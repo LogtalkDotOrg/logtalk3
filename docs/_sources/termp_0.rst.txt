@@ -12,7 +12,8 @@ Prolog term utility predicates protocol.
 | **Version:** 1.31
 | **Date:** 2010/6/9
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``depth(Term,Depth)``
@@ -53,7 +55,8 @@ True if the depth of Term is Depth. The depth of atomic terms is zero; the depth
 
 True if the argument is ground.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``ground(Term)``
@@ -73,7 +76,8 @@ True if the argument is ground.
 
 Creates a new term instance (if meaningful).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``new(Term)``
@@ -93,7 +97,8 @@ Creates a new term instance (if meaningful).
 
 True if the variable occurs in the term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``occurs(Variable,Term)``
@@ -113,7 +118,8 @@ True if the variable occurs in the term.
 
 The first term subsumes the second term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subsumes(General,Specific)``
@@ -133,7 +139,8 @@ The first term subsumes the second term.
 
 The first term is a subterm of the second term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subterm(Subterm,Term)``
@@ -153,7 +160,8 @@ The first term is a subterm of the second term.
 
 Term is valid.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``valid(Term)``
@@ -173,7 +181,8 @@ Term is valid.
 
 Checks if a term is valid. Throws an exception if the term is not valid.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check(Term)``
@@ -193,7 +202,8 @@ Checks if a term is valid. Throws an exception if the term is not valid.
 
 Each term is a variant of the other (i.e. they are structurally equivalent).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``variant(Term1,Term2)``
@@ -213,7 +223,8 @@ Each term is a variant of the other (i.e. they are structurally equivalent).
 
 Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of Term).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``variables(Term,List)``
@@ -233,7 +244,8 @@ Returns a list of all term variables (ordered as found when doing a depth-first,
 
 Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of Term).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``singletons(Term,Singletons)``

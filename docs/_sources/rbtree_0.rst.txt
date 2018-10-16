@@ -12,7 +12,8 @@ Red-Black trees. Uses standard order to compare keys.
 | **Version:** 1.4
 | **Date:** 2018/6/18
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -35,7 +36,8 @@ Public interface
 
 Applies a closure to the tree pairs identified by a set of keys.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``partial_map(Tree,Keys,Closure,NewTree)``

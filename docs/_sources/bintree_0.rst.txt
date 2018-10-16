@@ -12,7 +12,8 @@ Simple binary tree implementation of the dictionary protocol. Uses standard orde
 | **Version:** 2.3
 | **Date:** 2018/3/18
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -35,7 +36,8 @@ Public interface
 
 Preorder tree traversal.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``preorder(Tree,List)``
@@ -53,7 +55,8 @@ Preorder tree traversal.
 ``inorder/2``
 ^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``inorder(@tree,-list)`` - ``one``
@@ -69,7 +72,8 @@ Preorder tree traversal.
 ``postorder/2``
 ^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``postorder(@tree,-list)`` - ``one``

@@ -12,7 +12,8 @@ Implementation of persistent object flags.
 | **Version:** 1.0
 | **Date:** 2010/11/27
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Gets or tests the value of a flag.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``get_flag_value(Flag,Value)``
@@ -53,7 +55,8 @@ Gets or tests the value of a flag.
 
 Sets the value of a flag.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_flag_value(Flag,NewValue)``
@@ -73,7 +76,8 @@ Sets the value of a flag.
 
 Sets the value of a flag, returning the old value.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_flag_value(Flag,OldValue,NewValue)``
@@ -93,7 +97,8 @@ Sets the value of a flag, returning the old value.
 
 Resets all flags to their default values.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``reset_flags`` - ``one``
@@ -111,7 +116,8 @@ Resets all flags to their default values.
 
 Resets all flags in a group to their default values.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``reset_flags(Group)``
@@ -131,7 +137,8 @@ Resets all flags in a group to their default values.
 
 Returns a list of all flag groups.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``flag_groups(Groups)``
@@ -151,7 +158,8 @@ Returns a list of all flag groups.
 
 Checks if a given atom is a flag group.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``flag_group_chk(Group)``
@@ -171,7 +179,8 @@ Checks if a given atom is a flag group.
 
 Prints a listing of all flags.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``print_flags`` - ``one``
@@ -189,7 +198,8 @@ Prints a listing of all flags.
 
 Prints a listing of all flags in a group.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``print_flags(Group)``
@@ -209,7 +219,8 @@ Prints a listing of all flags in a group.
 
 Gets or test the existing (visible) flag definitions.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``defined_flag(Flag,Group,Type,DefaultValue,Description,Access)``
@@ -229,7 +240,8 @@ Gets or test the existing (visible) flag definitions.
 
 True if the argument is a built-in flag type with the specified default value.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``built_in_flag(Type,DefaultValue)``
@@ -252,7 +264,8 @@ Protected interface
 
 Sets the value of a flag without performing any validation checks.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``unsafe_set_flag_value(Flag,NewValue)``
@@ -272,7 +285,8 @@ Sets the value of a flag without performing any validation checks.
 
 Defines a new flag using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``define_flag(Flag)``
@@ -292,7 +306,8 @@ Defines a new flag using default options.
 
 Defines a new flag using a given set of options (for example, [group(general), type(nonvar), default(true), description(Flag), access(read_write)]).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``define_flag(Flag,Options)``
@@ -315,7 +330,8 @@ Private predicates
 
 Gets or test the existing flag definitions.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``defined_flag_(Flag,Group,Type,DefaultValue,Description,Access)``
@@ -335,7 +351,8 @@ Gets or test the existing flag definitions.
 
 Table of flag values.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``flag_value_(Flag,Value)``
@@ -353,7 +370,8 @@ Table of flag values.
 ``validate/3``
 ^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -366,7 +384,8 @@ Table of flag values.
 ``validate_type/1``
 ^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -379,7 +398,8 @@ Table of flag values.
 ``is_validator/1``
 ^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 Operators

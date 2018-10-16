@@ -12,7 +12,8 @@ Constructors for optional term references. An optional reference represents a te
 | **Version:** 1.2
 | **Date:** 2017/8/8
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -34,7 +35,8 @@ Public interface
 
 Constructs an empty optional reference.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``empty(Reference)``
@@ -54,7 +56,8 @@ Constructs an empty optional reference.
 
 Constructs an optional reference from a term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``of(Term,Reference)``

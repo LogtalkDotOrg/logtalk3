@@ -12,7 +12,8 @@ Debugger protocol.
 | **Version:** 2.1
 | **Date:** 2016/10/23
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Resets all debugging settings, including spy points and leashed ports, and turns off debugging.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``reset`` - ``one``
@@ -51,7 +53,8 @@ Resets all debugging settings, including spy points and leashed ports, and turns
 
 Starts debugging for all defined spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``debug`` - ``one``
@@ -69,7 +72,8 @@ Starts debugging for all defined spy points.
 
 Stops debugging for all defined spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``nodebug`` - ``one``
@@ -87,7 +91,8 @@ Stops debugging for all defined spy points.
 
 Reports current debugging settings, including spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``debugging`` - ``one``
@@ -105,7 +110,8 @@ Reports current debugging settings, including spy points.
 
 Enumerates, by backtracking, all entities compiled in debug mode.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``debugging(Entity)``
@@ -125,7 +131,8 @@ Enumerates, by backtracking, all entities compiled in debug mode.
 
 Starts tracing all calls compiled in debug mode.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``trace`` - ``one``
@@ -143,7 +150,8 @@ Starts tracing all calls compiled in debug mode.
 
 Stops tracing of calls compiled in debug mode.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``notrace`` - ``one``
@@ -161,7 +169,8 @@ Stops tracing of calls compiled in debug mode.
 
 Sets a line number spy point or a predicate spy point or a list of spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``spy(SpyPoint)``
@@ -182,7 +191,8 @@ Sets a line number spy point or a predicate spy point or a list of spy points.
 
 Enumerates, by backtracking, all defined line number and predicate spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``spying(SpyPoint)``
@@ -202,7 +212,8 @@ Enumerates, by backtracking, all defined line number and predicate spy points.
 
 Sets a context spy point.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``spy(Sender,This,Self,Goal)``
@@ -222,7 +233,8 @@ Sets a context spy point.
 
 Enumerates, by backtracking, all defined context spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``spying(Sender,This,Self,Goal)``
@@ -242,7 +254,8 @@ Enumerates, by backtracking, all defined context spy points.
 
 Removes all matching line number spy points and predicate spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nospy(SpyPoint)``
@@ -264,7 +277,8 @@ Removes all matching line number spy points and predicate spy points.
 
 Removes all matching context spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nospy(Sender,This,Self,Goal)``
@@ -284,7 +298,8 @@ Removes all matching context spy points.
 
 Removes all line number, predicate, and context spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``nospyall`` - ``one``
@@ -302,7 +317,8 @@ Removes all line number, predicate, and context spy points.
 
 Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leash(Ports)``
@@ -323,7 +339,8 @@ Sets the debugger leash ports using an abbreviation (none, loose, half, tight, o
 
 Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leashing(Port)``

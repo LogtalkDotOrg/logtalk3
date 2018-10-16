@@ -12,7 +12,8 @@ List protocol.
 | **Version:** 1.14
 | **Date:** 2018/8/17
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Appends all lists in a list of lists.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``append(Lists,Concatenation)``
@@ -53,7 +55,8 @@ Appends all lists in a list of lists.
 
 Appends two lists.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``append(List1,List2,List)``
@@ -73,7 +76,8 @@ Appends two lists.
 
 Deletes from a list all occurrences of an element returning the list of remaining elements. Uses ==/2 for element comparison.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``delete(List,Element,Remaining)``
@@ -93,7 +97,8 @@ Deletes from a list all occurrences of an element returning the list of remainin
 
 Deletes all matching elements from a list, returning the list of remaining elements. Uses =/2 for element comparison.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``delete_matches(List,Element,Remaining)``
@@ -113,7 +118,8 @@ Deletes all matching elements from a list, returning the list of remaining eleme
 
 True if the argument is an empty list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``empty(List)``
@@ -133,7 +139,8 @@ True if the argument is an empty list.
 
 Flattens a list of lists into a list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``flatten(List,Flatted)``
@@ -153,7 +160,8 @@ Flattens a list of lists into a list.
 
 Calculates the Hamming distance between two lists (using equality to compare list elements). Fails if the two lists are not of the same length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``hamming_distance(List1,List2,Distance)``
@@ -173,7 +181,8 @@ Calculates the Hamming distance between two lists (using equality to compare lis
 
 Sorts a list of key-value pairs in ascending order.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``keysort(List,Sorted)``
@@ -193,7 +202,8 @@ Sorts a list of key-value pairs in ascending order.
 
 List last element (if it exists).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``last(List,Last)``
@@ -213,7 +223,8 @@ List last element (if it exists).
 
 List length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``length(List,Length)``
@@ -233,7 +244,8 @@ List length.
 
 Determines the list maximum value using standard order. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``max(List,Maximum)``
@@ -253,7 +265,8 @@ Determines the list maximum value using standard order. Fails if the list is emp
 
 Element is a list member.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``member(Element,List)``
@@ -273,7 +286,8 @@ Element is a list member.
 
 Checks if a term is a member of a list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``memberchk(Element,List)``
@@ -293,7 +307,8 @@ Checks if a term is a member of a list.
 
 Determines the minimum value in a list using standard order. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``min(List,Minimum)``
@@ -313,7 +328,8 @@ Determines the minimum value in a list using standard order. Fails if the list i
 
 Sorts a list in ascending order (duplicated elements are not removed).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``msort(List,Sorted)``
@@ -333,7 +349,8 @@ Sorts a list in ascending order (duplicated elements are not removed).
 
 Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are not removed).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``msort(Closure,List,Sorted)``
@@ -355,7 +372,8 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 
 X and Y are consecutive elements in List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nextto(X,Y,List)``
@@ -375,7 +393,8 @@ X and Y are consecutive elements in List.
 
 Nth element of a list (counting from zero).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nth0(Nth,List,Element)``
@@ -395,7 +414,8 @@ Nth element of a list (counting from zero).
 
 Nth element of a list (counting from zero).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nth0(Nth,List,Element,Residue)``
@@ -415,7 +435,8 @@ Nth element of a list (counting from zero).
 
 Nth element of a list (counting from one).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nth1(Nth,List,Element)``
@@ -435,7 +456,8 @@ Nth element of a list (counting from one).
 
 Nth element of a list (counting from one).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nth1(Nth,List,Element,Residue)``
@@ -455,7 +477,8 @@ Nth element of a list (counting from one).
 
 Partitions a list in lists with values less, equal, and greater than a given value (using standard order).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``partition(List,Value,Less,Equal,Greater)``
@@ -475,7 +498,8 @@ Partitions a list in lists with values less, equal, and greater than a given val
 
 The two lists are a permutation of the same list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``permutation(List,Permutation)``
@@ -495,7 +519,8 @@ The two lists are a permutation of the same list.
 
 Prefix is a prefix of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``prefix(Prefix,List)``
@@ -515,7 +540,8 @@ Prefix is a prefix of List.
 
 Prefix is a prefix of length Length of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``prefix(Prefix,Length,List)``
@@ -536,7 +562,8 @@ Prefix is a prefix of length Length of List.
 
 Prefix is a proper prefix of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``proper_prefix(Prefix,List)``
@@ -556,7 +583,8 @@ Prefix is a proper prefix of List.
 
 Prefix is a proper prefix of length Length of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``proper_prefix(Prefix,Length,List)``
@@ -577,7 +605,8 @@ Prefix is a proper prefix of length Length of List.
 
 Reverses a list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``reverse(List,Reversed)``
@@ -599,7 +628,8 @@ Reverses a list.
 
 The two lists have the same length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``same_length(List1,List2)``
@@ -621,7 +651,8 @@ The two lists have the same length.
 
 The two lists have the same length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``same_length(List1,List2,Length)``
@@ -643,7 +674,8 @@ The two lists have the same length.
 
 Selects an element from a list, returning the list of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``select(Element,List,Remaining)``
@@ -663,7 +695,8 @@ Selects an element from a list, returning the list of remaining elements.
 
 Checks that an element can be selected from a list, returning the list of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``selectchk(Element,List,Remaining)``
@@ -683,7 +716,8 @@ Checks that an element can be selected from a list, returning the list of remain
 
 Selects an element from a list, replacing it by a new element and returning the resulting list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``select(Old,OldList,New,NewList)``
@@ -703,7 +737,8 @@ Selects an element from a list, replacing it by a new element and returning the 
 
 Checks that an element from a list can be replaced by a new element, returning the resulting list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``selectchk(Old,OldList,New,NewList)``
@@ -723,7 +758,8 @@ Checks that an element from a list can be replaced by a new element, returning t
 
 Sorts a list in ascending order (duplicated elements are removed).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sort(List,Sorted)``
@@ -743,7 +779,8 @@ Sorts a list in ascending order (duplicated elements are removed).
 
 Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are removed).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sort(Closure,List,Sorted)``
@@ -765,7 +802,8 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 
 Sorts a list using the given key and order. @< and @> orders remove duplicates while @=< and @>= orders keep them. @< and @=< specify ascending order while @> and @>= specify descending order. When the key is zero, the whole term is used for comparisons.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sort(Key,Order,List,Sorted)``
@@ -785,7 +823,8 @@ Sorts a list using the given key and order. @< and @> orders remove duplicates w
 
 Splits a list into sublists of a given length. Also returns a list with the remaining elements. Fails if the length is zero or negative.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``split(List,Length,Sublists,Remaining)``
@@ -805,7 +844,8 @@ Splits a list into sublists of a given length. Also returns a list with the rema
 
 The first list is a sublist of the second.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sublist(Sublist,List)``
@@ -825,7 +865,8 @@ The first list is a sublist of the second.
 
 List is an interleaving of Subsequence and Remaining. Element order is preserved.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subsequence(List,Subsequence,Remaining)``
@@ -845,7 +886,8 @@ List is an interleaving of Subsequence and Remaining. Element order is preserved
 
 Generates subsequences of a given length from a list. Also returns the remaining elements. Element order is preserved.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subsequence(List,Length,Subsequence,Remaining)``
@@ -865,7 +907,8 @@ Generates subsequences of a given length from a list. Also returns the remaining
 
 Substitutes all occurrences of Old in List by New, returning NewList. Uses term equality for element comparison.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``substitute(Old,List,New,NewList)``
@@ -885,7 +928,8 @@ Substitutes all occurrences of Old in List by New, returning NewList. Uses term 
 
 Removes all elements in the second list from the first list, returning the list of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subtract(List,Elements,Remaining)``
@@ -905,7 +949,8 @@ Removes all elements in the second list from the first list, returning the list 
 
 Suffix is a suffix of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``suffix(Suffix,List)``
@@ -925,7 +970,8 @@ Suffix is a suffix of List.
 
 Suffix is a suffix of length Length of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``suffix(Suffix,Length,List)``
@@ -946,7 +992,8 @@ Suffix is a suffix of length Length of List.
 
 Suffix is a proper suffix of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``proper_suffix(Suffix,List)``
@@ -966,7 +1013,8 @@ Suffix is a proper suffix of List.
 
 Suffix is a proper suffix of length Length of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``proper_suffix(Suffix,Length,List)``
@@ -987,7 +1035,8 @@ Suffix is a proper suffix of length Length of List.
 
 Takes the first N elements of a list. Fails if the list have fewer than N elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``take(N,List,Elements)``
@@ -1007,7 +1056,8 @@ Takes the first N elements of a list. Fails if the list have fewer than N elemen
 
 Drops the first N elements of a list. Fails if the list have fewer than N elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``drop(N,List,Remaining)``

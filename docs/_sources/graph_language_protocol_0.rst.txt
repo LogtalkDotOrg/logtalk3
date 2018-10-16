@@ -12,7 +12,8 @@ Predicates for generating graph files.
 | **Version:** 2.0
 | **Date:** 2014/12/30
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Constructs the diagram file basename by adding a graph language dependent extension to the given name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_file_name(Name,Basename)``
@@ -53,7 +55,8 @@ Constructs the diagram file basename by adding a graph language dependent extens
 
 Writes the output file header using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file_header(Stream,Identifier,Options)``
@@ -73,7 +76,8 @@ Writes the output file header using the specified options.
 
 Writes the output file footer using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file_footer(Stream,Identifier,Options)``
@@ -93,7 +97,8 @@ Writes the output file footer using the specified options.
 
 Writes a graph header using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``graph_header(Stream,Identifier,Label,Kind,Options)``
@@ -113,7 +118,8 @@ Writes a graph header using the specified options.
 
 Writes a graph footer using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``graph_footer(Stream,Identifier,Label,Kind,Options)``
@@ -133,7 +139,8 @@ Writes a graph footer using the specified options.
 
 Writes a node using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``node(Stream,Identifier,Label,Caption,Lines,Kind,Options)``
@@ -153,7 +160,8 @@ Writes a node using the specified options.
 
 Writes an edge between two nodes using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``edge(Stream,Start,End,Labels,Kind,Options)``

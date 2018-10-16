@@ -12,7 +12,8 @@ Dictionary protocol.
 | **Version:** 2.0
 | **Date:** 2010/2/26
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Converts a list of key-value pairs to a dictionary.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``as_dictionary(Pairs,Dictionary)``
@@ -53,7 +55,8 @@ Converts a list of key-value pairs to a dictionary.
 
 Converts a dictionary to a ordered list of key-value pairs.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``as_list(Dictionary,Pairs)``
@@ -73,7 +76,8 @@ Converts a dictionary to a ordered list of key-value pairs.
 
 Clones a dictionary using the same keys but with all values unbound and returning a list of all the pairs in the new clone.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``clone(Dictionary,Clone,ClonePairs)``
@@ -93,7 +97,8 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 
 Clones a dictionary using the same keys but with all values unbound and returning the list of all pairs in the dictionary and in the clone.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``clone(Dictionary,Pairs,Clone,ClonePairs)``
@@ -113,7 +118,8 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 
 Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``insert(OldDictionary,Key,Value,NewDictionary)``
@@ -133,7 +139,8 @@ Inserts a Key-Value pair into a dictionary, returning the updated dictionary. Wh
 
 Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``delete(OldDictionary,Key,Value,NewDictionary)``
@@ -153,7 +160,8 @@ Deletes a matching Key-Value pair from a dictionary, returning the updated dicti
 
 Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``update(OldDictionary,Key,NewValue,NewDictionary)``
@@ -173,7 +181,8 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 
 Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``update(OldDictionary,Key,OldValue,NewValue,NewDictionary)``
@@ -193,7 +202,8 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 
 True if the dictionary is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``empty(Dictionary)``
@@ -213,7 +223,8 @@ True if the dictionary is empty.
 
 Lookups a matching Key-Value pair from a dictionary.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``lookup(Key,Value,Dictionary)``
@@ -234,7 +245,8 @@ Lookups a matching Key-Value pair from a dictionary.
 
 Returns the previous pair in a dictionary given a key.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``previous(Dictionary,Key,Previous,Value)``
@@ -254,7 +266,8 @@ Returns the previous pair in a dictionary given a key.
 
 Returns the next pair in a dictionary given a key.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``next(Dictionary,Key,Next,Value)``
@@ -274,7 +287,8 @@ Returns the next pair in a dictionary given a key.
 
 Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``min(Dictionary,Key,Value)``
@@ -294,7 +308,8 @@ Returns the pair with the minimum key in a dictionary. Fails if the dictionary i
 
 Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``max(Dictionary,Key,Value)``
@@ -314,7 +329,8 @@ Returns the pair with the maximum key in a dictionary. Fails if the dictionary i
 
 Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``delete_min(OldDictionary,Key,Value,NewDictionary)``
@@ -334,7 +350,8 @@ Deletes the pair with the minimum key from a dictionary, returning the deleted p
 
 Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``delete_max(OldDictionary,Key,Value,NewDictionary)``
@@ -354,7 +371,8 @@ Deletes the pair with the maximum key from a dictionary, returning the deleted p
 
 Returns a list with all dictionary keys.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``keys(Dictionary,List)``
@@ -374,7 +392,8 @@ Returns a list with all dictionary keys.
 
 Maps a closure over each dictionary key-value pair. Fails if the mapped closure attempts to modify the keys.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,Dictionary)``
@@ -396,7 +415,8 @@ Maps a closure over each dictionary key-value pair. Fails if the mapped closure 
 
 Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure attempts to modify the keys.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,OldDictionary,NewDictionary)``
@@ -418,7 +438,8 @@ Maps a closure over each dictionary key-value pair, returning the new dictionary
 
 Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``apply(Closure,OldDictionary,Key,NewDictionary)``
@@ -440,7 +461,8 @@ Applies a closure to a specific key-value pair, returning the new dictionary. Fa
 
 Number of dictionary entries.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``size(Dictionary,Size)``

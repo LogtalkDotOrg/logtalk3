@@ -12,7 +12,8 @@ Counter implemented with asserta/retract.
 | **Version:** 1.0
 | **Date:** 2010/6/13
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Increment the counter by 1.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``increment`` - ``one``
@@ -51,7 +53,8 @@ Increment the counter by 1.
 
 Increments the counter by the specified amount.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``increase(+number)`` - ``one``
@@ -71,7 +74,8 @@ Increments the counter by the specified amount.
 
 Sets the counter to the specified amount.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``set(+number)`` - ``one``
@@ -91,7 +95,8 @@ Sets the counter to the specified amount.
 
 Gets the current value of the counter.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``value(?number)`` - ``one``
@@ -111,7 +116,8 @@ Gets the current value of the counter.
 
 Resets the counter to zero.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``reset`` - ``one``
@@ -135,7 +141,8 @@ Private predicates
 ``c/1``
 ^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 Operators

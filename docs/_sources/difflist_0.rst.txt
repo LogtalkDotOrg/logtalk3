@@ -12,7 +12,8 @@ Difference list predicates.
 | **Version:** 1.14
 | **Date:** 2018/7/11
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -35,7 +36,8 @@ Public interface
 
 Adds a term to the end of a difference list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``add(Term,DiffList,NewDiffList)``
@@ -55,7 +57,8 @@ Adds a term to the end of a difference list.
 
 Converts a difference list to a normal list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``as_list(DiffList,List)``

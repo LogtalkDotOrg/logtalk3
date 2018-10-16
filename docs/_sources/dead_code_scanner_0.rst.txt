@@ -12,7 +12,8 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 | **Version:** 0.11
 | **Date:** 2017/8/10
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Scans a loaded entity for dead code. Fails if the entity does not exist.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity(Entity)``
@@ -53,7 +55,8 @@ Scans a loaded entity for dead code. Fails if the entity does not exist.
 
 Scans all entities in a loaded source file for dead code. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file(File)``
@@ -73,7 +76,8 @@ Scans all entities in a loaded source file for dead code. The file can be given 
 
 Scans all entities in all loaded files from a given directory for dead code.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Directory)``
@@ -93,7 +97,8 @@ Scans all entities in all loaded files from a given directory for dead code.
 
 Scans all entities in all loaded files from a given directory and its sub-directories for dead code.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rdirectory(Directory)``
@@ -113,7 +118,8 @@ Scans all entities in all loaded files from a given directory and its sub-direct
 
 Scans all entities in all loaded files from a given library for dead code.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Library)``
@@ -133,7 +139,8 @@ Scans all entities in all loaded files from a given library for dead code.
 
 Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary(Library)``
@@ -153,7 +160,8 @@ Scans all entities in all loaded files in a loaded library and its sub-libraries
 
 Scans all entities for dead code.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``all`` - ``one``
@@ -171,7 +179,8 @@ Scans all entities for dead code.
 
 Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``predicates(Entity,Predicates)``
@@ -191,7 +200,8 @@ Returns an ordered set of local predicates (and non-terminals) that are not used
 
 Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``predicate(Entity,Predicate)``

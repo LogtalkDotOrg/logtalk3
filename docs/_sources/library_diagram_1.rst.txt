@@ -12,7 +12,8 @@ Common predicates for generating library diagrams.
 | **Version:** 2.2
 | **Date:** 2016/10/13
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 | **Extends:**
@@ -38,7 +39,8 @@ Protected interface
 
 Adds a documentation URL when using the option url_prefixes/2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``add_library_documentation_url(Kind,Options,Directory,NodeOptions)``
@@ -56,7 +58,8 @@ Adds a documentation URL when using the option url_prefixes/2.
 ``remember_included_library/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -69,7 +72,8 @@ Adds a documentation URL when using the option url_prefixes/2.
 ``remember_referenced_logtalk_library/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -82,7 +86,8 @@ Adds a documentation URL when using the option url_prefixes/2.
 ``remember_referenced_prolog_library/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 Private predicates
@@ -98,7 +103,8 @@ Private predicates
 ``included_library_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -111,7 +117,8 @@ Private predicates
 ``referenced_logtalk_library_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -124,7 +131,8 @@ Private predicates
 ``referenced_prolog_library_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 Operators

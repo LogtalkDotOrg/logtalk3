@@ -12,7 +12,8 @@ Set protocol.
 | **Version:** 1.4
 | **Date:** 2018/8/17
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Returns a set with all unique elements from the given list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``as_set(List,Set)``
@@ -53,7 +55,8 @@ Returns a set with all unique elements from the given list.
 
 Returns a list with all elements of the given set.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``as_list(Set,List)``
@@ -73,7 +76,8 @@ Returns a list with all elements of the given set.
 
 Deletes an element from a set returning the set of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``delete(Set,Element,Remaining)``
@@ -93,7 +97,8 @@ Deletes an element from a set returning the set of remaining elements.
 
 True if the two sets have no element in common.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``disjoint(Set1,Set2)``
@@ -113,7 +118,8 @@ True if the two sets have no element in common.
 
 True if the two sets are equal.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``equal(Set1,Set2)``
@@ -133,7 +139,8 @@ True if the two sets are equal.
 
 True if the set is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``empty(Set)``
@@ -153,7 +160,8 @@ True if the set is empty.
 
 Inserts an element in a set, returning the resulting set.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``insert(In,Element,Out)``
@@ -173,7 +181,8 @@ Inserts an element in a set, returning the resulting set.
 
 Inserts a list of elements in a set, returning the resulting set.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``insert_all(List,In,Out)``
@@ -193,7 +202,8 @@ Inserts a list of elements in a set, returning the resulting set.
 
 True if the two sets have at least one element in common.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``intersect(Set1,Set2)``
@@ -213,7 +223,8 @@ True if the two sets have at least one element in common.
 
 Returns the intersection of Set1 and Set2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``intersection(Set1,Set2,Intersection)``
@@ -233,7 +244,8 @@ Returns the intersection of Set1 and Set2.
 
 True if Intersection is the intersection of Set1 and Set2 and Difference is the difference between Set2 and Set1.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``intersection(Set1,Set2,Intersection,Difference)``
@@ -253,7 +265,8 @@ True if Intersection is the intersection of Set1 and Set2 and Difference is the 
 
 Number of set elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``length(Set,Length)``
@@ -273,7 +286,8 @@ Number of set elements.
 
 Element is a member of set Set.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``member(Element,Set)``
@@ -294,7 +308,8 @@ Element is a member of set Set.
 
 Checks if a term is a member of a set.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``memberchk(Element,Set)``
@@ -314,7 +329,8 @@ Checks if a term is a member of a set.
 
 Returns the power set of a set, represented as a list of sets.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``powerset(Set,Powerset)``
@@ -334,7 +350,8 @@ Returns the power set of a set, represented as a list of sets.
 
 Returns the cartesian product of two sets.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``product(Set1,Set2,Product)``
@@ -354,7 +371,8 @@ Returns the cartesian product of two sets.
 
 Selects an element from a set, returning the set of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``select(Element,Set,Remaining)``
@@ -374,7 +392,8 @@ Selects an element from a set, returning the set of remaining elements.
 
 Checks that an element can be selected from a set, returning the set of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``selectchk(Element,Set,Remaining)``
@@ -394,7 +413,8 @@ Checks that an element can be selected from a set, returning the set of remainin
 
 True if Subset is a subset of Set.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subset(Subset,Set)``
@@ -414,7 +434,8 @@ True if Subset is a subset of Set.
 
 True when Difference contains all and only the elements of Set1 which are not also in Set2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subtract(Set1,Set2,Difference)``
@@ -434,7 +455,8 @@ True when Difference contains all and only the elements of Set1 which are not al
 
 True if Difference is the symmetric difference of Set1 and Set2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``symdiff(Set1,Set2,Difference)``
@@ -454,7 +476,8 @@ True if Difference is the symmetric difference of Set1 and Set2.
 
 True if Union is the union of Set1 and Set2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``union(Set1,Set2,Union)``
@@ -474,7 +497,8 @@ True if Union is the union of Set1 and Set2.
 
 True if Union is the union of Set1 and Set2 and Difference is the difference between Set2 and Set1.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``union(Set1,Set2,Union,Difference)``

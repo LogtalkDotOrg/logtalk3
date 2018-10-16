@@ -12,7 +12,8 @@ Smalltalk dependent protocol.
 | **Version:** 1.0
 | **Date:** 2003/2/9
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Called when an observed object is updated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``update(Change)``

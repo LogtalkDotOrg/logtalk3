@@ -12,7 +12,8 @@ Documenting tool protocol.
 | **Version:** 3.2
 | **Date:** 2017/11/4
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary(Library,Options)``
@@ -58,7 +60,8 @@ Creates XML documenting files for all entities in a library and its sub-librarie
 
 Creates XML documenting files for all entities in a library and its sub-libraries using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary(Library)``
@@ -83,7 +86,8 @@ Creates XML documenting files for all entities in a library and its sub-librarie
 
 Creates XML documenting files for all entities in a library using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Library,Options)``
@@ -108,7 +112,8 @@ Creates XML documenting files for all entities in a library using the specified 
 
 Creates XML documenting files for all entities in a library using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Library)``
@@ -128,7 +133,8 @@ Creates XML documenting files for all entities in a library using default option
 
 Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rdirectory(Directory,Options)``
@@ -153,7 +159,8 @@ Creates XML documenting files for all entities in a directory and its sub-direct
 
 Creates XML documenting files for all entities in a directory and its sub-directories using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rdirectory(Directory)``
@@ -178,7 +185,8 @@ Creates XML documenting files for all entities in a directory and its sub-direct
 
 Creates XML documenting files for all entities in a directory using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Directory,Options)``
@@ -203,7 +211,8 @@ Creates XML documenting files for all entities in a directory using the specifie
 
 Creates XML documenting files for all entities in a directory using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Directory)``
@@ -223,7 +232,8 @@ Creates XML documenting files for all entities in a directory using default opti
 
 Creates XML documenting files for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file(File,Options)``
@@ -243,7 +253,8 @@ Creates XML documenting files for all entities in a loaded source file using the
 
 Creates XML documenting files for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file(File)``
@@ -263,7 +274,8 @@ Creates XML documenting files for all entities in a loaded source file using def
 
 Creates XML documenting files for all loaded entities using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``all(File)``
@@ -283,7 +295,8 @@ Creates XML documenting files for all loaded entities using the specified option
 
 Creates XML documenting files for all loaded entities using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``all`` - ``one``
@@ -301,7 +314,8 @@ Creates XML documenting files for all loaded entities using default options.
 
 Returns, by backtracking, all options and their values.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``option(Option,Value)``
@@ -321,7 +335,8 @@ Returns, by backtracking, all options and their values.
 
 Sets an option value.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_option(Option,Value)``

@@ -12,7 +12,8 @@ Character protocol.
 | **Version:** 1.2
 | **Date:** 2011/2/19
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 True if the argument is an ASCII character.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_ascii(Char)``
@@ -53,7 +55,8 @@ True if the argument is an ASCII character.
 
 True if the argument is an alphanumeric character.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_alphanumeric(Char)``
@@ -73,7 +76,8 @@ True if the argument is an alphanumeric character.
 
 True if the argument is a letter or an underscore.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_alpha(Char)``
@@ -93,7 +97,8 @@ True if the argument is a letter or an underscore.
 
 True if the argument is a letter.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_letter(Char)``
@@ -113,7 +118,8 @@ True if the argument is a letter.
 
 True if the argument is a binary digit.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_bin_digit(Char)``
@@ -133,7 +139,8 @@ True if the argument is a binary digit.
 
 True if the argument is an octal digit.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_octal_digit(Char)``
@@ -153,7 +160,8 @@ True if the argument is an octal digit.
 
 True if the argument is a decimal digit.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_dec_digit(Char)``
@@ -173,7 +181,8 @@ True if the argument is a decimal digit.
 
 True if the argument is an hexadecimal digit.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_hex_digit(Char)``
@@ -193,7 +202,8 @@ True if the argument is an hexadecimal digit.
 
 True if the argument is a lower case letter.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_lower_case(Char)``
@@ -213,7 +223,8 @@ True if the argument is a lower case letter.
 
 True if the argument is a upper case letter.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_upper_case(Char)``
@@ -233,7 +244,8 @@ True if the argument is a upper case letter.
 
 True if the argument is a vowel.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_vowel(Char)``
@@ -253,7 +265,8 @@ True if the argument is a vowel.
 
 True if the argument is a white space character (a space or a tab) inside a line of characters.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_white_space(Char)``
@@ -273,7 +286,8 @@ True if the argument is a white space character (a space or a tab) inside a line
 
 True if the argument is a layout character.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_layout(Char)``
@@ -293,7 +307,8 @@ True if the argument is a layout character.
 
 True if the argument is a quote character.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_quote(Char)``
@@ -313,7 +328,8 @@ True if the argument is a quote character.
 
 True if the argument is a sentence punctation character.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_punctation(Char)``
@@ -333,7 +349,8 @@ True if the argument is a sentence punctation character.
 
 True if the argument is a character that ends a sentence.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_period(Char)``
@@ -353,7 +370,8 @@ True if the argument is a character that ends a sentence.
 
 True if the argument is an ASCII control character.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_control(Char)``
@@ -373,7 +391,8 @@ True if the argument is an ASCII control character.
 
 True if the argument is the ASCII newline character.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_newline(Char)``
@@ -393,7 +412,8 @@ True if the argument is the ASCII newline character.
 
 True if the argument is the ASCII end-of-line character (either a carriage return or a line feed).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_end_of_line(Char)``
@@ -413,7 +433,8 @@ True if the argument is the ASCII end-of-line character (either a carriage retur
 
 Recognises and converts between open and close parenthesis.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parenthesis(Char1,Char2)``
@@ -435,7 +456,8 @@ Recognises and converts between open and close parenthesis.
 
 Recognises and converts between lower and upper case letters.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``lower_upper(Char1,Char2)``

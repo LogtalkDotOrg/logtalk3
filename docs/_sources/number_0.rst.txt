@@ -12,7 +12,8 @@ Number data type predicates.
 | **Version:** 1.5
 | **Date:** 2018/7/14
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Extends:**
@@ -33,7 +34,8 @@ Public interface
 
 Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. No type-checking.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``approximately_equal(Number1,Number2,Epsilon)``
@@ -53,7 +55,8 @@ Compares two numbers for approximate equality given an epsilon value using the d
 
 Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. No type-checking.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``essentially_equal(Number1,Number2,Epsilon)``
@@ -73,7 +76,8 @@ Compares two numbers for essential equality given an epsilon value using the de 
 
 Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). No type-checking.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)``
@@ -93,7 +97,8 @@ Compares two numbers for close equality given relative and absolute tolerances u
 
 Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``=~=(Float1,Float2)``

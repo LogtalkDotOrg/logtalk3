@@ -12,7 +12,8 @@ Core predicates for computing source code metrics.
 | **Version:** 0.8
 | **Date:** 2018/2/18
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Scans an entity and prints its metric score.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity(Entity)``
@@ -53,7 +55,8 @@ Scans an entity and prints its metric score.
 
 Prints metric scores for all the entities defined in a loaded source file.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file(File)``
@@ -73,7 +76,8 @@ Prints metric scores for all the entities defined in a loaded source file.
 
 Scans a directory and prints metric scores for all entities defined in its loaded source files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Directory)``
@@ -93,7 +97,8 @@ Scans a directory and prints metric scores for all entities defined in its loade
 
 Recursive version of the directory/1 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rdirectory(Directory)``
@@ -113,7 +118,8 @@ Recursive version of the directory/1 predicate.
 
 Prints metrics scores for all loaded entities from a given library.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Library)``
@@ -133,7 +139,8 @@ Prints metrics scores for all loaded entities from a given library.
 
 Recursive version of the library/1 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary(Library)``
@@ -153,7 +160,8 @@ Recursive version of the library/1 predicate.
 
 Scans all loaded entities and prints their metric scores.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``all`` - ``one``
@@ -171,7 +179,8 @@ Scans all loaded entities and prints their metric scores.
 
 Score is a term that represents the metric score associated with a loaded entity. Fails if the metric does not apply.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity_score(Entity,Score)``
@@ -188,7 +197,8 @@ Score is a term that represents the metric score associated with a loaded entity
 
 Score is a term that represents the metric score associated with a loaded library source files. Fails if the metric does not apply.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library_score(Library,Score)``
@@ -208,7 +218,8 @@ Score is a term that represents the metric score associated with a loaded librar
 
 Score is a term that represents the metric score associated with loaded source files from a library and its sub-libraries. Fails if the metric does not apply.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary_score(Library,Score)``
@@ -228,7 +239,8 @@ Score is a term that represents the metric score associated with loaded source f
 
 Score is a term that represents the metric score associated with a loaded source file. Fails if the metric does not apply.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file_score(File,Score)``
@@ -248,7 +260,8 @@ Score is a term that represents the metric score associated with a loaded source
 
 Score is a term that represents the metric score associated with loaded source files from a directory. Fails if the metric does not apply.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory_score(Directory,Score)``
@@ -268,7 +281,8 @@ Score is a term that represents the metric score associated with loaded source f
 
 Score is a term that represents the metric score associated with loaded source files from a directory and its sub-directories. Fails if the metric does not apply.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rdirectory_score(Directory,Score)``
@@ -288,7 +302,8 @@ Score is a term that represents the metric score associated with loaded source f
 
 Score is a term that represents the metric score associated with all loaded source files. Fails if the metric does not apply.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``all_score(Score)``
@@ -308,7 +323,8 @@ Score is a term that represents the metric score associated with all loaded sour
 
 Pretty prints the entity score.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity_score(Entity,Score)``
@@ -328,7 +344,8 @@ Protected interface
 
 Processes an entity of the given kind.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``process_entity(Kind,Entity)``
@@ -348,7 +365,8 @@ Processes an entity of the given kind.
 
 Processes a source file.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``process_file(Path)``
@@ -368,7 +386,8 @@ Processes a source file.
 
 Processes a directory of source files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``process_directory(Path)``
@@ -388,7 +407,8 @@ Processes a directory of source files.
 
 Recursively process a directory of source files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``process_rdirectory(Path)``
@@ -408,7 +428,8 @@ Recursively process a directory of source files.
 
 Recursively process a library of source files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``process_rlibrary(Path)``
@@ -428,7 +449,8 @@ Recursively process a library of source files.
 
 Processes all loaded source code.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``process_all`` - ``one``
@@ -446,7 +468,8 @@ Processes all loaded source code.
 
 Enumerates, by backtracking, all directory sub-directories containing loaded files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sub_directory(Directory,SubDirectory)``
@@ -466,7 +489,8 @@ Enumerates, by backtracking, all directory sub-directories containing loaded fil
 
 Enumerates, by backtracking, all library sub-library paths.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sub_library(Library,SubLibraryPath)``

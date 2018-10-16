@@ -12,7 +12,8 @@ Utility object to help automate (re)generating documentation for a project.
 | **Version:** 0.5
 | **Date:** 2017/1/5
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -33,7 +34,8 @@ Public interface
 
 Updates the project documentation, first by calling a sequence of goals and second by executing a sequence of shell commands. Fails if any goal or shell command fails.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``update`` - ``zero_or_one``
@@ -51,7 +53,8 @@ Updates the project documentation, first by calling a sequence of goals and seco
 
 Table of goals, typically using the "diagrams" and the "lgtdoc" tools, used to generate the documentation. Goals are called in the order they are defined and in the context of the "user" pseudo-object.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``doc_goal(Goal)``
@@ -71,7 +74,8 @@ Table of goals, typically using the "diagrams" and the "lgtdoc" tools, used to g
 
 Table of shell commands to convert intermediate documentation files into user-friendly documentation. Commands are executed in the order they are defined.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``shell_command(Command)``

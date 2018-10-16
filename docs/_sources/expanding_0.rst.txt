@@ -12,7 +12,8 @@ Term and goal expansion protocol.
 | **Version:** 1.1
 | **Date:** 2016/7/12
 
-| **Compilation flags:** ``static, built_in``
+| **Compilation flags:**
+|    ``static, built_in``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Defines a goal expansion. Called recursively until a fixed point is reached on goals found while compiling a source file (except for goals wrapped using the {}/1 compiler bypass control construct).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``goal_expansion(Goal,ExpandedGoal)``
@@ -53,7 +55,8 @@ Defines a goal expansion. Called recursively until a fixed point is reached on g
 
 Defines a term expansion. Called until it succeeds on all terms read while compiling a source file (except for terms skipped by using the conditional compilation directives or wrapped using the {}/1 compiler bypass control construct).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``term_expansion(Term,ExpandedTerms)``

@@ -12,7 +12,8 @@ Predicates for generating all supported diagrams for libraries, directories, or 
 | **Version:** 2.3
 | **Date:** 2016/5/7
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Creates all supported diagrams for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``libraries(Project,Libraries,Options)``
@@ -53,7 +55,8 @@ Creates all supported diagrams for a set of libraries using the specified option
 
 Creates all supported diagrams for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``libraries(Project,Libraries)``
@@ -73,7 +76,8 @@ Creates all supported diagrams for a set of libraries using the default options.
 
 Creates  all supported diagrams for a set of libraries using the default options. The prefix "libraries" is used for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``libraries(Libraries)``
@@ -93,7 +97,8 @@ Creates  all supported diagrams for a set of libraries using the default options
 
 Creates all supported diagrams for all loaded libraries using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``all_libraries(Options)``
@@ -113,7 +118,8 @@ Creates all supported diagrams for all loaded libraries using the specified opti
 
 Creates all supported diagrams for all loaded libraries using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``all_libraries`` - ``one``
@@ -131,7 +137,8 @@ Creates all supported diagrams for all loaded libraries using default options.
 
 Creates all supported diagrams for a library and its sub-libraries using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary(Library,Options)``
@@ -151,7 +158,8 @@ Creates all supported diagrams for a library and its sub-libraries using the spe
 
 Creates all supported diagrams for a library and its sub-libraries using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary(Library)``
@@ -171,7 +179,8 @@ Creates all supported diagrams for a library and its sub-libraries using default
 
 Creates all supported diagrams for a library using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Library,Options)``
@@ -191,7 +200,8 @@ Creates all supported diagrams for a library using the specified options.
 
 Creates all supported diagrams for a library using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Library)``
@@ -211,7 +221,8 @@ Creates all supported diagrams for a library using default options.
 
 Creates all supported diagrams for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directories(Project,Directories,Options)``
@@ -231,7 +242,8 @@ Creates all supported diagrams for a set of directories using the specified opti
 
 Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directories(Project,Directories)``
@@ -251,7 +263,8 @@ Creates a diagram for a directory using default options. The Project argument is
 
 Creates all supported diagrams for a directory using the specified options. The Project argument is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Project,Directory,Options)``
@@ -271,7 +284,8 @@ Creates all supported diagrams for a directory using the specified options. The 
 
 Creates all supported diagrams for a directory using default options. The Project argument is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Project,Directory)``
@@ -291,7 +305,8 @@ Creates all supported diagrams for a directory using default options. The Projec
 
 Creates all supported diagrams for a directory using default options. The name of the directory is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Directory)``
@@ -311,7 +326,8 @@ Creates all supported diagrams for a directory using default options. The name o
 
 Creates all supported diagrams for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``files(Project,Files,Options)``
@@ -331,7 +347,8 @@ Creates all supported diagrams for a set of files using the specified options. T
 
 Creates all supported diagrams for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``files(Project,Files)``
@@ -351,7 +368,8 @@ Creates all supported diagrams for a set of files using the default options. The
 
 Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file names.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``files(Files)``
@@ -371,7 +389,8 @@ Creates a diagram for a set of files using the default options. The file can be 
 
 Creates all supported diagrams for all loaded files using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``all_files(Options)``
@@ -391,7 +410,8 @@ Creates all supported diagrams for all loaded files using the specified options.
 
 Creates all supported diagrams for all loaded files using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``all_files`` - ``one``

@@ -12,7 +12,8 @@ Internal predicates for analyzing source code.
 | **Version:** 0.6
 | **Date:** 2018/6/8
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -43,7 +44,8 @@ Private predicates
 
 True if Entity descends from Ancestor, and EntityKind and AncestorKind unify with their respective entity types.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``ancestor(EntityKind,Entity,AncestorKind,Ancestor)``
@@ -63,7 +65,8 @@ True if Entity descends from Ancestor, and EntityKind and AncestorKind unify wit
 
 True if Entity is a currently loaded entity.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``current_entity(Entity)``
@@ -83,7 +86,8 @@ True if Entity is a currently loaded entity.
 
 True if Entity declares Predicate internally.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``declares_predicate(Entity,Predicate)``
@@ -103,7 +107,8 @@ True if Entity declares Predicate internally.
 
 True if Entity defines an implementation of Predicate internally. 'Auxiliary' predicates are excluded from results.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``defines_predicate(Entity,Predicate)``
@@ -123,7 +128,8 @@ True if Entity defines an implementation of Predicate internally. 'Auxiliary' pr
 
 Same as defines_predicate/2, except Property is unified with a corresponding property defined in the grammar.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``defines_predicate(Entity,Predicate,Property)``
@@ -143,7 +149,8 @@ Same as defines_predicate/2, except Property is unified with a corresponding pro
 
 True if a predicate Caller within Entity makes a Call.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity_calls(Entity,Caller,Call)``
@@ -163,7 +170,8 @@ True if a predicate Caller within Entity makes a Call.
 
 True if Kind defines Entity and is one of category, protocol, or object.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity_kind(Entity,Kind)``
@@ -183,7 +191,8 @@ True if Kind defines Entity and is one of category, protocol, or object.
 
 True if Property is a valid property of Entity. Entity can be either a category, a protocol, or an object.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity_property(Entity,Property)``
@@ -203,7 +212,8 @@ True if Property is a valid property of Entity. Entity can be either a category,
 
 True if a predicate Updater within Entity makes a dynamic update to Update (by e.g. asserta/1, retract/1, etc.)
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity_updates(Entity,Updater,Update)``

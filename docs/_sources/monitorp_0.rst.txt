@@ -12,7 +12,8 @@ Monitor protocol.
 | **Version:** 1.0
 | **Date:** 2000/7/24
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 True if monitor is currently active.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``monitor_activated`` - ``zero_or_one``
@@ -51,7 +53,8 @@ True if monitor is currently active.
 
 Activates all spy points and start monitoring.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``activate_monitor`` - ``one``
@@ -69,7 +72,8 @@ Activates all spy points and start monitoring.
 
 Suspends monitoring, deactivating all spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``suspend_monitor`` - ``one``
@@ -87,7 +91,8 @@ Suspends monitoring, deactivating all spy points.
 
 Resets monitor, deactivating and deleting all spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``reset_monitor`` - ``one``
@@ -105,7 +110,8 @@ Resets monitor, deactivating and deleting all spy points.
 
 Current spy point.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``spy_point(Event,Object,Message,Sender)``
@@ -125,7 +131,8 @@ Current spy point.
 
 Sets a spy point.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_spy_point(Event,Object,Message,Sender)``
@@ -145,7 +152,8 @@ Sets a spy point.
 
 Deletes all matching spy points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``del_spy_points(Event,Object,Message,Sender)``

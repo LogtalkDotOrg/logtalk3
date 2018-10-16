@@ -12,7 +12,8 @@ Atom data type predicates.
 | **Version:** 1.6
 | **Date:** 2018/7/11
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Extends:**
@@ -33,7 +34,8 @@ Public interface
 
 Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``replace_sub_atom(Old,New,Input,Output)``
@@ -53,7 +55,8 @@ Replaces all occurences of Old by New in Input returning Output. Returns Input i
 
 Splits an atom at a given delimiter into a list of sub-atoms.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``split(Atom,Delimiter,SubAtoms)``

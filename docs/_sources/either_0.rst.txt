@@ -12,7 +12,8 @@ Types and predicates for extended type-checking of expected term references and 
 | **Version:** 0.2
 | **Date:** 2018/6/4
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -36,7 +37,8 @@ Public interface
 
 Returns the values stored in the expected term references that hold an expected term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``expecteds(References,Expecteds)``
@@ -56,7 +58,8 @@ Returns the values stored in the expected term references that hold an expected 
 
 Returns the values stored in the expected term references that hold an expected term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``unexpecteds(References,Unexpecteds)``
@@ -76,7 +79,8 @@ Returns the values stored in the expected term references that hold an expected 
 
 Retrieves and partitions the values stored in the expected term references.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``partition(References,Expecteds,Unexpecteds)``

@@ -12,7 +12,8 @@ Class hierarchy protocol.
 | **Version:** 1.0
 | **Date:** 2000/7/24
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 | **Extends:**
@@ -33,7 +34,8 @@ Public interface
 
 Returns, by backtracking, all object classes.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``class(Class)``
@@ -53,7 +55,8 @@ Returns, by backtracking, all object classes.
 
 List of all object classes.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``classes(Classes)``
@@ -73,7 +76,8 @@ List of all object classes.
 
 Returns, by backtracking, all class instances.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``instance(Instance)``
@@ -93,7 +97,8 @@ Returns, by backtracking, all class instances.
 
 List of all class instances.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``instances(Instances)``
@@ -113,7 +118,8 @@ List of all class instances.
 
 Returns, by backtracking, all class subclasses.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subclass(Subclass)``
@@ -133,7 +139,8 @@ Returns, by backtracking, all class subclasses.
 
 List of all class subclasses.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subclasses(Subclasses)``
@@ -153,7 +160,8 @@ List of all class subclasses.
 
 Returns, by backtracking, all class superclasses.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``superclass(Superclass)``
@@ -173,7 +181,8 @@ Returns, by backtracking, all class superclasses.
 
 List of all class superclasses.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``superclasses(Superclasses)``
@@ -193,7 +202,8 @@ List of all class superclasses.
 
 Returns, by backtracking, all class leaf instances.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leaf_instance(Leaf)``
@@ -213,7 +223,8 @@ Returns, by backtracking, all class leaf instances.
 
 List of all class leaf instances.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leaf_instances(Leaves)``
@@ -233,7 +244,8 @@ List of all class leaf instances.
 
 Returns, by backtracking, all class leaf subclasses.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leaf_class(Leaf)``
@@ -253,7 +265,8 @@ Returns, by backtracking, all class leaf subclasses.
 
 List of all class leaf leaf subclasses.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leaf_classes(Leaves)``
@@ -273,7 +286,8 @@ List of all class leaf leaf subclasses.
 
 Returns, by backtracking, all class descendant instances.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``descendant_instance(Descendant)``
@@ -293,7 +307,8 @@ Returns, by backtracking, all class descendant instances.
 
 List of all class descendant instances.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``descendant_instances(Descendants)``
@@ -313,7 +328,8 @@ List of all class descendant instances.
 
 Returns, by backtracking, all class descendant subclasses.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``descendant_class(Descendant)``
@@ -333,7 +349,8 @@ Returns, by backtracking, all class descendant subclasses.
 
 List of all class descendant subclasses.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``descendant_classes(Descendants)``

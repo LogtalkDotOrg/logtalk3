@@ -12,7 +12,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 | **Version:** 6.24
 | **Date:** 2018/8/1
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -35,7 +36,8 @@ Public interface
 
 Declares entities being tested for which code coverage information should be collected.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``cover(Entity)``
@@ -55,7 +57,8 @@ Declares entities being tested for which code coverage information should be col
 
 Runs the unit tests, writing the results to the current output stream.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``run`` - ``one``
@@ -73,7 +76,8 @@ Runs the unit tests, writing the results to the current output stream.
 
 Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``run(Tests)``
@@ -94,7 +98,8 @@ Runs a unit test or a list of unit tests, writing the results to the current out
 
 Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``run(File,Mode)``
@@ -114,7 +119,8 @@ Runs the unit tests, writing the results to the specified file. Mode can be eith
 
 Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``run_test_sets(TestObjects)``
@@ -134,7 +140,8 @@ Runs two or more test sets as a unified set generating a single code coverage re
 
 True if the goal succeeds once without leaving choice-points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``deterministic(Goal)``
@@ -156,7 +163,8 @@ True if the goal succeeds once without leaving choice-points.
 
 Reified version of the deterministic/1 predicate. True if the goal succeeds. Returns a boolean value (true or false) indicating if the goal succeeded without leaving choice-points.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``deterministic(Goal,Deterministic)``
@@ -178,7 +186,8 @@ Reified version of the deterministic/1 predicate. True if the goal succeeds. Ret
 
 True if the assertion goal succeeds. Throws an error using the assertion goal as argument if the assertion goal throws an error or fails.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``assertion(Assertion)``
@@ -206,7 +215,8 @@ True if the assertion goal succeeds. Throws an error using the assertion goal as
 
 True if the assertion goal succeeds. Throws an error using the description as argument if the assertion goal throws an error or fails. The description argument helps to distinguish between different assertions in the same test body.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``assertion(Description,Assertion)``
@@ -234,7 +244,8 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 
 Reified version of the quick_check/2 predicate. Reports the result as "passed", "failed(Goal)" where Goal is the test that failed, or "error(Error,Template)".
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``quick_check(Template,Result,Options)``
@@ -254,7 +265,8 @@ Reified version of the quick_check/2 predicate. Reports the result as "passed", 
 
 Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option n(NumberOfTests). Default is to run 100 random tests.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``quick_check(Template,Options)``
@@ -274,7 +286,8 @@ Generates and runs random tests for a given predicate given its mode template. F
 
 Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails printing the test.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``quick_check(Template)``
@@ -294,7 +307,8 @@ Generates and runs 100 random tests for a given predicate given its mode templat
 
 Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``benchmark(Goal,Time)``
@@ -316,7 +330,8 @@ Benchmarks a goal and returns the total execution time in seconds. Uses cpu cloc
 
 Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)). Uses cpu clock.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``benchmark_reified(Goal,Time,Result)``
@@ -338,7 +353,8 @@ Benchmarks a goal and returns the total execution time in seconds plus its resul
 
 Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``benchmark(Goal,Repetitions,Time)``
@@ -360,7 +376,8 @@ Benchmarks a goal by repeating it the specified number of times and returning th
 
 Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (cpu or wall). Goals that may throw an exception should be wrapped by the catch/3 control construct.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``benchmark(Goal,Repetitions,Clock,Time)``
@@ -382,7 +399,8 @@ Benchmarks a goal by repeating it the specified number of times and returning th
 
 True when the two arguments are a variant of each other. I.e. if is possible to rename the term variables to make them identical. Useful for checking expected test results that contain variables.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``variant(Term1,Term2)``
@@ -402,7 +420,8 @@ True when the two arguments are a variant of each other. I.e. if is possible to 
 
 Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. Type-checked.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``approximately_equal(Number1,Number2,Epsilon)``
@@ -422,7 +441,8 @@ Compares two numbers for approximate equality given an epsilon value using the d
 
 Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. Type-checked.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``essentially_equal(Number1,Number2,Epsilon)``
@@ -442,7 +462,8 @@ Compares two numbers for essential equality given an epsilon value using the de 
 
 Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). Type-checked.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)``
@@ -462,7 +483,8 @@ Compares two numbers for close equality given relative and absolute tolerances u
 
 Compares two numbers (or lists of numbers) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``=~=(Number1,Number2)``
@@ -483,7 +505,8 @@ Compares two numbers (or lists of numbers) for approximate equality using 100*ep
 
 Returns the value of epsilon used in the definition of the (=~=)/2 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``epsilon(Epsilon)``
@@ -506,7 +529,8 @@ Protected interface
 
 Runs all defined unit tests.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``run_tests`` - ``one``
@@ -524,7 +548,8 @@ Runs all defined unit tests.
 
 Runs a list of defined tests.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``run_tests(Tests,File)``
@@ -544,7 +569,8 @@ Runs a list of defined tests.
 
 Runs a test set as part of running two or more test sets as a unified set.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``run_test_set`` - ``one``
@@ -562,7 +588,8 @@ Runs a test set as part of running two or more test sets as a unified set.
 
 Runs a list of defined tests.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``run_quick_check_tests(Template,NumberOfTests)``
@@ -582,7 +609,8 @@ Runs a list of defined tests.
 
 Verifies conditions for running the tests. Defaults to the goal true.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``condition`` - ``zero_or_one``
@@ -600,7 +628,8 @@ Verifies conditions for running the tests. Defaults to the goal true.
 
 Setup environment before running the test set. Defaults to the goal true.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``setup`` - ``zero_or_one``
@@ -618,7 +647,8 @@ Setup environment before running the test set. Defaults to the goal true.
 
 Cleanup environment after running the test set. Defaults to the goal true.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``cleanup`` - ``zero_or_one``
@@ -636,7 +666,8 @@ Cleanup environment after running the test set. Defaults to the goal true.
 
 Make target for automatically running the test set when calling the logtalk_make/1 built-in predicate. No default. Possible values are {all, check}.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``make(?atom)`` - ``zero_or_one``
@@ -654,7 +685,8 @@ Make target for automatically running the test set when calling the logtalk_make
 
 Note to be printed after the test results. Defaults to the empty atom.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``note(?atom)`` - ``zero_or_one``
@@ -672,7 +704,8 @@ Note to be printed after the test results. Defaults to the empty atom.
 
 Suppresses text output. Useful to avoid irrelevant text output from predicates being tested to clutter the test logs.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``suppress_text_output`` - ``one``
@@ -690,7 +723,8 @@ Suppresses text output. Useful to avoid irrelevant text output from predicates b
 
 Suppresses binary output. Useful to avoid irrelevant binary output from predicates being tested to clutter the test logs.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``suppress_binary_output`` - ``one``
@@ -708,7 +742,8 @@ Suppresses binary output. Useful to avoid irrelevant binary output from predicat
 
 Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_text_input(Alias,Contents,Options)``
@@ -728,7 +763,8 @@ Creates a temporary file with the given text contents and opens it for reading r
 
 Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_text_input(Alias,Contents)``
@@ -748,7 +784,8 @@ Creates a temporary file with the given text contents and opens it for reading r
 
 Creates a temporary file with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_text_input(Contents)``
@@ -768,7 +805,8 @@ Creates a temporary file with the given text contents, opens it for reading usin
 
 Checks that the temporary file (referenced with the given alias) being written have the expected text contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_text_input(Alias,Contents)``
@@ -788,7 +826,8 @@ Checks that the temporary file (referenced with the given alias) being written h
 
 Checks that the temporary file being written have the expected text contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_text_input(Contents)``
@@ -808,7 +847,8 @@ Checks that the temporary file being written have the expected text contents.
 
 Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``text_input_assertion(Alias,Contents,Assertion)``
@@ -828,7 +868,8 @@ Returns an assertion for checking that the temporary file (referenced with the g
 
 Returns an assertion for checking that the temporary file being written have the expected text contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``text_input_assertion(Contents,Assertion)``
@@ -848,7 +889,8 @@ Returns an assertion for checking that the temporary file being written have the
 
 Cleans the temporary file used when testing text input.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``clean_text_input`` - ``one``
@@ -866,7 +908,8 @@ Cleans the temporary file used when testing text input.
 
 Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_binary_input(Alias,Bytes,Options)``
@@ -886,7 +929,8 @@ Creates a temporary file with the given binary contents and opens it for reading
 
 Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_binary_input(Alias,Bytes)``
@@ -906,7 +950,8 @@ Creates a temporary file with the given binary contents and opens it for reading
 
 Creates a temporary file with the given binary contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_binary_input(Bytes)``
@@ -926,7 +971,8 @@ Creates a temporary file with the given binary contents, opens it for reading us
 
 Checks that the temporary file (referenced with the given alias) have the expected binary contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_binary_input(Alias,Bytes)``
@@ -946,7 +992,8 @@ Checks that the temporary file (referenced with the given alias) have the expect
 
 Checks that the temporary file have the expected binary contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_binary_input(Bytes)``
@@ -966,7 +1013,8 @@ Checks that the temporary file have the expected binary contents.
 
 Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``binary_input_assertion(Alias,Bytes,Assertion)``
@@ -986,7 +1034,8 @@ Returns an assertion for checking that the temporary file (referenced with the g
 
 Returns an assertion for checking that the temporary file have the expected binary contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``binary_input_assertion(Bytes,Assertion)``
@@ -1006,7 +1055,8 @@ Returns an assertion for checking that the temporary file have the expected bina
 
 Cleans the temporary file used when testing binary input.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``clean_binary_input`` - ``one``
@@ -1024,7 +1074,8 @@ Cleans the temporary file used when testing binary input.
 
 Creates a temporary file with the given text contents and referenced with the given alias.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_text_output(Alias,Contents)``
@@ -1044,7 +1095,8 @@ Creates a temporary file with the given text contents and referenced with the gi
 
 Creates a temporary file with the given text contents and sets the current output stream to the file.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_text_output(Contents)``
@@ -1064,7 +1116,8 @@ Creates a temporary file with the given text contents and sets the current outpu
 
 Checks that the temporary file (referenced with the given alias) being written have the expected text contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_text_output(Alias,Contents)``
@@ -1084,7 +1137,8 @@ Checks that the temporary file (referenced with the given alias) being written h
 
 Checks that the temporary file being written have the expected text contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_text_output(Contents)``
@@ -1104,7 +1158,8 @@ Checks that the temporary file being written have the expected text contents.
 
 Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``text_output_assertion(Alias,Contents,Assertion)``
@@ -1124,7 +1179,8 @@ Returns an assertion for checking that the temporary file (referenced with the g
 
 Returns an assertion for checking that the temporary file being written have the expected text contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``text_output_assertion(Contents,Assertion)``
@@ -1144,7 +1200,8 @@ Returns an assertion for checking that the temporary file being written have the
 
 Cleans the temporary file used when testing text output.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``clean_text_output`` - ``one``
@@ -1162,7 +1219,8 @@ Cleans the temporary file used when testing text output.
 
 Creates a temporary file with the given binary contents and referenced with the given alias.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_binary_output(Alias,Bytes)``
@@ -1182,7 +1240,8 @@ Creates a temporary file with the given binary contents and referenced with the 
 
 Creates a temporary file with the given binary contents and sets the current output stream to the file.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_binary_output(Bytes)``
@@ -1202,7 +1261,8 @@ Creates a temporary file with the given binary contents and sets the current out
 
 Checks that the temporary file (referenced with the given alias) have the expected binary contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_binary_output(Alias,Bytes)``
@@ -1222,7 +1282,8 @@ Checks that the temporary file (referenced with the given alias) have the expect
 
 Checks that the temporary file have the expected binary contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_binary_output(Bytes)``
@@ -1242,7 +1303,8 @@ Checks that the temporary file have the expected binary contents.
 
 Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``binary_output_assertion(Alias,Bytes,Assertion)``
@@ -1262,7 +1324,8 @@ Returns an assertion for checking that the temporary file (referenced with the g
 
 Returns an assertion for checking that the temporary file have the expected binary contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``binary_output_assertion(Bytes,Assertion)``
@@ -1282,7 +1345,8 @@ Returns an assertion for checking that the temporary file have the expected bina
 
 Cleans the temporary file used when testing binary output.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``clean_binary_output`` - ``one``
@@ -1300,7 +1364,8 @@ Cleans the temporary file used when testing binary output.
 
 Creates a text file with the given contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``create_text_file(File,Contents)``
@@ -1320,7 +1385,8 @@ Creates a text file with the given contents.
 
 Creates a binary file with the given contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``create_binary_file(File,Bytes)``
@@ -1340,7 +1406,8 @@ Creates a binary file with the given contents.
 
 Checks that the contents of a text file match the expected contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_text_file(File,Contents)``
@@ -1360,7 +1427,8 @@ Checks that the contents of a text file match the expected contents.
 
 Checks the contents of a binary file match the expected contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check_binary_file(File,Bytes)``
@@ -1380,7 +1448,8 @@ Checks the contents of a binary file match the expected contents.
 
 Closes any existing stream associated with the file and deletes the file if it exists.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``clean_file(File)``
@@ -1400,7 +1469,8 @@ Closes any existing stream associated with the file and deletes the file if it e
 
 Opens a temporary file with the given options for reading, closes it, and returns its stream handle.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``closed_input_stream(Stream,Options)``
@@ -1420,7 +1490,8 @@ Opens a temporary file with the given options for reading, closes it, and return
 
 Opens a temporary file with the given options for writing, closes it, and returns its stream handle.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``closed_output_stream(Stream,Options)``
@@ -1440,7 +1511,8 @@ Opens a temporary file with the given options for writing, closes it, and return
 
 Returns a syntactically valid stream position.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``stream_position(Position)``
@@ -1463,7 +1535,8 @@ Private predicates
 
 Internal flag used when running two or more test sets as a unified set.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Mode and number of proofs:**
 |    ``running_test_sets_`` - ``zero_or_one``
@@ -1481,7 +1554,8 @@ Internal flag used when running two or more test sets as a unified set.
 
 Specifies a unit test.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``test(Identifier,Variables,Outcome)``
@@ -1501,7 +1575,8 @@ Specifies a unit test.
 
 Counter for generarting unique auxiliary predicate names.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``auxiliary_predicate_counter_(Counter)``
@@ -1521,7 +1596,8 @@ Counter for generarting unique auxiliary predicate names.
 
 Table of defined tests.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``test_(Identifier,Test)``
@@ -1541,7 +1617,8 @@ Table of defined tests.
 
 Counter for skipped tests.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``skipped_(Counter)``
@@ -1561,7 +1638,8 @@ Counter for skipped tests.
 
 Counter for passed tests.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``passed_(Counter)``
@@ -1581,7 +1659,8 @@ Counter for passed tests.
 
 Counter for failed tests.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``failed_(Counter)``
@@ -1601,7 +1680,8 @@ Counter for failed tests.
 
 Fired clauses when running the unit tests.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``fired_(Entity,Predicate,Clause)``
@@ -1621,7 +1701,8 @@ Fired clauses when running the unit tests.
 
 Auxiliary predicate for collecting statistics on clause coverage.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``covered_(Entity,Predicate,Covered,Total)``

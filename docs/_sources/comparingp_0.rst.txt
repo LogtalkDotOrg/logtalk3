@@ -12,7 +12,8 @@ Comparing protocol using overloading of standard operators.
 | **Version:** 1.0
 | **Date:** 2000/7/24
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 True if Term1 is less than Term2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Term1<Term2``
@@ -53,7 +55,8 @@ True if Term1 is less than Term2.
 
 True if Term1 is less or equal than Term2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Term1=<Term2``
@@ -73,7 +76,8 @@ True if Term1 is less or equal than Term2.
 
 True if Term1 is greater than Term2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Term1>Term2``
@@ -93,7 +97,8 @@ True if Term1 is greater than Term2.
 
 True if Term1 is equal or grater than Term2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Term1>=Term2``
@@ -113,7 +118,8 @@ True if Term1 is equal or grater than Term2.
 
 True if Term1 is equal to Term2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Term1=:=Term2``
@@ -133,7 +139,8 @@ True if Term1 is equal to Term2.
 
 True if Term1 is not equal to Term2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Term1=\=Term2``

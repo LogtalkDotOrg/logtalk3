@@ -12,7 +12,8 @@ Common predicates for generating file diagrams.
 | **Version:** 2.4
 | **Date:** 2016/10/10
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 | **Extends:**
@@ -36,7 +37,8 @@ Protected interface
 ``remember_included_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -49,7 +51,8 @@ Protected interface
 ``remember_referenced_logtalk_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -62,7 +65,8 @@ Protected interface
 ``remember_referenced_prolog_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 Private predicates
@@ -78,7 +82,8 @@ Private predicates
 ``included_file_/1``
 ^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -91,7 +96,8 @@ Private predicates
 ``referenced_logtalk_file_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -104,7 +110,8 @@ Private predicates
 ``referenced_prolog_file_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 Operators

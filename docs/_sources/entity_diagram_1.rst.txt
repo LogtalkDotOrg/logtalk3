@@ -12,7 +12,8 @@ Predicates for generating entity diagrams in the specified format with both inhe
 | **Version:** 2.14
 | **Date:** 2018/2/4
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Imports:**
@@ -33,7 +34,8 @@ Public interface
 
 Creates a diagram for all entities in a loaded source file using the specified options. The file can be specified by name, basename, full path, or using library notation.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file(File,Options)``
@@ -53,7 +55,8 @@ Creates a diagram for all entities in a loaded source file using the specified o
 
 Creates a diagram for all entities in a loaded source file using default options. The file can be specified by name, basename, full path, or using library notation.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file(File)``
@@ -79,7 +82,8 @@ Private predicates
 ``included_entity_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -92,7 +96,8 @@ Private predicates
 ``referenced_entity_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -105,7 +110,8 @@ Private predicates
 ``referenced_module_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 Operators

@@ -12,7 +12,8 @@ Statistical calculations over a list of numbers protocol.
 | **Version:** 1.1
 | **Date:** 2017/10/3
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Calculates the product of all list numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``product(List,Product)``
@@ -53,7 +55,8 @@ Calculates the product of all list numbers. Fails if the list is empty.
 
 Calculates the sum of all list numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sum(List,Sum)``
@@ -73,7 +76,8 @@ Calculates the sum of all list numbers. Fails if the list is empty.
 
 Determines the list maximum value in a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``max(List,Maximum)``
@@ -93,7 +97,8 @@ Determines the list maximum value in a list of numbers. Fails if the list is emp
 
 Determines the minimum value in a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``min(List,Minimum)``
@@ -113,7 +118,8 @@ Determines the minimum value in a list of numbers. Fails if the list is empty.
 
 Range is the length of the smallest interval which contains all the numbers in List. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``range(List,Range)``
@@ -133,7 +139,8 @@ Range is the length of the smallest interval which contains all the numbers in L
 
 Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``arithmetic_mean(List,Mean)``
@@ -153,7 +160,8 @@ Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.
 
 Calculates the geometric mean of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``geometric_mean(List,Mean)``
@@ -173,7 +181,8 @@ Calculates the geometric mean of a list of numbers. Fails if the list is empty.
 
 Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``harmonic_mean(List,Mean)``
@@ -193,7 +202,8 @@ Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 
 Calculates the median of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``median(List,Median)``
@@ -213,7 +223,8 @@ Calculates the median of a list of numbers. Fails if the list is empty.
 
 Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``average_deviation(List,CentralTendency,Deviation)``
@@ -233,7 +244,8 @@ Calculates the average absolute deviation of a list of numbers given a central t
 
 Calculates the mean absolute deviation of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``mean_deviation(List,Deviation)``
@@ -253,7 +265,8 @@ Calculates the mean absolute deviation of a list of numbers. Fails if the list i
 
 Calculates the median absolute deviation of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``median_deviation(List,Deviation)``
@@ -273,7 +286,8 @@ Calculates the median absolute deviation of a list of numbers. Fails if the list
 
 Calculates the standard deviation of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``standard_deviation(List,Deviation)``
@@ -293,7 +307,8 @@ Calculates the standard deviation of a list of numbers. Fails if the list is emp
 
 Calculates the coefficient of variation of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``coefficient_of_variation(List,Coefficient)``
@@ -313,7 +328,8 @@ Calculates the coefficient of variation of a list of numbers. Fails if the list 
 
 Calculates the relative standard deviation of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``relative_standard_deviation(List,Percentage)``
@@ -333,7 +349,8 @@ Calculates the relative standard deviation of a list of numbers. Fails if the li
 
 Calculates the (moment) skewness of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``skewness(List,Skewness)``
@@ -353,7 +370,8 @@ Calculates the (moment) skewness of a list of numbers. Fails if the list is empt
 
 Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``kurtosis(List,Kurtosis)``
@@ -373,7 +391,8 @@ Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empt
 
 Calculates the unbiased variance of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``variance(List,Variance)``
@@ -393,7 +412,8 @@ Calculates the unbiased variance of a list of numbers. Fails if the list is empt
 
 Normalizes a list of number such that for the resulting list the mean of is close to zero and the standard deviation is close to 1. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``z_normalization(List,NormalizedList)``
@@ -413,7 +433,8 @@ Normalizes a list of number such that for the resulting list the mean of is clos
 
 Term is a closed list of numbers.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``valid(Term)``
@@ -439,7 +460,8 @@ Private predicates
 ``arithmetic_mean/5``
 ^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -452,7 +474,8 @@ Private predicates
 ``squares_and_cubes/6``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -465,7 +488,8 @@ Private predicates
 ``squares_and_hypers/6``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -478,7 +502,8 @@ Private predicates
 ``variance/6``
 ^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 Operators

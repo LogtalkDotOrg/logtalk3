@@ -12,7 +12,8 @@ Utility predicates for supporting Prolog modules in diagrams.
 | **Version:** 0.15
 | **Date:** 2018/2/2
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Access to module properties, at least exports/1, file/1, and file/2 but also declares/2, defines/2, calls/2, and provides/3 when possible.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``module_property(Module,Property)``
@@ -53,7 +55,8 @@ Access to module properties, at least exports/1, file/1, and file/2 but also dec
 
 Access to loaded source file properties, at least basename/1, directory/1 but also parent/1 when possible.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``loaded_file_property(File,Property)``
@@ -73,7 +76,8 @@ Access to loaded source file properties, at least basename/1, directory/1 but al
 
 Valid source file extension for Prolog source files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``source_file_extension(Extension)``

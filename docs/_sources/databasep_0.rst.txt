@@ -12,7 +12,8 @@ Database protocol.
 | **Version:** 1.0
 | **Date:** 2010/6/13
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Clauses for this predicate are automatically generated using term-expansion. The third argument contains the length of Body.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rule(Head,Body,Length,Tail)``
@@ -53,7 +55,8 @@ Clauses for this predicate are automatically generated using term-expansion. The
 
 Clauses for this predicate are automatically generated using term-expansion. The third argument denotes the tail of the Body.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rule(Head,Body,Tail)``
@@ -73,7 +76,8 @@ Clauses for this predicate are automatically generated using term-expansion. The
 
 Clauses for this predicate are automatically generated using term-expansion.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rule(Head,Body)``
@@ -93,7 +97,8 @@ Clauses for this predicate are automatically generated using term-expansion.
 
 Table of benchmark goals. They are used from shell.lgt to make benchmarking easier.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``bench_goal(Goal)``

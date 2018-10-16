@@ -12,7 +12,8 @@ Basic temporal interval relations protocol (based on James F. Allen Interval Alg
 | **Version:** 1.1
 | **Date:** 2014/4/26
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Constructs a new interval given start and end points. The start point must strictly precede the end point.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``new(Start,End,Interval)``
@@ -53,7 +55,8 @@ Constructs a new interval given start and end points. The start point must stric
 
 True if Interval is a valid interval.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``valid(Interval)``
@@ -73,7 +76,8 @@ True if Interval is a valid interval.
 
 True if Interval1 takes place before Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``before(Interval1,Interval2)``
@@ -93,7 +97,8 @@ True if Interval1 takes place before Interval2.
 
 True if Interval1 takes place after Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``after(Interval1,Interval2)``
@@ -113,7 +118,8 @@ True if Interval1 takes place after Interval2.
 
 True if Interval1 meets Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``meets(Interval1,Interval2)``
@@ -133,7 +139,8 @@ True if Interval1 meets Interval2.
 
 True if Interval1 is met by Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``met_by(Interval1,Interval2)``
@@ -153,7 +160,8 @@ True if Interval1 is met by Interval2.
 
 True if Interval1 overlaps with Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``overlaps(Interval1,Interval2)``
@@ -173,7 +181,8 @@ True if Interval1 overlaps with Interval2.
 
 True if Interval1 is overlapped by Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``overlapped_by(Interval1,Interval2)``
@@ -193,7 +202,8 @@ True if Interval1 is overlapped by Interval2.
 
 True if Interval1 starts Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``starts(Interval1,Interval2)``
@@ -213,7 +223,8 @@ True if Interval1 starts Interval2.
 
 True if Interval1 is started by Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``started_by(Interval1,Interval2)``
@@ -233,7 +244,8 @@ True if Interval1 is started by Interval2.
 
 True if Interval1 occurs during Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``during(Interval1,Interval2)``
@@ -253,7 +265,8 @@ True if Interval1 occurs during Interval2.
 
 True if Interval1 contains Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``contains(Interval1,Interval2)``
@@ -273,7 +286,8 @@ True if Interval1 contains Interval2.
 
 True if Interval1 finishes Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``finishes(Interval1,Interval2)``
@@ -293,7 +307,8 @@ True if Interval1 finishes Interval2.
 
 True if Interval1 is finished by Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``finished_by(Interval1,Interval2)``
@@ -313,7 +328,8 @@ True if Interval1 is finished by Interval2.
 
 True if Interval1 is equal to Interval2.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``equal(Interval1,Interval2)``

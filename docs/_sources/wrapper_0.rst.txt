@@ -12,7 +12,8 @@ Adviser tool for porting and wrapping plain Prolog applications.
 | **Version:** 0.1
 | **Date:** 2017/8/10
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -37,7 +38,8 @@ Public interface
 
 Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rdirectory(Directory,Options)``
@@ -57,7 +59,8 @@ Advises the user on missing directives for converting all plain Prolog files in 
 
 Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rdirectory(Directory)``
@@ -77,7 +80,8 @@ Advises the user on missing directives for converting all plain Prolog files in 
 
 Advises the user on missing directives for converting all plain Prolog files in a directory to Logtalk objects using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Directory,Options)``
@@ -97,7 +101,8 @@ Advises the user on missing directives for converting all plain Prolog files in 
 
 Advises the user on missing directives for converting all plain Prolog files in a directory to Logtalk objects using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Directory)``
@@ -117,7 +122,8 @@ Advises the user on missing directives for converting all plain Prolog files in 
 
 Advises the user on missing directives for converting all Prolog files in a set of directories to Logtalk objects using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directories(Directories,Options)``
@@ -137,7 +143,8 @@ Advises the user on missing directives for converting all Prolog files in a set 
 
 Advises the user on missing directives for converting all Prolog files in a set of directories to Logtalk objects using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directories(Directories)``
@@ -157,7 +164,8 @@ Advises the user on missing directives for converting all Prolog files in a set 
 
 Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``files(Files,Options)``
@@ -177,7 +185,8 @@ Advises the user on missing directives for converting a list of plain Prolog fil
 
 Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``files(Files)``
@@ -197,7 +206,8 @@ Advises the user on missing directives for converting a list of plain Prolog fil
 
 Advises the user on missing directives for converting a plain Prolog file to Logtalk objects using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file(File,Options)``
@@ -217,7 +227,8 @@ Advises the user on missing directives for converting a plain Prolog file to Log
 
 Advises the user on missing directives for converting a plain Prolog file to Logtalk objects using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file(File)``
@@ -237,7 +248,8 @@ Advises the user on missing directives for converting a plain Prolog file to Log
 
 Saves the generated wrapper objects (plus a loader file per directory) for all advised files using the specified options. The wrapper objects are saved to the same directories that contain the wrapped Prolog files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``save(Options)``
@@ -257,7 +269,8 @@ Saves the generated wrapper objects (plus a loader file per directory) for all a
 
 Saves the generated wrapper objects (plus a loader file per directory) for all advised files using default options. The wrapper objects are saved to the same directories that contain the wrapped Prolog files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``save`` - ``one``
@@ -275,7 +288,8 @@ Saves the generated wrapper objects (plus a loader file per directory) for all a
 
 Enumerates by backtracking the default options used when generating the wrapper objects.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``default_option(DefaultOption)``
@@ -295,7 +309,8 @@ Enumerates by backtracking the default options used when generating the wrapper 
 
 Returns a list of the default options used when generating the wrapper objects.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``default_options(DefaultOptions)``
@@ -323,7 +338,8 @@ Private predicates
 
 Merges the user options with the default options, returning the list of options used when generating the wrapper objects.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``merge_options(UserOptions,Options)``
@@ -343,7 +359,8 @@ Merges the user options with the default options, returning the list of options 
 
 Table of called object predicates that are not locally defined.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``predicate_called_but_not_defined_(Object,Predicate)``
@@ -363,7 +380,8 @@ Table of called object predicates that are not locally defined.
 
 Table of called object predicates.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``object_predicate_called_(Object,Other,Predicate)``
@@ -383,7 +401,8 @@ Table of called object predicates.
 
 Table of called module predicates.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``module_predicate_called_(Object,Module,Predicate)``
@@ -403,7 +422,8 @@ Table of called module predicates.
 
 Table of predicates called but not defined.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``unknown_predicate_called_(Object,Predicate)``
@@ -423,7 +443,8 @@ Table of predicates called but not defined.
 
 Table of missing predicate directives.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``missing_predicate_directive_(Object,Directive,Predicate)``
@@ -443,7 +464,8 @@ Table of missing predicate directives.
 
 Table of called non-standard predicates.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``non_standard_predicate_call_(Object,Predicate)``
@@ -463,7 +485,8 @@ Table of called non-standard predicates.
 
 Table of declared dynamic predicates.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``dynamic_directive_(Object,Line,Predicate)``
@@ -483,7 +506,8 @@ Table of declared dynamic predicates.
 
 Table of declared multifile predicates.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``multifile_directive_(Object,Line,Predicate)``
@@ -503,7 +527,8 @@ Table of declared multifile predicates.
 
 Table of directives to be added before the entity opening directive.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``add_directive_before_entity_(Object,Directive)``
@@ -523,7 +548,8 @@ Table of directives to be added before the entity opening directive.
 
 Table of directives to be added.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``add_directive_(Object,Directive)``
@@ -543,7 +569,8 @@ Table of directives to be added.
 
 Table of directives to be added to complement existing directives.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``add_directive_(Object,Directive,NewDirective)``
@@ -563,7 +590,8 @@ Table of directives to be added to complement existing directives.
 
 Table of directives to be removed.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``remove_directive_(Object,Directive)``
@@ -583,7 +611,8 @@ Table of directives to be removed.
 
 Table of files being advised are respective directories and names (basename without extension).
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``file_being_advised_(File,Path,Directory,Name)``

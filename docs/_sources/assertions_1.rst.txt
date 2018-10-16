@@ -12,7 +12,8 @@ A simple assertions framework. Can be used as a hook object for either suppressi
 | **Version:** 2.1
 | **Date:** 2018/2/20
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -33,7 +34,8 @@ Public interface
 
 Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``assertion(Goal)``
@@ -55,7 +57,8 @@ Checks that an assertion is true. Uses the structured message printing mechanism
 
 Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure. The context argument can be used to pass location data.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``assertion(Context,Goal)``

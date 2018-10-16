@@ -12,7 +12,8 @@ Simple parser of PDDL 3.0 files.
 | **Version:** 1.1
 | **Date:** 2016/5/18
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Imports:**
@@ -33,7 +34,8 @@ Public interface
 
 Parses a PDDL 3.0 domain file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parse_domain(File,Output,RestOfFile)``
@@ -53,7 +55,8 @@ Parses a PDDL 3.0 domain file, returning a compound term representing its conten
 
 Parses a PDDL 3.0 domain file, returning a compound term representing its contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parse_domain(File,Output)``
@@ -73,7 +76,8 @@ Parses a PDDL 3.0 domain file, returning a compound term representing its conten
 
 Parses a PDDL 3.0 problem file, returning a compound term representing its contents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parse_problem(File,Output)``
@@ -93,7 +97,8 @@ Parses a PDDL 3.0 problem file, returning a compound term representing its conte
 
 Parses a PDDL 3.0 problem file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parse_problem(File,Output,RestOfFile)``

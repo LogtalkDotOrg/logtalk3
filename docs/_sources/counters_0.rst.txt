@@ -12,7 +12,8 @@ Named integer counters. Counter names can be any nonvar term.
 | **Version:** 1.0
 | **Date:** 2011/1/3
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 True if Counter is a counter with value Value.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``counter(Counter,Value)``
@@ -53,7 +55,8 @@ True if Counter is a counter with value Value.
 
 Increments the named counter.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``increment_counter(Counter)``
@@ -73,7 +76,8 @@ Increments the named counter.
 
 Decrements the named counter.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``decrement_counter(Counter)``
@@ -93,7 +97,8 @@ Decrements the named counter.
 
 Resets the named counter to zero. Creates the counter if it does not exist.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``reset_counter(Counter)``
@@ -111,7 +116,8 @@ Resets the named counter to zero. Creates the counter if it does not exist.
 ``reset_counters/0``
 ^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``reset_counters`` - ``one``
@@ -137,7 +143,8 @@ Private predicates
 
 Table of named counters.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``counter_(Counter,Value)``

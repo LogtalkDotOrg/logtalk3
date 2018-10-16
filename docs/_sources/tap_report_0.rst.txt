@@ -12,7 +12,8 @@ Intercepts unit test execution messages and generates a tap_report.txt file usin
 | **Version:** 1.0
 | **Date:** 2017/12/21
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -43,7 +44,8 @@ Private predicates
 
 Cache of total of tests per test set.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Mode and number of proofs:**
 |    ``partial_(?integer)`` - ``zero_or_more``

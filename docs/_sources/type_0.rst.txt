@@ -12,7 +12,8 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 | **Version:** 1.19
 | **Date:** 2018/10/11
 
-| **Compilation flags:** ``static, context_switching_calls, complements(restrict)``
+| **Compilation flags:**
+|    ``static, context_switching_calls, complements(restrict)``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``type(Type)``
@@ -53,7 +55,8 @@ Table of defined types. A new type can be registered by defining a clause for th
 
 Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``meta_type(MetaType,SubTypes,Values)``
@@ -73,7 +76,8 @@ Table of defined meta-types. A registered type that is a meta-type can be descri
 
 True if the given term is of the specified type. Fails otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``valid(Type,Term)``
@@ -93,7 +97,8 @@ True if the given term is of the specified type. Fails otherwise.
 
 True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check(Type,Term,Context)``
@@ -113,7 +118,8 @@ True if the given term is of the specified type. Throws an error otherwise using
 
 True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``check(Type,Term)``

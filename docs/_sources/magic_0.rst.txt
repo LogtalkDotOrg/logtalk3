@@ -12,7 +12,8 @@ Object encapsulating magic methods.
 | **Version:** 1.0
 | **Date:** 2010/6/13
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Transform (Head :- Body) into a magic clause (NewHead :- NewBody).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``magicise(Head,Body,NewHead,NewBody)``
@@ -53,7 +55,8 @@ Transform (Head :- Body) into a magic clause (NewHead :- NewBody).
 
 Prefix the predicate symbol of Old with magic_.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``magic(Old,New)``

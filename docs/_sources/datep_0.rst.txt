@@ -12,7 +12,8 @@ Date protocol.
 | **Version:** 1.1
 | **Date:** 2005/3/17
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Returns current date.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``today(Year,Month,Day)``
@@ -53,7 +55,8 @@ Returns current date.
 
 True if the argument is a leap year.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leap_year(Year)``
@@ -73,7 +76,8 @@ True if the argument is a leap year.
 
 Name and short name of day.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``name_of_day(Index,Name,Short)``
@@ -93,7 +97,8 @@ Name and short name of day.
 
 Name and short name of month.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``name_of_month(Index,Name,Short)``
@@ -113,7 +118,8 @@ Name and short name of month.
 
 Number of days in a month.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``days_in_month(Month,Year,Days)``
@@ -133,7 +139,8 @@ Number of days in a month.
 
 True if the arguments represent a valid date.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``valid(Year,Month,Day)``

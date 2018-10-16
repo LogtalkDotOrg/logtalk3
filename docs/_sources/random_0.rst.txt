@@ -12,7 +12,8 @@ Portable random number generator predicates. Core predicates originally written 
 | **Version:** 2.5
 | **Date:** 2018/8/14
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -33,7 +34,8 @@ Public interface
 
 Resets the random generator seed to its default value. Use get_seed/1 and set_seed/1 instead if you need reproducibility.
 
-| **Compilation flags:** ``static, synchronized``
+| **Compilation flags:**
+|    ``static, synchronized``
 
 | **Mode and number of proofs:**
 |    ``reset_seed`` - ``one``
@@ -51,7 +53,8 @@ Resets the random generator seed to its default value. Use get_seed/1 and set_se
 
 Randomizes the random generator using a positive integer to compute a new seed.
 
-| **Compilation flags:** ``static, synchronized``
+| **Compilation flags:**
+|    ``static, synchronized``
 
 | **Template:**
 |    ``randomize(Seed)``
@@ -79,7 +82,8 @@ Private predicates
 
 Stores the current random generator seed values.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``seed_(S0,S1,S2)``

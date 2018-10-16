@@ -12,7 +12,8 @@ Event registry protocol.
 | **Version:** 1.1
 | **Date:** 2009/10/8
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Returns a list of all current monitors.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``monitors(Monitors)``
@@ -53,7 +55,8 @@ Returns a list of all current monitors.
 
 Monitor is an object playing the role of a monitor.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``monitor(Monitor)``
@@ -74,7 +77,8 @@ Monitor is an object playing the role of a monitor.
 
 Returns a list of all currently monitored objects.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``monitored(Objects)``
@@ -94,7 +98,8 @@ Returns a list of all currently monitored objects.
 
 True if the arguments describe a currently defined monitored event.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``monitor(Object,Message,Sender,Monitor)``
@@ -114,7 +119,8 @@ True if the arguments describe a currently defined monitored event.
 
 Sets a monitor for the set of matching events.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_monitor(Object,Message,Sender,Monitor)``
@@ -134,7 +140,8 @@ Sets a monitor for the set of matching events.
 
 Deletes all matching monitored events.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``del_monitors(Object,Message,Sender,Monitor)``
@@ -154,7 +161,8 @@ Deletes all matching monitored events.
 
 Deletes all monitored events.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``del_monitors`` - ``one``

@@ -12,7 +12,8 @@ Message forwarding protocol.
 | **Version:** 1.0
 | **Date:** 2013/5/4
 
-| **Compilation flags:** ``static, built_in``
+| **Compilation flags:**
+|    ``static, built_in``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 User-defined message forwarding handler, automatically called (if defined) by the runtime for any message that the receiving object does not understand.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``forward(Message)``

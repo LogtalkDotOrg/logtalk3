@@ -12,7 +12,8 @@ List of variables protocol.
 | **Version:** 1.1
 | **Date:** 2016/10/6
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Appends two lists.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``append(List1,List2,List)``
@@ -53,7 +55,8 @@ Appends two lists.
 
 Deletes from a list all occurrences of an element returning the list of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``delete(List,Element,Remaining)``
@@ -73,7 +76,8 @@ Deletes from a list all occurrences of an element returning the list of remainin
 
 True if the argument is an empty list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``empty(List)``
@@ -93,7 +97,8 @@ True if the argument is an empty list.
 
 Flattens a list of lists into a list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``flatten(List,Flatted)``
@@ -113,7 +118,8 @@ Flattens a list of lists into a list.
 
 List last element (if it exists).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``last(List,Last)``
@@ -133,7 +139,8 @@ List last element (if it exists).
 
 List length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``length(List,Length)``
@@ -153,7 +160,8 @@ List length.
 
 Checks if a variable is a member of a list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``memberchk(Element,List)``
@@ -173,7 +181,8 @@ Checks if a variable is a member of a list.
 
 X and Y are consecutive elements in List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nextto(X,Y,List)``
@@ -193,7 +202,8 @@ X and Y are consecutive elements in List.
 
 Nth element of a list (counting from zero).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nth0(Nth,List,Element)``
@@ -213,7 +223,8 @@ Nth element of a list (counting from zero).
 
 Nth element of a list (counting from zero).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nth0(Nth,List,Element,Residue)``
@@ -233,7 +244,8 @@ Nth element of a list (counting from zero).
 
 Nth element of a list (counting from one).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nth1(Nth,List,Element)``
@@ -253,7 +265,8 @@ Nth element of a list (counting from one).
 
 Nth element of a list (counting from zero).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``nth1(Nth,List,Element,Residue)``
@@ -273,7 +286,8 @@ Nth element of a list (counting from zero).
 
 The two lists are a permutation of the same list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``permutation(List,Permutation)``
@@ -293,7 +307,8 @@ The two lists are a permutation of the same list.
 
 Prefix is a prefix of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``prefix(Prefix,List)``
@@ -313,7 +328,8 @@ Prefix is a prefix of List.
 
 Reverses a list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``reverse(List,Reversed)``
@@ -335,7 +351,8 @@ Reverses a list.
 
 The two lists have the same length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``same_length(List1,List2)``
@@ -357,7 +374,8 @@ The two lists have the same length.
 
 Selects an element from a list, returning the list of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``select(Element,List,Remaining)``
@@ -377,7 +395,8 @@ Selects an element from a list, returning the list of remaining elements.
 
 The first list is a sublist of the second.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sublist(Sublist,List)``
@@ -397,7 +416,8 @@ The first list is a sublist of the second.
 
 Removes all elements in the second list from the first list, returning the list of remaining elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subtract(List,Elements,Remaining)``
@@ -417,7 +437,8 @@ Removes all elements in the second list from the first list, returning the list 
 
 Suffix is a suffix of List.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``suffix(Suffix,List)``
@@ -437,7 +458,8 @@ Suffix is a suffix of List.
 
 Term is a valid list of variables.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``valid(Term)``
@@ -457,7 +479,8 @@ Term is a valid list of variables.
 
 Checks if a term is a valid list of variables. Throws an exception if the term is not valid.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``check(Term)``

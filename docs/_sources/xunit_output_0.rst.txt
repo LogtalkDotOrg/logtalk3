@@ -12,7 +12,8 @@ Intercepts unit test execution messages and outputs a report using the xUnit XML
 | **Version:** 1.0
 | **Date:** 2017/12/29
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -43,7 +44,8 @@ Private predicates
 
 Table of messages emitted by the lgtunit tool when running tests.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``message_cache_(Message)``

@@ -12,7 +12,8 @@ Protocol for an interpreter.
 | **Version:** 1.0
 | **Date:** 2010/6/13
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 True if goal is provable in the specified database.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``prove(Goal,DB)``
@@ -53,7 +55,8 @@ True if goal is provable in the specified database.
 
 True if goal is provable within the given depth-limit in the specified database.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``prove(Goal,Limit,DB)``

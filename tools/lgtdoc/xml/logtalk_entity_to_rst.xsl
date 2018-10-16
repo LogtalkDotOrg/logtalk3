@@ -117,7 +117,9 @@
 		<xsl:text>| **License:** </xsl:text><xsl:value-of select="license" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
-	<xsl:text>| **Compilation flags:** ``</xsl:text><xsl:value-of select="compilation" /><xsl:text>``</xsl:text>
+	<xsl:text>| **Compilation flags:**</xsl:text>
+	<xsl:value-of select="$nl" />
+	<xsl:text>|    ``</xsl:text><xsl:value-of select="compilation" /><xsl:text>``</xsl:text>
 	<xsl:value-of select="$nl2" />
 	<xsl:if test="info">
 		<xsl:for-each select="info">
@@ -282,7 +284,9 @@
 		<xsl:value-of select="comment" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
-	<xsl:text>| **Compilation flags:** ``</xsl:text><xsl:value-of select="compilation" /><xsl:text>``</xsl:text>
+	<xsl:text>| **Compilation flags:**</xsl:text>
+	<xsl:value-of select="$nl" />
+	<xsl:text>|    ``</xsl:text><xsl:value-of select="compilation" /><xsl:text>``</xsl:text>
 	<xsl:value-of select="$nl2" />
 	<xsl:if test="template">
 		<xsl:text>| **Template:**</xsl:text>

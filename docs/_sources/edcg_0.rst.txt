@@ -15,7 +15,8 @@ Multiple hidden parameters: an extension to Prolog's DCG notation.
 | **Copyright:** Copyright (C) 1992 Peter Van Roy
 | **License:** MIT
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -46,7 +47,8 @@ Private predicates
 ``pred_info/3``
 ^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -59,7 +61,8 @@ Private predicates
 ``acc_info/7``
 ^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -72,7 +75,8 @@ Private predicates
 ``acc_info/5``
 ^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -85,7 +89,8 @@ Private predicates
 ``pass_info/2``
 ^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -98,7 +103,8 @@ Private predicates
 ``pass_info/1``
 ^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 Operators

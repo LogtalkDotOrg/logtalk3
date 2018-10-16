@@ -12,7 +12,8 @@ Adds predicates for generating random values for selected types to the library "
 | **Version:** 1.13
 | **Date:** 2018/4/4
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 
@@ -31,7 +32,8 @@ Public interface
 
 Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the arbitrary/2 multifile predicate.
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``arbitrary(Type)``
@@ -51,7 +53,8 @@ Table of defined types for which an arbitrary value can be generated. A new type
 
 Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``arbitrary(Type,Term)``
@@ -71,7 +74,8 @@ Generates an arbitrary term of the specified type. Fails if the given type is no
 
 Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``shrink(Type,Large,Small)``

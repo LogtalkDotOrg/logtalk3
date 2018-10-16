@@ -12,7 +12,8 @@ Predicates for generating unique atoms. Object protocol based on the "gensym" mo
 | **Version:** 1.01
 | **Date:** 2011/11/9
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Resets the generator counter for all bases.
 
-| **Compilation flags:** ``static, synchronized``
+| **Compilation flags:**
+|    ``static, synchronized``
 
 | **Mode and number of proofs:**
 |    ``reset_gensym`` - ``one``
@@ -51,7 +53,8 @@ Resets the generator counter for all bases.
 
 Resets the generator counter for a given base.
 
-| **Compilation flags:** ``static, synchronized``
+| **Compilation flags:**
+|    ``static, synchronized``
 
 | **Template:**
 |    ``reset_gensym(Base)``
@@ -71,7 +74,8 @@ Resets the generator counter for a given base.
 
 Returns a new unique atom with a given base (prefix).
 
-| **Compilation flags:** ``static, synchronized``
+| **Compilation flags:**
+|    ``static, synchronized``
 
 | **Template:**
 |    ``gensym(Base,Unique)``
@@ -99,7 +103,8 @@ Private predicates
 
 Table of generator bases and respective counters.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``base_(Base,Counter)``

@@ -12,7 +12,8 @@ Predicate execution box model port profiler.
 | **Version:** 1.2
 | **Date:** 2018/7/2
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -34,7 +35,8 @@ Public interface
 
 Prints a table with all port profiling data.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``data`` - ``one``
@@ -52,7 +54,8 @@ Prints a table with all port profiling data.
 
 Prints a table with all port profiling data for the specified entity.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``data(Entity)``
@@ -72,7 +75,8 @@ Prints a table with all port profiling data for the specified entity.
 
 Resets all port profiling data.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``reset`` - ``one``
@@ -90,7 +94,8 @@ Resets all port profiling data.
 
 Resets all port profiling data for the specified entity.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``reset(Entity)``
@@ -110,7 +115,8 @@ Resets all port profiling data for the specified entity.
 
 Enumerates, by backtracking, all collected port profiling data.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``port(Port,Entity,Functor,Arity,Count)``
@@ -138,7 +144,8 @@ Private predicates
 
 Internal table of collected port profiling data.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``port_(Port,Entity,Functor,Arity,Count)``

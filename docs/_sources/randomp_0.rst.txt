@@ -12,7 +12,8 @@ Random number generator protocol.
 | **Version:** 2.4
 | **Date:** 2018/8/14
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Returns a new random float value in the interval [0.0, 1.0[.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``random(Random)``
@@ -53,7 +55,8 @@ Returns a new random float value in the interval [0.0, 1.0[.
 
 Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or Upper are not integers or if Lower > Upper.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``between(Lower,Upper,Random)``
@@ -73,7 +76,8 @@ Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or U
 
 Returns a random member of a list. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``member(Random,List)``
@@ -93,7 +97,8 @@ Returns a random member of a list. Fails if the list is empty.
 
 Returns a random member of a list and the rest of the list. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``select(Random,List,Rest)``
@@ -113,7 +118,8 @@ Returns a random member of a list and the rest of the list. Fails if the list is
 
 Returns a random permutation of a list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``permutation(List,Permutation)``
@@ -133,7 +139,8 @@ Returns a random permutation of a list.
 
 Returns a list of the given length of random integers in random order in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers or if Lower > Upper.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sequence(Length,Lower,Upper,List)``
@@ -153,7 +160,8 @@ Returns a list of the given length of random integers in random order in the int
 
 Returns an ordered set of the given size of random integers in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers, if Lower > Upper, or if Length > Upper - Lower + 1.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set(Length,Lower,Upper,Set)``
@@ -173,7 +181,8 @@ Returns an ordered set of the given size of random integers in the interval [Low
 
 Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Upper. Deprecated. Use between/3 for integers.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``random(Lower,Upper,Random)``
@@ -194,7 +203,8 @@ Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Uppe
 
 Returns a list of the given length of random values in random order in the interval [Lower, Upper[. Fails if Lower > Upper or if the arguments are neither integers or floats. Deprecated. Use sequence/4 for integers.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``randseq(Length,Lower,Upper,List)``
@@ -215,7 +225,8 @@ Returns a list of the given length of random values in random order in the inter
 
 Returns an ordered set of the given size of random values in the interval [Lower, Upper[. Fails if the arguments are neither integers or floats, Lower > Upper, or Length > Upper - Lower when the arguments are integers. Deprecated. Use set/4 for integers.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``randset(Length,Lower,Upper,Set)``
@@ -236,7 +247,8 @@ Returns an ordered set of the given size of random values in the interval [Lower
 
 Gets the current random generator seed. Seed should be regarded as an opaque ground term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``get_seed(Seed)``
@@ -256,7 +268,8 @@ Gets the current random generator seed. Seed should be regarded as an opaque gro
 
 Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_seed(Seed)``
@@ -276,7 +289,8 @@ Sets the random generator seed to a given value returned by calling the get_seed
 
 Succeeds or fails with equal probability.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``maybe`` - ``zero_or_one``
@@ -294,7 +308,8 @@ Succeeds or fails with equal probability.
 
 Succeeds with probability Probability or fails with probability 1 - Probability. Fails if Probability is not a float or is outside the interval [0.0, 1.0].
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``maybe(Probability)``
@@ -314,7 +329,8 @@ Succeeds with probability Probability or fails with probability 1 - Probability.
 
 Succeeds with probability K/N where K and N are integers satisfying the equation 0 =< K =< N. Fails otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``maybe(K,N)``
@@ -334,7 +350,8 @@ Succeeds with probability K/N where K and N are integers satisfying the equation
 
 Calls a goal or fails without calling it with equal probability. When the goal is called, it determines if this predicate succeeds once or fails.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``maybe_call(Goal)``
@@ -356,7 +373,8 @@ Calls a goal or fails without calling it with equal probability. When the goal i
 
 Calls a goal or fails without calling it with probability Probability. When the goal is called, it determines if this predicate succeeds once or fails.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``maybe_call(Probability,Goal)``

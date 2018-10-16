@@ -12,7 +12,8 @@ Prototype hierarchy protocol.
 | **Version:** 1.1
 | **Date:** 2006/2/20
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 | **Extends:**
@@ -33,7 +34,8 @@ Public interface
 
 Returns, by backtracking, all object parents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parent(Parent)``
@@ -53,7 +55,8 @@ Returns, by backtracking, all object parents.
 
 List of all object parents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parents(Parents)``
@@ -73,7 +76,8 @@ List of all object parents.
 
 Returns, by backtracking, all object direct descendants.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``extension(Extension)``
@@ -93,7 +97,8 @@ Returns, by backtracking, all object direct descendants.
 
 List of all object direct descendants.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``extensions(Extensions)``

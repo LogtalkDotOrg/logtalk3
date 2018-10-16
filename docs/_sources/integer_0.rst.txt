@@ -12,7 +12,8 @@ Integer data type predicates.
 | **Version:** 1.53
 | **Date:** 2018/7/11
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Extends:**
@@ -33,7 +34,8 @@ Public interface
 
 Returns integers in the interval defined by the two first arguments.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``between(Lower,Upper,Integer)``
@@ -54,7 +56,8 @@ Returns integers in the interval defined by the two first arguments.
 
 Reversible integer sum. At least two of the arguments must be instantiated to integers.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``plus(I,J,Sum)``
@@ -76,7 +79,8 @@ Reversible integer sum. At least two of the arguments must be instantiated to in
 
 Successor of a natural number. At least one of the arguments must be instantiated to a natural number.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``succ(I,J)``
@@ -97,7 +101,8 @@ Successor of a natural number. At least one of the arguments must be instantiate
 
 Generates a list with the sequence of all integers in the interval [Inf, Sup], assuming Inf =< Sup.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sequence(Inf,Sup,List)``

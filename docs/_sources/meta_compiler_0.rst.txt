@@ -12,7 +12,8 @@ Compiler for the "meta" object meta-predicates. Generates auxiliary predicates i
 | **Version:** 0.12
 | **Date:** 2018/8/16
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -41,7 +42,8 @@ Private predicates
 ``generated_predicate/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 Operators

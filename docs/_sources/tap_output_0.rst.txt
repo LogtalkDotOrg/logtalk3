@@ -12,7 +12,8 @@ Intercepts unit test execution messages and outputs a report using the TAP forma
 | **Version:** 1.0
 | **Date:** 2017/12/21
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -43,7 +44,8 @@ Private predicates
 
 Flag to detect report in progress when processing two or more test sets as a unified set.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Mode and number of proofs:**
 |    ``generating_`` - ``zero_or_one``
@@ -61,7 +63,8 @@ Flag to detect report in progress when processing two or more test sets as a uni
 
 Cache of total of tests per test set.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Mode and number of proofs:**
 |    ``partial_(?integer)`` - ``zero_or_more``

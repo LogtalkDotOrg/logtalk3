@@ -12,7 +12,8 @@ ISO 8601 (and European civil calendar) compliant library of date predicates.
 | **Version:** 1.02
 | **Date:** 2014/11/3
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Get the system date and/or its Julian Day # or convert a Julian Day # to/from given date parts.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``date(JD,Year,Month,Day)``
@@ -83,7 +85,8 @@ Get the system date and/or its Julian Day # or convert a Julian Day # to/from gi
 
 Ditto date/4 + get/check its day-of-week #.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``date(JD,Year,Month,Day,DoW)``
@@ -122,7 +125,8 @@ Ditto date/4 + get/check its day-of-week #.
 
 Ditto date/5 + get/check its week #.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``date(JD,Year,Month,Day,DoW,Week)``
@@ -186,7 +190,8 @@ Ditto date/5 + get/check its week #.
 
 Ditto date/6 + get/check its day-of-year #.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``date(JD,Year,Month,Day,DoW,Week,DoY)``
@@ -239,7 +244,8 @@ Ditto date/6 + get/check its day-of-year #.
 
 Conversion between an ISO 8601 compliant date string and its components (truncated and expanded date representations are currently unsupported). Note that date components are not validated; that is the caller's responsibility!
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``date_string(Format,Components,String)``
@@ -343,7 +349,8 @@ Conversion between an ISO 8601 compliant date string and its components (truncat
 
 Validate a given date in the Gregorian calendar.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``valid_date(Year,Month,Day)``
@@ -377,7 +384,8 @@ Validate a given date in the Gregorian calendar.
 
 Succeed if given year is a leap year in the Gregorian calendar.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leap_year(Year)``
@@ -427,7 +435,8 @@ Succeed if given year is a leap year in the Gregorian calendar.
 
 Compute a calendar month.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``calendar_month(Year,Month,Calendar)``
@@ -455,7 +464,8 @@ Compute a calendar month.
 
 Compute a Gregorian Easter Sunday.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``easter_day(Year,Month,Day)``

@@ -12,7 +12,8 @@ Registry of implemented graph languages.
 | **Version:** 1.0
 | **Date:** 2014/8/18
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Table of defined graph languages and their implementation objects.
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``language_object(Format,Object)``

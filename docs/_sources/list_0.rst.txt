@@ -12,7 +12,8 @@ List predicates.
 | **Version:** 2.14
 | **Date:** 2018/3/13
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -35,7 +36,8 @@ Public interface
 
 Converts a list to a difference list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``as_difflist(List,Diffist)``

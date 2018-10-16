@@ -12,7 +12,8 @@ Protocol for a minimal abstraction for calling Java from Logtalk using familiar 
 | **Version:** 1.1
 | **Date:** 2018/5/23
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Gets the value of a class or object field.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``get_field(Field,Value)``
@@ -53,7 +55,8 @@ Gets the value of a class or object field.
 
 Sets the value of a class or object field.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``set_field(Field,Value)``
@@ -73,7 +76,8 @@ Sets the value of a class or object field.
 
 Creates a new instance using the specified parameter values.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``new(Parameters,Instance)``
@@ -93,7 +97,8 @@ Creates a new instance using the specified parameter values.
 
 Creates a new instance using default parameter values.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``new(Instance)``
@@ -113,7 +118,8 @@ Creates a new instance using default parameter values.
 
 Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``invoke(Method)``
@@ -133,7 +139,8 @@ Invokes a method. This is a more efficient compared with relying on the forward/
 
 Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``invoke(Functor,Arguments)``

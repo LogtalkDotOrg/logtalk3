@@ -12,7 +12,8 @@ Stream variables (supporting logical, backtracable, adding and retrieving of ter
 | **Version:** 1.2
 | **Date:** 2018/7/11
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Makes Variable a stream variable. Initial state will be empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``new(Variable)``
@@ -57,7 +59,8 @@ Makes Variable a stream variable. Initial state will be empty.
 
 Makes Variable a stream variable and sets its initial state to Value.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``new(Variable,Value)``
@@ -81,7 +84,8 @@ Makes Variable a stream variable and sets its initial state to Value.
 
 Sets the state of the stream variable Variable to Value (initializing the variable if needed).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Variable<=Value``
@@ -101,7 +105,8 @@ Sets the state of the stream variable Variable to Value (initializing the variab
 
 Unifies Value with the current state of the stream variable Variable.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Variable=>Value``

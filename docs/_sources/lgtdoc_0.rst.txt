@@ -12,7 +12,8 @@ Documenting tool. Generates XML documenting files for loaded entities and for li
 | **Version:** 4.11
 | **Date:** 2018/10/7
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -43,7 +44,8 @@ Private predicates
 
 Table of option values.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``option_(Option,Value)``
@@ -63,7 +65,8 @@ Table of option values.
 
 Table of documented entities per library.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``library_entity_(Library,PrimarySortKey,SecondarySortKey,Entity)``
@@ -83,7 +86,8 @@ Table of documented entities per library.
 
 Table of documented entities per directory.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``directory_entity_(Directory,PrimarySortKey,SecondarySortKey,Entity)``
@@ -103,7 +107,8 @@ Table of documented entities per directory.
 
 Table of documented entities per type.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``type_entity_(Type,PrimarySortKey,SecondarySortKey,Entity)``
@@ -123,7 +128,8 @@ Table of documented entities per type.
 
 Table of public predicates for all documented entities.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``predicate_entity_(Predicate,PrimarySortKey,SecondarySortKey,Entity)``

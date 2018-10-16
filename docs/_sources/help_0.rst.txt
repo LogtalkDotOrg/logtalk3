@@ -12,7 +12,8 @@ Command-line help for Logtalk built-in control constructs, predicates, non-termi
 | **Version:** 0.18
 | **Date:** 2018/6/29
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -33,7 +34,8 @@ Public interface
 
 Prints instructions on how to use the help tool.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``help`` - ``one``
@@ -51,7 +53,8 @@ Prints instructions on how to use the help tool.
 
 Provides help on the Functor/Arity built-in control construct, directive, predicate, or method.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Functor/Arity``
@@ -71,7 +74,8 @@ Provides help on the Functor/Arity built-in control construct, directive, predic
 
 Provides help on the Functor//Arity built-in non-terminal.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Functor//Arity``
@@ -91,7 +95,8 @@ Provides help on the Functor//Arity built-in non-terminal.
 
 Provides a completion pair (Completion-Page) for a given prefix.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``completion(Prefix,Completion)``
@@ -111,7 +116,8 @@ Provides a completion pair (Completion-Page) for a given prefix.
 
 Provides a list of completions pairs (Completion-Page) for a given prefix.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``completions(Prefix,Completions)``
@@ -131,7 +137,8 @@ Provides a list of completions pairs (Completion-Page) for a given prefix.
 
 Provides access to the HTML documenting files describing built-in directives.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``built_in_directive(Functor,Arity,Directory,Basename)``
@@ -151,7 +158,8 @@ Provides access to the HTML documenting files describing built-in directives.
 
 Provides access to the HTML documenting files describing built-in predicates.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``built_in_predicate(Functor,Arity,Directory,Basename)``
@@ -171,7 +179,8 @@ Provides access to the HTML documenting files describing built-in predicates.
 
 Provides access to the HTML documenting files describing built-in methods.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``built_in_method(Functor,Arity,Directory,Basename)``
@@ -191,7 +200,8 @@ Provides access to the HTML documenting files describing built-in methods.
 
 Provides access to the HTML documenting files describing built-in control constructs.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``control_construct(Functor,Arity,Directory,Basename)``
@@ -211,7 +221,8 @@ Provides access to the HTML documenting files describing built-in control constr
 
 Provides access to the HTML documenting files describing built-in DCG non-terminals.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``built_in_non_terminal(Functor,Arity,Directory,Basename)``
@@ -231,7 +242,8 @@ Provides access to the HTML documenting files describing built-in DCG non-termin
 
 Provides help on the standard Logtalk library.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``library`` - ``one``
@@ -249,7 +261,8 @@ Provides help on the standard Logtalk library.
 
 Provides help on the standard Logtalk library entities, predicates, and non-terminals.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Topic)``
@@ -269,7 +282,8 @@ Provides help on the standard Logtalk library entities, predicates, and non-term
 
 Provides access to the Logtalk User and Reference manuals.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``manuals`` - ``one``

@@ -12,7 +12,8 @@ Redis client. Inspired by Sean Charles GNU Prolog Redis client.
 | **Version:** 0.3
 | **Date:** 2017/6/29
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -33,7 +34,8 @@ Public interface
 
 Connect to a Redis server running on localhost using the default 6379 port.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``connect(Connection)``
@@ -53,7 +55,8 @@ Connect to a Redis server running on localhost using the default 6379 port.
 
 Connect to a Redis server running on the given host and port.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``connect(Host,Port,Connection)``
@@ -73,7 +76,8 @@ Connect to a Redis server running on the given host and port.
 
 Disconnect from a Redis server.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``disconnect(Connection)``
@@ -93,7 +97,8 @@ Disconnect from a Redis server.
 
 Sends a request to the a Redis server and returns its reply
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``send(Connection,Request,Reply)``
@@ -113,7 +118,8 @@ Sends a request to the a Redis server and returns its reply
 
 Sends a request to a Redis server running on localhost at the default 6379 port and prints the reply.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``console(Request)``

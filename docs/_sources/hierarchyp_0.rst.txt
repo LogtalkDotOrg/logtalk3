@@ -12,7 +12,8 @@ Common hierarchy protocol for prototype and class hierarchies.
 | **Version:** 1.0
 | **Date:** 2000/7/24
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Returns, by backtracking, all object ancestors.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``ancestor(Ancestor)``
@@ -53,7 +55,8 @@ Returns, by backtracking, all object ancestors.
 
 List of all object ancestors.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``ancestors(Ancestors)``
@@ -73,7 +76,8 @@ List of all object ancestors.
 
 Returns, by backtracking, all object leaves.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leaf(Leaf)``
@@ -93,7 +97,8 @@ Returns, by backtracking, all object leaves.
 
 List of all object leaves.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``leaves(Leaves)``
@@ -113,7 +118,8 @@ List of all object leaves.
 
 Returns, by backtracking, all object descendants.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``descendant(Descendant)``
@@ -133,7 +139,8 @@ Returns, by backtracking, all object descendants.
 
 List of all object descendants.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``descendants(Descendants)``

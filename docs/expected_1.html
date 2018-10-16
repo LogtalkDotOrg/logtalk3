@@ -295,7 +295,10 @@
 <div class="line"><strong>Date:</strong> 2018/7/11</div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
 </div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
@@ -304,7 +307,10 @@
 <span id="expected-1-is-unexpected-0"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">is_unexpected/0</span></code><a class="headerlink" href="#is-unexpected-0" title="Permalink to this headline">¶</a></h3>
 <p>True if the expected reference holds an unexpected term. Avoid whenever possible by using instead the if_unexpected/1 predicate.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Mode and number of proofs:</strong></div>
@@ -317,7 +323,10 @@
 <span id="expected-1-is-expected-0"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">is_expected/0</span></code><a class="headerlink" href="#is-expected-0" title="Permalink to this headline">¶</a></h3>
 <p>True if the expected reference holds an expected term. Avoid whenever possible by using instead the if_expected/1 predicate.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Mode and number of proofs:</strong></div>
@@ -330,7 +339,10 @@
 <span id="expected-1-if-unexpected-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">if_unexpected/1</span></code><a class="headerlink" href="#if-unexpected-1" title="Permalink to this headline">¶</a></h3>
 <p>Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -351,7 +363,10 @@
 <span id="expected-1-if-expected-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">if_expected/1</span></code><a class="headerlink" href="#if-expected-1" title="Permalink to this headline">¶</a></h3>
 <p>Applies a closure, with the expected reference term as additional argument, if it does not hold an unexpected term. Succeeds otherwise.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -372,7 +387,10 @@
 <span id="expected-1-unexpected-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">unexpected/1</span></code><a class="headerlink" href="#unexpected-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the unexpected reference term if not an expected term. Throws an error otherwise.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -398,7 +416,10 @@
 <span id="index-6"></span><span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">expected/1</span></code><a class="headerlink" href="#expected-1-expected-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if not an unexpected term. Throws an error otherwise.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -424,7 +445,10 @@
 <span id="expected-1-map-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">map/2</span></code><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
 <p>When the expected reference does not hold an unexpected term and mapping a closure with the expected reference term and the new term as additional arguments is successful, returns an expected reference with the new value. Otherwise returns the expected reference.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -445,7 +469,10 @@
 <span id="expected-1-flat-map-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">flat_map/2</span></code><a class="headerlink" href="#flat-map-2" title="Permalink to this headline">¶</a></h3>
 <p>When the expected reference does not hold an unexpected term and mapping a closure with the expected reference value and the new expected reference as additional arguments is successful, returns the new expected reference. Otherwise returns the expected reference.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -466,7 +493,10 @@
 <span id="expected-1-or-else-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else/2</span></code><a class="headerlink" href="#or-else-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term or the given default term if the expected reference holds an unexpected term.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -483,7 +513,10 @@
 <span id="expected-1-or-else-get-2"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_get/2</span></code><a class="headerlink" href="#or-else-get-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term or applies a closure to compute the term if the expected holds an unexpected term. Throws an error when the expected reference holds an unexpected term and a term cannot be computed using the given closure.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -513,7 +546,10 @@
 <span id="expected-1-or-else-call-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code><a class="headerlink" href="#or-else-call-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term. Can be used e.g. to throw the exception hold by the expected reference.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
@@ -534,7 +570,10 @@
 <span id="expected-1-or-else-fail-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code><a class="headerlink" href="#or-else-fail-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term. Fails otherwise. Usually called to skip over empty expected reference holding unexpected terms.</p>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>

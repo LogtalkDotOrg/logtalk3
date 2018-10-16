@@ -12,7 +12,8 @@ Optional reference predicates. Requires passing an optional reference constructe
 | **Version:** 1.4
 | **Date:** 2018/7/11
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 True if the optional reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``is_empty`` - ``zero_or_one``
@@ -51,7 +53,8 @@ True if the optional reference is empty. Avoid whenever possible by using instea
 
 True if the optional reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``is_present`` - ``zero_or_one``
@@ -69,7 +72,8 @@ True if the optional reference holds a term. Avoid whenever possible by using in
 
 Calls a goal if the optional reference is empty. Succeeds otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``if_empty(Goal)``
@@ -91,7 +95,8 @@ Calls a goal if the optional reference is empty. Succeeds otherwise.
 
 Applies a closure with the optional reference value as additional argument if not empty. Succeeds otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``if_present(Closure)``
@@ -113,7 +118,8 @@ Applies a closure with the optional reference value as additional argument if no
 
 Returns the optional reference when it is non-empty and its value satisfies a closure. Otherwise returns an empty optional.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``filter(Closure,Reference)``
@@ -135,7 +141,8 @@ Returns the optional reference when it is non-empty and its value satisfies a cl
 
 When the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,NewReference)``
@@ -157,7 +164,8 @@ When the optional reference is non-empty and mapping a closure with the optional
 
 When the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``flat_map(Closure,NewReference)``
@@ -179,7 +187,8 @@ When the optional reference is non-empty and mapping a closure with the optional
 
 Returns the optional reference term if not empty. Throws an error otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``get(Term)``
@@ -203,7 +212,8 @@ Returns the optional reference term if not empty. Throws an error otherwise.
 
 Returns the optional reference term if not empty or the given default term if the optional is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``or_else(Term,Default)``
@@ -223,7 +233,8 @@ Returns the optional reference term if not empty or the given default term if th
 
 Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty. Throws an error when the optional is empty and a term cannot be computed using the given closure.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``or_else_get(Term,Closure)``
@@ -249,7 +260,8 @@ Returns the optional reference term if not empty or applies a closure to compute
 
 Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Can be used e.g. to generate an exception for empty optionals.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``or_else_call(Term,Goal)``
@@ -271,7 +283,8 @@ Returns the optional reference term if not empty or calls a goal deterministical
 
 Returns the optional reference term if not empty. Fails otherwise. Usually called to skip over empty optionals.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``or_else_fail(Term)``

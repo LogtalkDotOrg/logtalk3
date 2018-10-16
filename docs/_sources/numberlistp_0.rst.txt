@@ -12,7 +12,8 @@ List of numbers protocol.
 | **Version:** 1.5
 | **Date:** 2017/10/7
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Calculates the product of all list numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``product(List,Product)``
@@ -53,7 +55,8 @@ Calculates the product of all list numbers. Fails if the list is empty.
 
 Calculates the sum of all list numbers. Returns the integer zero if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``sum(List,Sum)``
@@ -73,7 +76,8 @@ Calculates the sum of all list numbers. Returns the integer zero if the list is 
 
 Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``average(List,Average)``
@@ -93,7 +97,8 @@ Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the
 
 Calculates the Euclidean norm of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``euclidean_norm(List,Norm)``
@@ -113,7 +118,8 @@ Calculates the Euclidean norm of a list of numbers. Fails if the list is empty.
 
 Calculates the Chebyshev norm of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``chebyshev_norm(List,Norm)``
@@ -134,7 +140,8 @@ Calculates the Chebyshev norm of a list of numbers. Fails if the list is empty.
 
 Calculates the Manhattan norm of a list of numbers. Fails if the list is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``manhattan_norm(List,Norm)``
@@ -155,7 +162,8 @@ Calculates the Manhattan norm of a list of numbers. Fails if the list is empty.
 
 Calculates the Euclidean distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``euclidean_distance(List1,List2,Distance)``
@@ -175,7 +183,8 @@ Calculates the Euclidean distance between two lists of numbers. Fails if the two
 
 Calculates the Chebyshev distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``chebyshev_distance(List1,List2,Distance)``
@@ -196,7 +205,8 @@ Calculates the Chebyshev distance between two lists of numbers. Fails if the two
 
 Calculates the Manhattan distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``manhattan_distance(List1,List2,Distance)``
@@ -217,7 +227,8 @@ Calculates the Manhattan distance between two lists of numbers. Fails if the two
 
 Calculates the scalar product of two lists of numbers. Fails if the two lists are empty or not of the same length.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``scalar_product(List1,List2,Product)``
@@ -238,7 +249,8 @@ Calculates the scalar product of two lists of numbers. Fails if the two lists ar
 
 Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``normalize_range(List,NormalizedList)``
@@ -258,7 +270,8 @@ Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmet
 
 Normalizes a list of numbers into the given range. Caller must handle arithmetic exceptions if the input list if not normalizable.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``normalize_range(List,Minimum,Maximum,NormalizedList)``
@@ -278,7 +291,8 @@ Normalizes a list of numbers into the given range. Caller must handle arithmetic
 
 Normalizes a list of numbers returning its unit vector (i.e. a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``normalize_unit(List,NormalizedList)``
@@ -298,7 +312,8 @@ Normalizes a list of numbers returning its unit vector (i.e. a list with Euclide
 
 Normalizes a list of numbers such that the sum of all numbers is equal to one. Caller must handle arithmetic exceptions if the input list if not normalizable.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``normalize_scalar(List,NormalizedList)``
@@ -318,7 +333,8 @@ Normalizes a list of numbers such that the sum of all numbers is equal to one. C
 
 Rescales all numbers in a list by the given factor.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rescale(List,Factor,RescaledList)``

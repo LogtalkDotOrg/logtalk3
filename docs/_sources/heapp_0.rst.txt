@@ -12,7 +12,8 @@ Heap protocol.
 | **Version:** 1.01
 | **Date:** 2010/11/13
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Inserts the new Key-Value pair into a heap, returning the updated heap.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``insert(Key,Value,Heap,NewHeap)``
@@ -53,7 +55,8 @@ Inserts the new Key-Value pair into a heap, returning the updated heap.
 
 Inserts a list of Key-Value pairs into a heap, returning the updated heap.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``insert_all(List,Heap,NewHeap)``
@@ -73,7 +76,8 @@ Inserts a list of Key-Value pairs into a heap, returning the updated heap.
 
 Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``delete(Heap,Key,Value,NewHeap)``
@@ -93,7 +97,8 @@ Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.
 
 Merges two heaps.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``merge(Heap1,Heap2,NewHeap)``
@@ -113,7 +118,8 @@ Merges two heaps.
 
 True if the heap is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``empty(Heap)``
@@ -133,7 +139,8 @@ True if the heap is empty.
 
 Returns the number of heap elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``size(Heap,Size)``
@@ -153,7 +160,8 @@ Returns the number of heap elements.
 
 Returns the current set of Key-Value pairs in the Heap as a List, sorted into ascending order of Keys.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``as_list(Heap,List)``
@@ -173,7 +181,8 @@ Returns the current set of Key-Value pairs in the Heap as a List, sorted into as
 
 Constructs a Heap from a list of Key-Value pairs.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``as_heap(List,Heap)``
@@ -193,7 +202,8 @@ Constructs a Heap from a list of Key-Value pairs.
 
 Returns the top Key-Value pair in Heap. Fails if the heap is empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``top(Heap,Key,Value)``
@@ -213,7 +223,8 @@ Returns the top Key-Value pair in Heap. Fails if the heap is empty.
 
 Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fails if the heap does not have at least two elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``top_next(Heap,Key1,Value1,Key2,Value2)``

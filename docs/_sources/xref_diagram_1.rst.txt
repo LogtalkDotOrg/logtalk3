@@ -12,7 +12,8 @@ Predicates for generating predicate call cross-referencing diagrams.
 | **Version:** 2.19
 | **Date:** 2018/2/4
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Extends:**
@@ -33,7 +34,8 @@ Public interface
 
 Creates a diagram for a single entity using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity(Entity,Options)``
@@ -53,7 +55,8 @@ Creates a diagram for a single entity using the specified options.
 
 Creates a diagram for a single entity using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity(Entity)``
@@ -79,7 +82,8 @@ Private predicates
 ``included_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -92,7 +96,8 @@ Private predicates
 ``referenced_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 .. raw:: html
@@ -105,7 +110,8 @@ Private predicates
 ``external_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 
 Operators

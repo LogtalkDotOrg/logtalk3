@@ -12,7 +12,8 @@ Types and predicates for type-checking and handling optionals. Inspired by Haske
 | **Version:** 0.3
 | **Date:** 2017/12/18
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Provides:**
@@ -36,7 +37,8 @@ Public interface
 
 Returns the values stored in the non-empty optionals.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``cat(Optionals,Values)``

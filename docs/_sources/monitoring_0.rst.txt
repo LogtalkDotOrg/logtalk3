@@ -12,7 +12,8 @@ Event handlers protocol. The handlers are automatically by the runtime called fo
 | **Version:** 1.1
 | **Date:** 2018/10/14
 
-| **Compilation flags:** ``static, built_in``
+| **Compilation flags:**
+|    ``static, built_in``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Event handler for "before" events. A "before" event handler may prevent a method from being looked up or called by failing.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``before(Object,Message,Sender)``
@@ -53,7 +55,8 @@ Event handler for "before" events. A "before" event handler may prevent a method
 
 Event handler for "after" events. An "after" event handler may prevent a method from succeeding by failing.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``after(Object,Message,Sender)``

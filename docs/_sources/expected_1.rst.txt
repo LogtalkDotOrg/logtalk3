@@ -12,7 +12,8 @@ Expected term reference predicates. Requires passing an expected reference const
 | **Version:** 1.1
 | **Date:** 2018/7/11
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 True if the expected reference holds an unexpected term. Avoid whenever possible by using instead the if_unexpected/1 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``is_unexpected`` - ``zero_or_one``
@@ -51,7 +53,8 @@ True if the expected reference holds an unexpected term. Avoid whenever possible
 
 True if the expected reference holds an expected term. Avoid whenever possible by using instead the if_expected/1 predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``is_expected`` - ``zero_or_one``
@@ -69,7 +72,8 @@ True if the expected reference holds an expected term. Avoid whenever possible b
 
 Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``if_unexpected(Closure)``
@@ -91,7 +95,8 @@ Applies a closure, with the expected reference term as additional argument, if i
 
 Applies a closure, with the expected reference term as additional argument, if it does not hold an unexpected term. Succeeds otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``if_expected(Closure)``
@@ -113,7 +118,8 @@ Applies a closure, with the expected reference term as additional argument, if i
 
 Returns the unexpected reference term if not an expected term. Throws an error otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``unexpected(Unexpected)``
@@ -137,7 +143,8 @@ Returns the unexpected reference term if not an expected term. Throws an error o
 
 Returns the expected reference term if not an unexpected term. Throws an error otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``expected(Expected)``
@@ -161,7 +168,8 @@ Returns the expected reference term if not an unexpected term. Throws an error o
 
 When the expected reference does not hold an unexpected term and mapping a closure with the expected reference term and the new term as additional arguments is successful, returns an expected reference with the new value. Otherwise returns the expected reference.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,NewReference)``
@@ -183,7 +191,8 @@ When the expected reference does not hold an unexpected term and mapping a closu
 
 When the expected reference does not hold an unexpected term and mapping a closure with the expected reference value and the new expected reference as additional arguments is successful, returns the new expected reference. Otherwise returns the expected reference.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``flat_map(Closure,NewReference)``
@@ -205,7 +214,8 @@ When the expected reference does not hold an unexpected term and mapping a closu
 
 Returns the expected reference term if it does not hold an unexpected term or the given default term if the expected reference holds an unexpected term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``or_else(Term,Default)``
@@ -225,7 +235,8 @@ Returns the expected reference term if it does not hold an unexpected term or th
 
 Returns the expected reference term if it does not hold an unexpected term or applies a closure to compute the term if the expected holds an unexpected term. Throws an error when the expected reference holds an unexpected term and a term cannot be computed using the given closure.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``or_else_get(Term,Closure)``
@@ -251,7 +262,8 @@ Returns the expected reference term if it does not hold an unexpected term or ap
 
 Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term. Can be used e.g. to throw the exception hold by the expected reference.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``or_else_call(Expected,Goal)``
@@ -273,7 +285,8 @@ Returns the expected reference term if it does not hold an unexpected term or ca
 
 Returns the expected reference term if it does not hold an unexpected term. Fails otherwise. Usually called to skip over empty expected reference holding unexpected terms.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``or_else_fail(Expected)``

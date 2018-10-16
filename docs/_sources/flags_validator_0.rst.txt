@@ -12,7 +12,8 @@ Flag validation protocol. Must be implemented by validator objects.
 | **Version:** 1.0
 | **Date:** 2010/11/27
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Validates the validator object itself.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``print_flags`` - ``zero_or_one``
@@ -51,7 +53,8 @@ Validates the validator object itself.
 
 Validates a flag value.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``validate(Value)``

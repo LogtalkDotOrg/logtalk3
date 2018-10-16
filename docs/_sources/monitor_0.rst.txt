@@ -12,7 +12,8 @@ Monitor predicates.
 | **Version:** 1.2
 | **Date:** 2009/10/8
 
-| **Compilation flags:** ``static, events``
+| **Compilation flags:**
+|    ``static, events``
 
 
 | **Implements:**
@@ -43,7 +44,8 @@ Private predicates
 
 Stores current spy points.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``spy_point_(Event,Object,Message,Sender)``

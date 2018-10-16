@@ -12,7 +12,8 @@ Time protocol.
 | **Version:** 1.0
 | **Date:** 2000/7/24
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Returns current time.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``now(Hours,Mins,Secs)``
@@ -53,7 +55,8 @@ Returns current time.
 
 Returns the current cpu time.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``cpu_time(Time)``
@@ -73,7 +76,8 @@ Returns the current cpu time.
 
 True if the arguments represent a valid time value.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``valid(Hours,Mins,Secs)``

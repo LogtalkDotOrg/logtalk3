@@ -12,7 +12,8 @@ Utility predicates for parsing a file as a list of atoms.
 | **Version:** 1.0
 | **Date:** 2011/8/4
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Reads a file character by character, parsing it into a list of atoms.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``read_file(File,List)``

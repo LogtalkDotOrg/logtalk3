@@ -12,7 +12,8 @@ Assignable variables (supporting backtracable assignement of non-variable terms)
 | **Version:** 1.0
 | **Date:** 2015/7/31
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Makes Variable an assignable variable. Initial state will be empty.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``assignable(Variable)``
@@ -57,7 +59,8 @@ Makes Variable an assignable variable. Initial state will be empty.
 
 Makes Variable an assignable variable and sets its initial state to Value.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``assignable(Variable,Value)``
@@ -83,7 +86,8 @@ Makes Variable an assignable variable and sets its initial state to Value.
 
 Sets the state of the assignable variable Variable to Value (initializing the variable if needed).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Variable<=Value``
@@ -107,7 +111,8 @@ Sets the state of the assignable variable Variable to Value (initializing the va
 
 Unifies Value with the current state of the assignable variable Variable.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``Variable=>Value``

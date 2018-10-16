@@ -15,7 +15,8 @@ Bi-directional XML parser.
 | **Copyright:** Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher
 | **License:** This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 (no dependencies on other entities)
@@ -36,7 +37,8 @@ Public interface
 
 Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parse(Chars,Document)``
@@ -57,7 +59,8 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 
 Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``parse(Controls,Chars,Document)``
@@ -78,7 +81,8 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 
 Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``subterm(XMLTerm,Subterm)``
@@ -98,7 +102,8 @@ Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of i
 
 Pretty prints a XML document on the current output stream.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``pp(XMLDocument)``
@@ -126,7 +131,8 @@ Private predicates
 
 Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``xml_to_document(Controls,XML,Document)``
@@ -146,7 +152,8 @@ Translates the list of character codes XML into the Prolog term Document. Contro
 
 True if Map is a null map.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``empty_map(Map)``
@@ -166,7 +173,8 @@ True if Map is a null map.
 
 True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map_member(Key,Map,Data)``
@@ -186,7 +194,8 @@ True if Map is a ordered map structure which records the pair Key-Data. Key must
 
 True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map_store(Map0,Key,Data,Map1)``
@@ -206,7 +215,8 @@ True if Map0 is an ordered map structure, Key must be ground, and Map1 is identi
 
 Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``pp_string(String)``
@@ -226,7 +236,8 @@ Prints String onto the current output stream. If String contains only 7-bit char
 
 Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm's ancestor elements in the form <tag>{(id)}* where <tag> is the element tag and <id> is the value of any attribute _named_ id.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``fault(Term,Indentation,SubTerm,Path,Message)``
@@ -246,7 +257,8 @@ Identifies SubTerm as a sub-term of Term which cannot be serialized after Indent
 
 Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``exception(Message,Document,Culprit,Path)``
@@ -266,7 +278,8 @@ Hook to raise an exception to be raised in respect of a fault in the XML Term: D
 
 DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML's 'inline' elements. Also, Format is over-ridden, for an individual element, by an explicit 'xml:space'="preserve" attribute.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``document_generation(Format,Document)``
@@ -283,7 +296,8 @@ DCG generating Document as a list of character codes. Format is true|false defin
 
 Represents the ascii character set in its simplest format, using the character entities &amp; &quot; &lt; and &gt; which are common to both XML and HTML. The numeric entity &#39; is used in place of &apos;, because browsers don't recognize it in HTML.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``pcdata_7bit(Char)``
@@ -300,7 +314,8 @@ Represents the ascii character set in its simplest format, using the character e
 
 Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``character_data_format(Chars,Format0,Format1)``
@@ -320,7 +335,8 @@ Holds when Format0 and Format1 are the statuses of XML formatting before and aft
 
 Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``cdata_generation(Chars)``

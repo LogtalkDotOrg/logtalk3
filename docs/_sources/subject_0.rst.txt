@@ -12,7 +12,8 @@ Smalltalk dependent handling predicates.
 | **Version:** 1.0
 | **Date:** 2003/2/9
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Receiver changed in some way. Notify all dependents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``changed`` - ``one``
@@ -51,7 +53,8 @@ Receiver changed in some way. Notify all dependents.
 
 Receiver changed as specified in the argument. Notify all dependents.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``changed(Change)``
@@ -71,7 +74,8 @@ Receiver changed as specified in the argument. Notify all dependents.
 
 Returns a list of all dependent objects.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``dependents(Dependents)``
@@ -91,7 +95,8 @@ Returns a list of all dependent objects.
 
 Adds a new dependent object.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``addDependent(Dependent)``
@@ -111,7 +116,8 @@ Adds a new dependent object.
 
 Removes a dependent object.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``removeDependent(Dependent)``
@@ -139,7 +145,8 @@ Private predicates
 
 Table of dependent objects.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``dependent_(Dependent)``

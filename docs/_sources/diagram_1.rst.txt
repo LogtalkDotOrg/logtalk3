@@ -12,7 +12,8 @@ Common predicates for generating diagrams.
 | **Version:** 2.11
 | **Date:** 2017/11/27
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 | **Provides:**
@@ -34,7 +35,8 @@ Public interface
 
 Creates a diagram for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``libraries(Project,Libraries,Options)``
@@ -54,7 +56,8 @@ Creates a diagram for a set of libraries using the specified options. The Projec
 
 Creates a diagram for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``libraries(Project,Libraries)``
@@ -74,7 +77,8 @@ Creates a diagram for a set of libraries using the default options. The Project 
 
 Creates a diagram for a set of libraries using the default options. The prefix "libraries" is used for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``libraries(Libraries)``
@@ -94,7 +98,8 @@ Creates a diagram for a set of libraries using the default options. The prefix "
 
 Creates a diagram for all loaded libraries using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``all_libraries(Options)``
@@ -114,7 +119,8 @@ Creates a diagram for all loaded libraries using the specified options.
 
 Creates a diagram for all loaded libraries using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``all_libraries`` - ``one``
@@ -132,7 +138,8 @@ Creates a diagram for all loaded libraries using default options.
 
 Creates a diagram for a library and its sub-libraries using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary(Library,Options)``
@@ -152,7 +159,8 @@ Creates a diagram for a library and its sub-libraries using the specified option
 
 Creates a diagram for a library and its sub-libraries using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``rlibrary(Library)``
@@ -172,7 +180,8 @@ Creates a diagram for a library and its sub-libraries using default options.
 
 Creates a diagram for a library using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Library,Options)``
@@ -192,7 +201,8 @@ Creates a diagram for a library using the specified options.
 
 Creates a diagram for a library using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``library(Library)``
@@ -212,7 +222,8 @@ Creates a diagram for a library using default options.
 
 Creates a diagram for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directories(Project,Directories,Options)``
@@ -232,7 +243,8 @@ Creates a diagram for a set of directories using the specified options. The Proj
 
 Creates a diagram for a set of directories using the default options. The Project argument is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directories(Project,Directories)``
@@ -252,7 +264,8 @@ Creates a diagram for a set of directories using the default options. The Projec
 
 Creates a diagram for a directory using the specified options. The Project argument is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Project,Directory,Options)``
@@ -272,7 +285,8 @@ Creates a diagram for a directory using the specified options. The Project argum
 
 Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Project,Directory)``
@@ -292,7 +306,8 @@ Creates a diagram for a directory using default options. The Project argument is
 
 Creates a diagram for a directory using default options. The name of the directory is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``directory(Directory)``
@@ -312,7 +327,8 @@ Creates a diagram for a directory using default options. The name of the directo
 
 Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``files(Project,Files,Options)``
@@ -332,7 +348,8 @@ Creates a diagram for a set of files using the specified options. The file can b
 
 Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``files(Project,Files)``
@@ -352,7 +369,8 @@ Creates a diagram for a set of files using the default options. The file can be 
 
 Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``files(Files)``
@@ -372,7 +390,8 @@ Creates a diagram for a set of files using the default options. The file can be 
 
 Creates a diagram for all loaded files using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``all_files(Options)``
@@ -392,7 +411,8 @@ Creates a diagram for all loaded files using the specified options.
 
 Creates a diagram for all loaded files using default options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``all_files`` - ``one``
@@ -410,7 +430,8 @@ Creates a diagram for all loaded files using default options.
 
 Returns the identifier of the object implementing the graph language currently being used. Fails if none is specified.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``format_object(Object)``
@@ -430,7 +451,8 @@ Returns the identifier of the object implementing the graph language currently b
 
 Returns the diagram name suffix.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``diagram_name_suffix(Suffix)``
@@ -450,7 +472,8 @@ Returns the diagram name suffix.
 
 Enumerates by backtracking the default options used when generating a diagram.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``default_option(DefaultOption)``
@@ -470,7 +493,8 @@ Enumerates by backtracking the default options used when generating a diagram.
 
 Returns a list of the default options used when generating a diagram.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``default_options(DefaultOptions)``
@@ -493,7 +517,8 @@ Protected interface
 
 Merges the user options with the default options, returning the list of options used when generating a diagram. Path arguments in options are expanded to full paths. Also ensures that all directory paths end with a slash.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``merge_options(UserOptions,Options)``
@@ -513,7 +538,8 @@ Merges the user options with the default options, returning the list of options 
 
 Generates diagram output for a library and its sub-libraries using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_rlibrary(Library,Path,Options)``
@@ -533,7 +559,8 @@ Generates diagram output for a library and its sub-libraries using the specified
 
 Generates diagram output for a library using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_library(Library,Path,Options)``
@@ -553,7 +580,8 @@ Generates diagram output for a library using the specified options.
 
 Generates diagram output for a list of files using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_files(Files,Options)``
@@ -573,7 +601,8 @@ Generates diagram output for a list of files using the specified options.
 
 Generates diagram output for a file using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_file(Path,Basename,Directory,Options)``
@@ -593,7 +622,8 @@ Generates diagram output for a file using the specified options.
 
 Outputs external entities using the specified options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_externals(Options)``
@@ -613,7 +643,8 @@ Outputs external entities using the specified options.
 
 Resets all temporary information used when generating a diagram.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Mode and number of proofs:**
 |    ``reset`` - ``one``
@@ -631,7 +662,8 @@ Resets all temporary information used when generating a diagram.
 
 Outputs a graph node.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_node(Identifier,Label,Caption,Contents,Kind,Options)``
@@ -651,7 +683,8 @@ Outputs a graph node.
 
 Enumerates, by backtracking, all saved edges.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``edge(From,To,Labels,Kind,Options)``
@@ -671,7 +704,8 @@ Enumerates, by backtracking, all saved edges.
 
 Outputs all edges.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_edges(Options)``
@@ -691,7 +725,8 @@ Outputs all edges.
 
 Saves a graph edge.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``save_edge(From,To,Labels,Kind,Options)``
@@ -711,7 +746,8 @@ Saves a graph edge.
 
 True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``not_excluded_file(ExcludedFiles,Path,Basename)``
@@ -731,7 +767,8 @@ True when the given file is not excluded from the generated output. Excluded fil
 
 Returns the output file path.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``output_file_path(Name,Options,Format,Path)``
@@ -751,7 +788,8 @@ Returns the output file path.
 
 Locates a file given its name, basename, full path, or library notation representation.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``locate_file(File,Basename,Extension,Directory,Path)``
@@ -771,7 +809,8 @@ Locates a file given its name, basename, full path, or library notation represen
 
 Converts an entity identifier to a ground term.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``ground_entity_identifier(Kind,Identifier,GroundIdentifier)``
@@ -791,7 +830,8 @@ Converts an entity identifier to a ground term.
 
 Filters the file name extension depending on the file_extensions/1 option.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``filter_file_extension(Basename,Options,Name)``
@@ -811,7 +851,8 @@ Filters the file name extension depending on the file_extensions/1 option.
 
 Adds urls/2 and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``add_link_options(Path,Options,GraphOptions)``
@@ -831,7 +872,8 @@ Adds urls/2 and tooltip/1 link options (for use by the graph language) based on 
 
 Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing file node identitifers and captions.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``omit_path_prefix(Path,Options,Relative)``
@@ -851,7 +893,8 @@ Removes a prefix from a path, returning the relative path, when using the option
 
 Adds node zoom options when using the zoom option.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``add_node_zoom_option(Identifier,Suffix,Options,NodeOptions0,NodeOptions)``
@@ -874,7 +917,8 @@ Private predicates
 
 Table of saved edges.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``edge_(From,To,Labels,Kind,Options)``

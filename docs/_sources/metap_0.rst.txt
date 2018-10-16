@@ -12,7 +12,8 @@ Useful meta-predicates protocol.
 | **Version:** 6.1
 | **Date:** 2015/12/23
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Returns a list of all list elements that satisfy a predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``include(Closure,List,Included)``
@@ -55,7 +57,8 @@ Returns a list of all list elements that satisfy a predicate.
 
 Returns a list of all list elements that fail to satisfy a predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``exclude(Closure,List,Excluded)``
@@ -77,7 +80,8 @@ Returns a list of all list elements that fail to satisfy a predicate.
 
 Finds all members of a list that satisfy a given test.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``findall_member(Member,List,Test,Result)``
@@ -99,7 +103,8 @@ Finds all members of a list that satisfy a given test.
 
 Finds all members of a list that satisfy a given test appending the given tail to the result.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``findall_member(Member,List,Test,Result,Tail)``
@@ -121,7 +126,8 @@ Finds all members of a list that satisfy a given test appending the given tail t
 
 Partition a list of elements in two lists using a predicate.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``partition(Closure,List,Included,Excluded)``
@@ -143,7 +149,8 @@ Partition a list of elements in two lists using a predicate.
 
 Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as compare/3.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``partition(Closure,List,Value,Less,Equal,Greater)``
@@ -165,7 +172,8 @@ Partitions a list in lists with values less, equal, and greater than a given val
 
 List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``fold_left(Closure,Accumulator,List,Result)``
@@ -187,7 +195,8 @@ List folding (left associative). Closure is extended with three arguments: accum
 
 List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``fold_left_1(Closure,List,Result)``
@@ -209,7 +218,8 @@ List folding (left associative). Closure is extended with three arguments: accum
 
 List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``scan_left(Closure,Accumulator,List,Results)``
@@ -231,7 +241,8 @@ List scanning (left associative). Closure is extended with three arguments: accu
 
 List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``scan_left_1(Closure,List,Results)``
@@ -253,7 +264,8 @@ List scanning (left associative). Closure is extended with three arguments: accu
 
 List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``fold_right(Closure,Accumulator,List,Result)``
@@ -275,7 +287,8 @@ List folding (right associative). Closure is extended with three arguments: list
 
 List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``fold_right_1(Closure,List,Result)``
@@ -297,7 +310,8 @@ List folding (right associative). Closure is extended with three arguments: list
 
 List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``scan_right(Closure,Accumulator,List,Results)``
@@ -319,7 +333,8 @@ List scanning (right associative). Closure is extended with three arguments: lis
 
 List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``scan_right_1(Closure,List,Results)``
@@ -341,7 +356,8 @@ List scanning (right associative). Closure is extended with three arguments: lis
 
 True if the predicate succeeds for each list element.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,List)``
@@ -363,7 +379,8 @@ True if the predicate succeeds for each list element.
 
 List mapping predicate taken arguments from two lists of elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,List1,List2)``
@@ -385,7 +402,8 @@ List mapping predicate taken arguments from two lists of elements.
 
 List mapping predicate taken arguments from three lists of elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,List1,List2,List3)``
@@ -407,7 +425,8 @@ List mapping predicate taken arguments from three lists of elements.
 
 List mapping predicate taken arguments from four lists of elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,List1,List2,List3,List4)``
@@ -429,7 +448,8 @@ List mapping predicate taken arguments from four lists of elements.
 
 List mapping predicate taken arguments from five lists of elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,List1,List2,List3,List4,List5)``
@@ -451,7 +471,8 @@ List mapping predicate taken arguments from five lists of elements.
 
 List mapping predicate taken arguments from six lists of elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,List1,List2,List3,List4,List5,List6)``
@@ -473,7 +494,8 @@ List mapping predicate taken arguments from six lists of elements.
 
 List mapping predicate taken arguments from seven lists of elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map(Closure,List1,List2,List3,List4,List5,List6,List7)``
@@ -495,7 +517,8 @@ List mapping predicate taken arguments from seven lists of elements.
 
 Map a list and apply a fold left (reduce) to the resulting list.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``map_reduce(Map,Reduce,Accumulator,List,Result)``

@@ -12,7 +12,8 @@ Logging events to files protocol.
 | **Version:** 1.0
 | **Date:** 2011/1/6
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Access to the table of log files.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``log_file(Alias,File)``
@@ -53,7 +55,8 @@ Access to the table of log files.
 
 Defines a log file with alias Alias and file name File. If the log file already exists, its contents are kept. Logging is enabled by default.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``define_log_file(Alias,File)``
@@ -73,7 +76,8 @@ Defines a log file with alias Alias and file name File. If the log file already 
 
 Initializes a new log file with alias Alias and file name File. If the log file already exists, its contents are erased. Logging is enabled by default.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``init_log_file(Alias,File)``
@@ -93,7 +97,8 @@ Initializes a new log file with alias Alias and file name File. If the log file 
 
 Logs an event Event to a log file with alias Alias. Fails if a log file with alias Alias is not defined.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``log_event(Alias,Event)``
@@ -113,7 +118,8 @@ Logs an event Event to a log file with alias Alias. Fails if a log file with ali
 
 True if logging to file with alias Alias is enabled.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``logging(Alias)``
@@ -133,7 +139,8 @@ True if logging to file with alias Alias is enabled.
 
 Enables logging to file with alias Alias. Fails if a log file with alias Alias is not defined.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``enable_logging(Alias)``
@@ -153,7 +160,8 @@ Enables logging to file with alias Alias. Fails if a log file with alias Alias i
 
 Disables logging to file with alias Alias. Fails if a log file with alias Alias is not defined.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``disable_logging(Alias)``

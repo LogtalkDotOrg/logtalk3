@@ -12,7 +12,8 @@ Built-in object providing message printing, debugging, library, source file, and
 | **Version:** 1.13
 | **Date:** 2017/10/18
 
-| **Compilation flags:** ``static, built_in, context_switching_calls, threaded``
+| **Compilation flags:**
+|    ``static, built_in, context_switching_calls, threaded``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Prints a message of the given kind for the specified component.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``print_message(Kind,Component,Message)``
@@ -53,7 +55,8 @@ Prints a message of the given kind for the specified component.
 
 Print the messages tokens to the given stream, prefixing each line with the specified atom.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``print_message_tokens(Stream,Prefix,Tokens)``
@@ -73,7 +76,8 @@ Print the messages tokens to the given stream, prefixing each line with the spec
 
 User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).
 
-| **Compilation flags:** ``dynamic, multifile``
+| **Compilation flags:**
+|    ``dynamic, multifile``
 
 | **Template:**
 |    ``print_message_token(Stream,Prefix,Token,Tokens)``
@@ -93,7 +97,8 @@ User-defined hook predicate for printing a message token (at_same_line, nl, flus
 
 User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).
 
-| **Compilation flags:** ``dynamic, multifile``
+| **Compilation flags:**
+|    ``dynamic, multifile``
 
 | **Template:**
 |    ``message_tokens(Message,Component)``
@@ -110,7 +115,8 @@ User-defined hook grammar rule for converting a message into a list of tokens (a
 
 Message line prefix and output stream to be used when printing a message given its kind and component.
 
-| **Compilation flags:** ``dynamic, multifile``
+| **Compilation flags:**
+|    ``dynamic, multifile``
 
 | **Template:**
 |    ``message_prefix_stream(Kind,Component,Prefix,Stream)``
@@ -130,7 +136,8 @@ Message line prefix and output stream to be used when printing a message given i
 
 User-defined hook predicate for intercepting message printing calls.
 
-| **Compilation flags:** ``dynamic, multifile``
+| **Compilation flags:**
+|    ``dynamic, multifile``
 
 | **Template:**
 |    ``message_hook(Message,Kind,Component,Tokens)``
@@ -150,7 +157,8 @@ User-defined hook predicate for intercepting message printing calls.
 
 Asks a question and reads the answer until the check predicate is true.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``ask_question(Kind,Component,Question,Check,Answer)``
@@ -172,7 +180,8 @@ Asks a question and reads the answer until the check predicate is true.
 
 User-defined hook predicate for intercepting question asking calls.
 
-| **Compilation flags:** ``dynamic, multifile``
+| **Compilation flags:**
+|    ``dynamic, multifile``
 
 | **Template:**
 |    ``question_hook(Question,Kind,Component,Tokens,Check,Answer)``
@@ -194,7 +203,8 @@ User-defined hook predicate for intercepting question asking calls.
 
 Prompt and input stream to be used when asking a question given its kind and component.
 
-| **Compilation flags:** ``dynamic, multifile``
+| **Compilation flags:**
+|    ``dynamic, multifile``
 
 | **Template:**
 |    ``question_prompt_stream(Kind,Component,Prompt,Stream)``
@@ -214,7 +224,8 @@ Prompt and input stream to be used when asking a question given its kind and com
 
 Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.
 
-| **Compilation flags:** ``dynamic, multifile``
+| **Compilation flags:**
+|    ``dynamic, multifile``
 
 | **Template:**
 |    ``trace_event(Event,ExecutionContext)``
@@ -234,7 +245,8 @@ Trace event handler. The runtime calls all trace event handlers using a failure-
 
 Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``debug_handler_provider(Provider)``
@@ -254,7 +266,8 @@ Declares an object as the debug handler provider. There should be at most one de
 
 Debug event handler. The defined events are unification events - fact(Entity,Fact,Clause,File,Line) and rule(Entity,Head,Clause,File,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).
 
-| **Compilation flags:** ``static, multifile``
+| **Compilation flags:**
+|    ``static, multifile``
 
 | **Template:**
 |    ``debug_handler(Event,ExecutionContext)``
@@ -274,7 +287,8 @@ Debug event handler. The defined events are unification events - fact(Entity,Fac
 
 Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``expand_library_path(LibraryPath,AbsolutePath)``
@@ -295,7 +309,8 @@ Expands a library alias or a library path into its absolute path. Uses a depth b
 
 Enumerates, by backtracking, all loaded files, returning their full paths.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``loaded_file(Path)``
@@ -315,7 +330,8 @@ Enumerates, by backtracking, all loaded files, returning their full paths.
 
 Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``loaded_file_property(Path,Property)``
@@ -335,7 +351,8 @@ Enumerates, by backtracking, all loaded file properties. Valid properties are: b
 
 Enumerates, by backtracking, all defined file type extensions. The defined types are: source, object, logtalk, prolog, and tmp. The source type returns both logtalk and prolog type extensions.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``file_type_extension(Type,Extension)``
@@ -355,7 +372,8 @@ Enumerates, by backtracking, all defined file type extensions. The defined types
 
 Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from term_expansion/2 or goal_expansion/2 hook predicate definitions.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``compile_aux_clauses(Clauses)``
@@ -375,7 +393,8 @@ Compiles a list of auxiliary clauses. Can only be called during source file comp
 
 Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``entity_prefix(Entity,Prefix)``
@@ -395,7 +414,8 @@ Converts between an entity identifier and the entity prefix that is used for its
 
 Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``compile_predicate_heads(Heads,Entity,CompiledHeads,ExecutionContext)``
@@ -417,7 +437,8 @@ Compiles clause heads. The heads are compiled in the context of the entity under
 
 Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``compile_predicate_indicators(PredicateIndicators,Entity,CompiledPredicateIndicators)``
@@ -439,7 +460,8 @@ Compiles predicate indicators. The predicate are compiled in the context of the 
 
 Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``decompile_predicate_heads(CompiledHeads,Entity,Type,Heads)``
@@ -461,7 +483,8 @@ Decompiles clause heads. All compiled clause heads must belong to the same entit
 
 Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``decompile_predicate_indicators(CompiledPredicateIndicators,Entity,Type,PredicateIndicators)``
@@ -483,7 +506,8 @@ Decompiles predicate indicators. All compiled predicate indicators must belong t
 
 Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``execution_context(ExecutionContext,Entity,Sender,This,Self,MetaCallContext,CoinductionStack)``

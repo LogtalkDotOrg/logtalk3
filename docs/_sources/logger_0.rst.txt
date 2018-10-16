@@ -12,7 +12,8 @@ Global logger object for logging events to files.
 | **Version:** 1.0
 | **Date:** 2011/1/6
 
-| **Compilation flags:** ``static, context_switching_calls``
+| **Compilation flags:**
+|    ``static, context_switching_calls``
 
 
 | **Implements:**
@@ -43,7 +44,8 @@ Private predicates
 
 Table of log files.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``log_file_(Alias,File)``
@@ -63,7 +65,8 @@ Table of log files.
 
 Table of logging file status for log files.
 
-| **Compilation flags:** ``dynamic``
+| **Compilation flags:**
+|    ``dynamic``
 
 | **Template:**
 |    ``logging_to_file_(Alias,Status)``

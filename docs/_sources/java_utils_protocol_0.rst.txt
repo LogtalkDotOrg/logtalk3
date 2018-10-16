@@ -12,7 +12,8 @@ Abstract interface to Java utility predicates.
 | **Version:** 1.5
 | **Date:** 2017/10/16
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 
 (no dependencies on other entities)
@@ -33,7 +34,8 @@ Public interface
 
 Returns an opaque term that represents the Java value with the given name.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``value_reference(Value,Reference)``
@@ -53,7 +55,8 @@ Returns an opaque term that represents the Java value with the given name.
 
 Returns an opaque term that represents the Java value true.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``true(Reference)``
@@ -73,7 +76,8 @@ Returns an opaque term that represents the Java value true.
 
 Returns an opaque term that represents the Java value false.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``false(Reference)``
@@ -93,7 +97,8 @@ Returns an opaque term that represents the Java value false.
 
 Returns an opaque term that represents the Java value void.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``void(Reference)``
@@ -113,7 +118,8 @@ Returns an opaque term that represents the Java value void.
 
 Returns an opaque term that represents the Java value null.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``null(Reference)``
@@ -133,7 +139,8 @@ Returns an opaque term that represents the Java value null.
 
 True when the argument is the Java value true. Fails if the argument is not instantiated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_true(Reference)``
@@ -153,7 +160,8 @@ True when the argument is the Java value true. Fails if the argument is not inst
 
 True when the argument is the Java value false. Fails if the argument is not instantiated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_false(Reference)``
@@ -173,7 +181,8 @@ True when the argument is the Java value false. Fails if the argument is not ins
 
 True when the argument is the Java value void. Fails if the argument is not instantiated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_void(Reference)``
@@ -193,7 +202,8 @@ True when the argument is the Java value void. Fails if the argument is not inst
 
 True when the argument is the Java value null. Fails if the argument is not instantiated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_null(Reference)``
@@ -213,7 +223,8 @@ True when the argument is the Java value null. Fails if the argument is not inst
 
 True when the argument is a reference to a Java object. Fails if the argument is not instantiated.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``is_object(Reference)``
@@ -233,7 +244,8 @@ True when the argument is a reference to a Java object. Fails if the argument is
 
 Converts a list of ground Prolog terms to an array (a Java reference).
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``terms_to_array(Terms,Array)``
@@ -253,7 +265,8 @@ Converts a list of ground Prolog terms to an array (a Java reference).
 
 Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``array_to_terms(Array,Terms,Length)``
@@ -273,7 +286,8 @@ Converts an array (a Java reference) to a list of ground Prolog terms returning 
 
 Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``array_to_terms(Array,Terms)``
@@ -293,7 +307,8 @@ Converts an array (a Java reference) to a list of ground Prolog terms. The array
 
 Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``array_list(Array,List)``
@@ -314,7 +329,8 @@ Converts between an array (a Java reference) and a list. Deprecated. Use the ter
 
 Enumerates, by backtracking, all iterator elements.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``iterator_element(Iterator,Element)``
@@ -334,7 +350,8 @@ Enumerates, by backtracking, all iterator elements.
 
 Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``decode_exception(Exception,Cause)``
@@ -354,7 +371,8 @@ Decodes an exception into its corresponding cause. Fails if the exception is not
 
 Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.
 
-| **Compilation flags:** ``static``
+| **Compilation flags:**
+|    ``static``
 
 | **Template:**
 |    ``decode_exception(Exception,Cause,StackTrace)``
