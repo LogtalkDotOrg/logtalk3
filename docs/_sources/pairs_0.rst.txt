@@ -39,7 +39,6 @@ Converts between a list of pairs and lists of keys and values.
 |    ``keys_values(Pairs,Keys,Values)``
 | **Mode and number of proofs:**
 |    ``keys_values(+list(pair),-list,-list)`` - ``one``
-
 |    ``keys_values(-list(pair),+list,+list)`` - ``one``
 
 

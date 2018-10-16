@@ -59,7 +59,6 @@ Defines a term expansion. Called until it succeeds on all terms read while compi
 |    ``term_expansion(Term,ExpandedTerms)``
 | **Mode and number of proofs:**
 |    ``term_expansion(+term,-term)`` - ``zero_or_one``
-
 |    ``term_expansion(+term,-list(term))`` - ``zero_or_one``
 
 

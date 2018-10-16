@@ -319,9 +319,7 @@ Reverses a list.
 |    ``reverse(List,Reversed)``
 | **Mode and number of proofs:**
 |    ``reverse(@list,?list)`` - ``zero_or_one``
-
 |    ``reverse(?list,@list)`` - ``zero_or_one``
-
 |    ``reverse(-list,-list)`` - ``one_or_more``
 
 
@@ -343,9 +341,7 @@ The two lists have the same length.
 |    ``same_length(List1,List2)``
 | **Mode and number of proofs:**
 |    ``same_length(@list,?list)`` - ``zero_or_one``
-
 |    ``same_length(?list,@list)`` - ``zero_or_one``
-
 |    ``same_length(-list,-list)`` - ``one_or_more``
 
 

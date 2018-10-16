@@ -419,9 +419,7 @@ Recognises and converts between open and close parenthesis.
 |    ``parenthesis(Char1,Char2)``
 | **Mode and number of proofs:**
 |    ``parenthesis(?char,?char)`` - ``zero_or_more``
-
 |    ``parenthesis(+char,?char)`` - ``zero_or_one``
-
 |    ``parenthesis(?char,+char)`` - ``zero_or_one``
 
 
@@ -443,9 +441,7 @@ Recognises and converts between lower and upper case letters.
 |    ``lower_upper(Char1,Char2)``
 | **Mode and number of proofs:**
 |    ``lower_upper(?char,?char)`` - ``zero_or_more``
-
 |    ``lower_upper(+char,?char)`` - ``zero_or_one``
-
 |    ``lower_upper(?char,+char)`` - ``zero_or_one``
 
 

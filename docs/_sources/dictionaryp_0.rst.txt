@@ -219,7 +219,6 @@ Lookups a matching Key-Value pair from a dictionary.
 |    ``lookup(Key,Value,Dictionary)``
 | **Mode and number of proofs:**
 |    ``lookup(+ground,?term,@dictionary)`` - ``zero_or_one``
-
 |    ``lookup(-ground,?term,@dictionary)`` - ``zero_or_more``
 
 

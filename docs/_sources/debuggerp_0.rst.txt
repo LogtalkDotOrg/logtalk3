@@ -167,7 +167,6 @@ Sets a line number spy point or a predicate spy point or a list of spy points.
 |    ``spy(SpyPoint)``
 | **Mode and number of proofs:**
 |    ``spy(@spy_point)`` - ``one``
-
 |    ``spy(@list(spy_point))`` - ``one``
 
 
@@ -249,9 +248,7 @@ Removes all matching line number spy points and predicate spy points.
 |    ``nospy(SpyPoint)``
 | **Mode and number of proofs:**
 |    ``nospy(@var)`` - ``one``
-
 |    ``nospy(@spy_point)`` - ``one``
-
 |    ``nospy(@list(spy_point))`` - ``one``
 
 
@@ -311,7 +308,6 @@ Sets the debugger leash ports using an abbreviation (none, loose, half, tight, o
 |    ``leash(Ports)``
 | **Mode and number of proofs:**
 |    ``leash(+atom)`` - ``one``
-
 |    ``leash(+list(atom))`` - ``one``
 
 

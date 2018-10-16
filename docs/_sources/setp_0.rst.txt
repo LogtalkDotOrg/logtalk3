@@ -279,7 +279,6 @@ Element is a member of set Set.
 |    ``member(Element,Set)``
 | **Mode and number of proofs:**
 |    ``member(+term,+set)`` - ``zero_or_one``
-
 |    ``member(-term,+set)`` - ``zero_or_more``
 
 

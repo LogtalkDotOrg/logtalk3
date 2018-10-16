@@ -179,7 +179,6 @@ Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Uppe
 |    ``random(Lower,Upper,Random)``
 | **Mode and number of proofs:**
 |    ``random(+integer,+integer,-integer)`` - ``zero_or_one``
-
 |    ``random(+float,+float,-float)`` - ``zero_or_one``
 
 
@@ -201,7 +200,6 @@ Returns a list of the given length of random values in random order in the inter
 |    ``randseq(Length,Lower,Upper,List)``
 | **Mode and number of proofs:**
 |    ``randseq(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
-
 |    ``randseq(+integer,+float,+float,-list(float))`` - ``zero_or_one``
 
 
@@ -223,7 +221,6 @@ Returns an ordered set of the given size of random values in the interval [Lower
 |    ``randset(Length,Lower,Upper,Set)``
 | **Mode and number of proofs:**
 |    ``randset(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
-
 |    ``randset(+integer,+float,+float,-list(float))`` - ``zero_or_one``
 
 

@@ -248,7 +248,6 @@ Conversion between an ISO 8601 compliant date string and its components (truncat
 |        ``String`` - ISO 8601 formatted string correspondent to Components
 | **Mode and number of proofs:**
 |    ``date_string(+atom,+integer,?atom)`` - ``zero_or_one``
-
 |    ``date_string(+atom,?list,?atom)`` - ``zero_or_one``
 
 | **Examples:**

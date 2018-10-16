@@ -42,7 +42,6 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 |    ``parse(Chars,Document)``
 | **Mode and number of proofs:**
 |    ``parse(+nonvar,?nonvar)`` - ``zero_or_one``
-
 |    ``parse(?nonvar,+nonvar)`` - ``zero_or_one``
 
 
@@ -64,7 +63,6 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 |    ``parse(Controls,Chars,Document)``
 | **Mode and number of proofs:**
 |    ``parse(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
-
 |    ``parse(+nonvar,?nonvar,+nonvar)`` - ``zero_or_one``
 
 

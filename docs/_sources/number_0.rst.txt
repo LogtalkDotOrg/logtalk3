@@ -99,7 +99,6 @@ Compares two floats (or lists of floats) for approximate equality using 100*epsi
 |    ``=~=(Float1,Float2)``
 | **Mode and number of proofs:**
 |    ``=~=(+number,+number)`` - ``zero_or_one``
-
 |    ``=~=(+list(number),+list(number))`` - ``zero_or_one``
 
 

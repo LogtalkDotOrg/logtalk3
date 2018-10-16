@@ -521,7 +521,6 @@ Prefix is a prefix of length Length of List.
 |    ``prefix(Prefix,Length,List)``
 | **Mode and number of proofs:**
 |    ``prefix(?list,+integer,+list)`` - ``zero_or_one``
-
 |    ``prefix(?list,-integer,+list)`` - ``zero_or_more``
 
 
@@ -563,7 +562,6 @@ Prefix is a proper prefix of length Length of List.
 |    ``proper_prefix(Prefix,Length,List)``
 | **Mode and number of proofs:**
 |    ``proper_prefix(?list,+integer,+list)`` - ``zero_or_one``
-
 |    ``proper_prefix(?list,-integer,+list)`` - ``zero_or_more``
 
 
@@ -585,9 +583,7 @@ Reverses a list.
 |    ``reverse(List,Reversed)``
 | **Mode and number of proofs:**
 |    ``reverse(+list,?list)`` - ``zero_or_one``
-
 |    ``reverse(?list,+list)`` - ``zero_or_one``
-
 |    ``reverse(-list,-list)`` - ``one_or_more``
 
 
@@ -609,9 +605,7 @@ The two lists have the same length.
 |    ``same_length(List1,List2)``
 | **Mode and number of proofs:**
 |    ``same_length(+list,?list)`` - ``zero_or_one``
-
 |    ``same_length(?list,+list)`` - ``zero_or_one``
-
 |    ``same_length(-list,-list)`` - ``one_or_more``
 
 
@@ -633,9 +627,7 @@ The two lists have the same length.
 |    ``same_length(List1,List2,Length)``
 | **Mode and number of proofs:**
 |    ``same_length(+list,?list,?integer)`` - ``zero_or_one``
-
 |    ``same_length(?list,+list,?integer)`` - ``zero_or_one``
-
 |    ``same_length(-list,-list,-integer)`` - ``one_or_more``
 
 
@@ -939,7 +931,6 @@ Suffix is a suffix of length Length of List.
 |    ``suffix(Suffix,Length,List)``
 | **Mode and number of proofs:**
 |    ``suffix(?list,+integer,+list)`` - ``zero_or_one``
-
 |    ``suffix(?list,-integer,+list)`` - ``zero_or_more``
 
 
@@ -981,7 +972,6 @@ Suffix is a proper suffix of length Length of List.
 |    ``proper_suffix(Suffix,Length,List)``
 | **Mode and number of proofs:**
 |    ``proper_suffix(?list,+integer,+list)`` - ``zero_or_one``
-
 |    ``proper_suffix(?list,-integer,+list)`` - ``zero_or_more``
 
 

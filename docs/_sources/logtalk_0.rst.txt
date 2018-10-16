@@ -280,7 +280,6 @@ Expands a library alias or a library path into its absolute path. Uses a depth b
 |    ``expand_library_path(LibraryPath,AbsolutePath)``
 | **Mode and number of proofs:**
 |    ``expand_library_path(+atom,?atom)`` - ``zero_or_one``
-
 |    ``expand_library_path(+callable,?atom)`` - ``zero_or_one``
 
 
@@ -402,9 +401,7 @@ Compiles clause heads. The heads are compiled in the context of the entity under
 |    ``compile_predicate_heads(Heads,Entity,CompiledHeads,ExecutionContext)``
 | **Mode and number of proofs:**
 |    ``compile_predicate_heads(@list(callable),?entity_identifier,-list(callable),@execution_context)`` - ``zero_or_one``
-
 |    ``compile_predicate_heads(@conjunction(callable),?entity_identifier,-conjunction(callable),@execution_context)`` - ``zero_or_one``
-
 |    ``compile_predicate_heads(@callable,?entity_identifier,-callable,@execution_context)`` - ``zero_or_one``
 
 
@@ -426,9 +423,7 @@ Compiles predicate indicators. The predicate are compiled in the context of the 
 |    ``compile_predicate_indicators(PredicateIndicators,Entity,CompiledPredicateIndicators)``
 | **Mode and number of proofs:**
 |    ``compile_predicate_indicators(@list(predicate_indicator),?entity_identifier,-list(predicate_indicator))`` - ``zero_or_one``
-
 |    ``compile_predicate_indicators(@conjunction(predicate_indicator),?entity_identifier,-conjunction(predicate_indicator))`` - ``zero_or_one``
-
 |    ``compile_predicate_indicators(@predicate_indicator,?entity_identifier,-predicate_indicator)`` - ``zero_or_one``
 
 
@@ -450,9 +445,7 @@ Decompiles clause heads. All compiled clause heads must belong to the same entit
 |    ``decompile_predicate_heads(CompiledHeads,Entity,Type,Heads)``
 | **Mode and number of proofs:**
 |    ``decompile_predicate_heads(@list(callable),-entity_identifier,-atom,-list(callable))`` - ``zero_or_one``
-
 |    ``decompile_predicate_heads(@conjunction(callable),-entity_identifier,-atom,-conjunction(callable))`` - ``zero_or_one``
-
 |    ``decompile_predicate_heads(@callable,-entity_identifier,-atom,-callable)`` - ``zero_or_one``
 
 
@@ -474,9 +467,7 @@ Decompiles predicate indicators. All compiled predicate indicators must belong t
 |    ``decompile_predicate_indicators(CompiledPredicateIndicators,Entity,Type,PredicateIndicators)``
 | **Mode and number of proofs:**
 |    ``decompile_predicate_indicators(@list(predicate_indicator),-entity_identifier,-atom,-list(predicate_indicator))`` - ``zero_or_one``
-
 |    ``decompile_predicate_indicators(@conjunction(predicate_indicator),-entity_identifier,-atom,-conjunction(predicate_indicator))`` - ``zero_or_one``
-
 |    ``decompile_predicate_indicators(@predicate_indicator,-entity_identifier,-atom,-predicate_indicator)`` - ``zero_or_one``
 
 

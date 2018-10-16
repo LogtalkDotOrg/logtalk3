@@ -299,7 +299,6 @@ Converts between an array (a Java reference) and a list. Deprecated. Use the ter
 |    ``array_list(Array,List)``
 | **Mode and number of proofs:**
 |    ``array_list(+array,-list)`` - ``one``
-
 |    ``array_list(-array,+list)`` - ``one``
 
 

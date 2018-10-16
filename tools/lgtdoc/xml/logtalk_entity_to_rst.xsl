@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on October 15, 2018
+%  Last updated on October 16, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -313,8 +313,9 @@
 		<xsl:value-of select="$nl" />
 		<xsl:for-each select="mode">
 			<xsl:text>|    ``</xsl:text><xsl:value-of select="template" /><xsl:text>`` - ``</xsl:text><xsl:value-of select="proofs" /><xsl:text>``</xsl:text>
-			<xsl:value-of select="$nl2" />
+			<xsl:value-of select="$nl" />
 		</xsl:for-each>
+		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="exceptions">
 		<xsl:text>| **Exceptions:**</xsl:text>

@@ -79,7 +79,6 @@ Runs a unit test or a list of unit tests, writing the results to the current out
 |    ``run(Tests)``
 | **Mode and number of proofs:**
 |    ``run(+atom)`` - ``zero_or_one``
-
 |    ``run(+list(atom))`` - ``zero_or_one``
 
 
@@ -469,7 +468,6 @@ Compares two numbers (or lists of numbers) for approximate equality using 100*ep
 |    ``=~=(Number1,Number2)``
 | **Mode and number of proofs:**
 |    ``=~=(+number,+number)`` - ``zero_or_one``
-
 |    ``=~=(+list(number),+list(number))`` - ``zero_or_one``
 
 

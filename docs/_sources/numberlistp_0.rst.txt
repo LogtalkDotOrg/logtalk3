@@ -119,7 +119,6 @@ Calculates the Chebyshev norm of a list of numbers. Fails if the list is empty.
 |    ``chebyshev_norm(List,Norm)``
 | **Mode and number of proofs:**
 |    ``chebyshev_norm(+list(integer),-integer)`` - ``zero_or_one``
-
 |    ``chebyshev_norm(+list(float),-float)`` - ``zero_or_one``
 
 
@@ -141,7 +140,6 @@ Calculates the Manhattan norm of a list of numbers. Fails if the list is empty.
 |    ``manhattan_norm(List,Norm)``
 | **Mode and number of proofs:**
 |    ``manhattan_norm(+list(integer),-integer)`` - ``zero_or_one``
-
 |    ``manhattan_norm(+list(float),-float)`` - ``zero_or_one``
 
 
@@ -183,7 +181,6 @@ Calculates the Chebyshev distance between two lists of numbers. Fails if the two
 |    ``chebyshev_distance(List1,List2,Distance)``
 | **Mode and number of proofs:**
 |    ``chebyshev_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
-
 |    ``chebyshev_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
 
 
@@ -205,7 +202,6 @@ Calculates the Manhattan distance between two lists of numbers. Fails if the two
 |    ``manhattan_distance(List1,List2,Distance)``
 | **Mode and number of proofs:**
 |    ``manhattan_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
-
 |    ``manhattan_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
 
 
@@ -227,7 +223,6 @@ Calculates the scalar product of two lists of numbers. Fails if the two lists ar
 |    ``scalar_product(List1,List2,Product)``
 | **Mode and number of proofs:**
 |    ``scalar_product(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
-
 |    ``scalar_product(+list(float),+list(float),-float)`` - ``zero_or_one``
 
 
@@ -329,7 +324,6 @@ Rescales all numbers in a list by the given factor.
 |    ``rescale(List,Factor,RescaledList)``
 | **Mode and number of proofs:**
 |    ``rescale(+list(integer),+integer,-list(integer))`` - ``one``
-
 |    ``rescale(+list(number),+float,-list(float))`` - ``one``
 
 
