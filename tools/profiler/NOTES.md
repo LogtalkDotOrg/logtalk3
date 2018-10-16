@@ -30,7 +30,7 @@ This tool can be loaded using the query:
 
 	| ?- logtalk_load(assertions(loader)).
 
-For sample queries, please see the `SCRIPT.txt` file.
+For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file.
 
 
 Supported backend Prolog compilers

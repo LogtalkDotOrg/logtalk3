@@ -45,7 +45,7 @@ To consult this tool API documentation, open in a web browser the link:
 
 [docs/library_index.html#doclet](https://logtalk.org/docs/library_index.html#doclet)
 
-For sample queries, please see the `SCRIPT.txt` file.
+For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file.
 
 
 Loading
