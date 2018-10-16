@@ -89,5 +89,7 @@ Examples
 
 ::
 
+   % call the member/2 predicate in the
+   % context of the "list" object:
    test(member) :-
        list << member(1, [1]).

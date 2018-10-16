@@ -64,10 +64,16 @@ Examples
 
 ::
 
+   % include the "raw_1.txt" text file found
+   % on the "data" library directory:
    :- include(data('raw_1.txt')).
 
+   % include a "factbase.pl" file in the
+   % current directory:
    :- include('factbase.pl').
 
+   % include a file given its absolute path:
    :- include('/home/me/databases/countries.pl').
 
+   % create a wrapper object for a Prolog file:
    | ?- create_object(cities, [], [public(city/4), include('cities.pl')], []).

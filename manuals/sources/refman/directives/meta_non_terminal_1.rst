@@ -70,11 +70,8 @@ Examples
 
 ::
 
-   :- meta_non_terminal(findall(*, 0, *)).
-
-   :- meta_non_terminal(forall(0, 0)).
-
-   :- meta_non_terminal(maplist(2, *, *)).
+   :- meta_non_terminal(phrase(1, *)).
+   phrase(X, T) --> call(X, T).
 
 .. seealso::
 

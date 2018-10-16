@@ -60,9 +60,11 @@ Examples
 
 ::
 
+   % resolve a predicate name conflict:
    :- alias(list, [member/2 as list_member/2]).
    :- alias(set,  [member/2 as set_member/2]).
 
+   % define an alternative name for a non-terminal:
    :- alias(words, [singular//0 as peculiar//0]).
 
 .. seealso::

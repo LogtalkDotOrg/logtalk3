@@ -236,17 +236,22 @@ identifiers correspond to predicates defined in <code class="docutils literal no
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">{</span><span class="o">:-</span> load_foreign_resource(file)<span class="k">}</span>.
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% bypass the compiler for the next term:</span>
+<span class="k">{</span><span class="o">:-</span> load_foreign_resource(file)<span class="k">}</span>.
 
+<span class="c">% overload the standard &lt;/2 operator:</span>
 <span class="nv">N1</span><span class="o">/</span><span class="nv">D1</span> <span class="o">&lt;</span> <span class="nv">N2</span><span class="o">/</span><span class="nv">D2</span> <span class="o">:-</span>
     <span class="k">{</span><span class="nv">N1</span><span class="o">*</span><span class="nv">D2</span> <span class="o">&lt;</span> <span class="nv">N2</span><span class="o">*</span><span class="nv">D1</span><span class="k">}</span>.
 
+<span class="c">% call a closure in the context of &quot;user&quot;:</span>
 call_in_user(<span class="nv">F</span>, <span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>) <span class="o">:-</span>
     <span class="k">call</span>(<span class="k">{</span><span class="nv">F</span><span class="k">}</span>, <span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>).
 
+<span class="c">% use parametric object proxies:</span>
 | <span class="o">?-</span> <span class="k">{</span>circle(<span class="nv">Id</span>, <span class="nv">Radius</span>, <span class="nv">Color</span>)<span class="k">}</span><span class="o">::</span>area(<span class="nv">Area</span>).
 ...
 
+<span class="c">% use Prolog built-in predicates as messages:</span>
 | <span class="o">?-</span> logtalk<span class="o">::</span><span class="k">{write</span>(<span class="s">&#39;hello world!&#39;</span>), <span class="k">nl}</span>.
 hello world<span class="o">!</span>
 yes

@@ -231,9 +231,11 @@ alias(<span class="o">@</span>entity_identifier, <span class="o">+</span>list(no
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">alias</span>(list, [member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> list_member<span class="o">/</span><span class="m">2</span>]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% resolve a predicate name conflict:</span>
+<span class="p">:- </span><span class="k">alias</span>(list, [member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> list_member<span class="o">/</span><span class="m">2</span>]).
 <span class="p">:- </span><span class="k">alias</span>(set,  [member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> set_member<span class="o">/</span><span class="m">2</span>]).
 
+<span class="c">% define an alternative name for a non-terminal:</span>
 <span class="p">:- </span><span class="k">alias</span>(words, [singular<span class="o">//</span><span class="m">0</span> <span class="o">as</span> peculiar<span class="o">//</span><span class="m">0</span>]).
 </pre></div>
 </div>

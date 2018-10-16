@@ -29,7 +29,7 @@ Description
    phrase(NonTerminal)
 
 This non-terminal takes a non-terminal or a grammar rule body and parses
-it using the current implicit list of tokens. A common use is to wrap
+it using the implicit difference list of tokens. A common use is to wrap
 what otherwise would be a naked variable in a grammar rule body.
 
 Modes and number of proofs

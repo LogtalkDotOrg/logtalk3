@@ -242,11 +242,8 @@ meta_non_terminal(<span class="o">+</span>module_identifier<span class="o">:+</s
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_non_terminal</span>(<span class="k">findall</span>(<span class="o">*</span>, <span class="m">0</span>, <span class="o">*</span>)).
-
-<span class="p">:- </span><span class="k">meta_non_terminal</span>(<span class="k">forall</span>(<span class="m">0</span>, <span class="m">0</span>)).
-
-<span class="p">:- </span><span class="k">meta_non_terminal</span>(maplist(<span class="m">2</span>, <span class="o">*</span>, <span class="o">*</span>)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_non_terminal</span>(<span class="k">phrase</span>(<span class="m">1</span>, <span class="o">*</span>)).
+<span class="k">phrase</span>(<span class="nv">X</span>, <span class="nv">T</span>) <span class="o">--&gt;</span> <span class="k">call</span>(<span class="nv">X</span>, <span class="nv">T</span>).
 </pre></div>
 </div>
 <div class="admonition seealso">

@@ -57,4 +57,6 @@ Examples
 
 ::
 
+   % call the init/0 predicate after loading the
+   % source file containing the directive:
    :- initialization(init).

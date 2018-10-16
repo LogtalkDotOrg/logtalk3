@@ -223,12 +223,18 @@ predicate or the <a class="reference internal" href="../predicates/logtalk_make_
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">include</span>(data(<span class="s">&#39;raw_1.txt&#39;</span>)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% include the &quot;raw_1.txt&quot; text file found</span>
+<span class="c">% on the &quot;data&quot; library directory:</span>
+<span class="p">:- </span><span class="k">include</span>(data(<span class="s">&#39;raw_1.txt&#39;</span>)).
 
+<span class="c">% include a &quot;factbase.pl&quot; file in the</span>
+<span class="c">% current directory:</span>
 <span class="p">:- </span><span class="k">include</span>(<span class="s">&#39;factbase.pl&#39;</span>).
 
+<span class="c">% include a file given its absolute path:</span>
 <span class="p">:- </span><span class="k">include</span>(<span class="s">&#39;/home/me/databases/countries.pl&#39;</span>).
 
+<span class="c">% create a wrapper object for a Prolog file:</span>
 | <span class="o">?-</span> <span class="k">create_object</span>(cities, [], [public(city<span class="o">/</span><span class="m">4</span>), include(<span class="s">&#39;cities.pl&#39;</span>)], []).
 </pre></div>
 </div>

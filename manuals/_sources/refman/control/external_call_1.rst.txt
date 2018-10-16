@@ -71,17 +71,22 @@ Examples
 
 ::
 
+   % bypass the compiler for the next term:
    {:- load_foreign_resource(file)}.
 
+   % overload the standard </2 operator: 
    N1/D1 < N2/D2 :-
        {N1*D2 < N2*D1}.
 
+   % call a closure in the context of "user":
    call_in_user(F, X, Y, Z) :-
        call({F}, X, Y, Z).
 
+   % use parametric object proxies:
    | ?- {circle(Id, Radius, Color)}::area(Area).
    ...
 
+   % use Prolog built-in predicates as messages:
    | ?- logtalk::{write('hello world!'), nl}.
    hello world!
    yes
