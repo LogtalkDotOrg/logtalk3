@@ -32,13 +32,13 @@ Glossary
    category
       A set of predicates directives and clauses that can be (virtually)
       imported by any object. Categories support composing objects using
-      fine-grained units of code reuse and also hot patching of existing
-      objects. A category should be functionally-cohesive, defining a
-      single functionality.
+      fine-grained units of code reuse and also :term:`hot patching` of
+      existing objects. A category should be functionally-cohesive,
+      defining a single functionality.
 
    complementing category
-      A category used for hot patching an existing object (or a set of
-      objects).
+      A category used for :term:`hot patching` an existing object (or a
+      set of objects).
 
    parametric category
       See :term:`parametric entity`.
@@ -420,3 +420,8 @@ Glossary
       A variable that is global to a :term:`lambda expression`. All
       used global variables must be explicitly listed in a lambda
       expression.
+
+   hot patching
+      The act of fixing entity directives and predicates or adding new
+      entity directives and predicates to loaded entities in a running
+      application without requiring access to the entities source code.

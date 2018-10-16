@@ -32,8 +32,8 @@ class-based hierarchies. This concept of categories shares some ideas
 with Smalltalk-80 functional categories [Goldberg83]_, Flavors mix-ins
 [Moon86]_ (without necessarily implying multi-inheritance), and
 Objective-C categories [Cox86]_. Categories may also *complement*
-existing objects, thus providing a hot patching mechanism inspired by
-the Objective-C categories functionality.
+existing objects, thus providing a :term:`hot patching` mechanism
+inspired by the Objective-C categories functionality.
 
 .. _categories_defining:
 

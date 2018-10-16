@@ -190,9 +190,9 @@ predicates can be redefined within objects and categories.</dd>
 <dt id="term-category">category</dt>
 <dd>A set of predicates directives and clauses that can be (virtually)
 imported by any object. Categories support composing objects using
-fine-grained units of code reuse and also hot patching of existing
-objects. A category should be functionally-cohesive, defining a
-single functionality.</dd>
+fine-grained units of code reuse and also <a class="reference internal" href="#term-hot-patching"><span class="xref std std-term">hot patching</span></a> of
+existing objects. A category should be functionally-cohesive,
+defining a single functionality.</dd>
 <dt id="term-class">class</dt>
 <dd>An object that specializes another object, interpreted as its
 superclass. Classes define the common predicates of a set of objects
@@ -208,8 +208,8 @@ But messages or calls to undeclared predicates generate an error.</dd>
 semantics. Coinductive predicates allows reasoning about
 infinite rational entities such as cyclic terms and ω-automata.</dd>
 <dt id="term-complementing-category">complementing category</dt>
-<dd>A category used for hot patching an existing object (or a set of
-objects).</dd>
+<dd>A category used for <a class="reference internal" href="#term-hot-patching"><span class="xref std std-term">hot patching</span></a> an existing object (or a
+set of objects).</dd>
 <dt id="term-directive">directive</dt>
 <dd>A source file term that affects the interpretation of source code.
 Directives use the <code class="docutils literal notranslate"><span class="pre">(:-)/1</span></code> prefix operator as functor.</dd>
@@ -262,6 +262,10 @@ of Logtalk or Prolog source files. A hook object can be specified
 using the compiler flag <code class="docutils literal notranslate"><span class="pre">hook/1</span></code>. It can also be specified using
 a <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive in the source files to be
 expanded.</dd>
+<dt id="term-hot-patching">hot patching</dt>
+<dd>The act of fixing entity directives and predicates or adding new
+entity directives and predicates to loaded entities in a running
+application without requiring access to the entities source code.</dd>
 <dt id="term-identity">identity</dt>
 <dd>Property of an entity that distinguishes it from every other entity.
 Object and category identifiers can be atoms or compound terms.
