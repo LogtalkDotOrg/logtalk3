@@ -41,7 +41,7 @@ Glossary
       objects).
 
    parametric category
-      See parametric entity.
+      See :term:`parametric entity`.
 
    class
       An object that specializes another object, interpreted as its
@@ -230,7 +230,7 @@ Glossary
       expanded.
 
    parametric object
-      See parametric entity.
+      See :term:`parametric entity`.
 
    parametric object proxy
       A compound term (usually represented as a plain Prolog fact) with
@@ -238,9 +238,9 @@ Glossary
       identifier of a parametric object.
 
    parameter
-      An argument of a parametric object or a parametric category
-      identifier. Parameters are logical variables implicitly shared by all
-      the entity predicate clauses.
+      An argument of a parametric object or a parametric category identifier.
+      Parameters are *logical variables* implicitly shared by all the entity
+      predicate clauses.
 
    parameter variable
       A variable used as parameter in a parametric object or a parametric

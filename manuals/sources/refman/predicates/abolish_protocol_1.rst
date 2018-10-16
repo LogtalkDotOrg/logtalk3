@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: type_error/2
+.. index:: abolish_protocol/1
 .. _predicates_abolish_protocol_1:
 
 abolish_protocol/1
