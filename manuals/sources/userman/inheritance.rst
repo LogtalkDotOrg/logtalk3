@@ -46,10 +46,10 @@ Protocol inheritance
 --------------------
 
 Protocol inheritance refers to the inheritance of predicate declarations
-(scope directives). These can be contained in objects, in protocols, or
-in categories. Logtalk supports single and multi-inheritance of
-protocols: an object or a category may implement several protocols and a
-protocol may extend several protocols.
+(:term:`scope directives <predicate scope directive>`). These can be contained
+in objects, in protocols, or in categories. Logtalk supports single and
+multi-inheritance of protocols: an object or a category may implement several
+protocols and a protocol may extend several protocols.
 
 .. _inheritance_protocol_prototype:
 

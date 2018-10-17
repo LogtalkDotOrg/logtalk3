@@ -23,9 +23,9 @@ Glossary
    :sorted:
 
    ancestor
-      A class or a parent prototype that contributes (via inheritance) to
-      the definition of an object. For class-based hierarchies, the
-      ancestors of an instance are its class(es) and all the superclasses
+      A :term:`class` or a parent :term:`prototype` that contributes (via
+      inheritance) to the definition of an object. For class-based hierarchies,
+      the ancestors of an instance are its class(es) and all the superclasses
       of its class(es). For prototype-based hierarchies, the ancestors of
       a prototype are its parent(s) and the ancestors of its parent(s).
 
@@ -44,26 +44,26 @@ Glossary
       See :term:`parametric entity`.
 
    class
-      An object that specializes another object, interpreted as its
+      An :term:`object` that specializes another object, interpreted as its
       superclass. Classes define the common predicates of a set of objects
       that instantiates it. An object can also be interpreted as a class
       when it instantiates itself.
 
    abstract class
-      A class that cannot be instantiated. Usually used to contain
+      A :term:`class` that cannot be instantiated. Usually used to contain
       common predicates that are inherited by other classes.
 
    metaclass
-      The class of a class, when interpreted as an instance. Metaclass
-      instances are themselves classes.
+      The :term:`class` of a class, when interpreted as an instance.
+      Metaclass instances are themselves classes.
 
    subclass
-      A class that is a specialization, direct or indirectly, of another
-      class.
+      A :term:`class` that is a specialization, direct or indirectly, of
+      another class.
 
    superclass
-      A class from which another class is a specialization (directly or
-      indirectly via another class).
+      A :term:`class` from which another class is a specialization
+      (directly or indirectly via another class).
 
    closed-world assumption
       The assumption that what cannot be proved true is false. Therefore,
@@ -76,8 +76,9 @@ Glossary
       Directives use the ``(:-)/1`` prefix operator as functor.
 
    entity directive
-      A directive that affects how Logtalk entities (objects, protocols,
-      or categories) are used or compiled.
+      A directive that affects how Logtalk entities (:term:`objects <object>`,
+      :term:`categories <category>`, or :term:`protocols <protocol>`) are
+      used or compiled.
 
    predicate directive
       A directive that affects how predicates are called or compiled.
@@ -88,25 +89,26 @@ Glossary
    encapsulation
       The hiding of an object implementation. This promotes software reuse
       by isolating the object clients from its implementation details.
-      Encapsulation is enforced in Logtalk by using predicate scope
-      directives.
+      Encapsulation is enforced in Logtalk by using
+      :term:`predicate scope directives <predicate scope directive>`.
 
    entity
-      Generic name for Logtalk compilation units: objects, categories, and
-      protocols. Entities share a single namespace (i.e. entity identifiers
-      must be unique).
+      Generic name for Logtalk compilation units: :term:`objects <object>`,
+      :term:`categories <category>`, and :term:`protocols <protocol>`.
+      Entities share a single namespace (i.e. entity identifiers must be
+      unique).
 
    parametric entity
-      An object or category whose identifier is a compound term
-      containing free variables that can be used to parameterize the
+      An :term:`object` or :term:`category` whose identifier is a compound
+      term containing free variables that can be used to parameterize the
       entity predicates. Parameters are *logical variables* implicitly
       shared by all the entity clauses.
 
    event
-      The sending of a message to an object. An event can be expressed as
-      an ordered tuple: ``(Event, Object, Message, Sender)``. Logtalk
-      distinguish between the sending of a message — ``before`` event — and
-      the return of control to the sender — ``after`` event.
+      The sending of a :term:`message` to an object. An event can be
+      expressed as an ordered tuple: ``(Event, Object, Message, Sender)``.
+      Logtalk distinguish between the sending of a message — ``before``
+      event — and the return of control to the sender — ``after`` event.
 
    grammar rule
       An alternative notation for predicates used to parse or generate
@@ -126,7 +128,7 @@ Glossary
 
    identity
       Property of an entity that distinguishes it from every other entity.
-      Object and category identifiers can be atoms or compound terms.
+      Object and :term:`category` identifiers can be atoms or compound terms.
       Protocol identities must be atoms. All Logtalk entities (objects,
       protocols, and categories) share the same namespace.
 
@@ -160,6 +162,8 @@ Glossary
       A directory containing source files. The library name can be used as
       an alias to the directory path when compiling and loading source
       files using the notation ``library_name('source_file_relative_path')``.
+      Library names and their paths are defined using the
+      :ref:`predicates_logtalk_library_path_2` predicate.
 
    module
       A Prolog entity characterized by an identity and a set of predicate
@@ -169,7 +173,7 @@ Glossary
 
    message
       A query sent to an object. In logical terms, a message can be seen as
-      a request for proof construction using an object's database and the
+      a request for proof construction using an object database and the
       databases of related entities.
 
    message to self
@@ -187,17 +191,17 @@ Glossary
       find which method to run to answer a message.
 
    abstract method
-      A method implementing an algorithm whose step corresponds to calls
-      to methods defined in the descendants of the object (or category)
-      containing it.
+      A :term:`method` implementing an algorithm whose step corresponds
+      to calls to methods defined in the descendants of the object (or
+      :term:`category`) containing it.
 
    built-in method
-      A predefined method that can be called from within any object or
-      category. Built-in methods cannot be redefined.
+      A predefined :term:`method` that can be called from within any object
+      or :term:`category`. Built-in methods cannot be redefined.
 
    singleton method
-      A method defined in an instance itself. Singleton methods are
-      supported in Logtalk and can also be found in other
+      A :term:`method` defined in an :term:`instance` itself. Singleton
+      methods are supported in Logtalk and can also be found in other
       object-oriented programming languages.
 
    monitor
@@ -209,9 +213,9 @@ Glossary
    object
       An entity characterized by an identity and a set of predicate
       directives and clauses. Logtalk objects can be either static or
-      dynamic. Logtalk objects can play the role of classes, instances, or
-      prototypes. The role or roles an object plays depends on its
-      relations with other objects.
+      dynamic. Logtalk objects can play the *role* of classes, instances,
+      or prototypes. The role or roles an object plays are a function of
+      its relations with other objects.
 
    object database
       The set of predicates locally defined inside an object.
@@ -219,15 +223,15 @@ Glossary
    doclet object
       An object specifying the steps necessary to (re)generate the API
       documentation for a project. See the ``doclet`` and ``lgtdoc``
-      tool for details.
+      tools for details.
 
    hook object
       An object, implementing the ``expanding`` built-in protocol,
-      defining term- and goal-expansion clauses, used in the compilation
+      defining term- and goal-expansion predicates, used in the compilation
       of Logtalk or Prolog source files. A hook object can be specified
       using the compiler flag ``hook/1``. It can also be specified using
-      a ``set_logtalk_flag/2`` directive in the source files to be
-      expanded.
+      a :ref:`directives_set_logtalk_flag_2` directive in the source files
+      to be expanded.
 
    parametric object
       See :term:`parametric entity`.
@@ -266,7 +270,8 @@ Glossary
 
    built-in predicate
       A predefined predicate that can be called from anywhere. Built-in
-      predicates can be redefined within objects and categories.
+      predicates can be redefined within objects and
+      :term:`categories <category>`.
 
    coinductive predicate
       A predicate whose calls are proved using greatest fixed point
@@ -274,11 +279,11 @@ Glossary
       infinite rational entities such as cyclic terms and ω-automata.
 
    local predicate
-      A predicate that is defined in an object (or in a category) but
+      A predicate that is defined in an object (or in a :term:`category`) but
       that is not listed in a scope directive. These predicates behave
       like private predicates but are invisible to the reflection
-      built-in methods. Local predicates are usually auxiliary predicates
-      and only relevant to the entity where they are defined.
+      :term:`built-in methods <built-in method>`. Local predicates are usually
+      auxiliary predicates and only relevant to the entity where they are defined.
 
    meta-argument
       A predicate argument that is called as a goal, used as a closure
@@ -287,11 +292,16 @@ Glossary
 
    meta-predicate
       A predicate with one or more :term:`meta-arguments <meta-argument>`.
-      For example, ``call/1`` and ``findall/3`` are built-in meta-predicates.
+      For example, :ref:`methods_call_N` and :ref:`methods_findall_3` are
+      built-in meta-predicates.
+
+   predicate scope directive
+      A directive that declares a predicate by specifying its visibility
+      (public, protected, or private).
 
    predicate scope container
       The object that inherits a predicate declaration from an imported
-      category or an implemented protocol.
+      :term:`category` or an implemented :term:`protocol`.
 
    private predicate
       A predicate that can only be called from the object that contains
@@ -308,10 +318,11 @@ Glossary
       See :term:`multifile predicate`.
 
    multifile predicate
-      A predicate whose clauses can be defined in multiple entities. The
-      object or category holding the directive without an entity prefix
-      qualifying the predicate holds the multifile predicate *primary
-      declaration*, which consists of both a scope directive and a
+      A predicate whose clauses can be defined in multiple
+      :term:`entities <entity>`. The object or category holding the
+      directive without an entity prefix qualifying the predicate holds
+      the multifile predicate *primary declaration*, which consists of
+      both a :term:`scope directive <predicate scope directive>` and a
       ``multifile/1`` directive for the predicate.
 
    synchronized predicate
@@ -320,8 +331,9 @@ Glossary
       thread at a time.
 
    visible predicate
-      A predicate that is declared for an object, a built-in method, a
-      Logtalk built-in predicate, or a Prolog built-in predicate.
+      A predicate that is within scope, a locally defined predicate, a
+      :term:`built-in method`, a Logtalk built-in predicate, or a Prolog
+      built-in predicate.
 
    profiler
       A program that collects data about other program performance.
@@ -345,8 +357,8 @@ Glossary
 
    sender
       An object that sends a message to other object. When a message is
-      sent from within a category, the *sender* is the object importing the
-      category.
+      sent from within a :term:`category`, the *sender* is the object
+      importing the category.
 
    super call
       Call of an inherited (or imported) predicate definition. Mainly used
@@ -387,21 +399,21 @@ Glossary
 
    this
       The object that contains the predicate clause under execution. When
-      the predicate clause is contained in a category, *this* is a
+      the predicate clause is contained in a :term:`category`, *this* is a
       reference to the object importing the category for which the
       predicate clause is being executed.
 
    dynamic binding
       Runtime lookup of a predicate declaration and definition to verify
-      the validity of a message (or a super call) and find the predicate
+      the validity of a message (or a :term:`super call`) and find the predicate
       definition that will be used to answer the message (or the super call).
       Also known as *late binding*. See also :term:`static binding`.
 
    static binding
       Compile time lookup of a predicate declaration and definition when
-      compiling a message sending call (or a super call). Dynamic binding
-      is used whenever static binding is not possible (e.g. due to the
-      predicate being dynamic or due to lack of enough information).
+      compiling a message sending call (or a :term:`super call`). Dynamic
+      binding is used whenever static binding is not possible (e.g. due to
+      the predicate being dynamic or due to lack of enough information).
       Also known as *early binding*. See also :term:`dynamic binding`.
 
    lambda expression

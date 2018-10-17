@@ -165,28 +165,29 @@
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary docutils">
 <dt id="term-abstract-class">abstract class</dt>
-<dd>A class that cannot be instantiated. Usually used to contain
+<dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that cannot be instantiated. Usually used to contain
 common predicates that are inherited by other classes.</dd>
 <dt id="term-abstract-method">abstract method</dt>
-<dd>A method implementing an algorithm whose step corresponds to calls
-to methods defined in the descendants of the object (or category)
-containing it.</dd>
+<dd>A <a class="reference internal" href="#term-method"><span class="xref std std-term">method</span></a> implementing an algorithm whose step corresponds
+to calls to methods defined in the descendants of the object (or
+<a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>) containing it.</dd>
 <dt id="term-adapter-file">adapter file</dt>
 <dd>A Prolog source file defining a minimal abstraction layer between
 the Logtalk compiler/runtime and a specific backend Prolog
 compiler.</dd>
 <dt id="term-ancestor">ancestor</dt>
-<dd>A class or a parent prototype that contributes (via inheritance) to
-the definition of an object. For class-based hierarchies, the
-ancestors of an instance are its class(es) and all the superclasses
+<dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> or a parent <a class="reference internal" href="#term-prototype"><span class="xref std std-term">prototype</span></a> that contributes (via
+inheritance) to the definition of an object. For class-based hierarchies,
+the ancestors of an instance are its class(es) and all the superclasses
 of its class(es). For prototype-based hierarchies, the ancestors of
 a prototype are its parent(s) and the ancestors of its parent(s).</dd>
 <dt id="term-built-in-method">built-in method</dt>
-<dd>A predefined method that can be called from within any object or
-category. Built-in methods cannot be redefined.</dd>
+<dd>A predefined <a class="reference internal" href="#term-method"><span class="xref std std-term">method</span></a> that can be called from within any object
+or <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>. Built-in methods cannot be redefined.</dd>
 <dt id="term-built-in-predicate">built-in predicate</dt>
 <dd>A predefined predicate that can be called from anywhere. Built-in
-predicates can be redefined within objects and categories.</dd>
+predicates can be redefined within objects and
+<a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>.</dd>
 <dt id="term-category">category</dt>
 <dd>A set of predicates directives and clauses that can be (virtually)
 imported by any object. Categories support composing objects using
@@ -194,7 +195,7 @@ fine-grained units of code reuse and also <a class="reference internal" href="#t
 existing objects. A category should be functionally-cohesive,
 defining a single functionality.</dd>
 <dt id="term-class">class</dt>
-<dd>An object that specializes another object, interpreted as its
+<dd>An <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a> that specializes another object, interpreted as its
 superclass. Classes define the common predicates of a set of objects
 that instantiates it. An object can also be interpreted as a class
 when it instantiates itself.</dd>
@@ -219,29 +220,31 @@ e.g. a library or an application.</dd>
 <dt id="term-doclet-object">doclet object</dt>
 <dd>An object specifying the steps necessary to (re)generate the API
 documentation for a project. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
-tool for details.</dd>
+tools for details.</dd>
 <dt id="term-dynamic-binding">dynamic binding</dt>
 <dd>Runtime lookup of a predicate declaration and definition to verify
-the validity of a message (or a super call) and find the predicate
+the validity of a message (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>) and find the predicate
 definition that will be used to answer the message (or the super call).
 Also known as <em>late binding</em>. See also <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</dd>
 <dt id="term-encapsulation">encapsulation</dt>
 <dd>The hiding of an object implementation. This promotes software reuse
 by isolating the object clients from its implementation details.
-Encapsulation is enforced in Logtalk by using predicate scope
-directives.</dd>
+Encapsulation is enforced in Logtalk by using
+<a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">predicate scope directives</span></a>.</dd>
 <dt id="term-entity">entity</dt>
-<dd>Generic name for Logtalk compilation units: objects, categories, and
-protocols. Entities share a single namespace (i.e. entity identifiers
-must be unique).</dd>
+<dd>Generic name for Logtalk compilation units: <a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a>,
+<a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>, and <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocols</span></a>.
+Entities share a single namespace (i.e. entity identifiers must be
+unique).</dd>
 <dt id="term-entity-directive">entity directive</dt>
-<dd>A directive that affects how Logtalk entities (objects, protocols,
-or categories) are used or compiled.</dd>
+<dd>A directive that affects how Logtalk entities (<a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a>,
+<a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>, or <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocols</span></a>) are
+used or compiled.</dd>
 <dt id="term-event">event</dt>
-<dd>The sending of a message to an object. An event can be expressed as
-an ordered tuple: <code class="docutils literal notranslate"><span class="pre">(Event,</span> <span class="pre">Object,</span> <span class="pre">Message,</span> <span class="pre">Sender)</span></code>. Logtalk
-distinguish between the sending of a message — <code class="docutils literal notranslate"><span class="pre">before</span></code> event — and
-the return of control to the sender — <code class="docutils literal notranslate"><span class="pre">after</span></code> event.</dd>
+<dd>The sending of a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> to an object. An event can be
+expressed as an ordered tuple: <code class="docutils literal notranslate"><span class="pre">(Event,</span> <span class="pre">Object,</span> <span class="pre">Message,</span> <span class="pre">Sender)</span></code>.
+Logtalk distinguish between the sending of a message — <code class="docutils literal notranslate"><span class="pre">before</span></code>
+event — and the return of control to the sender — <code class="docutils literal notranslate"><span class="pre">after</span></code> event.</dd>
 <dt id="term-grammar-rule">grammar rule</dt>
 <dd>An alternative notation for predicates used to parse or generate
 sentences on some language. This notation hides the arguments used to
@@ -257,18 +260,18 @@ number of arguments using the notation <code class="docutils literal notranslate
 <dd>A word or basic symbol of a language.</dd>
 <dt id="term-hook-object">hook object</dt>
 <dd>An object, implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code> built-in protocol,
-defining term- and goal-expansion clauses, used in the compilation
+defining term- and goal-expansion predicates, used in the compilation
 of Logtalk or Prolog source files. A hook object can be specified
 using the compiler flag <code class="docutils literal notranslate"><span class="pre">hook/1</span></code>. It can also be specified using
-a <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive in the source files to be
-expanded.</dd>
+a <a class="reference internal" href="refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> directive in the source files
+to be expanded.</dd>
 <dt id="term-hot-patching">hot patching</dt>
 <dd>The act of fixing entity directives and predicates or adding new
 entity directives and predicates to loaded entities in a running
 application without requiring access to the entities source code.</dd>
 <dt id="term-identity">identity</dt>
 <dd>Property of an entity that distinguishes it from every other entity.
-Object and category identifiers can be atoms or compound terms.
+Object and <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> identifiers can be atoms or compound terms.
 Protocol identities must be atoms. All Logtalk entities (objects,
 protocols, and categories) share the same namespace.</dd>
 <dt id="term-inheritance">inheritance</dt>
@@ -300,18 +303,20 @@ be explicitly enumerated in a lambda expression.</dd>
 <dt id="term-library">library</dt>
 <dd>A directory containing source files. The library name can be used as
 an alias to the directory path when compiling and loading source
-files using the notation <code class="docutils literal notranslate"><span class="pre">library_name('source_file_relative_path')</span></code>.</dd>
+files using the notation <code class="docutils literal notranslate"><span class="pre">library_name('source_file_relative_path')</span></code>.
+Library names and their paths are defined using the
+<a class="reference internal" href="refman/predicates/logtalk_library_path_2.html#predicates-logtalk-library-path-2"><span class="std std-ref">logtalk_library_path/2</span></a> predicate.</dd>
 <dt id="term-loader-file">loader file</dt>
 <dd>A source file whose main purpose is to load a set of source files.</dd>
 <dt id="term-local-predicate">local predicate</dt>
-<dd>A predicate that is defined in an object (or in a category) but
+<dd>A predicate that is defined in an object (or in a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>) but
 that is not listed in a scope directive. These predicates behave
 like private predicates but are invisible to the reflection
-built-in methods. Local predicates are usually auxiliary predicates
-and only relevant to the entity where they are defined.</dd>
+<a class="reference internal" href="#term-built-in-method"><span class="xref std std-term">built-in methods</span></a>. Local predicates are usually
+auxiliary predicates and only relevant to the entity where they are defined.</dd>
 <dt id="term-message">message</dt>
 <dd>A query sent to an object. In logical terms, a message can be seen as
-a request for proof construction using an object’s database and the
+a request for proof construction using an object database and the
 databases of related entities.</dd>
 <dt id="term-message-to-self">message to self</dt>
 <dd>A message sent to the object that received the original message under
@@ -326,10 +331,11 @@ way that requires awareness of the predicate calling context.</dd>
 language.</dd>
 <dt id="term-meta-predicate">meta-predicate</dt>
 <dd>A predicate with one or more <a class="reference internal" href="#term-meta-argument"><span class="xref std std-term">meta-arguments</span></a>.
-For example, <code class="docutils literal notranslate"><span class="pre">call/1</span></code> and <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> are built-in meta-predicates.</dd>
+For example, <a class="reference internal" href="refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> and <a class="reference internal" href="refman/methods/findall_3.html#methods-findall-3"><span class="std std-ref">findall/3</span></a> are
+built-in meta-predicates.</dd>
 <dt id="term-metaclass">metaclass</dt>
-<dd>The class of a class, when interpreted as an instance. Metaclass
-instances are themselves classes.</dd>
+<dd>The <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> of a class, when interpreted as an instance.
+Metaclass instances are themselves classes.</dd>
 <dt id="term-method">method</dt>
 <dd>The predicate definition used to answer a message sent to an object.
 Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and dynamic binding to
@@ -345,17 +351,18 @@ is notified by the runtime when a spied event occurs. The spied
 <a class="reference internal" href="#term-event"><span class="xref std std-term">events</span></a> can be set by the monitor itself or by any
 other object.</dd>
 <dt id="term-multifile-predicate">multifile predicate</dt>
-<dd>A predicate whose clauses can be defined in multiple entities. The
-object or category holding the directive without an entity prefix
-qualifying the predicate holds the multifile predicate <em>primary
-declaration</em>, which consists of both a scope directive and a
+<dd>A predicate whose clauses can be defined in multiple
+<a class="reference internal" href="#term-entity"><span class="xref std std-term">entities</span></a>. The object or category holding the
+directive without an entity prefix qualifying the predicate holds
+the multifile predicate <em>primary declaration</em>, which consists of
+both a <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> and a
 <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive for the predicate.</dd>
 <dt id="term-object">object</dt>
 <dd>An entity characterized by an identity and a set of predicate
 directives and clauses. Logtalk objects can be either static or
-dynamic. Logtalk objects can play the role of classes, instances, or
-prototypes. The role or roles an object plays depends on its
-relations with other objects.</dd>
+dynamic. Logtalk objects can play the <em>role</em> of classes, instances,
+or prototypes. The role or roles an object plays are a function of
+its relations with other objects.</dd>
 <dt id="term-object-database">object database</dt>
 <dd>The set of predicates locally defined inside an object.</dd>
 <dt id="term-parameter">parameter</dt>
@@ -370,8 +377,8 @@ corresponding entity parameters.</dd>
 <dt id="term-parametric-category">parametric category</dt>
 <dd>See <a class="reference internal" href="#term-parametric-entity"><span class="xref std std-term">parametric entity</span></a>.</dd>
 <dt id="term-parametric-entity">parametric entity</dt>
-<dd>An object or category whose identifier is a compound term
-containing free variables that can be used to parameterize the
+<dd>An <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a> or <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> whose identifier is a compound
+term containing free variables that can be used to parameterize the
 entity predicates. Parameters are <em>logical variables</em> implicitly
 shared by all the entity clauses.</dd>
 <dt id="term-parametric-object">parametric object</dt>
@@ -397,7 +404,10 @@ meaningful in the calling context.</dd>
 <dd>A directive that affects how predicates are called or compiled.</dd>
 <dt id="term-predicate-scope-container">predicate scope container</dt>
 <dd>The object that inherits a predicate declaration from an imported
-category or an implemented protocol.</dd>
+<a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> or an implemented <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocol</span></a>.</dd>
+<dt id="term-predicate-scope-directive">predicate scope directive</dt>
+<dd>A directive that declares a predicate by specifying its visibility
+(public, protected, or private).</dd>
 <dt id="term-primary-predicate-declaration">primary predicate declaration</dt>
 <dd>See <a class="reference internal" href="#term-multifile-predicate"><span class="xref std std-term">multifile predicate</span></a>.</dd>
 <dt id="term-private-inheritance">private inheritance</dt>
@@ -434,16 +444,16 @@ with other objects is always interpreted as a prototype.</dd>
 <dd>The object that received the message under processing.</dd>
 <dt id="term-sender">sender</dt>
 <dd>An object that sends a message to other object. When a message is
-sent from within a category, the <em>sender</em> is the object importing the
-category.</dd>
+sent from within a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>, the <em>sender</em> is the object
+importing the category.</dd>
 <dt id="term-settings-file">settings file</dt>
 <dd>A source file, compiled and loaded at Logtalk startup, mainly
 defining default values for compiler flags that override the
 defaults found on the backend Prolog compiler
 <a class="reference internal" href="#term-adapter-file"><span class="xref std std-term">adapter files</span></a>.</dd>
 <dt id="term-singleton-method">singleton method</dt>
-<dd>A method defined in an instance itself. Singleton methods are
-supported in Logtalk and can also be found in other
+<dd>A <a class="reference internal" href="#term-method"><span class="xref std std-term">method</span></a> defined in an <a class="reference internal" href="#term-instance"><span class="xref std std-term">instance</span></a> itself. Singleton
+methods are supported in Logtalk and can also be found in other
 object-oriented programming languages.</dd>
 <dt id="term-source-file">source file</dt>
 <dd>A text file defining Logtalk and/or Prolog code. Multiple Logtalk
@@ -456,21 +466,21 @@ intermixed with entity definitions.</dd>
 predicates and possibly add new ones.</dd>
 <dt id="term-static-binding">static binding</dt>
 <dd>Compile time lookup of a predicate declaration and definition when
-compiling a message sending call (or a super call). Dynamic binding
-is used whenever static binding is not possible (e.g. due to the
-predicate being dynamic or due to lack of enough information).
+compiling a message sending call (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>). Dynamic
+binding is used whenever static binding is not possible (e.g. due to
+the predicate being dynamic or due to lack of enough information).
 Also known as <em>early binding</em>. See also <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
 <dt id="term-subclass">subclass</dt>
-<dd>A class that is a specialization, direct or indirectly, of another
-class.</dd>
+<dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that is a specialization, direct or indirectly, of
+another class.</dd>
 <dt id="term-super-call">super call</dt>
 <dd>Call of an inherited (or imported) predicate definition. Mainly used
 when redefining an inherited (or imported) predicate to call the
 overridden definition while making additional calls. Super calls preserve
 self and may require <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> if the predicate is dynamic.</dd>
 <dt id="term-superclass">superclass</dt>
-<dd>A class from which another class is a specialization (directly or
-indirectly via another class).</dd>
+<dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> from which another class is a specialization
+(directly or indirectly via another class).</dd>
 <dt id="term-synchronized-predicate">synchronized predicate</dt>
 <dd>A synchronized predicate is protected by a mutex ensuring that, in
 a multi-threaded application, it can only be called by a single
@@ -480,12 +490,13 @@ thread at a time.</dd>
 unit tests.</dd>
 <dt id="term-this">this</dt>
 <dd>The object that contains the predicate clause under execution. When
-the predicate clause is contained in a category, <em>this</em> is a
+the predicate clause is contained in a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>, <em>this</em> is a
 reference to the object importing the category for which the
 predicate clause is being executed.</dd>
 <dt id="term-visible-predicate">visible predicate</dt>
-<dd>A predicate that is declared for an object, a built-in method, a
-Logtalk built-in predicate, or a Prolog built-in predicate.</dd>
+<dd>A predicate that is within scope, a locally defined predicate, a
+<a class="reference internal" href="#term-built-in-method"><span class="xref std std-term">built-in method</span></a>, a Logtalk built-in predicate, or a Prolog
+built-in predicate.</dd>
 </dl>
 </div>
 
