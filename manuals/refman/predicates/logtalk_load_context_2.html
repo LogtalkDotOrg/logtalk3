@@ -205,18 +205,24 @@
 </pre></div>
 </div>
 <p>Provides access to the Logtalk compilation/loading context. The
-following keys are currently supported: <code class="docutils literal notranslate"><span class="pre">entity_identifier</span></code>,
-<code class="docutils literal notranslate"><span class="pre">entity_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">entity_type</span></code> (returns the value <code class="docutils literal notranslate"><span class="pre">module</span></code> when
-compiling a module as an object), <code class="docutils literal notranslate"><span class="pre">source</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span></code> (the actual file
-being compiled, which is different from <code class="docutils literal notranslate"><span class="pre">source</span></code> only when processing
-an <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive), <code class="docutils literal notranslate"><span class="pre">basename</span></code>, <code class="docutils literal notranslate"><span class="pre">directory</span></code>, <code class="docutils literal notranslate"><span class="pre">stream</span></code>,
-<code class="docutils literal notranslate"><span class="pre">target</span></code> (the full path of the intermediate Prolog file), <code class="docutils literal notranslate"><span class="pre">flags</span></code>
-(the list of the explicit flags used for the compilation of the source
-file), <code class="docutils literal notranslate"><span class="pre">term</span></code> (the term being expanded), <code class="docutils literal notranslate"><span class="pre">term_position</span></code>
-(<code class="docutils literal notranslate"><span class="pre">StartLine-EndLine</span></code>), and <code class="docutils literal notranslate"><span class="pre">variable_names</span></code>
-(<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>). The <code class="docutils literal notranslate"><span class="pre">term_position</span></code> key is only
-supported in back-end Prolog compilers that provide access to the start
-and end lines of a read term.</p>
+following keys are currently supported:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">entity_identifier</span></code> - identifier of the entity being compiled if any</li>
+<li><code class="docutils literal notranslate"><span class="pre">entity_prefix</span></code> - internal prefix for the entity compiled code</li>
+<li><code class="docutils literal notranslate"><span class="pre">entity_type</span></code> - returns the value <code class="docutils literal notranslate"><span class="pre">module</span></code> when compiling a module as an object</li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code> - full path of the source file being compiled</li>
+<li><code class="docutils literal notranslate"><span class="pre">file</span></code> - the actual file being compiled, different from <code class="docutils literal notranslate"><span class="pre">source</span></code> only when processing an <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive</li>
+<li><code class="docutils literal notranslate"><span class="pre">basename</span></code> - source file basename</li>
+<li><code class="docutils literal notranslate"><span class="pre">directory</span></code> - source file directory</li>
+<li><code class="docutils literal notranslate"><span class="pre">stream</span></code> - input stream being used to read source file terms</li>
+<li><code class="docutils literal notranslate"><span class="pre">target</span></code> - the full path of the intermediate Prolog file</li>
+<li><code class="docutils literal notranslate"><span class="pre">flags</span></code> - the list of the explicit flags used for the compilation of the source file</li>
+<li><code class="docutils literal notranslate"><span class="pre">term</span></code> - the source file term being compiled</li>
+<li><code class="docutils literal notranslate"><span class="pre">term_position</span></code> - the position of the term being compiled (<code class="docutils literal notranslate"><span class="pre">StartLine-EndLine</span></code>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">variable_names</span></code> - the variable names of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">term_position</span></code> key is only supported in back-end Prolog compilers
+that provide access to the start and end lines of a read term.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">logtalk_load_context/2</span></code> predicate can also be called
 <a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a>
 directives in a source file. A common scenario is to use the

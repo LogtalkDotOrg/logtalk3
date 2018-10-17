@@ -367,7 +367,7 @@ Glossary
       self and may require :term:`dynamic binding` if the predicate is dynamic.
 
    specialization
-      A class is specialized by defining a new class that inherit its
+      A :term:`class` is specialized by defining a new class that inherit its
       predicates and possibly add new ones.
 
    source file
@@ -436,4 +436,5 @@ Glossary
    hot patching
       The act of fixing entity directives and predicates or adding new
       entity directives and predicates to loaded entities in a running
-      application without requiring access to the entities source code.
+      application without requiring access to the entities source code
+      or restarting the application.

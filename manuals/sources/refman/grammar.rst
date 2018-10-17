@@ -102,8 +102,7 @@ Protocol definition
 -------------------
 
 | protocol ::=
-|    begin_protocol_directive [ protocol_directives ]
-|    end_protocol_directive.
+|    begin_protocol_directive [ protocol_directives ] end_protocol_directive.
 
 | begin_protocol_directive ::=
 |    "``:- protocol(``" protocol_identifier [ "``,``" extends_protocols ] "``).``"

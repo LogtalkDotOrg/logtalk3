@@ -29,18 +29,24 @@ Description
    logtalk_load_context(Key, Value)
 
 Provides access to the Logtalk compilation/loading context. The
-following keys are currently supported: ``entity_identifier``,
-``entity_prefix``, ``entity_type`` (returns the value ``module`` when
-compiling a module as an object), ``source``, ``file`` (the actual file
-being compiled, which is different from ``source`` only when processing
-an ``include/1`` directive), ``basename``, ``directory``, ``stream``,
-``target`` (the full path of the intermediate Prolog file), ``flags``
-(the list of the explicit flags used for the compilation of the source
-file), ``term`` (the term being expanded), ``term_position``
-(``StartLine-EndLine``), and ``variable_names``
-(``[Name1=Variable1, ...]``). The ``term_position`` key is only
-supported in back-end Prolog compilers that provide access to the start
-and end lines of a read term.
+following keys are currently supported:
+
+* ``entity_identifier`` - identifier of the entity being compiled if any
+* ``entity_prefix`` - internal prefix for the entity compiled code
+* ``entity_type`` - returns the value ``module`` when compiling a module as an object
+* ``source`` - full path of the source file being compiled
+* ``file`` - the actual file being compiled, different from ``source`` only when processing an ``include/1`` directive
+* ``basename`` - source file basename
+* ``directory`` - source file directory
+* ``stream`` - input stream being used to read source file terms
+* ``target`` - the full path of the intermediate Prolog file
+* ``flags`` - the list of the explicit flags used for the compilation of the source file
+* ``term`` - the source file term being compiled
+* ``term_position`` - the position of the term being compiled (``StartLine-EndLine``)
+* ``variable_names`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
+
+The ``term_position`` key is only supported in back-end Prolog compilers
+that provide access to the start and end lines of a read term.
 
 The ``logtalk_load_context/2`` predicate can also be called
 :ref:`directives_initialization_1`
