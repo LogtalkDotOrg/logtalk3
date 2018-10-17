@@ -22,13 +22,15 @@ web browser.
 
 The HTML, PDF, and ePub versions of the documentation are generated from
 reStructuredText sources in the `sources` directory using Sphinx. See the
-`sources/NOTES.md` file for details. Only HTML version is included in the
-sources distribution. The PDF and ePub versions can be downloaded from the
-Logtalk website (for the latest stable release) at:
+`sources/NOTES.md` file for details. Only the HTML version is included in
+the sources distribution. The PDF and ePub versions can be downloaded from
+the Logtalk website (for the latest stable release) at:
 
 https://logtalk.org/documentation.html
 
-The HTML, PDF, and ePub versions (for the latest git version) can be
+The HTML, PDF, and ePub versions (for the current git version) can be
 downloaded from the Read the Docs website at:
 
 https://logtalk3.readthedocs.io/en/latest/
+
+This website also provides improved search features.

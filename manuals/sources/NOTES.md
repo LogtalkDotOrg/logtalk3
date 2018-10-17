@@ -20,9 +20,13 @@ ________________________________________________________________________
 This directory contains the sources for the Logtalk documentation (which
 include the User Manual, Reference Manual, FAQ, and Glossary). The sources
 are written using the reStructuredText markup language and converted to
-HTML, PDF, and ePub formats using Sphinx with the `sphinx_rtd_theme` theme:
+HTML, PDF, and ePub formats using Sphinx:
 
 http://sphinx-doc.org/
+
+The conversion uses the `sphinx_rtd_theme` theme:
+
+https://github.com/rtfd/sphinx_rtd_theme
 
 The included Makefile allows exporting the documentation in the final
 formats:
