@@ -27,28 +27,28 @@ Description
 ::
 
    multifile(Name/Arity)
-   multifile((Functor1/Arity1, ...))
-   multifile([Functor1/Arity1, ...])
+   multifile((Name1/Arity1, ...))
+   multifile([Name1/Arity1, ...])
 
    multifile(Entity::Name/Arity)
-   multifile((Entity1::Functor1/Arity1, ...))
-   multifile([Entity1::Functor1/Arity1, ...])
+   multifile((Entity1::Name1/Arity1, ...))
+   multifile([Entity1::Name1/Arity1, ...])
 
    multifile(Module:Name/Arity)
-   multifile((Module1:Functor1/Arity1, ...))
-   multifile([Module1:Functor1/Arity1, ...])
+   multifile((Module1:Name1/Arity1, ...))
+   multifile([Module1:Name1/Arity1, ...])
 
    multifile(Name//Arity)
-   multifile((Functor1//Arity1, ...))
-   multifile([Functor1//Arity1, ...])
+   multifile((Name1//Arity1, ...))
+   multifile([Name1//Arity1, ...])
 
    multifile(Entity::Name//Arity)
-   multifile((Entity1::Functor1//Arity1, ...))
-   multifile([Entity1::Functor1//Arity1, ...])
+   multifile((Entity1::Name1//Arity1, ...))
+   multifile([Entity1::Name1//Arity1, ...])
 
    multifile(Module:Name//Arity)
-   multifile((Module1:Functor1//Arity1, ...))
-   multifile([Module1:Functor1//Arity1, ...])
+   multifile((Module1:Name1//Arity1, ...))
+   multifile([Module1:Name1//Arity1, ...])
 
 Declares multifile predicates and multifile grammar rule non-terminals.
 In the case of object or category multifile predicates, the predicate

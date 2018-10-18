@@ -27,12 +27,12 @@ Description
 ::
 
    synchronized(Name/Arity)
-   synchronized((Functor1/Arity1, ...))
-   synchronized([Functor1/Arity1, ...])
+   synchronized((Name/Arity, ...))
+   synchronized([Name/Arity, ...])
 
    synchronized(Name//Arity)
-   synchronized((Functor1//Arity1, ...))
-   synchronized([Functor1//Arity1, ...])
+   synchronized((Name//Arity, ...))
+   synchronized([Name//Arity, ...])
 
 Declares synchronized predicates and synchronized grammar rule
 non-terminals. A synchronized predicate (or synchronized non-terminal)

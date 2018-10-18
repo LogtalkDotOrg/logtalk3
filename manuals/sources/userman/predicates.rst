@@ -358,7 +358,9 @@ simplify the code above. The usage template for this directive is:
 
 ::
 
-   :- uses(Object, [Functor1/Arity1, Functor2/Arity2, ...]).
+   :- uses(Object, [
+       Name1/Arity1, Name2/Arity2, ...
+   ]).
 
 Rewriting the code above using this directive results in a simplified
 and more readable predicate definition:

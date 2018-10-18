@@ -509,7 +509,9 @@ sending goals. Consider the following example:</p>
 </div>
 <p>Logtalk provides a directive, <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>, which allows us to
 simplify the code above. The usage template for this directive is:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(<span class="nv">Object</span>, [<span class="nv">Functor1</span><span class="o">/</span><span class="nv">Arity1</span>, <span class="nv">Functor2</span><span class="o">/</span><span class="nv">Arity2</span>, ...]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(<span class="nv">Object</span>, [
+    <span class="nv">Name1</span><span class="o">/</span><span class="nv">Arity1</span>, <span class="nv">Name2</span><span class="o">/</span><span class="nv">Arity2</span>, ...
+]).
 </pre></div>
 </div>
 <p>Rewriting the code above using this directive results in a simplified

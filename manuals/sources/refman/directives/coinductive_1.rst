@@ -27,8 +27,8 @@ Description
 ::
 
    coinductive(Name/Arity)
-   coinductive((Functor1/Arity1, ...))
-   coinductive([Functor1/Arity1, ...])
+   coinductive((Name/Arity, ...))
+   coinductive([Name/Arity, ...])
 
    coinductive(Template)
    coinductive((Template1, ...))

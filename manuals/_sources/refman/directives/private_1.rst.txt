@@ -27,12 +27,12 @@ Description
 ::
 
    private(Name/Arity)
-   private((Functor1/Arity1, ...))
-   private([Functor1/Arity1, ...])
+   private((Name/Arity, ...))
+   private([Name/Arity, ...])
 
    private(Name//Arity)
-   private((Functor1//Arity1, ...))
-   private([Functor1//Arity1, ...])
+   private((Name//Arity, ...))
+   private([Name//Arity, ...])
 
    private(op(Precedence, Associativity, Operator))
 

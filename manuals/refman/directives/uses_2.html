@@ -202,13 +202,13 @@
 <span id="directives-uses-2"></span><span id="index-0"></span><h1>uses/2<a class="headerlink" href="#uses-2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>uses(<span class="nv">Object</span>, <span class="nv">Predicates</span>)
-uses(<span class="nv">Object</span>, <span class="nv">PredicatesAndAliases</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>uses(<span class="nv">Object</span>, [<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...])
+uses(<span class="nv">Object</span>, [<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">/</span><span class="nv">Arity</span>, ...])
 
-uses(<span class="nv">Object</span>, <span class="nv">NonTerminals</span>)
-uses(<span class="nv">Object</span>, <span class="nv">NonTerminalsAndAliases</span>)
+uses(<span class="nv">Object</span>, [<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...])
+uses(<span class="nv">Object</span>, [<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">//</span><span class="nv">Arity</span>, ...])
 
-uses(<span class="nv">Object</span>, <span class="nv">Operators</span>)
+uses(<span class="nv">Object</span>, [<span class="k">op</span>(<span class="nv">Precedence</span>, <span class="nv">Associativity</span>, <span class="nv">Operator</span>), ...])
 </pre></div>
 </div>
 <p>Declares that all calls made from predicates (or non-terminals) defined
@@ -219,8 +219,7 @@ of predicate definitions by allowing the programmer to omit the
 <code class="docutils literal notranslate"><span class="pre">Object::</span></code> prefix when using the predicates listed in the directive
 (as long as the calls do not occur as arguments for non-standard Prolog
 meta-predicates not declared on the adapter files). It is also possible
-to include operator declarations,
-<code class="docutils literal notranslate"><span class="pre">op(Precedence,</span> <span class="pre">Associativity,</span> <span class="pre">Operator)</span></code>, in the second argument.</p>
+to include operator declarations in the second argument.</p>
 <p>This directive is also used when compiling calls to the database and
 reflection built-in methods by looking into these methods predicate
 arguments.</p>
@@ -229,7 +228,7 @@ arguments.</p>
 <code class="docutils literal notranslate"><span class="pre">Name/Arity::Alias/Arity</span></code>. Aliases may be used either for avoiding
 conflicts between predicates specified in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directives or for giving more meaningful names considering
-the using context of the predicates.</p>
+the calling context of the predicates.</p>
 <p>To enable the use of static binding, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.</p>

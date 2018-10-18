@@ -27,28 +27,28 @@ Description
 ::
 
    dynamic(Name/Arity)
-   dynamic((Functor1/Arity1, ...))
-   dynamic([Functor1/Arity1, ...])
+   dynamic((Name/Arity, ...))
+   dynamic([Name/Arity, ...])
 
    dynamic(Entity::Name/Arity)
-   dynamic((Entity1::Functor1/Arity1, ...))
-   dynamic([Entity1::Functor1/Arity1, ...])
+   dynamic((Entity1::Name/Arity, ...))
+   dynamic([Entity1::Name/Arity, ...])
 
    dynamic(Module:Name/Arity)
-   dynamic((Module1:Functor1/Arity1, ...))
-   dynamic([Module1:Functor1/Arity1, ...])
+   dynamic((Module1:Name/Arity, ...))
+   dynamic([Module1:Name/Arity, ...])
 
    dynamic(Name//Arity)
-   dynamic((Functor1//Arity1, ...))
-   dynamic([Functor1//Arity1, ...])
+   dynamic((Name//Arity, ...))
+   dynamic([Name//Arity, ...])
 
    dynamic(Entity::Name//Arity)
-   dynamic((Entity1::Functor1//Arity1, ...))
-   dynamic([Entity1::Functor1//Arity1, ...])
+   dynamic((Entity1::Name//Arity, ...))
+   dynamic([Entity1::Name//Arity, ...])
 
    dynamic(Module:Name//Arity)
-   dynamic((Module1:Functor1//Arity1, ...))
-   dynamic([Module1:Functor1//Arity1, ...])
+   dynamic((Module1:Name//Arity, ...))
+   dynamic([Module1:Name//Arity, ...])
 
 Declares dynamic predicates and dynamic grammar rule non-terminals. Note
 that an object can be static and have both static and dynamic

@@ -26,13 +26,13 @@ Description
 
 ::
 
-   uses(Object, Predicates)
-   uses(Object, PredicatesAndAliases)
+   uses(Object, [Name/Arity, ...])
+   uses(Object, [Name/Arity as Alias/Arity, ...])
 
-   uses(Object, NonTerminals)
-   uses(Object, NonTerminalsAndAliases)
+   uses(Object, [Name//Arity, ...])
+   uses(Object, [Name//Arity as Alias//Arity, ...])
 
-   uses(Object, Operators)
+   uses(Object, [op(Precedence, Associativity, Operator), ...])
 
 Declares that all calls made from predicates (or non-terminals) defined
 in the category or object containing the directive to the specified
@@ -42,8 +42,7 @@ of predicate definitions by allowing the programmer to omit the
 ``Object::`` prefix when using the predicates listed in the directive
 (as long as the calls do not occur as arguments for non-standard Prolog
 meta-predicates not declared on the adapter files). It is also possible
-to include operator declarations,
-``op(Precedence, Associativity, Operator)``, in the second argument.
+to include operator declarations in the second argument.
 
 This directive is also used when compiling calls to the database and
 reflection built-in methods by looking into these methods predicate
@@ -54,7 +53,7 @@ It is possible to specify a predicate alias using the notation
 ``Name/Arity::Alias/Arity``. Aliases may be used either for avoiding
 conflicts between predicates specified in ``use_module/2`` and
 ``uses/2`` directives or for giving more meaningful names considering
-the using context of the predicates.
+the calling context of the predicates.
 
 To enable the use of static binding, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities

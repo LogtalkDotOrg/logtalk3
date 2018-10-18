@@ -27,12 +27,12 @@ Description
 ::
 
    discontiguous(Name/Arity)
-   discontiguous((Functor1/Arity1, ...))
-   discontiguous([Functor1/Arity1, ...])
+   discontiguous((Name/Arity, ...))
+   discontiguous([Name/Arity, ...])
 
    discontiguous(Name//Arity)
-   discontiguous((Functor1//Arity1, ...))
-   discontiguous([Functor1//Arity1, ...])
+   discontiguous((Name//Arity, ...))
+   discontiguous([Name//Arity, ...])
 
 Declares discontiguous predicates and discontiguous grammar rule
 non-terminals. The use of this directive should be avoided as not all

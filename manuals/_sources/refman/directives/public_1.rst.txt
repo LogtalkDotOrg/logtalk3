@@ -27,12 +27,12 @@ Description
 ::
 
    public(Name/Arity)
-   public((Functor1/Arity1, ...))
-   public([Functor1/Arity1, ...])
+   public((Name/Arity, ...))
+   public([Name/Arity, ...])
 
    public(Name//Arity)
-   public((Functor1//Arity1, ...))
-   public([Functor1//Arity1, ...])
+   public((Name//Arity, ...))
+   public([Name//Arity, ...])
 
    public(op(Precedence, Associativity, Operator))
 

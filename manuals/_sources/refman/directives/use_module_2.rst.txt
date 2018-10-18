@@ -26,13 +26,13 @@ Description
 
 ::
 
-   use_module(Module, Predicates)
-   use_module(Module, PredicatesAndAliases)
+   use_module(Module, [Name/Arity, ...])
+   use_module(Module, [Name/Arity as Alias/Arity, ...])
 
-   use_module(Module, NonTerminals)
-   use_module(Module, NonTerminalsAndAliases)
+   use_module(Module, [Name//Arity, ...])
+   use_module(Module, [Name//Arity as Alias//Arity, ...])
 
-   use_module(Module, Operators)
+   use_module(Module, [op(Precedence,Associativity,Operator), ...])
 
 This directive declares that all calls (made from predicates defined in
 the category or object containing the directive) to the specified
@@ -43,8 +43,7 @@ allowing the programmer to omit the ``Module:`` prefix when using the
 predicates listed in the directive (as long as the predicate calls do
 not occur as arguments for non-standard Prolog meta-predicates not
 declared on the adapter files). It is also possible to include operator
-declarations, ``op(Precedence, Associativity, Operator)``, in the second
-argument.
+declarations in the second argument.
 
 This directive is also used when compiling calls to the database and
 reflection built-in methods by examining these methods predicate
@@ -55,7 +54,7 @@ It is possible to specify a predicate alias using the notation
 ``Name/Arity:Alias/Arity``. Aliases may be used either for avoiding
 conflicts between predicates specified in ``use_module/2`` and
 :ref:`directives_uses_2` directives or for giving more meaningful
-names considering the using context of the predicates.
+names considering the calling context of the predicates.
 
 Note that this directive differs from the directive with the same name
 found on some Prolog implementations by requiring the first argument to

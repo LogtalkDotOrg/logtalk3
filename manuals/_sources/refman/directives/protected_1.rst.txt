@@ -27,12 +27,12 @@ Description
 ::
 
    protected(Name/Arity)
-   protected((Functor1/Arity1, ...))
-   protected([Functor1/Arity1, ...])
+   protected((Name/Arity, ...))
+   protected([Name/Arity, ...])
 
    protected(Name//Arity)
-   protected((Functor1//Arity1, ...))
-   protected([Functor1//Arity1, ...])
+   protected((Name//Arity, ...))
+   protected([Name//Arity, ...])
 
    protected(op(Precedence, Associativity, Operator))
 
