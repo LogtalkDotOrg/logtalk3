@@ -1087,10 +1087,13 @@ Predicate properties
 |    "``info(``" *list* "``)``" \|
 |    "``number_of_clauses(``" *integer* "``)``" \|
 |    "``number_of_rules(``" *integer* "``)``" \|
-|    "``declared_in(``" entity_identifier "``,``" *integer* "``)``" \|
-|    "``defined_in(``" object_identifier \| category_identifier "``,``" *integer*"``)``" \|
-|    "``redefined_from(``" object_identifier \| category_identifier "``,``" *integer*"``)``" \|
-|    "``alias_declared_in(``" entity_identifier "``,``" *integer*"``)``"
+|    "``declared_in(``" entity_identifier "``,``" line_count "``)``" \|
+|    "``defined_in(``" object_identifier \| category_identifier "``,``" line_count "``)``" \|
+|    "``redefined_from(``" object_identifier \| category_identifier "``,``" line_count "``)``" \|
+|    "``alias_declared_in(``" entity_identifier "``,``" line_count "``)``"
+
+| line_count ::=
+|    *integer*"
 
 .. _grammar_compiler_flags:
 

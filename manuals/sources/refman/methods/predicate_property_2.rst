@@ -31,7 +31,7 @@ Description
 Enumerates, by backtracking, the properties of a visible object predicate.
 Properties for predicates not declared using a scope directive are not
 enumerated. The valid predicate properties are listed in the language
-:ref:`grammar <grammar_predicate_properties>`.
+gramar section on :ref:`predicate properties <grammar_predicate_properties>`.
 
 When ``Predicate`` is ground at compile time and its predicate indicator
 is listed in a :ref:`directives_uses_2` or :ref:`directives_use_module_2`

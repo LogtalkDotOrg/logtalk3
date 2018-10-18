@@ -1784,10 +1784,16 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">info(</span></code>” <em>list</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">defined_in(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em>”<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">redefined_from(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em>”<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">alias_declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em>”<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” line_count “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">defined_in(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” line_count “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">redefined_from(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” line_count “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">alias_declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” line_count “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">line_count ::=</div>
+<div class="line-block">
+<div class="line"><em>integer</em>”</div>
 </div>
 </div>
 </div>

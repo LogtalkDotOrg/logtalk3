@@ -30,7 +30,7 @@ Description
 
 Enumerates, by backtracking, the properties associated with the defined
 objects. The valid object properties are listed in the language
-:ref:`grammar <grammar_entity_properties>`.
+gramar section on :ref:`entity properties <grammar_entity_properties>`.
 
 Modes and number of proofs
 --------------------------
