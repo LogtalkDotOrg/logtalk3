@@ -34,7 +34,9 @@ Description
    protected((Name//Arity, ...))
    protected([Name//Arity, ...])
 
-   protected(op(Precedence, Associativity, Operator))
+   protected(op(Precedence,Associativity,Operator))
+   protected((op(Precedence,Associativity,Operator), ...))
+   protected([op(Precedence,Associativity,Operator), ...])
 
 Declares protected predicates, protected grammar rule non-terminals, and
 protected operators. A protected predicate can only be called from the

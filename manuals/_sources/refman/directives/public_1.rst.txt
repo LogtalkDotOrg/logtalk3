@@ -34,7 +34,9 @@ Description
    public((Name//Arity, ...))
    public([Name//Arity, ...])
 
-   public(op(Precedence, Associativity, Operator))
+   public(op(Precedence,Associativity,Operator))
+   public((op(Precedence,Associativity,Operator), ...))
+   public([op(Precedence,Associativity,Operator), ...])
 
 Declares public predicates, public grammar rule non-terminals, and
 public operators. A public predicate can be called from any object. A

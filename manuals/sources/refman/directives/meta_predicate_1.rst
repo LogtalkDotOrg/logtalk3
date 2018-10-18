@@ -26,17 +26,17 @@ Description
 
 ::
 
-   meta_predicate(MetaPredicateTemplate)
-   meta_predicate((MetaPredicateTemplate1, ...))
-   meta_predicate([MetaPredicateTemplate1, ...])
+   meta_predicate(Template)
+   meta_predicate((Template, ...))
+   meta_predicate([Template, ...])
 
-   meta_predicate(Entity::MetaPredicateTemplate)
-   meta_predicate((Entity1::MetaPredicateTemplate1, ...))
-   meta_predicate([Entity1::MetaPredicateTemplate1, ...])
+   meta_predicate(Entity::Template)
+   meta_predicate((Entity::Template, ...))
+   meta_predicate([Entity::Template, ...])
 
-   meta_predicate(Module:MetaPredicateTemplate)
-   meta_predicate((Module1:MetaPredicateTemplate1, ...))
-   meta_predicate([Module1:MetaPredicateTemplate1, ...])
+   meta_predicate(Module:Template)
+   meta_predicate((Module:Template, ...))
+   meta_predicate([Module:Template, ...])
 
 Declares meta-predicates, i.e., predicates that have arguments that will
 be called as goals. An argument may also be a *closure* instead of a

@@ -27,6 +27,7 @@ Description
 ::
 
    op(Precedence, Associativity, Operator)
+   op(Precedence, Associativity, [Operator, ...])
 
 Declares operators. Operators declared inside entities have local scope.
 Global operators can be declared inside a source file by writing the

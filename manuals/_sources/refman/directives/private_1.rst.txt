@@ -34,7 +34,10 @@ Description
    private((Name//Arity, ...))
    private([Name//Arity, ...])
 
-   private(op(Precedence, Associativity, Operator))
+
+   private(op(Precedence,Associativity,Operator))
+   private((op(Precedence,Associativity,Operator), ...))
+   private([op(Precedence,Associativity,Operator), ...])
 
 Declares private predicates, private grammar rule non-terminals, and
 private operators. A private predicate can only be called from the

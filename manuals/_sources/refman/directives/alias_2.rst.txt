@@ -26,8 +26,8 @@ Description
 
 ::
 
-   alias(Entity, PredicateAliases)
-   alias(Entity, NonTerminalAliases)
+   alias(Entity, [Name/Arity as Alias/Arity, ...])
+   alias(Entity, [Name//Arity as Alias//Arity, ...])
 
 Declares predicate and grammar rule non-terminal aliases. A predicate
 (non-terminal) alias is an alternative name for a predicate

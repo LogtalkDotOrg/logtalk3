@@ -26,8 +26,8 @@ Description
 
 ::
 
-   info(Name/Arity, List)
-   info(Name//Arity, List)
+   info(Name/Arity, [Key is Value, ...])
+   info(Name//Arity, [Key is Value, ...])
 
 Documentation directive for predicates and grammar rule non-terminals.
 The first argument is either a predicate indicator or a grammar rule

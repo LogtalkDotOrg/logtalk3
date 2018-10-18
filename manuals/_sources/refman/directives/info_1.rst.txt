@@ -26,7 +26,7 @@ Description
 
 ::
 
-   info(List)
+   info([Key is Value, ...])
 
 Documentation directive for objects, protocols, and categories. The
 directive argument is a list of pairs using the format *Key is Value*.

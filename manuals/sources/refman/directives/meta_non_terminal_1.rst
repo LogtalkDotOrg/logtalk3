@@ -26,17 +26,17 @@ Description
 
 ::
 
-   meta_non_terminal(MetaNonTerminalTemplate)
-   meta_non_terminal((MetaNonTerminalTemplate1, ...))
-   meta_non_terminal([MetaNonTerminalTemplate1, ...])
+   meta_non_terminal(Template)
+   meta_non_terminal((Template, ...))
+   meta_non_terminal([Template, ...])
 
-   meta_non_terminal(Entity::MetaNonTerminalTemplate)
-   meta_non_terminal((Entity1::MetaNonTerminalTemplate1, ...))
-   meta_non_terminal([Entity1::MetaNonTerminalTemplate1, ...])
+   meta_non_terminal(Entity::Template)
+   meta_non_terminal((Entity::Template, ...))
+   meta_non_terminal([Entity::Template, ...])
 
-   meta_non_terminal(Module:MetaNonTerminalTemplate)
-   meta_non_terminal((Module1:MetaNonTerminalTemplate1, ...))
-   meta_non_terminal([Module1:MetaNonTerminalTemplate1, ...])
+   meta_non_terminal(Module:Template)
+   meta_non_terminal((Module:Template, ...))
+   meta_non_terminal([Module:Template, ...])
 
 Declares meta-non-terminals, i.e., non-terminals that have arguments
 that will be called as non-terminals (or grammar rule bodies). An
