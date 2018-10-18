@@ -200,9 +200,9 @@
 </pre></div>
 </div>
 <p>User-defined method for forwarding unknown messages sent to an object
-(using the <a class="reference internal" href="../control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control
-construct), automatically called by the runtime when defined. This
-method is declared in the <code class="docutils literal notranslate"><span class="pre">forwarding</span></code> built-in protocol as a public
+(using the <a class="reference internal" href="../control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct),
+automatically called by the runtime when defined. This method is
+declared in the <code class="docutils literal notranslate"><span class="pre">forwarding</span></code> built-in protocol as a public
 predicate. Note that you can make its scope protected or private by
 using, respectively, protected or private implementation of the
 <code class="docutils literal notranslate"><span class="pre">forwarding</span></code> protocol.</p>
@@ -224,7 +224,7 @@ using, respectively, protected or private implementation of the
     ...).
 
     <span class="k">forward</span>(<span class="nv">Message</span>) <span class="o">:-</span>
-        <span class="c">% delegate the unknown message to other object</span>
+        <span class="c">% delegate unknown messages to the &quot;real&quot; object</span>
         [real<span class="o">::</span><span class="nv">Message</span>].
 </pre></div>
 </div>

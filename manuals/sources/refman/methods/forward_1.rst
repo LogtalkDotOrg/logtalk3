@@ -29,9 +29,9 @@ Description
    forward(Message)
 
 User-defined method for forwarding unknown messages sent to an object
-(using the :ref:`control_send_to_object_2` control
-construct), automatically called by the runtime when defined. This
-method is declared in the ``forwarding`` built-in protocol as a public
+(using the :ref:`control_send_to_object_2` control construct),
+automatically called by the runtime when defined. This method is
+declared in the ``forwarding`` built-in protocol as a public
 predicate. Note that you can make its scope protected or private by
 using, respectively, protected or private implementation of the
 ``forwarding`` protocol.
@@ -58,7 +58,7 @@ Examples
        ...).
 
        forward(Message) :-
-           % delegate the unknown message to other object
+           % delegate unknown messages to the "real" object
            [real::Message].
 
 .. seealso::
