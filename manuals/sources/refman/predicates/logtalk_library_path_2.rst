@@ -57,6 +57,10 @@ directory for temporary files. It also allows several Logtalk instances
 to run concurrently without conflict by using a unique scratch directory
 per instance (e.g. using a process ID or a UUID generator).
 
+The ``logtalk`` built-in object provides an ``expand_library_path/2``
+predicate that can be used to expand library aliases and files expressed
+using library notation.
+
 Modes and number of proofs
 --------------------------
 
