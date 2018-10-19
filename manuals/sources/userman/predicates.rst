@@ -1349,7 +1349,7 @@ Term and goal expansion may be performed either by calling the
 by using *hook objects*. A hook object is simply an object defining
 clauses for the term- and goal-expansion hook predicates. To compile a
 source file using a hook object for expanding its terms and goals, you
-can use the :ref:`hook/1 <programming_flags>` compiler
+can use the :ref:`hook <flag_hook>` compiler
 flag in the second argument of the :ref:`predicates_logtalk_compile_2`
 or :ref:`predicates_logtalk_load_2` built-in predicates. In alternative,
 you can use a :ref:`directives_set_logtalk_flag_2`
@@ -1438,8 +1438,8 @@ groups. The following kinds of message are recognized by default:
 
 ``banner``
    banner messages (used e.g. when loading tools or main application
-   components; can be suppressed by setting the ``report`` flag to
-   ``warnings`` or ``off``)
+   components; can be suppressed by setting the :ref:`report <flag_report>`
+   flag to ``warnings`` or ``off``)
 ``help``
    messages printed in reply for the user asking for help (mostly for
    helping port existing Prolog code)
@@ -1450,10 +1450,10 @@ groups. The following kinds of message are recognized by default:
    ``message_hook/4`` predicate)
 ``comment`` and ``comment(Group)``
    useful but usually not essential messages (can be suppressed by
-   setting the ``report`` flag to ``warnings`` or ``off``)
+   setting the :ref:`report <flag_report>` flag to ``warnings`` or ``off``)
 ``warning`` and ``warning(Group)``
    warning messages (generated e.g. by the compiler; can be suppressed
-   by turning off the ``report`` flag)
+   by turning off the :ref:`report <flag_report>` flag)
 ``error`` and ``error(Group)``
    error messages (generated e.g. by the compiler)
 
@@ -1743,8 +1743,8 @@ non-standard Prolog arithmetic functions, you may run into portability
 problems while trying your applications with different back-end Prolog
 compilers (non-standard predicates and non-standard arithmetic functions
 are often specific to a Prolog compiler). You may use the Logtalk
-compiler flag ``portability/1`` at :ref:`programming_flags`
-to help check for problematic calls in your code.
+:ref:`portability <flag_portability>` compiler flag  to help check for
+problematic calls in your code.
 
 .. _predicates_prolog_meta:
 

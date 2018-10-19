@@ -1348,7 +1348,7 @@ predicate.</p>
 by using <em>hook objects</em>. A hook object is simply an object defining
 clauses for the term- and goal-expansion hook predicates. To compile a
 source file using a hook object for expanding its terms and goals, you
-can use the <a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">hook/1</span></a> compiler
+can use the <a class="reference internal" href="programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler
 flag in the second argument of the <a class="reference internal" href="../refman/predicates/logtalk_compile_2.html#predicates-logtalk-compile-2"><span class="std std-ref">logtalk_compile/2</span></a>
 or <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a> built-in predicates. In alternative,
 you can use a <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
@@ -1429,8 +1429,8 @@ groups. The following kinds of message are recognized by default:</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">banner</span></code></dt>
 <dd>banner messages (used e.g. when loading tools or main application
-components; can be suppressed by setting the <code class="docutils literal notranslate"><span class="pre">report</span></code> flag to
-<code class="docutils literal notranslate"><span class="pre">warnings</span></code> or <code class="docutils literal notranslate"><span class="pre">off</span></code>)</dd>
+components; can be suppressed by setting the <a class="reference internal" href="programming.html#flag-report"><span class="std std-ref">report</span></a>
+flag to <code class="docutils literal notranslate"><span class="pre">warnings</span></code> or <code class="docutils literal notranslate"><span class="pre">off</span></code>)</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">help</span></code></dt>
 <dd>messages printed in reply for the user asking for help (mostly for
 helping port existing Prolog code)</dd>
@@ -1441,10 +1441,10 @@ helping port existing Prolog code)</dd>
 <code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code> predicate)</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">comment</span></code> and <code class="docutils literal notranslate"><span class="pre">comment(Group)</span></code></dt>
 <dd>useful but usually not essential messages (can be suppressed by
-setting the <code class="docutils literal notranslate"><span class="pre">report</span></code> flag to <code class="docutils literal notranslate"><span class="pre">warnings</span></code> or <code class="docutils literal notranslate"><span class="pre">off</span></code>)</dd>
+setting the <a class="reference internal" href="programming.html#flag-report"><span class="std std-ref">report</span></a> flag to <code class="docutils literal notranslate"><span class="pre">warnings</span></code> or <code class="docutils literal notranslate"><span class="pre">off</span></code>)</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">warning(Group)</span></code></dt>
 <dd>warning messages (generated e.g. by the compiler; can be suppressed
-by turning off the <code class="docutils literal notranslate"><span class="pre">report</span></code> flag)</dd>
+by turning off the <a class="reference internal" href="programming.html#flag-report"><span class="std std-ref">report</span></a> flag)</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">error</span></code> and <code class="docutils literal notranslate"><span class="pre">error(Group)</span></code></dt>
 <dd>error messages (generated e.g. by the compiler)</dd>
 </dl>
@@ -1704,8 +1704,8 @@ non-standard Prolog arithmetic functions, you may run into portability
 problems while trying your applications with different back-end Prolog
 compilers (non-standard predicates and non-standard arithmetic functions
 are often specific to a Prolog compiler). You may use the Logtalk
-compiler flag <code class="docutils literal notranslate"><span class="pre">portability/1</span></code> at <a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">Compiler flags</span></a>
-to help check for problematic calls in your code.</p>
+<a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability</span></a> compiler flag  to help check for
+problematic calls in your code.</p>
 <div class="section" id="calling-prolog-non-standard-meta-predicates">
 <span id="predicates-prolog-meta"></span><h3>Calling Prolog non-standard meta-predicates<a class="headerlink" href="#calling-prolog-non-standard-meta-predicates" title="Permalink to this headline">¶</a></h3>
 <p>Prolog built-in meta-predicates may only be called locally within

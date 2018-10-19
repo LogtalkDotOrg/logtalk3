@@ -379,7 +379,7 @@ The built-in protocol *expanding*
 Logtalk defines a built-in protocol named
 :ref:`expanding <apis:expanding/0>` that declares
 the :ref:`methods_term_expansion_2` and :ref:`methods_goal_expansion_2`
-predicates. See the description of the :ref:`hook/1 <programming_flags>`
+predicates. See the description of the :ref:`hook <flag_hook>`
 compiler flag for more details.
 
 .. _protocols_monitoring:

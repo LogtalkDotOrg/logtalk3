@@ -208,20 +208,20 @@
 they are last loaded. Only source files loaded using the
 <code class="docutils literal notranslate"><span class="pre">logtalk_load/1-2</span></code> predicates are reloaded. Non-modified files will
 also be reloaded when there is a change to the compilation mode (i.e.
-when the files were loaded without explicit <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> or
-<code class="docutils literal notranslate"><span class="pre">optimize/1</span></code> flags and the default values of these flags changed after
-loading; no check is made, however, for other implicit compiler flags
-that may have changed since loading). When an included file is modified,
-this predicate reloads its main file (i.e. the file that contains the
-<code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive).</p>
+when the files were loaded without explicit <a class="reference internal" href="../../userman/programming.html#flag-debug"><span class="std std-ref">debug</span></a> or
+<a class="reference internal" href="../../userman/programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags and the default values of these
+flags changed after loading; no check is made, however, for other implicit
+compiler flags that may have changed since loading). When an included file
+is modified, this predicate reloads its main file (i.e. the file that
+contains the <a class="reference internal" href="../directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive).</p>
 <p>Depending on the back-end Prolog compiler, the shortcut <code class="docutils literal notranslate"><span class="pre">{*}</span></code> may be
 used in alternative. Check the adapter files for the availability of
 these shortcuts as they are not part of the language (and thus should
 only be used at the top-level interpreter).</p>
 <p>This predicate can be extended by the user by defining clauses for the
-<code class="docutils literal notranslate"><span class="pre">logtalk_make_target_action/1</span></code> multifile and dynamic hook predicate
-using the argument <code class="docutils literal notranslate"><span class="pre">all</span></code>. The additional user defined actions are run
-after the default one.</p>
+<a class="reference internal" href="logtalk_make_target_action_1.html#predicates-logtalk-make-target-action-1"><span class="std std-ref">logtalk_make_target_action/1</span></a> multifile and dynamic hook
+predicate using the argument <code class="docutils literal notranslate"><span class="pre">all</span></code>. The additional user defined actions
+are run after the default one.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>

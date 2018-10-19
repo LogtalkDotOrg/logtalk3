@@ -524,6 +524,8 @@ the entity or to the source file containing it.
 Version flags
 ^^^^^^^^^^^^^
 
+.. _flag_version_data:
+
 ``version_data(Value)``
    Read-only flag whose value is the compound term
    ``logtalk(Major,Minor,Patch,Status)``. The first three arguments are
@@ -537,12 +539,16 @@ Version flags
 Lint flags
 ^^^^^^^^^^
 
+.. _flag_unknown_entities:
+
 ``unknown_entities(Option)``
    Controls the unknown entity warnings, resulting from loading an
    entity that references some other entity that is not currently
    loaded. Possible option values are ``warning`` (the usual default)
    and ``silent``. Note that these warnings are not always avoidable,
    specially when using reflective designs of class-based hierarchies.
+
+.. _flag_unknown_predicates:
 
 ``unknown_predicates(Option)``
    Defines the compiler behavior when calls to unknown predicates (or
@@ -551,6 +557,8 @@ Lint flags
    are ``error``, ``warning`` (the usual default), and ``silent`` (not
    recommended).
 
+.. _flag_undefined_predicates:
+
 ``undefined_predicates(Option)``
    Defines the compiler behavior when calls to declared but undefined
    predicates (or non-terminals) are found. Note that calls to declared
@@ -558,16 +566,22 @@ Lint flags
    assumption. Possible option values are ``error``, ``warning`` (the
    usual default), and ``silent`` (not recommended).
 
+.. _flag_portability:
+
 ``portability(Option)``
    Controls the non-ISO specified Prolog built-in predicate and non-ISO
    specified Prolog built-in arithmetic function calls warnings plus use
    of non-standard Prolog flags and/or flag values. Possible option
    values are ``warning`` and ``silent`` (the usual default).
 
+.. _flag_missing_directives:
+
 ``missing_directives(Option)``
    Controls the missing predicate directive warnings. Possible option
    values are ``warning`` (the usual default) and ``silent`` (not
    recommended).
+
+.. _flag_duplicated_directives:
 
 ``duplicated_directives(Option)``
    Controls the duplicated predicate directive warnings. Possible option
@@ -575,25 +589,35 @@ Lint flags
    recommended). Note that conflicting directives for the same predicate
    are handled as errors, not as duplicated directive warnings.
 
+.. _flag_trivial_goal_fails:
+
 ``trivial_goal_fails(Option)``
    Controls the printing of warnings warnings for calls to local static
    predicates with no matching clauses. Possible option values are
    ``warning`` (the usual default) and ``silent`` (not recommended).
+
+.. _flag_always_true_or_false_goals:
 
 ``always_true_or_false_goals(Option)``
    Controls the printing of warnings for goals that are always true or
    false. Possible option values are ``warning`` (the usual default) and
    ``silent`` (not recommended).
 
+.. _flag_lambda_variables:
+
 ``lambda_variables(Option)``
    Controls the printing of lambda variable related warnings. Possible
    option values are ``warning`` (the usual default) and ``silent`` (not
    recommended).
 
+.. _flag_suspicious_calls:
+
 ``suspicious_calls(Option)``
    Controls the printing of suspicious call warnings. Possible option
    values are ``warning`` (the usual default) and ``silent`` (not
    recommended).
+
+.. _flag_redefined_built_ins:
 
 ``redefined_built_ins(Option)``
    Controls the Logtalk and Prolog built-in predicate redefinition
@@ -603,9 +627,13 @@ Lint flags
    Prolog compilers as each Prolog compiler defines its set of built-in
    predicates.
 
+.. _flag_singleton_variables:
+
 ``singleton_variables(Option)``
    Controls the singleton variable warnings. Possible option values are
    ``warning`` (the usual default) and ``silent`` (not recommended).
+
+.. _flag_underscore_variables:
 
 ``underscore_variables(Option)``
    Controls the interpretation of variables that start with an
@@ -620,6 +648,8 @@ Lint flags
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. _flag_complements:
+
 ``complements(Option)``
    Allows objects to be compiled with support for complementing
    categories turned off in order to improve performance and security.
@@ -632,6 +662,8 @@ Optional features compilation flags
    this option is of no consequence for objects already compiled and
    loaded.
 
+.. _flag_dynamic_declarations:
+
 ``dynamic_declarations(Option)``
    Allows objects to be compiled with support for dynamic declaration of
    new predicates turned off in order to improve performance and
@@ -641,6 +673,8 @@ Optional features compilation flags
    compiled and loaded. This option is only checked when sending an
    ``asserta/1`` or ``assertz/1`` message to an object. Local asserting
    of new predicates is always allowed.
+
+.. _flag_events:
 
 ``events(Option)``
    Allows message sending calls to be compiled with event-driven
@@ -652,6 +686,8 @@ Optional features compilation flags
    per-category) basis. Note that changing this option is of no
    consequence for objects already compiled and loaded.
 
+.. _flag_context_switching_calls:
+
 ``context_switching_calls(Option)``
    Allows context switching calls (``<</2``) to be either allowed or
    denied. Possible option values are ``allow`` and ``deny``. The
@@ -661,6 +697,8 @@ Optional features compilation flags
 Back-end Prolog compiler and loader flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. _flag_prolog_compiler:
+
 ``prolog_compiler(Flags)``
    List of compiler flags for the generated Prolog files. The valid
    flags are specific to the used Prolog backend compiler. The usual
@@ -669,6 +707,8 @@ Back-end Prolog compiler and loader flags
    to disk a Prolog file. For Prolog compilers that don't provide
    separate predicates for compiling and loading a file, use instead the
    ``prolog_loader/1`` flag.
+
+.. _flag_prolog_loader:
 
 ``prolog_loader(Flags)``
    List of loader flags for the generated Prolog files. The valid flags
@@ -680,6 +720,8 @@ Back-end Prolog compiler and loader flags
 Other flags
 ^^^^^^^^^^^
 
+.. _flag_scratch_directory:
+
 ``scratch_directory(Directory)``
    Sets the directory to be used to store the temporary files generated
    when compiling Logtalk source files. This directory can be specified
@@ -690,12 +732,16 @@ Other flags
    Relative directories must always start with ``'./'`` due to the lack
    of a portable solution to check if a path is relative or absolute.
 
+.. _flag_report:
+
 ``report(Option)``
    Controls the default printing of messages. Possible option values are
    ``on`` (by usual default, print all messages that are not intercepted
    by the user), ``warnings`` (only print warning and error messages
    that are not intercepted by the user), and ``off`` (do not print any
    messages that are not intercepted by the user).
+
+.. _flag_code_prefix:
 
 ``code_prefix(Character)``
    Enables the definition of prefix for all functors of Prolog code
@@ -707,6 +753,8 @@ Other flags
    specific prefix such as the character ``$``. Although this is not a
    read-only flag, it should only be changed at startup time and before
    loading any source files.
+
+.. _flag_optimize:
 
 ``optimize(Option)``
    Controls the compiler optimizations. Possible option values are
@@ -721,7 +769,9 @@ Other flags
    developing applications with this flag turned on as changing and
    reloading a file may render :term:`static binding` optimizations
    invalid for code defining in other loaded files. Turning on this
-   flag automatically turns off the ``debug`` flag.
+   flag automatically turns off the :ref:`debug <flag_debug>` flag.
+
+.. _flag_source_data:
 
 ``source_data(Option)``
    Defines how much information is retained when compiling a source
@@ -734,13 +784,17 @@ Other flags
    tools. This flag can be turned off in order to generate more compact
    code.
 
+.. _flag_debug:
+
 ``debug(Option)``
    Controls the compilation of source files in debug mode (the Logtalk
    default debugger can only be used with files compiled in this mode).
    Also controls, by default, printing of ``debug>`` and
    ``debug(Topic)`` messages. Possible option values are ``on`` and
    ``off`` (the usual default). Turning on this flag automatically turns
-   off the ``optimize`` flag.
+   off the :ref:`optimize <flag_optimize>` flag.
+
+.. _flag_reload:
 
 ``reload(Option)``
    Defines the reloading behavior for source files. Possible option
@@ -752,9 +806,13 @@ Other flags
    and the compilation mode are the same as before), and ``always``
    (always reload files).
 
+.. _flag_relative_to:
+
 ``relative_to(Directory)``
    Defines a base directory for resolving relative source file paths.
    The default value is the directory of the source file being compiled.
+
+.. _flag_hook:
 
 ``hook(Object)``
    Allows the definition of compiler hooks that are called for each term
@@ -777,6 +835,8 @@ Other flags
    ``goal_expansion/2`` is recursively called on the expanded goal until
    a fixed point is reached. Care must be taken to avoid compilation
    loops.
+
+.. _flag_clean:
 
 ``clean(Option)``
    Controls cleaning of the intermediate Prolog files generated when
@@ -848,9 +908,9 @@ Using Logtalk for batch processing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you use Logtalk for batch processing, you probably want to turn off
-the option ``report`` to suppress all messages of type ``banner``,
-``comment``, ``comment(_)``, ``warning``, and ``warning(_)`` that are
-normally printed. Note that error messages and messages providing
+the :ref:`report <flag_report>` flag to suppress all messages of type
+``banner``, ``comment``, ``comment(_)``, ``warning``, and ``warning(_)``
+that are normally printed. Note that error messages and messages providing
 information requested by the user will still be printed.
 
 .. _programming_performance:
@@ -861,8 +921,8 @@ Optimizing performance
 The default compiler flag settings are appropriated for the
 **development** but not necessarily for the **deployment** of
 applications. To minimize the generated code size, turn the
-``source_data`` flag off. To optimize runtime performance, turn on the
-``optimize`` flag.
+:ref:`source_data <flag_source_data>` flag off. To optimize runtime
+performance, turn on the :ref:`optimize <flag_optimize>` flag.
 
 Pay special attention to file compilation/loading order. Whenever
 possible, compile/load your files taking into account file dependencies

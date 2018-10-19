@@ -45,8 +45,8 @@ Manual.
 When this predicate is called from the top-level, relative source file
 paths are resolved using the current working directory. When the calls
 are made from a source file, relative source file paths are resolved by
-default using the source file directory (unless a ``relative_to/1`` flag
-is passed).
+default using the source file directory (unless a
+:ref:`relative_to <flag_relative_to>` flag is passed).
 
 Note that only the errors related to problems in the predicate argument
 are listed below. This predicate fails when errors are found during

@@ -205,8 +205,8 @@
 <span class="k">logtalk_load</span>(<span class="nv">Files</span>, <span class="nv">Flags</span>)
 </pre></div>
 </div>
-<p>Compiles to disk and then loads to memory a <a class="reference internal" href="../../glossary.html#term-source-file"><span class="xref std std-term">source file</span></a> or a list of source
-files using a list of compiler flags. The Logtalk source file name
+<p>Compiles to disk and then loads to memory a <a class="reference internal" href="../../glossary.html#term-source-file"><span class="xref std std-term">source file</span></a> or a list
+of source files using a list of compiler flags. The Logtalk source file name
 extension (by default, <code class="docutils literal notranslate"><span class="pre">.lgt</span></code>) can be omitted. Compiler flags are
 represented as <em>flag(value)</em>. This predicate can also be used to compile
 Prolog source files as Logtalk source code. When no recognized Logtalk
@@ -214,14 +214,13 @@ or Prolog extension is specified, the compiler tries first to append a
 Logtalk source file extension and then a Prolog source file extension.
 If that fails, the compiler tries to use the file name as-is. For a
 description of the available compiler flags, please consult the
-<a class="reference internal" href="../../userman/programming.html#programming-flags"><span class="std std-ref">Compiler flags</span></a> section in the User
-Manual. Source file paths can be absolute, relative to the current
-directory, or use library notation.</p>
+<a class="reference internal" href="../../userman/programming.html#programming-flags"><span class="std std-ref">Compiler flags</span></a> section in the User Manual. Source file paths
+can be absolute, relative to the current directory, or use library notation.</p>
 <p>When this predicate is called from the top-level, relative source file
 paths are resolved using the current working directory. When the calls
 are made from a source file, relative source file paths are resolved by
-default using the source file directory (unless a <code class="docutils literal notranslate"><span class="pre">relative_to/1</span></code> flag
-is passed).</p>
+default using the source file directory (unless a
+<a class="reference internal" href="../../userman/programming.html#flag-relative-to"><span class="std std-ref">relative_to</span></a> flag is passed).</p>
 <p>Note that only the errors related to problems in the predicate argument
 are listed below. This predicate fails when errors are found during
 compilation of a source file.</p>

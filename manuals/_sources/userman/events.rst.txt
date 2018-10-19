@@ -169,10 +169,10 @@ argument indexing performed by most Prolog compilers, which ensure — in
 the general case — access in constant time.
 
 Event-support can be turned off on a per-object (or per-category) basis
-using the :ref:`events/1 <programming_flags>` compiler flag. With event-support turned off,
-Logtalk uses optimized code for processing message sending calls that
-skips the checking of monitored events, resulting in a small but
-measurable performance improvement.
+using the :ref:`events <flag_events>` compiler flag. With event-support
+turned off, Logtalk uses optimized code for processing message sending
+calls that skips the checking of monitored events, resulting in a small
+but measurable performance improvement.
 
 .. _events_semantics:
 

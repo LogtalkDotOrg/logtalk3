@@ -325,10 +325,10 @@ monitored events. The events representation takes advantage of the first
 argument indexing performed by most Prolog compilers, which ensure — in
 the general case — access in constant time.</p>
 <p>Event-support can be turned off on a per-object (or per-category) basis
-using the <a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">events/1</span></a> compiler flag. With event-support turned off,
-Logtalk uses optimized code for processing message sending calls that
-skips the checking of monitored events, resulting in a small but
-measurable performance improvement.</p>
+using the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> compiler flag. With event-support
+turned off, Logtalk uses optimized code for processing message sending
+calls that skips the checking of monitored events, resulting in a small
+but measurable performance improvement.</p>
 </div>
 <div class="section" id="monitor-semantics">
 <span id="events-semantics"></span><h2>Monitor semantics<a class="headerlink" href="#monitor-semantics" title="Permalink to this headline">¶</a></h2>

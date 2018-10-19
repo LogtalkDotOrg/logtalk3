@@ -197,10 +197,10 @@ add new predicates, and add protocols and categories to existing objects
 without requiring access or modifications to their source code. Common
 scenarios are adding logging or debugging predicates to a set of
 objects. Complemented objects need to be compiled with the
-``complements`` compiler flag set ``allow`` (to allow both patching and
-adding functionality) or ``restrict`` (to allow only adding new
-functionality). A complementing category takes preference over a
-previously loaded complementing category for the same object thus
+:ref:`complements <flag_complements>` compiler flag set ``allow`` (to
+allow both patching and adding functionality) or ``restrict`` (to allow
+only adding new functionality). A complementing category takes preference
+over a previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.
 
 Note that :term:`super calls <super call>` from predicates defined in complementing
@@ -640,12 +640,12 @@ control construct. For example:
 This alternative should only be used when the user knows a priori that
 the category predicates will not be specialized or redefined by
 descendant objects of the object importing the category. Its advantage
-is that, when the ``optimize`` compiler flag is turned on, the Logtalk
-compiler will try to optimize the calls by using :term:`static binding`. When
-:term:`dynamic binding` is used due to e.g. the lack of sufficient information
-at compilation time, the performance is similar to calling the category
-predicate using a message to :term:`self` (in both cases a predicate lookup
-caching mechanism is used).
+is that, when the :ref:`optimize <flag_optimize>` compiler flag is turned
+on, the Logtalk compiler will try to optimize the calls by using
+:term:`static binding`. When :term:`dynamic binding` is used due to e.g.
+the lack of sufficient information at compilation time, the performance is
+similar to calling the category predicate using a message to :term:`self`
+(in both cases a predicate lookup caching mechanism is used).
 
 .. _categories_parametric:
 

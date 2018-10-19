@@ -48,12 +48,12 @@ and reload all files affected.
 When using the ``all`` target, only source files loaded using the
 ``logtalk_load/1-2`` predicates are reloaded. Non-modified files will
 also be reloaded when there is a change to the compilation mode (i.e.
-when the files were loaded without explicit ``debug/1`` or
-``optimize/1`` flags and the default values of these flags changed after
-loading; no check is made, however, for other implicit compiler flags
-that may have changed since loading). When an included file is modified,
-this target reloads its main file (i.e. the file that contains the
-``include/1`` directive).
+when the files were loaded without explicit :ref:`debug <flag_debug>` or
+:ref:`optimize <flag_optimize>` flags and the default values of these
+flags changed after loading; no check is made, however, for other implicit
+compiler flags that may have changed since loading). When an included file
+is modified, this target reloads its main file (i.e. the file that contains
+the :ref:`directives_include_1` directive).
 
 When using the ``check`` or ``circular`` targets, be sure to compile
 your source files with the ``source_date`` flag turned on for complete

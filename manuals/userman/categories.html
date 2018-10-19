@@ -355,10 +355,10 @@ add new predicates, and add protocols and categories to existing objects
 without requiring access or modifications to their source code. Common
 scenarios are adding logging or debugging predicates to a set of
 objects. Complemented objects need to be compiled with the
-<code class="docutils literal notranslate"><span class="pre">complements</span></code> compiler flag set <code class="docutils literal notranslate"><span class="pre">allow</span></code> (to allow both patching and
-adding functionality) or <code class="docutils literal notranslate"><span class="pre">restrict</span></code> (to allow only adding new
-functionality). A complementing category takes preference over a
-previously loaded complementing category for the same object thus
+<a class="reference internal" href="programming.html#flag-complements"><span class="std std-ref">complements</span></a> compiler flag set <code class="docutils literal notranslate"><span class="pre">allow</span></code> (to
+allow both patching and adding functionality) or <code class="docutils literal notranslate"><span class="pre">restrict</span></code> (to allow
+only adding new functionality). A complementing category takes preference
+over a previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.</p>
 <p>Note that <a class="reference internal" href="../glossary.html#term-super-call"><span class="xref std std-term">super calls</span></a> from predicates defined in complementing
 categories lookup inherited definitions as if the calls were made from
@@ -713,12 +713,12 @@ control construct. For example:</p>
 <p>This alternative should only be used when the user knows a priori that
 the category predicates will not be specialized or redefined by
 descendant objects of the object importing the category. Its advantage
-is that, when the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> compiler flag is turned on, the Logtalk
-compiler will try to optimize the calls by using <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a>. When
-<a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> is used due to e.g. the lack of sufficient information
-at compilation time, the performance is similar to calling the category
-predicate using a message to <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> (in both cases a predicate lookup
-caching mechanism is used).</p>
+is that, when the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> compiler flag is turned
+on, the Logtalk compiler will try to optimize the calls by using
+<a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a>. When <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> is used due to e.g.
+the lack of sufficient information at compilation time, the performance is
+similar to calling the category predicate using a message to <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a>
+(in both cases a predicate lookup caching mechanism is used).</p>
 </div>
 <div class="section" id="parametric-categories">
 <span id="categories-parametric"></span><h2>Parametric categories<a class="headerlink" href="#parametric-categories" title="Permalink to this headline">¶</a></h2>

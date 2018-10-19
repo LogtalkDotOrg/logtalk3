@@ -215,7 +215,7 @@ containing the predicate definition, we can write:
        ... .
 
 When events are not used, is possible to turn off event generation on a
-per object basis by using the :ref:`events/1 <programming_flags>` compiler
+per object basis by using the :ref:`events <flag_events>` compiler
 flag (see the :ref:`events_events` section for more details).
 
 .. _messages_performance:
@@ -225,12 +225,12 @@ Message sending performance
 
 Logtalk supports both :term:`static binding` and :term:`dynamic binding`.
 Static binding is used whenever messages are sent (using the ``::/2`` control
-construct) to static objects already loaded and with the ``optimize``
-compiler flag turned on. When that is not the case (or when using the
-``::/1`` control construct), Logtalk uses dynamic binding coupled with a
-caching mechanism that avoids repeated lookups of predicate declarations
-and predicate definitions. This is a solution common to other
-programming languages supporting dynamic binding. Message lookups are
+construct) to static objects already loaded and with the
+:ref:`optimize <flag_optimize>` compiler flag turned on. When that is not
+the case (or when using the ``::/1`` control construct), Logtalk uses dynamic
+binding coupled with a caching mechanism that avoids repeated lookups of
+predicate declarations and predicate definitions. This is a solution common
+to other programming languages supporting dynamic binding. Message lookups are
 automatically cached the first time a message is sent. Cache entries are
 automatically removed when loading entities or using Logtalk dynamic
 features that invalidate the cached lookups.
@@ -275,7 +275,7 @@ support for event-driven programming. When events are defined, the
 number of predicate calls grows proportional to the number of events and
 event handlers (monitors). Event-driven programming support can be
 switched off for specific object using the
-:ref:`events/1 <programming_flags>` compiler flag. Doing so, reduces
+:ref:`events <flag_events>` compiler flag. Doing so, reduces
 the number of predicate calls from three to just one.
 
 Messages to *self* are transparent regarding events and, as such, imply

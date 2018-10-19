@@ -348,19 +348,19 @@ containing the predicate definition, we can write:</p>
 </pre></div>
 </div>
 <p>When events are not used, is possible to turn off event generation on a
-per object basis by using the <a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">events/1</span></a> compiler
+per object basis by using the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> compiler
 flag (see the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more details).</p>
 </div>
 <div class="section" id="message-sending-performance">
 <span id="messages-performance"></span><h2>Message sending performance<a class="headerlink" href="#message-sending-performance" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk supports both <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> and <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.
 Static binding is used whenever messages are sent (using the <code class="docutils literal notranslate"><span class="pre">::/2</span></code> control
-construct) to static objects already loaded and with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code>
-compiler flag turned on. When that is not the case (or when using the
-<code class="docutils literal notranslate"><span class="pre">::/1</span></code> control construct), Logtalk uses dynamic binding coupled with a
-caching mechanism that avoids repeated lookups of predicate declarations
-and predicate definitions. This is a solution common to other
-programming languages supporting dynamic binding. Message lookups are
+construct) to static objects already loaded and with the
+<a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> compiler flag turned on. When that is not
+the case (or when using the <code class="docutils literal notranslate"><span class="pre">::/1</span></code> control construct), Logtalk uses dynamic
+binding coupled with a caching mechanism that avoids repeated lookups of
+predicate declarations and predicate definitions. This is a solution common
+to other programming languages supporting dynamic binding. Message lookups are
 automatically cached the first time a message is sent. Cache entries are
 automatically removed when loading entities or using Logtalk dynamic
 features that invalidate the cached lookups.</p>
@@ -399,7 +399,7 @@ support for event-driven programming. When events are defined, the
 number of predicate calls grows proportional to the number of events and
 event handlers (monitors). Event-driven programming support can be
 switched off for specific object using the
-<a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">events/1</span></a> compiler flag. Doing so, reduces
+<a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> compiler flag. Doing so, reduces
 the number of predicate calls from three to just one.</p>
 <p>Messages to <em>self</em> are transparent regarding events and, as such, imply
 only one predicate call (to the cache entry, a dynamic predicate).</p>
