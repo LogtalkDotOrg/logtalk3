@@ -201,19 +201,23 @@ source file name. Relative paths are interpreted as relative to the path
 of the file containing the directive.</p>
 <p>When using the reflection API, predicates from an included file can be
 distinguished from predicates from the main file by looking for the
-<code class="docutils literal notranslate"><span class="pre">include/1</span></code> predicate declaration or definition property. For the
-included predicates, the <code class="docutils literal notranslate"><span class="pre">line_count/1</span></code> property stores the term line
+<code class="docutils literal notranslate"><span class="pre">include/1</span></code> predicate declaration or predicate definition property. For
+the included predicates, the <code class="docutils literal notranslate"><span class="pre">line_count/1</span></code> property stores the term line
 number in the included file.</p>
 <p>This directive can be used as either a source file directive or an
 entity directive. As an entity directive, it can be used both in
 entities defined in source files and with the entity creation built-in
-predicates.</p>
-<p>Note that when using this directive as an argument in a call to the
+predicates. In the latter case, the file should be specified using an
+absolute path or using library notation (which expands to a full path).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When using this directive as an argument in calls to the
 <a class="reference internal" href="../predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a> and <a class="reference internal" href="../predicates/create_category_4.html#predicates-create-category-4"><span class="std std-ref">create_category/4</span></a>
-predicates, the objects will not be recreated or redefined when the
-included file(s) are modified and the <a class="reference internal" href="../predicates/logtalk_make_0.html#predicates-logtalk-make-0"><span class="std std-ref">logtalk_make/0</span></a>
-predicate or the <a class="reference internal" href="../predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make/1</span></a> predicate (with target
-<code class="docutils literal notranslate"><span class="pre">all</span></code>) are called.</p>
+predicates, the objects and categories will not be recreated or redefined
+when the included file(s) are modified and the <a class="reference internal" href="../predicates/logtalk_make_0.html#predicates-logtalk-make-0"><span class="std std-ref">logtalk_make/0</span></a>
+predicate or the <a class="reference internal" href="../predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make/1</span></a> (with target <code class="docutils literal notranslate"><span class="pre">all</span></code>)
+predicates are called.</p>
+</div>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>

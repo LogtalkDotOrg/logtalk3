@@ -36,21 +36,24 @@ of the file containing the directive.
 
 When using the reflection API, predicates from an included file can be
 distinguished from predicates from the main file by looking for the
-``include/1`` predicate declaration or definition property. For the
-included predicates, the ``line_count/1`` property stores the term line
+``include/1`` predicate declaration or predicate definition property. For
+the included predicates, the ``line_count/1`` property stores the term line
 number in the included file.
 
 This directive can be used as either a source file directive or an
 entity directive. As an entity directive, it can be used both in
 entities defined in source files and with the entity creation built-in
-predicates.
+predicates. In the latter case, the file should be specified using an
+absolute path or using library notation (which expands to a full path).
 
-Note that when using this directive as an argument in a call to the
-:ref:`predicates_create_object_4` and :ref:`predicates_create_category_4`
-predicates, the objects will not be recreated or redefined when the
-included file(s) are modified and the :ref:`predicates_logtalk_make_0`
-predicate or the :ref:`predicates_logtalk_make_1` predicate (with target
-``all``) are called.
+.. warning::
+
+   When using this directive as an argument in calls to the
+   :ref:`predicates_create_object_4` and :ref:`predicates_create_category_4`
+   predicates, the objects and categories will not be recreated or redefined
+   when the included file(s) are modified and the :ref:`predicates_logtalk_make_0`
+   predicate or the :ref:`predicates_logtalk_make_1` (with target ``all``)
+   predicates are called.
 
 Template and modes
 ------------------
