@@ -66,7 +66,7 @@ Errors
 |     ``permission_error(modify, protected_predicate, Name/Arity)``
 | The predicate indicator of Head, Name/Arity, is that of a static predicate:
 |     ``permission_error(modify, static_predicate, Name/Arity)``
-| Target object was created/compiled with support for dynamic declaration of predicates turned off:
+| The predicate indicator of Head, Name/Arity, does not match a declared predicate and the target object was created/compiled with support for dynamic declaration of predicates turned off:
 |     ``permission_error(create, predicate_declaration, Name/Arity)``
 
 Examples
