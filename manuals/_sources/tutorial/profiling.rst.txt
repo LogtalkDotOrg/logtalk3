@@ -52,7 +52,7 @@ message:
 
 the two corresponding events will be:
 
-::
+.. code-block:: text
 
    (before, foo, bar(X), user)
    (after, foo, bar(1), user)
@@ -90,7 +90,6 @@ time for the Prolog session:
 
        :- public(cpu_time/1).
        :- mode(cpu_time(-number), one).
-
        ...
 
    :- end_object.
@@ -102,19 +101,20 @@ description (object, message, and sender) and the current time:
 ::
 
    :- object(stop_watch,
-       implements(monitoring)).    % event handler predicate declarations
+       % event handler predicates protocol
+       implements(monitoring)).
 
-       :- uses(time).
+       :- uses(time, [cpu_time/1]).
 
        before(Object, Message, Sender) :-
            write(Object), write(' <-- '), writeq(Message),
            write(' from '), write(Sender), nl, write('STARTING at '),
-           time::cpu_time(Seconds), write(Seconds), write(' seconds'), nl.
+           cpu_time(Seconds), write(Seconds), write(' seconds'), nl.
 
        after(Object, Message, Sender) :-
            write(Object), write(' <-- '), writeq(Message),
            write(' from '), write(Sender), nl, write('ENDING at '),
-           time::cpu_time(Seconds), write(Seconds), write(' seconds'), nl.
+           cpu_time(Seconds), write(Seconds), write(' seconds'), nl.
 
    :- end_object.
 

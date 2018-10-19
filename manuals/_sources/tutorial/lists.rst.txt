@@ -39,9 +39,9 @@ definitions for some common list predicates like ``append/3``,
 
    :- object(list).
 
-       :- public(append/3).
-       :- public(length/2).
-       :- public(member/2).
+       :- public([
+           append/3, length/2, member/2
+       ]).
 
        append([], List, List).
        append([Head| Tail], List, [Head| Tail2]) :-
@@ -118,14 +118,12 @@ object predicate. If we try to call a non-public predicate such as the
 
    uncaught exception:
        error(
-           existence_error(predicate_declaration, length([1, 2, 3], 0, L)),
-           list::length([1, 2, 3], 0, L),
-           user)
+           existence_error(predicate_declaration, length/3),
+           logtalk(list::length([1,2,3],0,_), ...)
+       )   
 
-The error term describes the type of error, the message that caused the
-exception, and the sender of the message (in this case, the
-pseudo-object ``user`` because we are sending the message from the
-top-level interpreter).
+The exception term describes the type of error and the context
+where the error occured.
 
 .. _protocol:
 
@@ -148,9 +146,9 @@ protocol:
 
    :- protocol(listp).
 
-       :- public(append/3).
-       :- public(length/2).
-       :- public(member/2).
+       :- public([
+           append/3, length/2, member/2
+       ]).
 
    :- end_protocol.
 
@@ -188,7 +186,6 @@ the predicate directives and by declaring that the object implements the
        append([], List, List).
        append([Head| Tail], List, [Head| Tail2]) :-
            append(Tail, List, Tail2).
-
        ...
 
    :- end_object.

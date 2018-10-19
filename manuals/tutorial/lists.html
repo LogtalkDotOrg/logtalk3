@@ -189,9 +189,9 @@ definitions for some common list predicates like <code class="docutils literal n
 <code class="docutils literal notranslate"><span class="pre">length/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">member/2</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(list).
 
-<span class="p">    :- </span><span class="k">public</span>(append<span class="o">/</span><span class="m">3</span>).
-<span class="p">    :- </span><span class="k">public</span>(length<span class="o">/</span><span class="m">2</span>).
-<span class="p">    :- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">public</span>([
+        append<span class="o">/</span><span class="m">3</span>, length<span class="o">/</span><span class="m">2</span>, member<span class="o">/</span><span class="m">2</span>
+    ]).
 
     append([], <span class="nv">List</span>, <span class="nv">List</span>).
     append([<span class="nv">Head</span>| <span class="nv">Tail</span>], <span class="nv">List</span>, [<span class="nv">Head</span>| <span class="nv">Tail2</span>]) <span class="o">:-</span>
@@ -259,15 +259,13 @@ object predicate. If we try to call a non-public predicate such as the
 
 uncaught exception:
     error(
-        existence_error(predicate_declaration, length([1, 2, 3], 0, L)),
-        list::length([1, 2, 3], 0, L),
-        user)
+        existence_error(predicate_declaration, length/3),
+        logtalk(list::length([1,2,3],0,_), ...)
+    )
 </pre></div>
 </div>
-<p>The error term describes the type of error, the message that caused the
-exception, and the sender of the message (in this case, the
-pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code> because we are sending the message from the
-top-level interpreter).</p>
+<p>The exception term describes the type of error and the context
+where the error occured.</p>
 </div>
 <div class="section" id="defining-a-list-protocol">
 <span id="protocol"></span><h2>Defining a list protocol<a class="headerlink" href="#defining-a-list-protocol" title="Permalink to this headline">¶</a></h2>
@@ -284,9 +282,9 @@ level as objects and categories. That said, let us define a <code class="docutil
 protocol:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">protocol</span>(listp).
 
-<span class="p">    :- </span><span class="k">public</span>(append<span class="o">/</span><span class="m">3</span>).
-<span class="p">    :- </span><span class="k">public</span>(length<span class="o">/</span><span class="m">2</span>).
-<span class="p">    :- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">public</span>([
+        append<span class="o">/</span><span class="m">3</span>, length<span class="o">/</span><span class="m">2</span>, member<span class="o">/</span><span class="m">2</span>
+    ]).
 
 <span class="p">:- </span><span class="k">end_protocol.</span>
 </pre></div>
@@ -320,7 +318,6 @@ the predicate directives and by declaring that the object implements the
     append([], <span class="nv">List</span>, <span class="nv">List</span>).
     append([<span class="nv">Head</span>| <span class="nv">Tail</span>], <span class="nv">List</span>, [<span class="nv">Head</span>| <span class="nv">Tail2</span>]) <span class="o">:-</span>
         append(<span class="nv">Tail</span>, <span class="nv">List</span>, <span class="nv">Tail2</span>).
-
     ...
 
 <span class="p">:- </span><span class="k">end_object.</span>

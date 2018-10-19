@@ -202,8 +202,8 @@ yes
 </pre></div>
 </div>
 <p>the two corresponding events will be:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>(before, foo, bar(<span class="nv">X</span>), user)
-(after, foo, bar(<span class="m">1</span>), user)
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(before, foo, bar(X), user)
+(after, foo, bar(1), user)
 </pre></div>
 </div>
 <p>Note that the second event is only generated if the message succeeds. If
@@ -231,7 +231,6 @@ time for the Prolog session:</p>
 
 <span class="p">    :- </span><span class="k">public</span>(cpu_time<span class="o">/</span><span class="m">1</span>).
 <span class="p">    :- </span><span class="k">mode</span>(cpu_time(<span class="o">-</span>number), one).
-
     ...
 
 <span class="p">:- </span><span class="k">end_object.</span>
@@ -241,19 +240,20 @@ time for the Prolog session:</p>
 for the <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code> events that will print the event
 description (object, message, and sender) and the current time:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(stop_watch,
-    <span class="k">implements</span>(monitoring)).    <span class="c">% event handler predicate declarations</span>
+    <span class="c">% event handler predicates protocol</span>
+    <span class="k">implements</span>(monitoring)).
 
-<span class="p">    :- </span><span class="k">uses</span>(time).
+<span class="p">    :- </span><span class="k">uses</span>(time, [cpu_time<span class="o">/</span><span class="m">1</span>]).
 
     <span class="k">before</span>(<span class="nv">Object</span>, <span class="nv">Message</span>, <span class="nv">Sender</span>) <span class="o">:-</span>
         <span class="k">write</span>(<span class="nv">Object</span>), <span class="k">write</span>(<span class="s">&#39; &lt;-- &#39;</span>), <span class="k">writeq</span>(<span class="nv">Message</span>),
         <span class="k">write</span>(<span class="s">&#39; from &#39;</span>), <span class="k">write</span>(<span class="nv">Sender</span>), <span class="k">nl</span>, <span class="k">write</span>(<span class="s">&#39;STARTING at &#39;</span>),
-        time<span class="o">::</span>cpu_time(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="s">&#39; seconds&#39;</span>), <span class="k">nl</span>.
+        cpu_time(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="s">&#39; seconds&#39;</span>), <span class="k">nl</span>.
 
     <span class="k">after</span>(<span class="nv">Object</span>, <span class="nv">Message</span>, <span class="nv">Sender</span>) <span class="o">:-</span>
         <span class="k">write</span>(<span class="nv">Object</span>), <span class="k">write</span>(<span class="s">&#39; &lt;-- &#39;</span>), <span class="k">writeq</span>(<span class="nv">Message</span>),
         <span class="k">write</span>(<span class="s">&#39; from &#39;</span>), <span class="k">write</span>(<span class="nv">Sender</span>), <span class="k">nl</span>, <span class="k">write</span>(<span class="s">&#39;ENDING at &#39;</span>),
-        time<span class="o">::</span>cpu_time(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="s">&#39; seconds&#39;</span>), <span class="k">nl</span>.
+        cpu_time(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="s">&#39; seconds&#39;</span>), <span class="k">nl</span>.
 
 <span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
