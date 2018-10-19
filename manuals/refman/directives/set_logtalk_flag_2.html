@@ -239,6 +239,13 @@ the source file containing it. For global scope, use the corresponding
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% turn off the compiler unknown entity warnings</span>
 <span class="c">% during the compilation of the source file:</span>
 <span class="p">:- </span><span class="k">set_logtalk_flag</span>(unknown_entities, silent).
+
+
+<span class="p">:- </span><span class="k">object</span>(...).
+
+    <span class="c">% generate events for messages sent from this object</span>
+<span class="p">    :- </span><span class="k">set_logtalk_flag</span>(events, allow).
+    ...
 </pre></div>
 </div>
 </div>

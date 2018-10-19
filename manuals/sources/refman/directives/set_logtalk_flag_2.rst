@@ -64,3 +64,10 @@ Examples
    % turn off the compiler unknown entity warnings
    % during the compilation of the source file:
    :- set_logtalk_flag(unknown_entities, silent).
+
+
+   :- object(...).
+
+       % generate events for messages sent from this object 
+       :- set_logtalk_flag(events, allow).
+       ...
