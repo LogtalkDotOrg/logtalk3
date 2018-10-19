@@ -29,8 +29,8 @@ Description
    print_message_tokens(Stream, Prefix, Tokens)
 
 Built-in method for printing a list of message tokens, declared in the
-``logtalk`` built-in object as a public predicate. This method is
-automatically called by the
+:ref:`logtalk <apis:logtalk/0>` built-in object as a public predicate.
+This method is automatically called by the
 :ref:`methods_print_message_3` method (assuming that the
 message was not intercepted by a
 :ref:`methods_message_hook_4` definition) and calls the

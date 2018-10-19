@@ -30,8 +30,8 @@ Description
 
 User-defined hook method for specifying the default prompt and input
 stream for asking a question for a given kind and component. This method
-is declared in the ``logtalk`` built-in object as a public, multifile,
-and dynamic predicate.
+is declared in the :ref:`logtalk <apis:logtalk/0>` built-in object as a
+public, multifile, and dynamic predicate.
 
 Modes and number of proofs
 --------------------------

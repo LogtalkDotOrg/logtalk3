@@ -29,8 +29,8 @@ bring some sort of new dynamic state change concept to Logic Programming
 or Prolog.
 
 In Logtalk, the only pre-defined objects are the built-in objects
-``user`` and ``logtalk``, which are described at the end of this
-section.
+:ref:`user <apis:user/0>` and :ref:`logtalk <apis:logtalk/0>`, which
+are described at the end of this section.
 
 .. _objects_kind:
 
@@ -794,12 +794,12 @@ application.
 The built-in pseudo-object *user*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Logtalk defines a built-in, pseudo-object named ``user`` that virtually
-contains all user predicate definitions not encapsulated in a Logtalk
-entity. These predicates are assumed to be implicitly declared public.
-Messages sent from this pseudo-object, which includes messages sent from
-the top-level interpreter, generate events when the default value of the
-``events`` flag is set to ``allow``. Defining complementing categories
+Logtalk defines a built-in, pseudo-object named :ref:`user <apis:user/0>`
+that virtually contains all user predicate definitions not encapsulated in
+a Logtalk entity. These predicates are assumed to be implicitly declared
+public. Messages sent from this pseudo-object, which includes messages sent
+from the top-level interpreter, generate events when the default value of
+the ``events`` flag is set to ``allow``. Defining complementing categories
 for this pseudo-object is not supported.
 
 With some of the backend Prolog compilers that support a module system,

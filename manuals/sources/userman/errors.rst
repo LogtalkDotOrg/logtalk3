@@ -44,7 +44,8 @@ Note, however, that ``Goal`` and ``ExecutionContext`` can be unbound or only
 partially instantiated when the corresponding information is not available
 (e.g. due to compiler optimizations that throw away the necessary error context
 information). The ``ExecutionContext`` argument is an opaque term that
-can be decoded using the ``logtalk::execution_context/7`` predicate.
+can be decoded using the
+:ref:`logtalk::execution_context/7 <logtalk/0::execution_context/7>` predicate.
 
 Compiler warnings and errors
 ----------------------------
@@ -249,11 +250,11 @@ Message sending
 The message sending mechanisms always check if the receiver of a message
 is a defined object and if the message corresponds to a declared
 predicate within the scope of the sender. The built-in protocol
-``forwarding`` declares a predicate, :ref:`methods_forward_1`, which is
-automatically called (if defined) by the runtime for any message that
-the receiving object does not understand. The usual definition for this
-error handler is to delegate or forward the message to another object
-that might be able to answer it:
+:ref:`forwarding <apis:forwarding/0>` declares a predicate,
+:ref:`methods_forward_1`, which is automatically called (if defined) by
+the runtime for any message that the receiving object does not understand.
+The usual definition for this error handler is to delegate or forward the
+message to another object that might be able to answer it:
 
 ::
 

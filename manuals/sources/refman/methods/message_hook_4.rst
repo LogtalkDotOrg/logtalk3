@@ -28,10 +28,10 @@ Description
 
    message_hook(Message, Kind, Component, Tokens)
 
-User-defined hook method for intercepting printing of a message,
-declared in the ``logtalk`` built-in object as a public, multifile, and
-dynamic predicate. This hook method is automatically called by the
-:ref:`methods_print_message_3` method. When the call
+User-defined hook method for intercepting printing of a message, declared
+in the :ref:`logtalk <apis:logtalk/0>` built-in object as a public,
+multifile, and dynamic predicate. This hook method is automatically called
+by the :ref:`methods_print_message_3` method. When the call
 succeeds, the ``print_message/3`` method assumes that the message have
 been successfully printed.
 

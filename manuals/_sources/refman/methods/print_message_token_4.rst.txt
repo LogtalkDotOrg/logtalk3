@@ -29,9 +29,9 @@ Description
    print_message_token(Stream, Prefix, Token, Tokens)
 
 User-defined hook method for printing a message token, declared in the
-``logtalk`` built-in object as a public, multifile, and dynamic
-predicate. It allows the user to intercept the printing of a message
-token. This hook method is automatically called by the
+:ref:`logtalk <apis:logtalk/0>` built-in object as a public, multifile,
+and dynamic predicate. It allows the user to intercept the printing of
+a message token. This hook method is automatically called by the
 :ref:`methods_print_message_tokens_3` built-in
 method for each token.
 

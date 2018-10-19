@@ -28,10 +28,10 @@ Description
 
    message_tokens(Message, Component)
 
-User-defined non-terminal hook used to rewrite a message term into a
-list of tokens and declared in the ``logtalk`` built-in object as a
-public, multifile, and dynamic non-terminal. The list of tokens can be
-printed by calling the :ref:`methods_print_message_tokens_3` method.
+User-defined non-terminal hook used to rewrite a message term into a list
+of tokens and declared in the :ref:`logtalk <apis:logtalk/0>` built-in
+object as a public, multifile, and dynamic non-terminal. The list of tokens
+can be printed by calling the :ref:`methods_print_message_tokens_3` method.
 This non-terminal hook is automatically called by the
 :ref:`methods_print_message_3` method.
 

@@ -31,7 +31,8 @@ Description
 Built-in method for printing a message represented by a term, which is
 converted to the message text using the
 :ref:`logtalk::message_tokens(Term, Component) <methods_message_tokens_2>`
-hook non-terminal. This method is declared in the ``logtalk`` built-in
+hook non-terminal. This method is declared in the
+:ref:`logtalk <apis:logtalk/0>` built-in
 object as a public predicate. The line prefix and the output stream used
 for each ``Kind-Component`` pair can be found using the
 :ref:`logtalk::message_prefix_stream(Kind, Component, Prefix, Stream) <methods_message_prefix_stream_4>`

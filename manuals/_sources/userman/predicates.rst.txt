@@ -35,9 +35,11 @@ Reserved predicate names
 For performance reasons, a few predicates have a fixed interpretation.
 These predicates are declared in the built-protocols. They are:
 :ref:`methods_goal_expansion_2` and :ref:`methods_term_expansion_2`,
-declared in the ``expanding`` protocol; :ref:`methods_before_3` and
-:ref:`methods_after_3`, declared in the ``monitoring`` protocol; and
-:ref:`methods_forward_1`, declared in the ``forwarding`` protocol.
+declared in the :ref:`expanding <apis:expanding/0>` protocol;
+:ref:`methods_before_3` and :ref:`methods_after_3`, declared in the
+:ref:`monitoring <apis:monitoring/0>` protocol; and
+:ref:`methods_forward_1`, declared in the
+:ref:`forwarding <apis:forwarding/0>` protocol.
 By default, the compiler prints a warning when
 a definition for one of these predicates is found but the reference to
 the corresponding built-in protocol is missing.
@@ -1421,8 +1423,8 @@ disturb application flow, expose implementation details, spam the user
 with irrelevant details, or break user interfaces.
 
 The Logtalk message printing mechanism provides you with a set of
-predicates, defined in the ``logtalk`` built-in object, and some hook
-predicates. Two of the most important predicates are
+predicates, defined in the :ref:`logtalk <apis:logtalk/0>` built-in
+object, and some hook predicates. Two of the most important predicates are
 :ref:`print_message(Kind, Component, Term) <methods_print_message_3>`,
 which is used for printing a message, and
 :ref:`message_hook(Term, Kind, Component, Tokens) <methods_message_hook_4>`,

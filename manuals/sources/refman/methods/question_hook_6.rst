@@ -29,8 +29,8 @@ Description
    question_hook(Question, Kind, Component, Tokens, Check, Answer)
 
 User-defined hook method for intercepting asking a question, declared in
-the ``logtalk`` built-in object as a public, multifile, and dynamic
-predicate. This hook method is automatically called by the
+the :ref:`logtalk <apis:logtalk/0>` built-in object as a public, multifile,
+and dynamic predicate. This hook method is automatically called by the
 :ref:`methods_ask_question_5` method. When the call
 succeeds, the ``ask_question/5`` method assumes that the question have
 been successfully asked and replied.

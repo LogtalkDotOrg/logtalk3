@@ -113,8 +113,8 @@ properties:
 *Any object can act as a monitor*
    The monitor status is a role that any object can perform during its
    existence. The minimum protocol necessary is declared in the built-in
-   protocol ``monitoring``. Strictly speaking, the reference to this
-   protocol is only needed when specializing event handlers.
+   :ref:`monitoring <apis:monitoring/0>` protocol. Strictly speaking, the
+   reference to this protocol is only needed when specializing event handlers.
    Nevertheless, it is considered good programming practice to always
    refer the protocol when defining event handlers.
 *Unlimited number of monitors for each event*

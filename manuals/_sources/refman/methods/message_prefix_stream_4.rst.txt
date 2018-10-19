@@ -30,8 +30,8 @@ Description
 
 User-defined hook method for specifying the default prefix and stream
 for printing a message for a given kind and component. This method is
-declared in the ``logtalk`` built-in object as a public, multifile, and
-dynamic predicate.
+declared in the :ref:`logtalk <apis:logtalk/0>` built-in object as a
+public, multifile, and dynamic predicate.
 
 Modes and number of proofs
 --------------------------

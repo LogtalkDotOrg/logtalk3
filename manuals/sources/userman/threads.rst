@@ -59,9 +59,9 @@ message queue when the object is loaded or created at runtime. Object
 message queues are used for exchanging thread notifications and for
 storing concurrent goal solutions and replies to the *multi-threading
 calls* made within the object. The message queue for the pseudo-object
-``user`` is automatically created at Logtalk startup (provided that
-multi-threading programming is supported and enabled for the chosen
-Prolog compiler).
+:ref:`user <apis:user/0>` is automatically created at Logtalk startup
+(provided that multi-threading programming is supported and enabled for
+the chosen backend Prolog compiler).
 
 .. _threads_predicates:
 
