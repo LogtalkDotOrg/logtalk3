@@ -193,7 +193,8 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>endif
 </pre></div>
 </div>
-<p>Ends conditional compilation for the matching <code class="docutils literal notranslate"><span class="pre">if/1</span></code> directive.</p>
+<p>Ends conditional compilation for the matching <a class="reference internal" href="if_1.html#directives-if-1"><span class="std std-ref">if/1</span></a>
+directive.</p>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
@@ -203,7 +204,11 @@
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">endif.</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(date<span class="o">::</span>today(<span class="nv">_</span>,<span class="m">5</span>,<span class="m">25</span>)).
+
+<span class="p">    :- </span><span class="k">initialization</span>(<span class="k">write</span>(<span class="s">&#39;Happy Towel Day!</span><span class="se">\n</span><span class="s">&#39;</span>)).
+
+<span class="p">:- </span><span class="k">endif.</span>
 </pre></div>
 </div>
 <div class="admonition seealso">

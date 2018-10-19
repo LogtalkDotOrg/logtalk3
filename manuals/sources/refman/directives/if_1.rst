@@ -29,7 +29,7 @@ Description
    if(Goal)
 
 Starts conditional compilation. The code following the directive is
-compiled if ``Goal`` is true. The goal is subjected to goal expansion
+compiled iff ``Goal`` is true. The goal is subjected to goal expansion
 when the directive occurs in a source file.
 
 Conditional compilation goals cannot depend on predicate definitions
@@ -49,7 +49,13 @@ Examples
 
 ::
 
-   :- if(current_prolog_flag(double_quotes, atom)).
+   :- if(\+ predicate_property(length(_,_), built_in)).
+
+       length(List, Length) :-
+           ...
+
+   :- endif.
+   
 
 .. seealso::
 

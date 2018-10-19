@@ -29,6 +29,8 @@ Description
    else
 
 Starts an *else* branch when performing conditional compilation.
+The code following this directive is compiled iff the goal in the
+matching :ref:`directives_if_1` directive is false.
 
 Template and modes
 ------------------
@@ -42,7 +44,19 @@ Examples
 
 ::
 
+   :- if(current_prolog_flag(bounded, true)).
+
+       :- initialization(
+           logtalk::print_message(warning,app,bounded_arithmetic)
+       ).
+   
    :- else.
+
+       :- initialization(
+           logtalk::print_message(comment,app,unbounded_arithmetic)
+       ).
+
+   :- endif.
 
 .. seealso::
 

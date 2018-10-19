@@ -194,7 +194,7 @@
 </pre></div>
 </div>
 <p>Supports embedded conditionals when performing conditional compilation.
-The code following the directive is compiled if <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is true. The
+The code following the directive is compiled iff <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is true. The
 goal is subjected to goal expansion when the directive occurs in a
 source file.</p>
 <p>Conditional compilation goals cannot depend on predicate definitions
@@ -210,7 +210,19 @@ the file is fully compiled and loaded).</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">elif</span>(<span class="k">predicate_property</span>(<span class="k">callable</span>(<span class="nv">_</span>), built_in)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">current_prolog_flag</span>(double_quotes, codes)).
+
+    ...
+
+<span class="p">:- </span><span class="k">elif</span>(<span class="k">current_prolog_flag</span>(double_quotes, chars)).
+
+    ...
+
+<span class="p">:- </span><span class="k">elif</span>(<span class="k">current_prolog_flag</span>(double_quotes, atom)).
+
+    ...
+
+<span class="p">:- </span><span class="k">endif.</span>
 </pre></div>
 </div>
 <div class="admonition seealso">

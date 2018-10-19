@@ -28,7 +28,8 @@ Description
 
    endif
 
-Ends conditional compilation for the matching ``if/1`` directive.
+Ends conditional compilation for the matching :ref:`directives_if_1`
+directive.
 
 Template and modes
 ------------------
@@ -41,6 +42,10 @@ Examples
 --------
 
 ::
+
+   :- if(date::today(_,5,25)).
+
+       :- initialization(write('Happy Towel Day!\n')).
 
    :- endif.
 

@@ -29,7 +29,7 @@ Description
    elif(Goal)
 
 Supports embedded conditionals when performing conditional compilation.
-The code following the directive is compiled if ``Goal`` is true. The
+The code following the directive is compiled iff ``Goal`` is true. The
 goal is subjected to goal expansion when the directive occurs in a
 source file.
 
@@ -50,7 +50,19 @@ Examples
 
 ::
 
-   :- elif(predicate_property(callable(_), built_in)).
+   :- if(current_prolog_flag(double_quotes, codes)).
+
+       ...
+
+   :- elif(current_prolog_flag(double_quotes, chars)).
+
+       ...
+
+   :- elif(current_prolog_flag(double_quotes, atom)).
+
+       ...
+
+   :- endif.
 
 .. seealso::
 
