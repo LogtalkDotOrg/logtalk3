@@ -60,9 +60,9 @@ your source files with the ``source_date`` flag turned on for complete
 and detailed reports.
 
 When using the ``check`` target, predicates for messages sent to objects
-that implement the ``forwarding`` built-in protocol are not reported.
-While this usually avoids only false positives, it may also result in
-failure to report true missing predicates in some cases.
+that implement the :ref:`forwarding <apis:forwarding/0>` built-in protocol
+are not reported. While this usually avoids only false positives, it may
+also result in failure to report true missing predicates in some cases.
 
 When using the ``circular`` target, be prepared for a lengthy
 computation time for applications with a large combined number of

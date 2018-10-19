@@ -231,9 +231,9 @@ this target reloads its main file (i.e. the file that contains the
 your source files with the <code class="docutils literal notranslate"><span class="pre">source_date</span></code> flag turned on for complete
 and detailed reports.</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">check</span></code> target, predicates for messages sent to objects
-that implement the <code class="docutils literal notranslate"><span class="pre">forwarding</span></code> built-in protocol are not reported.
-While this usually avoids only false positives, it may also result in
-failure to report true missing predicates in some cases.</p>
+that implement the <a class="reference external" href="https://logtalk.org/library/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">forwarding</span></a> built-in protocol
+are not reported. While this usually avoids only false positives, it may
+also result in failure to report true missing predicates in some cases.</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">circular</span></code> target, be prepared for a lengthy
 computation time for applications with a large combined number of
 objects and message calls. Only mutual and triangular dependencies are

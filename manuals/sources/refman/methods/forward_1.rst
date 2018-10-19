@@ -31,10 +31,10 @@ Description
 User-defined method for forwarding unknown messages sent to an object
 (using the :ref:`control_send_to_object_2` control construct),
 automatically called by the runtime when defined. This method is
-declared in the ``forwarding`` built-in protocol as a public
-predicate. Note that you can make its scope protected or private by
-using, respectively, protected or private implementation of the
-``forwarding`` protocol.
+declared in the :ref:`forwarding <apis:forwarding/0>` built-in protocol
+as a public predicate. Note that you can make its scope protected or
+private by using, respectively, protected or private implementation of
+the ``forwarding`` protocol.
 
 Modes and number of proofs
 --------------------------
