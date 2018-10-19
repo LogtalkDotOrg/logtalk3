@@ -39,9 +39,12 @@ release = u'v3.21.0-b01'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.intersphinx'
 #    'rinoh.frontend.sphinx'
 #.   'rst2pdf.pdfbuilder'
 ]
+
+intersphinx_mapping = {'apis': ('https://logtalk.org/library/','../../docs/objects.inv')}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
