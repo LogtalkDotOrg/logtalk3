@@ -37,7 +37,7 @@ Multiple initialization directives can be used in a source file or in an
 object. Their goals will be called in order at loading time.
 
 Categories and protocols cannot contain initialization directives as the
-initialization goals would lack a complete execution context which is
+initialization goals would lack a complete execution context that is
 only available for objects.
 
 Although technically a global ``initialization/1`` directive in a source
