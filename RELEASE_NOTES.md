@@ -41,9 +41,9 @@ using it to run Logtalk.
 Documentation
 -------------
 
-* CHANGED: The HTML, PDF, and ePub versions of the documentation (which
-includes the User Manual, Reference Manual, FAQ, and Glossary) are now
-generated from reStructuredText sources using Sphinx.
+* CHANGED: HTML, PDF, and ePub versions of the documentation (which includes
+the User Manual, Reference Manual, FAQ, and Glossary) are now generated from
+reStructuredText sources using Sphinx and the Read the Docs theme.
 
 * CHANGED: The manual `userman.pdf` and `refman.pdf` files have been replaced
 by `TheLogtalkHandbook-3.21.0.pdf` and `TheLogtalkHandbook-3.21.0.epub` files.
@@ -52,11 +52,17 @@ Logtalk and Read the Docs websites.
 
 * ADDED: Contributor Covenant code of conduct.
 
+* IMPROVED: Manuals and APIs documentation cross-referencing.
+
+* FIXED: Several typos and also some outdated information in the manuals,
+tutorial, and APIs documentation.
+
 Library
 -------
 
 * CHANGED: The library, tools, and contributions APIs are now generated from
-reStructuredText intermediate files using Sphinx.
+reStructuredText intermediate files (generated with the new `lgt2rst` script)
+using Sphinx and the Read the Docs theme.
 
 * ADDED: Types `operator_specifier` and `operator_priority` to the `type`
 library object.
