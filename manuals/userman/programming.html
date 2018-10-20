@@ -270,7 +270,8 @@ directives are compiled for better performance.</p>
 <p>The text encoding used in a source file may be declared using the
 <a class="reference internal" href="../refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive when running Logtalk with
 back-end Prolog compilers that support multiple encodings (check the
-<code class="docutils literal notranslate"><span class="pre">encoding_directive</span></code> flag in the adapter file of your Prolog compiler).</p>
+<a class="reference internal" href="installing.html#flag-encoding-directive"><span class="std std-ref">encoding_directive</span></a> flag in the
+adapter file of your Prolog compiler).</p>
 <p>Logtalk source files can include the text of other files by using the
 <a class="reference internal" href="../refman/directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive.
 Although there’s also a standard Prolog <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive, any
@@ -290,8 +291,8 @@ non-portable code in a small number of objects and provide a portable
 <strong>interface</strong> for that code through the use of Logtalk protocols. An
 example will be code that access operating-system specific features. The
 Logtalk compiler can warn you of the use of non-ISO specified built-in
-predicates and arithmetic functions by using the <code class="docutils literal notranslate"><span class="pre">portability/1</span></code>
-compiler flag.</p>
+predicates and arithmetic functions by using the
+<a class="reference internal" href="#flag-portability"><span class="std std-ref">portability</span></a> compiler flag.</p>
 </div>
 <div class="section" id="conditional-compilation">
 <span id="programming-cc"></span><h3>Conditional compilation<a class="headerlink" href="#conditional-compilation" title="Permalink to this headline">¶</a></h3>
@@ -426,8 +427,8 @@ files in debug mode by using the queries:</p>
 </pre></div>
 </div>
 <p>After debugging and fixing the bugs, you can reload the files in normal
-(or optimized) mode by turning the debug flag off and calling the
-<code class="docutils literal notranslate"><span class="pre">logtalk_make/0</span></code> predicate again.</p>
+(or optimized) mode by turning the <a class="reference internal" href="#flag-debug"><span class="std std-ref">debug</span></a> flag off
+and calling the <code class="docutils literal notranslate"><span class="pre">logtalk_make/0</span></code> predicate again.</p>
 <p>An extended version of this predicate, <a class="reference internal" href="../refman/predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make/1</span></a>,
 accepts <code class="docutils literal notranslate"><span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">clean</span></code>, <code class="docutils literal notranslate"><span class="pre">check</span></code>, <code class="docutils literal notranslate"><span class="pre">circular</span></code>, <code class="docutils literal notranslate"><span class="pre">documentation</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">caches</span></code> arguments for, respectively, reloading modified Logtalk
@@ -1033,10 +1034,10 @@ specify the execution context for entering the debugger. This feature is
 a consequence of the encapsulation of predicates inside objects.</p>
 <div class="section" id="compiling-source-files-and-entities-in-debug-mode">
 <span id="programming-debug-mode"></span><h3>Compiling source files and entities in debug mode<a class="headerlink" href="#compiling-source-files-and-entities-in-debug-mode" title="Permalink to this headline">¶</a></h3>
-<p>Compilation of source files in debug mode is controlled by the compiler
-flag <code class="docutils literal notranslate"><span class="pre">debug</span></code>. The default value for this flag, usually <code class="docutils literal notranslate"><span class="pre">off</span></code>, is
-defined in the adapter files. Its value may be changed at runtime by
-writing:</p>
+<p>Compilation of source files in debug mode is controlled by the
+<a class="reference internal" href="#flag-debug"><span class="std std-ref">debug</span></a> compiler flag. The default value for this flag,
+usually <code class="docutils literal notranslate"><span class="pre">off</span></code>, is defined in the adapter files. Its value may be changed
+at runtime by calling:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(debug, on).
 </pre></div>
 </div>
@@ -1045,10 +1046,10 @@ mode, we may instead write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load([file1, file2, ...], [debug(on)]).
 </pre></div>
 </div>
-<p>The compiler flag <code class="docutils literal notranslate"><span class="pre">clean</span></code> should be turned on whenever the debug flag
-is turned on at runtime. This is necessary because debug code would not
-be generated for files previously compiled in normal mode if there are
-no changes to the source files.</p>
+<p>The <a class="reference internal" href="#flag-clean"><span class="std std-ref">clean</span></a> compiler flag should be turned on whenever
+the <a class="reference internal" href="#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on at runtime. This is necessary
+because debug code would not be generated for files previously compiled in
+normal mode if there are no changes to the source files.</p>
 <p>After loading the debugger, we may check or enumerate, by backtracking,
 all loaded entities compiled in debug mode as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::debugging(Entity).
@@ -1393,8 +1394,9 @@ object, not within the context of the object making the <code class="docutils li
 Thus, the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct implements a form of
 <em>execution-context switching</em>.</p>
 <p>The availability of the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct is controlled by the
-compiler flag <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> (its default value is defined
-in the adapter files of the back-end Prolog compilers).</p>
+<a class="reference internal" href="#flag-context-switching-calls"><span class="std std-ref">context_switching_calls</span></a> compiler
+flag (its default value is defined in the adapter files of the back-end
+Prolog compilers).</p>
 </div>
 <div class="section" id="using-compilation-hooks-and-term-expansion-for-debugging">
 <span id="programming-hooks"></span><h3>Using compilation hooks and term expansion for debugging<a class="headerlink" href="#using-compilation-hooks-and-term-expansion-for-debugging" title="Permalink to this headline">¶</a></h3>
@@ -1427,9 +1429,10 @@ built-in predicate <code class="docutils literal notranslate"><span class="pre">
 <span id="programming-debugging-messages"></span><h3>Debugging messages<a class="headerlink" href="#debugging-messages" title="Permalink to this headline">¶</a></h3>
 <p>Calls to the <code class="docutils literal notranslate"><span class="pre">logtalk::print_message/3</span></code> predicate where the message
 kind is either <code class="docutils literal notranslate"><span class="pre">debug</span></code> or <code class="docutils literal notranslate"><span class="pre">debug(_)</span></code> are only printed, by default,
-when the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag is turned on. Note that using these messages
-does not require compiling the code in debug mode, only turning on the
-flag. To avoid having to define <code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code> grammar rules for
+when the <a class="reference internal" href="#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on. Note that using
+these messages does not require compiling the code in debug mode, only
+turning on the flag. To avoid having to define
+<a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules for
 translating each debug message, Logtalk provides default tokenization
 for four <em>meta-messages</em> that cover the most common cases:</p>
 <dl class="docutils">

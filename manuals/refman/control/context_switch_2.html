@@ -198,10 +198,10 @@ specified object. The goal is called with the execution context
 The goal may need to be written between parenthesis to avoid parsing
 errors due to operator conflicts. This control construct should only be
 used for debugging or for writing unit tests. This control construct can
-only be used for objects compiled with the compiler flag
-<code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Set this compiler flag to
-<code class="docutils literal notranslate"><span class="pre">deny</span></code> to disable this control construct and thus preventing using it
-to break encapsulation.</p>
+only be used for objects compiled with the
+<a class="reference internal" href="../../userman/programming.html#flag-context-switching-calls"><span class="std std-ref">context_switching_calls</span></a> compiler
+flag set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Set this compiler flag to <code class="docutils literal notranslate"><span class="pre">deny</span></code> to disable
+this control construct and thus preventing using it to break encapsulation.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}&lt;&lt;Goal</span></code> syntax allows simplified access to
 <a class="reference internal" href="../../glossary.html#term-parametric-object-proxy"><span class="xref std std-term">parametric object proxies</span></a>.
 Its operational semantics is equivalent to the goal conjunction

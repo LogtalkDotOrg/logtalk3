@@ -32,7 +32,8 @@ Description
 Asserts a clause as the first one for an object dynamic predicate. If the
 predicate is not previously declared (using a scope directive), then a
 dynamic predicate declaration is added to the object (assuming that we are
-asserting locally or that the compiler flag ``dynamic_declarations`` was
+asserting locally or that the
+:ref:`dynamic_declarations <flag_dynamic_declarations>` compiler flag was
 set to ``allow`` when the object was created or compiled).
 
 When the predicate indicator for ``Head`` is declared in a

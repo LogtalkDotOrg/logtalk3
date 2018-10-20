@@ -85,7 +85,8 @@ directives are compiled for better performance.
 The text encoding used in a source file may be declared using the
 :ref:`directives_encoding_1` directive when running Logtalk with
 back-end Prolog compilers that support multiple encodings (check the
-``encoding_directive`` flag in the adapter file of your Prolog compiler).
+:ref:`encoding_directive <flag_encoding_directive>` flag in the
+adapter file of your Prolog compiler).
 
 Logtalk source files can include the text of other files by using the
 :ref:`directives_include_1` directive.
@@ -109,8 +110,8 @@ non-portable code in a small number of objects and provide a portable
 **interface** for that code through the use of Logtalk protocols. An
 example will be code that access operating-system specific features. The
 Logtalk compiler can warn you of the use of non-ISO specified built-in
-predicates and arithmetic functions by using the ``portability/1``
-compiler flag.
+predicates and arithmetic functions by using the
+:ref:`portability <flag_portability>` compiler flag.
 
 .. _programming_cc:
 
@@ -280,8 +281,8 @@ files in debug mode by using the queries:
    ...
 
 After debugging and fixing the bugs, you can reload the files in normal
-(or optimized) mode by turning the debug flag off and calling the
-``logtalk_make/0`` predicate again.
+(or optimized) mode by turning the :ref:`debug <flag_debug>` flag off
+and calling the ``logtalk_make/0`` predicate again.
 
 An extended version of this predicate, :ref:`predicates_logtalk_make_1`,
 accepts ``all``, ``clean``, ``check``, ``circular``, ``documentation``,
@@ -1011,10 +1012,10 @@ a consequence of the encapsulation of predicates inside objects.
 Compiling source files and entities in debug mode
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compilation of source files in debug mode is controlled by the compiler
-flag ``debug``. The default value for this flag, usually ``off``, is
-defined in the adapter files. Its value may be changed at runtime by
-writing:
+Compilation of source files in debug mode is controlled by the
+:ref:`debug <flag_debug>` compiler flag. The default value for this flag,
+usually ``off``, is defined in the adapter files. Its value may be changed
+at runtime by calling:
 
 .. code-block:: text
 
@@ -1027,10 +1028,10 @@ mode, we may instead write:
 
    | ?- logtalk_load([file1, file2, ...], [debug(on)]).
 
-The compiler flag ``clean`` should be turned on whenever the debug flag
-is turned on at runtime. This is necessary because debug code would not
-be generated for files previously compiled in normal mode if there are
-no changes to the source files.
+The :ref:`clean <flag_clean>` compiler flag should be turned on whenever
+the :ref:`debug <flag_debug>` flag is turned on at runtime. This is necessary
+because debug code would not be generated for files previously compiled in
+normal mode if there are no changes to the source files.
 
 After loading the debugger, we may check or enumerate, by backtracking,
 all loaded entities compiled in debug mode as follows:
@@ -1431,8 +1432,9 @@ Thus, the ``<</2`` control construct implements a form of
 *execution-context switching*.
 
 The availability of the ``<</2`` control construct is controlled by the
-compiler flag ``context_switching_calls`` (its default value is defined
-in the adapter files of the back-end Prolog compilers).
+:ref:`context_switching_calls <flag_context_switching_calls>` compiler
+flag (its default value is defined in the adapter files of the back-end
+Prolog compilers).
 
 .. _programming_hooks:
 
@@ -1477,9 +1479,10 @@ Debugging messages
 
 Calls to the ``logtalk::print_message/3`` predicate where the message
 kind is either ``debug`` or ``debug(_)`` are only printed, by default,
-when the ``debug`` flag is turned on. Note that using these messages
-does not require compiling the code in debug mode, only turning on the
-flag. To avoid having to define ``message_tokens//2`` grammar rules for
+when the :ref:`debug <flag_debug>` flag is turned on. Note that using
+these messages does not require compiling the code in debug mode, only
+turning on the flag. To avoid having to define
+:ref:`methods_message_tokens_2` grammar rules for
 translating each debug message, Logtalk provides default tokenization
 for four *meta-messages* that cover the most common cases:
 

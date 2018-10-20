@@ -392,7 +392,7 @@ I can include it in the next release of Logtalk.</p>
 compiler flags. Most of these compiler flags are described in the
 <a class="reference external" href="programming.html#programming_flags">next</a> section. A few of these
 flags have read-only values and cannot be changed at runtime. These are:</p>
-<dl class="docutils">
+<span id="index-0"></span><dl class="docutils" id="flag-settings-file">
 <dt><code class="docutils literal notranslate"><span class="pre">settings_file</span></code></dt>
 <dd>Allows or disables loading of <em>settings files</em> at startup. Possible
 values are <code class="docutils literal notranslate"><span class="pre">allow</span></code>, <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, and <code class="docutils literal notranslate"><span class="pre">deny</span></code>. The usual default
@@ -402,31 +402,43 @@ of <code class="docutils literal notranslate"><span class="pre">allow</span></co
 in the Logtalk user directory, and in the user home directory. With a
 value of <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, settings files are only searched in the
 Logtalk user directory and in the user home directory.</dd>
+</dl>
+<span id="index-1"></span><dl class="docutils" id="flag-prolog-dialect">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_dialect</span></code></dt>
 <dd>Name of the back-end Prolog compiler (an atom). This flag can be used
 for conditional compilation of Prolog specific code.</dd>
+</dl>
+<span id="index-2"></span><dl class="docutils" id="flag-prolog-version">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_version</span></code></dt>
 <dd>Version of the back-end Prolog compiler (a compound term,
 <code class="docutils literal notranslate"><span class="pre">v(Major,</span> <span class="pre">Minor,</span> <span class="pre">Patch)</span></code>, whose arguments are integers). This flag
 availability depends on the Prolog compiler. Checking the value of
 this flag fails for any Prolog compiler that does not provide access
 to version data.</dd>
+</dl>
+<span id="index-3"></span><dl class="docutils" id="flag-prolog-compatible-version">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_compatible_version</span></code></dt>
 <dd>Compatible version of the back-end Prolog compiler (a compound term,
 usually with the format <code class="docutils literal notranslate"><span class="pre">&#64;&gt;=(v(Major,</span> <span class="pre">Minor,</span> <span class="pre">Patch))</span></code>, whose
 arguments are integers). This flag availability depends on the Prolog
 compiler. Checking the value of this flag fails for any Prolog
 compiler that does not provide access to version data.</dd>
+</dl>
+<span id="index-4"></span><dl class="docutils" id="flag-prolog-conformance">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_conformance</span></code></dt>
 <dd>Level of conformance of the back-end Prolog compiler with the ISO
 Prolog Core standard. The possible values are <code class="docutils literal notranslate"><span class="pre">strict</span></code> for
 compilers claiming strict conformance and <code class="docutils literal notranslate"><span class="pre">lax</span></code> for compilers
 claiming only broad conformance.</dd>
+</dl>
+<span id="index-5"></span><dl class="docutils" id="flag-unicode">
 <dt><code class="docutils literal notranslate"><span class="pre">unicode</span></code></dt>
 <dd>Informs Logtalk if the back-end Prolog compiler supports the Unicode
 standard. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code> (all
 Unicode planes supported), and <code class="docutils literal notranslate"><span class="pre">bmp</span></code> (supports only the Basic
 Multilingual Plane).</dd>
+</dl>
+<span id="index-6"></span><dl class="docutils" id="flag-encoding-directive">
 <dt><code class="docutils literal notranslate"><span class="pre">encoding_directive</span></code></dt>
 <dd>Informs Logtalk if the back-end Prolog compiler supports the
 <a class="reference internal" href="../refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive.
@@ -434,24 +446,34 @@ This directive is used for declaring the text encoding of source
 files. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code> (can be
 used in both Logtalk source files and compiler generated Prolog
 files), and <code class="docutils literal notranslate"><span class="pre">source</span></code> (can be used only in Logtalk source files).</dd>
+</dl>
+<span id="index-7"></span><dl class="docutils" id="flag-tabling">
 <dt><code class="docutils literal notranslate"><span class="pre">tabling</span></code></dt>
 <dd>Informs Logtalk if the back-end Prolog compiler provides tabling
 programming support. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and
 <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
+</dl>
+<span id="index-8"></span><dl class="docutils" id="flag-engines">
 <dt><code class="docutils literal notranslate"><span class="pre">engines</span></code></dt>
 <dd>Informs if the back-end Prolog compiler provides the required low
 level multi-threading programming support for Logtalk threaded
 engines. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
+</dl>
+<span id="index-9"></span><dl class="docutils" id="flag-threads">
 <dt><code class="docutils literal notranslate"><span class="pre">threads</span></code></dt>
 <dd>Informs if the back-end Prolog compiler provides the required low
 level multi-threading programming support for all high-level Logtalk
 multi-threading features. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code>
 and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
+</dl>
+<span id="index-10"></span><dl class="docutils" id="flag-modules">
 <dt><code class="docutils literal notranslate"><span class="pre">modules</span></code></dt>
 <dd>Informs Logtalk if the back-end Prolog compiler provides suitable
 module support. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and
 <code class="docutils literal notranslate"><span class="pre">supported</span></code> (Logtalk provides limited support for compiling Prolog
 modules as objects).</dd>
+</dl>
+<span id="index-11"></span><dl class="docutils" id="flag-coinduction">
 <dt><code class="docutils literal notranslate"><span class="pre">coinduction</span></code></dt>
 <dd>Informs Logtalk if the back-end Prolog compiler provides the minimal
 support for cyclic terms necessary for working with coinductive

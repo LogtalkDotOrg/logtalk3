@@ -35,10 +35,10 @@ specified object. The goal is called with the execution context
 The goal may need to be written between parenthesis to avoid parsing
 errors due to operator conflicts. This control construct should only be
 used for debugging or for writing unit tests. This control construct can
-only be used for objects compiled with the compiler flag
-``context_switching_calls`` set to ``allow``. Set this compiler flag to
-``deny`` to disable this control construct and thus preventing using it
-to break encapsulation.
+only be used for objects compiled with the
+:ref:`context_switching_calls <flag_context_switching_calls>` compiler
+flag set to ``allow``. Set this compiler flag to ``deny`` to disable
+this control construct and thus preventing using it to break encapsulation.
 
 The ``{Proxy}<<Goal`` syntax allows simplified access to
 :term:`parametric object proxies <parametric object proxy>`.
