@@ -524,6 +524,7 @@ the entity or to the source file containing it.
 Version flags
 ^^^^^^^^^^^^^
 
+.. index:: single: version_data flag
 .. _flag_version_data:
 
 ``version_data(Value)``
@@ -539,6 +540,7 @@ Version flags
 Lint flags
 ^^^^^^^^^^
 
+.. index:: single: unknown_entities flag
 .. _flag_unknown_entities:
 
 ``unknown_entities(Option)``
@@ -548,6 +550,7 @@ Lint flags
    and ``silent``. Note that these warnings are not always avoidable,
    specially when using reflective designs of class-based hierarchies.
 
+.. index:: single: unknown_predicates flag
 .. _flag_unknown_predicates:
 
 ``unknown_predicates(Option)``
@@ -557,6 +560,7 @@ Lint flags
    are ``error``, ``warning`` (the usual default), and ``silent`` (not
    recommended).
 
+.. index:: single: undefined_predicates flag
 .. _flag_undefined_predicates:
 
 ``undefined_predicates(Option)``
@@ -566,6 +570,7 @@ Lint flags
    assumption. Possible option values are ``error``, ``warning`` (the
    usual default), and ``silent`` (not recommended).
 
+.. index:: single: portability flag
 .. _flag_portability:
 
 ``portability(Option)``
@@ -574,6 +579,7 @@ Lint flags
    of non-standard Prolog flags and/or flag values. Possible option
    values are ``warning`` and ``silent`` (the usual default).
 
+.. index:: single: missing_directives flag
 .. _flag_missing_directives:
 
 ``missing_directives(Option)``
@@ -581,6 +587,7 @@ Lint flags
    values are ``warning`` (the usual default) and ``silent`` (not
    recommended).
 
+.. index:: single: duplicated_directives flag
 .. _flag_duplicated_directives:
 
 ``duplicated_directives(Option)``
@@ -589,6 +596,7 @@ Lint flags
    recommended). Note that conflicting directives for the same predicate
    are handled as errors, not as duplicated directive warnings.
 
+.. index:: single: trivial_goal_fails flag
 .. _flag_trivial_goal_fails:
 
 ``trivial_goal_fails(Option)``
@@ -596,6 +604,7 @@ Lint flags
    predicates with no matching clauses. Possible option values are
    ``warning`` (the usual default) and ``silent`` (not recommended).
 
+.. index:: single: always_true_or_false_goals flag
 .. _flag_always_true_or_false_goals:
 
 ``always_true_or_false_goals(Option)``
@@ -603,6 +612,7 @@ Lint flags
    false. Possible option values are ``warning`` (the usual default) and
    ``silent`` (not recommended).
 
+.. index:: single: lambda_variables flag
 .. _flag_lambda_variables:
 
 ``lambda_variables(Option)``
@@ -610,6 +620,7 @@ Lint flags
    option values are ``warning`` (the usual default) and ``silent`` (not
    recommended).
 
+.. index:: single: suspicious_calls flag
 .. _flag_suspicious_calls:
 
 ``suspicious_calls(Option)``
@@ -617,6 +628,7 @@ Lint flags
    values are ``warning`` (the usual default) and ``silent`` (not
    recommended).
 
+.. index:: single: redefined_built_ins flag
 .. _flag_redefined_built_ins:
 
 ``redefined_built_ins(Option)``
@@ -627,12 +639,14 @@ Lint flags
    Prolog compilers as each Prolog compiler defines its set of built-in
    predicates.
 
+.. index:: single: singleton_variables flag
 .. _flag_singleton_variables:
 
 ``singleton_variables(Option)``
    Controls the singleton variable warnings. Possible option values are
    ``warning`` (the usual default) and ``silent`` (not recommended).
 
+.. index:: single: underscore_variables flag
 .. _flag_underscore_variables:
 
 ``underscore_variables(Option)``
@@ -648,6 +662,7 @@ Lint flags
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. index:: single: complements flag
 .. _flag_complements:
 
 ``complements(Option)``
@@ -662,6 +677,7 @@ Optional features compilation flags
    this option is of no consequence for objects already compiled and
    loaded.
 
+.. index:: single: dynamic_declarations flag
 .. _flag_dynamic_declarations:
 
 ``dynamic_declarations(Option)``
@@ -674,6 +690,7 @@ Optional features compilation flags
    ``asserta/1`` or ``assertz/1`` message to an object. Local asserting
    of new predicates is always allowed.
 
+.. index:: single: events flag
 .. _flag_events:
 
 ``events(Option)``
@@ -686,6 +703,7 @@ Optional features compilation flags
    per-category) basis. Note that changing this option is of no
    consequence for objects already compiled and loaded.
 
+.. index:: single: context_switching_calls flag
 .. _flag_context_switching_calls:
 
 ``context_switching_calls(Option)``
@@ -697,6 +715,7 @@ Optional features compilation flags
 Back-end Prolog compiler and loader flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. index:: single: prolog_compiler flag
 .. _flag_prolog_compiler:
 
 ``prolog_compiler(Flags)``
@@ -708,6 +727,7 @@ Back-end Prolog compiler and loader flags
    separate predicates for compiling and loading a file, use instead the
    ``prolog_loader/1`` flag.
 
+.. index:: single: prolog_loader flag
 .. _flag_prolog_loader:
 
 ``prolog_loader(Flags)``
@@ -720,6 +740,7 @@ Back-end Prolog compiler and loader flags
 Other flags
 ^^^^^^^^^^^
 
+.. index:: single: scratch_directory flag
 .. _flag_scratch_directory:
 
 ``scratch_directory(Directory)``
@@ -732,6 +753,7 @@ Other flags
    Relative directories must always start with ``'./'`` due to the lack
    of a portable solution to check if a path is relative or absolute.
 
+.. index:: single: report flag
 .. _flag_report:
 
 ``report(Option)``
@@ -741,6 +763,7 @@ Other flags
    that are not intercepted by the user), and ``off`` (do not print any
    messages that are not intercepted by the user).
 
+.. index:: single: code_prefix flag
 .. _flag_code_prefix:
 
 ``code_prefix(Character)``
@@ -754,6 +777,7 @@ Other flags
    read-only flag, it should only be changed at startup time and before
    loading any source files.
 
+.. index:: single: optimize flag
 .. _flag_optimize:
 
 ``optimize(Option)``
@@ -771,6 +795,7 @@ Other flags
    invalid for code defining in other loaded files. Turning on this
    flag automatically turns off the :ref:`debug <flag_debug>` flag.
 
+.. index:: single: source_data flag
 .. _flag_source_data:
 
 ``source_data(Option)``
@@ -784,6 +809,7 @@ Other flags
    tools. This flag can be turned off in order to generate more compact
    code.
 
+.. index:: single: debug flag
 .. _flag_debug:
 
 ``debug(Option)``
@@ -794,6 +820,7 @@ Other flags
    ``off`` (the usual default). Turning on this flag automatically turns
    off the :ref:`optimize <flag_optimize>` flag.
 
+.. index:: single: reload flag
 .. _flag_reload:
 
 ``reload(Option)``
@@ -806,12 +833,14 @@ Other flags
    and the compilation mode are the same as before), and ``always``
    (always reload files).
 
+.. index:: single: relative_to flag
 .. _flag_relative_to:
 
 ``relative_to(Directory)``
    Defines a base directory for resolving relative source file paths.
    The default value is the directory of the source file being compiled.
 
+.. index:: single: hook flag
 .. _flag_hook:
 
 ``hook(Object)``
@@ -836,6 +865,7 @@ Other flags
    a fixed point is reached. Care must be taken to avoid compilation
    loops.
 
+.. index:: single: clean flag
 .. _flag_clean:
 
 ``clean(Option)``
