@@ -773,8 +773,8 @@ When a predicate is called from an ``initialization/1`` directive, the
 argument of the ``caller/1`` property is ``:-/1``.
 
 Some of the properties such as line numbers are only available when the
-object is defined in a source file compiled with the ``source_data``
-flag turned on.
+object is defined in a source file compiled with the
+:ref:`source_data <flag_source_data>` flag turned on.
 
 The properties that return the number of clauses (rules) report the
 clauses (rules) *textually defined in the object* for both multifile and
@@ -799,8 +799,8 @@ that virtually contains all user predicate definitions not encapsulated in
 a Logtalk entity. These predicates are assumed to be implicitly declared
 public. Messages sent from this pseudo-object, which includes messages sent
 from the top-level interpreter, generate events when the default value of
-the ``events`` flag is set to ``allow``. Defining complementing categories
-for this pseudo-object is not supported.
+the :ref:`events <flag_events>` flag is set to ``allow``. Defining
+complementing categories for this pseudo-object is not supported.
 
 With some of the backend Prolog compilers that support a module system,
 it is possible to load (the) Logtalk (compiler/runtime) into a module

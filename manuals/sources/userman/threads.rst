@@ -40,7 +40,7 @@ Enabling multi-threading support
 
 Multi-threading support may be disabled by default. It can be enabled on
 the Prolog adapter files of supported compilers by setting the read-only
-compiler flag ``threads`` to ``supported``.
+:ref:`threads <flag_threads>` compiler flag to ``supported``.
 
 .. _threads_directive:
 

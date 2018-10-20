@@ -222,10 +222,10 @@ object observed, and not on the implementation of that same protocol.</li>
 on the dynamic behavior of objects in complement to the reflective
 information of the object’s contents and relations.</li>
 <li>Provide a mechanism for easily defining method pre- and
-post-conditions that can be toggled using the <code class="docutils literal notranslate"><span class="pre">events</span></code> compiler
-flag. The pre- and post-conditions may be defined in the same object
-containing the methods or distributed between several objects acting
-as method monitors.</li>
+post-conditions that can be toggled using the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a>
+compiler flag. The pre- and post-conditions may be defined in the same
+object containing the methods or distributed between several objects
+acting as method monitors.</li>
 </ul>
 <div class="section" id="definitions">
 <span id="events-definitions"></span><h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h2>
@@ -455,11 +455,15 @@ Its definition could be something like:</p>
 <span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
-<p>After compiling and loading both objects (note that the object <code class="docutils literal notranslate"><span class="pre">any</span></code>
-must be compiled with the flag <code class="docutils literal notranslate"><span class="pre">events(allow)</span></code>), we can start tracing
+<p>After compiling and loading both objects and setting the
+<a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> to <code class="docutils literal notranslate"><span class="pre">allow</span></code>) flag, we can start tracing
 every message sent to any object by calling the <code class="docutils literal notranslate"><span class="pre">define_events/5</span></code>
 built-in predicate:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- define_events(_, _, _, _, tracer).
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(events, allow).
+
+yes
+
+| ?- define_events(_, _, _, _, tracer).
 
 yes
 </pre></div>

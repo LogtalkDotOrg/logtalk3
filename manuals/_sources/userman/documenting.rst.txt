@@ -21,12 +21,12 @@
 Documenting applications
 ========================
 
-By setting the compiler flag ``source_data``, Logtalk saves all relevant
-documenting information collected when compiling a source file. The
-provided ``lgtdoc`` tool can access this information by using Logtalk's
-reflection support and generate a documentation file for each compiled
-entity (object, protocol, or category) in `XML <http://www.w3.org/XML/>`_
-format. Contents of the XML file
+By setting the :ref:`source_data <flag_source_data>` compiler flag, Logtalk
+saves all relevant documenting information collected when compiling a source
+file. The provided ``lgtdoc`` tool can access this information by using
+Logtalk's reflection support and generate a documentation file for each
+compiled entity (object, protocol, or category) in
+`XML <http://www.w3.org/XML/>`_ format. Contents of the XML file
 include the entity name, type, and compilation mode (static or dynamic),
 the entity relations with other entities, and a description of any
 declared predicates (name, compilation mode, scope, ...).

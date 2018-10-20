@@ -41,10 +41,10 @@ inherited (or imported) predicate definition.
 
 The lookups for the predicate declaration and the predicate definition
 are performed using a depth-first strategy. Depending on the value of
-the ``optimize`` flag, these lookups are performed at compile time when
-the predicate is static and sufficient information is available. When
-the lookups are performed at runtime, a caching mechanism is used to
-improve performance in subsequent calls.
+the :ref:`optimize <flag_optimize>` flag, these lookups are performed
+at compile time when the predicate is static and sufficient information
+is available. When the lookups are performed at runtime, a caching
+mechanism is used to improve performance in subsequent calls.
 
 When the call is made from within an object, the lookup for the
 predicate definition starts at the imported categories, if any. If an

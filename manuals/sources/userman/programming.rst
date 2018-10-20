@@ -908,15 +908,15 @@ which may still be in use (e.g. threads may be waiting on it).
 
 When using library entities and stable code, you can avoid reloading the
 corresponding source files (and, therefore, recompiling them) by setting
-the compiler flag ``reload`` to ``skip``. For code under development,
-you can turn off the ``clean`` flag to avoid recompiling files that have
-not been modified since last compilation (assuming that back-end Prolog
-compiler that you are using supports retrieving of file modification
-dates). You can disable deleting the intermediate files generated when
-compiling source files by changing the default flag value in your
-settings file, by using the corresponding compiler flag with the
-compiling and loading built-in predicates, or, for the remaining of a
-working session, by using the call:
+the :ref:`reload <flag_reload>` compiler flag to ``skip``. For code under
+development, you can turn off the :ref:`clean <flag_clean>` flag to avoid
+recompiling files that have not been modified since last compilation
+(assuming that back-end Prolog compiler that you are using supports
+retrieving of file modification dates). You can disable deleting the
+intermediate files generated when compiling source files by changing the
+default flag value in your settings file, by using the corresponding
+compiler flag with the compiling and loading built-in predicates, or,
+for the remaining of a working session, by using the call:
 
 .. code-block:: text
 

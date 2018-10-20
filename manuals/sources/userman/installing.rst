@@ -394,14 +394,14 @@ operating-system, is also possible to define per-project settings files
 by creating a ``settings.lgt`` file in the project directory and by
 starting Logtalk from this directory. At startup, Logtalk tries to load
 a ``settings.lgt`` file from the startup directory (assuming that the
-read-only ``settings`` flag is set to ``allow``). If not found, Logtalk
-tries to load a ``settings.lgt`` file from the Logtalk user folder. If
-still not found, Logtalk tries to load a ``settings.lgt`` file from the
-user home folder. When no settings files are found, Logtalk will use the
-default compiler flag values set on the back-end Prolog compiler adapter
-files. When limitations of the back-end Prolog compiler or on the
-operating-system prevent Logtalk from finding the settings files, these
-can always be loaded manually after Logtalk startup.
+read-only :ref:`settings_file <flag_settings_file>` flag is set to
+``allow``). If not found, Logtalk tries to load a ``settings.lgt`` file
+from the Logtalk user folder. If still not found, Logtalk tries to load a
+``settings.lgt`` file from the user home folder. When no settings files are
+found, Logtalk will use the default compiler flag values set on the back-end
+Prolog compiler adapter files. When limitations of the back-end Prolog
+compiler or on the operating-system prevent Logtalk from finding the
+settings files, these can always be loaded manually after Logtalk startup.
 
 Settings files are normal Logtalk source files (although when
 automatically loaded by Logtalk they are compiled silently with any
@@ -428,10 +428,10 @@ support for conditional compilation you could write:
 
    :- endif.
 
-The Logtalk flag ``prolog_dialect`` may also be used with the
-conditional compilation directives in order to define a single settings
-file that can be used with several back-end Prolog compilers. For
-example:
+The :ref:`prolog_dialect <flag_prolog_dialect>` flag may also be used
+with the conditional compilation directives in order to define a single
+settings file that can be used with several back-end Prolog compilers.
+For example:
 
 ::
 

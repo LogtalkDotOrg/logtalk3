@@ -84,7 +84,8 @@ Prolog compiler supports cross-referencing tools, you may use them to
 help you make sure that all calls to predicates on other source
 files/objects are listed in the :ref:`directives_uses_2` directives. In
 alternative, compiling the resulting objects with the Logtalk
-``unknown_predicates`` and ``portability`` flags set to ``warning`` will
+:ref:`unknown_predicates <flag_unknown_predicates>` and
+:ref:`portability <flag_portability>` flags set to ``warning`` will
 help you identify calls to predicates defined on other converted source
 files and possible portability issues.
 
@@ -207,7 +208,8 @@ Assuming that this is the case, apply the following steps:
    if that is not the case, just keep the ``multifile/1`` directives and
    the clause heads as-is).
 #. Compile the resulting objects with the Logtalk
-   ``unknown_predicates``, and ``portability`` flags set to ``warning``
+   :ref:`unknown_predicates <flag_unknown_predicates>`, and
+   :ref:`portability <flag_portability>` flags set to ``warning``
    to help you locate possible issues and calls to proprietary Prolog
    built-in predicates and to predicates defined on other converted
    modules. In order to improve code portability, check the Logtalk
@@ -228,8 +230,8 @@ Compiling Prolog modules as objects
 
 An alternative to convert Prolog modules into objects is to just compile
 the Prolog source files using the ``logtalk_load/1-2`` and
-``logtalk_compile/1-2``
-predicates (set the Logtalk ``portability`` flag set to ``warning`` to
+``logtalk_compile/1-2`` predicates (set the Logtalk
+:ref:`portability <flag_portability>` flag set to ``warning`` to
 help you catch any unnoticed cross-module predicate calls). This allows
 you to reuse existing module code as objects. This has the advantage of
 requiring little if any code changes. There are, however, some
@@ -304,12 +306,12 @@ instead of:
 Another common issue is missing ``meta_predicate/1``, ``dynamic/1``,
 ``discontiguous/1``, and ``multifile/1`` predicate directives. Logtalk
 allows detection of most missing directives (by setting its
-``missing_directives`` flag to ``warning``).
+:ref:`missing_directives <flag_missing_directives>` flag to ``warning``).
 
 When compiling modules as objects, you probably don't need event support
-turned on. You may use the compiler flag ``events(deny)`` with the
-Logtalk compiling and loading built-in methods for a small performance
-gain for the compiled code.
+turned on. You may use the :ref:`events <flag_events>` compiler flag to
+``deny`` with the Logtalk compiling and loading built-in methods for a
+small performance gain for the compiled code.
 
 .. _migration_limitations:
 
@@ -325,7 +327,8 @@ directives by finding which predicates exported by the specified modules
 are reexported or imported into the module containing the directive.
 Finding the names of the imported predicates that are actually used is
 easy. First, comment out the ``use_module/1`` directives and compile the
-file (making sure that the compiler flag ``unknown_predicates`` is set
+file (making sure that the
+:ref:`unknown_predicates <flag_unknown_predicates>` compiler flag is set
 to ``warning``). Logtalk will print a warning with a list of predicates
 that are called but never defined. Second, use these list to replace the
 ``reexport/1`` and ``use_module/1`` directives by, respectively,
@@ -379,9 +382,9 @@ predicate:
 
 This Logtalk feature can be used to allow compilation of legacy Prolog
 code without the need of changing the sources. When used, is advisable
-to set the ``portability/1`` compiler flag to ``warning`` in order to
-more easily identify source files that are likely non-portable across
-Prolog compilers.
+to set the :ref:`portability <flag_portability>` compiler flag to
+``warning`` in order to more easily identify source files that are
+likely non-portable across Prolog compilers.
 
 A second example, where a proprietary Prolog directive is discarded
 after triggering a side effect:

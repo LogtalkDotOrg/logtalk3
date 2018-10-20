@@ -305,8 +305,8 @@ The following protocol properties are supported:
    being the begin line of the alias directive)
 
 Some of the properties such as line numbers are only available when the
-protocol is defined in a source file compiled with the ``source_data``
-flag turned on.
+protocol is defined in a source file compiled with the
+:ref:`source_data <flag_source_data>` flag turned on.
 
 .. _protocols_implementing:
 

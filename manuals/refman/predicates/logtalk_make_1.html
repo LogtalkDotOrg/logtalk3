@@ -216,8 +216,8 @@ between pairs or trios of objects when called with the target
 target <code class="docutils literal notranslate"><span class="pre">caches</span></code>.</p>
 <p>There are also three variants of the <code class="docutils literal notranslate"><span class="pre">all</span></code> target: <code class="docutils literal notranslate"><span class="pre">debug</span></code>,
 <code class="docutils literal notranslate"><span class="pre">normal</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimal</span></code>. These targets change the compilation mode
-(by changing the default value of the <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flags)
-and reload all files affected.</p>
+(by changing the default value of the <a class="reference internal" href="../../userman/programming.html#flag-debug"><span class="std std-ref">debug</span></a> and
+<a class="reference internal" href="../../userman/programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags) and reload all files affected.</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">all</span></code> target, only source files loaded using the
 <code class="docutils literal notranslate"><span class="pre">logtalk_load/1-2</span></code> predicates are reloaded. Non-modified files will
 also be reloaded when there is a change to the compilation mode (i.e.
@@ -228,8 +228,8 @@ compiler flags that may have changed since loading). When an included file
 is modified, this target reloads its main file (i.e. the file that contains
 the <a class="reference internal" href="../directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive).</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">check</span></code> or <code class="docutils literal notranslate"><span class="pre">circular</span></code> targets, be sure to compile
-your source files with the <code class="docutils literal notranslate"><span class="pre">source_date</span></code> flag turned on for complete
-and detailed reports.</p>
+your source files with the <a class="reference internal" href="../../userman/programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag
+turned on for complete and detailed reports.</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">check</span></code> target, predicates for messages sent to objects
 that implement the <a class="reference external" href="https://logtalk.org/library/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">forwarding</span></a> built-in protocol
 are not reported. While this usually avoids only false positives, it may

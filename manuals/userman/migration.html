@@ -253,7 +253,8 @@ Prolog compiler supports cross-referencing tools, you may use them to
 help you make sure that all calls to predicates on other source
 files/objects are listed in the <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directives. In
 alternative, compiling the resulting objects with the Logtalk
-<code class="docutils literal notranslate"><span class="pre">unknown_predicates</span></code> and <code class="docutils literal notranslate"><span class="pre">portability</span></code> flags set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> will
+<a class="reference internal" href="programming.html#flag-unknown-predicates"><span class="std std-ref">unknown_predicates</span></a> and
+<a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability</span></a> flags set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> will
 help you identify calls to predicates defined on other converted source
 files and possible portability issues.</p>
 <div class="section" id="prolog-multifile-predicates">
@@ -363,7 +364,8 @@ modules defining the multifile predicates are converted into objects;
 if that is not the case, just keep the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directives and
 the clause heads as-is).</li>
 <li>Compile the resulting objects with the Logtalk
-<code class="docutils literal notranslate"><span class="pre">unknown_predicates</span></code>, and <code class="docutils literal notranslate"><span class="pre">portability</span></code> flags set to <code class="docutils literal notranslate"><span class="pre">warning</span></code>
+<a class="reference internal" href="programming.html#flag-unknown-predicates"><span class="std std-ref">unknown_predicates</span></a>, and
+<a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability</span></a> flags set to <code class="docutils literal notranslate"><span class="pre">warning</span></code>
 to help you locate possible issues and calls to proprietary Prolog
 built-in predicates and to predicates defined on other converted
 modules. In order to improve code portability, check the Logtalk
@@ -381,8 +383,8 @@ changes to the file name extensions.</p>
 <span id="migration-compiling"></span><h2>Compiling Prolog modules as objects<a class="headerlink" href="#compiling-prolog-modules-as-objects" title="Permalink to this headline">¶</a></h2>
 <p>An alternative to convert Prolog modules into objects is to just compile
 the Prolog source files using the <code class="docutils literal notranslate"><span class="pre">logtalk_load/1-2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">logtalk_compile/1-2</span></code>
-predicates (set the Logtalk <code class="docutils literal notranslate"><span class="pre">portability</span></code> flag set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> to
+<code class="docutils literal notranslate"><span class="pre">logtalk_compile/1-2</span></code> predicates (set the Logtalk
+<a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability</span></a> flag set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> to
 help you catch any unnoticed cross-module predicate calls). This allows
 you to reuse existing module code as objects. This has the advantage of
 requiring little if any code changes. There are, however, some
@@ -449,11 +451,11 @@ directives. For better portability avoid this usage. For example, write:</p>
 <p>Another common issue is missing <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code>, <code class="docutils literal notranslate"><span class="pre">dynamic/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">discontiguous/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> predicate directives. Logtalk
 allows detection of most missing directives (by setting its
-<code class="docutils literal notranslate"><span class="pre">missing_directives</span></code> flag to <code class="docutils literal notranslate"><span class="pre">warning</span></code>).</p>
+<a class="reference internal" href="programming.html#flag-missing-directives"><span class="std std-ref">missing_directives</span></a> flag to <code class="docutils literal notranslate"><span class="pre">warning</span></code>).</p>
 <p>When compiling modules as objects, you probably don’t need event support
-turned on. You may use the compiler flag <code class="docutils literal notranslate"><span class="pre">events(deny)</span></code> with the
-Logtalk compiling and loading built-in methods for a small performance
-gain for the compiled code.</p>
+turned on. You may use the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> compiler flag to
+<code class="docutils literal notranslate"><span class="pre">deny</span></code> with the Logtalk compiling and loading built-in methods for a
+small performance gain for the compiled code.</p>
 </div>
 <div class="section" id="current-limitations-and-workarounds">
 <span id="migration-limitations"></span><h3>Current limitations and workarounds<a class="headerlink" href="#current-limitations-and-workarounds" title="Permalink to this headline">¶</a></h3>
@@ -466,7 +468,8 @@ directives by finding which predicates exported by the specified modules
 are reexported or imported into the module containing the directive.
 Finding the names of the imported predicates that are actually used is
 easy. First, comment out the <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives and compile the
-file (making sure that the compiler flag <code class="docutils literal notranslate"><span class="pre">unknown_predicates</span></code> is set
+file (making sure that the
+<a class="reference internal" href="programming.html#flag-unknown-predicates"><span class="std std-ref">unknown_predicates</span></a> compiler flag is set
 to <code class="docutils literal notranslate"><span class="pre">warning</span></code>). Logtalk will print a warning with a list of predicates
 that are called but never defined. Second, use these list to replace the
 <code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives by, respectively,
@@ -513,9 +516,9 @@ predicate:</p>
 </div>
 <p>This Logtalk feature can be used to allow compilation of legacy Prolog
 code without the need of changing the sources. When used, is advisable
-to set the <code class="docutils literal notranslate"><span class="pre">portability/1</span></code> compiler flag to <code class="docutils literal notranslate"><span class="pre">warning</span></code> in order to
-more easily identify source files that are likely non-portable across
-Prolog compilers.</p>
+to set the <a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability</span></a> compiler flag to
+<code class="docutils literal notranslate"><span class="pre">warning</span></code> in order to more easily identify source files that are
+likely non-portable across Prolog compilers.</p>
 <p>A second example, where a proprietary Prolog directive is discarded
 after triggering a side effect:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_term_expansion&#39;</span>(

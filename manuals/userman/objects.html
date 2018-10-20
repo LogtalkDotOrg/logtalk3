@@ -825,8 +825,8 @@ compilation time</dd>
 <p>When a predicate is called from an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive, the
 argument of the <code class="docutils literal notranslate"><span class="pre">caller/1</span></code> property is <code class="docutils literal notranslate"><span class="pre">:-/1</span></code>.</p>
 <p>Some of the properties such as line numbers are only available when the
-object is defined in a source file compiled with the <code class="docutils literal notranslate"><span class="pre">source_data</span></code>
-flag turned on.</p>
+object is defined in a source file compiled with the
+<a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag turned on.</p>
 <p>The properties that return the number of clauses (rules) report the
 clauses (rules) <em>textually defined in the object</em> for both multifile and
 non-multifile predicates. Thus, these numbers exclude clauses (rules)
@@ -843,8 +843,8 @@ that virtually contains all user predicate definitions not encapsulated in
 a Logtalk entity. These predicates are assumed to be implicitly declared
 public. Messages sent from this pseudo-object, which includes messages sent
 from the top-level interpreter, generate events when the default value of
-the <code class="docutils literal notranslate"><span class="pre">events</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Defining complementing categories
-for this pseudo-object is not supported.</p>
+the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Defining
+complementing categories for this pseudo-object is not supported.</p>
 <p>With some of the backend Prolog compilers that support a module system,
 it is possible to load (the) Logtalk (compiler/runtime) into a module
 other than the pseudo-module <em>user</em>. In this case, the Logtalk

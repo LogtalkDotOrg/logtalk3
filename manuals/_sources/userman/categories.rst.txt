@@ -528,8 +528,8 @@ The following category properties are supported:
    Total number of user-defined predicate rules defined in the category
 
 Some properties such as line numbers are only available when the
-category is defined in a source file compiled with the ``source_data``
-flag turned on.
+category is defined in a source file compiled with the
+:ref:`source_data <flag_source_data>` flag turned on.
 
 The properties that return the number of clauses (rules) report the
 clauses (rules) *textually defined in the object* for both multifile and

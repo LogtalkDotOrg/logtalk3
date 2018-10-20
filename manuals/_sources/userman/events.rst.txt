@@ -46,10 +46,10 @@ programming, we intend to achieve the following goals:
    information of the object's contents and relations.
 
 -  Provide a mechanism for easily defining method pre- and
-   post-conditions that can be toggled using the ``events`` compiler
-   flag. The pre- and post-conditions may be defined in the same object
-   containing the methods or distributed between several objects acting
-   as method monitors.
+   post-conditions that can be toggled using the :ref:`events <flag_events>`
+   compiler flag. The pre- and post-conditions may be defined in the same
+   object containing the methods or distributed between several objects
+   acting as method monitors.
 
 .. _events_definitions:
 
@@ -334,12 +334,16 @@ Assume that we also have the following object:
 
    :- end_object.
 
-After compiling and loading both objects (note that the object ``any``
-must be compiled with the flag ``events(allow)``), we can start tracing
+After compiling and loading both objects and setting the
+:ref:`events <flag_events>` to ``allow``) flag, we can start tracing
 every message sent to any object by calling the ``define_events/5``
 built-in predicate:
 
 .. code-block:: text
+
+   | ?- set_logtalk_flag(events, allow).
+
+   yes
 
    | ?- define_events(_, _, _, _, tracer).
 

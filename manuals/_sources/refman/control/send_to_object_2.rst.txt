@@ -47,10 +47,10 @@ control construct. This syntax construct supports backtracking over the
 
 The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. Depending on the value of the
-``optimize`` flag, these lookups are performed at compile time whenever
-sufficient information is available. When the lookups are performed at
-runtime, a caching mechanism is used to improve performance in
-subsequent messages.
+:ref:`optimize <flag_optimize>` flag, these lookups are performed at
+compile time whenever sufficient information is available. When the
+lookups are performed at runtime, a caching mechanism is used to improve
+performance in subsequent messages.
 
 Modes and number of proofs
 --------------------------

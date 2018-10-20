@@ -1293,7 +1293,7 @@ Reflection methods
 Logtalk provides a comprehensive set of built-in predicates and built-in
 methods for querying about entities and predicates. Some of the information,
 however, requires that the source files are compiled with the
-``source_data`` flag turned on.
+:ref:`source_data <flag_source_data>` flag turned on.
 
 The reflection API supports two different views on entities and their
 contents, which we may call the *transparent box view* and the *black
@@ -1639,7 +1639,7 @@ The following predicate properties are supported:
 
 Some properties are only available when the entities are defined in
 source files and when those source files are compiled with the
-``source_data`` flag turned on:
+:ref:`source_data <flag_source_data>` flag turned on:
 
 ``inline``
    The predicate definition is inlined

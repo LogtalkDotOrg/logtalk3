@@ -29,8 +29,8 @@ Description
    logtalk_load(File)
    logtalk_load(Files)
 
-Compiles to disk and then loads to memory a :term:`source file` or a list of source
-files using the current default compiler flag values. The Logtalk source
+Compiles to disk and then loads to memory a :term:`source file` or a list
+of source files using the default compiler flag values. The Logtalk source
 file name extension (by default, ``.lgt``) can be omitted. Source file
 paths can be absolute, relative to the current directory, or use library
 notation. This predicate can also be used to compile Prolog source files
