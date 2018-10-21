@@ -23,9 +23,6 @@ README
 [![Build Status](https://travis-ci.org/LogtalkDotOrg/logtalk3.svg?branch=master)](https://travis-ci.org/LogtalkDotOrg/logtalk3)
 [![Documentation Status](https://readthedocs.org/projects/logtalk3/badge/?version=latest)](https://logtalk3.readthedocs.io/en/latest/?badge=latest)
 [![Join the chat at https://gitter.im/LogtalkDotOrg/logtalk3](https://badges.gitter.im/LogtalkDotOrg/logtalk3.svg)](https://gitter.im/LogtalkDotOrg/logtalk3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![GitHub license](https://img.shields.io/github/license/LogtalkDotOrg/logtalk3.svg)](https://github.com/LogtalkDotOrg/logtalk3/blob/master/LICENSE.txt)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/LogtalkDotOrg/logtalk3.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FLogtalkDotOrg%2Flogtalk3)
-
 
 About
 -----
