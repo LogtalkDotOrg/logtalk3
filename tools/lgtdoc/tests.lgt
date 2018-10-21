@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2018/02/24,
+		date is 2018/10/21,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
@@ -97,8 +97,7 @@
 		rdirectory(Directory).
 
 	cleanup :-
-		this(This),
-		object_property(This, file(_,Directory)),
+		logtalk::expand_library_path(lgtunit, Directory),
 		atom_concat(Directory, 'xml_docs/', XMLDocsDirectory),
 		os::directory_files(XMLDocsDirectory, XMLFiles),
 		forall(

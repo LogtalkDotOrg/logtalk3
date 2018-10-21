@@ -1261,7 +1261,11 @@
 		once(kind_ref_doctype_xsd(index, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream),
 		write_xml_element(Stream, type, [], Type),
-		setof(PrimarySortKey-Key, SecondarySortKey^Entity^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity), SortedKeys),
+		setof(
+			PrimarySortKey-Key,
+			SecondarySortKey^Entity^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity),
+			SortedKeys
+		),
 		sorted_keys_to_keys(SortedKeys, Keys),
 		write_xml_open_tag(Stream, entries, []),
 		write_index_keys(Keys, Functor, Stream),
@@ -1292,7 +1296,11 @@
 	:- meta_predicate(write_index_key(*, 4, *)).
 
 	write_index_key(Key, Functor, Stream) :-
-		setof(SecondarySortKey-Entity, PrimarySortKey^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity), SortedEntities),
+		setof(
+			SecondarySortKey-Entity,
+			PrimarySortKey^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity),
+			SortedEntities
+		),
 		sorted_keys_to_keys(SortedEntities, Entities),
 		write_xml_open_tag(Stream, entry, []),
 		write_xml_cdata_element(Stream, key, [], Key),

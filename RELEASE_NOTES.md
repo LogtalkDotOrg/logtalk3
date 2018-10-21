@@ -83,6 +83,8 @@ Sphinx using the new `lgt2rst` script.
 * ADDED: Note on `tokei` (an open-source command-line program for counting
 blank lines, comment lines, and lines of source code) support for Logtalk.
 
+* FIXED: Cleanup goal for the `lgtdoc` tool tests.
+
 Examples
 --------
 
