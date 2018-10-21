@@ -23,18 +23,18 @@ Predicates
 
 Predicate directives and clauses can be encapsulated inside objects and
 categories. Protocols can only contain predicate directives. From the
-point-of-view of an object-oriented language, predicates allows both
-object state and object behavior to be represented. Mutable object state
-can be represented using dynamic object predicates.
+point-of-view of a traditional imperative object-oriented language,
+predicates allows both object state and object behavior to be represented.
+Mutable object state can be represented using dynamic object predicates.
 
 .. _predicates_reserved:
 
 Reserved predicate names
 ------------------------
 
-For performance reasons, a few predicates have a fixed interpretation.
-These predicates are declared in the built-protocols. They are:
-:ref:`methods_goal_expansion_2` and :ref:`methods_term_expansion_2`,
+For practical and performance reasons, a few predicates have a fixed
+interpretation. These predicates are declared in the built-protocols.
+They are: :ref:`methods_goal_expansion_2` and :ref:`methods_term_expansion_2`,
 declared in the :ref:`expanding <apis:expanding/0>` protocol;
 :ref:`methods_before_3` and :ref:`methods_after_3`, declared in the
 :ref:`monitoring <apis:monitoring/0>` protocol; and
@@ -117,8 +117,8 @@ example:
 
 The first directive argument describes a valid calling mode. The minimum
 information will be the instantiation mode of each argument. The first
-four possible values are described in [ISO95]_). The remaining two can be
-found in use in some Prolog systems.
+four possible values are described in [ISO95]_). The remaining two can
+also be found in use in some Prolog systems.
 
 ``+``
    Argument must be instantiated (but not necessarily ground).
@@ -134,7 +134,7 @@ found in use in some Prolog systems.
 ``--``
    Argument must be unbound.
 
-These four mode atoms are also declared as prefix operators by the
+These six mode atoms are also declared as prefix operators by the
 Logtalk compiler. This makes it possible to include type information
 for each argument like in the example above. Some possible type
 values are: ``event``, ``object``, ``category``, ``protocol``,
@@ -144,7 +144,7 @@ first four are Logtalk specific. The remaining are common Prolog types.
 We can also use our own types that can be either atoms or ground
 compound terms.
 
-The second directive argument documents the number of proofs (not
+The second directive argument documents the number of proofs (but not
 necessarily distinct solutions) for the specified mode. Note that
 different modes for the same predicate often have different determinism.
 The possible values are:
@@ -165,12 +165,13 @@ The possible values are:
    Predicate will throw an error (see below).
 
 Mode declarations can also be used to document that some call modes will
-throw an error. For instance, regarding the ``arg/3`` ISO Prolog
-built-in predicate, we may write:
+throw an error. For instance, regarding the ``arg/3`` and ``open/3`` ISO
+Prolog built-in predicates, we may write:
 
 ::
 
    :- mode(arg(-, -, +), error).
+   :- mode(open(@, @, --), one_or_error).
 
 Note that most predicates have more than one valid mode implying several
 mode directives. For example, to document the possible use modes of the
@@ -183,13 +184,14 @@ mode directives. For example, to document the possible use modes of the
 
 Some old Prolog compilers supported some sort of mode directives to
 improve performance. To the best of my knowledge, there is no modern
-Prolog compiler supporting this kind of directive. The current version
-of the Logtalk compiler just parses and then discards this directive
-(however, see the description on :ref:`synchronized
-predicates <threads_synchronized_predicates>` in the
-:ref:`multi-threading programming <threads_threads>` section). Nevertheless,
-the use of mode directives is a good starting point for documenting your
-predicates.
+Prolog compiler supporting this kind of directive for that purpodse.
+The current Logtalk version simply parses this directive for collecting
+its information for use in the reflection API (assuming the
+:ref:`source_data <flag_source_data>` is turned on). But see also see the
+description on :ref:`synchronized predicates <threads_synchronized_predicates>`
+in the :ref:`multi-threading programming <threads_threads>` section).
+In any case, the use of mode directives is a good starting point for
+documenting your predicates.
 
 .. _predicates_meta:
 
@@ -197,10 +199,11 @@ Meta-predicate directive
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Some predicates may have arguments that will be called as goals or
-closures that will be used for constructing goals. To ensure that these
-goals will be executed in the correct context (i.e. in the *calling
-context*, not in the meta-predicate *definition context*) we need to use
-the :ref:`directives_meta_predicate_1` directive. For example:
+interpreted as closures that will be used for constructing goals.
+To ensure that these goals will be executed in the correct context
+(i.e. in the *calling context*, not in the meta-predicate
+*definition context*) we need to use the
+:ref:`directives_meta_predicate_1` directive. For example:
 
 ::
 
@@ -694,10 +697,10 @@ something like:
    :- end_object.
 
 Note that, abstracting from the opening and closing object directives
-and the scope directives, what we have written is plain Prolog. Calls in
-a predicate definition body default to the local predicates, unless we
-use the message sending operators or the external call operator. This
-enables easy conversion from Prolog code to Logtalk objects: we just
+and the scope directives, what we have written is also valid Prolog code.
+Calls in a predicate definition body default to the local predicates,
+unless we use the message sending operators or the external call operator.
+This enables easy conversion from Prolog code to Logtalk objects: we just
 need to add the necessary encapsulation and scope directives to the old
 code.
 
@@ -751,11 +754,11 @@ Meta-predicates
 
 Meta-predicates may be defined inside objects (and categories) as any
 other predicate. A meta-predicate is declared using the
-``meta_predicate/1`` directive as described earlier on this section.
-When defining a meta-predicate, the arguments in the clause heads
-corresponding to the meta-arguments must be variables. All
-meta-arguments are called in the context of the entity calling the
-meta-predicate.
+:ref:`directives_meta_predicate_1` directive as described earlier on
+this section. When defining a meta-predicate, the arguments in the 
+clause heads corresponding to the meta-arguments must be variables.
+All meta-arguments are called in the context of the entity calling
+the meta-predicate.
 
 Some meta-predicates have meta-arguments which are not goals but
 closures. Logtalk supports the definition of meta-predicates that are

@@ -232,14 +232,14 @@
 <span id="predicates-predicates"></span><h1>Predicates<a class="headerlink" href="#predicates" title="Permalink to this headline">¶</a></h1>
 <p>Predicate directives and clauses can be encapsulated inside objects and
 categories. Protocols can only contain predicate directives. From the
-point-of-view of an object-oriented language, predicates allows both
-object state and object behavior to be represented. Mutable object state
-can be represented using dynamic object predicates.</p>
+point-of-view of a traditional imperative object-oriented language,
+predicates allows both object state and object behavior to be represented.
+Mutable object state can be represented using dynamic object predicates.</p>
 <div class="section" id="reserved-predicate-names">
 <span id="predicates-reserved"></span><h2>Reserved predicate names<a class="headerlink" href="#reserved-predicate-names" title="Permalink to this headline">¶</a></h2>
-<p>For performance reasons, a few predicates have a fixed interpretation.
-These predicates are declared in the built-protocols. They are:
-<a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a>,
+<p>For practical and performance reasons, a few predicates have a fixed
+interpretation. These predicates are declared in the built-protocols.
+They are: <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a>,
 declared in the <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">expanding</span></a> protocol;
 <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>, declared in the
 <a class="reference external" href="https://logtalk.org/library/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">monitoring</span></a> protocol; and
@@ -306,8 +306,8 @@ example:</p>
 </div>
 <p>The first directive argument describes a valid calling mode. The minimum
 information will be the instantiation mode of each argument. The first
-four possible values are described in <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>). The remaining two can be
-found in use in some Prolog systems.</p>
+four possible values are described in <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>). The remaining two can
+also be found in use in some Prolog systems.</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">+</span></code></dt>
 <dd>Argument must be instantiated (but not necessarily ground).</dd>
@@ -323,7 +323,7 @@ the call will unify the returned term with the given term).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">--</span></code></dt>
 <dd>Argument must be unbound.</dd>
 </dl>
-<p>These four mode atoms are also declared as prefix operators by the
+<p>These six mode atoms are also declared as prefix operators by the
 Logtalk compiler. This makes it possible to include type information
 for each argument like in the example above. Some possible type
 values are: <code class="docutils literal notranslate"><span class="pre">event</span></code>, <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">category</span></code>, <code class="docutils literal notranslate"><span class="pre">protocol</span></code>,
@@ -332,7 +332,7 @@ values are: <code class="docutils literal notranslate"><span class="pre">event</
 first four are Logtalk specific. The remaining are common Prolog types.
 We can also use our own types that can be either atoms or ground
 compound terms.</p>
-<p>The second directive argument documents the number of proofs (not
+<p>The second directive argument documents the number of proofs (but not
 necessarily distinct solutions) for the specified mode. Note that
 different modes for the same predicate often have different determinism.
 The possible values are:</p>
@@ -353,9 +353,10 @@ The possible values are:</p>
 <dd>Predicate will throw an error (see below).</dd>
 </dl>
 <p>Mode declarations can also be used to document that some call modes will
-throw an error. For instance, regarding the <code class="docutils literal notranslate"><span class="pre">arg/3</span></code> ISO Prolog
-built-in predicate, we may write:</p>
+throw an error. For instance, regarding the <code class="docutils literal notranslate"><span class="pre">arg/3</span></code> and <code class="docutils literal notranslate"><span class="pre">open/3</span></code> ISO
+Prolog built-in predicates, we may write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(<span class="k">arg</span>(<span class="o">-</span>, <span class="o">-</span>, <span class="o">+</span>), error).
+<span class="p">:- </span><span class="k">mode</span>(<span class="k">open</span>(<span class="o">@</span>, <span class="o">@</span>, <span class="o">--</span>), one_or_error).
 </pre></div>
 </div>
 <p>Note that most predicates have more than one valid mode implying several
@@ -367,21 +368,23 @@ mode directives. For example, to document the possible use modes of the
 </div>
 <p>Some old Prolog compilers supported some sort of mode directives to
 improve performance. To the best of my knowledge, there is no modern
-Prolog compiler supporting this kind of directive. The current version
-of the Logtalk compiler just parses and then discards this directive
-(however, see the description on <a class="reference internal" href="threads.html#threads-synchronized-predicates"><span class="std std-ref">synchronized
-predicates</span></a> in the
-<a class="reference internal" href="threads.html#threads-threads"><span class="std std-ref">multi-threading programming</span></a> section). Nevertheless,
-the use of mode directives is a good starting point for documenting your
-predicates.</p>
+Prolog compiler supporting this kind of directive for that purpodse.
+The current Logtalk version simply parses this directive for collecting
+its information for use in the reflection API (assuming the
+<a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> is turned on). But see also see the
+description on <a class="reference internal" href="threads.html#threads-synchronized-predicates"><span class="std std-ref">synchronized predicates</span></a>
+in the <a class="reference internal" href="threads.html#threads-threads"><span class="std std-ref">multi-threading programming</span></a> section).
+In any case, the use of mode directives is a good starting point for
+documenting your predicates.</p>
 </div>
 <div class="section" id="meta-predicate-directive">
 <span id="predicates-meta"></span><h3>Meta-predicate directive<a class="headerlink" href="#meta-predicate-directive" title="Permalink to this headline">¶</a></h3>
 <p>Some predicates may have arguments that will be called as goals or
-closures that will be used for constructing goals. To ensure that these
-goals will be executed in the correct context (i.e. in the <em>calling
-context</em>, not in the meta-predicate <em>definition context</em>) we need to use
-the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive. For example:</p>
+interpreted as closures that will be used for constructing goals.
+To ensure that these goals will be executed in the correct context
+(i.e. in the <em>calling context</em>, not in the meta-predicate
+<em>definition context</em>) we need to use the
+<a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(<span class="k">findall</span>(<span class="o">*</span>, <span class="m">0</span>, <span class="o">*</span>)).
 </pre></div>
 </div>
@@ -792,10 +795,10 @@ something like:</p>
 </pre></div>
 </div>
 <p>Note that, abstracting from the opening and closing object directives
-and the scope directives, what we have written is plain Prolog. Calls in
-a predicate definition body default to the local predicates, unless we
-use the message sending operators or the external call operator. This
-enables easy conversion from Prolog code to Logtalk objects: we just
+and the scope directives, what we have written is also valid Prolog code.
+Calls in a predicate definition body default to the local predicates,
+unless we use the message sending operators or the external call operator.
+This enables easy conversion from Prolog code to Logtalk objects: we just
 need to add the necessary encapsulation and scope directives to the old
 code.</p>
 </div>
@@ -840,11 +843,11 @@ and calling dynamic predicates from inside a category.</p>
 <span id="predicates-metadef"></span><h3>Meta-predicates<a class="headerlink" href="#meta-predicates" title="Permalink to this headline">¶</a></h3>
 <p>Meta-predicates may be defined inside objects (and categories) as any
 other predicate. A meta-predicate is declared using the
-<code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directive as described earlier on this section.
-When defining a meta-predicate, the arguments in the clause heads
-corresponding to the meta-arguments must be variables. All
-meta-arguments are called in the context of the entity calling the
-meta-predicate.</p>
+<a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive as described earlier on
+this section. When defining a meta-predicate, the arguments in the
+clause heads corresponding to the meta-arguments must be variables.
+All meta-arguments are called in the context of the entity calling
+the meta-predicate.</p>
 <p>Some meta-predicates have meta-arguments which are not goals but
 closures. Logtalk supports the definition of meta-predicates that are
 called with closures instead of goals as long as the definition uses the
