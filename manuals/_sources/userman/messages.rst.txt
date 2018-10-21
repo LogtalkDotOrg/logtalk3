@@ -62,9 +62,9 @@ Sending a message to an object
 Sending a message to an object is accomplished by using the
 :ref:`control_send_to_object_2` control construct:
 
-.. code-block:: text
+::
 
-   | ?- Object::Message.
+   ..., Object::Message, ...
 
 The message must match a public predicate declared for the receiving
 object. The message may also correspond to a protected or private
@@ -100,7 +100,7 @@ This is done in Logtalk through the
 
 ::
 
-   ::Message
+   ..., ::Message, ....
 
 The message must match either a public or protected predicate declared
 for the receiving object or a private predicate within the scope of the
@@ -148,7 +148,7 @@ Logtalk using the :ref:`control_call_super_1` control construct:
 
 ::
 
-   ^^Predicate
+   ..., ^^Predicate, ....
 
 Most of the time we will use this control construct by instantiating the
 pattern:

@@ -24,13 +24,13 @@ Objects
 The main goal of Logtalk objects is the encapsulation and reuse of
 predicates. Instead of a single database containing all your code,
 Logtalk objects provide separated namespaces or databases allowing the
-partitioning of code in more manageable parts. Logtalk does not aim to
-bring some sort of new dynamic state change concept to Logic Programming
-or Prolog.
+partitioning of code in more manageable parts. Logtalk is a *declarative
+programming language* and does not aim to bring some sort of new dynamic
+state change concept to Logic Programming or Prolog.
 
-In Logtalk, the only pre-defined objects are the built-in objects
-:ref:`user <apis:user/0>` and :ref:`logtalk <apis:logtalk/0>`, which
-are described at the end of this section.
+Logtalk, defines two built-in objects, :ref:`user <apis:user/0>` and
+:ref:`logtalk <apis:logtalk/0>`, which are described at the end of this
+section.
 
 .. _objects_kind:
 
@@ -38,8 +38,8 @@ Objects, prototypes, classes, and instances
 -------------------------------------------
 
 There are only three kinds of encapsulation entities in Logtalk:
-objects, protocols, and categories. Logtalk uses the term *object* in a
-broad sense. The terms *prototype*, *parent*, *class*, *subclass*,
+*objects*, *protocols*, and *categories*. Logtalk uses the term *object*
+in a broad sense. The terms *prototype*, *parent*, *class*, *subclass*,
 *superclass*, *metaclass*, and *instance* always designate an object.
 Different names are used to emphasize the *role* played by an object in
 a particular context. I.e. we use a term other than object when we want
@@ -322,7 +322,18 @@ variables introduce a concept of entity global variables, they allow
 object parameters to be added, rearranged, or removed without requiring
 any changes to the clauses that refer to them. Note that using parameter
 variables doesn't change the fact that entity parameters are logical
-variables.
+variables. For example:
+
+::
+
+   :- object(foo(_Arg_)).
+
+       ...
+
+       bar :-
+           ...,
+           baz(_Arg_),
+           ... .
 
 When storing a parametric object in its own source file, the convention
 is to name the file after the object, with the object arity appended.
@@ -340,7 +351,7 @@ represented as Prolog facts when sending a message:
 
 ::
 
-   {Proxy}::Message
+   ..., {Proxy}::Message, ...
 
 In this context, the proxy argument is proved as a plain Prolog goal. If
 successful, the message is sent to the corresponding parametric object.
@@ -361,6 +372,9 @@ built-in predicate with a non-instantiated variable:
 .. code-block:: text
 
    | ?- current_object(Object).
+   Object = logtalk ;
+   Object = user ;
+   ...
 
 This predicate can also be used to test if an object is defined by
 calling it with a valid object identifier (an atom or a compound term).
@@ -655,7 +669,7 @@ use the :ref:`predicates_complements_object_2` built-in predicate:
    | ?- complements_object(Category, Object).
 
 Note that more than one category may explicitly complement a single
-object.
+object and a single category can complement several objects.
 
 .. _objects_properties:
 

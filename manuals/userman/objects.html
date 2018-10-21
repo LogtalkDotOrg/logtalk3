@@ -211,17 +211,17 @@
 <p>The main goal of Logtalk objects is the encapsulation and reuse of
 predicates. Instead of a single database containing all your code,
 Logtalk objects provide separated namespaces or databases allowing the
-partitioning of code in more manageable parts. Logtalk does not aim to
-bring some sort of new dynamic state change concept to Logic Programming
-or Prolog.</p>
-<p>In Logtalk, the only pre-defined objects are the built-in objects
-<a class="reference external" href="https://logtalk.org/library/user_0.html#user-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">user</span></a> and <a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">logtalk</span></a>, which
-are described at the end of this section.</p>
+partitioning of code in more manageable parts. Logtalk is a <em>declarative
+programming language</em> and does not aim to bring some sort of new dynamic
+state change concept to Logic Programming or Prolog.</p>
+<p>Logtalk, defines two built-in objects, <a class="reference external" href="https://logtalk.org/library/user_0.html#user-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">user</span></a> and
+<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">logtalk</span></a>, which are described at the end of this
+section.</p>
 <div class="section" id="objects-prototypes-classes-and-instances">
 <span id="objects-kind"></span><h2>Objects, prototypes, classes, and instances<a class="headerlink" href="#objects-prototypes-classes-and-instances" title="Permalink to this headline">¶</a></h2>
 <p>There are only three kinds of encapsulation entities in Logtalk:
-objects, protocols, and categories. Logtalk uses the term <em>object</em> in a
-broad sense. The terms <em>prototype</em>, <em>parent</em>, <em>class</em>, <em>subclass</em>,
+<em>objects</em>, <em>protocols</em>, and <em>categories</em>. Logtalk uses the term <em>object</em>
+in a broad sense. The terms <em>prototype</em>, <em>parent</em>, <em>class</em>, <em>subclass</em>,
 <em>superclass</em>, <em>metaclass</em>, and <em>instance</em> always designate an object.
 Different names are used to emphasize the <em>role</em> played by an object in
 a particular context. I.e. we use a term other than object when we want
@@ -461,7 +461,17 @@ variables introduce a concept of entity global variables, they allow
 object parameters to be added, rearranged, or removed without requiring
 any changes to the clauses that refer to them. Note that using parameter
 variables doesn’t change the fact that entity parameters are logical
-variables.</p>
+variables. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Arg_</span>)).
+
+    ...
+
+    bar <span class="o">:-</span>
+        ...,
+        baz(<span class="nv">_Arg_</span>),
+        ... .
+</pre></div>
+</div>
 <p>When storing a parametric object in its own source file, the convention
 is to name the file after the object, with the object arity appended.
 For instance, when defining an object named <code class="docutils literal notranslate"><span class="pre">sort(Type)</span></code>, we may save
@@ -474,7 +484,7 @@ parametric object. Proxies may be stored on the database as Prolog facts
 and be used to represent different instantiations of a parametric object
 identifier. Logtalk provides a convenient notation for accessing proxies
 represented as Prolog facts when sending a message:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">{</span><span class="nv">Proxy</span><span class="k">}</span><span class="o">::</span><span class="nv">Message</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="k">{</span><span class="nv">Proxy</span><span class="k">}</span><span class="o">::</span><span class="nv">Message</span>, ...
 </pre></div>
 </div>
 <p>In this context, the proxy argument is proved as a plain Prolog goal. If
@@ -490,6 +500,9 @@ argument that unifies with several facts on backtracking.</p>
 <a class="reference internal" href="../refman/predicates/current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a>
 built-in predicate with a non-instantiated variable:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- current_object(Object).
+Object = logtalk ;
+Object = user ;
+...
 </pre></div>
 </div>
 <p>This predicate can also be used to test if an object is defined by
@@ -713,7 +726,7 @@ use the <a class="reference internal" href="../refman/predicates/complements_obj
 </pre></div>
 </div>
 <p>Note that more than one category may explicitly complement a single
-object.</p>
+object and a single category can complement several objects.</p>
 </div>
 <div class="section" id="object-properties">
 <span id="objects-properties"></span><h2>Object properties<a class="headerlink" href="#object-properties" title="Permalink to this headline">¶</a></h2>

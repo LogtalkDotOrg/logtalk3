@@ -226,7 +226,7 @@ in the Prolog ISO standard.</p>
 <span id="messages-sending"></span><h2>Sending a message to an object<a class="headerlink" href="#sending-a-message-to-an-object" title="Permalink to this headline">¶</a></h2>
 <p>Sending a message to an object is accomplished by using the
 <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- Object::Message.
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="nv">Object</span><span class="o">::</span><span class="nv">Message</span>, ...
 </pre></div>
 </div>
 <p>The message must match a public predicate declared for the receiving
@@ -254,7 +254,7 @@ control construct:</p>
 <em>self</em>, i.e., to the same object that has received the original message.
 This is done in Logtalk through the
 <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> control construct:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">::</span><span class="nv">Message</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="o">::</span><span class="nv">Message</span>, ....
 </pre></div>
 </div>
 <p>The message must match either a public or protected predicate declared
@@ -290,7 +290,7 @@ control construct.</p>
 definition in the new code. This functionality, introduced by the
 Smalltalk language through the <code class="docutils literal notranslate"><span class="pre">super</span></code> primitive, is available in
 Logtalk using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> control construct:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">^^</span><span class="nv">Predicate</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="o">^^</span><span class="nv">Predicate</span>, ....
 </pre></div>
 </div>
 <p>Most of the time we will use this control construct by instantiating the
