@@ -263,6 +263,9 @@ hierarchies (and freely exchange messages between all objects). We
 cannot however mix the two types of hierarchies by, e.g., specializing
 an object that extends another object in this current Logtalk version.
 
+Logtalk also supports public, protected, and private inheritance. See
+the :ref:`inheritance <inheritance_types>` section for details.
+
 .. _objects_parametric:
 
 Parametric objects

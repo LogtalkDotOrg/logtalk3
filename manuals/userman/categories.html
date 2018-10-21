@@ -202,7 +202,7 @@
             
   <div class="section" id="categories">
 <span id="categories-categories"></span><h1>Categories<a class="headerlink" href="#categories" title="Permalink to this headline">¶</a></h1>
-<p>Categories are fine-grained units of code reuse and can be regarded as a
+<p>Categories are <em>fine-grained units of code reuse</em> and can be regarded as a
 dual concept of protocols. Categories provide a way to encapsulate a set
 of related predicate declarations and definitions that do not represent
 a complete object and that only make sense when composed with other
@@ -266,8 +266,8 @@ breaking its functional cohesion (for example, when a modified version
 of a category is needed for importing on several unrelated objects). The
 preferred way of composing several categories is by importing them into
 an object. When a category overrides a predicate defined in an extended
-category, the overridden definition can still be used by using the
-<a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive.</p>
+category, the overridden definition can still be called by using the
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> control construct.</p>
 <p>Categories cannot inherit from objects. In addition, categories cannot
 define clauses for dynamic predicates. This restriction applies because
 a category can be imported by several objects and because we cannot use

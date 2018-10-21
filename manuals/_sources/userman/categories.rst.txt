@@ -21,7 +21,7 @@
 Categories
 ==========
 
-Categories are fine-grained units of code reuse and can be regarded as a
+Categories are *fine-grained units of code reuse* and can be regarded as a
 dual concept of protocols. Categories provide a way to encapsulate a set
 of related predicate declarations and definitions that do not represent
 a complete object and that only make sense when composed with other
@@ -97,8 +97,8 @@ breaking its functional cohesion (for example, when a modified version
 of a category is needed for importing on several unrelated objects). The
 preferred way of composing several categories is by importing them into
 an object. When a category overrides a predicate defined in an extended
-category, the overridden definition can still be used by using the
-:ref:`directives_alias_2` predicate directive.
+category, the overridden definition can still be called by using the
+:ref:`control_call_super_1` control construct.
 
 Categories cannot inherit from objects. In addition, categories cannot
 define clauses for dynamic predicates. This restriction applies because

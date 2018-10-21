@@ -56,7 +56,7 @@ compiler, the names of the intermediate Prolog files may include a
 directory hash).
 
 Protocol names must be atoms. Objects, categories and protocols share
-the same name space: we cannot have a protocol with the same name as an
+the same namespace: we cannot have a protocol with the same name as an
 object or a category.
 
 Protocol directives are textually encapsulated by using two Logtalk
