@@ -27,7 +27,9 @@ application and, in some cases, it might be the most appropriated
 solution. Modules may be used for legacy code or when a simple
 encapsulation mechanism is adequate. Logtalk objects may be used when
 more powerful encapsulation, abstraction, and reuse features are
-necessary. Logtalk supports the compilation of source files containing
+necessary.
+
+Logtalk supports the compilation of source files containing
 both plain Prolog and Prolog modules. This guide provides tips for
 integrating and migrating plain Prolog code and Prolog module
 code to Logtalk. Step-by-step instructions are provided for
@@ -35,7 +37,8 @@ encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
 inside Logtalk. An interesting application of the techniques described
 in this guide is a solution for running a Prolog application which uses
-modules on a Prolog compiler with no module system.
+modules on a Prolog compiler with no module system. The ``wrapper`` tool
+can be used to help in migrating Prolog code.
 
 .. _migration_hybrid:
 
@@ -74,16 +77,17 @@ beginning of the file and an ending object directive,
 :ref:`directives_end_object_0`, to end of
 the file. Choose an object name that reflects the purpose of source file
 code (this is a good opportunity for code refactoring if necessary).
-Second, add public predicate directives, :ref:`directives_public_1`, for the top-level
-predicates that are used directly by the user or called from other
-source files. Third, we need to be able to call from inside an object
+Second, add :ref:`directives_public_1` predicate directives for the
+top-level predicates that are used directly by the user or called from
+other source files. Third, we need to be able to call from inside an object
 predicates defined in other source files/objects. The easiest solution,
 which has the advantage of not requiring any changes to the predicate
 definitions, is to use the :ref:`directives_uses_2` directive. If your
 Prolog compiler supports cross-referencing tools, you may use them to
 help you make sure that all calls to predicates on other source
-files/objects are listed in the :ref:`directives_uses_2` directives. In
-alternative, compiling the resulting objects with the Logtalk
+files/objects are listed in the :ref:`directives_uses_2` directives.
+The Logtalk ``wrapper`` tool can also help in detecting cross predicate
+calls. Compiling the resulting objects with the Logtalk
 :ref:`unknown_predicates <flag_unknown_predicates>` and
 :ref:`portability <flag_portability>` flags set to ``warning`` will
 help you identify calls to predicates defined on other converted source
@@ -236,7 +240,8 @@ help you catch any unnoticed cross-module predicate calls). This allows
 you to reuse existing module code as objects. This has the advantage of
 requiring little if any code changes. There are, however, some
 limitations that you must be aware. These limitations are a consequence
-of the lack of standardization of Prolog module systems.
+of the lack of standardization of Prolog module systems and consequent
+proliferation of proprietary extensions.
 
 .. _migration_compatibility:
 
@@ -304,8 +309,8 @@ instead of:
    :- dynamic foo/1, bar/2.
 
 Another common issue is missing ``meta_predicate/1``, ``dynamic/1``,
-``discontiguous/1``, and ``multifile/1`` predicate directives. Logtalk
-allows detection of most missing directives (by setting its
+``discontiguous/1``, and ``multifile/1`` predicate directives. The Logtalk
+compiler supports detection of missing directives (by setting its
 :ref:`missing_directives <flag_missing_directives>` flag to ``warning``).
 
 When compiling modules as objects, you probably don't need event support

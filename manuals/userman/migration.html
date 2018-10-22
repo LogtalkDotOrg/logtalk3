@@ -204,7 +204,8 @@ application and, in some cases, it might be the most appropriated
 solution. Modules may be used for legacy code or when a simple
 encapsulation mechanism is adequate. Logtalk objects may be used when
 more powerful encapsulation, abstraction, and reuse features are
-necessary. Logtalk supports the compilation of source files containing
+necessary.</p>
+<p>Logtalk supports the compilation of source files containing
 both plain Prolog and Prolog modules. This guide provides tips for
 integrating and migrating plain Prolog code and Prolog module
 code to Logtalk. Step-by-step instructions are provided for
@@ -212,7 +213,8 @@ encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
 inside Logtalk. An interesting application of the techniques described
 in this guide is a solution for running a Prolog application which uses
-modules on a Prolog compiler with no module system.</p>
+modules on a Prolog compiler with no module system. The <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> tool
+can be used to help in migrating Prolog code.</p>
 <div class="section" id="source-files-with-both-prolog-code-and-logtalk-code">
 <span id="migration-hybrid"></span><h2>Source files with both Prolog code and Logtalk code<a class="headerlink" href="#source-files-with-both-prolog-code-and-logtalk-code" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk source files may contain plain Prolog code intermixed with
@@ -243,16 +245,17 @@ beginning of the file and an ending object directive,
 <a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>, to end of
 the file. Choose an object name that reflects the purpose of source file
 code (this is a good opportunity for code refactoring if necessary).
-Second, add public predicate directives, <a class="reference internal" href="../refman/directives/public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a>, for the top-level
-predicates that are used directly by the user or called from other
-source files. Third, we need to be able to call from inside an object
+Second, add <a class="reference internal" href="../refman/directives/public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a> predicate directives for the
+top-level predicates that are used directly by the user or called from
+other source files. Third, we need to be able to call from inside an object
 predicates defined in other source files/objects. The easiest solution,
 which has the advantage of not requiring any changes to the predicate
 definitions, is to use the <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive. If your
 Prolog compiler supports cross-referencing tools, you may use them to
 help you make sure that all calls to predicates on other source
-files/objects are listed in the <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directives. In
-alternative, compiling the resulting objects with the Logtalk
+files/objects are listed in the <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directives.
+The Logtalk <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> tool can also help in detecting cross predicate
+calls. Compiling the resulting objects with the Logtalk
 <a class="reference internal" href="programming.html#flag-unknown-predicates"><span class="std std-ref">unknown_predicates</span></a> and
 <a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability</span></a> flags set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> will
 help you identify calls to predicates defined on other converted source
@@ -389,7 +392,8 @@ help you catch any unnoticed cross-module predicate calls). This allows
 you to reuse existing module code as objects. This has the advantage of
 requiring little if any code changes. There are, however, some
 limitations that you must be aware. These limitations are a consequence
-of the lack of standardization of Prolog module systems.</p>
+of the lack of standardization of Prolog module systems and consequent
+proliferation of proprietary extensions.</p>
 <div class="section" id="supported-module-directives">
 <span id="migration-compatibility"></span><h3>Supported module directives<a class="headerlink" href="#supported-module-directives" title="Permalink to this headline">¶</a></h3>
 <p>Currently, Logtalk supports the following module directives:</p>
@@ -449,8 +453,8 @@ directives. For better portability avoid this usage. For example, write:</p>
 </pre></div>
 </div>
 <p>Another common issue is missing <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code>, <code class="docutils literal notranslate"><span class="pre">dynamic/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">discontiguous/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> predicate directives. Logtalk
-allows detection of most missing directives (by setting its
+<code class="docutils literal notranslate"><span class="pre">discontiguous/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> predicate directives. The Logtalk
+compiler supports detection of missing directives (by setting its
 <a class="reference internal" href="programming.html#flag-missing-directives"><span class="std std-ref">missing_directives</span></a> flag to <code class="docutils literal notranslate"><span class="pre">warning</span></code>).</p>
 <p>When compiling modules as objects, you probably don’t need event support
 turned on. You may use the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> compiler flag to
