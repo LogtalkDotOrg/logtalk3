@@ -104,7 +104,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#implementation-inheritance">Implementation inheritance</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#inheritance-implementation-prototype">Search order for prototype hierarchies</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#inheritance-implementation-class">Search order for class hierarchies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#inheritance-versus-predicate-redefinition">Inheritance versus predicate redefinition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redefining-inherited-predicate-definitions">Redefining inherited predicate definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specializing-inherited-predicate-definitions">Specializing inherited predicate definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#union-of-inherited-and-local-predicate-definitions">Union of inherited and local predicate definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selective-inheritance-of-predicate-definitions">Selective inheritance of predicate definitions</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#public-protected-and-private-inheritance">Public, protected, and private inheritance</a></li>
@@ -199,7 +202,8 @@
 <span id="inheritance-inheritance"></span><h1>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this headline">¶</a></h1>
 <p>The inheritance mechanisms found on object-oriented programming
 languages allow us the specialization of previously defined objects,
-avoiding the unnecessary repetition of code. In the context of logic
+avoiding the unnecessary repetition of code and allowing the definition
+of common predicates for sets of objects. In the context of logic
 programming, we can interpret inheritance as a form of theory extension:
 an object will virtually contain, besides its own predicates, all the
 predicates inherited from other objects that are not redefined by
@@ -208,11 +212,11 @@ itself.</p>
 declarations and predicate definitions, as explained below. The lookup
 procedures locate the entities holding the predicate declaration and the
 predicate definition using, respectively, the predicate indicator and
-the predicate template (constructed from the predicate indicator).</p>
-<p>The <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate
-directive may be used to defining alternative names for inherited
-predicates, for solving inheritance conflicts, and for giving access to
-all inherited definitions.</p>
+the predicate template (constructed from the predicate indicator).
+The <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive may be used to defining
+alternative names for inherited predicates, for solving inheritance
+conflicts, and for giving access to all inherited definitions (thus
+overriding the default lookup procedure).</p>
 <div class="section" id="protocol-inheritance">
 <span id="inheritance-protocol"></span><h2>Protocol inheritance<a class="headerlink" href="#protocol-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>Protocol inheritance refers to the inheritance of predicate declarations
@@ -226,7 +230,7 @@ protocols and a protocol may extend several protocols.</p>
 the implemented protocols (and the protocols that these may extend),
 third the imported categories (and the protocols that they may
 implement), and last the objects that the object extends. This search is
-performed in a depth-first way. When an object inherits two different
+performed in depth-first order. When an object inherits two different
 declarations for the same predicate, by default, only the first one will
 be considered.</p>
 </div>
@@ -237,7 +241,7 @@ classes. Following the classes declaration order, the search starts in
 the classes implemented protocols (and the protocols that these may
 extend), third the classes imported categories (and the protocols that
 they may implement), and last the superclasses of the object classes.
-This search is performed in a depth-first way. If the object inherits
+This search is performed in depth-first order. If the object inherits
 two different declarations for the same predicate, by default only the
 first one will be considered.</p>
 </div>
@@ -264,13 +268,12 @@ at the instance itself (that received the message) before proceeding, if
 no predicate definition is found there, to the instance classes and then
 to the class superclasses.</p>
 </div>
-<div class="section" id="inheritance-versus-predicate-redefinition">
-<span id="inheritance-implementation-redefinition"></span><h3>Inheritance versus predicate redefinition<a class="headerlink" href="#inheritance-versus-predicate-redefinition" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="redefining-inherited-predicate-definitions">
+<span id="inheritance-implementation-redefinition"></span><h3>Redefining inherited predicate definitions<a class="headerlink" href="#redefining-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
 <p>When we define a predicate that is already inherited from other object,
 the inherited definitions are hidden by the new definitions. This is
-called overriding inheritance: a local definition overrides any
-inherited ones. For example, assume that we have the following two
-objects:</p>
+called overriding inheritance: a local definition overrides any inherited
+definitions. For example, assume that we have the following two objects:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(root).
 
 <span class="p">    :- </span><span class="k">public</span>(bar<span class="o">/</span><span class="m">1</span>).
@@ -306,14 +309,16 @@ Foo = descendant
 yes
 </pre></div>
 </div>
-<p>However, we can explicitly program other behaviors. Let us see a few
-examples.</p>
-<div class="section" id="specialization-inheritance">
-<span id="inheritance-specialization"></span><h4>Specialization inheritance<a class="headerlink" href="#specialization-inheritance" title="Permalink to this headline">¶</a></h4>
+<p>However, we can explicitly code other behaviors. Some examples follow.</p>
+</div>
+<div class="section" id="specializing-inherited-predicate-definitions">
+<span id="inheritance-specialization"></span><h3>Specializing inherited predicate definitions<a class="headerlink" href="#specializing-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
 <p>Specialization of inherited definitions: the new definition uses the
-inherited definitions, adding to this new code. This is accomplished by
+inherited definitions, adding new code. This is accomplished by
 calling the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator
-in the new definition.</p>
+in the new definition. For example, assume a <code class="docutils literal notranslate"><span class="pre">init/0</span></code> predicate
+that must account for object specific initializations along the
+inheritance chain:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(root).
 
 <span class="p">    :- </span><span class="k">public</span>(init<span class="o">/</span><span class="m">0</span>).
@@ -343,14 +348,14 @@ yes
 </pre></div>
 </div>
 </div>
-<div class="section" id="union-inheritance">
-<span id="inheritance-union"></span><h4>Union inheritance<a class="headerlink" href="#union-inheritance" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="union-of-inherited-and-local-predicate-definitions">
+<span id="inheritance-union"></span><h3>Union of inherited and local predicate definitions<a class="headerlink" href="#union-of-inherited-and-local-predicate-definitions" title="Permalink to this headline">¶</a></h3>
 <p>Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
 mechanisms. This can be accomplished by writing a clause that just calls,
 using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator, the inherited definitions.
 The relative position of this clause among the other definition clauses
-sets the calling order for the local and inherited definitions.</p>
+sets the calling order for the local and inherited definitions. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(root).
 
 <span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
@@ -380,13 +385,14 @@ no
 </pre></div>
 </div>
 </div>
-<div class="section" id="selective-inheritance">
-<span id="inheritance-selective"></span><h4>Selective inheritance<a class="headerlink" href="#selective-inheritance" title="Permalink to this headline">¶</a></h4>
-<p>Hiding of some of the inherited definitions, or differential inheritance:
-this form of inheritance is normally used in the representation of
-exceptions to generic definitions. Here we will need to use the
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator to test and possibly reject some of
-the inherited definitions.</p>
+<div class="section" id="selective-inheritance-of-predicate-definitions">
+<span id="inheritance-selective"></span><h3>Selective inheritance of predicate definitions<a class="headerlink" href="#selective-inheritance-of-predicate-definitions" title="Permalink to this headline">¶</a></h3>
+<p>The selective inheritance of predicate definitions (also known as
+differential inheritance) is normally used in the representation
+of exceptions to inherited default definitions. We can use the
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator to test and possibly reject
+some of the inherited definitions. A common example is representing
+flightless birds:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bird).
 
 <span class="p">    :- </span><span class="k">public</span>(mode<span class="o">/</span><span class="m">1</span>).
@@ -418,7 +424,6 @@ no
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="public-protected-and-private-inheritance">
 <span id="inheritance-types"></span><h2>Public, protected, and private inheritance<a class="headerlink" href="#public-protected-and-private-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>To make all <a class="reference internal" href="../glossary.html#term-public-predicate"><span class="xref std std-term">public predicates</span></a>
@@ -426,7 +431,7 @@ declared via implemented protocols, imported categories, or ancestor
 objects <a class="reference internal" href="../glossary.html#term-protected-predicate"><span class="xref std std-term">protected predicates</span></a> or to make
 all public and protected predicates
 <a class="reference internal" href="../glossary.html#term-private-predicate"><span class="xref std std-term">private predicates</span></a> we prefix the entity’s
-name with the corresponding keyword. For instance:</p>
+name with the corresponding keyword. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">implements</span>(private<span class="o">::</span><span class="nv">Protocol</span>)).
 
@@ -497,12 +502,11 @@ best used as an analysis and project abstraction, rather than
 as an implementation technique <a class="reference internal" href="../bibliography.html#shan-et-al-93" id="id7">[Shan_et_al_93]</a>. Logtalk provides first-class
 support for software composition using <a class="reference internal" href="categories.html#categories-categories"><span class="std std-ref">Categories</span></a>.</p>
 <p>Nevertheless, Logtalk supports multi-inheritance by enabling an object
-to extend, instantiate, or specialize more than one object. The current
-Logtalk release provides a predicate directive,
-<a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a>, which may be used
-to solve some multi-inheritance conflicts. Lastly, it should be noted
-that the multi-inheritance support does not affect performance when we
-use single-inheritance.</p>
+to extend, instantiate, or specialize more than one object. The
+<a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive can always be used
+to solve multi-inheritance conflicts. It should also be noted that the
+multi-inheritance support does not affect performance when we use
+single-inheritance.</p>
 </div>
 </div>
 

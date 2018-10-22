@@ -23,7 +23,8 @@ Inheritance
 
 The inheritance mechanisms found on object-oriented programming
 languages allow us the specialization of previously defined objects,
-avoiding the unnecessary repetition of code. In the context of logic
+avoiding the unnecessary repetition of code and allowing the definition
+of common predicates for sets of objects. In the context of logic
 programming, we can interpret inheritance as a form of theory extension:
 an object will virtually contain, besides its own predicates, all the
 predicates inherited from other objects that are not redefined by
@@ -34,11 +35,10 @@ declarations and predicate definitions, as explained below. The lookup
 procedures locate the entities holding the predicate declaration and the
 predicate definition using, respectively, the predicate indicator and
 the predicate template (constructed from the predicate indicator).
-
-The :ref:`directives_alias_2` predicate
-directive may be used to defining alternative names for inherited
-predicates, for solving inheritance conflicts, and for giving access to
-all inherited definitions.
+The :ref:`directives_alias_2` predicate directive may be used to defining
+alternative names for inherited predicates, for solving inheritance
+conflicts, and for giving access to all inherited definitions (thus
+overriding the default lookup procedure).
 
 .. _inheritance_protocol:
 
@@ -60,7 +60,7 @@ The search order for predicate declarations is first the object, second
 the implemented protocols (and the protocols that these may extend),
 third the imported categories (and the protocols that they may
 implement), and last the objects that the object extends. This search is
-performed in a depth-first way. When an object inherits two different
+performed in depth-first order. When an object inherits two different
 declarations for the same predicate, by default, only the first one will
 be considered.
 
@@ -74,7 +74,7 @@ classes. Following the classes declaration order, the search starts in
 the classes implemented protocols (and the protocols that these may
 extend), third the classes imported categories (and the protocols that
 they may implement), and last the superclasses of the object classes.
-This search is performed in a depth-first way. If the object inherits
+This search is performed in depth-first order. If the object inherits
 two different declarations for the same predicate, by default only the
 first one will be considered.
 
@@ -112,14 +112,13 @@ to the class superclasses.
 
 .. _inheritance_implementation_redefinition:
 
-Inheritance versus predicate redefinition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Redefining inherited predicate definitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When we define a predicate that is already inherited from other object,
 the inherited definitions are hidden by the new definitions. This is
-called overriding inheritance: a local definition overrides any
-inherited ones. For example, assume that we have the following two
-objects:
+called overriding inheritance: a local definition overrides any inherited
+definitions. For example, assume that we have the following two objects:
 
 ::
 
@@ -159,18 +158,19 @@ behavior by trying the following queries:
    Foo = descendant
    yes
 
-However, we can explicitly program other behaviors. Let us see a few
-examples.
+However, we can explicitly code other behaviors. Some examples follow.
 
 .. _inheritance_specialization:
 
-Specialization inheritance
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Specializing inherited predicate definitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Specialization of inherited definitions: the new definition uses the
-inherited definitions, adding to this new code. This is accomplished by
+inherited definitions, adding new code. This is accomplished by
 calling the :ref:`control_call_super_1` operator
-in the new definition.
+in the new definition. For example, assume a ``init/0`` predicate
+that must account for object specific initializations along the
+inheritance chain:
 
 ::
 
@@ -203,15 +203,15 @@ in the new definition.
 
 .. _inheritance_union:
 
-Union inheritance
-^^^^^^^^^^^^^^^^^
+Union of inherited and local predicate definitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
 mechanisms. This can be accomplished by writing a clause that just calls,
 using the :ref:`control_call_super_1` operator, the inherited definitions.
 The relative position of this clause among the other definition clauses
-sets the calling order for the local and inherited definitions.
+sets the calling order for the local and inherited definitions. For example:
 
 ::
 
@@ -244,14 +244,15 @@ sets the calling order for the local and inherited definitions.
 
 .. _inheritance_selective:
 
-Selective inheritance
-^^^^^^^^^^^^^^^^^^^^^
+Selective inheritance of predicate definitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Hiding of some of the inherited definitions, or differential inheritance:
-this form of inheritance is normally used in the representation of
-exceptions to generic definitions. Here we will need to use the
-:ref:`control_call_super_1` operator to test and possibly reject some of
-the inherited definitions.
+The selective inheritance of predicate definitions (also known as
+differential inheritance) is normally used in the representation
+of exceptions to inherited default definitions. We can use the
+:ref:`control_call_super_1` operator to test and possibly reject
+some of the inherited definitions. A common example is representing
+flightless birds:
 
 ::
 
@@ -293,7 +294,7 @@ declared via implemented protocols, imported categories, or ancestor
 objects :term:`protected predicates <protected predicate>` or to make
 all public and protected predicates
 :term:`private predicates <private predicate>` we prefix the entity's
-name with the corresponding keyword. For instance:
+name with the corresponding keyword. For example:
 
 ::
 
@@ -377,9 +378,8 @@ as an implementation technique [Shan_et_al_93]_. Logtalk provides first-class
 support for software composition using :ref:`categories_categories`.
 
 Nevertheless, Logtalk supports multi-inheritance by enabling an object
-to extend, instantiate, or specialize more than one object. The current
-Logtalk release provides a predicate directive,
-:ref:`directives_alias_2`, which may be used
-to solve some multi-inheritance conflicts. Lastly, it should be noted
-that the multi-inheritance support does not affect performance when we
-use single-inheritance.
+to extend, instantiate, or specialize more than one object. The
+:ref:`directives_alias_2` predicate directive can always be used
+to solve multi-inheritance conflicts. It should also be noted that the
+multi-inheritance support does not affect performance when we use
+single-inheritance.
