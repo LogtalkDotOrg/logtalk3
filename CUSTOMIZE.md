@@ -84,8 +84,8 @@ by coping or renaming the `settings-sample.lgt` file in your Logtalk user
 folder to `settings.lgt` and editing it. The `settings.lgt` file may also be
 stored in your home directory. For application specific settings, save the
 `settings.lgt` file in the application root directory and start Logtalk from
-it. Settings in this file override the default values in the adapter files.
-Some default flag values that you may want to change include:
+that directory. Settings in this file override the default values in the
+adapter files. Some default flag values that you may want to change include:
 
 * `report`  
     for less verbose startup and compilation reports
@@ -117,10 +117,11 @@ containing a set of shell scripts, CSS and XSLT style-sheets, and DTD and
 XML Schema files for processing the XML documenting files that are generated
 from the source data collected when compiling source files. You may want to
 customize the CSS and XSLT files to modify the layout or style of the resulting
-Markdown/XML/PDF/(X)HTML files or to write new scripts and transformations to
-generate other formats. You may also edit the file `custom.ent` in order to
-specify XML entities for your personal data that can be used with the Logtalk
-documenting directives. For details, see the `tools/lgtdoc/NOTES.md` file.
+reStructuredText/Markdown/XML/PDF/(X)HTML files or to write new scripts and
+transformations to generate other formats. You may also edit the file
+`custom.ent` in order to specify XML entities for your personal data that
+can be used with the Logtalk documenting directives. For details, see the
+`tools/lgtdoc/NOTES.md` file.
 
 
 Adding Logtalk support to text editors and IDEs

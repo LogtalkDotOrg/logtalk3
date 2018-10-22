@@ -34,16 +34,15 @@ should add the basics of good object-oriented design.
 
 One of the advantages of a system like Logtalk is that it enable us to
 use the currently available object-oriented methodologies, tools, and
-metrics [Champaux92]_ in Prolog
-programming. That said, writing applications in Logtalk is similar to
-writing applications in Prolog: we define new predicates describing what
-is true about our domain objects, about our problem solution. We
-encapsulate our predicate directives and definitions inside new objects,
-categories and protocols that we create by hand with a text editor or by
-using the Logtalk built-in predicates. Some of the information collected
-during the analysis and design phases can be integrated in the objects,
-categories and protocols that we define by using the available entity
-and predicate documenting directives.
+metrics [Champaux92]_ in logic programming. That said, writing applications
+in Logtalk is similar to writing applications in Prolog: we define new
+predicates describing what is true about our domain objects, about our
+problem solution. We encapsulate our predicate directives and definitions
+inside new objects, categories, and protocols that we create by hand with
+a text editor or by using the Logtalk built-in predicates. Some of the
+information collected during the analysis and design phases can be
+integrated in the objects, categories and protocols that we define by
+using the available entity and predicate documenting directives.
 
 .. _programming_source_files:
 
@@ -66,9 +65,9 @@ example, we may define an object named ``vehicle`` and save it in a
 object we can save it on a ``sort_1.lgt`` source file that will be
 compiled to a ``sort_1_lgt.pl`` Prolog file. This name scheme helps
 avoid file name conflicts (remember that all Logtalk entities share the
-same name space). To further prevent file name conflicts, depending on
-the backend compiler, the names of the intermediate Prolog files may
-include a directory hash.
+same namespace). To further prevent file name conflicts, specially when
+embedding applications, and depending on the backend compiler, the names
+of the intermediate Prolog files may include a directory hash.
 
 Logtalk source files may contain Prolog code interleaved with Logtalk
 entity definitions. Plain Prolog code is usually copied as-is to the
@@ -90,18 +89,18 @@ adapter file of your Prolog compiler).
 
 Logtalk source files can include the text of other files by using the
 :ref:`directives_include_1` directive.
-Although there's also a standard Prolog ``include/1`` directive, any
-occurrences of this directive in a Logtalk source file is handled by the
-Logtalk compiler, not by the backend Prolog compiler.
+Although there is also a standard Prolog ``include/1`` directive, any
+occurrences of this directive in a Logtalk source file is handled by
+the Logtalk compiler, not by the backend Prolog compiler.
 
 .. _programming_portability:
 
 Portable applications
 ~~~~~~~~~~~~~~~~~~~~~
 
-Logtalk is compatible with almost all modern Prolog compilers. However,
-this does not necessarily imply that your Logtalk applications will have
-the same level of portability. If possible, you should only use in your
+Logtalk is compatible with most modern standards compliant Prolog compilers.
+However, this does not necessarily imply that your Logtalk applications will
+have the same level of portability. If possible, you should only use in your
 applications Logtalk built-in predicates and ISO Prolog specified
 built-in predicates and arithmetic functions. If you need to use
 built-in predicates (or built-in arithmetic functions) that may not be
@@ -122,7 +121,7 @@ Logtalk supports conditional compilation within source files using the
 :ref:`directives_if_1`, :ref:`directives_elif_1`,
 :ref:`directives_else_0`, and :ref:`directives_endif_0` directives. This
 support is similar to the support found in several Prolog systems such
-as ECLiPSe, SWI-Prolog, or YAP.
+as ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, XSB, and YAP.
 
 .. _programming_errors:
 
@@ -135,9 +134,9 @@ need to go back to the design stage.
 
 Try to avoid lengthy hierarchies. Composition is often a better choice
 over inheritance for defining new objects (Logtalk supports
-component-based programming through the use of categories). In addition,
-prototype-based hierarchies are semantically simpler than class-based
-hierarchies.
+component-based programming through the use of
+:ref:`categories <categories_categories>`). In addition, prototype-based
+hierarchies are semantically simpler than class-based hierarchies.
 
 Dynamic predicates or dynamic entities are sometimes needed, but we
 should always try to minimize the use of non-logical features such as
@@ -281,25 +280,18 @@ files in debug mode by using the queries:
    ...
 
 After debugging and fixing the bugs, you can reload the files in normal
-(or optimized) mode by turning the :ref:`debug <flag_debug>` flag off
-and calling the ``logtalk_make/0`` predicate again.
+(or optimized) mode by turning the :ref:`debug <flag_debug>` flag off and
+calling the ``logtalk_make/0`` predicate again. With most backend Prolog
+compilers, you can also use the ``{*}`` top-level shortcut.
 
 An extended version of this predicate, :ref:`predicates_logtalk_make_1`,
-accepts ``all``, ``clean``, ``check``, ``circular``, ``documentation``,
-and ``caches`` arguments for, respectively, reloading modified Logtalk
-source files, deleting any intermediate files generated by the
-compilation of Logtalk source files, checking for code issues, listing
-of circular dependencies, generating documentation, and deleting dynamic
-binding caches. With most Prolog backend compilers, you can use the
-shorthands ``{*}`` for ``logtalk_make(all)``, ``{!}`` for
-``logtalk_make(clean)``, ``{?}`` for ``logtalk_make(missing)``, ``{@}``
-for ``logtalk_make(circular)``, ``{#}`` for
-``logtalk_make(documentation)``, and ``{$}`` for
-``logtalk_make(caches)``. The ``logtalk_make(clean)`` goal can be
-specially useful before switching backend Prolog compilers as the
-generated intermediate files may not be compatible. The
-``logtalk_make(caches)`` goal is usually used when benchmarking compiler
-performance improvements.
+accepts multiple targets including ``all``, ``clean``, ``check``,
+``circular``, ``documentation``, and ``caches``. See the reference manual
+for a complete list of targets and top-level shortcuts. In particular, the
+``logtalk_make(clean)`` goal can be specially useful before switching
+backend Prolog compilers as the generated intermediate files may not be
+compatible. The ``logtalk_make(caches)`` goal is usually used when
+benchmarking compiler performance improvements.
 
 .. _programming_loaders:
 
@@ -954,6 +946,8 @@ The default compiler flag settings are appropriated for the
 applications. To minimize the generated code size, turn the
 :ref:`source_data <flag_source_data>` flag off. To optimize runtime
 performance, turn on the :ref:`optimize <flag_optimize>` flag.
+Your chosen backend Prolog compiler may also provide performance
+related flags; check its documentation.
 
 Pay special attention to file compilation/loading order. Whenever
 possible, compile/load your files taking into account file dependencies
