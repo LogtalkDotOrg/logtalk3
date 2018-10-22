@@ -21,9 +21,9 @@
 Error handling
 ==============
 
-All error handling is done in Logtalk by using the ISO defined
-``catch/3`` and ``throw/1`` predicates [ISO95]_.
-Errors thrown by Logtalk have the following format:
+All error handling is done in Logtalk by using the standard ``catch/3``
+and ``throw/1`` predicates [ISO95]_. Errors thrown by Logtalk have
+(when possible) the following format:
 
 ::
 
@@ -50,16 +50,18 @@ can be decoded using the
 Compiler warnings and errors
 ----------------------------
 
-The current Logtalk compiler uses the ``read_term/3`` ISO Prolog defined
-built-in predicate to read and compile a Logtalk source file. One
-consequence of this is that invalid Prolog terms or syntax errors may
-abort the compilation process with limited information given to the user
-(due to the inherent limitations of the ``read_term/3`` predicate).
+The current Logtalk compiler uses the standard ``read_term/3`` built-in
+predicate to read and compile a Logtalk source file. This improves the
+compatibility with backend Prolog compilers and their proprietary syntax
+extensions and standard compliance quirks. But one consequence of this
+design choice is that invalid Prolog terms or syntax errors may abort the
+compilation process with limited information given to the user (due to
+the inherent limitations of the ``read_term/3`` predicate).
 
-If all the terms in a source file are valid, then there is a set of
-errors or potential errors, described below, that the compiler will try
+Assuming that all the terms in a source file are valid, there is a set of
+errors and potential errors, described below, that the compiler will try
 to detect and report, depending on the used compiler flags (see the
-:ref:`programming_flags` section of this manual for details).
+:ref:`programming_flags` section of this manual on lint flags for details).
 
 .. _errors_unknown:
 
@@ -78,11 +80,11 @@ Singleton variables
 ~~~~~~~~~~~~~~~~~~~
 
 Singleton variables in a clause are often misspell variables and, as
-such, one of the most common errors when programming in Prolog. When the
-backend Prolog compiler complies with the Prolog ISO standard or at
-least supports the ISO predicate ``read_term/3`` called with the option
-``singletons(S)``, the Logtalk compiler warns about any singleton
-variable found while compiling a source file.
+such, one of the most common errors when programming in Prolog.
+Assuming that the backend Prolog compiler implementation of the
+``read_term/3`` predicate supports the standard ``singletons/1``
+option, the compiler warns about any singleton variable found while
+compiling a source file.
 
 .. _errors_prolog:
 
@@ -92,9 +94,9 @@ Redefinition of Prolog built-in predicates
 The Logtalk compiler will warn us of any redefinition of a Prolog
 built-in predicate inside an object or category. Sometimes the
 redefinition is intended. In other cases, the user may not be aware that
-the used backend Prolog compiler may already provide the predicate as a
-built-in or may want to ensure code portability among several Prolog
-compilers with different sets of built-in predicates.
+a particular backend Prolog compiler may already provide the predicate
+as a built-in predicate or may want to ensure code portability among
+several Prolog compilers with different sets of built-in predicates.
 
 .. _errors_redefinion_predicates:
 
@@ -102,8 +104,8 @@ Redefinition of Logtalk built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Similar to the redefinition of Prolog built-in predicates, the Logtalk
-compiler will warn us if we try to redefine a Logtalk built-in. The
-redefinition will probably be an error in almost all (if not all) cases.
+compiler will warn us if we try to redefine a Logtalk built-in. But the
+redefinition will probably be an error in most (if not all) cases.
 
 .. _errors_redefinion_methods:
 
@@ -130,7 +132,7 @@ Portability warnings
 ~~~~~~~~~~~~~~~~~~~~
 
 A warning will be reported if a predicate clause contains a call to a
-non-ISO specified built-in predicate or arithmetic function, Portability
+non-standard built-in predicate or arithmetic function, Portability
 warnings are also reported for non-standard flags or flag values. These
 warnings often cannot be avoided due to the limited scope of the ISO
 Prolog standard.
@@ -141,7 +143,9 @@ Deprecated elements
 ~~~~~~~~~~~~~~~~~~~
 
 A warning will be reported if a deprecated directive or control
-construct is used.
+construct is used. These warnings should be fixed as soon as possible
+as support for any deprecated features will likely be discontinued in
+future versions.
 
 .. _errors_missing_directives:
 
@@ -186,7 +190,7 @@ Suspicious calls
 A warning will be reported for calls that are syntactically correct but
 most likely a semantic error. An example is ``::/1`` calls in clauses
 that apparently are meant to implement recursive predicate definitions
-where the user intention is to call the local predicate.
+where the user intention is to call the local predicate definition.
 
 .. _errors_lambda_variables:
 
@@ -204,7 +208,7 @@ Redefinition of predicates declared in ``uses/2`` and ``use_module/2`` directive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A error will be reported for any attempt to define locally a predicate
-that is already listed in an :ref:`directives_uses_2` or in an
+that is already declared in an :ref:`directives_uses_2` or
 :ref:`directives_use_module_2` directive.
 
 .. _errors_others:

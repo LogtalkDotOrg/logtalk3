@@ -209,9 +209,9 @@
             
   <div class="section" id="error-handling">
 <span id="errors-errors"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
-<p>All error handling is done in Logtalk by using the ISO defined
-<code class="docutils literal notranslate"><span class="pre">catch/3</span></code> and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>.
-Errors thrown by Logtalk have the following format:</p>
+<p>All error handling is done in Logtalk by using the standard <code class="docutils literal notranslate"><span class="pre">catch/3</span></code>
+and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>. Errors thrown by Logtalk have
+(when possible) the following format:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>error(<span class="nv">Error</span>, logtalk(<span class="nv">Goal</span>, <span class="nv">ExecutionContext</span>))
 </pre></div>
 </div>
@@ -232,15 +232,17 @@ can be decoded using the
 <a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-execution-context-7" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">logtalk::execution_context/7</span></a> predicate.</p>
 <div class="section" id="compiler-warnings-and-errors">
 <h2>Compiler warnings and errors<a class="headerlink" href="#compiler-warnings-and-errors" title="Permalink to this headline">¶</a></h2>
-<p>The current Logtalk compiler uses the <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> ISO Prolog defined
-built-in predicate to read and compile a Logtalk source file. One
-consequence of this is that invalid Prolog terms or syntax errors may
-abort the compilation process with limited information given to the user
-(due to the inherent limitations of the <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate).</p>
-<p>If all the terms in a source file are valid, then there is a set of
-errors or potential errors, described below, that the compiler will try
+<p>The current Logtalk compiler uses the standard <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in
+predicate to read and compile a Logtalk source file. This improves the
+compatibility with backend Prolog compilers and their proprietary syntax
+extensions and standard compliance quirks. But one consequence of this
+design choice is that invalid Prolog terms or syntax errors may abort the
+compilation process with limited information given to the user (due to
+the inherent limitations of the <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate).</p>
+<p>Assuming that all the terms in a source file are valid, there is a set of
+errors and potential errors, described below, that the compiler will try
 to detect and report, depending on the used compiler flags (see the
-<a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">Compiler flags</span></a> section of this manual for details).</p>
+<a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">Compiler flags</span></a> section of this manual on lint flags for details).</p>
 <div class="section" id="unknown-entities">
 <span id="errors-unknown"></span><h3>Unknown entities<a class="headerlink" href="#unknown-entities" title="Permalink to this headline">¶</a></h3>
 <p>The Logtalk compiler warns about any referenced entity that is not
@@ -252,26 +254,26 @@ avoided when possible as it prevents some code optimizations such as
 <div class="section" id="singleton-variables">
 <span id="errors-singletons"></span><h3>Singleton variables<a class="headerlink" href="#singleton-variables" title="Permalink to this headline">¶</a></h3>
 <p>Singleton variables in a clause are often misspell variables and, as
-such, one of the most common errors when programming in Prolog. When the
-backend Prolog compiler complies with the Prolog ISO standard or at
-least supports the ISO predicate <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> called with the option
-<code class="docutils literal notranslate"><span class="pre">singletons(S)</span></code>, the Logtalk compiler warns about any singleton
-variable found while compiling a source file.</p>
+such, one of the most common errors when programming in Prolog.
+Assuming that the backend Prolog compiler implementation of the
+<code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate supports the standard <code class="docutils literal notranslate"><span class="pre">singletons/1</span></code>
+option, the compiler warns about any singleton variable found while
+compiling a source file.</p>
 </div>
 <div class="section" id="redefinition-of-prolog-built-in-predicates">
 <span id="errors-prolog"></span><h3>Redefinition of Prolog built-in predicates<a class="headerlink" href="#redefinition-of-prolog-built-in-predicates" title="Permalink to this headline">¶</a></h3>
 <p>The Logtalk compiler will warn us of any redefinition of a Prolog
 built-in predicate inside an object or category. Sometimes the
 redefinition is intended. In other cases, the user may not be aware that
-the used backend Prolog compiler may already provide the predicate as a
-built-in or may want to ensure code portability among several Prolog
-compilers with different sets of built-in predicates.</p>
+a particular backend Prolog compiler may already provide the predicate
+as a built-in predicate or may want to ensure code portability among
+several Prolog compilers with different sets of built-in predicates.</p>
 </div>
 <div class="section" id="redefinition-of-logtalk-built-in-predicates">
 <span id="errors-redefinion-predicates"></span><h3>Redefinition of Logtalk built-in predicates<a class="headerlink" href="#redefinition-of-logtalk-built-in-predicates" title="Permalink to this headline">¶</a></h3>
 <p>Similar to the redefinition of Prolog built-in predicates, the Logtalk
-compiler will warn us if we try to redefine a Logtalk built-in. The
-redefinition will probably be an error in almost all (if not all) cases.</p>
+compiler will warn us if we try to redefine a Logtalk built-in. But the
+redefinition will probably be an error in most (if not all) cases.</p>
 </div>
 <div class="section" id="redefinition-of-logtalk-built-in-methods">
 <span id="errors-redefinion-methods"></span><h3>Redefinition of Logtalk built-in methods<a class="headerlink" href="#redefinition-of-logtalk-built-in-methods" title="Permalink to this headline">¶</a></h3>
@@ -289,7 +291,7 @@ these calls are simple misspell errors.</p>
 <div class="section" id="portability-warnings">
 <span id="errors-portability"></span><h3>Portability warnings<a class="headerlink" href="#portability-warnings" title="Permalink to this headline">¶</a></h3>
 <p>A warning will be reported if a predicate clause contains a call to a
-non-ISO specified built-in predicate or arithmetic function, Portability
+non-standard built-in predicate or arithmetic function, Portability
 warnings are also reported for non-standard flags or flag values. These
 warnings often cannot be avoided due to the limited scope of the ISO
 Prolog standard.</p>
@@ -297,7 +299,9 @@ Prolog standard.</p>
 <div class="section" id="deprecated-elements">
 <span id="errors-deprecated"></span><h3>Deprecated elements<a class="headerlink" href="#deprecated-elements" title="Permalink to this headline">¶</a></h3>
 <p>A warning will be reported if a deprecated directive or control
-construct is used.</p>
+construct is used. These warnings should be fixed as soon as possible
+as support for any deprecated features will likely be discontinued in
+future versions.</p>
 </div>
 <div class="section" id="missing-directives">
 <span id="errors-missing-directives"></span><h3>Missing directives<a class="headerlink" href="#missing-directives" title="Permalink to this headline">¶</a></h3>
@@ -327,7 +331,7 @@ no matching clause.</p>
 <p>A warning will be reported for calls that are syntactically correct but
 most likely a semantic error. An example is <code class="docutils literal notranslate"><span class="pre">::/1</span></code> calls in clauses
 that apparently are meant to implement recursive predicate definitions
-where the user intention is to call the local predicate.</p>
+where the user intention is to call the local predicate definition.</p>
 </div>
 <div class="section" id="lambda-variables">
 <span id="errors-lambda-variables"></span><h3>Lambda variables<a class="headerlink" href="#lambda-variables" title="Permalink to this headline">¶</a></h3>
@@ -339,7 +343,7 @@ or <a class="reference internal" href="../glossary.html#term-lambda-parameter"><
 <div class="section" id="redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives">
 <span id="errors-predicate-redefinition"></span><h3>Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives<a class="headerlink" href="#redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives" title="Permalink to this headline">¶</a></h3>
 <p>A error will be reported for any attempt to define locally a predicate
-that is already listed in an <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or in an
+that is already declared in an <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or
 <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive.</p>
 </div>
 <div class="section" id="other-warnings-and-errors">
