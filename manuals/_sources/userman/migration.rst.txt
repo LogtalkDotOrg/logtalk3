@@ -18,7 +18,7 @@
 .. _migration_migration:
 
 ======================================
-Prolog Integration and Migration Guide
+Prolog integration and migration guide
 ======================================
 
 An application may include plain Prolog files, Prolog modules, and

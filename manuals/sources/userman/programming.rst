@@ -179,8 +179,8 @@ own source files.
 
 .. _programming_session:
 
-Running a Logtalk session
--------------------------
+Compiling and running applications
+----------------------------------
 
 We run Logtalk inside a normal Prolog session, after loading the
 necessary files. Logtalk extends but does not modify your Prolog
@@ -947,7 +947,7 @@ information requested by the user will still be printed.
 .. _programming_performance:
 
 Optimizing performance
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 The default compiler flag settings are appropriated for the
 **development** but not necessarily for the **deployment** of
@@ -982,8 +982,8 @@ whenever possible.
 
 .. _programming_debugging:
 
-Debugging Logtalk applications
-------------------------------
+Debugging applications
+----------------------
 
 The Logtalk distribution includes in its ``tools`` directory a
 command-line debugger, implemented as a Logtalk application. It can be

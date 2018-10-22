@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Prolog Integration and Migration Guide" href="migration.html" />
+    <link rel="next" title="Prolog integration and migration guide" href="migration.html" />
     <link rel="prev" title="Installing Logtalk" href="installing.html" /> 
 
   
@@ -110,7 +110,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#coding-style-guidelines">Coding style guidelines</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#running-a-logtalk-session">Running a Logtalk session</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compiling-and-running-applications">Compiling and running applications</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#starting-logtalk">Starting Logtalk</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compiling-and-loading-your-applications">Compiling and loading your applications</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#loader-utility-files">Loader utility files</a></li>
@@ -119,10 +119,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#compiler-flags">Compiler flags</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reloading-and-smart-compilation-of-source-files">Reloading and smart compilation of source files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-logtalk-for-batch-processing">Using Logtalk for batch processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimizing-performance">Optimizing performance</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#optimizing-performance">Optimizing performance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#debugging-logtalk-applications">Debugging Logtalk applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-applications">Debugging applications</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#compiling-source-files-and-entities-in-debug-mode">Compiling source files and entities in debug mode</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#logtalk-procedure-box-model">Logtalk Procedure Box model</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-spy-points">Defining spy points</a></li>
@@ -136,7 +136,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog Integration and Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog integration and migration guide</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -345,8 +345,8 @@ different contexts (such as library entities) are best defined in their
 own source files.</p>
 </div>
 </div>
-<div class="section" id="running-a-logtalk-session">
-<span id="programming-session"></span><h2>Running a Logtalk session<a class="headerlink" href="#running-a-logtalk-session" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="compiling-and-running-applications">
+<span id="programming-session"></span><h2>Compiling and running applications<a class="headerlink" href="#compiling-and-running-applications" title="Permalink to this headline">¶</a></h2>
 <p>We run Logtalk inside a normal Prolog session, after loading the
 necessary files. Logtalk extends but does not modify your Prolog
 compiler. We can freely mix Prolog queries with the sending of messages
@@ -980,9 +980,8 @@ the <a class="reference internal" href="#flag-report"><span class="std std-ref">
 that are normally printed. Note that error messages and messages providing
 information requested by the user will still be printed.</p>
 </div>
-</div>
 <div class="section" id="optimizing-performance">
-<span id="programming-performance"></span><h2>Optimizing performance<a class="headerlink" href="#optimizing-performance" title="Permalink to this headline">¶</a></h2>
+<span id="programming-performance"></span><h3>Optimizing performance<a class="headerlink" href="#optimizing-performance" title="Permalink to this headline">¶</a></h3>
 <p>The default compiler flag settings are appropriated for the
 <strong>development</strong> but not necessarily for the <strong>deployment</strong> of
 applications. To minimize the generated code size, turn the
@@ -1011,8 +1010,9 @@ define your predicates to take advantage of first-argument indexing. In
 the case of recursive predicates, define them as tail-recursive predicates
 whenever possible.</p>
 </div>
-<div class="section" id="debugging-logtalk-applications">
-<span id="programming-debugging"></span><h2>Debugging Logtalk applications<a class="headerlink" href="#debugging-logtalk-applications" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="debugging-applications">
+<span id="programming-debugging"></span><h2>Debugging applications<a class="headerlink" href="#debugging-applications" title="Permalink to this headline">¶</a></h2>
 <p>The Logtalk distribution includes in its <code class="docutils literal notranslate"><span class="pre">tools</span></code> directory a
 command-line debugger, implemented as a Logtalk application. It can be
 loaded by typing:</p>
@@ -1496,7 +1496,7 @@ yes
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="migration.html" class="btn btn-neutral float-right" title="Prolog Integration and Migration Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="migration.html" class="btn btn-neutral float-right" title="Prolog integration and migration guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="installing.html" class="btn btn-neutral" title="Installing Logtalk" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
