@@ -1017,21 +1017,21 @@ loaded by typing:</p>
 Prolog systems. There are some differences, however, between the usual
 implementation of Prolog debuggers and the current implementation of the
 Logtalk debugger that you should be aware. First, unlike some Prolog
-debuggers, the Logtalk debugger is not implemented as a
-meta-interpreter. This translates to a different, although similar, set
-of debugging features when compared with some of the more sophisticated
-Prolog debuggers. Second, debugging is only possible for entities
-compiled in debug mode. When compiling an entity in debug mode, Logtalk
-decorates clauses with source information to allow tracing of the goal
-execution. Third, implementation of spy points allows the user to
-specify the execution context for entering the debugger. This feature is
-a consequence of the encapsulation of predicates inside objects.</p>
+debuggers, the Logtalk debugger is not built-in but a regular Logtalk
+application using documented debugging hook predicates. This translates
+to a different, although similar, set of debugging features when compared
+with some of the more sophisticated Prolog debuggers. Second, debugging is
+only possible for entities compiled in debug mode. When compiling an entity
+in debug mode, Logtalk decorates clauses with source information to allow
+tracing of the goal execution. Third, implementation of spy points allows
+the user to specify the execution context for entering the debugger. This
+feature is a consequence of the encapsulation of predicates inside objects.</p>
 <div class="section" id="compiling-source-files-and-entities-in-debug-mode">
 <span id="programming-debug-mode"></span><h3>Compiling source files and entities in debug mode<a class="headerlink" href="#compiling-source-files-and-entities-in-debug-mode" title="Permalink to this headline">¶</a></h3>
 <p>Compilation of source files in debug mode is controlled by the
 <a class="reference internal" href="#flag-debug"><span class="std std-ref">debug</span></a> compiler flag. The default value for this flag,
-usually <code class="docutils literal notranslate"><span class="pre">off</span></code>, is defined in the adapter files. Its value may be changed
-at runtime by calling:</p>
+usually <code class="docutils literal notranslate"><span class="pre">off</span></code>, is defined in the adapter files. Its default value may
+be changed at runtime by calling:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(debug, on).
 </pre></div>
 </div>
@@ -1040,11 +1040,18 @@ mode, we may instead write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load([file1, file2, ...], [debug(on)]).
 </pre></div>
 </div>
+<p>The <a class="reference internal" href="../refman/predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make/1</span></a> built-in predicate can also be used to
+recompile all loaded files (that were loaded in normal mode) in debug mode:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_make(debug).
+</pre></div>
+</div>
+<p>With most backend Prolog compilers, the <code class="docutils literal notranslate"><span class="pre">{+d}</span></code> top-level shortcut can also
+be used.</p>
 <p>The <a class="reference internal" href="#flag-clean"><span class="std std-ref">clean</span></a> compiler flag should be turned on whenever
 the <a class="reference internal" href="#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on at runtime. This is necessary
 because debug code would not be generated for files previously compiled in
 normal mode if there are no changes to the source files.</p>
-<p>After loading the debugger, we may check or enumerate, by backtracking,
+<p>After loading the debugger, we may check (or enumerate by backtracking),
 all loaded entities compiled in debug mode as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::debugging(Entity).
 </pre></div>
@@ -1055,36 +1062,51 @@ all loaded entities compiled in debug mode as follows:</p>
 <div class="section" id="logtalk-procedure-box-model">
 <span id="programming-box-model"></span><h3>Logtalk Procedure Box model<a class="headerlink" href="#logtalk-procedure-box-model" title="Permalink to this headline">¶</a></h3>
 <p>Logtalk uses a <em>Procedure Box model</em> similar to those found on most
-Prolog compilers. The traditional Prolog procedure box model uses four
-ports (<em>call</em>, <em>exit</em>, <em>redo</em>, and <em>fail</em>) for describing control flow
-when a predicate clause is used during program execution:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">call</span></code></dt>
-<dd>predicate call</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">exit</span></code></dt>
-<dd>success of a predicate call</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">redo</span></code></dt>
-<dd>backtracking into a predicate</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">fail</span></code></dt>
-<dd>failure of a predicate call</dd>
-</dl>
+Prolog compilers. The traditional Prolog procedure box model defines
+four ports (<em>call</em>, <em>exit</em>, <em>redo</em>, and <em>fail</em>) for describing control
+flow when a predicate clause is used during program execution:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">call</span></code></div>
+<div class="line-block">
+<div class="line">predicate call</div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exit</span></code></div>
+<div class="line-block">
+<div class="line">success of a predicate call</div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">redo</span></code></div>
+<div class="line-block">
+<div class="line">backtracking into a predicate</div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fail</span></code></div>
+<div class="line-block">
+<div class="line">failure of a predicate call</div>
+</div>
+</div>
 <p>Logtalk, as found on some recent Prolog compilers, adds a port for
 dealing with exceptions thrown when calling a predicate:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">exception</span></code></dt>
-<dd>predicate call throws an exception</dd>
-</dl>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exception</span></code></div>
+<div class="line-block">
+<div class="line">predicate call throws an exception</div>
+</div>
+</div>
 <p>In addition to the ports described above, Logtalk adds two more ports,
-<em>fact</em> and <em>rule</em>, which show the result of the unification of a goal
-with, respectively, a fact and a rule head:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">fact</span></code></dt>
-<dd>unification success between a goal and a fact</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">rule</span></code></dt>
-<dd>unification success between a goal and a rule head</dd>
-</dl>
-<p>The user may define for which ports the debugger should pause for user
-interaction by specifying a list of leashed ports. For example:</p>
+<code class="docutils literal notranslate"><span class="pre">fact</span></code> and <code class="docutils literal notranslate"><span class="pre">rule</span></code>, which show the result of the unification of a
+goal with, respectively, a fact and a rule head:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fact</span></code></div>
+<div class="line-block">
+<div class="line">unification success between a goal and a fact</div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rule</span></code></div>
+<div class="line-block">
+<div class="line">unification success between a goal and a rule head</div>
+</div>
+</div>
+<p>Following Prolog tradition, the user may define for which ports the
+debugger should pause for user interaction by specifying a list of
+<em>leashed</em> ports. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::leash([call, exit, fail]).
 </pre></div>
 </div>
@@ -1095,18 +1117,28 @@ set of ports. For example:</p>
 </div>
 <p>The abbreviations defined in Logtalk are similar to those defined on
 some Prolog compilers:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">none</span></code></dt>
-<dd><code class="docutils literal notranslate"><span class="pre">[]</span></code></dd>
-<dt><code class="docutils literal notranslate"><span class="pre">loose</span></code></dt>
-<dd><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call]</span></code></dd>
-<dt><code class="docutils literal notranslate"><span class="pre">half</span></code></dt>
-<dd><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">redo]</span></code></dd>
-<dt><code class="docutils literal notranslate"><span class="pre">tight</span></code></dt>
-<dd><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">redo,</span> <span class="pre">fail,</span> <span class="pre">exception]</span></code></dd>
-<dt><code class="docutils literal notranslate"><span class="pre">full</span></code></dt>
-<dd><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">exit,</span> <span class="pre">redo,</span> <span class="pre">fail,</span> <span class="pre">exception]</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">none</span></code></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">[]</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">loose</span></code></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call]</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">half</span></code></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">redo]</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tight</span></code></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">redo,</span> <span class="pre">fail,</span> <span class="pre">exception]</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">full</span></code></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">exit,</span> <span class="pre">redo,</span> <span class="pre">fail,</span> <span class="pre">exception]</span></code></div>
+</div>
+</div>
 <p>By default, the debugger pauses at every port for user interaction.</p>
 </div>
 <div class="section" id="defining-spy-points">
@@ -1114,16 +1146,16 @@ some Prolog compilers:</p>
 <p>Logtalk spy points can be defined by simply stating which file line
 numbers or predicates should be spied, as in most Prolog debuggers, or
 by fully specifying the context for activating a spy point. In the case
-of line number spy points, the line number must correspond to the first
-line of an entity clause. To simplify the definition of line number spy
-points, these are specified using the entity identifier instead of the
-file name (as all entities share a single namespace, an entity can only
-be defined in a single file).</p>
+of line number spy points (also known as breakpoints), the line number
+must correspond to the first line of an entity clause. To simplify the
+definition of line number spy points, these are specified using the
+entity identifier instead of the file name (as all entities share a
+single namespace, an entity can only be defined in a single file).</p>
 <div class="section" id="defining-line-number-and-predicate-spy-points">
 <h4>Defining line number and predicate spy points<a class="headerlink" href="#defining-line-number-and-predicate-spy-points" title="Permalink to this headline">¶</a></h4>
-<p>Line number and predicate spy points are specified using the method
-<code class="docutils literal notranslate"><span class="pre">spy/1</span></code>. The argument can be either a pair entity identifier - line
-number (<code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code>) or a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>) or a
+<p>Line number and predicate spy points are specified using the debuuger
+<code class="docutils literal notranslate"><span class="pre">spy/1</span></code> predicate. The argument can be a breakpoint (expressed as a
+<code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), or a
 list of spy points. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(person-42).
 
@@ -1141,10 +1173,10 @@ Spy points set.
 yes
 </pre></div>
 </div>
-<p>Line numbers and predicate spy points can be removed by using the method
-<code class="docutils literal notranslate"><span class="pre">nospy/1</span></code>. The argument can be a spy point, a list of spy points, or a
-non-instantiated variable in which case all spy points will be removed.
-For example:</p>
+<p>Line numbers and predicate spy points can be removed by using the
+debugger <code class="docutils literal notranslate"><span class="pre">nospy/1</span></code> predicate. The argument can be a spy point, a
+list of spy points, or a non-instantiated variable in which case all
+spy points will be removed. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(_).
 
 All matching predicate spy points removed.
@@ -1154,7 +1186,7 @@ yes
 </div>
 <div class="section" id="defining-context-spy-points">
 <h4>Defining context spy points<a class="headerlink" href="#defining-context-spy-points" title="Permalink to this headline">¶</a></h4>
-<p>A context spy point is a term describing a message execution context and
+<p>A context spy point is a tuple describing a message execution context and
 a goal:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>(<span class="nv">Sender</span>, <span class="nv">This</span>, <span class="nv">Self</span>, <span class="nv">Goal</span>)
 </pre></div>
@@ -1180,8 +1212,8 @@ Spy point set.
 yes
 </pre></div>
 </div>
-<p>The method <code class="docutils literal notranslate"><span class="pre">nospy/4</span></code> may be used to remove all matching spy points.
-For example, the call:</p>
+<p>The debugger <code class="docutils literal notranslate"><span class="pre">nospy/4</span></code> predicate may be used to remove all matching
+spy points. For example, the call:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(_, _, foo, _).
 
 All matching context spy points removed.
@@ -1194,7 +1226,7 @@ atom <code class="docutils literal notranslate"><span class="pre">foo</span></co
 <div class="section" id="removing-all-spy-points">
 <h4>Removing all spy points<a class="headerlink" href="#removing-all-spy-points" title="Permalink to this headline">¶</a></h4>
 <p>We may remove all line number, predicate, and context spy points by
-using the <code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code> predicate:</p>
+using the debugger <code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code> predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospyall.
 
 All line number spy points removed.
@@ -1429,7 +1461,8 @@ turning on the flag. To avoid having to define
 <a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules for
 translating each debug message, Logtalk provides default tokenization
 for four <em>meta-messages</em> that cover the most common cases:</p>
-<dl class="docutils">
+<blockquote>
+<div><dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code></dt>
 <dd>By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code>
 predicate followed by a newline.</dd>
@@ -1446,10 +1479,10 @@ items are preceded by a dash and printed as passed to the
 indented list items, one per line. The items are preceded by a dash
 and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</dd>
 </dl>
+</div></blockquote>
 <p>These print messages goals can always be combined with hooks as
 described in the previous section to remove them in production ready
-code.</p>
-<p>Some simple examples of using these meta-messages:</p>
+code. Some simple examples of using these meta-messages:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::print_message(debug, core, @&#39;Phase 1 completed&#39;).
 yes
 

@@ -991,15 +991,15 @@ This tool implements debugging features similar to those found on most
 Prolog systems. There are some differences, however, between the usual
 implementation of Prolog debuggers and the current implementation of the
 Logtalk debugger that you should be aware. First, unlike some Prolog
-debuggers, the Logtalk debugger is not implemented as a
-meta-interpreter. This translates to a different, although similar, set
-of debugging features when compared with some of the more sophisticated
-Prolog debuggers. Second, debugging is only possible for entities
-compiled in debug mode. When compiling an entity in debug mode, Logtalk
-decorates clauses with source information to allow tracing of the goal
-execution. Third, implementation of spy points allows the user to
-specify the execution context for entering the debugger. This feature is
-a consequence of the encapsulation of predicates inside objects.
+debuggers, the Logtalk debugger is not built-in but a regular Logtalk
+application using documented debugging hook predicates. This translates
+to a different, although similar, set of debugging features when compared
+with some of the more sophisticated Prolog debuggers. Second, debugging is
+only possible for entities compiled in debug mode. When compiling an entity
+in debug mode, Logtalk decorates clauses with source information to allow
+tracing of the goal execution. Third, implementation of spy points allows
+the user to specify the execution context for entering the debugger. This
+feature is a consequence of the encapsulation of predicates inside objects.
 
 .. _programming_debug_mode:
 
@@ -1008,8 +1008,8 @@ Compiling source files and entities in debug mode
 
 Compilation of source files in debug mode is controlled by the
 :ref:`debug <flag_debug>` compiler flag. The default value for this flag,
-usually ``off``, is defined in the adapter files. Its value may be changed
-at runtime by calling:
+usually ``off``, is defined in the adapter files. Its default value may
+be changed at runtime by calling:
 
 .. code-block:: text
 
@@ -1022,12 +1022,22 @@ mode, we may instead write:
 
    | ?- logtalk_load([file1, file2, ...], [debug(on)]).
 
+The :ref:`predicates_logtalk_make_1` built-in predicate can also be used to
+recompile all loaded files (that were loaded in normal mode) in debug mode:
+
+.. code-block:: text
+
+   | ?- logtalk_make(debug).
+
+With most backend Prolog compilers, the ``{+d}`` top-level shortcut can also
+be used.
+
 The :ref:`clean <flag_clean>` compiler flag should be turned on whenever
 the :ref:`debug <flag_debug>` flag is turned on at runtime. This is necessary
 because debug code would not be generated for files previously compiled in
 normal mode if there are no changes to the source files.
 
-After loading the debugger, we may check or enumerate, by backtracking,
+After loading the debugger, we may check (or enumerate by backtracking),
 all loaded entities compiled in debug mode as follows:
 
 .. code-block:: text
@@ -1043,36 +1053,37 @@ Logtalk Procedure Box model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Logtalk uses a *Procedure Box model* similar to those found on most
-Prolog compilers. The traditional Prolog procedure box model uses four
-ports (*call*, *exit*, *redo*, and *fail*) for describing control flow
-when a predicate clause is used during program execution:
+Prolog compilers. The traditional Prolog procedure box model defines
+four ports (*call*, *exit*, *redo*, and *fail*) for describing control
+flow when a predicate clause is used during program execution:
 
-``call``
-   predicate call
-``exit``
-   success of a predicate call
-``redo``
-   backtracking into a predicate
-``fail``
-   failure of a predicate call
+| ``call``
+|    predicate call
+| ``exit``
+|    success of a predicate call
+| ``redo``
+|    backtracking into a predicate
+| ``fail``
+|    failure of a predicate call
 
 Logtalk, as found on some recent Prolog compilers, adds a port for
 dealing with exceptions thrown when calling a predicate:
 
-``exception``
-   predicate call throws an exception
+| ``exception``
+|    predicate call throws an exception
 
 In addition to the ports described above, Logtalk adds two more ports,
-*fact* and *rule*, which show the result of the unification of a goal
-with, respectively, a fact and a rule head:
+``fact`` and ``rule``, which show the result of the unification of a
+goal with, respectively, a fact and a rule head:
 
-``fact``
-   unification success between a goal and a fact
-``rule``
-   unification success between a goal and a rule head
+| ``fact``
+|    unification success between a goal and a fact
+| ``rule``
+|    unification success between a goal and a rule head
 
-The user may define for which ports the debugger should pause for user
-interaction by specifying a list of leashed ports. For example:
+Following Prolog tradition, the user may define for which ports the
+debugger should pause for user interaction by specifying a list of
+*leashed* ports. For example:
 
 .. code-block:: text
 
@@ -1088,16 +1099,16 @@ set of ports. For example:
 The abbreviations defined in Logtalk are similar to those defined on
 some Prolog compilers:
 
-``none``
-   ``[]``
-``loose``
-   ``[fact, rule, call]``
-``half``
-   ``[fact, rule, call, redo]``
-``tight``
-   ``[fact, rule, call, redo, fail, exception]``
-``full``
-   ``[fact, rule, call, exit, redo, fail, exception]``
+| ``none``
+|    ``[]``
+| ``loose``
+|    ``[fact, rule, call]``
+| ``half``
+|    ``[fact, rule, call, redo]``
+| ``tight``
+|    ``[fact, rule, call, redo, fail, exception]``
+| ``full``
+|    ``[fact, rule, call, exit, redo, fail, exception]``
 
 By default, the debugger pauses at every port for user interaction.
 
@@ -1107,18 +1118,18 @@ Defining spy points
 Logtalk spy points can be defined by simply stating which file line
 numbers or predicates should be spied, as in most Prolog debuggers, or
 by fully specifying the context for activating a spy point. In the case
-of line number spy points, the line number must correspond to the first
-line of an entity clause. To simplify the definition of line number spy
-points, these are specified using the entity identifier instead of the
-file name (as all entities share a single namespace, an entity can only
-be defined in a single file).
+of line number spy points (also known as breakpoints), the line number
+must correspond to the first line of an entity clause. To simplify the
+definition of line number spy points, these are specified using the
+entity identifier instead of the file name (as all entities share a
+single namespace, an entity can only be defined in a single file).
 
 Defining line number and predicate spy points
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Line number and predicate spy points are specified using the method
-``spy/1``. The argument can be either a pair entity identifier - line
-number (``Entity-Line``) or a predicate indicator (``Name/Arity``) or a
+Line number and predicate spy points are specified using the debuuger
+``spy/1`` predicate. The argument can be a breakpoint (expressed as a
+``Entity-Line`` pair), a predicate indicator (``Name/Arity``), or a
 list of spy points. For example:
 
 .. code-block:: text
@@ -1138,10 +1149,10 @@ list of spy points. For example:
    Spy points set.
    yes
 
-Line numbers and predicate spy points can be removed by using the method
-``nospy/1``. The argument can be a spy point, a list of spy points, or a
-non-instantiated variable in which case all spy points will be removed.
-For example:
+Line numbers and predicate spy points can be removed by using the
+debugger ``nospy/1`` predicate. The argument can be a spy point, a
+list of spy points, or a non-instantiated variable in which case all
+spy points will be removed. For example:
 
 .. code-block:: text
 
@@ -1153,7 +1164,7 @@ For example:
 Defining context spy points
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A context spy point is a term describing a message execution context and
+A context spy point is a tuple describing a message execution context and
 a goal:
 
 ::
@@ -1185,8 +1196,8 @@ the condition:
    Spy point set.
    yes
 
-The method ``nospy/4`` may be used to remove all matching spy points.
-For example, the call:
+The debugger ``nospy/4`` predicate may be used to remove all matching
+spy points. For example, the call:
 
 .. code-block:: text
 
@@ -1202,7 +1213,7 @@ Removing all spy points
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 We may remove all line number, predicate, and context spy points by
-using the ``nospyall/0`` predicate:
+using the debugger ``nospyall/0`` predicate:
 
 .. code-block:: text
 
@@ -1480,27 +1491,25 @@ turning on the flag. To avoid having to define
 translating each debug message, Logtalk provides default tokenization
 for four *meta-messages* that cover the most common cases:
 
-``@Message``
-   By default, the message is printed as passed to the ``write/1``
-   predicate followed by a newline.
-``Key-Value``
-   By default, the message is printed as ``Key: Value`` followed by a
-   newline. The value is printed as passed to the ``writeq/1``
-   predicate.
-``List``
-   By default, the list items are printed indented one per line. The
-   items are preceded by a dash and printed as passed to the
-   ``writeq/1`` predicate.
-``Title::List``
-   By default, the title is printed followed by a newline and the
-   indented list items, one per line. The items are preceded by a dash
-   and printed as passed to the ``writeq/1`` predicate.
+ ``@Message``
+    By default, the message is printed as passed to the ``write/1``
+    predicate followed by a newline.
+ ``Key-Value``
+    By default, the message is printed as ``Key: Value`` followed by a
+    newline. The value is printed as passed to the ``writeq/1``
+    predicate.
+ ``List``
+    By default, the list items are printed indented one per line. The
+    items are preceded by a dash and printed as passed to the
+    ``writeq/1`` predicate.
+ ``Title::List``
+    By default, the title is printed followed by a newline and the
+    indented list items, one per line. The items are preceded by a dash
+    and printed as passed to the ``writeq/1`` predicate.
 
 These print messages goals can always be combined with hooks as
 described in the previous section to remove them in production ready
-code.
-
-Some simple examples of using these meta-messages:
+code. Some simple examples of using these meta-messages:
 
 .. code-block:: text
 
