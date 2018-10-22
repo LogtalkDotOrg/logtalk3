@@ -191,24 +191,24 @@
             
   <div class="section" id="documenting-applications">
 <span id="documenting-documenting"></span><h1>Documenting applications<a class="headerlink" href="#documenting-applications" title="Permalink to this headline">¶</a></h1>
-<p>By setting the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> compiler flag, Logtalk
-saves all relevant documenting information collected when compiling a source
-file. The provided <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool can access this information by using
-Logtalk’s reflection support and generate a documentation file for each
-compiled entity (object, protocol, or category) in
-<a class="reference external" href="http://www.w3.org/XML/">XML</a> format. Contents of the XML file
-include the entity name, type, and compilation mode (static or dynamic),
-the entity relations with other entities, and a description of any
+<p>Assuming that the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> is turned on, the
+compiler saves all relevant documenting information collected when compiling
+a source file. The provided <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool can access this information by
+using the reflection support and generate a documentation file for each
+compiled entity (object, protocol, or category) in XML format. Contents of
+the XML file include the entity name, type, and compilation mode (static or
+dynamic), the entity relations with other entities, and a description of any
 declared predicates (name, compilation mode, scope, …).</p>
 <p>The XML documentation files can be enriched with arbitrary user-defined
 information, either about an entity or about its predicates, by using
-the two directives described below.</p>
+the two directives described next.</p>
 <div class="section" id="documenting-directives">
 <span id="id1"></span><h2>Documenting directives<a class="headerlink" href="#documenting-directives" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
-directives complement other Logtalk directives that also provide
-important documentation information like <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a>.</p>
+directives complement other directives that also provide important
+documentation information such as the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a>
+directive.</p>
 <div class="section" id="entity-directives">
 <span id="documenting-entity"></span><h3>Entity directives<a class="headerlink" href="#entity-directives" title="Permalink to this headline">¶</a></h3>
 <p>Arbitrary user-defined entity information can be represented using the
@@ -222,10 +222,10 @@ important documentation information like <a class="reference internal" href="../
 </div>
 <p>In this pattern, keys should be atoms and values should be ground terms.
 The following keys are predefined and may be processed specially by
-Logtalk:</p>
+Logtalk tools:</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt>
-<dd>Comment describing entity purpose (an atom).</dd>
+<dd>Comment describing the entity purpose (an atom).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt>
 <dd>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
 <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>
@@ -233,10 +233,11 @@ file).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt>
 <dd>Version number (a number).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">date</span></code></dt>
-<dd>Date of last modification (formatted as Year/Month/Day).</dd>
+<dd>Date of last modification (formatted as <code class="docutils literal notranslate"><span class="pre">Year/Month/Day</span></code> where
+<code class="docutils literal notranslate"><span class="pre">Year</span></code>, <code class="docutils literal notranslate"><span class="pre">Month</span></code>, and <code class="docutils literal notranslate"><span class="pre">Day</span></code> are integers).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code></dt>
 <dd>Parameter names and descriptions for parametric entities (a list of
-key-values where both keys and values are atoms).</dd>
+<em>Name-Description</em> pairs where both names and descriptions are atoms).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">parnames</span></code></dt>
 <dd>Parameter names for parametric entities (a list of atoms; a simpler
 version of the previous key, used when parameter descriptions are
@@ -250,16 +251,17 @@ defined in the <code class="docutils literal notranslate"><span class="pre">cust
 name (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the
 name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt>
-<dd>List of general remarks about the entity using the format <em>Topic</em>
-<code class="docutils literal notranslate"><span class="pre">-</span></code> <em>Text</em>. Both the topic and the text must be atoms.</dd>
+<dd>List of general remarks about the entity using <em>Topic-Text</em> pairs
+where both the topic and the text must be atoms.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">see_also</span></code></dt>
-<dd>List of related entities.</dd>
+<dd>List of related entities (using the entity indentifiers, which can
+be atoms or compound terms).</dd>
 </dl>
 <p>For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>([
     version <span class="k">is</span> <span class="m">2.1</span>,
     author <span class="k">is</span> <span class="s">&#39;Paulo Moura&#39;</span>,
-    date <span class="k">is</span> <span class="m">2000</span><span class="o">/</span><span class="m">4</span><span class="o">/</span><span class="m">20</span>,
+    date <span class="k">is</span> <span class="m">2000</span><span class="o">/</span><span class="m">04</span><span class="o">/</span><span class="m">20</span>,
     comment <span class="k">is</span> <span class="s">&#39;Building representation.&#39;</span>,
     diagram <span class="k">is</span> <span class="s">&#39;UML Class Diagram #312&#39;</span>
 ]).
@@ -284,13 +286,14 @@ the <a class="reference internal" href="../refman/directives/info_2.html#directi
 <p>The first argument can also a grammar rule non-terminal indicator,
 <code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>. Keys should be atoms and values should be bound terms.
 The following keys are predefined and may be processed specially by
-Logtalk:</p>
+Logtalk tools:</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt>
-<dd>Comment describing predicate purpose (an atom).</dd>
+<dd>Comment describing the predicate purpose (an atom).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">arguments</span></code></dt>
 <dd>Names and descriptions of predicate arguments for pretty print output
-(a list of key-values where both keys and values are atoms).</dd>
+(a list of <em>Name-Description</em> pairs where both names and descriptions
+are atoms).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">argnames</span></code></dt>
 <dd>Names of predicate arguments for pretty print output (a list of
 atoms; a simpler version of the previous key, used when argument
@@ -304,21 +307,20 @@ are <code class="docutils literal notranslate"><span class="pre">container</span
 what way. Some possible values are <code class="docutils literal notranslate"><span class="pre">never</span></code>, <code class="docutils literal notranslate"><span class="pre">free</span></code>,
 <code class="docutils literal notranslate"><span class="pre">specialize</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_first</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_last</span></code>.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">exceptions</span></code></dt>
-<dd>List of possible exceptions throw by the predicate using the format
-<em>Description</em> <code class="docutils literal notranslate"><span class="pre">-</span></code> <em>Exception term</em>. The description must be an
+<dd>List of possible exceptions throw by the predicate using
+<em>Description</em>-<em>Exception term</em> pairs. The description must be an
 atom. The exception term must be a non-variable term.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">examples</span></code></dt>
 <dd>List of typical predicate call examples using the format
-<em>Description</em> <code class="docutils literal notranslate"><span class="pre">-</span></code> <em>Predicate call</em> <code class="docutils literal notranslate"><span class="pre">-</span></code> <em>Variable bindings</em>. The
-description must be an atom. The predicate call term must be a
-non-variable term. The variable bindings term uses the format
-<code class="docutils literal notranslate"><span class="pre">{</span></code><em>Variable</em><code class="docutils literal notranslate"><span class="pre">=</span></code><em>Term</em>, …<code class="docutils literal notranslate"><span class="pre">}</span></code>. When there are no
-variable bindings, the success or failure of the predicate call
-should be represented by the terms <code class="docutils literal notranslate"><span class="pre">{yes}</span></code> or <code class="docutils literal notranslate"><span class="pre">{no}</span></code>,
-respectively.</dd>
+<em>Description-Goal-Bindings</em>. The description must be an atom.
+The predicate call term must be a non-variable term. The
+variable bindings term uses the format <em>{Variable = Term, …}</em>.
+When there are no variable bindings, the success or failure of
+the predicate call should be represented by the terms <code class="docutils literal notranslate"><span class="pre">{yes}</span></code>
+or <code class="docutils literal notranslate"><span class="pre">{no}</span></code>, respectively.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt>
-<dd>List of general remarks about the predicate using the format <em>Topic</em>
-<code class="docutils literal notranslate"><span class="pre">-</span></code> <em>Text</em>. Both the topic and the text must be atoms.</dd>
+<dd>List of general remarks about the predicate using <em>Topic-Text</em>
+pairs where both the topic and the text must be atoms.</dd>
 </dl>
 <p>For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(color<span class="o">/</span><span class="m">1</span>, [
@@ -342,10 +344,9 @@ documenting libraries and directories. For example, assuming the default
 filename extensions, a <code class="docutils literal notranslate"><span class="pre">trace</span></code> object and a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code> parametric object
 will result in <code class="docutils literal notranslate"><span class="pre">trace_0.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">sort_1.xml</span></code> XML files.</p>
 <p>Each entity XML file contains references to two other files, an XML
-specification file and a XSL style-sheet file. The XML specification
+specification file and a XSLT style-sheet file. The XML specification
 file can be either a DTD file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>) or an XML Scheme
-file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.xsd</span></code>). The <a class="reference external" href="http://www.w3.org/Style/XSL/">XSL</a>
-style-sheet file is responsible
+file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.xsd</span></code>). The XSLT style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
 file are defined by the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool but can be overridden by passing a

@@ -21,19 +21,18 @@
 Documenting applications
 ========================
 
-By setting the :ref:`source_data <flag_source_data>` compiler flag, Logtalk
-saves all relevant documenting information collected when compiling a source
-file. The provided ``lgtdoc`` tool can access this information by using
-Logtalk's reflection support and generate a documentation file for each
-compiled entity (object, protocol, or category) in
-`XML <http://www.w3.org/XML/>`_ format. Contents of the XML file
-include the entity name, type, and compilation mode (static or dynamic),
-the entity relations with other entities, and a description of any
+Assuming that the :ref:`source_data <flag_source_data>` is turned on, the
+compiler saves all relevant documenting information collected when compiling
+a source file. The provided ``lgtdoc`` tool can access this information by
+using the reflection support and generate a documentation file for each
+compiled entity (object, protocol, or category) in XML format. Contents of
+the XML file include the entity name, type, and compilation mode (static or
+dynamic), the entity relations with other entities, and a description of any
 declared predicates (name, compilation mode, scope, ...).
 
 The XML documentation files can be enriched with arbitrary user-defined
 information, either about an entity or about its predicates, by using
-the two directives described below.
+the two directives described next.
 
 .. _documenting_directives:
 
@@ -42,8 +41,9 @@ Documenting directives
 
 Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
-directives complement other Logtalk directives that also provide
-important documentation information like :ref:`directives_mode_2`.
+directives complement other directives that also provide important
+documentation information such as the :ref:`directives_mode_2`
+directive.
 
 .. _documenting_entity:
 
@@ -63,10 +63,10 @@ Arbitrary user-defined entity information can be represented using the
 
 In this pattern, keys should be atoms and values should be ground terms.
 The following keys are predefined and may be processed specially by
-Logtalk:
+Logtalk tools:
 
 ``comment``
-   Comment describing entity purpose (an atom).
+   Comment describing the entity purpose (an atom).
 ``author``
    Entity author(s) (an atom or a compound term ``{entity}`` where
    ``entity`` is the name of an XML entity defined in the ``custom.ent``
@@ -74,10 +74,11 @@ Logtalk:
 ``version``
    Version number (a number).
 ``date``
-   Date of last modification (formatted as Year/Month/Day).
+   Date of last modification (formatted as ``Year/Month/Day`` where
+   ``Year``, ``Month``, and ``Day`` are integers).
 ``parameters``
    Parameter names and descriptions for parametric entities (a list of
-   key-values where both keys and values are atoms).
+   *Name-Description* pairs where both names and descriptions are atoms).
 ``parnames``
    Parameter names for parametric entities (a list of atoms; a simpler
    version of the previous key, used when parameter descriptions are
@@ -91,10 +92,11 @@ Logtalk:
    name (an atom or a compound term ``{entity}`` where ``entity`` is the
    name of an XML entity defined in the ``custom.ent`` file).
 ``remarks``
-   List of general remarks about the entity using the format *Topic*
-   ``-`` *Text*. Both the topic and the text must be atoms.
+   List of general remarks about the entity using *Topic-Text* pairs
+   where both the topic and the text must be atoms.
 ``see_also``
-   List of related entities.
+   List of related entities (using the entity indentifiers, which can
+   be atoms or compound terms).
 
 For example:
 
@@ -103,7 +105,7 @@ For example:
    :- info([
        version is 2.1,
        author is 'Paulo Moura',
-       date is 2000/4/20,
+       date is 2000/04/20,
        comment is 'Building representation.',
        diagram is 'UML Class Diagram #312'
    ]).
@@ -132,13 +134,14 @@ the :ref:`directives_info_2` directive:
 The first argument can also a grammar rule non-terminal indicator,
 ``Name//Arity``. Keys should be atoms and values should be bound terms.
 The following keys are predefined and may be processed specially by
-Logtalk:
+Logtalk tools:
 
 ``comment``
-   Comment describing predicate purpose (an atom).
+   Comment describing the predicate purpose (an atom).
 ``arguments``
    Names and descriptions of predicate arguments for pretty print output
-   (a list of key-values where both keys and values are atoms).
+   (a list of *Name-Description* pairs where both names and descriptions
+   are atoms).
 ``argnames``
    Names of predicate arguments for pretty print output (a list of
    atoms; a simpler version of the previous key, used when argument
@@ -152,21 +155,20 @@ Logtalk:
    what way. Some possible values are ``never``, ``free``,
    ``specialize``, ``call_super_first``, ``call_super_last``.
 ``exceptions``
-   List of possible exceptions throw by the predicate using the format
-   *Description* ``-`` *Exception term*. The description must be an
+   List of possible exceptions throw by the predicate using
+   *Description*-*Exception term* pairs. The description must be an
    atom. The exception term must be a non-variable term.
 ``examples``
    List of typical predicate call examples using the format
-   *Description* ``-`` *Predicate call* ``-`` *Variable bindings*. The
-   description must be an atom. The predicate call term must be a
-   non-variable term. The variable bindings term uses the format
-   ``{``\ *Variable*\ ``=``\ *Term*, ...\ ``}``. When there are no
-   variable bindings, the success or failure of the predicate call
-   should be represented by the terms ``{yes}`` or ``{no}``,
-   respectively.
+   *Description-Goal-Bindings*. The description must be an atom.
+   The predicate call term must be a non-variable term. The
+   variable bindings term uses the format *{Variable = Term, ...}*.
+   When there are no variable bindings, the success or failure of
+   the predicate call should be represented by the terms ``{yes}``
+   or ``{no}``, respectively.
 ``remarks``
-   List of general remarks about the predicate using the format *Topic*
-   ``-`` *Text*. Both the topic and the text must be atoms.
+   List of general remarks about the predicate using *Topic-Text*
+   pairs where both the topic and the text must be atoms.
 
 For example:
 
@@ -195,10 +197,9 @@ filename extensions, a ``trace`` object and a ``sort(_)`` parametric object
 will result in ``trace_0.xml`` and ``sort_1.xml`` XML files.
 
 Each entity XML file contains references to two other files, an XML
-specification file and a XSL style-sheet file. The XML specification
+specification file and a XSLT style-sheet file. The XML specification
 file can be either a DTD file (``logtalk_entity.dtd``) or an XML Scheme
-file (``logtalk_entity.xsd``). The `XSL <http://www.w3.org/Style/XSL/>`_
-style-sheet file is responsible
+file (``logtalk_entity.xsd``). The XSLT style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
 file are defined by the ``lgtdoc`` tool but can be overridden by passing a
