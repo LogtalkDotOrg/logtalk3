@@ -286,7 +286,7 @@ management.</p>
 <div class="section" id="proving-goals-asynchronously-using-threads">
 <span id="threads-call"></span><h3>Proving goals asynchronously using threads<a class="headerlink" href="#proving-goals-asynchronously-using-threads" title="Permalink to this headline">¶</a></h3>
 <p>A goal may be proved asynchronously using a new thread by calling the
-Logtalk built-in predicate <a class="reference internal" href="../refman/predicates/threaded_call_1_2.html#predicates-threaded-call-1-2"><span class="std std-ref">threaded_call/1-2</span></a>.
+<a class="reference internal" href="../refman/predicates/threaded_call_1_2.html#predicates-threaded-call-1-2"><span class="std std-ref">threaded_call/1-2</span></a> built-in predicate .
 Calls to this predicate are always true and return immediately (assuming
 a callable argument). The term representing the goal is copied, not
 shared with the thread. The thread computes the first solution to the
@@ -295,12 +295,11 @@ goal, posts it to the message queue of the object from where the
 either a request for an alternative solution or for the program to
 commit to the current solution.</p>
 <p>The results of proving a goal asynchronously in a new thread may be
-later retrieved by calling the Logtalk built-in predicate
-<a class="reference internal" href="../refman/predicates/threaded_exit_1_2.html#predicates-threaded-exit-1-2"><span class="std std-ref">threaded_exit/1-2</span></a>
-within the same object where the call to the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code>
-predicate was made. The <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> calls suspend execution
-until the results of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> calls are sent back to the
-object message queue.</p>
+later retrieved by calling the <a class="reference internal" href="../refman/predicates/threaded_exit_1_2.html#predicates-threaded-exit-1-2"><span class="std std-ref">threaded_exit/1-2</span></a>
+built-in predicate within the same object where the call to the
+<code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> predicate was made. The <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code>
+calls suspend execution until the results of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code>
+calls are sent back to the object message queue.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate allow us to retrieve alternative
 solutions through backtracking (if you want to commit to the first
 solution, you may use the <a class="reference internal" href="../refman/predicates/threaded_once_1_2.html#predicates-threaded-once-1-2"><span class="std std-ref">threaded_once/1-2</span></a>

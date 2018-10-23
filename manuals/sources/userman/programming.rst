@@ -229,7 +229,7 @@ Compiling and loading your applications
 
 Your applications will be made of source files containing your objects,
 protocols, and categories. The source files can be compiled to disk by
-calling the Logtalk built-in predicate :ref:`predicates_logtalk_compile_1`:
+calling the :ref:`predicates_logtalk_compile_1` built-in predicate:
 
 .. code-block:: text
 
@@ -240,7 +240,7 @@ are found, outputs Prolog source files that can then be consulted or
 compiled in the usual way by your Prolog compiler.
 
 To compile to disk and also load into memory the source files we can use
-the Logtalk built-in predicate :ref:`predicates_logtalk_load_1`:
+the :ref:`predicates_logtalk_load_1` built-in predicate:
 
 .. code-block:: text
 
@@ -309,7 +309,7 @@ would type:
 
    | ?- logtalk_load(loader).
 
-Usually these files contain a call to the Logtalk built-in predicates
+Usually these files contain a call to the built-in predicates
 :ref:`predicates_set_logtalk_flag_2`
 (e.g. for setting global, *project-specific*, flag values) and
 :ref:`predicates_logtalk_load_1` or :ref:`predicates_logtalk_load_2` (for

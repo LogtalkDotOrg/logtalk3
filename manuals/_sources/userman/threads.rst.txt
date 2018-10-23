@@ -136,7 +136,7 @@ Proving goals asynchronously using threads
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A goal may be proved asynchronously using a new thread by calling the
-Logtalk built-in predicate :ref:`predicates_threaded_call_1_2`.
+:ref:`predicates_threaded_call_1_2` built-in predicate .
 Calls to this predicate are always true and return immediately (assuming
 a callable argument). The term representing the goal is copied, not
 shared with the thread. The thread computes the first solution to the
@@ -146,12 +146,11 @@ either a request for an alternative solution or for the program to
 commit to the current solution.
 
 The results of proving a goal asynchronously in a new thread may be
-later retrieved by calling the Logtalk built-in predicate
-:ref:`predicates_threaded_exit_1_2`
-within the same object where the call to the ``threaded_call/1``
-predicate was made. The ``threaded_exit/1`` calls suspend execution
-until the results of the ``threaded_call/1`` calls are sent back to the
-object message queue.
+later retrieved by calling the :ref:`predicates_threaded_exit_1_2`
+built-in predicate within the same object where the call to the
+``threaded_call/1`` predicate was made. The ``threaded_exit/1``
+calls suspend execution until the results of the ``threaded_call/1``
+calls are sent back to the object message queue.
 
 The ``threaded_exit/1`` predicate allow us to retrieve alternative
 solutions through backtracking (if you want to commit to the first

@@ -138,6 +138,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#calling-prolog-user-defined-predicates">Calling Prolog user-defined predicates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#calling-plain-prolog-predicates">Calling plain Prolog predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#calling-prolog-module-predicates">Calling Prolog module predicates</a></li>
 </ul>
 </li>
@@ -368,7 +369,7 @@ mode directives. For example, to document the possible use modes of the
 </div>
 <p>Some old Prolog compilers supported some sort of mode directives to
 improve performance. To the best of my knowledge, there is no modern
-Prolog compiler supporting this kind of directive for that purpodse.
+Prolog compiler supporting this kind of directive for that purpose.
 The current Logtalk version simply parses this directive for collecting
 its information for use in the reflection API (assuming the
 <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> is turned on). But see also see the
@@ -851,7 +852,7 @@ the meta-predicate.</p>
 <p>Some meta-predicates have meta-arguments which are not goals but
 closures. Logtalk supports the definition of meta-predicates that are
 called with closures instead of goals as long as the definition uses the
-Logtalk built-in predicate <a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> to call the closure with
+<a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> built-in predicate to call the closure with
 the additional arguments. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(all_true<span class="o">/</span><span class="m">2</span>).
 <span class="p">:- </span><span class="k">meta_predicate</span>(all_true(<span class="m">1</span>, <span class="o">*</span>)).
@@ -956,7 +957,8 @@ time may prevent the compiler of checking all uses of lambda
 expressions. The compiler also checks if a variable is classified as
 both a free variable and a lambda parameter. An optimizing
 meta-predicate and lambda expression compiler, based on the
-term-expansion mechanism, is provided for practical performance.</p>
+term-expansion mechanism, is provided for practical performance by
+the standard library.</p>
 </div>
 <div class="section" id="definite-clause-grammar-rules">
 <span id="predicates-dcgs"></span><h3>Definite clause grammar rules<a class="headerlink" href="#definite-clause-grammar-rules" title="Permalink to this headline">¶</a></h3>
@@ -1681,7 +1683,7 @@ functor but users should not rely on this always being true.</p>
 <div class="section" id="calling-prolog-built-in-predicates">
 <span id="predicates-prolog"></span><h2>Calling Prolog built-in predicates<a class="headerlink" href="#calling-prolog-built-in-predicates" title="Permalink to this headline">¶</a></h2>
 <p>In predicate definitions, predicate calls which are not prefixed with a
-message sending operator (either <code class="docutils literal notranslate"><span class="pre">::</span></code> or <code class="docutils literal notranslate"><span class="pre">^^</span></code>), are compiled to
+message sending or super call operator (<code class="docutils literal notranslate"><span class="pre">::</span></code> or <code class="docutils literal notranslate"><span class="pre">^^</span></code>), are compiled to
 either calls to local predicates or as calls to Logtalk/Prolog built-in
 predicates. A predicate call is compiled as a call to a local predicate
 if the object (or category) contains a scope directive, a definition for
@@ -1737,8 +1739,14 @@ debug mode.</p>
 </div>
 <div class="section" id="calling-prolog-user-defined-predicates">
 <span id="predicates-prolog-user"></span><h2>Calling Prolog user-defined predicates<a class="headerlink" href="#calling-prolog-user-defined-predicates" title="Permalink to this headline">¶</a></h2>
-<p>Prolog user-defined predicates can be called from within objects or
-categories by using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> compiler bypass
+<p>Prolog user-defined predicates are not visible from within objects or
+categories. Notably, this ensures that the compilation of Logtalk entities
+is not affected by any plain Prolog definitions that happen to be loaded
+at the time of compilation.</p>
+<div class="section" id="calling-plain-prolog-predicates">
+<h3>Calling plain Prolog predicates<a class="headerlink" href="#calling-plain-prolog-predicates" title="Permalink to this headline">¶</a></h3>
+<p>Prolog user-defined plain predicates can be called from within objects
+or categories by using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> compiler bypass
 control construct. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
     ...,
@@ -1759,17 +1767,19 @@ foo <span class="o">:-</span>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">user</span></code> is a pseudo-object in Logtalk containing all
 predicate definitions that are not encapsulated (either in a Logtalk
 entity or a Prolog module).</p>
+</div>
 <div class="section" id="calling-prolog-module-predicates">
 <span id="predicates-prolog-module"></span><h3>Calling Prolog module predicates<a class="headerlink" href="#calling-prolog-module-predicates" title="Permalink to this headline">¶</a></h3>
-<p>To call Prolog module predicates from within objects or categories you
-can use simply write:</p>
+<p>Prolog module predicates  can be called from within objects or categories by
+using explicit qualification. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
     ...,
     module<span class="o">:</span>bar,
     ...
 </pre></div>
 </div>
-<p>You can also use in alternative the <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive:</p>
+<p>You can also use in alternative the <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive
+to call the module predicates using implicit qualification:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(module, [bar<span class="o">/</span><span class="m">0</span>]).
 
 foo <span class="o">:-</span>
@@ -1799,6 +1809,9 @@ meta-predicates whose meta-predicate templates are ambiguous and cannot
 be processed by the Logtalk compiler (note, however, that it’s often
 possible to specify an overriding meta-predicate directive within the
 object or category making the call as explained above).</p>
+<p>Calls to module meta-predicates may require providing or overriding the
+meta-predicate template due to lack of standardization as discussed
+<a class="reference internal" href="#predicates-prolog-meta"><span class="std std-ref">earlier</span></a> in this section.</p>
 </div>
 </div>
 </div>

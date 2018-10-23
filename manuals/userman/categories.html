@@ -342,7 +342,8 @@ to have its own set of clauses for those dynamic predicates.</p>
 <div class="section" id="hot-patching">
 <span id="categories-patching"></span><h3>Hot patching<a class="headerlink" href="#hot-patching" title="Permalink to this headline">¶</a></h3>
 <p>A category may explicitly complement one or more existing objects, thus
-providing hot patching functionality inspired by Objective-C categories:</p>
+providing <a class="reference internal" href="../glossary.html#term-hot-patching"><span class="xref std std-term">hot patching</span></a> functionality inspired by Objective-C
+categories:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(<span class="nv">Category</span>,
     <span class="k">complements</span>([<span class="nv">Object1</span>, <span class="nv">Object2</span>, ....])).
     ...
@@ -383,8 +384,8 @@ compiler level for destructively replacing static predicates.</p>
 <div class="section" id="finding-defined-categories">
 <span id="categories-finding"></span><h2>Finding defined categories<a class="headerlink" href="#finding-defined-categories" title="Permalink to this headline">¶</a></h2>
 <p>We can find, by backtracking, all defined categories by using the
-<a class="reference internal" href="../refman/predicates/current_category_1.html#predicates-current-category-1"><span class="std std-ref">current_category/1</span></a>
-Logtalk built-in predicate with a non-instantiated variable:</p>
+<a class="reference internal" href="../refman/predicates/current_category_1.html#predicates-current-category-1"><span class="std std-ref">current_category/1</span></a> built-in predicate with a
+non-instantiated variable:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- current_category(Category).
 </pre></div>
 </div>
@@ -507,7 +508,7 @@ not an object.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- imports_category(Object, Category).
 </pre></div>
 </div>
-<p>or, if we want to know the importation scope:</p>
+<p>or, if we also want to know the importation scope:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- imports_category(Object, Category, Scope).
 </pre></div>
 </div>

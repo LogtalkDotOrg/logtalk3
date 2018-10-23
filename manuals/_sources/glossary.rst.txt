@@ -238,8 +238,8 @@ Glossary
 
    parametric object proxy
       A compound term (usually represented as a plain Prolog fact) with
-      the same functor and with the same number of arguments as the
-      identifier of a parametric object.
+      the same name and number of arguments as the identifier of a parametric
+      object.
 
    parameter
       An argument of a parametric object or a parametric category identifier.
@@ -372,8 +372,8 @@ Glossary
 
    source file
       A text file defining Logtalk and/or Prolog code. Multiple Logtalk
-      entities may be defined in a single source file. Prolog code may be
-      intermixed with entity definitions.
+      entities may be defined in a single source file. Plain rolog code
+      may be intermixed with Logtalk entity definitions.
 
    adapter file
       A Prolog source file defining a minimal abstraction layer between
@@ -438,3 +438,9 @@ Glossary
       entity directives and predicates to loaded entities in a running
       application without requiring access to the entities source code
       or restarting the application.
+
+   threaded engine
+      A computing thread running a goal whose solutions can be lazily and
+      concurrently computed and retrieved. A threaded engine also supports
+      a term queue that allows passing arbitrary terms to the engine. This
+      queue can be used to pass e.g. data and new goals to the engine.

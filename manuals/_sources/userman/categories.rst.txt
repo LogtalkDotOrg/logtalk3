@@ -182,7 +182,8 @@ Hot patching
 ~~~~~~~~~~~~
 
 A category may explicitly complement one or more existing objects, thus
-providing hot patching functionality inspired by Objective-C categories:
+providing :term:`hot patching` functionality inspired by Objective-C
+categories:
 
 ::
 
@@ -230,8 +231,8 @@ Finding defined categories
 --------------------------
 
 We can find, by backtracking, all defined categories by using the
-:ref:`predicates_current_category_1`
-Logtalk built-in predicate with a non-instantiated variable:
+:ref:`predicates_current_category_1` built-in predicate with a
+non-instantiated variable:
 
 .. code-block:: text
 
@@ -398,7 +399,7 @@ To find which objects import which categories we can use the
 
    | ?- imports_category(Object, Category).
 
-or, if we want to know the importation scope:
+or, if we also want to know the importation scope:
 
 .. code-block:: text
 

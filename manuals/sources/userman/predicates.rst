@@ -184,7 +184,7 @@ mode directives. For example, to document the possible use modes of the
 
 Some old Prolog compilers supported some sort of mode directives to
 improve performance. To the best of my knowledge, there is no modern
-Prolog compiler supporting this kind of directive for that purpodse.
+Prolog compiler supporting this kind of directive for that purpose.
 The current Logtalk version simply parses this directive for collecting
 its information for use in the reflection API (assuming the
 :ref:`source_data <flag_source_data>` is turned on). But see also see the
@@ -763,7 +763,7 @@ the meta-predicate.
 Some meta-predicates have meta-arguments which are not goals but
 closures. Logtalk supports the definition of meta-predicates that are
 called with closures instead of goals as long as the definition uses the
-Logtalk built-in predicate :ref:`methods_call_N` to call the closure with
+:ref:`methods_call_N` built-in predicate to call the closure with
 the additional arguments. For example:
 
 ::
@@ -887,7 +887,8 @@ time may prevent the compiler of checking all uses of lambda
 expressions. The compiler also checks if a variable is classified as
 both a free variable and a lambda parameter. An optimizing
 meta-predicate and lambda expression compiler, based on the
-term-expansion mechanism, is provided for practical performance.
+term-expansion mechanism, is provided for practical performance by
+the standard library.
 
 .. _predicates_dcgs:
 
@@ -1717,7 +1718,7 @@ Calling Prolog built-in predicates
 ----------------------------------
 
 In predicate definitions, predicate calls which are not prefixed with a
-message sending operator (either ``::`` or ``^^``), are compiled to
+message sending or super call operator (``::`` or ``^^``), are compiled to
 either calls to local predicates or as calls to Logtalk/Prolog built-in
 predicates. A predicate call is compiled as a call to a local predicate
 if the object (or category) contains a scope directive, a definition for
@@ -1786,8 +1787,16 @@ debug mode.
 Calling Prolog user-defined predicates
 --------------------------------------
 
-Prolog user-defined predicates can be called from within objects or
-categories by using the :ref:`control_external_call_1` compiler bypass
+Prolog user-defined predicates are not visible from within objects or
+categories. Notably, this ensures that the compilation of Logtalk entities
+is not affected by any plain Prolog definitions that happen to be loaded
+at the time of compilation.
+
+Calling plain Prolog predicates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Prolog user-defined plain predicates can be called from within objects
+or categories by using the :ref:`control_external_call_1` compiler bypass
 control construct. For example:
 
 ::
@@ -1818,8 +1827,8 @@ entity or a Prolog module).
 Calling Prolog module predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To call Prolog module predicates from within objects or categories you
-can use simply write:
+Prolog module predicates  can be called from within objects or categories by
+using explicit qualification. For example:
 
 ::
 
@@ -1828,7 +1837,8 @@ can use simply write:
        module:bar,
        ...
 
-You can also use in alternative the :ref:`directives_use_module_2` directive:
+You can also use in alternative the :ref:`directives_use_module_2` directive
+to call the module predicates using implicit qualification:
 
 ::
 
@@ -1863,3 +1873,7 @@ meta-predicates whose meta-predicate templates are ambiguous and cannot
 be processed by the Logtalk compiler (note, however, that it's often
 possible to specify an overriding meta-predicate directive within the
 object or category making the call as explained above).
+
+Calls to module meta-predicates may require providing or overriding the
+meta-predicate template due to lack of standardization as discussed
+:ref:`earlier <predicates_prolog_meta>` in this section.

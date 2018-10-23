@@ -386,8 +386,8 @@ shared by all the entity clauses.</dd>
 <dd>See <a class="reference internal" href="#term-parametric-entity"><span class="xref std std-term">parametric entity</span></a>.</dd>
 <dt id="term-parametric-object-proxy">parametric object proxy</dt>
 <dd>A compound term (usually represented as a plain Prolog fact) with
-the same functor and with the same number of arguments as the
-identifier of a parametric object.</dd>
+the same name and number of arguments as the identifier of a parametric
+object.</dd>
 <dt id="term-parent">parent</dt>
 <dd>A prototype that is extended by another prototype.</dd>
 <dt id="term-predicate">predicate</dt>
@@ -458,8 +458,8 @@ methods are supported in Logtalk and can also be found in other
 object-oriented programming languages.</dd>
 <dt id="term-source-file">source file</dt>
 <dd>A text file defining Logtalk and/or Prolog code. Multiple Logtalk
-entities may be defined in a single source file. Prolog code may be
-intermixed with entity definitions.</dd>
+entities may be defined in a single source file. Plain rolog code
+may be intermixed with Logtalk entity definitions.</dd>
 <dt id="term-source-file-directive">source file directive</dt>
 <dd>A directive that affects how a source file is compiled.</dd>
 <dt id="term-specialization">specialization</dt>
@@ -494,6 +494,11 @@ unit tests.</dd>
 the predicate clause is contained in a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>, <em>this</em> is a
 reference to the object importing the category for which the
 predicate clause is being executed.</dd>
+<dt id="term-threaded-engine">threaded engine</dt>
+<dd>A computing thread running a goal whose solutions can be lazily and
+concurrently computed and retrieved. A threaded engine also supports
+a term queue that allows passing arbitrary terms to the engine. This
+queue can be used to pass e.g. data and new goals to the engine.</dd>
 <dt id="term-visible-predicate">visible predicate</dt>
 <dd>A predicate that is within scope, a locally defined predicate, a
 <a class="reference internal" href="#term-built-in-method"><span class="xref std std-term">built-in method</span></a>, a Logtalk built-in predicate, or a Prolog

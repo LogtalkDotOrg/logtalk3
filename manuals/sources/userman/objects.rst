@@ -707,7 +707,7 @@ The following object properties are supported:
    applicable)
 ``context_switching_calls``
    The object supports context switching calls (i.e. can be used with
-   the ``<</2`` debugging control construct)
+   the :ref:`control_context_switch_2` debugging control construct)
 ``dynamic_declarations``
    The object supports dynamic declarations of predicates
 ``events``
