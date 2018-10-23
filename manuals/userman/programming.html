@@ -1461,8 +1461,7 @@ turning on the flag. To avoid having to define
 <a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules for
 translating each debug message, Logtalk provides default tokenization
 for four <em>meta-messages</em> that cover the most common cases:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code></dt>
 <dd>By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code>
 predicate followed by a newline.</dd>
@@ -1479,7 +1478,6 @@ items are preceded by a dash and printed as passed to the
 indented list items, one per line. The items are preceded by a dash
 and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</dd>
 </dl>
-</div></blockquote>
 <p>These print messages goals can always be combined with hooks as
 described in the previous section to remove them in production ready
 code. Some simple examples of using these meta-messages:</p>

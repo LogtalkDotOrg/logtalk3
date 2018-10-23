@@ -1491,21 +1491,21 @@ turning on the flag. To avoid having to define
 translating each debug message, Logtalk provides default tokenization
 for four *meta-messages* that cover the most common cases:
 
- ``@Message``
-    By default, the message is printed as passed to the ``write/1``
-    predicate followed by a newline.
- ``Key-Value``
-    By default, the message is printed as ``Key: Value`` followed by a
-    newline. The value is printed as passed to the ``writeq/1``
-    predicate.
- ``List``
-    By default, the list items are printed indented one per line. The
-    items are preceded by a dash and printed as passed to the
-    ``writeq/1`` predicate.
- ``Title::List``
-    By default, the title is printed followed by a newline and the
-    indented list items, one per line. The items are preceded by a dash
-    and printed as passed to the ``writeq/1`` predicate.
+``@Message``
+   By default, the message is printed as passed to the ``write/1``
+   predicate followed by a newline.
+``Key-Value``
+   By default, the message is printed as ``Key: Value`` followed by a
+   newline. The value is printed as passed to the ``writeq/1``
+   predicate.
+``List``
+   By default, the list items are printed indented one per line. The
+   items are preceded by a dash and printed as passed to the
+   ``writeq/1`` predicate.
+``Title::List``
+   By default, the title is printed followed by a newline and the
+   indented list items, one per line. The items are preceded by a dash
+   and printed as passed to the ``writeq/1`` predicate.
 
 These print messages goals can always be combined with hooks as
 described in the previous section to remove them in production ready
