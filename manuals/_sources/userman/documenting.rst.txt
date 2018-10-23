@@ -17,7 +17,6 @@
 
 .. _documenting_documenting:
 
-========================
 Documenting applications
 ========================
 

@@ -17,7 +17,6 @@
 
 .. _nomenclature_nomenclature:
 
-============
 Nomenclature
 ============
 

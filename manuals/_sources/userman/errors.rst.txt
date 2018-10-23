@@ -17,7 +17,6 @@
 
 .. _errors_errors:
 
-==============
 Error handling
 ==============
 

@@ -17,7 +17,6 @@
 
 .. _protocols_protocols:
 
-=========
 Protocols
 =========
 

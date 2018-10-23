@@ -17,7 +17,6 @@
 
 .. _grammar_grammar:
 
-=======
 Grammar
 =======
 

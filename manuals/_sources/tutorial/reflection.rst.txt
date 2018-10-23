@@ -15,7 +15,6 @@
    limitations under the License.
 
 
-===============================
 A reflective class-based system
 ===============================
 
@@ -26,8 +25,8 @@ class, otherwise it is compiled as a prototype. A consequence of this is
 that, in order to work with instance or classes, we always have to
 define root objects for the instantiation and specialization hierarchies
 (however, we are not restricted to a single hierarchy). The best
-solution is often to define a reflective class-based system [Maes87]_, where every class is also an
-object and, as such, an instance of some class.
+solution is often to define a reflective class-based system [Maes87]_,
+where every class is also an object and, as such, an instance of some class.
 
 In this example, we are going to define the basis for a reflective
 class-based system, based on an extension of the ideas presented in

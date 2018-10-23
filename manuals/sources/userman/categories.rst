@@ -17,7 +17,6 @@
 
 .. _categories_categories:
 
-==========
 Categories
 ==========
 

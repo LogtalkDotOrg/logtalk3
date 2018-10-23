@@ -17,7 +17,6 @@
 
 .. _threads_threads:
 
-===========================
 Multi-threading programming
 ===========================
 

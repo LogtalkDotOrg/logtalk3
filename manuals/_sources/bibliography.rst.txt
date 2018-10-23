@@ -17,7 +17,6 @@
 
 .. only:: html
 
-   ============
    Bibliography
    ============
 

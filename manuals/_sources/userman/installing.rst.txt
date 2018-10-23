@@ -17,7 +17,6 @@
 
 .. _installing_installing:
 
-==================
 Installing Logtalk
 ==================
 

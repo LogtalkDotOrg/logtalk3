@@ -17,7 +17,6 @@
 
 .. _programming_programming:
 
-============================================
 Writing, running, and debugging applications
 ============================================
 

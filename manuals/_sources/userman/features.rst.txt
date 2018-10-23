@@ -17,7 +17,6 @@
 
 .. _features_features:
 
-=============
 Main features
 =============
 

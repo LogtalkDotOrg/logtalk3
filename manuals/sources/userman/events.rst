@@ -17,7 +17,6 @@
 
 .. _events_events:
 
-========================
 Event-driven programming
 ========================
 

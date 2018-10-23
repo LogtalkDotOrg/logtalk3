@@ -17,7 +17,6 @@
 
 .. _migration_migration:
 
-======================================
 Prolog integration and migration guide
 ======================================
 

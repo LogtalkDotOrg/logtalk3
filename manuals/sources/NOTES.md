@@ -34,6 +34,6 @@ formats:
 	$ make clean && make html && make latexpdf && make epub
 
 After completion, the exported files are found in the `_build` directory.
-The `build_docs.sh` bash shell script can be used to both export the final
-formats and move the final files to the `manuals` root directory in the
-distribution.
+The `build_manuals.sh` bash shell script can be used to both export the
+final formats and move the final files to the `manuals` root directory
+in the distribution.

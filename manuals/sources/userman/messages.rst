@@ -17,7 +17,6 @@
 
 .. _messages_messages:
 
-========
 Messages
 ========
 

@@ -17,7 +17,6 @@
 
 .. _predicates_predicates:
 
-==========
 Predicates
 ==========
 

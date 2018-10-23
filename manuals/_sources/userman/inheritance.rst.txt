@@ -17,7 +17,6 @@
 
 .. _inheritance_inheritance:
 
-===========
 Inheritance
 ===========
 
