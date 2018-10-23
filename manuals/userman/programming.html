@@ -752,13 +752,13 @@ security. Possible option values are <code class="docutils literal notranslate">
 usual default). This option can be used on a per-object basis. Note
 that changing this option is of no consequence for objects already
 compiled and loaded. This option is only checked when sending an
-<code class="docutils literal notranslate"><span class="pre">asserta/1</span></code> or <code class="docutils literal notranslate"><span class="pre">assertz/1</span></code> message to an object. Local asserting
-of new predicates is always allowed.</dd>
+<a class="reference internal" href="../refman/methods/asserta_1.html#methods-asserta-1"><span class="std std-ref">asserta/1</span></a> or <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> message to an
+object. Local asserting of new predicates is always allowed.</dd>
 </dl>
 <span id="index-16"></span><dl class="docutils" id="flag-events">
 <dt><code class="docutils literal notranslate"><span class="pre">events(Option)</span></code></dt>
-<dd>Allows message sending calls to be compiled with event-driven
-programming support disable in order to improve performance. Possible
+<dd>Allows message sending calls to be compiled with or without
+<a class="reference internal" href="events.html#events-events"><span class="std std-ref">event-driven programming</span></a> support. Possible
 option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> and <code class="docutils literal notranslate"><span class="pre">deny</span></code> (the usual default). Objects
 (and categories) compiled with this option set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> use
 optimized code for message-sending calls that does not trigger
@@ -783,8 +783,8 @@ flags are specific to the used Prolog backend compiler. The usual
 default is the empty list. These flags are passed to the backend
 Prolog compiler built-in predicate that is responsible for compiling
 to disk a Prolog file. For Prolog compilers that don’t provide
-separate predicates for compiling and loading a file, use instead the
-<code class="docutils literal notranslate"><span class="pre">prolog_loader/1</span></code> flag.</dd>
+separate predicates for compiling and loading a file, use instead
+the <a class="reference internal" href="#flag-prolog-loader"><span class="std std-ref">prolog_loader</span></a> flag.</dd>
 </dl>
 <span id="index-19"></span><dl class="docutils" id="flag-prolog-loader">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_loader(Flags)</span></code></dt>

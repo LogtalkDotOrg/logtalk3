@@ -394,10 +394,10 @@ compiler flags. Most of these compiler flags are described in the
 flags have read-only values and cannot be changed at runtime. These are:</p>
 <span id="index-0"></span><dl class="docutils" id="flag-settings-file">
 <dt><code class="docutils literal notranslate"><span class="pre">settings_file</span></code></dt>
-<dd>Allows or disables loading of <em>settings files</em> at startup. Possible
-values are <code class="docutils literal notranslate"><span class="pre">allow</span></code>, <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, and <code class="docutils literal notranslate"><span class="pre">deny</span></code>. The usual default
-value is <code class="docutils literal notranslate"><span class="pre">allow</span></code> but it can be changed by editing the adapter file
-when e.g. embedding Logtalk in a compiled application. With a value
+<dd>Allows or disables loading of a <a class="reference internal" href="../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a> at startup.
+Possible values are <code class="docutils literal notranslate"><span class="pre">allow</span></code>, <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, and <code class="docutils literal notranslate"><span class="pre">deny</span></code>. The usual
+default value is <code class="docutils literal notranslate"><span class="pre">allow</span></code> but it can be changed by editing the adapter
+file when e.g. embedding Logtalk in a compiled application. With a value
 of <code class="docutils literal notranslate"><span class="pre">allow</span></code>, settings files are searched in the startup directory,
 in the Logtalk user directory, and in the user home directory. With a
 value of <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, settings files are only searched in the
@@ -406,7 +406,8 @@ Logtalk user directory and in the user home directory.</dd>
 <span id="index-1"></span><dl class="docutils" id="flag-prolog-dialect">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_dialect</span></code></dt>
 <dd>Name of the back-end Prolog compiler (an atom). This flag can be used
-for conditional compilation of Prolog specific code.</dd>
+for <a class="reference internal" href="../refman/directives/conditional_compilation_directives.html#conditional-compilation-directives"><span class="std std-ref">conditional compilation</span></a>
+of Prolog specific code.</dd>
 </dl>
 <span id="index-2"></span><dl class="docutils" id="flag-prolog-version">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_version</span></code></dt>
@@ -456,15 +457,16 @@ programming support. Possible flag values are <code class="docutils literal notr
 <span id="index-8"></span><dl class="docutils" id="flag-engines">
 <dt><code class="docutils literal notranslate"><span class="pre">engines</span></code></dt>
 <dd>Informs if the back-end Prolog compiler provides the required low
-level multi-threading programming support for Logtalk threaded
-engines. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
+level multi-threading programming support for Logtalk
+<a class="reference internal" href="../glossary.html#term-threaded-engine"><span class="xref std std-term">threaded engines</span></a>. Possible flag values
+are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
 </dl>
 <span id="index-9"></span><dl class="docutils" id="flag-threads">
 <dt><code class="docutils literal notranslate"><span class="pre">threads</span></code></dt>
 <dd>Informs if the back-end Prolog compiler provides the required low
 level multi-threading programming support for all high-level Logtalk
-multi-threading features. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code>
-and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
+<a class="reference internal" href="threads.html#threads-threads"><span class="std std-ref">multi-threading features</span></a>. Possible flag
+values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
 </dl>
 <span id="index-10"></span><dl class="docutils" id="flag-modules">
 <dt><code class="docutils literal notranslate"><span class="pre">modules</span></code></dt>
@@ -476,9 +478,9 @@ modules as objects).</dd>
 <span id="index-11"></span><dl class="docutils" id="flag-coinduction">
 <dt><code class="docutils literal notranslate"><span class="pre">coinduction</span></code></dt>
 <dd>Informs Logtalk if the back-end Prolog compiler provides the minimal
-support for cyclic terms necessary for working with coinductive
-predicates. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and
-<code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
+support for cyclic terms necessary for working with
+<a class="reference internal" href="../glossary.html#term-coinductive-predicate"><span class="xref std std-term">coinductive predicates</span></a>. Possible flag
+values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
 </dl>
 </div>
 <div class="section" id="settings-files">

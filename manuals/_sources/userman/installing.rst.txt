@@ -272,10 +272,10 @@ flags have read-only values and cannot be changed at runtime. These are:
 .. _flag_settings_file:
 
 ``settings_file``
-   Allows or disables loading of *settings files* at startup. Possible
-   values are ``allow``, ``restrict``, and ``deny``. The usual default
-   value is ``allow`` but it can be changed by editing the adapter file
-   when e.g. embedding Logtalk in a compiled application. With a value
+   Allows or disables loading of a :term:`settings file` at startup.
+   Possible values are ``allow``, ``restrict``, and ``deny``. The usual
+   default value is ``allow`` but it can be changed by editing the adapter
+   file when e.g. embedding Logtalk in a compiled application. With a value
    of ``allow``, settings files are searched in the startup directory,
    in the Logtalk user directory, and in the user home directory. With a
    value of ``restrict``, settings files are only searched in the
@@ -286,7 +286,8 @@ flags have read-only values and cannot be changed at runtime. These are:
 
 ``prolog_dialect``
    Name of the back-end Prolog compiler (an atom). This flag can be used
-   for conditional compilation of Prolog specific code.
+   for :ref:`conditional compilation <conditional_compilation_directives>`
+   of Prolog specific code.
 
 .. index:: single: prolog_version flag
 .. _flag_prolog_version:
@@ -350,8 +351,9 @@ flags have read-only values and cannot be changed at runtime. These are:
 
 ``engines``
    Informs if the back-end Prolog compiler provides the required low
-   level multi-threading programming support for Logtalk threaded
-   engines. Possible flag values are ``unsupported`` and ``supported``.
+   level multi-threading programming support for Logtalk
+   :term:`threaded engines <threaded engine>`. Possible flag values
+   are ``unsupported`` and ``supported``.
 
 .. index:: single: threads flag
 .. _flag_threads:
@@ -359,8 +361,8 @@ flags have read-only values and cannot be changed at runtime. These are:
 ``threads``
    Informs if the back-end Prolog compiler provides the required low
    level multi-threading programming support for all high-level Logtalk
-   multi-threading features. Possible flag values are ``unsupported``
-   and ``supported``.
+   :ref:`multi-threading features <threads_threads>`. Possible flag
+   values are ``unsupported`` and ``supported``.
 
 .. index:: single: modules flag
 .. _flag_modules:
@@ -376,9 +378,9 @@ flags have read-only values and cannot be changed at runtime. These are:
 
 ``coinduction``
    Informs Logtalk if the back-end Prolog compiler provides the minimal
-   support for cyclic terms necessary for working with coinductive
-   predicates. Possible flag values are ``unsupported`` and
-   ``supported``.
+   support for cyclic terms necessary for working with
+   :term:`coinductive predicates <coinductive predicate>`. Possible flag
+   values are ``unsupported`` and ``supported``.
 
 .. _installing_settings:
 

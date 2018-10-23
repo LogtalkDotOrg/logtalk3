@@ -679,15 +679,15 @@ Optional features compilation flags
    usual default). This option can be used on a per-object basis. Note
    that changing this option is of no consequence for objects already
    compiled and loaded. This option is only checked when sending an
-   ``asserta/1`` or ``assertz/1`` message to an object. Local asserting
-   of new predicates is always allowed.
+   :ref:`methods_asserta_1` or :ref:`methods_assertz_1` message to an
+   object. Local asserting of new predicates is always allowed.
 
 .. index:: single: events flag
 .. _flag_events:
 
 ``events(Option)``
-   Allows message sending calls to be compiled with event-driven
-   programming support disable in order to improve performance. Possible
+   Allows message sending calls to be compiled with or without
+   :ref:`event-driven programming <events_events>` support. Possible
    option values are ``allow`` and ``deny`` (the usual default). Objects
    (and categories) compiled with this option set to ``deny`` use
    optimized code for message-sending calls that does not trigger
@@ -716,8 +716,8 @@ Back-end Prolog compiler and loader flags
    default is the empty list. These flags are passed to the backend
    Prolog compiler built-in predicate that is responsible for compiling
    to disk a Prolog file. For Prolog compilers that don't provide
-   separate predicates for compiling and loading a file, use instead the
-   ``prolog_loader/1`` flag.
+   separate predicates for compiling and loading a file, use instead
+   the :ref:`prolog_loader <flag_prolog_loader>` flag.
 
 .. index:: single: prolog_loader flag
 .. _flag_prolog_loader:
