@@ -1850,30 +1850,16 @@ to call the module predicates using implicit qualification:
        ...
 
 Note that the first argument of the ``use_module/2``, when used within
-an object or a category, is a module name, not a file name. The actual
-module code should be loaded prior to compilation of Logtalk that uses
-it. In particular, programmers should not expect that the module be
-auto-loaded (when using back-end Prolog compilers supporting an
-autoloading mechanism).
+an object or a category, is a module name, not a file name.
 
-When the module predicate is a meta-predicate but for some reason you
-don't want its calls to be compiled as such, you can use the
-:ref:`control_external_call_1` compiler bypass
-control construct as before:
+.. warning::
 
-::
+   The actual module code should be loaded prior to compilation of Logtalk
+   that uses it. In particular, programmers should not expect that the
+   module be auto-loaded (when using back-end Prolog compilers supporting an
+   autoloading mechanism).
 
-   foo :-
-       ...,
-       {module:bar},
-       ...
-
-This workaround is sometimes necessary when calling module
-meta-predicates whose meta-predicate templates are ambiguous and cannot
-be processed by the Logtalk compiler (note, however, that it's often
-possible to specify an overriding meta-predicate directive within the
-object or category making the call as explained above).
-
-Calls to module meta-predicates may require providing or overriding the
-meta-predicate template due to lack of standardization as discussed
+Calls to module meta-predicates may require providing a missing
+meta-predicate template or overriding an existing meta-predicate
+template due to lack of standardization as discussed
 :ref:`earlier <predicates_prolog_meta>` in this section.

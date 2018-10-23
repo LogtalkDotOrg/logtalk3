@@ -1789,28 +1789,17 @@ foo <span class="o">:-</span>
 </pre></div>
 </div>
 <p>Note that the first argument of the <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>, when used within
-an object or a category, is a module name, not a file name. The actual
-module code should be loaded prior to compilation of Logtalk that uses
-it. In particular, programmers should not expect that the module be
-auto-loaded (when using back-end Prolog compilers supporting an
+an object or a category, is a module name, not a file name.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The actual module code should be loaded prior to compilation of Logtalk
+that uses it. In particular, programmers should not expect that the
+module be auto-loaded (when using back-end Prolog compilers supporting an
 autoloading mechanism).</p>
-<p>When the module predicate is a meta-predicate but for some reason you
-don’t want its calls to be compiled as such, you can use the
-<a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> compiler bypass
-control construct as before:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
-    ...,
-    <span class="k">{</span>module<span class="o">:</span>bar<span class="k">}</span>,
-    ...
-</pre></div>
 </div>
-<p>This workaround is sometimes necessary when calling module
-meta-predicates whose meta-predicate templates are ambiguous and cannot
-be processed by the Logtalk compiler (note, however, that it’s often
-possible to specify an overriding meta-predicate directive within the
-object or category making the call as explained above).</p>
-<p>Calls to module meta-predicates may require providing or overriding the
-meta-predicate template due to lack of standardization as discussed
+<p>Calls to module meta-predicates may require providing a missing
+meta-predicate template or overriding an existing meta-predicate
+template due to lack of standardization as discussed
 <a class="reference internal" href="#predicates-prolog-meta"><span class="std std-ref">earlier</span></a> in this section.</p>
 </div>
 </div>
