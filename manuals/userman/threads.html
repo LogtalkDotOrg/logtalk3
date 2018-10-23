@@ -108,7 +108,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#one-way-asynchronous-calls">One-way asynchronous calls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#asynchronous-calls-and-synchronized-predicates">Asynchronous calls and synchronized predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#synchronizing-threads-through-notifications">Synchronizing threads through notifications</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#engines">Engines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#threaded-engines">Threaded engines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#multi-threading-performance">Multi-threading performance</a></li>
 </ul>
 </li>
@@ -205,7 +205,7 @@ allows programmers to easily take advantage of modern multi-processor
 and multi-core computers without worrying about the details of creating,
 synchronizing, or communicating with threads. Logtalk multi-threading
 programming integrates with object-oriented programming providing a
-threaded engines API, enabling objects and categories to prove goals
+<em>threaded engines</em> API, enabling objects and categories to prove goals
 concurrently, and supporting synchronous and asynchronous messages.</p>
 <div class="section" id="enabling-multi-threading-support">
 <span id="threads-enabling"></span><h2>Enabling multi-threading support<a class="headerlink" href="#enabling-multi-threading-support" title="Permalink to this headline">¶</a></h2>
@@ -220,14 +220,6 @@ directive is used to enable an object to make multi-threading calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">threaded.</span>
 </pre></div>
 </div>
-<p>This directive results in the automatic creation and set up of an object
-message queue when the object is loaded or created at runtime. Object
-message queues are used for exchanging thread notifications and for
-storing concurrent goal solutions and replies to the <em>multi-threading
-calls</em> made within the object. The message queue for the pseudo-object
-<a class="reference external" href="https://logtalk.org/library/user_0.html#user-0" title="(in Logtalk APIs v3.21.0)"><span class="xref std std-ref">user</span></a> is automatically created at Logtalk startup
-(provided that multi-threading programming is supported and enabled for
-the chosen backend Prolog compiler).</p>
 </div>
 <div class="section" id="multi-threading-built-in-predicates">
 <span id="threads-predicates"></span><h2>Multi-threading built-in predicates<a class="headerlink" href="#multi-threading-built-in-predicates" title="Permalink to this headline">¶</a></h2>
@@ -371,21 +363,21 @@ matching <code class="docutils literal notranslate"><span class="pre">threaded_e
 established with any of them. Nevertheless, you can easily use a tag the
 calls by using the extended <a class="reference internal" href="../refman/predicates/threaded_call_1_2.html#predicates-threaded-call-1-2"><span class="std std-ref">threaded_call/1-2</span></a>
 and <a class="reference internal" href="../refman/predicates/threaded_exit_1_2.html#predicates-threaded-exit-1-2"><span class="std std-ref">threaded_exit/1-2</span></a> built-in predicates. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">threaded_call</span>(member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), <span class="nv">Tag</span>).
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>?- threaded_call(member(X, [1,2,3]), Tag).
 
-<span class="nv">Tag</span> <span class="o">=</span> <span class="m">1</span>
+Tag = 1
 yes
 
-<span class="o">?-</span> <span class="k">threaded_call</span>(member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), <span class="nv">Tag</span>).
+?- threaded_call(member(X, [1,2,3]), Tag).
 
-<span class="nv">Tag</span> <span class="o">=</span> <span class="m">2</span>
+Tag = 2
 yes
 
-<span class="o">?-</span> <span class="k">threaded_exit</span>(member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), <span class="m">2</span>).
+?- threaded_exit(member(X, [1,2,3]), 2).
 
-<span class="nv">X</span> <span class="o">=</span> <span class="m">1</span> <span class="o">;</span>
-<span class="nv">X</span> <span class="o">=</span> <span class="m">2</span> <span class="o">;</span>
-<span class="nv">X</span> <span class="o">=</span> <span class="m">3</span>
+X = 1 ;
+X = 2 ;
+X = 3
 yes
 </pre></div>
 </div>
@@ -510,15 +502,15 @@ predicate is consumed by a single <code class="docutils literal notranslate"><sp
 be taken to avoid deadlocks when two (or more) threads both wait and
 post notifications to each other.</p>
 </div>
-<div class="section" id="engines">
-<span id="threads-engines"></span><h2>Engines<a class="headerlink" href="#engines" title="Permalink to this headline">¶</a></h2>
-<p>Threaded <em>engines</em> provide an alternative to the multi-threading
-predicates described in the previous sections. An engine is a computing
+<div class="section" id="threaded-engines">
+<span id="threads-engines"></span><h2>Threaded engines<a class="headerlink" href="#threaded-engines" title="Permalink to this headline">¶</a></h2>
+<p>Threaded engines provide an alternative to the multi-threading
+predicates described in the previous sections. An <em>engine</em> is a computing
 thread whose solutions can be lazily computed and retrieved. In
 addition, an engine also supports a term queue that allows passing
 arbitrary terms to the engine.</p>
 <p>An engine is created by calling the <a class="reference internal" href="../refman/predicates/threaded_engine_create_3.html#predicates-threaded-engine-create-3"><span class="std std-ref">threaded_engine_create/3</span></a>
-built-in predicates. For example:</p>
+built-in predicate. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_engine_create(X, member(X, [1,2,3]), worker).
 yes
 </pre></div>
@@ -544,11 +536,31 @@ solutions left. After returning a solution, this predicate signals the
 engine to start computing the next one. Note that this predicate is
 deterministic. In contrast with the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1-2</span></code> built-in
 predicates, retrieving the next solution requires calling the predicate
-again instead of by backtracking into its call.</p>
-<p>There is also an alternative reified version of the predicate,
+again instead of by backtracking into its call. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>collect_all(<span class="nv">Engine</span>, [<span class="nv">X</span>| <span class="nv">Xs</span>]) <span class="o">:-</span>
+    threaded_engine_next(<span class="nv">Engine</span>, <span class="nv">X</span>),
+    <span class="o">!</span>,
+    collect_all(<span class="nv">Engine</span>, <span class="nv">Xs</span>).
+collect_all(<span class="nv">_</span>, []).
+</pre></div>
+</div>
+<p>There is also a reified alternative version of the predicate,
 <a class="reference internal" href="../refman/predicates/threaded_engine_next_reified_2.html#predicates-threaded-engine-next-reified-2"><span class="std std-ref">threaded_engine_next_reified/2</span></a>,
 which returns <code class="docutils literal notranslate"><span class="pre">the(Answer)</span></code>, <code class="docutils literal notranslate"><span class="pre">no</span></code>, and <code class="docutils literal notranslate"><span class="pre">exception(Error)</span></code> terms as
-answers.</p>
+answers. Using this predicate, collecting all solutions to an engine
+uses a different programming pattern:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>... <span class="o">:-</span>
+    ...,
+    threaded_engine_next_reified(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
+    collect_all_reifeid(<span class="nv">Answer</span>, <span class="nv">Engine</span>, <span class="nv">List0</span>),
+    ...
+
+collect_all_reifeid(no, <span class="nv">_</span>, []).
+collect_all_reifeid(the(<span class="nv">X</span>), <span class="nv">Engine</span>, [<span class="nv">X</span>| <span class="nv">Xs</span>]) <span class="o">:-</span>
+    threaded_engine_next_reified(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
+    collect_all_reifeid(<span class="nv">Answer</span>, <span class="nv">Engine</span>, <span class="nv">Xs</span>).
+</pre></div>
+</div>
 <p>Engines must be explicitly terminated using the
 <a class="reference internal" href="../refman/predicates/threaded_engine_destroy_1.html#predicates-threaded-engine-destroy-1"><span class="std std-ref">threaded_engine_destroy/1</span></a> built-in predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_engine_destroy(worker).
@@ -587,18 +599,18 @@ a solution becomes available.</p>
 <span id="threads-performance"></span><h2>Multi-threading performance<a class="headerlink" href="#multi-threading-performance" title="Permalink to this headline">¶</a></h2>
 <p>The performance of multi-threading applications is highly dependent on
 the back-end Prolog compiler, on the operating-system, and on the use of
-<a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> and dynamic predicates. All compatible back-end Prolog
-compilers that support multi-threading features make use of POSIX
+<a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> and dynamic predicates. All compatible back-end
+Prolog compilers that support multi-threading features make use of POSIX
 threads or <em>pthreads</em>. The performance of the underlying pthreads
 implementation can exhibit significant differences between operating
 systems. An important point is synchronized access to dynamic
 predicates. As different threads may try to simultaneously access and
-update dynamic predicates, these operations must be protected by a lock,
-usually implemented using a mutex. Poor mutex lock operating-system
-performance, combined with a large number of collisions by several
-threads trying to acquire the same lock, often result in severe
-performance penalties. Thus, whenever possible, avoid using dynamic
-predicates and dynamic binding.</p>
+update dynamic predicates, these operations may used a lock-free algorithm
+or be protected by a lock, usually implemented using a mutex. In the latter
+case, poor mutex lock operating-system performance, combined with a large
+number of collisions by several threads trying to acquire the same lock,
+can result in severe performance penalties. Thus, whenever possible,
+avoid using dynamic predicates and dynamic binding.</p>
 </div>
 </div>
 

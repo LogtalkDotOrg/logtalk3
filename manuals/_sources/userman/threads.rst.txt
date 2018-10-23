@@ -30,7 +30,7 @@ allows programmers to easily take advantage of modern multi-processor
 and multi-core computers without worrying about the details of creating,
 synchronizing, or communicating with threads. Logtalk multi-threading
 programming integrates with object-oriented programming providing a
-threaded engines API, enabling objects and categories to prove goals
+*threaded engines* API, enabling objects and categories to prove goals
 concurrently, and supporting synchronous and asynchronous messages.
 
 .. _threads_enabling:
@@ -53,15 +53,6 @@ directive is used to enable an object to make multi-threading calls:
 ::
 
    :- threaded.
-
-This directive results in the automatic creation and set up of an object
-message queue when the object is loaded or created at runtime. Object
-message queues are used for exchanging thread notifications and for
-storing concurrent goal solutions and replies to the *multi-threading
-calls* made within the object. The message queue for the pseudo-object
-:ref:`user <apis:user/0>` is automatically created at Logtalk startup
-(provided that multi-threading programming is supported and enabled for
-the chosen backend Prolog compiler).
 
 .. _threads_predicates:
 
@@ -232,7 +223,7 @@ established with any of them. Nevertheless, you can easily use a tag the
 calls by using the extended :ref:`predicates_threaded_call_1_2`
 and :ref:`predicates_threaded_exit_1_2` built-in predicates. For example:
 
-::
+.. code-block:: text
 
    ?- threaded_call(member(X, [1,2,3]), Tag).
 
@@ -398,17 +389,17 @@ post notifications to each other.
 
 .. _threads_engines:
 
-Engines
--------
+Threaded engines
+----------------
 
-Threaded *engines* provide an alternative to the multi-threading
-predicates described in the previous sections. An engine is a computing
+Threaded engines provide an alternative to the multi-threading
+predicates described in the previous sections. An *engine* is a computing
 thread whose solutions can be lazily computed and retrieved. In
 addition, an engine also supports a term queue that allows passing
 arbitrary terms to the engine.
 
 An engine is created by calling the :ref:`predicates_threaded_engine_create_3`
-built-in predicates. For example:
+built-in predicate. For example:
 
 .. code-block:: text
 
@@ -440,12 +431,35 @@ solutions left. After returning a solution, this predicate signals the
 engine to start computing the next one. Note that this predicate is
 deterministic. In contrast with the ``threaded_exit/1-2`` built-in
 predicates, retrieving the next solution requires calling the predicate
-again instead of by backtracking into its call.
+again instead of by backtracking into its call. For example: 
 
-There is also an alternative reified version of the predicate,
+::
+
+   collect_all(Engine, [X| Xs]) :-
+       threaded_engine_next(Engine, X),
+       !,
+       collect_all(Engine, Xs).
+   collect_all(_, []).
+
+There is also a reified alternative version of the predicate,
 :ref:`predicates_threaded_engine_next_reified_2`,
 which returns ``the(Answer)``, ``no``, and ``exception(Error)`` terms as
-answers.
+answers. Using this predicate, collecting all solutions to an engine
+uses a different programming pattern:
+
+::
+
+   ... :-
+       ...,
+       threaded_engine_next_reified(Engine, Answer),
+       collect_all_reifeid(Answer, Engine, List0),
+       ...
+
+   collect_all_reifeid(no, _, []).
+   collect_all_reifeid(the(X), Engine, [X| Xs]) :-
+       threaded_engine_next_reified(Engine, Answer),
+       collect_all_reifeid(Answer, Engine, Xs).
+
 
 Engines must be explicitly terminated using the
 :ref:`predicates_threaded_engine_destroy_1` built-in predicate:
@@ -494,15 +508,15 @@ Multi-threading performance
 
 The performance of multi-threading applications is highly dependent on
 the back-end Prolog compiler, on the operating-system, and on the use of
-:term:`dynamic binding` and dynamic predicates. All compatible back-end Prolog
-compilers that support multi-threading features make use of POSIX
+:term:`dynamic binding` and dynamic predicates. All compatible back-end
+Prolog compilers that support multi-threading features make use of POSIX
 threads or *pthreads*. The performance of the underlying pthreads
 implementation can exhibit significant differences between operating
 systems. An important point is synchronized access to dynamic
 predicates. As different threads may try to simultaneously access and
-update dynamic predicates, these operations must be protected by a lock,
-usually implemented using a mutex. Poor mutex lock operating-system
-performance, combined with a large number of collisions by several
-threads trying to acquire the same lock, often result in severe
-performance penalties. Thus, whenever possible, avoid using dynamic
-predicates and dynamic binding.
+update dynamic predicates, these operations may used a lock-free algorithm
+or be protected by a lock, usually implemented using a mutex. In the latter
+case, poor mutex lock operating-system performance, combined with a large
+number of collisions by several threads trying to acquire the same lock,
+can result in severe performance penalties. Thus, whenever possible,
+avoid using dynamic predicates and dynamic binding.

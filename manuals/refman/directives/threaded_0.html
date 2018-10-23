@@ -207,6 +207,14 @@
 and asynchronous messages. Any object containing calls to the built-in
 multi-threading predicates (or importing a category that contains such
 calls) must include this directive.</p>
+<p>This directive results in the automatic creation and set up of an object
+message queue when the object is loaded or created at runtime. Object
+message queues are used for exchanging thread notifications and for
+storing concurrent goal solutions and replies to the multi-threading
+calls made within the object. The message queue for the
+<a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a> pseudo-object is automatically created at
+Logtalk startup (provided that multi-threading programming is supported
+and enabled for the chosen backend Prolog compiler).</p>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
@@ -221,7 +229,7 @@ calls) must include this directive.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a>
+<p class="last"><a class="reference internal" href="synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a>,
 <a class="reference internal" href="../predicates/object_property_2.html#predicates-object-property-2"><span class="std std-ref">object_property/2</span></a></p>
 </div>
 </div>

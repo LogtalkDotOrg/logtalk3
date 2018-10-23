@@ -33,6 +33,15 @@ and asynchronous messages. Any object containing calls to the built-in
 multi-threading predicates (or importing a category that contains such
 calls) must include this directive.
 
+This directive results in the automatic creation and set up of an object
+message queue when the object is loaded or created at runtime. Object
+message queues are used for exchanging thread notifications and for
+storing concurrent goal solutions and replies to the multi-threading
+calls made within the object. The message queue for the
+:ref:`user <objects_user>` pseudo-object is automatically created at
+Logtalk startup (provided that multi-threading programming is supported
+and enabled for the chosen backend Prolog compiler).
+
 Template and modes
 ------------------
 
@@ -49,5 +58,5 @@ Examples
 
 .. seealso::
 
-   :ref:`directives_synchronized_1`
+   :ref:`directives_synchronized_1`,
    :ref:`predicates_object_property_2`

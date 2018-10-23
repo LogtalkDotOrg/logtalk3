@@ -52,6 +52,8 @@ Logtalk and Read the Docs websites.
 
 * ADDED: Contributor Covenant code of conduct.
 
+* IMPROVED: Fixes and improvements to the contents of the manuals and tutorial.
+
 * IMPROVED: Manuals and APIs documentation cross-referencing.
 
 * FIXED: Several typos and also some outdated information in the manuals,
