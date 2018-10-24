@@ -188,11 +188,10 @@ if (sphinx) {
     WScript.Echo("");
     WScript.Echo("running sphinx-quickstart ...");
     WScript.Echo("");
-	FSObject.CopyFile(directory + "\\index.rst", directory + "\\index.rst.backup");
-	FSObject.DeleteFile(directory + "\\index.rst");
-	WshShell.Run("sphinx-quickstart", true);
-	FSObject.CopyFile(directory + "\\index.rst.backup", directory + "\\index.rst");
-	FSObject.DeleteFile(directory + "\\index.rst.backup");
+	WshShell.Run("sphinx-quickstart --master delete_me.rst", true);
+	FSObject.DeleteFile(WshShell.CurrentDirectory + "\\delete_me.rst");
+    WScript.Echo("");
+    WScript.Echo("all done");
 }
 
 WScript.Quit(0);
