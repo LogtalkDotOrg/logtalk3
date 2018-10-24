@@ -152,7 +152,7 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 	if (FSObject.GetExtensionName(file) == "xml") {
 		WScript.Echo("  converting " + file);
 		var rst_file = directory + "\\" + FSObject.GetBaseName(file) + ".rst";
-		if (file == "directory_index.xml" || file == "entity_index.xml" || file == "predicate_index.xml") {
+		if (file == "library_index.xml" || file == "directory_index.xml" || file == "entity_index.xml" || file == "predicate_index.xml") {
 			xslt = index_xslt;
 		} else {
 			xslt = entity_xslt;
