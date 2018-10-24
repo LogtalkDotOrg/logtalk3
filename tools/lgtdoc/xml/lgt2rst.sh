@@ -4,7 +4,7 @@
 ## 
 ##   XML documenting files to reStructuredText files conversion script
 ## 
-##   Last updated on October 6, 2018
+##   Last updated on October 24, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -89,6 +89,8 @@ processor=xsltproc
 
 directory="."
 
+sphinx=false
+
 index_file=index.rst
 index_title="Documentation index"
 
@@ -99,7 +101,7 @@ usage_help()
 	echo "current directory to reStructuredText files for use with Sphinx"
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory] [-i index] [-t title] [-p processor]"
+	echo "  $(basename "$0") [-d directory] [-i index] [-t title] [-p processor] [-s]"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
@@ -107,6 +109,7 @@ usage_help()
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
+	echo "  -s run sphinx-quickstart script"
 	echo "  -h help"
 	echo
 }
@@ -157,13 +160,14 @@ create_index_file()
 	echo "Generated on $date" >> "$index_file"
 }
 
-while getopts "d:i:t:p:h" Option
+while getopts "d:i:t:p:sh" Option
 do
 	case $Option in
 		d) d_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
+		s) sphinx=true;;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
@@ -241,6 +245,11 @@ if grep -q "<logtalk" ./*.xml ; then
 	create_index_file
 	echo "$(basename "$index_file") file generated"
 	echo
+	if [ "$sphinx" = true ] ; then
+		mv index.rst index.rst.backup
+		sphinx-quickstart
+		mv index.rst.backup index.rst
+	fi
 else
 	echo
 	echo "No XML files exist in the current directory!"

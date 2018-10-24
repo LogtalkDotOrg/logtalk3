@@ -1,4 +1,4 @@
-.TH lgt2rst 1 "October 9, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
+.TH lgt2rst 1 "October 24, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files for use with Sphinx
@@ -20,6 +20,9 @@ lgt2rst \- Logtalk script for converting XML documenting files into reStructured
 [
 .B \-p
 .I processor
+]
+[
+.B \-s
 ]
 .br
 .B lgt2rst
@@ -46,11 +49,15 @@ Title to be used on the index file.
 .I processor
 XSLT processor.
 .TP
+.B \-s
+Runs sphinx-quickstart script.
+.TP
 .B \-h
 Prints a summary of the script options.
 
 .SH REQUIREMENTS
 Requires a compatible XSLT processor. See the script help screen for more information.
+The use of the -s option requires Sphinx (and the theme that you want to use) to be installed.
 
 .SH ENVIRONMENT
 .TP

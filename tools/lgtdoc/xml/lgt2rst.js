@@ -2,7 +2,7 @@
 //
 //   XML documenting files to reStructuredText files conversion script
 //
-//   Last updated on October 9, 2018
+//   Last updated on October 24, 2018
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -30,6 +30,8 @@ if (ScriptEngineMajorVersion() < 5 || ScriptEngineMajorVersion() == 5 && ScriptE
 var WshShell = new ActiveXObject("WScript.Shell");
 
 var directory = WshShell.CurrentDirectory;
+
+var sphinx = false;
 
 var index_file = "index.rst"
 var index_title = "Documentation index"
@@ -89,6 +91,9 @@ if (WScript.Arguments.Named.Exists("t"))
 
 if (WScript.Arguments.Named.Exists("p"))
 	p_arg = WScript.Arguments.Named.Item("p");
+
+if (WScript.Arguments.Named.Exists("s"))
+	sphinx = true;
 
 var FSObject = new ActiveXObject("Scripting.FileSystemObject");
 
@@ -179,6 +184,12 @@ create_index_file();
 WScript.Echo("index file generated");
 WScript.Echo("");
 
+if ( sphinx == true ) {
+	FSObject.MoveFile("index.rst", "index.rst.backup");
+	WshShell.Run("sphinx-quickstart", true);
+	FSObject.MoveFile("index.rst.backup", "index.rst");
+}
+
 WScript.Quit(0);
 
 function usage_help() {
@@ -187,7 +198,7 @@ function usage_help() {
 	WScript.Echo("current directory to reStructuredText files for use with Sphinx");
 	WScript.Echo("");
 	WScript.Echo("Usage:");
-	WScript.Echo("  " + WScript.ScriptName + " [/d:directory] [/i:index] [/t:title] [/p:processor]");
+	WScript.Echo("  " + WScript.ScriptName + " [/d:directory] [/i:index] [/t:title] [/p:processor] [/s]");
 	WScript.Echo("  " + WScript.ScriptName + " help");
 	WScript.Echo("");
 	WScript.Echo("Optional arguments:");
@@ -195,6 +206,7 @@ function usage_help() {
 	WScript.Echo("  i - name of the index file (default is " + index_file + ")");
 	WScript.Echo("  t - title to be used in the index file (default is " + index_title + ")");
 	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, or sabcmd; default is " + processor + ")");
+	WScript.Echo("  s - run sphinx-quickstart script");
 	WScript.Echo("");
 	WScript.Quit(1);
 }

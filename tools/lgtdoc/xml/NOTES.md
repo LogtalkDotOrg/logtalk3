@@ -203,13 +203,14 @@ Brief description of each file in this folder:
 	need to type `lgt2md` in order to run the script).
 
 - `lgt2rst.sh` and `lgt2rst.js`  
-	Sample scripts to batch convert XML files to  reStructuredText files.
+	Sample scripts to batch convert XML files to reStructuredText files.
 
 	The scripts should be called from the directory containing the XML files
 	you wish to convert. Call the scripts with the help option for a description
 	of the available optional parameters (type `cscript lgt2rst.js help` or
 	`lgt2rst.sh -h`; depending on your Logtalk installation, you may simply
-	need to type `lgt2rst` in order to run the script).
+	need to type `lgt2rst` in order to run the script). The generated files
+	are expected to be used with Sphinx.
 
 - `lgt2txt.sh` and `lgt2txt.js`  
 	Sample scripts to batch convert XML files to text files.
