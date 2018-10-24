@@ -185,13 +185,15 @@ WScript.Echo("index file generated");
 WScript.Echo("");
 
 if (sphinx) {
-    WScript.Echo("");
-    WScript.Echo("running sphinx-quickstart ...");
-    WScript.Echo("");
-	WshShell.Run("sphinx-quickstart --master delete_me.rst", true);
-	FSObject.DeleteFile(WshShell.CurrentDirectory + "\\delete_me.rst");
-    WScript.Echo("");
-    WScript.Echo("all done");
+	WScript.Echo("");
+	WScript.Echo("running sphinx-quickstart ...");
+	WScript.Echo("");
+	FSObject.MoveFile(WshShell.CurrentDirectory + "\\index.rst", WshShell.CurrentDirectory + "\\index.backup");
+	WshShell.Run("sphinx-quickstart", 1, true);
+	FSObject.DeleteFile(WshShell.CurrentDirectory + "\\index.rst");
+	FSObject.MoveFile(WshShell.CurrentDirectory + "\\index.backup", WshShell.CurrentDirectory + "\\index.rst");
+	WScript.Echo("");
+	WScript.Echo("all done");
 }
 
 WScript.Quit(0);
@@ -225,7 +227,6 @@ function create_index_file() {
 	var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 
 	if (FSObject.FileExists(WshShell.CurrentDirectory + "\\directory_index.xml")) {
-        
 		f.WriteLine(".. toctree::");
 		f.WriteLine("   :maxdepth: 3");
 		f.WriteLine("   :caption: Contents:");
@@ -262,20 +263,20 @@ function create_index_file() {
 	var year  = today.getFullYear();
 	var month = today.getMonth() + 1;
 	if (month < 10)
-        month = "0" + month;
+		month = "0" + month;
 	var day = today.getDate();
 	if (day < 10)
-        day = "0" + day;
+		day = "0" + day;
 	strToday = year + "/" + month + "/" + day;
 	var hours = today.getHours();
 	if (hours < 10)
-        hours = "0" + hours;
+		hours = "0" + hours;
 	var mins = today.getMinutes();
 	if (mins < 10)
-        mins = "0" + mins;
+		mins = "0" + mins;
 	var secs = today.getSeconds();
 	if (secs < 10)
-        secs = "0" + secs;
+		secs = "0" + secs;
 	strTime = hours + ":" + mins + ":" + secs;
 	f.WriteLine("Generated on " + strToday + " - " + strTime);
 
