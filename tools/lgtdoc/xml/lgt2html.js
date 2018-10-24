@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to (X)HTML conversion script 
-//   Last updated on July 5, 2016
+//   Last updated on October 24, 2016
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -174,7 +174,7 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 	if (FSObject.GetExtensionName(file) == "xml") {
 		WScript.Echo("  converting " + file);
 		var html_file = directory + "\\" + FSObject.GetBaseName(file) + ".html";
-		if (file == "directory_index.xml" || file == "entity_index.xml" || file == "predicate_index.xml") {
+		if (file == "library_index.xml" || file == "directory_index.xml" || file == "entity_index.xml" || file == "predicate_index.xml") {
 			xslt = index_xslt;
 		} else {
 			xslt = entity_xslt;

@@ -87,6 +87,9 @@ blank lines, comment lines, and lines of source code) support for Logtalk.
 
 * FIXED: Cleanup goal for the `lgtdoc` tool tests.
 
+* FIXED: Conversion of the `library_index.xml` file by the `lgt2html.js` and
+`lgt2md.js` scripts.
+
 Examples
 --------
 
