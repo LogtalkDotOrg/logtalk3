@@ -136,7 +136,7 @@ Name: "{group}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; Components: b
 Name: "{group}\Read Me"; Filename: "{app}\README.md"; Components: base
 Name: "{group}\Customization instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: base
 Name: "{group}\Default settings"; Filename: "%LOGTALKUSER%\settings-sample.lgt"; Components: base
-Name: "{group}\Entity documentation"; Filename: "%LOGTALKUSER%\docs\index.html"; Components: base
+Name: "{group}\APIs documentation"; Filename: "%LOGTALKUSER%\docs\index.html"; Components: base
 
 Name: "{group}\Web Site"; Filename: "{#MyAppUrl}"; Components: base
 

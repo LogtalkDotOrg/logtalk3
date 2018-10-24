@@ -184,7 +184,10 @@ create_index_file();
 WScript.Echo("index file generated");
 WScript.Echo("");
 
-if ( sphinx == true ) {
+if (sphinx) {
+    WScript.Echo("");
+    WScript.Echo("running sphinx-quickstart ...");
+    WScript.Echo("");
 	FSObject.MoveFile("index.rst", "index.rst.backup");
 	WshShell.Run("sphinx-quickstart", true);
 	FSObject.MoveFile("index.rst.backup", "index.rst");
