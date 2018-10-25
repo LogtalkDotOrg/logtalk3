@@ -62,9 +62,9 @@ tutorial, and APIs documentation.
 Library
 -------
 
-* CHANGED: The library, tools, and contributions APIs are now generated from
-reStructuredText intermediate files (generated with the new `lgt2rst` script)
-using Sphinx and the Read the Docs theme.
+* CHANGED: The HTML version of the library, tools, and contributions APIs are
+now generated from reStructuredText intermediate files (themselves generated
+with the new `lgt2rst` script) using Sphinx and the Read the Docs theme.
 
 * ADDED: Types `operator_specifier` and `operator_priority` to the `type`
 library object.
