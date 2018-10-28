@@ -659,7 +659,7 @@ A predicate can be declared *coinductive* by using the
    :- coinductive(comember/2).
 
 Logtalk support for coinductive predicates is experimental and requires
-a back-end Prolog compiler with minimal support for cyclic terms.
+a backend Prolog compiler with minimal support for cyclic terms.
 
 .. _predicates_defining:
 
@@ -819,7 +819,7 @@ rewritten as:
 
 Lambda expressions may also contain lambda free variables. I.e.
 variables that are global to the lambda expression. For example, using
-GNU Prolog as the back-end compiler, we can write:
+GNU Prolog as the backend compiler, we can write:
 
 .. code-block:: text
 
@@ -844,7 +844,7 @@ Consider the following example by Markus Triska:
    yes
 
 Lambda expressions can be used, as expected, in non-deterministic
-queries as in the following example using SWI-Prolog as the back-end
+queries as in the following example using SWI-Prolog as the backend
 compiler and Markus Triska's CLP(FD) library:
 
 .. code-block:: text
@@ -1743,7 +1743,7 @@ encapsulating the above definition also contains a predicate named
 
 When calling non-standard Prolog built-in predicates or using
 non-standard Prolog arithmetic functions, you may run into portability
-problems while trying your applications with different back-end Prolog
+problems while trying your applications with different backend Prolog
 compilers (non-standard predicates and non-standard arithmetic functions
 are often specific to a Prolog compiler). You may use the Logtalk
 :ref:`portability <flag_portability>` compiler flag  to help check for
@@ -1855,7 +1855,7 @@ an object or a category, is a module name, not a file name.
 
    The actual module code should be loaded prior to compilation of Logtalk
    that uses it. In particular, programmers should not expect that the
-   module be auto-loaded (when using back-end Prolog compilers supporting an
+   module be auto-loaded (when using backend Prolog compilers supporting an
    autoloading mechanism).
 
 Calls to module meta-predicates may require providing a missing

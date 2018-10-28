@@ -169,7 +169,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 %  there should only a single extension defined for object files but
 %  but multiple extensions can be defined for Logtalk and Prolog source
-%  files and for back-end specific temporary files
+%  files and for backend specific temporary files
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -187,14 +187,14 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  back-end Prolog compiler features
+%  backend Prolog compiler features
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 % '$lgt_prolog_feature'(?atom, ?atom)
 %
-% back-end Prolog compiler supported features (that are compatible with Logtalk)
+% backend Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, if).
 '$lgt_prolog_feature'(prolog_version, _) :-

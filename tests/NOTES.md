@@ -33,9 +33,9 @@ You can automate running all these tests by calling the `logtalk_tester`
 shell script from the command-line (see the `scripts/NOTES.md` file for
 details on how to use this script with POSIX and Windows operating-systems).
 Type `man logtalk_tester` or `logtalk_tester -h` for usage details, including
-how to select the back-end Prolog compiler.
+how to select the backend Prolog compiler.
 
-To run all the provided unit tests with e.g. SWI-Prolog as the back-end
+To run all the provided unit tests with e.g. SWI-Prolog as the backend
 compiler, open a terminal and type:
 
 	$ cd $LOGTALKUSER

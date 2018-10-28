@@ -36,7 +36,7 @@ as proprietary built-in predicates. In addition, it is advisable that you constr
 if possible, the use of platform or compiler dependent code to a
 small number of objects with clearly defined protocols. You may also
 use Logtalk support for conditional compilation to compile different
-entity or predicate definitions depending on the back-end Prolog
+entity or predicate definitions depending on the backend Prolog
 compiler being used.
 
 .. _faq_portability_os:

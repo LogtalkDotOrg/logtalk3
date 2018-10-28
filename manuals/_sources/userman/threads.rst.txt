@@ -505,8 +505,8 @@ Multi-threading performance
 ---------------------------
 
 The performance of multi-threading applications is highly dependent on
-the back-end Prolog compiler, on the operating-system, and on the use of
-:term:`dynamic binding` and dynamic predicates. All compatible back-end
+the backend Prolog compiler, on the operating-system, and on the use of
+:term:`dynamic binding` and dynamic predicates. All compatible backend
 Prolog compilers that support multi-threading features make use of POSIX
 threads or *pthreads*. The performance of the underlying pthreads
 implementation can exhibit significant differences between operating

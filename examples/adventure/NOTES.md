@@ -28,12 +28,12 @@ adventures:
 - wumpus, written by Dan Cliburn, University of the Pacific
 
 For the "sleepy" and "spider" adventures, I applied the necessary changes
-to ensure compatibility with all the back-end Prolog compilers that you
+to ensure compatibility with all the backend Prolog compilers that you
 can use with Logtalk, rewrote some code to avoid creation of choice-points,
 and added a very simple command-line interface.
 
 For the "wumpus" adventure, I applied the necessary changes to ensure
-compatibility with all the back-end Prolog compilers that you can use
+compatibility with all the backend Prolog compilers that you can use
 with Logtalk.
 
 Any bugs introduced while adapting these text adventure examples to

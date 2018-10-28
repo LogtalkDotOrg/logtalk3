@@ -24,7 +24,7 @@ ________________________________________________________________________
 
 
 % the following lambda benchmarks are so far only available when using
-% SWI-Prolog, XSB, or YAP as the Logtalk back-end compilers:
+% SWI-Prolog, XSB, or YAP as the Logtalk backend compilers:
 
 ?- lambda_benchmarks::bench1.
 Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 

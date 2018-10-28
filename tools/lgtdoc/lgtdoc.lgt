@@ -329,7 +329,7 @@
 			(	Type == windows ->
 				Encoding = unicode_le
 			;	% other operating-systems can be either big-endian or little-endian
-				% but most Prolog back-end compilers don't provide the reflection
+				% but most Prolog backend compilers don't provide the reflection
 				% support to query about the operating-system and the architecture
 				Encoding = unicode_be
 			).

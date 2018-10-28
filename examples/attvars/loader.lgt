@@ -33,7 +33,7 @@
 :- else.
 
 	:- initialization((
-		write('WARNING: example not supported on this back-end Prolog compiler!'), nl
+		write('WARNING: example not supported on this backend Prolog compiler!'), nl
 	)).
 
 :- endif.

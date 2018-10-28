@@ -27,6 +27,6 @@
 
 :- else.
 
-	:- initialization((write('WARNING: example not supported on this back-end Prolog compiler!'), nl)).
+	:- initialization((write('WARNING: example not supported on this backend Prolog compiler!'), nl)).
 
 :- endif.

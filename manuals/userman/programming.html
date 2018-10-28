@@ -268,7 +268,7 @@ calls to Logtalk built-in predicates from file <code class="docutils literal not
 directives are compiled for better performance.</p>
 <p>The text encoding used in a source file may be declared using the
 <a class="reference internal" href="../refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive when running Logtalk with
-back-end Prolog compilers that support multiple encodings (check the
+backend Prolog compilers that support multiple encodings (check the
 <a class="reference internal" href="installing.html#flag-encoding-directive"><span class="std std-ref">encoding_directive</span></a> flag in the
 adapter file of your Prolog compiler).</p>
 <p>Logtalk source files can include the text of other files by using the
@@ -407,7 +407,7 @@ the adapter file (by default, <code class="docutils literal notranslate"><span c
 loader helper file containing the calls to the <code class="docutils literal notranslate"><span class="pre">logtalk_load/1-2</span></code>
 predicates. Consulting or compiling the loader file will then compile
 and load all your Logtalk entities into memory (see below for details).</p>
-<p>With most Prolog back-end compilers, you can use the shorthands
+<p>With most Prolog backend compilers, you can use the shorthands
 <code class="docutils literal notranslate"><span class="pre">{File}</span></code> for <code class="docutils literal notranslate"><span class="pre">logtalk_load(File)</span></code> and <code class="docutils literal notranslate"><span class="pre">{File1,</span> <span class="pre">File2,</span> <span class="pre">...}</span></code> for
 <code class="docutils literal notranslate"><span class="pre">logtalk_load([File1,</span> <span class="pre">File2,</span> <span class="pre">...])</span></code>. The use these shorthands should
 be restricted to the Logtalk/Prolog top-level interpreter as they are
@@ -537,11 +537,11 @@ predicate needed for all available libraries. This allows us to load
 library source files or entire libraries without worrying about
 libraries paths, improving code portability. The directory paths on the
 second argument should always end with the path directory separator
-character. Most back-end Prolog compilers allows the use of environment
+character. Most backend Prolog compilers allows the use of environment
 variables in the second argument of the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code>
 predicate. Use of POSIX relative paths (e.g. <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) for
 top-level library directories (e.g. <code class="docutils literal notranslate"><span class="pre">lgtuser</span></code> in the example above) is
-not advised as different back-end Prolog compilers may start with
+not advised as different backend Prolog compilers may start with
 different initial working directories, which may result in portability
 problems of your loader files.</p>
 <p>The library notation provides functionality inspired by the
@@ -774,8 +774,8 @@ default flag vale is <code class="docutils literal notranslate"><span class="pre
 no consequence for objects already compiled and loaded.</dd>
 </dl>
 </div>
-<div class="section" id="back-end-prolog-compiler-and-loader-flags">
-<h4>Back-end Prolog compiler and loader flags<a class="headerlink" href="#back-end-prolog-compiler-and-loader-flags" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="backend-prolog-compiler-and-loader-flags">
+<h4>Back-end Prolog compiler and loader flags<a class="headerlink" href="#backend-prolog-compiler-and-loader-flags" title="Permalink to this headline">¶</a></h4>
 <span id="index-18"></span><dl class="docutils" id="flag-prolog-compiler">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_compiler(Flags)</span></code></dt>
 <dd>List of compiler flags for the generated Prolog files. The valid
@@ -804,7 +804,7 @@ when compiling Logtalk source files. This directory can be specified
 using an atom or using library notation. The directory must always
 end with a slash. The default value is a sub-directory of the source
 files directory, either <code class="docutils literal notranslate"><span class="pre">'./lgt_tmp/'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./.lgt_tmp/'</span></code>
-(depending on the back-end Prolog compiler and operating-system).
+(depending on the backend Prolog compiler and operating-system).
 Relative directories must always start with <code class="docutils literal notranslate"><span class="pre">'./'</span></code> due to the lack
 of a portable solution to check if a path is relative or absolute.</dd>
 </dl>
@@ -934,7 +934,7 @@ files. For static predicates, almost all Prolog compilers replace the
 old definitions with the new ones. However, for dynamic predicates, the
 behavior depends on the Prolog compiler. Most compilers replace the old
 definitions but some of them simply append the new ones, which usually
-leads to trouble. See the compatibility notes for the back-end Prolog
+leads to trouble. See the compatibility notes for the backend Prolog
 compiler you intend to use for more information. There is an additional
 potential problem when using multi-threading programming. Reloading a
 threaded object does not recreate from scratch its old message queue,
@@ -944,7 +944,7 @@ corresponding source files (and, therefore, recompiling them) by setting
 the <a class="reference internal" href="#flag-reload"><span class="std std-ref">reload</span></a> compiler flag to <code class="docutils literal notranslate"><span class="pre">skip</span></code>. For code under
 development, you can turn off the <a class="reference internal" href="#flag-clean"><span class="std std-ref">clean</span></a> flag to avoid
 recompiling files that have not been modified since last compilation
-(assuming that back-end Prolog compiler that you are using supports
+(assuming that backend Prolog compiler that you are using supports
 retrieving of file modification dates). You can disable deleting the
 intermediate files generated when compiling source files by changing the
 default flag value in your settings file, by using the corresponding
@@ -1421,7 +1421,7 @@ Thus, the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/
 <em>execution-context switching</em>.</p>
 <p>The availability of the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct is controlled by the
 <a class="reference internal" href="#flag-context-switching-calls"><span class="std std-ref">context_switching_calls</span></a> compiler
-flag (its default value is defined in the adapter files of the back-end
+flag (its default value is defined in the adapter files of the backend
 Prolog compilers).</p>
 </div>
 <div class="section" id="using-compilation-hooks-and-term-expansion-for-debugging">

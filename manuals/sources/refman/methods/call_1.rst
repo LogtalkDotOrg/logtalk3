@@ -35,7 +35,7 @@ This non-terminal takes a closure and is processed by appending the
 input list of tokens and the list of remaining tokens to the arguments
 of the closure. This built-in non-terminal is interpreted as a private
 non-terminal and thus cannot be used as a message to an object. When
-using a back-end Prolog compiler supporting a module system, calls in
+using a backend Prolog compiler supporting a module system, calls in
 the format ``call(Module:Closure)`` may also be used. By using as
 argument a :term:`lambda expression`, this built-in non-terminal can
 provide controlled access to the input list of tokens and to the list

@@ -403,7 +403,7 @@
 	default_print_message_token(term(Term, Options), _, Stream, _) :-
 		{write_term(Stream, Term, Options)}.
 	% the following tokens were first introduced by SWI-Prolog; we use default definitions
-	% for compatibility when running Logtalk with other back-end Prolog compilers
+	% for compatibility when running Logtalk with other backend Prolog compilers
 	default_print_message_token(ansi(_, Format, Arguments), _, Stream, _) :-
 		{format(Stream, Format, Arguments)}.
 	default_print_message_token(begin(_, _), _, _, _).

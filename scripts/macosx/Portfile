@@ -18,7 +18,7 @@ long_description	\
 	language with a feature set suitable for programming in the large. Logtalk supports modern code     \
 	encapsulation and code reuse mechanisms without compromising the declarative programming features   \
 	of Prolog. Logtalk is implemented in highly portable code and can use most modern and standards     \
-	compliant Prolog implementations as a back-end compiler. As a multi-paradigm language, it includes  \
+	compliant Prolog implementations as a backend compiler. As a multi-paradigm language, it includes  \
 	support for modules, prototypes, classes, protocols (interfaces), categories (components and hot    \
 	patching), event-driven programming, and high-level multi-threading programming. Its distribution   \
 	uses a commercial friendly license and includes full documentation, portable libraries, a           \
@@ -63,7 +63,7 @@ post-pkg {
 post-activate {
 	ui_msg "****************************************************************************"
 	ui_msg "* Integration scripts have been created for running Logtalk with selected"
-	ui_msg "* back-end Prolog compilers (which must be properly installed for running"
+	ui_msg "* backend Prolog compilers (which must be properly installed for running"
 	ui_msg "* the scripts!):"
 	ui_msg "*"
 	ui_msg "* B-Prolog (version 7.8 or later):         bplgt"

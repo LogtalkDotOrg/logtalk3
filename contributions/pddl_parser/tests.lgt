@@ -55,7 +55,7 @@
 
 	:- if(current_prolog_flag(max_arity, 255)).
 		:- initialization((
-			write('WARNING: The "sokoban" unit tests cannot run with this back-end Prolog'), nl,
+			write('WARNING: The "sokoban" unit tests cannot run with this backend Prolog'), nl,
 			write('         compiler due to a limitation on the maximum arity of terms.'), nl
 		)).
 	:- else.

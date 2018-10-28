@@ -32,7 +32,7 @@
 	cover(test).
 	cover(metapreds).
 	:- if(current_object(client)).	% client for testing use_module/1 directives, which are
-		cover(client).				% only supported for some back-end Prolog compilers
+		cover(client).				% only supported for some backend Prolog compilers
 	:- endif.
 
 	test(modules_1) :-
@@ -57,7 +57,7 @@
 		Names == [paulo, carlos, helena].
 
 	:- if(current_object(client)).	% client for testing use_module/1 directives, which are
-									% only supported for some back-end Prolog compilers
+									% only supported for some backend Prolog compilers
 		test(modules_6) :-
 			client::names(Names),
 			Names == [paulo, carlos, helena].

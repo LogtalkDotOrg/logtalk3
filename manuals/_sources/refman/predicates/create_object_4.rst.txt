@@ -34,7 +34,7 @@ instances, and classes. This predicate is often used as a primitive to
 implement high-level object creation methods.
 
 Note that, when opting for runtime generated object identifiers, it's
-possible to run out of identifiers when using a back-end Prolog compiler
+possible to run out of identifiers when using a backend Prolog compiler
 with bounded integer support. The portable solution, when creating a
 large number of dynamic objects in long-running applications, is to
 recycle, whenever possible, the identifiers.

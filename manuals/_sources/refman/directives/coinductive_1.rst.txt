@@ -35,7 +35,7 @@ Description
    coinductive([Template1, ...])
 
 This is an **experimental** directive, used for declaring coinductive
-predicates. Requires a back-end Prolog compiler with minimal support for
+predicates. Requires a backend Prolog compiler with minimal support for
 cyclic terms. The current implementation of coinduction allows the
 generation of only the *basic cycles* but all valid solutions should be
 recognized. Use a predicate indicator as argument when all the

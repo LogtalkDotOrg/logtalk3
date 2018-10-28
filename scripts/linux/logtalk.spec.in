@@ -10,7 +10,7 @@ BuildArchitectures: noarch
 URL: https://logtalk.org/
 AutoReqProv: no
 %description
-Logtalk is an object-oriented logic programming language that can use most Prolog implementations as a back-end compiler. As a multi-paradigm language, it includes support for both prototypes and classes, protocols (interfaces), component-based programming through category-based composition, event-driven programming, and high-level multi-threading programming.
+Logtalk is an object-oriented logic programming language that can use most Prolog implementations as a backend compiler. As a multi-paradigm language, it includes support for both prototypes and classes, protocols (interfaces), component-based programming through category-based composition, event-driven programming, and high-level multi-threading programming.
 
 %prep
 %setup -q -c LOGTALK_INSTALL_DIRECTORY -n LOGTALK_INSTALL_DIRECTORY
@@ -124,7 +124,7 @@ echo "\"lgt2txt\" scripts have been created on \"/usr/local/bin\";"
 echo "ensure that this directory is in your execution path."
 echo
 echo "The following integration scripts are installed for running Logtalk"
-echo "with selected back-end Prolog compilers:"
+echo "with selected backend Prolog compilers:"
 echo
 echo "* B-Prolog (version 7.8 or later):         bplgt"
 echo "* CxProlog (version 0.98.1 or later):      cxlgt"

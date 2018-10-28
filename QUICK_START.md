@@ -28,7 +28,7 @@ operating-system (when available) or by following the instructions
 on the `INSTALL.md` file.
 
 On POSIX operating-systems, the following shell scripts are installed 
-by default for running Logtalk with selected back-end Prolog compilers 
+by default for running Logtalk with selected backend Prolog compilers 
 (which must be up-to-date and properly installed before running these
 scripts!):
 
@@ -47,12 +47,12 @@ scripts!):
 * YAP:            `yaplgt`
 
 On MacOS X systems, `/opt/local/bin` must be in your PATH to run the scripts.
-Terminal command files for running Logtalk with selected back-end Prolog 
+Terminal command files for running Logtalk with selected backend Prolog 
 compilers are also available on the Logtalk installation folder (by default,
 `/opt/local/share/logtalk/scripts/macosx/command_files`; for easy access, the
 installer creates an alias to the Logtalk folder in the Applications folder.
 
-On Windows systems, shortcuts for running Logtalk with selected back-end 
+On Windows systems, shortcuts for running Logtalk with selected backend 
 Prolog compilers are created on the `Start Menu/Programs/Logtalk` menu.
 The first run of the JIProlog and XSB integration shortcuts may require
 administrator privileges depending on the XSB installation (right-click

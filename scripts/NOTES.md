@@ -102,7 +102,7 @@ also available in the Logtalk website.
 
 - `logtalk_backend_select.sh`  
 	experimental shell script for defining an alias, logtalk, to a chosen
-	back-end Prolog integration script for POSIX operating-systems; the
+	backend Prolog integration script for POSIX operating-systems; the
 	alias is created in same directory where the `*lgt` integration scripts
 	are found
 

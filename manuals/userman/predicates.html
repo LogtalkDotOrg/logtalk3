@@ -766,7 +766,7 @@ predicate primary declaration.</p>
 </pre></div>
 </div>
 <p>Logtalk support for coinductive predicates is experimental and requires
-a back-end Prolog compiler with minimal support for cyclic terms.</p>
+a backend Prolog compiler with minimal support for cyclic terms.</p>
 </div>
 </div>
 <div class="section" id="defining-predicates">
@@ -898,7 +898,7 @@ yes
 </div>
 <p>Lambda expressions may also contain lambda free variables. I.e.
 variables that are global to the lambda expression. For example, using
-GNU Prolog as the back-end compiler, we can write:</p>
+GNU Prolog as the backend compiler, we can write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- meta::map({Z}/[X,Y]&gt;&gt;(Z#=X+Y), [1,2,3], Zs).
 Z = _#22(3..268435455)
 Zs = [_#3(2..268435454),_#66(1..268435453),_#110(0..268435452)]
@@ -918,7 +918,7 @@ yes
 </pre></div>
 </div>
 <p>Lambda expressions can be used, as expected, in non-deterministic
-queries as in the following example using SWI-Prolog as the back-end
+queries as in the following example using SWI-Prolog as the backend
 compiler and Markus Triska’s CLP(FD) library:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- meta::map({Z}/[X,Y]&gt;&gt;(clpfd:(Z#=X+Y)), Xs, Ys).
 Xs = [],
@@ -1706,7 +1706,7 @@ encapsulating the above definition also contains a predicate named
 <code class="docutils literal notranslate"><span class="pre">write/1</span></code> or a dynamic declaration for the predicate.</p>
 <p>When calling non-standard Prolog built-in predicates or using
 non-standard Prolog arithmetic functions, you may run into portability
-problems while trying your applications with different back-end Prolog
+problems while trying your applications with different backend Prolog
 compilers (non-standard predicates and non-standard arithmetic functions
 are often specific to a Prolog compiler). You may use the Logtalk
 <a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability</span></a> compiler flag  to help check for
@@ -1794,7 +1794,7 @@ an object or a category, is a module name, not a file name.</p>
 <p class="first admonition-title">Warning</p>
 <p class="last">The actual module code should be loaded prior to compilation of Logtalk
 that uses it. In particular, programmers should not expect that the
-module be auto-loaded (when using back-end Prolog compilers supporting an
+module be auto-loaded (when using backend Prolog compilers supporting an
 autoloading mechanism).</p>
 </div>
 <p>Calls to module meta-predicates may require providing a missing

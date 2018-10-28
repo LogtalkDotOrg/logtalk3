@@ -274,7 +274,7 @@ to_engine(Interactor, Pattern, Goal) :-
 %
 %  there should only a single extension defined for object files but
 %  but multiple extensions can be defined for Logtalk and Prolog source
-%  files and for back-end specific temporary files
+%  files and for backend specific temporary files
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -292,14 +292,14 @@ to_engine(Interactor, Pattern, Goal) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  back-end Prolog compiler features
+%  backend Prolog compiler features
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 % '$lgt_prolog_feature'(?atom, ?atom)
 %
-% back-end Prolog compiler supported features (that are compatible with Logtalk)
+% backend Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, lean).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-

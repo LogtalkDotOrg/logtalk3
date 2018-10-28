@@ -52,7 +52,7 @@ run all the example unit tests. You can automate running all these tests by
 calling the `logtalk_tester` shell script from the command-line (see the
 `scripts/NOTES.md` file for details on how to use with POSIX and Windows
 operating-systems). Type `man logtalk_tester` or `logtalk_tester -h` for
-usage details, including how to select the back-end Prolog compiler.
+usage details, including how to select the backend Prolog compiler.
 
 Follows a short description of each included example (in alphabetical order):
 
@@ -111,7 +111,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `cc`  
 	example of using conditional compilation directives to write code
-	portable across several back-end Prolog compilers
+	portable across several backend Prolog compilers
 
 - `classmethods`  
 	example of defining "class methods" as found on some class-based
@@ -136,7 +136,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `constraints`  
 	several examples of using constraints within objects and categories
-	when using constraint domain solvers found in back-end Prolog compilers
+	when using constraint domain solvers found in backend Prolog compilers
 
 - `dcgs`  
 	examples of using DCG rules inside objects and categories

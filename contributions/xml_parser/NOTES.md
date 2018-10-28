@@ -32,6 +32,6 @@ documentation to HTML or PDF.
 See the copyright and license information on the contributed files for 
 usage and distributions conditions.
 
-When using GNU Prolog as the back-end compiler, you may need to to use a
+When using GNU Prolog as the backend compiler, you may need to to use a
 larger default global stack size (see the GNU Prolog documentation on the
 environment variable `GLOBALSZ`).

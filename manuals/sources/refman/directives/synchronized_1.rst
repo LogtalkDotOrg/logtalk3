@@ -44,7 +44,7 @@ the same mutex. In order to use a separate mutex for each predicate
 per-predicate synchronized directive must be used.
 
 Declaring a predicate synchronized implicitly makes it deterministic.
-When using a single-threaded back-end Prolog compiler, calls to
+When using a single-threaded backend Prolog compiler, calls to
 synchronized predicates behave as wrapped by the standard ``once/1``
 meta-predicate.
 

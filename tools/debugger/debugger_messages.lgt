@@ -252,10 +252,10 @@
 	% features
 
 	message_tokens(break_not_supported) -->
-		['     break/0 not supported by the back-end Prolog compiler.'-[], nl].
+		['     break/0 not supported by the backend Prolog compiler.'-[], nl].
 
 	message_tokens(max_depth_not_supported) -->
-		['     Limiting write term depth not supported by the back-end Prolog compiler.'-[], nl].
+		['     Limiting write term depth not supported by the backend Prolog compiler.'-[], nl].
 
 	% help
 

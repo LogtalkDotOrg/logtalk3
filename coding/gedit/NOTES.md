@@ -57,6 +57,6 @@ the following locations on your home directory:
 	Gedit 3.x: ~/.config/gedit/tools/
 
 Before using the provided tools, edit and customize them in order to
-use your favorite back-end Prolog compiler and to set your choices
+use your favorite backend Prolog compiler and to set your choices
 for the (X)HTML and PDF generation scripts. The `xdg-open` command
 must available to use most of the provided commands.

@@ -23,7 +23,7 @@ ________________________________________________________________________
 ...
 
 
-% some example queries for back-end Prolog compilers implementing the 
+% some example queries for backend Prolog compilers implementing the 
 % time/1 timing predicate (e.g. SWI-Prolog, YAP, or XSB):
 
 ?- time(ack::ack(2, 4, V)).
@@ -39,7 +39,7 @@ V = 61.
 V = 125.
 
 
-% some example queries for other back-end Prolog compilers:
+% some example queries for other backend Prolog compilers:
 
 ?- ack::ack(2, 4, V).
 V = 11

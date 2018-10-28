@@ -19,4 +19,4 @@ ________________________________________________________________________
 
 This directory contains files used when building macOS installer 
 packages and a set of double-clickable `*.command` Terminal files
-for starting Logtalk with selected back-end Prolog compilers.
+for starting Logtalk with selected backend Prolog compilers.

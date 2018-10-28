@@ -188,7 +188,7 @@ High level multi-threading programming support
 ----------------------------------------------
 
    High level multi-threading programming is available when running
-   Logtalk with selected back-end Prolog compilers, allowing objects to
+   Logtalk with selected backend Prolog compilers, allowing objects to
    support both synchronous and asynchronous messages. Logtalk allows
    programmers to take advantage of modern multi-processor and
    multi-core computers without bothering with the details of creating
@@ -222,7 +222,7 @@ Performance
    The current Logtalk implementation works as a trans-compiler: Logtalk
    source files are first compiled to Prolog source files, which are
    then compiled by the chosen Prolog compiler. Therefore, Logtalk
-   performance necessarily depends on the back-end Prolog compiler. The
+   performance necessarily depends on the backend Prolog compiler. The
    Logtalk compiler preserves the programmers choices when writing
    efficient code that takes advantage of tail recursion and
    first-argument indexing.

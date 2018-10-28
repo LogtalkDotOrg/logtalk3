@@ -31,7 +31,7 @@
 
 
 % test object for calling user-defined predicates in "user"
-% it requires a back-end Prolog compiler that supports the
+% it requires a backend Prolog compiler that supports the
 % definition of meta-predicates in plain Prolog
 
 :- object(uses_2_test_object_2).

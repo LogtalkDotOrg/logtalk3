@@ -195,7 +195,7 @@ For more information on the DOT language and related tools see:
 
 When using Windows, there are known issues with some Prolog compilers due
 to the internal representation of paths. If you encounter problems with a
-specific back-end Prolog compiler, try to use another supported back-end
+specific backend Prolog compiler, try to use another supported backend
 Prolog compiler when generating diagrams.
 
 For printing large diagrams, you will need to either use a tool to slice

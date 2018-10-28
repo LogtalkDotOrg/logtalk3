@@ -66,7 +66,7 @@ Name: "custom"; Description: "Custom installation"; Flags: iscustom
 Name: "base"; Description: "Base system (compiler/runtime, Prolog integration files, manuals)"; Types: full base custom; Flags: disablenouninstallwarning
 Name: "user"; Description: "User files (libraries, examples, and other support files)"; Types: full user custom; Flags: checkablealone disablenouninstallwarning
 Name: "user\backup"; Description: "Backup current Logtalk user folder"; Types: full user custom; Flags: disablenouninstallwarning
-Name: "prolog"; Description: "Prolog integration (back-end compiler support)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog"; Description: "Prolog integration (backend compiler support)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\bp"; Description: "B-Prolog integration (version 7.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.98.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#143 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -784,7 +784,7 @@ begin
   begin
     Error := 'No compatible Prolog compiler found!'
              + Chr(13) + Chr(13)
-             + 'Logtalk requires a compatible Prolog compiler to be installed in order to run. Logtalk uses a Prolog compiler as a back-end compiler.'
+             + 'Logtalk requires a compatible Prolog compiler to be installed in order to run. Logtalk uses a Prolog compiler as a backend compiler.'
              + Chr(13) + Chr(13)
              + 'You must rerun the Logtalk installer after installing a compatible Prolog compiler.';
     ErrorPage := CreateOutputMsgPage(wpSelectDir, 'Warning', 'No compatible Prolog compiler found!', Error)

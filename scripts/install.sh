@@ -160,7 +160,7 @@ for file in ../../logtalk/man/man1/*.1.gz ; do
 done
 
 echo "The following integration scripts are installed for running Logtalk"
-echo "with selected back-end Prolog compilers:"
+echo "with selected backend Prolog compilers:"
 echo
 echo "* B-Prolog (version 7.8 or later):         bplgt"
 echo "* CxProlog (version 0.98.1 or later):      cxlgt"

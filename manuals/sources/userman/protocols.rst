@@ -265,7 +265,7 @@ We can find the properties of defined protocols by calling the
 A protocol may have the property ``static``, ``dynamic``, or
 ``built_in``. Dynamic protocols can be abolished in runtime by calling
 the :ref:`predicates_abolish_protocol_1`
-built-in predicate. Depending on the back-end Prolog compiler, a
+built-in predicate. Depending on the backend Prolog compiler, a
 protocol may have additional properties related to the source file where
 it is defined.
 

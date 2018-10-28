@@ -1676,7 +1676,7 @@
 
 	:- else.
 
-		:- initialization((write('WARNING: back-end Prolog compiler not supported!'), nl)).
+		:- initialization((write('WARNING: backend Prolog compiler not supported!'), nl)).
 
 	:- endif.
 

@@ -2,7 +2,7 @@
 
 #############################################################################
 ## 
-##   Logtalk back-end Prolog compiler select script
+##   Logtalk backend Prolog compiler select script
 ##   Last updated on May 17, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
@@ -31,7 +31,7 @@ print_version() {
 
 
 list_backends() {
-	echo "Available back-end Prolog compilers:"
+	echo "Available backend Prolog compilers:"
 	if [ -e "$(command -v bplgt)" ] && [ "$(command -v bp)" != "" ] ; then
 		echo -n "  bplgt"
 	fi
@@ -103,7 +103,7 @@ remove_link() {
 
 usage_help() {
 	echo 
-	echo "This script allows the definition of a default back-end Prolog compiler by"
+	echo "This script allows the definition of a default backend Prolog compiler by"
 	echo "creating a symbolic link, \"logtalk\", to the corresponding integration script."
 	echo
 	echo "Usage:"

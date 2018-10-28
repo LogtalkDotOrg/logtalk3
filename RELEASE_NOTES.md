@@ -100,7 +100,7 @@ entities for clarity.
 category to add a missing predicate scope directive to an object.
 
 * FIXED: Issue running the `birds` example when using a recent SWI-Prolog
-version as the backend compiler (which now require flushing output before
+version as the backend compiler (which now requires flushing output before
 reading a term).
 
 IDEs, text editors, and syntax highlighters support

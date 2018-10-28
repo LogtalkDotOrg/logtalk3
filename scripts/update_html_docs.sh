@@ -39,7 +39,7 @@ fi
 
 
 # default to SWI-Prolog as some of the documentation should be
-# generated using a multi-threaded back-end Prolog compiler
+# generated using a multi-threaded backend Prolog compiler
 backend=swipl
 prolog='SWI-Prolog'
 logtalk="swilgt$extension -g"
@@ -67,7 +67,7 @@ usage_help()
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -p back-end Prolog compiler (default is $backend)"
+	echo "  -p backend Prolog compiler (default is $backend)"
 	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
@@ -123,11 +123,11 @@ elif [ "$p_arg" == "yap" ] ; then
 	prolog='YAP'
 	logtalk="yaplgt$extension -g"
 elif [ "$p_arg" != "" ] ; then
-	echo "Error! Unsupported back-end Prolog compiler: $p_arg" >&2
+	echo "Error! Unsupported backend Prolog compiler: $p_arg" >&2
 	usage_help
 	exit 1
 elif [ ! "$(command -v $backend)" ] ; then
-	echo "Error! Default back-end Prolog compiler not found: $prolog" >&2
+	echo "Error! Default backend Prolog compiler not found: $prolog" >&2
 	usage_help
 	exit 1
 fi

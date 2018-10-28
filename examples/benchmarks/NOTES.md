@@ -77,7 +77,7 @@ Prolog predicate calls). In real-life applications, only testing can give
 you a balanced view on the trade-offs between plain Prolog performance and
 Logtalk programming features.
 
-The loader files load a module version of the tests when a back-end Prolog
+The loader files load a module version of the tests when a backend Prolog
 compiler that supports modules is used. For most Prolog module systems, the 
 performance of module calls is close or even identical to the performance of 
 plain Prolog calls when using imported predicates and implicit qualification.

@@ -82,7 +82,7 @@ directives are compiled for better performance.
 
 The text encoding used in a source file may be declared using the
 :ref:`directives_encoding_1` directive when running Logtalk with
-back-end Prolog compilers that support multiple encodings (check the
+backend Prolog compilers that support multiple encodings (check the
 :ref:`encoding_directive <flag_encoding_directive>` flag in the
 adapter file of your Prolog compiler).
 
@@ -257,7 +257,7 @@ loader helper file containing the calls to the ``logtalk_load/1-2``
 predicates. Consulting or compiling the loader file will then compile
 and load all your Logtalk entities into memory (see below for details).
 
-With most Prolog back-end compilers, you can use the shorthands
+With most Prolog backend compilers, you can use the shorthands
 ``{File}`` for ``logtalk_load(File)`` and ``{File1, File2, ...}`` for
 ``logtalk_load([File1, File2, ...])``. The use these shorthands should
 be restricted to the Logtalk/Prolog top-level interpreter as they are
@@ -412,11 +412,11 @@ predicate needed for all available libraries. This allows us to load
 library source files or entire libraries without worrying about
 libraries paths, improving code portability. The directory paths on the
 second argument should always end with the path directory separator
-character. Most back-end Prolog compilers allows the use of environment
+character. Most backend Prolog compilers allows the use of environment
 variables in the second argument of the ``logtalk_library_path/2``
 predicate. Use of POSIX relative paths (e.g. ``'../'`` or ``'./'``) for
 top-level library directories (e.g. ``lgtuser`` in the example above) is
-not advised as different back-end Prolog compilers may start with
+not advised as different backend Prolog compilers may start with
 different initial working directories, which may result in portability
 problems of your loader files.
 
@@ -741,7 +741,7 @@ Other flags
    using an atom or using library notation. The directory must always
    end with a slash. The default value is a sub-directory of the source
    files directory, either ``'./lgt_tmp/'`` or ``'./.lgt_tmp/'``
-   (depending on the back-end Prolog compiler and operating-system).
+   (depending on the backend Prolog compiler and operating-system).
    Relative directories must always start with ``'./'`` due to the lack
    of a portable solution to check if a path is relative or absolute.
 
@@ -891,7 +891,7 @@ files. For static predicates, almost all Prolog compilers replace the
 old definitions with the new ones. However, for dynamic predicates, the
 behavior depends on the Prolog compiler. Most compilers replace the old
 definitions but some of them simply append the new ones, which usually
-leads to trouble. See the compatibility notes for the back-end Prolog
+leads to trouble. See the compatibility notes for the backend Prolog
 compiler you intend to use for more information. There is an additional
 potential problem when using multi-threading programming. Reloading a
 threaded object does not recreate from scratch its old message queue,
@@ -902,7 +902,7 @@ corresponding source files (and, therefore, recompiling them) by setting
 the :ref:`reload <flag_reload>` compiler flag to ``skip``. For code under
 development, you can turn off the :ref:`clean <flag_clean>` flag to avoid
 recompiling files that have not been modified since last compilation
-(assuming that back-end Prolog compiler that you are using supports
+(assuming that backend Prolog compiler that you are using supports
 retrieving of file modification dates). You can disable deleting the
 intermediate files generated when compiling source files by changing the
 default flag value in your settings file, by using the corresponding
@@ -1437,7 +1437,7 @@ Thus, the ``<</2`` control construct implements a form of
 
 The availability of the ``<</2`` control construct is controlled by the
 :ref:`context_switching_calls <flag_context_switching_calls>` compiler
-flag (its default value is defined in the adapter files of the back-end
+flag (its default value is defined in the adapter files of the backend
 Prolog compilers).
 
 .. _programming_hooks:

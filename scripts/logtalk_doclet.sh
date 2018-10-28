@@ -119,7 +119,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
-	echo "  -p back-end Prolog compiler (default is $backend)"
+	echo "  -p backend Prolog compiler (default is $backend)"
 	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
@@ -205,11 +205,11 @@ elif [ "$p_arg" == "yap" ] ; then
 	logtalk=yaplgt$extension
 	logtalk_call="$logtalk -g"
 elif [ "$p_arg" != "" ] ; then
-	echo "Error! Unsupported back-end Prolog compiler: $p_arg" >&2
+	echo "Error! Unsupported backend Prolog compiler: $p_arg" >&2
 	usage_help
 	exit 1
 elif [ ! "$(command -v $backend)" ] ; then
-	echo "Error! Default back-end Prolog compiler not found: $prolog" >&2
+	echo "Error! Default backend Prolog compiler not found: $prolog" >&2
 	usage_help
 	exit 1
 elif [ ! "$(command -v $logtalk)" ] ; then

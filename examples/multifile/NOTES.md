@@ -20,7 +20,7 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This example illustrates how to use multifile predicates within Logtalk objects
-and categories. Note, however, that a back-end Prolog compiler also supporting
+and categories. Note, however, that a backend Prolog compiler also supporting
 static multifile predicates is required to run this example (Qu-Prolog 9.0 only
 supports dynamic multifile predicates; if using XSB, you will need r9206 or a
 later version).

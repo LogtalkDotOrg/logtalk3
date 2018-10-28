@@ -48,7 +48,7 @@ Basic library aliases defined in the `paths.pl` file include:
 You might need to edit the `paths.pl` file in order to adapt it to 
 reflect your Logtalk installation, Prolog compiler, and operating-system 
 requirements. However, as defined, the provided `paths.pl` file is already
-compatible with the supported back-end Prolog compilers running on MacOS X,
+compatible with the supported backend Prolog compilers running on MacOS X,
 Windows, Linux, Unix, and Unix-like operating-systems.
 
 Although you could customize this file by adding the paths to your own

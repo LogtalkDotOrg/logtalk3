@@ -171,7 +171,7 @@ the `scripts/NOTES.md` file for details):
 
 The local copies made by the `logtalk_user_setup` scripts have both read and
 write permissions for the user running the script. When used with one of the
-back-end Prolog compilers for which an integration script is provided on
+backend Prolog compilers for which an integration script is provided on
 the `integration` directory, this setup as the advantage of allowing each
 end-user to independently customize default compilation flags, library paths,
 and modify and experiment with the provided libraries and examples.
@@ -191,7 +191,7 @@ Automatically loading Logtalk at Prolog startup
 -----------------------------------------------
 
 The `$LOGTALKHOME/integration` sub-directory contains shell scripts for running
-Logtalk with all supported back-end Prolog compilers. You can use these scripts
+Logtalk with all supported backend Prolog compilers. You can use these scripts
 as examples when creating initialization files for other Prolog compilers. Be
 sure to read the `adapters/NOTES.md` file notes on the Prolog compilers that
 you intend to use.

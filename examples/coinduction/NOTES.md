@@ -19,11 +19,11 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 This example requires a recent version of CxProlog, ECLiPSE, SICStus Prolog,
-SWI-Prolog, or YAP as the back-end Prolog compiler.
+SWI-Prolog, or YAP as the backend Prolog compiler.
 
 Note that Logtalk support for coinduction is still experimental. The two major
 issues are lack of robust Prolog support for cyclic terms and lack of support
-for tabling of cyclic terms. The first issue prevents using of some back-end
+for tabling of cyclic terms. The first issue prevents using of some backend
 Prolog compilers. The second issue may prevent some coinductive predicates to
 behave as (theoretically) expected.
 

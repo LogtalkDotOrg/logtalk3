@@ -405,13 +405,13 @@ Logtalk user directory and in the user home directory.</dd>
 </dl>
 <span id="index-1"></span><dl class="docutils" id="flag-prolog-dialect">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_dialect</span></code></dt>
-<dd>Name of the back-end Prolog compiler (an atom). This flag can be used
+<dd>Name of the backend Prolog compiler (an atom). This flag can be used
 for <a class="reference internal" href="../refman/directives/conditional_compilation_directives.html#conditional-compilation-directives"><span class="std std-ref">conditional compilation</span></a>
 of Prolog specific code.</dd>
 </dl>
 <span id="index-2"></span><dl class="docutils" id="flag-prolog-version">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_version</span></code></dt>
-<dd>Version of the back-end Prolog compiler (a compound term,
+<dd>Version of the backend Prolog compiler (a compound term,
 <code class="docutils literal notranslate"><span class="pre">v(Major,</span> <span class="pre">Minor,</span> <span class="pre">Patch)</span></code>, whose arguments are integers). This flag
 availability depends on the Prolog compiler. Checking the value of
 this flag fails for any Prolog compiler that does not provide access
@@ -419,7 +419,7 @@ to version data.</dd>
 </dl>
 <span id="index-3"></span><dl class="docutils" id="flag-prolog-compatible-version">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_compatible_version</span></code></dt>
-<dd>Compatible version of the back-end Prolog compiler (a compound term,
+<dd>Compatible version of the backend Prolog compiler (a compound term,
 usually with the format <code class="docutils literal notranslate"><span class="pre">&#64;&gt;=(v(Major,</span> <span class="pre">Minor,</span> <span class="pre">Patch))</span></code>, whose
 arguments are integers). This flag availability depends on the Prolog
 compiler. Checking the value of this flag fails for any Prolog
@@ -427,21 +427,21 @@ compiler that does not provide access to version data.</dd>
 </dl>
 <span id="index-4"></span><dl class="docutils" id="flag-prolog-conformance">
 <dt><code class="docutils literal notranslate"><span class="pre">prolog_conformance</span></code></dt>
-<dd>Level of conformance of the back-end Prolog compiler with the ISO
+<dd>Level of conformance of the backend Prolog compiler with the ISO
 Prolog Core standard. The possible values are <code class="docutils literal notranslate"><span class="pre">strict</span></code> for
 compilers claiming strict conformance and <code class="docutils literal notranslate"><span class="pre">lax</span></code> for compilers
 claiming only broad conformance.</dd>
 </dl>
 <span id="index-5"></span><dl class="docutils" id="flag-unicode">
 <dt><code class="docutils literal notranslate"><span class="pre">unicode</span></code></dt>
-<dd>Informs Logtalk if the back-end Prolog compiler supports the Unicode
+<dd>Informs Logtalk if the backend Prolog compiler supports the Unicode
 standard. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code> (all
 Unicode planes supported), and <code class="docutils literal notranslate"><span class="pre">bmp</span></code> (supports only the Basic
 Multilingual Plane).</dd>
 </dl>
 <span id="index-6"></span><dl class="docutils" id="flag-encoding-directive">
 <dt><code class="docutils literal notranslate"><span class="pre">encoding_directive</span></code></dt>
-<dd>Informs Logtalk if the back-end Prolog compiler supports the
+<dd>Informs Logtalk if the backend Prolog compiler supports the
 <a class="reference internal" href="../refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive.
 This directive is used for declaring the text encoding of source
 files. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code> (can be
@@ -450,34 +450,34 @@ files), and <code class="docutils literal notranslate"><span class="pre">source<
 </dl>
 <span id="index-7"></span><dl class="docutils" id="flag-tabling">
 <dt><code class="docutils literal notranslate"><span class="pre">tabling</span></code></dt>
-<dd>Informs Logtalk if the back-end Prolog compiler provides tabling
+<dd>Informs Logtalk if the backend Prolog compiler provides tabling
 programming support. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and
 <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
 </dl>
 <span id="index-8"></span><dl class="docutils" id="flag-engines">
 <dt><code class="docutils literal notranslate"><span class="pre">engines</span></code></dt>
-<dd>Informs if the back-end Prolog compiler provides the required low
+<dd>Informs if the backend Prolog compiler provides the required low
 level multi-threading programming support for Logtalk
 <a class="reference internal" href="../glossary.html#term-threaded-engine"><span class="xref std std-term">threaded engines</span></a>. Possible flag values
 are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
 </dl>
 <span id="index-9"></span><dl class="docutils" id="flag-threads">
 <dt><code class="docutils literal notranslate"><span class="pre">threads</span></code></dt>
-<dd>Informs if the back-end Prolog compiler provides the required low
+<dd>Informs if the backend Prolog compiler provides the required low
 level multi-threading programming support for all high-level Logtalk
 <a class="reference internal" href="threads.html#threads-threads"><span class="std std-ref">multi-threading features</span></a>. Possible flag
 values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
 </dl>
 <span id="index-10"></span><dl class="docutils" id="flag-modules">
 <dt><code class="docutils literal notranslate"><span class="pre">modules</span></code></dt>
-<dd>Informs Logtalk if the back-end Prolog compiler provides suitable
+<dd>Informs Logtalk if the backend Prolog compiler provides suitable
 module support. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and
 <code class="docutils literal notranslate"><span class="pre">supported</span></code> (Logtalk provides limited support for compiling Prolog
 modules as objects).</dd>
 </dl>
 <span id="index-11"></span><dl class="docutils" id="flag-coinduction">
 <dt><code class="docutils literal notranslate"><span class="pre">coinduction</span></code></dt>
-<dd>Informs Logtalk if the back-end Prolog compiler provides the minimal
+<dd>Informs Logtalk if the backend Prolog compiler provides the minimal
 support for cyclic terms necessary for working with
 <a class="reference internal" href="../glossary.html#term-coinductive-predicate"><span class="xref std std-term">coinductive predicates</span></a>. Possible flag
 values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</dd>
@@ -485,10 +485,10 @@ values are <code class="docutils literal notranslate"><span class="pre">unsuppor
 </div>
 <div class="section" id="settings-files">
 <span id="installing-settings"></span><h3>Settings files<a class="headerlink" href="#settings-files" title="Permalink to this headline">¶</a></h3>
-<p>Although is always possible to edit the back-end Prolog compiler adapter
+<p>Although is always possible to edit the backend Prolog compiler adapter
 files, the recommended solution to customize compiler flags is to edit
 the <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file in the Logtalk user folder or in the user home
-folder. Depending on the back-end Prolog compiler and on the
+folder. Depending on the backend Prolog compiler and on the
 operating-system, is also possible to define per-project settings files
 by creating a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file in the project directory and by
 starting Logtalk from this directory. At startup, Logtalk tries to load
@@ -497,8 +497,8 @@ read-only <a class="reference internal" href="#flag-settings-file"><span class="
 <code class="docutils literal notranslate"><span class="pre">allow</span></code>). If not found, Logtalk tries to load a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file
 from the Logtalk user folder. If still not found, Logtalk tries to load a
 <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file from the user home folder. When no settings files are
-found, Logtalk will use the default compiler flag values set on the back-end
-Prolog compiler adapter files. When limitations of the back-end Prolog
+found, Logtalk will use the default compiler flag values set on the backend
+Prolog compiler adapter files. When limitations of the backend Prolog
 compiler or on the operating-system prevent Logtalk from finding the
 settings files, these can always be loaded manually after Logtalk startup.</p>
 <p>Settings files are normal Logtalk source files (although when
@@ -526,7 +526,7 @@ support for conditional compilation you could write:</p>
 </div>
 <p>The <a class="reference internal" href="#flag-prolog-dialect"><span class="std std-ref">prolog_dialect</span></a> flag may also be used
 with the conditional compilation directives in order to define a single
-settings file that can be used with several back-end Prolog compilers.
+settings file that can be used with several backend Prolog compilers.
 For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">current_logtalk_flag</span>(prolog_dialect, yap)).
 

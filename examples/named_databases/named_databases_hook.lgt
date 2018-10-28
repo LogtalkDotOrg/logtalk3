@@ -78,7 +78,7 @@
 
 	:- else.
 
-		:- initialization((write('WARNING: named databases not supported on this back-end Prolog compiler!'), nl)).
+		:- initialization((write('WARNING: named databases not supported on this backend Prolog compiler!'), nl)).
 
 	:- endif.
 

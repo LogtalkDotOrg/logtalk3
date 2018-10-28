@@ -28,7 +28,7 @@ Description
 
    encoding(Encoding)
 
-Declares the source file text encoding. Requires a back-end Prolog compiler
+Declares the source file text encoding. Requires a backend Prolog compiler
 supporting the chosen encoding. When used, this directive must be the first
 term in the source file in the first line.
 
@@ -44,7 +44,7 @@ used instead. Examples includes ``'US-ASCII'``, ``'ISO-8859-1'``,
 ``'EUC-JP'``. When writing portable code that cannot be expressed using
 ASCII, ``'UTF-8'`` is the most commonly supported encoding.
 
-The back-end Prolog compiler adapter files define a table that translates
+The backend Prolog compiler adapter files define a table that translates
 between the Logtalk and Prolog specific atoms that represent each supported
 encoding.
 

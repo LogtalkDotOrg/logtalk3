@@ -41,7 +41,7 @@
 
 	:- initialization((
 		nl,
-		write('Your back-end Prolog compiler does not support a suitable profiler.'),
+		write('Your backend Prolog compiler does not support a suitable profiler.'),
 		nl
 	)).
 

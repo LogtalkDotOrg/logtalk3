@@ -29,7 +29,7 @@ Usability
 Is there a shortcut for compiling and loading source files?
 -----------------------------------------------------------
 
-Yes. With most back-end Prolog compilers, you can use ``{File}`` as a
+Yes. With most backend Prolog compilers, you can use ``{File}`` as a
 shortcut for ``logtalk_load(File)``. For compiling and loading
 multiple files simply use ``{File1, File2, ...}``. See the documentation
 of the :ref:`predicates_logtalk_load_1` predicate for details.
@@ -48,7 +48,7 @@ of the :ref:`predicates_logtalk_load_2` predicate for details.
 Are there shortcuts for the make functionality?
 -----------------------------------------------
 
-Yes. With most back-end Prolog compilers, you can use ``{*}`` as a
+Yes. With most backend Prolog compilers, you can use ``{*}`` as a
 shortcut for ``logtalk_make(all)`` to reload all files modified since
 last compiled and loaded, ``{!}`` as a shortcut for
 ``logtalk_make(clean)`` to delete all intermediate Prolog files

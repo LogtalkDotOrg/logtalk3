@@ -20,7 +20,7 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This folder provides an object for running multi-threading benchmarks. The
-supported back-end Prolog compilers are	SWI-Prolog, YAP, and XSB.
+supported backend Prolog compilers are	SWI-Prolog, YAP, and XSB.
 
 For example, the following goal will run all benchmark tests:
 
@@ -44,6 +44,6 @@ The following tests are available:
 	integration2d	(independent and-parallelism)
 	search			(competitive or-parallelism)
 
-For the same back-end Prolog compiler, the benchmark results can show 
+For the same backend Prolog compiler, the benchmark results can show 
 significant variation depending on the operating-system and if you're 
 using a 32 bits or a 64 bits version.

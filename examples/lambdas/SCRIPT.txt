@@ -126,7 +126,7 @@ uncaught exception: error(representation_error(lambda_parameters),{a}/[a]>>char_
 uncaught exception: error(representation_error(lambda_parameters),[_278,_280,_282]>>char_code(_278),meta)
 
 
-% some examples with constraints using GNU Prolog as the back-end compiler:
+% some examples with constraints using GNU Prolog as the backend compiler:
 
 | ?- Xss = [[1,2],[3]], meta::map(meta::map([X,Y,Z]>>(X+Y#=Z)), Xss, Yss, Zss).
 
@@ -166,7 +166,7 @@ Ys = [_#41(0..268435455),_#115(0..268435455),_#189(0..268435455),_#263(0..268435
 ...
 
 
-% some examples with constraints using SWI-Prolog or YAP as the back-end compiler:
+% some examples with constraints using SWI-Prolog or YAP as the backend compiler:
 
 | ?- use_module(library(clpfd)).
 
@@ -207,7 +207,7 @@ _G2209+_G2230#=Z
 ...
 
 
-% some examples with constraints using B-Prolog as the back-end compiler:
+% some examples with constraints using B-Prolog as the backend compiler:
 
 | ?- Xss= [[1,2],[3]], meta::map(meta::map([X,Y,Z]>>(X+Y#=Z)), Xss, Yss, Zss).
 Xss = [[1,2],[3]]
@@ -221,7 +221,7 @@ Zss = [[_01aca4:[-268435455..268435455],_0348cc:[-268435455..268435455]],[_04e5c
 yes
 
 
-% some examples with constraints using SICStus Prolog as the back-end compiler:
+% some examples with constraints using SICStus Prolog as the backend compiler:
 
 | ?- use_module(library(clpfd)).
 
@@ -344,7 +344,7 @@ yes
 
 
 % the following lambda benchmarks are so far only available when using
-% SWI-Prolog, XSB, or YAP as the Logtalk back-end compilers:
+% SWI-Prolog, XSB, or YAP as the Logtalk backend compilers:
 
 ?- lambda_benchmarks::bench1.
 Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 

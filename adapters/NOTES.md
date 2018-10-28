@@ -321,7 +321,7 @@ calls. To try it, copy the code to your Logtalk settings file that is
 loaded at startup.
 
 The adapter file may set the `iso` SWI-Prolog flag to `true`. This setting
-may improve compatibility of Logtalk code across different back-end 
+may improve compatibility of Logtalk code across different backend 
 Prolog compilers buy may also cause compatibility problems with some 
 SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2` 
 directive if necessary.

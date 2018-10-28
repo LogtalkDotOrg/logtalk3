@@ -34,7 +34,7 @@ True when the ``GrammarRuleBody`` grammar rule body can be applied to
 the ``Input-Rest`` difference list of tokens. In the most common case,
 ``GrammarRuleBody`` is a non-terminal defined by a grammar rule. This
 built-in method is declared private and thus cannot be used as a message
-to an object. When using a back-end Prolog compiler supporting a module
+to an object. When using a backend Prolog compiler supporting a module
 system, calls in the format
 ``phrase(Module:GrammarRuleBody, Input, Rest)`` may also be used.
 
