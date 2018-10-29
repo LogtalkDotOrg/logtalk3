@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 16, 2018
+##   Last updated on October 29, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.31"
+	echo "$(basename "$0") 0.32"
 	exit 0
 }
 
@@ -107,6 +107,15 @@ run_tests() {
 	cd "$unit" || exit 1
 	echo '*******************************************************************************'
 	echo "***** Testing $unit_short"
+	if [ -f tester.sh ] ; then
+		source tester.sh "$@"
+		source_exit=$?
+		if [ "$source_exit" -gt 0 ] ; then
+			echo "*****         source tester.sh returned code $source_exit"
+			echo '*******************************************************************************'
+			exit 9
+		fi
+	fi
 	name=${unit////__}
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 		run_test "$name" "$initialization_goal,$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
@@ -223,30 +232,37 @@ shift $((OPTIND - 1))
 args=("$@")
 
 if [ "$p_arg" == "b" ] ; then
+	backend=b
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
 	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "cx" ] ; then
+	backend=cx
 	prolog='CxProlog'
 	logtalk=cxlgt$extension
 	logtalk_call="$logtalk --goal"
 elif [ "$p_arg" == "eclipse" ] ; then
+	backend=eclipse
 	prolog='ECLiPSe'
 	logtalk=eclipselgt$extension
 	logtalk_call="$logtalk -e"
 elif [ "$p_arg" == "gnu" ] ; then
+	backend=gnu
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
 	logtalk_call="$logtalk --query-goal"
 elif [ "$p_arg" == "ji" ] ; then
+	backend=ji
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
 	logtalk_call="$logtalk -n -g"
 elif [ "$p_arg" == "lean" ] ; then
+	backend=lean
 	prolog='Lean Prolog'
 	logtalk=lplgt$extension
 	logtalk_call="$logtalk"
 elif [ "$p_arg" == "qp" ] ; then
+	backend=qp
 	prolog='Qu-Prolog'
 	logtalk=qplgt$extension
 	logtalk_call="$logtalk -g"
@@ -255,6 +271,7 @@ elif [ "$p_arg" == "qp" ] ; then
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "sicstus" ] ; then
+	backend=sicstus
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension
 	logtalk_call="$logtalk --goal"
@@ -263,14 +280,17 @@ elif [ "$p_arg" == "sicstus" ] ; then
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "swi" ] ; then
+	backend=swi
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension
 	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "swipack" ] ; then
+	backend=swipack
 	prolog='SWI-Prolog'
 	logtalk=swipl
 	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "xsb" ] ; then
+	backend=xsb
 	prolog='XSB'
 	logtalk=xsblgt$extension
 	logtalk_call="$logtalk -e"
@@ -279,6 +299,7 @@ elif [ "$p_arg" == "xsb" ] ; then
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "xsbmt" ] ; then
+	backend=xsbmt
 	prolog='XSB-MT'
 	logtalk=xsbmtlgt$extension
 	logtalk_call="$logtalk -e"
@@ -287,6 +308,7 @@ elif [ "$p_arg" == "xsbmt" ] ; then
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "yap" ] ; then
+	backend=yap
 	prolog='YAP'
 	logtalk=yaplgt$extension
 	logtalk_call="$logtalk -g"

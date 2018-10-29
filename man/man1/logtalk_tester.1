@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "March 7, 2018" "Logtalk 3.15.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "October 29, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -31,7 +31,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors.
+\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the current directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the \fIlogtalk_tester\fR script.
 
 .SH OPTIONS
 .TP
@@ -87,6 +87,9 @@ One or more test sets are broken and thus could not be executed but there are no
 .TP
 .B 7
 One or more test sets crashed the process running them.
+.TP
+.B 9
+The sourced \fItester.sh\fR file returned a non-zero code.
 
 .SH ENVIRONMENT
 .TP
