@@ -195,7 +195,7 @@
 <span id="predicates-create-logtalk-flag-3"></span><span id="index-0"></span><h1>create_logtalk_flag/3<a class="headerlink" href="#create-logtalk-flag-3" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>create_logtalk_flag(<span class="nv">Flag</span>, <span class="nv">Value</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">create_logtalk_flag</span>(<span class="nv">Flag</span>, <span class="nv">Value</span>, <span class="nv">Options</span>)
 </pre></div>
 </div>
 <p>Creates a new Logtalk flag and sets its default value. User-defined
@@ -216,7 +216,7 @@ initial value.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>create_logtalk_flag(<span class="o">+</span>atom, <span class="o">+</span>ground, <span class="o">+</span>list(ground)) <span class="o">-</span> one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">create_logtalk_flag</span>(<span class="o">+</span>atom, <span class="o">+</span>ground, <span class="o">+</span>list(ground)) <span class="o">-</span> one
 </pre></div>
 </div>
 </div>
@@ -264,7 +264,7 @@ initial value.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% create a new booloean flag with default value set to false:</span>
-| <span class="o">?-</span> create_logtalk_flag(pretty_print_blobs, <span class="k">false</span>, []).
+| <span class="o">?-</span> <span class="k">create_logtalk_flag</span>(pretty_print_blobs, <span class="k">false</span>, []).
 </pre></div>
 </div>
 <div class="admonition seealso">

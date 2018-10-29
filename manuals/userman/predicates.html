@@ -1243,7 +1243,7 @@ takes an atom and an integer as arguments. We could type-check the
 arguments by writing (using the library <code class="docutils literal notranslate"><span class="pre">type</span></code> object):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo(<span class="nv">A</span>, <span class="nv">N</span>) <span class="o">:-</span>
     <span class="c">% type-check arguments</span>
-    context(<span class="nv">Context</span>),
+    <span class="k">context</span>(<span class="nv">Context</span>),
     type<span class="o">::</span>check(atom, <span class="nv">A</span>, <span class="nv">Context</span>),
     type<span class="o">::</span>check(integer, <span class="nv">N</span>, <span class="nv">Context</span>),
     <span class="c">% arguments are fine; go ahead</span>

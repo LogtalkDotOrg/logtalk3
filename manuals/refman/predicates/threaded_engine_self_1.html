@@ -201,14 +201,14 @@
 <span id="predicates-threaded-engine-self-1"></span><span id="index-0"></span><h1>threaded_engine_self/1<a class="headerlink" href="#threaded-engine-self-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_self(<span class="nv">Engine</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_self</span>(<span class="nv">Engine</span>)
 </pre></div>
 </div>
 <p>Queries the name of engine calling the predicate.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_self(<span class="o">?</span>nonvar) <span class="o">-</span> zero_or_one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_self</span>(<span class="o">?</span>nonvar) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
 </div>
@@ -219,10 +219,10 @@
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% find the name of the engine making the query:</span>
-..., threaded_engine_self(<span class="nv">Engine</span>), ...
+..., <span class="k">threaded_engine_self</span>(<span class="nv">Engine</span>), ...
 
 <span class="c">% check if the the engine making the query is worker_1:</span>
-..., threaded_engine_self(worker_1), ...
+..., <span class="k">threaded_engine_self</span>(worker_1), ...
 </pre></div>
 </div>
 <div class="admonition seealso">

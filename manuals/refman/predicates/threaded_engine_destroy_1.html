@@ -201,14 +201,14 @@
 <span id="predicates-threaded-engine-destroy-1"></span><span id="index-0"></span><h1>threaded_engine_destroy/1<a class="headerlink" href="#threaded-engine-destroy-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_destroy(<span class="nv">Engine</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_destroy</span>(<span class="nv">Engine</span>)
 </pre></div>
 </div>
 <p>Stops and destroys an engine.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_destroy(<span class="o">@</span>nonvar) <span class="o">-</span> one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_destroy</span>(<span class="o">@</span>nonvar) <span class="o">-</span> one
 </pre></div>
 </div>
 </div>
@@ -228,12 +228,12 @@
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% stop the worker_1 engine:</span>
-| <span class="o">?-</span> threaded_engine_destroy(worker_1).
+| <span class="o">?-</span> <span class="k">threaded_engine_destroy</span>(worker_1).
 
 <span class="c">% stop all engines:</span>
 | <span class="o">?-</span> <span class="k">forall</span>(
-         threaded_engine(<span class="nv">Engine</span>),
-         threaded_engine_destroy(<span class="nv">Engine</span>)
+         <span class="k">threaded_engine</span>(<span class="nv">Engine</span>),
+         <span class="k">threaded_engine_destroy</span>(<span class="nv">Engine</span>)
      ).
 </pre></div>
 </div>

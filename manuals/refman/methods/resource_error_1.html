@@ -207,7 +207,7 @@
 <span id="methods-resource-error-1"></span><span id="index-0"></span><h1>resource_error/1<a class="headerlink" href="#resource-error-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>resource_error(<span class="nv">Resource</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">resource_error</span>(<span class="nv">Resource</span>)
 </pre></div>
 </div>
 <p>Throws a resource error. This built-in predicate is declared as
@@ -215,8 +215,8 @@ a private method and thus cannot be used as a message to an object.
 Calling this predicate is equivalent to the following sequence of calls
 where <code class="docutils literal notranslate"><span class="pre">Head</span></code> is the head of the predicate clause making the call:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
-context(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(resource_error(<span class="nv">Resource</span>), logtalk(<span class="nv">Head</span>,<span class="nv">Context</span>))).
+<span class="k">context</span>(<span class="nv">Context</span>),
+<span class="k">throw</span>(error(<span class="k">resource_error</span>(<span class="nv">Resource</span>), logtalk(<span class="nv">Head</span>,<span class="nv">Context</span>))).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
@@ -224,7 +224,7 @@ runtime.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>resource_error(<span class="o">+</span>nonvar) <span class="o">-</span> error
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">resource_error</span>(<span class="o">+</span>nonvar) <span class="o">-</span> error
 </pre></div>
 </div>
 </div>
@@ -241,7 +241,7 @@ runtime.</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 empty(<span class="nv">Tank</span>),
-resource_error(gas).
+<span class="k">resource_error</span>(gas).
 </pre></div>
 </div>
 <div class="admonition seealso">

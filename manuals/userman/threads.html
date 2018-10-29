@@ -537,7 +537,7 @@ deterministic. In contrast with the <code class="docutils literal notranslate"><
 predicates, retrieving the next solution requires calling the predicate
 again instead of by backtracking into its call. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>collect_all(<span class="nv">Engine</span>, [<span class="nv">X</span>| <span class="nv">Xs</span>]) <span class="o">:-</span>
-    threaded_engine_next(<span class="nv">Engine</span>, <span class="nv">X</span>),
+    <span class="k">threaded_engine_next</span>(<span class="nv">Engine</span>, <span class="nv">X</span>),
     <span class="o">!</span>,
     collect_all(<span class="nv">Engine</span>, <span class="nv">Xs</span>).
 collect_all(<span class="nv">_</span>, []).
@@ -550,13 +550,13 @@ answers. Using this predicate, collecting all solutions to an engine
 uses a different programming pattern:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>... <span class="o">:-</span>
     ...,
-    threaded_engine_next_reified(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
+    <span class="k">threaded_engine_next_reified</span>(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
     collect_all_reifeid(<span class="nv">Answer</span>, <span class="nv">Engine</span>, <span class="nv">List0</span>),
     ...
 
 collect_all_reifeid(no, <span class="nv">_</span>, []).
 collect_all_reifeid(the(<span class="nv">X</span>), <span class="nv">Engine</span>, [<span class="nv">X</span>| <span class="nv">Xs</span>]) <span class="o">:-</span>
-    threaded_engine_next_reified(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
+    <span class="k">threaded_engine_next_reified</span>(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
     collect_all_reifeid(<span class="nv">Answer</span>, <span class="nv">Engine</span>, <span class="nv">Xs</span>).
 </pre></div>
 </div>
@@ -570,7 +570,7 @@ yes
 that uses the engine term queue to retrieve a task to be performed. For
 example, assume we define the following predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>loop <span class="o">:-</span>
-    threaded_engine_fetch(<span class="nv">Task</span>),
+    <span class="k">threaded_engine_fetch</span>(<span class="nv">Task</span>),
     handle(<span class="nv">Task</span>),
     loop.
 </pre></div>
