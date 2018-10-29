@@ -2,8 +2,8 @@
 
 #############################################################################
 ## 
-##   Logtalk installation script
-##   Last updated on September 4, 2018
+##   Set CLASSPATH environment variable for SWI-Prolog
+##   Last updated on October 29, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>

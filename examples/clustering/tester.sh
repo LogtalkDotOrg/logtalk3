@@ -2,7 +2,7 @@
 
 #############################################################################
 ## 
-##   Set CLASSPATH environment variable for SWI-Prolog
+##   Bash script to be sourced by the logtalk_tester script
 ##   Last updated on October 29, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
@@ -23,11 +23,18 @@
 #############################################################################
 
 
-eval $(swipl --dump-runtime-variables)
-CLASSPATH="$PLBASE/lib/jpl.jar"
-
-for jar in jars/*; do
-	CLASSPATH="$PWD/$jar":$CLASSPATH
+while getopts "p:" option; do
+    case $option in
+		p) backend="$OPTARG";;
+    esac
 done
 
-export CLASSPATH
+if [ "$backend" == "swipl" ] ; then
+	source set_classpath_swi.sh
+	export CLASSPATH
+elif [ "$backend" == "yap" ] ; then
+	source set_classpath_yap.sh
+	export CLASSPATH
+fi
+
+return 0

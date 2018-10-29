@@ -103,6 +103,10 @@ entities for clarity.
 * UPDATED: The `patching` example to illustrate how to use a complementing
 category to add a missing predicate scope directive to an object.
 
+* UPDATED: The `clustering` example now includes a `tester.sh` file that
+is sourced by the `logtalk_tester` script and that sets the `CLASSPATH`
+environment variable for the used backend Prolog compiler.
+
 * FIXED: Issue running the `birds` example when using a recent SWI-Prolog
 version as the backend compiler (which now requires flushing output before
 reading a term).
