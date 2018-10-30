@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on October 23, 2018
+##   Last updated on October 30, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -48,7 +48,7 @@ tar zcvf "logtalk-$version.tgz" logtalk
 mv "logtalk-$version.tgz" ..
 cd ..
 
-manuals/sources/build_manuals.sh
+"logtalk-$version"/manuals/sources/build_manuals.sh
 cp -R "logtalk-$version/manuals" "logtalk-manuals-$version"
 tar -czf "logtalk-manuals-$version.tgz" "logtalk-manuals-$version"
 tar -cjf "logtalk-$version.tar.bz2" "logtalk-$version"
