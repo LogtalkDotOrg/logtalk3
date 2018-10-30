@@ -111,6 +111,12 @@ environment variable for the used backend Prolog compiler.
 version as the backend compiler (which now requires flushing output before
 reading a term).
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Issue in the Windows installer where the Start Menu shortcuts to
+the APIs documentation and the sample settings file could be invalid.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

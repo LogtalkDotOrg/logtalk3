@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on October 24, 2018
+; Last updated on October 30, 2018
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -135,8 +135,8 @@ Name: "{group}\Quick Start"; Filename: "{app}\QUICK_START.md"; Components: base
 Name: "{group}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; Components: base
 Name: "{group}\Read Me"; Filename: "{app}\README.md"; Components: base
 Name: "{group}\Customization instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: base
-Name: "{group}\Default settings"; Filename: "%LOGTALKUSER%\settings-sample.lgt"; Components: base
-Name: "{group}\APIs documentation"; Filename: "%LOGTALKUSER%\docs\index.html"; Components: base
+Name: "{group}\Default settings"; Filename: "{app}\settings-sample.lgt"; Components: base
+Name: "{group}\APIs documentation"; Filename: "{app}\docs\index.html"; Components: base
 
 Name: "{group}\Web Site"; Filename: "{#MyAppUrl}"; Components: base
 
