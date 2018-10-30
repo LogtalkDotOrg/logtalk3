@@ -217,159 +217,160 @@ When events are not used, is possible to turn off event generation on a
 per object basis by using the :ref:`events <flag_events>` compiler
 flag (see the :ref:`events_events` section for more details).
 
-.. _messages_performance:
-
-Message sending performance
----------------------------
-
-Logtalk supports both :term:`static binding` and :term:`dynamic binding`.
-Static binding is used whenever messages are sent (using the ``::/2`` control
-construct) to static objects already loaded and with the
-:ref:`optimize <flag_optimize>` compiler flag turned on. When that is not
-the case (or when using the ``::/1`` control construct), Logtalk uses dynamic
-binding coupled with a caching mechanism that avoids repeated lookups of
-predicate declarations and predicate definitions. This is a solution common
-to other programming languages supporting dynamic binding. Message lookups are
-automatically cached the first time a message is sent. Cache entries are
-automatically removed when loading entities or using Logtalk dynamic
-features that invalidate the cached lookups.
-
-Whenever static binding is used, message sending performance is roughly
-the same as a predicate call in plain Prolog. When discussing Logtalk
-dynamic binding performance, two distinct cases should be considered:
-messages sent by the user from the top-level interpreter and messages
-sent from compiled objects. In addition, the message declaration and
-definition lookups may, or may not be already cached by the runtime
-engine. In what follows, we will assume that the message lookups are
-already cached.
-
-.. _messages_inferences:
-
-Translating message processing to predicate calls
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In order to better understand the performance trade-offs of using Logtalk
-dynamic binding when compared to plain Prolog or to Prolog module
-systems, is useful to translate message processing in terms of predicate
-calls. However, in doing this, we should keep in mind that the number of
-predicate calls is not necessarily proportional to the time taken to
-execute them.
-
-With event-support turned on, a message sent from a compiled object (or
-category) to another object translates to a minimum of five predicate
-calls:
-
-checking for *before* events
-   one call to the built-in predicate ``\+/1`` and a call to its
-   argument, assuming that no events are defined
-method call using the cached lookup
-   one call to a dynamic predicate (the cache entry)
-checking for *after* events
-   one call to the built-in predicate ``\+/1`` and a call to its
-   argument, assuming that no events are defined
-
-Given that events can be dynamically defined at runtime, there is no
-room for reducing the number of predicate calls without turning off
-support for event-driven programming. When events are defined, the
-number of predicate calls grows proportional to the number of events and
-event handlers (monitors). Event-driven programming support can be
-switched off for specific object using the
-:ref:`events <flag_events>` compiler flag. Doing so, reduces
-the number of predicate calls from three to just one.
-
-Messages to *self* are transparent regarding events and, as such, imply
-only one predicate call (to the cache entry, a dynamic predicate).
-
-When a message is sent by the user from the top-level interpreter,
-Logtalk needs to perform a runtime translation of the message term in
-order to prove the corresponding goal. Thus, while sending a message
-from a compiled object corresponds to either three predicate calls
-(event-support on) or one predicate call (event-support off), the same
-message sent by the user from the top-level interpreter necessarily
-implies an overhead. Considering the time taken for the user to type the
-goal and read the reply, this overhead is of no practical consequence.
-
-When a message is not cached, the number of predicate calls depends on
-the number of steps needed for the Logtalk runtime engine to lookup the
-corresponding predicate scope declaration (to check if the message is
-valid) and then to lookup a predicate definition for answering the
-message.
-
-.. _messages_cputime:
-
-Processing time
-~~~~~~~~~~~~~~~
-
-Not all predicate calls take the same time. Moreover, the time taken to
-process a specific predicate call depends on the Prolog compiler
-implementation details. As such, the only valid performance measure is
-the time taken for processing a message.
-
-The usual way of measuring the time taken by a predicate call is to
-repeat the call a number of times and than to calculate the average
-time. A sufficient large number of repetitions would hopefully lead to
-an accurate measure. Care should be taken to subtract the time taken by
-the repetition code itself. In addition, we should be aware of any
-limitations of the predicates used to measure execution times. One way
-to make sense of numbers we get is to repeat the test with the same
-predicate using plain Prolog and with the predicate encapsulated in a
-module.
-
-A simple predicate for helping benchmarking predicate calls could be:
-
-::
-
-   benchmark(N, Goal) :-
-       repeat(N),
-           call(Goal),
-       fail.
-
-   benchmark(_, _).
-
-The rational of using a failure-driven loop is to try to avoid any
-interference on our timing measurements from garbage-collection or
-memory expansion mechanisms. Based on the predicate ``benchmark/2``, we
-may define a more convenient predicate for performing our benchmarks.
-For example:
-
-::
-
-   benchmark(Goal) :-
-       % some sufficiently large number of repetitions
-       N = 10000000,
-       write('Number of repetitions: '), write(N), nl,
-       % replace by your Prolog-specific predicate
-       get_cpu_time(Seconds1),
-       benchmark(N, Goal),
-       get_cpu_time(Seconds2),
-       Average is (Seconds2 - Seconds1)/N,
-       write('Average time per call: '), write(Average), write(' seconds'), nl,
-       Speed is 1.0/Average,
-       write('Number of calls per second: '), write(Speed), nl.
-
-We can get a baseline for our timings by doing:
-
-.. code-block:: text
-
-   | ?- benchmark(true).
-
-For comparing message sending performance across several Prolog
-compilers, we would call the ``benchmark/1`` predicate with a suitable
-argument. For example:
-
-.. code-block:: text
-
-   | ?- benchmark(list::length([1,2,3,4,5,6,7,8,9,0], _)).
-
-For comparing message sending performance with predicate calls in plain
-Prolog and with calls to predicates encapsulated in modules, we should
-use exactly the same predicate definition in the three cases.
-
-It should be stressed that message sending is only one of the factors
-affecting the performance of a Logtalk application (and often not the
-most important one). The strengths and limitations of the chosen Prolog
-compiler play a crucial role on all aspects of the development,
-reliability, usability, and performance of a Logtalk application. It is
-advisable to take advantage of the Logtalk wide compatibility with most
-Prolog compilers to test for the best match for developing your Logtalk
-applications.
+..
+   .. _messages_performance:
+   
+   Message sending performance
+   ---------------------------
+   
+   Logtalk supports both :term:`static binding` and :term:`dynamic binding`.
+   Static binding is used whenever messages are sent (using the ``::/2`` control
+   construct) to static objects already loaded and with the
+   :ref:`optimize <flag_optimize>` compiler flag turned on. When that is not
+   the case (or when using the ``::/1`` control construct), Logtalk uses dynamic
+   binding coupled with a caching mechanism that avoids repeated lookups of
+   predicate declarations and predicate definitions. This is a solution common
+   to other programming languages supporting dynamic binding. Message lookups are
+   automatically cached the first time a message is sent. Cache entries are
+   automatically removed when loading entities or using Logtalk dynamic
+   features that invalidate the cached lookups.
+   
+   Whenever static binding is used, message sending performance is roughly
+   the same as a predicate call in plain Prolog. When discussing Logtalk
+   dynamic binding performance, two distinct cases should be considered:
+   messages sent by the user from the top-level interpreter and messages
+   sent from compiled objects. In addition, the message declaration and
+   definition lookups may, or may not be already cached by the runtime
+   engine. In what follows, we will assume that the message lookups are
+   already cached.
+   
+   .. _messages_inferences:
+   
+   Translating message processing to predicate calls
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   
+   In order to better understand the performance trade-offs of using Logtalk
+   dynamic binding when compared to plain Prolog or to Prolog module
+   systems, is useful to translate message processing in terms of predicate
+   calls. However, in doing this, we should keep in mind that the number of
+   predicate calls is not necessarily proportional to the time taken to
+   execute them.
+   
+   With event-support turned on, a message sent from a compiled object (or
+   category) to another object translates to a minimum of five predicate
+   calls:
+   
+   checking for *before* events
+      one call to the built-in predicate ``\+/1`` and a call to its
+      argument, assuming that no events are defined
+   method call using the cached lookup
+      one call to a dynamic predicate (the cache entry)
+   checking for *after* events
+      one call to the built-in predicate ``\+/1`` and a call to its
+      argument, assuming that no events are defined
+   
+   Given that events can be dynamically defined at runtime, there is no
+   room for reducing the number of predicate calls without turning off
+   support for event-driven programming. When events are defined, the
+   number of predicate calls grows proportional to the number of events and
+   event handlers (monitors). Event-driven programming support can be
+   switched off for specific object using the
+   :ref:`events <flag_events>` compiler flag. Doing so, reduces
+   the number of predicate calls from three to just one.
+   
+   Messages to *self* are transparent regarding events and, as such, imply
+   only one predicate call (to the cache entry, a dynamic predicate).
+   
+   When a message is sent by the user from the top-level interpreter,
+   Logtalk needs to perform a runtime translation of the message term in
+   order to prove the corresponding goal. Thus, while sending a message
+   from a compiled object corresponds to either three predicate calls
+   (event-support on) or one predicate call (event-support off), the same
+   message sent by the user from the top-level interpreter necessarily
+   implies an overhead. Considering the time taken for the user to type the
+   goal and read the reply, this overhead is of no practical consequence.
+   
+   When a message is not cached, the number of predicate calls depends on
+   the number of steps needed for the Logtalk runtime engine to lookup the
+   corresponding predicate scope declaration (to check if the message is
+   valid) and then to lookup a predicate definition for answering the
+   message.
+   
+   .. _messages_cputime:
+   
+   Processing time
+   ~~~~~~~~~~~~~~~
+   
+   Not all predicate calls take the same time. Moreover, the time taken to
+   process a specific predicate call depends on the Prolog compiler
+   implementation details. As such, the only valid performance measure is
+   the time taken for processing a message.
+   
+   The usual way of measuring the time taken by a predicate call is to
+   repeat the call a number of times and than to calculate the average
+   time. A sufficient large number of repetitions would hopefully lead to
+   an accurate measure. Care should be taken to subtract the time taken by
+   the repetition code itself. In addition, we should be aware of any
+   limitations of the predicates used to measure execution times. One way
+   to make sense of numbers we get is to repeat the test with the same
+   predicate using plain Prolog and with the predicate encapsulated in a
+   module.
+   
+   A simple predicate for helping benchmarking predicate calls could be:
+   
+   ::
+   
+      benchmark(N, Goal) :-
+          repeat(N),
+              call(Goal),
+          fail.
+   
+      benchmark(_, _).
+   
+   The rational of using a failure-driven loop is to try to avoid any
+   interference on our timing measurements from garbage-collection or
+   memory expansion mechanisms. Based on the predicate ``benchmark/2``, we
+   may define a more convenient predicate for performing our benchmarks.
+   For example:
+   
+   ::
+   
+      benchmark(Goal) :-
+          % some sufficiently large number of repetitions
+          N = 10000000,
+          write('Number of repetitions: '), write(N), nl,
+          % replace by your Prolog-specific predicate
+          get_cpu_time(Seconds1),
+          benchmark(N, Goal),
+          get_cpu_time(Seconds2),
+          Average is (Seconds2 - Seconds1)/N,
+          write('Average time per call: '), write(Average), write(' seconds'), nl,
+          Speed is 1.0/Average,
+          write('Number of calls per second: '), write(Speed), nl.
+   
+   We can get a baseline for our timings by doing:
+   
+   .. code-block:: text
+   
+      | ?- benchmark(true).
+   
+   For comparing message sending performance across several Prolog
+   compilers, we would call the ``benchmark/1`` predicate with a suitable
+   argument. For example:
+   
+   .. code-block:: text
+   
+      | ?- benchmark(list::length([1,2,3,4,5,6,7,8,9,0], _)).
+   
+   For comparing message sending performance with predicate calls in plain
+   Prolog and with calls to predicates encapsulated in modules, we should
+   use exactly the same predicate definition in the three cases.
+   
+   It should be stressed that message sending is only one of the factors
+   affecting the performance of a Logtalk application (and often not the
+   most important one). The strengths and limitations of the chosen Prolog
+   compiler play a crucial role on all aspects of the development,
+   reliability, usability, and performance of a Logtalk application. It is
+   advisable to take advantage of the Logtalk wide compatibility with most
+   Prolog compilers to test for the best match for developing your Logtalk
+   applications.

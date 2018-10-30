@@ -34,6 +34,7 @@ User Manual
    threads
    errors
    documenting
+   performance
    installing
    programming
    migration
