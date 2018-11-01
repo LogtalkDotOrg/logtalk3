@@ -25,7 +25,8 @@ welcome, including code patches, bug reports, documentation fixes, feature
 suggestions, portability improvements, new libraries, new examples, and
 improved support for text editors and IDEs. No contribution is too small.
 The [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md) file lists past contributions
-and their authors. Looking forward to seeing your name there.
+and their authors. Looking forward to seeing your name there. Contributors
+are expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 
 How to make a contribution
