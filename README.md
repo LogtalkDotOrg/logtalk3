@@ -48,8 +48,9 @@ Logtalk is distributed under a commercial friendly license and includes full
 documentation, portable libraries, portable developer tools, and numerous
 programming examples to help get you started.
 
-Logtalk development adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
-By participating, you are expected to uphold this code. Please report
+Logtalk development adheres to the Contributor Covenant
+[code of conduct](CODE_OF_CONDUCT.md). By participating,
+you are expected to uphold this code. Please report
 unacceptable behavior to contact@logtalk.org.
 
 
@@ -60,8 +61,8 @@ The latest stable release of the Logtalk is always available at:
 
 https://logtalk.org/
 
-At this address you can download installers for your operating-system and also
-find additional documentation and information about Logtalk.
+At this address you can download installers for your operating-system and
+find full documentation on Logtalk.
 
 
 Installation
@@ -102,9 +103,8 @@ A quick and highly recommended introduction for users comfortable with Prolog
 and with general knowledge about object-oriented programming is available at
 the [Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
 
-The reference and user manuals are provided in HTML, PDF, and ePub formats and
-can be found in the [manuals](manuals/) directory. They are also available
-online at:
+The reference and user manuals are provided in HTML format and can be found in
+the [manuals](manuals/) directory. They are also available online at:
 
 https://logtalk.org/manuals/index.html
 
@@ -124,9 +124,6 @@ On POSIX systems, there's also a [man page](man/man1) for most shell scripts.
 A list of these scripts can be generated using the `apropos logtalk` command.
 [HTML versions](https://logtalk.org/man/) of the man pages are also available
 at the Logtalk website.
-
-Additional useful information is available in the official repository
-[wiki](https://github.com/LogtalkDotOrg/logtalk3/wiki) at GitHub.
 
 
 Registration
