@@ -20,7 +20,7 @@
 Documenting applications
 ========================
 
-Assuming that the :ref:`source_data <flag_source_data>` is turned on, the
+Assuming that the :ref:`source_data <flag_source_data>` flag is turned on, the
 compiler saves all relevant documenting information collected when compiling
 a source file. The provided ``lgtdoc`` tool can access this information by
 using the reflection support and generate a documentation file for each
