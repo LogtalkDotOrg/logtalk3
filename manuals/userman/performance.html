@@ -196,7 +196,7 @@
 predicates, it preserves in the generated Prolog code all cases of
 first-argument indexing and tail-recursion. In practice, this mean that
 if you know how to write efficient Prolog predicates, you already know
-how to write Logtalk predicates.</p>
+how to write efficient Logtalk predicates.</p>
 <p>The Logtalk compiler adds an hidden execution-context argument to all
 entity predicates. When a predicate makes no calls to either
 execution-context predicates or message-sending control constructs and
@@ -204,8 +204,8 @@ is neither a meta-predicate or a coinductive predicate, the
 execution-context argument is simply passed around. In this case, with
 most backend Prolog VMs, the cost of this extra argument is null or
 negligible. When the execution-context argument needs to be accessed
-(e.g.&nbsp;to fetch the value of <em>self</em> for a <code class="docutils literal notranslate"><span class="pre">::/1</span></code> call) there may be a
-small inherent overhead due to the implicit unifications.</p>
+(e.g.&nbsp;to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>
+call) there may be a small inherent overhead due to the implicit unifications.</p>
 <div class="section" id="local-predicate-calls">
 <h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Permalink to this headline">¶</a></h2>
 <p>Local calls to object (or category) predicates have zero overhead in
@@ -214,8 +214,9 @@ calls.</p>
 </div>
 <div class="section" id="calls-to-imported-or-inherited-predicates">
 <h2>Calls to imported or inherited predicates<a class="headerlink" href="#calls-to-imported-or-inherited-predicates" title="Permalink to this headline">¶</a></h2>
-<p>Assuming the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag is turned on and a static predicate,
-<code class="docutils literal notranslate"><span class="pre">^^/1</span></code> calls have zero overhead in terms of number of inferences.</p>
+<p>Assuming the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on and a
+static predicate, <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> calls have zero overhead
+in terms of number of inferences.</p>
 </div>
 <div class="section" id="calls-to-module-predicates">
 <h2>Calls to module predicates<a class="headerlink" href="#calls-to-module-predicates" title="Permalink to this headline">¶</a></h2>
@@ -236,35 +237,36 @@ Logtalk 3.17.0 and later versions are:</p>
 <li>Dynamic binding (object bound at runtime time): 2</li>
 </ul>
 <p>Static binding is the common case with libraries and most application
-code; it requires compiling code with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on.
-Dynamic binding numbers are after the first call (i.e.&nbsp;after the
-generalization of the query is cached). All numbers with the <code class="docutils literal notranslate"><span class="pre">events</span></code>
-flag set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> (setting this flag to <code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of
-5 inferences to the numbers above).</p>
+code; it requires compiling code with the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a>
+flag turned on. Dynamic binding numbers are after the first call (i.e.
+after the generalization of the query is cached). All numbers with the
+<a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> (setting this flag to
+<code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of 5 inferences to the numbers above).</p>
 <p>The dynamic binding caches assume the used backend Prolog compiler does
 indexing of dynamic predicates. This is a common feature of modern
 Prolog systems but the actual details vary from system to system and may
 have an impact on dynamic binding performance.</p>
-<p>Note that messages to <em>self</em> (<code class="docutils literal notranslate"><span class="pre">::/1</span></code> calls) always use dynamic binding
-as the object that receives the message is only know at runtime.</p>
+<p>Note that messages to <em>self</em> (<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> calls) always
+use dynamic binding as the object that receives the message is only know
+at runtime.</p>
 </div>
 <div class="section" id="inlining">
 <h2>Inlining<a class="headerlink" href="#inlining" title="Permalink to this headline">¶</a></h2>
-<p>When the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag is turned on, the Logtalk compiler performs
-inlining of predicate calls whenever possible. This includes calls to
-built-in predicates such as <code class="docutils literal notranslate"><span class="pre">once/1</span></code>, <code class="docutils literal notranslate"><span class="pre">ignore/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">phrase/2-3</span></code>
-but also calls to Prolog predicates that are either built-in, foreign,
-or defined in a module (including <code class="docutils literal notranslate"><span class="pre">user</span></code>). Inlining notably allows
-wrapping module or foreign predicates using an object without
+<p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
+compiler performs <em>inlining</em> of predicate calls whenever possible. This
+includes calls to built-in predicates such as <code class="docutils literal notranslate"><span class="pre">once/1</span></code>, <code class="docutils literal notranslate"><span class="pre">ignore/1</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">phrase/2-3</span></code> but also calls to Prolog predicates that are either
+built-in, foreign, or defined in a module (including <code class="docutils literal notranslate"><span class="pre">user</span></code>). Inlining
+notably allows wrapping module or foreign predicates using an object without
 introducing any overhead.</p>
 </div>
 <div class="section" id="generated-code-simplification-and-optimizations">
 <h2>Generated code simplification and optimizations<a class="headerlink" href="#generated-code-simplification-and-optimizations" title="Permalink to this headline">¶</a></h2>
-<p>When the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag is turned on, the Logtalk compiler simplifies
-and optimizes generated clauses (including those resulting from the
-compilation of grammar rules), by flattening conjunctions, folding left
-unifications (e.g.&nbsp;generated as a by-product of the compilation of
-grammar rules), and removing redundant calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
+<p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
+compiler simplifies and optimizes generated clauses (including those
+resulting from the compilation of grammar rules), by flattening conjunctions,
+folding left unifications (e.g.&nbsp;generated as a by-product of the compilation
+of grammar rules), and removing redundant calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
 </div>
 <div class="section" id="other-considerations">
 <h2>Other considerations<a class="headerlink" href="#other-considerations" title="Permalink to this headline">¶</a></h2>

@@ -640,7 +640,7 @@ control construct. For example:
 This alternative should only be used when the user knows a priori that
 the category predicates will not be specialized or redefined by
 descendant objects of the object importing the category. Its advantage
-is that, when the :ref:`optimize <flag_optimize>` compiler flag is turned
+is that, when the :ref:`optimize <flag_optimize>` flag is turned
 on, the Logtalk compiler will try to optimize the calls by using
 :term:`static binding`. When :term:`dynamic binding` is used due to e.g.
 the lack of sufficient information at compilation time, the performance is

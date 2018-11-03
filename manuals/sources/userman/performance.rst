@@ -24,7 +24,7 @@ Logtalk is implemented as a *trans-compiler* to Prolog. When compiling
 predicates, it preserves in the generated Prolog code all cases of
 first-argument indexing and tail-recursion. In practice, this mean that
 if you know how to write efficient Prolog predicates, you already know
-how to write Logtalk predicates.
+how to write efficient Logtalk predicates.
 
 The Logtalk compiler adds an hidden execution-context argument to all
 entity predicates. When a predicate makes no calls to either
@@ -33,8 +33,8 @@ is neither a meta-predicate or a coinductive predicate, the
 execution-context argument is simply passed around. In this case, with
 most backend Prolog VMs, the cost of this extra argument is null or
 negligible. When the execution-context argument needs to be accessed
-(e.g. to fetch the value of *self* for a ``::/1`` call) there may be a
-small inherent overhead due to the implicit unifications.
+(e.g. to fetch the value of *self* for a :ref:`control_send_to_self_1`
+call) there may be a small inherent overhead due to the implicit unifications.
 
 Local predicate calls
 ---------------------
@@ -46,8 +46,9 @@ calls.
 Calls to imported or inherited predicates
 -----------------------------------------
 
-Assuming the ``optimize`` flag is turned on and a static predicate,
-``^^/1`` calls have zero overhead in terms of number of inferences.
+Assuming the :ref:`optimize <flag_optimize>` flag is turned on and a
+static predicate, :ref:`control_call_super_1` calls have zero overhead
+in terms of number of inferences.
 
 Calls to module predicates
 --------------------------
@@ -70,39 +71,40 @@ Logtalk 3.17.0 and later versions are:
 -  Dynamic binding (object bound at runtime time): 2
 
 Static binding is the common case with libraries and most application
-code; it requires compiling code with the ``optimize`` flag turned on.
-Dynamic binding numbers are after the first call (i.e. after the
-generalization of the query is cached). All numbers with the ``events``
-flag set to ``deny`` (setting this flag to ``allow`` adds an overhead of
-5 inferences to the numbers above).
+code; it requires compiling code with the :ref:`optimize <flag_optimize>`
+flag turned on. Dynamic binding numbers are after the first call (i.e.
+after the generalization of the query is cached). All numbers with the
+:ref:`events <flag_events>` flag set to ``deny`` (setting this flag to
+``allow`` adds an overhead of 5 inferences to the numbers above).
 
 The dynamic binding caches assume the used backend Prolog compiler does
 indexing of dynamic predicates. This is a common feature of modern
 Prolog systems but the actual details vary from system to system and may
 have an impact on dynamic binding performance.
 
-Note that messages to *self* (``::/1`` calls) always use dynamic binding
-as the object that receives the message is only know at runtime.
+Note that messages to *self* (:ref:`control_send_to_self_1` calls) always
+use dynamic binding as the object that receives the message is only know
+at runtime.
 
 Inlining
 --------
 
-When the ``optimize`` flag is turned on, the Logtalk compiler performs
-inlining of predicate calls whenever possible. This includes calls to
-built-in predicates such as ``once/1``, ``ignore/1``, and ``phrase/2-3``
-but also calls to Prolog predicates that are either built-in, foreign,
-or defined in a module (including ``user``). Inlining notably allows
-wrapping module or foreign predicates using an object without
+When the :ref:`optimize <flag_optimize>` flag is turned on, the Logtalk
+compiler performs *inlining* of predicate calls whenever possible. This
+includes calls to built-in predicates such as ``once/1``, ``ignore/1``,
+and ``phrase/2-3`` but also calls to Prolog predicates that are either
+built-in, foreign, or defined in a module (including ``user``). Inlining
+notably allows wrapping module or foreign predicates using an object without
 introducing any overhead.
 
 Generated code simplification and optimizations
 -----------------------------------------------
 
-When the ``optimize`` flag is turned on, the Logtalk compiler simplifies
-and optimizes generated clauses (including those resulting from the
-compilation of grammar rules), by flattening conjunctions, folding left
-unifications (e.g. generated as a by-product of the compilation of
-grammar rules), and removing redundant calls to ``true/0``.
+When the :ref:`optimize <flag_optimize>` flag is turned on, the Logtalk
+compiler simplifies and optimizes generated clauses (including those
+resulting from the compilation of grammar rules), by flattening conjunctions,
+folding left unifications (e.g. generated as a by-product of the compilation
+of grammar rules), and removing redundant calls to ``true/0``.
 
 Other considerations
 --------------------
