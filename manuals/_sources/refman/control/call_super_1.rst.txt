@@ -87,6 +87,8 @@ Examples
 
 ::
 
+   % specialize the inherited definition
+   % of the init/0 predicate:
    init :-
        assertz(counter(0)),
        ^^init.

@@ -86,6 +86,7 @@ Examples
 
 ::
 
+   % delegate unknown messages to the "backup" object:
    forward(Message) :-
        [backup::Message].
 

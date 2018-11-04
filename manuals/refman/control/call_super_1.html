@@ -250,7 +250,9 @@ categories besides classes.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>init <span class="o">:-</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% specialize the inherited definition</span>
+<span class="c">% of the init/0 predicate:</span>
+init <span class="o">:-</span>
     <span class="k">assertz</span>(counter(<span class="m">0</span>)),
     <span class="o">^^</span>init.
 </pre></div>

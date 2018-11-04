@@ -69,7 +69,7 @@ Examples
    area(Area) :-
        ::width(Width),
        ::height(Height),
-       Area is Width*Height.
+       Area is Width * Height.
 
 .. seealso::
 

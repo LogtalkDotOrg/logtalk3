@@ -79,6 +79,7 @@ Examples
 
    :- uses(list, [append/3, member/2]).
    :- uses(store, [data/2]).
+   :- uses(user, [table/4]).
 
    foo :-
        ...,
@@ -88,6 +89,8 @@ Examples
        append(A, B, C),
        % the same as store::assertz(data(X, C))
        assertz(data(X, C)),
+       % call the table/4 predicate in "user"
+       table(X, Y, Z, T),
        ...
 
 Another example, using the extended notation that allows us to define

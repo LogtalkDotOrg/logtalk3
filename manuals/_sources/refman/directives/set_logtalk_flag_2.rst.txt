@@ -68,6 +68,6 @@ Examples
 
    :- object(...).
 
-       % generate events for messages sent from this object 
+       % generate events for messages sent from this object:
        :- set_logtalk_flag(events, allow).
        ...

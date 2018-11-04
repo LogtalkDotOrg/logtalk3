@@ -249,6 +249,7 @@ uses(<span class="o">+</span>object_identifier, <span class="o">+</span>operator
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(list, [append<span class="o">/</span><span class="m">3</span>, member<span class="o">/</span><span class="m">2</span>]).
 <span class="p">:- </span><span class="k">uses</span>(store, [data<span class="o">/</span><span class="m">2</span>]).
+<span class="p">:- </span><span class="k">uses</span>(user, [table<span class="o">/</span><span class="m">4</span>]).
 
 foo <span class="o">:-</span>
     ...,
@@ -258,6 +259,8 @@ foo <span class="o">:-</span>
     append(<span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">C</span>),
     <span class="c">% the same as store::assertz(data(X, C))</span>
     <span class="k">assertz</span>(data(<span class="nv">X</span>, <span class="nv">C</span>)),
+    <span class="c">% call the table/4 predicate in &quot;user&quot;</span>
+    table(<span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>, <span class="nv">T</span>),
     ...
 </pre></div>
 </div>

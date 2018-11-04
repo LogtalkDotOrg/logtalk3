@@ -266,7 +266,8 @@ emphasize that the syntax is a list with a single element.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">forward</span>(<span class="nv">Message</span>) <span class="o">:-</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% delegate unknown messages to the &quot;backup&quot; object:</span>
+<span class="k">forward</span>(<span class="nv">Message</span>) <span class="o">:-</span>
     [backup<span class="o">::</span><span class="nv">Message</span>].
 </pre></div>
 </div>
