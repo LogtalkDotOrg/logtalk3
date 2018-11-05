@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Default library paths
+%  Default library paths for core resources
 %  Last updated on April 12, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>

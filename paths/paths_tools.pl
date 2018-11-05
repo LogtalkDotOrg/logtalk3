@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Default library paths
+%  Default library paths for the developer tools
 %  Last updated on October 24, 2017
 %
 %  This file is part of Logtalk <https://logtalk.org/>

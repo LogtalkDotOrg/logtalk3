@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on September 25, 2018
+%  Last updated on November 5, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -127,6 +127,7 @@ logtalk_library_path(constraints, examples('constraints/')).
 logtalk_library_path(dcgs, examples('dcgs/')).
 logtalk_library_path(debug_hooks, examples('debug_hooks/')).
 logtalk_library_path(delegates, examples('delegates/')).
+logtalk_library_path(design_patterns, examples('design_patterns/')).
 logtalk_library_path(diamonds, examples('diamonds/')).
 logtalk_library_path(dynpred, examples('dynpred/')).
 logtalk_library_path(ebench, engines('ebench/')).
