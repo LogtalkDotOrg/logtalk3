@@ -31,7 +31,7 @@ Description
 Dynamic and multifile user-defined predicate, allowing the declaration
 of aliases to library paths. Library aliases may also be used on the
 second argument (using the notation *alias(path)*). Paths must always
-end with the path directory separator character ('/').
+end with the path directory separator character (``'/'``).
 
 Relative paths (e.g. ``'../'`` or ``'./'``) should only be used within
 the *alias(path)*) notation so that library paths can always be expanded
@@ -57,7 +57,8 @@ directory for temporary files. It also allows several Logtalk instances
 to run concurrently without conflict by using a unique scratch directory
 per instance (e.g. using a process ID or a UUID generator).
 
-The ``logtalk`` built-in object provides an ``expand_library_path/2``
+The :ref:`logtalk <objects_logtalk>` built-in object provides an
+:ref:`expand_library_path/2 <apis:logtalk/0::expand_library_path/2>`
 predicate that can be used to expand library aliases and files expressed
 using library notation.
 

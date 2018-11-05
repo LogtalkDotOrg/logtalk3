@@ -111,6 +111,9 @@ Examples
 
 ::
 
+   % reload loaded source files in debug mode:
+   | ?- logtalk_make(debug).
+
    % check for code issues in the loaded source files:
    | ?- logtalk_make(check).
 

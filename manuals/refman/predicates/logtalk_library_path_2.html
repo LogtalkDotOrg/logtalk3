@@ -207,7 +207,7 @@
 <p>Dynamic and multifile user-defined predicate, allowing the declaration
 of aliases to library paths. Library aliases may also be used on the
 second argument (using the notation <em>alias(path)</em>). Paths must always
-end with the path directory separator character (‘/’).</p>
+end with the path directory separator character (<code class="docutils literal notranslate"><span class="pre">'/'</span></code>).</p>
 <p>Relative paths (e.g. <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) should only be used within
 the <em>alias(path)</em>) notation so that library paths can always be expanded
 to absolute paths independently of the (usually unpredictable) current
@@ -229,7 +229,8 @@ read-only directory by setting this alias to the operating-system
 directory for temporary files. It also allows several Logtalk instances
 to run concurrently without conflict by using a unique scratch directory
 per instance (e.g. using a process ID or a UUID generator).</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> built-in object provides an <code class="docutils literal notranslate"><span class="pre">expand_library_path/2</span></code>
+<p>The <a class="reference internal" href="../../userman/objects.html#objects-logtalk"><span class="std std-ref">logtalk</span></a> built-in object provides an
+<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-expand-library-path-2" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">expand_library_path/2</span></a>
 predicate that can be used to expand library aliases and files expressed
 using library notation.</p>
 </div>
