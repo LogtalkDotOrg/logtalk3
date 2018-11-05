@@ -241,6 +241,12 @@ predicates (or non-terminals) are also declared multifile.</p>
 <p>Note that dynamic predicates cannot be declared synchronized (when
 necessary, declare the predicates updating the dynamic predicates as
 synchronized).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Some backend Prolog compilers declare <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> as an operator
+for a lighter syntax. But this makes the code non-portable and is
+a practice best avoided.</p>
+</div>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>

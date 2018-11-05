@@ -24,7 +24,11 @@ RELEASE NOTES
 3.22.0 - December ??, 2018
 ==========================
 
+Documentation
+-------------
 
+* UPDATED: Warn about the portability issues of using operator notation with
+some predicate directives such as `dynamic/1`.
 
 
 3.21.0 - October 30, 2018

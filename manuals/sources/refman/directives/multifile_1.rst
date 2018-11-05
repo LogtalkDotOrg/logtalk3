@@ -61,6 +61,12 @@ contributing with clauses for the multifile predicates.
 Protocols cannot declare multifile predicates as protocols cannot
 contain predicate definitions.
 
+.. warning::
+
+   Some backend Prolog compilers declare ``multifile`` as an operator
+   for a lighter syntax. But this makes the code non-portable and is
+   a practice best avoided.
+
 Template and modes
 ------------------
 

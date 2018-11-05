@@ -57,6 +57,12 @@ meta-predicate directive. This is sometimes necessary when calling
 Prolog module meta-predicates due to the lack of standardization of the
 syntax of the meta-predicate templates.
 
+.. warning::
+
+   Some backend Prolog compilers declare ``meta_predicate`` as an operator
+   for a lighter syntax. But this makes the code non-portable and is
+   a practice best avoided.
+
 Template and modes
 ------------------
 
@@ -74,10 +80,15 @@ Examples
 
 ::
 
+   % findall/3 second argument is interpreted as a goal:
    :- meta_predicate(findall(*, 0, *)).
 
+   % both forall/2 arguments are interpreted as goals:
    :- meta_predicate(forall(0, 0)).
 
+   % maplist/3 first argument is interpreted as a closure
+   % that will be expanded to a goal by appending two
+   % arguments:
    :- meta_predicate(maplist(2, *, *)).
 
 .. seealso::

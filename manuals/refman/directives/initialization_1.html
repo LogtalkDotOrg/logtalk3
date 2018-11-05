@@ -207,6 +207,12 @@ only available for objects.</p>
 file is a Prolog directive, calls to Logtalk built-in predicates from it
 are usually compiled to improve performance and providing better support
 for embedded applications.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Some backend Prolog compilers declare <code class="docutils literal notranslate"><span class="pre">initialization</span></code> as an operator
+for a lighter syntax. But this makes the code non-portable and is
+a practice best avoided.</p>
+</div>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>

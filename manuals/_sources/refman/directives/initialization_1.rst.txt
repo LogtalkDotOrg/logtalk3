@@ -45,6 +45,12 @@ file is a Prolog directive, calls to Logtalk built-in predicates from it
 are usually compiled to improve performance and providing better support
 for embedded applications.
 
+.. warning::
+
+   Some backend Prolog compilers declare ``initialization`` as an operator
+   for a lighter syntax. But this makes the code non-portable and is
+   a practice best avoided.
+
 Template and modes
 ------------------
 

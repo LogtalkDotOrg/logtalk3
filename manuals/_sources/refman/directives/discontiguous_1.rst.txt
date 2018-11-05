@@ -38,6 +38,12 @@ Declares discontiguous predicates and discontiguous grammar rule
 non-terminals. The use of this directive should be avoided as not all
 backend Prolog compilers support discontiguous predicates.
 
+.. warning::
+
+   Some backend Prolog compilers declare ``discontiguous`` as an operator
+   for a lighter syntax. But this makes the code non-portable and is
+   a practice best avoided.
+
 Template and modes
 ------------------
 

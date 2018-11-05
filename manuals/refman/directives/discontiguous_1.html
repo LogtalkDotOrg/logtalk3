@@ -214,6 +214,12 @@ discontiguous([<span class="nv">Name</span><span class="o">//</span><span class=
 <p>Declares discontiguous predicates and discontiguous grammar rule
 non-terminals. The use of this directive should be avoided as not all
 backend Prolog compilers support discontiguous predicates.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Some backend Prolog compilers declare <code class="docutils literal notranslate"><span class="pre">discontiguous</span></code> as an operator
+for a lighter syntax. But this makes the code non-portable and is
+a practice best avoided.</p>
+</div>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>

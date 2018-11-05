@@ -63,11 +63,11 @@ Examples
 --------
 
 | To enumerate, by backtracking, the properties of a locally visible user predicate or a user predicate visible in :term:`this`:
-|     ``predicate_property(foo(_), Property)``
+|     ``predicate_property(Predicate, Property)``
 | To enumerate, by backtracking, the properties of a public or protected predicate visible in :term:`self`:
-|     ``::predicate_property(foo(_), Property)``
+|     ``::predicate_property(Predicate, Property)``
 | To enumerate, by backtracking, the properties of a public predicate visible in an explicit object:
-|     ``Object::predicate_property(foo(_), Property)``
+|     ``Object::predicate_property(Predicate, Property)``
 
 .. seealso::
 
