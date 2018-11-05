@@ -28,9 +28,9 @@ Description
 
    findall(Template, Goal, List, Tail)
 
-Variant of the ``findall/3`` method that allows passing the tail of the
-results list. It succeeds returning the tail argument when the goal has
-no solutions.
+Variant of the :ref:`methods_findall_3` method that allows passing the
+tail of the results list. It succeeds returning the tail argument when
+the goal has no solutions.
 
 This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.

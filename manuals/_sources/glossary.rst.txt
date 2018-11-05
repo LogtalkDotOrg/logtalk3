@@ -228,9 +228,9 @@ Glossary
       An object, implementing the ``expanding`` built-in protocol,
       defining term- and goal-expansion predicates, used in the compilation
       of Logtalk or Prolog source files. A hook object can be specified
-      using the compiler flag ``hook/1``. It can also be specified using
-      a :ref:`directives_set_logtalk_flag_2` directive in the source files
-      to be expanded.
+      using the :ref:`hook <flag_hook>` compiler flag. It can also be
+      specified using a :ref:`directives_set_logtalk_flag_2` directive in
+      the source files to be expanded.
 
    parametric object
       See :term:`parametric entity`.
