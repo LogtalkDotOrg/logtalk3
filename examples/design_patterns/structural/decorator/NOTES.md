@@ -36,7 +36,15 @@ to persist across backtracking the association between a decorator object
 and its decorated object, we can use in alternative a dynamic predicate
 in the decorator object.
 
-As a decorator object should accept all messages that the decorated
-object accepts, we use the `forward/1` handler for unknown messages
-to forward to the decorated objects all messages that are not defined
-in the decorator itself.
+As a decorator object should accept all messages that the decorated object
+accepts, we use the `forward/1` handler for unknown messages to forward to
+the decorated objects all messages that are not defined in the decorator
+itself.
+
+Another possible implementation of this pattern is to use a *complementing
+category* (i.e. hot patching) to decorate an object. This can be a good
+alternative solution when we need only to decorated a few specific objects
+(although a complementing category can complement multiple objects). The
+advantage of using a decorator object is that it can be used to decorate
+any object at compilation time or at runtime while with a complementing
+category we need to know in advance which objects we will be decorating.
