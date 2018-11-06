@@ -58,3 +58,39 @@ yes
 
 Diameter = 14.0.
 yes
+
+
+% we can define a pipeline of decorators; e.g. a colored, named
+% shape:
+
+| ?- create_object(NamedShape, [extends(named_shape)], [], [shape(colored_shape(o1,blue)), name(thingy)]).
+
+NamedShape = o2
+yes
+
+| ?- o2::string.
+
+A circle of radius 7.0
+which is colored blue
+which is named thingy
+yes
+
+| ?- o2::diameter(Diameter).
+
+Diameter = 14.0.
+yes
+
+
+% same queries using the decorator defined in the source file:
+
+| ?- my_named_shape::string.
+
+A circle of radius 10.0
+which is colored green
+which is named Mr. Round
+yes
+
+| ?- my_named_shape::diameter(Diameter).
+
+Diameter = 20.0.
+yes

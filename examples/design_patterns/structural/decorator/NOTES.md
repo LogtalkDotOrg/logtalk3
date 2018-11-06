@@ -39,7 +39,9 @@ in the decorator object.
 As a decorator object should accept all messages that the decorated object
 accepts, we use the `forward/1` handler for unknown messages to forward to
 the decorated objects all messages that are not defined in the decorator
-itself.
+itself. By using this handler, it is simple to define pipelines of
+decorators where a decorator acts as the decorated object for another
+decorator.
 
 Another possible implementation of this pattern is to use a *complementing
 category* (i.e. hot patching) to decorate an object. This can be a good

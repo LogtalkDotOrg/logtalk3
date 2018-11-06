@@ -54,8 +54,7 @@
 
 % define the decorator as a parametric object usong one parameter
 % to pass the decorated object and a second parameter to pass the
-% decoration; an alternative solution would be two use two dynamic
-% predicates to store the decorated object and the decoration
+% decoration
 
 :- object(colored_shape(_Shape_, _Color_),
 	implements(forwarding),
@@ -70,5 +69,44 @@
 	% forward unknown messages to the decorated object
 	forward(Message) :-
 		[_Shape_::Message].
+
+:- end_object.
+
+
+% we can define multiple decorators for the same type of objects;
+% here we use an alternative solution with two dynamic predicates
+% to store the decorated object and the decoration
+
+:- object(named_shape,
+	implements(forwarding),
+	extends(shape)).
+
+	:- public([shape/1, name/1]).
+	:- dynamic([shape/1, name/1]).
+
+	% define the string/0 predicate to print both the
+	% decorated object data and the decoration
+	string :-
+		::shape(Shape),
+		Shape::string,
+		::name(Name),
+		write('which is named '), write(Name), nl.
+
+	% forward unknown messages to the decorated object
+	forward(Message) :-
+		::shape(Shape),
+		[Shape::Message].
+
+:- end_object.
+
+
+% we can also fully define a decorator in a source file
+
+:- object(my_named_shape,
+	extends(named_shape)).
+
+	shape(colored_shape(circle, green)).
+
+	name('Mr. Round').
 
 :- end_object.
