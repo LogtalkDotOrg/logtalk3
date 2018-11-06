@@ -19,7 +19,7 @@
 
 
 % this example is an adaptation of the sample code found on the Wikipedia
-% page on the adapter design pattern:
+% page on the proxy design pattern:
 %
 % https://en.wikipedia.org/wiki/Proxy_pattern
 

@@ -19,7 +19,7 @@
 
 
 % this example is an adaptation of the sample code found on the Wikipedia
-% page on the adapter design pattern:
+% page on the facade design pattern:
 %
 % https://en.wikipedia.org/wiki/Facade_pattern
 
