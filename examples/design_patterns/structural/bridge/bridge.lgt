@@ -19,7 +19,7 @@
 
 
 % this example is an adaptation of the sample code found on the Wikipedia
-% page on the bridge design pattern:
+% page on the Bridge design pattern:
 %
 % https://en.wikipedia.org/wiki/Bridge_pattern
 

@@ -19,7 +19,7 @@
 
 
 % this example is an adaptation of the sample code found on the Wikipedia
-% page on the composite design pattern:
+% page on the Composite design pattern:
 %
 % https://en.wikipedia.org/wiki/Composite_pattern
 

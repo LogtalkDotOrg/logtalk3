@@ -19,7 +19,7 @@
 
 
 % this example is an adaptation of the sample code found on the Wikipedia
-% page on the flyweight design pattern:
+% page on the Flyweight design pattern:
 %
 % https://en.wikipedia.org/wiki/Flyweight_pattern
 

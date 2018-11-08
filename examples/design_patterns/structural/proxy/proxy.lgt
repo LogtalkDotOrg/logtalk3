@@ -19,7 +19,7 @@
 
 
 % this example is an adaptation of the sample code found on the Wikipedia
-% page on the proxy design pattern:
+% page on the Proxy design pattern:
 %
 % https://en.wikipedia.org/wiki/Proxy_pattern
 

@@ -43,10 +43,10 @@ Loading
 Supported operating-systems
 ---------------------------
 
-Currently, support is limited to Linux, MacOS X, and Windows.
+Currently, support is limited to Linux, macOS, and Windows.
 
 On Windows, the `start` command must be available. On Linux, the `xdg-open`
-command must be available. On MacOS X, the command `open` is used.
+command must be available. On macOS, the command `open` is used.
 
 This tool relies on the library portable operating-system access abstraction.
 
@@ -56,6 +56,10 @@ Known issues
 
 On macOS, the `open` command used to open documentation URLs drops the anchors,
 thus preventing navigating to the specified position on the documentation page.
+
+ECLiPSe defines a `help` prefix operator that forces wrapping this atom between
+parenthesis when sending messages to the tool. E.g. use `(help)::help` instead
+of `help::help`.
 
 
 Other notes

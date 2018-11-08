@@ -19,7 +19,7 @@
 
 
 % this example is an adaptation of the sample code found on the Wikipedia
-% page on the state design pattern:
+% page on the State design pattern:
 %
 % https://en.wikipedia.org/wiki/State_pattern
 

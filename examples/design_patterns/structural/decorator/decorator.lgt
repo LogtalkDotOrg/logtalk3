@@ -19,7 +19,7 @@
 
 
 % this example is an adaptation of the sample C++ code found on the Wikipedia
-% page on the decorator design pattern:
+% page on the Decorator design pattern:
 %
 % https://en.wikipedia.org/wiki/Decorator_pattern
 
