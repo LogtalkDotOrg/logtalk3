@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on September 18, 2018
+%  Last updated on November 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -698,6 +698,11 @@
 '$lgt_swi_table_directive_predicate'(F/A, TF/TA) :-
 	!,
 	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
+
+'$lgt_swi_table_directive_predicate'(F//A, TF/TA) :-
+	!,
+	A2 is A + 2,
+	'$lgt_compile_predicate_indicators'(F/A2, _, TF/TA).
 
 '$lgt_swi_table_directive_predicate'(Head, THead) :-
 	'$lgt_compile_predicate_heads'(Head, _, THead, _).

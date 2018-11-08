@@ -24,6 +24,12 @@ RELEASE NOTES
 3.22.0 - December ??, 2018
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The adapter files for B-Prolog, SWI-Prolog, XSB, and YAP to support
+using grammar rule non-terminal indicators in `table/1` directives.
+
 Documentation
 -------------
 

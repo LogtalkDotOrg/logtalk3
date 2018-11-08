@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on July 23, 2018
+%  Last updated on November 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -532,6 +532,11 @@ findall(Term, Goal, List, Tail) :-
 '$lgt_b_directive_expansion'(table(F/A), {table(TF/TA)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
+
+'$lgt_b_directive_expansion'(table(F//A), {table(TF/TA)}) :-
+	logtalk_load_context(entity_type, _),
+	A2 is A + 2,
+	'$lgt_compile_predicate_indicators'(F/A2, _, TF/TA).
 
 '$lgt_b_directive_expansion'(table([F/A| PIs]), {table(TPIs)}) :-
 	logtalk_load_context(entity_type, _),
