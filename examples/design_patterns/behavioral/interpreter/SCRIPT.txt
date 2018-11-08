@@ -23,6 +23,9 @@ ________________________________________________________________________
 ...
 
 
-% :
+% parse and evaluate an expression in Reverse Polish notation (RPN):
 
-| ?- 
+| ?- interpreter::eval("a b + c a - -", [a=5, b=3, c=1], Value).
+
+Value = 12
+yes

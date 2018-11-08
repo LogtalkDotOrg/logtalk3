@@ -29,7 +29,7 @@ This pattern can be used with both classes and prototypes.
 
 Logtalk support for Definite Clause Grammars (DCGs) allows straightforward
 representation of grammars and thus implementation of this pattern. Our
-sampel code makes use of tabling (to deal with left-recursion in the
+sample code makes use of tabling (to deal with left-recursion in the
 original example) and thus can only be run with B-Prolog, SWI-Prolog, XSB,
 or YAP backend Prolog compilers.
 

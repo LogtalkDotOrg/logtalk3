@@ -25,7 +25,8 @@
 
 
 % the Wikipedia page uses as example the following grammar
-% (in BNF format)
+% (in BNF format) for simple arithmetic expressions written
+% in Reverse Polish notation (RPN)
 %
 % expression ::= plus | minus | variable | number
 % plus ::= expression expression '+'
@@ -55,13 +56,16 @@
 	:- table(expression//2).
 
 	expression(Variables, Value) -->
-		variable(Variables, Value).
-	expression(_, Value) -->
-		number(Value).
-	expression(Variables, Value) -->
 		plus(Variables, Value).
 	expression(Variables, Value) -->
 		minus(Variables, Value).
+	expression(Variables, Value) -->
+		variable(Variables, Value).
+	expression(_, Value) -->
+		number(Value).
+
+	% to simplify, we assume a single space separate expression tokens
+	% with no preceeding or trailing spaces surrounding the expression
 
 	plus(Variables, Value) -->
 		expression(Variables, X), " ", expression(Variables, Y), " ", "+",
