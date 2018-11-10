@@ -94,12 +94,12 @@ html_theme = 'sphinx_rtd_theme'
 #
 # html_theme_options = {}
 # html_logo = 'logtalk.png'
-html_favicon = 'logtalk.ico'
+# html_favicon = 'logtalk.ico'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-
+html_extra_path = ['android-chrome-192x192.png', 'android-chrome-512x512.png', 'apple-touch-icon.png', 'browserconfig.xml', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon.ico', 'mstile-150x150.png', 'safari-pinned-tab.svg', 'site.webmanifest']
 # html_last_updated_fmt = ''
 
 # Custom sidebar templates, must be a dictionary that maps document names
