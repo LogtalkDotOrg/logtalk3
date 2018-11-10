@@ -33,6 +33,11 @@ using grammar rule non-terminal indicators in `table/1` directives.
 Documentation
 -------------
 
+* IMPROVED: Using of favicons in mobile and desktop browsers for the HTML
+version of the Handbook and APIs documentation.
+
+* IMPROVED: Readability of Handbook PDF version by using more readable fonts.
+
 * UPDATED: Warn about the portability issues of using operator notation with
 some predicate directives such as `dynamic/1`.
 
