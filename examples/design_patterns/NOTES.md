@@ -17,16 +17,16 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains sample implementations of the design patterns
-described in the book:
+This directory contains sample implementations of design patterns, most of
+them described in the book:
 
 Design Patterns - Elements of Reusable Object-Oriented Software
 Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
 Addison-Wesley Professional Computing Series
 ISBN 0-201-63361-2
 
-Note that the design patterns described in the book (aka as the "Gang of
-Four" book) assume, in general, a class-based object-oriented language.
+Note that the design patterns described in the book (aka the "Gang of Four"
+or "GoF" book) assume, in general, a class-based object-oriented language.
 Logtalk features, including the support for prototypes, categories, and
 event-driven programming, allow alternative, and sometimes preferable,
 solutions for some of the design patterns. When applicable, the design

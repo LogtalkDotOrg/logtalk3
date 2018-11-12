@@ -34,7 +34,7 @@ Documentation
 -------------
 
 * IMPROVED: Using of favicons in mobile and desktop browsers for the HTML
-version of the Handbook and APIs documentation.
+versions of the Handbook and APIs documentation.
 
 * IMPROVED: Readability of Handbook PDF version by using more readable fonts.
 

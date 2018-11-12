@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% this example is an adaptation of the sample language found on the Wikipedia
+% this example is an adaptation of the sample code found on the Wikipedia
 % page on the Interpreter design pattern:
 %
 % https://en.wikipedia.org/wiki/Interpreter_pattern
