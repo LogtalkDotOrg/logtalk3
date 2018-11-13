@@ -20,5 +20,5 @@
 
 :- initialization(
 	% avoid warnings due to the circular references in the sample code
-	logtalk_load(twin, [unknown_entities(silent)])
+	logtalk_load(mediator, [unknown_entities(silent)])
 ).
