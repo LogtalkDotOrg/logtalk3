@@ -1,0 +1,63 @@
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>  
+Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% start by loading the design pattern sample implementations:
+
+| ?- logtalk_load(design_patterns('behavioral/command/loader')).
+...
+
+
+% first, test the basic functionality for light:
+
+| ?- light(l1)::turn_on.
+
+The light(l1) is on
+yes
+
+
+% commands are represented using parametric object identifiers
+
+| ?- flip_up_command(light(l1))::execute.
+
+The light(l1) is on
+yes
+
+
+% use the client/invoker object to store_and_execute commands:
+
+| ?- switch::(
+		store_and_execute(flip_up_command(light(kitchen))),
+		store_and_execute(flip_up_command(coffee_maker))
+	).
+
+The light(kitchen) is on
+The coffee_maker is on
+yes
+
+| ?- switch::history.
+
+flip_up_command(light(kitchen))
+flip_up_command(coffee_maker)
+yes
+
+| ?- switch::reply_history.
+
+The light(kitchen) is on
+The coffee_maker is on
+yes
