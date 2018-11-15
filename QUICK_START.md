@@ -46,7 +46,7 @@ scripts!):
 * XSB MT:         `xsbmtlgt`   (first run may require `sudo`)
 * YAP:            `yaplgt`
 
-On MacOS X systems, `/opt/local/bin` must be in your PATH to run the scripts.
+On macOS systems, `/opt/local/bin` must be in your PATH to run the scripts.
 Terminal command files for running Logtalk with selected backend Prolog 
 compilers are also available on the Logtalk installation folder (by default,
 `/opt/local/share/logtalk/scripts/macosx/command_files`; for easy access, the
@@ -55,13 +55,13 @@ installer creates an alias to the Logtalk folder in the Applications folder.
 On Windows systems, shortcuts for running Logtalk with selected backend 
 Prolog compilers are created on the `Start Menu/Programs/Logtalk` menu.
 The first run of the JIProlog and XSB integration shortcuts may require
-administrator privileges depending on the XSB installation (right-click
-on the shortcut and select the "Run as administrator" option).
+administrator privileges depending on the JIProlog and XSB installation
+(right-click on the shortcut and select the "Run as administrator" option).
 
 If you get an unexpected failure when using one of the Prolog integration
 scripts or shortcuts, consult the `adapters/NOTES.md` file in the Logtalk
 installation folder for compatibility notes. For the integration scripts,
-see also the integration script man page.
+see also the integration script `man` page.
 
 Open the `manuals/index.html` file with a web browser and select the
 `Tutorial` link. This will provide you with a basic understanding of
@@ -78,15 +78,13 @@ Start Logtalk and call the goal `{help(loader)}` followed by `help::help`.
 This will provide you with an overview on how to get help and how to load
 and debug your code.
 
-Running the examples
---------------------
+Running an example
+------------------
 
-You may now try some examples:
+You may now try some examples. The `examples/NOTES.md` file contains a
+brief description of each example.
 
-1. Open the `examples` sub-directory. There you find several sub-directories
-with ready to run examples and a `NOTES.md` file containing general 
-instructions and a brief description of each example. Select and open one 
-of the examples sub-directory.
+1. Select and open one  of the examples sub-directory.
 
 2. Read the example `NOTES.md` file for a description of the example.
 
