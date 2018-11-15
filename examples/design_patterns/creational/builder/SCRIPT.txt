@@ -1,0 +1,54 @@
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>  
+Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% start by loading the design pattern sample implementations:
+
+| ?- logtalk_load(design_patterns('creational/builder/loader')).
+...
+
+
+% parametric object version:
+
+| ?- builder(_)::(set_wheels(3), set_seats(2), set_color(red), get_result(Car)).
+
+Car = car(3, 2, red)
+yes
+
+| ?- car(3, 2, red)::seats(Seats).
+
+Seats = 2
+yes
+
+
+% objects with dynamic state version:
+
+| ?- builder::new(Builder).
+
+Builder = o2
+yes
+
+| ?- o2::(set_wheels(3), set_seats(2), set_color(red), get_result(Car)).
+
+Car = o1
+yes
+
+| ?- o1::seats(Seats).
+
+Seats = 2
+yes
