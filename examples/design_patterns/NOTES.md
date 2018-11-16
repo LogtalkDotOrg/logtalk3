@@ -27,10 +27,17 @@ ISBN 0-201-63361-2
 
 Note that the design patterns described in the book (aka the "Gang of Four"
 or "GoF" book) assume, in general, a class-based object-oriented language.
-Logtalk features, including the support for prototypes, categories, and
-event-driven programming, allow alternative, and sometimes preferable,
-solutions for some of the design patterns. When applicable, the design
-patterns are generalized to apply to both classes and prototypes.
+Logtalk features, notably the support for prototypes, categories, parametric
+entities, and event-driven programming, allow alternative, and sometimes
+preferable, solutions for some of the design patterns. When applicable, the
+design patterns are generalized to apply to both classes and prototypes.
+
+It is also important to note that basic Logtalk (and Prolog) features,
+for example, meta-predicates and multifile predicates, can complement
+or provide alternative solutions for the problems targeted by some of
+the patterns. Thus, these sample implementations of design patterns
+should be taken as examples to be mined for ideas rather than canonical
+advice on how to solve the described problems.
 
 Given that Logtalk is a *declarative* language, the creational patterns
 are usually reinterpreted as structural patterns as objects, including

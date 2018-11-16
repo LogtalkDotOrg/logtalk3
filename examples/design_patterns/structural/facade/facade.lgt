@@ -90,7 +90,7 @@
 % there would be a constructor capable of assembling a specific computer
 % from specific parts, that in turn would be defined or created as
 % descendant objects for the generic prototypes above or from equivalent
-% classes; but the main point is that a facade abstract the complexity
+% classes; but the main point is that a facade abstracts the complexity
 % of the subsystems, isolating its clients from the subsystem details
 
 :- object(computer_facade).
