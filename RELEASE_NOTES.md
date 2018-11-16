@@ -44,8 +44,8 @@ some predicate directives such as `dynamic/1`.
 Examples
 --------
 
-* ADDED: New example, `design_patters`, with sample implementations of
-object-oriented behavioral, creational, and structural design patters.
+* ADDED: New set of examples, `design_patters`, with sample implementations
+of object-oriented behavioral, creational, and structural design patters.
 
 
 3.21.0 - October 30, 2018

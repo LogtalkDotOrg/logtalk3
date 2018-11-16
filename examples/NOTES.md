@@ -152,6 +152,9 @@ Follows a short description of each included example (in alphabetical order):
 	examples of problems and solutions for the "diamond problem"
 	(multi-inheritance conflicts and ambiguities)
 
+- `design_patterns`
+	sample implementation of common object-oriented design patterns
+
 - `dynpred`  
 	example of using the built-in database handling methods to
 	implement dynamic object state
