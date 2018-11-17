@@ -228,7 +228,11 @@ categories are found, either static, dynamic, or built-in.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">current_category</span>(monitoring).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate the defined categories:</span>
+| <span class="o">?-</span> <span class="k">current_category</span>(<span class="nv">Category</span>).
+
+<span class="nv">Category</span> <span class="o">=</span> core_messages <span class="o">;</span>
+...
 </pre></div>
 </div>
 <div class="admonition seealso">

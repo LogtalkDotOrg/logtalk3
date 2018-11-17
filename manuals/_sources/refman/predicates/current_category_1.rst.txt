@@ -49,7 +49,11 @@ Examples
 
 ::
 
-   | ?- current_category(monitoring).
+   % enumerate the defined categories:
+   | ?- current_category(Category).
+   
+   Category = core_messages ;
+   ...
 
 .. seealso::
 

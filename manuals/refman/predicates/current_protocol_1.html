@@ -228,7 +228,13 @@ protocols are found, either static, dynamic, or built-in.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">current_protocol</span>(listp).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate the defined protocols:</span>
+| <span class="o">?-</span> <span class="k">current_protocol</span>(<span class="nv">Protocol</span>).
+
+<span class="nv">Protocol</span> <span class="o">=</span> expanding <span class="o">;</span>
+<span class="nv">Protocol</span> <span class="o">=</span> monitoring <span class="o">;</span>
+<span class="nv">Protocol</span> <span class="o">=</span> forwarding <span class="o">;</span>
+...
 </pre></div>
 </div>
 <div class="admonition seealso">

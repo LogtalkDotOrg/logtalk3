@@ -54,7 +54,13 @@ Examples
 
 ::
 
-   | ?- category_property(Category, dynamic).
+   % enumerate the properties of the core_messages built-in category:
+   | ?- category_property(core_messages, Property).
+
+   Property = source_data ;
+   Property = static ;
+   Property = built_in ;
+   ...
 
 .. seealso::
 

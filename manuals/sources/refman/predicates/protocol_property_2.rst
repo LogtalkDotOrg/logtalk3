@@ -54,7 +54,13 @@ Examples
 
 ::
 
-   | ?- protocol_property(listp, Property).
+   % enumerate the properties of the monitoring built-in protocol:
+   | ?- protocol_property(monitoring, Property).
+   
+   Property = source_data ;
+   Property = static ;
+   Property = built_in ;
+   ...
 
 .. seealso::
 

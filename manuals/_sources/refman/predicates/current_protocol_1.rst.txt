@@ -49,7 +49,13 @@ Examples
 
 ::
 
-   | ?- current_protocol(listp).
+   % enumerate the defined protocols:
+   | ?- current_protocol(Protocol).
+   
+   Protocol = expanding ;
+   Protocol = monitoring ;
+   Protocol = forwarding ;
+   ...
 
 .. seealso::
 

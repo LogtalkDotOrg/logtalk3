@@ -49,7 +49,12 @@ Examples
 
 ::
 
-   | ?- current_object(list).
+   % enumerate the defined objects:
+   | ?- current_object(Object).
+   
+   Object = user ;
+   Object = logtalk ;
+   ...
 
 .. seealso::
 

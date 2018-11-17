@@ -54,7 +54,15 @@ Examples
 
 ::
 
-   | ?- object_property(list, Property).
+   % enumerate the properties of the logtalk built-in object:
+   | ?- object_property(logtalk, Property).
+
+   Property = context_switching_calls ;
+   Property = source_data ;
+   Property = threaded ;
+   Property = static ;
+   Property = built_in ;
+   ...
 
 .. seealso::
 

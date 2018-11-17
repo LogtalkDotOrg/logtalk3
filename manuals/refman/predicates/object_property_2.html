@@ -237,7 +237,15 @@ gramar section on <a class="reference internal" href="../grammar.html#grammar-en
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">object_property</span>(list, <span class="nv">Property</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate the properties of the logtalk built-in object:</span>
+| <span class="o">?-</span> <span class="k">object_property</span>(logtalk, <span class="nv">Property</span>).
+
+<span class="nv">Property</span> <span class="o">=</span> context_switching_calls <span class="o">;</span>
+<span class="nv">Property</span> <span class="o">=</span> source_data <span class="o">;</span>
+<span class="nv">Property</span> <span class="o">=</span> threaded <span class="o">;</span>
+<span class="nv">Property</span> <span class="o">=</span> static <span class="o">;</span>
+<span class="nv">Property</span> <span class="o">=</span> built_in <span class="o">;</span>
+...
 </pre></div>
 </div>
 <div class="admonition seealso">

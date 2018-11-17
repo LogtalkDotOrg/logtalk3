@@ -228,7 +228,12 @@ are found, either static, dynamic or built-in.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">current_object</span>(list).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate the defined objects:</span>
+| <span class="o">?-</span> <span class="k">current_object</span>(<span class="nv">Object</span>).
+
+<span class="nv">Object</span> <span class="o">=</span> user <span class="o">;</span>
+<span class="nv">Object</span> <span class="o">=</span> logtalk <span class="o">;</span>
+...
 </pre></div>
 </div>
 <div class="admonition seealso">
