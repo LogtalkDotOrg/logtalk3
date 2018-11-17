@@ -38,6 +38,9 @@ versions of the Handbook and APIs documentation.
 
 * IMPROVED: Readability of Handbook PDF version by using more readable fonts.
 
+* IMPROVED: Formatting of inline code fragments in the HTML versions of the
+Handbook and APIs documentation.
+
 * UPDATED: Warn about the portability issues of using operator notation with
 some predicate directives such as `dynamic/1`.
 
