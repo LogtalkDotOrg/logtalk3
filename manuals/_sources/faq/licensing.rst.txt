@@ -44,5 +44,5 @@ Yes, the Apache License 2.0 allows commercial use. See e.g. the
 What's the final license for a combination of Logtalk with a Prolog compiler?
 -----------------------------------------------------------------------------
 
-See the wiki page on `licensing <https://github.com/LogtalkDotOrg/logtalk3/wiki/Licensing>`_
+See the `licensing guide <https://logtalk.org/licensing.html>`_
 for details and relevant resources.

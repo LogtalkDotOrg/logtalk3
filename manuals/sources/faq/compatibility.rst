@@ -29,7 +29,7 @@ Compatibility
 What are the backend Prolog compiler requirements to run Logtalk?
 -----------------------------------------------------------------
 
-See the wiki page on `backend Prolog compiler requirements <https://github.com/LogtalkDotOrg/logtalk3/wiki/Backend-Prolog-compiler-requirements>`_.
+See the `backend Prolog compiler requirements guide <https://logtalk.org/backend_requirements.html>`_.
 
 .. _faq_compatibility_constraints:
 

@@ -34,4 +34,4 @@ Logtalk compiler and runtime. The distribution includes embedding scripts
 for selected backend Prolog compilers and embedding examples.
 
 For instructions on how to embed Logtalk and Logtalk applications see
-the wiki section on `embedding <https://github.com/LogtalkDotOrg/logtalk3/wiki/Embedding-Logtalk>`_.
+the `embedding guide <https://logtalk.org/embedding.html>`_.
