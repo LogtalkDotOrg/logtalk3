@@ -60,7 +60,26 @@ Errors
 Examples
 --------
 
-(none)
+::
+
+   % Are there "occurrences" of arg1 in arg2?
+   :- public(member/2).
+   :- coinductive(member/2).
+   
+   member(X, [X| _]).
+   member(X, [_| T]) :-
+       member(X, T).
+
+   % Are there infinitely many "occurrences" of arg1 in arg2?
+   :- public(comember/2).
+   :- coinductive(comember/2).
+   comember(X, [_| T]) :-
+       comember(X, T).
+
+   coinductive_success_hook(member(_, _)) :-
+       fail.
+   coinductive_success_hook(comember(X, L)) :-
+       member(X, L).
 
 .. seealso::
 

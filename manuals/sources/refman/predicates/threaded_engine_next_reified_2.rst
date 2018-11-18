@@ -53,7 +53,7 @@ Examples
 
 ::
 
-   % get the next answer from the worker_1 engine:
+   % get the next reified answer from the worker_1 engine:
    | ?- threaded_engine_next_reified(worker_1, Answer).
 
 .. seealso::

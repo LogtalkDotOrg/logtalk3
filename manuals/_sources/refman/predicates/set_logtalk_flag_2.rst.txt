@@ -62,7 +62,8 @@ Examples
 
 ::
 
-   % turn off the compiler unknown entities warnings:
+   % turn off globally and by default the compiler
+   % unknown entities warnings:
    | ?- set_logtalk_flag(unknown_entities, silent).
 
 .. seealso::

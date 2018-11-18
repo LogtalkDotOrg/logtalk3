@@ -236,7 +236,26 @@ coinductive_success_hook(<span class="o">+</span>callable) <span class="o">-</sp
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>(none)</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Are there &quot;occurrences&quot; of arg1 in arg2?</span>
+<span class="p">:- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">coinductive</span>(member<span class="o">/</span><span class="m">2</span>).
+
+member(<span class="nv">X</span>, [<span class="nv">X</span>| <span class="nv">_</span>]).
+member(<span class="nv">X</span>, [<span class="nv">_</span>| <span class="nv">T</span>]) <span class="o">:-</span>
+    member(<span class="nv">X</span>, <span class="nv">T</span>).
+
+<span class="c">% Are there infinitely many &quot;occurrences&quot; of arg1 in arg2?</span>
+<span class="p">:- </span><span class="k">public</span>(comember<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">coinductive</span>(comember<span class="o">/</span><span class="m">2</span>).
+comember(<span class="nv">X</span>, [<span class="nv">_</span>| <span class="nv">T</span>]) <span class="o">:-</span>
+    comember(<span class="nv">X</span>, <span class="nv">T</span>).
+
+coinductive_success_hook(member(<span class="nv">_</span>, <span class="nv">_</span>)) <span class="o">:-</span>
+    <span class="k">fail</span>.
+coinductive_success_hook(comember(<span class="nv">X</span>, <span class="nv">L</span>)) <span class="o">:-</span>
+    member(<span class="nv">X</span>, <span class="nv">L</span>).
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="../directives/coinductive_1.html#directives-coinductive-1"><span class="std std-ref">coinductive/1</span></a></p>
