@@ -19,13 +19,13 @@
 
 
 % this example is an adaptation of the sample code found on the Wikipedia
-% page on the Factory method design pattern:
+% page on the Multiton design pattern:
 %
 % https://en.wikipedia.org/wiki/Multiton_pattern
 
 
-% we start by defing a multiton metaclass with a simple with
-% a simple interface for multiton classes
+% we start by defing a multiton metaclass prioviding a simple
+% interface for multiton classes
 %
 % this interface uses lazy creation of the named instances
 %
