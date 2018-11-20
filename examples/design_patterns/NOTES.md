@@ -25,6 +25,11 @@ Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
 Addison-Wesley Professional Computing Series
 ISBN 0-201-63361-2
 
+If you don't have access to a copy of the book, see freely available
+Internet resources such as:
+
+https://en.wikipedia.org/wiki/Design_Patterns
+
 Note that the design patterns described in the book (aka the "Gang of Four"
 or "GoF" book) assume, in general, a class-based object-oriented language.
 Logtalk features, notably the support for prototypes, categories, parametric
@@ -44,4 +49,5 @@ are usually reinterpreted as structural patterns as objects, including
 those playing the role of instances, are often defined in source files
 instead of being forcefully dynamically created.
 
-The descriptions of the design patterns are citations from the book.
+The descriptions of the design patterns are citations from the book
+when applicable.
