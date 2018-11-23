@@ -50,6 +50,12 @@ Examples
 * ADDED: New set of examples, `design_patters`, with sample implementations
 of object-oriented behavioral, creational, and structural design patters.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `build_release.sh` script to also build the experimental pack
+for SWI-Prolog.
+
 
 3.21.0 - October 30, 2018
 =========================

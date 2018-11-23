@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on October 30, 2018
+##   Last updated on November 23, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -46,6 +46,14 @@ mv "pack-$version/settings.lgt" "pack-$version/logtalk/logtalk-$version"
 cd "pack-$version" || exit 1
 tar zcvf "logtalk-$version.tgz" logtalk
 mv "logtalk-$version.tgz" ..
+cd ..
+
+cp -R "logtalk-$version/scripts/pack-experimental" "pack-experimental-$version"
+cp -R "logtalk-$version" "pack-experimental-$version/logtalk"
+mv "pack-experimental-$version/settings.lgt" "pack-experimental-$version/logtalk/logtalk-$version"
+cd "pack-experimental-$version" || exit 1
+tar zcvf "logtalk-experimental-$version.tgz" logtalk
+mv "logtalk-experimental-$version.tgz" ..
 cd ..
 
 "logtalk-$version"/manuals/sources/build_manuals.sh
