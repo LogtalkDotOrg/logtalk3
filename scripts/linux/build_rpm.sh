@@ -22,11 +22,8 @@
 ## 
 #############################################################################
 
-if [ -z "$1" ]; then
-	version=$(cat ../../VERSION.txt)
-else
-	version="$1"
-fi
+
+version=$(cat ../../VERSION.txt)
 version_clean=$(echo "$version" | sed -e 's/-stable$//' | sed -e 's/-/_/g')
 archive=logtalk-$version
 

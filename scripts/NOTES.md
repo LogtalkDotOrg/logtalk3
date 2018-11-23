@@ -35,8 +35,7 @@ also available in the Logtalk website.
 
 - `build_release.sh`  
 	helper script for building most of the distribution files of a new
-	Logtalk release; accepts as an optional argument a version identifier
-	(e.g. 3.00.0-a8); must be run on a macOS computer due to its dependency
+	Logtalk release; must be run on a macOS computer due to its dependency
 	on MacPorts to build the macOS installer
 
 - `cleandist.sh`  
