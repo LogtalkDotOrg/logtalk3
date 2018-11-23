@@ -28,38 +28,38 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc /usr/local/share/logtalk/ACKNOWLEDGMENTS.md
-%doc /usr/local/share/logtalk/BIBLIOGRAPHY.bib
-%doc /usr/local/share/logtalk/CODE_OF_CONDUCT.md
-%doc /usr/local/share/logtalk/CONTRIBUTING.md
-%doc /usr/local/share/logtalk/CUSTOMIZE.md
-%doc /usr/local/share/logtalk/INSTALL.md
-%doc /usr/local/share/logtalk/LICENSE.txt
-%doc /usr/local/share/logtalk/NOTICE.txt
-%doc /usr/local/share/logtalk/QUICK_START.md
-%doc /usr/local/share/logtalk/README.md
-%doc /usr/local/share/logtalk/RELEASE_NOTES.md
-%doc /usr/local/share/logtalk/UPGRADING.md
-/usr/local/share/logtalk/VERSION.txt
-/usr/local/share/logtalk/loader-sample.lgt
-/usr/local/share/logtalk/settings-sample.lgt
-/usr/local/share/logtalk/tester-sample.lgt
-/usr/local/share/logtalk/tests-sample.lgt
-/usr/local/share/logtalk/adapters
-/usr/local/share/logtalk/coding
-/usr/local/share/logtalk/contributions
-/usr/local/share/logtalk/core
-%doc /usr/local/share/logtalk/docs
-/usr/local/share/logtalk/examples
-/usr/local/share/logtalk/integration
-/usr/local/share/logtalk/library
-/usr/local/share/logtalk/paths
-/usr/local/share/logtalk/man
-%doc /usr/local/share/logtalk/manuals
-/usr/local/share/logtalk/scratch
-/usr/local/share/logtalk/scripts
-/usr/local/share/logtalk/tests
-/usr/local/share/logtalk/tools
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/ACKNOWLEDGMENTS.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/BIBLIOGRAPHY.bib
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/CODE_OF_CONDUCT.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/CONTRIBUTING.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/CUSTOMIZE.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/INSTALL.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/LICENSE.txt
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/NOTICE.txt
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/QUICK_START.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/README.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/RELEASE_NOTES.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/UPGRADING.md
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/VERSION.txt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/loader-sample.lgt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/settings-sample.lgt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/tester-sample.lgt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/tests-sample.lgt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/adapters
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/coding
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/contributions
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/core
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/docs
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/examples
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/integration
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/library
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/paths
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/man
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/manuals
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/scratch
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/scripts
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/tests
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/tools
 /usr/local/share/logtalk
 /usr/local/bin/logtalk_user_setup
 /usr/local/bin/lgt2pdf
@@ -182,7 +182,7 @@ echo
 if [ -x /usr/bin/update-mime-database ]; then
 	mkdir -p /usr/share/mime/packages
 	rm -f /usr/share/mime/packages/logtalk.xml
-	cp /usr/local/share/logtalk/scripts/freedesktop/logtalk.xml /usr/share/mime/packages/logtalk.xml
+	cp /usr/local/share/LOGTALK_INSTALL_DIRECTORY/scripts/freedesktop/logtalk.xml /usr/share/mime/packages/logtalk.xml
 	update-mime-database /usr/share/mime
 	echo "Added the Logtalk mime-type to the Shared MIME-info Database."
 	echo
