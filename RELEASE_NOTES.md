@@ -56,6 +56,9 @@ Installers and installation scripts
 * UPDATED: The `build_release.sh` script to also build the experimental pack
 for SWI-Prolog.
 
+* FIXED: Calling the `build_release.sh` script with a custom version argument
+failed to pass the argument to the `build_rpm.sh` script.
+
 
 3.21.0 - October 30, 2018
 =========================

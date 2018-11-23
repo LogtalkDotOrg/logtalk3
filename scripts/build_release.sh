@@ -26,7 +26,6 @@
 if [ -z "$1" ]; then
 	git clone --depth=1 git://github.com/LogtalkDotOrg/logtalk3.git lgtclone
 	version=$(sed -e 's/-stable$//' < lgtclone/VERSION.txt)
-
 	mv lgtclone "logtalk-$version"
 else
 	version="$1"
@@ -106,7 +105,11 @@ cp -R "work/logtalk-$version.pkg" "$directory"
 sudo port clean logtalk
 
 cd "$directory/logtalk-$version/scripts/linux" || exit 1
-./build_rpm.sh
+if [ -z "$1" ]; then
+	./build_rpm.sh
+else
+	./build_rpm.sh "$1"
+fi
 mv "$HOME"/rpmbuild/RPMS/noarch/logtalk-*.rpm "$directory"
 
 cd "$directory" || exit 1

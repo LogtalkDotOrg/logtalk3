@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk RPM package build script
-##   Last updated on February 17, 2017
+##   Last updated on November 23, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -22,8 +22,11 @@
 ## 
 #############################################################################
 
-version=$(cat ../../VERSION.txt)
-
+if [ -z "$1" ]; then
+	version=$(cat ../../VERSION.txt)
+else
+	version="$1"
+fi
 version_clean=$(echo "$version" | sed -e 's/-stable$//' | sed -e 's/-/_/g')
 archive=logtalk-$version
 
