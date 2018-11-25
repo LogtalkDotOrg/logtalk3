@@ -222,11 +222,10 @@
 </div>
 <p>Throws a representation error. This built-in predicate is declared as
 a private method and thus cannot be used as a message to an object.
-Calling this predicate is equivalent to the following sequence of calls
-where <code class="docutils literal notranslate"><span class="pre">Head</span></code> is the head of the predicate clause making the call:</p>
+Calling this predicate is equivalent to the following sequence of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(<span class="k">representation_error</span>(<span class="nv">Flag</span>), logtalk(<span class="nv">Head</span>,<span class="nv">Context</span>))).
+<span class="k">throw</span>(error(<span class="k">representation_error</span>(<span class="nv">Flag</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the

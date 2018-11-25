@@ -30,14 +30,13 @@ Description
 
 Throws a system error. This built-in predicate is declared as
 a private method and thus cannot be used as a message to an object.
-Calling this predicate is equivalent to the following sequence of calls
-where ``Head`` is the head of the predicate clause making the call:
+Calling this predicate is equivalent to the following sequence of calls:
 
 ::
 
    ...,
    context(Context),
-   throw(error(system_error, logtalk(Head,Context))).
+   throw(error(system_error, Context)).
 
 This allows the user to generate errors in the same format used by the
 runtime.

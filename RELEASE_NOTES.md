@@ -44,6 +44,9 @@ Handbook and APIs documentation.
 * UPDATED: Warn about the portability issues of using operator notation with
 some predicate directives such as `dynamic/1`.
 
+* FIXED: Typo in the description of the equivalent calls to the error throwing
+built-in methods.
+
 Examples
 --------
 

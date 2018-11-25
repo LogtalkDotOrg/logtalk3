@@ -28,16 +28,15 @@ Description
 
    existence_error(Thing, Culprit)
 
-Throws an existence error. This built-in predicate is declared as
-a private method and thus cannot be used as a message to an object.
-Calling this predicate is equivalent to the following sequence of calls
-where ``Head`` is the head of the predicate clause making the call:
+Throws an existence error. This built-in predicate is declared as a private
+method and thus cannot be used as a message to an object. Calling this
+predicate is equivalent to the following sequence of calls:
 
 ::
 
    ...,
    context(Context),
-   throw(error(existence_error(Thing,Culprit), logtalk(Head,Context))).
+   throw(error(existence_error(Thing,Culprit), Context)).
 
 This allows the user to generate errors in the same format used by the
 runtime.
