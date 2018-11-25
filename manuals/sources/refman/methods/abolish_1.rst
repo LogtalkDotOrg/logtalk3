@@ -43,7 +43,7 @@ Modes and number of proofs
 
 ::
 
-   abolish(+predicate_indicator) - one
+   abolish(@predicate_indicator) - one
 
 Errors
 ------

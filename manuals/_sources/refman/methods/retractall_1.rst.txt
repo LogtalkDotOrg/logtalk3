@@ -43,7 +43,7 @@ Modes and number of proofs
 
 ::
 
-   retractall(+callable) - one
+   retractall(@callable) - one
 
 Errors
 ------

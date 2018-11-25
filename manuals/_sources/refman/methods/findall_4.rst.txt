@@ -40,7 +40,7 @@ Modes and number of proofs
 
 ::
 
-   findall(?term, +callable, ?list, +list) - zero_or_one
+   findall(?term, +callable, ?list, ?term) - zero_or_one
 
 Errors
 ------
