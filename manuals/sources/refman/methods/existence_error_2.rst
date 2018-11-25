@@ -46,13 +46,13 @@ Modes and number of proofs
 
 ::
 
-   existence_error(+nonvar) - error
+   existence_error(@nonvar, @nonvar) - error
 
 Errors
 ------
 
 | When called:
-|     ``existence_error(Thing,Culprit)``
+|     ``existence_error(Thing, Culprit)``
 
 Examples
 --------

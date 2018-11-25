@@ -46,7 +46,7 @@ Modes and number of proofs
 
 ::
 
-   evaluation_error(+nonvar) - error
+   evaluation_error(@nonvar) - error
 
 Errors
 ------

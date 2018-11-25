@@ -46,7 +46,7 @@ Modes and number of proofs
 
 ::
 
-   syntax_error(+nonvar) - error
+   syntax_error(@nonvar) - error
 
 Errors
 ------

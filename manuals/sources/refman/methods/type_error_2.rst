@@ -46,13 +46,13 @@ Modes and number of proofs
 
 ::
 
-   type_error(+nonvar,+term) - error
+   type_error(@nonvar, @term) - error
 
 Errors
 ------
 
 | When called:
-|     ``type_error(Type,Culprit)``
+|     ``type_error(Type, Culprit)``
 
 Examples
 --------

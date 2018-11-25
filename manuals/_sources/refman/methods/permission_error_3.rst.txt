@@ -46,13 +46,13 @@ Modes and number of proofs
 
 ::
 
-   permission_error(+nonvar) - error
+   permission_error(@nonvar, @nonvar, @nonvar) - error
 
 Errors
 ------
 
 | When called:
-|     ``permission_error(Operation,Permission,Culprit)``
+|     ``permission_error(Operation, Permission, Culprit)``
 
 Examples
 --------

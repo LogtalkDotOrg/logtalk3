@@ -46,7 +46,7 @@ Modes and number of proofs
 
 ::
 
-   resource_error(+nonvar) - error
+   resource_error(@nonvar) - error
 
 Errors
 ------

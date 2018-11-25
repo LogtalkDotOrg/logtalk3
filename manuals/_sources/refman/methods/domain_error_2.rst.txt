@@ -46,13 +46,13 @@ Modes and number of proofs
 
 ::
 
-   domain_error(+atom, +nonvar) - error
+   domain_error(+atom, @nonvar) - error
 
 Errors
 ------
 
 | When called:
-|     ``domain_error(Domain,Culprit)``
+|     ``domain_error(Domain, Culprit)``
 
 Examples
 --------
