@@ -48,7 +48,7 @@ Examples
 --------
 
 * ADDED: New set of examples, `design_patters`, with sample implementations
-of object-oriented behavioral, creational, and structural design patters.
+of 28 object-oriented behavioral, creational, and structural design patters.
 
 Installers and installation scripts
 -----------------------------------
