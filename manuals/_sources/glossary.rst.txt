@@ -203,6 +203,9 @@ Glossary
       methods are supported in Logtalk and can also be found in other
       object-oriented programming languages.
 
+   template method
+      See :term:`abstract method`.
+
    monitor
       Any object, implementing the ``monitoring`` built-in protocol, that
       is notified by the runtime when a spied event occurs. The spied
