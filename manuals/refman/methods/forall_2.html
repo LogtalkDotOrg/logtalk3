@@ -213,13 +213,15 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">forall</span>(<span class="nv">Generator</span>, <span class="nv">Test</span>)
 </pre></div>
 </div>
-<p>For all solutions of <code class="docutils literal notranslate"><span class="pre">Generator</span></code>, <code class="docutils literal notranslate"><span class="pre">Test</span></code> is true. This built-in
-meta-predicate is declared as a private method and thus cannot be used
-as a message to an object.</p>
+<p>For all solutions of <code class="docutils literal notranslate"><span class="pre">Generator</span></code>, <code class="docutils literal notranslate"><span class="pre">Test</span></code> is true. This meta-predicate
+implements a <em>generate-and-test</em> loop using a definition equivalent to
+<code class="docutils literal notranslate"><span class="pre">\+</span> <span class="pre">(Generator,</span> <span class="pre">\+</span> <span class="pre">Test)</span></code>.</p>
+<p>This built-in meta-predicate is declared as a private method and thus
+cannot be used as a message to an object.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">forall</span>(<span class="o">+</span>callable, <span class="o">+</span>callable) <span class="o">-</span> zero_or_one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">forall</span>(<span class="o">@</span>callable, <span class="o">@</span>callable) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
 </div>

@@ -28,16 +28,19 @@ Description
 
    forall(Generator, Test)
 
-For all solutions of ``Generator``, ``Test`` is true. This built-in
-meta-predicate is declared as a private method and thus cannot be used
-as a message to an object.
+For all solutions of ``Generator``, ``Test`` is true. This meta-predicate
+implements a *generate-and-test* loop using a definition equivalent to
+``\+ (Generator, \+ Test)``.
+
+This built-in meta-predicate is declared as a private method and thus
+cannot be used as a message to an object.
 
 Modes and number of proofs
 --------------------------
 
 ::
 
-   forall(+callable, +callable) - zero_or_one
+   forall(@callable, @callable) - zero_or_one
 
 Errors
 ------
