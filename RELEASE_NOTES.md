@@ -47,6 +47,8 @@ some predicate directives such as `dynamic/1`.
 * FIXED: Typo in the description of the equivalent calls to the error throwing
 built-in methods.
 
+* FIXED: Handbook link to the generated index from the sub-sections.
+
 Examples
 --------
 

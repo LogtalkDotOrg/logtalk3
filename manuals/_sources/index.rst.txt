@@ -28,8 +28,7 @@ The Logtalk Handbook
    faq/index
    glossary
    bibliography
-
-* :ref:`genindex`
+   genindex
 
 .. only:: builder_html
 
