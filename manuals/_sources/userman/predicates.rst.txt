@@ -1362,6 +1362,14 @@ defined. If that fails, it tries the default hook object, if defined. If
 that also fails, the compiler tries the Prolog dialect specific
 expansion predicate definitions if defined in the adapter file.
 
+.. index:: single: begin_of_file
+.. index:: single: end_of_file
+
+When using an hook object to expand the terms of a source file, two
+virtual terms are generated: ``begin_of_file`` and ``end_of_file``.
+These terms allow the user to define term-expansions before and after
+the actual source file terms.
+
 Sometimes we have multiple hook objects that we need to use in the
 compilation of a source file. The Logtalk library includes support for
 two basic expansion workflows: a pipeline of hook objects, where the
