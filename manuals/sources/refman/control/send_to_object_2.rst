@@ -36,21 +36,23 @@ protected or private predicate, the call is only valid if the
 predicate is declared but not defined, the message simply fails (as per
 the :term:`closed-world assumption`).
 
-The ``{Proxy}::Message`` syntax allows simplified access to parametric
-object *proxies*. Its operational semantics is equivalent to the goal
+The ``{Proxy}::Message`` syntax allows simplified access to
+:term:`parametric object proxies <parametric object proxy>`.
+Its operational semantics is equivalent to the goal
 conjunction ``(call(Proxy), Proxy::Message)``. I.e. ``Proxy`` is proved
 within the context of the pseudo-object :ref:`user <objects_user>` and,
 if successful, the goal term is used as a parametric object identifier.
 Exceptions thrown when proving ``Proxy`` are handled by the ``::/2``
-control construct. This syntax construct supports backtracking over the
-``{Proxy}`` goal.
+control construct. This construct construct supports backtracking over
+the ``{Proxy}`` goal.
 
 The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. Depending on the value of the
 :ref:`optimize <flag_optimize>` flag, these lookups are performed at
 compile time whenever sufficient information is available. When the
 lookups are performed at runtime, a caching mechanism is used to improve
-performance in subsequent messages.
+performance in subsequent messages. See the user manual section on
+:ref:`performance <performance_performance>` for details.
 
 Modes and number of proofs
 --------------------------

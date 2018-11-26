@@ -215,7 +215,9 @@ are performed using a depth-first strategy. Depending on the value of
 the <a class="reference internal" href="../../userman/programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag, these lookups are performed
 at compile time when the predicate is static and sufficient information
 is available. When the lookups are performed at runtime, a caching
-mechanism is used to improve performance in subsequent calls.</p>
+mechanism is used to improve performance in subsequent calls. See the
+user manual section on <a class="reference internal" href="../../userman/performance.html#performance-performance"><span class="std std-ref">performance</span></a> for
+details.</p>
 <p>When the call is made from within an object, the lookup for the
 predicate definition starts at the imported categories, if any. If an
 imported predicate definition is not found, the lookup proceeds to the

@@ -209,20 +209,22 @@ protected or private predicate, the call is only valid if the
 <a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a> matches the <a class="reference internal" href="../../glossary.html#term-predicate-scope-container"><span class="xref std std-term">predicate scope container</span></a>. When the
 predicate is declared but not defined, the message simply fails (as per
 the <a class="reference internal" href="../../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}::Message</span></code> syntax allows simplified access to parametric
-object <em>proxies</em>. Its operational semantics is equivalent to the goal
+<p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}::Message</span></code> syntax allows simplified access to
+<a class="reference internal" href="../../glossary.html#term-parametric-object-proxy"><span class="xref std std-term">parametric object proxies</span></a>.
+Its operational semantics is equivalent to the goal
 conjunction <code class="docutils literal notranslate"><span class="pre">(call(Proxy),</span> <span class="pre">Proxy::Message)</span></code>. I.e. <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is proved
 within the context of the pseudo-object <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a> and,
 if successful, the goal term is used as a parametric object identifier.
 Exceptions thrown when proving <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> are handled by the <code class="docutils literal notranslate"><span class="pre">::/2</span></code>
-control construct. This syntax construct supports backtracking over the
-<code class="docutils literal notranslate"><span class="pre">{Proxy}</span></code> goal.</p>
+control construct. This construct construct supports backtracking over
+the <code class="docutils literal notranslate"><span class="pre">{Proxy}</span></code> goal.</p>
 <p>The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. Depending on the value of the
 <a class="reference internal" href="../../userman/programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag, these lookups are performed at
 compile time whenever sufficient information is available. When the
 lookups are performed at runtime, a caching mechanism is used to improve
-performance in subsequent messages.</p>
+performance in subsequent messages. See the user manual section on
+<a class="reference internal" href="../../userman/performance.html#performance-performance"><span class="std std-ref">performance</span></a> for details.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
