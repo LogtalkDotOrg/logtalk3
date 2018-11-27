@@ -27,11 +27,11 @@ if you know how to write efficient Prolog predicates, you already know
 how to write efficient Logtalk predicates.
 
 The Logtalk compiler adds an hidden execution-context argument to all
-entity predicates. When a predicate makes no calls to either
-execution-context predicates or message-sending control constructs and
-is neither a meta-predicate or a coinductive predicate, the
-execution-context argument is simply passed around. In this case, with
-most backend Prolog VMs, the cost of this extra argument is null or
+entity predicates. In the common case where a predicate makes no calls to
+the execution-context predicates and message-sending control constructs
+and is neither a meta-predicate nor a coinductive predicate, the
+execution-context argument is simply passed between goals. In this case,
+with most backend Prolog VMs, the cost of this extra argument is null or
 negligible. When the execution-context argument needs to be accessed
 (e.g. to fetch the value of *self* for a :ref:`control_send_to_self_1`
 call) there may be a small inherent overhead due to the implicit unifications.
@@ -62,9 +62,9 @@ Messages
 
 For ``::/1-2`` calls Logtalk implements static binding and dynamic
 binding. For dynamic binding, a caching mechanism is used by the
-runtime. It’s useful to measure the performance overhead in *number of
-inferences* compared with plain Prolog/Prolog modules. The results for
-Logtalk 3.17.0 and later versions are:
+runtime. It's useful to measure the performance overhead in *number of
+inferences* compared with plain Prolog and Prolog modules. The results
+for Logtalk 3.17.0 and later versions are:
 
 -  Static binding: 0
 -  Dynamic binding (object bound at compile time): 1
@@ -75,7 +75,7 @@ code; it requires compiling code with the :ref:`optimize <flag_optimize>`
 flag turned on. Dynamic binding numbers are after the first call (i.e.
 after the generalization of the query is cached). All numbers with the
 :ref:`events <flag_events>` flag set to ``deny`` (setting this flag to
-``allow`` adds an overhead of 5 inferences to the numbers above).
+``allow`` adds an overhead of 5 inferences to the results above).
 
 The dynamic binding caches assume the used backend Prolog compiler does
 indexing of dynamic predicates. This is a common feature of modern
@@ -95,7 +95,9 @@ includes calls to built-in predicates such as ``once/1``, ``ignore/1``,
 and ``phrase/2-3`` but also calls to Prolog predicates that are either
 built-in, foreign, or defined in a module (including ``user``). Inlining
 notably allows wrapping module or foreign predicates using an object without
-introducing any overhead.
+introducing any overhead. In the specific case of the
+:ref:`execution-context predicates <predicates_context>`,
+calls are inlined independently of the ``optimize`` flag value.
 
 Generated code simplification and optimizations
 -----------------------------------------------

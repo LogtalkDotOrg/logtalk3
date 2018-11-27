@@ -206,11 +206,11 @@ first-argument indexing and tail-recursion. In practice, this mean that
 if you know how to write efficient Prolog predicates, you already know
 how to write efficient Logtalk predicates.</p>
 <p>The Logtalk compiler adds an hidden execution-context argument to all
-entity predicates. When a predicate makes no calls to either
-execution-context predicates or message-sending control constructs and
-is neither a meta-predicate or a coinductive predicate, the
-execution-context argument is simply passed around. In this case, with
-most backend Prolog VMs, the cost of this extra argument is null or
+entity predicates. In the common case where a predicate makes no calls to
+the execution-context predicates and message-sending control constructs
+and is neither a meta-predicate nor a coinductive predicate, the
+execution-context argument is simply passed between goals. In this case,
+with most backend Prolog VMs, the cost of this extra argument is null or
 negligible. When the execution-context argument needs to be accessed
 (e.g.&nbsp;to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>
 call) there may be a small inherent overhead due to the implicit unifications.</p>
@@ -237,8 +237,8 @@ compile time).</p>
 <p>For <code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> calls Logtalk implements static binding and dynamic
 binding. For dynamic binding, a caching mechanism is used by the
 runtime. It’s useful to measure the performance overhead in <em>number of
-inferences</em> compared with plain Prolog/Prolog modules. The results for
-Logtalk 3.17.0 and later versions are:</p>
+inferences</em> compared with plain Prolog and Prolog modules. The results
+for Logtalk 3.17.0 and later versions are:</p>
 <ul class="simple">
 <li>Static binding: 0</li>
 <li>Dynamic binding (object bound at compile time): 1</li>
@@ -249,7 +249,7 @@ code; it requires compiling code with the <a class="reference internal" href="pr
 flag turned on. Dynamic binding numbers are after the first call (i.e.
 after the generalization of the query is cached). All numbers with the
 <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> (setting this flag to
-<code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of 5 inferences to the numbers above).</p>
+<code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of 5 inferences to the results above).</p>
 <p>The dynamic binding caches assume the used backend Prolog compiler does
 indexing of dynamic predicates. This is a common feature of modern
 Prolog systems but the actual details vary from system to system and may
@@ -266,7 +266,9 @@ includes calls to built-in predicates such as <code class="docutils literal notr
 and <code class="docutils literal notranslate"><span class="pre">phrase/2-3</span></code> but also calls to Prolog predicates that are either
 built-in, foreign, or defined in a module (including <code class="docutils literal notranslate"><span class="pre">user</span></code>). Inlining
 notably allows wrapping module or foreign predicates using an object without
-introducing any overhead.</p>
+introducing any overhead. In the specific case of the
+<a class="reference internal" href="predicates.html#predicates-context"><span class="std std-ref">execution-context predicates</span></a>,
+calls are inlined independently of the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag value.</p>
 </div>
 <div class="section" id="generated-code-simplification-and-optimizations">
 <h2>Generated code simplification and optimizations<a class="headerlink" href="#generated-code-simplification-and-optimizations" title="Permalink to this headline">¶</a></h2>
