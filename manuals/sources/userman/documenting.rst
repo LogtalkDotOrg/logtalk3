@@ -17,8 +17,8 @@
 
 .. _documenting_documenting:
 
-Documenting applications
-========================
+Documenting
+===========
 
 Assuming that the :ref:`source_data <flag_source_data>` flag is turned on, the
 compiler saves all relevant documenting information collected when compiling

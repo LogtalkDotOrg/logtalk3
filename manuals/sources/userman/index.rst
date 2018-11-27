@@ -33,8 +33,9 @@ User Manual
    events
    threads
    errors
+   programming
    documenting
+   debugging
    performance
    installing
-   programming
    migration
