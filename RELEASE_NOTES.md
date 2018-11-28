@@ -33,6 +33,8 @@ using grammar rule non-terminal indicators in `table/1` directives.
 Documentation
 -------------
 
+* ADDED: User manual section on declarative object-oriented programming.
+
 * IMPROVED: Using of favicons in mobile and desktop browsers for the HTML
 versions of the Handbook and APIs documentation.
 
