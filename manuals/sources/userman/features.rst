@@ -30,12 +30,12 @@ system to use the name Logtalk appeared in February 1995. At that
 time, Logtalk was mainly an experiment in computational reflection with
 a rudimentary runtime and no compiler. Based on feedback by users and on
 the author subsequent work, the name was retained and Logtalk as created
-as a full programming language focusing on using object-oriented
-concepts for code encapsulation and reuse. Its first public alpha
-version was released in July 1998 with the first stable release (2.0)
-following in February 1999. Development of the third generation of
-Logtalk started in 2012 with the first public alpha version in August
-2012 and the first stable release (3.0.0) in January 2015.
+as a full programming language focusing on using object-oriented concepts
+for code encapsulation and reuse. Development started on January 1998 with
+the first public alpha version released in July 1998. The first stable
+release (2.0) was published in February 1999. Development of the third
+generation of Logtalk started in 2012 with the first public alpha version
+in August 2012 and the first stable release (3.0.0) in January 2015.
 
 Logtalk provides the following features:
 
@@ -55,10 +55,10 @@ Integration of logic and object-oriented programming
    application and its problem domain, turning the writing and
    maintenance of programming easier and more productive.
 
-   In a more pragmatically view, Logtalk objects provide Prolog with the
-   possibility of defining several namespaces, instead of the
-   traditional Prolog single database, addressing some of the needs of
-   large software projects.
+   From a pragmatic perspective, Logtalk objects provide Prolog with
+   the possibility of defining several namespaces, instead of the
+   traditional Prolog single database, addressing some of the needs
+   of large software projects.
 
 .. _features_events:
 

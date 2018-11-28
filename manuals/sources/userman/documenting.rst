@@ -235,7 +235,9 @@ entities).
 
 The ``lgtdoc`` tool supports a set of options that can be used to
 control the generation of the XML documentation files. Please see the
-tool documentation for details.
+tool documentation for details. There is also a ``doclet`` tool that
+allows automating the steps required to generate the documentation for
+an application.
 
 .. _documenting_formatting:
 

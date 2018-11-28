@@ -22,6 +22,7 @@ User Manual
 .. toctree::
    :maxdepth: 2
 
+   declarative
    features
    nomenclature
    messages
