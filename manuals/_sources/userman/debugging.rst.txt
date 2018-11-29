@@ -529,8 +529,8 @@ kind is either ``debug`` or ``debug(_)`` are only printed, by default,
 when the :ref:`debug <flag_debug>` flag is turned on. Note that using
 these messages does not require compiling the code in debug mode, only
 turning on the flag. To avoid having to define
-:ref:`methods_message_tokens_2` grammar rules for
-translating each debug message, Logtalk provides default tokenization
+:ref:`methods_message_tokens_2` grammar rules for translating each and
+every debug message, Logtalk provides default tokenization
 for four *meta-messages* that cover the most common cases:
 
 ``@Message``

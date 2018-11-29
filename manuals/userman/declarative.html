@@ -110,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
@@ -215,13 +216,13 @@ are usually static and thus Logtalk objects are static by default. This contrast
 imperative object-oriented languages where usually classes are static and objects are
 dynamic. This view of an object as a set of predicates also forgo a distinction
 between <em>data</em> and <em>procedures</em> that is central to imperative object-oriented
-languages but moot in declarative logic languages.</p>
+languages but moot in declarative, homoiconic logic languages.</p>
 <p>The second critical generalization concerns the relation between objects and other
 entities such as protocols (interfaces). The idea is that entity relations define
 <em>reuse patterns</em> and the <em>roles</em> played by the participating entities. A common reuse
 pattern is <em>inheritance</em>. In this case, an entity inherits, and thus reuses,
-resources from other entity. In a reuse pattern, each participating entity plays
-a specific <em>role</em>. The same entity, however, can play multiple roles
+resources from an ancestor entity. In a reuse pattern, each participating entity
+plays a specific <em>role</em>. The same entity, however, can play multiple roles
 depending on its relations with other entities. For example, an object can play
 the role of a class for its instances, the role of a subclass for its superclasses,
 and the role of an instance for its metaclass. Another common reuse pattern is

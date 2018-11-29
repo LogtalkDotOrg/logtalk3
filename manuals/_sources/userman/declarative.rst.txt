@@ -44,14 +44,14 @@ are usually static and thus Logtalk objects are static by default. This contrast
 imperative object-oriented languages where usually classes are static and objects are
 dynamic. This view of an object as a set of predicates also forgo a distinction
 between *data* and *procedures* that is central to imperative object-oriented
-languages but moot in declarative logic languages.
+languages but moot in declarative, homoiconic logic languages.
 
 The second critical generalization concerns the relation between objects and other
 entities such as protocols (interfaces). The idea is that entity relations define
 *reuse patterns* and the *roles* played by the participating entities. A common reuse
 pattern is *inheritance*. In this case, an entity inherits, and thus reuses,
-resources from other entity. In a reuse pattern, each participating entity plays
-a specific *role*. The same entity, however, can play multiple roles
+resources from an ancestor entity. In a reuse pattern, each participating entity
+plays a specific *role*. The same entity, however, can play multiple roles
 depending on its relations with other entities. For example, an object can play
 the role of a class for its instances, the role of a subclass for its superclasses,
 and the role of an instance for its metaclass. Another common reuse pattern is

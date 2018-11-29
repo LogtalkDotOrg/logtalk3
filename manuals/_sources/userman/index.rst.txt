@@ -35,6 +35,7 @@ User Manual
    threads
    errors
    programming
+   printing
    documenting
    debugging
    performance

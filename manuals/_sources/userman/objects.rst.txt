@@ -889,25 +889,6 @@ The following predicates are defined:
 ``execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, Stack)``
    Allows constructing and accessing execution context components.
 
-``print_message(Kind, Component, Term)``
-   Prints a message term after converting it into a list of tokens using
-   the ``message_tokens//2`` hook non-terminal. When the conversion
-   fails, the message term itself is printed.
-``print_message_tokens(Stream, Prefix, Tokens)``
-   Prints a list of message tokens to the specified stream and prefixing
-   each line with the specified prefix.
-``print_message_token(Stream, Prefix, Token, Tokens)``
-   Hook predicate, declared multifile and dynamic, allowing the default
-   printing of a token to be overridden.
-``message_tokens(Term, Component)``
-   Hook non-terminal, declared multifile and dynamic, allowing the
-   translation of a message into a list of tokens for printing.
-``message_prefix_stream(Kind, Component, Prefix, Stream)``
-   Hook predicate, declared multifile and dynamic, allowing the
-   definition of line prefix and output stream for messages.
-``message_hook(Term, Kind, Component, Tokens)``
-   Hook predicate, declared multifile and dynamic, allowing the
-   overriding the default printing of a message.
 
 ``trace_event(Event, EventExecutionContext)``
    Hook predicate, declared multifile and dynamic, for handling trace
