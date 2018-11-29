@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Declarative object-oriented programming &mdash; The Logtalk Handbook v3.22.0-b01 documentation</title>
+  <title>Term and goal expansion &mdash; The Logtalk Handbook v3.22.0-b01 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Main features" href="features.html" />
-    <link rel="prev" title="User Manual" href="index.html" />
+    <link rel="next" title="Documenting" href="documenting.html" />
+    <link rel="prev" title="Printing messages and asking questions" href="printing.html" />
    
 
   
@@ -97,7 +97,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Declarative object-oriented programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
@@ -111,7 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Term and goal expansion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
@@ -172,14 +172,14 @@
         
           <li><a href="index.html">User Manual</a> &raquo;</li>
         
-      <li>Declarative object-oriented programming</li>
+      <li>Term and goal expansion</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/userman/declarative.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/userman/expansion.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -193,52 +193,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="declarative-object-oriented-programming">
-<span id="declarative-declarative"></span><h1>Declarative object-oriented programming<a class="headerlink" href="#declarative-object-oriented-programming" title="Permalink to this headline">¶</a></h1>
-<p>Logtalk is a <em>declarative object-oriented logic programming language</em>. This means
-that Logtalk shares key concepts with other object-oriented programming languages
-but abstracts and reinterprets these concepts in the context of declarative logic
-programming.</p>
-<p>The key concepts in <em>declarative</em> object-oriented programming are <em>encapsulation</em>
-and <em>reuse patterns</em>. Notably, the concept of <em>mutable state</em>, which is an <em>imperative</em>
-concept, is not a significant concept in <em>declarative</em> object-oriented programming.
-Declarative object-oriented programming concepts can be materialized in both
-logic and functional languages. In this section, we focus only in declarative
-object-oriented logic programming.</p>
-<p>The first critical generalization of object-oriented programming concepts is the
-concept of object itself. What an object encapsulates depends on the <em>base programming
-paradigm</em> where we apply object-oriented programming concepts. When these concepts
-are applied to an imperative language, where mutable state and destructive assignment
-are central, objects naturally encapsulate and abstract mutable state, providing
-disciplined access and modification. When these concepts are applied to a declarative
-logic language such as Prolog, objects naturally encapsulate predicates. Therefore, an
-object can be seen as a <em>theory</em>, expressed by a set of related predicates. Theories
-are usually static and thus Logtalk objects are static by default. This contrasts with
-imperative object-oriented languages where usually classes are static and objects are
-dynamic. This view of an object as a set of predicates also forgo a distinction
-between <em>data</em> and <em>procedures</em> that is central to imperative object-oriented
-languages but moot in declarative, homoiconic logic languages.</p>
-<p>The second critical generalization concerns the relation between objects and other
-entities such as protocols (interfaces). The idea is that entity relations define
-<em>reuse patterns</em> and the <em>roles</em> played by the participating entities. A common reuse
-pattern is <em>inheritance</em>. In this case, an entity inherits, and thus reuses,
-resources from an ancestor entity. In a reuse pattern, each participating entity
-plays a specific <em>role</em>. The same entity, however, can play multiple roles
-depending on its relations with other entities. For example, an object can play
-the role of a class for its instances, the role of a subclass for its superclasses,
-and the role of an instance for its metaclass. Another common reuse pattern is
-<em>protocol implementation</em>. In this case, an object implementing a protocol reuses
-resource declarations by providing an implementation for those resources and
-exposing those resources to its clients. An essential consequence of this
-generalization is that protocols and objects are first-class entities
-while e.g. <em>class</em>, <em>instance</em>, <em>metaclass</em>, <em>subclass</em>, <em>superclass</em> are just
-<em>roles</em> that an object can play. Moreover, a language can provide multiple reuse
-patterns instead of selecting a set of patterns and supporting this set as a design
-choice that excludes other sets of patterns. For example, most imperative
-object-oriented languages are either class-based or prototype-based. In contrast,
-Logtalk naturally supports both classes and prototypes by providing the corresponding
-reuse patterns using objects as first-class entities capable of playing multiple
-roles.</p>
+  <div class="section" id="term-and-goal-expansion">
+<span id="expansion-expansion"></span><h1>Term and goal expansion<a class="headerlink" href="#term-and-goal-expansion" title="Permalink to this headline">¶</a></h1>
+<p>Logtalk supports an <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> built-in
+method for expanding a term into another term or a list of terms. This
+method is mainly used to translate grammar rules into Prolog clauses. It
+can be customized, e.g. for bypassing the default Logtalk grammar rule
+translator, by defining clauses for the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> hook
+predicate. Logtalk also supports an <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a> built-in
+method for expanding a goal. This method can also be customized by
+defining clauses for the <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> hook
+predicate.</p>
+<p>Term and goal expansion may be performed either by calling the
+<code class="docutils literal notranslate"><span class="pre">expand_term/2</span></code> and <code class="docutils literal notranslate"><span class="pre">expand_goal/2</span></code> built-in methods explicitly or
+by using <em>hook objects</em>. A hook object is simply an object defining
+clauses for the term- and goal-expansion hook predicates. To compile a
+source file using a hook object for expanding its terms and goals, you
+can use the <a class="reference internal" href="programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler
+flag in the second argument of the <a class="reference internal" href="../refman/predicates/logtalk_compile_2.html#predicates-logtalk-compile-2"><span class="std std-ref">logtalk_compile/2</span></a>
+or <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a> built-in predicates. In alternative,
+you can use a <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
+directive in the source file itself. When compiling a source file, the
+compiler will first try the source file specific hook object, if
+defined. If that fails, it tries the default hook object, if defined. If
+that also fails, the compiler tries the Prolog dialect specific
+expansion predicate definitions if defined in the adapter file.</p>
+<span class="target" id="index-0"></span><p id="index-1">When using an hook object to expand the terms of a source file, two
+virtual terms are generated: <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> and <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.
+These terms allow the user to define term-expansions before and after
+the actual source file terms.</p>
+<p>Sometimes we have multiple hook objects that we need to use in the
+compilation of a source file. The Logtalk library includes support for
+two basic expansion workflows: a pipeline of hook objects, where the
+expansion results from a hook object are feed to the next hook object
+in the pipeline, and a set of hook objects, where expansions are tried
+until one of is found that succeeds. These workflows are implemented as
+parametric objects allowing combining them to implement more
+sophisticated expansion workflows.</p>
+<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates
+defined within an object or a category are never used in the compilation
+of the object or the category itself, however. In order to use clauses
+for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates defined
+in plain Prolog, simply specify the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code> as the hook
+object when compiling source files. When using backend Prolog compilers
+that support a module system, it can also be specified a module
+containing clauses for the expanding predicates as long as the module
+name doesn’t coincide with an object name. But note that Prolog module
+libraries may provide definitions of the expansion predicates that are
+not compatible with the Logtalk compiler. Specially when setting the
+hook object to <code class="docutils literal notranslate"><span class="pre">user</span></code>, be aware of any Prolog library that is loaded,
+possibly by default or implicitly by the Prolog system, that may be
+contributing definitions of the expansion predicates. It is usually much
+safer to define a specific hook object for combining multiple expansions
+in a fully controlled way.</p>
+<p>Logtalk provides a <a class="reference internal" href="../refman/predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a>
+built-in predicate that can be used to access the compilation/loading
+context when performing term-expansion or goal-expansion.</p>
 </div>
 
 
@@ -249,10 +259,10 @@ roles.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="features.html" class="btn btn-neutral float-right" title="Main features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="documenting.html" class="btn btn-neutral float-right" title="Documenting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="User Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="printing.html" class="btn btn-neutral" title="Printing messages and asking questions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

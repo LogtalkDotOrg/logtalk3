@@ -136,7 +136,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#all-solutions-methods">All solutions methods</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reflection-methods">Reflection methods</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#definite-clause-grammar-parsing-methods-and-non-terminals">Definite clause grammar parsing methods and non-terminals</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#term-and-goal-expansion-methods">Term and goal expansion methods</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#predicate-properties">Predicate properties</a></li>
@@ -158,6 +157,7 @@
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
@@ -1346,63 +1346,6 @@ The <code class="docutils literal notranslate"><span class="pre">call//1-N</span
 expression) plus zero or more additional arguments and are processed by
 appending the input list of tokens and the list of remaining tokens to
 the arguments.</p>
-</div>
-<div class="section" id="term-and-goal-expansion-methods">
-<span id="predicates-expanding"></span><h3>Term and goal expansion methods<a class="headerlink" href="#term-and-goal-expansion-methods" title="Permalink to this headline">¶</a></h3>
-<p>Logtalk supports an <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> built-in
-method for expanding a term into another term or a list of terms. This
-method is mainly used to translate grammar rules into Prolog clauses. It
-can be customized, e.g. for bypassing the default Logtalk grammar rule
-translator, by defining clauses for the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> hook
-predicate. Logtalk also supports an <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a> built-in
-method for expanding a goal. This method can also be customized by
-defining clauses for the <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> hook
-predicate.</p>
-<p>Term and goal expansion may be performed either by calling the
-<code class="docutils literal notranslate"><span class="pre">expand_term/2</span></code> and <code class="docutils literal notranslate"><span class="pre">expand_goal/2</span></code> built-in methods explicitly or
-by using <em>hook objects</em>. A hook object is simply an object defining
-clauses for the term- and goal-expansion hook predicates. To compile a
-source file using a hook object for expanding its terms and goals, you
-can use the <a class="reference internal" href="programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler
-flag in the second argument of the <a class="reference internal" href="../refman/predicates/logtalk_compile_2.html#predicates-logtalk-compile-2"><span class="std std-ref">logtalk_compile/2</span></a>
-or <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a> built-in predicates. In alternative,
-you can use a <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
-directive in the source file itself. When compiling a source file, the
-compiler will first try the source file specific hook object, if
-defined. If that fails, it tries the default hook object, if defined. If
-that also fails, the compiler tries the Prolog dialect specific
-expansion predicate definitions if defined in the adapter file.</p>
-<span class="target" id="index-0"></span><p id="index-1">When using an hook object to expand the terms of a source file, two
-virtual terms are generated: <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> and <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.
-These terms allow the user to define term-expansions before and after
-the actual source file terms.</p>
-<p>Sometimes we have multiple hook objects that we need to use in the
-compilation of a source file. The Logtalk library includes support for
-two basic expansion workflows: a pipeline of hook objects, where the
-expansion results from a hook object are feed to the next hook object
-in the pipeline, and a set of hook objects, where expansions are tried
-until one of is found that succeeds. These workflows are implemented as
-parametric objects allowing combining them to implement more
-sophisticated expansion workflows.</p>
-<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates
-defined within an object or a category are never used in the compilation
-of the object or the category itself, however. In order to use clauses
-for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates defined
-in plain Prolog, simply specify the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code> as the hook
-object when compiling source files. When using backend Prolog compilers
-that support a module system, it can also be specified a module
-containing clauses for the expanding predicates as long as the module
-name doesn’t coincide with an object name. But note that Prolog module
-libraries may provide definitions of the expansion predicates that are
-not compatible with the Logtalk compiler. Specially when setting the
-hook object to <code class="docutils literal notranslate"><span class="pre">user</span></code>, be aware of any Prolog library that is loaded,
-possibly by default or implicitly by the Prolog system, that may be
-contributing definitions of the expansion predicates. It is usually much
-safer to define a specific hook object for combining multiple expansions
-in a fully controlled way.</p>
-<p>Logtalk provides a <a class="reference internal" href="../refman/predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a>
-built-in predicate that can be used to access the compilation/loading
-context when performing term-expansion or goal-expansion.</p>
 </div>
 </div>
 <div class="section" id="predicate-properties">

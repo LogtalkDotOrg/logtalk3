@@ -36,6 +36,7 @@ User Manual
    errors
    programming
    printing
+   expansion
    documenting
    debugging
    performance
