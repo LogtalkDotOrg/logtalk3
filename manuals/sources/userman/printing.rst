@@ -305,8 +305,8 @@ until the goal constructed by extending the closure with the user answer
 succeeds.
 
 There is also a hook predicate,
-:ref:`logtalk::question_hook/6 <methods_question_hook_6>`,
-that can be used to intercept questions, similar to the ``logtalk::message_hook/4.
+:ref:`logtalk::question_hook/6 <methods_question_hook_6>`, that can be used
+to intercept questions, similar to the ``logtalk::message_hook/4`` predicate.
 For example, assume that we want to automate testing and thus cannot rely
 on the user manually providing answers:
 

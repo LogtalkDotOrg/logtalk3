@@ -455,8 +455,8 @@ is used to check the answers provided by the user. The question is repeated
 until the goal constructed by extending the closure with the user answer
 succeeds.</p>
 <p>There is also a hook predicate,
-<a class="reference internal" href="../refman/methods/question_hook_6.html#methods-question-hook-6"><span class="std std-ref">logtalk::question_hook/6</span></a>,
-that can be used to intercept questions, similar to the <a href="#id2"><span class="problematic" id="id3">``</span></a>logtalk::message_hook/4.
+<a class="reference internal" href="../refman/methods/question_hook_6.html#methods-question-hook-6"><span class="std std-ref">logtalk::question_hook/6</span></a>, that can be used
+to intercept questions, similar to the <code class="docutils literal notranslate"><span class="pre">logtalk::message_hook/4</span></code> predicate.
 For example, assume that we want to automate testing and thus cannot rely
 on the user manually providing answers:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(hitchhikers_fixed_answers).
