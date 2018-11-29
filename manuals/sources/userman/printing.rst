@@ -253,37 +253,84 @@ compiler messages:
 Asking questions
 ----------------
 
-Logtalk features a *structured question asking* mechanism that
-complements the message printing mechanism. This feature provides an
-abstraction for the common task of asking a user a question and reading
-back its reply. By default, this mechanism writes the question, writes a
-prompt, and reads the answer from the current user input and output
-streams but allows both steps to be intercepted, filtered, rewritten,
-and redirected. Two typical examples are using a GUI dialog for asking
-questions and automatically providing answers to specific questions.
+Logtalk *structured question asking* mechanism complements the message
+printing mechanism. It provides an abstraction for the common task of
+asking a user a question and reading back its reply. By default, this
+mechanism writes the question, writes a prompt, and reads the answer
+from the current user input and output streams but allows both steps to
+be intercepted, filtered, rewritten, and redirected. Two typical examples
+are using a GUI dialog for asking questions and automatically providing
+answers to specific questions.
 
 The question asking mechanism works in tandem with the message printing
 mechanism, using it to print the question text and a prompt. It provides
 an asking predicate and a hook predicate, both declared and defined in
 the ``logtalk`` built-in object. The asking predicate,
-:ref:`ask_question(Kind, Component, Question, Check, Answer) <methods_ask_question_5>`,
-is used for ask a question and read the answer. The hook predicate,
-:ref:`question_hook(Question, Kind, Component, Tokens, Check, Answer) <methods_question_hook_6>`,
-is used for intercepting questions. The ``Kind`` argument is used to
-represent the nature of the question being asked. Its default value is
-``question`` but it can be any atom or compound term, e.g.
-``question(parameters)``. Using a compound term allows easy partitioning
-of messages of the same kind in different groups. The ``Check`` argument
-is a closure that is converted into a checking goal taking as argument
-the user answer. The ``ask_question/5`` implements a read loop that
-terminates when this checking predicate is true. The question itself is
-a term that is translated into printing tokens using the
-``message_tokens/2`` multifile predicate described above.
+:ref:`logtalk::ask_question/5 <apis:logtalk/0::ask_question/5>`,
+is used for ask a question and read the answer. Assume that we defined
+the following message tokenization and question prompt and stream:
 
-There is also a user-defined multifile predicate for setting default
-prompt and input streams,
-``question_prompt_stream(Kind, Component, Prompt, Stream)`` :ref:`methods_question_prompt_stream_4`.
+::
 
-A usage example of this mechanism can be found in the ``debugger`` tool
-where it's used to abstract the user interaction when tracing a goal
+   :- category(hitchhikers_guide_to_the_galaxy).
+   
+       :- multifile(logtalk::message_tokens//2).
+       :- dynamic(logtalk::message_tokens//2).
+   
+       logtalk::message_tokens(ultimate_answer, hitchhikers) -->
+           ['The answer to the ultimate question of life, the universe and everything is'-[]].
+   
+      :- multifile(logtalk::question_prompt_stream/4).
+      :- dynamic(logtalk::question_prompt_stream/4).
+   
+      logtalk::question_prompt_stream(question, hitchhikers, ': ', user_input).
+   
+   :- end_category.
+
+After compiling and loading this category, we can now ask the ultimate
+question:
+
+.. code-block:: text
+
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, integer, N).
+   
+   The answer to the ultimate question of life, the universe and everything is: 42.
+
+   N = 42
+   yes
+   
+Note that the fourth argument, ``integer`` in our example, is a closure that
+is used to check the answers provided by the user. The question is repeated
+until the goal constructed by extending the closure with the user answer
+succeeds.
+
+There is also a hook predicate,
+:ref:`logtalk::question_hook/6 <apis:logtalk/0::question_hook/6>`,
+that can be used to intercept questions, similar to the ``logtalk::message_hook/4.
+For example, assume that we want to automate testing and thus cannot rely
+on the user manually providing answers:
+
+::
+
+   :- category(hitchhikers_fixed_answers).
+   
+       :- multifile(logtalk::question_hook/6).
+       :- dynamic(logtalk::question_hook/6).
+   
+       logtalk::question_hook(ultimate_answer, question, hitchhikers, _, _, 42).
+   
+   :- end_category.
+
+After compiling and loading this category, trying the question again will
+now skip asking the user:
+
+.. code-block:: text
+
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, integer, N).
+   
+   N = 42
+   yes
+
+Other usage examples of this mechanism can be found e.g. in the ``debugger``
+tool where it's used to abstract the user interaction when tracing a goal
 execution in debug mode.

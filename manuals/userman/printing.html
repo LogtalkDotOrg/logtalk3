@@ -408,36 +408,76 @@ compiler messages:</p>
 </div>
 <div class="section" id="asking-questions">
 <span id="printing-questions"></span><h2>Asking questions<a class="headerlink" href="#asking-questions" title="Permalink to this headline">¶</a></h2>
-<p>Logtalk features a <em>structured question asking</em> mechanism that
-complements the message printing mechanism. This feature provides an
-abstraction for the common task of asking a user a question and reading
-back its reply. By default, this mechanism writes the question, writes a
-prompt, and reads the answer from the current user input and output
-streams but allows both steps to be intercepted, filtered, rewritten,
-and redirected. Two typical examples are using a GUI dialog for asking
-questions and automatically providing answers to specific questions.</p>
+<p>Logtalk <em>structured question asking</em> mechanism complements the message
+printing mechanism. It provides an abstraction for the common task of
+asking a user a question and reading back its reply. By default, this
+mechanism writes the question, writes a prompt, and reads the answer
+from the current user input and output streams but allows both steps to
+be intercepted, filtered, rewritten, and redirected. Two typical examples
+are using a GUI dialog for asking questions and automatically providing
+answers to specific questions.</p>
 <p>The question asking mechanism works in tandem with the message printing
 mechanism, using it to print the question text and a prompt. It provides
 an asking predicate and a hook predicate, both declared and defined in
 the <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> built-in object. The asking predicate,
-<a class="reference internal" href="../refman/methods/ask_question_5.html#methods-ask-question-5"><span class="std std-ref">ask_question(Kind, Component, Question, Check, Answer)</span></a>,
-is used for ask a question and read the answer. The hook predicate,
-<a class="reference internal" href="../refman/methods/question_hook_6.html#methods-question-hook-6"><span class="std std-ref">question_hook(Question, Kind, Component, Tokens, Check, Answer)</span></a>,
-is used for intercepting questions. The <code class="docutils literal notranslate"><span class="pre">Kind</span></code> argument is used to
-represent the nature of the question being asked. Its default value is
-<code class="docutils literal notranslate"><span class="pre">question</span></code> but it can be any atom or compound term, e.g.
-<code class="docutils literal notranslate"><span class="pre">question(parameters)</span></code>. Using a compound term allows easy partitioning
-of messages of the same kind in different groups. The <code class="docutils literal notranslate"><span class="pre">Check</span></code> argument
-is a closure that is converted into a checking goal taking as argument
-the user answer. The <code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code> implements a read loop that
-terminates when this checking predicate is true. The question itself is
-a term that is translated into printing tokens using the
-<code class="docutils literal notranslate"><span class="pre">message_tokens/2</span></code> multifile predicate described above.</p>
-<p>There is also a user-defined multifile predicate for setting default
-prompt and input streams,
-<code class="docutils literal notranslate"><span class="pre">question_prompt_stream(Kind,</span> <span class="pre">Component,</span> <span class="pre">Prompt,</span> <span class="pre">Stream)</span></code> <a class="reference internal" href="../refman/methods/question_prompt_stream_4.html#methods-question-prompt-stream-4"><span class="std std-ref">question_prompt_stream/4</span></a>.</p>
-<p>A usage example of this mechanism can be found in the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool
-where it’s used to abstract the user interaction when tracing a goal
+<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-ask-question-5" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">logtalk::ask_question/5</span></a>,
+is used for ask a question and read the answer. Assume that we defined
+the following message tokenization and question prompt and stream:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(hitchhikers_guide_to_the_galaxy).
+
+<span class="p">    :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_tokens<span class="o">//</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_tokens<span class="o">//</span><span class="m">2</span>).
+
+    logtalk<span class="o">::</span>message_tokens(ultimate_answer, hitchhikers) <span class="o">--&gt;</span>
+        [<span class="s">&#39;The answer to the ultimate question of life, the universe and everything is&#39;</span><span class="o">-</span>[]].
+
+<span class="p">   :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>question_prompt_stream<span class="o">/</span><span class="m">4</span>).
+<span class="p">   :- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>question_prompt_stream<span class="o">/</span><span class="m">4</span>).
+
+   logtalk<span class="o">::</span>question_prompt_stream(question, hitchhikers, <span class="s">&#39;: &#39;</span>, user_input).
+
+<span class="p">:- </span><span class="k">end_category.</span>
+</pre></div>
+</div>
+<p>After compiling and loading this category, we can now ask the ultimate
+question:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, integer, N).
+
+The answer to the ultimate question of life, the universe and everything is: 42.
+
+N = 42
+yes
+</pre></div>
+</div>
+<p>Note that the fourth argument, <code class="docutils literal notranslate"><span class="pre">integer</span></code> in our example, is a closure that
+is used to check the answers provided by the user. The question is repeated
+until the goal constructed by extending the closure with the user answer
+succeeds.</p>
+<p>There is also a hook predicate,
+<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-question-hook-6" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">logtalk::question_hook/6</span></a>,
+that can be used to intercept questions, similar to the <a href="#id2"><span class="problematic" id="id3">``</span></a>logtalk::message_hook/4.
+For example, assume that we want to automate testing and thus cannot rely
+on the user manually providing answers:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(hitchhikers_fixed_answers).
+
+<span class="p">    :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>question_hook<span class="o">/</span><span class="m">6</span>).
+<span class="p">    :- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>question_hook<span class="o">/</span><span class="m">6</span>).
+
+    logtalk<span class="o">::</span>question_hook(ultimate_answer, question, hitchhikers, <span class="nv">_</span>, <span class="nv">_</span>, <span class="m">42</span>).
+
+<span class="p">:- </span><span class="k">end_category.</span>
+</pre></div>
+</div>
+<p>After compiling and loading this category, trying the question again will
+now skip asking the user:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, integer, N).
+
+N = 42
+yes
+</pre></div>
+</div>
+<p>Other usage examples of this mechanism can be found e.g. in the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
+tool where it’s used to abstract the user interaction when tracing a goal
 execution in debug mode.</p>
 </div>
 </div>
