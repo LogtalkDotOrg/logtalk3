@@ -69,7 +69,7 @@ Printing messages
 -----------------
 
 The main predicate for printing a message is
-:ref:`logtalk::print_message/3 <apis:logtalk/0::print_message/3>`.
+:ref:`logtalk::print_message/3 <methods_print_message_3>`.
 A simple example, using the Logtalk runtime is:
 
 .. code-block:: text
@@ -149,7 +149,7 @@ Message tokenization
 
 The advantages of using message terms require a solution for generating
 the actual messages text. This is supported by defining grammar rules for
-the :ref:`logtalk::message_tokens//2 <apis:logtalk/0::message_tokens//2>`
+the :ref:`logtalk::message_tokens//2 <methods_message_tokens_2>`
 multifile non-terminal, which translates a message term, for a given
 component, to a list of tokens. For example:
 
@@ -204,9 +204,9 @@ See the :ref:`programming_debugging_messages` section and the
 Intercepting messages
 ---------------------
 
-Calls to the :ref:`logtalk::print_message/3 <apis:logtalk/0::print_message/3>`
+Calls to the :ref:`logtalk::print_message/3 <methods_print_message_3>`
 predicate can be intercepted by defining clauses for the
-:ref:`logtalk::message_hook/4 <apis:logtalk/0::message_hook/4>` multifile
+:ref:`logtalk::message_hook/4 <methods_message_hook_4>` multifile
 hook predicate. This predicate can suppress, rewrite, and divert messages.
 
 As a first example, assume that you want to make Logtalk startup less verbose
@@ -266,7 +266,7 @@ The question asking mechanism works in tandem with the message printing
 mechanism, using it to print the question text and a prompt. It provides
 an asking predicate and a hook predicate, both declared and defined in
 the ``logtalk`` built-in object. The asking predicate,
-:ref:`logtalk::ask_question/5 <apis:logtalk/0::ask_question/5>`,
+:ref:`logtalk::ask_question/5 <methods_ask_question_5>`,
 is used for ask a question and read the answer. Assume that we defined
 the following message tokenization and question prompt and stream:
 
@@ -305,7 +305,7 @@ until the goal constructed by extending the closure with the user answer
 succeeds.
 
 There is also a hook predicate,
-:ref:`logtalk::question_hook/6 <apis:logtalk/0::question_hook/6>`,
+:ref:`logtalk::question_hook/6 <methods_question_hook_6>`,
 that can be used to intercept questions, similar to the ``logtalk::message_hook/4.
 For example, assume that we want to automate testing and thus cannot rely
 on the user manually providing answers:
