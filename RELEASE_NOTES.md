@@ -35,8 +35,8 @@ Documentation
 
 * ADDED: User manual section on declarative object-oriented programming.
 
-* IMPROVED: User manual section on the structured message printing and
-question asking mechanisms.
+* IMPROVED: User manual sections on the structured message printing, question
+asking, and term expansion mechanisms.
 
 * IMPROVED: Using of favicons in mobile and desktop browsers for the HTML
 versions of the Handbook and APIs documentation.

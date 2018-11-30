@@ -836,26 +836,13 @@ Other flags
 .. _flag_hook:
 
 ``hook(Object)``
-   Allows the definition of compiler hooks that are called for each term
-   read form a source file and for each compiled goal. This option
-   specifies an object (which can be the pseudo-object
+   Allows the definition of an object (which can be the pseudo-object
    :ref:`user <apis:user/0>`) implementing the
    :ref:`expanding <apis:expanding/0>` built-in
    protocol. The hook object must be compiled and loaded when this option
    is used. It's also possible to specify a Prolog module instead of a
    Logtalk object but the module must be pre-loaded and its identifier
-   must be different from any object identifier. The object is expected
-   to define clauses for the :ref:`methods_term_expansion_2` and
-   :ref:`methods_goal_expansion_2`
-   predicates. In the case of the ``term_expansion/2`` predicate, the
-   first argument is the term read form the source file while the second
-   argument returns a list of terms corresponding to the expansion of
-   the first argument. In the case of the ``goal_expansion/2``
-   predicate, the second argument should be a goal resulting from the
-   expansion of the goal in the first argument. The predicate
-   ``goal_expansion/2`` is recursively called on the expanded goal until
-   a fixed point is reached. Care must be taken to avoid compilation
-   loops.
+   must be different from any object identifier.
 
 .. index:: single: clean flag
 .. _flag_clean:

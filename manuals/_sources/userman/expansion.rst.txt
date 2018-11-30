@@ -20,51 +20,86 @@
 Term and goal expansion
 =======================
 
-Logtalk supports an :ref:`methods_expand_term_2` built-in
-method for expanding a term into another term or a list of terms. This
-method is mainly used to translate grammar rules into Prolog clauses. It
-can be customized, e.g. for bypassing the default Logtalk grammar rule
-translator, by defining clauses for the :ref:`methods_term_expansion_2` hook
-predicate. Logtalk also supports an :ref:`methods_expand_goal_2` built-in
-method for expanding a goal. This method can also be customized by
-defining clauses for the :ref:`methods_goal_expansion_2` hook
-predicate.
+Logtalk supports the *term and goal expansion mechanism* also found in some
+Prolog systems. This macro mechanism is used to define source-to-source
+transformations. Two common uses are the definition of language extensions
+and domain-specific languages.
 
-Term and goal expansion may be performed either by calling the
-``expand_term/2`` and ``expand_goal/2`` built-in methods explicitly or
-by using *hook objects*. A hook object is simply an object defining
-clauses for the term- and goal-expansion hook predicates. To compile a
-source file using a hook object for expanding its terms and goals, you
-can use the :ref:`hook <flag_hook>` compiler
-flag in the second argument of the :ref:`predicates_logtalk_compile_2`
-or :ref:`predicates_logtalk_load_2` built-in predicates. In alternative,
-you can use a :ref:`directives_set_logtalk_flag_2`
-directive in the source file itself. When compiling a source file, the
-compiler will first try the source file specific hook object, if
-defined. If that fails, it tries the default hook object, if defined. If
-that also fails, the compiler tries the Prolog dialect specific
-expansion predicate definitions if defined in the adapter file.
+Term and goal expansions are defined using, respectively, the predicates
+:ref:`methods_term_expansion_2` and :ref:`methods_goal_expansion_2`, which
+are declared in the :ref:`expanding <apis:expanding/0>` built-in protocol.
+These predicates can be called using the :ref:`methods_expand_term_2` and
+:ref:`methods_expand_goal_2` built-in methods or when compiling a source
+file.
 
-.. index:: single: begin_of_file
-.. index:: single: end_of_file
+Hook objects
+------------
 
-When using an hook object to expand the terms of a source file, two
-virtual terms are generated: ``begin_of_file`` and ``end_of_file``.
-These terms allow the user to define term-expansions before and after
-the actual source file terms.
+Term and goal expansion of a source file during its compilation is performed
+by using *hook objects*. A hook object is simply an object implementing the
+:ref:`expanding <apis:expanding/0>` built-in protocol, defining clauses for
+the term and goal expansion hook predicates. For example:
 
-Sometimes we have multiple hook objects that we need to use in the
-compilation of a source file. The Logtalk library includes support for
-two basic expansion workflows: a pipeline of hook objects, where the
-expansion results from a hook object are feed to the next hook object
-in the pipeline, and a set of hook objects, where expansions are tried
-until one of is found that succeeds. These workflows are implemented as
-parametric objects allowing combining them to implement more
-sophisticated expansion workflows.
+::
 
-Clauses for the ``term_expansion/2`` and ``goal_expansion/2`` predicates
-defined within an object or a category are never used in the compilation
-of the object or the category itself, however. In order to use clauses
+   :- object(hook_object,
+       implements(expanding)).
+
+       term_expansion(..., ...) :-
+           ...
+
+       goal_expansion(..., ...) :-
+           ...
+
+   :- end_object.
+
+To compile a source file using a hook object, we can use the
+:ref:`hook <flag_hook>` compiler flag in the second argument of the
+:ref:`predicates_logtalk_compile_2` and :ref:`predicates_logtalk_load_2`
+built-in predicates. For example:
+
+.. code-block:: text
+
+   | ?- logtalk_load(source_file, [hook(hook_object)]).
+   ...
+
+In alternative, you can use a :ref:`directives_set_logtalk_flag_2`
+directive in the source file itself. For example:
+
+::
+
+   :- set_logtalk_flag(hook, hook_object).
+
+It is also possible to define a default hook object by defining a global
+value for the ``hook`` flag by calling the :ref:`predicates_set_logtalk_flag_2`
+predicate. For example:
+
+.. code-block:: text
+
+   | ?- set_logtalk_flag(hook, hook_object).
+   
+   yes
+
+When compiling a source file, the compiler will first try the source file
+specific hook object, if defined. If that fails, it tries the default hook
+object, if defined. If that also fails, the compiler tries the Prolog dialect
+specific expansion predicate definitions if defined in the adapter file.
+
+.. note::
+
+   Clauses for the ``term_expansion/2`` and ``goal_expansion/2`` predicates
+   defined within an object or a category are never used in the compilation
+   of the object or the category itself.
+
+Sometimes we have multiple hook objects that we need to use in the compilation
+of a source file. The Logtalk library includes support for two basic expansion
+workflows: a *pipeline* of hook objects, where the expansion results from a
+hook object are feed to the next hook object in the pipeline, and a *set* of
+hook objects, where expansions are tried until one of them succeeds. These
+workflows are implemented as parametric objects allowing combining them to
+implement more sophisticated expansion workflows.
+
+In order to use clauses
 for the ``term_expansion/2`` and ``goal_expansion/2`` predicates defined
 in plain Prolog, simply specify the pseudo-object ``user`` as the hook
 object when compiling source files. When using backend Prolog compilers
@@ -75,10 +110,51 @@ libraries may provide definitions of the expansion predicates that are
 not compatible with the Logtalk compiler. Specially when setting the
 hook object to ``user``, be aware of any Prolog library that is loaded,
 possibly by default or implicitly by the Prolog system, that may be
-contributing definitions of the expansion predicates. It is usually much
+contributing definitions of the expansion predicates. It is usually
 safer to define a specific hook object for combining multiple expansions
 in a fully controlled way.
 
-Logtalk provides a :ref:`predicates_logtalk_load_context_2`
+Expanding terms
+---------------
+
+Clauses for the ``term_expansion/2`` predicate are called until of them
+succeeds. The returned expansion can be a single term or a list of terms. 
+
+.. index:: single: begin_of_file
+.. index:: single: end_of_file
+
+When using an hook object to expand the terms of a source file, two
+virtual terms are generated: ``begin_of_file`` and ``end_of_file``.
+These terms allow the user to define term-expansions before and after
+the actual source file terms. Logtalk provides a
+:ref:`predicates_logtalk_load_context_2`
 built-in predicate that can be used to access the compilation/loading
 context when performing term-expansion or goal-expansion.
+
+A common term expansion is the translation of grammar rules into predicate
+clauses. This transformation is performed automatically by the compiler
+when a source file entity defines grammar rules. It can also be done
+explicitly by calling the ``expand_term/2`` built-in method. For example: 
+
+.. code-block:: text
+
+   | ?- logtalk::expand_term((a --> b, c), Clause).
+
+   Clause = (a(A,B) :- b(A,C), c(C,B))
+   yes
+
+Note that the default translation of grammar rules can be overriden by
+defining clauses for the :ref:`methods_term_expansion_2` predicate.
+
+Expanding goals
+---------------
+
+Clauses for the ``goal_expansion/2`` predicate are recursively called on
+the expanded goal until a fixed point is reached. Care must be taken to
+avoid compilation loops.
+
+Bypassing term and goal expansion
+---------------------------------
+
+Source file terms and source file goals wrapped by the
+:ref:`control_external_call_1` control construct are not expanded.
