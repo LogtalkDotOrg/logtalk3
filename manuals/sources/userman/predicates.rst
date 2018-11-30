@@ -1613,10 +1613,10 @@ an object or a category, is a module name, not a file name.
 
 .. warning::
 
-   The actual module code should be loaded prior to compilation of Logtalk
-   that uses it. In particular, programmers should not expect that the
-   module be auto-loaded (when using backend Prolog compilers supporting an
-   autoloading mechanism).
+   The actual module code must be loaded prior to compilation of Logtalk
+   source code that uses it. In particular, programmers should not expect
+   that the module be auto-loaded (including when using a backend Prolog
+   compiler that supports an autoloading mechanism).
 
 Calls to module meta-predicates may require providing a missing
 meta-predicate template or overriding an existing meta-predicate
