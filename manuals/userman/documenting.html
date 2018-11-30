@@ -120,6 +120,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#processing-and-viewing-documenting-files">Processing and viewing documenting files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inline-formatting-in-comments-text">Inline formatting in comments text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagrams">Diagrams</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
@@ -267,7 +268,7 @@ name of an XML entity defined in the <code class="docutils literal notranslate">
 <dd>List of general remarks about the entity using <em>Topic-Text</em> pairs
 where both the topic and the text must be atoms.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">see_also</span></code></dt>
-<dd>List of related entities (using the entity indentifiers, which can
+<dd>List of related entities (using the entity identifiers, which can
 be atoms or compound terms).</dd>
 </dl>
 <p>For example:</p>
@@ -402,6 +403,17 @@ an application.</p>
 (or reStructuredText) syntax and converting XML documenting files to
 Markdown (or reStructuredText) files (and these, if required, to e.g. HTML,
 ePub, or PDF formats).</p>
+</div>
+<div class="section" id="diagrams">
+<h2>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool supports a wide range of diagrams that can also help
+in documenting an application. The generated diagrams can include URL links
+to both source code and API documentation. They can also be linked, connecting
+for example high level diagrams to detail diagrams. These features allow
+diagrams to be an effective solution for navigating and understanding the
+structure and implementation of an application. This tool uses the same
+reflection APIs as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool and thus have access to the same
+source data.</p>
 </div>
 </div>
 

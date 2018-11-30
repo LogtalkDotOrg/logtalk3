@@ -94,7 +94,7 @@ Logtalk tools:
    List of general remarks about the entity using *Topic-Text* pairs
    where both the topic and the text must be atoms.
 ``see_also``
-   List of related entities (using the entity indentifiers, which can
+   List of related entities (using the entity identifiers, which can
    be atoms or compound terms).
 
 For example:
@@ -248,3 +248,15 @@ Inline formatting in comments text can be accomplished by using Markdown
 (or reStructuredText) syntax and converting XML documenting files to
 Markdown (or reStructuredText) files (and these, if required, to e.g. HTML,
 ePub, or PDF formats).
+
+Diagrams
+--------
+
+The ``diagrams`` tool supports a wide range of diagrams that can also help
+in documenting an application. The generated diagrams can include URL links
+to both source code and API documentation. They can also be linked, connecting
+for example high level diagrams to detail diagrams. These features allow
+diagrams to be an effective solution for navigating and understanding the
+structure and implementation of an application. This tool uses the same
+reflection APIs as the ``lgtdoc`` tool and thus have access to the same
+source data.
