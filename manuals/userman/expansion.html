@@ -112,10 +112,10 @@
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Term and goal expansion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defining-expansions">Defining expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expanding-grammar-rules">Expanding grammar rules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hook-objects">Hook objects</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#expanding-terms">Expanding terms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#expanding-goals">Expanding goals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bypassing-term-and-goal-expansion">Bypassing term and goal expansion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bypassing-expansions">Bypassing expansions</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
@@ -205,30 +205,100 @@
 Prolog systems. This macro mechanism is used to define source-to-source
 transformations. Two common uses are the definition of language extensions
 and domain-specific languages.</p>
+<div class="section" id="defining-expansions">
+<h2>Defining expansions<a class="headerlink" href="#defining-expansions" title="Permalink to this headline">¶</a></h2>
 <p>Term and goal expansions are defined using, respectively, the predicates
 <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>, which
 are declared in the <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol.
-These predicates can be called using the <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> and
-<a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a> built-in methods or when compiling a source
-file.</p>
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(an_object,
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">term_expansion</span>(ping, pong).
+    <span class="k">term_expansion</span>(
+        colors,
+        [white, yellow, blue, green, read, black]
+    ).
+
+    <span class="k">goal_expansion</span>(a, b).
+    <span class="k">goal_expansion</span>(b, c).
+    <span class="k">goal_expansion</span>(<span class="nv">X</span> <span class="k">is</span> <span class="nv">Expression</span>, <span class="k">true</span>) <span class="o">:-</span>
+        <span class="k">catch</span>(<span class="nv">X</span> <span class="k">is</span> <span class="nv">Expression</span>, <span class="nv">_</span>, <span class="k">fail</span>).
+
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>These predicates can be explicitly called using the <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a>
+and <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a> built-in methods.</p>
+<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> predicate are called until of them
+succeeds. The returned expansion can be a single term or a list of terms.
+For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_term(ping, Term).
+
+Term = pong
+yes
+
+| ?- an_object::expand_term(colors, Colors).
+
+Colors = [white, yellow, blue, green, read, black]
+yes
+</pre></div>
+</div>
+<p>When no <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> clause applies, the same term that we are
+trying to expand is returned:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_term(sounds, Sounds).
+
+Sounds = sounds
+yes
+</pre></div>
+</div>
+<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicate are recursively called on
+the expanded goal until a fixed point is reached. Care must be taken to
+avoid compilation loops. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_goal(a, Goal).
+
+Goal = c
+yes
+
+| ?- an_object::expand_goal(X is 3+2*5, Goal).
+
+X = 13,
+Goal = true
+yes
+</pre></div>
+</div>
+<p>When no <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> clause applies, the same goal that we are
+trying to expand is returned:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_goal(3 =:= 5, Goal).
+
+Goal = (3=:=5)
+yes
+</pre></div>
+</div>
+<p>Term and goal expansion predicates can also be used when compiling a source
+file as described below.</p>
+</div>
+<div class="section" id="expanding-grammar-rules">
+<h2>Expanding grammar rules<a class="headerlink" href="#expanding-grammar-rules" title="Permalink to this headline">¶</a></h2>
+<p>A common term expansion is the translation of grammar rules into predicate
+clauses. This transformation is performed automatically by the compiler
+when a source file entity defines grammar rules. It can also be done
+explicitly by calling the <code class="docutils literal notranslate"><span class="pre">expand_term/2</span></code> built-in method. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::expand_term((a --&gt; b, c), Clause).
+
+Clause = (a(A,B) :- b(A,C), c(C,B))
+yes
+</pre></div>
+</div>
+<p>Note that the default translation of grammar rules can be overriden by
+defining clauses for the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> predicate.</p>
+</div>
 <div class="section" id="hook-objects">
 <h2>Hook objects<a class="headerlink" href="#hook-objects" title="Permalink to this headline">¶</a></h2>
 <p>Term and goal expansion of a source file during its compilation is performed
 by using <em>hook objects</em>. A hook object is simply an object implementing the
 <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol, defining clauses for
-the term and goal expansion hook predicates. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(hook_object,
-    <span class="k">implements</span>(expanding)).
-
-    <span class="k">term_expansion</span>(..., ...) <span class="o">:-</span>
-        ...
-
-    <span class="k">goal_expansion</span>(..., ...) <span class="o">:-</span>
-        ...
-
-<span class="p">:- </span><span class="k">end_object.</span>
-</pre></div>
-</div>
+the term and goal expansion hook predicates.</p>
 <p>To compile a source file using a hook object, we can use the
 <a class="reference internal" href="programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler flag in the second argument of the
 <a class="reference internal" href="../refman/predicates/logtalk_compile_2.html#predicates-logtalk-compile-2"><span class="std std-ref">logtalk_compile/2</span></a> and <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a>
@@ -281,41 +351,33 @@ possibly by default or implicitly by the Prolog system, that may be
 contributing definitions of the expansion predicates. It is usually
 safer to define a specific hook object for combining multiple expansions
 in a fully controlled way.</p>
-</div>
-<div class="section" id="expanding-terms">
-<h2>Expanding terms<a class="headerlink" href="#expanding-terms" title="Permalink to this headline">¶</a></h2>
-<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> predicate are called until of them
-succeeds. The returned expansion can be a single term or a list of terms.</p>
 <span class="target" id="index-0"></span><p id="index-1">When using an hook object to expand the terms of a source file, two
 virtual terms are generated: <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> and <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.
 These terms allow the user to define term-expansions before and after
-the actual source file terms. Logtalk provides a
-<a class="reference internal" href="../refman/predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a>
+the actual source file terms.</p>
+<p>Logtalk provides a <a class="reference internal" href="../refman/predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a>
 built-in predicate that can be used to access the compilation/loading
-context when performing term-expansion or goal-expansion.</p>
-<p>A common term expansion is the translation of grammar rules into predicate
-clauses. This transformation is performed automatically by the compiler
-when a source file entity defines grammar rules. It can also be done
-explicitly by calling the <code class="docutils literal notranslate"><span class="pre">expand_term/2</span></code> built-in method. For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::expand_term((a --&gt; b, c), Clause).
+context when performing expansions. The <a class="reference internal" href="objects.html#objects-logtalk"><span class="std std-ref">logtalk</span></a>
+built-in object also provides a set of predicates that can be useful,
+notably when adding Logtalk support for languages extensions originally
+developed for Prolog.</p>
+</div>
+<div class="section" id="bypassing-expansions">
+<h2>Bypassing expansions<a class="headerlink" href="#bypassing-expansions" title="Permalink to this headline">¶</a></h2>
+<p>Terms and goals wrapped by the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> control
+construct are not expanded. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_term({ping}, Term).
 
-Clause = (a(A,B) :- b(A,C), c(C,B))
+Term = {ping}
+yes
+
+| ?- an_object::expand_goal({a}, Goal).
+
+Goal = {a}
 yes
 </pre></div>
 </div>
-<p>Note that the default translation of grammar rules can be overriden by
-defining clauses for the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> predicate.</p>
-</div>
-<div class="section" id="expanding-goals">
-<h2>Expanding goals<a class="headerlink" href="#expanding-goals" title="Permalink to this headline">¶</a></h2>
-<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicate are recursively called on
-the expanded goal until a fixed point is reached. Care must be taken to
-avoid compilation loops.</p>
-</div>
-<div class="section" id="bypassing-term-and-goal-expansion">
-<h2>Bypassing term and goal expansion<a class="headerlink" href="#bypassing-term-and-goal-expansion" title="Permalink to this headline">¶</a></h2>
-<p>Source file terms and source file goals wrapped by the
-<a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> control construct are not expanded.</p>
+<p>This also applies to source file terms and source file goals.</p>
 </div>
 </div>
 
