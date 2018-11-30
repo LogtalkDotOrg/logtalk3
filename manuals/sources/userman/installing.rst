@@ -190,13 +190,14 @@ application unit tests
 
 ``examples``
    ``NOTES.md`` – short description of the provided examples
-   ``bricks``
-   ``NOTES.md`` – example description and other notes
-   ``SCRIPT.txt`` – step by step example tutorial
-   ``loader.lgt`` – loader utility file for the example objects
-   ``...`` – bricks example source files
 
-``...`` – other examples
+   ``bricks``
+      ``NOTES.md`` – example description and other notes
+      ``SCRIPT.txt`` – step by step example tutorial
+      ``loader.lgt`` – loader utility file for the example objects
+      ``...`` – bricks example source files
+
+   ``...`` – other examples
 
 ``integration``
    ``NOTES.md`` – notes on scripts for Logtalk integration with Prolog
@@ -457,7 +458,7 @@ For example:
 Logtalk compiler and runtime
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``compiler`` sub-directory contains the Prolog source file(s) that
+The ``core`` sub-directory contains the Prolog and Logtalk source files that
 implement the Logtalk compiler and the Logtalk runtime. The compiler and
 the runtime may be split in two (or more) separate files or combined in
 a single file, depending on the Logtalk release that you are installing.
