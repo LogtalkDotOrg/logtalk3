@@ -146,7 +146,7 @@ built-in predicates. For example:
    | ?- logtalk_load(source_file, [hook(hook_object)]).
    ...
 
-In alternative, you can use a :ref:`directives_set_logtalk_flag_2`
+In alternative, we can use a :ref:`directives_set_logtalk_flag_2`
 directive in the source file itself. For example:
 
 ::

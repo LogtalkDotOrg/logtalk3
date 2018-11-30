@@ -20,9 +20,9 @@
 Debugging
 =========
 
-The Logtalk distribution includes in its ``tools`` directory a
-command-line debugger, implemented as a Logtalk application. It can be
-loaded by typing:
+The Logtalk distribution includes a command-line
+`debugger tool <https://logtalk.org/tools.html#debugger>`_
+implemented as a Logtalk application. It can be loaded by typing:
 
 .. code-block:: text
 
@@ -581,3 +581,11 @@ code. Some simple examples of using these meta-messages:
    >>> - ford
    >>> - marvin
    yes
+
+Ports profiling
+---------------
+
+The Logtalk distribution includes a
+`ports profiler tool <https://logtalk.org/tools.html#ports-profiler>`_ 
+based on the same procedure box model described above.
+See the tool documentation for details. 

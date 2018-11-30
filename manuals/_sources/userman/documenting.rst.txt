@@ -22,12 +22,13 @@ Documenting
 
 Assuming that the :ref:`source_data <flag_source_data>` flag is turned on, the
 compiler saves all relevant documenting information collected when compiling
-a source file. The provided ``lgtdoc`` tool can access this information by
-using the reflection support and generate a documentation file for each
-compiled entity (object, protocol, or category) in XML format. Contents of
-the XML file include the entity name, type, and compilation mode (static or
-dynamic), the entity relations with other entities, and a description of any
-declared predicates (name, compilation mode, scope, ...).
+a source file. The provided
+`lgtdoc tool <https://logtalk.org/tools.html#documenting>`_ can access this
+information by using the reflection support and generate a documentation file
+for each compiled entity (object, protocol, or category) in XML format.
+Contents of the XML file include the entity name, type, and compilation mode
+(static or dynamic), the entity relations with other entities, and a
+description of any declared predicates (name, compilation mode, scope, ...).
 
 The XML documentation files can be enriched with arbitrary user-defined
 information, either about an entity or about its predicates, by using
@@ -112,7 +113,7 @@ For example:
 Use only the keywords that make sense for your application and remember
 that you are free to invent your own keywords. All key-value pairs can
 be retrieved programmatically using the reflection API and are visible
-to ``lgtdoc`` tool.
+to the `lgtdoc tool <https://logtalk.org/tools.html#documenting>`_.
 
 .. _documenting_predicate:
 
@@ -182,14 +183,16 @@ For example:
 As with the ``info/1`` directive, use only the keywords that make sense
 for your application and remember that you are free to invent your own
 keywords. All key-value pairs can also be retrieved programmatically
-using the reflection API and are visible to ``lgtdoc`` tool.
+using the reflection API and are visible to the
+`lgtdoc tool <https://logtalk.org/tools.html#documenting>`_.
 
 .. _documenting_processing:
 
 Processing and viewing documenting files
 ----------------------------------------
 
-The ``lgtdoc`` tool generates an XML documenting file per entity. It can
+The `lgtdoc tool <https://logtalk.org/tools.html#documenting>`_
+generates an XML documenting file per entity. It can
 also generate library, directory, entity, and predicate indexes when
 documenting libraries and directories. For example, assuming the default
 filename extensions, a ``trace`` object and a ``sort(_)`` parametric object
@@ -201,12 +204,14 @@ file can be either a DTD file (``logtalk_entity.dtd``) or an XML Scheme
 file (``logtalk_entity.xsd``). The XSLT style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
-file are defined by the ``lgtdoc`` tool but can be overridden by passing a
+file are defined by the
+`lgtdoc tool <https://logtalk.org/tools.html#documenting>`_ but can be
+overridden by passing a
 list of options to the tool predicates. The ``lgtdoc/xml`` sub-directory
 in the Logtalk installation directory contains the XML specification
 files described above, along with several sample XSL style-sheet files
 and sample scripts for converting XML documenting files to several
-formats (e.g. reStructuredText, Markdown, HTML, and PDF). Please read
+formats (e.g. reStructuredText, Markdown, HTML, and PDF). See
 the ``NOTES`` file included in the directory for details. You may use
 the supplied sample files as a starting point for generating the
 documentation of your Logtalk applications.
@@ -233,9 +238,10 @@ entity when the XML documenting files are processed (**not** when they
 are generated; this notation is just a shortcut to take advantage of XML
 entities).
 
-The ``lgtdoc`` tool supports a set of options that can be used to
-control the generation of the XML documentation files. Please see the
-tool documentation for details. There is also a ``doclet`` tool that
+The `lgtdoc tool <https://logtalk.org/tools.html#documenting>`_ supports
+a set of options that can be used to control the generation of the XML
+documentation files. See the tool documentation for details. There is also
+a `doclet tool <https://logtalk.org/tools.html#documenting>`_  that
 allows automating the steps required to generate the documentation for
 an application.
 
@@ -252,11 +258,12 @@ ePub, or PDF formats).
 Diagrams
 --------
 
-The ``diagrams`` tool supports a wide range of diagrams that can also help
+The `diagrams tool <https://logtalk.org/tools.html#diagrams>`_ supports
+a wide range of diagrams that can also help
 in documenting an application. The generated diagrams can include URL links
 to both source code and API documentation. They can also be linked, connecting
 for example high level diagrams to detail diagrams. These features allow
 diagrams to be an effective solution for navigating and understanding the
 structure and implementation of an application. This tool uses the same
 reflection APIs as the ``lgtdoc`` tool and thus have access to the same
-source data.
+source data. See the tool documentation for details. 

@@ -128,6 +128,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#context-switching-calls">Context-switching calls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-compilation-hooks-and-term-expansion-for-debugging">Using compilation hooks and term expansion for debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-messages">Debugging messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ports-profiling">Ports profiling</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
@@ -211,9 +212,9 @@
             
   <div class="section" id="debugging">
 <span id="debugging-debugging"></span><h1>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
-<p>The Logtalk distribution includes in its <code class="docutils literal notranslate"><span class="pre">tools</span></code> directory a
-command-line debugger, implemented as a Logtalk application. It can be
-loaded by typing:</p>
+<p>The Logtalk distribution includes a command-line
+<a class="reference external" href="https://logtalk.org/tools.html#debugger">debugger tool</a>
+implemented as a Logtalk application. It can be loaded by typing:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(debugger(loader)).
 </pre></div>
 </div>
@@ -714,6 +715,13 @@ yes
 yes
 </pre></div>
 </div>
+</div>
+<div class="section" id="ports-profiling">
+<h2>Ports profiling<a class="headerlink" href="#ports-profiling" title="Permalink to this headline">¶</a></h2>
+<p>The Logtalk distribution includes a
+<a class="reference external" href="https://logtalk.org/tools.html#ports-profiler">ports profiler tool</a>
+based on the same procedure box model described above.
+See the tool documentation for details.</p>
 </div>
 </div>
 
