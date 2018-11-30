@@ -73,9 +73,9 @@ outside the object. This is done using the
 After we copy the object code to a text file and saved it under the name
 ``list.lgt``, we need to change the Prolog working directory to the one
 used to save our file (consult your Prolog compiler reference manual).
-Then, after starting Logtalk (see the `Installing and running
-Logtalk <../userman/installing.html#programming>`__ section on the User
-Manual), we can compile and load the object using the
+Then, after starting Logtalk (see the
+:ref:`Installing and running Logtalk <installing_installing>` section on
+the User Manual), we can compile and load the object using the
 :ref:`predicates_logtalk_load_1` Logtalk built-in predicate:
 
 .. code-block:: text

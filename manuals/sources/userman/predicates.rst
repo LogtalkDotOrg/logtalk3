@@ -1159,11 +1159,10 @@ interfere with the optimizations that some Prolog compilers perform when
 the first clause body condition is a call to a built-in type-test
 predicate or a comparison operator.
 
-For parametric objects and categories, the method
-:ref:`methods_parameter_2` enables us to
-retrieve current parameter values (see the section on `parametric
-objects <objects.html#objects_parametric>`__ for a detailed
-description). For example:
+For parametric objects and categories, the method :ref:`methods_parameter_2`
+enables us to retrieve current parameter values (see the section on
+:ref:`parametric objects <objects_parametric>` for a detailed description).
+For example:
 
 ::
 

@@ -264,10 +264,10 @@ yet, switch to a modern, ISO compliant, Prolog compiler. If you send me
 your adapter file, with a reference to the target Prolog compiler, maybe
 I can include it in the next release of Logtalk.
 
-The adapter files specifies *default* values for most of the Logtalk
+The adapter files specify *default* values for most of the Logtalk
 compiler flags. Most of these compiler flags are described in the
-`next <programming.html#programming_flags>`__ section. A few of these
-flags have read-only values and cannot be changed at runtime. These are:
+:ref:`next section <programming_flags>`. A few of these flags have
+read-only values and cannot be changed at runtime. These are:
 
 .. index:: single: settings_file flag
 .. _flag_settings_file:

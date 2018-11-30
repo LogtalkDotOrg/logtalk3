@@ -1203,11 +1203,10 @@ clause body. As such, the use of these context execution methods do not
 interfere with the optimizations that some Prolog compilers perform when
 the first clause body condition is a call to a built-in type-test
 predicate or a comparison operator.</p>
-<p>For parametric objects and categories, the method
-<a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> enables us to
-retrieve current parameter values (see the section on <a class="reference external" href="objects.html#objects_parametric">parametric
-objects</a> for a detailed
-description). For example:</p>
+<p>For parametric objects and categories, the method <a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a>
+enables us to retrieve current parameter values (see the section on
+<a class="reference internal" href="objects.html#objects-parametric"><span class="std std-ref">parametric objects</span></a> for a detailed description).
+For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(block(<span class="nv">_Color</span>)).
 
 <span class="p">    :- </span><span class="k">public</span>(test<span class="o">/</span><span class="m">0</span>).
