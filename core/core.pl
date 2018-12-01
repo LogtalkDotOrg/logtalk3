@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 22, 0, b01)).
+'$lgt_version_data'(logtalk(3, 22, 0, b02)).
 
 
 
@@ -12202,8 +12202,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-		(	'$lgt_member'(CMArg, CMArgs), CMArg == ('::') ->
-			% the meta-argument specifier '::' is ambiguous in this context
+		(	'$lgt_member'(CMArg, CMArgs), CMArg == (::) ->
+			% the "::" meta-argument specifier is ambiguous in this context
 			throw(domain_error(meta_argument_specifier, Meta))
 		;	'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 			TPred0 =.. [Functor| TArgs],
@@ -20312,10 +20312,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_built_in_predicate'(threaded_once(_, _), threaded_once(0, *)).
 '$lgt_logtalk_built_in_predicate'(threaded_once(_), threaded_once(0)).
 '$lgt_logtalk_built_in_predicate'(threaded_ignore(_), threaded_ignore(0)).
-'$lgt_logtalk_built_in_predicate'(threaded_exit(_, _), threaded_exit('::', *)).
-'$lgt_logtalk_built_in_predicate'(threaded_exit(_), threaded_exit('::')).
-'$lgt_logtalk_built_in_predicate'(threaded_peek(_, _), threaded_peek('::', *)).
-'$lgt_logtalk_built_in_predicate'(threaded_peek(_), threaded_peek('::')).
+'$lgt_logtalk_built_in_predicate'(threaded_exit(_, _), threaded_exit((::), *)).
+'$lgt_logtalk_built_in_predicate'(threaded_exit(_), threaded_exit((::))).
+'$lgt_logtalk_built_in_predicate'(threaded_peek(_, _), threaded_peek((::), *)).
+'$lgt_logtalk_built_in_predicate'(threaded_peek(_), threaded_peek((::))).
 '$lgt_logtalk_built_in_predicate'(threaded_wait(_), no).
 '$lgt_logtalk_built_in_predicate'(threaded_notify(_), no).
 % threaded engines predicates
