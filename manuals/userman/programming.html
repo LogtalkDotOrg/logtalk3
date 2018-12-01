@@ -980,7 +980,7 @@ used in alternative. When dynamic predicates cannot be avoided, try to
 make them private. Declaring a dynamic predicate also as a private
 predicate allows the compiler to optimize local calls to the database
 methods (e.g. <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> and <a class="reference internal" href="../refman/methods/retract_1.html#methods-retract-1"><span class="std std-ref">retract/1</span></a>) that
-handle the predicate.</p>
+modify the predicate.</p>
 <p>Sending a <a class="reference internal" href="../glossary.html#term-message-to-self"><span class="xref std std-term">message to self</span></a> implies <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> but
 there are often cases where <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> is misused
 to call an imported or inherited predicate that is never going to be
@@ -991,6 +991,8 @@ writing efficient Prolog code also apply to Logtalk code. In particular,
 define your predicates to take advantage of first-argument indexing. In
 the case of recursive predicates, define them as tail-recursive predicates
 whenever possible.</p>
+<p>See the <a class="reference internal" href="performance.html#performance-performance"><span class="std std-ref">user manual section on performance</span></a>
+for a detailed discusion on Logtalk performance.</p>
 </div>
 </div>
 </div>

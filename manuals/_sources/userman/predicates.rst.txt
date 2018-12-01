@@ -1473,21 +1473,31 @@ functor but users should not rely on this always being true.
 
 .. _predicates_prolog:
 
-Calling Prolog built-in predicates
-----------------------------------
+Calling Prolog predicates
+-------------------------
 
-In predicate definitions, predicate calls which are not prefixed with a
-message sending or super call operator (``::`` or ``^^``), are compiled to
-either calls to local predicates or as calls to Logtalk/Prolog built-in
-predicates. A predicate call is compiled as a call to a local predicate
-if the object (or category) contains a scope directive, a definition for
-the called predicate, or a dynamic declaration for it. When the object
-(or category) does not contain either a definition of the called
-predicate or a corresponding dynamic declaration, Logtalk tests if the
-call corresponds to a Logtalk or Prolog built-in predicate. Calling a
-predicate which is neither a local predicate nor a Logtalk/Prolog
-built-in predicate results in a compile time warning. This means that,
-in the following example:
+Logtalk is designed for both *robusteness* and *portability*. In the context
+of calling Prolog predicates, robusteness requires that the compilation of
+Logtalk source code must not have *accidental* dependencies on Prolog code that
+happens to be loaded at the time of the compilation. One immediate consequence
+is that only Prolog *built-in* predicates are visible by default from within
+objects and categories. But Prolog systems provide a widely diverse set of
+built-in predicates, easily rising portability issues. Relying on non-standard
+predicates is often unavoidable, however, due to the narrow scope of Prolog
+standards.
+
+Calling Prolog built-in predicates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In predicate clauses and ``initialization/1`` directives, predicate calls
+that are not prefixed with a message sending, super call, or module
+qualification operator (``::``, ``^^``, or ``:``), are compiled to either
+calls to local predicates or as calls to Logtalk/Prolog built-in predicates.
+A predicate call is compiled as a call to a local predicate if the object (or
+category) contains a scope directive, a definition for the called predicate,
+or a dynamic declaration for it. When that is not the case, the compiler
+checks if the call corresponds to a Logtalk or Prolog built-in predicate.
+Consider the following example:
 
 ::
 
@@ -1496,18 +1506,29 @@ in the following example:
        write(bar),
        ...
 
-the call to the predicate ``write/1`` will be compiled as a call to the
-corresponding Prolog built-in predicate unless the object (or category)
-encapsulating the above definition also contains a predicate named
-``write/1`` or a dynamic declaration for the predicate.
+The call to the ``write/1`` predicate will be compiled as a call to the
+corresponding Prolog standard built-in predicate unless the object (or
+category) containing the above definition also contains a predicate
+named ``write/1`` or a dynamic directive for the predicate.
 
-When calling non-standard Prolog built-in predicates or using
-non-standard Prolog arithmetic functions, you may run into portability
-problems while trying your applications with different backend Prolog
-compilers (non-standard predicates and non-standard arithmetic functions
-are often specific to a Prolog compiler). You may use the Logtalk
-:ref:`portability <flag_portability>` compiler flag  to help check for
-problematic calls in your code.
+When calling non-standard Prolog built-in predicates or using non-standard
+Prolog arithmetic functions, we may run into portability problems while
+trying your applications with different backend Prolog compilers. We can
+use the compiler :ref:`portability flag <flag_portability>` to generate
+warnings for calls to non-standard predicates and arithmetic functions.
+We can also document those calls using the :ref:`directives_uses_2`
+directive. For example, a few Prolog systems provide an ``atom_string/2``
+non-standard predicate. We can write (in the object or category calling the
+predicate):
+
+::
+
+   :- uses(user, [atom_string/2])
+
+This directive is based on the fact that built-in predicates are visible in
+plain Prolog (i.e. in ``user``). Besides helping to document the dependency
+on a non-standard, this directive will silence the compiler portability
+warning.
 
 .. _predicates_prolog_meta:
 
@@ -1527,7 +1548,7 @@ directive:
 
 ::
 
-   :- meta_predicate(user:det_call(0)).
+   :- meta_predicate(user::det_call(0)).
 
 Another solution is to explicitly declare all non-standard Prolog
 meta-predicates in the corresponding adapter file using the internal
@@ -1543,16 +1564,8 @@ debug mode.
 
 .. _predicates_prolog_user:
 
-Calling Prolog user-defined predicates
---------------------------------------
-
-Prolog user-defined predicates are not visible from within objects or
-categories. Notably, this ensures that the compilation of Logtalk entities
-is not affected by any plain Prolog definitions that happen to be loaded
-at the time of compilation.
-
-Calling plain Prolog predicates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Calling Prolog user-defined plain predicates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Prolog user-defined plain predicates can be called from within objects
 or categories by using the :ref:`control_external_call_1` compiler bypass
@@ -1565,8 +1578,8 @@ control construct. For example:
        {bar},
        ...
 
-In alternative, you can also use the :ref:`directives_uses_2` directive
-and write:
+A better alternative is to use the :ref:`directives_uses_2` directive and
+write:
 
 ::
 
@@ -1577,9 +1590,11 @@ and write:
        bar,
        ...
 
-Note that ``user`` is a pseudo-object in Logtalk containing all
-predicate definitions that are not encapsulated (either in a Logtalk
-entity or a Prolog module).
+Note that ``user`` is a pseudo-object in Logtalk containing all predicate
+definitions that are not encapsulated (either in a Logtalk entity or a
+Prolog module). The advantage of using an ``uses/2`` directive is that
+the listed predicates will be recognized and documented as dependencies
+by the developer tools.
 
 .. _predicates_prolog_module:
 
@@ -1609,11 +1624,19 @@ to call the module predicates using implicit qualification:
        ...
 
 Note that the first argument of the ``use_module/2``, when used within
-an object or a category, is a module name, not a file name.
+an object or a category, is a module name, not a file specification (also
+be aware that Prolog modules are sometimes defined in files with names
+that differ from the module names). As loading a Prolog module varies
+between Prolog systems, the actual loading directive or goal is usually
+done by the application :term:`loader file`. An advantage of this approach
+is that it contributes to a clean separation between *loading* and *using*
+a resource with the loader file being the central point that loads all
+application resources (complex applications often use a *hierarchy* of
+loader files but the main idea remains the same).
 
 .. warning::
 
-   The actual module code must be loaded prior to compilation of Logtalk
+   The actual module code **must** be loaded prior to compilation of Logtalk
    source code that uses it. In particular, programmers should not expect
    that the module be auto-loaded (including when using a backend Prolog
    compiler that supports an autoloading mechanism).

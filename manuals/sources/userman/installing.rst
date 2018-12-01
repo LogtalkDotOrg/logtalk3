@@ -126,8 +126,8 @@ of all text files to match your operating system.
 
 .. _installing_organization:
 
-Directories and files organization
-----------------------------------
+Distribution overview
+---------------------
 
 In the Logtalk installation directory, you will find the following files
 and directories:
@@ -455,8 +455,8 @@ For example:
 
 .. _installing_runtime:
 
-Logtalk compiler and runtime
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiler and runtime
+~~~~~~~~~~~~~~~~~~~~
 
 The ``core`` sub-directory contains the Prolog and Logtalk source files that
 implement the Logtalk compiler and the Logtalk runtime. The compiler and

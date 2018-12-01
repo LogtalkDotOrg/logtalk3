@@ -947,7 +947,7 @@ used in alternative. When dynamic predicates cannot be avoided, try to
 make them private. Declaring a dynamic predicate also as a private
 predicate allows the compiler to optimize local calls to the database
 methods (e.g. :ref:`methods_assertz_1` and :ref:`methods_retract_1`) that
-handle the predicate.
+modify the predicate.
 
 Sending a :term:`message to self` implies :term:`dynamic binding` but
 there are often cases where :ref:`control_send_to_self_1` is misused
@@ -959,3 +959,6 @@ writing efficient Prolog code also apply to Logtalk code. In particular,
 define your predicates to take advantage of first-argument indexing. In
 the case of recursive predicates, define them as tail-recursive predicates
 whenever possible.
+
+See the :ref:`user manual section on performance <performance_performance>`
+for a detailed discusion on Logtalk performance.
