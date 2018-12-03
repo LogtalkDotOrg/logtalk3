@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on November 8, 2018
+%  Last updated on December 3, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -607,15 +607,9 @@
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
-	'$lgt_swi_directive_expansion'(Directive, Expanded0),
-	(	Expanded0 == [] ->
-		Expanded  == []
-	;	Expanded0 = [_| _] ->
-		Expanded = Expanded0
-	;	Expanded0 =  {ExpandedDirective} ->
-		Expanded  =  {(:- ExpandedDirective)}
-	;	Expanded  =  (:- Expanded0)
-	).
+	% allow first-argument indexing
+	'$lgt_swi_directive_expansion'(Directive, Expanded).
+
 
 '$lgt_swi_directive_expansion'(public(_), []) :-
 	% used to provide information about module predicates to the cross-referencer
@@ -624,7 +618,7 @@
 '$lgt_swi_directive_expansion'(style_check(Option), []) :-
 	style_check(Option).
 
-'$lgt_swi_directive_expansion'(arithmetic_function(Functor/Arity), {arithmetic_function(Functor/Arity)}) :-
+'$lgt_swi_directive_expansion'(arithmetic_function(Functor/Arity), {:- arithmetic_function(Functor/Arity)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(Functor/Arity, _, TFunctor/TArity),
 	functor(Term, Functor, TArity),
@@ -635,48 +629,51 @@
 	'$lgt_swi_unify_head_thead_args'(Args, TArgs),
 	'$lgt_compile_aux_clauses'([({Term} :- {TTerm})]).
 
-'$lgt_swi_directive_expansion'(create_prolog_flag(Key, Value, Options), {create_prolog_flag(Key, Value, Options)}).
+'$lgt_swi_directive_expansion'(create_prolog_flag(Key, Value, Options), {:- create_prolog_flag(Key, Value, Options)}).
 
-'$lgt_swi_directive_expansion'(expects_dialect(Dialect), {expects_dialect(Dialect)}) :-
+'$lgt_swi_directive_expansion'(expects_dialect(Dialect), {:- expects_dialect(Dialect)}) :-
 	expects_dialect(Dialect).
 
-'$lgt_swi_directive_expansion'(license(License), {license(License)}).
+'$lgt_swi_directive_expansion'(license(License), {:- license(License)}).
 
-'$lgt_swi_directive_expansion'(set_prolog_flag(generate_debug_info, false), {set_prolog_flag(generate_debug_info, false)}).
+'$lgt_swi_directive_expansion'(set_prolog_flag(generate_debug_info, false), {:- set_prolog_flag(generate_debug_info, false)}).
 
-'$lgt_swi_directive_expansion'(use_foreign_library(File), {use_foreign_library(File)}) :-
+'$lgt_swi_directive_expansion'(use_foreign_library(File), {:- use_foreign_library(File)}) :-
 	load_foreign_library(File).
 
-'$lgt_swi_directive_expansion'(use_foreign_library(File, Entry), {use_foreign_library(File, Entry)}) :-
+'$lgt_swi_directive_expansion'(use_foreign_library(File, Entry), {:- use_foreign_library(File, Entry)}) :-
 	load_foreign_library(File, Entry).
 
-'$lgt_swi_directive_expansion'(encoding(Encoding1), encoding(Encoding2)) :-
+'$lgt_swi_directive_expansion'(encoding(Encoding1), (:- encoding(Encoding2))) :-
 	nonvar(Encoding1),
 	'$lgt_swi_encoding_to_logtalk_encoding'(Encoding1, Encoding2).
 
-'$lgt_swi_directive_expansion'(ensure_loaded(File), use_module(Module, Imports)) :-
+'$lgt_swi_directive_expansion'(ensure_loaded(File), Expanded) :-
 	logtalk_load_context(entity_type, module),
-	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
-	'$lgt_swi_list_of_exports'(File, Module, Imports).
+	% ensure_loaded/1 directive used within a module
+	% (sloppy replacement for the use_module/1-2 directives)
+	'$lgt_swi_directive_expansion'(use_module(File), Expanded).
 
-'$lgt_swi_directive_expansion'(op(Priority, Specifier, Module:Operators), {op(Priority, Specifier, Operators)}) :-
+'$lgt_swi_directive_expansion'(op(Priority, Specifier, Module:Operators), {:- op(Priority, Specifier, Operators)}) :-
 	Module == user.
 
-'$lgt_swi_directive_expansion'(reexport(File), reexport(Module, Exports)) :-
+'$lgt_swi_directive_expansion'(use_module(File, Imports), [{:- use_module(File, Imports)}, (:- use_module(Module, Imports))]) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_swi_list_of_exports'(File, Module, _),
+	use_module(File, Imports).
+
+'$lgt_swi_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_swi_list_of_exports'(File, Module, Imports),
+	use_module(File).
+
+'$lgt_swi_directive_expansion'(reexport(File), (:- reexport(Module, Exports))) :-
 	'$lgt_swi_list_of_exports'(File, Module, Exports).
 
-'$lgt_swi_directive_expansion'(reexport(File, Exports), reexport(Module, Exports)) :-
+'$lgt_swi_directive_expansion'(reexport(File, Exports), (:- reexport(Module, Exports))) :-
 	'$lgt_swi_list_of_exports'(File, Module, _).
 
-'$lgt_swi_directive_expansion'(use_module(File, Imports), use_module(Module, Imports)) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_swi_list_of_exports'(File, Module, _).
-
-'$lgt_swi_directive_expansion'(use_module(File), use_module(Module, Imports)) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_swi_list_of_exports'(File, Module, Imports).
-
-'$lgt_swi_directive_expansion'(table(Predicates), {table(TPredicates)}) :-
+'$lgt_swi_directive_expansion'(table(Predicates), {:- table(TPredicates)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
 

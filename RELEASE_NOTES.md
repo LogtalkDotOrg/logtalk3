@@ -27,6 +27,10 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: The adapter files for ECLiPSe, SICStus Prolog, SWI-Prolog, XSB,
+and YAP to better support expansion of Prolog module directives when used
+within objects and categories.
+
 * UPDATED: The adapter files for B-Prolog, SWI-Prolog, XSB, and YAP to support
 using grammar rule non-terminal indicators in `table/1` directives.
 

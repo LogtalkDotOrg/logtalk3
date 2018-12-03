@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on July 23, 2018
+%  Last updated on December 3, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -617,55 +617,53 @@ forall(Generate, Test) :-
 
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
-	'$lgt_eclipse_directive_expansion'(Directive, Expanded0),
-	(	Expanded0 == [] ->
-		Expanded  == []
-	;	Expanded0 =  {ExpandedDirective} ->
-		Expanded  =  {(:- ExpandedDirective)}
-	;	Expanded  =  (:- Expanded0)
-	).
+	% allow first-argument indexing
+	'$lgt_eclipse_directive_expansion'(Directive, Expanded).
 
 
 '$lgt_eclipse_directive_expansion'(mode(_), []).
 '$lgt_eclipse_directive_expansion'(comment(_, _), []).
 
-'$lgt_eclipse_directive_expansion'(export(chtab(Char, Class)), {export(chtab(Char, Class))}).
-'$lgt_eclipse_directive_expansion'(export(domain(Domain)), {export(domain(Domain))}).
-'$lgt_eclipse_directive_expansion'(export(struct(Struct)), {export(struct(Struct))}).
-'$lgt_eclipse_directive_expansion'(export(syntax_option(SyntaxOption)), {export(syntax_option(SyntaxOption))}).
+'$lgt_eclipse_directive_expansion'(export(chtab(Char, Class)), {:- export(chtab(Char, Class))}).
+'$lgt_eclipse_directive_expansion'(export(domain(Domain)), {:- export(domain(Domain))}).
+'$lgt_eclipse_directive_expansion'(export(struct(Struct)), {:- export(struct(Struct))}).
+'$lgt_eclipse_directive_expansion'(export(syntax_option(SyntaxOption)), {:- export(syntax_option(SyntaxOption))}).
 
-'$lgt_eclipse_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+'$lgt_eclipse_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {:- op(Priority, Specifier, Operators)}) :-
 	Module == user.
 
-'$lgt_eclipse_directive_expansion'(pragma(Pragma), {pragma(Pragma)}).
+'$lgt_eclipse_directive_expansion'(pragma(Pragma), {:- pragma(Pragma)}).
 
-'$lgt_eclipse_directive_expansion'(set_event_handler(Event, defers(Functor/Arity)), {set_event_handler(Event, defers(CFunctor/CArity))}) :-
+'$lgt_eclipse_directive_expansion'(set_event_handler(Event, defers(Functor/Arity)), {:- set_event_handler(Event, defers(CFunctor/CArity))}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
-'$lgt_eclipse_directive_expansion'(set_event_handler(Event, Functor/Arity), {set_event_handler(Event, CFunctor/CArity)}) :-
+'$lgt_eclipse_directive_expansion'(set_event_handler(Event, Functor/Arity), {:- set_event_handler(Event, CFunctor/CArity)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
 
-'$lgt_eclipse_directive_expansion'(import(from(Conjunction, Module)), use_module(Module, Imports)) :-
-	'$lgt_flatten_to_list'(Conjunction, Imports).
+'$lgt_eclipse_directive_expansion'(import(from(Conjunction, Module)), [{:- import(from(Conjunction, Module))}, (:- use_module(Module, Imports))]) :-
+	'$lgt_flatten_to_list'(Conjunction, Imports),
+	import(from(Conjunction, Module)).
 
-'$lgt_eclipse_directive_expansion'(local(Functor/Arity), private(Functor/Arity)).
-'$lgt_eclipse_directive_expansion'(local(op(Priority, Spec, Operators)), op(Priority, Spec, Operators)).
+'$lgt_eclipse_directive_expansion'(local(Functor/Arity), (:- private(Functor/Arity))).
+'$lgt_eclipse_directive_expansion'(local(op(Priority, Spec, Operators)), (:- op(Priority, Spec, Operators))).
 
-'$lgt_eclipse_directive_expansion'(lib(Library), use_module(Module, Exports)) :-
+'$lgt_eclipse_directive_expansion'(lib(Library), [{:- lib(Library)}, (:- use_module(Module, Exports))]) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_eclipse_list_of_exports'(library(Library), Module, Exports).
+	'$lgt_eclipse_list_of_exports'(library(Library), Module, Exports),
+	lib(Library).
 
-'$lgt_eclipse_directive_expansion'(reexport(File), reexport(Module, Exports)) :-
+'$lgt_eclipse_directive_expansion'(reexport(File), (:- reexport(Module, Exports))) :-
 	atom(File),
 	'$lgt_eclipse_list_of_exports'(File, Module, Exports).
 
-'$lgt_eclipse_directive_expansion'(reexport(from(Conjunction, Module)), reexport(Module, Exports)) :-
+'$lgt_eclipse_directive_expansion'(reexport(from(Conjunction, Module)), (:- reexport(Module, Exports))) :-
 	'$lgt_flatten_to_list'(Conjunction, Exports).
 
-'$lgt_eclipse_directive_expansion'(use_module(File), use_module(Module, Imports)) :-
+'$lgt_eclipse_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_eclipse_list_of_exports'(File, Module, Imports).
+	'$lgt_eclipse_list_of_exports'(File, Module, Imports),
+	use_module(File).
 
 
 '$lgt_eclipse_list_of_exports'(File, Module, Exports) :-

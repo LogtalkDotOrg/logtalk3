@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on July 23, 2018
+%  Last updated on December 3, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -500,36 +500,35 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
-	'$lgt_xsb_directive_expansion'(Directive, Expanded0),
-	(	Expanded0 == [] ->
-		Expanded  == []
-	;	Expanded0 =  {ExpandedDirective} ->
-		Expanded  =  {(:- ExpandedDirective)}
-	;	Expanded  =  (:- Expanded0)
-	).
+	% allow first-argument indexing
+	'$lgt_xsb_directive_expansion'(Directive, Expanded).
 
 
-'$lgt_xsb_directive_expansion'(table(PIs), {table(CPIs)}) :-
+'$lgt_xsb_directive_expansion'(table(PIs), {:- table(CPIs)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(PIs, _, CPIs).
 
-'$lgt_xsb_directive_expansion'(as(dynamic(PIs),ShareMode), {as(dynamic(CPIs),ShareMode)}) :-
+'$lgt_xsb_directive_expansion'(as(dynamic(PIs),ShareMode), {:- as(dynamic(CPIs),ShareMode)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(PIs, _, CPIs).
 
-'$lgt_xsb_directive_expansion'(as(table(PIs),ShareMode), {as(table(CPIs),ShareMode)}) :-
+'$lgt_xsb_directive_expansion'(as(table(PIs),ShareMode), {:- as(table(CPIs),ShareMode)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(PIs, _, CPIs).
 
-'$lgt_xsb_directive_expansion'(import(as(from(PI), Module), Functor), use_module(Module, [as(PI, Functor)])).
+'$lgt_xsb_directive_expansion'(import(as(from(PI), Module), Functor), (:- use_module(Module, [as(PI, Functor)]))).
 
-'$lgt_xsb_directive_expansion'(import(from(PIs1, Module)), use_module(Module, PIs2)) :-
+'$lgt_xsb_directive_expansion'(import(from(PIs1, Module)), (:- use_module(Module, PIs2))) :-
 	'$lgt_xsb_conjunction_to_list'(PIs1, PIs2).
 
-'$lgt_xsb_directive_expansion'(local(PIs1), private(PIs2)) :-
+'$lgt_xsb_directive_expansion'(use_module(Module, Imports), [{:- use_module(Module, Imports)}, (:- use_module(Module, Imports))]) :-
+	logtalk_load_context(entity_type, _),
+	use_module(Module, Imports).
+
+'$lgt_xsb_directive_expansion'(local(PIs1), (:- private(PIs2))) :-
 	'$lgt_xsb_conjunction_to_list'(PIs1, PIs2).
 
-'$lgt_xsb_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+'$lgt_xsb_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {:- op(Priority, Specifier, Operators)}) :-
 	Module == user.
 
 

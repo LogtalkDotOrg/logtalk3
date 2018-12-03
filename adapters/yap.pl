@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on November 8, 2018
+%  Last updated on December 3, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -591,54 +591,52 @@
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
-	'$lgt_yap_directive_expansion'(Directive, Expanded0),
-	(	Expanded0 == [] ->
-		Expanded  == []
-	;	Expanded0 =  {ExpandedDirective} ->
-		Expanded  =  {(:- ExpandedDirective)}
-	;	Expanded  =  (:- Expanded0)
-	).
+	% allow first-argument indexing
+	'$lgt_yap_directive_expansion'(Directive, Expanded).
 
 '$lgt_yap_directive_expansion'(style_check(_), []).
 
-'$lgt_yap_directive_expansion'(create_prolog_flag(Key, Value, Options), {create_prolog_flag(Key, Value, Options)}).
+'$lgt_yap_directive_expansion'(create_prolog_flag(Key, Value, Options), {:- create_prolog_flag(Key, Value, Options)}).
 
-'$lgt_yap_directive_expansion'(expects_dialect(Dialect), {expects_dialect(Dialect)}) :-
+'$lgt_yap_directive_expansion'(expects_dialect(Dialect), {:- expects_dialect(Dialect)}) :-
 	'$expects_dialect'(Dialect).
 
-'$lgt_yap_directive_expansion'(load_foreign_files(Files, Libs, InitRoutine), {initialization(load_foreign_files(Files, Libs, InitRoutine))}) :-
+'$lgt_yap_directive_expansion'(load_foreign_files(Files, Libs, InitRoutine), {:- initialization(load_foreign_files(Files, Libs, InitRoutine))}) :-
 	load_foreign_files(Files, Libs, InitRoutine).
 
-'$lgt_yap_directive_expansion'(public(PIs), {public(CPIs)}) :-	% used to make clause/2 work with static predicates
+'$lgt_yap_directive_expansion'(public(PIs), {:- public(CPIs)}) :-	% used to make clause/2 work with static predicates
 	logtalk_load_context(entity_type, module),					% only when we're compiling a module as an object!
 	'$lgt_compile_predicate_indicators'(PIs, _, CPIs).
 
-'$lgt_yap_directive_expansion'(encoding(Encoding1), encoding(Encoding2)) :-
+'$lgt_yap_directive_expansion'(encoding(Encoding1), (:- encoding(Encoding2))) :-
 	nonvar(Encoding1),
 	'$lgt_yap_encoding_to_logtalk_encoding'(Encoding1, Encoding2).
 
-'$lgt_yap_directive_expansion'(ensure_loaded(File), use_module(Module, Imports)) :-
+'$lgt_yap_directive_expansion'(ensure_loaded(File), Expanded) :-
 	logtalk_load_context(entity_type, module),
-	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
-	'$lgt_yap_list_of_exports'(File, Module, Imports).
+	% ensure_loaded/1 directive used within a module
+	% (sloppy replacement for the use_module/1-2 directives)
+	'$lgt_yap_directive_expansion'(use_module(File), Expanded).
 
-'$lgt_yap_directive_expansion'(reexport(File), reexport(Module, Exports)) :-
+'$lgt_yap_directive_expansion'(reexport(File), (:- reexport(Module, Exports))) :-
 	'$lgt_yap_list_of_exports'(File, Module, Exports).
 
-'$lgt_yap_directive_expansion'(reexport(File, Exports), reexport(Module, Exports)) :-
+'$lgt_yap_directive_expansion'(reexport(File, Exports), (:- reexport(Module, Exports))) :-
 	'$lgt_yap_list_of_exports'(File, Module, _).
 
-'$lgt_yap_directive_expansion'(yap_flag(Flag, Value), set_prolog_flag(Flag, Value)).
+'$lgt_yap_directive_expansion'(yap_flag(Flag, Value), (:- set_prolog_flag(Flag, Value))).
 
-'$lgt_yap_directive_expansion'(use_module(File, Imports), use_module(Module, Imports)) :-
+'$lgt_yap_directive_expansion'(use_module(File, Imports), [{:- use_module(File, Imports)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_yap_list_of_exports'(File, Module, _).
+	'$lgt_yap_list_of_exports'(File, Module, _),
+	use_module(File, Imports).
 
-'$lgt_yap_directive_expansion'(use_module(File), use_module(Module, Imports)) :-
+'$lgt_yap_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_yap_list_of_exports'(File, Module, Imports).
+	'$lgt_yap_list_of_exports'(File, Module, Imports),
+	use_module(File).
 
-'$lgt_yap_directive_expansion'(table(Predicates), {table(TPredicates)}) :-
+'$lgt_yap_directive_expansion'(table(Predicates), {:- table(TPredicates)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_yap_table_directive_expansion'(Predicates, TPredicates).
 

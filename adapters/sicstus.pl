@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on July 23, 2018
+%  Last updated on December 3, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -567,47 +567,48 @@ forall(Generate, Test) :-
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
-	'$lgt_sicstus_directive_expansion'(Directive, Expanded0),
-	(	Expanded0 == [] ->
-		Expanded  == []
-	;	Expanded0 =  {ExpandedDirective} ->
-		Expanded  =  {(:- ExpandedDirective)}
-	;	Expanded  =  (:- Expanded0)
-	).
+	% allow first-argument indexing
+	'$lgt_sicstus_directive_expansion'(Directive, Expanded).
 
 
 '$lgt_sicstus_directive_expansion'(mode(_), []).
 '$lgt_sicstus_directive_expansion'(public(_), []) :-	% used to provide info to the cross-referencer
 	logtalk_load_context(entity_type, module).			% only when we're compiling a module as an object!
 
-'$lgt_sicstus_directive_expansion'(block(Heads), {block(THeads)}) :-
+'$lgt_sicstus_directive_expansion'(block(Heads), {:- block(THeads)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_heads'(Heads, _, THeads, '?').
-'$lgt_sicstus_directive_expansion'(load_foreign_resource(Resource), {initialization(load_foreign_resource(Resource))}) :-
+'$lgt_sicstus_directive_expansion'(load_foreign_resource(Resource), {:- initialization(load_foreign_resource(Resource))}) :-
 	load_foreign_resource(Resource).
 
-'$lgt_sicstus_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+'$lgt_sicstus_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {:- op(Priority, Specifier, Operators)}) :-
 	Module == user.
 
-'$lgt_sicstus_directive_expansion'(ensure_loaded(File), use_module(Module, Imports)) :-
+'$lgt_sicstus_directive_expansion'(ensure_loaded(File), Expanded) :-
 	logtalk_load_context(entity_type, module),
-	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
-	logtalk_load_context(directory, Directory),
-	'$lgt_sicstus_list_of_exports'(File, Directory, Module, Imports).
-'$lgt_sicstus_directive_expansion'(module(Module, Exports, _), module(Module, Exports)).
-'$lgt_sicstus_directive_expansion'(use_module(File, Imports), use_module(Module, Imports)) :-
+	% ensure_loaded/1 directive used within a module
+	% (sloppy replacement for the use_module/1-2 directives)
+	'$lgt_sicstus_directive_expansion'(use_module(File), Expanded).
+
+'$lgt_sicstus_directive_expansion'(module(Module, Exports, _), (:- module(Module, Exports))).
+
+'$lgt_sicstus_directive_expansion'(use_module(File, Imports), [{:- use_module(File, Imports)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
 	logtalk_load_context(directory, Directory),
-	'$lgt_sicstus_list_of_exports'(File, Directory, Module, _).
-'$lgt_sicstus_directive_expansion'(use_module(File), use_module(Module, Imports)) :-
+	'$lgt_sicstus_list_of_exports'(File, Directory, Module, _),
+	use_module(File, Imports).
+
+'$lgt_sicstus_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
 	logtalk_load_context(directory, Directory),
-	'$lgt_sicstus_list_of_exports'(File, Directory, Module, Imports).
+	'$lgt_sicstus_list_of_exports'(File, Directory, Module, Imports),
+	use_module(File).
+
 '$lgt_sicstus_directive_expansion'(use_module(Module, File, Imports), Directive) :-
 	logtalk_load_context(entity_type, _),
 	(	var(Module) ->
 		'$lgt_sicstus_directive_expansion'(use_module(File, Imports), Directive)
-	;	Directive = use_module(Module, Imports)
+	;	Directive = (:- use_module(Module, Imports))
 	).
 
 
