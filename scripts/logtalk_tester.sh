@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 29, 2018
+##   Last updated on December 3, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.32"
+	echo "$(basename "$0") 0.33"
 	exit 0
 }
 
@@ -79,7 +79,7 @@ coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
 base="$PWD"
 level=""
 results="$base/logtalk_tester_logs"
-backend=swipl
+backend=swi
 prolog='SWI-Prolog'
 logtalk=swilgt$extension
 logtalk_call="$logtalk -g"
@@ -108,7 +108,11 @@ run_tests() {
 	echo '*******************************************************************************'
 	echo "***** Testing $unit_short"
 	if [ -f tester.sh ] ; then
-		source tester.sh "$@"
+		if [ $# -eq 0 ] ; then
+			source tester.sh -p $backend
+		else
+			source tester.sh "$@"
+		fi
 		source_exit=$?
 		if [ "$source_exit" -gt 0 ] ; then
 			echo "*****         source tester.sh returned code $source_exit"
@@ -314,10 +318,6 @@ elif [ "$p_arg" == "yap" ] ; then
 	logtalk_call="$logtalk -g"
 elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported backend Prolog compiler: $p_arg" >&2
-	usage_help
-	exit 1
-elif [ ! "$(command -v $backend)" ] ; then
-	echo "Error! Default backend Prolog compiler not found: $prolog" >&2
 	usage_help
 	exit 1
 elif [ ! "$(command -v $logtalk)" ] ; then

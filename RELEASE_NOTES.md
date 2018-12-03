@@ -58,6 +58,12 @@ built-in methods.
 
 * FIXED: Handbook link to the generated index from the sub-sections.
 
+Tools
+-----
+
+* FIXED: The `logtalk_tester` script to pass the default backend when sourcing
+a `tester.sh` script when called without any arguments.
+
 Examples
 --------
 
