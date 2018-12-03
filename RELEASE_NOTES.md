@@ -58,6 +58,12 @@ built-in methods.
 
 * FIXED: Handbook link to the generated index from the sub-sections.
 
+Library
+-------
+
+* FIXED: The `parallel_logtalk_processes_setup.pl` sample code to account for
+the operating-system reusing process identifiers.
+
 Tools
 -----
 

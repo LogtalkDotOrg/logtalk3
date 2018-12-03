@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Parallel Logtalk processes setup for selected backend Prolog compilers
-%  Last updated on September 27, 2018
+%  Last updated on December 3, 2018
 %  
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -47,19 +47,25 @@
 		temporary_name(lgtXXXXXX, Name),
 		decompose_file_name(Name, _, Prefix, _),
 		atom_concat('/tmp/', Prefix, Directory),
-		make_directory(Directory).
+		(	file_exists(Directory) ->
+			true
+		;	make_directory(Directory)
+		).
 
 :- elif(current_prolog_flag(dialect, yap)).
 
 	% usage: yaplgt -f parallel_logtalk_processes_setup.pl
 	% in alternative, add the code to your  ~/.yaprc, ~/.prologrc, or ~/prolog.ini file and start Logtalk as usual
 
-	:- use_module(library(system), [tmpnam/1, delete_file/1, make_directory/1]).
+	:- use_module(library(system), [tmpnam/1, delete_file/1, file_exists/1, make_directory/1]).
 
 	logtalk_library_path(scratch_directory, Directory) :-
 		tmpnam(Directory),
 		delete_file(Directory),
-		make_directory(Directory).
+		(	file_exists(Directory) ->
+			true
+		;	make_directory(Directory)
+		).
 
 :- elif(current_prolog_flag(dialect, eclipse)).
 
@@ -73,7 +79,10 @@
 		atom_codes(PIDAtom, PIDCodes),
 		atom_concat(TMP_DIR, logtalk, Directory0),
 		atom_concat(Directory0, PIDAtom, Directory),
-		mkdir(Directory).
+		(	exists(Directory) ->
+			true
+		;	mkdir(Directory)
+		).
 
 :- elif(current_prolog_flag(dialect, sicstus)).
 
@@ -81,7 +90,7 @@
 
 	:- use_module(library(system), [environ/2]).
 	:- use_module(library(system3), [pid/1]).
-	:- use_module(library(file_systems), [make_directory/1]).
+	:- use_module(library(file_systems), [directory_exists/1, make_directory/1]).
 
 	logtalk_library_path(scratch_directory, Directory) :-
 		environ('SP_TEMP_DIR', SP_TEMP_DIR),
@@ -90,6 +99,9 @@
 		atom_codes(PIDAtom, PIDCodes),
 		atom_concat(SP_TEMP_DIR, logtalk, Directory0),
 		atom_concat(Directory0, PIDAtom, Directory),
-		make_directory(Directory).
+		(	directory_exists(Directory) ->
+			true
+		;	make_directory(Directory)
+		).
 
 :- endif.
