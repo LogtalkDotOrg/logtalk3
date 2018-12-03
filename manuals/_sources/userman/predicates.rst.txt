@@ -1624,9 +1624,9 @@ to call the module predicates using implicit qualification:
        ...
 
 Note that the first argument of the ``use_module/2``, when used within
-an object or a category, is a module name, not a file specification (also
-be aware that Prolog modules are sometimes defined in files with names
-that differ from the module names). As loading a Prolog module varies
+an object or a category, is a *module name*, not a *file specification*
+(also be aware that Prolog modules are sometimes defined in files with
+names that differ from the module names). As loading a Prolog module varies
 between Prolog systems, the actual loading directive or goal is usually
 done by the application :term:`loader file`. An advantage of this approach
 is that it contributes to a clean separation between *loading* and *using*
