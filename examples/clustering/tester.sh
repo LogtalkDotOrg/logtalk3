@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Bash script to be sourced by the logtalk_tester script
-##   Last updated on October 29, 2018
+##   Last updated on December 3, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -29,7 +29,10 @@ while getopts "p:" option; do
     esac
 done
 
-if [ "$backend" == "swipl" ] ; then
+if [ "$backend" == "swi" ] ; then
+	source set_classpath_swi.sh
+	export CLASSPATH
+elif [ "$backend" == "swipack" ] ; then
 	source set_classpath_swi.sh
 	export CLASSPATH
 elif [ "$backend" == "yap" ] ; then
