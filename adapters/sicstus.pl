@@ -593,12 +593,14 @@ forall(Generate, Test) :-
 '$lgt_sicstus_directive_expansion'(module(Module, Exports, _), (:- module(Module, Exports))).
 
 '$lgt_sicstus_directive_expansion'(use_module(File, Imports), [{:- use_module(File, Imports)}, (:- use_module(Module, Imports))]) :-
+	\+ atom(File),
 	logtalk_load_context(entity_type, _),
 	logtalk_load_context(directory, Directory),
 	'$lgt_sicstus_list_of_exports'(File, Directory, Module, _),
 	use_module(File, Imports).
 
 '$lgt_sicstus_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
+	\+ atom(File),
 	logtalk_load_context(entity_type, _),
 	logtalk_load_context(directory, Directory),
 	'$lgt_sicstus_list_of_exports'(File, Directory, Module, Imports),

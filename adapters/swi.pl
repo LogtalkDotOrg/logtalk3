@@ -658,11 +658,13 @@
 	Module == user.
 
 '$lgt_swi_directive_expansion'(use_module(File, Imports), [{:- use_module(File, Imports)}, (:- use_module(Module, Imports))]) :-
+	\+ atom(File),
 	logtalk_load_context(entity_type, _),
 	'$lgt_swi_list_of_exports'(File, Module, _),
 	use_module(File, Imports).
 
 '$lgt_swi_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
+	\+ atom(File),
 	logtalk_load_context(entity_type, _),
 	'$lgt_swi_list_of_exports'(File, Module, Imports),
 	use_module(File).
