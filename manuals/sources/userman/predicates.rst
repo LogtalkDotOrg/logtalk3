@@ -658,8 +658,10 @@ A predicate can be declared *coinductive* by using the
 
    :- coinductive(comember/2).
 
-Logtalk support for coinductive predicates is experimental and requires
-a backend Prolog compiler with minimal support for cyclic terms.
+Logtalk support for coinductive predicates is experimental and requires a
+backend Prolog compiler with minimal support for cyclic terms. The value
+of the read-only :ref:`coinduction flag <flag_coinduction>` is set to
+``supported`` for the backend Prolog compilers providing that support.
 
 .. _predicates_defining:
 
