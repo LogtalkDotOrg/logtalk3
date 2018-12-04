@@ -1480,11 +1480,12 @@ Logtalk is designed for both *robusteness* and *portability*. In the context
 of calling Prolog predicates, robusteness requires that the compilation of
 Logtalk source code must not have *accidental* dependencies on Prolog code that
 happens to be loaded at the time of the compilation. One immediate consequence
-is that only Prolog *built-in* predicates are visible by default from within
-objects and categories. But Prolog systems provide a widely diverse set of
-built-in predicates, easily rising portability issues. Relying on non-standard
+is that only Prolog *built-in* predicates are visible from within objects and
+categories. But Prolog systems provide a widely diverse set of built-in
+predicates, easily rising portability issues. Relying on non-standard
 predicates is often unavoidable, however, due to the narrow scope of Prolog
-standards.
+standards. Logtalk applications may also require calling user-defined Prolog
+predicates, either in *user* or in Prolog modules. 
 
 Calling Prolog built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1540,8 +1541,8 @@ objects or categories, i.e. they cannot be used as messages. Compiling
 calls to non-standard, Prolog built-in meta-predicates can be tricky,
 however, as there is no standard way of checking if a built-in predicate
 is also a meta-predicate and finding out which are its meta-arguments.
-But Logtalk supports override the original meta-predicate template if
-not programmatically available or usable. For example, assume a
+But Logtalk supports overriding the original meta-predicate template
+when not programmatically available or usable. For example, assume a
 ``det_call/1`` Prolog built-in meta-predicate that takes a goal as
 argument. We can add to the object (or category) calling it the
 directive:
@@ -1627,7 +1628,7 @@ Note that the first argument of the ``use_module/2``, when used within
 an object or a category, is a *module name*, not a *file specification*
 (also be aware that Prolog modules are sometimes defined in files with
 names that differ from the module names). As loading a Prolog module varies
-between Prolog systems, the actual loading directive or goal is usually
+between Prolog systems, the actual loading directive or goal is preferably
 done by the application :term:`loader file`. An advantage of this approach
 is that it contributes to a clean separation between *loading* and *using*
 a resource with the loader file being the central point that loads all
