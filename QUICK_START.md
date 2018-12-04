@@ -67,9 +67,9 @@ Open the `manuals/index.html` file with a web browser and select the
 `Tutorial` link. This will provide you with a basic understanding of
 some of the main Logtalk concepts. You can then go back to the `index.html`
 file, select the `User Manual` link, then the `Installing Logtalk` and
-`Writing, Running, and Debugging Logtalk Programs` links. This will
-provide you with a basic understanding of how to start Logtalk as well
-as how to compile and load Logtalk code.
+`Writing and running applications` links. This will provide you with a
+basic understanding of how to start Logtalk as well as how to compile and
+load Logtalk code.
 
 Basic help on Logtalk usage at the top-level interpreter
 --------------------------------------------------------
