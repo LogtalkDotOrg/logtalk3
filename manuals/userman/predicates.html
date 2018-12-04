@@ -1286,8 +1286,24 @@ similar to the usual database Prolog predicates:
 <a class="reference internal" href="../refman/methods/clause_2.html#methods-clause-2"><span class="std std-ref">clause/2</span></a>,
 <a class="reference internal" href="../refman/methods/retract_1.html#methods-retract-1"><span class="std std-ref">retract/1</span></a>, and
 <a class="reference internal" href="../refman/methods/retractall_1.html#methods-retractall-1"><span class="std std-ref">retractall/1</span></a>. These
-methods always operate on the database of the object receiving the
-corresponding message.</p>
+methods always operate on the database of the object receiving the corresponding
+message. When called locally, these predicates take into account any
+<a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directives that refer
+to the dynamic predicate being handled. For example, in the following object, the
+clauses for the <code class="docutils literal notranslate"><span class="pre">data/1</span></code> predicate are retracted and asserted in <em>user</em> due to
+the <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(an_object).
+
+<span class="p">    :- </span><span class="k">uses</span>(user, [data<span class="o">/</span><span class="m">1</span>]).
+
+<span class="p">    :- </span><span class="k">public</span>(some_predicate<span class="o">/</span><span class="m">1</span>).
+    some_predicate(<span class="nv">Arg</span>) <span class="o">:-</span>
+        <span class="k">retractall</span>(data(<span class="nv">_</span>)),
+        <span class="k">assertz</span>(data(<span class="nv">Arg</span>)).
+
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
 <p>When working with dynamic grammar rule non-terminals, you may use the
 built-in method <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> convert a
 grammar rule into a clause that can then be used with the database
@@ -1487,8 +1503,8 @@ standards. Logtalk applications may also require calling user-defined Prolog
 predicates, either in <em>user</em> or in Prolog modules.</p>
 <div class="section" id="calling-prolog-built-in-predicates">
 <h3>Calling Prolog built-in predicates<a class="headerlink" href="#calling-prolog-built-in-predicates" title="Permalink to this headline">¶</a></h3>
-<p>In predicate clauses and <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives, predicate calls
-that are not prefixed with a message sending, super call, or module
+<p>In predicate clauses and object <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives, predicate
+calls that are not prefixed with a message sending, super call, or module
 qualification operator (<code class="docutils literal notranslate"><span class="pre">::</span></code>, <code class="docutils literal notranslate"><span class="pre">^^</span></code>, or <code class="docutils literal notranslate"><span class="pre">:</span></code>), are compiled to either
 calls to local predicates or as calls to Logtalk/Prolog built-in predicates.
 A predicate call is compiled as a call to a local predicate if the object (or
@@ -1520,7 +1536,7 @@ predicate):</p>
 </div>
 <p>This directive is based on the fact that built-in predicates are visible in
 plain Prolog (i.e. in <code class="docutils literal notranslate"><span class="pre">user</span></code>). Besides helping to document the dependency
-on a non-standard, this directive will silence the compiler portability
+on a non-standard, this directive will also silence the compiler portability
 warning.</p>
 </div>
 <div class="section" id="calling-prolog-non-standard-meta-predicates">
@@ -1614,7 +1630,7 @@ compiler that supports an autoloading mechanism).</p>
 </div>
 <p>Calls to module meta-predicates may require providing a missing
 meta-predicate template or overriding an existing meta-predicate
-template due to lack of standardization as discussed
+template due to lack of Prolog standardization as discussed
 <a class="reference internal" href="#predicates-prolog-meta"><span class="std std-ref">earlier</span></a> in this section.</p>
 </div>
 </div>

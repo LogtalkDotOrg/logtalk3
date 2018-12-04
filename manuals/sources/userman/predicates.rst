@@ -1258,8 +1258,25 @@ similar to the usual database Prolog predicates:
 :ref:`methods_clause_2`,
 :ref:`methods_retract_1`, and
 :ref:`methods_retractall_1`. These
-methods always operate on the database of the object receiving the
-corresponding message.
+methods always operate on the database of the object receiving the corresponding
+message. When called locally, these predicates take into account any
+:ref:`directives_uses_2` or :ref:`directives_use_module_2` directives that refer
+to the dynamic predicate being handled. For example, in the following object, the
+clauses for the ``data/1`` predicate are retracted and asserted in *user* due to
+the ``uses/2`` directive:
+
+::
+
+   :- object(an_object).
+   
+       :- uses(user, [data/1]).
+   
+       :- public(some_predicate/1).
+       some_predicate(Arg) :-
+           retractall(data(_)),
+           assertz(data(Arg)).
+       
+   :- end_object.
 
 When working with dynamic grammar rule non-terminals, you may use the
 built-in method :ref:`methods_expand_term_2` convert a
@@ -1492,8 +1509,8 @@ predicates, either in *user* or in Prolog modules.
 Calling Prolog built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In predicate clauses and ``initialization/1`` directives, predicate calls
-that are not prefixed with a message sending, super call, or module
+In predicate clauses and object ``initialization/1`` directives, predicate
+calls that are not prefixed with a message sending, super call, or module
 qualification operator (``::``, ``^^``, or ``:``), are compiled to either
 calls to local predicates or as calls to Logtalk/Prolog built-in predicates.
 A predicate call is compiled as a call to a local predicate if the object (or
@@ -1530,7 +1547,7 @@ predicate):
 
 This directive is based on the fact that built-in predicates are visible in
 plain Prolog (i.e. in ``user``). Besides helping to document the dependency
-on a non-standard, this directive will silence the compiler portability
+on a non-standard, this directive will also silence the compiler portability
 warning.
 
 .. _predicates_prolog_meta:
@@ -1646,5 +1663,5 @@ loader files but the main idea remains the same).
 
 Calls to module meta-predicates may require providing a missing
 meta-predicate template or overriding an existing meta-predicate
-template due to lack of standardization as discussed
+template due to lack of Prolog standardization as discussed
 :ref:`earlier <predicates_prolog_meta>` in this section.
