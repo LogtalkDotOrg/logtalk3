@@ -1301,10 +1301,10 @@ All solutions methods
 ~~~~~~~~~~~~~~~~~~~~~
 
 The usual all solutions meta-predicates are built-in private methods in
-Logtalk: :ref:`methods_bagof_3`, :ref:`methods_findall_3`, :ref:`methods_findall_4`, and
-:ref:`methods_setof_3`. There is also a :ref:`methods_forall_2` method that
-implements generate and test loops. These methods cannot be used as
-messages to objects.
+Logtalk: :ref:`methods_bagof_3`, :ref:`methods_findall_3`,
+:ref:`methods_findall_4`, and :ref:`methods_setof_3`. There is also a
+:ref:`methods_forall_2` method that implements generate-and-test loops.
+These methods cannot be used as messages to objects.
 
 .. _predicates_reflection:
 
@@ -1470,15 +1470,15 @@ Finding declared predicates
 
 We can find, by backtracking, all visible user predicates by calling the
 :ref:`methods_current_predicate_1` built-in method. This method respects
-the predicate's scope declarations. For instance, the following call:
+the predicate's scope declarations. For instance, the following call will
+only return user predicates that are declared public:
 
 .. code-block:: text
 
    | ?- some_object::current_predicate(Name/Arity).
 
-will only return user predicates that are declared public. The predicate
-property ``non_terminal/1`` may be used to retrieve all grammar rule
-non-terminals declared for an object. For example:
+The predicate property ``non_terminal/1`` may be used to retrieve all
+grammar rule non-terminals declared for an object. For example:
 
 ::
 

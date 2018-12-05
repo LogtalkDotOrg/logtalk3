@@ -1321,10 +1321,10 @@ Logtalk supports the built-in private meta-predicates
 <div class="section" id="all-solutions-methods">
 <span id="predicates-solutions"></span><h3>All solutions methods<a class="headerlink" href="#all-solutions-methods" title="Permalink to this headline">¶</a></h3>
 <p>The usual all solutions meta-predicates are built-in private methods in
-Logtalk: <a class="reference internal" href="../refman/methods/bagof_3.html#methods-bagof-3"><span class="std std-ref">bagof/3</span></a>, <a class="reference internal" href="../refman/methods/findall_3.html#methods-findall-3"><span class="std std-ref">findall/3</span></a>, <a class="reference internal" href="../refman/methods/findall_4.html#methods-findall-4"><span class="std std-ref">findall/4</span></a>, and
-<a class="reference internal" href="../refman/methods/setof_3.html#methods-setof-3"><span class="std std-ref">setof/3</span></a>. There is also a <a class="reference internal" href="../refman/methods/forall_2.html#methods-forall-2"><span class="std std-ref">forall/2</span></a> method that
-implements generate and test loops. These methods cannot be used as
-messages to objects.</p>
+Logtalk: <a class="reference internal" href="../refman/methods/bagof_3.html#methods-bagof-3"><span class="std std-ref">bagof/3</span></a>, <a class="reference internal" href="../refman/methods/findall_3.html#methods-findall-3"><span class="std std-ref">findall/3</span></a>,
+<a class="reference internal" href="../refman/methods/findall_4.html#methods-findall-4"><span class="std std-ref">findall/4</span></a>, and <a class="reference internal" href="../refman/methods/setof_3.html#methods-setof-3"><span class="std std-ref">setof/3</span></a>. There is also a
+<a class="reference internal" href="../refman/methods/forall_2.html#methods-forall-2"><span class="std std-ref">forall/2</span></a> method that implements generate-and-test loops.
+These methods cannot be used as messages to objects.</p>
 </div>
 <div class="section" id="reflection-methods">
 <span id="predicates-reflection"></span><h3>Reflection methods<a class="headerlink" href="#reflection-methods" title="Permalink to this headline">¶</a></h3>
@@ -1473,13 +1473,13 @@ The same is true for protocol declared predicates.</p>
 <span id="predicates-finding"></span><h2>Finding declared predicates<a class="headerlink" href="#finding-declared-predicates" title="Permalink to this headline">¶</a></h2>
 <p>We can find, by backtracking, all visible user predicates by calling the
 <a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> built-in method. This method respects
-the predicate’s scope declarations. For instance, the following call:</p>
+the predicate’s scope declarations. For instance, the following call will
+only return user predicates that are declared public:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- some_object::current_predicate(Name/Arity).
 </pre></div>
 </div>
-<p>will only return user predicates that are declared public. The predicate
-property <code class="docutils literal notranslate"><span class="pre">non_terminal/1</span></code> may be used to retrieve all grammar rule
-non-terminals declared for an object. For example:</p>
+<p>The predicate property <code class="docutils literal notranslate"><span class="pre">non_terminal/1</span></code> may be used to retrieve all
+grammar rule non-terminals declared for an object. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>current_non_terminal(<span class="nv">Object</span>, <span class="nv">Name</span><span class="o">//</span><span class="nv">Args</span>) <span class="o">:-</span>
     <span class="nv">Object</span><span class="o">::</span><span class="k">current_predicate</span>(<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>),
     <span class="k">functor</span>(<span class="nv">Predicate</span>, <span class="nv">Functor</span>, <span class="nv">Arity</span>),

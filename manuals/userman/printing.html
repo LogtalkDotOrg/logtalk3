@@ -206,12 +206,12 @@ These include banners, logging, debugging, and computation results messages
 but also, in some cases, user interaction messages. However, the authors of
 applications, components, and libraries often cannot anticipate the context
 where their software will be used and thus decide which and when messages
-should be displayed, suppressed, or diverted. Consider the different components
-in a Logtalk application development and deployment. At the bottom level,
-you have the Logtalk compiler and runtime. The compiler writes
+should be displayed, suppressed, or diverted. Consider the different
+components in a Logtalk application development and deployment. At the base
+level, you have the Logtalk compiler and runtime. The compiler writes
 messages related to e.g. compiling and loading files, compiling
 entities, compilation warnings and errors. The runtime may write
-banner messages and handles execution errors that may result in printing
+banner messages or throw execution errors that may result in printing
 human-level messages. The development environment can be console-based
 or you may be using a GUI tool such as PDT. In the latter case, PDT
 needs to intercept the Logtalk compiler and runtime messages to present
@@ -220,10 +220,10 @@ components in a typical application. For example, your own libraries and
 third-party libraries. The libraries may want to print messages on its
 own, e.g. banners, debugging information, or logging information. As you
 assemble all your application components, you want to have the final
-word on which messages are printed, where, an in what conditions.
-Uncontrolled message printing by libraries could potentially
-disturb application flow, expose implementation details, spam the user
-with irrelevant details, or break user interfaces.</p>
+word on which messages are printed, where, and when. Uncontrolled message
+printing by libraries could potentially disturb application flow, expose
+implementation details, spam the user with irrelevant details, or break
+user interfaces.</p>
 <p>The solution is to decouple the calls to print a message from the actual
 printing of the output text. The same is true for calls to read user input.
 By decoupling the call to input some data from the actual read of the data,
@@ -232,15 +232,16 @@ dialog or even automate providing the data (e.g. when automating testing
 of user interaction).</p>
 <p>Logtalk provides a solution based on the <em>structured message printing
 mechanism</em> that was introduced by Quintus Prolog, where it was apparently
-implemented by Dave Bowen (thanks to Richard O’Keefe for the historical bits).
-This mechanism gives the programmer full control of message printing,
-allowing it to filter, rewrite, or redirect any message.
-Variations of this mechanism can also be found in some Prolog systems
-including SICStus Prolog, SWI-Prolog, and YAP. Based on this mechanism,
-Logtalk introduces an extension that also allows abstracting asking a user
-for input. Both mechanisms are implemented by the <a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">logtalk</span></a>
-built-in object and described in this section. The message printing mechanism is
-widely used by the Logtalk compiler itself and by the developer tools.</p>
+implemented by Dave Bowen (thanks to Richard O’Keefe for the historical
+bits). This mechanism gives the programmer full control of message printing,
+allowing it to filter, rewrite, or redirect any message. Variations of this
+mechanism can also be found in some Prolog systems including SICStus Prolog,
+SWI-Prolog, and YAP. Based on this mechanism, Logtalk introduces an extension
+that also allows abstracting asking a user for input. Both mechanisms are
+implemented by the <a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">logtalk</span></a> built-in object and
+described in this section. The message printing mechanism is extensively
+used by the Logtalk compiler itself and by the developer tools. The question
+asking mechanism is used in the debugger tool.</p>
 <div class="section" id="printing-messages">
 <span id="id1"></span><h2>Printing messages<a class="headerlink" href="#printing-messages" title="Permalink to this headline">¶</a></h2>
 <p>The main predicate for printing a message is
@@ -279,7 +280,8 @@ by turning off the <a class="reference internal" href="programming.html#flag-rep
 <dt><code class="docutils literal notranslate"><span class="pre">error</span></code> and <code class="docutils literal notranslate"><span class="pre">error(Group)</span></code></dt>
 <dd>error messages (generated e.g. by the compiler)</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">debug,</span> <span class="pre">debug(Group)</span></code></dt>
-<dd>debugging messages</dd>
+<dd>debugging messages (by default, only printed when the
+<a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on)</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">question,</span> <span class="pre">question(Group)</span></code></dt>
 <dd>questions to a user</dd>
 </dl>
@@ -295,13 +297,13 @@ identifying the Logtalk compiler/runtime. This argument was introduced to
 simplify programming-in-the-large by allowing easy filtering of all messages
 from a specific component or library and also avoiding conflicts when two
 components happen to define the same message term (e.g. <code class="docutils literal notranslate"><span class="pre">banner</span></code>). Users
-should choose and use a unique name for their components, which usually is
+should choose and use a unique name for a component, which usually is
 the name of the component itself. For example, all messages from the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool use <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> for the component argument.</p>
-<p>The third argument of <code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> is the message itself represented
-by a term. In this case, the message term is <code class="docutils literal notranslate"><span class="pre">banner</span></code>. Using a
+<p>The third argument of <code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> is the message itself, represented
+by a term. In the above example, the message term is <code class="docutils literal notranslate"><span class="pre">banner</span></code>. Using a
 term to represent a message instead of a string with the message text itself
-have significant advantages. Notably, it simplifies machine-processing and
+have significant advantages. Notably, it simplifies machine-processing, and
 allows using a compound term for easy parameterization of the message text.
 For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::print_message(comment, core, redefining_entity(object, foo)).
@@ -406,6 +408,9 @@ compiler messages:</p>
 <span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
+<p>This example calls the <a class="reference internal" href="../refman/methods/message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a>
+hook predicate, which can be used to define a message line prefix and an
+output stream for printing messages for a given component.</p>
 </div>
 <div class="section" id="asking-questions">
 <span id="printing-questions"></span><h2>Asking questions<a class="headerlink" href="#asking-questions" title="Permalink to this headline">¶</a></h2>
@@ -413,7 +418,7 @@ compiler messages:</p>
 printing mechanism. It provides an abstraction for the common task of
 asking a user a question and reading back its reply. By default, this
 mechanism writes the question, writes a prompt, and reads the answer
-from the current user input and output streams but allows both steps to
+using the current user input and output streams but allows all steps to
 be intercepted, filtered, rewritten, and redirected. Two typical examples
 are using a GUI dialog for asking questions and automatically providing
 answers to specific questions.</p>

@@ -25,12 +25,12 @@ These include banners, logging, debugging, and computation results messages
 but also, in some cases, user interaction messages. However, the authors of
 applications, components, and libraries often cannot anticipate the context
 where their software will be used and thus decide which and when messages
-should be displayed, suppressed, or diverted. Consider the different components
-in a Logtalk application development and deployment. At the bottom level,
-you have the Logtalk compiler and runtime. The compiler writes
+should be displayed, suppressed, or diverted. Consider the different
+components in a Logtalk application development and deployment. At the base
+level, you have the Logtalk compiler and runtime. The compiler writes
 messages related to e.g. compiling and loading files, compiling
 entities, compilation warnings and errors. The runtime may write
-banner messages and handles execution errors that may result in printing
+banner messages or throw execution errors that may result in printing
 human-level messages. The development environment can be console-based
 or you may be using a GUI tool such as PDT. In the latter case, PDT
 needs to intercept the Logtalk compiler and runtime messages to present
@@ -39,10 +39,10 @@ components in a typical application. For example, your own libraries and
 third-party libraries. The libraries may want to print messages on its
 own, e.g. banners, debugging information, or logging information. As you
 assemble all your application components, you want to have the final
-word on which messages are printed, where, an in what conditions.
-Uncontrolled message printing by libraries could potentially
-disturb application flow, expose implementation details, spam the user
-with irrelevant details, or break user interfaces.
+word on which messages are printed, where, and when. Uncontrolled message
+printing by libraries could potentially disturb application flow, expose
+implementation details, spam the user with irrelevant details, or break
+user interfaces.
 
 The solution is to decouple the calls to print a message from the actual
 printing of the output text. The same is true for calls to read user input.
@@ -53,15 +53,16 @@ of user interaction).
 
 Logtalk provides a solution based on the *structured message printing
 mechanism* that was introduced by Quintus Prolog, where it was apparently
-implemented by Dave Bowen (thanks to Richard O'Keefe for the historical bits).
-This mechanism gives the programmer full control of message printing,
-allowing it to filter, rewrite, or redirect any message.
-Variations of this mechanism can also be found in some Prolog systems
-including SICStus Prolog, SWI-Prolog, and YAP. Based on this mechanism,
-Logtalk introduces an extension that also allows abstracting asking a user
-for input. Both mechanisms are implemented by the :ref:`logtalk <apis:logtalk/0>`
-built-in object and described in this section. The message printing mechanism is
-widely used by the Logtalk compiler itself and by the developer tools.
+implemented by Dave Bowen (thanks to Richard O'Keefe for the historical
+bits). This mechanism gives the programmer full control of message printing,
+allowing it to filter, rewrite, or redirect any message. Variations of this
+mechanism can also be found in some Prolog systems including SICStus Prolog,
+SWI-Prolog, and YAP. Based on this mechanism, Logtalk introduces an extension
+that also allows abstracting asking a user for input. Both mechanisms are
+implemented by the :ref:`logtalk <apis:logtalk/0>` built-in object and
+described in this section. The message printing mechanism is extensively
+used by the Logtalk compiler itself and by the developer tools. The question
+asking mechanism is used in the debugger tool.
 
 .. _printing_messages:
 
@@ -106,7 +107,8 @@ list of message kinds is supported by default:
 ``error`` and ``error(Group)``
    error messages (generated e.g. by the compiler)
 ``debug, debug(Group)``
-   debugging messages
+   debugging messages (by default, only printed when the
+   :ref:`debug <flag_debug>` flag is turned on)
 ``question, question(Group)``
    questions to a user
 
@@ -123,14 +125,14 @@ identifying the Logtalk compiler/runtime. This argument was introduced to
 simplify programming-in-the-large by allowing easy filtering of all messages
 from a specific component or library and also avoiding conflicts when two
 components happen to define the same message term (e.g. ``banner``). Users
-should choose and use a unique name for their components, which usually is
+should choose and use a unique name for a component, which usually is
 the name of the component itself. For example, all messages from the
 ``lgtunit`` tool use ``lgtunit`` for the component argument.
 
-The third argument of ``print_message/3`` is the message itself represented
-by a term. In this case, the message term is ``banner``. Using a
+The third argument of ``print_message/3`` is the message itself, represented
+by a term. In the above example, the message term is ``banner``. Using a
 term to represent a message instead of a string with the message text itself
-have significant advantages. Notably, it simplifies machine-processing and
+have significant advantages. Notably, it simplifies machine-processing, and
 allows using a compound term for easy parameterization of the message text.
 For example:
 
@@ -248,6 +250,10 @@ compiler messages:
    
    :- end_category.
 
+This example calls the :ref:`logtalk::message_prefix_stream/4 <methods_message_prefix_stream_4>`
+hook predicate, which can be used to define a message line prefix and an
+output stream for printing messages for a given component.
+
 .. _printing_questions:
 
 Asking questions
@@ -257,7 +263,7 @@ Logtalk *structured question asking* mechanism complements the message
 printing mechanism. It provides an abstraction for the common task of
 asking a user a question and reading back its reply. By default, this
 mechanism writes the question, writes a prompt, and reads the answer
-from the current user input and output streams but allows both steps to
+using the current user input and output streams but allows all steps to
 be intercepted, filtered, rewritten, and redirected. Two typical examples
 are using a GUI dialog for asking questions and automatically providing
 answers to specific questions.
