@@ -26,11 +26,15 @@ In order to use CodeMirror for editing Logtalk source files, copy the file
 directory.
 
 The supporting files are work in progress and were obtained by converting
-the Ace mode using the `ace2cm` converter:
+the Ace mode using the `ace2cm` converter (and replacing `storage` by `meta`
+in the token types in the regular expressions):
 
 	https://github.com/espadrine/ace2cm
 
 The `logtalk.js` is licensed under the MIT license as other CodeMirror mode
 files.
+
+Supported themes must define CSS styles for `meta` and `variable`. Examples
+are `ambiance`, `blackboard`, and `erlang-dark`.
 
 THESE SYNTAX COLORING SUPPORT FILES ARE UNDER DEVELOPMENT.
