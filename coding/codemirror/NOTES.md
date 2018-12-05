@@ -21,20 +21,18 @@ CodeMirror is an embeddable code editor written in JavaScript available from:
 
 	https://codemirror.net/
 
-In order to use CodeMirror for editing Logtalk source files, copy the file
-`logtalk.js` to a `mode/logtalk` sub-directory of your CodeMirror installation
-directory.
+In order to use CodeMirror for editing Logtalk source files, copy (or update
+if already present) the files `logtalk.js` and `index.html` to a `mode/logtalk`
+sub-directory of your CodeMirror installation directory.
 
 The supporting files are work in progress and were obtained by converting
-the Ace mode using the `ace2cm` converter (and replacing `storage` by `meta`
-in the token types in the regular expressions):
+the Logtalk Ace mode using the `ace2cm` converter (and replacing `storage`
+by `meta` in the token types in the regular expressions):
 
 	https://github.com/espadrine/ace2cm
 
-The `logtalk.js` is licensed under the MIT license as other CodeMirror mode
-files.
+The `logtalk.js` and `index.html` files are licensed under the MIT license
+as other CodeMirror mode files.
 
 Supported themes must define CSS styles for `meta` and `variable`. Examples
-are `ambiance`, `blackboard`, and `erlang-dark`.
-
-THESE SYNTAX COLORING SUPPORT FILES ARE UNDER DEVELOPMENT.
+are `ambiance`, `blackboard`, `erlang-dark`, `lesser-dark`, and `mdn-like`.
