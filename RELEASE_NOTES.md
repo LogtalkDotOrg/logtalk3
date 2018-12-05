@@ -85,6 +85,11 @@ for SWI-Prolog.
 * REMOVED: The unused `build_release.sh` script option to pass a custom
 version string.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: CodeMirror mode.
+
 
 3.21.0 - October 30, 2018
 =========================
