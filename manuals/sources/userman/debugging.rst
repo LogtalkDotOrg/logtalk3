@@ -28,19 +28,21 @@ implemented as a Logtalk application. It can be loaded by typing:
 
    | ?- logtalk_load(debugger(loader)).
 
-This tool implements debugging features similar to those found on most
-Prolog systems. There are some differences, however, between the usual
-implementation of Prolog debuggers and the current implementation of the
-Logtalk debugger that you should be aware. First, unlike some Prolog
-debuggers, the Logtalk debugger is not built-in but a regular Logtalk
-application using documented debugging hook predicates. This translates
-to a different, although similar, set of debugging features when compared
-with some of the more sophisticated Prolog debuggers. Second, debugging is
-only possible for entities compiled in debug mode. When compiling an entity
-in debug mode, Logtalk decorates clauses with source information to allow
-tracing of the goal execution. Third, implementation of spy points allows
-the user to specify the execution context for entering the debugger. This
-feature is a consequence of the encapsulation of predicates inside objects.
+It can also be loaded automatically at startup time by using a
+:term:`settings file`. This tool implements debugging features similar to
+those found on most Prolog systems. There are some differences, however,
+between the usual implementation of Prolog debuggers and the current
+implementation of the Logtalk debugger that you should be aware. First,
+unlike some Prolog debuggers, the Logtalk debugger is not built-in but a
+regular Logtalk application using documented debugging hook predicates.
+This translates to a different, although similar, set of debugging features
+when compared with some of the more sophisticated Prolog debuggers. Second,
+debugging is only possible for entities compiled in debug mode. When
+compiling an entity in debug mode, Logtalk decorates clauses with source
+information to allow tracing of the goal execution. Third, implementation
+of spy points allows the user to specify the execution context for entering
+the debugger. This feature is a consequence of the encapsulation of
+predicates inside objects.
 
 .. _programming_debug_mode:
 
@@ -64,14 +66,17 @@ mode, we may instead write:
    | ?- logtalk_load([file1, file2, ...], [debug(on)]).
 
 The :ref:`predicates_logtalk_make_1` built-in predicate can also be used to
-recompile all loaded files (that were loaded in normal mode) in debug mode:
+recompile all loaded files (that were compiled without using explicit values
+for the :ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` compiler
+flags in a ``logtalk_load/2`` call or in a loader file, if used) in debug mode:
 
 .. code-block:: text
 
    | ?- logtalk_make(debug).
 
 With most backend Prolog compilers, the ``{+d}`` top-level shortcut can also
-be used.
+be used. After debugging, the files can be recompiled in normal or optimized
+mode using, respectively, the ``{+n}`` or ``{+o}`` top-level shortcuts.
 
 The :ref:`clean <flag_clean>` compiler flag should be turned on whenever
 the :ref:`debug <flag_debug>` flag is turned on at runtime. This is necessary
