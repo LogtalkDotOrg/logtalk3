@@ -25,9 +25,10 @@ In order to use CodeMirror for editing Logtalk source files, copy (or update
 if already present) the files `logtalk.js` and `index.html` to a `mode/logtalk`
 sub-directory of your CodeMirror installation directory.
 
-The supporting files are work in progress and were obtained by converting
-the Logtalk Ace mode using the `ace2cm` converter (and replacing `storage`
-by `meta` in the token types in the regular expressions):
+The supporting files are work in progress, currently providing syntax highlight
+and code folding. The files were obtained by converting the Logtalk Ace mode
+using the `ace2cm` converter (and replacing `storage` by `meta` in the token
+types in the regular expressions):
 
 	https://github.com/espadrine/ace2cm
 

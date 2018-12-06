@@ -1063,7 +1063,8 @@ CodeMirror.defineMode("logtalk", function(cmCfg, modeCfg) {
       };
     },
     blankLine: function(state) { matchToken('', state); },
-    token: matchToken
+    token: matchToken,
+    fold: 'indent'
   };
 });
 
