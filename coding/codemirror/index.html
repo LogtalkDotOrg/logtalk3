@@ -11,6 +11,7 @@
 <script src="../../addon/edit/matchbrackets.js"></script>
 <script src="../../addon/fold/foldcode.js"></script>
 <script src="../../addon/fold/foldgutter.js"></script>
+<script src="../../addon/fold/comment-fold.js"></script>
 <script src="../../addon/fold/indent-fold.js"></script>
 <script src="logtalk.js"></script>
 <style>.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
@@ -478,7 +479,12 @@ comment
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
-        extraKeys: {"Tab":  "indentAuto", "Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+        extraKeys: {
+          "Tab":  "indentAuto",
+          "Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); },
+          "Ctrl-Y": cm => CodeMirror.commands.foldAll(cm),
+          "Ctrl-I": cm => CodeMirror.commands.unfoldAll(cm)
+        },
         theme: "ambiance",
         foldGutter: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]

@@ -4,7 +4,7 @@
 // Parts from Ace; see <https://raw.githubusercontent.com/ajaxorg/ace/master/LICENSE>
 
 // Generated from the Logtalk Ace mode using ace2cm
-// Author (original Logtalk Ace mode): Paulo Moura
+// Author: Paulo Moura
 
 CodeMirror.defineMode("logtalk", function(cmCfg, modeCfg) {
 
@@ -1064,7 +1064,7 @@ CodeMirror.defineMode("logtalk", function(cmCfg, modeCfg) {
     },
     blankLine: function(state) { matchToken('', state); },
     token: matchToken,
-    fold: 'indent'
+    fold: ['indent', 'comment']
   };
 });
 

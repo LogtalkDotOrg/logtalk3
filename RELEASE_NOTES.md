@@ -88,7 +88,7 @@ version string.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: CodeMirror mode.
+* ADDED: CodeMirror mode supporting syntax highlighting and code folding.
 
 
 3.21.0 - October 30, 2018
