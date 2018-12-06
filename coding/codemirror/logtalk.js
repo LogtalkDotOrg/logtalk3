@@ -481,18 +481,15 @@ CodeMirror.defineMode("logtalk", function(cmCfg, modeCfg) {
                     regex: '\\*/',
                     next: 'pop' },
                   { defaultToken: 'comment.block.logtalk' } ] },
-             { todo: 'fix grouping',
-               token: 
+             { token: 
                 [ 'comment.line.percentage.logtalk',
                   'punctuation.definition.comment.logtalk' ],
                regex: '%.*$\\n?' },
-             { todo: 'fix grouping',
-               token: 
+             { token: 
                 [  'meta.type.opening.logtalk',
                   'punctuation.definition.storage.type.logtalk' ],
                regex: ':-\\s(?:object|protocol|category|module)(?=[(])' },
-             { todo: 'fix grouping',
-               token: 
+             { token: 
                 [  'meta.type.closing.logtalk',
                   'punctuation.definition.storage.type.logtalk' ],
                regex: ':-\\send_(?:object|protocol|category)(?=[.])' },
@@ -500,19 +497,16 @@ CodeMirror.defineMode("logtalk", function(cmCfg, modeCfg) {
                token:  'meta.type.relations.logtalk',
                regex: '\\b(?:complements|extends|i(?:nstantiates|mp(?:orts|lements))|specializes)(?=[(])' },
              { caseInsensitive: false,
-               todo: 'fix grouping',
                token: 
                 [  'meta.modifier.others.logtalk',
                   'punctuation.definition.storage.modifier.logtalk' ],
                regex: ':-\\s(?:e(?:lse|ndif)|built_in|dynamic|synchronized|threaded)(?=[.])' },
              { caseInsensitive: false,
-               todo: 'fix grouping',
                token: 
                 [  'meta.modifier.others.logtalk',
                   'punctuation.definition.storage.modifier.logtalk' ],
                regex: ':-\\s(?:c(?:alls|oinductive)|e(?:lif|n(?:coding|sure_loaded)|xport)|i(?:f|n(?:clude|itialization|fo))|reexport|set_(?:logtalk|prolog)_flag|uses)(?=[(])' },
              { caseInsensitive: false,
-               todo: 'fix grouping',
                token: 
                 [  'meta.modifier.others.logtalk',
                   'punctuation.definition.storage.modifier.logtalk' ],
