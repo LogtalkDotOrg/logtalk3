@@ -1064,6 +1064,10 @@ CodeMirror.defineMode("logtalk", function(cmCfg, modeCfg) {
     },
     blankLine: function(state) { matchToken('', state); },
     token: matchToken,
+    blockCommentStart: "/*",
+    blockCommentEnd: "*/",
+    blockCommentContinue: " * ",
+    lineComment: "%",
     fold: ['indent', 'comment']
   };
 });
