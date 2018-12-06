@@ -23,12 +23,14 @@ CodeMirror is an embeddable code editor written in JavaScript available from:
 
 In order to use CodeMirror for editing Logtalk source files, copy (or update
 if already present) the files `logtalk.js` and `index.html` to a `mode/logtalk`
-sub-directory of your CodeMirror installation directory.
+sub-directory of your CodeMirror installation directory. The `logtalk.js` file
+implements the mode while the `index.html` shows a usage example.
 
-The supporting files are work in progress, currently providing code folding
-and syntax highlighting. The files were obtained by converting the Logtalk
-Ace mode using the `ace2cm` converter (and replacing `storage` by `meta` in
-the token types in the regular expressions):
+The supporting files are work in progress, currently providing code folding,
+code completion (using words in the document), and syntax highlighting. The
+files were obtained by converting the Logtalk Ace mode using the `ace2cm`
+converter (and replacing `storage` by `meta` in the token types in the regular
+expressions):
 
 	https://github.com/espadrine/ace2cm
 
