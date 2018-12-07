@@ -43,7 +43,9 @@ target ``caches``.
 There are also three variants of the ``all`` target: ``debug``,
 ``normal``, and ``optimal``. These targets change the compilation mode
 (by changing the default value of the :ref:`debug <flag_debug>` and
-:ref:`optimize <flag_optimize>` flags) and reload all files affected.
+:ref:`optimize <flag_optimize>` flags) and reload all affected files 
+(i.e. all files loaded without an explicit ``debug/1`` or ``optimize/1``
+compiler option).
 
 When using the ``all`` target, only source files loaded using the
 ``logtalk_load/1-2`` predicates are reloaded. Non-modified files will

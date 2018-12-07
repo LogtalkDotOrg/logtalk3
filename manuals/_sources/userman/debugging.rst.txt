@@ -46,8 +46,8 @@ predicates inside objects.
 
 .. _programming_debug_mode:
 
-Compiling source files and entities in debug mode
--------------------------------------------------
+Compiling source files in debug mode
+------------------------------------
 
 Compilation of source files in debug mode is controlled by the
 :ref:`debug <flag_debug>` compiler flag. The default value for this flag,
@@ -310,9 +310,9 @@ Debugging using spy points
 --------------------------
 
 Tracing a program execution may generate large amounts of debugging
-data. Debugging using spy points allows the user to concentrate its
-attention in specific points of its code. To start a debugging session
-using spy points, write:
+data. Debugging using spy points allows the user to concentrate in
+specific points of the code. To start a debugging session using spy
+points, write:
 
 .. code-block:: text
 
