@@ -116,6 +116,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#expanding-grammar-rules">Expanding grammar rules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hook-objects">Hook objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bypassing-expansions">Bypassing expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#combining-multiple-expansions">Combining multiple expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-prolog-defined-expansions">Using Prolog defined expansions</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
@@ -330,27 +332,6 @@ specific expansion predicate definitions if defined in the adapter file.</p>
 defined within an object or a category are never used in the compilation
 of the object or the category itself.</p>
 </div>
-<p>Sometimes we have multiple hook objects that we need to use in the compilation
-of a source file. The Logtalk library includes support for two basic expansion
-workflows: a <a class="reference external" href="https://logtalk.org/library/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">pipeline</span></a> of hook objects, where the
-expansion results from a hook object are feed to the next hook object in the
-pipeline, and a <a class="reference external" href="https://logtalk.org/library/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">set</span></a> of hook objects, where expansions
-are tried until one of them succeeds. These workflows are implemented as
-parametric objects allowing combining them to implement more sophisticated
-expansion workflows.</p>
-<p>In order to use clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
-predicates defined in plain Prolog, simply specify the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>
-as the hook object when compiling source files. When using backend Prolog
-compilers that support a module system, it can also be specified a module
-containing clauses for the expanding predicates as long as the module
-name doesn’t coincide with an object name. But note that Prolog module
-libraries may provide definitions of the expansion predicates that are
-not compatible with the Logtalk compiler. Specially when setting the
-hook object to <code class="docutils literal notranslate"><span class="pre">user</span></code>, be aware of any Prolog library that is loaded,
-possibly by default or implicitly by the Prolog system, that may be
-contributing definitions of the expansion predicates. It is usually
-safer to define a specific hook object for combining multiple expansions
-in a fully controlled way.</p>
 <span class="target" id="index-0"></span><p id="index-1">When using an hook object to expand the terms of a source file, two
 virtual terms are generated: <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> and <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.
 These terms allow the user to define term-expansions before and after
@@ -378,6 +359,33 @@ yes
 </pre></div>
 </div>
 <p>This also applies to source file terms and source file goals.</p>
+</div>
+<div class="section" id="combining-multiple-expansions">
+<h2>Combining multiple expansions<a class="headerlink" href="#combining-multiple-expansions" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes we have multiple hook objects that we need to use in the compilation
+of a source file. The Logtalk library includes support for two basic expansion
+workflows: a <a class="reference external" href="https://logtalk.org/library/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">pipeline</span></a> of hook objects, where the
+expansion results from a hook object are feed to the next hook object in the
+pipeline, and a <a class="reference external" href="https://logtalk.org/library/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.22.0)"><span class="xref std std-ref">set</span></a> of hook objects, where expansions
+are tried until one of them succeeds. These workflows are implemented as
+parametric objects allowing combining them to implement more sophisticated
+expansion workflows.</p>
+</div>
+<div class="section" id="using-prolog-defined-expansions">
+<h2>Using Prolog defined expansions<a class="headerlink" href="#using-prolog-defined-expansions" title="Permalink to this headline">¶</a></h2>
+<p>In order to use clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
+predicates defined in plain Prolog, simply specify the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>
+as the hook object when compiling source files. When using backend Prolog
+compilers that support a module system, it can also be specified a module
+containing clauses for the expanding predicates as long as the module
+name doesn’t coincide with an object name. But note that Prolog module
+libraries may provide definitions of the expansion predicates that are
+not compatible with the Logtalk compiler. Specially when setting the
+hook object to <code class="docutils literal notranslate"><span class="pre">user</span></code>, be aware of any Prolog library that is loaded,
+possibly by default or implicitly by the Prolog system, that may be
+contributing definitions of the expansion predicates. It is usually
+safer to define a specific hook object for combining multiple expansions
+in a fully controlled way.</p>
 </div>
 </div>
 

@@ -174,29 +174,6 @@ specific expansion predicate definitions if defined in the adapter file.
    defined within an object or a category are never used in the compilation
    of the object or the category itself.
 
-Sometimes we have multiple hook objects that we need to use in the compilation
-of a source file. The Logtalk library includes support for two basic expansion
-workflows: a :ref:`pipeline <apis:hook_pipeline/1>` of hook objects, where the
-expansion results from a hook object are feed to the next hook object in the
-pipeline, and a :ref:`set <apis:hook_set/1>` of hook objects, where expansions
-are tried until one of them succeeds. These workflows are implemented as
-parametric objects allowing combining them to implement more sophisticated
-expansion workflows.
-
-In order to use clauses for the ``term_expansion/2`` and ``goal_expansion/2``
-predicates defined in plain Prolog, simply specify the pseudo-object ``user``
-as the hook object when compiling source files. When using backend Prolog
-compilers that support a module system, it can also be specified a module
-containing clauses for the expanding predicates as long as the module
-name doesn't coincide with an object name. But note that Prolog module
-libraries may provide definitions of the expansion predicates that are
-not compatible with the Logtalk compiler. Specially when setting the
-hook object to ``user``, be aware of any Prolog library that is loaded,
-possibly by default or implicitly by the Prolog system, that may be
-contributing definitions of the expansion predicates. It is usually
-safer to define a specific hook object for combining multiple expansions
-in a fully controlled way.
-
 .. index:: single: begin_of_file
 .. index:: single: end_of_file
 
@@ -231,3 +208,32 @@ construct are not expanded. For example:
    yes
 
 This also applies to source file terms and source file goals.
+
+Combining multiple expansions
+-----------------------------
+
+Sometimes we have multiple hook objects that we need to use in the compilation
+of a source file. The Logtalk library includes support for two basic expansion
+workflows: a :ref:`pipeline <apis:hook_pipeline/1>` of hook objects, where the
+expansion results from a hook object are feed to the next hook object in the
+pipeline, and a :ref:`set <apis:hook_set/1>` of hook objects, where expansions
+are tried until one of them succeeds. These workflows are implemented as
+parametric objects allowing combining them to implement more sophisticated
+expansion workflows.
+
+Using Prolog defined expansions
+-------------------------------
+
+In order to use clauses for the ``term_expansion/2`` and ``goal_expansion/2``
+predicates defined in plain Prolog, simply specify the pseudo-object ``user``
+as the hook object when compiling source files. When using backend Prolog
+compilers that support a module system, it can also be specified a module
+containing clauses for the expanding predicates as long as the module
+name doesn't coincide with an object name. But note that Prolog module
+libraries may provide definitions of the expansion predicates that are
+not compatible with the Logtalk compiler. Specially when setting the
+hook object to ``user``, be aware of any Prolog library that is loaded,
+possibly by default or implicitly by the Prolog system, that may be
+contributing definitions of the expansion predicates. It is usually
+safer to define a specific hook object for combining multiple expansions
+in a fully controlled way.
