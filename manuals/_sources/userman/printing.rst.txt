@@ -310,11 +310,19 @@ is used to check the answers provided by the user. The question is repeated
 until the goal constructed by extending the closure with the user answer
 succeeds.
 
-There is also a hook predicate,
-:ref:`logtalk::question_hook/6 <methods_question_hook_6>`, that can be used
-to intercept questions, similar to the ``logtalk::message_hook/4`` predicate.
+Practical usage examples of this mechanism can be found e.g. in the
+``debugger`` tool where it's used to abstract the user interaction when
+tracing a goal execution in debug mode.
+
+Intercepting questions
+----------------------
+
+Calls to the :ref:`logtalk::ask_question/5 <methods_ask_question_5>`
+predicate can be intercepted by defining clauses for the
+:ref:`logtalk::question_hook/6 <methods_question_hook_6>` multifile
+hook predicate. This predicate can suppress, rewrite, and divert questions.
 For example, assume that we want to automate testing and thus cannot rely
-on the user manually providing answers:
+on someone manually providing answers:
 
 ::
 
@@ -336,7 +344,3 @@ now skip asking the user:
    
    N = 42
    yes
-
-Other usage examples of this mechanism can be found e.g. in the ``debugger``
-tool where it's used to abstract the user interaction when tracing a goal
-execution in debug mode.

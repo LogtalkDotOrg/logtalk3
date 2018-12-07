@@ -115,6 +115,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#message-tokenization">Message tokenization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#intercepting-messages">Intercepting messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#asking-questions">Asking questions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intercepting-questions">Intercepting questions</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
@@ -459,11 +460,18 @@ yes
 is used to check the answers provided by the user. The question is repeated
 until the goal constructed by extending the closure with the user answer
 succeeds.</p>
-<p>There is also a hook predicate,
-<a class="reference internal" href="../refman/methods/question_hook_6.html#methods-question-hook-6"><span class="std std-ref">logtalk::question_hook/6</span></a>, that can be used
-to intercept questions, similar to the <code class="docutils literal notranslate"><span class="pre">logtalk::message_hook/4</span></code> predicate.
+<p>Practical usage examples of this mechanism can be found e.g. in the
+<code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool where it’s used to abstract the user interaction when
+tracing a goal execution in debug mode.</p>
+</div>
+<div class="section" id="intercepting-questions">
+<h2>Intercepting questions<a class="headerlink" href="#intercepting-questions" title="Permalink to this headline">¶</a></h2>
+<p>Calls to the <a class="reference internal" href="../refman/methods/ask_question_5.html#methods-ask-question-5"><span class="std std-ref">logtalk::ask_question/5</span></a>
+predicate can be intercepted by defining clauses for the
+<a class="reference internal" href="../refman/methods/question_hook_6.html#methods-question-hook-6"><span class="std std-ref">logtalk::question_hook/6</span></a> multifile
+hook predicate. This predicate can suppress, rewrite, and divert questions.
 For example, assume that we want to automate testing and thus cannot rely
-on the user manually providing answers:</p>
+on someone manually providing answers:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(hitchhikers_fixed_answers).
 
 <span class="p">    :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>question_hook<span class="o">/</span><span class="m">6</span>).
@@ -482,9 +490,6 @@ N = 42
 yes
 </pre></div>
 </div>
-<p>Other usage examples of this mechanism can be found e.g. in the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
-tool where it’s used to abstract the user interaction when tracing a goal
-execution in debug mode.</p>
 </div>
 </div>
 
