@@ -661,7 +661,6 @@ forall(Generate, Test) :-
 	'$lgt_flatten_to_list'(Conjunction, Exports).
 
 '$lgt_eclipse_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
-	\+ atom(File),
 	logtalk_load_context(entity_type, _),
 	'$lgt_eclipse_list_of_exports'(File, Module, Imports),
 	use_module(File).
