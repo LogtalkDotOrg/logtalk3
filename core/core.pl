@@ -10013,8 +10013,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% safe to add local definition
 		'$lgt_compile_aux_clauses'([(Alias :- Obj::Original)])
 	),
-	% ensure that the uses/2 directive is found when looking for senders of this message
-	'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
+	(	Obj == user ->
+		true
+	;	% ensure that this uses/2 directive is found when looking for
+		% senders of this message
+		'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias)
+	),
 	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, Lines)).
 
 '$lgt_compile_uses_directive_predicate_resource'(_, AliasFunctor, Arity, _, _) :-
@@ -10135,9 +10139,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% safe to add local definition
 		'$lgt_compile_aux_clauses'([(Alias :- ':'(Module, Original))])
 	),
-	% ensure that the this use_module/2 directive is found when looking for callers of this module predicate
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias),
+	(	Module == user ->
+		true
+	;	% ensure that this use_module/2 directive is found when looking
+		% for callers of this module predicate
+		'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias)
+	),
 	assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, Lines)).
 
 '$lgt_compile_use_module_directive_predicate_resource'(_, AliasFunctor, Arity, _, _) :-
