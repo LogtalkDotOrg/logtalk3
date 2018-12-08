@@ -24,6 +24,13 @@ RELEASE NOTES
 3.22.0 - December ??, 2018
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: When compiling `uses/2` and `use_module/2` directives, don't try
+to create a local definition for specified predicates that would clash with
+built-in methods, which cannot be overridden.
+
 Prolog adapter and integration files
 ------------------------------------
 
