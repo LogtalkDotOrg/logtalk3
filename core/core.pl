@@ -9997,10 +9997,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% unify arguments of TOriginal and TAlias
 	Original =.. [_| Args],
 	Alias =.. [_| Args],
-	% allow for runtime use by adding a local definition that calls the remote
-	% definition except when the remote is a built-in predicate in "user" with
-	% no alias being defined or a built-in method that would clash with the
-	% local definition
+	% allow for runtime use by adding a local definition that calls the remote definition
+	% except when the remote is a built-in predicate in "user" with no alias being defined
+	% or a built-in method that would clash with the local definition
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
 	(	Obj == user,
 		OriginalFunctor == AliasFunctor,
@@ -10013,12 +10012,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% safe to add local definition
 		'$lgt_compile_aux_clauses'([(Alias :- Obj::Original)])
 	),
-	(	Obj == user ->
-		true
-	;	% ensure that this uses/2 directive is found when looking for
-		% senders of this message
-		'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias)
-	),
+	% ensure that this uses/2 directive is found when looking for senders of this message
+	'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
 	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, Lines)).
 
 '$lgt_compile_uses_directive_predicate_resource'(_, AliasFunctor, Arity, _, _) :-
@@ -10124,10 +10119,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% unify arguments of TOriginal and TAlias
 	Original =.. [_| Args],
 	Alias =.. [_| Args],
-	% allow for runtime use by adding a local definition that calls the remote
-	% definition except when the remote is a built-in predicate in "user" with
-	% no alias being defined or a built-in method that would clash with the
-	% local definition
+	% allow for runtime use by adding a local definition that calls the remote definition 
+	% except when the remote is a built-in predicate in "user" with no alias being defined
+	% or a built-in method that would clash with the local definition
 	(	Module == user,
 		OriginalFunctor == AliasFunctor,
 		'$lgt_predicate_property'(Original, built_in) ->
@@ -10140,12 +10134,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_aux_clauses'([(Alias :- ':'(Module, Original))])
 	),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	(	Module == user ->
-		true
-	;	% ensure that this use_module/2 directive is found when looking
-		% for callers of this module predicate
-		'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias)
-	),
+	% ensure that this use_module/2 directive is found when looking for callers of this module predicate
+	'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias),
 	assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, Lines)).
 
 '$lgt_compile_use_module_directive_predicate_resource'(_, AliasFunctor, Arity, _, _) :-
