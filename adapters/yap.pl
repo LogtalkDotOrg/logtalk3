@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on December 3, 2018
+%  Last updated on December 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -592,7 +592,8 @@
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	% allow first-argument indexing
-	'$lgt_yap_directive_expansion'(Directive, Expanded).
+	catch('$lgt_yap_directive_expansion'(Directive, Expanded), _, fail).
+
 
 '$lgt_yap_directive_expansion'(style_check(_), []).
 
@@ -626,13 +627,27 @@
 
 '$lgt_yap_directive_expansion'(yap_flag(Flag, Value), (:- set_prolog_flag(Flag, Value))).
 
+'$lgt_yap_directive_expansion'(use_module(File, Imports), (:- use_module(Module, Imports))) :-
+	logtalk_load_context(entity_type, module),
+	% we're compiling a module as an object; assume referenced modules are also compiled as objects
+	!,
+	'$lgt_yap_list_of_exports'(File, Module, _).
+
 '$lgt_yap_directive_expansion'(use_module(File, Imports), [{:- use_module(File, Imports)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
+	% object or category using a Prolog module
 	'$lgt_yap_list_of_exports'(File, Module, _),
 	use_module(File, Imports).
 
+'$lgt_yap_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
+	logtalk_load_context(entity_type, module),
+	% we're compiling a module as an object; assume referenced modules are also compiled as objects
+	!,
+	'$lgt_yap_list_of_exports'(File, Module, Imports).
+
 '$lgt_yap_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
+	% object or category using a Prolog module
 	'$lgt_yap_list_of_exports'(File, Module, Imports),
 	use_module(File).
 
@@ -675,9 +690,11 @@
 		absolute_file_name(File, Path, [extensions(['.lgt','.logtalk']), access(read), file_errors(fail)])
 	),
 	open(Path, read, In),
-	(	peek_char(In, #) ->		% deal with #! script; if not present
-		skip(In, 10)			% assume that the module declaration
-	;	true					% is the first directive on the file
+	% deal with #! script; if not present assume that the
+	% module declaration is the first directive on the file
+	(	peek_char(In, #) ->
+		skip(In, 10)
+	;	true
 	),
 	setup_call_cleanup(true, '$lgt_yap_read_module_directive'(In, Module, Exports), close(In)),
 	(	var(Module) ->

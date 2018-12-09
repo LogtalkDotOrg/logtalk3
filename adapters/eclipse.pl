@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on December 3, 2018
+%  Last updated on December 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -618,7 +618,7 @@ forall(Generate, Test) :-
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	% allow first-argument indexing
-	'$lgt_eclipse_directive_expansion'(Directive, Expanded).
+	catch('$lgt_eclipse_directive_expansion'(Directive, Expanded), _, fail).
 
 
 '$lgt_eclipse_directive_expansion'(mode(_), []).
@@ -641,15 +641,30 @@ forall(Generate, Test) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
 
+'$lgt_eclipse_directive_expansion'(import(from(Conjunction, Module)), (:- use_module(Module, Imports))) :-
+	logtalk_load_context(entity_type, module),
+	% we're compiling a module as an object; assume referenced modules are also compiled as objects
+	!,
+	'$lgt_flatten_to_list'(Conjunction, Imports).
+
 '$lgt_eclipse_directive_expansion'(import(from(Conjunction, Module)), [{:- import(from(Conjunction, Module))}, (:- use_module(Module, Imports))]) :-
+	logtalk_load_context(entity_type, _),
+	% object or category using a Prolog module
 	'$lgt_flatten_to_list'(Conjunction, Imports),
 	import(from(Conjunction, Module)).
 
 '$lgt_eclipse_directive_expansion'(local(Functor/Arity), (:- private(Functor/Arity))).
 '$lgt_eclipse_directive_expansion'(local(op(Priority, Spec, Operators)), (:- op(Priority, Spec, Operators))).
 
+'$lgt_eclipse_directive_expansion'(lib(Library), (:- use_module(Module, Exports))) :-
+	logtalk_load_context(entity_type, module),
+	% we're compiling a module as an object; assume referenced modules are also compiled as objects
+	!,
+	'$lgt_eclipse_list_of_exports'(library(Library), Module, Exports).
+
 '$lgt_eclipse_directive_expansion'(lib(Library), [{:- lib(Library)}, (:- use_module(Module, Exports))]) :-
 	logtalk_load_context(entity_type, _),
+	% object or category using a Prolog module
 	'$lgt_eclipse_list_of_exports'(library(Library), Module, Exports),
 	lib(Library).
 
@@ -659,6 +674,12 @@ forall(Generate, Test) :-
 
 '$lgt_eclipse_directive_expansion'(reexport(from(Conjunction, Module)), (:- reexport(Module, Exports))) :-
 	'$lgt_flatten_to_list'(Conjunction, Exports).
+
+'$lgt_eclipse_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
+	logtalk_load_context(entity_type, module),
+	% we're compiling a module as an object; assume referenced modules are also compiled as objects
+	!,
+	'$lgt_eclipse_list_of_exports'(File, Module, Imports).
 
 '$lgt_eclipse_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on December 3, 2018
+%  Last updated on December 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -522,7 +522,8 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 	'$lgt_xsb_conjunction_to_list'(PIs1, PIs2).
 
 '$lgt_xsb_directive_expansion'(use_module(Module, Imports), [{:- use_module(Module, Imports)}, (:- use_module(Module, Imports))]) :-
-	logtalk_load_context(entity_type, _),
+	logtalk_load_context(entity_type, Type),
+	Type \== module,
 	use_module(Module, Imports).
 
 '$lgt_xsb_directive_expansion'(local(PIs1), (:- private(PIs2))) :-
