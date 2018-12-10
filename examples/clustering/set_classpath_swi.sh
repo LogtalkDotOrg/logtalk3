@@ -26,7 +26,7 @@
 eval $(swipl --dump-runtime-variables)
 CLASSPATH="$PLBASE/lib/jpl.jar"
 
-for jar in jars/*; do
+for jar in jars/*.jar; do
 	CLASSPATH="$PWD/$jar":$CLASSPATH
 done
 

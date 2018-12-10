@@ -24,7 +24,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2018/12/10,
-		comment is 'Document to text conversion example using the Apache tika Java library.'
+		comment is 'Document to text conversion example using the Apache Tika Java library.'
 	]).
 
 	:- public(convert/2).
