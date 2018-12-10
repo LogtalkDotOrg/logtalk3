@@ -83,6 +83,9 @@ Examples
 * ADDED: New set of examples, `design_patters`, with sample implementations
 of 28 object-oriented behavioral, creational, and structural design patters.
 
+* ADDED: Simple example, `document_converter`, of using a Java library for
+converting documents to text.
+
 Installers and installation scripts
 -----------------------------------
 
