@@ -17,20 +17,4 @@ limitations under the License.
 ________________________________________________________________________
 
 
-% start by setting the Java CLASSPATH environment variable (to use YAP
-% instead of SWI-Prolog, source the `set_classpath_yap.sh` file instead):
-
-$ cd "$LOGTALKUSER/examples/clustering"
-$ . set_classpath_swi.sh
-
-
-% second, start Logtalk and load the example:
-
-| ?- logtalk_load(clustering(loader)).
-...
-
-
-% create 4 clusters from a list of float values:
-
-| ?- clustering::clusters([1.0,1.5,1.8,3.5,3.6,4.0,4.2], 4, 10000, Clusters).
-Clusters = [[3.5, 3.6], [1.5, 1.8], [4.0, 4.2], [1.0]].
+Download the required JAR files into this folder.
