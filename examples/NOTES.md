@@ -152,8 +152,12 @@ Follows a short description of each included example (in alphabetical order):
 	examples of problems and solutions for the "diamond problem"
 	(multi-inheritance conflicts and ambiguities)
 
+- `document_converter`  
+	example of using a Java library for converting documents to text
+
 - `design_patterns`
-	sample implementation of common object-oriented design patterns
+	sample implementation of common object-oriented behavioral,
+	creational, and structural design patterns
 
 - `dynpred`  
 	example of using the built-in database handling methods to
