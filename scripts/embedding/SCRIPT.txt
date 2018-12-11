@@ -20,7 +20,7 @@ ________________________________________________________________________
 % create a GNU Prolog executable that includes the Logtalk compiler/runtime:
 
 $ cd $LOGTALKHOME/scripts/embedding/gprolog/
-$ ./gprolog_embed_logtalk.sh -c
+$ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect
 $ cd ~/collect
 $ ./logtalk
 
@@ -29,7 +29,7 @@ $ ./logtalk
 % and the "searching" example:
 
 $ cd $LOGTALKHOME/scripts/embedding/gprolog/
-$ ./gprolog_embed_logtalk.sh -c -l ~/logtalk/examples/searching/loader.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -p ~/logtalk/paths/paths.pl
+$ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect -l ~/logtalk/examples/searching/loader.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -p ~/logtalk/paths/paths.pl
 $ cd ~/collect
 $ ./logtalk
 ...
@@ -39,7 +39,7 @@ $ ./logtalk
 % create a SWI-Prolog saved state from the "spider" text adventure example:
 
 $ cd $LOGTALKHOME/scripts/embedding/swipl/
-$ ./swipl_logtalk_qlf.sh -c -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ ./swipl_logtalk_qlf.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
 $ cd ~/collect
 $ swipl -g "[logtalk, application], qsave_program(spider, [goal('::'(spider,start)), stand_alone(true)])" -t "halt"
 $ ./spider
@@ -48,7 +48,7 @@ $ ./spider
 % create a SICStus Prolog saved state from the "sleepy" text adventure example:
 
 $ cd $LOGTALKHOME/scripts/embedding/sicstus/
-$ ./sicstus_logtalk_po.sh -c -l ~/logtalk/examples/adventure/sleepy.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ ./sicstus_logtalk_po.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/sleepy.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
 $ cd ~/collect
 $ sicstus --goal "load_files(['logtalk.po','application.po']), save_program(sleepy, '::'(sleepy,start)), halt."
 $ chmod a+x sleepy.sav
@@ -58,7 +58,7 @@ $ ./sleepy.sav
 % create a YAP saved state from the "wumpus" text adventure example:
 
 $ cd $LOGTALKHOME/scripts/embedding/yap/
-$ ./yap_logtalk_pl.sh -c -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ ./yap_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
 $ cd ~/collect
 $ yap -g "consult([logtalk,application]), save_program(wumpus, '::'(wumpus,main)), halt"
 $ chmod a+x wumpus

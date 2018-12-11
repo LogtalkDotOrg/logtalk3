@@ -93,12 +93,12 @@ else
 fi
 
 # default values
-directory="$HOME/collect"
+directory="$(pwd -P)"
 paths="$LOGTALKHOME/paths/paths_core.pl"
 compile="false"
 
 print_version() {
-	echo "$(basename "$0") 0.10"
+	echo "$(basename "$0") 0.11"
 	exit 0
 }
 
@@ -116,7 +116,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
-	echo "  -d directory for intermediate and final results (default is $directory)"
+	echo "  -d directory for the generated .jip files (default is the current directory)"
 	echo "  -p library paths file (default is $paths)"
 	echo "  -s settings file"
 	echo "  -l loader file for the application"
@@ -175,7 +175,14 @@ else
 fi
 
 mkdir -p "$directory"
-cd "$directory" || exit 1
+
+temporary=$(mktemp -d)
+if [[ ! "$temporary" || ! -d "$temporary" ]]; then
+  echo "Could not create temporary directory!"
+  exit 1
+fi
+
+cd "$temporary" || exit 1
 
 operating_system=$(uname -s)
 
@@ -192,19 +199,19 @@ fi
 cp "$LOGTALKHOME/adapters/ji.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
-jiplgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt"
+jiplgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')]),halt"
 
 if [ "$compile" != "false" ] ; then
-	jiplgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$directory')]),halt"
+	jiplgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt"
 else
-	cp "$paths" "$directory/paths_lgt.pl"
+	cp "$paths" "$temporary/paths_lgt.pl"
 fi
 
 if [ "$settings" != "" ] ; then
 	if [ "$compile" != "false" ] ; then
-		jiplgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$directory')]),halt"
+		jiplgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
 	else
-		jiplgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$directory')]),halt"
+		jiplgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt"
 	fi
 	cat \
 		ji.pl \
@@ -234,16 +241,19 @@ fi
 
 java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),compile('logtalk.pl'),halt"
 
-rm ./*.pl
-rm ./*_lgt.jip
+mv logtalk.jip "$directory"
 
 if [ "$loader" != "" ] ; then
-	mkdir -p "$directory/application"
-	cd "$directory/application" || exit 1
-	java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('../logtalk.jip'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt"
-	cat $(ls -rt "$directory/application"/*.pl) > application.pl
-	java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('../logtalk.jip'),compile('application.pl'),halt"
-	mv application.jip ..
-	rm ./*.pl
-	rm ./*_lgt.jip
+	mkdir -p "$temporary/application"
+	cd "$temporary/application" || exit 1
+	java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('$directory/logtalk.jip'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
+	cat $(ls -rt "$temporary/application"/*.pl) > application.pl
+	java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('$directory/logtalk.jip'),compile('application.pl'),halt"
+	mv application.jip "$directory"
 fi
+
+function cleanup {
+	rm -rf "$temporary"
+}
+# register cleanup function to be called on EXIT signal
+trap cleanup EXIT

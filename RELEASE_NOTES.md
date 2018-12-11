@@ -89,6 +89,9 @@ converting documents to text.
 Installers and installation scripts
 -----------------------------------
 
+* IMPROVED: The sample embedding scripts to create and use a temporary
+directory for the intermediate files.
+
 * UPDATED: The `build_release.sh` script to also build the experimental pack
 for SWI-Prolog.
 
