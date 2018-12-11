@@ -124,7 +124,7 @@ usage_help()
 	echo
 }
 
-while getopts "cd:p:h:l:s:vh" option
+while getopts "cd:p:l:s:vh" option
 do
 	case $option in
 		c) compile="true";;
