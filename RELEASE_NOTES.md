@@ -92,6 +92,10 @@ Installers and installation scripts
 * IMPROVED: The sample embedding scripts to create and use a temporary
 directory for the intermediate files.
 
+* FIXED: A file order bug in the sample embedding script for GNU Prolog,
+`gprolog_embed_logtalk.sh`, which caused multiple values to be returned
+for some flags.
+
 * UPDATED: The `build_release.sh` script to also build the experimental pack
 for SWI-Prolog.
 

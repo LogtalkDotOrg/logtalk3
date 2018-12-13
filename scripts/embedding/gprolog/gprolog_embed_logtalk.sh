@@ -5,7 +5,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on December 11, 2018
+##   Last updated on December 13, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -228,7 +228,7 @@ else
 	touch application.pl
 fi
 
-gplc -o "$directory"/logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl $(ls -rt application/*.pl 2>/dev/null) core.pl settings*_lgt.pl paths_*.pl
+gplc -o "$directory"/logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl $(ls -rt application/*.pl 2>/dev/null) settings*_lgt.pl core.pl paths_*.pl
 
 function cleanup {
 	rm -rf "$temporary"
