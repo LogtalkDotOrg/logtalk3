@@ -587,6 +587,11 @@ code. Some simple examples of using these meta-messages:
    >>> - marvin
    yes
 
+The ``>>>`` prefix is the default message prefix for ``debug`` messages.
+It can be redefined using the
+:ref:`logtalk::message_prefix_stream/4 <methods_message_prefix_stream_4>`
+hook predicate.
+
 Ports profiling
 ---------------
 
