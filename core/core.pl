@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 22, 0, b03)).
+'$lgt_version_data'(logtalk(3, 22, 0, b04)).
 
 
 
@@ -23428,14 +23428,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 % cache default and read-only compiler flags to improve the performance
 % of the compiler by reducing the potential number of flag levels that
 % need to be checked for finding the value of a flag in a given context
+%
+% although there should be no clauses for the '$lgt_current_flag_'/2
+% predicate when this predicte is called at runtime initialization, a
+% wrong file order when embedding Logtalk or a Logtalk application can
+% falsify this assumption; therefore, we test for a flag definition
+% before caching its default value
 
 '$lgt_cache_compiler_flags' :-
 	'$lgt_default_flag'(Name, Value),
+	\+ '$lgt_current_flag_'(Name, _),
 	assertz('$lgt_current_flag_'(Name, Value)),
 	fail.
 
 '$lgt_cache_compiler_flags' :-
 	'$lgt_prolog_feature'(Name, Value),
+	\+ '$lgt_current_flag_'(Name, _),
 	assertz('$lgt_current_flag_'(Name, Value)),
 	fail.
 

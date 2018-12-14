@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Caching of default flags at runtime initialization is now more
+robust to file assembling order issues when embedding Logtalk or a Logtalk
+application.
+
 * FIXED: When compiling `uses/2` and `use_module/2` directives, don't try
 to create a local definition for specified predicates that would clash with
 built-in methods, which cannot be overridden.
@@ -93,7 +97,7 @@ Installers and installation scripts
 directory for the intermediate files.
 
 * FIXED: A file order bug in the sample embedding script for GNU Prolog,
-`gprolog_embed_logtalk.sh`, which caused multiple values to be returned
+`gprolog_embed_logtalk.sh`, could result in multiple values being returned
 for some flags.
 
 * UPDATED: The `build_release.sh` script to also build the experimental pack
