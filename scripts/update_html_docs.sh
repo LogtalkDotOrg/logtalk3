@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, and
 ##   contributions documentation
 ## 
-##   Last updated on October 8, 2018
+##   Last updated on December 15, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -142,7 +142,9 @@ make linkcheck
 cp -R _build/html/* ../
 make clean
 mv conf.py _conf.py
+mv browserconfig.xml browserconfig.xml.saved
 rm *.xml
+mv browserconfig.xml.saved browserconfig.xml
 rm *.rst
 
 exit 0
