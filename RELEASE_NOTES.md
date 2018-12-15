@@ -69,6 +69,9 @@ built-in methods.
 
 * FIXED: Handbook link to the generated index from the sub-sections.
 
+* FIXED: Workaround lack of character escaping in Sphinx preventing correct
+display of parametric entity names with two or more arguments in the index.
+
 Library
 -------
 

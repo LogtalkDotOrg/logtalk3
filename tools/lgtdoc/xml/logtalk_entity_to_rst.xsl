@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on October 16, 2018
+%  Last updated on December 15, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -63,7 +63,12 @@
 
 
 <xsl:template match="/">
-	<xsl:text>.. index:: </xsl:text><xsl:value-of select="logtalk_entity/entity/name" />
+	<xsl:text>.. index:: </xsl:text>
+	<xsl:call-template name="replace-string">
+		<xsl:with-param name="text" select="logtalk_entity/entity/name" />
+		<xsl:with-param name="replace" select="','" />
+		<xsl:with-param name="with" select="'&#xff0c;'" />
+	</xsl:call-template>
 	<xsl:value-of select="$nl" />
 	<xsl:text>.. _</xsl:text><xsl:value-of select="logtalk_entity/entity/functor" /><xsl:text>:</xsl:text>
 	<xsl:value-of select="$nl2" />
@@ -421,6 +426,27 @@
 		</xsl:for-each>
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
+</xsl:template>
+
+
+<xsl:template name="replace-string">
+	<xsl:param name="text"/>
+	<xsl:param name="replace"/>
+	<xsl:param name="with"/>
+	<xsl:choose>
+		<xsl:when test="contains($text,$replace)">
+			<xsl:value-of select="substring-before($text,$replace)"/>
+			<xsl:value-of select="$with"/>
+			<xsl:call-template name="replace-string">
+				<xsl:with-param name="text" select="substring-after($text,$replace)"/>
+				<xsl:with-param name="replace" select="$replace"/>
+				<xsl:with-param name="with" select="$with"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="$text"/>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 
