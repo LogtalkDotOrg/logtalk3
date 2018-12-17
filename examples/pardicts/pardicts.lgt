@@ -21,25 +21,31 @@
 :- object(obj(_Dict_)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2018/09/03,
+		date is 2018/12/17,
 		comment is 'Simple object for testing passing a dict as the object parameter.'
 	]).
 
 	:- public(sum/1).
 	sum(Sum) :-
-		Sum is _Dict_.m + _Dict_.n.
+		get_dict(m, _Dict_, M),
+		get_dict(n, _Dict_, N),
+		Sum is M + N.
 
 	:- public(product/1).
 	product(Product) :-
-		Product is _Dict_.m * _Dict_.n.
+		get_dict(m, _Dict_, M),
+		get_dict(n, _Dict_, N),
+		Product is M * N.
 
 	:- public(double/0).
 	double :-
-		M2 is _Dict_.m * 2,
+		get_dict(m, _Dict_, M),
+		M2 is M * 2,
 		b_set_dict(m, _Dict_, M2),
-		N2 is _Dict_.n * 2,
+		get_dict(n, _Dict_, N),
+		N2 is N * 2,
 		b_set_dict(n, _Dict_, N2).
 
 :- end_object.

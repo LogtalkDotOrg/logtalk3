@@ -93,6 +93,10 @@ of 28 object-oriented behavioral, creational, and structural design patters.
 * ADDED: Simple example, `document_converter`, of using a Java library for
 converting documents to text.
 
+* UPDATED: The `pardicts` example to avoid instantiation errors when compiled
+in optimal mode due to SWI-Prolog different semantics for clauses that contain
+`./2` terms when the clauses are asserted versus compiled from a source file. 
+
 Installers and installation scripts
 -----------------------------------
 

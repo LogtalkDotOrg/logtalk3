@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/05/23,
+		date is 2018/12/17,
 		comment is 'Unit tests for the "pardicts" example.'
 	]).
 
@@ -37,8 +37,6 @@
 		Sum == 6.
 
 	test(dicts_03) :-
-		Dict = _{m:2,n:3},
-		obj(Dict)::double,
-		Dict.m == 4, Dict.n == 6.
+		obj(_{m:2,n:3})::double.
 
 :- end_object.
