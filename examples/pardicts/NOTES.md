@@ -24,3 +24,12 @@ This example requires using SWI-Prolog 7.x as the backend Prolog compiler.
 It illustrates using a SWI-Prolog native dictionary term for representing
 a parametric object parameters. This is accomplished simply by passing a
 dict as the single object parameter.
+
+Know issue
+----------
+
+Don't use dot notation, `./2`, when working with dicts within objects and
+categories. SWI-Prolog provides different semantics for compiled versus
+asserted clauses that contain `./2` terms and that can clash with Logtalk
+dynamic binding caching and inlining optimizations (usually resulting
+in instantiation errors).
