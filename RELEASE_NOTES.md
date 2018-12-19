@@ -24,6 +24,10 @@ RELEASE NOTES
 3.23.0 - January ??, 2019
 =========================
 
+Examples
+--------
+
+* ADDED: Simple example, `serialization`, of serializing objects to a file.
 
 
 3.22.0 - December 18, 2018
