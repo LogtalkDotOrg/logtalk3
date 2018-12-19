@@ -77,7 +77,7 @@ A simple example, using the Logtalk runtime is:
 
    | ?- logtalk::print_message(banner, core, banner).
 
-   Logtalk 3.22.0
+   Logtalk 3.23.0
    Copyright (c) 1998-2018 Paulo Moura
    yes
 
