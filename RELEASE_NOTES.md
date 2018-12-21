@@ -24,6 +24,12 @@ RELEASE NOTES
 3.23.0 - January ??, 2019
 =========================
 
+Tools
+-----
+
+* ADDED: Sample Sphinx configuration file, `conf-sample.py`, to the `lgtdoc`
+tool.
+
 Examples
 --------
 

@@ -210,7 +210,9 @@ Brief description of each file in this folder:
 	of the available optional parameters (type `cscript lgt2rst.js help` or
 	`lgt2rst.sh -h`; depending on your Logtalk installation, you may simply
 	need to type `lgt2rst` in order to run the script). The generated files
-	are expected to be used with Sphinx.
+	are expected to be used with Sphinx (which also requires a `conf.py`
+	configuration file; you can rename and edit the provided `conf-sample.py`
+	file as a starting point; see the Sphinx documentation for more details).
 
 - `lgt2txt.sh` and `lgt2txt.js`  
 	Sample scripts to batch convert XML files to text files.
