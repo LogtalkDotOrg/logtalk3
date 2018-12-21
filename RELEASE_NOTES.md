@@ -24,6 +24,12 @@ RELEASE NOTES
 3.23.0 - January ??, 2019
 =========================
 
+Documentation
+-------------
+
+* FIXED: HTML favicon bug that resulted in a non-valid ePub version of the
+Handbook.
+
 Tools
 -----
 
