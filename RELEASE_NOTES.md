@@ -24,6 +24,12 @@ RELEASE NOTES
 3.23.0 - January ??, 2019
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Detection of missing meta-predicate directives when compiling
+closures.
+
 Documentation
 -------------
 

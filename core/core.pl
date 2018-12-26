@@ -11308,9 +11308,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 	(	var(Closure) ->
 		% we're compiling a runtime meta-call
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Closure),
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, ExCtx)
 	;	'$lgt_extend_closure'(Closure, ExtraArgs, Goal),
 		\+ (functor(Goal, call, Arity), Arity >= 2) ->
@@ -13221,9 +13222,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 2,
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, Mode, _, _),
-	'$lgt_check_closure'(Closure, MetaArg, Ctx),
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaArg),
+	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
 % call to a meta-predicate from a user-defined meta-predicate;
@@ -19525,52 +19524,54 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_check_closure'(@nonvar, @compilation_context)
 %
-% checks that a closure meta-argument is valid and return the meta-argument
+% checks that a closure meta-argument is valid
 
-'$lgt_check_closure'(Closure, Closure, _) :-
+'$lgt_check_closure'(Closure, _) :-
 	var(Closure),
 	!.
 
-'$lgt_check_closure'(Free/Goal, Goal, Ctx) :-
+'$lgt_check_closure'(Free/Goal, Ctx) :-
 	!,
-	'$lgt_check_lambda_expression'(Free/Goal, Ctx).
+	'$lgt_check_lambda_expression'(Free/Goal, Ctx),
+	'$lgt_check_closure'(Goal, Ctx).
 
-'$lgt_check_closure'(Parameters>>Goal, Goal, Ctx) :-
+'$lgt_check_closure'(Parameters>>Goal, Ctx) :-
 	!,
-	'$lgt_check_lambda_expression'(Parameters>>Goal, Ctx).
+	'$lgt_check_lambda_expression'(Parameters>>Goal, Ctx),
+	'$lgt_check_closure'(Goal, Ctx).
 
-'$lgt_check_closure'({Closure}, Closure, _) :-
+'$lgt_check_closure'({Closure}, _) :-
 	!,
 	'$lgt_check'(var_or_callable, Closure).
 
-'$lgt_check_closure'(Object::Closure, Closure, _) :-
+'$lgt_check_closure'(Object::Closure, _) :-
 	!,
 	'$lgt_check'(var_or_object_identifier, Object),
 	'$lgt_check'(var_or_callable, Closure).
 
-'$lgt_check_closure'(::Closure, Closure, _) :-
+'$lgt_check_closure'(::Closure, _) :-
 	!,
 	'$lgt_check'(var_or_callable, Closure).
 
-'$lgt_check_closure'(^^Closure, Closure, _) :-
+'$lgt_check_closure'(^^Closure, _) :-
 	!,
 	'$lgt_check'(var_or_callable, Closure).
 
-'$lgt_check_closure'(Object<<Closure, Closure, _) :-
+'$lgt_check_closure'(Object<<Closure, _) :-
 	!,
 	'$lgt_check'(var_or_object_identifier, Object),
 	'$lgt_check'(var_or_callable, Closure).
 
-'$lgt_check_closure'(':'(Module, Closure), Closure, _) :-
+'$lgt_check_closure'(':'(Module, Closure), _) :-
 	!,
 	'$lgt_check'(var_or_module_identifier, Module),
 	'$lgt_check'(var_or_callable, Closure).
 
-'$lgt_check_closure'(Closure, _, _) :-
+'$lgt_check_closure'(Closure, _) :-
 	\+ callable(Closure),
 	throw(type_error(callable, Closure)).
 
-'$lgt_check_closure'(Closure, Closure, _).
+'$lgt_check_closure'(_, _).
 
 
 
