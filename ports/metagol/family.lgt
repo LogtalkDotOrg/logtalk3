@@ -73,6 +73,6 @@ learn :-
 	Neg = [
 		grandparent(amy,amelia)
 	],
-	::learn(Pos,Neg).
+	::learn(Pos, Neg).
 
 :- end_object.

@@ -89,7 +89,7 @@ learn :-
 		great_grandparent(steve,sally)
 	],
 	
-	::learn(Pos3,[],Prog3),
+	::learn(Pos3, [], Prog3),
 	::pprint(Prog3).
 
 :- end_object.

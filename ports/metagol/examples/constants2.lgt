@@ -49,8 +49,13 @@ metarule([P,Q,A],([P,A,B]:-[[Q,A],[Q,B]])).
 metarule([P,Q,B],([P,A,B]:-[[Q,A],[Q,B]])).
 
 %% background knowledge
-num(X):-
-  between(0,inf,X).
+:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
+	num(X) :-
+		between(0, inf, X).
+:- else.
+	num(X) :-
+		between(0, 1000000, X).
+:- endif.
 
 :- public(learn/0).
 learn :-

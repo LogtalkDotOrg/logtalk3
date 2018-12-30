@@ -54,9 +54,9 @@ my_succ(A,B) :- integer(A),(ground(B)->integer(B);true), succ(A,B).
 my_length(A,B) :- A = [_|_], length(A,B).
 
 map([],[],_F).
-map([A|As],[B|Bs],F):-
-  call(F,A,B),
-  map(As,Bs,F).
+map([A|As],[B|Bs],F) :-
+	call(F,A,B),
+	map(As,Bs,F).
 
 %% metarules
 metarule([P,Q,F],([P,A,B]:-[[Q,A,B,F]])).
@@ -66,6 +66,6 @@ metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 learn :-
 	A = [[a],[a,a],[a,a,a],[a,a,a,a]],
 	B = [2,4,6,8],
-	::learn([f(A,B)],[]).
+	::learn([f(A,B)], []).
 
 :- end_object.

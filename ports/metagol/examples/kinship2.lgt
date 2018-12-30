@@ -67,6 +67,6 @@ learn :-
 		ancestor(george_sixth,prince_harry),
 		ancestor(queen_mother,prince_william)
 	],
-	::learn(Pos,[]).
+	::learn(Pos, []).
 
 :- end_object.

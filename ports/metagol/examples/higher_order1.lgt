@@ -61,7 +61,7 @@ metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
 :- public(learn/0).
 learn :-
-	::learn([f([1,2,3],[2,3,4])],[],Prog),
+	::learn([f([1,2,3],[2,3,4])],[], Prog),
 	::pprint(Prog).
 
 :- end_object.

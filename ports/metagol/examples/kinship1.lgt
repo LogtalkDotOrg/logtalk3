@@ -76,6 +76,9 @@ learn1 :-
 learn2 :-
 	Pos = [grandparent(ann,amelia)],
 	Neg = [grandparent(ann,amelia)],
-	(::learn(Pos,Neg) -> false; write('failed to learn a theory'), nl).
+	(	::learn(Pos, Neg) ->
+		false
+	;	write('failed to learn a theory'), nl
+	).
 
 :- end_object.

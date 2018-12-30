@@ -64,21 +64,21 @@ metarule([P,Q,X],([P,A,B]:-[[Q,A,B,X]])).
 
 :- public(learn/0).
 learn :-
-    Pos = [
-        e(east1),
-        e(east2),
-        e(east3),
-        e(east4),
-        e(east5)
-    ],
-    Neg = [
-        e(west6),
-        e(west7),
-        e(west8),
-        e(west9),
-        e(west10)
-    ],
-    ::learn(Pos,Neg).
+	Pos = [
+		e(east1),
+		e(east2),
+		e(east3),
+		e(east4),
+		e(east5)
+	],
+	Neg = [
+		e(west6),
+		e(west7),
+		e(west8),
+		e(west9),
+		e(west10)
+	],
+	::learn(Pos, Neg).
 
 % type definitions
 car(car_11).

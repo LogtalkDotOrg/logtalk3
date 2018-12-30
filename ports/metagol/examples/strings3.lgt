@@ -63,7 +63,7 @@ next_empty([_]/_).
 func_test(Atom,PS,G) :-
 	Atom = [P,In/B,_/[]],
 	Actual = [P,In/Z,_/[]],
-	\+ (::prove_deduce([Actual],PS,G),Z \= B).
+	\+ (::prove_deduce([Actual],PS,G), Z \= B).
 
 :- public(learn/0).
 learn :-
@@ -72,6 +72,6 @@ learn :-
 		f(['a','a','c']/['a','a','c','d'],_/[]),
 		f(['a','c']/['a','c','d'],_/[])
 	],
-	::learn(Pos,[]).
+	::learn(Pos, []).
 
 :- end_object.

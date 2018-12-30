@@ -51,6 +51,6 @@ p(patrick,amelia).
 
 :- public(learn/0).
 learn :-
-    ::learn([f(andy,laura),f(andy,amelia)],[]).
+	::learn([f(andy,laura),f(andy,amelia)],[]).
 
 :- end_object.

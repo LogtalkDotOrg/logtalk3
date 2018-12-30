@@ -81,7 +81,7 @@ learn :-
 		great_grandparent(steve,sally)
 	]/[],
 	
-	::learn_seq([T1,T2,T3],Prog),
+	::learn_seq([T1,T2,T3], Prog),
 	::pprint(Prog).
 
 :- end_object.

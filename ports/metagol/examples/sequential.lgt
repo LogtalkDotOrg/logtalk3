@@ -62,26 +62,26 @@ father(spongebob,sally).
 %% learn parent, then grandparent, then great-grandparent
 :- public(learn/0).
 learn :-
-  T1 = [
-    parent(ann,andy),
-    parent(steve,andy),
-    parent(ann,amy),
-    parent(ann,andy)
-  ]/[],
-
-  T2 = [
-    grandparent(steve,amelia),
-    grandparent(ann,amelia),
-    grandparent(linda,amelia),
-    grandparent(ann,spongebob)
-  ]/[],
-
-  T3 = [
-    great_grandparent(ann,sally),
-    great_grandparent(steve,sally)
-  ]/[],
-
-  ::learn_seq([T1,T2,T3],Prog),
-  ::pprint(Prog).
+	T1 = [
+		parent(ann,andy),
+		parent(steve,andy),
+		parent(ann,amy),
+		parent(ann,andy)
+	]/[],
+	
+	T2 = [
+		grandparent(steve,amelia),
+		grandparent(ann,amelia),
+		grandparent(linda,amelia),
+		grandparent(ann,spongebob)
+	]/[],
+	
+	T3 = [
+		great_grandparent(ann,sally),
+		great_grandparent(steve,sally)
+	]/[],
+	
+	::learn_seq([T1,T2,T3], Prog),
+	::pprint(Prog).
 
 :- end_object.

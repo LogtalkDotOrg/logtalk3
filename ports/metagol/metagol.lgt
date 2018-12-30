@@ -64,7 +64,7 @@
 	:- uses(user, [between/3, format/2]).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-	    :- use_module(sicstus, [when/2]).
+		:- use_module(sicstus, [when/2]).
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- uses(user, [when/2]).
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
@@ -173,19 +173,20 @@
 
 	select_lower(P,A,FullSig,_Sig1,Sig2) :-
 		nonvar(P),!,
-		append(_,[sym(P,A,_)|Sig2],FullSig),!.
+		append(_,[sym(P,A,_)|Sig2],FullSig), !.
 
 	select_lower(P,A,_FullSig,Sig1,Sig2) :-
 		append(_,[sym(P,A,U)|Sig2],Sig1),
 		(	var(U) ->
-			!,fail
+			!,
+			fail
 		;	true
 		).
 
 	bind_lower(P,A,FullSig,_Sig1,Sig2) :-
 		nonvar(P),
 		!,
-		append(_,[sym(P,A,_)|Sig2],FullSig),!.
+		append(_,[sym(P,A,_)|Sig2],FullSig), !.
 
 	bind_lower(P,A,_FullSig,Sig1,Sig2) :-
 		append(_,[sym(P,A,U)|Sig2],Sig1),
