@@ -1,10 +1,10 @@
-.. index:: ports
-.. _ports/0:
+.. index:: ports_profiler
+.. _ports_profiler/0:
 
 **object**
 
-``ports``
-=========
+``ports_profiler``
+==================
 
 Predicate execution box model port profiler.
 
@@ -28,7 +28,7 @@ Public interface
    <div id="data/0"> </div>
 
 .. index:: data/0
-.. _ports/0::data/0:
+.. _ports_profiler/0::data/0:
 
 ``data/0``
 ^^^^^^^^^^
@@ -47,7 +47,7 @@ Prints a table with all port profiling data.
    <div id="data/1"> </div>
 
 .. index:: data/1
-.. _ports/0::data/1:
+.. _ports_profiler/0::data/1:
 
 ``data/1``
 ^^^^^^^^^^
@@ -68,7 +68,7 @@ Prints a table with all port profiling data for the specified entity.
    <div id="reset/0"> </div>
 
 .. index:: reset/0
-.. _ports/0::reset/0:
+.. _ports_profiler/0::reset/0:
 
 ``reset/0``
 ^^^^^^^^^^^
@@ -87,7 +87,7 @@ Resets all port profiling data.
    <div id="reset/1"> </div>
 
 .. index:: reset/1
-.. _ports/0::reset/1:
+.. _ports_profiler/0::reset/1:
 
 ``reset/1``
 ^^^^^^^^^^^
@@ -108,7 +108,7 @@ Resets all port profiling data for the specified entity.
    <div id="port/5"> </div>
 
 .. index:: port/5
-.. _ports/0::port/5:
+.. _ports_profiler/0::port/5:
 
 ``port/5``
 ^^^^^^^^^^
@@ -137,7 +137,7 @@ Private predicates
    <div id="port_/5"> </div>
 
 .. index:: port_/5
-.. _ports/0::port_/5:
+.. _ports_profiler/0::port_/5:
 
 ``port_/5``
 ^^^^^^^^^^^

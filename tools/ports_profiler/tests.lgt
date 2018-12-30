@@ -25,10 +25,10 @@
 		version is 0.1,
 		author is 'Paulo Moura',
 		date is 2018/02/28,
-		comment is 'Unit tests for the "ports" tool.'
+		comment is 'Unit tests for the "ports_profiler" tool.'
 	]).
 
-	:- uses(ports, [
+	:- uses(ports_profiler, [
 		data/0, data/1, port/5,
 		reset/0, reset/1
 	]).
@@ -36,58 +36,58 @@
 	setup :-
 		foo::solutions.
 
-	deterministic(ports_data_0_01) :-
+	deterministic(ports_profiler_data_0_01) :-
 		data.
 
-	deterministic(ports_data_1_01) :-
+	deterministic(ports_profiler_data_1_01) :-
 		data(foo).
 
-	deterministic(ports_data_1_02) :-
+	deterministic(ports_profiler_data_1_02) :-
 		data(non_existant).
 
-	succeeds(ports_port_5_01) :-
+	succeeds(ports_profiler_port_5_01) :-
 		port(fact, foo, Functor, Arity, Count),
 		Functor/Arity == solutions/0, Count == 1.
 
-	succeeds(ports_port_5_02) :-
+	succeeds(ports_profiler_port_5_02) :-
 		port(rule, foo, Functor, Arity, Count),
 		Functor/Arity == solutions/0, Count == 1.
 
-	succeeds(ports_port_5_03) :-
+	succeeds(ports_profiler_port_5_03) :-
 		port(call, foo, Functor, Arity, Count),
 		Functor/Arity == solutions/0, Count == 1.
 
-	succeeds(ports_port_5_04) :-
+	succeeds(ports_profiler_port_5_04) :-
 		port(exit, foo, Functor, Arity, Count),
 		Functor/Arity == solutions/0, Count == 1.
 
-	succeeds(ports_port_5_05) :-
+	succeeds(ports_profiler_port_5_05) :-
 		port(fact, bar, Functor, Arity, Count),
 		Functor/Arity == qux/1, Count == 6.
 
-	succeeds(ports_port_5_06) :-
+	succeeds(ports_profiler_port_5_06) :-
 		port(call, bar, Functor, Arity, Count),
 		Functor/Arity == qux/1, Count == 2.
 
-	succeeds(ports_port_5_07) :-
+	succeeds(ports_profiler_port_5_07) :-
 		port(exit, bar, Functor, Arity, Count),
 		Functor/Arity == qux/1, Count == 2.
 
-	succeeds(ports_port_5_08) :-
+	succeeds(ports_profiler_port_5_08) :-
 		port(nd_exit, bar, Functor, Arity, Count),
 		Functor/Arity == qux/1, Count == 4.
 
-	succeeds(ports_port_5_09) :-
+	succeeds(ports_profiler_port_5_09) :-
 		port(redo, bar, Functor, Arity, Count),
 		Functor/Arity == qux/1, Count == 4.
 
-	deterministic(ports_reset_0_01) :-
+	deterministic(ports_profiler_reset_0_01) :-
 		reset.
 
-	deterministic(ports_reset_1_01) :-
+	deterministic(ports_profiler_reset_1_01) :-
 		reset(foo).
 
-	deterministic(ports_reset_1_02) :-
+	deterministic(ports_profiler_reset_1_02) :-
 		reset(non_existant).
 
 :- end_object.

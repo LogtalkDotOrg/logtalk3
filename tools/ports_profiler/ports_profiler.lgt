@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(ports).
+:- object(ports_profiler).
 
 	% avoid a catch-22...
 	:- set_logtalk_flag(debug, off).

@@ -19,10 +19,5 @@
 
 
 :- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(ports, [source_data(on)]),
-	logtalk_load(test_entities, [debug(on), source_data(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	logtalk_load(ports_profiler, [optimize(on)])
 )).

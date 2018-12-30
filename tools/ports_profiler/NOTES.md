@@ -21,9 +21,9 @@ ________________________________________________________________________
 Overview
 --------
 
-The `ports.lgt` source file defines a simple predicate execution box model
-port profiler tool (inspired by the ECLiPSe `port_profiler` tool). The box
-model is the same used in the debugger tool.
+The `ports_profiler.lgt` source file defines a simple predicate execution box
+model port profiler tool (inspired by the ECLiPSe `port_profiler` tool). The
+box model is the same used in the debugger tool.
 
 The Logtalk predicate execution box model is an extended version of the
 original Byrd's four port model. Besides the standard `call`, `exit`, `fail`,
@@ -40,7 +40,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/library_index.html#ports](https://logtalk.org/docs/library_index.html#ports)
+[docs/library_index.html#ports_profiler](https://logtalk.org/docs/library_index.html#ports_profiler)
 
 For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file.
 
@@ -48,7 +48,7 @@ For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file.
 Loading
 -------
 
-	| ?- logtalk_load(ports(loader)).
+	| ?- logtalk_load(ports_profiler(loader)).
 
 Note that this tool cannot be loaded at the same time as other tools (e.g.
 the debugger) that also provide a debug handler, which must be unique in a
@@ -84,19 +84,19 @@ Printing profiling data reports
 After calling the goals that you want to profile, you can print a table with 
 all profile data by typing:
 
-	| ?- ports::data.
+	| ?- ports_profiler::data.
 
 To print a table with data for a single entity, use the query:
 
-	| ?- ports::data(Entity).
+	| ?- ports_profiler::data(Entity).
 
 The profiling data can be reset using the query:
 
-	| ?- ports::reset.
+	| ?- ports_profiler::reset.
 
 To reset only the data about a specific entity, use the query:
 
-	| ?- ports::reset(Entity).
+	| ?- ports_profiler::reset(Entity).
 
 
 Interpreting profiling data

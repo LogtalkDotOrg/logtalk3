@@ -45,6 +45,8 @@ Handbook.
 Tools
 -----
 
+* RENAMED: The `ports` tool to `ports_profiler`.
+
 * ADDED: Sample Sphinx configuration file, `conf-sample.py`, to the `lgtdoc`
 tool.
 
