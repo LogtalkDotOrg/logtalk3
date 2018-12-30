@@ -30,6 +30,12 @@ Logtalk compiler and runtime
 * IMPROVED: Detection of missing meta-predicate directives when compiling
 closures.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: O-Prolog adapter file definition of the '$lgt_compile_prolog_code'/3
+internal predicate.
+
 Documentation
 -------------
 

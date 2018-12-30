@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for O-Prolog 1.32 and later versions
-%  Last updated on August 19, 2018
+%  Last updated on December 30, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -381,8 +381,7 @@ format(Format, Arguments) :-
 % compile to disk a Prolog file, resulting from a
 % Logtalk source file, given a list of flags
 
-'$lgt_compile_prolog_code'(File, _Source, _Options) :-
-	compile_file(File).
+'$lgt_compile_prolog_code'(_File, _Source, _Options).
 
 
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
