@@ -2214,6 +2214,16 @@ Predicate index
 
 * :ref:`forwarding <forwarding/0::forward/1>`
 
+``functional/0``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::functional/0>`
+
 ``gensym/2``
 ------------
 
@@ -2525,6 +2535,16 @@ Predicate index
 
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::instances/1>`
+
+``interpreted_bk/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::interpreted_bk/2>`
 
 ``intersect/2``
 ---------------
@@ -3029,6 +3049,36 @@ Predicate index
 * :ref:`datep <datep/0::leap_year/1>`
 * :ref:`iso8601 <iso8601/0::leap_year/1>`
 
+``learn/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::learn/2>`
+
+``learn/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::learn/3>`
+
+``learn_seq/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::learn_seq/2>`
+
 ``leash/1``
 -----------
 
@@ -3399,6 +3449,26 @@ Predicate index
 
 * :ref:`dictionaryp <dictionaryp/0::max/3>`
 
+``max_clauses/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::max_clauses/1>`
+
+``max_inv_preds/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::max_inv_preds/1>`
+
 ``maybe/0``
 -----------
 
@@ -3573,6 +3643,36 @@ Predicate index
 
 * :ref:`type <type/0::meta_type/3>`
 
+``metarule/7``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::metarule/7>`
+
+``metarule_init/6``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::metarule_init/6>`
+
+``metarule_next_id/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::metarule_next_id/1>`
+
 ``min/2``
 ---------
 
@@ -3593,6 +3693,16 @@ Predicate index
 
 
 * :ref:`dictionaryp <dictionaryp/0::min/3>`
+
+``min_clauses/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::min_clauses/1>`
 
 ``module_property/2``
 ---------------------
@@ -4258,6 +4368,16 @@ Predicate index
 
 * :ref:`xml <xml/0::pp/1>`
 
+``pprint/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::pprint/1>`
+
 ``predicate/2``
 ---------------
 
@@ -4358,6 +4478,26 @@ Predicate index
 
 
 * :ref:`dictionaryp <dictionaryp/0::previous/4>`
+
+``prim/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::prim/1>`
+
+``primcall/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::primcall/2>`
 
 ``print_flags/0``
 -----------------
@@ -5748,6 +5888,16 @@ Predicate index
 
 
 * :ref:`either <either/0::unexpecteds/2>`
+
+``unfold_program/0``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::unfold_program/0>`
 
 ``union/3``
 -----------

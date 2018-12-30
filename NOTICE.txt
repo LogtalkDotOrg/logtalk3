@@ -2,7 +2,8 @@ Logtalk <https://logtalk.org/>
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 
-The Logtalk distribution includes contributed third-party software:
+The Logtalk distribution includes contributed third-party software
+and Logtalk ports of third-party software:
 
 - contributions/flags
 	Copyright 2010 Katholieke Universiteit Leuven
@@ -46,3 +47,7 @@ The Logtalk distribution includes contributed third-party software:
 - manuals/_static
 	Copyright (c) 2013-2018 Dave Snider, Read the Docs, Inc. & contributors
 	Licensed under the MIT License
+
+- ports/metagol
+	Copyright 2016 Metagol authors
+	Licensed under the BSD 3-Clause License

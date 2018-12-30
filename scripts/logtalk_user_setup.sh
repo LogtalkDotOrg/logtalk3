@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on May 16, 2018
+##   Last updated on December 30, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -112,6 +112,7 @@ mkdir -p "$LOGTALKUSER"/contributions
 mkdir -p "$LOGTALKUSER"/docs
 mkdir -p "$LOGTALKUSER"/examples
 mkdir -p "$LOGTALKUSER"/library
+mkdir -p "$LOGTALKUSER"/ports
 mkdir -p "$LOGTALKUSER"/scratch
 mkdir -p "$LOGTALKUSER"/tests
 mkdir -p "$LOGTALKUSER"/tools
@@ -119,6 +120,7 @@ cp -RL "$LOGTALKHOME"/contributions "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/docs "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/examples "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/library "$LOGTALKUSER"/
+cp -RL "$LOGTALKHOME"/ports "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/scratch "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/tests "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/tools "$LOGTALKUSER"/

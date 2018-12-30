@@ -223,6 +223,10 @@ application unit tests
    ``NOTES.md`` – description on how to setup library and examples paths
    ``paths.pl`` – default library and example paths
 
+``ports``
+   ``NOTES.md`` – description of included ports of third-party software
+   ``...`` – ports
+
 ``scratch``
    ``NOTES.md`` – notes on the scratch directory
 

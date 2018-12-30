@@ -67,6 +67,7 @@ logtalk_library_path(coding, logtalk_user('coding/')).
 logtalk_library_path(contributions, logtalk_user('contributions/')).
 logtalk_library_path(examples, logtalk_user('examples/')).
 logtalk_library_path(library, logtalk_user('library/')).
+logtalk_library_path(ports, logtalk_user('ports/')).
 logtalk_library_path(tools, logtalk_user('tools/')).
 
 % third-party contributions
@@ -75,6 +76,9 @@ logtalk_library_path(iso8601, contributions('iso8601/')).
 logtalk_library_path(pddl_parser, contributions('pddl_parser/')).
 logtalk_library_path(verdi_neruda, contributions('verdi_neruda/')).
 logtalk_library_path(xml_parser, contributions('xml_parser/')).
+
+% ports of third-party libraries and applications
+logtalk_library_path(metagol, ports('metagol/')).
 
 % developer tools
 logtalk_library_path(assertions, tools('assertions/')).

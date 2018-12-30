@@ -1,0 +1,269 @@
+.. index:: metagol
+.. _metagol/0:
+
+**object**
+
+``metagol``
+===========
+
+Inductive logic programming (ILP) system based on meta-interpretive learning.
+
+| **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
+| **Version:** 0.1
+| **Date:** 2018/12/30
+
+| **Copyright:** Copyright 2016 Metagol authors
+| **License:** BSD 3-Clause License
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="learn/2"> </div>
+
+.. index:: learn/2
+.. _metagol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="learn/3"> </div>
+
+.. index:: learn/3
+.. _metagol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="learn_seq/2"> </div>
+
+.. index:: learn_seq/2
+.. _metagol/0::learn_seq/2:
+
+``learn_seq/2``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="pprint/1"> </div>
+
+.. index:: pprint/1
+.. _metagol/0::pprint/1:
+
+``pprint/1``
+^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="metarule/7"> </div>
+
+.. index:: metarule/7
+.. _metagol/0::metarule/7:
+
+``metarule/7``
+^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="metarule_init/6"> </div>
+
+.. index:: metarule_init/6
+.. _metagol/0::metarule_init/6:
+
+``metarule_init/6``
+^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="prim/1"> </div>
+
+.. index:: prim/1
+.. _metagol/0::prim/1:
+
+``prim/1``
+^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="primcall/2"> </div>
+
+.. index:: primcall/2
+.. _metagol/0::primcall/2:
+
+``primcall/2``
+^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="interpreted_bk/2"> </div>
+
+.. index:: interpreted_bk/2
+.. _metagol/0::interpreted_bk/2:
+
+``interpreted_bk/2``
+^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="functional/0"> </div>
+
+.. index:: functional/0
+.. _metagol/0::functional/0:
+
+``functional/0``
+^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="unfold_program/0"> </div>
+
+.. index:: unfold_program/0
+.. _metagol/0::unfold_program/0:
+
+``unfold_program/0``
+^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="min_clauses/1"> </div>
+
+.. index:: min_clauses/1
+.. _metagol/0::min_clauses/1:
+
+``min_clauses/1``
+^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="max_clauses/1"> </div>
+
+.. index:: max_clauses/1
+.. _metagol/0::max_clauses/1:
+
+``max_clauses/1``
+^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="max_inv_preds/1"> </div>
+
+.. index:: max_inv_preds/1
+.. _metagol/0::max_inv_preds/1:
+
+``max_inv_preds/1``
+^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="metarule_next_id/1"> </div>
+
+.. index:: metarule_next_id/1
+.. _metagol/0::metarule_next_id/1:
+
+``metarule_next_id/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="interpreted_/1"> </div>
+
+.. index:: interpreted_/1
+.. _metagol/0::interpreted_/1:
+
+``interpreted_/1``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+

@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>metagol &mdash; Logtalk APIs v3.23.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pddl" href="pddl_0.html" />
+    <link rel="prev" title="varlistp" href="varlistp_0.html" />
+   
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Logtalk APIs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.23.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#metagol"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">metagol</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="core_inheritance_diagram.svg">Core diagram</a>
+    <a href="library_inheritance_diagram.svg">Library diagram</a>
+    <a href="tools_inheritance_diagram.svg">Tools diagram</a>
+    <a href="ports_inheritance_diagram.svg">Ports diagram</a>
+    <a href="contributions_inheritance_diagram.svg">Contributions diagram</a>
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Logtalk APIs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">metagol</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/metagol_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="metagol-0"><span id="index-0"></span><strong>object</strong></p>
+<div class="section" id="metagol">
+<h1><code class="docutils literal notranslate"><span class="pre">metagol</span></code><a class="headerlink" href="#metagol" title="Permalink to this headline">¶</a></h1>
+<p>Inductive logic programming (ILP) system based on meta-interpretive learning.</p>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Metagol authors; adapted to Logtalk by Paulo Moura.</div>
+<div class="line"><strong>Version:</strong> 0.1</div>
+<div class="line"><strong>Date:</strong> 2018/12/30</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Copyright:</strong> Copyright 2016 Metagol authors</div>
+<div class="line"><strong>License:</strong> BSD 3-Clause License</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Implements:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="expanding_0.html#expanding-0"><span class="std std-ref">expanding</span></a></div>
+</div>
+</div>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="learn/2"> </div><div class="section" id="learn-2">
+<span id="metagol-0-learn-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">learn/2</span></code><a class="headerlink" href="#learn-2" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div id="learn/3"> </div></div>
+<div class="section" id="learn-3">
+<span id="metagol-0-learn-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">learn/3</span></code><a class="headerlink" href="#learn-3" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div id="learn_seq/2"> </div></div>
+<div class="section" id="learn-seq-2">
+<span id="metagol-0-learn-seq-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">learn_seq/2</span></code><a class="headerlink" href="#learn-seq-2" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div id="pprint/1"> </div></div>
+<div class="section" id="pprint-1">
+<span id="metagol-0-pprint-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint/1</span></code><a class="headerlink" href="#pprint-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div id="metarule/7"> </div></div>
+<div class="section" id="metarule-7">
+<span id="metagol-0-metarule-7"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule/7</span></code><a class="headerlink" href="#metarule-7" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div id="metarule_init/6"> </div></div>
+<div class="section" id="metarule-init-6">
+<span id="metagol-0-metarule-init-6"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule_init/6</span></code><a class="headerlink" href="#metarule-init-6" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div id="prim/1"> </div></div>
+<div class="section" id="prim-1">
+<span id="metagol-0-prim-1"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">prim/1</span></code><a class="headerlink" href="#prim-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div id="primcall/2"> </div></div>
+<div class="section" id="primcall-2">
+<span id="metagol-0-primcall-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">primcall/2</span></code><a class="headerlink" href="#primcall-2" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div id="interpreted_bk/2"> </div></div>
+<div class="section" id="interpreted-bk-2">
+<span id="metagol-0-interpreted-bk-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">interpreted_bk/2</span></code><a class="headerlink" href="#interpreted-bk-2" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div id="functional/0"> </div></div>
+<div class="section" id="functional-0">
+<span id="metagol-0-functional-0"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">functional/0</span></code><a class="headerlink" href="#functional-0" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div id="unfold_program/0"> </div></div>
+<div class="section" id="unfold-program-0">
+<span id="metagol-0-unfold-program-0"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">unfold_program/0</span></code><a class="headerlink" href="#unfold-program-0" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div id="min_clauses/1"> </div></div>
+<div class="section" id="min-clauses-1">
+<span id="metagol-0-min-clauses-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code><a class="headerlink" href="#min-clauses-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div id="max_clauses/1"> </div></div>
+<div class="section" id="max-clauses-1">
+<span id="metagol-0-max-clauses-1"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code><a class="headerlink" href="#max-clauses-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div id="max_inv_preds/1"> </div></div>
+<div class="section" id="max-inv-preds-1">
+<span id="metagol-0-max-inv-preds-1"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code><a class="headerlink" href="#max-inv-preds-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div id="metarule_next_id/1"> </div></div>
+<div class="section" id="metarule-next-id-1">
+<span id="metagol-0-metarule-next-id-1"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code><a class="headerlink" href="#metarule-next-id-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(see related entities)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<div id="interpreted_/1"> </div><div class="section" id="interpreted-1">
+<span id="metagol-0-interpreted-1"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">interpreted_/1</span></code><a class="headerlink" href="#interpreted-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pddl_0.html" class="btn btn-neutral float-right" title="pddl" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="varlistp_0.html" class="btn btn-neutral" title="varlistp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

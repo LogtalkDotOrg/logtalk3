@@ -49,11 +49,13 @@ library_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), 
 
 tools_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports_profiler(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','https://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]), halt."
 
+ports_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(ports(loader)), inheritance_diagram::rlibrary(ports, [title('Logtalk ports of third-party software'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','https://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]), halt."
+
 contributions_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(contributions(loader)), inheritance_diagram::rlibrary(contributions, [title('Logtalk third-party contributions'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','https://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]), halt."
 
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 0.10"
 	exit 0
 }
 
@@ -142,6 +144,7 @@ $logtalk "$core_goal"
 $logtalk "$library_goal"
 $logtalk "$tools_goal"
 $logtalk "$contributions_goal"
+$logtalk "$ports_goal"
 
 
 for f in *.dot; do

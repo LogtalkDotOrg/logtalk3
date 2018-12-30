@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on October 30, 2018
+; Last updated on December 30, 2018
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -103,6 +103,7 @@ Source: "{#MyBaseDir}\contributions\*"; Excludes: ".*"; DestDir: "{code:GetLgtUs
 Source: "{#MyBaseDir}\docs\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\docs"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\examples\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\examples"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\library\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\library"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
+Source: "{#MyBaseDir}\ports\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\ports"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\scratch\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\scratch"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\tests\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\tests"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\tools\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\tools"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall

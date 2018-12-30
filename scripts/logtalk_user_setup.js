@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   Logtalk user folder setup script
-//   Last updated on May 20, 2017
+//   Last updated on December 30, 2018
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -114,6 +114,7 @@ FSObject.CopyFolder(logtalk_home + "\\contributions", logtalk_user + "\\contribu
 FSObject.CopyFolder(logtalk_home + "\\docs", logtalk_user + "\\docs");
 FSObject.CopyFolder(logtalk_home + "\\examples", logtalk_user + "\\examples");
 FSObject.CopyFolder(logtalk_home + "\\library", logtalk_user + "\\library");
+FSObject.CopyFolder(logtalk_home + "\\ports", logtalk_user + "\\ports");
 FSObject.CopyFolder(logtalk_home + "\\scratch", logtalk_user + "\\scratch");
 FSObject.CopyFolder(logtalk_home + "\\tests", logtalk_user + "\\tests");
 FSObject.CopyFolder(logtalk_home + "\\tools", logtalk_user + "\\tools");

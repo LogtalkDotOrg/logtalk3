@@ -50,6 +50,12 @@ Tools
 * ADDED: Sample Sphinx configuration file, `conf-sample.py`, to the `lgtdoc`
 tool.
 
+Ports
+-----
+
+* ADDED: Port of `metagol`, an inductive logic programming (ILP) system based
+on meta-interpretive learning.
+
 Examples
 --------
 
