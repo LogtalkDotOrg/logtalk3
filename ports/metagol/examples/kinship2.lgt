@@ -37,7 +37,7 @@
 
 
 :- object(kinship2,
-	implements(expanding)).
+	extends(metagol)).
 
 %% tell metagol to use the BK
 prim(parent/2).

@@ -37,7 +37,7 @@
 
 
 :- object(robots,
-	implements(expanding)).
+	extends(metagol)).
 
 %% metagol settings
 functional.

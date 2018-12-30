@@ -35,6 +35,7 @@ func_test(Atom,PS,G) :-
 	\+ (::prove_deduce([Actual],PS,G), Z \= B).
 
 %% term ordering for recursive metarule that ensures that with each iteration the length of the string decreases
+:- public(term_gt/2).
 term_gt(A, B) :-
 	A = In1/_,
 	B = In2/_,

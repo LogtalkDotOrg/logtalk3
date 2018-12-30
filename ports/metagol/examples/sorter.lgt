@@ -45,7 +45,7 @@
 
 	:- uses(list, [append/3, length/2, member/2, nth1/3]).
 	:- uses(time, [now/3]).
-	:- uses(fast_random, [random/3, randseq/3, set_seed/1]).
+	:- uses(fast_random, [random/3, randseq/4, set_seed/1]).
 	:- uses(user, [between/3, setarg/3]).
 
 :- dynamic(energy_bound/1).
@@ -74,7 +74,7 @@ learn :-
 	::pprint(G).
 
 example(N,A,B):-
-	randseq(N,N,L1),
+	randseq(N,1,N,L1),
 	sort(L1,L2),
 	A = [values(L1),energy(0),intervals([1-N]),robot_pos(1),holding_left(none),holding_right(none),left_bag([]),right_bag([])],
 	B = [values(L2),energy(_),intervals(_),robot_pos(_),holding_left(_),holding_right(_),left_bag(_),right_bag(_)].
@@ -103,18 +103,20 @@ sum_intervals([X-Y|T],Acc1,Total):-
 	Acc2 is Acc1 + Dif,
 	sum_intervals(T,Acc2,Total).
 
-term_gt(A,B):-
+:- public(term_gt/2).
+
+term_gt(A, B):-
 	world_check(intervals(Xs),A),
 	world_check(intervals(Zs),B),
 	sum_intervals(Xs,0,SumXs),
 	sum_intervals(Zs,0,SumZs),
-	SumXs > SumZs,!.
+	SumXs > SumZs, !.
 
 
-term_gt(A,B):-
+term_gt(A, B):-
 	world_check(robot_pos(APos),A),
 	world_check(robot_pos(BPos),B),
-	APos < BPos,!.
+	APos < BPos, !.
 
 
 %% FIRST-ORDER BACKGROUND KNOWLEDGE
