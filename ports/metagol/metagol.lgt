@@ -37,7 +37,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2018/12/31,
 		copyright is 'Copyright 2016 Metagol authors',
@@ -400,7 +400,10 @@
 
 	assert_prim(Prim) :-
 		prim_asserts(Prim, Asserts),
-		maplist(assertz, Asserts).
+		maplist(assert_prim_aux, Asserts).
+
+	assert_prim_aux(Assert) :-
+		::assertz(Assert).
 
 	retract_prim(Prim) :-
 		Prim = P/_,
