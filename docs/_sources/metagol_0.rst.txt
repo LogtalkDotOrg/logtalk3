@@ -9,8 +9,8 @@
 Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0.1
-| **Date:** 2018/12/30
+| **Version:** 0.2
+| **Date:** 2018/12/31
 
 | **Copyright:** Copyright 2016 Metagol authors
 | **License:** BSD 3-Clause License
@@ -76,6 +76,48 @@ Public interface
 
 ``pprint/1``
 ^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="func_test/3"> </div>
+
+.. index:: func_test/3
+.. _metagol/0::func_test/3:
+
+``func_test/3``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="prove_deduce/3"> </div>
+
+.. index:: prove_deduce/3
+.. _metagol/0::prove_deduce/3:
+
+``prove_deduce/3``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="assert_prims/1"> </div>
+
+.. index:: assert_prims/1
+.. _metagol/0::assert_prims/1:
+
+``assert_prims/1``
+^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``static``

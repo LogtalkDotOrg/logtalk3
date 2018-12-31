@@ -37,9 +37,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2018/12/30,
+		date is 2018/12/31,
 		copyright is 'Copyright 2016 Metagol authors',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
@@ -135,7 +135,7 @@
 		::primcall(P,Args).
 
 	%% use interpreted BK - can we skip this if no interpreted_bk?
-	%% only works if interpreted/2 is below the corresponding definition
+	%% only works if interpreted/1 is before the corresponding definition
 	prove_aux(p(inv,_P,_A,_Args,Atom,Path),FullSig,Sig,MaxN,N1,N2,Prog1,Prog2) :-
 		::interpreted_bk(Atom,Body1),
 		add_path_to_body(Body1,[Atom|Path],Body2,_),
@@ -337,6 +337,9 @@
 	term_expansion((Head:-Body), Converted) :-
 		interpreted_(Head),
 		convert_to_interpreted((Head:-Body), Converted).
+	term_expansion(Head, Converted) :-
+		interpreted_(Head),
+		convert_to_interpreted((Head:-true), Converted).
 
 	term_expansion(prim(P/A), [prim(P/A),(primcall(P,Args) :- Call)]) :-
 		functor(Call,P,A),
