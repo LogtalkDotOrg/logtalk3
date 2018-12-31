@@ -37,7 +37,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2018/12/31,
 		copyright is 'Copyright 2016 Metagol authors',
@@ -45,7 +45,35 @@
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
 	]).
 
-	:- public([learn/2, learn/3, learn_seq/2, pprint/1, func_test/3, prove_deduce/3, assert_prim/1]).
+	:- public(learn/3).
+	:- mode(learn(@list(clause), @list(clause), -list(clause)), zero_or_one).
+	:- info(learn/3, [
+		comment is 'Learns from a set of positive examples and a set of negative examples and returns the learned program.',
+		argnames is ['PositiveExamples', 'NegativeExamples', 'Program']
+	]).
+
+	:- public(learn/2).
+	:- mode(learn(@list(clause), @list(clause)), zero_or_one).
+	:- info(learn/2, [
+		comment is 'Learns from a set of positive examples and a set of negative examples and prints the learned program.',
+		argnames is ['PositiveExamples', 'NegativeExamples']
+	]).
+
+	:- public(learn_seq/2).
+	:- mode(learn_seq(@list(clause), -list(clause)), zero_or_one).
+	:- info(learn_seq/2, [
+		comment is 'Learns from a sequence of examples represented as a list of PositiveExamples/NegativeExamples elements and returns the learned program.',
+		argnames is ['Examples', 'Program']
+	]).
+
+	:- public(pprint/1).
+	:- mode(pprint(@list(clause)), one).
+	:- info(pprint/1, [
+		comment is 'Prints a learned program.',
+		argnames is ['Program']
+	]).
+
+	:- public([func_test/3, prove_deduce/3, assert_prim/1, assert_program/1]).
 
 	:- public([metarule/7, metarule_init/6, prim/1, primcall/2, interpreted_bk/2]).
 	:- dynamic([prim/1, primcall/2]).
@@ -190,13 +218,17 @@
 
 	bind_lower(P,A,_FullSig,Sig1,Sig2) :-
 		append(_,[sym(P,A,U)|Sig2],Sig1),
-		(var(U)-> U = 1,!;true).
+		(	var(U) ->
+			U = 1,
+			!
+		;	true
+		).
 
 	check_new_metasub(Name,P,A,MetaSub,Prog) :-
 		member(sub(Name,P,A,_,_),Prog),
 		!,
 		last(MetaSub,X),
-		when(ground(X),\+ member(sub(Name,P,A,MetaSub,_),Prog)).
+		when(ground(X), \+ member(sub(Name,P,A,MetaSub,_), Prog)).
 	check_new_metasub(_Name,_P,_A,_MetaSub,_Prog).
 
 	size([],0) :-!.
@@ -206,7 +238,7 @@
 	size(L,N) :- !,
 		length(L,N).
 
-	nproveall([],_PS,_Prog) :- !.
+	nproveall([],_PS,_Prog).
 	nproveall([Atom|Atoms],PS,Prog) :-
 		\+ prove_deduce([Atom],PS,Prog),
 		nproveall(Atoms,PS,Prog).
@@ -248,7 +280,8 @@
 		maplist(pprint_clause,Prog6).
 
 	remove_orderings([],[]).
-	remove_orderings(['@'(_H)|T],Out) :-!,
+	remove_orderings(['@'(_H)|T],Out) :-
+		!,
 		remove_orderings(T,Out).
 	remove_orderings([H|T],[H|Out]) :-
 		remove_orderings(T,Out).
@@ -271,8 +304,9 @@
 		::metarule_init(Name,MetaSub,_,(HeadList:-BodyAsList1),_,_),
 		add_path_to_body(BodyAsList2,_,BodyAsList1,_).
 
-	list_to_clause([Atom], Atom) :- !.
-	list_to_clause([Atom|T1], (Atom,T2)) :- !,
+	list_to_clause([Atom], Atom) :-
+		!.
+	list_to_clause([Atom|T1], (Atom,T2)) :-
 		list_to_clause(T1, T2).
 
 	list_to_atom(AtomList,Atom) :-

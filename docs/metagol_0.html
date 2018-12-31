@@ -211,7 +211,7 @@
 <p>Inductive logic programming (ILP) system based on meta-interpretive learning.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Metagol authors; adapted to Logtalk by Paulo Moura.</div>
-<div class="line"><strong>Version:</strong> 0.4</div>
+<div class="line"><strong>Version:</strong> 0.6</div>
 <div class="line"><strong>Date:</strong> 2018/12/31</div>
 </div>
 <div class="line-block">
@@ -232,39 +232,83 @@
 </div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
-<div id="learn/2"> </div><div class="section" id="learn-2">
-<span id="metagol-0-learn-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">learn/2</span></code><a class="headerlink" href="#learn-2" title="Permalink to this headline">¶</a></h3>
+<div id="learn/3"> </div><div class="section" id="learn-3">
+<span id="metagol-0-learn-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">learn/3</span></code><a class="headerlink" href="#learn-3" title="Permalink to this headline">¶</a></h3>
+<p>Learns from a set of positive examples and a set of negative examples and returns the learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
-<div id="learn/3"> </div></div>
-<div class="section" id="learn-3">
-<span id="metagol-0-learn-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">learn/3</span></code><a class="headerlink" href="#learn-3" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(PositiveExamples,NegativeExamples,Program)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(&#64;list(clause),&#64;list(clause),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div id="learn/2"> </div></div>
+<div class="section" id="learn-2">
+<span id="metagol-0-learn-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">learn/2</span></code><a class="headerlink" href="#learn-2" title="Permalink to this headline">¶</a></h3>
+<p>Learns from a set of positive examples and a set of negative examples and prints the learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(PositiveExamples,NegativeExamples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(&#64;list(clause),&#64;list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="learn_seq/2"> </div></div>
 <div class="section" id="learn-seq-2">
 <span id="metagol-0-learn-seq-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">learn_seq/2</span></code><a class="headerlink" href="#learn-seq-2" title="Permalink to this headline">¶</a></h3>
+<p>Learns from a sequence of examples represented as a list of PositiveExamples/NegativeExamples elements and returns the learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_seq(Examples,Program)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_seq(&#64;list(clause),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="pprint/1"> </div></div>
 <div class="section" id="pprint-1">
 <span id="metagol-0-pprint-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint/1</span></code><a class="headerlink" href="#pprint-1" title="Permalink to this headline">¶</a></h3>
+<p>Prints a learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pprint(Program)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pprint(&#64;list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <div id="func_test/3"> </div></div>

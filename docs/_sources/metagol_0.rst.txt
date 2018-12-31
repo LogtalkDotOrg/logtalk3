@@ -9,7 +9,7 @@
 Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0.4
+| **Version:** 0.6
 | **Date:** 2018/12/31
 
 | **Copyright:** Copyright 2016 Metagol authors
@@ -27,20 +27,6 @@ Public interface
 
 .. raw:: html
 
-   <div id="learn/2"> </div>
-
-.. index:: learn/2
-.. _metagol/0::learn/2:
-
-``learn/2``
-^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-.. raw:: html
-
    <div id="learn/3"> </div>
 
 .. index:: learn/3
@@ -49,8 +35,36 @@ Public interface
 ``learn/3``
 ^^^^^^^^^^^
 
+Learns from a set of positive examples and a set of negative examples and returns the learned program.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``learn(PositiveExamples,NegativeExamples,Program)``
+| **Mode and number of proofs:**
+|    ``learn(@list(clause),@list(clause),-list(clause))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="learn/2"> </div>
+
+.. index:: learn/2
+.. _metagol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns from a set of positive examples and a set of negative examples and prints the learned program.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(PositiveExamples,NegativeExamples)``
+| **Mode and number of proofs:**
+|    ``learn(@list(clause),@list(clause))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -63,8 +77,15 @@ Public interface
 ``learn_seq/2``
 ^^^^^^^^^^^^^^^
 
+Learns from a sequence of examples represented as a list of PositiveExamples/NegativeExamples elements and returns the learned program.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``learn_seq(Examples,Program)``
+| **Mode and number of proofs:**
+|    ``learn_seq(@list(clause),-list(clause))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -77,8 +98,15 @@ Public interface
 ``pprint/1``
 ^^^^^^^^^^^^
 
+Prints a learned program.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``pprint(Program)``
+| **Mode and number of proofs:**
+|    ``pprint(@list(clause))`` - ``one``
 
 
 .. raw:: html
