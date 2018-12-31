@@ -45,7 +45,7 @@
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
 	]).
 
-	:- public([learn/2, learn/3, learn_seq/2, pprint/1, func_test/3, prove_deduce/3, assert_prims/1]).
+	:- public([learn/2, learn/3, learn_seq/2, pprint/1, func_test/3, prove_deduce/3, assert_prim/1]).
 
 	:- public([metarule/7, metarule_init/6, prim/1, primcall/2, interpreted_bk/2]).
 	:- dynamic([prim/1, primcall/2]).

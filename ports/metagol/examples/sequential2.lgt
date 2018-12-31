@@ -72,7 +72,7 @@ learn :-
 	],
 	::learn(Pos1,[],Prog1),
 	::pprint(Prog1),
-	::assert_prims(Prog1),
+	::assert_prim(Prog1),
 	::assert_program(Prog1),
 	
 	Pos2 = [
@@ -83,7 +83,7 @@ learn :-
 	],
 	::learn(Pos2,[],Prog2),
 	::pprint(Prog2),
-	::assert_prims(Prog2),
+	::assert_prim(Prog2),
 	::assert_program(Prog2),
 	
 	Pos3 = [
