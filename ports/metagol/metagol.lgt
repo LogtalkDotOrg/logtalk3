@@ -37,7 +37,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2018/12/31,
 		copyright is 'Copyright 2016 Metagol authors',
@@ -319,7 +319,8 @@
 	term_expansion(
 		(:- Directive),
 		[	(:- Directive),
-			(:- discontiguous([metarule/7,metarule_init/6,prim/1,primcall/2]))
+			(:- discontiguous([metarule/7,metarule_init/6,prim/1,primcall/2])),
+			(:- dynamic([prim/1, primcall/2]))
 		]
 	) :-
 		functor(Directive, object, _),
