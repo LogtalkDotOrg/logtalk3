@@ -37,7 +37,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2018/12/31,
 		copyright is 'Copyright 2016 Metagol authors',
@@ -319,7 +319,12 @@
 	term_expansion(
 		(:- Directive),
 		[	(:- Directive),
+			% examples may require asserting new predicates during learning
+			(:- set_logtalk_flag(dynamic_declarations, allow)),
+			% currently term-expansion can generate discontiguous predicates
 			(:- discontiguous([metarule/7,metarule_init/6,prim/1,primcall/2])),
+			% learning may generate new clauses for the following predicates
+			% which would have been compiled static if defioned in the examples
 			(:- dynamic([prim/1, primcall/2]))
 		]
 	) :-

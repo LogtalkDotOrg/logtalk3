@@ -39,8 +39,6 @@
 :- object(sequential2,
 	extends(metagol)).
 
-	:- set_logtalk_flag(dynamic_declarations, allow).
-
 %% tell metagol to use BK
 prim(mother/2).
 prim(father/2).
