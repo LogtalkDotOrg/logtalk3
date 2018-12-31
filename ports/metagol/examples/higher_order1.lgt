@@ -46,7 +46,7 @@ prim(my_succ/2).
 interpreted(map/3).
 
 %% background knowledge
-my_succ(A,B):-
+my_succ(A,B) :-
 	integer(A),
 	succ(A,B).
 

@@ -49,7 +49,7 @@ ________________________________________________________________________
 % clauses: 1
 % clauses: 2
 % clauses: 3
-grandparent(A,B):-grandparent_1(A,C),grandparent_1(C,B).
-grandparent_1(A,B):-father(A,B).
-grandparent_1(A,B):-mother(A,B).
+grandparent(A,B) :- grandparent_1(A,C), grandparent_1(C,B).
+grandparent_1(A,B) :- father(A,B).
+grandparent_1(A,B) :- mother(A,B).
 yes

@@ -52,10 +52,17 @@
 		sequential,
 		sequential1,
 		sequential2,
-		sorter,
 		strings1,
 		strings2,
 		strings3,
 		trains
 	])
 )).
+
+:- if(\+ current_logtalk_flag(prolog_dialect, sicstus)).
+	:- initialization((
+		logtalk_load([
+			sorter	% requires a setarg/3 built-in predicate
+		])
+	)).
+:- endif.
