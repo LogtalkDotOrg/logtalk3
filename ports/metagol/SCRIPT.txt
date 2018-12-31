@@ -53,3 +53,69 @@ grandparent(A,B) :- grandparent_1(A,C), grandparent_1(C,B).
 grandparent_1(A,B) :- father(A,B).
 grandparent_1(A,B) :- mother(A,B).
 yes
+
+
+% load all the examples from the original "metagol" distribution:
+
+| ?- logtalk_load(metagol('examples/loader')).
+...
+
+
+% try some of the examples:
+
+| ?- constants1::learn.
+
+% learning p/2
+% clauses: 1
+% clauses: 2
+% clauses: 3
+p(4,A).
+p(A,2).
+p(1,A).
+yes
+
+| ?- higher_order1::learn.
+
+% learning f/2
+% clauses: 1
+f(A,B):-map(A,B,my_succ).
+yes
+
+| ?- sequential::learn.
+
+% learning parent/2
+% clauses: 1
+% clauses: 2
+% learning grandparent/2
+% clauses: 1
+% learning great_grandparent/2
+% clauses: 1
+grandparent(A,B):-parent(A,C),parent(C,B).
+great_grandparent(A,B):-parent(A,C),grandparent(C,B).
+parent(A,B):-father(A,B).
+parent(A,B):-mother(A,B).
+yes
+
+| ?- strings2::learn.
+
+% learning f/2
+% clauses: 1
+% clauses: 2
+% clauses: 3
+% clauses: 4
+% clauses: 5
+f(A,B):-f_1(A,C),f_2(C,B).
+f_1(A,B):-next_empty(A),f_2(A,B).
+f_1(A,B):-f_2(A,C),f_1(C,B).
+f_2(A,B):-write1(A,B,d).
+f_2(A,B):-copy1(A,C),skip1(C,B).
+yes
+
+| ?- trains::learn.
+
+% learning e/1
+% clauses: 1
+% clauses: 2
+e(A):-has_car(A,B),e_1(B).
+e_1(A):-short(A),closed(A).
+yes

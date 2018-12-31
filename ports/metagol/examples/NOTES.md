@@ -33,19 +33,8 @@ ________________________________________________________________________
 
 
 To load this port and for sample queries, please see the `SCRIPT.txt`
-file.
+file in the main directory.
 
-This folder contains a Logtalk port of `metagol`, an inductive logic
-programming (ILP) system based on meta-interpretive learning available
-from:
-
-	https://github.com/metagol/metagol
-
-The port allows any number of datasets to be loaded simultaneously with
-per-dataset learning options. A dataset is simply wrapped in an object
-that extends and is expanded by the `metagol` object.
-
-Both the original code and the port requires the coroutining `when/2`
-predicate, which is only available in some backend Prolog systems.
-The port currently supports ECLiPSe, SICStus Prolog, SWI-Prolog, and
-YAP.
+This folder contains ports of the examples in the original `metagol`
+distribution. All examples provide a public `learn/0` predicate (or
+`learn1/0`, `learn2/0`, ... predicates) to run them.
