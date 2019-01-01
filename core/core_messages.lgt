@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
 %  This file is part of Logtalk <https://logtalk.org/>  
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
+%  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
 %  
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.43,
+		version is 1.44,
 		author is 'Paulo Moura',
-		date is 2018/07/12,
+		date is 2019/01/01,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -202,8 +202,8 @@
 	message_tokens(banner) -->
 		{current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status))},
 		(	{Status == stable} ->
-			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2018 Paulo Moura'-[], nl, nl]
-		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2018 Paulo Moura'-[], nl, nl]
+			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2019 Paulo Moura'-[], nl, nl]
+		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2019 Paulo Moura'-[], nl, nl]
 		).
 
 	message_tokens(default_flags) -->
