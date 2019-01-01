@@ -40,6 +40,7 @@
 		constants1,
 		constants2,
 		constants3,
+		family,
 		find_duplicate,
 		graph_reachability,
 		higher_order1,

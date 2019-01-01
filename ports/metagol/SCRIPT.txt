@@ -38,10 +38,13 @@ ________________________________________________________________________
 ...
 
 
-% load and run the "family" example:
+% load all the examples:
 
-| ?- logtalk_load(metagol(family)).
+| ?- logtalk_load(metagol('examples/loader')).
 ...
+
+
+% try some of the examples:
 
 | ?- family::learn.
 
@@ -53,15 +56,6 @@ grandparent(A,B) :- grandparent_1(A,C), grandparent_1(C,B).
 grandparent_1(A,B) :- father(A,B).
 grandparent_1(A,B) :- mother(A,B).
 yes
-
-
-% load all the examples from the original "metagol" distribution:
-
-| ?- logtalk_load(metagol('examples/loader')).
-...
-
-
-% try some of the examples:
 
 | ?- constants1::learn.
 
