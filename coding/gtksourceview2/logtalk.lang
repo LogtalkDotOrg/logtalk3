@@ -2,7 +2,7 @@
 <!--
 
  Author: Paulo Moura <pmoura@logtalk.org>
- Copyright (c) 2007-2018 Paulo Moura <pmoura@logtalk.org>
+ Copyright (c) 2007-2019 Paulo Moura <pmoura@logtalk.org>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Library General Public
@@ -311,7 +311,7 @@
       <!-- Existential quantifier -->
       <keyword>\^</keyword>
       <!-- Predicate aliases -->
-      <keyword>as</keyword>
+      <keyword>\bas\b</keyword>
     </context>
 
     <context id="number" style-ref="number">

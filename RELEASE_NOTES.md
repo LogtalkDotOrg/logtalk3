@@ -61,6 +61,11 @@ Examples
 
 * ADDED: Simple example, `serialization`, of serializing objects to a file.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: GtkSourceView syntax highlighting of the `as` infix operator.
+
 
 3.22.0 - December 18, 2018
 ==========================
