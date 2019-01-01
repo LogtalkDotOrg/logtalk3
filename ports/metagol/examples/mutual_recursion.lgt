@@ -62,10 +62,16 @@ s(2,1).
 s(1,0).
 
 %% learn the definition of even by inventing odd
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	Pos = [even(10),even(8),even(6),even(4),even(2)],
 	Neg = [even(3)],
-	::learn(Pos, Neg).
+	::learn(Pos, Neg, Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

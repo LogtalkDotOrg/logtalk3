@@ -51,13 +51,19 @@ metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 copy1([A|T1]/[A|T2],[A|T1]/T2).
 skip1([_|T1]/Out,T1/Out).
 
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	Pos = [
 		f(['a','b','c']/['a','a','b','b','c','c'],_/[]),
 		f(['a','a','c']/['a','a','a','a','c','c'],_/[]),
 		f(['a','c']/['a','a','c','c'],_/[])
 	],
-	::learn(Pos, []).
+	::learn(Pos, [], Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

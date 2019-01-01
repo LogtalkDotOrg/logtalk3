@@ -43,8 +43,8 @@
 metarule([P,A],([P,A,_B]:-[])).
 metarule([P,B],([P,_A,B]:-[])).
 
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	Pos = [
 		p(1,2),
 		p(1,3),
@@ -58,6 +58,12 @@ learn :-
 		p(3,4),
 		p(3,1)
 	],
-	::learn(Pos,Neg).
+	::learn(Pos, Neg, Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

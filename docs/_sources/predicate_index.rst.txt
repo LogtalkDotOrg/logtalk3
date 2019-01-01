@@ -439,26 +439,6 @@ Predicate index
 
 * :ref:`logtalk <logtalk/0::ask_question/5>`
 
-``assert_prim/1``
------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`metagol <metagol/0::assert_prim/1>`
-
-``assert_program/1``
---------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`metagol <metagol/0::assert_program/1>`
-
 ``assertion/1``
 ---------------
 
@@ -2233,16 +2213,6 @@ Predicate index
 
 
 * :ref:`forwarding <forwarding/0::forward/1>`
-
-``func_test/3``
----------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`metagol <metagol/0::func_test/3>`
 
 ``functional/0``
 ----------------
@@ -4326,6 +4296,16 @@ Predicate index
 
 * :ref:`metap <metap/0::partition/6>`
 
+``pclauses/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::pclauses/2>`
+
 ``permutation/2``
 -----------------
 
@@ -4660,16 +4640,6 @@ Predicate index
 
 
 * :ref:`interpreterp <interpreterp/0::prove/3>`
-
-``prove_deduce/3``
-------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`metagol <metagol/0::prove_deduce/3>`
 
 ``question_hook/6``
 -------------------

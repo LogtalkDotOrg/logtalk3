@@ -55,9 +55,15 @@ edge(b, c).
 edge(c, a).
 edge(a, d).
 
+:- public(learn/1).
+learn(Clauses) :-
+	Pos = [p(a, b), p(a, c), p(a, a)],
+	::learn(Pos,[], Prog),
+	::pclauses(Prog, Clauses).
+
 :- public(learn/0).
 learn :-
-	Pos = [p(a, b), p(a, c), p(a, a)],
-	::learn(Pos,[]).
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

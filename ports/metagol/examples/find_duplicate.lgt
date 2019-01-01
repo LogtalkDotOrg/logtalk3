@@ -62,7 +62,7 @@ head([H|_],H).
 tail([_|T],T).
 element([X|_T],X).
 element([_|T],X) :- element(T,X).
-mergesort([H|T],B) :- A = [H|T], msort(A,B), A\=B.
+mergesort([H|T],B) :- A = [H|T], msort(A,B), A \= B.
 
 %% functional test
 func_test(Atom,PS,G) :-
@@ -70,8 +70,8 @@ func_test(Atom,PS,G) :-
 	Actual = [P,A,Z],
 	\+ (::prove_deduce([Actual],PS,G), Z \= B).
 
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	Pos = [
 		f([1,3,3,4,2,5],3),
 		f([6,4,2,5,3,5,1],5),
@@ -79,6 +79,12 @@ learn :-
 		f([6,5,7,8,4,2,1,3,7],7),
 		f([14,4,13,6,12,1,9,2,10,8,15,5,7,14,3,11],14)
 	],
-	::learn(Pos, []).
+	::learn(Pos, [], Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

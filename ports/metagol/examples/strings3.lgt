@@ -65,13 +65,19 @@ func_test(Atom,PS,G) :-
 	Actual = [P,In/Z,_/[]],
 	\+ (::prove_deduce([Actual],PS,G), Z \= B).
 
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	Pos = [
 		f(['a','b','c']/['a','b','c','d'],_/[]),
 		f(['a','a','c']/['a','a','c','d'],_/[]),
 		f(['a','c']/['a','c','d'],_/[])
 	],
-	::learn(Pos, []).
+	::learn(Pos, [], Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

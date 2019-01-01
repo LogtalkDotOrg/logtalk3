@@ -37,4 +37,6 @@ file in the main directory.
 
 This folder contains ports of the examples in the original `metagol`
 distribution. All examples provide a public `learn/0` predicate (or
-`learn1/0`, `learn2/0`, ... predicates) to run them.
+`learn1/0`, `learn2/0`, ... predicates) to run them. There's also a
+`learn/1` predicate (or `learn1/1`, `learn2/1`, ... predicates) that
+is mainly used in the unit tests.

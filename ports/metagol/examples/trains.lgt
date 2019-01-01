@@ -62,8 +62,8 @@ metarule([P,Q,R],([P,A,B]:-[[Q,A,B],[R,B]])).
 metarule([P,Q,X],([P,A]:-[[Q,A,X]])).
 metarule([P,Q,X],([P,A,B]:-[[Q,A,B,X]])).
 
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	Pos = [
 		e(east1),
 		e(east2),
@@ -78,7 +78,13 @@ learn :-
 		e(west9),
 		e(west10)
 	],
-	::learn(Pos, Neg).
+	::learn(Pos, Neg, Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 % type definitions
 car(car_11).

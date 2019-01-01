@@ -59,9 +59,14 @@ map([A|As],[B|Bs],F) :-
 metarule([P,Q,F],([P,A,B]:-[[Q,A,B,F]])).
 metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
+:- public(learn/1).
+learn(Clauses) :-
+	::learn([f([1,2,3],[2,3,4])], [], Prog),
+	::pclauses(Prog, Clauses).
+
 :- public(learn/0).
 learn :-
-	::learn([f([1,2,3],[2,3,4])],[], Prog),
-	::pprint(Prog).
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

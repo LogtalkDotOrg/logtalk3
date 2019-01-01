@@ -60,10 +60,16 @@ filter([A|T1],[A|T2],F) :-
 filter([_|T1],T2,F) :-
 	filter(T1,T2,F).
 
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	A = [1,2,3,4,5,6,7,8,9,10],
 	B = [2,4,5,6,8,10],
-	::learn([f(A,B)],[]).
+	::learn([f(A,B)], [], Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

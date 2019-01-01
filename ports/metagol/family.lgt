@@ -59,8 +59,8 @@ metarule([P,Q,R],([P,A,B]:-[[Q,A,B],[R,A,B]])).
 metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
 %% learning task
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	%% positive examples
 	Pos = [
 		grandparent(ann,amelia),
@@ -73,6 +73,12 @@ learn :-
 	Neg = [
 		grandparent(amy,amelia)
 	],
-	::learn(Pos, Neg).
+	::learn(Pos, Neg, Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

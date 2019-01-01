@@ -57,8 +57,8 @@ metarule([P,Q,B],([P,A,B]:-[[Q,A],[Q,B]])).
 		between(0, 1000000, X).
 :- endif.
 
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	Pos = [
 		q(1,2),
 		q(1,3),
@@ -72,6 +72,12 @@ learn :-
 		q(3,4),
 		q(3,1)
 	],
-	::learn(Pos,Neg).
+	::learn(Pos, Neg, Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

@@ -67,11 +67,16 @@ prim(combine/2).
 metarule(tailrec,[P,Q],([P,A,B]:-[[Q,A,C],@term_gt(A,C),[P,C,B],@term_gt(C,B)])).
 metarule(chain,[P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
+:- public(learn/1).
+learn(Clauses) :-
+	examples(10,TrainExamples), !,
+	::learn(TrainExamples, [], G),
+	::pclauses(G, Clauses).
+
 :- public(learn/0).
 learn :-
-	examples(10,TrainExamples), !,
-	::learn(TrainExamples,[],G),
-	::pprint(G).
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 example(N,A,B) :-
 	randseq(N,1,N,L1),

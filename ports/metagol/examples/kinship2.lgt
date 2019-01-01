@@ -60,13 +60,19 @@ parent(princess_diana,prince_william).
 parent(princess_diana,prince_harry).
 parent(prince_william,prince_george).
 
-:- public(learn/0).
-learn :-
+:- public(learn/1).
+learn(Clauses) :-
 	Pos = [
 		ancestor(elizabeth_second,prince_charles),
 		ancestor(george_sixth,prince_harry),
 		ancestor(queen_mother,prince_william)
 	],
-	::learn(Pos, []).
+	::learn(Pos, [], Prog),
+	::pclauses(Prog, Clauses).
+
+:- public(learn/0).
+learn :-
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

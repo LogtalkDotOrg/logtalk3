@@ -37,9 +37,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2018/12/31,
+		date is 2019/01/01,
 		copyright is 'Copyright 2016 Metagol authors',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
@@ -66,6 +66,13 @@
 		argnames is ['Examples', 'Program']
 	]).
 
+	:- public(pclauses/2).
+	:- mode(pclauses(@list(clause), -list(clause)), one).
+	:- info(pclauses/2, [
+		comment is 'Converts a learned program into a list of clauses.',
+		argnames is ['Program', 'Clauses']
+	]).
+
 	:- public(pprint/1).
 	:- mode(pprint(@list(clause)), one).
 	:- info(pprint/1, [
@@ -73,7 +80,7 @@
 		argnames is ['Program']
 	]).
 
-	:- public([func_test/3, prove_deduce/3, assert_prim/1, assert_program/1]).
+	:- protected([pprint_clause/1, func_test/3, prove_deduce/3, assert_prim/1, assert_program/1]).
 
 	:- public([metarule/7, metarule_init/6, prim/1, primcall/2, interpreted_bk/2]).
 	:- dynamic([prim/1, primcall/2]).
@@ -266,7 +273,7 @@
 			Sig
 		).
 
-	pprint(Prog1) :-
+	pclauses(Prog1,Prog6) :-
 		map_list_to_pairs(arg(2),Prog1,Pairs),
 		keysort(Pairs,Sorted),
 		pairs_values(Sorted,Prog2),
@@ -276,7 +283,10 @@
 		;	Prog3 = Prog4
 		),
 		maplist(remove_orderings,Prog4,Prog5),
-		maplist(clause_list_to_clause,Prog5,Prog6),
+		maplist(clause_list_to_clause,Prog5,Prog6).
+
+	pprint(Prog1) :-
+		pclauses(Prog1,Prog6),
 		maplist(pprint_clause,Prog6).
 
 	remove_orderings([],[]).

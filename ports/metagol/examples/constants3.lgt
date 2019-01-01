@@ -49,8 +49,14 @@ metarule([P,Q,X,Y],([P,X,A]:-[[Q,Y,A]])).
 p(spongebob,laura).
 p(patrick,amelia).
 
+:- public(learn/1).
+learn(Clauses) :-
+	::learn([f(andy,laura),f(andy,amelia)], [], Prog),
+	::pclauses(Prog, Clauses).
+
 :- public(learn/0).
 learn :-
-	::learn([f(andy,laura),f(andy,amelia)],[]).
+	learn(Clauses),
+	meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.
