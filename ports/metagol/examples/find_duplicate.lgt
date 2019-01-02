@@ -62,7 +62,7 @@ head([H|_],H).
 tail([_|T],T).
 element([X|_T],X).
 element([_|T],X) :- element(T,X).
-mergesort([H|T],B) :- A = [H|T], msort(A,B), A \= B.
+mergesort([H|T],B) :- A = [H|T], msort(A,C), C = B, A \= B.
 
 %% functional test
 func_test(Atom,PS,G) :-
