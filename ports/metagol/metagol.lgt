@@ -38,7 +38,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2019/01/02,
 		copyright is 'Copyright 2016 Metagol authors',
@@ -300,8 +300,7 @@
 		remove_orderings(T,Out).
 
 	pprint_clause(Clause) :-
-		numbervars(Clause,0,_),
-		format('~q.~n',[Clause]).
+		print_message(results, metagol, clause(Clause)).
 
 	clause_list_to_clause([H|B1],Clause) :-
 		list_to_atom(H,Head),
@@ -522,5 +521,18 @@
 		unfold_clause(C2,C1,P,D),
 		unfold_program([D|Prog4],Prog2).
 	unfold_program(Prog,Prog) :- !.
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(clause(Clause), metagol) -->
+		{numbervars(Clause, 0, _)},
+		['~q.'-[Clause], nl].
+
+	:- multifile(logtalk::message_prefix_stream/4).
+	:- dynamic(logtalk::message_prefix_stream/4).
+
+	logtalk::message_prefix_stream(comment, metagol, '% ', user_output).
+	logtalk::message_prefix_stream(results, metagol, '', user_output).
 
 :- end_object.

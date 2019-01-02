@@ -9,7 +9,7 @@
 Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0.8
+| **Version:** 0.9
 | **Date:** 2019/1/2
 
 | **Copyright:** Copyright 2016 Metagol authors
@@ -21,6 +21,9 @@ Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Implements:**
 |    ``public`` :ref:`expanding <expanding/0>`
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+|    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
 
 Public interface
 ----------------
