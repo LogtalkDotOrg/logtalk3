@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -39,49 +40,53 @@
 :- object(sequential,
 	extends(metagol)).
 
-%% tell metagol to use BK
-prim(mother/2).
-prim(father/2).
+	%% tell metagol to use BK
+	prim(mother/2).
+	prim(father/2).
 
-%% metarules
-metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
-metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
+	%% metarules
+	metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
+	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
-%% background knowledge
-mother(ann,amy).
-mother(ann,andy).
-mother(amy,amelia).
-mother(linda,gavin).
-father(steve,amy).
-father(steve,andy).
-father(gavin,amelia).
-father(andy,spongebob).
-father(spongebob,sally).
+	%% background knowledge
+	mother(ann,amy).
+	mother(ann,andy).
+	mother(amy,amelia).
+	mother(linda,gavin).
+	father(steve,amy).
+	father(steve,andy).
+	father(gavin,amelia).
+	father(andy,spongebob).
+	father(spongebob,sally).
 
+	%% learn parent, then grandparent, then great-grandparent
+	:- public(learn/1).
+	learn(Clauses) :-
+		T1 = [
+			parent(ann,andy),
+			parent(steve,andy),
+			parent(ann,amy),
+			parent(ann,andy)
+		]/[],
+		
+		T2 = [
+			grandparent(steve,amelia),
+			grandparent(ann,amelia),
+			grandparent(linda,amelia),
+			grandparent(ann,spongebob)
+		]/[],
+		
+		T3 = [
+			great_grandparent(ann,sally),
+			great_grandparent(steve,sally)
+		]/[],
+		
+		::learn_seq([T1,T2,T3], Prog),
+		::pclauses(Prog, Clauses).
 
-%% learn parent, then grandparent, then great-grandparent
-:- public(learn/0).
-learn :-
-	T1 = [
-		parent(ann,andy),
-		parent(steve,andy),
-		parent(ann,amy),
-		parent(ann,andy)
-	]/[],
-	
-	T2 = [
-		grandparent(steve,amelia),
-		grandparent(ann,amelia),
-		grandparent(linda,amelia),
-		grandparent(ann,spongebob)
-	]/[],
-	
-	T3 = [
-		great_grandparent(ann,sally),
-		great_grandparent(steve,sally)
-	]/[],
-	
-	::learn_seq([T1,T2,T3], Prog),
-	::pprint(Prog).
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

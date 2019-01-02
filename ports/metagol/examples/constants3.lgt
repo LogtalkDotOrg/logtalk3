@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -39,24 +40,24 @@
 :- object(constants3,
 	extends(metagol)).
 
-%% tell metagol to use the BK
-prim(p/2).
+	%% tell metagol to use the BK
+	prim(p/2).
 
-%% metarules
-metarule([P,Q,X,Y],([P,X,A]:-[[Q,Y,A]])).
+	%% metarules
+	metarule([P,Q,X,Y],([P,X,A]:-[[Q,Y,A]])).
 
-%% background knowledge
-p(spongebob,laura).
-p(patrick,amelia).
+	%% background knowledge
+	p(spongebob,laura).
+	p(patrick,amelia).
 
-:- public(learn/1).
-learn(Clauses) :-
-	::learn([f(andy,laura),f(andy,amelia)], [], Prog),
-	::pclauses(Prog, Clauses).
+	:- public(learn/1).
+	learn(Clauses) :-
+		::learn([f(andy,laura),f(andy,amelia)], [], Prog),
+		::pclauses(Prog, Clauses).
 
-:- public(learn/0).
-learn :-
-	learn(Clauses),
-	meta::maplist(::pprint_clause, Clauses).
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

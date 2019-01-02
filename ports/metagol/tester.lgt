@@ -34,45 +34,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(hook, metagol).
-
-
-:- object(higher_order2,
-	extends(metagol)).
-
-	:- uses(integer, [succ/2]).
-	:- uses(list, [length/2]).
-
-	%% tell metagol to use the BK
-	prim(my_succ/2).
-	prim(my_double/2).
-	prim(my_length/2).
-	interpreted(map/3).
-
-	%% background knowledge
-	my_double(A,B) :- integer(A),B is A*2.
-	my_succ(A,B) :- integer(A),(ground(B)->integer(B);true), succ(A,B).
-	my_length(A,B) :- A = [_|_], length(A,B).
-
-	map([],[],_F).
-	map([A|As],[B|Bs],F) :-
-		call(F,A,B),
-		map(As,Bs,F).
-
-	%% metarules
-	metarule([P,Q,F],([P,A,B]:-[[Q,A,B,F]])).
-	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
-
-	:- public(learn/1).
-	learn(Clauses) :-
-		A = [[a],[a,a],[a,a,a],[a,a,a,a]],
-		B = [2,4,6,8],
-		::learn([f(A,B)], [], Prog),
-		::pclauses(Prog, Clauses).
-
-	:- public(learn/0).
-	learn :-
-		learn(Clauses),
-		meta::maplist(::pprint_clause, Clauses).
-
-:- end_object.
+:- initialization((
+	set_logtalk_flag(report, warnings),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(loader),
+	logtalk_load('examples/loader'),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
+)).

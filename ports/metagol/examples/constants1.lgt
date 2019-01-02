@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -39,31 +40,31 @@
 :- object(constants1,
 	extends(metagol)).
 
-%% metarules
-metarule([P,A],([P,A,_B]:-[])).
-metarule([P,B],([P,_A,B]:-[])).
+	%% metarules
+	metarule([P,A],([P,A,_B]:-[])).
+	metarule([P,B],([P,_A,B]:-[])).
 
-:- public(learn/1).
-learn(Clauses) :-
-	Pos = [
-		p(1,2),
-		p(1,3),
-		p(1,4),
-		p(1,1),
-		p(2,2),
-		p(4,4)
-	],
-	Neg = [
-		p(2,4),
-		p(3,4),
-		p(3,1)
-	],
-	::learn(Pos, Neg, Prog),
-	::pclauses(Prog, Clauses).
+	:- public(learn/1).
+	learn(Clauses) :-
+		Pos = [
+			p(1,2),
+			p(1,3),
+			p(1,4),
+			p(1,1),
+			p(2,2),
+			p(4,4)
+		],
+		Neg = [
+			p(2,4),
+			p(3,4),
+			p(3,1)
+		],
+		::learn(Pos, Neg, Prog),
+		::pclauses(Prog, Clauses).
 
-:- public(learn/0).
-learn :-
-	learn(Clauses),
-	meta::maplist(::pprint_clause, Clauses).
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

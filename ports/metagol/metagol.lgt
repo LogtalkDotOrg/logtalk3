@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -162,7 +163,8 @@
 		prove_aux(Atom,FullSig,Sig,MaxN,N1,N3,Prog1,Prog3),
 		prove(Atoms,FullSig,Sig,MaxN,N3,N2,Prog3,Prog2).
 
-	prove_aux('@'(Atom),_FullSig,_Sig,_MaxN,N,N,Prog,Prog) :-!,
+	prove_aux('@'(Atom),_FullSig,_Sig,_MaxN,N,N,Prog,Prog) :-
+		!,
 		::Atom.
 
 	%% prove primitive atom

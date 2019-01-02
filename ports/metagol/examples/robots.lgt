@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -39,94 +40,92 @@
 :- object(robots,
 	extends(metagol)).
 
-%% metagol settings
-functional.
-max_clauses(10).
+	%% metagol settings
+	functional.
+	max_clauses(10).
+	unfold_program.
 
-%% tell metagol to use the BK
-prim(move_left/2).
-prim(move_right/2).
-prim(move_forwards/2).
-prim(move_backwards/2).
-prim(grab_ball/2).
-prim(drop_ball/2).
+	%% tell metagol to use the BK
+	prim(move_left/2).
+	prim(move_right/2).
+	prim(move_forwards/2).
+	prim(move_backwards/2).
+	prim(grab_ball/2).
+	prim(drop_ball/2).
 
+	%% metarules
+	metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
+	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
-unfold_program.
+	%% functional check
+	func_test(Atom,PS,G) :-
+		Atom = [P,A,B],
+		Actual = [P,A,Z],
+		\+ (::prove_deduce([Actual],PS,G), Z \= B).
 
-%% metarules
-metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
-metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
+	%% robot learning to move a ball to a specific position
+	:- public(learn1/0).
+	learn1 :-
+		Pos = [f(world((1/1),(1/1),false),world((3/3),(3/3),false))],
+		::learn(Pos,[]).
 
-%% functional check
-func_test(Atom,PS,G) :-
-	Atom = [P,A,B],
-	Actual = [P,A,Z],
-	\+ (::prove_deduce([Actual],PS,G), Z \= B).
+	:- public(learn2/0).
+	learn2 :-
+		Pos = [f(world((1/1),(1/1),false),world((5/5),(5/5),false))],
+		::learn(Pos,[]).
 
-%% robot learning to move a ball to a specific position
-:- public(learn1/0).
-learn1 :-
-	Pos = [f(world((1/1),(1/1),false),world((3/3),(3/3),false))],
-	::learn(Pos,[]).
+	:- public(learn3/0).
+	learn3 :-
+		Pos = [f(world((1/1),(1/1),false),world((6/6),(6/6),false))],
+		::learn(Pos,[]).
 
-:- public(learn2/0).
-learn2 :-
-	Pos = [f(world((1/1),(1/1),false),world((5/5),(5/5),false))],
-	::learn(Pos,[]).
+	:- public(learn4/0).
+	learn4 :-
+		Pos = [f(world((1/1),(1/1),false),world((7/7),(7/7),false))],
+		::learn(Pos,[]).
 
-:- public(learn3/0).
-learn3 :-
-	Pos = [f(world((1/1),(1/1),false),world((6/6),(6/6),false))],
-	::learn(Pos,[]).
+	%% background knowledge
+	max_right(6).
+	max_forwards(6).
 
-:- public(learn4/0).
-learn4 :-
-	Pos = [f(world((1/1),(1/1),false),world((7/7),(7/7),false))],
-	::learn(Pos,[]).
+	grab_ball(world(Pos,Pos,false),world(Pos,Pos,true)).
 
-%% background knowledge
-max_right(6).
-max_forwards(6).
+	drop_ball(world(Pos,Pos,true),world(Pos,Pos,false)).
 
-grab_ball(world(Pos,Pos,false),world(Pos,Pos,true)).
+	move_left(world(X1/Y1,Bpos,false),world(X2/Y1,Bpos,false)) :-
+		X1 > 0,
+		X2 is X1-1.
 
-drop_ball(world(Pos,Pos,true),world(Pos,Pos,false)).
+	move_left(world(X1/Y1,_,true),world(X2/Y1,X2/Y1,true)) :-
+		X1 > 0,
+		X2 is X1-1.
 
-move_left(world(X1/Y1,Bpos,false),world(X2/Y1,Bpos,false)) :-
-	X1 > 0,
-	X2 is X1-1.
+	move_right(world(X1/Y1,Bpos,false),world(X2/Y1,Bpos,false)) :-
+	  max_right(MAXRIGHT),
+	  X1 < MAXRIGHT,
+	  X2 is X1+1.
 
-move_left(world(X1/Y1,_,true),world(X2/Y1,X2/Y1,true)) :-
-	X1 > 0,
-	X2 is X1-1.
+	move_right(world(X1/Y1,_,true),world(X2/Y1,X2/Y1,true)) :-
+		max_right(MAXRIGHT),
+		X1 < MAXRIGHT,
+		X2 is X1+1.
 
-move_right(world(X1/Y1,Bpos,false),world(X2/Y1,Bpos,false)) :-
-  max_right(MAXRIGHT),
-  X1 < MAXRIGHT,
-  X2 is X1+1.
+	move_backwards(world(X1/Y1,Bpos,false),world(X1/Y2,Bpos,false)) :-
+		Y1 > 0,
+		Y2 is Y1-1.
 
-move_right(world(X1/Y1,_,true),world(X2/Y1,X2/Y1,true)) :-
-	max_right(MAXRIGHT),
-	X1 < MAXRIGHT,
-	X2 is X1+1.
+	move_backwards(world(X1/Y1,_,true),world(X1/Y2,X1/Y2,true)) :-
+		Y1 > 0,
+		Y2 is Y1-1.
 
-move_backwards(world(X1/Y1,Bpos,false),world(X1/Y2,Bpos,false)) :-
-	Y1 > 0,
-	Y2 is Y1-1.
+	move_forwards(world(X1/Y1,Bpos,false),world(X1/Y2,Bpos,false)) :-
+		max_forwards(MAXFORWARDS),
+		Y1 < MAXFORWARDS,
+		Y2 is Y1+1.
 
-move_backwards(world(X1/Y1,_,true),world(X1/Y2,X1/Y2,true)) :-
-	Y1 > 0,
-	Y2 is Y1-1.
-
-move_forwards(world(X1/Y1,Bpos,false),world(X1/Y2,Bpos,false)) :-
-	max_forwards(MAXFORWARDS),
-	Y1 < MAXFORWARDS,
-	Y2 is Y1+1.
-
-move_forwards(world(X1/Y1,_,true),world(X1/Y2,X1/Y2,true)) :-
-	max_forwards(MAXFORWARDS),
-	Y1 < MAXFORWARDS,
-	Y2 is Y1+1.
+	move_forwards(world(X1/Y1,_,true),world(X1/Y2,X1/Y2,true)) :-
+		max_forwards(MAXFORWARDS),
+		Y1 < MAXFORWARDS,
+		Y2 is Y1+1.
 
 :- end_object.

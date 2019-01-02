@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -39,31 +40,31 @@
 :- object(graph_reachability,
 	extends(metagol)).
 
-%% metagol settings
-max_clauses(2).
+	%% metagol settings
+	max_clauses(2).
 
-%% tell metagol to use the BK
-prim(edge/2).
+	%% tell metagol to use the BK
+	prim(edge/2).
 
-%% metarules
-metarule([P, Q], ([P, A, B]:-[[Q, A, B]])).
-metarule([P, Q], ([P, A, B]:-[[Q, A, C], [P, C, B]])).
+	%% metarules
+	metarule([P, Q], ([P, A, B]:-[[Q, A, B]])).
+	metarule([P, Q], ([P, A, B]:-[[Q, A, C], [P, C, B]])).
 
-%% background knowledge
-edge(a, b).
-edge(b, c).
-edge(c, a).
-edge(a, d).
+	%% background knowledge
+	edge(a, b).
+	edge(b, c).
+	edge(c, a).
+	edge(a, d).
 
-:- public(learn/1).
-learn(Clauses) :-
-	Pos = [p(a, b), p(a, c), p(a, a)],
-	::learn(Pos,[], Prog),
-	::pclauses(Prog, Clauses).
+	:- public(learn/1).
+	learn(Clauses) :-
+		Pos = [p(a, b), p(a, c), p(a, a)],
+		::learn(Pos,[], Prog),
+		::pclauses(Prog, Clauses).
 
-:- public(learn/0).
-learn :-
-	learn(Clauses),
-	meta::maplist(::pprint_clause, Clauses).
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

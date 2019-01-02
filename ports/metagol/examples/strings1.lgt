@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -39,31 +40,31 @@
 :- object(strings1,
 	extends(metagol)).
 
-%% tell metagol to use the BK
-prim(copy1/2).
-prim(skip1/2).
+	%% tell metagol to use the BK
+	prim(copy1/2).
+	prim(skip1/2).
 
-%% metarules
-metarule([P,Q],([P,A,B]:-[[Q,A,C],[P,C,B]])).
-metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
+	%% metarules
+	metarule([P,Q],([P,A,B]:-[[Q,A,C],[P,C,B]])).
+	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
-%% background knowledge
-copy1([A|T1]/[A|T2],[A|T1]/T2).
-skip1([_|T1]/Out,T1/Out).
+	%% background knowledge
+	copy1([A|T1]/[A|T2],[A|T1]/T2).
+	skip1([_|T1]/Out,T1/Out).
 
-:- public(learn/1).
-learn(Clauses) :-
-	Pos = [
-		f(['a','b','c']/['a','a','b','b','c','c'],_/[]),
-		f(['a','a','c']/['a','a','a','a','c','c'],_/[]),
-		f(['a','c']/['a','a','c','c'],_/[])
-	],
-	::learn(Pos, [], Prog),
-	::pclauses(Prog, Clauses).
+	:- public(learn/1).
+	learn(Clauses) :-
+		Pos = [
+			f(['a','b','c']/['a','a','b','b','c','c'],_/[]),
+			f(['a','a','c']/['a','a','a','a','c','c'],_/[]),
+			f(['a','c']/['a','a','c','c'],_/[])
+		],
+		::learn(Pos, [], Prog),
+		::pclauses(Prog, Clauses).
 
-:- public(learn/0).
-learn :-
-	learn(Clauses),
-	meta::maplist(::pprint_clause, Clauses).
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

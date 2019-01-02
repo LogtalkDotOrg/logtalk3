@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -39,40 +40,40 @@
 :- object(kinship2,
 	extends(metagol)).
 
-%% tell metagol to use the BK
-prim(parent/2).
+	%% tell metagol to use the BK
+	prim(parent/2).
 
-%% metarules
-metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
-metarule([P,Q],([P,A,B]:-[[Q,A,C],[P,C,B]])).
+	%% metarules
+	metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
+	metarule([P,Q],([P,A,B]:-[[Q,A,C],[P,C,B]])).
 
-%% background knowledge
-parent(queen_victoria,edward_seventh).
-parent(edward_seventh,george_fifth).
-parent(george_fifth,george_sixth).
-parent(george_sixth,elizabeth_second).
-parent(queen_mother,elizabeth_second).
-parent(elizabeth_second,prince_charles).
-parent(prince_philip,prince_charles).
-parent(prince_charles,prince_william).
-parent(prince_charles,prince_harry).
-parent(princess_diana,prince_william).
-parent(princess_diana,prince_harry).
-parent(prince_william,prince_george).
+	%% background knowledge
+	parent(queen_victoria,edward_seventh).
+	parent(edward_seventh,george_fifth).
+	parent(george_fifth,george_sixth).
+	parent(george_sixth,elizabeth_second).
+	parent(queen_mother,elizabeth_second).
+	parent(elizabeth_second,prince_charles).
+	parent(prince_philip,prince_charles).
+	parent(prince_charles,prince_william).
+	parent(prince_charles,prince_harry).
+	parent(princess_diana,prince_william).
+	parent(princess_diana,prince_harry).
+	parent(prince_william,prince_george).
 
-:- public(learn/1).
-learn(Clauses) :-
-	Pos = [
-		ancestor(elizabeth_second,prince_charles),
-		ancestor(george_sixth,prince_harry),
-		ancestor(queen_mother,prince_william)
-	],
-	::learn(Pos, [], Prog),
-	::pclauses(Prog, Clauses).
+	:- public(learn/1).
+	learn(Clauses) :-
+		Pos = [
+			ancestor(elizabeth_second,prince_charles),
+			ancestor(george_sixth,prince_harry),
+			ancestor(queen_mother,prince_william)
+		],
+		::learn(Pos, [], Prog),
+		::pclauses(Prog, Clauses).
 
-:- public(learn/0).
-learn :-
-	learn(Clauses),
-	meta::maplist(::pprint_clause, Clauses).
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.

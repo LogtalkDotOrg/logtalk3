@@ -3,6 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  
 %  Copyright 2016 Metagol authors
+%  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
 %  
 %  Redistribution and use in source and binary forms, with or without
@@ -39,46 +40,46 @@
 :- object(family,
 	extends(metagol)).
 
-%% first-order background knowledge
-mother(ann,amy).
-mother(ann,andy).
-mother(amy,amelia).
-mother(linda,gavin).
-father(steve,amy).
-father(steve,andy).
-father(gavin,amelia).
-father(andy,spongebob).
+	%% first-order background knowledge
+	mother(ann,amy).
+	mother(ann,andy).
+	mother(amy,amelia).
+	mother(linda,gavin).
+	father(steve,amy).
+	father(steve,andy).
+	father(gavin,amelia).
+	father(andy,spongebob).
 
-%% predicates that can be used in the learning
-prim(mother/2).
-prim(father/2).
+	%% predicates that can be used in the learning
+	prim(mother/2).
+	prim(father/2).
 
-%% metarules
-metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
-metarule([P,Q,R],([P,A,B]:-[[Q,A,B],[R,A,B]])).
-metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
+	%% metarules
+	metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
+	metarule([P,Q,R],([P,A,B]:-[[Q,A,B],[R,A,B]])).
+	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
-%% learning task
-:- public(learn/1).
-learn(Clauses) :-
-	%% positive examples
-	Pos = [
-		grandparent(ann,amelia),
-		grandparent(steve,amelia),
-		grandparent(ann,spongebob),
-		grandparent(steve,spongebob),
-		grandparent(linda,amelia)
-	],
-	%% negative examples
-	Neg = [
-		grandparent(amy,amelia)
-	],
-	::learn(Pos, Neg, Prog),
-	::pclauses(Prog, Clauses).
+	%% learning task
+	:- public(learn/1).
+	learn(Clauses) :-
+		%% positive examples
+		Pos = [
+			grandparent(ann,amelia),
+			grandparent(steve,amelia),
+			grandparent(ann,spongebob),
+			grandparent(steve,spongebob),
+			grandparent(linda,amelia)
+		],
+		%% negative examples
+		Neg = [
+			grandparent(amy,amelia)
+		],
+		::learn(Pos, Neg, Prog),
+		::pclauses(Prog, Clauses).
 
-:- public(learn/0).
-learn :-
-	learn(Clauses),
-	meta::maplist(::pprint_clause, Clauses).
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 :- end_object.
