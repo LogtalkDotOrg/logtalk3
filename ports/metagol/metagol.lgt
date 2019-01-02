@@ -38,9 +38,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2019/01/01,
+		date is 2019/01/02,
 		copyright is 'Copyright 2016 Metagol authors',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
@@ -94,10 +94,11 @@
 
 	:- uses(integer, [succ/2]).
 	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, select/3]).
+	:- uses(logtalk, [print_message/3]).
 	:- uses(meta, [maplist/2, maplist/3]).
 	:- uses(pairs, [map/3 as map_list_to_pairs/3, values/2 as pairs_values/2]).
 	:- uses(set, [as_set/2 as list_to_set/2]).
-	:- uses(user, [between/3, format/2]).
+	:- uses(user, [between/3]).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 		:- use_module(sicstus, [when/2]).
@@ -137,9 +138,9 @@
 
 	proveall(Atoms,Sig,Prog) :-
 		target_predicate(Atoms,P/A),
-		format('% learning ~w\n',[P/A]),
+		print_message(comment, metagol, 'learning '-(P/A)),
 		iterator(MaxN),
-		format('% clauses: ~d\n',[MaxN]),
+		print_message(comment, metagol, 'clauses: '-MaxN),
 		invented_symbols(MaxN,P/A,Sig),
 		prove_examples(Atoms,Sig,_Sig,MaxN,0,_N,[],Prog).
 
