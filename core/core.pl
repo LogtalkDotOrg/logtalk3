@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 23, 0, b02)).
+'$lgt_version_data'(logtalk(3, 23, 0, b03)).
 
 
 
@@ -21999,7 +21999,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			Obj = GObj, Pred = GPred, This = GThis, CallerExCtx = GCallerExCtx, Call = GCall
 		;	% meta-predicates cannot be cached as they require translation of
 			% the meta-arguments, which must succeed to allow static binding
-			Meta =.. [PredFunctor| MArgs],
+			% (don't require the predicate and the meta-predicate template to
+			% share the name as we may be using a predicate alias)
+			Meta =.. [_| MArgs],
 			Pred =.. [PredFunctor| Args],
 			'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs),
 			TPred =.. [PredFunctor| TArgs],

@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * IMPROVED: Detection of missing meta-predicate directives when compiling
 closures.
 
+* FIXED: Enable message sending static binding optimization when the message
+is an alias to a meta-predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 
