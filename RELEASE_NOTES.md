@@ -64,6 +64,9 @@ Examples
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: EditorConfig root file (`.editorconfig`) to set the indentation
+preferences as per coding guidelines.
+
 * FIXED: GtkSourceView syntax highlighting of the `as` infix operator.
 
 
