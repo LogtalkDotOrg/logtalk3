@@ -38,11 +38,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2019/01/03,
 		comment is 'Unit tests for the "metagol" example.'
 	]).
+
+	cover(metagol).
 
 	test(metagol_constants1_1) :-
 		constants1::learn(Clauses), !,

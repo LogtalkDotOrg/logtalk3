@@ -40,7 +40,7 @@
 )).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-	    :- lib(sicstus).
+	    :- ensure_loaded(library(sicstus)).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(when), []).
 	:- endif.

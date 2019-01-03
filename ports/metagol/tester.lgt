@@ -34,11 +34,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(loader),
-	logtalk_load('examples/loader'),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap)
 )).
+
+	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+	    :- ensure_loaded(library(sicstus)).
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(library(when), []).
+	:- endif.
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(library(types_loader)),
+		logtalk_load(library(metapredicates_loader)),
+		logtalk_load(metagol, [debug(on), source_data(on)]),
+		logtalk_load('examples/loader'),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- else.
+
+	:- initialization((write('(not applicable)'), nl)).
+
+:- endif.
