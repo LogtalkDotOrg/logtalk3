@@ -38,9 +38,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/01/02,
+		date is 2019/01/03,
 		comment is 'Unit tests for the "metagol" example.'
 	]).
 
@@ -141,6 +141,25 @@
 			[	even(0),
 				(even(A) :- s(A, B), even_1(B)),
 				(even_1(C) :- s(C, D), even(D))
+			]
+		).
+
+	test(metagol_robots_1) :-
+		robots::learn1(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(f(A,E) :- grab_ball(A,B), f_3(B,C), f_3(C,D), drop_ball(D,E)),
+				(f_3(F,H) :- move_right(F,G), move_forwards(G,H))
+			]
+		).
+
+	test(metagol_robots_2) :-
+		robots::learn2(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(f(A,E) :- grab_ball(A,B), f_3(B,C), f_3(C,D), drop_ball(D,E)),
+				(f_3(F,H) :- f_4(F,G), f_4(G,H)),
+				(f_4(I,K) :- move_right(I,J), move_forwards(J,K))
 			]
 		).
 

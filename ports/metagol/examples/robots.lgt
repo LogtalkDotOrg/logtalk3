@@ -64,25 +64,49 @@
 		\+ (::prove_deduce([Actual],PS,G), Z \= B).
 
 	%% robot learning to move a ball to a specific position
+	:- public(learn1/1).
+	learn1(Clauses) :-
+		Pos = [f(world((1/1),(1/1),false),world((3/3),(3/3),false))],
+		::learn(Pos, [], Prog),
+		::pclauses(Prog, Clauses).
+
+	:- public(learn2/1).
+	learn2(Clauses) :-
+		Pos = [f(world((1/1),(1/1),false),world((5/5),(5/5),false))],
+		::learn(Pos, [], Prog),
+		::pclauses(Prog, Clauses).
+
+	:- public(learn3/1).
+	learn3(Clauses) :-
+		Pos = [f(world((1/1),(1/1),false),world((6/6),(6/6),false))],
+		::learn(Pos, [], Prog),
+		::pclauses(Prog, Clauses).
+
+	:- public(learn4/1).
+	learn4(Clauses) :-
+		Pos = [f(world((1/1),(1/1),false),world((7/7),(7/7),false))],
+		::learn(Pos, [], Prog),
+		::pclauses(Prog, Clauses).
+
 	:- public(learn1/0).
 	learn1 :-
-		Pos = [f(world((1/1),(1/1),false),world((3/3),(3/3),false))],
-		::learn(Pos,[]).
+		learn1(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 	:- public(learn2/0).
 	learn2 :-
-		Pos = [f(world((1/1),(1/1),false),world((5/5),(5/5),false))],
-		::learn(Pos,[]).
+		learn2(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 	:- public(learn3/0).
 	learn3 :-
-		Pos = [f(world((1/1),(1/1),false),world((6/6),(6/6),false))],
-		::learn(Pos,[]).
+		learn3(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 	:- public(learn4/0).
 	learn4 :-
-		Pos = [f(world((1/1),(1/1),false),world((7/7),(7/7),false))],
-		::learn(Pos,[]).
+		learn4(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 	%% background knowledge
 	max_right(6).
