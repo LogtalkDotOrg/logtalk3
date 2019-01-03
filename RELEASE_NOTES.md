@@ -45,6 +45,12 @@ Documentation
 * FIXED: HTML favicon bug that resulted in a non-valid ePub version of the
 Handbook.
 
+Library
+-------
+
+* ADDED: Predicate `remove_duplicates/2` to the library list entities (`listp`,
+`list`, and `difflist`).
+
 Tools
 -----
 

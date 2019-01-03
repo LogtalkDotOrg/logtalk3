@@ -306,8 +306,8 @@
 <p>List protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.14</div>
-<div class="line"><strong>Date:</strong> 2018/8/17</div>
+<div class="line"><strong>Version:</strong> 1.15</div>
+<div class="line"><strong>Date:</strong> 2019/1/3</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -863,9 +863,25 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">proper_prefix(?list,-integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
+<div id="remove_duplicates/2"> </div></div>
+<div class="section" id="remove-duplicates-2">
+<span id="listp-0-remove-duplicates-2"></span><span id="index-28"></span><h3><code class="docutils literal notranslate"><span class="pre">remove_duplicates/2</span></code><a class="headerlink" href="#remove-duplicates-2" title="Permalink to this headline">¶</a></h3>
+<p>Removes duplicated list elements using equality (==/2) for comparison and keepying the left-most element when repeated.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">remove_duplicates(List,Set)</span></code></div>
+</div>
+</div>
 <div id="reverse/2"> </div></div>
 <div class="section" id="reverse-2">
-<span id="listp-0-reverse-2"></span><span id="index-28"></span><h3><code class="docutils literal notranslate"><span class="pre">reverse/2</span></code><a class="headerlink" href="#reverse-2" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-reverse-2"></span><span id="index-29"></span><h3><code class="docutils literal notranslate"><span class="pre">reverse/2</span></code><a class="headerlink" href="#reverse-2" title="Permalink to this headline">¶</a></h3>
 <p>Reverses a list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -880,6 +896,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reverse(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reverse(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reverse(?list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reverse(-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
@@ -887,7 +904,7 @@
 </div>
 <div id="same_length/2"> </div></div>
 <div class="section" id="same-length-2">
-<span id="listp-0-same-length-2"></span><span id="index-29"></span><h3><code class="docutils literal notranslate"><span class="pre">same_length/2</span></code><a class="headerlink" href="#same-length-2" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-same-length-2"></span><span id="index-30"></span><h3><code class="docutils literal notranslate"><span class="pre">same_length/2</span></code><a class="headerlink" href="#same-length-2" title="Permalink to this headline">¶</a></h3>
 <p>The two lists have the same length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -909,7 +926,7 @@
 </div>
 <div id="same_length/3"> </div></div>
 <div class="section" id="same-length-3">
-<span id="listp-0-same-length-3"></span><span id="index-30"></span><h3><code class="docutils literal notranslate"><span class="pre">same_length/3</span></code><a class="headerlink" href="#same-length-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-same-length-3"></span><span id="index-31"></span><h3><code class="docutils literal notranslate"><span class="pre">same_length/3</span></code><a class="headerlink" href="#same-length-3" title="Permalink to this headline">¶</a></h3>
 <p>The two lists have the same length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -931,7 +948,7 @@
 </div>
 <div id="select/3"> </div></div>
 <div class="section" id="select-3">
-<span id="listp-0-select-3"></span><span id="index-31"></span><h3><code class="docutils literal notranslate"><span class="pre">select/3</span></code><a class="headerlink" href="#select-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-select-3"></span><span id="index-32"></span><h3><code class="docutils literal notranslate"><span class="pre">select/3</span></code><a class="headerlink" href="#select-3" title="Permalink to this headline">¶</a></h3>
 <p>Selects an element from a list, returning the list of remaining elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -951,7 +968,7 @@
 </div>
 <div id="selectchk/3"> </div></div>
 <div class="section" id="selectchk-3">
-<span id="listp-0-selectchk-3"></span><span id="index-32"></span><h3><code class="docutils literal notranslate"><span class="pre">selectchk/3</span></code><a class="headerlink" href="#selectchk-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-selectchk-3"></span><span id="index-33"></span><h3><code class="docutils literal notranslate"><span class="pre">selectchk/3</span></code><a class="headerlink" href="#selectchk-3" title="Permalink to this headline">¶</a></h3>
 <p>Checks that an element can be selected from a list, returning the list of remaining elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -971,7 +988,7 @@
 </div>
 <div id="select/4"> </div></div>
 <div class="section" id="select-4">
-<span id="listp-0-select-4"></span><span id="index-33"></span><h3><code class="docutils literal notranslate"><span class="pre">select/4</span></code><a class="headerlink" href="#select-4" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-select-4"></span><span id="index-34"></span><h3><code class="docutils literal notranslate"><span class="pre">select/4</span></code><a class="headerlink" href="#select-4" title="Permalink to this headline">¶</a></h3>
 <p>Selects an element from a list, replacing it by a new element and returning the resulting list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -991,7 +1008,7 @@
 </div>
 <div id="selectchk/4"> </div></div>
 <div class="section" id="selectchk-4">
-<span id="listp-0-selectchk-4"></span><span id="index-34"></span><h3><code class="docutils literal notranslate"><span class="pre">selectchk/4</span></code><a class="headerlink" href="#selectchk-4" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-selectchk-4"></span><span id="index-35"></span><h3><code class="docutils literal notranslate"><span class="pre">selectchk/4</span></code><a class="headerlink" href="#selectchk-4" title="Permalink to this headline">¶</a></h3>
 <p>Checks that an element from a list can be replaced by a new element, returning the resulting list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1011,7 +1028,7 @@
 </div>
 <div id="sort/2"> </div></div>
 <div class="section" id="sort-2">
-<span id="listp-0-sort-2"></span><span id="index-35"></span><h3><code class="docutils literal notranslate"><span class="pre">sort/2</span></code><a class="headerlink" href="#sort-2" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-sort-2"></span><span id="index-36"></span><h3><code class="docutils literal notranslate"><span class="pre">sort/2</span></code><a class="headerlink" href="#sort-2" title="Permalink to this headline">¶</a></h3>
 <p>Sorts a list in ascending order (duplicated elements are removed).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1031,7 +1048,7 @@
 </div>
 <div id="sort/3"> </div></div>
 <div class="section" id="sort-3">
-<span id="listp-0-sort-3"></span><span id="index-36"></span><h3><code class="docutils literal notranslate"><span class="pre">sort/3</span></code><a class="headerlink" href="#sort-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-sort-3"></span><span id="index-37"></span><h3><code class="docutils literal notranslate"><span class="pre">sort/3</span></code><a class="headerlink" href="#sort-3" title="Permalink to this headline">¶</a></h3>
 <p>Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are removed).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1055,7 +1072,7 @@
 </div>
 <div id="sort/4"> </div></div>
 <div class="section" id="sort-4">
-<span id="listp-0-sort-4"></span><span id="index-37"></span><h3><code class="docutils literal notranslate"><span class="pre">sort/4</span></code><a class="headerlink" href="#sort-4" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-sort-4"></span><span id="index-38"></span><h3><code class="docutils literal notranslate"><span class="pre">sort/4</span></code><a class="headerlink" href="#sort-4" title="Permalink to this headline">¶</a></h3>
 <p>Sorts a list using the given key and order. &#64;&lt; and &#64;&gt; orders remove duplicates while &#64;=&lt; and &#64;&gt;= orders keep them. &#64;&lt; and &#64;=&lt; specify ascending order while &#64;&gt; and &#64;&gt;= specify descending order. When the key is zero, the whole term is used for comparisons.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1075,7 +1092,7 @@
 </div>
 <div id="split/4"> </div></div>
 <div class="section" id="split-4">
-<span id="listp-0-split-4"></span><span id="index-38"></span><h3><code class="docutils literal notranslate"><span class="pre">split/4</span></code><a class="headerlink" href="#split-4" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-split-4"></span><span id="index-39"></span><h3><code class="docutils literal notranslate"><span class="pre">split/4</span></code><a class="headerlink" href="#split-4" title="Permalink to this headline">¶</a></h3>
 <p>Splits a list into sublists of a given length. Also returns a list with the remaining elements. Fails if the length is zero or negative.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1095,7 +1112,7 @@
 </div>
 <div id="sublist/2"> </div></div>
 <div class="section" id="sublist-2">
-<span id="listp-0-sublist-2"></span><span id="index-39"></span><h3><code class="docutils literal notranslate"><span class="pre">sublist/2</span></code><a class="headerlink" href="#sublist-2" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-sublist-2"></span><span id="index-40"></span><h3><code class="docutils literal notranslate"><span class="pre">sublist/2</span></code><a class="headerlink" href="#sublist-2" title="Permalink to this headline">¶</a></h3>
 <p>The first list is a sublist of the second.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1115,7 +1132,7 @@
 </div>
 <div id="subsequence/3"> </div></div>
 <div class="section" id="subsequence-3">
-<span id="listp-0-subsequence-3"></span><span id="index-40"></span><h3><code class="docutils literal notranslate"><span class="pre">subsequence/3</span></code><a class="headerlink" href="#subsequence-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-subsequence-3"></span><span id="index-41"></span><h3><code class="docutils literal notranslate"><span class="pre">subsequence/3</span></code><a class="headerlink" href="#subsequence-3" title="Permalink to this headline">¶</a></h3>
 <p>List is an interleaving of Subsequence and Remaining. Element order is preserved.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1135,7 +1152,7 @@
 </div>
 <div id="subsequence/4"> </div></div>
 <div class="section" id="subsequence-4">
-<span id="listp-0-subsequence-4"></span><span id="index-41"></span><h3><code class="docutils literal notranslate"><span class="pre">subsequence/4</span></code><a class="headerlink" href="#subsequence-4" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-subsequence-4"></span><span id="index-42"></span><h3><code class="docutils literal notranslate"><span class="pre">subsequence/4</span></code><a class="headerlink" href="#subsequence-4" title="Permalink to this headline">¶</a></h3>
 <p>Generates subsequences of a given length from a list. Also returns the remaining elements. Element order is preserved.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1155,7 +1172,7 @@
 </div>
 <div id="substitute/4"> </div></div>
 <div class="section" id="substitute-4">
-<span id="listp-0-substitute-4"></span><span id="index-42"></span><h3><code class="docutils literal notranslate"><span class="pre">substitute/4</span></code><a class="headerlink" href="#substitute-4" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-substitute-4"></span><span id="index-43"></span><h3><code class="docutils literal notranslate"><span class="pre">substitute/4</span></code><a class="headerlink" href="#substitute-4" title="Permalink to this headline">¶</a></h3>
 <p>Substitutes all occurrences of Old in List by New, returning NewList. Uses term equality for element comparison.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1175,7 +1192,7 @@
 </div>
 <div id="subtract/3"> </div></div>
 <div class="section" id="subtract-3">
-<span id="listp-0-subtract-3"></span><span id="index-43"></span><h3><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code><a class="headerlink" href="#subtract-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-subtract-3"></span><span id="index-44"></span><h3><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code><a class="headerlink" href="#subtract-3" title="Permalink to this headline">¶</a></h3>
 <p>Removes all elements in the second list from the first list, returning the list of remaining elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1195,7 +1212,7 @@
 </div>
 <div id="suffix/2"> </div></div>
 <div class="section" id="suffix-2">
-<span id="listp-0-suffix-2"></span><span id="index-44"></span><h3><code class="docutils literal notranslate"><span class="pre">suffix/2</span></code><a class="headerlink" href="#suffix-2" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-suffix-2"></span><span id="index-45"></span><h3><code class="docutils literal notranslate"><span class="pre">suffix/2</span></code><a class="headerlink" href="#suffix-2" title="Permalink to this headline">¶</a></h3>
 <p>Suffix is a suffix of List.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1215,7 +1232,7 @@
 </div>
 <div id="suffix/3"> </div></div>
 <div class="section" id="suffix-3">
-<span id="listp-0-suffix-3"></span><span id="index-45"></span><h3><code class="docutils literal notranslate"><span class="pre">suffix/3</span></code><a class="headerlink" href="#suffix-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-suffix-3"></span><span id="index-46"></span><h3><code class="docutils literal notranslate"><span class="pre">suffix/3</span></code><a class="headerlink" href="#suffix-3" title="Permalink to this headline">¶</a></h3>
 <p>Suffix is a suffix of length Length of List.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1236,7 +1253,7 @@
 </div>
 <div id="proper_suffix/2"> </div></div>
 <div class="section" id="proper-suffix-2">
-<span id="listp-0-proper-suffix-2"></span><span id="index-46"></span><h3><code class="docutils literal notranslate"><span class="pre">proper_suffix/2</span></code><a class="headerlink" href="#proper-suffix-2" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-proper-suffix-2"></span><span id="index-47"></span><h3><code class="docutils literal notranslate"><span class="pre">proper_suffix/2</span></code><a class="headerlink" href="#proper-suffix-2" title="Permalink to this headline">¶</a></h3>
 <p>Suffix is a proper suffix of List.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1256,7 +1273,7 @@
 </div>
 <div id="proper_suffix/3"> </div></div>
 <div class="section" id="proper-suffix-3">
-<span id="listp-0-proper-suffix-3"></span><span id="index-47"></span><h3><code class="docutils literal notranslate"><span class="pre">proper_suffix/3</span></code><a class="headerlink" href="#proper-suffix-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-proper-suffix-3"></span><span id="index-48"></span><h3><code class="docutils literal notranslate"><span class="pre">proper_suffix/3</span></code><a class="headerlink" href="#proper-suffix-3" title="Permalink to this headline">¶</a></h3>
 <p>Suffix is a proper suffix of length Length of List.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1277,7 +1294,7 @@
 </div>
 <div id="take/3"> </div></div>
 <div class="section" id="take-3">
-<span id="listp-0-take-3"></span><span id="index-48"></span><h3><code class="docutils literal notranslate"><span class="pre">take/3</span></code><a class="headerlink" href="#take-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-take-3"></span><span id="index-49"></span><h3><code class="docutils literal notranslate"><span class="pre">take/3</span></code><a class="headerlink" href="#take-3" title="Permalink to this headline">¶</a></h3>
 <p>Takes the first N elements of a list. Fails if the list have fewer than N elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1297,7 +1314,7 @@
 </div>
 <div id="drop/3"> </div></div>
 <div class="section" id="drop-3">
-<span id="listp-0-drop-3"></span><span id="index-49"></span><h3><code class="docutils literal notranslate"><span class="pre">drop/3</span></code><a class="headerlink" href="#drop-3" title="Permalink to this headline">¶</a></h3>
+<span id="listp-0-drop-3"></span><span id="index-50"></span><h3><code class="docutils literal notranslate"><span class="pre">drop/3</span></code><a class="headerlink" href="#drop-3" title="Permalink to this headline">¶</a></h3>
 <p>Drops the first N elements of a list. Fails if the list have fewer than N elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

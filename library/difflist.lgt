@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2019/01/03,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -298,6 +298,42 @@
 		ListTail \== Back2,
 		Length1 is Length0 + 1,
 		proper_prefix(PrefixTail-Back1, Length1, Length, ListTail-Back2).
+
+	remove_duplicates(List, Set) :-
+		add_positions(List, 1, Pairs),
+		keysort(Pairs, SortedPairs),
+		remove_duplicates_and_invert(SortedPairs, InvertedPairs),
+		keysort(InvertedPairs, InvertedPairsSorted),
+		remove_positions(InvertedPairsSorted, Set).
+
+	add_positions(List-Back, _, List-Back) :-
+		List == Back,
+		!.
+	add_positions([Head| List]-Back, N, [Head-N| Pairs]-Back) :-
+		M is N + 1,
+		add_positions(List-Back, M, Pairs-Back).
+
+	remove_duplicates_and_invert(List-Back, List-Back) :-
+		List == Back,
+		!.
+	remove_duplicates_and_invert([Head-Key| Pairs]-Back, [Key-Head| InvertedPairs]-Back) :-
+		remove_duplicates_and_invert(Pairs-Back, Head, InvertedPairs-Back).
+
+	remove_duplicates_and_invert(List-Back, _, List-Back) :-
+		List == Back,
+		!.
+	remove_duplicates_and_invert([Head-_| Pairs]-Back, Element, InvertedPairs-Back) :-
+		Head == Element,
+		!,
+		remove_duplicates_and_invert(Pairs-Back, Element, InvertedPairs-Back).
+	remove_duplicates_and_invert([Head-Key| Pairs]-Back, _, [Key-Head| InvertedPairs]-Back) :-
+		remove_duplicates_and_invert(Pairs-Back, Head, InvertedPairs-Back).
+
+	remove_positions(List-Back, List-Back) :-
+		List == Back,
+		!.
+	remove_positions([_-Head| Pairs]-Back, [Head| Set]-Back) :-
+		remove_positions(Pairs-Back, Set-Back).
 
 	reverse(List-Back, Reversed-Back) :-
 		same_length(List-Back, Reversed-Back),

@@ -21,9 +21,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2018/08/17,
+		date is 2019/01/03,
 		comment is 'List protocol.',
 		see_also is [numberlistp, varlistp]
 	]).
@@ -218,6 +218,13 @@
 	:- info(proper_prefix/3, [
 		comment is 'Prefix is a proper prefix of length Length of List.',
 		argnames is ['Prefix', 'Length', 'List']
+	]).
+
+	:- public(remove_duplicates/2).
+	:- mode(reverse(+list, -list), one).
+	:- info(remove_duplicates/2, [
+		comment is 'Removes duplicated list elements using equality (==/2) for comparison and keepying the left-most element when repeated.',
+		argnames is ['List', 'Set']
 	]).
 
 	:- public(reverse/2).
