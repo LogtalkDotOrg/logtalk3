@@ -38,10 +38,10 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.9,
+		version is 0.11,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2019/01/02,
-		copyright is 'Copyright 2016 Metagol authors',
+		date is 2019/01/03,
+		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
 	]).
@@ -81,23 +81,22 @@
 		argnames is ['Program']
 	]).
 
-	:- protected([pprint_clause/1, func_test/3, prove_deduce/3, assert_prim/1, assert_program/1]).
-
 	:- public([metarule/7, metarule_init/6, prim/1, primcall/2, interpreted_bk/2]).
 	:- dynamic([prim/1, primcall/2]).
 
 	:- public([functional/0, unfold_program/0, min_clauses/1, max_clauses/1, max_inv_preds/1, metarule_next_id/1]).
 	:- dynamic([functional/0, unfold_program/0, min_clauses/1, max_clauses/1, max_inv_preds/1, metarule_next_id/1]).
 
+	:- protected([pprint_clause/1, func_test/3, prove_deduce/3, assert_prim/1, assert_program/1]).
+
 	:- private(interpreted_/1).
 	:- dynamic(interpreted_/1).
 
 	:- uses(integer, [succ/2]).
-	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, select/3]).
+	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, remove_duplicates/2 as list_to_set/2, select/3]).
 	:- uses(logtalk, [print_message/3]).
 	:- uses(meta, [maplist/2, maplist/3]).
 	:- uses(pairs, [map/3 as map_list_to_pairs/3, values/2 as pairs_values/2]).
-	:- uses(set, [as_set/2 as list_to_set/2]).
 	:- uses(user, [between/3]).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
@@ -138,9 +137,9 @@
 
 	proveall(Atoms,Sig,Prog) :-
 		target_predicate(Atoms,P/A),
-		print_message(comment, metagol, 'learning '-(P/A)),
+		print_message(comment, metagol, learning_predicate(P/A)),
 		iterator(MaxN),
-		print_message(comment, metagol, 'clauses: '-MaxN),
+		print_message(comment, metagol, number_of_clauses(MaxN)),
 		invented_symbols(MaxN,P/A,Sig),
 		prove_examples(Atoms,Sig,_Sig,MaxN,0,_N,[],Prog).
 
@@ -300,7 +299,7 @@
 		remove_orderings(T,Out).
 
 	pprint_clause(Clause) :-
-		print_message(results, metagol, clause(Clause)).
+		print_message(results, metagol, learned_clause(Clause)).
 
 	clause_list_to_clause([H|B1],Clause) :-
 		list_to_atom(H,Head),
@@ -368,7 +367,7 @@
 			% examples may require asserting new predicates during learning
 			(:- set_logtalk_flag(dynamic_declarations, allow)),
 			% currently term-expansion can generate discontiguous predicates
-			(:- discontiguous([metarule/7,metarule_init/6,prim/1,primcall/2])),
+			(:- discontiguous([metarule/7, metarule_init/6, prim/1, primcall/2])),
 			% learning may generate new clauses for the following predicates
 			% which would have been compiled static if defioned in the examples
 			(:- dynamic([prim/1, primcall/2]))
@@ -408,7 +407,10 @@
 	term_expansion((metarule(Name,MetaSub,Clause,PS) :-Body),Asserts) :-
 		get_asserts(Name,MetaSub,Clause,Body,PS,Asserts).
 
-	get_asserts(Name,MetaSub,Clause1,MetaBody,PS,[MRule,metarule_init(AssertName,MetaSub,PredTypes,Clause2,Recursive,Path)]) :-
+	get_asserts(
+		Name,MetaSub,Clause1,MetaBody,PS,
+		[MRule,metarule_init(AssertName,MetaSub,PredTypes,Clause2,Recursive,Path)]
+	) :-
 		Clause1 = (Head:-Body1),
 		Head = [P|_],
 		is_recursive(Body1,P,Recursive),
@@ -420,7 +422,7 @@
 		),
 		(	var(MetaBody) ->
 			MRule = metarule(AssertName,MetaSub,PredTypes,Clause2,PS,Recursive,Path)
-		;	MRule = (metarule(AssertName,MetaSub,PredTypes,Clause2,PS,Recursive,Path) :-MetaBody)
+		;	MRule = (metarule(AssertName,MetaSub,PredTypes,Clause2,PS,Recursive,Path) :- MetaBody)
 		).
 
 	is_recursive([],_,false).
@@ -525,14 +527,18 @@
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(clause(Clause), metagol) -->
+	logtalk::message_tokens(learned_clause(Clause), metagol) -->
 		{numbervars(Clause, 0, _)},
 		['~q.'-[Clause], nl].
+	logtalk::message_tokens(learning_predicate(Predicate), metagol) -->
+		['learning ~q'-[Predicate], nl].
+	logtalk::message_tokens(number_of_clauses(Clauses), metagol) -->
+		['clauses: ~w'-[Clauses], nl].
 
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
 	logtalk::message_prefix_stream(comment, metagol, '% ', user_output).
-	logtalk::message_prefix_stream(results, metagol, '', user_output).
+	logtalk::message_prefix_stream(results, metagol, '',   user_output).
 
 :- end_object.
