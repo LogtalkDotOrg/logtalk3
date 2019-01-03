@@ -10,7 +10,7 @@
 <title>library</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-2084 6146,-2084 6146,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/01/03, 15:27</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/01/03, 16:22</text>
 <g id="clust1" class="cluster"><title>cluster_library_library</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <path fill="#eee9e9" stroke="#8b8989" d="M20,-38C20,-38 6122,-38 6122,-38 6128,-38 6134,-44 6134,-50 6134,-50 6134,-2060 6134,-2060 6134,-2066 6128,-2072 6122,-2072 6122,-2072 20,-2072 20,-2072 14,-2072 8,-2066 8,-2060 8,-2060 8,-50 8,-50 8,-44 14,-38 20,-38"/>
@@ -181,8 +181,8 @@
 </g>
 <g id="clust31" class="cluster"><title>cluster_file_/Users/pmoura/logtalk/library/varlistp.lgt</title>
 <g id="a_clust31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/varlistp.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/varlistp.lgt">
-<path fill="snow" stroke="#8b8989" d="M5130,-357C5130,-357 5226,-357 5226,-357 5232,-357 5238,-363 5238,-369 5238,-369 5238,-644 5238,-644 5238,-650 5232,-656 5226,-656 5226,-656 5130,-656 5130,-656 5124,-656 5118,-650 5118,-644 5118,-644 5118,-369 5118,-369 5118,-363 5124,-357 5130,-357"/>
-<text text-anchor="middle" x="5162.5" y="-364" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">varlistp.lgt</text>
+<path fill="snow" stroke="#8b8989" d="M5098,-352C5098,-352 5226,-352 5226,-352 5232,-352 5238,-358 5238,-364 5238,-364 5238,-649 5238,-649 5238,-655 5232,-661 5226,-661 5226,-661 5098,-661 5098,-661 5092,-661 5086,-655 5086,-649 5086,-649 5086,-364 5086,-364 5086,-358 5092,-352 5098,-352"/>
+<text text-anchor="middle" x="5130.5" y="-359" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">varlistp.lgt</text>
 </a>
 </g>
 </g>
@@ -1690,82 +1690,85 @@
 <!-- varlistp -->
 <g id="node24" class="node"><title>varlistp</title>
 <g id="a_node24"><a xlink:href="https://logtalk.org/library/varlistp_0.html" xlink:title="https://logtalk.org/library/varlistp_0.html">
-<polygon fill="aquamarine" stroke="black" points="5221.5,-646 5128.5,-646 5128.5,-386 5227.5,-386 5227.5,-640 5221.5,-646"/>
-<polyline fill="none" stroke="black" points="5221.5,-646 5221.5,-640 "/>
-<polyline fill="none" stroke="black" points="5227.5,-640 5221.5,-640 "/>
-<text text-anchor="start" x="5137" y="-633.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5152" y="-633.2" font-family="Courier,monospace" font-size="11.00">varlistp</text>
-<text text-anchor="start" x="5214" y="-633.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-622.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5161.5" y="-623.4" font-family="Courier,monospace" font-size="7.00">protocol</text>
-<text text-anchor="start" x="5214" y="-622.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-612.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-602.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5156.5" y="-602.8" font-family="Courier,monospace" font-size="9.00">append/3</text>
-<text text-anchor="start" x="5214" y="-602.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-592.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5156.5" y="-592.8" font-family="Courier,monospace" font-size="9.00">delete/3</text>
-<text text-anchor="start" x="5214" y="-592.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-582.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5159.5" y="-582.8" font-family="Courier,monospace" font-size="9.00">empty/1</text>
-<text text-anchor="start" x="5214" y="-582.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-572.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5154" y="-572.8" font-family="Courier,monospace" font-size="9.00">flatten/2</text>
-<text text-anchor="start" x="5214" y="-572.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-562.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5162" y="-562.8" font-family="Courier,monospace" font-size="9.00">last/2</text>
-<text text-anchor="start" x="5214" y="-562.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-552.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5156.5" y="-552.8" font-family="Courier,monospace" font-size="9.00">length/2</text>
-<text text-anchor="start" x="5214" y="-552.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-542.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5148.5" y="-542.8" font-family="Courier,monospace" font-size="9.00">memberchk/2</text>
-<text text-anchor="start" x="5214" y="-542.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-532.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5156.5" y="-532.8" font-family="Courier,monospace" font-size="9.00">nextto/3</text>
-<text text-anchor="start" x="5214" y="-532.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-522.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5162" y="-522.8" font-family="Courier,monospace" font-size="9.00">nth0/3</text>
-<text text-anchor="start" x="5214" y="-522.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-512.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5162" y="-512.8" font-family="Courier,monospace" font-size="9.00">nth0/4</text>
-<text text-anchor="start" x="5214" y="-512.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-502.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5162" y="-502.8" font-family="Courier,monospace" font-size="9.00">nth1/3</text>
-<text text-anchor="start" x="5214" y="-502.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-492.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5162" y="-492.8" font-family="Courier,monospace" font-size="9.00">nth1/4</text>
-<text text-anchor="start" x="5214" y="-492.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-482.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5143" y="-482.8" font-family="Courier,monospace" font-size="9.00">permutation/2</text>
-<text text-anchor="start" x="5214" y="-482.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-472.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5156.5" y="-472.8" font-family="Courier,monospace" font-size="9.00">prefix/2</text>
-<text text-anchor="start" x="5214" y="-472.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-462.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5154" y="-462.8" font-family="Courier,monospace" font-size="9.00">reverse/2</text>
-<text text-anchor="start" x="5214" y="-462.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-452.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5143" y="-452.8" font-family="Courier,monospace" font-size="9.00">same_length/2</text>
-<text text-anchor="start" x="5214" y="-452.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-442.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5156.5" y="-442.8" font-family="Courier,monospace" font-size="9.00">select/3</text>
-<text text-anchor="start" x="5214" y="-442.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-432.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5154" y="-432.8" font-family="Courier,monospace" font-size="9.00">sublist/2</text>
-<text text-anchor="start" x="5214" y="-432.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-422.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5151" y="-422.8" font-family="Courier,monospace" font-size="9.00">subtract/3</text>
-<text text-anchor="start" x="5214" y="-422.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-412.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5156.5" y="-412.8" font-family="Courier,monospace" font-size="9.00">suffix/2</text>
-<text text-anchor="start" x="5214" y="-412.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-402.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5159.5" y="-402.8" font-family="Courier,monospace" font-size="9.00">valid/1</text>
-<text text-anchor="start" x="5214" y="-402.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5137" y="-392.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="5159.5" y="-392.8" font-family="Courier,monospace" font-size="9.00">check/1</text>
-<text text-anchor="start" x="5214" y="-392.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<polygon fill="aquamarine" stroke="black" points="5221.5,-651 5096.5,-651 5096.5,-381 5227.5,-381 5227.5,-645 5221.5,-651"/>
+<polyline fill="none" stroke="black" points="5221.5,-651 5221.5,-645 "/>
+<polyline fill="none" stroke="black" points="5227.5,-645 5221.5,-645 "/>
+<text text-anchor="start" x="5105" y="-638.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5136" y="-638.2" font-family="Courier,monospace" font-size="11.00">varlistp</text>
+<text text-anchor="start" x="5214" y="-638.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-627.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5145.5" y="-628.4" font-family="Courier,monospace" font-size="7.00">protocol</text>
+<text text-anchor="start" x="5214" y="-627.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-617.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-607.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5140.5" y="-607.8" font-family="Courier,monospace" font-size="9.00">append/3</text>
+<text text-anchor="start" x="5214" y="-607.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-597.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5140.5" y="-597.8" font-family="Courier,monospace" font-size="9.00">delete/3</text>
+<text text-anchor="start" x="5214" y="-597.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-587.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5143.5" y="-587.8" font-family="Courier,monospace" font-size="9.00">empty/1</text>
+<text text-anchor="start" x="5214" y="-587.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-577.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5138" y="-577.8" font-family="Courier,monospace" font-size="9.00">flatten/2</text>
+<text text-anchor="start" x="5214" y="-577.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-567.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5146" y="-567.8" font-family="Courier,monospace" font-size="9.00">last/2</text>
+<text text-anchor="start" x="5214" y="-567.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-557.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5140.5" y="-557.8" font-family="Courier,monospace" font-size="9.00">length/2</text>
+<text text-anchor="start" x="5214" y="-557.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-547.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5132.5" y="-547.8" font-family="Courier,monospace" font-size="9.00">memberchk/2</text>
+<text text-anchor="start" x="5214" y="-547.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-537.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5140.5" y="-537.8" font-family="Courier,monospace" font-size="9.00">nextto/3</text>
+<text text-anchor="start" x="5214" y="-537.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-527.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5146" y="-527.8" font-family="Courier,monospace" font-size="9.00">nth0/3</text>
+<text text-anchor="start" x="5214" y="-527.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-517.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5146" y="-517.8" font-family="Courier,monospace" font-size="9.00">nth0/4</text>
+<text text-anchor="start" x="5214" y="-517.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-507.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5146" y="-507.8" font-family="Courier,monospace" font-size="9.00">nth1/3</text>
+<text text-anchor="start" x="5214" y="-507.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-497.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5146" y="-497.8" font-family="Courier,monospace" font-size="9.00">nth1/4</text>
+<text text-anchor="start" x="5214" y="-497.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-487.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5127" y="-487.8" font-family="Courier,monospace" font-size="9.00">permutation/2</text>
+<text text-anchor="start" x="5214" y="-487.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-477.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5140.5" y="-477.8" font-family="Courier,monospace" font-size="9.00">prefix/2</text>
+<text text-anchor="start" x="5214" y="-477.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-467.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5111" y="-467.8" font-family="Courier,monospace" font-size="9.00">remove_duplicates/2</text>
+<text text-anchor="start" x="5214" y="-467.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-457.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5138" y="-457.8" font-family="Courier,monospace" font-size="9.00">reverse/2</text>
+<text text-anchor="start" x="5214" y="-457.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-447.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5127" y="-447.8" font-family="Courier,monospace" font-size="9.00">same_length/2</text>
+<text text-anchor="start" x="5214" y="-447.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-437.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5140.5" y="-437.8" font-family="Courier,monospace" font-size="9.00">select/3</text>
+<text text-anchor="start" x="5214" y="-437.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-427.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5138" y="-427.8" font-family="Courier,monospace" font-size="9.00">sublist/2</text>
+<text text-anchor="start" x="5214" y="-427.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-417.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5135" y="-417.8" font-family="Courier,monospace" font-size="9.00">subtract/3</text>
+<text text-anchor="start" x="5214" y="-417.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-407.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5140.5" y="-407.8" font-family="Courier,monospace" font-size="9.00">suffix/2</text>
+<text text-anchor="start" x="5214" y="-407.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-397.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5143.5" y="-397.8" font-family="Courier,monospace" font-size="9.00">valid/1</text>
+<text text-anchor="start" x="5214" y="-397.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5105" y="-387.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="5143.5" y="-387.8" font-family="Courier,monospace" font-size="9.00">check/1</text>
+<text text-anchor="start" x="5214" y="-387.8" font-family="Courier,monospace" font-size="9.00"> </text>
 </a>
 </g>
 </g>
@@ -1785,12 +1788,12 @@
 <!-- varlist&#45;&gt;varlistp -->
 <g id="edge20" class="edge"><title>varlist&#45;&gt;varlistp</title>
 <g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
-<path fill="none" stroke="black" d="M5442.44,-194.347C5434.16,-214.149 5418.13,-246.331 5395,-266 5339.86,-312.887 5293.98,-274.648 5244,-327 5229.98,-341.688 5218.91,-359.527 5210.19,-378.298"/>
-<ellipse fill="black" stroke="black" cx="5208.47" cy="-382.164" rx="4.00002" ry="4.00002"/>
+<path fill="none" stroke="black" d="M5442.44,-194.347C5434.16,-214.149 5418.13,-246.331 5395,-266 5339.86,-312.887 5295.88,-276.524 5244,-327 5230.27,-340.363 5218.68,-356.415 5208.95,-373.435"/>
+<ellipse fill="black" stroke="black" cx="5206.83" cy="-377.282" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
 <g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
-<text text-anchor="start" x="5283" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+<text text-anchor="start" x="5287" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
 </a>
 </g>
 </g>

@@ -21,9 +21,9 @@
 :- protocol(varlistp).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/10/06,
+		date is 2019/01/03,
 		comment is 'List of variables protocol.',
 		see_also is [listp, numberlistp]
 	]).
@@ -124,6 +124,13 @@
 	:- info(prefix/2, [
 		comment is 'Prefix is a prefix of List.',
 		argnames is ['Prefix', 'List']
+	]).
+
+	:- public(remove_duplicates/2).
+	:- mode(reverse(+list, -list), one).
+	:- info(remove_duplicates/2, [
+		comment is 'Removes duplicated variables and keepying the left-most variable when repeated.',
+		argnames is ['List', 'Set']
 	]).
 
 	:- public(reverse/2).

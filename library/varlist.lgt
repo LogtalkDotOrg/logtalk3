@@ -22,9 +22,9 @@
 	implements(varlistp)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2019/01/03,
 		comment is 'List of variables predicates.',
 		see_also is [list, list(_), numberlist, difflist]
 	]).
@@ -132,6 +132,34 @@
 			Head1 == Head2
 		),
 		prefix(Tail1, Tail2).
+
+	remove_duplicates(List, Set) :-
+		add_positions(List, 1, Pairs),
+		keysort(Pairs, SortedPairs),
+		remove_duplicates_and_invert(SortedPairs, InvertedPairs),
+		keysort(InvertedPairs, InvertedPairsSorted),
+		remove_positions(InvertedPairsSorted, Set).
+
+	add_positions([], _, []).
+	add_positions([Head| List], N, [Head-N| Pairs]) :-
+		M is N + 1,
+		add_positions(List, M, Pairs).
+
+	remove_duplicates_and_invert([], []).
+	remove_duplicates_and_invert([Head-Key| Pairs], [Key-Head| InvertedPairs]) :-
+		remove_duplicates_and_invert(Pairs, Head, InvertedPairs).
+
+	remove_duplicates_and_invert([], _, []).
+	remove_duplicates_and_invert([Head-_| Pairs], Element, InvertedPairs) :-
+		Head == Element,
+		!,
+		remove_duplicates_and_invert(Pairs, Element, InvertedPairs).
+	remove_duplicates_and_invert([Head-Key| Pairs], _, [Key-Head| InvertedPairs]) :-
+		remove_duplicates_and_invert(Pairs, Head, InvertedPairs).
+
+	remove_positions([], []).
+	remove_positions([_-Head| Pairs], [Head| Set]) :-
+		remove_positions(Pairs, Set).
 
 	reverse(List, Reversed) :-
 		reverse(List, [], Reversed, Reversed).

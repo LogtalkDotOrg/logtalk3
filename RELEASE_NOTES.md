@@ -48,8 +48,7 @@ Handbook.
 Library
 -------
 
-* ADDED: Predicate `remove_duplicates/2` to the library list entities (`listp`,
-`list`, and `difflist`).
+* ADDED: Predicate `remove_duplicates/2` to the library list entities.
 
 Tools
 -----

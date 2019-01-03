@@ -9,8 +9,8 @@
 List of variables protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.1
-| **Date:** 2016/10/6
+| **Version:** 1.2
+| **Date:** 2019/1/3
 
 | **Compilation flags:**
 |    ``static``
@@ -318,6 +318,24 @@ Prefix is a prefix of List.
 
 .. raw:: html
 
+   <div id="remove_duplicates/2"> </div>
+
+.. index:: remove_duplicates/2
+.. _varlistp/0::remove_duplicates/2:
+
+``remove_duplicates/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes duplicated variables and keepying the left-most variable when repeated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_duplicates(List,Set)``
+
+.. raw:: html
+
    <div id="reverse/2"> </div>
 
 .. index:: reverse/2
@@ -334,6 +352,7 @@ Reverses a list.
 | **Template:**
 |    ``reverse(List,Reversed)``
 | **Mode and number of proofs:**
+|    ``reverse(+list,-list)`` - ``one``
 |    ``reverse(@list,?list)`` - ``zero_or_one``
 |    ``reverse(?list,@list)`` - ``zero_or_one``
 |    ``reverse(-list,-list)`` - ``one_or_more``
