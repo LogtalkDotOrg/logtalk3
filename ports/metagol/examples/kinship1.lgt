@@ -59,8 +59,8 @@
 	father(andy,spongebob).
 
 	%% learn grandparent by inventing parent
-	:- public(learn1/0).
-	learn1 :-
+	:- public(learn1/1).
+	learn1(Clauses) :-
 		Pos = [
 			grandparent(ann,amelia),
 			grandparent(steve,amelia),
@@ -69,7 +69,13 @@
 			grandparent(linda,amelia)
 		],
 		Neg = [grandparent(amy,amelia)],
-		::learn(Pos,Neg).
+		::learn(Pos, Neg, Prog),
+		::pclauses(Prog, Clauses).
+
+	:- public(learn1/0).
+	learn1 :-
+		learn1(Clauses),
+		meta::maplist(::pprint_clause, Clauses).
 
 	%% example of a failure
 	:- public(learn2/0).
@@ -78,7 +84,7 @@
 		Neg = [grandparent(ann,amelia)],
 		(	::learn(Pos, Neg) ->
 			false
-		;	write('failed to learn a theory'), nl
+		;	logtalk::print_message(comment, metagol, @'failed to learn a theory')
 		).
 
 :- end_object.

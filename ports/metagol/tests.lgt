@@ -44,16 +44,6 @@
 		comment is 'Unit tests for the "metagol" example.'
 	]).
 
-	test(metagol_family_1) :-
-		family::learn(Clauses), !,
-		^^variant(
-			Clauses,
-			[	(grandparent(A,C) :- grandparent_1(A,B), grandparent_1(B,C)),
-				(grandparent_1(D,E) :- father(D,E)),
-				(grandparent_1(F,G) :- mother(F,G))
-			]
-		).
-
 	test(metagol_constants1_1) :-
 		constants1::learn(Clauses), !,
 		^^variant(
@@ -77,6 +67,16 @@
 			Clauses,
 			[	(f(andy, A) :- p(patrick, A)),
 				(f(andy, B) :- p(spongebob, B))
+			]
+		).
+
+	test(metagol_family_1) :-
+		family::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(grandparent(A,C) :- grandparent_1(A,B), grandparent_1(B,C)),
+				(grandparent_1(D,E) :- father(D,E)),
+				(grandparent_1(F,G) :- mother(F,G))
 			]
 		).
 
@@ -124,6 +124,19 @@
 				(f_1(D) :- divisible2(D))
 			]
 		).
+
+	test(metagol_kinship1_1) :-
+		kinship1::learn1(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(grandparent(A,C) :- grandparent_1(A,B), grandparent_1(B,C)),
+				(grandparent_1(D,E) :- father(D,E)),
+				(grandparent_1(F,G) :- mother(F,G))
+			]
+		).
+
+	test(metagol_kinship1_2) :-
+		kinship1::learn2, !.
 
 	test(metagol_kinship2_1) :-
 		kinship2::learn(Clauses), !,
