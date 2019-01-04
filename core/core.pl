@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 23, 0, b03)).
+'$lgt_version_data'(logtalk(3, 23, 0, b04)).
 
 
 
@@ -16265,11 +16265,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	fail
 	),
 	Head =.. [_| HeadArguments],
+	term_variables(HeadArguments, HeadVariables),
+	HeadArguments == HeadVariables,
 	Body =.. [_| BodyArguments],
-	forall(
-		'$lgt_member'(Argument, HeadArguments),
-		(var(Argument), '$lgt_member_var'(Argument, BodyArguments))
-	),
+	term_variables(BodyArguments, BodyVariables),
+	'$lgt_intersection'(HeadVariables, BodyVariables, HeadVariables),
 	% all head arguments are variables and exist in the body
 	DefClauseOld =.. [Def, Head, _, _],
 	retractall('$lgt_pp_def_'(DefClauseOld)),
@@ -22076,7 +22076,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TGoal =.. [TFunctor| TAllArgs],
 	% subtract the number of extra arguments
 	Arity is TArity - N,
-	TArity >= 0,
+	Arity >= 0,
 	% unify the compiled closure arguments from the compiled goal arguments
 	'$lgt_length'(TArgs, 0, Arity),
 	'$lgt_append'(TArgs, _, TAllArgs),
