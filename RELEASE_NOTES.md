@@ -32,6 +32,10 @@ closures.
 
 * IMPROVED: Inlining of predicate definitions.
 
+* FIXED: Try to ensure that calls to module meta-predicates are never inlined.
+Effectiveness requires a backend Prolog system with a `predicate_property/2`
+built-in predicate supporting the `meta_predicate/1` property.
+
 * FIXED: Enable message sending static binding optimization when the message
 is an alias to a meta-predicate.
 

@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 23, 0, b04)).
+'$lgt_version_data'(logtalk(3, 23, 0, b05)).
 
 
 
@@ -16207,6 +16207,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % inline calls in linking clauses to Prolog module, built-in, and
 % foreign predicates when compiling source files in optimal mode
+%
+% calls to meta-predicates are never inlined as the inlined goal may
+% contain free variables (not present in the clause head) that will
+% break semantics (compared with the non-inlined definition) if
+% meta-called from a bagof/3 or setof/3 goal
 
 '$lgt_inline_calls'(protocol).
 
@@ -16243,7 +16248,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	TBody = ':'(Module, Body) ->
 		% call to a Prolog module predicate
 		atom(Module),
-		callable(Body)
+		callable(Body),
+		\+ catch('$lgt_predicate_property'(':'(Module, Body), meta_predicate(_)), _, true)
 	;	'$lgt_predicate_property'(TBody, built_in),
 		\+ '$lgt_predicate_property'(TBody, meta_predicate(_)) ->
 		% Prolog built-in predicate
