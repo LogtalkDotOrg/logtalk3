@@ -75,7 +75,7 @@
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		meta::maplist(::pprint_clause, Clauses).
+		::pprint_clauses(Clauses).
 
 	example(N,A,B) :-
 		randseq(N,1,N,L1),

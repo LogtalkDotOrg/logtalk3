@@ -91,22 +91,22 @@
 	:- public(learn1/0).
 	learn1 :-
 		learn1(Clauses),
-		meta::maplist(::pprint_clause, Clauses).
+		::pprint_clauses(Clauses).
 
 	:- public(learn2/0).
 	learn2 :-
 		learn2(Clauses),
-		meta::maplist(::pprint_clause, Clauses).
+		::pprint_clauses(Clauses).
 
 	:- public(learn3/0).
 	learn3 :-
 		learn3(Clauses),
-		meta::maplist(::pprint_clause, Clauses).
+		::pprint_clauses(Clauses).
 
 	:- public(learn4/0).
 	learn4 :-
 		learn4(Clauses),
-		meta::maplist(::pprint_clause, Clauses).
+		::pprint_clauses(Clauses).
 
 	%% background knowledge
 	max_right(6).

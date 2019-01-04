@@ -44,7 +44,8 @@ from:
 
 The port allows any number of datasets to be loaded simultaneously with
 per-dataset learning options. A dataset is simply wrapped in an object
-that extends and is expanded by the `metagol` object.
+that extends and is expanded by the `metagol` object as illustrated by
+the ported examples.
 
 Both the original code and the port requires the coroutining `when/2`
 predicate, which is only available in some backend Prolog systems.

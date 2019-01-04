@@ -85,7 +85,7 @@ learn(Clauses) :-
 :- public(learn/0).
 learn :-
 	learn(Clauses),
-	meta::maplist(::pprint_clause, Clauses).
+	::pprint_clauses(Clauses).
 
 % type definitions
 car(car_11).

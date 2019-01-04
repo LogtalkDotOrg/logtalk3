@@ -75,7 +75,7 @@
 	:- public(learn1/0).
 	learn1 :-
 		learn1(Clauses),
-		meta::maplist(::pprint_clause, Clauses).
+		::pprint_clauses(Clauses).
 
 	%% example of a failure
 	:- public(learn2/0).
