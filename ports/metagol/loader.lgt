@@ -39,13 +39,8 @@
 	(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap)
 )).
 
-	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-	    :- ensure_loaded(library(sicstus)).
-	:- elif(current_logtalk_flag(prolog_dialect, swi)).
-		:- use_module(library(when), []).
-	:- endif.
-
 	:- initialization((
+		logtalk_load(library(coroutining_loader)),
 		logtalk_load(library(types_loader)),
 		logtalk_load(library(metapredicates_loader)),
 		logtalk_load(library(meta_compiler_loader)),

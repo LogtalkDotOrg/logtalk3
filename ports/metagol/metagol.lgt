@@ -38,7 +38,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.12,
+		version is 0.13,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2019/01/04,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
@@ -92,22 +92,13 @@
 	:- private(interpreted_/1).
 	:- dynamic(interpreted_/1).
 
+	:- uses(coroutining, [when/2]).
 	:- uses(integer, [succ/2]).
 	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, remove_duplicates/2 as list_to_set/2, select/3]).
 	:- uses(logtalk, [print_message/3]).
 	:- uses(meta, [maplist/2, maplist/3]).
 	:- uses(pairs, [map/3 as map_list_to_pairs/3, values/2 as pairs_values/2]).
 	:- uses(user, [between/3]).
-
-	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-		:- use_module(sicstus, [when/2]).
-	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-		:- uses(user, [when/2]).
-	:- elif(current_logtalk_flag(prolog_dialect, yap)).
-		:- uses(user, [when/2]).
-	:- elif(current_logtalk_flag(prolog_dialect, swi)).
-		:- use_module(when, [when/2]).
-	:- endif.
 
 	% defaults
 	default(min_clauses(1)).
