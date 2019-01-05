@@ -22,14 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/05/23,
+		date is 2019/01/05,
 		comment is 'Unit tests for the "inlining" example.'
 	]).
 
 	:- uses(list, [
-		memberchk/2
+		member/2, memberchk/2
 	]).
 
 	% test "inline" predicate property
@@ -70,32 +70,49 @@
 		ground(Properties),
 		memberchk(inline, Properties).
 
+	test(inlining_07) :-
+		\+ inlining::predicate_property(any(_,_), inline).
+
+	test(inlining_08) :-
+		findall(
+			Property,
+			inlining::predicate_property(any(_,_), Property),
+			Properties
+		),
+		ground(Properties),
+		\+ member(inline, Properties).
+
 	% test "inline" predicate definition property
 
-	test(inlining_07) :-
+	test(inlining_09) :-
 		object_property(inlining, defines(integer/1, Properties)),
 		ground(Properties),
 		memberchk(inline, Properties).
 
-	test(inlining_08) :-
+	test(inlining_10) :-
 		object_property(inlining, defines(map/2, Properties)),
 		ground(Properties),
 		memberchk(inline, Properties).
 
-	test(inlining_09) :-
+	test(inlining_11) :-
 		object_property(inlining, defines(a/2, Properties)),
 		ground(Properties),
 		memberchk(inline, Properties).
+
+	test(inlining_12) :-
+		object_property(inlining, defines(any/2, Properties)),
+		ground(Properties),
+		\+ member(inline, Properties).
 
 	:- if(current_logtalk_flag(modules, supported)).
 
 		:- if(current_module(lists)).
 
-			test(inlining_10) :-
+			test(inlining_13) :-
 				findall(X, inlining::member(X, [1,2,3]), L),
 				L == [1,2,3].
 
-			test(inlining_11) :-
+			test(inlining_14) :-
 				object_property(inlining, defines(member/2, Properties)),
 				ground(Properties),
 				memberchk(inline, Properties).

@@ -30,11 +30,11 @@ Logtalk compiler and runtime
 * IMPROVED: Detection of missing meta-predicate directives when compiling
 closures.
 
-* IMPROVED: Inlining of predicate definitions.
+* IMPROVED: Allow inlining of meta-predicate definitions in safe cases.
 
-* FIXED: Try to ensure that calls to module meta-predicates are never inlined.
-Effectiveness requires a backend Prolog system with a `predicate_property/2`
-built-in predicate supporting the `meta_predicate/1` property.
+* FIXED: Cases are predicate definition inlining would give wrong results
+when meta-calling the predicate from `bagof/3` or `setof/3` goals due to the
+presence of anonymous variables in the predicate definition.
 
 * FIXED: Enable message sending static binding optimization when the message
 is an alias to a meta-predicate.

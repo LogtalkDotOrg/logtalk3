@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 23, 0, b05)).
+'$lgt_version_data'(logtalk(3, 23, 0, b06)).
 
 
 
@@ -16208,10 +16208,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % inline calls in linking clauses to Prolog module, built-in, and
 % foreign predicates when compiling source files in optimal mode
 %
-% calls to meta-predicates are never inlined as the inlined goal may
-% contain free variables (not present in the clause head) that will
-% break semantics (compared with the non-inlined definition) if
-% meta-called from a bagof/3 or setof/3 goal
+% predicate definitions are only inlined when the clause body does
+% not contain anonymous variables, which would break the predicate
+% semantics (compared with the non-inlined definition) when calling
+% the predicate from a bagof/3 or setof/3 goals
 
 '$lgt_inline_calls'(protocol).
 
@@ -16237,46 +16237,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% static, non-multifile, and no synchronization wrapper
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_), user),
 	% source file user-defined predicate
-	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
-	(	TBody = ':'(_, _) ->
-		% allow inlining of Prolog module predicate calls
-		true
-	;	\+ '$lgt_control_construct'(TBody),
-		\+ '$lgt_logtalk_meta_predicate'(TBody, _, _)
-		% body is not otherwise a control construct or a built-in meta-predicate
-	),
-	(	TBody = ':'(Module, Body) ->
-		% call to a Prolog module predicate
-		atom(Module),
-		callable(Body),
-		\+ catch('$lgt_predicate_property'(':'(Module, Body), meta_predicate(_)), _, true)
-	;	'$lgt_predicate_property'(TBody, built_in),
-		\+ '$lgt_predicate_property'(TBody, meta_predicate(_)) ->
-		% Prolog built-in predicate
-		Body = TBody
-	;	% not all backend Prolog systems support a "foreign" predicate property
-		catch('$lgt_predicate_property'(TBody, foreign), _, fail),
-		\+ '$lgt_predicate_property'(TBody, meta_predicate(_)) ->
-		% Prolog foreign predicate
-		Body = TBody
-	;	functor(TBody, TFunctor, TArity),
-		'$lgt_pp_referenced_object_message_'(Object, TFunctor/TArity, _, Functor/Arity, _, _),
-		Object == user ->
-		% message to the "user" pseudo-object
-		Body = TBody
-	;	'$lgt_pp_defines_predicate_'(Body, _, _, TBody, compile(_), user),
-		\+ '$lgt_pp_meta_predicate_'(Body, _) ->
-		% call to a local predicate
-		true
-	;	fail
-	),
 	Head =.. [_| HeadArguments],
 	term_variables(HeadArguments, HeadVariables),
 	HeadArguments == HeadVariables,
-	Body =.. [_| BodyArguments],
-	term_variables(BodyArguments, BodyVariables),
-	'$lgt_intersection'(HeadVariables, BodyVariables, HeadVariables),
-	% all head arguments are variables and exist in the body
+	% all head arguments are variables
+	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
+	'$lgt_inlining_candidate'(TBody, Functor/Arity),
+	% valid candidate for inlining
+	term_variables(TBody, TBodyVariables),
+	forall(
+		'$lgt_member'(TBodyVariable, TBodyVariables),
+		'$lgt_member_var'(TBodyVariable, [ExCtx| HeadVariables])
+	),
+	% no anonymous variables in the body
 	DefClauseOld =.. [Def, Head, _, _],
 	retractall('$lgt_pp_def_'(DefClauseOld)),
 	DefClauseNew =.. [Def, Head, ExCtx, TBody],
@@ -16286,6 +16259,48 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_inline_calls_def'(_).
+	
+	
+'$lgt_inlining_candidate'(':'(Module, Body), _) :-
+	% call to a Prolog module predicate
+	!,
+	atom(Module),
+	callable(Body).
+	
+'$lgt_inlining_candidate'(TBody, _) :-
+	'$lgt_control_construct'(TBody),
+	% don't inline control constructs
+	!,
+	fail.
+	
+'$lgt_inlining_candidate'(TBody, _) :-
+	'$lgt_logtalk_meta_predicate'(TBody, _, _),
+	% don't inline Logtalk built-in meta-predicates
+	!,
+	fail.
+
+'$lgt_inlining_candidate'(TBody, _) :-
+	'$lgt_predicate_property'(TBody, built_in),
+	% Prolog built-in predicate
+	!.
+
+'$lgt_inlining_candidate'(TBody, _) :-
+	% not all backend Prolog systems support a "foreign" predicate property
+	catch('$lgt_predicate_property'(TBody, foreign), _, fail),
+	% Prolog foreign predicate
+	!.
+	
+'$lgt_inlining_candidate'(TBody, Functor/Arity) :-
+	functor(TBody, TFunctor, TArity),
+	'$lgt_pp_referenced_object_message_'(Object, TFunctor/TArity, _, Functor/Arity, _, _),
+	Object == user,
+	% message to the "user" pseudo-object
+	!.
+
+'$lgt_inlining_candidate'(TBody, _) :-
+	'$lgt_pp_defines_predicate_'(_, _, _, TBody, compile(_), user),
+	% call to a local predicate
+	!.
 
 
 

@@ -19,26 +19,29 @@
 
 
 % simple plain Prolog table for the inlining examples
-a(1, a, 'A').
-a(2, b, 'B').
-a(3, c, 'C').
+t(1,  a,  'A').
+t(2,  b,  'B').
+t(3,  c,  'C').
+t(4, 'A', 'A').
+t(5, 'B', 'B').
+t(6, 'C', 'C').
 
 
 :- object(inlining).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/05/23,
+		date is 2019/01/05,
 		comment is 'Simple object for illustrating and testing inlining of predicate definitions.'
 	]).
 
 	:- public([
-		integer/1, map/2, a/2, member/2
+		integer/1, map/2, a/2, any/2, member/2
 	]).
 
 	:- uses(user, [
-		a/3
+		t/3
 	]).
 
 	% the following clause defining the local predicate integer/1
@@ -69,7 +72,15 @@ a(3, c, 'C').
 	% (see the uses/2 directive above)
 	
 	a(N, C) :-
-		a(N, C, _).
+		t(N, C, 'A').
+
+	% but we cannot inline predicates when the body contains anonymous
+	% variables as replacing calling the clause head by calling directly
+	% the clause body would potentially break calls to the predicate
+	% from bagof/3 and setof/3 goals
+
+	any(N, C) :-
+		t(N, C, _).
 
 	% yet another common case is linking clauses that call Prolog module predicates
 
