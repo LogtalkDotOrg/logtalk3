@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>monitorp &mdash; Logtalk APIs v3.23.0-b01 documentation</title>
+  <title>coroutining &mdash; Logtalk APIs v3.23.0-b01 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="natural" href="natural_0.html" />
-    <link rel="prev" title="monitor" href="monitor_0.html" />
+    <link rel="next" title="counters" href="counters_0.html" />
+    <link rel="prev" title="compound" href="compound_0.html" />
    
 
   
@@ -127,7 +127,14 @@
 <li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
-<li class="toctree-l3"><a class="reference internal" href="coroutining_0.html">coroutining</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">coroutining</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="date_0.html">date</a></li>
 <li class="toctree-l3"><a class="reference internal" href="datep_0.html">datep</a></li>
@@ -172,14 +179,7 @@
 <li class="toctree-l3"><a class="reference internal" href="metap_0.html">metap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">monitorp</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
 <li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
@@ -282,13 +282,13 @@
         
           <li><a href="library_index.html">Library index</a> &raquo;</li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">monitorp</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/monitorp_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/coroutining_0.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -301,91 +301,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p id="monitorp-0"><span id="index-0"></span><strong>protocol</strong></p>
-<div class="section" id="monitorp">
-<h1><code class="docutils literal notranslate"><span class="pre">monitorp</span></code><a class="headerlink" href="#monitorp" title="Permalink to this headline">¶</a></h1>
-<p>Monitor protocol.</p>
+  <p id="coroutining-0"><span id="index-0"></span><strong>object</strong></p>
+<div class="section" id="coroutining">
+<h1><code class="docutils literal notranslate"><span class="pre">coroutining</span></code><a class="headerlink" href="#coroutining" title="Permalink to this headline">¶</a></h1>
+<p>Coroutining predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.0</div>
-<div class="line"><strong>Date:</strong> 2000/7/24</div>
+<div class="line"><strong>Version:</strong> 0.1</div>
+<div class="line"><strong>Date:</strong> 2019/1/5</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
 </div>
 </div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
-<div id="monitor_activated/0"> </div><div class="section" id="monitor-activated-0">
-<span id="monitorp-0-monitor-activated-0"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">monitor_activated/0</span></code><a class="headerlink" href="#monitor-activated-0" title="Permalink to this headline">¶</a></h3>
-<p>True if monitor is currently active.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">monitor_activated</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<div id="activate_monitor/0"> </div></div>
-<div class="section" id="activate-monitor-0">
-<span id="monitorp-0-activate-monitor-0"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">activate_monitor/0</span></code><a class="headerlink" href="#activate-monitor-0" title="Permalink to this headline">¶</a></h3>
-<p>Activates all spy points and start monitoring.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">activate_monitor</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<div id="suspend_monitor/0"> </div></div>
-<div class="section" id="suspend-monitor-0">
-<span id="monitorp-0-suspend-monitor-0"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">suspend_monitor/0</span></code><a class="headerlink" href="#suspend-monitor-0" title="Permalink to this headline">¶</a></h3>
-<p>Suspends monitoring, deactivating all spy points.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">suspend_monitor</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<div id="reset_monitor/0"> </div></div>
-<div class="section" id="reset-monitor-0">
-<span id="monitorp-0-reset-monitor-0"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">reset_monitor/0</span></code><a class="headerlink" href="#reset-monitor-0" title="Permalink to this headline">¶</a></h3>
-<p>Resets monitor, deactivating and deleting all spy points.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_monitor</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<div id="spy_point/4"> </div></div>
-<div class="section" id="spy-point-4">
-<span id="monitorp-0-spy-point-4"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">spy_point/4</span></code><a class="headerlink" href="#spy-point-4" title="Permalink to this headline">¶</a></h3>
-<p>Current spy point.</p>
+<div id="dif/2"> </div><div class="section" id="dif-2">
+<span id="coroutining-0-dif-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">dif/2</span></code><a class="headerlink" href="#dif-2" title="Permalink to this headline">¶</a></h3>
+<p>Sets a constraint that is true iff the two terms are different.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -395,17 +331,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">spy_point(Event,Object,Message,Sender)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dif(Term1,Term2)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">spy_point(?event,?object,?callable,?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dif(+term,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-<div id="set_spy_point/4"> </div></div>
-<div class="section" id="set-spy-point-4">
-<span id="monitorp-0-set-spy-point-4"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">set_spy_point/4</span></code><a class="headerlink" href="#set-spy-point-4" title="Permalink to this headline">¶</a></h3>
-<p>Sets a spy point.</p>
+<div id="freeze/2"> </div></div>
+<div class="section" id="freeze-2">
+<span id="coroutining-0-freeze-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">freeze/2</span></code><a class="headerlink" href="#freeze-2" title="Permalink to this headline">¶</a></h3>
+<p>Delays the execution of a goal until a variable is bound.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -415,17 +351,21 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">set_spy_point(Event,Object,Message,Sender)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">freeze(Variable,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">freeze(*,0)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">set_spy_point(?event,?object,?callable,?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">freeze(+term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
-<div id="del_spy_points/4"> </div></div>
-<div class="section" id="del-spy-points-4">
-<span id="monitorp-0-del-spy-points-4"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">del_spy_points/4</span></code><a class="headerlink" href="#del-spy-points-4" title="Permalink to this headline">¶</a></h3>
-<p>Deletes all matching spy points.</p>
+<div id="frozen/2"> </div></div>
+<div class="section" id="frozen-2">
+<span id="coroutining-0-frozen-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">frozen/2</span></code><a class="headerlink" href="#frozen-2" title="Permalink to this headline">¶</a></h3>
+<p>Unifies Goal with the goal delayed by Variable. When no goals are frozen on Variable, Goal is unified with true.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -435,11 +375,35 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">del_spy_points(Event,Object,Message,Sender)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">frozen(Variable,Goal)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">del_spy_points(&#64;event,&#64;object,&#64;callable,&#64;object)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">frozen(&#64;var,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div id="when/2"> </div></div>
+<div class="section" id="when-2">
+<span id="coroutining-0-when-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">when/2</span></code><a class="headerlink" href="#when-2" title="Permalink to this headline">¶</a></h3>
+<p>Calls Goal when Condition becomes true. The portable conditions are: nonvar/1, ground/1, (,)/2, and (;)/2.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">when(Condition,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">when(*,0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">when(+callable,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 </div>
@@ -458,7 +422,9 @@
 </div>
 <div class="section" id="remarks">
 <h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
-<p>(none)</p>
+<ul class="simple">
+<li><strong>Supported backend Prolog systems</strong>: ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.</li>
+</ul>
 </div>
 </div>
 
@@ -470,10 +436,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="natural_0.html" class="btn btn-neutral float-right" title="natural" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="counters_0.html" class="btn btn-neutral float-right" title="counters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="monitor_0.html" class="btn btn-neutral" title="monitor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="compound_0.html" class="btn btn-neutral" title="compound" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

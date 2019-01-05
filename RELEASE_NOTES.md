@@ -54,6 +54,10 @@ Handbook.
 Library
 -------
 
+* ADDED: Coroutining library supporting ECLiPSe, SICStus Prolog, SWI-Prolog,
+and YAP as backend Prolog systems. Provides a portable abstraction over how
+the coroutining predicates are made available by each Prolog system.
+
 * ADDED: Predicate `remove_duplicates/2` to the library list entities.
 
 Tools

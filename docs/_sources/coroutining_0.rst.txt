@@ -1,0 +1,132 @@
+.. index:: coroutining
+.. _coroutining/0:
+
+**object**
+
+``coroutining``
+===============
+
+Coroutining predicates.
+
+| **Author:** Paulo Moura
+| **Version:** 0.1
+| **Date:** 2019/1/5
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="dif/2"> </div>
+
+.. index:: dif/2
+.. _coroutining/0::dif/2:
+
+``dif/2``
+^^^^^^^^^
+
+Sets a constraint that is true iff the two terms are different.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dif(Term1,Term2)``
+| **Mode and number of proofs:**
+|    ``dif(+term,+term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="freeze/2"> </div>
+
+.. index:: freeze/2
+.. _coroutining/0::freeze/2:
+
+``freeze/2``
+^^^^^^^^^^^^
+
+Delays the execution of a goal until a variable is bound.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``freeze(Variable,Goal)``
+| **Meta-predicate template:**
+|    ``freeze(*,0)``
+| **Mode and number of proofs:**
+|    ``freeze(+term,+callable)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="frozen/2"> </div>
+
+.. index:: frozen/2
+.. _coroutining/0::frozen/2:
+
+``frozen/2``
+^^^^^^^^^^^^
+
+Unifies Goal with the goal delayed by Variable. When no goals are frozen on Variable, Goal is unified with true.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frozen(Variable,Goal)``
+| **Mode and number of proofs:**
+|    ``frozen(@var,--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="when/2"> </div>
+
+.. index:: when/2
+.. _coroutining/0::when/2:
+
+``when/2``
+^^^^^^^^^^
+
+Calls Goal when Condition becomes true. The portable conditions are: nonvar/1, ground/1, (,)/2, and (;)/2.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``when(Condition,Goal)``
+| **Meta-predicate template:**
+|    ``when(*,0)``
+| **Mode and number of proofs:**
+|    ``when(+callable,+callable)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Supported backend Prolog systems**: ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.
+
