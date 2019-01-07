@@ -1587,19 +1587,17 @@ debug mode.
 Calling Prolog user-defined plain predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Prolog user-defined plain predicates can be called from within objects
-or categories by using the :ref:`control_external_call_1` compiler bypass
-control construct. For example:
+Prolog user-defined plain predicates can be called from within objects or
+categories by sending the corresponding message to ``user``. For example:
 
 ::
 
    foo :-
        ...,
-       {bar},
+       user::bar,
        ...
 
-A better alternative is to use the :ref:`directives_uses_2` directive and
-write:
+In alternative, we can use the :ref:`directives_uses_2` directive and write:
 
 ::
 
@@ -1612,9 +1610,22 @@ write:
 
 Note that ``user`` is a pseudo-object in Logtalk containing all predicate
 definitions that are not encapsulated (either in a Logtalk entity or a
-Prolog module). The advantage of using an ``uses/2`` directive is that
-the listed predicates will be recognized and documented as dependencies
-by the developer tools.
+Prolog module).
+
+When the Prolog predicate is not a meta-predicate, we can also use the
+:ref:`control_external_call_1` compiler bypass control construct. For
+example:
+
+::
+
+   foo :-
+       ...,
+       {bar},
+       ...
+
+But note that in this case the reflection API will not record the
+dependency of the `foo/0` predicate on the Prolog `bar/0` predicate
+as we are effectively bypassing the compiler.
 
 .. _predicates_prolog_module:
 

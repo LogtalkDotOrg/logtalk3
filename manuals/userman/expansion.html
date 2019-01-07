@@ -256,7 +256,7 @@ yes
 </div>
 <p>Clauses for the <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicate are recursively called on
 the expanded goal until a fixed point is reached. Care must be taken to
-avoid compilation loops. For example:</p>
+avoid expansion loops. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_goal(a, Goal).
 
 Goal = c

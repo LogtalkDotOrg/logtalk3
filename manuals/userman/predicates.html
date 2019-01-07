@@ -1566,17 +1566,15 @@ debug mode.</p>
 </div>
 <div class="section" id="calling-prolog-user-defined-plain-predicates">
 <span id="predicates-prolog-user"></span><h3>Calling Prolog user-defined plain predicates<a class="headerlink" href="#calling-prolog-user-defined-plain-predicates" title="Permalink to this headline">¶</a></h3>
-<p>Prolog user-defined plain predicates can be called from within objects
-or categories by using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> compiler bypass
-control construct. For example:</p>
+<p>Prolog user-defined plain predicates can be called from within objects or
+categories by sending the corresponding message to <code class="docutils literal notranslate"><span class="pre">user</span></code>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
     ...,
-    <span class="k">{</span>bar<span class="k">}</span>,
+    user<span class="o">::</span>bar,
     ...
 </pre></div>
 </div>
-<p>A better alternative is to use the <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive and
-write:</p>
+<p>In alternative, we can use the <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive and write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(user, [bar<span class="o">/</span><span class="m">0</span>]).
 
 foo <span class="o">:-</span>
@@ -1587,9 +1585,19 @@ foo <span class="o">:-</span>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">user</span></code> is a pseudo-object in Logtalk containing all predicate
 definitions that are not encapsulated (either in a Logtalk entity or a
-Prolog module). The advantage of using an <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive is that
-the listed predicates will be recognized and documented as dependencies
-by the developer tools.</p>
+Prolog module).</p>
+<p>When the Prolog predicate is not a meta-predicate, we can also use the
+<a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> compiler bypass control construct. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
+    ...,
+    <span class="k">{</span>bar<span class="k">}</span>,
+    ...
+</pre></div>
+</div>
+<p>But note that in this case the reflection API will not record the
+dependency of the <cite>foo/0</cite> predicate on the Prolog <cite>bar/0</cite> predicate
+as we are effectively bypassing the compiler.</p>
 </div>
 <div class="section" id="calling-prolog-module-predicates">
 <span id="predicates-prolog-module"></span><h3>Calling Prolog module predicates<a class="headerlink" href="#calling-prolog-module-predicates" title="Permalink to this headline">¶</a></h3>

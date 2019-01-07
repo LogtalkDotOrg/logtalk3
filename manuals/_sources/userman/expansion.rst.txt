@@ -82,7 +82,7 @@ trying to expand is returned:
 
 Clauses for the ``goal_expansion/2`` predicate are recursively called on
 the expanded goal until a fixed point is reached. Care must be taken to
-avoid compilation loops. For example:
+avoid expansion loops. For example:
 
 .. code-block:: text
    
