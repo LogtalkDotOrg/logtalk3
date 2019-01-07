@@ -1624,7 +1624,7 @@ example:
        ...
 
 But note that in this case the reflection API will not record the
-dependency of the `foo/0` predicate on the Prolog `bar/0` predicate
+dependency of the ``foo/0`` predicate on the Prolog ``bar/0`` predicate
 as we are effectively bypassing the compiler.
 
 .. _predicates_prolog_module:

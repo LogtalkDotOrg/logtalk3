@@ -28,7 +28,7 @@ Description
 
    abolish_object(Object)
 
-Abolishes a dynamic object.
+Abolishes a dynamic object. The object identifier can then be reused when creating a new object.
 
 Modes and number of proofs
 --------------------------

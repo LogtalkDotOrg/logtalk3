@@ -28,7 +28,7 @@ Description
 
    abolish_category(Category)
 
-Abolishes a dynamic category.
+Abolishes a dynamic category. The category identifier can then be reused when creating a new category.
 
 Modes and number of proofs
 --------------------------

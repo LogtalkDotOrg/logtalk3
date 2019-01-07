@@ -28,7 +28,7 @@ Description
 
    abolish_protocol(Protocol)
 
-Abolishes a dynamic protocol.
+Abolishes a dynamic protocol. The protocol identifier can then be reused when creating a new protocol.
 
 Modes and number of proofs
 --------------------------
