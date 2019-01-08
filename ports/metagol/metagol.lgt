@@ -38,7 +38,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.15,
+		version is 0.16,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2019/01/08,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
@@ -197,7 +197,7 @@
 		prove(Body1,FullSig,Sig2,MaxN,N3,N2,[sub(Name,P,A,MetaSub,PredTypes)|Prog1],Prog2).
 
 	add_empty_path([P|Args],p(inv,P,A,Args,[P|Args],[])) :-
-		size(Args,A).
+		length(Args,A).
 
 	select_lower(P,A,FullSig,_Sig1,Sig2) :-
 		nonvar(P),!,
@@ -230,13 +230,6 @@
 		last(MetaSub,X),
 		when(ground(X), \+ member(sub(Name,P,A,MetaSub,_), Prog)).
 	check_new_metasub(_Name,_P,_A,_MetaSub,_Prog).
-
-	size([],0) :-!.
-	size([_],1) :-!.
-	size([_,_],2) :-!.
-	size([_,_,_],3) :-!.
-	size(L,N) :- !,
-		length(L,N).
 
 	nproveall([],_PS,_Prog).
 	nproveall([Atom|Atoms],PS,Prog) :-
@@ -430,7 +423,7 @@
 	add_path_to_body(['@'(Atom)|Atoms],Path,['@'(Atom)|Rest],Out) :-
 		add_path_to_body(Atoms,Path,Rest,Out).
 	add_path_to_body([[P|Args]|Atoms],Path,[p(PType,P,A,Args,[P|Args],Path)|Rest],[PType|Out]) :-
-		size(Args,A),
+		length(Args,A),
 		add_path_to_body(Atoms,Path,Rest,Out).
 
 	assert_program(Prog) :-
