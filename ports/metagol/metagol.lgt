@@ -38,7 +38,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.14,
+		version is 0.15,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2019/01/08,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
@@ -472,14 +472,6 @@
 		!.
 	ho_atom_to_list(Atom,AtomList) :-
 		Atom=..AtomList.
-
-	unique_body_pred([[P|_]|B1],Q) :-
-		select([Q|_],B1,B2),
-		P \= Q,
-		\+ member([Q|_],B2).
-
-	unique_head_pred([[P|_]|B],P) :-
-		\+ member([P|_],B).
 
 	unfold_clause(C1,[[P|Args]|C2],P,D) :-
 		append(Pre,[[P|Args]|Post],C1),
