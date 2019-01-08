@@ -211,8 +211,8 @@
 <p>Inductive logic programming (ILP) system based on meta-interpretive learning.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Metagol authors; adapted to Logtalk by Paulo Moura.</div>
-<div class="line"><strong>Version:</strong> 0.13</div>
-<div class="line"><strong>Date:</strong> 2019/1/4</div>
+<div class="line"><strong>Version:</strong> 0.14</div>
+<div class="line"><strong>Date:</strong> 2019/1/8</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Copyright:</strong> Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura</div>
@@ -253,7 +253,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(&#64;list(clause),&#64;list(clause),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(&#64;list(example),&#64;list(example),-list(term))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="learn/2"> </div></div>
@@ -273,7 +273,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(&#64;list(clause),&#64;list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(&#64;list(example),&#64;list(example))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="learn_seq/2"> </div></div>
@@ -293,7 +293,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_seq(&#64;list(clause),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_seq(&#64;list(example),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="pclauses/2"> </div></div>
@@ -313,7 +313,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">pclauses(&#64;list(clause),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pclauses(&#64;list(term),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <div id="pprint/1"> </div></div>
@@ -333,7 +333,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">pprint(&#64;list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pprint(&#64;list(term))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <div id="metarule/7"> </div></div>
@@ -483,9 +483,18 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
+<div id="retract_prim/1"> </div></div>
+<div class="section" id="retract-prim-1">
+<span id="metagol-0-retract-prim-1"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">retract_prim/1</span></code><a class="headerlink" href="#retract-prim-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
 <div id="assert_program/1"> </div></div>
 <div class="section" id="assert-program-1">
-<span id="metagol-0-assert-program-1"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">assert_program/1</span></code><a class="headerlink" href="#assert-program-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-assert-program-1"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">assert_program/1</span></code><a class="headerlink" href="#assert-program-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -497,7 +506,7 @@
 <div class="section" id="private-predicates">
 <h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="interpreted_/1"> </div><div class="section" id="interpreted-1">
-<span id="metagol-0-interpreted-1"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">interpreted_/1</span></code><a class="headerlink" href="#interpreted-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-interpreted-1"></span><span id="index-24"></span><h3><code class="docutils literal notranslate"><span class="pre">interpreted_/1</span></code><a class="headerlink" href="#interpreted-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

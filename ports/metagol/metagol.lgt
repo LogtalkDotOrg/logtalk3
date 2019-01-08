@@ -38,44 +38,44 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.13,
+		version is 0.14,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2019/01/04,
+		date is 2019/01/08,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
 	]).
 
 	:- public(learn/3).
-	:- mode(learn(@list(clause), @list(clause), -list(clause)), zero_or_one).
+	:- mode(learn(@list(example), @list(example), -list(term)), zero_or_one).
 	:- info(learn/3, [
 		comment is 'Learns from a set of positive examples and a set of negative examples and returns the learned program.',
 		argnames is ['PositiveExamples', 'NegativeExamples', 'Program']
 	]).
 
 	:- public(learn/2).
-	:- mode(learn(@list(clause), @list(clause)), zero_or_one).
+	:- mode(learn(@list(example), @list(example)), zero_or_one).
 	:- info(learn/2, [
 		comment is 'Learns from a set of positive examples and a set of negative examples and prints the learned program.',
 		argnames is ['PositiveExamples', 'NegativeExamples']
 	]).
 
 	:- public(learn_seq/2).
-	:- mode(learn_seq(@list(clause), -list(clause)), zero_or_one).
+	:- mode(learn_seq(@list(example), -list(clause)), zero_or_one).
 	:- info(learn_seq/2, [
 		comment is 'Learns from a sequence of examples represented as a list of PositiveExamples/NegativeExamples elements and returns the learned program.',
 		argnames is ['Examples', 'Program']
 	]).
 
 	:- public(pclauses/2).
-	:- mode(pclauses(@list(clause), -list(clause)), one).
+	:- mode(pclauses(@list(term), -list(clause)), one).
 	:- info(pclauses/2, [
 		comment is 'Converts a learned program into a list of clauses.',
 		argnames is ['Program', 'Clauses']
 	]).
 
 	:- public(pprint/1).
-	:- mode(pprint(@list(clause)), one).
+	:- mode(pprint(@list(term)), one).
 	:- info(pprint/1, [
 		comment is 'Prints a learned program.',
 		argnames is ['Program']
@@ -87,7 +87,7 @@
 	:- public([functional/0, unfold_program/0, min_clauses/1, max_clauses/1, max_inv_preds/1, metarule_next_id/1]).
 	:- dynamic([functional/0, unfold_program/0, min_clauses/1, max_clauses/1, max_inv_preds/1, metarule_next_id/1]).
 
-	:- protected([pprint_clause/1, pprint_clauses/1, func_test/3, prove_deduce/3, assert_prim/1, assert_program/1]).
+	:- protected([pprint_clause/1, pprint_clauses/1, func_test/3, prove_deduce/3, assert_prim/1, retract_prim/1, assert_program/1]).
 
 	:- private(interpreted_/1).
 	:- dynamic(interpreted_/1).
@@ -477,6 +477,7 @@
 		select([Q|_],B1,B2),
 		P \= Q,
 		\+ member([Q|_],B2).
+
 	unique_head_pred([[P|_]|B],P) :-
 		\+ member([P|_],B).
 

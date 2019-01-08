@@ -9,8 +9,8 @@
 Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0.13
-| **Date:** 2019/1/4
+| **Version:** 0.14
+| **Date:** 2019/1/8
 
 | **Copyright:** Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura
 | **License:** BSD 3-Clause License
@@ -46,7 +46,7 @@ Learns from a set of positive examples and a set of negative examples and return
 | **Template:**
 |    ``learn(PositiveExamples,NegativeExamples,Program)``
 | **Mode and number of proofs:**
-|    ``learn(@list(clause),@list(clause),-list(clause))`` - ``zero_or_one``
+|    ``learn(@list(example),@list(example),-list(term))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -67,7 +67,7 @@ Learns from a set of positive examples and a set of negative examples and prints
 | **Template:**
 |    ``learn(PositiveExamples,NegativeExamples)``
 | **Mode and number of proofs:**
-|    ``learn(@list(clause),@list(clause))`` - ``zero_or_one``
+|    ``learn(@list(example),@list(example))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -88,7 +88,7 @@ Learns from a sequence of examples represented as a list of PositiveExamples/Neg
 | **Template:**
 |    ``learn_seq(Examples,Program)``
 | **Mode and number of proofs:**
-|    ``learn_seq(@list(clause),-list(clause))`` - ``zero_or_one``
+|    ``learn_seq(@list(example),-list(clause))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -109,7 +109,7 @@ Converts a learned program into a list of clauses.
 | **Template:**
 |    ``pclauses(Program,Clauses)``
 | **Mode and number of proofs:**
-|    ``pclauses(@list(clause),-list(clause))`` - ``one``
+|    ``pclauses(@list(term),-list(clause))`` - ``one``
 
 
 .. raw:: html
@@ -130,7 +130,7 @@ Prints a learned program.
 | **Template:**
 |    ``pprint(Program)``
 | **Mode and number of proofs:**
-|    ``pprint(@list(clause))`` - ``one``
+|    ``pprint(@list(term))`` - ``one``
 
 
 .. raw:: html
@@ -355,6 +355,20 @@ Protected interface
 
 ``assert_prim/1``
 ^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="retract_prim/1"> </div>
+
+.. index:: retract_prim/1
+.. _metagol/0::retract_prim/1:
+
+``retract_prim/1``
+^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``static``
