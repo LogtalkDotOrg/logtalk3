@@ -22,14 +22,14 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2019/01/08,
 		comment is 'Atom data type predicates.'
 	]).
 
 	:- public(replace_sub_atom/4).
-	:- mode(replace_sub_atom(+atom, +atom, +atom, -atom), one).
+	:- mode(replace_sub_atom(+atom, +atom, +atom, ?atom), zero_or_one).
 	:- info(replace_sub_atom/4, [
 		comment is 'Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.',
 		argnames is ['Old', 'New', 'Input', 'Output']

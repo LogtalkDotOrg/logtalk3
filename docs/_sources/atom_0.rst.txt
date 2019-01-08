@@ -9,8 +9,8 @@
 Atom data type predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1.6
-| **Date:** 2018/7/11
+| **Version:** 1.7
+| **Date:** 2019/1/8
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -40,7 +40,7 @@ Replaces all occurences of Old by New in Input returning Output. Returns Input i
 | **Template:**
 |    ``replace_sub_atom(Old,New,Input,Output)``
 | **Mode and number of proofs:**
-|    ``replace_sub_atom(+atom,+atom,+atom,-atom)`` - ``one``
+|    ``replace_sub_atom(+atom,+atom,+atom,?atom)`` - ``zero_or_one``
 
 
 .. raw:: html
