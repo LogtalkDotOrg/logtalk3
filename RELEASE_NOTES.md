@@ -37,7 +37,7 @@ when meta-calling the predicate from `bagof/3` or `setof/3` goals due to the
 presence of anonymous variables in the predicate definition.
 
 * FIXED: Enable message sending static binding optimization when the message
-is an alias to a meta-predicate.
+is an alias of a meta-predicate.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -53,6 +53,9 @@ Handbook.
 
 Library
 -------
+
+* CHANGED: The `list` library object will use the backend Prolog system native
+implementation of the de facto standard `length/2` predicate when available.
 
 * ADDED: Coroutining library supporting ECLiPSe, SICStus Prolog, SWI-Prolog,
 and YAP as backend Prolog systems. Provides a portable abstraction over how

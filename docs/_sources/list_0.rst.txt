@@ -9,8 +9,8 @@
 List predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 2.15
-| **Date:** 2019/1/3
+| **Version:** 2.16
+| **Date:** 2019/1/8
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -63,7 +63,7 @@ Operators
 Remarks
 -------
 
-(none)
+* **Portability notes**: This object will use the backend Prolog system length/2 and msort/2 built-in predicates when avaialble.
 
 .. seealso::
 
