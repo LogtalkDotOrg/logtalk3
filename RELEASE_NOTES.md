@@ -39,6 +39,9 @@ presence of anonymous variables in the predicate definition.
 * FIXED: Enable message sending static binding optimization when the message
 is an alias of a meta-predicate.
 
+* FIXED: Misspelling of `instantiation_error` in some exceptions throw by the
+compiler.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -76,6 +79,11 @@ Ports
 
 * ADDED: Port of `metagol`, an inductive logic programming (ILP) system based
 on meta-interpretive learning.
+
+Tests
+-----
+
+* IMPROVED: Unit tests for the entity creation built-in predicates.
 
 Examples
 --------

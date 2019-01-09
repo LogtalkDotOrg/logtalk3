@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 23, 0, b06)).
+'$lgt_version_data'(logtalk(3, 23, 0, b07)).
 
 
 
@@ -8053,7 +8053,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_expanded_term'((-), Term, _) :-
 	% catch variables
-	throw(error(instantiantion_error, term_expansion(Term, _))).
+	throw(error(instantiation_error, term_expansion(Term, _))).
 
 '$lgt_compile_expanded_term'(begin_of_file, _, _) :-
 	!.
@@ -8101,7 +8101,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, SourceData, Lines))
 		)
 	;	var(ExpandedTerm) ->
-		throw(error(instantiantion_error, term_expansion(Term, {ExpandedTerm})))
+		throw(error(instantiation_error, term_expansion(Term, {ExpandedTerm})))
 	;	throw(error(type_error(callable, Term), term_expansion(Term, {ExpandedTerm})))
 	).
 
@@ -8165,7 +8165,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_runtime_term'((-), _) :-
 	% catch variables
-	throw(error(instantiantion_error, term(_))).
+	throw(error(instantiation_error, term(_))).
 
 '$lgt_compile_runtime_term'(begin_of_file, _) :-
 	!.
@@ -8179,7 +8179,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	callable(Term) ->
 		assertz('$lgt_pp_entity_term_'({Term}, nil, '-'(0,0)))
 	;	var(Term) ->
-		throw(error(instantiantion_error, term({Term})))
+		throw(error(instantiation_error, term({Term})))
 	;	throw(error(type_error(callable, Term), term({Term})))
 	).
 
@@ -8211,7 +8211,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_directive'((-), _) :-
 	% catch variables
-	throw(error(instantiantion_error, directive(_))).
+	throw(error(instantiation_error, directive(_))).
 
 % conditional compilation directives
 
@@ -8638,17 +8638,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_logtalk_directives'(+list(term), +compilation_context)
 %
 % compiles a list of Logtalk directives
-%
-% note that the clause order ensures that instantiation errors will be caught
-% by the call to the '$lgt_compile_logtalk_directive'/2 predicate
 
 '$lgt_compile_logtalk_directives'([Directive| Directives], Ctx) :-
-	% only the compilation context mode should be shared between different directives
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_comp_ctx_mode'(NewCtx, Mode),
-	(	'$lgt_logtalk_directive'(Directive) ->
-		'$lgt_compile_logtalk_directive'(Directive, NewCtx),
-		'$lgt_compile_logtalk_directives'(Directives, Ctx)
+	(	var(Directive) ->
+		throw(instantiation_error)
+	;	'$lgt_logtalk_directive'(Directive) ->
+		'$lgt_compile_logtalk_directive'(Directive, Ctx),
+		% only the compilation context mode should be shared between different directives
+		'$lgt_comp_ctx_mode'(Ctx, Mode),
+		'$lgt_comp_ctx_mode'(NewCtx, Mode),
+		'$lgt_compile_logtalk_directives'(Directives, NewCtx)
 	;	functor(Directive, Functor, Arity),
 		throw(domain_error(directive, Functor/Arity))
 	).
@@ -16299,7 +16298,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_inlining_candidate'(TBody, _) :-
 	'$lgt_pp_defines_predicate_'(_, _, _, TBody, compile(_), user),
-	% call to a local predicate
+	% call to a local user-defined predicate
 	!.
 
 

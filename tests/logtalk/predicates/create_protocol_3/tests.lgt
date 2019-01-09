@@ -22,90 +22,102 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2018/03/27,
+		date is 2019/01/09,
 		comment is 'Unit tests for the create_protocol/3 built-in predicate.'
 	]).
 
-	throws(create_protocol_3_01, error(instantiation_error, logtalk(create_protocol(_, _, _), _))) :-
-		% delay the error to runtime
-		{create_protocol(_, _, _)}.
-
-	throws(create_protocol_3_02, error(type_error(protocol_identifier, 1), logtalk(create_protocol(1, [], []), _))) :-
+	throws(create_protocol_3_01, error(type_error(protocol_identifier, 1), logtalk(create_protocol(1, [], []), _))) :-
 		% delay the error to runtime
 		{create_protocol(1, [], [])}.
 
-	throws(create_protocol_3_03, error(permission_error(modify, protocol, monitoring), logtalk(create_protocol(monitoring, [], []), _))) :-
+	throws(create_protocol_3_02, error(permission_error(modify, protocol, monitoring), logtalk(create_protocol(monitoring, [], []), _))) :-
 		% delay the error to runtime
 		{create_protocol(monitoring, [], [])}.
 
-	throws(create_protocol_3_04, error(permission_error(modify, object, logtalk), logtalk(create_protocol(logtalk, [], []), _))) :-
+	throws(create_protocol_3_03, error(permission_error(modify, object, logtalk), logtalk(create_protocol(logtalk, [], []), _))) :-
 		% delay the error to runtime
 		{create_protocol(logtalk, [], [])}.
 
-	throws(create_protocol_3_05, error(type_error(list, atom), logtalk(create_protocol(_, atom, []), _))) :-
+	throws(create_protocol_3_04, error(instantiation_error, logtalk(create_protocol(_, _, []), _))) :-
+		% delay the error to runtime
+		{create_protocol(_, _, [])}.
+
+	throws(create_protocol_3_05, error(instantiation_error, logtalk(create_protocol(_, [], _), _))) :-
+		% delay the error to runtime
+		{create_protocol(_, [], _)}.
+
+	throws(create_protocol_3_06, error(instantiation_error, logtalk(create_protocol(_, [_], []), _))) :-
+		% delay the error to runtime
+		{create_protocol(_, [_], [])}.
+
+	throws(create_protocol_3_07, error(instantiation_error, logtalk(create_protocol(_, [], [_]), _))) :-
+		% delay the error to runtime
+		{create_protocol(_, [], [_])}.
+
+	throws(create_protocol_3_08, error(type_error(list, atom), logtalk(create_protocol(_, atom, []), _))) :-
 		% delay the error to runtime
 		{create_protocol(_, atom, [])}.
 
-	throws(create_protocol_3_06, error(type_error(list, atom), logtalk(create_protocol(_, [], atom), _))) :-
+	throws(create_protocol_3_09, error(type_error(list, atom), logtalk(create_protocol(_, [], atom), _))) :-
 		% delay the error to runtime
 		{create_protocol(_, [], atom)}.
 
-	throws(create_protocol_3_07, error(permission_error(modify, dynamic_predicate, foo/1), logtalk(create_protocol(_, [], [dynamic(foo/1), synchronized(foo/1)]), _))) :-
+	throws(create_protocol_3_10, error(permission_error(modify, dynamic_predicate, foo/1), logtalk(create_protocol(_, [], [dynamic(foo/1), synchronized(foo/1)]), _))) :-
 		% delay the error to runtime
 		{create_protocol(_, [], [dynamic(foo/1), synchronized(foo/1)])}.
 
-	throws(create_protocol_3_08, error(permission_error(modify, synchronized_predicate, foo/1), logtalk(create_protocol(_, [], [synchronized(foo/1), dynamic(foo/1)]), _))) :-
+	throws(create_protocol_3_11, error(permission_error(modify, synchronized_predicate, foo/1), logtalk(create_protocol(_, [], [synchronized(foo/1), dynamic(foo/1)]), _))) :-
 		% delay the error to runtime
 		{create_protocol(_, [], [synchronized(foo/1), dynamic(foo/1)])}.
 
-	throws(create_protocol_3_09, error(permission_error(repeat, entity_relation, extends/1), logtalk(create_protocol(_, [extends(protocol1), extends(protocol2)], []), _))) :-
+	throws(create_protocol_3_12, error(permission_error(repeat, entity_relation, extends/1), logtalk(create_protocol(_, [extends(protocol1), extends(protocol2)], []), _))) :-
 		% delay the error to runtime
 		{create_protocol(_, [extends(protocol1), extends(protocol2)], [])}.
 
-	throws(create_protocol_3_10, error(permission_error(extend, self, _), logtalk(create_protocol(Protocol, [extends(Protocol)], []), _))) :-
+	throws(create_protocol_3_13, error(permission_error(extend, self, _), logtalk(create_protocol(Protocol, [extends(Protocol)], []), _))) :-
 		% delay the error to runtime
 		{create_protocol(Protocol, [extends(Protocol)], [])}.
 
-	throws(create_protocol_3_11, error(type_error(protocol, Object), logtalk(create_protocol(Protocol, [extends(Object)], []), _))) :-
+	throws(create_protocol_3_14, error(type_error(protocol, Object), logtalk(create_protocol(Protocol, [extends(Object)], []), _))) :-
 		create_object(Object, [], [], []),
 		% delay the error to runtime
 		{create_protocol(Protocol, [extends(Object)], [])}.
 
-	throws(create_protocol_3_12, error(type_error(protocol, Category), logtalk(create_protocol(Protocol, [extends(Category)], []), _))) :-
+	throws(create_protocol_3_15, error(type_error(protocol, Category), logtalk(create_protocol(Protocol, [extends(Category)], []), _))) :-
 		create_category(Category, [], [], []),
 		% delay the error to runtime
 		{create_protocol(Protocol, [extends(Category)], [])}.
 
-	succeeds(create_protocol_3_13) :-
+	succeeds(create_protocol_3_16) :-
 		create_protocol(Protocol, [], []),
 		atom(Protocol).
 
-	succeeds(create_protocol_3_14) :-
+	succeeds(create_protocol_3_17) :-
 		create_protocol(create_protocol_3_test_protocol, [], []),
 		abolish_protocol(create_protocol_3_test_protocol).
 
-	succeeds(create_protocol_3_15) :-
+	succeeds(create_protocol_3_18) :-
 		create_protocol(Protocol, [], []),
 		abolish_protocol(Protocol).
 
-	succeeds(create_protocol_3_16) :-
+	succeeds(create_protocol_3_19) :-
 		create_protocol(Parent, [], [public([p/1, q/1])]),
 		create_protocol(Descendant, [extends(Parent)], []),
 		abolish_protocol(Descendant),
 		abolish_protocol(Parent).
 
-	throws(create_protocol_3_17, error(permission_error(extend, self, _), logtalk(create_protocol(Protocol, [extends(Protocol)], []), _))) :-
+	throws(create_protocol_3_20, error(permission_error(extend, self, _), logtalk(create_protocol(Protocol, [extends(Protocol)], []), _))) :-
 		% delay the error to runtime
 		{create_protocol(Protocol, [extends(Protocol)], [])}.
 
-	throws(create_protocol_3_18, error(type_error(protocol, Category), logtalk(create_protocol(Protocol, [extends(Category)], []), _))) :-
+	throws(create_protocol_3_21, error(type_error(protocol, Category), logtalk(create_protocol(Protocol, [extends(Category)], []), _))) :-
 		create_category(Category, [], [], []),
 		% delay the error to runtime
 		{create_protocol(Protocol, [extends(Category)], [])}.
 
-	throws(create_protocol_3_19, error(type_error(protocol, Object), logtalk(create_protocol(Protocol, [extends(Object)], []), _))) :-
+	throws(create_protocol_3_22, error(type_error(protocol, Object), logtalk(create_protocol(Protocol, [extends(Object)], []), _))) :-
 		create_object(Object, [], [], []),
 		% delay the error to runtime
 		{create_protocol(Protocol, [extends(Object)], [])}.
