@@ -38,7 +38,7 @@ notation as argument for the compiling and loading predicates. For example:
 
 	| ?- logtalk_load(library(random_loader)).
 
-Currently, there are fourteen groups of entities defined, each one with
+Currently, there are fiveteen groups of entities defined, each one with
 its own loader and notes files:
 
 * assignvars  
@@ -97,6 +97,10 @@ its own loader and notes files:
 * redis  
 	`redis_loader.lgt`
 	`redis.md`
+
+* zippers  
+	`zippers_loader.lgt`
+	`zippers.md`
 
 For helping when embedding Logtalk and Logtalk applications:
 
