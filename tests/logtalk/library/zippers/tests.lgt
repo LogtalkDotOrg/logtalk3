@@ -133,4 +133,26 @@
 		zlist::delete_and_unzip(Zipper, List),
 		List = [1,2,4,5].
 
+	test(zlist_delete_all_before_2_01) :-
+		zlist::zip(3, [1,2,3,4,5], Zipper0, _),
+		zlist::delete_all_before(Zipper0, Zipper1),
+		zlist::unzip(Zipper1, List),
+		List == [3,4,5].
+
+	test(zlist_delete_all_before_and_unzip_2_01) :-
+		zlist::zip(3, [1,2,3,4,5], Zipper, _),
+		zlist::delete_all_before_and_unzip(Zipper, List),
+		List == [3,4,5].
+
+	test(zlist_delete_all_after_2_01) :-
+		zlist::zip(3, [1,2,3,4,5], Zipper0, _),
+		zlist::delete_all_after(Zipper0, Zipper1),
+		zlist::unzip(Zipper1, List),
+		List == [1,2,3].
+
+	test(zlist_delete_all_after_and_unzip_2_01) :-
+		zlist::zip(3, [1,2,3,4,5], Zipper, _),
+		zlist::delete_all_after_and_unzip(Zipper, List),
+		List == [1,2,3].
+
 :- end_object.

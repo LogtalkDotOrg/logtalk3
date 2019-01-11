@@ -127,4 +127,32 @@
 		argnames is ['Zipper', 'Sequence']
 	]).
 
+	:- public(delete_all_before/2).
+	:- mode(delete_all_before(+zipper, --zipper), one).
+	:- info(delete_all_before/2, [
+		comment is 'Deletes all elements before the current element.',
+		argnames is ['Zipper', 'NewZipper']
+	]).
+
+	:- public(delete_all_before_and_unzip/2).
+	:- mode(delete_all_before_and_unzip(+zipper, --sequence), one).
+	:- info(delete_all_before_and_unzip/2, [
+		comment is 'Deletes all elements before the current element and removes the zipper returning the resulting sequence.',
+		argnames is ['Zipper', 'NewZipper']
+	]).
+
+	:- public(delete_all_after/2).
+	:- mode(delete_all_after(+zipper, --zipper), one).
+	:- info(delete_all_after/2, [
+		comment is 'Deletes all elements after the current element.',
+		argnames is ['Zipper', 'NewZipper']
+	]).
+
+	:- public(delete_all_after_and_unzip/2).
+	:- mode(delete_all_after_and_unzip(+zipper, --sequence), one).
+	:- info(delete_all_after_and_unzip/2, [
+		comment is 'Deletes all elements after the current element and removes the zipper returning the resulting sequence.',
+		argnames is ['Zipper', 'NewZipper']
+	]).
+
 :- end_protocol.

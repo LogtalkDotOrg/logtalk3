@@ -86,4 +86,14 @@
 		;	List = []
 		).
 
+	delete_all_before(zip(_,Current,After), zip([],Current,After)).
+
+	delete_all_before_and_unzip(zip(_,Current,After), List) :-
+		unzip([], Current, After, List).
+
+	delete_all_after(zip(Before,Current,_), zip(Before,Current,[])).
+
+	delete_all_after_and_unzip(zip(Before,Current,_), List):-
+		unzip(Before, Current, [], List).
+
 :- end_object.

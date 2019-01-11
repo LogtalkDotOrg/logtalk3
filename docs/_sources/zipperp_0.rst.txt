@@ -318,6 +318,90 @@ Deletes the current element and removes the zipper returning the resulting seque
 |    ``delete_and_unzip(+zipper,--sequence)`` - ``one``
 
 
+.. raw:: html
+
+   <div id="delete_all_before/2"> </div>
+
+.. index:: delete_all_before/2
+.. _zipperp/0::delete_all_before/2:
+
+``delete_all_before/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes all elements before the current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_all_before(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_all_before(+zipper,--zipper)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="delete_all_before_and_unzip/2"> </div>
+
+.. index:: delete_all_before_and_unzip/2
+.. _zipperp/0::delete_all_before_and_unzip/2:
+
+``delete_all_before_and_unzip/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes all elements before the current element and removes the zipper returning the resulting sequence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_all_before_and_unzip(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_all_before_and_unzip(+zipper,--sequence)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="delete_all_after/2"> </div>
+
+.. index:: delete_all_after/2
+.. _zipperp/0::delete_all_after/2:
+
+``delete_all_after/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes all elements after the current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_all_after(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_all_after(+zipper,--zipper)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="delete_all_after_and_unzip/2"> </div>
+
+.. index:: delete_all_after_and_unzip/2
+.. _zipperp/0::delete_all_after_and_unzip/2:
+
+``delete_all_after_and_unzip/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes all elements after the current element and removes the zipper returning the resulting sequence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_all_after_and_unzip(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_all_after_and_unzip(+zipper,--sequence)`` - ``one``
+
+
 Protected interface
 -------------------
 

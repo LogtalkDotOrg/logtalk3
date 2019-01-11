@@ -10,7 +10,7 @@
 <title>library</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-2084 6470,-2084 6470,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/01/11, 15:25</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/01/11, 15:46</text>
 <g id="clust1" class="cluster"><title>cluster_library_library</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <path fill="#eee9e9" stroke="#8b8989" d="M20,-38C20,-38 6446,-38 6446,-38 6452,-38 6458,-44 6458,-50 6458,-50 6458,-2060 6458,-2060 6458,-2066 6452,-2072 6446,-2072 6446,-2072 20,-2072 20,-2072 14,-2072 8,-2066 8,-2060 8,-2060 8,-50 8,-50 8,-44 14,-38 20,-38"/>
@@ -629,8 +629,8 @@
 </g>
 <g id="clust114" class="cluster"><title>cluster_file_/Users/pmoura/logtalk/library/zipperp.lgt</title>
 <g id="a_clust114"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/zipperp.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/zipperp.lgt">
-<path fill="snow" stroke="#8b8989" d="M288,-397C288,-397 426,-397 426,-397 432,-397 438,-403 438,-409 438,-409 438,-604 438,-604 438,-610 432,-616 426,-616 426,-616 288,-616 288,-616 282,-616 276,-610 276,-604 276,-604 276,-409 276,-409 276,-403 282,-397 288,-397"/>
-<text text-anchor="middle" x="317.5" y="-404" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">zipperp.lgt</text>
+<path fill="snow" stroke="#8b8989" d="M266,-377C266,-377 448,-377 448,-377 454,-377 460,-383 460,-389 460,-389 460,-624 460,-624 460,-630 454,-636 448,-636 448,-636 266,-636 266,-636 260,-636 254,-630 254,-624 254,-624 254,-389 254,-389 254,-383 260,-377 266,-377"/>
+<text text-anchor="middle" x="295.5" y="-384" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">zipperp.lgt</text>
 </a>
 </g>
 </g>
@@ -4316,58 +4316,70 @@
 <!-- zipperp -->
 <g id="node96" class="node"><title>zipperp</title>
 <g id="a_node96"><a xlink:href="https://logtalk.org/library/zipperp_0.html" xlink:title="https://logtalk.org/library/zipperp_0.html">
-<polygon fill="aquamarine" stroke="black" points="422,-606 286,-606 286,-426 428,-426 428,-600 422,-606"/>
-<polyline fill="none" stroke="black" points="422,-606 422,-600 "/>
-<polyline fill="none" stroke="black" points="428,-600 422,-600 "/>
-<text text-anchor="start" x="294" y="-593.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="333.5" y="-593.2" font-family="Courier,monospace" font-size="11.00">zipperp</text>
-<text text-anchor="start" x="414" y="-593.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-582.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="340" y="-583.4" font-family="Courier,monospace" font-size="7.00">protocol</text>
-<text text-anchor="start" x="414" y="-582.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-572.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-562.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="343" y="-562.8" font-family="Courier,monospace" font-size="9.00">zip/2</text>
-<text text-anchor="start" x="414" y="-562.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-552.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="338" y="-552.8" font-family="Courier,monospace" font-size="9.00">unzip/2</text>
-<text text-anchor="start" x="414" y="-552.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-542.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="332.5" y="-542.8" font-family="Courier,monospace" font-size="9.00">current/2</text>
-<text text-anchor="start" x="414" y="-542.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-532.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="340.5" y="-532.8" font-family="Courier,monospace" font-size="9.00">next/2</text>
-<text text-anchor="start" x="414" y="-532.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-522.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="340.5" y="-522.8" font-family="Courier,monospace" font-size="9.00">next/3</text>
-<text text-anchor="start" x="414" y="-522.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-512.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="329.5" y="-512.8" font-family="Courier,monospace" font-size="9.00">previous/2</text>
-<text text-anchor="start" x="414" y="-512.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-502.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="329.5" y="-502.8" font-family="Courier,monospace" font-size="9.00">previous/3</text>
-<text text-anchor="start" x="414" y="-502.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-492.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="338" y="-492.8" font-family="Courier,monospace" font-size="9.00">apply/2</text>
-<text text-anchor="start" x="414" y="-492.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-482.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="316" y="-482.8" font-family="Courier,monospace" font-size="9.00">insert_before/3</text>
-<text text-anchor="start" x="414" y="-482.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-472.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="319" y="-472.8" font-family="Courier,monospace" font-size="9.00">insert_after/3</text>
-<text text-anchor="start" x="414" y="-472.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-462.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="332.5" y="-462.8" font-family="Courier,monospace" font-size="9.00">replace/3</text>
-<text text-anchor="start" x="414" y="-462.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-452.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="300" y="-452.8" font-family="Courier,monospace" font-size="9.00">delete_and_previous/2</text>
-<text text-anchor="start" x="414" y="-452.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-442.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="311" y="-442.8" font-family="Courier,monospace" font-size="9.00">delete_and_next/2</text>
-<text text-anchor="start" x="414" y="-442.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="294" y="-432.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="308" y="-432.8" font-family="Courier,monospace" font-size="9.00">delete_and_unzip/2</text>
-<text text-anchor="start" x="414" y="-432.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<polygon fill="aquamarine" stroke="black" points="443.5,-626 264.5,-626 264.5,-406 449.5,-406 449.5,-620 443.5,-626"/>
+<polyline fill="none" stroke="black" points="443.5,-626 443.5,-620 "/>
+<polyline fill="none" stroke="black" points="449.5,-620 443.5,-620 "/>
+<text text-anchor="start" x="273" y="-613.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="334" y="-613.2" font-family="Courier,monospace" font-size="11.00">zipperp</text>
+<text text-anchor="start" x="436" y="-613.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-602.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="340.5" y="-603.4" font-family="Courier,monospace" font-size="7.00">protocol</text>
+<text text-anchor="start" x="436" y="-602.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-592.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-582.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="343.5" y="-582.8" font-family="Courier,monospace" font-size="9.00">zip/2</text>
+<text text-anchor="start" x="436" y="-582.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-572.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="338.5" y="-572.8" font-family="Courier,monospace" font-size="9.00">unzip/2</text>
+<text text-anchor="start" x="436" y="-572.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-562.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="333" y="-562.8" font-family="Courier,monospace" font-size="9.00">current/2</text>
+<text text-anchor="start" x="436" y="-562.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-552.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="341" y="-552.8" font-family="Courier,monospace" font-size="9.00">next/2</text>
+<text text-anchor="start" x="436" y="-552.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-542.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="341" y="-542.8" font-family="Courier,monospace" font-size="9.00">next/3</text>
+<text text-anchor="start" x="436" y="-542.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-532.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="330" y="-532.8" font-family="Courier,monospace" font-size="9.00">previous/2</text>
+<text text-anchor="start" x="436" y="-532.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-522.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="330" y="-522.8" font-family="Courier,monospace" font-size="9.00">previous/3</text>
+<text text-anchor="start" x="436" y="-522.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-512.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="338.5" y="-512.8" font-family="Courier,monospace" font-size="9.00">apply/2</text>
+<text text-anchor="start" x="436" y="-512.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-502.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="316.5" y="-502.8" font-family="Courier,monospace" font-size="9.00">insert_before/3</text>
+<text text-anchor="start" x="436" y="-502.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-492.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="319.5" y="-492.8" font-family="Courier,monospace" font-size="9.00">insert_after/3</text>
+<text text-anchor="start" x="436" y="-492.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-482.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="333" y="-482.8" font-family="Courier,monospace" font-size="9.00">replace/3</text>
+<text text-anchor="start" x="436" y="-482.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-472.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="300.5" y="-472.8" font-family="Courier,monospace" font-size="9.00">delete_and_previous/2</text>
+<text text-anchor="start" x="436" y="-472.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-462.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="311.5" y="-462.8" font-family="Courier,monospace" font-size="9.00">delete_and_next/2</text>
+<text text-anchor="start" x="436" y="-462.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-452.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="308.5" y="-452.8" font-family="Courier,monospace" font-size="9.00">delete_and_unzip/2</text>
+<text text-anchor="start" x="436" y="-452.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-442.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="306" y="-442.8" font-family="Courier,monospace" font-size="9.00">delete_all_before/2</text>
+<text text-anchor="start" x="436" y="-442.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-432.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="279" y="-432.8" font-family="Courier,monospace" font-size="9.00">delete_all_before_and_unzip/2</text>
+<text text-anchor="start" x="436" y="-432.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-422.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="308.5" y="-422.8" font-family="Courier,monospace" font-size="9.00">delete_all_after/2</text>
+<text text-anchor="start" x="436" y="-422.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="273" y="-412.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="281.5" y="-412.8" font-family="Courier,monospace" font-size="9.00">delete_all_after_and_unzip/2</text>
+<text text-anchor="start" x="436" y="-412.8" font-family="Courier,monospace" font-size="9.00"> </text>
 </a>
 </g>
 </g>
@@ -4391,8 +4403,8 @@
 <!-- zlist&#45;&gt;zipperp -->
 <g id="edge67" class="edge"><title>zlist&#45;&gt;zipperp</title>
 <g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
-<path fill="none" stroke="black" d="M357,-201.037C357,-245.565 357,-343.138 357,-417.774"/>
-<ellipse fill="black" stroke="black" cx="357" cy="-421.837" rx="4" ry="4"/>
+<path fill="none" stroke="black" d="M357,-201.037C357,-241.627 357,-326.292 357,-397.483"/>
+<ellipse fill="black" stroke="black" cx="357" cy="-401.651" rx="4" ry="4"/>
 </a>
 </g>
 <g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
