@@ -1,0 +1,281 @@
+.. index:: zipperp
+.. _zipperp/0:
+
+**protocol**
+
+``zipperp``
+===========
+
+Zipper protocol.
+
+| **Author:** Paulo Moura
+| **Version:** 0.1
+| **Date:** 2019/1/11
+
+| **Compilation flags:**
+|    ``static``
+
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="zip/2"> </div>
+
+.. index:: zip/2
+.. _zipperp/0::zip/2:
+
+``zip/2``
+^^^^^^^^^
+
+Adds a zipper to a compound term holding a sequence of elements. Fails if the sequence is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zip(Sequence,Zipper)``
+| **Mode and number of proofs:**
+|    ``zip(+sequence,--zipper)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="unzip/2"> </div>
+
+.. index:: unzip/2
+.. _zipperp/0::unzip/2:
+
+``unzip/2``
+^^^^^^^^^^^
+
+Removes a zipper from a sequence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unzip(Zipper,Sequence)``
+| **Mode and number of proofs:**
+|    ``unzip(@zipper,--sequence)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="current/2"> </div>
+
+.. index:: current/2
+.. _zipperp/0::current/2:
+
+``current/2``
+^^^^^^^^^^^^^
+
+Current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``current(Zipper,Current)``
+| **Mode and number of proofs:**
+|    ``current(+zipper,?term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="next/2"> </div>
+
+.. index:: next/2
+.. _zipperp/0::next/2:
+
+``next/2``
+^^^^^^^^^^
+
+Moves to the next element. Fails if already at the last elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``next(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``next(+zipper,-zipper)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="next/3"> </div>
+
+.. index:: next/3
+.. _zipperp/0::next/3:
+
+``next/3``
+^^^^^^^^^^
+
+Moves to and returns the next element. Fails if already at the last elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``next(Zipper,NewZipper,Next)``
+| **Mode and number of proofs:**
+|    ``next(+zipper,-zipper,-term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="previous/2"> </div>
+
+.. index:: previous/2
+.. _zipperp/0::previous/2:
+
+``previous/2``
+^^^^^^^^^^^^^^
+
+Moves to the previous element. Fails if already at the first elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``previous(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``previous(+zipper,-zipper)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="previous/3"> </div>
+
+.. index:: previous/3
+.. _zipperp/0::previous/3:
+
+``previous/3``
+^^^^^^^^^^^^^^
+
+Moves to and returns the previous element. Fails if already at the first elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``previous(Zipper,NewZipper,Previous)``
+| **Mode and number of proofs:**
+|    ``previous(+zipper,-zipper,-term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="apply/2"> </div>
+
+.. index:: apply/2
+.. _zipperp/0::apply/2:
+
+``apply/2``
+^^^^^^^^^^^
+
+Applies a closure to the current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``apply(Closure,Zipper)``
+| **Meta-predicate template:**
+|    ``apply(1,*)``
+| **Mode and number of proofs:**
+|    ``apply(+callable,+zipper)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="replace/3"> </div>
+
+.. index:: replace/3
+.. _zipperp/0::replace/3:
+
+``replace/3``
+^^^^^^^^^^^^^
+
+Replaces the current element with a new element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``replace(Zipper,NewCurrent,NewZipper)``
+| **Mode and number of proofs:**
+|    ``replace(+zipper,?term,?zipper)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="insert_before/3"> </div>
+
+.. index:: insert_before/3
+.. _zipperp/0::insert_before/3:
+
+``insert_before/3``
+^^^^^^^^^^^^^^^^^^^
+
+Inserts an element before the current one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert_before(Zipper,Element,NewZipper)``
+| **Mode and number of proofs:**
+|    ``insert_before(+zipper,?term,?zipper)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="insert_after/3"> </div>
+
+.. index:: insert_after/3
+.. _zipperp/0::insert_after/3:
+
+``insert_after/3``
+^^^^^^^^^^^^^^^^^^
+
+Inserts an element after the current one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert_after(Zipper,Element,NewZipper)``
+| **Mode and number of proofs:**
+|    ``insert_after(+zipper,?term,?zipper)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+.. seealso::
+
+   :ref:`zlist <zlist/0>`
+

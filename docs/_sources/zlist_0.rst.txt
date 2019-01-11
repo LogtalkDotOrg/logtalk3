@@ -1,0 +1,65 @@
+.. index:: zlist
+.. _zlist/0:
+
+**object**
+
+``zlist``
+=========
+
+Zipper list predicates.
+
+| **Author:** Paulo Moura
+| **Version:** 0.1
+| **Date:** 2019/1/11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`zipperp <zipperp/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="zip/4"> </div>
+
+.. index:: zip/4
+.. _zlist/0::zip/4:
+
+``zip/4``
+^^^^^^^^^
+
+Adds a zipper to a list opened at the given index and also returns the element at the index. Fails if the list is empty or the index (starting at 1) does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zip(Index,List,Zipper,Element)``
+| **Mode and number of proofs:**
+|    ``zip(+natural,+list,--zipper,--term)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+

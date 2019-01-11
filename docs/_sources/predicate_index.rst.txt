@@ -294,6 +294,16 @@ Predicate index
 * :ref:`listp <listp/0::append/3>`
 * :ref:`varlistp <varlistp/0::append/3>`
 
+``apply/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::apply/2>`
+
 ``apply/4``
 -----------
 
@@ -923,6 +933,16 @@ Predicate index
 
 * :ref:`osp <osp/0::cpu_time/1>`
 * :ref:`timep <timep/0::cpu_time/1>`
+
+``current/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::current/2>`
 
 ``data/0``
 ----------
@@ -2535,6 +2555,16 @@ Predicate index
 * :ref:`dictionaryp <dictionaryp/0::insert/4>`
 * :ref:`heapp <heapp/0::insert/4>`
 
+``insert_after/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::insert_after/3>`
+
 ``insert_all/3``
 ----------------
 
@@ -2545,6 +2575,16 @@ Predicate index
 
 * :ref:`heapp <heapp/0::insert_all/3>`
 * :ref:`setp <setp/0::insert_all/3>`
+
+``insert_before/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::insert_before/3>`
 
 ``instance/1``
 --------------
@@ -3867,6 +3907,26 @@ Predicate index
 
 * :ref:`intervalp <intervalp/0::new/3>`
 
+``next/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::next/2>`
+
+``next/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::next/3>`
+
 ``next/4``
 ----------
 
@@ -4509,6 +4569,26 @@ Predicate index
 
 * :ref:`bintree <bintree/0::preorder/2>`
 
+``previous/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::previous/2>`
+
+``previous/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::previous/3>`
+
 ``previous/4``
 --------------
 
@@ -4876,6 +4956,16 @@ Predicate index
 
 
 * :ref:`osp <osp/0::rename_file/2>`
+
+``replace/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::replace/3>`
 
 ``replace_sub_atom/4``
 ----------------------
@@ -5970,6 +6060,16 @@ Predicate index
 
 * :ref:`setp <setp/0::union/4>`
 
+``unzip/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::unzip/2>`
+
 ``update/0``
 ------------
 
@@ -6184,4 +6284,24 @@ Predicate index
 
 
 * :ref:`statisticsp <statisticsp/0::z_normalization/2>`
+
+``zip/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zipperp <zipperp/0::zip/2>`
+
+``zip/4``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`zlist <zlist/0::zip/4>`
 

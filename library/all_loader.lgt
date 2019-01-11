@@ -42,6 +42,7 @@
 		expand_library_alias_paths_loader,
 		edcg_loader,
 		coroutining_loader,
+		zippers_loader,
 		gensym,
 		counters,
 		streamvars

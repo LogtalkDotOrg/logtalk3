@@ -66,6 +66,8 @@ the coroutining predicates are made available by each Prolog system.
 
 * ADDED: Predicate `remove_duplicates/2` to the library list entities.
 
+* ADDED: Library zipper protocol and list zipper object.
+
 Tools
 -----
 
