@@ -397,7 +397,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">next(+zipper,-zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">next(+zipper,--zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="next/3"> </div></div>
@@ -417,7 +417,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">next(+zipper,-zipper,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">next(+zipper,--zipper,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="previous/2"> </div></div>
@@ -437,13 +437,13 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">previous(+zipper,-zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">previous(+zipper,--zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="previous/3"> </div></div>
 <div class="section" id="previous-3">
 <span id="zipperp-0-previous-3"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">previous/3</span></code><a class="headerlink" href="#previous-3" title="Permalink to this headline">¶</a></h3>
-<p>Moves to and returns the previous element. Fails if already at the first elements.</p>
+<p>Moves to and returns the previous element. Fails if already at the first element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -457,7 +457,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">previous(+zipper,-zipper,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">previous(+zipper,--zipper,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="apply/2"> </div></div>
@@ -484,29 +484,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">apply(+callable,+zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
-<div id="replace/3"> </div></div>
-<div class="section" id="replace-3">
-<span id="zipperp-0-replace-3"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">replace/3</span></code><a class="headerlink" href="#replace-3" title="Permalink to this headline">¶</a></h3>
-<p>Replaces the current element with a new element.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">replace(Zipper,NewCurrent,NewZipper)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">replace(+zipper,?term,?zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
 <div id="insert_before/3"> </div></div>
 <div class="section" id="insert-before-3">
-<span id="zipperp-0-insert-before-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">insert_before/3</span></code><a class="headerlink" href="#insert-before-3" title="Permalink to this headline">¶</a></h3>
+<span id="zipperp-0-insert-before-3"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">insert_before/3</span></code><a class="headerlink" href="#insert-before-3" title="Permalink to this headline">¶</a></h3>
 <p>Inserts an element before the current one.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -521,12 +501,12 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_before(+zipper,?term,?zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_before(+zipper,?term,--zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="insert_after/3"> </div></div>
 <div class="section" id="insert-after-3">
-<span id="zipperp-0-insert-after-3"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">insert_after/3</span></code><a class="headerlink" href="#insert-after-3" title="Permalink to this headline">¶</a></h3>
+<span id="zipperp-0-insert-after-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">insert_after/3</span></code><a class="headerlink" href="#insert-after-3" title="Permalink to this headline">¶</a></h3>
 <p>Inserts an element after the current one.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -541,7 +521,87 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_after(+zipper,?term,?zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_after(+zipper,?term,--zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div id="replace/3"> </div></div>
+<div class="section" id="replace-3">
+<span id="zipperp-0-replace-3"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">replace/3</span></code><a class="headerlink" href="#replace-3" title="Permalink to this headline">¶</a></h3>
+<p>Replaces the current element with a new element.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">replace(Zipper,NewCurrent,NewZipper)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">replace(+zipper,?term,--zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div id="delete_and_previous/2"> </div></div>
+<div class="section" id="delete-and-previous-2">
+<span id="zipperp-0-delete-and-previous-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">delete_and_previous/2</span></code><a class="headerlink" href="#delete-and-previous-2" title="Permalink to this headline">¶</a></h3>
+<p>Deletes the current element and moves to the previous element. Fails if no previous element exists.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_and_previous(Zipper,NewZipper)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_and_previous(+zipper,--zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div id="delete_and_next/2"> </div></div>
+<div class="section" id="delete-and-next-2">
+<span id="zipperp-0-delete-and-next-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">delete_and_next/2</span></code><a class="headerlink" href="#delete-and-next-2" title="Permalink to this headline">¶</a></h3>
+<p>Deletes the current element and moves to the next element. Fails if no next element exists.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_and_next(Zipper,NewZipper)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_and_next(+zipper,--zipper)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div id="delete_and_unzip/2"> </div></div>
+<div class="section" id="delete-and-unzip-2">
+<span id="zipperp-0-delete-and-unzip-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">delete_and_unzip/2</span></code><a class="headerlink" href="#delete-and-unzip-2" title="Permalink to this headline">¶</a></h3>
+<p>Deletes the current element and removes the zipper returning the resulting sequence.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_and_unzip(Zipper,Sequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_and_unzip(+zipper,--sequence)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </div>

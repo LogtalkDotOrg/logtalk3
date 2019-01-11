@@ -50,30 +50,30 @@
 	]).
 
 	:- public(next/2).
-	:- mode(next(+zipper, -zipper), zero_or_one).
+	:- mode(next(+zipper, --zipper), zero_or_one).
 	:- info(next/2, [
 		comment is 'Moves to the next element. Fails if already at the last elements.',
 		argnames is ['Zipper', 'NewZipper']
 	]).
 
 	:- public(next/3).
-	:- mode(next(+zipper, -zipper, -term), zero_or_one).
+	:- mode(next(+zipper, --zipper, -term), zero_or_one).
 	:- info(next/3, [
 		comment is 'Moves to and returns the next element. Fails if already at the last elements.',
 		argnames is ['Zipper', 'NewZipper', 'Next']
 	]).
 
 	:- public(previous/2).
-	:- mode(previous(+zipper, -zipper), zero_or_one).
+	:- mode(previous(+zipper, --zipper), zero_or_one).
 	:- info(previous/2, [
 		comment is 'Moves to the previous element. Fails if already at the first elements.',
 		argnames is ['Zipper', 'NewZipper']
 	]).
 
 	:- public(previous/3).
-	:- mode(previous(+zipper, -zipper, -term), zero_or_one).
+	:- mode(previous(+zipper, --zipper, -term), zero_or_one).
 	:- info(previous/3, [
-		comment is 'Moves to and returns the previous element. Fails if already at the first elements.',
+		comment is 'Moves to and returns the previous element. Fails if already at the first element.',
 		argnames is ['Zipper', 'NewZipper', 'Previous']
 	]).
 
@@ -85,25 +85,46 @@
 		argnames is ['Closure', 'Zipper']
 	]).
 
-	:- public(replace/3).
-	:- mode(replace(+zipper, ?term, ?zipper), one).
-	:- info(replace/3, [
-		comment is 'Replaces the current element with a new element.',
-		argnames is ['Zipper', 'NewCurrent', 'NewZipper']
-	]).
-
 	:- public(insert_before/3).
-	:- mode(insert_before(+zipper, ?term, ?zipper), zero_or_one).
+	:- mode(insert_before(+zipper, ?term, --zipper), zero_or_one).
 	:- info(insert_before/3, [
 		comment is 'Inserts an element before the current one.',
 		argnames is ['Zipper', 'Element', 'NewZipper']
 	]).
 
 	:- public(insert_after/3).
-	:- mode(insert_after(+zipper, ?term, ?zipper), zero_or_one).
+	:- mode(insert_after(+zipper, ?term, --zipper), zero_or_one).
 	:- info(insert_after/3, [
 		comment is 'Inserts an element after the current one.',
 		argnames is ['Zipper', 'Element', 'NewZipper']
+	]).
+
+	:- public(replace/3).
+	:- mode(replace(+zipper, ?term, --zipper), one).
+	:- info(replace/3, [
+		comment is 'Replaces the current element with a new element.',
+		argnames is ['Zipper', 'NewCurrent', 'NewZipper']
+	]).
+
+	:- public(delete_and_previous/2).
+	:- mode(delete_and_previous(+zipper, --zipper), zero_or_one).
+	:- info(delete_and_previous/2, [
+		comment is 'Deletes the current element and moves to the previous element. Fails if no previous element exists.',
+		argnames is ['Zipper', 'NewZipper']
+	]).
+
+	:- public(delete_and_next/2).
+	:- mode(delete_and_next(+zipper, --zipper), zero_or_one).
+	:- info(delete_and_next/2, [
+		comment is 'Deletes the current element and moves to the next element. Fails if no next element exists.',
+		argnames is ['Zipper', 'NewZipper']
+	]).
+
+	:- public(delete_and_unzip/2).
+	:- mode(delete_and_unzip(+zipper, --sequence), one).
+	:- info(delete_and_unzip/2, [
+		comment is 'Deletes the current element and removes the zipper returning the resulting sequence.',
+		argnames is ['Zipper', 'Sequence']
 	]).
 
 :- end_protocol.

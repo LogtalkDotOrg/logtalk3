@@ -28,6 +28,16 @@
 		comment is 'Unit tests for the "zippers" library.'
 	]).
 
+	test(zlist_zip_4_01) :-
+		\+ zlist::zip(1, [], _, _).
+
+	test(zlist_zip_4_02) :-
+		\+ zlist::zip(3, [1,2], _, _).
+
+	test(zlist_zip_4_03) :-
+		zlist::zip(3, [1,2,3,4,5], _, Current),
+		Current == 3.
+
 	test(zlist_zip_2_01) :-
 		\+ zlist::zip([], _).
 
@@ -86,12 +96,6 @@
 		zlist::apply({M}/[N]>>(M is N + 1), Zipper),
 		M == 2.
 
-	test(zlist_replace_3_01) :-
-		zlist::zip([1,2,3,4,5], Zipper0),
-		zlist::replace(Zipper0, 0, Zipper1),
-		zlist::current(Zipper1, Current),
-		Current = 0.
-
 	test(zlist_insert_before_3_01) :-
 		zlist::zip([1,2,3,4,5], Zipper0),
 		zlist::insert_before(Zipper0, 0, Zipper1),
@@ -105,5 +109,28 @@
 		zlist::next(Zipper1, Zipper2),
 		zlist::current(Zipper2, Current),
 		Current == 2.
+
+	test(zlist_replace_3_01) :-
+		zlist::zip([1,2,3,4,5], Zipper0),
+		zlist::replace(Zipper0, 0, Zipper1),
+		zlist::current(Zipper1, Current),
+		Current = 0.
+
+	test(zlist_delete_and_previous_2_01) :-
+		zlist::zip(3, [1,2,3,4,5], Zipper0, _),
+		zlist::delete_and_previous(Zipper0, Zipper1),
+		zlist::current(Zipper1, Current),
+		Current = 2.
+
+	test(zlist_delete_and_next_2_01) :-
+		zlist::zip(3, [1,2,3,4,5], Zipper0, _),
+		zlist::delete_and_next(Zipper0, Zipper1),
+		zlist::current(Zipper1, Current),
+		Current = 4.
+
+	test(zlist_delete_and_unzip_2_01) :-
+		zlist::zip(3, [1,2,3,4,5], Zipper, _),
+		zlist::delete_and_unzip(Zipper, List),
+		List = [1,2,4,5].
 
 :- end_object.

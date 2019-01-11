@@ -25,7 +25,7 @@
 		version is 0.1,
 		author is 'Paulo Moura',
 		date is 2019/01/11,
-		comment is 'Zipper list predicates.'
+		comment is 'Zipper list predicates. Zippers should be regarded as opaque terms.'
 	]).
 
 	:- public(zip/4).
@@ -68,10 +68,22 @@
 	apply(Closure, zip(_,Element,_)) :-
 		call(Closure, Element).
 
-	replace(zip(Before,_,After), Element, zip(Before,Element,After)).
-
 	insert_before(zip(Before,Current,After), Element, zip([Element| Before],Current,After)).
 
 	insert_after(zip(Before,Current,After), Element, zip(Before,Current,[Element| After])).
+
+	replace(zip(Before,_,After), Element, zip(Before,Element,After)).
+
+	delete_and_previous(zip([Element|Before],_,Tail), zip(Before,Element,Tail)).
+
+	delete_and_next(zip(Before,_,[Head|Tail]), zip(Before,Head,Tail)).
+
+	delete_and_unzip(zip(Before,_,After), List) :-
+		(	After = [Current| Tail] ->
+			unzip(Before, Current, Tail, List)
+		;	Before = [Current| Tail] ->
+			unzip(Before, Current, After, List)
+		;	List = []
+		).
 
 :- end_object.
