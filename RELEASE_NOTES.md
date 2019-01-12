@@ -85,6 +85,8 @@ on meta-interpretive learning.
 Tests
 -----
 
+* ADDED: Unit tests for the new library list zipper predicates.
+
 * IMPROVED: Unit tests for the entity creation built-in predicates.
 
 Examples

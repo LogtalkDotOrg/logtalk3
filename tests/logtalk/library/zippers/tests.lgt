@@ -22,11 +22,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/01/11,
+		date is 2019/01/12,
 		comment is 'Unit tests for the "zippers" library.'
 	]).
+
+	cover(zlist).
 
 	test(zlist_zip_4_01) :-
 		\+ zlist::zip(1, [], _, _).
