@@ -85,6 +85,8 @@ on meta-interpretive learning.
 Tests
 -----
 
+* ADDED: Library alias `tests` to the `paths/paths.pl` file.
+
 * ADDED: Unit tests for the new library list zipper predicates.
 
 * IMPROVED: Unit tests for the entity creation built-in predicates.

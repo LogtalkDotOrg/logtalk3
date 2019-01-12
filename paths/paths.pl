@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on December 30, 2018
+%  Last updated on January 12, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -69,6 +69,7 @@ logtalk_library_path(examples, logtalk_user('examples/')).
 logtalk_library_path(library, logtalk_user('library/')).
 logtalk_library_path(ports, logtalk_user('ports/')).
 logtalk_library_path(tools, logtalk_user('tools/')).
+logtalk_library_path(tests, logtalk_user('tests/')).
 
 % third-party contributions
 logtalk_library_path(flags, contributions('flags/')).
