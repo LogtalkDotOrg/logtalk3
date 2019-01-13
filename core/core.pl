@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 23, 0, b07)).
+'$lgt_version_data'(logtalk(3, 23, 0, b08)).
 
 
 
@@ -14451,6 +14451,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Obj == user,
 	!,
 	'$lgt_check'(var_or_callable, Pred).
+
+% suppress debug messages when compiling in optimized mode
+
+'$lgt_compile_message_to_object'(Pred, Obj, true, _, _) :-
+	Obj == logtalk,
+	Pred = print_message(Kind, _, _),
+	callable(Kind),
+	functor(Kind, debug, _),
+	'$lgt_compiler_flag'(optimize, on),
+	!.
 
 % convenient access to parametric object proxies
 
