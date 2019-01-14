@@ -22,9 +22,9 @@
 	instantiates(heuristic_search(Threshold))).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2008/6/9,
+		date is 2019/01/14,
 		comment is 'Hill climbing heuristic state space search strategy.',
 		parnames is ['Threshold']
 	]).
@@ -39,14 +39,16 @@
 		Space::goal_state(State).
 	hill(Space, State, Threshold, Path, Solution, SoFar, Total) :-
 		findall(
-			(Estimate, Cost, Next),
-			(Space::next_state(State, Next, Cost),
-			 \+ Space::member_path(Next, [State| Path]),
-			 Space::heuristic(Next, Guess),
-			 Estimate is Guess + Cost),
-			States),
+			next(Estimate, Cost, Next),
+			(	Space::next_state(State, Next, Cost),
+				\+ Space::member_path(Next, [State| Path]),
+				Space::heuristic(Next, Guess),
+				Estimate is Guess + Cost
+			),
+			States
+		),
 		sort(States, SortedStates),
-		member((_, Cost2, Next2), SortedStates),
+		member(next(_, Cost2, Next2), SortedStates),
 		SoFar2 is SoFar + Cost2,
 		SoFar2 =< Threshold,
 		hill(Space, Next2, Threshold, [State| Path], Solution, SoFar2, Total).

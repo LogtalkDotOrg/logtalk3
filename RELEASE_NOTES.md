@@ -104,6 +104,9 @@ Examples
 
 * ADDED: Simple example, `serialization`, of serializing objects to a file.
 
+* IMPROVED: Implementation of the hill climbing search method found in the
+`searching` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
