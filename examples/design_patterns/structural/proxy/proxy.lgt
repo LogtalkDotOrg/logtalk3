@@ -39,7 +39,7 @@
 :- object(car,
 	implements(carp)).
 
-    drive :-
+	drive :-
 		write('Car has been driven!'), nl.
 
 :- end_object.
@@ -51,11 +51,11 @@
 :- object(car_proxy(_Car_, _Driver_),
 	implements(carp)).
 
-    drive :-
+	drive :-
 		(	_Driver_::age(Age), Age < 16 ->
 			_Driver_::name(Name),
 			write('Sorry, '), write(Name), write(' is too young to drive!'), nl
-        ;	_Car_::drive
+		;	_Car_::drive
 		).
 
 :- end_object.

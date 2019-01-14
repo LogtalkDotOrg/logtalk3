@@ -39,8 +39,8 @@
 % 
 
 
-% the constraint solver libraries must always be loaded prior to compilation of 
-% the individual example files:
+% the constraint solver libraries must always be loaded prior to
+% compilation of the individual example files:
 :- lib(ic).
 :- lib(ic_sets).
 
@@ -52,21 +52,28 @@
 	:- use_module(ic, [(#=<)/2]).
 	:- use_module(ic_sets, [(#)/2, intsets/4, insetdomain/4]).
 
-	:- op(1100, xfy, do).               % ECLiPSe "do" operator is not available when the library(iso) is used
+	% ECLiPSe "do" operator is not available when the library(iso) is used
+	:- op(1100, xfy, do).
 
 	steiner(N, Sets) :-
-		NB is N * (N-1) // 6,           % compute number of triplets
-		intsets(Sets, NB, 1, N),        % initialise the set variables
-		( foreach(S,Sets) do
-		    #(S,3)                      % constrain their cardinality to 3
+		% compute number of triplets
+		NB is N * (N-1) // 6,
+		% initialise the set variables
+		intsets(Sets, NB, 1, N),
+		(	foreach(S,Sets) do
+			% constrain their cardinality to 3
+			#(S,3)
 		),
-		( fromto(Sets,[S1|Ss],Ss,[]) do
-		    ( foreach(S2,Ss), param(S1) do
-		        #(S1 /\ S2, C),         % constrain the cardinality
-		        C #=< 1                 % of pairwise intersections to 1
-		    )
+		(	fromto(Sets,[S1|Ss],Ss,[]) do
+			(	foreach(S2,Ss), param(S1) do
+				% constrain the cardinality
+				#(S1 /\ S2, C),
+				% of pairwise intersections to 1
+				C #=< 1
+			)
 		),
-		label_sets(Sets).               % search
+		% search
+		label_sets(Sets).
 
 	label_sets([]).
 	label_sets([S|Ss]) :-

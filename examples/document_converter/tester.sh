@@ -24,9 +24,9 @@
 
 
 while getopts "p:" option; do
-    case $option in
+	case $option in
 		p) backend="$OPTARG";;
-    esac
+	esac
 done
 
 if [ "$backend" == "swi" ] ; then

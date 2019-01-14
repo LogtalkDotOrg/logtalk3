@@ -63,7 +63,7 @@
 		convert_file(Document, Contents).
 
 	convert_file(Document, Contents) :-
-	    catch(
+		catch(
 			convert_file_java(Document, Contents),
 			error(_, JavaException),
 			resource_error(JavaException)

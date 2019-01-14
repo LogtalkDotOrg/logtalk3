@@ -32,14 +32,14 @@
 		freeze/0, jump/1, execute/0
 	]).
 
-    freeze :-
-        write('Freezing processor.'), nl.
+	freeze :-
+		write('Freezing processor.'), nl.
 
 	jump(Position) :-
-        write('Jumping to: '), write(Position), nl.
+		write('Jumping to: '), write(Position), nl.
 
 	execute :-
-        write('Executing.'), nl.
+		write('Executing.'), nl.
 
 :- end_object.
 
@@ -49,7 +49,7 @@
 	:- public(load/2).
 
 	load(Position, Data) :-
-        write('Loading from '), write(Position),
+		write('Loading from '), write(Position),
 		write(' data: '), write(Data), nl.
 
 :- end_object.
@@ -77,11 +77,11 @@
 	:- public(start/0).
 
 	start :-
-        _CPU_::freeze,
+		_CPU_::freeze,
 		_SSD_::read('100', '1024', Data),
-        _Memory_::load('0x00', Data),
-        _CPU_::jump('0x00'),
-        _CPU_::execute.
+		_Memory_::load('0x00', Data),
+		_CPU_::jump('0x00'),
+		_CPU_::execute.
 
 :- end_object.
 
@@ -98,10 +98,10 @@
 	:- public(start/0).
 
 	start :-
-        cpu::freeze,
+		cpu::freeze,
 		ssd::read('100', '1024', Data),
-        memory::load('0x00', Data),
-        cpu::jump('0x00'),
-        cpu::execute.
+		memory::load('0x00', Data),
+		cpu::jump('0x00'),
+		cpu::execute.
 
 :- end_object.
