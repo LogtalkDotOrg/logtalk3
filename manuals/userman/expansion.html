@@ -333,15 +333,42 @@ defined within an object or a category are never used in the compilation
 of the object or the category itself.</p>
 </div>
 <span class="target" id="index-0"></span><p id="index-1">When using an hook object to expand the terms of a source file, two
-virtual terms are generated: <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> and <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.
+virtual file terms are generated: <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> and <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.
 These terms allow the user to define term-expansions before and after
 the actual source file terms.</p>
-<p>Logtalk provides a <a class="reference internal" href="../refman/predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a>
+<p>Logtalk also provides a <a class="reference internal" href="../refman/predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a>
 built-in predicate that can be used to access the compilation/loading
 context when performing expansions. The <a class="reference internal" href="objects.html#objects-logtalk"><span class="std std-ref">logtalk</span></a>
 built-in object also provides a set of predicates that can be useful,
 notably when adding Logtalk support for languages extensions originally
 developed for Prolog.</p>
+<p>As an example of using the virtual terms and the <code class="docutils literal notranslate"><span class="pre">logtalk_load_context/2</span></code>
+predicate, assume that you want to convert plain Prolog files to Logtalk by
+wrapping the Prolog code in each file using an object (named after the file)
+that implements a given protocol. This could be accomplished by defining
+the following hook object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(wrapper(<span class="nv">_Protocol_</span>),
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">term_expansion</span>(begin_of_file, (<span class="o">:-</span> object(<span class="nv">Name</span>,implements(<span class="nv">_Protocol_</span>)))) <span class="o">:-</span>
+        <span class="k">logtalk_load_context</span>(file, <span class="nv">File</span>),
+        os<span class="o">::</span>decompose_file_name(<span class="nv">File</span>,<span class="nv">_</span> , <span class="nv">Name</span>, <span class="nv">_</span>).
+
+    <span class="k">term_expansion</span>(end_of_file, (<span class="o">:-</span> end_object)).
+
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>Assuming e.g. <code class="docutils literal notranslate"><span class="pre">my_car.pl</span></code> and <code class="docutils literal notranslate"><span class="pre">lease_car.pl</span></code> files  to be wrapped and a
+<code class="docutils literal notranslate"><span class="pre">car_protocol</span></code> protocol, we could then load them using:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(
+         [&#39;my_car.pl&#39;, &#39;lease_car.pl&#39;],
+         [hook(wrapper(car_protocol))]
+     ).
+
+yes
+</pre></div>
+</div>
 </div>
 <div class="section" id="bypassing-expansions">
 <h2>Bypassing expansions<a class="headerlink" href="#bypassing-expansions" title="Permalink to this headline">¶</a></h2>

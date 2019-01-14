@@ -28,8 +28,9 @@ Description
 
    current_predicate(Predicate)
 
-Enumerates, by backtracking, visible user object predicates.
-Predicates not declared using a scope directive are not enumerated.
+Enumerates, by backtracking, visible, user-defined, object predicates.
+Built-in predicates and predicates not declared using a scope directive
+are not enumerated.
 
 When ``Predicate`` is ground at compile time, this predicate also
 succeeds for any predicates listed in :ref:`directives_uses_2` and

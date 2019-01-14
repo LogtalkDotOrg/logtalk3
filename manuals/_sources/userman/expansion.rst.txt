@@ -178,16 +178,47 @@ specific expansion predicate definitions if defined in the adapter file.
 .. index:: single: end_of_file
 
 When using an hook object to expand the terms of a source file, two
-virtual terms are generated: ``begin_of_file`` and ``end_of_file``.
+virtual file terms are generated: ``begin_of_file`` and ``end_of_file``.
 These terms allow the user to define term-expansions before and after
 the actual source file terms.
 
-Logtalk provides a :ref:`predicates_logtalk_load_context_2`
+Logtalk also provides a :ref:`predicates_logtalk_load_context_2`
 built-in predicate that can be used to access the compilation/loading
 context when performing expansions. The :ref:`logtalk <objects_logtalk>`
 built-in object also provides a set of predicates that can be useful,
 notably when adding Logtalk support for languages extensions originally
 developed for Prolog.
+
+As an example of using the virtual terms and the ``logtalk_load_context/2``
+predicate, assume that you want to convert plain Prolog files to Logtalk by
+wrapping the Prolog code in each file using an object (named after the file)
+that implements a given protocol. This could be accomplished by defining
+the following hook object:
+
+::
+
+   :- object(wrapper(_Protocol_),
+       implements(expanding)).
+
+       term_expansion(begin_of_file, (:- object(Name,implements(_Protocol_)))) :-
+           logtalk_load_context(file, File),
+           os::decompose_file_name(File,_ , Name, _).
+
+       term_expansion(end_of_file, (:- end_object)).
+
+   :- end_object.
+
+Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
+``car_protocol`` protocol, we could then load them using:
+
+.. code-block:: text
+
+   | ?- logtalk_load(
+            ['my_car.pl', 'lease_car.pl'],
+            [hook(wrapper(car_protocol))]
+        ).
+   
+   yes
 
 Bypassing expansions
 --------------------

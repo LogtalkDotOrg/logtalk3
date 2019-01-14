@@ -54,6 +54,8 @@ internal predicate.
 Documentation
 -------------
 
+* IMPROVED: Handbook section on the term-expansion mechanism.
+
 * FIXED: HTML favicon bug that resulted in a non-valid ePub version of the
 Handbook.
 

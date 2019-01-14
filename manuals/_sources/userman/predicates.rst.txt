@@ -1326,11 +1326,10 @@ black box view, we look into an entity from a usage point-of-view using
 built-in methods for inspecting object operators and predicates that are
 within scope from where we are making the call:
 :ref:`methods_current_op_3`, which returns operator specifications,
-:ref:`methods_predicate_property_2`,
-which returns predicate properties, and
-:ref:`methods_current_predicate_1`,
-which enables us to query about predicate definitions. See below for a
-more detailed description of these methods.
+:ref:`methods_predicate_property_2`, which returns predicate properties,
+and :ref:`methods_current_predicate_1`, which enables us to query about
+user-defined predicate definitions. See below for a more detailed description
+of these methods.
 
 .. _predicates_parsing:
 
