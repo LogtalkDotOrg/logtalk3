@@ -413,6 +413,14 @@ possibly by default or implicitly by the Prolog system, that may be
 contributing definitions of the expansion predicates. It is usually
 safer to define a specific hook object for combining multiple expansions
 in a fully controlled way.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">user</span></code> object declares <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
+as multifile and dynamic predicates. This helps in avoiding predicate
+existence errors when compiling source files with the <code class="docutils literal notranslate"><span class="pre">hook</span></code> flag set
+to <code class="docutils literal notranslate"><span class="pre">user</span></code> as these predicates are only natively declared in some of the
+supported backend Prolog compilers.</p>
+</div>
 </div>
 </div>
 

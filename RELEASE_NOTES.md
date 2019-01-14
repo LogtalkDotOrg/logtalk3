@@ -27,8 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* IMPROVED: The compiler now suppresses `logtalk::print_message/3` debug messages
-when the `optimize` flag is turned on.
+* IMPROVED: The compiler now suppresses `logtalk::print_message/3` debug
+messages when the `optimize` flag is turned on.
 
 * IMPROVED: Detection of missing meta-predicate directives when compiling
 closures.
@@ -55,6 +55,9 @@ Documentation
 -------------
 
 * IMPROVED: Handbook section on the term-expansion mechanism.
+
+* IMPROVED: Handbook reference page on the `current_predicate/1` built-in
+method.
 
 * FIXED: HTML favicon bug that resulted in a non-valid ePub version of the
 Handbook.

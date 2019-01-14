@@ -268,3 +268,11 @@ possibly by default or implicitly by the Prolog system, that may be
 contributing definitions of the expansion predicates. It is usually
 safer to define a specific hook object for combining multiple expansions
 in a fully controlled way.
+
+.. note::
+
+   The ``user`` object declares ``term_expansion/2`` and ``goal_expansion/2``
+   as multifile and dynamic predicates. This helps in avoiding predicate
+   existence errors when compiling source files with the ``hook`` flag set
+   to ``user`` as these predicates are only natively declared in some of the
+   supported backend Prolog compilers.
