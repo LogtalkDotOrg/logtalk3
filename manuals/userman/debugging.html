@@ -126,8 +126,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#debugging-using-spy-points">Debugging using spy points</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-commands">Debugging commands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#context-switching-calls">Context-switching calls</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-compilation-hooks-and-term-expansion-for-debugging">Using compilation hooks and term expansion for debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-messages">Debugging messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-term-expansion-mechanism-for-debugging">Using the term-expansion mechanism for debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ports-profiling">Ports profiling</a></li>
 </ul>
 </li>
@@ -234,7 +234,7 @@ of spy points allows the user to specify the execution context for entering
 the debugger. This feature is a consequence of the encapsulation of
 predicates inside objects.</p>
 <div class="section" id="compiling-source-files-in-debug-mode">
-<span id="programming-debug-mode"></span><h2>Compiling source files in debug mode<a class="headerlink" href="#compiling-source-files-in-debug-mode" title="Permalink to this headline">¶</a></h2>
+<span id="debugging-debug-mode"></span><h2>Compiling source files in debug mode<a class="headerlink" href="#compiling-source-files-in-debug-mode" title="Permalink to this headline">¶</a></h2>
 <p>Compilation of source files in debug mode is controlled by the
 <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> compiler flag. The default value for this flag,
 usually <code class="docutils literal notranslate"><span class="pre">off</span></code>, is defined in the adapter files. Its default value may
@@ -270,7 +270,7 @@ all loaded entities compiled in debug mode as follows:</p>
 <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> directive inside the entity.</p>
 </div>
 <div class="section" id="procedure-box-model">
-<span id="programming-box-model"></span><h2>Procedure Box model<a class="headerlink" href="#procedure-box-model" title="Permalink to this headline">¶</a></h2>
+<span id="debugging-box-model"></span><h2>Procedure Box model<a class="headerlink" href="#procedure-box-model" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk uses a <em>Procedure Box model</em> similar to those found on most
 Prolog compilers. The traditional Prolog procedure box model defines
 four ports (<em>call</em>, <em>exit</em>, <em>redo</em>, and <em>fail</em>) for describing control
@@ -475,7 +475,7 @@ yes
 </div>
 </div>
 <div class="section" id="debugging-using-spy-points">
-<span id="programming-debug"></span><h2>Debugging using spy points<a class="headerlink" href="#debugging-using-spy-points" title="Permalink to this headline">¶</a></h2>
+<span id="debugging-debug"></span><h2>Debugging using spy points<a class="headerlink" href="#debugging-using-spy-points" title="Permalink to this headline">¶</a></h2>
 <p>Tracing a program execution may generate large amounts of debugging
 data. Debugging using spy points allows the user to concentrate in
 specific points of the code. To start a debugging session using spy
@@ -498,7 +498,7 @@ yes
 <p>Note that stopping the debugger does not remove any defined spy points.</p>
 </div>
 <div class="section" id="debugging-commands">
-<span id="programming-commands"></span><h2>Debugging commands<a class="headerlink" href="#debugging-commands" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Debugging commands<a class="headerlink" href="#debugging-commands" title="Permalink to this headline">¶</a></h2>
 <p>The debugger pauses at leashed ports when tracing or when finding a spy
 point for user interaction. The commands available are as follows:</p>
 <dl class="docutils">
@@ -577,7 +577,7 @@ unification port</dd>
 </dl>
 </div>
 <div class="section" id="context-switching-calls">
-<span id="programming-context"></span><h2>Context-switching calls<a class="headerlink" href="#context-switching-calls" title="Permalink to this headline">¶</a></h2>
+<span id="debugging-context"></span><h2>Context-switching calls<a class="headerlink" href="#context-switching-calls" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk provides a control construct, <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">&lt;&lt;/2</span></a>,
 which allows the execution of a query within the context of an object.
 Common debugging uses include checking an object local predicates (e.g.
@@ -635,43 +635,17 @@ Thus, the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/
 flag (its default value is defined in the adapter files of the backend
 Prolog compilers).</p>
 </div>
-<div class="section" id="using-compilation-hooks-and-term-expansion-for-debugging">
-<span id="programming-hooks"></span><h2>Using compilation hooks and term expansion for debugging<a class="headerlink" href="#using-compilation-hooks-and-term-expansion-for-debugging" title="Permalink to this headline">¶</a></h2>
-<p>It is possible to use compilation hooks and the term expansion mechanism
-for conditional compilation of debugging goals. Assume that we chose the
-predicate <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> to represent debug goals. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>member(<span class="nv">Head</span>, [<span class="nv">Head</span>| <span class="nv">_</span>]) <span class="o">:-</span>
-    debug((<span class="k">write</span>(<span class="s">&#39;Base case: &#39;</span>), <span class="k">writeq</span>(member(<span class="nv">Head</span>, [<span class="nv">Head</span>| <span class="nv">_</span>])))).
-member(<span class="nv">Head</span>, [<span class="nv">_</span>| <span class="nv">Tail</span>]) <span class="o">:-</span>
-    debug((<span class="k">write</span>(<span class="s">&#39;Recursive case: &#39;</span>), <span class="k">writeq</span>(member(<span class="nv">Head</span>, <span class="nv">Tail</span>)))),
-    member(<span class="nv">Head</span>, <span class="nv">Tail</span>).
-</pre></div>
-</div>
-<p>When debugging, we want to call the argument of the predicate
-<code class="docutils literal notranslate"><span class="pre">debug/1</span></code>. This can be easily accomplished by defining a hook object
-containing the following definition for <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(debug(<span class="nv">Goal</span>), <span class="nv">Goal</span>).
-</pre></div>
-</div>
-<p>When not debugging, we can use a second hook object to discard the
-<code class="docutils literal notranslate"><span class="pre">debug/1</span></code> calls by defining the predicate <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> as
-follows:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(debug(<span class="nv">_</span>), <span class="k">true</span>).
-</pre></div>
-</div>
-<p>The Logtalk compiler automatically removes any redundant calls to the
-built-in predicate <code class="docutils literal notranslate"><span class="pre">true/0</span></code> when compiling object predicates.</p>
-</div>
 <div class="section" id="debugging-messages">
-<span id="programming-debugging-messages"></span><h2>Debugging messages<a class="headerlink" href="#debugging-messages" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Debugging messages<a class="headerlink" href="#debugging-messages" title="Permalink to this headline">¶</a></h2>
 <p>Calls to the <code class="docutils literal notranslate"><span class="pre">logtalk::print_message/3</span></code> predicate where the message
 kind is either <code class="docutils literal notranslate"><span class="pre">debug</span></code> or <code class="docutils literal notranslate"><span class="pre">debug(_)</span></code> are only printed, by default,
-when the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on. Note that using
-these messages does not require compiling the code in debug mode, only
-turning on the flag. To avoid having to define
-<a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules for translating each and
-every debug message, Logtalk provides default tokenization
-for four <em>meta-messages</em> that cover the most common cases:</p>
+when the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on. These messages
+are suppressed by the compiler when the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a>
+flag is turned on. Note that using these messages does not require
+compiling the code in debug mode, only turning on the flag. To avoid
+having to define <a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules for
+translating each and every debug message, Logtalk provides default
+tokenization for four <em>meta-messages</em> that cover the most common cases:</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code></dt>
 <dd>By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code>
@@ -725,8 +699,37 @@ It can be redefined using the
 <a class="reference internal" href="../refman/methods/message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a>
 hook predicate.</p>
 </div>
+<div class="section" id="using-the-term-expansion-mechanism-for-debugging">
+<span id="debugging-hooks"></span><h2>Using the term-expansion mechanism for debugging<a class="headerlink" href="#using-the-term-expansion-mechanism-for-debugging" title="Permalink to this headline">¶</a></h2>
+<p>Debugging messages can only output information by default. They can
+be intercepted to perform other options. An alternative is to use the
+term-expansion mechanism for conditional compilation of debugging goals.
+As an example, assume that a <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> predicate is used to wrap
+debug goals:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>member(<span class="nv">Head</span>, [<span class="nv">Head</span>| <span class="nv">_</span>]) <span class="o">:-</span>
+    debug((<span class="k">write</span>(<span class="s">&#39;Base case: &#39;</span>), <span class="k">writeq</span>(member(<span class="nv">Head</span>, [<span class="nv">Head</span>| <span class="nv">_</span>])))).
+member(<span class="nv">Head</span>, [<span class="nv">_</span>| <span class="nv">Tail</span>]) <span class="o">:-</span>
+    debug((<span class="k">write</span>(<span class="s">&#39;Recursive case: &#39;</span>), <span class="k">writeq</span>(member(<span class="nv">Head</span>, <span class="nv">Tail</span>)))),
+    member(<span class="nv">Head</span>, <span class="nv">Tail</span>).
+</pre></div>
+</div>
+<p>When debugging, we want to call the argument of the predicate
+<code class="docutils literal notranslate"><span class="pre">debug/1</span></code>. This can be easily accomplished by defining a hook object
+containing the following definition for <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(debug(<span class="nv">Goal</span>), <span class="nv">Goal</span>).
+</pre></div>
+</div>
+<p>When not debugging, we can use a second hook object to discard the
+<code class="docutils literal notranslate"><span class="pre">debug/1</span></code> calls by defining the predicate <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> as
+follows:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(debug(<span class="nv">_</span>), <span class="k">true</span>).
+</pre></div>
+</div>
+<p>The Logtalk compiler automatically removes any redundant calls to the
+built-in predicate <code class="docutils literal notranslate"><span class="pre">true/0</span></code> when compiling entity predicates.</p>
+</div>
 <div class="section" id="ports-profiling">
-<h2>Ports profiling<a class="headerlink" href="#ports-profiling" title="Permalink to this headline">¶</a></h2>
+<span id="debugging-ports-profiling"></span><h2>Ports profiling<a class="headerlink" href="#ports-profiling" title="Permalink to this headline">¶</a></h2>
 <p>The Logtalk distribution includes a
 <a class="reference external" href="https://logtalk.org/tools.html#ports-profiler">ports profiler tool</a>
 based on the same procedure box model described above.

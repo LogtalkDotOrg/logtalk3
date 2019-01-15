@@ -44,7 +44,7 @@ of spy points allows the user to specify the execution context for entering
 the debugger. This feature is a consequence of the encapsulation of
 predicates inside objects.
 
-.. _programming_debug_mode:
+.. _debugging_debug_mode:
 
 Compiling source files in debug mode
 ------------------------------------
@@ -93,7 +93,7 @@ all loaded entities compiled in debug mode as follows:
 To compile only a specific entity in debug mode, use the
 :ref:`directives_set_logtalk_flag_2` directive inside the entity.
 
-.. _programming_box_model:
+.. _debugging_box_model:
 
 Procedure Box model
 -------------------
@@ -304,7 +304,7 @@ To stop tracing and turning off the debugger, write:
 
    yes
 
-.. _programming_debug:
+.. _debugging_debug:
 
 Debugging using spy points
 --------------------------
@@ -335,7 +335,7 @@ To stop the debugger, write:
 
 Note that stopping the debugger does not remove any defined spy points.
 
-.. _programming_commands:
+.. _debugging_commands:
 
 Debugging commands
 ------------------
@@ -416,7 +416,7 @@ point for user interaction. The commands available are as follows:
 ``?`` — extended help
    prints list of command options
 
-.. _programming_context:
+.. _debugging_context:
 
 Context-switching calls
 -----------------------
@@ -488,55 +488,20 @@ The availability of the ``<</2`` control construct is controlled by the
 flag (its default value is defined in the adapter files of the backend
 Prolog compilers).
 
-.. _programming_hooks:
-
-Using compilation hooks and term expansion for debugging
---------------------------------------------------------
-
-It is possible to use compilation hooks and the term expansion mechanism
-for conditional compilation of debugging goals. Assume that we chose the
-predicate ``debug/1`` to represent debug goals. For example:
-
-::
-
-   member(Head, [Head| _]) :-
-       debug((write('Base case: '), writeq(member(Head, [Head| _])))).
-   member(Head, [_| Tail]) :-
-       debug((write('Recursive case: '), writeq(member(Head, Tail)))),
-       member(Head, Tail).
-
-When debugging, we want to call the argument of the predicate
-``debug/1``. This can be easily accomplished by defining a hook object
-containing the following definition for ``goal_expansion/2``:
-
-::
-
-   goal_expansion(debug(Goal), Goal).
-
-When not debugging, we can use a second hook object to discard the
-``debug/1`` calls by defining the predicate ``goal_expansion/2`` as
-follows:
-
-::
-
-   goal_expansion(debug(_), true).
-
-The Logtalk compiler automatically removes any redundant calls to the
-built-in predicate ``true/0`` when compiling object predicates.
-
-.. _programming_debugging_messages:
+.. _debugging_messages:
 
 Debugging messages
 ------------------
 
 Calls to the ``logtalk::print_message/3`` predicate where the message
 kind is either ``debug`` or ``debug(_)`` are only printed, by default,
-when the :ref:`debug <flag_debug>` flag is turned on. Note that using
-these messages does not require compiling the code in debug mode, only
-turning on the flag. To avoid having to define
-:ref:`methods_message_tokens_2` grammar rules for translating each and
-every debug message, Logtalk provides default tokenization
-for four *meta-messages* that cover the most common cases:
+when the :ref:`debug <flag_debug>` flag is turned on. These messages
+are suppressed by the compiler when the :ref:`optimize <flag_optimize>`
+flag is turned on. Note that using these messages does not require
+compiling the code in debug mode, only turning on the flag. To avoid
+having to define :ref:`methods_message_tokens_2` grammar rules for
+translating each and every debug message, Logtalk provides default
+tokenization for four *meta-messages* that cover the most common cases:
 
 ``@Message``
    By default, the message is printed as passed to the ``write/1``
@@ -591,6 +556,46 @@ The ``>>>`` prefix is the default message prefix for ``debug`` messages.
 It can be redefined using the
 :ref:`logtalk::message_prefix_stream/4 <methods_message_prefix_stream_4>`
 hook predicate.
+
+.. _debugging_hooks:
+
+Using the term-expansion mechanism for debugging
+------------------------------------------------
+
+Debugging messages can only output information by default. They can
+be intercepted to perform other options. An alternative is to use the
+term-expansion mechanism for conditional compilation of debugging goals.
+As an example, assume that a ``debug/1`` predicate is used to wrap
+debug goals:
+
+::
+
+   member(Head, [Head| _]) :-
+       debug((write('Base case: '), writeq(member(Head, [Head| _])))).
+   member(Head, [_| Tail]) :-
+       debug((write('Recursive case: '), writeq(member(Head, Tail)))),
+       member(Head, Tail).
+
+When debugging, we want to call the argument of the predicate
+``debug/1``. This can be easily accomplished by defining a hook object
+containing the following definition for ``goal_expansion/2``:
+
+::
+
+   goal_expansion(debug(Goal), Goal).
+
+When not debugging, we can use a second hook object to discard the
+``debug/1`` calls by defining the predicate ``goal_expansion/2`` as
+follows:
+
+::
+
+   goal_expansion(debug(_), true).
+
+The Logtalk compiler automatically removes any redundant calls to the
+built-in predicate ``true/0`` when compiling entity predicates.
+
+.. _debugging_ports_profiling:
 
 Ports profiling
 ---------------

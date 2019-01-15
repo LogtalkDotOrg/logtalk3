@@ -201,7 +201,7 @@ of messages printed on a console.
 Define tokenization rules for every message is not always necessary, however.
 Logtalk defines several *meta-messages* that are handy for simple cases and
 temporary messages only used to help developing, notably debugging messages.
-See the :ref:`programming_debugging_messages` section and the
+See the :ref:`debugging_messages` section and the
 :ref:`logtalk built-in object <apis:logtalk/0>` remarks section for details.
 
 Intercepting messages

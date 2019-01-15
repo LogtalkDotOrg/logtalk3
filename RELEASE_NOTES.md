@@ -35,7 +35,7 @@ closures.
 
 * IMPROVED: Allow inlining of meta-predicate definitions in safe cases.
 
-* FIXED: Cases are predicate definition inlining would give wrong results
+* FIXED: A case are predicate definition inlining would give wrong results
 when meta-calling the predicate from `bagof/3` or `setof/3` goals due to the
 presence of anonymous variables in the predicate definition.
 
@@ -54,7 +54,7 @@ internal predicate.
 Documentation
 -------------
 
-* IMPROVED: Handbook section on the term-expansion mechanism.
+* IMPROVED: Handbook sections on debugging and the term-expansion mechanism.
 
 * IMPROVED: Handbook reference page on the `current_predicate/1` built-in
 method.
@@ -110,7 +110,7 @@ Examples
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: EditorConfig root file (`.editorconfig`) to set the indentation
+* ADDED: EditorConfig root file, `.editorconfig`, to set the indentation
 preferences as per coding guidelines.
 
 * FIXED: GtkSourceView syntax highlighting of the `as` infix operator.
