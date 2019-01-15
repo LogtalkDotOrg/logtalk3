@@ -76,6 +76,8 @@ the coroutining predicates are made available by each Prolog system.
 
 * ADDED: Library zipper protocol and list zipper object.
 
+* IMPROVED: Documentation cross-references for library entities.
+
 Tools
 -----
 

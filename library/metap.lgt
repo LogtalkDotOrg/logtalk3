@@ -24,7 +24,8 @@
 		version is 6.1,
 		date is 2015/12/23,
 		author is 'Paulo Moura',
-		comment is 'Useful meta-predicates protocol.'
+		comment is 'Useful meta-predicates protocol.',
+		see_also is [meta]
 	]).
 
 	:- public(include/3).

@@ -25,7 +25,7 @@
 		author is 'Paulo Moura',
 		date is 2019/01/03,
 		comment is 'List of variables protocol.',
-		see_also is [listp, numberlistp]
+		see_also is [varlist, listp, numberlistp]
 	]).
 
 	:- public(append/3).

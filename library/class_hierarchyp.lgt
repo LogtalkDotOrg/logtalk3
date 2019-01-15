@@ -18,7 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(class_hierarchyp,
 	extends(hierarchyp)).
 
@@ -26,7 +25,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'Class hierarchy protocol.'
+		comment is 'Class hierarchy protocol.',
+		see_also is [class_hierarchy]
 	]).
 
 	:- public(class/1).

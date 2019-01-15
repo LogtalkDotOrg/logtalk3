@@ -25,7 +25,7 @@
 		author is 'Paulo Moura',
 		date is 2018/03/07,
 		comment is 'Portable operating-system access protocol.',
-		see_also is [os_types]
+		see_also is [os, os_types]
 	]).
 
 	:- public(pid/1).

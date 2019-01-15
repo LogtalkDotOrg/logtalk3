@@ -26,7 +26,8 @@
 		version is 1.8,
 		author is 'Richard O''Keefe (main predicates); adapted to Logtalk by Paulo Moura.',
 		date is 2018/08/17,
-		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.'
+		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.',
+		see_also is [set(_)]
 	]).
 
 	as_set(List, Set) :-

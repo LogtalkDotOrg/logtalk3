@@ -30,7 +30,8 @@
 			'Predicate spy point' - 'Specified as a ground term Functor/Arity.',
 			'Line number spy point' - 'Specified as an Entity-Line term with both Entity and Line bound. Line must be the first source file line of an entity clause.',
 			'Leash shorthands' - 'none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].'
-		]
+		],
+		see_also is [debugger]
 	]).
 
 	% avoid a catch-22...

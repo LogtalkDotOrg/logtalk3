@@ -25,7 +25,7 @@
 		author is 'Paulo Moura',
 		date is 2017/10/07,
 		comment is 'List of numbers protocol.',
-		see_also is [listp, varlistp]
+		see_also is [numberlist, listp, varlistp]
 	]).
 
 	:- public(product/2).

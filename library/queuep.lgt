@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(queuep).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'Queue protocol.'
+		comment is 'Queue protocol.',
+		see_also is [queue]
 	]).
 
 	:- public(empty/1).

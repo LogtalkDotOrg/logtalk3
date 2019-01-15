@@ -374,3 +374,7 @@ Remarks
 
 * **Leash shorthands**: none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].
 
+.. seealso::
+
+   :ref:`debugger <debugger/0>`
+

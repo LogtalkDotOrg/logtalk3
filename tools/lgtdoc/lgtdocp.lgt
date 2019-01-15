@@ -39,7 +39,8 @@
 			'exclude_paths(List) option' - 'List of (relative) library paths to exclude when generating the XML documenting files.',
 			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files.',
 			'Known issues' - 'The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.'
-		]
+		],
+		see_also is [lgtdoc]
 	]).
 
 	:- public(rlibrary/2).

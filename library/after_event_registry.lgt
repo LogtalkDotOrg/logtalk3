@@ -18,7 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(after_event_registry,
 	implements(event_registryp)).
 
@@ -26,7 +25,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2009/10/8,
-		comment is 'After events registry predicates.'
+		comment is 'After events registry predicates.',
+		see_also is [before_event_registry, monitorp]
 	]).
 
 	monitor(Monitor) :-

@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(characterp).
 
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2011/02/19,
-		comment is 'Character protocol.'
+		comment is 'Character protocol.',
+		see_also is [character]
 	]).
 
 	:- public(is_ascii/1).

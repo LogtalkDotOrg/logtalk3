@@ -24,7 +24,8 @@
 		version is 2.4,
 		author is 'Paulo Moura',
 		date is 2018/08/14,
-		comment is 'Random number generator protocol.'
+		comment is 'Random number generator protocol.',
+		see_also is [random, backend_random, fast_random]
 	]).
 
 	:- public(random/1).

@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(heapp).
 
 	:- info([
 		version is 1.01,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
 		date is 2010/11/13,
-		comment is 'Heap protocol.'
+		comment is 'Heap protocol.',
+		see_also is [heap(_)]
 	]).
 
 	:- public(insert/4).

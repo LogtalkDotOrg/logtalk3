@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(monitorp).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'Monitor protocol.'
+		comment is 'Monitor protocol.',
+		see_also is [monitor, event_registryp]
 	]).
 
 	:- public(monitor_activated/0).

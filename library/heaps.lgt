@@ -68,7 +68,8 @@
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
 		date is 2010/02/19,
 		comment is 'Heap implementation, parameterized by the order to be used to compare keys ("<" or ">").',
-		parnames is ['Order']
+		parnames is ['Order'],
+		see_also is [minheap, maxheap]
 	]).
 
 	insert(Key, Value, t(M,[],OldTree), t(N,[],NewTree)) :- !,

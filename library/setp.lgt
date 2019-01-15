@@ -24,7 +24,8 @@
 		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2018/08/17,
-		comment is 'Set protocol.'
+		comment is 'Set protocol.',
+		see_also is [set, set(_)]
 	]).
 
 	:- public(as_set/2).

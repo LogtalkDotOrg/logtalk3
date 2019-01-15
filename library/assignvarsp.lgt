@@ -31,7 +31,8 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 		version is 1.0,
 		author is 'Nobukuni Kino and Paulo Moura',
 		date is 2015/07/31,
-		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms) protocol.'
+		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms) protocol.',
+		see_also is [assignvars]
 	]).
 
 	:- public(assignable/1).

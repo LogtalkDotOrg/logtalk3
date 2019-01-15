@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(dictionaryp).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2010/02/26,
-		comment is 'Dictionary protocol.'
+		comment is 'Dictionary protocol.',
+		see_also is [bintree, rbtree]
 	]).
 
 	:- public(as_dictionary/2).

@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(termp).
 
 	:- info([
 		version is 1.31,
 		author is 'Paulo Moura',
 		date is 2010/06/09,
-		comment is 'Prolog term utility predicates protocol.'
+		comment is 'Prolog term utility predicates protocol.',
+		see_also is [term]
 	]).
 
 	:- public(depth/2).
