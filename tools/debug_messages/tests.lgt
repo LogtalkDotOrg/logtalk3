@@ -54,13 +54,23 @@
 		print_message(debug, foo, @debug_messages_enable_1_01),
 		^^text_output_assertion(test_output, 'debug_messages_enable_1_01\n', Assertion).
 
+	test(debug_messages_enable_1_02, true(Assertion)) :-
+		enable(foo),
+		^^set_text_output(test_output, ''),
+		print_message(debug(group), foo, @debug_messages_enable_1_02),
+		^^text_output_assertion(test_output, 'debug_messages_enable_1_02\n', Assertion).
+
 	test(debug_messages_disable_1_01, true(Assertion)) :-
 		disable(foo),
 		^^set_text_output(test_output, ''),
 		print_message(debug, foo, @debug_messages_disable_1_01),
 		^^text_output_assertion(test_output, '', Assertion).
 
-	test(debug_messages_enabled_1_01, true(Components == [bar,foo])) :-
+	test(debug_messages_enabled_1_01, true(Components == [])) :-
+		disable(_),
+		findall(Component, enabled(Component), Components).
+
+	test(debug_messages_enabled_1_02, true(Components == [bar,foo])) :-
 		disable(_),
 		enable(bar),
 		enable(foo),
@@ -72,13 +82,23 @@
 		print_message(debug(group), baz, @debug_messages_enable_2_01),
 		^^text_output_assertion(test_output, 'debug_messages_enable_2_01\n', Assertion).
 
+	test(debug_messages_enable_2_02, true(Assertion)) :-
+		enable(baz, group),
+		^^set_text_output(test_output, ''),
+		print_message(debug(other), baz, @debug_messages_enable_2_02),
+		^^text_output_assertion(test_output, '', Assertion).
+
 	test(debug_messages_disable_2_01, true(Assertion)) :-
 		disable(baz, group),
 		^^set_text_output(test_output, ''),
 		print_message(debug(group), baz, @debug_messages_disable_2_01),
 		^^text_output_assertion(test_output, '', Assertion).
 
-	test(debug_messages_enabled_2_01, true(List == [baz-group,qux-group])) :-
+	test(debug_messages_enabled_2_01, true(List == [])) :-
+		disable(_, _),
+		findall(Component-Group, enabled(Component, Group), List).
+
+	test(debug_messages_enabled_2_02, true(List == [baz-group,qux-group])) :-
 		disable(_, _),
 		enable(baz, group),
 		enable(qux, group),
