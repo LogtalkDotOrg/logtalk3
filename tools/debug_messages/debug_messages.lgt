@@ -89,8 +89,8 @@
 	]).
 
 	enable(Component) :-
-		retractall(enabled_(_, _)),
-		retractall(enabled_(_)),
+		retractall(enabled_(Component, _)),
+		retractall(enabled_(Component)),
 		assertz(enabled_(Component)).
 
 	disable(Component) :-
@@ -101,7 +101,7 @@
 		enabled_(Component).
 
 	enable(Component, Group) :-
-		retractall(enabled_(_, _)),
+		retractall(enabled_(Component, Group)),
 		assertz(enabled_(Component, Group)).
 
 	disable(Component, Group) :-
