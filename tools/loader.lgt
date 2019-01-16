@@ -26,6 +26,7 @@
 		assertions(loader),
 		code_metrics(loader),
 		dead_code_scanner(loader),
+		debug_messages(loader),
 		debugger(loader),
 		diagrams(loader),
 		doclet(loader),

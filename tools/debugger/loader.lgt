@@ -23,5 +23,7 @@
 		debuggerp,
 		debugger,
 		debugger_messages
-	], [optimize(on)])
+	], [
+		optimize(on)
+	])
 ).

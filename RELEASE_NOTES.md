@@ -83,6 +83,9 @@ Tools
 
 * RENAMED: The `ports` tool to `ports_profiler`.
 
+* ADDED: A `debug_messages` tool supporting enabling and disabling of `debug`
+and `debug(Group)` messages for code compiled in normal mode.
+
 * ADDED: Sample Sphinx configuration file, `conf-sample.py`, to the `lgtdoc`
 tool.
 

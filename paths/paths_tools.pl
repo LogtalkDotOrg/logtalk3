@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the developer tools
-%  Last updated on December 30, 2018
+%  Last updated on January 16, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -35,6 +35,7 @@ logtalk_library_path(tools, logtalk_user('tools/')).
 logtalk_library_path(assertions, tools('assertions/')).
 logtalk_library_path(code_metrics, tools('code_metrics/')).
 logtalk_library_path(dead_code_scanner, tools('dead_code_scanner/')).
+logtalk_library_path(debug_messages, tools('debug_messages/')).
 logtalk_library_path(debugger, tools('debugger/')).
 logtalk_library_path(diagrams, tools('diagrams/')).
 logtalk_library_path(doclet, tools('doclet/')).

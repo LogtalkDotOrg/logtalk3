@@ -28,6 +28,7 @@ The following developer tools are available, each one with its own
 - assertions
 - code_metrics
 - dead_code_scanner
+- debug_messages
 - debugger
 - diagrams
 - doclet

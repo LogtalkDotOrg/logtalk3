@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on January 12, 2019
+%  Last updated on January 16, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -85,6 +85,7 @@ logtalk_library_path(metagol, ports('metagol/')).
 logtalk_library_path(assertions, tools('assertions/')).
 logtalk_library_path(code_metrics, tools('code_metrics/')).
 logtalk_library_path(dead_code_scanner, tools('dead_code_scanner/')).
+logtalk_library_path(debug_messages, tools('debug_messages/')).
 logtalk_library_path(debugger, tools('debugger/')).
 logtalk_library_path(diagrams, tools('diagrams/')).
 logtalk_library_path(doclet, tools('doclet/')).
