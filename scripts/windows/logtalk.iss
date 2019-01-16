@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on December 30, 2018
+; Last updated on January 16, 2019
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -17,7 +17,7 @@
 ; limitations under the License.
 
 #define MyAppName "Logtalk"
-#define MyAppCopyright "Copyright © 1998-2018 Paulo Moura"
+#define MyAppCopyright "Copyright © 1998-2019 Paulo Moura"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "https://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"
