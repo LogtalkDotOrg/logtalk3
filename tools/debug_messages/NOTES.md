@@ -22,8 +22,8 @@ Overview
 
 By default, `debug` and `debug(Group)` messages are only printed when the `debug`
 flag is turned on. These messages are also suppressed when compiling code with the
-`optimize` flag turned on. This tool supports enabling and disabling of `debug` and
-`debug(Group)` messages in normal mode.
+`optimize` flag turned on. This tool supports selective enabling of `debug` and
+`debug(Group)` messages in normal and debug modes.
 
 
 API documentation
@@ -53,6 +53,9 @@ Usage
 The tool provides two sets of predicates. The first set allows enabling and disabling
 of all `debug` and `debug(Group)` messages for a given component. The second set allows
 enabling and disabling of `debug(Group)` messages for a given group and component.
+
+Upon loading the tool, all debug messages are skipped. The user is then expected to
+use the tool API to selectively enable the messages that will be printed.
 
 
 Other notes

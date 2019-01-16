@@ -24,9 +24,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2019/01/16,
-		comment is 'Supports enabling and disabling of debug and debug(Group) messages in normal mode.',
+		comment is 'Supports selective enabling and disabling of debug and debug(Group) messages.',
 		remarks is [
-			'Motivation' - 'Allow selective enabling of debug messages, which are skipped by default in normal mode, without requiring turning on the "debug" flag.',
 			'Limitations' - 'Debug messages are suppressed by the compiler when the "optimize" flag is turned on and thus cannot be enabled in this case.'
 		]
 	]).
@@ -115,15 +114,21 @@
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(_, debug, Component, Tokens) :-
-		enabled_(Component),
-		logtalk::message_prefix_stream(debug, Component, Prefix, Stream),
-		logtalk::print_message_tokens(Stream, Prefix, Tokens).
+		(	enabled_(Component) ->
+			logtalk::message_prefix_stream(debug, Component, Prefix, Stream),
+			logtalk::print_message_tokens(Stream, Prefix, Tokens)
+		;	% suppress printing of the message
+			true
+		).
 
 	logtalk::message_hook(_, debug(Group), Component, Tokens) :-
-		(	enabled_(Component)
-		;	enabled_(Component, Group)
-		),
-		logtalk::message_prefix_stream(debug(Group), Component, Prefix, Stream),
-		logtalk::print_message_tokens(Stream, Prefix, Tokens).
+		(	(	enabled_(Component)
+			;	enabled_(Component, Group)
+			) ->
+			logtalk::message_prefix_stream(debug(Group), Component, Prefix, Stream),
+			logtalk::print_message_tokens(Stream, Prefix, Tokens)
+		;	% suppress printing of the message
+			true
+		).
 
 :- end_object.
