@@ -126,7 +126,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#debugging-using-spy-points">Debugging using spy points</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-commands">Debugging commands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#context-switching-calls">Context-switching calls</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#debugging-messages">Debugging messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-messages">Debugging messages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#meta-messages">Meta-messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selective-printing-of-debug-messages">Selective printing of debug messages</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#using-the-term-expansion-mechanism-for-debugging">Using the term-expansion mechanism for debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ports-profiling">Ports profiling</a></li>
 </ul>
@@ -213,7 +217,7 @@
   <div class="section" id="debugging">
 <span id="debugging-debugging"></span><h1>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
 <p>The Logtalk distribution includes a command-line
-<a class="reference external" href="https://logtalk.org/tools.html#debugger">debugger tool</a>
+<a class="reference external" href="https://logtalk.org/tools.html#debugger">debugger</a> tool
 implemented as a Logtalk application. It can be loaded by typing:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(debugger(loader)).
 </pre></div>
@@ -637,14 +641,17 @@ Prolog compilers).</p>
 </div>
 <div class="section" id="debugging-messages">
 <span id="id2"></span><h2>Debugging messages<a class="headerlink" href="#debugging-messages" title="Permalink to this headline">¶</a></h2>
-<p>Calls to the <code class="docutils literal notranslate"><span class="pre">logtalk::print_message/3</span></code> predicate where the message
-kind is either <code class="docutils literal notranslate"><span class="pre">debug</span></code> or <code class="docutils literal notranslate"><span class="pre">debug(_)</span></code> are only printed, by default,
-when the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on. These messages
-are suppressed by the compiler when the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a>
-flag is turned on. Note that using these messages does not require
-compiling the code in debug mode, only turning on the flag. To avoid
-having to define <a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules for
-translating each and every debug message, Logtalk provides default
+<p>Calls to the <a class="reference internal" href="../refman/methods/print_message_3.html#methods-print-message-3"><span class="std std-ref">logtalk::print_message/3</span></a>
+predicate where the message kind is either <code class="docutils literal notranslate"><span class="pre">debug</span></code> or <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> are
+only printed, by default, when the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> flag is turned
+on. Moreover, these calls are suppressed by the compiler when the
+<a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on. Note that actual printing
+of debug messages does not require compiling the code in debug mode, only
+turning on the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag.</p>
+<div class="section" id="meta-messages">
+<h3>Meta-messages<a class="headerlink" href="#meta-messages" title="Permalink to this headline">¶</a></h3>
+<p>To avoid having to define <a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules
+for translating each and every debug message, Logtalk provides default
 tokenization for four <em>meta-messages</em> that cover the most common cases:</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code></dt>
@@ -699,23 +706,24 @@ It can be redefined using the
 <a class="reference internal" href="../refman/methods/message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a>
 hook predicate.</p>
 </div>
+<div class="section" id="selective-printing-of-debug-messages">
+<h3>Selective printing of debug messages<a class="headerlink" href="#selective-printing-of-debug-messages" title="Permalink to this headline">¶</a></h3>
+<p>By default, all debug messages are either printed or skipped, depending on
+the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> and <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags.
+When the code is not compiled in optimal mode, the
+<a class="reference external" href="https://logtalk.org/tools.html#debugging">debug_messages</a> tool allows
+selectively enabling of debug messages per component and per debug group.
+See the tool documentation for details.</p>
+</div>
+</div>
 <div class="section" id="using-the-term-expansion-mechanism-for-debugging">
 <span id="debugging-hooks"></span><h2>Using the term-expansion mechanism for debugging<a class="headerlink" href="#using-the-term-expansion-mechanism-for-debugging" title="Permalink to this headline">¶</a></h2>
-<p>Debugging messages can only output information by default. They can
-be intercepted to perform other options. An alternative is to use the
-term-expansion mechanism for conditional compilation of debugging goals.
-As an example, assume that a <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> predicate is used to wrap
-debug goals:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>member(<span class="nv">Head</span>, [<span class="nv">Head</span>| <span class="nv">_</span>]) <span class="o">:-</span>
-    debug((<span class="k">write</span>(<span class="s">&#39;Base case: &#39;</span>), <span class="k">writeq</span>(member(<span class="nv">Head</span>, [<span class="nv">Head</span>| <span class="nv">_</span>])))).
-member(<span class="nv">Head</span>, [<span class="nv">_</span>| <span class="nv">Tail</span>]) <span class="o">:-</span>
-    debug((<span class="k">write</span>(<span class="s">&#39;Recursive case: &#39;</span>), <span class="k">writeq</span>(member(<span class="nv">Head</span>, <span class="nv">Tail</span>)))),
-    member(<span class="nv">Head</span>, <span class="nv">Tail</span>).
-</pre></div>
-</div>
-<p>When debugging, we want to call the argument of the predicate
-<code class="docutils literal notranslate"><span class="pre">debug/1</span></code>. This can be easily accomplished by defining a hook object
-containing the following definition for <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>:</p>
+<p>Debugging messages only output information by default. These messages can,
+however, be intercepted to perform other actions. An alternative is to use
+instead the term-expansion mechanism for conditional compilation of debugging
+goals. For example, assuming a <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> predicate is used to wrap debug
+goals, we can define a hook object containing the following definition for
+<code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(debug(<span class="nv">Goal</span>), <span class="nv">Goal</span>).
 </pre></div>
 </div>
@@ -731,9 +739,11 @@ built-in predicate <code class="docutils literal notranslate"><span class="pre">
 <div class="section" id="ports-profiling">
 <span id="debugging-ports-profiling"></span><h2>Ports profiling<a class="headerlink" href="#ports-profiling" title="Permalink to this headline">¶</a></h2>
 <p>The Logtalk distribution includes a
-<a class="reference external" href="https://logtalk.org/tools.html#ports-profiler">ports profiler tool</a>
-based on the same procedure box model described above.
-See the tool documentation for details.</p>
+<a class="reference external" href="https://logtalk.org/tools.html#ports-profiler">ports_profiler</a> tool
+based on the same procedure box model described above. This tool is
+specially useful for debugging performance issues (e.g. due to lack of
+determinism or unexpected backtracking). See the tool documentation for
+details.</p>
 </div>
 </div>
 

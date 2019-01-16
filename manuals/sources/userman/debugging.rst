@@ -21,7 +21,7 @@ Debugging
 =========
 
 The Logtalk distribution includes a command-line
-`debugger tool <https://logtalk.org/tools.html#debugger>`_
+`debugger <https://logtalk.org/tools.html#debugging>`_ tool
 implemented as a Logtalk application. It can be loaded by typing:
 
 .. code-block:: text
@@ -493,14 +493,19 @@ Prolog compilers).
 Debugging messages
 ------------------
 
-Calls to the ``logtalk::print_message/3`` predicate where the message
-kind is either ``debug`` or ``debug(_)`` are only printed, by default,
-when the :ref:`debug <flag_debug>` flag is turned on. These messages
-are suppressed by the compiler when the :ref:`optimize <flag_optimize>`
-flag is turned on. Note that using these messages does not require
-compiling the code in debug mode, only turning on the flag. To avoid
-having to define :ref:`methods_message_tokens_2` grammar rules for
-translating each and every debug message, Logtalk provides default
+Calls to the :ref:`logtalk::print_message/3 <methods_print_message_3>`
+predicate where the message kind is either ``debug`` or ``debug(Group)`` are
+only printed, by default, when the :ref:`debug <flag_debug>` flag is turned
+on. Moreover, these calls are suppressed by the compiler when the
+:ref:`optimize <flag_optimize>` flag is turned on. Note that actual printing
+of debug messages does not require compiling the code in debug mode, only
+turning on the ``debug`` flag.
+
+Meta-messages
+~~~~~~~~~~~~~
+
+To avoid having to define :ref:`methods_message_tokens_2` grammar rules
+for translating each and every debug message, Logtalk provides default
 tokenization for four *meta-messages* that cover the most common cases:
 
 ``@Message``
@@ -557,6 +562,16 @@ It can be redefined using the
 :ref:`logtalk::message_prefix_stream/4 <methods_message_prefix_stream_4>`
 hook predicate.
 
+Selective printing of debug messages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, all debug messages are either printed or skipped, depending on
+the :ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` flags.
+When the code is not compiled in optimal mode, the
+`debug_messages <https://logtalk.org/tools.html#debugging>`_ tool allows
+selectively enabling of debug messages per component and per debug group.
+See the tool documentation for details. 
+
 .. _debugging_hooks:
 
 Using the term-expansion mechanism for debugging
@@ -566,19 +581,8 @@ Debugging messages only output information by default. These messages can,
 however, be intercepted to perform other actions. An alternative is to use
 instead the term-expansion mechanism for conditional compilation of debugging
 goals. For example, assuming a ``debug/1`` predicate is used to wrap debug
-goals, we can write:
-
-::
-
-   member(Head, [Head| _]) :-
-       debug((write('Base case: '), writeq(member(Head, [Head| _])))).
-   member(Head, [_| Tail]) :-
-       debug((write('Recursive case: '), writeq(member(Head, Tail)))),
-       member(Head, Tail).
-
-When debugging, we want to call the argument of the predicate
-``debug/1``. This can be easily accomplished by defining a hook object
-containing the following definition for ``goal_expansion/2``:
+goals, we can define a hook object containing the following definition for
+``goal_expansion/2``:
 
 ::
 
@@ -601,6 +605,8 @@ Ports profiling
 ---------------
 
 The Logtalk distribution includes a
-`ports profiler tool <https://logtalk.org/tools.html#ports-profiler>`_ 
-based on the same procedure box model described above.
-See the tool documentation for details. 
+`ports_profiler <https://logtalk.org/tools.html#ports-profiler>`_ tool
+based on the same procedure box model described above. This tool is
+specially useful for debugging performance issues (e.g. due to lack of
+determinism or unexpected backtracking). See the tool documentation for
+details. 

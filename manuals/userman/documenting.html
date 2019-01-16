@@ -208,7 +208,7 @@
 <p>Assuming that the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag is turned on, the
 compiler saves all relevant documenting information collected when compiling
 a source file. The provided
-<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc tool</a> can access this
+<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool can access this
 information by using the reflection support and generate a documentation file
 for each compiled entity (object, protocol, or category) in XML format.
 Contents of the XML file include the entity name, type, and compilation mode
@@ -285,7 +285,7 @@ be atoms or compound terms).</dd>
 <p>Use only the keywords that make sense for your application and remember
 that you are free to invent your own keywords. All key-value pairs can
 be retrieved programmatically using the reflection API and are visible
-to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc tool</a>.</p>
+to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
 </div>
 <div class="section" id="predicate-directives">
 <span id="documenting-predicate"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Permalink to this headline">¶</a></h3>
@@ -349,17 +349,17 @@ pairs where both the topic and the text must be atoms.</dd>
 for your application and remember that you are free to invent your own
 keywords. All key-value pairs can also be retrieved programmatically
 using the reflection API and are visible to the
-<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc tool</a>.</p>
+<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
 </div>
 </div>
 <div class="section" id="processing-and-viewing-documenting-files">
 <span id="documenting-processing"></span><h2>Processing and viewing documenting files<a class="headerlink" href="#processing-and-viewing-documenting-files" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc tool</a>
-generates an XML documenting file per entity. It can
-also generate library, directory, entity, and predicate indexes when
-documenting libraries and directories. For example, assuming the default
-filename extensions, a <code class="docutils literal notranslate"><span class="pre">trace</span></code> object and a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code> parametric object
-will result in <code class="docutils literal notranslate"><span class="pre">trace_0.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">sort_1.xml</span></code> XML files.</p>
+<p>The <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool
+generates an XML documenting file per entity. It can also generate library,
+directory, entity, and predicate indexes when documenting libraries and
+directories. For example, assuming the default filename extensions, a
+<code class="docutils literal notranslate"><span class="pre">trace</span></code> object and a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code> parametric object will result in
+<code class="docutils literal notranslate"><span class="pre">trace_0.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">sort_1.xml</span></code> XML files.</p>
 <p>Each entity XML file contains references to two other files, an XML
 specification file and a XSLT style-sheet file. The XML specification
 file can be either a DTD file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>) or an XML Scheme
@@ -367,13 +367,12 @@ file (<code class="docutils literal notranslate"><span class="pre">logtalk_entit
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
 file are defined by the
-<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc tool</a> but can be
-overridden by passing a
-list of options to the tool predicates. The <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> sub-directory
-in the Logtalk installation directory contains the XML specification
-files described above, along with several sample XSL style-sheet files
-and sample scripts for converting XML documenting files to several
-formats (e.g. reStructuredText, Markdown, HTML, and PDF). See
+<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool but can be
+overridden by passing a list of options to the tool predicates. The
+<code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> sub-directory in the Logtalk installation directory contains
+the XML specification files described above, along with several sample XSL
+style-sheet files and sample scripts for converting XML documenting files
+to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). See
 the <code class="docutils literal notranslate"><span class="pre">NOTES</span></code> file included in the directory for details. You may use
 the supplied sample files as a starting point for generating the
 documentation of your Logtalk applications.</p>
@@ -396,10 +395,10 @@ assuming that the XML entities are named <em>author</em>, <em>license</em>, and
 entity when the XML documenting files are processed (<strong>not</strong> when they
 are generated; this notation is just a shortcut to take advantage of XML
 entities).</p>
-<p>The <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc tool</a> supports
+<p>The <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool supports
 a set of options that can be used to control the generation of the XML
-documentation files. See the tool documentation for details. There is also
-a <a class="reference external" href="https://logtalk.org/tools.html#documenting">doclet tool</a>  that
+documentation files. See the tool documentation for details. There is
+also a <a class="reference external" href="https://logtalk.org/tools.html#documenting">doclet</a> tool that
 allows automating the steps required to generate the documentation for
 an application.</p>
 </div>
@@ -412,15 +411,15 @@ ePub, or PDF formats).</p>
 </div>
 <div class="section" id="diagrams">
 <h2>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://logtalk.org/tools.html#diagrams">diagrams tool</a> supports
-a wide range of diagrams that can also help
-in documenting an application. The generated diagrams can include URL links
-to both source code and API documentation. They can also be linked, connecting
-for example high level diagrams to detail diagrams. These features allow
-diagrams to be an effective solution for navigating and understanding the
-structure and implementation of an application. This tool uses the same
-reflection APIs as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool and thus have access to the same
-source data. See the tool documentation for details.</p>
+<p>The <a class="reference external" href="https://logtalk.org/tools.html#diagrams">diagrams</a> tool supports
+a wide range of diagrams that can also help in documenting an application.
+The generated diagrams can include URL links to both source code and API
+documentation. They can also be linked, connecting for example high level
+diagrams to detail diagrams. These features allow diagrams to be an
+effective solution for navigating and understanding the structure and
+implementation of an application. This tool uses the same reflection APIs
+as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool and thus have access to the same source data. See
+the tool documentation for details.</p>
 </div>
 </div>
 
