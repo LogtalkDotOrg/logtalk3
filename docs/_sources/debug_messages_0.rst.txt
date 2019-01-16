@@ -1,0 +1,208 @@
+.. index:: debug_messages
+.. _debug_messages/0:
+
+**object**
+
+``debug_messages``
+==================
+
+Supports selective enabling and disabling of debug and debug(Group) messages.
+
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2019/1/16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="enable/1"> </div>
+
+.. index:: enable/1
+.. _debug_messages/0::enable/1:
+
+``enable/1``
+^^^^^^^^^^^^
+
+Enables all debug and debug(Group) messages for the given component.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``enable(Component)``
+| **Mode and number of proofs:**
+|    ``enable(@term)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="disable/1"> </div>
+
+.. index:: disable/1
+.. _debug_messages/0::disable/1:
+
+``disable/1``
+^^^^^^^^^^^^^
+
+Disables all debug and debug(Group) messages for the given component.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``disable(Component)``
+
+.. raw:: html
+
+   <div id="enabled/1"> </div>
+
+.. index:: enabled/1
+.. _debug_messages/0::enabled/1:
+
+``enabled/1``
+^^^^^^^^^^^^^
+
+Enumerates by backtraking the components with enabled debug and debug(Group) messages.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``enabled(Component)``
+| **Mode and number of proofs:**
+|    ``enabled(?term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="enable/2"> </div>
+
+.. index:: enable/2
+.. _debug_messages/0::enable/2:
+
+``enable/2``
+^^^^^^^^^^^^
+
+Enables debug(Group) messages for the given component and group.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``enable(Component,Group)``
+| **Mode and number of proofs:**
+|    ``enable(@term,@term)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="disable/2"> </div>
+
+.. index:: disable/2
+.. _debug_messages/0::disable/2:
+
+``disable/2``
+^^^^^^^^^^^^^
+
+Disables debug(Group) messages for the given component and group.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``disable(Component,Group)``
+| **Mode and number of proofs:**
+|    ``disable(@term,@term)`` - ``one``
+|    ``disable(@term,@term)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="enabled/2"> </div>
+
+.. index:: enabled/2
+.. _debug_messages/0::enabled/2:
+
+``enabled/2``
+^^^^^^^^^^^^^
+
+Enumerates by backtraking the enabled debug(Group) messages for each component.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``enabled(Component,Group)``
+| **Mode and number of proofs:**
+|    ``enabled(?term,?term)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="enabled_/1"> </div>
+
+.. index:: enabled_/1
+.. _debug_messages/0::enabled_/1:
+
+``enabled_/1``
+^^^^^^^^^^^^^^
+
+Table of components with currently enabled debug and debug(Group) messages.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``enabled_(Component)``
+| **Mode and number of proofs:**
+|    ``enabled_(?term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="enabled_/2"> </div>
+
+.. index:: enabled_/2
+.. _debug_messages/0::enabled_/2:
+
+``enabled_/2``
+^^^^^^^^^^^^^^
+
+Table of currently enabled debug(Group) per component.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``enabled_(Component,Group)``
+| **Mode and number of proofs:**
+|    ``enabled_(?term,?term)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Limitations**: Debug messages are suppressed by the compiler when the "optimize" flag is turned on and thus cannot be enabled in this case.
+
