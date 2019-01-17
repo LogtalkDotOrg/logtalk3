@@ -22,7 +22,7 @@
 	implements(zipperp)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
 		date is 2019/01/17,
 		comment is 'Zipper list predicates. Zippers should be regarded as opaque terms.'
@@ -67,12 +67,20 @@
 	rewind(zip(Before,Current,After), Zipper) :-
 		rewind(Before, Current, After, Zipper).
 
+	rewind(zip(Before,Current,After), Zipper, First) :-
+		rewind(Before, Current, After, Zipper),
+		Zipper = zip(_, First, _).
+
 	rewind([], Head, After, zip([],Head,After)).
 	rewind([Element| Before], Current, After, Zipper) :-
 		rewind(Before, Element, [Current| After], Zipper).
 
 	forward(zip(Before,Current,After), Zipper) :-
 		forward(After, Current, Before, Zipper).
+
+	forward(zip(Before,Current,After), Zipper, Last) :-
+		forward(After, Current, Before, Zipper),
+		Zipper = zip(_, Last, _).
 
 	forward([], Last, Before, zip(Before,Last,[])).
 	forward([Element| After], Current, Before, Zipper) :-

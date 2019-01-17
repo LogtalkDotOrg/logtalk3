@@ -9,7 +9,7 @@
 Zipper protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 0.2
+| **Version:** 0.3
 | **Date:** 2019/1/17
 
 | **Compilation flags:**
@@ -192,6 +192,27 @@ Rewinds the zipper so that the first element becomes the current element.
 
 .. raw:: html
 
+   <div id="rewind/3"> </div>
+
+.. index:: rewind/3
+.. _zipperp/0::rewind/3:
+
+``rewind/3``
+^^^^^^^^^^^^
+
+Rewinds the zipper so that the first element becomes the current element. Also returns the first element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rewind(Zipper,NewZipper,First)``
+| **Mode and number of proofs:**
+|    ``rewind(+zipper,--zipper,?term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
    <div id="forward/2"> </div>
 
 .. index:: forward/2
@@ -209,6 +230,27 @@ Forward the zipper so that the last element becomes the current element.
 |    ``forward(Zipper,NewZipper)``
 | **Mode and number of proofs:**
 |    ``forward(+zipper,--zipper)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="forward/3"> </div>
+
+.. index:: forward/3
+.. _zipperp/0::forward/3:
+
+``forward/3``
+^^^^^^^^^^^^^
+
+Forward the zipper so that the last element becomes the current element. Also returns the last element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forward(Zipper,NewZipper,Last)``
+| **Mode and number of proofs:**
+|    ``forward(+zipper,--zipper,?term)`` - ``zero_or_one``
 
 
 .. raw:: html

@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
 		date is 2019/01/17,
 		comment is 'Unit tests for the "zippers" library.'
@@ -100,11 +100,27 @@
 		zlist::rewind(Zipper2, Zipper),
 		Zipper0 == Zipper.
 
+	test(zlist_rewind_3_01) :-
+		zlist::zip([1,2,3,4,5], Zipper0),
+		zlist::next(Zipper0, Zipper1),
+		zlist::next(Zipper1, Zipper2),
+		zlist::rewind(Zipper2, Zipper, First),
+		Zipper0 == Zipper,
+		First == 1.
+
 	test(zlist_forward_2_01) :-
 		zlist::zip([1,2,3,4,5], Zipper0),
 		zlist::forward(Zipper0, Zipper),
 		zlist::current(Zipper, Current),
 		Current == 5.
+
+	test(zlist_forward_3_01) :-
+		zlist::zip([1,2,3,4,5], Zipper0),
+		zlist::forward(Zipper0, Zipper, Last),
+		zlist::zip(5, [1,2,3,4,5], Zipper1, Last1),
+		Zipper == Zipper1,
+		Last == 5,
+		Last == Last1.
 
 	test(zlist_apply_2_01) :-
 		zlist::zip([1,2,3,4,5], Zipper),

@@ -21,7 +21,7 @@
 :- protocol(zipperp).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
 		date is 2019/01/17,
 		comment is 'Zipper protocol.',
@@ -84,11 +84,25 @@
 		argnames is ['Zipper', 'NewZipper']
 	]).
 
+	:- public(rewind/3).
+	:- mode(rewind(+zipper, --zipper, ?term), zero_or_one).
+	:- info(rewind/3, [
+		comment is 'Rewinds the zipper so that the first element becomes the current element. Also returns the first element.',
+		argnames is ['Zipper', 'NewZipper', 'First']
+	]).
+
 	:- public(forward/2).
 	:- mode(forward(+zipper, --zipper), one).
 	:- info(forward/2, [
 		comment is 'Forward the zipper so that the last element becomes the current element.',
 		argnames is ['Zipper', 'NewZipper']
+	]).
+
+	:- public(forward/3).
+	:- mode(forward(+zipper, --zipper, ?term), zero_or_one).
+	:- info(forward/3, [
+		comment is 'Forward the zipper so that the last element becomes the current element. Also returns the last element.',
+		argnames is ['Zipper', 'NewZipper', 'Last']
 	]).
 
 	:- public(apply/2).
