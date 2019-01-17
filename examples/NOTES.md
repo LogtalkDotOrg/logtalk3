@@ -403,12 +403,18 @@ Follows a short description of each included example (in alphabetical order):
 - `self_messages`  
 	simple example illustrating the semantics of messages to "self"
 
+- `serialization`  
+	simple example of serializing objects to a file
+
 - `shapes`  
 	simple geometric shapes implemented as both a prototype hierarchy 
 	and a class hierarchy for comparing both approaches
 
 - `sicstus`  
 	examples adapted from SICStus Objects documentation
+
+- `slides`  
+	example of using the library list zippers
 
 - `super_calls`  
 	simple example illustrating that "super" calls preserve the value

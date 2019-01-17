@@ -109,6 +109,8 @@ Examples
 
 * ADDED: Simple example, `serialization`, of serializing objects to a file.
 
+* ADDED: Simple example, `slides`, of using the library list zipper support.
+
 * IMPROVED: Implementation of the hill climbing search method found in the
 `searching` example.
 

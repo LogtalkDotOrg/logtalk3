@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on December 19, 2018
+%  Last updated on January 17, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -161,6 +161,7 @@ logtalk_library_path(serialization, examples('serialization/')).
 logtalk_library_path(shapes_ch, examples('shapes/ch/')).
 logtalk_library_path(shapes_ph, examples('shapes/ph/')).
 logtalk_library_path(sicstus, examples('sicstus/')).
+logtalk_library_path(slides, examples('slides/')).
 logtalk_library_path(sorting, threads('sorting/')).
 logtalk_library_path(sums, engines('sums/')).
 logtalk_library_path(super_calls, examples('super_calls/')).
