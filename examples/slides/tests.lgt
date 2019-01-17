@@ -28,5 +28,39 @@
 		comment is 'Unit tests for the "slides" example.'
 	]).
 
+	:- private(answer_/1).
+	:- dynamic(answer_/1).
+
+	cover(slides).
+
+	% sequence of answers for the test
+	setup :-
+		assertz(answer_(n)),
+		assertz(answer_(n)),
+		assertz(answer_(n)),
+		assertz(answer_(p)),
+		assertz(answer_(f)),
+		assertz(answer_(l)),
+		assertz(answer_(e)).
+
+	test(slides_01, true(Assertion)) :-
+		^^set_text_output(test_output, ''),
+		slides::show([1,2,3,4,5,6], {slide}),
+		^^text_output_assertion(
+			test_output,
+			'First slide\nSecond slide\nThird slide\nFourth slide\nThird slide\nFirst slide\nLast slide\n',
+			Assertion
+		).
+
+	:- multifile(logtalk::message_prefix_stream/4).
+	:- dynamic(logtalk::message_prefix_stream/4).
+	% divert the slide show output to the stream indentified with the "test_output" alias
+	logtalk::message_prefix_stream(_, slides, '', test_output).
+
+	:- multifile(logtalk::question_hook/6).
+	:- dynamic(logtalk::message_tokens/6).
+
+	logtalk::question_hook(remote, question, slides, _, _, Answer) :-
+		retract(answer_(Answer)).
 
 :- end_object.
