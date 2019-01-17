@@ -21,9 +21,9 @@
 :- protocol(zipperp).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/01/11,
+		date is 2019/01/17,
 		comment is 'Zipper protocol.',
 		see_also is [zlist]
 	]).
@@ -75,6 +75,20 @@
 	:- info(previous/3, [
 		comment is 'Moves to and returns the previous element. Fails if already at the first element.',
 		argnames is ['Zipper', 'NewZipper', 'Previous']
+	]).
+
+	:- public(rewind/2).
+	:- mode(rewind(+zipper, --zipper), one).
+	:- info(rewind/2, [
+		comment is 'Rewinds the zipper so that the first element becomes the current element.',
+		argnames is ['Zipper', 'NewZipper']
+	]).
+
+	:- public(forward/2).
+	:- mode(forward(+zipper, --zipper), one).
+	:- info(forward/2, [
+		comment is 'Forward the zipper so that the last element becomes the current element.',
+		argnames is ['Zipper', 'NewZipper']
 	]).
 
 	:- public(apply/2).

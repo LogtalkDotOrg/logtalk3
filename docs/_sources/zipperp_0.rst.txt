@@ -9,8 +9,8 @@
 Zipper protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 0.1
-| **Date:** 2019/1/11
+| **Version:** 0.2
+| **Date:** 2019/1/17
 
 | **Compilation flags:**
 |    ``static``
@@ -167,6 +167,48 @@ Moves to and returns the previous element. Fails if already at the first element
 |    ``previous(Zipper,NewZipper,Previous)``
 | **Mode and number of proofs:**
 |    ``previous(+zipper,--zipper,-term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="rewind/2"> </div>
+
+.. index:: rewind/2
+.. _zipperp/0::rewind/2:
+
+``rewind/2``
+^^^^^^^^^^^^
+
+Rewinds the zipper so that the first element becomes the current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rewind(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``rewind(+zipper,--zipper)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="forward/2"> </div>
+
+.. index:: forward/2
+.. _zipperp/0::forward/2:
+
+``forward/2``
+^^^^^^^^^^^^^
+
+Forward the zipper so that the last element becomes the current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forward(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``forward(+zipper,--zipper)`` - ``one``
 
 
 .. raw:: html

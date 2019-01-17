@@ -22,9 +22,9 @@
 	implements(zipperp)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/01/11,
+		date is 2019/01/17,
 		comment is 'Zipper list predicates. Zippers should be regarded as opaque terms.'
 	]).
 
@@ -63,6 +63,20 @@
 	previous(zip([Element|Before],Head,Tail), zip(Before,Element,[Head|Tail])).
 
 	previous(zip([Element|Before],Head,Tail), zip(Before,Element,[Head|Tail]), Element).
+
+	rewind(zip(Before,Current,After), Zipper) :-
+		rewind(Before, Current, After, Zipper).
+
+	rewind([], Head, After, zip([],Head,After)).
+	rewind([Element| Before], Current, After, Zipper) :-
+		rewind(Before, Element, [Current| After], Zipper).
+
+	forward(zip(Before,Current,After), Zipper) :-
+		forward(After, Current, Before, Zipper).
+
+	forward([], Last, Before, zip(Before,Last,[])).
+	forward([Element| After], Current, Before, Zipper) :-
+		forward(After, Element, [Current| Before], Zipper).
 
 	:- meta_predicate(apply(1,*)).
 	apply(Closure, zip(_,Element,_)) :-
