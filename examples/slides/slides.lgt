@@ -36,7 +36,11 @@ slide(6, 'Last slide').
 	:- meta_predicate(show(*, 2)).
 
 	:- uses(zlist, [
-		zip/2, current/2, next/3, previous/3, rewind/2, forward/2
+		zip/2, current/2, next/3, previous/3, rewind/3, forward/3
+	]).
+
+	:- uses(logtalk, [
+		ask_question/5, print_message/3
 	]).
 
 	show(Slides, Closure) :-
@@ -76,19 +80,23 @@ slide(6, 'Last slide').
 	:- meta_predicate(display(*, 2)).
 	display(Index, Closure) :-
 		call(Closure, Index, Contents),
-		write(Contents), nl.
+		print_message(information, slides, contents(Contents)).
 
 	remote(Command) :-
-		repeat,
-			write('remote: '),
-			read(Command),
-		valid(Command),
-		!.
+		ask_question(question, slides, remote, valid, Command).
 
 	valid(n).
 	valid(p).
 	valid(f).
 	valid(l).
 	valid(e).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(contents(Contents), slides) -->
+		['~w'-[Contents], nl].
+	logtalk::message_tokens(remote, slides) -->
+		['remote '-[]].
 
 :- end_object.
