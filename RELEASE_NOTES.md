@@ -33,6 +33,10 @@ messages when the `optimize` flag is turned on.
 * IMPROVED: Detection of missing meta-predicate directives when compiling
 closures.
 
+* IMPROVED: The question asking mechanism when using SICStus Prolog or
+SWI-Prolog as the backend compiler by avoiding the intrusion of the default
+read prompt.
+
 * IMPROVED: Allow inlining of meta-predicate definitions in safe cases.
 
 * FIXED: A case are predicate definition inlining would give wrong results

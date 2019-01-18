@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2017/10/18,
+		date is 2019/01/18,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Message kinds' - 'The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.',
@@ -459,12 +459,49 @@
 			;	% no such kind of question; use "question" instead
 				default_question_prompt_stream(question, _, Prompt, InputStream)
 			),
+			read_loop(InputStream, OutputStream, Prompt, Check, Answer)
+		).
+
+	:- meta_predicate(read_loop(*, *, *, 1, *)).
+
+	:- if(current_logtalk_flag(prolog_dialect, swi)).
+
+		read_loop(InputStream, OutputStream, Prompt, Check, Answer) :-
+			setup_call_cleanup(
+				prompt(Old, ''),
+				(	repeat,
+						write(OutputStream, Prompt),
+						read(InputStream, Answer),
+					call(Check, Answer),
+					!
+				),
+				prompt(_, Old)
+			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+
+		read_loop(InputStream, OutputStream, Prompt, Check, Answer) :-
+			prompt(Old, ''),
+			call_cleanup(
+				(	repeat,
+						write(OutputStream, Prompt),
+						read(InputStream, Answer),
+					call(Check, Answer),
+					!
+				),
+				prompt(_, Old)
+			).
+
+	:- else.
+
+		read_loop(InputStream, OutputStream, Prompt, Check, Answer) :-
 			repeat,
 				write(OutputStream, Prompt),
 				read(InputStream, Answer),
 			call(Check, Answer),
-			!
-		).
+			!.
+
+	:- endif.
 
 	default_question_prompt_stream(question, _, '> ', user_input).
 
