@@ -91,6 +91,12 @@ slide(6, 'Last slide').
 	valid(l).
 	valid(e).
 
+	:- multifile(logtalk::message_prefix_stream/4).
+	:- dynamic(logtalk::message_prefix_stream/4).
+	% set the prefix to the empty atom so that the output only contains
+	% the actual slide contents
+	logtalk::message_prefix_stream(information, slides, '', user_output).
+
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 

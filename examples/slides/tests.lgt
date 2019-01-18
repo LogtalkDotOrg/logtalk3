@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/01/15,
+		date is 2019/01/18,
 		comment is 'Unit tests for the "slides" example.'
 	]).
 
@@ -33,15 +33,19 @@
 
 	cover(slides).
 
-	% sequence of answers for the test
 	setup :-
+		% sequence of answers for the test
 		assertz(answer_(n)),
 		assertz(answer_(n)),
 		assertz(answer_(n)),
 		assertz(answer_(p)),
 		assertz(answer_(f)),
 		assertz(answer_(l)),
-		assertz(answer_(e)).
+		assertz(answer_(e)),
+		% divert the slide show output to the stream
+		% indentified with the "test_output" alias
+		logtalk::retractall(message_prefix_stream(_, slides, _, _)),
+		logtalk::assertz(message_prefix_stream(_, slides, '', test_output)).
 
 	test(slides_01, true(Assertion)) :-
 		^^set_text_output(test_output, ''),
@@ -51,11 +55,6 @@
 			'First slide\nSecond slide\nThird slide\nFourth slide\nThird slide\nFirst slide\nLast slide\n',
 			Assertion
 		).
-
-	:- multifile(logtalk::message_prefix_stream/4).
-	:- dynamic(logtalk::message_prefix_stream/4).
-	% divert the slide show output to the stream indentified with the "test_output" alias
-	logtalk::message_prefix_stream(_, slides, '', test_output).
 
 	:- multifile(logtalk::question_hook/6).
 	:- dynamic(logtalk::message_tokens/6).
