@@ -222,8 +222,8 @@ Performance
    The current Logtalk implementation works as a trans-compiler: Logtalk
    source files are first compiled to Prolog source files, which are
    then compiled by the chosen Prolog compiler. Therefore, Logtalk
-   performance necessarily depends on the backend Prolog compiler. The
-   Logtalk compiler preserves the programmers choices when writing
+   performance necessarily depends on the :term:`backend Prolog compiler`.
+   The Logtalk compiler preserves the programmers choices when writing
    efficient code that takes advantage of tail recursion and
    first-argument indexing.
 

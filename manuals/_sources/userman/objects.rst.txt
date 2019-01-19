@@ -104,9 +104,9 @@ have, by default, a ``_lgt`` suffix and a ``.pl`` extension. Again, this
 can be set to match the needs of a particular Prolog compiler in the
 corresponding adapter file. For instance, we may define an object named
 ``vehicle`` and save it in a ``vehicle.lgt`` source file which will be
-compiled to a ``vehicle_lgt.pl`` Prolog file (depending on the backend
-compiler, the names of the intermediate Prolog files may include a
-directory hash).
+compiled to a ``vehicle_lgt.pl`` Prolog file (depending on the
+:term:`backend compiler <backend Prolog compiler>`, the names of the
+intermediate Prolog files may include a directory hash).
 
 Object names can be atoms or compound terms (when defining parametric
 objects, see below). Objects, categories, and protocols share the same
@@ -818,11 +818,11 @@ from the top-level interpreter, generate events when the default value of
 the :ref:`events <flag_events>` flag is set to ``allow``. Defining
 complementing categories for this pseudo-object is not supported.
 
-With some of the backend Prolog compilers that support a module system,
-it is possible to load (the) Logtalk (compiler/runtime) into a module
-other than the pseudo-module *user*. In this case, the Logtalk
-pseudo-object *user* virtually contains all user predicate definitions
-defined in the module where Logtalk was loaded.
+With some of the :term:`backend Prolog compilers <backend Prolog compiler>`
+that support a module system, it is possible to load (the) Logtalk
+(compiler/runtime) into a module other than the pseudo-module *user*. In
+this case, the Logtalk pseudo-object *user* virtually contains all user
+predicate definitions defined in the module where Logtalk was loaded.
 
 .. _objects_logtalk:
 

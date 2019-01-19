@@ -65,7 +65,8 @@ object we can save it on a ``sort_1.lgt`` source file that will be
 compiled to a ``sort_1_lgt.pl`` Prolog file. This name scheme helps
 avoid file name conflicts (remember that all Logtalk entities share the
 same namespace). To further prevent file name conflicts, specially when
-embedding applications, and depending on the backend compiler, the names
+embedding applications, and depending on the
+:term:`backend compiler <backend Prolog compiler>`, the names
 of the intermediate Prolog files may include a directory hash.
 
 Logtalk source files may contain Prolog code interleaved with Logtalk
@@ -90,7 +91,7 @@ Logtalk source files can include the text of other files by using the
 :ref:`directives_include_1` directive.
 Although there is also a standard Prolog ``include/1`` directive, any
 occurrences of this directive in a Logtalk source file is handled by
-the Logtalk compiler, not by the backend Prolog compiler.
+the Logtalk compiler, not by the :term:`backend Prolog compiler`.
 
 .. _programming_portability:
 
@@ -257,12 +258,12 @@ loader helper file containing the calls to the ``logtalk_load/1-2``
 predicates. Consulting or compiling the loader file will then compile
 and load all your Logtalk entities into memory (see below for details).
 
-With most Prolog backend compilers, you can use the shorthands
-``{File}`` for ``logtalk_load(File)`` and ``{File1, File2, ...}`` for
-``logtalk_load([File1, File2, ...])``. The use these shorthands should
-be restricted to the Logtalk/Prolog top-level interpreter as they are
-not part of the language specification and may be commented out in case
-of conflicts with backend Prolog compiler features.
+With most :term:`backend Prolog compilers <backend Prolog compiler>`, you
+can use the shorthands ``{File}`` for ``logtalk_load(File)`` and
+``{File1, File2, ...}`` for ``logtalk_load([File1, File2, ...])``. The use
+these shorthands should be restricted to the Logtalk/Prolog top-level
+interpreter as they are not part of the language specification and may be
+commented out in case of conflicts with backend Prolog compiler features.
 
 The built-in predicate :ref:`predicates_logtalk_make_0` can be
 used to reload all modified source files. Files are also reloaded when

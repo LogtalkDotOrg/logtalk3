@@ -455,7 +455,7 @@ code for the automatic loading of modules referenced in
 ``use_module/1-2`` directives. This is a consequence of the lack of
 standardization of these directives, whose first argument can be a
 module name, a straight file name, or a file name using some kind of
-library notation, depending on the backend Prolog compiler. Worse,
+library notation, depending on the :term:`backend Prolog compiler`. Worse,
 modules are sometimes defined in files with names different from the
 module names requiring finding, opening, and reading the file in order
 to find the actual module name.

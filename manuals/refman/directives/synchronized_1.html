@@ -228,7 +228,7 @@ the same mutex. In order to use a separate mutex for each predicate
 (non-terminal) so that they are independently synchronized, a
 per-predicate synchronized directive must be used.</p>
 <p>Declaring a predicate synchronized implicitly makes it deterministic.
-When using a single-threaded backend Prolog compiler, calls to
+When using a single-threaded <a class="reference internal" href="../../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, calls to
 synchronized predicates behave as wrapped by the standard <code class="docutils literal notranslate"><span class="pre">once/1</span></code>
 meta-predicate.</p>
 <p>Note that synchronized predicates cannot be declared dynamic (when

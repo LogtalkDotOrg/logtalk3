@@ -254,7 +254,8 @@ object we can save it on a <code class="docutils literal notranslate"><span clas
 compiled to a <code class="docutils literal notranslate"><span class="pre">sort_1_lgt.pl</span></code> Prolog file. This name scheme helps
 avoid file name conflicts (remember that all Logtalk entities share the
 same namespace). To further prevent file name conflicts, specially when
-embedding applications, and depending on the backend compiler, the names
+embedding applications, and depending on the
+<a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend compiler</span></a>, the names
 of the intermediate Prolog files may include a directory hash.</p>
 <p>Logtalk source files may contain Prolog code interleaved with Logtalk
 entity definitions. Plain Prolog code is usually copied as-is to the
@@ -276,7 +277,7 @@ adapter file of your Prolog compiler).</p>
 <a class="reference internal" href="../refman/directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive.
 Although there is also a standard Prolog <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive, any
 occurrences of this directive in a Logtalk source file is handled by
-the Logtalk compiler, not by the backend Prolog compiler.</p>
+the Logtalk compiler, not by the <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>.</p>
 </div>
 <div class="section" id="portable-applications">
 <span id="programming-portability"></span><h3>Portable applications<a class="headerlink" href="#portable-applications" title="Permalink to this headline">¶</a></h3>
@@ -408,12 +409,12 @@ the adapter file (by default, <code class="docutils literal notranslate"><span c
 loader helper file containing the calls to the <code class="docutils literal notranslate"><span class="pre">logtalk_load/1-2</span></code>
 predicates. Consulting or compiling the loader file will then compile
 and load all your Logtalk entities into memory (see below for details).</p>
-<p>With most Prolog backend compilers, you can use the shorthands
-<code class="docutils literal notranslate"><span class="pre">{File}</span></code> for <code class="docutils literal notranslate"><span class="pre">logtalk_load(File)</span></code> and <code class="docutils literal notranslate"><span class="pre">{File1,</span> <span class="pre">File2,</span> <span class="pre">...}</span></code> for
-<code class="docutils literal notranslate"><span class="pre">logtalk_load([File1,</span> <span class="pre">File2,</span> <span class="pre">...])</span></code>. The use these shorthands should
-be restricted to the Logtalk/Prolog top-level interpreter as they are
-not part of the language specification and may be commented out in case
-of conflicts with backend Prolog compiler features.</p>
+<p>With most <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>, you
+can use the shorthands <code class="docutils literal notranslate"><span class="pre">{File}</span></code> for <code class="docutils literal notranslate"><span class="pre">logtalk_load(File)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">{File1,</span> <span class="pre">File2,</span> <span class="pre">...}</span></code> for <code class="docutils literal notranslate"><span class="pre">logtalk_load([File1,</span> <span class="pre">File2,</span> <span class="pre">...])</span></code>. The use
+these shorthands should be restricted to the Logtalk/Prolog top-level
+interpreter as they are not part of the language specification and may be
+commented out in case of conflicts with backend Prolog compiler features.</p>
 <p>The built-in predicate <a class="reference internal" href="../refman/predicates/logtalk_make_0.html#predicates-logtalk-make-0"><span class="std std-ref">logtalk_make/0</span></a> can be
 used to reload all modified source files. Files are also reloaded when
 the compilation mode changes. For example, assume that you have loaded

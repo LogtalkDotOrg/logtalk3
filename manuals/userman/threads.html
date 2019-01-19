@@ -610,8 +610,8 @@ a solution becomes available.</p>
 <div class="section" id="multi-threading-performance">
 <span id="threads-performance"></span><h2>Multi-threading performance<a class="headerlink" href="#multi-threading-performance" title="Permalink to this headline">¶</a></h2>
 <p>The performance of multi-threading applications is highly dependent on
-the backend Prolog compiler, on the operating-system, and on the use of
-<a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> and dynamic predicates. All compatible backend
+the <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, on the operating-system, and on the use
+of <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> and dynamic predicates. All compatible backend
 Prolog compilers that support multi-threading features make use of POSIX
 threads or <em>pthreads</em>. The performance of the underlying pthreads
 implementation can exhibit significant differences between operating

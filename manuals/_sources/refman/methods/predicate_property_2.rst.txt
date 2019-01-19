@@ -42,7 +42,7 @@ predicate.
 
 When ``Predicate`` is bound at compile time to a ``:/2`` term, this
 predicate enumerates properties for module predicates (assuming that
-the backend Prolog compiler supports modules).
+the :term:`backend Prolog compiler` supports modules).
 
 Modes and number of proofs
 --------------------------

@@ -51,11 +51,11 @@ Compiler warnings and errors
 
 The current Logtalk compiler uses the standard ``read_term/3`` built-in
 predicate to read and compile a Logtalk source file. This improves the
-compatibility with backend Prolog compilers and their proprietary syntax
-extensions and standard compliance quirks. But one consequence of this
-design choice is that invalid Prolog terms or syntax errors may abort the
-compilation process with limited information given to the user (due to
-the inherent limitations of the ``read_term/3`` predicate).
+compatibility with :term:`backend Prolog compilers <backend Prolog compiler>`
+and their proprietary syntax extensions and standard compliance quirks. But one
+consequence of this design choice is that invalid Prolog terms or syntax errors
+may abort the compilation process with limited information given to the user
+(due to the inherent limitations of the ``read_term/3`` predicate).
 
 Assuming that all the terms in a source file are valid, there is a set of
 errors and potential errors, described below, that the compiler will try
@@ -80,7 +80,7 @@ Singleton variables
 
 Singleton variables in a clause are often misspell variables and, as
 such, one of the most common errors when programming in Prolog.
-Assuming that the backend Prolog compiler implementation of the
+Assuming that the :term:`backend Prolog compiler` implementation of the
 ``read_term/3`` predicate supports the standard ``singletons/1``
 option, the compiler warns about any singleton variable found while
 compiling a source file.
@@ -91,9 +91,9 @@ Redefinition of Prolog built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Logtalk compiler will warn us of any redefinition of a Prolog
-built-in predicate inside an object or category. Sometimes the
-redefinition is intended. In other cases, the user may not be aware that
-a particular backend Prolog compiler may already provide the predicate
+built-in predicate inside an object or category. Sometimes the redefinition
+is intended. In other cases, the user may not be aware that a particular
+:term:`backend Prolog compiler` may already provide the predicate
 as a built-in predicate or may want to ensure code portability among
 several Prolog compilers with different sets of built-in predicates.
 

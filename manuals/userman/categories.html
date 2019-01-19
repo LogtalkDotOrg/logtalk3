@@ -242,8 +242,8 @@ can be set to match the needs of a particular Prolog compiler in the
 corresponding adapter file. For example, we may define a category named
 <code class="docutils literal notranslate"><span class="pre">documenting</span></code> and save it in a <code class="docutils literal notranslate"><span class="pre">documenting.lgt</span></code> source file that
 will be compiled to a <code class="docutils literal notranslate"><span class="pre">documenting_lgt.pl</span></code> Prolog file (depending on
-the backend compiler, the names of the intermediate Prolog files may
-include a directory hash).</p>
+the <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend compiler</span></a>, the names of the
+intermediate Prolog files may include a directory hash).</p>
 <p>Category names can be atoms or compound terms (when defining parametric
 categories). Objects, categories, and protocols share the same name
 space: we cannot have a category with the same name as an object or a
@@ -390,8 +390,9 @@ binding optimizations invalid.</p>
 <p>Another important caveat is that, while a complementing category can
 replace a predicate definition, local callers of the replaced predicate
 will still call the unpatched version of the predicate. This is a
-consequence of the lack of a portable solution at the backend Prolog
-compiler level for destructively replacing static predicates.</p>
+consequence of the lack of a portable solution at the
+<a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> level for destructively replacing static
+predicates.</p>
 </div>
 </div>
 <div class="section" id="finding-defined-categories">

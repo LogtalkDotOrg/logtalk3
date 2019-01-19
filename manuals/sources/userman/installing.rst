@@ -68,8 +68,8 @@ modern, standards compliant, Prolog compiler available.
 Prolog compiler
 ~~~~~~~~~~~~~~~
 
-Logtalk requires a backend Prolog compiler supporting official and de
-facto standards. Capabilities needed by Logtalk that are not defined in
+Logtalk requires a :term:`backend Prolog compiler` supporting official and
+de facto standards. Capabilities needed by Logtalk that are not defined in
 the official ISO Prolog Core standard include:
 
 -  access to predicate properties
@@ -290,7 +290,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_prolog_dialect:
 
 ``prolog_dialect``
-   Name of the backend Prolog compiler (an atom). This flag can be used
+   Name of the :term:`backend Prolog compiler` (an atom). This flag can be used
    for :ref:`conditional compilation <conditional_compilation_directives>`
    of Prolog specific code.
 
@@ -298,7 +298,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_prolog_version:
 
 ``prolog_version``
-   Version of the backend Prolog compiler (a compound term,
+   Version of the :term:`backend Prolog compiler` (a compound term,
    ``v(Major, Minor, Patch)``, whose arguments are integers). This flag
    availability depends on the Prolog compiler. Checking the value of
    this flag fails for any Prolog compiler that does not provide access
@@ -308,7 +308,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_prolog_compatible_version:
 
 ``prolog_compatible_version``
-   Compatible version of the backend Prolog compiler (a compound term,
+   Compatible version of the :term:`backend Prolog compiler` (a compound term,
    usually with the format ``@>=(v(Major, Minor, Patch))``, whose
    arguments are integers). This flag availability depends on the Prolog
    compiler. Checking the value of this flag fails for any Prolog
@@ -318,8 +318,8 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_prolog_conformance:
 
 ``prolog_conformance``
-   Level of conformance of the backend Prolog compiler with the ISO
-   Prolog Core standard. The possible values are ``strict`` for
+   Level of conformance of the :term:`backend Prolog compiler` with the
+   ISO Prolog Core standard. The possible values are ``strict`` for
    compilers claiming strict conformance and ``lax`` for compilers
    claiming only broad conformance.
 
@@ -327,7 +327,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_unicode:
 
 ``unicode``
-   Informs Logtalk if the backend Prolog compiler supports the Unicode
+   Informs Logtalk if the :term:`backend Prolog compiler` supports the Unicode
    standard. Possible flag values are ``unsupported``, ``full`` (all
    Unicode planes supported), and ``bmp`` (supports only the Basic
    Multilingual Plane).
@@ -336,7 +336,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_encoding_directive:
 
 ``encoding_directive``
-   Informs Logtalk if the backend Prolog compiler supports the
+   Informs Logtalk if the :term:`backend Prolog compiler` supports the
    :ref:`directives_encoding_1` directive.
    This directive is used for declaring the text encoding of source
    files. Possible flag values are ``unsupported``, ``full`` (can be
@@ -347,7 +347,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_tabling:
 
 ``tabling``
-   Informs Logtalk if the backend Prolog compiler provides tabling
+   Informs Logtalk if the :term:`backend Prolog compiler` provides tabling
    programming support. Possible flag values are ``unsupported`` and
    ``supported``.
 
@@ -355,7 +355,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_engines:
 
 ``engines``
-   Informs if the backend Prolog compiler provides the required low
+   Informs if the :term:`backend Prolog compiler` provides the required low
    level multi-threading programming support for Logtalk
    :term:`threaded engines <threaded engine>`. Possible flag values
    are ``unsupported`` and ``supported``.
@@ -364,7 +364,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_threads:
 
 ``threads``
-   Informs if the backend Prolog compiler provides the required low
+   Informs if the :term:`backend Prolog compiler` provides the required low
    level multi-threading programming support for all high-level Logtalk
    :ref:`multi-threading features <threads_threads>`. Possible flag
    values are ``unsupported`` and ``supported``.
@@ -373,7 +373,7 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_modules:
 
 ``modules``
-   Informs Logtalk if the backend Prolog compiler provides suitable
+   Informs Logtalk if the :term:`backend Prolog compiler` provides suitable
    module support. Possible flag values are ``unsupported`` and
    ``supported`` (Logtalk provides limited support for compiling Prolog
    modules as objects).
@@ -382,8 +382,8 @@ read-only values and cannot be changed at runtime. These are:
 .. _flag_coinduction:
 
 ``coinduction``
-   Informs Logtalk if the backend Prolog compiler provides the minimal
-   support for cyclic terms necessary for working with
+   Informs Logtalk if the :term:`backend Prolog compiler` provides the
+   required minimal support for cyclic terms necessary for working with
    :term:`coinductive predicates <coinductive predicate>`. Possible flag
    values are ``unsupported`` and ``supported``.
 
@@ -392,7 +392,7 @@ read-only values and cannot be changed at runtime. These are:
 Settings files
 ~~~~~~~~~~~~~~
 
-Although is always possible to edit the backend Prolog compiler adapter
+Although is always possible to edit the :term:`backend Prolog compiler` adapter
 files, the recommended solution to customize compiler flags is to edit
 the ``settings.lgt`` file in the Logtalk user folder or in the user home
 folder. Depending on the backend Prolog compiler and on the
@@ -436,8 +436,8 @@ support for conditional compilation you could write:
 
 The :ref:`prolog_dialect <flag_prolog_dialect>` flag may also be used
 with the conditional compilation directives in order to define a single
-settings file that can be used with several backend Prolog compilers.
-For example:
+settings file that can be used with several
+:term:`backend Prolog compilers <backend Prolog compiler>`. For example:
 
 ::
 

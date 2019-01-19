@@ -74,8 +74,8 @@ checked due to the computational cost.
 The ``documentation`` target requires the ``doclet`` tool and a single
 *doclet* object to be loaded. See the ``doclet`` tool for more details.
 
-Depending on the backend Prolog compiler, the following top-level shortcuts
-are usually defined:
+Depending on the :term:`backend Prolog compiler`, the following top-level
+shortcuts are usually defined:
 
 * ``{*}`` - ``logtalk_make(all)``
 * ``{!}`` - ``logtalk_make(clean)``

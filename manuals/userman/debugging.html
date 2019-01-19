@@ -258,9 +258,10 @@ flags in a <code class="docutils literal notranslate"><span class="pre">logtalk_
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_make(debug).
 </pre></div>
 </div>
-<p>With most backend Prolog compilers, the <code class="docutils literal notranslate"><span class="pre">{+d}</span></code> top-level shortcut can also
-be used. After debugging, the files can be recompiled in normal or optimized
-mode using, respectively, the <code class="docutils literal notranslate"><span class="pre">{+n}</span></code> or <code class="docutils literal notranslate"><span class="pre">{+o}</span></code> top-level shortcuts.</p>
+<p>With most <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>, the
+<code class="docutils literal notranslate"><span class="pre">{+d}</span></code> top-level shortcut can also be used. After debugging, the files can
+be recompiled in normal or optimized mode using, respectively, the <code class="docutils literal notranslate"><span class="pre">{+n}</span></code>
+or <code class="docutils literal notranslate"><span class="pre">{+o}</span></code> top-level shortcuts.</p>
 <p>The <a class="reference internal" href="programming.html#flag-clean"><span class="std std-ref">clean</span></a> compiler flag should be turned on whenever
 the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on at runtime. This is necessary
 because debug code would not be generated for files previously compiled in

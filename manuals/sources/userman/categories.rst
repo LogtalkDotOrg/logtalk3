@@ -51,8 +51,8 @@ can be set to match the needs of a particular Prolog compiler in the
 corresponding adapter file. For example, we may define a category named
 ``documenting`` and save it in a ``documenting.lgt`` source file that
 will be compiled to a ``documenting_lgt.pl`` Prolog file (depending on
-the backend compiler, the names of the intermediate Prolog files may
-include a directory hash).
+the :term:`backend compiler <backend Prolog compiler>`, the names of the
+intermediate Prolog files may include a directory hash).
 
 Category names can be atoms or compound terms (when defining parametric
 categories). Objects, categories, and protocols share the same name
@@ -221,8 +221,9 @@ binding optimizations invalid.
 Another important caveat is that, while a complementing category can
 replace a predicate definition, local callers of the replaced predicate
 will still call the unpatched version of the predicate. This is a
-consequence of the lack of a portable solution at the backend Prolog
-compiler level for destructively replacing static predicates.
+consequence of the lack of a portable solution at the
+:term:`backend Prolog compiler` level for destructively replacing static
+predicates.
 
 .. _categories_finding:
 

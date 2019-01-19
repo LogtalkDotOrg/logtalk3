@@ -28,7 +28,7 @@ Description
 
    encoding(Encoding)
 
-Declares the source file text encoding. Requires a backend Prolog compiler
+Declares the source file text encoding. Requires a :term:`backend Prolog compiler`
 supporting the chosen encoding. When used, this directive must be the first
 term in the source file in the first line.
 

@@ -39,8 +39,8 @@ compiler flags that may have changed since loading). When an included file
 is modified, this predicate reloads its main file (i.e. the file that
 contains the :ref:`directives_include_1` directive).
 
-Depending on the backend Prolog compiler, the shortcut ``{*}`` may be
-used in alternative. Check the adapter files for the availability of
+Depending on the :term:`backend Prolog compiler`, the shortcut ``{*}`` may
+be used in alternative. Check the adapter files for the availability of
 these shortcuts as they are not part of the language (and thus should
 only be used at the top-level interpreter).
 

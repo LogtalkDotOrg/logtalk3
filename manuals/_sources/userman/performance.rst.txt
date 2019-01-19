@@ -77,8 +77,8 @@ after the generalization of the query is cached). All numbers with the
 :ref:`events <flag_events>` flag set to ``deny`` (setting this flag to
 ``allow`` adds an overhead of 5 inferences to the results above).
 
-The dynamic binding caches assume the used backend Prolog compiler does
-indexing of dynamic predicates. This is a common feature of modern
+The dynamic binding caches assume the used :term:`backend Prolog compiler`
+does indexing of dynamic predicates. This is a common feature of modern
 Prolog systems but the actual details vary from system to system and may
 have an impact on dynamic binding performance.
 

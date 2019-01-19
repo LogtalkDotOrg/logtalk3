@@ -290,9 +290,9 @@ have, by default, a <code class="docutils literal notranslate"><span class="pre"
 can be set to match the needs of a particular Prolog compiler in the
 corresponding adapter file. For instance, we may define an object named
 <code class="docutils literal notranslate"><span class="pre">vehicle</span></code> and save it in a <code class="docutils literal notranslate"><span class="pre">vehicle.lgt</span></code> source file which will be
-compiled to a <code class="docutils literal notranslate"><span class="pre">vehicle_lgt.pl</span></code> Prolog file (depending on the backend
-compiler, the names of the intermediate Prolog files may include a
-directory hash).</p>
+compiled to a <code class="docutils literal notranslate"><span class="pre">vehicle_lgt.pl</span></code> Prolog file (depending on the
+<a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend compiler</span></a>, the names of the
+intermediate Prolog files may include a directory hash).</p>
 <p>Object names can be atoms or compound terms (when defining parametric
 objects, see below). Objects, categories, and protocols share the same
 name space: we cannot have an object with the same name as a protocol or
@@ -873,11 +873,11 @@ public. Messages sent from this pseudo-object, which includes messages sent
 from the top-level interpreter, generate events when the default value of
 the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Defining
 complementing categories for this pseudo-object is not supported.</p>
-<p>With some of the backend Prolog compilers that support a module system,
-it is possible to load (the) Logtalk (compiler/runtime) into a module
-other than the pseudo-module <em>user</em>. In this case, the Logtalk
-pseudo-object <em>user</em> virtually contains all user predicate definitions
-defined in the module where Logtalk was loaded.</p>
+<p>With some of the <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>
+that support a module system, it is possible to load (the) Logtalk
+(compiler/runtime) into a module other than the pseudo-module <em>user</em>. In
+this case, the Logtalk pseudo-object <em>user</em> virtually contains all user
+predicate definitions defined in the module where Logtalk was loaded.</p>
 </div>
 <div class="section" id="the-built-in-object-logtalk">
 <span id="objects-logtalk"></span><h3>The built-in object <em>logtalk</em><a class="headerlink" href="#the-built-in-object-logtalk" title="Permalink to this headline">¶</a></h3>

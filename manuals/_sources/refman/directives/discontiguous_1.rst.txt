@@ -36,7 +36,8 @@ Description
 
 Declares discontiguous predicates and discontiguous grammar rule
 non-terminals. The use of this directive should be avoided as not all
-backend Prolog compilers support discontiguous predicates.
+:term:`backend Prolog compilers <backend Prolog compiler>` support
+discontiguous predicates.
 
 .. warning::
 

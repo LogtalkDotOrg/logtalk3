@@ -40,7 +40,7 @@ storing concurrent goal solutions and replies to the multi-threading
 calls made within the object. The message queue for the
 :ref:`user <objects_user>` pseudo-object is automatically created at
 Logtalk startup (provided that multi-threading programming is supported
-and enabled for the chosen backend Prolog compiler).
+and enabled for the chosen :term:`backend Prolog compiler`).
 
 Template and modes
 ------------------

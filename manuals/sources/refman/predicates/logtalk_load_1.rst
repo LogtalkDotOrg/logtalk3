@@ -48,8 +48,8 @@ Note that only the errors related to problems in the predicate argument
 are listed below. This predicate fails when errors are found during
 compilation of a source file.
 
-Depending on the backend Prolog compiler, the shortcuts ``{File}`` or
-``{File1, File2, ...}`` may be used in alternative. Check the adapter
+Depending on the :term:`backend Prolog compiler`, the shortcuts ``{File}``
+or ``{File1, File2, ...}`` may be used in alternative. Check the adapter
 files for the availability of these shortcuts as they are not part of
 the language (and thus should only be used at the top-level
 interpreter).

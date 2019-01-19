@@ -45,7 +45,8 @@ following keys are currently supported:
 * ``term_position`` - the position of the term being compiled (``StartLine-EndLine``)
 * ``variable_names`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
 
-The ``term_position`` key is only supported in backend Prolog compilers
+The ``term_position`` key is only supported in
+:term:`backend Prolog compilers <backend Prolog compiler>`
 that provide access to the start and end lines of a read term.
 
 The ``logtalk_load_context/2`` predicate can also be called

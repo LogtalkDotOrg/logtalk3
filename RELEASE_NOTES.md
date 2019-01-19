@@ -27,8 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* IMPROVED: The compiler now suppresses `logtalk::print_message/3` debug
-messages when the `optimize` flag is turned on.
+* IMPROVED: The compiler now suppresses `logtalk::print_message/3` calls for
+`debug` and `debug(Group)` messages when the `optimize` flag is turned on.
 
 * IMPROVED: Detection of missing meta-predicate directives when compiling
 closures.

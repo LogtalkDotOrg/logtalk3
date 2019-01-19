@@ -37,8 +37,8 @@ succeeds for any predicates listed in :ref:`directives_uses_2` and
 :ref:`directives_use_module_2` directives.
 
 When ``Predicate`` is bound at compile time to a ``:/2`` term, this
-predicate enumerates module predicates (assuming that the backend
-Prolog compiler supports modules).
+predicate enumerates module predicates (assuming that the
+:term:`backend Prolog compiler` supports modules).
 
 Modes and number of proofs
 --------------------------

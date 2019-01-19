@@ -74,9 +74,10 @@ flags in a ``logtalk_load/2`` call or in a loader file, if used) in debug mode:
 
    | ?- logtalk_make(debug).
 
-With most backend Prolog compilers, the ``{+d}`` top-level shortcut can also
-be used. After debugging, the files can be recompiled in normal or optimized
-mode using, respectively, the ``{+n}`` or ``{+o}`` top-level shortcuts.
+With most :term:`backend Prolog compilers <backend Prolog compiler>`, the
+``{+d}`` top-level shortcut can also be used. After debugging, the files can
+be recompiled in normal or optimized mode using, respectively, the ``{+n}``
+or ``{+o}`` top-level shortcuts.
 
 The :ref:`clean <flag_clean>` compiler flag should be turned on whenever
 the :ref:`debug <flag_debug>` flag is turned on at runtime. This is necessary

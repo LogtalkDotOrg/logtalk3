@@ -31,7 +31,7 @@ Description
 
 Calls a goal, which might be constructed by appending additional
 arguments to a closure. The upper limit for ``N`` depends on the upper
-limit for the arity of a compound term of the backend Prolog compiler.
+limit for the arity of a compound term of the :term:`backend Prolog compiler`.
 This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object. The ``Closure`` argument can
 also be a lambda expression or a Logtalk control construct. When using a

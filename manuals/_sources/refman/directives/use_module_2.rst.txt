@@ -62,7 +62,7 @@ be a module name (an atom) instead of a file specification. In Logtalk,
 there's no mixing between *loading* a resource and (declaring the)
 *using* (of) a resource. As a consequence, this directive doesn't
 automatically load the module. Loading the module file is dependent of
-the used backend Prolog compiler and must be done separately (usually,
+the used :term:`backend Prolog compiler` and must be done separately (usually,
 using a source file directive such as ``use_module/1`` or ``use_module/2``
 in the entity file or preferably in the application loader file).
 Also, note that the name of the module may differ from the name of the

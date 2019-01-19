@@ -257,8 +257,9 @@ Using Prolog defined expansions
 
 In order to use clauses for the ``term_expansion/2`` and ``goal_expansion/2``
 predicates defined in plain Prolog, simply specify the pseudo-object ``user``
-as the hook object when compiling source files. When using backend Prolog
-compilers that support a module system, it can also be specified a module
+as the hook object when compiling source files. When using
+:term:`backend Prolog compilers <backend Prolog compiler>` that support a
+module system, it can also be specified a module
 containing clauses for the expanding predicates as long as the module
 name doesn't coincide with an object name. But note that Prolog module
 libraries may provide definitions of the expansion predicates that are
