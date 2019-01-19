@@ -94,14 +94,17 @@ Glossary
    entity
       Generic name for Logtalk compilation units: :term:`objects <object>`,
       :term:`categories <category>`, and :term:`protocols <protocol>`.
-      Entities share a single namespace (i.e. entity identifiers must be
-      unique).
+      Entities share a single namespace (i.e. entity
+      :term:`identifiers <identity>` must be unique).
 
    parametric entity
-      An :term:`object` or :term:`category` whose identifier is a compound
-      term containing free variables that can be used to parameterize the
-      entity predicates. Parameters are *logical variables* implicitly
-      shared by all the entity clauses.
+      An :term:`object` or :term:`category` whose :term:`identifier <identity>`
+      is a compound term possibly containing free variables that can be used
+      to parameterize the entity predicates. Parameters are *logical variables*
+      implicitly shared by all the entity clauses. Note that the identifier
+      of a parametric entity is its functor, irrespective of the possible
+      values of its arguments (e.g. ``foo(bar)`` and ``foo(baz)`` are
+      different parameterizations of the same parametric entity, ``foo/1``).
 
    event
       The sending of a :term:`message` to an object. An event can be
@@ -127,9 +130,10 @@ Glossary
 
    identity
       Property of an entity that distinguishes it from every other entity.
-      Object and :term:`category` identifiers can be atoms or compound terms.
-      Protocol identities must be atoms. All Logtalk entities (objects,
-      protocols, and categories) share the same namespace.
+      The identifier of an entity is its functor (i.e. its name and arity),
+      which must be unique. Object and :term:`category` identifiers can be
+      atoms or compound terms. Protocol identities must be atoms. All Logtalk
+      entities (objects, protocols, and categories) share the same namespace.
 
    inheritance
       An entity inherits predicate directives and clauses from related
@@ -213,7 +217,7 @@ Glossary
       other object.
 
    object
-      An entity characterized by an identity and a set of predicate
+      An entity characterized by an :term:`identity` and a set of predicate
       directives and clauses. Logtalk objects can be either static or
       dynamic. Logtalk objects can play the *role* of classes, instances,
       or prototypes. The role or roles an object plays are a function of

@@ -63,6 +63,8 @@ Documentation
 * IMPROVED: Handbook reference page on the `current_predicate/1` built-in
 method.
 
+* IMPROVED: Glossary definitions of entity and parametric entity identifiers.
+
 * FIXED: HTML favicon bug that resulted in a non-valid ePub version of the
 Handbook.
 

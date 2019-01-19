@@ -242,8 +242,8 @@ Encapsulation is enforced in Logtalk by using
 <dt id="term-entity">entity</dt>
 <dd>Generic name for Logtalk compilation units: <a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a>,
 <a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>, and <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocols</span></a>.
-Entities share a single namespace (i.e. entity identifiers must be
-unique).</dd>
+Entities share a single namespace (i.e. entity
+<a class="reference internal" href="#term-identity"><span class="xref std std-term">identifiers</span></a> must be unique).</dd>
 <dt id="term-entity-directive">entity directive</dt>
 <dd>A directive that affects how Logtalk entities (<a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a>,
 <a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>, or <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocols</span></a>) are
@@ -280,9 +280,10 @@ application without requiring access to the entities source code
 or restarting the application.</dd>
 <dt id="term-identity">identity</dt>
 <dd>Property of an entity that distinguishes it from every other entity.
-Object and <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> identifiers can be atoms or compound terms.
-Protocol identities must be atoms. All Logtalk entities (objects,
-protocols, and categories) share the same namespace.</dd>
+The identifier of an entity is its functor (i.e. its name and arity),
+which must be unique. Object and <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> identifiers can be
+atoms or compound terms. Protocol identities must be atoms. All Logtalk
+entities (objects, protocols, and categories) share the same namespace.</dd>
 <dt id="term-inheritance">inheritance</dt>
 <dd>An entity inherits predicate directives and clauses from related
 entities. In the particular case of objects, when an object extends
@@ -367,7 +368,7 @@ the multifile predicate <em>primary declaration</em>, which consists of
 both a <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> and a
 <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive for the predicate.</dd>
 <dt id="term-object">object</dt>
-<dd>An entity characterized by an identity and a set of predicate
+<dd>An entity characterized by an <a class="reference internal" href="#term-identity"><span class="xref std std-term">identity</span></a> and a set of predicate
 directives and clauses. Logtalk objects can be either static or
 dynamic. Logtalk objects can play the <em>role</em> of classes, instances,
 or prototypes. The role or roles an object plays are a function of
@@ -386,10 +387,13 @@ corresponding entity parameters.</dd>
 <dt id="term-parametric-category">parametric category</dt>
 <dd>See <a class="reference internal" href="#term-parametric-entity"><span class="xref std std-term">parametric entity</span></a>.</dd>
 <dt id="term-parametric-entity">parametric entity</dt>
-<dd>An <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a> or <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> whose identifier is a compound
-term containing free variables that can be used to parameterize the
-entity predicates. Parameters are <em>logical variables</em> implicitly
-shared by all the entity clauses.</dd>
+<dd>An <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a> or <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> whose <a class="reference internal" href="#term-identity"><span class="xref std std-term">identifier</span></a>
+is a compound term possibly containing free variables that can be used
+to parameterize the entity predicates. Parameters are <em>logical variables</em>
+implicitly shared by all the entity clauses. Note that the identifier
+of a parametric entity is its functor, irrespective of the possible
+values of its arguments (e.g. <code class="docutils literal notranslate"><span class="pre">foo(bar)</span></code> and <code class="docutils literal notranslate"><span class="pre">foo(baz)</span></code> are
+different parameterizations of the same parametric entity, <code class="docutils literal notranslate"><span class="pre">foo/1</span></code>).</dd>
 <dt id="term-parametric-object">parametric object</dt>
 <dd>See <a class="reference internal" href="#term-parametric-entity"><span class="xref std std-term">parametric entity</span></a>.</dd>
 <dt id="term-parametric-object-proxy">parametric object proxy</dt>
