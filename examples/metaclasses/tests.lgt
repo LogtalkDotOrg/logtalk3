@@ -24,8 +24,28 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/03/02,
+		date is 2019/01/19,
 		comment is 'Unit tests for the "metaclasses" example.'
 	]).
+
+	cover(metaclass).
+	cover(root).
+	cover(subclass1).
+	cover(subclass2).
+
+	test(metaclasses_01) :-
+		root::new(Instance),
+		instantiates_class(Instance, Class),
+		Class == root.
+
+	test(metaclasses_02) :-
+		subclass1::new(Instance),
+		instantiates_class(Instance, Class),
+		Class == subclass1.
+
+	test(metaclasses_03) :-
+		subclass2::new(Instance),
+		instantiates_class(Instance, Class),
+		Class == subclass2.
 
 :- end_object.
