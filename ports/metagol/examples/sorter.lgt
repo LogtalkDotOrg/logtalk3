@@ -47,7 +47,8 @@
 	:- uses(list, [append/3, length/2, memberchk/2, nth1/3]).
 	:- uses(time, [now/3]).
 	:- uses(fast_random, [random/3, randseq/4, set_seed/1]).
-	:- uses(user, [between/3, setarg/3]).
+	:- uses(integer, [between/3]).
+	:- uses(user, [setarg/3]).
 
 	:- dynamic(energy_bound/1).
 

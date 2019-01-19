@@ -22,16 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/08/26,
+		date is 2019/01/19,
 		comment is 'Unit tests for the "ebench" example.'
 	]).
 
 	:- threaded.
 
 	:- uses(lgtunit, [benchmark/2]).
-	:- uses(user, [between/3]).
+	:- uses(integer, [between/3]).
 
 	note('total times to create and destroy 1000 threaded engines').
 

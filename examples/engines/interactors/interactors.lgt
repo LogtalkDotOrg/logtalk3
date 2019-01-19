@@ -21,9 +21,9 @@
 :- object(interactors).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2017/08/26,
+		date is 2019/01/19,
 		comment is 'Examples of implementing interactors using threaded engines.'
 	]).
 
@@ -58,7 +58,7 @@
 		argnames is ['Prime']
 	]).
 
-	:- uses(user, [between/3]).
+	:- uses(integer, [between/3]).
 
 	natural(N) :-
 		threaded_engine_next(naturals, N).

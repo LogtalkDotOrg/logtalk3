@@ -38,9 +38,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.16,
+		version is 0.17,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2019/01/08,
+		date is 2019/01/19,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
@@ -93,12 +93,11 @@
 	:- dynamic(interpreted_/1).
 
 	:- uses(coroutining, [when/2]).
-	:- uses(integer, [succ/2]).
+	:- uses(integer, [between/3, succ/2]).
 	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, remove_duplicates/2 as list_to_set/2, select/3]).
 	:- uses(logtalk, [print_message/3]).
 	:- uses(meta, [maplist/2, maplist/3]).
 	:- uses(pairs, [map/3 as map_list_to_pairs/3, values/2 as pairs_values/2]).
-	:- uses(user, [between/3]).
 
 	% defaults
 	default(min_clauses(1)).

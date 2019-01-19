@@ -40,7 +40,7 @@
 :- object(constants2,
 	extends(metagol)).
 
-	:- uses(user, [between/3]).
+	:- uses(integer, [between/3]).
 
 	%% tell metagol to use the BK
 	prim(num/1).
