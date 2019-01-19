@@ -80,14 +80,15 @@ the coroutining predicates are made available by each Prolog system.
 
 * ADDED: Predicate `remove_duplicates/2` to the library list entities.
 
-* ADDED: Library zipper protocol and list zipper object.
+* ADDED: Library zipper protocol, `zipperp`, and list zipper object, `zlist`.
 
-* IMPROVED: Documentation cross-references for library entities.
+* IMPROVED: Documentation cross-referencing for library entities.
 
 Tools
 -----
 
-* RENAMED: The `ports` tool to `ports_profiler`.
+* RENAMED: The `ports` tool to `ports_profiler`. The `ports` library alias is
+now used for the directory containing ports of third-party software.
 
 * ADDED: A `debug_messages` tool supporting enabling and disabling of `debug`
 and `debug(Group)` messages for code compiled in normal mode.
