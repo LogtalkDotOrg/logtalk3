@@ -117,7 +117,7 @@ Examples
 
 * ADDED: Simple example, `slides`, of using the library list zipper support.
 
-* ADDED: Unit tests for the `metaclasses` example.
+* ADDED: Unit tests for the `metaclasses` and `msglog` examples.
 
 * IMPROVED: Implementation of the hill climbing search method found in the
 `searching` example.

@@ -24,10 +24,56 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 20102/08/06,
+		date is 20119/01/19,
 		comment is 'Unit tests for the "msglog" example.'
 	]).
 
 	cover(msglog).
+
+	test(msglog_01) :-
+		msglog::erase,
+		\+ msglog::log(_, _).
+
+	test(msglog_02) :-
+		msglog::erase,
+		msglog::record,
+		% the "msglog" object records messages sent from "user"
+		{character::is_alpha(p)},
+		msglog::log(Object, Message),
+		Object == character,
+		Message == is_alpha(p).
+
+	test(msglog_03) :-
+		msglog::erase,
+		msglog::record,
+		% the "msglog" object records messages sent from "user"
+		forall({list::member(_, [1, 2, 3])}, true),
+		forall({integer::between(1, 4, _)}, true),
+		findall(
+			Object::Message,
+			msglog::log(Object, Message),
+			LogEntries
+		),
+		LogEntries = [Entry1, Entry2| Tail],
+		^^variant(Entry1, list::member(_, [1, 2, 3])),
+		^^variant(Entry2, integer::between(1, 4, _)),
+		Tail == [].
+
+	test(msglog_04) :-
+		msglog::erase,
+		msglog::record,
+		% the "msglog" object records messages sent from "user"
+		{character::is_alpha(p)},
+		msglog::stop,
+		forall({list::member(_, [1, 2, 3])}, true),
+		forall({integer::between(1, 4, _)}, true),
+		findall(
+			Object::Message,
+			msglog::log(Object, Message),
+			LogEntries
+		),
+		LogEntries = [Entry| Tail],
+		Entry == character::is_alpha(p),
+		Tail == [].
 
 :- end_object.

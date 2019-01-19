@@ -23,9 +23,9 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2008/10/20,
+		date is 2019/01/19,
 		comment is 'Monitor for recording, replaying, and saving user messages.'
 	]).
 
@@ -59,9 +59,16 @@
 		comment is 'Erases recorded messages.'
 	]).
 
+	:- public(log/2).
+	:- mode(log(?object_identifier, ?callable), zero_or_more).
+	:- info(log_/2, [
+		comment is 'Enumerates by bsacktracking all recorded messages.',
+		argnames is ['Object', 'Message']
+	]).
+
 	:- private(log_/2).
 	:- dynamic(log_/2).
-	:- mode(log_(+object, +nonvar), zero_or_more).
+	:- mode(log_(?object_identifier, ?callable), zero_or_more).
 	:- info(log_/2, [
 		comment is 'Table of recorded messages.',
 		argnames is ['Object', 'Message']
@@ -91,6 +98,9 @@
 
 	erase :-
 		::retractall(log_(_, _)).
+
+	log(Object, Message) :-
+		log_(Object, Message).
 
 	before(Object, Message, _) :-
 		self(Self),
