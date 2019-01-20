@@ -36,7 +36,7 @@ slide(6, 'Last slide').
 	:- meta_predicate(show(*, 2)).
 
 	:- uses(zlist, [
-		zip/2, current/2, next/3, previous/3, rewind/3, forward/3
+		zip/3, next/3, previous/3, rewind/3, forward/3
 	]).
 
 	:- uses(logtalk, [
@@ -44,9 +44,8 @@ slide(6, 'Last slide').
 	]).
 
 	show(Slides, Closure) :-
-		zip(Slides, Zipper),
-		current(Zipper, Current),
-		display(Current, Closure),
+		zip(Slides, Zipper, First),
+		display(First, Closure),
 		remote(Command),
 		interact(Command, Zipper, Closure).
 

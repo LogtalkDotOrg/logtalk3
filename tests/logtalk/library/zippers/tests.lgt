@@ -22,26 +22,36 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/01/17,
+		date is 2019/01/20,
 		comment is 'Unit tests for the "zippers" library.'
 	]).
 
 	cover(zlist).
 
-	test(zlist_zip_4_01) :-
-		\+ zlist::zip(1, [], _, _).
+	test(zlist_zip_at_index_4_01) :-
+		\+ zlist::zip_at_index(1, [], _, _).
 
-	test(zlist_zip_4_02) :-
-		\+ zlist::zip(3, [1,2], _, _).
+	test(zlist_zip_at_index_4_02) :-
+		\+ zlist::zip_at_index(3, [1,2], _, _).
 
-	test(zlist_zip_4_03) :-
-		zlist::zip(3, [1,2,3,4,5], _, Current),
+	test(zlist_zip_at_index_4_03) :-
+		zlist::zip_at_index(3, [1,2,3,4,5], _, Current),
 		Current == 3.
 
 	test(zlist_zip_2_01) :-
 		\+ zlist::zip([], _).
+
+	test(zlist_zip_2_02) :-
+		zlist::zip([1,2,3,4,5], _).
+
+	test(zlist_zip_3_01) :-
+		\+ zlist::zip([], _, _).
+
+	test(zlist_zip_3_02) :-
+		zlist::zip([1,2,3,4,5], _, First),
+		First == 1.
 
 	test(zlist_unzip_2_02) :-
 		zlist::zip([1,2,3,4,5], Zipper),
@@ -117,7 +127,7 @@
 	test(zlist_forward_3_01) :-
 		zlist::zip([1,2,3,4,5], Zipper0),
 		zlist::forward(Zipper0, Zipper, Last),
-		zlist::zip(5, [1,2,3,4,5], Zipper1, Last1),
+		zlist::zip_at_index(5, [1,2,3,4,5], Zipper1, Last1),
 		Zipper == Zipper1,
 		Last == 5,
 		Last == Last1.
@@ -148,41 +158,41 @@
 		Current = 0.
 
 	test(zlist_delete_and_previous_2_01) :-
-		zlist::zip(3, [1,2,3,4,5], Zipper0, _),
+		zlist::zip_at_index(3, [1,2,3,4,5], Zipper0, _),
 		zlist::delete_and_previous(Zipper0, Zipper1),
 		zlist::current(Zipper1, Current),
 		Current = 2.
 
 	test(zlist_delete_and_next_2_01) :-
-		zlist::zip(3, [1,2,3,4,5], Zipper0, _),
+		zlist::zip_at_index(3, [1,2,3,4,5], Zipper0, _),
 		zlist::delete_and_next(Zipper0, Zipper1),
 		zlist::current(Zipper1, Current),
 		Current = 4.
 
 	test(zlist_delete_and_unzip_2_01) :-
-		zlist::zip(3, [1,2,3,4,5], Zipper, _),
+		zlist::zip_at_index(3, [1,2,3,4,5], Zipper, _),
 		zlist::delete_and_unzip(Zipper, List),
 		List = [1,2,4,5].
 
 	test(zlist_delete_all_before_2_01) :-
-		zlist::zip(3, [1,2,3,4,5], Zipper0, _),
+		zlist::zip_at_index(3, [1,2,3,4,5], Zipper0, _),
 		zlist::delete_all_before(Zipper0, Zipper1),
 		zlist::unzip(Zipper1, List),
 		List == [3,4,5].
 
 	test(zlist_delete_all_before_and_unzip_2_01) :-
-		zlist::zip(3, [1,2,3,4,5], Zipper, _),
+		zlist::zip_at_index(3, [1,2,3,4,5], Zipper, _),
 		zlist::delete_all_before_and_unzip(Zipper, List),
 		List == [3,4,5].
 
 	test(zlist_delete_all_after_2_01) :-
-		zlist::zip(3, [1,2,3,4,5], Zipper0, _),
+		zlist::zip_at_index(3, [1,2,3,4,5], Zipper0, _),
 		zlist::delete_all_after(Zipper0, Zipper1),
 		zlist::unzip(Zipper1, List),
 		List == [1,2,3].
 
 	test(zlist_delete_all_after_and_unzip_2_01) :-
-		zlist::zip(3, [1,2,3,4,5], Zipper, _),
+		zlist::zip_at_index(3, [1,2,3,4,5], Zipper, _),
 		zlist::delete_all_after_and_unzip(Zipper, List),
 		List == [1,2,3].
 

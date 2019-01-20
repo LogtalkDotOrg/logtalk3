@@ -22,30 +22,32 @@
 	implements(zipperp)).
 
 	:- info([
-		version is 0.3,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/01/17,
+		date is 2019/01/20,
 		comment is 'Zipper list predicates. Zippers should be regarded as opaque terms.'
 	]).
 
-	:- public(zip/4).
-	:- mode(zip(+natural, +list, --zipper, --term), zero_or_one).
-	:- info(zip/4, [
+	:- public(zip_at_index/4).
+	:- mode(zip_at_index(+natural, +list, --zipper, --term), zero_or_one).
+	:- info(zip_at_index/4, [
 		comment is 'Adds a zipper to a list opened at the given index and also returns the element at the index. Fails if the list is empty or the index (starting at 1) does not exist.',
 		argnames is ['Index', 'List', 'Zipper', 'Element']
 	]).
 
-	zip(Position, List, Zipper, Element) :-
-	    zip(Position, List, [], Zipper, Element).
+	zip_at_index(Position, List, Zipper, Element) :-
+	    zip_at_index(Position, List, [], Zipper, Element).
 
-	zip(1, [Head|Tail], Acc, zip(Acc,Head,Tail), Head) :-
+	zip_at_index(1, [Head|Tail], Acc, zip(Acc,Head,Tail), Head) :-
 		!.
-	zip(N, [Head|Tail], Acc, zip(Before,Element,After), Element) :-
+	zip_at_index(N, [Head|Tail], Acc, zip(Before,Element,After), Element) :-
 	    N > 1,
 	    M is N - 1,
-	    zip(M, Tail, [Head|Acc], zip(Before,Element,After), Element).
+	    zip_at_index(M, Tail, [Head|Acc], zip(Before,Element,After), Element).
 
 	zip([Head| Tail], zip([],Head,Tail)).
+
+	zip([Head| Tail], zip([],Head,Tail), Head).
 
 	unzip(zip(Before,Current,After), List) :-
 		unzip(Before, Current, After, List).

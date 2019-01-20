@@ -310,8 +310,8 @@
 <p>Zipper list predicates. Zippers should be regarded as opaque terms.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0.3</div>
-<div class="line"><strong>Date:</strong> 2019/1/17</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2019/1/20</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -327,8 +327,8 @@
 </div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
-<div id="zip/4"> </div><div class="section" id="zip-4">
-<span id="zlist-0-zip-4"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">zip/4</span></code><a class="headerlink" href="#zip-4" title="Permalink to this headline">¶</a></h3>
+<div id="zip_at_index/4"> </div><div class="section" id="zip-at-index-4">
+<span id="zlist-0-zip-at-index-4"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">zip_at_index/4</span></code><a class="headerlink" href="#zip-at-index-4" title="Permalink to this headline">¶</a></h3>
 <p>Adds a zipper to a list opened at the given index and also returns the element at the index. Fails if the list is empty or the index (starting at 1) does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -339,11 +339,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">zip(Index,List,Zipper,Element)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zip_at_index(Index,List,Zipper,Element)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">zip(+natural,+list,--zipper,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zip_at_index(+natural,+list,--zipper,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </div>

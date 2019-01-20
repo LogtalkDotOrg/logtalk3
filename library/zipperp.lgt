@@ -21,9 +21,9 @@
 :- protocol(zipperp).
 
 	:- info([
-		version is 0.3,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/01/17,
+		date is 2019/01/20,
 		comment is 'Zipper protocol.',
 		see_also is [zlist]
 	]).
@@ -33,6 +33,13 @@
 	:- info(zip/2, [
 		comment is 'Adds a zipper to a compound term holding a sequence of elements. Fails if the sequence is empty.',
 		argnames is ['Sequence', 'Zipper']
+	]).
+
+	:- public(zip/3).
+	:- mode(zip(+sequence, --zipper, --term), zero_or_one).
+	:- info(zip/3, [
+		comment is 'Adds a zipper to a compound term holding a sequence of elements. Also returns the first element. Fails if the sequence is empty.',
+		argnames is ['Sequence', 'Zipper', 'First']
 	]).
 
 	:- public(unzip/2).

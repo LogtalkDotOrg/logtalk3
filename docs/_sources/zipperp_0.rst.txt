@@ -9,8 +9,8 @@
 Zipper protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 0.3
-| **Date:** 2019/1/17
+| **Version:** 1.0
+| **Date:** 2019/1/20
 
 | **Compilation flags:**
 |    ``static``
@@ -41,6 +41,27 @@ Adds a zipper to a compound term holding a sequence of elements. Fails if the se
 |    ``zip(Sequence,Zipper)``
 | **Mode and number of proofs:**
 |    ``zip(+sequence,--zipper)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="zip/3"> </div>
+
+.. index:: zip/3
+.. _zipperp/0::zip/3:
+
+``zip/3``
+^^^^^^^^^
+
+Adds a zipper to a compound term holding a sequence of elements. Also returns the first element. Fails if the sequence is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zip(Sequence,Zipper,First)``
+| **Mode and number of proofs:**
+|    ``zip(+sequence,--zipper,--term)`` - ``zero_or_one``
 
 
 .. raw:: html
