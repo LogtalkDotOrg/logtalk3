@@ -44,8 +44,13 @@ slide(6, 'Last slide').
 	]).
 
 	show(Slides, Closure) :-
+		% create a zipper from a list of slide indexes
 		zip(Slides, Zipper, First),
+		% display the first slide by calling the user-provided
+		% closure with the slide index as argument
 		display(First, Closure),
+		% do an interactive slideshow by reading
+		% and acting on the remote commands
 		remote(Command),
 		interact(Command, Zipper, Closure).
 
@@ -84,6 +89,7 @@ slide(6, 'Last slide').
 	remote(Command) :-
 		ask_question(question, slides, remote, valid, Command).
 
+	% table of valid remote commands
 	valid(n).
 	valid(p).
 	valid(f).
