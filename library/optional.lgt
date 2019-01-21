@@ -22,9 +22,9 @@
 :- object(optional).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/08/08,
+		date is 2019/01/21,
 		comment is 'Constructors for optional term references. An optional reference represents a term that may or may not be present. Optional references should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type "optional" for use with the "type" library object.'
@@ -46,9 +46,26 @@
 		argnames is ['Term', 'Reference']
 	]).
 
+	:- public(from_goal/3).
+	:- meta_predicate(from_goal(0, *, *)).
+	:- mode(from_goal(+callable, --term, --nonvar), one).
+	:- info(from_goal/3, [
+		comment is 'Constructs an optional reference by calling a goal that binds the term on success. Returns an empty optional reference if the goal fails or throws an error.',
+		argnames is ['Goal', 'Term', 'Reference']
+	]).
+
 	empty(empty).
 
 	of(Term, the(Term)).
+
+	from_goal(Goal, Term, Reference) :-
+		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
+				Reference = the(Term)
+			;	Reference = empty
+			)
+		;	Reference = empty
+		).
 
 	:- multifile(type::type/1).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog

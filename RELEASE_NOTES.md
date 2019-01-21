@@ -82,6 +82,10 @@ the coroutining predicates are made available by each Prolog system.
 
 * ADDED: Library zipper protocol, `zipperp`, and list zipper object, `zlist`.
 
+* ADDED: New optional term constructor, `from_goal/3`.
+
+* ADDED: New expected term constructors, `from_goal/3` and `from_goal/4`.
+
 * IMPROVED: Documentation cross-referencing for library entities.
 
 Tools

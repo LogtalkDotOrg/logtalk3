@@ -310,8 +310,8 @@
 <p>Constructors for expected term references. An expected reference contains either a term or an unexpected term. Expected references should be regarded as opaque terms and always used with the “expected(_)” object by passing the reference as a parameter.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.0</div>
-<div class="line"><strong>Date:</strong> 2017/12/16</div>
+<div class="line"><strong>Version:</strong> 1.1</div>
+<div class="line"><strong>Date:</strong> 2019/1/21</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -365,6 +365,54 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">of_expected(&#64;term,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div id="from_goal/4"> </div></div>
+<div class="section" id="from-goal-4">
+<span id="expected-0-from-goal-4"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">from_goal/4</span></code><a class="headerlink" href="#from-goal-4" title="Permalink to this headline">¶</a></h3>
+<p>Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses Failure to represent the failure.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">from_goal(Goal,Expected,Failure,Reference)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">from_goal(0,*,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">from_goal(+callable,--term,&#64;term,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div id="from_goal/3"> </div></div>
+<div class="section" id="from-goal-3">
+<span id="expected-0-from-goal-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">from_goal/3</span></code><a class="headerlink" href="#from-goal-3" title="Permalink to this headline">¶</a></h3>
+<p>Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses the atom “fail” to represent the failure.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">from_goal(Goal,Expected,Reference)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">from_goal(0,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">from_goal(+callable,--term,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </div>

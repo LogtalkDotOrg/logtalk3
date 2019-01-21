@@ -9,8 +9,8 @@
 Constructors for expected term references. An expected reference contains either a term or an unexpected term. Expected references should be regarded as opaque terms and always used with the "expected(_)" object by passing the reference as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.0
-| **Date:** 2017/12/16
+| **Version:** 1.1
+| **Date:** 2019/1/21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -63,6 +63,52 @@ Constructs an expected reference from a term.
 |    ``of_expected(Expected,Reference)``
 | **Mode and number of proofs:**
 |    ``of_expected(@term,--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="from_goal/4"> </div>
+
+.. index:: from_goal/4
+.. _expected/0::from_goal/4:
+
+``from_goal/4``
+^^^^^^^^^^^^^^^
+
+Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses Failure to represent the failure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``from_goal(Goal,Expected,Failure,Reference)``
+| **Meta-predicate template:**
+|    ``from_goal(0,*,*,*)``
+| **Mode and number of proofs:**
+|    ``from_goal(+callable,--term,@term,--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="from_goal/3"> </div>
+
+.. index:: from_goal/3
+.. _expected/0::from_goal/3:
+
+``from_goal/3``
+^^^^^^^^^^^^^^^
+
+Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses the atom "fail" to represent the failure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``from_goal(Goal,Expected,Reference)``
+| **Meta-predicate template:**
+|    ``from_goal(0,*,*)``
+| **Mode and number of proofs:**
+|    ``from_goal(+callable,--term,--nonvar)`` - ``one``
 
 
 Protected interface

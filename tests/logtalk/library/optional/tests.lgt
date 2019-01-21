@@ -22,15 +22,30 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2018/01/15,
+		date is 2019/01/21,
 		comment is 'Unit tests for the "optional" library.'
 	]).
 
 	:- discontiguous([
 		fails/1, succeeds/1, throws/2
 	]).
+
+	% from_goal/3 tests
+
+	succeeds(optional_from_goal_3_01) :-
+		optional::from_goal(Y is 1+2, Y, Ref), optional(Ref)::is_present.
+
+	succeeds(optional_from_goal_3_02) :-
+		optional::from_goal(Y is 1+2, Y, Ref), optional(Ref)::get(Term),
+		Term == 3.
+
+	succeeds(optional_from_goal_3_03) :-
+		optional::from_goal(Y is _, Y, Ref), optional(Ref)::is_empty.
+
+	succeeds(optional_from_goal_3_04) :-
+		optional::from_goal(2 is 3, _, Ref), optional(Ref)::is_empty.
 
 	% is_empty/0 tests
 

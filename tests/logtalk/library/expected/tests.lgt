@@ -32,6 +32,35 @@
 		fails/1, succeeds/1, throws/2
 	]).
 
+	% from_goal/4 tests
+
+	succeeds(expected_from_goal_4_01) :-
+		expected::from_goal(Y is 1+2, Y, failure, Ref), expected(Ref)::is_expected.
+
+	succeeds(expected_from_goal_4_02) :-
+		expected::from_goal(Y is 1+2, Y, failure, Ref), expected(Ref)::expected(Term),
+		Term == 3.
+
+	succeeds(expected_from_goal_4_03) :-
+		expected::from_goal(Y is _, Y, failure, Ref), expected(Ref)::is_unexpected.
+
+	succeeds(expected_from_goal_4_04) :-
+		expected::from_goal(2 is 3, _, failure, Ref), expected(Ref)::unexpected(Error),
+		writeln(Error),
+		Error == failure.
+
+	% from_goal/3 tests
+
+	succeeds(expected_from_goal_3_01) :-
+		expected::from_goal(Y is 1+2, Y, Ref), expected(Ref)::is_expected.
+
+	succeeds(expected_from_goal_3_02) :-
+		expected::from_goal(Y is 1+2, Y, Ref), expected(Ref)::expected(Term),
+		Term == 3.
+
+	succeeds(expected_from_goal_3_03) :-
+		expected::from_goal(Y is _, Y, Ref), expected(Ref)::is_unexpected.
+
 	% is_unexpected/0 tests
 
 	succeeds(expected_is_unexpected_1_01) :-

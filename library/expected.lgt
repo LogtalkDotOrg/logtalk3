@@ -21,9 +21,9 @@
 :- object(expected).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/12/16,
+		date is 2019/01/21,
 		comment is 'Constructors for expected term references. An expected reference contains either a term or an unexpected term. Expected references should be regarded as opaque terms and always used with the "expected(_)" object by passing the reference as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type "expected" for use with the "type" library object.'
@@ -45,9 +45,37 @@
 		argnames is ['Expected', 'Reference']
 	]).
 
+	:- public(from_goal/4).
+	:- meta_predicate(from_goal(0, *, *, *)).
+	:- mode(from_goal(+callable, --term, @term, --nonvar), one).
+	:- info(from_goal/4, [
+		comment is 'Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses Failure to represent the failure.',
+		argnames is ['Goal', 'Expected', 'Failure', 'Reference']
+	]).
+
+	:- public(from_goal/3).
+	:- meta_predicate(from_goal(0, *, *)).
+	:- mode(from_goal(+callable, --term, --nonvar), one).
+	:- info(from_goal/3, [
+		comment is 'Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses the atom "fail" to represent the failure.',
+		argnames is ['Goal', 'Expected', 'Reference']
+	]).
+
 	of_unexpected(Error, unexpected(Error)).
 
-	of_expected(Term, expected(Term)).
+	of_expected(Expected, expected(Expected)).
+
+	from_goal(Goal, Expected, Failure, Reference) :-
+		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
+				Reference = expected(Expected)
+			;	Reference = unexpected(Error)
+			)
+		;	Reference = unexpected(Failure)
+		).
+
+	from_goal(Goal, Expected, Reference) :-
+		from_goal(Goal, Expected, fail, Reference).
 
 	:- multifile(type::type/1).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog
