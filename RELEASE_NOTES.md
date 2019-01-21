@@ -86,6 +86,8 @@ the coroutining predicates are made available by each Prolog system.
 
 * ADDED: New expected term constructors, `from_goal/3` and `from_goal/4`.
 
+* ADDED: New expected term `or_else_throw/1` predicate.
+
 * IMPROVED: Documentation cross-referencing for library entities.
 
 Tools

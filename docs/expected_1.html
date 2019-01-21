@@ -356,7 +356,7 @@
 <div id="if_unexpected/1"> </div></div>
 <div class="section" id="if-unexpected-1">
 <span id="expected-1-if-unexpected-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">if_unexpected/1</span></code><a class="headerlink" href="#if-unexpected-1" title="Permalink to this headline">¶</a></h3>
-<p>Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise.</p>
+<p>Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise. Can be used to throw the exception hold by the expected reference by calling it the atom “throw”.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -563,7 +563,7 @@
 <div id="or_else_call/2"> </div></div>
 <div class="section" id="or-else-call-2">
 <span id="expected-1-or-else-call-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code><a class="headerlink" href="#or-else-call-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term. Can be used e.g. to throw the exception hold by the expected reference.</p>
+<p>Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -584,9 +584,29 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div id="or_else_throw/1"> </div></div>
+<div class="section" id="or-else-throw-1">
+<span id="expected-1-or-else-throw-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_throw/1</span></code><a class="headerlink" href="#or-else-throw-1" title="Permalink to this headline">¶</a></h3>
+<p>Returns the expected reference term if present. Throws the unexpected term as an error otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_throw(Expected)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_throw(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="or_else_fail/1"> </div></div>
 <div class="section" id="or-else-fail-1">
-<span id="expected-1-or-else-fail-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code><a class="headerlink" href="#or-else-fail-1" title="Permalink to this headline">¶</a></h3>
+<span id="expected-1-or-else-fail-1"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code><a class="headerlink" href="#or-else-fail-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term. Fails otherwise. Usually called to skip over empty expected reference holding unexpected terms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

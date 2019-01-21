@@ -165,6 +165,15 @@
 		expected::of_expected(1, Ref), expected(Ref)::or_else_call(Term, X = 0),
 		Term == 1, var(X).
 
+	% or_else_throw/1 tests
+
+	throws(expected_or_else_throw_1_01, instantiation_error) :-
+		expected::of_unexpected(instantiation_error, Ref), expected(Ref)::or_else_throw(_).
+
+	succeeds(expected_or_else_throw_1_02) :-
+		expected::of_expected(1, Ref), expected(Ref)::or_else_throw(Term),
+		Term == 1.
+
 	% or_else_fail/1 tests
 
 	fails(expected_or_else_fail_1_01) :-

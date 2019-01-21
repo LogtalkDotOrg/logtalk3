@@ -70,7 +70,7 @@ True if the expected reference holds an expected term. Avoid whenever possible b
 ``if_unexpected/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise.
+Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise. Can be used to throw the exception hold by the expected reference by calling it the atom "throw".
 
 | **Compilation flags:**
 |    ``static``
@@ -260,7 +260,7 @@ Returns the expected reference term if it does not hold an unexpected term or ap
 ``or_else_call/2``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term. Can be used e.g. to throw the exception hold by the expected reference.
+Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term.
 
 | **Compilation flags:**
 |    ``static``
@@ -271,6 +271,27 @@ Returns the expected reference term if it does not hold an unexpected term or ca
 |    ``or_else_call(*,0)``
 | **Mode and number of proofs:**
 |    ``or_else_call(--term,+callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="or_else_throw/1"> </div>
+
+.. index:: or_else_throw/1
+.. _expected/1::or_else_throw/1:
+
+``or_else_throw/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the expected reference term if present. Throws the unexpected term as an error otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_throw(Expected)``
+| **Mode and number of proofs:**
+|    ``or_else_throw(--term)`` - ``zero_or_one``
 
 
 .. raw:: html

@@ -137,7 +137,7 @@
 	:- meta_predicate(if_unexpected(1)).
 	:- mode(if_unexpected(+callable), zero_or_more).
 	:- info(if_unexpected/1, [
-		comment is 'Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise.',
+		comment is 'Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise. Can be used to throw the exception hold by the expected reference by calling it the atom "throw".',
 		argnames is ['Closure']
 	]).
 
@@ -201,8 +201,15 @@
 	:- meta_predicate(or_else_call(*, 0)).
 	:- mode(or_else_call(--term, +callable), zero_or_one).
 	:- info(or_else_call/2, [
-		comment is 'Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term. Can be used e.g. to throw the exception hold by the expected reference.',
+		comment is 'Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term.',
 		argnames is ['Expected', 'Goal']
+	]).
+
+	:- public(or_else_throw/1).
+	:- mode(or_else_throw(--term), zero_or_one).
+	:- info(or_else_throw/1, [
+		comment is 'Returns the expected reference term if present. Throws the unexpected term as an error otherwise.',
+		argnames is ['Expected']
 	]).
 
 	:- public(or_else_fail/1).
@@ -283,6 +290,14 @@
 		(	Reference = expected(Expected) ->
 			true
 		;	once(Goal)	
+		).
+
+	or_else_throw(Expected) :-
+		parameter(1, Reference),
+		(	Reference = expected(Expected) ->
+			true
+		;	Reference = unexpected(Error),
+			throw(Error)
 		).
 
 	or_else_fail(Expected) :-
