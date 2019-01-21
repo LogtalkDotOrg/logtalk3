@@ -21,9 +21,9 @@
 :- object(data_acquisition).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/06/10,
+		date is 2019/01/21,
 		comment is 'Data acquisition example, which is fully decoupled from data processing details.'
 	]).
 
@@ -48,16 +48,8 @@
 		% there might be some missing data; we delegate handling these
 		% cases to the code that processes the data by using expected
 		% terms that either hold the parent name or error information
-		(	parent(Father, Person),
-			male(Father) ->
-			expected::of_expected(Father, ExpectedFather)
-		;	expected::of_unexpected(missing_father, ExpectedFather)
-		),
-		(	parent(Mother, Person),
-			female(Mother) ->
-			expected::of_expected(Mother, ExpectedMother)
-		;	expected::of_unexpected(missing_mother, ExpectedMother)
-		).
+		expected::from_goal((parent(Father,Person), male(Father)), Father, missing_father, ExpectedFather),
+		expected::from_goal((parent(Mother,Person), female(Mother)), Mother, missing_mother, ExpectedMother).
 
 :- end_object.
 
