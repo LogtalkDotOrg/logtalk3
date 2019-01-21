@@ -184,16 +184,32 @@
 		expected::of_expected(1, Ref),
 		type::check(expected, Ref).
 
-	throws(expected_type_checking_support_03, instantiation_error) :-
+	succeeds(expected_type_checking_support_03) :-
+		expected::from_goal(Y is 1+2, Y, failure, Ref),
+		type::check(expected, Ref).
+
+	succeeds(expected_type_checking_support_04) :-
+		expected::from_goal(Y is _, Y, failure, Ref),
+		type::check(expected, Ref).
+
+	succeeds(expected_type_checking_support_05) :-
+		expected::from_goal(Y is 1+2, Y, Ref),
+		type::check(expected, Ref).
+
+	succeeds(expected_type_checking_support_06) :-
+		expected::from_goal(Y is _, Y, Ref),
+		type::check(expected, Ref).
+
+	throws(expected_type_checking_support_07, instantiation_error) :-
 		type::check(expected, _).
 
-	throws(expected_type_checking_support_04, type_error(expected,12345)) :-
+	throws(expected_type_checking_support_08, type_error(expected,12345)) :-
 		type::check(expected, 12345).
 
-	throws(expected_type_checking_support_05, type_error(expected,foobar)) :-
+	throws(expected_type_checking_support_09, type_error(expected,foobar)) :-
 		type::check(expected, foobar).
 
-	throws(expected_type_checking_support_06, type_error(expected,foo(bar,baz))) :-
+	throws(expected_type_checking_support_10, type_error(expected,foo(bar,baz))) :-
 		type::check(expected, foo(bar,baz)).
 
 	% auxiliary predicates

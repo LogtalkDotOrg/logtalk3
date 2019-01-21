@@ -171,16 +171,24 @@
 		optional::of(1, Ref),
 		type::check(optional, Ref).
 
-	throws(optional_type_checking_support_03, instantiation_error) :-
+	succeeds(optional_type_checking_support_03) :-
+		optional::from_goal(Y is 1+2, Y, Ref),
+		type::check(optional, Ref).
+
+	succeeds(optional_type_checking_support_04) :-
+		optional::from_goal(Y is _, Y, Ref),
+		type::check(optional, Ref).
+
+	throws(optional_type_checking_support_05, instantiation_error) :-
 		type::check(optional, _).
 
-	throws(optional_type_checking_support_04, type_error(optional,12345)) :-
+	throws(optional_type_checking_support_06, type_error(optional,12345)) :-
 		type::check(optional, 12345).
 
-	throws(optional_type_checking_support_05, type_error(optional,foobar)) :-
+	throws(optional_type_checking_support_07, type_error(optional,foobar)) :-
 		type::check(optional, foobar).
 
-	throws(optional_type_checking_support_06, type_error(optional,foo(bar,baz))) :-
+	throws(optional_type_checking_support_08, type_error(optional,foo(bar,baz))) :-
 		type::check(optional, foo(bar,baz)).
 
 	% auxiliary predicates
