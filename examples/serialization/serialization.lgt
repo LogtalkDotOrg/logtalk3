@@ -37,7 +37,7 @@
 	:- public(restore/1).
 	:- mode(restore(+atom), one).
 	:- info(restore/1, [
-		comment is 'Resrores from a file all serialized dynamic objects.',
+		comment is 'Restores from a file all serialized dynamic objects.',
 		argnames is ['File']
 	]).
 

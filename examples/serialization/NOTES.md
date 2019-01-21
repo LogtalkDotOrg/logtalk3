@@ -24,4 +24,4 @@ This example illustrates a simple solution for serializing dynamic objects
 that conform to a given protocol. The serialization data is saved to a file.
 Restoring this file recreates the serialized objects. Object identities are
 not perserved however. This example assumes that the dynamic objects contain
-only facts.
+only facts. See also the `persistency` example.
