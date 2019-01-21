@@ -24,12 +24,29 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/06/10,
+		date is 2019/01/21,
 		comment is 'Unit tests for the "optionals" example.'
 	]).
 
-	test(optionals_1) :-
-		^^suppress_text_output,
-		data_processing::print_extra.
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(optionals_1, true(Assertion)) :-
+			^^set_text_output(''),
+			data_processing::print_extra,
+			^^text_output_assertion('The Philosopher''s Stone (with extra quidditch_set)\r\nThe Chamber of Secrets (with extra map)\r\nThe Half-Blood Prince (with extra audio_cd)\r\nThe Deathly Hallows (with extra horcrux_set)\r\n', Assertion).
+
+	:- else.
+
+		test(optionals_1, true(Assertion)) :-
+			^^set_text_output(''),
+			data_processing::print_extra,
+			^^text_output_assertion('The Philosopher''s Stone (with extra quidditch_set)\nThe Chamber of Secrets (with extra map)\nThe Half-Blood Prince (with extra audio_cd)\nThe Deathly Hallows (with extra horcrux_set)\n', Assertion).
+
+	:- endif.
 
 :- end_object.

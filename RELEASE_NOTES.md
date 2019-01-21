@@ -78,9 +78,9 @@ implementation of the de facto standard `length/2` predicate when available.
 and YAP as backend Prolog systems. Provides a portable abstraction over how
 the coroutining predicates are made available by each Prolog system.
 
-* ADDED: Predicate `remove_duplicates/2` to the library list entities.
-
 * ADDED: Library zipper protocol, `zipperp`, and list zipper object, `zlist`.
+
+* ADDED: Predicate `remove_duplicates/2` to the library list entities.
 
 * ADDED: New optional term constructor, `from_goal/3`.
 
@@ -128,6 +128,9 @@ Examples
 
 * IMPROVED: Implementation of the hill climbing search method found in the
 `searching` example.
+
+* UPDATED: The `optionals` example to use the new `from_goal/3` optional term
+constructor.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

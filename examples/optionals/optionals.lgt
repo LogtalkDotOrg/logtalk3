@@ -37,16 +37,16 @@ extra('The Deathly Hallows',      horcrux_set).
 :- object(data_acquisition).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/06/10,
+		date is 2019/01/21,
 		comment is 'Data acquisition example, decoupled from data processing.'
 	]).
 
 	:- public(book_extra/1).
 	:- mode(book_extra(-pair(atom,optional)), zero_or_more).
 	:- info(book_extra/1, [
-		comment is '.'
+		comment is 'Returns a pair book-optional where the optional represents the possible presence of a book extra material.'
 	]).
 
 	:- uses(user, [
@@ -58,10 +58,7 @@ extra('The Deathly Hallows',      horcrux_set).
 		% instead of using a special value to represent the absence of
 		% a book extra, we use an optional to represent the possible
 		% existence of extras
-		(	extra(Book, Extra) ->
-			optional::of(Extra, Optional)
-		;	optional::empty(Optional)
-		).
+		optional::from_goal(extra(Book, Extra), Extra, Optional).
 
 :- end_object.
 
