@@ -32,4 +32,6 @@ as C++. For example:
 
 https://blog.tartanllama.xyz/optional-expected/ 
 
-For details please see the comments in the  `cascade.lgt` source file.
+For details please see the comments in the `cascade.lgt` source file.
+
+See also the `expecteds` and `optionals` examples. 

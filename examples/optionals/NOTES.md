@@ -29,3 +29,5 @@ values.
 
 For a description of this example, please see the comments in the 
 `optionals.lgt` source file.
+
+See also the `expecteds` and `cascade` examples. 
