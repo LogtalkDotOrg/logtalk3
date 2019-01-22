@@ -115,6 +115,8 @@ Tests
 
 * ADDED: Unit tests for the new library list zipper predicates.
 
+* ADDED: Unit tests for the de facto Prolog standard `length/2` predicate.
+
 * IMPROVED: Unit tests for the entity creation built-in predicates.
 
 Examples
