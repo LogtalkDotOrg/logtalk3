@@ -109,6 +109,11 @@ Follows a short description of each included example (in alphabetical order):
 - `carengines`  
 	example of extending categories using car engines
 
+- `cascade`  
+	example of using expected terms to call a conjunction of goals
+	where any of them may cause an error condition without using the
+	traditional catch/throw mechanism
+
 - `cc`  
 	example of using conditional compilation directives to write code
 	portable across several backend Prolog compilers

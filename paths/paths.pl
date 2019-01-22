@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on January 17, 2019
+%  Last updated on January 22, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -115,6 +115,7 @@ logtalk_library_path(bricks, examples('bricks/')).
 logtalk_library_path(buckets, threads('buckets/')).
 logtalk_library_path(buffer, threads('buffer/')).
 logtalk_library_path(carengines, examples('carengines/')).
+logtalk_library_path(cascade, examples('cascade/')).
 logtalk_library_path(cc, examples('cc/')).
 logtalk_library_path(checkpoint, threads('checkpoint/')).
 logtalk_library_path(classmethods, examples('classmethods/')).

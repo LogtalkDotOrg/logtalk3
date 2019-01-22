@@ -126,6 +126,10 @@ Examples
 
 * ADDED: Simple example, `slides`, of using the library list zipper support.
 
+* ADDED: Simple example, `cascade`, of using expected terms as an alternative
+to the traditional catch/throw mechanism to call a conjunction of goals where
+any of them may cause an error condition.
+
 * ADDED: Unit tests for the `metaclasses` and `msglog` examples.
 
 * IMPROVED: Implementation of the hill climbing search method found in the
