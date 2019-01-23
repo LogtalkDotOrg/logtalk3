@@ -307,11 +307,11 @@
   <p id="maybe-0"><span id="index-0"></span><strong>object</strong></p>
 <div class="section" id="maybe">
 <h1><code class="docutils literal notranslate"><span class="pre">maybe</span></code><a class="headerlink" href="#maybe" title="Permalink to this headline">¶</a></h1>
-<p>Types and predicates for type-checking and handling optionals. Inspired by Haskell.</p>
+<p>Types and predicates for type-checking and handling optional term references. Inspired by Haskell.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0.3</div>
-<div class="line"><strong>Date:</strong> 2017/12/18</div>
+<div class="line"><strong>Version:</strong> 0.4</div>
+<div class="line"><strong>Date:</strong> 2019/1/23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -332,7 +332,7 @@
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="cat/2"> </div><div class="section" id="cat-2">
 <span id="maybe-0-cat-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">cat/2</span></code><a class="headerlink" href="#cat-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns the values stored in the non-empty optionals.</p>
+<p>Returns the terms stored in the non-empty references.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">cat(Optionals,Values)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cat(References,Values)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -366,7 +366,7 @@
 <div class="section" id="remarks">
 <h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>Type maybe(Type)</strong>: Allows type-checking optional references where the optional term must be of the given type.</li>
+<li><strong>Type maybe(Type)</strong>: Allows type-checking optional term references where the optional term must be of the given type.</li>
 <li><strong>QuickCheck support</strong>: Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.</li>
 </ul>
 <div class="admonition seealso">

@@ -6,11 +6,11 @@
 ``optional``
 ============
 
-Constructors for optional term references. An optional reference represents a term that may or may not be present. Optional references should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.
+Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.3
-| **Date:** 2019/1/21
+| **Version:** 1.4
+| **Date:** 2019/1/23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,7 +33,7 @@ Public interface
 ``empty/1``
 ^^^^^^^^^^^
 
-Constructs an empty optional reference.
+Constructs an empty reference.
 
 | **Compilation flags:**
 |    ``static``
@@ -54,7 +54,7 @@ Constructs an empty optional reference.
 ``of/2``
 ^^^^^^^^
 
-Constructs an optional reference from a term.
+Constructs a reference holding a term.
 
 | **Compilation flags:**
 |    ``static``
@@ -75,7 +75,7 @@ Constructs an optional reference from a term.
 ``from_goal/3``
 ^^^^^^^^^^^^^^^
 
-Constructs an optional reference by calling a goal that binds the term on success. Returns an empty optional reference if the goal fails or throws an error.
+Constructs a reference by calling Goal that binds and holds Term on success. Returns an empty reference if the goal fails or throws an error.
 
 | **Compilation flags:**
 |    ``static``

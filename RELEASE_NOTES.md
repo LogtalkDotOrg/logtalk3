@@ -88,6 +88,8 @@ the coroutining predicates are made available by each Prolog system.
 
 * ADDED: New expected term `or_else_throw/1` predicate.
 
+* IMPROVED: Descriptions of the `optional` and `expected` library predicates.
+
 * IMPROVED: Documentation cross-referencing for library entities.
 
 * UPDATED: The instructions on the `parallel_logtalk_processes_setup.pl`

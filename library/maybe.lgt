@@ -21,12 +21,12 @@
 :- object(maybe).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2017/12/18,
-		comment is 'Types and predicates for type-checking and handling optionals. Inspired by Haskell.',
+		date is 2019/01/23,
+		comment is 'Types and predicates for type-checking and handling optional term references. Inspired by Haskell.',
 		remarks is [
-			'Type maybe(Type)' - 'Allows type-checking optional references where the optional term must be of the given type.',
+			'Type maybe(Type)' - 'Allows type-checking optional term references where the optional term must be of the given type.',
 			'QuickCheck support' - 'Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.'
 		],
 		see_also is [optional, optional(_), type, arbitrary]
@@ -35,8 +35,8 @@
 	:- public(cat/2).
 	:- mode(cat(+list(optional), -list), one).
 	:- info(cat/2, [
-		comment is 'Returns the values stored in the non-empty optionals.',
-		argnames is ['Optionals', 'Values']
+		comment is 'Returns the terms stored in the non-empty references.',
+		argnames is ['References', 'Values']
 	]).
 
 	:- multifile(type::type/1).
@@ -80,11 +80,11 @@
 		).
 
 	cat([], []).
-	cat([Optional| Optionals], Values) :-
-		(	optional(Optional)::or_else_fail(Value) ->
-			Values = [Value| RestValues]
-		;	Values = RestValues
+	cat([Reference| References], Terms) :-
+		(	optional(Reference)::or_else_fail(Term) ->
+			Terms = [Term| RestTerms]
+		;	Terms = RestTerms
 		),
-		cat(Optionals, RestValues).
+		cat(References, RestValues).
 
 :- end_object.

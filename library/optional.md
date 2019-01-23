@@ -24,9 +24,9 @@ This library provides an implementation of *optional term references* with
 an API modeled after the Java 8 `Optional` class (mainly due to this library
 being requested by users working in Logtalk/Java hybrid applications). An
 optional term reference is an opaque term that may or may not contain a
-non-null term. Optional term references avoid forcing the user to define a
-representation for a null term by providing an API with predicates that
-depend on the presence or absence of an optional term. Optional term
+term. Optional term references avoid forcing the user to define a
+representation for the absence of a term by providing an API with predicates
+that depend on the presence or absence of an optional term. Optional term
 references also allow separating the code that retrieves or constructs
 optional terms from the code that processes them, which is then free to
 deal if necessary and at its convenience with any case where the optional

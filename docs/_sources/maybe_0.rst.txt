@@ -6,11 +6,11 @@
 ``maybe``
 =========
 
-Types and predicates for type-checking and handling optionals. Inspired by Haskell.
+Types and predicates for type-checking and handling optional term references. Inspired by Haskell.
 
 | **Author:** Paulo Moura
-| **Version:** 0.3
-| **Date:** 2017/12/18
+| **Version:** 0.4
+| **Date:** 2019/1/23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -35,13 +35,13 @@ Public interface
 ``cat/2``
 ^^^^^^^^^
 
-Returns the values stored in the non-empty optionals.
+Returns the terms stored in the non-empty references.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``cat(Optionals,Values)``
+|    ``cat(References,Values)``
 | **Mode and number of proofs:**
 |    ``cat(+list(optional),-list)`` - ``one``
 
@@ -64,7 +64,7 @@ Operators
 Remarks
 -------
 
-* **Type maybe(Type)**: Allows type-checking optional references where the optional term must be of the given type.
+* **Type maybe(Type)**: Allows type-checking optional term references where the optional term must be of the given type.
 
 * **QuickCheck support**: Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.
 

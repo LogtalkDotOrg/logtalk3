@@ -21,10 +21,10 @@
 :- object(either).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/06/04,
-		comment is 'Types and predicates for extended type-checking of expected term references and for handling list of expected term references.',
+		date is 2019/01/23,
+		comment is 'Types and predicates for extended type-checking of expected term references and for handling lists of expected term references.',
 		remarks is [
 			'Type either(ExpectedType, UnexpectedType)' - 'Allows type-checking expected references where the expected and unexpected terms must be of the given types.',
 			'QuickCheck support' - 'Defines clauses for the type::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpectedType) type.'
@@ -35,21 +35,21 @@
 	:- public(expecteds/2).
 	:- mode(expecteds(+list(expected), -list), one).
 	:- info(expecteds/2, [
-		comment is 'Returns the values stored in the expected term references that hold an expected term.',
+		comment is 'Returns the terms stored in the references that hold an expected term.',
 		argnames is ['References', 'Expecteds']
 	]).
 
 	:- public(unexpecteds/2).
 	:- mode(unexpecteds(+list(expected), -list), one).
 	:- info(unexpecteds/2, [
-		comment is 'Returns the values stored in the expected term references that hold an expected term.',
+		comment is 'Returns the terms stored in the references that hold an expected term.',
 		argnames is ['References', 'Unexpecteds']
 	]).
 
 	:- public(partition/3).
 	:- mode(partition(+list(expected), -list, -list), one).
 	:- info(partition/3, [
-		comment is 'Retrieves and partitions the values stored in the expected term references.',
+		comment is 'Retrieves and partitions the terms hold by the references.',
 		argnames is ['References', 'Expecteds', 'Unexpecteds']
 	]).
 

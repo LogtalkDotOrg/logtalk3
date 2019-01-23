@@ -6,11 +6,11 @@
 ``expected``
 ============
 
-Constructors for expected term references. An expected reference contains either a term or an unexpected term. Expected references should be regarded as opaque terms and always used with the "expected(_)" object by passing the reference as a parameter.
+Constructors for expected term references. A reference contains either an expected term or an unexpected term. References should be regarded as opaque terms and always used with the "expected(_)" object by passing the reference as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.1
-| **Date:** 2019/1/21
+| **Version:** 1.2
+| **Date:** 2019/1/23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,7 +33,7 @@ Public interface
 ``of_unexpected/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Constructs an expected reference from an unexpected term.
+Constructs a reference from an unexpected term.
 
 | **Compilation flags:**
 |    ``static``
@@ -54,7 +54,7 @@ Constructs an expected reference from an unexpected term.
 ``of_expected/2``
 ^^^^^^^^^^^^^^^^^
 
-Constructs an expected reference from a term.
+Constructs a reference from an expected term.
 
 | **Compilation flags:**
 |    ``static``
@@ -75,7 +75,7 @@ Constructs an expected reference from a term.
 ``from_goal/4``
 ^^^^^^^^^^^^^^^
 
-Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses Failure to represent the failure.
+Constructs a reference by calling Goal that binds and holds Expected on success. Otherwise returns a reference with the unexpected goal error or failure represented by the Failure argument.
 
 | **Compilation flags:**
 |    ``static``
@@ -98,7 +98,7 @@ Constructs an expected reference by calling Goal that binds Expected on success.
 ``from_goal/3``
 ^^^^^^^^^^^^^^^
 
-Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses the atom "fail" to represent the failure.
+Constructs a reference by calling Goal that binds and uses Expected on success. Otherwise returns a reference with the unexpected goal error or failure represented by the atom "fail".
 
 | **Compilation flags:**
 |    ``static``

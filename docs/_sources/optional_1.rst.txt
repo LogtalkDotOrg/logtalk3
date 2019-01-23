@@ -6,11 +6,11 @@
 ``optional(Reference)``
 =======================
 
-Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.
+Optional reference predicates. Requires passing a reference constructed using the "optional" object as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.4
-| **Date:** 2018/7/11
+| **Version:** 1.5
+| **Date:** 2019/1/23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,7 +32,7 @@ Public interface
 ``is_empty/0``
 ^^^^^^^^^^^^^^
 
-True if the optional reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.
+True if the reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -51,7 +51,7 @@ True if the optional reference is empty. Avoid whenever possible by using instea
 ``is_present/0``
 ^^^^^^^^^^^^^^^^
 
-True if the optional reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.
+True if the reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -70,7 +70,7 @@ True if the optional reference holds a term. Avoid whenever possible by using in
 ``if_empty/1``
 ^^^^^^^^^^^^^^
 
-Calls a goal if the optional reference is empty. Succeeds otherwise.
+Calls a goal if the reference is empty. Succeeds otherwise.
 
 | **Compilation flags:**
 |    ``static``
@@ -93,7 +93,7 @@ Calls a goal if the optional reference is empty. Succeeds otherwise.
 ``if_present/1``
 ^^^^^^^^^^^^^^^^
 
-Applies a closure with the optional reference value as additional argument if not empty. Succeeds otherwise.
+Applies a closure if the reference holds a term using the term as additional argument. Succeeds otherwise.
 
 | **Compilation flags:**
 |    ``static``
@@ -116,7 +116,7 @@ Applies a closure with the optional reference value as additional argument if no
 ``filter/2``
 ^^^^^^^^^^^^
 
-Returns the optional reference when it is non-empty and its value satisfies a closure. Otherwise returns an empty optional.
+Returns the reference when it is non-empty and the term it holds satisfies a closure. Otherwise returns an empty reference.
 
 | **Compilation flags:**
 |    ``static``
@@ -139,7 +139,7 @@ Returns the optional reference when it is non-empty and its value satisfies a cl
 ``map/2``
 ^^^^^^^^^
 
-When the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.
+When the reference is non-empty and mapping a closure with the term it holds and the new term as additional arguments is successful, returns a reference with the new term. Otherwise returns an empty reference.
 
 | **Compilation flags:**
 |    ``static``
@@ -162,7 +162,7 @@ When the optional reference is non-empty and mapping a closure with the optional
 ``flat_map/2``
 ^^^^^^^^^^^^^^
 
-When the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.
+When the reference is non-empty and mapping a closure with the optional tern and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.
 
 | **Compilation flags:**
 |    ``static``
@@ -185,7 +185,7 @@ When the optional reference is non-empty and mapping a closure with the optional
 ``get/1``
 ^^^^^^^^^
 
-Returns the optional reference term if not empty. Throws an error otherwise.
+Returns the term hold by the reference if not empty. Throws an error otherwise.
 
 | **Compilation flags:**
 |    ``static``
@@ -210,7 +210,7 @@ Returns the optional reference term if not empty. Throws an error otherwise.
 ``or_else/2``
 ^^^^^^^^^^^^^
 
-Returns the optional reference term if not empty or the given default term if the optional is empty.
+Returns the term hold by the reference if not empty or the given default term if the reference is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -231,7 +231,7 @@ Returns the optional reference term if not empty or the given default term if th
 ``or_else_get/2``
 ^^^^^^^^^^^^^^^^^
 
-Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty. Throws an error when the optional is empty and a term cannot be computed using the given closure.
+Returns the term hold by the reference if not empty. Applies a closure to compute the term otherwise. Throws an error when the reference is empty and the term cannot be computed.
 
 | **Compilation flags:**
 |    ``static``
@@ -244,7 +244,7 @@ Returns the optional reference term if not empty or applies a closure to compute
 |    ``or_else_get(--term,+callable)`` - ``one``
 
 | **Exceptions:**
-|    Optional is empty and a term cannot be computed:
+|    Reference is empty and the term cannot be computed:
 |        ``existence_error(optional_term,Reference)``
 
 
@@ -258,7 +258,7 @@ Returns the optional reference term if not empty or applies a closure to compute
 ``or_else_call/2``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Can be used e.g. to generate an exception for empty optionals.
+Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty. Can be used e.g. to generate an exception for empty optionals.
 
 | **Compilation flags:**
 |    ``static``
@@ -281,7 +281,7 @@ Returns the optional reference term if not empty or calls a goal deterministical
 ``or_else_fail/1``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the optional reference term if not empty. Fails otherwise. Usually called to skip over empty optionals.
+Returns the term hold by the reference if not empty. Fails otherwise. Usually called to skip over empty references.
 
 | **Compilation flags:**
 |    ``static``

@@ -307,11 +307,11 @@
   <p id="expected-0"><span id="index-0"></span><strong>object</strong></p>
 <div class="section" id="expected">
 <h1><code class="docutils literal notranslate"><span class="pre">expected</span></code><a class="headerlink" href="#expected" title="Permalink to this headline">¶</a></h1>
-<p>Constructors for expected term references. An expected reference contains either a term or an unexpected term. Expected references should be regarded as opaque terms and always used with the “expected(_)” object by passing the reference as a parameter.</p>
+<p>Constructors for expected term references. A reference contains either an expected term or an unexpected term. References should be regarded as opaque terms and always used with the “expected(_)” object by passing the reference as a parameter.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.1</div>
-<div class="line"><strong>Date:</strong> 2019/1/21</div>
+<div class="line"><strong>Version:</strong> 1.2</div>
+<div class="line"><strong>Date:</strong> 2019/1/23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -330,7 +330,7 @@
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="of_unexpected/2"> </div><div class="section" id="of-unexpected-2">
 <span id="expected-0-of-unexpected-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">of_unexpected/2</span></code><a class="headerlink" href="#of-unexpected-2" title="Permalink to this headline">¶</a></h3>
-<p>Constructs an expected reference from an unexpected term.</p>
+<p>Constructs a reference from an unexpected term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -350,7 +350,7 @@
 <div id="of_expected/2"> </div></div>
 <div class="section" id="of-expected-2">
 <span id="expected-0-of-expected-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">of_expected/2</span></code><a class="headerlink" href="#of-expected-2" title="Permalink to this headline">¶</a></h3>
-<p>Constructs an expected reference from a term.</p>
+<p>Constructs a reference from an expected term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -370,7 +370,7 @@
 <div id="from_goal/4"> </div></div>
 <div class="section" id="from-goal-4">
 <span id="expected-0-from-goal-4"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">from_goal/4</span></code><a class="headerlink" href="#from-goal-4" title="Permalink to this headline">¶</a></h3>
-<p>Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses Failure to represent the failure.</p>
+<p>Constructs a reference by calling Goal that binds and holds Expected on success. Otherwise returns a reference with the unexpected goal error or failure represented by the Failure argument.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -394,7 +394,7 @@
 <div id="from_goal/3"> </div></div>
 <div class="section" id="from-goal-3">
 <span id="expected-0-from-goal-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">from_goal/3</span></code><a class="headerlink" href="#from-goal-3" title="Permalink to this headline">¶</a></h3>
-<p>Constructs an expected reference by calling Goal that binds Expected on success. Otherwise returns an expected reference with the unexpected goal error or failure. Uses the atom “fail” to represent the failure.</p>
+<p>Constructs a reference by calling Goal that binds and uses Expected on success. Otherwise returns a reference with the unexpected goal error or failure represented by the atom “fail”.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
