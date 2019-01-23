@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Parallel Logtalk processes setup for selected backend Prolog compilers
-%  Last updated on December 3, 2018
+%  Last updated on January 22, 2019
 %  
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -86,7 +86,10 @@
 
 :- elif(current_prolog_flag(dialect, sicstus)).
 
-	% usage: cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_sicstus.pl" > combined.pl && sicstus -l combined.pl
+	% usage on SICStus Prolog 4.4.1 and earlier versions: 
+	%   cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_sicstus.pl" > combined.pl && sicstus -l combined.pl
+	% usage on SICStus Prolog 4.5.0 and later versions: 
+	%   sicstus -l parallel_logtalk_processes_setup.pl -l "$LOGTALKHOME/integration/logtalk_sicstus.pl"
 
 	:- use_module(library(system), [environ/2]).
 	:- use_module(library(system3), [pid/1]).

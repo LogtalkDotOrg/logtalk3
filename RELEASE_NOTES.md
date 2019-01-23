@@ -90,6 +90,10 @@ the coroutining predicates are made available by each Prolog system.
 
 * IMPROVED: Documentation cross-referencing for library entities.
 
+* UPDATED: The instructions on the `parallel_logtalk_processes_setup.pl`
+sample code for SICStus Prolog to take into account the changes in the new
+4.5.0 release.
+
 Tools
 -----
 
@@ -135,8 +139,9 @@ any of them may cause an error condition.
 * IMPROVED: Implementation of the hill climbing search method found in the
 `searching` example.
 
-* UPDATED: The `optionals` example to use the new `from_goal/3` optional term
-constructor.
+* UPDATED: The `optionals` example to use the new `from_goal/3` constructor.
+
+* UPDATED: The `expecteds` example to use the new `from_goal/4` constructor.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
