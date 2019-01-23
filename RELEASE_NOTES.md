@@ -145,6 +145,12 @@ any of them may cause an error condition.
 
 * UPDATED: The `expecteds` example to use the new `from_goal/4` constructor.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installation script to also detect SICStus Prolog
+4.5.x versions.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
