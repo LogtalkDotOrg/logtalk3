@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2017/12/27,
+		date is 2019/01/23,
 		comment is 'Unit tests for the "expected" library.'
 	]).
 
@@ -46,7 +46,6 @@
 
 	succeeds(expected_from_goal_4_04) :-
 		expected::from_goal(2 is 3, _, failure, Ref), expected(Ref)::unexpected(Error),
-		writeln(Error),
 		Error == failure.
 
 	% from_goal/3 tests
