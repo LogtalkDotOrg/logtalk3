@@ -22,15 +22,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2019/01/23,
+		date is 2019/01/24,
 		comment is 'Unit tests for the "expected" library.'
 	]).
 
 	:- discontiguous([
 		fails/1, succeeds/1, throws/2
 	]).
+
+	cover(expected).
+	cover(expected(_)).
+	cover(either).
 
 	% from_goal/4 tests
 
@@ -219,6 +223,112 @@
 
 	throws(expected_type_checking_support_10, type_error(expected,foo(bar,baz))) :-
 		type::check(expected, foo(bar,baz)).
+
+	% expecteds/2 tests
+
+	succeeds(either_expecteds_2_01) :-
+		either::expecteds([], Terms),
+		Terms == [].
+
+	succeeds(either_expecteds_2_02) :-
+		expected::of_unexpected(e1, Ref1),
+		expected::of_expected(1, Ref2),
+		expected::of_unexpected(e2, Ref3),
+		expected::of_expected(2, Ref4),
+		either::expecteds([Ref1, Ref2, Ref3, Ref4], Terms),
+		Terms == [1, 2].
+
+	% unexpecteds/2 tests
+
+	succeeds(either_unexpecteds_2_01) :-
+		either::unexpecteds([], Terms),
+		Terms == [].
+
+	succeeds(either_unexpecteds_2_02) :-
+		expected::of_unexpected(e1, Ref1),
+		expected::of_expected(1, Ref2),
+		expected::of_unexpected(e2, Ref3),
+		expected::of_expected(2, Ref4),
+		either::unexpecteds([Ref1, Ref2, Ref3, Ref4], Terms),
+		Terms == [e1, e2].
+
+	% partition/3 tests
+
+	succeeds(either_partition_3_01) :-
+		either::partition([], Expecteds, Unexpecteds),
+		Expecteds == [],
+		Unexpecteds == [].
+
+	succeeds(either_partition_3_02) :-
+		expected::of_unexpected(e1, Ref1),
+		expected::of_expected(1, Ref2),
+		expected::of_unexpected(e2, Ref3),
+		expected::of_expected(2, Ref4),
+		either::partition([Ref1, Ref2, Ref3, Ref4], Expecteds, Unexpecteds),
+		Expecteds == [1, 2],
+		Unexpecteds == [e1, e2].
+
+	% "either" type tests
+
+	succeeds(either_type_checking_support_01) :-
+		expected::of_unexpected(a, Ref),
+		type::check(either(integer, atom), Ref).
+
+	succeeds(either_type_checking_support_02) :-
+		expected::of_expected(1, Ref),
+		type::check(either(integer, atom), Ref).
+
+	succeeds(either_type_checking_support_03) :-
+		expected::from_goal(Y is 1+2, Y, Ref),
+		type::check(either(integer, atom), Ref).
+
+	succeeds(either_type_checking_support_04) :-
+		expected::from_goal(2 is 3, _, Ref),
+		type::check(either(integer, atom), Ref).
+
+	succeeds(either_type_checking_support_05) :-
+		expected::from_goal(Y is 1+2, Y, a, Ref),
+		type::check(either(integer, atom), Ref).
+
+	succeeds(either_type_checking_support_06) :-
+		expected::from_goal(2 is 3, _, a, Ref),
+		type::check(either(integer, atom), Ref).
+
+	throws(either_type_checking_support_07, instantiation_error) :-
+		type::check(either(integer, atom), _).
+
+	throws(either_type_checking_support_08, type_error(expected,12345)) :-
+		type::check(either(integer, atom), 12345).
+
+	throws(either_type_checking_support_09, type_error(expected,foobar)) :-
+		type::check(either(integer, atom), foobar).
+
+	throws(either_type_checking_support_10, type_error(expected,foo(bar,baz))) :-
+		type::check(either(integer, atom), foo(bar,baz)).
+
+	throws(either_type_checking_support_11, type_error(integer,a)) :-
+		expected::of_expected(a, Ref),
+		type::check(either(integer, atom), Ref).
+
+	throws(either_type_checking_support_12, type_error(atom,1)) :-
+		expected::of_unexpected(1, Ref),
+		type::check(either(integer, atom), Ref).
+
+	throws(either_type_checking_support_13, type_error(atom,3)) :-
+		expected::from_goal(Y is 1+2, Y, Ref),
+		type::check(either(atom, integer), Ref).
+
+	throws(either_type_checking_support_14, type_error(integer,fail)) :-
+		expected::from_goal(2 is 3, _, Ref),
+		type::check(either(atom, integer), Ref).
+
+	throws(either_type_checking_support_15, type_error(atom,3)) :-
+		expected::from_goal(Y is 1+2, Y, fail, Ref),
+		type::check(either(atom, integer), Ref).
+
+	throws(either_type_checking_support_16, type_error(integer,fail)) :-
+		expected::from_goal(2 is 3, _, fail, Ref),
+		type::check(either(atom, integer), Ref).
 
 	% auxiliary predicates
 

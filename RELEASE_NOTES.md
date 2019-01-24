@@ -130,6 +130,8 @@ Tests
 
 * IMPROVED: Unit tests for the `optional` library.
 
+* IMPROVED: Unit tests for the `expected` library.
+
 Examples
 --------
 
