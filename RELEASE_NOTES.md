@@ -125,6 +125,8 @@ Tests
 
 * IMPROVED: Unit tests for the entity creation built-in predicates.
 
+* IMPROVED: Unit tests for the `optional` library.
+
 Examples
 --------
 

@@ -22,15 +22,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2019/01/21,
+		date is 2019/01/24,
 		comment is 'Unit tests for the "optional" library.'
 	]).
 
 	:- discontiguous([
 		fails/1, succeeds/1, throws/2
 	]).
+
+	cover(optional).
+	cover(optional(_)).
+	cover(maybe).
 
 	% from_goal/3 tests
 
@@ -190,6 +194,54 @@
 
 	throws(optional_type_checking_support_08, type_error(optional,foo(bar,baz))) :-
 		type::check(optional, foo(bar,baz)).
+
+	% cat/2 tests
+
+	succeeds(maybe_cat_2_01) :-
+		maybe::cat([], Terms),
+		Terms == [].
+
+	succeeds(maybe_cat_2_02) :-
+		optional::empty(Ref1),
+		optional::of(1, Ref2),
+		optional::empty(Ref3),
+		optional::of(2, Ref4),
+		maybe::cat([Ref1, Ref2, Ref3, Ref4], Terms),
+		Terms == [1, 2].
+
+	% "maybe" type tests
+
+	succeeds(maybe_type_checking_support_01) :-
+		optional::empty(Ref),
+		type::check(maybe(integer), Ref).
+
+	succeeds(maybe_type_checking_support_02) :-
+		optional::of(1, Ref),
+		type::check(maybe(integer), Ref).
+
+	succeeds(maybe_type_checking_support_03) :-
+		optional::from_goal(Y is 1+2, Y, Ref),
+		type::check(maybe(integer), Ref).
+
+	succeeds(maybe_type_checking_support_04) :-
+		optional::from_goal(Y is _, Y, Ref),
+		type::check(maybe(integer), Ref).
+
+	throws(maybe_type_checking_support_05, instantiation_error) :-
+		type::check(maybe(integer), _).
+
+	throws(maybe_type_checking_support_06, type_error(optional,12345)) :-
+		type::check(maybe(integer), 12345).
+
+	throws(maybe_type_checking_support_07, type_error(optional,foobar)) :-
+		type::check(maybe(integer), foobar).
+
+	throws(maybe_type_checking_support_08, type_error(optional,foo(bar,baz))) :-
+		type::check(maybe(integer), foo(bar,baz)).
+
+	throws(maybe_type_checking_support_09, type_error(integer,a)) :-
+		optional::of(a, Ref),
+		type::check(maybe(integer), Ref).
 
 	% auxiliary predicates
 

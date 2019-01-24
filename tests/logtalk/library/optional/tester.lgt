@@ -20,7 +20,9 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(library(optional_loader)),
+	logtalk_load(library(basic_types_loader)),
+	logtalk_load(library(arbitrary_loader)),
+	logtalk_load([library(optional), library(maybe)], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
