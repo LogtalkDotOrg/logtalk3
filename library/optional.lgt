@@ -105,7 +105,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2019/01/23,
+		date is 2019/01/24,
 		comment is 'Optional reference predicates. Requires passing a reference constructed using the "optional" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [optional]
@@ -164,7 +164,7 @@
 	]).
 
 	:- public(get/1).
-	:- mode(get(--term), one).
+	:- mode(get(--term), one_or_error).
 	:- info(get/1, [
 		comment is 'Returns the term hold by the reference if not empty. Throws an error otherwise.',
 		argnames is ['Term'],
@@ -180,7 +180,7 @@
 
 	:- public(or_else_get/2).
 	:- meta_predicate(or_else_get(*, 1)).
-	:- mode(or_else_get(--term, +callable), one).
+	:- mode(or_else_get(--term, +callable), one_or_error).
 	:- info(or_else_get/2, [
 		comment is 'Returns the term hold by the reference if not empty. Applies a closure to compute the term otherwise. Throws an error when the reference is empty and the term cannot be computed.',
 		argnames is ['Term', 'Closure'],

@@ -10,7 +10,7 @@ Optional reference predicates. Requires passing a reference constructed using th
 
 | **Author:** Paulo Moura
 | **Version:** 1.5
-| **Date:** 2019/1/23
+| **Date:** 2019/1/24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -193,7 +193,7 @@ Returns the term hold by the reference if not empty. Throws an error otherwise.
 | **Template:**
 |    ``get(Term)``
 | **Mode and number of proofs:**
-|    ``get(--term)`` - ``one``
+|    ``get(--term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Optional is empty:
@@ -241,7 +241,7 @@ Returns the term hold by the reference if not empty. Applies a closure to comput
 | **Meta-predicate template:**
 |    ``or_else_get(*,1)``
 | **Mode and number of proofs:**
-|    ``or_else_get(--term,+callable)`` - ``one``
+|    ``or_else_get(--term,+callable)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Reference is empty and the term cannot be computed:

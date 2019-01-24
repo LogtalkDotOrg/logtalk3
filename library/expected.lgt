@@ -115,7 +115,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/01/23,
+		date is 2019/01/24,
 		comment is 'Expected term reference predicates. Requires passing a reference constructed using the "expected" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [expected]
@@ -150,7 +150,7 @@
 	]).
 
 	:- public(unexpected/1).
-	:- mode(unexpected(--term), one).
+	:- mode(unexpected(--term), one_or_error).
 	:- info(unexpected/1, [
 		comment is 'Returns the unexpected term hold by the reference. Throws an error otherwise.',
 		argnames is ['Unexpected'],
@@ -158,7 +158,7 @@
 	]).
 
 	:- public(expected/1).
-	:- mode(expected(--term), one).
+	:- mode(expected(--term), one_or_error).
 	:- info(expected/1, [
 		comment is 'Returns the expected term hold by the reference. Throws an error otherwise.',
 		argnames is ['Expected'],
@@ -185,15 +185,15 @@
 	:- mode(or_else(--term, @term), one).
 	:- info(or_else/2, [
 		comment is 'Returns the expected term hold by the reference if it does not hold an unexpected term or the given default term if the reference holds an unexpected term.',
-		argnames is ['Term', 'Default']
+		argnames is ['Expected', 'Default']
 	]).
 
 	:- public(or_else_get/2).
 	:- meta_predicate(or_else_get(*, 1)).
-	:- mode(or_else_get(--term, +callable), one).
+	:- mode(or_else_get(--term, +callable), one_or_error).
 	:- info(or_else_get/2, [
 		comment is 'Returns the expected term hold by the reference if it does not hold an unexpected term. Otherwise applies a closure to compute the expected term. Throws an error when the reference holds an unexpected term and an expected term cannot be computed.',
-		argnames is ['Term', 'Closure'],
+		argnames is ['Expected', 'Closure'],
 		exceptions is ['Reference holds an unexpected term and an expected term cannot be computed' - existence_error(expected_term,'Reference')]
 	]).
 
@@ -206,7 +206,7 @@
 	]).
 
 	:- public(or_else_throw/1).
-	:- mode(or_else_throw(--term), zero_or_one).
+	:- mode(or_else_throw(--term), one_or_error).
 	:- info(or_else_throw/1, [
 		comment is 'Returns the expected term hold by the reference if present. Throws the unexpected term as an error otherwise.',
 		argnames is ['Expected']

@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2019/01/23,
+		date is 2019/01/24,
 		comment is 'Types and predicates for type-checking and handling optional term references. Inspired by Haskell.',
 		remarks is [
 			'Type maybe(Type)' - 'Allows type-checking optional term references where the optional term must be of the given type.',
@@ -85,6 +85,6 @@
 			Terms = [Term| RestTerms]
 		;	Terms = RestTerms
 		),
-		cat(References, RestValues).
+		cat(References, RestTerms).
 
 :- end_object.

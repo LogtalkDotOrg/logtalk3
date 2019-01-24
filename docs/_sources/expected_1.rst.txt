@@ -10,7 +10,7 @@ Expected term reference predicates. Requires passing a reference constructed usi
 
 | **Author:** Paulo Moura
 | **Version:** 1.2
-| **Date:** 2019/1/23
+| **Date:** 2019/1/24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -124,7 +124,7 @@ Returns the unexpected term hold by the reference. Throws an error otherwise.
 | **Template:**
 |    ``unexpected(Unexpected)``
 | **Mode and number of proofs:**
-|    ``unexpected(--term)`` - ``one``
+|    ``unexpected(--term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Reference holds an expected term:
@@ -149,7 +149,7 @@ Returns the expected term hold by the reference. Throws an error otherwise.
 | **Template:**
 |    ``expected(Expected)``
 | **Mode and number of proofs:**
-|    ``expected(--term)`` - ``one``
+|    ``expected(--term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Reference holds an unexpected term:
@@ -218,7 +218,7 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 |    ``static``
 
 | **Template:**
-|    ``or_else(Term,Default)``
+|    ``or_else(Expected,Default)``
 | **Mode and number of proofs:**
 |    ``or_else(--term,@term)`` - ``one``
 
@@ -239,11 +239,11 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 |    ``static``
 
 | **Template:**
-|    ``or_else_get(Term,Closure)``
+|    ``or_else_get(Expected,Closure)``
 | **Meta-predicate template:**
 |    ``or_else_get(*,1)``
 | **Mode and number of proofs:**
-|    ``or_else_get(--term,+callable)`` - ``one``
+|    ``or_else_get(--term,+callable)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Reference holds an unexpected term and an expected term cannot be computed:
@@ -291,7 +291,7 @@ Returns the expected term hold by the reference if present. Throws the unexpecte
 | **Template:**
 |    ``or_else_throw(Expected)``
 | **Mode and number of proofs:**
-|    ``or_else_throw(--term)`` - ``zero_or_one``
+|    ``or_else_throw(--term)`` - ``one_or_error``
 
 
 .. raw:: html
