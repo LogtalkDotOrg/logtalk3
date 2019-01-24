@@ -21,7 +21,7 @@
 :- object(maybe).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
 		date is 2019/01/24,
 		comment is 'Types and predicates for type-checking and handling optional term references. Inspired by Haskell.',
@@ -72,8 +72,7 @@
 	:- endif.
 
 	arbitrary::arbitrary(maybe(Type), Arbitrary) :-
-		random::random(Random),
-		(	Random < 0.5 ->
+		(	random::maybe ->
 			optional::empty(Arbitrary)
 		;	type::arbitrary(Type, Term),
 			optional::of(Term, Arbitrary)	

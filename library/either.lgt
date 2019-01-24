@@ -21,7 +21,7 @@
 :- object(either).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
 		date is 2019/01/24,
 		comment is 'Types and predicates for extended type-checking of expected term references and for handling lists of expected term references.',
@@ -87,8 +87,7 @@
 	:- endif.
 
 	arbitrary::arbitrary(either(ExpectedType, UnexpectedType), Arbitrary) :-
-		random::random(Random),
-		(	Random < 0.5 ->
+		(	random::maybe ->
 			type::arbitrary(ExpectedType, Expected),
 			expected::of_expected(Expected, Arbitrary)
 		;	type::arbitrary(UnexpectedType, Unexpected),
