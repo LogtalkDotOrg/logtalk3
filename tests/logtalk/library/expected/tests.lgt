@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2019/01/24,
 		comment is 'Unit tests for the "expected" library.'
@@ -329,6 +329,13 @@
 	throws(either_type_checking_support_16, type_error(integer,fail)) :-
 		expected::from_goal(2 is 3, _, fail, Ref),
 		type::check(either(atom, integer), Ref).
+
+	% "either" arbitrary tests
+
+	quick_check(
+		either_arbitrary_support_01,
+		type::arbitrary({either(integer, atom)}, -either(integer, atom))
+	).
 
 	% auxiliary predicates
 

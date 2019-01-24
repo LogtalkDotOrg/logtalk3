@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Paulo Moura',
 		date is 2019/01/24,
 		comment is 'Unit tests for the "optional" library.'
@@ -242,6 +242,13 @@
 	throws(maybe_type_checking_support_09, type_error(integer,a)) :-
 		optional::of(a, Ref),
 		type::check(maybe(integer), Ref).
+
+	% "maybe" arbitrary tests
+
+	quick_check(
+		maybe_arbitrary_support_01,
+		type::arbitrary({maybe(integer)}, -maybe(integer))
+	).
 
 	% auxiliary predicates
 
