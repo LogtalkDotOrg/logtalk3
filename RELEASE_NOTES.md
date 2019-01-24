@@ -96,6 +96,9 @@ the coroutining predicates are made available by each Prolog system.
 sample code for SICStus Prolog to take into account the changes in the new
 4.5.0 release.
 
+* FIXED: Bug in the implementation of the `either::partition/3` library
+predicate.
+
 Tools
 -----
 

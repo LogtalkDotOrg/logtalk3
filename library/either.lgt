@@ -21,9 +21,9 @@
 :- object(either).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2019/01/23,
+		date is 2019/01/24,
 		comment is 'Types and predicates for extended type-checking of expected term references and for handling lists of expected term references.',
 		remarks is [
 			'Type either(ExpectedType, UnexpectedType)' - 'Allows type-checking expected references where the expected and unexpected terms must be of the given types.',
@@ -115,11 +115,11 @@
 	partition([], [], []).
 	partition([Reference| References], Expecteds, Unexpecteds) :-
 		(	expected(Reference)::or_else_fail(Expected) ->
-			Expecteds = [Expected| Rest],
+			Expecteds = [Expected| RestExpecteds],
 			Unexpecteds = RestUnexpecteds
 		;	expected(Reference)::unexpected(Unexpected),
 			Expecteds = RestExpecteds,
-			Unexpecteds = [Unexpected| Rest]
+			Unexpecteds = [Unexpected| RestUnexpecteds]
 		),
 		partition(References, RestExpecteds, RestUnexpecteds).
 
