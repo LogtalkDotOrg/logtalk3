@@ -228,7 +228,7 @@ set of objects).</dd>
 Directives use the <code class="docutils literal notranslate"><span class="pre">(:-)/1</span></code> prefix operator as functor.</dd>
 <dt id="term-doclet-file">doclet file</dt>
 <dd>A source file whose main purpose is to generate documentation for
-e.g. a library or an application.</dd>
+e.g. a <a class="reference internal" href="#term-library"><span class="xref std std-term">library</span></a> or an application.</dd>
 <dt id="term-doclet-object">doclet object</dt>
 <dd>An object specifying the steps necessary to (re)generate the API
 documentation for a project. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
@@ -295,7 +295,8 @@ other object, we have prototype-based inheritance. When an object
 specializes or instantiates another object, we have class-based
 inheritance.</dd>
 <dt id="term-instance">instance</dt>
-<dd>An object that instantiates another object, interpreted as its class.</dd>
+<dd>An object that instantiates another object, interpreted as its
+<a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a>.</dd>
 <dt id="term-instantiation">instantiation</dt>
 <dd>The process of creating a new class instance. In Logtalk, this does
 not necessarily imply dynamic creation of an object at runtime; an
@@ -321,13 +322,15 @@ files using the notation <code class="docutils literal notranslate"><span class=
 Library names and their paths are defined using the
 <a class="reference internal" href="refman/predicates/logtalk_library_path_2.html#predicates-logtalk-library-path-2"><span class="std std-ref">logtalk_library_path/2</span></a> predicate.</dd>
 <dt id="term-loader-file">loader file</dt>
-<dd>A source file whose main purpose is to load a set of source files.</dd>
+<dd>A <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> whose main purpose is to load a set of
+source files.</dd>
 <dt id="term-local-predicate">local predicate</dt>
-<dd>A predicate that is defined in an object (or in a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>) but
-that is not listed in a scope directive. These predicates behave
+<dd>A predicate that is defined in an object (or in a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>)
+but that is not listed in a scope directive. These predicates behave
 like private predicates but are invisible to the reflection
-<a class="reference internal" href="#term-built-in-method"><span class="xref std std-term">built-in methods</span></a>. Local predicates are usually
-auxiliary predicates and only relevant to the entity where they are defined.</dd>
+<a class="reference internal" href="#term-built-in-method"><span class="xref std std-term">built-in methods</span></a>. Local predicates are
+usually auxiliary predicates and only relevant to the entity where
+they are defined.</dd>
 <dt id="term-message">message</dt>
 <dd>A query sent to an object. In logical terms, a message can be seen as
 a request for proof construction using an object database and the
@@ -352,8 +355,8 @@ built-in meta-predicates.</dd>
 Metaclass instances are themselves classes.</dd>
 <dt id="term-method">method</dt>
 <dd>The predicate definition used to answer a message sent to an object.
-Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and dynamic binding to
-find which method to run to answer a message.</dd>
+Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>
+to find which method to run to answer a message.</dd>
 <dt id="term-module">module</dt>
 <dd>A Prolog entity characterized by an identity and a set of predicate
 directives and clauses. Prolog modules are usually static although
@@ -436,8 +439,8 @@ the scope directive.</dd>
 <dt id="term-profiler">profiler</dt>
 <dd>A program that collects data about other program performance.</dd>
 <dt id="term-protected-inheritance">protected inheritance</dt>
-<dd>All public predicates are inherited as protected. No change for
-protected or private predicates.</dd>
+<dd>All public predicates are inherited as protected. No scope change
+for protected or private predicates.</dd>
 <dt id="term-protected-predicate">protected predicate</dt>
 <dd>A predicate that can only be called from the object containing the
 scope directive or from an object that inherits the predicate.</dd>
@@ -464,7 +467,7 @@ with other objects is always interpreted as a prototype.</dd>
 sent from within a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>, the <em>sender</em> is the object
 importing the category.</dd>
 <dt id="term-settings-file">settings file</dt>
-<dd>A source file, compiled and loaded at Logtalk startup, mainly
+<dd>A <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a>, compiled and loaded at Logtalk startup, mainly
 defining default values for compiler flags that override the
 defaults found on the backend Prolog compiler
 <a class="reference internal" href="#term-adapter-file"><span class="xref std std-term">adapter files</span></a>.</dd>
@@ -474,10 +477,10 @@ methods are supported in Logtalk and can also be found in other
 object-oriented programming languages.</dd>
 <dt id="term-source-file">source file</dt>
 <dd>A text file defining Logtalk and/or Prolog code. Multiple Logtalk
-entities may be defined in a single source file. Plain rolog code
+entities may be defined in a single source file. Plain Prolog code
 may be intermixed with Logtalk entity definitions.</dd>
 <dt id="term-source-file-directive">source file directive</dt>
-<dd>A directive that affects how a source file is compiled.</dd>
+<dd>A directive that affects how a <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> is compiled.</dd>
 <dt id="term-specialization">specialization</dt>
 <dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> is specialized by defining a new class that inherit its
 predicates and possibly add new ones.</dd>
@@ -485,8 +488,9 @@ predicates and possibly add new ones.</dd>
 <dd>Compile time lookup of a predicate declaration and definition when
 compiling a message sending call (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>). Dynamic
 binding is used whenever static binding is not possible (e.g. due to
-the predicate being dynamic or due to lack of enough information).
-Also known as <em>early binding</em>. See also <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
+the predicate being dynamic or due to lack of enough information at
+compilation time). Also known as <em>early binding</em>. See also
+<a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
 <dt id="term-subclass">subclass</dt>
 <dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that is a specialization, direct or indirectly, of
 another class.</dd>
@@ -505,7 +509,7 @@ thread at a time.</dd>
 <dt id="term-template-method">template method</dt>
 <dd>See <a class="reference internal" href="#term-abstract-method"><span class="xref std std-term">abstract method</span></a>.</dd>
 <dt id="term-tester-file">tester file</dt>
-<dd>A source file whose main purpose is to load and a run a set of
+<dd>A <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> whose main purpose is to load and a run a set of
 unit tests.</dd>
 <dt id="term-this">this</dt>
 <dd>The object that contains the predicate clause under execution. When

@@ -83,7 +83,7 @@ Glossary
       A directive that affects how predicates are called or compiled.
 
    source file directive
-      A directive that affects how a source file is compiled.
+      A directive that affects how a :term:`source file` is compiled.
 
    encapsulation
       The hiding of an object implementation. This promotes software reuse
@@ -147,14 +147,15 @@ Glossary
       predicates.
 
    protected inheritance
-      All public predicates are inherited as protected. No change for
-      protected or private predicates.
+      All public predicates are inherited as protected. No scope change
+      for protected or private predicates.
 
    public inheritance
       All inherited predicates maintain their declared scope.
 
    instance
-      An object that instantiates another object, interpreted as its class.
+      An object that instantiates another object, interpreted as its
+      :term:`class`.
 
    instantiation
       The process of creating a new class instance. In Logtalk, this does
@@ -190,8 +191,8 @@ Glossary
 
    method
       The predicate definition used to answer a message sent to an object.
-      Logtalk supports both :term:`static binding` and dynamic binding to
-      find which method to run to answer a message.
+      Logtalk supports both :term:`static binding` and :term:`dynamic binding`
+      to find which method to run to answer a message.
 
    abstract method
       A :term:`method` implementing an algorithm whose step corresponds
@@ -285,11 +286,12 @@ Glossary
       infinite rational entities such as cyclic terms and ω-automata.
 
    local predicate
-      A predicate that is defined in an object (or in a :term:`category`) but
-      that is not listed in a scope directive. These predicates behave
+      A predicate that is defined in an object (or in a :term:`category`)
+      but that is not listed in a scope directive. These predicates behave
       like private predicates but are invisible to the reflection
-      :term:`built-in methods <built-in method>`. Local predicates are usually
-      auxiliary predicates and only relevant to the entity where they are defined.
+      :term:`built-in methods <built-in method>`. Local predicates are
+      usually auxiliary predicates and only relevant to the entity where
+      they are defined.
 
    meta-argument
       A predicate argument that is called as a goal, used as a closure
@@ -378,7 +380,7 @@ Glossary
 
    source file
       A text file defining Logtalk and/or Prolog code. Multiple Logtalk
-      entities may be defined in a single source file. Plain rolog code
+      entities may be defined in a single source file. Plain Prolog code
       may be intermixed with Logtalk entity definitions.
 
    adapter file
@@ -388,19 +390,20 @@ Glossary
 
    doclet file
       A source file whose main purpose is to generate documentation for
-      e.g. a library or an application.
+      e.g. a :term:`library` or an application.
 
    loader file
-      A source file whose main purpose is to load a set of source files.
+      A :term:`source file` whose main purpose is to load a set of
+      source files.
 
    settings file
-      A source file, compiled and loaded at Logtalk startup, mainly
+      A :term:`source file`, compiled and loaded at Logtalk startup, mainly
       defining default values for compiler flags that override the
       defaults found on the backend Prolog compiler
       :term:`adapter files <adapter file>`.
 
    tester file
-      A source file whose main purpose is to load and a run a set of
+      A :term:`source file` whose main purpose is to load and a run a set of
       unit tests.
 
    this
@@ -419,8 +422,9 @@ Glossary
       Compile time lookup of a predicate declaration and definition when
       compiling a message sending call (or a :term:`super call`). Dynamic
       binding is used whenever static binding is not possible (e.g. due to
-      the predicate being dynamic or due to lack of enough information).
-      Also known as *early binding*. See also :term:`dynamic binding`.
+      the predicate being dynamic or due to lack of enough information at
+      compilation time). Also known as *early binding*. See also
+      :term:`dynamic binding`.
 
    lambda expression
       A compound term that can be used in place of a goal or closure
