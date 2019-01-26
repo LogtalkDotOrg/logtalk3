@@ -328,7 +328,7 @@ yes
 <span id="inheritance-specialization"></span><h3>Specializing inherited predicate definitions<a class="headerlink" href="#specializing-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
 <p>Specialization of inherited definitions: the new definition uses the
 inherited definitions, adding new code. This is accomplished by
-calling the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator
+calling the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator
 in the new definition. For example, assume a <code class="docutils literal notranslate"><span class="pre">init/0</span></code> predicate
 that must account for object specific initializations along the
 inheritance chain:</p>
@@ -366,9 +366,10 @@ yes
 <p>Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
 mechanisms. This can be accomplished by writing a clause that just calls,
-using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator, the inherited definitions.
-The relative position of this clause among the other definition clauses
-sets the calling order for the local and inherited definitions. For example:</p>
+using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator, the inherited
+definitions. The relative position of this clause among the other definition
+clauses sets the calling order for the local and inherited definitions. For
+example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(root).
 
 <span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
@@ -403,8 +404,8 @@ no
 <p>The selective inheritance of predicate definitions (also known as
 differential inheritance) is normally used in the representation
 of exceptions to inherited default definitions. We can use the
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator to test and possibly reject
-some of the inherited definitions. A common example is representing
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator to test and possibly
+reject some of the inherited definitions. A common example is representing
 flightless birds:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bird).
 
@@ -513,7 +514,7 @@ preferably use in our software development composition mechanisms
 instead of specialization mechanisms <a class="reference internal" href="../bibliography.html#taenzer89" id="id6">[Taenzer89]</a>. Multiple inheritance is
 best used as an analysis and project abstraction, rather than
 as an implementation technique <a class="reference internal" href="../bibliography.html#shan-et-al-93" id="id7">[Shan_et_al_93]</a>. Logtalk provides first-class
-support for software composition using <a class="reference internal" href="categories.html#categories-categories"><span class="std std-ref">Categories</span></a>.</p>
+support for composition using <a class="reference internal" href="categories.html#categories-categories"><span class="std std-ref">categories</span></a>.</p>
 <p>Nevertheless, Logtalk supports multi-inheritance by enabling an object
 to extend, instantiate, or specialize more than one object. The
 <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive can always be used

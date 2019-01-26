@@ -166,7 +166,7 @@ Specializing inherited predicate definitions
 
 Specialization of inherited definitions: the new definition uses the
 inherited definitions, adding new code. This is accomplished by
-calling the :ref:`control_call_super_1` operator
+calling the :ref:`control_call_super_1` *super call* operator
 in the new definition. For example, assume a ``init/0`` predicate
 that must account for object specific initializations along the
 inheritance chain:
@@ -208,9 +208,10 @@ Union of inherited and local predicate definitions
 Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
 mechanisms. This can be accomplished by writing a clause that just calls,
-using the :ref:`control_call_super_1` operator, the inherited definitions.
-The relative position of this clause among the other definition clauses
-sets the calling order for the local and inherited definitions. For example:
+using the :ref:`control_call_super_1` *super call* operator, the inherited
+definitions. The relative position of this clause among the other definition
+clauses sets the calling order for the local and inherited definitions. For
+example:
 
 ::
 
@@ -249,8 +250,8 @@ Selective inheritance of predicate definitions
 The selective inheritance of predicate definitions (also known as
 differential inheritance) is normally used in the representation
 of exceptions to inherited default definitions. We can use the
-:ref:`control_call_super_1` operator to test and possibly reject
-some of the inherited definitions. A common example is representing
+:ref:`control_call_super_1` *super call* operator to test and possibly
+reject some of the inherited definitions. A common example is representing
 flightless birds:
 
 ::
@@ -374,7 +375,7 @@ preferably use in our software development composition mechanisms
 instead of specialization mechanisms [Taenzer89]_. Multiple inheritance is
 best used as an analysis and project abstraction, rather than
 as an implementation technique [Shan_et_al_93]_. Logtalk provides first-class
-support for software composition using :ref:`categories_categories`.
+support for composition using :ref:`categories <categories_categories>`.
 
 Nevertheless, Logtalk supports multi-inheritance by enabling an object
 to extend, instantiate, or specialize more than one object. The
