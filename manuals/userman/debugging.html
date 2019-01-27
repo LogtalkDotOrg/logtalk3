@@ -714,7 +714,24 @@ the <a class="reference internal" href="programming.html#flag-debug"><span class
 When the code is not compiled in optimal mode, the
 <a class="reference external" href="https://logtalk.org/tools.html#debugging">debug_messages</a> tool allows
 selectively enabling of debug messages per component and per debug group.
-See the tool documentation for details.</p>
+For example, to enable all <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages for the
+component <code class="docutils literal notranslate"><span class="pre">parser</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(debug_messages(loader)).
+...
+
+| ?- debug_messages::enable(parser).
+yes
+</pre></div>
+</div>
+<p>To enable only <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages for a <code class="docutils literal notranslate"><span class="pre">tokenization</span></code> group:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debug_messages::disable(parser).
+yes
+
+| ?- debug_messages::enable(parser, tokenization).
+yes
+</pre></div>
+</div>
+<p>See the tool documentation for more details.</p>
 </div>
 </div>
 <div class="section" id="using-the-term-expansion-mechanism-for-debugging">

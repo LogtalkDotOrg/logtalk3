@@ -571,7 +571,28 @@ the :ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` flags.
 When the code is not compiled in optimal mode, the
 `debug_messages <https://logtalk.org/tools.html#debugging>`_ tool allows
 selectively enabling of debug messages per component and per debug group.
-See the tool documentation for details. 
+For example, to enable all ``debug`` and ``debug(Group)`` messages for the
+component ``parser``:
+
+.. code-block:: text
+
+   | ?- logtalk_load(debug_messages(loader)).
+   ...
+
+   | ?- debug_messages::enable(parser).
+   yes
+
+To enable only ``debug(Group)`` messages for a ``tokenization`` group:
+
+.. code-block:: text
+
+   | ?- debug_messages::disable(parser).
+   yes
+
+   | ?- debug_messages::enable(parser, tokenization).
+   yes
+
+See the tool documentation for more details. 
 
 .. _debugging_hooks:
 
