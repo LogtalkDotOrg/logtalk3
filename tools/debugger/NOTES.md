@@ -33,7 +33,7 @@ To consult this tool API documentation, open in a web browser the link:
 For more information on using the debugger, open in a web browser the
 following file and consult the debugging section of the User Manual:
 
-[manuals/userman/programming.html#debugging-logtalk-applications](https://logtalk.org/manuals/userman/programming.html#debugging-logtalk-applications)
+[manuals/userman/debugging.html](https://logtalk.org/manuals/userman/debugging.html)
 
 
 Loading
