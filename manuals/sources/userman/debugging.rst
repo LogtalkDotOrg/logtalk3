@@ -33,8 +33,8 @@ It can also be loaded automatically at startup time by using a
 those found on most Prolog systems. There are some differences, however,
 between the usual implementation of Prolog debuggers and the current
 implementation of the Logtalk debugger that you should be aware. First,
-unlike some Prolog debuggers, the Logtalk debugger is not built-in but a
-regular Logtalk application using documented debugging hook predicates.
+unlike most Prolog debuggers, the Logtalk debugger is not a built-in feature
+but a regular Logtalk application using documented debugging hook predicates.
 This translates to a different, although similar, set of debugging features
 when compared with some of the more sophisticated Prolog debuggers. Second,
 debugging is only possible for entities compiled in debug mode. When
@@ -174,7 +174,7 @@ single namespace, an entity can only be defined in a single file).
 Defining line number and predicate spy points
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Line number and predicate spy points are specified using the debuuger
+Line number and predicate spy points are specified using the debugger
 ``spy/1`` predicate. The argument can be a breakpoint (expressed as a
 ``Entity-Line`` pair), a predicate indicator (``Name/Arity``), or a
 list of spy points. For example:
@@ -572,23 +572,27 @@ When the code is not compiled in optimal mode, the
 `debug_messages <https://logtalk.org/tools.html#debugging>`_ tool allows
 selectively enabling of debug messages per component and per debug group.
 For example, to enable all ``debug`` and ``debug(Group)`` messages for the
-component ``parser``:
+``parser`` component:
 
 .. code-block:: text
 
+   % upon loading the tool, all messages are disabled by default: 
    | ?- logtalk_load(debug_messages(loader)).
    ...
 
+   % enable both debug and debug(_) messages:
    | ?- debug_messages::enable(parser).
    yes
 
-To enable only ``debug(Group)`` messages for a ``tokenization`` group:
+To enable only ``debug(tokenization)`` messages for the ``parser`` component:
 
 .. code-block:: text
 
+   % first disable any and all enabled messages:
    | ?- debug_messages::disable(parser).
    yes
 
+   % enable only debug(tokenization) messages:
    | ?- debug_messages::enable(parser, tokenization).
    yes
 

@@ -227,8 +227,8 @@ implemented as a Logtalk application. It can be loaded by typing:</p>
 those found on most Prolog systems. There are some differences, however,
 between the usual implementation of Prolog debuggers and the current
 implementation of the Logtalk debugger that you should be aware. First,
-unlike some Prolog debuggers, the Logtalk debugger is not built-in but a
-regular Logtalk application using documented debugging hook predicates.
+unlike most Prolog debuggers, the Logtalk debugger is not a built-in feature
+but a regular Logtalk application using documented debugging hook predicates.
 This translates to a different, although similar, set of debugging features
 when compared with some of the more sophisticated Prolog debuggers. Second,
 debugging is only possible for entities compiled in debug mode. When
@@ -368,7 +368,7 @@ entity identifier instead of the file name (as all entities share a
 single namespace, an entity can only be defined in a single file).</p>
 <div class="section" id="defining-line-number-and-predicate-spy-points">
 <h3>Defining line number and predicate spy points<a class="headerlink" href="#defining-line-number-and-predicate-spy-points" title="Permalink to this headline">¶</a></h3>
-<p>Line number and predicate spy points are specified using the debuuger
+<p>Line number and predicate spy points are specified using the debugger
 <code class="docutils literal notranslate"><span class="pre">spy/1</span></code> predicate. The argument can be a breakpoint (expressed as a
 <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), or a
 list of spy points. For example:</p>
@@ -715,18 +715,22 @@ When the code is not compiled in optimal mode, the
 <a class="reference external" href="https://logtalk.org/tools.html#debugging">debug_messages</a> tool allows
 selectively enabling of debug messages per component and per debug group.
 For example, to enable all <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages for the
-component <code class="docutils literal notranslate"><span class="pre">parser</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(debug_messages(loader)).
+<code class="docutils literal notranslate"><span class="pre">parser</span></code> component:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>% upon loading the tool, all messages are disabled by default:
+| ?- logtalk_load(debug_messages(loader)).
 ...
 
+% enable both debug and debug(_) messages:
 | ?- debug_messages::enable(parser).
 yes
 </pre></div>
 </div>
-<p>To enable only <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages for a <code class="docutils literal notranslate"><span class="pre">tokenization</span></code> group:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debug_messages::disable(parser).
+<p>To enable only <code class="docutils literal notranslate"><span class="pre">debug(tokenization)</span></code> messages for the <code class="docutils literal notranslate"><span class="pre">parser</span></code> component:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>% first disable any and all enabled messages:
+| ?- debug_messages::disable(parser).
 yes
 
+% enable only debug(tokenization) messages:
 | ?- debug_messages::enable(parser, tokenization).
 yes
 </pre></div>
