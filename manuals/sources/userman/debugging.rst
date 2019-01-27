@@ -285,17 +285,48 @@ mode. To start the debugger in trace mode, write:
 
    yes
 
-Note that, when tracing, spy points will be ignored. While tracing, the
-debugger will pause for user input at each leashed port, printing an
-informative message with the port name and the current goal. Before the
+Next, type the query to be debugged. For examples, using the ``family``
+example in the Logtalk distribution compiled for debugging:
+
+.. code-block:: text
+
+   | ?- addams::sister(Sister, Sibling).
+        Call: (1) sister(_1082,_1104) ? 
+        Rule: (1) sister(_1082,_1104) ? 
+        Call: (2) ::female(_1082) ? 
+        Call: (3) female(_1082) ? 
+        Fact: (3) female(morticia) ? 
+       *Exit: (3) female(morticia) ? 
+       *Exit: (2) ::female(morticia) ? 
+       ...
+
+While tracing, the debugger will pause for user input at each leashed port,
+printing an informative message. Each trace line starts with the port,
+followed by the goal invocation number, followed by the goal. The invocation
+numbers are unique and allows us to correlate the ports used for a goal.
+In the output above, you can see for example that the goal ``::female(_1082)``
+succeeds with the answer ``::female(morticia)``. The debugger also provides
+determinism information by prefixing the ``exit`` port with a ``*`` character
+when a call succeeds with choice-points pending, thus indicating that there
+might be alternative solutions for the goal.
+
+Note that, when tracing, spy points will be ignored. Before the
 port number, when a spy point is set for the current clause or goal, the
 debugger will print a ``#`` character for line number spy points, a
 ``+`` character for predicate spy points, and a ``*`` character for
-context spy points. The debugger also provides determinism information
-by prefixing the ``exit`` port with a ``*`` character when a call
-succeeds with choice-points pending. After the port name, the debugger
-prints the goal invocation number. This invocation number is unique and
-can be used to correlate the port trace messages.
+context spy points. For example:
+
+.. code-block:: text
+
+   | ?- debugger::spy(female/2).
+
+   yes
+
+   | ?- addams::sister(Sister, Sibling).
+        Call: (1) sister(_1078,_1100) ? 
+        Rule: (1) sister(_1078,_1100) ? 
+        Call: (2) ::female(_1078) ? 
+     +  Call: (3) female(_1078) ? 
 
 To stop tracing and turning off the debugger, write:
 
@@ -321,10 +352,13 @@ points, write:
 
    yes
 
-At the beginning of a port description, the debugger will print a ``#``,
-``+``, or ``*`` character before the current goal if there is,
-respectively, a line number, a predicate, or a context spy point
-defined.
+For example, assuming the spy point we set in the previous section on
+the ``female/1`` predicate:
+
+.. code-block:: text
+
+   | ?- addams::sister(Sister, Sibling).
+     +  Call: (3) female(_1078) ? 
 
 To stop the debugger, write:
 

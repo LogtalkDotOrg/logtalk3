@@ -461,17 +461,44 @@ mode. To start the debugger in trace mode, write:</p>
 yes
 </pre></div>
 </div>
-<p>Note that, when tracing, spy points will be ignored. While tracing, the
-debugger will pause for user input at each leashed port, printing an
-informative message with the port name and the current goal. Before the
+<p>Next, type the query to be debugged. For examples, using the <code class="docutils literal notranslate"><span class="pre">family</span></code>
+example in the Logtalk distribution compiled for debugging:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- addams::sister(Sister, Sibling).
+     Call: (1) sister(_1082,_1104) ?
+     Rule: (1) sister(_1082,_1104) ?
+     Call: (2) ::female(_1082) ?
+     Call: (3) female(_1082) ?
+     Fact: (3) female(morticia) ?
+    *Exit: (3) female(morticia) ?
+    *Exit: (2) ::female(morticia) ?
+    ...
+</pre></div>
+</div>
+<p>While tracing, the debugger will pause for user input at each leashed port,
+printing an informative message. Each trace line starts with the port,
+followed by the goal invocation number, followed by the goal. The invocation
+numbers are unique and allows us to correlate the ports used for a goal.
+In the output above, you can see for example that the goal <code class="docutils literal notranslate"><span class="pre">::female(_1082)</span></code>
+succeeds with the answer <code class="docutils literal notranslate"><span class="pre">::female(morticia)</span></code>. The debugger also provides
+determinism information by prefixing the <code class="docutils literal notranslate"><span class="pre">exit</span></code> port with a <code class="docutils literal notranslate"><span class="pre">*</span></code> character
+when a call succeeds with choice-points pending, thus indicating that there
+might be alternative solutions for the goal.</p>
+<p>Note that, when tracing, spy points will be ignored. Before the
 port number, when a spy point is set for the current clause or goal, the
 debugger will print a <code class="docutils literal notranslate"><span class="pre">#</span></code> character for line number spy points, a
 <code class="docutils literal notranslate"><span class="pre">+</span></code> character for predicate spy points, and a <code class="docutils literal notranslate"><span class="pre">*</span></code> character for
-context spy points. The debugger also provides determinism information
-by prefixing the <code class="docutils literal notranslate"><span class="pre">exit</span></code> port with a <code class="docutils literal notranslate"><span class="pre">*</span></code> character when a call
-succeeds with choice-points pending. After the port name, the debugger
-prints the goal invocation number. This invocation number is unique and
-can be used to correlate the port trace messages.</p>
+context spy points. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(female/2).
+
+yes
+
+| ?- addams::sister(Sister, Sibling).
+     Call: (1) sister(_1078,_1100) ?
+     Rule: (1) sister(_1078,_1100) ?
+     Call: (2) ::female(_1078) ?
+  +  Call: (3) female(_1078) ?
+</pre></div>
+</div>
 <p>To stop tracing and turning off the debugger, write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::notrace.
 
@@ -490,10 +517,12 @@ points, write:</p>
 yes
 </pre></div>
 </div>
-<p>At the beginning of a port description, the debugger will print a <code class="docutils literal notranslate"><span class="pre">#</span></code>,
-<code class="docutils literal notranslate"><span class="pre">+</span></code>, or <code class="docutils literal notranslate"><span class="pre">*</span></code> character before the current goal if there is,
-respectively, a line number, a predicate, or a context spy point
-defined.</p>
+<p>For example, assuming the spy point we set in the previous section on
+the <code class="docutils literal notranslate"><span class="pre">female/1</span></code> predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- addams::sister(Sister, Sibling).
+  +  Call: (3) female(_1078) ?
+</pre></div>
+</div>
 <p>To stop the debugger, write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> debugger<span class="o">::</span>nodebug.
 
