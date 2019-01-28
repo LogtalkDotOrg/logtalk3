@@ -36,14 +36,14 @@
 	]).
 
 	zip_at_index(Position, List, Zipper, Element) :-
-	    zip_at_index(Position, List, [], Zipper, Element).
+		zip_at_index(Position, List, [], Zipper, Element).
 
 	zip_at_index(1, [Head|Tail], Acc, zip(Acc,Head,Tail), Head) :-
 		!.
 	zip_at_index(N, [Head|Tail], Acc, zip(Before,Element,After), Element) :-
-	    N > 1,
-	    M is N - 1,
-	    zip_at_index(M, Tail, [Head|Acc], zip(Before,Element,After), Element).
+		N > 1,
+		M is N - 1,
+		zip_at_index(M, Tail, [Head|Acc], zip(Before,Element,After), Element).
 
 	zip([Head| Tail], zip([],Head,Tail)).
 
