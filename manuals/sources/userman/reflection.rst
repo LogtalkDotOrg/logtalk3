@@ -15,6 +15,7 @@
    limitations under the License.
 
 
+.. index:: single: reflection
 .. _reflection_reflection:
 
 Reflection
@@ -25,6 +26,7 @@ Structural reflection supports computations over an application structure
 while behavioral reflection computations over what an application does while
 running.
 
+.. index:: single: structural reflection
 .. _reflection_structural:
 
 Structural reflection
@@ -35,6 +37,8 @@ protocols, and predicates. It is materialized by an API that supports all the
 developer tools, which are regular applications. This API provides two views
 on the structure of an application: a *transparent-box view* and a *black-box
 view*, described next.
+
+.. index:: single: transparent-box view
 
 Transparent-box view
 ~~~~~~~~~~~~~~~~~~~~
@@ -59,6 +63,8 @@ on :ref:`object relations <objects_relationships>`,
 The :ref:`logtalk <apis:logtalk/0>` built-in object provides predicates for
 querying loaded source files and their properties. 
 
+.. index:: single: black-box view
+
 Black-box view
 ~~~~~~~~~~~~~~
 
@@ -73,6 +79,7 @@ It is also possible to enumerate defined entity :ref:`entity operators <methods_
 See the sections on :ref:`finding declared predicates <predicates_finding>` and
 on :ref:`predicate properties <predicates_properties>` for more details.
 
+.. index:: single: behavioral reflection
 .. _reflection_behavioral:
 
 Behavioral reflection
