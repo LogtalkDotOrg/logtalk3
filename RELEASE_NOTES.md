@@ -65,6 +65,9 @@ method.
 
 * IMPROVED: Glossary definitions of entity and parametric entity identifiers.
 
+* IMPROVED: Clarify definitions of object and category number of clauses and
+number of rules properties regarding definitions of multifile predicates.
+
 * FIXED: HTML favicon bug that resulted in a non-valid ePub version of the
 Handbook.
 
