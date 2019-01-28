@@ -102,6 +102,12 @@ predicate.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool now considers multifile predicates defined for
+other entities when reporting entity and predicates code coverage results.
+This change may result in lower percentages of code coverage than reported
+in previous versions for entities defining multifile predicates for other
+entities.
+
 * RENAMED: The `ports` tool to `ports_profiler`. The `ports` library alias is
 now used for the directory containing ports of third-party software.
 
