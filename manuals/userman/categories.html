@@ -129,6 +129,7 @@
 <li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">Reflection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
@@ -517,7 +518,6 @@ we will need to use the <a class="reference internal" href="../refman/predicates
 built-in predicate to ensure that the returned entity is a category and
 not an object.</p>
 <p>To find which objects import which categories we can use the
-<a class="reference internal" href="../refman/predicates/imports_category_2_3.html#predicates-imports-category-2-3"><span class="std std-ref">imports_category/2-3</span></a> or
 <a class="reference internal" href="../refman/predicates/imports_category_2_3.html#predicates-imports-category-2-3"><span class="std std-ref">imports_category/2-3</span></a> built-in predicates:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- imports_category(Object, Category).
 </pre></div>
@@ -528,7 +528,6 @@ not an object.</p>
 </div>
 <p>Note that a category may be imported by several objects.</p>
 <p>To find which categories extend other categories we can use the
-<a class="reference internal" href="../refman/predicates/extends_category_2_3.html#predicates-extends-category-2-3"><span class="std std-ref">extends_category/2-3</span></a> or
 <a class="reference internal" href="../refman/predicates/extends_category_2_3.html#predicates-extends-category-2-3"><span class="std std-ref">extends_category/2-3</span></a> built-in predicates:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_category(Category1, Category2).
 </pre></div>

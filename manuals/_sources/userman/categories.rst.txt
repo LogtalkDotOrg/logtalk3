@@ -392,7 +392,6 @@ built-in predicate to ensure that the returned entity is a category and
 not an object.
 
 To find which objects import which categories we can use the
-:ref:`predicates_imports_category_2_3` or
 :ref:`predicates_imports_category_2_3` built-in predicates:
 
 .. code-block:: text
@@ -408,7 +407,6 @@ or, if we also want to know the importation scope:
 Note that a category may be imported by several objects.
 
 To find which categories extend other categories we can use the
-:ref:`predicates_extends_category_2_3` or
 :ref:`predicates_extends_category_2_3` built-in predicates:
 
 .. code-block:: text

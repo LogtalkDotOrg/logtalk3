@@ -58,6 +58,8 @@ internal predicate.
 Documentation
 -------------
 
+* ADDED: Handbook section on reflection support.
+
 * IMPROVED: Handbook sections on debugging and the term-expansion mechanism.
 
 * IMPROVED: Handbook reference page on the `current_predicate/1` built-in

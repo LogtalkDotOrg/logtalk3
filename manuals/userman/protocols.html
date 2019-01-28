@@ -130,6 +130,7 @@
 <li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">Reflection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
@@ -364,9 +365,8 @@ directive.</p>
 <p>Logtalk provides two sets of built-in predicates that enable us to query
 the system about the possible relationships that a protocol have with
 other entities.</p>
-<p>The built-in predicates <a class="reference internal" href="../refman/predicates/extends_protocol_2_3.html#predicates-extends-protocol-2-3"><span class="std std-ref">extends_protocol/2-3</span></a>
-and <a class="reference internal" href="../refman/predicates/extends_protocol_2_3.html#predicates-extends-protocol-2-3"><span class="std std-ref">extends_protocol/2-3</span></a>
-return all pairs of protocols so that the first one extends the second:</p>
+<p>The <a class="reference internal" href="../refman/predicates/extends_protocol_2_3.html#predicates-extends-protocol-2-3"><span class="std std-ref">extends_protocol/2-3</span></a> built-in predicates return all
+pairs of protocols so that the first one extends the second:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_protocol(Protocol1, Protocol2).
 </pre></div>
 </div>
@@ -375,8 +375,7 @@ return all pairs of protocols so that the first one extends the second:</p>
 </pre></div>
 </div>
 <p>To find which objects or categories implement which protocols we can
-call the <a class="reference internal" href="../refman/predicates/implements_protocol_2_3.html#predicates-implements-protocol-2-3"><span class="std std-ref">implements_protocol/2-3</span></a>
-or <a class="reference internal" href="../refman/predicates/implements_protocol_2_3.html#predicates-implements-protocol-2-3"><span class="std std-ref">implements_protocol/2-3</span></a> built-in predicates:</p>
+call the <a class="reference internal" href="../refman/predicates/implements_protocol_2_3.html#predicates-implements-protocol-2-3"><span class="std std-ref">implements_protocol/2-3</span></a> built-in predicates:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- implements_protocol(ObjectOrCategory, Protocol).
 </pre></div>
 </div>

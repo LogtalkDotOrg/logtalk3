@@ -135,6 +135,7 @@
 <li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">Reflection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
@@ -681,9 +682,8 @@ dynamically. For example:</p>
 <p>Logtalk provides six sets of built-in predicates that enable us to query
 the system about the possible relationships that an object may have with
 other entities.</p>
-<p>The built-in predicates <a class="reference internal" href="../refman/predicates/instantiates_class_2_3.html#predicates-instantiates-class-2-3"><span class="std std-ref">instantiates_class/2-3</span></a> and
-<a class="reference internal" href="../refman/predicates/instantiates_class_2_3.html#predicates-instantiates-class-2-3"><span class="std std-ref">instantiates_class/2-3</span></a>
-can be used to query all instantiation relations:</p>
+<p>The <a class="reference internal" href="../refman/predicates/instantiates_class_2_3.html#predicates-instantiates-class-2-3"><span class="std std-ref">instantiates_class/2-3</span></a> built-in predicates can be
+used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- instantiates_class(Instance, Class).
 </pre></div>
 </div>
@@ -691,8 +691,7 @@ can be used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- instantiates_class(Instance, Class, Scope).
 </pre></div>
 </div>
-<p>Specialization relations can be found by using either the
-<a class="reference internal" href="../refman/predicates/specializes_class_2_3.html#predicates-specializes-class-2-3"><span class="std std-ref">specializes_class/2-3</span></a> or the
+<p>Specialization relations can be found by using the
 <a class="reference internal" href="../refman/predicates/specializes_class_2_3.html#predicates-specializes-class-2-3"><span class="std std-ref">specializes_class/2-3</span></a> built-in predicates:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- specializes_class(Class, Superclass).
 </pre></div>
@@ -701,8 +700,7 @@ can be used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- specializes_class(Class, Superclass, Scope).
 </pre></div>
 </div>
-<p>For prototypes, we can query extension relations with the
-<a class="reference internal" href="../refman/predicates/extends_object_2_3.html#predicates-extends-object-2-3"><span class="std std-ref">extends_object/2-3</span></a> or the
+<p>For prototypes, we can query extension relations using with the
 <a class="reference internal" href="../refman/predicates/extends_object_2_3.html#predicates-extends-object-2-3"><span class="std std-ref">extends_object/2-3</span></a> built-in predicates:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_object(Object, Parent).
 </pre></div>
@@ -712,8 +710,7 @@ can be used to query all instantiation relations:</p>
 </pre></div>
 </div>
 <p>In order to find which objects import which categories we can use the
-built-in predicates <a class="reference internal" href="../refman/predicates/imports_category_2_3.html#predicates-imports-category-2-3"><span class="std std-ref">imports_category/2-3</span></a> or
-<a class="reference internal" href="../refman/predicates/imports_category_2_3.html#predicates-imports-category-2-3"><span class="std std-ref">imports_category/2-3</span></a>:</p>
+<a class="reference internal" href="../refman/predicates/imports_category_2_3.html#predicates-imports-category-2-3"><span class="std std-ref">imports_category/2-3</span></a> built-in predicates:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- imports_category(Object, Category).
 </pre></div>
 </div>

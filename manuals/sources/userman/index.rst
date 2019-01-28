@@ -34,6 +34,7 @@ User Manual
    events
    threads
    errors
+   reflection
    programming
    printing
    expansion

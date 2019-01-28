@@ -217,9 +217,8 @@ Logtalk provides two sets of built-in predicates that enable us to query
 the system about the possible relationships that a protocol have with
 other entities.
 
-The built-in predicates :ref:`predicates_extends_protocol_2_3`
-and :ref:`predicates_extends_protocol_2_3`
-return all pairs of protocols so that the first one extends the second:
+The :ref:`predicates_extends_protocol_2_3` built-in predicates return all
+pairs of protocols so that the first one extends the second:
 
 .. code-block:: text
 
@@ -232,8 +231,7 @@ or, if we want to know the extension scope:
    | ?- extends_protocol(Protocol1, Protocol2, Scope).
 
 To find which objects or categories implement which protocols we can
-call the :ref:`predicates_implements_protocol_2_3`
-or :ref:`predicates_implements_protocol_2_3` built-in predicates:
+call the :ref:`predicates_implements_protocol_2_3` built-in predicates:
 
 .. code-block:: text
 

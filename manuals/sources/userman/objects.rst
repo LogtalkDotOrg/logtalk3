@@ -588,9 +588,8 @@ Logtalk provides six sets of built-in predicates that enable us to query
 the system about the possible relationships that an object may have with
 other entities.
 
-The built-in predicates :ref:`predicates_instantiates_class_2_3` and
-:ref:`predicates_instantiates_class_2_3`
-can be used to query all instantiation relations:
+The :ref:`predicates_instantiates_class_2_3` built-in predicates can be
+used to query all instantiation relations:
 
 .. code-block:: text
 
@@ -602,8 +601,7 @@ or, if we want to know the instantiation scope:
 
    | ?- instantiates_class(Instance, Class, Scope).
 
-Specialization relations can be found by using either the
-:ref:`predicates_specializes_class_2_3` or the
+Specialization relations can be found by using the
 :ref:`predicates_specializes_class_2_3` built-in predicates:
 
 .. code-block:: text
@@ -616,8 +614,7 @@ or, if we want to know the specialization scope:
 
    | ?- specializes_class(Class, Superclass, Scope).
 
-For prototypes, we can query extension relations with the
-:ref:`predicates_extends_object_2_3` or the
+For prototypes, we can query extension relations using with the
 :ref:`predicates_extends_object_2_3` built-in predicates:
 
 .. code-block:: text
@@ -631,8 +628,7 @@ or, if we want to know the extension scope:
    | ?- extends_object(Object, Parent, Scope).
 
 In order to find which objects import which categories we can use the
-built-in predicates :ref:`predicates_imports_category_2_3` or
-:ref:`predicates_imports_category_2_3`:
+:ref:`predicates_imports_category_2_3` built-in predicates:
 
 .. code-block:: text
 
