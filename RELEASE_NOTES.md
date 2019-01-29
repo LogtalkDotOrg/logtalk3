@@ -52,7 +52,7 @@ compiler.
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: O-Prolog adapter file definition of the '$lgt_compile_prolog_code'/3
+* FIXED: O-Prolog adapter file definition of the `'$lgt_compile_prolog_code'/3`
 internal predicate.
 
 Documentation
@@ -171,6 +171,9 @@ Installers and installation scripts
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
+
+* CHANGED: The source code for the IntelliJ IDEA plugin is now available
+from its own repository.
 
 * ADDED: EditorConfig root file, `.editorconfig`, to set the indentation
 preferences as per coding guidelines.
