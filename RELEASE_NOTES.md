@@ -146,8 +146,8 @@ Tests
 Examples
 --------
 
-* ADDED: Descriptions of two AI design patterns, "state-space search" and
-"many worlds", to the `design_patterns` example.
+* ADDED: Descriptions of "state-space search", "many worlds", and "expert
+system " AI design patterns to the `design_patterns` example.
 
 * ADDED: Simple example, `serialization`, of serializing objects to a file.
 
