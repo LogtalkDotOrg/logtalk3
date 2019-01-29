@@ -74,7 +74,15 @@ Examples
    % check that the list object publicly implements the listp protocol:
    | ?- implements_protocol(list, listp, public).
 
+   % enumerate only objects that implement the listp protocol:
+   | ?- current_object(Object), implements_protocol(Object, listp).
+
+   % enumerate only categories that implement the serialization protocol:
+   | ?- current_category(Category), implements_protocol(Category, serialization).
+
 .. seealso::
 
+   :ref:`predicates_current_object_1`,
    :ref:`predicates_current_protocol_1`,
+   :ref:`predicates_current_category_1`,
    :ref:`predicates_conforms_to_protocol_2_3`

@@ -74,7 +74,15 @@ Examples
    % enumerate objects and categories that privately conform to the listp protocol:
    | ?- conforms_to_protocol(Object, listp, private).
 
+   % enumerate only objects that conform to the listp protocol:
+   | ?- current_object(Object), conforms_to_protocol(Object, listp).
+
+   % enumerate only categories that conform to the serialization protocol:
+   | ?- current_category(Category), conforms_to_protocol(Category, serialization).
+
 .. seealso::
 
+   :ref:`predicates_current_object_1`,
    :ref:`predicates_current_protocol_1`,
+   :ref:`predicates_current_category_1`,
    :ref:`predicates_implements_protocol_2_3`

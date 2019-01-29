@@ -264,11 +264,19 @@ relation.</p>
 
 <span class="c">% enumerate objects and categories that privately conform to the listp protocol:</span>
 | <span class="o">?-</span> <span class="k">conforms_to_protocol</span>(<span class="nv">Object</span>, listp, private).
+
+<span class="c">% enumerate only objects that conform to the listp protocol:</span>
+| <span class="o">?-</span> <span class="k">current_object</span>(<span class="nv">Object</span>), <span class="k">conforms_to_protocol</span>(<span class="nv">Object</span>, listp).
+
+<span class="c">% enumerate only categories that conform to the serialization protocol:</span>
+| <span class="o">?-</span> <span class="k">current_category</span>(<span class="nv">Category</span>), <span class="k">conforms_to_protocol</span>(<span class="nv">Category</span>, serialization).
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="current_protocol_1.html#predicates-current-protocol-1"><span class="std std-ref">current_protocol/1</span></a>,
+<p class="last"><a class="reference internal" href="current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a>,
+<a class="reference internal" href="current_protocol_1.html#predicates-current-protocol-1"><span class="std std-ref">current_protocol/1</span></a>,
+<a class="reference internal" href="current_category_1.html#predicates-current-category-1"><span class="std std-ref">current_category/1</span></a>,
 <a class="reference internal" href="implements_protocol_2_3.html#predicates-implements-protocol-2-3"><span class="std std-ref">implements_protocol/2-3</span></a></p>
 </div>
 </div>
