@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/12/19,
+		date is 2019/01/29,
 		comment is 'Unit tests for the "serialization" example.'
 	]).
 
@@ -40,11 +40,17 @@
 	test(serialization_02) :-
 		forall(conforms_to_protocol(Object,abc), abolish_object(Object)),
 		serializer::restore(abc_objects),
-		conforms_to_protocol(Object1, abc), Object1::(a(A1), b(B1), c(C1)),
-		A1 == 1, B1 == 1, C1 == 1,
-		conforms_to_protocol(Object2, abc), Object2::(a(A2), b(B2), c(C2)),
-		A2 == 2, B2 == 2, C2 == 2,
-		conforms_to_protocol(Object3, abc), Object3::(a(A3), b(B3), c(C3)),
-		A3 == 3, B3 == 3, C3 == 3.
+		conforms_to_protocol(Object1, abc),
+		Object1::a(A1), A1 == 1,
+		Object1::b(B1), B1 == 1,
+		Object1::c(C1), C1 == 1,
+		conforms_to_protocol(Object2, abc),
+		Object2::a(A2), A2 == 2,
+		Object2::b(B2), B2 == 2,
+		Object2::c(C2), C2 == 2,
+		conforms_to_protocol(Object3, abc),
+		Object3::a(A3), A3 == 3,
+		Object3::b(B3), B3 == 3,
+		Object3::c(C3), C3 == 3.
 
 :- end_object.
