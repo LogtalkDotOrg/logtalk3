@@ -146,6 +146,9 @@ Tests
 Examples
 --------
 
+* ADDED: Descriptions of two AI design patterns, "state-space search" and
+"many worlds", to the `design_patterns` example.
+
 * ADDED: Simple example, `serialization`, of serializing objects to a file.
 
 * ADDED: Simple example, `slides`, of using the library list zipper support.

@@ -17,18 +17,22 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains ports of third-party libraries and applications:
+Design pattern:
+	State-space search
 
-* `metagol`  
-	This folder contains a Logtalk port of `metagol`, an inductive
-	logic programming (ILP) system based on meta-interpretive learning.
+Description:
+	Allow defining state-spaces (characterized by definitions
+	of initial states, goal states, and state transitions) and
+	applying different search strategies (blind or heuristic)
+	to find solutions (represented by a sequence of transitions
+	between an initial state and a final state).
 
-See the copyright and license information on the port files for usage
-and distributions conditions.
+Related examples:
+	The `examples/searching` example implements popular
+	state-spaces often used in AI courses and common blind
+	and heuristic search methods.
 
-The `loader.lgt` file loads all ports.
-
-HTML documentation for each port can be found on the `docs` directory
-(open the `docs/index.html` file with your web browser). The documentation
-for these tools can be regenerated using the shell scripts
-`../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.
+This design pattern is usually implemented such that a given state-space
+can be searched using any search method and a given search method can be
+applied to any state-space. I.e. the state-spaces and search methods
+implementations are kept orthogonal for maximum flexibility.

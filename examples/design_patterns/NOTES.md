@@ -17,8 +17,10 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains sample implementations of design patterns, most of
-them described in the book:
+This directory contains sample implementations of design patterns,
+originating from the OOP and AI communities. The OOP patterns are
+split between behavioral, creational, and structural patterns. Most
+of them are described in the book:
 
 Design Patterns - Elements of Reusable Object-Oriented Software
 Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
