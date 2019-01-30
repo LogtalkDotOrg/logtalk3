@@ -143,6 +143,8 @@ Tests
 
 * IMPROVED: Unit tests for the `expected` library.
 
+* IMPROVED: Unit tests for the `os` library.
+
 Examples
 --------
 

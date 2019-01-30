@@ -22,11 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Paulo Moura',
-		date is 2018/03/07,
+		date is 2019/01/30,
 		comment is 'Unit tests for the "os" object.'
 	]).
+
+	cover(os).
+	cover(os_types).
+
+	% os object tests
 
 	test(os_time_stamp_1_01) :-
 		os::time_stamp(TimeStamp),
@@ -301,6 +306,50 @@
 
 	test(os_sleep_1_01) :-
 		os::sleep(1).
+
+	% os_types category tests
+
+	test(os_types_type_1_01) :-
+		type::type(file).
+
+	test(os_types_type_1_02) :-
+		type::type(file(_)).
+
+	test(os_types_type_1_03) :-
+		type::type(directory).
+
+	test(os_types_type_1_04) :-
+		type::type(environment_variable).
+
+	test(os_types_check_2_01) :-
+		logtalk::expand_library_path(core('monitoring.lgt'), Path),
+		type::check(file, Path).
+
+	test(os_types_check_2_02) :-
+		logtalk::expand_library_path(core('foobar42.lgt'), Path),
+		\+ type::valid(file, Path).
+
+	test(os_types_check_2_03) :-
+		logtalk::expand_library_path(core('monitoring.lgt'), Path),
+		type::check(file(['.pl','.lgt']), Path).
+
+	test(os_types_check_2_04) :-
+		logtalk::expand_library_path(core('monitoring.lgt'), Path),
+		\+ type::valid(file(['.foo','.bar']), Path).
+
+	test(os_types_check_2_05) :-
+		logtalk::expand_library_path(core, Path),
+		type::check(directory, Path).
+
+	test(os_types_check_2_06) :-
+		logtalk::expand_library_path(core('foobar42/'), Path),
+		\+ type::valid(directory, Path).
+
+	test(os_types_check_2_07) :-
+		type::check(environment_variable, 'LOGTALKHOME').
+
+	test(os_types_check_2_08) :-
+		\+ type::valid(environment_variable, 'FOOBAR42').
 
 	setup :-
 		cleanup.
