@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2019/01/24,
+		date is 2019/01/30,
 		comment is 'Unit tests for the "expected" library.'
 	]).
 
@@ -35,6 +35,17 @@
 	cover(expected).
 	cover(expected(_)).
 	cover(either).
+
+	% type and arbitrary support
+
+	succeeds(expected_type_1_01) :-
+		type::type(expected).
+
+	succeeds(either_type_1_01) :-
+		type::type(either(_,_)).
+
+	succeeds(either_arbitrary_1_01) :-
+		type::arbitrary(either(_,_)).
 
 	% from_goal/4 tests
 

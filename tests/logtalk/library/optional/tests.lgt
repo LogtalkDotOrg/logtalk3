@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.9,
+		version is 0.11,
 		author is 'Paulo Moura',
-		date is 2019/01/24,
+		date is 2019/01/30,
 		comment is 'Unit tests for the "optional" library.'
 	]).
 
@@ -35,6 +35,17 @@
 	cover(optional).
 	cover(optional(_)).
 	cover(maybe).
+
+	% type and arbitrary support
+
+	succeeds(optional_type_1_01) :-
+		type::type(optional).
+
+	succeeds(maybe_type_1_01) :-
+		type::type(maybe(_)).
+
+	succeeds(maybe_arbitrary_1_01) :-
+		type::arbitrary(maybe(_)).
 
 	% from_goal/3 tests
 
