@@ -55,9 +55,9 @@ directives in a source file. A common scenario is to use the
 ``directory`` key to define library aliases.
 
 Currently, any variables in the values of the ``term`` and
-``variable_names`` keys are not shared with, respectively, the term and
-goal arguments of the ``term_expansion/2`` and ``goal_expansion/2``
-methods.
+``variable_names`` keys are not shared with, respectively, the term
+and goal arguments of the :ref:`methods_term_expansion_2` and
+:ref:`methods_goal_expansion_2` methods.
 
 Using the ``variable_names`` key requires calling the standard built-in
 predicate ``term_variables/2`` on the term read and unifying the term
@@ -96,5 +96,5 @@ Examples
 
 .. seealso::
 
-   :ref:`methods_goal_expansion_2`,
-   :ref:`methods_term_expansion_2`
+   :ref:`methods_term_expansion_2`,
+   :ref:`methods_goal_expansion_2`

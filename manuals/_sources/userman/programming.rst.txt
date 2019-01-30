@@ -286,7 +286,7 @@ compilers, you can also use the ``{*}`` top-level shortcut.
 
 An extended version of this predicate, :ref:`predicates_logtalk_make_1`,
 accepts multiple targets including ``all``, ``clean``, ``check``,
-``circular``, ``documentation``, and ``caches``. See the reference manual
+``circular``, ``documentation``, and ``caches``. See the Reference Manual
 for a complete list of targets and top-level shortcuts. In particular, the
 ``logtalk_make(clean)`` goal can be specially useful before switching
 backend Prolog compilers as the generated intermediate files may not be
@@ -961,5 +961,5 @@ define your predicates to take advantage of first-argument indexing. In
 the case of recursive predicates, define them as tail-recursive predicates
 whenever possible.
 
-See the :ref:`user manual section on performance <performance_performance>`
+See the :ref:`User Manual section on performance <performance_performance>`
 for a detailed discusion on Logtalk performance.

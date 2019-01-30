@@ -64,7 +64,7 @@ Whenever static binding is used, message sending performance is
 essentially the same as a predicate call in plain Prolog. Performance
 of dynamic binding when lookups are cached is close to the
 performance that would be achieved with static binding. See the
-user manual section on :ref:`performance <performance_performance>`
+User Manual section on :ref:`performance <performance_performance>`
 for more details.
 
 Which Prolog-dependent factors are most crucial for good Logtalk performance?

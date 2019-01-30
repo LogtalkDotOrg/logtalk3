@@ -28,9 +28,9 @@ Description
 
    logtalk_make_target_action(Target)
 
-Multifile and dynamic hook predicate that allows defining user actions
-for the ``logtalk_make/1`` targets. The user defined actions are run
-after the default ones using a failure driven loop.
+Multifile and dynamic hook predicate that allows defining user actions for
+the :ref:`predicates_logtalk_make_1` targets. The user defined actions are
+run after the default ones using a failure driven loop.
 
 Modes and number of proofs
 --------------------------

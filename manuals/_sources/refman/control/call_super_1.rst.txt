@@ -45,7 +45,7 @@ the :ref:`optimize <flag_optimize>` flag, these lookups are performed
 at compile time when the predicate is static and sufficient information
 is available. When the lookups are performed at runtime, a caching
 mechanism is used to improve performance in subsequent calls. See the
-user manual section on :ref:`performance <performance_performance>` for
+User Manual section on :ref:`performance <performance_performance>` for
 details.
 
 When the call is made from within an object, the lookup for the

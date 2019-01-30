@@ -31,7 +31,7 @@ Description
 Enumerates, by backtracking, the properties associated with the defined
 categories. The valid properties are listed in the language gramar section
 on :ref:`entity properties <grammar_entity_properties>` and described in
-the user manual section on :ref:`category properties <categories_properties>`.
+the User Manual section on :ref:`category properties <categories_properties>`.
 
 Modes and number of proofs
 --------------------------

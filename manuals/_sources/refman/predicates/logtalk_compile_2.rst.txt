@@ -39,8 +39,8 @@ specified, the compiler tries first to append a Logtalk source file
 extension and then a Prolog source file extension. If that fails, the
 compiler tries to use the file name as-is. Compiler flags are
 represented as *flag(value)*. For a description of the available
-compiler flags, please see :ref:`programming_flags` in the User
-Manual.
+compiler flags, please see the :ref:`programming_flags` section in the
+User Manual.
 
 When this predicate is called from the top-level, relative source file
 paths are resolved using the current working directory. When the calls

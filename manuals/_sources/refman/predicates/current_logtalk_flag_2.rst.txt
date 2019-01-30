@@ -28,7 +28,9 @@ Description
 
    current_logtalk_flag(Flag, Value)
 
-Enumerates, by backtracking, the current Logtalk flag values.
+Enumerates, by backtracking, the current Logtalk flag values. For
+a description of the predefined compiler flags, please see the
+:ref:`programming_flags` section in the User Manual.
 
 Modes and number of proofs
 --------------------------

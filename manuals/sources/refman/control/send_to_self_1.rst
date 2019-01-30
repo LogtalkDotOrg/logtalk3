@@ -40,7 +40,7 @@ is declared but not defined, the message simply fails (as per the
 The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. A message to *self* necessarily
 implies the use of dynamic binding but a caching mechanism is used to
-improve performance in subsequent messages. See the user manual section
+improve performance in subsequent messages. See the User Manual section
 on :ref:`performance <performance_performance>` for details.
 
 Modes and number of proofs

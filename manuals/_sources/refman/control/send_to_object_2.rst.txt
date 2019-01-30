@@ -51,7 +51,7 @@ performed using a depth-first strategy. Depending on the value of the
 :ref:`optimize <flag_optimize>` flag, these lookups are performed at
 compile time whenever sufficient information is available. When the
 lookups are performed at runtime, a caching mechanism is used to improve
-performance in subsequent messages. See the user manual section on
+performance in subsequent messages. See the User Manual section on
 :ref:`performance <performance_performance>` for details.
 
 Modes and number of proofs

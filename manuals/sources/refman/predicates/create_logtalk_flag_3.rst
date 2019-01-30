@@ -29,9 +29,11 @@ Description
    create_logtalk_flag(Flag, Value, Options)
 
 Creates a new Logtalk flag and sets its default value. User-defined
-flags can be queried and set in the same way as pre-defined flags by
+flags can be queried and set in the same way as predefined flags by
 using, respectively, the :ref:`predicates_current_logtalk_flag_2` and
-:ref:`predicates_set_logtalk_flag_2` built-in predicates.
+:ref:`predicates_set_logtalk_flag_2` built-in predicates. For a
+description of the predefined compiler flags, please see the
+:ref:`programming_flags` section in the User Manual.
 
 This predicate is based on the specification of the SWI-Prolog
 ``create_prolog_flag/3`` built-in predicate and supports the same

@@ -31,15 +31,15 @@ Description
 
 Compiles to disk and then loads to memory a :term:`source file` or a list
 of source files using a list of compiler flags. The Logtalk source file name
-extension (by default, ``.lgt``) can be omitted. Compiler flags are
-represented as *flag(value)*. This predicate can also be used to compile
-Prolog source files as Logtalk source code. When no recognized Logtalk
-or Prolog extension is specified, the compiler tries first to append a
+extension (by default, ``.lgt``) can be omitted. Source file paths can be
+absolute, relative to the current directory, or use library notation.
+Compiler flags are represented as *flag(value)*. This predicate can also be
+used to compile Prolog source files as Logtalk source code. When no recognized
+Logtalk or Prolog extension is specified, the compiler tries first to append a
 Logtalk source file extension and then a Prolog source file extension.
 If that fails, the compiler tries to use the file name as-is. For a
-description of the available compiler flags, please consult the
-:ref:`programming_flags` section in the User Manual. Source file paths
-can be absolute, relative to the current directory, or use library notation.
+description of the available compiler flags, please see the
+:ref:`programming_flags` section in the User Manual.
 
 When this predicate is called from the top-level, relative source file
 paths are resolved using the current working directory. When the calls

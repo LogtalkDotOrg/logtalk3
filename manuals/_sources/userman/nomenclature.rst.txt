@@ -67,7 +67,7 @@ equivalents.
    predicates.
 
 **friend function**
-   Not supported in Logtalk. Nevertheless, see the manual section on
+   Not supported in Logtalk. Nevertheless, see the User Manual section on
    :ref:`meta-predicates <predicates_meta>`.
 
 **instance**

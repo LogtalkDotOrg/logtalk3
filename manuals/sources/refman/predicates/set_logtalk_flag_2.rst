@@ -29,10 +29,11 @@ Description
    set_logtalk_flag(Flag, Value)
 
 Sets Logtalk default, global, flag values. For local flag scope, use the
-corresponding :ref:`directives_set_logtalk_flag_2`
-directive. To set a global flag value when compiling and loading a
-source file, wrap the calls to this built-in predicate with an
-:ref:`directives_initialization_1` directive.
+corresponding :ref:`directives_set_logtalk_flag_2` directive. To set a
+global flag value when compiling and loading a source file, wrap the calls
+to this built-in predicate with an :ref:`directives_initialization_1`
+directive. For a description of the predefined compiler flags, please see
+the :ref:`programming_flags` section in the User Manual.
 
 Modes and number of proofs
 --------------------------
