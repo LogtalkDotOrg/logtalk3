@@ -25,7 +25,7 @@ Starting up Logtalk
 
 Install Logtalk by using either the installer provided for your 
 operating-system (when available) or by following the instructions 
-on the `INSTALL.md` file.
+on the [INSTALL.md](INSTALL.md) file.
 
 On POSIX operating-systems, the following shell scripts are installed 
 by default for running Logtalk with selected backend Prolog compilers 

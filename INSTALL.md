@@ -54,7 +54,9 @@ In this case, there is no installation procedure other than decompressing the
 sources (or cloning the git repository) into a convenient directory. Simply
 skip to the section below on setting the Logtalk environment variables and
 use the directory full path as the value for both the `LOGTALKHOME` and
-`LOGTALKUSER` variables.
+`LOGTALKUSER` variables. Note that in this case, on POSIX systems, you will
+need to call the provided scripts without omitting the `.sh` extension (e.g.
+`swilgt.sh` instead of `swilgt`).
 
 * Installing for a single user with no administrative rights:
 
@@ -97,7 +99,7 @@ installation script accepts an installation prefix as argument. For example:
 If no prefix is given, the default installation prefix depends on the
 operating-system:
 
-* Mac OS X:				`/opt/local`
+* macOS:				`/opt/local`
 * Debian distributions:	`/usr`
 * Other POSIX systems:	`/usr/local`
 
@@ -124,7 +126,8 @@ in your home directory where you want to store the user-specific Logtalk files
 Windows). Both environment variables may be set for all users by a user with
 administration privileges.
 
-For POSIX systems, add the following lines to your `~/.profile` file:
+For POSIX systems using a bash shell, add the following lines to your
+`~/.profile` file:
 
 	LOGTALKHOME=/your/logtalk/installation/directory
 	LOGTALKUSER=$HOME/logtalk
@@ -132,7 +135,8 @@ For POSIX systems, add the following lines to your `~/.profile` file:
 	MANPATH=$MANPATH:$LOGTALKHOME/man
 	export LOGTALKHOME LOGTALKUSER PATH MANPATH
 
-If you use instead a csh shell, add the following line to your `~/.cshrc` file:
+If you use instead a csh shell, add the following line to your
+`~/.cshrc` file:
 
 	setenv LOGTALKHOME /your/logtalk/installation/directory
 	setenv LOGTALKUSER ${HOME}/logtalk
