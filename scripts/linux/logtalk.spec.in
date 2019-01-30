@@ -54,6 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/integration
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/library
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/paths
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/ports
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/man
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/manuals
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/scratch
