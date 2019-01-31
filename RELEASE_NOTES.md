@@ -32,6 +32,9 @@ Documentation
 Examples
 --------
 
+* ADDED: Logic design pattern "threading state" to the `design_patterns`
+example.
+
 * ADDED: An alternative implementation of the `cascade` example using DCGs.
 
 
