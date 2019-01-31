@@ -22,9 +22,15 @@ file.
 
 This example illustrates using expected terms to call a conjunction of
 goals where any of them may cause an error condition without using the
-traditional catch/throw mechanism. This solution allows us to abstract
-the error handling code that would be required to test if the previous
-goal generated an error before calling the next goal in the conjunction.
+traditional catch/throw mechanism. This solution allows us to:
+
+1. Abstract the error handling code that would be required to test if
+the previous goal generated an error before calling the next goal in
+the conjunction.
+
+2. Allow the next goal to decide what to do with the result passed by
+the previous goal. For example, recovering from an unexpected error or
+just passing the unexpected error to the next goal.
 
 The original example is taken from standardization proposals and online
 discussions on expected values in the context of other OOP languages such
