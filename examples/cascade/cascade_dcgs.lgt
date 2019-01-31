@@ -61,21 +61,24 @@
 
 	% calling the individual image filter predicates either results in an error
 	% (missing_cat, bow_tie_failure, ...) or in the application of the filter;
+	%
+	% we use call//1 to avoid hard-coding assumptions on how grammar rules are
+	% compiled into clauses
 
 	crop_to_cat -->
-		apply_filter(cropped, missing_cat).
+		call(apply_filter(cropped, missing_cat)).
 
 	add_bow_tie -->
-		apply_filter(with_bow_tie, bow_tie_failure).
+		call(apply_filter(with_bow_tie, bow_tie_failure)).
 
 	make_eyes_sparkle -->
-		apply_filter(sparkling_eyes, eyes_closed).
+		call(apply_filter(sparkling_eyes, eyes_closed)).
 
 	make_smaller -->
-		apply_filter(smaller, wants_to_grow).
+		call(apply_filter(smaller, wants_to_grow)).
 
 	add_rainbow -->
-		apply_filter(with_rainbow, sunny_day).
+		call(apply_filter(with_rainbow, sunny_day)).
 
 	% we get the random behavior by calling the random::maybe(0.9) predicate,
 	% which succeeds with probability 0.9;
