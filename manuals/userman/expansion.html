@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Term and goal expansion &mdash; The Logtalk Handbook v3.23.0 documentation</title>
+  <title>Term and goal expansion &mdash; The Logtalk Handbook v3.24.0-b01 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                3.23.0
+                3.24.0
               </div>
             
           
@@ -212,7 +212,7 @@ and domain-specific languages.</p>
 <h2>Defining expansions<a class="headerlink" href="#defining-expansions" title="Permalink to this headline">¶</a></h2>
 <p>Term and goal expansions are defined using, respectively, the predicates
 <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>, which
-are declared in the <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.23.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol.
+are declared in the <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol.
 For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(an_object,
     <span class="k">implements</span>(expanding)).
@@ -300,7 +300,7 @@ defining clauses for the <a class="reference internal" href="../refman/methods/t
 <h2>Hook objects<a class="headerlink" href="#hook-objects" title="Permalink to this headline">¶</a></h2>
 <p>Term and goal expansion of a source file during its compilation is performed
 by using <em>hook objects</em>. A hook object is simply an object implementing the
-<a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.23.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol, defining clauses for
+<a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol, defining clauses for
 the term and goal expansion hook predicates.</p>
 <p>To compile a source file using a hook object, we can use the
 <a class="reference internal" href="programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler flag in the second argument of the
@@ -392,9 +392,9 @@ yes
 <h2>Combining multiple expansions<a class="headerlink" href="#combining-multiple-expansions" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes we have multiple hook objects that we need to use in the compilation
 of a source file. The Logtalk library includes support for two basic expansion
-workflows: a <a class="reference external" href="https://logtalk.org/library/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.23.0)"><span class="xref std std-ref">pipeline</span></a> of hook objects, where the
+workflows: a <a class="reference external" href="https://logtalk.org/library/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">pipeline</span></a> of hook objects, where the
 expansion results from a hook object are feed to the next hook object in the
-pipeline, and a <a class="reference external" href="https://logtalk.org/library/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.23.0)"><span class="xref std std-ref">set</span></a> of hook objects, where expansions
+pipeline, and a <a class="reference external" href="https://logtalk.org/library/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">set</span></a> of hook objects, where expansions
 are tried until one of them succeeds. These workflows are implemented as
 parametric objects allowing combining them to implement more sophisticated
 expansion workflows.</p>
