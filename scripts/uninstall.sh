@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on October 4, 2018
+##   Last updated on January 31, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
