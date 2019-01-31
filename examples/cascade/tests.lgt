@@ -22,16 +22,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/01/22,
+		date is 2019/01/31,
 		comment is 'Unit tests for the "cascade" example.'
 	]).
 
 	cover(cascade).
+	cover(cascade_dcgs).
 
 	test(cascade_01) :-
 		catch(cascade::process_image(image, Final), Error, true),
+		(	var(Error) ->
+			ground(Final),
+			compound(Final)
+		;	ground(Error),
+			list::memberchk(Error, [missing_cat,bow_tie_failure,eyes_closed,wants_to_grow,sunny_day])
+		).
+
+	test(cascade_dcgs_01) :-
+		catch(cascade_dcgs::process_image(image, Final), Error, true),
 		(	var(Error) ->
 			ground(Final),
 			compound(Final)

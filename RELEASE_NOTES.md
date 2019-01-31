@@ -24,6 +24,10 @@ RELEASE NOTES
 3.24.0 - March ??, 2019
 =======================
 
+Examples
+--------
+
+* ADDED: An alternative implementation of the `cascade` example using DCGs.
 
 
 3.23.0 - January 30, 2019

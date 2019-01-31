@@ -21,5 +21,5 @@
 :- initialization((
 	logtalk_load(library(expected_loader)),
 	logtalk_load(library(random_loader)),
-	logtalk_load(cascade)
+	logtalk_load([cascade, cascade_dcgs])
 )).
