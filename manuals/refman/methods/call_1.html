@@ -212,6 +212,8 @@
 <span class="k">call</span>(<span class="nv">Closure</span>, <span class="nv">Arg1</span>, ...)
 <span class="k">call</span>(<span class="nv">Object</span><span class="o">::</span><span class="nv">Closure</span>, <span class="nv">Arg1</span>, ...)
 <span class="k">call</span>(<span class="o">::</span><span class="nv">Closure</span>, <span class="nv">Arg1</span>, ...)
+<span class="k">call</span>(<span class="o">^^</span><span class="nv">Closure</span>, <span class="nv">Arg1</span>, ...)
+...
 </pre></div>
 </div>
 <p>This non-terminal takes a closure and is processed by appending the
@@ -257,6 +259,10 @@ the remaining tokens processed by the grammar rule containing the call.</p>
 <div class="line">Calls a goal, constructed by appending the tokens difference list to the closure, in in the context of the object or category containing the call:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">call(Closure)</span></code></div>
+</div>
+<div class="line">To make a <em>super</em> call, constructed by appending the tokens difference list to the closure:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">call(^^Closure)</span></code></div>
 </div>
 <div class="line">To send a goal, constructed by appending the tokens difference list to the closure, as a message to <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</div>
 <div class="line-block">

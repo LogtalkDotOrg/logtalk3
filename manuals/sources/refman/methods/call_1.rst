@@ -30,6 +30,8 @@ Description
    call(Closure, Arg1, ...)
    call(Object::Closure, Arg1, ...)
    call(::Closure, Arg1, ...)
+   call(^^Closure, Arg1, ...)
+   ...
 
 This non-terminal takes a closure and is processed by appending the
 input list of tokens and the list of remaining tokens to the arguments
@@ -71,6 +73,8 @@ Examples
 
 | Calls a goal, constructed by appending the tokens difference list to the closure, in in the context of the object or category containing the call:
 |     ``call(Closure)``
+| To make a *super* call, constructed by appending the tokens difference list to the closure:
+|     ``call(^^Closure)``
 | To send a goal, constructed by appending the tokens difference list to the closure, as a message to :term:`self`:
 |     ``call(::Closure)``
 | To send a goal, constructed by appending the tokens difference list to the closure, as a message to an explicit object:
