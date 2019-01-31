@@ -46,12 +46,33 @@
 	% difference-list in each grammar rule
 
 	square -->
-		call([Number,Double]>>(Double is Number*Number)).
+		call([Number, Double]>>(Double is Number * Number)).
 
 	half -->
-		call([Number,Half]>>(Half is Number/2.0)).
+		call([Number, Half]>>(Half is Number / 2.0)).
 
 	round -->
-		call([Float,Integer]>>(Integer is round(Float))).
+		call([Float, Integer]>>(Integer is round(Float))).
+
+	% alternative formulation where the individual steps
+	% are defined as predicates instead of non-terminals
+	%
+	% the call//1 built-in meta non-terminal is used to
+	% avoid hard-coding assumptions abourt how grammar
+	% rules are compiled into clauses
+
+%	steps -->
+%		call(square),
+%		call(half),
+%		call(round).
+%
+%	square(Number, Double) :-
+%		Double is Number*Number.
+%
+%	half(Number, Half) :-
+%		Half is Number / 2.0.
+%
+%	round(Float, Integer) :-
+%		Integer is round(Float).
 
 :- end_object.
