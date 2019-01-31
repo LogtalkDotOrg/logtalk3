@@ -24,6 +24,11 @@ RELEASE NOTES
 3.24.0 - March ??, 2019
 =======================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `call//1-N` built-in non-terminal.
+
 Examples
 --------
 

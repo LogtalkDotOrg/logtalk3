@@ -34,12 +34,19 @@ Description
 This non-terminal takes a closure and is processed by appending the
 input list of tokens and the list of remaining tokens to the arguments
 of the closure. This built-in non-terminal is interpreted as a private
-non-terminal and thus cannot be used as a message to an object. When
-using a :term:`backend Prolog compiler` supporting a module system, calls
-in the format ``call(Module:Closure)`` may also be used. By using as
-argument a :term:`lambda expression`, this built-in non-terminal can
-provide controlled access to the input list of tokens and to the list
-of the remaining tokens processed by the grammar rule containing the call.
+non-terminal and thus cannot be used as a message to an object.
+
+Using this non-terminal is recommended when calling a predicate whose
+last two arguments are the input list of tokens and the list of remaining
+tokens to avoid hard-coding assumptions about how grammar rules are
+compiled into clauses. Note that the compiler ensures zero overhead when
+using this non-terminal with a bound argument at compile time.
+
+When using a :term:`backend Prolog compiler` supporting a module system,
+calls in the format ``call(Module:Closure)`` may also be used. By using
+as argument a :term:`lambda expression`, this built-in non-terminal can
+provide controlled access to the input list of tokens and to the list of
+the remaining tokens processed by the grammar rule containing the call.
 
 Modes and number of proofs
 --------------------------
