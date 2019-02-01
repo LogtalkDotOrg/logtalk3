@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(prolog_dialect, swi), \+ current_prolog_flag(double_quotes, codes))).
+:- if(current_logtalk_flag(prolog_dialect, swi)).
 	:- set_prolog_flag(double_quotes, codes).
 :- endif.
 
