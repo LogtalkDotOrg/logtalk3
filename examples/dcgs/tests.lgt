@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018/08/16,
+		date is 2019/02/01,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -127,6 +127,7 @@
 	:- endif.
 
 	test(dcgs_21) :-
+		^^suppress_text_output,
 		logtalk << phrase(bypass::foo, _, _).
 
 	% test access to the grammar rule implicit list of tokens using the call//1 built-in
@@ -168,6 +169,7 @@
 		Xs == [1,2,3].
 
 	test(dcgs_30) :-
+		^^suppress_text_output,
 		client::print.
 
 	test(dcgs_31) :-
