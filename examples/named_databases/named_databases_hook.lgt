@@ -74,7 +74,7 @@
 		goal_expansion(db_call(Database, Goal), Database:Goal).
 		goal_expansion(db_once(Database, Goal), once(Database:Goal)).
 		goal_expansion(db_listing(Database), listing(Database:_)).
-		goal_expansion(db_load(Database, File), Database:reconsult(File)).
+		goal_expansion(db_load(Database, File), Database:load_files(File,[])).
 
 	:- else.
 

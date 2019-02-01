@@ -165,6 +165,11 @@
 
 :- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
 
+	% don't rely on SWI-Prolog autoloading mechanism to be enabled
+	:- if(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(library(listing), [listing/1]).
+	:- endif.
+
 	db_create(Database) :-
 		(	current_module(Database) ->
 			db_clear(Database)
@@ -202,7 +207,7 @@
 		listing(Database:_).
 
 	db_load(Database, File) :-
-		Database:reconsult(File).
+		Database:load_files(File, []).
 
 	db_save(Database, File) :-
 		open(File, write, Stream),

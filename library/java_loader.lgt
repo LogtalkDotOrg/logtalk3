@@ -18,6 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% don't rely on SWI-Prolog autoloading mechanism to be enabled
+:- if(current_logtalk_flag(prolog_dialect, swi)).
+
+	:- use_module(library(dialect), [exists_source/1]).
+
+:- endif.
+
+
 :- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
 
 	:- if(exists_source(library(jpl))).
