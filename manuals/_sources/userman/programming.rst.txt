@@ -514,6 +514,13 @@ an entity. For example:
 Note that the scope of the ``set_logtalk_flag/2`` directive is local to
 the entity or to the source file containing it.
 
+.. note::
+
+   Applications should never rely on default flag values for working
+   properly.  Whenever the compilation of a source file or an entity
+   requires a specific flag value, the flag should be set explicitly
+   in the file, in the entity, or in the loader file.
+
 Version flags
 ^^^^^^^^^^^^^
 

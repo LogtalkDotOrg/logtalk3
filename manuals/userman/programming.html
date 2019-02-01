@@ -622,6 +622,13 @@ an entity. For example:</p>
 </div>
 <p>Note that the scope of the <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive is local to
 the entity or to the source file containing it.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Applications should never rely on default flag values for working
+properly.  Whenever the compilation of a source file or an entity
+requires a specific flag value, the flag should be set explicitly
+in the file, in the entity, or in the loader file.</p>
+</div>
 <div class="section" id="version-flags">
 <h4>Version flags<a class="headerlink" href="#version-flags" title="Permalink to this headline">¶</a></h4>
 <span id="index-0"></span><dl class="docutils" id="flag-version-data">
