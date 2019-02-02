@@ -126,22 +126,22 @@ in your home directory where you want to store the user-specific Logtalk files
 Windows). Both environment variables may be set for all users by a user with
 administration privileges.
 
-For POSIX systems using a bash shell, add the following lines to your
+For POSIX systems using a bash shell, edit and add the following lines to your
 `~/.profile` file:
 
-	LOGTALKHOME=/your/logtalk/installation/directory
-	LOGTALKUSER=$HOME/logtalk
-	PATH=$PATH:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
-	MANPATH=$MANPATH:$LOGTALKHOME/man
-	export LOGTALKHOME LOGTALKUSER PATH MANPATH
+LOGTALKHOME=/your/logtalk/installation/directory
+LOGTALKUSER="$HOME/logtalk"
+PATH="$PATH:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration"
+MANPATH="$MANPATH:$LOGTALKHOME/man"
+export LOGTALKHOME LOGTALKUSER PATH MANPATH
 
-If you use instead a csh shell, add the following line to your
+If you use instead a csh shell, edit and add the following lines to your
 `~/.cshrc` file:
 
-	setenv LOGTALKHOME /your/logtalk/installation/directory
-	setenv LOGTALKUSER ${HOME}/logtalk
-	setenv PATH ${PATH}:${LOGTALKHOME}/tools/lgtdoc/xml:${LOGTALKHOME}/scripts:${LOGTALKHOME}/integration
-	setenv MANPATH ${MANPATH}:${LOGTALKHOME}/man
+setenv LOGTALKHOME /your/logtalk/installation/directory
+setenv LOGTALKUSER ${HOME}/logtalk
+setenv PATH ${PATH}:${LOGTALKHOME}/tools/lgtdoc/xml:${LOGTALKHOME}/scripts:${LOGTALKHOME}/integration
+setenv MANPATH ${MANPATH}:${LOGTALKHOME}/man
 
 Don't use relative paths such as `../` or `./` in the definition of the environment
 variables. Some Prolog compilers don't expand environment variables, resulting
