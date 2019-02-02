@@ -180,9 +180,8 @@ common predicates that are inherited by other classes.</dd>
 to calls to methods defined in the descendants of the object (or
 <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>) containing it.</dd>
 <dt id="term-adapter-file">adapter file</dt>
-<dd>A Prolog source file defining a minimal abstraction layer between
-the Logtalk compiler/runtime and a specific
-<a class="reference internal" href="#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>.</dd>
+<dd>A Prolog source file defining a minimal abstraction layer between the
+Logtalk compiler/runtime and a specific <a class="reference internal" href="#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>.</dd>
 <dt id="term-ancestor">ancestor</dt>
 <dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> or a parent <a class="reference internal" href="#term-prototype"><span class="xref std std-term">prototype</span></a> that contributes (via
 inheritance) to the definition of an object. For class-based hierarchies,
@@ -213,7 +212,7 @@ that instantiates it. An object can also be interpreted as a class
 when it instantiates itself.</dd>
 <dt id="term-closed-world-assumption">closed-world assumption</dt>
 <dd>The assumption that what cannot be proved true is false. Therefore,
-sending a message corresponding to a <em>declared</em> but not <em>defined</em>
+sending a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> corresponding to a <em>declared</em> but not <em>defined</em>
 predicate, or calling a declared predicate with no clauses, fails.
 But messages or calls to undeclared predicates generate an error.</dd>
 <dt id="term-coinductive-predicate">coinductive predicate</dt>
@@ -227,17 +226,17 @@ set of objects).</dd>
 <dd>A source file term that affects the interpretation of source code.
 Directives use the <code class="docutils literal notranslate"><span class="pre">(:-)/1</span></code> prefix operator as functor.</dd>
 <dt id="term-doclet-file">doclet file</dt>
-<dd>A source file whose main purpose is to generate documentation for
-e.g. a <a class="reference internal" href="#term-library"><span class="xref std std-term">library</span></a> or an application.</dd>
+<dd>A <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> whose main purpose is to generate documentation
+for e.g. a <a class="reference internal" href="#term-library"><span class="xref std std-term">library</span></a> or an application.</dd>
 <dt id="term-doclet-object">doclet object</dt>
 <dd>An object specifying the steps necessary to (re)generate the API
 documentation for a project. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
 tools for details.</dd>
 <dt id="term-dynamic-binding">dynamic binding</dt>
-<dd>Runtime lookup of a predicate declaration and definition to verify
-the validity of a message (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>) and find the predicate
-definition that will be used to answer the message (or the super call).
-Also known as <em>late binding</em>. See also <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</dd>
+<dd>Runtime lookup of a predicate declaration and definition to verify the
+validity of a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>) and find the
+predicate definition that will be used to answer the message (or the
+super call). Also known as <em>late binding</em>. See also <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</dd>
 <dt id="term-encapsulation">encapsulation</dt>
 <dd>The hiding of an object implementation. This promotes software reuse
 by isolating the object clients from its implementation details.
@@ -301,6 +300,8 @@ inheritance.</dd>
 <dd>The process of creating a new class instance. In Logtalk, this does
 not necessarily imply dynamic creation of an object at runtime; an
 instance may also be defined as a static object in a source file.</dd>
+<dt id="term-interface">interface</dt>
+<dd>See <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocol</span></a>.</dd>
 <dt id="term-lambda-expression">lambda expression</dt>
 <dd>A compound term that can be used in place of a goal or closure
 meta-argument and that abstracts a predicate definition by listing
@@ -354,9 +355,9 @@ built-in meta-predicates.</dd>
 <dd>The <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> of a class, when interpreted as an instance.
 Metaclass instances are themselves classes.</dd>
 <dt id="term-method">method</dt>
-<dd>The predicate definition used to answer a message sent to an object.
-Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>
-to find which method to run to answer a message.</dd>
+<dd>The predicate definition used to answer a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> sent to
+an object. Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and
+<a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> to find which method to run to answer a message.</dd>
 <dt id="term-module">module</dt>
 <dd>A Prolog entity characterized by an identity and a set of predicate
 directives and clauses. Prolog modules are usually static although
@@ -461,10 +462,10 @@ with other objects is always interpreted as a prototype.</dd>
 <dt id="term-public-predicate">public predicate</dt>
 <dd>A predicate that can be called from any object.</dd>
 <dt id="term-self">self</dt>
-<dd>The object that received the message under processing.</dd>
+<dd>The object that received the <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> under processing.</dd>
 <dt id="term-sender">sender</dt>
-<dd>An object that sends a message to other object. When a message is
-sent from within a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>, the <em>sender</em> is the object
+<dd>An object that sends a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> to other object. When a message
+is sent from within a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>, the <em>sender</em> is the object
 importing the category.</dd>
 <dt id="term-settings-file">settings file</dt>
 <dd>A <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a>, compiled and loaded at Logtalk startup, mainly
@@ -486,10 +487,10 @@ may be intermixed with Logtalk entity definitions.</dd>
 predicates and possibly add new ones.</dd>
 <dt id="term-static-binding">static binding</dt>
 <dd>Compile time lookup of a predicate declaration and definition when
-compiling a message sending call (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>). Dynamic
-binding is used whenever static binding is not possible (e.g. due to
-the predicate being dynamic or due to lack of enough information at
-compilation time). Also known as <em>early binding</em>. See also
+compiling a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> sending call (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>).
+Dynamic binding is used whenever static binding is not possible (e.g.
+due to the predicate being dynamic or due to lack of enough information
+at compilation time). Also known as <em>early binding</em>. See also
 <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
 <dt id="term-subclass">subclass</dt>
 <dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that is a specialization, direct or indirectly, of
@@ -498,7 +499,8 @@ another class.</dd>
 <dd>Call of an inherited (or imported) predicate definition. Mainly used
 when redefining an inherited (or imported) predicate to call the
 overridden definition while making additional calls. Super calls preserve
-self and may require <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> if the predicate is dynamic.</dd>
+<a class="reference internal" href="#term-self"><span class="xref std std-term">self</span></a> and may require <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> if the predicate is
+dynamic.</dd>
 <dt id="term-superclass">superclass</dt>
 <dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> from which another class is a specialization
 (directly or indirectly via another class).</dd>

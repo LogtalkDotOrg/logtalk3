@@ -21,8 +21,8 @@ Error handling
 ==============
 
 All error handling is done in Logtalk by using the standard ``catch/3``
-and ``throw/1`` predicates [ISO95]_. Errors thrown by Logtalk have
-(when possible) the following format:
+and ``throw/1`` predicates [ISO95]_. Errors thrown by Logtalk have,
+whenever possible, the following format:
 
 ::
 
@@ -186,9 +186,9 @@ no matching clause.
 Suspicious calls
 ~~~~~~~~~~~~~~~~
 
-A warning will be reported for calls that are syntactically correct but
-most likely a semantic error. An example is ``::/1`` calls in clauses
-that apparently are meant to implement recursive predicate definitions
+A warning will be reported for calls that are syntactically correct but most
+likely a semantic error. An example is :ref:`control_send_to_self_1` calls in
+clauses that apparently are meant to implement recursive predicate definitions
 where the user intention is to call the local predicate definition.
 
 .. _errors_lambda_variables:

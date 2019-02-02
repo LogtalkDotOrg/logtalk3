@@ -66,7 +66,7 @@ Glossary
 
    closed-world assumption
       The assumption that what cannot be proved true is false. Therefore,
-      sending a message corresponding to a *declared* but not *defined*
+      sending a :term:`message` corresponding to a *declared* but not *defined*
       predicate, or calling a declared predicate with no clauses, fails.
       But messages or calls to undeclared predicates generate an error.
 
@@ -190,9 +190,9 @@ Glossary
       language.
 
    method
-      The predicate definition used to answer a message sent to an object.
-      Logtalk supports both :term:`static binding` and :term:`dynamic binding`
-      to find which method to run to answer a message.
+      The predicate definition used to answer a :term:`message` sent to
+      an object. Logtalk supports both :term:`static binding` and
+      :term:`dynamic binding` to find which method to run to answer a message.
 
    abstract method
       A :term:`method` implementing an algorithm whose step corresponds
@@ -355,24 +355,28 @@ Glossary
       protocol should be functionally-cohesive, specifying a single
       functionality.
 
+   interface
+      See :term:`protocol`.
+
    prototype
       A self-describing object that may extend or be extended by other
       objects. An object with no instantiation or specialization relations
       with other objects is always interpreted as a prototype.
 
    self
-      The object that received the message under processing.
+      The object that received the :term:`message` under processing.
 
    sender
-      An object that sends a message to other object. When a message is
-      sent from within a :term:`category`, the *sender* is the object
+      An object that sends a :term:`message` to other object. When a message
+      is sent from within a :term:`category`, the *sender* is the object
       importing the category.
 
    super call
       Call of an inherited (or imported) predicate definition. Mainly used
       when redefining an inherited (or imported) predicate to call the
       overridden definition while making additional calls. Super calls preserve
-      self and may require :term:`dynamic binding` if the predicate is dynamic.
+      :term:`self` and may require :term:`dynamic binding` if the predicate is
+      dynamic.
 
    specialization
       A :term:`class` is specialized by defining a new class that inherit its
@@ -384,13 +388,12 @@ Glossary
       may be intermixed with Logtalk entity definitions.
 
    adapter file
-      A Prolog source file defining a minimal abstraction layer between
-      the Logtalk compiler/runtime and a specific
-      :term:`backend Prolog compiler`.
+      A Prolog source file defining a minimal abstraction layer between the
+      Logtalk compiler/runtime and a specific :term:`backend Prolog compiler`.
 
    doclet file
-      A source file whose main purpose is to generate documentation for
-      e.g. a :term:`library` or an application.
+      A :term:`source file` whose main purpose is to generate documentation
+      for e.g. a :term:`library` or an application.
 
    loader file
       A :term:`source file` whose main purpose is to load a set of
@@ -413,17 +416,17 @@ Glossary
       predicate clause is being executed.
 
    dynamic binding
-      Runtime lookup of a predicate declaration and definition to verify
-      the validity of a message (or a :term:`super call`) and find the predicate
-      definition that will be used to answer the message (or the super call).
-      Also known as *late binding*. See also :term:`static binding`.
+      Runtime lookup of a predicate declaration and definition to verify the
+      validity of a :term:`message` (or a :term:`super call`) and find the
+      predicate definition that will be used to answer the message (or the
+      super call). Also known as *late binding*. See also :term:`static binding`.
 
    static binding
       Compile time lookup of a predicate declaration and definition when
-      compiling a message sending call (or a :term:`super call`). Dynamic
-      binding is used whenever static binding is not possible (e.g. due to
-      the predicate being dynamic or due to lack of enough information at
-      compilation time). Also known as *early binding*. See also
+      compiling a :term:`message` sending call (or a :term:`super call`).
+      Dynamic binding is used whenever static binding is not possible (e.g.
+      due to the predicate being dynamic or due to lack of enough information
+      at compilation time). Also known as *early binding*. See also
       :term:`dynamic binding`.
 
    lambda expression

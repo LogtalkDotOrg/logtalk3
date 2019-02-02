@@ -224,8 +224,8 @@
   <div class="section" id="error-handling">
 <span id="errors-errors"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
 <p>All error handling is done in Logtalk by using the standard <code class="docutils literal notranslate"><span class="pre">catch/3</span></code>
-and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>. Errors thrown by Logtalk have
-(when possible) the following format:</p>
+and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>. Errors thrown by Logtalk have,
+whenever possible, the following format:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>error(<span class="nv">Error</span>, logtalk(<span class="nv">Goal</span>, <span class="nv">ExecutionContext</span>))
 </pre></div>
 </div>
@@ -342,9 +342,9 @@ no matching clause.</p>
 </div>
 <div class="section" id="suspicious-calls">
 <span id="errors-suspicious-calls"></span><h3>Suspicious calls<a class="headerlink" href="#suspicious-calls" title="Permalink to this headline">¶</a></h3>
-<p>A warning will be reported for calls that are syntactically correct but
-most likely a semantic error. An example is <code class="docutils literal notranslate"><span class="pre">::/1</span></code> calls in clauses
-that apparently are meant to implement recursive predicate definitions
+<p>A warning will be reported for calls that are syntactically correct but most
+likely a semantic error. An example is <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> calls in
+clauses that apparently are meant to implement recursive predicate definitions
 where the user intention is to call the local predicate definition.</p>
 </div>
 <div class="section" id="lambda-variables">
