@@ -235,8 +235,9 @@ documentation for a project. See the
 and <a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtdoc/NOTES.md">lgtdoc</a>
 tools for details.</dd>
 <dt id="term-dynamic-binding">dynamic binding</dt>
-<dd>Runtime lookup of a predicate declaration and definition to verify the
-validity of a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>) and find the
+<dd>Runtime lookup of a <a class="reference internal" href="#term-predicate-declaration"><span class="xref std std-term">predicate declaration</span></a> and
+<a class="reference internal" href="#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a> to verify the validity of a
+<a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>) and find the
 predicate definition that will be used to answer the message (or the
 super call). Also known as <em>late binding</em>. See also <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</dd>
 <dt id="term-encapsulation">encapsulation</dt>
@@ -306,10 +307,10 @@ instance may also be defined as a static object in a source file.</dd>
 <dd>See <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocol</span></a>.</dd>
 <dt id="term-lambda-expression">lambda expression</dt>
 <dd>A compound term that can be used in place of a goal or closure
-meta-argument and that abstracts a predicate definition by listing
-its variables and a callable term that implements the definition.
-Lambda expressions help avoiding the need of naming and defining
-auxiliary predicates.</dd>
+meta-argument and that abstracts a <a class="reference internal" href="#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a> by
+listing its variables and a callable term that implements the
+definition. Lambda expressions help avoiding the need of naming and
+defining auxiliary predicates.</dd>
 <dt id="term-lambda-free-variable">lambda free variable</dt>
 <dd>A variable that is global to a <a class="reference internal" href="#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>. All
 used global variables must be explicitly listed in a lambda
@@ -322,15 +323,16 @@ be explicitly enumerated in a lambda expression.</dd>
 <dd>A directory containing source files. The library name can be used as
 an alias to the directory path when compiling and loading source
 files using the notation <code class="docutils literal notranslate"><span class="pre">library_name('source_file_relative_path')</span></code>.
-Library names and their paths are defined using the
+Library names and their paths can be defined using the
 <a class="reference internal" href="refman/predicates/logtalk_library_path_2.html#predicates-logtalk-library-path-2"><span class="std std-ref">logtalk_library_path/2</span></a> predicate.</dd>
 <dt id="term-loader-file">loader file</dt>
 <dd>A <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> whose main purpose is to load a set of
 source files.</dd>
 <dt id="term-local-predicate">local predicate</dt>
 <dd>A predicate that is defined in an object (or in a <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a>)
-but that is not listed in a scope directive. These predicates behave
-like private predicates but are invisible to the reflection
+but that is not listed in a
+<a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a>. These predicates
+behave like private predicates but are invisible to the reflection
 <a class="reference internal" href="#term-built-in-method"><span class="xref std std-term">built-in methods</span></a>. Local predicates are
 usually auxiliary predicates and only relevant to the entity where
 they are defined.</dd>
@@ -357,8 +359,8 @@ built-in meta-predicates.</dd>
 <dd>The <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> of a class, when interpreted as an instance.
 Metaclass instances are themselves classes.</dd>
 <dt id="term-method">method</dt>
-<dd>The predicate definition used to answer a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> sent to
-an object. Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and
+<dd>The <a class="reference internal" href="#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a> used to answer a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> sent
+to an object. Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and
 <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> to find which method to run to answer a message.</dd>
 <dt id="term-module">module</dt>
 <dd>A Prolog entity characterized by an identity and a set of predicate
@@ -366,10 +368,10 @@ directives and clauses. Prolog modules are usually static although
 some Prolog systems allow the creation of dynamic modules at runtime.
 Prolog modules can be seen as prototypes.</dd>
 <dt id="term-monitor">monitor</dt>
-<dd>Any object, implementing the <code class="docutils literal notranslate"><span class="pre">monitoring</span></code> built-in protocol, that
-is notified by the runtime when a spied event occurs. The spied
-<a class="reference internal" href="#term-event"><span class="xref std std-term">events</span></a> can be set by the monitor itself or by any
-other object.</dd>
+<dd>Any object, implementing the <a class="reference external" href="https://logtalk.org/library/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">monitoring</span></a>
+built-in protocol, that is notified by the runtime when a spied event
+occurs. The spied <a class="reference internal" href="#term-event"><span class="xref std std-term">events</span></a> can be set by the monitor
+itself or by any other object.</dd>
 <dt id="term-multifile-predicate">multifile predicate</dt>
 <dd>A predicate whose clauses can be defined in multiple
 <a class="reference internal" href="#term-entity"><span class="xref std std-term">entities</span></a>. The object or category holding the
@@ -416,8 +418,8 @@ object.</dd>
 <dd>Predicates describe what is true about the application domain. A
 predicate is identified by its <em>predicate indicator</em>, i.e. by its
 name and number of arguments using the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>.
-Predicates defined in <a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a> and
-<a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a> are also referred to as
+When predicates defined in <a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a> or
+<a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a> they are also referred to as
 <a class="reference internal" href="#term-method"><span class="xref std std-term">methods</span></a>.</dd>
 <dt id="term-predicate-alias">predicate alias</dt>
 <dd>An alternative functor (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>) for a predicate. Predicate
@@ -427,14 +429,23 @@ aliases can be defined for any inherited predicate using the
 Predicate aliases can be used to solve inheritance conflicts and
 to improve code clarity by using alternative names that are more
 meaningful in the calling context.</dd>
+<dt id="term-predicate-declaration">predicate declaration</dt>
+<dd>A predicate declaration is composed by a set of predicate directives,
+which must include ar least a
+<a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a>.</dd>
+<dt id="term-predicate-definition">predicate definition</dt>
+<dd>The set of clauses for a predicate, contained in an object or category.
+Predicate definitions can be overriden or specialized in descendant
+entities.</dd>
 <dt id="term-predicate-directive">predicate directive</dt>
-<dd>A directive that affects how predicates are called or compiled.</dd>
+<dd>A directive that specifies a predicate property that affects how
+predicates are called or compiled.</dd>
 <dt id="term-predicate-scope-container">predicate scope container</dt>
-<dd>The object that inherits a predicate declaration from an imported
-<a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> or an implemented <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocol</span></a>.</dd>
+<dd>The object that inherits a <a class="reference internal" href="#term-predicate-declaration"><span class="xref std std-term">predicate declaration</span></a> from an
+imported <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> or an implemented <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocol</span></a>.</dd>
 <dt id="term-predicate-scope-directive">predicate scope directive</dt>
 <dd>A directive that declares a predicate by specifying its visibility
-(public, protected, or private).</dd>
+as <em>public</em>, <em>protected</em>, or <em>private</em>.</dd>
 <dt id="term-primary-predicate-declaration">primary predicate declaration</dt>
 <dd>See <a class="reference internal" href="#term-multifile-predicate"><span class="xref std std-term">multifile predicate</span></a>.</dd>
 <dt id="term-private-inheritance">private inheritance</dt>
@@ -452,8 +463,9 @@ for protected or private predicates.</dd>
 <dd>A predicate that can only be called from the object containing the
 scope directive or from an object that inherits the predicate.</dd>
 <dt id="term-protocol">protocol</dt>
-<dd>An entity that contains predicate declarations. A predicate is
-declared using a scope directive. It may be further specified by
+<dd>An entity that contains
+<a class="reference internal" href="#term-predicate-declaration"><span class="xref std std-term">predicate declarations</span></a>. A predicate
+is declared using a scope directive. It may be further specified by
 additional predicate directives. Protocols support the separation
 between interface and implementation, can be implemented by both
 objects and categories, and can be extended by other protocols. A
@@ -492,18 +504,18 @@ may be intermixed with Logtalk entity definitions.</dd>
 <dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> is specialized by defining a new class that inherit its
 predicates and possibly add new ones.</dd>
 <dt id="term-static-binding">static binding</dt>
-<dd>Compile time lookup of a predicate declaration and definition when
-compiling a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> sending call (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>).
-Dynamic binding is used whenever static binding is not possible (e.g.
-due to the predicate being dynamic or due to lack of enough information
-at compilation time). Also known as <em>early binding</em>. See also
-<a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
+<dd>Compile time lookup of a <a class="reference internal" href="#term-predicate-declaration"><span class="xref std std-term">predicate declaration</span></a> and
+<a class="reference internal" href="#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a> when compiling a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> sending
+call (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>). Dynamic binding is used whenever static
+binding is not possible (e.g. due to the predicate being dynamic or due
+to lack of enough information at compilation time). Also known as <em>early
+binding</em>. See also <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
 <dt id="term-subclass">subclass</dt>
 <dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that is a specialization, direct or indirectly, of
 another class.</dd>
 <dt id="term-super-call">super call</dt>
-<dd>Call of an inherited (or imported) predicate definition. Mainly used
-when redefining an inherited (or imported) predicate to call the
+<dd>Call of an inherited (or imported) <a class="reference internal" href="#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a>. Mainly
+used when redefining an inherited (or imported) predicate to call the
 overridden definition while making additional calls. Super calls preserve
 <a class="reference internal" href="#term-self"><span class="xref std std-term">self</span></a> and may require <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> if the predicate is
 dynamic.</dd>

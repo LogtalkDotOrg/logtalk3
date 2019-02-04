@@ -80,7 +80,8 @@ Glossary
       used or compiled.
 
    predicate directive
-      A directive that affects how predicates are called or compiled.
+      A directive that specifies a predicate property that affects how
+      predicates are called or compiled.
 
    source file directive
       A directive that affects how a :term:`source file` is compiled.
@@ -166,7 +167,7 @@ Glossary
       A directory containing source files. The library name can be used as
       an alias to the directory path when compiling and loading source
       files using the notation ``library_name('source_file_relative_path')``.
-      Library names and their paths are defined using the
+      Library names and their paths can be defined using the
       :ref:`predicates_logtalk_library_path_2` predicate.
 
    module
@@ -190,8 +191,8 @@ Glossary
       language.
 
    method
-      The predicate definition used to answer a :term:`message` sent to
-      an object. Logtalk supports both :term:`static binding` and
+      The :term:`predicate definition` used to answer a :term:`message` sent
+      to an object. Logtalk supports both :term:`static binding` and
       :term:`dynamic binding` to find which method to run to answer a message.
 
    abstract method
@@ -212,10 +213,10 @@ Glossary
       See :term:`abstract method`.
 
    monitor
-      Any object, implementing the ``monitoring`` built-in protocol, that
-      is notified by the runtime when a spied event occurs. The spied
-      :term:`events <event>` can be set by the monitor itself or by any
-      other object.
+      Any object, implementing the :ref:`monitoring <apis:monitoring/0>`
+      built-in protocol, that is notified by the runtime when a spied event
+      occurs. The spied :term:`events <event>` can be set by the monitor
+      itself or by any other object.
 
    object
       An entity characterized by an :term:`identity` and a set of predicate
@@ -268,9 +269,19 @@ Glossary
       Predicates describe what is true about the application domain. A
       predicate is identified by its *predicate indicator*, i.e. by its
       name and number of arguments using the notation ``Name/Arity``.
-      Predicates defined in :term:`objects <object>` and
-      :term:`categories <category>` are also referred to as
+      When predicates defined in :term:`objects <object>` or
+      :term:`categories <category>` they are also referred to as
       :term:`methods <method>`.
+
+   predicate declaration
+      A predicate declaration is composed by a set of predicate directives,
+      which must include ar least a
+      :term:`scope directive <predicate scope directive>`.
+
+   predicate definition
+      The set of clauses for a predicate, contained in an object or category.
+      Predicate definitions can be overriden or specialized in descendant
+      entities.
 
    predicate alias
       An alternative functor (``Name/Arity``) for a predicate. Predicate
@@ -293,8 +304,9 @@ Glossary
 
    local predicate
       A predicate that is defined in an object (or in a :term:`category`)
-      but that is not listed in a scope directive. These predicates behave
-      like private predicates but are invisible to the reflection
+      but that is not listed in a
+      :term:`scope directive <predicate scope directive>`. These predicates
+      behave like private predicates but are invisible to the reflection
       :term:`built-in methods <built-in method>`. Local predicates are
       usually auxiliary predicates and only relevant to the entity where
       they are defined.
@@ -311,11 +323,11 @@ Glossary
 
    predicate scope directive
       A directive that declares a predicate by specifying its visibility
-      (public, protected, or private).
+      as *public*, *protected*, or *private*.
 
    predicate scope container
-      The object that inherits a predicate declaration from an imported
-      :term:`category` or an implemented :term:`protocol`.
+      The object that inherits a :term:`predicate declaration` from an
+      imported :term:`category` or an implemented :term:`protocol`.
 
    private predicate
       A predicate that can only be called from the object that contains
@@ -353,8 +365,9 @@ Glossary
       A program that collects data about other program performance.
 
    protocol
-      An entity that contains predicate declarations. A predicate is
-      declared using a scope directive. It may be further specified by
+      An entity that contains
+      :term:`predicate declarations <predicate declaration>`. A predicate
+      is declared using a scope directive. It may be further specified by
       additional predicate directives. Protocols support the separation
       between interface and implementation, can be implemented by both
       objects and categories, and can be extended by other protocols. A
@@ -378,8 +391,8 @@ Glossary
       importing the category.
 
    super call
-      Call of an inherited (or imported) predicate definition. Mainly used
-      when redefining an inherited (or imported) predicate to call the
+      Call of an inherited (or imported) :term:`predicate definition`. Mainly
+      used when redefining an inherited (or imported) predicate to call the
       overridden definition while making additional calls. Super calls preserve
       :term:`self` and may require :term:`dynamic binding` if the predicate is
       dynamic.
@@ -422,25 +435,26 @@ Glossary
       predicate clause is being executed.
 
    dynamic binding
-      Runtime lookup of a predicate declaration and definition to verify the
-      validity of a :term:`message` (or a :term:`super call`) and find the
+      Runtime lookup of a :term:`predicate declaration` and
+      :term:`predicate definition` to verify the validity of a
+      :term:`message` (or a :term:`super call`) and find the
       predicate definition that will be used to answer the message (or the
       super call). Also known as *late binding*. See also :term:`static binding`.
 
    static binding
-      Compile time lookup of a predicate declaration and definition when
-      compiling a :term:`message` sending call (or a :term:`super call`).
-      Dynamic binding is used whenever static binding is not possible (e.g.
-      due to the predicate being dynamic or due to lack of enough information
-      at compilation time). Also known as *early binding*. See also
-      :term:`dynamic binding`.
+      Compile time lookup of a :term:`predicate declaration` and
+      :term:`predicate definition` when compiling a :term:`message` sending
+      call (or a :term:`super call`). Dynamic binding is used whenever static
+      binding is not possible (e.g. due to the predicate being dynamic or due
+      to lack of enough information at compilation time). Also known as *early
+      binding*. See also :term:`dynamic binding`.
 
    lambda expression
       A compound term that can be used in place of a goal or closure
-      meta-argument and that abstracts a predicate definition by listing
-      its variables and a callable term that implements the definition.
-      Lambda expressions help avoiding the need of naming and defining
-      auxiliary predicates.
+      meta-argument and that abstracts a :term:`predicate definition` by
+      listing its variables and a callable term that implements the
+      definition. Lambda expressions help avoiding the need of naming and
+      defining auxiliary predicates.
 
    lambda parameter
       A term (usually a variable or a non-ground compound term) that is
