@@ -29,10 +29,11 @@ Description
    Object::Message
    {Proxy}::Message
 
-Sends a message to an object. The message argument must match a public
-predicate of the receiver object. When the message corresponds to a
-protected or private predicate, the call is only valid if the
-:term:`sender` matches the :term:`predicate scope container`. When the
+Sends a message to an object. The message argument must match a
+:ref:`public <directives_public_1>` predicate of the receiver object. When
+the message corresponds to a :ref:`protected <directives_protected_1>` or
+:ref:`private <directives_private_1>` predicate, the call is only valid if
+the :term:`sender` matches the :term:`predicate scope container`. When the
 predicate is declared but not defined, the message simply fails (as per
 the :term:`closed-world assumption`).
 

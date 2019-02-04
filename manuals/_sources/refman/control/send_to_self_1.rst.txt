@@ -28,9 +28,10 @@ Description
 
    ::Message
 
-Sends a message to :term:`self`. Can only used in
-the body of a predicate definition. The argument should match a public
-or protected predicate of *self*. It may also match a private predicate
+Sends a message to :term:`self`. Can only used in the body of a predicate
+definition. The argument should match a :ref:`public <directives_public_1>`
+or :ref:`protected <directives_protected_1>` predicate of *self*. It may
+also match a :ref:`private <directives_private_1>` predicate
 if the predicate is within the scope of the object where the method
 making the call is defined, if imported from a category, if used from
 within a category, or when using private inheritance. When the predicate
@@ -39,8 +40,8 @@ is declared but not defined, the message simply fails (as per the
 
 The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. A message to *self* necessarily
-implies the use of dynamic binding but a caching mechanism is used to
-improve performance in subsequent messages. See the User Manual section
+implies the use of :term:`dynamic binding` but a caching mechanism is used
+to improve performance in subsequent messages. See the User Manual section
 on :ref:`performance <performance_performance>` for details.
 
 Modes and number of proofs

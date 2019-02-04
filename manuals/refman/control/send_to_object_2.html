@@ -201,10 +201,11 @@
 <span class="k">{</span><span class="nv">Proxy</span><span class="k">}</span><span class="o">::</span><span class="nv">Message</span>
 </pre></div>
 </div>
-<p>Sends a message to an object. The message argument must match a public
-predicate of the receiver object. When the message corresponds to a
-protected or private predicate, the call is only valid if the
-<a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a> matches the <a class="reference internal" href="../../glossary.html#term-predicate-scope-container"><span class="xref std std-term">predicate scope container</span></a>. When the
+<p>Sends a message to an object. The message argument must match a
+<a class="reference internal" href="../directives/public_1.html#directives-public-1"><span class="std std-ref">public</span></a> predicate of the receiver object. When
+the message corresponds to a <a class="reference internal" href="../directives/protected_1.html#directives-protected-1"><span class="std std-ref">protected</span></a> or
+<a class="reference internal" href="../directives/private_1.html#directives-private-1"><span class="std std-ref">private</span></a> predicate, the call is only valid if
+the <a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a> matches the <a class="reference internal" href="../../glossary.html#term-predicate-scope-container"><span class="xref std std-term">predicate scope container</span></a>. When the
 predicate is declared but not defined, the message simply fails (as per
 the <a class="reference internal" href="../../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}::Message</span></code> syntax allows simplified access to

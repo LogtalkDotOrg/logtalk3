@@ -200,9 +200,10 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">::</span><span class="nv">Message</span>
 </pre></div>
 </div>
-<p>Sends a message to <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>. Can only used in
-the body of a predicate definition. The argument should match a public
-or protected predicate of <em>self</em>. It may also match a private predicate
+<p>Sends a message to <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>. Can only used in the body of a predicate
+definition. The argument should match a <a class="reference internal" href="../directives/public_1.html#directives-public-1"><span class="std std-ref">public</span></a>
+or <a class="reference internal" href="../directives/protected_1.html#directives-protected-1"><span class="std std-ref">protected</span></a> predicate of <em>self</em>. It may
+also match a <a class="reference internal" href="../directives/private_1.html#directives-private-1"><span class="std std-ref">private</span></a> predicate
 if the predicate is within the scope of the object where the method
 making the call is defined, if imported from a category, if used from
 within a category, or when using private inheritance. When the predicate
@@ -210,8 +211,8 @@ is declared but not defined, the message simply fails (as per the
 <a class="reference internal" href="../../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
 <p>The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. A message to <em>self</em> necessarily
-implies the use of dynamic binding but a caching mechanism is used to
-improve performance in subsequent messages. See the User Manual section
+implies the use of <a class="reference internal" href="../../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> but a caching mechanism is used
+to improve performance in subsequent messages. See the User Manual section
 on <a class="reference internal" href="../../userman/performance.html#performance-performance"><span class="std std-ref">performance</span></a> for details.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">

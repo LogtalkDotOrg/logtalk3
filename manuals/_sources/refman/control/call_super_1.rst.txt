@@ -57,9 +57,10 @@ the complemented object, thus allowing more comprehensive object
 patching. For other categories, the predicate definition lookup is
 restricted to the extended categories.
 
-The called predicate should be declared public or protected. It may also
-be declared private if within the scope of the entity where the method
-making the call is defined.
+The called predicate should be declared :ref:`public <directives_public_1>`
+or :ref:`protected <directives_protected_1>`. It may also be declared
+:ref:`private <directives_private_1>` if within the scope of the entity
+where the method making the call is defined.
 
 This control construct is a generalization of the Smalltalk *super*
 keyword to take into account Logtalk support for prototypes and

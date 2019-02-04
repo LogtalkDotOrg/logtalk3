@@ -35,8 +35,8 @@ sent using the :ref:`control_send_to_object_2` control construct from within
 objects compiled with the :ref:`events <flag_events>` flag set to ``allow``.
 
 Note that you can make this predicate scope protected or private by using,
-respectively, protected or private implementation of the ``monitoring``
-protocol.
+respectively, :ref:`protected or private implementation <inheritance_scope>`
+of the ``monitoring`` protocol.
 
 Modes and number of proofs
 --------------------------

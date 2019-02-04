@@ -284,7 +284,7 @@ flightless birds:
 
    no
 
-.. _inheritance_types:
+.. _inheritance_scope:
 
 Public, protected, and private inheritance
 ------------------------------------------

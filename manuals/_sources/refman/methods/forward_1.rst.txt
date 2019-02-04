@@ -28,13 +28,13 @@ Description
 
    forward(Message)
 
-User-defined method for forwarding unknown messages sent to an object
-(using the :ref:`control_send_to_object_2` control construct),
-automatically called by the runtime when defined. This method is
-declared in the :ref:`forwarding <apis:forwarding/0>` built-in protocol
-as a public predicate. Note that you can make its scope protected or
-private by using, respectively, protected or private implementation of
-the ``forwarding`` protocol.
+User-defined method for forwarding unknown messages sent to an object (using
+the :ref:`control_send_to_object_2` control construct), automatically called
+by the runtime when defined. This method is declared in the
+:ref:`forwarding <apis:forwarding/0>` built-in protocol as a
+:ref:`public <directives_public_1>` predicate. Note that you can make
+its scope protected or private by using, respectively, :ref:`protected or
+private implementation <inheritance_scope>` of the ``forwarding`` protocol.
 
 Modes and number of proofs
 --------------------------

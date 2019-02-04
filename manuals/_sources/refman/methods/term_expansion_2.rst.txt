@@ -50,8 +50,8 @@ construct will not be further expanded.
 Objects and categories implementing this predicate should declare that
 they implement the :ref:`expanding <apis:expanding/0>` protocol if no
 ancestor already declares it. This protocol implementation relation can
-be declared as either protected or private to restrict the scope of this
-predicate.
+be declared as either :ref:`protected or private <inheritance_scope>` to
+restrict the scope of this predicate.
 
 Modes and number of proofs
 --------------------------
