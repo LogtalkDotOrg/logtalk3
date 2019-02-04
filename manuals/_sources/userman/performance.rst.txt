@@ -60,11 +60,11 @@ compile time).
 Messages
 --------
 
-For ``::/1-2`` calls Logtalk implements static binding and dynamic
-binding. For dynamic binding, a caching mechanism is used by the
-runtime. It's useful to measure the performance overhead in *number of
-inferences* compared with plain Prolog and Prolog modules. The results
-for Logtalk 3.17.0 and later versions are:
+Logtalk implements static binding and dynamic binding for message sending
+calls. For dynamic binding, a caching mechanism is used by the runtime.
+It's useful to measure the performance overhead in *number of inferences*
+compared with plain Prolog and Prolog modules. The results for Logtalk
+3.17.0 and later versions are:
 
 -  Static binding: 0
 -  Dynamic binding (object bound at compile time): 1
@@ -91,11 +91,12 @@ Inlining
 
 When the :ref:`optimize <flag_optimize>` flag is turned on, the Logtalk
 compiler performs *inlining* of predicate calls whenever possible. This
-includes calls to built-in predicates such as ``once/1``, ``ignore/1``,
-and ``phrase/2-3`` but also calls to Prolog predicates that are either
-built-in, foreign, or defined in a module (including ``user``). Inlining
-notably allows wrapping module or foreign predicates using an object without
-introducing any overhead. In the specific case of the
+includes calls to built-in methods such as :ref:`methods_once_1`,
+:ref:`methods_ignore_1`, :ref:`methods_phrase_2`, and :ref:`methods_phrase_3`
+but also calls to Prolog predicates that are either built-in, foreign, or
+defined in a module (including ``user``). Inlining notably allows wrapping
+module or foreign predicates using an object without introducing any
+overhead. In the specific case of the 
 :ref:`execution-context predicates <predicates_context>`,
 calls are inlined independently of the ``optimize`` flag value.
 
@@ -107,6 +108,23 @@ compiler simplifies and optimizes generated clauses (including those
 resulting from the compilation of grammar rules), by flattening conjunctions,
 folding left unifications (e.g. generated as a by-product of the compilation
 of grammar rules), and removing redundant calls to ``true/0``.
+
+Size of the generated code
+--------------------------
+
+The size of the generated code is proportional to the size of the source
+code. Assuming that the term-expansion mechanism is not used, each predicate
+clause in the source code is usually compiled into a single predicate clause.
+The Logtalk compiler also generates internal tables for the defined entities,
+for the entity relations, and for the predicates. These tables enable support
+for fundamental features such as inheritance and reflection. The size of
+these tables is proportional to the number of entities, entity relations,
+and predicate declarations and definitions. When the
+:ref:`source_data <flag_source_data>` is turned on (the default when
+*developing* an application), the generated code also includes additional
+data about the source code such as entity and predicates positions in a
+source file. This data enables advanced developer tool functionality but
+it's usually not required when *deploying* an application.
 
 Other considerations
 --------------------

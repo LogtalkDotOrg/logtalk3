@@ -29,6 +29,8 @@ Documentation
 
 * IMPROVED: Documentation of the `call//1-N` built-in non-terminal.
 
+* IMPROVED: Handbook section on performance.
+
 Examples
 --------
 

@@ -122,6 +122,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#messages">Messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inlining">Inlining</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generated-code-simplification-and-optimizations">Generated code simplification and optimizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#size-of-the-generated-code">Size of the generated code</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-considerations">Other considerations</a></li>
 </ul>
 </li>
@@ -239,11 +240,11 @@ compile time).</p>
 </div>
 <div class="section" id="messages">
 <h2>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h2>
-<p>For <code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> calls Logtalk implements static binding and dynamic
-binding. For dynamic binding, a caching mechanism is used by the
-runtime. It’s useful to measure the performance overhead in <em>number of
-inferences</em> compared with plain Prolog and Prolog modules. The results
-for Logtalk 3.17.0 and later versions are:</p>
+<p>Logtalk implements static binding and dynamic binding for message sending
+calls. For dynamic binding, a caching mechanism is used by the runtime.
+It’s useful to measure the performance overhead in <em>number of inferences</em>
+compared with plain Prolog and Prolog modules. The results for Logtalk
+3.17.0 and later versions are:</p>
 <ul class="simple">
 <li>Static binding: 0</li>
 <li>Dynamic binding (object bound at compile time): 1</li>
@@ -267,11 +268,12 @@ at runtime.</p>
 <h2>Inlining<a class="headerlink" href="#inlining" title="Permalink to this headline">¶</a></h2>
 <p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
 compiler performs <em>inlining</em> of predicate calls whenever possible. This
-includes calls to built-in predicates such as <code class="docutils literal notranslate"><span class="pre">once/1</span></code>, <code class="docutils literal notranslate"><span class="pre">ignore/1</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">phrase/2-3</span></code> but also calls to Prolog predicates that are either
-built-in, foreign, or defined in a module (including <code class="docutils literal notranslate"><span class="pre">user</span></code>). Inlining
-notably allows wrapping module or foreign predicates using an object without
-introducing any overhead. In the specific case of the
+includes calls to built-in methods such as <a class="reference internal" href="../refman/methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a>,
+<a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a>, <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a>, and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a>
+but also calls to Prolog predicates that are either built-in, foreign, or
+defined in a module (including <code class="docutils literal notranslate"><span class="pre">user</span></code>). Inlining notably allows wrapping
+module or foreign predicates using an object without introducing any
+overhead. In the specific case of the
 <a class="reference internal" href="predicates.html#predicates-context"><span class="std std-ref">execution-context predicates</span></a>,
 calls are inlined independently of the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag value.</p>
 </div>
@@ -282,6 +284,22 @@ compiler simplifies and optimizes generated clauses (including those
 resulting from the compilation of grammar rules), by flattening conjunctions,
 folding left unifications (e.g.&nbsp;generated as a by-product of the compilation
 of grammar rules), and removing redundant calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
+</div>
+<div class="section" id="size-of-the-generated-code">
+<h2>Size of the generated code<a class="headerlink" href="#size-of-the-generated-code" title="Permalink to this headline">¶</a></h2>
+<p>The size of the generated code is proportional to the size of the source
+code. Assuming that the term-expansion mechanism is not used, each predicate
+clause in the source code is usually compiled into a single predicate clause.
+The Logtalk compiler also generates internal tables for the defined entities,
+for the entity relations, and for the predicates. These tables enable support
+for fundamental features such as inheritance and reflection. The size of
+these tables is proportional to the number of entities, entity relations,
+and predicate declarations and definitions. When the
+<a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> is turned on (the default when
+<em>developing</em> an application), the generated code also includes additional
+data about the source code such as entity and predicates positions in a
+source file. This data enables advanced developer tool functionality but
+it’s usually not required when <em>deploying</em> an application.</p>
 </div>
 <div class="section" id="other-considerations">
 <h2>Other considerations<a class="headerlink" href="#other-considerations" title="Permalink to this headline">¶</a></h2>
