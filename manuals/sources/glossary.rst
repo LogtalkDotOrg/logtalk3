@@ -229,15 +229,17 @@ Glossary
 
    doclet object
       An object specifying the steps necessary to (re)generate the API
-      documentation for a project. See the ``doclet`` and ``lgtdoc``
+      documentation for a project. See the
+      `doclet <https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/doclet/NOTES.md>`_
+      and `lgtdoc <https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtdoc/NOTES.md>`_
       tools for details.
 
    hook object
-      An object, implementing the ``expanding`` built-in protocol,
-      defining term- and goal-expansion predicates, used in the compilation
-      of Logtalk or Prolog source files. A hook object can be specified
-      using the :ref:`hook <flag_hook>` compiler flag. It can also be
-      specified using a :ref:`directives_set_logtalk_flag_2` directive in
+      An object, implementing the :ref:`expanding <apis:expanding/0>` built-in
+      protocol, defining term- and goal-expansion predicates, used in the
+      compilation of Logtalk or Prolog source files. A hook object can be
+      specified using the :ref:`hook <flag_hook>` compiler flag. It can also
+      be specified using a :ref:`directives_set_logtalk_flag_2` directive in
       the source files to be expanded.
 
    parametric object
@@ -266,13 +268,17 @@ Glossary
       Predicates describe what is true about the application domain. A
       predicate is identified by its *predicate indicator*, i.e. by its
       name and number of arguments using the notation ``Name/Arity``.
+      Predicates defined in :term:`objects <object>` and
+      :term:`categories <category>` are also referred to as
+      :term:`methods <method>`.
 
    predicate alias
       An alternative functor (``Name/Arity``) for a predicate. Predicate
-      aliases can be defined for any inherited predicate using the ``alias/2``
-      directive and for predicates listed in ``uses/2`` and ``use_module``
-      directives. Predicate aliases can be used to solve inheritance conflicts
-      and to improve code clarity by using alternative names that are more
+      aliases can be defined for any inherited predicate using the
+      :ref:`directives_alias_2` directive and for predicates listed in
+      :ref:`directives_uses_2` and :ref:`directives_use_module_2` directives.
+      Predicate aliases can be used to solve inheritance conflicts and
+      to improve code clarity by using alternative names that are more
       meaningful in the calling context.
 
    built-in predicate
@@ -331,7 +337,7 @@ Glossary
       directive without an entity prefix qualifying the predicate holds
       the multifile predicate *primary declaration*, which consists of
       both a :term:`scope directive <predicate scope directive>` and a
-      ``multifile/1`` directive for the predicate.
+      :ref:`directives_multifile_1` directive for the predicate.
 
    synchronized predicate
       A synchronized predicate is protected by a mutex ensuring that, in

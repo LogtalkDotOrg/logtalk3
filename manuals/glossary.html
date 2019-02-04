@@ -230,7 +230,9 @@ Directives use the <code class="docutils literal notranslate"><span class="pre">
 for e.g. a <a class="reference internal" href="#term-library"><span class="xref std std-term">library</span></a> or an application.</dd>
 <dt id="term-doclet-object">doclet object</dt>
 <dd>An object specifying the steps necessary to (re)generate the API
-documentation for a project. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
+documentation for a project. See the
+<a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/doclet/NOTES.md">doclet</a>
+and <a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtdoc/NOTES.md">lgtdoc</a>
 tools for details.</dd>
 <dt id="term-dynamic-binding">dynamic binding</dt>
 <dd>Runtime lookup of a predicate declaration and definition to verify the
@@ -270,11 +272,11 @@ number of arguments using the notation <code class="docutils literal notranslate
 <dt id="term-grammar-rule-terminal">grammar rule terminal</dt>
 <dd>A word or basic symbol of a language.</dd>
 <dt id="term-hook-object">hook object</dt>
-<dd>An object, implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code> built-in protocol,
-defining term- and goal-expansion predicates, used in the compilation
-of Logtalk or Prolog source files. A hook object can be specified
-using the <a class="reference internal" href="userman/programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler flag. It can also be
-specified using a <a class="reference internal" href="refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> directive in
+<dd>An object, implementing the <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">expanding</span></a> built-in
+protocol, defining term- and goal-expansion predicates, used in the
+compilation of Logtalk or Prolog source files. A hook object can be
+specified using the <a class="reference internal" href="userman/programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler flag. It can also
+be specified using a <a class="reference internal" href="refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> directive in
 the source files to be expanded.</dd>
 <dt id="term-hot-patching">hot patching</dt>
 <dd>The act of fixing entity directives and predicates or adding new
@@ -374,7 +376,7 @@ other object.</dd>
 directive without an entity prefix qualifying the predicate holds
 the multifile predicate <em>primary declaration</em>, which consists of
 both a <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> and a
-<code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive for the predicate.</dd>
+<a class="reference internal" href="refman/directives/multifile_1.html#directives-multifile-1"><span class="std std-ref">multifile/1</span></a> directive for the predicate.</dd>
 <dt id="term-object">object</dt>
 <dd>An entity characterized by an <a class="reference internal" href="#term-identity"><span class="xref std std-term">identity</span></a> and a set of predicate
 directives and clauses. Logtalk objects can be either static or
@@ -413,13 +415,17 @@ object.</dd>
 <dt id="term-predicate">predicate</dt>
 <dd>Predicates describe what is true about the application domain. A
 predicate is identified by its <em>predicate indicator</em>, i.e. by its
-name and number of arguments using the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>.</dd>
+name and number of arguments using the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>.
+Predicates defined in <a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a> and
+<a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a> are also referred to as
+<a class="reference internal" href="#term-method"><span class="xref std std-term">methods</span></a>.</dd>
 <dt id="term-predicate-alias">predicate alias</dt>
 <dd>An alternative functor (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>) for a predicate. Predicate
-aliases can be defined for any inherited predicate using the <code class="docutils literal notranslate"><span class="pre">alias/2</span></code>
-directive and for predicates listed in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module</span></code>
-directives. Predicate aliases can be used to solve inheritance conflicts
-and to improve code clarity by using alternative names that are more
+aliases can be defined for any inherited predicate using the
+<a class="reference internal" href="refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> directive and for predicates listed in
+<a class="reference internal" href="refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> and <a class="reference internal" href="refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directives.
+Predicate aliases can be used to solve inheritance conflicts and
+to improve code clarity by using alternative names that are more
 meaningful in the calling context.</dd>
 <dt id="term-predicate-directive">predicate directive</dt>
 <dd>A directive that affects how predicates are called or compiled.</dd>
