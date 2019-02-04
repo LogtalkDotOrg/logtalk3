@@ -63,13 +63,14 @@ scripts or shortcuts, consult the [`adapters/NOTES.md`](adapters/NOTES.md)
 file in the Logtalk installation folder for compatibility notes. For the
 integration scripts, see also the integration script `man` page.
 
-Open the `manuals/index.html` file with a web browser and select the
-`Tutorial` link. This will provide you with a basic understanding of
-some of the main Logtalk concepts. You can then go back to the `index.html`
-file, select the `User Manual` link, then the `Installing Logtalk` and
-`Writing and running applications` links. This will provide you with a
-basic understanding of how to start Logtalk as well as how to compile and
-load Logtalk code.
+For a quick overview of some of the main Logtalk concepts, see the
+at [Learn X in Y minutes Where X=Logtalk](https://learnxinyminutes.com/docs/logtalk/)
+tutorial. See also the bundled [Handbook](https://logtalk.org/manuals/index.html)
+by opening the `manuals/index.html` file with a web browser. The
+[Installing Logtalk](https://logtalk.org/manuals/userman/installing.html) and
+[Writing and running applications](https://logtalk.org/manuals/userman/programming.html)
+sections in the User Manual will provide you with a basic understanding of how
+to start Logtalk as well as how to compile and load Logtalk code.
 
 Basic help on Logtalk usage at the top-level interpreter
 --------------------------------------------------------
@@ -114,9 +115,10 @@ which is updated when you update Logtalk) with a suitable name to hold
 all the files of your application.
 
 5. Copy or rename the [`settings-sample.lgt`](settings-sample.lgt) file to
-`settings.lgt`, and modify it to define a library alias for your application
-directory and for defining default compiler flags (see the
-[`CUSTOMIZE.md`](CUSTOMIZE.md) file for details).
+`settings.lgt`, and modify it to preload developer tools (e.g. the `help`
+and `debugger` tools), to define library aliases for your applications, to
+define default compiler flags (see the [`CUSTOMIZE.md`](CUSTOMIZE.md) file
+for details), and more.
 
 6. Copy to your application directory the [`loader-sample.lgt`](loader-sample.lgt)
 file, rename it to `loader.lgt`, and modify it to load your application source
