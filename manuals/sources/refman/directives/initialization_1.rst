@@ -36,9 +36,11 @@ after the compiled source file is loaded into memory.
 Multiple initialization directives can be used in a source file or in an
 object. Their goals will be called in order at loading time.
 
-Categories and protocols cannot contain initialization directives as the
-initialization goals would lack a complete execution context that is
-only available for objects.
+.. note::
+
+   Categories and protocols cannot contain ``initialization/1`` directives
+   as the initialization goals would lack a complete execution context that
+   is only available for objects.
 
 Although technically a global ``initialization/1`` directive in a source
 file is a Prolog directive, calls to Logtalk built-in predicates from it

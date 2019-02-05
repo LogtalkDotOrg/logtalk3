@@ -28,10 +28,12 @@ Description
 
    set_logtalk_flag(Flag, Value)
 
-Sets Logtalk flag values. The scope of this directive is the entity or
+Sets local flag values. The scope of this directive is the entity or
 the source file containing it. For global scope, use the corresponding
 :ref:`predicates_set_logtalk_flag_2` built-in predicate called from an
-:ref:`directives_initialization_1` directive.
+:ref:`directives_initialization_1` directive. For a description of the
+predefined compiler flags, please see the :ref:`programming_flags`
+section in the User Manual.
 
 Template and modes
 ------------------

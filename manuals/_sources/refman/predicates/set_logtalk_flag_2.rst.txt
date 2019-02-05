@@ -28,7 +28,7 @@ Description
 
    set_logtalk_flag(Flag, Value)
 
-Sets Logtalk default, global, flag values. For local flag scope, use the
+Sets global, default, flag values. For local flag scope, use the
 corresponding :ref:`directives_set_logtalk_flag_2` directive. To set a
 global flag value when compiling and loading a source file, wrap the calls
 to this built-in predicate with an :ref:`directives_initialization_1`

@@ -28,8 +28,8 @@ Description
 
    built_in
 
-Declares an entity as built-in. Built-in entities cannot be redefined
-once loaded.
+Declares an entity as built-in. Built-in entities must be static and cannot
+be redefined once loaded.
 
 Template and modes
 ------------------
