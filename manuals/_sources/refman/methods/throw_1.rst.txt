@@ -28,8 +28,8 @@ Description
 
    throw(Exception)
 
-Throws an exception. This built-in predicate is declared as a private
-method and thus cannot be used as a message to an object.
+Throws an exception. This built-in method is declared private and thus
+cannot be used as a message to an object.
 
 Modes and number of proofs
 --------------------------

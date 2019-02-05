@@ -218,9 +218,9 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>instantiation_error
 </pre></div>
 </div>
-<p>Throws an instantiation error. This built-in predicate is declared as
-a private method and thus cannot be used as a message to an object.
-Calling this predicate is equivalent to the following sequence of calls:</p>
+<p>Throws an instantiation error. This built-in method is declared private
+and thus cannot be used as a message to an object. Calling this predicate
+is equivalent to the following sequence of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 context(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(instantiation_error, <span class="nv">Context</span>)).

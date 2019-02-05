@@ -28,9 +28,9 @@ Description
 
    existence_error(Thing, Culprit)
 
-Throws an existence error. This built-in predicate is declared as a private
-method and thus cannot be used as a message to an object. Calling this
-predicate is equivalent to the following sequence of calls:
+Throws an existence error. This built-in method is declared private and
+thus cannot be used as a message to an object. Calling this predicate is
+equivalent to the following sequence of calls:
 
 ::
 
