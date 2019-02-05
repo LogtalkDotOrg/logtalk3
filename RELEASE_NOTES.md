@@ -24,12 +24,23 @@ RELEASE NOTES
 3.24.0 - March ??, 2019
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The compiler now throws a permission error when attempting to create
+an entity that is both built-in and dynamic.
+
 Documentation
 -------------
 
 * IMPROVED: Documentation of the `call//1-N` built-in non-terminal.
 
 * IMPROVED: Handbook section on performance.
+
+Tests
+-----
+
+* ADDED: Unit tests for the `built_in/0` directive.
 
 Examples
 --------

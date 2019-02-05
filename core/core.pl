@@ -8882,8 +8882,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % declare an entity as built-in
 
-'$lgt_compile_logtalk_directive'(built_in, _) :-
-	assertz('$lgt_pp_built_in_').
+'$lgt_compile_logtalk_directive'(built_in, Ctx) :-
+	(	(	'$lgt_pp_dynamic_'
+		;	'$lgt_comp_ctx_mode'(Ctx, runtime)
+		) ->
+		'$lgt_pp_entity_'(_, Entity, _, _, _),
+		throw(permission_error(declare, built_in, Entity))
+	;	assertz('$lgt_pp_built_in_')
+	).
 
 % create a message queue at object initialization
 
@@ -8905,7 +8911,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % (entities are static by default but can be declared dynamic using this directive)
 
 '$lgt_compile_logtalk_directive'((dynamic), _) :-
-	assertz('$lgt_pp_dynamic_').
+	(	'$lgt_pp_built_in_' ->
+		'$lgt_pp_entity_'(_, Entity, _, _, _),
+		throw(permission_error(declare, (dynamic), Entity))
+	;	assertz('$lgt_pp_dynamic_')
+	).
 
 % initialization/1 object directive
 %
