@@ -220,22 +220,22 @@ dynamic. This view of an object as a set of predicates also forgo a distinction
 between <em>data</em> and <em>procedures</em> that is central to imperative object-oriented
 languages but moot in declarative, homoiconic logic languages.</p>
 <p>The second critical generalization concerns the relation between objects and other
-entities such as protocols (interfaces). The idea is that entity relations define
-<em>reuse patterns</em> and the <em>roles</em> played by the participating entities. A common reuse
-pattern is <em>inheritance</em>. In this case, an entity inherits, and thus reuses,
-resources from an ancestor entity. In a reuse pattern, each participating entity
+entities such as protocols (interfaces) and ancestor objects. The idea is that entity
+relations define <em>reuse patterns</em> and the <em>roles</em> played by the participating entities.
+A common reuse pattern is <em>inheritance</em>. In this case, an entity inherits, and thus
+reuses, resources from an ancestor entity. In a reuse pattern, each participating entity
 plays a specific <em>role</em>. The same entity, however, can play multiple roles
 depending on its relations with other entities. For example, an object can play
 the role of a class for its instances, the role of a subclass for its superclasses,
 and the role of an instance for its metaclass. Another common reuse pattern is
 <em>protocol implementation</em>. In this case, an object implementing a protocol reuses
-resource declarations by providing an implementation for those resources and
-exposing those resources to its clients. An essential consequence of this
-generalization is that protocols and objects are first-class entities
+its predicate declarations by providing an implementation for those predicates and
+exposing those predicates to its clients. An essential consequence of this
+generalization is that protocols, objects, and categories are first-class entities
 while e.g. <em>class</em>, <em>instance</em>, <em>metaclass</em>, <em>subclass</em>, <em>superclass</em> are just
 <em>roles</em> that an object can play. Moreover, a language can provide multiple reuse
 patterns instead of selecting a set of patterns and supporting this set as a design
-choice that excludes other sets of patterns. For example, most imperative
+choice that excludes other reuse patterns. For example, most imperative
 object-oriented languages are either class-based or prototype-based. In contrast,
 Logtalk naturally supports both classes and prototypes by providing the corresponding
 reuse patterns using objects as first-class entities capable of playing multiple

@@ -47,22 +47,22 @@ between *data* and *procedures* that is central to imperative object-oriented
 languages but moot in declarative, homoiconic logic languages.
 
 The second critical generalization concerns the relation between objects and other
-entities such as protocols (interfaces). The idea is that entity relations define
-*reuse patterns* and the *roles* played by the participating entities. A common reuse
-pattern is *inheritance*. In this case, an entity inherits, and thus reuses,
-resources from an ancestor entity. In a reuse pattern, each participating entity
+entities such as protocols (interfaces) and ancestor objects. The idea is that entity
+relations define *reuse patterns* and the *roles* played by the participating entities.
+A common reuse pattern is *inheritance*. In this case, an entity inherits, and thus
+reuses, resources from an ancestor entity. In a reuse pattern, each participating entity
 plays a specific *role*. The same entity, however, can play multiple roles
 depending on its relations with other entities. For example, an object can play
 the role of a class for its instances, the role of a subclass for its superclasses,
 and the role of an instance for its metaclass. Another common reuse pattern is
 *protocol implementation*. In this case, an object implementing a protocol reuses
-resource declarations by providing an implementation for those resources and
-exposing those resources to its clients. An essential consequence of this
-generalization is that protocols and objects are first-class entities
+its predicate declarations by providing an implementation for those predicates and
+exposing those predicates to its clients. An essential consequence of this
+generalization is that protocols, objects, and categories are first-class entities
 while e.g. *class*, *instance*, *metaclass*, *subclass*, *superclass* are just
 *roles* that an object can play. Moreover, a language can provide multiple reuse
 patterns instead of selecting a set of patterns and supporting this set as a design
-choice that excludes other sets of patterns. For example, most imperative
+choice that excludes other reuse patterns. For example, most imperative
 object-oriented languages are either class-based or prototype-based. In contrast,
 Logtalk naturally supports both classes and prototypes by providing the corresponding
 reuse patterns using objects as first-class entities capable of playing multiple
