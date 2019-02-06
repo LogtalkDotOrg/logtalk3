@@ -380,9 +380,10 @@ mode directives. For example, to document the possible use modes of the
 improve performance. To the best of my knowledge, there is no modern
 Prolog compiler supporting this kind of directive for that purpose.
 The current Logtalk version simply parses this directive for collecting
-its information for use in the reflection API (assuming the
-<a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> is turned on). But see also see the
-description on <a class="reference internal" href="threads.html#threads-synchronized-predicates"><span class="std std-ref">synchronized predicates</span></a>
+its information for use in the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a>
+(assuming the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> is turned on). But see
+also see the description on
+<a class="reference internal" href="threads.html#threads-synchronized-predicates"><span class="std std-ref">synchronized predicates</span></a>
 in the <a class="reference internal" href="threads.html#threads-threads"><span class="std std-ref">multi-threading programming</span></a> section).
 In any case, the use of mode directives is a good starting point for
 documenting your predicates.</p>
@@ -1333,9 +1334,9 @@ These methods cannot be used as messages to objects.</p>
 methods for querying about entities and predicates. Some of the information,
 however, requires that the source files are compiled with the
 <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag turned on.</p>
-<p>The reflection API supports two different views on entities and their
-contents, which we may call the <em>transparent box view</em> and the <em>black
-box view</em>. In the transparent box view, we look into an entity
+<p>The <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> supports two different views
+on entities and their contents, which we may call the <em>transparent box view</em>
+and the <em>black box view</em>. In the transparent box view, we look into an entity
 disregarding how it will be used and returning all information available
 on it, including predicate declarations and predicate definitions. This
 view is supported by the entity property built-in predicates. In the
@@ -1595,9 +1596,9 @@ example:</p>
     ...
 </pre></div>
 </div>
-<p>But note that in this case the reflection API will not record the
-dependency of the <code class="docutils literal notranslate"><span class="pre">foo/0</span></code> predicate on the Prolog <code class="docutils literal notranslate"><span class="pre">bar/0</span></code> predicate
-as we are effectively bypassing the compiler.</p>
+<p>But note that in this case the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a>
+will not record the dependency of the <code class="docutils literal notranslate"><span class="pre">foo/0</span></code> predicate on the Prolog
+<code class="docutils literal notranslate"><span class="pre">bar/0</span></code> predicate as we are effectively bypassing the compiler.</p>
 </div>
 <div class="section" id="calling-prolog-module-predicates">
 <span id="predicates-prolog-module"></span><h3>Calling Prolog module predicates<a class="headerlink" href="#calling-prolog-module-predicates" title="Permalink to this headline">¶</a></h3>

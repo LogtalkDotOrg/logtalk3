@@ -185,9 +185,10 @@ Some old Prolog compilers supported some sort of mode directives to
 improve performance. To the best of my knowledge, there is no modern
 Prolog compiler supporting this kind of directive for that purpose.
 The current Logtalk version simply parses this directive for collecting
-its information for use in the reflection API (assuming the
-:ref:`source_data <flag_source_data>` is turned on). But see also see the
-description on :ref:`synchronized predicates <threads_synchronized_predicates>`
+its information for use in the :ref:`reflection API <reflection_reflection>`
+(assuming the :ref:`source_data <flag_source_data>` is turned on). But see
+also see the description on
+:ref:`synchronized predicates <threads_synchronized_predicates>`
 in the :ref:`multi-threading programming <threads_threads>` section).
 In any case, the use of mode directives is a good starting point for
 documenting your predicates.
@@ -1316,9 +1317,9 @@ methods for querying about entities and predicates. Some of the information,
 however, requires that the source files are compiled with the
 :ref:`source_data <flag_source_data>` flag turned on.
 
-The reflection API supports two different views on entities and their
-contents, which we may call the *transparent box view* and the *black
-box view*. In the transparent box view, we look into an entity
+The :ref:`reflection API <reflection_reflection>` supports two different views
+on entities and their contents, which we may call the *transparent box view*
+and the *black box view*. In the transparent box view, we look into an entity
 disregarding how it will be used and returning all information available
 on it, including predicate declarations and predicate definitions. This
 view is supported by the entity property built-in predicates. In the
@@ -1622,9 +1623,9 @@ example:
        {bar},
        ...
 
-But note that in this case the reflection API will not record the
-dependency of the ``foo/0`` predicate on the Prolog ``bar/0`` predicate
-as we are effectively bypassing the compiler.
+But note that in this case the :ref:`reflection API <reflection_reflection>`
+will not record the dependency of the ``foo/0`` predicate on the Prolog
+``bar/0`` predicate as we are effectively bypassing the compiler.
 
 .. _predicates_prolog_module:
 

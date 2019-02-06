@@ -24,11 +24,12 @@ Assuming that the :ref:`source_data <flag_source_data>` flag is turned on, the
 compiler saves all relevant documenting information collected when compiling
 a source file. The provided
 `lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool can access this
-information by using the reflection support and generate a documentation file
-for each compiled entity (object, protocol, or category) in XML format.
-Contents of the XML file include the entity name, type, and compilation mode
-(static or dynamic), the entity relations with other entities, and a
-description of any declared predicates (name, compilation mode, scope, ...).
+information by using the :ref:`reflection <reflection_reflection>` support
+and generate a documentation file for each compiled entity (object, protocol,
+or category) in XML format. Contents of the XML file include the entity name,
+type, and compilation mode (static or dynamic), the entity relations with
+other entities, and a description of any declared predicates (name,
+compilation mode, scope, ...).
 
 The XML documentation files can be enriched with arbitrary user-defined
 information, either about an entity or about its predicates, by using
@@ -110,10 +111,10 @@ For example:
        diagram is 'UML Class Diagram #312'
    ]).
 
-Use only the keywords that make sense for your application and remember
-that you are free to invent your own keywords. All key-value pairs can
-be retrieved programmatically using the reflection API and are visible
-to the `lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool.
+Use only the keywords that make sense for your application and remember that
+you are free to invent your own keywords. All key-value pairs can be retrieved
+programmatically using the :ref:`reflection API <reflection_reflection>` and
+are visible to the `lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool.
 
 .. _documenting_predicate:
 
@@ -183,8 +184,8 @@ For example:
 As with the ``info/1`` directive, use only the keywords that make sense
 for your application and remember that you are free to invent your own
 keywords. All key-value pairs can also be retrieved programmatically
-using the reflection API and are visible to the
-`lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool.
+using the :ref:`reflection API <reflection_reflection>` and are visible
+to the `lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool.
 
 .. _documenting_processing:
 
@@ -263,6 +264,7 @@ The generated diagrams can include URL links to both source code and API
 documentation. They can also be linked, connecting for example high level
 diagrams to detail diagrams. These features allow diagrams to be an
 effective solution for navigating and understanding the structure and
-implementation of an application. This tool uses the same reflection APIs
-as the ``lgtdoc`` tool and thus have access to the same source data. See
-the tool documentation for details. 
+implementation of an application. This tool uses the same
+:ref:`reflection API <reflection_reflection>` as the ``lgtdoc`` tool and
+thus have access to the same source data. See the tool documentation for
+details. 

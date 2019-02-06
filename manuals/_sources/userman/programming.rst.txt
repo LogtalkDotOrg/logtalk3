@@ -804,7 +804,8 @@ Other flags
    development) and ``off``. With this flag set to ``on``, Logtalk will
    keep the information represented using documenting directives plus
    source location data (including source file names and line numbers).
-   This information can be retrieved using reflection and is useful for
+   This information can be retrieved using the
+   :ref:`reflection API <reflection_reflection>` and is useful for
    documenting, debugging, and integration with third-party development
    tools. This flag can be turned off in order to generate more compact
    code.

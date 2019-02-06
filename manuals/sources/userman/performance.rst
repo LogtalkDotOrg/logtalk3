@@ -117,14 +117,15 @@ code. Assuming that the term-expansion mechanism is not used, each predicate
 clause in the source code is usually compiled into a single predicate clause.
 The Logtalk compiler also generates internal tables for the defined entities,
 for the entity relations, and for the predicates. These tables enable support
-for fundamental features such as inheritance and reflection. The size of
-these tables is proportional to the number of entities, entity relations,
-and predicate declarations and definitions. When the
-:ref:`source_data <flag_source_data>` is turned on (the default when
-*developing* an application), the generated code also includes additional
-data about the source code such as entity and predicates positions in a
-source file. This data enables advanced developer tool functionality but
-it's usually not required when *deploying* an application.
+for fundamental features such as :ref:`inheritance <inheritance_inheritance>`
+and :ref:`reflection <reflection_reflection>`. The size of these tables is
+proportional to the number of entities, entity relations, and predicate
+declarations and definitions. When the :ref:`source_data <flag_source_data>`
+is turned on (the default when *developing* an application), the generated
+code also includes additional data about the source code such as entity and
+predicates positions in a source file. This data enables advanced developer
+tool functionality but it's usually not required when *deploying* an
+application.
 
 Other considerations
 --------------------

@@ -210,11 +210,12 @@
 compiler saves all relevant documenting information collected when compiling
 a source file. The provided
 <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool can access this
-information by using the reflection support and generate a documentation file
-for each compiled entity (object, protocol, or category) in XML format.
-Contents of the XML file include the entity name, type, and compilation mode
-(static or dynamic), the entity relations with other entities, and a
-description of any declared predicates (name, compilation mode, scope, …).</p>
+information by using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection</span></a> support
+and generate a documentation file for each compiled entity (object, protocol,
+or category) in XML format. Contents of the XML file include the entity name,
+type, and compilation mode (static or dynamic), the entity relations with
+other entities, and a description of any declared predicates (name,
+compilation mode, scope, …).</p>
 <p>The XML documentation files can be enriched with arbitrary user-defined
 information, either about an entity or about its predicates, by using
 the two directives described next.</p>
@@ -283,10 +284,10 @@ be atoms or compound terms).</dd>
 ]).
 </pre></div>
 </div>
-<p>Use only the keywords that make sense for your application and remember
-that you are free to invent your own keywords. All key-value pairs can
-be retrieved programmatically using the reflection API and are visible
-to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
+<p>Use only the keywords that make sense for your application and remember that
+you are free to invent your own keywords. All key-value pairs can be retrieved
+programmatically using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and
+are visible to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
 </div>
 <div class="section" id="predicate-directives">
 <span id="documenting-predicate"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Permalink to this headline">¶</a></h3>
@@ -349,8 +350,8 @@ pairs where both the topic and the text must be atoms.</dd>
 <p>As with the <code class="docutils literal notranslate"><span class="pre">info/1</span></code> directive, use only the keywords that make sense
 for your application and remember that you are free to invent your own
 keywords. All key-value pairs can also be retrieved programmatically
-using the reflection API and are visible to the
-<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
+using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and are visible
+to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
 </div>
 </div>
 <div class="section" id="processing-and-viewing-documenting-files">
@@ -418,9 +419,10 @@ The generated diagrams can include URL links to both source code and API
 documentation. They can also be linked, connecting for example high level
 diagrams to detail diagrams. These features allow diagrams to be an
 effective solution for navigating and understanding the structure and
-implementation of an application. This tool uses the same reflection APIs
-as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool and thus have access to the same source data. See
-the tool documentation for details.</p>
+implementation of an application. This tool uses the same
+<a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool and
+thus have access to the same source data. See the tool documentation for
+details.</p>
 </div>
 </div>
 

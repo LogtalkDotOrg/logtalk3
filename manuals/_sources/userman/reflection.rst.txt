@@ -49,7 +49,8 @@ the corresponding source code.
 
 For entities, built-in predicates are provided for
 :ref:`enumerating entities <enumerating_entity_predicates>`,
-:ref:`enumerating entity properties <enumerating_entity_property_predicates>`,
+:ref:`enumerating entity properties <enumerating_entity_property_predicates>`
+(including entity declared, defined, called, and updated predicates),
 and :ref:`enumerating entity relations <entity_relation_predicates>`.
 For a detailed description of the supported entity properties, see the sections
 on :ref:`object properties <objects_properties>`,
@@ -90,4 +91,3 @@ Specifically, by observing and acting on the messages being exchanged between
 objects. See the section on :ref:`event-driven programming <events_events>`
 for details. In addition, the :ref:`logtalk <apis:logtalk/0>` built-in object
 provides predicates for handling debug events. 
-

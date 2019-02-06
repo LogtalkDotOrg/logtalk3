@@ -45,8 +45,8 @@ meta-predicates not declared on the adapter files). It is also possible
 to include operator declarations in the second argument.
 
 This directive is also used when compiling calls to the database and
-reflection built-in methods by looking into these methods predicate
-arguments.
+:ref:`reflection <reflection_reflection>` built-in methods by looking
+into these methods predicate arguments.
 
 It is possible to specify a predicate alias using the notation
 ``Name/Arity as Alias/Arity`` or, in alternative, the notation

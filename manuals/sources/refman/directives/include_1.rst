@@ -34,11 +34,11 @@ path, an absolute path, or using library notation and is expanded as a
 source file name. Relative paths are interpreted as relative to the path
 of the file containing the directive.
 
-When using the reflection API, predicates from an included file can be
-distinguished from predicates from the main file by looking for the
-``include/1`` predicate declaration or predicate definition property. For
-the included predicates, the ``line_count/1`` property stores the term line
-number in the included file.
+When using the :ref:`reflection API <reflection_reflection>`, predicates
+from an included file can be distinguished from predicates from the main
+file by looking for the ``include/1`` predicate declaration or predicate
+definition property. For the included predicates, the ``line_count/1``
+property stores the term line number in the included file.
 
 This directive can be used as either a source file directive or an
 entity directive. As an entity directive, it can be used both in
