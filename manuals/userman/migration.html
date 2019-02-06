@@ -480,20 +480,21 @@ small performance gain for the compiled code.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives are not directly
 supported by the Logtalk compiler. But most Prolog adapter files provide
 support for compiling these directives using Logtalk’s first stage of
-its term-expansion mechanism. Nevertheless, these directives can be
-converted, respectively, into <code class="docutils literal notranslate"><span class="pre">reexport/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
-directives by finding which predicates exported by the specified modules
-are reexported or imported into the module containing the directive.
-Finding the names of the imported predicates that are actually used is
-easy. First, comment out the <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives and compile the
-file (making sure that the
+its <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>. Nevertheless,
+these directives can be converted, respectively, into <code class="docutils literal notranslate"><span class="pre">reexport/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives by finding which predicates exported by the
+specified modules are reexported or imported into the module containing
+the directive. Finding the names of the imported predicates that are
+actually used is easy. First, comment out the <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives
+and compile the file (making sure that the
 <a class="reference internal" href="programming.html#flag-unknown-predicates"><span class="std std-ref">unknown_predicates</span></a> compiler flag is set
 to <code class="docutils literal notranslate"><span class="pre">warning</span></code>). Logtalk will print a warning with a list of predicates
 that are called but never defined. Second, use these list to replace the
 <code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives by, respectively,
 <code class="docutils literal notranslate"><span class="pre">reexport/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives. You should then be able
 to compile the modified Prolog module as an object.</p>
-<p>Although Logtalk supports term and goal expansion mechanisms, the
+<p>Although Logtalk supports
+<a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term and goal expansion mechanisms</span></a>, the
 semantics are different from similar mechanisms found in some Prolog
 compilers. In particular, Logtalk does not support defining term and
 goal expansions clauses in a source file for expanding the source file

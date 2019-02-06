@@ -772,10 +772,10 @@ yes
 <span id="debugging-hooks"></span><h2>Using the term-expansion mechanism for debugging<a class="headerlink" href="#using-the-term-expansion-mechanism-for-debugging" title="Permalink to this headline">¶</a></h2>
 <p>Debugging messages only output information by default. These messages can,
 however, be intercepted to perform other actions. An alternative is to use
-instead the term-expansion mechanism for conditional compilation of debugging
-goals. For example, assuming a <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> predicate is used to wrap debug
-goals, we can define a hook object containing the following definition for
-<code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>:</p>
+instead the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a> for
+conditional compilation of debugging goals. For example, assuming a
+<code class="docutils literal notranslate"><span class="pre">debug/1</span></code> predicate is used to wrap debug goals, we can define a hook
+object containing the following definition for <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(debug(<span class="nv">Goal</span>), <span class="nv">Goal</span>).
 </pre></div>
 </div>

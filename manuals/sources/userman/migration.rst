@@ -325,13 +325,13 @@ Current limitations and workarounds
 The ``reexport/1`` and ``use_module/1`` directives are not directly
 supported by the Logtalk compiler. But most Prolog adapter files provide
 support for compiling these directives using Logtalk's first stage of
-its term-expansion mechanism. Nevertheless, these directives can be
-converted, respectively, into ``reexport/2`` and ``use_module/2``
-directives by finding which predicates exported by the specified modules
-are reexported or imported into the module containing the directive.
-Finding the names of the imported predicates that are actually used is
-easy. First, comment out the ``use_module/1`` directives and compile the
-file (making sure that the
+its :ref:`term-expansion mechanism <expansion_expansion>`. Nevertheless,
+these directives can be converted, respectively, into ``reexport/2`` and
+``use_module/2`` directives by finding which predicates exported by the
+specified modules are reexported or imported into the module containing
+the directive. Finding the names of the imported predicates that are
+actually used is easy. First, comment out the ``use_module/1`` directives
+and compile the file (making sure that the
 :ref:`unknown_predicates <flag_unknown_predicates>` compiler flag is set
 to ``warning``). Logtalk will print a warning with a list of predicates
 that are called but never defined. Second, use these list to replace the
@@ -339,7 +339,8 @@ that are called but never defined. Second, use these list to replace the
 ``reexport/2`` and ``use_module/2`` directives. You should then be able
 to compile the modified Prolog module as an object.
 
-Although Logtalk supports term and goal expansion mechanisms, the
+Although Logtalk supports
+:ref:`term and goal expansion mechanisms <expansion_expansion>`, the
 semantics are different from similar mechanisms found in some Prolog
 compilers. In particular, Logtalk does not support defining term and
 goal expansions clauses in a source file for expanding the source file

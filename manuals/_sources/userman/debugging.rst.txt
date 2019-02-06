@@ -639,10 +639,10 @@ Using the term-expansion mechanism for debugging
 
 Debugging messages only output information by default. These messages can,
 however, be intercepted to perform other actions. An alternative is to use
-instead the term-expansion mechanism for conditional compilation of debugging
-goals. For example, assuming a ``debug/1`` predicate is used to wrap debug
-goals, we can define a hook object containing the following definition for
-``goal_expansion/2``:
+instead the :ref:`term-expansion mechanism <expansion_expansion>` for
+conditional compilation of debugging goals. For example, assuming a
+``debug/1`` predicate is used to wrap debug goals, we can define a hook
+object containing the following definition for ``goal_expansion/2``:
 
 ::
 

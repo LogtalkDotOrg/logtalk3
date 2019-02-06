@@ -889,8 +889,8 @@ time may prevent the compiler of checking all uses of lambda
 expressions. The compiler also checks if a variable is classified as
 both a free variable and a lambda parameter. An optimizing
 meta-predicate and lambda expression compiler, based on the
-term-expansion mechanism, is provided for practical performance by
-the standard library.
+:ref:`term-expansion mechanism <expansion_expansion>`, is provided for
+practical performance by the standard library.
 
 .. _predicates_dcgs:
 
@@ -1427,7 +1427,7 @@ source files and when those source files are compiled with the
    The predicate definition is inlined
 ``auxiliary``
    The predicate is not user-defined but rather automatically generated
-   by the compiler or the term-expansion mechanism
+   by the compiler or the :ref:`term-expansion mechanism <expansion_expansion>`
 ``mode(Mode, Solutions)``
    Instantiation, type, and determinism mode for the predicate (which
    can have multiple modes)

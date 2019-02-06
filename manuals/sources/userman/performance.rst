@@ -113,11 +113,12 @@ Size of the generated code
 --------------------------
 
 The size of the generated code is proportional to the size of the source
-code. Assuming that the term-expansion mechanism is not used, each predicate
-clause in the source code is usually compiled into a single predicate clause.
-The Logtalk compiler also generates internal tables for the defined entities,
-for the entity relations, and for the predicates. These tables enable support
-for fundamental features such as :ref:`inheritance <inheritance_inheritance>`
+code. Assuming that the :ref:`term-expansion mechanism <expansion_expansion>`
+is not used, each predicate clause in the source code is usually compiled
+into a single predicate clause. The Logtalk compiler also generates internal
+tables for the defined entities, for the entity relations, and for the
+predicates. These tables enable support for fundamental features such as
+:ref:`inheritance <inheritance_inheritance>`
 and :ref:`reflection <reflection_reflection>`. The size of these tables is
 proportional to the number of entities, entity relations, and predicate
 declarations and definitions. When the :ref:`source_data <flag_source_data>`

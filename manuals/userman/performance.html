@@ -288,11 +288,12 @@ of grammar rules), and removing redundant calls to <code class="docutils literal
 <div class="section" id="size-of-the-generated-code">
 <h2>Size of the generated code<a class="headerlink" href="#size-of-the-generated-code" title="Permalink to this headline">¶</a></h2>
 <p>The size of the generated code is proportional to the size of the source
-code. Assuming that the term-expansion mechanism is not used, each predicate
-clause in the source code is usually compiled into a single predicate clause.
-The Logtalk compiler also generates internal tables for the defined entities,
-for the entity relations, and for the predicates. These tables enable support
-for fundamental features such as <a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">inheritance</span></a>
+code. Assuming that the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>
+is not used, each predicate clause in the source code is usually compiled
+into a single predicate clause. The Logtalk compiler also generates internal
+tables for the defined entities, for the entity relations, and for the
+predicates. These tables enable support for fundamental features such as
+<a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">inheritance</span></a>
 and <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection</span></a>. The size of these tables is
 proportional to the number of entities, entity relations, and predicate
 declarations and definitions. When the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a>

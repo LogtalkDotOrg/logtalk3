@@ -72,11 +72,11 @@ of the intermediate Prolog files may include a directory hash.
 Logtalk source files may contain Prolog code interleaved with Logtalk
 entity definitions. Plain Prolog code is usually copied as-is to the
 corresponding Prolog output file (except, of course, if subject to the
-term-expansion mechanism). Prolog modules are compiled as objects. The
-following Prolog directives are processed when read (thus affecting the
-compilation of the source code that follows): ``ensure_loaded/1``,
-``use_module/1-2``, ``op/3``, and ``set_prolog_flag/2``. The
-``initialization/1`` Prolog directive may be used for defining an
+:ref:`term-expansion mechanism <expansion_expansion>`). Prolog modules
+are compiled as objects. The following Prolog directives are processed
+when read (thus affecting the compilation of the source code that follows):
+``ensure_loaded/1``, ``use_module/1-2``, ``op/3``, and ``set_prolog_flag/2``.
+The ``initialization/1`` Prolog directive may be used for defining an
 initialization goal to be executed when loading a source file. Most
 calls to Logtalk built-in predicates from file ``initialization/1``
 directives are compiled for better performance.

@@ -261,11 +261,11 @@ of the intermediate Prolog files may include a directory hash.</p>
 <p>Logtalk source files may contain Prolog code interleaved with Logtalk
 entity definitions. Plain Prolog code is usually copied as-is to the
 corresponding Prolog output file (except, of course, if subject to the
-term-expansion mechanism). Prolog modules are compiled as objects. The
-following Prolog directives are processed when read (thus affecting the
-compilation of the source code that follows): <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">op/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_prolog_flag/2</span></code>. The
-<code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> Prolog directive may be used for defining an
+<a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>). Prolog modules
+are compiled as objects. The following Prolog directives are processed
+when read (thus affecting the compilation of the source code that follows):
+<code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code>, <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">op/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_prolog_flag/2</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> Prolog directive may be used for defining an
 initialization goal to be executed when loading a source file. Most
 calls to Logtalk built-in predicates from file <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code>
 directives are compiled for better performance.</p>
