@@ -198,6 +198,9 @@ default output stream and message prefixes. For example, the SWI-Prolog
 adapter file uses the print message token hook predicate to enable coloring
 of messages printed on a console.
 
+Meta-messages
+-------------
+
 Define tokenization rules for every message is not always necessary, however.
 Logtalk defines several *meta-messages* that are handy for simple cases and
 temporary messages only used to help developing, notably debugging messages.

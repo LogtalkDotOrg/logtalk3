@@ -114,6 +114,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Printing messages and asking questions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#printing-messages">Printing messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#message-tokenization">Message tokenization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meta-messages">Meta-messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#intercepting-messages">Intercepting messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#asking-questions">Asking questions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#intercepting-questions">Intercepting questions</a></li>
@@ -365,6 +366,9 @@ of tokens, for hooking into printing an individual token, and for setting
 default output stream and message prefixes. For example, the SWI-Prolog
 adapter file uses the print message token hook predicate to enable coloring
 of messages printed on a console.</p>
+</div>
+<div class="section" id="meta-messages">
+<h2>Meta-messages<a class="headerlink" href="#meta-messages" title="Permalink to this headline">¶</a></h2>
 <p>Define tokenization rules for every message is not always necessary, however.
 Logtalk defines several <em>meta-messages</em> that are handy for simple cases and
 temporary messages only used to help developing, notably debugging messages.
