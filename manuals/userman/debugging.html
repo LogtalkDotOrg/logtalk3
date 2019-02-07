@@ -735,7 +735,13 @@ yes
 <p>The <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> prefix is the default message prefix for <code class="docutils literal notranslate"><span class="pre">debug</span></code> messages.
 It can be redefined using the
 <a class="reference internal" href="../refman/methods/message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a>
-hook predicate.</p>
+hook predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_prefix_stream<span class="o">/</span><span class="m">4</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_prefix_stream<span class="o">/</span><span class="m">4</span>).
+
+logtalk<span class="o">::</span>message_prefix_stream(debug, core, <span class="s">&#39;(dbg) &#39;</span>, user_error).
+</pre></div>
+</div>
 </div>
 <div class="section" id="selective-printing-of-debug-messages">
 <h3>Selective printing of debug messages<a class="headerlink" href="#selective-printing-of-debug-messages" title="Permalink to this headline">¶</a></h3>

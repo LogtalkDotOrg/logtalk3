@@ -595,7 +595,14 @@ code. Some simple examples of using these meta-messages:
 The ``>>>`` prefix is the default message prefix for ``debug`` messages.
 It can be redefined using the
 :ref:`logtalk::message_prefix_stream/4 <methods_message_prefix_stream_4>`
-hook predicate.
+hook predicate. For example:
+
+::
+
+   :- multifile(logtalk::message_prefix_stream/4).
+   :- dynamic(logtalk::message_prefix_stream/4).
+
+   logtalk::message_prefix_stream(debug, core, '(dbg) ', user_error).
 
 Selective printing of debug messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
