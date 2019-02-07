@@ -42,8 +42,12 @@ contains the :ref:`directives_include_1` directive).
 
 Depending on the :term:`backend Prolog compiler`, the shortcut ``{*}`` may
 be used in alternative. Check the adapter files for the availability of
-these shortcuts as they are not part of the language (and thus should
-only be used at the top-level interpreter).
+the shortcut as it is not part of the language.
+
+.. warning::
+
+   Only use the ``{*}`` shortcut at the top-level interpreter and
+   never in source files.
 
 This predicate can be extended by the user by defining clauses for the
 :ref:`predicates_logtalk_make_target_action_1` multifile and dynamic hook

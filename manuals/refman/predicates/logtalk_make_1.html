@@ -265,8 +265,12 @@ shortcuts are usually defined:</p>
 <li><code class="docutils literal notranslate"><span class="pre">{+o}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(optimal)</span></code></li>
 </ul>
 <p>Check the adapter files for the availability of these shortcuts as they are
-not part of the language (and thus should only be used at the top-level
-interpreter).</p>
+not part of the language.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Only use the shortcuts at the top-level interpreter and
+never in source files.</p>
+</div>
 <p>The target actions can be extended by defining clauses for the multifile
 and dynamic hook predicate <code class="docutils literal notranslate"><span class="pre">logtalk_make_target_action(Target)</span></code> where
 <code class="docutils literal notranslate"><span class="pre">Target</span></code> is one of the targets listed above. The additional user

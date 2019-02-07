@@ -89,8 +89,12 @@ shortcuts are usually defined:
 * ``{+o}`` - ``logtalk_make(optimal)``
 
 Check the adapter files for the availability of these shortcuts as they are
-not part of the language (and thus should only be used at the top-level
-interpreter).
+not part of the language.
+
+.. warning::
+
+   Only use the shortcuts at the top-level interpreter and
+   never in source files.
 
 The target actions can be extended by defining clauses for the multifile
 and dynamic hook predicate ``logtalk_make_target_action(Target)`` where
