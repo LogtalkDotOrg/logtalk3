@@ -213,8 +213,8 @@
 </pre></div>
 </div>
 <p>Dynamic and multifile user-defined predicate, allowing the declaration
-of aliases to library paths. Library aliases may also be used on the
-second argument (using the notation <em>alias(path)</em>). Paths must always
+of aliases to <a class="reference internal" href="../../glossary.html#term-library"><span class="xref std std-term">library</span></a> paths. Library aliases may also be used on
+the second argument (using the notation <em>alias(path)</em>). Paths must always
 end with the path directory separator character (<code class="docutils literal notranslate"><span class="pre">'/'</span></code>).</p>
 <p>Relative paths (e.g. <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) should only be used within
 the <em>alias(path)</em>) notation so that library paths can always be expanded
@@ -229,9 +229,9 @@ with the <code class="docutils literal notranslate"><span class="pre">directory<
 <a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directive
 to wrap the call to the <code class="docutils literal notranslate"><span class="pre">logtalk_load_context/2</span></code> predicate and the
 assert of the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> fact.</p>
-<p>This predicate may also be used to override the default scratch
-directory by defining the library alias <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code> in a
-backend Prolog initialization file (assumed to be loaded prior to
+<p>This predicate may also be used to override the default
+<a class="reference internal" href="../../glossary.html#term-scratch-directory"><span class="xref std std-term">scratch directory</span></a> by defining the library alias <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code>
+in a backend Prolog initialization file (assumed to be loaded prior to
 Logtalk loading). This allows e.g. Logtalk to be installed in a
 read-only directory by setting this alias to the operating-system
 directory for temporary files. It also allows several Logtalk instances

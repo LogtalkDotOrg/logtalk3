@@ -68,10 +68,12 @@ in the entity file or preferably in the application loader file).
 Also, note that the name of the module may differ from the name of the
 module file.
 
-The modules **must** be loaded prior to the compilation of entities that
-call the module predicates. This is required in general to allow the
-compiler to check if the called module predicate is a meta-predicate and
-retrieve its meta-predicate template to ensure proper call compilation.
+.. warning::
+
+   The modules **must** be loaded prior to the compilation of entities
+   that call the module predicates. This is required in general to allow
+   the compiler to check if the called module predicate is a meta-predicate
+   and retrieve its meta-predicate template to ensure proper call compilation.
 
 Template and modes
 ------------------

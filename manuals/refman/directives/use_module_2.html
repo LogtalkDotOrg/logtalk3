@@ -249,10 +249,13 @@ using a source file directive such as <code class="docutils literal notranslate"
 in the entity file or preferably in the application loader file).
 Also, note that the name of the module may differ from the name of the
 module file.</p>
-<p>The modules <strong>must</strong> be loaded prior to the compilation of entities that
-call the module predicates. This is required in general to allow the
-compiler to check if the called module predicate is a meta-predicate and
-retrieve its meta-predicate template to ensure proper call compilation.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The modules <strong>must</strong> be loaded prior to the compilation of entities
+that call the module predicates. This is required in general to allow
+the compiler to check if the called module predicate is a meta-predicate
+and retrieve its meta-predicate template to ensure proper call compilation.</p>
+</div>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>

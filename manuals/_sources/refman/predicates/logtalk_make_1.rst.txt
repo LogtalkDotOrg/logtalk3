@@ -37,8 +37,8 @@ when called with the target ``clean``, checking for code issues when
 called with the target ``check``, listing of circular dependencies
 between pairs or trios of objects when called with the target
 ``circular``, generating documentation when called with the target
-``documentation``, and deleting the dynamic binding caches with the
-target ``caches``.
+``documentation``, and deleting the :term:`dynamic binding` caches with
+the target ``caches``.
 
 There are also three variants of the ``all`` target: ``debug``,
 ``normal``, and ``optimal``. These targets change the compilation mode
@@ -88,8 +88,8 @@ shortcuts are usually defined:
 * ``{+n}`` - ``logtalk_make(normal)``
 * ``{+o}`` - ``logtalk_make(optimal)``
 
-Check the adapter files for the availability of these shortcuts as they are
-not part of the language.
+Check the :term:`adapter files <adapter file>` for the availability of
+these shortcuts as they are not part of the language.
 
 .. warning::
 

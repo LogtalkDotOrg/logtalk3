@@ -29,8 +29,8 @@ Description
    logtalk_library_path(Library, Path)
 
 Dynamic and multifile user-defined predicate, allowing the declaration
-of aliases to library paths. Library aliases may also be used on the
-second argument (using the notation *alias(path)*). Paths must always
+of aliases to :term:`library` paths. Library aliases may also be used on
+the second argument (using the notation *alias(path)*). Paths must always
 end with the path directory separator character (``'/'``).
 
 Relative paths (e.g. ``'../'`` or ``'./'``) should only be used within
@@ -48,9 +48,9 @@ with the ``directory`` key and using the returned value to define the
 to wrap the call to the ``logtalk_load_context/2`` predicate and the
 assert of the ``logtalk_library_path/2`` fact.
 
-This predicate may also be used to override the default scratch
-directory by defining the library alias ``scratch_directory`` in a
-backend Prolog initialization file (assumed to be loaded prior to
+This predicate may also be used to override the default
+:term:`scratch directory` by defining the library alias ``scratch_directory``
+in a backend Prolog initialization file (assumed to be loaded prior to
 Logtalk loading). This allows e.g. Logtalk to be installed in a
 read-only directory by setting this alias to the operating-system
 directory for temporary files. It also allows several Logtalk instances

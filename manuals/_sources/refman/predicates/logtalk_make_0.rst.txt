@@ -41,8 +41,8 @@ is modified, this predicate reloads its main file (i.e. the file that
 contains the :ref:`directives_include_1` directive).
 
 Depending on the :term:`backend Prolog compiler`, the shortcut ``{*}`` may
-be used in alternative. Check the adapter files for the availability of
-the shortcut as it is not part of the language.
+be used in alternative. Check the :term:`adapter files <adapter file>` for
+the availability of the shortcut as it is not part of the language.
 
 .. warning::
 
