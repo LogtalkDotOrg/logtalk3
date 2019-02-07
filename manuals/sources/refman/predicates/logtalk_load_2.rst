@@ -32,7 +32,7 @@ Description
 Compiles to disk and then loads to memory a :term:`source file` or a list
 of source files using a list of compiler flags. The Logtalk source file name
 extension (by default, ``.lgt``) can be omitted. Source file paths can be
-absolute, relative to the current directory, or use library notation.
+absolute, relative to the current directory, or use :term:`library notation`.
 Compiler flags are represented as *flag(value)*. This predicate can also be
 used to compile Prolog source files as Logtalk source code. When no recognized
 Logtalk or Prolog extension is specified, the compiler tries first to append a

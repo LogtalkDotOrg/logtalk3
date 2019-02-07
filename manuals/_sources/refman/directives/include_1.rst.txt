@@ -30,9 +30,9 @@ Description
 
 Includes a file contents, which must be valid terms, at the place of
 occurrence of the directive. The file can be specified as a relative
-path, an absolute path, or using library notation and is expanded as a
-source file name. Relative paths are interpreted as relative to the path
-of the file containing the directive.
+path, an absolute path, or using :term:`library notation` and is expanded
+as a source file name. Relative paths are interpreted as relative to the
+path of the file containing the directive.
 
 When using the :ref:`reflection API <reflection_reflection>`, predicates
 from an included file can be distinguished from predicates from the main

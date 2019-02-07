@@ -811,9 +811,9 @@ compiler built-in predicate that is responsible for loading a
 <dt><code class="docutils literal notranslate"><span class="pre">scratch_directory(Directory)</span></code></dt>
 <dd>Sets the directory to be used to store the temporary files generated
 when compiling Logtalk source files. This directory can be specified
-using an atom or using library notation. The directory must always
-end with a slash. The default value is a sub-directory of the source
-files directory, either <code class="docutils literal notranslate"><span class="pre">'./lgt_tmp/'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./.lgt_tmp/'</span></code>
+using an atom or using <a class="reference internal" href="../glossary.html#term-library-notation"><span class="xref std std-term">library notation</span></a>. The directory must
+always end with a slash. The default value is a sub-directory of the
+source files directory, either <code class="docutils literal notranslate"><span class="pre">'./lgt_tmp/'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./.lgt_tmp/'</span></code>
 (depending on the backend Prolog compiler and operating-system).
 Relative directories must always start with <code class="docutils literal notranslate"><span class="pre">'./'</span></code> due to the lack
 of a portable solution to check if a path is relative or absolute.</dd>

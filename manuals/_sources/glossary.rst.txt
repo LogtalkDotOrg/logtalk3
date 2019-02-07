@@ -164,11 +164,21 @@ Glossary
       instance may also be defined as a static object in a source file.
 
    library
-      A directory containing source files. The library name can be used as
-      an alias to the directory path when compiling and loading source
-      files using the notation ``library_name('source_file_relative_path')``.
-      Library names and their paths can be defined using the
-      :ref:`predicates_logtalk_library_path_2` predicate.
+      A directory containing source files. See also :term:`library alias`
+      and :term:`library notation`.
+
+   library alias
+      An atom that can be used as an alias for a :term:`library` full
+      path. Library aliases and their corresponding paths can be defined
+      using the :ref:`predicates_logtalk_library_path_2` predicate. See
+      also :term:`library notation`.
+
+   library notation
+      A compound term where the name is a :term:`library alias` and the
+      single argument is a :term:`source file` relative path. Use of
+      library notation simplifies compiling and loading source files and
+      can make an application easily relocatable by defining an alias for
+      the root directory of the application files.
 
    module
       A Prolog entity characterized by an identity and a set of predicate

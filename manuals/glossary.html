@@ -320,11 +320,19 @@ expression.</dd>
 local to a <a class="reference internal" href="#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>. All lambda parameters must
 be explicitly enumerated in a lambda expression.</dd>
 <dt id="term-library">library</dt>
-<dd>A directory containing source files. The library name can be used as
-an alias to the directory path when compiling and loading source
-files using the notation <code class="docutils literal notranslate"><span class="pre">library_name('source_file_relative_path')</span></code>.
-Library names and their paths can be defined using the
-<a class="reference internal" href="refman/predicates/logtalk_library_path_2.html#predicates-logtalk-library-path-2"><span class="std std-ref">logtalk_library_path/2</span></a> predicate.</dd>
+<dd>A directory containing source files. See also <a class="reference internal" href="#term-library-alias"><span class="xref std std-term">library alias</span></a>
+and <a class="reference internal" href="#term-library-notation"><span class="xref std std-term">library notation</span></a>.</dd>
+<dt id="term-library-alias">library alias</dt>
+<dd>An atom that can be used as an alias for a <a class="reference internal" href="#term-library"><span class="xref std std-term">library</span></a> full
+path. Library aliases and their corresponding paths can be defined
+using the <a class="reference internal" href="refman/predicates/logtalk_library_path_2.html#predicates-logtalk-library-path-2"><span class="std std-ref">logtalk_library_path/2</span></a> predicate. See
+also <a class="reference internal" href="#term-library-notation"><span class="xref std std-term">library notation</span></a>.</dd>
+<dt id="term-library-notation">library notation</dt>
+<dd>A compound term where the name is a <a class="reference internal" href="#term-library-alias"><span class="xref std std-term">library alias</span></a> and the
+single argument is a <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> relative path. Use of
+library notation simplifies compiling and loading source files and
+can make an application easily relocatable by defining an alias for
+the root directory of the application files.</dd>
 <dt id="term-loader-file">loader file</dt>
 <dd>A <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> whose main purpose is to load a set of
 source files.</dd>

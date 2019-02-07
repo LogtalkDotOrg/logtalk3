@@ -845,7 +845,7 @@ objects.
 The following predicates are defined:
 
 ``expand_library_path(Library, Path)``
-   Expands a file specification in library notation to a full
+   Expands a file specification in :term:`library notation` to a full
    operating-system path.
 ``loaded_file(Path)``
    Returns the full path of a currently loaded source file.

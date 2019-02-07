@@ -746,9 +746,9 @@ Other flags
 ``scratch_directory(Directory)``
    Sets the directory to be used to store the temporary files generated
    when compiling Logtalk source files. This directory can be specified
-   using an atom or using library notation. The directory must always
-   end with a slash. The default value is a sub-directory of the source
-   files directory, either ``'./lgt_tmp/'`` or ``'./.lgt_tmp/'``
+   using an atom or using :term:`library notation`. The directory must
+   always end with a slash. The default value is a sub-directory of the
+   source files directory, either ``'./lgt_tmp/'`` or ``'./.lgt_tmp/'``
    (depending on the backend Prolog compiler and operating-system).
    Relative directories must always start with ``'./'`` due to the lack
    of a portable solution to check if a path is relative or absolute.
