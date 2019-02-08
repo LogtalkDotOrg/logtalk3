@@ -191,14 +191,14 @@ categories:
        ...
    :- end_category.
 
-This allows us to add missing directives (e.g. to define aliases for
-complemented object predicates), replace broken predicate definitions,
-add new predicates, and add protocols and categories to existing objects
-without requiring access or modifications to their source code. Common
-scenarios are adding logging or debugging predicates to a set of
-objects. Complemented objects need to be compiled with the
-:ref:`complements <flag_complements>` compiler flag set ``allow`` (to
-allow both patching and adding functionality) or ``restrict`` (to allow
+This allows us to add missing directives (e.g. to define
+:term:`aliases <predicate alias>` for complemented object predicates),
+replace broken predicate definitions, add new predicates, and add protocols
+and categories to existing objects without requiring access or modifications
+to their source code. Common scenarios are adding logging or debugging
+predicates to a set of objects. Complemented objects need to be compiled
+with the :ref:`complements <flag_complements>` compiler flag set ``allow``
+(to allow both patching and adding functionality) or ``restrict`` (to allow
 only adding new functionality). A complementing category takes preference
 over a previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.
@@ -487,7 +487,7 @@ The following category properties are supported:
    ``line_count(Line)`` with ``Line`` being the begin line of the
    multifile predicate clause)
 ``alias(Predicate, Properties)``
-   List of properties for a predicate alias declared by the category
+   List of properties for a :term:`predicate alias` declared by the category
    (the properties include ``for(Original)``, ``from(Entity)``,
    ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
    being the begin line of the alias directive)

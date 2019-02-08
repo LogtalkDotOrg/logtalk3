@@ -50,9 +50,9 @@ The ``term_position`` key is only supported in
 that provide access to the start and end lines of a read term.
 
 The ``logtalk_load_context/2`` predicate can also be called
-:ref:`directives_initialization_1`
-directives in a source file. A common scenario is to use the
-``directory`` key to define library aliases.
+:ref:`directives_initialization_1` directives in a source file.
+A common scenario is to use the ``directory`` key to define
+:term:`library aliases <library alias>`.
 
 Currently, any variables in the values of the ``term`` and
 ``variable_names`` keys are not shared with, respectively, the term

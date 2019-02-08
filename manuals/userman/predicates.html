@@ -275,8 +275,8 @@ Protected predicates can only be called from the container object or
 from a container descendant. Private predicates can only be called from
 the container object. Local predicates, like private predicates, can
 only be called from the container object (or category) but they are
-<em>invisible</em> to the reflection built-in methods (<a class="reference internal" href="../refman/methods/current_op_3.html#methods-current-op-3"><span class="std std-ref">current_op/3</span></a>,
-<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>, and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>)
+<em>invisible</em> to the reflection built-in methods (
+<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>)
 and to the message error handling mechanisms (i.e. sending a message corresponding
 to a local predicate results in a <code class="docutils literal notranslate"><span class="pre">predicate_declaration</span></code> existence
 error instead of a scope error).</p>
@@ -304,6 +304,8 @@ the role of a class defining a private (possibly dynamic) predicate for
 its descendant instances. Only the class can call (and possibly
 assert/retract clauses for) the predicate but its clauses can be
 found/defined in the instances themselves.</p>
+<p>Scope directives may also be used to declare grammar rule non-terminals
+and operators.</p>
 </div>
 <div class="section" id="mode-directive">
 <span id="predicates-mode"></span><h3>Mode directive<a class="headerlink" href="#mode-directive" title="Permalink to this headline">¶</a></h3>
@@ -495,6 +497,9 @@ visibility of the operator declaration in the context of the <em>sender</em> of
 the message). If you want to declare global operators and, at the same
 time, use them inside an entity, just write the corresponding directives
 at the top of your source file, before the entity opening directive.</p>
+<p>Note that operators can also be declared using a scope directive. Only
+these operators are visible to the <a class="reference internal" href="../refman/methods/current_op_3.html#methods-current-op-3"><span class="std std-ref">current_op/3</span></a> reflection
+method.</p>
 <p>When the same operators are used on several entities within the same
 source file, the corresponding directives must appear before any entity
 that uses them. However, this results in a global scope for the
@@ -545,8 +550,8 @@ foo <span class="o">:-</span>
 </pre></div>
 </div>
 <p>Logtalk also supports an extended version of this directive that allows
-the declaration of predicate aliases using the notation
-<code class="docutils literal notranslate"><span class="pre">Predicate</span> <span class="pre">as</span> <span class="pre">Alias</span></code> (or the alternative notation
+the declaration of <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate aliases</span></a> using the
+notation <code class="docutils literal notranslate"><span class="pre">Predicate</span> <span class="pre">as</span> <span class="pre">Alias</span></code> (or the alternative notation
 <code class="docutils literal notranslate"><span class="pre">Predicate::Alias</span></code>). For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(btrees, [new<span class="o">/</span><span class="m">1</span> <span class="o">as</span> new_btree<span class="o">/</span><span class="m">1</span>]).
 <span class="p">:- </span><span class="k">uses</span>(queues, [new<span class="o">/</span><span class="m">1</span> <span class="o">as</span> new_queue<span class="o">/</span><span class="m">1</span>]).
@@ -1460,8 +1465,8 @@ the specified line (if applicable)</dd>
 from the specified entity, which is defined in a source file at the
 specified line (if applicable)</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">alias_declared_in(Entity,</span> <span class="pre">Line)</span></code></dt>
-<dd>The predicate alias is declared in the specified entity in a source
-file at the specified line (if applicable)</dd>
+<dd>The <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> is declared in the specified entity in a
+source file at the specified line (if applicable)</dd>
 </dl>
 <p>The properties <code class="docutils literal notranslate"><span class="pre">declared_in/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">defined_in/1-2</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">redefined_from/1-2</span></code> do not apply to built-in methods and Logtalk or

@@ -461,8 +461,8 @@ modules are sometimes defined in files with names different from the
 module names requiring finding, opening, and reading the file in order
 to find the actual module name.
 
-Logtalk supports the declaration of predicate aliases in
-``use_module/2`` directives used within object and categories. For
+Logtalk supports the declaration of :term:`predicate aliases <predicate alias>`
+in ``use_module/2`` directives used within object and categories. For
 example, the ECLiPSe IC Constraint Solvers define a ``::/2`` variable
 domain operator that clashes with the Logtalk ``::/2`` message sending
 operator. We can solve the conflict by writing:

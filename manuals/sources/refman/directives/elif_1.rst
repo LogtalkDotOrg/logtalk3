@@ -30,8 +30,8 @@ Description
 
 Supports embedded conditionals when performing conditional compilation.
 The code following the directive is compiled iff ``Goal`` is true. The
-goal is subjected to goal expansion when the directive occurs in a
-source file.
+goal is subjected to :ref:`goal expansion <expansion_expansion>` when the
+directive occurs in a source file.
 
 Conditional compilation goals cannot depend on predicate definitions
 contained in the same source file that contains the conditional

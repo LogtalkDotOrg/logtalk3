@@ -296,7 +296,7 @@ The following protocol properties are supported:
 ``declares(Predicate, Properties)``
    List of properties for a predicate declared by the protocol
 ``alias(Predicate, Properties)``
-   List of properties for a predicate alias declared by the protocol
+   List of properties for a :term:`predicate alias` declared by the protocol
    (the properties include ``for(Original)``, ``from(Entity)``,
    ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
    being the begin line of the alias directive)

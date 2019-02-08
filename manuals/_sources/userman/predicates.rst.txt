@@ -66,8 +66,8 @@ Protected predicates can only be called from the container object or
 from a container descendant. Private predicates can only be called from
 the container object. Local predicates, like private predicates, can
 only be called from the container object (or category) but they are
-*invisible* to the reflection built-in methods (:ref:`methods_current_op_3`,
-:ref:`methods_current_predicate_1`, and :ref:`methods_predicate_property_2`)
+*invisible* to the reflection built-in methods (
+:ref:`methods_current_predicate_1` and :ref:`methods_predicate_property_2`)
 and to the message error handling mechanisms (i.e. sending a message corresponding
 to a local predicate results in a ``predicate_declaration`` existence
 error instead of a scope error).
@@ -99,6 +99,9 @@ the role of a class defining a private (possibly dynamic) predicate for
 its descendant instances. Only the class can call (and possibly
 assert/retract clauses for) the predicate but its clauses can be
 found/defined in the instances themselves.
+
+Scope directives may also be used to declare grammar rule non-terminals
+and operators.
 
 .. _predicates_mode:
 
@@ -324,6 +327,10 @@ the message). If you want to declare global operators and, at the same
 time, use them inside an entity, just write the corresponding directives
 at the top of your source file, before the entity opening directive.
 
+Note that operators can also be declared using a scope directive. Only
+these operators are visible to the :ref:`methods_current_op_3` reflection
+method.
+
 When the same operators are used on several entities within the same
 source file, the corresponding directives must appear before any entity
 that uses them. However, this results in a global scope for the
@@ -384,8 +391,8 @@ and more readable predicate definition:
        ...
 
 Logtalk also supports an extended version of this directive that allows
-the declaration of predicate aliases using the notation
-``Predicate as Alias`` (or the alternative notation
+the declaration of :term:`predicate aliases <predicate alias>` using the
+notation ``Predicate as Alias`` (or the alternative notation
 ``Predicate::Alias``). For example:
 
 ::
@@ -1453,8 +1460,8 @@ source files and when those source files are compiled with the
    from the specified entity, which is defined in a source file at the
    specified line (if applicable)
 ``alias_declared_in(Entity, Line)``
-   The predicate alias is declared in the specified entity in a source
-   file at the specified line (if applicable)
+   The :term:`predicate alias` is declared in the specified entity in a
+   source file at the specified line (if applicable)
 
 The properties ``declared_in/1-2``, ``defined_in/1-2``, and
 ``redefined_from/1-2`` do not apply to built-in methods and Logtalk or

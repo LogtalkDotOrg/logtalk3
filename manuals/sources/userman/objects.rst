@@ -737,8 +737,8 @@ The following object properties are supported:
    ``line_count(Line)`` with ``Line`` being the begin line of the
    multifile predicate clause)
 ``alias(Predicate, Properties)``
-   List of properties for a predicate alias declared by the object (the
-   properties include ``for(Original)``, ``from(Entity)``,
+   List of properties for a :term:`predicate alias` declared by the object
+   (the properties include ``for(Original)``, ``from(Entity)``,
    ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
    being the begin line of the alias directive)
 ``calls(Call, Properties)``
