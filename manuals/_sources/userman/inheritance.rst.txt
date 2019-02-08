@@ -21,20 +21,18 @@ Inheritance
 ===========
 
 The inheritance mechanisms found on object-oriented programming
-languages allow us the specialization of previously defined objects,
+languages allow the specialization of previously defined objects,
 avoiding the unnecessary repetition of code and allowing the definition
 of common predicates for sets of objects. In the context of logic
-programming, we can interpret inheritance as a form of theory extension:
+programming, we can interpret inheritance as a form of *theory extension*:
 an object will virtually contain, besides its own predicates, all the
-predicates inherited from other objects that are not redefined by
-itself.
+predicates inherited from other objects that are not redefined locally.
 
 Logtalk uses a depth-first lookup procedure for finding predicate
 declarations and predicate definitions, as explained below. The lookup
-procedures locate the entities holding the predicate declaration and the
-predicate definition using, respectively, the predicate indicator and
-the predicate template (constructed from the predicate indicator).
-The :ref:`directives_alias_2` predicate directive may be used to defining
+procedures locate the entities holding the predicate declaration and
+the predicate definition using the predicate template.
+The :ref:`directives_alias_2` predicate directive may be used for defining
 alternative names for inherited predicates, for solving inheritance
 conflicts, and for giving access to all inherited definitions (thus
 overriding the default lookup procedure).
