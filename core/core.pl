@@ -3384,7 +3384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 24, 0, b01)).
+'$lgt_version_data'(logtalk(3, 24, 0, b02)).
 
 
 
@@ -11156,7 +11156,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %	% call to a standard Prolog predicate that is not being locally redefined
 % 	'$lgt_increment_compiling_warnings_counter',
 % 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-%	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, {Pred}, Pred)),
+%	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, {Pred}, [Pred])),
 %	fail.
 
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
@@ -14142,6 +14142,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % this predicate fails if the closure can only be extended at runtime
 
+'$lgt_extend_closure'(Closure, _, _) :-
+	var(Closure),
+	!,
+	fail.
+
 '$lgt_extend_closure'(Obj::Closure, ExtArgs, Goal) :-
 	Obj == user,
 	!,
@@ -14508,7 +14513,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Self == Obj,
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, ::Pred)),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, [::Pred])),
 	fail.
 
 % suspicious use of ::/2 in objects to call a local predicate
@@ -14521,7 +14526,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	This == Obj,
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, Pred)),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, [Pred])),
 	fail.
 
 % translation performed at runtime
@@ -14821,7 +14826,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, ::Pred, Pred)),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, ::Pred, [Pred, ^^Pred])),
 	fail.
 
 % broadcasting control constructs
