@@ -43,13 +43,18 @@ commonly used Smalltalk terms with their Logtalk counterparts.
    Similar to Smalltalk, an abstract class is just a class not meant to be
    instantiated by not understanding a message to create instances.
 
+**block**
+   Logtalk supports lambda expressions and meta-predicates, which can be used
+   to provide similar functionality to Smalltalk blocks.
+
 **class**
    Similar to Smalltalk, *class* is a just a *role* that an object can play.
 
 **instance**
    While in Smalltalk every object is an *instance* of same class, objects
    in Logtalk can play multiple roles, including the role of a prototype
-   where the concepts of instance and class don't apply.
+   where the concepts of instance and class don't apply. Moreover, instances
+   can be either created dynamically or defined statically.
 
 **inheritance**
    While Smalltalk only supports single inheritance, Logtalk supports both
@@ -65,6 +70,10 @@ commonly used Smalltalk terms with their Logtalk counterparts.
    Similar to Smalltalk, a *message* is a request for an operation, which is
    interpreted in Logtalk as a logic query, asking for the construction of a
    proof that something is true.
+
+**message selector**
+   Logtalk uses the predicate template (i.e. the predicate callable term with
+   all its arguments unbound) as message selector.
 
 **metaclass**
    Metaclasses are optional in Logtalk. Besides Logtalk supporting both classes

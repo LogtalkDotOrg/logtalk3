@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Nomenclature &mdash; The Logtalk Handbook v3.24.0-b01 documentation</title>
+  <title>Nomenclature &mdash; The Logtalk Handbook v3.24.0-b02 documentation</title>
   
 
   
@@ -219,12 +219,16 @@ commonly used Smalltalk terms with their Logtalk counterparts.</p>
 <dt><strong>abstract class</strong></dt>
 <dd>Similar to Smalltalk, an abstract class is just a class not meant to be
 instantiated by not understanding a message to create instances.</dd>
+<dt><strong>block</strong></dt>
+<dd>Logtalk supports lambda expressions and meta-predicates, which can be used
+to provide similar functionality to Smalltalk blocks.</dd>
 <dt><strong>class</strong></dt>
 <dd>Similar to Smalltalk, <em>class</em> is a just a <em>role</em> that an object can play.</dd>
 <dt><strong>instance</strong></dt>
 <dd>While in Smalltalk every object is an <em>instance</em> of same class, objects
 in Logtalk can play multiple roles, including the role of a prototype
-where the concepts of instance and class don’t apply.</dd>
+where the concepts of instance and class don’t apply. Moreover, instances
+can be either created dynamically or defined statically.</dd>
 <dt><strong>inheritance</strong></dt>
 <dd>While Smalltalk only supports single inheritance, Logtalk supports both
 single and multiple inheritance.</dd>
@@ -237,6 +241,9 @@ state as in Smalltalk can be approximated by using dynamic predicates.</dd>
 <dd>Similar to Smalltalk, a <em>message</em> is a request for an operation, which is
 interpreted in Logtalk as a logic query, asking for the construction of a
 proof that something is true.</dd>
+<dt><strong>message selector</strong></dt>
+<dd>Logtalk uses the predicate template (i.e. the predicate callable term with
+all its arguments unbound) as message selector.</dd>
 <dt><strong>metaclass</strong></dt>
 <dd>Metaclasses are optional in Logtalk. Besides Logtalk supporting both classes
 and prototypes, an object playing the role of a class doesn’t necessarily
