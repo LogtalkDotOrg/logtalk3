@@ -20,14 +20,93 @@
 Nomenclature
 ============
 
-Depending on your Object-oriented Programming background (or lack of
-it), you may find Logtalk nomenclature either familiar or at odds with
-the terms used in other languages. In addition, being a superset of
-Prolog, terms such as *predicate* and *method* are often used
-interchangeably. Logtalk inherits most of its nomenclature from
-Smalltalk, arguably (and somehow sadly) not the most popular OOP
-language nowadays. In this section, we map nomenclatures from popular
-OOP languages such as C++ and Java to the Logtalk nomenclature.
+Depending on your Object-oriented Programming background (or lack of it), you
+may find Logtalk nomenclature either familiar or at odds with the terms used
+in other languages. In addition, being a superset of Prolog, terms such as
+*predicate* and *method* are often used interchangeably. Logtalk inherits
+most of its nomenclature from Smalltalk, arguably (and somehow sadly) not
+the most popular OOP language nowadays. In this section, we map nomenclatures
+from popular OOP languages such as Smalltalk, C++, and Java to the Logtalk
+nomenclature.
+
+.. _nomenclature_smalltalk:
+
+Smalltalk nomenclature
+----------------------
+
+The Logtalk name originates from a combination of the Prolog and Smalltalk
+names. Smalltalk had a significant influence in the design of Logtalk and
+thus inherits some of its nomenclature. The following list relates the most
+commonly used Smalltalk terms with their Logtalk counterparts.
+
+**abstract class**
+   Similar to Smalltalk, an abstract class is just a class not meant to be
+   instantiated by not understanding a message to create instances.
+
+**class**
+   Similar to Smalltalk, *class* is a just a *role* that an object can play.
+
+**instance**
+   While in Smalltalk every object is an *instance* of same class, objects
+   in Logtalk can play multiple roles, including the role of a prototype
+   where the concepts of instance and class don't apply.
+
+**inheritance**
+   While Smalltalk only supports single inheritance, Logtalk supports both
+   single and multiple inheritance.
+
+**instance variable**
+   Logtalk being a *declarative* language, objects encapsulate a set of
+   predicates instead of encapsulating *state*. But different objects may
+   provide different definitions of the same predicates. Mutable internal
+   state as in Smalltalk can be approximated by using dynamic predicates.
+
+**message**
+   Similar to Smalltalk, a *message* is a request for an operation, which is
+   interpreted in Logtalk as a logic query, asking for the construction of a
+   proof that something is true.
+
+**metaclass**
+   Metaclasses are optional in Logtalk. Besides Logtalk supporting both classes
+   and prototypes, an object playing the role of a class doesn't necessarily
+   instantiate an object playing the role of its metaclass.
+
+**method**
+   Same as in Smalltalk, a *method* is the actual code (i.i. predicate
+   definition) that is run to answer a message. Logtalk uses the words
+   *method* and *predicate* interchangeably. 
+
+**object**
+   Unlike Smalltalk, where *everything* is an object, Logtalk language
+   constructs includes both *terms* (as in Prolog representing e.g. numbers
+   and structures) and three first-class entities: objects, protocols, and
+   categories.
+
+**protocol**
+   In Smalltalk, an object *protocol* is the set of messages it understands.
+   The same concept applies in Logtalk. But note that Logtalk also supports
+   protocols as first-class entities where a protocol can be implemented by
+   multiple objects and an object can implement multiple protocols.
+
+**self**
+   Logtalk uses the same definition of *self* found in Smalltalk: the object
+   that received the message being processed. Note, however, that *self* is
+   not a keyword in Logtalk but implicit in the :ref:`control_send_to_self_1`
+   message to *self* control construct.
+
+**subclass**
+   Same definition in Logtalk.
+
+**super**
+   As in Smalltalk, the idea of *super* is to allow calling an inherited
+   predicate (that is usually being redefined). Note, however, that *super* is
+   not a keyword in Logtalk, which provides instead a :ref:`control_call_super_1`
+   *super* call control construct.
+
+**superclass**
+   Same definition in Logtalk. But while in Smalltalk a class can only have a
+   single superclass, Logtalk support for multiple inheritance allows a class
+   to have multiple superclasses.
 
 .. _nomenclature_cpp:
 
@@ -165,8 +244,8 @@ Logtalk equivalents.
    predicates.
 
 **final**
-   There is no ``final`` keyword in Logtalk; methods may always be
-   redefined in subclasses (and instances!).
+   There is no ``final`` keyword in Logtalk. Predicates can always be
+   redeclared and redefined in subclasses (and instances!).
 
 **inner class**
    Inner classes are not supported in Logtalk.

@@ -33,9 +33,14 @@ an entity that is both built-in and dynamic.
 Documentation
 -------------
 
+* ADDED: Handbook section on Smalltalk nomenclature, comparing its concepts to
+Logtalk counterparts.
+
 * IMPROVED: Documentation of the `call//1-N` built-in non-terminal.
 
 * IMPROVED: Handbook section on performance.
+
+* IMPROVED: Handbook cross-referencing and glossary.
 
 Tests
 -----

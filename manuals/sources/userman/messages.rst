@@ -114,7 +114,7 @@ message simply fails (as per the :term:`closed-world assumption`).
 Broadcasting
 ------------
 
-In the Logtalk context, broadcasting is interpreted as the sending of
+In the Logtalk context, *broadcasting* is interpreted as the sending of
 several messages to the same object. This can be achieved by using the
 message sending method described above. However, for convenience,
 Logtalk implements an extended syntax for message sending that may
@@ -213,8 +213,8 @@ containing the predicate definition, we can write:
        {Self::Message},
        ... .
 
-When events are not used, is possible to turn off event generation on a
-per object basis by using the :ref:`events <flag_events>` compiler
+When events are not used, is possible to turn off event generation globally
+or on a per entity basis by using the :ref:`events <flag_events>` compiler
 flag (see the :ref:`events_events` section for more details).
 
 ..
