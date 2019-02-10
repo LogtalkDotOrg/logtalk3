@@ -163,10 +163,11 @@ predicate. For example:
    
    yes
 
-When compiling a source file, the compiler will first try the source file
-specific hook object, if defined. If that fails, it tries the default hook
-object, if defined. If that also fails, the compiler tries the Prolog dialect
-specific expansion predicate definitions if defined in the adapter file.
+When compiling a source file, the compiler will first try the source
+file specific hook object, if defined. If that fails, it tries the
+default hook object, if defined. If that also fails, the compiler tries
+the Prolog dialect specific expansion predicate definitions if defined
+in the :term:`adapter file`.
 
 .. note::
 

@@ -128,14 +128,15 @@ from a specific component or library and also avoiding conflicts when two
 components happen to define the same message term (e.g. ``banner``). Users
 should choose and use a unique name for a component, which usually is
 the name of the component itself. For example, all messages from the
-``lgtunit`` tool use ``lgtunit`` for the component argument.
+``lgtunit`` tool use ``lgtunit`` for the component argument. The compiler
+and runtime are interpreted as a single component designated as ``core``.
 
 The third argument of ``print_message/3`` is the message itself, represented
 by a term. In the above example, the message term is ``banner``. Using a
 term to represent a message instead of a string with the message text itself
-have significant advantages. Notably, it simplifies machine-processing, and
-allows using a compound term for easy parameterization of the message text.
-For example:
+have significant advantages. Notably, it allows using a compound term for
+easy parameterization of the message text and simplifies machine-processing,
+localization of applications, and message interception. For example:
 
 .. code-block:: text
 
@@ -143,9 +144,6 @@ For example:
 
    % Redefining object foo
    yes
-
-Localization of messages also become possible without changing the
-``print_message/3`` predicate calls.
 
 Message tokenization
 --------------------

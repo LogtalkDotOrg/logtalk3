@@ -303,21 +303,20 @@ from a specific component or library and also avoiding conflicts when two
 components happen to define the same message term (e.g. <code class="docutils literal notranslate"><span class="pre">banner</span></code>). Users
 should choose and use a unique name for a component, which usually is
 the name of the component itself. For example, all messages from the
-<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool use <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> for the component argument.</p>
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool use <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> for the component argument. The compiler
+and runtime are interpreted as a single component designated as <code class="docutils literal notranslate"><span class="pre">core</span></code>.</p>
 <p>The third argument of <code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> is the message itself, represented
 by a term. In the above example, the message term is <code class="docutils literal notranslate"><span class="pre">banner</span></code>. Using a
 term to represent a message instead of a string with the message text itself
-have significant advantages. Notably, it simplifies machine-processing, and
-allows using a compound term for easy parameterization of the message text.
-For example:</p>
+have significant advantages. Notably, it allows using a compound term for
+easy parameterization of the message text and simplifies machine-processing,
+localization of applications, and message interception. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::print_message(comment, core, redefining_entity(object, foo)).
 
 % Redefining object foo
 yes
 </pre></div>
 </div>
-<p>Localization of messages also become possible without changing the
-<code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> predicate calls.</p>
 </div>
 <div class="section" id="message-tokenization">
 <h2>Message tokenization<a class="headerlink" href="#message-tokenization" title="Permalink to this headline">¶</a></h2>
