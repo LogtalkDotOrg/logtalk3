@@ -40,29 +40,30 @@
 % are interpreted as instances, classes, or both.
 
 % to work with classes and instances in Logtalk, we must define at least
-% one meta-classs; 
+% one metaclass; 
 
-% a common solution to avoid a infinit regression is to make a class its
+% a common solution to avoid a infinite regression is to make a class its
 % own metaclass:
 
 :- object(metaclass,
 	instantiates(metaclass)).
 
-	% metaclass are used to hold methods for their instances,
-	% which play the role of classes; common examples are
-	% instance creation methods; for example:
+	% metaclass are used to hold methods for their instances, which play
+	% the role of classes; a common example is instance creation method:
 	:- public(new/1).
 	new(Instance) :-
 		self(Class),
-		% create a new, dynamic, object:
+		% create a new, dynamic, object that instantiates the class
+		% that received the new/1 message:
 		create_object(Instance, [instantiates(Class)], [], []),
 		Instance::init.
 
 :- end_object.
 
 
-% but we don't need to define a metaclasses for every class; i.e. metaclasses
-% are optional, except for the root class, and can be shared by several classes
+% but we don't need to define a metaclasses for every class: except for
+% the root class, metaclasses are optional, and can be shared by several
+% classes
 
 :- object(root,
 	instantiates(metaclass)).
@@ -78,7 +79,7 @@
 	instantiates(metaclass),
 	specializes(root)).
 
-	% methods can be specialized:
+	% methods can always be specialized:
 	init :-
 		% call the inherited, overriden definition:
 		^^init,
@@ -98,7 +99,7 @@
 :- end_object.
 
 
-% instance can be static and defined in source files:
+% instances can be static and defined in source files:
 
 :- object(instance,
 	instantiates(subclass1)).
@@ -131,8 +132,8 @@
 :- object(instance2,
 	instantiates(class2)).
 
-	% ... it's possible, if necessary, to define a dynamic
-	% instance in a source file by writing:
+	% ... it's alos possible, if necessary, to define a dynamic
+	% instance in a source file by using the dynamic/0 directive:
 	:- (dynamic).
 
 :- end_object.
