@@ -27,7 +27,9 @@ in other languages. In addition, being a superset of Prolog, terms such as
 most of its nomenclature from Smalltalk, arguably (and somehow sadly) not
 the most popular OOP language nowadays. In this section, we map nomenclatures
 from popular OOP languages such as Smalltalk, C++, and Java to the Logtalk
-nomenclature.
+nomenclature. The Logtalk distribution includes several examples of how to
+implement common concepts found in other languages, complementing the
+information in this section.
 
 .. _nomenclature_smalltalk:
 
@@ -48,7 +50,22 @@ commonly used Smalltalk terms with their Logtalk counterparts.
    to provide similar functionality to Smalltalk blocks.
 
 **class**
-   Similar to Smalltalk, *class* is a just a *role* that an object can play.
+   In Logtalk, *class* is a just a *role* that an object can play. This is
+   similar to Smalltalk where classes are also objects.
+
+**class method**
+   Class methods in Logtalk are simply instance methods declared and defined
+   in the class metaclass.
+
+**class variable**
+   Logtalk objects, which can play the roles of class and instance,
+   encapsulate predicates, not state. Class variables, which in Smalltalk are
+   really shared instance variables, can be emulated in a class by defining a
+   predicate locally instead of defining it in the class instances.
+
+**inheritance**
+   While Smalltalk only supports single inheritance, Logtalk supports both
+   single and multiple inheritance.
 
 **instance**
    While in Smalltalk every object is an *instance* of same class, objects
@@ -56,9 +73,9 @@ commonly used Smalltalk terms with their Logtalk counterparts.
    where the concepts of instance and class don't apply. Moreover, instances
    can be either created dynamically or defined statically.
 
-**inheritance**
-   While Smalltalk only supports single inheritance, Logtalk supports both
-   single and multiple inheritance.
+**instance method**
+   Instance methods in Logtalk are simply predicates declared and defined
+   in a class and thus inherited by the class instances.
 
 **instance variable**
    Logtalk being a *declarative* language, objects encapsulate a set of
@@ -76,9 +93,9 @@ commonly used Smalltalk terms with their Logtalk counterparts.
    all its arguments unbound) as message selector.
 
 **metaclass**
-   Metaclasses are optional in Logtalk. Besides Logtalk supporting both classes
-   and prototypes, an object playing the role of a class doesn't necessarily
-   instantiate an object playing the role of its metaclass.
+   Metaclasses are optional in Logtalk (except for a root class) and can be
+   shared by several classes. When metaclasses are used, infinite regression
+   is simply avoided by making a class an instance of itself.
 
 **method**
    Same as in Smalltalk, a *method* is the actual code (i.i. predicate
@@ -93,9 +110,9 @@ commonly used Smalltalk terms with their Logtalk counterparts.
 
 **protocol**
    In Smalltalk, an object *protocol* is the set of messages it understands.
-   The same concept applies in Logtalk. But note that Logtalk also supports
-   protocols as first-class entities where a protocol can be implemented by
-   multiple objects and an object can implement multiple protocols.
+   The same concept applies in Logtalk. But Logtalk also supports protocols
+   as first-class entities where a protocol can be implemented by multiple
+   objects and an object can implement multiple protocols.
 
 **self**
    Logtalk uses the same definition of *self* found in Smalltalk: the object
