@@ -245,6 +245,8 @@ tools for details.</dd>
 <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>) and find the
 predicate definition that will be used to answer the message (or the
 super call). Also known as <em>late binding</em>. See also <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</dd>
+<dt id="term-early-binding">early binding</dt>
+<dd>See <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</dd>
 <dt id="term-encapsulation">encapsulation</dt>
 <dd>The hiding of an object implementation. This promotes software reuse
 by isolating the object clients from its implementation details.
@@ -300,7 +302,8 @@ entities (objects, protocols, and categories) share the same namespace.</dd>
 entities. In the particular case of objects, when an object extends
 other object, we have prototype-based inheritance. When an object
 specializes or instantiates another object, we have class-based
-inheritance.</dd>
+inheritance. See also <a class="reference internal" href="#term-public-inheritance"><span class="xref std std-term">public inheritance</span></a>,
+<a class="reference internal" href="#term-protected-inheritance"><span class="xref std std-term">protected inheritance</span></a>, and <a class="reference internal" href="#term-private-inheritance"><span class="xref std std-term">private inheritance</span></a>.</dd>
 <dt id="term-instance">instance</dt>
 <dd>An object that instantiates one another object, interpreted as its
 <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a>. An object may instantiate multiple objects (also known
@@ -325,6 +328,8 @@ expression.</dd>
 <dd>A term (usually a variable or a non-ground compound term) that is
 local to a <a class="reference internal" href="#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>. All lambda parameters must
 be explicitly enumerated in a lambda expression.</dd>
+<dt id="term-late-binding">late binding</dt>
+<dd>See <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
 <dt id="term-library">library</dt>
 <dd>A directory containing source files. See also <a class="reference internal" href="#term-library-alias"><span class="xref std std-term">library alias</span></a>
 and <a class="reference internal" href="#term-library-notation"><span class="xref std std-term">library notation</span></a>.</dd>
@@ -395,10 +400,11 @@ occurs. The spied <a class="reference internal" href="#term-event"><span class="
 itself or by any other object.</dd>
 <dt id="term-multifile-predicate">multifile predicate</dt>
 <dd>A predicate whose clauses can be defined in multiple
-<a class="reference internal" href="#term-entity"><span class="xref std std-term">entities</span></a>. The object or category holding the
-directive without an entity prefix qualifying the predicate holds
-the multifile predicate <em>primary declaration</em>, which consists of
-both a <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> and a
+<a class="reference internal" href="#term-entity"><span class="xref std std-term">entities</span></a> and <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source files</span></a>.
+The object or category holding the directive without an entity
+prefix qualifying the predicate holds the multifile predicate
+<em>primary declaration</em>, which consists of both a
+<a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> and a
 <a class="reference internal" href="refman/directives/multifile_1.html#directives-multifile-1"><span class="std std-ref">multifile/1</span></a> directive for the predicate.</dd>
 <dt id="term-object">object</dt>
 <dd>An entity characterized by an <a class="reference internal" href="#term-identity"><span class="xref std std-term">identity</span></a> and a set of predicate
@@ -483,33 +489,37 @@ as <em>public</em>, <em>protected</em>, or <em>private</em>.</dd>
 <dd>See <a class="reference internal" href="#term-multifile-predicate"><span class="xref std std-term">multifile predicate</span></a>.</dd>
 <dt id="term-private-inheritance">private inheritance</dt>
 <dd>All public and protected predicates are inherited as private
-predicates.</dd>
+predicates. See also <a class="reference internal" href="#term-public-inheritance"><span class="xref std std-term">public inheritance</span></a> and
+<a class="reference internal" href="#term-protected-inheritance"><span class="xref std std-term">protected inheritance</span></a>.</dd>
 <dt id="term-private-predicate">private predicate</dt>
 <dd>A predicate that can only be called from the object that contains
-the scope directive.</dd>
+its <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a>.</dd>
 <dt id="term-profiler">profiler</dt>
 <dd>A program that collects data about other program performance.</dd>
 <dt id="term-protected-inheritance">protected inheritance</dt>
 <dd>All public predicates are inherited as protected. No scope change
-for protected or private predicates.</dd>
+for protected or private predicates. See also <a class="reference internal" href="#term-public-inheritance"><span class="xref std std-term">public inheritance</span></a>
+and <a class="reference internal" href="#term-private-inheritance"><span class="xref std std-term">private inheritance</span></a>.</dd>
 <dt id="term-protected-predicate">protected predicate</dt>
-<dd>A predicate that can only be called from the object containing the
-scope directive or from an object that inherits the predicate.</dd>
+<dd>A predicate that can only be called from the object containing its
+<a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> or from an object
+that inherits the predicate.</dd>
 <dt id="term-protocol">protocol</dt>
 <dd>An entity that contains
 <a class="reference internal" href="#term-predicate-declaration"><span class="xref std std-term">predicate declarations</span></a>. A predicate
-is declared using a scope directive. It may be further specified by
-additional predicate directives. Protocols support the separation
-between interface and implementation, can be implemented by both
-objects and categories, and can be extended by other protocols. A
-protocol should be functionally-cohesive, specifying a single
-functionality. Also known as <em>interface</em>.</dd>
+is declared using a <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a>.
+It may be further specified by additional predicate directives.
+Protocols support the separation between interface and implementation,
+can be implemented by both objects and categories, and can be extended
+by other protocols. A protocol should be functionally-cohesive,
+specifying a single functionality. Also known as <em>interface</em>.</dd>
 <dt id="term-prototype">prototype</dt>
 <dd>A self-describing object that may extend or be extended by other
 objects. An object with no instantiation or specialization relations
 with other objects is always interpreted as a prototype.</dd>
 <dt id="term-public-inheritance">public inheritance</dt>
-<dd>All inherited predicates maintain their declared scope.</dd>
+<dd>All inherited predicates maintain their declared scope. See also
+<a class="reference internal" href="#term-protected-inheritance"><span class="xref std std-term">protected inheritance</span></a> and <a class="reference internal" href="#term-private-inheritance"><span class="xref std std-term">private inheritance</span></a>.</dd>
 <dt id="term-public-predicate">public predicate</dt>
 <dd>A predicate that can be called from any object.</dd>
 <dt id="term-scratch-directory">scratch directory</dt>
@@ -533,7 +543,10 @@ object-oriented programming languages.</dd>
 <dt id="term-source-file">source file</dt>
 <dd>A text file defining Logtalk and/or Prolog code. Multiple Logtalk
 entities may be defined in a single source file. Plain Prolog code
-may be intermixed with Logtalk entity definitions.</dd>
+may be intermixed with Logtalk entity definitions. Depending on the
+used <a class="reference internal" href="#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, the text encoding may be
+specified using an <a class="reference internal" href="refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive as the
+first term in the first line in the file.</dd>
 <dt id="term-source-file-directive">source file directive</dt>
 <dd>A directive that affects how a <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> is compiled.</dd>
 <dt id="term-specialization">specialization</dt>

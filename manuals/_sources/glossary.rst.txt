@@ -143,18 +143,22 @@ Glossary
       entities. In the particular case of objects, when an object extends
       other object, we have prototype-based inheritance. When an object
       specializes or instantiates another object, we have class-based
-      inheritance.
+      inheritance. See also :term:`public inheritance`,
+      :term:`protected inheritance`, and :term:`private inheritance`.
 
    private inheritance
       All public and protected predicates are inherited as private
-      predicates.
+      predicates. See also :term:`public inheritance` and
+      :term:`protected inheritance`.
 
    protected inheritance
       All public predicates are inherited as protected. No scope change
-      for protected or private predicates.
+      for protected or private predicates. See also :term:`public inheritance`
+      and :term:`private inheritance`.
 
    public inheritance
-      All inherited predicates maintain their declared scope.
+      All inherited predicates maintain their declared scope. See also
+      :term:`protected inheritance` and :term:`private inheritance`.
 
    instance
       An object that instantiates one another object, interpreted as its
@@ -365,11 +369,12 @@ Glossary
 
    private predicate
       A predicate that can only be called from the object that contains
-      the scope directive.
+      its :term:`scope directive <predicate scope directive>`.
 
    protected predicate
-      A predicate that can only be called from the object containing the
-      scope directive or from an object that inherits the predicate.
+      A predicate that can only be called from the object containing its
+      :term:`scope directive <predicate scope directive>` or from an object
+      that inherits the predicate.
 
    public predicate
       A predicate that can be called from any object.
@@ -379,10 +384,11 @@ Glossary
 
    multifile predicate
       A predicate whose clauses can be defined in multiple
-      :term:`entities <entity>`. The object or category holding the
-      directive without an entity prefix qualifying the predicate holds
-      the multifile predicate *primary declaration*, which consists of
-      both a :term:`scope directive <predicate scope directive>` and a
+      :term:`entities <entity>` and :term:`source files <source file>`.
+      The object or category holding the directive without an entity
+      prefix qualifying the predicate holds the multifile predicate
+      *primary declaration*, which consists of both a
+      :term:`scope directive <predicate scope directive>` and a
       :ref:`directives_multifile_1` directive for the predicate.
 
    synchronized predicate
@@ -401,12 +407,12 @@ Glossary
    protocol
       An entity that contains
       :term:`predicate declarations <predicate declaration>`. A predicate
-      is declared using a scope directive. It may be further specified by
-      additional predicate directives. Protocols support the separation
-      between interface and implementation, can be implemented by both
-      objects and categories, and can be extended by other protocols. A
-      protocol should be functionally-cohesive, specifying a single
-      functionality. Also known as *interface*.
+      is declared using a :term:`scope directive <predicate scope directive>`.
+      It may be further specified by additional predicate directives.
+      Protocols support the separation between interface and implementation,
+      can be implemented by both objects and categories, and can be extended
+      by other protocols. A protocol should be functionally-cohesive,
+      specifying a single functionality. Also known as *interface*.
 
    interface
       See :term:`protocol`.
@@ -438,7 +444,10 @@ Glossary
    source file
       A text file defining Logtalk and/or Prolog code. Multiple Logtalk
       entities may be defined in a single source file. Plain Prolog code
-      may be intermixed with Logtalk entity definitions.
+      may be intermixed with Logtalk entity definitions. Depending on the
+      used :term:`backend Prolog compiler`, the text encoding may be
+      specified using an :ref:`directives_encoding_1` directive as the
+      first term in the first line in the file.
 
    adapter file
       A Prolog source file defining a minimal abstraction layer between the
@@ -485,6 +494,9 @@ Glossary
       predicate definition that will be used to answer the message (or the
       super call). Also known as *late binding*. See also :term:`static binding`.
 
+   late binding
+      See :term:`dynamic binding`.
+
    static binding
       Compile time lookup of a :term:`predicate declaration` and
       :term:`predicate definition` when compiling a :term:`message` sending
@@ -492,6 +504,9 @@ Glossary
       binding is not possible (e.g. due to the predicate being dynamic or due
       to lack of enough information at compilation time). Also known as *early
       binding*. See also :term:`dynamic binding`.
+
+   early binding
+      See :term:`static binding`.
 
    lambda expression
       A compound term that can be used in place of a goal or closure
