@@ -22,7 +22,7 @@
 	% load the application core logic code
 	logtalk_load(my_game),
 	% load all the application localizations;
-	% tipically we would load just a single one
+	% typically we would load just a single one
 	% based on some setting
 	logtalk_load(my_game_de_localization),
 	logtalk_load(my_game_en_localization),
