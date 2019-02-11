@@ -235,9 +235,9 @@ Performance
    without necessarily implying recompilation of all related entities.
 
    When dynamic binding is used, the Logtalk runtime engine implements
-   caching of method lookups (including messages to *self* and *super*
-   calls), ensuring a performance level close to what could be achieved
-   when using static binding.
+   caching of :term:`message lookups <message lookup>` (including messages
+   to *self* and *super* calls), ensuring a performance level close to what
+   could be achieved when using static binding.
 
 .. _features_scope:
 

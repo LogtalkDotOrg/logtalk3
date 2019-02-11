@@ -230,11 +230,11 @@ flag (see the :ref:`events_events` section for more details).
    the case (or when using the ``::/1`` control construct), Logtalk uses dynamic
    binding coupled with a caching mechanism that avoids repeated lookups of
    predicate declarations and predicate definitions. This is a solution common
-   to other programming languages supporting dynamic binding. Message lookups are
-   automatically cached the first time a message is sent. Cache entries are
-   automatically removed when loading entities or using Logtalk dynamic
-   features that invalidate the cached lookups.
-   
+   to other programming languages supporting dynamic binding. :term:`Message
+   lookups <message lookup>` are automatically cached the first time a message
+   is sent. Cache entries are automatically removed when loading entities or
+   using Logtalk dynamic features that invalidate the cached lookups.
+
    Whenever static binding is used, message sending performance is roughly
    the same as a predicate call in plain Prolog. When discussing Logtalk
    dynamic binding performance, two distinct cases should be considered:

@@ -84,7 +84,7 @@ instantiation graph and the default meta-class for instantiable classes:
 Note that all three objects are instances of class ``class``. The
 instantiation and specialization relationships are chosen so that each
 object may use the predicates defined in itself and in the other two
-objects, with no danger of method lookup endless loops.
+objects, with no danger of :term:`message lookup` endless loops.
 
 Summary
 -------

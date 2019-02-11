@@ -133,8 +133,8 @@ Hook objects
 
 Term and goal expansion of a source file during its compilation is performed
 by using *hook objects*. A hook object is simply an object implementing the
-:ref:`expanding <apis:expanding/0>` built-in protocol, defining clauses for
-the term and goal expansion hook predicates.
+:ref:`expanding <apis:expanding/0>` built-in protocol and defining clauses
+for the term and goal expansion hook predicates.
 
 To compile a source file using a hook object, we can use the
 :ref:`hook <flag_hook>` compiler flag in the second argument of the

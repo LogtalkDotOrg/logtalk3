@@ -29,9 +29,9 @@ Description
    message_prefix_stream(Kind, Component, Prefix, Stream)
 
 User-defined hook method for specifying the default prefix and stream
-for printing a message for a given kind and component. This method is
-declared in the :ref:`logtalk <apis:logtalk/0>` built-in object as a
-public, multifile, and dynamic predicate.
+for printing a message for a given kind and :term:`component`. This
+method is declared in the :ref:`logtalk <apis:logtalk/0>` built-in
+object as a public, multifile, and dynamic predicate.
 
 Modes and number of proofs
 --------------------------

@@ -749,9 +749,9 @@ logtalk<span class="o">::</span>message_prefix_stream(debug, core, <span class="
 the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> and <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags.
 When the code is not compiled in optimal mode, the
 <a class="reference external" href="https://logtalk.org/tools.html#debugging">debug_messages</a> tool allows
-selectively enabling of debug messages per component and per debug group.
-For example, to enable all <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages for the
-<code class="docutils literal notranslate"><span class="pre">parser</span></code> component:</p>
+selectively enabling of debug messages per <a class="reference internal" href="../glossary.html#term-component"><span class="xref std std-term">component</span></a> and per debug
+group. For example, to enable all <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages
+for the <code class="docutils literal notranslate"><span class="pre">parser</span></code> component:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>% upon loading the tool, all messages are disabled by default:
 | ?- logtalk_load(debug_messages(loader)).
 ...

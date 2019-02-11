@@ -611,9 +611,9 @@ By default, all debug messages are either printed or skipped, depending on
 the :ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` flags.
 When the code is not compiled in optimal mode, the
 `debug_messages <https://logtalk.org/tools.html#debugging>`_ tool allows
-selectively enabling of debug messages per component and per debug group.
-For example, to enable all ``debug`` and ``debug(Group)`` messages for the
-``parser`` component:
+selectively enabling of debug messages per :term:`component` and per debug
+group. For example, to enable all ``debug`` and ``debug(Group)`` messages
+for the ``parser`` component:
 
 .. code-block:: text
 
