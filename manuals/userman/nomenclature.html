@@ -215,12 +215,15 @@ information in this section.</p>
 <span id="nomenclature-smalltalk"></span><h2>Smalltalk nomenclature<a class="headerlink" href="#smalltalk-nomenclature" title="Permalink to this headline">¶</a></h2>
 <p>The Logtalk name originates from a combination of the Prolog and Smalltalk
 names. Smalltalk had a significant influence in the design of Logtalk and
-thus inherits some of its nomenclature. The following list relates the most
-commonly used Smalltalk terms with their Logtalk counterparts.</p>
+thus inherits some of its ideas and nomenclature. The following list relates
+the most commonly used Smalltalk terms with their Logtalk counterparts.</p>
 <dl class="docutils">
 <dt><strong>abstract class</strong></dt>
 <dd>Similar to Smalltalk, an abstract class is just a class not meant to be
 instantiated by not understanding a message to create instances.</dd>
+<dt><strong>assignment statement</strong></dt>
+<dd>Logtalk, as a superset of Prolog, uses <em>logic variables</em> and <em>unification</em>
+and thus provides no equivalent to the Smalltalk assignment statement.</dd>
 <dt><strong>block</strong></dt>
 <dd>Logtalk supports lambda expressions and meta-predicates, which can be used
 to provide similar functionality to Smalltalk blocks.</dd>
@@ -236,11 +239,11 @@ encapsulate predicates, not state. Class variables, which in Smalltalk are
 really shared instance variables, can be emulated in a class by defining a
 predicate locally instead of defining it in the class instances.</dd>
 <dt><strong>inheritance</strong></dt>
-<dd>While Smalltalk only supports single inheritance, Logtalk supports both
-single and multiple inheritance.</dd>
+<dd>While Smalltalk only supports single inheritance, Logtalk supports
+single inheritance, multiple inheritance, and multiple instantiation.</dd>
 <dt><strong>instance</strong></dt>
 <dd>While in Smalltalk every object is an <em>instance</em> of same class, objects
-in Logtalk can play multiple roles, including the role of a prototype
+in Logtalk can play different roles, including the role of a prototype
 where the concepts of instance and class don’t apply. Moreover, instances
 can be either created dynamically or defined statically.</dd>
 <dt><strong>instance method</strong></dt>
@@ -250,27 +253,37 @@ in a class and thus inherited by the class instances.</dd>
 <dd>Logtalk being a <em>declarative</em> language, objects encapsulate a set of
 predicates instead of encapsulating <em>state</em>. But different objects may
 provide different definitions of the same predicates. Mutable internal
-state as in Smalltalk can be approximated by using dynamic predicates.</dd>
+state as in Smalltalk can be emulated by using dynamic predicates.</dd>
 <dt><strong>message</strong></dt>
 <dd>Similar to Smalltalk, a <em>message</em> is a request for an operation, which is
 interpreted in Logtalk as a logic query, asking for the construction of a
 proof that something is true.</dd>
 <dt><strong>message selector</strong></dt>
 <dd>Logtalk uses the predicate template (i.e. the predicate callable term with
-all its arguments unbound) as message selector.</dd>
+all its arguments unbound) as message selector. The actual type of the
+message arguments is not considered. Like Smalltalk, Logtalk uses <em>single
+dispatch</em> on the message receiver.</dd>
 <dt><strong>metaclass</strong></dt>
 <dd>Metaclasses are optional in Logtalk (except for a root class) and can be
 shared by several classes. When metaclasses are used, infinite regression
 is simply avoided by making a class an instance of itself.</dd>
 <dt><strong>method</strong></dt>
-<dd>Same as in Smalltalk, a <em>method</em> is the actual code (i.i. predicate
+<dd>Same as in Smalltalk, a <em>method</em> is the actual code (i.e. predicate
 definition) that is run to answer a message. Logtalk uses the words
 <em>method</em> and <em>predicate</em> interchangeably.</dd>
+<dt><strong>method categories</strong></dt>
+<dd>There is no support in Logtalk for partitioning the methods of an object
+in different categories. The Logtalk concept of <em>category</em> (a first-class
+entity) was, however, partially inspired by Smalltalk method categories.</dd>
 <dt><strong>object</strong></dt>
 <dd>Unlike Smalltalk, where <em>everything</em> is an object, Logtalk language
 constructs includes both <em>terms</em> (as in Prolog representing e.g. numbers
 and structures) and three first-class entities: objects, protocols, and
 categories.</dd>
+<dt><em>pool variables*</em></dt>
+<dd>Logtalk, as a superset of Prolog, uses <em>predicates</em> with no distinction
+between <em>variables</em> and <em>methods</em>. Categories can be used to share a set
+of predicate definitions between any number of objects.</dd>
 <dt><strong>protocol</strong></dt>
 <dd>In Smalltalk, an object <em>protocol</em> is the set of messages it understands.
 The same concept applies in Logtalk. But Logtalk also supports protocols

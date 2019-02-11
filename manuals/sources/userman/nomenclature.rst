@@ -38,12 +38,16 @@ Smalltalk nomenclature
 
 The Logtalk name originates from a combination of the Prolog and Smalltalk
 names. Smalltalk had a significant influence in the design of Logtalk and
-thus inherits some of its nomenclature. The following list relates the most
-commonly used Smalltalk terms with their Logtalk counterparts.
+thus inherits some of its ideas and nomenclature. The following list relates
+the most commonly used Smalltalk terms with their Logtalk counterparts.
 
 **abstract class**
    Similar to Smalltalk, an abstract class is just a class not meant to be
    instantiated by not understanding a message to create instances.
+
+**assignment statement**
+   Logtalk, as a superset of Prolog, uses *logic variables* and *unification*
+   and thus provides no equivalent to the Smalltalk assignment statement.
 
 **block**
    Logtalk supports lambda expressions and meta-predicates, which can be used
@@ -64,12 +68,12 @@ commonly used Smalltalk terms with their Logtalk counterparts.
    predicate locally instead of defining it in the class instances.
 
 **inheritance**
-   While Smalltalk only supports single inheritance, Logtalk supports both
-   single and multiple inheritance.
+   While Smalltalk only supports single inheritance, Logtalk supports
+   single inheritance, multiple inheritance, and multiple instantiation.
 
 **instance**
    While in Smalltalk every object is an *instance* of same class, objects
-   in Logtalk can play multiple roles, including the role of a prototype
+   in Logtalk can play different roles, including the role of a prototype
    where the concepts of instance and class don't apply. Moreover, instances
    can be either created dynamically or defined statically.
 
@@ -81,7 +85,7 @@ commonly used Smalltalk terms with their Logtalk counterparts.
    Logtalk being a *declarative* language, objects encapsulate a set of
    predicates instead of encapsulating *state*. But different objects may
    provide different definitions of the same predicates. Mutable internal
-   state as in Smalltalk can be approximated by using dynamic predicates.
+   state as in Smalltalk can be emulated by using dynamic predicates.
 
 **message**
    Similar to Smalltalk, a *message* is a request for an operation, which is
@@ -90,7 +94,9 @@ commonly used Smalltalk terms with their Logtalk counterparts.
 
 **message selector**
    Logtalk uses the predicate template (i.e. the predicate callable term with
-   all its arguments unbound) as message selector.
+   all its arguments unbound) as message selector. The actual type of the
+   message arguments is not considered. Like Smalltalk, Logtalk uses *single
+   dispatch* on the message receiver.
 
 **metaclass**
    Metaclasses are optional in Logtalk (except for a root class) and can be
@@ -98,15 +104,25 @@ commonly used Smalltalk terms with their Logtalk counterparts.
    is simply avoided by making a class an instance of itself.
 
 **method**
-   Same as in Smalltalk, a *method* is the actual code (i.i. predicate
+   Same as in Smalltalk, a *method* is the actual code (i.e. predicate
    definition) that is run to answer a message. Logtalk uses the words
-   *method* and *predicate* interchangeably. 
+   *method* and *predicate* interchangeably.
+
+**method categories**
+   There is no support in Logtalk for partitioning the methods of an object
+   in different categories. The Logtalk concept of *category* (a first-class
+   entity) was, however, partially inspired by Smalltalk method categories.
 
 **object**
    Unlike Smalltalk, where *everything* is an object, Logtalk language
    constructs includes both *terms* (as in Prolog representing e.g. numbers
    and structures) and three first-class entities: objects, protocols, and
    categories.
+
+*pool variables**
+   Logtalk, as a superset of Prolog, uses *predicates* with no distinction
+   between *variables* and *methods*. Categories can be used to share a set
+   of predicate definitions between any number of objects.
 
 **protocol**
    In Smalltalk, an object *protocol* is the set of messages it understands.
