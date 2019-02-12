@@ -2174,6 +2174,18 @@ threaded_peek(Goal) :-
 	catch('$lgt_threaded_peek'(Goal, ExCtx), Error, '$lgt_runtime_error_handler'(Error)).
 
 
+% threaded_cancel(+nonvar)
+
+threaded_cancel(Tag) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_cancel(Tag), ExCtx))).
+
+threaded_cancel(Tag) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	catch('$lgt_threaded_cancel_tagged'(Tag, ExCtx), Error, '$lgt_runtime_error_handler'(Error)).
+
+
 % threaded_engine_create(@term, @callable, ?nonvar)
 
 threaded_engine_create(AnswerTemplate, Goal, Engine) :-
@@ -3384,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 24, 0, b02)).
+'$lgt_version_data'(logtalk(3, 24, 0, b03)).
 
 
 
@@ -12004,6 +12016,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TGoal = '$lgt_threaded_peek'(Goal, ExCtx).
 
 
+'$lgt_compile_body'(threaded_cancel(_), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_cancel(Tag), TGoal, '$lgt_debug'(goal(threaded_cancel(Tag), TGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TGoal = '$lgt_threaded_cancel_tagged'(Tag, ExCtx).
+
+
 '$lgt_compile_body'(threaded_engine_create(_, _, _), _, _, _) :-
 	\+ '$lgt_pp_threaded_',
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
@@ -20379,6 +20402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_built_in_predicate'(threaded_exit(_), threaded_exit((::))).
 '$lgt_logtalk_built_in_predicate'(threaded_peek(_, _), threaded_peek((::), *)).
 '$lgt_logtalk_built_in_predicate'(threaded_peek(_), threaded_peek((::))).
+'$lgt_logtalk_built_in_predicate'(threaded_cancel(_), threaded_cancel(*)).
 '$lgt_logtalk_built_in_predicate'(threaded_wait(_), no).
 '$lgt_logtalk_built_in_predicate'(threaded_notify(_), no).
 % threaded engines predicates
@@ -21316,6 +21340,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, _, _)).
+
+
+
+% '$lgt_threaded_cancel_tagged'(@nonvar, @execution_context)
+
+'$lgt_threaded_cancel_tagged'(Tag, ExCtx) :-
+	'$lgt_check'(nonvar, Tag, logtalk(threaded_cancel(Tag), ExCtx)),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
+	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+	(	thread_peek_message(Queue, '$lgt_thread_id'(_, _, This, Self, Tag, Id)) ->
+		% answering thread exists; go ahead and cancel it
+		thread_get_message(Queue, '$lgt_thread_id'(_, _, This, Self, Tag, Id)),
+		catch(thread_signal(Id, throw('$lgt_aborted')), _, true),
+		catch(thread_join(Id, _), _, true),
+		% delete any thread reply that is pending retrievel
+		forall(
+			thread_peek_message(Queue, '$lgt_reply'(_, This, Self, Tag, _, Id)),
+			thread_get_message(Queue, '$lgt_reply'(_, This, Self, Tag, _, Id))
+		)
+	;	% assume thread already canceled
+		true
+	).
 
 
 

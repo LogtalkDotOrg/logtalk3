@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Built-in predicate `threaded_cancel/1` to allow cancel asynchronous
+calls made using the `threaded_call/2` and `threaded_once/2` predicates.
+
 * IMPROVED: Allow the compiler linter to suggest more than one alternative for
 a suspicious call.
 
@@ -47,6 +50,8 @@ Logtalk counterparts.
 
 Tests
 -----
+
+* ADDED: Unit tests for the new `threaded_cancel/1` built-in predicate.
 
 * ADDED: Unit tests for the `built_in/0` directive.
 

@@ -215,11 +215,13 @@ predicates:
 
 When using asynchronous calls, the link between a ``threaded_exit/1``
 call and the corresponding ``threaded_call/1`` call is established using
-unification. If there are multiple ``threaded_call/1`` calls for a
-matching ``threaded_exit/1`` call, the connection can potentially be
-established with any of them. Nevertheless, you can easily use a tag the
-calls by using the extended :ref:`predicates_threaded_call_1_2`
-and :ref:`predicates_threaded_exit_1_2` built-in predicates. For example:
+unification. If there are multiple ``threaded_call/1`` calls for a matching
+``threaded_exit/1`` call, the connection can potentially be established with
+any of them. Nevertheless, you can easily use a tag the calls by using in
+alternative :ref:`threaded_call/2 <predicates_threaded_call_1_2>`,
+:ref:`threaded_once/2 <predicates_threaded_once_1_2>`, and
+:ref:`threaded_exit/2 <predicates_threaded_exit_1_2>` built-in predicates.
+For example:
 
 .. code-block:: text
 
@@ -241,7 +243,8 @@ and :ref:`predicates_threaded_exit_1_2` built-in predicates. For example:
    yes
 
 When using these predicates, the tags shall be considered as an opaque
-term; users shall not rely on its type.
+term; users shall not rely on its type. Tagged asynchronous calls can be
+canceled by using the :ref:`predicates_threaded_cancel_1` predicate.
 
 .. _threads_ignore:
 

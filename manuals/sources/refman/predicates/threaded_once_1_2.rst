@@ -35,9 +35,10 @@ always succeeds. The result (success, failure, or exception) is sent
 back to the message queue of the object containing the call
 (:term:`this`).
 
-The variant ``threaded_once/2`` returns a threaded call identifier tag
-that can be used with the :ref:`predicates_threaded_exit_1_2` predicate.
-Tags shall be regarded as opaque terms; users shall not rely on its type.
+The ``threaded_once/2`` variant returns a threaded call identifier tag that
+can be used with the :ref:`threaded_exit/2 <predicates_threaded_exit_1_2>`
+and :ref:`predicates_threaded_cancel_1` predicates. Tags shall be regarded
+as opaque terms; users shall not rely on its type.
 
 Modes and number of proofs
 --------------------------
@@ -73,5 +74,6 @@ Examples
    :ref:`predicates_threaded_exit_1_2`,
    :ref:`predicates_threaded_ignore_1`,
    :ref:`predicates_threaded_peek_1_2`,
+   :ref:`predicates_threaded_cancel_1`,
    :ref:`predicates_threaded_1`,
    :ref:`directives_synchronized_1`

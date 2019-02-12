@@ -29,5 +29,6 @@ Multi-threading
    threaded_ignore_1
    threaded_exit_1_2
    threaded_peek_1_2
+   threaded_cancel_1
    threaded_wait_1
    threaded_notify_1
