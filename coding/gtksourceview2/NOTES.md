@@ -44,4 +44,4 @@ on your system configuration.
 Alternatively, you can copy the `logtalk.lang` file to the following 
 location on your home directory:
 
-	~./gnome2/gtksourceview-2.0/language-specs/
+	~/.gnome2/gtksourceview-2.0/language-specs/
