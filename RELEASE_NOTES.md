@@ -63,6 +63,12 @@ example.
 
 * ADDED: An alternative implementation of the `cascade` example using DCGs.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax coloring support for the new `threaded_cancel/1` built-in
+predicate.
+
 
 3.23.0 - January 30, 2019
 =========================

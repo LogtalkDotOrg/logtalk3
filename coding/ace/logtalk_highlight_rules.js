@@ -176,7 +176,7 @@ var LogtalkHighlightRules = function() {
            regex: '\\b((?:bag|set)of|f(?:ind|or)all)(?=[(])' },
          { caseInsensitive: false,
            token: 'support.function.multi-threading.logtalk',
-           regex: '\\b(threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(])' },
+           regex: '\\b(threaded(_(ca(?:ll|ncel)|once|ignore|exit|peek|wait|notify))?)(?=[(])' },
          { caseInsensitive: false,
            token: 'support.function.engines.logtalk',
            regex: '\\b(threaded_engine(_(create|destroy|self|next(?:_reified)?|yield|post|fetch))?)(?=[(])' },

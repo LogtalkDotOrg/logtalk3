@@ -345,7 +345,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(])</string>
+			<string>\b(threaded(_(ca(ll|ncel)|once|ignore|exit|peek|wait|notify))?)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.multi-threading.logtalk</string>
 		</dict>

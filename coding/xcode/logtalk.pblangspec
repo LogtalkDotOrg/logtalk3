@@ -5,32 +5,32 @@
 (
 {
 	Identifier = logtalk;
-  	Name = "Logtalk";
-  	Description = "Logtalk";
-  	BasedOn = c;
+	Name = "Logtalk";
+	Description = "Logtalk";
+	BasedOn = c;
 	SupportsIndentation = NO;
-  	SyntaxColoring = {
-    	CaseSensitive = YES;
+	SyntaxColoring = {
+		CaseSensitive = YES;
 		IdentifierStartChars = "_";
-    	IdentifierChars = "_";
-    	MultiLineComment = (
-     	    ( "/*", "*/" )
-        );
-        CommentsCanBeNested = YES;
-    	SingleLineComment = ("%");
+		IdentifierChars = "_";
+		MultiLineComment = (
+			( "/*", "*/" )
+		);
+		CommentsCanBeNested = YES;
+		SingleLineComment = ("%");
 		String = (
-	   	   	("'", "'")
+			("'", "'")
 		);
 		Character = (
-                ( "'", "'" )
-         );
-    	EscapeCharacter = "\\";
-    	Keywords = (
+			( "'", "'" )
+		);
+		EscapeCharacter = "\\";
+		Keywords = (
 			"if"
 			"elif"
 			"else"
 			"endif"
-      		"category",
+			"category",
 			"end_category",
 			"end_object",
 			"end_protocol",
@@ -62,6 +62,6 @@
 		PreprocessorKeywordStart = "";
 		PreprocessorKeywords = (
 		);
-  	};
+	};
 }
 )

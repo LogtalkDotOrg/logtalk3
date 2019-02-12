@@ -178,7 +178,7 @@
       <keyword>(logtalk_(compile|l(ibrary_path|oad|oad_context)|make(_target_action)?))(?=[(])</keyword>
       <keyword>logtalk_make</keyword>
       <!-- Multi-threading predicates -->
-      <keyword>(threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(])</keyword>
+      <keyword>(threaded(_(ca(ll|ncel)|once|ignore|exit|peek|wait|notify))?)(?=[(])</keyword>
       <!-- Engine predicates -->
       <keyword>(threaded_engine(_(create|destroy|self|next|next_reified|yield|post|fetch))?)(?=[(])</keyword>
       <!-- All solutions -->

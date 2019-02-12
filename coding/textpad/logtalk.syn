@@ -1,14 +1,14 @@
 ; TextPad syntax definitions for Logtalk (https://logtalk.org/)
 ; 
-; Author: 			Paulo Moura
-; Last changed in: 	July 27, 2018
+; Author:          Paulo Moura
+; Last changed in: February 12, 2019
 ;
 ; Tags used and suggested colors:
-;   Keywords 1	message sending operators	blue
-;   Keywords 2	entity enclosing directives	purple
-;   Keywords 3	entity  directives		purple
-;   Keywords 4	built-in predicates
-;   Keywords 5	built-in methods
+;   Keywords 1 message sending operators   blue
+;   Keywords 2 entity enclosing directives purple
+;   Keywords 3 entity  directives          purple
+;   Keywords 4 built-in predicates
+;   Keywords 5 built-in methods
 
 
 C=1
@@ -160,6 +160,7 @@ logtalk_make
 logtalk_make_target_action
 threaded
 threaded_call
+threaded_cancel
 threaded_once
 threaded_ignore
 threaded_exit

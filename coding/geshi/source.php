@@ -49,9 +49,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.43,
+		version is 1.44,
 		author is 'Paulo Moura',
-		date is 2018/08/03,
+		date is 2019/02/12,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -146,10 +146,15 @@ comment
 	multi_threading :-
 		threaded(Goals),
 		threaded_call(Goal),
+		threaded_call(Goal, Tag),
 		threaded_once(Goal),
+		threaded_once(Goal, Tag),
 		threaded_ignore(Goal),
 		threaded_exit(Goal),
+		threaded_exit(Goal, Tag),
 		threaded_peek(Goal),
+		threaded_peek(Goal, Tag),
+		threaded_cancel(Tag),
 		threaded_wait(Notification),
 		threaded_notify(Notification).
 

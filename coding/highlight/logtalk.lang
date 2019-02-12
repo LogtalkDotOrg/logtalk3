@@ -124,7 +124,7 @@ Keywords={
     Group=1
   },
   { Id=3, --multi-threading predicates
-    Regex=[[ (threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(]) ]],
+    Regex=[[ (threaded(_(call|cancel|once|ignore|exit|peek|wait|notify))?)(?=[(]) ]],
     Group=1
   },
   { Id=3, --engine predicates

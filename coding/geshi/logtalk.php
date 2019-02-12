@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2019/02/12 (1.1.24)
+ *  -  Added syntax coloring of the threaded_cancel/1 predicate
  * 2018/07/26 (1.1.23)
  *  -  Added syntax coloring of the logtalk_make_target_action/1 predicate
  * 2018/06/29 (1.1.22)
@@ -184,7 +186,8 @@ $language_data = array(
             'bagof', 'findall', 'forall', 'setof',
             // multi-threading predicates
             'threaded',
-            'threaded_call', 'threaded_once', 'threaded_ignore', 'threaded_exit', 'threaded_peek',
+            'threaded_call', 'threaded_once', 'threaded_ignore',
+			'threaded_exit', 'threaded_peek', 'threaded_cancel',
             'threaded_wait', 'threaded_notify',
             // engine predicates
             'threaded_engine',

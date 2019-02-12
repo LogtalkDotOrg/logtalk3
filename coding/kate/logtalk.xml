@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 
-<language name="Logtalk" version="2.11" kateversion="2.4" section="Sources" extensions="*.lgt;.logtalk" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="Apache License 2.0">
+<language name="Logtalk" version="2.12" kateversion="2.4" section="Sources" extensions="*.lgt;.logtalk" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="Apache License 2.0">
 
 	<highlighting>
 
@@ -45,7 +45,7 @@
 				<!-- All solutions -->
 				<RegExpr String = "\b((bag|set)of|f(ind|or)all)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Multi-threading predicates -->
-				<RegExpr String = "\bthreaded(_(call|once|ignore|exit|peek|wait|notify))?(?=[(])" attribute = "Built-in" context = "#stay" />
+				<RegExpr String = "\bthreaded(_(ca(ll|ncel)|once|ignore|exit|peek|wait|notify))?(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Engine predicates -->
 				<RegExpr String = "\bthreaded_engine(_(create|destroy|self|next|next_reified|yield|post|fetch))?(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Term unification -->

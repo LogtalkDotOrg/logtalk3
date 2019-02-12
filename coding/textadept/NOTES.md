@@ -23,6 +23,7 @@ Textadept is a multiple platform text editor available from:
 
 Textadept includes a lexer for Logtalk written by Michael T. Richter. See
 the `lexers/logtalk.lua` file in the Textadept installation for details.
+Replace it with the `logtalk.lua` file in this directory if more recent.
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
