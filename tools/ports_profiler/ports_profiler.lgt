@@ -81,7 +81,7 @@
 		:- dynamic(logtalk::debug_handler_provider/1).
 	:- endif.
 
-	logtalk::debug_handler_provider(ports).
+	logtalk::debug_handler_provider(ports_profiler).
 
 	:- multifile(logtalk::debug_handler/2).
 	:- if(current_logtalk_flag(prolog_dialect, qp)).
