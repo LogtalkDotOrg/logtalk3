@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 24, 0, b03)).
+'$lgt_version_data'(logtalk(3, 24, 0, b04)).
 
 
 
@@ -11076,12 +11076,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_comp_ctx_head'(Ctx, user::Head).
 
-'$lgt_compile_head'(logtalk::debug_handler_provider(_), _, _, Ctx) :-
+'$lgt_compile_head'(logtalk::debug_handler_provider(NewProvider), _, _, Ctx) :-
+	'$lgt_check'(object_identifier, NewProvider),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$logtalk#0.debug_handler_provider#1'(Provider, _),
+	'$logtalk#0.debug_handler_provider#1'(OldProvider, _),
+	functor(NewProvider, Functor, Arity),
+	\+ functor(OldProvider, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(general), core, debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider)),
+	'$lgt_print_message'(warning(general), core, debug_handler_provider_already_exists(File, Lines, Type, Entity, OldProvider)),
 	fail.
 
 '$lgt_compile_head'(Other::Head, Other::Functor/Arity, THead, Ctx) :-

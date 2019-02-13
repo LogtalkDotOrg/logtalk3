@@ -34,6 +34,9 @@ predicates.
 * IMPROVED: Allow the compiler linter to suggest more than one alternative for
 a suspicious call.
 
+* IMPROVED: Only print a warning about a debug handler provider already being
+loaded when the old and new provider are not the same object due to reloading.
+
 * FIXED: The compiler now throws a permission error when attempting to create
 an entity that would be both built-in and dynamic.
 
