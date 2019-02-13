@@ -24,7 +24,7 @@ ________________________________________________________________________
 
 
 % the tool requires that the applications to be profiled are compiled in
-% debug mode:
+% debug mode as the port data is collected using debug hooks:
 
 | ?- set_logtalk_flag(debug, on).
 ...
@@ -63,3 +63,19 @@ heuristic_search/1  threshold/1           0     1     1     1     0     0     0 
 hill_climbing/1     hill/7                0    25    13     0    12     1     0     0
 hill_climbing/1     search/5              0     1     1     0     1     0     0     0
 -------------------------------------------------------------------------------------
+
+
+% focus on a single entity:
+
+| ?- ports_profiler::data(miss_cann).
+
+-----------------------------------------------------------------
+Predicate          Fact  Rule  Call  Exit *Exit  Fail  Redo Error
+-----------------------------------------------------------------
+goal_state/2          1     0    13     1     0    12     0     0
+heuristic/2           0    15    15    15     0     0     0     0
+initial_state/2       1     0     1     1     0     0     0     0
+next_state/3          0    66    18     0    38    18    38     0
+print_state/1         0    12    12    12     0     0     0     0
+-----------------------------------------------------------------
+

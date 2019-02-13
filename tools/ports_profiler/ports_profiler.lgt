@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/07/02,
+		date is 2019/02/13,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -183,9 +183,9 @@
 				Port^Count^port_(Port, EntityTemplate, Functor, Arity, Count),
 				Predicates
 			),
-			write_data(Predicates, EntityTemplate)
+			write_data_entity(Predicates, Entity)
 		;	% no profling data collected so far for this entity
-			write_data([], _)
+			write_data_entity([], _)
 		).
 
 	reset(Entity) :-
@@ -218,6 +218,19 @@
 		(	Predicates == [] ->
 			write('(no profiling data available)'), nl
 		;	write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount)
+		),
+		write(Ruler), nl.
+
+	write_data_entity(Predicates, Entity) :-
+		maximum_width_predicate(Predicates, MaximumWidthPredicate),
+		maximum_width_result(Entity, MaximumWidthCount),
+		table_ruler(MaximumWidthPredicate, MaximumWidthCount, Ruler),
+		write(Ruler), nl,
+		write_table_label(MaximumWidthPredicate, MaximumWidthCount),
+		write(Ruler), nl,
+		(	Predicates == [] ->
+			write('(no profiling data available)'), nl
+		;	write_data_rows(Predicates, MaximumWidthPredicate, MaximumWidthCount)
 		),
 		write(Ruler), nl.
 
@@ -291,6 +304,18 @@
 		atom_to_left_padded_atom('Error', MaximumWidthCount, Error),
 		write_list([Entity, Predicate, Fact, Rule, Call, Exit, NDExit, Fail, Redo, Error]), nl.
 
+	write_table_label(MaximumWidthPredicate, MaximumWidthCount) :-
+		atom_to_right_padded_atom('Predicate', MaximumWidthPredicate, Predicate),
+		atom_to_left_padded_atom(' Fact', MaximumWidthCount, Fact),
+		atom_to_left_padded_atom(' Rule', MaximumWidthCount, Rule),
+		atom_to_left_padded_atom(' Call', MaximumWidthCount, Call),
+		atom_to_left_padded_atom(' Exit', MaximumWidthCount, Exit),
+		atom_to_left_padded_atom('*Exit', MaximumWidthCount, NDExit),
+		atom_to_left_padded_atom(' Fail', MaximumWidthCount, Fail),
+		atom_to_left_padded_atom(' Redo', MaximumWidthCount, Redo),
+		atom_to_left_padded_atom('Error', MaximumWidthCount, Error),
+		write_list([Predicate, Fact, Rule, Call, Exit, NDExit, Fail, Redo, Error]), nl.
+
 	write_data_rows([], _, _, _).
 	write_data_rows([Entity-Functor/Arity| Predicates], MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount) :-
 		port(fact, Entity, Functor, Arity, MaximumWidthCount, FactAtom),
@@ -307,6 +332,20 @@
 		predicate_to_padded_atom(Entity, Functor/Arity, MaximumWidthPredicate, PredicateAtom),
 		write_list([TemplateAtom, PredicateAtom, FactAtom, RuleAtom, CallAtom, ExitAtom, NDExitAtom, FailAtom, RedoAtom, ExceptionAtom]), nl,
 		write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount).
+
+	write_data_rows([], _, _).
+	write_data_rows([Entity-Functor/Arity| Predicates], MaximumWidthPredicate, MaximumWidthCount) :-
+		port(fact, Entity, Functor, Arity, MaximumWidthCount, FactAtom),
+		port(rule, Entity, Functor, Arity, MaximumWidthCount, RuleAtom),
+		port(call, Entity, Functor, Arity, MaximumWidthCount, CallAtom),
+		port(exit, Entity, Functor, Arity, MaximumWidthCount, ExitAtom),
+		port(nd_exit, Entity, Functor, Arity, MaximumWidthCount, NDExitAtom),
+		port(fail, Entity, Functor, Arity, MaximumWidthCount, FailAtom),
+		port(redo, Entity, Functor, Arity, MaximumWidthCount, RedoAtom),
+		port(exception, Entity, Functor, Arity, MaximumWidthCount, ExceptionAtom),
+		predicate_to_padded_atom(Entity, Functor/Arity, MaximumWidthPredicate, PredicateAtom),
+		write_list([PredicateAtom, FactAtom, RuleAtom, CallAtom, ExitAtom, NDExitAtom, FailAtom, RedoAtom, ExceptionAtom]), nl,
+		write_data_rows(Predicates, MaximumWidthPredicate, MaximumWidthCount).
 
 	write_list([]).
 	write_list([Atom| Atoms]) :-
@@ -375,6 +414,10 @@
 
 	table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount, Ruler) :-
 		Length is MaximumWidthEntity + 2 + MaximumWidthPredicate + 2 + 8*MaximumWidthCount + 2*8,
+		generate_atom(Length, '-', Ruler).
+
+	table_ruler(MaximumWidthPredicate, MaximumWidthCount, Ruler) :-
+		Length is MaximumWidthPredicate + 2 + 8*MaximumWidthCount + 2*8,
 		generate_atom(Length, '-', Ruler).
 
 	generate_atom(Length, Character, Atom) :-
