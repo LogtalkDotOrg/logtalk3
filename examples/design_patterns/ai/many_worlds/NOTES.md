@@ -31,7 +31,7 @@ Related examples:
 	of rules. See the `ports/metagol` directory for details. Another,
 	simpler, example of this design pattern is `examples/family`.
 
-This is a pattern that is trivial in Logtalk bur cumbersome at best
+This is a pattern that is trivial in Logtalk but cumbersome at best
 using Prolog modules. The key Logtalk features are inheritance (of
 the reasoning code that we want to apply to many worlds) and messages
 to self (which allow calling from the reasoning code the predicates
