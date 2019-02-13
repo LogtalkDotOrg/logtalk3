@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.18,
+		version is 0.19,
 		author is 'Paulo Moura',
-		date is 2018/06/29,
+		date is 2019/02/13,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -275,6 +275,7 @@
 	built_in_predicate(threaded_exit, 2, '/manuals/refman/predicates/', 'threaded_exit_1_2.html').
 	built_in_predicate(threaded_peek, 1, '/manuals/refman/predicates/', 'threaded_peek_1_2.html').
 	built_in_predicate(threaded_peek, 2, '/manuals/refman/predicates/', 'threaded_peek_1_2.html').
+	built_in_predicate(threaded_cancel, 1, '/manuals/refman/predicates/', 'threaded_cancel_1.html').
 	built_in_predicate(threaded_wait, 1, '/manuals/refman/predicates/', 'threaded_wait_1.html').
 	built_in_predicate(threaded_notify, 1, '/manuals/refman/predicates/', 'threaded_notify_1.html').
 
