@@ -28,10 +28,10 @@ Description
 
    threaded_engine_next_reified(Engine, Answer)
 
-Retrieves the next reified answer from an engine. This predicate
-always succeeds and blocks until an answer becomes available.
-Answers are returned using the terms ``the(Answer)``, ``no``, and
-``exception(Error)``.
+Retrieves an answer from an engine and signals it to start computing the
+next answer. This predicate always succeeds and blocks until an answer
+becomes available. Answers are returned using the terms ``the(Answer)``,
+``no``, and ``exception(Error)``.
 
 Modes and number of proofs
 --------------------------

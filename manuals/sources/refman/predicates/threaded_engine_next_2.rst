@@ -28,11 +28,11 @@ Description
 
    threaded_engine_next(Engine, Answer)
 
-Retrieves the next answer from an engine. This predicate blocks until an
-answer becomes available. The predicate fails when there are no more
-solutions to the engine goal. If the engine goal throws an exception,
-calling this predicate will re-throw the exception and subsequent calls
-will fail.
+Retrieves an answer from an engine and signals it to start computing the
+next answer. This predicate blocks until an answer becomes available.
+The predicate fails when there are no more solutions to the engine goal.
+If the engine goal throws an exception, calling this predicate will
+re-throw the exception and subsequent calls will fail.
 
 Modes and number of proofs
 --------------------------
