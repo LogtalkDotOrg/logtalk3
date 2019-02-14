@@ -80,6 +80,9 @@ example.
 
 * ADDED: An alternative implementation of the `cascade` example using DCGs.
 
+* ADDED: Simple example of working with "futures", a common concurrent
+programming idiom, using the high-level multi-threading predicates.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
