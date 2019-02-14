@@ -6,6 +6,7 @@ insert_final_newline = true
 [*.{lgt,pl}]
 indent_style = tab
 indent_size = 4
+trim_trailing_whitespace = true
 
 [*.md]
 trim_trailing_whitespace = false
