@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 Ace is an embeddable code editor written in JavaScript available from:
 
-	http://ace.c9.io/
+	https://ace.c9.io/
 
 In order to use Ace for editing Logtalk source files, copy the files
 `logtalk.js` and `logtalk_highlight_rules.js` to the `lib/ace/mode`
