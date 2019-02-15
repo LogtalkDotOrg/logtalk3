@@ -25,7 +25,8 @@ Prettify:
 In order to check if your Google Code Prettify distribution already includes 
 support for Logtalk, look for a file named `lang-logtalk.js` in the `src`
 directory. If support for Logtalk is not included or if it is outdated, copy
-the provided `lang-logtalk.js` file to the `src` folder.
+the provided `lang-logtalk.js` file to the `src` folder. The `source.html`
+file can be used for testing.
 
 The `lang-logtalk.js` file is licensed under the Apache License, Version 2.0,
 as other Google Code Prettify language mode files.
