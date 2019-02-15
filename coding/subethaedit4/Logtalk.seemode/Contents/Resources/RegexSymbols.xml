@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE syntax SYSTEM "symbol.dtd">
+<symbols>
+
+	<symbol id="Objects" symbol="O_#E2913F" indentation="1">
+		<regex>((?&lt;=:-\sobject\()[a-z][A-Za-z0-9_]*)</regex>
+		<postprocess>
+			<find>((?&lt;=:-\sobject\()[a-z][A-Za-z0-9_]*)</find>
+			<replace>\1</replace>
+		</postprocess>
+	</symbol>
+
+	<symbol id="Protocols" symbol="P_#4CBD40" indentation="1">
+		<regex>((?&lt;=:-\sprotocol\()[a-z][A-Za-z0-9_]*)</regex>
+		<postprocess>
+			<find>((?&lt;=:-\sprotocol\()[a-z][A-Za-z0-9_]*)</find>
+			<replace>\1</replace>
+		</postprocess>
+	</symbol>
+
+	<symbol id="Categories" symbol="C_#225ADA" indentation="1">
+		<regex>((?&lt;=:-\scategory\()[a-z][A-Za-z0-9_]*)</regex>
+		<postprocess>
+			<find>((?&lt;=:-\scategory\()[a-z][A-Za-z0-9_]*)</find>
+			<replace>\1</replace>
+		</postprocess>
+	</symbol>
+
+</symbols>

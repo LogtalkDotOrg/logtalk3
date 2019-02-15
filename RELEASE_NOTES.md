@@ -89,6 +89,8 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Syntax coloring support for the new `threaded_cancel/1` built-in
 predicate.
 
+* ADDED: SubEthaEdit 4.x/5.x text editor support.
+
 
 3.23.0 - January 30, 2019
 =========================

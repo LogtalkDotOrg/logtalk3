@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE syntax SYSTEM "syntax.dtd">
+<syntax>
+
+	<head>
+		<name>Logtalk</name>
+		<charsintokens><![CDATA[_0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{}-]]></charsintokens>
+		<!-- <charsdelimitingtokens><![CDATA[ []()]]></charsdelimitingtokens> -->
+		<folding toplevel="2" />
+	</head>
+
+	<states>
+
+		<default id="Base" scope="meta.default">
+
+			<keywords id="Variables" useforautocomplete="no" scope="language.variable">
+				<regex>\b([A-Z_][A-Za-z0-9_]*)</regex>
+			</keywords>
+
+			<keywords id="Entity Relations" useforautocomplete="yes" scope="language.subroutine.function">
+				<regex>\b(complements)\(</regex>
+				<regex>\b(extends)\(</regex>
+				<regex>\b(i(?:mp(?:orts|lements)|nstantiates))\(</regex>
+				<regex>\b(specializes)\(</regex>
+			</keywords>
+
+			<keywords id="Message Sending Operators" useforautocomplete="no" scope="language.subroutine.method">
+				<regex>(::)</regex>
+				<regex>(\^\^)</regex>
+			</keywords>
+
+			<keywords id="Category Predicate Direct Call" useforautocomplete="no" scope="language.subroutine.method">
+				<regex>(:)</regex>
+			</keywords>
+
+			<keywords id="External Call" useforautocomplete="no" scope="language.subroutine.method">
+				<regex>(\{)</regex>
+				<regex>(\})</regex>
+			</keywords>
+
+			<keywords id="Control Constructs" useforautocomplete="yes" scope="language.subroutine.method">
+				<regex>\b(ca(?:ll|tch))\(</regex>
+				<regex>\b(throw)\(</regex>
+				<regex>\b(true)[^[(A-Za-z_]]</regex>
+				<regex>\b(fail)[^[(A-Za-z_]]</regex>
+				<regex>\b(false)[^[(A-Za-z_]]</regex>
+				<regex>\s(--&gt;)\s</regex>
+				<regex>\s(-&gt;)\s</regex>
+				<regex>(!)</regex>
+				<regex>(;)</regex>
+				<regex>\b(instantiation_error)[^[(A-Za-z_]]</regex>
+				<regex>\b(type_error)\(</regex>
+				<regex>\b(domain_error)\(</regex>
+				<regex>\b(existence_error)\(</regex>
+				<regex>\b(permission_error)\(</regex>
+				<regex>\b(representation_error)\(</regex>
+				<regex>\b(evaluation_error)\(</regex>
+				<regex>\b(resource_error)\(</regex>
+				<regex>\b(syntax_error)\(</regex>
+				<regex>\b(system_error)[^[(A-Za-z_]]</regex>
+			</keywords>
+
+			<keywords id="Built-in Methods" useforautocomplete="yes" scope="language.subroutine.method">
+				<regex>\b(context)\(</regex>
+				<regex>\b(parameter)\(</regex>
+				<regex>\b(se(?:lf|nder))\(</regex>
+				<regex>\b(this)\(</regex>
+				<regex>\b(current_predicate)\(</regex>
+				<regex>\b(predicate_property)\(</regex>
+				<regex>\b(a(?:bolish|ssert(?:a|z)))\(</regex>
+				<regex>\b(clause)\(</regex>
+				<regex>\b(retract(?:all)?)\(</regex>
+				<regex>\b((?:bag|set)of)\(</regex>
+				<regex>\b(f(?:ind|or)all)\(</regex>
+				<regex>\b(before)\(</regex>
+				<regex>\b(after)\(</regex>
+				<regex>\b(forward)\(</regex>
+				<regex>\b(expand_(?:goal|term))\(</regex>
+				<regex>\b((?:goal|term)_expansion)\(</regex>
+				<regex>\b(phrase)\(</regex>
+			</keywords>
+
+			<keywords id="Built-in Predicates" useforautocomplete="yes" scope="language.subroutine.method">
+				<regex>\b(current_(?:object|protocol|category|event))\(</regex>
+				<regex>\b(create_(?:object|protocol|category))\(</regex>
+				<regex>\b((?:object|protocol|category)_property)\(</regex>
+				<regex>\b(abolish_(?:object|protocol|category|events))\(</regex>
+				<regex>\b(co(?:mplements_object|nforms_to_protocol))\(</regex>
+				<regex>\b(extends_(?:object|protocol|category))\(</regex>
+				<regex>\b(imp(?:lements_protocol|orts_category))\(</regex>
+				<regex>\b((?:instantiat|specializ)es_class)\(</regex>
+				<regex>\b(define_events)\(</regex>
+				<regex>\b((?:set|create|current)_logtalk_flag)\(</regex>
+				<regex>\b(logtalk_(?:compile|l(?:ibrary_path|oad|oad_context)|make(?:_target_action)?))\(</regex>
+				<regex>\b(logtalk_make)\b</regex>
+				<regex>\b(forall)\(</regex>
+				<!-- <regex>\b(retractall)\(</regex> -->
+				<regex>\b(threaded(?:_(?:call|once|ignore|exit|peek|wait|notify))?)\(</regex>
+				<regex>\b(threaded_engine(?:_(?:create|destroy|self|next|next_reified|yield|post|fetch))?)\(</regex>
+			</keywords>
+
+			<keywords id="Other Built-in Predicates" useforautocomplete="yes" scope="language.subroutine.method">
+				<!-- Term unification -->
+				<regex>\s(=)\s</regex>
+				<regex>\s(\\=)\s</regex>
+				<regex>\b(subsumes_term)\(</regex>
+				<regex>\b(unify_with_occurs_check)\(</regex>
+				<!-- Term testing -->
+				<regex>\b(atom(?:ic)?)\(</regex>
+				<regex>\b(integer)\(</regex>
+				<regex>\b(float)\(</regex>
+				<regex>\b(c(?:allable|ompound))\(</regex>
+				<regex>\b((?:non)?var)\(</regex>
+				<regex>\b(number)\(</regex>
+				<regex>\b(ground)\(</regex>
+				<regex>\b(acyclic_term)\(</regex>
+				<!-- Term comparison -->
+				<regex>\b(compare)\(</regex>
+				<regex>(==)</regex>
+				<regex>(\\==)</regex>
+				<regex>(@&lt;)</regex>
+				<regex>(@=&lt;)</regex>
+				<regex>(@&gt;=)</regex>
+				<regex>(@&gt;)</regex>
+				<!-- Term creation and decomposition -->
+				<regex>\b(functor)\(</regex>
+				<regex>\b(arg)\(</regex>
+				<regex>(=\.\.)</regex>
+				<regex>\b(copy_term)\(</regex>
+				<regex>\b(numbervars)\(</regex>
+				<regex>\b(term_variables)\(</regex>
+				<!-- Predicate aliases -->
+				<regex>\s(as)\s</regex>
+				<!-- Arithmetic evaluation -->
+				<regex>\s(is)\s</regex>
+				<!-- Arithmetic comparison -->
+				<regex>(=:=)</regex>
+				<regex>(=\\=)</regex>
+				<regex>(&lt;)</regex>
+				<regex>(=&lt;)</regex>
+				<regex>(&gt;)</regex>
+				<regex>(&gt;=)</regex>
+				<!-- Evaluable functors -->
+				<regex>(\+)</regex>
+				<regex>(?&lt;!:)(-)</regex>
+				<regex>(\*)</regex>
+				<regex>(//)</regex>
+				<regex>(/)</regex>
+				<regex>\b(e)\b</regex>
+				<regex>\b(pi)\b</regex>
+				<regex>\b(rem)\b</regex>
+				<regex>\b(mod)\b</regex>
+				<regex>\b(div)\b</regex>
+				<regex>\b(rem)\(</regex>
+				<regex>\b(div)\(</regex>
+				<regex>\b(m(?:ax|in|od))\(</regex>
+				<regex>\b(abs)\(</regex>
+				<regex>\b(sign)\(</regex>
+				<regex>\b(float(?:_(?:integer|fractional)_part)?)\(</regex>
+				<regex>\b(floor)\(</regex>
+				<regex>\b(t(?:an|runcate))\(</regex>
+				<regex>\b(round)\(</regex>
+				<regex>\b(ceiling)\(</regex>
+				<!-- Other arithemtic functors -->
+				<regex>(\*\*)</regex>
+				<regex>\b(sin)\(</regex>
+				<regex>\b(cos)\(</regex>
+				<regex>\b(a(?:cos|sin|tan|tan2))\(</regex>
+				<regex>\b(exp)\(</regex>
+				<regex>\b(log)\(</regex>
+				<regex>\b(sqrt)\(</regex>
+				<!-- Bitwise functors -->
+				<regex>(&gt;&gt;)</regex>
+				<regex>(&lt;&lt;)</regex>
+				<regex>(/\\)</regex>
+				<regex>(\\/)</regex>
+				<regex>(\\)</regex>
+				<regex>\b(xor)\(</regex>
+				<!-- Stream selection and control -->
+				<regex>\b((?:curren|se)t_(?:in|out)put)\(</regex>
+				<regex>\b(open)\(</regex>
+				<regex>\b(close)\(</regex>
+				<regex>\b(flush_output)\(</regex>
+				<regex>\b(stream_property)\(</regex>
+				<regex>\b(at_end_of_stream)\(</regex>
+				<regex>\b(set_stream_position)\(</regex>
+				<regex>\b(flush_output)[^[(A-Za-z_]]</regex>
+				<regex>\b(at_end_of_stream)[^[(A-Za-z_]]</regex>
+				<!-- Character input/output -->
+				<regex>\b((?:get|p(?:eek|ut))_c(?:har|ode))\(</regex>
+				<regex>\b(nl)\(</regex>
+				<regex>\b(nl)\b</regex>
+				<!-- Byte input/output -->
+				<regex>\b((?:get|peek|put)_byte)\(</regex>
+				<!-- Term input/output -->
+				<regex>\b(read(?:_term)?)\(</regex>
+				<regex>\b(write(?:q)?)\(</regex>
+				<regex>\b(write_(?:canonical|term))\(</regex>
+				<regex>\b((?:current_)?op)\(</regex>
+				<regex>\b((?:current_)?char_conversion)\(</regex>
+				<!-- Logic and control -->
+				<regex>(\\\+)</regex>
+				<regex>\b(ignore)\(</regex>
+				<regex>\b(once)\(</regex>
+				<regex>\b(repeat)[^[(A-Za-z_]]</regex>
+				<!-- Atomic term processing -->
+				<regex>\b(atom_(?:length|c(?:hars|o(?:ncat|des))))\(</regex>
+				<regex>\b(sub_atom)\(</regex>
+				<regex>\b(char_code)\(</regex>
+				<regex>\b(number_c(?:har|ode)s)\(</regex>
+				<!-- Implementation defined hooks functions -->
+				<regex>\b((?:se|curren)t_prolog_flag)\(</regex>
+				<regex>\b(halt)\(</regex>
+				<regex>\b(halt)[^[(A-Za-z_]]</regex>
+				<!-- Sorting -->
+				<regex>\b((?:key)?sort)\(</regex>
+			</keywords>
+
+			<keywords id="Mode Operators" useforautocomplete="no" scope="language.subroutine.method">
+				<regex>(@)</regex>
+				<regex>(\?)</regex>
+				<regex>(\+)</regex>
+				<regex>(-)</regex>
+			</keywords>
+
+			<keywords id="Existential Quantifier Operator" useforautocomplete="no" scope="language.subroutine.method">
+				<regex>(\^)</regex>
+			</keywords>
+
+			<keywords id="Numbers" useforautocomplete="no" scope="language.constant.numeric">
+				<regex>(?&lt;=[^\w\d]|^)(0b[0-1]+)</regex>
+				<regex>(?&lt;=[^\w\d]|^)(0o[0-7]+)</regex>
+				<regex>(?&lt;=[^\w\d]|^)(0x\h+)</regex>
+				<regex>(?&lt;=[^\w\d]|^)(0'[\\]?.)</regex>
+				<regex>(?&lt;=[^\w\d]|^)([+-]?\d+(?:\.\d+)?(?:[eE](?:[+-])?\d+)?)</regex>
+			</keywords>
+
+			<keywords id="Metapredicate Operators" useforautocomplete="no" scope="language.subroutine.method">
+				<regex>(::)</regex>
+				<regex>(\*)</regex>
+			</keywords>
+
+			<keywords id="Directives" useforautocomplete="yes" scope="language.subroutine.function">
+				<regex>:-\s(object)\(</regex>
+				<regex>:-\s(protocol)\(</regex>
+				<regex>:-\s(category)\(</regex>
+				<regex>:-\s(end_(?:object|protocol|category))\.</regex>
+				<regex>:-\s(alias)\(</regex>
+				<regex>:-\s(e(?:n(?:coding|sure_loaded)|xport))\(</regex>
+				<regex>:-\s(in(?:clude|itialization|fo))\(</regex>
+				<regex>:-\s(mod(?:e|ule))\(</regex>
+				<regex>:-\s(built_in)\.</regex>
+				<regex>:-\s(dynamic)\(</regex>
+				<regex>:-\s(dynamic)\.</regex>
+				<regex>:-\s((?:el)?if)\(</regex>
+				<regex>:-\s(e(?:lse|ndif))\.</regex>
+				<regex>:-\s(discontiguous)\(</regex>
+				<regex>:-\s(p(?:ublic|r(?:otected|ivate)))\(</regex>
+				<regex>:-\s(m(?:eta_(?:non_terminal|predicate)|ultifile))\(</regex>
+				<regex>:-\s(op)\(</regex>
+				<regex>:-\s(c(?:alls|oinductive))\(</regex>
+				<regex>:-\s(use(?:s|_module))\(</regex>
+				<regex>:-\s(reexport)\(</regex>
+				<regex>:-\s(s(?:et_(?:logtalk|prolog)_flag|ynchronized))\(</regex>
+				<regex>:-\s(synchronized)\.</regex>
+				<regex>:-\s(threaded)\.</regex>
+			</keywords>
+
+			<keywords id="Clause Operator" useforautocomplete="no" scope="language.subroutine.method">
+				<regex>(:-)</regex>
+			</keywords>
+
+			<state id="Strings" type="string" useforautocomplete="no" scope="string.double">
+				<begin><regex>(?&lt;!0'|0'\\)"</regex></begin>
+				<end><regex>"</regex></end>
+			</state>
+	
+			<state id="Quoted Atoms" type="string" useforautocomplete="no" scope="string.single">
+				<begin><regex>(?&lt;!0|0'|0'\\)'</regex></begin>
+				<end><regex>'</regex></end>
+			</state>
+	
+			<state id="Comment" type="comment" useforautocomplete="no" foldable="yes" scope="comment.block">
+				<begin><regex>/\*</regex><autoend>\*/</autoend></begin>
+				<end><regex>\*/</regex></end>
+				<import mode="Base" state="EmailAndURLContainerState" keywords-only="yes"/>
+			</state>
+	
+			<state id="Single Comment" type="comment" useforautocomplete="no" scope="comment.line">
+				<begin><regex>(?&lt;!0'|0'\\)%</regex></begin>
+				<end><regex>[\n\r]</regex></end>
+				<import mode="Base" state="EmailAndURLContainerState" keywords-only="yes"/>
+			</state>
+	
+			<state id="Conditional Compilation" foldable="yes" scope="meta.default">
+				<begin><regex>:-\sif\(</regex><autoend>:-\sendif\.</autoend></begin>
+				<end><regex>:-\sendif\.</regex></end>
+                <import/>
+			</state>
+	
+			<state id="Entity" foldable="yes" scope="meta.default">
+				<begin><regex>:-\s(?:object|protocol|category)\(</regex><autoend>:-\send_(?:object|protocol|category)\.</autoend></begin>
+				<end><regex>:-\send_(?:object|protocol|category)\.</regex></end>
+                <import/>
+			</state>
+
+		</default>
+	</states>
+
+</syntax>
