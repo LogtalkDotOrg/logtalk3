@@ -42,4 +42,5 @@ following shell command from the root of the source distribution:
 	$ node tools/build.js -n logtalk
 
 The new `highlight.pack.js` file will be created in the `build` folder.
-See the highlight.js for detailed build instructions.
+See the highlight.js for detailed build instructions. The `source.html`
+can be used to test the build.
