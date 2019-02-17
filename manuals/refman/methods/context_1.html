@@ -210,7 +210,7 @@
 <span id="methods-context-1"></span><span id="index-0"></span><h1>context/1<a class="headerlink" href="#context-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>context(<span class="nv">Context</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">context</span>(<span class="nv">Context</span>)
 </pre></div>
 </div>
 <p>Returns the execution context for a predicate clause using the term
@@ -224,7 +224,7 @@ predicate. Calls to this predicate are inlined at compilation time.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>context(<span class="o">--</span>callable) <span class="o">-</span> one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">context</span>(<span class="o">--</span>callable) <span class="o">-</span> one
 </pre></div>
 </div>
 </div>
@@ -241,7 +241,7 @@ predicate. Calls to this predicate are inlined at compilation time.</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo(<span class="nv">A</span>, <span class="nv">N</span>) <span class="o">:-</span>
     <span class="c">% type-check arguments</span>
-    context(<span class="nv">Context</span>),
+    <span class="k">context</span>(<span class="nv">Context</span>),
     type<span class="o">::</span>check(atom, <span class="nv">A</span>, <span class="nv">Context</span>),
     type<span class="o">::</span>check(integer, <span class="nv">N</span>, <span class="nv">Context</span>),
     <span class="c">% arguments are fine; go ahead</span>

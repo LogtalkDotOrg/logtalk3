@@ -217,15 +217,15 @@
 <span id="methods-type-error-2"></span><span id="index-0"></span><h1>type_error/2<a class="headerlink" href="#type-error-2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>type_error(<span class="nv">Type</span>, <span class="nv">Culprit</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">type_error</span>(<span class="nv">Type</span>, <span class="nv">Culprit</span>)
 </pre></div>
 </div>
 <p>Throws a type error. This built-in method is declared private
 and thus cannot be used as a message to an object. Calling this predicate is
 equivalent to the following sequence of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
-context(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(type_error(<span class="nv">Type</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
+<span class="k">context</span>(<span class="nv">Context</span>),
+<span class="k">throw</span>(error(<span class="k">type_error</span>(<span class="nv">Type</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
@@ -233,7 +233,7 @@ runtime.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>type_error(<span class="o">@</span>nonvar, <span class="o">@</span>term) <span class="o">-</span> error
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">type_error</span>(<span class="o">@</span>nonvar, <span class="o">@</span>term) <span class="o">-</span> error
 </pre></div>
 </div>
 </div>
@@ -250,7 +250,7 @@ runtime.</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="o">\+</span> <span class="k">atom</span>(<span class="nv">Name</span>),
-type_error(atom, <span class="nv">Name</span>).
+<span class="k">type_error</span>(atom, <span class="nv">Name</span>).
 </pre></div>
 </div>
 <div class="admonition seealso">

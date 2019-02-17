@@ -211,7 +211,7 @@
 <span id="predicates-logtalk-make-target-action-1"></span><span id="index-0"></span><h1>logtalk_make_target_action/1<a class="headerlink" href="#logtalk-make-target-action-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_make_target_action(<span class="nv">Target</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_make_target_action</span>(<span class="nv">Target</span>)
 </pre></div>
 </div>
 <p>Multifile and dynamic hook predicate that allows defining user actions for
@@ -220,7 +220,7 @@ run after the default ones using a failure driven loop.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_make_target_action(<span class="o">+</span>atom) <span class="o">-</span> zero_or_more
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_make_target_action</span>(<span class="o">+</span>atom) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
 </div>
@@ -235,7 +235,7 @@ run after the default ones using a failure driven loop.</p>
 <span class="p">:- </span><span class="k">multifile</span>(logtalk_make_target_action<span class="o">/</span><span class="m">1</span>).
 <span class="p">:- </span><span class="k">dynamic</span>(logtalk_make_target_action<span class="o">/</span><span class="m">1</span>).
 
-logtalk_make_target_action(check) <span class="o">:-</span>
+<span class="k">logtalk_make_target_action</span>(check) <span class="o">:-</span>
     dead_code_scanner<span class="o">::</span>all.
 </pre></div>
 </div>

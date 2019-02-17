@@ -295,15 +295,14 @@ benchmarking compiler performance improvements.
 
 .. _programming_loaders:
 
-Loader utility files
-~~~~~~~~~~~~~~~~~~~~
+Loader files
+~~~~~~~~~~~~
 
-Most examples directories contain a Logtalk utility file that can be
-used to load all included source files. These loader utility files are
-usually named ``loader.lgt`` or contain the word "loader" in their name.
-Loader files are ordinary source file and thus compiled and loaded like
-any source file. For an example loader file named ``loader.lgt`` we
-would type:
+Most examples directories contain a Logtalk utility file that can be used
+to load all included source files. These loader files are usually named
+``loader.lgt`` or contain the word "loader" in their name. Loader files
+are ordinary source file and thus compiled and loaded like any source file.
+For an example loader file named ``loader.lgt`` we would type:
 
 .. code-block:: text
 
@@ -355,8 +354,8 @@ To take the best advantage of loader files, define a clause for the
 multifile and dynamic ``logtalk_library_path/2`` predicate for the
 directory containing your source files as explained in the next section.
 
-A common mistake is to try to set compiler flags using
-``logtalk_load/2`` with a loader file. For example, by writing:
+A common mistake is to try to set compiler flags using ``logtalk_load/2``
+with a loader file. For example, by writing:
 
 .. code-block:: text
 
@@ -948,8 +947,8 @@ Pay special attention to file compilation/loading order. Whenever
 possible, compile/load your files taking into account file dependencies
 to enable :term:`static binding` optimizations. The easiest way to find
 the dependencies and thus the best compilation/loading order is to use
-the ``diagrams`` tool to generate a file dependency diagram for your
-application.
+the `diagrams <https://logtalk.org/tools.html#diagrams>`_ tool to generate
+a file dependency diagram for your application.
 
 Minimize the use of dynamic predicates. Parametric objects can often be
 used in alternative. When dynamic predicates cannot be avoided, try to
@@ -969,5 +968,5 @@ define your predicates to take advantage of first-argument indexing. In
 the case of recursive predicates, define them as tail-recursive predicates
 whenever possible.
 
-See the :ref:`User Manual section on performance <performance_performance>`
+See the :ref:`section on performance <performance_performance>`
 for a detailed discusion on Logtalk performance.

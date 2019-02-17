@@ -84,7 +84,7 @@ In order to maximize protocol reuse, all predicates specified in a
 protocol should relate to the same functionality. Therefore, the only
 recommended use of protocol extension is when you need both a minimal
 protocol and an extended version of the same protocol with additional,
-useful predicates.
+convenient predicates.
 
 .. _protocols_finding:
 
@@ -92,8 +92,8 @@ Finding defined protocols
 -------------------------
 
 We can find, by backtracking, all defined protocols by using the
-:ref:`predicates_current_protocol_1`
-built-in predicate with a non-instantiated variable:
+:ref:`predicates_current_protocol_1` built-in predicate with a
+unbound argument:
 
 .. code-block:: text
 
@@ -107,7 +107,7 @@ calling it with a valid protocol identifier (an atom).
 Creating a new protocol in runtime
 ----------------------------------
 
-We can create a new (dynamic) protocol in runtime by calling the Logtalk
+We can create a new (dynamic) protocol at runtime by calling the Logtalk
 built-in predicate :ref:`predicates_create_protocol_3`:
 
 .. code-block:: text
@@ -224,7 +224,7 @@ pairs of protocols so that the first one extends the second:
 
    | ?- extends_protocol(Protocol1, Protocol2).
 
-or, if we want to know the extension scope:
+or, if we also want to know the extension scope:
 
 .. code-block:: text
 
@@ -237,7 +237,7 @@ call the :ref:`predicates_implements_protocol_2_3` built-in predicates:
 
    | ?- implements_protocol(ObjectOrCategory, Protocol).
 
-or, if we want to know the implementation scope:
+or, if we also want to know the implementation scope:
 
 .. code-block:: text
 

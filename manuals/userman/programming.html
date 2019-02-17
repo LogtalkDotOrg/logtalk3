@@ -124,7 +124,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#compiling-and-running-applications">Compiling and running applications</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#starting-logtalk">Starting Logtalk</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compiling-and-loading-your-applications">Compiling and loading your applications</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#loader-utility-files">Loader utility files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loader-files">Loader files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#libraries-of-source-files">Libraries of source files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compiler-linter">Compiler linter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compiler-flags">Compiler flags</a></li>
@@ -443,14 +443,13 @@ backend Prolog compilers as the generated intermediate files may not be
 compatible. The <code class="docutils literal notranslate"><span class="pre">logtalk_make(caches)</span></code> goal is usually used when
 benchmarking compiler performance improvements.</p>
 </div>
-<div class="section" id="loader-utility-files">
-<span id="programming-loaders"></span><h3>Loader utility files<a class="headerlink" href="#loader-utility-files" title="Permalink to this headline">¶</a></h3>
-<p>Most examples directories contain a Logtalk utility file that can be
-used to load all included source files. These loader utility files are
-usually named <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> or contain the word “loader” in their name.
-Loader files are ordinary source file and thus compiled and loaded like
-any source file. For an example loader file named <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> we
-would type:</p>
+<div class="section" id="loader-files">
+<span id="programming-loaders"></span><h3>Loader files<a class="headerlink" href="#loader-files" title="Permalink to this headline">¶</a></h3>
+<p>Most examples directories contain a Logtalk utility file that can be used
+to load all included source files. These loader files are usually named
+<code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> or contain the word “loader” in their name. Loader files
+are ordinary source file and thus compiled and loaded like any source file.
+For an example loader file named <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> we would type:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(loader).
 </pre></div>
 </div>
@@ -495,8 +494,8 @@ compiler flags). For example:</p>
 <p>To take the best advantage of loader files, define a clause for the
 multifile and dynamic <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> predicate for the
 directory containing your source files as explained in the next section.</p>
-<p>A common mistake is to try to set compiler flags using
-<code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> with a loader file. For example, by writing:</p>
+<p>A common mistake is to try to set compiler flags using <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code>
+with a loader file. For example, by writing:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(loader, [optimize(on)]).
 </pre></div>
 </div>
@@ -985,8 +984,8 @@ related flags; check its documentation.</p>
 possible, compile/load your files taking into account file dependencies
 to enable <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> optimizations. The easiest way to find
 the dependencies and thus the best compilation/loading order is to use
-the <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool to generate a file dependency diagram for your
-application.</p>
+the <a class="reference external" href="https://logtalk.org/tools.html#diagrams">diagrams</a> tool to generate
+a file dependency diagram for your application.</p>
 <p>Minimize the use of dynamic predicates. Parametric objects can often be
 used in alternative. When dynamic predicates cannot be avoided, try to
 make them private. Declaring a dynamic predicate also as a private
@@ -1003,7 +1002,7 @@ writing efficient Prolog code also apply to Logtalk code. In particular,
 define your predicates to take advantage of first-argument indexing. In
 the case of recursive predicates, define them as tail-recursive predicates
 whenever possible.</p>
-<p>See the <a class="reference internal" href="performance.html#performance-performance"><span class="std std-ref">User Manual section on performance</span></a>
+<p>See the <a class="reference internal" href="performance.html#performance-performance"><span class="std std-ref">section on performance</span></a>
 for a detailed discusion on Logtalk performance.</p>
 </div>
 </div>

@@ -272,13 +272,13 @@ will be:</p>
 protocol should relate to the same functionality. Therefore, the only
 recommended use of protocol extension is when you need both a minimal
 protocol and an extended version of the same protocol with additional,
-useful predicates.</p>
+convenient predicates.</p>
 </div>
 <div class="section" id="finding-defined-protocols">
 <span id="protocols-finding"></span><h2>Finding defined protocols<a class="headerlink" href="#finding-defined-protocols" title="Permalink to this headline">¶</a></h2>
 <p>We can find, by backtracking, all defined protocols by using the
-<a class="reference internal" href="../refman/predicates/current_protocol_1.html#predicates-current-protocol-1"><span class="std std-ref">current_protocol/1</span></a>
-built-in predicate with a non-instantiated variable:</p>
+<a class="reference internal" href="../refman/predicates/current_protocol_1.html#predicates-current-protocol-1"><span class="std std-ref">current_protocol/1</span></a> built-in predicate with a
+unbound argument:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- current_protocol(Protocol).
 </pre></div>
 </div>
@@ -287,7 +287,7 @@ calling it with a valid protocol identifier (an atom).</p>
 </div>
 <div class="section" id="creating-a-new-protocol-in-runtime">
 <span id="protocols-creating"></span><h2>Creating a new protocol in runtime<a class="headerlink" href="#creating-a-new-protocol-in-runtime" title="Permalink to this headline">¶</a></h2>
-<p>We can create a new (dynamic) protocol in runtime by calling the Logtalk
+<p>We can create a new (dynamic) protocol at runtime by calling the Logtalk
 built-in predicate <a class="reference internal" href="../refman/predicates/create_protocol_3.html#predicates-create-protocol-3"><span class="std std-ref">create_protocol/3</span></a>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_protocol(Protocol, Relations, Directives).
 </pre></div>
@@ -372,7 +372,7 @@ pairs of protocols so that the first one extends the second:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_protocol(Protocol1, Protocol2).
 </pre></div>
 </div>
-<p>or, if we want to know the extension scope:</p>
+<p>or, if we also want to know the extension scope:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_protocol(Protocol1, Protocol2, Scope).
 </pre></div>
 </div>
@@ -381,7 +381,7 @@ call the <a class="reference internal" href="../refman/predicates/implements_pro
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- implements_protocol(ObjectOrCategory, Protocol).
 </pre></div>
 </div>
-<p>or, if we want to know the implementation scope:</p>
+<p>or, if we also want to know the implementation scope:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- implements_protocol(ObjectOrCategory, Protocol, Scope).
 </pre></div>
 </div>

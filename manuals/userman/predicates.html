@@ -249,7 +249,7 @@ predicates allows both object state and object behavior to be represented.
 Mutable object state can be represented using dynamic object predicates.</p>
 <div class="section" id="reserved-predicate-names">
 <span id="predicates-reserved"></span><h2>Reserved predicate names<a class="headerlink" href="#reserved-predicate-names" title="Permalink to this headline">¶</a></h2>
-<p>For practical and performance reasons, a few predicates have a fixed
+<p>For practical and performance reasons, some predicate names have a fixed
 interpretation. These predicates are declared in the built-protocols.
 They are: <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a>,
 declared in the <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">expanding</span></a> protocol;
@@ -1261,7 +1261,7 @@ takes an atom and an integer as arguments. We could type-check the
 arguments by writing (using the library <code class="docutils literal notranslate"><span class="pre">type</span></code> object):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo(<span class="nv">A</span>, <span class="nv">N</span>) <span class="o">:-</span>
     <span class="c">% type-check arguments</span>
-    context(<span class="nv">Context</span>),
+    <span class="k">context</span>(<span class="nv">Context</span>),
     type<span class="o">::</span>check(atom, <span class="nv">A</span>, <span class="nv">Context</span>),
     type<span class="o">::</span>check(integer, <span class="nv">N</span>, <span class="nv">Context</span>),
     <span class="c">% arguments are fine; go ahead</span>

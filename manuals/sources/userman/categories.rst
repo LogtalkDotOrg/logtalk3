@@ -232,7 +232,7 @@ Finding defined categories
 
 We can find, by backtracking, all defined categories by using the
 :ref:`predicates_current_category_1` built-in predicate with a
-non-instantiated variable:
+unbound argument:
 
 .. code-block:: text
 
@@ -380,16 +380,15 @@ allows us to find which categories implements which protocols:
 
    | ?- implements_protocol(Category, Protocol, Scope).
 
-or, if we also want inherited protocols:
+or, if we also want to consider inherited protocols:
 
 .. code-block:: text
 
    | ?- conforms_to_protocol(Category, Protocol, Scope).
 
-Note that, if we use a non-instantiated variable for the first argument,
-we will need to use the :ref:`predicates_current_category_1`
-built-in predicate to ensure that the returned entity is a category and
-not an object.
+Note that, if we use a unbound first argument, we will need to use the
+:ref:`predicates_current_category_1` built-in predicate to ensure that
+the returned entity is a category and not an object.
 
 To find which objects import which categories we can use the
 :ref:`predicates_imports_category_2_3` built-in predicates:
@@ -413,7 +412,7 @@ To find which categories extend other categories we can use the
 
    | ?- extends_category(Category1, Category2).
 
-or, if we want to know the extension scope:
+or, if we also want to know the extension scope:
 
 .. code-block:: text
 

@@ -211,7 +211,7 @@
 <span id="predicates-threaded-engine-1"></span><span id="index-0"></span><h1>threaded_engine/1<a class="headerlink" href="#threaded-engine-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine(<span class="nv">Engine</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine</span>(<span class="nv">Engine</span>)
 </pre></div>
 </div>
 <p>Enumerates, by backtracking, all existing engines. Engine names shall be
@@ -219,7 +219,7 @@ regarded as opaque terms; users shall not rely on its type.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine(<span class="o">?</span>nonvar) <span class="o">-</span> zero_or_more
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine</span>(<span class="o">?</span>nonvar) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
 </div>
@@ -230,11 +230,11 @@ regarded as opaque terms; users shall not rely on its type.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% check that the worker_1 engine exists:</span>
-| <span class="o">?-</span> threaded_engine(worker_1).
+| <span class="o">?-</span> <span class="k">threaded_engine</span>(worker_1).
 
 <span class="c">% write the names of all existing engines:</span>
 | <span class="o">?-</span> <span class="k">forall</span>(
-         threaded_engine(<span class="nv">Engine</span>),
+         <span class="k">threaded_engine</span>(<span class="nv">Engine</span>),
          (<span class="k">writeq</span>(<span class="nv">Engine</span>), <span class="k">nl</span>)
      ).
 </pre></div>

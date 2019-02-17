@@ -515,8 +515,8 @@ argument that unifies with several facts on backtracking.</p>
 <div class="section" id="finding-defined-objects">
 <span id="objects-finding"></span><h2>Finding defined objects<a class="headerlink" href="#finding-defined-objects" title="Permalink to this headline">¶</a></h2>
 <p>We can find, by backtracking, all defined objects by calling the
-<a class="reference internal" href="../refman/predicates/current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a>
-built-in predicate with a non-instantiated variable:</p>
+<a class="reference internal" href="../refman/predicates/current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a> built-in predicate with a
+unbound argument:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- current_object(Object).
 Object = logtalk ;
 Object = user ;
@@ -658,11 +658,11 @@ using the <a class="reference internal" href="../refman/directives/info_1.html#d
 <div class="section" id="loading-files-into-an-object">
 <span id="objects-include"></span><h3>Loading files into an object<a class="headerlink" href="#loading-files-into-an-object" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="../refman/directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive
-can be used to load the contents of a file into an object. A typical
-usage scenario is to load a plain Prolog database into an object thus
-providing a simple way to encapsulate it. For example, assume a
-<code class="docutils literal notranslate"><span class="pre">cities.pl</span></code> file defining facts for a <code class="docutils literal notranslate"><span class="pre">city/4</span></code> predicate. We could
-define a wrapper for this database by writing:</p>
+can be used to load the contents of a file into an object. A typical usage
+scenario is to load a plain Prolog file into an object thus providing a
+simple way to encapsulate its contents. For example, assume a <code class="docutils literal notranslate"><span class="pre">cities.pl</span></code>
+file defining facts for a <code class="docutils literal notranslate"><span class="pre">city/4</span></code> predicate. We could define a wrapper
+for this database by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(cities).
 
 <span class="p">    :- </span><span class="k">public</span>(city<span class="o">/</span><span class="m">4</span>).
@@ -689,7 +689,7 @@ used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- instantiates_class(Instance, Class).
 </pre></div>
 </div>
-<p>or, if we want to know the instantiation scope:</p>
+<p>or, if we also want to know the instantiation scope:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- instantiates_class(Instance, Class, Scope).
 </pre></div>
 </div>
@@ -698,7 +698,7 @@ used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- specializes_class(Class, Superclass).
 </pre></div>
 </div>
-<p>or, if we want to know the specialization scope:</p>
+<p>or, if we also want to know the specialization scope:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- specializes_class(Class, Superclass, Scope).
 </pre></div>
 </div>
@@ -707,7 +707,7 @@ used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_object(Object, Parent).
 </pre></div>
 </div>
-<p>or, if we want to know the extension scope:</p>
+<p>or, if we also want to know the extension scope:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_object(Object, Parent, Scope).
 </pre></div>
 </div>
@@ -716,7 +716,7 @@ used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- imports_category(Object, Category).
 </pre></div>
 </div>
-<p>or, if we want to know the importation scope:</p>
+<p>or, if we also want to know the importation scope:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- imports_category(Object, Category, Scope).
 </pre></div>
 </div>
@@ -726,14 +726,13 @@ used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- implements_protocol(Object, Protocol, Scope).
 </pre></div>
 </div>
-<p>or, if we also want inherited protocols:</p>
+<p>or, if we also want to consider inherited protocols:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- conforms_to_protocol(Object, Protocol, Scope).
 </pre></div>
 </div>
-<p>Note that, if we use a non-instantiated variable for the first argument,
-we will need to use the <a class="reference internal" href="../refman/predicates/current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a>
-built-in predicate to ensure that the entity returned is an object and
-not a category.</p>
+<p>Note that, if we use a unbound first argument, we will need to use the
+<a class="reference internal" href="../refman/predicates/current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a> built-in predicate to ensure that the
+entity returned is an object and not a category.</p>
 <p>To find which objects are explicitly complemented by categories we can
 use the <a class="reference internal" href="../refman/predicates/complements_object_2.html#predicates-complements-object-2"><span class="std std-ref">complements_object/2</span></a> built-in predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- complements_object(Category, Object).

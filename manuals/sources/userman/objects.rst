@@ -368,8 +368,8 @@ Finding defined objects
 -----------------------
 
 We can find, by backtracking, all defined objects by calling the
-:ref:`predicates_current_object_1`
-built-in predicate with a non-instantiated variable:
+:ref:`predicates_current_object_1` built-in predicate with a
+unbound argument:
 
 .. code-block:: text
 
@@ -556,11 +556,11 @@ Loading files into an object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :ref:`directives_include_1` directive
-can be used to load the contents of a file into an object. A typical
-usage scenario is to load a plain Prolog database into an object thus
-providing a simple way to encapsulate it. For example, assume a
-``cities.pl`` file defining facts for a ``city/4`` predicate. We could
-define a wrapper for this database by writing:
+can be used to load the contents of a file into an object. A typical usage
+scenario is to load a plain Prolog file into an object thus providing a
+simple way to encapsulate its contents. For example, assume a ``cities.pl``
+file defining facts for a ``city/4`` predicate. We could define a wrapper
+for this database by writing:
 
 ::
 
@@ -595,7 +595,7 @@ used to query all instantiation relations:
 
    | ?- instantiates_class(Instance, Class).
 
-or, if we want to know the instantiation scope:
+or, if we also want to know the instantiation scope:
 
 .. code-block:: text
 
@@ -608,7 +608,7 @@ Specialization relations can be found by using the
 
    | ?- specializes_class(Class, Superclass).
 
-or, if we want to know the specialization scope:
+or, if we also want to know the specialization scope:
 
 .. code-block:: text
 
@@ -621,7 +621,7 @@ For prototypes, we can query extension relations using with the
 
    | ?- extends_object(Object, Parent).
 
-or, if we want to know the extension scope:
+or, if we also want to know the extension scope:
 
 .. code-block:: text
 
@@ -634,7 +634,7 @@ In order to find which objects import which categories we can use the
 
    | ?- imports_category(Object, Category).
 
-or, if we want to know the importation scope:
+or, if we also want to know the importation scope:
 
 .. code-block:: text
 
@@ -648,16 +648,15 @@ To find which objects implements which protocols we can use the
 
    | ?- implements_protocol(Object, Protocol, Scope).
 
-or, if we also want inherited protocols:
+or, if we also want to consider inherited protocols:
 
 .. code-block:: text
 
    | ?- conforms_to_protocol(Object, Protocol, Scope).
 
-Note that, if we use a non-instantiated variable for the first argument,
-we will need to use the :ref:`predicates_current_object_1`
-built-in predicate to ensure that the entity returned is an object and
-not a category.
+Note that, if we use a unbound first argument, we will need to use the
+:ref:`predicates_current_object_1` built-in predicate to ensure that the
+entity returned is an object and not a category.
 
 To find which objects are explicitly complemented by categories we can
 use the :ref:`predicates_complements_object_2` built-in predicate:

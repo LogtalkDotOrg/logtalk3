@@ -211,7 +211,7 @@
 <span id="predicates-threaded-engine-next-2"></span><span id="index-0"></span><h1>threaded_engine_next/2<a class="headerlink" href="#threaded-engine-next-2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_next(<span class="nv">Engine</span>, <span class="nv">Answer</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_next</span>(<span class="nv">Engine</span>, <span class="nv">Answer</span>)
 </pre></div>
 </div>
 <p>Retrieves an answer from an engine and signals it to start computing the
@@ -222,7 +222,7 @@ re-throw the exception and subsequent calls will fail.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_next(<span class="o">@</span>nonvar, <span class="o">?</span>term) <span class="o">-</span> zero_or_one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_next</span>(<span class="o">@</span>nonvar, <span class="o">?</span>term) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
 </div>
@@ -242,7 +242,7 @@ re-throw the exception and subsequent calls will fail.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% get the next answer from the worker_1 engine:</span>
-| <span class="o">?-</span> threaded_engine_next(worker_1, <span class="nv">Answer</span>).
+| <span class="o">?-</span> <span class="k">threaded_engine_next</span>(worker_1, <span class="nv">Answer</span>).
 </pre></div>
 </div>
 <div class="admonition seealso">

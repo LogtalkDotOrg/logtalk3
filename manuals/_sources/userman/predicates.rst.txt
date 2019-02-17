@@ -31,7 +31,7 @@ Mutable object state can be represented using dynamic object predicates.
 Reserved predicate names
 ------------------------
 
-For practical and performance reasons, a few predicates have a fixed
+For practical and performance reasons, some predicate names have a fixed
 interpretation. These predicates are declared in the built-protocols.
 They are: :ref:`methods_goal_expansion_2` and :ref:`methods_term_expansion_2`,
 declared in the :ref:`expanding <apis:expanding/0>` protocol;

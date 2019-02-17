@@ -211,7 +211,7 @@
 <span id="predicates-threaded-engine-create-3"></span><span id="index-0"></span><h1>threaded_engine_create/3<a class="headerlink" href="#threaded-engine-create-3" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_create(<span class="nv">AnswerTemplate</span>, <span class="nv">Goal</span>, <span class="nv">Engine</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_create</span>(<span class="nv">AnswerTemplate</span>, <span class="nv">Goal</span>, <span class="nv">Engine</span>)
 </pre></div>
 </div>
 <p>Creates a new engine for proving the given goal and defines an answer
@@ -223,8 +223,8 @@ type.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_create(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">@</span>nonvar) <span class="o">-</span> one
-threaded_engine_create(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">--</span>nonvar) <span class="o">-</span> one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_create</span>(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">@</span>nonvar) <span class="o">-</span> one
+<span class="k">threaded_engine_create</span>(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">--</span>nonvar) <span class="o">-</span> one
 </pre></div>
 </div>
 </div>
@@ -248,7 +248,7 @@ threaded_engine_create(<span class="o">@</span>term, <span class="o">@</span>cal
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% create a new engine for finding members of a list:</span>
-| <span class="o">?-</span> threaded_engine_create(<span class="nv">X</span>, member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), worker_1).
+| <span class="o">?-</span> <span class="k">threaded_engine_create</span>(<span class="nv">X</span>, member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), worker_1).
 </pre></div>
 </div>
 <div class="admonition seealso">
