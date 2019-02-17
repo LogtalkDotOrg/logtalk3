@@ -5,17 +5,17 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on June 21, 2018
+%  Last updated on February 17, 2019
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -303,6 +303,15 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_post'(_, _, _), 'threaded_engine_post/2') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_fetch'(_, _), 'threaded_engine_fetch/1') :- !.
 
+
+:- multifile(prolog:message//1).
+
+prolog:message(error(Error, Context)) -->
+	{
+		callable(Context),
+		Context = logtalk(_, _),
+		'$lgt_print_message'(error, core, runtime_error(error(Error, Context)))
+	}.
 
 :- multifile(prolog:term_compiled/2).
 

@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of Logtalk <https://logtalk.org/>  
+%
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
-%  
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.45,
+		version is 1.46,
 		author is 'Paulo Moura',
-		date is 2019/02/09,
+		date is 2019/02/17,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -216,7 +216,7 @@
 		 current_logtalk_flag(missing_directives, Missing),
 		 current_logtalk_flag(duplicated_directives, Duplicated),
 		 current_logtalk_flag(trivial_goal_fails, Trivial),
-		 current_logtalk_flag(always_true_or_false_goals, Always),		 
+		 current_logtalk_flag(always_true_or_false_goals, Always),
 		 current_logtalk_flag(lambda_variables, Lambda),
 		 current_logtalk_flag(suspicious_calls, SuspiciousCalls),
 		 current_logtalk_flag(singleton_variables, Singletons),
@@ -300,6 +300,11 @@
 	message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider)) -->
 		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
 		message_context(File, Lines, Type, Entity).
+
+	% runtime error
+
+	message_tokens(runtime_error(Error)) -->
+		error_term_tokens(Error).
 
 	% compiler error and warning messages
 
@@ -593,6 +598,17 @@
 	error_tokens(Error) -->
 		['~q'-[Error], nl].
 
+	term_tokens(logtalk(Goal, c(This, Entity, r(Sender, Self, MetaCallContext, Stack)))) -->
+		[
+			'  in goal: ~q'-[Goal], nl,
+			'  with execution context:'-[], nl,
+			'    entity:            ~q'-[Entity], nl,
+			'    sender:            ~q'-[Sender], nl,
+			'    this:              ~q'-[This], nl,
+			'    self:              ~q'-[Self], nl,
+			'    meta-call context: ~q'-[MetaCallContext], nl,
+			'    coinduction stack: ~q'-[Stack], nl
+		].
 	term_tokens(entity(Type, Entity)) -->
 		['  in ~w ~q'-[Type, Entity], nl].
 	term_tokens(directive(Directive)) -->
@@ -650,7 +666,7 @@
 
 	alternative_calls([], AlternativeCall) -->
 			['~q'-[AlternativeCall], nl].
-	
+
 	alternative_calls([NextAlternativeCall| AlternativeCalls], AlternativeCall) -->
 			['~q or '-[AlternativeCall]],
 			alternative_calls(AlternativeCalls, NextAlternativeCall).

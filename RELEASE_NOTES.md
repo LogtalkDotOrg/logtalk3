@@ -40,6 +40,15 @@ loaded when the old and new provider are not the same object due to reloading.
 * FIXED: The compiler now throws a permission error when attempting to create
 an entity that would be both built-in and dynamic.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The SWI-Prolog hooks file, `swihooks.pl`, now includes a definition
+for the `prolog:message//1` multifile predicate that prints Logtalk runtime
+exceptions with full execution context details. This is a workaround for the
+issue of the SWI-Prolog top-level intercepting those exceptions but printing
+only the culprit goal.
+
 Documentation
 -------------
 
