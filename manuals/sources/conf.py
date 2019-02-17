@@ -28,7 +28,7 @@ author = u'Paulo Moura'
 # The short X.Y version
 version = u'3.24.0'
 # The full version, including alpha/beta/rc tags
-release = u'v3.24.0-b02'
+release = u'v3.24.0-b04'
 
 
 # -- General configuration ---------------------------------------------------
@@ -185,7 +185,7 @@ texinfo_documents = [
 # -- Options for Epub output -------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = project
+epub_title = project + '\n\n' + release
 epub_author = author
 epub_publisher = author
 epub_copyright = copyright
