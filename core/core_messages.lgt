@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.46,
+		version is 1.47,
 		author is 'Paulo Moura',
-		date is 2019/02/17,
+		date is 2019/02/20,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -261,7 +261,7 @@
 			'  report: ~w, scratch_directory: ~w'-[Report, ScratchDirectory], nl,
 			'  source_data: ~w, code_prefix: ~q, hook: ~q'-[SourceData, Code, GroundHook], nl,
 			'  optimize: ~w, debug: ~w, clean: ~w, reload: ~w'-[Optimize, Debug, Clean, Reload], nl,
-			'Backend Prolog compiler flags:'-[], nl,
+			'Backend Prolog compiler file compilation and loading flags:'-[], nl,
 			'  prolog_compiler: ~w'-[PrologCompiler], nl,
 			'  prolog_loader:   ~w'-[PrologLoader], nl,
 			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
