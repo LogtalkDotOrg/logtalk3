@@ -1,17 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on September 21, 2018
+%  Last updated on February 20, 2019
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -61,11 +61,13 @@
 %
 %  To use settings files, copy this file to your Logtalk user directory or to
 %  the directory containing your project files, rename it to `settings.lgt`,
-%  customize it (see the examples below), and start Logtalk from the desired
-%  directory. Note that, for setting Logtalk flag values, you must use the
-%  `set_logtalk_flag/2` predicate (wrapped in a `initialization/1` directive)
-%  as the scope of the `set_logtalk_flag/2` directive is local to the entity
-%  or the source file containing it.
+%  customize it (see the examples below), and start Logtalk from the project
+%  directory (if you're using a project specific settings file) or from
+%  anywhere (when using a default settings file). Note that, for setting
+%  Logtalk flag values, you must use the `set_logtalk_flag/2` predicate
+%  (wrapped in a `initialization/1` directive) as the scope of the
+%  `set_logtalk_flag/2` directive is local to the entity or the source file
+%  containing it.
 %
 %  If you use more than one backend Prolog compiler and want to use per
 %  compiler settings, you can use the Logtalk conditional compilation
@@ -76,11 +78,11 @@
 %  be printed by default if syntax errors are found. Be sure to debug and
 %  test your settings files as regular Logtalk source files before using
 %  them (you may use the `logtalk_compile/1-2` built-in predicates to compile
-%  the settings files without loading them to check for syntax errors).
+%  the settings files without loading them to check for e.g. syntax errors).
 %
 %  Limitations of the backend Prolog compilers may prevent settings files
 %  to work from directories other than the Logtalk user directory, specially
-%  when running on non-POSIX operating systems such as Windows. Check the 
+%  when running on non-POSIX operating systems such as Windows. Check the
 %  `adapters/NOTES.md` file for compatibility details.
 
 
@@ -136,7 +138,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To define a "library" alias for your project while making it
-%  relocatable, edit and uncomment the following lines:
+%  relocatable, use a project specific settings file, editing and
+%  uncommenting the following lines:
 
 /*
 :- initialization((
@@ -164,7 +167,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	%set_logtalk_flag(prolog_loader, [silent(true)]),   % for SWI-Prolog and YAP
 	%set_stream(log_output, null),                      % for ECLiPSe
-	%set_prolog_flag(informational, off),               % SICStus Prolog
+	%set_prolog_flag(informational, off),               % for SICStus Prolog
 	set_logtalk_flag(report, off)
 )).
 %*/
