@@ -97,6 +97,8 @@ example.
 * ADDED: Simple example of working with "futures", a common concurrent
 programming idiom, using the high-level multi-threading predicates.
 
+* IMPROVED: The `roles` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

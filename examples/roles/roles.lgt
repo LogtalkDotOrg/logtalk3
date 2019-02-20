@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of Logtalk <https://logtalk.org/>  
+%
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
-%  
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,7 +31,7 @@
 
 % prototypes can be derived from other prototypes using the "extends"
 % relation; the prototypes that are extended play the role of parent
-% prototypes: 
+% prototypes:
 
 :- object(parent).
 
@@ -56,10 +56,10 @@
 % object must have at least an instantiation or a specialization
 % relation with another object
 
-% a class can be its own metaclass:
+% a class can be its own metaclass (thus preventing infinite regression):
 
-:- object(class,
-	instantiates(class)).
+:- object(superclass,
+	instantiates(superclass)).
 
 	:- public(foo/1).
 	foo(1).
@@ -70,7 +70,7 @@
 % object, which plays the role of its superclass:
 
 :- object(subclass,
-	specializes(class)).
+	specializes(superclass)).
 
 	:- public(bar/2).
 	bar(1,2).
@@ -84,5 +84,10 @@
 	instantiates(subclass)).
 
 	foo(2).
+
+:- end_object.
+
+:- object(empty_instance,
+	instantiates(subclass)).
 
 :- end_object.

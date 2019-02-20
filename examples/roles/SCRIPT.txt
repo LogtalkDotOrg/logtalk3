@@ -45,15 +45,18 @@ Y = 2
 yes
 
 
-% a class that is its own metaclass can access its own predicates:
+% a class that is its own metaclass can access its own public predicates
+% using message sending:
 
-| ?- class::foo(Foo).
+| ?- superclass::foo(Foo).
 
 Foo = 1
 yes
 
 
-% a subclass that doesn't have a metaclass cannot receive any message:
+% a class that doesn't have a metaclass cannot receive any message as
+% the predicate declaration lookup to answer to validate the message
+% would start in the metaclass:
 
 | ?- subclass::current_predicate(_).
 
@@ -78,4 +81,9 @@ yes
 
 X = 1,
 Y = 2
+yes
+
+| ?- empty_instance::foo(Foo).
+
+Foo = 1
 yes
