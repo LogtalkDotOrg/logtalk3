@@ -21,3 +21,4 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This simple programming example illustrates predicate scope semantics.
+See the comments in the `scopes.lgt` file for detailed explanations.
