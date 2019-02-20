@@ -99,6 +99,8 @@ programming idiom, using the high-level multi-threading predicates.
 
 * IMPROVED: The source code comments of the `roles` and `scopes` examples.
 
+* UPDATED: Enable code coverage for the `planets` example tests.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
