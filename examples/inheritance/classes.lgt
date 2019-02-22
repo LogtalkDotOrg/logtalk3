@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of Logtalk <https://logtalk.org/>  
+%
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
-%  
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,11 +29,11 @@ This source file defines the following class-based hierarchy:
 		subclass3
 			instance3
 
-The root object imports the category "predicates", which defines one 
-public predicate, public/0, one protected predicate, protected/0, and 
+The root object imports the category "predicates", which defines one
+public predicate, public/0, one protected predicate, protected/0, and
 one private predicate, private/0.
 
-All objects import the category "interface", which defines a predicate, 
+All objects import the category "interface", which defines a predicate,
 interface/0, for listing the object interface.
 */
 
@@ -41,7 +41,6 @@ interface/0, for listing the object interface.
 :- object(root,
 	imports((predicates, interface)),
 	instantiates(root)).
-
 
 :- end_object.
 

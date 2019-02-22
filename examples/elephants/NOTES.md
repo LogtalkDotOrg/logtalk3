@@ -20,5 +20,6 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This is a very simple example illustrating the concept of _prototypes_
-using elephants.
+This is a simple example illustrating the concept of _prototypes_ using
+elephants. A similar example is often found in knowledge representation
+discussions.

@@ -24,7 +24,7 @@ ________________________________________________________________________
 
 
 % prototypes are neither instances or classes but either standalone objects
-% as "clyde", our prototypical elephant ...
+% as "clyde", our prototypical but concrete elephant ...
 
 | ?- clyde::number_of_legs(N).
 

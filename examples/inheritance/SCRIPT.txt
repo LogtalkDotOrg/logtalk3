@@ -106,9 +106,8 @@ yes
 
 | ?- instance1::interface.
 
-public/0 - public
 protected/0 - protected
-
+public/0 - public
 yes
 
 
@@ -116,9 +115,8 @@ yes
 
 | ?- instance2::interface.
 
-public/0 - protected
 protected/0 - protected
-
+public/0 - protected
 yes
 
 
