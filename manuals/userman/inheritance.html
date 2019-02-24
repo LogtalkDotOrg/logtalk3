@@ -351,13 +351,12 @@ inheritance chain:</p>
         <span class="o">^^</span>init.
 
 <span class="p">:- </span><span class="k">end_object.</span>
-
-
-| <span class="o">?-</span> descendant<span class="o">::</span>init.
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- descendant::init.
 
 descendant init
 root init
-
 yes
 </pre></div>
 </div>
@@ -389,13 +388,13 @@ example:</p>
         <span class="o">^^</span>foo(<span class="nv">Foo</span>).
 
 <span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- descendant::foo(Foo).
 
-
-| <span class="o">?-</span> descendant<span class="o">::</span>foo(<span class="nv">Foo</span>).
-
-<span class="nv">Foo</span> <span class="o">=</span> <span class="m">3</span> <span class="o">;</span>
-<span class="nv">Foo</span> <span class="o">=</span> <span class="m">1</span> <span class="o">;</span>
-<span class="nv">Foo</span> <span class="o">=</span> <span class="m">2</span> <span class="o">;</span>
+Foo = 3 ;
+Foo = 1 ;
+Foo = 2 ;
 no
 </pre></div>
 </div>
@@ -424,16 +423,15 @@ flightless birds:</p>
     mode(swims).
     mode(<span class="nv">Mode</span>) <span class="o">:-</span>
         <span class="o">^^</span>mode(<span class="nv">Mode</span>),
-        <span class="nv">Mode</span> <span class="o">\=</span> flies.
+        <span class="nv">Mode</span> <span class="o">\==</span> flies.
 
 <span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- penguin::mode(Mode).
 
-
-| <span class="o">?-</span> penguin<span class="o">::</span>mode(<span class="nv">Mode</span>).
-
-<span class="nv">Mode</span> <span class="o">=</span> swims <span class="o">;</span>
-<span class="nv">Mode</span> <span class="o">=</span> walks <span class="o">;</span>
-
+Mode = swims ;
+Mode = walks ;
 no
 </pre></div>
 </div>
@@ -475,14 +473,18 @@ name with the corresponding keyword. For example:</p>
 keyword. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">imports</span>(public<span class="o">::</span><span class="nv">Category</span>)).
+
     ...
+
 <span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>This is the same as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">imports</span>(<span class="nv">Category</span>)).
+
     ...
+
 <span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>

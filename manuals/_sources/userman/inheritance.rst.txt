@@ -191,11 +191,12 @@ inheritance chain:
    :- end_object.
 
 
+.. code-block:: text
+
    | ?- descendant::init.
 
    descendant init
    root init
-
    yes
 
 .. _inheritance_union:
@@ -232,6 +233,8 @@ example:
 
    :- end_object.
 
+
+.. code-block:: text
 
    | ?- descendant::foo(Foo).
 
@@ -270,16 +273,17 @@ flightless birds:
        mode(swims).
        mode(Mode) :-
            ^^mode(Mode),
-           Mode \= flies.
+           Mode \== flies.
 
    :- end_object.
 
+
+.. code-block:: text
 
    | ?- penguin::mode(Mode).
 
    Mode = swims ;
    Mode = walks ;
-
    no
 
 .. _inheritance_scope:
@@ -328,7 +332,9 @@ keyword. For example:
 
    :- object(Object,
        imports(public::Category)).
+
        ...
+
    :- end_object.
 
 This is the same as:
@@ -337,7 +343,9 @@ This is the same as:
 
    :- object(Object,
        imports(Category)).
+
        ...
+
    :- end_object.
 
 This way we ensure backward compatibility with older Logtalk versions

@@ -1554,8 +1554,8 @@ predicate):
 
 This directive is based on the fact that built-in predicates are visible in
 plain Prolog (i.e. in ``user``). Besides helping to document the dependency
-on a non-standard, this directive will also silence the compiler portability
-warning.
+on a non-standard built-in predicate, this directive will also silence the
+compiler portability warning.
 
 .. _predicates_prolog_meta:
 
