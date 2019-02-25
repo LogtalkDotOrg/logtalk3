@@ -49,6 +49,9 @@ exceptions with full execution context details. This is a workaround for the
 issue of the SWI-Prolog top-level intercepting those exceptions but printing
 only the culprit goal.
 
+* FIXED: Workaround problematic SWI-Prolog declaration of the ISO standard
+`op/3` predicate as a meta-predicate.
+
 Documentation
 -------------
 
