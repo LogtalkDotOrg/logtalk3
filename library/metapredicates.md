@@ -28,6 +28,10 @@ The `meta` object implements common Prolog meta-predicates like `map/3` and
 The `loop` object implements several kinds of loops typical of imperative 
 languages.
 
+The `meta_compiler` object provides a compiler for the `meta` object
+meta-predicates. Is used as an hook object to generate auxiliary predicates
+in order to avoid meta-call overheads.
+
 
 API documentation
 -----------------
@@ -39,13 +43,21 @@ and choose the library index.
 Loading
 -------
 
-To load all entities in this group load the `metapredicates_loader.lgt`
+To load the main entities in this group load the `metapredicates_loader.lgt`
 utility file:
 
 	| ?- logtalk_load(library(metapredicates_loader)).
+
+To load also the meta-predicates compiler, load the `meta_compiler_loader.lgt`
+utility file:
+
+	| ?- logtalk_load(library(meta_compiler_loader)).
 
 
 Usage
 -----
 
-See the `metapredicates` example and unit tests.
+See the `metapredicates` example and unit tests. To use the meta-predicates
+compiler, declare `meta_compiler` as the default hook object or use the
+`hook(meta_compiler)` and `optimize(on)` complier options when compiling and
+loading the code that you want to optimize.

@@ -38,12 +38,24 @@ notation as argument for the compiling and loading predicates. For example:
 
 	| ?- logtalk_load(library(random_loader)).
 
-Currently, there are sixteen groups of entities defined, each one with
+Currently, there are several groups of entities defined, each one with
 its own loader and notes files:
+
+* arbitrary  
+	`arbitrary_loader.lgt`
+	`arbitrary.md`
 
 * assignvars  
 	`assignvars_loader.lgt`
 	`assignvars.md`
+
+* coroutining  
+	`coroutining_loader.lgt`
+	`coroutining.md`
+
+* dates  
+	`dates_loader.lgt`
+	`dates.md`
 
 * dependents  
 	`dependents_loader.lgt`
@@ -65,12 +77,21 @@ its own loader and notes files:
 	`hierarchies_loader.lgt`
 	`hierarchies.md`
 
+* hook_flows  
+	`hook_flows_loader.lgt`
+	`hook_flows.md`
+
+* intervals  
+	`intervals_loader.lgt`
+	`intervals.md`
+
 * java  
 	`java_loader.lgt`
 	`java.md`
 
 * metapredicates  
 	`metapredicates_loader.lgt`
+	`meta_compiler_loader.lgt`
 	`metapredicates.md`
 
 * optional  
