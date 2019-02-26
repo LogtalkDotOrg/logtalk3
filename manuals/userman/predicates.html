@@ -1630,13 +1630,23 @@ foo <span class="o">:-</span>
 <p>Note that the first argument of the <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>, when used within
 an object or a category, is a <em>module name</em>, not a <em>file specification</em>
 (also be aware that Prolog modules are sometimes defined in files with
-names that differ from the module names). As loading a Prolog module varies
-between Prolog systems, the actual loading directive or goal is preferably
-done by the application <a class="reference internal" href="../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a>. An advantage of this approach
-is that it contributes to a clean separation between <em>loading</em> and <em>using</em>
-a resource with the loader file being the central point that loads all
-application resources (complex applications often use a <em>hierarchy</em> of
-loader files but the main idea remains the same).</p>
+names that differ from the module names).</p>
+<p>As loading a Prolog module varies between Prolog systems, the actual loading
+directive or goal is preferably done from the application <a class="reference internal" href="../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a>.
+An advantage of this approach is that it contributes to a clean separation
+between <em>loading</em> and <em>using</em> a resource with the loader file being the
+central point that loads all application resources (complex applications
+often use a <em>hierarchy</em> of loader files but the main idea remains the same).
+For example, assume that we need to call predicates defined in a CLP(FD)
+Prolog library, which can be loaded using <code class="docutils literal notranslate"><span class="pre">library(clpfd)</span></code> as the file
+specification. In the loader file, we would add:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(library(clpfd), []).
+</pre></div>
+</div>
+<p>Specifying an empty import list is often used to avoid adding the module
+exported predicates to plain Prolog. In the objects and categories we can
+then call the library predicates, using implicit or explicit qualification,
+as explained.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The actual module code <strong>must</strong> be loaded prior to compilation of Logtalk

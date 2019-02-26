@@ -1664,13 +1664,26 @@ to call the module predicates using implicit qualification:
 Note that the first argument of the ``use_module/2``, when used within
 an object or a category, is a *module name*, not a *file specification*
 (also be aware that Prolog modules are sometimes defined in files with
-names that differ from the module names). As loading a Prolog module varies
-between Prolog systems, the actual loading directive or goal is preferably
-done by the application :term:`loader file`. An advantage of this approach
-is that it contributes to a clean separation between *loading* and *using*
-a resource with the loader file being the central point that loads all
-application resources (complex applications often use a *hierarchy* of
-loader files but the main idea remains the same).
+names that differ from the module names).
+
+As loading a Prolog module varies between Prolog systems, the actual loading
+directive or goal is preferably done from the application :term:`loader file`.
+An advantage of this approach is that it contributes to a clean separation
+between *loading* and *using* a resource with the loader file being the
+central point that loads all application resources (complex applications
+often use a *hierarchy* of loader files but the main idea remains the same).
+For example, assume that we need to call predicates defined in a CLP(FD)
+Prolog library, which can be loaded using ``library(clpfd)`` as the file
+specification. In the loader file, we would add:
+
+::
+
+   :- use_module(library(clpfd), []).
+
+Specifying an empty import list is often used to avoid adding the module
+exported predicates to plain Prolog. In the objects and categories we can
+then call the library predicates, using implicit or explicit qualification,
+as explained.
 
 .. warning::
 

@@ -95,6 +95,8 @@ Tests
 
 * ADDED: Unit tests for the `built_in/0` directive.
 
+* ADDED: Unit tests for the new `reader` library object.
+
 Examples
 --------
 
