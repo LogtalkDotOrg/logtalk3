@@ -47,14 +47,14 @@
 	:- mode(file_to_chars(+atom, -list(character)), one).
 	:- info(file_to_chars/2, [
 		comment is 'Reads a text file into a list of characters.',
-		argnames is ['File', 'Codes']
+		argnames is ['File', 'Chars']
 	]).
 
 	:- public(file_to_chars/3).
 	:- mode(file_to_chars(+atom, -list(character), @term), one).
 	:- info(file_to_chars/3, [
 		comment is 'Reads a text file into a list of characters. The list is terminated by the given tail.',
-		argnames is ['File', 'Codes', 'Tail']
+		argnames is ['File', 'Chars', 'Tail']
 	]).
 
 	:- public(file_to_terms/2).
@@ -91,14 +91,14 @@
 	:- mode(stream_to_chars(+stream_or_alias, -list(char)), one).
 	:- info(stream_to_chars/2, [
 		comment is 'Reads a text stream into a list of characters. Does not close the stream.',
-		argnames is ['Stream', 'Codes']
+		argnames is ['Stream', 'Chars']
 	]).
 
 	:- public(stream_to_chars/3).
 	:- mode(stream_to_chars(+stream_or_alias, -list(char), @term), one).
 	:- info(stream_to_chars/3, [
 		comment is 'Reads a text stream into a list of characters. Does not close the stream. The list is terminated by the given tail.',
-		argnames is ['Stream', 'Codes', 'Tail']
+		argnames is ['Stream', 'Chars', 'Tail']
 	]).
 
 	:- public(stream_to_terms/2).
