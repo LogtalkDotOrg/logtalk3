@@ -43,6 +43,7 @@
 		edcg_loader,
 		coroutining_loader,
 		zippers_loader,
+		reader_loader,
 		gensym,
 		counters,
 		streamvars

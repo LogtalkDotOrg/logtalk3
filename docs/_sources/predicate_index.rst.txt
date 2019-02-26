@@ -2097,6 +2097,66 @@ Predicate index
 
 * :ref:`osp <osp/0::file_size/2>`
 
+``file_to_chars/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::file_to_chars/2>`
+
+``file_to_chars/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::file_to_chars/3>`
+
+``file_to_codes/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::file_to_codes/2>`
+
+``file_to_codes/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::file_to_codes/3>`
+
+``file_to_terms/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::file_to_terms/2>`
+
+``file_to_terms/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::file_to_terms/3>`
+
 ``file_type_extension/2``
 -------------------------
 
@@ -3442,6 +3502,26 @@ Predicate index
 
 
 * :ref:`code_metric <code_metric/0::library_score/2>`
+
+``line_to_codes/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::line_to_codes/2>`
+
+``line_to_codes/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::line_to_codes/3>`
 
 ``loaded_file/1``
 -----------------
@@ -5893,6 +5973,66 @@ Predicate index
 
 
 * :ref:`intervalp <intervalp/0::starts/2>`
+
+``stream_to_chars/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::stream_to_chars/2>`
+
+``stream_to_chars/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::stream_to_chars/3>`
+
+``stream_to_codes/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::stream_to_codes/2>`
+
+``stream_to_codes/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::stream_to_codes/3>`
+
+``stream_to_terms/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::stream_to_terms/2>`
+
+``stream_to_terms/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::stream_to_terms/3>`
 
 ``subclass/1``
 --------------
