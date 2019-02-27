@@ -85,6 +85,12 @@ text stream contents to lists of terms, characters, or character codes.
 Tools
 -----
 
+* IMPROVED: When using the `lgt2rst` documentation script with the `-s` option,
+the `sphinx-quickstart` interactive script is now called with a `conf.py_t`
+template file using the `$LOGTALKUSER/tools/lgtdoc/xml` directory as the
+templates directory. The provided `conf.py_t` template results in similar
+output to the Logtalk own API documentation.
+
 * IMPROVED: Simplify the `ports_profiler::data(Entity)` predicate to omit the
 entity column.
 

@@ -4,7 +4,7 @@
 ## 
 ##   XML documenting files to reStructuredText files conversion script
 ## 
-##   Last updated on October 24, 2018
+##   Last updated on February 26, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -247,7 +247,7 @@ if grep -q "<logtalk" ./*.xml ; then
 	echo
 	if [ "$sphinx" = true ] ; then
 		mv index.rst index.rst.backup
-		sphinx-quickstart
+		sphinx-quickstart --templatedir="$LOGTALKUSER/tools/lgtdoc/xml"
 		mv index.rst.backup index.rst
 	fi
 else

@@ -2,7 +2,7 @@
 //
 //   XML documenting files to reStructuredText files conversion script
 //
-//   Last updated on October 24, 2018
+//   Last updated on February 26, 2019
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -189,7 +189,7 @@ if (sphinx) {
 	WScript.Echo("running sphinx-quickstart ...");
 	WScript.Echo("");
 	FSObject.MoveFile(WshShell.CurrentDirectory + "\\index.rst", WshShell.CurrentDirectory + "\\index.backup");
-	WshShell.Run("sphinx-quickstart", 1, true);
+	WshShell.Run("sphinx-quickstart --templatedir=\"$LOGTALKUSER\\tools\\lgtdoc\\xml\"", 1, true);
 	FSObject.DeleteFile(WshShell.CurrentDirectory + "\\index.rst");
 	FSObject.MoveFile(WshShell.CurrentDirectory + "\\index.backup", WshShell.CurrentDirectory + "\\index.rst");
 	WScript.Echo("");
