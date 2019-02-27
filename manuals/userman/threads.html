@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Multi-threading programming &mdash; The Logtalk Handbook v3.24.0-b05 documentation</title>
+  <title>Multi-threading programming &mdash; The Logtalk Handbook v3.24.0 documentation</title>
   
 
   
@@ -555,10 +555,10 @@ engine to start computing the next one. Note that this predicate is
 deterministic. In contrast with the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1-2</span></code> built-in
 predicates, retrieving the next solution requires calling the predicate
 again instead of by backtracking into its call. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>collect_all(<span class="nv">Engine</span>, [<span class="nv">X</span>| <span class="nv">Xs</span>]) <span class="o">:-</span>
-    <span class="k">threaded_engine_next</span>(<span class="nv">Engine</span>, <span class="nv">X</span>),
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>collect_all(<span class="nv">Engine</span>, [<span class="nv">Answer</span>| <span class="nv">Answers</span>]) <span class="o">:-</span>
+    <span class="k">threaded_engine_next</span>(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
     <span class="o">!</span>,
-    collect_all(<span class="nv">Engine</span>, <span class="nv">Xs</span>).
+    collect_all(<span class="nv">Engine</span>, <span class="nv">Answers</span>).
 collect_all(<span class="nv">_</span>, []).
 </pre></div>
 </div>
@@ -569,14 +569,14 @@ answers. Using this predicate, collecting all solutions to an engine
 uses a different programming pattern:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>... <span class="o">:-</span>
     ...,
-    <span class="k">threaded_engine_next_reified</span>(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
-    collect_all_reifeid(<span class="nv">Answer</span>, <span class="nv">Engine</span>, <span class="nv">List0</span>),
+    <span class="k">threaded_engine_next_reified</span>(<span class="nv">Engine</span>, <span class="nv">Reified</span>),
+    collect_all_reifeid(<span class="nv">Reified</span>, <span class="nv">Engine</span>, <span class="nv">Answers</span>),
     ...
 
 collect_all_reifeid(no, <span class="nv">_</span>, []).
-collect_all_reifeid(the(<span class="nv">X</span>), <span class="nv">Engine</span>, [<span class="nv">X</span>| <span class="nv">Xs</span>]) <span class="o">:-</span>
-    <span class="k">threaded_engine_next_reified</span>(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
-    collect_all_reifeid(<span class="nv">Answer</span>, <span class="nv">Engine</span>, <span class="nv">Xs</span>).
+collect_all_reifeid(the(<span class="nv">Answer</span>), <span class="nv">Engine</span>, [<span class="nv">Answer</span>| <span class="nv">Answers</span>]) <span class="o">:-</span>
+    <span class="k">threaded_engine_next_reified</span>(<span class="nv">Engine</span>, <span class="nv">Reified</span>),
+    collect_all_reifeid(<span class="nv">Reified</span>, <span class="nv">Engine</span>, <span class="nv">Answers</span>).
 </pre></div>
 </div>
 <p>Engines must be explicitly terminated using the

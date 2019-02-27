@@ -436,10 +436,10 @@ again instead of by backtracking into its call. For example:
 
 ::
 
-   collect_all(Engine, [X| Xs]) :-
-       threaded_engine_next(Engine, X),
+   collect_all(Engine, [Answer| Answers]) :-
+       threaded_engine_next(Engine, Answer),
        !,
-       collect_all(Engine, Xs).
+       collect_all(Engine, Answers).
    collect_all(_, []).
 
 There is also a reified alternative version of the predicate,
@@ -452,14 +452,14 @@ uses a different programming pattern:
 
    ... :-
        ...,
-       threaded_engine_next_reified(Engine, Answer),
-       collect_all_reifeid(Answer, Engine, List0),
+       threaded_engine_next_reified(Engine, Reified),
+       collect_all_reifeid(Reified, Engine, Answers),
        ...
 
    collect_all_reifeid(no, _, []).
-   collect_all_reifeid(the(X), Engine, [X| Xs]) :-
-       threaded_engine_next_reified(Engine, Answer),
-       collect_all_reifeid(Answer, Engine, Xs).
+   collect_all_reifeid(the(Answer), Engine, [Answer| Answers]) :-
+       threaded_engine_next_reified(Engine, Reified),
+       collect_all_reifeid(Reified, Engine, Answers).
 
 
 Engines must be explicitly terminated using the
