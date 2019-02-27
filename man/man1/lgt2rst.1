@@ -1,4 +1,4 @@
-.TH lgt2rst 1 "October 24, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
+.TH lgt2rst 1 "February 27, 2019" "Logtalk 3.24.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files for use with Sphinx
@@ -57,7 +57,8 @@ Prints a summary of the script options.
 
 .SH REQUIREMENTS
 Requires a compatible XSLT processor. See the script help screen for more information.
-The use of the -s option requires Sphinx (and the theme that you want to use) to be installed.
+The use of the -s option requires Sphinx and the Read the Docs Sphinx Theme to be
+installed.
 
 .SH ENVIRONMENT
 .TP
@@ -84,8 +85,14 @@ The Logtalk entity XML Schema file.
 .BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.xsd
 The Logtalk index XML Schema file.
 .TP
-.BI $LOGTALKUSER/tools/lgtdoc/xml/lgtrst.xsl
-The default XSLT file.
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_rst.xsl
+The Logtalk entity XSLT file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_rst.xsl
+The Logtalk index XSLT file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/conf.py_t
+The conf.py template file.
 
 .SH "SEE ALSO"
 The Sphinx website at <http://www.sphinx-doc.org/en/master/>
@@ -100,4 +107,4 @@ logtalk_user_setup(1),\ lgt2html(1),\ lgt2xml(1),\ lgt2pdf(1),\ lgt2md(1),\ lgt2
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2018 Paulo Moura.
+Copyright (c) 1998-2019 Paulo Moura.

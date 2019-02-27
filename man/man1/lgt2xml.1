@@ -1,4 +1,4 @@
-.TH lgt2xml 1 "October 4, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
+.TH lgt2xml 1 "February 27, 2019" "Logtalk 3.24.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2xml \- Logtalk script for generating an index of all XML documenting files in the current directory
@@ -66,8 +66,11 @@ The Logtalk index XML Schema file.
 .BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk.css
 The default CSS file for the generated (X)HTML title file.
 .TP
-.BI $LOGTALKUSER/tools/lgtdoc/xml/lgtxml.xsl
-XSLT file for viewing XML documenting files directly in a web browser.
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_xml.xsl
+The Logtalk entity XSLT file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_xml.xsl
+The Logtalk index XSLT file.
 
 .SH "SEE ALSO"
 The Logtalk website at <https://logtalk.org/>
@@ -80,4 +83,4 @@ logtalk_user_setup(1),\ lgt2html(1),\ lgt2txt(1),\ lgt2pdf(1),\ lgt2md(1)
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2018 Paulo Moura.
+Copyright (c) 1998-2019 Paulo Moura.

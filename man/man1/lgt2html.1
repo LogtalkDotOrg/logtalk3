@@ -1,4 +1,4 @@
-.TH lgt2html 1 "October 4, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
+.TH lgt2html 1 "February 27, 2019" "Logtalk 3.24.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2html \- Logtalk script for converting XML documenting files into (X)HTML files
@@ -85,11 +85,17 @@ The Logtalk index XML Schema file.
 .BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk.css
 The default CSS file for the generated (X)HTML files.
 .TP
-.BI $LOGTALKUSER/tools/lgtdoc/xml/lgthtml.xsl
-The default XSLT file for generating HTML files.
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html.xsl
+The Logtalk entity XSLT file for generating HTML files.
 .TP
-.BI $LOGTALKUSER/tools/lgtdoc/xml/lgtxhtml.xsl
-The default XSLT file for generating XHTML files.
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html.xsl
+The Logtalk index XSLT file for generating HTML files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_xhtml.xsl
+The Logtalk entity XSLT file for generating XHTML files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_xhtml.xsl
+The Logtalk index XSLT file for generating XHTML files.
 
 .SH "SEE ALSO"
 The Logtalk website at <https://logtalk.org/>
@@ -102,4 +108,4 @@ logtalk_user_setup(1),\ lgt2txt(1),\ lgt2md(1),\ lgt2xml(1),\ lgt2pdf(1)
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2018 Paulo Moura.
+Copyright (c) 1998-2019 Paulo Moura.

@@ -1,4 +1,4 @@
-.TH lgt2md 1 "October 9, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
+.TH lgt2md 1 "February 27, 2019" "Logtalk 3.24.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2md \- Logtalk script for converting XML documenting files into Markdown text files
@@ -77,8 +77,11 @@ The Logtalk entity XML Schema file.
 .BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.xsd
 The Logtalk index XML Schema file.
 .TP
-.BI $LOGTALKUSER/tools/lgtdoc/xml/lgtmd.xsl
-The default XSLT file.
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_md.xsl
+The Logtalk entity XSLT file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_md.xsl
+The Logtalk index XSLT file.
 
 .SH "SEE ALSO"
 The Logtalk website at <https://logtalk.org/>
@@ -91,4 +94,4 @@ logtalk_user_setup(1),\ lgt2html(1),\ lgt2xml(1),\ lgt2pdf(1),\ lgt2txt(1)
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2018 Paulo Moura.
+Copyright (c) 1998-2019 Paulo Moura.
