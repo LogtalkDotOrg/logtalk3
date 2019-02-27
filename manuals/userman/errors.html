@@ -252,9 +252,9 @@ can be decoded using the
 <div class="section" id="generating-errors">
 <h2>Generating errors<a class="headerlink" href="#generating-errors" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="../refman/methods/error_handling_methods.html#error-handling-methods"><span class="std std-ref">error handling section</span></a> in the reference
-manual lists a set of convenient built-in methods that generated <code class="docutils literal notranslate"><span class="pre">error/2</span></code>
+manual lists a set of convenient built-in methods that generate <code class="docutils literal notranslate"><span class="pre">error/2</span></code>
 exception terms with the expected context argument. For example, instead of
-manually constructing a type error:</p>
+manually constructing a type error as in:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">type_error</span>(atom, <span class="m">42</span>), <span class="nv">Context</span>)).
@@ -265,6 +265,8 @@ manually constructing a type error:</p>
 <span class="k">type_error</span>(atom, <span class="m">42</span>).
 </pre></div>
 </div>
+<p>The provided error built-in methods cover all standard error types as notably
+found in the ISO Prolog Core standard.</p>
 </div>
 <div class="section" id="type-checking">
 <h2>Type-checking<a class="headerlink" href="#type-checking" title="Permalink to this headline">¶</a></h2>
@@ -273,7 +275,7 @@ type-checking predicate arguments and input data before processing it.
 The standard library includes a <a class="reference external" href="https://logtalk.org/library/type_0.html#type-0" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">type</span></a> object that
 defines an extensive set of types, together with predicates for validating
 and checking terms. The set of types is user extensible and new types can
-be defined by adding clauses for <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2`</span></code> multifile
+be defined by adding clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile
 predicates. For example, assume that we want to be able to check
 <em>temparatures</em> expressed in Celsius, Fahrenheit, or Kelvin scales. We
 start by declaring (in an object or category) the new type:</p>
@@ -304,21 +306,26 @@ type? If we want just to test if a temperature is valid, we can write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>valid(temperature(celsius), <span class="m">42</span>), ...
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">type::valid/2</span></code> predicate succeeds or fails depending on the second
-argument being of the type specified in the first argument. If instead of
-success or failure we want to generate an error for invalid values, we can
-write instead:</p>
+<p>The <a class="reference external" href="https://logtalk.org/library/type_0.html#type-0-valid-2" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">type::valid/2</span></a> predicate succeeds or fails
+depending on the second argument being of the type specified in the first
+argument. If instead of success or failure we want to generate an error for
+invalid values, we can use the <a class="reference external" href="https://logtalk.org/library/type_0.html#type-0-check-2" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">type::check/2</span></a>
+predicate instead:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>check(temperature(celsius), <span class="m">42</span>), ...
 </pre></div>
 </div>
 <p>If we require an <code class="docutils literal notranslate"><span class="pre">error/2</span></code> exception term with the error context, we can
-use instead the <code class="docutils literal notranslate"><span class="pre">type::check/3</span></code> predicate:</p>
+use instead the <a class="reference external" href="https://logtalk.org/library/type_0.html#type-0-check-3" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">type::check/3</span></a> predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 type<span class="o">::</span>check(temperature(celsius), <span class="m">42</span>, <span class="nv">Context</span>),
 ...
 </pre></div>
 </div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">context/1</span></code> calls are inlined and messages to the library
+<code class="docutils literal notranslate"><span class="pre">type</span></code> object use <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> when compiling with the
+<a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize flag</span></a> turned on, thus enabling efficient
+type-checking.</p>
 </div>
 <div class="section" id="compiler-warnings-and-errors">
 <h2>Compiler warnings and errors<a class="headerlink" href="#compiler-warnings-and-errors" title="Permalink to this headline">¶</a></h2>

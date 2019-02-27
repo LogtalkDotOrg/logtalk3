@@ -52,9 +52,9 @@ Generating errors
 -----------------
 
 The :ref:`error handling section <error_handling_methods>` in the reference
-manual lists a set of convenient built-in methods that generated ``error/2``
+manual lists a set of convenient built-in methods that generate ``error/2``
 exception terms with the expected context argument. For example, instead of
-manually constructing a type error:
+manually constructing a type error as in:
 
 ::
 
@@ -69,6 +69,8 @@ we can simply type:
    ...,
    type_error(atom, 42).
 
+The provided error built-in methods cover all standard error types as notably
+found in the ISO Prolog Core standard.
 
 Type-checking
 -------------
@@ -78,7 +80,7 @@ type-checking predicate arguments and input data before processing it.
 The standard library includes a :ref:`type <apis:type/0>` object that 
 defines an extensive set of types, together with predicates for validating
 and checking terms. The set of types is user extensible and new types can
-be defined by adding clauses for ``type/1`` and ``check/2``` multifile
+be defined by adding clauses for the ``type/1`` and ``check/2`` multifile
 predicates. For example, assume that we want to be able to check
 *temparatures* expressed in Celsius, Fahrenheit, or Kelvin scales. We
 start by declaring (in an object or category) the new type:
@@ -115,17 +117,18 @@ type? If we want just to test if a temperature is valid, we can write:
 
    ..., type::valid(temperature(celsius), 42), ...
 
-The ``type::valid/2`` predicate succeeds or fails depending on the second
-argument being of the type specified in the first argument. If instead of
-success or failure we want to generate an error for invalid values, we can
-write instead:
+The :ref:`type::valid/2 <apis:type/0::valid/2>` predicate succeeds or fails
+depending on the second argument being of the type specified in the first
+argument. If instead of success or failure we want to generate an error for
+invalid values, we can use the :ref:`type::check/2 <apis:type/0::check/2>`
+predicate instead:
 
 ::
 
    ..., type::check(temperature(celsius), 42), ...
 
 If we require an ``error/2`` exception term with the error context, we can
-use instead the ``type::check/3`` predicate:
+use instead the :ref:`type::check/3 <apis:type/0::check/3>` predicate:
 
 ::
 
@@ -133,6 +136,11 @@ use instead the ``type::check/3`` predicate:
    context(Context),
    type::check(temperature(celsius), 42, Context),
    ...
+
+Note that ``context/1`` calls are inlined and messages to the library
+``type`` object use :term:`static binding` when compiling with the
+:ref:`optimize flag <flag_optimize>` turned on, thus enabling efficient
+type-checking.
 
 Compiler warnings and errors
 ----------------------------
