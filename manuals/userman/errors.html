@@ -111,6 +111,8 @@
 <li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Error handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generating-errors">Generating errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-checking">Type-checking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compiler-warnings-and-errors">Compiler warnings and errors</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#unknown-entities">Unknown entities</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#singleton-variables">Singleton variables</a></li>
@@ -225,9 +227,10 @@
             
   <div class="section" id="error-handling">
 <span id="errors-errors"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
-<p>All error handling is done in Logtalk by using the standard <code class="docutils literal notranslate"><span class="pre">catch/3</span></code>
-and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>. Errors thrown by Logtalk have,
-whenever possible, the following format:</p>
+<p>Error handling is accomplished in Logtalk by using the standard <code class="docutils literal notranslate"><span class="pre">catch/3</span></code>
+and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a> together with a set of built-in methods
+that simplify generating errors decorated with expected context.</p>
+<p>Errors thrown by Logtalk have, whenever possible, the following format:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>error(<span class="nv">Error</span>, logtalk(<span class="nv">Goal</span>, <span class="nv">ExecutionContext</span>))
 </pre></div>
 </div>
@@ -246,6 +249,77 @@ partially instantiated when the corresponding information is not available
 information). The <code class="docutils literal notranslate"><span class="pre">ExecutionContext</span></code> argument is an opaque term that
 can be decoded using the
 <a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-execution-context-7" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">logtalk::execution_context/7</span></a> predicate.</p>
+<div class="section" id="generating-errors">
+<h2>Generating errors<a class="headerlink" href="#generating-errors" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../refman/methods/error_handling_methods.html#error-handling-methods"><span class="std std-ref">error handling section</span></a> in the reference
+manual lists a set of convenient built-in methods that generated <code class="docutils literal notranslate"><span class="pre">error/2</span></code>
+exception terms with the expected context argument. For example, instead of
+manually constructing a type error:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
+<span class="k">context</span>(<span class="nv">Context</span>),
+<span class="k">throw</span>(error(<span class="k">type_error</span>(atom, <span class="m">42</span>), <span class="nv">Context</span>)).
+</pre></div>
+</div>
+<p>we can simply type:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
+<span class="k">type_error</span>(atom, <span class="m">42</span>).
+</pre></div>
+</div>
+</div>
+<div class="section" id="type-checking">
+<h2>Type-checking<a class="headerlink" href="#type-checking" title="Permalink to this headline">¶</a></h2>
+<p>One of the most common case where errors may be generated is when
+type-checking predicate arguments and input data before processing it.
+The standard library includes a <a class="reference external" href="https://logtalk.org/library/type_0.html#type-0" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">type</span></a> object that
+defines an extensive set of types, together with predicates for validating
+and checking terms. The set of types is user extensible and new types can
+be defined by adding clauses for <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2`</span></code> multifile
+predicates. For example, assume that we want to be able to check
+<em>temparatures</em> expressed in Celsius, Fahrenheit, or Kelvin scales. We
+start by declaring (in an object or category) the new type:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
+type<span class="o">::</span>type(temperature(<span class="nv">_Unit</span>)).
+</pre></div>
+</div>
+<p>Next, we need to define the actual code that would verify that a temperature
+is valid. As the different scales use a different value for absolute zero,
+we can write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>check<span class="o">/</span><span class="m">2</span>).
+type<span class="o">::</span>check(temperature(<span class="nv">Unit</span>), <span class="nv">Term</span>) <span class="o">:-</span>
+    check_temperature(<span class="nv">Unit</span>, <span class="nv">Term</span>).
+
+<span class="c">% given that temperature has only a lower bound, we make use of the library</span>
+<span class="c">% property/2 type to define the necessary test expression for each unit</span>
+check_temperature(celsius, <span class="nv">Term</span>) <span class="o">:-</span>
+    type<span class="o">::</span>check(property(float, [<span class="nv">Temperature</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Temperature</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="m">273.15</span>)), <span class="nv">Term</span>).
+check_temperature(fahrenheit, <span class="nv">Term</span>) <span class="o">:-</span>
+    type<span class="o">::</span>check(property(float, [<span class="nv">Temperature</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Temperature</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="m">459.67</span>)), <span class="nv">Term</span>).
+check_temperature(kelvin, <span class="nv">Term</span>) <span class="o">:-</span>
+    type<span class="o">::</span>check(property(float, [<span class="nv">Temperature</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Temperature</span> <span class="o">&gt;=</span> <span class="m">0.0</span>)), <span class="nv">Term</span>).
+</pre></div>
+</div>
+<p>With this definition, a term is first checked that it is a float value before
+checking that it is in the expected open interval. But how do we use this new
+type? If we want just to test if a temperature is valid, we can write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>valid(temperature(celsius), <span class="m">42</span>), ...
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">type::valid/2</span></code> predicate succeeds or fails depending on the second
+argument being of the type specified in the first argument. If instead of
+success or failure we want to generate an error for invalid values, we can
+write instead:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>check(temperature(celsius), <span class="m">42</span>), ...
+</pre></div>
+</div>
+<p>If we require an <code class="docutils literal notranslate"><span class="pre">error/2</span></code> exception term with the error context, we can
+use instead the <code class="docutils literal notranslate"><span class="pre">type::check/3</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
+<span class="k">context</span>(<span class="nv">Context</span>),
+type<span class="o">::</span>check(temperature(celsius), <span class="m">42</span>, <span class="nv">Context</span>),
+...
+</pre></div>
+</div>
+</div>
 <div class="section" id="compiler-warnings-and-errors">
 <h2>Compiler warnings and errors<a class="headerlink" href="#compiler-warnings-and-errors" title="Permalink to this headline">¶</a></h2>
 <p>The current Logtalk compiler uses the standard <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in

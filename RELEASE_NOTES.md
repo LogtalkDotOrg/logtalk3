@@ -62,6 +62,8 @@ Logtalk counterparts.
 "scratch directory", "library alias", "library notation", "message lookup",
 "component", and "polymorphism".
 
+* ADDED: Handbook sections on generating exceptions and type-checking terms.
+
 * IMPROVED: Documentation of the `call//1-N` built-in non-terminal and of
 the `threaded_engine_next/2` and `threaded_engine_next_reified/2` built-in
 predicates.

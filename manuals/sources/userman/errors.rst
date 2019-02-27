@@ -20,9 +20,11 @@
 Error handling
 ==============
 
-All error handling is done in Logtalk by using the standard ``catch/3``
-and ``throw/1`` predicates [ISO95]_. Errors thrown by Logtalk have,
-whenever possible, the following format:
+Error handling is accomplished in Logtalk by using the standard ``catch/3``
+and ``throw/1`` predicates [ISO95]_ together with a set of built-in methods
+that simplify generating errors decorated with expected context.
+
+Errors thrown by Logtalk have, whenever possible, the following format:
 
 ::
 
@@ -45,6 +47,92 @@ partially instantiated when the corresponding information is not available
 information). The ``ExecutionContext`` argument is an opaque term that
 can be decoded using the
 :ref:`logtalk::execution_context/7 <logtalk/0::execution_context/7>` predicate.
+
+Generating errors
+-----------------
+
+The :ref:`error handling section <error_handling_methods>` in the reference
+manual lists a set of convenient built-in methods that generated ``error/2``
+exception terms with the expected context argument. For example, instead of
+manually constructing a type error:
+
+::
+
+   ...,
+   context(Context),
+   throw(error(type_error(atom, 42), Context)).
+
+we can simply type:
+
+::
+
+   ...,
+   type_error(atom, 42).
+
+
+Type-checking
+-------------
+
+One of the most common case where errors may be generated is when
+type-checking predicate arguments and input data before processing it.
+The standard library includes a :ref:`type <apis:type/0>` object that 
+defines an extensive set of types, together with predicates for validating
+and checking terms. The set of types is user extensible and new types can
+be defined by adding clauses for ``type/1`` and ``check/2``` multifile
+predicates. For example, assume that we want to be able to check
+*temparatures* expressed in Celsius, Fahrenheit, or Kelvin scales. We
+start by declaring (in an object or category) the new type:
+
+::
+
+   :- multifile(type::type/1).
+   type::type(temperature(_Unit)).
+
+Next, we need to define the actual code that would verify that a temperature
+is valid. As the different scales use a different value for absolute zero,
+we can write:
+
+::
+
+   :- multifile(type::check/2).
+   type::check(temperature(Unit), Term) :-
+       check_temperature(Unit, Term).
+
+   % given that temperature has only a lower bound, we make use of the library
+   % property/2 type to define the necessary test expression for each unit
+   check_temperature(celsius, Term) :-
+       type::check(property(float, [Temperature]>>(Temperature >= -273.15)), Term).
+   check_temperature(fahrenheit, Term) :-
+       type::check(property(float, [Temperature]>>(Temperature >= -459.67)), Term).
+   check_temperature(kelvin, Term) :-
+       type::check(property(float, [Temperature]>>(Temperature >= 0.0)), Term).
+
+With this definition, a term is first checked that it is a float value before
+checking that it is in the expected open interval. But how do we use this new
+type? If we want just to test if a temperature is valid, we can write:
+
+::
+
+   ..., type::valid(temperature(celsius), 42), ...
+
+The ``type::valid/2`` predicate succeeds or fails depending on the second
+argument being of the type specified in the first argument. If instead of
+success or failure we want to generate an error for invalid values, we can
+write instead:
+
+::
+
+   ..., type::check(temperature(celsius), 42), ...
+
+If we require an ``error/2`` exception term with the error context, we can
+use instead the ``type::check/3`` predicate:
+
+::
+
+   ...,
+   context(Context),
+   type::check(temperature(celsius), 42, Context),
+   ...
 
 Compiler warnings and errors
 ----------------------------
