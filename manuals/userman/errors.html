@@ -303,7 +303,7 @@ check_temperature(kelvin, <span class="nv">Term</span>) <span class="o">:-</span
 <p>With this definition, a term is first checked that it is a float value before
 checking that it is in the expected open interval. But how do we use this new
 type? If we want just to test if a temperature is valid, we can write:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>valid(temperature(celsius), <span class="m">42</span>), ...
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>valid(temperature(celsius), <span class="m">42.0</span>), ...
 </pre></div>
 </div>
 <p>The <a class="reference external" href="https://logtalk.org/library/type_0.html#type-0-valid-2" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">type::valid/2</span></a> predicate succeeds or fails
@@ -311,14 +311,14 @@ depending on the second argument being of the type specified in the first
 argument. If instead of success or failure we want to generate an error for
 invalid values, we can use the <a class="reference external" href="https://logtalk.org/library/type_0.html#type-0-check-2" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">type::check/2</span></a>
 predicate instead:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>check(temperature(celsius), <span class="m">42</span>), ...
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>check(temperature(celsius), <span class="m">42.0</span>), ...
 </pre></div>
 </div>
 <p>If we require an <code class="docutils literal notranslate"><span class="pre">error/2</span></code> exception term with the error context, we can
 use instead the <a class="reference external" href="https://logtalk.org/library/type_0.html#type-0-check-3" title="(in Logtalk APIs v3.24.0)"><span class="xref std std-ref">type::check/3</span></a> predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
-type<span class="o">::</span>check(temperature(celsius), <span class="m">42</span>, <span class="nv">Context</span>),
+type<span class="o">::</span>check(temperature(celsius), <span class="m">42.0</span>, <span class="nv">Context</span>),
 ...
 </pre></div>
 </div>

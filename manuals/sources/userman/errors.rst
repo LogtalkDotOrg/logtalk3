@@ -115,7 +115,7 @@ type? If we want just to test if a temperature is valid, we can write:
 
 ::
 
-   ..., type::valid(temperature(celsius), 42), ...
+   ..., type::valid(temperature(celsius), 42.0), ...
 
 The :ref:`type::valid/2 <apis:type/0::valid/2>` predicate succeeds or fails
 depending on the second argument being of the type specified in the first
@@ -125,7 +125,7 @@ predicate instead:
 
 ::
 
-   ..., type::check(temperature(celsius), 42), ...
+   ..., type::check(temperature(celsius), 42.0), ...
 
 If we require an ``error/2`` exception term with the error context, we can
 use instead the :ref:`type::check/3 <apis:type/0::check/3>` predicate:
@@ -134,7 +134,7 @@ use instead the :ref:`type::check/3 <apis:type/0::check/3>` predicate:
 
    ...,
    context(Context),
-   type::check(temperature(celsius), 42, Context),
+   type::check(temperature(celsius), 42.0, Context),
    ...
 
 Note that ``context/1`` calls are inlined and messages to the library
