@@ -9,8 +9,8 @@
 List of numbers protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.5
-| **Date:** 2017/10/7
+| **Version:** 1.6
+| **Date:** 2019/3/2
 
 | **Compilation flags:**
 |    ``static``
@@ -21,6 +21,48 @@ List of numbers protocol.
 
 Public interface
 ----------------
+
+.. raw:: html
+
+   <div id="max/2"> </div>
+
+.. index:: max/2
+.. _numberlistp/0::max/2:
+
+``max/2``
+^^^^^^^^^
+
+Determines the list maximum value using arithmetic order. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``max(List,Maximum)``
+| **Mode and number of proofs:**
+|    ``max(+list(number),-number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="min/2"> </div>
+
+.. index:: min/2
+.. _numberlistp/0::min/2:
+
+``min/2``
+^^^^^^^^^
+
+Determines the minimum value in a list using arithmetic order. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min(List,Minimum)``
+| **Mode and number of proofs:**
+|    ``min(+list(number),-number)`` - ``zero_or_one``
+
 
 .. raw:: html
 

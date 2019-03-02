@@ -313,8 +313,8 @@
 <p>List of numbers protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.5</div>
-<div class="line"><strong>Date:</strong> 2017/10/7</div>
+<div class="line"><strong>Version:</strong> 1.6</div>
+<div class="line"><strong>Date:</strong> 2019/3/2</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -325,8 +325,48 @@
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
-<div id="product/2"> </div><div class="section" id="product-2">
-<span id="numberlistp-0-product-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">product/2</span></code><a class="headerlink" href="#product-2" title="Permalink to this headline">¶</a></h3>
+<div id="max/2"> </div><div class="section" id="max-2">
+<span id="numberlistp-0-max-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">max/2</span></code><a class="headerlink" href="#max-2" title="Permalink to this headline">¶</a></h3>
+<p>Determines the list maximum value using arithmetic order. Fails if the list is empty.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max(List,Maximum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div id="min/2"> </div></div>
+<div class="section" id="min-2">
+<span id="numberlistp-0-min-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">min/2</span></code><a class="headerlink" href="#min-2" title="Permalink to this headline">¶</a></h3>
+<p>Determines the minimum value in a list using arithmetic order. Fails if the list is empty.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min(List,Minimum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div id="product/2"> </div></div>
+<div class="section" id="product-2">
+<span id="numberlistp-0-product-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">product/2</span></code><a class="headerlink" href="#product-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the product of all list numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -346,7 +386,7 @@
 </div>
 <div id="sum/2"> </div></div>
 <div class="section" id="sum-2">
-<span id="numberlistp-0-sum-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">sum/2</span></code><a class="headerlink" href="#sum-2" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-sum-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">sum/2</span></code><a class="headerlink" href="#sum-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the sum of all list numbers. Returns the integer zero if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -366,7 +406,7 @@
 </div>
 <div id="average/2"> </div></div>
 <div class="section" id="average-2">
-<span id="numberlistp-0-average-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">average/2</span></code><a class="headerlink" href="#average-2" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-average-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">average/2</span></code><a class="headerlink" href="#average-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -386,7 +426,7 @@
 </div>
 <div id="euclidean_norm/2"> </div></div>
 <div class="section" id="euclidean-norm-2">
-<span id="numberlistp-0-euclidean-norm-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">euclidean_norm/2</span></code><a class="headerlink" href="#euclidean-norm-2" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-euclidean-norm-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">euclidean_norm/2</span></code><a class="headerlink" href="#euclidean-norm-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the Euclidean norm of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -406,7 +446,7 @@
 </div>
 <div id="chebyshev_norm/2"> </div></div>
 <div class="section" id="chebyshev-norm-2">
-<span id="numberlistp-0-chebyshev-norm-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">chebyshev_norm/2</span></code><a class="headerlink" href="#chebyshev-norm-2" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-chebyshev-norm-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">chebyshev_norm/2</span></code><a class="headerlink" href="#chebyshev-norm-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the Chebyshev norm of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -427,7 +467,7 @@
 </div>
 <div id="manhattan_norm/2"> </div></div>
 <div class="section" id="manhattan-norm-2">
-<span id="numberlistp-0-manhattan-norm-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">manhattan_norm/2</span></code><a class="headerlink" href="#manhattan-norm-2" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-manhattan-norm-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">manhattan_norm/2</span></code><a class="headerlink" href="#manhattan-norm-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the Manhattan norm of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -448,7 +488,7 @@
 </div>
 <div id="euclidean_distance/3"> </div></div>
 <div class="section" id="euclidean-distance-3">
-<span id="numberlistp-0-euclidean-distance-3"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">euclidean_distance/3</span></code><a class="headerlink" href="#euclidean-distance-3" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-euclidean-distance-3"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">euclidean_distance/3</span></code><a class="headerlink" href="#euclidean-distance-3" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the Euclidean distance between two lists of numbers. Fails if the two lists are empty or not of the same length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -468,7 +508,7 @@
 </div>
 <div id="chebyshev_distance/3"> </div></div>
 <div class="section" id="chebyshev-distance-3">
-<span id="numberlistp-0-chebyshev-distance-3"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">chebyshev_distance/3</span></code><a class="headerlink" href="#chebyshev-distance-3" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-chebyshev-distance-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">chebyshev_distance/3</span></code><a class="headerlink" href="#chebyshev-distance-3" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the Chebyshev distance between two lists of numbers. Fails if the two lists are empty or not of the same length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -489,7 +529,7 @@
 </div>
 <div id="manhattan_distance/3"> </div></div>
 <div class="section" id="manhattan-distance-3">
-<span id="numberlistp-0-manhattan-distance-3"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">manhattan_distance/3</span></code><a class="headerlink" href="#manhattan-distance-3" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-manhattan-distance-3"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">manhattan_distance/3</span></code><a class="headerlink" href="#manhattan-distance-3" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the Manhattan distance between two lists of numbers. Fails if the two lists are empty or not of the same length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -510,7 +550,7 @@
 </div>
 <div id="scalar_product/3"> </div></div>
 <div class="section" id="scalar-product-3">
-<span id="numberlistp-0-scalar-product-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">scalar_product/3</span></code><a class="headerlink" href="#scalar-product-3" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-scalar-product-3"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">scalar_product/3</span></code><a class="headerlink" href="#scalar-product-3" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the scalar product of two lists of numbers. Fails if the two lists are empty or not of the same length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -531,7 +571,7 @@
 </div>
 <div id="normalize_range/2"> </div></div>
 <div class="section" id="normalize-range-2">
-<span id="numberlistp-0-normalize-range-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">normalize_range/2</span></code><a class="headerlink" href="#normalize-range-2" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-normalize-range-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">normalize_range/2</span></code><a class="headerlink" href="#normalize-range-2" title="Permalink to this headline">¶</a></h3>
 <p>Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -551,7 +591,7 @@
 </div>
 <div id="normalize_range/4"> </div></div>
 <div class="section" id="normalize-range-4">
-<span id="numberlistp-0-normalize-range-4"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">normalize_range/4</span></code><a class="headerlink" href="#normalize-range-4" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-normalize-range-4"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">normalize_range/4</span></code><a class="headerlink" href="#normalize-range-4" title="Permalink to this headline">¶</a></h3>
 <p>Normalizes a list of numbers into the given range. Caller must handle arithmetic exceptions if the input list if not normalizable.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -571,7 +611,7 @@
 </div>
 <div id="normalize_unit/2"> </div></div>
 <div class="section" id="normalize-unit-2">
-<span id="numberlistp-0-normalize-unit-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">normalize_unit/2</span></code><a class="headerlink" href="#normalize-unit-2" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-normalize-unit-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">normalize_unit/2</span></code><a class="headerlink" href="#normalize-unit-2" title="Permalink to this headline">¶</a></h3>
 <p>Normalizes a list of numbers returning its unit vector (i.e. a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -591,7 +631,7 @@
 </div>
 <div id="normalize_scalar/2"> </div></div>
 <div class="section" id="normalize-scalar-2">
-<span id="numberlistp-0-normalize-scalar-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">normalize_scalar/2</span></code><a class="headerlink" href="#normalize-scalar-2" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-normalize-scalar-2"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">normalize_scalar/2</span></code><a class="headerlink" href="#normalize-scalar-2" title="Permalink to this headline">¶</a></h3>
 <p>Normalizes a list of numbers such that the sum of all numbers is equal to one. Caller must handle arithmetic exceptions if the input list if not normalizable.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -611,7 +651,7 @@
 </div>
 <div id="rescale/3"> </div></div>
 <div class="section" id="rescale-3">
-<span id="numberlistp-0-rescale-3"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">rescale/3</span></code><a class="headerlink" href="#rescale-3" title="Permalink to this headline">¶</a></h3>
+<span id="numberlistp-0-rescale-3"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">rescale/3</span></code><a class="headerlink" href="#rescale-3" title="Permalink to this headline">¶</a></h3>
 <p>Rescales all numbers in a list by the given factor.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

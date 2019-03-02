@@ -21,11 +21,25 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2017/10/07,
+		date is 2019/03/02,
 		comment is 'List of numbers protocol.',
 		see_also is [numberlist, listp, varlistp]
+	]).
+
+	:- public(max/2).
+	:- mode(max(+list(number), -number), zero_or_one).
+	:- info(max/2, [
+		comment is 'Determines the list maximum value using arithmetic order. Fails if the list is empty.',
+		argnames is ['List', 'Maximum']
+	]).
+
+	:- public(min/2).
+	:- mode(min(+list(number), -number), zero_or_one).
+	:- info(min/2, [
+		comment is 'Determines the minimum value in a list using arithmetic order. Fails if the list is empty.',
+		argnames is ['List', 'Minimum']
 	]).
 
 	:- public(product/2).

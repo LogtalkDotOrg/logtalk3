@@ -24,7 +24,12 @@ RELEASE NOTES
 3.25.0 - April ??, 2019
 =======================
 
+Library
+-------
 
+* FIXED: Add to the `numberlistp` protocol declarations for the `max/2` and
+`min/2` predicates as these override inherited declaration from the `listp`
+protocol to use arithmetic instead of standard order.
 
 
 3.24.0 - February 28, 2019
