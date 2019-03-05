@@ -24,6 +24,13 @@ RELEASE NOTES
 3.25.0 - April ??, 2019
 =======================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: SWI-Prolog and YAP adapter file definitions for expanding top-level
+and module calls to the `::/2` message sending control construct to reject
+expanding a variable goal.
+
 Library
 -------
 
