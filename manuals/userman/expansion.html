@@ -257,9 +257,8 @@ Sounds = sounds
 yes
 </pre></div>
 </div>
-<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicate are recursively called on
-the expanded goal until a fixed point is reached. Care must be taken to
-avoid expansion loops. For example:</p>
+<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicate are recursively called on the
+expanded goal until a fixed point is reached. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_goal(a, Goal).
 
 Goal = c
@@ -280,6 +279,22 @@ Goal = (3=:=5)
 yes
 </pre></div>
 </div>
+<p>The goal-expansion mechanism prevents an infinite loop when expanding a goal
+by checking that a goal to be expanded does not resulted from a previous
+expansion of the same goal. For example, consider the following object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(fixed_point,
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">goal_expansion</span>(a, b).
+    <span class="k">goal_expansion</span>(b, c).
+    <span class="k">goal_expansion</span>(c, (a <span class="o">-&gt;</span> b<span class="o">;</span> c)).
+
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>The expansion of the goal <code class="docutils literal notranslate"><span class="pre">a</span></code> results in the goal <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">-&gt;</span> <span class="pre">b;</span> <span class="pre">c)</span></code> with no
+attempt to further expand the <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> goals as they have
+already been expanded.</p>
 <p>Term and goal expansion predicates can also be used when compiling a source
 file as described below.</p>
 </div>

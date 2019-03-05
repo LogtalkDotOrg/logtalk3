@@ -37,4 +37,11 @@
 
 	r(a). r(b). r(c).
 
+	:- public(fp/1).
+	fp(X) :- c(X).
+
+	c(1).
+	d(1).
+	e(2).
+
 :- end_object.

@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on February 17, 2019
+%  Last updated on March 5, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -755,10 +755,10 @@ prolog_clause:make_varnames_hook(_, (Module:THead :- _), Offsets, Names, Binding
 :- meta_predicate '$lgt_find_original_predicate'(*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_entity_property_alias'(*,*,*,*,*).
 :- meta_predicate '$lgt_expand_goal_category_scoped'(*,*,*,*).
-:- meta_predicate '$lgt_expand_goal_category_local'(*,*,*,*).
+:- meta_predicate '$lgt_expand_goal_category_local'(*,*,*,*,*).
 :- meta_predicate '$lgt_expand_goal_object_scoped'(*,*,*,*).
-:- meta_predicate '$lgt_expand_goal_object_local'(*,*,*,*,*).
-:- meta_predicate '$lgt_expand_goal_message'(*,*,*,*).
+:- meta_predicate '$lgt_expand_goal_object_local'(*,*,*,*,*,*).
+:- meta_predicate '$lgt_expand_goal_message'(*,*,*,*,*).
 :- meta_predicate '$lgt_assert_pred_dcl'(*,*,*,*,*,*,*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_define_events'(*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_threaded_or'(*,*,*).

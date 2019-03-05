@@ -25,4 +25,8 @@
 	goal_expansion(one(G), (G -> true)).
 	goal_expansion((true -> G), G).
 
+	goal_expansion(c(X), d(X)).
+	goal_expansion(d(X), e(X)).
+	goal_expansion(e(X), (c(X) -> d(X); e(X))).
+
 :- end_object.

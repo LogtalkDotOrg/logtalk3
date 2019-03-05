@@ -148,9 +148,9 @@ compound terms.
 
 The second directive argument documents the number of proofs, but not
 necessarily distinct solutions, for the specified mode. As an example,
-that the ``member(X, [1,1,1,1])`` goal have only one distinct solution
-but four proofs for that solution. Note that different modes for the
-same predicate often have different determinism. The possible values are:
+the ``member(X, [1,1,1,1])`` goal have only one distinct solution but four
+proofs for that solution. Note that different modes for the same predicate
+often have different determinism. The possible values are:
 
 ``zero``
    Predicate always fails.

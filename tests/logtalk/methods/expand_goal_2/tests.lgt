@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/10/28,
+		date is 2019/03/05,
 		comment is 'Unit tests for the expand_goal/2 built-in method.'
 	]).
 
@@ -171,5 +171,12 @@
 	test(expand_goal_multifile_01) :-
 		primary::expand(goal, Expansion),
 		Expansion == secondary.
+
+	% test that goal-expansion doesn't go into an infinite loop when the goal
+	% to be expanded resulted from a previous expansion of the same goal
+
+	test(expand_goal_fixed_point) :-
+		fixed_point::expand_goal(a, Expansion),
+		Expansion == (a->b;c).
 
 :- end_object.

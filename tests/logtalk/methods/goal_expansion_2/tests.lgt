@@ -22,21 +22,25 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/11/09,
+		date is 2019/03/05,
 		comment is 'Unit tests for the goal_expansion/2 user-defined hook predicate.'
 	]).
 
 	% see also the tests for the expand_goal/2 predicate, which further
 	% test the goal_expansion/2 user-defined hook predicate
 
-	test(goal_expansion_2_1) :-
+	test(goal_expansion_2_01) :-
 		findall(X, object::a(X), L),
 		L == [1, a, b, c].
 
-	test(goal_expansion_2_2) :-
+	test(goal_expansion_2_02) :-
 		findall(X, object::b(X), L),
 		L == [1, 2, 3].
+
+	test(goal_expansion_2_03) :-
+		object::fp(X),
+		X == 1.
 
 :- end_object.

@@ -24,6 +24,14 @@ RELEASE NOTES
 3.25.0 - April ??, 2019
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Prevent goal-expansion resulting in an infinite loop when the goal
+to be expanded resulted from a previous expansion of the same goal (checked
+using term equality). After a discussion with Peter Ludemann and Jan Wielemaker
+on the SWI-Prolog public forum.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -37,6 +45,12 @@ Library
 * FIXED: Add to the `numberlistp` protocol declarations for the `max/2` and
 `min/2` predicates as these override inherited declaration from the `listp`
 protocol to use arithmetic instead of standard order.
+
+Tests
+-----
+
+* ADDED: New unit tests for the `expand_goal/2` and `goal_expansion/2` methods
+to check the changes to the goal-expansion mechanism.
 
 
 3.24.0 - February 28, 2019

@@ -80,9 +80,8 @@ trying to expand is returned:
    Sounds = sounds
    yes
 
-Clauses for the ``goal_expansion/2`` predicate are recursively called on
-the expanded goal until a fixed point is reached. Care must be taken to
-avoid expansion loops. For example:
+Clauses for the ``goal_expansion/2`` predicate are recursively called on the
+expanded goal until a fixed point is reached. For example:
 
 .. code-block:: text
    
@@ -106,6 +105,25 @@ trying to expand is returned:
    
    Goal = (3=:=5)
    yes
+
+The goal-expansion mechanism prevents an infinite loop when expanding a goal
+by checking that a goal to be expanded does not resulted from a previous
+expansion of the same goal. For example, consider the following object:
+
+::
+
+   :- object(fixed_point,
+       implements(expanding)).
+
+       goal_expansion(a, b).
+       goal_expansion(b, c).
+       goal_expansion(c, (a -> b; c)).
+
+   :- end_object.
+
+The expansion of the goal ``a`` results in the goal ``(a -> b; c)`` with no
+attempt to further expand the ``a``, ``b``, and ``c`` goals as they have
+already been expanded.
 
 Term and goal expansion predicates can also be used when compiling a source
 file as described below.
