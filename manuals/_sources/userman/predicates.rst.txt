@@ -134,7 +134,7 @@ also be found in use in some Prolog systems.
 ``++``
    Argument must be ground.
 ``--``
-   Argument must be unbound.
+   Argument must be unbound. Used mainly when returning an opaque term.
 
 These six mode atoms are also declared as prefix operators by the
 Logtalk compiler. This makes it possible to include type information
@@ -146,10 +146,11 @@ first four are Logtalk specific. The remaining are common Prolog types.
 We can also use our own types that can be either atoms or ground
 compound terms.
 
-The second directive argument documents the number of proofs (but not
-necessarily distinct solutions) for the specified mode. Note that
-different modes for the same predicate often have different determinism.
-The possible values are:
+The second directive argument documents the number of proofs, but not
+necessarily distinct solutions, for the specified mode. As an example,
+that the ``member(X, [1,1,1,1])`` goal have only one distinct solution
+but four proofs for that solution. Note that different modes for the
+same predicate often have different determinism. The possible values are:
 
 ``zero``
    Predicate always fails.
