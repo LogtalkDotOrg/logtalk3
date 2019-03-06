@@ -258,7 +258,10 @@ Logtalk equivalents.
    prototype extension.
 
 **interface**
-   Logtalk uses the term :term:`protocol` with the same meaning.
+   Logtalk uses the term :term:`protocol` with similar meaning. But note
+   that Logtalk objects and categories declared as implementing a protocol
+   are not required to provide definitions for the declared predicates
+   (:term:`closed-world assumption`).
 
 **callback method**
    Logtalk supports :ref:`event-driven programming <events_events>`,
