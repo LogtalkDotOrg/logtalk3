@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b02)).
+'$lgt_version_data'(logtalk(3, 25, 0, b03)).
 
 
 
@@ -11318,6 +11318,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
 
+'$lgt_compile_body'(!, _, _, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_), _, Lines),
+	'$lgt_compiler_flag'(steadfastness, warning),
+	'$lgt_variable_aliasing'(Head),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(steadfastness), core, possible_non_steadfast_predicate(File, Lines, Type, Entity, Head)),
+	fail.
 % when processing the debug event, the compiled goal is meta-called but
 % this would make the cut local, changing the semantics of the user code;
 % the solution is to use a conjunction for the debug goal of the debug
@@ -20062,6 +20070,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(unknown_predicates).
 '$lgt_valid_flag'(undefined_predicates).
 '$lgt_valid_flag'(underscore_variables).
+'$lgt_valid_flag'(steadfastness).
 '$lgt_valid_flag'(portability).
 '$lgt_valid_flag'(redefined_built_ins).
 '$lgt_valid_flag'(missing_directives).
@@ -20149,6 +20158,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(undefined_predicates, silent) :- !.
 '$lgt_valid_flag_value'(undefined_predicates, warning) :- !.
 '$lgt_valid_flag_value'(undefined_predicates, error) :- !.
+
+'$lgt_valid_flag_value'(steadfastness, silent) :- !.
+'$lgt_valid_flag_value'(steadfastness, warning) :- !.
 
 '$lgt_valid_flag_value'(portability, silent) :- !.
 '$lgt_valid_flag_value'(portability, warning) :- !.
@@ -22709,6 +22721,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_sum_list'([Value| Values], Sum0, Sum) :-
 	Sum1 is Sum0 + Value,
 	'$lgt_sum_list'(Values, Sum1, Sum).
+
+
+'$lgt_select'(Head, [Head| Tail], Tail).
+'$lgt_select'(Head, [Head2| Tail], [Head2| Tail2]) :-
+	'$lgt_select'(Head, Tail, Tail2).
+
+
+'$lgt_variable_aliasing'(Term) :-
+	compound(Term),
+	Term =.. [_| Arguments],
+	'$lgt_select'(Argument1, Arguments, OtherArguments),
+	'$lgt_select'(Argument2, OtherArguments, _),
+	term_variables(Argument1, Variables1),
+	term_variables(Argument2, Variables2),
+	'$lgt_intersection'(Variables1, Variables2, [_| _]),
+	!.
 
 
 '$lgt_read_file_to_terms'(Mode, File, Directory, SourceFile, Terms) :-

@@ -228,6 +228,7 @@ numbervars(Term, From, Next) :-
 '$lgt_default_flag'(unknown_predicates, warning).
 '$lgt_default_flag'(undefined_predicates, warning).
 '$lgt_default_flag'(singleton_variables, warning).
+'$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(deprecated, warning).

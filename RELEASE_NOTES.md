@@ -32,6 +32,12 @@ to be expanded resulted from a previous expansion of the same goal (checked
 using term equality). After a discussion with Peter Ludemann and Jan Wielemaker
 on the SWI-Prolog public forum.
 
+* ADDED: Lint check for possible non-steadfast predicate definitions.
+
+* ADDED: Compiler option `steadfastness` to control output of steadfast
+predicate warnings. Default value is `silent` due to the possibility of
+false positives.
+
 * ADDED: Detect and report `is/2` goals that are always false due to the first
 argument being a term other than a variable or a number.
 
@@ -45,6 +51,10 @@ expanding a variable goal.
 Documentation
 -------------
 
+* ADDED: Handbook documentation about the new `steadfastness` compiler option.
+
+* ADDED: Handbook glossary entry for "steadfastness".
+
 * FIXED: Spurious and empty index section in the PDF version of the Handbook.
 
 Library
@@ -53,6 +63,8 @@ Library
 * FIXED: Add to the `numberlistp` protocol declarations for the `max/2` and
 `min/2` predicates as these override inherited declaration from the `listp`
 protocol to use arithmetic instead of standard order.
+
+* FIXED: Non-steadfast `list::flatten/2` predicate definition.
 
 Tests
 -----

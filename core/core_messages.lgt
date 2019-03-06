@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.47,
+		version is 1.48,
 		author is 'Paulo Moura',
-		date is 2019/02/20,
+		date is 2019/03/06,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -210,6 +210,7 @@
 		{current_logtalk_flag(unknown_entities, UnknownEntities),
 		 current_logtalk_flag(unknown_predicates, UnknownPredicates),
 		 current_logtalk_flag(undefined_predicates, UndefinedPredicates),
+		 current_logtalk_flag(steadfastness, Steadfastness),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, Redefined),
 		 current_logtalk_flag(deprecated, Deprecated),
@@ -248,7 +249,7 @@
 		[
 			'Default lint compilation flags: '-[], nl,
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
-			'  unknown_entities: ~w'-[UnknownEntities], nl,
+			'  unknown_entities: ~w, steadfastness: ~w'-[UnknownEntities, Steadfastness], nl,
 			'  missing_directives: ~w, duplicated_directives: ~w'-[Missing, Duplicated], nl,
 			'  portability: ~w, redefined_built_ins: ~w, deprecated: ~w'-[Portability, Redefined, Deprecated], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
@@ -549,6 +550,10 @@
 	message_tokens(misplaced_encoding_directive(File, Lines)) -->
 		['The encoding/1 directive is misplaced'-[], nl],
 		message_context(File, Lines).
+
+	message_tokens(possible_non_steadfast_predicate(File, Lines, Type, Entity, Head)) -->
+		['Predicate with clause head ~q may not be steadfast due to variable aliasing and cut'-[Head], nl],
+		message_context(File, Lines, Type, Entity).
 
 	% auxiliary grammar rules
 

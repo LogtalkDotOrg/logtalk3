@@ -569,6 +569,15 @@ Lint flags
    assumption. Possible option values are ``error``, ``warning`` (the
    usual default), and ``silent`` (not recommended).
 
+.. index:: single: steadfastness flag
+.. _flag_steadfastness:
+
+``steadfastness(Option)``
+   Controls warnings about *possible* non :term:`steadfast <steadfastness>`
+   predicate definitions due to variable aliasing at a clause head and a cut
+   in the clause body. Possible option values are ``warning`` and ``silent``
+   (the usual default due to the possibility of false positives).
+
 .. index:: single: portability flag
 .. _flag_portability:
 

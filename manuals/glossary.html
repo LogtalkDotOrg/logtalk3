@@ -561,6 +561,11 @@ call (or a <a class="reference internal" href="#term-super-call"><span class="xr
 binding is not possible (e.g. due to the predicate being dynamic or due
 to lack of enough information at compilation time). Also known as <em>early
 binding</em>. See also <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
+<dt id="term-steadfastness">steadfastness</dt>
+<dd>A predicate definition is <em>steadfast</em> when it still generates only
+correct answers when called with unexpected arguments. Typically,
+a predicate may not be steadfast when output argument unifications
+can occur before a cut in a predicate clause.</dd>
 <dt id="term-subclass">subclass</dt>
 <dd>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that is a specialization, direct or indirectly, of
 another class.</dd>

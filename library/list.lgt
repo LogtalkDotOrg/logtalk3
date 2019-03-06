@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.16,
+		version is 2.17,
 		author is 'Paulo Moura',
-		date is 2019/01/08,
+		date is 2019/03/06,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -75,11 +75,13 @@
 	flatten(List, Flatted) :-
 		flatten(List, [], Flatted).
 
-	flatten(Var, Tail, [Var| Tail]) :-
+	flatten(Var, Tail, Flatted) :-
 		var(Var),
-		!.
-	flatten([], Flatted, Flatted) :-
-		!.
+		!,
+		Flatted = [Var| Tail].
+	flatten([], List, Flatted) :-
+		!,
+		Flatted = List.
 	flatten([Head| Tail], List, Flatted) :-
 		!,
 		flatten(Tail, List, Aux),
@@ -286,7 +288,7 @@
 		prefix(Tail, Tail2).
 
 	prefix(Prefix, Length, List) :-
-		(	var(Length) ->	
+		(	var(Length) ->
 			prefix(Prefix, 0, Length, List)
 		;	prefix(Prefix, 0, Length, List),
 			!
@@ -302,7 +304,7 @@
 		proper_prefix(PrefixTail, ListTail).
 
 	proper_prefix(Prefix, Length, List) :-
-		(	var(Length) ->	
+		(	var(Length) ->
 			proper_prefix(Prefix, 0, Length, List)
 		;	proper_prefix(Prefix, 0, Length, List),
 			!
