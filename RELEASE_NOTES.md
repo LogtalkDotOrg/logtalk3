@@ -32,6 +32,9 @@ to be expanded resulted from a previous expansion of the same goal (checked
 using term equality). After a discussion with Peter Ludemann and Jan Wielemaker
 on the SWI-Prolog public forum.
 
+* ADDED: Detect and report `is/2` goals that are always false due to the first
+argument being a term other than a variable or a number.
+
 Prolog adapter and integration files
 ------------------------------------
 
