@@ -39,6 +39,11 @@ Prolog adapter and integration files
 and module calls to the `::/2` message sending control construct to reject
 expanding a variable goal.
 
+Documentation
+-------------
+
+* FIXED: Spurious and empty index section in the PDF version of the Handbook.
+
 Library
 -------
 

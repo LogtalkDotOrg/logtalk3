@@ -155,7 +155,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'TheLogtalkHandbook-' + version + '.tex', u'The Logtalk Handbook',
+    ('index_latexpdf', 'TheLogtalkHandbook-' + version + '.tex', u'The Logtalk Handbook',
      u'Paulo Moura', 'manual'),
 ]
 

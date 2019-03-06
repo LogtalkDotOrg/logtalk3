@@ -106,10 +106,8 @@
 <li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Categories</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#defining-a-new-category">Defining a new category</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#hot-patching">Hot patching</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-a-new-category">Defining a new category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hot-patching">Hot patching</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#finding-defined-categories">Finding defined categories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creating-a-new-category-in-runtime">Creating a new category in runtime</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#abolishing-an-existing-category">Abolishing an existing category</a></li>
@@ -355,10 +353,11 @@ working in the context of <em>this</em> ties those dynamic predicates to the
 object importing the category while working in the context of <em>self</em>
 allows each object inheriting from the object that imports the category
 to have its own set of clauses for those dynamic predicates.</p>
+</div>
 <div class="section" id="hot-patching">
-<span id="categories-patching"></span><h3>Hot patching<a class="headerlink" href="#hot-patching" title="Permalink to this headline">¶</a></h3>
-<p>A category may explicitly complement one or more existing objects, thus
-providing <a class="reference internal" href="../glossary.html#term-hot-patching"><span class="xref std std-term">hot patching</span></a> functionality inspired by Objective-C
+<span id="categories-patching"></span><h2>Hot patching<a class="headerlink" href="#hot-patching" title="Permalink to this headline">¶</a></h2>
+<p>A category may also explicitly complement one or more existing objects,
+thus providing <a class="reference internal" href="../glossary.html#term-hot-patching"><span class="xref std std-term">hot patching</span></a> functionality inspired by Objective-C
 categories:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(<span class="nv">Category</span>,
     <span class="k">complements</span>([<span class="nv">Object1</span>, <span class="nv">Object2</span>, ....])).
@@ -396,7 +395,6 @@ will still call the unpatched version of the predicate. This is a
 consequence of the lack of a portable solution at the
 <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> level for destructively replacing static
 predicates.</p>
-</div>
 </div>
 <div class="section" id="finding-defined-categories">
 <span id="categories-finding"></span><h2>Finding defined categories<a class="headerlink" href="#finding-defined-categories" title="Permalink to this headline">¶</a></h2>

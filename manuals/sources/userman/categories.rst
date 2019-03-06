@@ -178,10 +178,10 @@ to have its own set of clauses for those dynamic predicates.
 .. _categories_patching:
 
 Hot patching
-~~~~~~~~~~~~
+------------
 
-A category may explicitly complement one or more existing objects, thus
-providing :term:`hot patching` functionality inspired by Objective-C
+A category may also explicitly complement one or more existing objects,
+thus providing :term:`hot patching` functionality inspired by Objective-C
 categories:
 
 ::
