@@ -152,6 +152,8 @@
 
 	rats :- \+ x \== y.
 
+	jinx(X) :- a is X*2.
+
 :- end_object.
 
 
