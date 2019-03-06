@@ -35,6 +35,7 @@
 			suspicious_calls(warning),
 		 	singleton_variables(warning),
 		 	portability(warning),
+			steadfastness(warning),
 			report(on)
 		]
 	)

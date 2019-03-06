@@ -72,6 +72,11 @@ Tests
 * ADDED: New unit tests for the `expand_goal/2` and `goal_expansion/2` methods
 to check the changes to the goal-expansion mechanism.
 
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate the new compiler lint checks.
+
 
 3.24.0 - February 28, 2019
 ==========================

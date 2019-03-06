@@ -270,3 +270,12 @@
 	baz.
 
 :- end_object.
+
+
+
+:- object(steadfastness).
+
+	max(X, Y, X) :- X >= Y, !.
+	max(_, Y, Y).
+
+:- end_object.
