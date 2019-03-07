@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b04)).
+'$lgt_version_data'(logtalk(3, 25, 0, b05)).
 
 
 
@@ -11318,6 +11318,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
 
+% warning on cuts on clauses for multifile predicates
+'$lgt_compile_body'(!, _, _, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_), _, Lines),
+	callable(Head),
+	(	Head = _::_ ->
+		true
+	;	Head = ':'(_, _)
+	),
+	% clause for a multifile predicate
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, !, reason(multifile))),
+	fail.
+% warning on cuts on clauses with variable aliasing in the head
 '$lgt_compile_body'(!, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_), _, Lines),
 	'$lgt_compiler_flag'(steadfastness, warning),

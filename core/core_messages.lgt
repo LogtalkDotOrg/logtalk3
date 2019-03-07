@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.48,
+		version is 1.49,
 		author is 'Paulo Moura',
-		date is 2019/03/06,
+		date is 2019/03/07,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -403,6 +403,10 @@
 		['Suspicious call: ~q instead of '-[Call]],
 		alternative_calls(AlternativeCalls, AlternativeCall),
 		message_context(File, Lines, Type, Entity).
+	message_tokens(suspicious_call(File, Lines, Type, Entity, Call, reason(Reason))) -->
+		['Suspicious call: ~q '-[Call]],
+		suspicious_call_reason(Reason),
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(non_standard_predicate_call(File, Lines, Type, Entity, Predicate)) -->
 		['Call to non-standard Prolog built-in predicate: ~q'-[Predicate], nl],
@@ -670,11 +674,13 @@
 		).
 
 	alternative_calls([], AlternativeCall) -->
-			['~q'-[AlternativeCall], nl].
-
+		['~q'-[AlternativeCall], nl].
 	alternative_calls([NextAlternativeCall| AlternativeCalls], AlternativeCall) -->
-			['~q or '-[AlternativeCall]],
-			alternative_calls(AlternativeCalls, NextAlternativeCall).
+		['~q or '-[AlternativeCall]],
+		alternative_calls(AlternativeCalls, NextAlternativeCall).
+
+	suspicious_call_reason(multifile) -->
+		['in clause for multifile predicate'-[], nl].
 
 	missing_entities([]) -->
 		[].

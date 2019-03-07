@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/29,
+		date is 2019/03/07,
 		comment is 'Unit tests for the "assertions" tool.'
 	]).
 
@@ -77,9 +77,7 @@
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
-
 	logtalk::message_hook(Message, Kind, assertions, _) :-
-		!,
 		ground(Message),
 		message(Message, Kind).
 
