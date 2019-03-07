@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2018/08/14,
+		date is 2019/03/07,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic random/1, get_seed/1, and set_seed/1 predicates.',
@@ -198,11 +198,11 @@
 	:- if(current_logtalk_flag(prolog_dialect, b)).
 		get_seed(_).
 		set_seed(_).
-		random(Random) :- {Random is random}.
+		random(Random) :- Random is random.
 	:- elif(current_logtalk_flag(prolog_dialect, cx)).
 		get_seed(_).
 		set_seed(_).
-		random(Random) :- {Random is random}.
+		random(Random) :- Random is random.
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 		get_seed(_).
 		set_seed(Seed) :- {seed(Seed)}.
@@ -214,11 +214,11 @@
 	:- elif(current_logtalk_flag(prolog_dialect, ji)).
 		get_seed(_).
 		set_seed(_).
-		random(Random) :- {Random is rand}.
+		random(Random) :- Random is rand.
 	:- elif(current_logtalk_flag(prolog_dialect, lean)).
 		get_seed(_).
 		set_seed(_).
-		random(Random) :- {Random is random}.
+		random(Random) :- Random is random.
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 		get_seed(Seed) :- {srandom(Seed)}.
 		set_seed(Seed) :- {srandom(Seed)}.
@@ -236,7 +236,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		get_seed(Seed) :- {random_property(state(Seed))}.
 		set_seed(Seed) :- {set_random(seed(Seed))}.
-		random(Random) :- {Random is random_float}.
+		random(Random) :- Random is random_float.
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 		{:- import(from(/(getrand,1), random))}.
 		{:- import(from(/(setrand,1), random))}.

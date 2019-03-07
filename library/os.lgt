@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.49,
+		version is 1.51,
 		author is 'Paulo Moura',
-		date is 2018/03/15,
+		date is 2019/03/07,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -56,12 +56,12 @@
 	]).
 
 	expand_path(Path, ExpandedPath) :-
-		absolute_file_name(Path, ExpandedPath).	
+		absolute_file_name(Path, ExpandedPath).
 
 	:- if(current_logtalk_flag(prolog_dialect, swi)).
 
 		pid(PID) :-
-			{current_prolog_flag(pid, PID)}.
+			current_prolog_flag(pid, PID).
 
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
@@ -165,15 +165,15 @@
 			Seconds is Miliseconds / 1000.
 
 		operating_system_type(Type) :-
-			(	{current_prolog_flag(windows, true)} ->
+			(	current_prolog_flag(windows, true) ->
 				Type = windows
-			;	{current_prolog_flag(unix, true)} ->
+			;	current_prolog_flag(unix, true) ->
 				Type = unix
 			;	Type = unknown
 			).
 
 		command_line_arguments(Arguments) :-
-			{current_prolog_flag(argv, Arguments)}.
+			current_prolog_flag(argv, Arguments).
 
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
@@ -276,15 +276,15 @@
 			Seconds is Miliseconds / 1000.
 
 		operating_system_type(Type) :-
-			(	{current_prolog_flag(windows, true)} ->
+			(	current_prolog_flag(windows, true) ->
 				Type = windows
-			;	{current_prolog_flag(unix, true)} ->
+			;	current_prolog_flag(unix, true) ->
 				Type = unix
 			;	Type = unknown
 			).
 
 		command_line_arguments(Arguments) :-
-			{current_prolog_flag(argv, Arguments)}.
+			current_prolog_flag(argv, Arguments).
 
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
@@ -714,7 +714,7 @@
 			).
 
 		command_line_arguments(Arguments) :-
-			{current_prolog_flag(argv, Arguments)}.
+			current_prolog_flag(argv, Arguments).
 
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
@@ -1207,7 +1207,7 @@
 
 		split_command_([], [[]]).
 		split_command_([' '| Chars], [[]| List]) :-
-			!,			
+			!,
 			split_command_(Chars, List).
 		split_command_([Char| Chars], [[Char|Tail]| List]) :-
 			split_command_(Chars, [Tail| List]).

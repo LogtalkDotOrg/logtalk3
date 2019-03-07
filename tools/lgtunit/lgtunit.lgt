@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.25,
+		version is 6.26,
 		author is 'Paulo Moura',
-		date is 2019/01/28,
+		date is 2019/03/07,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -691,7 +691,7 @@
 		;	tests_skipped
 		),
 		% restore the current output stream
-		set_output(Output).		
+		set_output(Output).
 
 	run(Test) :-
 		atom(Test),
@@ -717,12 +717,12 @@
 		set_input(Input), set_output(Output).
 
 	run_condition :-
-		% expected either success or failure; error means user error 
+		% expected either success or failure; error means user error
 		catch(::condition, Error, (broken_step(condition,Error), fail)),
 		!.
 
 	run_setup :-
-		% expected success; failure or error means user error 
+		% expected success; failure or error means user error
 		(	catch(::setup, Error, broken_step(setup,Error)) ->
 			(	var(Error) ->
 				true
@@ -733,7 +733,7 @@
 		).
 
 	run_cleanup :-
-		% expected success; failure or error means user error 
+		% expected success; failure or error means user error
 		(	catch(::cleanup, Error, broken_step(cleanup,Error)) ->
 			true
 		;	failed_step(cleanup)
@@ -983,7 +983,7 @@
 
 	run_test_condition(Test, Condition, File, Position, Note, Output) :-
 		option_goal(Condition, Goal),
-		% expected either success or failure; error means user error 
+		% expected either success or failure; error means user error
 		(	Goal == true ->
 			true
 		;	catch(Goal, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note,Output), fail))
@@ -993,7 +993,7 @@
 
 	run_test_setup(Test, Setup, File, Position, Note, Output) :-
 		option_goal(Setup, Goal),
-		% expected success; failure or error means user error 
+		% expected success; failure or error means user error
 		(	Goal == true ->
 			true
 		;	catch(Goal, Error, failed_test(Test,File,Position,step_error(setup,Error),Note,Output)) ->
@@ -1009,7 +1009,7 @@
 
 	run_test_cleanup(Test, Cleanup, File, Position, Output) :-
 		option_goal(Cleanup, Goal),
-		% expected success; failure or error means user error 
+		% expected success; failure or error means user error
 		(	Goal == true ->
 			true
 		;	catch(Goal, Error, failed_cleanup(Test,File,Position,error(Error),Output)) ->
@@ -1214,7 +1214,7 @@
 		reset_compilation_counters.
 
 	% the discontiguous/1 directives usually required when using some of the
-	% unit tests idioms are no longer necessary after term-expanding them 
+	% unit tests idioms are no longer necessary after term-expanding them
 	directive_expansion(discontiguous(PI), Expansion) :-
 		ground(PI),
 		filter_discontiguous_directive(PI, Filtered),
@@ -1223,7 +1223,7 @@
 		;	Expansion = (:- discontiguous(Filtered))
 		).
 
-	% collect all unit test identifiers when reching the end_object/0 directive 
+	% collect all unit test identifiers when reching the end_object/0 directive
 	directive_expansion(end_object, Terms) :-
 		findall(test_(Identifier, Test), test_(Identifier, Test), Terms, [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]),
 		findall(Test, retract(test_(_, Test)), Tests),
@@ -1551,10 +1551,10 @@
 			(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx)
 	)).
 		epsilon(Epsilon) :-
-			{Epsilon is epsilon}.
+			Epsilon is epsilon.
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 		epsilon(Epsilon) :-
-			{Epsilon is nexttoward(1.0, 2.0) - 1.0}.
+			Epsilon is nexttoward(1.0, 2.0) - 1.0.
 	:- else.
 		epsilon(0.000000000001).
 	:- endif.

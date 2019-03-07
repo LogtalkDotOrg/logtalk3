@@ -32,6 +32,9 @@ to be expanded resulted from a previous expansion of the same goal (checked
 using term equality). After a discussion with Peter Ludemann and Jan Wielemaker
 on the SWI-Prolog public forum.
 
+* ADDED: Lint check for redundant uses of the `{}/1` compiler bypass control
+construct (controlled by the `suspicious_calls` compiler flag).
+
 * ADDED: Lint check for possible non-steadfast predicate definitions.
 
 * ADDED: Compiler option `steadfastness` to control output of steadfast

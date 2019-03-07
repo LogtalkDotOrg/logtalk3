@@ -22,9 +22,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2018/07/14,
+		date is 2019/03/07,
 		comment is 'Number data type predicates.'
 	]).
 
@@ -85,10 +85,10 @@
 			(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx)
 	)).
 		epsilon(Epsilon) :-
-			{Epsilon is epsilon}.
+			Epsilon is epsilon.
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 		epsilon(Epsilon) :-
-			{Epsilon is nexttoward(1.0, 2.0) - 1.0}.
+			Epsilon is nexttoward(1.0, 2.0) - 1.0.
 	:- else.
 		epsilon(0.000000000001).
 	:- endif.
