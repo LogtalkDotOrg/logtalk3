@@ -269,6 +269,11 @@
 
 	baz.
 
+	:- public(multi/0).
+	:- multifile(multi/0).
+	multi :-
+		!.
+
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 	logtalk::message_prefix_stream(comment, foo, ':> ', user_error) :-

@@ -11324,7 +11324,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Head),
 	(	Head = _::_ ->
 		true
-	;	Head = ':'(_, _)
+	;	Head = ':'(_, _) ->
+		true
+	;	'$lgt_pp_multifile_'(Head, _, _)
 	),
 	% clause for a multifile predicate
 	'$lgt_compiler_flag'(suspicious_calls, warning),
