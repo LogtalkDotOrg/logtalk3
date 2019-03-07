@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.19,
+		version is 1.21,
 		author is 'Paulo Moura',
-		date is 2018/10/11,
+		date is 2019/03/07,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -452,7 +452,7 @@
 			throw(instantiation_error)
 		;	throw(type_error(callable, Term))
 		).
-	
+
 	check(ground, Term) :-
 		(	ground(Term) ->
 			true
@@ -752,10 +752,10 @@
 		(	Term = (Head, List --> Body) ->
 			check(callable, Head),
 			check(list, List),
-			check(callable, Body)		
+			check(callable, Body)
 		;	Term = (Head --> Body) ->
 			check(callable, Head),
-			check(callable, Body)		
+			check(callable, Body)
 		;	throw(type_error(grammar_rule, Term))
 		).
 
@@ -901,21 +901,18 @@
 	% (assume a compliant implementation of stream_property/2)
 
 	check(stream, Term) :-
-		catch(stream_property(Term, _), error(Error,_), throw(Error)),
-		!.
+		catch(once(stream_property(Term, _)), error(Error,_), throw(Error)).
 
 	check(stream(Property), Term) :-
 		(	catch(stream_property(Term, Property), error(Error,_), throw(Error)) ->
 			true
 		;	throw(type_error(stream(Property), Term))
-		),
-		!.
+		).
 
 	check(stream_or_alias, Term) :-
 		(	atom(Term), stream_property(_, alias(Term)) ->
 			true
-		;	catch(stream_property(Term, _), error(Error,_), throw(Error)),
-			!
+		;	catch(once(stream_property(Term, _)), error(Error,_), throw(Error))
 		).
 
 	check(stream_or_alias(Property), Term) :-
@@ -970,7 +967,7 @@
 		).
 
 	% auxiliary predicates; we could use the Logtalk standard library
-	% for some of them but we prefer to avoid any object dependencies	
+	% for some of them but we prefer to avoid any object dependencies
 
 	code_upper_limit(Upper) :-
 		current_logtalk_flag(unicode, Unicode),
@@ -989,7 +986,7 @@
 		fail.
 	is_list([]).
 	is_list([_| Tail]) :-
-		is_list(Tail).	
+		is_list(Tail).
 
 	is_partial_list(Var) :-
 		var(Var),

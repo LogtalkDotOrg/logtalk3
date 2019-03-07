@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2018/04/04,
+		date is 2019/03/07,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -449,16 +449,12 @@
 			random(Random),
 			Arbitrary is Random * (Upper-Lower) + Lower
 		;	% not a number
-			repeat,
-			arbitrary(Type, Arbitrary),
-			Lower @=< Arbitrary, Arbitrary @=< Upper,
-			!
+			arbitrary_between(Type, Lower, Upper, Arbitrary)
 		).
 
 	arbitrary(property(Type, [Arbitrary]>>Goal), Arbitrary) :-
 		arbitrary(Type, Arbitrary),
-		{call(Goal)},
-		!.
+		{once(Goal)}.
 
 	arbitrary(one_of(_Type, Set), Arbitrary) :-
 		member(Arbitrary, Set).
@@ -468,10 +464,7 @@
 
 	arbitrary(ground(Type), Arbitrary) :-
 		Type \== var,
-		repeat,
-		arbitrary(Type, Arbitrary),
-		ground(Arbitrary),
-		!.
+		arbitrary_ground(Type, Arbitrary).
 
 	arbitrary(types(Types), Arbitrary) :-
 		member(Type, Types),
@@ -650,6 +643,18 @@
 
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies
+
+	arbitrary_between(Type, Lower, Upper, Arbitrary) :-
+		repeat,
+			arbitrary(Type, Arbitrary),
+			Lower @=< Arbitrary, Arbitrary @=< Upper,
+		!.
+
+	arbitrary_ground(Type, Arbitrary) :-
+		repeat,
+			arbitrary(Type, Arbitrary),
+			ground(Arbitrary),
+		!.
 
 	code_upper_limit(Upper) :-
 		current_logtalk_flag(unicode, Unicode),

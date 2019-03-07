@@ -9,8 +9,8 @@
 Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1.19
-| **Date:** 2018/10/11
+| **Version:** 1.21
+| **Date:** 2019/3/7
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(restrict)``
