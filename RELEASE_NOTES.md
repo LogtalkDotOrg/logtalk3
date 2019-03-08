@@ -32,12 +32,14 @@ to be expanded resulted from a previous expansion of the same goal (checked
 using term equality). After a discussion with Peter Ludemann and Jan Wielemaker
 on the SWI-Prolog public forum.
 
-* ADDED: Lint check for `->/2` and `*->` calls without an else part.
+* ADDED: Lint check for `->/2` and `*->/2` calls without an else part.
 
 * ADDED: Lint check for redundant uses of the `{}/1` compiler bypass control
 construct (controlled by the `suspicious_calls` compiler flag).
 
 * ADDED: Lint check for cuts in clauses for multifile predicates.
+
+* ADDED: Lint check for redundant uses of the `call/1` control construct.
 
 * ADDED: Lint check for possible non-steadfast predicate definitions.
 
