@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b07)).
+'$lgt_version_data'(logtalk(3, 25, 0, b08)).
 
 
 
@@ -11582,6 +11582,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % built-in meta-predicates
 
+'$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
+	callable(QGoal),
+	QGoal = _^_,
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
+ 	'$lgt_increment_compiling_warnings_counter',
+ 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable| Variables], Goal)))),
+	fail.
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
@@ -11613,6 +11623,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Gen, TGen, DGen, Ctx),
 	'$lgt_compile_body'(Test, TTest, DTest, Ctx).
 
+'$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
+	callable(QGoal),
+	QGoal = _^_,
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
+ 	'$lgt_increment_compiling_warnings_counter',
+ 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable| Variables], Goal)))),
+	fail.
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
@@ -13674,6 +13694,38 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_quantified_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
+
+
+
+% compute list of existentially qualified variables not occurring in the qualified goal
+
+'$lgt_missing_existential_variables'(QGoal, Variables, Goal) :-
+	'$lgt_decompose_quantified_body'(QGoal, Terms, Goal),
+	term_variables(Terms, ExistentialVariables),
+	term_variables(Goal, GoalVariables),
+	'$lgt_filter_missing_existential_variables'(ExistentialVariables, GoalVariables, Variables).
+
+
+'$lgt_decompose_quantified_body'(Term^Pred, [Term| Terms], Goal) :-
+	!,
+	(	var(Pred) ->
+		!,
+		fail
+	;	'$lgt_decompose_quantified_body'(Pred, Terms, Goal)
+	).
+
+'$lgt_decompose_quantified_body'(Goal, [], Goal).
+
+
+'$lgt_filter_missing_existential_variables'([], _, []).
+
+'$lgt_filter_missing_existential_variables'([Variable| ExistentialVariables], GoalVariables, Variables) :-
+	'$lgt_member_var'(Variable, GoalVariables),
+	!,
+	'$lgt_filter_missing_existential_variables'(ExistentialVariables, GoalVariables, Variables).
+
+'$lgt_filter_missing_existential_variables'([Variable| ExistentialVariables], GoalVariables, [Variable| Variables]) :-
+	'$lgt_filter_missing_existential_variables'(ExistentialVariables, GoalVariables, Variables).
 
 
 

@@ -39,6 +39,9 @@ construct (controlled by the `suspicious_calls` compiler flag).
 
 * ADDED: Lint check for cuts in clauses for multifile predicates.
 
+* ADDED: Lint check for `bagof/3` and `setof/3` calls with existentially
+qualified variables not occurring in the qualified goal.
+
 * ADDED: Lint check for redundant uses of the `call/1` control construct.
 
 * ADDED: Lint check for possible non-steadfast predicate definitions.
@@ -75,6 +78,8 @@ protocol to use arithmetic instead of standard order.
 
 * FIXED: Non-steadfast `list::flatten/2` predicate definition.
 
+* FIXED: Warnings printed by the new lint checks while compiling the libraries.
+
 Tests
 -----
 
@@ -85,6 +90,14 @@ Examples
 --------
 
 * UPDATED: The `errors` example to illustrate the new compiler lint checks.
+
+* FIXED: Warnings printed by the new lint checks while compiling the examples.
+
+Contributions
+-------------
+
+* FIXED: Harmless bug in the `verdi_neruda` contribution in a `bagof/3` call
+with a existentially qualified variable not occurring in the qualified goal.
 
 
 3.24.0 - February 28, 2019

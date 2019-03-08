@@ -3,9 +3,9 @@
 	implements(interpreterp)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Victor Lagerkvist',
-		date is 2010/06/13,
+		date is 2019/03/08,
 		comment is 'Best-first framework for general logic programs.'
 	]).
 
@@ -49,7 +49,7 @@
 	expand_state(_Cost0, state([Goal|Goals], Length1, Depth0, Bindings), Pairs, DB) :-
 		Depth is Depth0 + 1,
 		bagof(Cost - state(Body, Length, Depth, Goal),
-			  Depth0^Length1^Length2^(
+			  Length1^Length2^(
 				rule(Goal, Body, Length2, Goals, DB),
 				Length is Length1 + Length2 - 1,
 				counter::increment, %Inference counting.

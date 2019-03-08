@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.49,
+		version is 1.51,
 		author is 'Paulo Moura',
-		date is 2019/03/07,
+		date is 2019/03/08,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -681,6 +681,10 @@
 
 	suspicious_call_reason(multifile) -->
 		['in clause for multifile predicate'-[], nl].
+	suspicious_call_reason(existential_variables([Variable], Goal)) -->
+		['as existential variable ~w do not exist in goal ~q '-[Variable, Goal], nl].
+	suspicious_call_reason(existential_variables([Variable1, Variable2| Variables], Goal)) -->
+		['as existential variables ~w do not exist in goal ~q '-[[Variable1, Variable2| Variables], Goal], nl].
 
 	missing_entities([]) -->
 		[].

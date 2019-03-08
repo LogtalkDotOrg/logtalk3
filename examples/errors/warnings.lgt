@@ -313,3 +313,17 @@
 	:- endif.
 
 :- end_object.
+
+
+
+:- object(existential_variables).
+
+	foo(X,Y,Z,W,V) :-
+		bagof(X, Y^Z^baz(Z,W,V), _).
+
+	bar(X,Y,Z,W,V) :-
+		setof(X, Y^Z^baz(Z,W,V), _).
+
+	baz(_, _, _).
+
+:- end_object.

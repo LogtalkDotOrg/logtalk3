@@ -14,6 +14,7 @@ Categories
 
    arbitrary <arbitrary_0>
    assertions_messages <assertions_messages_0>
+   best_first <best_first_0>
    class_hierarchy <class_hierarchy_0>
    code_metric <code_metric_0>
    code_metrics_messages <code_metrics_messages_0>
@@ -45,6 +46,7 @@ Objects
 
 
 
+   a_star_interpreter(W) <a_star_interpreter_1>
    after_event_registry <after_event_registry_0>
    assertions <assertions_0>
    assertions(Mode) <assertions_1>
@@ -54,7 +56,9 @@ Objects
    backend_random <backend_random_0>
    before_event_registry <before_event_registry_0>
    benchmark_generators <benchmark_generators_0>
+   bfs_interpreter <bfs_interpreter_0>
    bintree <bintree_0>
+   bup_interpreter <bup_interpreter_0>
    callable <callable_0>
    cc_metric <cc_metric_0>
    character <character_0>
@@ -70,6 +74,7 @@ Objects
    debug_messages <debug_messages_0>
    debugger <debugger_0>
    demodb <demodb_0>
+   dfs_interpreter <dfs_interpreter_0>
    diagrams <diagrams_0>
    diagrams(Format) <diagrams_1>
    difflist <difflist_0>
@@ -100,6 +105,7 @@ Objects
    heuristic_expansion(A) <heuristic_expansion_1>
    hook_pipeline(Pipeline) <hook_pipeline_1>
    hook_set(Set) <hook_set_1>
+   iddfs_interpreter(Increment) <iddfs_interpreter_1>
    inheritance_diagram <inheritance_diagram_0>
    inheritance_diagram(Format) <inheritance_diagram_1>
    integer <integer_0>
@@ -150,6 +156,7 @@ Objects
    sample <sample_0>
    set <set_0>
    set(Type) <set_1>
+   shell(Interpreters) <shell_1>
    shell_expansion(A) <shell_expansion_1>
    size_metric <size_metric_0>
    streamvars <streamvars_0>
