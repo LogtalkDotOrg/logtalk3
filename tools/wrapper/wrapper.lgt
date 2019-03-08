@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.10,
+		version is 0.11,
 		author is 'Paulo Moura',
-		date is 2017/08/10,
+		date is 2019/03/08,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is [''.pl'',''.pro'',''.prolog''])',
@@ -32,7 +32,7 @@
 			'exclude_files(Files) option' - 'list of Prolog source files names to exclude (default is [])',
 			'exclude_directories(Files) option' - 'list of sub-directory names to exclude (default is [])',
 			'include_wrapped_files(Boolean)' - 'generate include/1 directives for the wrapped Prolog source files (default is true)'
-		]		
+		]
 	]).
 
 	:- uses(logtalk, [
@@ -303,7 +303,7 @@
 		directories(Directories, Extensions, Files1, Files).
 
 	directories(Directories) :-
-		directories(Directories, []).		
+		directories(Directories, []).
 
 	directory_prolog_files(Directory, Extensions, DirectoryFiles) :-
 		os::directory_files(Directory, Files),
@@ -401,7 +401,7 @@
 		logtalk_load(Path, [hook(Self), source_data(on), reload(always)| LintOptions]).
 
 	logtalk_load_lint_options([
-		portability(warning), 
+		portability(warning),
 		unknown_predicates(warning),
 		undefined_predicates(warning),
 		unknown_entities(warning),
@@ -420,7 +420,7 @@
 		missing_private_directives_advise(Object),
 		missing_predicate_directives_advise(Object),
 		fail.
-	generate_advise.		
+	generate_advise.
 
 	print_advise :-
 		file_being_advised_(File, _, _, Object),
@@ -520,8 +520,7 @@
 			provides_used_predicate(Object, Predicate),
 			Predicates
 		),
-		Directive =.. [(public), Predicates],
-		assertz(add_directive_(Object, Directive)),
+		assertz(add_directive_(Object, public(Predicates))),
 		fail.
 	missing_public_directives_advise(_).
 
@@ -543,8 +542,7 @@
 			internal_dynamic_predicate(Object, Predicate),
 			Predicates
 		),
-		Directive =.. [(private), Predicates],
-		assertz(add_directive_(Object, Directive)),
+		assertz(add_directive_(Object, private(Predicates))),
 		fail.
 	missing_private_directives_advise(_).
 
@@ -556,9 +554,7 @@
 	% predicates declared as multifile
 	missing_predicate_directives_advise(Object) :-
 		missing_predicate_directive_(Object, (public), Predicate),
-		PublicDirective =.. [(public), Predicate],
-		MultifileDirective =.. [(multifile), Predicate],
-		assertz(add_directive_(Object, MultifileDirective, PublicDirective)),
+		assertz(add_directive_(Object, public(Predicate), multifile(Predicate))),
 		fail.
 	% other missing directives
 	missing_predicate_directives_advise(Object) :-
@@ -604,8 +600,7 @@
 
 	missing_uses_directives_advise(Object) :-
 		missing_uses_directive(Object, Other, Predicates),
-		Directive =.. [uses, Other, Predicates],
-		assertz(add_directive_(Object, Directive)),
+		assertz(add_directive_(Object, uses(Other, Predicates))),
 		fail.
 	missing_uses_directives_advise(_).
 
@@ -629,8 +624,7 @@
 
 	missing_use_module_directives_advise(Object) :-
 		missing_use_module_directive(Object, Module, Predicates),
-		Directive =.. [use_module, Module, Predicates],
-		assertz(add_directive_(Object, Directive)),
+		assertz(add_directive_(Object, use_module(Module, Predicates))),
 		fail.
 	missing_use_module_directives_advise(_).
 
@@ -838,7 +832,7 @@
 		[':- ~q.'-[Directive], nl, nl].
 
 	message_tokens(add_directive(Directive, NewDirective)) -->
-		[	
+		[
 			'% before the directive:'-[], nl,
 			'% :- ~q'-[Directive], nl,
 			'% add the directive:'-[], nl, nl,

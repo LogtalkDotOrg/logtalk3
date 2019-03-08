@@ -44,6 +44,8 @@ qualified variables not occurring in the qualified goal.
 
 * ADDED: Lint check for redundant uses of the `call/1` control construct.
 
+* ADDED: Lint check for redundant uses of the `=../1` standard predicate.
+
 * ADDED: Lint check for possible non-steadfast predicate definitions.
 
 * ADDED: Compiler option `steadfastness` to control output of steadfast
@@ -80,6 +82,12 @@ protocol to use arithmetic instead of standard order.
 
 * FIXED: Warnings printed by the new lint checks while compiling the libraries.
 
+Tools
+-----
+
+* FIXED: Warnings printed by the new lint checks while compiling the `wrapper`
+tool.
+
 Tests
 -----
 
@@ -98,6 +106,15 @@ Contributions
 
 * FIXED: Harmless bug in the `verdi_neruda` contribution in a `bagof/3` call
 with a existentially qualified variable not occurring in the qualified goal.
+
+* FIXED: Warnings printed by the new lint checks while compiling the PDDL
+parser.
+
+Ports
+-----
+
+* FIXED: Warnings printed by the new lint checks while compiling a Metagol
+example.
 
 
 3.24.0 - February 28, 2019

@@ -39,13 +39,14 @@
 %%              )
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- object(pddl,
 	imports(read_file)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2016/05/18,
+		date is 2019/03/08,
 		comment is 'Simple parser of PDDL 3.0 files.'
 	]).
 
@@ -150,7 +151,7 @@
 
 	variable(Variable) -->
 		['?'], name(Name),
-		{Variable =.. [?, Name]}.
+		{Variable = '?'(Name)}.
 
 	atomic_function_skeleton(f(Symbol, Variables)) -->
 		['('], function_symbol(Symbol), typed_list(variable, Variables), [')'].
@@ -425,7 +426,7 @@
 		['('], multi_op(Operator), metric_f_exp(Expression1), oneOrMore(metric_f_exp, Expressions), [')'].
 	metric_f_exp(Expression) -->
 		['(', '-'], metric_f_exp(Expression1), [')'],
-		{Expression =.. [-, Expression1]}.
+		{Expression = '-'(Expression1)}.
 	metric_f_exp(Number) -->
 		number(Number).
 	metric_f_exp(Function) -->

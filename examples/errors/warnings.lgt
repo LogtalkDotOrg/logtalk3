@@ -327,3 +327,12 @@
 	baz(_, _, _).
 
 :- end_object.
+
+
+
+:- object(redundant_univ).
+
+	foo :-
+		Term =.. [foo, bar, baz].
+
+:- end_object.

@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b08)).
+'$lgt_version_data'(logtalk(3, 25, 0, b09)).
 
 
 
@@ -11509,6 +11509,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(system_error, TPred, DPred, Ctx) :-
 	!,
 	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
+
+% term creation and decomposition predicates
+
+'$lgt_compile_body'(Term =.. List, _, _, Ctx) :-
+	'$lgt_is_list'(List),
+	List = [Functor| _],
+	nonvar(Functor),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	ListTerm =.. List,
+ 	'$lgt_increment_compiling_warnings_counter',
+ 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Term =.. List, [Term = ListTerm])),
+	fail.
 
 % lambda expressions
 
