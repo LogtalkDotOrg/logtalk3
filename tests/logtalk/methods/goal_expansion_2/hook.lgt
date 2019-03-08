@@ -22,7 +22,7 @@
 	implements(expanding)).
 
 	% tests cases where conditionals are added or removed
-	goal_expansion(one(G), (G -> true)).
+	goal_expansion(one(G), (G -> true; fail)).
 	goal_expansion((true -> G), G).
 
 	goal_expansion(c(X), d(X)).

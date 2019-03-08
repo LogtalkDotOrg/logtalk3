@@ -289,3 +289,27 @@
 	max(_, Y, Y).
 
 :- end_object.
+
+
+
+:- object(missing_else).
+
+	foo :-
+		bar -> baz.
+
+	bar.
+
+	baz.
+
+	:- if(predicate_property('*->'(_,_), built_in)).
+
+		qux :-
+			quux -> corge.
+
+		quux.
+
+		corge.
+
+	:- endif.
+
+:- end_object.

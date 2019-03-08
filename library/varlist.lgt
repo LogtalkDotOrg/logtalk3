@@ -22,9 +22,9 @@
 	implements(varlistp)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2019/01/03,
+		date is 2019/03/08,
 		comment is 'List of variables predicates.',
 		see_also is [list, list(_), numberlist, difflist]
 	]).
@@ -121,7 +121,8 @@
 
 	is_permutation([], []).
 	is_permutation([Head| Tail], Permutation) :-
-		select(Head, Permutation, Remaining) ->
+		select(Head, Permutation, Remaining),
+		!,
 		is_permutation(Tail, Remaining).
 
 	prefix([], _).

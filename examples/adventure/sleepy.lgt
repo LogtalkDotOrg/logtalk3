@@ -26,9 +26,9 @@
 :- object(sleepy).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'David Matuszek, Villanova University. Adapted to Logtalk by Paulo Moura.',
-		date is 2010/09/10,
+		date is 2019/03/08,
 		comment is 'Sleepy - A Sample Adventure Game.'
 	]).
 
@@ -246,7 +246,7 @@
 		nl,
 		!, fail.
 
-	sleep :- 
+	sleep :-
 		(i_am_holding(flyswatter); at(flyswatter, bed)),
 		write('What? Sleep with a dirty old flyswatter?'), nl,
 		nl,
@@ -312,7 +312,7 @@
 			retract(at(fly, bedroom)),
 			assertz(at(fly, den))
 		;	at(fly, den),
-			lit(bedroom) ->
+			lit(bedroom),
 			retract(at(fly, den)),
 			assertz(at(fly, bedroom))
 		).

@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.15,
+		version is 1.16,
 		author is 'Paulo Moura',
-		date is 2019/01/03,
+		date is 2019/03/08,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -263,7 +263,7 @@
 		prefix(Tail-Back, Tail2-Back2).
 
 	prefix(Prefix, Length, List) :-
-		(	var(Length) ->	
+		(	var(Length) ->
 			prefix(Prefix, 0, Length, List)
 		;	prefix(Prefix, 0, Length, List),
 			!
@@ -286,7 +286,7 @@
 		proper_prefix(PrefixTail-Back1, ListTail-Back2).
 
 	proper_prefix(Prefix, Length, List) :-
-		(	var(Length) ->	
+		(	var(Length) ->
 			proper_prefix(Prefix, 0, Length, List)
 		;	proper_prefix(Prefix, 0, Length, List),
 			!
@@ -399,7 +399,8 @@
 		select(Head, Tail-Back, Tail2-Back).
 
 	selectchk(Elem, List-Back, Remaining-Back) :-
-		select(Elem, List-Back, Rest-Back) ->
+		select(Elem, List-Back, Rest-Back),
+		!,
 		unify_with_occurs_check(Remaining, Rest).
 
 	select(Old, OldList-Back, New, NewList-Back) :-
@@ -414,7 +415,8 @@
 		select(Old, OldTail-Back, New, NewTail-Back).
 
 	selectchk(Old, OldList-Back, New, NewList0-Back) :-
-		select(Old, OldList-Back, New, NewList-Back) ->
+		select(Old, OldList-Back, New, NewList-Back),
+		!,
 		unify_with_occurs_check(NewList0, NewList).
 
 	sort(Difflist, Sorted) :-

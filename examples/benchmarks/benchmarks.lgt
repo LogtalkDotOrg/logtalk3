@@ -199,21 +199,21 @@
 
 	do_benchmark(s31, N) :-
 		{my_repeat(N)},
-			({maze_solve(1, 7, _)} -> true),
+			({maze_solve(1, 7, _)} -> true; fail),
 		fail.
 	do_benchmark(s31, _).
 
 	:- if(current_logtalk_flag(modules, supported)).
 	do_benchmark(s32, N) :-
 		{my_repeat(N)},
-			(':'(module, mod_maze_solve(1, 7, _)) -> true),
+			(':'(module, mod_maze_solve(1, 7, _)) -> true; fail),
 		fail.
 	do_benchmark(s32, _).
 	:- endif.
 
 	do_benchmark(s33, N) :-
 		{my_repeat(N)},
-			(maze::solve(1, 7, _) -> true),
+			(maze::solve(1, 7, _) -> true; fail),
 		fail.
 	do_benchmark(s33, _).
 

@@ -33,8 +33,8 @@ Assuming, as we do, that fairy-tale characters either always lie or always tell 
 :- object(jam_thief).
 
 	:- info([
-		version is 1.0,
-		date is 2004/4/29,
+		version is 1.01,
+		date is 2019/03/08,
 		author is 'Paulo Moura',
 		comment is 'Who Stole the Jam logical puzzle'
 	]).
@@ -61,13 +61,13 @@ Assuming, as we do, that fairy-tale characters either always lie or always tell 
 
 	thief(Thief, [Reason1, Reason2, Reason3]) :-
 		(	claim(dormouse, Thief) -> Reason1 = trusty(dormouse)
-		;	\+ claim(dormouse, Thief) -> Reason1 = liar(dormouse)
+		;	\+ claim(dormouse, Thief), Reason1 = liar(dormouse)
 		),
 		(	claim(hare, Thief) -> Reason2 = trusty(hare)
-		;	\+ claim(hare, Thief) -> Reason2 = liar(hare)
+		;	\+ claim(hare, Thief), Reason2 = liar(hare)
 		),
 		(	claim(hatter, Thief) -> Reason3 = trusty(hatter)
-		;	\+ claim(hatter, Thief) -> Reason3 = liar(hatter)
+		;	\+ claim(hatter, Thief), Reason3 = liar(hatter)
 		),
 		(	\+ claim(hare, Thief)
 		;	\+ claim(dormouse, Thief)

@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Richard O''Keefe (main predicates); adapted to Logtalk by Paulo Moura.',
-		date is 2018/08/17,
+		date is 2019/03/08,
 		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.',
 		see_also is [set(_)]
 	]).
@@ -180,7 +180,8 @@
 		select(Head, Tail, Tail2).
 
 	selectchk(Elem, List, Remaining) :-
-		select(Elem, List, Rest) ->
+		select(Elem, List, Rest),
+		!,
 		Remaining = Rest.
 
 	subset([], _) :- !.
@@ -195,7 +196,6 @@
 
 	subtract(Set, [], Set) :- !.
 	subtract([], _, []) :- !.
-
 	subtract([Head1| Tail1], [Head2| Tail2], Difference) :-
 		compare(Order, Head1, Head2),
 		subtract(Order, Head1, Tail1, Head2, Tail2, Difference).

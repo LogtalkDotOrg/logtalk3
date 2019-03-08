@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.14,
+		version is 2.15,
 		author is 'Paulo Moura',
-		date is 2018/02/04,
+		date is 2019/03/08,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -303,7 +303,7 @@
 		{xref_diagram::diagram_name_suffix(Suffix0)},
 		atom_concat('_category', Suffix0, Suffix),
 		NodeOptions0 = Options,
-		(	category_property(Category, defines(_, DefinesProperties)) ->
+		(	category_property(Category, defines(_, DefinesProperties)),
 			memberchk(number_of_clauses(NumberOfClauses), DefinesProperties),
 			NumberOfClauses > 0 ->
 			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions)

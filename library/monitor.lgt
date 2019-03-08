@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- category(monitor,
 	implements(monitorp)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2009/10/8,
+		date is 2019/03/08,
 		comment is 'Monitor predicates.'
 	]).
 
@@ -39,8 +38,8 @@
 
 	monitor_activated :-
 		self(Self),
-		current_event(_, _, _, _, Self) ->
-		true.
+		current_event(_, _, _, _, Self),
+		!.
 
 	activate_monitor :-
 		self(Self),

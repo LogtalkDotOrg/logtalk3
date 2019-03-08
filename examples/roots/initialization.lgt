@@ -21,9 +21,9 @@
 :- category(initialization).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2019/03/08,
 		comment is 'Object initialization protocol.'
 	]).
 
@@ -145,14 +145,14 @@
 
 	valid_init_options([]).
 	valid_init_options([Option| Options]) :-
-		::valid_init_option(Option) ->
+		::valid_init_option(Option),
 		valid_init_options(Options).
 
 	valid_init_option(_).
 
 	process_init_options([]).
 	process_init_options([Option| Options]) :-
-		::process_init_option(Option) ->
+		::process_init_option(Option),
 		process_init_options(Options).
 
 	process_init_option(_Option) :-
@@ -170,14 +170,14 @@
 
 	valid_free_options([]).
 	valid_free_options([Option| Options]) :-
-		::valid_free_option(Option) ->
+		::valid_free_option(Option),
 		valid_free_options(Options).
 
 	valid_free_option(_).
 
 	process_free_options([]).
 	process_free_options([Option| Options]) :-
-		::process_free_option(Option) ->
+		::process_free_option(Option),
 		process_free_options(Options).
 
 	process_free_option(_Option) :-

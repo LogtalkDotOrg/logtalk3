@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.11,
+		version is 4.12,
 		author is 'Paulo Moura',
-		date is 2018/10/07,
+		date is 2019/03/08,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1319,7 +1319,7 @@
 		functor(Entity, Name, Arity),
 		write_xml_cdata_element(Stream, functor, [], Name/Arity),
 		write_xml_close_tag(Stream, entity),
-		write_index_key_entities(Entities, Stream).	
+		write_index_key_entities(Entities, Stream).
 
 	default_option(entity_xsl_file, 'logtalk_entity_to_xml.xsl').
 	default_option(index_xsl_file, 'logtalk_index_to_xml.xsl').
@@ -1377,6 +1377,7 @@
 			Value = Value2
 		;	default_option(Option, Value2) ->
 			Value = Value2
+		;	fail
 		).
 
 	set_option(Option, Value) :-

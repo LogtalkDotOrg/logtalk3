@@ -5,7 +5,7 @@
  * Copyright (C) 2005-2013 John Fletcher
  *
  * Current Release: $Revision: 3.5 $
- * 
+ *
  * TERMS AND CONDITIONS:
  *
  * This program is offered free of charge, as unsupported source code. You may
@@ -17,9 +17,9 @@
 :- object(xml).
 
 	:- info([
-		version is 3.6,
+		version is 3.7,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
-		date is 2018/10/09,
+		date is 2019/03/08,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
 		license is 'This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
@@ -182,8 +182,7 @@
 		initial_context( Controls, Context ),
 		(	xml_declaration( Attributes0, XML, XML1 ) ->
 			Attributes = Attributes0
-		;	otherwise ->
-			XML1 = XML,
+		;	XML1 = XML,
 			Attributes = []
 		),
 		xml_to_document0( XML1, Context, Terms, [], WellFormed ),
@@ -215,8 +214,7 @@
 			layouts( Chars, Context, [Char|T], T, Terms, Residue, WF )
 		;	void_context( Context ) ->
 			unparsed( [Char|Chars], Context, Terms, Residue, WF )
-		;	otherwise ->
-			Terms = [pcdata([Char|Chars1])|Terms1],
+		;	Terms = [pcdata([Char|Chars1])|Terms1],
 			acquire_pcdata( Chars, Context, Chars1, Terms1, Residue, WF )
 		).
 
@@ -232,8 +230,7 @@
 			layouts( Chars, Context, Plus, Minus1, Terms, Residue, WF )
 		;	void_context( Context ) ->
 			unparsed( [Char|Chars], Context, Terms, Residue, WF )
-		;	otherwise ->
-			Terms = [pcdata(Plus)|Terms1],
+		;	Terms = [pcdata(Plus)|Terms1],
 			Minus = [Char|Chars1],
 			context_update( space_preserve, Context, true, Context1 ),
 			acquire_pcdata( Chars, Context1, Chars1, Terms1, Residue, WF )
@@ -247,8 +244,7 @@
 			markup_structure( Chars, Context, Terms, Residue, WF )
 		;	Char =:= 0'& ->
 			reference_in_pcdata( Chars, Context, Chars1, Terms, Residue, WF )
-		;	otherwise ->
-			Chars1 = [Char|Chars2],
+		;	Chars1 = [Char|Chars2],
 			acquire_pcdata( Chars, Context, Chars2, Terms, Residue, WF )
 		).
 
@@ -264,8 +260,7 @@
 			declaration_acquisition( Chars1, Context, Terms, Residue, WF )
 		;	open_tag(Tag,Context,Attributes,Type, Chars, Chars2 ) ->
 			push_tag( Tag, Chars2, Context, Attributes, Type, Terms, Residue, WF )
-		;	otherwise ->
-			unparsed( [0'<|Chars], Context, Terms, Residue, WF ) %'
+		;	unparsed( [0'<|Chars], Context, Terms, Residue, WF ) %'
 		).
 
 	push_tag( Tag, Chars, Context, Attributes, Type, Terms, Residue, WF ) :-
@@ -281,8 +276,7 @@
 		(	append( NSChars, [0':|TagChars1], TagChars ), %'
 			specific_namespace( NSChars, Context1, SpecificNamespace ) ->
 			Namespace0 = SpecificNamespace
-		;	otherwise ->
-			NSChars = "",
+		;	NSChars = "",
 			TagChars1 = TagChars,
 			default_namespace( Context1, Namespace0 )
 		),
@@ -290,8 +284,7 @@
 		(	Namespace0 == CurrentNamespace ->
 			Term = element(Tag, Attributes, Contents),
 			Context2 = Context1
-		;	otherwise ->
-			Term = namespace( Namespace0, NSChars,
+		;	Term = namespace( Namespace0, NSChars,
 						element(Tag, Attributes, Contents)
 						),
 			context_update( current_namespace, Context1, Namespace0, Context2 )
@@ -310,8 +303,7 @@
 			Target \== xml ->
 			Terms = [instructions(Target, Processing)|Terms1],
 			xml_to_document0( Rest, Context, Terms1, Residue, WellFormed )
-		;	otherwise ->
-			unparsed( [0'<,0'?|Chars], Context, Terms, Residue, WellFormed )
+		;	unparsed( [0'<,0'?|Chars], Context, Terms, Residue, WellFormed )
 		).
 
 	declaration_acquisition( Chars, Context, Terms, Residue, WF ) :-
@@ -319,8 +311,7 @@
 			declaration_parse( Type, Context, Term, Context1, Chars1, Rest ) ->
 			Terms = [Term|Terms1],
 			xml_to_document0( Rest, Context1, Terms1, Residue, WF )
-		;	otherwise ->
-			unparsed( [0'<,0'!|Chars], Context, Terms, Residue, WF )
+		;	unparsed( [0'<,0'!|Chars], Context, Terms, Residue, WF )
 		).
 
 	open_tag( Tag, Namespaces, Attributes, Termination ) -->
@@ -358,8 +349,7 @@
 		(	declaration_type1( Char1, Char2, Chars1, Class0, Residue ) ->
 			Class = Class0,
 			Rest = Residue
-		;	otherwise ->
-			Class = generic,
+		;	Class = generic,
 			Rest = Chars
 		).
 
@@ -375,8 +365,7 @@
 			Terms = [],
 			Residue = Rest,
 			WellFormed = true
-		;	otherwise ->
-			unparsed( [0'<,0'/|Chars], Context, Terms, Residue, WellFormed )
+		;	unparsed( [0'<,0'/|Chars], Context, Terms, Residue, WellFormed )
 		).
 
 	closing_tag_name( Tag ) -->
@@ -400,8 +389,7 @@
 			Minus = [0'&|Chars1], %'
 			Terms = [pcdata(Plus)|Terms1],
 			acquire_pcdata( Chars, Context, Chars1, Terms1, Residue, WF )
-		;	otherwise ->
-			unparsed( [0'&|Chars], Context, Terms, Residue, WF ) %'
+		;	unparsed( [0'&|Chars], Context, Terms, Residue, WF ) %'
 		).
 
 	reference_in_pcdata( Chars0, Context, Chars1, Terms, Residue, WF ) :-
@@ -415,8 +403,7 @@
 		;	allow_ampersand( Context ) ->
 			Chars1 = [0'&|Chars2],
 			acquire_pcdata( Chars0, Context, Chars2, Terms, Residue, WF )
-		;	otherwise ->
-			Chars1 = [],
+		;	Chars1 = [],
 			unparsed( [0'&|Chars0], Context, Terms, Residue, WF )
 		).
 
@@ -436,8 +423,7 @@
 		;	member( "xml:space"="preserve", Attributes0 ) ->
 			Attributes = Attributes0,
 			context_update( space_preserve, Context0, true, Context )
-		;	otherwise ->
-			Context = Context0,
+		;	Context = Context0,
 			Attributes = Attributes0
 		).
 
@@ -450,8 +436,7 @@
 			specific_namespace( NSChars, Context, Namespace ),
 			current_namespace( Context, Namespace ) ->
 			atom_codes( Name, NameChars1 )
-		;	otherwise ->
-			atom_codes( Name, NameChars )
+		;	atom_codes( Name, NameChars )
 		),
 		input_attributes( Attributes0, Context, Attributes ).
 
@@ -571,8 +556,7 @@
 			Minus = Plus
 		;	Char =:= 0'& ->
 			reference_in_entity( Namespaces, Quote, String, Plus, Minus )
-		;	otherwise ->
-			String = [Char|String1],
+		;	String = [Char|String1],
 			entity_value( Quote, Namespaces, String1, Plus, Minus )
 		).
 
@@ -590,8 +574,7 @@
 		;	Char > 32, Char \== 160 ->
 			String = [Char|String1],
 			attribute_layouts( Quote, Namespaces, false, String1, Plus, Minus )
-		;	otherwise ->
-			attribute_leading_layouts( Quote, Namespaces, String, Plus, Minus )
+		;	attribute_leading_layouts( Quote, Namespaces, String, Plus, Minus )
 		).
 
 	attribute_layouts( _Quote, _Namespaces, _Layout, [], [], [] ).
@@ -604,12 +587,10 @@
 		;	Char > 32, Char \== 160 ->
 			(	Layout == true ->
 				String = [0' ,Char|String1] %'
-			;	otherwise ->
-				String = [Char|String1]
+			;	String = [Char|String1]
 			),
 			attribute_layouts( Quote, Namespaces, false, String1, Plus, Minus )
-		;	otherwise ->
-			attribute_layouts( Quote, Namespaces, true, String, Plus, Minus )
+		;	attribute_layouts( Quote, Namespaces, true, String, Plus, Minus )
 		).
 
 	ref_in_attribute_layout( NS, Quote, String, Plus, Minus ) :-
@@ -620,7 +601,7 @@
 			defined_entity( Name, NS, Text ) ->
 			append( Text, Suffix, Mid ),
 			attribute_leading_layouts( Quote, NS, String, Mid, Minus )
-		;	otherwise -> % Just & is okay in a value
+		;	% Just & is okay in a value
 			String = [0'&|String1], %'
 			attribute_layouts( Quote, NS, false, String1, Plus, Minus )
 		).
@@ -629,8 +610,7 @@
 		(	standard_character_entity( Char, Plus, Mid ) ->
 			(	Layout == true ->
 				String = [0' ,Char|String1] %'
-			;	otherwise ->
-				String = [Char|String1]
+			;	String = [Char|String1]
 			),
 			Layout1 = false
 		;	entity_reference_name( Name, Plus, Suffix ),
@@ -638,7 +618,7 @@
 			String = String1,
 			append( Text, Suffix, Mid ),
 			Layout1 = Layout
-		;	otherwise -> % Just & is okay in a value
+		;	% Just & is okay in a value
 			Mid = Plus,
 			String = [0'&|String1], %'
 			Layout1 = false
@@ -656,6 +636,7 @@
 			defined_entity( Name, Namespaces, Text ) ->
 			String = String1,
 			append( Text, Suffix, Mid )
+		;	fail
 		),
 		entity_value( Quote, Namespaces, String1, Mid, Minus ).
 
@@ -734,8 +715,7 @@
 	spaces( [Char|Chars0], Chars1 ) :-
 		(	Char =< 32 ->
 			spaces( Chars0, Chars1 )
-		;	otherwise ->
-			Chars1 = [Char|Chars0]
+		;	Chars1 = [Char|Chars0]
 		).
 
 	nmtoken( Name ) -->
@@ -1014,8 +994,7 @@
 	pp_name( Name ) :-
 		(	possible_operator( Name ) ->
 			write( '(' ), write( Name ), write( ')=' )
-		;	otherwise ->
-			writeq( Name ), write( '=' )
+		;	writeq( Name ), write( '=' )
 		).
 
 	possible_operator( (abolish) ).
@@ -1131,6 +1110,7 @@
 			Data0 = Data1
 		;	Key0 @> Key1 ->
 			map_member( Key0, Rest, Data0 )
+		;	fail
 		).
 
 	/* map_store( +Map0, +Key, +Data, ?Map1 ) is true if Map0 is an ordered map
@@ -1150,7 +1130,7 @@
 			Map = [Key-Data|Map0]
 		;	Key @< Key0 ->
 			Map = [Key-Data,Key0-Data0|Map0]
-		;	otherwise -> % >
+		;	% >
 			Map = [Key0-Data0|Map1],
 			map_store( Map0, Key, Data, Map1 )
 		).
@@ -1166,23 +1146,19 @@
 		empty_map( Empty ),
 		(	member( extended_characters(false), Controls ) ->
 			Entities = Empty
-		;	otherwise ->
-			extended_character_entities(Entities)
+		;	extended_character_entities(Entities)
 		),
 		(	member( format(false), Controls ) ->
 			PreserveSpace = true
-		;	otherwise ->
-			PreserveSpace = false
+		;	PreserveSpace = false
 		),
 		(	member( remove_attribute_prefixes(true), Controls ) ->
 			RemoveAttributePrefixes = true
-		;	otherwise ->
-			RemoveAttributePrefixes = false
+		;	RemoveAttributePrefixes = false
 		),
 		(	member( allow_ampersand(true), Controls ) ->
 			AllowAmpersand = true
-		;	otherwise ->
-			AllowAmpersand = false
+		;	AllowAmpersand = false
 		).
 
 	context_update( current_namespace, Context0, URI, Context1 ) :-
@@ -1281,8 +1257,7 @@
 		(	member( Char, Chars ),
 			not_shorthand( Char ) ->
 			write( Chars )
-		;	otherwise ->
-			put_quote,
+		;	put_quote,
 			pp_string1( Chars ),
 			put_quote
 		).
@@ -1306,8 +1281,7 @@
 			Chars = [10|Chars1] ->
 			put_code( 10 ),
 			pp_string1( Chars1 )
-		;	otherwise ->
-			put_code( Char ),
+		;	put_code( Char ),
 			pp_string1( Chars )
 		).
 
@@ -1343,8 +1317,7 @@
 	lowercase( [Char|Chars], [Lower|LowerCase] ) :-
 		(	Char >= 0'A, Char =< 0'Z ->
 			Lower is Char + 0'a - 0'A
-		;	otherwise ->
-			Lower = Char
+		;	Lower = Char
 		),
 		lowercase( Chars, LowerCase ).
 
@@ -1783,9 +1756,8 @@
 	generated_attributes( [Name=Value|Attributes], Format0, Format  ) -->
 		{(	Name == 'xml:space',
 			Value="preserve" ->
-				Format1 = false
-		  ; otherwise ->
-				Format1 = Format0
+			Format1 = false
+		  ;	Format1 = Format0
 		  )},
 		" ",
 		generated_name( Name ),
@@ -1866,8 +1838,7 @@
 	quoted_string1( [Char|Chars], NoLeadingLayouts ) :-
 		(	Char > 32 ->
 			NoLeadingLayouts = [Char|Chars]
-		;	otherwise ->
-			quoted_string1( Chars, NoLeadingLayouts )
+		;	quoted_string1( Chars, NoLeadingLayouts )
 		).
 
 	quoted_string2( [], _LayoutPlus, _LayoutMinus, List, List ).
@@ -1894,8 +1865,7 @@
 			number_codes( Char, Codes ),
 			pcdata_8bits_plus( Codes, LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
-		;	otherwise ->
-			LayoutPlus = LayoutPlus1,
+		;	LayoutPlus = LayoutPlus1,
 			LayoutMinus = LayoutMinus1,
 			Plus = Plus1
 		),
@@ -1923,8 +1893,7 @@
 		;	legal_xml_unicode( Char ) ->
 			number_codes( Char, Codes ),
 			pcdata_8bits_plus( Codes, Plus, Mid )
-		;	otherwise ->
-			Plus = Mid
+		;	Plus = Mid
 		),
 		pcdata_generation( Chars, Mid, Minus ).
 
@@ -2116,8 +2085,6 @@
 	legal_xml_unicode( Code ) :-
 		Code >= 65536,
 		Code =< 1114111.
-
-	otherwise.
 
 	/* For reference, this is a comprehensive recognizer for namechar, based on
 	 * the definition of in http://www.w3.org/TR/2000/REC-xml-20001006 .

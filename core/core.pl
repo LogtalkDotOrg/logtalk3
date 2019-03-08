@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b05)).
+'$lgt_version_data'(logtalk(3, 25, 0, b06)).
 
 
 
@@ -11302,12 +11302,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_fix_disjunction_left_side'(DPred10, DPred1),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
 
+'$lgt_compile_body'('*->'(Pred1, Pred2), _, _, Ctx) :-
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	callable(Pred1),
+	callable(Pred2),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+ 	'$lgt_increment_compiling_warnings_counter',
+ 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), [(Pred1, Pred2)])),
+	fail.
 '$lgt_compile_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
 
+'$lgt_compile_body'((Pred1 -> Pred2), _, _, Ctx) :-
+	callable(Pred1),
+	callable(Pred2),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+ 	'$lgt_increment_compiling_warnings_counter',
+ 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), [(once(Pred1), Pred2)])),
+	fail.
 '$lgt_compile_body'((Pred1 -> Pred2), (TPred1 -> TPred2), (DPred1 -> DPred2), Ctx) :-
 	!,
 	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
