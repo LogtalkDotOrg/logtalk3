@@ -46,14 +46,14 @@ qualified variables not occurring in the qualified goal.
 
 * ADDED: Lint check for redundant uses of the `=../1` standard predicate.
 
+* ADDED: Lint check for `is/2` goals that are always false due to the first
+argument being a term other than a variable or a number.
+
 * ADDED: Lint check for possible non-steadfast predicate definitions.
 
 * ADDED: Compiler option `steadfastness` to control output of steadfast
 predicate warnings. Default value is `silent` due to the possibility of
 false positives.
-
-* ADDED: Detect and report `is/2` goals that are always false due to the first
-argument being a term other than a variable or a number.
 
 Prolog adapter and integration files
 ------------------------------------

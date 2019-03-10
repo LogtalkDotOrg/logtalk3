@@ -12,8 +12,8 @@
 Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.
 
 | **Author:** Paulo Moura
-| **Version:** 1.0
-| **Date:** 2015/11/16
+| **Version:** 1.01
+| **Date:** 2019/3/10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

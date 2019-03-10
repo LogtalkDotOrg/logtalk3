@@ -25,9 +25,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2015/11/16,
+		date is 2019/03/10,
 		comment is 'Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.',
 		parameters is ['Pipeline'-'List of hook objects'],
 		see_also is [hook_set(_)]
@@ -61,11 +61,13 @@
 		Hook::expand_goal(ExpandedGoal0, ExpandedGoal1),
 		goal_expansion_pipeline(Hooks, ExpandedGoal1, ExpandedGoal).
 
-	flatten(Var, Tail, [Var| Tail]) :-
+	flatten(Var, Tail, Flatted) :-
 		var(Var),
-		!.
-	flatten([], Flatted, Flatted) :-
-		!.
+		!,
+		Flatted = [Var| Tail].
+	flatten([], List, Flatted) :-
+		!,
+		Flatted = List.
 	flatten([Head| Tail], List, Flatted) :-
 		!,
 		flatten(Tail, List, Aux),
