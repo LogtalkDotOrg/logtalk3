@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- category(statistics,
 	implements(statisticsp)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/07/13,
+		date is 2019/03/10,
 		comment is 'Statistical calculations over a list of numbers.'
 	]).
 
@@ -137,14 +136,17 @@
 		),
 		partition(Xs, Pivot, Small1, Large1).
 
-	middle_element(N, N, [X| _], X) :-
-		!.
+	middle_element(N, N, [X| _], Middle) :-
+		!,
+		Middle = X.
 	middle_element(M, N, [_| Xs], X) :-
 		M2 is M + 1,
 		middle_element(M2, N, Xs, X).
 
-	middle_elements(N, N, [X1, X2| _], X1, X2) :-
-		!.
+	middle_elements(N, N, [X1, X2| _], MiddleLeft, MiddleRight) :-
+		!,
+		MiddleLeft = X1,
+		MiddleRight = X2.
 	middle_elements(M, N, [_| Xs], X1, X2) :-
 		M2 is M + 1,
 		middle_elements(M2, N, Xs, X1, X2).
