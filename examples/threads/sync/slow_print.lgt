@@ -18,6 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% silence warning about repeat loop without a cut
+:- set_logtalk_flag(suspicious_calls, silent).
+
+
 :- object(slow_print).
 
 	:- info([

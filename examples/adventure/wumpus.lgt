@@ -51,9 +51,9 @@
 :- object(wumpus).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Dan Cliburn. Adapted to Logtalk by Paulo Moura.',
-		date is 2010/09/10,
+		date is 2019/03/11,
 		comment is 'Hunt the Wumpus text adventure.'
 	]).
 
@@ -530,7 +530,8 @@
 			write('>command: '),
 			get_command(X),
 			do(X), nl,
-		end_condition(X).
+		end_condition(X),
+		!.
 
 	end_condition(end).
 	end_condition(_) :-

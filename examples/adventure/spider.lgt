@@ -26,9 +26,9 @@
 :- object(spider).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'David Matuszek, Villanova University. Adapted to Logtalk by Paulo Moura.',
-		date is 2010/09/10,
+		date is 2019/03/11,
 		comment is 'Spider - A Sample Adventure Game.'
 	]).
 
@@ -232,6 +232,7 @@
 			read(Command), nl,
 			once(do(Command)),
 		Command == halt,
+		!,	% just to silence a compiler warning
 		halt.
 
 	% These rules describe the various rooms.  Depending on

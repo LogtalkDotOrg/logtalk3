@@ -26,9 +26,9 @@
 :- object(sleepy).
 
 	:- info([
-		version is 1.01,
+		version is 1.02,
 		author is 'David Matuszek, Villanova University. Adapted to Logtalk by Paulo Moura.',
-		date is 2019/03/08,
+		date is 2019/03/11,
 		comment is 'Sleepy - A Sample Adventure Game.'
 	]).
 
@@ -361,6 +361,7 @@
 			read(Command), nl,
 			once(do(Command)),
 		Command == halt,
+		!,	% just to silence a compiler warning
 		halt.
 
 
