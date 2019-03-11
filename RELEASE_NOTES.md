@@ -52,6 +52,9 @@ construct to call predicates in `user`.
 * ADDED: Lint check for `is/2` goals that are always false due to the first
 argument being a term other than a variable or a number.
 
+* ADDED: Lint check for missing cut after a call to the standard `repeat/0`
+predicate.
+
 * ADDED: Lint check for possible non-steadfast predicate definitions.
 
 * ADDED: Compiler option `steadfastness` to control output of steadfast

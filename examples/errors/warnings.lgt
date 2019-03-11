@@ -333,6 +333,21 @@
 :- object(redundant_univ).
 
 	foo :-
-		Term =.. [foo, bar, baz].
+		_ =.. [foo, bar, baz].
+
+:- end_object.
+
+
+
+:- object(repeat).
+
+	foo :-
+		repeat,
+			bar(X),
+		X == 42.
+
+	bar(3).
+	bar(7).
+	bar(42).
 
 :- end_object.

@@ -21,8 +21,8 @@
 :- object(faa).
 
 	:- info([
-		version is 1.1,
-		date is 2016/05/18,
+		version is 1.2,
+		date is 2019/03/11,
 		author is 'Paulo Moura',
 		comment is 'Adaptation of the command language DCG example from the Amzi! Prolog manual.'
 	]).
@@ -45,7 +45,8 @@
 		write('Fly Amzi! Air'), nl,
 		repeat,
 			do_command(Command),
-		Command == exit.
+		Command == exit,
+		!.
 
 	:- meta_predicate(do_command(0)).
 	do_command(Command) :-
@@ -61,7 +62,7 @@
 		codes_to_tokens(Codes, Tokens).
 
 	read_codes(Codes) :-
-		get_code(Code), 
+		get_code(Code),
 		read_codes(Code, Codes).
 
 	read_codes(10, [[]]) :-
