@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b09)).
+'$lgt_version_data'(logtalk(3, 25, 0, b10)).
 
 
 
@@ -14658,10 +14658,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % messages to the pseudo-object "user"
 
-'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, _) :-
+'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, Ctx) :-
 	Obj == user,
 	!,
-	'$lgt_check'(var_or_callable, Pred).
+	'$lgt_check'(var_or_callable, Pred),
+	(	callable(Pred),
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_), _, _),
+		'$lgt_compiler_flag'(suspicious_calls, warning),
+		'$lgt_iso_spec_predicate'(Pred),
+		\+ '$lgt_built_in_method'(Pred, _, _, _),
+		\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, user::Pred, [Pred])) ->
+		true
+	;	true
+	).
 
 % suppress debug messages when compiling in optimized mode
 

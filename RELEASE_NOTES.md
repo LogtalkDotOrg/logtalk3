@@ -46,6 +46,9 @@ qualified variables not occurring in the qualified goal.
 
 * ADDED: Lint check for redundant uses of the `=../1` standard predicate.
 
+* ADDED: Lint check for redundant uses of the `::/2` message sending control
+construct to call predicates in `user`.
+
 * ADDED: Lint check for `is/2` goals that are always false due to the first
 argument being a term other than a variable or a number.
 
