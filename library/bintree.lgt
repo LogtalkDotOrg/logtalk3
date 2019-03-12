@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2018/03/18,
+		date is 2019/03/12,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [rbtree]
 	]).
@@ -188,23 +188,33 @@
 	lookup_var(Key, Value, t(_, _, _, Right)) :-
 		lookup_var(Key, Value, Right).
 
-	min(t(Key, Value, t, _), Key, Value) :-
-		!.
+	min(t(Key, Value, t, _), MinKey, MinValue) :-
+		!,
+		MinKey = Key,
+		MinValue = Value.
 	min(t(_, _, Left, _), Key, Value) :-
 		min(Left, Key, Value).
 
-	max(t(Key, Value, _, t), Key, Value) :-
-		!.
+	max(t(Key, Value, _, t), MaxKey, MaxValue) :-
+		!,
+		MaxKey = Key,
+		MaxValue = Value.
 	max(t(_ , _, _, Right), Key, Value) :-
 		max(Right, Key, Value).
 
-	delete_min(t(Key, Value, t, Right), Key, Value, Right) :-
-		!.
+	delete_min(t(Key, Value, t, Right), MinKey, MinValue, NewTree) :-
+		!,
+		MinKey = Key,
+		MinValue = Value,
+		NewTree = Right.
 	delete_min(t(Key0, Value0, Left, Right), Key, Value, t(Key0, Value0, NewLeft, Right)) :-
 		delete_min(Left, Key, Value, NewLeft).
 
-	delete_max(t(Key, Value, Left, t), Key, Value, Left) :-
-		!.
+	delete_max(t(Key, Value, Left, t), MaxKey, MaxValue, NewTree) :-
+		!,
+		MaxKey = Key,
+		MaxValue = Value,
+		NewTree = Left.
 	delete_max(t(Key0, Value0, Left, Right), Key, Value, t(Key0, Value0, Left, NewRight)) :-
 		delete_max(Right, Key, Value, NewRight).
 
