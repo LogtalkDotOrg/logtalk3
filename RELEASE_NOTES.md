@@ -69,6 +69,14 @@ false positives.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: GNU Prolog definition of the hook predicate
+`'$lgt_candidate_tautology_or_falsehood_goal_hook'/1` to include non-standard
+type testing built-in predicates.
+
+* UPDATED: SICStus Prolog definition of the hook predicate
+`'$lgt_candidate_tautology_or_falsehood_goal_hook'/1` to include non-standard
+type testing and unification built-in predicates.
+
 * FIXED: SWI-Prolog and YAP adapter file definitions for expanding top-level
 and module calls to the `::/2` message sending control construct to reject
 expanding a variable goal.

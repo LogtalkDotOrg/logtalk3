@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on March 6, 2019
+%  Last updated on March 12, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -197,8 +197,11 @@ forall(Generate, Test) :-
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
 
-'$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
-	fail.
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(db_reference(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(mutable(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(simple(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(?=(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(dif(_, _)).
 
 
 % '$lgt_prolog_database_predicate'(@callable)
