@@ -22,9 +22,9 @@
 	implements(varlistp)).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2019/03/08,
+		date is 2019/03/12,
 		comment is 'List of variables predicates.',
 		see_also is [list, list(_), numberlist, difflist]
 	]).
@@ -47,11 +47,13 @@
 	flatten(List, Flatted) :-
 		flatten(List, [], Flatted).
 
-	flatten(Var, Tail, [Var| Tail]) :-
+	flatten(Var, Tail, Flatted) :-
 		var(Var),
-		!.
-	flatten([], Flatted, Flatted) :-
-		!.
+		!,
+		Flatted = [Var| Tail].
+	flatten([], Tail, Flatted) :-
+		!,
+		Flatted = Tail.
 	flatten([Head| Tail], List, Flatted) :-
 		flatten(Tail, List, Aux),
 		flatten(Head, Aux, Flatted).
