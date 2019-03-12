@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b11)).
+'$lgt_version_data'(logtalk(3, 25, 0, b12)).
 
 
 
@@ -13297,6 +13297,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(always_true_or_false_goals), core, goal_is_always_false(File, Lines, Type, Entity, Term is Exp)),
+	fail.
+'$lgt_compile_body'(Term is Exp, _, _, _) :-
+	var(Term),
+	Term \== Exp,
+	term_variables(Exp, ExpVariables),
+	once('$lgt_member_var'(Term, ExpVariables)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Term is Exp, reason(is(Term)))),
 	fail.
 '$lgt_compile_body'(_ is Exp, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),

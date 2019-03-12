@@ -339,7 +339,7 @@
 
 
 
-:- object(repeat).
+:- object(repeat_loop).
 
 	foo :-
 		repeat,
@@ -349,5 +349,14 @@
 	bar(3).
 	bar(7).
 	bar(42).
+
+:- end_object.
+
+
+
+:- object(arithmetic).
+
+	foo :-
+		X is X - 1.
 
 :- end_object.
