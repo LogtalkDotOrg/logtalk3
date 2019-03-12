@@ -360,3 +360,17 @@
 		X is X - 1.
 
 :- end_object.
+
+
+
+:- object(findalls).
+
+	foo(X, Y, Z) :-
+		findall(X, bar(Y,Z), _).
+
+	baz(X, Y, Z) :-
+		findall(X, bar(Y,Z), _, _).
+
+	bar(_, _).
+
+:- end_object.
