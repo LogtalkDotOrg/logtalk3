@@ -49,7 +49,7 @@
     The idea is that if the maximum number of elements that have been in
     the heap so far is M, and the tree currently has K elements, the tree
     is some subtreee of the tree of this form having exactly M elements,
-    and the Free list is a list of K-M integers saying which of the 
+    and the Free list is a list of K-M integers saying which of the
     positions in the M-element tree are currently unoccupied.  This free
     list is needed to ensure that the cost of passing N elements through
     the heap is O(NlgM) instead of O(NlgN).  For M say 100 and N say 10^4
@@ -64,9 +64,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
-		date is 2010/02/19,
+		date is 2019/03/12,
 		comment is 'Heap implementation, parameterized by the order to be used to compare keys ("<" or ">").',
 		parnames is ['Order'],
 		see_also is [minheap, maxheap]
@@ -79,8 +79,9 @@
 		N is M + 1,
 		insert(H, Key, Value, OldTree, NewTree).
 
-	insert(1, Key, Value, _, t(Key,Value,t,t)) :-
-		!.
+	insert(1, Key, Value, _, Heap) :-
+		!,
+		Heap = t(Key,Value,t,t).
 	insert(N, Key, Value, t(K1,V1,L1,R1), t(K2,V2,L2,R2)) :-
 		E is N mod 2,
 		M is N // 2,
@@ -137,22 +138,25 @@
 	as_list(t(_,_,Tree), List) :-
 		tree_to_list(Tree, List).
 
-	tree_to_list(t, []) :-
-		!.
+	tree_to_list(t, []).
 	tree_to_list(t(Key,Value,Left,Right), [Key-Value| Pairs]) :-
 		tree_to_list(Left, LeftPairs),
 		tree_to_list(Right, RighPairs),
 		merge_pairs(LeftPairs, RighPairs, Pairs).
 
-	merge_pairs([Pair1| Pairs1], [Pair2| Pairs2], [Pair2| Pairs]) :-
+	merge_pairs([Pair1| Pairs1], [Pair2| Pairs2], [Pair| Pairs]) :-
 		parameter(1, Order),
 		compare(Order, Pair2, Pair1),
 		!,
+		Pair = Pair2,
 		merge_pairs([Pair1| Pairs1], Pairs2, Pairs).
-	merge_pairs([Pair1| Pairs1], Pairs2, [Pair1| Pairs]) :-
+	merge_pairs([Pair1| Pairs1], Pairs2, [Pair| Pairs]) :-
 		!,
+		Pair = Pair1,
 		merge_pairs(Pairs1, Pairs2, Pairs).
-	merge_pairs([], Pairs, Pairs) :- !.
+	merge_pairs([], Pairs2, Pairs) :-
+		!,
+		Pairs = Pairs2.
 	merge_pairs(Pairs, [], Pairs).
 
 	as_heap(List, Heap) :-
@@ -181,10 +185,12 @@
 	top_next(t(_,_,t(Key1,Value1,Left,Right)), Key1, Value1, Key2, Value2) :-
 		top_next(Left, Right, Key2, Value2).
 
-	top_next(t(Ka,_,_,_), t(Kb,Vb,_,_), Kb, Vb) :-
+	top_next(t(Ka,_,_,_), t(Kb,Vb,_,_), Key, Value) :-
 		parameter(1, Order),
 		compare(Order, Kb, Ka),
-		!.
+		!,
+		Key = Kb,
+		Value = Vb.
 	top_next(t(Ka,Va,_,_), _, Ka, Va).
 	top_next(t, t(Kb,Vb,_,_), Kb, Vb).
 
