@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2019/03/07,
+		date is 2019/03/12,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -690,15 +690,17 @@
 	shrink_list_keep_next([Head| Tail], [Head| Small]) :-
 		shrink_list(Tail, Small).
 
-	shrink_difference_list(List-Back, List-Back) :-
+	shrink_difference_list(List-Back, Small) :-
 		List == Back,
-		!.
+		!,
+		Small = List-Back.
 	shrink_difference_list([_| Tail]-Back, Small) :-
 		shrink_difference_list_keep_next(Tail-Back, Small).
 
-	shrink_difference_list_keep_next(List-Back, List-Back) :-
+	shrink_difference_list_keep_next(List-Back, Small) :-
 		List == Back,
-		!.
+		!,
+		Small = List-Back.
 	shrink_difference_list_keep_next([Head| Tail]-Back, [Head| Small]-Back) :-
 		shrink_difference_list(Tail-Back, Small-Back).
 
