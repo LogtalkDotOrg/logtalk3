@@ -11614,6 +11614,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % built-in meta-predicates
 
+'$lgt_compile_body'(bagof(Term, QGoal, List), _, _, Ctx) :-
+	nonvar(QGoal),
+	\+ ground(Term),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_decompose_quantified_body'(QGoal, _, Goal),
+	term_variables(Goal, GoalVariables),
+	term_variables(Term, TermVariables),
+	'$lgt_intersection'(TermVariables, GoalVariables, []),
+ 	'$lgt_increment_compiling_warnings_counter',
+ 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, bagof(Term,QGoal,List), reason(no_shared_variables))),
+	fail.
 '$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
 	callable(QGoal),
 	QGoal = _^_,
@@ -11622,7 +11635,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
  	'$lgt_increment_compiling_warnings_counter',
  	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable| Variables], Goal)))),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
 	fail.
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
@@ -11679,6 +11692,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Gen, TGen, DGen, Ctx),
 	'$lgt_compile_body'(Test, TTest, DTest, Ctx).
 
+'$lgt_compile_body'(setof(Term, QGoal, List), _, _, Ctx) :-
+	nonvar(QGoal),
+	\+ ground(Term),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_decompose_quantified_body'(QGoal, _, Goal),
+	term_variables(Goal, GoalVariables),
+	term_variables(Term, TermVariables),
+	'$lgt_intersection'(TermVariables, GoalVariables, []),
+ 	'$lgt_increment_compiling_warnings_counter',
+ 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, setof(Term,QGoal,List), reason(no_shared_variables))),
+	fail.
 '$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
 	callable(QGoal),
 	QGoal = _^_,
@@ -11687,7 +11713,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
  	'$lgt_increment_compiling_warnings_counter',
  	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable| Variables], Goal)))),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
 	fail.
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,

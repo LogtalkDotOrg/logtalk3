@@ -18,6 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% silence warning about no shared variable between template and test
+:- set_logtalk_flag(suspicious_calls, silent).
+
+
 :- object(tests,
 	extends(lgtunit)).
 

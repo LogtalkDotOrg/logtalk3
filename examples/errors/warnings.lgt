@@ -363,14 +363,20 @@
 
 
 
-:- object(findalls).
+:- object(all_solutions).
 
 	foo(X, Y, Z) :-
-		findall(X, bar(Y,Z), _).
+		findall(X, quux(Y,Z), _).
+
+	bar(X, Y, Z) :-
+		findall(X, quux(Y,Z), _, _).
 
 	baz(X, Y, Z) :-
-		findall(X, bar(Y,Z), _, _).
+		bagof(X, quux(Y,Z), _).
 
-	bar(_, _).
+	qux(X, Y, Z) :-
+		setof(X, quux(Y,Z), _).
+
+	quux(_, _).
 
 :- end_object.

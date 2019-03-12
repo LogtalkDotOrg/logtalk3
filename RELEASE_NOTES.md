@@ -42,8 +42,8 @@ construct (controlled by the `suspicious_calls` compiler flag).
 * ADDED: Lint check for `bagof/3` and `setof/3` calls with existentially
 qualified variables not occurring in the qualified goal.
 
-* ADDED: Lint check for `findall/3-4` calls with a non-ground template and no
-shared variables between template and goal.
+* ADDED: Lint check for `bagof/3`, `setof/3`, and `findall/3-4` calls with
+a non-ground template and no shared variables between template and goal.
 
 * ADDED: Lint check for redundant uses of the `call/1` control construct.
 
