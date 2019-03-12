@@ -89,7 +89,16 @@ Library
 `min/2` predicates as these override inherited declaration from the `listp`
 protocol to use arithmetic instead of standard order.
 
-* FIXED: Non-steadfast `list::flatten/2` predicate definition.
+* FIXED: Non-steadfast `flatten/2` predicate definition in `list`, `varlist`
+and `hook_pipeline/1` objects.
+
+* FIXED: Non-steadfast `bintree` object `min/3`, `max/3`, `delete_min/4`, and
+`delete_max/4` predicate definitions.
+
+* FIXED: Non-steadfast `heap/1` object `insert/4` and `top_next/4` predicate
+definitions.
+
+* FIXED: Non-steadfast `zlist::zip_index/4` predicate definition.
 
 * FIXED: Warnings printed by the new lint checks while compiling the libraries.
 
