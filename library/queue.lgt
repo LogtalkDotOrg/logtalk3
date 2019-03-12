@@ -18,15 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(queue,
 	implements(queuep),
 	extends(compound)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2000/7/24,
+		date is 2019/03/12,
 		comment is 'Queue predicates implemented using difference lists.'
 	]).
 
@@ -60,14 +59,15 @@
 		jump_all(Tail, Queue2, Queue3).
 
 	length(Front-Back, Length) :-
-		length(Front, Back, 0, N),
-		Length = N.
+		length(Front, Back, 0, Length).
 
-	length(Front, Back, N, N) :-
-		Front == Back, !.
-	length([_|Front], Back, K, N) :-
-		L is K+1,
-		length(Front, Back, L, N).
+	length(Front, Back, N, Length) :-
+		Front == Back,
+		!,
+		Length = N.
+	length([_|Front], Back, K, Length) :-
+		L is K + 1,
+		length(Front, Back, L, Length).
 
 	new(Back-Back).
 
