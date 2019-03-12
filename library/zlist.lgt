@@ -22,9 +22,9 @@
 	implements(zipperp)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2019/01/20,
+		date is 2019/03/12,
 		comment is 'Zipper list predicates. Zippers should be regarded as opaque terms.'
 	]).
 
@@ -38,8 +38,10 @@
 	zip_at_index(Position, List, Zipper, Element) :-
 		zip_at_index(Position, List, [], Zipper, Element).
 
-	zip_at_index(1, [Head|Tail], Acc, zip(Acc,Head,Tail), Head) :-
-		!.
+	zip_at_index(1, [Head|Tail], Acc, Zipper, Element) :-
+		!,
+		Zipper = zip(Acc, Head, Tail),
+		Element = Head.
 	zip_at_index(N, [Head|Tail], Acc, zip(Before,Element,After), Element) :-
 		N > 1,
 		M is N - 1,
