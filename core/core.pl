@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b13)).
+'$lgt_version_data'(logtalk(3, 25, 0, b14)).
 
 
 
@@ -14018,6 +14018,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_candidate_tautology_or_falsehood_goal'(nonvar(_)).
 '$lgt_candidate_tautology_or_falsehood_goal'(number(_)).
 '$lgt_candidate_tautology_or_falsehood_goal'(var(_)).
+% term creation and decomposition
+'$lgt_candidate_tautology_or_falsehood_goal'(_ =.. _).
+'$lgt_candidate_tautology_or_falsehood_goal'(arg(_, _, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(copy_term(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(functor(_, _, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(subsumes_term(_, _)).
 
 
 
