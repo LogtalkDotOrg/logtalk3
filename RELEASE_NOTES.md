@@ -66,8 +66,8 @@ predicate.
 predicate warnings. Default value is `silent` due to the possibility of
 false positives.
 
-* UPDATED: Include the standard `=../2`, `arg/3`, `copy_term/2`, `functor/3`,
-and `subsumes_term/2` in the list of predicates for the lint check for goals
+* UPDATED: Include the standard atomic term processing plus term creation and
+decomposition predicates in the list of predicates for the lint check for goals
 that are always true or false.
 
 Prolog adapter and integration files

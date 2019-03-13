@@ -14024,6 +14024,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_candidate_tautology_or_falsehood_goal'(copy_term(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal'(functor(_, _, _)).
 '$lgt_candidate_tautology_or_falsehood_goal'(subsumes_term(_, _)).
+% atomic term processing
+'$lgt_candidate_tautology_or_falsehood_goal'(atom_length(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(atom_concat(_, _, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(sub_atom(_, _, _, _, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(atom_chars(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(atom_codes(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(char_code(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(number_chars(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(number_codes(_, _)).
 
 
 
