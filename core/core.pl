@@ -11217,19 +11217,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TPred = Pred
 	).
 
-% protect goal from further goal expansion (only applied at compile time)
-
-'$lgt_compile_body'(@Pred, TPred, DPred, Ctx) :-
-	!,
-	'$lgt_check'(var_or_callable, Pred),
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	(	Mode == runtime ->
-		'$lgt_compile_body'(Pred, TPred, DPred, Ctx)
-	;	Mode = compile(How, Cut, _),
-		'$lgt_comp_ctx'(Ctx,    Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _,                  Stack, Lines),
-		'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,[Pred]), Stack, Lines),
-		'$lgt_compile_body'(Pred, TPred, DPred, NewCtx)
-	).
+% protect goal from further goal expansion
+%
+%'$lgt_compile_body'(@Pred, TPred, DPred, Ctx) :-
+%	!,
+%	'$lgt_check'(var_or_callable, Pred),
+%	'$lgt_comp_ctx_mode'(Ctx, Mode),
+%	(	Mode == runtime ->
+%		'$lgt_compile_body'(Pred, TPred, DPred, Ctx)
+%	;	Mode = compile(How, Cut, _),
+%		'$lgt_comp_ctx'(Ctx,    Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _,                  Stack, Lines),
+%		'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,[Pred]), Stack, Lines),
+%		'$lgt_compile_body'(Pred, TPred, DPred, NewCtx)
+%	).
 
 % goal expansion (only applied at compile time)
 
