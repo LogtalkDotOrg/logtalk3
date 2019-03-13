@@ -239,6 +239,11 @@ Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
    
    yes
 
+.. note::
+
+   When a source file also contains plain Prolog directives and predicates,
+   these are term-expanded but not goal-expanded.
+
 Bypassing expansions
 --------------------
 
