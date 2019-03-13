@@ -32,6 +32,9 @@ to be expanded resulted from a previous expansion of the same goal (checked
 using term equality). After a discussion with Peter Ludemann and Jan Wielemaker
 on the SWI-Prolog public forum.
 
+* CHANGED: Print an empty line after a compiler error or compiler warning for
+better readability.
+
 * ADDED: Lint check for `->/2` and `*->/2` calls without an else part.
 
 * ADDED: Lint check for redundant uses of the `{}/1` compiler bypass control
@@ -73,13 +76,12 @@ that are always true or false.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: GNU Prolog definition of the hook predicate
-`'$lgt_candidate_tautology_or_falsehood_goal_hook'/1` to include non-standard
-type testing built-in predicates.
+* UPDATED: GNU Prolog definition of the hook predicate for candidate tautology
+or falsehood goals to include non-standard type testing built-in predicates.
 
-* UPDATED: SICStus Prolog definition of the hook predicate
-`'$lgt_candidate_tautology_or_falsehood_goal_hook'/1` to include non-standard
-type testing and unification built-in predicates.
+* UPDATED: SICStus Prolog definition of the hook predicate for candidate
+tautology or falsehood goals to include non-standard type testing and
+unification built-in predicates.
 
 * FIXED: SWI-Prolog and YAP adapter file definitions for expanding top-level
 and module calls to the `::/2` message sending control construct to reject
@@ -99,7 +101,7 @@ Library
 
 * FIXED: Add to the `numberlistp` protocol declarations for the `max/2` and
 `min/2` predicates as these override inherited declaration from the `listp`
-protocol to use arithmetic instead of standard order.
+protocol to use arithmetic order instead of standard order.
 
 * FIXED: Non-steadfast `flatten/2` predicate definition in `list`, `varlist`
 and `hook_pipeline/1` objects.
