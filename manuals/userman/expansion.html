@@ -230,7 +230,7 @@ For example:</p>
     <span class="k">goal_expansion</span>(<span class="nv">X</span> <span class="k">is</span> <span class="nv">Expression</span>, <span class="k">true</span>) <span class="o">:-</span>
         <span class="k">catch</span>(<span class="nv">X</span> <span class="k">is</span> <span class="nv">Expression</span>, <span class="nv">_</span>, <span class="k">fail</span>).
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>These predicates can be explicitly called using the <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a>
@@ -289,7 +289,7 @@ expansion of the same goal. For example, consider the following object:</p>
     <span class="k">goal_expansion</span>(b, c).
     <span class="k">goal_expansion</span>(c, (a <span class="o">-&gt;</span> b<span class="o">;</span> c)).
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>The expansion of the goal <code class="docutils literal notranslate"><span class="pre">a</span></code> results in the goal <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">-&gt;</span> <span class="pre">b;</span> <span class="pre">c)</span></code> with no
@@ -375,7 +375,7 @@ the following hook object:</p>
 
     <span class="k">term_expansion</span>(end_of_file, (<span class="o">:-</span> end_object)).
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Assuming e.g. <code class="docutils literal notranslate"><span class="pre">my_car.pl</span></code> and <code class="docutils literal notranslate"><span class="pre">lease_car.pl</span></code> files  to be wrapped and a
