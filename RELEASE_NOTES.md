@@ -153,8 +153,8 @@ example.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* FIXED: Pygments highlighting of directives with no arguments to not colorize
-the ending dot.
+* FIXED: Kate and Pygments highlighting of directives with no arguments to not
+colorize the ending dot.
 
 
 3.24.0 - February 28, 2019
