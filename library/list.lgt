@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.17,
+		version is 2.18,
 		author is 'Paulo Moura',
-		date is 2019/03/06,
+		date is 2019/03/15,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -597,15 +597,17 @@
 		;	type_error(list, Term)
 		).
 
-	take(0, _, []) :-
-		!.
+	take(0, _, Elements) :-
+		!,
+		Elements = [].
 	take(N, [Element| Tail], [Element| Elements]) :-
 		N > 0,
 		M is N - 1,
 		take(M, Tail, Elements).
 
-	drop(0, List, List) :-
-		!.
+	drop(0, List, Remaining) :-
+		!,
+		Remaining = List.
 	drop(N, [_| Tail], Remaining) :-
 		N > 0,
 		M is N - 1,
