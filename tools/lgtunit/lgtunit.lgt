@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.26,
+		version is 6.27,
 		author is 'Paulo Moura',
-		date is 2019/03/07,
+		date is 2019/03/15,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1017,18 +1017,18 @@
 		;	failed_cleanup(Test, File, Position, failure, Output)
 		).
 
-	option_goal(Object::Message, Object::Message) :-
-		!.
-	option_goal(::Message, ::Message) :-
-		!.
-	option_goal(^^Message, ^^Message) :-
-		!.
-	option_goal(Object<<Goal, Object<<Goal) :-
-		!.
-	option_goal(':'(Module,Goal), ':'(Module,Goal)) :-
-		!.
-	option_goal(Goal, Sender<<Goal) :-
-		sender(Sender).
+	option_goal(Option, Goal) :-
+		(	control_construct(Option) ->
+			Goal = Option
+		;	sender(Sender),
+			Goal = Sender<<Option
+		).
+
+	control_construct(_::_).
+	control_construct(::_).
+	control_construct(^^_).
+	control_construct(_<<_).
+	control_construct(':'(_,_)).
 
 	broken_step(Step, Error) :-
 		self(Object),
@@ -1594,14 +1594,16 @@
 			run_quick_check_test(Template, Entity, Operator, Name, Types)
 		).
 
-	decompose_quick_check_template(Object::Template, Object, (::), Template) :-
-		!.
-	decompose_quick_check_template(Object<<Template, Object, (<<), Template) :-
-		!.
-	decompose_quick_check_template(':'(Module,Template), Module, (:), Template) :-
-		!.
-	decompose_quick_check_template(Template, Sender, (<<), Template) :-
-		sender(Sender).
+	decompose_quick_check_template(Template, Entity, Operator, Predicate) :-
+		(	control_construct(Template, Entity, Operator, Predicate) ->
+			true
+		;	sender(Sender),
+			Entity = Sender, Operator = (<<), Predicate = Template
+		).
+
+	control_construct(Object::Template, Object, (::), Template).
+	control_construct(Object<<Template, Object, (<<), Template).
+	control_construct(':'(Module,Template), Module, (:), Template).
 
 	run_quick_check_test(Template, Entity, Operator, Name, Types) :-
 		generate_arbitrary_arguments(Types, Arguments),
