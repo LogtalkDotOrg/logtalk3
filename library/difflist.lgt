@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.16,
+		version is 1.17,
 		author is 'Paulo Moura',
-		date is 2019/03/08,
+		date is 2019/03/15,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -96,12 +96,14 @@
 	flatten(List-Back, Flatted-Back) :-
 		flatten(List-Back, Back-Back, Flatted-Back).
 
-	flatten(Var, Tail-Back, [Var| Tail]-Back) :-
+	flatten(Var, Tail-Back, Flatted) :-
 		var(Var),
-		!.
-	flatten(List-Back, Flatted, Flatted) :-
+		!,
+		Flatted = [Var| Tail]-Back.
+	flatten(List-Back, Acc, Flatted) :-
 		List == Back,
-		!.
+		!,
+		Flatted = Acc.
 	flatten(List-Back, Acc, Flatted) :-
 		!,
 		List \== Back,
