@@ -138,6 +138,8 @@
 
 :- object(tautology).
 
+	% goals are always true (usually happens due to typos)
+
 	oops :- x \== y.
 
 	really :- \+ x == y.
@@ -147,6 +149,8 @@
 
 
 :- object(falsewood).
+
+	% goals are always false (usually happens due to typos)
 
 	damn :- x == y.
 
@@ -159,6 +163,8 @@
 
 
 :- object(trivial_fails).
+
+	% no matching clause for a call to a local predicate
 
 	foo :-
 		bar(1).
@@ -254,6 +260,8 @@
 
 :- object(suspicious_calls).
 
+	% calling local predicates doesn't require message sending
+
 	recursive([]).
 	recursive([H| T]) :-
 		::single(H),
@@ -268,6 +276,10 @@
 		This::baz.
 
 	baz.
+
+	% a cut in a clause of a multifile predicate can unwanted and
+	% difficult to track consequences as the clauses are distributed
+	% among several entities/files
 
 	:- public(multi/0).
 	:- multifile(multi/0).
@@ -285,6 +297,7 @@
 
 :- object(steadfastness).
 
+	% incorrect max/3 definition (e.g. max(5,3,3) is true!)
 	max(X, Y, X) :- X >= Y, !.
 	max(_, Y, Y).
 
@@ -293,6 +306,9 @@
 
 
 :- object(missing_else).
+
+	% missing else in ->/2 and *->/2 calls are a frequent source of bugs
+	% and should never be used
 
 	foo :-
 		bar -> baz.
@@ -318,6 +334,8 @@
 
 :- object(existential_variables).
 
+	% existentially-qualified variables must exist in the qualified goal
+
 	foo(X,Y,Z,W,V) :-
 		bagof(X, Y^Z^baz(Z,W,V), _).
 
@@ -332,6 +350,8 @@
 
 :- object(redundant_univ).
 
+	% =../2 calls are only necessary when the second argument is a partial list
+	% (i.e. a variable or a list with a variable tail)
 	foo :-
 		_ =.. [foo, bar, baz].
 
@@ -339,8 +359,20 @@
 
 
 
+:- object(redundant_user).
+
+	% no need to send a message to "user" to call a standard predicate
+	foo :-
+		user::atom(baz).
+
+:- end_object.
+
+
+
 :- object(repeat_loop).
 
+	% repeat loops without a cut can result in trouble in case of
+	% unexpected backtracking
 	foo :-
 		repeat,
 			bar(X),
@@ -356,6 +388,7 @@
 
 :- object(arithmetic).
 
+	% variable typo or misunderstading of arithmetic
 	foo :-
 		X is X - 1.
 
@@ -364,6 +397,8 @@
 
 
 :- object(all_solutions).
+
+	% template variables are expected to exist in the goal
 
 	foo(X, Y, Z) :-
 		findall(X, quux(Y,Z), _).
