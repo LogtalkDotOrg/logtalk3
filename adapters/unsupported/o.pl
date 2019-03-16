@@ -185,6 +185,9 @@ format(Format, Arguments) :-
 
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
+%
+% valid candidates are proprietary built-in predicates with
+% no side-effects when called with ground arguments
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
 	fail.

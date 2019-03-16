@@ -140,6 +140,9 @@ setup_call_cleanup(_, _, _) :-
 
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
+%
+% valid candidates are proprietary built-in predicates with
+% no side-effects when called with ground arguments
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(list(_)).

@@ -13960,7 +13960,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not a recursive call which can originate from a predicate with a single clause
 		\+ '$lgt_pp_dynamic_'(Call),
 		\+ '$lgt_pp_multifile_'(Call, _, _),
-		% not a dynmaic or multifile predicate
+		% not a dynamic or multifile predicate
 		\+ '$lgt_pp_entity_term_'(fact(TCall), _, _),
 		\+ '$lgt_pp_entity_term_'(srule(TCall, _, _), _, _),
 		\+ '$lgt_pp_entity_term_'(dfact(TCall, _), _, _),
@@ -13985,7 +13985,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_candidate_tautology_or_falsehood_goal'(@callable).
+% '$lgt_candidate_tautology_or_falsehood_goal'(@callable)
+%
+% valid candidates are standard built-in predicates with
+% no side-effects when called with ground arguments
 
 % unification
 '$lgt_candidate_tautology_or_falsehood_goal'(_ = _).

@@ -410,6 +410,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
+%
+% valid candidates are proprietary built-in predicates with
+% no side-effects when called with ground arguments
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
 	fail.
