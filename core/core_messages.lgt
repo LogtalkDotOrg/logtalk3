@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.55,
+		version is 1.56,
 		author is 'Paulo Moura',
-		date is 2019/03/13,
+		date is 2019/03/17,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -685,8 +685,12 @@
 		['loop without a cut'-[], nl].
 	suspicious_call_reason(shared_variable(Variable)) -->
 		['as variable ~w occurs in expression'-[Variable], nl].
-	suspicious_call_reason(no_shared_variables) -->
-		['as template and goal share no variables'-[Variable], nl].
+	suspicious_call_reason(no_shared_variables(Predicate)) -->
+		(	{Predicate == forall} ->
+			['as generator and test goals share no variables'-[], nl]
+		;	% assume bagof/setof/findall
+			['as template and goal share no variables'-[Variable], nl]
+		).
 	suspicious_call_reason(existential_variables([Variable], Goal)) -->
 		['as existential variable ~w do not exist in goal ~q '-[Variable, Goal], nl].
 	suspicious_call_reason(existential_variables([Variable1, Variable2| Variables], Goal)) -->

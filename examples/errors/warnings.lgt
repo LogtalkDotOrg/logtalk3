@@ -401,17 +401,24 @@
 	% template variables are expected to exist in the goal
 
 	foo(X, Y, Z) :-
-		findall(X, quux(Y,Z), _).
+		findall(X, corge(Y,Z), _).
 
 	bar(X, Y, Z) :-
-		findall(X, quux(Y,Z), _, _).
+		findall(X, corge(Y,Z), _, _).
 
 	baz(X, Y, Z) :-
-		bagof(X, quux(Y,Z), _).
+		bagof(X, corge(Y,Z), _).
 
 	qux(X, Y, Z) :-
-		setof(X, quux(Y,Z), _).
+		setof(X, corge(Y,Z), _).
 
-	quux(_, _).
+	% generator and test are expected to share variables
+
+	quux(X, Y) :-
+		forall(grault(X), garply(Y)).
+
+	corge(_, _).
+	grault(_).
+	garply(_).
 
 :- end_object.
