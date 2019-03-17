@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.27,
+		version is 6.28,
 		author is 'Paulo Moura',
-		date is 2019/03/15,
+		date is 2019/03/17,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1590,8 +1590,8 @@
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
 		forall(
-			between(1, NumberOfTests, _),
-			run_quick_check_test(Template, Entity, Operator, Name, Types)
+			between(1, NumberOfTests, Test),
+			run_quick_check_test(Template, Entity, Operator, Name, Types, Test)
 		).
 
 	decompose_quick_check_template(Template, Entity, Operator, Predicate) :-
@@ -1605,7 +1605,7 @@
 	control_construct(Object<<Template, Object, (<<), Template).
 	control_construct(':'(Module,Template), Module, (:), Template).
 
-	run_quick_check_test(Template, Entity, Operator, Name, Types) :-
+	run_quick_check_test(Template, Entity, Operator, Name, Types, _Test) :-
 		generate_arbitrary_arguments(Types, Arguments),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],

@@ -11689,6 +11689,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(forall(Gen, Test), _, _, Ctx) :-
 	callable(Gen),
 	callable(Test),
+	 \+ ground(Gen),
+	 \+ ground(Test),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	term_variables(Gen, GenVariables),
