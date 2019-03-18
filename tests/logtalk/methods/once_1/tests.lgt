@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/05/29,
+		date is 2019/03/18,
 		comment is 'Unit tests for the once/1 built-in method.'
 	]).
 
@@ -66,7 +66,10 @@
 		Xs == [1, 2, 3].
 
 	fails(once_1_09) :-
-		once(a(4)).
+		% avoid a warning about a no matching clause for goal a(4)
+		% by delaying the argument instantiation to runtime
+		N = 4,
+		once(a(N)).
 
 	fails(once_1_10) :-
 		once(fail).
@@ -74,15 +77,15 @@
 	% once/1 is opaque to cuts
 
 	succeeds(once_1_11) :-
-		findall(X, ((X = 1; X =2; X = 3), once(!)), L), 
+		findall(X, ((X = 1; X =2; X = 3), once(!)), L),
 		L == [1, 2, 3].
 
 	succeeds(once_1_12) :-
-		findall(X, ((X = 1; X =2; X = 3), once((true,!))), L), 
+		findall(X, ((X = 1; X =2; X = 3), once((true,!))), L),
 		L == [1, 2, 3].
 
 	succeeds(once_1_13) :-
-		findall(X, ((X = 1; X =2; X = 3), once((true;!))), L), 
+		findall(X, ((X = 1; X =2; X = 3), once((true;!))), L),
 		L == [1, 2, 3].
 
 	% auxiliary predicates

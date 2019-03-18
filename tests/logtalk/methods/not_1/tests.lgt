@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/05/26,
+		date is 2019/03/18,
 		comment is 'Unit tests for the forall/2 built-in method.'
 	]).
 
@@ -35,7 +35,10 @@
 		\+ \+ true.
 
 	test(not_1_3) :-
-		\+ a(4).
+		% avoid a warning about a no matching clause for goal a(4)
+		% by delaying the argument instantiation to runtime
+		N = 4,
+		\+ a(N).
 
 	test(not_1_4) :-
 		\+ \+ a(_).

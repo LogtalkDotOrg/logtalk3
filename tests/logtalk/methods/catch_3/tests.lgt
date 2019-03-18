@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/05/26,
+		date is 2019/03/18,
 		comment is 'Unit tests for the catch/3 built-in method.'
 	]).
 
@@ -42,7 +42,10 @@
 		\+ catch(fail, _, _).
 
 	test(catch_3_5) :-
-		\+ catch(a(4), _, _).
+		% avoid a warning about a no matching clause for goal a(4)
+		% by delaying the argument instantiation to runtime
+		N = 4,
+		\+ catch(a(N), _, _).
 
 	test(catch_3_6) :-
 		Goal = a(4),
