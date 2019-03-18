@@ -25,7 +25,7 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2019/03/18,
-		comment is 'Unit tests for the forall/2 built-in method.'
+		comment is 'Unit tests for the \+/1 built-in method.'
 	]).
 
 	test(not_1_1) :-
