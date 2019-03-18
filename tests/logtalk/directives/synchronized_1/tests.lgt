@@ -18,6 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- set_logtalk_flag(undefined_predicates, silent).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
