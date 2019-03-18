@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2015/12/07,
+		date is 2019/03/18,
 		comment is 'Unit tests for the "lambdas" example.'
 	]).
 
@@ -45,22 +45,14 @@
 		meta::map([X]>>(X>3),[4,5,9]).
 
 	succeeds(lambdas_04) :-
-		meta::map([X,Y]>>(X=A-B,Y=B-A), [1-a,2-b,3-c], Zs),
-		Zs == [a-1, b-2, c-3].
-
-	succeeds(lambdas_05) :-
-		meta::map([X,B-A]>>(X=A-B), [1-a,2-b,3-c], Zs),
-		Zs == [a-1, b-2, c-3].
-
-	succeeds(lambdas_06) :-
 		meta::map([A-B,B-A]>>true, [1-a,2-b,3-c], Zs),
 		Zs == [a-1, b-2, c-3].
 
-	succeeds(lambdas_07) :-
+	succeeds(lambdas_05) :-
 		meta::map([A-B]>>([B-A]>>true), [1-a,2-b,3-c], Zs),
 		Zs == [a-1, b-2, c-3].
 
-	succeeds(lambdas_08) :-
+	succeeds(lambdas_06) :-
 		Points = [(1,4),(2,5),(8,3)], meta::map([(X,Y),Z]>>(Z is sqrt(X*X + Y*Y)), Points, Distances),
 		Distances = [Distance1, Distance2, Distance3],
 		Distance1 =~= 4.1231056256176606,
@@ -68,7 +60,7 @@
 		Distance3 =~= 8.5440037453175304,
 		Points == [(1,4),(2,5),(8,3)].
 
-	succeeds(lambdas_09) :-
+	succeeds(lambdas_07) :-
 		Points = [(1,4),(2,5),(8,3)], meta::map([(X,Y)]>>([Z]>>(Z is sqrt(X*X + Y*Y))), Points, Distances),
 		Distances = [Distance1, Distance2, Distance3],
 		Distance1 =~= 4.1231056256176606,
@@ -76,116 +68,112 @@
 		Distance3 =~= 8.5440037453175304,
 		Points == [(1,4),(2,5),(8,3)].
 
-	succeeds(lambdas_10) :-
+	succeeds(lambdas_08) :-
 		meta::map([[X,Y],Z]>>(Z is X*X + Y*Y), [[1,2],[3,4],[5,6]], Result),
 		Result == [5, 25, 61].
 
-	succeeds(lambdas_11) :-
+	succeeds(lambdas_09) :-
 		meta::map([[X,Y]]>>([Z]>>(Z is X*X + Y*Y)), [[1,2],[3,4],[5,6]], Result),
 		Result == [5, 25, 61].
 
-	succeeds(lambdas_12) :-
+	succeeds(lambdas_10) :-
 		Xsss = [[[1,2,3], [4]], [[5]]],
 		meta::map(meta::map(meta::map([X,Y]>>(Y is X+3))), Xsss,  Ysss),
 		Ysss == [[[4,5,6], [7]], [[8]]].
 
-	succeeds(lambdas_13) :-
+	succeeds(lambdas_11) :-
 		meta::map([X,[X]]>>true,[1,2],Ys),
 		Ys == [[1], [2]].
 
-	succeeds(lambdas_14) :-
+	succeeds(lambdas_12) :-
 		meta::map([X,[X]]>>true,Xs,[[1],[2]]),
 		Xs == [1, 2].
 
-	succeeds(lambdas_15) :-
+	succeeds(lambdas_13) :-
 		meta::map([N,M]>>(list::length(L, N), list::length([_|L], M)), [999,123],R),
 		R == [1000, 124].
 
-	succeeds(lambdas_16) :-
+	succeeds(lambdas_14) :-
 		meta::map([N]>>([M]>>(list::length(L, N), list::length([_|L], M))), [999,123],R),
 		R == [1000, 124].
 
-	succeeds(lambdas_17) :-
+	succeeds(lambdas_15) :-
 		[]>>true.
 
-	succeeds(lambdas_18) :-
+	succeeds(lambdas_16) :-
 		{}/true.
 
-	succeeds(lambdas_19) :-
+	succeeds(lambdas_17) :-
 		{}/[]>>true.
 
-	succeeds(lambdas_20) :-
+	succeeds(lambdas_18) :-
 		{_}/true.
 
-	throws(lambdas_21, error(representation_error(lambda_parameters), logtalk(_,_))) :-
+	throws(lambdas_19, error(representation_error(lambda_parameters), logtalk(_,_))) :-
 		logtalk << ({X}/[X]>>true).
 
-	fails(lambdas_22) :-
+	fails(lambdas_20) :-
 		meta::map({X}/[X]>>char_code(X), [a,b,c], _).
 
-	throws(lambdas_23, error(representation_error(lambda_parameters), logtalk(_,_))) :-
+	throws(lambdas_21, error(representation_error(lambda_parameters), logtalk(_,_))) :-
 		meta::map([X,_,_]>>char_code(X), [a,b,c], _).
 
-	succeeds(lambdas_24) :-
+	succeeds(lambdas_22) :-
 		findall(Currencies, countries::currencies_wrong(Currencies), Solutions),
 		list::msort(Solutions, SolutionsSorted),
 		SolutionsSorted == [[dinar], [dinar], [euro], [euro], [pound_sterling], [ringgit]].
 
-	succeeds(lambdas_25) :-
+	succeeds(lambdas_23) :-
 		countries::currencies_no_lambda(Currencies),
 		Currencies == [dinar, euro, pound_sterling, ringgit].
 
-	succeeds(lambdas_26) :-
+	succeeds(lambdas_24) :-
 		countries::currencies_lambda(Currencies),
 		Currencies == [dinar, euro, pound_sterling, ringgit].
 
-	succeeds(lambdas_27) :-
+	succeeds(lambdas_25) :-
 		sigma::sum([X,Y]>>(Y is X), 0, 9, R),
 		R == 45.
 
-	succeeds(lambdas_28) :-
+	succeeds(lambdas_26) :-
 		sigma::sum([X,Y]>>(Y is X*X), 0, 9, R),
 		R == 285.
 
-	succeeds(lambdas_29) :-
+	succeeds(lambdas_27) :-
 		sigma::sum([X,Y]>>(sigma::sum([W,Z]>>(Z is W), X, 9, Y)), 0, 9, R),
 		R == 330.
 
-	succeeds(lambdas_30) :-
+	succeeds(lambdas_28) :-
 		meta::fold_left([X,Y,Z]>>(Z is X+Y*Y), 0, [1,2,3], R),
 		R == 14.
 
-	succeeds(lambdas_31) :-
+	succeeds(lambdas_29) :-
 		meta::fold_left([N1-[F1,F2],_,N2-[F2,F3]]>>(F3 is F1+F2, N2 is N1+1), 0-[0,1], _, 10-[F, _]),
 		F == 55.
 
-	succeeds(lambdas_32) :-
+	succeeds(lambdas_30) :-
 		meta::scan_left([X,Y,Z]>>(Z is X*Y), 1, [1,2,3,4,5,6], R),
 		R == [1, 1, 2, 6, 24, 120, 720].
 
 	% the following two tests were contributed by Boris Vassilev
 
-	succeeds(lambdas_33) :-
-		meta::include([X]>>(X=a(_)), [a(1), b(2)], R),
-		R == [a(1)].
-
-	succeeds(lambdas_34) :-
+	succeeds(lambdas_31) :-
 		meta::include([a(_)]>>true, [a(1), b(2)], R),
 		R == [a(1)].
 
-	succeeds(lambdas_35) :-
+	succeeds(lambdas_32) :-
 		meta::include([a(_)]>>true, [b(2), a(1)], R),
 		R == [a(1)].
 
-	succeeds(lambdas_36) :-
+	succeeds(lambdas_33) :-
 		meta::include([a(_)]>>true, [b(2), b(1)], R),
 		R == [].
 
-	succeeds(lambdas_37) :-
+	succeeds(lambdas_34) :-
 		findall(A-B, meta::map([X]>>(X=1;X=2), [A,B]), L),
 		L == [1-1,1-2,2-1,2-2].
 
-	succeeds(lambdas_38) :-
+	succeeds(lambdas_35) :-
 		call(f, X, Y),
 		call([X]>>f(X), X, Y),
 		call([X,Y]>>f(X,Y), X, Y),
@@ -194,14 +182,14 @@
 		call(f(X), Y),
 		f(X, Y).
 
-	succeeds(lambdas_39) :-
+	succeeds(lambdas_36) :-
 		call([X,Y,Z]>>plus(X,Y,Z), 1, 2, 3),
 		call([X,Y]>>plus(X,Y), 1, 2, 3),
 		call([X]>>plus(X), 1, 2, 3),
 		call([]>>plus, 1, 2, 3),
 		call(plus, 1, 2, 3).
 
-	succeeds(lambdas_40) :-
+	succeeds(lambdas_37) :-
 		findall(X, {X}/p(X,_), L),
 		L == [1,2].
 

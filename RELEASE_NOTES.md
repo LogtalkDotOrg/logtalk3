@@ -48,6 +48,9 @@ qualified variables not occurring in the qualified goal.
 * ADDED: Lint check for `bagof/3`, `setof/3`, and `findall/3-4` calls with
 a non-ground template and no shared variables between template and goal.
 
+* ADDED: Lint check for `forall/2` calls with non-ground arguments with no
+shared variables.
+
 * ADDED: Lint check for redundant uses of the `call/1` control construct.
 
 * ADDED: Lint check for redundant uses of the `=../1` standard predicate.
@@ -134,6 +137,9 @@ Examples
 * UPDATED: The `errors` example to illustrate the new compiler lint checks.
 
 * FIXED: Warnings printed by the new lint checks while compiling the examples.
+
+* FIXED: Deleted `lambdas` example sample queries and unit tests that used
+unclassified variables in the lambda expressions.
 
 Contributions
 -------------

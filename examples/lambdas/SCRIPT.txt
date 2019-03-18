@@ -41,14 +41,6 @@ yes
 | ?- meta::map([X]>>(X>3),[4,5,9]).
 yes
 
-| ?- meta::map([X,Y]>>(X=A-B,Y=B-A), [1-a,2-b,3-c], Zs).
-Zs = [a-1,b-2,c-3]
-yes
-
-| ?- meta::map([X,B-A]>>(X=A-B), [1-a,2-b,3-c], Zs).
-Zs = [a-1,b-2,c-3]
-yes
-
 | ?- meta::map([A-B,B-A]>>true, [1-a,2-b,3-c], Zs).
 Zs = [a-1,b-2,c-3]
 yes
