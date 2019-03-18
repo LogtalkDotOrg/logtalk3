@@ -76,6 +76,10 @@ false positives.
 decomposition predicates in the list of predicates for the lint check for goals
 that are always true or false.
 
+* FIXED: The lint check for unclassified variables in lambda expressions to
+avoid spurious warnings when compiling in optimized mode and using lambda
+expressions as meta-predicate arguments.
+
 Prolog adapter and integration files
 ------------------------------------
 

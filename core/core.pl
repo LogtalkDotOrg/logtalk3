@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b16)).
+'$lgt_version_data'(logtalk(3, 25, 0, b17)).
 
 
 
@@ -19895,13 +19895,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_closure'(Free/Goal, Ctx) :-
 	!,
-	'$lgt_check_lambda_expression'(Free/Goal, Ctx),
-	'$lgt_check_closure'(Goal, Ctx).
+	'$lgt_check_lambda_expression'(Free/Goal, Ctx).
 
 '$lgt_check_closure'(Parameters>>Goal, Ctx) :-
 	!,
-	'$lgt_check_lambda_expression'(Parameters>>Goal, Ctx),
-	'$lgt_check_closure'(Goal, Ctx).
+	'$lgt_check_lambda_expression'(Parameters>>Goal, Ctx).
 
 '$lgt_check_closure'({Closure}, _) :-
 	!,
@@ -19978,9 +19976,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % each lambda goal variable should be either a lambda free variable or a lambda parameter
 
-'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal, _) :-
+'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal, Ctx) :-
 	% take into account currying to avoid false positives
-	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars),
+	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars, Ctx),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars),
 	(	UnqualifiedVars \== [],
@@ -19992,13 +19990,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_check_lambda_expression_goal_variables'(Parameters>>Goal, UnqualifiedVars) :-
+'$lgt_check_lambda_expression_goal_variables'(Parameters>>Goal, UnqualifiedVars, Ctx) :-
 	!,
-	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars),
+	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars, Ctx),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars).
 
-'$lgt_check_lambda_expression_goal_variables'(Goal, UnqualifiedVars) :-
+'$lgt_check_lambda_expression_goal_variables'(Goal, UnqualifiedVars, Ctx) :-
+	'$lgt_check_closure'(Goal, Ctx),
 	term_variables(Goal, UnqualifiedVars).
 
 
