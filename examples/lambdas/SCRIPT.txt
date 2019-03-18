@@ -356,3 +356,20 @@ Adding 1 to every integer in the list [1..100000] using map/3 with the integer::
 Adding 1 to every integer in the list [1..100000] using map/3 with a lambda argument with a is/2 goal:
 % 1,800,030 inferences, 0.439 CPU in 0.442 seconds (99% CPU, 4100651 Lips)
 true.
+
+
+% learn about lint checks for lambdas expressions:
+
+| ?- logtalk_load(lambda_warnings).
+
+*     Unclassified variable A in lambda expression: [B,C]>>f(B,C,A)
+*       while compiling object lambda_warnings
+*       in file .../examples/lambdas/lambda_warnings.lgt between lines 31-33
+*     
+*     Variable A have dual role in lambda expression: {A}/[B,C,A]>>f(B,C,A)
+*       while compiling object lambda_warnings
+*       in file .../examples/lambdas/lambda_warnings.lgt between lines 36-37
+*     
+% [ .../examples/lambdas/lambda_warnings.lgt loaded ]
+% 2 compilation warnings
+yes

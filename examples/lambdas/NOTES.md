@@ -24,3 +24,5 @@ This folder contains examples of using Logtalk support for lambda
 expressions. Some examples and test queries are collected from public
 discussions on lambda expressions on the SWI-Prolog mailing list and
 on the `comp.lang.prolog` discussion group.
+
+The `lambda_warnings` file illustrates lint checks for lambda expressions.

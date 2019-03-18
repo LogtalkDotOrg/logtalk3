@@ -141,6 +141,9 @@ Examples
 * FIXED: Deleted `lambdas` example sample queries and unit tests that used
 unclassified variables in the lambda expressions.
 
+* CHANGED: Moved the `lambdas` example object used to illustrate lint checks
+of lambda expressions to a separate source file.
+
 Contributions
 -------------
 
