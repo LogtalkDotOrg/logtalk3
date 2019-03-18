@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.18,
+		version is 2.19,
 		author is 'Paulo Moura',
-		date is 2019/03/15,
+		date is 2019/03/18,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -122,7 +122,7 @@
 			(	integer(Length) ->
 				Length >= 0,
 				make_list(Length, List)
-			;	var(Length) ->
+			;	var(Length),
 				length(List, 0, Length)
 			).
 

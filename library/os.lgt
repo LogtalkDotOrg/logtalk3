@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.51,
+		version is 1.52,
 		author is 'Paulo Moura',
-		date is 2019/03/07,
+		date is 2019/03/18,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1026,15 +1026,15 @@
 			{os_env(Variable, Value)}.
 
 		time_stamp(TimeStamp) :-
-			{TimeStamp is currtime}.
+			TimeStamp is currtime.
 
 		date_time(0, 0, 0, 0, 0, 0, 0).
 
 		cpu_time(Seconds) :-
-			{Seconds is cputime}.
+			Seconds is cputime.
 
 		wall_time(Seconds) :-
-			{Seconds is currtime}.
+			Seconds is currtime.
 
 		operating_system_type(Type) :-
 			{os_name(Name)},
@@ -1156,7 +1156,7 @@
 		environment_variable(Variable, Value) :-
 			(	{predicate_property(getenv(_, _), built_in)} ->
 				{getenv(Variable, Value)}
-			;	{predicate_property(env_getenv(_, _), built_in)} ->
+			;	{predicate_property(env_getenv(_, _), built_in)},
 				{env_getenv(Variable, Value)}
 			).
 
