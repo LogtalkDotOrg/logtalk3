@@ -82,11 +82,9 @@ yes
 Xs = [1,2] ?
 yes
 
-| ?- meta::map([N,M]>>(list::length(L, N), list::length([_|L], M)), [999,123],R).
-R = [1000,124]
-yes
+% in the next example, we use currying to "declare" the variable L as a local variable
 
-| ?- meta::map([N]>>([M]>>(list::length(L, N), list::length([_|L], M))), [999,123],R).
+| ?- meta::map([N]>>({L}/[M]>>(list::length(L, N), list::length([1|L], M))), [999,123],R).
 R = [1000,124]
 yes
 

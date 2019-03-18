@@ -90,11 +90,7 @@
 		Xs == [1, 2].
 
 	succeeds(lambdas_13) :-
-		meta::map([N,M]>>(list::length(L, N), list::length([_|L], M)), [999,123],R),
-		R == [1000, 124].
-
-	succeeds(lambdas_14) :-
-		meta::map([N]>>([M]>>(list::length(L, N), list::length([_|L], M))), [999,123],R),
+		meta::map([N]>>({L}/[M]>>(list::length(L, N), list::length([1|L], M))), [999,123], R),
 		R == [1000, 124].
 
 	succeeds(lambdas_15) :-
