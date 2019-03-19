@@ -69,6 +69,8 @@ predicate.
 * ADDED: Lint check for predicate names and variable names as per official
 coding guidelines.
 
+* ADDED: Lint check for variable names that differ only on case.
+
 * ADDED: Lint check for possible non-steadfast predicate definitions.
 
 * ADDED: Compiler option `naming` to control output of predicate name and

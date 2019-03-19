@@ -437,4 +437,6 @@
 
 	noMoreTokens --> eos.
 
+	predicate(List, LIST, List, LIST).
+
 :- end_object.

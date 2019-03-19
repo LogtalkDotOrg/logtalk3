@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b18)).
+'$lgt_version_data'(logtalk(3, 25, 0, b19)).
 
 
 
@@ -16910,6 +16910,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_predicate_naming_issues'(_, _).
 
 
+'$lgt_camel_case_name'(Name) :-
+	atom_chars(Name, Chars),
+	'$lgt_append'([_| _], [Char1, Char2| _], Chars),
+	a @=< Char1, Char1 @=< z,
+	'A' @=< Char2, Char2 @=< 'Z',
+	!.
+
+
 
 % '$lgt_add_def_clause'(+callable, +atom, +integer, -callable, +compilation_context)
 %
@@ -17082,8 +17090,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % reports variable naming issues as per official coding guidelines
 
+'$lgt_report_variable_naming_issues'(_, _, _) :-
+	'$lgt_compiler_flag'(naming, silent),
+	!.
+
 '$lgt_report_variable_naming_issues'(Names, File, Lines) :-
-	'$lgt_compiler_flag'(naming, warning),
 	'$lgt_member'(Name=_, Names),
 	'$lgt_non_camel_case_name'(Name),
 	'$lgt_increment_compiling_warnings_counter',
@@ -17093,15 +17104,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	fail.
 
+'$lgt_report_variable_naming_issues'(Names, File, Lines) :-
+	'$lgt_name_pair'(Names, Name, OtherName),
+	'$lgt_similar_names'(Name, OtherName),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
+		'$lgt_print_message'(warning(naming), core, variable_names_differ_only_on_case(File, Lines, Type, Entity, Name, OtherName))
+	;	'$lgt_print_message'(warning(naming), core, variable_names_differ_only_on_case(File, Lines, Name, OtherName))
+	),
+	fail.
+
 '$lgt_report_variable_naming_issues'(_, _, _).
-
-
-'$lgt_camel_case_name'(Name) :-
-	atom_chars(Name, Chars),
-	'$lgt_append'([_| _], [Char1, Char2| _], Chars),
-	a @=< Char1, Char1 @=< z,
-	'A' @=< Char2, Char2 @=< 'Z',
-	!.
 
 
 '$lgt_non_camel_case_name'(Name) :-
@@ -17110,6 +17123,44 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Char1 \== '_',
 	Char2 \== '_',
 	!.
+
+'$lgt_name_pair'([Name=_| Names], Name, OtherName) :-
+	'$lgt_member'(OtherName=_, Names).
+
+'$lgt_name_pair'([_| Names], Name, OtherName) :-
+	'$lgt_name_pair'(Names, Name, OtherName).
+
+
+'$lgt_similar_names'(Name, OtherName) :-
+	atom_length(Name, Length),
+	atom_length(OtherName, Length),
+	% same length
+	sub_atom(Name, _, 1, 0, Last),
+	\+ ('0' @=< Last, Last @=< '9'),
+	sub_atom(OtherName, _, 1, 0, OtherLast),
+	\+ ('0' @=< OtherLast, OtherLast @=< '9'),
+	% not ending with a digit
+	'$lgt_to_lower_case'(Name, NameLowerCase),
+	'$lgt_to_lower_case'(OtherName, OtherNameLowerCase),
+	NameLowerCase == OtherNameLowerCase.
+
+
+'$lgt_to_lower_case'(Name, NameLowerCase) :-
+	atom_codes(Name, Codes),
+	'$lgt_to_lower_case_codes'(Codes, CodesLowerCase),
+	atom_codes(NameLowerCase, CodesLowerCase).
+
+
+'$lgt_to_lower_case_codes'([], []).
+
+'$lgt_to_lower_case_codes'([Code| Codes], [LowerCode| LowerCodes]) :-
+	65 =< Code, Code @=< 90,
+	!,
+	LowerCode is 97 + Code - 65,
+	'$lgt_to_lower_case_codes'(Codes, LowerCodes).
+
+'$lgt_to_lower_case_codes'([Code| Codes], [Code| LowerCodes]) :-
+	'$lgt_to_lower_case_codes'(Codes, LowerCodes).
 
 
 

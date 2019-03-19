@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.58,
+		version is 1.59,
 		author is 'Paulo Moura',
 		date is 2019/03/19,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -574,6 +574,14 @@
 
 	message_tokens(non_camel_case_variable_name(File, Lines, Name)) -->
 		['Variable name not in camel case: ~w'-[Name], nl],
+		message_context(File, Lines).
+
+	message_tokens(variable_names_differ_only_on_case(File, Lines, Type, Entity, Name, OtherName)) -->
+		['Variables differ only on case: ~w ~w'-[Name, OtherName], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(variable_names_differ_only_on_case(File, Lines, Name, OtherName)) -->
+		['Variables differ only on case: ~w ~w'-[Name, OtherName], nl],
 		message_context(File, Lines).
 
 	% auxiliary grammar rules
