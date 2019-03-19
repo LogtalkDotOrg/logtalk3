@@ -151,6 +151,9 @@ of lambda expressions to a separate source file.
 Contributions
 -------------
 
+* CHANGED: The `verdi_neruda` contribution loader file to enable reporting of
+compilation warnings.
+
 * FIXED: Harmless bug in the `verdi_neruda` contribution in a `bagof/3` call
 with a existentially qualified variable not occurring in the qualified goal.
 

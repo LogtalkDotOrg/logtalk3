@@ -6,7 +6,7 @@
 load_interpreters([]).
 load_interpreters([I|Is]) :-
 	functor(I, Name, _),
-	logtalk_load(Name, [hook(debug_expansion(production)), report(off)]),
+	logtalk_load(Name, [hook(debug_expansion(production)), report(warnings)]),
 	load_interpreters(Is).
 
 :- initialization((
@@ -19,22 +19,22 @@ load_interpreters([I|Is]) :-
 		[library(types_loader),
 		 library(metapredicates_loader),
 		 library(random_loader)],
-		[report(off)]
+		[report(warnings)]
 	),
-	logtalk_load(counter, [report(off)]),
-	logtalk_load(magic, [report(off)]),
-	logtalk_load(flatting, [report(off)]),
-	logtalk_load(debug_expansion, [report(off)]),
-	logtalk_load(rule_expansion, [report(off)]),
-	logtalk_load(magic_expansion, [report(off)]),
-	logtalk_load(shell_expansion, [report(off)]),
-	logtalk_load(heuristic_expansion, [report(off)]),
-	logtalk_load(benchmark_generators, [report(off)]),
-	logtalk_load(databasep, [report(off)]),
-	logtalk_load(demodb, [hook(rule_expansion(production)), report(off)]),
-	logtalk_load(interpreterp, [report(off)]),
-	logtalk_load(best_first, [report(off)]),
+	logtalk_load(counter, [report(warnings)]),
+	logtalk_load(magic, [report(warnings)]),
+	logtalk_load(flatting, [report(warnings)]),
+	logtalk_load(debug_expansion, [report(warnings)]),
+	logtalk_load(rule_expansion, [report(warnings)]),
+	logtalk_load(magic_expansion, [report(warnings)]),
+	logtalk_load(shell_expansion, [report(warnings)]),
+	logtalk_load(heuristic_expansion, [report(warnings)]),
+	logtalk_load(benchmark_generators, [report(warnings)]),
+	logtalk_load(databasep, [report(warnings)]),
+	logtalk_load(demodb, [hook(rule_expansion(production)), report(warnings)]),
+	logtalk_load(interpreterp, [report(warnings)]),
+	logtalk_load(best_first, [report(warnings)]),
 	pairs::keys(Interpreters, Interpreters1),
 	load_interpreters(Interpreters1),
-	logtalk_load(shell, [hook(debug_expansion(production)), report(off)]),
+	logtalk_load(shell, [hook(debug_expansion(production)), report(warnings)]),
 	shell(Interpreters)::init)).
