@@ -1563,7 +1563,7 @@
 			{time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds)}.
 
 		cpu_time(Seconds) :-
-			{Miliseconds is cputime},
+			Miliseconds is cputime,
 			Seconds is Miliseconds / 1000.
 
 		wall_time(Seconds) :-
