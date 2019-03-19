@@ -440,3 +440,9 @@
 	predicate(List, LIST, List, LIST).
 
 :- end_object.
+
+
+
+:- object(someObject).
+
+:- end_object.

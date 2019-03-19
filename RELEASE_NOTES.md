@@ -66,8 +66,8 @@ argument being a term other than a variable or a number.
 * ADDED: Lint check for missing cut after a call to the standard `repeat/0`
 predicate.
 
-* ADDED: Lint check for predicate names and variable names as per official
-coding guidelines.
+* ADDED: Lint check for entity names, predicate names, and variable names as
+per official coding guidelines.
 
 * ADDED: Lint check for variable names that differ only on case.
 

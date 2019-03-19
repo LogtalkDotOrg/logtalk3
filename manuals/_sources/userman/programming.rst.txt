@@ -671,12 +671,12 @@ Lint flags
 .. _flag_naming:
 
 ``naming(Option)``
-   Controls warnings about predicate names and variable names. The official
-   coding guidelines advise using underscores for predicate names and camel
-   case variable names. Additionally, variable names should not differ only
-   on case. Possible option values are ``warning`` and ``silent`` (the usual
-   default due to the curent limitation to ASCII names and the computational
-   cost of the checks).
+   Controls warnings about entity, predicate, and variable names. The
+   official coding guidelines advise using underscores for entity and
+   predicate names and camel case variable names. Additionally, variable
+   names should not differ only on case. Possible option values are
+   ``warning`` and ``silent`` (the usual default due to the curent
+   limitation to ASCII names and the computational cost of the checks).
 
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

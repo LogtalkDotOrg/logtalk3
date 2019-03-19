@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.59,
+		version is 1.61,
 		author is 'Paulo Moura',
 		date is 2019/03/19,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -559,6 +559,10 @@
 	message_tokens(possible_non_steadfast_predicate(File, Lines, Type, Entity, Head)) -->
 		['Predicate with clause head ~q may not be steadfast due to variable aliasing and cut'-[Head], nl],
 		message_context(File, Lines, Type, Entity).
+
+	message_tokens(camel_case_entity_name(File, Lines, _Type, Entity)) -->
+		['Entity name in camel case: ~w'-[Entity], nl],
+		message_context(File, Lines).
 
 	message_tokens(camel_case_predicate_name(File, Lines, Type, Entity, Predicate)) -->
 		['Predicate name in camel case: ~w'-[Predicate], nl],

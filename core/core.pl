@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b19)).
+'$lgt_version_data'(logtalk(3, 25, 0, b20)).
 
 
 
@@ -8783,9 +8783,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		% we're indeed compiling an object
-		retract('$lgt_pp_referenced_object_'(Obj, _, Start-_)),
+		retract('$lgt_pp_referenced_object_'(Obj, File, Start-_)),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_object_'(Obj, _, Start-End)),
+		assertz('$lgt_pp_referenced_object_'(Obj, File, Start-End)),
 		'$lgt_second_stage'(object, Obj, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
 	;	% entity ending directive mismatch
@@ -8832,9 +8832,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_protocol, Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
 		% we're indeed compiling a protocol
-		retract('$lgt_pp_referenced_protocol_'(Ptc, _, Start-_)),
+		retract('$lgt_pp_referenced_protocol_'(Ptc, File, Start-_)),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_protocol_'(Ptc, _, Start-End)),
+		assertz('$lgt_pp_referenced_protocol_'(Ptc, File, Start-End)),
 		'$lgt_second_stage'(protocol, Ptc, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
 	;	% entity ending directive mismatch
@@ -8888,9 +8888,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
 		% we're indeed compiling a category
-		retract('$lgt_pp_referenced_category_'(Ctg, _, Start-_)),
+		retract('$lgt_pp_referenced_category_'(Ctg, File, Start-_)),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_category_'(Ctg, _, Start-End)),
+		assertz('$lgt_pp_referenced_category_'(Ctg, File, Start-End)),
 		'$lgt_second_stage'(category, Ctg, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
 	;	% entity ending directive mismatch
@@ -16839,7 +16839,26 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_naming_issues'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(naming, warning) ->
+		'$lgt_report_entity_naming_issues'(Type, Entity),
 		'$lgt_report_predicate_naming_issues'(Type, Entity)
+	;	true
+	).
+
+
+'$lgt_report_entity_naming_issues'(Type, Entity) :-
+	functor(Entity, Functor, _),
+	(	'$lgt_camel_case_name'(Functor) ->
+		'$lgt_increment_compiling_warnings_counter',
+		(	'$lgt_pp_referenced_object_'(Entity, File, Lines) ->
+			true
+		;	'$lgt_pp_referenced_protocol_'(Entity, File, Lines) ->
+			true
+		;	'$lgt_pp_referenced_category_'(Entity, File, Lines) ->
+			true
+		;	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
+			Lines = '-'(-1, -1)
+		),
+		'$lgt_print_message'(warning(naming), core, camel_case_entity_name(File, Lines, Type, Entity))
 	;	true
 	).
 
