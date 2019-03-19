@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.56,
+		version is 1.58,
 		author is 'Paulo Moura',
-		date is 2019/03/17,
+		date is 2019/03/19,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -211,6 +211,7 @@
 		 current_logtalk_flag(unknown_predicates, UnknownPredicates),
 		 current_logtalk_flag(undefined_predicates, UndefinedPredicates),
 		 current_logtalk_flag(steadfastness, Steadfastness),
+		 current_logtalk_flag(naming, Naming),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, Redefined),
 		 current_logtalk_flag(deprecated, Deprecated),
@@ -249,7 +250,7 @@
 		[
 			'Default lint compilation flags: '-[], nl,
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
-			'  unknown_entities: ~w, steadfastness: ~w'-[UnknownEntities, Steadfastness], nl,
+			'  unknown_entities: ~w, steadfastness: ~w, naming: ~w'-[UnknownEntities, Steadfastness, Naming], nl,
 			'  missing_directives: ~w, duplicated_directives: ~w'-[Missing, Duplicated], nl,
 			'  portability: ~w, redefined_built_ins: ~w, deprecated: ~w'-[Portability, Redefined, Deprecated], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
@@ -557,6 +558,14 @@
 
 	message_tokens(possible_non_steadfast_predicate(File, Lines, Type, Entity, Head)) -->
 		['Predicate with clause head ~q may not be steadfast due to variable aliasing and cut'-[Head], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(camel_case_predicate_name(File, Lines, Type, Entity, Predicate)) -->
+		['Predicate name in camel case: ~w'-[Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(non_camel_case_variable_name(File, Lines, Type, Entity, Name)) -->
+		['Variable name not in camel case: ~w'-[Name], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% auxiliary grammar rules

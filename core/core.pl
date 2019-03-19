@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b17)).
+'$lgt_version_data'(logtalk(3, 25, 0, b18)).
 
 
 
@@ -16693,7 +16693,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_lint_issues'(Type, Entity) :-
 	'$lgt_report_missing_directives'(Type, Entity),
 	'$lgt_report_non_portable_calls'(Type, Entity),
-	'$lgt_report_unknown_entities'(Type, Entity).
+	'$lgt_report_unknown_entities'(Type, Entity),
+	'$lgt_report_predicate_naming'(Type, Entity).
 
 
 
@@ -16828,6 +16829,38 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_unknown_modules'(_, _).
+
+
+
+% '$lgt_report_predicate_naming'(Type, Entity)
+%
+% reports predicate naming issues for predicates with a scope directive
+% but no predicate definition (e.g. predicates declared in protocols)
+
+'$lgt_report_predicate_naming'(Type, Entity) :-
+	(	'$lgt_compiler_flag'(naming, warning) ->
+		'$lgt_report_scoped_predicate_naming'(Type, Entity)
+	;	true
+	).
+
+
+'$lgt_report_scoped_predicate_naming'(Type, Entity) :-
+		(	'$lgt_pp_public_'(Functor, Arity)
+		;	'$lgt_pp_protected_'(Functor, Arity)
+		;	'$lgt_pp_private_'(Functor, Arity)
+		),
+		functor(Template, Functor, Arity),
+		\+ '$lgt_pp_defines_predicate_'(Template, _, _, _, _, _),
+		'$lgt_camel_case_name'(Functor),
+		'$lgt_increment_compiling_warnings_counter',
+		(	'$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line) ->
+			'$lgt_print_message'(warning(naming), core, camel_case_predicate_name(File, Line-Line, Type, Entity, Functor/Arity))
+		;	'$lgt_source_file_context'(File, _),
+			'$lgt_print_message'(warning(naming), core, camel_case_predicate_name(File, '-'(-1, -1), Type, Entity, Functor/Arity))
+		),
+		fail.
+
+'$lgt_report_scoped_predicate_naming'(_, _).
 
 
 
@@ -16985,16 +17018,71 @@ create_logtalk_flag(Flag, Value, Options) :-
 % redefinition of built-in predicates, detect missing predicate directives, and
 % speed up compilation of other clauses for the same predicates
 
-'$lgt_remember_defined_predicate'(Mode, Head, PI, ExCtx, THead) :-
-	(	Mode = compile(aux,_,_) ->
-		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, aux)),
+'$lgt_remember_defined_predicate'(runtime, Head, PI, ExCtx, THead) :-
+	assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, runtime, user)),
+	retractall('$lgt_pp_previous_predicate_'(_, user)),
+	assertz('$lgt_pp_previous_predicate_'(Head, user)).
+
+'$lgt_remember_defined_predicate'(compile(How,Cut,ExpandedGoals), Head, PI, ExCtx, THead) :-
+	(	How == aux ->
+		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, compile(How,Cut,ExpandedGoals), aux)),
 		retractall('$lgt_pp_previous_predicate_'(_, aux)),
 		assertz('$lgt_pp_previous_predicate_'(Head, aux))
-	;	% compile(user,_,_) or runtime
-		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, user)),
+	;	% How == user,
+		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, compile(How,Cut,ExpandedGoals), user)),
 		retractall('$lgt_pp_previous_predicate_'(_, user)),
-		assertz('$lgt_pp_previous_predicate_'(Head, user))
+		assertz('$lgt_pp_previous_predicate_'(Head, user)),
+		(	'$lgt_compiler_flag'(naming, warning) ->
+			'$lgt_report_naming_issues'(Head, PI)
+		;	true
+		)
 	).
+
+
+
+% '$lgt_report_naming_issues'(+atom, @entity_identifier)
+%
+% reports predicate and variable naming issues as per official coding guidelines
+
+'$lgt_report_naming_issues'(Head, Functor/Arity) :-
+	'$lgt_report_predicate_naming_issues'(Functor, Arity),
+	'$lgt_report_variable_naming_issues'(Head).
+
+
+'$lgt_report_predicate_naming_issues'(Functor, Arity) :-
+	(	'$lgt_camel_case_name'(Functor) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(warning(naming), core, camel_case_predicate_name(File, Lines, Type, Entity, Functor/Arity))
+	;	true
+	).
+
+
+'$lgt_report_variable_naming_issues'(_) :-
+	'$lgt_pp_term_variable_names_file_lines_'(_, Names, _, _),
+	(	'$lgt_member'(Name=_, Names),
+		'$lgt_non_camel_case_name'(Name) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(warning(naming), core, non_camel_case_variable_name(File, Lines, Type, Entity, Name))
+	;	true
+	).
+
+
+'$lgt_camel_case_name'(Name) :-
+	atom_chars(Name, Chars),
+	'$lgt_append'([_| _], [Char1, Char2| _], Chars),
+	a @=< Char1, Char1 @=< z,
+	'A' @=< Char2, Char2 @=< 'Z',
+	!.
+
+
+'$lgt_non_camel_case_name'(Name) :-
+	atom_chars(Name, Chars),
+	'$lgt_append'(_, [Char1, '_', Char2| _], Chars),
+	Char1 \== '_',
+	Char2 \== '_',
+	!.
 
 
 
@@ -20311,6 +20399,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(trivial_goal_fails).
 '$lgt_valid_flag'(always_true_or_false_goals).
 '$lgt_valid_flag'(deprecated).
+'$lgt_valid_flag'(naming).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -20419,6 +20508,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(deprecated, silent) :- !.
 '$lgt_valid_flag_value'(deprecated, warning) :- !.
+
+'$lgt_valid_flag_value'(naming, silent) :- !.
+'$lgt_valid_flag_value'(naming, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.

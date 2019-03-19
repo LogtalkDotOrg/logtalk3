@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on March 6, 2019
+%  Last updated on March 19, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -263,6 +263,7 @@ findall(Term, Goal, List, Tail) :-
 '$lgt_default_flag'(undefined_predicates, warning).
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(steadfastness, silent).
+'$lgt_default_flag'(naming, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(deprecated, warning).

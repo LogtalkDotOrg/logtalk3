@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on March 6, 2019
+%  Last updated on March 19, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -243,6 +243,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_default_flag'(undefined_predicates, warning).
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(steadfastness, silent).
+'$lgt_default_flag'(naming, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(deprecated, warning).

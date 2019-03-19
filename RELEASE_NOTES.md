@@ -66,19 +66,26 @@ argument being a term other than a variable or a number.
 * ADDED: Lint check for missing cut after a call to the standard `repeat/0`
 predicate.
 
+* ADDED: Lint check for predicate names and variable names as per official
+coding guidelines.
+
 * ADDED: Lint check for possible non-steadfast predicate definitions.
+
+* ADDED: Compiler option `naming` to control output of predicate name and
+variable name warnings. Default value is `silent` due to the the curent
+limitation to ASCII names and the computational cost of the checks.
 
 * ADDED: Compiler option `steadfastness` to control output of steadfast
 predicate warnings. Default value is `silent` due to the possibility of
 false positives.
 
-* UPDATED: Include the standard atomic term processing plus term creation and
-decomposition predicates in the list of predicates for the lint check for goals
-that are always true or false.
+* UPDATED: Include the standard atomic term processing plus term creation
+and decomposition predicates in the list of predicates for the lint check
+for goals that are always true or false.
 
 * FIXED: The lint check for unclassified variables in lambda expressions to
 avoid spurious warnings when compiling in optimized mode and using lambda
-expressions as meta-predicate arguments.
+expressions with currying as meta-predicate arguments.
 
 Prolog adapter and integration files
 ------------------------------------

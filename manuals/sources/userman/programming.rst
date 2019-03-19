@@ -667,6 +667,16 @@ Lint flags
    with an underscore as singleton variables. There is no standard
    behavior, hence this option.
 
+.. index:: single: naming flag
+.. _flag_naming:
+
+``naming(Option)``
+   Controls warnings about predicate names and variable names. The official
+   coding guidelines advise using underscores for predicate names and camel
+   case variable names. Possible option values are ``warning`` and ``silent``
+   (the usual default due to the curent limitation to ASCII names and the
+   computational cost of the checks).
+
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

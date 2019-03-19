@@ -20,10 +20,12 @@
 
 :- initialization(
 	logtalk_load(
-		[	warnings,
+		[
+			warnings,
 			main_include_compiler_warning
 		],
-		[	redefined_built_ins(warning),
+		[
+			redefined_built_ins(warning),
 			missing_directives(warning),
 			duplicated_directives(warning),
 			unknown_entities(warning),
@@ -36,6 +38,7 @@
 		 	singleton_variables(warning),
 		 	portability(warning),
 			steadfastness(warning),
+			naming(warning),
 			report(on)
 		]
 	)

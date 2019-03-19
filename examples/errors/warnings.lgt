@@ -422,3 +422,15 @@
 	garply(_).
 
 :- end_object.
+
+
+
+:- object(naming).
+
+	:- public(fooBar/0).
+
+	bazQux.
+
+	quux(Corge_Grault, Corge_Grault).
+
+:- end_object.
