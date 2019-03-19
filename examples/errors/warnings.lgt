@@ -429,8 +429,12 @@
 
 	:- public(fooBar/0).
 
+	:- private(nonTerminal//0).
+
 	bazQux.
 
 	quux(Corge_Grault, Corge_Grault).
+
+	noMoreTokens --> eos.
 
 :- end_object.

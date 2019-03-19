@@ -564,9 +564,17 @@
 		['Predicate name in camel case: ~w'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
+	message_tokens(camel_case_non_terminal_name(File, Lines, Type, Entity, NonTerminal)) -->
+		['Non-terminal name in camel case: ~w'-[NonTerminal], nl],
+		message_context(File, Lines, Type, Entity).
+
 	message_tokens(non_camel_case_variable_name(File, Lines, Type, Entity, Name)) -->
 		['Variable name not in camel case: ~w'-[Name], nl],
 		message_context(File, Lines, Type, Entity).
+
+	message_tokens(non_camel_case_variable_name(File, Lines, Name)) -->
+		['Variable name not in camel case: ~w'-[Name], nl],
+		message_context(File, Lines).
 
 	% auxiliary grammar rules
 

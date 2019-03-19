@@ -7350,6 +7350,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
 	% the actual read term predicate is defined in the adapter files
 	'$lgt_read_term'(Stream, Term, Options, Lines, VariableNames),
+	'$lgt_report_variable_naming_issues'(VariableNames, File, Lines),
 	assertz('$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines)).
 
 
@@ -16694,7 +16695,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_report_missing_directives'(Type, Entity),
 	'$lgt_report_non_portable_calls'(Type, Entity),
 	'$lgt_report_unknown_entities'(Type, Entity),
-	'$lgt_report_predicate_naming'(Type, Entity).
+	'$lgt_report_naming_issues'(Type, Entity).
 
 
 
@@ -16832,23 +16833,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_report_predicate_naming'(Type, Entity)
+% '$lgt_report_naming_issues'(Type, Entity)
 %
-% reports predicate naming issues for predicates with a scope directive
-% but no predicate definition (e.g. predicates declared in protocols)
+% reports names not following official coding guidelines
 
-'$lgt_report_predicate_naming'(Type, Entity) :-
+'$lgt_report_naming_issues'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(naming, warning) ->
-		'$lgt_report_scoped_predicate_naming'(Type, Entity)
+		'$lgt_report_predicate_naming_issues'(Type, Entity)
 	;	true
 	).
 
 
-'$lgt_report_scoped_predicate_naming'(Type, Entity) :-
+'$lgt_report_predicate_naming_issues'(Type, Entity) :-
 		(	'$lgt_pp_public_'(Functor, Arity)
 		;	'$lgt_pp_protected_'(Functor, Arity)
 		;	'$lgt_pp_private_'(Functor, Arity)
 		),
+		\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
 		functor(Template, Functor, Arity),
 		\+ '$lgt_pp_defines_predicate_'(Template, _, _, _, _, _),
 		'$lgt_camel_case_name'(Functor),
@@ -16860,7 +16861,53 @@ create_logtalk_flag(Flag, Value, Options) :-
 		),
 		fail.
 
-'$lgt_report_scoped_predicate_naming'(_, _).
+'$lgt_report_predicate_naming_issues'(Type, Entity) :-
+	'$lgt_pp_non_terminal_'(Functor, Arity, ExtArity),
+	functor(Template, Functor, ExtArity),
+	\+ '$lgt_pp_defines_predicate_'(Template, _, _, _, _, _),
+	'$lgt_camel_case_name'(Functor),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_predicate_declaration_location_'(Functor, ExtArity, File, Line) ->
+		'$lgt_print_message'(warning(naming), core, camel_case_non_terminal_name(File, Line-Line, Type, Entity, Functor//Arity))
+	;	'$lgt_source_file_context'(File, _),
+		'$lgt_print_message'(warning(naming), core, camel_case_non_terminal_name(File, '-'(-1, -1), Type, Entity, Functor//Arity))
+	),
+	fail.
+
+'$lgt_report_predicate_naming_issues'(Type, Entity) :-
+	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, _),
+	Arity2 is Arity - 2,
+	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity2),
+	\+ '$lgt_pp_public_'(Functor, Arity),
+	\+ '$lgt_pp_protected_'(Functor, Arity),
+	\+ '$lgt_pp_private_'(Functor, Arity),
+	\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
+	'$lgt_camel_case_name'(Functor),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Line) ->
+		'$lgt_print_message'(warning(naming), core, camel_case_predicate_name(File, Line-Line, Type, Entity, Functor/Arity))
+	;	'$lgt_source_file_context'(File, _),
+		'$lgt_print_message'(warning(naming), core, camel_case_predicate_name(File, '-'(-1, -1), Type, Entity, Functor/Arity))
+	),
+	fail.
+
+'$lgt_report_predicate_naming_issues'(Type, Entity) :-
+	'$lgt_pp_defines_non_terminal_'(Functor, Arity),
+	ExtArity is Arity + 2,
+	\+ '$lgt_pp_public_'(Functor, ExtArity),
+	\+ '$lgt_pp_protected_'(Functor, ExtArity),
+	\+ '$lgt_pp_private_'(Functor, ExtArity),
+	\+ '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity),
+	'$lgt_camel_case_name'(Functor),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_predicate_definition_location_'(Functor, ExtArity, File, Line) ->
+		'$lgt_print_message'(warning(naming), core, camel_case_non_terminal_name(File, Line-Line, Type, Entity, Functor//Arity))
+	;	'$lgt_source_file_context'(File, _),
+		'$lgt_print_message'(warning(naming), core, camel_case_non_terminal_name(File, '-'(-1, -1), Type, Entity, Functor//Arity))
+	),
+	fail.
+
+'$lgt_report_predicate_naming_issues'(_, _).
 
 
 
@@ -17018,55 +17065,35 @@ create_logtalk_flag(Flag, Value, Options) :-
 % redefinition of built-in predicates, detect missing predicate directives, and
 % speed up compilation of other clauses for the same predicates
 
-'$lgt_remember_defined_predicate'(runtime, Head, PI, ExCtx, THead) :-
-	assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, runtime, user)),
-	retractall('$lgt_pp_previous_predicate_'(_, user)),
-	assertz('$lgt_pp_previous_predicate_'(Head, user)).
-
-'$lgt_remember_defined_predicate'(compile(How,Cut,ExpandedGoals), Head, PI, ExCtx, THead) :-
-	(	How == aux ->
-		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, compile(How,Cut,ExpandedGoals), aux)),
+'$lgt_remember_defined_predicate'(Mode, Head, PI, ExCtx, THead) :-
+	(	Mode = compile(aux,_,_) ->
+		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, aux)),
 		retractall('$lgt_pp_previous_predicate_'(_, aux)),
 		assertz('$lgt_pp_previous_predicate_'(Head, aux))
-	;	% How == user,
-		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, compile(How,Cut,ExpandedGoals), user)),
+	;	% compile(user,_,_) or runtime
+		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, user)),
 		retractall('$lgt_pp_previous_predicate_'(_, user)),
-		assertz('$lgt_pp_previous_predicate_'(Head, user)),
-		(	'$lgt_compiler_flag'(naming, warning) ->
-			'$lgt_report_naming_issues'(Head, PI)
-		;	true
-		)
+		assertz('$lgt_pp_previous_predicate_'(Head, user))
 	).
 
 
 
-% '$lgt_report_naming_issues'(+atom, @entity_identifier)
+% '$lgt_report_variable_naming_issues'(+list, +atom, +compound)
 %
-% reports predicate and variable naming issues as per official coding guidelines
+% reports variable naming issues as per official coding guidelines
 
-'$lgt_report_naming_issues'(Head, Functor/Arity) :-
-	'$lgt_report_predicate_naming_issues'(Functor, Arity),
-	'$lgt_report_variable_naming_issues'(Head).
-
-
-'$lgt_report_predicate_naming_issues'(Functor, Arity) :-
-	(	'$lgt_camel_case_name'(Functor) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(naming), core, camel_case_predicate_name(File, Lines, Type, Entity, Functor/Arity))
-	;	true
-	).
-
-
-'$lgt_report_variable_naming_issues'(_) :-
-	'$lgt_pp_term_variable_names_file_lines_'(_, Names, _, _),
-	(	'$lgt_member'(Name=_, Names),
-		'$lgt_non_camel_case_name'(Name) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
+'$lgt_report_variable_naming_issues'(Names, File, Lines) :-
+	'$lgt_compiler_flag'(naming, warning),
+	'$lgt_member'(Name=_, Names),
+	'$lgt_non_camel_case_name'(Name),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(naming), core, non_camel_case_variable_name(File, Lines, Type, Entity, Name))
-	;	true
-	).
+	;	'$lgt_print_message'(warning(naming), core, non_camel_case_variable_name(File, Lines, Name))
+	),
+	fail.
+
+'$lgt_report_variable_naming_issues'(_, _, _).
 
 
 '$lgt_camel_case_name'(Name) :-
