@@ -31,12 +31,13 @@
 	complements(type)).
 
 	:- info([
-		version is 1.17,
+		version is 1.18,
 		author is 'Paulo Moura',
 		date is 2019/03/20,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
-			'Character sets' - 'When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
+			'Character sets' - 'When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.',
+			'Caveats' - 'The type argument to the predicates is not type-checked for performance reasons.'
 		],
 		see_also is [type]
 	]).
