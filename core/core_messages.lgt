@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.62,
+		version is 1.63,
 		author is 'Paulo Moura',
 		date is 2019/03/20,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -558,6 +558,10 @@
 
 	message_tokens(possible_non_steadfast_predicate(File, Lines, Type, Entity, Predicate)) -->
 		['Predicate ~q may not be steadfast due to cut and variable aliasing in clause head'-[Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(possible_non_steadfast_non_terminal(File, Lines, Type, Entity, NonTerminal)) -->
+		['Non-terminal ~q may not be steadfast due to cut and variable aliasing in grammar rule head'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(camel_case_entity_name(File, Lines, _Type, Entity)) -->

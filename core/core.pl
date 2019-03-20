@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b20)).
+'$lgt_version_data'(logtalk(3, 25, 0, b21)).
 
 
 
@@ -11375,7 +11375,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(steadfastness), core, possible_non_steadfast_predicate(File, Lines, Type, Entity, Functor/Arity)),
+	(	Arity2 is Arity - 2,
+		'$lgt_pp_defines_non_terminal_'(Functor, Arity2) ->
+		'$lgt_print_message'(warning(steadfastness), core, possible_non_steadfast_non_terminal(File, Lines, Type, Entity, Functor//Arity2))
+	;	'$lgt_print_message'(warning(steadfastness), core, possible_non_steadfast_predicate(File, Lines, Type, Entity, Functor/Arity))
+	),
 	fail.
 % when processing the debug event, the compiled goal is meta-called but
 % this would make the cut local, changing the semantics of the user code;

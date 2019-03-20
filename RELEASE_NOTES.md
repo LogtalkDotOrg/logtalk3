@@ -71,7 +71,8 @@ per official coding guidelines.
 
 * ADDED: Lint check for variable names that differ only on case.
 
-* ADDED: Lint check for possible non-steadfast predicate definitions.
+* ADDED: Lint check for possible non-steadfast predicate and non-terminal
+definitions.
 
 * ADDED: Compiler option `naming` to control output of predicate name and
 variable name warnings. Default value is `silent` due to the the curent
