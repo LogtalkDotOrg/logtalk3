@@ -183,7 +183,8 @@ Contributions
 -------------
 
 * CHANGED: The `verdi_neruda` contribution loader file to enable reporting of
-compilation warnings.
+compilation warnings and to require a manual start to not interfere with the
+automation scripts for generating API documentation.
 
 * FIXED: Harmless bug in the `verdi_neruda` contribution in a `bagof/3` call
 with a existentially qualified variable not occurring in the qualified goal.

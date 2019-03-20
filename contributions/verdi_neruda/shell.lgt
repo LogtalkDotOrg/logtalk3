@@ -1,10 +1,10 @@
 
-:- object(shell(_Interpreters)).
+:- object(shell(_Interpreters_)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Victor Lagerkvist and Paulo Moura',
-		date is 2014/03/12,
+		date is 2019/03/20,
 		comment is 'Prolog shell for the interpreters.',
 		parnames is ['Interpreters']
 	]).
@@ -12,10 +12,8 @@
 	:- public(init/0).
 
 	init :-
-		write_release_information,
-		nl,
-		nl,
-		write_welcoming_message,
+		write('Welcome, noble adventurer, your destiny awaits you!'), nl,
+		write('Type "help." for online help.'), nl,
 		repl.
 
 	repl :-
@@ -229,19 +227,6 @@
 	load_database(Database, Expander) :-
 		logtalk_load(Database, [hook(Expander), report(off)]).
 
-	write_release_information :-
-		Version = '1.0',
-		Author = 'Victor Lagerkvist',
-		write('Verdi Neruda version '),
-		write(Version),
-		write(' by '),
-		write(Author),
-		write('.').
-
-	write_welcoming_message :-
-		 write('Welcome, noble adventurer, your destiny awaits you!'), nl,
-		 write('Type "help." for online help.'), nl.
-
 	write_statistics(Stream, _Statistic, N, Res0) :-
 		Res1 is Res0/N,
 		Res is floor(Res1),
@@ -306,5 +291,42 @@
 	writeln(Stream, X) :-
 		write(Stream, X),
 		nl(Stream).
+
+:- end_object.
+
+
+
+:- object(shell).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2019/03/20,
+		comment is 'User frontend to start the application.'
+	]).
+
+	:- public(welcome/0).
+
+	welcome :-
+		Version = '1.0',
+		Author = 'Victor Lagerkvist',
+		write('Verdi Neruda version '),
+		write(Version),
+		write(' by '),
+		write(Author),
+		write('.'), nl, nl,
+		write('Type shell::start to start.'), nl, nl.
+
+	:- public(start/0).
+
+	start :-
+		Interpreters = [
+			dfs_interpreter - rule_expansion(production),
+			bfs_interpreter - rule_expansion(production),
+			iddfs_interpreter(_Inc) - rule_expansion(production),
+			bup_interpreter - magic_expansion(production),
+			a_star_interpreter(_W) - heuristic_expansion(production)
+		],
+		shell(Interpreters)::init.
 
 :- end_object.
