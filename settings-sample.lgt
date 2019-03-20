@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on February 20, 2019
+%  Last updated on March 20, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -21,69 +21,84 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%  This is a sample settings file for Logtalk that can be used to override
-%  the default flag values in the backend Prolog compiler adapter files.
-%  This is specially useful when Logtalk is installed system-wide in a
-%  read-only directory. Using settings files allows Logtalk to easily support
-%  user-specific and project-specific settings. Note that the settings
-%  defined here can always be overridden by using the `logtalk_compile/2` and
-%  `logtalk_load/2` built-in predicates or by using the `set_logtalk_flag/2`
-%  directive within the source files.
-%
-%  Settings files are also a convenient place to define your own shortcuts
-%  for commonly used queries (e.g. load the debugger and start tracing).
-%
-%  Logtalk looks for a settings file first in the startup directory (thus
-%  supporting per-project settings files). If not found, Logtalk looks for
-%  a settings file in the Logtalk user directory. If still not found, Logtalk
-%  for a settings file in the home directory. If no settings file is found,
-%  Logtalk will use the default flag values defined in the backend Prolog
-%  compiler adapter file. It's however possible to restrict searching
-%  of settings files to the Logtalk user directory and to the home directory
-%  or to disable settings files by changing the definition of the read-only
-%  flag `settings_file` in the used Prolog adapter file from `allow` to,
-%  respectively, `restrict` or `deny`.
-%
-%  Logtalk uses the value of the `LOGTALK_STARTUP_DIRECTORY` environment
-%  variable for the startup directory and the value of the `LOGTALKUSER`
-%  environment variable for the Logtalk user directory. The POSIX integration
-%  scripts automatically set the `LOGTALK_STARTUP_DIRECTORY` variable.
-%  On Windows systems, the integration shortcuts `Start in` field is set by
-%  default to `%LOGTALKUSER%` as the `%CD%` alternative only works on some
-%  Windows versions. A workaround to use per-project settings files is to
-%  copy the shortcut to the project directory and to and edit its `Target`
-%  field to prefix its content with:
-%
-%  C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
-%
-%  When the `LOGTALK_STARTUP_DIRECTORY` variable is not available, Logtalk
-%  uses the current directory as returned by the backend Prolog compiler.
-%
-%  To use settings files, copy this file to your Logtalk user directory or to
-%  the directory containing your project files, rename it to `settings.lgt`,
-%  customize it (see the examples below), and start Logtalk from the project
-%  directory (if you're using a project specific settings file) or from
-%  anywhere (when using a default settings file). Note that, for setting
-%  Logtalk flag values, you must use the `set_logtalk_flag/2` predicate
-%  (wrapped in a `initialization/1` directive) as the scope of the
-%  `set_logtalk_flag/2` directive is local to the entity or the source file
-%  containing it.
-%
-%  If you use more than one backend Prolog compiler and want to use per
-%  compiler settings, you can use the Logtalk conditional compilation
-%  directives and the `prolog_dialect` compiler flag. See the User and
-%  Reference Manuals for details.
-%
-%  Logtalk compiles and loads settings files silently but a warning will
-%  be printed by default if syntax errors are found. Be sure to debug and
-%  test your settings files as regular Logtalk source files before using
-%  them (you may use the `logtalk_compile/1-2` built-in predicates to compile
-%  the settings files without loading them to check for e.g. syntax errors).
-%
-%  Limitations of the backend Prolog compilers may prevent settings files
-%  to work from directories other than the Logtalk user directory, specially
-%  when running on non-POSIX operating systems such as Windows. Check the
-%  `adapters/NOTES.md` file for compatibility details.
+/*
+About
+-----
+
+This is a sample settings file for Logtalk that can be used to override
+the default flag values in the backend Prolog compiler adapter files.
+
+Settings files are specially useful when Logtalk is installed system-wide
+in a read-only directory. Using settings files allows Logtalk to easily
+support user-specific and project-specific settings. Note that the settings
+defined here can always be overridden by using the `logtalk_compile/2` and
+`logtalk_load/2` built-in predicates or by using the `set_logtalk_flag/2`
+directive within the source files.
+
+Settings files are also a convenient place to define your own shortcuts
+for commonly used queries (e.g. load the debugger and start tracing).
+
+Settings file locations
+-----------------------
+
+Logtalk looks for a settings file first in the startup directory (thus
+supporting per-project settings files). If not found, Logtalk looks for
+a settings file in the Logtalk user directory. If still not found, Logtalk
+for a settings file in the home directory. If no settings file is found,
+Logtalk will use the default flag values defined in the backend Prolog
+compiler adapter file. It's however possible to restrict searching
+of settings files to the Logtalk user directory and to the home directory
+or to disable settings files by changing the definition of the read-only
+flag `settings_file` in the used Prolog adapter file from `allow` to,
+respectively, `restrict` or `deny`.
+
+Logtalk uses the value of the `LOGTALK_STARTUP_DIRECTORY` environment
+variable for the startup directory and the value of the `LOGTALKUSER`
+environment variable for the Logtalk user directory. The POSIX integration
+scripts automatically set the `LOGTALK_STARTUP_DIRECTORY` variable.
+On Windows systems, the integration shortcuts `Start in` field is set by
+default to `%LOGTALKUSER%` as the `%CD%` alternative only works on some
+Windows versions. A workaround to use per-project settings files is to
+copy the shortcut to the project directory and to and edit its `Target`
+field to prefix its content with:
+
+C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
+
+When the `LOGTALK_STARTUP_DIRECTORY` variable is not available, Logtalk
+uses the current directory as returned by the backend Prolog compiler.
+
+Defining a settings file
+------------------------
+
+To use settings files, copy this file to your Logtalk user directory or to
+the directory containing your project files, rename it to `settings.lgt`,
+customize it (see the examples below), and start Logtalk from the project
+directory (if you're using a project specific settings file) or from
+anywhere (when using a default settings file). Note that, for setting
+Logtalk flag values, you must use the `set_logtalk_flag/2` predicate
+(wrapped in a `initialization/1` directive) as the scope of the
+`set_logtalk_flag/2` directive is local to the entity or the source file
+containing it.
+
+If you use more than one backend Prolog compiler and want to use per
+compiler settings, you can use the Logtalk conditional compilation
+directives and the `prolog_dialect` compiler flag. See the User and
+Reference Manuals for details.
+
+Caveats
+-------
+
+Logtalk compiles and loads settings files silently but a warning will
+be printed by default if syntax errors are found. Be sure to debug and
+test your settings files as regular Logtalk source files before using
+them (you may use the `logtalk_compile/1-2` built-in predicates to compile
+the settings files without loading them to check for e.g. syntax errors).
+
+Limitations of the backend Prolog compilers may prevent settings files
+to work from directories other than the Logtalk user directory, specially
+when running on non-POSIX operating systems such as Windows. Check the
+`adapters/NOTES.md` file for compatibility details.
+*/
 
 
 %  To load the `help` tool at startup, which provides basic on-line help
