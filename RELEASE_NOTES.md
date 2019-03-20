@@ -106,7 +106,8 @@ expanding a variable goal.
 Documentation
 -------------
 
-* ADDED: Handbook documentation about the new `steadfastness` compiler option.
+* ADDED: Handbook documentation about the new `naming` and `steadfastness`
+compiler options.
 
 * ADDED: Handbook glossary entry for "steadfastness".
 

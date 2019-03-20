@@ -176,6 +176,8 @@ to have an entity per source file. Entities that might be useful in
 different contexts (such as library entities) are best defined in their
 own source files.
 
+A detailed coding style guide is available at the Logtalk official website.
+
 .. _programming_session:
 
 Compiling and running applications
