@@ -112,6 +112,8 @@ Documentation
 
 * FIXED: Spurious and empty index section in the PDF version of the Handbook.
 
+* FIXED: Hyperlinks to compiler flags in the PDF version of the Handbook.
+
 Library
 -------
 
