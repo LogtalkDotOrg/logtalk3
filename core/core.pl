@@ -11372,9 +11372,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines),
 	'$lgt_compiler_flag'(steadfastness, warning),
 	'$lgt_variable_aliasing'(Head),
+	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(steadfastness), core, possible_non_steadfast_predicate(File, Lines, Type, Entity, Head)),
+	'$lgt_print_message'(warning(steadfastness), core, possible_non_steadfast_predicate(File, Lines, Type, Entity, Functor/Arity)),
 	fail.
 % when processing the debug event, the compiled goal is meta-called but
 % this would make the cut local, changing the semantics of the user code;

@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.61,
+		version is 1.62,
 		author is 'Paulo Moura',
-		date is 2019/03/19,
+		date is 2019/03/20,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -556,8 +556,8 @@
 		['The encoding/1 directive is misplaced'-[], nl],
 		message_context(File, Lines).
 
-	message_tokens(possible_non_steadfast_predicate(File, Lines, Type, Entity, Head)) -->
-		['Predicate with clause head ~q may not be steadfast due to variable aliasing and cut'-[Head], nl],
+	message_tokens(possible_non_steadfast_predicate(File, Lines, Type, Entity, Predicate)) -->
+		['Predicate ~q may not be steadfast due to cut and variable aliasing in clause head'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(camel_case_entity_name(File, Lines, _Type, Entity)) -->
