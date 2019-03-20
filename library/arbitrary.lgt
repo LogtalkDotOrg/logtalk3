@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 1.16,
+		version is 1.17,
 		author is 'Paulo Moura',
 		date is 2019/03/20,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -260,7 +260,7 @@
 
 	arbitrary(compound, Arbitrary) :-
 		arbitrary(atom(ascii_printable), Functor),
-		arbitrary(list, Arguments),
+		arbitrary(non_empty_list, Arguments),
 		Arbitrary =.. [Functor| Arguments].
 
 	arbitrary(callable, Arbitrary) :-

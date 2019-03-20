@@ -134,6 +134,8 @@ Library
 `codes`, `codes(CharSet)`, `chars`, `chars(CharSet)`, `code`, `code(CharSet)`,
 `char`, and `char(CharSet)`.
 
+* FIXED: Generation of arbitrary values for the `compound` type.
+
 * FIXED: Add to the `numberlistp` protocol declarations for the `max/2` and
 `min/2` predicates as these override inherited declaration from the `listp`
 protocol to use arithmetic order instead of standard order.
