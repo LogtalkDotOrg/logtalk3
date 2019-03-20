@@ -9,8 +9,8 @@
 Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1.21
-| **Date:** 2019/3/7
+| **Version:** 1.22
+| **Date:** 2019/3/20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(restrict)``
@@ -161,15 +161,15 @@ Remarks
 
 * **Base types from Prolog**: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}
 
-* **Atom derived types**: {non_empty_atom, boolean, character, operator_specifier}
+* **Atom derived types**: {non_empty_atom, boolean, character, char (same as character), operator_specifier}
 
 * **Number derived types**: {positive_number, negative_number, non_positive_number, non_negative_number}
 
 * **Float derived types**: {positive_float, negative_float, non_positive_float, non_negative_float, probability}
 
-* **Integer derived types**: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, operator_priority}
+* **Integer derived types**: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, code (same as character_code), operator_priority}
 
-* **List types (compound derived types)**: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}
+* **List types (compound derived types)**: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}
 
 * **Other compound derived types**: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}
 
@@ -212,6 +212,8 @@ Remarks
 * **Registering new types**: New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.
 
 * **Meta-types**: Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.
+
+* **Character sets**: When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.
 
 .. seealso::
 

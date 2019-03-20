@@ -118,6 +118,22 @@ compiler options.
 Library
 -------
 
+* CHANGED: Generation of arbitrary values for the types `character_code` and
+`character` to default to the ASCII printable character set.
+
+* ADDED: Type definitions for `atom(CharSet)`, `non_empty_atom(Charset)`,
+`character_code(CharSet)`, and `character(CharSet)`.
+
+* ADDED: Type definitions for the common type abbreviations `codes`,
+`codes(CharSet)`, `chars`, `chars(CharSet)`, `code`, `code(CharSet)`,
+`char`, and `char(CharSet)`.
+
+* ADDED: Generation of arbitrary values for the `character(CharSet)` type.
+
+* ADDED: Generation of arbitrary values for the common type abbreviations
+`codes`, `codes(CharSet)`, `chars`, `chars(CharSet)`, `code`, `code(CharSet)`,
+`char`, and `char(CharSet)`.
+
 * FIXED: Add to the `numberlistp` protocol declarations for the `max/2` and
 `min/2` predicates as these override inherited declaration from the `listp`
 protocol to use arithmetic order instead of standard order.

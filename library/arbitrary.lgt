@@ -31,12 +31,12 @@
 	complements(type)).
 
 	:- info([
-		version is 1.15,
+		version is 1.16,
 		author is 'Paulo Moura',
-		date is 2019/03/12,
+		date is 2019/03/20,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
-			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
+			'Character sets' - 'When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
 		],
 		see_also is [type]
 	]).
@@ -119,9 +119,14 @@
 	arbitrary(byte).
 	arbitrary(character_code).
 	arbitrary(character_code(_CharSet)).
+	arbitrary(code).
+	arbitrary(code(_CharSet)).
 	% atom derived types
 	arbitrary(boolean).
 	arbitrary(character).
+	arbitrary(character(_CharSet)).
+	arbitrary(char).
+	arbitrary(char(_CharSet)).
 	arbitrary(order).
 	arbitrary(non_empty_atom).
 	arbitrary(atom(_CharSet)).
@@ -139,6 +144,10 @@
 	arbitrary(list(_Type, _Min, _Max)).
 	arbitrary(difference_list).
 	arbitrary(difference_list(_Type)).
+	arbitrary(codes).
+	arbitrary(codes(_CharSet)).
+	arbitrary(chars).
+	arbitrary(chars(_CharSet)).
 	arbitrary(pair).
 	arbitrary(pair(_KeyType, _ValueType)).
 	arbitrary(between(_Type, _Lower, _Upper)).
@@ -266,8 +275,18 @@
 		member(Arbitrary, [true, false]).
 
 	arbitrary(character, Arbitrary) :-
-		arbitrary(character_code, Code),
+		arbitrary(character_code(ascii_printable), Code),
 		char_code(Arbitrary, Code).
+
+	arbitrary(character(CharSet), Arbitrary) :-
+		arbitrary(character_code(CharSet), Code),
+		char_code(Arbitrary, Code).
+
+	arbitrary(char, Arbitrary) :-
+		arbitrary(character, Arbitrary).
+
+	arbitrary(char(CharSet), Arbitrary) :-
+		arbitrary(character(CharSet), Arbitrary).
 
 	arbitrary(order, Arbitrary) :-
 		member(Arbitrary, [(<), (=), (>)]).
@@ -340,8 +359,8 @@
 		between(0, 255, Arbitrary).
 
 	arbitrary(character_code, Arbitrary) :-
-		code_upper_limit(Upper),
-		between(0, Upper, Arbitrary).
+		% ascii_printable
+		between(32, 126, Arbitrary).
 
 	arbitrary(character_code(CharSet), Arbitrary) :-
 		(	CharSet == ascii_full ->
@@ -354,8 +373,15 @@
 			between(0, 65535, Arbitrary)
 		;	CharSet == unicode_full ->
 			between(0, 1114111, Arbitrary)
-		;	between(32, 126, Arbitrary)
+		;	% default to ASCII printable
+			between(32, 126, Arbitrary)
 		).
+
+	arbitrary(code, Arbitrary) :-
+		arbitrary(character_code, Arbitrary).
+
+	arbitrary(code(CharSet), Arbitrary) :-
+		arbitrary(character_code(CharSet), Arbitrary).
 
 	% compound derived types
 
@@ -430,6 +456,18 @@
 		between(0, 42, Length),
 		length(Arbitrary0, Length),
 		map_arbitrary(Arbitrary0, Arbitrary, Type).
+
+	arbitrary(codes, Arbitrary) :-
+		arbitrary(list(character_code(ascii_printable)), Arbitrary).
+
+	arbitrary(codes(CharSet), Arbitrary) :-
+		arbitrary(list(character_code(CharSet)), Arbitrary).
+
+	arbitrary(chars, Arbitrary) :-
+		arbitrary(list(character(ascii_printable)), Arbitrary).
+
+	arbitrary(chars(CharSet), Arbitrary) :-
+		arbitrary(list(character(CharSet)), Arbitrary).
 
 	arbitrary(pair, ArbitraryKey-ArbitraryValue) :-
 		arbitrary(types([non_empty_atom,integer]), ArbitraryKey),
@@ -567,6 +605,22 @@
 	shrink(difference_list(_), Large-Back, Small) :-
 		Large \== Back,
 		shrink_difference_list(Large-Back, Small).
+
+	shrink(codes, Large, Small) :-
+		Large \== [],
+		shrink_list(Large, Small).
+
+	shrink(codes(_), Large, Small) :-
+		Large \== [],
+		shrink_list(Large, Small).
+
+	shrink(chars, Large, Small) :-
+		Large \== [],
+		shrink_list(Large, Small).
+
+	shrink(chars(_), Large, Small) :-
+		Large \== [],
+		shrink_list(Large, Small).
 
 	shrink(pair, LargeKey-Value, SmallKey-Value) :-
 		(	atom(LargeKey) ->

@@ -21,19 +21,19 @@
 :- object(type).
 
 	:- info([
-		version is 1.21,
+		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2019/03/07,
+		date is 2019/03/20,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
 			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier, qualified_callable}',
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
-			'Atom derived types' - '{non_empty_atom, boolean, character, operator_specifier}',
+			'Atom derived types' - '{atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}',
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
-			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, operator_priority}',
-			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}',
+			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}',
+			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}',
@@ -54,7 +54,8 @@
 			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.',
 			'Error context' - 'The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.',
 			'Registering new types' - 'New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.',
-			'Meta-types' - 'Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.'
+			'Meta-types' - 'Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.',
+			'Character sets' - 'When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.'
 		],
 		see_also is [arbitrary, os_types]
 	]).
@@ -171,11 +172,18 @@
 	type(non_negative_integer).
 	type(byte).
 	type(character_code).
+	type(character_code(_Charset)).
+	type(code).
 	type(operator_priority).
 	% atom derived types
+	type(atom(_Charset)).
 	type(non_empty_atom).
+	type(non_empty_atom(_Charset)).
 	type(boolean).
 	type(character).
+	type(character(_Charset)).
+	type(char).
+	type(char(_Charset)).
 	type(order).
 	type(operator_specifier).
 	% compound derived types
@@ -194,6 +202,10 @@
 	type(non_empty_list(_Type)).
 	type(difference_list).
 	type(difference_list(_Type)).
+	type(codes).
+	type(codes(_Charset)).
+	type(chars).
+	type(chars(_Charset)).
 	type(pair).
 	type(pair(_KeyType, _ValueType)).
 	type(cyclic).
@@ -478,6 +490,16 @@
 
 	% atom derived types
 
+	check(atom(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	atom(Term),
+			atom_codes(Term, Codes),
+			catch(check(list(character_code(CharSet)), Codes), _, fail) ->
+			true
+		;	throw(type_error(atom(CharSet), Term))
+		).
+
 	check(non_empty_atom, Term) :-
 		(	Term == '' ->
 			throw(type_error(non_empty_atom, Term))
@@ -486,6 +508,18 @@
 		;	var(Term) ->
 			throw(instantiation_error)
 		;	throw(type_error(non_empty_atom, Term))
+		).
+
+	check(non_empty_atom(CharSet), Term) :-
+		(	Term == '' ->
+			throw(type_error(non_empty_atom(CharSet), Term))
+		;	atom(Term),
+			atom_codes(Term, Codes),
+			catch(check(list(character_code(CharSet)), Codes), _, fail) ->
+			true
+		;	var(Term) ->
+			throw(instantiation_error)
+		;	throw(type_error(non_empty_atom(CharSet), Term))
 		).
 
 	check(boolean, Term) :-
@@ -508,6 +542,42 @@
 		;	atom_length(Term, 1) ->
 			true
 		;	throw(domain_error(character, Term))
+		).
+
+	check(character(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ atom(Term) ->
+			throw(type_error(atom, Term))
+		;	\+ atom_length(Term, 1) ->
+			throw(domain_error(character(CharSet), Term))
+		;	char_code(Term, Code),
+			valid_character_code(CharSet, Code) ->
+			true
+		;	throw(domain_error(character(CharSet), Term))
+		).
+
+	check(char, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ atom(Term) ->
+			throw(type_error(atom, Term))
+		;	atom_length(Term, 1) ->
+			true
+		;	throw(domain_error(char, Term))
+		).
+
+	check(char(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ atom(Term) ->
+			throw(type_error(atom, Term))
+		;	\+ atom_length(Term, 1) ->
+			throw(domain_error(char(CharSet), Term))
+		;	char_code(Term, Code),
+			valid_character_code(CharSet, Code) ->
+			true
+		;	throw(domain_error(char(CharSet), Term))
 		).
 
 	check(order, Term) :-
@@ -691,6 +761,37 @@
 		;	throw(domain_error(character_code, Term))
 		).
 
+	check(character_code(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ integer(Term) ->
+			throw(type_error(integer, Term))
+		;	valid_character_code(CharSet, Term) ->
+			true
+		;	throw(domain_error(character_code(CharSet), Term))
+		).
+
+	check(code, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ integer(Term) ->
+			throw(type_error(integer, Term))
+		;	code_upper_limit(Upper),
+			0 =< Term, Term =< Upper ->
+			true
+		;	throw(domain_error(code, Term))
+		).
+
+	check(code(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ integer(Term) ->
+			throw(type_error(integer, Term))
+		;	valid_character_code(CharSet, Term) ->
+			true
+		;	throw(domain_error(code(CharSet), Term))
+		).
+
 	check(operator_priority, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
@@ -841,7 +942,39 @@
 			throw(instantiation_error)
 		;	is_difference_list(Term) ->
 			is_difference_list_of_type(Term, Type)
-		;	throw(type_error(difference_list, Term))
+		;	throw(type_error(difference_list(Type), Term))
+		).
+
+	check(codes, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	is_list(Term) ->
+			is_list_of_type(Term, character_code)
+		;	throw(type_error(codes, Term))
+		).
+
+	check(codes(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	is_list(Term) ->
+			is_list_of_type(Term, code(CharSet))
+		;	throw(type_error(codes(CharSet), Term))
+		).
+
+	check(chars, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	is_list(Term) ->
+			is_list_of_type(Term, character)
+		;	throw(type_error(chars, Term))
+		).
+
+	check(chars(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	is_list(Term) ->
+			is_list_of_type(Term, char(CharSet))
+		;	throw(type_error(chars(CharSet), Term))
 		).
 
 	check(pair, Term) :-
@@ -979,6 +1112,17 @@
 	code_upper_limit(bmp, 65535).
 	% 0xFF
 	code_upper_limit(unsupported, 255).
+
+	valid_character_code(ascii_full, Code) :-
+		0 =< Code, Code =< 127.
+	valid_character_code(ascii_printable, Code) :-
+		32 =< Code, Code =< 126.
+	valid_character_code(byte, Code) :-
+		0 =< Code, Code =< 255.
+	valid_character_code(unicode_bmp, Code) :-
+		0 =< Code, Code =< 65535.
+	valid_character_code(unicode_full, Code) :-
+		0 =< Code, Code =< 1114111.
 
 	is_list(Var) :-
 		var(Var),
