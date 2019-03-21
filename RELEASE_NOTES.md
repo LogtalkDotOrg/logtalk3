@@ -158,6 +158,9 @@ definitions.
 Tools
 -----
 
+* FIXED: The QuickCheck implementation in the `lgtunit` tool to unbound output
+arguments when shrinking a goal.
+
 * FIXED: Warnings printed by the new lint checks while compiling the `wrapper`
 tool.
 
@@ -203,7 +206,7 @@ IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
 * FIXED: Kate and Pygments highlighting of directives with no arguments to not
-colorize the ending dot.
+colorize the ending dot for consistency with other directives coloring.
 
 
 3.24.0 - February 28, 2019
