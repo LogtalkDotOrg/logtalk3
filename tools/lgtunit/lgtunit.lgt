@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.29,
+		version is 6.31,
 		author is 'Paulo Moura',
 		date is 2019/03/21,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
@@ -1670,7 +1670,8 @@
 		quick_check_failed(Goal, Template).
 
 	shrink_goal(Types, Large, Small) :-
-		decompose_quick_check_template(Large, Entity, Operator, Goal),
+		copy_term(Large, LargeCopy),
+		decompose_quick_check_template(LargeCopy, Entity, Operator, Goal),
 		Goal =.. [Functor| LargeArguments],
 		shrink_goal_arguments(Types, LargeArguments, SmallArguments),
 		SmallGoal =.. [Functor| SmallArguments],
@@ -1679,13 +1680,10 @@
 
 	shrink_goal_arguments([], [], []).
 	shrink_goal_arguments([Type| Types], [LargeArgument| LargeArguments], [SmallArgument| SmallArguments]) :-
-		(	extract_input_type(Type, InputType) ->
-			(	shrink(InputType, LargeArgument, SmallArgument) ->
-				true
-			;	SmallArgument = LargeArgument
-			)
-		;	% unbound output types
+		(	extract_input_type(Type, InputType),
+			shrink(InputType, LargeArgument, SmallArgument) ->
 			true
+		;	SmallArgument = LargeArgument
 		),
 		shrink_goal_arguments(Types, LargeArguments, SmallArguments).
 

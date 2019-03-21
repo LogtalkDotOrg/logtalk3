@@ -158,8 +158,8 @@ definitions.
 Tools
 -----
 
-* FIXED: The QuickCheck implementation in the `lgtunit` tool to unbound output
-arguments when shrinking a goal.
+* FIXED: The QuickCheck implementation in the `lgtunit` tool to prevent
+accidental binding of goal variables when shrinking it.
 
 * FIXED: Warnings printed by the new lint checks while compiling the `wrapper`
 tool.
