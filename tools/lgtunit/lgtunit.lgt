@@ -1662,6 +1662,8 @@
 	type_edge_case(atomic, 2, 0).
 	type_edge_case(atomic, 3, 0.0).
 	type_edge_case(integer, 1, 0).
+	type_edge_case(positive_integer, 1, 1).
+	type_edge_case(negative_integer, 1, -1).
 	type_edge_case(non_positive_integer, 1, 0).
 	type_edge_case(non_negative_integer, 1, 0).
 	type_edge_case(float, 1, 0.0).
@@ -1673,6 +1675,8 @@
 	type_edge_case(non_positive_number, 2, 0.0).
 	type_edge_case(non_negative_number, 1, 0).
 	type_edge_case(non_negative_number, 2, 0.0).
+	type_edge_case(byte, 1, 0).
+	type_edge_case(byte, 2, 255).
 	type_edge_case(probability, 1, 0.0).
 	type_edge_case(probability, 2, 1.0).
 	type_edge_case(list, 1, []).

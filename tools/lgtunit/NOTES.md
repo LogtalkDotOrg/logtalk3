@@ -336,15 +336,18 @@ Another example using a Prolog module predicate:
 Properties are expressed using predicates. The QuickCheck test dialects and
 predicates take as argument the mode template for a property, generate random
 values for each input argument based on the type information, and check each
-output argument. The mode template syntax is the same used in the `info/2`
-predicate directives with an additional notation, `{}/1`, for passing argument
-values as-is instead of generating random values for these arguments. For
-example, assume that we want to verify the `type::valid/2` predicate, which
-takes as first argument a type. Randomly generating random types would be
-cumbersome at best but the main problem is that we need to generate random
-values for the second argument according to the first argument. Using the
-`{}/1` notation we can solve this problem for any specific type, e.g. integer,
-by writing:
+output argument. For common types, the implementation tries first common edge
+cases (e.g. empty atom, empty list, or zero) before generating arbitrary
+values.
+
+The mode template syntax is the same used in the `info/2` predicate directives
+with an additional notation, `{}/1`, for passing argument values as-is instead
+of generating random values for these arguments. For example, assume that we
+want to verify the `type::valid/2` predicate, which takes as first argument a
+type. Randomly generating random types would be cumbersome at best but the
+main problem is that we need to generate random values for the second argument
+according to the first argument. Using the `{}/1` notation we can solve this
+problem for any specific type, e.g. integer, by writing:
 
 	| ?- lgtunit::quick_check(type::valid({integer}, +integer)).
 
