@@ -129,7 +129,8 @@ Library
 `codes(CharSet)`, `chars`, `chars(CharSet)`, `code`, `code(CharSet)`,
 `char`, and `char(CharSet)`.
 
-* ADDED: Generation of arbitrary values for the `character(CharSet)` type.
+* ADDED: Generation of arbitrary values for the `character(CharSet)`,
+`qualified_callable`, `operator_priority`, and `operator_specifier` types.
 
 * ADDED: Generation of arbitrary values for the common type abbreviations
 `codes`, `codes(CharSet)`, `chars`, `chars(CharSet)`, `code`, `code(CharSet)`,

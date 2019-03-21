@@ -31,11 +31,22 @@
 	complements(type)).
 
 	:- info([
-		version is 1.18,
+		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2019/03/20,
+		date is 2019/03/21,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
+			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
+			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier, qualified_callable}',
+			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
+			'Atom derived types' - '{atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}',
+			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
+			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
+			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}',
+			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}',
+			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}',
+			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
+			'Registering new types' - 'New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrink/3 multifile predicate. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.',
 			'Character sets' - 'When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.',
 			'Caveats' - 'The type argument to the predicates is not type-checked for performance reasons.'
 		],
@@ -101,6 +112,10 @@
 	arbitrary(compound).
 	arbitrary(callable).
 	arbitrary(ground).
+	% other type predicates
+	:- if(current_logtalk_flag(modules, supported)).
+		arbitrary(qualified_callable).
+	:- endif.
 	% number derived types
 	arbitrary(positive_number).
 	arbitrary(negative_number).
@@ -122,6 +137,7 @@
 	arbitrary(character_code(_CharSet)).
 	arbitrary(code).
 	arbitrary(code(_CharSet)).
+	arbitrary(operator_priority).
 	% atom derived types
 	arbitrary(boolean).
 	arbitrary(character).
@@ -132,6 +148,7 @@
 	arbitrary(non_empty_atom).
 	arbitrary(atom(_CharSet)).
 	arbitrary(non_empty_atom(_CharSet)).
+	arbitrary(operator_specifier).
 	% compound derived types
 	arbitrary(predicate_indicator).
 	arbitrary(non_terminal_indicator).
@@ -270,6 +287,17 @@
 	arbitrary(ground, Arbitrary) :-
 		arbitrary(types([atom(ascii_printable), integer, float, ground(compound), ground(list)]), Arbitrary).
 
+	% other type predicates
+
+	:- if(current_logtalk_flag(modules, supported)).
+
+	arbitrary(qualified_callable, Arbitrary) :-
+		arbitrary(module_identifier, Module),
+		arbitrary(callable, Goal),
+		Arbitrary = ':'(Module, Goal).
+
+	:- endif.
+
 	% atom derived types
 
 	arbitrary(boolean, Arbitrary) :-
@@ -305,6 +333,9 @@
 		arbitrary(character_code(CharSet), Code),
 		arbitrary(list(character_code(CharSet)), Codes),
 		atom_codes(Arbitrary, [Code| Codes]).
+
+	arbitrary(operator_specifier, Arbitrary) :-
+		member(Arbitrary, [fx, fy, xfx, xfy, yfx, xf, yf]).
 
 	% number derived types
 
@@ -383,6 +414,9 @@
 
 	arbitrary(code(CharSet), Arbitrary) :-
 		arbitrary(character_code(CharSet), Arbitrary).
+
+	arbitrary(operator_priority, Arbitrary) :-
+		between(0, 1200, Arbitrary).
 
 	% compound derived types
 
