@@ -1679,6 +1679,20 @@
 	type_edge_case(byte, 2, 255).
 	type_edge_case(probability, 1, 0.0).
 	type_edge_case(probability, 2, 1.0).
+	type_edge_case(character_code(ascii_full), 1, 0).
+	type_edge_case(character_code(ascii_full), 2, 127).
+	type_edge_case(character_code(ascii_printable), 1, 32).
+	type_edge_case(character_code(ascii_printable), 2, 126).
+	type_edge_case(character_code(byte), 1, 0).
+	type_edge_case(character_code(byte), 2, 255).
+	type_edge_case(character_code(unicode_bmp), 1, 0).
+	type_edge_case(character_code(unicode_bmp), 2, 65535).
+	type_edge_case(character_code(unicode_full), 1, 0).
+	type_edge_case(character_code(unicode_full), 2, 1114111).
+	type_edge_case(code(CharSet), Test, Value) :-
+		type_edge_case(character_code(CharSet), Test, Value).
+	type_edge_case(operator_priority, 1, 0).
+	type_edge_case(operator_priority, 1, 1200).
 	type_edge_case(list, 1, []).
 	type_edge_case(list(_), 1, []).
 	type_edge_case(list(_,_,_), 1, []).
