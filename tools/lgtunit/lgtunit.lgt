@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.31,
+		version is 7.0,
 		author is 'Paulo Moura',
 		date is 2019/03/21,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
@@ -614,6 +614,8 @@
 	% don't assume that between/3 is a built-in predicate as some backend
 	% Prolog systems still provide it as a library predicate
 	:- uses(integer, [between/3]).
+	% for QuickCheck support
+	:- uses(random, [maybe/0]).
 
 	% by default, run the unit tests
 	condition.
@@ -1605,8 +1607,8 @@
 	control_construct(Object<<Template, Object, (<<), Template).
 	control_construct(':'(Module,Template), Module, (:), Template).
 
-	run_quick_check_test(Template, Entity, Operator, Name, Types, _Test) :-
-		generate_arbitrary_arguments(Types, Arguments),
+	run_quick_check_test(Template, Entity, Operator, Name, Types, Test) :-
+		generate_arbitrary_arguments(Types, Arguments, Test),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],
 		(	catch(
@@ -1623,22 +1625,69 @@
 		call(Goal),
 		check_output_arguments(Types, Arguments, quick_check_goal(Goal)).
 
-	generate_arbitrary_arguments([], []).
-	generate_arbitrary_arguments([Type| Types], [Argument| Arguments]) :-
-		generate_arbitrary_argument(Type, Argument),
-		generate_arbitrary_arguments(Types, Arguments).
+	generate_arbitrary_arguments([], [], _).
+	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], Test) :-
+		generate_arbitrary_argument(Type, Argument, Test),
+		generate_arbitrary_arguments(Types, Arguments, Test).
 
-	generate_arbitrary_argument('--'(_), _).
-	generate_arbitrary_argument('-'(_), _).
-	generate_arbitrary_argument('++'(Type), Arbitrary) :-
-		arbitrary(Type, Arbitrary).
-	generate_arbitrary_argument('+'(Type), Arbitrary) :-
-		arbitrary(Type, Arbitrary).
-	generate_arbitrary_argument('?'(Type), Arbitrary) :-
-		arbitrary(types([var,Type]), Arbitrary).
-	generate_arbitrary_argument('@'(Type), Arbitrary) :-
-		arbitrary(Type, Arbitrary).
-	generate_arbitrary_argument('{}'(Argument), Argument).
+	generate_arbitrary_argument('--'(_), _, _).
+	generate_arbitrary_argument('-'(_), _, _).
+	generate_arbitrary_argument('++'(Type), Arbitrary, Test) :-
+		(	type_edge_case(Type, Test, Arbitrary) ->
+			true
+		;	arbitrary(Type, Arbitrary)
+		).
+	generate_arbitrary_argument('+'(Type), Arbitrary, Test) :-
+		(	type_edge_case(Type, Test, Arbitrary) ->
+			true
+		;	arbitrary(Type, Arbitrary)
+		).
+	generate_arbitrary_argument('?'(Type), Arbitrary, Test) :-
+		(	type_edge_case(Type, Test, Arbitrary) ->
+			true
+		;	maybe ->
+			arbitrary(var, Arbitrary)
+		;	arbitrary(Type, Arbitrary)
+		).
+	generate_arbitrary_argument('@'(Type), Arbitrary, Test) :-
+		(	type_edge_case(Type, Test, Arbitrary) ->
+			true
+		;	arbitrary(Type, Arbitrary)
+		).
+	generate_arbitrary_argument('{}'(Argument), Argument, _).
+
+	type_edge_case(atom, 1, '').
+	type_edge_case(atom(_), 1, '').
+	type_edge_case(atomic, 1, '').
+	type_edge_case(atomic, 2, 0).
+	type_edge_case(atomic, 3, 0.0).
+	type_edge_case(integer, 1, 0).
+	type_edge_case(non_positive_integer, 1, 0).
+	type_edge_case(non_negative_integer, 1, 0).
+	type_edge_case(float, 1, 0.0).
+	type_edge_case(non_positive_float, 1, 0.0).
+	type_edge_case(non_negative_float, 1, 0.0).
+	type_edge_case(number, 1, 0).
+	type_edge_case(number, 2, 0.0).
+	type_edge_case(non_positive_number, 1, 0).
+	type_edge_case(non_positive_number, 2, 0.0).
+	type_edge_case(non_negative_number, 1, 0).
+	type_edge_case(non_negative_number, 2, 0.0).
+	type_edge_case(probability, 1, 0.0).
+	type_edge_case(probability, 2, 1.0).
+	type_edge_case(list, 1, []).
+	type_edge_case(list(_), 1, []).
+	type_edge_case(list(_,_,_), 1, []).
+	type_edge_case(difference_list, 1, Back-Back).
+	type_edge_case(difference_list(_), 1, Back-Back).
+	type_edge_case(codes, 1, []).
+	type_edge_case(codes(_), 1, []).
+	type_edge_case(chars, 1, []).
+	type_edge_case(chars(_), 1, []).
+	type_edge_case(callable, 1, true).
+	type_edge_case(callable, 2, fail).
+	type_edge_case(between(_, Lower, _), 1, Lower).
+	type_edge_case(between(_, _, Upper), 2, Upper).
 
 	check_output_arguments([], [], _).
 	check_output_arguments([Type| Types], [Argument| Arguments], Goal) :-

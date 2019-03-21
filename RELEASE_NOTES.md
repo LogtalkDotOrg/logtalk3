@@ -158,6 +158,10 @@ definitions.
 Tools
 -----
 
+* IMPROVED: The `lgtunit` tool QuickCheck implementation to try common edge
+values (e.g. empty atom, empty list, or zero) before generating arbitrary
+values for common types.
+
 * FIXED: The QuickCheck implementation in the `lgtunit` tool to prevent
 accidental binding of goal variables when shrinking it.
 
