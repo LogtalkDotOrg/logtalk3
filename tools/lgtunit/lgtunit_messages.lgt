@@ -119,8 +119,11 @@
 	message_tokens(quick_check_passed(NumberOfTests)) -->
 		['~w random tests passed'-[NumberOfTests], nl].
 
-	message_tokens(quick_check_failed(Goal, Test, Depth)) -->
-		['quick check test failure (at test ~w after ~w shrinks):'-[Test, Depth], nl, '  ~q'-[Goal], nl].
+	message_tokens(quick_check_failed(Goal, Test, Shrinks)) -->
+		(	{Shrinks == 1} ->
+			['quick check test failure (at test ~w after ~w shrink):'-[Test, Shrinks], nl, '  ~q'-[Goal], nl]
+		;	['quick check test failure (at test ~w after ~w shrinks):'-[Test, Shrinks], nl, '  ~q'-[Goal], nl]
+		).
 
 	message_tokens(quick_check_error(error(Error,_), Goal, Test)) -->
 		message_tokens(quick_check_error(Error, Goal, Test)).
