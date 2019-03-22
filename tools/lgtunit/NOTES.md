@@ -317,8 +317,8 @@ of the *sender* using the `<</2` debugging control construct. A simple example
 by passing an incorrect template:
 
 	| ?- lgtunit::quick_check(random::random(-negative_float)).
-	*       quick check test failure:
-	*         random::random(0.09230089279334841)
+	*     quick check test failure (at test 1 after 1 shrink):
+	*       random::random(0.09230089279334841)
 	no
 
 Another example using a Prolog module predicate:

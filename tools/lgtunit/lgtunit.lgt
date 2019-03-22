@@ -608,7 +608,7 @@
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
 	:- uses(logtalk, [print_message/3]).
 	% library support for quick check
-	:- uses(type, [check/2, arbitrary/2, shrink/3]).
+	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2]).
 	% don't assume that between/3 is a built-in predicate as some backend
@@ -1504,24 +1504,24 @@
 
 	approximately_equal(Number1, Number2, Epsilon) :-
 		context(Context),
-		type::check(number, Number1, Context),
-		type::check(number, Number2, Context),
-		type::check(number, Epsilon, Context),
+		check(number, Number1, Context),
+		check(number, Number2, Context),
+		check(number, Epsilon, Context),
 		abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon.
 
 	essentially_equal(Number1, Number2, Epsilon) :-
 		context(Context),
-		type::check(number, Number1, Context),
-		type::check(number, Number2, Context),
-		type::check(number, Epsilon, Context),
+		check(number, Number1, Context),
+		check(number, Number2, Context),
+		check(number, Epsilon, Context),
 		abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon.
 
 	tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance) :-
 		context(Context),
-		type::check(number, Number1, Context),
-		type::check(number, Number2, Context),
-		type::check(number, RelativeTolerance, Context),
-		type::check(number, AbsoluteTolerance, Context),
+		check(number, Number1, Context),
+		check(number, Number2, Context),
+		check(number, RelativeTolerance, Context),
+		check(number, AbsoluteTolerance, Context),
 		abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance).
 
 	'=~='(Float1, _) :-
@@ -1540,8 +1540,8 @@
 		context(Context),
 		% some backend Prolog systems have non-compliant implementations of
 		% float operators such as (/)/2 that can produce integer results
-		type::check(number, Float1, Context),
-		type::check(number, Float2, Context),
+		check(number, Float1, Context),
+		check(number, Float2, Context),
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:
 			epsilon(Epsilon), abs(Float1 - Float2) < 100*Epsilon ->
 			true
@@ -1607,23 +1607,18 @@
 	control_construct(Object<<Template, Object, (<<), Template).
 	control_construct(':'(Module,Template), Module, (:), Template).
 
+	:- meta_predicate(run_quick_check_test(*, *, *, *, *, *)).
 	run_quick_check_test(Template, Entity, Operator, Name, Types, Test) :-
 		generate_arbitrary_arguments(Types, Arguments, Test),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],
-		(	catch(
-				run_quick_check_test(Goal, Types, Arguments),
-				Error,
-				throw(quick_check_error(Error, Goal, Test))
-			) ->
-			true
+		(	catch(Goal, Error, throw(quick_check_error(Error, Goal, Test))) ->
+			(	check_output_arguments(Types, Arguments) ->
+				true
+			;	shrink_failed_test(Types, Goal, Template, Test, 1)
+			)
 		;	shrink_failed_test(Types, Goal, Template, Test, 1)
 		).
-
-	:- meta_predicate(run_quick_check_test(*, *, *)).
-	run_quick_check_test(Goal, Types, Arguments) :-
-		call(Goal),
-		check_output_arguments(Types, Arguments, quick_check_goal(Goal)).
 
 	generate_arbitrary_arguments([], [], _).
 	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], Test) :-
@@ -1707,22 +1702,22 @@
 	type_edge_case(between(_, Lower, _), 1, Lower).
 	type_edge_case(between(_, _, Upper), 2, Upper).
 
-	check_output_arguments([], [], _).
-	check_output_arguments([Type| Types], [Argument| Arguments], Goal) :-
-		check_output_argument(Type, Argument, Goal),
-		check_output_arguments(Types, Arguments, Goal).
+	check_output_arguments([], []).
+	check_output_arguments([Type| Types], [Argument| Arguments]) :-
+		check_output_argument(Type, Argument),
+		check_output_arguments(Types, Arguments).
 
-	check_output_argument('--'(Type), Argument, Goal) :-
-		type::check(Type, Argument, Goal).
-	check_output_argument('-'(Type), Argument, Goal) :-
-		type::check(Type, Argument, Goal).
-	check_output_argument('++'(_), _, _).
-	check_output_argument('+'(Type), Argument, Goal) :-
-		type::check(Type, Argument, Goal).
-	check_output_argument('?'(Type), Argument, Goal) :-
-		type::check(Type, Argument, Goal).
-	check_output_argument('@'(_), _, _).
-	check_output_argument('{}'(_), _, _).
+	check_output_argument('--'(Type), Argument) :-
+		valid(Type, Argument).
+	check_output_argument('-'(Type), Argument) :-
+		valid(Type, Argument).
+	check_output_argument('++'(_), _).
+	check_output_argument('+'(Type), Argument) :-
+		valid(Type, Argument).
+	check_output_argument('?'(Type), Argument) :-
+		valid(Type, Argument).
+	check_output_argument('@'(_), _).
+	check_output_argument('{}'(_), _).
 
 	shrink_failed_test(Types, Goal, Template, Test, Count) :-
 		Count < 16,

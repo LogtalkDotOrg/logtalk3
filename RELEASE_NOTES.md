@@ -158,6 +158,10 @@ definitions.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool QuickCheck implementation to print a failure
+instead of an error message when the test goal output arguments do not conform
+to the template signature. 
+
 * IMPROVED: The `lgtunit` tool QuickCheck implementation to try common edge
 values (e.g. empty atom, empty list, or zero) before generating arbitrary
 values for common types.
