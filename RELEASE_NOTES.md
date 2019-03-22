@@ -162,6 +162,9 @@ Tools
 values (e.g. empty atom, empty list, or zero) before generating arbitrary
 values for common types.
 
+* IMPROVED: The `lgtunit` tool QuickCheck implementation to print the test
+number and the number of shrinks operations in failed test messages.
+
 * FIXED: The QuickCheck implementation in the `lgtunit` tool to prevent
 accidental binding of goal variables when shrinking it.
 

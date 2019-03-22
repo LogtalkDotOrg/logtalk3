@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2018/07/18,
+		date is 2019/03/22,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -463,7 +463,7 @@
 	logtalk::message_hook(quick_check_passed(NumberOfTests), _, lgtunit, _) :-
 		retractall(quick_check_passed(_)),
 		assertz(quick_check_passed(NumberOfTests)).
-	logtalk::message_hook(quick_check_failed(_), _, lgtunit, _).
-	logtalk::message_hook(quick_check_error(_,_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_failed(_,_,_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_error(_,_,_), _, lgtunit, _).
 
 :- end_object.

@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2018/03/30,
+		date is 2019/03/22,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -119,13 +119,13 @@
 	message_tokens(quick_check_passed(NumberOfTests)) -->
 		['~w random tests passed'-[NumberOfTests], nl].
 
-	message_tokens(quick_check_failed(Goal)) -->
-		['quick check test failure:'-[], nl, '  ~q'-[Goal], nl].
+	message_tokens(quick_check_failed(Goal, Test, Depth)) -->
+		['quick check test failure (at test ~w after ~w shrinks):'-[Test, Depth], nl, '  ~q'-[Goal], nl].
 
-	message_tokens(quick_check_error(error(Error,_), _Goal)) -->
-		['quick check test error:'-[], nl, '  ~q'-[Error], nl].
-	message_tokens(quick_check_error(Error, _Goal)) -->
-		['quick check test error:'-[], nl, '  ~q'-[Error], nl].
+	message_tokens(quick_check_error(error(Error,_), Goal, Test)) -->
+		message_tokens(quick_check_error(Error, Goal, Test)).
+	message_tokens(quick_check_error(Error, _Goal, Test)) -->
+		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl].
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, _Object, Test),
@@ -162,7 +162,7 @@
 		[].
 
 	message_tokens(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses)) -->
-		(	{Covered =:= Total} ->	
+		(	{Covered =:= Total} ->
 			% all clause are covered
 			['~q: ~q - ~w - ~w'-[Entity, Predicate, Covered/Total, '(all)'], nl]
 		;	['~q: ~q - ~w - ~w'-[Entity, Predicate, Covered/Total, Clauses], nl]

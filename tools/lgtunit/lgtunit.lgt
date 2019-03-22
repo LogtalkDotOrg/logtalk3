@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.0,
+		version is 7.1,
 		author is 'Paulo Moura',
-		date is 2019/03/21,
+		date is 2019/03/22,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -610,7 +610,7 @@
 	% library support for quick check
 	:- uses(type, [check/2, arbitrary/2, shrink/3]).
 	% library list predicates
-	:- uses(list, [append/3, length/2, member/2]).
+	:- uses(list, [append/3, length/2, member/2, memberchk/2]).
 	% don't assume that between/3 is a built-in predicate as some backend
 	% Prolog systems still provide it as a library predicate
 	:- uses(integer, [between/3]).
@@ -1390,7 +1390,7 @@
 		parse_quick_check_number_of_tests_option(Options, NumberOfTests).
 
 	parse_quick_check_number_of_tests_option(Options, NumberOfTests) :-
-		(	member(n(NumberOfTests), Options),
+		(	memberchk(n(NumberOfTests), Options),
 			integer(NumberOfTests),
 			NumberOfTests >= 0 ->
 			true
@@ -1566,11 +1566,11 @@
 		catch(run_quick_check_tests(Template, NumberOfTests), Error, true),
 		(	var(Error) ->
 			Result = passed
-		;	Error = quick_check_failed(Goal) ->
+		;	Error = quick_check_failed(Goal, _, _) ->
 			Result = failed(Goal)
-		;	Error = quick_check_error(error(Exception,_), Goal) ->
+		;	Error = quick_check_error(error(Exception,_), Goal, _) ->
 			Result = error(Exception, Goal)
-		;	Error = quick_check_error(Exception, Goal),
+		;	Error = quick_check_error(Exception, Goal, _),
 			Result = error(Exception, Goal)
 		).
 
@@ -1587,7 +1587,7 @@
 		quick_check(Template, []).
 
 	run_quick_check_tests(Template, NumberOfTests) :-
-		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template))),
+		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template,1))),
 		integer(NumberOfTests),
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
@@ -1614,10 +1614,10 @@
 		(	catch(
 				run_quick_check_test(Goal, Types, Arguments),
 				Error,
-				throw(quick_check_error(Error, Goal))
+				throw(quick_check_error(Error, Goal, Test))
 			) ->
 			true
-		;	shrink_failed_test(16, Types, Goal, Template)
+		;	shrink_failed_test(Types, Goal, Template, Test, 1)
 		).
 
 	:- meta_predicate(run_quick_check_test(*, *, *)).
@@ -1724,17 +1724,17 @@
 	check_output_argument('@'(_), _, _).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(Depth, Types, Goal, Template) :-
-		Depth > 0,
+	shrink_failed_test(Types, Goal, Template, Test, Count) :-
+		Count < 16,
 		shrink_goal(Types, Goal, Small),
 		!,
-		NextDepth is Depth - 1,
-		(	catch(Small, _, shrink_failed_test(NextDepth, Types, Small, Template)) ->
-			quick_check_failed(Goal, Template)
-		;	shrink_failed_test(NextDepth, Types, Small, Template)
+		Next is Count + 1,
+		(	catch(Small, _, shrink_failed_test(Types, Small, Template, Test, Next)) ->
+			quick_check_failed(Goal, Template, Test, Count)
+		;	shrink_failed_test(Types, Small, Template, Test, Next)
 		).
-	shrink_failed_test(_, _, Goal, Template) :-
-		quick_check_failed(Goal, Template).
+	shrink_failed_test(_, Goal, Template, Test, Count) :-
+		quick_check_failed(Goal, Template, Test, Count).
 
 	shrink_goal(Types, Large, Small) :-
 		copy_term(Large, LargeCopy),
@@ -1759,14 +1759,15 @@
 	extract_input_type('?'(Type), Type).
 	extract_input_type('@'(Type), Type).
 
-	quick_check_failed(Object<<Goal, _<<_) :-
+	% undo the <</2 control construct if added by the tool itself
+	quick_check_failed(Object<<Goal, _<<_, Test, Depth) :-
 		!,
-		throw(quick_check_failed(Object<<Goal)).
-	quick_check_failed(_<<Goal, _) :-
+		throw(quick_check_failed(Object<<Goal, Test, Depth)).
+	quick_check_failed(_<<Goal, _, Test, Depth) :-
 		!,
-		throw(quick_check_failed(Goal)).
-	quick_check_failed(Goal, _) :-
-		throw(quick_check_failed(Goal)).
+		throw(quick_check_failed(Goal, Test, Depth)).
+	quick_check_failed(Goal, _, Test, Depth) :-
+		throw(quick_check_failed(Goal, Test, Depth)).
 
 	% definition taken from the SWI-Prolog documentation
 	variant(Term1, Term2) :-
