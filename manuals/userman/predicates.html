@@ -144,9 +144,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#finding-declared-predicates">Finding declared predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calling-prolog-predicates">Calling Prolog predicates</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#calling-prolog-built-in-predicates">Calling Prolog built-in predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#calling-prolog-non-standard-meta-predicates">Calling Prolog non-standard meta-predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#calling-prolog-non-standard-built-in-meta-predicates">Calling Prolog non-standard built-in meta-predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#calling-prolog-user-defined-plain-predicates">Calling Prolog user-defined plain predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#calling-prolog-module-predicates">Calling Prolog module predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#calling-prolog-module-meta-predicates">Calling Prolog module meta-predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiling-prolog-module-multifile-predicates">Compiling Prolog module multifile predicates</a></li>
 </ul>
 </li>
 </ul>
@@ -1548,8 +1550,8 @@ plain Prolog (i.e. in <code class="docutils literal notranslate"><span class="pr
 on a non-standard built-in predicate, this directive will also silence the
 compiler portability warning.</p>
 </div>
-<div class="section" id="calling-prolog-non-standard-meta-predicates">
-<span id="predicates-prolog-meta"></span><h3>Calling Prolog non-standard meta-predicates<a class="headerlink" href="#calling-prolog-non-standard-meta-predicates" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="calling-prolog-non-standard-built-in-meta-predicates">
+<span id="predicates-prolog-meta"></span><h3>Calling Prolog non-standard built-in meta-predicates<a class="headerlink" href="#calling-prolog-non-standard-built-in-meta-predicates" title="Permalink to this headline">¶</a></h3>
 <p>Prolog built-in meta-predicates may only be called locally within
 objects or categories, i.e. they cannot be used as messages. Compiling
 calls to non-standard, Prolog built-in meta-predicates can be tricky,
@@ -1610,7 +1612,7 @@ will not record the dependency of the <code class="docutils literal notranslate"
 </div>
 <div class="section" id="calling-prolog-module-predicates">
 <span id="predicates-prolog-module"></span><h3>Calling Prolog module predicates<a class="headerlink" href="#calling-prolog-module-predicates" title="Permalink to this headline">¶</a></h3>
-<p>Prolog module predicates  can be called from within objects or categories by
+<p>Prolog module predicates can be called from within objects or categories by
 using explicit qualification. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
     ...,
@@ -1637,8 +1639,8 @@ directive or goal is preferably done from the application <a class="reference in
 An advantage of this approach is that it contributes to a clean separation
 between <em>loading</em> and <em>using</em> a resource with the loader file being the
 central point that loads all application resources (complex applications
-often use a <em>hierarchy</em> of loader files but the main idea remains the same).
-For example, assume that we need to call predicates defined in a CLP(FD)
+often use a <em>hierarchy</em> of loader files but the main idea remains the same).</p>
+<p>As an example, assume that we need to call predicates defined in a CLP(FD)
 Prolog library, which can be loaded using <code class="docutils literal notranslate"><span class="pre">library(clpfd)</span></code> as the file
 specification. In the loader file, we would add:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(library(clpfd), []).
@@ -1647,7 +1649,30 @@ specification. In the loader file, we would add:</p>
 <p>Specifying an empty import list is often used to avoid adding the module
 exported predicates to plain Prolog. In the objects and categories we can
 then call the library predicates, using implicit or explicit qualification,
-as explained.</p>
+as explained. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>:- object(puzzle).
+
+    :- public(puzzle/1).
+
+    :- use_module(clpfd, [
+        all_different/1, ins/2, label/1,
+        (#=)/2, (#\=)/2,
+        op(700, xfx, #=), op(700, xfx, #\=)
+    ]).
+
+    puzzle([S,E,N,D] + [M,O,R,E] = [M,O,N,E,Y]) :-
+        Vars = [S,E,N,D,M,O,R,Y],
+        Vars ins 0..9,
+        all_different(Vars),
+                  S*1000 + E*100 + N*10 + D +
+                  M*1000 + O*100 + R*10 + E #=
+        M*10000 + O*1000 + N*100 + E*10 + Y,
+        M #\= 0, S #\= 0,
+        label([M,O,N,E,Y]).
+
+:- end_object.
+</pre></div>
+</div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The actual module code <strong>must</strong> be loaded prior to compilation of Logtalk
@@ -1655,10 +1680,86 @@ source code that uses it. In particular, programmers should not expect
 that the module be auto-loaded (including when using a backend Prolog
 compiler that supports an autoloading mechanism).</p>
 </div>
-<p>Calls to module meta-predicates may require providing a missing
-meta-predicate template or overriding an existing meta-predicate
-template due to lack of Prolog standardization as discussed
-<a class="reference internal" href="#predicates-prolog-meta"><span class="std std-ref">earlier</span></a> in this section.</p>
+</div>
+<div class="section" id="calling-prolog-module-meta-predicates">
+<h3>Calling Prolog module meta-predicates<a class="headerlink" href="#calling-prolog-module-meta-predicates" title="Permalink to this headline">¶</a></h3>
+<p>The Logtalk library provides implementations of common meta-predicates,
+which can be used in place of module meta-predicates (e.g. list mapping
+meta-predicates). If that is not the case the Logtalk compiler may need
+help to understand the module meta-predicate templates. Despite some recent
+progress in standardization of the syntax of <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives
+and of the <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> property returned by the <code class="docutils literal notranslate"><span class="pre">predicate_property/2</span></code>
+reflection predicate, portability is still a major problem. Thus, Logtalk
+allows the original <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directive to be <strong>overridden</strong>
+with a local directive that Logtalk can make sense of. Note that Logtalk
+is not based on a predicate prefixing mechanism as found in module systems.
+This fundamental difference precludes an automated solution at the Logtalk
+compiler level.</p>
+<p>As an example, assume that you want to call from an object (or a category)
+a module meta-predicate with the following meta-predicate directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">module</span>(foo, [bar<span class="o">/</span><span class="m">2</span>]).
+
+<span class="p">:- </span><span class="k">meta_predicate</span>(bar(<span class="o">*</span>, <span class="o">:</span>)).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">:</span></code> meta-argument specifier is ambiguous. It tell us that the second
+argument of the meta-predicate is module sensitive but it does not tell us
+<em>how</em>. Some legacy module libraries and some Prolog systems use <code class="docutils literal notranslate"><span class="pre">:</span></code> to
+mean <code class="docutils literal notranslate"><span class="pre">0</span></code> (i.e. a meta-argument that will be meta-called). Some others
+use <code class="docutils literal notranslate"><span class="pre">:</span></code> for meta-arguments that are not meta-called but that still need
+to be augmented with module information. Whichever the case, the Logtalk
+compiler doesn’t have enough information to unambiguously parse the
+directive and correctly compile the  meta-arguments in the meta-predicate
+call. Therefore, the Logtalk compiler will generate an error stating that
+<code class="docutils literal notranslate"><span class="pre">:</span></code> is not a valid meta-argument specifier when trying to compile a
+<code class="docutils literal notranslate"><span class="pre">foo:bar/2</span></code> goal. There are two alternative solutions for this problem.
+The advised solution is to override the meta-predicate directive by writing,
+inside the object (or category) where the meta-predicate is called:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(bar(<span class="o">*</span>, <span class="o">*</span>)).
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(bar(<span class="o">*</span>, <span class="m">0</span>)).
+</pre></div>
+</div>
+<p>depending on the true meaning of the second meta-argument. The
+second alternative is to simply use the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a>
+compiler bypass control construct to call the meta-predicate as-is:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>... <span class="o">:-</span> <span class="k">{</span>foo<span class="o">:</span>bar(..., ...)<span class="k">}</span>, ...
+</pre></div>
+</div>
+<p>The downside of this alternative is that it hides the dependency on the
+module library from the reflection API and thus from the developer tools.</p>
+</div>
+<div class="section" id="compiling-prolog-module-multifile-predicates">
+<h3>Compiling Prolog module multifile predicates<a class="headerlink" href="#compiling-prolog-module-multifile-predicates" title="Permalink to this headline">¶</a></h3>
+<p>Some Prolog module libraries, e.g. constraint packages, expect clauses
+for some library predicates to be defined in other modules. This is
+accomplished by declaring the library predicate <em>multifile</em> and by
+explicitly prefixing predicate clause heads with the library module
+identifier. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(clpfd<span class="o">:</span>run_propagator<span class="o">/</span><span class="m">2</span>).
+clpfd<span class="o">:</span>run_propagator(..., ...) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>Logtalk supports the compilation of such clauses within objects and
+categories. While the clause head is compiled as-is, the clause body is
+compiled in the same way as a regular object or category predicate, thus
+allowing calls to local object or category predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
+
+<span class="p">    :- </span><span class="k">multifile</span>(clpfd<span class="o">:</span>run_propagator<span class="o">/</span><span class="m">2</span>).
+    clpfd<span class="o">:</span>run_propagator(..., ...) <span class="o">:-</span>
+        <span class="c">% calls to local object predicates</span>
+        ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The Logtalk compiler will print a warning if the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code>
+directive is missing. These multifile predicates may also be declared
+dynamic using the same <code class="docutils literal notranslate"><span class="pre">Module:Name/Arity</span></code> notation.</p>
 </div>
 </div>
 </div>

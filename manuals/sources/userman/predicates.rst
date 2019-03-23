@@ -1560,8 +1560,8 @@ compiler portability warning.
 
 .. _predicates_prolog_meta:
 
-Calling Prolog non-standard meta-predicates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Calling Prolog non-standard built-in meta-predicates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Prolog built-in meta-predicates may only be called locally within
 objects or categories, i.e. they cannot be used as messages. Compiling
@@ -1640,7 +1640,7 @@ will not record the dependency of the ``foo/0`` predicate on the Prolog
 Calling Prolog module predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Prolog module predicates  can be called from within objects or categories by
+Prolog module predicates can be called from within objects or categories by
 using explicit qualification. For example:
 
 ::
@@ -1673,7 +1673,8 @@ An advantage of this approach is that it contributes to a clean separation
 between *loading* and *using* a resource with the loader file being the
 central point that loads all application resources (complex applications
 often use a *hierarchy* of loader files but the main idea remains the same).
-For example, assume that we need to call predicates defined in a CLP(FD)
+
+As an example, assume that we need to call predicates defined in a CLP(FD)
 Prolog library, which can be loaded using ``library(clpfd)`` as the file
 specification. In the loader file, we would add:
 
@@ -1684,7 +1685,31 @@ specification. In the loader file, we would add:
 Specifying an empty import list is often used to avoid adding the module
 exported predicates to plain Prolog. In the objects and categories we can
 then call the library predicates, using implicit or explicit qualification,
-as explained.
+as explained. For example:
+
+::
+
+   :- object(puzzle).
+
+       :- public(puzzle/1).
+
+       :- use_module(clpfd, [
+           all_different/1, ins/2, label/1,
+           (#=)/2, (#\=)/2,
+           op(700, xfx, #=), op(700, xfx, #\=)
+       ]).
+
+       puzzle([S,E,N,D] + [M,O,R,E] = [M,O,N,E,Y]) :-
+           Vars = [S,E,N,D,M,O,R,Y],
+           Vars ins 0..9,
+           all_different(Vars),
+                     S*1000 + E*100 + N*10 + D +
+                     M*1000 + O*100 + R*10 + E #=
+           M*10000 + O*1000 + N*100 + E*10 + Y,
+           M #\= 0, S #\= 0,
+           label([M,O,N,E,Y]).
+
+   :- end_object.
 
 .. warning::
 
@@ -1693,7 +1718,97 @@ as explained.
    that the module be auto-loaded (including when using a backend Prolog
    compiler that supports an autoloading mechanism).
 
-Calls to module meta-predicates may require providing a missing
-meta-predicate template or overriding an existing meta-predicate
-template due to lack of Prolog standardization as discussed
-:ref:`earlier <predicates_prolog_meta>` in this section.
+Calling Prolog module meta-predicates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Logtalk library provides implementations of common meta-predicates,
+which can be used in place of module meta-predicates (e.g. list mapping
+meta-predicates). If that is not the case the Logtalk compiler may need
+help to understand the module meta-predicate templates. Despite some recent
+progress in standardization of the syntax of ``meta_predicate/1`` directives
+and of the ``meta_predicate/1`` property returned by the ``predicate_property/2``
+reflection predicate, portability is still a major problem. Thus, Logtalk
+allows the original ``meta_predicate/1`` directive to be **overridden**
+with a local directive that Logtalk can make sense of. Note that Logtalk
+is not based on a predicate prefixing mechanism as found in module systems.
+This fundamental difference precludes an automated solution at the Logtalk
+compiler level.
+
+As an example, assume that you want to call from an object (or a category)
+a module meta-predicate with the following meta-predicate directive:
+
+::
+
+   :- module(foo, [bar/2]).
+
+   :- meta_predicate(bar(*, :)).
+
+The ``:`` meta-argument specifier is ambiguous. It tell us that the second
+argument of the meta-predicate is module sensitive but it does not tell us
+*how*. Some legacy module libraries and some Prolog systems use ``:`` to
+mean ``0`` (i.e. a meta-argument that will be meta-called). Some others
+use ``:`` for meta-arguments that are not meta-called but that still need
+to be augmented with module information. Whichever the case, the Logtalk
+compiler doesn't have enough information to unambiguously parse the
+directive and correctly compile the  meta-arguments in the meta-predicate
+call. Therefore, the Logtalk compiler will generate an error stating that
+``:`` is not a valid meta-argument specifier when trying to compile a
+``foo:bar/2`` goal. There are two alternative solutions for this problem.
+The advised solution is to override the meta-predicate directive by writing,
+inside the object (or category) where the meta-predicate is called:
+
+::
+
+   :- meta_predicate(bar(*, *)).
+
+or:
+
+::
+
+   :- meta_predicate(bar(*, 0)).
+
+depending on the true meaning of the second meta-argument. The
+second alternative is to simply use the :ref:`control_external_call_1`
+compiler bypass control construct to call the meta-predicate as-is:
+
+::
+
+   ... :- {foo:bar(..., ...)}, ...
+
+The downside of this alternative is that it hides the dependency on the
+module library from the reflection API and thus from the developer tools.
+
+Compiling Prolog module multifile predicates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some Prolog module libraries, e.g. constraint packages, expect clauses
+for some library predicates to be defined in other modules. This is
+accomplished by declaring the library predicate *multifile* and by
+explicitly prefixing predicate clause heads with the library module
+identifier. For example:
+
+::
+
+   :- multifile(clpfd:run_propagator/2).
+   clpfd:run_propagator(..., ...) :-
+       ...
+
+Logtalk supports the compilation of such clauses within objects and
+categories. While the clause head is compiled as-is, the clause body is
+compiled in the same way as a regular object or category predicate, thus
+allowing calls to local object or category predicates. For example:
+
+::
+
+   :- object(...).
+
+       :- multifile(clpfd:run_propagator/2).
+       clpfd:run_propagator(..., ...) :-
+           % calls to local object predicates
+           ...
+
+   :- end_object.
+
+The Logtalk compiler will print a warning if the ``multifile/1``
+directive is missing. These multifile predicates may also be declared
+dynamic using the same ``Module:Name/Arity`` notation.
