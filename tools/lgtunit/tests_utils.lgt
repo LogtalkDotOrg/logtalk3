@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2019/03/22,
+		date is 2019/03/23,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -366,6 +366,7 @@
 		% delay calling the assertion to runtime
 		Assertion = foobar(1),
 		assertion(4, Assertion).
+
 	% quick_check/3 tests
 
 	succeeds(quick_check_3_01) :-
@@ -386,15 +387,15 @@
 
 	succeeds(quick_check_3_05) :-
 		quick_check(_, Result, []),
-		Result = error(instantiation_error, _).
+		Result = error(Error, _), Error == instantiation_error.
 
 	succeeds(quick_check_3_06) :-
 		quick_check(1, Result, []),
-		Result = error(type_error(callable,1), _).
+		Result = error(Error, _), Error == type_error(callable, 1).
 
 	succeeds(quick_check_3_07) :-
 		quick_check(type::foo42(+integer), Result, []),
-		Result = error(existence_error(predicate_declaration,foo42/1), _).
+		Result = error(Error, _), Error == existence_error(predicate_declaration, foo42/1).
 
 	% quick_check/2 tests
 
