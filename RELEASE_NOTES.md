@@ -112,6 +112,8 @@ compiler options.
 
 * ADDED: Handbook glossary entry for "steadfastness".
 
+* IMPROVED: Handbook session on calling Prolog module meta-predicates.
+
 * FIXED: Spurious and empty index section in the PDF version of the Handbook.
 
 * FIXED: Hyperlinks to compiler flags in the PDF version of the Handbook.
@@ -160,7 +162,7 @@ Tools
 
 * CHANGED: The `lgtunit` tool QuickCheck implementation to print a failure
 instead of an error message when the test goal output arguments do not conform
-to the template signature. 
+to the template signature.
 
 * IMPROVED: The `lgtunit` tool QuickCheck implementation to try common edge
 values (e.g. empty atom, empty list, or zero) before generating arbitrary

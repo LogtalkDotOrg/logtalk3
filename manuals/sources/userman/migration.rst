@@ -475,17 +475,6 @@ With this directive, calls to the ``ins/2`` predicate alias will be
 automatically compiled by Logtalk to calls to the ``::/2`` predicate in
 the ``ic`` module.
 
-When calling Prolog module meta-predicates, the Logtalk compiler may
-need help to understand the corresponding meta-predicate template.
-Despite some recent progress in standardization of the syntax of
-``meta_predicate/1`` directives and of the ``meta_predicate/1`` property
-returned by the ``predicate_property/2`` reflection predicate,
-portability is still a problem. Thus, Logtalk allows the original
-``meta_predicate/1`` directive to be overridden with a local one that
-Logtalk can make sense of. Note that the Logtalk library provides
-implementations of common meta-predicates, which can be used in place of
-module meta-predicates.
-
 Logtalk allows you to send a message to a module in order to call one of
 its predicates. This is usually not advised as it implies a performance
 penalty when compared to just using the ``Module:Call`` notation.
@@ -500,6 +489,68 @@ calling them through message sending. Thus, this feature ensures that,
 on a module compiled as an object, any predicate calling other module
 predicates will work as expected either these other modules are loaded
 as-is or also compiled as objects.
+
+Calling Prolog module meta-predicates
+-------------------------------------
+
+The Logtalk library provides implementations of common meta-predicates,
+which can be used in place of module meta-predicates (e.g. list mapping
+meta-predicates). If that is not the case, when calling Prolog module
+meta-predicates, the Logtalk compiler may need help to understand the
+corresponding meta-predicate template. Despite some recent progress in
+standardization of the syntax of ``meta_predicate/1`` directives and of
+the ``meta_predicate/1`` property returned by the ``predicate_property/2``
+reflection predicate, portability is still a major problem. Thus, Logtalk
+allows the original ``meta_predicate/1`` directive to be **overridden**
+with a local directive that Logtalk can make sense of. Note that Logtalk
+is not based on a predicate prefixing mechanism as found in module systems.
+This fundamental difference precludes an automated solution at the Logtalk
+compiler level.
+
+As an example, assume that you want to call from an object (or a category)
+a module meta-predicate with the following meta-predicate directive:
+
+::
+
+   :- module(foo, [bar/2]).
+
+   :- meta_predicate(bar(*, :)).
+
+The ``:`` meta-argument specifier is ambiguous. It tell us that the second
+argument of the meta-predicate is module sensitive but it does not tell us
+*how*. Some legacy module libraries and some Prolog systems use ``:`` to
+mean ``0`` (i.e. a meta-argument that will be meta-called). Some others
+use ``:`` for meta-arguments that are not meta-called but that still need
+to be augmented with module information. Whichever the case, the Logtalk
+compiler doesn't have enough information to unambiguously parse the
+directive and correctly compile the  meta-arguments in the meta-predicate
+call. Therefore, the Logtalk compiler will generate an error stating that
+``:`` is not a valid meta-argument specifier when trying to compile a
+``foo:bar/2`` goal. There are two alternative solutions for this problem.
+The advised solution is to override the meta-predicate directive by writing,
+inside the object (or category) where the meta-predicate is called:
+
+::
+
+   :- meta_predicate(bar(*, *)).
+
+or:
+
+::
+
+   :- meta_predicate(bar(*, 0)).
+
+depending on the true meaning of the second meta-argument. The
+second alternative is to simply use the :ref:`control_external_call_1`
+compiler bypass control construct to call the meta-predicate as-is:
+
+::
+
+   ... :- {foo:bar(..., ...)}, ...
+
+The downside of this alternative is that it hides from the developer
+tools the (e.g., the ``diagrams`` tool) the dependency on the module
+library.
 
 .. _migration_module:
 
