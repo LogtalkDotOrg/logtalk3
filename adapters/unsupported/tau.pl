@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for <your Prolog compiler name here>
+%  Adapter file for Tau Prolog
 %  Last updated on March 24, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
@@ -115,7 +115,10 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup_call_cleanup(+callable, +callable, +callable) -- built-in ????
+% setup_call_cleanup(+callable, +callable, +callable) -- not supported
+
+setup_call_cleanup(_, _, _) :-
+	throw(not_supported(setup_call_cleanup/3)).
 
 
 
@@ -153,8 +156,7 @@ numbervars(Term, From, Next) :-
 % valid candidates are proprietary built-in predicates with
 % no side-effects when called with ground arguments
 
-'$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
-	fail.
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(succ(_, _)).
 
 
 % '$lgt_prolog_database_predicate'(@callable)
@@ -204,7 +206,7 @@ numbervars(Term, From, Next) :-
 
 '$lgt_prolog_feature'(prolog_dialect, tau).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Path)) :-
-	?????
+	current_prolog_flag(version_data, tau(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(Major, Minor, Path))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
