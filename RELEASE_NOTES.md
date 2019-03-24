@@ -138,7 +138,11 @@ Library
 `codes`, `codes(CharSet)`, `chars`, `chars(CharSet)`, `code`, `code(CharSet)`,
 `char`, and `char(CharSet)`.
 
-* FIXED: Generation of arbitrary values for the `compound` type.
+* IMPROVED: Shrinking of lists by the `arbitrary` category now generates
+multiple solutions by incrementally reducing the generated list size.
+
+* FIXED: Bug when generating arbitrary values for the `compound` type where
+an atom could be produced.
 
 * FIXED: Add to the `numberlistp` protocol declarations for the `max/2` and
 `min/2` predicates as these override inherited declaration from the `listp`
@@ -167,6 +171,10 @@ to the template signature.
 * IMPROVED: The `lgtunit` tool QuickCheck implementation to try common edge
 values (e.g. empty atom, empty list, or zero) before generating arbitrary
 values for common types.
+
+* IMPROVED: The `lgtunit` tool QuickCheck implementation to support shrinking
+predicates that can generated multiple solutions, allowing finding simpler
+counter-examples when shrinking a failed goal.
 
 * IMPROVED: The `lgtunit` tool QuickCheck implementation to print the test
 number and the number of shrinks operations in failed test messages.

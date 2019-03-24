@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.1,
+		version is 7.2,
 		author is 'Paulo Moura',
-		date is 2019/03/22,
+		date is 2019/03/24,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1720,16 +1720,15 @@
 	check_output_argument('{}'(_), _).
 
 	shrink_failed_test(Types, Goal, Template, Test, Count) :-
-		Count < 16,
-		shrink_goal(Types, Goal, Small),
-		!,
-		Next is Count + 1,
-		(	catch(Small, _, shrink_failed_test(Types, Small, Template, Test, Next)) ->
-			quick_check_failed(Goal, Template, Test, Count)
-		;	shrink_failed_test(Types, Small, Template, Test, Next)
+		(	Count < 16 ->
+			(	shrink_goal(Types, Goal, Small),
+				catch(\+ Small, _, fail) ->
+				Next is Count + 1,
+				shrink_failed_test(Types, Small, Template, Test, Next)
+			;	quick_check_failed(Goal, Template, Test, Count)
+			)
+		;	quick_check_failed(Goal, Template, Test, Count)
 		).
-	shrink_failed_test(_, Goal, Template, Test, Count) :-
-		quick_check_failed(Goal, Template, Test, Count).
 
 	shrink_goal(Types, Large, Small) :-
 		copy_term(Large, LargeCopy),
@@ -1743,8 +1742,7 @@
 	shrink_goal_arguments([], [], []).
 	shrink_goal_arguments([Type| Types], [LargeArgument| LargeArguments], [SmallArgument| SmallArguments]) :-
 		(	extract_input_type(Type, InputType),
-			shrink(InputType, LargeArgument, SmallArgument) ->
-			true
+			shrink(InputType, LargeArgument, SmallArgument)
 		;	SmallArgument = LargeArgument
 		),
 		shrink_goal_arguments(Types, LargeArguments, SmallArguments).

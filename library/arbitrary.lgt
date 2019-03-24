@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.19,
+		version is 1.21,
 		author is 'Paulo Moura',
-		date is 2019/03/21,
+		date is 2019/03/22,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -771,13 +771,26 @@
 		arbitrary(Type, Head),
 		map_arbitrary(Tail, TailBack-Back, Type).
 
-	shrink_list([], []).
-	shrink_list([_| Tail], Small) :-
-		shrink_list_keep_next(Tail, Small).
+	shrink_list(List, Small) :-
+		length(List, Length),
+		shrink_list(List, 2, Length, Small).
 
-	shrink_list_keep_next([], []).
-	shrink_list_keep_next([Head| Tail], [Head| Small]) :-
-		shrink_list(Tail, Small).
+	shrink_list([], _, _, []).
+	shrink_list([Head| Tail], N, _, Small) :-
+		shrink_list_by([Head| Tail], 1, N, Small).
+	shrink_list([Head| Tail], N, Length, Small) :-
+		N*2 =< Length,
+		M is N + 1,
+		shrink_list([Head| Tail], M, Length, Small).
+
+	shrink_list_by([], _, _, []).
+	shrink_list_by([_| Tail], N0, N, Small) :-
+		N0 < N,
+		!,
+		N1 is N0 + 1,
+		shrink_list_by(Tail, N1, N, Small).
+	shrink_list_by([Head| Tail], N, N, [Head| Small]) :-
+		shrink_list_by(Tail, 1, N, Small).
 
 	shrink_difference_list(List-Back, Small) :-
 		List == Back,
