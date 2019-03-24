@@ -72,7 +72,7 @@ Generates an arbitrary term of the specified type. Fails if the given type is no
 ``shrink/3``
 ^^^^^^^^^^^^
 
-Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.
+Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate. Must always generate a finite number of solutions.
 
 | **Compilation flags:**
 |    ``static, multifile``
@@ -80,7 +80,7 @@ Shrinks a value to a smaller value. Fails if the given type is not supported or 
 | **Template:**
 |    ``shrink(Type,Large,Small)``
 | **Mode and number of proofs:**
-|    ``shrink(@callable,@term,-term)`` - ``zero_or_one``
+|    ``shrink(@callable,@term,-term)`` - ``zero_or_more``
 
 
 Protected interface

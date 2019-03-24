@@ -74,9 +74,9 @@
 
 	:- public(shrink/3).
 	:- multifile(shrink/3).
-	:- mode(shrink(@callable, @term, -term), zero_or_one).
+	:- mode(shrink(@callable, @term, -term), zero_or_more).
 	:- info(shrink/3, [
-		comment is 'Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.',
+		comment is 'Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate. Must always generate a finite number of solutions.',
 		argnames is ['Type', 'Large', 'Small']
 	]).
 

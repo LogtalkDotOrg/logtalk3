@@ -121,6 +121,10 @@ compiler options.
 Library
 -------
 
+* CHANGED: Specification fo the `arbitrary` category `shrink/3` hook predicate
+to allow for generating multiple solutions for improved shrinking of failed
+goals by the QuickCheck implementation in the `lgtunit` tool.
+
 * CHANGED: Generation of arbitrary values for the types `character_code` and
 `character` to default to the ASCII printable character set.
 

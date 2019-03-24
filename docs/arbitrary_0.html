@@ -366,7 +366,7 @@
 <div id="shrink/3"> </div></div>
 <div class="section" id="shrink-3">
 <span id="arbitrary-0-shrink-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">shrink/3</span></code><a class="headerlink" href="#shrink-3" title="Permalink to this headline">¶</a></h3>
-<p>Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.</p>
+<p>Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate. Must always generate a finite number of solutions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -380,7 +380,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">shrink(&#64;callable,&#64;term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrink(&#64;callable,&#64;term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 </div>
