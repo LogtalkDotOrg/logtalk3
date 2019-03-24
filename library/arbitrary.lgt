@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.21,
+		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2019/03/22,
+		date is 2019/03/24,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -53,6 +53,7 @@
 		see_also is [type]
 	]).
 
+	:- uses(integer, [between/3 as for/3]).
 	:- uses(list, [length/2]).
 	:- uses(random, [between/3, member/2, random/1]).
 
@@ -668,10 +669,16 @@
 		shrink(ValueType, LargeValue, SmallValue).
 
 	shrink(compound, Large, Small) :-
+		% shrink by reducing the number of arguments
 		Large =.. [LargeFunctor| LargeArguments],
 		shrink(atom, LargeFunctor, SmallFunctor),
 		shrink(list, LargeArguments, SmallArguments),
 		Small =.. [SmallFunctor| SmallArguments].
+	shrink(compound, Large, Small) :-
+		% shrink by returning the arguments
+		functor(Large, _, Arity),
+		for(1, Arity, Argument),
+		arg(Argument, Large, Small).
 
 	shrink(ground, Large, Small) :-
 		(	atom(Large) ->

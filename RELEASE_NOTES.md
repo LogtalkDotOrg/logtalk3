@@ -145,6 +145,9 @@ goals by the QuickCheck implementation in the `lgtunit` tool.
 * IMPROVED: Shrinking of lists by the `arbitrary` category now generates
 multiple solutions by incrementally reducing the generated list size.
 
+* IMPROVED: Shrinking of compound terms by also replacing a compound by
+any of its arguments.
+
 * FIXED: Bug when generating arbitrary values for the `compound` type where
 an atom could be produced.
 
