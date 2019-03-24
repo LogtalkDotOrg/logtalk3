@@ -93,6 +93,8 @@ expressions with currying as meta-predicate arguments.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Unsupported adapter file for Tau Prolog.
+
 * UPDATED: GNU Prolog definition of the hook predicate for candidate tautology
 or falsehood goals to include non-standard type testing built-in predicates.
 
