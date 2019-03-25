@@ -1720,7 +1720,7 @@
 	check_output_argument('{}'(_), _).
 
 	shrink_failed_test(Types, Goal, Template, Test, Count) :-
-		(	Count < 16 ->
+		(	Count =< 16 ->
 			(	shrink_goal(Types, Goal, Small),
 				catch(\+ Small, _, fail) ->
 				Next is Count + 1,

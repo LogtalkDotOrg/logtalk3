@@ -338,7 +338,11 @@ predicates take as argument the mode template for a property, generate random
 values for each input argument based on the type information, and check each
 output argument. For common types, the implementation tries first common edge
 cases (e.g. empty atom, empty list, or zero) before generating arbitrary
-values.
+values. When the output arguments check fails, the QuickCheck implementation
+tries up to 16 shrink operations of the counter-example to report a simpler
+case to help debugging the failed test. Both generating arbitrary terms and
+shrinking terms make use of the library `arbitrary` category, which is user
+extensible.
 
 The mode template syntax is the same used in the `info/2` predicate directives
 with an additional notation, `{}/1`, for passing argument values as-is instead
