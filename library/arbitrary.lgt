@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 1.24,
+		version is 1.25,
 		author is 'Paulo Moura',
 		date is 2019/03/25,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -600,9 +600,11 @@
 		).
 
 	shrink(integer, Large, Small) :-
+		Large =\= 0,
 		Small is Large // 2.
 
 	shrink(non_negative_integer, Large, Small) :-
+		Large =\= 0,
 		Small is Large // 2.
 
 	shrink(positive_integer, Large, Small) :-

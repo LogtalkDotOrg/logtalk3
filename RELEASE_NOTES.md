@@ -152,6 +152,9 @@ multiple solutions by incrementally reducing the generated list size.
 * IMPROVED: Shrinking of compound terms by also replacing a compound by
 any of its arguments.
 
+* FIXED: Shrinking of `integer` and `non_negative_integer` type values to
+fail when the value is zero.
+
 * FIXED: Bug when generating arbitrary values for the `compound` type where
 an atom could be produced.
 
