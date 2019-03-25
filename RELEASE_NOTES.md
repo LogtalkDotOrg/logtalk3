@@ -134,6 +134,9 @@ goals by the QuickCheck implementation in the `lgtunit` tool.
 non-terminal identifier types plus compound and callable types to default
 to an `ascii_identifier` functor.
 
+* ADDED: Multifile predicate `shrinker/1` to the `arbitrary` category to
+support declaring shrinkers for new types.
+
 * ADDED: Type and arbitrary support for the `ascii_identifier` character set.
 
 * ADDED: Type definitions for `atom(CharSet)`, `non_empty_atom(Charset)`,
@@ -150,7 +153,9 @@ to an `ascii_identifier` functor.
 `codes`, `codes(CharSet)`, `chars`, `chars(CharSet)`, `code`, `code(CharSet)`,
 `char`, and `char(CharSet)`.
 
-* ADDED: Support for shrinking values of types `var_or/1` and `types/1`.
+* ADDED: Support for shrinking values of types `nonvar`, `atomic`, `var_or/1`,
+`atom(CharSet)`, `non_empty_atom(CharSet)`,`probability`, `qualified_callable`
+and `types/1`.
 
 * IMPROVED: Shrinking of lists by the `arbitrary` category now generates
 multiple solutions by incrementally reducing the generated list size.

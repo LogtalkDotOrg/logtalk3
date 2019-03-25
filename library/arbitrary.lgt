@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 1.26,
+		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2019/03/25,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -46,7 +46,7 @@
 			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
-			'Registering new types' - 'New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrink/3 multifile predicate. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.',
+			'Registering new types' - 'New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.',
 			'Character sets' - 'When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default depends on the type.',
 			'Default character sets' - 'Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.',
 			'Caveats' - 'The type argument to the predicates is not type-checked for performance reasons.'
@@ -72,6 +72,14 @@
 	:- info(arbitrary/2, [
 		comment is 'Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.',
 		argnames is ['Type', 'Term']
+	]).
+
+	:- public(shrinker/1).
+	:- multifile(shrinker/1).
+	:- mode(shrinker(?callable), zero_or_more).
+	:- info(shrinker/1, [
+		comment is 'Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the shrink/3 multifile predicate.',
+		argnames is ['Type']
 	]).
 
 	:- public(shrink/3).
@@ -549,6 +557,68 @@
 		member(Type, Types),
 		arbitrary(Type, Arbitrary).
 
+	% shrinker/1
+
+	% Logtalk entity identifiers
+	shrinker(entity_identifier).
+	shrinker(object_identifier).
+	shrinker(protocol_identifier).
+	shrinker(category_identifier).
+	:- if(current_logtalk_flag(modules, supported)).
+		shrinker(module_identifier).
+	:- endif.
+	% base types from the Prolog standard
+	shrinker(nonvar).
+	shrinker(atomic).
+	shrinker(atom).
+	shrinker(number).
+	shrinker(integer).
+	shrinker(float).
+	shrinker(compound).
+	shrinker(callable).
+	shrinker(ground).
+	% other type predicates
+	:- if(current_logtalk_flag(modules, supported)).
+		shrinker(qualified_callable).
+	:- endif.
+	% number derived types
+	shrinker(positive_number).
+	shrinker(non_negative_number).
+	% float derived types
+	shrinker(positive_float).
+	shrinker(non_negative_float).
+	shrinker(probability).
+	% integer derived types
+	shrinker(positive_integer).
+	shrinker(non_negative_integer).
+	% atom derived types
+	shrinker(non_empty_atom).
+	shrinker(atom(_CharSet)).
+	shrinker(non_empty_atom(_CharSet)).
+	% compound derived types
+	shrinker(predicate_indicator).
+	shrinker(non_terminal_indicator).
+	shrinker(predicate_or_non_terminal_indicator).
+	shrinker(clause).
+	shrinker(clause_or_partial_clause).
+	shrinker(list).
+	shrinker(non_empty_list).
+	shrinker(list(_Type)).
+	shrinker(non_empty_list(_Type)).
+	shrinker(list(_Type, _Min, _Max)).
+	shrinker(difference_list).
+	shrinker(difference_list(_Type)).
+	shrinker(codes).
+	shrinker(codes(_CharSet)).
+	shrinker(chars).
+	shrinker(chars(_CharSet)).
+	shrinker(pair).
+	shrinker(pair(_KeyType, _ValueType)).
+	% other types
+	shrinker(var_or(_Type)).
+	shrinker(ground(_Type)).
+	shrinker(types(_Types)).
+
 	% shrink/3
 
 	shrink(entity_identifier, Large, Small) :-
@@ -582,9 +652,15 @@
 		shrink_list(LargeCodes, SmallCodes),
 		atom_codes(Small, SmallCodes).
 
+	shrink(atom(_), Large, Small) :-
+		shrink(atom, Large, Small).
+
 	shrink(non_empty_atom, Large, Small) :-
 		shrink(atom, Large, Small),
 		Small \== ''.
+
+	shrink(non_empty_atom(_), Large, Small) :-
+		shrink(non_empty_atom, Large, Small).
 
 	shrink(number, Large, Small) :-
 		(	integer(Large) ->
@@ -624,6 +700,33 @@
 
 	shrink(positive_float, Large, Small) :-
 		Small is Large / 2.0.
+
+	shrink(probability, Large, Small) :-
+		Small is Large / 2.0.
+
+	shrink(nonvar, Large, Small) :-
+		(	atom(Large) ->
+			shrink(atom, Large, Small)
+		;	integer(Large) ->
+			shrink(integer, Large, Small)
+		;	float(Large) ->
+			shrink(float, Large, Small)
+		;	Large == [] ->
+			fail
+		;	Large = [_| _] ->
+			shrink(list, Large, Small)
+		;	% compound(Large),
+			shrink(compound, Large, Small)
+		).
+
+	shrink(atomic, Large, Small) :-
+		(	atom(Large) ->
+			shrink(atom, Large, Small)
+		;	integer(Large) ->
+			shrink(integer, Large, Small)
+		;	% float(Large),
+			shrink(float, Large, Small)
+		).
 
 	shrink(list, Large, Small) :-
 		Large \== [],
@@ -723,6 +826,14 @@
 			shrink(atom, Large, Small)
 		;	shrink(compound, Large, Small)
 		).
+
+	:- if(current_logtalk_flag(modules, supported)).
+
+	shrink(qualified_callable, ':'(Module, Goal), ':'(SmallModule, SmallGoal)) :-
+		shrink(module_identifier, Module, SmallModule),
+		shrink(callable, Goal, SmallGoal).
+
+	:- endif.
 
 	shrink(predicate_indicator, LargeName/LargeArity, SmallName/SmallArity) :-
 		shrink(atom, LargeName, SmallName),
