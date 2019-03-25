@@ -313,8 +313,8 @@
 <p>Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.22</div>
-<div class="line"><strong>Date:</strong> 2019/3/20</div>
+<div class="line"><strong>Version:</strong> 1.23</div>
+<div class="line"><strong>Date:</strong> 2019/3/25</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -490,7 +490,7 @@
 <li><strong>Error context</strong>: The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.</li>
 <li><strong>Registering new types</strong>: New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</li>
 <li><strong>Meta-types</strong>: Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.</li>
-<li><strong>Character sets</strong>: When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.</li>
+<li><strong>Character sets</strong>: When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.</li>
 <li><strong>Caveats</strong>: The type argument to the predicates is never itself type-checked for performance reasons.</li>
 </ul>
 <div class="admonition seealso">

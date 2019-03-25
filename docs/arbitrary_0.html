@@ -313,7 +313,7 @@
 <p>Adds predicates for generating random values for selected types to the library “type” object.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.25</div>
+<div class="line"><strong>Version:</strong> 1.26</div>
 <div class="line"><strong>Date:</strong> 2019/3/25</div>
 </div>
 <div class="line-block">
@@ -411,7 +411,8 @@
 <li><strong>Other compound derived types</strong>: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}</li>
 <li><strong>Other types</strong>: {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}</li>
 <li><strong>Registering new types</strong>: New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrink/3 multifile predicate. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.</li>
-<li><strong>Character sets</strong>: When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.</li>
+<li><strong>Character sets</strong>: When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default depends on the type.</li>
+<li><strong>Default character sets</strong>: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.</li>
 <li><strong>Caveats</strong>: The type argument to the predicates is not type-checked for performance reasons.</li>
 </ul>
 <div class="admonition seealso">

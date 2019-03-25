@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.22,
+		version is 1.23,
 		author is 'Paulo Moura',
-		date is 2019/03/20,
+		date is 2019/03/25,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -54,7 +54,7 @@
 			'Error context' - 'The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.',
 			'Registering new types' - 'New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.',
 			'Meta-types' - 'Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.',
-			'Character sets' - 'When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.',
+			'Character sets' - 'When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.'
 		],
 		see_also is [arbitrary, os_types]
@@ -1117,6 +1117,13 @@
 		0 =< Code, Code =< 127.
 	valid_character_code(ascii_printable, Code) :-
 		32 =< Code, Code =< 126.
+	valid_character_code(ascii_identifier, Code) :-
+		once((
+			48 =< Code, Code =< 57
+		;	65 =< Code, Code =< 90
+		;	Code =:= 95
+		;	97 =< Code, Code =< 122
+		)).
 	valid_character_code(byte, Code) :-
 		0 =< Code, Code =< 255.
 	valid_character_code(unicode_bmp, Code) :-

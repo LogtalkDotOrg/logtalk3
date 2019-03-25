@@ -9,7 +9,7 @@
 Adds predicates for generating random values for selected types to the library "type" object.
 
 | **Author:** Paulo Moura
-| **Version:** 1.25
+| **Version:** 1.26
 | **Date:** 2019/3/25
 
 | **Compilation flags:**
@@ -123,7 +123,9 @@ Remarks
 
 * **Registering new types**: New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrink/3 multifile predicate. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.
 
-* **Character sets**: When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.
+* **Character sets**: When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default depends on the type.
+
+* **Default character sets**: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.
 
 * **Caveats**: The type argument to the predicates is not type-checked for performance reasons.
 

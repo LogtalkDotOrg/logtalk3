@@ -9,8 +9,8 @@
 Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1.22
-| **Date:** 2019/3/20
+| **Version:** 1.23
+| **Date:** 2019/3/25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(restrict)``
@@ -211,7 +211,7 @@ Remarks
 
 * **Meta-types**: Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.
 
-* **Character sets**: When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.
+* **Character sets**: When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.
 
 * **Caveats**: The type argument to the predicates is never itself type-checked for performance reasons.
 

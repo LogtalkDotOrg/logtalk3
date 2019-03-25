@@ -128,7 +128,13 @@ to allow for generating multiple solutions for improved shrinking of failed
 goals by the QuickCheck implementation in the `lgtunit` tool.
 
 * CHANGED: Generation of arbitrary values for the types `character_code` and
-`character` to default to the ASCII printable character set.
+`character` to default to the `ascii_full` character set.
+
+* CHANGED: Generation of arbitrary values for the entity, predicate, and
+non-terminal identifier types plus compound and callable types to default
+to an `ascii_identifier` functor.
+
+* ADDED: Type and arbitrary support for the `ascii_identifier` character set.
 
 * ADDED: Type definitions for `atom(CharSet)`, `non_empty_atom(Charset)`,
 `character_code(CharSet)`, and `character(CharSet)`.

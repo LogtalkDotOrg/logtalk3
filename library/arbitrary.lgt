@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 1.25,
+		version is 1.26,
 		author is 'Paulo Moura',
 		date is 2019/03/25,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -47,7 +47,8 @@
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
 			'Registering new types' - 'New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrink/3 multifile predicate. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.',
-			'Character sets' - 'When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.',
+			'Character sets' - 'When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default depends on the type.',
+			'Default character sets' - 'Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.',
 			'Caveats' - 'The type argument to the predicates is not type-checked for performance reasons.'
 		],
 		see_also is [type]
@@ -216,21 +217,21 @@
 	% entity identifiers
 
 	arbitrary(entity_identifier, Arbitrary) :-
-		arbitrary(atom(ascii_printable), Arbitrary).
+		arbitrary(atom(ascii_identifier), Arbitrary).
 
 	arbitrary(object_identifier, Arbitrary) :-
-		arbitrary(types([atom(ascii_printable), compound]), Arbitrary).
+		arbitrary(types([atom(ascii_identifier), compound]), Arbitrary).
 
 	arbitrary(protocol_identifier, Arbitrary) :-
-		arbitrary(atom(ascii_printable), Arbitrary).
+		arbitrary(atom(ascii_identifier), Arbitrary).
 
 	arbitrary(category_identifier, Arbitrary) :-
-		arbitrary(types([atom(ascii_printable), compound]), Arbitrary).
+		arbitrary(types([atom(ascii_identifier), compound]), Arbitrary).
 
 	:- if(current_logtalk_flag(modules, supported)).
 
 	arbitrary(module_identifier, Arbitrary) :-
-		arbitrary(atom(ascii_printable), Arbitrary).
+		arbitrary(atom(ascii_identifier), Arbitrary).
 
 	:- endif.
 
@@ -257,10 +258,10 @@
 	arbitrary(var, _).
 
 	arbitrary(nonvar, Arbitrary) :-
-		arbitrary(types([atom(ascii_printable), integer, float, compound, list]), Arbitrary).
+		arbitrary(types([atom, integer, float, compound, list]), Arbitrary).
 
 	arbitrary(atomic, Arbitrary) :-
-		arbitrary(types([atom(ascii_printable), integer, float]), Arbitrary).
+		arbitrary(types([atom, integer, float]), Arbitrary).
 
 	arbitrary(atom, Arbitrary) :-
 		arbitrary(list(character_code(ascii_printable)), Codes),
@@ -278,15 +279,15 @@
 		Arbitrary is Integer * Factor.
 
 	arbitrary(compound, Arbitrary) :-
-		arbitrary(atom(ascii_printable), Functor),
+		arbitrary(atom(ascii_identifier), Functor),
 		arbitrary(non_empty_list, Arguments),
 		Arbitrary =.. [Functor| Arguments].
 
 	arbitrary(callable, Arbitrary) :-
-		arbitrary(types([atom(ascii_printable), compound]), Arbitrary).
+		arbitrary(types([atom(ascii_identifier), compound]), Arbitrary).
 
 	arbitrary(ground, Arbitrary) :-
-		arbitrary(types([atom(ascii_printable), integer, float, ground(compound), ground(list)]), Arbitrary).
+		arbitrary(types([atom, integer, float, ground(compound), ground(list)]), Arbitrary).
 
 	% other type predicates
 
@@ -305,7 +306,7 @@
 		member(Arbitrary, [true, false]).
 
 	arbitrary(character, Arbitrary) :-
-		arbitrary(character_code(ascii_printable), Code),
+		arbitrary(character_code(ascii_full), Code),
 		char_code(Arbitrary, Code).
 
 	arbitrary(character(CharSet), Arbitrary) :-
@@ -392,14 +393,18 @@
 		between(0, 255, Arbitrary).
 
 	arbitrary(character_code, Arbitrary) :-
-		% ascii_printable
-		between(32, 126, Arbitrary).
+		% ascii_full
+		between(0, 129, Arbitrary).
 
 	arbitrary(character_code(CharSet), Arbitrary) :-
 		(	CharSet == ascii_full ->
 			between(0, 127, Arbitrary)
 		;	CharSet == ascii_printable ->
 			between(32, 126, Arbitrary)
+		;	CharSet == ascii_identifier ->
+			identifier_characters(Characters),
+			member(Character, Characters),
+			char_code(Character, Arbitrary)
 		;	CharSet == byte ->
 			between(0, 255, Arbitrary)
 		;	CharSet == unicode_bmp ->
@@ -422,11 +427,11 @@
 	% compound derived types
 
 	arbitrary(predicate_indicator, Name/Arity) :-
-		arbitrary(non_empty_atom(ascii_printable), Name),
+		arbitrary(non_empty_atom(ascii_identifier), Name),
 		arbitrary(between(integer,0,42), Arity).
 
 	arbitrary(non_terminal_indicator, Name//Arity) :-
-		arbitrary(non_empty_atom(ascii_printable), Name),
+		arbitrary(non_empty_atom(ascii_identifier), Name),
 		arbitrary(between(integer,0,42), Arity).
 
 	arbitrary(predicate_or_non_terminal_indicator, Arbitrary) :-
@@ -465,10 +470,10 @@
 		).
 
 	arbitrary(list, Arbitrary) :-
-		arbitrary(list(types([var,atom(ascii_printable),integer,float])), Arbitrary).
+		arbitrary(list(types([var,atom,integer,float])), Arbitrary).
 
 	arbitrary(non_empty_list, Arbitrary) :-
-		arbitrary(non_empty_list(types([var,atom(ascii_printable),integer,float])), Arbitrary).
+		arbitrary(non_empty_list(types([var,atom,integer,float])), Arbitrary).
 
 	arbitrary(list(Type), Arbitrary) :-
 		between(0, 42, Length),
@@ -486,7 +491,7 @@
 		map_arbitrary(Arbitrary, Type, Min, Max).
 
 	arbitrary(difference_list, Arbitrary) :-
-		arbitrary(difference_list(types([var,atom(ascii_printable),integer,float])), Arbitrary).
+		arbitrary(difference_list(types([var,atom,integer,float])), Arbitrary).
 
 	arbitrary(difference_list(Type), Arbitrary) :-
 		between(0, 42, Length),
@@ -494,13 +499,13 @@
 		map_arbitrary(Arbitrary0, Arbitrary, Type).
 
 	arbitrary(codes, Arbitrary) :-
-		arbitrary(list(character_code(ascii_printable)), Arbitrary).
+		arbitrary(list(character_code(ascii_full)), Arbitrary).
 
 	arbitrary(codes(CharSet), Arbitrary) :-
 		arbitrary(list(character_code(CharSet)), Arbitrary).
 
 	arbitrary(chars, Arbitrary) :-
-		arbitrary(list(character(ascii_printable)), Arbitrary).
+		arbitrary(list(character(ascii_full)), Arbitrary).
 
 	arbitrary(chars(CharSet), Arbitrary) :-
 		arbitrary(list(character(CharSet)), Arbitrary).
@@ -777,6 +782,13 @@
 	code_upper_limit(bmp, 65535).
 	% 0xFF
 	code_upper_limit(unsupported, 255).
+
+	identifier_characters([
+		a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,
+		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+		'0','1','2','3','4','5','6','7','8','9','0',
+		'_'
+	]).
 
 	map_arbitrary([], _).
 	map_arbitrary([Head| Tail], Type) :-
