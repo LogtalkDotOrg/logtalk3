@@ -21,7 +21,7 @@
 :- object(type).
 
 	:- info([
-		version is 1.23,
+		version is 1.24,
 		author is 'Paulo Moura',
 		date is 2019/03/25,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
@@ -174,6 +174,7 @@
 	type(character_code).
 	type(character_code(_Charset)).
 	type(code).
+	type(code(_Charset)).
 	type(operator_priority).
 	% atom derived types
 	type(atom(_Charset)).

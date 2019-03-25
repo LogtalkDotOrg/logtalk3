@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/03/15,
+		date is 2019/03/25,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -108,15 +108,47 @@
 		numberlist::rescale([1,2,3,4], 2, Rescaled),
 		Rescaled == [2,4,6,8].
 
+	% all arbitrary types must also be supported type-checked types
 	test(type_arbitrary_2_01) :-
+		forall(
+			type::arbitrary(Type),
+			^^assertion(type(Type), type::type(Type))
+		).
+
+	% arbitrary types must generate valid values
+	test(type_arbitrary_2_02) :-
 		forall(
 			(	type::type(Type),
 				ground(Type),
 				type::arbitrary(Type)
 			),
-			(	lgtunit::assertion(arbitrary(Type), type::arbitrary(Type, Arbitrary)),
-				lgtunit::assertion(check(Type), type::check(Type, Arbitrary))
-			)
+			lgtunit::quick_check(type::arbitrary({Type}, -Type))
+		).
+
+	% all shrinker types must also be arbitrary types
+	test(type_arbitrary_2_03) :-
+		forall(
+			type::shrinker(Type),
+			^^assertion(type(Type), type::arbitrary(Type))
+		).
+
+	% all shrinkers must generate valid values
+	test(type_arbitrary_2_04) :-
+		forall(
+			(	type::shrinker(Type),
+				ground(Type)
+			),
+			lgtunit::quick_check(shrink_value({Type}, -Type))
+		).
+
+	% test support predicates
+
+	shrink_value(Type, Small) :-
+		type::arbitrary(Type, Arbitrary),
+		(	type::shrink(Type, Arbitrary, Small) ->
+			true
+		;	% shrinking is not always possible
+			Small = Arbitrary
 		).
 
 :- end_object.
