@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
 		date is 2019/03/25,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -583,13 +583,19 @@
 	:- endif.
 	% number derived types
 	shrinker(positive_number).
+	shrinker(negative_number).
+	shrinker(non_positive_number).
 	shrinker(non_negative_number).
 	% float derived types
 	shrinker(positive_float).
+	shrinker(negative_float).
+	shrinker(non_positive_float).
 	shrinker(non_negative_float).
 	shrinker(probability).
 	% integer derived types
 	shrinker(positive_integer).
+	shrinker(negative_integer).
+	shrinker(non_positive_integer).
 	shrinker(non_negative_integer).
 	% atom derived types
 	shrinker(non_empty_atom).
@@ -668,6 +674,12 @@
 		;	shrink(float, Large, Small)
 		).
 
+	shrink(non_positive_number, Large, Small) :-
+		(	integer(Large) ->
+			shrink(non_positive_integer, Large, Small)
+		;	shrink(non_positive_float, Large, Small)
+		).
+
 	shrink(non_negative_number, Large, Small) :-
 		(	integer(Large) ->
 			shrink(non_negative_integer, Large, Small)
@@ -680,7 +692,17 @@
 		;	shrink(positive_float, Large, Small)
 		).
 
+	shrink(negative_number, Large, Small) :-
+		(	integer(Large) ->
+			shrink(negative_integer, Large, Small)
+		;	shrink(negative_float, Large, Small)
+		).
+
 	shrink(integer, Large, Small) :-
+		Large =\= 0,
+		Small is Large // 2.
+
+	shrink(non_positive_integer, Large, Small) :-
 		Large =\= 0,
 		Small is Large // 2.
 
@@ -692,14 +714,28 @@
 		Small is Large // 2,
 		Small > 0.
 
+	shrink(negative_integer, Large, Small) :-
+		Small is Large // 2,
+		Small < 0.
+
 	shrink(float, Large, Small) :-
 		Small is Large / 2.0.
 
+	shrink(non_positive_float, Large, Small) :-
+		Large =\= 0.0,
+		Small is Large / 2.0.
+
 	shrink(non_negative_float, Large, Small) :-
+		Large =\= 0.0,
 		Small is Large / 2.0.
 
 	shrink(positive_float, Large, Small) :-
-		Small is Large / 2.0.
+		Small is Large / 2.0,
+		Small > 0.0.
+
+	shrink(negative_float, Large, Small) :-
+		Small is Large / 2.0,
+		Small < 0.0.
 
 	shrink(probability, Large, Small) :-
 		Small is Large / 2.0.

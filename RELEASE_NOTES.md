@@ -154,8 +154,9 @@ support declaring shrinkers for new types.
 `char`, and `char(CharSet)`.
 
 * ADDED: Support for shrinking values of types `nonvar`, `atomic`, `var_or/1`,
-`atom(CharSet)`, `non_empty_atom(CharSet)`,`probability`, `qualified_callable`
-and `types/1`.
+`atom(CharSet)`, `non_empty_atom(CharSet)`,`probability`, `qualified_callable`,
+`types/1`, `negative_number`, `non_positive_number`, `negative_float`,
+`non_positive_float`, `negative_integer`, and `non_positive_integer`.
 
 * IMPROVED: Shrinking of lists by the `arbitrary` category now generates
 multiple solutions by incrementally reducing the generated list size.
