@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 1.23,
+		version is 1.24,
 		author is 'Paulo Moura',
 		date is 2019/03/25,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -619,7 +619,8 @@
 		Small is Large / 2.0.
 
 	shrink(list, Large, Small) :-
-		shrink(list(_), Large, Small).
+		Large \== [],
+		shrink_list(Large, Small).
 
 	shrink(list(_), Large, Small) :-
 		Large \== [],
@@ -637,8 +638,9 @@
 		Large \== [],
 		shrink_list(Large, Small).
 
-	shrink(difference_list, Large, Small) :-
-		shrink(difference_list(_), Large, Small).
+	shrink(difference_list, Large-Back, Small) :-
+		Large \== Back,
+		shrink_difference_list(Large-Back, Small).
 
 	shrink(difference_list(_), Large-Back, Small) :-
 		Large \== Back,
@@ -690,7 +692,7 @@
 			shrink(integer, Large, Small)
 		;	float(Large) ->
 			shrink(float, Large, Small)
-		;	Large = [] ->
+		;	Large == [] ->
 			fail
 		;	Large = [_| _] ->
 			shrink(list, Large, Small)
@@ -699,6 +701,14 @@
 		).
 
 	shrink(ground(Type), Large, Small) :-
+		shrink(Type, Large, Small).
+
+	shrink(var_or(Type), Large, Small) :-
+		nonvar(Large),
+		shrink(Type, Large, Small).
+
+	shrink(types(Types), Large, Small) :-
+		once((list::member(Type, Types), type::valid(Type, Large))),
 		shrink(Type, Large, Small).
 
 	shrink(callable, Large, Small) :-

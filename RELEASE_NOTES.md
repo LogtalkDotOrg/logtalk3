@@ -144,6 +144,8 @@ goals by the QuickCheck implementation in the `lgtunit` tool.
 `codes`, `codes(CharSet)`, `chars`, `chars(CharSet)`, `code`, `code(CharSet)`,
 `char`, and `char(CharSet)`.
 
+* ADDED: Support for shrinking values of types `var_or/1` and `types/1`.
+
 * IMPROVED: Shrinking of lists by the `arbitrary` category now generates
 multiple solutions by incrementally reducing the generated list size.
 
