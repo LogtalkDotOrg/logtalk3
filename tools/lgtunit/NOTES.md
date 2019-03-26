@@ -308,7 +308,7 @@ The `quick_check/3` predicate returns results in reified form:
 
 - `passed`,
 - `failed(Goal)` with Goal being the random test that failed
-- `error(Error, Template)`
+- `error(Error, Template)` or `error(Error, Goal)`
 
 The other two predicates print the test results. The template can be a `::/2`,
 `<</2`, or `:/2` qualified callable term. When the template is an unqualified
@@ -354,6 +354,12 @@ according to the first argument. Using the `{}/1` notation we can solve this
 problem for any specific type, e.g. integer, by writing:
 
 	| ?- lgtunit::quick_check(type::valid({integer}, +integer)).
+
+You can find the list of the basic supported types for using in the template
+in the API documentation for the library entities `type` and `arbitrary`. Note
+that other library entities, including third-party or your own, can contribute
+with additional type definitions as both `type` and `arbitrary` entities are
+user extensible by defining clauses for their multifile predicates.
 
 An optional argument, `n/1`, allows the specification of the number of random
 tests that will be generated and run. The user can define new types to use in
