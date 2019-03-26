@@ -339,7 +339,7 @@ values for each input argument based on the type information, and check each
 output argument. For common types, the implementation tries first common edge
 cases (e.g. empty atom, empty list, or zero) before generating arbitrary
 values. When the output arguments check fails, the QuickCheck implementation
-tries up to 16 shrink operations of the counter-example to report a simpler
+tries up to 64 shrink operations of the counter-example to report a simpler
 case to help debugging the failed test. Both generating arbitrary terms and
 shrinking terms make use of the library `arbitrary` category, which is user
 extensible.

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.2,
+		version is 7.3,
 		author is 'Paulo Moura',
-		date is 2019/03/24,
+		date is 2019/03/26,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1720,7 +1720,7 @@
 	check_output_argument('{}'(_), _).
 
 	shrink_failed_test(Types, Goal, Template, Test, Count) :-
-		(	Count =< 16 ->
+		(	Count =< 64 ->
 			(	shrink_goal(Types, Goal, Small),
 				catch(\+ Small, _, fail) ->
 				Next is Count + 1,

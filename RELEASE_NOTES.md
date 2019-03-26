@@ -159,7 +159,8 @@ support declaring shrinkers for new types.
 `non_positive_float`, `negative_integer`, and `non_positive_integer`.
 
 * IMPROVED: Shrinking of lists by the `arbitrary` category now generates
-multiple solutions by incrementally reducing the generated list size.
+multiple solutions by incrementally reducing the generated list size and
+shrinking the list elements between each reduction.
 
 * IMPROVED: Shrinking of compound terms by also replacing a compound by
 any of its arguments.

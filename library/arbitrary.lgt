@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2019/03/25,
+		date is 2019/03/26,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -654,8 +654,7 @@
 
 	shrink(atom, Large, Small) :-
 		atom_codes(Large, LargeCodes),
-		LargeCodes \== [],
-		shrink_list(LargeCodes, SmallCodes),
+		shrink_list(LargeCodes, character_code, SmallCodes),
 		atom_codes(Small, SmallCodes).
 
 	shrink(atom(_), Large, Small) :-
@@ -765,24 +764,21 @@
 		).
 
 	shrink(list, Large, Small) :-
-		Large \== [],
-		shrink_list(Large, Small).
+		shrink_list(Large, term, Small).
 
-	shrink(list(_), Large, Small) :-
-		Large \== [],
-		shrink_list(Large, Small).
+	shrink(list(Type), Large, Small) :-
+		shrink_list(Large, Type, Small).
 
 	shrink(non_empty_list, Large, Small) :-
-		shrink_list(Large, Small),
+		shrink_list(Large, term, Small),
 		Small \== [].
 
-	shrink(non_empty_list(_), Large, Small) :-
-		shrink_list(Large, Small),
+	shrink(non_empty_list(Type), Large, Small) :-
+		shrink_list(Large, Type, Small),
 		Small \== [].
 
-	shrink(list(_,_,_), Large, Small) :-
-		Large \== [],
-		shrink_list(Large, Small).
+	shrink(list(Type,Lower,Upper), Large, Small) :-
+		shrink_list(Large, between(Type,Lower,Upper), Small).
 
 	shrink(difference_list, Large-Back, Small) :-
 		Large \== Back,
@@ -793,20 +789,16 @@
 		shrink_difference_list(Large-Back, Small).
 
 	shrink(codes, Large, Small) :-
-		Large \== [],
-		shrink_list(Large, Small).
+		shrink_list(Large, code, Small).
 
-	shrink(codes(_), Large, Small) :-
-		Large \== [],
-		shrink_list(Large, Small).
+	shrink(codes(CharSet), Large, Small) :-
+		shrink_list(Large, code(CharSet), Small).
 
 	shrink(chars, Large, Small) :-
-		Large \== [],
-		shrink_list(Large, Small).
+		shrink_list(Large, char, Small).
 
-	shrink(chars(_), Large, Small) :-
-		Large \== [],
-		shrink_list(Large, Small).
+	shrink(chars(CharSet), Large, Small) :-
+		shrink_list(Large, char(CharSet), Small).
 
 	shrink(pair, LargeKey-Value, SmallKey-Value) :-
 		(	atom(LargeKey) ->
@@ -952,17 +944,23 @@
 		arbitrary(Type, Head),
 		map_arbitrary(Tail, TailBack-Back, Type).
 
-	shrink_list(List, Small) :-
-		length(List, Length),
-		shrink_list(List, 2, Length, Small).
+	shrink_list([Head| Tail], Type, Small) :-
+		(	Tail == [] ->
+			Small0 = [Head]
+		;	length([Head| Tail], Length),
+			shrink_list([Head| Tail], Type, 2, Length, Small0)
+		),
+		(	Small = Small0
+		;	shrink_list_elements(Small0, Type, Small)
+		).
+	shrink_list([_| _], _, []).
 
-	shrink_list([], _, _, []).
-	shrink_list([Head| Tail], N, _, Small) :-
-		shrink_list_by([Head| Tail], 1, N, Small).
-	shrink_list([Head| Tail], N, Length, Small) :-
+	shrink_list(List, _, N, _, Small) :-
+		shrink_list_by(List, 1, N, Small).
+	shrink_list(List, Type, N, Length, Small) :-
 		N*2 =< Length,
 		M is N + 1,
-		shrink_list([Head| Tail], M, Length, Small).
+		shrink_list(List, Type, M, Length, Small).
 
 	shrink_list_by([], _, _, []).
 	shrink_list_by([_| Tail], N0, N, Small) :-
@@ -972,6 +970,21 @@
 		shrink_list_by(Tail, N1, N, Small).
 	shrink_list_by([Head| Tail], N, N, [Head| Small]) :-
 		shrink_list_by(Tail, 1, N, Small).
+
+	shrink_list_elements(List, Type, Small) :-
+		shrink_list_elements(List, Type, Small0, Flag),
+		(	var(Flag), !, fail
+		;	Small = Small0
+		;	shrink_list_elements(Small0, Type, Small)
+		).
+
+	shrink_list_elements([], _, [], _).
+	shrink_list_elements([Head| Tail], Type, [Small| Rest], Flag) :-
+		(	shrink(Type, Head, Small) ->
+			Flag = true
+		;	Small = Head
+		),
+		shrink_list_elements(Tail, Type, Rest, Flag).
 
 	shrink_difference_list(List-Back, Small) :-
 		List == Back,
