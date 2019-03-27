@@ -230,8 +230,9 @@ each argument (see the section below for more details):
 	quick_check(Test, Template).
 
 The valid options are the same as for the `test/3` dialect plus a `n/1` option
-to specify the number of random tests that will be generated and run (defaults
-to 100 tests).
+to specify the number of random tests that will be generated/run (default is
+100) and a `s/1` option to specify the maximum number of shrink operations
+(default is 64).
 
 In all dialects, `Test` is a callable term, usually an atom, that uniquely
 identifies a test. This simplifies reporting failed tests and running tests
@@ -362,9 +363,12 @@ with additional type definitions as both `type` and `arbitrary` entities are
 user extensible by defining clauses for their multifile predicates.
 
 An optional argument, `n/1`, allows the specification of the number of random
-tests that will be generated and run. The user can define new types to use in
-the property mode templates to use with its QuickCheck tests by defining
-clauses for the `arbitrary` library category multifile predicates.
+tests that will be generated and run. The maximum number of shrink operations
+can be specified using the option `s/1`.
+
+The user can define new types to use in the property mode templates to use
+with its QuickCheck tests by defining clauses for the `arbitrary` library
+category multifile predicates.
 
 Note that is possible to complement the random tests performed by QuickCheck
 by defining a surrogate predicate that calls the predicate being tested and

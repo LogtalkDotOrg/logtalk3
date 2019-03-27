@@ -202,6 +202,9 @@ Tools
 instead of an error message when the test goal output arguments do not conform
 to the template signature.
 
+* ADDED: The `lgtunit` tool QuickCheck test idioms and predicates now supports
+a `s/1` option for specifying the maximum number of shrink operations.
+
 * IMPROVED: The `lgtunit` tool QuickCheck implementation to try common edge
 values (e.g. empty atom, empty list, or zero) before generating arbitrary
 values for common types.

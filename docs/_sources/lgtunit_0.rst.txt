@@ -9,7 +9,7 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 7.4
+| **Version:** 7.5
 | **Date:** 2019/3/27
 
 | **Compilation flags:**
@@ -578,12 +578,12 @@ Runs a test set as part of running two or more test sets as a unified set.
 
 .. raw:: html
 
-   <div id="run_quick_check_tests/2"> </div>
+   <div id="run_quick_check_tests/3"> </div>
 
-.. index:: run_quick_check_tests/2
-.. _lgtunit/0::run_quick_check_tests/2:
+.. index:: run_quick_check_tests/3
+.. _lgtunit/0::run_quick_check_tests/3:
 
-``run_quick_check_tests/2``
+``run_quick_check_tests/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Runs a list of defined tests.
@@ -592,9 +592,9 @@ Runs a list of defined tests.
 |    ``static``
 
 | **Template:**
-|    ``run_quick_check_tests(Template,NumberOfTests)``
+|    ``run_quick_check_tests(Template,NumberOfTests,MaximumNumberOfShrinks)``
 | **Mode and number of proofs:**
-|    ``run_quick_check_tests(@callable,+integer)`` - ``one_or_error``
+|    ``run_quick_check_tests(@callable,+integer,+integer)`` - ``one_or_error``
 
 
 .. raw:: html
