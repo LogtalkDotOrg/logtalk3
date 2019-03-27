@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2019/03/25,
+		date is 2019/03/27,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -139,6 +139,16 @@
 				ground(Type)
 			),
 			lgtunit::quick_check(shrink_value({Type}, -Type))
+		).
+
+	% all edge cases must be valid
+	test(type_arbitrary_2_05) :-
+		forall(
+			(	type::type(Type),
+				ground(Type),
+				type::edge_case(Type, Term)
+			),
+			^^assertion(edge_case(Type, Term), type::valid(Type, Term))
 		).
 
 	% test support predicates

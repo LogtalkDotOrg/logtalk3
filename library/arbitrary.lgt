@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2019/03/26,
+		date is 2019/03/27,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -88,6 +88,14 @@
 	:- info(shrink/3, [
 		comment is 'Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate. Must always generate a finite number of solutions.',
 		argnames is ['Type', 'Large', 'Small']
+	]).
+
+	:- public(edge_case/2).
+	:- multifile(edge_case/2).
+	:- mode(edge_case(?callable, ?term), zero_or_more).
+	:- info(edge_case/2, [
+		comment is 'Table of type edge cases. Fails if the given type have no defined edge cases. New edge cases for existing or new types can be added by defining a clause for this multifile predicate.',
+		argnames is ['Type', 'Term']
 	]).
 
 	% arbitrary/1
@@ -895,6 +903,75 @@
 			Small = (SmallHead :- SmallBody)
 		;	shrink(callable, Large, Small)
 		).
+
+	% edge_case/2
+
+	edge_case(atom, '').
+	edge_case(atom(_), '').
+	edge_case(atomic, '').
+	edge_case(atomic, 0).
+	edge_case(atomic, 0.0).
+	edge_case(integer, 0).
+	edge_case(positive_integer, 1).
+	edge_case(negative_integer, -1).
+	edge_case(non_positive_integer, 0).
+	edge_case(non_negative_integer, 0).
+	edge_case(float, 0.0).
+	edge_case(non_positive_float, 0.0).
+	edge_case(non_negative_float, 0.0).
+	edge_case(number, 0).
+	edge_case(number, 0.0).
+	edge_case(non_positive_number, 0).
+	edge_case(non_positive_number, 0.0).
+	edge_case(non_negative_number, 0).
+	edge_case(non_negative_number, 0.0).
+	edge_case(byte, 0).
+	edge_case(byte, 255).
+	edge_case(probability, 0.0).
+	edge_case(probability, 1.0).
+	edge_case(character_code(ascii_full), 0).
+	edge_case(character_code(ascii_full), 127).
+	edge_case(character_code(ascii_printable), 32).
+	edge_case(character_code(ascii_printable), 126).
+	edge_case(character_code(byte), 0).
+	edge_case(character_code(byte), 255).
+	edge_case(character_code(unicode_bmp), 0).
+	edge_case(character_code(unicode_bmp), 65535).
+	edge_case(character_code(unicode_full), 0).
+	edge_case(character_code(unicode_full), 1114111).
+	edge_case(code(CharSet), Term) :-
+		edge_case(character_code(CharSet), Term).
+	edge_case(operator_priority, 0).
+	edge_case(operator_priority, 1200).
+	edge_case(list, []).
+	edge_case(list(_), []).
+	edge_case(list(Type), [Term]) :-
+		edge_case(Type, Term).
+	edge_case(list(_, _, _), []).
+	edge_case(list(_, Min, _), [Min]).
+	edge_case(list(_, _, Max), [Max]).
+	edge_case(list(Type, Min, Max), [Term]) :-
+		edge_case(Type, Term),
+		Min @< Term, Term @< Max.
+	edge_case(difference_list, Back-Back).
+	edge_case(difference_list(_), Back-Back).
+	edge_case(difference_list(Type), [Term| Back]-Back) :-
+		edge_case(Type, Term).
+	edge_case(codes, []).
+	edge_case(codes(_), []).
+	edge_case(codes(CharSet), [Term]) :-
+		edge_case(character_code(CharSet), Term).
+	edge_case(chars, []).
+	edge_case(chars(_), []).
+	edge_case(chars(CharSet), [Term]) :-
+		edge_case(character(CharSet), Term).
+	edge_case(callable, true).
+	edge_case(callable, fail).
+	edge_case(between(_, Lower, _), Lower).
+	edge_case(between(_, _, Upper), Upper).
+	edge_case(between(Type, Lower, Upper), Term) :-
+		edge_case(Type, Term),
+		Lower @< Term, Term @< Upper.
 
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies

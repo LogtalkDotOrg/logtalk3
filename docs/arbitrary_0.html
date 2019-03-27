@@ -313,8 +313,8 @@
 <p>Adds predicates for generating random values for selected types to the library “type” object.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2.2</div>
-<div class="line"><strong>Date:</strong> 2019/3/26</div>
+<div class="line"><strong>Version:</strong> 2.3</div>
+<div class="line"><strong>Date:</strong> 2019/3/27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -401,6 +401,26 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">shrink(&#64;callable,&#64;term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div id="edge_case/2"> </div></div>
+<div class="section" id="edge-case-2">
+<span id="arbitrary-0-edge-case-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">edge_case/2</span></code><a class="headerlink" href="#edge-case-2" title="Permalink to this headline">¶</a></h3>
+<p>Table of type edge cases. Fails if the given type have no defined edge cases. New edge cases for existing or new types can be added by defining a clause for this multifile predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">edge_case(Type,Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">edge_case(?callable,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 </div>

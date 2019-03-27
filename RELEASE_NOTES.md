@@ -137,6 +137,9 @@ to an `ascii_identifier` functor.
 * ADDED: Multifile predicate `shrinker/1` to the `arbitrary` category to
 support declaring shrinkers for new types.
 
+* ADDED: Multifile predicate `edge_case/2` to the `arbitrary` category to
+support defining edge cases for new and existing types.
+
 * ADDED: Type and arbitrary support for the `ascii_identifier` character set.
 
 * ADDED: Type definitions for `atom(CharSet)`, `non_empty_atom(Charset)`,

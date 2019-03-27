@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.3,
+		version is 7.4,
 		author is 'Paulo Moura',
-		date is 2019/03/26,
+		date is 2019/03/27,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -608,9 +608,9 @@
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
 	:- uses(logtalk, [print_message/3]).
 	% library support for quick check
-	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3]).
+	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2]).
 	% library list predicates
-	:- uses(list, [append/3, length/2, member/2, memberchk/2]).
+	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3]).
 	% don't assume that between/3 is a built-in predicate as some backend
 	% Prolog systems still provide it as a library predicate
 	:- uses(integer, [between/3]).
@@ -1628,79 +1628,32 @@
 	generate_arbitrary_argument('--'(_), _, _).
 	generate_arbitrary_argument('-'(_), _, _).
 	generate_arbitrary_argument('++'(Type), Arbitrary, Test) :-
-		(	type_edge_case(Type, Test, Arbitrary) ->
+		(	type_test_edge_case(Type, Test, Arbitrary) ->
 			true
 		;	arbitrary(Type, Arbitrary)
 		).
 	generate_arbitrary_argument('+'(Type), Arbitrary, Test) :-
-		(	type_edge_case(Type, Test, Arbitrary) ->
+		(	type_test_edge_case(Type, Test, Arbitrary) ->
 			true
 		;	arbitrary(Type, Arbitrary)
 		).
 	generate_arbitrary_argument('?'(Type), Arbitrary, Test) :-
-		(	type_edge_case(Type, Test, Arbitrary) ->
+		(	type_test_edge_case(Type, Test, Arbitrary) ->
 			true
 		;	maybe ->
 			arbitrary(var, Arbitrary)
 		;	arbitrary(Type, Arbitrary)
 		).
 	generate_arbitrary_argument('@'(Type), Arbitrary, Test) :-
-		(	type_edge_case(Type, Test, Arbitrary) ->
+		(	type_test_edge_case(Type, Test, Arbitrary) ->
 			true
 		;	arbitrary(Type, Arbitrary)
 		).
 	generate_arbitrary_argument('{}'(Argument), Argument, _).
 
-	type_edge_case(atom, 1, '').
-	type_edge_case(atom(_), 1, '').
-	type_edge_case(atomic, 1, '').
-	type_edge_case(atomic, 2, 0).
-	type_edge_case(atomic, 3, 0.0).
-	type_edge_case(integer, 1, 0).
-	type_edge_case(positive_integer, 1, 1).
-	type_edge_case(negative_integer, 1, -1).
-	type_edge_case(non_positive_integer, 1, 0).
-	type_edge_case(non_negative_integer, 1, 0).
-	type_edge_case(float, 1, 0.0).
-	type_edge_case(non_positive_float, 1, 0.0).
-	type_edge_case(non_negative_float, 1, 0.0).
-	type_edge_case(number, 1, 0).
-	type_edge_case(number, 2, 0.0).
-	type_edge_case(non_positive_number, 1, 0).
-	type_edge_case(non_positive_number, 2, 0.0).
-	type_edge_case(non_negative_number, 1, 0).
-	type_edge_case(non_negative_number, 2, 0.0).
-	type_edge_case(byte, 1, 0).
-	type_edge_case(byte, 2, 255).
-	type_edge_case(probability, 1, 0.0).
-	type_edge_case(probability, 2, 1.0).
-	type_edge_case(character_code(ascii_full), 1, 0).
-	type_edge_case(character_code(ascii_full), 2, 127).
-	type_edge_case(character_code(ascii_printable), 1, 32).
-	type_edge_case(character_code(ascii_printable), 2, 126).
-	type_edge_case(character_code(byte), 1, 0).
-	type_edge_case(character_code(byte), 2, 255).
-	type_edge_case(character_code(unicode_bmp), 1, 0).
-	type_edge_case(character_code(unicode_bmp), 2, 65535).
-	type_edge_case(character_code(unicode_full), 1, 0).
-	type_edge_case(character_code(unicode_full), 2, 1114111).
-	type_edge_case(code(CharSet), Test, Value) :-
-		type_edge_case(character_code(CharSet), Test, Value).
-	type_edge_case(operator_priority, 1, 0).
-	type_edge_case(operator_priority, 1, 1200).
-	type_edge_case(list, 1, []).
-	type_edge_case(list(_), 1, []).
-	type_edge_case(list(_,_,_), 1, []).
-	type_edge_case(difference_list, 1, Back-Back).
-	type_edge_case(difference_list(_), 1, Back-Back).
-	type_edge_case(codes, 1, []).
-	type_edge_case(codes(_), 1, []).
-	type_edge_case(chars, 1, []).
-	type_edge_case(chars(_), 1, []).
-	type_edge_case(callable, 1, true).
-	type_edge_case(callable, 2, fail).
-	type_edge_case(between(_, Lower, _), 1, Lower).
-	type_edge_case(between(_, _, Upper), 2, Upper).
+	type_test_edge_case(Type, Test, EdgeCase) :-
+		findall(Term, edge_case(Type, Term), EdgeCases),
+		nth1(Test, EdgeCases, EdgeCase).
 
 	check_output_arguments([], []).
 	check_output_arguments([Type| Types], [Argument| Arguments]) :-
