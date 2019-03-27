@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b21)).
+'$lgt_version_data'(logtalk(3, 25, 0, b22)).
 
 
 
@@ -13105,8 +13105,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(var, Context),
 	'$lgt_comp_ctx_head'(Ctx, Head0),
 	(	Head0 = _::Head ->
+		% multifile predicate
 		true
 	;	Head0 = ':'(_,Head) ->
+		% assume Prolog module multifile predicate
 		true
 	;	Head0 = Head
 	),
@@ -14641,17 +14643,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 % checks for a discontiguous/1 directive for a predicate
 
 '$lgt_check_discontiguous_directive'(Head, Ctx) :-
+	'$lgt_term_template'(Head, Template),
 	retractall('$lgt_pp_previous_predicate_'(_, user)),
-	assertz('$lgt_pp_previous_predicate_'(Head, user)),
-	(	'$lgt_pp_discontiguous_'(Head) ->
+	assertz('$lgt_pp_previous_predicate_'(Template, user)),
+	(	'$lgt_pp_discontiguous_'(Template) ->
 		% discontiguous directive present
 		true
-	;	'$lgt_pp_missing_discontiguous_directive_'(Head, _, _) ->
+	;	'$lgt_pp_missing_discontiguous_directive_'(Template, _, _) ->
 		% missing discontiguous/1 directive already recorded
 		true
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)) ->
 		% compiling a source file clause; record missing discontiguous directive
-		'$lgt_term_template'(Head, Template),
 		'$lgt_source_file_context'(File, Lines),
 		% delay reporting to the end of entity compilation to avoid repeated reports for the same
 		% missing directive when there multiple discontiguous blocks for the same predicate

@@ -90,6 +90,10 @@ for goals that are always true or false.
 avoid spurious warnings when compiling in optimized mode and using lambda
 expressions with currying as meta-predicate arguments.
 
+* FIXED: Compiler bug when checking for a discontiguous predicate in the
+presence of two clauses for the same predicate with heads whose unification
+would create a cyclic term.
+
 Prolog adapter and integration files
 ------------------------------------
 
