@@ -340,10 +340,11 @@ values for each input argument based on the type information, and check each
 output argument. For common types, the implementation tries first common edge
 cases (e.g. empty atom, empty list, or zero) before generating arbitrary
 values. When the output arguments check fails, the QuickCheck implementation
-tries up to 64 shrink operations of the counter-example to report a simpler
-case to help debugging the failed test. Both generating arbitrary terms and
-shrinking terms make use of the library `arbitrary` category, which is user
-extensible.
+tries (by default) up to 64 shrink operations of the counter-example to report
+a simpler case to help debugging the failed test. Edge cases, generating of
+arbitrary terms, and shrinking terms make use of the library `arbitrary`
+category via the `type` object (both entities can be extended by the user by
+defining clauses for multifile predicates).
 
 The mode template syntax is the same used in the `info/2` predicate directives
 with an additional notation, `{}/1`, for passing argument values as-is instead
