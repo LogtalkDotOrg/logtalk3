@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.5,
+		version is 7.6,
 		author is 'Paulo Moura',
-		date is 2019/03/27,
+		date is 2019/03/28,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -223,11 +223,11 @@
 		comment is 'Runs a test set as part of running two or more test sets as a unified set.'
 	]).
 
-	:- protected(run_quick_check_tests/3).
-	:- mode(run_quick_check_tests(@callable, +integer, +integer), one_or_error).
-	:- info(run_quick_check_tests/3, [
-		comment is 'Runs a list of defined tests.',
-		argnames is ['Template', 'NumberOfTests', 'MaximumNumberOfShrinks']
+	:- protected(run_quick_check_tests/2).
+	:- mode(run_quick_check_tests(@callable, +list), one_or_error).
+	:- info(run_quick_check_tests/2, [
+		comment is 'Runs a list of defined tests using the given options.',
+		argnames is ['Template', 'Options']
 	]).
 
 	:- protected(condition/0).
@@ -610,7 +610,7 @@
 	% library support for quick check
 	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2]).
 	% library list predicates
-	:- uses(list, [append/3, length/2, member/2, nth1/3]).
+	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3]).
 	% don't assume that between/3 is a built-in predicate as some backend
 	% Prolog systems still provide it as a library predicate
 	:- uses(integer, [between/3]).
@@ -1168,18 +1168,17 @@
 		assertz(test_(Test, throws(Test, Errors, Position))).
 
 	% unit test idiom quick_check/3
-	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, NumberOfTests, MaximumNumberOfShrinks))]) :-
+	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests, MaximumNumberOfShrinks),
+		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions),
 		assertz(test_(Test, quick_check(Test, Position, Condition, Setup, Cleanup, Note))).
 
 	% unit test idiom quick_check/2
-	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, NumberOfTests, MaximumNumberOfShrinks))]) :-
+	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		default_quick_check_option(n, NumberOfTests),
-		default_quick_check_option(s, MaximumNumberOfShrinks),
+		findall(Option, default_quick_check_option(Option), QuickCheckOptions),
 		assertz(test_(Test, quick_check(Test, Position))).
 
 	% make target for automatically running the tests
@@ -1386,26 +1385,28 @@
 		atom_codes(CounterAtom, CounterCodes),
 		atom_concat(Prefix2, CounterAtom, Prefix).
 
-	parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests, MaximumNumberOfShrinks) :-
+	parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions) :-
 		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),
-		parse_quick_check_options(Options, NumberOfTests, MaximumNumberOfShrinks).
+		parse_quick_check_options(Options, QuickCheckOptions).
 
-	parse_quick_check_options(Options, NumberOfTests, MaximumNumberOfShrinks) :-
+	parse_quick_check_options(Options, [n(NumberOfTests), s(MaximumNumberOfShrinks)]) :-
 		(	member(n(NumberOfTests), Options),
 			integer(NumberOfTests),
 			NumberOfTests >= 0 ->
 			true
-		;	default_quick_check_option(n, NumberOfTests)
+		;	default_quick_check_option(n(NumberOfTests))
 		),
 		(	member(s(MaximumNumberOfShrinks), Options),
 			integer(MaximumNumberOfShrinks),
 			MaximumNumberOfShrinks >= 0 ->
 			true
-		;	default_quick_check_option(s, MaximumNumberOfShrinks)
+		;	default_quick_check_option(s(MaximumNumberOfShrinks))
 		).
 
-	default_quick_check_option(n, 100).
-	default_quick_check_option(s,  64).
+	% generate and run 100 tests by default
+	default_quick_check_option(n(100)).
+	% perform a maximum of 64 shrink operations on a counter-example
+	default_quick_check_option(s(64)).
 
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
@@ -1570,8 +1571,8 @@
 	:- endif.
 
 	quick_check(Template, Result, Options) :-
-		parse_quick_check_options(Options, NumberOfTests, MaximumNumberOfShrinks),
-		catch(run_quick_check_tests(Template, NumberOfTests, MaximumNumberOfShrinks), Error, true),
+		parse_quick_check_options(Options, QuickCheckOptions),
+		catch(run_quick_check_tests(Template, QuickCheckOptions), Error, true),
 		(	var(Error) ->
 			Result = passed
 		;	Error = quick_check_failed(Goal, _, _) ->
@@ -1583,8 +1584,9 @@
 		).
 
 	quick_check(Template, Options) :-
-		parse_quick_check_options(Options, NumberOfTests, MaximumNumberOfShrinks),
-		catch(run_quick_check_tests(Template, NumberOfTests, MaximumNumberOfShrinks), Error, true),
+		parse_quick_check_options(Options, QuickCheckOptions),
+		memberchk(n(NumberOfTests), QuickCheckOptions),
+		catch(run_quick_check_tests(Template, QuickCheckOptions), Error, true),
 		(	var(Error) ->
 			print_message(information, lgtunit, quick_check_passed(NumberOfTests))
 		;	print_message(warning, lgtunit, Error),
@@ -1594,9 +1596,10 @@
 	quick_check(Template) :-
 		quick_check(Template, []).
 
-	run_quick_check_tests(Template, NumberOfTests, MaximumNumberOfShrinks) :-
+	run_quick_check_tests(Template, Options) :-
 		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template,1))),
-		integer(NumberOfTests),
+		memberchk(n(NumberOfTests), Options),
+		memberchk(s(MaximumNumberOfShrinks), Options),
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
 		forall(
