@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on March 19, 2019
+%  Last updated on March 28, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -930,7 +930,7 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 		% use default value of the "events" flag
 		'$lgt_current_flag_'(events, Events)
 	),
-	'$lgt_comp_ctx'(Ctx, _, _, user, user, user, Obj, _, [], [], ExCtx, compile(aux), [], Line-Line),
+	'$lgt_comp_ctx'(Ctx, _, _, user, user, user, Obj, _, [], [], ExCtx, compile(aux,_,_), [], Line-Line),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch('$lgt_compile_message_to_object'(Message, Object, Goal, Events, Ctx), _, fail),
 	'$lgt_user_module_qualification'(Goal, ExpandedGoal).
