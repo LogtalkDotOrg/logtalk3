@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 25, 0, b22)).
+'$lgt_version_data'(logtalk(3, 25, 0, b23)).
 
 
 
@@ -9942,6 +9942,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	functor(Head, Functor, Arity),
 	'$lgt_construct_extended_coinductive_template'(Functor, Arity, Template).
+
+'$lgt_valid_coinductive_template'(NonTerminal, Functor, ExtendedArity, Head, Head, Template) :-
+	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtendedArity),
+	!,
+	functor(Head, Functor, ExtendedArity),
+	'$lgt_construct_extended_coinductive_template'(Functor, ExtendedArity, Template).
 
 '$lgt_valid_coinductive_template'(Template, Functor, Arity, Head, TestHead, Template) :-
 	'$lgt_check'(callable, Template),

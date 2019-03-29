@@ -30,6 +30,10 @@ Description
    coinductive((Name/Arity, ...))
    coinductive([Name/Arity, ...])
 
+   coinductive(Name//Arity)
+   coinductive((Name//Arity, ...))
+   coinductive([Name//Arity, ...])
+
    coinductive(Template)
    coinductive((Template1, ...))
    coinductive([Template1, ...])
@@ -62,6 +66,7 @@ Template and modes
 ::
 
    coinductive(+predicate_indicator_term)
+   coinductive(+non_terminal_indicator_term)
    coinductive(+coinductive_predicate_template_term)
 
 Examples
@@ -70,6 +75,7 @@ Examples
 ::
 
    :- coinductive(comember/2).
+   :- coinductive(ones_and_zeros//0).
    :- coinductive(controller(+,+,+,-,-)).
 
 .. seealso::

@@ -86,6 +86,9 @@ false positives.
 and decomposition predicates in the list of predicates for the lint check
 for goals that are always true or false.
 
+* UPDATED: The `coinductive/1` directive to also accept non-terminal
+indicators.
+
 * FIXED: The lint check for unclassified variables in lambda expressions to
 avoid spurious warnings when compiling in optimized mode and using lambda
 expressions with currying as meta-predicate arguments.
@@ -230,6 +233,8 @@ Tests
 
 * ADDED: New unit tests for the `expand_goal/2` and `goal_expansion/2` methods
 to check the changes to the goal-expansion mechanism.
+
+* UPDATED: Unit tests for the `coinductive/1` directive.
 
 Examples
 --------

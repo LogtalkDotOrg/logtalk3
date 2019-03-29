@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/16,
+		date is 2019/03/29,
 		comment is 'Unit tests for the coinductive/1 built-in directive.'
 	]).
 
@@ -36,23 +36,31 @@
 	:- public(a/1).
 	:- coinductive(a/1).
 
-	test(coinductive_1_1) :-
+	test(coinductive_1_01) :-
 		predicate_property(a(_), coinductive(Template)),
 		Template == a(+).
 
-	:- public(b/2).
-	:- coinductive(b(+, -)).
 
-	test(coinductive_1_2) :-
-		predicate_property(b(_, _), coinductive(Template)),
-		Template == b(+, -).
+	:- public(b//0).
+	:- coinductive(b//0).
+
+	test(coinductive_1_02) :-
+		predicate_property(b(_,_), coinductive(Template)),
+		Template == b(+,+).
+
+	:- public(c/2).
+	:- coinductive(c(+, -)).
+
+	test(coinductive_1_03) :-
+		predicate_property(c(_, _), coinductive(Template)),
+		Template == c(+, -).
 
 	% calls to predicates declared coinductive but not defined
 	% must fail instead of throwing an existence error
 
-	:- coinductive(c/3).
+	:- coinductive(d/3).
 
-	test(coinductive_1_3) :-
-		\+ c(_, _, _).
+	test(coinductive_1_04) :-
+		\+ d(_, _, _).
 
 :- end_object.

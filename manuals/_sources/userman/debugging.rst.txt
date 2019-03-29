@@ -96,10 +96,10 @@ To compile only a specific entity in debug mode, use the
 
 .. _debugging_box_model:
 
-Procedure Box model
+Procedure box model
 -------------------
 
-Logtalk uses a *Procedure Box model* similar to those found on most
+Logtalk uses a *procedure box model* similar to those found on most
 Prolog compilers. The traditional Prolog procedure box model defines
 four ports (*call*, *exit*, *redo*, and *fail*) for describing control
 flow when a predicate clause is used during program execution:
