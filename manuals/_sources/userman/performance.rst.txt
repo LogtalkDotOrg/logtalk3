@@ -134,18 +134,25 @@ an application footprint.
 Debug mode overhead
 -------------------
 
-Code compiled in debug mode runs slower, as expected. The Logtalk compiler
-supports both *trace events* and *debug handlers*, which can be defined using,
-respectively, the :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
+Code compiled in debug mode runs slower, as expected. The overhead depends
+on the number of *debug events* generated when running the application. A
+debug event is simply a pass on a call or unification port of the
+:ref:`procedure box model <debugging_box_model>`. These debug events can
+be intercepted by defined clauses for the
+:ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
 and :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>` multifile
-predicates. Both predicates accept as first argument a *debugging event*,
-which can be a goal or a clause head unification. With no application
+predicates. With no application (such as a debugger or a port profiler)
 loaded defining clauses for these predicates, each goal have an overhead of
 four extra inferences due to the runtime checking for a definition of the
 hook predicates and a meta-call of the user goal. The clause head unification
-events results in one more inference per goal. In practice, this overhead
-translates to code compiled in debug mode running ~5x to ~7x slower than
-code compiled in normal or optimized mode.
+events results in one or more inferences per goal (depending on the number of
+clauses whose head unify with the goal and backtracking). In practice, this
+overhead translates to code compiled in debug mode running typically ~2x to
+~7x slower than code compiled in normal or optimized mode depending on the
+application (the exact overhead is proporcional to the number of passes on
+the call and unification ports; deterministic code often results in a larger
+overhead compared with code performing significant backtracking).
+
 
 Other considerations
 --------------------
