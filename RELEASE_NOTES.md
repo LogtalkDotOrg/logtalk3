@@ -120,6 +120,9 @@ compiler options.
 
 * IMPROVED: Handbook session on calling Prolog module meta-predicates.
 
+* UPDATED: Handbook session on performance with an overview of debug mode
+overhead.
+
 * FIXED: Spurious and empty index section in the PDF version of the Handbook.
 
 * FIXED: Hyperlinks to compiler flags in the PDF version of the Handbook.

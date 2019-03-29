@@ -27,12 +27,12 @@ if you know how to write efficient Prolog predicates, you already know
 how to write efficient Logtalk predicates.
 
 The Logtalk compiler adds an hidden execution-context argument to all
-entity predicates. In the common case where a predicate makes no calls to
-the execution-context predicates and message-sending control constructs
-and is neither a meta-predicate nor a coinductive predicate, the
-execution-context argument is simply passed between goals. In this case,
-with most backend Prolog VMs, the cost of this extra argument is null or
-negligible. When the execution-context argument needs to be accessed
+entity predicate clauses. In the common case where a predicate makes no
+calls to the execution-context predicates and message-sending control
+constructs and is neither a meta-predicate nor a coinductive predicate,
+the execution-context argument is simply passed between goals. In this
+case, with most backend Prolog VMs, the cost of this extra argument is null
+or negligible. When the execution-context argument needs to be accessed
 (e.g. to fetch the value of *self* for a :ref:`control_send_to_self_1`
 call) there may be a small inherent overhead due to the implicit unifications.
 
@@ -129,6 +129,23 @@ predicates positions in a source file. This data enables advanced developer
 tool functionality but it is usually not required when *deploying* an
 application. Thus, turning this flag off is a common setting for minimizing
 an application footprint.
+
+
+Debug mode overhead
+-------------------
+
+Code compiled in debug mode runs slower, as expected. The Logtalk compiler
+supports both *trace events* and *debug handlers*, which can be defined using,
+respectively, the :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
+and :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>` multifile
+predicates. Both predicates accept as first argument a *debugging event*,
+which can be a goal or a clause head unification. With no application
+loaded defining clauses for these predicates, each goal have an overhead of
+four extra inferences due to the runtime checking for a definition of the
+hook predicates and a meta-call of the user goal. The clause head unification
+events results in one more inference per goal. In practice, this overhead
+translates to code compiled in debug mode running ~5x to ~7x slower than
+code compiled in normal or optimized mode.
 
 Other considerations
 --------------------

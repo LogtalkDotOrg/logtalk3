@@ -125,6 +125,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#inlining">Inlining</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generated-code-simplification-and-optimizations">Generated code simplification and optimizations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#size-of-the-generated-code">Size of the generated code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-mode-overhead">Debug mode overhead</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-considerations">Other considerations</a></li>
 </ul>
 </li>
@@ -214,12 +215,12 @@ first-argument indexing and tail-recursion. In practice, this mean that
 if you know how to write efficient Prolog predicates, you already know
 how to write efficient Logtalk predicates.</p>
 <p>The Logtalk compiler adds an hidden execution-context argument to all
-entity predicates. In the common case where a predicate makes no calls to
-the execution-context predicates and message-sending control constructs
-and is neither a meta-predicate nor a coinductive predicate, the
-execution-context argument is simply passed between goals. In this case,
-with most backend Prolog VMs, the cost of this extra argument is null or
-negligible. When the execution-context argument needs to be accessed
+entity predicate clauses. In the common case where a predicate makes no
+calls to the execution-context predicates and message-sending control
+constructs and is neither a meta-predicate nor a coinductive predicate,
+the execution-context argument is simply passed between goals. In this
+case, with most backend Prolog VMs, the cost of this extra argument is null
+or negligible. When the execution-context argument needs to be accessed
 (e.g.&nbsp;to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>
 call) there may be a small inherent overhead due to the implicit unifications.</p>
 <div class="section" id="local-predicate-calls">
@@ -306,6 +307,21 @@ predicates positions in a source file. This data enables advanced developer
 tool functionality but it is usually not required when <em>deploying</em> an
 application. Thus, turning this flag off is a common setting for minimizing
 an application footprint.</p>
+</div>
+<div class="section" id="debug-mode-overhead">
+<h2>Debug mode overhead<a class="headerlink" href="#debug-mode-overhead" title="Permalink to this headline">¶</a></h2>
+<p>Code compiled in debug mode runs slower, as expected. The Logtalk compiler
+supports both <em>trace events</em> and <em>debug handlers</em>, which can be defined using,
+respectively, the <a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a>
+and <a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-debug-handler-2" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">logtalk::debug_handler/2</span></a> multifile
+predicates. Both predicates accept as first argument a <em>debugging event</em>,
+which can be a goal or a clause head unification. With no application
+loaded defining clauses for these predicates, each goal have an overhead of
+four extra inferences due to the runtime checking for a definition of the
+hook predicates and a meta-call of the user goal. The clause head unification
+events results in one more inference per goal. In practice, this overhead
+translates to code compiled in debug mode running ~5x to ~7x slower than
+code compiled in normal or optimized mode.</p>
 </div>
 <div class="section" id="other-considerations">
 <h2>Other considerations<a class="headerlink" href="#other-considerations" title="Permalink to this headline">¶</a></h2>
