@@ -109,6 +109,9 @@ or falsehood goals to include non-standard type testing built-in predicates.
 tautology or falsehood goals to include non-standard type testing and
 unification built-in predicates.
 
+* UPDATED: The SWI-Prolog and YAP hooks files for the recently added
+`threaded_cancel/1` built-in predicate.
+
 * FIXED: SWI-Prolog and YAP adapter file definitions for expanding top-level
 and module calls to the `::/2` message sending control construct to reject
 expanding a variable goal.
@@ -125,6 +128,8 @@ compiler options.
 
 * UPDATED: Handbook session on performance with an overview of debug mode
 overhead.
+
+* UPDATED: The Handbook `conf.py` file for compatibility with Sphinx 2.x.
 
 * FIXED: Spurious and empty index section in the PDF version of the Handbook.
 
