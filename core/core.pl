@@ -9931,6 +9931,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(instantiation_error).
 
 
+% coinductive success is achieved when the current hypothesis is already
+% present in the stack of previous hypothesis
+
 '$lgt_check_coinductive_success'(Hypothesis, [Hypothesis| _], Hypothesis).
 
 '$lgt_check_coinductive_success'(TestHead, [_| Stack], Hypothesis) :-
@@ -9960,6 +9963,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TestHead =.. [Functor| TestHeadArgs].
 
 
+% when the argument of the directive is a predicate (or non-terminal) indicator,
+% we construct an extended template for the predicate by making all arguments
+% relevant for testing for coinductive success
+
 '$lgt_construct_extended_coinductive_template'(Functor, Arity, Template) :-
 	functor(Template, Functor, Arity),
 	Template =.. [Functor| Args],
@@ -9971,6 +9978,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_construct_extended_coinductive_template_args'([(+)| Args]) :-
 	'$lgt_construct_extended_coinductive_template_args'(Args).
 
+
+% when only some arguments are relevant for testing for coinductive success,
+% we must construct a test head where non-relevant arguments are replaced by
+% anonymous variables as these will always unify with any term and thus prevent
+% these arguments of causing a failure when checking for coinductive success
 
 '$lgt_map_coinductive_template_args'([], [], []).
 
@@ -24127,6 +24139,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiler, the runtime initialization may be triggered again when
 % running the saved state; we use a dynamic predicate as a flag to
 % prevent redoing this initialization
+%
+% we write the initialization/1 directive at the end of the file to
+% avoid issues with backend Prolog compilers that fail to fully support
+% ISO Prolog specified semantics for this directive
 
 '$lgt_runtime_initialization' :-
 	'$lgt_runtime_initialization_completed_',
