@@ -242,39 +242,39 @@ directive.</p>
 <p>In this pattern, keys should be atoms and values should be ground terms.
 The following keys are predefined and may be processed specially by
 Logtalk tools:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt>
-<dd>Comment describing the entity purpose (an atom).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt>
-<dd>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the entity purpose (an atom).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt><dd><p>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
 <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>
-file).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt>
-<dd>Version number (a number).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">date</span></code></dt>
-<dd>Date of last modification (formatted as <code class="docutils literal notranslate"><span class="pre">Year/Month/Day</span></code> where
-<code class="docutils literal notranslate"><span class="pre">Year</span></code>, <code class="docutils literal notranslate"><span class="pre">Month</span></code>, and <code class="docutils literal notranslate"><span class="pre">Day</span></code> are integers).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code></dt>
-<dd>Parameter names and descriptions for parametric entities (a list of
-<em>Name-Description</em> pairs where both names and descriptions are atoms).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">parnames</span></code></dt>
-<dd>Parameter names for parametric entities (a list of atoms; a simpler
+file).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt><dd><p>Version number (a number).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">date</span></code></dt><dd><p>Date of last modification (formatted as <code class="docutils literal notranslate"><span class="pre">Year/Month/Day</span></code> where
+<code class="docutils literal notranslate"><span class="pre">Year</span></code>, <code class="docutils literal notranslate"><span class="pre">Month</span></code>, and <code class="docutils literal notranslate"><span class="pre">Day</span></code> are integers).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code></dt><dd><p>Parameter names and descriptions for parametric entities (a list of
+<em>Name-Description</em> pairs where both names and descriptions are atoms).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">parnames</span></code></dt><dd><p>Parameter names for parametric entities (a list of atoms; a simpler
 version of the previous key, used when parameter descriptions are
-deemed unnecessary).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">copyright</span></code></dt>
-<dd>Copyright notice for the entity source code (an atom or a compound
+deemed unnecessary).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">copyright</span></code></dt><dd><p>Copyright notice for the entity source code (an atom or a compound
 term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity
-defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">license</span></code></dt>
-<dd>License terms for the entity source code; usually, just the license
+defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">license</span></code></dt><dd><p>License terms for the entity source code; usually, just the license
 name (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the
-name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt>
-<dd>List of general remarks about the entity using <em>Topic-Text</em> pairs
-where both the topic and the text must be atoms.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">see_also</span></code></dt>
-<dd>List of related entities (using the entity identifiers, which can
-be atoms or compound terms).</dd>
+name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the entity using <em>Topic-Text</em> pairs
+where both the topic and the text must be atoms.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">see_also</span></code></dt><dd><p>List of related entities (using the entity identifiers, which can
+be atoms or compound terms).</p>
+</dd>
 </dl>
 <p>For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>([
@@ -306,40 +306,40 @@ the <a class="reference internal" href="../refman/directives/info_2.html#directi
 <code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>. Keys should be atoms and values should be bound terms.
 The following keys are predefined and may be processed specially by
 Logtalk tools:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt>
-<dd>Comment describing the predicate purpose (an atom).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">arguments</span></code></dt>
-<dd>Names and descriptions of predicate arguments for pretty print output
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the predicate purpose (an atom).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">arguments</span></code></dt><dd><p>Names and descriptions of predicate arguments for pretty print output
 (a list of <em>Name-Description</em> pairs where both names and descriptions
-are atoms).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">argnames</span></code></dt>
-<dd>Names of predicate arguments for pretty print output (a list of
+are atoms).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">argnames</span></code></dt><dd><p>Names of predicate arguments for pretty print output (a list of
 atoms; a simpler version of the previous key, used when argument
-descriptions are deemed unnecessary).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">allocation</span></code></dt>
-<dd>Objects where we should define the predicate. Some possible values
+descriptions are deemed unnecessary).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">allocation</span></code></dt><dd><p>Objects where we should define the predicate. Some possible values
 are <code class="docutils literal notranslate"><span class="pre">container</span></code>, <code class="docutils literal notranslate"><span class="pre">descendants</span></code>, <code class="docutils literal notranslate"><span class="pre">instances</span></code>, <code class="docutils literal notranslate"><span class="pre">classes</span></code>,
-<code class="docutils literal notranslate"><span class="pre">subclasses</span></code>, and <code class="docutils literal notranslate"><span class="pre">any</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">redefinition</span></code></dt>
-<dd>Describes if predicate is expected to be redefined and, if so, in
+<code class="docutils literal notranslate"><span class="pre">subclasses</span></code>, and <code class="docutils literal notranslate"><span class="pre">any</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">redefinition</span></code></dt><dd><p>Describes if predicate is expected to be redefined and, if so, in
 what way. Some possible values are <code class="docutils literal notranslate"><span class="pre">never</span></code>, <code class="docutils literal notranslate"><span class="pre">free</span></code>,
-<code class="docutils literal notranslate"><span class="pre">specialize</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_first</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_last</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">exceptions</span></code></dt>
-<dd>List of possible exceptions throw by the predicate using
+<code class="docutils literal notranslate"><span class="pre">specialize</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_first</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_last</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">exceptions</span></code></dt><dd><p>List of possible exceptions throw by the predicate using
 <em>Description</em>-<em>Exception term</em> pairs. The description must be an
-atom. The exception term must be a non-variable term.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">examples</span></code></dt>
-<dd>List of typical predicate call examples using the format
+atom. The exception term must be a non-variable term.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">examples</span></code></dt><dd><p>List of typical predicate call examples using the format
 <em>Description-Goal-Bindings</em>. The description must be an atom.
 The predicate call term must be a non-variable term. The
 variable bindings term uses the format <em>{Variable = Term, …}</em>.
 When there are no variable bindings, the success or failure of
 the predicate call should be represented by the terms <code class="docutils literal notranslate"><span class="pre">{yes}</span></code>
-or <code class="docutils literal notranslate"><span class="pre">{no}</span></code>, respectively.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt>
-<dd>List of general remarks about the predicate using <em>Topic-Text</em>
-pairs where both the topic and the text must be atoms.</dd>
+or <code class="docutils literal notranslate"><span class="pre">{no}</span></code>, respectively.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the predicate using <em>Topic-Text</em>
+pairs where both the topic and the text must be atoms.</p>
+</dd>
 </dl>
 <p>For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(color<span class="o">/</span><span class="m">1</span>, [

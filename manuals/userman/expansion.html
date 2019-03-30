@@ -346,8 +346,8 @@ default hook object, if defined. If that also fails, the compiler tries
 the Prolog dialect specific expansion predicate definitions if defined
 in the <a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates
+<p class="admonition-title">Note</p>
+<p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates
 defined within an object or a category are never used in the compilation
 of the object or the category itself.</p>
 </div>
@@ -389,8 +389,8 @@ yes
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">When a source file also contains plain Prolog directives and predicates,
+<p class="admonition-title">Note</p>
+<p>When a source file also contains plain Prolog directives and predicates,
 these are term-expanded but not goal-expanded.</p>
 </div>
 </div>
@@ -439,8 +439,8 @@ contributing definitions of the expansion predicates. It is usually
 safer to define a specific hook object for combining multiple expansions
 in a fully controlled way.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">user</span></code> object declares <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">user</span></code> object declares <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
 as multifile and dynamic predicates. This helps in avoiding predicate
 existence errors when compiling source files with the <code class="docutils literal notranslate"><span class="pre">hook</span></code> flag set
 to <code class="docutils literal notranslate"><span class="pre">user</span></code> as these predicates are only natively declared in some of the

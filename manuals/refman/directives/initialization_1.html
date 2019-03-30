@@ -211,8 +211,8 @@ after the compiled source file is loaded into memory.</p>
 <p>Multiple initialization directives can be used in a source file or in an
 object. Their goals will be called in order at loading time.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Categories and protocols cannot contain <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives
+<p class="admonition-title">Note</p>
+<p>Categories and protocols cannot contain <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives
 as the initialization goals would lack a complete execution context that
 is only available for objects.</p>
 </div>
@@ -221,8 +221,8 @@ file is a Prolog directive, calls to Logtalk built-in predicates from it
 are usually compiled to improve performance and providing better support
 for embedded applications.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Some backend Prolog compilers declare <code class="docutils literal notranslate"><span class="pre">initialization</span></code> as an operator
+<p class="admonition-title">Warning</p>
+<p>Some backend Prolog compilers declare <code class="docutils literal notranslate"><span class="pre">initialization</span></code> as an operator
 for a lighter syntax. But this makes the code non-portable and is
 a practice best avoided.</p>
 </div>

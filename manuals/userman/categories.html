@@ -224,9 +224,9 @@ predicates. Categories may also be used to break a complex object in
 functional units. A category can be imported by several objects (without
 code duplication), including objects participating in prototype or
 class-based hierarchies. This concept of categories shares some ideas
-with Smalltalk-80 functional categories <a class="reference internal" href="../bibliography.html#goldberg83" id="id1">[Goldberg83]</a>, Flavors mix-ins
-<a class="reference internal" href="../bibliography.html#moon86" id="id2">[Moon86]</a> (without necessarily implying multi-inheritance), and
-Objective-C categories <a class="reference internal" href="../bibliography.html#cox86" id="id3">[Cox86]</a>. Categories may also <em>complement</em>
+with Smalltalk-80 functional categories <a class="reference internal" href="../bibliography.html#goldberg83" id="id1"><span>[Goldberg83]</span></a>, Flavors mix-ins
+<a class="reference internal" href="../bibliography.html#moon86" id="id2"><span>[Moon86]</span></a> (without necessarily implying multi-inheritance), and
+Objective-C categories <a class="reference internal" href="../bibliography.html#cox86" id="id3"><span>[Cox86]</span></a>. Categories may also <em>complement</em>
 existing objects, thus providing a <a class="reference internal" href="../glossary.html#term-hot-patching"><span class="xref std std-term">hot patching</span></a> mechanism
 inspired by the Objective-C categories functionality.</p>
 <div class="section" id="defining-a-new-category">
@@ -551,56 +551,55 @@ predicate <a class="reference internal" href="../refman/predicates/category_prop
 </pre></div>
 </div>
 <p>The following category properties are supported:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">static</span></code></dt>
-<dd>The category is static</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt>
-<dd>The category is dynamic (and thus can be abolished in runtime by
-calling the <a class="reference internal" href="../refman/predicates/abolish_category_1.html#predicates-abolish-category-1"><span class="std std-ref">abolish_category/1</span></a> built-in predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt>
-<dd>The category is a built-in category (and thus always available)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code></dt>
-<dd>Absolute path of the source file defining the category (if
-applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">file(Basename,</span> <span class="pre">Directory)</span></code></dt>
-<dd>Basename and directory of the source file defining the category (if
-applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">lines(BeginLine,</span> <span class="pre">EndLine)</span></code></dt>
-<dd>Source file begin and end lines of the category definition (if
-applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">events</span></code></dt>
-<dd>Messages sent from the category generate events</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">source_data</span></code></dt>
-<dd>Source data available for the category</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">public(Predicates)</span></code></dt>
-<dd>List of public predicates declared by the category</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">protected(Predicates)</span></code></dt>
-<dd>List of protected predicates declared by the category</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt>
-<dd>List of private predicates declared by the category</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for a predicate declared by the category</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">defines(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for a predicate defined by the category</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">includes(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for an object multifile predicate that are defined
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">static</span></code></dt><dd><p>The category is static</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt><dd><p>The category is dynamic (and thus can be abolished in runtime by
+calling the <a class="reference internal" href="../refman/predicates/abolish_category_1.html#predicates-abolish-category-1"><span class="std std-ref">abolish_category/1</span></a> built-in predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt><dd><p>The category is a built-in category (and thus always available)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code></dt><dd><p>Absolute path of the source file defining the category (if
+applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file(Basename,</span> <span class="pre">Directory)</span></code></dt><dd><p>Basename and directory of the source file defining the category (if
+applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lines(BeginLine,</span> <span class="pre">EndLine)</span></code></dt><dd><p>Source file begin and end lines of the category definition (if
+applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">events</span></code></dt><dd><p>Messages sent from the category generate events</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">source_data</span></code></dt><dd><p>Source data available for the category</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">public(Predicates)</span></code></dt><dd><p>List of public predicates declared by the category</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">protected(Predicates)</span></code></dt><dd><p>List of protected predicates declared by the category</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt><dd><p>List of private predicates declared by the category</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a predicate declared by the category</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">defines(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a predicate defined by the category</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">includes(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for an object multifile predicate that are defined
 in the specified entity (the properties include
 <code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
-multifile predicate clause)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">provides(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for other entity multifile predicate that are
+multifile predicate clause)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">provides(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for other entity multifile predicate that are
 defined in the category (the properties include
 <code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
-multifile predicate clause)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the category
+multifile predicate clause)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the category
 (the properties include <code class="docutils literal notranslate"><span class="pre">for(Original)</span></code>, <code class="docutils literal notranslate"><span class="pre">from(Entity)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">non_terminal(NonTerminal)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code>
-being the begin line of the alias directive)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for predicate calls made by the category (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
+being the begin line of the alias directive)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for predicate calls made by the category (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
 is either a predicate indicator or a control construct such as
 <code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> with a predicate indicator as argument; note
 that <code class="docutils literal notranslate"><span class="pre">Call</span></code> may not be ground in case of a call to a control
@@ -608,9 +607,9 @@ construct where its argument is only know at runtime; the properties
 include <code class="docutils literal notranslate"><span class="pre">caller(Caller)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with both <code class="docutils literal notranslate"><span class="pre">Caller</span></code> and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> being
 predicate indicators and <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
-predicate clause or directive making the call)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for dynamic predicate updates (and also access
+predicate clause or directive making the call)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for dynamic predicate updates (and also access
 using the <code class="docutils literal notranslate"><span class="pre">clause/2</span></code> predicate) made by the object (<code class="docutils literal notranslate"><span class="pre">Predicate</span></code>
 is either a predicate indicator or a control construct such as
 <code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> with a predicate indicator as argument; note
@@ -619,31 +618,32 @@ argument only know at runtime; the properties include
 <code class="docutils literal notranslate"><span class="pre">updater(Updater)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with
 <code class="docutils literal notranslate"><span class="pre">Updater</span></code> being a (possibly multifile) predicate indicator,
 <code class="docutils literal notranslate"><span class="pre">Alias</span></code> being a predicate indicator, and <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin
-line of the predicate clause or directive updating the predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code></dt>
-<dd>Total number of predicate clauses defined in the category (includes
+line of the predicate clause or directive updating the predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code></dt><dd><p>Total number of predicate clauses defined in the category (includes
 both user-defined clauses and auxiliary clauses generated by the
 compiler or by the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">expansion hooks</span></a> but
 does not include clauses for multifile predicates defined for other
 entities or clauses for the category own multifile predicates
-contributed by other entities)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code></dt>
-<dd>Total number of predicate rules defined in the category (includes
+contributed by other entities)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code></dt><dd><p>Total number of predicate rules defined in the category (includes
 both user-defined rules and auxiliary rules generated by the compiler
 or by the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">expansion hooks</span></a> but does not
 include rules for multifile predicates defined for other entities or
 rules for the category own multifile predicates contributed by other
-entities)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(Number)</span></code></dt>
-<dd>Total number of user-defined predicate clauses defined in the
+entities)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(Number)</span></code></dt><dd><p>Total number of user-defined predicate clauses defined in the
 category (does not include clauses for multifile predicates defined
 for other entities or clauses for the category own multifile predicates
-contributed by other entities)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_rules(Number)</span></code></dt>
-<dd>Total number of user-defined predicate rules defined in the category
+contributed by other entities)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_rules(Number)</span></code></dt><dd><p>Total number of user-defined predicate rules defined in the category
 (does not include rules for multifile predicates defined for other
 entities or rules for the category own multifile predicates contributed
-by other entities)</dd>
+by other entities)</p>
+</dd>
 </dl>
 <p>Some properties such as line numbers are only available when the
 category is defined in a source file compiled with the

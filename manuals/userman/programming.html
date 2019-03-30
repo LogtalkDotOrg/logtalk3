@@ -229,7 +229,7 @@ code apply as well to Logtalk programming. To those guidelines, you
 should add the basics of good object-oriented design.</p>
 <p>One of the advantages of a system like Logtalk is that it enable us to
 use the currently available object-oriented methodologies, tools, and
-metrics <a class="reference internal" href="../bibliography.html#champaux92" id="id1">[Champaux92]</a> in logic programming. That said, writing applications
+metrics <a class="reference internal" href="../bibliography.html#champaux92" id="id1"><span>[Champaux92]</span></a> in logic programming. That said, writing applications
 in Logtalk is similar to writing applications in Prolog: we define new
 predicates describing what is true about our domain objects, about our
 problem solution. We encapsulate our predicate directives and definitions
@@ -368,14 +368,14 @@ On Windows, the shortcuts should be available from the Start Menu.</p>
 operating-system, or Prolog compiler, you can always start a Logtalk
 session by performing the following steps:</p>
 <ol class="arabic simple">
-<li>Start your Prolog compiler.</li>
-<li>Load the appropriate adapter file for your compiler. Adapter files
+<li><p>Start your Prolog compiler.</p></li>
+<li><p>Load the appropriate adapter file for your compiler. Adapter files
 for most common Prolog compilers can be found in the <code class="docutils literal notranslate"><span class="pre">adapters</span></code>
-subdirectory.</li>
-<li>Load the library paths file corresponding to your Logtalk
-installation contained in the <code class="docutils literal notranslate"><span class="pre">paths</span></code> subdirectory.</li>
-<li>Load the Logtalk compiler/runtime files contained in the <code class="docutils literal notranslate"><span class="pre">core</span></code>
-subdirectory.</li>
+subdirectory.</p></li>
+<li><p>Load the library paths file corresponding to your Logtalk
+installation contained in the <code class="docutils literal notranslate"><span class="pre">paths</span></code> subdirectory.</p></li>
+<li><p>Load the Logtalk compiler/runtime files contained in the <code class="docutils literal notranslate"><span class="pre">core</span></code>
+subdirectory.</p></li>
 </ol>
 <p>Note that the adapter files, compiler/runtime files, and library paths
 file are Prolog source files. The predicate called to load (and compile)
@@ -625,143 +625,142 @@ an entity. For example:</p>
 <p>Note that the scope of the <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive is local to
 the entity or to the source file containing it.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Applications should never rely on default flag values for working
+<p class="admonition-title">Note</p>
+<p>Applications should never rely on default flag values for working
 properly.  Whenever the compilation of a source file or an entity
 requires a specific flag value, the flag should be set explicitly
 in the file, in the entity, or in the loader file.</p>
 </div>
 <div class="section" id="version-flags">
 <h4>Version flags<a class="headerlink" href="#version-flags" title="Permalink to this headline">¶</a></h4>
-<span class="target" id="flag-version-data"></span><dl class="docutils" id="index-0">
-<dt><code class="docutils literal notranslate"><span class="pre">version_data(Value)</span></code></dt>
-<dd>Read-only flag whose value is the compound term
+<span class="target" id="flag-version-data"></span><dl class="simple" id="index-0">
+<dt><code class="docutils literal notranslate"><span class="pre">version_data(Value)</span></code></dt><dd><p>Read-only flag whose value is the compound term
 <code class="docutils literal notranslate"><span class="pre">logtalk(Major,Minor,Patch,Status)</span></code>. The first three arguments are
 integers and the last argument is an atom, possibly empty,
 representing version status: <code class="docutils literal notranslate"><span class="pre">aN</span></code> for alpha versions, <code class="docutils literal notranslate"><span class="pre">bN</span></code> for
 beta versions, <code class="docutils literal notranslate"><span class="pre">rcN</span></code> for release candidates (with <code class="docutils literal notranslate"><span class="pre">N</span></code> being a
 natural number), and <code class="docutils literal notranslate"><span class="pre">stable</span></code> for stable versions. The
 <code class="docutils literal notranslate"><span class="pre">version_data</span></code> flag is also a de facto standard for Prolog
-compilers.</dd>
+compilers.</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="lint-flags">
 <h4>Lint flags<a class="headerlink" href="#lint-flags" title="Permalink to this headline">¶</a></h4>
-<span class="target" id="flag-unknown-entities"></span><dl class="docutils" id="index-1">
-<dt><code class="docutils literal notranslate"><span class="pre">unknown_entities(Option)</span></code></dt>
-<dd>Controls the unknown entity warnings, resulting from loading an
+<span class="target" id="flag-unknown-entities"></span><dl class="simple" id="index-1">
+<dt><code class="docutils literal notranslate"><span class="pre">unknown_entities(Option)</span></code></dt><dd><p>Controls the unknown entity warnings, resulting from loading an
 entity that references some other entity that is not currently
 loaded. Possible option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default)
 and <code class="docutils literal notranslate"><span class="pre">silent</span></code>. Note that these warnings are not always avoidable,
-specially when using reflective designs of class-based hierarchies.</dd>
+specially when using reflective designs of class-based hierarchies.</p>
+</dd>
 </dl>
-<span class="target" id="flag-unknown-predicates"></span><dl class="docutils" id="index-2">
-<dt><code class="docutils literal notranslate"><span class="pre">unknown_predicates(Option)</span></code></dt>
-<dd>Defines the compiler behavior when calls to unknown predicates (or
+<span class="target" id="flag-unknown-predicates"></span><dl class="simple" id="index-2">
+<dt><code class="docutils literal notranslate"><span class="pre">unknown_predicates(Option)</span></code></dt><dd><p>Defines the compiler behavior when calls to unknown predicates (or
 non-terminals) are found. An unknown predicate is a called predicate
 that is neither locally declared or defined. Possible option values
 are <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default), and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
-recommended).</dd>
+recommended).</p>
+</dd>
 </dl>
-<span class="target" id="flag-undefined-predicates"></span><dl class="docutils" id="index-3">
-<dt><code class="docutils literal notranslate"><span class="pre">undefined_predicates(Option)</span></code></dt>
-<dd>Defines the compiler behavior when calls to declared but undefined
+<span class="target" id="flag-undefined-predicates"></span><dl class="simple" id="index-3">
+<dt><code class="docutils literal notranslate"><span class="pre">undefined_predicates(Option)</span></code></dt><dd><p>Defines the compiler behavior when calls to declared but undefined
 predicates (or non-terminals) are found. Note that calls to declared
 but undefined predicates (or non-terminals) fail as per closed-world
 assumption. Possible option values are <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the
-usual default), and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</dd>
+usual default), and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</p>
+</dd>
 </dl>
-<span class="target" id="flag-steadfastness"></span><dl class="docutils" id="index-4">
-<dt><code class="docutils literal notranslate"><span class="pre">steadfastness(Option)</span></code></dt>
-<dd>Controls warnings about <em>possible</em> non <a class="reference internal" href="../glossary.html#term-steadfastness"><span class="xref std std-term">steadfast</span></a>
+<span class="target" id="flag-steadfastness"></span><dl class="simple" id="index-4">
+<dt><code class="docutils literal notranslate"><span class="pre">steadfastness(Option)</span></code></dt><dd><p>Controls warnings about <em>possible</em> non <a class="reference internal" href="../glossary.html#term-steadfastness"><span class="xref std std-term">steadfast</span></a>
 predicate definitions due to variable aliasing at a clause head and a cut
 in the clause body. Possible option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">silent</span></code>
-(the usual default due to the possibility of false positives).</dd>
+(the usual default due to the possibility of false positives).</p>
+</dd>
 </dl>
-<span class="target" id="flag-portability"></span><dl class="docutils" id="index-5">
-<dt><code class="docutils literal notranslate"><span class="pre">portability(Option)</span></code></dt>
-<dd>Controls the non-ISO specified Prolog built-in predicate and non-ISO
+<span class="target" id="flag-portability"></span><dl class="simple" id="index-5">
+<dt><code class="docutils literal notranslate"><span class="pre">portability(Option)</span></code></dt><dd><p>Controls the non-ISO specified Prolog built-in predicate and non-ISO
 specified Prolog built-in arithmetic function calls warnings plus use
 of non-standard Prolog flags and/or flag values. Possible option
-values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (the usual default).</dd>
+values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (the usual default).</p>
+</dd>
 </dl>
-<span class="target" id="flag-missing-directives"></span><dl class="docutils" id="index-6">
-<dt><code class="docutils literal notranslate"><span class="pre">missing_directives(Option)</span></code></dt>
-<dd>Controls the missing predicate directive warnings. Possible option
+<span class="target" id="flag-missing-directives"></span><dl class="simple" id="index-6">
+<dt><code class="docutils literal notranslate"><span class="pre">missing_directives(Option)</span></code></dt><dd><p>Controls the missing predicate directive warnings. Possible option
 values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
-recommended).</dd>
+recommended).</p>
+</dd>
 </dl>
-<span class="target" id="flag-duplicated-directives"></span><dl class="docutils" id="index-7">
-<dt><code class="docutils literal notranslate"><span class="pre">duplicated_directives(Option)</span></code></dt>
-<dd>Controls the duplicated predicate directive warnings. Possible option
+<span class="target" id="flag-duplicated-directives"></span><dl class="simple" id="index-7">
+<dt><code class="docutils literal notranslate"><span class="pre">duplicated_directives(Option)</span></code></dt><dd><p>Controls the duplicated predicate directive warnings. Possible option
 values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
 recommended). Note that conflicting directives for the same predicate
-are handled as errors, not as duplicated directive warnings.</dd>
+are handled as errors, not as duplicated directive warnings.</p>
+</dd>
 </dl>
-<span class="target" id="flag-trivial-goal-fails"></span><dl class="docutils" id="index-8">
-<dt><code class="docutils literal notranslate"><span class="pre">trivial_goal_fails(Option)</span></code></dt>
-<dd>Controls the printing of warnings warnings for calls to local static
+<span class="target" id="flag-trivial-goal-fails"></span><dl class="simple" id="index-8">
+<dt><code class="docutils literal notranslate"><span class="pre">trivial_goal_fails(Option)</span></code></dt><dd><p>Controls the printing of warnings warnings for calls to local static
 predicates with no matching clauses. Possible option values are
-<code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</dd>
+<code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</p>
+</dd>
 </dl>
-<span class="target" id="flag-always-true-or-false-goals"></span><dl class="docutils" id="index-9">
-<dt><code class="docutils literal notranslate"><span class="pre">always_true_or_false_goals(Option)</span></code></dt>
-<dd>Controls the printing of warnings for goals that are always true or
+<span class="target" id="flag-always-true-or-false-goals"></span><dl class="simple" id="index-9">
+<dt><code class="docutils literal notranslate"><span class="pre">always_true_or_false_goals(Option)</span></code></dt><dd><p>Controls the printing of warnings for goals that are always true or
 false. Possible option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and
-<code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</dd>
+<code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</p>
+</dd>
 </dl>
-<span class="target" id="flag-lambda-variables"></span><dl class="docutils" id="index-10">
-<dt><code class="docutils literal notranslate"><span class="pre">lambda_variables(Option)</span></code></dt>
-<dd>Controls the printing of lambda variable related warnings. Possible
+<span class="target" id="flag-lambda-variables"></span><dl class="simple" id="index-10">
+<dt><code class="docutils literal notranslate"><span class="pre">lambda_variables(Option)</span></code></dt><dd><p>Controls the printing of lambda variable related warnings. Possible
 option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
-recommended).</dd>
+recommended).</p>
+</dd>
 </dl>
-<span class="target" id="flag-suspicious-calls"></span><dl class="docutils" id="index-11">
-<dt><code class="docutils literal notranslate"><span class="pre">suspicious_calls(Option)</span></code></dt>
-<dd>Controls the printing of suspicious call warnings. Possible option
+<span class="target" id="flag-suspicious-calls"></span><dl class="simple" id="index-11">
+<dt><code class="docutils literal notranslate"><span class="pre">suspicious_calls(Option)</span></code></dt><dd><p>Controls the printing of suspicious call warnings. Possible option
 values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
-recommended).</dd>
+recommended).</p>
+</dd>
 </dl>
-<span class="target" id="flag-redefined-built-ins"></span><dl class="docutils" id="index-12">
-<dt><code class="docutils literal notranslate"><span class="pre">redefined_built_ins(Option)</span></code></dt>
-<dd>Controls the Logtalk and Prolog built-in predicate redefinition
+<span class="target" id="flag-redefined-built-ins"></span><dl class="simple" id="index-12">
+<dt><code class="docutils literal notranslate"><span class="pre">redefined_built_ins(Option)</span></code></dt><dd><p>Controls the Logtalk and Prolog built-in predicate redefinition
 warnings. Possible option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default)
 and <code class="docutils literal notranslate"><span class="pre">silent</span></code>. Warnings about redefined Prolog built-in predicates
 are often the result of running a Logtalk application on several
 Prolog compilers as each Prolog compiler defines its set of built-in
-predicates.</dd>
+predicates.</p>
+</dd>
 </dl>
-<span class="target" id="flag-singleton-variables"></span><dl class="docutils" id="index-13">
-<dt><code class="docutils literal notranslate"><span class="pre">singleton_variables(Option)</span></code></dt>
-<dd>Controls the singleton variable warnings. Possible option values are
-<code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</dd>
+<span class="target" id="flag-singleton-variables"></span><dl class="simple" id="index-13">
+<dt><code class="docutils literal notranslate"><span class="pre">singleton_variables(Option)</span></code></dt><dd><p>Controls the singleton variable warnings. Possible option values are
+<code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</p>
+</dd>
 </dl>
-<span class="target" id="flag-underscore-variables"></span><dl class="docutils" id="index-14">
-<dt><code class="docutils literal notranslate"><span class="pre">underscore_variables(Option)</span></code></dt>
-<dd>Controls the interpretation of variables that start with an
+<span class="target" id="flag-underscore-variables"></span><dl class="simple" id="index-14">
+<dt><code class="docutils literal notranslate"><span class="pre">underscore_variables(Option)</span></code></dt><dd><p>Controls the interpretation of variables that start with an
 underscore (excluding the anonymous variable) that occur once in a
 term as either don’t care variables or singleton variables. Possible
 option values are <code class="docutils literal notranslate"><span class="pre">dont_care</span></code> and <code class="docutils literal notranslate"><span class="pre">singletons</span></code> (the usual
 default). Note that, depending on your Prolog compiler, the
 <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in predicate may report variables that start
 with an underscore as singleton variables. There is no standard
-behavior, hence this option.</dd>
+behavior, hence this option.</p>
+</dd>
 </dl>
-<span class="target" id="flag-naming"></span><dl class="docutils" id="index-15">
-<dt><code class="docutils literal notranslate"><span class="pre">naming(Option)</span></code></dt>
-<dd>Controls warnings about entity, predicate, and variable names per
+<span class="target" id="flag-naming"></span><dl class="simple" id="index-15">
+<dt><code class="docutils literal notranslate"><span class="pre">naming(Option)</span></code></dt><dd><p>Controls warnings about entity, predicate, and variable names per
 official coding guidelines (which advise using underscores for entity
 and predicate names and camel case for variable names). Additionally,
 variable names should not differ only on case. Possible option values
 are <code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (the usual default due to the curent
-limitation to ASCII names and the computational cost of the checks).</dd>
+limitation to ASCII names and the computational cost of the checks).</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="optional-features-compilation-flags">
 <h4>Optional features compilation flags<a class="headerlink" href="#optional-features-compilation-flags" title="Permalink to this headline">¶</a></h4>
-<span class="target" id="flag-complements"></span><dl class="docutils" id="index-16">
-<dt><code class="docutils literal notranslate"><span class="pre">complements(Option)</span></code></dt>
-<dd>Allows objects to be compiled with support for complementing
+<span class="target" id="flag-complements"></span><dl class="simple" id="index-16">
+<dt><code class="docutils literal notranslate"><span class="pre">complements(Option)</span></code></dt><dd><p>Allows objects to be compiled with support for complementing
 categories turned off in order to improve performance and security.
 Possible option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> (allow complementing categories
 to override local object predicate declarations and definitions),
@@ -770,83 +769,83 @@ declarations and definitions to an object but not to override them),
 and <code class="docutils literal notranslate"><span class="pre">deny</span></code> (ignore complementing categories; the usual default).
 This option can be used on a per-object basis. Note that changing
 this option is of no consequence for objects already compiled and
-loaded.</dd>
+loaded.</p>
+</dd>
 </dl>
-<span class="target" id="flag-dynamic-declarations"></span><dl class="docutils" id="index-17">
-<dt><code class="docutils literal notranslate"><span class="pre">dynamic_declarations(Option)</span></code></dt>
-<dd>Allows objects to be compiled with support for dynamic declaration of
+<span class="target" id="flag-dynamic-declarations"></span><dl class="simple" id="index-17">
+<dt><code class="docutils literal notranslate"><span class="pre">dynamic_declarations(Option)</span></code></dt><dd><p>Allows objects to be compiled with support for dynamic declaration of
 new predicates turned off in order to improve performance and
 security. Possible option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> and <code class="docutils literal notranslate"><span class="pre">deny</span></code> (the
 usual default). This option can be used on a per-object basis. Note
 that changing this option is of no consequence for objects already
 compiled and loaded. This option is only checked when sending an
 <a class="reference internal" href="../refman/methods/asserta_1.html#methods-asserta-1"><span class="std std-ref">asserta/1</span></a> or <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> message to an
-object. Local asserting of new predicates is always allowed.</dd>
+object. Local asserting of new predicates is always allowed.</p>
+</dd>
 </dl>
-<span class="target" id="flag-events"></span><dl class="docutils" id="index-18">
-<dt><code class="docutils literal notranslate"><span class="pre">events(Option)</span></code></dt>
-<dd>Allows message sending calls to be compiled with or without
+<span class="target" id="flag-events"></span><dl class="simple" id="index-18">
+<dt><code class="docutils literal notranslate"><span class="pre">events(Option)</span></code></dt><dd><p>Allows message sending calls to be compiled with or without
 <a class="reference internal" href="events.html#events-events"><span class="std std-ref">event-driven programming</span></a> support. Possible
 option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> and <code class="docutils literal notranslate"><span class="pre">deny</span></code> (the usual default). Objects
 (and categories) compiled with this option set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> use
 optimized code for message-sending calls that does not trigger
 events. As such, this option can be used on a per-object (or
 per-category) basis. Note that changing this option is of no
-consequence for objects already compiled and loaded.</dd>
+consequence for objects already compiled and loaded.</p>
+</dd>
 </dl>
-<span class="target" id="flag-context-switching-calls"></span><dl class="docutils" id="index-19">
-<dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls(Option)</span></code></dt>
-<dd>Allows context switching calls (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>) to be either allowed or
+<span class="target" id="flag-context-switching-calls"></span><dl class="simple" id="index-19">
+<dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls(Option)</span></code></dt><dd><p>Allows context switching calls (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>) to be either allowed or
 denied. Possible option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> and <code class="docutils literal notranslate"><span class="pre">deny</span></code>. The
 default flag vale is <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Note that changing this option is of
-no consequence for objects already compiled and loaded.</dd>
+no consequence for objects already compiled and loaded.</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="back-end-prolog-compiler-and-loader-flags">
 <h4>Back-end Prolog compiler and loader flags<a class="headerlink" href="#back-end-prolog-compiler-and-loader-flags" title="Permalink to this headline">¶</a></h4>
-<span class="target" id="flag-prolog-compiler"></span><dl class="docutils" id="index-20">
-<dt><code class="docutils literal notranslate"><span class="pre">prolog_compiler(Flags)</span></code></dt>
-<dd>List of compiler flags for the generated Prolog files. The valid
+<span class="target" id="flag-prolog-compiler"></span><dl class="simple" id="index-20">
+<dt><code class="docutils literal notranslate"><span class="pre">prolog_compiler(Flags)</span></code></dt><dd><p>List of compiler flags for the generated Prolog files. The valid
 flags are specific to the used Prolog backend compiler. The usual
 default is the empty list. These flags are passed to the backend
 Prolog compiler built-in predicate that is responsible for compiling
 to disk a Prolog file. For Prolog compilers that don’t provide
 separate predicates for compiling and loading a file, use instead
-the <a class="reference internal" href="#flag-prolog-loader"><span class="std std-ref">prolog_loader</span></a> flag.</dd>
+the <a class="reference internal" href="#flag-prolog-loader"><span class="std std-ref">prolog_loader</span></a> flag.</p>
+</dd>
 </dl>
-<span class="target" id="flag-prolog-loader"></span><dl class="docutils" id="index-21">
-<dt><code class="docutils literal notranslate"><span class="pre">prolog_loader(Flags)</span></code></dt>
-<dd>List of loader flags for the generated Prolog files. The valid flags
+<span class="target" id="flag-prolog-loader"></span><dl class="simple" id="index-21">
+<dt><code class="docutils literal notranslate"><span class="pre">prolog_loader(Flags)</span></code></dt><dd><p>List of loader flags for the generated Prolog files. The valid flags
 are specific to the used Prolog backend compiler. The usual default
 is the empty list. These flags are passed to the backend Prolog
 compiler built-in predicate that is responsible for loading a
-(compiled) Prolog file.</dd>
+(compiled) Prolog file.</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="other-flags">
 <h4>Other flags<a class="headerlink" href="#other-flags" title="Permalink to this headline">¶</a></h4>
-<span class="target" id="flag-scratch-directory"></span><dl class="docutils" id="index-22">
-<dt><code class="docutils literal notranslate"><span class="pre">scratch_directory(Directory)</span></code></dt>
-<dd>Sets the directory to be used to store the temporary files generated
+<span class="target" id="flag-scratch-directory"></span><dl class="simple" id="index-22">
+<dt><code class="docutils literal notranslate"><span class="pre">scratch_directory(Directory)</span></code></dt><dd><p>Sets the directory to be used to store the temporary files generated
 when compiling Logtalk source files. This directory can be specified
 using an atom or using <a class="reference internal" href="../glossary.html#term-library-notation"><span class="xref std std-term">library notation</span></a>. The directory must
 always end with a slash. The default value is a sub-directory of the
 source files directory, either <code class="docutils literal notranslate"><span class="pre">'./lgt_tmp/'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./.lgt_tmp/'</span></code>
 (depending on the backend Prolog compiler and operating-system).
 Relative directories must always start with <code class="docutils literal notranslate"><span class="pre">'./'</span></code> due to the lack
-of a portable solution to check if a path is relative or absolute.</dd>
+of a portable solution to check if a path is relative or absolute.</p>
+</dd>
 </dl>
-<span class="target" id="flag-report"></span><dl class="docutils" id="index-23">
-<dt><code class="docutils literal notranslate"><span class="pre">report(Option)</span></code></dt>
-<dd>Controls the default printing of messages. Possible option values are
+<span class="target" id="flag-report"></span><dl class="simple" id="index-23">
+<dt><code class="docutils literal notranslate"><span class="pre">report(Option)</span></code></dt><dd><p>Controls the default printing of messages. Possible option values are
 <code class="docutils literal notranslate"><span class="pre">on</span></code> (by usual default, print all messages that are not intercepted
 by the user), <code class="docutils literal notranslate"><span class="pre">warnings</span></code> (only print warning and error messages
 that are not intercepted by the user), and <code class="docutils literal notranslate"><span class="pre">off</span></code> (do not print any
-messages that are not intercepted by the user).</dd>
+messages that are not intercepted by the user).</p>
+</dd>
 </dl>
-<span class="target" id="flag-code-prefix"></span><dl class="docutils" id="index-24">
-<dt><code class="docutils literal notranslate"><span class="pre">code_prefix(Character)</span></code></dt>
-<dd>Enables the definition of prefix for all functors of Prolog code
+<span class="target" id="flag-code-prefix"></span><dl class="simple" id="index-24">
+<dt><code class="docutils literal notranslate"><span class="pre">code_prefix(Character)</span></code></dt><dd><p>Enables the definition of prefix for all functors of Prolog code
 generated by the Logtalk compiler. The option value must be a single
 character atom. Its default value is <code class="docutils literal notranslate"><span class="pre">'$'</span></code>. Specifying a code
 prefix provides a way to solve possible conflicts between Logtalk
@@ -854,11 +853,11 @@ compiled code and other Prolog code. In addition, some Prolog
 compilers automatically hide predicates whose functor start with a
 specific prefix such as the character <code class="docutils literal notranslate"><span class="pre">$</span></code>. Although this is not a
 read-only flag, it should only be changed at startup time and before
-loading any source files.</dd>
+loading any source files.</p>
+</dd>
 </dl>
-<span class="target" id="flag-optimize"></span><dl class="docutils" id="index-25">
-<dt><code class="docutils literal notranslate"><span class="pre">optimize(Option)</span></code></dt>
-<dd>Controls the compiler optimizations. Possible option values are
+<span class="target" id="flag-optimize"></span><dl class="simple" id="index-25">
+<dt><code class="docutils literal notranslate"><span class="pre">optimize(Option)</span></code></dt><dd><p>Controls the compiler optimizations. Possible option values are
 <code class="docutils literal notranslate"><span class="pre">on</span></code> (used by default for deployment) and <code class="docutils literal notranslate"><span class="pre">off</span></code> (used by default
 for development). Compiler optimizations include the use of static
 binding whenever possible, the removal of redundant calls to
@@ -870,11 +869,11 @@ predicate with the same arguments. Care should be taken when
 developing applications with this flag turned on as changing and
 reloading a file may render <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> optimizations
 invalid for code defining in other loaded files. Turning on this
-flag automatically turns off the <a class="reference internal" href="#flag-debug"><span class="std std-ref">debug</span></a> flag.</dd>
+flag automatically turns off the <a class="reference internal" href="#flag-debug"><span class="std std-ref">debug</span></a> flag.</p>
+</dd>
 </dl>
-<span class="target" id="flag-source-data"></span><dl class="docutils" id="index-26">
-<dt><code class="docutils literal notranslate"><span class="pre">source_data(Option)</span></code></dt>
-<dd>Defines how much information is retained when compiling a source
+<span class="target" id="flag-source-data"></span><dl class="simple" id="index-26">
+<dt><code class="docutils literal notranslate"><span class="pre">source_data(Option)</span></code></dt><dd><p>Defines how much information is retained when compiling a source
 file. Possible option values are <code class="docutils literal notranslate"><span class="pre">on</span></code> (the usual default for
 development) and <code class="docutils literal notranslate"><span class="pre">off</span></code>. With this flag set to <code class="docutils literal notranslate"><span class="pre">on</span></code>, Logtalk will
 keep the information represented using documenting directives plus
@@ -883,46 +882,46 @@ This information can be retrieved using the
 <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and is useful for
 documenting, debugging, and integration with third-party development
 tools. This flag can be turned off in order to generate more compact
-code.</dd>
+code.</p>
+</dd>
 </dl>
-<span class="target" id="flag-debug"></span><dl class="docutils" id="index-27">
-<dt><code class="docutils literal notranslate"><span class="pre">debug(Option)</span></code></dt>
-<dd>Controls the compilation of source files in debug mode (the Logtalk
+<span class="target" id="flag-debug"></span><dl class="simple" id="index-27">
+<dt><code class="docutils literal notranslate"><span class="pre">debug(Option)</span></code></dt><dd><p>Controls the compilation of source files in debug mode (the Logtalk
 default debugger can only be used with files compiled in this mode).
 Also controls, by default, printing of <code class="docutils literal notranslate"><span class="pre">debug&gt;</span></code> and
 <code class="docutils literal notranslate"><span class="pre">debug(Topic)</span></code> messages. Possible option values are <code class="docutils literal notranslate"><span class="pre">on</span></code> and
 <code class="docutils literal notranslate"><span class="pre">off</span></code> (the usual default). Turning on this flag automatically turns
-off the <a class="reference internal" href="#flag-optimize"><span class="std std-ref">optimize</span></a> flag.</dd>
+off the <a class="reference internal" href="#flag-optimize"><span class="std std-ref">optimize</span></a> flag.</p>
+</dd>
 </dl>
-<span class="target" id="flag-reload"></span><dl class="docutils" id="index-28">
-<dt><code class="docutils literal notranslate"><span class="pre">reload(Option)</span></code></dt>
-<dd>Defines the reloading behavior for source files. Possible option
+<span class="target" id="flag-reload"></span><dl class="simple" id="index-28">
+<dt><code class="docutils literal notranslate"><span class="pre">reload(Option)</span></code></dt><dd><p>Defines the reloading behavior for source files. Possible option
 values are <code class="docutils literal notranslate"><span class="pre">skip</span></code> (skip loading of already loaded files; this value
 can be used to get similar functionality to the Prolog directive
 <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code> but should be used only with fully debugged
 code), <code class="docutils literal notranslate"><span class="pre">changed</span></code> (the usual default; reload files only when they
 are changed since last loaded provided that the any explicit flags
 and the compilation mode are the same as before), and <code class="docutils literal notranslate"><span class="pre">always</span></code>
-(always reload files).</dd>
+(always reload files).</p>
+</dd>
 </dl>
-<span class="target" id="flag-relative-to"></span><dl class="docutils" id="index-29">
-<dt><code class="docutils literal notranslate"><span class="pre">relative_to(Directory)</span></code></dt>
-<dd>Defines a base directory for resolving relative source file paths.
-The default value is the directory of the source file being compiled.</dd>
+<span class="target" id="flag-relative-to"></span><dl class="simple" id="index-29">
+<dt><code class="docutils literal notranslate"><span class="pre">relative_to(Directory)</span></code></dt><dd><p>Defines a base directory for resolving relative source file paths.
+The default value is the directory of the source file being compiled.</p>
+</dd>
 </dl>
-<span class="target" id="flag-hook"></span><dl class="docutils" id="index-30">
-<dt><code class="docutils literal notranslate"><span class="pre">hook(Object)</span></code></dt>
-<dd>Allows the definition of an object (which can be the pseudo-object
+<span class="target" id="flag-hook"></span><dl class="simple" id="index-30">
+<dt><code class="docutils literal notranslate"><span class="pre">hook(Object)</span></code></dt><dd><p>Allows the definition of an object (which can be the pseudo-object
 <a class="reference external" href="https://logtalk.org/library/user_0.html#user-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">user</span></a>) implementing the
 <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">expanding</span></a> built-in
 protocol. The hook object must be compiled and loaded when this option
 is used. It’s also possible to specify a Prolog module instead of a
 Logtalk object but the module must be pre-loaded and its identifier
-must be different from any object identifier.</dd>
+must be different from any object identifier.</p>
+</dd>
 </dl>
-<span class="target" id="flag-clean"></span><dl class="docutils" id="index-31">
-<dt><code class="docutils literal notranslate"><span class="pre">clean(Option)</span></code></dt>
-<dd>Controls cleaning of the intermediate Prolog files generated when
+<span class="target" id="flag-clean"></span><dl class="simple" id="index-31">
+<dt><code class="docutils literal notranslate"><span class="pre">clean(Option)</span></code></dt><dd><p>Controls cleaning of the intermediate Prolog files generated when
 compiling Logtalk source files. Possible option values are <code class="docutils literal notranslate"><span class="pre">off</span></code>
 and <code class="docutils literal notranslate"><span class="pre">on</span></code> (the usual default). When turned on, this flag also forces
 recompilation of all source files, disregarding any existing
@@ -930,7 +929,8 @@ intermediate files. Thus, it is strong advisable to turn on this flag
 when switching backend Prolog compilers as the intermediate files
 generated by the compilation of source files may not be portable (due
 to differences in the implementation of the standard
-<code class="docutils literal notranslate"><span class="pre">write_canonical/2</span></code> predicate).</dd>
+<code class="docutils literal notranslate"><span class="pre">write_canonical/2</span></code> predicate).</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="user-defined-flags">

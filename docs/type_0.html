@@ -462,40 +462,40 @@
 <div class="section" id="remarks">
 <h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>Logtalk specific types</strong>: {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}</li>
-<li><strong>Prolog module related types (when the backend compiler supports modules)</strong>: {module, module_identifier, qualified_callable}</li>
-<li><strong>Base types from Prolog</strong>: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}</li>
-<li><strong>Atom derived types</strong>: {atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}</li>
-<li><strong>Number derived types</strong>: {positive_number, negative_number, non_positive_number, non_negative_number}</li>
-<li><strong>Float derived types</strong>: {positive_float, negative_float, non_positive_float, non_negative_float, probability}</li>
-<li><strong>Integer derived types</strong>: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}</li>
-<li><strong>List types (compound derived types)</strong>: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}</li>
-<li><strong>Other compound derived types</strong>: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}</li>
-<li><strong>Stream types</strong>: {stream, stream_or_alias, stream(Property), stream_or_alias(Property)}</li>
-<li><strong>Other types</strong>: {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}</li>
-<li><strong>predicate type notes</strong>: This type is used to check for an object public predicate specified as Object::Functor/Arity.</li>
-<li><strong>boolean type notes</strong>: The two value of this type are the atoms true and false.</li>
-<li><strong>Stream types notes</strong>: In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.</li>
-<li><strong>order type notes</strong>: The three possible values of this type are the single character atoms &lt;, =, and &gt;.</li>
-<li><strong>character_code type notes</strong>: This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</li>
-<li><strong>between(Type, Lower, Upper) type notes</strong>: The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.</li>
-<li><strong>property(Type, Lambda) type notes</strong>: Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]&gt;&gt;Goal. The lambda expression is applied in the context of “user”. The term is type-checked before calling the goal.</li>
-<li><strong>one_of(Type, Set) type notes</strong>: For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.</li>
-<li><strong>var_or(Type) notes</strong>: Allows checking if a term is either a variable or a valid value of the given type.</li>
-<li><strong>ground(Type) notes</strong>: Allows checking if a term is ground and a valid value of the given type.</li>
-<li><strong>types(Types) notes</strong>: Allows checking if a term is a valid value for one of the types in a list of types.</li>
-<li><strong>type notes</strong>: Allows checking if a term is a valid type.</li>
-<li><strong>qualified_callable notes</strong>: Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.</li>
-<li><strong>Design choices</strong>: The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.</li>
-<li><strong>Error context</strong>: The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.</li>
-<li><strong>Registering new types</strong>: New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</li>
-<li><strong>Meta-types</strong>: Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.</li>
-<li><strong>Character sets</strong>: When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.</li>
-<li><strong>Caveats</strong>: The type argument to the predicates is never itself type-checked for performance reasons.</li>
+<li><p><strong>Logtalk specific types</strong>: {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}</p></li>
+<li><p><strong>Prolog module related types (when the backend compiler supports modules)</strong>: {module, module_identifier, qualified_callable}</p></li>
+<li><p><strong>Base types from Prolog</strong>: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}</p></li>
+<li><p><strong>Atom derived types</strong>: {atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}</p></li>
+<li><p><strong>Number derived types</strong>: {positive_number, negative_number, non_positive_number, non_negative_number}</p></li>
+<li><p><strong>Float derived types</strong>: {positive_float, negative_float, non_positive_float, non_negative_float, probability}</p></li>
+<li><p><strong>Integer derived types</strong>: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}</p></li>
+<li><p><strong>List types (compound derived types)</strong>: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}</p></li>
+<li><p><strong>Other compound derived types</strong>: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}</p></li>
+<li><p><strong>Stream types</strong>: {stream, stream_or_alias, stream(Property), stream_or_alias(Property)}</p></li>
+<li><p><strong>Other types</strong>: {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}</p></li>
+<li><p><strong>predicate type notes</strong>: This type is used to check for an object public predicate specified as Object::Functor/Arity.</p></li>
+<li><p><strong>boolean type notes</strong>: The two value of this type are the atoms true and false.</p></li>
+<li><p><strong>Stream types notes</strong>: In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.</p></li>
+<li><p><strong>order type notes</strong>: The three possible values of this type are the single character atoms &lt;, =, and &gt;.</p></li>
+<li><p><strong>character_code type notes</strong>: This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</p></li>
+<li><p><strong>between(Type, Lower, Upper) type notes</strong>: The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.</p></li>
+<li><p><strong>property(Type, Lambda) type notes</strong>: Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]&gt;&gt;Goal. The lambda expression is applied in the context of “user”. The term is type-checked before calling the goal.</p></li>
+<li><p><strong>one_of(Type, Set) type notes</strong>: For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.</p></li>
+<li><p><strong>var_or(Type) notes</strong>: Allows checking if a term is either a variable or a valid value of the given type.</p></li>
+<li><p><strong>ground(Type) notes</strong>: Allows checking if a term is ground and a valid value of the given type.</p></li>
+<li><p><strong>types(Types) notes</strong>: Allows checking if a term is a valid value for one of the types in a list of types.</p></li>
+<li><p><strong>type notes</strong>: Allows checking if a term is a valid type.</p></li>
+<li><p><strong>qualified_callable notes</strong>: Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.</p></li>
+<li><p><strong>Design choices</strong>: The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.</p></li>
+<li><p><strong>Error context</strong>: The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.</p></li>
+<li><p><strong>Registering new types</strong>: New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</p></li>
+<li><p><strong>Meta-types</strong>: Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.</p></li>
+<li><p><strong>Character sets</strong>: When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.</p></li>
+<li><p><strong>Caveats</strong>: The type argument to the predicates is never itself type-checked for performance reasons.</p></li>
 </ul>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="arbitrary_0.html#arbitrary-0"><span class="std std-ref">arbitrary</span></a>, <a class="reference internal" href="os_types_0.html#os-types-0"><span class="std std-ref">os_types</span></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="arbitrary_0.html#arbitrary-0"><span class="std std-ref">arbitrary</span></a>, <a class="reference internal" href="os_types_0.html#os-types-0"><span class="std std-ref">os_types</span></a></p>
 </div>
 </div>
 </div>

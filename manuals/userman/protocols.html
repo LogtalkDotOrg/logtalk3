@@ -404,38 +404,38 @@ built-in predicate. Depending on the <a class="reference internal" href="../glos
 protocol may have additional properties related to the source file where
 it is defined.</p>
 <p>The following protocol properties are supported:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">static</span></code></dt>
-<dd>The protocol is static</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt>
-<dd>The protocol is dynamic (and thus can be abolished in runtime by
-calling the <a class="reference internal" href="../refman/predicates/abolish_category_1.html#predicates-abolish-category-1"><span class="std std-ref">abolish_category/1</span></a> built-in predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt>
-<dd>The protocol is a built-in protocol (and thus always available)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">source_data</span></code></dt>
-<dd>Source data available for the protocol</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code></dt>
-<dd>Absolute path of the source file defining the protocol (if
-applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">file(Basename,</span> <span class="pre">Directory)</span></code></dt>
-<dd>Basename and directory of the source file defining the protocol (if
-applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">lines(BeginLine,</span> <span class="pre">EndLine)</span></code></dt>
-<dd>Source file begin and end lines of the protocol definition (if
-applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">public(Predicates)</span></code></dt>
-<dd>List of public predicates declared by the protocol</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">protected(Predicates)</span></code></dt>
-<dd>List of protected predicates declared by the protocol</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt>
-<dd>List of private predicates declared by the protocol</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for a predicate declared by the protocol</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the protocol
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">static</span></code></dt><dd><p>The protocol is static</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt><dd><p>The protocol is dynamic (and thus can be abolished in runtime by
+calling the <a class="reference internal" href="../refman/predicates/abolish_category_1.html#predicates-abolish-category-1"><span class="std std-ref">abolish_category/1</span></a> built-in predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt><dd><p>The protocol is a built-in protocol (and thus always available)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">source_data</span></code></dt><dd><p>Source data available for the protocol</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code></dt><dd><p>Absolute path of the source file defining the protocol (if
+applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file(Basename,</span> <span class="pre">Directory)</span></code></dt><dd><p>Basename and directory of the source file defining the protocol (if
+applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lines(BeginLine,</span> <span class="pre">EndLine)</span></code></dt><dd><p>Source file begin and end lines of the protocol definition (if
+applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">public(Predicates)</span></code></dt><dd><p>List of public predicates declared by the protocol</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">protected(Predicates)</span></code></dt><dd><p>List of protected predicates declared by the protocol</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt><dd><p>List of private predicates declared by the protocol</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a predicate declared by the protocol</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the protocol
 (the properties include <code class="docutils literal notranslate"><span class="pre">for(Original)</span></code>, <code class="docutils literal notranslate"><span class="pre">from(Entity)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">non_terminal(NonTerminal)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code>
-being the begin line of the alias directive)</dd>
+being the begin line of the alias directive)</p>
+</dd>
 </dl>
 <p>Some of the properties such as line numbers are only available when the
 protocol is defined in a source file compiled with the

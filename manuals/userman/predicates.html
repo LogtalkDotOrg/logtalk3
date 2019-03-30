@@ -322,22 +322,22 @@ example:</p>
 </div>
 <p>The first directive argument describes a valid calling mode. The minimum
 information will be the instantiation mode of each argument. The first
-four possible values are described in <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>). The remaining two can
+four possible values are described in <a class="reference internal" href="../bibliography.html#iso95" id="id1"><span>[ISO95]</span></a>). The remaining two can
 also be found in use in some Prolog systems.</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">+</span></code></dt>
-<dd>Argument must be instantiated (but not necessarily ground).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-</span></code></dt>
-<dd>Argument should be a free (non-instantiated) variable (when bound,
-the call will unify the returned term with the given term).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">?</span></code></dt>
-<dd>Argument can either be instantiated or free.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">&#64;</span></code></dt>
-<dd>Argument will not be further instantiated (modified).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">++</span></code></dt>
-<dd>Argument must be ground.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">--</span></code></dt>
-<dd>Argument must be unbound. Used mainly when returning an opaque term.</dd>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">+</span></code></dt><dd><p>Argument must be instantiated (but not necessarily ground).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-</span></code></dt><dd><p>Argument should be a free (non-instantiated) variable (when bound,
+the call will unify the returned term with the given term).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">?</span></code></dt><dd><p>Argument can either be instantiated or free.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&#64;</span></code></dt><dd><p>Argument will not be further instantiated (modified).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">++</span></code></dt><dd><p>Argument must be ground.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--</span></code></dt><dd><p>Argument must be unbound. Used mainly when returning an opaque term.</p>
+</dd>
 </dl>
 <p>These six mode atoms are also declared as prefix operators by the
 Logtalk compiler. This makes it possible to include type information
@@ -353,21 +353,21 @@ necessarily distinct solutions, for the specified mode. As an example,
 the <code class="docutils literal notranslate"><span class="pre">member(X,</span> <span class="pre">[1,1,1,1])</span></code> goal have only one distinct solution but four
 proofs for that solution. Note that different modes for the same predicate
 often have different determinism. The possible values are:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">zero</span></code></dt>
-<dd>Predicate always fails.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one</span></code></dt>
-<dd>Predicate always succeeds once.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></dt>
-<dd>Predicate either fails or succeeds.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></dt>
-<dd>Predicate has zero or more proofs.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></dt>
-<dd>Predicate has one or more proofs.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></dt>
-<dd>Predicate either succeeds once or throws an error (see below).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">error</span></code></dt>
-<dd>Predicate will throw an error (see below).</dd>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">zero</span></code></dt><dd><p>Predicate always fails.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">one</span></code></dt><dd><p>Predicate always succeeds once.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></dt><dd><p>Predicate either fails or succeeds.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></dt><dd><p>Predicate has zero or more proofs.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></dt><dd><p>Predicate has one or more proofs.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></dt><dd><p>Predicate either succeeds once or throws an error (see below).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">error</span></code></dt><dd><p>Predicate will throw an error (see below).</p>
+</dd>
 </dl>
 <p>Mode declarations can also be used to document that some call modes will
 throw an error. For instance, regarding the <code class="docutils literal notranslate"><span class="pre">arg/3</span></code> and <code class="docutils literal notranslate"><span class="pre">open/3</span></code> ISO
@@ -408,39 +408,39 @@ To ensure that these goals will be executed in the correct context
 </div>
 <p>The meta-predicate mode arguments in this directive have the following
 meaning:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">0</span></code></dt>
-<dd>Meta-argument that will be called as a goal.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">N</span></code></dt>
-<dd>Meta-argument that will be a closure used to construct a call by
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">0</span></code></dt><dd><p>Meta-argument that will be called as a goal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">N</span></code></dt><dd><p>Meta-argument that will be a closure used to construct a call by
 appending <code class="docutils literal notranslate"><span class="pre">N</span></code> arguments. The value of <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a positive
-integer.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">::</span></code></dt>
-<dd>Argument that is context-aware but that will not be used as a goal
-or a closure.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">^</span></code></dt>
-<dd>Goal that may be existentially quantified (<code class="docutils literal notranslate"><span class="pre">Vars^Goal</span></code>).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">*</span></code></dt>
-<dd>Normal argument.</dd>
+integer.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">::</span></code></dt><dd><p>Argument that is context-aware but that will not be used as a goal
+or a closure.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">^</span></code></dt><dd><p>Goal that may be existentially quantified (<code class="docutils literal notranslate"><span class="pre">Vars^Goal</span></code>).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">*</span></code></dt><dd><p>Normal argument.</p>
+</dd>
 </dl>
 <p>The following meta-predicate mode arguments are for use only when writing
 backend Prolog <a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter files</span></a> to deal with proprietary
 built-in meta-predicates and meta-directives:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">/</span></code></dt>
-<dd>Predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), list of predicate indicators,
-or conjunction of predicate indicators.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">//</span></code></dt>
-<dd>Non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), list of predicate
-indicators, or conjunction of predicate indicators.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">[0]</span></code></dt>
-<dd>List of goals.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">[N]</span></code></dt>
-<dd>List of closures.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">[/]</span></code></dt>
-<dd>List of predicate indicators.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">[//]</span></code></dt>
-<dd>List of non-terminal indicators.</dd>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">/</span></code></dt><dd><p>Predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), list of predicate indicators,
+or conjunction of predicate indicators.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">//</span></code></dt><dd><p>Non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), list of predicate
+indicators, or conjunction of predicate indicators.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[0]</span></code></dt><dd><p>List of goals.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[N]</span></code></dt><dd><p>List of closures.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[/]</span></code></dt><dd><p>List of predicate indicators.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[//]</span></code></dt><dd><p>List of non-terminal indicators.</p>
+</dd>
 </dl>
 <p>To the best of my knowledge, the use of non-negative integers to specify
 closures has first introduced on Quintus Prolog for providing
@@ -1388,90 +1388,90 @@ predicates.</p>
 declared for the object with all the built-in methods and all the
 Logtalk and Prolog built-in predicates.</p>
 <p>The following predicate properties are supported:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">scope(Scope)</span></code></dt>
-<dd>The predicate scope (useful for finding the predicate scope with a
-single call to <code class="docutils literal notranslate"><span class="pre">predicate_property/2</span></code>)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">protected</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code></dt>
-<dd>The predicate scope (useful for testing if a predicate have a
-specific scope)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">static</span></code>, <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt>
-<dd>All predicates are either static or dynamic (note, however, that a
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">scope(Scope)</span></code></dt><dd><p>The predicate scope (useful for finding the predicate scope with a
+single call to <code class="docutils literal notranslate"><span class="pre">predicate_property/2</span></code>)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">protected</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code></dt><dd><p>The predicate scope (useful for testing if a predicate have a
+specific scope)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">static</span></code>, <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt><dd><p>All predicates are either static or dynamic (note, however, that a
 dynamic predicate can only be abolished if it was dynamically
-declared)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">logtalk</span></code>, <code class="docutils literal notranslate"><span class="pre">prolog</span></code>, <code class="docutils literal notranslate"><span class="pre">foreign</span></code></dt>
-<dd>A predicate can be defined in Logtalk source code, Prolog code, or in
-foreign code (e.g. in C)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt>
-<dd>The predicate is a built-in predicate</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">multifile</span></code></dt>
-<dd>The predicate is declared multifile (i.e. it can have clauses defined
-in several entities)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">meta_predicate(Template)</span></code></dt>
-<dd>The predicate is declared as a meta-predicate with the specified
-template</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">coinductive(Template)</span></code></dt>
-<dd>The predicate is declared as a coinductive predicate with the
-specified template</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">declared_in(Entity)</span></code></dt>
-<dd>The predicate is declared (using a scope directive) in the specified
-entity</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">defined_in(Entity)</span></code></dt>
-<dd>The predicate definition is looked up in the specified entity (note
+declared)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">logtalk</span></code>, <code class="docutils literal notranslate"><span class="pre">prolog</span></code>, <code class="docutils literal notranslate"><span class="pre">foreign</span></code></dt><dd><p>A predicate can be defined in Logtalk source code, Prolog code, or in
+foreign code (e.g. in C)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt><dd><p>The predicate is a built-in predicate</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">multifile</span></code></dt><dd><p>The predicate is declared multifile (i.e. it can have clauses defined
+in several entities)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">meta_predicate(Template)</span></code></dt><dd><p>The predicate is declared as a meta-predicate with the specified
+template</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">coinductive(Template)</span></code></dt><dd><p>The predicate is declared as a coinductive predicate with the
+specified template</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">declared_in(Entity)</span></code></dt><dd><p>The predicate is declared (using a scope directive) in the specified
+entity</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">defined_in(Entity)</span></code></dt><dd><p>The predicate definition is looked up in the specified entity (note
 that this property does not necessarily imply that clauses for the
 predicate exist in <code class="docutils literal notranslate"><span class="pre">Entity</span></code>; the predicate can simply be false as
-per the <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">redefined_from(Entity)</span></code></dt>
-<dd>The predicate is a redefinition of a predicate definition inherited
-from the specified entity</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">non_terminal(NonTerminal//Arity)</span></code></dt>
-<dd>The predicate resulted from the compilation of the specified grammar
-rule non-terminal</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">alias_of(Predicate)</span></code></dt>
-<dd>The predicate (name) is an alias for the specified predicate</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">alias_declared_in(Entity)</span></code></dt>
-<dd>The predicate alias is declared in the specified entity</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">synchronized</span></code></dt>
-<dd>The predicate is declared as synchronized (i.e. it’s a deterministic
+per the <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">redefined_from(Entity)</span></code></dt><dd><p>The predicate is a redefinition of a predicate definition inherited
+from the specified entity</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">non_terminal(NonTerminal//Arity)</span></code></dt><dd><p>The predicate resulted from the compilation of the specified grammar
+rule non-terminal</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alias_of(Predicate)</span></code></dt><dd><p>The predicate (name) is an alias for the specified predicate</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alias_declared_in(Entity)</span></code></dt><dd><p>The predicate alias is declared in the specified entity</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">synchronized</span></code></dt><dd><p>The predicate is declared as synchronized (i.e. it’s a deterministic
 predicate synchronized using a mutex when using a backend Prolog
-compiler supporting a compatible multi-threading implementation)</dd>
+compiler supporting a compatible multi-threading implementation)</p>
+</dd>
 </dl>
 <p>Some properties are only available when the entities are defined in
 source files and when those source files are compiled with the
 <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag turned on:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">inline</span></code></dt>
-<dd>The predicate definition is inlined</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">auxiliary</span></code></dt>
-<dd>The predicate is not user-defined but rather automatically generated
-by the compiler or the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a></dd>
-<dt><code class="docutils literal notranslate"><span class="pre">mode(Mode,</span> <span class="pre">Solutions)</span></code></dt>
-<dd>Instantiation, type, and determinism mode for the predicate (which
-can have multiple modes)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">info(ListOfPairs)</span></code></dt>
-<dd>Documentation key-value pairs as specified in the user-defined
-<code class="docutils literal notranslate"><span class="pre">info/2</span></code> directive</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_clauses(N)</span></code></dt>
-<dd>The number of clauses for the predicate existing at compilation time
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">inline</span></code></dt><dd><p>The predicate definition is inlined</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">auxiliary</span></code></dt><dd><p>The predicate is not user-defined but rather automatically generated
+by the compiler or the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mode(Mode,</span> <span class="pre">Solutions)</span></code></dt><dd><p>Instantiation, type, and determinism mode for the predicate (which
+can have multiple modes)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">info(ListOfPairs)</span></code></dt><dd><p>Documentation key-value pairs as specified in the user-defined
+<code class="docutils literal notranslate"><span class="pre">info/2</span></code> directive</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_clauses(N)</span></code></dt><dd><p>The number of clauses for the predicate existing at compilation time
 (note that this property is not updated at runtime when asserting and
-retracting clauses for dynamic predicates)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_rules(N)</span></code></dt>
-<dd>The number of rules for the predicate existing at compilation time
+retracting clauses for dynamic predicates)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_rules(N)</span></code></dt><dd><p>The number of rules for the predicate existing at compilation time
 (note that this property is not updated at runtime when asserting and
-retracting clauses for dynamic predicates)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">declared_in(Entity,</span> <span class="pre">Line)</span></code></dt>
-<dd>The predicate is declared (using a scope directive) in the specified
-entity in a source file at the specified line (if applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">defined_in(Entity,</span> <span class="pre">Line)</span></code></dt>
-<dd>The predicate is defined in the specified entity in a source file at
-the specified line (if applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">redefined_from(Entity,</span> <span class="pre">Line)</span></code></dt>
-<dd>The predicate is a redefinition of a predicate definition inherited
+retracting clauses for dynamic predicates)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">declared_in(Entity,</span> <span class="pre">Line)</span></code></dt><dd><p>The predicate is declared (using a scope directive) in the specified
+entity in a source file at the specified line (if applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">defined_in(Entity,</span> <span class="pre">Line)</span></code></dt><dd><p>The predicate is defined in the specified entity in a source file at
+the specified line (if applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">redefined_from(Entity,</span> <span class="pre">Line)</span></code></dt><dd><p>The predicate is a redefinition of a predicate definition inherited
 from the specified entity, which is defined in a source file at the
-specified line (if applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">alias_declared_in(Entity,</span> <span class="pre">Line)</span></code></dt>
-<dd>The <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> is declared in the specified entity in a
-source file at the specified line (if applicable)</dd>
+specified line (if applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alias_declared_in(Entity,</span> <span class="pre">Line)</span></code></dt><dd><p>The <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> is declared in the specified entity in a
+source file at the specified line (if applicable)</p>
+</dd>
 </dl>
 <p>The properties <code class="docutils literal notranslate"><span class="pre">declared_in/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">defined_in/1-2</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">redefined_from/1-2</span></code> do not apply to built-in methods and Logtalk or
@@ -1674,8 +1674,8 @@ as explained. For example:</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The actual module code <strong>must</strong> be loaded prior to compilation of Logtalk
+<p class="admonition-title">Warning</p>
+<p>The actual module code <strong>must</strong> be loaded prior to compilation of Logtalk
 source code that uses it. In particular, programmers should not expect
 that the module be auto-loaded (including when using a backend Prolog
 compiler that supports an autoloading mechanism).</p>

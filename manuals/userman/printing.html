@@ -263,33 +263,33 @@ yes
 want to print. In this case, we use <code class="docutils literal notranslate"><span class="pre">banner</span></code> to indicate that
 we are printing a product name and copyright banner. An extensive
 list of message kinds is supported by default:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">banner</span></code></dt>
-<dd>banner messages (used e.g. when loading tools or main application
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">banner</span></code></dt><dd><p>banner messages (used e.g. when loading tools or main application
 components; can be suppressed by setting the <a class="reference internal" href="programming.html#flag-report"><span class="std std-ref">report</span></a>
-flag to <code class="docutils literal notranslate"><span class="pre">warnings</span></code> or <code class="docutils literal notranslate"><span class="pre">off</span></code>)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">help</span></code></dt>
-<dd>messages printed in reply for the user asking for help (mostly for
-helping port existing Prolog code)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">information</span></code> and <code class="docutils literal notranslate"><span class="pre">information(Group)</span></code></dt>
-<dd>messages usually printed in reply to a user request for information</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">silent</span></code> and <code class="docutils literal notranslate"><span class="pre">silent(Group)</span></code></dt>
-<dd>not printed by default (but can be intercepted using the
-<code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code> predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code> and <code class="docutils literal notranslate"><span class="pre">comment(Group)</span></code></dt>
-<dd>useful but usually not essential messages (can be suppressed by
-setting the <a class="reference internal" href="programming.html#flag-report"><span class="std std-ref">report</span></a> flag to <code class="docutils literal notranslate"><span class="pre">warnings</span></code> or <code class="docutils literal notranslate"><span class="pre">off</span></code>)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">warning(Group)</span></code></dt>
-<dd>warning messages (generated e.g. by the compiler; can be suppressed
-by turning off the <a class="reference internal" href="programming.html#flag-report"><span class="std std-ref">report</span></a> flag)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">error</span></code> and <code class="docutils literal notranslate"><span class="pre">error(Group)</span></code></dt>
-<dd>error messages (generated e.g. by the compiler)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">debug,</span> <span class="pre">debug(Group)</span></code></dt>
-<dd>debugging messages (by default, only printed when the
+flag to <code class="docutils literal notranslate"><span class="pre">warnings</span></code> or <code class="docutils literal notranslate"><span class="pre">off</span></code>)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">help</span></code></dt><dd><p>messages printed in reply for the user asking for help (mostly for
+helping port existing Prolog code)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">information</span></code> and <code class="docutils literal notranslate"><span class="pre">information(Group)</span></code></dt><dd><p>messages usually printed in reply to a user request for information</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">silent</span></code> and <code class="docutils literal notranslate"><span class="pre">silent(Group)</span></code></dt><dd><p>not printed by default (but can be intercepted using the
+<code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code> predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code> and <code class="docutils literal notranslate"><span class="pre">comment(Group)</span></code></dt><dd><p>useful but usually not essential messages (can be suppressed by
+setting the <a class="reference internal" href="programming.html#flag-report"><span class="std std-ref">report</span></a> flag to <code class="docutils literal notranslate"><span class="pre">warnings</span></code> or <code class="docutils literal notranslate"><span class="pre">off</span></code>)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">warning(Group)</span></code></dt><dd><p>warning messages (generated e.g. by the compiler; can be suppressed
+by turning off the <a class="reference internal" href="programming.html#flag-report"><span class="std std-ref">report</span></a> flag)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">error</span></code> and <code class="docutils literal notranslate"><span class="pre">error(Group)</span></code></dt><dd><p>error messages (generated e.g. by the compiler)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debug,</span> <span class="pre">debug(Group)</span></code></dt><dd><p>debugging messages (by default, only printed when the
 <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> flag is turned on; these messages are suppressed
-by the compiler when the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">question,</span> <span class="pre">question(Group)</span></code></dt>
-<dd>questions to a user</dd>
+by the compiler when the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">question,</span> <span class="pre">question(Group)</span></code></dt><dd><p>questions to a user</p>
+</dd>
 </dl>
 <p>Using a compound term allows easy partitioning of messages of the same kind
 in different groups. Note that you can define your own alternative message
@@ -335,32 +335,32 @@ logtalk<span class="o">::</span>message_tokens(redefining_entity(<span class="nv
 </pre></div>
 </div>
 <p>The following tokens can be used when translating a message:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">at_same_line</span></code></dt>
-<dd>Signals a following part to a multi-part message with no line break
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">at_same_line</span></code></dt><dd><p>Signals a following part to a multi-part message with no line break
 in between; this token is ignored when it’s not the first in the list
-of tokens</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">flush</span></code></dt>
-<dd>Flush the output stream (by calling the <code class="docutils literal notranslate"><span class="pre">flush_output/1</span></code> standard
-predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">nl</span></code></dt>
-<dd>Change line in the output stream</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code></dt>
-<dd><code class="docutils literal notranslate"><span class="pre">Format</span></code> must be an atom and <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> must be a list of format
+of tokens</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">flush</span></code></dt><dd><p>Flush the output stream (by calling the <code class="docutils literal notranslate"><span class="pre">flush_output/1</span></code> standard
+predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nl</span></code></dt><dd><p>Change line in the output stream</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">Format</span></code> must be an atom and <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> must be a list of format
 arguments (the token arguments are passed to a call to the
-<code class="docutils literal notranslate"><span class="pre">format/3</span></code> de facto standard predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">term(Term,</span> <span class="pre">Options)</span></code></dt>
-<dd><code class="docutils literal notranslate"><span class="pre">Term</span></code> can be any term and <code class="docutils literal notranslate"><span class="pre">Options</span></code> must be a list of valid
+<code class="docutils literal notranslate"><span class="pre">format/3</span></code> de facto standard predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">term(Term,</span> <span class="pre">Options)</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">Term</span></code> can be any term and <code class="docutils literal notranslate"><span class="pre">Options</span></code> must be a list of valid
 <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> output options (the token arguments are passed to a
-call to the <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> standard predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">ansi(Attributes,</span> <span class="pre">Format,</span> <span class="pre">Arguments)</span></code></dt>
-<dd>Taken from SWI-Prolog; by default, do nothing; can be used for styled
-output</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">begin(Kind,</span> <span class="pre">Var)</span></code></dt>
-<dd>Taken from SWI-Prolog; by default, do nothing; can be used together
-with <code class="docutils literal notranslate"><span class="pre">end(Var)</span></code> to wrap a sequence of message tokens</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">end(Var)</span></code></dt>
-<dd>Taken from SWI-Prolog; by default, do nothing</dd>
+call to the <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> standard predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ansi(Attributes,</span> <span class="pre">Format,</span> <span class="pre">Arguments)</span></code></dt><dd><p>Taken from SWI-Prolog; by default, do nothing; can be used for styled
+output</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">begin(Kind,</span> <span class="pre">Var)</span></code></dt><dd><p>Taken from SWI-Prolog; by default, do nothing; can be used together
+with <code class="docutils literal notranslate"><span class="pre">end(Var)</span></code> to wrap a sequence of message tokens</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">end(Var)</span></code></dt><dd><p>Taken from SWI-Prolog; by default, do nothing</p>
+</dd>
 </dl>
 <p>The <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> object also defines public predicates for printing a list
 of tokens, for hooking into printing an individual token, and for setting

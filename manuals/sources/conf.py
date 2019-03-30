@@ -144,6 +144,8 @@ latex_elements = {
         \usepackage{charter}
         \usepackage[defaultsans]{lato}
         \usepackage{inconsolata}
+        \usepackage[utf8]{inputenc}
+        \DeclareUnicodeCharacter{03C9}{$\omega$}
     ''',
 
     # Latex figure (float) alignment

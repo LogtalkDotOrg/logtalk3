@@ -42,10 +42,10 @@ This is an **experimental** directive, used for declaring coinductive
 predicates. Requires a :term:`backend Prolog compiler` with minimal support
 for cyclic terms. The current implementation of coinduction allows the
 generation of only the *basic cycles* but all valid solutions should be
-recognized. Use a predicate indicator as argument when all the
-coinductive predicate arguments are relevant for coinductive success.
-Use a template when only some coinductive predicate arguments
-(represented by a "``+``") should be considered when testing for
+recognized. Use a predicate indicator or a non-terminal indicator as
+argument when all the coinductive predicate arguments are relevant for
+coinductive success. Use a template when only some coinductive predicate
+arguments (represented by a "``+``") should be considered when testing for
 coinductive success (represent the arguments that should be disregarded
 by a "``-``"). It's possible to define local
 :ref:`methods_coinductive_success_hook_1_2`

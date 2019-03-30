@@ -377,8 +377,8 @@ or specialization relations with other objects) is always compiled as a
 prototype, that is, a self-describing object. If we want to use classes
 and instances, then we will need to specify at least one instantiation
 or specialization relation. The best way to do this is to define a set
-of objects that provide the basis of a reflective system <a class="reference internal" href="../bibliography.html#cointe87" id="id1">[Cointe87]</a>,
-<a class="reference internal" href="../bibliography.html#moura94" id="id2">[Moura94]</a>. For example:</p>
+of objects that provide the basis of a reflective system <a class="reference internal" href="../bibliography.html#cointe87" id="id1"><span>[Cointe87]</span></a>,
+<a class="reference internal" href="../bibliography.html#moura94" id="id2"><span>[Moura94]</span></a>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% default root of the inheritance graph</span>
 <span class="c">% predicates common to all objects</span>
 
@@ -749,67 +749,66 @@ predicate <a class="reference internal" href="../refman/predicates/object_proper
 </pre></div>
 </div>
 <p>The following object properties are supported:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">static</span></code></dt>
-<dd>The object is static</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt>
-<dd>The object is dynamic (and thus can be abolished in runtime by
-calling the <a class="reference internal" href="../refman/predicates/abolish_object_1.html#predicates-abolish-object-1"><span class="std std-ref">abolish_object/1</span></a> built-in predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt>
-<dd>The object is a built-in object (and thus always available)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">threaded</span></code></dt>
-<dd>The object supports/makes multi-threading calls</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code></dt>
-<dd>Absolute path of the source file defining the object (if applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">file(Basename,</span> <span class="pre">Directory)</span></code></dt>
-<dd>Basename and directory of the source file defining the object (if
-applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">lines(BeginLine,</span> <span class="pre">EndLine)</span></code></dt>
-<dd>Source file begin and end lines of the object definition (if
-applicable)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code></dt>
-<dd>The object supports context switching calls (i.e. can be used with
-the <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">&lt;&lt;/2</span></a> debugging control construct)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">dynamic_declarations</span></code></dt>
-<dd>The object supports dynamic declarations of predicates</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">events</span></code></dt>
-<dd>Messages sent from the object generate events</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">source_data</span></code></dt>
-<dd>Source data available for the object</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">complements(Permission)</span></code></dt>
-<dd>The object supports complementing categories with the specified
-permission (<code class="docutils literal notranslate"><span class="pre">allow</span></code> or <code class="docutils literal notranslate"><span class="pre">restrict</span></code>)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">complements</span></code></dt>
-<dd>The object supports complementing categories</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">public(Predicates)</span></code></dt>
-<dd>List of public predicates declared by the object</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">protected(Predicates)</span></code></dt>
-<dd>List of protected predicates declared by the object</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt>
-<dd>List of private predicates declared by the object</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for a predicate declared by the object</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">defines(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for a predicate defined by the object</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">includes(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for an object multifile predicate that are defined
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">static</span></code></dt><dd><p>The object is static</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt><dd><p>The object is dynamic (and thus can be abolished in runtime by
+calling the <a class="reference internal" href="../refman/predicates/abolish_object_1.html#predicates-abolish-object-1"><span class="std std-ref">abolish_object/1</span></a> built-in predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt><dd><p>The object is a built-in object (and thus always available)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">threaded</span></code></dt><dd><p>The object supports/makes multi-threading calls</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code></dt><dd><p>Absolute path of the source file defining the object (if applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file(Basename,</span> <span class="pre">Directory)</span></code></dt><dd><p>Basename and directory of the source file defining the object (if
+applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lines(BeginLine,</span> <span class="pre">EndLine)</span></code></dt><dd><p>Source file begin and end lines of the object definition (if
+applicable)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code></dt><dd><p>The object supports context switching calls (i.e. can be used with
+the <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">&lt;&lt;/2</span></a> debugging control construct)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dynamic_declarations</span></code></dt><dd><p>The object supports dynamic declarations of predicates</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">events</span></code></dt><dd><p>Messages sent from the object generate events</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">source_data</span></code></dt><dd><p>Source data available for the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">complements(Permission)</span></code></dt><dd><p>The object supports complementing categories with the specified
+permission (<code class="docutils literal notranslate"><span class="pre">allow</span></code> or <code class="docutils literal notranslate"><span class="pre">restrict</span></code>)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">complements</span></code></dt><dd><p>The object supports complementing categories</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">public(Predicates)</span></code></dt><dd><p>List of public predicates declared by the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">protected(Predicates)</span></code></dt><dd><p>List of protected predicates declared by the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt><dd><p>List of private predicates declared by the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a predicate declared by the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">defines(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a predicate defined by the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">includes(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for an object multifile predicate that are defined
 in the specified entity (the properties include
 <code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
-multifile predicate clause)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">provides(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for other entity multifile predicate that are
+multifile predicate clause)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">provides(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for other entity multifile predicate that are
 defined in the object (the properties include
 <code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
-multifile predicate clause)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the object
+multifile predicate clause)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the object
 (the properties include <code class="docutils literal notranslate"><span class="pre">for(Original)</span></code>, <code class="docutils literal notranslate"><span class="pre">from(Entity)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">non_terminal(NonTerminal)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code>
-being the begin line of the alias directive)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for predicate calls made by the object (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
+being the begin line of the alias directive)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for predicate calls made by the object (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
 is either a predicate indicator or a control construct such as
 <code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> with a predicate indicator as argument; note
 that <code class="docutils literal notranslate"><span class="pre">Call</span></code> may not be ground in case of a call to a control
@@ -817,9 +816,9 @@ construct where its argument is only know at runtime; the properties
 include <code class="docutils literal notranslate"><span class="pre">caller(Caller)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with both <code class="docutils literal notranslate"><span class="pre">Caller</span></code> and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> being
 predicate indicators and <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
-predicate clause or directive making the call)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt>
-<dd>List of properties for dynamic predicate updates (and also access
+predicate clause or directive making the call)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for dynamic predicate updates (and also access
 using the <code class="docutils literal notranslate"><span class="pre">clause/2</span></code> predicate) made by the object (<code class="docutils literal notranslate"><span class="pre">Predicate</span></code>
 is either a predicate indicator or a control construct such as
 <code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> with a predicate indicator as argument; note
@@ -828,35 +827,36 @@ argument only know at runtime; the properties include
 <code class="docutils literal notranslate"><span class="pre">updater(Updater)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with
 <code class="docutils literal notranslate"><span class="pre">Updater</span></code> being a (possibly multifile) predicate indicator,
 <code class="docutils literal notranslate"><span class="pre">Alias</span></code> being a predicate indicator, and <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin
-line of the predicate clause or directive updating the predicate)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code></dt>
-<dd>Total number of predicate clauses defined in the object at compilation
+line of the predicate clause or directive updating the predicate)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code></dt><dd><p>Total number of predicate clauses defined in the object at compilation
 time (includes both user-defined clauses and auxiliary clauses generated
 by the compiler or by the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">expansion hooks</span></a>
 but does not include clauses for multifile predicates defined for other
 entities or clauses for the object own multifile predicates contributed
-by other entities)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code></dt>
-<dd>Total number of predicate rules defined in the object at compilation
+by other entities)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code></dt><dd><p>Total number of predicate rules defined in the object at compilation
 time (includes both user-defined rules and auxiliary rules generated
 by the compiler or by the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">expansion hooks</span></a>
 but does not include rules for multifile predicates defined for other
 entities or rules for the object own multifile predicates contributed
-by other entities)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(Number)</span></code></dt>
-<dd>Total number of user-defined predicate clauses defined in the object
+by other entities)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(Number)</span></code></dt><dd><p>Total number of user-defined predicate clauses defined in the object
 at compilation time (does not include clauses for multifile predicates
 defined for other entities or clauses for the object own multifile
-predicates contributed by other entities)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_rules(Number)</span></code></dt>
-<dd>Total number of user-defined predicate rules defined in the object at
+predicates contributed by other entities)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_rules(Number)</span></code></dt><dd><p>Total number of user-defined predicate rules defined in the object at
 compilation time (does not include rules for multifile predicates defined
 for other entities or rules for the object own multifile predicates
-contributed by other entities)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">debugging</span></code></dt>
-<dd>The object is compiled in debug mode</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">module</span></code></dt>
-<dd>The object resulted from the compilation of a Prolog module</dd>
+contributed by other entities)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debugging</span></code></dt><dd><p>The object is compiled in debug mode</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">module</span></code></dt><dd><p>The object resulted from the compilation of a Prolog module</p>
+</dd>
 </dl>
 <p>When a predicate is called from an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive, the
 argument of the <code class="docutils literal notranslate"><span class="pre">caller/1</span></code> property is <code class="docutils literal notranslate"><span class="pre">:-/1</span></code>.</p>
@@ -896,14 +896,13 @@ the internal database of loaded files and their properties, and also a
 set of low-level utility predicates normally used when defining hook
 objects.</p>
 <p>The following predicates are defined:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">expand_library_path(Library,</span> <span class="pre">Path)</span></code></dt>
-<dd>Expands a file specification in <a class="reference internal" href="../glossary.html#term-library-notation"><span class="xref std std-term">library notation</span></a> to a full
-operating-system path.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">loaded_file(Path)</span></code></dt>
-<dd>Returns the full path of a currently loaded source file.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">loaded_file_property(Path,</span> <span class="pre">Property)</span></code></dt>
-<dd>Returns a property for a currently loaded source file. Valid
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">expand_library_path(Library,</span> <span class="pre">Path)</span></code></dt><dd><p>Expands a file specification in <a class="reference internal" href="../glossary.html#term-library-notation"><span class="xref std std-term">library notation</span></a> to a full
+operating-system path.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">loaded_file(Path)</span></code></dt><dd><p>Returns the full path of a currently loaded source file.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">loaded_file_property(Path,</span> <span class="pre">Property)</span></code></dt><dd><p>Returns a property for a currently loaded source file. Valid
 properties are <code class="docutils literal notranslate"><span class="pre">basename/1</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">flags/1</span></code> (explicit
 flags used when the file was loaded), <code class="docutils literal notranslate"><span class="pre">text_properties/1</span></code> (list,
 possibly empty, whose possible elements are <code class="docutils literal notranslate"><span class="pre">encoding/1</span></code> and
@@ -913,50 +912,51 @@ stamp that should be treated as an opaque term but that may be used
 for comparisons), <code class="docutils literal notranslate"><span class="pre">parent/1</span></code> (parent file, if it exists, that
 loaded the file; a file may have multiple parents), and <code class="docutils literal notranslate"><span class="pre">library/1</span></code>
 (library name when there is a library whose location is the same as
-the loaded file directory).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses(Clauses)</span></code></dt>
-<dd>Compiles a list of clauses in the context of the entity under
+the loaded file directory).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses(Clauses)</span></code></dt><dd><p>Compiles a list of clauses in the context of the entity under
 compilation. This method is usually called from <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
 hooks in order to compile auxiliary clauses generated for supporting
 an expanded goal. The compilation of the clauses avoids the risk of
 making the predicate whose clause is being goal-expanded
-discontiguous by accident.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">entity_prefix(Entity,</span> <span class="pre">Prefix)</span></code></dt>
-<dd>Converts an entity identifier into its internal prefix or an internal
-prefix into an entity identifier.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads(Heads,</span> <span class="pre">Entity,</span> <span class="pre">TranslatedHeads,</span> <span class="pre">ContextArgument)</span></code></dt>
-<dd>Compiles a predicate head or a list of predicate heads in the context
+discontiguous by accident.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entity_prefix(Entity,</span> <span class="pre">Prefix)</span></code></dt><dd><p>Converts an entity identifier into its internal prefix or an internal
+prefix into an entity identifier.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads(Heads,</span> <span class="pre">Entity,</span> <span class="pre">TranslatedHeads,</span> <span class="pre">ContextArgument)</span></code></dt><dd><p>Compiles a predicate head or a list of predicate heads in the context
 of the specified entity or in the context of the entity being
-compiled when <code class="docutils literal notranslate"><span class="pre">Entity</span></code> is not instantiated.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators(PredicateIndicators,</span> <span class="pre">Entity,</span> <span class="pre">TranslatedPredicateIndicators)</span></code></dt>
-<dd>Compiles a predicate indicator or a list of predicate indicators in
+compiled when <code class="docutils literal notranslate"><span class="pre">Entity</span></code> is not instantiated.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators(PredicateIndicators,</span> <span class="pre">Entity,</span> <span class="pre">TranslatedPredicateIndicators)</span></code></dt><dd><p>Compiles a predicate indicator or a list of predicate indicators in
 the context of the specified entity or in the context of the entity
-being compiled when <code class="docutils literal notranslate"><span class="pre">Entity</span></code> is not instantiated.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads(TranslatedHeads,</span> <span class="pre">Entity,</span> <span class="pre">EntityType,</span> <span class="pre">Heads)</span></code></dt>
-<dd>Decompiles a compiled predicate head or a list of compiled predicate
+being compiled when <code class="docutils literal notranslate"><span class="pre">Entity</span></code> is not instantiated.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads(TranslatedHeads,</span> <span class="pre">Entity,</span> <span class="pre">EntityType,</span> <span class="pre">Heads)</span></code></dt><dd><p>Decompiles a compiled predicate head or a list of compiled predicate
 heads returning the entity, entity type, and source level heads.
-Requires the entity to be currently loaded.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators(TranslatedPredicateIndicators,</span> <span class="pre">Entity,</span> <span class="pre">EntityType,</span> <span class="pre">PredicateIndicators)</span></code></dt>
-<dd>Decompiles a compiled predicate indicator or a list of compiled
+Requires the entity to be currently loaded.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators(TranslatedPredicateIndicators,</span> <span class="pre">Entity,</span> <span class="pre">EntityType,</span> <span class="pre">PredicateIndicators)</span></code></dt><dd><p>Decompiles a compiled predicate indicator or a list of compiled
 predicate indicators returning the entity, entity type, and source
 level predicate indicators. Requires the entity to be currently
-loaded.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">execution_context(ExecutionContext,</span> <span class="pre">Entity,</span> <span class="pre">Sender,</span> <span class="pre">This,</span> <span class="pre">Self,</span> <span class="pre">MetaCallContext,</span> <span class="pre">Stack)</span></code></dt>
-<dd>Allows constructing and accessing execution context components.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">trace_event(Event,</span> <span class="pre">EventExecutionContext)</span></code></dt>
-<dd>Hook predicate, declared multifile and dynamic, for handling trace
+loaded.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">execution_context(ExecutionContext,</span> <span class="pre">Entity,</span> <span class="pre">Sender,</span> <span class="pre">This,</span> <span class="pre">Self,</span> <span class="pre">MetaCallContext,</span> <span class="pre">Stack)</span></code></dt><dd><p>Allows constructing and accessing execution context components.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">trace_event(Event,</span> <span class="pre">EventExecutionContext)</span></code></dt><dd><p>Hook predicate, declared multifile and dynamic, for handling trace
 events generated by the execution of source code compiled in debug
 mode. The Logtalk runtime calls all defined handlers using a
 failure-driven loop. Thus, care must be taken that the handlers are
-deterministic to avoid potential termination issues.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">debug_handler_provider(Provider)</span></code></dt>
-<dd>Multifile predicate for declaring an object that provides a debug
+deterministic to avoid potential termination issues.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debug_handler_provider(Provider)</span></code></dt><dd><p>Multifile predicate for declaring an object that provides a debug
 handler. There can only be one debug handler provider loaded at the
 same time. The Logtalk runtime uses this hook predicate for detecting
-multiple instances of the handler and for better error reporting.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">debug_handler(Event,</span> <span class="pre">EventExecutionContext)</span></code></dt>
-<dd>Multifile predicate for handling debug events generated by the
-execution of source code compiled in debug mode.</dd>
+multiple instances of the handler and for better error reporting.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debug_handler(Event,</span> <span class="pre">EventExecutionContext)</span></code></dt><dd><p>Multifile predicate for handling debug events generated by the
+execution of source code compiled in debug mode.</p>
+</dd>
 </dl>
 <p>To use these predicates, simply send the corresponding message to the
 <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> object.</p>

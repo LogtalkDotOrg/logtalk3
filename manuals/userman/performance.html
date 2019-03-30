@@ -221,7 +221,7 @@ constructs and is neither a meta-predicate nor a coinductive predicate,
 the execution-context argument is simply passed between goals. In this
 case, with most backend Prolog VMs, the cost of this extra argument is null
 or negligible. When the execution-context argument needs to be accessed
-(e.g.&nbsp;to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>
+(e.g. to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>
 call) there may be a small inherent overhead due to the implicit unifications.</p>
 <div class="section" id="local-predicate-calls">
 <h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Permalink to this headline">¶</a></h2>
@@ -249,9 +249,9 @@ It’s useful to measure the performance overhead in <em>number of inferences</e
 compared with plain Prolog and Prolog modules. The results for Logtalk
 3.17.0 and later versions are:</p>
 <ul class="simple">
-<li>Static binding: 0</li>
-<li>Dynamic binding (object bound at compile time): 1</li>
-<li>Dynamic binding (object bound at runtime time): 2</li>
+<li><p>Static binding: 0</p></li>
+<li><p>Dynamic binding (object bound at compile time): 1</p></li>
+<li><p>Dynamic binding (object bound at runtime time): 2</p></li>
 </ul>
 <p>Static binding is the common case with libraries and most application
 code; it requires compiling code with the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a>
@@ -285,7 +285,7 @@ calls are inlined independently of the <code class="docutils literal notranslate
 <p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
 compiler simplifies and optimizes generated clauses (including those
 resulting from the compilation of grammar rules), by flattening conjunctions,
-folding left unifications (e.g.&nbsp;generated as a by-product of the compilation
+folding left unifications (e.g. generated as a by-product of the compilation
 of grammar rules), and removing redundant calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
 </div>
 <div class="section" id="size-of-the-generated-code">

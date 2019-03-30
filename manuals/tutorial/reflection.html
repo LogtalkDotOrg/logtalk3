@@ -192,14 +192,14 @@ class, otherwise it is compiled as a prototype. A consequence of this is
 that, in order to work with instance or classes, we always have to
 define root objects for the instantiation and specialization hierarchies
 (however, we are not restricted to a single hierarchy). The best
-solution is often to define a reflective class-based system <a class="reference internal" href="../bibliography.html#maes87" id="id1">[Maes87]</a>,
+solution is often to define a reflective class-based system <a class="reference internal" href="../bibliography.html#maes87" id="id1"><span>[Maes87]</span></a>,
 where every class is also an object and, as such, an instance of some class.</p>
 <p>In this example, we are going to define the basis for a reflective
 class-based system, based on an extension of the ideas presented in
-<a class="reference internal" href="../bibliography.html#cointe87" id="id2">[Cointe87]</a>. This extension
+<a class="reference internal" href="../bibliography.html#cointe87" id="id2"><span>[Cointe87]</span></a>. This extension
 provides, along with root objects for the instantiation and
 specialization hierarchies, explicit support for abstract classes
-<a class="reference internal" href="../bibliography.html#moura94" id="id3">[Moura94]</a>.</p>
+<a class="reference internal" href="../bibliography.html#moura94" id="id3"><span>[Moura94]</span></a>.</p>
 <div class="section" id="defining-the-base-classes">
 <span id="classes"></span><h2>Defining the base classes<a class="headerlink" href="#defining-the-base-classes" title="Permalink to this headline">¶</a></h2>
 <p>We will start by defining three classes: <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">abstract_class</span></code>,
@@ -245,16 +245,16 @@ objects, with no danger of <a class="reference internal" href="../glossary.html#
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>An object that does not instantiate or specialize other objects is
-always compiled as a prototype.</li>
-<li>An instance must instantiate at least one object (its class).
+<li><p>An object that does not instantiate or specialize other objects is
+always compiled as a prototype.</p></li>
+<li><p>An instance must instantiate at least one object (its class).
 Similarly, a class must at least specialize or instantiate other
-object.</li>
-<li>The distinction between abstract classes and instantiable classes is
+object.</p></li>
+<li><p>The distinction between abstract classes and instantiable classes is
 an operational one, depending on the class inherited methods. A class
 is instantiable if inherits methods for creating instances.
 Conversely, a class is abstract if does not inherit any instance
-creation method.</li>
+creation method.</p></li>
 </ul>
 </div>
 </div>

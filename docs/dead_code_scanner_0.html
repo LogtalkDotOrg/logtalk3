@@ -419,9 +419,9 @@
 <div class="section" id="remarks">
 <h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>Dead code</strong>: A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.</li>
-<li><strong>Known issues</strong>: Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.</li>
-<li><strong>Requirements</strong>: Source files must be compiled with the source_data flag turned on. To avoid false positives do to meta-calls, compilation of source files with the optimized flag turned on is also advised.</li>
+<li><p><strong>Dead code</strong>: A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.</p></li>
+<li><p><strong>Known issues</strong>: Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.</p></li>
+<li><p><strong>Requirements</strong>: Source files must be compiled with the source_data flag turned on. To avoid false positives do to meta-calls, compilation of source files with the optimized flag turned on is also advised.</p></li>
 </ul>
 </div>
 </div>

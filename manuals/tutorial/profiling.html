@@ -188,8 +188,8 @@
 <h1>Profiling programs<a class="headerlink" href="#profiling-programs" title="Permalink to this headline">¶</a></h1>
 <p>In this example, we will illustrate the use of:</p>
 <ul class="simple">
-<li>events</li>
-<li>monitors</li>
+<li><p>events</p></li>
+<li><p>monitors</p></li>
 </ul>
 <p>by defining a simple profiler that prints the starting and ending time
 for processing a message sent to an object.</p>
@@ -308,21 +308,21 @@ assigned to the <code class="docutils literal notranslate"><span class="pre">sto
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>An event is defined as the sending of a (public) message to an
-object.</li>
-<li>There are two kinds of events: <code class="docutils literal notranslate"><span class="pre">before</span></code> events, generated before a
+<li><p>An event is defined as the sending of a (public) message to an
+object.</p></li>
+<li><p>There are two kinds of events: <code class="docutils literal notranslate"><span class="pre">before</span></code> events, generated before a
 message is processed, and <code class="docutils literal notranslate"><span class="pre">after</span></code> events, generated after the
-message processing completed successfully.</li>
-<li>Any object can be declared as a monitor to any event. A monitor shall
+message processing completed successfully.</p></li>
+<li><p>Any object can be declared as a monitor to any event. A monitor shall
 reference the <code class="docutils literal notranslate"><span class="pre">monitoring</span></code> built-in protocol in the object opening
-directive.</li>
-<li>A monitor defines event handlers, the predicates
+directive.</p></li>
+<li><p>A monitor defines event handlers, the predicates
 <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>, that are
-automatically called by the runtime engine when a spied event occurs.</li>
-<li>Three built-in predicates, <a class="reference internal" href="../refman/predicates/define_events_5.html#predicates-define-events-5"><span class="std std-ref">define_events/5</span></a>,
+automatically called by the runtime engine when a spied event occurs.</p></li>
+<li><p>Three built-in predicates, <a class="reference internal" href="../refman/predicates/define_events_5.html#predicates-define-events-5"><span class="std std-ref">define_events/5</span></a>,
 <a class="reference internal" href="../refman/predicates/current_event_5.html#predicates-current-event-5"><span class="std std-ref">current_event/5</span></a>, and
 <a class="reference internal" href="../refman/predicates/abolish_events_5.html#predicates-abolish-events-5"><span class="std std-ref">abolish_events/5</span></a>,
-enables us define, query, and abolish both events and monitors.</li>
+enables us define, query, and abolish both events and monitors.</p></li>
 </ul>
 </div>
 </div>

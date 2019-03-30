@@ -333,32 +333,32 @@ parametric objects, and categories.</p>
 directives used in the module are supported by Logtalk (see below).
 Assuming that this is the case, apply the following steps:</p>
 <ol class="arabic simple">
-<li>Convert the module <code class="docutils literal notranslate"><span class="pre">module/1</span></code> directive into an opening object
+<li><p>Convert the module <code class="docutils literal notranslate"><span class="pre">module/1</span></code> directive into an opening object
 directive, <a class="reference internal" href="../refman/directives/object_1_5.html#directives-object-1-5"><span class="std std-ref">object/1-5</span></a>,
 using the module name as the object name. For <code class="docutils literal notranslate"><span class="pre">module/2</span></code> directives
 apply the same conversion and convert the list of exported predicates
 into Logtalk <a class="reference internal" href="../refman/directives/public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a>
-predicate directives.</li>
-<li>Add a closing object directive,
+predicate directives.</p></li>
+<li><p>Add a closing object directive,
 <a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>, at the
-end of the module code.</li>
-<li>Convert any <code class="docutils literal notranslate"><span class="pre">export/1</span></code> directives into <code class="docutils literal notranslate"><span class="pre">public/1</span></code> predicate
-directives.</li>
-<li>Convert any <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives into <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
-directives (see next section).</li>
-<li>Convert any <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives referencing other modules
+end of the module code.</p></li>
+<li><p>Convert any <code class="docutils literal notranslate"><span class="pre">export/1</span></code> directives into <code class="docutils literal notranslate"><span class="pre">public/1</span></code> predicate
+directives.</p></li>
+<li><p>Convert any <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives into <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
+directives (see next section).</p></li>
+<li><p>Convert any <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives referencing other modules
 also being converted to objects into Logtalk
 <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directives. If the
 referenced modules are not being converted into objects, simply keep
-the <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives unchanged.</li>
-<li>Convert any <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives into Logtalk
+the <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives unchanged.</p></li>
+<li><p>Convert any <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives into Logtalk
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a>
 directives by replacing the module meta-argument indicator, <code class="docutils literal notranslate"><span class="pre">:</span></code>,
 with the Logtalk meta-argument indicator, <code class="docutils literal notranslate"><span class="pre">0</span></code>. Closures must be
 represented using an integer denoting the number of additional
 arguments that will be appended to construct a goal. Arguments which
-are not meta-arguments are represented by the <code class="docutils literal notranslate"><span class="pre">*</span></code> character.</li>
-<li>Convert any explicit qualified calls to module predicates to messages
+are not meta-arguments are represented by the <code class="docutils literal notranslate"><span class="pre">*</span></code> character.</p></li>
+<li><p>Convert any explicit qualified calls to module predicates to messages
 by replacing the <code class="docutils literal notranslate"><span class="pre">:/2</span></code> operator with the
 <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> message
 sending operator, assuming that the referenced modules are also being
@@ -369,26 +369,26 @@ external call control construct. You can also use instead an
 <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive where the
 first argument would be the atom <code class="docutils literal notranslate"><span class="pre">user</span></code> and the second argument a
 list of all external predicates. This alternative has the advantage
-of not requiring changes to the code making the predicate calls.</li>
-<li>If your module uses the database built-in predicates to implement
+of not requiring changes to the code making the predicate calls.</p></li>
+<li><p>If your module uses the database built-in predicates to implement
 module local mutable state using dynamic predicates, add both
 <a class="reference internal" href="../refman/directives/private_1.html#directives-private-1"><span class="std std-ref">private/1</span></a> and
 <a class="reference internal" href="../refman/directives/dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic/1</span></a> directives
-for each dynamic predicate.</li>
-<li>If your module declares or defines clauses for multifile module
+for each dynamic predicate.</p></li>
+<li><p>If your module declares or defines clauses for multifile module
 predicates, replace the <code class="docutils literal notranslate"><span class="pre">:/2</span></code> functor by <code class="docutils literal notranslate"><span class="pre">::/2</span></code> in the
 <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directives and in the clause heads (assuming that all
 modules defining the multifile predicates are converted into objects;
 if that is not the case, just keep the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directives and
-the clause heads as-is).</li>
-<li>Compile the resulting objects with the Logtalk
+the clause heads as-is).</p></li>
+<li><p>Compile the resulting objects with the Logtalk
 <a class="reference internal" href="programming.html#flag-unknown-predicates"><span class="std std-ref">unknown_predicates</span></a>, and
 <a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability</span></a> flags set to <code class="docutils literal notranslate"><span class="pre">warning</span></code>
 to help you locate possible issues and calls to proprietary Prolog
 built-in predicates and to predicates defined on other converted
 modules. In order to improve code portability, check the Logtalk
 library for possible alternatives to the use of proprietary Prolog
-built-in predicates.</li>
+built-in predicates.</p></li>
 </ol>
 <p>Before converting your modules to objects, you may try to compile them
 first as objects (using the <a class="reference internal" href="../refman/predicates/logtalk_compile_1.html#predicates-logtalk-compile-1"><span class="std std-ref">logtalk_compile/1</span></a>
@@ -412,17 +412,16 @@ proliferation of proprietary extensions.</p>
 <div class="section" id="supported-module-directives">
 <span id="migration-compatibility"></span><h3>Supported module directives<a class="headerlink" href="#supported-module-directives" title="Permalink to this headline">¶</a></h3>
 <p>Currently, Logtalk supports the following module directives:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">module/1</span></code></dt>
-<dd>The module name becomes the object name.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">module/2</span></code></dt>
-<dd>The module name becomes the object name. The exported predicates
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">module/1</span></code></dt><dd><p>The module name becomes the object name.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">module/2</span></code></dt><dd><p>The module name becomes the object name. The exported predicates
 become public object predicates. The exported grammar rule
 non-terminals become public grammar rule non-terminals. The exported
 operators become public object operators but are not active elsewhere
-when loading the code.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">use_module/2</span></code></dt>
-<dd>This directive is compiled as a Logtalk
+when loading the code.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">use_module/2</span></code></dt><dd><p>This directive is compiled as a Logtalk
 <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive in order
 to ensure correct compilation of the module predicate clauses. The
 first argument of this directive must be the module <strong>name</strong> (an
@@ -435,27 +434,28 @@ also want the specified module to be compiled as an object). The
 second argument must be a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a
 grammar rule non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), a operator
 declaration, or a list of predicate indicators, grammar rule
-non-terminal indicators, and operator declarations.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">export/1</span></code></dt>
-<dd>Exported predicates are compiled as public object predicates. The
+non-terminal indicators, and operator declarations.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">export/1</span></code></dt><dd><p>Exported predicates are compiled as public object predicates. The
 argument must be a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a grammar
 rule non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), an operator
 declaration, or a list of predicate indicators, grammar rule
-non-terminal indicators, and operator declarations.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">reexport/2</span></code></dt>
-<dd>Reexported predicates are compiled as public object predicates. The
+non-terminal indicators, and operator declarations.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reexport/2</span></code></dt><dd><p>Reexported predicates are compiled as public object predicates. The
 first argument is the module name. The second argument must be a
 predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a grammar rule non-terminal
 indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), an operator declaration, or a list of
 predicate indicators, grammar rule non-terminal indicators, and
-operator declarations.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code></dt>
-<dd>Module meta-predicates become object meta-predicates. Only predicate
+operator declarations.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code></dt><dd><p>Module meta-predicates become object meta-predicates. Only predicate
 arguments marked as goals or closures (using an integer) are
 interpreted as meta-arguments. In addition, Prolog module
 meta-predicates and Logtalk meta-predicates don’t share the same
 explicit-qualification calling semantics: in Logtalk, meta-arguments
-are always called in the context of the <em>sender</em>.</dd>
+are always called in the context of the <em>sender</em>.</p>
+</dd>
 </dl>
 <p>A common issue when compiling modules as objects is the use of the atoms
 <code class="docutils literal notranslate"><span class="pre">dynamic</span></code>, <code class="docutils literal notranslate"><span class="pre">discontiguous</span></code>, and <code class="docutils literal notranslate"><span class="pre">multifile</span></code> as operators in

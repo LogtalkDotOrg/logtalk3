@@ -440,24 +440,24 @@
 <div class="section" id="remarks">
 <h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>Logtalk specific types</strong>: {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}</li>
-<li><strong>Prolog module related types (when the backend compiler supports modules)</strong>: {module, module_identifier, qualified_callable}</li>
-<li><strong>Base types from Prolog</strong>: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}</li>
-<li><strong>Atom derived types</strong>: {atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}</li>
-<li><strong>Number derived types</strong>: {positive_number, negative_number, non_positive_number, non_negative_number}</li>
-<li><strong>Float derived types</strong>: {positive_float, negative_float, non_positive_float, non_negative_float, probability}</li>
-<li><strong>Integer derived types</strong>: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}</li>
-<li><strong>List types (compound derived types)</strong>: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}</li>
-<li><strong>Other compound derived types</strong>: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}</li>
-<li><strong>Other types</strong>: {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}</li>
-<li><strong>Registering new types</strong>: New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.</li>
-<li><strong>Character sets</strong>: When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default depends on the type.</li>
-<li><strong>Default character sets</strong>: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.</li>
-<li><strong>Caveats</strong>: The type argument to the predicates is not type-checked for performance reasons.</li>
+<li><p><strong>Logtalk specific types</strong>: {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}</p></li>
+<li><p><strong>Prolog module related types (when the backend compiler supports modules)</strong>: {module, module_identifier, qualified_callable}</p></li>
+<li><p><strong>Base types from Prolog</strong>: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}</p></li>
+<li><p><strong>Atom derived types</strong>: {atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}</p></li>
+<li><p><strong>Number derived types</strong>: {positive_number, negative_number, non_positive_number, non_negative_number}</p></li>
+<li><p><strong>Float derived types</strong>: {positive_float, negative_float, non_positive_float, non_negative_float, probability}</p></li>
+<li><p><strong>Integer derived types</strong>: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}</p></li>
+<li><p><strong>List types (compound derived types)</strong>: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}</p></li>
+<li><p><strong>Other compound derived types</strong>: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}</p></li>
+<li><p><strong>Other types</strong>: {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}</p></li>
+<li><p><strong>Registering new types</strong>: New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.</p></li>
+<li><p><strong>Character sets</strong>: When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default depends on the type.</p></li>
+<li><p><strong>Default character sets</strong>: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.</p></li>
+<li><p><strong>Caveats</strong>: The type argument to the predicates is not type-checked for performance reasons.</p></li>
 </ul>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></p>
 </div>
 </div>
 </div>

@@ -538,79 +538,79 @@ yes
 <span id="id1"></span><h2>Debugging commands<a class="headerlink" href="#debugging-commands" title="Permalink to this headline">¶</a></h2>
 <p>The debugger pauses at leashed ports when tracing or when finding a spy
 point for user interaction. The commands available are as follows:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">c</span></code> — creep</dt>
-<dd>go on; you may use the spacebar, return, or enter keys in alternative</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">l</span></code> — leap</dt>
-<dd>continues execution until the next spy point is found</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">s</span></code> — skip</dt>
-<dd>skips debugging for the current goal; valid at call, redo, and
-unification ports</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">q</span></code> — quasi-skip</dt>
-<dd>skips debugging until returning to the current goal or reaching a spy
-point; valid at call and redo ports</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">r</span></code> — retry</dt>
-<dd>retries the current goal but side-effects are not undone; valid at
-the fail port</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">j</span></code> — jump</dt>
-<dd>reads invocation number and continues execution until a port is
-reached for that number</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">z</span></code> — zap</dt>
-<dd>reads port name and continues execution until that port is reached
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">c</span></code> — creep</dt><dd><p>go on; you may use the spacebar, return, or enter keys in alternative</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">l</span></code> — leap</dt><dd><p>continues execution until the next spy point is found</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">s</span></code> — skip</dt><dd><p>skips debugging for the current goal; valid at call, redo, and
+unification ports</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">q</span></code> — quasi-skip</dt><dd><p>skips debugging until returning to the current goal or reaching a spy
+point; valid at call and redo ports</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">r</span></code> — retry</dt><dd><p>retries the current goal but side-effects are not undone; valid at
+the fail port</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">j</span></code> — jump</dt><dd><p>reads invocation number and continues execution until a port is
+reached for that number</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">z</span></code> — zap</dt><dd><p>reads port name and continues execution until that port is reached
 reads negated port name and continues execution until a port other
-than the negated port is reached</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">i</span></code> — ignore</dt>
-<dd>ignores goal, assumes that it succeeded; valid at call and redo ports</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">f</span></code> — fail</dt>
-<dd>forces backtracking; may also be used to convert an exception into a
-failure</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">n</span></code> — nodebug</dt>
-<dd>turns off debugging</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">&#64;</span></code> — command; <code class="docutils literal notranslate"><span class="pre">!</span></code> can be used in alternative</dt>
-<dd>reads and executes a query</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">b</span></code> — break</dt>
-<dd>suspends execution and starts new interpreter; type <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>
-to terminate</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">a</span></code> — abort</dt>
-<dd>returns to top level interpreter</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Q</span></code> — quit</dt>
-<dd>quits Logtalk</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">p</span></code> — print</dt>
-<dd>writes current goal using the print/1 predicate if available</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">d</span></code> — display</dt>
-<dd>writes current goal without using operator notation</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">w</span></code> — write</dt>
-<dd>writes current goal quoting atoms if necessary</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">$</span></code> — dollar</dt>
-<dd>outputs the compiled form of the current goal (for low-level
-debugging)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">x</span></code> — context</dt>
-<dd>prints execution context</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">.</span></code> — file</dt>
-<dd>prints file, entity, predicate, and line number information at an
-unification port</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">e</span></code> — exception</dt>
-<dd>prints exception term thrown by the current goal</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">=</span></code> — debugging</dt>
-<dd>prints debugging information</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> — write depth</dt>
-<dd>sets the write term depth (set to 0 to reset)</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">*</span></code> — add</dt>
-<dd>adds a context spy point for the current goal</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">/</span></code> — remove</dt>
-<dd>removes a context spy point for the current goal</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">+</span></code> — add</dt>
-<dd>adds a predicate spy point for the current goal</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-</span></code> — remove</dt>
-<dd>removes a predicate spy point for the current goal</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">#</span></code> — add</dt>
-<dd>adds a line number spy point for the current clause</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">|</span></code> — remove</dt>
-<dd>removes a line number spy point for the current clause</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">h</span></code> — condensed help</dt>
-<dd>prints list of command options</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">?</span></code> — extended help</dt>
-<dd>prints list of command options</dd>
+than the negated port is reached</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">i</span></code> — ignore</dt><dd><p>ignores goal, assumes that it succeeded; valid at call and redo ports</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">f</span></code> — fail</dt><dd><p>forces backtracking; may also be used to convert an exception into a
+failure</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">n</span></code> — nodebug</dt><dd><p>turns off debugging</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&#64;</span></code> — command; <code class="docutils literal notranslate"><span class="pre">!</span></code> can be used in alternative</dt><dd><p>reads and executes a query</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">b</span></code> — break</dt><dd><p>suspends execution and starts new interpreter; type <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>
+to terminate</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">a</span></code> — abort</dt><dd><p>returns to top level interpreter</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Q</span></code> — quit</dt><dd><p>quits Logtalk</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">p</span></code> — print</dt><dd><p>writes current goal using the print/1 predicate if available</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">d</span></code> — display</dt><dd><p>writes current goal without using operator notation</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">w</span></code> — write</dt><dd><p>writes current goal quoting atoms if necessary</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">$</span></code> — dollar</dt><dd><p>outputs the compiled form of the current goal (for low-level
+debugging)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">x</span></code> — context</dt><dd><p>prints execution context</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">.</span></code> — file</dt><dd><p>prints file, entity, predicate, and line number information at an
+unification port</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">e</span></code> — exception</dt><dd><p>prints exception term thrown by the current goal</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">=</span></code> — debugging</dt><dd><p>prints debugging information</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> — write depth</dt><dd><p>sets the write term depth (set to 0 to reset)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">*</span></code> — add</dt><dd><p>adds a context spy point for the current goal</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/</span></code> — remove</dt><dd><p>removes a context spy point for the current goal</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">+</span></code> — add</dt><dd><p>adds a predicate spy point for the current goal</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-</span></code> — remove</dt><dd><p>removes a predicate spy point for the current goal</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">#</span></code> — add</dt><dd><p>adds a line number spy point for the current clause</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">|</span></code> — remove</dt><dd><p>removes a line number spy point for the current clause</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">h</span></code> — condensed help</dt><dd><p>prints list of command options</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">?</span></code> — extended help</dt><dd><p>prints list of command options</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="context-switching-calls">
@@ -686,22 +686,22 @@ turning on the <code class="docutils literal notranslate"><span class="pre">debu
 <p>To avoid having to define <a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules
 for translating each and every debug message, Logtalk provides default
 tokenization for four <em>meta-messages</em> that cover the most common cases:</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code></dt>
-<dd>By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code>
-predicate followed by a newline.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Key-Value</span></code></dt>
-<dd>By default, the message is printed as <code class="docutils literal notranslate"><span class="pre">Key:</span> <span class="pre">Value</span></code> followed by a
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code></dt><dd><p>By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code>
+predicate followed by a newline.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Key-Value</span></code></dt><dd><p>By default, the message is printed as <code class="docutils literal notranslate"><span class="pre">Key:</span> <span class="pre">Value</span></code> followed by a
 newline. The value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code>
-predicate.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">List</span></code></dt>
-<dd>By default, the list items are printed indented one per line. The
+predicate.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">List</span></code></dt><dd><p>By default, the list items are printed indented one per line. The
 items are preceded by a dash and printed as passed to the
-<code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Title::List</span></code></dt>
-<dd>By default, the title is printed followed by a newline and the
+<code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Title::List</span></code></dt><dd><p>By default, the title is printed followed by a newline and the
 indented list items, one per line. The items are preceded by a dash
-and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</dd>
+and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p>
+</dd>
 </dl>
 <p>These print messages goals can always be combined with hooks as
 described in the previous section to remove them in production ready
