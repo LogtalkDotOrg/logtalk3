@@ -3,17 +3,17 @@
 %  Integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers.
 %
-%  Last updated on March 30, 2018
+%  Last updated on March 30, 2019
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -98,6 +98,7 @@ user:prolog_predicate_name(user:'$lgt_threaded_peek'(_, _, _, _), 'threaded_peek
 user:prolog_predicate_name(user:'$lgt_threaded_peek_tagged'(_, _, _, _, _), 'threaded_peek/2') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_exit'(_, _, _, _), 'threaded_exit/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_exit_tagged'(_, _, _, _, _), 'threaded_exit/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_cancel_tagged'(_, _), 'threaded_cancel/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_wait_synch_ctg'(_, _, _), 'threaded_wait/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_wait_synch'(_, _, _), 'threaded_wait/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_wait_ctg'(_, _), 'threaded_wait/1') :- !.

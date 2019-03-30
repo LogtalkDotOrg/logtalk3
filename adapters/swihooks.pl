@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on March 5, 2019
+%  Last updated on March 30, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -287,6 +287,7 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_peek_tagged'(_, _, _, _, _), 'threaded_peek/2') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_exit'(_, _, _, _), 'threaded_exit/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_exit_tagged'(_, _, _, _, _), 'threaded_exit/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_cancel_tagged'(_, _), 'threaded_cancel/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_wait_synch_ctg'(_, _, _), 'threaded_wait/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_wait_synch'(_, _, _), 'threaded_wait/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_wait_ctg'(_, _), 'threaded_wait/1') :- !.
@@ -573,18 +574,15 @@ prolog_clause:make_varnames_hook(_, (Module:THead :- _), Offsets, Names, Binding
 '$lgt_swi_unify_clause_body'(threaded_once(Goal), _, '$lgt_threaded_once'(Goal, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_call(Goal, Tag), _, '$lgt_threaded_call_tagged'(Goal, _, _, Tag), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_once(Goal, Tag), _, '$lgt_threaded_once_tagged'(Goal, _, _, Tag), TermPos, TermPos) :- !.
-
 '$lgt_swi_unify_clause_body'(threaded_peek(Goal), Entity, '$lgt_threaded_peek'(TGoal, _, _, _), TermPos0, TermPos) :- !,
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
-
 '$lgt_swi_unify_clause_body'(threaded_peek(Goal, Tag), Entity, '$lgt_threaded_peek_tagged'(TGoal, _, _, _, Tag), TermPos0, TermPos) :- !,
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
-
 '$lgt_swi_unify_clause_body'(threaded_exit(Goal), Entity, '$lgt_threaded_exit'(TGoal, _, _, _), TermPos0, TermPos) :- !,
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
-
 '$lgt_swi_unify_clause_body'(threaded_exit(Goal, Tag), Entity, '$lgt_threaded_exit_tagged'(TGoal, _, _, _, Tag), TermPos0, TermPos) :- !,
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
+'$lgt_swi_unify_clause_body'(threaded_cancel(Tag), _, '$lgt_threaded_cancel_tagged'(Tag, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(threaded_wait(Msg), _, '$lgt_threaded_wait_synch_ctg'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_wait(Msg), _, '$lgt_threaded_wait_synch'(_, Msg, _), TermPos, TermPos) :- !.
@@ -725,6 +723,7 @@ prolog_clause:make_varnames_hook(_, (Module:THead :- _), Offsets, Names, Binding
 :- '$set_predicate_attribute'('$lgt_threaded_exit'/5, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_exit_tagged'/5, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_exit_tagged'/6, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_cancel_tagged'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_wait_synch_ctg'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_wait_synch'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_wait_ctg'/2, trace, 1).

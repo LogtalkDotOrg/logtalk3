@@ -1,17 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SWI-Prolog
-%  Last updated on May 28, 2018
+%  Last updated on May 30, 2019
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,7 @@
 	'$lgt_before_event_'/5, '$lgt_after_event_'/5,
 	'$lgt_current_protocol_'/5, '$lgt_current_category_'/6, '$lgt_current_object_'/11,
 	'$lgt_entity_property_'/2,
-	'$lgt_implements_protocol_'/3, '$lgt_imports_category_'/3, '$lgt_instantiates_class_'/3, 
+	'$lgt_implements_protocol_'/3, '$lgt_imports_category_'/3, '$lgt_instantiates_class_'/3,
 	'$lgt_specializes_class_'/3, '$lgt_extends_category_'/3, '$lgt_extends_object_'/3,
 	'$lgt_extends_protocol_'/3, '$lgt_complemented_object_'/5,
 	'$lgt_loaded_file_'/7, '$lgt_failed_file_'/1, '$lgt_parent_file_'/2, '$lgt_file_loading_stack_'/1,
@@ -122,6 +122,8 @@
 :- lock_predicate(current_event/5).
 :- lock_predicate(define_events/5).
 
+:- lock_predicate(thread_sleep/1).
+
 :- lock_predicate(threaded/1).
 :- lock_predicate(threaded_call/1).
 :- lock_predicate(threaded_call/2).
@@ -132,6 +134,7 @@
 :- lock_predicate(threaded_exit/2).
 :- lock_predicate(threaded_peek/1).
 :- lock_predicate(threaded_peek/2).
+:- lock_predicate(threaded_cancel/1).
 :- lock_predicate(threaded_wait/1).
 :- lock_predicate(threaded_notify/1).
 
