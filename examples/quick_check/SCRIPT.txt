@@ -50,8 +50,8 @@ yes
 % counter-example that falsifies the property:
 
 | ?- lgtunit::quick_check(broken_nth1_3_prop(+list), [n(25)]).
-*       quick check test failure:
-*         broken_nth1_3_prop([157.39783108350045,-79])
+*     quick check test failure (at test 1 after 0 shrinks):
+*       broken_nth1_3_prop([])
 no
 
 
@@ -63,7 +63,7 @@ Result = passed.
 yes
 
 | ?- lgtunit::quick_check(broken_nth1_3_prop(+list), Result, [n(250)]).
-Result = failed(broken_nth1_3_prop([-580.5691640744163, 19, 'nUU!{4WKMv]fCtX*cOyApd', 457])).
+Result = failed(broken_nth1_3_prop([])).
 yes
 
 

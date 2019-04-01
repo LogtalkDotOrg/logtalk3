@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/10/10,
+		date is 2019/04/01,
 		comment is 'Unit tests for the "quick_check" example.'
 	]).
 
@@ -39,6 +39,8 @@
 	quick_check(qc2, same_length_2_prop(+list)).
 	% run 25 random tests
 	quick_check(qc3, same_length_3_prop(+list), [n(25)]).
+	% limit the maximum number of shrink operations to 16
+	quick_check(qc4, same_length_3_prop(+list), [s(16)]).
 
 	% properties (must be defined as local predicates but can, of course,
 	% call any predicate defined elsewhere)
