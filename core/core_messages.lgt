@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.64,
+		version is 1.65,
 		author is 'Paulo Moura',
 		date is 2019/04/01,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -712,10 +712,24 @@
 		['~q or '-[AlternativeCall]],
 		alternative_calls(AlternativeCalls, NextAlternativeCall).
 
-	suspicious_call_reason(multifile) -->
-		['in clause for multifile predicate'-[], nl].
-	suspicious_call_reason(repeat) -->
-		['loop without a cut'-[], nl].
+	suspicious_call_reason(multifile(Entity::Head)) -->
+		{functor(Head, Functor, Arity)},
+		['in clause for multifile predicate ~q'-[Entity::Functor/Arity], nl].
+	suspicious_call_reason(multifile(':'(Module,Head))) -->
+		{functor(Head, Functor, Arity)},
+		['in clause for multifile predicate ~q'-[':'(Module,Functor/Arity)], nl].
+	suspicious_call_reason(multifile(Head)) -->
+		{functor(Head, Functor, Arity)},
+		['in clause for multifile predicate ~q'-[Functor/Arity], nl].
+	suspicious_call_reason(repeat(Entity::Head)) -->
+		{functor(Head, Functor, Arity)},
+		['loop without a cut in clause for predicate ~q'-[Entity::Functor/Arity], nl].
+	suspicious_call_reason(repeat(':'(Module,Head))) -->
+		{functor(Head, Functor, Arity)},
+		['loop without a cut in clause for predicate ~q'-[':'(Module,Functor/Arity)], nl].
+	suspicious_call_reason(repeat(Head)) -->
+		{functor(Head, Functor, Arity)},
+		['loop without a cut in clause for predicate ~q'-[Functor/Arity], nl].
 	suspicious_call_reason(shared_variable(Variable)) -->
 		['as variable ~w occurs in expression'-[Variable], nl].
 	suspicious_call_reason(no_shared_variables(Predicate)) -->
