@@ -246,6 +246,8 @@ Examples
 
 * UPDATED: The `errors` example to illustrate the new compiler lint checks.
 
+* UPDATED: The `proxies` example to use parameter variables.
+
 * FIXED: Warnings printed by the new lint checks while compiling the examples.
 
 * FIXED: Deleted `lambdas` example sample queries and unit tests that used

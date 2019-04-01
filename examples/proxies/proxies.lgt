@@ -18,10 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% we use a parametric object in order to give an interpretation to an 
+% we use a parametric object in order to give an interpretation to an
 % object proxy arguments and to encapsulate relevant predicates:
 
-:- object(circle(_Id, _Radius, _Color)).
+:- object(circle(_Id_, _Radius_, _Color_)).
 
 	:- public([
 		id/1, radius/1, color/1,
@@ -29,28 +29,23 @@
 		print/0
 	]).
 
-	id(Id) :-
-		parameter(1, Id).
+	id(_Id_).
 
-	radius(Radius) :-
-		parameter(2, Radius).
+	radius(_Radius_).
 
-	color(Color) :-
-		parameter(3, Color).
+	color(_Color_).
 
 	area(Area) :-
-		parameter(2, Radius),
-		Area is 3.14159265358979*Radius*Radius.
+		Area is 3.14159265358979*_Radius_*_Radius_.
 
 	perimeter(Perimeter) :-
-		parameter(2, Radius),
-		Perimeter is 2*3.14159265358979*Radius.
+		Perimeter is 2*3.14159265358979*_Radius_.
 
 	print :-
-		id(Id), write('id: '), write(Id),
+		write('id: '), write(_Id_),
 		area(Area), write(', area: '), write(Area),
 		perimeter(Perimeter), write(', perimeter: '), write(Perimeter),
-		color(Color), write(', color: '), write(Color), nl.
+		write(', color: '), write(_Color_), nl.
 
 :- end_object.
 

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/07/03,
+		date is 2019/04/01,
 		comment is 'Unit tests for the "proxies" example.'
 	]).
 
@@ -32,12 +32,24 @@
 
 	cover(circle(_, _, _)).
 
-	test(proxies_1) :-
+	test(proxies_01) :-
+		circle(one, 7, red)::id(Id),
+		Id == one.
+
+	test(proxies_02) :-
+		circle(one, 7, red)::radius(Radius),
+		Radius == 7.
+
+	test(proxies_03) :-
+		circle(one, 7, red)::color(Color),
+		Color == red.
+
+	test(proxies_04) :-
 		{circle('#2', Radius, Color)}::print,
 		Radius =~= 3.71,
 		Color == yellow.
 
-	test(proxies_2) :-
+	test(proxies_05) :-
 		findall(Area, {circle(_, _, _)}::area(Area), Areas),
 		Areas = [Area1, Area2, Area3, Area4, Area5],
 		Area1 =~= 4.75291552561599,
