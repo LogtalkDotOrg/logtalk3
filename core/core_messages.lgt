@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.63,
+		version is 1.64,
 		author is 'Paulo Moura',
-		date is 2019/03/20,
+		date is 2019/04/01,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -722,7 +722,7 @@
 		(	{Predicate == forall} ->
 			['as generator and test goals share no variables'-[], nl]
 		;	% assume bagof/setof/findall
-			['as template and goal share no variables'-[Variable], nl]
+			['as template and goal share no variables'-[], nl]
 		).
 	suspicious_call_reason(existential_variables([Variable], Goal)) -->
 		['as existential variable ~w do not exist in goal ~q '-[Variable, Goal], nl].

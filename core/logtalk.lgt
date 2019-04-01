@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2019/01/18,
+		date is 2019/04/01,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Message kinds' - 'The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.',
@@ -401,7 +401,7 @@
 	default_print_message_token(Format-Arguments, _, Stream, _) :-
 		{format(Stream, Format, Arguments)}.
 	default_print_message_token(term(Term, Options), _, Stream, _) :-
-		{write_term(Stream, Term, Options)}.
+		write_term(Stream, Term, Options).
 	% the following tokens were first introduced by SWI-Prolog; we use default definitions
 	% for compatibility when running Logtalk with other backend Prolog compilers
 	default_print_message_token(ansi(_, Format, Arguments), _, Stream, _) :-
