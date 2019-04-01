@@ -62,3 +62,33 @@ C = yellow.
 | ?- findall(Area, {circle(_, _, _)}::area(Area), Areas).
 
 Areas = [4.75291, 43.2412, 0.477836, 103.508, 217.468].
+
+
+% some example queries for backend Prolog compilers implementing the 
+% time/1 timing predicate (e.g. SWI-Prolog or YAP; the adapter files
+% for these two systems ensure that a ::/2 goal in the argument of the
+% time/1 predicate is compiled prior to calling it so that we benchmark
+% the code instead of the compiler):
+
+?- set_logtalk_flag(optimize, on).
+true.
+
+?- logtalk_load(proxies(loader)).
+...
+true.
+
+?- time(true).  % autoload the predicate in the case of SWI-Prolog
+% 2 inferences, 0.000 CPU in 0.000 seconds (67% CPU, 250000 Lips)
+true.
+
+?- time(circle(one, 7, red)::id(Id)).
+% 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 76923 Lips)
+Id = one.
+
+?- time(circle(one, 7, red)::radius(Radius)).
+% 1 inferences, 0.000 CPU in 0.000 seconds (61% CPU, 83333 Lips)
+Radius = 7.
+
+?- time(circle(one, 7, red)::color(Color)).
+% 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
+Color = red.

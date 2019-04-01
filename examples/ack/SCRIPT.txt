@@ -24,7 +24,12 @@ ________________________________________________________________________
 
 
 % some example queries for backend Prolog compilers implementing the 
-% time/1 timing predicate (e.g. SWI-Prolog, YAP, or XSB):
+% time/1 timing predicate (e.g. SWI-Prolog or YAP; the adapter files
+% for these two systems ensure that a ::/2 goal in the argument of the
+% time/1 predicate is compiled prior to calling it):
+
+?- time(true).  % autoload the predicate in the case of SWI-Prolog
+true.
 
 ?- time(ack::ack(2, 4, V)).
 % 98 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)

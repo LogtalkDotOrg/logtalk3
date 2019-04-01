@@ -45,6 +45,7 @@
 		Color == red.
 
 	test(proxies_04) :-
+		^^suppress_text_output,
 		{circle('#2', Radius, Color)}::print,
 		Radius =~= 3.71,
 		Color == yellow.
