@@ -92,3 +92,21 @@ Radius = 7.
 ?- time(circle(one, 7, red)::color(Color)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
 Color = red.
+
+?- Id0 = one, time(circle(Id0, 7, red)::id(Id)).
+% 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 76923 Lips)
+Id0 = Id, Id = one.
+
+?- Radius0 = 7, time(circle(one, Radius0, red)::radius(Radius)).
+% 1 inferences, 0.000 CPU in 0.000 seconds (61% CPU, 83333 Lips)
+Radius0 = Radius, Radius = 7.
+
+?- Color0 = red, time(circle(one, 7, Color0)::color(Color)).
+% 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
+Color0 = Color, Color = red.
+
+?- time({circle('#2', Radius, Color)}::id(Id)).
+% 2 inferences, 0.000 CPU in 0.000 seconds (71% CPU, 90909 Lips)
+Radius = 3.71,
+Color = yellow,
+Id = '#2'.

@@ -246,7 +246,8 @@ Examples
 
 * UPDATED: The `errors` example to illustrate the new compiler lint checks.
 
-* UPDATED: The `proxies` example to use parameter variables.
+* UPDATED: The `proxies` example to use parameter variables. Also added sample
+benchmark calls.
 
 * FIXED: Warnings printed by the new lint checks while compiling the examples.
 
