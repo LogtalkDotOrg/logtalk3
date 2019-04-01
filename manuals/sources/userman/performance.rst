@@ -134,11 +134,11 @@ an application footprint.
 Debug mode overhead
 -------------------
 
-Code compiled in debug mode runs slower, as expected. The overhead depends
-on the number of *debug events* generated when running the application. A
-debug event is simply a pass on a call or unification port of the
-:ref:`procedure box model <debugging_box_model>`. These debug events can
-be intercepted by defined clauses for the
+Code compiled in debug mode runs slower, as expected, when compared with
+normal or optimized mode. The overhead depends on the number of *debug events*
+generated when running the application. A debug event is simply a pass on a
+call or unification port of the :ref:`procedure box model <debugging_box_model>`.
+These debug events can be intercepted by defined clauses for the
 :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
 and :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>` multifile
 predicates. With no application (such as a debugger or a port profiler)
