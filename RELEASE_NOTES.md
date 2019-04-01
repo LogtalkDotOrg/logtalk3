@@ -246,6 +246,9 @@ Examples
 
 * UPDATED: The `errors` example to illustrate the new compiler lint checks.
 
+* UPDATED: The `aliases` example to use parameter variables and improved test
+coverage.
+
 * UPDATED: The `proxies` example to use parameter variables. Also added sample
 benchmark calls.
 

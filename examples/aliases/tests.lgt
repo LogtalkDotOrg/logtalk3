@@ -22,20 +22,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2015/01/20,
+		date is 2019/01/01,
 		comment is 'Unit tests for the "aliases" example.'
+	]).
+
+	:- uses(list, [
+		msort/2, subsequence/3
 	]).
 
 	cover(rectangle(_, _)).
 	cover(square(_)).
+	cover(square1).
+
 	cover(ellipse(_, _)).
 	cover(circle(_)).
 
 	test(aliases_01) :-
 		findall(Predicate, square(_)::current_predicate(Predicate), PredicatesUnsorted),
-		list::msort(PredicatesUnsorted, PredicatesSorted),
+		msort(PredicatesUnsorted, PredicatesSorted),
 		PredicatesSorted == [area/1, height/1, side/1, width/1].
 
 	test(aliases_02) :-
@@ -43,48 +49,76 @@
 		Side == 2.
 
 	test(aliases_03) :-
-		findall(Property, square(_)::predicate_property(side(_), Property), AllProperties),
-		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([alias_of(width(_)), alias_declared_in(square(_),_), logtalk, public, static, declared_in(rectangle(_,_)), defined_in(rectangle(_,_)), scope(public), number_of_clauses(1)], PropertiesSorted),
-		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+		square(2)::area(Area),
+		Area == 4.
 
 	test(aliases_04) :-
-		findall(Property, square(_)::predicate_property(width(_), Property), AllProperties),
-		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([logtalk, public, static, declared_in(rectangle(_,_)), defined_in(rectangle(_,_)), scope(public)], PropertiesSorted),
-		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+		square(2)::width(Width),
+		Width == 2.
 
 	test(aliases_05) :-
-		findall(Predicate, circle(_)::current_predicate(Predicate), PredicatesUnsorted),
-		list::msort(PredicatesUnsorted, PredicatesSorted),
-		PredicatesSorted == [area/1, r/1, rx/1, ry/1].
+		square(2)::height(Height),
+		Height == 2.
 
 	test(aliases_06) :-
+		square1::side(Side),
+		Side == 1.
+
+	test(aliases_07) :-
+		square1::area(Area),
+		Area == 1.
+
+	test(aliases_08) :-
+		square1::width(Width),
+		Width == 1.
+
+	test(aliases_09) :-
+		square1::height(Height),
+		Height == 1.
+
+	test(aliases_10) :-
+		findall(Property, square(_)::predicate_property(side(_), Property), AllProperties),
+		msort(AllProperties, AllPropertiesSorted),
+		msort([alias_of(width(_)), alias_declared_in(square(_),_), logtalk, public, static, declared_in(rectangle(_,_)), defined_in(rectangle(_,_)), scope(public), number_of_clauses(1)], PropertiesSorted),
+		subsequence(AllPropertiesSorted, PropertiesSorted, _).
+
+	test(aliases_11) :-
+		findall(Property, square(_)::predicate_property(width(_), Property), AllProperties),
+		msort(AllProperties, AllPropertiesSorted),
+		msort([logtalk, public, static, declared_in(rectangle(_,_)), defined_in(rectangle(_,_)), scope(public)], PropertiesSorted),
+		subsequence(AllPropertiesSorted, PropertiesSorted, _).
+
+	test(aliases_12) :-
+		findall(Predicate, circle(_)::current_predicate(Predicate), PredicatesUnsorted),
+		msort(PredicatesUnsorted, PredicatesSorted),
+		PredicatesSorted == [area/1, r/1, rx/1, ry/1].
+
+	test(aliases_13) :-
 		circle(3)::r(Radius),
 		Radius == 3.
 
-	test(aliases_07) :-
+	test(aliases_14) :-
 		findall(Property, circle(3)::predicate_property(r(_), Property), AllProperties),
-		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([alias_of(rx(_)), logtalk, public, static, declared_in(ellipse(_, _)), defined_in(ellipse(_, _)), scope(public)], PropertiesSorted),
-		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+		msort(AllProperties, AllPropertiesSorted),
+		msort([alias_of(rx(_)), logtalk, public, static, declared_in(ellipse(_, _)), defined_in(ellipse(_, _)), scope(public)], PropertiesSorted),
+		subsequence(AllPropertiesSorted, PropertiesSorted, _).
 
-	test(aliases_08) :-
+	test(aliases_15) :-
 		findall(Property, circle(3)::predicate_property(rx(_), Property), AllProperties),
-		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([logtalk, public, static, declared_in(ellipse(_, _)), defined_in(ellipse(_, _)), scope(public)], PropertiesSorted),
-		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+		msort(AllProperties, AllPropertiesSorted),
+		msort([logtalk, public, static, declared_in(ellipse(_, _)), defined_in(ellipse(_, _)), scope(public)], PropertiesSorted),
+		subsequence(AllPropertiesSorted, PropertiesSorted, _).
 
-	test(aliases_09) :-
+	test(aliases_16) :-
 		object_property(square(_), alias(side/1, AllProperties)),
-		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([for(width/1), from(rectangle(_,_)), line_count(_)], PropertiesSorted),
-		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+		msort(AllProperties, AllPropertiesSorted),
+		msort([for(width/1), from(rectangle(_,_)), line_count(_)], PropertiesSorted),
+		subsequence(AllPropertiesSorted, PropertiesSorted, _).
 
-	test(aliases_10) :-
+	test(aliases_17) :-
 		object_property(circle(_), alias(r/1, AllProperties)),
-		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([for(rx/1), from(ellipse(_,_)), line_count(_)], PropertiesSorted),
-		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+		msort(AllProperties, AllPropertiesSorted),
+		msort([for(rx/1), from(ellipse(_,_)), line_count(_)], PropertiesSorted),
+		subsequence(AllPropertiesSorted, PropertiesSorted, _).
 
 :- end_object.

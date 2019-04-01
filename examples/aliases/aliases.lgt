@@ -19,34 +19,30 @@
 
 
 /*
-This example illustrates the use of the predicate directive alias/2 for 
+This example illustrates the use of the predicate directive alias/2 for
 defining alternative names for inherited predicates.
 */
 
 
 % first, we define a simple parametric object for representing rectangles:
 
-:- object(rectangle(_Width, _Height)).
+:- object(rectangle(_Width_, _Height_)).
 
 	:- public([
 		width/1, height/1, area/1
 	]).
 
-	width(Width) :-
-		parameter(1, Width).
+	width(_Width_).
 
-	height(Height) :-
-		parameter(2, Height).
+	height(_Height_).
 
 	area(Area) :-
-		::width(Width),
-		::height(Height),
-		Area is Width*Height.
+		Area is _Width_ * _Height_.
 
 :- end_object.
 
 
-% next, we define a square object which adds an alias, side/1, for the 
+% next, we define a square object which adds an alias, side/1, for the
 % inherited predicate width/1:
 
 :- object(square(Side),
@@ -67,27 +63,23 @@ defining alternative names for inherited predicates.
 
 % a similar example can be defined using ellipses and circles:
 
-:- object(ellipse(_RX, _RY)).
+:- object(ellipse(_RX_, _RY_)).
 
 	:- public([
 		rx/1, ry/1, area/1
 	]).
 
-	rx(Rx) :-
-		parameter(1, Rx).
+	rx(_RX_).
 
-	ry(Ry) :-
-		parameter(2, Ry).
+	ry(_RY_).
 
 	area(Area) :-
-		::rx(Rx),
-		::ry(Ry),
-		Area is Rx*Ry*3.1415927.
+		Area is _RX_ * _RY_ * 3.1415927.
 
 :- end_object.
 
 
-% in this case, we define an alias named r/1 for the inherited 
+% in this case, we define an alias named r/1 for the inherited
 % predicate rx/1:
 
 :- object(circle(Radius),
