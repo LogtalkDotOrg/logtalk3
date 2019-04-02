@@ -126,8 +126,8 @@ compiler options.
 
 * IMPROVED: Handbook session on calling Prolog module meta-predicates.
 
-* UPDATED: Handbook session on performance with an overview of debug mode
-overhead.
+* UPDATED: Handbook session on performance with an overview of compilation
+modes and debug mode overhead.
 
 * UPDATED: The Handbook `conf.py` file for compatibility with Sphinx 2.x.
 

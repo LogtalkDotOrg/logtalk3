@@ -31,10 +31,26 @@ entity predicate clauses. In the common case where a predicate makes no
 calls to the execution-context predicates and message-sending control
 constructs and is neither a meta-predicate nor a coinductive predicate,
 the execution-context argument is simply passed between goals. In this
-case, with most backend Prolog VMs, the cost of this extra argument is null
-or negligible. When the execution-context argument needs to be accessed
-(e.g. to fetch the value of *self* for a :ref:`control_send_to_self_1`
-call) there may be a small inherent overhead due to the implicit unifications.
+case, with most backend Prolog virtual machines, the cost of this extra
+argument is null or negligible. When the execution-context needs to be
+accessed (e.g. to fetch the value of *self* for a :ref:`control_send_to_self_1`
+call) there may be a small inherent overhead due to the access to the
+individual arguments of the compound term used to represent the
+execution-context.
+
+Source code compilation modes
+-----------------------------
+
+Source code can be compiled in *optimal*, *normal*, or *debug* mode,
+depending on the :ref:`optimize <flag_optimize>` and
+:ref:`debug <flag_debug>` compiler flags. Optimal mode is used when
+deploying an application while normal and debug modes are used when
+developing an application. Compiling code in optimal mode enables
+several optimizations, notably use of :term:`static binding` whenever
+enough information is available at compile time. In debug mode, most
+optimizations are turned off and the code is instrumented to generate
+*debug events* that enable tools such as the command-line debugger and
+the ports profiler.
 
 Local predicate calls
 ---------------------

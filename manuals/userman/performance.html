@@ -118,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#source-code-compilation-modes">Source code compilation modes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#local-predicate-calls">Local predicate calls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calls-to-imported-or-inherited-predicates">Calls to imported or inherited predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calls-to-module-predicates">Calls to module predicates</a></li>
@@ -219,10 +220,25 @@ entity predicate clauses. In the common case where a predicate makes no
 calls to the execution-context predicates and message-sending control
 constructs and is neither a meta-predicate nor a coinductive predicate,
 the execution-context argument is simply passed between goals. In this
-case, with most backend Prolog VMs, the cost of this extra argument is null
-or negligible. When the execution-context argument needs to be accessed
-(e.g. to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>
-call) there may be a small inherent overhead due to the implicit unifications.</p>
+case, with most backend Prolog virtual machines, the cost of this extra
+argument is null or negligible. When the execution-context needs to be
+accessed (e.g. to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>
+call) there may be a small inherent overhead due to the access to the
+individual arguments of the compound term used to represent the
+execution-context.</p>
+<div class="section" id="source-code-compilation-modes">
+<h2>Source code compilation modes<a class="headerlink" href="#source-code-compilation-modes" title="Permalink to this headline">¶</a></h2>
+<p>Source code can be compiled in <em>optimal</em>, <em>normal</em>, or <em>debug</em> mode,
+depending on the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> and
+<a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> compiler flags. Optimal mode is used when
+deploying an application while normal and debug modes are used when
+developing an application. Compiling code in optimal mode enables
+several optimizations, notably use of <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> whenever
+enough information is available at compile time. In debug mode, most
+optimizations are turned off and the code is instrumented to generate
+<em>debug events</em> that enable tools such as the command-line debugger and
+the ports profiler.</p>
+</div>
 <div class="section" id="local-predicate-calls">
 <h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Permalink to this headline">¶</a></h2>
 <p>Local calls to object (or category) predicates have zero overhead in
