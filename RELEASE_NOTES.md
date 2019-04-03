@@ -30,6 +30,8 @@ Prolog adapter and integration files
 * ADDED: SWI-Prolog adapter file specification for the built-in meta-predicate
 `call_with_inference_limit/3`.
 
+* ADDED: Unsupported adapter file for Scryer Prolog.
+
 
 3.25.0 - April 2, 2019
 ======================
