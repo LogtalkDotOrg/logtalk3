@@ -34,48 +34,62 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(library(dates_loader)),
-	logtalk_load(library(random_loader)),
-	logtalk_load([
-		adjacent_to_ed,
-		constants1,
-		constants2,
-		constants3,
-		family,
-		find_duplicate,
-		grandparent,
-		graph_colouring,
-		graph_connectedness,
-		graph_reachability,
-		higher_order1,
-		higher_order2,
-		higher_order3,
-		kinship1,
-		kinship2,
-		less_than,
-		member,
-		mutual_recursion,
-		predecessor,
-		relatedness,
-		robots,
-		sequential,
-		sequential1,
-		sequential2,
-		son,
-		sorter,
-		strings1,
-		strings2,
-		strings3,
-		trains,
-		undirected_edge
-	])
-)).
+:- set_logtalk_flag(hook, metagol).
 
-:- if(\+ current_logtalk_flag(prolog_dialect, sicstus)).
-	:- initialization((
-		logtalk_load([
-			sorter	% requires a setarg/3 built-in predicate
-		])
-	)).
-:- endif.
+
+:- object(member,
+	extends(metagol)).
+
+	%% tell Metagol to use the BK
+	prim(cons/2).
+	prim(value/2).
+
+	%% metarules
+	metarule([P,Q],([P,A,B]:-[[Q,B,A]])).
+	metarule([P,Q,_],([P,A,B]:-[[Q,B,C],[P,A,C]])).
+
+	%% background knowledge
+	cons([4,3,2,1],[3,2,1]).
+	cons([3,2,1],[2,1]).
+	cons([2,1],[1]).
+	cons([1],0).
+	value([4,3,2,1],4).
+	value([3,2,1],3).
+	value([2,1],2).
+	value([1],1).
+
+	:- public(learn/1).
+	learn(Clauses) :-
+		Pos = [
+			target(4,[4,3,2,1]),
+			target(3,[4,3,2,1]),
+			target(2,[4,3,2,1]),
+			target(1,[4,3,2,1]),
+			target(3,[3,2,1]),
+			target(2,[3,2,1]),
+			target(1,[3,2,1]),
+			target(2,[2,1]),
+			target(1,[2,1]),
+			target(1,[1])
+		],
+		Neg = [
+			target(5,[4,3,2,1]),
+			target(6,[4,3,2,1]),
+			target(7,[4,3,2,1]),
+			target(8,[4,3,2,1]),
+			target(4,[3,2,1]),
+			target(5,[3,2,1]),
+			target(6,[3,2,1]),
+			target(3,[2,1]),
+			target(4,[2,1]),
+			target(2,[1])
+		],
+		::learn(Pos, Neg, Prog),
+		::pclauses(Prog, Clauses).
+
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		::pprint_clauses(Clauses).
+
+:- end_object.

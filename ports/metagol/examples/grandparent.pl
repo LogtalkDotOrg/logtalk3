@@ -34,48 +34,57 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(library(dates_loader)),
-	logtalk_load(library(random_loader)),
-	logtalk_load([
-		adjacent_to_ed,
-		constants1,
-		constants2,
-		constants3,
-		family,
-		find_duplicate,
-		grandparent,
-		graph_colouring,
-		graph_connectedness,
-		graph_reachability,
-		higher_order1,
-		higher_order2,
-		higher_order3,
-		kinship1,
-		kinship2,
-		less_than,
-		member,
-		mutual_recursion,
-		predecessor,
-		relatedness,
-		robots,
-		sequential,
-		sequential1,
-		sequential2,
-		son,
-		sorter,
-		strings1,
-		strings2,
-		strings3,
-		trains,
-		undirected_edge
-	])
-)).
+:- set_logtalk_flag(hook, metagol).
 
-:- if(\+ current_logtalk_flag(prolog_dialect, sicstus)).
-	:- initialization((
-		logtalk_load([
-			sorter	% requires a setarg/3 built-in predicate
-		])
-	)).
-:- endif.
+
+:- object(grandparent,
+	extends(metagol)).
+
+	%% tell Metagol to use the BK
+	prim(father/2).
+	prim(mother/2).
+
+	%% metarules
+	metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
+	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
+
+	%% background knowledge
+	mother(i,a).
+	mother(c,f).
+	mother(c,g).
+	mother(f,h).
+	father(a,b).
+	father(a,c).
+	father(b,d).
+	father(b,e).
+
+	:- public(learn/1).
+	learn(Clauses) :-
+		Pos = [
+			target(i,b),
+			target(i,c),
+			target(a,d),
+			target(a,e),
+			target(a,f),
+			target(a,g),
+			target(c,h)
+		],
+		Neg = [
+			target(a,b),
+			target(b,c),
+			target(c,d),
+			target(d,e),
+			target(e,f),
+			target(f,g),
+			target(g,h),
+			target(h,i)
+		],
+		::learn(Pos, Neg, Prog),
+		::pclauses(Prog, Clauses).
+
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		::pprint_clauses(Clauses).
+
+:- end_object.

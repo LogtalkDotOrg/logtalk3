@@ -34,48 +34,47 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(library(dates_loader)),
-	logtalk_load(library(random_loader)),
-	logtalk_load([
-		adjacent_to_ed,
-		constants1,
-		constants2,
-		constants3,
-		family,
-		find_duplicate,
-		grandparent,
-		graph_colouring,
-		graph_connectedness,
-		graph_reachability,
-		higher_order1,
-		higher_order2,
-		higher_order3,
-		kinship1,
-		kinship2,
-		less_than,
-		member,
-		mutual_recursion,
-		predecessor,
-		relatedness,
-		robots,
-		sequential,
-		sequential1,
-		sequential2,
-		son,
-		sorter,
-		strings1,
-		strings2,
-		strings3,
-		trains,
-		undirected_edge
-	])
-)).
+:- set_logtalk_flag(hook, metagol).
 
-:- if(\+ current_logtalk_flag(prolog_dialect, sicstus)).
-	:- initialization((
-		logtalk_load([
-			sorter	% requires a setarg/3 built-in predicate
-		])
-	)).
-:- endif.
+
+:- object(graph_connectedness,
+	extends(metagol)).
+
+	%% tell Metagol to use the BK
+	prim(edge/2).
+
+	%% metarules
+	metarule([P,Q],([P,A,B]:-[[Q,A,B]])).
+	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
+
+	%% background knowledge
+	edge(a,b).
+	edge(b,c).
+	edge(c,d).
+	edge(b,a).
+
+	:- public(learn/1).
+	learn(Clauses) :-
+		Pos = [
+			target(a,b),
+			target(b,c),
+			target(c,d),
+			target(b,a),
+			target(a,c),
+			target(a,d),
+			target(a,a),
+			target(b,d),
+			target(b,a),
+			target(b,b)
+		],
+		Neg = [
+		],
+		::learn(Pos, Neg, Prog),
+		::pclauses(Prog, Clauses).
+
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		::pprint_clauses(Clauses).
+
+:- end_object.

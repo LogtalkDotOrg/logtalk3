@@ -32,6 +32,12 @@ Prolog adapter and integration files
 
 * ADDED: Unsupported adapter file for Scryer Prolog.
 
+Ports
+-----
+
+* ADDED: Port of Metagol examples from the (Evans & Greffenstette, 2018) paper.
+Original Prolog examples source code files contributed by MystikNinja.
+
 
 3.25.0 - April 2, 2019
 ======================
