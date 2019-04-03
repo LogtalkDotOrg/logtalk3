@@ -32,14 +32,14 @@
 	:- mode(translate(+nonvar, -list), zero_or_one).
 	:- info(translate/2, [
 		comment is 'Translates a proposition to a list of clauses.',
-		argnames is ['Propostion', 'Clauses']
+		argnames is ['Proposition', 'Clauses']
 	]).
 
 	:- public(step_by_step/2).
 	:- mode(step_by_step(+nonvar, -list), zero_or_one).
 	:- info(step_by_step/2, [
 		comment is 'Translates a proposition to a list of clauses, printing the result of each translation step.',
-		argnames is ['Propostion', 'Clauses']
+		argnames is ['Proposition', 'Clauses']
 	]).
 
 	:- public(op(10,  fy, '~' )).	% negation
