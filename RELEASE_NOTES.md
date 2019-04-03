@@ -24,6 +24,11 @@ RELEASE NOTES
 3.26.0 - May ??, 2019
 =====================
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: SWI-Prolog adapter file specification for the built-in meta-predicate
+`call_with_inference_limit/3`.
 
 
 3.25.0 - April 2, 2019

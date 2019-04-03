@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on March 28, 2019
+%  Last updated on April 3, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -166,6 +166,7 @@
 '$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
 '$lgt_prolog_meta_predicate'(call_cleanup(_, _, _), call_cleanup(0, *, 0), predicate).
 '$lgt_prolog_meta_predicate'(call_with_depth_limit(_, _, _), call_with_depth_limit(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_inference_limit(_, _, _), call_with_inference_limit(0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(compile_predicates(_), compile_predicates([/]), predicate).
 '$lgt_prolog_meta_predicate'(dynamic(_), dynamic(/), predicate).
 '$lgt_prolog_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
