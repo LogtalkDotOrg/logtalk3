@@ -1,23 +1,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
-%  
+%  This file is part of Logtalk <https://logtalk.org/>
+%
 %  Copyright 2016 Metagol authors
 %  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
-%  
+%
 %  Redistribution and use in source and binary forms, with or without
 %  modification, are permitted provided that the following conditions
 %  are met:
-%  
+%
 %  1. Redistributions of source code must retain the above copyright
 %     notice, this list of conditions and the following disclaimer.
-%  
+%
 %  2. Redistributions in binary form must reproduce the above copyright
 %     notice, this list of conditions and the following disclaimer in
 %     the documentation and/or other materials provided with the
 %     distribution.
-%  
+%
 %  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 %  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 %  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -38,13 +38,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2019/01/03,
+		date is 2019/04/04,
 		comment is 'Unit tests for the "metagol" example.'
 	]).
 
 	cover(metagol).
+
+	test(metagol_adjacent_to_red_1) :-
+		adjacent_to_red::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(target(A) :- edge(A, B), target_1(B)),
+				(target_1(C) :- colour(C, D), red(D))
+			]
+		).
 
 	test(metagol_constants1_1) :-
 		constants1::learn(Clauses), !,
@@ -89,6 +98,25 @@
 			[	(f(A, B) :- head(A, B), f_1(A, B)),
 				(f(C, E) :- tail(C, D), f(D, E)),
 				(f_1(F, H) :- tail(F, G), element(G, H))
+			]
+		).
+
+	test(metagol_grandparent_1) :-
+		grandparent::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(target(A, C) :- target_1(A, B), target_1(B, C)),
+				(target_1(D, E) :- father(D, E)),
+				(target_1(F, G) :- mother(F, G))
+			]
+		).
+
+	test(metagol_graph_colouring_1) :-
+		graph_colouring::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(target(A) :- edge(A, B), target_1(A, B)),
+				(target_1(C, D) :- colour(C, E), colour(D, E))
 			]
 		).
 
@@ -149,6 +177,14 @@
 			]
 		).
 
+	test(metagol_member_1) :-
+		member::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(target(A, B) :- cons(B, C), target(A, C)),
+				(target(D, E) :- value(E, D))]
+		).
+
 	test(metagol_mutual_recursion_1) :-
 		mutual_recursion::learn(Clauses), !,
 		^^variant(
@@ -157,6 +193,13 @@
 				(even(A) :- s(A, B), even_1(B)),
 				(even_1(C) :- s(C, D), even(D))
 			]
+		).
+
+	test(metagol_predecessor_1) :-
+		predecessor::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[(target(A, B) :- succ(B, A))]
 		).
 
 	test(metagol_robots_1) :-
@@ -240,6 +283,15 @@
 			Clauses,
 			[	(e(A) :- has_car(A, B), e_1(B)),
 				(e_1(C) :- short(C), closed(C))
+			]
+		).
+
+	test(metagol_undirected_edge_1) :-
+		undirected_edge::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[	(target(A, B) :- edge(B, A)),
+				(target(C, D) :- edge(C, D))
 			]
 		).
 
