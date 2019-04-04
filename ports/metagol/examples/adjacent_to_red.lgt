@@ -37,7 +37,7 @@
 :- set_logtalk_flag(hook, metagol).
 
 
-:- object(adjacent_to_ed,
+:- object(adjacent_to_red,
 	extends(metagol)).
 
 	%% tell Metagol to use the BK

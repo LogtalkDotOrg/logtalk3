@@ -38,7 +38,7 @@
 	logtalk_load(library(dates_loader)),
 	logtalk_load(library(random_loader)),
 	logtalk_load([
-		adjacent_to_ed,
+		adjacent_to_red,
 		constants1,
 		constants2,
 		constants3,
