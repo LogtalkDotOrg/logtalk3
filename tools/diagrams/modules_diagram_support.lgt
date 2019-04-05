@@ -1,10 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.15,
+		version is 0.16,
 		author is 'Paulo Moura',
-		date is 2018/02/02,
+		date is 2019/04/05,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -65,7 +84,7 @@
 			{module_property(Module, file(File)),
 			 file_directory_name(File, Directory0),
 			 atom_concat(Directory0, '/', Directory),
-			 file_base_name(File, Basename)			
+			 file_base_name(File, Basename)
 			}.
 		property_module(calls(Callee, [caller(Caller)| OtherProperties]), Module) :-
 			{module_property(Module, file(File)),
@@ -167,7 +186,7 @@
 			{module_property(Module, file(File)),
 			 file_directory_name(File, Directory0),
 			 atom_concat(Directory0, '/', Directory),
-			 file_base_name(File, Basename)			
+			 file_base_name(File, Basename)
 			}.
 		property_module(calls(Callee, [caller(Caller)| OtherProperties]), Module) :-
 			{module_property(Module, file(File)),
@@ -191,6 +210,12 @@
 				Callee = ':'(OtherModule,CalleeFunctor/CalleeArity)
 			 ;	xref_defined(File, Callee0, imported(FromFile)) ->
 			 	once(module_property(FromModule, file(FromFile))),
+			 	functor(Callee0, CalleeFunctor, CalleeArity),
+			 	Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
+			 ;	predicate_property(Callee0, autoload(FromFile)),
+				absolute_file_name(FromFile, FromFilePath, [file_type(prolog)]),
+			 	catch(load_files([FromFilePath]), _, fail),
+				once(module_property(FromModule, file(FromFilePath))) ->
 			 	functor(Callee0, CalleeFunctor, CalleeArity),
 			 	Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
 			 ;	% assume local predicate

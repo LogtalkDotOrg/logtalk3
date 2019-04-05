@@ -32,6 +32,13 @@ Prolog adapter and integration files
 
 * ADDED: Unsupported adapter file for Scryer Prolog.
 
+Tools
+-----
+
+* IMPROVED: The `diagrams` tool support for Prolog module applications is now
+able to detect and report implicit module dependencies that are handled by the
+autoloading mechanism when using SWI-Prolog as the backend compiler.
+
 Ports
 -----
 
