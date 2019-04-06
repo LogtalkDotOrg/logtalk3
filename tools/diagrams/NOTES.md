@@ -130,6 +130,8 @@ relations):
 - exported module predicates  
 	`ellipse` (green)
 
+- directories  
+	`box3d` (3D box, lightyellow)
 - files  
 	`box` (pale turquoise rectangle)
 
@@ -237,6 +239,8 @@ generated diagrams. For entity diagrams the options are:
 	print/omit predicate cross-reference calls (`true` or `false`; default depends on the specific diagram)
 - `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `'./'`)
+- `exclude_directories(Directories)`  
+	list of directories to exclude (default is `[]`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
@@ -286,6 +290,8 @@ For file diagrams the options are:
 	print/omit node type captions (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `'./'`)
+- `exclude_directories(Directories)`  
+	list of directories to exclude (default is `[]`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
@@ -317,6 +323,8 @@ For library diagrams the options are:
 	print/omit node type captions (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `'./'`)
+- `exclude_directories(Directories)`  
+	list of directories to exclude (default is `[]`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  

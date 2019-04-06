@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2017/11/27,
+		date is 2019/04/06,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -295,6 +295,58 @@
 
 	directories(Project, Directories) :-
 		::directories(Project, Directories, []).
+
+	:- public(rdirectory/3).
+	:- mode(rdirectory(+atom, +atom, +list(compound)), one).
+	:- info(rdirectory/3, [
+		comment is 'Creates a diagram for a directory and its sub-directories using the specified options. The Project argument is used as a prefix for the diagram file name.',
+		argnames is ['Project', 'Directory', 'Options']
+	]).
+
+	rdirectory(Project, Directory, UserOptions) :-
+		format_object(Format),
+		merge_options(UserOptions, Options),
+		::reset,
+		::output_file_path(Project, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		(	Format::file_header(diagram_output_file, Project, Options),
+			atom_concat(rdirectory_, Project, Identifier),
+			normalize_directory_paths([Directory], [NormalizedDirectory]),
+			add_link_options(NormalizedDirectory, Options, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Project, rdirectory, GraphOptions),
+			::output_rdirectory(Project, NormalizedDirectory, GraphOptions),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, Project, rdirectory, GraphOptions),
+			Format::file_footer(diagram_output_file, Project, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, Directory, UserOptions)))
+		),
+		close(Stream).
+
+	:- public(rdirectory/2).
+	:- mode(rdirectory(+atom, +atom), one).
+	:- info(rdirectory/2, [
+		comment is 'Creates a diagram for a directory and its sub-directories using default options. The Project argument is used as a prefix for the diagram file name.',
+		argnames is ['Project', 'Directory']
+	]).
+
+	rdirectory(Project, Directory) :-
+		::rdirectory(Project, Directory, []).
+
+	:- public(rdirectory/1).
+	:- mode(rdirectory(+atom), one).
+	:- info(rdirectory/1, [
+		comment is 'Creates a diagram for a directory and its sub-directories using default options. The name of the directory is used as a prefix for the diagram file name.',
+		argnames is ['Directory']
+	]).
+
+	rdirectory(Directory) :-
+		os::absolute_file_name(Directory, Path),
+		os::decompose_file_name(Path, _, Project, _),
+		::rdirectory(Project, Directory, []).
 
 	:- public(directory/3).
 	:- mode(directory(+atom, +atom, +list(compound)), one).
@@ -570,6 +622,44 @@
 		comment is 'Generates diagram output for a library using the specified options.',
 		argnames is ['Library', 'Path', 'Options']
 	]).
+
+	:- protected(output_rdirectory/3).
+	:- mode(output_rdirectory(+atom, +atom, +list(compound)), one).
+	:- info(output_rdirectory/3, [
+		comment is 'Generates diagram output for a directory and its sub-directories using the specified options.',
+		argnames is ['Project', 'Path', 'Options']
+	]).
+
+	output_rdirectory(Project, TopPath, Options) :-
+		format_object(Format),
+		memberchk(exclude_directories(ExcludedDirectories), Options),
+		atom_concat(directory_, Project, TopIdentifier),
+		add_link_options(TopPath, Options, TopGraphOptions),
+		Format::graph_header(diagram_output_file, TopIdentifier, Project, directory, TopGraphOptions),
+		::output_library(Project, TopPath, TopGraphOptions),
+		Format::graph_footer(diagram_output_file, TopIdentifier, Project, directory, TopGraphOptions),
+		sub_directory(TopPath, ExcludedDirectories, Directory, Path),
+			atom_concat(directory_, Directory, Identifier),
+			add_link_options(Path, Options, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Directory, directory, GraphOptions),
+			::output_library(Directory, Path, GraphOptions),
+			Format::graph_footer(diagram_output_file, Identifier, Directory, directory, GraphOptions),
+		fail.
+	output_rdirectory(_, _, _).
+
+	sub_directory(TopPath, ExcludedDirectories, SubDirectory, SubDirectoryPath) :-
+		os::directory_files(TopPath, SubDirectories, [type(directory), dot_files(false), paths(relative)]),
+		member(Directory, SubDirectories),
+		\+ member(Directory, ExcludedDirectories),
+		atom_concat(TopPath, Directory, DirectoryPath0),
+		(	sub_atom(DirectoryPath0, _, 1, 0, '/') ->
+			DirectoryPath = DirectoryPath0
+		;	atom_concat(DirectoryPath0, '/', DirectoryPath)
+		),
+		(	SubDirectory = Directory,
+			SubDirectoryPath = DirectoryPath
+		;	sub_directory(DirectoryPath, ExcludedDirectories, SubDirectory, SubDirectoryPath)
+		).
 
 	:- protected(output_files/2).
 	:- mode(output_files(+list, +list(compound)), one).

@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.9,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2018/02/04,
+		date is 2019/04/06,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parnames is ['Format'],
 		see_also is [file_dependency_diagram(_), library_dependency_diagram(_)]
@@ -117,6 +117,8 @@
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
+	% by default, don't exclude any directories:
+	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
 	% by default, exclude only the "startup" and "scratch_directory" libraries:

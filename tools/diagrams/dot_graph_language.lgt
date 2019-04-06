@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2018/02/01,
+		date is 2019/04/06,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -195,6 +195,7 @@
 	node_shape_style_color(category, component, filled, lightcyan).
 	node_shape_style_color(module, tab, filled, gainsboro).
 	node_shape_style_color(file, box, filled, paleturquoise).
+	node_shape_style_color(directory, box3d, filled, paleturquoise).
 	node_shape_style_color(library, box3d, filled, lightyellow).
 	% external entities to the file or library being documented
 	node_shape_style_color(external_prototype, box, 'filled,dashed', beige).
@@ -354,7 +355,7 @@
 
 		write_term_to_chars(Term, Chars) :-
 			{format(chars(Chars), '~w', [Term])}.
-	
+
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		{:- use_module(library(codesio), [])}.
@@ -372,7 +373,7 @@
 			{format(chars(Chars), '~w', [Term])}.
 
 	:- else.
-	
+
 		write_term_to_chars(_, _) :-
 			fail.
 

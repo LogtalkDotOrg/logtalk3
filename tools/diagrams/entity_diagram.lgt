@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.15,
+		version is 2.16,
 		author is 'Paulo Moura',
-		date is 2019/03/08,
+		date is 2019/04/06,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -746,6 +746,8 @@
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
+	% by default, don't exclude any directories:
+	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
 	% by default, exclude only the "startup" and "scratch_directory" libraries:

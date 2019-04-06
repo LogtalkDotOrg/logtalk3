@@ -5155,6 +5155,8 @@ Predicate index
 
 * :ref:`code_metric <code_metric/0::rdirectory/1>`
 * :ref:`dead_code_scanner <dead_code_scanner/0::rdirectory/1>`
+* :ref:`diagram(Format) <diagram/1::rdirectory/1>`
+* :ref:`diagrams(Format) <diagrams/1::rdirectory/1>`
 * :ref:`lgtdocp <lgtdocp/0::rdirectory/1>`
 * :ref:`wrapper <wrapper/0::rdirectory/1>`
 
@@ -5166,8 +5168,21 @@ Predicate index
 
 
 
+* :ref:`diagram(Format) <diagram/1::rdirectory/2>`
+* :ref:`diagrams(Format) <diagrams/1::rdirectory/2>`
 * :ref:`lgtdocp <lgtdocp/0::rdirectory/2>`
 * :ref:`wrapper <wrapper/0::rdirectory/2>`
+
+``rdirectory/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::rdirectory/3>`
+* :ref:`diagrams(Format) <diagrams/1::rdirectory/3>`
 
 ``rdirectory_score/2``
 ----------------------

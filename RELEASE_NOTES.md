@@ -35,6 +35,9 @@ Prolog adapter and integration files
 Tools
 -----
 
+* ADDED: Predicates `rdirectory/1-3` to the `diagrams` tool for generating
+diagrams for a directory and its sub-directories.
+
 * IMPROVED: The `diagrams` tool support for Prolog module applications is now
 able to detect and report implicit module dependencies that are handled by the
 autoloading mechanism when using SWI-Prolog as the backend compiler.

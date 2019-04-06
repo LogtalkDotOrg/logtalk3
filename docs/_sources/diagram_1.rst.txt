@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.11
-| **Date:** 2017/11/27
+| **Version:** 2.12
+| **Date:** 2019/4/6
 
 | **Compilation flags:**
 |    ``static``
@@ -250,6 +250,69 @@ Creates a diagram for a set of directories using the default options. The Projec
 |    ``directories(Project,Directories)``
 | **Mode and number of proofs:**
 |    ``directories(+atom,+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/3"> </div>
+
+.. index:: rdirectory/3
+.. _diagram/1::rdirectory/3:
+
+``rdirectory/3``
+^^^^^^^^^^^^^^^^
+
+Creates a diagram for a directory and its sub-directories using the specified options. The Project argument is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Project,Directory,Options)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/2"> </div>
+
+.. index:: rdirectory/2
+.. _diagram/1::rdirectory/2:
+
+``rdirectory/2``
+^^^^^^^^^^^^^^^^
+
+Creates a diagram for a directory and its sub-directories using default options. The Project argument is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Project,Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/1"> </div>
+
+.. index:: rdirectory/1
+.. _diagram/1::rdirectory/1:
+
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
+
+Creates a diagram for a directory and its sub-directories using default options. The name of the directory is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -566,6 +629,27 @@ Generates diagram output for a library using the specified options.
 |    ``output_library(Library,Path,Options)``
 | **Mode and number of proofs:**
 |    ``output_library(+atom,+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="output_rdirectory/3"> </div>
+
+.. index:: output_rdirectory/3
+.. _diagram/1::output_rdirectory/3:
+
+``output_rdirectory/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates diagram output for a directory and its sub-directories using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_rdirectory(Project,Path,Options)``
+| **Mode and number of proofs:**
+|    ``output_rdirectory(+atom,+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html

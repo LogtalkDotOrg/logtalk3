@@ -18,13 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(diagrams(_Format)).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2016/05/07,
+		date is 2019/04/06,
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.',
 		parnames is ['Format'],
 		remarks is [
@@ -155,12 +154,48 @@
 	:- public(directories/2).
 	:- mode(directories(+atom, +list(atom)), one).
 	:- info(directories/2, [
-		comment is 'Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file names.',
+		comment is 'Creates all supported diagrams for a directory using default options. The Project argument is used as a prefix for the diagram file names.',
 		argnames is ['Project', 'Directories']
 	]).
 
 	directories(Project, Directories) :-
 		::directories(Project, Directories, []).
+
+	:- public(rdirectory/3).
+	:- mode(rdirectory(+atom, +atom, +list(compound)), one).
+	:- info(rdirectory/3, [
+		comment is 'Creates all supported diagrams for a directory and its sub-directories using the specified options. The Project argument is used as a prefix for the diagram file name.',
+		argnames is ['Project', 'Directory', 'Options']
+	]).
+
+	rdirectory(Project, Directory, Options) :-
+		parameter(1, Format),
+		forall(
+			supported_diagram(rdirectory, Format, Diagram),
+			Diagram::rdirectory(Project, Directory, Options)
+		).
+
+	:- public(rdirectory/2).
+	:- mode(rdirectory(+atom, +atom), one).
+	:- info(rdirectory/2, [
+		comment is 'Creates all supported diagrams for a directory and its sub-directories using default options. The Project argument is used as a prefix for the diagram file name.',
+		argnames is ['Project', 'Directory']
+	]).
+
+	rdirectory(Project, Directory) :-
+		::rdirectory(Project, Directory, []).
+
+	:- public(rdirectory/1).
+	:- mode(rdirectory(+atom), one).
+	:- info(rdirectory/1, [
+		comment is 'Creates all supported diagrams for a directory and its sub-directories using default options. The name of the directory is used as a prefix for the diagram file name.',
+		argnames is ['Directory']
+	]).
+
+	rdirectory(Directory) :-
+		os::absolute_file_name(Directory, Path),
+		os::decompose_file_name(Path, _, Project, _),
+		::rdirectory(Project, Directory, []).
 
 	:- public(directory/3).
 	:- mode(directory(+atom, +atom, +list(compound)), one).
@@ -225,7 +260,7 @@
 	:- public(files/1).
 	:- mode(files(+list(atom)), one).
 	:- info(files/1, [
-		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file names.',
+		comment is 'Creates all supported diagrams for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file names.',
 		argnames is ['Files']
 	]).
 

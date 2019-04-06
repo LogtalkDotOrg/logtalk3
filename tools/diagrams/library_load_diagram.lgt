@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2018/02/04,
+		date is 2019/04/06,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format'],
 		see_also is [library_dependency_diagram(_), file_dependency_diagram(_)]
@@ -88,7 +88,7 @@
 			\+ member(OtherLibrary, ExcludedLibraries),
 			^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory)
 		;	modules_diagram_support::module_property(OtherLibrary, file(Other)) ->
-			% Prolog library module 
+			% Prolog library module
 			^^remember_referenced_prolog_library(OtherLibrary, OtherDirectory)
 		;	% as last resort, use the basename of the file
 			modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
@@ -116,6 +116,8 @@
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
+	% by default, don't exclude any directories:
+	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
 	% by default, exclude only the "startup" and "scratch_directory" libraries:

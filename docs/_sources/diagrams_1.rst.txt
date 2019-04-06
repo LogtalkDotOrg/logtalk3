@@ -9,8 +9,8 @@
 Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.
 
 | **Author:** Paulo Moura
-| **Version:** 2.3
-| **Date:** 2016/5/7
+| **Version:** 2.4
+| **Date:** 2019/4/6
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -240,7 +240,7 @@ Creates all supported diagrams for a set of directories using the specified opti
 ``directories/2``
 ^^^^^^^^^^^^^^^^^
 
-Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file names.
+Creates all supported diagrams for a directory using default options. The Project argument is used as a prefix for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``
@@ -249,6 +249,69 @@ Creates a diagram for a directory using default options. The Project argument is
 |    ``directories(Project,Directories)``
 | **Mode and number of proofs:**
 |    ``directories(+atom,+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/3"> </div>
+
+.. index:: rdirectory/3
+.. _diagrams/1::rdirectory/3:
+
+``rdirectory/3``
+^^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a directory and its sub-directories using the specified options. The Project argument is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Project,Directory,Options)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/2"> </div>
+
+.. index:: rdirectory/2
+.. _diagrams/1::rdirectory/2:
+
+``rdirectory/2``
+^^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a directory and its sub-directories using default options. The Project argument is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Project,Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/1"> </div>
+
+.. index:: rdirectory/1
+.. _diagrams/1::rdirectory/1:
+
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a directory and its sub-directories using default options. The name of the directory is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -366,7 +429,7 @@ Creates all supported diagrams for a set of files using the default options. The
 ``files/1``
 ^^^^^^^^^^^
 
-Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file names.
+Creates all supported diagrams for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``
