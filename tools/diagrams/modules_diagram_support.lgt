@@ -21,9 +21,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.16,
+		version is 0.17,
 		author is 'Paulo Moura',
-		date is 2019/04/05,
+		date is 2019/04/06,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -213,9 +213,7 @@
 			 	functor(Callee0, CalleeFunctor, CalleeArity),
 			 	Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
 			 ;	predicate_property(Callee0, autoload(FromFile)),
-				absolute_file_name(FromFile, FromFilePath, [file_type(prolog)]),
-			 	catch(load_files([FromFilePath]), _, fail),
-				once(module_property(FromModule, file(FromFilePath))) ->
+			 	xref_public_list(FromFile, File, [module(FromModule)]) ->
 			 	functor(Callee0, CalleeFunctor, CalleeArity),
 			 	Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
 			 ;	% assume local predicate
