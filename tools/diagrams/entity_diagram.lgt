@@ -324,7 +324,13 @@
 			append(ExportedPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
-		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| Options]),
+		% use the {}/1 control construct to avoid a warning do to the circular
+		% reference between this object and the xref_diagram object
+		{xref_diagram::diagram_name_suffix(Suffix0)},
+		atom_concat('_module', Suffix0, Suffix),
+		NodeOptions0 = Options,
+		^^add_node_zoom_option(Module, Suffix, Options, NodeOptions0, NodeOptions),
+		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| NodeOptions]),
 		output_module_relations(Module, Options).
 
 	fix_non_terminals([], _, _, []).
