@@ -71,8 +71,7 @@
 			modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
 			OtherDirectory \== Directory,
 			% not a Logtalk generated intermediate Prolog file
-			\+ logtalk::loaded_file_property(_, target(Other)),
-			writeq(loaded_file_property(Other, parent(File))-OtherDirectory), nl
+			\+ logtalk::loaded_file_property(_, target(Other))
 		),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^omit_path_prefix(OtherDirectory, Options, OtherRelative),
