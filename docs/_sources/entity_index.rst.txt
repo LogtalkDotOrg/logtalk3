@@ -24,6 +24,7 @@ Categories
    dead_code_scanner_messages <dead_code_scanner_messages_0>
    debugger_messages <debugger_messages_0>
    diagram(Format) <diagram_1>
+   directory_diagram(Format) <directory_diagram_1>
    file_diagram(Format) <file_diagram_1>
    flags <flags_0>
    flatting <flatting_0>
@@ -78,6 +79,10 @@ Objects
    diagrams <diagrams_0>
    diagrams(Format) <diagrams_1>
    difflist <difflist_0>
+   directory_dependency_diagram <directory_dependency_diagram_0>
+   directory_dependency_diagram(Format) <directory_dependency_diagram_1>
+   directory_load_diagram <directory_load_diagram_0>
+   directory_load_diagram(Format) <directory_load_diagram_1>
    dit_metric <dit_metric_0>
    doc_metric <doc_metric_0>
    doclet <doclet_0>

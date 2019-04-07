@@ -244,7 +244,9 @@
 			).
 		property_source_file(parent(Parent), File) :-
 			{source_file_property(File, load_context(Module, _, _)),
-			 module_property(Module, file(Parent))}.
+			 module_property(Module, file(Parent)),
+			 % verify explicit dependency instead of auto-loading
+			 once(xref_defined(Parent, _, imported(File)))}.
 		property_source_file(parent(Parent), File) :-
 			{source_file_property(File, derived_from(Parent, _))}.
 		property_source_file(directory(Directory), File) :-

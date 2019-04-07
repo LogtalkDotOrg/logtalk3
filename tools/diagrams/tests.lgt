@@ -22,15 +22,18 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/02/18,
+		date is 2019/04/07,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
 	cover(diagram(_)).
 	cover(diagrams(_)).
 	cover(entity_diagram(_)).
+	cover(directory_dependency_diagram(_)).
+	cover(directory_diagram(_)).
+	cover(directory_load_diagram(_)).
 	cover(file_dependency_diagram(_)).
 	cover(file_diagram(_)).
 	cover(file_load_diagram(_)).
@@ -225,6 +228,126 @@
 	test(inheritance_diagram_file_1_01, deterministic) :-
 		object_property(inheritance_diagram, file(File)),
 		inheritance_diagram::file(File).
+
+	% directory_dependency_diagram tests
+
+	test(directory_dependency_diagram_rdirectory_3_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_dependency_diagram::rdirectory(test, LgtunitDirectory, []).
+
+	test(directory_dependency_diagram_rdirectory_2_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_dependency_diagram::rdirectory(test, LgtunitDirectory, []).
+
+	test(directory_dependency_diagram_rdirectory_1_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_dependency_diagram::rdirectory(LgtunitDirectory).
+
+	test(directory_dependency_diagram_directories_3_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_dependency_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+
+	test(directory_dependency_diagram_directories_2_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_dependency_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+
+	test(directory_dependency_diagram_directory_3_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		directory_dependency_diagram::directory(test, DiagramsDirectory, []).
+
+	test(directory_dependency_diagram_directory_2_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		directory_dependency_diagram::directory(test, DiagramsDirectory).
+
+	test(directory_dependency_diagram_directory_1_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		directory_dependency_diagram::directory(DiagramsDirectory).
+
+	test(directory_dependency_diagram_files_3_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, Directory),
+		os::directory_files(Directory, Files0),
+		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
+		directory_dependency_diagram::files(test, Files, []).
+
+	test(directory_dependency_diagram_files_2_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, Directory),
+		os::directory_files(Directory, Files0),
+		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
+		directory_dependency_diagram::files(test, Files).
+
+	test(directory_dependency_diagram_files_1_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, Directory),
+		os::directory_files(Directory, Files0),
+		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
+		directory_dependency_diagram::files(Files).
+
+	test(directory_dependency_diagram_all_files_1_01, deterministic) :-
+		directory_dependency_diagram::all_files([]).
+
+	test(directory_dependency_diagram_all_files_0_01, deterministic) :-
+		directory_dependency_diagram::all_files.
+
+	% directory_load_diagram tests
+
+	test(directory_load_diagram_rdirectory_3_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_load_diagram::rdirectory(test, LgtunitDirectory, []).
+
+	test(directory_load_diagram_rdirectory_2_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_load_diagram::rdirectory(test, LgtunitDirectory, []).
+
+	test(directory_load_diagram_rdirectory_1_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_load_diagram::rdirectory(LgtunitDirectory).
+
+	test(directory_load_diagram_directories_3_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_load_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+
+	test(directory_load_diagram_directories_2_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		directory_load_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+
+	test(directory_load_diagram_directory_3_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		directory_load_diagram::directory(test, DiagramsDirectory, []).
+
+	test(directory_load_diagram_directory_2_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		directory_load_diagram::directory(test, DiagramsDirectory).
+
+	test(directory_load_diagram_directory_1_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		directory_load_diagram::directory(DiagramsDirectory).
+
+	test(directory_load_diagram_files_3_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, Directory),
+		os::directory_files(Directory, Files0),
+		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
+		directory_load_diagram::files(test, Files, []).
+
+	test(directory_load_diagram_files_2_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, Directory),
+		os::directory_files(Directory, Files0),
+		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
+		directory_load_diagram::files(test, Files).
+
+	test(directory_load_diagram_files_1_01, deterministic) :-
+		logtalk::expand_library_path(diagrams, Directory),
+		os::directory_files(Directory, Files0),
+		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
+		directory_load_diagram::files(Files).
+
+	test(directory_load_diagram_all_files_1_01, deterministic) :-
+		directory_load_diagram::all_files([]).
+
+	test(directory_load_diagram_all_files_0_01, deterministic) :-
+		directory_load_diagram::all_files.
 
 	% file_dependency_diagram tests
 

@@ -35,6 +35,9 @@ Prolog adapter and integration files
 Tools
 -----
 
+* ADDED: Support for generating directory loading and directory dependency
+diagrams.
+
 * ADDED: Predicates `rdirectory/1-3` to the `diagrams` tool for generating
 diagrams for a directory and its sub-directories.
 

@@ -20,18 +20,19 @@ ________________________________________________________________________
 Overview
 --------
 
-This tool generates library, file, and entity diagrams for source files
-and for libraries of source files using the Logtalk reflection features
+This tool generates library, directory, file, and entity diagrams for source
+files and for libraries of source files using the Logtalk reflection features
 to collect the relevant information and a graph language for representing
 the diagrams. Limited support is also available for generating diagrams
 for Prolog module applications. It's also possible to generate predicate
 cross-referencing diagrams for plain Prolog files.
 
-Linking library diagrams to entity diagrams to predicate cross-referencing
-diagrams is also supported when using SVG output. This feature allows using
-diagrams for navigating complex code by zooming into details. SVG output
-can also easily link to both source code repositories and API documentation.
-This allows diagrams to be used for source code navigation.
+Linking library and directory diagrams to entity diagrams to predicate
+cross-referencing diagrams is also supported when using SVG output. This
+feature allows using diagrams for navigating complex code by zooming into
+details. SVG output can also easily link to both source code repositories
+and API documentation. This allows diagrams to be used for source code
+navigation.
 
 All diagrams support a comprehensive set of options to customize the final
 contents and appearance.
@@ -81,15 +82,22 @@ File dependency diagrams are specially useful in revealing dependencies
 that are not represented in file loading diagrams due to files being
 loaded indirectly by files external to the libraries being documented.
 
+The following directory diagrams are supported:
+
+- directory loading dependency diagrams which directories load other directories
+- directory dependency diagrams showing which directories contain entities with
+references to entities defined in other directories
+
 The following library diagrams are supported:
 
 - library loading dependency diagrams which libraries load other libraries
 - library dependency diagrams showing which libraries contain entities with
 references to entities defined in other libraries
 
-Library dependency diagrams are specially useful for large applications
-where file diagrams would be too large and complex to be useful, specially
-when combined with the *zoom* option to link to individual library diagrams.
+Library and directory dependency diagrams are specially useful for large
+applications where file diagrams would be too large and complex to be useful,
+specially when combined with the *zoom* option to link to individual library
+diagrams.
 
 A utility object, `diagrams`, is provided for generating all supported
 diagrams in one step. This object provides an interface common to all
@@ -104,8 +112,7 @@ relations):
 
 - libraries  
 	`box3d` (3D box, lightyellow)
-
-- library and file loading and dependency relations  
+- library loading and dependency relations  
 	`normal` (arrow ending with a black triangle)
 
 - objects (classes, instances, and prototypes)  
@@ -132,8 +139,13 @@ relations):
 
 - directories  
 	`box3d` (3D box, lightyellow)
+- directory loading and dependency relations  
+	`normal` (arrow ending with a black triangle)
+
 - files  
 	`box` (pale turquoise rectangle)
+- file loading and dependency relations  
+	`normal` (arrow ending with a black triangle)
 
 - specialization relation  
 	`onormal` (arrow ending with a white triangle)
@@ -151,9 +163,9 @@ relations):
 - uses and use module relations  
 	`rdiamond` (arrow ending with a black half diamond)
 
-The library, file, entity, and predicate nodes that are not part of the
-predicates, entities, files, or libraries for which we are generating a
-diagram use a dashed border.
+The library, directory, file, entity, and predicate nodes that are not part
+of the predicates, entities, files, or libraries for which we are generating
+a diagram use a dashed border.
 
 
 Supported graph languages

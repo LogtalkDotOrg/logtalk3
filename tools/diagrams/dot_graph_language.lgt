@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.13,
+		version is 2.14,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/07,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -195,7 +195,7 @@
 	node_shape_style_color(category, component, filled, lightcyan).
 	node_shape_style_color(module, tab, filled, gainsboro).
 	node_shape_style_color(file, box, filled, paleturquoise).
-	node_shape_style_color(directory, box3d, filled, paleturquoise).
+	node_shape_style_color(directory, box3d, filled, lightyellow).
 	node_shape_style_color(library, box3d, filled, lightyellow).
 	% external entities to the file or library being documented
 	node_shape_style_color(external_prototype, box, 'filled,dashed', beige).
@@ -206,6 +206,7 @@
 	node_shape_style_color(external_category, component, 'filled,dashed', lightcyan).
 	node_shape_style_color(external_module, tab, 'filled,dashed', gainsboro).
 	node_shape_style_color(external_file, box, 'filled,dashed', paleturquoise).
+	node_shape_style_color(external_directory, box3d, 'filled,dashed', lightyellow).
 	node_shape_style_color(external_library, box3d, 'filled,dashed', lightyellow).
 	% predicates of the entities being documented
 	node_shape_style_color(predicate, ellipse, filled, beige).
@@ -261,6 +262,9 @@
 	edge_arrow(depends_on_file, normal).
 	edge_arrow(loads_file, normal).
 	edge_arrow(includes_file, normal).
+	% directory relations
+	edge_arrow(depends_on_directory, normal).
+	edge_arrow(loads_directory, normal).
 	% library relations
 	edge_arrow(depends_on_library, normal).
 	edge_arrow(loads_library, normal).

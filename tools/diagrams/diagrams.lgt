@@ -21,9 +21,9 @@
 :- object(diagrams(_Format)).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/07,
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.',
 		parnames is ['Format'],
 		remarks is [
@@ -297,6 +297,10 @@
 	supported_diagram(_,         Format, xref_diagram(Format)).
 	supported_diagram(_,         Format, file_dependency_diagram(Format)).
 	supported_diagram(_,         Format, file_load_diagram(Format)).
+	supported_diagram(Predicate, Format, directory_dependency_diagram(Format)) :-
+		list::memberchk(Predicate, [directories, rdirectory, directory]).
+	supported_diagram(Predicate, Format, directory_load_diagram(Format)) :-
+		list::memberchk(Predicate, [directories, rdirectory, directory]).
 	supported_diagram(Predicate, Format, library_dependency_diagram(Format)) :-
 		list::memberchk(Predicate, [all_libraries, libraries, rlibrary, library]).
 	supported_diagram(Predicate, Format, library_load_diagram(Format)) :-
@@ -310,10 +314,10 @@
 	extends(diagrams(dot))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/03/09,
-		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the DOT format.'
+		date is 2019/04/07,
+		comment is 'Predicates for generating all supported diagrams for libraries, directories, and files in one step using the DOT format.'
 	]).
 
 :- end_object.
