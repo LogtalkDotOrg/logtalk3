@@ -35,18 +35,17 @@
 	]).
 
 	% first, output the directory node
-	output_library(_, Directory, Options) :-
+	output_library(Project, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^add_directory_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions0),
-		(	logtalk::loaded_file_property(File, directory(Directory)),
-			(	logtalk::loaded_file_property(File, object(_))
-			;	logtalk::loaded_file_property(File, protocol(_))
-			;	logtalk::loaded_file_property(File, category(_))
+		(	(	logtalk::loaded_file_property(_, directory(Directory))
+			;	modules_diagram_support::loaded_file_property(_, directory(Directory))
 			) ->
-			entity_diagram::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Directory, Suffix, Options, NodeOptions0, NodeOptions)
-		;	% no entities for this directory; entity diagram empty
+			parameter(1, Format),
+			file_dependency_diagram(Format)::diagram_name_suffix(Suffix),
+			^^add_node_zoom_option(Project, Suffix, Options, NodeOptions0, NodeOptions)
+		;	% no files for this directory
 			NodeOptions = NodeOptions0
 		),
 		(	member(directory_paths(true), Options) ->

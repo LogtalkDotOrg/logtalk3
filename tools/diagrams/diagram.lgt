@@ -256,7 +256,7 @@
 			atom_concat(directories_, Project, Identifier),
 			Format::graph_header(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
 			normalize_directory_paths(Directories, NormalizedDirectories),
-			output_directories(NormalizedDirectories, Format, Options),
+			output_directories(NormalizedDirectories, Project, Format, Options),
 			::output_externals(Options),
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
@@ -277,14 +277,14 @@
 		),
 		normalize_directory_paths(Directories, NormalizedDirectories).
 
-	output_directories([], _Format, _Options).
-	output_directories([Directory| Directories], Format, Options) :-
+	output_directories([], _Project, _Format, _Options).
+	output_directories([Directory| Directories], Project, Format, Options) :-
 		atom_concat(directory_, Directory, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, Directory, directory, GraphOptions),
-		::output_library(Directory, Directory, GraphOptions),
+		::output_library(Project, Directory, GraphOptions),
 		Format::graph_footer(diagram_output_file, Identifier, Directory, directory, GraphOptions),
-		output_directories(Directories, Format, Options).
+		output_directories(Directories, Project, Format, Options).
 
 	:- public(directories/2).
 	:- mode(directories(+atom, +list(atom)), one).
