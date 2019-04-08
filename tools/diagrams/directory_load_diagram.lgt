@@ -123,8 +123,6 @@
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, use a 'directory_index.html' suffix for entity documentation URLs:
-	default_option(entity_url_suffix_target('directory_index.html', '#')).
 	% by default, don't link to sub-diagrams:
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams

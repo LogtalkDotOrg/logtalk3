@@ -145,8 +145,6 @@
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, exclude only the "startup" and "scratch_directory" libraries:
-	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, don't link to sub-diagrams:
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams

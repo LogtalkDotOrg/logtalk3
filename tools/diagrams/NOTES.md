@@ -306,8 +306,6 @@ For directory and file diagrams the options are:
 	list of directories to exclude (default is `[]`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
-- `exclude_libraries(Libraries)`  
-	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
 	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
