@@ -32,6 +32,12 @@ Prolog adapter and integration files
 
 * ADDED: Unsupported adapter file for Scryer Prolog.
 
+Documentation
+-------------
+
+* ADDED: Predicate cross-referencing diagrams linked from the core, library,
+tools, ports, and contributions inheritance diagrams.
+
 Tools
 -----
 
