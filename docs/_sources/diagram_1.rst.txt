@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.12
-| **Date:** 2019/4/6
+| **Version:** 2.13
+| **Date:** 2019/4/8
 
 | **Compilation flags:**
 |    ``static``
@@ -713,6 +713,27 @@ Outputs external entities using the specified options.
 |    ``output_externals(Options)``
 | **Mode and number of proofs:**
 |    ``output_externals(+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="output_sub_diagrams/1"> </div>
+
+.. index:: output_sub_diagrams/1
+.. _diagram/1::output_sub_diagrams/1:
+
+``output_sub_diagrams/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Outputs sub-diagrams using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_sub_diagrams(Options)``
+| **Mode and number of proofs:**
+|    ``output_sub_diagrams(+list(compound))`` - ``one``
 
 
 .. raw:: html

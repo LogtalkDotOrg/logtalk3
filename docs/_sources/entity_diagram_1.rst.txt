@@ -9,8 +9,8 @@
 Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.
 
 | **Author:** Paulo Moura
-| **Version:** 2.16
-| **Date:** 2019/4/6
+| **Version:** 2.17
+| **Date:** 2019/4/8
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -80,6 +80,20 @@ Private predicates
 .. _entity_diagram/1::included_entity_/1:
 
 ``included_entity_/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="included_module_/1"> </div>
+
+.. index:: included_module_/1
+.. _entity_diagram/1::included_module_/1:
+
+``included_module_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**

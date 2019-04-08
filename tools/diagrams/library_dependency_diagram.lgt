@@ -22,17 +22,20 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2018/02/04,
+		date is 2018/02/08,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parnames is ['Format'],
-		see_also is [library_load_diagram(_), file_load_diagram(_)]
+		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_)]
 	]).
 
 	:- uses(list, [
 		member/2, memberchk/2
 	]).
+
+	:- private(sub_diagrams_/1).
+	:- dynamic(sub_diagrams_/1).
 
 	% first, output the library node
 	output_library(Library, Directory, Options) :-
@@ -45,7 +48,8 @@
 			;	logtalk::loaded_file_property(File, category(_))
 			) ->
 			entity_diagram::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Library, Suffix, Options, NodeOptions0, NodeOptions)
+			^^add_node_zoom_option(Library, Suffix, Options, NodeOptions0, NodeOptions),
+			assertz(sub_diagrams_(Library))
 		;	% no entities for this library; entity diagram empty
 			NodeOptions = NodeOptions0
 		),
@@ -137,6 +141,24 @@
 		category_property(Entity, file(Basename, Directory)).
 	entity_basename_directory(module, Entity, Basename, Directory) :-
 		modules_diagram_support::module_property(Entity, file(Basename, Directory)).
+
+	output_sub_diagrams(Options) :-
+		parameter(1, Format),
+		memberchk(zoom(true), Options),
+		sub_diagrams_(Library),
+%		logtalk::loaded_file_property(File, library(Library)),
+%		(	logtalk::loaded_file_property(File, object(Entity))
+%		;	logtalk::loaded_file_property(File, protocol(Entity))
+%		;	logtalk::loaded_file_property(File, category(Entity))
+%		),
+%		entity_diagram(Format)::entity(Entity, Options),
+		entity_diagram(Format)::library(Library, Options),
+		fail.
+	output_sub_diagrams(_).
+
+	reset :-
+		^^reset,
+		::retractall(sub_diagrams_(_)).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).

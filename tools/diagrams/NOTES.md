@@ -394,19 +394,19 @@ Generating complete diagrams requires that all referenced entities are loaded.
 When that is not the case, notably when generating cross-referencing diagrams,
 missing entities can result in incomplete diagrams.
 
-The Graphviz command-line utilities, e.g. `dot`, are notorious for random
-crashes (segmentation faults usually), often requiring re-doing conversions
-from `.dot` files to other formats. A possible workaround is to repeat the
-command until it completes without error. For example:
-
-	$ for file in *.dot; do flag=0; counter=10; while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; (( --counter )); done; done
-
 The zoom icons, `zoom.png` and `zoom.svg` have been designed by Xinh Studio:
 
 	https://www.iconfinder.com/xinhstudio
 
 Currently, only the `zoom.png` file is used. A copy of this file must exist
 in any directory used for publishing diagrams using it.
+
+The Graphviz command-line utilities, e.g. `dot`, are notorious for random
+crashes (segmentation faults usually), often requiring re-doing conversions
+from `.dot` files to other formats. A possible workaround is to repeat the
+command until it completes without error. For example:
+
+	$ cp "$LOGTALKUSER/tools/diagrams/zoom.png" . && for file in *.dot; do flag=0; counter=10; while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; (( --counter )); done; done
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).

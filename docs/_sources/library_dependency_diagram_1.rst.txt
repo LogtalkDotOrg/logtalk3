@@ -9,8 +9,8 @@
 Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.
 
 | **Author:** Paulo Moura
-| **Version:** 2.8
-| **Date:** 2018/2/4
+| **Version:** 2.9
+| **Date:** 2018/2/8
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,7 +32,19 @@ Protected interface
 Private predicates
 ------------------
 
-(see related entities)
+.. raw:: html
+
+   <div id="sub_diagrams_/1"> </div>
+
+.. index:: sub_diagrams_/1
+.. _library_dependency_diagram/1::sub_diagrams_/1:
+
+``sub_diagrams_/1``
+^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
 
 Operators
 ---------
@@ -46,5 +58,5 @@ Remarks
 
 .. seealso::
 
-   :ref:`library_load_diagram(Format) <library_load_diagram/1>`, :ref:`file_load_diagram(Format) <file_load_diagram/1>`
+   :ref:`library_load_diagram(Format) <library_load_diagram/1>`, :ref:`directory_load_diagram(Format) <directory_load_diagram/1>`, :ref:`file_load_diagram(Format) <file_load_diagram/1>`
 

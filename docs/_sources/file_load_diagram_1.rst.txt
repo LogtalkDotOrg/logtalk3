@@ -9,8 +9,8 @@
 Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.
 
 | **Author:** Paulo Moura
-| **Version:** 2.11
-| **Date:** 2019/4/6
+| **Version:** 2.12
+| **Date:** 2019/4/8
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -46,5 +46,5 @@ Remarks
 
 .. seealso::
 
-   :ref:`file_dependency_diagram(Format) <file_dependency_diagram/1>`, :ref:`library_dependency_diagram(Format) <library_dependency_diagram/1>`
+   :ref:`file_dependency_diagram(Format) <file_dependency_diagram/1>`, :ref:`directory_dependency_diagram(Format) <directory_dependency_diagram/1>`, :ref:`library_dependency_diagram(Format) <library_dependency_diagram/1>`
 

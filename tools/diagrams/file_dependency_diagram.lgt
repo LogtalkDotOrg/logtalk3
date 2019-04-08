@@ -22,12 +22,12 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/08,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format'],
-		see_also is [file_load_diagram(_), library_load_diagram(_)]
+		see_also is [file_load_diagram(_), directory_load_diagram(_), library_load_diagram(_)]
 	]).
 
 	:- uses(list, [

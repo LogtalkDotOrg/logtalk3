@@ -22,12 +22,12 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/08,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parnames is ['Format'],
-		see_also is [file_dependency_diagram(_), library_dependency_diagram(_)]
+		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
 	]).
 
 	:- uses(list, [

@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.16,
+		version is 2.17,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/08,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -50,6 +50,9 @@
 
 	:- private(included_entity_/1).
 	:- dynamic(included_entity_/1).
+
+	:- private(included_module_/1).
+	:- dynamic(included_module_/1).
 
 	:- private(referenced_entity_/1).
 	:- dynamic(referenced_entity_/1).
@@ -79,7 +82,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::file(Source, UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	file(Source) :-
 		file(Source, []).
@@ -101,7 +105,9 @@
 	remember_referenced_entity(Entity) :-
 		(	referenced_entity_(Entity) ->
 			true
-		;	assertz(referenced_entity_(Entity))
+		;	functor(Entity, Functor, Arity),
+			functor(Template, Functor, Arity),
+			assertz(referenced_entity_(Template))
 		).
 
 	remember_referenced_module(Module) :-
@@ -113,30 +119,44 @@
 	reset :-
 		^^reset,
 		retractall(included_entity_(_)),
+		retractall(included_module_(_)),
 		retractall(referenced_entity_(_)),
 		retractall(referenced_module_(_)).
 
-	output_externals(_Options) :-
-		retract(included_entity_(Entity)),
-		retractall(referenced_entity_(Entity)),
-		retractall(referenced_module_(Entity)),
-		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_header(diagram_output_file, other, '(external entities)', external, [urls('',''), tooltip('(external entities)')| Options]),
-		retract(referenced_entity_(Entity)),
+		referenced_entity_(Entity),
+		\+ included_entity_(Entity),
 		add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
 		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
-		retract(referenced_module_(Module)),
+		referenced_module_(Module),
+		\+ included_module_(Module),
 		add_external_entity_documentation_url(module, Module, Options, EntityOptions),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_footer(diagram_output_file, other, '(external entities)', external, [urls('',''), tooltip('(external entities)')| Options]).
+
+	output_sub_diagrams(Options) :-
+		memberchk(zoom(true), Options),
+		included_entity_(Entity),
+		% use the {}/1 control construct to avoid a warning do to the circular
+		% reference between this object and the xref_diagram object
+		{xref_diagram::entity(Entity, Options)},
+		fail.
+	output_sub_diagrams(Options) :-
+		memberchk(zoom(true), Options),
+		included_module_(Module),
+		% use the {}/1 control construct to avoid a warning do to the circular
+		% reference between this object and the xref_diagram object
+		{xref_diagram::entity(Module, Options)},
+		fail.
+	output_sub_diagrams(_).
 
 	process(Basename, Directory, Options) :-
 		memberchk(exclude_entities(ExcludedEntities), Options),
@@ -169,7 +189,7 @@
 		\+ member(Module, ExcludedEntities),
 		add_entity_documentation_url(module, Module, Options, ModuleOptions),
 		output_module(Module, ModuleOptions),
-		assertz(included_entity_(Module)),
+		assertz(included_module_(Module)),
 		fail.
 	process(_, _, _).
 

@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/08,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -57,7 +57,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::libraries(Project, Libraries, UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	output_libraries([], _Format, _Options).
 	output_libraries([Library| Libraries], Format, Options) :-
@@ -113,7 +114,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::all_libraries(UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	output_all_libraries(Options) :-
 		format_object(Format),
@@ -168,7 +170,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rlibrary(Library, UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
@@ -208,7 +211,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::library(Library, UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	output_library(_Library, Directory, Options) :-
 		memberchk(exclude_files(ExcludedFiles), Options),
@@ -266,7 +270,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directories(Project, Directories, UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
@@ -324,7 +329,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, Directory, UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	:- public(rdirectory/2).
 	:- mode(rdirectory(+atom, +atom), one).
@@ -376,7 +382,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, Directory, UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	:- public(directory/2).
 	:- mode(directory(+atom, +atom), one).
@@ -426,7 +433,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::files(Project, Files, UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	output_files([], _Options).
 	output_files([File| Files], Options) :-
@@ -478,7 +486,8 @@
 			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::all_files(UserOptions)))
 		),
-		close(Stream).
+		close(Stream),
+		::output_sub_diagrams(Options).
 
 	output_all_files(Options) :-
 		logtalk::loaded_file(Path),
@@ -684,6 +693,16 @@
 
 	% by default, don't output externals
 	output_externals(_).
+
+	:- protected(output_sub_diagrams/1).
+	:- mode(output_sub_diagrams(+list(compound)), one).
+	:- info(output_sub_diagrams/1, [
+		comment is 'Outputs sub-diagrams using the specified options.',
+		argnames is ['Options']
+	]).
+
+	% by default, don't output sub-diagrams
+	output_sub_diagrams(_).
 
 	:- protected(reset/0).
 	:- mode(reset, one).

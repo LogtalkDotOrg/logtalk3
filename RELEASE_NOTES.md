@@ -35,6 +35,9 @@ Prolog adapter and integration files
 Tools
 -----
 
+* ADDED: Support for generating sub-diagrams when using the `zoom(true)`
+option.
+
 * ADDED: Support for generating directory loading and directory dependency
 diagrams.
 

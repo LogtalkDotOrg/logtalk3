@@ -22,17 +22,20 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 2.8,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/08,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parnames is ['Format'],
-		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_)]
+		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
 	]).
 
 	:- uses(list, [
 		member/2, memberchk/2
 	]).
+
+	:- private(sub_diagrams_/2).
+	:- dynamic(sub_diagrams_/2).
 
 	% first, output the directory node
 	output_library(Project, Directory, Options) :-
@@ -44,7 +47,8 @@
 			)->
 			parameter(1, Format),
 			file_load_diagram(Format)::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Project, Suffix, Options, NodeOptions0, NodeOptions)
+			^^add_node_zoom_option(Project, Suffix, Options, NodeOptions0, NodeOptions),
+			assertz((sub_diagrams_(Project, Directory)))
 		;	% no files for this directory
 			NodeOptions = NodeOptions0
 		),
@@ -85,6 +89,18 @@
 		^^save_edge(Relative, OtherRelative, [loads], loads_directory, [tooltip(loads)| Options]),
 		fail.
 	output_library(_, _, _).
+
+	output_sub_diagrams(Options) :-
+		parameter(1, Format),
+		memberchk(zoom(true), Options),
+		sub_diagrams_(Project, Directory),
+		file_load_diagram(Format)::directory(Project, Directory, Options),
+		fail.
+	output_sub_diagrams(_).
+
+	reset :-
+		^^reset,
+		::retractall(sub_diagrams_(_, _)).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).
