@@ -41,16 +41,15 @@
 	output_library(Project, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		^^add_directory_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions0),
 		(	(	logtalk::loaded_file_property(_, directory(Directory))
 			;	modules_diagram_support::loaded_file_property(_, directory(Directory))
 			) ->
 			parameter(1, Format),
 			file_dependency_diagram(Format)::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Project, Suffix, Options, NodeOptions0, NodeOptions),
+			^^add_node_zoom_option(Project, Suffix, Options, LinkingOptions, NodeOptions),
 			assertz((sub_diagrams_(Project, Directory)))
 		;	% no files for this directory
-			NodeOptions = NodeOptions0
+			NodeOptions = LinkingOptions
 		),
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Relative, Relative, directory, [Relative], directory, NodeOptions)

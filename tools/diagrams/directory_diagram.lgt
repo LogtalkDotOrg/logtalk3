@@ -3,20 +3,15 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/04/07,
+		date is 2019/04/08,
 		comment is 'Common predicates for generating directory diagrams.',
 		parnames is ['Format']
 	]).
 
-	:- uses(list, [member/2, memberchk/2]).
-
-	:- protected(add_directory_documentation_url/4).
-	:- mode(add_directory_documentation_url(+atom, +list(compound), +atom, -list(compound)), one).
-	:- info(add_directory_documentation_url/4, [
-		comment is 'Adds a documentation URL when using the option url_prefixes/2.',
-		argnames is ['Kind', 'Options', 'Directory', 'NodeOptions']
+	:- uses(list, [
+		member/2, memberchk/2
 	]).
 
 	:- protected(remember_included_directory/1).
@@ -80,36 +75,22 @@
 		::retract(referenced_logtalk_directory_(Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		add_directory_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
-			^^output_node(Relative, Relative, directory, [Relative], external_directory, NodeOptions)
-		;	^^output_node(Relative, Relative, directory, [], external_directory, NodeOptions)
+			^^output_node(Relative, Relative, directory, [Relative], external_directory, LinkingOptions)
+		;	^^output_node(Relative, Relative, directory, [], external_directory, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-
 		::retract(referenced_prolog_directory_(Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		add_directory_documentation_url(prolog, LinkingOptions, Relative, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
-			^^output_node(Relative, Relative, directory, [Relative], external_directory, NodeOptions)
-		;	^^output_node(Relative, Relative, directory, [], external_directory, NodeOptions)
+			^^output_node(Relative, Relative, directory, [Relative], external_directory, LinkingOptions)
+		;	^^output_node(Relative, Relative, directory, [], external_directory, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_footer(diagram_output_file, other, '(external directories)', external, [urls('',''), tooltip('(external libraries)')| Options]).
-
-	add_directory_documentation_url(logtalk, Options, Directory, NodeOptions) :-
-		(	member(urls(CodePrefix, DocPrefix), Options) ->
-			memberchk(entity_url_suffix_target(Suffix, Target), Options),
-			atom_concat(DocPrefix, Suffix, URL0),
-			atom_concat(URL0, Target, URL1),
-			atom_concat(URL1, Directory, URL),
-			NodeOptions = [urls(CodePrefix, URL)| Options]
-		;	NodeOptions = Options
-		).
-	% tbd
-	add_directory_documentation_url(prolog, NodeOptions, _, NodeOptions).
 
 :- end_category.
