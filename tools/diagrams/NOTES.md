@@ -260,15 +260,15 @@ generated diagrams. For entity diagrams the options are:
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
-	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default)
+	code and documenting URL prefixes for a path prefix used when generating cluster, library, directory, file, and entity links (atoms; no default)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
-	default code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; defaults are `''`)
+	default code and documenting URL prefixes used when generating cluster, library, directory, file, and entity links (atoms; defaults are `''`)
 - `entity_url_suffix_target(Suffix, Target)`  
 	extension for entity documenting URLs (an atom; default is `'.html'`) and target separating symbols (an atom; default is `'#'`)
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 - `zoom(Boolean)`  
-	add/omit zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
+	generate sub-diagrams and add zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
 	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
@@ -278,7 +278,7 @@ In the particular case of cross-referencing diagrams, there is also the option:
 	syntax for the URL source file line part (an atom; possible values are `{github,gitlab,bitbucket}`; default is `github`);
 	when using this option, the `CodeURLPrefix` should be a permanent link (i.e. it should include the commit SHA1)
 
-For file diagrams the options are:
+For directory and file diagrams the options are:
 
 - `layout(Layout)`  
 	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default is `top_to_bottom`)
@@ -291,9 +291,9 @@ For file diagrams the options are:
 - `file_extensions(Boolean)`  
 	print/omit file name extensions (`true` or `false`; default is `true`)
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
-	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default)
+	code and documenting URL prefixes for a path prefix used when generating cluster, directory, file, and entity links (atoms; no default)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
-	default URL code and documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
+	default URL code and documenting URL prefixes used when generating cluster, directory, file, and entity links (atoms; defaults are `''`)
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 - `relation_labels(Boolean)`  
@@ -309,7 +309,7 @@ For file diagrams the options are:
 - `exclude_libraries(Libraries)`  
 	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
-	add/omit zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
+	generate sub-diagrams and add zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
 	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
@@ -326,7 +326,7 @@ For library diagrams the options are:
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
 	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
-	default URL code and documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
+	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; defaults are `''`)
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 - `relation_labels(Boolean)`  
@@ -342,7 +342,7 @@ For library diagrams the options are:
 - `exclude_libraries(Libraries)`  
 	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
-	add/omit zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
+	generate sub-diagrams and add zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
 	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
