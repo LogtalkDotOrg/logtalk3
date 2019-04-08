@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.21,
+		version is 2.22,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/08,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -123,7 +123,7 @@
 		predicate_kind_caption(Kind, Properties, PredicateKind, Caption),
 		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
 		^^output_node(Predicate, Predicate, Caption, [], PredicateKind, PredicateOptions),
-		assertz(included_predicate_(Predicate)),
+		remember_included_predicate(Predicate),
 		fail.
 	process(Kind, Entity, Options) :-
 		Kind \== protocol,
@@ -139,7 +139,7 @@
 		),
 		memberchk(node_type_captions(Boolean), Options),
 		^^output_node(Predicate, Predicate, local, [], local_predicate, [node_type_captions(Boolean)]),
-		assertz(included_predicate_(Predicate)),
+		remember_included_predicate(Predicate),
 		fail.
 	process(Kind, Entity, Options) :-
 		Kind \== protocol,
@@ -152,7 +152,7 @@
 		),
 		memberchk(node_type_captions(Boolean), Options),
 		^^output_node(Predicate, Predicate, (dynamic), [], local_predicate, [node_type_captions(Boolean)]),
-		assertz(included_predicate_(Predicate)),
+		remember_included_predicate(Predicate),
 		fail.
 	process(Kind, Entity, Options) :-
 		Kind \== protocol,
@@ -161,7 +161,7 @@
 		(	Kind == module ->
 			memberchk(node_type_captions(Boolean), Options),
 			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, [node_type_captions(Boolean)]),
-			assertz(included_predicate_(':'(To,Predicate)))
+			remember_included_predicate(':'(To,Predicate))
 		;	(	current_object(To) ->
 				ToKind = object
 			;	ToKind = category
@@ -170,10 +170,10 @@
 			member(non_terminal(NonTerminal), DeclaresProperties) ->
 			add_predicate_documentation_url(Options, Entity, To::NonTerminal, PredicateOptions),
 			^^output_node(To::NonTerminal, To::NonTerminal, (multifile), [], multifile_predicate, PredicateOptions),
-			assertz(included_predicate_(To::NonTerminal))
+			remember_included_predicate(To::NonTerminal)
 		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
 			^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
-			assertz(included_predicate_(To::Predicate))
+			remember_included_predicate(To::Predicate)
 		),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -201,10 +201,15 @@
 		^^save_edge(Caller, Callee, ['super call'], calls_super_predicate, [tooltip('super call')| XRefOptions]),
 		fail.
 	process(Kind, Entity, Options) :-
-		calls_external_predicate(Kind, Entity, Caller, Line, Callee),
-		remember_external_predicate(Callee),
-		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
+		calls_external_predicate(Kind, Entity, Caller, Line, Callee0),
+		remember_external_predicate(Callee0),
+		\+ ^^edge(Caller, Callee0, [calls], calls_predicate, _),
 		add_xref_code_url(Options, Entity, Line, XRefOptions),
+		(	Callee0 = Other::Predicate ->
+			^^ground_entity_identifier(object, Other, Name),
+			Callee = Name::Predicate
+		;	Callee = Callee0
+		),
 		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| XRefOptions]),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -576,16 +581,34 @@
 		retractall(referenced_predicate_(_)),
 		retractall(external_predicate_(_)).
 
-	remember_referenced_predicate(Predicate) :-
-		(	referenced_predicate_(Predicate) ->
+	remember_included_predicate(Reference) :-
+		(	included_predicate_(Reference) ->
 			true
-		;	assertz(referenced_predicate_(Predicate))
+		;	Reference = Entity::Predicate ->
+			functor(Entity, Functor, Arity),
+			functor(Template, Functor, Arity),
+			assertz(included_predicate_(Template::Predicate))
+		;	assertz(included_predicate_(Reference))
 		).
 
-	remember_external_predicate(Predicate) :-
-		(	external_predicate_(Predicate) ->
+	remember_referenced_predicate(Reference) :-
+		(	referenced_predicate_(Reference) ->
 			true
-		;	assertz(external_predicate_(Predicate))
+		;	Reference = Entity::Predicate ->
+			functor(Entity, Functor, Arity),
+			functor(Template, Functor, Arity),
+			assertz(referenced_predicate_(Template::Predicate))
+		;	assertz(referenced_predicate_(Reference))
+		).
+
+	remember_external_predicate(Reference) :-
+		(	external_predicate_(Reference) ->
+			true
+		;	Reference = Entity::Predicate ->
+			functor(Entity, Functor, Arity),
+			functor(Template, Functor, Arity),
+			assertz(external_predicate_(Template::Predicate))
+		;	assertz(external_predicate_(Reference))
 		).
 
 	output_external_predicates(Options) :-
@@ -602,7 +625,7 @@
 		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.
 	output_external_predicates(Options) :-
-		retract(referenced_predicate_(Predicate)),
+		retract(external_predicate_(Predicate)),
 		memberchk(node_type_captions(Boolean), Options),
 		^^output_node(Predicate, Predicate, external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.

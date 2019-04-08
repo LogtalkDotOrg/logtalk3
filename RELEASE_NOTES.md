@@ -45,6 +45,10 @@ diagrams for a directory and its sub-directories.
 able to detect and report implicit module dependencies that are handled by the
 autoloading mechanism when using SWI-Prolog as the backend compiler.
 
+* FIXED: Bug when generating predicate cross-referencing diagrams where a call
+to a multifile predicate for a parametric entity would result in a duplicated
+node.
+
 Ports
 -----
 
