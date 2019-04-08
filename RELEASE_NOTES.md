@@ -35,6 +35,9 @@ Prolog adapter and integration files
 Tools
 -----
 
+* CHANGED: Default value for the `entity_url_suffix_target/2` option for the
+library diagrams for compatibility with Sphinx-based API documentation.
+
 * ADDED: Support for generating sub-diagrams when using the `zoom(true)`
 option.
 

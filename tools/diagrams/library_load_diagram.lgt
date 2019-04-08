@@ -22,7 +22,7 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.9,
+		version is 2.11,
 		author is 'Paulo Moura',
 		date is 2019/04/08,
 		comment is 'Predicates for generating library loading dependency diagrams.',
@@ -41,7 +41,7 @@
 	output_library(Library, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		^^add_library_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions0),
+		^^add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions0),
 		(	logtalk::loaded_file_property(File, library(Library)),
 			(	logtalk::loaded_file_property(File, object(_))
 			;	logtalk::loaded_file_property(File, protocol(_))
@@ -106,12 +106,6 @@
 		parameter(1, Format),
 		memberchk(zoom(true), Options),
 		sub_diagrams_(Library),
-%		logtalk::loaded_file_property(File, library(Library)),
-%		(	logtalk::loaded_file_property(File, object(Entity))
-%		;	logtalk::loaded_file_property(File, protocol(Entity))
-%		;	logtalk::loaded_file_property(File, category(Entity))
-%		),
-%		entity_diagram(Format)::entity(Entity, Options),
 		entity_diagram(Format)::library(Library, Options),
 		fail.
 	output_sub_diagrams(_).
@@ -144,8 +138,8 @@
 	default_option(exclude_files([])).
 	% by default, exclude only the "startup" and "scratch_directory" libraries:
 	default_option(exclude_libraries([startup, scratch_directory])).
-	% by default, use a 'directory_index.html' suffix for entity documentation URLs:
-	default_option(entity_url_suffix_target('directory_index.html', '#')).
+	% by default, use a 'library_index.html' suffix for entity documentation URLs:
+	default_option(entity_url_suffix_target('library_index.html', '#')).
 	% by default, don't zooming into libraries and entities:
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for zoom linked diagrams

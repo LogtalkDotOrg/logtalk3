@@ -9,8 +9,8 @@
 Common predicates for generating library diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.2
-| **Date:** 2016/10/13
+| **Version:** 2.3
+| **Date:** 2019/4/8
 
 | **Compilation flags:**
 |    ``static``
@@ -43,7 +43,7 @@ Adds a documentation URL when using the option url_prefixes/2.
 |    ``static``
 
 | **Template:**
-|    ``add_library_documentation_url(Kind,Options,Directory,NodeOptions)``
+|    ``add_library_documentation_url(Kind,Options,Library,NodeOptions)``
 | **Mode and number of proofs:**
 |    ``add_library_documentation_url(+atom,+list(compound),+atom,-list(compound))`` - ``one``
 

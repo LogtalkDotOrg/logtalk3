@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/10/13,
+		date is 2019/04/08,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -16,7 +16,7 @@
 	:- mode(add_library_documentation_url(+atom, +list(compound), +atom, -list(compound)), one).
 	:- info(add_library_documentation_url/4, [
 		comment is 'Adds a documentation URL when using the option url_prefixes/2.',
-		argnames is ['Kind', 'Options', 'Directory', 'NodeOptions']
+		argnames is ['Kind', 'Options', 'Library', 'NodeOptions']
 	]).
 
 	:- protected(remember_included_library/2).
@@ -80,7 +80,7 @@
 		::retract(referenced_logtalk_library_(Library, Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		add_library_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions),
+		add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
 			^^output_node(Relative, Library, library, [Relative], external_library, NodeOptions)
 		;	^^output_node(Relative, Library, library, [], external_library, NodeOptions)
@@ -90,7 +90,7 @@
 		::retract(referenced_prolog_library_(Library, Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		add_library_documentation_url(prolog, LinkingOptions, Relative, NodeOptions),
+		add_library_documentation_url(prolog, LinkingOptions, Library, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
 			^^output_node(Relative, Library, library, [Relative], external_library, NodeOptions)
 		;	^^output_node(Relative, Library, library, [], external_library, NodeOptions)
@@ -100,12 +100,12 @@
 		^^format_object(Format),
 		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [urls('',''), tooltip('(external libraries)')| Options]).
 
-	add_library_documentation_url(logtalk, Options, Directory, NodeOptions) :-
+	add_library_documentation_url(logtalk, Options, Library, NodeOptions) :-
 		(	member(urls(CodePrefix, DocPrefix), Options) ->
 			memberchk(entity_url_suffix_target(Suffix, Target), Options),
 			atom_concat(DocPrefix, Suffix, URL0),
 			atom_concat(URL0, Target, URL1),
-			atom_concat(URL1, Directory, URL),
+			atom_concat(URL1, Library, URL),
 			NodeOptions = [urls(CodePrefix, URL)| Options]
 		;	NodeOptions = Options
 		).
