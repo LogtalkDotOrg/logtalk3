@@ -268,9 +268,9 @@ generated diagrams. For entity diagrams the options are:
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 - `zoom(Boolean)`  
-	generate sub-diagrams and add zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
+	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
-	extension for zoom linked diagrams (an atom; default is `'.svg'`)
+	extension for linked diagrams (an atom; default is `'.svg'`)
 
 In the particular case of cross-referencing diagrams, there is also the option:
 
@@ -309,9 +309,9 @@ For directory and file diagrams the options are:
 - `exclude_libraries(Libraries)`  
 	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
-	generate sub-diagrams and add zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
+	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
-	extension for zoom linked diagrams (an atom; default is `'.svg'`)
+	extension for linked diagrams (an atom; default is `'.svg'`)
 
 For library diagrams the options are:
 
@@ -342,9 +342,9 @@ For library diagrams the options are:
 - `exclude_libraries(Libraries)`  
 	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
-	generate sub-diagrams and add zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
+	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
-	extension for zoom linked diagrams (an atom; default is `'.svg'`)
+	extension for linked diagrams (an atom; default is `'.svg'`)
 
 The option `omit_path_prefixes(Prefixes)` with a non-empty list of prefixes
 should be used together with the option `directory_paths(true)`, in particular

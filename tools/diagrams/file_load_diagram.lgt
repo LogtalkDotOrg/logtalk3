@@ -123,9 +123,9 @@
 	default_option(exclude_files([])).
 	% by default, exclude only the "startup" and "scratch_directory" libraries:
 	default_option(exclude_libraries([startup, scratch_directory])).
-	% by default, don't zooming into libraries and entities:
+	% by default, don't link to sub-diagrams:
 	default_option(zoom(false)).
-	% by default, use a '.svg' extension for zoom linked diagrams
+	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_file_load_diagram').

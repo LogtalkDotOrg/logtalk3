@@ -176,9 +176,9 @@
 	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, use a 'library_index.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('library_index.html', '#')).
-	% by default, don't zooming into libraries and entities:
+	% by default, don't link to sub-diagrams:
 	default_option(zoom(false)).
-	% by default, use a '.svg' extension for zoom linked diagrams
+	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_library_dependency_diagram').
