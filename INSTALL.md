@@ -131,7 +131,7 @@ For POSIX systems using a bash shell, edit and add the following lines to your
 
     LOGTALKHOME=/your/logtalk/installation/directory
     LOGTALKUSER="$HOME/logtalk"
-    PATH="$PATH:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration"
+    PATH="$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration"
     MANPATH="$MANPATH:$LOGTALKHOME/man"
     export LOGTALKHOME LOGTALKUSER PATH MANPATH
 
@@ -140,7 +140,7 @@ If you use instead a csh shell, edit and add the following lines to your
 
     setenv LOGTALKHOME /your/logtalk/installation/directory
     setenv LOGTALKUSER ${HOME}/logtalk
-    setenv PATH ${PATH}:${LOGTALKHOME}/tools/lgtdoc/xml:${LOGTALKHOME}/scripts:${LOGTALKHOME}/integration
+    setenv PATH ${PATH}:${LOGTALKHOME}/tools/diagrams:${LOGTALKHOME}/tools/lgtdoc/xml:${LOGTALKHOME}/scripts:${LOGTALKHOME}/integration
     setenv MANPATH ${MANPATH}:${LOGTALKHOME}/man
 
 Don't use relative paths such as `../` or `./` in the definition of the environment

@@ -63,6 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/tools
 /usr/local/share/logtalk
 /usr/local/bin/logtalk_user_setup
+/usr/local/bin/lgt2svg
 /usr/local/bin/lgt2pdf
 /usr/local/bin/lgt2html
 /usr/local/bin/lgt2xml
@@ -92,6 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/eclipselgt.1.gz
 /usr/local/share/man/man1/gplgt.1.gz
 /usr/local/share/man/man1/jiplgt.1.gz
+/usr/local/share/man/man1/lgt2svg.1.gz
 /usr/local/share/man/man1/lgt2html.1.gz
 /usr/local/share/man/man1/lgt2pdf.1.gz
 /usr/local/share/man/man1/lgt2xml.1.gz
@@ -120,9 +122,8 @@ echo
 
 echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
 echo "\"logtalk_version_select\", \"logtalk_tester\", \"logtalk_doclet\","
-echo "\"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\", \"lgt2rst\" and"
-echo "\"lgt2txt\" scripts have been created on \"/usr/local/bin\";"
-echo "ensure that this directory is in your execution path."
+echo "\"lgt2svg\", \"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\","
+echo "\"lgt2rst\" and \"lgt2txt\" scripts have been created on \"/usr/local/bin\"."
 echo
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"

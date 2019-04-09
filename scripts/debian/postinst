@@ -48,8 +48,8 @@ fi
 echo
 echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
 echo "\"logtalk_version_select\", \"logtalk_tester\", \"logtalk_doclet\","
-echo "\"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\", and \"lgt2txt\""
-echo "scripts have been created on \"/usr/bin\"."
+echo "\"lgt2svg\", \"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\","
+echo "\"lgt2rst\" and \"lgt2txt\" scripts have been created on \"/usr/bin\"."
 echo
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"

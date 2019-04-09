@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Distribution clean script for packaging
-##   Last updated on October 4, 2018
+##   Last updated on April 9, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -55,5 +55,7 @@ chmod a+x scripts/docker/swi-prolog/*.sh
 chmod a+x scripts/linux/*.sh
 chmod a+x scripts/macosx/postflight
 chmod a+x scripts/macosx/command_files/*.command
+chmod a+x tools/diagrams/*.sh
+chmod a+x tools/diagrams/*.js
 chmod a+x tools/lgtdoc/xml/*.sh
 chmod a-x tools/lgtdoc/xml/*.js

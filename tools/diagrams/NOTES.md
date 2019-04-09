@@ -27,12 +27,12 @@ the diagrams. Limited support is also available for generating diagrams
 for Prolog module applications. It's also possible to generate predicate
 cross-referencing diagrams for plain Prolog files.
 
-Linking library and directory diagrams to entity diagrams to predicate
-cross-referencing diagrams is also supported when using SVG output. This
-feature allows using diagrams for navigating complex code by zooming into
-details. SVG output can also easily link to both source code repositories
-and API documentation. This allows diagrams to be used for source code
-navigation.
+Linking library diagrams to entity diagrams to predicate cross-referencing
+diagrams and linking directory diagrams to file diagrams is also supported
+when using SVG output. This feature allows using diagrams for navigating
+complex code by zooming into details. SVG output can also easily link to
+both source code repositories and API documentation. This allows diagrams
+to be used for source code navigation.
 
 All diagrams support a comprehensive set of options to customize the final
 contents and appearance.
@@ -173,7 +173,7 @@ Supported graph languages
 
 Currently only the DOT graph language is supported (tested with Graphviz
 version 2.38.0; visit the <http://www.graphviz.org/> website for more
-information). Versions 2.40 and 2.41 have a nasty regression in the SVG
+information. Some of the more recent have a nasty regression in the SVG
 exporter where text overflows the boxes that should contain it.
 
 The diagrams `.dot` files are created on the current directory by default.
@@ -184,8 +184,8 @@ simply type:
 	dot -Tpdf diagram.dot > diagram.pdf
 
 This usually works fine for entity and predicate call cross-referencing
-diagrams. For file diagrams, the `circo` command-line executable often
-produces better results:
+diagrams. For directory and file diagrams, the `circo` command-line
+executable may produce better results:
 
 	circo -Tpdf diagram.dot > diagram.pdf
 
@@ -196,6 +196,15 @@ Some output formats such as SVG support tooltips and URL links, which can
 be used for showing e.g. entity types, relation types, file paths, and for
 navigating to files and directories of files (libraries). See the relevant
 diagram options below in order to take advantage of these features.
+
+Sample helper scripts are provided for converting `.dot` files to `.svg`
+files:
+
+- `lgt2svg.sh` for POSIX systems
+- `lgt2svg.js` and `lgt2svg.bat` for Windows systems
+
+The scripts assume that the `dot` executable is available from the system
+path.
 
 When generating diagrams for multiple libraries or directories, it's possible
 to split a diagram with several disconnected library or directory graphs using
@@ -407,7 +416,7 @@ in any directory used for publishing diagrams using it.
 The Graphviz command-line utilities, e.g. `dot`, are notorious for random
 crashes (segmentation faults usually), often requiring re-doing conversions
 from `.dot` files to other formats. A possible workaround is to repeat the
-command until it completes without error. For example:
+command until it completes without error. For example, on a POSIX system:
 
 	$ cp "$LOGTALKUSER/tools/diagrams/zoom.png" . && for file in *.dot; do flag=0; counter=10; while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; (( --counter )); done; done
 

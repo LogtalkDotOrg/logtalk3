@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on December 30, 2018
+##   Last updated on April 9, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -149,6 +149,7 @@ ln -sf "$LOGTALKHOME"/integration "$LOGTALKUSER"/integration
 ln -sf "$LOGTALKHOME"/manuals "$LOGTALKUSER"/manuals
 ln -sf "$LOGTALKHOME"/paths "$LOGTALKUSER"/paths
 ln -sf "$LOGTALKHOME"/scripts "$LOGTALKUSER"/scripts
+ln -sf "$LOGTALKHOME"/tools/diagrams/lgt2svg.sh "$LOGTALKUSER"/tools/diagrams/lgt2svg
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2html.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2html
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2pdf.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2pdf
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2xml.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2xml

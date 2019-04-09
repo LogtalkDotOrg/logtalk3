@@ -57,6 +57,9 @@ diagrams.
 * ADDED: Predicates `rdirectory/1-3` to the `diagrams` tool for generating
 diagrams for a directory and its sub-directories.
 
+* ADDED: POSIX and Windows scripts for converting Graphviz `.dot` files into
+`.svg` files to the `diagrams` tool.
+
 * IMPROVED: The `diagrams` tool support for Prolog module applications is now
 able to detect and report implicit module dependencies that are handled by the
 autoloading mechanism when using SWI-Prolog as the backend compiler.

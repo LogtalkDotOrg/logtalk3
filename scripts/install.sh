@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on October 12, 2018
+##   Last updated on April 9, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -124,6 +124,7 @@ ln -sf ../share/logtalk/scripts/logtalk_doclet.sh logtalk_doclet
 ln -sf ../share/logtalk/scripts/logtalk_user_setup.sh logtalk_user_setup
 cp -f ../share/logtalk/scripts/logtalk_version_select.sh logtalk_version_select
 ln -sf ../share/logtalk/scripts/logtalk_backend_select.sh logtalk_backend_select
+ln -sf ../share/logtalk/tools/diagrams/lgt2svg.sh lgt2svg
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2pdf.sh lgt2pdf
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2html.sh lgt2html
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2xml.sh lgt2xml
@@ -133,8 +134,8 @@ ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2txt.sh lgt2txt
 
 echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
 echo "\"logtalk_version_select\", \"logtalk_tester\", \"logtalk_doclet\","
-echo "\"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\", \"lgt2rst\" and"
-echo "\"lgt2txt\" scripts have been created on \"$prefix/bin\";"
+echo "\"lgt2svg\", \"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\","
+echo "\"lgt2rst\" and \"lgt2txt\" scripts have been created on \"$prefix/bin\";"
 echo "ensure that this directory is in your execution path."
 echo
 

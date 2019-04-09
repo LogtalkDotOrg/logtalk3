@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on January 31, 2019
+##   Last updated on April 9, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -67,6 +67,7 @@ rm -f cxlgt
 rm -f eclipselgt
 rm -f gplgt
 rm -f jiplgt
+rm -f lgt2svg
 rm -f lgt2html
 rm -f lgt2pdf
 rm -f lgt2xml
@@ -92,6 +93,7 @@ rm -f cxlgt.1.gz
 rm -f eclipselgt.1.gz
 rm -f gplgt.1.gz
 rm -f jiplgt.1.gz
+rm -f lgt2svg.1.gz
 rm -f lgt2html.1.gz
 rm -f lgt2pdf.1.gz
 rm -f lgt2xml.1.gz
