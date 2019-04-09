@@ -1,0 +1,72 @@
+.. index:: shell
+.. _shell/0:
+
+**object**
+
+``shell``
+=========
+
+User frontend to start the application.
+
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2019/3/20
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="welcome/0"> </div>
+
+.. index:: welcome/0
+.. _shell/0::welcome/0:
+
+``welcome/0``
+^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="start/0"> </div>
+
+.. index:: start/0
+.. _shell/0::start/0:
+
+``start/0``
+^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
