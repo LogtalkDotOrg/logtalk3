@@ -1,23 +1,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
-%  
+%  This file is part of Logtalk <https://logtalk.org/>
+%
 %  Copyright 2016 Metagol authors
 %  Copyright 2018-2019 Paulo Moura
 %  All rights reserved.
-%  
+%
 %  Redistribution and use in source and binary forms, with or without
 %  modification, are permitted provided that the following conditions
 %  are met:
-%  
+%
 %  1. Redistributions of source code must retain the above copyright
 %     notice, this list of conditions and the following disclaimer.
-%  
+%
 %  2. Redistributions in binary form must reproduce the above copyright
 %     notice, this list of conditions and the following disclaimer in
 %     the documentation and/or other materials provided with the
 %     distribution.
-%  
+%
 %  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 %  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 %  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -40,11 +40,6 @@
 :- object(higher_order3,
 	extends(metagol)).
 
-	%% tell metagol to use the BK
-	prim(divisible2/1).
-	prim(divisible5/1).
-	interpreted(filter/3).
-
 	%% metarules
 	metarule([P,Q],([P,A]:-[[Q,A]])).
 	metarule([P,Q,F],([P,A,B]:-[[Q,A,B,F]])).
@@ -54,12 +49,21 @@
 	divisible5(X) :- 0 is X mod 5.
 	divisible2(X) :- 0 is X mod 2.
 
+	:- meta_predicate(filter(*, *, 1)).
 	filter([],[],_F).
 	filter([A|T1],[A|T2],F) :-
 		call(F,A),
 		filter(T1,T2,F).
 	filter([_|T1],T2,F) :-
 		filter(T1,T2,F).
+
+	%% tell metagol to use the BK
+	prim(divisible2/1).
+	prim(divisible5/1).
+
+	interpreted_bk([filter,[],[],_],[]).
+	interpreted_bk([filter,[A|T1],[A|T2],F],[[F,A],[filter,T1,T2,F]]).
+	interpreted_bk([filter,[_|T1],T2,F],[[filter,T1,T2,F]]).
 
 	:- public(learn/1).
 	learn(Clauses) :-
