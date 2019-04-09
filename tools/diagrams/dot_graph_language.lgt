@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.14,
+		version is 2.15,
 		author is 'Paulo Moura',
-		date is 2019/04/07,
+		date is 2019/04/09,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -151,7 +151,9 @@
 		write_key_value_comma(Stream, shape, Shape),
 		(	(	Kind == file, member(urls(URL, _), Options)
 			;	Kind == external_file, member(urls(URL, _), Options)
-			;	member(urls(_, URL), Options)	% entities or predicates
+			;	Kind == directory, member(urls(URL, _), Options)
+			;	Kind == external_directory, member(urls(URL, _), Options)
+			;	member(urls(_, URL), Options)	% libraries, entities, or predicates
 			),
 			URL \== '' ->
 			write_key_value_comma(Stream, 'URL', URL),
