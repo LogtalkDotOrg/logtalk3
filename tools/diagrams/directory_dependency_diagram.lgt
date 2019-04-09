@@ -22,9 +22,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/04/08,
+		date is 2019/04/09,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parnames is ['Format'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -148,10 +148,13 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
-	% by default, don't generate cluster, file, and entity URLs:
-	default_option(url_prefixes('', '')).
-	% by default, don't omit any path prefixes when printing paths:
-	default_option(omit_path_prefixes([])).
+	% by default, use a home directory URL for the source code:
+	default_option(url_prefixes(URL, '')) :-
+		logtalk::expand_library_path(home, HOME),
+		atom_concat('file://', HOME, URL).
+	% by default, omit the home directory path prefix when printing paths:
+	default_option(omit_path_prefixes([HOME])) :-
+		logtalk::expand_library_path(home, HOME).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
 	% by default, print relation labels:

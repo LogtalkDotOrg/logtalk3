@@ -41,6 +41,10 @@ tools, ports, and contributions inheritance diagrams.
 Tools
 -----
 
+* CHANGED: Default values for the `url_prefixes/2` and `omit_path_prefixes/1`
+diagram options to use the home directory URL and path as the default prefixes
+for source code directories and files.
+
 * CHANGED: Default value for the `entity_url_suffix_target/2` option for the
 library diagrams for compatibility with Sphinx-based API documentation.
 

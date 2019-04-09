@@ -262,11 +262,11 @@ generated diagrams. For entity diagrams the options are:
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
 	code and documenting URL prefixes for a path prefix used when generating cluster, library, directory, file, and entity links (atoms; no default)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
-	default code and documenting URL prefixes used when generating cluster, library, directory, file, and entity links (atoms; defaults are `''`)
+	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; default is the home directory URL for `CodeURLPrefix` and `''` for `DocURLPrefix`)
 - `entity_url_suffix_target(Suffix, Target)`  
 	extension for entity documenting URLs (an atom; default is `'.html'`) and target separating symbols (an atom; default is `'#'`)
 - `omit_path_prefixes(Prefixes)`  
-	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
+	omit common path prefixes when printing directory paths (a list of atoms; default is a list with the home directory path)
 - `zoom(Boolean)`  
 	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
@@ -293,9 +293,9 @@ For directory and file diagrams the options are:
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
 	code and documenting URL prefixes for a path prefix used when generating cluster, directory, file, and entity links (atoms; no default)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
-	default URL code and documenting URL prefixes used when generating cluster, directory, file, and entity links (atoms; defaults are `''`)
+	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; default is the home directory URL for `CodeURLPrefix` and `''` for `DocURLPrefix`)
 - `omit_path_prefixes(Prefixes)`  
-	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
+	omit common path prefixes when printing directory paths (a list of atoms; default is a list with the home directory path)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
 - `node_type_captions(Boolean)`  
@@ -324,9 +324,9 @@ For library diagrams the options are:
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
 	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
-	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; defaults are `''`)
+	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; default is the home directory URL for `CodeURLPrefix` and `''` for `DocURLPrefix`)
 - `omit_path_prefixes(Prefixes)`  
-	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
+	omit common path prefixes when printing directory paths (a list of atoms; default is a list with the home directory path)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
 - `node_type_captions(Boolean)`  
