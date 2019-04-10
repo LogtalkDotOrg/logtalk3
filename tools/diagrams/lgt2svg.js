@@ -74,7 +74,7 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 	var dot_file = files.item().name;
 	if (FSObject.GetExtensionName(file) == "dot") {
 		WScript.Echo("  converting " + dot_file);
-		var svg_file = WshShell.CurrentDirectory + "\\" + FSObject.GetBaseName(file) + ".svg";
+		var svg_file = WshShell.CurrentDirectory + "\\" + FSObject.GetBaseName(dot_file) + ".svg";
 		WshShell.Run("dot.exe -Tsvg \"" + dot_file + "\" > \"" + svg_file + "\"", true);
 	}
 }
