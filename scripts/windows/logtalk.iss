@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on January 23, 2019
+; Last updated on April 10, 2019
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -115,6 +115,7 @@ Source: "{#MyBaseDir}\tests-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestNa
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 
 Source: "{#MyBaseDir}\scripts\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminLoggedOn
+Source: "{#MyBaseDir}\tools\diagrams\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminLoggedOn
 Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminLoggedOn
 
 [INI]
