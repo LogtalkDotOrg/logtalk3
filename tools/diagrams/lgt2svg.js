@@ -61,6 +61,7 @@ else {
 	WScript.Quit(1);
 }
 
+var FSObject = new ActiveXObject("Scripting.FileSystemObject");
 
 FSObject.CopyFile(logtalk_user + "\\tools\\diagrams\\zoom.png", WshShell.CurrentDirectory + "\\zoom.png");
 
