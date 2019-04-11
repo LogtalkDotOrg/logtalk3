@@ -63,8 +63,8 @@
 
 	entity(Entity, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, predicate, Entity)),
 		entity_kind(Entity, Kind, GroundEntity, Name),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, Kind, Entity)),
 		atom_concat(Name, '_', Identifier0),
 		atom_concat(Identifier0, Kind, Identifier),
 		^^format_object(Format),
@@ -82,7 +82,7 @@
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
 			Format::file_footer(diagram_output_file, Identifier, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram(Self, predicate, Entity))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, Kind, Entity))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::entity(Entity, UserOptions)))
 		),
@@ -686,7 +686,7 @@
 
 	diagram_name_suffix('_xref_diagram').
 
-	message_diagram_description_prefix('cross-referencing').
+	message_diagram_description('cross-referencing').
 
 :- end_object.
 

@@ -130,7 +130,7 @@
 
 	diagram_name_suffix('_directory_load_diagram').
 
-	message_diagram_description_prefix('directory load').
+	message_diagram_description('directory load').
 
 :- end_object.
 

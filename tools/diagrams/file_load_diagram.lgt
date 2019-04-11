@@ -131,7 +131,7 @@
 
 	diagram_name_suffix('_file_load_diagram').
 
-	message_diagram_description_prefix('file load').
+	message_diagram_description('file load').
 
 :- end_object.
 

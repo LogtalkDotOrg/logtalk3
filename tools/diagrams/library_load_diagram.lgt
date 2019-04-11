@@ -150,7 +150,7 @@
 
 	diagram_name_suffix('_library_load_diagram').
 
-	message_diagram_description_prefix('library load').
+	message_diagram_description('library load').
 
 :- end_object.
 

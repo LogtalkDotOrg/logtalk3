@@ -797,7 +797,7 @@
 
 	diagram_name_suffix('_entity_diagram').
 
-	message_diagram_description_prefix('entity').
+	message_diagram_description('entity').
 
 :- end_object.
 

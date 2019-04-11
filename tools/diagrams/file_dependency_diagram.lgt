@@ -155,7 +155,7 @@
 
 	diagram_name_suffix('_file_dependency_diagram').
 
-	message_diagram_description_prefix('file dependency').
+	message_diagram_description('file dependency').
 
 :- end_object.
 

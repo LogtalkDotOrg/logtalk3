@@ -157,7 +157,7 @@
 
 	rlibrary(Library, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, rlibrary, Library)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -173,7 +173,7 @@
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
 			Format::file_footer(diagram_output_file, Library, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram(Self, rlibrary, Library))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rlibrary(Library, UserOptions)))
 		),
@@ -321,7 +321,7 @@
 
 	rdirectory(Project, Directory, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, rdirectory, Directory)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -337,7 +337,7 @@
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Project, rdirectory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram(Self, rdirectory, Directory))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, Directory))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, Directory, UserOptions)))
 		),
@@ -1055,12 +1055,12 @@
 	% the main reason to not write directly to an output stream is to
 	% allow other tools such as IDEs to intercept and handle results
 
-	:- protected(message_diagram_description_prefix/1).
+	:- protected(message_diagram_description/1).
 
 	% default definition; should never be required
-	message_diagram_description_prefix(Prefix) :-
+	message_diagram_description(Description) :-
 		self(Self),
-		functor(Self, Prefix, _).
+		functor(Self, Description, _).
 
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
@@ -1079,23 +1079,14 @@
 	logtalk::message_tokens(Message, diagrams) -->
 		message_tokens(Message).
 
-	message_tokens(generating_diagram(Self, Diagram, For)) -->
-		{Self::message_diagram_description_prefix(Prefix),
-		 message_diagram_description(Diagram, Description)},
-		['Generating ~w ~w diagram for ~q ... '-[Prefix, Description, For]].
-	message_tokens(generated_diagram(_Self, _Diagram, _For)) -->
+	message_tokens(generating_diagram(Self, Kind, For)) -->
+		{Self::message_diagram_description(Description)},
+		['Generating ~w diagram for ~w ~q ... '-[Description, Kind, For]].
+	message_tokens(generated_diagram(_Self, _Kind, _For)) -->
 		[at_same_line, 'done'-[], nl].
 	message_tokens(generating_diagram_failed(Message)) -->
 		[nl, 'Generating diagram failed: ~q'-[Message], nl].
 	message_tokens(entity_not_loaded(Entity)) -->
 		[nl, 'Referenced entity not loaded: ~q'-[Entity], nl].
-
-	message_diagram_description(rlibrary, 'recursive library').
-	message_diagram_description(library, 'library').
-	message_diagram_description(rdirectory, 'recursive directory').
-	message_diagram_description(directory, 'directory').
-	message_diagram_description(file, 'file').
-	message_diagram_description(entity, 'entity').
-	message_diagram_description(predicate, 'predicate').
 
 :- end_category.

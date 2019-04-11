@@ -171,7 +171,7 @@
 
 	diagram_name_suffix('_directory_dependency_diagram').
 
-	message_diagram_description_prefix('directory dependency').
+	message_diagram_description('directory dependency').
 
 :- end_object.
 

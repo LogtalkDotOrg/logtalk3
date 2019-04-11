@@ -79,7 +79,7 @@
 
 	diagram_name_suffix('_inheritance_diagram').
 
-	message_diagram_description_prefix('inheritance').
+	message_diagram_description('inheritance').
 
 :- end_object.
 

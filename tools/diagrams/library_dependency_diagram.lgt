@@ -186,7 +186,7 @@
 
 	diagram_name_suffix('_library_dependency_diagram').
 
-	message_diagram_description_prefix('library dependency').
+	message_diagram_description('library dependency').
 
 :- end_object.
 

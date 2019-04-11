@@ -80,7 +80,7 @@
 
 	diagram_name_suffix('_uses_diagram').
 
-	message_diagram_description_prefix('uses').
+	message_diagram_description('uses').
 
 :- end_object.
 
