@@ -60,6 +60,10 @@ diagrams for a directory and its sub-directories.
 * ADDED: POSIX and Windows scripts for converting Graphviz `.dot` files into
 `.svg` files to the `diagrams` tool.
 
+* UPDATED: The `diagrams` tool predicates to print log messages for the
+diagrams being created. These log messages can be suppressed by setting the
+`report` flag to `warnings` or `off`.
+
 * IMPROVED: The `diagrams` tool support for Prolog module applications is now
 able to detect and report implicit module dependencies that are handled by the
 autoloading mechanism when using SWI-Prolog as the backend compiler.

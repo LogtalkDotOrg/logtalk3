@@ -21,9 +21,9 @@
 :- object(diagrams(_Format)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2019/04/07,
+		date is 2019/04/11,
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.',
 		parnames is ['Format'],
 		remarks is [
@@ -290,21 +290,21 @@
 	all_files :-
 		::all_files([]).
 
-	% supported_diagram(+atom, -entity_identifier)
+	% supported_diagram(+atom, -nonvar, -entity_identifier)
 	supported_diagram(_,         Format, entity_diagram(Format)).
 	supported_diagram(_,         Format, inheritance_diagram(Format)).
 	supported_diagram(_,         Format, uses_diagram(Format)).
 	supported_diagram(_,         Format, xref_diagram(Format)).
 	supported_diagram(_,         Format, file_dependency_diagram(Format)).
 	supported_diagram(_,         Format, file_load_diagram(Format)).
-	supported_diagram(Predicate, Format, directory_dependency_diagram(Format)) :-
-		list::memberchk(Predicate, [directories, rdirectory, directory]).
-	supported_diagram(Predicate, Format, directory_load_diagram(Format)) :-
-		list::memberchk(Predicate, [directories, rdirectory, directory]).
-	supported_diagram(Predicate, Format, library_dependency_diagram(Format)) :-
-		list::memberchk(Predicate, [all_libraries, libraries, rlibrary, library]).
-	supported_diagram(Predicate, Format, library_load_diagram(Format)) :-
-		list::memberchk(Predicate, [all_libraries, libraries, rlibrary, library]).
+	supported_diagram(Kind, Format, directory_dependency_diagram(Format)) :-
+		list::memberchk(Kind, [directories, rdirectory, directory]).
+	supported_diagram(Kind, Format, directory_load_diagram(Format)) :-
+		list::memberchk(Kind, [directories, rdirectory, directory]).
+	supported_diagram(Kind, Format, library_dependency_diagram(Format)) :-
+		list::memberchk(Kind, [all_libraries, libraries, rlibrary, library]).
+	supported_diagram(Kind, Format, library_load_diagram(Format)) :-
+		list::memberchk(Kind, [all_libraries, libraries, rlibrary, library]).
 
 :- end_object.
 

@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.14
-| **Date:** 2019/4/8
+| **Version:** 2.15
+| **Date:** 2019/4/11
 
 | **Compilation flags:**
 |    ``static``
@@ -1005,6 +1005,20 @@ Adds node zoom options when using the zoom option.
 |    ``add_node_zoom_option(Identifier,Suffix,Options,NodeOptions0,NodeOptions)``
 | **Mode and number of proofs:**
 |    ``add_node_zoom_option(+atom,+atom,+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="message_diagram_description_prefix/1"> </div>
+
+.. index:: message_diagram_description_prefix/1
+.. _diagram/1::message_diagram_description_prefix/1:
+
+``message_diagram_description_prefix/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
 
 
 Private predicates

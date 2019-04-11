@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.23,
+		version is 2.24,
 		author is 'Paulo Moura',
-		date is 2019/04/09,
+		date is 2019/04/11,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -62,6 +62,8 @@
 	:- dynamic(external_predicate_/1).
 
 	entity(Entity, UserOptions) :-
+		self(Self),
+		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, predicate, Entity)),
 		entity_kind(Entity, Kind, GroundEntity, Name),
 		atom_concat(Name, '_', Identifier0),
 		atom_concat(Identifier0, Kind, Identifier),
@@ -80,9 +82,8 @@
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
 			Format::file_footer(diagram_output_file, Identifier, Options) ->
-			true
+			logtalk::print_message(comment, diagrams, generated_diagram_for(Self, predicate, Entity))
 		;	% failure is usually caused by errors in the source itself
-			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::entity(Entity, UserOptions)))
 		),
 		close(Stream).
@@ -684,6 +685,8 @@
 	default_option(url_line_references(github)).
 
 	diagram_name_suffix('_xref_diagram').
+
+	message_diagram_description_prefix('cross-referencing').
 
 :- end_object.
 

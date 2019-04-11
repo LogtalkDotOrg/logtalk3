@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2019/04/09,
+		date is 2019/04/11,
 		comment is 'Predicates for generating entity diagrams with only uses and use_module relation edges.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), xref_diagram(_)]
@@ -79,6 +79,8 @@
 	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_uses_diagram').
+
+	message_diagram_description_prefix('uses').
 
 :- end_object.
 

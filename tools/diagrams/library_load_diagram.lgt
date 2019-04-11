@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2019/04/09,
+		date is 2019/04/11,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_)]
@@ -149,6 +149,8 @@
 	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_library_load_diagram').
+
+	message_diagram_description_prefix('library load').
 
 :- end_object.
 

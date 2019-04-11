@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.13,
+		version is 2.14,
 		author is 'Paulo Moura',
-		date is 2019/04/09,
+		date is 2019/04/11,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parnames is ['Format'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
@@ -130,6 +130,8 @@
 	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_file_load_diagram').
+
+	message_diagram_description_prefix('file load').
 
 :- end_object.
 

@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.18,
+		version is 2.19,
 		author is 'Paulo Moura',
-		date is 2019/04/09,
+		date is 2019/04/11,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -61,6 +61,8 @@
 	:- dynamic(referenced_module_/1).
 
 	file(Source, UserOptions) :-
+		self(Self),
+		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, file, Source)),
 		^^format_object(Format),
 		^^locate_file(Source, Basename, Extension, Directory, Path),
 		atom_concat(Name, Extension, Basename),
@@ -77,9 +79,8 @@
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			Format::file_footer(diagram_output_file, Basename, Options) ->
-			true
+			logtalk::print_message(comment, diagrams, generated_diagram_for(Self, file, Source))
 		;	% failure is usually caused by errors in the source itself
-			self(Self),
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::file(Source, UserOptions)))
 		),
 		close(Stream),
@@ -795,6 +796,8 @@
 	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_entity_diagram').
+
+	message_diagram_description_prefix('entity').
 
 :- end_object.
 

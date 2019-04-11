@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2019/04/09,
+		date is 2019/04/11,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -78,6 +78,8 @@
 	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_inheritance_diagram').
+
+	message_diagram_description_prefix('inheritance').
 
 :- end_object.
 

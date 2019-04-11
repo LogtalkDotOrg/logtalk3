@@ -22,7 +22,7 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2019/04/11,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
@@ -129,6 +129,8 @@
 	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_directory_load_diagram').
+
+	message_diagram_description_prefix('directory load').
 
 :- end_object.
 
