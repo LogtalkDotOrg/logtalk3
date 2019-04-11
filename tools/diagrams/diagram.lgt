@@ -720,9 +720,9 @@
 		argnames is ['Identifier', 'Label', 'Caption', 'Contents', 'Kind', 'Options']
 	]).
 
-	output_node(Identifier, Label, Caption, Lines, Kind, Options) :-
+	output_node(Identifier, Label, Caption, Contents, Kind, Options) :-
 		format_object(Format),
-		Format::node(diagram_output_file, Identifier, Label, Caption, Lines, Kind, Options).
+		Format::node(diagram_output_file, Identifier, Label, Caption, Contents, Kind, Options).
 
 	:- protected(edge/5).
 	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom, ?list(compound)), zero_or_more).

@@ -22,9 +22,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/04/09,
+		date is 2019/04/11,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parnames is ['Format'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -51,10 +51,7 @@
 		;	% no files for this directory
 			NodeOptions = LinkingOptions
 		),
-		(	member(directory_paths(true), Options) ->
-			^^output_node(Relative, Relative, directory, [Relative], directory, NodeOptions)
-		;	^^output_node(Relative, Relative, directory, [], directory, NodeOptions)
-		),
+		^^output_node(Relative, Relative, directory, [], directory, NodeOptions),
 		^^remember_included_directory(Directory),
 		fail.
 	% second, output edges for all directories that this directory refers to

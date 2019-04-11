@@ -353,10 +353,6 @@ For library diagrams the options are:
 - `zoom_url_suffix(Suffix)`  
 	extension for linked diagrams (an atom; default is `'.svg'`)
 
-To generate diagrams that can be relocated in the local file system without
-breaking the links to directories and files, use the `directory_paths(true)`
-option.
-
 The option `omit_path_prefixes(Prefixes)` with a non-empty list of prefixes
 should be used together with the option `directory_paths(true)`, in particular
 when generating library, directory, or file diagrams that reference external

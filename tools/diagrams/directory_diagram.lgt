@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/04/08,
+		date is 2019/04/11,
 		comment is 'Common predicates for generating directory diagrams.',
 		parnames is ['Format']
 	]).
@@ -75,19 +75,13 @@
 		::retract(referenced_logtalk_directory_(Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		(	memberchk(directory_paths(true), Options) ->
-			^^output_node(Relative, Relative, directory, [Relative], external_directory, LinkingOptions)
-		;	^^output_node(Relative, Relative, directory, [], external_directory, LinkingOptions)
-		),
+		^^output_node(Relative, Relative, directory, [], external_directory, LinkingOptions),
 		fail.
 	output_externals(Options) :-
 		::retract(referenced_prolog_directory_(Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		(	memberchk(directory_paths(true), Options) ->
-			^^output_node(Relative, Relative, directory, [Relative], external_directory, LinkingOptions)
-		;	^^output_node(Relative, Relative, directory, [], external_directory, LinkingOptions)
-		),
+		^^output_node(Relative, Relative, directory, [], external_directory, LinkingOptions),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
