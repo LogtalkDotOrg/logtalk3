@@ -63,7 +63,7 @@
 	output_libraries([], _Format, _Options).
 	output_libraries([Library| Libraries], Format, Options) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, library, Library)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		logtalk_library_path(Library, _),
 		logtalk::expand_library_path(Library, Directory),
 		atom_concat(library_, Library, Identifier),
@@ -71,7 +71,7 @@
 		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Directory, GraphOptions),
 		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
-		logtalk::print_message(comment, diagrams, generated_diagram_for(Self, library, Library)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library)),
 		output_libraries(Libraries, Format, Options).
 
 	:- public(libraries/2).
@@ -129,13 +129,13 @@
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
 		% loaded library
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, library, Library)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		atom_concat(library_, Library, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Directory, GraphOptions),
 		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
-		logtalk::print_message(comment, diagrams, generated_diagram_for(Self, library, Library)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library)),
 		fail.
 	output_all_libraries(_).
 
@@ -157,7 +157,7 @@
 
 	rlibrary(Library, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, rlibrary, Library)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, rlibrary, Library)),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -173,7 +173,7 @@
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
 			Format::file_footer(diagram_output_file, Library, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram_for(Self, rlibrary, Library))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, rlibrary, Library))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rlibrary(Library, UserOptions)))
 		),
@@ -199,7 +199,7 @@
 
 	library(Library, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, library, Library)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -215,7 +215,7 @@
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
 			Format::file_footer(diagram_output_file, Library, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram_for(Self, library, Library))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::library(Library, UserOptions)))
 		),
@@ -293,13 +293,13 @@
 	output_directories([], _Project, _Format, _Options).
 	output_directories([Directory| Directories], Project, Format, Options) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, directory, Directory)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
 		atom_concat(directory_, Directory, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, Directory, directory, GraphOptions),
 		::output_library(Project, Directory, GraphOptions),
 		Format::graph_footer(diagram_output_file, Identifier, Directory, directory, GraphOptions),
-		logtalk::print_message(comment, diagrams, generated_diagram_for(Self, directory, Directory)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, Directory)),
 		output_directories(Directories, Project, Format, Options).
 
 	:- public(directories/2).
@@ -321,7 +321,7 @@
 
 	rdirectory(Project, Directory, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, rdirectory, Directory)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, rdirectory, Directory)),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -337,7 +337,7 @@
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Project, rdirectory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram_for(Self, rdirectory, Directory))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, rdirectory, Directory))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, Directory, UserOptions)))
 		),
@@ -375,7 +375,7 @@
 
 	directory(Project, Directory, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, directory, Directory)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -391,7 +391,7 @@
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Project, directory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram_for(Self, directory, Directory))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, Directory))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, Directory, UserOptions)))
 		),
@@ -452,11 +452,11 @@
 	output_files([], _Options).
 	output_files([File| Files], Options) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, file, File)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, File)),
 		locate_file(File, Basename, _, Directory, Path),
 		add_link_options(Path, Options, FileOptions),
 		::output_file(Path, Basename, Directory, FileOptions),
-		logtalk::print_message(comment, diagrams, generated_diagram_for(Self, file, File)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, File)),
 		output_files(Files, Options).
 
 	:- public(files/2).
@@ -510,9 +510,9 @@
 		logtalk::loaded_file(Path),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, file, Path)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Path)),
 		::output_file(Path, Basename, Directory, Options),
-		logtalk::print_message(comment, diagrams, generated_diagram_for(Self, file, Path)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Path)),
 		fail.
 	output_all_files(Options) :-
 		self(Self),
@@ -526,9 +526,9 @@
 			logtalk::loaded_file(Other)
 		)),
 		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, file, Path)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Path)),
 		::output_file(Path, Basename, Directory, Options),
-		logtalk::print_message(comment, diagrams, generated_diagram_for(Self, file, Path)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Path)),
 		fail.
 	output_all_files(_).
 
@@ -1079,14 +1079,12 @@
 	logtalk::message_tokens(Message, diagrams) -->
 		message_tokens(Message).
 
-	message_tokens(generating_diagram_for(Self, Diagram, For)) -->
+	message_tokens(generating_diagram(Self, Diagram, For)) -->
 		{Self::message_diagram_description_prefix(Prefix),
 		 message_diagram_description(Diagram, Description)},
-		['Generating ~w ~w diagram for ~q ...'-[Prefix, Description, For], nl].
-	message_tokens(generated_diagram_for(Self, Diagram, For)) -->
-		{Self::message_diagram_description_prefix(Prefix),
-		 message_diagram_description(Diagram, Description)},
-		['... generated ~w ~w diagram for ~q'-[Prefix, Description, For], nl].
+		['Generating ~w ~w diagram for ~q ... '-[Prefix, Description, For]].
+	message_tokens(generated_diagram(_Self, _Diagram, _For)) -->
+		[at_same_line, 'done'-[], nl].
 	message_tokens(generating_diagram_failed(Message)) -->
 		[nl, 'Generating diagram failed: ~q'-[Message], nl].
 	message_tokens(entity_not_loaded(Entity)) -->

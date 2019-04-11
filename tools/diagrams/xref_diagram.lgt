@@ -63,7 +63,7 @@
 
 	entity(Entity, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, predicate, Entity)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, predicate, Entity)),
 		entity_kind(Entity, Kind, GroundEntity, Name),
 		atom_concat(Name, '_', Identifier0),
 		atom_concat(Identifier0, Kind, Identifier),
@@ -82,7 +82,7 @@
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
 			Format::file_footer(diagram_output_file, Identifier, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram_for(Self, predicate, Entity))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, predicate, Entity))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::entity(Entity, UserOptions)))
 		),

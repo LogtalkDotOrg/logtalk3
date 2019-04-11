@@ -62,7 +62,7 @@
 
 	file(Source, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram_for(Self, file, Source)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Source)),
 		^^format_object(Format),
 		^^locate_file(Source, Basename, Extension, Directory, Path),
 		atom_concat(Name, Extension, Basename),
@@ -79,7 +79,7 @@
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			Format::file_footer(diagram_output_file, Basename, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram_for(Self, file, Source))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Source))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::file(Source, UserOptions)))
 		),
