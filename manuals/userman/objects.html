@@ -230,8 +230,8 @@ Logtalk objects provide separated namespaces or databases allowing the
 partitioning of code in more manageable parts. Logtalk is a <em>declarative
 programming language</em> and does not aim to bring some sort of new dynamic
 state change concept to Logic Programming or Prolog.</p>
-<p>Logtalk, defines two built-in objects, <a class="reference external" href="https://logtalk.org/library/user_0.html#user-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">user</span></a> and
-<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">logtalk</span></a>, which are described at the end of this
+<p>Logtalk, defines two built-in objects, <a class="reference external" href="https://logtalk.org/library/user_0.html#user-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">user</span></a> and
+<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">logtalk</span></a>, which are described at the end of this
 section.</p>
 <div class="section" id="objects-prototypes-classes-and-instances">
 <span id="objects-kind"></span><h2>Objects, prototypes, classes, and instances<a class="headerlink" href="#objects-prototypes-classes-and-instances" title="Permalink to this headline">¶</a></h2>
@@ -787,28 +787,28 @@ permission (<code class="docutils literal notranslate"><span class="pre">allow</
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt><dd><p>List of private predicates declared by the object</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a predicate declared by the object</p>
+<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for a predicate declared by the object</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">defines(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a predicate defined by the object</p>
+<dt><code class="docutils literal notranslate"><span class="pre">defines(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for a predicate defined by the object</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">includes(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for an object multifile predicate that are defined
+<dt><code class="docutils literal notranslate"><span class="pre">includes(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for an object multifile predicate that are defined
 in the specified entity (the properties include
 <code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
 multifile predicate clause)</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">provides(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for other entity multifile predicate that are
+<dt><code class="docutils literal notranslate"><span class="pre">provides(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for other entity multifile predicate that are
 defined in the object (the properties include
 <code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
 multifile predicate clause)</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the object
+<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the object
 (the properties include <code class="docutils literal notranslate"><span class="pre">for(Original)</span></code>, <code class="docutils literal notranslate"><span class="pre">from(Entity)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">non_terminal(NonTerminal)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code>
 being the begin line of the alias directive)</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for predicate calls made by the object (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
+<dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for predicate calls made by the object (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
 is either a predicate indicator or a control construct such as
 <code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> with a predicate indicator as argument; note
 that <code class="docutils literal notranslate"><span class="pre">Call</span></code> may not be ground in case of a call to a control
@@ -818,7 +818,7 @@ include <code class="docutils literal notranslate"><span class="pre">caller(Call
 predicate indicators and <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
 predicate clause or directive making the call)</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for dynamic predicate updates (and also access
+<dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for dynamic predicate updates (and also access
 using the <code class="docutils literal notranslate"><span class="pre">clause/2</span></code> predicate) made by the object (<code class="docutils literal notranslate"><span class="pre">Predicate</span></code>
 is either a predicate indicator or a control construct such as
 <code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> with a predicate indicator as argument; note
@@ -874,7 +874,7 @@ for multifile predicates <em>contributed</em> by other entities.</p>
 application.</p>
 <div class="section" id="the-built-in-pseudo-object-user">
 <span id="objects-user"></span><h3>The built-in pseudo-object <em>user</em><a class="headerlink" href="#the-built-in-pseudo-object-user" title="Permalink to this headline">¶</a></h3>
-<p>Logtalk defines a built-in, pseudo-object named <a class="reference external" href="https://logtalk.org/library/user_0.html#user-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">user</span></a>
+<p>Logtalk defines a built-in, pseudo-object named <a class="reference external" href="https://logtalk.org/library/user_0.html#user-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">user</span></a>
 that virtually contains all user predicate definitions not encapsulated in
 a Logtalk entity. These predicates are assumed to be implicitly declared
 public. Messages sent from this pseudo-object, which includes messages sent

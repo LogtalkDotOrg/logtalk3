@@ -227,9 +227,9 @@ similar meaning. Logtalk allows predicate declarations of any scope
 within protocols, contrary to some languages that only allow public
 declarations.</p>
 <p>Logtalk defines three built-in protocols,
-<a class="reference external" href="https://logtalk.org/library/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">monitoring</span></a>,
-<a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">expanding</span></a>, and
-<a class="reference external" href="https://logtalk.org/library/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">forwarding</span></a>, which are described at the
+<a class="reference external" href="https://logtalk.org/library/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">monitoring</span></a>,
+<a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">expanding</span></a>, and
+<a class="reference external" href="https://logtalk.org/library/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">forwarding</span></a>, which are described at the
 end of this section.</p>
 <div class="section" id="defining-a-new-protocol">
 <span id="protocols-defining"></span><h2>Defining a new protocol<a class="headerlink" href="#defining-a-new-protocol" title="Permalink to this headline">¶</a></h2>
@@ -429,9 +429,9 @@ applicable)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt><dd><p>List of private predicates declared by the protocol</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a predicate declared by the protocol</p>
+<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for a predicate declared by the protocol</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of properties for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the protocol
+<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for a <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> declared by the protocol
 (the properties include <code class="docutils literal notranslate"><span class="pre">for(Original)</span></code>, <code class="docutils literal notranslate"><span class="pre">from(Entity)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">non_terminal(NonTerminal)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code>
 being the begin line of the alias directive)</p>
@@ -490,7 +490,7 @@ for any application.</p>
 <div class="section" id="the-built-in-protocol-expanding">
 <span id="protocols-expanding"></span><h3>The built-in protocol <em>expanding</em><a class="headerlink" href="#the-built-in-protocol-expanding" title="Permalink to this headline">¶</a></h3>
 <p>Logtalk defines a built-in protocol named
-<a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">expanding</span></a> that declares
+<a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">expanding</span></a> that declares
 the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>
 predicates. See the description of the <a class="reference internal" href="programming.html#flag-hook"><span class="std std-ref">hook</span></a>
 compiler flag for more details.</p>
@@ -498,14 +498,14 @@ compiler flag for more details.</p>
 <div class="section" id="the-built-in-protocol-monitoring">
 <span id="protocols-monitoring"></span><h3>The built-in protocol <em>monitoring</em><a class="headerlink" href="#the-built-in-protocol-monitoring" title="Permalink to this headline">¶</a></h3>
 <p>Logtalk defines a built-in protocol named
-<a class="reference external" href="https://logtalk.org/library/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">monitoring</span></a> declares the
+<a class="reference external" href="https://logtalk.org/library/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">monitoring</span></a> declares the
 <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a> public event handler
 predicates. See the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more details.</p>
 </div>
 <div class="section" id="the-built-in-protocol-forwarding">
 <span id="protocols-forwarding"></span><h3>The built-in protocol <em>forwarding</em><a class="headerlink" href="#the-built-in-protocol-forwarding" title="Permalink to this headline">¶</a></h3>
 <p>Logtalk defines a built-in protocol named
-<a class="reference external" href="https://logtalk.org/library/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.25.0)"><span class="xref std std-ref">forwarding</span></a> that declares the
+<a class="reference external" href="https://logtalk.org/library/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.26.0)"><span class="xref std std-ref">forwarding</span></a> that declares the
 <a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a> user-defined message forwarding
 handler, which is automatically called (if defined) by the runtime for
 any message that the receiving object does not understand. See also the

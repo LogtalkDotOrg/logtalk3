@@ -720,28 +720,28 @@ The following object properties are supported:
 ``private(Predicates)``
    List of private predicates declared by the object
 ``declares(Predicate, Properties)``
-   List of properties for a predicate declared by the object
+   List of :ref:`properties <grammar_entity_properties>` for a predicate declared by the object
 ``defines(Predicate, Properties)``
-   List of properties for a predicate defined by the object
+   List of :ref:`properties <grammar_entity_properties>` for a predicate defined by the object
 ``includes(Predicate, Entity, Properties)``
-   List of properties for an object multifile predicate that are defined
+   List of :ref:`properties <grammar_entity_properties>` for an object multifile predicate that are defined
    in the specified entity (the properties include
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
    ``line_count(Line)`` with ``Line`` being the begin line of the
    multifile predicate clause)
 ``provides(Predicate, Entity, Properties)``
-   List of properties for other entity multifile predicate that are
+   List of :ref:`properties <grammar_entity_properties>` for other entity multifile predicate that are
    defined in the object (the properties include
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
    ``line_count(Line)`` with ``Line`` being the begin line of the
    multifile predicate clause)
 ``alias(Predicate, Properties)``
-   List of properties for a :term:`predicate alias` declared by the object
+   List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the object
    (the properties include ``for(Original)``, ``from(Entity)``,
    ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
    being the begin line of the alias directive)
 ``calls(Call, Properties)``
-   List of properties for predicate calls made by the object (``Call``
+   List of :ref:`properties <grammar_entity_properties>` for predicate calls made by the object (``Call``
    is either a predicate indicator or a control construct such as
    ``::/1-2`` or ``^^/1`` with a predicate indicator as argument; note
    that ``Call`` may not be ground in case of a call to a control
@@ -751,7 +751,7 @@ The following object properties are supported:
    predicate indicators and ``Line`` being the begin line of the
    predicate clause or directive making the call)
 ``updates(Predicate, Properties)``
-   List of properties for dynamic predicate updates (and also access
+   List of :ref:`properties <grammar_entity_properties>` for dynamic predicate updates (and also access
    using the ``clause/2`` predicate) made by the object (``Predicate``
    is either a predicate indicator or a control construct such as
    ``::/1-2`` or ``:/2`` with a predicate indicator as argument; note

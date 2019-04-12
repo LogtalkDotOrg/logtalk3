@@ -294,9 +294,9 @@ The following protocol properties are supported:
 ``private(Predicates)``
    List of private predicates declared by the protocol
 ``declares(Predicate, Properties)``
-   List of properties for a predicate declared by the protocol
+   List of :ref:`properties <grammar_entity_properties>` for a predicate declared by the protocol
 ``alias(Predicate, Properties)``
-   List of properties for a :term:`predicate alias` declared by the protocol
+   List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the protocol
    (the properties include ``for(Original)``, ``from(Entity)``,
    ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
    being the begin line of the alias directive)
