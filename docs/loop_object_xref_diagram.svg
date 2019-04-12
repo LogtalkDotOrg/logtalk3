@@ -10,7 +10,7 @@
 <title>loop_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-365.8528 1302,-365.8528 1302,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_loop_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt">
@@ -22,6 +22,7 @@
 <!-- foreach/4 -->
 <g id="node1" class="node">
 <title>foreach/4</title>
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L55">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1218" cy="-303.6396" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="1182" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1188" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">foreach/4</text>
@@ -29,10 +30,13 @@
 <text text-anchor="start" x="1182" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1207" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1248" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- foreach_inv/5 -->
 <g id="node6" class="node">
 <title>foreach_inv/5</title>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L59">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1199" cy="-69.2132" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="1150" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1156" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">foreach_inv/5</text>
@@ -40,6 +44,8 @@
 <text text-anchor="start" x="1150" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1188" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1242" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- foreach/4&#45;&gt;foreach_inv/5 -->
 <g id="edge3" class="edge">
@@ -57,6 +63,7 @@
 <!-- foreach/3 -->
 <g id="node2" class="node">
 <title>foreach/3</title>
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L45">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1076" cy="-303.6396" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="1040" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1046" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">foreach/3</text>
@@ -64,10 +71,13 @@
 <text text-anchor="start" x="1040" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1065" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1106" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- foreach_inv/3 -->
 <g id="node5" class="node">
 <title>foreach_inv/3</title>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L49">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1020" cy="-69.2132" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="971" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="977" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">foreach_inv/3</text>
@@ -75,6 +85,8 @@
 <text text-anchor="start" x="971" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1009" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1063" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- foreach/3&#45;&gt;foreach_inv/3 -->
 <g id="edge2" class="edge">
@@ -92,6 +104,7 @@
 <!-- whiledo/2 -->
 <g id="node3" class="node">
 <title>whiledo/2</title>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L32">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="859" cy="-69.2132" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="823" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="829" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">whiledo/2</text>
@@ -99,10 +112,13 @@
 <text text-anchor="start" x="823" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="848" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="889" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- dowhile/2 -->
 <g id="node4" class="node">
 <title>dowhile/2</title>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L40">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="934" cy="-303.6396" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="898" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="904" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">dowhile/2</text>
@@ -110,6 +126,8 @@
 <text text-anchor="start" x="898" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="923" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="964" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- dowhile/2&#45;&gt;whiledo/2 -->
 <g id="edge1" class="edge">
@@ -127,6 +145,7 @@
 <!-- forto_aux/5 -->
 <g id="node7" class="node">
 <title>forto_aux/5</title>
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L66">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="677" cy="-69.2132" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="635" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="641" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">forto_aux/5</text>
@@ -134,10 +153,13 @@
 <text text-anchor="start" x="635" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="666.5" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="714" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- forto/3 -->
 <g id="node8" class="node">
 <title>forto/3</title>
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L75">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="801" cy="-303.6396" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="772" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="778" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">forto/3</text>
@@ -145,6 +167,8 @@
 <text text-anchor="start" x="772" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="790.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="825" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- forto/3&#45;&gt;forto_aux/5 -->
 <g id="edge4" class="edge">
@@ -162,6 +186,7 @@
 <!-- forto/4 -->
 <g id="node9" class="node">
 <title>forto/4</title>
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L81">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="677" cy="-303.6396" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="648" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="654" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">forto/4</text>
@@ -169,6 +194,8 @@
 <text text-anchor="start" x="648" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="666.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="701" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- forto/4&#45;&gt;forto_aux/5 -->
 <g id="edge5" class="edge">
@@ -186,6 +213,7 @@
 <!-- forto/5 -->
 <g id="node10" class="node">
 <title>forto/5</title>
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L87">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="553" cy="-303.6396" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="524" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="530" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">forto/5</text>
@@ -193,6 +221,8 @@
 <text text-anchor="start" x="524" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="542.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="577" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- forto/5&#45;&gt;forto_aux/5 -->
 <g id="edge6" class="edge">
@@ -210,6 +240,7 @@
 <!-- fordownto_aux/5 -->
 <g id="node11" class="node">
 <title>fordownto_aux/5</title>
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L94">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="250" cy="-69.2132" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="194" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="200" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">fordownto_aux/5</text>
@@ -217,10 +248,13 @@
 <text text-anchor="start" x="194" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="239" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="300" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- fordownto/3 -->
 <g id="node12" class="node">
 <title>fordownto/3</title>
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L103">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="411" cy="-303.6396" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="369" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="375" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">fordownto/3</text>
@@ -228,6 +262,8 @@
 <text text-anchor="start" x="369" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="400.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="448" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- fordownto/3&#45;&gt;fordownto_aux/5 -->
 <g id="edge7" class="edge">
@@ -245,6 +281,7 @@
 <!-- fordownto/4 -->
 <g id="node13" class="node">
 <title>fordownto/4</title>
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L109">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="250" cy="-303.6396" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="208" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="214" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">fordownto/4</text>
@@ -252,6 +289,8 @@
 <text text-anchor="start" x="208" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="239.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="287" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- fordownto/4&#45;&gt;fordownto_aux/5 -->
 <g id="edge8" class="edge">
@@ -269,6 +308,7 @@
 <!-- fordownto/5 -->
 <g id="node14" class="node">
 <title>fordownto/5</title>
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/loop.lgt#L115">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="89" cy="-303.6396" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="47" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="53" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">fordownto/5</text>
@@ -276,6 +316,8 @@
 <text text-anchor="start" x="47" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="78.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="126" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- fordownto/5&#45;&gt;fordownto_aux/5 -->
 <g id="edge9" class="edge">

@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2019/04/08,
+		date is 2019/04/12,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -76,7 +76,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external libraries)', external, [urls('',''), tooltip('(external libraries)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external libraries)', external, [url(''), tooltip('(external libraries)')| Options]),
 		::retract(referenced_logtalk_library_(Library, Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
@@ -98,15 +98,15 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [urls('',''), tooltip('(external libraries)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [url(''), tooltip('(external libraries)')| Options]).
 
 	add_library_documentation_url(logtalk, Options, Library, NodeOptions) :-
-		(	member(urls(CodePrefix, DocPrefix), Options) ->
+		(	member(urls(_, DocPrefix), Options) ->
 			memberchk(entity_url_suffix_target(Suffix, Target), Options),
 			atom_concat(DocPrefix, Suffix, URL0),
 			atom_concat(URL0, Target, URL1),
 			atom_concat(URL1, Library, URL),
-			NodeOptions = [urls(CodePrefix, URL)| Options]
+			NodeOptions = [url(URL)| Options]
 		;	NodeOptions = Options
 		).
 	% tbd

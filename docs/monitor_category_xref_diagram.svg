@@ -10,7 +10,7 @@
 <title>monitor_category</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-365.8528 1467,-365.8528 1467,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_monitor_category</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt">
@@ -22,7 +22,7 @@
 <!-- spy_point_/4 -->
 <g id="node1" class="node">
 <title>spy_point_/4</title>
-<g id="a_node1"><a xlink:href="https://logtalk.org/library/monitor_0.html#spy_point_/4" xlink:title="https://logtalk.org/library/monitor_0.html#spy_point_/4">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L31">
 <ellipse fill="#ff6a6a" stroke="#000000" cx="933" cy="-69.2132" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="887" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="893" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">spy_point_/4</text>
@@ -36,6 +36,7 @@
 <!-- monitor_activated/0 -->
 <g id="node2" class="node">
 <title>monitor_activated/0</title>
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L39">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1336" cy="-303.6396" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="1267" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1273" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">monitor_activated/0</text>
@@ -43,10 +44,13 @@
 <text text-anchor="start" x="1267" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1325" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1399" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- activate_monitor/0 -->
 <g id="node3" class="node">
 <title>activate_monitor/0</title>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L44">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="727" cy="-303.6396" rx="103.8894" ry="21.4286"/>
 <text text-anchor="start" x="662" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="668" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">activate_monitor/0</text>
@@ -54,16 +58,18 @@
 <text text-anchor="start" x="662" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="716.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="787" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- activate_monitor/0&#45;&gt;spy_point_/4 -->
 <g id="edge1" class="edge">
 <title>activate_monitor/0&#45;&gt;spy_point_/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="calls in self">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L44" xlink:title="calls in self">
 <path fill="none" stroke="#000000" d="M745.6445,-282.4224C782.4293,-240.5615 864.437,-147.2374 906.6998,-99.1427"/>
 <polygon fill="none" stroke="#000000" points="906.9198,-98.8923 907.8756,-91.7448 914.841,-89.878 906.9198,-98.8923"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L44">
 <text text-anchor="start" x="834" y="-184.2264" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls in self</text>
 </a>
 </g>
@@ -71,6 +77,7 @@
 <!-- suspend_monitor/0 -->
 <g id="node4" class="node">
 <title>suspend_monitor/0</title>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L52">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="949" cy="-303.6396" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="887" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="893" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">suspend_monitor/0</text>
@@ -78,10 +85,13 @@
 <text text-anchor="start" x="887" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="938.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1006" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- reset_monitor/0 -->
 <g id="node5" class="node">
 <title>reset_monitor/0</title>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="316" cy="-303.6396" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="260" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="266" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">reset_monitor/0</text>
@@ -89,10 +99,13 @@
 <text text-anchor="start" x="260" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="305" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="366" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- ::spy_point_/4 -->
 <g id="node9" class="node">
 <title>::spy_point_/4</title>
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="316" cy="-69.2132" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="264" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="270" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">::spy_point_/4</text>
@@ -100,17 +113,19 @@
 <text text-anchor="start" x="264" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="301.5" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">dynamic</text>
 <text text-anchor="start" x="363" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- reset_monitor/0&#45;&gt;::spy_point_/4 -->
 <g id="edge3" class="edge">
 <title>reset_monitor/0&#45;&gt;::spy_point_/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="updates in self">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57" xlink:title="updates in self">
 <path fill="none" stroke="#000000" d="M316,-282.4224C316,-239.555 316,-142.7201 316,-95.7535"/>
 <polygon fill="#000000" stroke="#000000" points="311,-91.5515 321,-91.5513 321.0001,-93.5513 311.0001,-93.5515 311,-91.5515"/>
 <polyline fill="none" stroke="#000000" points="316,-90.5514 316.0001,-95.5514 "/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57">
 <text text-anchor="start" x="316" y="-184.2264" font-family="Courier,monospace" font-size="9.00" fill="#000000">updates in self</text>
 </a>
 </g>
@@ -118,6 +133,7 @@
 <!-- spy_point/4 -->
 <g id="node6" class="node">
 <title>spy_point/4</title>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L63">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1138" cy="-303.6396" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="1096" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1102" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">spy_point/4</text>
@@ -125,16 +141,18 @@
 <text text-anchor="start" x="1096" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1127.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1175" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- spy_point/4&#45;&gt;spy_point_/4 -->
 <g id="edge2" class="edge">
 <title>spy_point/4&#45;&gt;spy_point_/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="calls in self">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L63" xlink:title="calls in self">
 <path fill="none" stroke="#000000" d="M1119.8076,-282.8358C1083.4127,-241.2167 1001.5176,-147.566 959.2872,-99.2737"/>
 <polygon fill="none" stroke="#000000" points="959.051,-99.0037 952.0902,-97.1201 951.1516,-89.9704 959.051,-99.0037"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L63">
 <text text-anchor="start" x="1039" y="-184.2264" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls in self</text>
 </a>
 </g>
@@ -142,6 +160,7 @@
 <!-- set_spy_point/4 -->
 <g id="node7" class="node">
 <title>set_spy_point/4</title>
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L66">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="515" cy="-303.6396" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="459" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="465" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">set_spy_point/4</text>
@@ -149,17 +168,19 @@
 <text text-anchor="start" x="459" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="504" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="565" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- set_spy_point/4&#45;&gt;::spy_point_/4 -->
 <g id="edge4" class="edge">
 <title>set_spy_point/4&#45;&gt;::spy_point_/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="updates in self">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L66" xlink:title="updates in self">
 <path fill="none" stroke="#000000" d="M496.9891,-282.4224C460.2117,-239.0978 376.6399,-140.6484 337.2684,-94.2678"/>
 <polygon fill="#000000" stroke="#000000" points="330.6622,-94.2118 338.2858,-87.7402 339.5801,-89.2649 331.9565,-95.7365 330.6622,-94.2118"/>
 <polyline fill="none" stroke="#000000" points="333.8268,-90.2136 337.0626,-94.0254 "/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L66">
 <text text-anchor="start" x="419" y="-184.2264" font-family="Courier,monospace" font-size="9.00" fill="#000000">updates in self</text>
 </a>
 </g>
@@ -167,6 +188,7 @@
 <!-- del_spy_points/4 -->
 <g id="node8" class="node">
 <title>del_spy_points/4</title>
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L71">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="113" cy="-303.6396" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="54" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="60" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">del_spy_points/4</text>
@@ -174,17 +196,19 @@
 <text text-anchor="start" x="54" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="102" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="166" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- del_spy_points/4&#45;&gt;::spy_point_/4 -->
 <g id="edge5" class="edge">
 <title>del_spy_points/4&#45;&gt;::spy_point_/4</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="updates in self">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L71" xlink:title="updates in self">
 <path fill="none" stroke="#000000" d="M131.3729,-282.4224C168.8895,-239.0978 254.1412,-140.6484 294.3041,-94.2678"/>
 <polygon fill="#000000" stroke="#000000" points="293.3804,-87.6964 300.94,-94.2427 299.6308,-95.7546 292.0711,-89.2084 293.3804,-87.6964"/>
 <polyline fill="none" stroke="#000000" points="297.8148,-90.2136 294.5417,-93.9934 "/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L71">
 <text text-anchor="start" x="218" y="-184.2264" font-family="Courier,monospace" font-size="9.00" fill="#000000">updates in self</text>
 </a>
 </g>

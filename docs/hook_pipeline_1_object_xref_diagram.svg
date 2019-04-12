@@ -10,7 +10,7 @@
 <title>hook_pipeline_1_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-600.2792 606,-600.2792 606,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_hook_pipeline_1_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt">
@@ -22,6 +22,7 @@
 <!-- term_expansion/2 -->
 <g id="node1" class="node">
 <title>term_expansion/2</title>
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L36">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="447" cy="-538.066" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="388" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="394" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">term_expansion/2</text>
@@ -29,10 +30,13 @@
 <text text-anchor="start" x="388" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="436" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="500" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- term_expansion_pipeline/3 -->
 <g id="node2" class="node">
 <title>term_expansion_pipeline/3</title>
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L40">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="447" cy="-303.6396" rx="137.3577" ry="21.4286"/>
 <text text-anchor="start" x="358" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="364" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">term_expansion_pipeline/3</text>
@@ -40,6 +44,8 @@
 <text text-anchor="start" x="358" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="436" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="530" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- term_expansion/2&#45;&gt;term_expansion_pipeline/3 -->
 <g id="edge1" class="edge">
@@ -57,6 +63,7 @@
 <!-- term_expansion_pipeline_all/3 -->
 <g id="node3" class="node">
 <title>term_expansion_pipeline_all/3</title>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L46">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="267" cy="-69.2132" rx="155.627" ry="21.4286"/>
 <text text-anchor="start" x="165" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="171" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">term_expansion_pipeline_all/3</text>
@@ -64,6 +71,8 @@
 <text text-anchor="start" x="165" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="256" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="363" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- term_expansion_pipeline/3&#45;&gt;term_expansion_pipeline_all/3 -->
 <g id="edge2" class="edge">
@@ -81,6 +90,7 @@
 <!-- flatten/3 -->
 <g id="node6" class="node">
 <title>flatten/3</title>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L64">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="503" cy="-69.2132" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="467" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="473" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">flatten/3</text>
@@ -88,6 +98,8 @@
 <text text-anchor="start" x="467" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="492" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="533" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- term_expansion_pipeline/3&#45;&gt;flatten/3 -->
 <g id="edge3" class="edge">
@@ -105,6 +117,7 @@
 <!-- goal_expansion/2 -->
 <g id="node4" class="node">
 <title>goal_expansion/2</title>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L55">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="155" cy="-538.066" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="96" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="102" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">goal_expansion/2</text>
@@ -112,10 +125,13 @@
 <text text-anchor="start" x="96" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="144" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="208" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- goal_expansion_pipeline/3 -->
 <g id="node5" class="node">
 <title>goal_expansion_pipeline/3</title>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L59">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="155" cy="-303.6396" rx="137.3577" ry="21.4286"/>
 <text text-anchor="start" x="66" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="72" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">goal_expansion_pipeline/3</text>
@@ -123,6 +139,8 @@
 <text text-anchor="start" x="66" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="144" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="238" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- goal_expansion/2&#45;&gt;goal_expansion_pipeline/3 -->
 <g id="edge4" class="edge">

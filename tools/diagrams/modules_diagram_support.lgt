@@ -161,24 +161,29 @@
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
 		property_module(declares(Functor/Arity, Properties), Module) :-
-			{module_property(Module, exports(Exports)),
-			 member(Functor/Arity, Exports)
-			},
-			module_predicate_properties(Module, Functor/Arity, Properties).
-		property_module(defines(Functor/Arity, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 setof(How, xref_defined(File, Predicate, How), _),
-			 Predicate \= ':'(_,_),
-			 \+ xref_defined(File, Predicate, imported(_)),
-			 functor(Predicate, Functor, Arity)
+			 module_property(Module, exports(Exports)),
+			 member(Functor/Arity, Exports),
+ 			 functor(Predicate, Functor, Arity),
+			 xref_defined(File, Predicate, local(_)),
+			 findall(Property, predicate_property(':'(Module,Predicate), Property), Properties)
 			}.
-		property_module(provides(Functor/Arity, To, []), Module) :-
+		property_module(defines(Functor/Arity, Properties), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 setof(Location, xref_defined(File, To:Predicate, local(Location)), _),
+			 xref_defined(File, Predicate, local(_)),
+			 Predicate \= ':'(_,_),
+			 functor(Predicate, Functor, Arity),
+			 findall(Property, predicate_property(':'(Module,Predicate), Property), Properties)
+			}.
+		property_module(provides(Functor/Arity, To, [line_count(Line)| Properties]), Module) :-
+			{module_property(Module, file(File)),
+			 xref_source(File),
+			 xref_defined(File, To:Predicate, local(Line)),
 			 To \== Module,
-			 functor(Predicate, Functor, Arity)
+			 functor(Predicate, Functor, Arity),
+			 findall(Property, predicate_property(':'(To,Predicate), Property), Properties)
 			}.
 		property_module(file(File), Module) :-
 			{module_property(Module, file(File))}.
@@ -225,11 +230,19 @@
 		module_predicate_properties(Module, Functor/Arity, Properties) :-
 			functor(Predicate, Functor, Arity),
 			(	{predicate_property(':'(Module,Predicate), (dynamic))} ->
-				Properties = [(dynamic)| Properties0]
-			;	Properties = [static| Properties0]
+				Properties = [(dynamic)| Properties2]
+			;	Properties = [static| Properties2]
 			),
 			(	{predicate_property(':'(Module,Predicate), (multifile))} ->
-				Properties0 = [(multifile)]
+				Properties2 = [(multifile)| Properties1]
+			;	Properties2 = Properties1
+			),
+			(	{predicate_property(':'(Module,Predicate), line_count(Line))} ->
+				Properties1 = [line_count(Line)| Properties0]
+			;	Properties1 = Properties0
+			),
+			(	{predicate_property(':'(Module,Predicate), number_of_clauses(Count))} ->
+				Properties0 = [number_of_clauses(Count)]
 			;	Properties0 = []
 			).
 

@@ -10,7 +10,7 @@
 <title>tap_output_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1069.132 1027,-1069.132 1027,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_tap_output_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt">
@@ -22,7 +22,7 @@
 <!-- generating_/0 -->
 <g id="node1" class="node">
 <title>generating_/0</title>
-<g id="a_node1"><a xlink:href="https://logtalk.org/library/tap_output_0.html#generating_/0" xlink:title="https://logtalk.org/library/tap_output_0.html#generating_/0">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L37">
 <ellipse fill="#ff6a6a" stroke="#000000" cx="99" cy="-538.066" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="50" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="56" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">generating_/0</text>
@@ -36,7 +36,7 @@
 <!-- partial_/1 -->
 <g id="node2" class="node">
 <title>partial_/1</title>
-<g id="a_node2"><a xlink:href="https://logtalk.org/library/tap_output_0.html#partial_/1" xlink:title="https://logtalk.org/library/tap_output_0.html#partial_/1">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L44">
 <ellipse fill="#ff6a6a" stroke="#000000" cx="265" cy="-538.066" rx="67.7647" ry="21.4286"/>
 <text text-anchor="start" x="225" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="231.5" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">partial_/1</text>
@@ -50,6 +50,7 @@
 <!-- message_hook/1 -->
 <g id="node3" class="node">
 <title>message_hook/1</title>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="436" cy="-772.4924" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="384" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="390" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">message_hook/1</text>
@@ -57,6 +58,8 @@
 <text text-anchor="start" x="384" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="425.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="483" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- message_hook/1&#45;&gt;generating_/0 -->
 <g id="edge2" class="edge">
@@ -115,6 +118,7 @@
 <!-- write_failed_reason_message/1 -->
 <g id="node4" class="node">
 <title>write_failed_reason_message/1</title>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L121">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="506" cy="-538.066" rx="155.627" ry="21.4286"/>
 <text text-anchor="start" x="404" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="410" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_failed_reason_message/1</text>
@@ -122,6 +126,8 @@
 <text text-anchor="start" x="404" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="495" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="602" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- message_hook/1&#45;&gt;write_failed_reason_message/1 -->
 <g id="edge5" class="edge">
@@ -139,6 +145,7 @@
 <!-- write_test_note/2 -->
 <g id="node6" class="node">
 <title>write_test_note/2</title>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L150">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="779" cy="-538.066" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="717" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="723" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_test_note/2</text>
@@ -146,6 +153,8 @@
 <text text-anchor="start" x="717" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="768.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="836" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- message_hook/1&#45;&gt;write_test_note/2 -->
 <g id="edge4" class="edge">
@@ -163,6 +172,7 @@
 <!-- pretty_print_term/1 -->
 <g id="node7" class="node">
 <title>pretty_print_term/1</title>
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L165">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="750" cy="-69.2132" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="681" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="687" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">pretty_print_term/1</text>
@@ -170,6 +180,8 @@
 <text text-anchor="start" x="681" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="739" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="813" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- message_hook/1&#45;&gt;pretty_print_term/1 -->
 <g id="edge3" class="edge">
@@ -187,6 +199,7 @@
 <!-- sum/2 -->
 <g id="node8" class="node">
 <title>sum/2</title>
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L171">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="961" cy="-538.066" rx="43.6818" ry="21.4286"/>
 <text text-anchor="start" x="938" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="944" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">sum/2</text>
@@ -194,6 +207,8 @@
 <text text-anchor="start" x="938" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="950" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="978" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- message_hook/1&#45;&gt;sum/2 -->
 <g id="edge7" class="edge">
@@ -211,6 +226,7 @@
 <!-- write_failed_reason_message_data/1 -->
 <g id="node5" class="node">
 <title>write_failed_reason_message_data/1</title>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L126">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="603" cy="-303.6396" rx="178.7961" ry="21.4286"/>
 <text text-anchor="start" x="485" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="491" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_failed_reason_message_data/1</text>
@@ -218,6 +234,8 @@
 <text text-anchor="start" x="485" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="592.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="716" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_failed_reason_message/1&#45;&gt;write_failed_reason_message_data/1 -->
 <g id="edge8" class="edge">
@@ -248,6 +266,7 @@
 <!-- sum/3 -->
 <g id="node9" class="node">
 <title>sum/3</title>
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L174">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="961" cy="-303.6396" rx="43.6818" ry="21.4286"/>
 <text text-anchor="start" x="938" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="944" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">sum/3</text>
@@ -255,6 +274,8 @@
 <text text-anchor="start" x="938" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="950" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="978" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- sum/2&#45;&gt;sum/3 -->
 <g id="edge10" class="edge">
@@ -272,7 +293,7 @@
 <!-- logtalk::message_hook/4 -->
 <g id="node10" class="node">
 <title>logtalk::message_hook/4</title>
-<g id="a_node10"><a xlink:href="https://logtalk.org/library/logtalk_0.html#message_hook/4" xlink:title="https://logtalk.org/library/logtalk_0.html#message_hook/4">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L56">
 <ellipse fill="#87ceeb" stroke="#000000" cx="436" cy="-1006.9188" rx="127.0588" ry="21.4286"/>
 <text text-anchor="start" x="354" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="360" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">logtalk::message_hook/4</text>

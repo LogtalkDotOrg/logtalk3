@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.15,
+		version is 2.16,
 		author is 'Paulo Moura',
-		date is 2019/04/09,
+		date is 2019/04/12,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -112,7 +112,7 @@
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Identifier),
 		write(Stream, '" {'), nl(Stream),
-		(	memberchk(urls(URL, _), Options) ->
+		(	memberchk(url(URL), Options) ->
 			write_key_value_nl(Stream, 'URL', URL),
 			(	URL \== '' ->
 				write_key_value_nl(Stream, tooltip, URL)
@@ -149,12 +149,7 @@
 		write(Stream, Identifier),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, shape, Shape),
-		(	(	Kind == file, member(urls(URL, _), Options)
-			;	Kind == external_file, member(urls(URL, _), Options)
-			;	Kind == directory, member(urls(URL, _), Options)
-			;	Kind == external_directory, member(urls(URL, _), Options)
-			;	member(urls(_, URL), Options)	% libraries, entities, or predicates
-			),
+		(	member(url(URL), Options),
 			URL \== '' ->
 			write_key_value_comma(Stream, 'URL', URL),
 			write_key_value_comma(Stream, tooltip, URL)
@@ -229,7 +224,7 @@
 		write(Stream, End),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, arrowhead, ArrowHead),
-		(	member(urls(URL, _), Options),
+		(	member(url(URL), Options),
 			URL \== '' ->
 			write_key_value_comma(Stream, 'URL', URL),
 			write_key_value_comma(Stream, labeltooltip, URL)

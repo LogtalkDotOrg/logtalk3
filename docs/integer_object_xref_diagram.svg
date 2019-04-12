@@ -10,7 +10,7 @@
 <title>integer_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-365.8528 792,-365.8528 792,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_integer_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt">
@@ -22,7 +22,7 @@
 <!-- between/3 -->
 <g id="node1" class="node">
 <title>between/3</title>
-<g id="a_node1"><a xlink:href="https://logtalk.org/library/integer_0.html#between/3" xlink:title="https://logtalk.org/library/integer_0.html#between/3">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L31">
 <ellipse fill="#00ff7f" stroke="#000000" cx="708" cy="-303.6396" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="672" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="678" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">between/3</text>
@@ -36,7 +36,7 @@
 <!-- plus/3 -->
 <g id="node2" class="node">
 <title>plus/3</title>
-<g id="a_node2"><a xlink:href="https://logtalk.org/library/integer_0.html#plus/3" xlink:title="https://logtalk.org/library/integer_0.html#plus/3">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L39">
 <ellipse fill="#00ff7f" stroke="#000000" cx="580" cy="-303.6396" rx="48.1667" ry="21.4286"/>
 <text text-anchor="start" x="554" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="560" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">plus/3</text>
@@ -50,7 +50,7 @@
 <!-- succ/2 -->
 <g id="node3" class="node">
 <title>succ/2</title>
-<g id="a_node3"><a xlink:href="https://logtalk.org/library/integer_0.html#succ/2" xlink:title="https://logtalk.org/library/integer_0.html#succ/2">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L48">
 <ellipse fill="#00ff7f" stroke="#000000" cx="466" cy="-303.6396" rx="48.1667" ry="21.4286"/>
 <text text-anchor="start" x="440" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="446" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">succ/2</text>
@@ -64,7 +64,7 @@
 <!-- sequence/3 -->
 <g id="node4" class="node">
 <title>sequence/3</title>
-<g id="a_node4"><a xlink:href="https://logtalk.org/library/integer_0.html#sequence/3" xlink:title="https://logtalk.org/library/integer_0.html#sequence/3">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L56">
 <ellipse fill="#00ff7f" stroke="#000000" cx="333" cy="-303.6396" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="294" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="300" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">sequence/3</text>
@@ -78,6 +78,7 @@
 <!-- gen_sequence/3 -->
 <g id="node6" class="node">
 <title>gen_sequence/3</title>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L136">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="333" cy="-69.2132" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="281" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="287" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">gen_sequence/3</text>
@@ -85,6 +86,8 @@
 <text text-anchor="start" x="281" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="322.5" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="380" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- sequence/3&#45;&gt;gen_sequence/3 -->
 <g id="edge1" class="edge">
@@ -102,6 +105,7 @@
 <!-- valid/1 -->
 <g id="node5" class="node">
 <title>valid/1</title>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L143">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="195" cy="-303.6396" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="166" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="172" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">valid/1</text>
@@ -109,10 +113,13 @@
 <text text-anchor="start" x="166" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="184.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="219" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- check/1 -->
 <g id="node7" class="node">
 <title>check/1</title>
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/integer.lgt#L146">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="71" cy="-303.6396" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="42" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="48" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">check/1</text>
@@ -120,6 +127,8 @@
 <text text-anchor="start" x="42" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="60.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="95" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 </g>
 </svg>

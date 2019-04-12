@@ -10,7 +10,7 @@
 <title>population_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-359.4264 757,-359.4264 757,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_population_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt">
@@ -22,6 +22,7 @@
 <!-- skewness/2 -->
 <g id="node1" class="node">
 <title>skewness/2</title>
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt#L32">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="638" cy="-297.2132" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="599" y="-300.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="605" y="-299.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">skewness/2</text>
@@ -29,6 +30,8 @@
 <text text-anchor="start" x="599" y="-289.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="627.5" y="-289.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="672" y="-289.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- arithmetic_mean/5 -->
 <g id="node5" class="node">
@@ -75,6 +78,7 @@
 <!-- kurtosis/2 -->
 <g id="node2" class="node">
 <title>kurtosis/2</title>
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt#L40">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="483" cy="-297.2132" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="444" y="-300.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="450" y="-299.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">kurtosis/2</text>
@@ -82,6 +86,8 @@
 <text text-anchor="start" x="444" y="-289.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="472.5" y="-289.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="517" y="-289.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- kurtosis/2&#45;&gt;arithmetic_mean/5 -->
 <g id="edge3" class="edge">
@@ -141,6 +147,7 @@
 <!-- standard_deviation/2 -->
 <g id="node3" class="node">
 <title>standard_deviation/2</title>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt#L49">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="132" cy="-297.2132" rx="113.6886" ry="21.4286"/>
 <text text-anchor="start" x="60" y="-300.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="66" y="-299.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">standard_deviation/2</text>
@@ -148,6 +155,8 @@
 <text text-anchor="start" x="60" y="-289.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="121.5" y="-289.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="199" y="-289.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- standard_deviation/2&#45;&gt;variance/6 -->
 <g id="edge6" class="edge">
@@ -165,6 +174,7 @@
 <!-- variance/2 -->
 <g id="node4" class="node">
 <title>variance/2</title>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/population.lgt#L53">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="331" cy="-297.2132" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="292" y="-300.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="298" y="-299.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">variance/2</text>
@@ -172,6 +182,8 @@
 <text text-anchor="start" x="292" y="-289.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="320.5" y="-289.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="365" y="-289.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- variance/2&#45;&gt;variance/6 -->
 <g id="edge7" class="edge">

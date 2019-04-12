@@ -10,7 +10,7 @@
 <title>xunit_report_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-2006.8377 2727,-2006.8377 2727,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_xunit_report_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt">
@@ -22,15 +22,15 @@
 <g id="clust2" class="cluster">
 <title>cluster_other</title>
 <g id="a_clust2"><a xlink:title="(external predicates)">
-<path fill="#ffffff" stroke="#8b8989" d="M1313,-506.8528C1313,-506.8528 1639,-506.8528 1639,-506.8528 1645,-506.8528 1651,-512.8528 1651,-518.8528 1651,-518.8528 1651,-576.2792 1651,-576.2792 1651,-582.2792 1645,-588.2792 1639,-588.2792 1639,-588.2792 1313,-588.2792 1313,-588.2792 1307,-588.2792 1301,-582.2792 1301,-576.2792 1301,-576.2792 1301,-518.8528 1301,-518.8528 1301,-512.8528 1307,-506.8528 1313,-506.8528"/>
-<text text-anchor="middle" x="1372.5" y="-576.2792" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">(external predicates)</text>
+<path fill="#ffffff" stroke="#8b8989" d="M1313,-510.066C1313,-510.066 1589,-510.066 1589,-510.066 1595,-510.066 1601,-516.066 1601,-522.066 1601,-522.066 1601,-573.066 1601,-573.066 1601,-579.066 1595,-585.066 1589,-585.066 1589,-585.066 1313,-585.066 1313,-585.066 1307,-585.066 1301,-579.066 1301,-573.066 1301,-573.066 1301,-522.066 1301,-522.066 1301,-516.066 1307,-510.066 1313,-510.066"/>
+<text text-anchor="middle" x="1372.5" y="-573.066" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">(external predicates)</text>
 </a>
 </g>
 </g>
 <!-- message_cache_/1 -->
 <g id="node1" class="node">
 <title>message_cache_/1</title>
-<g id="a_node1"><a xlink:href="https://logtalk.org/library/xunit_report_0.html#message_cache_/1" xlink:title="https://logtalk.org/library/xunit_report_0.html#message_cache_/1">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L37">
 <ellipse fill="#ff6a6a" stroke="#000000" cx="1103" cy="-303.6396" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="1044" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1050" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">message_cache_/1</text>
@@ -44,154 +44,164 @@
 <!-- message_hook/1 -->
 <g id="node2" class="node">
 <title>message_hook/1</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1812" cy="-1710.1981" rx="85.6199" ry="21.4286"/>
-<text text-anchor="start" x="1760" y="-1712.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1766" y="-1712.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">message_hook/1</text>
-<text text-anchor="start" x="1859" y="-1712.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1760" y="-1701.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1801.5" y="-1702.5981" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="1859" y="-1701.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L56">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="1767" cy="-1710.1981" rx="85.6199" ry="21.4286"/>
+<text text-anchor="start" x="1715" y="-1712.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1721" y="-1712.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">message_hook/1</text>
+<text text-anchor="start" x="1814" y="-1712.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1715" y="-1701.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1756.5" y="-1702.5981" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="1814" y="-1701.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- message_hook/1&#45;&gt;message_cache_/1 -->
 <g id="edge43" class="edge">
 <title>message_hook/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L56" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M1812,-1688.5947C1812,-1665.0762 1812,-1626.3581 1812,-1592.9848 1812,-1592.9848 1812,-1592.9848 1812,-1073.632 1812,-853.9113 1884.2131,-806.9171 1906,-588.2792 1909.5884,-552.2681 1927.915,-535.6523 1906,-506.8528 1883.4226,-477.1829 1370.3226,-362.1964 1176.362,-319.6161"/>
-<polygon fill="#000000" stroke="#000000" points="1171.1833,-323.5988 1173.3268,-313.8311 1175.2803,-314.2598 1173.1369,-324.0274 1171.1833,-323.5988"/>
-<polyline fill="none" stroke="#000000" points="1171.2783,-318.5006 1176.1621,-319.5723 "/>
+<path fill="none" stroke="#000000" d="M1767,-1688.5947C1767,-1665.0762 1767,-1626.3581 1767,-1592.9848 1767,-1592.9848 1767,-1592.9848 1767,-1073.632 1767,-852.9182 1835.6066,-804.8357 1856,-585.066 1859.0799,-551.8753 1875.7887,-536.8899 1856,-510.066 1835.1842,-481.8498 1355.9906,-364.366 1173.0787,-320.3705"/>
+<polygon fill="#000000" stroke="#000000" points="1167.8222,-324.2493 1170.1599,-314.5263 1172.1045,-314.9939 1169.7668,-324.7168 1167.8222,-324.2493"/>
+<polyline fill="none" stroke="#000000" points="1168.0188,-319.154 1172.8803,-320.3229 "/>
 </a>
 </g>
 <g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L56">
-<text text-anchor="start" x="1816" y="-1004.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000">updates</text>
+<text text-anchor="start" x="1771" y="-1004.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000">updates</text>
 </a>
 </g>
 </g>
 <!-- generate_xml_report/0 -->
 <g id="node3" class="node">
 <title>generate_xml_report/0</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="766" cy="-1475.7716" rx="118.1737" ry="21.4286"/>
-<text text-anchor="start" x="691" y="-1478.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="697" y="-1477.9716" font-family="Courier,monospace" font-size="11.00" fill="#000000">generate_xml_report/0</text>
-<text text-anchor="start" x="836" y="-1478.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="691" y="-1467.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="755.5" y="-1468.1716" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="836" y="-1467.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="761" cy="-1475.7716" rx="118.1737" ry="21.4286"/>
+<text text-anchor="start" x="686" y="-1478.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="692" y="-1477.9716" font-family="Courier,monospace" font-size="11.00" fill="#000000">generate_xml_report/0</text>
+<text text-anchor="start" x="831" y="-1478.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="686" y="-1467.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="750.5" y="-1468.1716" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="831" y="-1467.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- message_hook/1&#45;&gt;generate_xml_report/0 -->
 <g id="edge2" class="edge">
 <title>message_hook/1&#45;&gt;generate_xml_report/0</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L70" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1748.1426,-1695.8865C1568.0959,-1655.535 1056.2223,-1540.8154 851.8324,-1495.0082"/>
-<polygon fill="#000000" stroke="#000000" points="851.6985,-1494.9782 844.969,-1497.5692 839.989,-1492.3538 851.6985,-1494.9782"/>
+<path fill="none" stroke="#000000" d="M1704.4503,-1695.6222C1530.712,-1655.1363 1042.1101,-1541.2782 845.0042,-1495.347"/>
+<polygon fill="#000000" stroke="#000000" points="844.9815,-1495.3418 838.2302,-1497.8757 833.2946,-1492.6183 844.9815,-1495.3418"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L70">
-<text text-anchor="start" x="1310" y="-1590.7848" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1284" y="-1590.7848" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- logtalk::loaded_file_property/2 -->
 <g id="node32" class="node">
 <title>logtalk::loaded_file_property/2</title>
-<g id="a_node32"><a xlink:href="https://logtalk.org/library/logtalk_0.html#loaded_file_property/2" xlink:title="https://logtalk.org/library/logtalk_0.html#loaded_file_property/2">
-<ellipse fill="#d3d3d3" stroke="#000000" stroke-dasharray="5,2" cx="1476" cy="-538.066" rx="164.5121" ry="21.4286"/>
-<text text-anchor="start" x="1368" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1374" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">logtalk::loaded_file_property/2</text>
-<text text-anchor="start" x="1579" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1368" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1459.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">external</text>
-<text text-anchor="start" x="1579" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-</a>
-</g>
+<ellipse fill="#d3d3d3" stroke="#000000" stroke-dasharray="5,2" cx="1451" cy="-538.066" rx="140.2235" ry="18"/>
+<text text-anchor="start" x="1343" y="-535.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1349" y="-535.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">logtalk::loaded_file_property/2</text>
+<text text-anchor="start" x="1554" y="-535.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </g>
 <!-- message_hook/1&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge41" class="edge">
 <title>message_hook/1&#45;&gt;logtalk::loaded_file_property/2</title>
 <g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L60" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1829.4116,-1689.2206C1846.1743,-1666.8434 1869,-1629.6423 1869,-1592.9848 1869,-1592.9848 1869,-1592.9848 1869,-772.4924 1869,-710.7609 1850.0913,-690.1939 1803,-650.2792 1783.3437,-633.6185 1642.9202,-588.8178 1552.5936,-561.126"/>
-<polygon fill="#000000" stroke="#000000" points="1552.4945,-561.0958 1545.5871,-563.1666 1541.0189,-557.587 1552.4945,-561.0958"/>
+<path fill="none" stroke="#000000" d="M1784.4116,-1689.2206C1801.1743,-1666.8434 1824,-1629.6423 1824,-1592.9848 1824,-1592.9848 1824,-1592.9848 1824,-772.4924 1824,-712.1771 1809.8597,-690.5972 1765,-650.2792 1755.2264,-641.4952 1601.3158,-588.7082 1512.6768,-558.7664"/>
+<polygon fill="#000000" stroke="#000000" points="1512.5216,-558.7141 1505.5577,-560.5859 1501.1514,-554.8776 1512.5216,-558.7141"/>
 </a>
 </g>
 <g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L60">
-<text text-anchor="start" x="1869" y="-1121.932" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1824" y="-1121.932" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- write_report_header/0 -->
 <g id="node4" class="node">
 <title>write_report_header/0</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="766" cy="-1241.3452" rx="118.1737" ry="21.4286"/>
-<text text-anchor="start" x="691" y="-1244.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="697" y="-1243.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_report_header/0</text>
-<text text-anchor="start" x="836" y="-1244.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="691" y="-1233.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="755.5" y="-1233.7452" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="836" y="-1233.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L91">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="761" cy="-1241.3452" rx="118.1737" ry="21.4286"/>
+<text text-anchor="start" x="686" y="-1244.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="692" y="-1243.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_report_header/0</text>
+<text text-anchor="start" x="831" y="-1244.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="686" y="-1233.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="750.5" y="-1233.7452" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="831" y="-1233.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- generate_xml_report/0&#45;&gt;write_report_header/0 -->
 <g id="edge3" class="edge">
 <title>generate_xml_report/0&#45;&gt;write_report_header/0</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M766,-1454.5544C766,-1413.687 766,-1323.77 766,-1274.774"/>
-<polygon fill="#000000" stroke="#000000" points="766.0001,-1274.6834 762,-1268.6835 766,-1262.6834 766.0001,-1274.6834"/>
+<path fill="none" stroke="#000000" d="M761,-1454.5544C761,-1413.687 761,-1323.77 761,-1274.774"/>
+<polygon fill="#000000" stroke="#000000" points="761.0001,-1274.6834 757,-1268.6835 761,-1262.6834 761.0001,-1274.6834"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87">
-<text text-anchor="start" x="766" y="-1356.3584" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="761" y="-1356.3584" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- write_testsuites_element/0 -->
 <g id="node5" class="node">
 <title>write_testsuites_element/0</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="321" cy="-1241.3452" rx="141.3428" ry="21.4286"/>
-<text text-anchor="start" x="229" y="-1244.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="235" y="-1243.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_testsuites_element/0</text>
-<text text-anchor="start" x="407" y="-1244.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="229" y="-1233.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="310" y="-1233.7452" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="407" y="-1233.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="316" cy="-1241.3452" rx="141.3428" ry="21.4286"/>
+<text text-anchor="start" x="224" y="-1244.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="230" y="-1243.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_testsuites_element/0</text>
+<text text-anchor="start" x="402" y="-1244.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="224" y="-1233.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="305" y="-1233.7452" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="402" y="-1233.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- generate_xml_report/0&#45;&gt;write_testsuites_element/0 -->
 <g id="edge4" class="edge">
 <title>generate_xml_report/0&#45;&gt;write_testsuites_element/0</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M727.6744,-1455.5817C647.1268,-1413.1491 460.3375,-1314.7484 370.7182,-1267.5368"/>
-<polygon fill="#000000" stroke="#000000" points="370.6432,-1267.4974 363.4704,-1268.2398 360.0263,-1261.9043 370.6432,-1267.4974"/>
+<path fill="none" stroke="#000000" d="M722.6744,-1455.5817C642.1268,-1413.1491 455.3375,-1314.7484 365.7182,-1267.5368"/>
+<polygon fill="#000000" stroke="#000000" points="365.6432,-1267.4974 358.4704,-1268.2398 355.0263,-1261.9043 365.6432,-1267.4974"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87">
-<text text-anchor="start" x="552" y="-1356.3584" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="547" y="-1356.3584" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- write_testsuite_element/0 -->
 <g id="node6" class="node">
 <title>write_testsuite_element/0</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="766" cy="-1006.9188" rx="137.3577" ry="21.4286"/>
-<text text-anchor="start" x="677" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="683" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_testsuite_element/0</text>
-<text text-anchor="start" x="849" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="677" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="755" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="849" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="761" cy="-1006.9188" rx="137.3577" ry="21.4286"/>
+<text text-anchor="start" x="672" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="678" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_testsuite_element/0</text>
+<text text-anchor="start" x="844" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="672" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="750" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="844" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuites_element/0&#45;&gt;write_testsuite_element/0 -->
 <g id="edge6" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_testsuite_element/0</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M360.1008,-1220.7469C441.1314,-1178.0599 627.2512,-1080.0118 716.4995,-1032.9957"/>
-<polygon fill="#000000" stroke="#000000" points="716.5298,-1032.9798 719.9739,-1026.6443 727.1467,-1027.3868 716.5298,-1032.9798"/>
+<path fill="none" stroke="#000000" d="M355.1008,-1220.7469C436.1314,-1178.0599 622.2512,-1080.0118 711.4995,-1032.9957"/>
+<polygon fill="#000000" stroke="#000000" points="711.5298,-1032.9798 714.9739,-1026.6443 722.1467,-1027.3868 711.5298,-1032.9798"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94">
-<text text-anchor="start" x="552" y="-1121.932" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="547" y="-1121.932" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- write_xml_open_tag/2 -->
 <g id="node23" class="node">
 <title>write_xml_open_tag/2</title>
+<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L245" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L245">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="386" cy="-303.6396" rx="113.6886" ry="21.4286"/>
 <text text-anchor="start" x="314" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="320" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_xml_open_tag/2</text>
@@ -199,23 +209,26 @@
 <text text-anchor="start" x="314" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="375.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="453" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuites_element/0&#45;&gt;write_xml_open_tag/2 -->
 <g id="edge5" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_xml_open_tag/2</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M256.3831,-1222.325C211.9772,-1204.8203 161,-1173.8893 161,-1124.132 161,-1124.132 161,-1124.132 161,-839.2056 161,-764.6146 185.8097,-578.0667 208,-506.8528 210.8932,-497.5678 248.2746,-423.5622 254,-415.8528 278.9958,-382.1954 315.9032,-351.9239 344.3416,-331.3287"/>
+<path fill="none" stroke="#000000" d="M254.2945,-1222.1202C211.07,-1204.3728 161,-1173.2205 161,-1124.132 161,-1124.132 161,-1124.132 161,-839.2056 161,-765.2898 188.7902,-581.1653 209,-510.066 221.6875,-465.4304 226.3332,-453.1068 254,-415.8528 278.9958,-382.1954 315.9032,-351.9239 344.3416,-331.3287"/>
 <polygon fill="#000000" stroke="#000000" points="344.6125,-331.1364 347.1899,-324.4016 354.3979,-324.1904 344.6125,-331.1364"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94">
-<text text-anchor="start" x="166" y="-770.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="167" y="-770.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- write_xml_close_tag/1 -->
 <g id="node28" class="node">
 <title>write_xml_close_tag/1</title>
+<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L290">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="136" cy="-303.6396" rx="118.1737" ry="21.4286"/>
 <text text-anchor="start" x="61" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="67" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_xml_close_tag/1</text>
@@ -223,12 +236,14 @@
 <text text-anchor="start" x="61" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="125.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="206" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuites_element/0&#45;&gt;write_xml_close_tag/1 -->
 <g id="edge7" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_xml_close_tag/1</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M216.8692,-1226.9287C158.373,-1212.3044 97,-1182.9464 97,-1124.132 97,-1124.132 97,-1124.132 97,-420.8528 97,-390.9477 108.5709,-358.8447 119.1076,-335.8108"/>
+<path fill="none" stroke="#000000" d="M214.8337,-1226.3945C157.4517,-1211.5435 97,-1182.1339 97,-1124.132 97,-1124.132 97,-1124.132 97,-420.8528 97,-390.9477 108.5709,-358.8447 119.1076,-335.8108"/>
 <polygon fill="#000000" stroke="#000000" points="119.1172,-335.7907 118.1,-328.6517 124.2987,-324.967 119.1172,-335.7907"/>
 </a>
 </g>
@@ -240,144 +255,162 @@
 <!-- write_test_elements/0 -->
 <g id="node7" class="node">
 <title>write_test_elements/0</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="535" cy="-772.4924" rx="118.1737" ry="21.4286"/>
-<text text-anchor="start" x="460" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="466" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_test_elements/0</text>
-<text text-anchor="start" x="605" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="460" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="524.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="605" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="530" cy="-772.4924" rx="118.1737" ry="21.4286"/>
+<text text-anchor="start" x="455" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="461" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_test_elements/0</text>
+<text text-anchor="start" x="600" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="455" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="519.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="600" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuite_element/0&#45;&gt;write_test_elements/0 -->
 <g id="edge14" class="edge">
 <title>write_testsuite_element/0&#45;&gt;write_test_elements/0</title>
 <g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M745.0929,-985.7016C703.7759,-943.7718 611.5809,-850.2093 564.2583,-802.1848"/>
-<polygon fill="#000000" stroke="#000000" points="564.1161,-802.0404 557.0556,-800.5741 555.6935,-793.4928 564.1161,-802.0404"/>
+<path fill="none" stroke="#000000" d="M740.0929,-985.7016C698.7759,-943.7718 606.5809,-850.2093 559.2583,-802.1848"/>
+<polygon fill="#000000" stroke="#000000" points="559.1161,-802.0404 552.0556,-800.5741 550.6935,-793.4928 559.1161,-802.0404"/>
 </a>
 </g>
 <g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
-<text text-anchor="start" x="655" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="650" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- testsuite_stats/4 -->
 <g id="node10" class="node">
 <title>testsuite_stats/4</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="978" cy="-772.4924" rx="99.9045" ry="21.4286"/>
-<text text-anchor="start" x="916" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="922" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_stats/4</text>
-<text text-anchor="start" x="1035" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="916" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="967.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="1035" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L148">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="973" cy="-772.4924" rx="99.9045" ry="21.4286"/>
+<text text-anchor="start" x="911" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="917" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_stats/4</text>
+<text text-anchor="start" x="1030" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="911" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="962.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="1030" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuite_element/0&#45;&gt;testsuite_stats/4 -->
 <g id="edge8" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_stats/4</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M785.1875,-985.7016C823.0272,-943.859 907.3663,-850.5981 950.8768,-802.4849"/>
-<polygon fill="#000000" stroke="#000000" points="950.9597,-802.3932 952.0174,-795.26 959.0086,-793.4928 950.9597,-802.3932"/>
+<path fill="none" stroke="#000000" d="M780.1875,-985.7016C818.0272,-943.859 902.3663,-850.5981 945.8768,-802.4849"/>
+<polygon fill="#000000" stroke="#000000" points="945.9597,-802.3932 947.0174,-795.26 954.0086,-793.4928 945.9597,-802.3932"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
-<text text-anchor="start" x="876" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="871" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- testsuite_name/1 -->
 <g id="node12" class="node">
 <title>testsuite_name/1</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="766" cy="-772.4924" rx="94.5053" ry="21.4286"/>
-<text text-anchor="start" x="707" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="713" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_name/1</text>
-<text text-anchor="start" x="819" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="707" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="755" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="819" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L162">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="761" cy="-772.4924" rx="94.5053" ry="21.4286"/>
+<text text-anchor="start" x="702" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="708" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_name/1</text>
+<text text-anchor="start" x="814" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="702" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="750" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="814" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuite_element/0&#45;&gt;testsuite_name/1 -->
 <g id="edge9" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_name/1</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M766,-985.7016C766,-944.8342 766,-854.9172 766,-805.9212"/>
-<polygon fill="#000000" stroke="#000000" points="766.0001,-805.8306 762,-799.8307 766,-793.8306 766.0001,-805.8306"/>
+<path fill="none" stroke="#000000" d="M761,-985.7016C761,-944.8342 761,-854.9172 761,-805.9212"/>
+<polygon fill="#000000" stroke="#000000" points="761.0001,-805.8306 757,-799.8307 761,-793.8306 761.0001,-805.8306"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
-<text text-anchor="start" x="766" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="761" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- testsuite_package/1 -->
 <g id="node13" class="node">
 <title>testsuite_package/1</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1205" cy="-772.4924" rx="108.789" ry="21.4286"/>
-<text text-anchor="start" x="1136" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1142" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_package/1</text>
-<text text-anchor="start" x="1268" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1136" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1194" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="1268" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="1200" cy="-772.4924" rx="108.789" ry="21.4286"/>
+<text text-anchor="start" x="1131" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1137" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_package/1</text>
+<text text-anchor="start" x="1263" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1131" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1189" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="1263" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuite_element/0&#45;&gt;testsuite_package/1 -->
 <g id="edge10" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_package/1</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M804.1904,-986.5251C884.1101,-943.8479 1068.8433,-845.2002 1156.7847,-798.2394"/>
-<polygon fill="#000000" stroke="#000000" points="1156.9362,-798.1586 1160.3446,-791.8039 1167.5215,-792.506 1156.9362,-798.1586"/>
+<path fill="none" stroke="#000000" d="M799.1904,-986.5251C879.1101,-943.8479 1063.8433,-845.2002 1151.7847,-798.2394"/>
+<polygon fill="#000000" stroke="#000000" points="1151.9362,-798.1586 1155.3446,-791.8039 1162.5215,-792.506 1151.9362,-798.1586"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
-<text text-anchor="start" x="994" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="989" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- testsuite_time/1 -->
 <g id="node14" class="node">
 <title>testsuite_time/1</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1714" cy="-772.4924" rx="94.5053" ry="21.4286"/>
-<text text-anchor="start" x="1655" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1661" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_time/1</text>
-<text text-anchor="start" x="1767" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1655" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1703" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="1767" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L186">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="1684" cy="-772.4924" rx="94.5053" ry="21.4286"/>
+<text text-anchor="start" x="1625" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1631" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_time/1</text>
+<text text-anchor="start" x="1737" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1625" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1673" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="1737" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuite_element/0&#45;&gt;testsuite_time/1 -->
 <g id="edge11" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_time/1</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M838.8139,-988.913C1014.3846,-945.497 1459.6961,-835.378 1638.2412,-791.2264"/>
-<polygon fill="#000000" stroke="#000000" points="1638.4704,-791.1698 1643.3347,-785.8464 1650.1195,-788.2891 1638.4704,-791.1698"/>
+<path fill="none" stroke="#000000" d="M832.6582,-988.7189C1003.8845,-945.2303 1435.4547,-835.6187 1609.5112,-791.4113"/>
+<polygon fill="#000000" stroke="#000000" points="1609.7124,-791.3603 1614.5431,-786.0063 1621.3431,-788.4062 1609.7124,-791.3603"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
-<text text-anchor="start" x="1259" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1241" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- testsuite_timestamp/1 -->
 <g id="node15" class="node">
 <title>testsuite_timestamp/1</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1450" cy="-772.4924" rx="118.1737" ry="21.4286"/>
-<text text-anchor="start" x="1375" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1381" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_timestamp/1</text>
-<text text-anchor="start" x="1520" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1375" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1439.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="1520" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="1445" cy="-772.4924" rx="118.1737" ry="21.4286"/>
+<text text-anchor="start" x="1370" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1376" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_timestamp/1</text>
+<text text-anchor="start" x="1515" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1370" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1434.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="1515" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testsuite_element/0&#45;&gt;testsuite_timestamp/1 -->
 <g id="edge12" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_timestamp/1</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M822.5565,-987.5353C947.9226,-944.5688 1248.6724,-841.4932 1383.1028,-795.42"/>
-<polygon fill="#000000" stroke="#000000" points="1383.4589,-795.298 1387.8379,-789.5688 1394.8107,-791.4074 1383.4589,-795.298"/>
+<path fill="none" stroke="#000000" d="M817.5565,-987.5353C942.9226,-944.5688 1243.6724,-841.4932 1378.1028,-795.42"/>
+<polygon fill="#000000" stroke="#000000" points="1378.4589,-795.298 1382.8379,-789.5688 1389.8107,-791.4074 1378.4589,-795.298"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
-<text text-anchor="start" x="1122" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1117" y="-887.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -385,12 +418,12 @@
 <g id="edge13" class="edge">
 <title>write_testsuite_element/0&#45;&gt;write_xml_open_tag/2</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M711.0836,-987.3576C590.6088,-940.8313 307.0121,-810.5398 221,-588.2792 182.2379,-488.1157 289.4335,-381.5319 349.0865,-331.9966"/>
-<polygon fill="#000000" stroke="#000000" points="349.2715,-331.8459 351.3957,-324.9547 358.5738,-324.2651 349.2715,-331.8459"/>
+<path fill="none" stroke="#000000" d="M707.2227,-987.3507C587.8356,-940.3465 304.622,-808.137 221,-585.066 183.7125,-485.5975 289.6307,-380.8171 348.9301,-331.9007"/>
+<polygon fill="#000000" stroke="#000000" points="349.0404,-331.8114 351.1872,-324.9273 358.3675,-324.2612 349.0404,-331.8114"/>
 </a>
 </g>
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
-<text text-anchor="start" x="257" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="258" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -398,18 +431,19 @@
 <g id="edge15" class="edge">
 <title>write_testsuite_element/0&#45;&gt;write_xml_close_tag/1</title>
 <g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M713.8754,-987.1776C680.5574,-974.3616 636.5259,-957.0578 598,-940.7056 480.8212,-890.9693 134,-732.0764 134,-604.7792 134,-604.7792 134,-604.7792 134,-420.8528 134,-392.6901 134.5843,-360.7266 135.1213,-337.2996"/>
+<path fill="none" stroke="#000000" d="M709.8148,-987.1337C677.0952,-974.3005 633.8505,-956.994 596,-940.7056 479.4006,-890.529 134,-731.7167 134,-604.7792 134,-604.7792 134,-604.7792 134,-420.8528 134,-392.6901 134.5843,-360.7266 135.1213,-337.2996"/>
 <polygon fill="#000000" stroke="#000000" points="135.1227,-337.2376 131.2679,-331.1434 135.4108,-325.2411 135.1227,-337.2376"/>
 </a>
 </g>
 <g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
-<text text-anchor="start" x="152" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="153" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- write_testcase_element_tags/4 -->
 <g id="node8" class="node">
 <title>write_testcase_element_tags/4</title>
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L122">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="386" cy="-538.066" rx="155.627" ry="21.4286"/>
 <text text-anchor="start" x="284" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="290" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_testcase_element_tags/4</text>
@@ -417,23 +451,26 @@
 <text text-anchor="start" x="284" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="375" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="482" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_test_elements/0&#45;&gt;write_testcase_element_tags/4 -->
 <g id="edge17" class="edge">
 <title>write_test_elements/0&#45;&gt;write_testcase_element_tags/4</title>
 <g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M521.5145,-751.2752C495.2078,-709.886 436.9244,-618.1871 406.0673,-569.6385"/>
-<polygon fill="#000000" stroke="#000000" points="405.9994,-569.5317 399.4051,-566.6136 399.5624,-559.4042 405.9994,-569.5317"/>
+<path fill="none" stroke="#000000" d="M516.967,-751.2752C491.5431,-709.886 435.2156,-618.1871 405.3939,-569.6385"/>
+<polygon fill="#000000" stroke="#000000" points="405.3882,-569.6292 398.8394,-566.6104 399.1073,-559.4042 405.3882,-569.6292"/>
 </a>
 </g>
 <g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116">
-<text text-anchor="start" x="463" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="460" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- testcase_classname_name_time/4 -->
 <g id="node16" class="node">
 <title>testcase_classname_name_time/4</title>
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L196">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="720" cy="-538.066" rx="160.5265" ry="21.4286"/>
 <text text-anchor="start" x="615" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="621" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">testcase_classname_name_time/4</text>
@@ -441,23 +478,26 @@
 <text text-anchor="start" x="615" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="709.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="820" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_test_elements/0&#45;&gt;testcase_classname_name_time/4 -->
 <g id="edge16" class="edge">
 <title>write_test_elements/0&#45;&gt;testcase_classname_name_time/4</title>
 <g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M551.7438,-751.2752C584.5437,-709.7121 657.3805,-617.4156 695.5653,-569.0289"/>
-<polygon fill="#000000" stroke="#000000" points="695.7268,-568.8243 696.3037,-561.6363 703.1607,-559.4042 695.7268,-568.8243"/>
+<path fill="none" stroke="#000000" d="M547.1963,-751.2752C580.8827,-709.7121 655.6881,-617.4156 694.9049,-569.0289"/>
+<polygon fill="#000000" stroke="#000000" points="695.1498,-568.7268 695.8202,-561.5469 702.7056,-559.4042 695.1498,-568.7268"/>
 </a>
 </g>
 <g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116">
-<text text-anchor="start" x="631" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="628" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- write_xml_empty_tag/2 -->
 <g id="node22" class="node">
 <title>write_xml_empty_tag/2</title>
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L239">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="872" cy="-303.6396" rx="118.1737" ry="21.4286"/>
 <text text-anchor="start" x="797" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="803" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_xml_empty_tag/2</text>
@@ -465,6 +505,8 @@
 <text text-anchor="start" x="797" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="861.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="942" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testcase_element_tags/4&#45;&gt;write_xml_empty_tag/2 -->
 <g id="edge18" class="edge">
@@ -495,6 +537,7 @@
 <!-- write_xml_element/3 -->
 <g id="node24" class="node">
 <title>write_xml_element/3</title>
+<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L251">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="627" cy="-303.6396" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="558" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="564" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_xml_element/3</text>
@@ -502,6 +545,8 @@
 <text text-anchor="start" x="558" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="616" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="690" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_testcase_element_tags/4&#45;&gt;write_xml_element/3 -->
 <g id="edge20" class="edge">
@@ -532,30 +577,34 @@
 <!-- testsuites_duration/1 -->
 <g id="node9" class="node">
 <title>testsuites_duration/1</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1779" cy="-538.066" rx="118.1737" ry="21.4286"/>
-<text text-anchor="start" x="1704" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1710" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuites_duration/1</text>
-<text text-anchor="start" x="1849" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1704" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1768.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="1849" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="1729" cy="-538.066" rx="118.1737" ry="21.4286"/>
+<text text-anchor="start" x="1654" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1660" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuites_duration/1</text>
+<text text-anchor="start" x="1799" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1654" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1718.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="1799" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- testsuites_duration/1&#45;&gt;message_cache_/1 -->
 <g id="edge22" class="edge">
 <title>testsuites_duration/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1724.5381,-519.1795C1600.5576,-476.1849 1297.8372,-371.2062 1166.0404,-325.5011"/>
-<polygon fill="#000000" stroke="#000000" points="1165.9214,-325.4599 1158.942,-327.2732 1154.5838,-321.5281 1165.9214,-325.4599"/>
+<path fill="none" stroke="#000000" d="M1677.7718,-518.8819C1563.0636,-475.9256 1286.0277,-372.1804 1163.2777,-326.2126"/>
+<polygon fill="#000000" stroke="#000000" points="1163.1288,-326.1569 1156.1071,-327.7986 1151.891,-321.9484 1163.1288,-326.1569"/>
 </a>
 </g>
 <g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135">
-<text text-anchor="start" x="1455" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1429" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- julian_day/4 -->
 <g id="node17" class="node">
 <title>julian_day/4</title>
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L205" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L205">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1292" cy="-303.6396" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="1246" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1252" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">julian_day/4</text>
@@ -563,23 +612,26 @@
 <text text-anchor="start" x="1246" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1281" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1332" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- testsuites_duration/1&#45;&gt;julian_day/4 -->
 <g id="edge23" class="edge">
 <title>testsuites_duration/1&#45;&gt;julian_day/4</title>
 <g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1737.4787,-518.079C1647.9792,-474.9968 1437.2355,-373.5514 1341.2147,-327.33"/>
-<polygon fill="#000000" stroke="#000000" points="1341.1758,-327.3114 1334.0346,-328.3131 1330.3633,-322.1065 1341.1758,-327.3114"/>
+<path fill="none" stroke="#000000" d="M1691.3634,-517.8761C1611.4331,-474.9979 1424.968,-374.9696 1338.0833,-328.3607"/>
+<polygon fill="#000000" stroke="#000000" points="1337.8239,-328.2217 1330.6458,-328.9102 1327.2494,-322.549 1337.8239,-328.2217"/>
 </a>
 </g>
 <g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135">
-<text text-anchor="start" x="1545" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1519" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- testsuite_stats/6 -->
 <g id="node11" class="node">
 <title>testsuite_stats/6</title>
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L151">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1063" cy="-538.066" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="1001" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1007" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">testsuite_stats/6</text>
@@ -587,17 +639,19 @@
 <text text-anchor="start" x="1001" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1052.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1120" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- testsuite_stats/4&#45;&gt;testsuite_stats/6 -->
 <g id="edge24" class="edge">
 <title>testsuite_stats/4&#45;&gt;testsuite_stats/6</title>
 <g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L148" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M985.6931,-751.2752C1000.5742,-710.2338 1033.3916,-619.7247 1051.1051,-570.8715"/>
-<polygon fill="#000000" stroke="#000000" points="1051.1725,-570.6855 1049.4573,-563.6814 1055.263,-559.4042 1051.1725,-570.6855"/>
+<path fill="none" stroke="#000000" d="M981.1456,-751.2752C996.9021,-710.2338 1031.65,-619.7247 1050.4054,-570.8715"/>
+<polygon fill="#000000" stroke="#000000" points="1050.5069,-570.607 1048.9232,-563.5719 1054.8079,-559.4042 1050.5069,-570.607"/>
 </a>
 </g>
 <g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L148">
-<text text-anchor="start" x="1022" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1019" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -619,7 +673,7 @@
 <g id="edge25" class="edge">
 <title>testsuite_name/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L162" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M820.9416,-754.9774C864.1162,-737.3769 917,-705.5568 917,-655.2792 917,-655.2792 917,-655.2792 917,-420.8528 917,-367.9142 971.5962,-337.9326 1021.6301,-321.5716"/>
+<path fill="none" stroke="#000000" d="M817.7609,-755.4999C862.3651,-738.2302 917,-706.6019 917,-655.2792 917,-655.2792 917,-655.2792 917,-420.8528 917,-367.9142 971.5962,-337.9326 1021.6301,-321.5716"/>
 <polygon fill="#000000" stroke="#000000" points="1021.7465,-321.5357 1026.2976,-315.9422 1033.2113,-317.9918 1021.7465,-321.5357"/>
 </a>
 </g>
@@ -632,7 +686,7 @@
 <g id="edge26" class="edge">
 <title>testsuite_package/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1203.2323,-750.906C1201.4624,-727.402 1199,-688.6961 1199,-655.2792 1199,-655.2792 1199,-655.2792 1199,-420.8528 1199,-384.001 1170.2474,-352.379 1144.2132,-331.2999"/>
+<path fill="none" stroke="#000000" d="M1199.7054,-750.8895C1199.4104,-727.3714 1199,-688.6536 1199,-655.2792 1199,-655.2792 1199,-655.2792 1199,-420.8528 1199,-384.001 1170.2474,-352.379 1144.2132,-331.2999"/>
 <polygon fill="#000000" stroke="#000000" points="1143.9318,-331.0827 1136.7382,-330.5815 1134.434,-323.7484 1143.9318,-331.0827"/>
 </a>
 </g>
@@ -645,12 +699,12 @@
 <g id="edge42" class="edge">
 <title>testsuite_package/1&#45;&gt;logtalk::loaded_file_property/2</title>
 <g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1227.139,-751.6504C1241.4968,-738.248 1260.6863,-720.5482 1278,-705.2792 1334.2704,-655.6544 1401.2433,-599.732 1441.1014,-566.7712"/>
-<polygon fill="#000000" stroke="#000000" points="1441.1339,-566.7443 1443.213,-559.8394 1450.3864,-559.1028 1441.1339,-566.7443"/>
+<path fill="none" stroke="#000000" d="M1222.2746,-751.6886C1267.9239,-709.0535 1372.0363,-611.8157 1422.5125,-564.6725"/>
+<polygon fill="#000000" stroke="#000000" points="1422.8036,-564.4006 1424.4583,-557.3819 1431.5735,-556.2098 1422.8036,-564.4006"/>
 </a>
 </g>
 <g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171">
-<text text-anchor="start" x="1340" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1330" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -658,12 +712,12 @@
 <g id="edge27" class="edge">
 <title>testsuite_time/1&#45;&gt;testsuites_duration/1</title>
 <g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L186" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1739.709,-752.0673C1763.1056,-731.6876 1796.0526,-698.0371 1810,-660.2792 1821.0502,-630.3646 1809.4834,-594.9177 1797.4631,-569.9235"/>
-<polygon fill="#000000" stroke="#000000" points="1797.458,-569.9135 1791.1628,-566.3965 1791.988,-559.2327 1797.458,-569.9135"/>
+<path fill="none" stroke="#000000" d="M1705.3896,-751.6303C1725.2066,-730.6796 1753.3247,-696.4014 1765,-660.2792 1774.8517,-629.7991 1762.0363,-594.6936 1749.0468,-569.9502"/>
+<polygon fill="#000000" stroke="#000000" points="1748.9892,-569.8467 1742.5742,-566.5529 1743.1473,-559.3646 1748.9892,-569.8467"/>
 </a>
 </g>
 <g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L186">
-<text text-anchor="start" x="1812" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1767" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -671,7 +725,7 @@
 <g id="edge28" class="edge">
 <title>testsuite_timestamp/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1423.4262,-751.6705C1384.6827,-720.0838 1312.5729,-656.4765 1269,-588.2792 1213.0856,-500.7659 1247.6194,-453.4474 1186,-369.8528 1174.9807,-354.9038 1159.7793,-341.4658 1145.3943,-330.6649"/>
+<path fill="none" stroke="#000000" d="M1419.8991,-751.5474C1382.5298,-719.2198 1312.0592,-653.6917 1269,-585.066 1214.5131,-498.2274 1246.8281,-452.3738 1186,-369.8528 1174.9807,-354.9038 1159.7793,-341.4658 1145.3943,-330.6649"/>
 <polygon fill="#000000" stroke="#000000" points="1145.361,-330.6409 1138.1547,-330.3763 1135.6274,-323.6225 1145.361,-330.6409"/>
 </a>
 </g>
@@ -683,24 +737,27 @@
 <!-- date_time_to_timestamp/7 -->
 <g id="node18" class="node">
 <title>date_time_to_timestamp/7</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2067" cy="-538.066" rx="132.4583" ry="21.4286"/>
-<text text-anchor="start" x="1982" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1988" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">date_time_to_timestamp/7</text>
-<text text-anchor="start" x="2147" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1982" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="2056.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="2147" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213">
+<ellipse fill="#f5f5dc" stroke="#000000" cx="2017" cy="-538.066" rx="132.4583" ry="21.4286"/>
+<text text-anchor="start" x="1932" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1938" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">date_time_to_timestamp/7</text>
+<text text-anchor="start" x="2097" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1932" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="2006.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="2097" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- testsuite_timestamp/1&#45;&gt;date_time_to_timestamp/7 -->
 <g id="edge29" class="edge">
 <title>testsuite_timestamp/1&#45;&gt;date_time_to_timestamp/7</title>
 <g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1500.4917,-753.3083C1612.4355,-710.7758 1881.2323,-608.6476 2003.9645,-562.0161"/>
-<polygon fill="#000000" stroke="#000000" points="2004.158,-561.9426 2008.3461,-556.0723 2015.3756,-557.6805 2004.158,-561.9426"/>
+<path fill="none" stroke="#000000" d="M1490.2453,-752.8786C1546.8423,-728.4394 1646.8013,-685.5913 1733,-650.2792 1808.9578,-619.1624 1896.9226,-584.6376 1954.5847,-562.2098"/>
+<polygon fill="#000000" stroke="#000000" points="1954.8719,-562.0983 1959.0156,-556.1967 1966.057,-557.7518 1954.8719,-562.0983"/>
 </a>
 </g>
 <g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190">
-<text text-anchor="start" x="1771" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1733" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -720,6 +777,7 @@
 <!-- integers_to_atoms/2 -->
 <g id="node19" class="node">
 <title>integers_to_atoms/2</title>
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L218">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1731" cy="-303.6396" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="1662" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1668" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">integers_to_atoms/2</text>
@@ -727,23 +785,26 @@
 <text text-anchor="start" x="1662" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1720" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1794" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- date_time_to_timestamp/7&#45;&gt;integers_to_atoms/2 -->
 <g id="edge31" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;integers_to_atoms/2</title>
 <g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2059.0066,-516.7477C2044.4832,-480.9373 2010.3418,-408.8094 1958,-369.8528 1935.2579,-352.9265 1870.981,-334.9911 1816.6061,-322.0623"/>
-<polygon fill="#000000" stroke="#000000" points="1816.5006,-322.0376 1809.7462,-324.5631 1804.8171,-319.2996 1816.5006,-322.0376"/>
+<path fill="none" stroke="#000000" d="M2008.5683,-516.8764C1993.5052,-481.5815 1958.7261,-410.6139 1908,-369.8528 1881.2401,-348.3498 1846.7864,-333.3632 1815.3985,-323.1582"/>
+<polygon fill="#000000" stroke="#000000" points="1815.0019,-323.0352 1808.0858,-325.0766 1803.5413,-319.4776 1815.0019,-323.0352"/>
 </a>
 </g>
 <g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213">
-<text text-anchor="start" x="2009" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1958" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- pad_single_char_atoms/2 -->
 <g id="node20" class="node">
 <title>pad_single_char_atoms/2</title>
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L224">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1985" cy="-303.6396" rx="127.0588" ry="21.4286"/>
 <text text-anchor="start" x="1903" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1909" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">pad_single_char_atoms/2</text>
@@ -751,23 +812,26 @@
 <text text-anchor="start" x="1903" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1974" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2061" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- date_time_to_timestamp/7&#45;&gt;pad_single_char_atoms/2 -->
 <g id="edge32" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;pad_single_char_atoms/2</title>
 <g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2066.2478,-516.7445C2064.8321,-491.9014 2060.753,-449.9121 2049,-415.8528 2038.9865,-386.8346 2021.3852,-356.7682 2007.1725,-335.0699"/>
-<polygon fill="#000000" stroke="#000000" points="2006.9931,-334.8023 2000.3298,-332.0453 2000.3119,-324.8342 2006.9931,-334.8023"/>
+<path fill="none" stroke="#000000" d="M2014.1038,-516.8488C2008.5252,-475.9813 1996.2513,-386.0644 1989.5631,-337.0684"/>
+<polygon fill="#000000" stroke="#000000" points="1989.5358,-336.8676 1984.761,-331.4637 1987.9127,-324.9778 1989.5358,-336.8676"/>
 </a>
 </g>
 <g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213">
-<text text-anchor="start" x="2052" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="2001" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- concatenate_atoms/3 -->
 <g id="node21" class="node">
 <title>concatenate_atoms/3</title>
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L232">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1495" cy="-303.6396" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="1426" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1432" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">concatenate_atoms/3</text>
@@ -775,23 +839,26 @@
 <text text-anchor="start" x="1426" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1484" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1558" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- date_time_to_timestamp/7&#45;&gt;concatenate_atoms/3 -->
 <g id="edge33" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;concatenate_atoms/3</title>
 <g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2048.849,-516.7679C2010.6704,-472.0219 1925.2089,-372.155 1921,-369.8528 1799.6282,-303.4641 1749.5425,-347.0947 1613,-324.8528 1604.2866,-323.4335 1595.2213,-321.9021 1586.1601,-320.3349"/>
-<polygon fill="#000000" stroke="#000000" points="1586.1013,-320.3247 1579.5027,-323.2328 1574.2802,-318.2602 1586.1013,-320.3247"/>
+<path fill="none" stroke="#000000" d="M1998.5183,-517.0214C1978.7727,-494.5101 1946.5853,-457.7357 1919,-425.8528 1897.5516,-401.063 1899.4895,-386.0676 1871,-369.8528 1769.8392,-312.2773 1727.6144,-345.1504 1613,-324.8528 1604.5456,-323.3556 1595.752,-321.7901 1586.948,-320.2172"/>
+<polygon fill="#000000" stroke="#000000" points="1586.7795,-320.1871 1580.1688,-323.0678 1574.9671,-318.0735 1586.7795,-320.1871"/>
 </a>
 </g>
 <g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213">
-<text text-anchor="start" x="1970" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1919" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- write_xml_tag_attributes/1 -->
 <g id="node27" class="node">
 <title>write_xml_tag_attributes/1</title>
+<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L281">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="872" cy="-69.2132" rx="141.3428" ry="21.4286"/>
 <text text-anchor="start" x="780" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="786" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_xml_tag_attributes/1</text>
@@ -799,6 +866,8 @@
 <text text-anchor="start" x="780" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="861" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="958" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_xml_empty_tag/2&#45;&gt;write_xml_tag_attributes/1 -->
 <g id="edge34" class="edge">
@@ -842,6 +911,7 @@
 <!-- writeq_xml_cdata_element/3 -->
 <g id="node25" class="node">
 <title>writeq_xml_cdata_element/3</title>
+<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L261">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2564" cy="-303.6396" rx="141.3428" ry="21.4286"/>
 <text text-anchor="start" x="2472" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2478" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">writeq_xml_cdata_element/3</text>
@@ -849,6 +919,8 @@
 <text text-anchor="start" x="2472" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2553" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2650" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- writeq_xml_cdata_element/3&#45;&gt;write_xml_tag_attributes/1 -->
 <g id="edge37" class="edge">
@@ -866,6 +938,7 @@
 <!-- pretty_print_vars_quoted/1 -->
 <g id="node30" class="node">
 <title>pretty_print_vars_quoted/1</title>
+<g id="a_node30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L301">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2564" cy="-69.2132" rx="141.3428" ry="21.4286"/>
 <text text-anchor="start" x="2472" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2478" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">pretty_print_vars_quoted/1</text>
@@ -873,6 +946,8 @@
 <text text-anchor="start" x="2472" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2553" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2650" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- writeq_xml_cdata_element/3&#45;&gt;pretty_print_vars_quoted/1 -->
 <g id="edge38" class="edge">
@@ -890,6 +965,7 @@
 <!-- write_xml_cdata_element/3 -->
 <g id="node26" class="node">
 <title>write_xml_cdata_element/3</title>
+<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L271">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2267" cy="-303.6396" rx="137.3577" ry="21.4286"/>
 <text text-anchor="start" x="2178" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2184" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">write_xml_cdata_element/3</text>
@@ -897,6 +973,8 @@
 <text text-anchor="start" x="2178" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2256" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2350" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_xml_cdata_element/3&#45;&gt;write_xml_tag_attributes/1 -->
 <g id="edge39" class="edge">
@@ -914,6 +992,7 @@
 <!-- pretty_print_vars/1 -->
 <g id="node29" class="node">
 <title>pretty_print_vars/1</title>
+<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L295" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L295">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2267" cy="-69.2132" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="2198" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2204" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">pretty_print_vars/1</text>
@@ -921,6 +1000,8 @@
 <text text-anchor="start" x="2198" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2256" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2330" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- write_xml_cdata_element/3&#45;&gt;pretty_print_vars/1 -->
 <g id="edge40" class="edge">
@@ -938,14 +1019,14 @@
 <!-- logtalk::message_hook/4 -->
 <g id="node31" class="node">
 <title>logtalk::message_hook/4</title>
-<g id="a_node31"><a xlink:href="https://logtalk.org/library/logtalk_0.html#message_hook/4" xlink:title="https://logtalk.org/library/logtalk_0.html#message_hook/4">
-<ellipse fill="#87ceeb" stroke="#000000" cx="1812" cy="-1944.6245" rx="127.0588" ry="21.4286"/>
-<text text-anchor="start" x="1730" y="-1947.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1736" y="-1946.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">logtalk::message_hook/4</text>
-<text text-anchor="start" x="1888" y="-1947.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1730" y="-1936.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1793" y="-1937.0245" font-family="Courier,monospace" font-size="7.00" fill="#000000">multifile</text>
-<text text-anchor="start" x="1888" y="-1936.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L50">
+<ellipse fill="#87ceeb" stroke="#000000" cx="1767" cy="-1944.6245" rx="127.0588" ry="21.4286"/>
+<text text-anchor="start" x="1685" y="-1947.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1691" y="-1946.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">logtalk::message_hook/4</text>
+<text text-anchor="start" x="1843" y="-1947.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1685" y="-1936.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1748" y="-1937.0245" font-family="Courier,monospace" font-size="7.00" fill="#000000">multifile</text>
+<text text-anchor="start" x="1843" y="-1936.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
@@ -953,12 +1034,12 @@
 <g id="edge1" class="edge">
 <title>logtalk::message_hook/4&#45;&gt;message_hook/1</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L50" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1812,-1923.4072C1812,-1882.5398 1812,-1792.6228 1812,-1743.6268"/>
-<polygon fill="#000000" stroke="#000000" points="1812.0001,-1743.5363 1808,-1737.5363 1812,-1731.5363 1812.0001,-1743.5363"/>
+<path fill="none" stroke="#000000" d="M1767,-1923.4072C1767,-1882.5398 1767,-1792.6228 1767,-1743.6268"/>
+<polygon fill="#000000" stroke="#000000" points="1767.0001,-1743.5363 1763,-1737.5363 1767,-1731.5363 1767.0001,-1743.5363"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L50">
-<text text-anchor="start" x="1812" y="-1825.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1767" y="-1825.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>

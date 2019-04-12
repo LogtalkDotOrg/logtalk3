@@ -10,7 +10,7 @@
 <title>contributions</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1456 2260,-1456 2260,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk third&#45;party contributions</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_rlibrary_contributions</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/">
@@ -440,13 +440,13 @@
 <!-- pddl&#45;&gt;read_file -->
 <g id="edge1" class="edge">
 <title>pddl&#45;&gt;read_file</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/pddl_parser/" xlink:title="imports">
+<g id="a_edge1"><a xlink:href="https://logtalk.org/library/pddl_0.html" xlink:title="imports">
 <path fill="none" stroke="#000000" d="M1674,-251.1294C1674,-285.7937 1674,-334.6493 1674,-377.5 1674,-377.5 1674,-377.5 1674,-570.5 1674,-600.8989 1674,-635.2508 1674,-661.2193"/>
 <polygon fill="#000000" stroke="#000000" points="1678,-671.4433 1670,-671.4432 1670.0001,-663.4432 1678.0001,-663.4433 1678,-671.4433"/>
 <polyline fill="none" stroke="#000000" points="1674.0001,-663.4433 1674.0001,-661.4433 "/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/pddl_parser/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/pddl_parser/">
+<g id="a_edge1&#45;label"><a xlink:href="https://logtalk.org/library/pddl_0.html" xlink:title="https://logtalk.org/library/pddl_0.html">
 <text text-anchor="start" x="1674" y="-471.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">imports</text>
 </a>
 </g>
@@ -567,12 +567,12 @@
 <!-- debug_expansion(Mode)&#45;&gt;expanding -->
 <g id="edge2" class="edge">
 <title>debug_expansion(Mode)&#45;&gt;expanding</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge2"><a xlink:href="https://logtalk.org/library/debug_expansion_1.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M1148.8842,-1186.7329C1188.33,-1220.6649 1269.9998,-1289.6218 1343,-1343 1362.3205,-1357.1273 1384.6343,-1371.8605 1402.8841,-1383.524"/>
 <ellipse fill="#000000" stroke="#000000" cx="1406.5449" cy="-1385.8516" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge2&#45;label"><a xlink:href="https://logtalk.org/library/debug_expansion_1.html" xlink:title="https://logtalk.org/library/debug_expansion_1.html">
 <text text-anchor="start" x="1281" y="-1289.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -598,13 +598,13 @@
 <!-- rule_expansion(_)&#45;&gt;flatting -->
 <g id="edge5" class="edge">
 <title>rule_expansion(_)&#45;&gt;flatting</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="imports">
+<g id="a_edge5"><a xlink:href="https://logtalk.org/library/rule_expansion_1.html" xlink:title="imports">
 <path fill="none" stroke="#000000" d="M1210.8158,-722.5035C1183.0019,-746.7968 1143,-790.0675 1143,-838 1143,-838 1143,-838 1143,-1040 1143,-1087.0629 1190.0946,-1075.4322 1225,-1107 1235.7875,-1116.756 1247.189,-1127.9351 1257.0634,-1137.9203"/>
 <polygon fill="#000000" stroke="#000000" points="1267.1371,-1142.4791 1261.4255,-1148.0808 1255.8239,-1142.3692 1261.5355,-1136.7675 1267.1371,-1142.4791"/>
 <polyline fill="none" stroke="#000000" points="1258.6797,-1139.5683 1257.2793,-1138.1404 "/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge5&#45;label"><a xlink:href="https://logtalk.org/library/rule_expansion_1.html" xlink:title="https://logtalk.org/library/rule_expansion_1.html">
 <text text-anchor="start" x="1143" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">imports</text>
 </a>
 </g>
@@ -612,12 +612,12 @@
 <!-- rule_expansion(_)&#45;&gt;debug_expansion(Mode) -->
 <g id="edge4" class="edge">
 <title>rule_expansion(_)&#45;&gt;debug_expansion(Mode)</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="extends">
+<g id="a_edge4"><a xlink:href="https://logtalk.org/library/rule_expansion_1.html" xlink:title="extends">
 <path fill="none" stroke="#000000" d="M1200.1317,-722.6374C1150.6781,-751.6014 1069,-804.5083 1069,-838 1069,-838 1069,-838 1069,-1040 1069,-1075.6043 1087.903,-1112.3686 1103.744,-1136.9267"/>
 <polygon fill="#000000" stroke="#000000" points="1109.4009,-1145.3973 1100.1049,-1139.5804 1106.624,-1141.2393 1103.8472,-1137.0813 1103.8472,-1137.0813 1103.8472,-1137.0813 1106.624,-1141.2393 1107.5894,-1134.5821 1109.4009,-1145.3973 1109.4009,-1145.3973"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge4&#45;label"><a xlink:href="https://logtalk.org/library/rule_expansion_1.html" xlink:title="https://logtalk.org/library/rule_expansion_1.html">
 <text text-anchor="start" x="1069" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">extends</text>
 </a>
 </g>
@@ -625,12 +625,12 @@
 <!-- rule_expansion(_)&#45;&gt;expanding -->
 <g id="edge3" class="edge">
 <title>rule_expansion(_)&#45;&gt;expanding</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge3"><a xlink:href="https://logtalk.org/library/rule_expansion_1.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M1269.7033,-722.7032C1302.4456,-746.2607 1348,-788.0177 1348,-838 1348,-838 1348,-838 1348,-1292 1348,-1329.8198 1378.9696,-1362.3105 1404.7751,-1382.8188"/>
 <ellipse fill="#000000" stroke="#000000" cx="1408.0338" cy="-1385.3294" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge3&#45;label"><a xlink:href="https://logtalk.org/library/rule_expansion_1.html" xlink:title="https://logtalk.org/library/rule_expansion_1.html">
 <text text-anchor="start" x="1348" y="-1037.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -656,13 +656,13 @@
 <!-- magic_expansion(_)&#45;&gt;flatting -->
 <g id="edge8" class="edge">
 <title>magic_expansion(_)&#45;&gt;flatting</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="imports">
+<g id="a_edge8"><a xlink:href="https://logtalk.org/library/magic_expansion_1.html" xlink:title="imports">
 <path fill="none" stroke="#000000" d="M1377.8167,-722.5299C1341.0565,-745.3862 1291,-786.0479 1291,-838 1291,-838 1291,-838 1291,-1040 1291,-1072.3975 1288.6644,-1109.4087 1286.6914,-1134.8937"/>
 <polygon fill="#000000" stroke="#000000" points="1289.8631,-1145.3828 1281.8887,-1144.7433 1282.5282,-1136.7689 1290.5026,-1137.4084 1289.8631,-1145.3828"/>
 <polyline fill="none" stroke="#000000" points="1286.5154,-1137.0886 1286.6753,-1135.095 "/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge8&#45;label"><a xlink:href="https://logtalk.org/library/magic_expansion_1.html" xlink:title="https://logtalk.org/library/magic_expansion_1.html">
 <text text-anchor="start" x="1291" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">imports</text>
 </a>
 </g>
@@ -670,12 +670,12 @@
 <!-- magic_expansion(_)&#45;&gt;debug_expansion(Mode) -->
 <g id="edge7" class="edge">
 <title>magic_expansion(_)&#45;&gt;debug_expansion(Mode)</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="extends">
+<g id="a_edge7"><a xlink:href="https://logtalk.org/library/magic_expansion_1.html" xlink:title="extends">
 <path fill="none" stroke="#000000" d="M1379.5003,-722.5799C1322.0507,-755.5652 1217,-818.5416 1217,-838 1217,-838 1217,-838 1217,-1040 1217,-1079.765 1186.7424,-1115.3603 1160.9319,-1138.4903"/>
 <polygon fill="#000000" stroke="#000000" points="1153.1029,-1145.2592 1157.7244,-1135.3147 1156.8853,-1141.989 1160.6676,-1138.7188 1160.6676,-1138.7188 1160.6676,-1138.7188 1156.8853,-1141.989 1163.6108,-1142.1229 1153.1029,-1145.2592 1153.1029,-1145.2592"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge7&#45;label"><a xlink:href="https://logtalk.org/library/magic_expansion_1.html" xlink:title="https://logtalk.org/library/magic_expansion_1.html">
 <text text-anchor="start" x="1217" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">extends</text>
 </a>
 </g>
@@ -683,12 +683,12 @@
 <!-- magic_expansion(_)&#45;&gt;expanding -->
 <g id="edge6" class="edge">
 <title>magic_expansion(_)&#45;&gt;expanding</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge6"><a xlink:href="https://logtalk.org/library/magic_expansion_1.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M1421.6854,-722.5538C1428.4964,-749.0285 1439,-796.5728 1439,-838 1439,-838 1439,-838 1439,-1292 1439,-1322.0099 1439,-1356.4635 1439,-1379.5687"/>
 <ellipse fill="#000000" stroke="#000000" cx="1439" cy="-1383.8355" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge6&#45;label"><a xlink:href="https://logtalk.org/library/magic_expansion_1.html" xlink:title="https://logtalk.org/library/magic_expansion_1.html">
 <text text-anchor="start" x="1439" y="-1037.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -714,12 +714,12 @@
 <!-- shell_expansion(_)&#45;&gt;rule_expansion(_) -->
 <g id="edge10" class="edge">
 <title>shell_expansion(_)&#45;&gt;rule_expansion(_)</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="extends">
+<g id="a_edge10"><a xlink:href="https://logtalk.org/library/shell_expansion_1.html" xlink:title="extends">
 <path fill="none" stroke="#000000" d="M1050.6962,-226.0844C1068.8352,-257.511 1100,-319.8885 1100,-377.5 1100,-377.5 1100,-377.5 1100,-570.5 1100,-584.8722 1163.5637,-640.6769 1204.098,-674.8022"/>
 <polygon fill="#000000" stroke="#000000" points="1211.8721,-681.3195 1201.3177,-678.3436 1208.0404,-678.1073 1204.2087,-674.8951 1204.2087,-674.8951 1204.2087,-674.8951 1208.0404,-678.1073 1207.0997,-671.4466 1211.8721,-681.3195 1211.8721,-681.3195"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge10&#45;label"><a xlink:href="https://logtalk.org/library/shell_expansion_1.html" xlink:title="https://logtalk.org/library/shell_expansion_1.html">
 <text text-anchor="start" x="1100" y="-471.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">extends</text>
 </a>
 </g>
@@ -727,12 +727,12 @@
 <!-- shell_expansion(_)&#45;&gt;expanding -->
 <g id="edge9" class="edge">
 <title>shell_expansion(_)&#45;&gt;expanding</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge9"><a xlink:href="https://logtalk.org/library/shell_expansion_1.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M1050.8244,-226.1213C1066.4952,-249.4513 1095.2601,-286.7026 1130,-306 1205.6882,-348.0435 1513,-290.9185 1513,-377.5 1513,-377.5 1513,-377.5 1513,-1292 1513,-1327.5872 1487.3155,-1360.8107 1466.2101,-1382.1036"/>
 <ellipse fill="#000000" stroke="#000000" cx="1463.2629" cy="-1384.9874" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge9&#45;label"><a xlink:href="https://logtalk.org/library/shell_expansion_1.html" xlink:title="https://logtalk.org/library/shell_expansion_1.html">
 <text text-anchor="start" x="1513" y="-835.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -758,12 +758,12 @@
 <!-- heuristic_expansion(_)&#45;&gt;rule_expansion(_) -->
 <g id="edge12" class="edge">
 <title>heuristic_expansion(_)&#45;&gt;rule_expansion(_)</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="extends">
+<g id="a_edge12"><a xlink:href="https://logtalk.org/library/heuristic_expansion_1.html" xlink:title="extends">
 <path fill="none" stroke="#000000" d="M1234.3951,-226.1503C1234.978,-258.4404 1236,-322.8505 1236,-377.5 1236,-377.5 1236,-377.5 1236,-570.5 1236,-604.8127 1236.3447,-644.1601 1236.6293,-670.8043"/>
 <polygon fill="#000000" stroke="#000000" points="1236.7425,-681.0474 1232.1322,-671.0978 1236.6872,-676.0477 1236.6319,-671.048 1236.6319,-671.048 1236.6319,-671.048 1236.6872,-676.0477 1241.1316,-670.9983 1236.7425,-681.0474 1236.7425,-681.0474"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge12&#45;label"><a xlink:href="https://logtalk.org/library/heuristic_expansion_1.html" xlink:title="https://logtalk.org/library/heuristic_expansion_1.html">
 <text text-anchor="start" x="1236" y="-471.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">extends</text>
 </a>
 </g>
@@ -771,12 +771,12 @@
 <!-- heuristic_expansion(_)&#45;&gt;expanding -->
 <g id="edge11" class="edge">
 <title>heuristic_expansion(_)&#45;&gt;expanding</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge11"><a xlink:href="https://logtalk.org/library/heuristic_expansion_1.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M1249.3603,-226.4045C1267.9648,-250.0005 1301.6221,-287.5014 1340,-306 1442.1805,-355.2521 1585,-264.0689 1585,-377.5 1585,-377.5 1585,-377.5 1585,-616.5 1585,-737.6835 1604,-767.3165 1604,-888.5 1604,-888.5 1604,-888.5 1604,-1292 1604,-1345.4307 1544.7105,-1375.7679 1497.2127,-1391.4987"/>
 <ellipse fill="#000000" stroke="#000000" cx="1493.2126" cy="-1392.7753" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge11&#45;label"><a xlink:href="https://logtalk.org/library/heuristic_expansion_1.html" xlink:title="https://logtalk.org/library/heuristic_expansion_1.html">
 <text text-anchor="start" x="1603" y="-835.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -853,12 +853,12 @@
 <!-- demodb&#45;&gt;databasep -->
 <g id="edge13" class="edge">
 <title>demodb&#45;&gt;databasep</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge13"><a xlink:href="https://logtalk.org/library/demodb_0.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M707.7112,-226.1742C717.0825,-247.2544 733.1978,-280.406 752,-306 778.514,-342.0914 823,-332.7163 823,-377.5 823,-377.5 823,-377.5 823,-570.5 823,-664.0524 945.0441,-582.8202 1024,-633 1033.7886,-639.2211 1043.0238,-647.3496 1051.2511,-655.8347"/>
 <ellipse fill="#000000" stroke="#000000" cx="1054.0481" cy="-658.8255" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge13&#45;label"><a xlink:href="https://logtalk.org/library/demodb_0.html" xlink:title="https://logtalk.org/library/demodb_0.html">
 <text text-anchor="start" x="823" y="-471.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -909,12 +909,12 @@
 <!-- best_first&#45;&gt;interpreterp -->
 <g id="edge14" class="edge">
 <title>best_first&#45;&gt;interpreterp</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge14"><a xlink:href="https://logtalk.org/library/best_first_0.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M788.9344,-722.9261C780.6396,-749.3974 768,-796.5371 768,-838 768,-838 768,-838 768,-1040 768,-1078.0436 738.9719,-1109.2437 709.5894,-1131.08"/>
 <ellipse fill="#000000" stroke="#000000" cx="706.1759" cy="-1133.5364" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge14&#45;label"><a xlink:href="https://logtalk.org/library/best_first_0.html" xlink:title="https://logtalk.org/library/best_first_0.html">
 <text text-anchor="start" x="768" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -940,12 +940,12 @@
 <!-- dfs_interpreter&#45;&gt;interpreterp -->
 <g id="edge15" class="edge">
 <title>dfs_interpreter&#45;&gt;interpreterp</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge15"><a xlink:href="https://logtalk.org/library/dfs_interpreter_0.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M649,-722.7367C649,-749.4046 649,-797.1528 649,-838 649,-838 649,-838 649,-1040 649,-1069.48 649,-1102.8397 649,-1127.8247"/>
 <ellipse fill="#000000" stroke="#000000" cx="649" cy="-1131.9591" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge15&#45;label"><a xlink:href="https://logtalk.org/library/dfs_interpreter_0.html" xlink:title="https://logtalk.org/library/dfs_interpreter_0.html">
 <text text-anchor="start" x="649" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -971,12 +971,12 @@
 <!-- bfs_interpreter&#45;&gt;interpreterp -->
 <g id="edge16" class="edge">
 <title>bfs_interpreter&#45;&gt;interpreterp</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge16"><a xlink:href="https://logtalk.org/library/bfs_interpreter_0.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M494.3367,-722.7245C505.2976,-748.9877 522,-795.9128 522,-838 522,-838 522,-838 522,-1040 522,-1080.74 555.3421,-1112.8106 587.8584,-1134.4001"/>
 <ellipse fill="#000000" stroke="#000000" cx="591.4081" cy="-1136.6834" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge16&#45;label"><a xlink:href="https://logtalk.org/library/bfs_interpreter_0.html" xlink:title="https://logtalk.org/library/bfs_interpreter_0.html">
 <text text-anchor="start" x="522" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -1002,12 +1002,12 @@
 <!-- iddfs_interpreter(Increment)&#45;&gt;interpreterp -->
 <g id="edge17" class="edge">
 <title>iddfs_interpreter(Increment)&#45;&gt;interpreterp</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge17"><a xlink:href="https://logtalk.org/library/iddfs_interpreter_1.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M299.3666,-722.6076C321.8787,-747.6614 355,-792.2894 355,-838 355,-838 355,-838 355,-1040 355,-1090.0137 500.5538,-1132.0263 586.8323,-1152.5365"/>
 <ellipse fill="#000000" stroke="#000000" cx="590.8394" cy="-1153.4786" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge17&#45;label"><a xlink:href="https://logtalk.org/library/iddfs_interpreter_1.html" xlink:title="https://logtalk.org/library/iddfs_interpreter_1.html">
 <text text-anchor="start" x="355" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -1033,12 +1033,12 @@
 <!-- bup_interpreter&#45;&gt;interpreterp -->
 <g id="edge18" class="edge">
 <title>bup_interpreter&#45;&gt;interpreterp</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="implements">
+<g id="a_edge18"><a xlink:href="https://logtalk.org/library/bup_interpreter_0.html" xlink:title="implements">
 <path fill="none" stroke="#000000" d="M928.5786,-722.5823C911.9862,-748.3237 887,-794.3362 887,-838 887,-838 887,-838 887,-1040 887,-1119.6813 781.5134,-1149.1131 710.9952,-1159.8859"/>
 <ellipse fill="#000000" stroke="#000000" cx="706.9641" cy="-1160.4733" rx="4" ry="4"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge18&#45;label"><a xlink:href="https://logtalk.org/library/bup_interpreter_0.html" xlink:title="https://logtalk.org/library/bup_interpreter_0.html">
 <text text-anchor="start" x="887" y="-936.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>
 </a>
 </g>
@@ -1064,13 +1064,13 @@
 <!-- a_star_interpreter(W)&#45;&gt;best_first -->
 <g id="edge19" class="edge">
 <title>a_star_interpreter(W)&#45;&gt;best_first</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="imports">
+<g id="a_edge19"><a xlink:href="https://logtalk.org/library/a_star_interpreter_1.html" xlink:title="imports">
 <path fill="none" stroke="#000000" d="M568.3843,-226.2079C598.4097,-256.3563 648,-315.5301 648,-377.5 648,-377.5 648,-377.5 648,-570.5 648,-616.3236 695.8363,-602.4608 730,-633 744.1239,-645.6254 758.7903,-660.7291 770.7003,-673.5824"/>
 <polygon fill="#000000" stroke="#000000" points="780.679,-678.5495 774.7814,-683.955 769.3759,-678.0575 775.2735,-672.652 780.679,-678.5495"/>
 <polyline fill="none" stroke="#000000" points="772.3247,-675.3547 770.9733,-673.8803 "/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/">
+<g id="a_edge19&#45;label"><a xlink:href="https://logtalk.org/library/a_star_interpreter_1.html" xlink:title="https://logtalk.org/library/a_star_interpreter_1.html">
 <text text-anchor="start" x="648" y="-471.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">imports</text>
 </a>
 </g>

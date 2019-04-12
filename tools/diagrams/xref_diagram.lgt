@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.24,
+		version is 2.25,
 		author is 'Paulo Moura',
-		date is 2019/04/11,
+		date is 2019/04/12,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -122,7 +122,7 @@
 		;	Predicate = Predicate0
 		),
 		predicate_kind_caption(Kind, Properties, PredicateKind, Caption),
-		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
+		add_predicate_code_url(Options, Entity, Properties, PredicateOptions),
 		^^output_node(Predicate, Predicate, Caption, [], PredicateKind, PredicateOptions),
 		remember_included_predicate(Predicate),
 		fail.
@@ -138,8 +138,8 @@
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
 		),
-		memberchk(node_type_captions(Boolean), Options),
-		^^output_node(Predicate, Predicate, local, [], local_predicate, [node_type_captions(Boolean)]),
+		add_predicate_code_url(Options, Entity, Properties, PredicateOptions),
+		^^output_node(Predicate, Predicate, local, [], local_predicate, PredicateOptions),
 		remember_included_predicate(Predicate),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -151,8 +151,8 @@
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
 		),
-		memberchk(node_type_captions(Boolean), Options),
-		^^output_node(Predicate, Predicate, (dynamic), [], local_predicate, [node_type_captions(Boolean)]),
+		add_predicate_code_url(Options, Entity, Properties, PredicateOptions),
+		^^output_node(Predicate, Predicate, (dynamic), [], local_predicate, PredicateOptions),
 		remember_included_predicate(Predicate),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -160,8 +160,8 @@
 		entity_property(Kind, Entity, provides(Predicate, To, ProvidesProperties)),
 		\+ member(auxiliary, ProvidesProperties),
 		(	Kind == module ->
-			memberchk(node_type_captions(Boolean), Options),
-			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, [node_type_captions(Boolean)]),
+			add_predicate_code_url(Options, Entity, ProvidesProperties, PredicateOptions),
+			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, PredicateOptions),
 			remember_included_predicate(':'(To,Predicate))
 		;	(	current_object(To) ->
 				ToKind = object
@@ -169,10 +169,10 @@
 			),
 			entity_property(ToKind, To, declares(Predicate, DeclaresProperties)),
 			member(non_terminal(NonTerminal), DeclaresProperties) ->
-			add_predicate_documentation_url(Options, Entity, To::NonTerminal, PredicateOptions),
+			add_predicate_code_url(Options, Entity, ProvidesProperties, PredicateOptions),
 			^^output_node(To::NonTerminal, To::NonTerminal, (multifile), [], multifile_predicate, PredicateOptions),
 			remember_included_predicate(To::NonTerminal)
-		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
+		;	add_predicate_code_url(Options, Entity, ProvidesProperties, PredicateOptions),
 			^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
 			remember_included_predicate(To::Predicate)
 		),
@@ -274,61 +274,18 @@
 	scope_predicate_kind(protected, protected_predicate).
 	scope_predicate_kind(private, private_predicate).
 
-	% multifile predicate
-	add_predicate_documentation_url(Options, _, Entity::Functor/Arity, PredicateOptions) :-
-		!,
-		add_predicate_documentation_url(Options, Entity, Functor/Arity, PredicateOptions).
-	% multifile non-terminal
-	add_predicate_documentation_url(Options, _, Entity::Functor//Arity, PredicateOptions) :-
-		!,
-		add_predicate_documentation_url(Options, Entity, Functor//Arity, PredicateOptions).
-	% local predicate or non-terminal
-	add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions) :-
-		(	(	(	current_object(Entity) ->
-					object_property(Entity, file(Path))
-				;	current_category(Entity) ->
-					object_property(Entity, file(Path))
-				;	current_protocol(Entity) ->
-					protocol_property(Entity, file(Path))
-				;	% entity is not loaded
-					fail
-				),
-				member(path_url_prefixes(Prefix, CodePrefix, DocPrefix), Options),
-				atom_concat(Prefix, _, Path) ->
-				true
-			;	member(url_prefixes(CodePrefix, DocPrefix), Options)
-			) ->
-			functor(Entity, EntityFunctor, EntityArity),
-			atom_concat(DocPrefix, EntityFunctor, DocURL0),
-			atom_concat(DocURL0, '_', DocURL1),
-			number_codes(EntityArity, EntityArityCodes),
-			atom_codes(EntityArityAtom, EntityArityCodes),
-			atom_concat(DocURL1, EntityArityAtom, DocURL2),
-			memberchk(entity_url_suffix_target(Suffix, Target), Options),
-			(	Target == '' ->
-				atom_concat(DocURL2, Suffix, DocURL)
-			;	atom_concat(DocURL2, Suffix, DocURL3),
-				atom_concat(DocURL3, Target, DocURL4),
-				(	Predicate = Functor/Arity ->
-					atom_concat(DocURL4, Functor, DocURL5),
-					atom_concat(DocURL5, '/', DocURL6)
-				;	Predicate = Functor//Arity,
-					atom_concat(DocURL4, Functor, DocURL5),
-					atom_concat(DocURL5, '//', DocURL6)
-				),
-				number_codes(Arity, ArityCodes),
-				atom_codes(ArityAtom, ArityCodes),
-				atom_concat(DocURL6, ArityAtom, DocURL)
-			),
-			PredicateOptions = [urls(CodePrefix, DocURL)| Options]
-		;	PredicateOptions = Options
+	add_predicate_code_url(Options, Entity, Properties, PredicateOptions) :-
+		(	member(line_count(Line), Properties),
+			Line =\= -1 ->
+			add_xref_code_url(Options, Entity, Line, PredicateOptions)
+		;	PredicateOptions = []
 		).
 
 	add_xref_code_url(Options, Entity, Line, XRefOptions) :-
 		(	(	current_object(Entity) ->
 				object_property(Entity, file(Path))
 			;	current_category(Entity) ->
-				object_property(Entity, file(Path))
+				category_property(Entity, file(Path))
 			;	{atom(Entity), current_module(Entity)} ->
 				modules_diagram_support::module_property(Entity, file(Path))
 			;	% entity is not loaded
@@ -366,7 +323,7 @@
 				atom_codes(LineAtom, LineCodes),
 				atom_concat(CodeURL2, LineAtom, CodeURL)
 			),
-			XRefOptions = [urls(CodeURL, '')| Options]
+			XRefOptions = [url(CodeURL)| Options]
 		;	XRefOptions = Options
 		).
 
@@ -614,10 +571,10 @@
 
 	output_external_predicates(Options) :-
 		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external predicates)', external, [urls('',''), tooltip('(external predicates)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external predicates)', external, [url(''), tooltip('(external predicates)')| Options]),
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
-		add_predicate_documentation_url(Options, Object, Predicate, PredicateOptions),
+		add_predicate_code_url(Options, Object, [], PredicateOptions),
 		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
 		fail.
 	output_external_predicates(Options) :-
@@ -632,7 +589,7 @@
 		fail.
 	output_external_predicates(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external predicates)', external, [urls('',''), tooltip('(external predicates)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external predicates)', external, [url(''), tooltip('(external predicates)')| Options]).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).

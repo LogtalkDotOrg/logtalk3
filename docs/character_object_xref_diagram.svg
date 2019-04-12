@@ -10,7 +10,7 @@
 <title>character_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-834.7056 3166,-834.7056 3166,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_character_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt">
@@ -22,6 +22,7 @@
 <!-- is_newline/1 -->
 <g id="node1" class="node">
 <title>is_newline/1</title>
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L129">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="3068" cy="-772.4924" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="3022" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="3028" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_newline/1</text>
@@ -29,10 +30,13 @@
 <text text-anchor="start" x="3022" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="3057" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="3108" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_ascii/1 -->
 <g id="node2" class="node">
 <title>is_ascii/1</title>
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L32">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2906" cy="-772.4924" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="2867" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2873" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_ascii/1</text>
@@ -40,10 +44,13 @@
 <text text-anchor="start" x="2867" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2895.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2940" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_alpha/1 -->
 <g id="node3" class="node">
 <title>is_alpha/1</title>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L37">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2648" cy="-538.066" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="2609" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2615" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_alpha/1</text>
@@ -51,10 +58,13 @@
 <text text-anchor="start" x="2609" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2637.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2682" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_letter/1 -->
 <g id="node4" class="node">
 <title>is_letter/1</title>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L41">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2648" cy="-303.6396" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="2606" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2612" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_letter/1</text>
@@ -62,6 +72,8 @@
 <text text-anchor="start" x="2606" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2637.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2685" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_alpha/1&#45;&gt;is_letter/1 -->
 <g id="edge1" class="edge">
@@ -79,6 +91,7 @@
 <!-- is_lower_case/1 -->
 <g id="node10" class="node">
 <title>is_lower_case/1</title>
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L72">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2598" cy="-69.2132" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="2542" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2548" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_lower_case/1</text>
@@ -86,6 +99,8 @@
 <text text-anchor="start" x="2542" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2587" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2648" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_letter/1&#45;&gt;is_lower_case/1 -->
 <g id="edge2" class="edge">
@@ -103,6 +118,7 @@
 <!-- is_upper_case/1 -->
 <g id="node11" class="node">
 <title>is_upper_case/1</title>
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L76">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2797" cy="-69.2132" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="2741" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2747" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_upper_case/1</text>
@@ -110,6 +126,8 @@
 <text text-anchor="start" x="2741" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2786" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2847" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_letter/1&#45;&gt;is_upper_case/1 -->
 <g id="edge3" class="edge">
@@ -127,6 +145,7 @@
 <!-- is_alphanumeric/1 -->
 <g id="node5" class="node">
 <title>is_alphanumeric/1</title>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L46">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2721" cy="-772.4924" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="2659" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2665" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_alphanumeric/1</text>
@@ -134,6 +153,8 @@
 <text text-anchor="start" x="2659" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2710.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2778" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_alphanumeric/1&#45;&gt;is_alpha/1 -->
 <g id="edge4" class="edge">
@@ -151,6 +172,7 @@
 <!-- is_dec_digit/1 -->
 <g id="node8" class="node">
 <title>is_dec_digit/1</title>
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L58">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2819" cy="-538.066" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="2767" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2773" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_dec_digit/1</text>
@@ -158,6 +180,8 @@
 <text text-anchor="start" x="2767" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2808.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2866" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_alphanumeric/1&#45;&gt;is_dec_digit/1 -->
 <g id="edge5" class="edge">
@@ -175,6 +199,7 @@
 <!-- is_bin_digit/1 -->
 <g id="node6" class="node">
 <title>is_bin_digit/1</title>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L51">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2518" cy="-772.4924" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="2466" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2472" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_bin_digit/1</text>
@@ -182,10 +207,13 @@
 <text text-anchor="start" x="2466" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2507.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2565" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_octal_digit/1 -->
 <g id="node7" class="node">
 <title>is_octal_digit/1</title>
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L54">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2320" cy="-772.4924" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="2261" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2267" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_octal_digit/1</text>
@@ -193,10 +221,13 @@
 <text text-anchor="start" x="2261" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2309" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2373" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_hex_digit/1 -->
 <g id="node9" class="node">
 <title>is_hex_digit/1</title>
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L62">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="2122" cy="-772.4924" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="2070" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2076" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_hex_digit/1</text>
@@ -204,10 +235,13 @@
 <text text-anchor="start" x="2070" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2111.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="2169" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_vowel/1 -->
 <g id="node12" class="node">
 <title>is_vowel/1</title>
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L80">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1951" cy="-772.4924" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="1912" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1918" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_vowel/1</text>
@@ -215,10 +249,13 @@
 <text text-anchor="start" x="1912" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1940.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1985" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_white_space/1 -->
 <g id="node13" class="node">
 <title>is_white_space/1</title>
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L91">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1771" cy="-772.4924" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="1712" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1718" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_white_space/1</text>
@@ -226,10 +263,13 @@
 <text text-anchor="start" x="1712" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1760" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1824" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_white_space_code/1 -->
 <g id="node14" class="node">
 <title>is_white_space_code/1</title>
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L95">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1783" cy="-538.066" rx="118.1737" ry="21.4286"/>
 <text text-anchor="start" x="1708" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1714" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_white_space_code/1</text>
@@ -237,6 +277,8 @@
 <text text-anchor="start" x="1708" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1772.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1853" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_white_space/1&#45;&gt;is_white_space_code/1 -->
 <g id="edge6" class="edge">
@@ -254,6 +296,7 @@
 <!-- is_layout/1 -->
 <g id="node15" class="node">
 <title>is_layout/1</title>
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L98">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1587" cy="-772.4924" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="1545" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1551" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_layout/1</text>
@@ -261,10 +304,13 @@
 <text text-anchor="start" x="1545" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1576.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1624" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_layout_code/1 -->
 <g id="node16" class="node">
 <title>is_layout_code/1</title>
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L102">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1552" cy="-538.066" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="1493" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1499" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_layout_code/1</text>
@@ -272,6 +318,8 @@
 <text text-anchor="start" x="1493" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1541" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1605" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_layout/1&#45;&gt;is_layout_code/1 -->
 <g id="edge7" class="edge">
@@ -289,6 +337,7 @@
 <!-- is_quote/1 -->
 <g id="node17" class="node">
 <title>is_quote/1</title>
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L109">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1430" cy="-772.4924" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="1391" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1397" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_quote/1</text>
@@ -296,10 +345,13 @@
 <text text-anchor="start" x="1391" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1419.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1464" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_punctation/1 -->
 <g id="node18" class="node">
 <title>is_punctation/1</title>
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L113">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1254" cy="-772.4924" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="1198" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1204" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_punctation/1</text>
@@ -307,10 +359,13 @@
 <text text-anchor="start" x="1198" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1243" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1304" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_period/1 -->
 <g id="node19" class="node">
 <title>is_period/1</title>
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L120">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1074" cy="-772.4924" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="1032" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1038" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_period/1</text>
@@ -318,10 +373,13 @@
 <text text-anchor="start" x="1032" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1063.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1111" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_control/1 -->
 <g id="node20" class="node">
 <title>is_control/1</title>
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L124">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="908" cy="-772.4924" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="862" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="868" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_control/1</text>
@@ -329,10 +387,13 @@
 <text text-anchor="start" x="862" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="897" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="948" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- is_end_of_line/1 -->
 <g id="node21" class="node">
 <title>is_end_of_line/1</title>
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L132">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="719" cy="-772.4924" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="660" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="666" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_end_of_line/1</text>
@@ -340,10 +401,13 @@
 <text text-anchor="start" x="660" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="708" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="772" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- parenthesis/2 -->
 <g id="node22" class="node">
 <title>parenthesis/2</title>
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L138">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="526" cy="-772.4924" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="477" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="483" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">parenthesis/2</text>
@@ -351,10 +415,13 @@
 <text text-anchor="start" x="477" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="515" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="569" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- lower_upper/2 -->
 <g id="node23" class="node">
 <title>lower_upper/2</title>
+<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L142">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="347" cy="-772.4924" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="298" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="304" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">lower_upper/2</text>
@@ -362,10 +429,13 @@
 <text text-anchor="start" x="298" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="336" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="390" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- valid/1 -->
 <g id="node24" class="node">
 <title>valid/1</title>
+<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L172">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="195" cy="-772.4924" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="166" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="172" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">valid/1</text>
@@ -373,10 +443,13 @@
 <text text-anchor="start" x="166" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="184.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="219" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- check/1 -->
 <g id="node25" class="node">
 <title>check/1</title>
+<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/character.lgt#L176">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="71" cy="-772.4924" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="42" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="48" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">check/1</text>
@@ -384,6 +457,8 @@
 <text text-anchor="start" x="42" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="60.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="95" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 </g>
 </svg>

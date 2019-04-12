@@ -10,7 +10,7 @@
 <title>java_2_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-375.8528 963,-375.8528 963,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_java_2_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt">
@@ -30,6 +30,7 @@
 <!-- get_field/2 -->
 <g id="node1" class="node">
 <title>get_field/2</title>
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L41">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="870" cy="-313.6396" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="828" y="-316.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="834" y="-315.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">get_field/2</text>
@@ -37,6 +38,8 @@
 <text text-anchor="start" x="828" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="859.5" y="-306.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="907" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- jpl:jpl_get/3 -->
 <g id="node8" class="node">
@@ -65,6 +68,7 @@
 <!-- set_field/2 -->
 <g id="node2" class="node">
 <title>set_field/2</title>
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L44">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="709" cy="-313.6396" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="667" y="-316.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="673" y="-315.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">set_field/2</text>
@@ -72,6 +76,8 @@
 <text text-anchor="start" x="667" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="698.5" y="-306.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="746" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- jpl:jpl_set/3 -->
 <g id="node9" class="node">
@@ -100,6 +106,7 @@
 <!-- new/2 -->
 <g id="node3" class="node">
 <title>new/2</title>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L47">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="576" cy="-313.6396" rx="43.6818" ry="21.4286"/>
 <text text-anchor="start" x="553" y="-316.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="559" y="-315.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">new/2</text>
@@ -107,6 +114,8 @@
 <text text-anchor="start" x="553" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="565" y="-306.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="593" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- jpl:jpl_new/3 -->
 <g id="node10" class="node">
@@ -135,6 +144,7 @@
 <!-- new/1 -->
 <g id="node4" class="node">
 <title>new/1</title>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L50">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="470" cy="-313.6396" rx="43.6818" ry="21.4286"/>
 <text text-anchor="start" x="447" y="-316.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="453" y="-315.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">new/1</text>
@@ -142,6 +152,8 @@
 <text text-anchor="start" x="447" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="459" y="-306.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="487" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- new/1&#45;&gt;jpl:jpl_new/3 -->
 <g id="edge4" class="edge">
@@ -159,6 +171,7 @@
 <!-- invoke/1 -->
 <g id="node5" class="node">
 <title>invoke/1</title>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L53">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="351" cy="-313.6396" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="319" y="-316.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="325" y="-315.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">invoke/1</text>
@@ -166,6 +179,8 @@
 <text text-anchor="start" x="319" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="340.5" y="-306.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="378" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- jpl:jpl_call/4 -->
 <g id="node11" class="node">
@@ -194,6 +209,7 @@
 <!-- invoke/2 -->
 <g id="node6" class="node">
 <title>invoke/2</title>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L57">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="218" cy="-313.6396" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="186" y="-316.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="192" y="-315.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">invoke/2</text>
@@ -201,6 +217,8 @@
 <text text-anchor="start" x="186" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="207.5" y="-306.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="245" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- invoke/2&#45;&gt;jpl:jpl_call/4 -->
 <g id="edge6" class="edge">
@@ -218,6 +236,7 @@
 <!-- forward/1 -->
 <g id="node7" class="node">
 <title>forward/1</title>
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_jpl.lgt#L60">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="80" cy="-313.6396" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="44" y="-316.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="50" y="-315.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">forward/1</text>
@@ -225,6 +244,8 @@
 <text text-anchor="start" x="44" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="69" y="-306.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="110" y="-305.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- forward/1&#45;&gt;jpl:jpl_call/4 -->
 <g id="edge7" class="edge">

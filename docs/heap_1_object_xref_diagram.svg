@@ -10,7 +10,7 @@
 <title>heap_1_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1069.132 1146,-1069.132 1146,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/08, 18:41</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_heap_1_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt">
@@ -22,6 +22,7 @@
 <!-- as_heap/2 -->
 <g id="node1" class="node">
 <title>as_heap/2</title>
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L162">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1062" cy="-772.4924" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="1026" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1032" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">as_heap/2</text>
@@ -29,10 +30,13 @@
 <text text-anchor="start" x="1026" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1051" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1092" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- as_heap/4 -->
 <g id="node15" class="node">
 <title>as_heap/4</title>
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L165">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1052" cy="-538.066" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="1016" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1022" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">as_heap/4</text>
@@ -40,6 +44,8 @@
 <text text-anchor="start" x="1016" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1041" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1082" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- as_heap/2&#45;&gt;as_heap/4 -->
 <g id="edge9" class="edge">
@@ -57,6 +63,7 @@
 <!-- empty/1 -->
 <g id="node2" class="node">
 <title>empty/1</title>
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L131">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1071" cy="-1006.9188" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="1042" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1048" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">empty/1</text>
@@ -64,10 +71,13 @@
 <text text-anchor="start" x="1042" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1060.5" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1095" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- insert/4 -->
 <g id="node3" class="node">
 <title>insert/4</title>
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L75">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="905" cy="-538.066" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="873" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="879" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">insert/4</text>
@@ -75,10 +85,13 @@
 <text text-anchor="start" x="873" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="894.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="932" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- insert/5 -->
 <g id="node4" class="node">
 <title>insert/5</title>
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L82">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="979" cy="-303.6396" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="947" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="953" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">insert/5</text>
@@ -86,6 +99,8 @@
 <text text-anchor="start" x="947" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="968.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1006" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- insert/4&#45;&gt;insert/5 -->
 <g id="edge1" class="edge">
@@ -103,6 +118,7 @@
 <!-- insert/8 -->
 <g id="node5" class="node">
 <title>insert/8</title>
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L92">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="918" cy="-69.2132" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="886" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="892" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">insert/8</text>
@@ -110,6 +126,8 @@
 <text text-anchor="start" x="886" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="907.5" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="945" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- insert/5&#45;&gt;insert/8 -->
 <g id="edge3" class="edge">
@@ -127,6 +145,7 @@
 <!-- sort/8 -->
 <g id="node6" class="node">
 <title>sort/8</title>
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L99">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="1043" cy="-69.2132" rx="48.1667" ry="21.4286"/>
 <text text-anchor="start" x="1017" y="-72.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1023" y="-71.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">sort/8</text>
@@ -134,6 +153,8 @@
 <text text-anchor="start" x="1017" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1032" y="-61.6132" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="1063" y="-61.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- insert/5&#45;&gt;sort/8 -->
 <g id="edge2" class="edge">
@@ -164,6 +185,7 @@
 <!-- insert_all/3 -->
 <g id="node7" class="node">
 <title>insert_all/3</title>
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L105">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="905" cy="-772.4924" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="859" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="865" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">insert_all/3</text>
@@ -171,6 +193,8 @@
 <text text-anchor="start" x="859" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="894" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="945" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- insert_all/3&#45;&gt;insert/4 -->
 <g id="edge5" class="edge">
@@ -188,6 +212,7 @@
 <!-- delete/4 -->
 <g id="node8" class="node">
 <title>delete/4</title>
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L110">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="943" cy="-1006.9188" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="911" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="917" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">delete/4</text>
@@ -195,10 +220,13 @@
 <text text-anchor="start" x="911" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="932.5" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="970" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- repair/4 -->
 <g id="node9" class="node">
 <title>repair/4</title>
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L114">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="753" cy="-772.4924" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="721" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="727" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">repair/4</text>
@@ -206,6 +234,8 @@
 <text text-anchor="start" x="721" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="742.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="780" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- delete/4&#45;&gt;repair/4 -->
 <g id="edge6" class="edge">
@@ -223,6 +253,7 @@
 <!-- new/1 -->
 <g id="node10" class="node">
 <title>new/1</title>
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L134">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="824" cy="-1006.9188" rx="43.6818" ry="21.4286"/>
 <text text-anchor="start" x="801" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="807" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">new/1</text>
@@ -230,10 +261,13 @@
 <text text-anchor="start" x="801" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="813" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="841" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- size/2 -->
 <g id="node11" class="node">
 <title>size/2</title>
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L136">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="714" cy="-1006.9188" rx="48.1667" ry="21.4286"/>
 <text text-anchor="start" x="688" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="694" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">size/2</text>
@@ -241,10 +275,13 @@
 <text text-anchor="start" x="688" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="703" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="734" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- as_list/2 -->
 <g id="node12" class="node">
 <title>as_list/2</title>
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L138">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="462" cy="-1006.9188" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="426" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="432" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">as_list/2</text>
@@ -252,10 +289,13 @@
 <text text-anchor="start" x="426" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="451" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="492" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- tree_to_list/2 -->
 <g id="node13" class="node">
 <title>tree_to_list/2</title>
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L141">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="421" cy="-772.4924" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="369" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="375" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">tree_to_list/2</text>
@@ -263,6 +303,8 @@
 <text text-anchor="start" x="369" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="410.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="468" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- as_list/2&#45;&gt;tree_to_list/2 -->
 <g id="edge7" class="edge">
@@ -280,6 +322,7 @@
 <!-- merge_pairs/3 -->
 <g id="node14" class="node">
 <title>merge_pairs/3</title>
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L147">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="421" cy="-538.066" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="372" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="378" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">merge_pairs/3</text>
@@ -287,6 +330,8 @@
 <text text-anchor="start" x="372" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="410" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="464" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- tree_to_list/2&#45;&gt;merge_pairs/3 -->
 <g id="edge8" class="edge">
@@ -317,6 +362,7 @@
 <!-- merge/3 -->
 <g id="node16" class="node">
 <title>merge/3</title>
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L171">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="595" cy="-1006.9188" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="566" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="572" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">merge/3</text>
@@ -324,10 +370,13 @@
 <text text-anchor="start" x="566" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="584.5" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="619" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- merge_tree/3 -->
 <g id="node17" class="node">
 <title>merge_tree/3</title>
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L177">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="601" cy="-772.4924" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="555" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="561" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">merge_tree/3</text>
@@ -335,6 +384,8 @@
 <text text-anchor="start" x="555" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="590" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="641" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- merge/3&#45;&gt;merge_tree/3 -->
 <g id="edge11" class="edge">
@@ -365,6 +416,7 @@
 <!-- top/3 -->
 <g id="node18" class="node">
 <title>top/3</title>
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L183">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="338" cy="-1006.9188" rx="43.6818" ry="21.4286"/>
 <text text-anchor="start" x="315" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="321" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">top/3</text>
@@ -372,10 +424,13 @@
 <text text-anchor="start" x="315" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="327" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="355" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- top_next/5 -->
 <g id="node19" class="node">
 <title>top_next/5</title>
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L185">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="209" cy="-1006.9188" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="170" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="176" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">top_next/5</text>
@@ -383,10 +438,13 @@
 <text text-anchor="start" x="170" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="198.5" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="243" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- top_next/4 -->
 <g id="node20" class="node">
 <title>top_next/4</title>
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L188">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="217" cy="-772.4924" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="178" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="184" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">top_next/4</text>
@@ -394,6 +452,8 @@
 <text text-anchor="start" x="178" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="206.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="251" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- top_next/5&#45;&gt;top_next/4 -->
 <g id="edge13" class="edge">
@@ -411,6 +471,7 @@
 <!-- valid/1 -->
 <g id="node21" class="node">
 <title>valid/1</title>
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L197">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="71" cy="-1006.9188" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="42" y="-1009.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="48" y="-1009.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">valid/1</text>
@@ -418,10 +479,13 @@
 <text text-anchor="start" x="42" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="60.5" y="-999.3188" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="95" y="-998.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- valid_/3 -->
 <g id="node22" class="node">
 <title>valid_/3</title>
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/heaps.lgt#L202">
 <ellipse fill="#f5f5dc" stroke="#000000" cx="75" cy="-772.4924" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="43" y="-775.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="49" y="-774.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">valid_/3</text>
@@ -429,6 +493,8 @@
 <text text-anchor="start" x="43" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="64.5" y="-764.8924" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
 <text text-anchor="start" x="102" y="-764.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- valid/1&#45;&gt;valid_/3 -->
 <g id="edge14" class="edge">

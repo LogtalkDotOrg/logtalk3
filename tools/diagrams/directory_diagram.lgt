@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/04/11,
+		date is 2019/04/12,
 		comment is 'Common predicates for generating directory diagrams.',
 		parnames is ['Format']
 	]).
@@ -71,7 +71,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external directories)', external, [urls('',''), tooltip('(external directories)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external directories)', external, [url(''), tooltip('(external directories)')| Options]),
 		::retract(referenced_logtalk_directory_(Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
@@ -85,6 +85,6 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external directories)', external, [urls('',''), tooltip('(external directories)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external directories)', external, [url(''), tooltip('(external directories)')| Options]).
 
 :- end_category.
