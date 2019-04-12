@@ -269,7 +269,7 @@ generated diagrams. For entity diagrams the options are:
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
-	code and documenting URL prefixes for a path prefix used when generating cluster, library, directory, file, and entity links (atoms; no default)
+	code and documenting URL prefixes for a path prefix used when generating cluster, library, directory, file, and entity links (atoms; no default; can be specified multiple times)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
 	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; default is the home directory URL for `CodeURLPrefix` and `''` for `DocURLPrefix`)
 - `entity_url_suffix_target(Suffix, Target)`  
@@ -300,7 +300,7 @@ For directory and file diagrams the options are:
 - `file_extensions(Boolean)`  
 	print/omit file name extensions (`true` or `false`; default is `true`)
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
-	code and documenting URL prefixes for a path prefix used when generating cluster, directory, file, and entity links (atoms; no default)
+	code and documenting URL prefixes for a path prefix used when generating cluster, directory, file, and entity links (atoms; no default; can be specified multiple times)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
 	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; default is the home directory URL for `CodeURLPrefix` and `''` for `DocURLPrefix`)
 - `omit_path_prefixes(Prefixes)`  
@@ -331,7 +331,7 @@ For library diagrams the options are:
 - `directory_paths(Boolean)`  
 	print/omit file directory paths (`true` or `false`; default is `false`)
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
-	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default)
+	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default; can be specified multiple times)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
 	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; default is the home directory URL for `CodeURLPrefix` and `''` for `DocURLPrefix`)
 - `omit_path_prefixes(Prefixes)`  
