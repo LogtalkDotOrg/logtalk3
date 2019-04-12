@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on April 8, 2019
+##   Last updated on April 12, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -55,7 +55,7 @@ contributions_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data
 
 
 print_version() {
-	echo "$(basename "$0") 0.10"
+	echo "$(basename "$0") 0.11"
 	exit 0
 }
 
@@ -146,21 +146,7 @@ $logtalk "$tools_goal"
 $logtalk "$contributions_goal"
 $logtalk "$ports_goal"
 
-cp "$LOGTALKHOME/tools/diagrams/zoom.png" .
-
-for f in *.dot; do
-	flag=0
-	counter=10
-	# use loop to workaround dot random crashes by retrying
-	# the conversion in case of a crash up to 10 times
-	while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do
-		if dot -Tsvg "$f" > "${f%.*}.svg" ; then
-			flag=1
-		fi
-		(( --counter ))
-	done
-done
-
+"$LOGTALKHOME/tools/diagrams/lgt2svg.sh"
 rm ./*.dot
 
 exit 0
