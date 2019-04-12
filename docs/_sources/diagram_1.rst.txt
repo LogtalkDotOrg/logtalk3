@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.15
-| **Date:** 2019/4/11
+| **Version:** 2.16
+| **Date:** 2019/4/12
 
 | **Compilation flags:**
 |    ``static``
@@ -975,7 +975,7 @@ Adds urls/2 and tooltip/1 link options (for use by the graph language) based on 
 ``omit_path_prefix/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing file node identitifers and captions.
+Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing directory and file node identitifers and captions.
 
 | **Compilation flags:**
 |    ``static``
@@ -1009,13 +1009,13 @@ Adds node zoom options when using the zoom option.
 
 .. raw:: html
 
-   <div id="message_diagram_description_prefix/1"> </div>
+   <div id="message_diagram_description/1"> </div>
 
-.. index:: message_diagram_description_prefix/1
-.. _diagram/1::message_diagram_description_prefix/1:
+.. index:: message_diagram_description/1
+.. _diagram/1::message_diagram_description/1:
 
-``message_diagram_description_prefix/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``message_diagram_description/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``static``

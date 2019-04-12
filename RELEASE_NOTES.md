@@ -72,6 +72,8 @@ autoloading mechanism when using SWI-Prolog as the backend compiler.
 to a multifile predicate for a parametric entity would result in a duplicated
 node.
 
+* FIXED: Bug where a diagram node with an empty label could be generated.
+
 Ports
 -----
 

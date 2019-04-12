@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.15,
+		version is 2.16,
 		author is 'Paulo Moura',
-		date is 2019/04/11,
+		date is 2019/04/12,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -1012,13 +1012,15 @@
 	:- protected(omit_path_prefix/3).
 	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).
 	:- info(omit_path_prefix/3, [
-		comment is 'Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing file node identitifers and captions.',
+		comment is 'Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing directory and file node identitifers and captions.',
 		argnames is ['Path', 'Options', 'Relative']
 	]).
 
 	omit_path_prefix(Path, Options, Relative) :-
 		memberchk(omit_path_prefixes(Prefixes), Options),
-		(	member(Prefix, Prefixes),
+		(	member(Path, Prefixes) ->
+			Relative = './'
+		;	member(Prefix, Prefixes),
 			atom_concat(Prefix, Relative, Path) ->
 			true
 		;	Relative = Path
