@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.28,
+		version is 2.29,
 		author is 'Paulo Moura',
 		date is 2019/04/13,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -356,7 +356,10 @@
 			(	Line = -1 ->
 				% no line number available; simply link to the entity file
 				CodeURL = CodeURL0
-			;	% line available; check first for BitBucket code hosting
+			;	sub_atom(CodeURL0, 0, 7, _, 'file://') ->
+				% link to local file; don't append line number
+				CodeURL = CodeURL0
+			;	% append line number; check first for BitBucket code hosting
 				% style URL line reference
 				member(url_line_references(bitbucket), Options) ->
 				decompose_file_name(RelativePath, _, File),

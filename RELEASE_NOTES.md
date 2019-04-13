@@ -77,6 +77,8 @@ node.
 
 * FIXED: Bug where a diagram node with an empty label could be generated.
 
+* FIXED: Don't append line numbers to local file URLs when generating diagrams.
+
 Ports
 -----
 
