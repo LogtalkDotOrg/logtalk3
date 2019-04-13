@@ -41,8 +41,8 @@ tools, ports, and contributions inheritance diagrams.
 Tools
 -----
 
-* CHANGED: Predicate nodes in cross-referencing diagrams now link to source
-code instead of documentation.
+* CHANGED: Predicate nodes in cross-referencing diagrams (with the except of
+external nodes) now link to source code instead of documentation.
 
 * CHANGED: Default values for the `url_prefixes/2` and `omit_path_prefixes/1`
 diagram options to use the home directory URL and path as the default prefixes

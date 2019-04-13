@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.27,
+		version is 2.28,
 		author is 'Paulo Moura',
 		date is 2019/04/13,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -273,6 +273,51 @@
 	scope_predicate_kind(public, public_predicate).
 	scope_predicate_kind(protected, protected_predicate).
 	scope_predicate_kind(private, private_predicate).
+
+	add_predicate_documentation_url(Options, Entity, Predicate, XRefOptions) :-
+		(	% first, find the file defining the entity
+			(	current_object(Entity) ->
+				object_property(Entity, file(Path))
+			;	current_category(Entity) ->
+				object_property(Entity, file(Path))
+			;	current_protocol(Entity) ->
+				protocol_property(Entity, file(Path))
+			;	% entity is not loaded
+				fail
+			),
+			% second, find the documentation URL prefix, looking for a
+			% path specific prefix before considering the generic prefix
+			(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
+				atom_concat(Prefix, _, Path) ->
+				true
+			;	member(url_prefixes(_, DocPrefix), Options)
+			) ->
+			functor(Entity, EntityFunctor, EntityArity),
+			atom_concat(DocPrefix, EntityFunctor, DocURL0),
+			atom_concat(DocURL0, '_', DocURL1),
+			number_codes(EntityArity, EntityArityCodes),
+			atom_codes(EntityArityAtom, EntityArityCodes),
+			atom_concat(DocURL1, EntityArityAtom, DocURL2),
+			memberchk(entity_url_suffix_target(Suffix, Target), Options),
+			(	Target == '' ->
+				atom_concat(DocURL2, Suffix, DocURL)
+			;	atom_concat(DocURL2, Suffix, DocURL3),
+				atom_concat(DocURL3, Target, DocURL4),
+				(	Predicate = Functor/Arity ->
+					atom_concat(DocURL4, Functor, DocURL5),
+					atom_concat(DocURL5, '/', DocURL6)
+				;	Predicate = Functor//Arity,
+					atom_concat(DocURL4, Functor, DocURL5),
+					atom_concat(DocURL5, '//', DocURL6)
+				),
+				number_codes(Arity, ArityCodes),
+				atom_codes(ArityAtom, ArityCodes),
+				atom_concat(DocURL6, ArityAtom, DocURL)
+			),
+			XRefOptions = [url(DocURL)| Options]
+		;	% could not find entity file or URL prefixes not definined
+			XRefOptions = Options
+		).
 
 	add_predicate_code_url(Options, Entity, Properties, PredicateOptions) :-
 		(	member(line_count(Line), Properties),
@@ -579,8 +624,8 @@
 		Format::graph_header(diagram_output_file, other, '(external predicates)', external, [url(''), tooltip('(external predicates)')| Options]),
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
-		memberchk(node_type_captions(Boolean), Options),
-		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, [node_type_captions(Boolean)]),
+		add_predicate_documentation_url(Options, Object, Predicate, PredicateOptions),
+		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
 		fail.
 	output_external_predicates(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
