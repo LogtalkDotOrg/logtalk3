@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.26,
+		version is 2.27,
 		author is 'Paulo Moura',
 		date is 2019/04/13,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -282,7 +282,8 @@
 		).
 
 	add_xref_code_url(Options, Entity, Line, XRefOptions) :-
-		(	(	current_object(Entity) ->
+		(	% first, find the file defining the entity
+			(	current_object(Entity) ->
 				object_property(Entity, file(Path))
 			;	current_category(Entity) ->
 				category_property(Entity, file(Path))
@@ -291,24 +292,28 @@
 			;	% entity is not loaded
 				fail
 			),
+			% second, find the code URL prefix, looking for a path
+			% specific prefix before considering the generic prefix
 			(	member(path_url_prefixes(Prefix, CodePrefix, _), Options),
 				atom_concat(Prefix, _, Path) ->
 				true
 			;	member(url_prefixes(CodePrefix, _), Options)
 			) ->
+			% third, cut down when specified local path prefix
+			% before constructing the final code URL
 			memberchk(omit_path_prefixes(PathPrefixes), Options),
 			(	member(PathPrefix, PathPrefixes),
 				atom_concat(PathPrefix, RelativePath, Path) ->
 				true
 			;	RelativePath = Path
 			),
-			memberchk(entity_url_suffix_target(_, Target), Options),
 			atom_concat(CodePrefix, RelativePath, CodeURL0),
-			(	Target == '' ->
+			(	Line = -1 ->
+				% no line number available; simply link to the entity file
 				CodeURL = CodeURL0
-			;	Line = -1 ->
-				CodeURL = CodeURL0
-			;	member(url_line_references(bitbucket), Options) ->
+			;	% line available; check first for BitBucket code hosting
+				% style URL line reference
+				member(url_line_references(bitbucket), Options) ->
 				decompose_file_name(RelativePath, _, File),
 				atom_concat(CodeURL0, '?fileviewer=file-view-default#', CodeURL1),
 				atom_concat(CodeURL1, File, CodeURL2),
@@ -317,14 +322,14 @@
 				atom_codes(LineAtom, LineCodes),
 				atom_concat(CodeURL3, LineAtom, CodeURL)
 			;	% assume github or gitlab line reference syntax
-				atom_concat(CodeURL0, Target, CodeURL1),
-				atom_concat(CodeURL1, 'L', CodeURL2),
+				atom_concat(CodeURL0, '#L', CodeURL1),
 				number_codes(Line, LineCodes),
 				atom_codes(LineAtom, LineCodes),
-				atom_concat(CodeURL2, LineAtom, CodeURL)
+				atom_concat(CodeURL1, LineAtom, CodeURL)
 			),
 			XRefOptions = [url(CodeURL)| Options]
-		;	XRefOptions = Options
+		;	% could not find entity file or URL prefixes not definined
+			XRefOptions = Options
 		).
 
 	calls_local_predicate(module, Entity, Caller, Line, Callee) :-
