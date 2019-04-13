@@ -39,7 +39,7 @@ contents and appearance.
 
 Diagram generation can be easily automated using the `doclet` tool and the
 `logtalk_doclet` script. See the `doclet` tool examples and documentation
-for details.
+for details. See also the `diagrams` tool `lgt2svg` script.
 
 
 API documentation
@@ -165,7 +165,7 @@ relations):
 
 The library, directory, file, entity, and predicate nodes that are not part
 of the predicates, entities, files, or libraries for which we are generating
-a diagram use a dashed border.
+a diagram use a dashed border and described as external.
 
 
 Supported graph languages
@@ -375,7 +375,8 @@ Support for displaying Prolog modules and Prolog module files in diagrams:
 When using SWI-Prolog or YAP as the backend compilers, diagrams can also be
 generated for (loaded) Prolog source files (containing module definitions)
 and for (loaded) Prolog modules. However, the diagraming methods that take
-a library name as argument are not currently usable.
+a library name as argument are not currently usable and links to module
+documentation is limited.
 
 
 Creating diagrams for plain Prolog files
