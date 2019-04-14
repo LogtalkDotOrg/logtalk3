@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.31,
+		version is 2.32,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -407,7 +407,10 @@
 			true
 		;	Line = -1
 		),
-		(	entity_property(Kind, Entity, defines(Callee0, CalleeDefinesProperties)),
+		(	entity_property(Kind, Entity, declares(Callee0, CalleeDeclaresProperties)),
+			member(non_terminal(CalleeNonTerminal), CalleeDeclaresProperties) ->
+			Callee = CalleeNonTerminal
+		;	entity_property(Kind, Entity, defines(Callee0, CalleeDefinesProperties)),
 			member(non_terminal(CalleeNonTerminal), CalleeDefinesProperties) ->
 			Callee = CalleeNonTerminal
 		;	Callee = Callee0
