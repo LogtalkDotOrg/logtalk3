@@ -152,6 +152,6 @@ yes
 | ?- [cliopatria].
 ...
 
-| ?- working_directory(ClioPatria,ClioPatria), getenv('HOME', Home), file_search_path(swi, SWIHome), atom_concat(SWIHome, '/library', Library), git_hash(Hash, []), atomic_list_concat(['https://github.com/ClioPatria/ClioPatria/tree/',Hash,'/'], Git), diagrams::rdirectory(cliopatria, '.', [zoom(true), path_url_prefixes(ClioPatria, Git, ''), path_url_prefixes(Library, 'https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', ''), omit_path_prefixes([ClioPatria, Home]), exclude_directories([web, test, scripts, w3c, etc, rdf, 'Windows', 'Java'])]).
+| ?- working_directory(ClioPatria,ClioPatria), getenv('HOME', Home), file_search_path(swi, SWIHome), atom_concat(SWIHome, '/library', Library), git_hash(Hash, []), atomic_list_concat(['https://github.com/ClioPatria/ClioPatria/tree/',Hash,'/'], Git), diagrams::rdirectory(cliopatria, '.', [zoom(true), path_url_prefixes(ClioPatria, Git, ''), path_url_prefixes(Library, 'https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', ''), omit_path_prefixes([ClioPatria, Library]), exclude_directories([web, test, scripts, w3c, etc, rdf, 'Windows', 'Java'])]).
 ...
 
