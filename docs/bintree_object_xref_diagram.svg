@@ -10,7 +10,7 @@
 <title>bintree_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-834.7056 2859,-834.7056 2859,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/14, 19:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_bintree_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt">
@@ -22,8 +22,8 @@
 <g id="clust2" class="cluster">
 <title>cluster_other</title>
 <g id="a_clust2"><a xlink:title="(external predicates)">
-<path fill="#ffffff" stroke="#8b8989" d="M938,-275.6396C938,-275.6396 1228,-275.6396 1228,-275.6396 1234,-275.6396 1240,-281.6396 1240,-287.6396 1240,-287.6396 1240,-338.6396 1240,-338.6396 1240,-344.6396 1234,-350.6396 1228,-350.6396 1228,-350.6396 938,-350.6396 938,-350.6396 932,-350.6396 926,-344.6396 926,-338.6396 926,-338.6396 926,-287.6396 926,-287.6396 926,-281.6396 932,-275.6396 938,-275.6396"/>
-<text text-anchor="middle" x="997.5" y="-338.6396" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">(external predicates)</text>
+<path fill="#ffffff" stroke="#8b8989" d="M907,-272.4264C907,-272.4264 1245,-272.4264 1245,-272.4264 1251,-272.4264 1257,-278.4264 1257,-284.4264 1257,-284.4264 1257,-341.8528 1257,-341.8528 1257,-347.8528 1251,-353.8528 1245,-353.8528 1245,-353.8528 907,-353.8528 907,-353.8528 901,-353.8528 895,-347.8528 895,-341.8528 895,-341.8528 895,-284.4264 895,-284.4264 895,-278.4264 901,-272.4264 907,-272.4264"/>
+<text text-anchor="middle" x="966.5" y="-341.8528" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">(external predicates)</text>
 </a>
 </g>
 </g>
@@ -86,13 +86,13 @@
 <g id="node16" class="node">
 <title>inorder/3</title>
 <g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L65">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1312" cy="-303.6396" rx="62.4516" ry="21.4286"/>
-<text text-anchor="start" x="1276" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1282" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">inorder/3</text>
-<text text-anchor="start" x="1342" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1276" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1301" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="1342" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<ellipse fill="#f5f5dc" stroke="#000000" cx="1329" cy="-303.6396" rx="62.4516" ry="21.4286"/>
+<text text-anchor="start" x="1293" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1299" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">inorder/3</text>
+<text text-anchor="start" x="1359" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1293" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1318" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="1359" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
@@ -100,12 +100,12 @@
 <g id="edge2" class="edge">
 <title>inorder/2&#45;&gt;inorder/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L62" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1271.0728,-516.8488C1278.9176,-475.9813 1296.1779,-386.0644 1305.5831,-337.0684"/>
-<polygon fill="#000000" stroke="#000000" points="1305.6417,-336.7627 1302.8445,-330.1161 1307.904,-324.9778 1305.6417,-336.7627"/>
+<path fill="none" stroke="#000000" d="M1272.6114,-516.8488C1283.4429,-475.8944 1307.3019,-385.6815 1320.2415,-336.7562"/>
+<polygon fill="#000000" stroke="#000000" points="1320.2883,-336.5789 1317.9554,-329.7556 1323.3566,-324.9778 1320.2883,-336.5789"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L62">
-<text text-anchor="start" x="1290" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1299" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -604,17 +604,23 @@
 <!-- list::sort/2 -->
 <g id="node50" class="node">
 <title>list::sort/2</title>
-<ellipse fill="#d3d3d3" stroke="#000000" stroke-dasharray="5,2" cx="1165" cy="-303.6396" rx="64.889" ry="18"/>
-<text text-anchor="start" x="1119" y="-301.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="1125" y="-300.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">list::sort/2</text>
-<text text-anchor="start" x="1205" y="-301.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node50"><a xlink:href="https://logtalk.org/library/list_0.html#sort/2" xlink:title="https://logtalk.org/library/list_0.html#sort/2">
+<ellipse fill="#d3d3d3" stroke="#000000" stroke-dasharray="5,2" cx="1171" cy="-303.6396" rx="76.2353" ry="21.4286"/>
+<text text-anchor="start" x="1125" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1131" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">list::sort/2</text>
+<text text-anchor="start" x="1211" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1125" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="1154" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">external</text>
+<text text-anchor="start" x="1211" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- as_dictionary/2&#45;&gt;list::sort/2 -->
 <g id="edge36" class="edge">
 <title>as_dictionary/2&#45;&gt;list::sort/2</title>
 <g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L78" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1110.0757,-751.8728C1130.9179,-730.0689 1159,-693.5838 1159,-655.2792 1159,-655.2792 1159,-655.2792 1159,-420.8528 1159,-391.2819 1160.9282,-357.5694 1162.5985,-333.9142"/>
-<polygon fill="#000000" stroke="#000000" points="1162.602,-333.8647 1159.0548,-327.5864 1163.4859,-321.8973 1162.602,-333.8647"/>
+<path fill="none" stroke="#000000" d="M1110.0757,-751.8728C1130.9179,-730.0689 1159,-693.5838 1159,-655.2792 1159,-655.2792 1159,-655.2792 1159,-420.8528 1159,-392.547 1162.506,-360.5952 1165.7279,-337.2089"/>
+<polygon fill="#000000" stroke="#000000" points="1165.7504,-337.0524 1162.6485,-330.5425 1167.4645,-325.1754 1165.7504,-337.0524"/>
 </a>
 </g>
 <g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L78">
@@ -626,13 +632,13 @@
 <g id="node20" class="node">
 <title>split/4</title>
 <g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L95">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="863" cy="-303.6396" rx="53.066" ry="21.4286"/>
-<text text-anchor="start" x="834" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="840" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">split/4</text>
-<text text-anchor="start" x="887" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="834" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="852.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="887" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<ellipse fill="#f5f5dc" stroke="#000000" cx="832" cy="-303.6396" rx="53.066" ry="21.4286"/>
+<text text-anchor="start" x="803" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="809" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">split/4</text>
+<text text-anchor="start" x="856" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="803" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="821.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="856" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
@@ -640,33 +646,39 @@
 <g id="edge5" class="edge">
 <title>as_dictionary_/2&#45;&gt;split/4</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L88" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1013.0663,-516.8488C983.7258,-475.1627 918.4649,-382.4422 884.4914,-334.1739"/>
-<polygon fill="#000000" stroke="#000000" points="884.4518,-334.1175 877.7273,-331.5133 877.5449,-324.3045 884.4518,-334.1175"/>
+<path fill="none" stroke="#000000" d="M1010.2606,-516.8488C975.1733,-474.8824 896.8414,-381.1933 856.7204,-333.2065"/>
+<polygon fill="#000000" stroke="#000000" points="856.696,-333.1774 849.7787,-331.14 848.9989,-323.9712 856.696,-333.1774"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L88">
-<text text-anchor="start" x="948" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="934" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
 <!-- list::length/2 -->
 <g id="node51" class="node">
 <title>list::length/2</title>
-<ellipse fill="#d3d3d3" stroke="#000000" stroke-dasharray="5,2" cx="1009" cy="-303.6396" rx="72.5245" ry="18"/>
-<text text-anchor="start" x="957" y="-301.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="963" y="-300.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">list::length/2</text>
-<text text-anchor="start" x="1056" y="-301.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node51"><a xlink:href="https://logtalk.org/library/list_0.html#length/2" xlink:title="https://logtalk.org/library/list_0.html#length/2">
+<ellipse fill="#d3d3d3" stroke="#000000" stroke-dasharray="5,2" cx="991" cy="-303.6396" rx="85.6199" ry="21.4286"/>
+<text text-anchor="start" x="939" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="945" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">list::length/2</text>
+<text text-anchor="start" x="1038" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="939" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="974.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">external</text>
+<text text-anchor="start" x="1038" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- as_dictionary_/2&#45;&gt;list::length/2 -->
 <g id="edge37" class="edge">
 <title>as_dictionary_/2&#45;&gt;list::length/2</title>
 <g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L88" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1026.2804,-516.8488C1022.8915,-475.0359 1015.3411,-381.8777 1011.4392,-333.7346"/>
-<polygon fill="#000000" stroke="#000000" points="1011.4335,-333.663 1006.9618,-328.0058 1010.464,-321.7022 1011.4335,-333.663"/>
+<path fill="none" stroke="#000000" d="M1024.6512,-516.8488C1018.201,-475.9813 1004.0093,-386.0644 996.2761,-337.0684"/>
+<polygon fill="#000000" stroke="#000000" points="996.2388,-336.8311 991.3522,-331.5281 994.3679,-324.9778 996.2388,-336.8311"/>
 </a>
 </g>
 <g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L88">
-<text text-anchor="start" x="1018" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="1010" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -930,13 +942,13 @@
 <g id="node31" class="node">
 <title>lookup_nonvar/6</title>
 <g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L179">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="528" cy="-303.6396" rx="90.5193" ry="21.4286"/>
-<text text-anchor="start" x="472" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="478" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">lookup_nonvar/6</text>
-<text text-anchor="start" x="578" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="472" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="517" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="578" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<ellipse fill="#f5f5dc" stroke="#000000" cx="521" cy="-303.6396" rx="90.5193" ry="21.4286"/>
+<text text-anchor="start" x="465" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="471" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">lookup_nonvar/6</text>
+<text text-anchor="start" x="571" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="465" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="510" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="571" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
@@ -944,8 +956,8 @@
 <g id="edge21" class="edge">
 <title>lookup_nonvar/3&#45;&gt;lookup_nonvar/6</title>
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L175" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M514.4461,-516.4928C507.8303,-492.1218 499.1057,-451.2403 503,-415.8528 505.9704,-388.8605 512.8448,-358.864 518.6346,-336.6807"/>
-<polygon fill="#000000" stroke="#000000" points="518.6813,-336.5064 516.3745,-329.6742 521.7939,-324.9171 518.6813,-336.5064"/>
+<path fill="none" stroke="#000000" d="M514.8414,-516.5303C508.5799,-492.1929 500.1717,-451.3414 503,-415.8528 505.1326,-389.0934 510.0826,-359.0823 514.2529,-336.834"/>
+<polygon fill="#000000" stroke="#000000" points="514.257,-336.8123 511.4652,-330.1636 516.5287,-325.0293 514.257,-336.8123"/>
 </a>
 </g>
 <g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L175">
@@ -957,8 +969,8 @@
 <g id="edge22" class="edge">
 <title>lookup_nonvar/6&#45;&gt;lookup_nonvar/3</title>
 <g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L180" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M529.432,-325.2835C530.8391,-349.7178 532.5652,-390.6558 531,-425.8528 529.8233,-452.3134 527.0932,-482.18 524.7825,-504.4446"/>
-<polygon fill="#000000" stroke="#000000" points="524.7596,-504.6598 528.0998,-511.0506 523.4853,-516.5919 524.7596,-504.6598"/>
+<path fill="none" stroke="#000000" d="M523.4853,-325.1137C525.9617,-347.6711 529.5924,-384.1991 531,-415.8528 532.3308,-445.7785 529.1775,-479.7295 526.0674,-504.2397"/>
+<polygon fill="#000000" stroke="#000000" points="526.0231,-504.5692 529.1862,-511.0496 524.421,-516.4618 526.0231,-504.5692"/>
 </a>
 </g>
 <g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L180">
@@ -1012,13 +1024,13 @@
 <g id="node39" class="node">
 <title>delete/8</title>
 <g id="a_node39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L234">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="326" cy="-538.066" rx="57.0522" ry="21.4286"/>
-<text text-anchor="start" x="294" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="300" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">delete/8</text>
-<text text-anchor="start" x="353" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="294" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="315.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="353" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<ellipse fill="#f5f5dc" stroke="#000000" cx="314" cy="-538.066" rx="57.0522" ry="21.4286"/>
+<text text-anchor="start" x="282" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="288" y="-540.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">delete/8</text>
+<text text-anchor="start" x="341" y="-540.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="282" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="303.5" y="-530.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="341" y="-529.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
@@ -1026,12 +1038,12 @@
 <g id="edge24" class="edge">
 <title>delete/4&#45;&gt;delete/8</title>
 <g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L230" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M309.2998,-751.2874C304.5034,-726.9058 298.256,-685.6856 302,-650.2792 304.8503,-623.3246 311.4498,-593.3258 317.0083,-571.1319"/>
-<polygon fill="#000000" stroke="#000000" points="317.0469,-570.9821 314.6708,-564.1737 320.0415,-559.3617 317.0469,-570.9821"/>
+<path fill="none" stroke="#000000" d="M309.5287,-751.1027C305.0729,-728.6141 298.5393,-692.1416 296,-660.2792 293.577,-629.8764 299.4007,-595.5377 305.0565,-571.018"/>
+<polygon fill="#000000" stroke="#000000" points="305.1048,-570.8205 302.6439,-564.0423 307.9543,-559.1637 305.1048,-570.8205"/>
 </a>
 </g>
 <g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L230">
-<text text-anchor="start" x="302" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="296" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -1039,12 +1051,12 @@
 <g id="edge26" class="edge">
 <title>delete/8&#45;&gt;delete/4</title>
 <g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L236" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M328.0238,-559.2866C330.042,-583.6824 332.5085,-624.9158 330,-660.2792 328.1144,-686.8614 323.7464,-716.721 320.05,-738.9519"/>
-<polygon fill="#000000" stroke="#000000" points="319.9993,-739.2491 322.9299,-745.8379 317.9751,-751.0772 319.9993,-739.2491"/>
+<path fill="none" stroke="#000000" d="M317.421,-559.6702C320.8992,-584.069 325.57,-624.9752 324,-660.2792 322.8233,-686.7398 320.0932,-716.6064 317.7825,-738.871"/>
+<polygon fill="#000000" stroke="#000000" points="317.7596,-739.0862 321.0998,-745.477 316.4853,-751.0183 317.7596,-739.0862"/>
 </a>
 </g>
 <g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L236" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L236">
-<text text-anchor="start" x="330" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="324" y="-653.0792" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -1052,13 +1064,13 @@
 <g id="node43" class="node">
 <title>join/3</title>
 <g id="a_node43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L254">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="326" cy="-303.6396" rx="48.1667" ry="21.4286"/>
-<text text-anchor="start" x="300" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="306" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">join/3</text>
-<text text-anchor="start" x="346" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="300" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="315" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="346" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<ellipse fill="#f5f5dc" stroke="#000000" cx="314" cy="-303.6396" rx="48.1667" ry="21.4286"/>
+<text text-anchor="start" x="288" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="294" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">join/3</text>
+<text text-anchor="start" x="334" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="288" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="303" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="334" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
@@ -1066,12 +1078,12 @@
 <g id="edge25" class="edge">
 <title>delete/8&#45;&gt;join/3</title>
 <g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L234" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M326,-516.8488C326,-475.9813 326,-386.0644 326,-337.0684"/>
-<polygon fill="#000000" stroke="#000000" points="326.0001,-336.9778 322,-330.9778 326,-324.9778 326.0001,-336.9778"/>
+<path fill="none" stroke="#000000" d="M314,-516.8488C314,-475.9813 314,-386.0644 314,-337.0684"/>
+<polygon fill="#000000" stroke="#000000" points="314.0001,-336.9778 310,-330.9778 314,-324.9778 314.0001,-336.9778"/>
 </a>
 </g>
 <g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L234">
-<text text-anchor="start" x="326" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="314" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -1120,13 +1132,13 @@
 <g id="node42" class="node">
 <title>update/9</title>
 <g id="a_node42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L248">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="198" cy="-303.6396" rx="57.0522" ry="21.4286"/>
-<text text-anchor="start" x="166" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="172" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">update/9</text>
-<text text-anchor="start" x="225" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="166" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="187.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="225" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<ellipse fill="#f5f5dc" stroke="#000000" cx="170" cy="-303.6396" rx="57.0522" ry="21.4286"/>
+<text text-anchor="start" x="138" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="144" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">update/9</text>
+<text text-anchor="start" x="197" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="138" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="159.5" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="197" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
@@ -1134,12 +1146,12 @@
 <g id="edge28" class="edge">
 <title>update/5&#45;&gt;update/9</title>
 <g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L244" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M175.0295,-516.8425C168.9466,-492.444 161.0573,-451.2082 166,-415.8528 169.8338,-388.4292 178.6964,-358.2999 186.1247,-336.1724"/>
-<polygon fill="#000000" stroke="#000000" points="186.1451,-336.113 184.3232,-329.1359 190.0629,-324.7706 186.1451,-336.113"/>
+<path fill="none" stroke="#000000" d="M173.8043,-516.8681C166.6321,-494.536 156.1109,-458.1894 152,-425.8528 148.1536,-395.5971 154.1353,-361.242 160.2128,-336.6788"/>
+<polygon fill="#000000" stroke="#000000" points="160.2857,-336.4026 157.9494,-329.5804 163.3482,-324.7999 160.2857,-336.4026"/>
 </a>
 </g>
 <g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L244">
-<text text-anchor="start" x="166" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="152" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>
@@ -1147,12 +1159,12 @@
 <g id="edge29" class="edge">
 <title>update/9&#45;&gt;update/5</title>
 <g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L249" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M197.8365,-324.8632C197.5254,-349.2618 196.622,-390.4976 194,-425.8528 192.0357,-452.3387 188.5118,-482.2038 185.628,-504.4614"/>
-<polygon fill="#000000" stroke="#000000" points="185.5954,-504.708 188.7734,-511.181 184.0206,-516.6042 185.5954,-504.708"/>
+<path fill="none" stroke="#000000" d="M172.4329,-325.1161C174.8667,-347.6755 178.4629,-384.2051 180,-415.8528 181.4484,-445.6741 181.6067,-479.6355 181.4555,-504.1762"/>
+<polygon fill="#000000" stroke="#000000" points="181.4535,-504.4166 185.4015,-510.451 181.3497,-516.4162 181.4535,-504.4166"/>
 </a>
 </g>
 <g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/bintree.lgt#L249">
-<text text-anchor="start" x="194" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="180" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>

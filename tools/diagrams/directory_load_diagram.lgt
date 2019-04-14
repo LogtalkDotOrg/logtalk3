@@ -22,7 +22,7 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
@@ -43,7 +43,7 @@
 		^^omit_path_prefix(Directory, Options, Relative),
 		(	(	logtalk::loaded_file_property(_, directory(Directory))
 			;	modules_diagram_support::loaded_file_property(_, directory(Directory))
-			)->
+			) ->
 			parameter(1, Format),
 			file_load_diagram(Format)::diagram_name_suffix(Suffix),
 			^^add_node_zoom_option(Project, Suffix, Options, LinkingOptions, NodeOptions),
@@ -51,7 +51,7 @@
 		;	% no files for this directory
 			NodeOptions = LinkingOptions
 		),
-		^^output_node(Relative, Relative, directory, [], directory, NodeOptions),
+		^^output_node(Directory, Relative, directory, [], directory, NodeOptions),
 		^^remember_included_directory(Directory),
 		fail.
 	% second, output edges for all directories loaded by files in this directory
@@ -73,16 +73,14 @@
 			% not a Logtalk generated intermediate Prolog file
 			\+ logtalk::loaded_file_property(_, target(Other))
 		),
-		^^omit_path_prefix(Directory, Options, Relative),
-		^^omit_path_prefix(OtherDirectory, Options, OtherRelative),
 		% edge not previously recorded
-		\+ ^^edge(Relative, OtherRelative, _, _, _),
+		\+ ^^edge(Directory, OtherDirectory, _, _, _),
 		(	logtalk::loaded_file_property(Other, directory(OtherDirectory)) ->
 			^^remember_referenced_logtalk_directory(OtherDirectory)
 		;	% Prolog directory module
 			^^remember_referenced_prolog_directory(OtherDirectory)
 		),
-		^^save_edge(Relative, OtherRelative, [loads], loads_directory, [tooltip(loads)| Options]),
+		^^save_edge(Directory, OtherDirectory, [loads], loads_directory, [tooltip(loads)| Options]),
 		fail.
 	output_library(_, _, _).
 

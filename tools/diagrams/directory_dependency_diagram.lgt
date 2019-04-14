@@ -22,7 +22,7 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
@@ -51,7 +51,7 @@
 		;	% no files for this directory
 			NodeOptions = LinkingOptions
 		),
-		^^output_node(Relative, Relative, directory, [], directory, NodeOptions),
+		^^output_node(Directory, Relative, directory, [], directory, NodeOptions),
 		^^remember_included_directory(Directory),
 		fail.
 	% second, output edges for all directories that this directory refers to
@@ -59,11 +59,9 @@
 		depends_directory(Directory, OtherDirectory, Kind),
 		memberchk(exclude_directories(ExcludedDirectories), Options),
 		\+ member(OtherDirectory, ExcludedDirectories),
-		^^omit_path_prefix(Directory, Options, Relative),
-		^^omit_path_prefix(OtherDirectory, Options, OtherRelative),
 		% ensure that this dependency is not already recorded
-		\+ ^^edge(Relative, OtherRelative, _, _, _),
-		^^save_edge(Relative, OtherRelative, [depends], depends_on_directory, [tooltip(depends)| Options]),
+		\+ ^^edge(Directory, OtherDirectory, _, _, _),
+		^^save_edge(Directory, OtherDirectory, [depends], depends_on_directory, [tooltip(depends)| Options]),
 		(	Kind == module ->
 			^^remember_referenced_prolog_directory(OtherDirectory)
 		;	^^remember_referenced_logtalk_directory(OtherDirectory)

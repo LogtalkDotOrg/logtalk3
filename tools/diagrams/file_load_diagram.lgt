@@ -60,23 +60,18 @@
 		fail.
 	% output edges for all files loaded by this file
 	output_file(Path, _, _, Options) :-
-		^^omit_path_prefix(Path, Options, Relative),
 		logtalk::loaded_file_property(OtherPath, parent(Path)),
 			^^remember_referenced_logtalk_file(OtherPath),
-			^^omit_path_prefix(OtherPath, Options, OtherRelative),
-			^^save_edge(Relative, OtherRelative, [loads], loads_file, [tooltip(loads)| Options]),
+			^^save_edge(Path, OtherPath, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	% output edges for all files included by this file
 	output_file(Path, _, _, Options) :-
-		^^omit_path_prefix(Path, Options, Relative),
 		logtalk::loaded_file_property(Path, includes(IncludePath)),
 			^^remember_referenced_logtalk_file(IncludePath),
-			^^omit_path_prefix(IncludePath, Options, IncludeRelative),
-			^^save_edge(Relative, IncludeRelative, [includes], includes_file, [tooltip(includes)| Options]),
+			^^save_edge(Path, IncludePath, [includes], includes_file, [tooltip(includes)| Options]),
 		fail.
 	% output edges for loaded Prolog module files
 	output_file(Path, _, _, Options) :-
-		^^omit_path_prefix(Path, Options, Relative),
 		modules_diagram_support::loaded_file_property(OtherPath, parent(Path)),
 			(	logtalk::loaded_file_property(OriginalPath, target(OtherPath)) ->
 				(	% make sure we don't get circular references as Path can be a Logtalk
@@ -85,14 +80,12 @@
 					OriginalPath \== Path ->
 					% Prolog file loading a Logtalk generated intermediate Prolog file
 					^^remember_referenced_logtalk_file(OriginalPath),
-					^^omit_path_prefix(OriginalPath, Options, OriginalRelative),
-					^^save_edge(Relative, OriginalRelative, [loads], loads_file, [tooltip(loads)| Options])
+					^^save_edge(Path, OtherPath, [loads], loads_file, [tooltip(loads)| Options])
 				;	true
 				)
 			;	% Prolog file loading a non-Logtalk generated Prolog file
 				^^remember_referenced_prolog_file(OtherPath),
-				^^omit_path_prefix(OtherPath, Options, OtherRelative),
-				^^save_edge(Relative, OtherRelative, [loads], loads_file, [tooltip(loads)| Options])
+				^^save_edge(Path, OtherPath, [loads], loads_file, [tooltip(loads)| Options])
 			),
 		fail.
 	output_file(_, _, _, _).

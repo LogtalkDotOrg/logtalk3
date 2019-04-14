@@ -75,6 +75,8 @@ node.
 
 * FIXED: Don't append line numbers to local file URLs when generating diagrams.
 
+* FIXED: Cases where a diagram node identifier would not be unique.
+
 * FIXED: Bug where a diagram predicate node would be generated instead of a
 non-terminal node due to a predicate calling a declared but not defined
 non-terminal.

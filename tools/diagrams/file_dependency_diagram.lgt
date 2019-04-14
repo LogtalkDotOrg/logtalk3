@@ -22,7 +22,7 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.13,
+		version is 2.14,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
@@ -48,15 +48,13 @@
 	% second, output edges for all files that this file refers to
 	output_file(Path, Basename, Directory, Options) :-
 		depends_file(Basename, Directory, OtherPath, Kind),
-		^^omit_path_prefix(Path, Options, Relative),
-		^^omit_path_prefix(OtherPath, Options, OtherRelative),
 		% ensure that this dependency is not already recorded
-		\+ ^^edge(Relative, OtherRelative, _, _, _),
+		\+ ^^edge(Path, OtherPath, _, _, _),
 			(	Kind == module ->
 				^^remember_referenced_prolog_file(OtherPath),
-				^^save_edge(Relative, OtherRelative, [depends], depends_on_file, [tooltip(depends)| Options])
+				^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
 			;	^^remember_referenced_logtalk_file(OtherPath),
-				^^save_edge(Relative, OtherRelative, [depends], depends_on_file, [tooltip(depends)| Options])
+				^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
 			),
 		fail.
 	output_file(_, _, _, _).

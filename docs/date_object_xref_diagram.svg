@@ -10,7 +10,7 @@
 <title>date_object</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-600.2792 649,-600.2792 649,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/12, 21:30</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/14, 19:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_date_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/date.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/date.lgt">
@@ -22,8 +22,8 @@
 <g id="clust2" class="cluster">
 <title>cluster_other</title>
 <g id="a_clust2"><a xlink:title="(external predicates)">
-<path fill="#ffffff" stroke="#8b8989" d="M465,-275.6396C465,-275.6396 615,-275.6396 615,-275.6396 621,-275.6396 627,-281.6396 627,-287.6396 627,-287.6396 627,-338.6396 627,-338.6396 627,-344.6396 621,-350.6396 615,-350.6396 615,-350.6396 465,-350.6396 465,-350.6396 459,-350.6396 453,-344.6396 453,-338.6396 453,-338.6396 453,-287.6396 453,-287.6396 453,-281.6396 459,-275.6396 465,-275.6396"/>
-<text text-anchor="middle" x="524.5" y="-338.6396" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">(external predicates)</text>
+<path fill="#ffffff" stroke="#8b8989" d="M437,-272.4264C437,-272.4264 615,-272.4264 615,-272.4264 621,-272.4264 627,-278.4264 627,-284.4264 627,-284.4264 627,-341.8528 627,-341.8528 627,-347.8528 621,-353.8528 615,-353.8528 615,-353.8528 437,-353.8528 437,-353.8528 431,-353.8528 425,-347.8528 425,-341.8528 425,-341.8528 425,-284.4264 425,-284.4264 425,-278.4264 431,-272.4264 437,-272.4264"/>
+<text text-anchor="middle" x="496.5" y="-341.8528" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">(external predicates)</text>
 </a>
 </g>
 </g>
@@ -44,21 +44,27 @@
 <!-- os::date_time/7 -->
 <g id="node7" class="node">
 <title>os::date_time/7</title>
-<ellipse fill="#d3d3d3" stroke="#000000" stroke-dasharray="5,2" cx="540" cy="-303.6396" rx="76.9425" ry="18"/>
-<text text-anchor="start" x="484" y="-301.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="490" y="-300.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">os::date_time/7</text>
-<text text-anchor="start" x="590" y="-301.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<g id="a_node7"><a xlink:href="https://logtalk.org/library/os_0.html#date_time/7" xlink:title="https://logtalk.org/library/os_0.html#date_time/7">
+<ellipse fill="#d3d3d3" stroke="#000000" stroke-dasharray="5,2" cx="526" cy="-303.6396" rx="90.5193" ry="21.4286"/>
+<text text-anchor="start" x="470" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="476" y="-305.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">os::date_time/7</text>
+<text text-anchor="start" x="576" y="-306.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="470" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="509" y="-296.0396" font-family="Courier,monospace" font-size="7.00" fill="#000000">external</text>
+<text text-anchor="start" x="576" y="-295.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+</a>
+</g>
 </g>
 <!-- today/3&#45;&gt;os::date_time/7 -->
 <g id="edge3" class="edge">
 <title>today/3&#45;&gt;os::date_time/7</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/date.lgt#L32" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M570.9228,-516.8488C564.8584,-475.0359 551.3472,-381.8777 544.3648,-333.7346"/>
-<polygon fill="#000000" stroke="#000000" points="544.3422,-333.5779 539.5224,-328.2142 542.6197,-321.7022 544.3422,-333.5779"/>
+<path fill="none" stroke="#000000" d="M569.6557,-516.8488C561.27,-475.8944 542.7985,-385.6815 532.7808,-336.7562"/>
+<polygon fill="#000000" stroke="#000000" points="532.7763,-336.7339 527.654,-331.6583 530.3691,-324.9778 532.7763,-336.7339"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/date.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/date.lgt#L32">
-<text text-anchor="start" x="557" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
+<text text-anchor="start" x="550" y="-418.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
 </g>

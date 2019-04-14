@@ -22,7 +22,7 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.14,
+		version is 2.15,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Predicates for generating library loading dependency diagrams.',
@@ -54,8 +54,8 @@
 			NodeOptions = NodeOptions0
 		),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Relative, Library, library, [Relative], library, NodeOptions)
-		;	^^output_node(Relative, Library, library, [], library, NodeOptions)
+			^^output_node(Directory, Library, library, [Relative], library, NodeOptions)
+		;	^^output_node(Directory, Library, library, [], library, NodeOptions)
 		),
 		^^remember_included_library(Library, Directory),
 		fail.
@@ -78,10 +78,8 @@
 			% not a Logtalk generated intermediate Prolog file
 			\+ logtalk::loaded_file_property(_, target(Other))
 		),
-		^^omit_path_prefix(Directory, Options, Relative),
-		^^omit_path_prefix(OtherDirectory, Options, OtherRelative),
 		% edge not previously recorded
-		\+ ^^edge(Relative, OtherRelative, _, _, _),
+		\+ ^^edge(Directory, OtherDirectory, _, _, _),
 		(	logtalk::loaded_file_property(Other, library(OtherLibrary)) ->
 			^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory)
 		;	modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
@@ -98,7 +96,7 @@
 			modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
 			modules_diagram_support::loaded_file_property(Other, basename(OtherLibrary))
 		),
-		^^save_edge(Relative, OtherRelative, [loads], loads_library, [tooltip(loads)| Options]),
+		^^save_edge(Directory, OtherDirectory, [loads], loads_library, [tooltip(loads)| Options]),
 		fail.
 	output_library(_, _, _).
 

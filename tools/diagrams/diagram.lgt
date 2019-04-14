@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.19,
+		version is 2.21,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Common predicates for generating diagrams.',
@@ -1000,8 +1000,12 @@
 		),
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		(	member(Path, Prefixes) ->
-			CodeURL = './',
-			Suffix = './'
+			(	CodePrefix == '' ->
+				CodeURL = './',
+				Suffix = './'
+			;	CodeURL = CodePrefix,
+				Suffix = CodePrefix
+			)
 		;	member(Prefix, Prefixes),
 			atom_concat(Prefix, Suffix, Path) ->
 			atom_concat(CodePrefix, Suffix, CodeURL)

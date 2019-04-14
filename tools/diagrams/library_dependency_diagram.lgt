@@ -22,7 +22,7 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.14,
+		version is 2.15,
 		author is 'Paulo Moura',
 		date is 2018/02/14,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
@@ -54,8 +54,8 @@
 			NodeOptions = NodeOptions0
 		),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Relative, Library, library, [Relative], library, NodeOptions)
-		;	^^output_node(Relative, Library, library, [], library, NodeOptions)
+			^^output_node(Directory, Library, library, [Relative], library, NodeOptions)
+		;	^^output_node(Directory, Library, library, [], library, NodeOptions)
 		),
 		^^remember_included_library(Library, Directory),
 		fail.
@@ -64,11 +64,9 @@
 		depends_library(Library, Directory, OtherLibrary, OtherDirectory, Kind),
 		memberchk(exclude_libraries(ExcludedLibraries), Options),
 		\+ member(OtherLibrary, ExcludedLibraries),
-		^^omit_path_prefix(Directory, Options, Relative),
-		^^omit_path_prefix(OtherDirectory, Options, OtherRelative),
 		% ensure that this dependency is not already recorded
-		\+ ^^edge(Relative, OtherRelative, _, _, _),
-		^^save_edge(Relative, OtherRelative, [depends], depends_on_library, [tooltip(depends)| Options]),
+		\+ ^^edge(Directory, OtherDirectory, _, _, _),
+		^^save_edge(Directory, OtherDirectory, [depends], depends_on_library, [tooltip(depends)| Options]),
 		(	Kind == module ->
 			^^remember_referenced_prolog_library(OtherLibrary, OtherDirectory)
 		;	^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory)
