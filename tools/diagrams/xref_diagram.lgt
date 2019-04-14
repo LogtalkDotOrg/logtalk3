@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.29,
+		version is 2.31,
 		author is 'Paulo Moura',
-		date is 2019/04/13,
+		date is 2019/04/14,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -356,8 +356,12 @@
 			(	Line = -1 ->
 				% no line number available; simply link to the entity file
 				CodeURL = CodeURL0
-			;	sub_atom(CodeURL0, 0, 7, _, 'file://') ->
-				% link to local file; don't append line number
+			;	sub_atom(CodeURL0, 0, 1, _, '/') ->
+				% absolute path; link to local file and don't append line number
+				CodeURL = CodeURL0
+			;	\+ sub_atom(CodeURL0, 0, 7, _, 'http://'),
+				\+ sub_atom(CodeURL0, 0, 8, _, 'https://') ->
+				% assume local file and don't append line number
 				CodeURL = CodeURL0
 			;	% append line number; check first for BitBucket code hosting
 				% style URL line reference
@@ -679,12 +683,9 @@
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
 	% by default, use a home directory URL for the source code:
-	default_option(url_prefixes(URL, '')) :-
-		logtalk::expand_library_path(home, HOME),
-		atom_concat('file://', HOME, URL).
+	default_option(url_prefixes('', '')).
 	% by default, omit the home directory path prefix when printing paths:
-	default_option(omit_path_prefixes([HOME])) :-
-		logtalk::expand_library_path(home, HOME).
+	default_option(omit_path_prefixes([])).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).
 	% by default, don't link to sub-diagrams:

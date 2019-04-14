@@ -41,12 +41,8 @@ tools, ports, and contributions inheritance diagrams.
 Tools
 -----
 
-* CHANGED: Predicate nodes in cross-referencing diagrams (with the except of
-external nodes) now link to source code instead of documentation.
-
-* CHANGED: Default values for the `url_prefixes/2` and `omit_path_prefixes/1`
-diagram options to use the home directory URL and path as the default prefixes
-for source code directories and files.
+* CHANGED: Predicate nodes in cross-referencing diagrams (with the exception
+of external nodes) now link to source code instead of documentation.
 
 * CHANGED: Default value for the `entity_url_suffix_target/2` option for the
 library diagrams for compatibility with Sphinx-based API documentation.

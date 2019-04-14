@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.17,
+		version is 2.18,
 		author is 'Paulo Moura',
-		date is 2019/04/12,
+		date is 2019/04/14,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -321,7 +321,8 @@
 
 	rdirectory(Project, Directory, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
+		normalize_directory_paths([Directory], [NormalizedDirectory]),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, NormalizedDirectory)),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -329,7 +330,6 @@
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, Project, Options),
 			atom_concat(rdirectory_, Project, Identifier),
-			normalize_directory_paths([Directory], [NormalizedDirectory]),
 			add_link_options(NormalizedDirectory, Options, GraphOptions),
 			Format::graph_header(diagram_output_file, Identifier, Project, rdirectory, GraphOptions),
 			::output_rdirectory(Project, NormalizedDirectory, GraphOptions),
@@ -337,9 +337,9 @@
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Project, rdirectory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, Directory))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
 		;	% failure is usually caused by errors in the source itself
-			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, Directory, UserOptions)))
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, NormalizedDirectory, UserOptions)))
 		),
 		close(Stream),
 		::output_sub_diagrams(UserOptions).
@@ -375,7 +375,8 @@
 
 	directory(Project, Directory, UserOptions) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
+		normalize_directory_paths([Directory], [NormalizedDirectory]),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, NormalizedDirectory)),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -383,7 +384,6 @@
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, Project, Options),
 			atom_concat(directory_, Project, Identifier),
-			normalize_directory_paths([Directory], [NormalizedDirectory]),
 			add_link_options(NormalizedDirectory, Options, GraphOptions),
 			Format::graph_header(diagram_output_file, Identifier, Project, directory, GraphOptions),
 			::output_library(Project, NormalizedDirectory, GraphOptions),
@@ -391,9 +391,9 @@
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Project, directory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
-			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, Directory))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
 		;	% failure is usually caused by errors in the source itself
-			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, Directory, UserOptions)))
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, NormalizedDirectory, UserOptions)))
 		),
 		close(Stream),
 		::output_sub_diagrams(UserOptions).
@@ -993,21 +993,22 @@
 	]).
 
 	add_link_options(Path, Options, LinkingOptions) :-
-		member(path_url_prefixes(PathPrefix, CodePrefix, DocPrefix), Options),
-		atom_concat(PathPrefix, PathSuffix, Path),
-		!,
-		atom_concat(CodePrefix, PathSuffix, CodeURL),
-		LinkingOptions = [url(CodeURL), urls(CodeURL,DocPrefix), tooltip(PathSuffix)| Options].
-	add_link_options(Path, Options, LinkingOptions) :-
+		(	member(path_url_prefixes(PathPrefix, CodePrefix, DocPrefix), Options),
+			atom_concat(PathPrefix, _, Path) ->
+			true
+		;	memberchk(url_prefixes(CodePrefix, DocPrefix), Options)
+		),
 		memberchk(omit_path_prefixes(Prefixes), Options),
-		memberchk(url_prefixes(CodePrefix, DocPrefix), Options),
-		(	member(Prefix, Prefixes),
+		(	member(Path, Prefixes) ->
+			CodeURL = './',
+			Suffix = './'
+		;	member(Prefix, Prefixes),
 			atom_concat(Prefix, Suffix, Path) ->
 			atom_concat(CodePrefix, Suffix, CodeURL)
-		;	Suffix = Path,
-			CodeURL = CodePrefix
+		;	CodeURL = Path,
+			Suffix = Path
 		),
-		LinkingOptions = [url(CodeURL), urls(CodeURL,DocPrefix), tooltip(Suffix)| Options].
+		LinkingOptions = [url(CodeURL), tooltip(Suffix)| Options].
 
 	:- protected(omit_path_prefix/3).
 	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).

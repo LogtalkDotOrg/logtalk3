@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2019/04/11,
+		date is 2019/04/14,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format'],
 		see_also is [file_load_diagram(_), directory_load_diagram(_), library_load_diagram(_)]
@@ -128,12 +128,9 @@
 	% by default, print current date:
 	default_option(date(true)).
 	% by default, use a home directory URL for the source code:
-	default_option(url_prefixes(URL, '')) :-
-		logtalk::expand_library_path(home, HOME),
-		atom_concat('file://', HOME, URL).
+	default_option(url_prefixes('', '')).
 	% by default, omit the home directory path prefix when printing paths:
-	default_option(omit_path_prefixes([HOME])) :-
-		logtalk::expand_library_path(home, HOME).
+	default_option(omit_path_prefixes([])).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
 	% by default, print file name extensions:
