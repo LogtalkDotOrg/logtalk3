@@ -81,6 +81,9 @@ node.
 non-terminal node due to a predicate calling a declared but not defined
 non-terminal.
 
+* FIXED: Only generate diagram node documentation links when the documentation
+URL prefix is defined.
+
 Ports
 -----
 

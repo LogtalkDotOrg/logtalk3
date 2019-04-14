@@ -3,7 +3,7 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Common predicates for generating library diagrams.',
@@ -101,7 +101,8 @@
 		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [url(''), tooltip('(external libraries)')| Options]).
 
 	add_library_documentation_url(logtalk, Options, Library, NodeOptions) :-
-		(	member(urls(_, DocPrefix), Options) ->
+		(	member(urls(_, DocPrefix), Options),
+			DocPrefix \== '' ->
 			memberchk(entity_url_suffix_target(Suffix, Target), Options),
 			atom_concat(DocPrefix, Suffix, URL0),
 			atom_concat(URL0, Target, URL1),

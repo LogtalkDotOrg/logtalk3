@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.32,
+		version is 2.33,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -291,7 +291,8 @@
 				atom_concat(Prefix, _, Path) ->
 				true
 			;	member(url_prefixes(_, DocPrefix), Options)
-			) ->
+			),
+			DocPrefix \== '' ->
 			functor(Entity, EntityFunctor, EntityArity),
 			atom_concat(DocPrefix, EntityFunctor, DocURL0),
 			atom_concat(DocURL0, '_', DocURL1),
@@ -315,7 +316,7 @@
 				atom_concat(DocURL6, ArityAtom, DocURL)
 			),
 			XRefOptions = [url(DocURL)| Options]
-		;	% could not find entity file or URL prefixes not definined
+		;	% could not find entity file or URL prefixes not defined
 			XRefOptions = Options
 		).
 
