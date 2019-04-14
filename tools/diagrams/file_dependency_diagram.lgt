@@ -22,7 +22,7 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.14,
+		version is 2.15,
 		author is 'Paulo Moura',
 		date is 2019/04/14,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
@@ -40,8 +40,8 @@
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Relative, Name, file, [Relative], file, LinkingOptions)
-		;	^^output_node(Relative, Name, file, [], file, LinkingOptions)
+			^^output_node(Path, Name, file, [Relative], file, LinkingOptions)
+		;	^^output_node(Path, Name, file, [], file, LinkingOptions)
 		),
 		^^remember_included_file(Path),
 		fail.

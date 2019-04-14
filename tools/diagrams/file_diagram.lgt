@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2016/10/10,
+		date is 2016/10/14,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -65,8 +65,8 @@
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Relative, Name, file, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Relative, Name, file, [], external_file, LinkingOptions)
+			^^output_node(Path, Name, file, [Relative], external_file, LinkingOptions)
+		;	^^output_node(Path, Name, file, [], external_file, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-
@@ -76,8 +76,8 @@
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Relative, Name, file, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Relative, Name, file, [], external_file, LinkingOptions)
+			^^output_node(Path, Name, file, [Relative], external_file, LinkingOptions)
+		;	^^output_node(Path, Name, file, [], external_file, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-
