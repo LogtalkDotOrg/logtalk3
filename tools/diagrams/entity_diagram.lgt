@@ -750,8 +750,8 @@
 		;	Caption = protocol
 		).
 
-	% by default, diagram layout is top to bottom:
-	default_option(layout(top_to_bottom)).
+	% by default, diagram layout is bottom to top:
+	default_option(layout(bottom_to_top)).
 	% by default, diagram title is empty:
 	default_option(title('')).
 	% by default, print current date:
