@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.33,
+		version is 2.34,
 		author is 'Paulo Moura',
-		date is 2019/04/14,
+		date is 2019/04/15,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -317,7 +317,7 @@
 			),
 			XRefOptions = [url(DocURL)| Options]
 		;	% could not find entity file or URL prefixes not defined
-			XRefOptions = Options
+			XRefOptions = [url('')| Options]
 		).
 
 	add_predicate_code_url(Options, Entity, Properties, PredicateOptions) :-

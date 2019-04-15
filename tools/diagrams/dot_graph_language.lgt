@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.16,
+		version is 2.17,
 		author is 'Paulo Moura',
-		date is 2019/04/12,
+		date is 2019/04/15,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -149,7 +149,7 @@
 		write(Stream, Identifier),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, shape, Shape),
-		(	member(url(URL), Options),
+		(	memberchk(url(URL), Options),
 			URL \== '' ->
 			write_key_value_comma(Stream, 'URL', URL),
 			write_key_value_comma(Stream, tooltip, URL)
@@ -169,7 +169,7 @@
 		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11">'),
 		write_escaped_term(Stream, Label),
 		write(Stream, '</FONT></TD><TD> </TD></TR>'),
-		(	member(node_type_captions(true), Options),
+		(	memberchk(node_type_captions(true), Options),
 			Caption \== '' ->
 			write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="7">'),
 			write_escaped_term(Stream, Caption),
@@ -224,7 +224,7 @@
 		write(Stream, End),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, arrowhead, ArrowHead),
-		(	member(url(URL), Options),
+		(	memberchk(url(URL), Options),
 			URL \== '' ->
 			write_key_value_comma(Stream, 'URL', URL),
 			write_key_value_comma(Stream, labeltooltip, URL)

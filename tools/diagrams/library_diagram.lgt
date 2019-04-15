@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2019/04/14,
+		date is 2019/04/15,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -101,14 +101,14 @@
 		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [url(''), tooltip('(external libraries)')| Options]).
 
 	add_library_documentation_url(logtalk, Options, Library, NodeOptions) :-
-		(	member(urls(_, DocPrefix), Options),
+		(	memberchk(urls(_, DocPrefix), Options),
 			DocPrefix \== '' ->
 			memberchk(entity_url_suffix_target(Suffix, Target), Options),
 			atom_concat(DocPrefix, Suffix, URL0),
 			atom_concat(URL0, Target, URL1),
 			atom_concat(URL1, Library, URL),
 			NodeOptions = [url(URL)| Options]
-		;	NodeOptions = Options
+		;	NodeOptions = [url('')| Options]
 		).
 	% tbd
 	add_library_documentation_url(prolog, NodeOptions, _, NodeOptions).

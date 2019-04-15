@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.23,
+		version is 2.24,
 		author is 'Paulo Moura',
-		date is 2019/04/14,
+		date is 2019/04/15,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -195,19 +195,19 @@
 	process(_, _, _).
 
 	add_entity_documentation_url(Kind, Entity, Options, EntityOptions) :-
-		(	member(urls(_, DocPrefix), Options),
-			DocPrefix \== '' ->
+		memberchk(urls(_, DocPrefix), Options),
+		(	DocPrefix \== '' ->
 			entity_to_html_name(Kind, Entity, Name),
 			atom_concat(DocPrefix, Name, DocURL0),
 			memberchk(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(DocURL0, Suffix, DocURL),
 			EntityOptions = [url(DocURL)| Options]
-		;	EntityOptions = Options
+		;	EntityOptions = [url('')| Options]
 		).
 
 	add_external_entity_documentation_url(module, Entity, Options, EntityOptions) :-
-		(	modules_diagram_support::module_property(Entity, file(Path)),
-			member(path_url_prefixes(Prefix, _, DocPrefix), Options),
+		modules_diagram_support::module_property(Entity, file(Path)),
+		(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
 			DocPrefix \== '',
 			atom_concat(Prefix, _, Path) ->
 			entity_to_html_name(module, Entity, Name),
@@ -215,7 +215,7 @@
 			memberchk(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(DocURL0, Suffix, DocURL),
 			EntityOptions = [url(DocURL)| Options]
-		;	EntityOptions = Options
+		;	EntityOptions = [url('')| Options]
 		).
 	add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions) :-
 		(	current_object(Entity) ->
@@ -235,7 +235,7 @@
 			memberchk(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(DocURL0, Suffix, DocURL),
 			EntityOptions = [url(DocURL)| Options]
-		;	EntityOptions = Options
+		;	EntityOptions = [url('')| Options]
 		).
 
 	entity_to_html_name(module, Entity, Entity).
