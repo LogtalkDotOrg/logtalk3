@@ -143,7 +143,7 @@ yes
 % using its full path as using only the name would pick the "pairs"
 % Logtalk object instead
 
-| ?- {diagrams(loader)}, module_property(pairs, file(PairsFile)), findall(Path, file_search_path(library, Path), Paths), current_prolog_flag(home, Home), atom_concat(Home, '/library', HomePath), entity_diagram::files('SWI-Prolog library', [aggregate, apply, assoc, broadcast, charsio, check, clpfd, csv, debug, gensym, lists, nb_set, www_browser, option, optparse, ordsets, PairsFile, pio, predicate_options, prolog_pack, prolog_xref, quasi_quotations, random, readutil, record, simplex, thread_pool, ugraphs, url, varnumbers], [url_prefixes('https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', 'http://www.swi-prolog.org/pldoc/man?section='), entity_url_suffix_target('',''), omit_path_prefixes([HomePath| Paths])]).
+| ?- {diagrams(loader)}, module_property(pairs, file(PairsFile)), findall(Path, file_search_path(library, Path), Paths), current_prolog_flag(home, Home), atom_concat(Home, '/library', HomePath), entity_diagram::files('SWI-Prolog library', [aggregate, apply, assoc, broadcast, charsio, check, clpfd, csv, debug, gensym, lists, nb_set, www_browser, option, optparse, ordsets, PairsFile, pio, predicate_options, prolog_pack, prolog_xref, quasi_quotations, random, readutil, record, simplex, thread_pool, ugraphs, url, varnumbers], [url_prefixes('https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', 'http://www.swi-prolog.org/pldoc/man?section='), entity_url_suffix_target('',''), omit_path_prefixes([HomePath| Paths]), layout(top_to_bottom)]).
 yes
 
 
@@ -152,6 +152,6 @@ yes
 | ?- [cliopatria].
 ...
 
-| ?- working_directory(ClioPatria,ClioPatria), getenv('HOME', Home), file_search_path(swi, SWIHome), atom_concat(SWIHome, '/library', Library), git_hash(Hash, []), atomic_list_concat(['https://github.com/ClioPatria/ClioPatria/tree/',Hash,'/'], Git), diagrams::rdirectory(cliopatria, '.', [zoom(true), path_url_prefixes(ClioPatria, Git, ''), path_url_prefixes(Library, 'https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', ''), omit_path_prefixes([ClioPatria, Library]), exclude_directories([web, test, scripts, w3c, etc, rdf, 'Windows', 'Java'])]).
+| ?- working_directory(ClioPatria,ClioPatria), getenv('HOME', Home), file_search_path(swi, SWIHome), atom_concat(SWIHome, '/library', Library), git_hash(Hash, []), atomic_list_concat(['https://github.com/ClioPatria/ClioPatria/tree/',Hash,'/'], Git), diagrams::rdirectory(cliopatria, '.', [zoom(true), path_url_prefixes(ClioPatria, Git, ''), path_url_prefixes(Library, 'https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', ''), omit_path_prefixes([ClioPatria, Library]), exclude_directories([web, test, scripts, w3c, etc, rdf, 'Windows', 'Java']), layout(top_to_bottom)]).
 ...
 

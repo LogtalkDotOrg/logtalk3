@@ -34,8 +34,8 @@ complex code by zooming into details. SVG output can also easily link to
 both source code repositories and API documentation. This allows diagrams
 to be used for source code navigation.
 
-All diagrams support a comprehensive set of options to customize the final
-contents and appearance.
+All diagrams support a comprehensive set of options, discussed below, to
+customize the final contents and appearance.
 
 Diagram generation can be easily automated using the `doclet` tool and the
 `logtalk_doclet` script. See the `doclet` tool examples and documentation
@@ -66,15 +66,14 @@ Supported diagrams
 The following entity diagrams are supported:
 
 - entity diagrams showing entity public interfaces, entity inheritance
-relations and entity predicate call cross-reference relations
-- call diagrams showing entity predicate cross-reference calls
-- inheritance diagrams showing only entity inheritance relations
-- uses diagrams showing only predicate call cross-reference relations
+relations, and entity predicate cross-reference relations
+- predicate cross-reference diagrams (between entities or within an entity)
+- inheritance diagrams showing entity inheritance relations
+- uses diagrams showing which entities use resources from other entities
 
 The following file diagrams are supported:
 
-- file loading dependency diagrams showing which files load or include
-other files
+- file loading diagrams showing which files load or include other files
 - file dependency diagrams showing which files contain entities with
 references to entities defined in other files
 
@@ -84,25 +83,36 @@ loaded indirectly by files external to the libraries being documented.
 
 The following directory diagrams are supported:
 
-- directory loading dependency diagrams which directories load other directories
-- directory dependency diagrams showing which directories contain entities with
-references to entities defined in other directories
+- directory loading diagrams showing which directories contain files that
+load files in other directories
+- directory dependency diagrams showing which directories contain entities
+with references to entities defined in other directories
 
 The following library diagrams are supported:
 
-- library loading dependency diagrams which libraries load other libraries
+- library loading diagrams showing which libraries load other libraries
 - library dependency diagrams showing which libraries contain entities with
 references to entities defined in other libraries
 
+Comparing directory (or file) loading diagrams with directory (or file)
+dependency diagrams allows comparing what is explicitly loaded with the
+actual directory (or file) dependencies, which are inferred from the
+source code.
+
 Library and directory dependency diagrams are specially useful for large
-applications where file diagrams would be too large and complex to be useful,
-specially when combined with the *zoom* option to link to individual library
-diagrams.
+applications where file diagrams would be too large and complex to be
+useful, specially when combined with the *zoom* option to link to,
+respectively, entity and file diagrams.
 
 A utility object, `diagrams`, is provided for generating all supported
 diagrams in one step. This object provides an interface common to all
 diagrams but note that some predicates that generate diagrams only make
-sense for some types of diagrams.
+sense for some types of diagrams. For best results and fine-grained
+customization of each diagram, the individual diagram objects should
+be used.
+
+Graph elements
+--------------
 
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
@@ -172,9 +182,9 @@ Supported graph languages
 -------------------------
 
 Currently only the DOT graph language is supported (tested with Graphviz
-version 2.38.0; visit the <http://www.graphviz.org/> website for more
-information. Some of the more recent have a nasty regression in the SVG
-exporter where text overflows the boxes that should contain it.
+version 2.40.1 on macOS; visit the <http://www.graphviz.org/> website for
+more information). Some of the more recent have a nasty regression in the
+SVG exporter where text overflows the boxes that should contain it.
 
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as SVG, PDF,
@@ -204,7 +214,9 @@ files:
 - `lgt2svg.js` and `lgt2svg.bat` for Windows systems
 
 The scripts assume that the `dot` executable is available from the system
-path.
+path. Due to the lack of a Graphviz installer for Windows, limited test is
+performed in Windows operating-systems. Use if possible the bash script in
+a POSIX system (macOS, Linux, BSD, ...).
 
 When generating diagrams for multiple libraries or directories, it's possible
 to split a diagram with several disconnected library or directory graphs using
@@ -361,7 +373,8 @@ libraries, directories, or files.
 Be sure to set the `source_data` flag `on` before compiling the libraries
 or files for which you want to generated diagrams.
 
-Support for displaying Prolog modules and Prolog module files in diagrams:
+Support for displaying Prolog modules and Prolog module files in diagrams of
+Logtalk applications:
 
 - ECLiPSe  
 	file diagrams don't display module files
@@ -372,11 +385,41 @@ Support for displaying Prolog modules and Prolog module files in diagrams:
 - YAP  
 	full support (uses the YAP `prolog_xref` library)
 
-When using SWI-Prolog or YAP as the backend compilers, diagrams can also be
-generated for (loaded) Prolog source files (containing module definitions)
-and for (loaded) Prolog modules. However, the diagraming methods that take
-a library name as argument are not currently usable and links to module
-documentation is limited.
+
+Linking diagrams
+----------------
+
+When using SVG output, it's possible to generate diagrams that link to other
+diagrams and also diagrams that link to API documentation and source code
+repositories.
+
+For generating links between diagrams, use the `zoom(true)` option. This
+option allows (1) linking library diagrams to entity diagrams to predicate
+cross-referencing diagrams and (2) linking directory diagrams to file
+diagrams. The sub-diagrams are automatically generated. E.g. using the
+predicates that generate library diagrams will automatically also generate
+the entity and predicate cross-referencing diagrams. This feature allows
+using diagrams for navigating complex code by zooming into details.
+
+To generate links to API documentation and source code repositories, use
+the options `path_url_prefixes/3` (or `url_prefixes/2` for simpler cases)
+and `omit_path_prefixes/1`. The idea is that the `omit_path_prefixes/1`
+option specifies local file prefixes that will be cut and replaced by the
+URL prefixes (which can be path prefix specific when addressing multiple
+code repositories). See the `SCRIPT.txt` file for some usage examples.
+
+
+Creating diagrams for Prolog module applications
+------------------------------------------------
+
+Currently limited to SWI-Prolog and YAP Prolog module applications due to
+the lack of a comprehensive reflection API in other Prolog systems.
+
+Simply load your Prolog module application and its dependencies and then
+use diagram entity, directory, or file predicates. Library diagram predicates
+are not supported. See the `SCRIPT.txt` file for some usage examples. Note
+that support for diagrams with links to API documentation is quite limited,
+however, due to the lack of Prolog standards.
 
 
 Creating diagrams for plain Prolog files
@@ -413,9 +456,8 @@ in any directory used for publishing diagrams using it.
 The Graphviz command-line utilities, e.g. `dot`, are notorious for random
 crashes (segmentation faults usually), often requiring re-doing conversions
 from `.dot` files to other formats. A possible workaround is to repeat the
-command until it completes without error. For example, on a POSIX system:
-
-	$ cp "$LOGTALKUSER/tools/diagrams/zoom.png" . && for file in *.dot; do flag=0; counter=10; while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; (( --counter )); done; done
+command until it completes without error. See for example the `lgt2svg.sh`
+script.
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).
