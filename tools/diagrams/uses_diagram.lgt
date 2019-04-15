@@ -22,16 +22,16 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.9,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2019/04/14,
+		date is 2019/04/15,
 		comment is 'Predicates for generating entity diagrams with only uses and use_module relation edges.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), xref_diagram(_)]
 	]).
 
-	% by default, diagram layout is bottom to top:
-	default_option(layout(bottom_to_top)).
+	% by default, diagram layout is top to bottom:
+	default_option(layout(top_to_bottom)).
 	% by default, diagram title is empty:
 	default_option(title('')).
 	% by default, print current date:
