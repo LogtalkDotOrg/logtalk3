@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.34,
+		version is 2.35,
 		author is 'Paulo Moura',
 		date is 2019/04/15,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -324,7 +324,7 @@
 		(	member(line_count(Line), Properties),
 			Line =\= -1 ->
 			add_xref_code_url(Options, Entity, Line, PredicateOptions)
-		;	PredicateOptions = []
+		;	PredicateOptions = [url('')| Options]
 		).
 
 	add_xref_code_url(Options, Entity, Line, XRefOptions) :-
@@ -382,7 +382,7 @@
 			),
 			XRefOptions = [url(CodeURL)| Options]
 		;	% could not find entity file or URL prefixes not definined
-			XRefOptions = Options
+			XRefOptions = [url('')| Options]
 		).
 
 	calls_local_predicate(module, Entity, Caller, Line, Callee) :-
