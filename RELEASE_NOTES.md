@@ -47,6 +47,8 @@ of external nodes) now link to source code instead of documentation.
 * CHANGED: Default value for the `entity_url_suffix_target/2` option for the
 library diagrams for compatibility with Sphinx-based API documentation.
 
+* CHANGED: Default entity diagram layout to top to bottom.
+
 * ADDED: Support for generating sub-diagrams when using the `zoom(true)`
 option.
 
