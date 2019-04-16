@@ -65,8 +65,8 @@
 	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
 
 	%% interpreted BK
-	interpreted_bk([map,[],[],_],[]).
-	interpreted_bk([map,[A|As],[B|Bs],F],[[F,A,B],[map,As,Bs,F]]).
+	ibk([map,[],[],_],[]).
+	ibk([map,[A|As],[B|Bs],F],[[F,A,B],[map,As,Bs,F]]).
 
 	:- public(learn/1).
 	learn(Clauses) :-

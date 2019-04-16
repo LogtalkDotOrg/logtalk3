@@ -46,6 +46,10 @@
 	%% metarules
 	metarule([P,Q],([P,A,B]:-[[Q,B,A]])).
 
+	%% background knowledge
+	succ(I, J) :-
+		integer::succ(I, J).
+
 	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [

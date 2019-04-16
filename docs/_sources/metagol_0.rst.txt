@@ -9,8 +9,8 @@
 Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0.17
-| **Date:** 2019/1/19
+| **Version:** 0.18
+| **Date:** 2019/4/16
 
 | **Copyright:** Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura
 | **License:** BSD 3-Clause License
@@ -135,12 +135,12 @@ Prints a learned program.
 
 .. raw:: html
 
-   <div id="metarule/7"> </div>
+   <div id="metarule/8"> </div>
 
-.. index:: metarule/7
-.. _metagol/0::metarule/7:
+.. index:: metarule/8
+.. _metagol/0::metarule/8:
 
-``metarule/7``
+``metarule/8``
 ^^^^^^^^^^^^^^
 
 | **Compilation flags:**
@@ -149,12 +149,12 @@ Prints a learned program.
 
 .. raw:: html
 
-   <div id="metarule_init/6"> </div>
+   <div id="metarule_init/7"> </div>
 
-.. index:: metarule_init/6
-.. _metagol/0::metarule_init/6:
+.. index:: metarule_init/7
+.. _metagol/0::metarule_init/7:
 
-``metarule_init/6``
+``metarule_init/7``
 ^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
@@ -191,13 +191,13 @@ Prints a learned program.
 
 .. raw:: html
 
-   <div id="interpreted_bk/2"> </div>
+   <div id="ibk/3"> </div>
 
-.. index:: interpreted_bk/2
-.. _metagol/0::interpreted_bk/2:
+.. index:: ibk/3
+.. _metagol/0::ibk/3:
 
-``interpreted_bk/2``
-^^^^^^^^^^^^^^^^^^^^
+``ibk/3``
+^^^^^^^^^
 
 | **Compilation flags:**
 |    ``static``
@@ -391,19 +391,7 @@ Protected interface
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="interpreted_/1"> </div>
-
-.. index:: interpreted_/1
-.. _metagol/0::interpreted_/1:
-
-``interpreted_/1``
-^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
+(see related entities)
 
 Operators
 ---------

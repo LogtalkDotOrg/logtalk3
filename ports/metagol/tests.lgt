@@ -177,7 +177,7 @@
 			]
 		).
 
-	test(metagol_member_1) :-
+	- test(metagol_member_1) :-
 		member::learn(Clauses), !,
 		^^variant(
 			Clauses,
@@ -185,7 +185,7 @@
 				(target(D, E) :- value(E, D))]
 		).
 
-	test(metagol_mutual_recursion_1) :-
+	- test(metagol_mutual_recursion_1) :-
 		mutual_recursion::learn(Clauses), !,
 		^^variant(
 			Clauses,
@@ -221,7 +221,7 @@
 			]
 		).
 
-	test(metagol_sequential_1) :-
+	- test(metagol_sequential_1) :-
 		sequential::learn(Clauses), !,
 		^^variant(
 			Clauses,
@@ -232,7 +232,7 @@
 			]
 		).
 
-	test(metagol_sequential1_1) :-
+	- test(metagol_sequential1_1) :-
 		sequential1::learn(Clauses), !,
 		^^variant(
 			Clauses,

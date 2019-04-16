@@ -29,10 +29,10 @@
 	write1(In/[H|RestOut],In/RestOut,H).
 	next_empty([_]/_).
 
-	func_test(Atom,PS,G) :-
-		Atom = [P,In/B,_/[]],
-		Actual = [P,In/Z,_/[]],
-		\+ (::prove_deduce([Actual],PS,G), Z \= B).
+	func_test(Atom1, Atom2, Condition):-
+		Atom1 = [P,In/B,_/[]],
+		Atom2 = [P,In/Z,_/[]],
+		Condition = (Z \= B).
 
 	%% term ordering for recursive metarule that ensures that with each iteration the length of the string decreases
 	:- public(term_gt/2).

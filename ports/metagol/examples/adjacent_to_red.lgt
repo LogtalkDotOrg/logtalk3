@@ -70,9 +70,9 @@
 			target(c)
 		],
 		Neg = [
-		target(a),
-		target(d),
-		target(e)
+			target(a),
+			target(d),
+			target(e)
 		],
 		::learn(Pos, Neg, Prog),
 		::pclauses(Prog, Clauses).

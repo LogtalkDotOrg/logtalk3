@@ -61,9 +61,9 @@
 	prim(divisible2/1).
 	prim(divisible5/1).
 
-	interpreted_bk([filter,[],[],_],[]).
-	interpreted_bk([filter,[A|T1],[A|T2],F],[[F,A],[filter,T1,T2,F]]).
-	interpreted_bk([filter,[_|T1],T2,F],[[filter,T1,T2,F]]).
+	ibk([filter,[],[],_],[]).
+	ibk([filter,[A|T1],[A|T2],F],[[F,A],[filter,T1,T2,F]]).
+	ibk([filter,[_|T1],T2,F],[[filter,T1,T2,F]]).
 
 	:- public(learn/1).
 	learn(Clauses) :-
