@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-142.4264 3819,-142.4264 3819,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/17, 17:20</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/17, 17:54</text>
 <g id="clust1" class="cluster">
 <title>cluster_characterp_protocol</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt">
@@ -23,7 +23,7 @@
 <!-- is_ascii/1 -->
 <g id="node1" class="node">
 <title>is_ascii/1</title>
-<g id="a_node1"><a xlink:title="library/characterp.lgt">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L31">
 <ellipse fill="#00ff7f" stroke="#000000" cx="3730" cy="-80.2132" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="3691" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="3697" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_ascii/1</text>
@@ -37,7 +37,7 @@
 <!-- is_alphanumeric/1 -->
 <g id="node2" class="node">
 <title>is_alphanumeric/1</title>
-<g id="a_node2"><a xlink:title="library/characterp.lgt">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L38">
 <ellipse fill="#00ff7f" stroke="#000000" cx="3545" cy="-80.2132" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="3483" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="3489" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_alphanumeric/1</text>
@@ -51,7 +51,7 @@
 <!-- is_alpha/1 -->
 <g id="node3" class="node">
 <title>is_alpha/1</title>
-<g id="a_node3"><a xlink:title="library/characterp.lgt">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L45">
 <ellipse fill="#00ff7f" stroke="#000000" cx="3360" cy="-80.2132" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="3321" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="3327" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_alpha/1</text>
@@ -65,7 +65,7 @@
 <!-- is_letter/1 -->
 <g id="node4" class="node">
 <title>is_letter/1</title>
-<g id="a_node4"><a xlink:title="library/characterp.lgt">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L52">
 <ellipse fill="#00ff7f" stroke="#000000" cx="3203" cy="-80.2132" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="3161" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="3167" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_letter/1</text>
@@ -79,7 +79,7 @@
 <!-- is_bin_digit/1 -->
 <g id="node5" class="node">
 <title>is_bin_digit/1</title>
-<g id="a_node5"><a xlink:title="library/characterp.lgt">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L59">
 <ellipse fill="#00ff7f" stroke="#000000" cx="3028" cy="-80.2132" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="2976" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2982" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_bin_digit/1</text>
@@ -93,7 +93,7 @@
 <!-- is_octal_digit/1 -->
 <g id="node6" class="node">
 <title>is_octal_digit/1</title>
-<g id="a_node6"><a xlink:title="library/characterp.lgt">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L66">
 <ellipse fill="#00ff7f" stroke="#000000" cx="2830" cy="-80.2132" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="2771" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2777" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_octal_digit/1</text>
@@ -107,7 +107,7 @@
 <!-- is_dec_digit/1 -->
 <g id="node7" class="node">
 <title>is_dec_digit/1</title>
-<g id="a_node7"><a xlink:title="library/characterp.lgt">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L73">
 <ellipse fill="#00ff7f" stroke="#000000" cx="2632" cy="-80.2132" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="2580" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2586" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_dec_digit/1</text>
@@ -121,7 +121,7 @@
 <!-- is_hex_digit/1 -->
 <g id="node8" class="node">
 <title>is_hex_digit/1</title>
-<g id="a_node8"><a xlink:title="library/characterp.lgt">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L80">
 <ellipse fill="#00ff7f" stroke="#000000" cx="2443" cy="-80.2132" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="2391" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2397" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_hex_digit/1</text>
@@ -135,7 +135,7 @@
 <!-- is_lower_case/1 -->
 <g id="node9" class="node">
 <title>is_lower_case/1</title>
-<g id="a_node9"><a xlink:title="library/characterp.lgt">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L87">
 <ellipse fill="#00ff7f" stroke="#000000" cx="2249" cy="-80.2132" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="2193" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2199" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_lower_case/1</text>
@@ -149,7 +149,7 @@
 <!-- is_upper_case/1 -->
 <g id="node10" class="node">
 <title>is_upper_case/1</title>
-<g id="a_node10"><a xlink:title="library/characterp.lgt">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L94">
 <ellipse fill="#00ff7f" stroke="#000000" cx="2050" cy="-80.2132" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="1994" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2000" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_upper_case/1</text>
@@ -163,7 +163,7 @@
 <!-- is_vowel/1 -->
 <g id="node11" class="node">
 <title>is_vowel/1</title>
-<g id="a_node11"><a xlink:title="library/characterp.lgt">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L101">
 <ellipse fill="#00ff7f" stroke="#000000" cx="1874" cy="-80.2132" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="1835" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1841" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_vowel/1</text>
@@ -177,7 +177,7 @@
 <!-- is_white_space/1 -->
 <g id="node12" class="node">
 <title>is_white_space/1</title>
-<g id="a_node12"><a xlink:title="library/characterp.lgt">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L108">
 <ellipse fill="#00ff7f" stroke="#000000" cx="1694" cy="-80.2132" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="1635" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1641" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_white_space/1</text>
@@ -191,7 +191,7 @@
 <!-- is_layout/1 -->
 <g id="node13" class="node">
 <title>is_layout/1</title>
-<g id="a_node13"><a xlink:title="library/characterp.lgt">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L115">
 <ellipse fill="#00ff7f" stroke="#000000" cx="1510" cy="-80.2132" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="1468" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1474" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_layout/1</text>
@@ -205,7 +205,7 @@
 <!-- is_quote/1 -->
 <g id="node14" class="node">
 <title>is_quote/1</title>
-<g id="a_node14"><a xlink:title="library/characterp.lgt">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L122">
 <ellipse fill="#00ff7f" stroke="#000000" cx="1353" cy="-80.2132" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="1314" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1320" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_quote/1</text>
@@ -219,7 +219,7 @@
 <!-- is_punctation/1 -->
 <g id="node15" class="node">
 <title>is_punctation/1</title>
-<g id="a_node15"><a xlink:title="library/characterp.lgt">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L129">
 <ellipse fill="#00ff7f" stroke="#000000" cx="1177" cy="-80.2132" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="1121" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1127" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_punctation/1</text>
@@ -233,7 +233,7 @@
 <!-- is_period/1 -->
 <g id="node16" class="node">
 <title>is_period/1</title>
-<g id="a_node16"><a xlink:title="library/characterp.lgt">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L136">
 <ellipse fill="#00ff7f" stroke="#000000" cx="997" cy="-80.2132" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="955" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="961" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_period/1</text>
@@ -247,7 +247,7 @@
 <!-- is_control/1 -->
 <g id="node17" class="node">
 <title>is_control/1</title>
-<g id="a_node17"><a xlink:title="library/characterp.lgt">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L143">
 <ellipse fill="#00ff7f" stroke="#000000" cx="831" cy="-80.2132" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="785" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="791" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_control/1</text>
@@ -261,7 +261,7 @@
 <!-- is_newline/1 -->
 <g id="node18" class="node">
 <title>is_newline/1</title>
-<g id="a_node18"><a xlink:title="library/characterp.lgt">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L150">
 <ellipse fill="#00ff7f" stroke="#000000" cx="660" cy="-80.2132" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="614" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="620" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_newline/1</text>
@@ -275,7 +275,7 @@
 <!-- is_end_of_line/1 -->
 <g id="node19" class="node">
 <title>is_end_of_line/1</title>
-<g id="a_node19"><a xlink:title="library/characterp.lgt">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L157">
 <ellipse fill="#00ff7f" stroke="#000000" cx="471" cy="-80.2132" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="412" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="418" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_end_of_line/1</text>
@@ -289,7 +289,7 @@
 <!-- parenthesis/2 -->
 <g id="node20" class="node">
 <title>parenthesis/2</title>
-<g id="a_node20"><a xlink:title="library/characterp.lgt">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L164">
 <ellipse fill="#00ff7f" stroke="#000000" cx="278" cy="-80.2132" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="229" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="235" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">parenthesis/2</text>
@@ -303,7 +303,7 @@
 <!-- lower_upper/2 -->
 <g id="node21" class="node">
 <title>lower_upper/2</title>
-<g id="a_node21"><a xlink:title="library/characterp.lgt">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/characterp.lgt#L173">
 <ellipse fill="#00ff7f" stroke="#000000" cx="99" cy="-80.2132" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="50" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="56" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">lower_upper/2</text>
