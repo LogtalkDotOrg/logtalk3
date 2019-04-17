@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.21,
+		version is 2.22,
 		author is 'Paulo Moura',
-		date is 2019/04/14,
+		date is 2019/04/17,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -385,11 +385,12 @@
 		(	Format::file_header(diagram_output_file, Project, Options),
 			atom_concat(directory_, Project, Identifier),
 			add_link_options(NormalizedDirectory, Options, GraphOptions),
-			Format::graph_header(diagram_output_file, Identifier, Project, directory, GraphOptions),
+			omit_path_prefix(NormalizedDirectory, Options, Relative),
+			Format::graph_header(diagram_output_file, Identifier, Relative, directory, GraphOptions),
 			::output_library(Project, NormalizedDirectory, GraphOptions),
 			::output_externals(Options),
 			::output_edges(Options),
-			Format::graph_footer(diagram_output_file, Identifier, Project, directory, GraphOptions),
+			Format::graph_footer(diagram_output_file, Identifier, Relative, directory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
 		;	% failure is usually caused by errors in the source itself
@@ -665,10 +666,11 @@
 		format_object(Format),
 		memberchk(exclude_directories(ExcludedDirectories), Options),
 		atom_concat(directory_, Project, TopIdentifier),
+		omit_path_prefix(TopPath, Options, TopDirectory),
 		add_link_options(TopPath, Options, TopGraphOptions),
-		Format::graph_header(diagram_output_file, TopIdentifier, Project, directory, TopGraphOptions),
+		Format::graph_header(diagram_output_file, TopIdentifier, TopDirectory, directory, TopGraphOptions),
 		::output_library(Project, TopPath, TopGraphOptions),
-		Format::graph_footer(diagram_output_file, TopIdentifier, Project, directory, TopGraphOptions),
+		Format::graph_footer(diagram_output_file, TopIdentifier, TopDirectory, directory, TopGraphOptions),
 		sub_directory(TopPath, ExcludedDirectories, Directory, Path),
 			atom_concat(directory_, Directory, Identifier),
 			add_link_options(Path, Options, GraphOptions),

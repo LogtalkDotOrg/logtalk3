@@ -86,6 +86,8 @@ non-terminal.
 * FIXED: Only generate diagram node documentation links when the documentation
 URL prefix is defined.
 
+* FIXED: Label for root directory in directory diagrams.
+
 Ports
 -----
 
