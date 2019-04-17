@@ -22,9 +22,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2019/04/14,
+		date is 2019/04/17,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parnames is ['Format'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -163,6 +163,8 @@
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
+
+	diagram_title('Directory dependency diagram').
 
 	diagram_name_suffix('_directory_dependency_diagram').
 

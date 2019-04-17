@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.35,
+		version is 2.36,
 		author is 'Paulo Moura',
-		date is 2019/04/15,
+		date is 2019/04/17,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -698,6 +698,8 @@
 	default_option(zoom_url_suffix('.svg')).
 	% by default, assume GitHub/GitLab line references in URLs
 	default_option(url_line_references(github)).
+
+	diagram_title('Cross-referencing diagram').
 
 	diagram_name_suffix('_xref_diagram').
 

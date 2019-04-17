@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.24,
+		version is 2.25,
 		author is 'Paulo Moura',
-		date is 2019/04/15,
+		date is 2019/04/17,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -794,6 +794,8 @@
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
+
+	diagram_title('Entity diagram').
 
 	diagram_name_suffix('_entity_diagram').
 

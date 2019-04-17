@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2019/04/15,
+		date is 2019/04/17,
 		comment is 'Predicates for generating entity diagrams with only uses and use_module relation edges.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), xref_diagram(_)]
@@ -74,6 +74,8 @@
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
+
+	diagram_title('Uses diagram').
 
 	diagram_name_suffix('_uses_diagram').
 

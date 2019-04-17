@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.15,
+		version is 2.16,
 		author is 'Paulo Moura',
-		date is 2018/02/14,
+		date is 2018/02/17,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parnames is ['Format'],
 		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_)]
@@ -178,6 +178,8 @@
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
+
+	diagram_title('Library dependency diagram').
 
 	diagram_name_suffix('_library_dependency_diagram').
 

@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.15,
+		version is 2.16,
 		author is 'Paulo Moura',
-		date is 2019/04/14,
+		date is 2019/04/17,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format'],
 		see_also is [file_load_diagram(_), directory_load_diagram(_), library_load_diagram(_)]
@@ -147,6 +147,8 @@
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
+
+	diagram_title('File dependency diagram').
 
 	diagram_name_suffix('_file_dependency_diagram').
 
