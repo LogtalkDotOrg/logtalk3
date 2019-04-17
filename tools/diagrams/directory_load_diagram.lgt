@@ -22,7 +22,7 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
 		date is 2019/04/17,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
@@ -94,7 +94,7 @@
 
 	reset :-
 		^^reset,
-		::retractall(sub_diagrams_(_, _)).
+		retractall(sub_diagrams_(_, _)).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).

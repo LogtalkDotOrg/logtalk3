@@ -1,0 +1,62 @@
+.. index:: directory_dependency_diagram(Format)
+.. _directory_dependency_diagram/1:
+
+**object**
+
+``directory_dependency_diagram(Format)``
+========================================
+
+Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.
+
+| **Author:** Paulo Moura
+| **Version:** 1.8
+| **Date:** 2019/4/17
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`directory_diagram(Format) <directory_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="sub_diagrams_/2"> </div>
+
+.. index:: sub_diagrams_/2
+.. _directory_dependency_diagram/1::sub_diagrams_/2:
+
+``sub_diagrams_/2``
+^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+.. seealso::
+
+   :ref:`directory_load_diagram(Format) <directory_load_diagram/1>`, :ref:`file_load_diagram(Format) <file_load_diagram/1>`, :ref:`library_load_diagram(Format) <library_load_diagram/1>`
+

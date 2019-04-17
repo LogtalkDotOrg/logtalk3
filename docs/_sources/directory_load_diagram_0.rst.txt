@@ -1,0 +1,50 @@
+.. index:: directory_load_diagram
+.. _directory_load_diagram/0:
+
+**object**
+
+``directory_load_diagram``
+==========================
+
+Predicates for generating directory loading dependency diagrams in DOT format.
+
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2019/4/7
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`directory_load_diagram(dot) <directory_load_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+.. seealso::
+
+   :ref:`directory_dependency_diagram <directory_dependency_diagram/0>`, :ref:`file_dependency_diagram <file_dependency_diagram/0>`
+

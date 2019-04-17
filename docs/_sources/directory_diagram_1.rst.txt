@@ -1,0 +1,126 @@
+.. index:: directory_diagram(Format)
+.. _directory_diagram/1:
+
+**category**
+
+``directory_diagram(Format)``
+=============================
+
+Common predicates for generating directory diagrams.
+
+| **Author:** Paulo Moura
+| **Version:** 1.4
+| **Date:** 2019/4/14
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`diagram(Format) <diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+.. raw:: html
+
+   <div id="remember_included_directory/1"> </div>
+
+.. index:: remember_included_directory/1
+.. _directory_diagram/1::remember_included_directory/1:
+
+``remember_included_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="remember_referenced_logtalk_directory/1"> </div>
+
+.. index:: remember_referenced_logtalk_directory/1
+.. _directory_diagram/1::remember_referenced_logtalk_directory/1:
+
+``remember_referenced_logtalk_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="remember_referenced_prolog_directory/1"> </div>
+
+.. index:: remember_referenced_prolog_directory/1
+.. _directory_diagram/1::remember_referenced_prolog_directory/1:
+
+``remember_referenced_prolog_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="included_directory_/1"> </div>
+
+.. index:: included_directory_/1
+.. _directory_diagram/1::included_directory_/1:
+
+``included_directory_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="referenced_logtalk_directory_/1"> </div>
+
+.. index:: referenced_logtalk_directory_/1
+.. _directory_diagram/1::referenced_logtalk_directory_/1:
+
+``referenced_logtalk_directory_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="referenced_prolog_directory_/1"> </div>
+
+.. index:: referenced_prolog_directory_/1
+.. _directory_diagram/1::referenced_prolog_directory_/1:
+
+``referenced_prolog_directory_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
