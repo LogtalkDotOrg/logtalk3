@@ -72,6 +72,9 @@ autoloading mechanism when using SWI-Prolog as the backend compiler.
 * IMPROVED: Print the diagram description in diagrams that display multiple
 library, directory, file, or entity nodes.
 
+* IMPROVED: Library diagrams now clearly show that the container of a library
+node is the library directory.
+
 * FIXED: Bug when generating predicate cross-referencing diagrams where a call
 to a multifile predicate for a parametric entity would result in a duplicated
 node.

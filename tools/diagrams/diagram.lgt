@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.23,
+		version is 2.24,
 		author is 'Paulo Moura',
 		date is 2019/04/17,
 		comment is 'Common predicates for generating diagrams.',
@@ -69,9 +69,10 @@
 		logtalk::expand_library_path(Library, Directory),
 		atom_concat(library_, Library, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
+		omit_path_prefix(Directory, Options, Relative),
+		Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
 		::output_library(Library, Directory, GraphOptions),
-		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
+		Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library)),
 		output_libraries(Libraries, Format, Options).
 
@@ -133,9 +134,10 @@
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		atom_concat(library_, Library, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
+		omit_path_prefix(Directory, Options, Relative),
+		Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
 		::output_library(Library, Directory, GraphOptions),
-		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
+		Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library)),
 		fail.
 	output_all_libraries(_).
@@ -211,11 +213,12 @@
 		(	Format::file_header(diagram_output_file, Library, Options),
 			atom_concat(library_, Library, Identifier),
 			add_link_options(Path, Options, GraphOptions),
-			Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
+			omit_path_prefix(Path, Options, Relative),
+			Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
 			::output_library(Library, Path, GraphOptions),
 			::output_externals(Options),
 			::output_edges(Options),
-			Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
+			Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 			Format::file_footer(diagram_output_file, Library, Options) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
 		;	% failure is usually caused by errors in the source itself
@@ -643,15 +646,17 @@
 		memberchk(exclude_libraries(ExcludedLibraries), Options),
 		atom_concat(library_, TopLibrary, TopIdentifier),
 		add_link_options(TopPath, Options, TopGraphOptions),
-		Format::graph_header(diagram_output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
+		omit_path_prefix(TopPath, Options, TopRelative),
+		Format::graph_header(diagram_output_file, TopIdentifier, TopRelative, library, TopGraphOptions),
 		::output_library(TopLibrary, TopPath, TopGraphOptions),
-		Format::graph_footer(diagram_output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
+		Format::graph_footer(diagram_output_file, TopIdentifier, TopRelative, library, TopGraphOptions),
 		sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			atom_concat(library_, Library, Identifier),
 			add_link_options(Path, Options, GraphOptions),
-			Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
+			omit_path_prefix(Path, Options, Relative),
+			Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
 			::output_library(Library, Path, GraphOptions),
-			Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
+			Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 		fail.
 	output_rlibrary(_, _, _).
 
