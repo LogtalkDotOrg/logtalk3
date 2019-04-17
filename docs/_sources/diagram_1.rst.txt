@@ -9,7 +9,7 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.24
+| **Version:** 2.25
 | **Date:** 2019/4/17
 
 | **Compilation flags:**
@@ -504,23 +504,23 @@ Returns the identifier of the object implementing the graph language currently b
 
 .. raw:: html
 
-   <div id="diagram_title/1"> </div>
+   <div id="diagram_description/1"> </div>
 
-.. index:: diagram_title/1
-.. _diagram/1::diagram_title/1:
+.. index:: diagram_description/1
+.. _diagram/1::diagram_description/1:
 
-``diagram_title/1``
-^^^^^^^^^^^^^^^^^^^
+``diagram_description/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns the diagram title.
+Returns the diagram description.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``diagram_title(Title)``
+|    ``diagram_description(Description)``
 | **Mode and number of proofs:**
-|    ``diagram_title(-atom)`` - ``one``
+|    ``diagram_description(-atom)`` - ``one``
 
 
 .. raw:: html

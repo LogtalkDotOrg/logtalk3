@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.36,
+		version is 2.37,
 		author is 'Paulo Moura',
 		date is 2019/04/17,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -71,8 +71,9 @@
 		^^merge_options(UserOptions, Options),
 		::reset,
 		^^output_file_path(Identifier, Options, Format, OutputPath),
+		::diagram_description(Description),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		(	Format::file_header(diagram_output_file, Identifier, Options),
+		(	Format::file_header(diagram_output_file, Identifier, [description(Description)| Options]),
 			entity_property(Kind, Entity, file(Basename, Directory)),
 			atom_concat(Directory, Basename, Path),
 			^^add_link_options(Path, Options, GraphOptions),
@@ -699,7 +700,7 @@
 	% by default, assume GitHub/GitLab line references in URLs
 	default_option(url_line_references(github)).
 
-	diagram_title('Cross-referencing diagram').
+	diagram_description('Cross-referencing diagram').
 
 	diagram_name_suffix('_xref_diagram').
 

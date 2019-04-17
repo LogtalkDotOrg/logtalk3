@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.25,
+		version is 2.26,
 		author is 'Paulo Moura',
 		date is 2019/04/17,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -69,8 +69,9 @@
 		^^merge_options(UserOptions, Options),
 		::reset,
 		^^output_file_path(Name, Options, Format, OutputPath),
+		::diagram_description(Description),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		(	Format::file_header(diagram_output_file, Basename, Options),
+		(	Format::file_header(diagram_output_file, Basename, [description(Description)| Options]),
 			atom_concat(file_, Path, Identifier),
 			^^add_link_options(Path, Options, GraphOptions),
 			Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
@@ -795,7 +796,7 @@
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
 
-	diagram_title('Entity diagram').
+	diagram_description('Entity diagram').
 
 	diagram_name_suffix('_entity_diagram').
 

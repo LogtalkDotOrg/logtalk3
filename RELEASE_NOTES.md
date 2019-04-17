@@ -69,8 +69,7 @@ diagrams being created. These log messages can be suppressed by setting the
 able to detect and report implicit module dependencies that are handled by the
 autoloading mechanism when using SWI-Prolog as the backend compiler.
 
-* IMPROVED: Print the diagram description in diagrams that display multiple
-library, directory, file, or entity nodes.
+* IMPROVED: Print the diagram description after the user supplied title.
 
 * IMPROVED: Library diagrams now clearly show that the container of a library
 node is the library directory.

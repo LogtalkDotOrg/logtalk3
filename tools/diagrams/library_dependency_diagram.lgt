@@ -22,7 +22,7 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.16,
+		version is 2.17,
 		author is 'Paulo Moura',
 		date is 2018/02/17,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
@@ -179,7 +179,7 @@
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
 
-	diagram_title('Library dependency diagram').
+	diagram_description('Library dependency diagram').
 
 	diagram_name_suffix('_library_dependency_diagram').
 

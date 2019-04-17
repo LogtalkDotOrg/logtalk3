@@ -22,7 +22,7 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.16,
+		version is 2.17,
 		author is 'Paulo Moura',
 		date is 2019/04/17,
 		comment is 'Predicates for generating library loading dependency diagrams.',
@@ -143,7 +143,7 @@
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
 
-	diagram_title('Library load diagram').
+	diagram_description('Library load diagram').
 
 	diagram_name_suffix('_library_load_diagram').
 

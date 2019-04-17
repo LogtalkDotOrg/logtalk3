@@ -22,7 +22,7 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
 		date is 2019/04/17,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
@@ -164,7 +164,7 @@
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
 
-	diagram_title('Directory dependency diagram').
+	diagram_description('Directory dependency diagram').
 
 	diagram_name_suffix('_directory_dependency_diagram').
 

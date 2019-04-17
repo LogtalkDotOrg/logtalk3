@@ -22,7 +22,7 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.17,
+		version is 2.18,
 		author is 'Paulo Moura',
 		date is 2019/04/17,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
@@ -119,7 +119,7 @@
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
 
-	diagram_title('File load diagram').
+	diagram_description('File load diagram').
 
 	diagram_name_suffix('_file_load_diagram').
 
