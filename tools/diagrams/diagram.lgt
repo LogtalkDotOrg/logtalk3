@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.25,
+		version is 2.26,
 		author is 'Paulo Moura',
-		date is 2019/04/17,
+		date is 2019/04/18,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -689,20 +689,12 @@
 	]).
 
 	output_rdirectory(Project, TopPath, Options) :-
-		format_object(Format),
 		memberchk(exclude_directories(ExcludedDirectories), Options),
-		atom_concat(directory_, Project, TopIdentifier),
-		omit_path_prefix(TopPath, Options, TopDirectory),
 		add_link_options(TopPath, Options, TopGraphOptions),
-		Format::graph_header(diagram_output_file, TopIdentifier, TopDirectory, directory, TopGraphOptions),
 		::output_library(Project, TopPath, TopGraphOptions),
-		Format::graph_footer(diagram_output_file, TopIdentifier, TopDirectory, directory, TopGraphOptions),
 		sub_directory(TopPath, ExcludedDirectories, Directory, Path),
-			atom_concat(directory_, Directory, Identifier),
 			add_link_options(Path, Options, GraphOptions),
-			Format::graph_header(diagram_output_file, Identifier, Directory, directory, GraphOptions),
 			::output_library(Directory, Path, GraphOptions),
-			Format::graph_footer(diagram_output_file, Identifier, Directory, directory, GraphOptions),
 		fail.
 	output_rdirectory(_, _, _).
 
