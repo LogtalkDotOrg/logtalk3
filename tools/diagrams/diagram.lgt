@@ -303,7 +303,6 @@
 	output_directories([Directory| Directories], Project, Format, Options) :-
 		self(Self),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
-		atom_concat(directory_, Directory, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
 		::output_library(Project, Directory, GraphOptions),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, Directory)),
