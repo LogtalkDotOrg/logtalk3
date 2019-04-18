@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.26,
+		version is 2.27,
 		author is 'Paulo Moura',
 		date is 2019/04/18,
 		comment is 'Common predicates for generating diagrams.',
@@ -305,9 +305,7 @@
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
 		atom_concat(directory_, Directory, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, Directory, directory, GraphOptions),
 		::output_library(Project, Directory, GraphOptions),
-		Format::graph_footer(diagram_output_file, Identifier, Directory, directory, GraphOptions),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, Directory)),
 		output_directories(Directories, Project, Format, Options).
 
