@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2016/10/14,
+		date is 2016/10/18,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -51,6 +51,9 @@
 		::retractall(referenced_logtalk_file_(_)),
 		::retractall(referenced_prolog_file_(_)).
 
+	output_externals(Options) :-
+		memberchk(externals(false), Options),
+		!.
 	output_externals(_Options) :-
 		::retract(included_file_(Path)),
 		::retractall(referenced_logtalk_file_(Path)),

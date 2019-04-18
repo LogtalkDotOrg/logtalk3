@@ -725,7 +725,7 @@ Generates diagram output for a file using the specified options.
 ``output_externals/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Outputs external entities using the specified options.
+Outputs external entities using the specified options depending on the value of the boolean option externals/1.
 
 | **Compilation flags:**
 |    ``static``

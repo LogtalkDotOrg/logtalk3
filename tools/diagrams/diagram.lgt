@@ -729,11 +729,11 @@
 	:- protected(output_externals/1).
 	:- mode(output_externals(+list(compound)), one).
 	:- info(output_externals/1, [
-		comment is 'Outputs external entities using the specified options.',
+		comment is 'Outputs external entities using the specified options depending on the value of the boolean option externals/1.',
 		argnames is ['Options']
 	]).
 
-	% by default, don't output externals
+	% default definition; expected to be overriden
 	output_externals(_).
 
 	:- protected(output_sub_diagrams/1).

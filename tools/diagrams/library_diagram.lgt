@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2019/04/15,
+		date is 2019/04/18,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -69,6 +69,9 @@
 		::retractall(referenced_logtalk_library_(_, _)),
 		::retractall(referenced_prolog_library_(_, _)).
 
+	output_externals(Options) :-
+		memberchk(externals(false), Options),
+		!.
 	output_externals(_Options) :-
 		::retract(included_library_(Library, Path)),
 		::retractall(referenced_logtalk_library_(Library, Path)),

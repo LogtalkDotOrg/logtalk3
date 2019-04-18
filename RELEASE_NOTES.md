@@ -61,6 +61,9 @@ diagrams for a directory and its sub-directories.
 * ADDED: POSIX and Windows scripts for converting Graphviz `.dot` files into
 `.svg` files to the `diagrams` tool.
 
+* ADDED: Boolean option `externals/1` to the `diagrams` tool to control
+printing of external modes.
+
 * UPDATED: The `diagrams` tool predicates to print log messages for the
 diagrams being created. These log messages can be suppressed by setting the
 `report` flag to `warnings` or `off`.

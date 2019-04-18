@@ -22,9 +22,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2019/04/17,
+		date is 2019/04/18,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parnames is ['Format'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
@@ -111,6 +111,9 @@
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
 	% by default, print node type captions
+	% by default, print external nodes:
+	default_option(externals(true)).
+	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).

@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2019/04/17,
+		date is 2019/04/18,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -52,7 +52,9 @@
 	default_option(relation_labels(true)).
 	% by default, don't write cross-referencing calls:
 	default_option(xref_calls(false)).
-	% by default, print node type captions
+	% by default, print external nodes:
+	default_option(externals(true)).
+	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).

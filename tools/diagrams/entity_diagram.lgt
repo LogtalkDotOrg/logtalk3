@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.26,
+		version is 2.27,
 		author is 'Paulo Moura',
-		date is 2019/04/17,
+		date is 2019/04/18,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -125,6 +125,9 @@
 		retractall(referenced_entity_(_)),
 		retractall(referenced_module_(_)).
 
+	output_externals(Options) :-
+		memberchk(externals(false), Options),
+		!.
 	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_header(diagram_output_file, other, '(external entities)', external, [url(''), tooltip('(external entities)')| Options]),
@@ -773,7 +776,9 @@
 	default_option(relation_labels(true)).
 	% by default, write cross-referencing calls:
 	default_option(xref_calls(false)).
-	% by default, print node type captions
+	% by default, print external nodes:
+	default_option(externals(true)).
+	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).

@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.18,
+		version is 2.19,
 		author is 'Paulo Moura',
-		date is 2019/04/17,
+		date is 2019/04/18,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parnames is ['Format'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
@@ -106,7 +106,9 @@
 	default_option(file_extensions(true)).
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
-	% by default, print node type captions
+	% by default, print external nodes:
+	default_option(externals(true)).
+	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).

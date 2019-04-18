@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2019/04/14,
+		date is 2019/04/18,
 		comment is 'Common predicates for generating directory diagrams.',
 		parnames is ['Format']
 	]).
@@ -64,6 +64,9 @@
 		::retractall(referenced_logtalk_directory_(_)),
 		::retractall(referenced_prolog_directory_(_)).
 
+	output_externals(Options) :-
+		memberchk(externals(false), Options),
+		!.
 	output_externals(_Options) :-
 		::retract(included_directory_(Path)),
 		::retractall(referenced_logtalk_directory_(Path)),

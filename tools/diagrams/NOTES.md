@@ -260,6 +260,8 @@ generated diagrams. For entity diagrams the options are:
 	print/omit file name extensions (`true` or `false`; default is `true`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `true`)
+- `externals(Boolean)`  
+	print/omit external nodes (`true` or `false`; default is `true`)
 - `node_type_captions(Boolean)`  
 	print/omit node type captions (`true` or `false`; default is `true`)
 - `inheritance_relations(Boolean)`  
@@ -319,6 +321,8 @@ For directory and file diagrams the options are:
 	omit common path prefixes when printing directory paths (a list of atoms; default is an empty list)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
+- `externals(Boolean)`  
+	print/omit external nodes (`true` or `false`; default is `true`)
 - `node_type_captions(Boolean)`  
 	print/omit node type captions (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  
@@ -350,6 +354,8 @@ For library diagrams the options are:
 	omit common path prefixes when printing directory paths (a list of atoms; default is an empty list)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
+- `externals(Boolean)`  
+	print/omit external nodes (`true` or `false`; default is `true`)
 - `node_type_captions(Boolean)`  
 	print/omit node type captions (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  
