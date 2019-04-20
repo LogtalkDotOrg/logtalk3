@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.28,
+		version is 2.29,
 		author is 'Paulo Moura',
 		date is 2019/04/20,
 		comment is 'Common predicates for generating diagrams.',
@@ -725,6 +725,9 @@
 		argnames is ['Options']
 	]).
 
+	% default definition; expected to be overriden
+	process_externals(_).
+
 	:- protected(output_files/2).
 	:- mode(output_files(+list, +list(compound)), one).
 	:- info(output_files/2, [
@@ -738,9 +741,6 @@
 		comment is 'Generates diagram output for a file using the specified options.',
 		argnames is ['Path', 'Basename', 'Directory', 'Options']
 	]).
-
-	% default definition; expected to be overriden
-	process_externals(_).
 
 	:- protected(output_sub_diagrams/1).
 	:- mode(output_sub_diagrams(+list(compound)), one).
@@ -789,7 +789,7 @@
 
 	output_nodes(_Options) :-
 		format_object(Format),
-		::retract(node_(Identifier, Label, Caption, Contents, Kind, Options)),
+		::node_(Identifier, Label, Caption, Contents, Kind, Options),
 		Format::node(diagram_output_file, Identifier, Label, Caption, Contents, Kind, Options),
 		fail.
 	output_nodes(_).
@@ -829,12 +829,34 @@
 		argnames is ['Options']
 	]).
 
-	output_edges(_Options) :-
+	output_edges(Options) :-
+		memberchk(externals(Externals), Options),
 		format_object(Format),
-		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
+		output_edges(Externals, Format).
+
+	output_edges(true, Format) :-
+		::edge_(From, To, Labels, Kind, EdgeOptions),
 		Format::edge(diagram_output_file, From, To, Labels, Kind, EdgeOptions),
 		fail.
-	output_edges(_).
+	output_edges(false, Format) :-
+		::edge_(From, To, Labels, Kind, EdgeOptions),
+		::node_(To, _, _, _, ToKind, _),
+		\+ external_node_kind(ToKind),
+		Format::edge(diagram_output_file, From, To, Labels, Kind, EdgeOptions),
+		fail.
+	output_edges(_, _).
+
+	external_node_kind(external_prototype).
+	external_node_kind(external_class).
+	external_node_kind(external_instance).
+	external_node_kind(external_instance_and_class).
+	external_node_kind(external_protocol).
+	external_node_kind(external_category).
+	external_node_kind(external_module).
+	external_node_kind(external_file).
+	external_node_kind(external_directory).
+	external_node_kind(external_library).
+	external_node_kind(external_predicate).
 
 	:- protected(save_edge/5).
 	:- mode(save_edge(+nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
