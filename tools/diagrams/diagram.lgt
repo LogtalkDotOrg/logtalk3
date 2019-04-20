@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.29,
+		version is 2.31,
 		author is 'Paulo Moura',
 		date is 2019/04/20,
 		comment is 'Common predicates for generating diagrams.',
@@ -762,6 +762,18 @@
 		::retractall(node_(_, _, _, _, _, _)),
 		::retractall(edge_(_, _, _, _, _)).
 
+	:- protected(output_node/6).
+	:- mode(output_node(+nonvar, +nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
+	:- info(output_node/6, [
+		comment is 'Outputs a graph node.',
+		argnames is ['Identifier', 'Label', 'Caption', 'Contents', 'Kind', 'Options']
+	]).
+
+	output_node(Identifier, Label, Caption, Contents, Kind, Options) :-
+		::assertz(node_(Identifier, Label, Caption, Contents, Kind, Options)),
+		format_object(Format),
+		Format::node(diagram_output_file, Identifier, Label, Caption, Contents, Kind, Options).
+
 	:- protected(node/6).
 	:- mode(node(?nonvar, ?nonvar, ?nonvar, ?list(compound), ?atom, ?list(compound)), zero_or_more).
 	:- info(node/6, [
@@ -793,16 +805,6 @@
 		Format::node(diagram_output_file, Identifier, Label, Caption, Contents, Kind, Options),
 		fail.
 	output_nodes(_).
-
-	:- protected(save_node/6).
-	:- mode(save_node(+nonvar, +nonvar, +nonvar, +list(compound), +atom, +list(compound)), one).
-	:- info(save_node/6, [
-		comment is 'Saves a graph node.',
-		argnames is ['Identifier', 'Label', 'Caption', 'Contents', 'Kind', 'Options']
-	]).
-
-	save_node(Identifier, Label, Caption, Contents, Kind, Options) :-
-		::assertz(node_(Identifier, Label, Caption, Contents, Kind, Options)).
 
 	:- protected(edge/5).
 	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom, ?list(compound)), zero_or_more).

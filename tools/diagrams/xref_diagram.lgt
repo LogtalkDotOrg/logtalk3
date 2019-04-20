@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.41,
+		version is 2.42,
 		author is 'Paulo Moura',
 		date is 2019/04/20,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -125,7 +125,7 @@
 		),
 		predicate_kind_caption(Kind, Properties, PredicateKind, Caption),
 		add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions),
-		^^save_node(Predicate, Predicate, Caption, [], PredicateKind, PredicateOptions),
+		^^output_node(Predicate, Predicate, Caption, [], PredicateKind, PredicateOptions),
 		remember_included_predicate(Predicate),
 		fail.
 	process_entity(Kind, Entity, Options) :-
@@ -141,7 +141,7 @@
 		;	Predicate = Predicate0
 		),
 		add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions),
-		^^save_node(Predicate, Predicate, local, [], local_predicate, PredicateOptions),
+		^^output_node(Predicate, Predicate, local, [], local_predicate, PredicateOptions),
 		remember_included_predicate(Predicate),
 		fail.
 	process_entity(Kind, Entity, Options) :-
@@ -154,7 +154,7 @@
 		;	Predicate = Predicate0
 		),
 		add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions),
-		^^save_node(Predicate, Predicate, (dynamic), [], local_predicate, PredicateOptions),
+		^^output_node(Predicate, Predicate, (dynamic), [], local_predicate, PredicateOptions),
 		remember_included_predicate(Predicate),
 		fail.
 	process_entity(Kind, Entity, Options) :-
@@ -163,7 +163,7 @@
 		\+ member(auxiliary, ProvidesProperties),
 		(	Kind == module ->
 			add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
-			^^save_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, PredicateOptions),
+			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, PredicateOptions),
 			remember_included_predicate(':'(To,Predicate))
 		;	(	current_object(To) ->
 				ToKind = object
@@ -172,10 +172,10 @@
 			entity_property(ToKind, To, declares(Predicate, DeclaresProperties)),
 			member(non_terminal(NonTerminal), DeclaresProperties) ->
 			add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
-			^^save_node(To::NonTerminal, To::NonTerminal, (multifile), [], multifile_predicate, PredicateOptions),
+			^^output_node(To::NonTerminal, To::NonTerminal, (multifile), [], multifile_predicate, PredicateOptions),
 			remember_included_predicate(To::NonTerminal)
 		;	add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
-			^^save_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
+			^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
 			remember_included_predicate(To::Predicate)
 		),
 		fail.
@@ -238,7 +238,7 @@
 		fail.
 	process_entity(_, _, _) :-
 		retract(referenced_predicate_(Functor/Arity)),
-		^^save_node(Functor/Arity, Functor/Arity, '', [], predicate, []),
+		^^output_node(Functor/Arity, Functor/Arity, '', [], predicate, []),
 		fail.
 	process_entity(_, _, _).
 
@@ -638,17 +638,17 @@
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
 		add_predicate_documentation_url(Options, Object, Predicate, PredicateOptions),
-		^^save_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
+		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
 		fail.
 	process_external_predicates(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
 		memberchk(node_type_captions(Boolean), Options),
-		^^save_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, [node_type_captions(Boolean)]),
+		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.
 	process_external_predicates(Options) :-
 		retract(external_predicate_(Predicate)),
 		memberchk(node_type_captions(Boolean), Options),
-		^^save_node(Predicate, Predicate, external, [], external_predicate, [node_type_captions(Boolean)]),
+		^^output_node(Predicate, Predicate, external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.
 	process_external_predicates(_).
 

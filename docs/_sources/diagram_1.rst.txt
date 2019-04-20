@@ -9,7 +9,7 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.29
+| **Version:** 2.31
 | **Date:** 2019/4/20
 
 | **Compilation flags:**
@@ -778,6 +778,27 @@ Resets all temporary information used when generating a diagram.
 
 .. raw:: html
 
+   <div id="output_node/6"> </div>
+
+.. index:: output_node/6
+.. _diagram/1::output_node/6:
+
+``output_node/6``
+^^^^^^^^^^^^^^^^^
+
+Outputs a graph node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_node(Identifier,Label,Caption,Contents,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``output_node(+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
    <div id="node/6"> </div>
 
 .. index:: node/6
@@ -816,27 +837,6 @@ Outputs all nodes.
 |    ``output_nodes(Options)``
 | **Mode and number of proofs:**
 |    ``output_nodes(+list(compound))`` - ``one``
-
-
-.. raw:: html
-
-   <div id="save_node/6"> </div>
-
-.. index:: save_node/6
-.. _diagram/1::save_node/6:
-
-``save_node/6``
-^^^^^^^^^^^^^^^
-
-Saves a graph node.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``save_node(Identifier,Label,Caption,Contents,Kind,Options)``
-| **Mode and number of proofs:**
-|    ``save_node(+nonvar,+nonvar,+nonvar,+list(compound),+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html

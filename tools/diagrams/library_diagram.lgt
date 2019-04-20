@@ -3,7 +3,7 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.9,
+		version is 2.11,
 		author is 'Paulo Moura',
 		date is 2019/04/20,
 		comment is 'Common predicates for generating library diagrams.',
@@ -83,8 +83,8 @@
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
-			^^save_node(Directory, Library, library, [Relative], external_library, NodeOptions)
-		;	^^save_node(Directory, Library, library, [], external_library, NodeOptions)
+			^^output_node(Directory, Library, library, [Relative], external_library, NodeOptions)
+		;	^^output_node(Directory, Library, library, [], external_library, NodeOptions)
 		),
 		fail.
 	process_externals(Options) :-
@@ -93,8 +93,8 @@
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(prolog, LinkingOptions, Library, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
-			^^save_node(Directory, Library, library, [Relative], external_library, NodeOptions)
-		;	^^save_node(Directory, Library, library, [], external_library, NodeOptions)
+			^^output_node(Directory, Library, library, [Relative], external_library, NodeOptions)
+		;	^^output_node(Directory, Library, library, [], external_library, NodeOptions)
 		),
 		fail.
 	process_externals(_).

@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.28,
+		version is 2.29,
 		author is 'Paulo Moura',
 		date is 2019/04/20,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -134,13 +134,13 @@
 		\+ included_entity_(Entity),
 		add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
-		^^save_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
+		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
 	process_externals(Options) :-
 		referenced_module_(Module),
 		\+ included_module_(Module),
 		add_external_entity_documentation_url(module, Module, Options, EntityOptions),
-		^^save_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
+		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
 	process_externals(_).
 
@@ -255,7 +255,7 @@
 		),
 		fix_non_terminals(Resources0, protocol, Protocol, Resources),
 		protocol_name_kind_caption(Protocol, Name, Kind, Caption),
-		^^save_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -295,7 +295,7 @@
 		;	% no locally defined predicates; xref diagram empty
 			NodeOptions = NodeOptions0
 		),
-		^^save_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
@@ -335,7 +335,7 @@
 		;	% no locally defined predicates; xref diagram empty
 			NodeOptions = NodeOptions0
 		),
-		^^save_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_category_relations(Category, Options).
 
 	output_module(Module, Options) :-
@@ -355,7 +355,7 @@
 		atom_concat('_module', Suffix0, Suffix),
 		NodeOptions0 = Options,
 		^^add_node_zoom_option(Module, Suffix, Options, NodeOptions0, NodeOptions),
-		^^save_node(Module, Module, module, Resources, module, [tooltip(module)| NodeOptions]),
+		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| NodeOptions]),
 		output_module_relations(Module, Options).
 
 	fix_non_terminals([], _, _, []).

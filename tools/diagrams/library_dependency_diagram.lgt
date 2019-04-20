@@ -22,7 +22,7 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.19,
+		version is 2.21,
 		author is 'Paulo Moura',
 		date is 2019/04/20,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
@@ -54,8 +54,8 @@
 			NodeOptions = NodeOptions0
 		),
 		(	member(directory_paths(true), Options) ->
-			^^save_node(Directory, Library, library, [Relative], library, NodeOptions)
-		;	^^save_node(Directory, Library, library, [], library, NodeOptions)
+			^^output_node(Directory, Library, library, [Relative], library, NodeOptions)
+		;	^^output_node(Directory, Library, library, [], library, NodeOptions)
 		),
 		^^remember_included_library(Library, Directory),
 		fail.
