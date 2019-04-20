@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.18,
+		version is 2.19,
 		author is 'Paulo Moura',
-		date is 2019/04/17,
+		date is 2019/04/20,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -135,13 +135,13 @@
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
 		write(Stream, '}'), nl(Stream), nl(Stream).
 
-	graph_style_margin_color(rlibrary, rounded, 10, snow3).
-	graph_style_margin_color(libraries, rounded, 10, snow3).
-	graph_style_margin_color(library, rounded, 10, snow2).
-	graph_style_margin_color(rdirectory, rounded, 10, snow3).
-	graph_style_margin_color(directories, rounded, 10, snow3).
-	graph_style_margin_color(directory, rounded, 10, snow2).
-	graph_style_margin_color(files, rounded, 10, snow2).
+	graph_style_margin_color(rlibrary, rounded, 10, snow2).
+	graph_style_margin_color(libraries, rounded, 10, snow2).
+	graph_style_margin_color(library, rounded, 10, snow1).
+	graph_style_margin_color(rdirectory, rounded, 10, snow2).
+	graph_style_margin_color(directories, rounded, 10, snow2).
+	graph_style_margin_color(directory, rounded, 10, snow1).
+	graph_style_margin_color(files, rounded, 10, snow1).
 	graph_style_margin_color(file, rounded, 10, snow).
 	graph_style_margin_color(external, rounded, 10, white).
 	graph_style_margin_color(entity, rounded, 10, snow).
@@ -198,16 +198,16 @@
 	node_shape_style_color(directory, box3d, filled, lightyellow).
 	node_shape_style_color(library, box3d, filled, lightyellow).
 	% external entities to the file or library being documented
-	node_shape_style_color(external_prototype, box, 'filled,dashed', beige).
-	node_shape_style_color(external_class, box, 'filled,dashed', yellow).
-	node_shape_style_color(external_instance, box, 'filled,dashed', yellow).
-	node_shape_style_color(external_instance_and_class, box, 'filled,dashed', yellow).
-	node_shape_style_color(external_protocol, note, 'filled,dashed', aquamarine).
-	node_shape_style_color(external_category, component, 'filled,dashed', lightcyan).
-	node_shape_style_color(external_module, tab, 'filled,dashed', gainsboro).
-	node_shape_style_color(external_file, box, 'filled,dashed', paleturquoise).
-	node_shape_style_color(external_directory, box3d, 'filled,dashed', lightyellow).
-	node_shape_style_color(external_library, box3d, 'filled,dashed', lightyellow).
+	node_shape_style_color(external_prototype, box, 'filled,dashed', cornsilk2).
+	node_shape_style_color(external_class, box, 'filled,dashed', yellow1).
+	node_shape_style_color(external_instance, box, 'filled,dashed', yellow1).
+	node_shape_style_color(external_instance_and_class, box, 'filled,dashed', yellow1).
+	node_shape_style_color(external_protocol, note, 'filled,dashed', aquamarine1).
+	node_shape_style_color(external_category, component, 'filled,dashed', cyan).
+	node_shape_style_color(external_module, tab, 'filled,dashed', lightgray).
+	node_shape_style_color(external_file, box, 'filled,dashed', powderblue).
+	node_shape_style_color(external_directory, box3d, 'filled,dashed', lightyellow1).
+	node_shape_style_color(external_library, box3d, 'filled,dashed', lightyellow1).
 	% predicates of the entities being documented
 	node_shape_style_color(predicate, ellipse, filled, beige).
 	node_shape_style_color(public_predicate, ellipse, filled, springgreen).
@@ -217,7 +217,7 @@
 	node_shape_style_color(multifile_predicate, ellipse, filled, skyblue).
 	node_shape_style_color(exported_predicate, ellipse, filled, springgreen).
 	% external predicates to the entities being documented
-	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', lightgrey).
+	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', cornsilk2).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),

@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.27,
+		version is 2.28,
 		author is 'Paulo Moura',
-		date is 2019/04/18,
+		date is 2019/04/20,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -49,7 +49,8 @@
 			atom_concat(libraries_, Project, Identifier),
 			Format::graph_header(diagram_output_file, Identifier, '', libraries, Options),
 			output_libraries(Libraries, Format, Options),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', libraries, Options),
 			Format::file_footer(diagram_output_file, Project, Options) ->
@@ -112,7 +113,8 @@
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, libraries, [description(Description)| Options]),
 			output_all_libraries(Options),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::file_footer(diagram_output_file, libraries, Options) ->
 			true
@@ -175,7 +177,8 @@
 			omit_path_prefix(Path, Options, Relative),
 			Format::graph_header(diagram_output_file, Identifier, Relative, rlibrary, GraphOptions),
 			::output_rlibrary(Library, Path, GraphOptions),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rlibrary, GraphOptions),
 			Format::file_footer(diagram_output_file, Library, Options) ->
@@ -219,7 +222,8 @@
 			omit_path_prefix(Path, Options, Relative),
 			Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
 			::output_library(Library, Path, GraphOptions),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 			Format::file_footer(diagram_output_file, Library, Options) ->
@@ -278,7 +282,8 @@
 			Format::graph_header(diagram_output_file, Identifier, '', directories, Options),
 			normalize_directory_paths(Directories, NormalizedDirectories),
 			output_directories(NormalizedDirectories, Project, Format, Options),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', directories, Options),
 			Format::file_footer(diagram_output_file, Project, Options) ->
@@ -341,7 +346,8 @@
 			omit_path_prefix(NormalizedDirectory, Options, Relative),
 			Format::graph_header(diagram_output_file, Identifier, Relative, rdirectory, GraphOptions),
 			::output_rdirectory(Project, NormalizedDirectory, GraphOptions),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rdirectory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
@@ -397,7 +403,8 @@
 			omit_path_prefix(NormalizedDirectory, Options, Relative),
 			Format::graph_header(diagram_output_file, Identifier, Relative, directory, GraphOptions),
 			::output_library(Project, NormalizedDirectory, GraphOptions),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, directory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
@@ -448,7 +455,8 @@
 			atom_concat(files_, Project, Identifier),
 			Format::graph_header(diagram_output_file, Identifier, '', files, Options),
 			::output_files(Files, Options),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', files, Options),
 			Format::file_footer(diagram_output_file, Project, Options) ->
@@ -506,7 +514,8 @@
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, files, [description(Description)| Options]),
 			output_all_files(Options),
-			::output_externals(Options),
+			::process_externals(Options),
+			::output_nodes(Options),
 			::output_edges(Options),
 			Format::file_footer(diagram_output_file, files, Options) ->
 			true
@@ -709,6 +718,13 @@
 		;	sub_directory(DirectoryPath, ExcludedDirectories, SubDirectory, SubDirectoryPath)
 		).
 
+	:- protected(process_externals/1).
+	:- mode(process_externals(+list(compound)), one).
+	:- info(process_externals/1, [
+		comment is 'Process external entities using the specified options depending on the value of the boolean option externals/1.',
+		argnames is ['Options']
+	]).
+
 	:- protected(output_files/2).
 	:- mode(output_files(+list, +list(compound)), one).
 	:- info(output_files/2, [
@@ -723,15 +739,8 @@
 		argnames is ['Path', 'Basename', 'Directory', 'Options']
 	]).
 
-	:- protected(output_externals/1).
-	:- mode(output_externals(+list(compound)), one).
-	:- info(output_externals/1, [
-		comment is 'Outputs external entities using the specified options depending on the value of the boolean option externals/1.',
-		argnames is ['Options']
-	]).
-
 	% default definition; expected to be overriden
-	output_externals(_).
+	process_externals(_).
 
 	:- protected(output_sub_diagrams/1).
 	:- mode(output_sub_diagrams(+list(compound)), one).
@@ -750,18 +759,50 @@
 	]).
 
 	reset :-
+		::retractall(node_(_, _, _, _, _, _)),
 		::retractall(edge_(_, _, _, _, _)).
 
-	:- protected(output_node/6).
-	:- mode(output_node(+nonvar, +nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
-	:- info(output_node/6, [
-		comment is 'Outputs a graph node.',
+	:- protected(node/6).
+	:- mode(node(?nonvar, ?nonvar, ?nonvar, ?list(compound), ?atom, ?list(compound)), zero_or_more).
+	:- info(node/6, [
+		comment is 'Enumerates, by backtracking, all saved nodes.',
 		argnames is ['Identifier', 'Label', 'Caption', 'Contents', 'Kind', 'Options']
 	]).
 
-	output_node(Identifier, Label, Caption, Contents, Kind, Options) :-
+	node(Identifier, Label, Caption, Contents, Kind, Options) :-
+		::node_(Identifier, Label, Caption, Contents, Kind, Options).
+
+	:- private(node_/6).
+	:- dynamic(node_/6).
+	:- mode(node_(?nonvar, ?nonvar, ?nonvar, ?list(compound), ?atom, ?list(compound)), zero_or_more).
+	:- info(node_/6, [
+		comment is 'Table of saved nodes.',
+		argnames is ['Identifier', 'Label', 'Caption', 'Contents', 'Kind', 'Options']
+	]).
+
+	:- protected(output_nodes/1).
+	:- mode(output_nodes(+list(compound)), one).
+	:- info(output_nodes/1, [
+		comment is 'Outputs all nodes.',
+		argnames is ['Options']
+	]).
+
+	output_nodes(_Options) :-
 		format_object(Format),
-		Format::node(diagram_output_file, Identifier, Label, Caption, Contents, Kind, Options).
+		::retract(node_(Identifier, Label, Caption, Contents, Kind, Options)),
+		Format::node(diagram_output_file, Identifier, Label, Caption, Contents, Kind, Options),
+		fail.
+	output_nodes(_).
+
+	:- protected(save_node/6).
+	:- mode(save_node(+nonvar, +nonvar, +nonvar, +list(compound), +atom, +list(compound)), one).
+	:- info(save_node/6, [
+		comment is 'Saves a graph node.',
+		argnames is ['Identifier', 'Label', 'Caption', 'Contents', 'Kind', 'Options']
+	]).
+
+	save_node(Identifier, Label, Caption, Contents, Kind, Options) :-
+		::assertz(node_(Identifier, Label, Caption, Contents, Kind, Options)).
 
 	:- protected(edge/5).
 	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom, ?list(compound)), zero_or_more).

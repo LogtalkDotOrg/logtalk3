@@ -22,9 +22,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2019/04/18,
+		date is 2019/04/20,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parnames is ['Format'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
@@ -51,7 +51,7 @@
 		;	% no files for this directory
 			NodeOptions = LinkingOptions
 		),
-		^^output_node(Directory, Relative, directory, [], directory, NodeOptions),
+		^^save_node(Directory, Relative, directory, [], directory, NodeOptions),
 		^^remember_included_directory(Directory),
 		fail.
 	% second, output edges for all directories loaded by files in this directory

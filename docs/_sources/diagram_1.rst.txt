@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.27
-| **Date:** 2019/4/18
+| **Version:** 2.28
+| **Date:** 2019/4/20
 
 | **Compilation flags:**
 |    ``static``
@@ -675,6 +675,27 @@ Generates diagram output for a directory and its sub-directories using the speci
 
 .. raw:: html
 
+   <div id="process_externals/1"> </div>
+
+.. index:: process_externals/1
+.. _diagram/1::process_externals/1:
+
+``process_externals/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Process external entities using the specified options depending on the value of the boolean option externals/1.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``process_externals(Options)``
+| **Mode and number of proofs:**
+|    ``process_externals(+list(compound))`` - ``one``
+
+
+.. raw:: html
+
    <div id="output_files/2"> </div>
 
 .. index:: output_files/2
@@ -713,27 +734,6 @@ Generates diagram output for a file using the specified options.
 |    ``output_file(Path,Basename,Directory,Options)``
 | **Mode and number of proofs:**
 |    ``output_file(+atom,+atom,+atom,+list(compound))`` - ``one``
-
-
-.. raw:: html
-
-   <div id="output_externals/1"> </div>
-
-.. index:: output_externals/1
-.. _diagram/1::output_externals/1:
-
-``output_externals/1``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Outputs external entities using the specified options depending on the value of the boolean option externals/1.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_externals(Options)``
-| **Mode and number of proofs:**
-|    ``output_externals(+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -778,23 +778,65 @@ Resets all temporary information used when generating a diagram.
 
 .. raw:: html
 
-   <div id="output_node/6"> </div>
+   <div id="node/6"> </div>
 
-.. index:: output_node/6
-.. _diagram/1::output_node/6:
+.. index:: node/6
+.. _diagram/1::node/6:
 
-``output_node/6``
-^^^^^^^^^^^^^^^^^
+``node/6``
+^^^^^^^^^^
 
-Outputs a graph node.
+Enumerates, by backtracking, all saved nodes.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``output_node(Identifier,Label,Caption,Contents,Kind,Options)``
+|    ``node(Identifier,Label,Caption,Contents,Kind,Options)``
 | **Mode and number of proofs:**
-|    ``output_node(+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+|    ``node(?nonvar,?nonvar,?nonvar,?list(compound),?atom,?list(compound))`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="output_nodes/1"> </div>
+
+.. index:: output_nodes/1
+.. _diagram/1::output_nodes/1:
+
+``output_nodes/1``
+^^^^^^^^^^^^^^^^^^
+
+Outputs all nodes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_nodes(Options)``
+| **Mode and number of proofs:**
+|    ``output_nodes(+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="save_node/6"> </div>
+
+.. index:: save_node/6
+.. _diagram/1::save_node/6:
+
+``save_node/6``
+^^^^^^^^^^^^^^^
+
+Saves a graph node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save_node(Identifier,Label,Caption,Contents,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``save_node(+nonvar,+nonvar,+nonvar,+list(compound),+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -1044,6 +1086,27 @@ Adds node zoom options when using the zoom option.
 
 Private predicates
 ------------------
+
+.. raw:: html
+
+   <div id="node_/6"> </div>
+
+.. index:: node_/6
+.. _diagram/1::node_/6:
+
+``node_/6``
+^^^^^^^^^^^
+
+Table of saved nodes.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``node_(Identifier,Label,Caption,Contents,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``node_(?nonvar,?nonvar,?nonvar,?list(compound),?atom,?list(compound))`` - ``zero_or_more``
+
 
 .. raw:: html
 

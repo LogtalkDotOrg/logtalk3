@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.27,
+		version is 2.28,
 		author is 'Paulo Moura',
-		date is 2019/04/18,
+		date is 2019/04/20,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -76,7 +76,8 @@
 			^^add_link_options(Path, Options, GraphOptions),
 			Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			process(Basename, Directory, GraphOptions),
-			output_externals(Options),
+			^^output_nodes(Options),
+			process_externals(Options),
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			Format::file_footer(diagram_output_file, Basename, Options) ->
@@ -125,27 +126,23 @@
 		retractall(referenced_entity_(_)),
 		retractall(referenced_module_(_)).
 
-	output_externals(Options) :-
+	process_externals(Options) :-
 		memberchk(externals(false), Options),
 		!.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external entities)', external, [url(''), tooltip('(external entities)')| Options]),
+	process_externals(Options) :-
 		referenced_entity_(Entity),
 		\+ included_entity_(Entity),
 		add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
-		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
+		^^save_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
-	output_externals(Options) :-
+	process_externals(Options) :-
 		referenced_module_(Module),
 		\+ included_module_(Module),
 		add_external_entity_documentation_url(module, Module, Options, EntityOptions),
-		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
+		^^save_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external entities)', external, [url(''), tooltip('(external entities)')| Options]).
+	process_externals(_).
 
 	output_sub_diagrams(Options) :-
 		memberchk(zoom(true), Options),
@@ -258,7 +255,7 @@
 		),
 		fix_non_terminals(Resources0, protocol, Protocol, Resources),
 		protocol_name_kind_caption(Protocol, Name, Kind, Caption),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
+		^^save_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -298,7 +295,7 @@
 		;	% no locally defined predicates; xref diagram empty
 			NodeOptions = NodeOptions0
 		),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
+		^^save_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
@@ -338,7 +335,7 @@
 		;	% no locally defined predicates; xref diagram empty
 			NodeOptions = NodeOptions0
 		),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
+		^^save_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_category_relations(Category, Options).
 
 	output_module(Module, Options) :-
@@ -358,7 +355,7 @@
 		atom_concat('_module', Suffix0, Suffix),
 		NodeOptions0 = Options,
 		^^add_node_zoom_option(Module, Suffix, Options, NodeOptions0, NodeOptions),
-		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| NodeOptions]),
+		^^save_node(Module, Module, module, Resources, module, [tooltip(module)| NodeOptions]),
 		output_module_relations(Module, Options).
 
 	fix_non_terminals([], _, _, []).

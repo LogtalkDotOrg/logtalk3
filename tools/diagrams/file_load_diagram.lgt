@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.19,
+		version is 2.21,
 		author is 'Paulo Moura',
-		date is 2019/04/18,
+		date is 2019/04/20,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parnames is ['Format'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
@@ -40,8 +40,8 @@
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Path, Name, file, [Relative], file, LinkingOptions)
-		;	^^output_node(Path, Name, file, [], file, LinkingOptions)
+			^^save_node(Path, Name, file, [Relative], file, LinkingOptions)
+		;	^^save_node(Path, Name, file, [], file, LinkingOptions)
 		),
 		^^remember_included_file(Path),
 		fail.
@@ -53,8 +53,8 @@
 		^^add_link_options(IncludePath, Options, LinkingOptions),
 		^^omit_path_prefix(IncludePath, Options, Relative),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(IncludePath, Name, file, [Relative], file, LinkingOptions)
-		;	^^output_node(IncludePath, Name, file, [], file, LinkingOptions)
+			^^save_node(IncludePath, Name, file, [Relative], file, LinkingOptions)
+		;	^^save_node(IncludePath, Name, file, [], file, LinkingOptions)
 		),
 		^^remember_included_file(IncludePath),
 		fail.

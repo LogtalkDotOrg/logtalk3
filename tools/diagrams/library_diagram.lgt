@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2019/04/18,
+		date is 2019/04/20,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -69,39 +69,35 @@
 		::retractall(referenced_logtalk_library_(_, _)),
 		::retractall(referenced_prolog_library_(_, _)).
 
-	output_externals(Options) :-
+	process_externals(Options) :-
 		memberchk(externals(false), Options),
 		!.
-	output_externals(_Options) :-
+	process_externals(_Options) :-
 		::retract(included_library_(Library, Path)),
 		::retractall(referenced_logtalk_library_(Library, Path)),
 		::retractall(referenced_prolog_library_(Library, Path)),
 		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external libraries)', external, [url(''), tooltip('(external libraries)')| Options]),
+	process_externals(Options) :-
 		::retract(referenced_logtalk_library_(Library, Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
-			^^output_node(Directory, Library, library, [Relative], external_library, NodeOptions)
-		;	^^output_node(Directory, Library, library, [], external_library, NodeOptions)
+			^^save_node(Directory, Library, library, [Relative], external_library, NodeOptions)
+		;	^^save_node(Directory, Library, library, [], external_library, NodeOptions)
 		),
 		fail.
-	output_externals(Options) :-
+	process_externals(Options) :-
 		::retract(referenced_prolog_library_(Library, Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(prolog, LinkingOptions, Library, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
-			^^output_node(Directory, Library, library, [Relative], external_library, NodeOptions)
-		;	^^output_node(Directory, Library, library, [], external_library, NodeOptions)
+			^^save_node(Directory, Library, library, [Relative], external_library, NodeOptions)
+		;	^^save_node(Directory, Library, library, [], external_library, NodeOptions)
 		),
 		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [url(''), tooltip('(external libraries)')| Options]).
+	process_externals(_).
 
 	add_library_documentation_url(logtalk, Options, Library, NodeOptions) :-
 		(	memberchk(urls(_, DocPrefix), Options),

@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2019/04/18,
+		date is 2019/04/20,
 		comment is 'Common predicates for generating directory diagrams.',
 		parnames is ['Format']
 	]).
@@ -64,30 +64,26 @@
 		::retractall(referenced_logtalk_directory_(_)),
 		::retractall(referenced_prolog_directory_(_)).
 
-	output_externals(Options) :-
+	process_externals(Options) :-
 		memberchk(externals(false), Options),
 		!.
-	output_externals(_Options) :-
+	process_externals(_Options) :-
 		::retract(included_directory_(Path)),
 		::retractall(referenced_logtalk_directory_(Path)),
 		::retractall(referenced_prolog_directory_(Path)),
 		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external directories)', external, [url(''), tooltip('(external directories)')| Options]),
+	process_externals(Options) :-
 		::retract(referenced_logtalk_directory_(Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		^^output_node(Directory, Relative, directory, [], external_directory, LinkingOptions),
+		^^save_node(Directory, Relative, directory, [], external_directory, LinkingOptions),
 		fail.
-	output_externals(Options) :-
+	process_externals(Options) :-
 		::retract(referenced_prolog_directory_(Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		^^output_node(Directory, Relative, directory, [], external_directory, LinkingOptions),
+		^^save_node(Directory, Relative, directory, [], external_directory, LinkingOptions),
 		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external directories)', external, [url(''), tooltip('(external directories)')| Options]).
+	process_externals(_).
 
 :- end_category.

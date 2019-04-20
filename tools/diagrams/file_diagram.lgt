@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2016/10/18,
+		date is 2019/04/20,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -51,40 +51,36 @@
 		::retractall(referenced_logtalk_file_(_)),
 		::retractall(referenced_prolog_file_(_)).
 
-	output_externals(Options) :-
+	process_externals(Options) :-
 		memberchk(externals(false), Options),
 		!.
-	output_externals(_Options) :-
+	process_externals(_Options) :-
 		::retract(included_file_(Path)),
 		::retractall(referenced_logtalk_file_(Path)),
 		::retractall(referenced_prolog_file_(Path)),
 		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external files)', external, [urls('',''), tooltip('(external files)')| Options]),
+	process_externals(Options) :-
 		::retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Path, Name, file, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Path, Name, file, [], external_file, LinkingOptions)
+			^^save_node(Path, Name, file, [Relative], external_file, LinkingOptions)
+		;	^^save_node(Path, Name, file, [], external_file, LinkingOptions)
 		),
 		fail.
-	output_externals(Options) :-
+	process_externals(Options) :-
 		::retract(referenced_prolog_file_(Path)),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Path, Name, file, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Path, Name, file, [], external_file, LinkingOptions)
+			^^save_node(Path, Name, file, [Relative], external_file, LinkingOptions)
+		;	^^save_node(Path, Name, file, [], external_file, LinkingOptions)
 		),
 		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external files)', external, [urls('',''), tooltip('(external files)')| Options]).
+	process_externals(_).
 
 :- end_category.
