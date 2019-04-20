@@ -63,7 +63,6 @@
 		sequential1,
 		sequential2,
 		son,
-		sorter,
 		strings1,
 		strings2,
 		strings3,

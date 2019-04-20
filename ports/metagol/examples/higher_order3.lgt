@@ -41,9 +41,9 @@
 	extends(metagol)).
 
 	%% metarules
-	metarule([P,Q],([P,A]:-[[Q,A]])).
-	metarule([P,Q,F],([P,A,B]:-[[Q,A,B,F]])).
-	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
+	metarule([P,Q],   [P,A],   [[Q,A]]).
+	metarule([P,Q,F], [P,A,B], [[Q,A,B,F]]).
+	metarule([P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
 
 	%% background knowledge
 	divisible5(X) :- 0 is X mod 5.

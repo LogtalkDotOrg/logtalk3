@@ -45,8 +45,8 @@
 	prim(colour/2).
 
 	%% metarules
-	metarule([P,Q,R],([P,A]:-[[Q,A,B],[R,A,B]])).
-	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,B,C]])).
+	metarule([P,Q,R], [P,A],   [[Q,A,B],[R,A,B]]).
+	metarule([P,Q,R], [P,A,B], [[Q,A,C],[R,B,C]]).
 
 	%% background knowledge
 	edge(a,b).

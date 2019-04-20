@@ -44,7 +44,7 @@
 	prim(succ/2).
 
 	%% metarules
-	metarule([P,Q],([P,A,B]:-[[Q,B,A]])).
+	metarule([P,Q], [P,A,B], [[Q,B,A]]).
 
 	%% background knowledge
 	succ(I, J) :-

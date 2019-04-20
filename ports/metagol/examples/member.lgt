@@ -45,8 +45,8 @@
 	prim(value/2).
 
 	%% metarules
-	metarule([P,Q],([P,A,B]:-[[Q,B,A]])).
-	metarule([P,Q,_],([P,A,B]:-[[Q,B,C],[P,A,C]])).
+	metarule([P,Q],   [P,A,B], [[Q,B,A]]).
+	metarule([P,Q], [P,A,B], [[Q,B,C],[P,A,C]]).
 
 	%% background knowledge
 	cons([4,3,2,1],[3,2,1]).

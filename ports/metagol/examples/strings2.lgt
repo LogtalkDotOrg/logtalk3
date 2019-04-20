@@ -17,10 +17,10 @@
 	prim(next_empty/1).
 
 	%% metarules
-	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
-	metarule([P,Q,R],([P,A,B]:-[[Q,A],[R,A,B]])).
-	metarule([P,Q,X],([P,A,B]:-[[Q,A,B,X]])).
-	metarule([P,Q],([P,A,B]:-[[Q,A,C],@term_gt(A,C),[P,C,B],@term_gt(C,B)])).
+	metarule([P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
+	metarule([P,Q,R], [P,A,B], [[Q,A],[R,A,B]]).
+	metarule([P,Q,X], [P,A,B], [[Q,A,B,X]]).
+	metarule([P,Q],   [P,A,B], [[Q,A,C],@term_gt(A,C),[P,C,B],@term_gt(C,B)]).
 	%% SEE STRINGS3 FOR AN EXAMPLE WITHOUT AN ORDERING CONSTRAINT
 
 	%% background knowledge

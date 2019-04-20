@@ -48,7 +48,7 @@
 		succ(A,B).
 
 	%% metarules
-	metarule([P,Q,F],([P,A,B]:-[[Q,A,B,F]])).
+	metarule([P,Q,F], [P,A,B], [[Q,A,B,F]]).
 
 	%% tell metagol to use the compiled BK
 	prim(my_succ/2).

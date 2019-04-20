@@ -38,9 +38,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2019/04/04,
+		date is 2019/04/20,
 		comment is 'Unit tests for the "metagol" example.'
 	]).
 
@@ -59,16 +59,17 @@
 		constants1::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[p(4, _), p(_, 2), p(1, _)]
+			[p(1, _), p(_, 2), p(4, _)]
 		).
 
 	test(metagol_constants2_1) :-
 		constants2::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(q(4, A) :-num(4), num(A)),
+			[
+				(q(1, C) :-num(1), num(C)),
 				(q(B, 2) :-num(B), num(2)),
-				(q(1, C) :-num(1), num(C))
+				(q(4, A) :-num(4), num(A))
 			]
 		).
 
@@ -76,8 +77,9 @@
 		constants3::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(andy, A) :- p(patrick, A)),
-				(f(andy, B) :- p(spongebob, B))
+			[
+				(f(andy, B) :- p(spongebob, B)),
+				(f(andy, A) :- p(patrick, A))
 			]
 		).
 
@@ -85,9 +87,10 @@
 		family::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(grandparent(A,C) :- grandparent_1(A,B), grandparent_1(B,C)),
-				(grandparent_1(D,E) :- father(D,E)),
-				(grandparent_1(F,G) :- mother(F,G))
+			[
+				(grandparent(A,C) :- grandparent_1(A,B), grandparent_1(B,C)),
+				(grandparent_1(F,G) :- mother(F,G)),
+				(grandparent_1(D,E) :- father(D,E))
 			]
 		).
 
@@ -95,8 +98,9 @@
 		find_duplicate::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(A, B) :- head(A, B), f_1(A, B)),
+			[
 				(f(C, E) :- tail(C, D), f(D, E)),
+				(f(A, B) :- head(A, B), f_1(A, B)),
 				(f_1(F, H) :- tail(F, G), element(G, H))
 			]
 		).
@@ -105,9 +109,10 @@
 		grandparent::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(target(A, C) :- target_1(A, B), target_1(B, C)),
-				(target_1(D, E) :- father(D, E)),
-				(target_1(F, G) :- mother(F, G))
+			[
+				(target(A, C) :- target_1(A, B), target_1(B, C)),
+				(target_1(F, G) :- mother(F, G)),
+				(target_1(D, E) :- father(D, E))
 			]
 		).
 
@@ -124,8 +129,9 @@
 		graph_reachability::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(p(A, C) :- edge(A, B), p(B, C)),
-				(p(D, E) :- edge(D, E))
+			[
+				(p(D, E) :- edge(D, E)),
+				(p(A, C) :- edge(A, B), p(B, C))
 			]
 		).
 
@@ -140,7 +146,8 @@
 		higher_order2::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(A, B) :- map(A, B, f_1)),
+			[
+				(f(A, B) :- map(A, B, f_1)),
 				(f_1(C, E) :- my_length(C, D), my_double(D, E))
 			]
 		).
@@ -149,9 +156,10 @@
 		higher_order3::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(A, B) :- filter(A, B, f_1)),
-				(f_1(C) :- divisible5(C)),
-				(f_1(D) :- divisible2(D))
+			[
+				(f(A, B) :- filter(A, B, f_1)),
+				(f_1(D) :- divisible2(D)),
+				(f_1(C) :- divisible5(C))
 			]
 		).
 
@@ -160,8 +168,8 @@
 		^^variant(
 			Clauses,
 			[	(grandparent(A,C) :- grandparent_1(A,B), grandparent_1(B,C)),
-				(grandparent_1(D,E) :- father(D,E)),
-				(grandparent_1(F,G) :- mother(F,G))
+				(grandparent_1(F,G) :- mother(F,G)),
+				(grandparent_1(D,E) :- father(D,E))
 			]
 		).
 
@@ -172,26 +180,30 @@
 		kinship2::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(ancestor(A, C) :- parent(A, B), ancestor(B, C)),
-				(ancestor(D, E) :- parent(D, E))
+			[
+				(ancestor(D, E) :- parent(D, E)),
+				(ancestor(A, C) :- parent(A, B), ancestor(B, C))
 			]
 		).
 
-	- test(metagol_member_1) :-
+	test(metagol_member_1) :-
 		member::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(target(A, B) :- cons(B, C), target(A, C)),
-				(target(D, E) :- value(E, D))]
+			[
+				(target(D, E) :- value(E, D)),
+				(target(A, B) :- cons(B, C), target(A, C))
+			]
 		).
 
-	- test(metagol_mutual_recursion_1) :-
+	test(metagol_mutual_recursion_1) :-
 		mutual_recursion::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	even(0),
+			[
 				(even(A) :- s(A, B), even_1(B)),
-				(even_1(C) :- s(C, D), even(D))
+				(even_1(C) :- s(C, D), even(D)),
+				even(0)
 			]
 		).
 
@@ -206,8 +218,13 @@
 		robots::learn1(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(A,E) :- grab_ball(A,B), f_3(B,C), f_3(C,D), drop_ball(D,E)),
-				(f_3(F,H) :- move_right(F,G), move_forwards(G,H))
+			[
+				(f(A, C):-grab_ball(A, B), f_1(B, C)),
+				(f_1(D, F):-f_2(D, E), drop_ball(E, F)),
+				(f_2(G, I):-f_3(G, H), f_3(H, I)),
+				(f_3(J, K):-move_right(J, L), move_forwards(L, K))
+%				(f(A,E) :- grab_ball(A,B), f_3(B,C), f_3(C,D), drop_ball(D,E)),
+%				(f_3(F,H) :- move_right(F,G), move_forwards(G,H))
 			]
 		).
 
@@ -215,31 +232,39 @@
 		robots::learn2(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(A,E) :- grab_ball(A,B), f_3(B,C), f_3(C,D), drop_ball(D,E)),
-				(f_3(F,H) :- f_4(F,G), f_4(G,H)),
-				(f_4(I,K) :- move_right(I,J), move_forwards(J,K))
+			[
+				(f(A, C):-grab_ball(A, B), f_1(B, C)),
+				(f_1(D, F):-f_2(D, E), drop_ball(E, F)),
+				(f_2(G, I):-f_3(G, H), f_3(H, I)),
+				(f_3(J, K):-f_4(J, L), f_4(L, K)),
+				(f_4(M, O):-move_right(M, N), move_forwards(N, O))
+%				(f(A,E) :- grab_ball(A,B), f_3(B,C), f_3(C,D), drop_ball(D,E)),
+%				(f_3(F,H) :- f_4(F,G), f_4(G,H)),
+%				(f_4(I,K) :- move_right(I,J), move_forwards(J,K))
 			]
 		).
 
-	- test(metagol_sequential_1) :-
+	test(metagol_sequential_1) :-
 		sequential::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(grandparent(A,C) :- parent(A,B), parent(B,C)),
+			[
 				(great_grandparent(D,F) :- parent(D,E), grandparent(E,F)),
-				(parent(G,H) :- father(G,H)),
-				(parent(I,J) :- mother(I,J))
+				(grandparent(A,C) :- parent(A,B), parent(B,C)),
+				(parent(I,J) :- mother(I,J)),
+				(parent(G,H) :- father(G,H))
 			]
 		).
 
-	- test(metagol_sequential1_1) :-
+	test(metagol_sequential1_1) :-
 		sequential1::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(grandparent(A,C) :- parent(A,B), parent(B,C)),
+			[
 				(great_grandparent(D,F) :- parent(D,E), grandparent(E,F)),
-				(parent(G,H) :- father(G,H)),
-				(parent(I,J) :- mother(I,J))
+				(grandparent(A,C) :- parent(A,B), parent(B,C)),
+				(parent(I,J) :- mother(I,J)),
+				(parent(G,H) :- father(G,H))
 			]
 		).
 
@@ -247,9 +272,10 @@
 		strings1::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(A, C) :- copy1(A, B), skip1(B, C)),
+			[
+				(f(G, I) :- copy1(G, H), f(H, I)),
 				(f(D, F) :- skip1(D, E), f(E, F)),
-				(f(G, I) :- copy1(G, H), f(H, I))
+				(f(A, C) :- copy1(A, B), skip1(B, C))
 			]
 		).
 
@@ -257,11 +283,12 @@
 		strings2::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(_3908, _3914) :- f_1(_3908, _3946), f_2(_3946, _3914)),
-				(f_1(_4198, _4204) :- next_empty(_4198), f_2(_4198, _4204)),
+			[
+				(f(_3908, _3914) :- f_1(_3908, _3946), f_2(_3946, _3914)),
 				(f_1(_4476, _4482) :- f_2(_4476, _4514), f_1(_4514, _4482)),
-				(f_2(_4812, _4818) :- write1(_4812, _4818, d)),
-				(f_2(_5046, _5052) :- copy1(_5046, _5084), skip1(_5084, _5052))
+				(f_2(_5046, _5052) :- copy1(_5046, _5084), skip1(_5084, _5052)),
+				(f_1(_4198, _4204) :- next_empty(_4198), f_2(_4198, _4204)),
+				(f_2(_4812, _4818) :- write1(_4812, _4818, d))
 			]
 		).
 
@@ -269,10 +296,11 @@
 		strings3::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(f(_1670, _1676) :- copy1(_1670, _1688), f_1(_1688, _1676)),
-				(f_1(_1724, _1730) :- next_empty(_1724), f_3(_1724, _1730)),
+			[
+				(f(_1670, _1676) :- copy1(_1670, _1688), f_1(_1688, _1676)),
 				(f_1(_1778, _1784) :- f_2(_1778, _1796), f_1(_1796, _1784)),
 				(f_2(_1856, _1862) :- skip1(_1856, _1874), copy1(_1874, _1862)),
+				(f_1(_1724, _1730) :- next_empty(_1724), f_3(_1724, _1730)),
 				(f_3(_1934, _1940) :- write1(_1934, _1940, d))
 			]
 		).
@@ -290,8 +318,9 @@
 		undirected_edge::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[	(target(A, B) :- edge(B, A)),
-				(target(C, D) :- edge(C, D))
+			[
+				(target(A, B) :- edge(A, B)),
+				(target(C, D) :- edge(D, C))
 			]
 		).
 

@@ -61,8 +61,8 @@
 	interpreted(map/3).
 
 	%% metarules
-	metarule([P,Q,F],([P,A,B]:-[[Q,A,B,F]])).
-	metarule([P,Q,R],([P,A,B]:-[[Q,A,C],[R,C,B]])).
+	metarule([P,Q,F], [P,A,B], [[Q,A,B,F]]).
+	metarule([P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
 
 	%% interpreted BK
 	ibk([map,[],[],_],[]).

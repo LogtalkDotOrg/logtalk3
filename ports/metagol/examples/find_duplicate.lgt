@@ -54,9 +54,9 @@
 	prim(element/2).
 
 	%% metarules
-	metarule(dident,  [P,Q,R], ([P,A,B]:-[[Q,A,B],[R,A,B]])).
-	metarule(chain,   [P,Q,R], ([P,A,B]:-[[Q,A,C],[R,C,B]])).
-	metarule(tailrec, [P,Q], ([P,A,B]:-[[Q,A,C],[P,C,B]])).
+	metarule(dident,  [P,Q,R], [P,A,B], [[Q,A,B],[R,A,B]]).
+	metarule(chain,   [P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
+	metarule(tailrec, [P,Q],   [P,A,B], [[Q,A,C],[P,C,B]]).
 
 	%% background knowledge
 	head([H|_],H).

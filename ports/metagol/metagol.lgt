@@ -38,9 +38,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.18,
+		version is 0.19,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2019/04/16,
+		date is 2019/04/20,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
@@ -91,7 +91,7 @@
 
 	:- uses(coroutining, [when/2]).
 	:- uses(integer, [between/3, succ/2]).
-	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, remove_duplicates/2 as list_to_set/2, select/3]).
+	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, remove_duplicates/2 as list_to_set/2, reverse/2, select/3]).
 	:- uses(logtalk, [print_message/3]).
 	:- uses(meta, [filter/3, maplist/2, maplist/3]).
 	:- uses(pairs, [map/3 as map_list_to_pairs/3, values/2 as pairs_values/2]).
@@ -126,26 +126,26 @@
 		prove_examples(Atoms,Sig,_Sig,MaxN,0,_N,[],Prog).
 
 	prove_examples([],_FullSig,_Sig,_MaxN,N,N,Prog,Prog).
-	prove_examples([Atom|Atoms],FullSig,Sig,MaxN,N1,N2,Prog1,Prog2):-
+	prove_examples([Atom|Atoms],FullSig,Sig,MaxN,N1,N2,Prog1,Prog2) :-
 		%% if we can deduce the atom from the program then do not try to 'learn' a solution to it (hence !)
-		deduce_atom(Atom,FullSig,Prog1),!,
+		deduce_atom(Atom,FullSig,Prog1), !,
 		check_functional([Atom],Sig,Prog1),
 		prove_examples(Atoms,FullSig,Sig,MaxN,N1,N2,Prog1,Prog2).
-	prove_examples([Atom|Atoms],FullSig,Sig,MaxN,N1,N2,Prog1,Prog2):-
+	prove_examples([Atom|Atoms],FullSig,Sig,MaxN,N1,N2,Prog1,Prog2) :-
 		prove([Atom],FullSig,Sig,MaxN,N1,N3,Prog1,Prog3),
 		check_functional([Atom],Sig,Prog3),
 		prove_examples(Atoms,FullSig,Sig,MaxN,N3,N2,Prog3,Prog2).
 
-	deduce_atom(Atom,Sig,Prog):-
+	deduce_atom(Atom,Sig,Prog) :-
 		length(Prog,N),
 		prove([Atom],Sig,_,N,N,N,Prog,Prog).
 
 	prove([],_FullSig,_Sig,_MaxN,N,N,Prog,Prog).
-	prove([Atom|Atoms],FullSig,Sig,MaxN,N1,N2,Prog1,Prog2):-
+	prove([Atom|Atoms],FullSig,Sig,MaxN,N1,N2,Prog1,Prog2) :-
 		prove_aux(Atom,FullSig,Sig,MaxN,N1,N3,Prog1,Prog3),
 		prove(Atoms,FullSig,Sig,MaxN,N3,N2,Prog3,Prog2).
 
-	%% used when the user gives an ordering over the herbrand base prove_aux('@'(Atom),_FullSig,_Sig,_MaxN,N,N,Prog,Prog):-!,
+	%% used when the user gives an ordering over the herbrand base prove_aux('@'(Atom),_FullSig,_Sig,_MaxN,N,N,Prog,Prog) :-!,
 	prove_aux('@'(Atom),_FullSig,_Sig,_MaxN,N,N,Prog,Prog) :-
 		!,
 		::Atom.
@@ -155,12 +155,12 @@
 		::primcall(P,Args).
 
 	%% TODO: retract this clause if no ibk predicate is given
-	prove_aux(p(inv,_P,_A,_Args,Atom,Path),FullSig,Sig,MaxN,N1,N2,Prog1,Prog2):-
+	prove_aux(p(inv,_P,_A,_Args,Atom,Path),FullSig,Sig,MaxN,N1,N2,Prog1,Prog2) :-
 		::ibk(Atom,Body,Path),
 		prove(Body,FullSig,Sig,MaxN,N1,N2,Prog1,Prog2).
 
 	%% use existing abduction
-	prove_aux(p(inv,P,A,_Args,Atom,Path),FullSig,Sig1,MaxN,N1,N2,Prog1,Prog2):-
+	prove_aux(p(inv,P,A,_Args,Atom,Path),FullSig,Sig1,MaxN,N1,N2,Prog1,Prog2) :-
 		select_lower(P,A,FullSig,Sig1,Sig2),
 		member(sub(Name,P,A,Subs,PredTypes),Prog1),
 		::metarule_init(Name,Subs,PredTypes,Atom,Body1,Recursive,[Atom|Path]),
@@ -168,7 +168,7 @@
 		prove(Body1,FullSig,Sig2,MaxN,N1,N2,Prog1,Prog2).
 
 	%% new abduction
-	prove_aux(p(inv,P,A,_Args,Atom,Path),FullSig,Sig1,MaxN,N1,N2,Prog1,Prog2):-
+	prove_aux(p(inv,P,A,_Args,Atom,Path),FullSig,Sig1,MaxN,N1,N2,Prog1,Prog2) :-
 		N1 < MaxN,
 		bind_lower(P,A,FullSig,Sig1,Sig2),
 		::metarule(Name,Subs,PredTypes,Atom,Body1,FullSig,Recursive,[Atom|Path]),
@@ -177,17 +177,17 @@
 		succ(N1,N3),
 		prove(Body1,FullSig,Sig2,MaxN,N3,N2,[sub(Name,P,A,Subs,PredTypes)|Prog1],Prog2).
 
-	nproveall(Atoms,Sig,Prog):-
+	nproveall(Atoms,Sig,Prog) :-
 		forall(member(Atom,Atoms), \+ deduce_atom(Atom,Sig,Prog)).
 
-	make_atoms(Atoms1,Atoms2):-
+	make_atoms(Atoms1,Atoms2) :-
 		maplist(atom_to_list,Atoms1,Atoms3),
 		maplist(make_atom,Atoms3,Atoms2).
 
-	make_atom([P|Args],p(inv,P,A,Args,[P|Args],[])):-
+	make_atom([P|Args],p(inv,P,A,Args,[P|Args],[])) :-
 		length(Args,A).
 
-	check_functional(Atoms,Sig,Prog):-
+	check_functional(Atoms,Sig,Prog) :-
 	    (	get_option(functional) ->
 	        forall(
 				member(Atom1,Atoms),
@@ -205,14 +205,14 @@
 	%% if not recursive continue as normal
 	check_recursion(false, _MaxN, _Atom, _Path).
 	%% if recursive then check that we are allowed at least one two clauses (we need a base and inductive step) check_recursion(false, _MaxN, _Atom, _Path).
-	check_recursion(true, MaxN, Atom, Path):-
+	check_recursion(true, MaxN, Atom, Path) :-
 		MaxN \== 1,
 		\+ member(Atom,Path).
 
-	select_lower(P,A,FullSig,_Sig1,Sig2):-
+	select_lower(P,A,FullSig,_Sig1,Sig2) :-
 	    nonvar(P),!,
 	    append(_,[sym(P,A,_)|Sig2],FullSig),!.
-	select_lower(P,A,_FullSig,Sig1,Sig2):-
+	select_lower(P,A,_FullSig,Sig1,Sig2) :-
 	    append(_,[sym(P,A,U)|Sig2],Sig1),
 	    (var(U)-> !,fail;true ).
 
@@ -220,7 +220,7 @@
 		nonvar(P),
 		!,
 		append(_,[sym(P,A,_)|Sig2],FullSig), !.
-	bind_lower(P,A,_FullSig,Sig1,Sig2):-
+	bind_lower(P,A,_FullSig,Sig1,Sig2) :-
 		append(_,[sym(P,A,U)|Sig2],Sig1),
 		(var(U)-> U = 1,!;true).
 
@@ -231,10 +231,10 @@
 		when(ground(X), \+ member(sub(Name,P,A,MetaSub,_), Prog)).
 	check_new_metasub(_Name,_P,_A,_MetaSub,_Prog).
 
-	check_prim_exists(P/A):-
+	check_prim_exists(P/A) :-
 		::current_predicate(P/A),
 		!.
-	check_prim_exists(P/A):-
+	check_prim_exists(P/A) :-
 		::retractall(prim(P/A)),
 		length(Args,A), !,
 		::retractall(primcall(P,Args)).
@@ -249,7 +249,7 @@
 
 	target_predicate([p(inv,P,A,_Args,_Atom,[])|_],P/A).
 
-	%% target_predicates(Atoms, Preds2):-
+	%% target_predicates(Atoms, Preds2) :-
 	%%     findall(P/A, member([p(inv,P,A,_Args,_Atom,[])],Atoms), Preds1),
 	%%     list_to_set(Preds1,Preds2).
 
@@ -268,28 +268,13 @@
 			Sig
 		).
 
-	pclauses(Prog1,Prog6) :-
-		map_list_to_pairs(arg(2),Prog1,Pairs),
-		keysort(Pairs,Sorted),
-		pairs_values(Sorted,Prog2),
-		maplist(metasub_to_clause_list,Prog2,Prog3),
-		(	get_option(unfold_program) ->
-			unfold_program(Prog3,Prog4)
-		;	Prog3 = Prog4
-		),
-		maplist(remove_orderings,Prog4,Prog5),
-		maplist(clause_list_to_clause,Prog5,Prog6).
+	pclauses(Prog1,Prog2) :-
+		reverse(Prog1,Prog3),
+		maplist(metasub_to_clause,Prog3,Prog2).
 
 	pprint(Prog) :-
 		pclauses(Prog, Clauses),
 		pprint_clauses(Clauses).
-
-	remove_orderings([],[]).
-	remove_orderings(['@'(_H)|T],Out) :-
-		!,
-		remove_orderings(T,Out).
-	remove_orderings([H|T],[H|Out]) :-
-		remove_orderings(T,Out).
 
 	pprint_clause(Clause) :-
 		print_message(results, metagol, learned_clause(Clause)).
@@ -297,21 +282,23 @@
 	pprint_clauses(Clauses) :-
 		maplist(pprint_clause, Clauses).
 
-	clause_list_to_clause([H|B1],Clause) :-
-		list_to_atom(H,Head),
-		(	B1 = [] ->
-			Clause = Head
-		;	maplist(list_to_atom,B1,B2),
-			list_to_clause(B2,B3),
-			Clause = (Head:-B3)
-		).
-
-	metasub_to_clause_list(sub(Name,_,_,Subs,_),[HeadList|BodyAsList2]):-
+	metasub_to_clause(sub(Name,_,_,Subs,_),Clause2):-
 		::metarule_init(Name,Subs,_,HeadList,BodyAsList1,_,_),
 		add_path_to_body(BodyAsList3,_,BodyAsList1,_),
-		filter(no_ordering,BodyAsList3,BodyAsList2).
+		filter(no_ordering,BodyAsList3,BodyAsList2),
+		maplist(atom_to_list,ClauseAsList,[HeadList|BodyAsList2]),
+		list_to_clause(ClauseAsList,Clause1),
+		(	Clause1 = (H,T) ->
+			Clause2=(H:-T)
+		;	Clause2=Clause1
+		).
 
-	no_ordering(H):-
+%	metasub_to_clause_list(sub(Name,_,_,Subs,_),[HeadList|BodyAsList2]) :-
+%		::metarule_init(Name,Subs,_,HeadList,BodyAsList1,_,_),
+%		add_path_to_body(BodyAsList3,_,BodyAsList1,_),
+%		filter(no_ordering,BodyAsList3,BodyAsList2).
+
+	no_ordering(H) :-
 		H \= '@'(_).
 
 	list_to_clause([Atom], Atom) :-
@@ -367,36 +354,36 @@
 		Call =.. [P|Args].
 
 	%% expand user IBK
-	term_expansion(ibk(Head,Body1), ibk(Head,Body2,Path)):-
+	term_expansion(ibk(Head,Body1), ibk(Head,Body2,Path)) :-
 		add_path_to_body(Body1,Path,Body2,_).
 
 	%% legacy clauses
-	term_expansion(metarule(Subs,(Head:-Body)),Asserts):-
+	term_expansion(metarule(Subs,(Head:-Body)),Asserts) :-
 	    get_asserts(_Name,Subs,Head,Body,_,_PS,Asserts).
-	term_expansion(metarule(Name,Subs,(Head:-Body)),Asserts):-
+	term_expansion(metarule(Name,Subs,(Head:-Body)),Asserts) :-
 	    get_asserts(Name,Subs,Head,Body,_,_PS,Asserts).
 
 	%% new ones
-	term_expansion(metarule(Subs,Head,Body),Asserts):-
+	term_expansion(metarule(Subs,Head,Body),Asserts) :-
 	    get_asserts(_Name,Subs,Head,Body,_,_PS,Asserts).
-	term_expansion(metarule(Name,Subs,Head,Body),Asserts):-
+	term_expansion(metarule(Name,Subs,Head,Body),Asserts) :-
 	    get_asserts(Name,Subs,Head,Body,_,_PS,Asserts).
-	term_expansion((metarule(Subs,Head,Body):-MetaBody),Asserts):-
+	term_expansion((metarule(Subs,Head,Body) :-MetaBody),Asserts) :-
 	    get_asserts(_Name,Subs,Head,Body,MetaBody,_PS,Asserts).
-	term_expansion((metarule(Name,Subs,Head,Body):-MetaBody),Asserts):-
+	term_expansion((metarule(Name,Subs,Head,Body) :-MetaBody),Asserts) :-
 	    get_asserts(Name,Subs,Head,Body,MetaBody,_PS,Asserts).
-	term_expansion((metarule(Name,Subs,Head,Body,PS):-MetaBody),Asserts):-
+	term_expansion((metarule(Name,Subs,Head,Body,PS) :-MetaBody),Asserts) :-
 	    get_asserts(Name,Subs,Head,Body,MetaBody,PS,Asserts).
 
 	%% build the internal metarule clauses
-	get_asserts(Name,Subs,Head,Body1,MetaBody,PS,[MRule,metarule_init(AssertName,Subs,PredTypes,Head,Body2,Recursive,Path)]):-
+	get_asserts(Name,Subs,Head,Body1,MetaBody,PS,[MRule,metarule_init(AssertName,Subs,PredTypes,Head,Body2,Recursive,Path)]) :-
 		Head = [P|_],
 		is_recursive(Body1,P,Recursive),
 		add_path_to_body(Body1,Path,Body2,PredTypes),
 		gen_metarule_id(Name,AssertName),
 		(	var(MetaBody) ->
 			MRule = metarule(AssertName,Subs,PredTypes,Head,Body2,PS,Recursive,Path)
-		;	MRule = (metarule(AssertName,Subs,PredTypes,Head,Body2,PS,Recursive,Path):-MetaBody)
+		;	MRule = (metarule(AssertName,Subs,PredTypes,Head,Body2,PS,Recursive,Path) :-MetaBody)
 		).
 
 	is_recursive([],_,false).
@@ -413,10 +400,10 @@
 		length(Args,A),
 		add_path_to_body(Atoms,Path,Rest,Out).
 
-	gen_metarule_id(Name,Name):-
+	gen_metarule_id(Name,Name) :-
 		ground(Name),
 		!.
-	gen_metarule_id(_Name,IdNext):-
+	gen_metarule_id(_Name,IdNext) :-
 		get_option(metarule_next_id(Id)),
 		succ(Id,IdNext),
 		set_option(metarule_next_id(IdNext)).
@@ -439,31 +426,20 @@
 		functor(Call,P,A),
 		Call =.. [P|Args].
 
-	assert_program(Prog) :-
-		maplist(assert_clause, Prog).
-
-	assert_clause(Sub) :-
-		metasub_to_clause_list(Sub, ClauseAsList),
-		clause_list_to_clause(ClauseAsList, Clause),
-		::assertz(Clause).
-
-	assert_prog_prims(Prog) :-
-		findall(P/A, (member(sub(_Name,P,A,_MetaSub,_PredTypes),Prog)), Prims),
-		list_to_set(Prims, PrimSet),
-		maplist(assert_prim, PrimSet).
-
 	%% learns a sequence of programs and asserts each program that it learns
-	learn_seq(Seq,Prog):-
+	learn_seq(Seq,Prog) :-
 		maplist(learn_task,Seq,Progs),
 		flatten(Progs,Prog).
 
-	learn_task(Pos/Neg,Prog1):-
-		learn(Pos,Neg,Prog1),!,
-		maplist(metasub_to_clause_list,Prog1,Prog3),
-		maplist(remove_orderings,Prog3,Prog4),
-		maplist(clause_list_to_clause,Prog4,Prog2),
+	learn_task(Pos/Neg,Prog1) :-
+		learn(Pos,Neg,Prog1), !,
+		maplist(metasub_to_clause,Prog1,Prog2),
 		forall(member(Clause,Prog2), ::assertz(Clause)),
-		findall(P/A,(member(sub(_Name,P,A,_Subs,_PredTypes),Prog2)),Prims),!,
+		findall(
+			P/A,
+			member(sub(_Name,P,A,_Subs,_PredTypes),Prog1),
+			Prims
+		), !,
 		list_to_set(Prims,PrimSet),
 		maplist(assert_prim,PrimSet).
 	learn_task(_,[]).
