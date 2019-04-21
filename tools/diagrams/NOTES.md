@@ -132,7 +132,7 @@ relations):
 - categories  
 	`component` (light cyan rectangle with two small rectangles intercepting the left side)
 - modules  
-	`tab` (grey rectangle with small tab at top)
+	`tab` (plum rectangle with small tab at top)
 
 - public predicates  
 	`ellipse` (green)

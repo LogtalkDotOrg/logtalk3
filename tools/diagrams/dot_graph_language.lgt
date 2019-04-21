@@ -22,7 +22,7 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.21,
+		version is 2.22,
 		author is 'Paulo Moura',
 		date is 2019/04/21,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
@@ -135,11 +135,11 @@
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
 		write(Stream, '}'), nl(Stream), nl(Stream).
 
-	graph_style_margin_color(rlibrary, rounded, 10, lightgrey).
-	graph_style_margin_color(libraries, rounded, 10, lightgrey).
+	graph_style_margin_color(rlibrary, rounded, 10, lightgray).
+	graph_style_margin_color(libraries, rounded, 10, lightgray).
 	graph_style_margin_color(library, rounded, 10, whitesmoke).
-	graph_style_margin_color(rdirectory, rounded, 10, lightgrey).
-	graph_style_margin_color(directories, rounded, 10, lightgrey).
+	graph_style_margin_color(rdirectory, rounded, 10, lightgray).
+	graph_style_margin_color(directories, rounded, 10, lightgray).
 	graph_style_margin_color(directory, rounded, 10, whitesmoke).
 	graph_style_margin_color(files, rounded, 10, whitesmoke).
 	graph_style_margin_color(file, rounded, 10, snow).
@@ -193,7 +193,7 @@
 	node_shape_style_color(instance_and_class, box, filled, yellow).
 	node_shape_style_color(protocol, note, filled, aquamarine).
 	node_shape_style_color(category, component, filled, lightcyan).
-	node_shape_style_color(module, tab, filled, gainsboro).
+	node_shape_style_color(module, tab, filled, plum).
 	node_shape_style_color(file, box, filled, paleturquoise).
 	node_shape_style_color(directory, box3d, filled, lightyellow).
 	node_shape_style_color(library, box3d, filled, lightyellow).
@@ -204,7 +204,7 @@
 	node_shape_style_color(external_instance_and_class, box, 'filled,dashed', lightgoldenrodyellow).
 	node_shape_style_color(external_protocol, note, 'filled,dashed', mediumaquamarine).
 	node_shape_style_color(external_category, component, 'filled,dashed', cyan).
-	node_shape_style_color(external_module, tab, 'filled,dashed', lightgray).
+	node_shape_style_color(external_module, tab, 'filled,dashed', orchid).
 	node_shape_style_color(external_file, box, 'filled,dashed', powderblue).
 	node_shape_style_color(external_directory, box3d, 'filled,dashed', lightgoldenrodyellow).
 	node_shape_style_color(external_library, box3d, 'filled,dashed', lightgoldenrodyellow).
