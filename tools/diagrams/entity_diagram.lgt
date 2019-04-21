@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.31,
+		version is 2.32,
 		author is 'Paulo Moura',
 		date is 2019/04/21,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -78,6 +78,7 @@
 			process(Basename, Directory, GraphOptions),
 			output_externals(Options),
 			^^output_edges(Options),
+			output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			Format::file_footer(diagram_output_file, Basename, Options) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Source))
@@ -142,6 +143,19 @@
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
 	output_externals(_).
+
+	output_missing_externals(Options) :-
+		referenced_entity_(Entity),
+		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
+		\+ ::node_(Name, _, _, _, _, _),
+		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| Options]),
+		fail.
+	output_missing_externals(Options) :-
+		referenced_module_(Module),
+		\+ ::node_(Module, _, _, _, _, _),
+		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| Options]),
+		fail.
+	output_missing_externals(_).
 
 	output_sub_diagrams(Options) :-
 		memberchk(zoom(true), Options),

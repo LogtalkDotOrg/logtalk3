@@ -80,6 +80,9 @@ autoloading mechanism when using SWI-Prolog as the backend compiler.
 * IMPROVED: Library diagrams now clearly show that the container of a library
 node is the library directory.
 
+* IMPROVED: Output missing external nodes (usually due to unloaded resources)
+that are referenced from diagram edges.
+
 * FIXED: Bug when generating predicate cross-referencing diagrams where a call
 to a multifile predicate for a parametric entity would result in a duplicated
 node.

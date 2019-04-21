@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.33,
+		version is 2.34,
 		author is 'Paulo Moura',
 		date is 2019/04/21,
 		comment is 'Common predicates for generating diagrams.',
@@ -51,6 +51,7 @@
 			output_libraries(Libraries, Format, Options),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', libraries, Options),
 			Format::file_footer(diagram_output_file, Project, Options) ->
 			true
@@ -114,6 +115,7 @@
 			output_all_libraries(Options),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::file_footer(diagram_output_file, libraries, Options) ->
 			true
 		;	% failure is usually caused by errors in the source itself
@@ -177,6 +179,7 @@
 			::output_rlibrary(Library, Path, GraphOptions),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rlibrary, GraphOptions),
 			Format::file_footer(diagram_output_file, Library, Options) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
@@ -221,6 +224,7 @@
 			::output_library(Library, Path, GraphOptions),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 			Format::file_footer(diagram_output_file, Library, Options) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
@@ -280,6 +284,7 @@
 			output_directories(NormalizedDirectories, Project, Format, Options),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', directories, Options),
 			Format::file_footer(diagram_output_file, Project, Options) ->
 			true
@@ -343,6 +348,7 @@
 			::output_rdirectory(Project, NormalizedDirectory, GraphOptions),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rdirectory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
@@ -399,6 +405,7 @@
 			::output_library(Project, NormalizedDirectory, GraphOptions),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, directory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, Options) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
@@ -450,6 +457,7 @@
 			::output_files(Files, Options),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', files, Options),
 			Format::file_footer(diagram_output_file, Project, Options) ->
 			true
@@ -508,6 +516,7 @@
 			output_all_files(Options),
 			::output_externals(Options),
 			::output_edges(Options),
+			::output_missing_externals(Options),
 			Format::file_footer(diagram_output_file, files, Options) ->
 			true
 		;	% failure is usually caused by errors in the source itself
@@ -849,6 +858,16 @@
 			::assertz(edge_(From, To, Labels, Kind, Options))
 		;	::assertz(edge_(From, To, [], Kind, Options))
 		).
+
+	:- protected(output_missing_externals/1).
+	:- mode(output_missing_externals(+list(compound)), one).
+	:- info(output_missing_externals/1, [
+		comment is 'Outputs missing external nodes (usually due to unloaded resources) that are referenced from edges.',
+		argnames is ['Options']
+	]).
+
+	% do nothing by default
+	output_missing_externals(_).
 
 	:- protected(not_excluded_file/3).
 	:- mode(not_excluded_file(+list(atom), +atom, +atom), zero_or_one).

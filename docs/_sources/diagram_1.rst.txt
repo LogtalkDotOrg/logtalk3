@@ -9,7 +9,7 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.33
+| **Version:** 2.34
 | **Date:** 2019/4/21
 
 | **Compilation flags:**
@@ -879,6 +879,27 @@ Saves a graph edge.
 |    ``save_edge(From,To,Labels,Kind,Options)``
 | **Mode and number of proofs:**
 |    ``save_edge(+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="output_missing_externals/1"> </div>
+
+.. index:: output_missing_externals/1
+.. _diagram/1::output_missing_externals/1:
+
+``output_missing_externals/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Outputs missing external nodes (usually due to unloaded resources) that are referenced from edges.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_missing_externals(Options)``
+| **Mode and number of proofs:**
+|    ``output_missing_externals(+list(compound))`` - ``one``
 
 
 .. raw:: html
