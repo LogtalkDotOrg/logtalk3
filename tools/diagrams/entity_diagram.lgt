@@ -160,14 +160,14 @@
 	output_sub_diagrams(Options) :-
 		memberchk(zoom(true), Options),
 		included_entity_(Entity),
-		% use the {}/1 control construct to avoid a warning do to the circular
+		% use the {}/1 control construct to avoid a warning due to the circular
 		% reference between this object and the xref_diagram object
 		{xref_diagram::entity(Entity, Options)},
 		fail.
 	output_sub_diagrams(Options) :-
 		memberchk(zoom(true), Options),
 		included_module_(Module),
-		% use the {}/1 control construct to avoid a warning do to the circular
+		% use the {}/1 control construct to avoid a warning due to the circular
 		% reference between this object and the xref_diagram object
 		{xref_diagram::entity(Module, Options)},
 		fail.
