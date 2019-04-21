@@ -175,7 +175,7 @@ relations):
 
 The library, directory, file, entity, and predicate nodes that are not part
 of the predicates, entities, files, or libraries for which we are generating
-a diagram use a dashed border and described as external.
+a diagram use a dashed border, a darker color, and are described as external.
 
 
 Supported graph languages
@@ -194,10 +194,11 @@ simply type:
 	dot -Tpdf diagram.dot > diagram.pdf
 
 This usually works fine for entity and predicate call cross-referencing
-diagrams. For directory and file diagrams, the `circo` command-line
-executable may produce better results:
+diagrams. For directory and file diagrams, the `fdp` and `circo` command-line
+executables may produce better results. For example:
 
-	circo -Tpdf diagram.dot > diagram.pdf
+	fdp -Tsvg diagram.dot > diagram.pdf
+	circo -Tsvg diagram.dot > diagram.pdf
 
 It's also worth to experiment with different layouts to find the one that
 produces the best results (see the `layout/1` option described below).
