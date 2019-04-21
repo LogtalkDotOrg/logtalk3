@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2019/04/20,
+		date is 2019/04/21,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -51,15 +51,15 @@
 		::retractall(referenced_logtalk_file_(_)),
 		::retractall(referenced_prolog_file_(_)).
 
-	process_externals(Options) :-
+	output_externals(Options) :-
 		memberchk(externals(false), Options),
 		!.
-	process_externals(_Options) :-
+	output_externals(_Options) :-
 		::retract(included_file_(Path)),
 		::retractall(referenced_logtalk_file_(Path)),
 		::retractall(referenced_prolog_file_(Path)),
 		fail.
-	process_externals(Options) :-
+	output_externals(Options) :-
 		::retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		^^filter_file_extension(Basename, Options, Name),
@@ -70,7 +70,7 @@
 		;	^^output_node(Path, Name, file, [], external_file, LinkingOptions)
 		),
 		fail.
-	process_externals(Options) :-
+	output_externals(Options) :-
 		::retract(referenced_prolog_file_(Path)),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		^^filter_file_extension(Basename, Options, Name),
@@ -81,6 +81,6 @@
 		;	^^output_node(Path, Name, file, [], external_file, LinkingOptions)
 		),
 		fail.
-	process_externals(_).
+	output_externals(_).
 
 :- end_category.

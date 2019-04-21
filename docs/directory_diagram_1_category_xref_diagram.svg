@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-839.2792 3111,-839.2792 3111,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 00:49</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 01:15</text>
 <g id="clust1" class="cluster">
 <title>cluster_directory_diagram_1_category</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt">
@@ -406,27 +406,27 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1 -->
+<!-- output_externals/1 -->
 <g id="node11" class="node">
-<title>process_externals/1</title>
+<title>output_externals/1</title>
 <g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L67">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="673" cy="-777.066" rx="108.789" ry="21.4286"/>
-<text text-anchor="start" x="604" y="-779.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="610" y="-779.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">process_externals/1</text>
-<text text-anchor="start" x="736" y="-779.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="604" y="-768.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="662" y="-769.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="736" y="-768.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<ellipse fill="#f5f5dc" stroke="#000000" cx="673" cy="-777.066" rx="103.8894" ry="21.4286"/>
+<text text-anchor="start" x="608" y="-779.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="614" y="-779.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">output_externals/1</text>
+<text text-anchor="start" x="733" y="-779.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="608" y="-768.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="662.5" y="-769.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="733" y="-768.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;::included_directory_/1 -->
+<!-- output_externals/1&#45;&gt;::included_directory_/1 -->
 <g id="edge19" class="edge">
-<title>process_externals/1&#45;&gt;::included_directory_/1</title>
+<title>output_externals/1&#45;&gt;::included_directory_/1</title>
 <g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L70" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M694.1786,-755.8488C737.5114,-712.4371 836.0905,-613.6784 882.2698,-567.4149"/>
-<polygon fill="#000000" stroke="#000000" points="881.7926,-560.8154 888.8701,-567.8801 887.4572,-569.2956 880.3796,-562.2309 881.7926,-560.8154"/>
-<polyline fill="none" stroke="#000000" points="886.0378,-563.64 882.5055,-567.1788 "/>
+<path fill="none" stroke="#000000" d="M693.7659,-756.2622C736.8484,-713.1012 835.7873,-613.982 882.1603,-567.5246"/>
+<polygon fill="#000000" stroke="#000000" points="881.699,-560.9092 888.7765,-567.9738 887.3636,-569.3894 880.286,-562.3247 881.699,-560.9092"/>
+<polyline fill="none" stroke="#000000" points="885.9442,-563.7338 882.4119,-567.2725 "/>
 </a>
 </g>
 <g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L70">
@@ -434,11 +434,11 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;::referenced_logtalk_directory_/1 -->
+<!-- output_externals/1&#45;&gt;::referenced_logtalk_directory_/1 -->
 <g id="edge20" class="edge">
-<title>process_externals/1&#45;&gt;::referenced_logtalk_directory_/1</title>
+<title>output_externals/1&#45;&gt;::referenced_logtalk_directory_/1</title>
 <g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L70" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M757.4171,-763.5519C840.9555,-747.8846 970.7906,-717.2547 1073,-664.8528 1123.3769,-639.025 1172.9537,-595.0865 1201.4554,-567.5272"/>
+<path fill="none" stroke="#000000" d="M755.0689,-763.9906C838.5072,-748.4597 969.8279,-717.7483 1073,-664.8528 1123.3769,-639.025 1172.9537,-595.0865 1201.4554,-567.5272"/>
 <polygon fill="#000000" stroke="#000000" points="1200.9615,-561.0312 1207.9355,-568.1981 1206.5021,-569.5929 1199.5281,-562.426 1200.9615,-561.0312"/>
 <polyline fill="none" stroke="#000000" points="1205.1652,-563.9173 1201.5817,-567.4043 "/>
 </a>
@@ -448,11 +448,11 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;::referenced_prolog_directory_/1 -->
+<!-- output_externals/1&#45;&gt;::referenced_prolog_directory_/1 -->
 <g id="edge21" class="edge">
-<title>process_externals/1&#45;&gt;::referenced_prolog_directory_/1</title>
+<title>output_externals/1&#45;&gt;::referenced_prolog_directory_/1</title>
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L70" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M772.1275,-768.1339C947.6086,-751.3438 1305.3312,-712.4442 1421,-664.8528 1477.1225,-641.7615 1531.8899,-595.9344 1562.6562,-567.4283"/>
+<path fill="none" stroke="#000000" d="M768.3563,-768.494C942.4321,-751.9049 1304.4963,-712.7877 1421,-664.8528 1477.1225,-641.7615 1531.8899,-595.9344 1562.6562,-567.4283"/>
 <polygon fill="#000000" stroke="#000000" points="1562.5101,-560.7246 1569.3341,-568.0344 1567.8722,-569.3992 1561.0481,-562.0894 1562.5101,-560.7246"/>
 <polyline fill="none" stroke="#000000" points="1566.6531,-563.6971 1562.9982,-567.1091 "/>
 </a>
@@ -470,9 +470,9 @@
 <text text-anchor="start" x="614" y="-539.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">add_link_options/3</text>
 <text text-anchor="start" x="733" y="-540.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </g>
-<!-- process_externals/1&#45;&gt;add_link_options/3 -->
+<!-- output_externals/1&#45;&gt;add_link_options/3 -->
 <g id="edge9" class="edge">
-<title>process_externals/1&#45;&gt;add_link_options/3</title>
+<title>output_externals/1&#45;&gt;add_link_options/3</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L75" xlink:title="super call">
 <path fill="none" stroke="#000000" d="M673,-755.8488C673,-714.0359 673,-620.8777 673,-572.7346"/>
 <polygon fill="#000000" stroke="#000000" points="673.0001,-572.7022 669,-566.7022 673,-560.7022 673.0001,-572.7022"/>
@@ -491,12 +491,12 @@
 <text text-anchor="start" x="47" y="-539.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">omit_path_prefix/3</text>
 <text text-anchor="start" x="166" y="-540.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </g>
-<!-- process_externals/1&#45;&gt;omit_path_prefix/3 -->
+<!-- output_externals/1&#45;&gt;omit_path_prefix/3 -->
 <g id="edge10" class="edge">
-<title>process_externals/1&#45;&gt;omit_path_prefix/3</title>
+<title>output_externals/1&#45;&gt;omit_path_prefix/3</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L75" xlink:title="super call">
-<path fill="none" stroke="#000000" d="M626.1176,-757.6825C520.6471,-714.0756 265.4272,-608.5549 156.5651,-563.5458"/>
-<polygon fill="#000000" stroke="#000000" points="156.352,-563.4577 149.2789,-564.8617 145.2624,-558.8727 156.352,-563.4577"/>
+<path fill="none" stroke="#000000" d="M626.6,-757.8819C521.4632,-714.4131 265.7681,-608.6958 156.6767,-563.5919"/>
+<polygon fill="#000000" stroke="#000000" points="156.4396,-563.4939 149.3665,-564.8979 145.35,-558.9089 156.4396,-563.4939"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L75">
@@ -512,9 +512,9 @@
 <text text-anchor="start" x="238" y="-539.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">output_node/6</text>
 <text text-anchor="start" x="324" y="-540.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </g>
-<!-- process_externals/1&#45;&gt;output_node/6 -->
+<!-- output_externals/1&#45;&gt;output_node/6 -->
 <g id="edge11" class="edge">
-<title>process_externals/1&#45;&gt;output_node/6</title>
+<title>output_externals/1&#45;&gt;output_node/6</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L75" xlink:title="super call">
 <path fill="none" stroke="#000000" d="M639.239,-756.8761C566.5774,-713.4225 395.7695,-611.2748 319.2491,-565.5136"/>
 <polygon fill="#000000" stroke="#000000" points="318.9651,-565.3438 311.7626,-565.6972 308.6662,-559.1847 318.9651,-565.3438"/>
@@ -539,9 +539,9 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;list::memberchk/2 -->
+<!-- output_externals/1&#45;&gt;list::memberchk/2 -->
 <g id="edge12" class="edge">
-<title>process_externals/1&#45;&gt;list::memberchk/2</title>
+<title>output_externals/1&#45;&gt;list::memberchk/2</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_diagram.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M654.3555,-755.8488C617.6633,-714.0933 535.9759,-621.1336 493.6203,-572.9334"/>
 <polygon fill="#000000" stroke="#000000" points="493.3751,-572.6542 486.4097,-570.7875 485.4539,-563.64 493.3751,-572.6542"/>

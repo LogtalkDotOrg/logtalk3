@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.29,
+		version is 2.31,
 		author is 'Paulo Moura',
-		date is 2019/04/20,
+		date is 2019/04/21,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -76,8 +76,7 @@
 			^^add_link_options(Path, Options, GraphOptions),
 			Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			process(Basename, Directory, GraphOptions),
-			^^output_nodes(Options),
-			process_externals(Options),
+			output_externals(Options),
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			Format::file_footer(diagram_output_file, Basename, Options) ->
@@ -126,23 +125,23 @@
 		retractall(referenced_entity_(_)),
 		retractall(referenced_module_(_)).
 
-	process_externals(Options) :-
+	output_externals(Options) :-
 		memberchk(externals(false), Options),
 		!.
-	process_externals(Options) :-
+	output_externals(Options) :-
 		referenced_entity_(Entity),
 		\+ included_entity_(Entity),
 		add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
 		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
-	process_externals(Options) :-
+	output_externals(Options) :-
 		referenced_module_(Module),
 		\+ included_module_(Module),
 		add_external_entity_documentation_url(module, Module, Options, EntityOptions),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
-	process_externals(_).
+	output_externals(_).
 
 	output_sub_diagrams(Options) :-
 		memberchk(zoom(true), Options),

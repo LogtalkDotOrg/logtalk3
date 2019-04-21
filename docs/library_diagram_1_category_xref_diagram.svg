@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-839.2792 3194,-839.2792 3194,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 00:49</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 01:15</text>
 <g id="clust1" class="cluster">
 <title>cluster_library_diagram_1_category</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt">
@@ -447,23 +447,23 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1 -->
+<!-- output_externals/1 -->
 <g id="node12" class="node">
-<title>process_externals/1</title>
+<title>output_externals/1</title>
 <g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L72">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="634" cy="-777.066" rx="108.789" ry="21.4286"/>
-<text text-anchor="start" x="565" y="-779.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="571" y="-779.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">process_externals/1</text>
-<text text-anchor="start" x="697" y="-779.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="565" y="-768.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="623" y="-769.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
-<text text-anchor="start" x="697" y="-768.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<ellipse fill="#f5f5dc" stroke="#000000" cx="634" cy="-777.066" rx="103.8894" ry="21.4286"/>
+<text text-anchor="start" x="569" y="-779.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="575" y="-779.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">output_externals/1</text>
+<text text-anchor="start" x="694" y="-779.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="569" y="-768.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="623.5" y="-769.466" font-family="Courier,monospace" font-size="7.00" fill="#000000">local</text>
+<text text-anchor="start" x="694" y="-768.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;add_library_documentation_url/4 -->
+<!-- output_externals/1&#45;&gt;add_library_documentation_url/4 -->
 <g id="edge3" class="edge">
-<title>process_externals/1&#45;&gt;add_library_documentation_url/4</title>
+<title>output_externals/1&#45;&gt;add_library_documentation_url/4</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M648.3001,-755.8488C676.1958,-714.4596 737.9996,-622.7606 770.7206,-574.2121"/>
 <polygon fill="#000000" stroke="#000000" points="770.9116,-573.9287 770.948,-566.7177 777.6184,-563.9778 770.9116,-573.9287"/>
@@ -474,11 +474,11 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;::included_library_/2 -->
+<!-- output_externals/1&#45;&gt;::included_library_/2 -->
 <g id="edge21" class="edge">
-<title>process_externals/1&#45;&gt;::included_library_/2</title>
+<title>output_externals/1&#45;&gt;::included_library_/2</title>
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M740.6152,-772.6768C963.561,-762.2695 1471.4999,-731.7854 1630,-664.8528 1682.2093,-642.8055 1730.5638,-596.4252 1757.3053,-567.5674"/>
+<path fill="none" stroke="#000000" d="M736.0062,-772.891C956.4805,-762.6917 1470.3979,-732.2508 1630,-664.8528 1682.2093,-642.8055 1730.5638,-596.4252 1757.3053,-567.5674"/>
 <polygon fill="#000000" stroke="#000000" points="1756.4162,-561.1442 1763.7808,-567.9091 1762.4278,-569.382 1755.0632,-562.6171 1756.4162,-561.1442"/>
 <polyline fill="none" stroke="#000000" points="1760.775,-563.7902 1757.3925,-567.4725 "/>
 </a>
@@ -488,11 +488,11 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;::referenced_logtalk_library_/2 -->
+<!-- output_externals/1&#45;&gt;::referenced_logtalk_library_/2 -->
 <g id="edge22" class="edge">
-<title>process_externals/1&#45;&gt;::referenced_logtalk_library_/2</title>
+<title>output_externals/1&#45;&gt;::referenced_logtalk_library_/2</title>
 <g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M735.2336,-769.1547C860.8909,-757.0236 1080.3218,-728.2038 1258,-664.8528 1327.8279,-639.9557 1401.7364,-594.3752 1443.6422,-566.4655"/>
+<path fill="none" stroke="#000000" d="M731.4136,-769.5211C856.4051,-757.6086 1078.5074,-728.8507 1258,-664.8528 1327.8279,-639.9557 1401.7364,-594.3752 1443.6422,-566.4655"/>
 <polygon fill="#000000" stroke="#000000" points="1444.2338,-560.0541 1449.794,-568.3659 1448.1316,-569.478 1442.5714,-561.1662 1444.2338,-560.0541"/>
 <polyline fill="none" stroke="#000000" points="1447.8451,-563.654 1443.6892,-566.4341 "/>
 </a>
@@ -502,9 +502,9 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;::referenced_prolog_library_/2 -->
+<!-- output_externals/1&#45;&gt;::referenced_prolog_library_/2 -->
 <g id="edge23" class="edge">
-<title>process_externals/1&#45;&gt;::referenced_prolog_library_/2</title>
+<title>output_externals/1&#45;&gt;::referenced_prolog_library_/2</title>
 <g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="updates in self">
 <path fill="none" stroke="#000000" d="M675.8533,-757.4822C768.1067,-714.3152 988.5175,-611.1813 1086.5551,-565.3078"/>
 <polygon fill="#000000" stroke="#000000" points="1088.1052,-559.0622 1092.3434,-568.1197 1090.5319,-568.9673 1086.2937,-559.9098 1088.1052,-559.0622"/>
@@ -524,12 +524,12 @@
 <text text-anchor="start" x="47" y="-539.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">add_link_options/3</text>
 <text text-anchor="start" x="166" y="-540.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </g>
-<!-- process_externals/1&#45;&gt;add_link_options/3 -->
+<!-- output_externals/1&#45;&gt;add_link_options/3 -->
 <g id="edge10" class="edge">
-<title>process_externals/1&#45;&gt;add_link_options/3</title>
+<title>output_externals/1&#45;&gt;add_link_options/3</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L80" xlink:title="super call">
-<path fill="none" stroke="#000000" d="M589.8912,-757.4822C491.8049,-713.9329 256.2511,-609.3495 154.3407,-564.1024"/>
-<polygon fill="#000000" stroke="#000000" points="154.1366,-564.0118 147.0296,-565.2329 143.169,-559.1422 154.1366,-564.0118"/>
+<path fill="none" stroke="#000000" d="M590.3423,-757.6825C492.4442,-714.2167 255.9978,-609.237 154.0753,-563.9845"/>
+<polygon fill="#000000" stroke="#000000" points="153.8738,-563.8951 146.7668,-565.1162 142.9062,-559.0256 153.8738,-563.8951"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L80">
@@ -545,11 +545,11 @@
 <text text-anchor="start" x="242" y="-539.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">omit_path_prefix/3</text>
 <text text-anchor="start" x="361" y="-540.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </g>
-<!-- process_externals/1&#45;&gt;omit_path_prefix/3 -->
+<!-- output_externals/1&#45;&gt;omit_path_prefix/3 -->
 <g id="edge11" class="edge">
-<title>process_externals/1&#45;&gt;omit_path_prefix/3</title>
+<title>output_externals/1&#45;&gt;omit_path_prefix/3</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L80" xlink:title="super call">
-<path fill="none" stroke="#000000" d="M599.5135,-756.8017C563.1366,-735.0877 504.4833,-699.1064 456,-664.8528 411.2991,-633.2715 362.0435,-593.527 331.3155,-568.0976"/>
+<path fill="none" stroke="#000000" d="M599.8487,-757.0018C563.4977,-735.3092 504.6325,-699.2118 456,-664.8528 411.2991,-633.2715 362.0435,-593.527 331.3155,-568.0976"/>
 <polygon fill="#000000" stroke="#000000" points="331.2487,-568.042 324.0775,-567.2839 322.0192,-560.3728 331.2487,-568.042"/>
 </a>
 </g>
@@ -566,9 +566,9 @@
 <text text-anchor="start" x="433" y="-539.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">output_node/6</text>
 <text text-anchor="start" x="519" y="-540.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </g>
-<!-- process_externals/1&#45;&gt;output_node/6 -->
+<!-- output_externals/1&#45;&gt;output_node/6 -->
 <g id="edge12" class="edge">
-<title>process_externals/1&#45;&gt;output_node/6</title>
+<title>output_externals/1&#45;&gt;output_node/6</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L80" xlink:title="super call">
 <path fill="none" stroke="#000000" d="M607.3768,-756.483C582.1159,-735.7392 544.6041,-701.6099 521,-664.8528 502.4163,-635.9137 490.0295,-598.2176 483.0365,-572.3877"/>
 <polygon fill="#000000" stroke="#000000" points="483.0321,-572.3705 477.6596,-567.5604 480.0332,-560.7512 483.0321,-572.3705"/>
@@ -579,9 +579,9 @@
 </a>
 </g>
 </g>
-<!-- process_externals/1&#45;&gt;list::memberchk/2 -->
+<!-- output_externals/1&#45;&gt;list::memberchk/2 -->
 <g id="edge13" class="edge">
-<title>process_externals/1&#45;&gt;list::memberchk/2</title>
+<title>output_externals/1&#45;&gt;list::memberchk/2</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L72" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M617.8103,-755.8952C602.2239,-733.3605 581,-696.0325 581,-659.8528 581,-659.8528 581,-659.8528 581,-425.4264 581,-393.2852 599.4412,-361.3385 616.2087,-338.9343"/>
 <polygon fill="#000000" stroke="#000000" points="616.321,-338.7909 616.8734,-331.601 623.7227,-329.3455 616.321,-338.7909"/>

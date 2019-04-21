@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.31
-| **Date:** 2019/4/20
+| **Version:** 2.32
+| **Date:** 2019/4/21
 
 | **Compilation flags:**
 |    ``static``
@@ -675,23 +675,23 @@ Generates diagram output for a directory and its sub-directories using the speci
 
 .. raw:: html
 
-   <div id="process_externals/1"> </div>
+   <div id="output_externals/1"> </div>
 
-.. index:: process_externals/1
-.. _diagram/1::process_externals/1:
+.. index:: output_externals/1
+.. _diagram/1::output_externals/1:
 
-``process_externals/1``
-^^^^^^^^^^^^^^^^^^^^^^^
+``output_externals/1``
+^^^^^^^^^^^^^^^^^^^^^^
 
-Process external entities using the specified options depending on the value of the boolean option externals/1.
+Output external nodes using the specified options depending on the value of the boolean option externals/1.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``process_externals(Options)``
+|    ``output_externals(Options)``
 | **Mode and number of proofs:**
-|    ``process_externals(+list(compound))`` - ``one``
+|    ``output_externals(+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -816,27 +816,6 @@ Enumerates, by backtracking, all saved nodes.
 |    ``node(Identifier,Label,Caption,Contents,Kind,Options)``
 | **Mode and number of proofs:**
 |    ``node(?nonvar,?nonvar,?nonvar,?list(compound),?atom,?list(compound))`` - ``zero_or_more``
-
-
-.. raw:: html
-
-   <div id="output_nodes/1"> </div>
-
-.. index:: output_nodes/1
-.. _diagram/1::output_nodes/1:
-
-``output_nodes/1``
-^^^^^^^^^^^^^^^^^^
-
-Outputs all nodes.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_nodes(Options)``
-| **Mode and number of proofs:**
-|    ``output_nodes(+list(compound))`` - ``one``
 
 
 .. raw:: html

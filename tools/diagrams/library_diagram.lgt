@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2019/04/20,
+		date is 2019/04/21,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -69,15 +69,15 @@
 		::retractall(referenced_logtalk_library_(_, _)),
 		::retractall(referenced_prolog_library_(_, _)).
 
-	process_externals(Options) :-
+	output_externals(Options) :-
 		memberchk(externals(false), Options),
 		!.
-	process_externals(_Options) :-
+	output_externals(_Options) :-
 		::retract(included_library_(Library, Path)),
 		::retractall(referenced_logtalk_library_(Library, Path)),
 		::retractall(referenced_prolog_library_(Library, Path)),
 		fail.
-	process_externals(Options) :-
+	output_externals(Options) :-
 		::retract(referenced_logtalk_library_(Library, Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
@@ -87,7 +87,7 @@
 		;	^^output_node(Directory, Library, library, [], external_library, NodeOptions)
 		),
 		fail.
-	process_externals(Options) :-
+	output_externals(Options) :-
 		::retract(referenced_prolog_library_(Library, Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
@@ -97,7 +97,7 @@
 		;	^^output_node(Directory, Library, library, [], external_library, NodeOptions)
 		),
 		fail.
-	process_externals(_).
+	output_externals(_).
 
 	add_library_documentation_url(logtalk, Options, Library, NodeOptions) :-
 		(	memberchk(urls(_, DocPrefix), Options),

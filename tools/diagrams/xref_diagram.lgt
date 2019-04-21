@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.42,
+		version is 2.43,
 		author is 'Paulo Moura',
-		date is 2019/04/20,
+		date is 2019/04/21,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -79,8 +79,7 @@
 			^^add_link_options(Path, Options, GraphOptions),
 			Format::graph_header(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
 			process_entity(Kind, Entity, GraphOptions),
-			process_external_predicates(Options),
-			^^output_nodes(Options),
+			output_externals(Options),
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
 			Format::file_footer(diagram_output_file, Identifier, Options) ->
@@ -634,23 +633,23 @@
 		;	assertz(external_predicate_(Reference))
 		).
 
-	process_external_predicates(Options) :-
+	output_externals(Options) :-
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
 		add_predicate_documentation_url(Options, Object, Predicate, PredicateOptions),
 		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
 		fail.
-	process_external_predicates(Options) :-
+	output_externals(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
 		memberchk(node_type_captions(Boolean), Options),
 		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.
-	process_external_predicates(Options) :-
+	output_externals(Options) :-
 		retract(external_predicate_(Predicate)),
 		memberchk(node_type_captions(Boolean), Options),
 		^^output_node(Predicate, Predicate, external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.
-	process_external_predicates(_).
+	output_externals(_).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).
