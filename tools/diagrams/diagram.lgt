@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.34,
+		version is 2.35,
 		author is 'Paulo Moura',
 		date is 2019/04/21,
 		comment is 'Common predicates for generating diagrams.',
@@ -823,11 +823,11 @@
 		output_edges(Externals, Format).
 
 	output_edges(true, Format) :-
-		::edge_(From, To, Labels, Kind, EdgeOptions),
+		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
 		Format::edge(diagram_output_file, From, To, Labels, Kind, EdgeOptions),
 		fail.
 	output_edges(false, Format) :-
-		::edge_(From, To, Labels, Kind, EdgeOptions),
+		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
 		::node_(To, _, _, _, ToKind, _),
 		\+ external_node_kind(ToKind),
 		Format::edge(diagram_output_file, From, To, Labels, Kind, EdgeOptions),
