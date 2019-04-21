@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.32,
+		version is 2.33,
 		author is 'Paulo Moura',
 		date is 2019/04/21,
 		comment is 'Common predicates for generating diagrams.',
@@ -656,7 +656,7 @@
 		sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			atom_concat(library_, Library, Identifier),
 			add_link_options(Path, Options, GraphOptions),
-			omit_path_prefix(Path, Options, Relative),
+			atom_concat(TopPath, Relative, Path),
 			Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
 			::output_library(Library, Path, GraphOptions),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
@@ -1146,8 +1146,10 @@
 		message_tokens(Message).
 
 	message_tokens(generating_diagram(Self, Kind, For)) -->
-		{Self::message_diagram_description(Description)},
-		['Generating ~w diagram for ~w ~q ... '-[Description, Kind, For]].
+		{copy_term(For, ForCopy),
+		 numbervars(ForCopy, 0, _),
+		 Self::message_diagram_description(Description)},
+		['Generating ~w diagram for ~w ~q ... '-[Description, Kind, ForCopy]].
 	message_tokens(generated_diagram(_Self, _Kind, _For)) -->
 		[at_same_line, 'done'-[], nl].
 	message_tokens(generating_diagram_failed(Message)) -->
