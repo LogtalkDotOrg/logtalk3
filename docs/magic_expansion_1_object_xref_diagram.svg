@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-611.2792 601,-611.2792 601,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 10:26</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 11:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_magic_expansion_1_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/magic_expansion.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/magic_expansion.lgt">
@@ -24,7 +24,7 @@
 <g id="node1" class="node">
 <title>goal_expansion/2</title>
 <g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/magic_expansion.lgt#L17" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/magic_expansion.lgt#L17">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="411" cy="-549.066" rx="94.5053" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="411" cy="-549.066" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="352" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="358" y="-551.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">goal_expansion/2</text>
 <text text-anchor="start" x="464" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -51,7 +51,7 @@
 <g id="node2" class="node">
 <title>term_expansion/2</title>
 <g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/magic_expansion.lgt#L20" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/magic_expansion.lgt#L20">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="203" cy="-549.066" rx="94.5053" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="203" cy="-549.066" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="144" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="150" y="-551.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">term_expansion/2</text>
 <text text-anchor="start" x="256" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -65,7 +65,7 @@
 <g id="node3" class="node">
 <title>magic_clause/5</title>
 <g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/magic_expansion.lgt#L27" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/magic_expansion.lgt#L27">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="257" cy="-314.6396" rx="85.6199" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="257" cy="-314.6396" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="205" y="-317.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="211" y="-316.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">magic_clause/5</text>
 <text text-anchor="start" x="304" y="-317.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -91,7 +91,7 @@
 <!-- flatten_goals/3 -->
 <g id="node4" class="node">
 <title>flatten_goals/3</title>
-<ellipse fill="#f5f5dc" stroke="#000000" cx="95" cy="-80.2132" rx="76.9425" ry="18"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="95" cy="-80.2132" rx="76.9425" ry="18"/>
 <text text-anchor="start" x="39" y="-78.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="45" y="-77.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">flatten_goals/3</text>
 <text text-anchor="start" x="145" y="-78.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -113,7 +113,7 @@
 <g id="node5" class="node">
 <title>magic::magicise/4</title>
 <g id="a_node5"><a xlink:href="https://logtalk.org/library/magic_0.html#magicise/4" xlink:title="https://logtalk.org/library/magic_0.html#magicise/4">
-<ellipse fill="#eee8cd" stroke="#000000" stroke-dasharray="5,2" cx="290" cy="-80.2132" rx="99.9045" ry="21.4286"/>
+<ellipse fill="#f5f5dc" stroke="#000000" stroke-dasharray="5,2" cx="290" cy="-80.2132" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="228" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="234" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">magic::magicise/4</text>
 <text text-anchor="start" x="347" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -140,7 +140,7 @@
 <g id="node6" class="node">
 <title>list::member/2</title>
 <g id="a_node6"><a xlink:href="https://logtalk.org/library/list_0.html#member/2" xlink:title="https://logtalk.org/library/list_0.html#member/2">
-<ellipse fill="#eee8cd" stroke="#000000" stroke-dasharray="5,2" cx="493" cy="-80.2132" rx="85.6199" ry="21.4286"/>
+<ellipse fill="#f5f5dc" stroke="#000000" stroke-dasharray="5,2" cx="493" cy="-80.2132" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="441" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="447" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">list::member/2</text>
 <text text-anchor="start" x="540" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>

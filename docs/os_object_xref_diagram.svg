@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1824.8377 2833,-1824.8377 2833,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 10:26</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 11:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_os_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt">
@@ -24,7 +24,7 @@
 <g id="node1" class="node">
 <title>sleep/1</title>
 <g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L178">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2758" cy="-1762.6245" rx="53.066" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2758" cy="-1762.6245" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="2729" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2735" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">sleep/1</text>
 <text text-anchor="start" x="2782" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -38,7 +38,7 @@
 <g id="node2" class="node">
 <title>command_line_arguments/1</title>
 <g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L175">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2555" cy="-1762.6245" rx="132.4583" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2555" cy="-1762.6245" rx="132.4583" ry="21.4286"/>
 <text text-anchor="start" x="2470" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2476" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">command_line_arguments/1</text>
 <text text-anchor="start" x="2635" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -52,7 +52,7 @@
 <g id="node3" class="node">
 <title>cpu_time/1</title>
 <g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L160" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L160">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2338" cy="-1762.6245" rx="67.3507" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2338" cy="-1762.6245" rx="67.3507" ry="21.4286"/>
 <text text-anchor="start" x="2299" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2305" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">cpu_time/1</text>
 <text text-anchor="start" x="2372" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -66,7 +66,7 @@
 <g id="node4" class="node">
 <title>time_stamp/1</title>
 <g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L151">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2176" cy="-1762.6245" rx="76.2353" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2176" cy="-1762.6245" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="2130" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2136" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">time_stamp/1</text>
 <text text-anchor="start" x="2216" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -80,7 +80,7 @@
 <g id="node5" class="node">
 <title>environment_variable/2</title>
 <g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L148">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1959" cy="-1762.6245" rx="123.0732" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1959" cy="-1762.6245" rx="123.0732" ry="21.4286"/>
 <text text-anchor="start" x="1880" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1886" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">environment_variable/2</text>
 <text text-anchor="start" x="2032" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -94,7 +94,7 @@
 <g id="node6" class="node">
 <title>working_directory/1</title>
 <g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L112">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1709" cy="-1762.6245" rx="108.789" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1709" cy="-1762.6245" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="1640" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1646" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">working_directory/1</text>
 <text text-anchor="start" x="1772" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -108,7 +108,7 @@
 <g id="node7" class="node">
 <title>shell/1</title>
 <g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L69">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1529" cy="-1762.6245" rx="53.066" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1529" cy="-1762.6245" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="1500" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1506" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">shell/1</text>
 <text text-anchor="start" x="1553" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -122,7 +122,7 @@
 <g id="node8" class="node">
 <title>shell/2</title>
 <g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L66">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1405" cy="-1762.6245" rx="53.066" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1405" cy="-1762.6245" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="1376" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1382" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">shell/2</text>
 <text text-anchor="start" x="1429" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -136,7 +136,7 @@
 <g id="node9" class="node">
 <title>pid/1</title>
 <g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L63">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1290" cy="-1762.6245" rx="43.6818" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1290" cy="-1762.6245" rx="43.6818" ry="21.4286"/>
 <text text-anchor="start" x="1267" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1273" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">pid/1</text>
 <text text-anchor="start" x="1307" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -150,7 +150,7 @@
 <g id="node10" class="node">
 <title>expand_path/2</title>
 <g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L58">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2240" cy="-1252.3452" rx="80.7205" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2240" cy="-1252.3452" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="2191" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2197" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">expand_path/2</text>
 <text text-anchor="start" x="2283" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -164,7 +164,7 @@
 <g id="node11" class="node">
 <title>absolute_file_name/2</title>
 <g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L72">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1576" cy="-1017.9188" rx="113.6886" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1576" cy="-1017.9188" rx="113.6886" ry="21.4286"/>
 <text text-anchor="start" x="1504" y="-1020.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1510" y="-1020.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">absolute_file_name/2</text>
 <text text-anchor="start" x="1643" y="-1020.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -191,7 +191,7 @@
 <g id="node12" class="node">
 <title>expand_path_/2</title>
 <g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L79">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1520" cy="-549.066" rx="85.6199" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1520" cy="-549.066" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="1468" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1474" y="-551.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">expand_path_/2</text>
 <text text-anchor="start" x="1567" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -218,7 +218,7 @@
 <g id="node13" class="node">
 <title>expand_only_directory_part/2</title>
 <g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L88">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1389" cy="-783.4924" rx="150.7276" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1389" cy="-783.4924" rx="150.7276" ry="21.4286"/>
 <text text-anchor="start" x="1291" y="-786.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1297" y="-785.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">expand_only_directory_part/2</text>
 <text text-anchor="start" x="1482" y="-786.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -258,7 +258,7 @@
 <g id="node30" class="node">
 <title>decompose_file_name/4</title>
 <g id="a_node30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1693" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1693">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1298" cy="-549.066" rx="118.1737" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1298" cy="-549.066" rx="118.1737" ry="21.4286"/>
 <text text-anchor="start" x="1223" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1229" y="-551.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">decompose_file_name/4</text>
 <text text-anchor="start" x="1368" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -285,7 +285,7 @@
 <g id="node14" class="node">
 <title>make_directory/1</title>
 <g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L93">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2047" cy="-1252.3452" rx="94.5053" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2047" cy="-1252.3452" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="1988" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1994" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">make_directory/1</text>
 <text text-anchor="start" x="2100" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -312,7 +312,7 @@
 <g id="node15" class="node">
 <title>make_directory_path/1</title>
 <g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L100">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1816" cy="-1252.3452" rx="118.1737" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1816" cy="-1252.3452" rx="118.1737" ry="21.4286"/>
 <text text-anchor="start" x="1741" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1747" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">make_directory_path/1</text>
 <text text-anchor="start" x="1886" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -339,7 +339,7 @@
 <g id="node16" class="node">
 <title>delete_directory/1</title>
 <g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L104">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1576" cy="-1252.3452" rx="103.8894" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1576" cy="-1252.3452" rx="103.8894" ry="21.4286"/>
 <text text-anchor="start" x="1511" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1517" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">delete_directory/1</text>
 <text text-anchor="start" x="1636" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -366,7 +366,7 @@
 <g id="node17" class="node">
 <title>change_directory/1</title>
 <g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L108">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1350" cy="-1252.3452" rx="103.8894" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1350" cy="-1252.3452" rx="103.8894" ry="21.4286"/>
 <text text-anchor="start" x="1285" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1291" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">change_directory/1</text>
 <text text-anchor="start" x="1410" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -393,7 +393,7 @@
 <g id="node18" class="node">
 <title>directory_files/2</title>
 <g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L115">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2267" cy="-1440.7716" rx="99.9045" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2267" cy="-1440.7716" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="2205" y="-1443.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2211" y="-1442.9716" font-family="Courier,monospace" font-size="11.00" fill="#000000">directory_files/2</text>
 <text text-anchor="start" x="2324" y="-1443.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -420,7 +420,7 @@
 <g id="node19" class="node">
 <title>directory_exists/1</title>
 <g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L119">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2707" cy="-1252.3452" rx="103.8894" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2707" cy="-1252.3452" rx="103.8894" ry="21.4286"/>
 <text text-anchor="start" x="2642" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2648" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">directory_exists/1</text>
 <text text-anchor="start" x="2767" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -447,7 +447,7 @@
 <g id="node20" class="node">
 <title>file_exists/1</title>
 <g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L123">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2504" cy="-1252.3452" rx="80.7205" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2504" cy="-1252.3452" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="2455" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2461" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">file_exists/1</text>
 <text text-anchor="start" x="2547" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -474,7 +474,7 @@
 <g id="node21" class="node">
 <title>file_modification_time/2</title>
 <g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L127">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1096" cy="-1252.3452" rx="132.4583" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1096" cy="-1252.3452" rx="132.4583" ry="21.4286"/>
 <text text-anchor="start" x="1011" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1017" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">file_modification_time/2</text>
 <text text-anchor="start" x="1176" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -501,7 +501,7 @@
 <g id="node22" class="node">
 <title>file_size/2</title>
 <g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L131">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="685" cy="-1252.3452" rx="71.3357" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="685" cy="-1252.3452" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="643" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="649" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">file_size/2</text>
 <text text-anchor="start" x="722" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -528,7 +528,7 @@
 <g id="node23" class="node">
 <title>file_permission/2</title>
 <g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L135">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="496" cy="-1252.3452" rx="99.9045" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="496" cy="-1252.3452" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="434" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="440" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">file_permission/2</text>
 <text text-anchor="start" x="553" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -555,7 +555,7 @@
 <g id="node24" class="node">
 <title>rename_file/2</title>
 <g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L139">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="298" cy="-1252.3452" rx="80.7205" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="298" cy="-1252.3452" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="249" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="255" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">rename_file/2</text>
 <text text-anchor="start" x="341" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -582,7 +582,7 @@
 <g id="node25" class="node">
 <title>delete_file/1</title>
 <g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L144">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="119" cy="-1252.3452" rx="80.7205" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="119" cy="-1252.3452" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="70" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="76" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">delete_file/1</text>
 <text text-anchor="start" x="162" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -609,7 +609,7 @@
 <g id="node26" class="node">
 <title>date_time/7</title>
 <g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L154">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1157" cy="-1762.6245" rx="71.3357" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1157" cy="-1762.6245" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="1115" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1121" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">date_time/7</text>
 <text text-anchor="start" x="1194" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -623,7 +623,7 @@
 <g id="node27" class="node">
 <title>wall_time/1</title>
 <g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L163">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="996" cy="-1762.6245" rx="71.3357" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="996" cy="-1762.6245" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="954" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="960" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">wall_time/1</text>
 <text text-anchor="start" x="1033" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -637,7 +637,7 @@
 <g id="node28" class="node">
 <title>operating_system_type/1</title>
 <g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L167">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="779" cy="-1762.6245" rx="127.0588" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="779" cy="-1762.6245" rx="127.0588" ry="21.4286"/>
 <text text-anchor="start" x="697" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="703" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">operating_system_type/1</text>
 <text text-anchor="start" x="855" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -651,7 +651,7 @@
 <g id="node29" class="node">
 <title>decompose_file_name/3</title>
 <g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1683" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1683">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1742" cy="-549.066" rx="118.1737" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1742" cy="-549.066" rx="118.1737" ry="21.4286"/>
 <text text-anchor="start" x="1667" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1673" y="-551.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">decompose_file_name/3</text>
 <text text-anchor="start" x="1812" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -665,7 +665,7 @@
 <g id="node31" class="node">
 <title>strrch/3</title>
 <g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1713" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1713">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1425" cy="-314.6396" rx="57.0522" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1425" cy="-314.6396" rx="57.0522" ry="21.4286"/>
 <text text-anchor="start" x="1393" y="-317.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1399" y="-316.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">strrch/3</text>
 <text text-anchor="start" x="1452" y="-317.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -705,7 +705,7 @@
 <g id="node32" class="node">
 <title>strrch1/4</title>
 <g id="a_node32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1720" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1720">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1425" cy="-80.2132" rx="62.4516" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1425" cy="-80.2132" rx="62.4516" ry="21.4286"/>
 <text text-anchor="start" x="1389" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1395" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">strrch1/4</text>
 <text text-anchor="start" x="1455" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -732,7 +732,7 @@
 <g id="node33" class="node">
 <title>directory_files/3</title>
 <g id="a_node33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1727" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1727">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="534" cy="-1762.6245" rx="99.9045" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="534" cy="-1762.6245" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="472" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="478" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">directory_files/3</text>
 <text text-anchor="start" x="591" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -772,7 +772,7 @@
 <g id="node34" class="node">
 <title>filter_regular/3</title>
 <g id="a_node34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1771" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1771">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="1972" cy="-1528.1981" rx="94.5053" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="1972" cy="-1528.1981" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="1913" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1919" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">filter_regular/3</text>
 <text text-anchor="start" x="2025" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -799,7 +799,7 @@
 <g id="node35" class="node">
 <title>filter_directories/3</title>
 <g id="a_node35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1780" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1780">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2697" cy="-1528.1981" rx="113.6886" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2697" cy="-1528.1981" rx="113.6886" ry="21.4286"/>
 <text text-anchor="start" x="2625" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2631" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">filter_directories/3</text>
 <text text-anchor="start" x="2764" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -826,7 +826,7 @@
 <g id="node36" class="node">
 <title>filter_extensions/3</title>
 <g id="a_node36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1789" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1789">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="307" cy="-1528.1981" rx="108.789" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="307" cy="-1528.1981" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="238" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="244" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">filter_extensions/3</text>
 <text text-anchor="start" x="370" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -853,7 +853,7 @@
 <g id="node37" class="node">
 <title>filter_prefixes/3</title>
 <g id="a_node37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1798" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1798">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="534" cy="-1528.1981" rx="99.9045" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="534" cy="-1528.1981" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="472" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="478" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">filter_prefixes/3</text>
 <text text-anchor="start" x="591" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -880,7 +880,7 @@
 <g id="node38" class="node">
 <title>filter_suffixes/3</title>
 <g id="a_node38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1807" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1807">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="751" cy="-1528.1981" rx="99.9045" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="751" cy="-1528.1981" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="689" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="695" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">filter_suffixes/3</text>
 <text text-anchor="start" x="808" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -907,7 +907,7 @@
 <g id="node39" class="node">
 <title>filter_dot_files/2</title>
 <g id="a_node39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1816" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1816">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2189" cy="-1528.1981" rx="103.8894" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2189" cy="-1528.1981" rx="103.8894" ry="21.4286"/>
 <text text-anchor="start" x="2124" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2130" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">filter_dot_files/2</text>
 <text text-anchor="start" x="2249" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -934,7 +934,7 @@
 <g id="node40" class="node">
 <title>expand_relative_paths/3</title>
 <g id="a_node40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1824" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/os.lgt#L1824">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="2438" cy="-1528.1981" rx="127.0588" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="2438" cy="-1528.1981" rx="127.0588" ry="21.4286"/>
 <text text-anchor="start" x="2356" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2362" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">expand_relative_paths/3</text>
 <text text-anchor="start" x="2514" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -961,7 +961,7 @@
 <g id="node41" class="node">
 <title>list::member/2</title>
 <g id="a_node41"><a xlink:href="https://logtalk.org/library/list_0.html#member/2" xlink:title="https://logtalk.org/library/list_0.html#member/2">
-<ellipse fill="#eee8cd" stroke="#000000" stroke-dasharray="5,2" cx="860" cy="-1252.3452" rx="85.6199" ry="21.4286"/>
+<ellipse fill="#f5f5dc" stroke="#000000" stroke-dasharray="5,2" cx="860" cy="-1252.3452" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="808" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="814" y="-1254.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">list::member/2</text>
 <text text-anchor="start" x="907" y="-1255.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>

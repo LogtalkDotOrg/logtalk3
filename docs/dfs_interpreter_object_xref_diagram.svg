@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-611.2792 382,-611.2792 382,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 10:26</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 11:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_dfs_interpreter_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt">
@@ -24,7 +24,7 @@
 <g id="node1" class="node">
 <title>prove/2</title>
 <g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L12" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L12">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="251" cy="-549.066" rx="53.066" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="251" cy="-549.066" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="222" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="228" y="-551.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">prove/2</text>
 <text text-anchor="start" x="275" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -38,7 +38,7 @@
 <g id="node3" class="node">
 <title>prove_body/3</title>
 <g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L18" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L18">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="189" cy="-314.6396" rx="76.2353" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="189" cy="-314.6396" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="143" y="-317.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="149" y="-316.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">prove_body/3</text>
 <text text-anchor="start" x="229" y="-317.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -65,7 +65,7 @@
 <g id="node2" class="node">
 <title>prove/3</title>
 <g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L15" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L15">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="125" cy="-549.066" rx="53.066" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="125" cy="-549.066" rx="53.066" ry="21.4286"/>
 <text text-anchor="start" x="96" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="102" y="-551.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">prove/3</text>
 <text text-anchor="start" x="149" y="-551.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -105,7 +105,7 @@
 <g id="node4" class="node">
 <title>rule/4</title>
 <g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L33">
-<ellipse fill="#f5f5dc" stroke="#000000" cx="66" cy="-80.2132" rx="48.1667" ry="21.4286"/>
+<ellipse fill="#fff8dc" stroke="#000000" cx="66" cy="-80.2132" rx="48.1667" ry="21.4286"/>
 <text text-anchor="start" x="40" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="46" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">rule/4</text>
 <text text-anchor="start" x="86" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
@@ -132,7 +132,7 @@
 <g id="node5" class="node">
 <title>counter::increment/0</title>
 <g id="a_node5"><a xlink:href="https://logtalk.org/library/counter_0.html#increment/0" xlink:title="https://logtalk.org/library/counter_0.html#increment/0">
-<ellipse fill="#eee8cd" stroke="#000000" stroke-dasharray="5,2" cx="246" cy="-80.2132" rx="113.6886" ry="21.4286"/>
+<ellipse fill="#f5f5dc" stroke="#000000" stroke-dasharray="5,2" cx="246" cy="-80.2132" rx="113.6886" ry="21.4286"/>
 <text text-anchor="start" x="174" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="180" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">counter::increment/0</text>
 <text text-anchor="start" x="313" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>

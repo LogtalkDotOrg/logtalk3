@@ -99,6 +99,8 @@ URL prefix is defined.
 
 * FIXED: Label for root directory in directory diagrams.
 
+* FIXED: Use only SVG colors for diagram elements.
+
 Ports
 -----
 
