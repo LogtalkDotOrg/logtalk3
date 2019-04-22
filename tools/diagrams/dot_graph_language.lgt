@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.22,
+		version is 2.23,
 		author is 'Paulo Moura',
-		date is 2019/04/21,
+		date is 2019/04/22,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -204,7 +204,7 @@
 	node_shape_style_color(external_instance_and_class, box, 'filled,dashed', lightgoldenrodyellow).
 	node_shape_style_color(external_protocol, note, 'filled,dashed', mediumaquamarine).
 	node_shape_style_color(external_category, component, 'filled,dashed', cyan).
-	node_shape_style_color(external_module, tab, 'filled,dashed', orchid).
+	node_shape_style_color(external_module, tab, 'filled,dashed', thistle).
 	node_shape_style_color(external_file, box, 'filled,dashed', powderblue).
 	node_shape_style_color(external_directory, box3d, 'filled,dashed', lightgoldenrodyellow).
 	node_shape_style_color(external_library, box3d, 'filled,dashed', lightgoldenrodyellow).
