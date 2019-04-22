@@ -32,7 +32,7 @@
 	func_test(Atom1, Atom2, Condition):-
 		Atom1 = [P,In/B,_/[]],
 		Atom2 = [P,In/Z,_/[]],
-		Condition = (Z \= B).
+		Condition = (Z = B).
 
 	%% term ordering for recursive metarule that ensures that with each iteration the length of the string decreases
 	:- public(term_gt/2).

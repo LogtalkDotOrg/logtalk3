@@ -41,7 +41,7 @@
 	extends(metagol)).
 
 	%% metagol settings
-	functional.
+	%% functional.
 	max_clauses(10).
 	unfold_program.
 
@@ -61,7 +61,7 @@
 	func_test(Atom1, Atom2, Condition):-
 		Atom1 = [P,A,B],
 		Atom2 = [P,A,Z],
-		Condition = (Z \= B).
+		Condition = (Z = B).
 
 	%% robot learning to move a ball to a specific position
 	:- public(learn1/1).

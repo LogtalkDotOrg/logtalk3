@@ -69,7 +69,7 @@
 	func_test(Atom1, Atom2, Condition):-
 		Atom1 = [P,A,B],
 		Atom2 = [P,A,Z],
-		Condition = (Z \= B).
+		Condition = (Z = B).
 
 	:- public(learn/1).
 	learn(Clauses) :-

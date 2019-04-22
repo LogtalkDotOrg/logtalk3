@@ -196,7 +196,7 @@
 	            	::func_test(Atom2,TestAtom2,Condition),
 	            	make_atom(TestAtom2,TestAtom1),
 	            	deduce_atom(TestAtom1,Sig,Prog),
-	            	call(Condition)
+	            	\+ call(Condition)
 				)
 			)
 		;	true
@@ -292,11 +292,6 @@
 			Clause2=(H:-T)
 		;	Clause2=Clause1
 		).
-
-%	metasub_to_clause_list(sub(Name,_,_,Subs,_),[HeadList|BodyAsList2]) :-
-%		::metarule_init(Name,Subs,_,HeadList,BodyAsList1,_,_),
-%		add_path_to_body(BodyAsList3,_,BodyAsList1,_),
-%		filter(no_ordering,BodyAsList3,BodyAsList2).
 
 	no_ordering(H) :-
 		H \= '@'(_).
