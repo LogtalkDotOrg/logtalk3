@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-2293.6905 5342.3676,-2293.6905 5342.3676,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk ports of third&#45;party software</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/21, 11:31</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 12:06</text>
 <g id="clust1" class="cluster">
 <title>cluster_metagol_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt">
@@ -248,12 +248,12 @@
 <!-- learn_seq/2&#45;&gt;map/3+learn_task#0/3 -->
 <g id="edge51" class="edge">
 <title>learn_seq/2&#45;&gt;map/3+learn_task#0/3</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M5036.56,-1741.8207C5073.7023,-1699.3469 5158.2327,-1602.6827 5199.6311,-1555.3418"/>
 <polygon fill="#000000" stroke="#000000" points="5199.8784,-1555.0589 5200.8171,-1547.9091 5207.7779,-1546.0256 5199.8784,-1555.0589"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425">
 <text text-anchor="start" x="5124.3676" y="-1643.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -275,12 +275,12 @@
 <!-- learn_seq/2&#45;&gt;meta::maplist/3 -->
 <g id="edge95" class="edge">
 <title>learn_seq/2&#45;&gt;meta::maplist/3</title>
-<g id="a_edge95"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430" xlink:title="calls">
+<g id="a_edge95"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M4951.1141,-1755.4533C4814.6577,-1740.3721 4495.7722,-1702.4244 4231.3676,-1650.4113 4081.6413,-1620.9574 3908.9318,-1574.3511 3815.3484,-1548.0207"/>
 <polygon fill="#000000" stroke="#000000" points="3815.3318,-1548.0161 3808.4709,-1550.2359 3803.783,-1544.7565 3815.3318,-1548.0161"/>
 </a>
 </g>
-<g id="a_edge95&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430">
+<g id="a_edge95&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425">
 <text text-anchor="start" x="4231.3676" y="-1643.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -302,12 +302,12 @@
 <!-- learn_seq/2&#45;&gt;list::flatten/2 -->
 <g id="edge96" class="edge">
 <title>learn_seq/2&#45;&gt;list::flatten/2</title>
-<g id="a_edge96"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430" xlink:title="calls">
+<g id="a_edge96"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M5018.3676,-1741.4072C5018.3676,-1700.5398 5018.3676,-1610.6228 5018.3676,-1561.6268"/>
 <polygon fill="#000000" stroke="#000000" points="5018.3677,-1561.5363 5014.3677,-1555.5363 5018.3676,-1549.5363 5018.3677,-1561.5363"/>
 </a>
 </g>
-<g id="a_edge96&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L430">
+<g id="a_edge96&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425">
 <text text-anchor="start" x="5018.3676" y="-1643.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -715,7 +715,7 @@
 <!-- prim_asserts/2 -->
 <g id="node58" class="node">
 <title>prim_asserts/2</title>
-<g id="a_node58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L425">
+<g id="a_node58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L420" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L420">
 <ellipse fill="#fff8dc" stroke="#000000" cx="4573.3676" cy="-1528.1981" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="4521.3676" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="4527.3676" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">prim_asserts/2</text>
@@ -729,12 +729,12 @@
 <!-- assert_prim/1&#45;&gt;prim_asserts/2 -->
 <g id="edge49" class="edge">
 <title>assert_prim/1&#45;&gt;prim_asserts/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M4573.3676,-1741.4072C4573.3676,-1700.5398 4573.3676,-1610.6228 4573.3676,-1561.6268"/>
 <polygon fill="#000000" stroke="#000000" points="4573.3677,-1561.5363 4569.3677,-1555.5363 4573.3676,-1549.5363 4573.3677,-1561.5363"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408">
 <text text-anchor="start" x="4573.3676" y="-1643.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -750,12 +750,12 @@
 <!-- assert_prim/1&#45;&gt;map/2+assert_prim_aux#0/2 -->
 <g id="edge50" class="edge">
 <title>assert_prim/1&#45;&gt;map/2+assert_prim_aux#0/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M4592.8911,-1741.8207C4632.8345,-1699.258 4723.8465,-1602.278 4768.1725,-1555.0453"/>
 <polygon fill="#000000" stroke="#000000" points="4768.4253,-1554.7759 4769.6145,-1547.6635 4776.6371,-1546.0256 4768.4253,-1554.7759"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408">
 <text text-anchor="start" x="4687.3676" y="-1643.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -763,12 +763,12 @@
 <!-- assert_prim/1&#45;&gt;meta::maplist/2 -->
 <g id="edge94" class="edge">
 <title>assert_prim/1&#45;&gt;meta::maplist/2</title>
-<g id="a_edge94"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413" xlink:title="calls">
+<g id="a_edge94"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M4538.2607,-1743.4404C4461.2109,-1701.3366 4277.2888,-1600.8326 4190.8077,-1553.5751"/>
 <polygon fill="#000000" stroke="#000000" points="4190.7924,-1553.5668 4183.6091,-1554.1998 4180.262,-1547.8125 4190.7924,-1553.5668"/>
 </a>
 </g>
-<g id="a_edge94&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L413">
+<g id="a_edge94&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L408">
 <text text-anchor="start" x="4367.3676" y="-1643.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -804,13 +804,13 @@
 <!-- retract_prim/1&#45;&gt;::prim/1 -->
 <g id="edge109" class="edge">
 <title>retract_prim/1&#45;&gt;::prim/1</title>
-<g id="a_edge109"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L420" xlink:title="updates in self">
+<g id="a_edge109"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415" xlink:title="updates in self">
 <path fill="none" stroke="#000000" d="M1585.5462,-1507.7391C1563.668,-1486.8314 1531.3846,-1452.352 1513.3676,-1415.9848 1498.1482,-1385.2644 1491.4329,-1345.9887 1488.5203,-1320.3723"/>
 <polygon fill="#000000" stroke="#000000" points="1483.0906,-1316.6511 1493.0331,-1315.5802 1493.2473,-1317.5687 1483.3048,-1318.6396 1483.0906,-1316.6511"/>
 <polyline fill="none" stroke="#000000" points="1487.9548,-1315.1214 1488.4902,-1320.0926 "/>
 </a>
 </g>
-<g id="a_edge109&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L420" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L420">
+<g id="a_edge109&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415">
 <text text-anchor="start" x="1513.3676" y="-1408.7848" font-family="Courier,monospace" font-size="9.00" fill="#000000">updates in self</text>
 </a>
 </g>
@@ -832,13 +832,13 @@
 <!-- retract_prim/1&#45;&gt;::primcall/2 -->
 <g id="edge110" class="edge">
 <title>retract_prim/1&#45;&gt;::primcall/2</title>
-<g id="a_edge110"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L420" xlink:title="updates in self">
+<g id="a_edge110"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415" xlink:title="updates in self">
 <path fill="none" stroke="#000000" d="M1633.8147,-1507.7146C1656.9719,-1487.2927 1689.5786,-1453.6128 1703.3676,-1415.9848 1715.3031,-1383.4147 1700.2776,-1344.4425 1687.0485,-1319.4097"/>
 <polygon fill="#000000" stroke="#000000" points="1680.6865,-1318.1638 1689.4787,-1313.3995 1690.4315,-1315.158 1681.6393,-1319.9223 1680.6865,-1318.1638"/>
 <polyline fill="none" stroke="#000000" points="1684.6061,-1314.9025 1686.9883,-1319.2986 "/>
 </a>
 </g>
-<g id="a_edge110&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L420" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L420">
+<g id="a_edge110&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415">
 <text text-anchor="start" x="1705.3676" y="-1408.7848" font-family="Courier,monospace" font-size="9.00" fill="#000000">updates in self</text>
 </a>
 </g>
@@ -860,7 +860,7 @@
 <!-- atom_to_list/2 -->
 <g id="node24" class="node">
 <title>atom_to_list/2</title>
-<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L312">
+<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L307">
 <ellipse fill="#fff8dc" stroke="#000000" cx="2105.3676" cy="-2231.4773" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="2053.3676" y="-2234.2773" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2059.3676" y="-2233.6773" font-family="Courier,monospace" font-size="11.00" fill="#000000">atom_to_list/2</text>
@@ -874,7 +874,7 @@
 <!-- list_to_atom/2 -->
 <g id="node25" class="node">
 <title>list_to_atom/2</title>
-<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L309">
+<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L304">
 <ellipse fill="#fff8dc" stroke="#000000" cx="1897.3676" cy="-2231.4773" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="1845.3676" y="-2234.2773" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1851.3676" y="-2233.6773" font-family="Courier,monospace" font-size="11.00" fill="#000000">list_to_atom/2</text>
@@ -1531,7 +1531,7 @@
 <!-- get_option/1 -->
 <g id="node50" class="node">
 <title>get_option/1</title>
-<g id="a_node50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L325">
+<g id="a_node50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L320">
 <ellipse fill="#fff8dc" stroke="#000000" cx="1836.3676" cy="-1059.3452" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="1790.3676" y="-1062.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1796.3676" y="-1061.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">get_option/1</text>
@@ -1865,7 +1865,7 @@
 <!-- list_to_clause/2 -->
 <g id="node47" class="node">
 <title>list_to_clause/2</title>
-<g id="a_node47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L304">
+<g id="a_node47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L299">
 <ellipse fill="#fff8dc" stroke="#000000" cx="3522.3676" cy="-1528.1981" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="3463.3676" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="3469.3676" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">list_to_clause/2</text>
@@ -1892,7 +1892,7 @@
 <!-- add_path_to_body/4 -->
 <g id="node55" class="node">
 <title>add_path_to_body/4</title>
-<g id="a_node55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L396">
+<g id="a_node55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L391">
 <ellipse fill="#fff8dc" stroke="#000000" cx="369.3676" cy="-1293.7716" rx="103.8894" ry="21.4286"/>
 <text text-anchor="start" x="304.3676" y="-1296.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="310.3676" y="-1295.9716" font-family="Courier,monospace" font-size="11.00" fill="#000000">add_path_to_body/4</text>
@@ -1993,7 +1993,7 @@
 <!-- no_ordering/1 -->
 <g id="node46" class="node">
 <title>no_ordering/1</title>
-<g id="a_node46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L301">
+<g id="a_node46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L296">
 <ellipse fill="#fff8dc" stroke="#000000" cx="1674.3676" cy="-2231.4773" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="1625.3676" y="-2234.2773" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1631.3676" y="-2233.6773" font-family="Courier,monospace" font-size="11.00" fill="#000000">no_ordering/1</text>
@@ -2007,7 +2007,7 @@
 <!-- is_functional/3 -->
 <g id="node48" class="node">
 <title>is_functional/3</title>
-<g id="a_node48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315">
+<g id="a_node48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L310">
 <ellipse fill="#fff8dc" stroke="#000000" cx="3130.3676" cy="-1528.1981" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="3074.3676" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="3080.3676" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_functional/3</text>
@@ -2021,7 +2021,7 @@
 <!-- is_functional_aux/3 -->
 <g id="node49" class="node">
 <title>is_functional_aux/3</title>
-<g id="a_node49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L320">
+<g id="a_node49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315">
 <ellipse fill="#fff8dc" stroke="#000000" cx="2217.3676" cy="-1293.7716" rx="108.789" ry="21.4286"/>
 <text text-anchor="start" x="2148.3676" y="-1296.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="2154.3676" y="-1295.9716" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_functional_aux/3</text>
@@ -2035,12 +2035,12 @@
 <!-- is_functional/3&#45;&gt;is_functional_aux/3 -->
 <g id="edge40" class="edge">
 <title>is_functional/3&#45;&gt;is_functional_aux/3</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L310" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M3064.1399,-1513.6395C3053.2062,-1511.3418 3041.9795,-1509.0464 3031.3676,-1506.9848 2917.1061,-1484.787 2886.6138,-1488.8873 2773.3676,-1461.9848 2593.1526,-1419.1734 2385.3286,-1351.2044 2282.2797,-1316.2148"/>
 <polygon fill="#000000" stroke="#000000" points="2282.1994,-1316.1875 2275.2303,-1318.0401 2270.8398,-1312.3196 2282.1994,-1316.1875"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L310">
 <text text-anchor="start" x="2592.3676" y="-1408.7848" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2048,12 +2048,12 @@
 <!-- is_functional/3&#45;&gt;get_option/1 -->
 <g id="edge39" class="edge">
 <title>is_functional/3&#45;&gt;get_option/1</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L310" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M3065.3952,-1513.3198C2963.6868,-1489.1104 2778.3676,-1440.8953 2778.3676,-1410.9848 2778.3676,-1410.9848 2778.3676,-1410.9848 2778.3676,-1176.5584 2778.3676,-1091.0519 2159.2681,-1067.1493 1924.8646,-1061.1637"/>
 <polygon fill="#000000" stroke="#000000" points="1924.6538,-1061.1585 1918.5559,-1065.0077 1912.6575,-1060.8594 1924.6538,-1061.1585"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L315">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L310">
 <text text-anchor="start" x="2778.3676" y="-1291.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2061,12 +2061,12 @@
 <!-- is_functional_aux/3&#45;&gt;func_test/3 -->
 <g id="edge68" class="edge">
 <title>is_functional_aux/3&#45;&gt;func_test/3</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L321" xlink:title="calls in self">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L316" xlink:title="calls in self">
 <path fill="none" stroke="#000000" d="M2138.7616,-1279.0172C2125.6276,-1276.731 2112.1272,-1274.4905 2099.3676,-1272.5584 1772.6083,-1223.08 1682.3655,-1260.1721 1361.3676,-1181.5584 1308.035,-1168.4971 1166.3773,-1112.6981 1088.1475,-1081.2049"/>
 <polygon fill="none" stroke="#000000" points="1087.7506,-1081.0449 1080.6899,-1082.5101 1076.6218,-1076.5561 1087.7506,-1081.0449"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L321">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L316">
 <text text-anchor="start" x="1361.3676" y="-1174.3584" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls in self</text>
 </a>
 </g>
@@ -2074,12 +2074,12 @@
 <!-- get_option/1&#45;&gt;default/1 -->
 <g id="edge41" class="edge">
 <title>get_option/1&#45;&gt;default/1</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L328" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L323" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1836.3676,-1038.128C1836.3676,-997.2606 1836.3676,-907.3436 1836.3676,-858.3476"/>
 <polygon fill="#000000" stroke="#000000" points="1836.3677,-858.257 1832.3677,-852.2571 1836.3676,-846.257 1836.3677,-858.257"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L328">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L323" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L323">
 <text text-anchor="start" x="1836.3676" y="-939.932" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2087,7 +2087,7 @@
 <!-- set_option/1 -->
 <g id="node51" class="node">
 <title>set_option/1</title>
-<g id="a_node51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L331">
+<g id="a_node51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L326">
 <ellipse fill="#fff8dc" stroke="#000000" cx="1200.3676" cy="-1059.3452" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="1154.3676" y="-1062.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1160.3676" y="-1061.5452" font-family="Courier,monospace" font-size="11.00" fill="#000000">set_option/1</text>
@@ -2101,7 +2101,7 @@
 <!-- term_expansion/2 -->
 <g id="node52" class="node">
 <title>term_expansion/2</title>
-<g id="a_node52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L337">
+<g id="a_node52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L332">
 <ellipse fill="#fff8dc" stroke="#000000" cx="204.3676" cy="-1762.6245" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="145.3676" y="-1765.4245" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="151.3676" y="-1764.8245" font-family="Courier,monospace" font-size="11.00" fill="#000000">term_expansion/2</text>
@@ -2115,7 +2115,7 @@
 <!-- get_asserts/7 -->
 <g id="node53" class="node">
 <title>get_asserts/7</title>
-<g id="a_node53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379">
+<g id="a_node53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374">
 <ellipse fill="#fff8dc" stroke="#000000" cx="220.3676" cy="-1528.1981" rx="80.7205" ry="21.4286"/>
 <text text-anchor="start" x="171.3676" y="-1530.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="177.3676" y="-1530.3981" font-family="Courier,monospace" font-size="11.00" fill="#000000">get_asserts/7</text>
@@ -2129,12 +2129,12 @@
 <!-- term_expansion/2&#45;&gt;get_asserts/7 -->
 <g id="edge43" class="edge">
 <title>term_expansion/2&#45;&gt;get_asserts/7</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L361" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L356" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M205.8157,-1741.4072C208.605,-1700.5398 214.742,-1610.6228 218.086,-1561.6268"/>
 <polygon fill="#000000" stroke="#000000" points="218.094,-1561.5084 214.5119,-1555.2499 218.9112,-1549.5363 218.094,-1561.5084"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L361">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L356">
 <text text-anchor="start" x="212.3676" y="-1643.2113" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2142,12 +2142,12 @@
 <!-- term_expansion/2&#45;&gt;add_path_to_body/4 -->
 <g id="edge42" class="edge">
 <title>term_expansion/2&#45;&gt;add_path_to_body/4</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L357" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L352" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M166.7881,-1742.9552C134.5861,-1723.0939 93.3676,-1689.1321 93.3676,-1645.4113 93.3676,-1645.4113 93.3676,-1645.4113 93.3676,-1461.4848 93.3676,-1373.6207 196.7861,-1330.4824 277.0116,-1310.2369"/>
 <polygon fill="#000000" stroke="#000000" points="277.5026,-1310.1182 282.394,-1304.8197 289.1662,-1307.297 277.5026,-1310.1182"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L357">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L352">
 <text text-anchor="start" x="93.3676" y="-1525.9981" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2155,7 +2155,7 @@
 <!-- is_recursive/3 -->
 <g id="node54" class="node">
 <title>is_recursive/3</title>
-<g id="a_node54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L389">
+<g id="a_node54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L384" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L384">
 <ellipse fill="#fff8dc" stroke="#000000" cx="161.3676" cy="-1293.7716" rx="85.6199" ry="21.4286"/>
 <text text-anchor="start" x="109.3676" y="-1296.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="115.3676" y="-1295.9716" font-family="Courier,monospace" font-size="11.00" fill="#000000">is_recursive/3</text>
@@ -2169,12 +2169,12 @@
 <!-- get_asserts/7&#45;&gt;is_recursive/3 -->
 <g id="edge44" class="edge">
 <title>get_asserts/7&#45;&gt;is_recursive/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M215.0277,-1506.9808C204.7204,-1466.0264 182.0158,-1375.8136 169.7023,-1326.8882"/>
 <polygon fill="#000000" stroke="#000000" points="169.6668,-1326.7469 164.3234,-1321.9047 166.738,-1315.1098 169.6668,-1326.7469"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374">
 <text text-anchor="start" x="191.3676" y="-1408.7848" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2182,12 +2182,12 @@
 <!-- get_asserts/7&#45;&gt;add_path_to_body/4 -->
 <g id="edge45" class="edge">
 <title>get_asserts/7&#45;&gt;add_path_to_body/4</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M233.8532,-1506.9808C260.1598,-1465.5917 318.4432,-1373.8927 349.3003,-1325.3442"/>
 <polygon fill="#000000" stroke="#000000" points="349.3682,-1325.2373 349.2108,-1318.0279 355.8052,-1315.1098 349.3682,-1325.2373"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374">
 <text text-anchor="start" x="297.3676" y="-1408.7848" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2195,7 +2195,7 @@
 <!-- gen_metarule_id/2 -->
 <g id="node56" class="node">
 <title>gen_metarule_id/2</title>
-<g id="a_node56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L403">
+<g id="a_node56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L398" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L398">
 <ellipse fill="#fff8dc" stroke="#000000" cx="1211.3676" cy="-1293.7716" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="1149.3676" y="-1296.5716" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1155.3676" y="-1295.9716" font-family="Courier,monospace" font-size="11.00" fill="#000000">gen_metarule_id/2</text>
@@ -2209,12 +2209,12 @@
 <!-- get_asserts/7&#45;&gt;gen_metarule_id/2 -->
 <g id="edge46" class="edge">
 <title>get_asserts/7&#45;&gt;gen_metarule_id/2</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M280.4968,-1513.9742C451.4902,-1473.5248 940.5291,-1357.8399 1132.5806,-1312.4091"/>
 <polygon fill="#000000" stroke="#000000" points="1132.8434,-1312.347 1137.7615,-1307.0732 1144.5212,-1309.5845 1132.8434,-1312.347"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L379">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L374">
 <text text-anchor="start" x="736.3676" y="-1408.7848" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2222,12 +2222,12 @@
 <!-- add_path_to_body/4&#45;&gt;list::length/2 -->
 <g id="edge92" class="edge">
 <title>add_path_to_body/4&#45;&gt;list::length/2</title>
-<g id="a_edge92"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L399" xlink:title="calls">
+<g id="a_edge92"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L394" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M433.8403,-1276.8927C481.2172,-1260.145 537.3676,-1229.1931 537.3676,-1176.5584 537.3676,-1176.5584 537.3676,-1176.5584 537.3676,-942.132 537.3676,-906.5596 563.5236,-874.7572 587.1524,-853.2852"/>
 <polygon fill="#000000" stroke="#000000" points="587.2971,-853.1596 589.208,-846.2063 596.3614,-845.2958 587.2971,-853.1596"/>
 </a>
 </g>
-<g id="a_edge92&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L399">
+<g id="a_edge92&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L394" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L394">
 <text text-anchor="start" x="537.3676" y="-1057.1452" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2235,12 +2235,12 @@
 <!-- gen_metarule_id/2&#45;&gt;get_option/1 -->
 <g id="edge47" class="edge">
 <title>gen_metarule_id/2&#45;&gt;get_option/1</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1223.6718,-1272.5491C1242.3009,-1241.1349 1277.5836,-1184.5607 1297.3676,-1171.5584 1371.5825,-1122.7836 1622.0517,-1085.6932 1753.7949,-1069.0235"/>
 <polygon fill="#000000" stroke="#000000" points="1753.8703,-1069.0141 1759.3265,-1064.2992 1765.7772,-1067.5222 1753.8703,-1069.0141"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401">
 <text text-anchor="start" x="1297.3676" y="-1174.3584" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2248,12 +2248,12 @@
 <!-- gen_metarule_id/2&#45;&gt;set_option/1 -->
 <g id="edge48" class="edge">
 <title>gen_metarule_id/2&#45;&gt;set_option/1</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1210.372,-1272.5544C1208.4544,-1231.687 1204.2352,-1141.77 1201.9362,-1092.774"/>
 <polygon fill="#000000" stroke="#000000" points="1201.9314,-1092.6702 1197.6545,-1086.8644 1201.3689,-1080.6834 1201.9314,-1092.6702"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401">
 <text text-anchor="start" x="1205.3676" y="-1174.3584" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2261,12 +2261,12 @@
 <!-- gen_metarule_id/2&#45;&gt;integer::succ/2 -->
 <g id="edge93" class="edge">
 <title>gen_metarule_id/2&#45;&gt;integer::succ/2</title>
-<g id="a_edge93"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406" xlink:title="calls">
+<g id="a_edge93"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1225.2228,-1272.7176C1252.133,-1229.2036 1307.0057,-1126.0686 1285.3676,-1038.132 1213.5234,-746.1595 1000.6603,-441.48 929.6906,-345.4725"/>
 <polygon fill="#000000" stroke="#000000" points="929.4843,-345.1952 922.6938,-342.7683 922.3223,-335.5668 929.4843,-345.1952"/>
 </a>
 </g>
-<g id="a_edge93&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L406">
+<g id="a_edge93&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L401">
 <text text-anchor="start" x="1219.3676" y="-822.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2274,7 +2274,7 @@
 <!-- assert_prim_aux/1 -->
 <g id="node57" class="node">
 <title>assert_prim_aux/1</title>
-<g id="a_node57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L417">
+<g id="a_node57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L412" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L412">
 <ellipse fill="#fff8dc" stroke="#000000" cx="1399.3676" cy="-2231.4773" rx="99.9045" ry="21.4286"/>
 <text text-anchor="start" x="1337.3676" y="-2234.2773" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1343.3676" y="-2233.6773" font-family="Courier,monospace" font-size="11.00" fill="#000000">assert_prim_aux/1</text>
@@ -2288,7 +2288,7 @@
 <!-- learn_task/2 -->
 <g id="node59" class="node">
 <title>learn_task/2</title>
-<g id="a_node59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434">
+<g id="a_node59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429">
 <ellipse fill="#fff8dc" stroke="#000000" cx="1051.3676" cy="-2231.4773" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="1005.3676" y="-2234.2773" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="1011.3676" y="-2233.6773" font-family="Courier,monospace" font-size="11.00" fill="#000000">learn_task/2</text>
@@ -2302,12 +2302,12 @@
 <!-- learn_task/2&#45;&gt;learn/3 -->
 <g id="edge52" class="edge">
 <title>learn_task/2&#45;&gt;learn/3</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1051.3676,-2210.26C1051.3676,-2169.3926 1051.3676,-2079.4756 1051.3676,-2030.4796"/>
 <polygon fill="#000000" stroke="#000000" points="1051.3677,-2030.3891 1047.3677,-2024.3891 1051.3676,-2018.3891 1051.3677,-2030.3891"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429">
 <text text-anchor="start" x="1051.3676" y="-2112.0641" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2315,12 +2315,12 @@
 <!-- learn_task/2&#45;&gt;map/3+metasub_to_clause#0/3 -->
 <g id="edge53" class="edge">
 <title>learn_task/2&#45;&gt;map/3+metasub_to_clause#0/3</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1123.7613,-2224.6328C1171.1376,-2220.257 1234.4043,-2214.6087 1290.3676,-2210.2641 1370.4705,-2204.0454 2733.3676,-2194.6079 2733.3676,-2114.2641 2733.3676,-2114.2641 2733.3676,-2114.2641 2733.3676,-1762.6245 2733.3676,-1684.1194 2689.9538,-1599.5463 2664.4618,-1556.6529"/>
 <polygon fill="#000000" stroke="#000000" points="2664.3331,-1556.4411 2657.7987,-1553.3912 2658.1008,-1546.1864 2664.3331,-1556.4411"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429">
 <text text-anchor="start" x="2733.3676" y="-1877.6377" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2336,12 +2336,12 @@
 <!-- learn_task/2&#45;&gt;map/2+assert_prim#0/2 -->
 <g id="edge54" class="edge">
 <title>learn_task/2&#45;&gt;map/2+assert_prim#0/2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M983.6982,-2221.5316C958.7701,-2217.9154 930.2941,-2213.8403 904.3676,-2210.2641 828.4315,-2199.7896 627.5972,-2205.527 562.3676,-2165.2641 509.5665,-2132.6726 475.5069,-2065.4615 459.3604,-2026.5864"/>
 <polygon fill="#000000" stroke="#000000" points="459.2909,-2026.4125 453.3489,-2022.3269 454.8348,-2015.2705 459.2909,-2026.4125"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429">
 <text text-anchor="start" x="510.3676" y="-2112.0641" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2349,12 +2349,12 @@
 <!-- learn_task/2&#45;&gt;list::member/2 -->
 <g id="edge98" class="edge">
 <title>learn_task/2&#45;&gt;list::member/2</title>
-<g id="a_edge98"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="calls">
+<g id="a_edge98"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1018.7294,-2212.1794C940.888,-2166.6951 737.3886,-2050.9575 557.3676,-1975.8377 497.4412,-1950.8313 478.9458,-1954.2209 418.3676,-1930.8377 371.9738,-1912.9296 361.5596,-1905.5926 316.3676,-1884.8377 220.062,-1840.6083 162.6527,-1869.579 100.3676,-1783.8377 -33.4794,-1599.5846 -20.3591,-1483.1354 66.3676,-1272.5584 168.0278,-1025.7222 347.431,-1072.2225 489.3676,-846.132 500.0015,-829.1933 493.6996,-820.6229 504.3676,-803.7056 534.8767,-755.3248 564.3758,-760.7787 595.3676,-712.7056 647.9465,-631.1476 656.3676,-600.1034 656.3676,-503.066 656.3676,-503.066 656.3676,-503.066 656.3676,-197.4264 656.3676,-168.7285 662.2652,-136.6343 667.6553,-113.2948"/>
 <polygon fill="#000000" stroke="#000000" points="667.6555,-113.2938 665.1773,-106.5218 670.4751,-101.6297 667.6555,-113.2938"/>
 </a>
 </g>
-<g id="a_edge98&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434">
+<g id="a_edge98&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429">
 <text text-anchor="start" x="121.3676" y="-1174.3584" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2362,12 +2362,12 @@
 <!-- learn_task/2&#45;&gt;meta::maplist/3 -->
 <g id="edge97" class="edge">
 <title>learn_task/2&#45;&gt;meta::maplist/3</title>
-<g id="a_edge97"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="calls">
+<g id="a_edge97"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1123.1963,-2224.1373C1170.6139,-2219.5299 1234.1393,-2213.8096 1290.3676,-2210.2641 1669.7081,-2186.3442 2645.3451,-2260.1416 2998.3676,-2119.2641 3329.0063,-1987.319 3632.0716,-1659.8497 3720.495,-1558.5514"/>
 <polygon fill="#000000" stroke="#000000" points="3720.7441,-1558.2644 3721.6543,-1551.1109 3728.6075,-1549.1998 3720.7441,-1558.2644"/>
 </a>
 </g>
-<g id="a_edge97&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434">
+<g id="a_edge97&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429">
 <text text-anchor="start" x="3393.3676" y="-1877.6377" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2375,12 +2375,12 @@
 <!-- learn_task/2&#45;&gt;meta::maplist/2 -->
 <g id="edge100" class="edge">
 <title>learn_task/2&#45;&gt;meta::maplist/2</title>
-<g id="a_edge100"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="calls">
+<g id="a_edge100"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M1122.9241,-2224.0085C1170.3657,-2219.3324 1234.0212,-2213.5839 1290.3676,-2210.2641 1974.8058,-2169.938 2147.3269,-2193.5665 2832.3676,-2165.2641 2938.4285,-2160.8822 3786.3676,-2220.4154 3786.3676,-2114.2641 3786.3676,-2114.2641 3786.3676,-2114.2641 3786.3676,-1930.3377 3786.3676,-1905.671 3776.7447,-1897.5499 3786.3676,-1874.8377 3850.8877,-1722.556 4018.6789,-1604.4092 4099.5284,-1554.334"/>
 <polygon fill="#000000" stroke="#000000" points="4099.639,-1554.2664 4102.6697,-1547.723 4109.8753,-1548.0039 4099.639,-1554.2664"/>
 </a>
 </g>
-<g id="a_edge100&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434">
+<g id="a_edge100&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429">
 <text text-anchor="start" x="3786.3676" y="-1877.6377" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2402,12 +2402,12 @@
 <!-- learn_task/2&#45;&gt;list::remove_duplicates/2 -->
 <g id="edge99" class="edge">
 <title>learn_task/2&#45;&gt;list::remove_duplicates/2</title>
-<g id="a_edge99"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="calls">
+<g id="a_edge99"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M983.7011,-2221.5104C958.7733,-2217.892 930.2968,-2213.8209 904.3676,-2210.2641 750.7335,-2189.1892 707.3983,-2208.1297 558.3676,-2165.2641 437.568,-2130.5185 305.9711,-2061.639 238.2905,-2023.6868"/>
 <polygon fill="#000000" stroke="#000000" points="238.0436,-2023.5474 230.8522,-2024.0804 227.5943,-2017.6471 238.0436,-2023.5474"/>
 </a>
 </g>
-<g id="a_edge99&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L434">
+<g id="a_edge99&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L429">
 <text text-anchor="start" x="428.3676" y="-2112.0641" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2415,7 +2415,7 @@
 <!-- unfold_clause/4 -->
 <g id="node60" class="node">
 <title>unfold_clause/4</title>
-<g id="a_node60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L448" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L448">
+<g id="a_node60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L443" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L443">
 <ellipse fill="#fff8dc" stroke="#000000" cx="559.3676" cy="-503.066" rx="90.5193" ry="21.4286"/>
 <text text-anchor="start" x="503.3676" y="-505.866" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="509.3676" y="-505.266" font-family="Courier,monospace" font-size="11.00" fill="#000000">unfold_clause/4</text>
@@ -2429,12 +2429,12 @@
 <!-- unfold_clause/4&#45;&gt;list::append/3 -->
 <g id="edge101" class="edge">
 <title>unfold_clause/4&#45;&gt;list::append/3</title>
-<g id="a_edge101"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L448" xlink:title="calls">
+<g id="a_edge101"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L443" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M577.6853,-482.0573C613.4113,-441.9215 696.1179,-353.0404 778.3676,-293.4264 917.7205,-192.4244 1112.1323,-128.1852 1215.7156,-98.8482"/>
 <polygon fill="#000000" stroke="#000000" points="1216.0271,-98.7611 1220.7273,-93.2923 1227.5832,-95.5275 1216.0271,-98.7611"/>
 </a>
 </g>
-<g id="a_edge101&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L448" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L448">
+<g id="a_edge101&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L443" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L443">
 <text text-anchor="start" x="778.3676" y="-312.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2442,7 +2442,7 @@
 <!-- head/2 -->
 <g id="node61" class="node">
 <title>head/2</title>
-<g id="a_node61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453">
+<g id="a_node61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L448" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L448">
 <ellipse fill="#fff8dc" stroke="#000000" cx="132.3676" cy="-80.2132" rx="48.1667" ry="21.4286"/>
 <text text-anchor="start" x="106.3676" y="-83.0132" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="112.3676" y="-82.4132" font-family="Courier,monospace" font-size="11.00" fill="#000000">head/2</text>
@@ -2456,7 +2456,7 @@
 <!-- head_pred/2 -->
 <g id="node62" class="node">
 <title>head_pred/2</title>
-<g id="a_node62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L454" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L454">
+<g id="a_node62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L449">
 <ellipse fill="#fff8dc" stroke="#000000" cx="546.3676" cy="-590.4924" rx="71.3357" ry="21.4286"/>
 <text text-anchor="start" x="504.3676" y="-593.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="510.3676" y="-592.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">head_pred/2</text>
@@ -2470,7 +2470,7 @@
 <!-- body_preds/2 -->
 <g id="node63" class="node">
 <title>body_preds/2</title>
-<g id="a_node63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L455" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L455">
+<g id="a_node63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L450" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L450">
 <ellipse fill="#fff8dc" stroke="#000000" cx="132.3676" cy="-314.6396" rx="76.2353" ry="21.4286"/>
 <text text-anchor="start" x="86.3676" y="-317.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="92.3676" y="-316.8396" font-family="Courier,monospace" font-size="11.00" fill="#000000">body_preds/2</text>
@@ -2484,12 +2484,12 @@
 <!-- body_preds/2&#45;&gt;head/2 -->
 <g id="edge55" class="edge">
 <title>body_preds/2&#45;&gt;head/2</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L455" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L450" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M132.3676,-293.4224C132.3676,-252.5549 132.3676,-162.638 132.3676,-113.642"/>
 <polygon fill="#000000" stroke="#000000" points="132.3677,-113.5514 128.3677,-107.5514 132.3676,-101.5514 132.3677,-113.5514"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L455" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L455">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L450" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L450">
 <text text-anchor="start" x="132.3676" y="-195.2264" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2497,12 +2497,12 @@
 <!-- body_preds/2&#45;&gt;list::member/2 -->
 <g id="edge102" class="edge">
 <title>body_preds/2&#45;&gt;list::member/2</title>
-<g id="a_edge102"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L455" xlink:title="calls">
+<g id="a_edge102"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L450" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M139.2551,-293.441C152.3549,-256.8004 184.5542,-182.1285 239.3676,-146.4264 294.0601,-110.8031 469.0476,-93.2854 580.295,-85.5412"/>
 <polygon fill="#000000" stroke="#000000" points="580.5552,-85.5236 586.2706,-81.1265 592.5277,-84.711 580.5552,-85.5236"/>
 </a>
 </g>
-<g id="a_edge102&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L455" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L455">
+<g id="a_edge102&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L450" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L450">
 <text text-anchor="start" x="190.3676" y="-195.2264" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2510,7 +2510,7 @@
 <!-- does_not_appear_twice/2 -->
 <g id="node64" class="node">
 <title>does_not_appear_twice/2</title>
-<g id="a_node64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458">
+<g id="a_node64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453">
 <ellipse fill="#fff8dc" stroke="#000000" cx="246.3676" cy="-590.4924" rx="127.0588" ry="21.4286"/>
 <text text-anchor="start" x="164.3676" y="-593.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="170.3676" y="-592.6924" font-family="Courier,monospace" font-size="11.00" fill="#000000">does_not_appear_twice/2</text>
@@ -2524,12 +2524,12 @@
 <!-- does_not_appear_twice/2&#45;&gt;body_preds/2 -->
 <g id="edge56" class="edge">
 <title>does_not_appear_twice/2&#45;&gt;body_preds/2</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M237.6115,-569.3048C217.8006,-521.3671 169.4299,-404.3216 145.801,-347.1452"/>
 <polygon fill="#000000" stroke="#000000" points="145.7368,-346.9897 139.7484,-342.9724 141.1535,-335.8995 145.7368,-346.9897"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453">
 <text text-anchor="start" x="182.3676" y="-429.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2537,12 +2537,12 @@
 <!-- does_not_appear_twice/2&#45;&gt;list::member/2 -->
 <g id="edge103" class="edge">
 <title>does_not_appear_twice/2&#45;&gt;list::member/2</title>
-<g id="a_edge103"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458" xlink:title="calls">
+<g id="a_edge103"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M245.9287,-569.1961C245.34,-538.7484 244.3676,-481.0185 244.3676,-431.8528 244.3676,-431.8528 244.3676,-431.8528 244.3676,-197.4264 244.3676,-128.0718 454.3787,-98.4485 581.5467,-86.8682"/>
 <polygon fill="#000000" stroke="#000000" points="581.6315,-86.8608 587.2556,-82.3475 593.5848,-85.8031 581.6315,-86.8608"/>
 </a>
 </g>
-<g id="a_edge103&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458">
+<g id="a_edge103&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453">
 <text text-anchor="start" x="244.3676" y="-312.4396" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2564,12 +2564,12 @@
 <!-- does_not_appear_twice/2&#45;&gt;list::select/3 -->
 <g id="edge104" class="edge">
 <title>does_not_appear_twice/2&#45;&gt;list::select/3</title>
-<g id="a_edge104"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458" xlink:title="calls">
+<g id="a_edge104"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M256.3526,-569.3048C278.9913,-521.2668 334.3345,-403.8316 361.2176,-346.7871"/>
 <polygon fill="#000000" stroke="#000000" points="361.2329,-346.7545 360.1724,-339.6217 366.3486,-335.8995 361.2329,-346.7545"/>
 </a>
 </g>
-<g id="a_edge104&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L458">
+<g id="a_edge104&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L453">
 <text text-anchor="start" x="322.3676" y="-429.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2577,7 +2577,7 @@
 <!-- unfold_program/2 -->
 <g id="node65" class="node">
 <title>unfold_program/2</title>
-<g id="a_node65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470">
+<g id="a_node65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465">
 <ellipse fill="#fff8dc" stroke="#000000" cx="385.3676" cy="-824.9188" rx="94.5053" ry="21.4286"/>
 <text text-anchor="start" x="326.3676" y="-827.7188" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="332.3676" y="-827.1188" font-family="Courier,monospace" font-size="11.00" fill="#000000">unfold_program/2</text>
@@ -2591,12 +2591,12 @@
 <!-- unfold_program/2&#45;&gt;unfold_clause/4 -->
 <g id="edge60" class="edge">
 <title>unfold_program/2&#45;&gt;unfold_clause/4</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M424.5621,-805.3912C482.4744,-773.9437 588.1682,-705.9296 626.3676,-611.7056 633.452,-594.2309 633.635,-586.6787 626.3676,-569.2792 620.3001,-554.7524 609.3217,-541.788 597.9838,-531.2651"/>
 <polygon fill="#000000" stroke="#000000" points="597.9558,-531.2408 590.8035,-530.3218 588.9009,-523.3662 597.9558,-531.2408"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465">
 <text text-anchor="start" x="563.3676" y="-705.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2604,12 +2604,12 @@
 <!-- unfold_program/2&#45;&gt;head_pred/2 -->
 <g id="edge57" class="edge">
 <title>unfold_program/2&#45;&gt;head_pred/2</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M413.7862,-804.5016C429.2089,-792.4231 447.8313,-776.1111 461.3676,-758.7056 494.4299,-716.193 520.1148,-658.8114 534.2417,-623.2543"/>
 <polygon fill="#000000" stroke="#000000" points="534.405,-622.8336 532.8487,-615.7925 538.7496,-611.6477 534.405,-622.8336"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465">
 <text text-anchor="start" x="496.3676" y="-705.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2617,12 +2617,12 @@
 <!-- unfold_program/2&#45;&gt;body_preds/2 -->
 <g id="edge58" class="edge">
 <title>unfold_program/2&#45;&gt;body_preds/2</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M309.8411,-812.0397C217.5038,-794.1048 73.3676,-758.0465 73.3676,-707.7056 73.3676,-707.7056 73.3676,-707.7056 73.3676,-431.8528 73.3676,-399.8476 91.1352,-367.671 107.1698,-345.1493"/>
 <polygon fill="#000000" stroke="#000000" points="107.1768,-345.1399 107.553,-337.9386 114.3451,-335.5162 107.1768,-345.1399"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465">
 <text text-anchor="start" x="73.3676" y="-588.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2630,12 +2630,12 @@
 <!-- unfold_program/2&#45;&gt;does_not_appear_twice/2 -->
 <g id="edge59" class="edge">
 <title>unfold_program/2&#45;&gt;does_not_appear_twice/2</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M372.7871,-803.7016C348.2975,-762.3994 294.1026,-670.9985 265.2699,-622.3715"/>
 <polygon fill="#000000" stroke="#000000" points="265.1401,-622.1526 258.6393,-619.0317 259.0198,-611.8306 265.1401,-622.1526"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465">
 <text text-anchor="start" x="318.3676" y="-705.5056" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2643,12 +2643,12 @@
 <!-- unfold_program/2&#45;&gt;list::member/2 -->
 <g id="edge106" class="edge">
 <title>unfold_program/2&#45;&gt;list::member/2</title>
-<g id="a_edge106"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="calls">
+<g id="a_edge106"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M393.4476,-803.645C398.1692,-790.7568 404.0326,-773.9199 408.3676,-758.7056 426.7162,-694.3093 428.1917,-677.3558 441.3676,-611.7056 452.9007,-554.2409 445.3482,-537.2917 464.3676,-481.8528 514.6589,-335.2605 612.7012,-177.001 655.5199,-111.4099"/>
 <polygon fill="#000000" stroke="#000000" points="655.5501,-111.3638 655.5021,-104.1529 662.1399,-101.3351 655.5501,-111.3638"/>
 </a>
 </g>
-<g id="a_edge106&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470">
+<g id="a_edge106&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465">
 <text text-anchor="start" x="484.3676" y="-429.6528" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2656,12 +2656,12 @@
 <!-- unfold_program/2&#45;&gt;list::select/3 -->
 <g id="edge105" class="edge">
 <title>unfold_program/2&#45;&gt;list::select/3</title>
-<g id="a_edge105"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="calls">
+<g id="a_edge105"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="calls">
 <path fill="none" stroke="#000000" d="M392.4386,-803.5837C399.518,-780.2946 409.3676,-741.7712 409.3676,-707.7056 409.3676,-707.7056 409.3676,-707.7056 409.3676,-431.8528 409.3676,-402.3286 399.5466,-370.1339 390.62,-346.969"/>
 <polygon fill="#000000" stroke="#000000" points="390.5797,-346.8689 384.6254,-342.8011 386.0902,-335.7403 390.5797,-346.8689"/>
 </a>
 </g>
-<g id="a_edge105&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L470">
+<g id="a_edge105&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L465">
 <text text-anchor="start" x="409.3676" y="-588.2924" font-family="Courier,monospace" font-size="9.00" fill="#000000">calls</text>
 </a>
 </g>
@@ -2669,7 +2669,7 @@
 <!-- logtalk::message_tokens//2 -->
 <g id="node68" class="node">
 <title>logtalk::message_tokens//2</title>
-<g id="a_node68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L489" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L489">
+<g id="a_node68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L484" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L484">
 <ellipse fill="#87ceeb" stroke="#000000" cx="754.3676" cy="-2231.4773" rx="141.3428" ry="21.4286"/>
 <text text-anchor="start" x="662.3676" y="-2234.2773" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="668.3676" y="-2233.6773" font-family="Courier,monospace" font-size="11.00" fill="#000000">logtalk::message_tokens//2</text>
@@ -2683,7 +2683,7 @@
 <!-- logtalk::message_prefix_stream/4 -->
 <g id="node69" class="node">
 <title>logtalk::message_prefix_stream/4</title>
-<g id="a_node69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L500" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L500">
+<g id="a_node69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L495" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L495">
 <ellipse fill="#87ceeb" stroke="#000000" cx="302.3676" cy="-2231.4773" rx="169.9115" ry="21.4286"/>
 <text text-anchor="start" x="190.3676" y="-2234.2773" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="196.3676" y="-2233.6773" font-family="Courier,monospace" font-size="11.00" fill="#000000">logtalk::message_prefix_stream/4</text>

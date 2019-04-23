@@ -44,6 +44,10 @@ Tools
 * CHANGED: Predicate nodes in cross-referencing diagrams (with the exception
 of external nodes) now link to source code instead of documentation.
 
+* CHANGED: When using the `zoom(true)` option, also link to non-empty protocol
+cross-referencing diagrams to allow linking and thus quick access to the source
+file lines of the predicate declarations.
+
 * CHANGED: Diagram external nodes are no longer grouped to allow for better
 layouts.
 

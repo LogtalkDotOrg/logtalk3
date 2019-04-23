@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.32,
+		version is 2.33,
 		author is 'Paulo Moura',
-		date is 2019/04/21,
+		date is 2019/04/23,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -268,7 +268,16 @@
 		),
 		fix_non_terminals(Resources0, protocol, Protocol, Resources),
 		protocol_name_kind_caption(Protocol, Name, Kind, Caption),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
+		(	protocol_property(Protocol, declares(_, _)) ->
+			% use the {}/1 control construct to avoid a warning do to the circular
+			% reference between this object and the xref_diagram object
+			{xref_diagram::diagram_name_suffix(Suffix0)},
+			atom_concat('_protocol', Suffix0, Suffix),
+			^^add_node_zoom_option(Name, Suffix, Options, Options, NodeOptions)
+		;	% no locally declared predicates; xref diagram empty
+			NodeOptions = Options
+		),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -296,17 +305,19 @@
 		;	Resources = []
 		),
 		object_name_kind_caption(Object, Name, Kind, Caption),
-		% use the {}/1 control construct to avoid a warning do to the circular
-		% reference between this object and the xref_diagram object
-		{xref_diagram::diagram_name_suffix(Suffix0)},
-		atom_concat('_object', Suffix0, Suffix),
-		NodeOptions0 = Options,
-		(	object_property(Object, defines(_, DefinesProperties)),
-			memberchk(number_of_clauses(NumberOfClauses), DefinesProperties),
-			NumberOfClauses > 0 ->
-			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions)
-		;	% no locally defined predicates; xref diagram empty
-			NodeOptions = NodeOptions0
+		(	(	object_property(Object, declares(_, _))
+			;	object_property(Object, provides(_, _, _))
+			;	object_property(Object, defines(_, DefinesProperties)),
+				memberchk(number_of_clauses(NumberOfClauses), DefinesProperties),
+				NumberOfClauses > 0
+			) ->
+			% use the {}/1 control construct to avoid a warning do to the circular
+			% reference between this object and the xref_diagram object
+			{xref_diagram::diagram_name_suffix(Suffix0)},
+			atom_concat('_object', Suffix0, Suffix),
+			^^add_node_zoom_option(Name, Suffix, Options, Options, NodeOptions)
+		;	% no locally declared/defined/provided predicates; xref diagram empty
+			NodeOptions = Options
 		),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_object_relations(Object, Options).
@@ -336,17 +347,19 @@
 		;	Resources = []
 		),
 		category_name_kind_caption(Category, Name, Kind, Caption),
-		% use the {}/1 control construct to avoid a warning do to the circular
-		% reference between this object and the xref_diagram object
-		{xref_diagram::diagram_name_suffix(Suffix0)},
-		atom_concat('_category', Suffix0, Suffix),
-		NodeOptions0 = Options,
-		(	category_property(Category, defines(_, DefinesProperties)),
-			memberchk(number_of_clauses(NumberOfClauses), DefinesProperties),
-			NumberOfClauses > 0 ->
-			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions)
-		;	% no locally defined predicates; xref diagram empty
-			NodeOptions = NodeOptions0
+		(	(	category_property(Category, declares(_, _))
+			;	category_property(Category, provides(_, _, _))
+			;	category_property(Category, defines(_, DefinesProperties)),
+				memberchk(number_of_clauses(NumberOfClauses), DefinesProperties),
+				NumberOfClauses > 0
+			) ->
+			% use the {}/1 control construct to avoid a warning do to the circular
+			% reference between this object and the xref_diagram object
+			{xref_diagram::diagram_name_suffix(Suffix0)},
+			atom_concat('_category', Suffix0, Suffix),
+			^^add_node_zoom_option(Name, Suffix, Options, Options, NodeOptions)
+		;	% no locally declared/defined/provided predicates; xref diagram empty
+			NodeOptions = Options
 		),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_category_relations(Category, Options).
@@ -362,12 +375,15 @@
 			append(ExportedPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
-		% use the {}/1 control construct to avoid a warning do to the circular
-		% reference between this object and the xref_diagram object
-		{xref_diagram::diagram_name_suffix(Suffix0)},
-		atom_concat('_module', Suffix0, Suffix),
-		NodeOptions0 = Options,
-		^^add_node_zoom_option(Module, Suffix, Options, NodeOptions0, NodeOptions),
+		(	modules_diagram_support::module_property(Module, exports([_| _])) ->
+			% use the {}/1 control construct to avoid a warning do to the circular
+			% reference between this object and the xref_diagram object
+			{xref_diagram::diagram_name_suffix(Suffix0)},
+			atom_concat('_module', Suffix0, Suffix),
+			^^add_node_zoom_option(Module, Suffix, Options, Options, NodeOptions)
+		;	% no locally exported predicates or operators; xref diagram empty
+			NodeOptions = Options
+		),
 		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| NodeOptions]),
 		output_module_relations(Module, Options).
 

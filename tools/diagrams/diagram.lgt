@@ -770,6 +770,7 @@
 	]).
 
 	output_node(Identifier, Label, Caption, Contents, Kind, Options) :-
+		% cache the node so that we can later check for missing external nodes
 		::assertz(node_(Identifier, Label, Caption, Contents, Kind, Options)),
 		format_object(Format),
 		Format::node(diagram_output_file, Identifier, Label, Caption, Contents, Kind, Options).
