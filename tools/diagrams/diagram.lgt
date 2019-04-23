@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.35,
+		version is 2.36,
 		author is 'Paulo Moura',
-		date is 2019/04/21,
+		date is 2019/04/23,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -169,7 +169,7 @@
 		::reset,
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
-		::diagram_description(Description),
+		diagram_caption(library, Library, Description),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, Library, [description(Description)| Options]),
 			atom_concat(rlibrary_, Library, Identifier),
@@ -214,7 +214,7 @@
 		::reset,
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
-		::diagram_description(Description),
+		diagram_caption(library, Library, Description),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, Library, [description(Description)| Options]),
 			atom_concat(library_, Library, Identifier),
@@ -338,12 +338,15 @@
 		merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
-		::diagram_description(Description),
+		omit_path_prefix(NormalizedDirectory, Options, Relative),
+		(	Relative == './' ->
+			::diagram_description(Description)
+		;	diagram_caption(directory, Relative, Description)
+		),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, Project, [description(Description)| Options]),
 			atom_concat(rdirectory_, Project, Identifier),
 			add_link_options(NormalizedDirectory, Options, GraphOptions),
-			omit_path_prefix(NormalizedDirectory, Options, Relative),
 			Format::graph_header(diagram_output_file, Identifier, Relative, rdirectory, GraphOptions),
 			::output_rdirectory(Project, NormalizedDirectory, GraphOptions),
 			::output_externals(Options),
@@ -395,12 +398,15 @@
 		merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
-		::diagram_description(Description),
+		omit_path_prefix(NormalizedDirectory, Options, Relative),
+		(	Relative == './' ->
+			::diagram_description(Description)
+		;	diagram_caption(directory, Relative, Description)
+		),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, Project, [description(Description)| Options]),
 			atom_concat(directory_, Project, Identifier),
 			add_link_options(NormalizedDirectory, Options, GraphOptions),
-			omit_path_prefix(NormalizedDirectory, Options, Relative),
 			Format::graph_header(diagram_output_file, Identifier, Relative, directory, GraphOptions),
 			::output_library(Project, NormalizedDirectory, GraphOptions),
 			::output_externals(Options),
@@ -645,6 +651,28 @@
 		normalize_directory_paths(Prefixes, NormalizedPrefixes).
 	fix_option(output_directory(Directory), output_directory(NormalizedDirectory)) :-
 		normalize_directory_paths([Directory], [NormalizedDirectory]).
+
+	:- protected(diagram_caption/3).
+	:- mode(diagram_caption(+atom, +callable, -atom), one).
+	:- info(diagram_caption/3, [
+		comment is 'Creates a diagram caption from the diagram description and the subject and its kind.',
+		argnames is ['Kind', 'Subject', 'Description']
+	]).
+
+	diagram_caption(Kind, Subject, Description) :-
+		::diagram_description(Description0),
+		atom_concat(Description0, ' for ', Description1),
+		atom_concat(Description1, Kind, Description2),
+		atom_concat(Description2, ' ', Description3),
+		(	atom(Subject) ->
+			atom_concat(Description3, Subject, Description)
+		;	functor(Subject, Functor, Arity),
+			atom_concat(Description3, Functor, Description4),
+			atom_concat(Description4, '/', Description5),
+			number_codes(Arity, ArityCodes),
+			atom_codes(ArityAtom, ArityCodes),
+			atom_concat(Description5, ArityAtom, Description)
+		).
 
 	:- protected(output_rlibrary/3).
 	:- mode(output_rlibrary(+atom, +atom, +list(compound)), one).

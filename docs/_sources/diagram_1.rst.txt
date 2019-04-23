@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.35
-| **Date:** 2019/4/21
+| **Version:** 2.36
+| **Date:** 2019/4/23
 
 | **Compilation flags:**
 |    ``static``
@@ -608,6 +608,27 @@ Merges the user options with the default options, returning the list of options 
 |    ``merge_options(UserOptions,Options)``
 | **Mode and number of proofs:**
 |    ``merge_options(+list(compound),-list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="diagram_caption/3"> </div>
+
+.. index:: diagram_caption/3
+.. _diagram/1::diagram_caption/3:
+
+``diagram_caption/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Creates a diagram caption from the diagram description and the subject and its kind.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagram_caption(Kind,Subject,Description)``
+| **Mode and number of proofs:**
+|    ``diagram_caption(+atom,+callable,-atom)`` - ``one``
 
 
 .. raw:: html
