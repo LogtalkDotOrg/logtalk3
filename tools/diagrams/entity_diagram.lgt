@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.34,
+		version is 2.35,
 		author is 'Paulo Moura',
-		date is 2019/04/23,
+		date is 2019/04/24,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -145,6 +145,9 @@
 		fail.
 	output_externals(_).
 
+	output_missing_externals(Options) :-
+		memberchk(externals(false), Options),
+		!.
 	output_missing_externals(Options) :-
 		referenced_entity_(Entity),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
