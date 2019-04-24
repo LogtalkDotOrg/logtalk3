@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1732.6905 3004.7869,-1732.6905 3004.7869,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object ports_profiler</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_ports_profiler_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt">
@@ -187,9 +187,8 @@
 <g id="edge61" class="edge">
 <title>reset/0&#45;&gt;port_/5</title>
 <g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L175" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M2738.6715,-854.035C2716.6997,-797.8159 2657.2135,-645.6081 2633.2293,-584.2396"/>
-<polygon fill="#000000" stroke="#000000" points="2626.9993,-582.035 2636.3133,-578.3948 2637.0413,-580.2576 2627.7274,-583.8978 2626.9993,-582.035"/>
-<polyline fill="none" stroke="#000000" points="2631.2923,-579.2835 2633.1124,-583.9405 "/>
+<path fill="none" stroke="#000000" d="M2738.6715,-854.035C2717.4498,-799.735 2661.2311,-655.8879 2635.8067,-590.8345"/>
+<polygon fill="#000000" stroke="#000000" points="2635.6605,-590.4603 2629.7508,-586.3279 2631.2923,-579.2835 2637.202,-583.4158 2635.6605,-590.4603"/>
 </a>
 </g>
 <g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L175">
@@ -215,9 +214,8 @@
 <g id="edge62" class="edge">
 <title>reset/1&#45;&gt;port_/5</title>
 <g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L191" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M2906.3742,-1649.6789C2918.7632,-1626.8488 2936,-1588.7151 2936,-1553.2641 2936,-1553.2641 2936,-1553.2641 2936,-1263.8377 2936,-1147.7298 2833.6419,-1150.9765 2803,-1038.9848 2798.0237,-1020.7972 2794.7661,-1013.5219 2803,-996.5584 2804.9607,-992.519 2928.0393,-900.5979 2930,-896.5584 2956.1006,-842.7862 2925.2909,-818.2338 2895,-766.7056 2847.9191,-686.6159 2821.2369,-672.7816 2742,-624.2792 2715.912,-608.3103 2685.7996,-591.5709 2662.3934,-578.9184"/>
-<polygon fill="#000000" stroke="#000000" points="2656.3115,-581.3193 2661.0583,-572.5176 2662.8186,-573.467 2658.0719,-582.2687 2656.3115,-581.3193"/>
-<polyline fill="none" stroke="#000000" points="2657.8047,-576.4438 2662.2056,-578.8172 "/>
+<path fill="none" stroke="#000000" d="M2906.3742,-1649.6789C2918.7632,-1626.8488 2936,-1588.7151 2936,-1553.2641 2936,-1553.2641 2936,-1553.2641 2936,-1263.8377 2936,-1147.7298 2833.6419,-1150.9765 2803,-1038.9848 2798.0237,-1020.7972 2794.7661,-1013.5219 2803,-996.5584 2804.9607,-992.519 2928.0393,-900.5979 2930,-896.5584 2956.1006,-842.7862 2925.2909,-818.2338 2895,-766.7056 2847.9191,-686.6159 2821.2369,-672.7816 2742,-624.2792 2718.086,-609.641 2690.7904,-594.3555 2668.3784,-582.1639"/>
+<polygon fill="#000000" stroke="#000000" points="2668.3593,-582.1536 2661.1788,-582.8169 2657.8047,-576.4438 2664.9853,-575.7805 2668.3593,-582.1536"/>
 </a>
 </g>
 <g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L191">
@@ -582,9 +580,8 @@
 <g id="edge60" class="edge">
 <title>port/3&#45;&gt;port_/5</title>
 <g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L139" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M938.1606,-860.7437C945.292,-858.2146 952.8112,-855.8501 960,-854.132 991.758,-846.5422 2100.7673,-739.7211 2128,-721.7056 2146.0683,-709.7528 2136.5898,-694.5062 2152,-679.2792 2188.0806,-643.6277 2204.1759,-641.1817 2252,-624.2792 2352.6044,-588.7225 2475.5939,-571.5971 2551.6183,-563.8497"/>
-<polygon fill="#000000" stroke="#000000" points="2555.515,-558.433 2556.5149,-568.3829 2554.5249,-568.5829 2553.525,-558.633 2555.515,-558.433"/>
-<polyline fill="none" stroke="#000000" points="2557.0099,-563.308 2552.035,-563.8079 "/>
+<path fill="none" stroke="#000000" d="M938.1606,-860.7437C945.292,-858.2146 952.8112,-855.8501 960,-854.132 991.758,-846.5422 2100.7673,-739.7211 2128,-721.7056 2146.0683,-709.7528 2136.5898,-694.5062 2152,-679.2792 2188.0806,-643.6277 2204.1759,-641.1817 2252,-624.2792 2349.5863,-589.7892 2468.2347,-572.6412 2544.6512,-564.5725"/>
+<polygon fill="#000000" stroke="#000000" points="2545.0723,-564.5295 2550.6339,-559.9395 2557.0099,-563.308 2551.4483,-567.898 2545.0723,-564.5295"/>
 </a>
 </g>
 <g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L139">

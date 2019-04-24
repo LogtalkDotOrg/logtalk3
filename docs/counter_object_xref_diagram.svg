@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-604.8528 803,-604.8528 803,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object counter</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_counter_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt">
@@ -52,9 +52,8 @@
 <g id="edge4" class="edge">
 <title>increment/0&#45;&gt;c/1</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L53" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M681.346,-295.0558C618.011,-251.7689 466.4473,-148.1813 399.6094,-102.5004"/>
-<polygon fill="#000000" stroke="#000000" points="393.3355,-104.2687 398.9782,-96.0127 400.6294,-97.1413 394.9867,-105.3973 393.3355,-104.2687"/>
-<polyline fill="none" stroke="#000000" points="395.3312,-99.5764 399.4592,-102.3978 "/>
+<path fill="none" stroke="#000000" d="M681.346,-295.0558C619.7808,-252.9785 474.849,-153.9236 405.4073,-106.463"/>
+<polygon fill="#000000" stroke="#000000" points="405.2384,-106.3476 398.0278,-106.2644 395.3312,-99.5764 402.5419,-99.6596 405.2384,-106.3476"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L53">
@@ -80,9 +79,8 @@
 <g id="edge5" class="edge">
 <title>increase/1&#45;&gt;c/1</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L58" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M536.4937,-293.8358C502.2311,-250.6527 423.5244,-151.4541 386.6878,-105.0268"/>
-<polygon fill="#000000" stroke="#000000" points="380.1739,-104.8615 388.0077,-98.646 389.2508,-100.2127 381.417,-106.4283 380.1739,-104.8615"/>
-<polyline fill="none" stroke="#000000" points="383.4693,-100.9704 386.5771,-104.8873 "/>
+<path fill="none" stroke="#000000" d="M536.4937,-293.8358C503.541,-252.3036 429.4772,-158.9568 391.0913,-110.5768"/>
+<polygon fill="#000000" stroke="#000000" points="390.9279,-110.3709 384.0651,-108.1568 383.4693,-100.9704 390.3321,-103.1844 390.9279,-110.3709"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L58">
@@ -108,9 +106,8 @@
 <g id="edge6" class="edge">
 <title>set/1&#45;&gt;c/1</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L63" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M418.8411,-293.4224C408.3969,-250.4681 384.7774,-153.3271 373.3838,-106.4683"/>
-<polygon fill="#000000" stroke="#000000" points="367.5661,-103.7045 377.283,-101.3417 377.7556,-103.2851 368.0387,-105.6479 367.5661,-103.7045"/>
-<polyline fill="none" stroke="#000000" points="372.1883,-101.5514 373.3697,-106.4099 "/>
+<path fill="none" stroke="#000000" d="M418.8411,-293.4224C408.8832,-252.468 386.9482,-162.2551 375.0522,-113.3298"/>
+<polygon fill="#000000" stroke="#000000" points="375.0235,-113.2117 369.7192,-108.3266 372.1883,-101.5514 377.4927,-106.4365 375.0235,-113.2117"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L63">
@@ -163,9 +160,8 @@
 <g id="edge7" class="edge">
 <title>reset/0&#45;&gt;c/1</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L70" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M200.8329,-294.2459C234.1609,-251.3175 311.4554,-151.7579 347.6505,-105.1364"/>
-<polygon fill="#000000" stroke="#000000" points="346.2504,-98.7865 354.1493,-104.919 352.9228,-106.4988 345.0239,-100.3663 346.2504,-98.7865"/>
-<polyline fill="none" stroke="#000000" points="350.8131,-101.0628 347.7469,-105.0123 "/>
+<path fill="none" stroke="#000000" d="M200.8329,-294.2459C232.8868,-252.9586 305.6098,-159.2873 343.3239,-110.7093"/>
+<polygon fill="#000000" stroke="#000000" points="343.4541,-110.5416 343.974,-103.3492 350.8131,-101.0628 350.2932,-108.2552 343.4541,-110.5416"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L70">
@@ -191,9 +187,8 @@
 <g id="edge3" class="edge">
 <title>init/0&#45;&gt;c/1</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L49" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M89.8706,-296.0486C144.3222,-253.6403 277.5977,-149.842 337.2669,-103.3701"/>
-<polygon fill="#000000" stroke="#000000" points="337.5725,-96.7945 343.7172,-104.684 342.1393,-105.913 335.9946,-98.0234 337.5725,-96.7945"/>
-<polyline fill="none" stroke="#000000" points="341.4338,-100.1248 337.489,-103.1971 "/>
+<path fill="none" stroke="#000000" d="M89.8706,-296.0486C142.6887,-254.9125 269.6721,-156.0147 331.7021,-107.7041"/>
+<polygon fill="#000000" stroke="#000000" points="331.9664,-107.4983 334.2423,-100.6557 341.4338,-100.1248 339.1579,-106.9674 331.9664,-107.4983"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/counter.lgt#L49">

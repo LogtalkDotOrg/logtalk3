@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-2059.2641 2727,-2059.2641 2727,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object xunit_output</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_xunit_output_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_output.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_output.lgt">
@@ -52,9 +52,8 @@
 <g id="edge43" class="edge">
 <title>message_hook/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_output.lgt#L53" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M1758.4063,-1754.4076C1870.0665,-1740.6128 2060,-1707.9555 2060,-1645.4113 2060,-1645.4113 2060,-1645.4113 2060,-431.8528 2060,-304.049 1903.7495,-397.2357 1777,-380.8528 1524.9749,-348.2776 1458.6353,-371.3133 1207,-335.8528 1196.7289,-334.4054 1185.9465,-332.5689 1175.3743,-330.5844"/>
-<polygon fill="#000000" stroke="#000000" points="1170.2508,-334.6982 1172.1226,-324.8749 1174.0872,-325.2493 1172.2155,-335.0726 1170.2508,-334.6982"/>
-<polyline fill="none" stroke="#000000" points="1170.2044,-329.5994 1175.116,-330.5353 "/>
+<path fill="none" stroke="#000000" d="M1758.4063,-1754.4076C1870.0665,-1740.6128 2060,-1707.9555 2060,-1645.4113 2060,-1645.4113 2060,-1645.4113 2060,-431.8528 2060,-304.049 1903.7495,-397.2357 1777,-380.8528 1524.9749,-348.2776 1458.6353,-371.3133 1207,-335.8528 1198.8765,-334.708 1190.4332,-333.3199 1182.027,-331.8076"/>
+<polygon fill="#000000" stroke="#000000" points="1182.0004,-331.8027 1175.3679,-334.6331 1170.2044,-329.5994 1176.8368,-326.7691 1182.0004,-331.8027"/>
 </a>
 </g>
 <g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_output.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_output.lgt#L53">
@@ -631,9 +630,8 @@
 <g id="edge44" class="edge">
 <title>testsuite_stats/6&#45;&gt;message_cache_/1</title>
 <g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_output.lgt#L138" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M1296.5509,-527.9921C1270.9311,-495.5104 1219.4959,-431.6514 1172,-380.8528 1158.6414,-366.5653 1142.9647,-351.4049 1129.9328,-339.201"/>
-<polygon fill="#000000" stroke="#000000" points="1123.2995,-339.8512 1130.1207,-332.5386 1131.5832,-333.9028 1124.762,-341.2154 1123.2995,-339.8512"/>
-<polyline fill="none" stroke="#000000" points="1125.9788,-335.5128 1129.6351,-338.9234 "/>
+<path fill="none" stroke="#000000" d="M1296.5509,-527.9921C1270.9311,-495.5104 1219.4959,-431.6514 1172,-380.8528 1160.2536,-368.2896 1146.715,-355.0516 1134.7581,-343.7421"/>
+<polygon fill="#000000" stroke="#000000" points="1134.7339,-343.7195 1127.6208,-342.5345 1125.9788,-335.5128 1133.0919,-336.6978 1134.7339,-343.7195"/>
 </a>
 </g>
 <g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_output.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_output.lgt#L138">

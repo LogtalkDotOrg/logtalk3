@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1080.132 1027,-1080.132 1027,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object tap_output</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_tap_output_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt">
@@ -79,9 +79,8 @@
 <g id="edge11" class="edge">
 <title>message_hook/1&#45;&gt;generating_/0</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M407.2676,-763.5054C344.9667,-720.1672 197.7657,-617.7702 131.8801,-571.9383"/>
-<polygon fill="#000000" stroke="#000000" points="125.6253,-573.6781 131.3359,-565.469 132.9778,-566.6111 127.2672,-574.8203 125.6253,-573.6781"/>
-<polyline fill="none" stroke="#000000" points="127.6597,-569.0025 131.7643,-571.8578 "/>
+<path fill="none" stroke="#000000" d="M407.2676,-763.5054C346.7076,-721.3782 205.9262,-623.4468 137.5903,-575.9105"/>
+<polygon fill="#000000" stroke="#000000" points="137.5107,-575.8551 130.301,-575.7125 127.6597,-569.0025 134.8694,-569.1452 137.5107,-575.8551"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60">
@@ -106,9 +105,8 @@
 <g id="edge12" class="edge">
 <title>message_hook/1&#45;&gt;partial_/1</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M426.7903,-762.1709C415.4311,-736.9613 394.6928,-694.2661 371,-661.2792 347.2062,-628.1518 314.2386,-594.7525 291.4149,-573.1133"/>
-<polygon fill="#000000" stroke="#000000" points="284.8569,-573.8021 291.717,-566.5261 293.1722,-567.8981 286.3121,-575.1742 284.8569,-573.8021"/>
-<polyline fill="none" stroke="#000000" points="287.5594,-569.4781 291.1974,-572.9082 "/>
+<path fill="none" stroke="#000000" d="M426.7903,-762.1709C415.4311,-736.9613 394.6928,-694.2661 371,-661.2792 348.8777,-630.4789 318.8251,-599.4436 296.3683,-577.8435"/>
+<polygon fill="#000000" stroke="#000000" points="296.2609,-577.7415 289.1557,-576.5103 287.5594,-569.4781 294.6646,-570.7093 296.2609,-577.7415"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60">

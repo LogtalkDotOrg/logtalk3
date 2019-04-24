@@ -255,9 +255,9 @@
 	edge_arrow(calls_super_predicate, normal).
 	edge_arrow(calls_self_predicate, normal).
 	% dynamic predicate updates
-	edge_arrow(updates_predicate, tee).
-	edge_arrow(updates_this_predicate, tee).
-	edge_arrow(updates_self_predicate, tee).
+	edge_arrow(updates_predicate, diamond).
+	edge_arrow(updates_this_predicate, diamond).
+	edge_arrow(updates_self_predicate, diamond).
 	% file relations
 	edge_arrow(depends_on_file, normal).
 	edge_arrow(loads_file, normal).

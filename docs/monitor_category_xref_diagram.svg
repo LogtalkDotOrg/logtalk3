@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 1638,-376.8528 1638,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for category monitor</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_monitor_category</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt">
@@ -121,9 +121,8 @@
 <g id="edge3" class="edge">
 <title>reset_monitor/0&#45;&gt;::spy_point_/4</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M659.7087,-293.4224C626.4428,-250.0978 550.8502,-151.6484 515.2377,-105.2678"/>
-<polygon fill="#000000" stroke="#000000" points="508.768,-105.0519 516.6996,-98.9617 517.9177,-100.548 509.986,-106.6382 508.768,-105.0519"/>
-<polyline fill="none" stroke="#000000" points="512.1248,-101.2136 515.1699,-105.1794 "/>
+<path fill="none" stroke="#000000" d="M659.7087,-293.4224C627.7145,-251.7541 556.568,-159.0951 519.4927,-110.8094"/>
+<polygon fill="#000000" stroke="#000000" points="519.433,-110.7315 512.6062,-108.4086 512.1248,-101.2136 518.9515,-103.5365 519.433,-110.7315"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L57">
@@ -176,9 +175,8 @@
 <g id="edge4" class="edge">
 <title>set_spy_point/4&#45;&gt;::spy_point_/4</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L66" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M332.2913,-293.4224C365.5572,-250.0978 441.1498,-151.6484 476.7623,-105.2678"/>
-<polygon fill="#000000" stroke="#000000" points="475.3004,-98.9617 483.232,-105.0519 482.014,-106.6382 474.0823,-100.548 475.3004,-98.9617"/>
-<polyline fill="none" stroke="#000000" points="479.8752,-101.2136 476.8301,-105.1794 "/>
+<path fill="none" stroke="#000000" d="M332.2913,-293.4224C364.2855,-251.7541 435.432,-159.0951 472.5073,-110.8094"/>
+<polygon fill="#000000" stroke="#000000" points="472.567,-110.7315 473.0485,-103.5365 479.8752,-101.2136 479.3938,-108.4086 472.567,-110.7315"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L66">
@@ -204,9 +202,8 @@
 <g id="edge5" class="edge">
 <title>del_spy_points/4&#45;&gt;::spy_point_/4</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L71" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M145.6544,-294.6525C216.6892,-251.1736 384.8408,-148.2514 459.3586,-102.6407"/>
-<polygon fill="#000000" stroke="#000000" points="460.2357,-96.2415 465.4563,-104.7707 463.7504,-105.8148 458.5298,-97.2857 460.2357,-96.2415"/>
-<polyline fill="none" stroke="#000000" points="463.6989,-99.9841 459.4343,-102.5944 "/>
+<path fill="none" stroke="#000000" d="M145.6544,-294.6525C214.8497,-252.2995 376.1969,-153.5422 453.3843,-106.2974"/>
+<polygon fill="#000000" stroke="#000000" points="453.4639,-106.2487 456.4932,-99.7047 463.6989,-99.9841 460.6696,-106.528 453.4639,-106.2487"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/monitor.lgt#L71">

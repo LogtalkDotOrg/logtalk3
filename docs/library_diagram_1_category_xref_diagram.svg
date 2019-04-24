@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-845.7056 2642,-845.7056 2642,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for category library_diagram/1</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_library_diagram_1_category</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt">
@@ -106,9 +106,8 @@
 <g id="edge15" class="edge">
 <title>remember_included_library/2&#45;&gt;::included_library_/2</title>
 <g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L48" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M2484.5944,-762.2172C2494.9607,-740.1206 2510.0348,-704.2338 2516,-671.2792 2521.9307,-638.515 2515.4448,-600.329 2509.4665,-575.4779"/>
-<polygon fill="#000000" stroke="#000000" points="2503.5909,-572.5583 2513.2969,-570.151 2513.7784,-572.0921 2504.0724,-574.4995 2503.5909,-572.5583"/>
-<polyline fill="none" stroke="#000000" points="2508.2032,-570.384 2509.4069,-575.237 "/>
+<path fill="none" stroke="#000000" d="M2484.5944,-762.2172C2494.9607,-740.1206 2510.0348,-704.2338 2516,-671.2792 2521.4096,-641.3938 2516.4887,-606.9977 2511.0454,-582.3247"/>
+<polygon fill="#000000" stroke="#000000" points="2510.9819,-582.0579 2505.7013,-577.1472 2508.2032,-570.384 2513.4839,-575.2947 2510.9819,-582.0579"/>
 </a>
 </g>
 <g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L48">
@@ -161,9 +160,8 @@
 <g id="edge16" class="edge">
 <title>remember_referenced_logtalk_library/2&#45;&gt;::referenced_logtalk_library_/2</title>
 <g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L54" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M1926.8859,-763.5543C1871.3463,-743.0843 1805.2848,-707.6885 1834,-661.2792 1863.6992,-613.2797 1920.8019,-585.1405 1970.0469,-569.0449"/>
-<polygon fill="#000000" stroke="#000000" points="1972.6136,-562.9723 1975.6646,-572.4955 1973.7599,-573.1057 1970.7089,-563.5825 1972.6136,-562.9723"/>
-<polyline fill="none" stroke="#000000" points="1975.0914,-567.4288 1970.3298,-568.9543 "/>
+<path fill="none" stroke="#000000" d="M1926.8859,-763.5543C1871.3463,-743.0843 1805.2848,-707.6885 1834,-661.2792 1862.3792,-615.413 1915.7802,-587.681 1963.4374,-571.263"/>
+<polygon fill="#000000" stroke="#000000" points="1963.6925,-571.1792 1968.1418,-565.5043 1975.0914,-567.4288 1970.642,-573.1036 1963.6925,-571.1792"/>
 </a>
 </g>
 <g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L54">
@@ -216,9 +214,8 @@
 <g id="edge17" class="edge">
 <title>remember_referenced_prolog_library/2&#45;&gt;::referenced_prolog_library_/2</title>
 <g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L60" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M845.2014,-768.7294C977.6562,-753.9044 1170.0583,-731.3045 1244,-717.2792 1324.7016,-701.9718 1345.1164,-697.3793 1423,-671.2792 1511.1907,-641.7251 1610.4329,-598.0277 1667.8332,-571.6764"/>
-<polygon fill="#000000" stroke="#000000" points="1669.5758,-565.3712 1673.7548,-574.4562 1671.9378,-575.292 1667.7588,-566.207 1669.5758,-565.3712"/>
-<polyline fill="none" stroke="#000000" points="1672.5738,-569.4958 1668.0313,-571.5853 "/>
+<path fill="none" stroke="#000000" d="M845.2014,-768.7294C977.6562,-753.9044 1170.0583,-731.3045 1244,-717.2792 1324.7016,-701.9718 1345.1164,-697.3793 1423,-671.2792 1508.0031,-642.7933 1603.2732,-601.1681 1661.4475,-574.6003"/>
+<polygon fill="#000000" stroke="#000000" points="1661.6668,-574.4997 1665.4523,-568.3621 1672.5738,-569.4958 1668.7883,-575.6334 1661.6668,-574.4997"/>
 </a>
 </g>
 <g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L60">
@@ -402,9 +399,8 @@
 <g id="edge18" class="edge">
 <title>reset/0&#45;&gt;::included_library_/2</title>
 <g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M2277.4672,-763.9086C2321.9654,-721.3308 2427.4365,-620.4115 2476.3134,-573.6441"/>
-<polygon fill="#000000" stroke="#000000" points="2475.8368,-567.1798 2482.7503,-574.4052 2481.3053,-575.7879 2474.3918,-568.5625 2475.8368,-567.1798"/>
-<polyline fill="none" stroke="#000000" points="2480.0161,-570.1011 2476.4034,-573.5579 "/>
+<path fill="none" stroke="#000000" d="M2277.4672,-763.9086C2320.4494,-722.7813 2420.3209,-627.2201 2471.1255,-578.608"/>
+<polygon fill="#000000" stroke="#000000" points="2471.3458,-578.3973 2472.9155,-571.3591 2480.0161,-570.1011 2478.4463,-577.1393 2471.3458,-578.3973"/>
 </a>
 </g>
 <g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66">
@@ -416,9 +412,8 @@
 <g id="edge19" class="edge">
 <title>reset/0&#45;&gt;::referenced_logtalk_library_/2</title>
 <g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M2222.1283,-767.3282C2173.1979,-743.8973 2088.1018,-700.1492 2070,-671.2792 2051.8577,-642.3446 2052.1239,-601.7227 2054.8576,-575.398"/>
-<polygon fill="#000000" stroke="#000000" points="2050.3516,-570.7611 2060.2878,-571.8888 2060.0623,-573.876 2050.1261,-572.7484 2050.3516,-570.7611"/>
-<polyline fill="none" stroke="#000000" points="2055.4325,-570.3313 2054.8686,-575.2994 "/>
+<path fill="none" stroke="#000000" d="M2222.1283,-767.3282C2173.1979,-743.8973 2088.1018,-700.1492 2070,-671.2792 2053.4451,-644.8764 2052.2182,-608.7421 2054.2073,-582.6192"/>
+<polygon fill="#000000" stroke="#000000" points="2054.2418,-582.2721 2050.8569,-575.9048 2055.4325,-570.3313 2058.8174,-576.6986 2054.2418,-582.2721"/>
 </a>
 </g>
 <g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66">
@@ -430,9 +425,8 @@
 <g id="edge20" class="edge">
 <title>reset/0&#45;&gt;::referenced_prolog_library_/2</title>
 <g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M2218.3672,-768.7159C2164.2639,-747.8497 2063.0106,-708.1698 1978,-671.2792 1902.0202,-638.3075 1815.1287,-597.0615 1762.9642,-571.909"/>
-<polygon fill="#000000" stroke="#000000" points="1757.0648,-574.614 1761.4108,-565.6077 1763.2121,-566.4769 1758.866,-575.4832 1757.0648,-574.614"/>
-<polyline fill="none" stroke="#000000" points="1758.3372,-569.6762 1762.8403,-571.8493 "/>
+<path fill="none" stroke="#000000" d="M2218.3672,-768.7159C2164.2639,-747.8497 2063.0106,-708.1698 1978,-671.2792 1905.0777,-639.6344 1822.1043,-600.3677 1769.4274,-575.0221"/>
+<polygon fill="#000000" stroke="#000000" points="1769.1469,-574.8869 1762.0051,-575.8848 1758.3372,-569.6762 1765.4789,-568.6783 1769.1469,-574.8869"/>
 </a>
 </g>
 <g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L66">
@@ -495,9 +489,8 @@
 <g id="edge21" class="edge">
 <title>output_externals/1&#45;&gt;::included_library_/2</title>
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M349.0261,-768.3039C362.281,-765.9697 376.0175,-763.8258 389,-762.2792 1168.0899,-669.4678 1382.083,-822.3518 2152,-671.2792 2209.8988,-659.9184 2364.3939,-602.1422 2447.4215,-570.2637"/>
-<polygon fill="#000000" stroke="#000000" points="2449.5697,-564.0815 2453.1572,-573.4159 2451.2903,-574.1334 2447.7029,-564.799 2449.5697,-564.0815"/>
-<polyline fill="none" stroke="#000000" points="2452.2969,-568.39 2447.6297,-570.1837 "/>
+<path fill="none" stroke="#000000" d="M349.0261,-768.3039C362.281,-765.9697 376.0175,-763.8258 389,-762.2792 1168.0899,-669.4678 1382.083,-822.3518 2152,-671.2792 2208.4571,-660.2012 2356.7598,-604.9907 2441.0889,-572.6921"/>
+<polygon fill="#000000" stroke="#000000" points="2441.0939,-572.6902 2445.262,-566.8057 2452.2969,-568.39 2448.1288,-574.2744 2441.0939,-572.6902"/>
 </a>
 </g>
 <g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75">
@@ -509,9 +502,8 @@
 <g id="edge22" class="edge">
 <title>output_externals/1&#45;&gt;::referenced_logtalk_library_/2</title>
 <g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M349.3467,-768.3892C362.5058,-766.0609 376.1268,-763.8971 389,-762.2792 896.3884,-698.5128 1031.6258,-755.6343 1536,-671.2792 1697.4363,-644.2795 1883.3814,-596.8456 1984.3218,-569.695"/>
-<polygon fill="#000000" stroke="#000000" points="1987.0945,-563.7697 1989.6959,-573.4255 1987.7647,-573.9458 1985.1633,-564.29 1987.0945,-563.7697"/>
-<polyline fill="none" stroke="#000000" points="1989.3608,-568.3375 1984.5329,-569.6382 "/>
+<path fill="none" stroke="#000000" d="M349.3467,-768.3892C362.5058,-766.0609 376.1268,-763.8971 389,-762.2792 896.3884,-698.5128 1031.6258,-755.6343 1536,-671.2792 1693.9094,-644.8693 1875.2684,-598.9084 1977.5855,-571.5031"/>
+<polygon fill="#000000" stroke="#000000" points="1977.7722,-571.453 1982.528,-566.0324 1989.3608,-568.3375 1984.605,-573.7581 1977.7722,-571.453"/>
 </a>
 </g>
 <g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75">
@@ -523,9 +515,8 @@
 <g id="edge23" class="edge">
 <title>output_externals/1&#45;&gt;::referenced_prolog_library_/2</title>
 <g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M349.3475,-768.3952C362.5065,-766.0663 376.1272,-763.9007 389,-762.2792 694.3489,-723.8177 778.6725,-779.8809 1080,-717.2792 1152.1252,-702.295 1165.351,-682.1427 1236,-661.2792 1368.2387,-622.2276 1524.1524,-587.8838 1621.5611,-567.7903"/>
-<polygon fill="#000000" stroke="#000000" points="1624.7453,-562.0298 1626.762,-571.8244 1624.8031,-572.2277 1622.7864,-562.4331 1624.7453,-562.0298"/>
-<polyline fill="none" stroke="#000000" points="1626.7331,-566.7254 1621.8358,-567.7338 "/>
+<path fill="none" stroke="#000000" d="M349.3475,-768.3952C362.5065,-766.0663 376.1272,-763.9007 389,-762.2792 694.3489,-723.8177 778.6725,-779.8809 1080,-717.2792 1152.1252,-702.295 1165.351,-682.1427 1236,-661.2792 1365.2154,-623.1204 1517.0355,-589.4566 1614.7892,-569.1907"/>
+<polygon fill="#000000" stroke="#000000" points="1614.9808,-569.1512 1620.0484,-564.0209 1626.7331,-566.7254 1621.6656,-571.8557 1614.9808,-569.1512"/>
 </a>
 </g>
 <g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/library_diagram.lgt#L75">

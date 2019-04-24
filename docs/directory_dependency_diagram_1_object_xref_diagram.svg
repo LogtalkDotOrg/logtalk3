@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-845.7056 5387,-845.7056 5387,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object directory_dependency_diagram/1</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_directory_dependency_diagram_1_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_dependency_diagram.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_dependency_diagram.lgt">
@@ -52,9 +52,8 @@
 <g id="edge28" class="edge">
 <title>output_library/3&#45;&gt;sub_diagrams_/2</title>
 <g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_dependency_diagram.lgt#L41" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M2404.3414,-775.3525C2027.6023,-740.2892 555.7847,-602.4649 350,-570.2792 340.4613,-568.7873 330.4584,-566.9591 320.6297,-565.0075"/>
-<polygon fill="#000000" stroke="#000000" points="315.5028,-569.0759 317.4761,-559.2725 319.4368,-559.6672 317.4635,-569.4706 315.5028,-569.0759"/>
-<polyline fill="none" stroke="#000000" points="315.5091,-563.9769 320.4108,-564.9636 "/>
+<path fill="none" stroke="#000000" d="M2404.3414,-775.3525C2027.6023,-740.2892 555.7847,-602.4649 350,-570.2792 342.6491,-569.1295 335.0225,-567.78 327.4124,-566.3283"/>
+<polygon fill="#000000" stroke="#000000" points="327.2816,-566.3026 320.6201,-569.0639 315.5091,-563.9769 322.1706,-561.2156 327.2816,-566.3026"/>
 </a>
 </g>
 <g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_dependency_diagram.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_dependency_diagram.lgt#L41">
@@ -713,9 +712,8 @@
 <g id="edge29" class="edge">
 <title>reset/0&#45;&gt;sub_diagrams_/2</title>
 <g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_dependency_diagram.lgt#L136" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M1078.7306,-768.683C1070.9756,-766.1711 1062.8039,-763.866 1055,-762.2792 917.8922,-734.4007 556.7225,-769.699 427,-717.2792 354.7817,-688.0964 295.3342,-613.7601 267.6948,-574.4017"/>
-<polygon fill="#000000" stroke="#000000" points="261.2679,-573.9191 269.4766,-568.2079 270.6189,-569.8496 262.4101,-575.5608 261.2679,-573.9191"/>
-<polyline fill="none" stroke="#000000" points="264.8011,-570.2426 267.6567,-574.347 "/>
+<path fill="none" stroke="#000000" d="M1078.7306,-768.683C1070.9756,-766.1711 1062.8039,-763.866 1055,-762.2792 917.8922,-734.4007 556.7225,-769.699 427,-717.2792 358.1441,-689.4551 300.8974,-620.5842 271.7603,-580.1186"/>
+<polygon fill="#000000" stroke="#000000" points="271.7134,-580.0519 264.9875,-577.4513 264.8011,-570.2426 271.527,-572.8432 271.7134,-580.0519"/>
 </a>
 </g>
 <g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_dependency_diagram.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/directory_dependency_diagram.lgt#L136">

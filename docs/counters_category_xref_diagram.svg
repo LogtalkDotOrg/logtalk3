@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 1196,-376.8528 1196,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for category counters</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_counters_category</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt">
@@ -79,9 +79,8 @@
 <g id="edge2" class="edge">
 <title>increment_counter/1&#45;&gt;::counter_/2</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L76" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M901.6403,-293.4224C857.8269,-249.901 758.0131,-150.7528 711.5898,-104.639"/>
-<polygon fill="#000000" stroke="#000000" points="704.9893,-105.1302 712.0367,-98.0354 713.4557,-99.4449 706.4083,-106.5396 704.9893,-105.1302"/>
-<polyline fill="none" stroke="#000000" points="707.8036,-100.878 711.3509,-104.4018 "/>
+<path fill="none" stroke="#000000" d="M901.6403,-293.4224C859.3225,-251.3867 764.7625,-157.4572 716.5263,-109.5426"/>
+<polygon fill="#000000" stroke="#000000" points="716.3172,-109.3349 709.2414,-107.9444 707.8036,-100.878 714.8793,-102.2686 716.3172,-109.3349"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L76">
@@ -107,9 +106,8 @@
 <g id="edge3" class="edge">
 <title>decrement_counter/1&#45;&gt;::counter_/2</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L81" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M687,-293.4224C687,-250.555 687,-153.7201 687,-106.7535"/>
-<polygon fill="#000000" stroke="#000000" points="682,-102.5515 692,-102.5513 692.0001,-104.5513 682.0001,-104.5515 682,-102.5515"/>
-<polyline fill="none" stroke="#000000" points="687,-101.5514 687.0001,-106.5514 "/>
+<path fill="none" stroke="#000000" d="M687,-293.4224C687,-252.5549 687,-162.638 687,-113.642"/>
+<polygon fill="#000000" stroke="#000000" points="687.0001,-113.5514 683,-107.5514 687,-101.5514 691,-107.5514 687.0001,-113.5514"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L81">
@@ -135,9 +133,8 @@
 <g id="edge4" class="edge">
 <title>reset_counter/1&#45;&gt;::counter_/2</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L86" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M489.2573,-293.8358C529.3108,-250.5658 621.4246,-151.0547 664.2897,-104.7472"/>
-<polygon fill="#000000" stroke="#000000" points="663.4372,-98.3077 670.7759,-105.1008 669.4172,-106.5685 662.0786,-99.7754 663.4372,-98.3077"/>
-<polyline fill="none" stroke="#000000" points="667.7859,-100.9704 664.3893,-104.6397 "/>
+<path fill="none" stroke="#000000" d="M489.2573,-293.8358C527.8631,-252.1298 614.8338,-158.1748 659.4535,-109.9719"/>
+<polygon fill="#000000" stroke="#000000" points="659.6342,-109.7767 660.7746,-102.6563 667.7859,-100.9704 666.6454,-108.0907 659.6342,-109.7767"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L86">
@@ -163,9 +160,8 @@
 <g id="edge5" class="edge">
 <title>reset_counters/0&#45;&gt;::counter_/2</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L90" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M302.447,-294.8546C380.5902,-251.2383 567.1523,-147.1071 648.2515,-101.841"/>
-<polygon fill="#000000" stroke="#000000" points="649.6607,-95.3283 654.5346,-104.0602 652.7882,-105.035 647.9143,-96.3031 649.6607,-95.3283"/>
-<polyline fill="none" stroke="#000000" points="652.9708,-99.2069 648.6049,-101.6438 "/>
+<path fill="none" stroke="#000000" d="M302.447,-294.8546C378.7223,-252.2809 558.295,-152.0509 642.2578,-105.1864"/>
+<polygon fill="#000000" stroke="#000000" points="642.4925,-105.0554 645.7822,-98.6384 652.9708,-99.2069 649.6812,-105.6239 642.4925,-105.0554"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/counters.lgt#L90">

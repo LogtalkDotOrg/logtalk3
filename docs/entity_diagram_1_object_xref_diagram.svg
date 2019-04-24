@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1783.4113 6988.991,-1783.4113 6988.991,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object entity_diagram/1</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_entity_diagram_1_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt">
@@ -600,9 +600,8 @@
 <g id="edge166" class="edge">
 <title>remember_referenced_entity/1&#45;&gt;referenced_entity_/1</title>
 <g id="a_edge166"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L109" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M4874.3622,-297.8273C5113.4864,-254.3048 5750.3041,-138.3988 5983.1577,-96.0176"/>
-<polygon fill="#000000" stroke="#000000" points="5986.3664,-90.3514 5988.1572,-100.1898 5986.1895,-100.548 5984.3987,-90.7096 5986.3664,-90.3514"/>
-<polyline fill="none" stroke="#000000" points="5988.2456,-95.0915 5983.3264,-95.9869 "/>
+<path fill="none" stroke="#000000" d="M4874.3622,-297.8273C5111.1339,-254.7329 5737.813,-140.6723 5976.169,-97.2896"/>
+<polygon fill="#000000" stroke="#000000" points="5976.4396,-97.2404 5981.6263,-92.2306 5988.2456,-95.0915 5983.0589,-100.1013 5976.4396,-97.2404"/>
 </a>
 </g>
 <g id="a_edge166&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L109">
@@ -641,9 +640,8 @@
 <g id="edge167" class="edge">
 <title>remember_referenced_module/1&#45;&gt;referenced_module_/1</title>
 <g id="a_edge167"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L117" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M4543.7006,-296.7086C4635.5553,-275.8753 4789.8474,-239.5848 4920.991,-202.4264 5035.3821,-170.0147 5167.1185,-125.9973 5241.2735,-100.5937"/>
-<polygon fill="#000000" stroke="#000000" points="5243.5061,-94.5424 5246.7498,-104.0017 5244.858,-104.6505 5241.6142,-95.1911 5243.5061,-94.5424"/>
-<polyline fill="none" stroke="#000000" points="5246.0739,-98.9477 5241.3442,-100.5695 "/>
+<path fill="none" stroke="#000000" d="M4543.7006,-296.7086C4635.5553,-275.8753 4789.8474,-239.5848 4920.991,-202.4264 5031.9572,-170.9851 5159.2457,-128.6226 5234.4601,-102.9247"/>
+<polygon fill="#000000" stroke="#000000" points="5234.7211,-102.8354 5239.1016,-97.1073 5246.0739,-98.9477 5241.6934,-104.6758 5234.7211,-102.8354"/>
 </a>
 </g>
 <g id="a_edge167&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L117">
@@ -669,9 +667,8 @@
 <g id="edge168" class="edge">
 <title>reset/0&#45;&gt;included_entity_/1</title>
 <g id="a_edge168"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M5325.0272,-996.6646C5325.6125,-971.8848 5328.3012,-929.9548 5338.991,-895.7056 5348.8641,-864.0734 5367.7665,-830.9848 5381.7274,-809.0066"/>
-<polygon fill="#000000" stroke="#000000" points="5379.701,-802.905 5388.1182,-808.3042 5387.0384,-809.9877 5378.6211,-804.5884 5379.701,-802.905"/>
-<polyline fill="none" stroke="#000000" points="5384.4495,-804.7629 5381.7499,-808.9715 "/>
+<path fill="none" stroke="#000000" d="M5325.0272,-996.6646C5325.6125,-971.8848 5328.3012,-929.9548 5338.991,-895.7056 5348.0002,-866.8412 5364.5277,-836.7642 5377.9585,-815.0227"/>
+<polygon fill="#000000" stroke="#000000" points="5378.0337,-814.9038 5377.8613,-807.6947 5384.4495,-804.7629 5384.6219,-811.9719 5378.0337,-814.9038"/>
 </a>
 </g>
 <g id="a_edge168&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123">
@@ -683,9 +680,8 @@
 <g id="edge169" class="edge">
 <title>reset/0&#45;&gt;included_module_/1</title>
 <g id="a_edge169"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M5350.1457,-998.9764C5383.2279,-974.3142 5443.4442,-930.2799 5496.991,-895.7056 5547.9509,-862.8017 5608.6783,-828.0197 5647.9898,-806.0584"/>
-<polygon fill="#000000" stroke="#000000" points="5649.3666,-799.5652 5654.2379,-808.2986 5652.4913,-809.2728 5647.6199,-800.5395 5649.3666,-799.5652"/>
-<polyline fill="none" stroke="#000000" points="5652.6756,-803.4448 5648.3089,-805.8805 "/>
+<path fill="none" stroke="#000000" d="M5350.1457,-998.9764C5383.2279,-974.3142 5443.4442,-930.2799 5496.991,-895.7056 5545.4651,-864.4068 5602.777,-831.4086 5642.0876,-809.3621"/>
+<polygon fill="#000000" stroke="#000000" points="5642.2005,-809.2991 5645.4866,-802.8802 5652.6756,-803.4448 5649.3895,-809.8636 5642.2005,-809.2991"/>
 </a>
 </g>
 <g id="a_edge169&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123">
@@ -697,9 +693,8 @@
 <g id="edge170" class="edge">
 <title>reset/0&#45;&gt;referenced_entity_/1</title>
 <g id="a_edge170"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M5364.7278,-1003.8493C5430.5339,-980.1867 5558.868,-932.3991 5598.991,-905.7056 5604.2241,-902.2241 5603.2917,-898.3559 5608.991,-895.7056 5824.5719,-795.455 6498.2972,-963.7797 6674.991,-804.7056 6702.0978,-780.302 6736.991,-518.8263 6736.991,-482.3528 6736.991,-482.3528 6736.991,-482.3528 6736.991,-197.4264 6736.991,-173.7997 6740.1682,-161.5199 6721.991,-146.4264 6681.7395,-113.0034 6362.7393,-93.4272 6186.332,-85.0543"/>
-<polygon fill="#000000" stroke="#000000" points="6181.9178,-89.8515 6182.3896,-79.8626 6184.3874,-79.957 6183.9156,-89.9459 6181.9178,-89.8515"/>
-<polyline fill="none" stroke="#000000" points="6181.1548,-84.8099 6186.1493,-85.0458 "/>
+<path fill="none" stroke="#000000" d="M5364.7278,-1003.8493C5430.5339,-980.1867 5558.868,-932.3991 5598.991,-905.7056 5604.2241,-902.2241 5603.2917,-898.3559 5608.991,-895.7056 5824.5719,-795.455 6498.2972,-963.7797 6674.991,-804.7056 6702.0978,-780.302 6736.991,-518.8263 6736.991,-482.3528 6736.991,-482.3528 6736.991,-482.3528 6736.991,-197.4264 6736.991,-173.7997 6740.1682,-161.5199 6721.991,-146.4264 6682.2555,-113.4319 6370.873,-93.9315 6193.1863,-85.3819"/>
+<polygon fill="#000000" stroke="#000000" points="6193.1413,-85.3798 6186.9581,-89.0903 6181.1548,-84.8099 6187.3381,-81.0994 6193.1413,-85.3798"/>
 </a>
 </g>
 <g id="a_edge170&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123">
@@ -711,9 +706,8 @@
 <g id="edge171" class="edge">
 <title>reset/0&#45;&gt;referenced_module_/1</title>
 <g id="a_edge171"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M5273.3653,-1012.6369C5210.8808,-1003.168 5108.1834,-977.0432 5060.991,-905.7056 5058.5389,-901.9989 5059.5893,-899.9232 5060.991,-895.7056 5076.9149,-847.7936 5105.1945,-849.2349 5128.991,-804.7056 5138.4175,-787.0664 5129.2301,-775.7742 5143.991,-762.2792 5338.6691,-584.2974 5460.5721,-668.1633 5718.991,-615.2792 5783.0977,-602.1601 5966.0438,-618.7603 6009.991,-570.2792 6051.3562,-524.6466 6054.9415,-346.0816 6022.991,-293.4264 5957.5834,-185.633 5581.0032,-119.3125 5398.7591,-93.1041"/>
-<polygon fill="#000000" stroke="#000000" points="5393.972,-97.4696 5395.3896,-87.5706 5397.3694,-87.8541 5395.9518,-97.7532 5393.972,-97.4696"/>
-<polyline fill="none" stroke="#000000" points="5393.6909,-92.3784 5398.6404,-93.0872 "/>
+<path fill="none" stroke="#000000" d="M5273.3653,-1012.6369C5210.8808,-1003.168 5108.1834,-977.0432 5060.991,-905.7056 5058.5389,-901.9989 5059.5893,-899.9232 5060.991,-895.7056 5076.9149,-847.7936 5105.1945,-849.2349 5128.991,-804.7056 5138.4175,-787.0664 5129.2301,-775.7742 5143.991,-762.2792 5338.6691,-584.2974 5460.5721,-668.1633 5718.991,-615.2792 5783.0977,-602.1601 5966.0438,-618.7603 6009.991,-570.2792 6051.3562,-524.6466 6054.9415,-346.0816 6022.991,-293.4264 5958.3893,-186.9611 5590.2359,-120.9531 5405.5831,-94.0911"/>
+<polygon fill="#000000" stroke="#000000" points="5405.5683,-94.0891 5399.0594,-97.1929 5393.6909,-92.3784 5400.1998,-89.2746 5405.5683,-94.0891"/>
 </a>
 </g>
 <g id="a_edge171&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L123">
@@ -1035,9 +1029,8 @@
 <g id="edge172" class="edge">
 <title>process/3&#45;&gt;included_entity_/1</title>
 <g id="a_edge172"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L177" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M4308.3493,-1238.1007C4466.9723,-1189.1219 4986.9155,-1026.5431 5144.991,-951.7056 5231.9976,-910.5142 5323.6765,-842.8673 5369.4047,-807.2037"/>
-<polygon fill="#000000" stroke="#000000" points="5369.5495,-800.7419 5375.7116,-808.6178 5374.1365,-809.8502 5367.9743,-801.9743 5369.5495,-800.7419"/>
-<polyline fill="none" stroke="#000000" points="5373.4182,-804.0637 5369.4802,-807.1447 "/>
+<path fill="none" stroke="#000000" d="M4308.3493,-1238.1007C4466.9723,-1189.1219 4986.9155,-1026.5431 5144.991,-951.7056 5228.4963,-912.1718 5316.3054,-848.2689 5363.6643,-811.6608"/>
+<polygon fill="#000000" stroke="#000000" points="5363.951,-811.4375 5366.2266,-804.5948 5373.4182,-804.0637 5371.1425,-810.9063 5363.951,-811.4375"/>
 </a>
 </g>
 <g id="a_edge172&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L177">
@@ -1049,9 +1042,8 @@
 <g id="edge173" class="edge">
 <title>process/3&#45;&gt;included_module_/1</title>
 <g id="a_edge173"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L201" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M4307.5673,-1237.6679C4315.9663,-1235.2664 4324.701,-1232.9674 4332.991,-1231.132 4620.4711,-1167.4864 5432.8108,-1244.3111 5643.991,-1039.132 5676.385,-1007.6587 5685.6391,-868.7399 5688.1299,-809.9334"/>
-<polygon fill="#000000" stroke="#000000" points="5683.3009,-805.6288 5693.2926,-806.0355 5693.2113,-808.0338 5683.2195,-807.6272 5683.3009,-805.6288"/>
-<polyline fill="none" stroke="#000000" points="5688.3374,-804.833 5688.1341,-809.8288 "/>
+<path fill="none" stroke="#000000" d="M4307.5673,-1237.6679C4315.9663,-1235.2664 4324.701,-1232.9674 4332.991,-1231.132 4620.4711,-1167.4864 5432.8108,-1244.3111 5643.991,-1039.132 5675.1466,-1008.8619 5684.8977,-879.2044 5687.8137,-817.0186"/>
+<polygon fill="#000000" stroke="#000000" points="5687.822,-816.8219 5684.0834,-810.6556 5688.3374,-804.833 5692.076,-810.9992 5687.822,-816.8219"/>
 </a>
 </g>
 <g id="a_edge173&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/entity_diagram.lgt#L201">

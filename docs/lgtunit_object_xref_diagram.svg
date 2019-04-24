@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-2969.6753 9592,-2969.6753 9592,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object lgtunit</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_lgtunit_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt">
@@ -66,9 +66,8 @@
 <g id="edge299" class="edge">
 <title>run/0&#45;&gt;running_test_sets_/0</title>
 <g id="a_edge299"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L643" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M7578.7249,-2427.6769C7709.7566,-2389.7048 8146.2961,-2263.1985 8314.3044,-2214.5108"/>
-<polygon fill="#000000" stroke="#000000" points="8316.8439,-2208.5692 8319.6275,-2218.174 8317.7065,-2218.7307 8314.923,-2209.1259 8316.8439,-2208.5692"/>
-<polyline fill="none" stroke="#000000" points="8319.1962,-2213.0932 8314.3938,-2214.485 "/>
+<path fill="none" stroke="#000000" d="M7578.7249,-2427.6769C7708.0121,-2390.2103 8134.7264,-2266.5513 8307.4526,-2216.4964"/>
+<polygon fill="#000000" stroke="#000000" points="8307.6704,-2216.4334 8312.3199,-2210.9214 8319.1962,-2213.0932 8314.5467,-2218.6052 8307.6704,-2216.4334"/>
 </a>
 </g>
 <g id="a_edge299&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L643" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L643">
@@ -588,9 +587,8 @@
 <g id="edge298" class="edge">
 <title>run/2&#45;&gt;logtalk::message_hook/4</title>
 <g id="a_edge298"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L632" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M7464.0846,-2652.2319C7441.6319,-2609.4393 7390.3178,-2511.6395 7365.6868,-2464.6951"/>
-<polygon fill="#000000" stroke="#000000" points="7359.2828,-2463.2513 7368.138,-2458.6051 7369.0672,-2460.3761 7360.2121,-2465.0224 7359.2828,-2463.2513"/>
-<polyline fill="none" stroke="#000000" points="7363.2458,-2460.0427 7365.5689,-2464.4703 "/>
+<path fill="none" stroke="#000000" d="M7464.0846,-2652.2319C7442.5844,-2611.2547 7394.6198,-2519.8386 7368.9615,-2470.9364"/>
+<polygon fill="#000000" stroke="#000000" points="7368.8212,-2470.6689 7362.4914,-2467.2142 7363.2458,-2460.0427 7369.5755,-2463.4973 7368.8212,-2470.6689"/>
 </a>
 </g>
 <g id="a_edge298&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L632" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L632">
@@ -616,9 +614,8 @@
 <g id="edge300" class="edge">
 <title>run_test_sets/1&#45;&gt;running_test_sets_/0</title>
 <g id="a_edge300"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L665" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M8568.42,-2419.0242C8534.1628,-2399.2526 8483.2484,-2366.0264 8449,-2326.3961 8421.4054,-2294.4652 8401.1985,-2249.3981 8390.2777,-2221.2572"/>
-<polygon fill="#000000" stroke="#000000" points="8384.1636,-2219.2701 8393.5031,-2215.6959 8394.2179,-2217.5638 8384.8784,-2221.138 8384.1636,-2219.2701"/>
-<polyline fill="none" stroke="#000000" points="8388.4759,-2216.549 8390.263,-2221.2188 "/>
+<path fill="none" stroke="#000000" d="M8568.42,-2419.0242C8534.1628,-2399.2526 8483.2484,-2366.0264 8449,-2326.3961 8423.4579,-2296.8402 8404.2453,-2256.0296 8392.8679,-2227.8051"/>
+<polygon fill="#000000" stroke="#000000" points="8392.8379,-2227.7282 8386.9305,-2223.5926 8388.4759,-2216.549 8394.3833,-2220.6846 8392.8379,-2227.7282"/>
 </a>
 </g>
 <g id="a_edge300&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L665" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L665">
@@ -4759,9 +4756,8 @@
 <g id="edge301" class="edge">
 <title>reset_compilation_counters/0&#45;&gt;auxiliary_predicate_counter_/1</title>
 <g id="a_edge301"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1051" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M1068.0403,-1272.8115C1112.3575,-1232.5729 1206.215,-1139.5442 1248,-1039.132 1263.1106,-1002.8203 1258,-990.536 1258,-951.2056 1258,-951.2056 1258,-951.2056 1258,-666.2792 1258,-632.7815 1240.754,-597.7753 1226.7248,-574.8404"/>
-<polygon fill="#000000" stroke="#000000" points="1220.254,-573.9122 1228.7399,-568.6216 1229.798,-570.3188 1221.3121,-575.6094 1220.254,-573.9122"/>
-<polyline fill="none" stroke="#000000" points="1223.9679,-570.4183 1226.6132,-574.6613 "/>
+<path fill="none" stroke="#000000" d="M1068.0403,-1272.8115C1112.3575,-1232.5729 1206.215,-1139.5442 1248,-1039.132 1263.1106,-1002.8203 1258,-990.536 1258,-951.2056 1258,-951.2056 1258,-951.2056 1258,-666.2792 1258,-635.573 1243.5086,-603.5992 1230.2872,-580.8177"/>
+<polygon fill="#000000" stroke="#000000" points="1230.1996,-580.6734 1223.6654,-577.6231 1223.9679,-570.4183 1230.5021,-573.4686 1230.1996,-580.6734"/>
 </a>
 </g>
 <g id="a_edge301&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1051" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1051">
@@ -4773,9 +4769,8 @@
 <g id="edge302" class="edge">
 <title>reset_compilation_counters/0&#45;&gt;test_/2</title>
 <g id="a_edge302"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1051" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M1106.305,-1274.3869C1132.2433,-1263.8447 1161.1144,-1248.5748 1182,-1227.5584 1215.7536,-1193.5935 1202.3302,-1170.5546 1228,-1130.132 1242.2158,-1107.7463 1247.3158,-1102.9498 1266,-1084.132 1281.2135,-1068.8098 1299.6351,-1053.2224 1314.8613,-1041.0233"/>
-<polygon fill="#000000" stroke="#000000" points="1315.169,-1034.3869 1321.3981,-1042.2099 1319.8335,-1043.4557 1313.6044,-1035.6327 1315.169,-1034.3869"/>
-<polyline fill="none" stroke="#000000" points="1319.0658,-1037.6755 1315.1543,-1040.79 "/>
+<path fill="none" stroke="#000000" d="M1106.305,-1274.3869C1132.2433,-1263.8447 1161.1144,-1248.5748 1182,-1227.5584 1215.7536,-1193.5935 1202.3302,-1170.5546 1228,-1130.132 1242.2158,-1107.7463 1247.3158,-1102.9498 1266,-1084.132 1279.5231,-1070.5123 1295.581,-1056.683 1309.6763,-1045.2102"/>
+<polygon fill="#000000" stroke="#000000" points="1309.7066,-1045.1859 1311.8828,-1038.3109 1319.0658,-1037.6755 1316.8897,-1044.5504 1309.7066,-1045.1859"/>
 </a>
 </g>
 <g id="a_edge302&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1051" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1051">
@@ -4787,9 +4782,8 @@
 <g id="edge303" class="edge">
 <title>increment_skipped_tests_counter/0&#45;&gt;::skipped_/1</title>
 <g id="a_edge303"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1056" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M5913.136,-1518.0423C6048.3903,-1483.8948 6342.0533,-1411.2817 6592,-1359.9848 6696.1709,-1338.6057 6723.1492,-1337.8685 6827,-1314.9848 6834.7492,-1313.2773 6842.8702,-1311.3847 6850.8896,-1309.4534"/>
-<polygon fill="#000000" stroke="#000000" points="6853.7156,-1303.6235 6856.0716,-1313.342 6854.1279,-1313.8132 6851.7718,-1304.0947 6853.7156,-1303.6235"/>
-<polyline fill="none" stroke="#000000" points="6855.8654,-1308.2471 6851.0062,-1309.4252 "/>
+<path fill="none" stroke="#000000" d="M5913.136,-1518.0423C6048.3903,-1483.8948 6342.0533,-1411.2817 6592,-1359.9848 6696.1709,-1338.6057 6723.1492,-1337.8685 6827,-1314.9848 6832.556,-1313.7606 6838.3032,-1312.4412 6844.067,-1311.0805"/>
+<polygon fill="#000000" stroke="#000000" points="6844.1972,-1311.0494 6849.0972,-1305.7588 6855.8654,-1308.2471 6850.9654,-1313.5377 6844.1972,-1311.0494"/>
 </a>
 </g>
 <g id="a_edge303&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1056" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1056">
@@ -4801,9 +4795,8 @@
 <g id="edge306" class="edge">
 <title>reset_test_counters/0&#45;&gt;::skipped_/1</title>
 <g id="a_edge306"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M6485.0757,-2087.545C6502.9519,-2076.4336 6522.5279,-2060.9366 6534,-2041.5433 6583.6333,-1957.6398 6497.9888,-1895.9981 6564,-1824.2641 6625.9891,-1756.9009 6695.0869,-1838.3623 6765,-1779.2641 6812.6051,-1739.0231 6785.3537,-1702.513 6818,-1649.4113 6846.0502,-1603.7853 6876.5132,-1607.897 6897,-1558.4113 6930.7124,-1476.9792 6922.3777,-1369.2721 6916.0406,-1320.1818"/>
-<polygon fill="#000000" stroke="#000000" points="6910.5336,-1316.7043 6920.4462,-1315.3847 6920.7101,-1317.3672 6910.7975,-1318.6868 6910.5336,-1316.7043"/>
-<polyline fill="none" stroke="#000000" points="6915.3579,-1315.0532 6916.0177,-1320.0095 "/>
+<path fill="none" stroke="#000000" d="M6485.0757,-2087.545C6502.9519,-2076.4336 6522.5279,-2060.9366 6534,-2041.5433 6583.6333,-1957.6398 6497.9888,-1895.9981 6564,-1824.2641 6625.9891,-1756.9009 6695.0869,-1838.3623 6765,-1779.2641 6812.6051,-1739.0231 6785.3537,-1702.513 6818,-1649.4113 6846.0502,-1603.7853 6876.5132,-1607.897 6897,-1558.4113 6929.211,-1480.6057 6923.0367,-1378.8133 6916.8952,-1327.0817"/>
+<polygon fill="#000000" stroke="#000000" points="6916.8793,-1326.9564 6912.1509,-1321.5119 6915.3579,-1315.0532 6920.0864,-1320.4977 6916.8793,-1326.9564"/>
 </a>
 </g>
 <g id="a_edge306&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061">
@@ -4815,9 +4808,8 @@
 <g id="edge304" class="edge">
 <title>reset_test_counters/0&#45;&gt;::passed_/1</title>
 <g id="a_edge304"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M6487.7995,-2087.8577C6507.8356,-2076.6906 6530.6182,-2061.0551 6546,-2041.5433 6609.5202,-1960.9676 6547.6636,-1892.8207 6624,-1824.2641 6687.2785,-1767.4345 6731.4342,-1811.8401 6810,-1779.2641 6878.8117,-1750.7324 6905.946,-1749.5874 6953,-1691.8377 7020.2657,-1609.2818 7033,-1572.475 7033,-1465.9848 7033,-1465.9848 7033,-1465.9848 7033,-1135.132 7033,-1104.1054 7033,-1068.459 7033,-1044.7014"/>
-<polygon fill="#000000" stroke="#000000" points="7028,-1040.5223 7038,-1040.5221 7038.0001,-1042.5221 7028.0001,-1042.5223 7028,-1040.5223"/>
-<polyline fill="none" stroke="#000000" points="7033,-1039.5222 7033.0001,-1044.5222 "/>
+<path fill="none" stroke="#000000" d="M6487.7995,-2087.8577C6507.8356,-2076.6906 6530.6182,-2061.0551 6546,-2041.5433 6609.5202,-1960.9676 6547.6636,-1892.8207 6624,-1824.2641 6687.2785,-1767.4345 6731.4342,-1811.8401 6810,-1779.2641 6878.8117,-1750.7324 6905.946,-1749.5874 6953,-1691.8377 7020.2657,-1609.2818 7033,-1572.475 7033,-1465.9848 7033,-1465.9848 7033,-1465.9848 7033,-1135.132 7033,-1106.9734 7033,-1075.0096 7033,-1051.5814"/>
+<polygon fill="#000000" stroke="#000000" points="7033.0001,-1051.5222 7029,-1045.5222 7033,-1039.5222 7037,-1045.5222 7033.0001,-1051.5222"/>
 </a>
 </g>
 <g id="a_edge304&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061">
@@ -4829,9 +4821,8 @@
 <g id="edge305" class="edge">
 <title>reset_test_counters/0&#45;&gt;::failed_/1</title>
 <g id="a_edge305"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M6451.5475,-2086.3798C6471.5641,-2021.1595 6530.897,-1828.8565 6536,-1824.2641 6608.8898,-1758.6662 6685.6236,-1851.4456 6752,-1779.2641 6761.9525,-1768.4411 6788.4427,-1527.2553 6779,-1515.9848 6742.3265,-1472.2128 6581.6152,-1483.9422 6526,-1470.9848 6440.3817,-1451.0374 6388.8179,-1486.2605 6336,-1415.9848 6324.6765,-1400.9186 6381.0238,-1130.4684 6399.3776,-1044.1588"/>
-<polygon fill="#000000" stroke="#000000" points="6395.3298,-1039.1603 6405.1105,-1041.2429 6404.694,-1043.1991 6394.9132,-1041.1165 6395.3298,-1039.1603"/>
-<polyline fill="none" stroke="#000000" points="6400.4284,-1039.2235 6399.3871,-1044.1139 "/>
+<path fill="none" stroke="#000000" d="M6451.5475,-2086.3798C6471.5641,-2021.1595 6530.897,-1828.8565 6536,-1824.2641 6608.8898,-1758.6662 6685.6236,-1851.4456 6752,-1779.2641 6761.9525,-1768.4411 6788.4427,-1527.2553 6779,-1515.9848 6742.3265,-1472.2128 6581.6152,-1483.9422 6526,-1470.9848 6440.3817,-1451.0374 6388.8179,-1486.2605 6336,-1415.9848 6324.9697,-1401.3088 6378.1508,-1144.3045 6397.8771,-1051.227"/>
+<polygon fill="#000000" stroke="#000000" points="6397.9335,-1050.9613 6395.2684,-1044.2608 6400.4284,-1039.2235 6403.0936,-1045.9241 6397.9335,-1050.9613"/>
 </a>
 </g>
 <g id="a_edge305&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1061">
@@ -4843,9 +4834,8 @@
 <g id="edge307" class="edge">
 <title>increment_passed_tests_counter/0&#45;&gt;::passed_/1</title>
 <g id="a_edge307"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1069" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M6677.2536,-1272.8114C6748.053,-1222.0836 6928.1768,-1093.0248 7001.3628,-1040.5869"/>
-<polygon fill="#000000" stroke="#000000" points="7001.8824,-1034.0636 7007.7068,-1042.1925 7006.081,-1043.3573 7000.2566,-1035.2285 7001.8824,-1034.0636"/>
-<polyline fill="none" stroke="#000000" points="7005.6075,-1037.5456 7001.543,-1040.4578 "/>
+<path fill="none" stroke="#000000" d="M6677.2536,-1272.8114C6746.2195,-1223.3973 6918.921,-1099.6565 6995.4657,-1044.8122"/>
+<polygon fill="#000000" stroke="#000000" points="6995.8529,-1044.5348 6998.4004,-1037.7887 7005.6075,-1037.5456 7003.0599,-1044.2917 6995.8529,-1044.5348"/>
 </a>
 </g>
 <g id="a_edge307&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1069" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1069">
@@ -4857,9 +4847,8 @@
 <g id="edge308" class="edge">
 <title>increment_failed_tests_counter/0&#45;&gt;::failed_/1</title>
 <g id="a_edge308"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1074" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M6128.0424,-1272.584C6182.9534,-1222.0928 6321.2418,-1094.9353 6379.0104,-1041.8166"/>
-<polygon fill="#000000" stroke="#000000" points="6378.5768,-1035.4227 6385.3455,-1042.7838 6383.8733,-1044.1376 6377.1046,-1036.7764 6378.5768,-1035.4227"/>
-<polyline fill="none" stroke="#000000" points="6382.6973,-1038.4264 6379.0167,-1041.8107 "/>
+<path fill="none" stroke="#000000" d="M6128.0424,-1272.584C6181.3093,-1223.6045 6313.0358,-1102.4808 6373.6094,-1046.7828"/>
+<polygon fill="#000000" stroke="#000000" points="6373.8639,-1046.5487 6375.5732,-1039.5431 6382.6973,-1038.4264 6380.9881,-1045.432 6373.8639,-1046.5487"/>
 </a>
 </g>
 <g id="a_edge308&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1074" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1074">
@@ -4885,9 +4874,8 @@
 <g id="edge309" class="edge">
 <title>term_expansion/2&#45;&gt;test_/2</title>
 <g id="a_edge309"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1089" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M182.1758,-1830.9217C259.5961,-1814.3748 376.7695,-1788.4662 396,-1779.2641 532.4603,-1713.9654 559.51,-1675.744 655,-1558.4113 668.8151,-1541.4361 661.4488,-1527.598 680,-1515.9848 785.6333,-1449.858 1124.5573,-1520.3208 1239,-1470.9848 1398.1265,-1402.3858 1365.0054,-1130.6426 1350.0892,-1044.3589"/>
-<polygon fill="#000000" stroke="#000000" points="1344.4275,-1041.0391 1354.2759,-1039.3042 1354.6228,-1041.2739 1344.7744,-1043.0087 1344.4275,-1041.0391"/>
-<polyline fill="none" stroke="#000000" points="1349.1782,-1039.1868 1350.0456,-1044.111 "/>
+<path fill="none" stroke="#000000" d="M182.1758,-1830.9217C259.5961,-1814.3748 376.7695,-1788.4662 396,-1779.2641 532.4603,-1713.9654 559.51,-1675.744 655,-1558.4113 668.8151,-1541.4361 661.4488,-1527.598 680,-1515.9848 785.6333,-1449.858 1124.5573,-1520.3208 1239,-1470.9848 1394.1602,-1404.0957 1366.5371,-1144.0629 1351.2352,-1051.1505"/>
+<polygon fill="#000000" stroke="#000000" points="1351.2117,-1051.0132 1346.2528,-1045.7779 1349.1782,-1039.1868 1354.1371,-1044.4222 1351.2117,-1051.0132"/>
 </a>
 </g>
 <g id="a_edge309&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1089" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1089">
@@ -5155,9 +5143,8 @@
 <g id="edge310" class="edge">
 <title>directive_expansion/2&#45;&gt;test_/2</title>
 <g id="a_edge310"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1229" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M602.646,-1520.65C758.792,-1484.7911 1112.9818,-1396.5633 1204,-1314.9848 1287.9356,-1239.7545 1258.7149,-1185.0092 1309,-1084.132 1315.8105,-1070.4694 1323.8907,-1055.5073 1330.6687,-1043.2679"/>
-<polygon fill="#000000" stroke="#000000" points="1328.246,-1037.3345 1336.9868,-1042.1924 1336.0152,-1043.9406 1327.2744,-1039.0826 1328.246,-1037.3345"/>
-<polyline fill="none" stroke="#000000" points="1333.1022,-1038.8894 1330.6732,-1043.2598 "/>
+<path fill="none" stroke="#000000" d="M602.646,-1520.65C758.792,-1484.7911 1112.9818,-1396.5633 1204,-1314.9848 1287.9356,-1239.7545 1258.7149,-1185.0092 1309,-1084.132 1314.6754,-1072.7465 1321.2326,-1060.4586 1327.1831,-1049.5959"/>
+<polygon fill="#000000" stroke="#000000" points="1327.2962,-1049.3913 1326.6985,-1042.205 1333.1022,-1038.8894 1333.6998,-1046.0757 1327.2962,-1049.3913"/>
 </a>
 </g>
 <g id="a_edge310&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1229">
@@ -5503,9 +5490,8 @@
 <g id="edge311" class="edge">
 <title>test_name_to_atom_prefix/2&#45;&gt;auxiliary_predicate_counter_/1</title>
 <g id="a_edge311"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1374" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M1078.033,-762.2752C1104.5252,-719.147 1164.5724,-621.3924 1193.2205,-574.7544"/>
-<polygon fill="#000000" stroke="#000000" points="1191.1088,-568.6392 1199.6297,-573.8734 1198.5829,-575.5776 1190.062,-570.3434 1191.1088,-568.6392"/>
-<polyline fill="none" stroke="#000000" points="1195.8927,-570.4042 1193.2756,-574.6647 "/>
+<path fill="none" stroke="#000000" d="M1078.033,-762.2752C1103.4569,-720.886 1159.7844,-629.1871 1189.6061,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="1189.6118,-580.6292 1189.3439,-573.4231 1195.8927,-570.4042 1196.1606,-577.6104 1189.6118,-580.6292"/>
 </a>
 </g>
 <g id="a_edge311&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1374">
@@ -6202,9 +6188,8 @@
 <g id="edge312" class="edge">
 <title>fired/3&#45;&gt;fired_/3</title>
 <g id="a_edge312"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1813" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M9358.0002,-1516.3782C9345.7382,-1490.5732 9328.6579,-1445.203 9337,-1405.9848 9343.6698,-1374.6287 9359.7442,-1341.4096 9371.8801,-1319.3248"/>
-<polygon fill="#000000" stroke="#000000" points="9369.5497,-1313.2289 9378.2885,-1318.0905 9377.3162,-1319.8383 9368.5774,-1314.9767 9369.5497,-1313.2289"/>
-<polyline fill="none" stroke="#000000" points="9374.4053,-1314.7858 9371.9745,-1319.1552 "/>
+<path fill="none" stroke="#000000" d="M9358.0002,-1516.3782C9345.7382,-1490.5732 9328.6579,-1445.203 9337,-1405.9848 9343.0837,-1377.3838 9356.992,-1347.2329 9368.599,-1325.3954"/>
+<polygon fill="#000000" stroke="#000000" points="9368.6442,-1325.3126 9368.0158,-1318.1289 9374.4053,-1314.7858 9375.0337,-1321.9695 9368.6442,-1325.3126"/>
 </a>
 </g>
 <g id="a_edge312&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1813" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1813">
@@ -6216,9 +6201,8 @@
 <g id="edge313" class="edge">
 <title>reset_coverage_results/0&#45;&gt;fired_/3</title>
 <g id="a_edge313"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1839" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M9266.3398,-2180.0451C9352.7656,-2160.075 9468,-2115.5874 9468,-2020.3301 9468,-2020.3301 9468,-2020.3301 9468,-1758.0509 9468,-1650.201 9501.5461,-1622.5579 9485,-1515.9848 9477.129,-1465.2882 9468.0294,-1454.0165 9450,-1405.9848 9442.1657,-1385.1136 9440.5516,-1379.6228 9430,-1359.9848 9422.4886,-1346.0052 9412.976,-1331.1269 9404.8088,-1319.0224"/>
-<polygon fill="#000000" stroke="#000000" points="9398.2942,-1318.3332 9406.5641,-1312.7109 9407.6885,-1314.3649 9399.4187,-1319.9872 9398.2942,-1318.3332"/>
-<polyline fill="none" stroke="#000000" points="9401.8669,-1314.6951 9404.6781,-1318.83 "/>
+<path fill="none" stroke="#000000" d="M9266.3398,-2180.0451C9352.7656,-2160.075 9468,-2115.5874 9468,-2020.3301 9468,-2020.3301 9468,-2020.3301 9468,-1758.0509 9468,-1650.201 9501.5461,-1622.5579 9485,-1515.9848 9477.129,-1465.2882 9468.0294,-1454.0165 9450,-1405.9848 9442.1657,-1385.1136 9440.5516,-1379.6228 9430,-1359.9848 9423.6747,-1348.2125 9415.9301,-1335.8029 9408.7649,-1324.9491"/>
+<polygon fill="#000000" stroke="#000000" points="9408.565,-1324.6518 9401.897,-1321.9061 9401.8669,-1314.6951 9408.5349,-1317.4408 9408.565,-1324.6518"/>
 </a>
 </g>
 <g id="a_edge313&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1839" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1839">
@@ -6230,9 +6214,8 @@
 <g id="edge314" class="edge">
 <title>reset_coverage_results/0&#45;&gt;covered_/4</title>
 <g id="a_edge314"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1839" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M9168.9757,-2173.8011C9153.9052,-2093.3172 9099.8398,-1800.8429 9064,-1558.4113 9054.0159,-1490.8759 9076.1464,-1466.7352 9045,-1405.9848 9042.5121,-1401.1323 8905.836,-1275.0784 8901,-1272.5584 8654.5866,-1144.1571 8557.5099,-1215.2647 8290,-1140.132 8179.1552,-1109.0002 8052.2987,-1062.085 7985.2701,-1036.3798"/>
-<polygon fill="#000000" stroke="#000000" points="7979.6891,-1039.5923 7983.2749,-1030.2573 7985.1419,-1030.9744 7981.5561,-1040.3095 7979.6891,-1039.5923"/>
-<polyline fill="none" stroke="#000000" points="7980.5485,-1034.5662 7985.216,-1036.3591 "/>
+<path fill="none" stroke="#000000" d="M9168.9757,-2173.8011C9153.9052,-2093.3172 9099.8398,-1800.8429 9064,-1558.4113 9054.0159,-1490.8759 9076.1464,-1466.7352 9045,-1405.9848 9042.5121,-1401.1323 8905.836,-1275.0784 8901,-1272.5584 8654.5866,-1144.1571 8557.5099,-1215.2647 8290,-1140.132 8182.7022,-1109.9964 8060.4011,-1065.0714 7991.8861,-1038.9115"/>
+<polygon fill="#000000" stroke="#000000" points="7991.7537,-1038.8608 7984.7196,-1040.4486 7980.5485,-1034.5662 7987.5826,-1032.9784 7991.7537,-1038.8608"/>
 </a>
 </g>
 <g id="a_edge314&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1839" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1839">
@@ -6546,9 +6529,8 @@
 <g id="edge315" class="edge">
 <title>write_entity_coverage_information/1&#45;&gt;covered_/4</title>
 <g id="a_edge315"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1895" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M8453.2381,-1515.9827C8434.9064,-1487.2005 8398.4935,-1435.9436 8355,-1405.9848 8304.1816,-1370.9807 8282.9152,-1378.3369 8224,-1359.9848 8151.4277,-1337.3786 8115.8884,-1365.398 8059,-1314.9848 8016.2478,-1277.0989 7964.3089,-1109.1532 7945.3639,-1043.9355"/>
-<polygon fill="#000000" stroke="#000000" points="7939.426,-1041.4017 7949.0321,-1038.6228 7949.5879,-1040.544 7939.9817,-1043.3229 7939.426,-1041.4017"/>
-<polyline fill="none" stroke="#000000" points="7943.9512,-1039.0516 7945.3406,-1043.8547 "/>
+<path fill="none" stroke="#000000" d="M8453.2381,-1515.9827C8434.9064,-1487.2005 8398.4935,-1435.9436 8355,-1405.9848 8304.1816,-1370.9807 8282.9152,-1378.3369 8224,-1359.9848 8151.4277,-1337.3786 8115.8884,-1365.398 8059,-1314.9848 8017.7043,-1278.3896 7967.8371,-1120.4454 7947.4134,-1050.9495"/>
+<polygon fill="#000000" stroke="#000000" points="7947.3041,-1050.5737 7941.7869,-1045.9303 7943.9512,-1039.0516 7949.4683,-1043.695 7947.3041,-1050.5737"/>
 </a>
 </g>
 <g id="a_edge315&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1895" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt#L1895">

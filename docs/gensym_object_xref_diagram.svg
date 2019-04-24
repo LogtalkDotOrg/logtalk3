@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 578,-376.8528 578,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object gensym</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_gensym_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt">
@@ -52,9 +52,8 @@
 <g id="edge1" class="edge">
 <title>reset_gensym/0&#45;&gt;base_/2</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L62" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M453.2275,-293.8358C418.4123,-250.6527 338.4361,-151.4541 301.0053,-105.0268"/>
-<polygon fill="#000000" stroke="#000000" points="294.47,-104.8871 302.2551,-98.6106 303.5104,-100.1676 295.7253,-106.4441 294.47,-104.8871"/>
-<polyline fill="none" stroke="#000000" points="297.7349,-100.9704 300.8732,-104.8629 "/>
+<path fill="none" stroke="#000000" d="M453.2275,-293.8358C419.7432,-252.3036 344.4849,-158.9568 305.4798,-110.5768"/>
+<polygon fill="#000000" stroke="#000000" points="305.2667,-110.3124 298.3868,-108.152 297.7349,-100.9704 304.6148,-103.1308 305.2667,-110.3124"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L62">
@@ -80,9 +79,8 @@
 <g id="edge2" class="edge">
 <title>reset_gensym/1&#45;&gt;base_/2</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L68" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M281,-293.4224C281,-250.555 281,-153.7201 281,-106.7535"/>
-<polygon fill="#000000" stroke="#000000" points="276,-102.5515 286,-102.5513 286.0001,-104.5513 276.0001,-104.5515 276,-102.5515"/>
-<polyline fill="none" stroke="#000000" points="281,-101.5514 281.0001,-106.5514 "/>
+<path fill="none" stroke="#000000" d="M281,-293.4224C281,-252.5549 281,-162.638 281,-113.642"/>
+<polygon fill="#000000" stroke="#000000" points="281.0001,-113.5514 277,-107.5514 281,-101.5514 285,-107.5514 281.0001,-113.5514"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L68">
@@ -108,9 +106,8 @@
 <g id="edge3" class="edge">
 <title>gensym/2&#45;&gt;base_/2</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L72" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M114.24,-293.8358C147.95,-250.6527 225.3873,-151.4541 261.6298,-105.0268"/>
-<polygon fill="#000000" stroke="#000000" points="260.2397,-98.6819 268.1223,-104.8354 266.8917,-106.4119 259.009,-100.2584 260.2397,-98.6819"/>
-<polyline fill="none" stroke="#000000" points="264.7964,-100.9704 261.7196,-104.9117 "/>
+<path fill="none" stroke="#000000" d="M114.24,-293.8358C146.6613,-252.3036 219.5305,-158.9568 257.2973,-110.5768"/>
+<polygon fill="#000000" stroke="#000000" points="257.4122,-110.4295 257.9513,-103.2386 264.7964,-100.9704 264.2574,-108.1613 257.4122,-110.4295"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/gensym.lgt#L72">

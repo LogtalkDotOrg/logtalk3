@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-2293.6905 4756.2433,-2293.6905 4756.2433,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk ports of third&#45;party software</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object metagol</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_metagol_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt">
@@ -805,9 +805,8 @@
 <g id="edge109" class="edge">
 <title>retract_prim/1&#45;&gt;::prim/1</title>
 <g id="a_edge109"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M558.2879,-1037.7815C566.9144,-1012.7108 582.8033,-970.508 602.2433,-937.132 621.1647,-904.6463 648.418,-871.042 667.3609,-849.1809"/>
-<polygon fill="#000000" stroke="#000000" points="666.3712,-842.707 673.9094,-849.2779 672.5952,-850.7855 665.057,-844.2146 666.3712,-842.707"/>
-<polyline fill="none" stroke="#000000" points="670.7974,-845.2386 667.5119,-849.0077 "/>
+<path fill="none" stroke="#000000" d="M558.2879,-1037.7815C566.9144,-1012.7108 582.8033,-970.508 602.2433,-937.132 619.673,-907.2075 644.1726,-876.3336 662.7338,-854.5641"/>
+<polygon fill="#000000" stroke="#000000" points="662.9485,-854.3158 663.8472,-847.1609 670.7974,-845.2386 669.8987,-852.3935 662.9485,-854.3158"/>
 </a>
 </g>
 <g id="a_edge109&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415">
@@ -833,9 +832,8 @@
 <g id="edge110" class="edge">
 <title>retract_prim/1&#45;&gt;::primcall/2</title>
 <g id="a_edge110"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M556.1231,-1038.1483C566.5368,-993.9419 592.5109,-888.9376 623.2433,-803.7056 647.405,-736.6964 688.2433,-728.4378 688.2433,-657.2056 688.2433,-657.2056 688.2433,-657.2056 688.2433,-431.8528 688.2433,-399.6245 699.3321,-364.019 708.2456,-340.6042"/>
-<polygon fill="#000000" stroke="#000000" points="705.0867,-334.9224 714.4098,-338.5391 713.6865,-340.4037 704.3633,-336.787 705.0867,-334.9224"/>
-<polyline fill="none" stroke="#000000" points="710.1099,-335.7984 708.3015,-340.46 "/>
+<path fill="none" stroke="#000000" d="M556.1231,-1038.1483C566.5368,-993.9419 592.5109,-888.9376 623.2433,-803.7056 647.405,-736.6964 688.2433,-728.4378 688.2433,-657.2056 688.2433,-657.2056 688.2433,-657.2056 688.2433,-431.8528 688.2433,-402.4563 697.469,-370.25 705.8547,-347.0481"/>
+<polygon fill="#000000" stroke="#000000" points="705.8644,-347.0223 704.2458,-339.9952 710.1099,-335.7984 711.7284,-342.8255 705.8644,-347.0223"/>
 </a>
 </g>
 <g id="a_edge110&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L415">
@@ -1750,9 +1748,8 @@
 <g id="edge107" class="edge">
 <title>check_prim_exists/1&#45;&gt;::prim/1</title>
 <g id="a_edge107"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L237" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M808.8504,-1038.2574C789.6421,-1016.5957 760.275,-981.3059 740.2433,-947.132 721.8226,-915.7067 706.6683,-876.3678 697.7929,-850.9476"/>
-<polygon fill="#000000" stroke="#000000" points="691.7032,-848.6338 701.1549,-845.3676 701.8081,-847.2579 692.3565,-850.5241 691.7032,-848.6338"/>
-<polyline fill="none" stroke="#000000" points="696.1024,-846.0556 697.7355,-850.7814 "/>
+<path fill="none" stroke="#000000" d="M808.8504,-1038.2574C789.6421,-1016.5957 760.275,-981.3059 740.2433,-947.132 723.3577,-918.3255 709.2167,-882.8693 700.1408,-857.5799"/>
+<polygon fill="#000000" stroke="#000000" points="700.0709,-857.3804 694.3117,-853.0408 696.1024,-846.0556 701.8616,-850.3951 700.0709,-857.3804"/>
 </a>
 </g>
 <g id="a_edge107&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L237">
@@ -1764,9 +1761,8 @@
 <g id="edge108" class="edge">
 <title>check_prim_exists/1&#45;&gt;::primcall/2</title>
 <g id="a_edge108"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L237" xlink:title="updates in self">
-<path fill="none" stroke="#000000" d="M827.9486,-1037.7423C827.6537,-1014.2242 827.2433,-975.5065 827.2433,-942.132 827.2433,-942.132 827.2433,-942.132 827.2433,-431.8528 827.2433,-390.0507 789.6334,-356.7667 758.8022,-336.5045"/>
-<polygon fill="#000000" stroke="#000000" points="752.4412,-338.3552 757.8558,-329.9478 759.5373,-331.0307 754.1227,-339.4381 752.4412,-338.3552"/>
-<polyline fill="none" stroke="#000000" points="754.3078,-333.6101 758.5115,-336.3173 "/>
+<path fill="none" stroke="#000000" d="M827.9486,-1037.7423C827.6537,-1014.2242 827.2433,-975.5065 827.2433,-942.132 827.2433,-942.132 827.2433,-942.132 827.2433,-431.8528 827.2433,-392.6205 794.1154,-360.8911 764.5548,-340.388"/>
+<polygon fill="#000000" stroke="#000000" points="764.3164,-340.2303 757.1053,-340.2564 754.3078,-333.6101 761.5188,-333.584 764.3164,-340.2303"/>
 </a>
 </g>
 <g id="a_edge108&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/ports/metagol/metagol.lgt#L237">

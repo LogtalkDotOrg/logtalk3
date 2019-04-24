@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 1131,-376.8528 1131,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object debug_messages</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 15:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_debug_messages_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt">
@@ -52,9 +52,8 @@
 <g id="edge6" class="edge">
 <title>enable/1&#45;&gt;enabled_/1</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L91" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M905.2136,-293.213C900.6514,-268.6282 892.2997,-227.2218 882,-192.4264 873.0705,-162.2599 860.0325,-128.5714 850.8573,-106.0516"/>
-<polygon fill="#000000" stroke="#000000" points="844.7129,-104.2413 853.9669,-100.4514 854.7249,-102.3022 845.4708,-106.0921 844.7129,-104.2413"/>
-<polyline fill="none" stroke="#000000" points="848.9609,-101.4209 850.8559,-106.048 "/>
+<path fill="none" stroke="#000000" d="M905.2136,-293.213C900.6514,-268.6282 892.2997,-227.2218 882,-192.4264 873.8925,-165.0367 862.398,-134.7436 853.483,-112.5429"/>
+<polygon fill="#000000" stroke="#000000" points="853.4807,-112.5372 847.5154,-108.4857 848.9609,-101.4209 854.9262,-105.4724 853.4807,-112.5372"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L91">
@@ -80,9 +79,8 @@
 <g id="edge5" class="edge">
 <title>enable/1&#45;&gt;enabled_/2</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L91" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M898.9103,-293.5262C884.7044,-266.0753 856.2104,-218.5615 818,-192.4264 714.7888,-121.8322 568.3891,-95.4932 482.2003,-85.7762"/>
-<polygon fill="#000000" stroke="#000000" points="477.5668,-90.2947 478.6653,-80.3552 480.6532,-80.5749 479.5547,-90.5144 477.5668,-90.2947"/>
-<polyline fill="none" stroke="#000000" points="477.1221,-85.2151 482.0918,-85.7643 "/>
+<path fill="none" stroke="#000000" d="M898.9103,-293.5262C884.7044,-266.0753 856.2104,-218.5615 818,-192.4264 717.5644,-123.7306 576.232,-96.9418 489.2824,-86.5968"/>
+<polygon fill="#000000" stroke="#000000" points="489.0454,-86.5699 482.6321,-89.867 477.1221,-85.2151 483.5353,-81.9181 489.0454,-86.5699"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L91">
@@ -108,9 +106,8 @@
 <g id="edge8" class="edge">
 <title>disable/1&#45;&gt;enabled_/1</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L96" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M769.9302,-293.4132C769.2798,-268.6595 770.0448,-226.754 780,-192.4264 789.2874,-160.4016 808.4808,-127.132 822.6704,-105.2182"/>
-<polygon fill="#000000" stroke="#000000" points="820.7059,-99.0892 829.0733,-104.5654 827.9781,-106.2388 819.6107,-100.7627 820.7059,-99.0892"/>
-<polyline fill="none" stroke="#000000" points="825.4372,-100.9905 822.6992,-105.1742 "/>
+<path fill="none" stroke="#000000" d="M769.9302,-293.4132C769.2798,-268.6595 770.0448,-226.754 780,-192.4264 788.4748,-163.2037 805.1978,-132.9446 818.8407,-111.2229"/>
+<polygon fill="#000000" stroke="#000000" points="818.9352,-111.0764 818.8243,-103.8661 825.4372,-100.9905 825.5481,-108.2008 818.9352,-111.0764"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L96">
@@ -122,9 +119,8 @@
 <g id="edge7" class="edge">
 <title>disable/1&#45;&gt;enabled_/2</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L96" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M741.8446,-295.6541C675.8358,-252.6702 515.2477,-148.0977 444.9269,-102.3059"/>
-<polygon fill="#000000" stroke="#000000" points="438.537,-104.1116 443.994,-95.7317 445.6699,-96.823 440.213,-105.203 438.537,-104.1116"/>
-<polyline fill="none" stroke="#000000" points="440.4275,-99.3759 444.6175,-102.1044 "/>
+<path fill="none" stroke="#000000" d="M741.8446,-295.6541C677.5486,-253.7855 523.518,-153.4832 450.5801,-105.9871"/>
+<polygon fill="#000000" stroke="#000000" points="450.4834,-105.9242 443.2727,-106.002 440.4275,-99.3759 447.6382,-99.2981 450.4834,-105.9242"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L96">
@@ -177,9 +173,8 @@
 <g id="edge9" class="edge">
 <title>enable/2&#45;&gt;enabled_/2</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L103" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M101.9283,-295.8518C163.1851,-253.1131 312.7507,-148.7615 378.7742,-102.6971"/>
-<polygon fill="#000000" stroke="#000000" points="379.3193,-96.2201 385.0413,-104.4213 383.401,-105.5657 377.679,-97.3645 379.3193,-96.2201"/>
-<polyline fill="none" stroke="#000000" points="383.0004,-99.7485 378.8998,-102.6095 "/>
+<path fill="none" stroke="#000000" d="M101.9283,-295.8518C161.4733,-254.3074 304.4607,-154.5454 373.0473,-106.6927"/>
+<polygon fill="#000000" stroke="#000000" points="373.159,-106.6148 375.7909,-99.9012 383.0004,-99.7485 380.3685,-106.4621 373.159,-106.6148"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L103">
@@ -205,9 +200,8 @@
 <g id="edge10" class="edge">
 <title>disable/2&#45;&gt;enabled_/2</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L107" xlink:title="updates">
-<path fill="none" stroke="#000000" d="M360.0684,-293.4224C370.3294,-250.4681 393.5345,-153.3271 404.7282,-106.4683"/>
-<polygon fill="#000000" stroke="#000000" points="400.8072,-101.3622 410.5335,-103.6858 410.0688,-105.6311 400.3425,-103.3075 400.8072,-101.3622"/>
-<polyline fill="none" stroke="#000000" points="405.9027,-101.5514 404.7409,-106.4146 "/>
+<path fill="none" stroke="#000000" d="M360.0684,-293.4224C369.8516,-252.468 391.4017,-162.2551 403.0891,-113.3298"/>
+<polygon fill="#000000" stroke="#000000" points="403.1145,-113.223 400.6181,-106.4578 405.9027,-101.5514 408.3991,-108.3166 403.1145,-113.223"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/debug_messages/debug_messages.lgt#L107">
