@@ -22,7 +22,7 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.25,
+		version is 2.26,
 		author is 'Paulo Moura',
 		date is 2019/04/24,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
@@ -126,22 +126,25 @@
 				write(Stream, URL),
 				write(Stream, '">'),
 				write(Stream, Label),
-				write(Stream, '</TD></TR></TABLE>>'), nl(Stream)
+				write(Stream, '</TD></TR></TABLE>>'), nl(Stream),
+				write_key_value_nl(Stream, tooltip, Label)
 			;	member(tooltip(Tooltip), Options) ->
 				write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
 				write(Stream, Tooltip),
 				write(Stream, '">'),
 				write(Stream, Label),
-				write(Stream, '</TD></TR></TABLE>>'), nl(Stream)
-			;	true
+				write(Stream, '</TD></TR></TABLE>>'), nl(Stream),
+				write_key_value_nl(Stream, tooltip, Tooltip)
+			;	write_key_value_nl(Stream, tooltip, Label)
 			)
 		;	member(tooltip(Tooltip), Options) ->
 			write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
 			write(Stream, Tooltip),
 			write(Stream, '">'),
 			write(Stream, Label),
-			write(Stream, '</TD></TR></TABLE>>'), nl(Stream)
-		;	true
+			write(Stream, '</TD></TR></TABLE>>'), nl(Stream),
+			write_key_value_nl(Stream, tooltip, Tooltip)
+		;	write_key_value_nl(Stream, tooltip, Label)
 		).
 
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
