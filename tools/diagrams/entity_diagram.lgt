@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.35,
+		version is 2.36,
 		author is 'Paulo Moura',
 		date is 2019/04/24,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -379,13 +379,16 @@
 			append(ExportedPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
-		(	modules_diagram_support::module_property(Module, exports([_| _])) ->
+		(	(	MultifilePredicates = [_| _]
+			;	member(_/_, ExportedPredicates)
+			) ->
 			% use the {}/1 control construct to avoid a warning do to the circular
 			% reference between this object and the xref_diagram object
 			{xref_diagram::diagram_name_suffix(Suffix0)},
 			atom_concat('_module', Suffix0, Suffix),
 			^^add_node_zoom_option(Module, Suffix, Options, Options, NodeOptions)
-		;	% no locally exported predicates or operators; xref diagram empty
+		;	% no locally exported predicates/operators or multifile
+			% predicate definitions; xref diagram empty
 			NodeOptions = Options
 		),
 		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| NodeOptions]),
