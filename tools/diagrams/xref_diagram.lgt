@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.45,
+		version is 2.46,
 		author is 'Paulo Moura',
 		date is 2019/04/24,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -633,6 +633,9 @@
 		;	assertz(external_predicate_(Reference))
 		).
 
+	output_externals(Options) :-
+		memberchk(externals(false), Options),
+		!.
 	output_externals(Options) :-
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
