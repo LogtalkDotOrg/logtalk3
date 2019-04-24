@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 411,-376.8528 411,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object time</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_time_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/time.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/time.lgt">
@@ -52,8 +52,8 @@
 <g id="edge2" class="edge">
 <title>cpu_time/1&#45;&gt;os::cpu_time/1</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/time.lgt#L35" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M313.9139,-293.4224C311.822,-252.5549 307.2192,-162.638 304.7112,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="304.7058,-113.5357 300.4043,-107.7481 304.0923,-101.5514 304.7058,-113.5357"/>
+<path fill="none" stroke="#000000" d="M313.9139,-293.4224C311.7953,-252.0332 307.1013,-160.3342 304.6162,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="308.099,-111.3594 304.0923,-101.5514 301.1082,-111.7173 308.099,-111.3594"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/time.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/time.lgt#L35">
@@ -93,8 +93,8 @@
 <g id="edge1" class="edge">
 <title>now/3&#45;&gt;os::date_time/7</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/time.lgt#L32" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M179.031,-293.4224C165.5505,-252.381 135.8217,-161.8718 119.7753,-113.0187"/>
-<polygon fill="#000000" stroke="#000000" points="119.7535,-112.9522 114.0809,-108.5 116.0088,-101.5514 119.7535,-112.9522"/>
+<path fill="none" stroke="#000000" d="M179.031,-293.4224C165.3791,-251.8593 135.0633,-159.5628 119.1701,-111.1761"/>
+<polygon fill="#000000" stroke="#000000" points="122.4547,-109.9598 116.0088,-101.5514 115.8042,-112.1443 122.4547,-109.9598"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/time.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/time.lgt#L32">

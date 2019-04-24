@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-845.7056 2011,-845.7056 2011,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object coverage_report</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_coverage_report_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt">
@@ -52,8 +52,8 @@
 <g id="edge4" class="edge">
 <title>message_hook/1&#45;&gt;timestamp_/6</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M753.487,-542.5944C633.8709,-532.3341 417.0678,-510.6196 344,-482.8528 257.2114,-449.872 170.6026,-381.7729 125.6371,-343.1"/>
-<polygon fill="#000000" stroke="#000000" points="125.4812,-342.9644 118.3291,-342.0439 116.428,-335.0879 125.4812,-342.9644"/>
+<path fill="none" stroke="#000000" d="M753.487,-542.5944C633.8709,-532.3341 417.0678,-510.6196 344,-482.8528 256.3017,-449.5262 168.7869,-380.3414 124.2368,-341.8937"/>
+<polygon fill="#000000" stroke="#000000" points="126.2663,-339.0197 116.428,-335.0879 121.6671,-344.2968 126.2663,-339.0197"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61">
@@ -93,8 +93,8 @@
 <g id="edge5" class="edge">
 <title>message_hook/1&#45;&gt;date_time_to_timestamp/7</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M793.8061,-530.2782C701.8451,-488.3364 479.7833,-387.0579 376.079,-339.7602"/>
-<polygon fill="#000000" stroke="#000000" points="375.8464,-339.6541 368.7275,-340.8037 364.9283,-334.6745 375.8464,-339.6541"/>
+<path fill="none" stroke="#000000" d="M793.8061,-530.2782C701.286,-488.0814 477.0786,-385.8243 374.2009,-338.9036"/>
+<polygon fill="#000000" stroke="#000000" points="375.4791,-335.6398 364.9283,-334.6745 372.5743,-342.0087 375.4791,-335.6398"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61">
@@ -120,8 +120,8 @@
 <g id="edge2" class="edge">
 <title>message_hook/1&#45;&gt;write_xml_open_tag/1</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M812.8142,-528.2622C768.2647,-486.4879 667.8125,-392.2934 616.4835,-344.1619"/>
-<polygon fill="#000000" stroke="#000000" points="616.2491,-343.942 609.1362,-342.7558 607.4955,-335.7338 616.2491,-343.942"/>
+<path fill="none" stroke="#000000" d="M812.8142,-528.2622C767.8025,-486.0546 665.7224,-390.3335 614.9021,-342.679"/>
+<polygon fill="#000000" stroke="#000000" points="617.1842,-340.0209 607.4955,-335.7338 612.396,-345.1271 617.1842,-340.0209"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61">
@@ -147,8 +147,8 @@
 <g id="edge7" class="edge">
 <title>message_hook/1&#45;&gt;write_xml_close_tag/1</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L88" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M835,-527.8488C835,-486.9813 835,-397.0644 835,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="835.0001,-347.9778 831,-341.9778 835,-335.9778 835.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M835,-527.8488C835,-486.4596 835,-394.7606 835,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="838.5001,-345.9778 835,-335.9778 831.5001,-345.9778 838.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L88">
@@ -174,8 +174,8 @@
 <g id="edge3" class="edge">
 <title>message_hook/1&#45;&gt;write_xml_element/2</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M856.7421,-528.2622C900.4006,-486.4879 998.8437,-392.2934 1049.1461,-344.1619"/>
-<polygon fill="#000000" stroke="#000000" points="1049.2841,-344.0299 1050.8539,-336.9917 1057.9544,-335.7338 1049.2841,-344.0299"/>
+<path fill="none" stroke="#000000" d="M856.7421,-528.2622C900.8535,-486.0546 1000.892,-390.3335 1050.6959,-342.679"/>
+<polygon fill="#000000" stroke="#000000" points="1053.1489,-345.1761 1057.9544,-335.7338 1048.3094,-340.1184 1053.1489,-345.1761"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61">
@@ -201,8 +201,8 @@
 <g id="edge8" class="edge">
 <title>message_hook/1&#45;&gt;entity_file/3</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L100" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M872.0709,-529.8819C953.9198,-487.5253 1149.9791,-386.0651 1240.5958,-339.1712"/>
-<polygon fill="#000000" stroke="#000000" points="1240.7106,-339.1118 1244.201,-332.8016 1251.3681,-333.5965 1240.7106,-339.1118"/>
+<path fill="none" stroke="#000000" d="M872.0709,-529.8819C954.4194,-487.2668 1152.3767,-384.8243 1242.2432,-338.3186"/>
+<polygon fill="#000000" stroke="#000000" points="1244.0955,-341.301 1251.3681,-333.5965 1240.8783,-335.0841 1244.0955,-341.301"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L100">
@@ -228,8 +228,8 @@
 <g id="edge6" class="edge">
 <title>message_hook/1&#45;&gt;entity_predicate_line/3</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L88" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M884.9285,-531.8281C1005.1547,-490.3197 1310.824,-384.7866 1446.8967,-337.8072"/>
-<polygon fill="#000000" stroke="#000000" points="1447.0105,-337.768 1451.3766,-332.0288 1458.3535,-333.8517 1447.0105,-337.768"/>
+<path fill="none" stroke="#000000" d="M884.9285,-531.8281C1005.638,-490.1528 1313.2847,-383.9371 1448.5295,-337.2435"/>
+<polygon fill="#000000" stroke="#000000" points="1450.0432,-340.4236 1458.3535,-333.8517 1447.7588,-333.8069 1450.0432,-340.4236"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L88">
@@ -255,8 +255,8 @@
 <g id="edge13" class="edge">
 <title>message_hook/1&#45;&gt;logtalk::loaded_file_property/2</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M896.8664,-534.4016C1065.6378,-494.3971 1534.6247,-383.2313 1733.2539,-336.1495"/>
-<polygon fill="#000000" stroke="#000000" points="1733.4072,-336.1132 1738.3229,-330.8372 1745.0837,-333.3454 1733.4072,-336.1132"/>
+<path fill="none" stroke="#000000" d="M896.8664,-534.4016C1066.2265,-494.2575 1537.8998,-382.455 1735.3224,-335.6592"/>
+<polygon fill="#000000" stroke="#000000" points="1736.1606,-339.0576 1745.0837,-333.3454 1734.546,-332.2463 1736.1606,-339.0576"/>
 </a>
 </g>
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L61">
@@ -282,8 +282,8 @@
 <g id="edge9" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;integers_to_atoms/2</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M303.4416,-293.4224C268.8868,-251.6669 191.9579,-158.7072 152.0696,-110.507"/>
-<polygon fill="#000000" stroke="#000000" points="152.0296,-110.4585 145.1226,-108.3863 144.3789,-101.2136 152.0296,-110.4585"/>
+<path fill="none" stroke="#000000" d="M303.4416,-293.4224C268.5261,-251.2311 190.3472,-156.7609 150.8327,-109.0123"/>
+<polygon fill="#000000" stroke="#000000" points="153.4509,-106.6863 144.3789,-101.2136 148.058,-111.1491 153.4509,-106.6863"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143">
@@ -309,8 +309,8 @@
 <g id="edge10" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;pad_single_char_atoms/2</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M326.4304,-293.4224C336.9124,-252.468 360.0019,-162.2551 372.524,-113.3298"/>
-<polygon fill="#000000" stroke="#000000" points="372.5631,-113.1767 370.1758,-106.3722 375.5386,-101.5514 372.5631,-113.1767"/>
+<path fill="none" stroke="#000000" d="M326.4304,-293.4224C337.046,-251.9463 360.5922,-159.9487 372.9974,-111.4803"/>
+<polygon fill="#000000" stroke="#000000" points="376.4497,-112.107 375.5386,-101.5514 369.6683,-110.3713 376.4497,-112.107"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143">
@@ -336,8 +336,8 @@
 <g id="edge11" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;concatenate_atoms/3</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M348.8654,-293.8358C405.4264,-251.6085 533.7323,-155.8177 597.5323,-108.1859"/>
-<polygon fill="#000000" stroke="#000000" points="597.5813,-108.1493 599.9962,-101.3546 607.197,-100.9704 597.5813,-108.1493"/>
+<path fill="none" stroke="#000000" d="M348.8654,-293.8358C405.8919,-251.2609 535.8492,-154.2373 599.0944,-107.0197"/>
+<polygon fill="#000000" stroke="#000000" points="601.2778,-109.7575 607.197,-100.9704 597.09,-104.1482 601.2778,-109.7575"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L143">
@@ -377,8 +377,8 @@
 <g id="edge12" class="edge">
 <title>entity_predicate_line/3&#45;&gt;member/2</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L218" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1514,-293.4224C1514,-252.5549 1514,-162.638 1514,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="1514.0001,-113.5514 1510,-107.5514 1514,-101.5514 1514.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M1514,-293.4224C1514,-252.0332 1514,-160.3342 1514,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="1517.5001,-111.5514 1514,-101.5514 1510.5001,-111.5514 1517.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L218">
@@ -404,8 +404,8 @@
 <g id="edge1" class="edge">
 <title>logtalk::message_hook/4&#45;&gt;message_hook/1</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L47" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M835,-762.2752C835,-721.4077 835,-631.4908 835,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="835.0001,-582.4042 831,-576.4043 835,-570.4042 835.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M835,-762.2752C835,-720.886 835,-629.1871 835,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="838.5001,-580.4042 835,-570.4042 831.5001,-580.4043 838.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/coverage_report.lgt#L47">

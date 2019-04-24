@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-845.7056 1765,-845.7056 1765,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object meta_compiler</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_meta_compiler_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt">
@@ -66,8 +66,8 @@
 <g id="edge11" class="edge">
 <title>conjunction_to_list/3&#45;&gt;conjunction_to_list/4</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L613" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M344,-293.4224C344,-252.5549 344,-162.638 344,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="344.0001,-113.5514 340,-107.5514 344,-101.5514 344.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M344,-293.4224C344,-252.0332 344,-160.3342 344,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="347.5001,-111.5514 344,-101.5514 340.5001,-111.5514 347.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L613" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L613">
@@ -121,8 +121,8 @@
 <g id="edge3" class="edge">
 <title>goal_expansion/2&#45;&gt;generated_predicate/1</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1222.0148,-771.3186C1273.94,-761.2968 1342.6992,-744.264 1399,-717.2792 1475.9286,-680.4076 1552.9374,-615.697 1594.2087,-578.196"/>
-<polygon fill="#000000" stroke="#000000" points="1594.3463,-578.0697 1596.0607,-571.0654 1603.1857,-569.954 1594.3463,-578.0697"/>
+<path fill="none" stroke="#000000" d="M1222.0148,-771.3186C1273.94,-761.2968 1342.6992,-744.264 1399,-717.2792 1476.9003,-679.9419 1554.8829,-614.0578 1595.7555,-576.7881"/>
+<polygon fill="#000000" stroke="#000000" points="1598.1949,-579.2997 1603.1857,-569.954 1593.4561,-574.1476 1598.1949,-579.2997"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52">
@@ -162,8 +162,8 @@
 <g id="edge1" class="edge">
 <title>goal_expansion/2&#45;&gt;decompose_closure/6</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1090.2495,-765.9213C1053.228,-753.3896 1003.1293,-735.5784 960,-717.2792 852.899,-671.8376 731.5852,-609.4654 666.1052,-574.8557"/>
-<polygon fill="#000000" stroke="#000000" points="665.9178,-574.7564 658.7431,-575.4807 655.3151,-569.1365 665.9178,-574.7564"/>
+<path fill="none" stroke="#000000" d="M1090.2495,-765.9213C1053.228,-753.3896 1003.1293,-735.5784 960,-717.2792 852.0138,-671.462 729.579,-608.4333 664.4932,-574.0034"/>
+<polygon fill="#000000" stroke="#000000" points="665.7895,-570.7291 655.3151,-569.1365 662.5102,-576.9135 665.7895,-570.7291"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52">
@@ -189,8 +189,8 @@
 <g id="edge5" class="edge">
 <title>goal_expansion/2&#45;&gt;extend_closure/4</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1076.9465,-768.3616C1041.5297,-758.0614 998.7442,-741.7614 966,-717.2792 916.4763,-680.2514 877.3041,-618.5319 856.4809,-581.0384"/>
-<polygon fill="#000000" stroke="#000000" points="856.3412,-580.781 849.9633,-577.4159 850.6165,-570.2345 856.3412,-580.781"/>
+<path fill="none" stroke="#000000" d="M1076.9465,-768.3616C1041.5297,-758.0614 998.7442,-741.7614 966,-717.2792 915.6225,-679.613 875.9564,-616.3963 855.4203,-579.121"/>
+<polygon fill="#000000" stroke="#000000" points="858.4508,-577.367 850.6165,-570.2345 852.293,-580.6958 858.4508,-577.367"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52">
@@ -216,8 +216,8 @@
 <g id="edge4" class="edge">
 <title>goal_expansion/2&#45;&gt;replace_functor/4</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1165.7421,-762.6886C1209.5109,-720.8088 1308.3413,-626.2437 1358.5263,-578.2245"/>
-<polygon fill="#000000" stroke="#000000" points="1358.6363,-578.1193 1360.2061,-571.0811 1367.3066,-569.8232 1358.6363,-578.1193"/>
+<path fill="none" stroke="#000000" d="M1165.7421,-762.6886C1209.9649,-720.3744 1310.3976,-624.2761 1360.0723,-576.7453"/>
+<polygon fill="#000000" stroke="#000000" points="1362.501,-579.2655 1367.3066,-569.8232 1357.6616,-574.2078 1362.501,-579.2655"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52">
@@ -243,8 +243,8 @@
 <g id="edge2" class="edge">
 <title>goal_expansion/2&#45;&gt;aux_predicate_functor/5</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1144,-762.2752C1144,-721.4077 1144,-631.4908 1144,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="1144.0001,-582.4042 1140,-576.4043 1144,-570.4042 1144.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M1144,-762.2752C1144,-720.886 1144,-629.1871 1144,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="1147.5001,-580.4042 1144,-570.4042 1140.5001,-580.4043 1147.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52">
@@ -270,8 +270,8 @@
 <g id="edge12" class="edge">
 <title>goal_expansion/2&#45;&gt;logtalk::compile_aux_clauses/1</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1079.5812,-767.8366C1030.3948,-751.5869 971,-720.6982 971,-666.2792 971,-666.2792 971,-666.2792 971,-431.8528 971,-390.5009 1075.441,-356.1336 1157.4283,-335.5256"/>
-<polygon fill="#000000" stroke="#000000" points="1157.4401,-335.5228 1162.3071,-330.2018 1169.0907,-332.6478 1157.4401,-335.5228"/>
+<path fill="none" stroke="#000000" d="M1079.5812,-767.8366C1030.3948,-751.5869 971,-720.6982 971,-666.2792 971,-666.2792 971,-666.2792 971,-431.8528 971,-390.2046 1076.9429,-355.6415 1159.1871,-335.0848"/>
+<polygon fill="#000000" stroke="#000000" points="1160.2167,-338.4359 1169.0907,-332.6478 1158.544,-331.6387 1160.2167,-338.4359"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L52">
@@ -283,8 +283,8 @@
 <g id="edge6" class="edge">
 <title>decompose_closure/6&#45;&gt;conjunction_to_list/3</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M593.6843,-528.2622C544.6555,-486.3146 433.8478,-391.5108 377.8084,-343.5651"/>
-<polygon fill="#000000" stroke="#000000" points="377.7732,-343.535 370.6137,-342.6738 368.6551,-335.7338 377.7732,-343.535"/>
+<path fill="none" stroke="#000000" d="M593.6843,-528.2622C544.2503,-485.9679 432.0121,-389.9402 376.4303,-342.386"/>
+<polygon fill="#000000" stroke="#000000" points="378.5289,-339.5753 368.6551,-335.7338 373.9782,-344.8943 378.5289,-339.5753"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464">
@@ -310,8 +310,8 @@
 <g id="edge7" class="edge">
 <title>decompose_closure/6&#45;&gt;control_construct/1</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L474" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M615.3753,-527.8488C610.3197,-486.9813 599.1965,-397.0644 593.1353,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="593.113,-347.887 588.4066,-342.4235 591.6397,-335.9778 593.113,-347.887"/>
+<path fill="none" stroke="#000000" d="M615.3753,-527.8488C610.2444,-486.3727 598.8638,-394.3751 592.8679,-345.9067"/>
+<polygon fill="#000000" stroke="#000000" points="596.341,-345.4724 591.6397,-335.9778 589.3939,-346.3319 596.341,-345.4724"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L474" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L474">
@@ -323,8 +323,8 @@
 <g id="edge16" class="edge">
 <title>decompose_closure/6&#45;&gt;logtalk::compile_aux_clauses/1</title>
 <g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M652.9348,-528.9005C714.3936,-494.1813 846.6697,-422.8118 966,-380.8528 1023.6038,-360.5981 1089.8952,-344.8652 1144.3457,-333.8275"/>
-<polygon fill="#000000" stroke="#000000" points="1144.3647,-333.8238 1149.4651,-328.7263 1156.1323,-331.4738 1144.3647,-333.8238"/>
+<path fill="none" stroke="#000000" d="M652.9348,-528.9005C714.3936,-494.1813 846.6697,-422.8118 966,-380.8528 1024.2076,-360.3858 1091.2859,-344.5359 1146.0541,-333.482"/>
+<polygon fill="#000000" stroke="#000000" points="1147.0091,-336.8606 1156.1323,-331.4738 1145.6411,-329.9955 1147.0091,-336.8606"/>
 </a>
 </g>
 <g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464">
@@ -350,8 +350,8 @@
 <g id="edge13" class="edge">
 <title>decompose_closure/6&#45;&gt;list::length/2</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M634.5628,-527.8488C667.0902,-486.1805 739.4225,-393.5215 777.1157,-345.2358"/>
-<polygon fill="#000000" stroke="#000000" points="777.2224,-345.0992 777.7614,-337.9082 784.6065,-335.64 777.2224,-345.0992"/>
+<path fill="none" stroke="#000000" d="M634.5628,-527.8488C667.4305,-485.7446 740.9401,-391.5775 778.2871,-343.7353"/>
+<polygon fill="#000000" stroke="#000000" points="781.212,-345.6764 784.6065,-335.64 775.6941,-341.3689 781.212,-345.6764"/>
 </a>
 </g>
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464">
@@ -377,8 +377,8 @@
 <g id="edge14" class="edge">
 <title>decompose_closure/6&#45;&gt;gensym::gensym/2</title>
 <g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M575.8126,-529.4822C483.9391,-486.8335 265.9685,-385.6492 165.4442,-338.9847"/>
-<polygon fill="#000000" stroke="#000000" points="165.2434,-338.8916 158.1169,-339.9934 154.3589,-333.8389 165.2434,-338.8916"/>
+<path fill="none" stroke="#000000" d="M575.8126,-529.4822C483.3801,-486.574 263.3111,-384.4156 163.6221,-338.1389"/>
+<polygon fill="#000000" stroke="#000000" points="164.903,-334.8749 154.3589,-333.8389 161.9556,-341.2241 164.903,-334.8749"/>
 </a>
 </g>
 <g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464">
@@ -404,8 +404,8 @@
 <g id="edge15" class="edge">
 <title>decompose_closure/6&#45;&gt;list::append/3</title>
 <g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M640.5238,-528.2639C678.2984,-494.1561 757.7912,-425.6615 834,-380.8528 863.8913,-363.2776 899.3235,-347.8512 928.8595,-336.3201"/>
-<polygon fill="#000000" stroke="#000000" points="929.0792,-336.2359 933.2486,-330.3523 940.2832,-331.9381 929.0792,-336.2359"/>
+<path fill="none" stroke="#000000" d="M640.5238,-528.2639C678.2984,-494.1561 757.7912,-425.6615 834,-380.8528 864.5526,-362.8887 900.894,-347.1697 930.8111,-335.5605"/>
+<polygon fill="#000000" stroke="#000000" points="932.1931,-338.7793 940.2832,-331.9381 929.6927,-332.2411 932.1931,-338.7793"/>
 </a>
 </g>
 <g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L464">
@@ -417,8 +417,8 @@
 <g id="edge17" class="edge">
 <title>extend_closure/4&#45;&gt;list::append/3</title>
 <g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L569" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M853.5761,-527.8488C880.1263,-486.3548 939.0311,-394.296 970.0334,-345.8442"/>
-<polygon fill="#000000" stroke="#000000" points="970.095,-345.7479 969.9595,-338.5381 976.5627,-335.64 970.095,-345.7479"/>
+<path fill="none" stroke="#000000" d="M853.5761,-527.8488C880.4052,-485.919 940.2721,-392.3564 971.0011,-344.3319"/>
+<polygon fill="#000000" stroke="#000000" points="974.1211,-345.9497 976.5627,-335.64 968.2248,-342.1769 974.1211,-345.9497"/>
 </a>
 </g>
 <g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L569" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L569">
@@ -444,8 +444,8 @@
 <g id="edge8" class="edge">
 <title>replace_functor/4&#45;&gt;replace_functor_head/4</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L574" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1453.0181,-532.7239C1547.958,-507.5731 1715,-459.4065 1715,-431.8528 1715,-431.8528 1715,-431.8528 1715,-197.4264 1715,-156.274 1678.5452,-125.5722 1644.6981,-105.9354"/>
-<polygon fill="#000000" stroke="#000000" points="1644.3565,-105.747 1637.1707,-106.3504 1633.8499,-99.9495 1644.3565,-105.747"/>
+<path fill="none" stroke="#000000" d="M1453.0181,-532.7239C1547.958,-507.5731 1715,-459.4065 1715,-431.8528 1715,-431.8528 1715,-431.8528 1715,-197.4264 1715,-155.5614 1677.2717,-124.512 1642.9423,-104.9253"/>
+<polygon fill="#000000" stroke="#000000" points="1644.3025,-101.6799 1633.8499,-99.9495 1640.942,-107.8205 1644.3025,-101.6799"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L574" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L574">
@@ -471,8 +471,8 @@
 <g id="edge9" class="edge">
 <title>replace_functor/4&#45;&gt;replace_functor_body/4</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L574" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1404.1147,-527.8488C1433.6613,-486.3727 1499.1982,-394.3751 1533.726,-345.9067"/>
-<polygon fill="#000000" stroke="#000000" points="1533.8366,-345.7514 1534.06,-338.5438 1540.7992,-335.9778 1533.8366,-345.7514"/>
+<path fill="none" stroke="#000000" d="M1404.1147,-527.8488C1433.971,-485.9379 1500.5761,-392.4409 1534.8015,-344.397"/>
+<polygon fill="#000000" stroke="#000000" points="1537.8477,-346.1533 1540.7992,-335.9778 1532.1464,-342.0918 1537.8477,-346.1533"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L574" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L574">
@@ -484,8 +484,8 @@
 <g id="edge10" class="edge">
 <title>replace_functor_body/4&#45;&gt;replace_functor_head/4</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L598" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1558.8962,-293.4224C1564.4748,-252.5549 1576.7487,-162.638 1583.4369,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="1583.4642,-113.4411 1580.3125,-106.9552 1585.0873,-101.5514 1583.4642,-113.4411"/>
+<path fill="none" stroke="#000000" d="M1558.8962,-293.4224C1564.5579,-251.9463 1577.1158,-159.9487 1583.7319,-111.4803"/>
+<polygon fill="#000000" stroke="#000000" points="1587.2025,-111.9329 1585.0873,-101.5514 1580.2668,-110.9861 1587.2025,-111.9329"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L598" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/meta_compiler.lgt#L598">

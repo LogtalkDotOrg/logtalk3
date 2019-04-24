@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 683,-376.8528 683,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object coroutining</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_coroutining_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt">
@@ -49,8 +49,8 @@
 <g id="edge1" class="edge">
 <title>dif/2&#45;&gt;dif:dif/2</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L93" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M599,-293.4224C599,-252.5549 599,-162.638 599,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="599.0001,-113.5514 595,-107.5514 599,-101.5514 599.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M599,-293.4224C599,-252.0332 599,-160.3342 599,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="602.5001,-111.5514 599,-101.5514 595.5001,-111.5514 602.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L93">
@@ -87,8 +87,8 @@
 <g id="edge2" class="edge">
 <title>freeze/2&#45;&gt;user:freeze/2</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L96" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M438,-293.4224C438,-252.5549 438,-162.638 438,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="438.0001,-113.5514 434,-107.5514 438,-101.5514 438.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M438,-293.4224C438,-252.0332 438,-160.3342 438,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="441.5001,-111.5514 438,-101.5514 434.5001,-111.5514 441.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L96">
@@ -125,8 +125,8 @@
 <g id="edge3" class="edge">
 <title>frozen/2&#45;&gt;user:frozen/2</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L99" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M259,-293.4224C259,-252.5549 259,-162.638 259,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="259.0001,-113.5514 255,-107.5514 259,-101.5514 259.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M259,-293.4224C259,-252.0332 259,-160.3342 259,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="262.5001,-111.5514 259,-101.5514 255.5001,-111.5514 262.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L99">
@@ -163,8 +163,8 @@
 <g id="edge4" class="edge">
 <title>when/2&#45;&gt;when:when/2</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L102" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M89,-293.4224C89,-252.5549 89,-162.638 89,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="89.0001,-113.5514 85,-107.5514 89,-101.5514 89.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M89,-293.4224C89,-252.0332 89,-160.3342 89,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="92.5001,-111.5514 89,-101.5514 85.5001,-111.5514 92.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/coroutining.lgt#L102">

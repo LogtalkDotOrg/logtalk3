@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.44,
+		version is 2.45,
 		author is 'Paulo Moura',
-		date is 2019/04/23,
+		date is 2019/04/24,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -125,7 +125,7 @@
 		predicate_kind_caption(Kind, Properties, PredicateKind, Caption),
 		add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions),
 		^^output_node(Predicate, Predicate, Caption, [], PredicateKind, PredicateOptions),
-		remember_included_predicate(Predicate),
+		remember_included_predicate(Predicate0),
 		fail.
 	process_entity(Kind, Entity, Options) :-
 		Kind \== protocol,
@@ -141,7 +141,7 @@
 		),
 		add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions),
 		^^output_node(Predicate, Predicate, local, [], local_predicate, PredicateOptions),
-		remember_included_predicate(Predicate),
+		remember_included_predicate(Predicate0),
 		fail.
 	process_entity(Kind, Entity, Options) :-
 		Kind \== protocol,
@@ -154,7 +154,7 @@
 		),
 		add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions),
 		^^output_node(Predicate, Predicate, (dynamic), [], local_predicate, PredicateOptions),
-		remember_included_predicate(Predicate),
+		remember_included_predicate(Predicate0),
 		fail.
 	process_entity(Kind, Entity, Options) :-
 		Kind \== protocol,
@@ -172,7 +172,7 @@
 			member(non_terminal(NonTerminal), DeclaresProperties) ->
 			add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
 			^^output_node(To::NonTerminal, To::NonTerminal, (multifile), [], multifile_predicate, PredicateOptions),
-			remember_included_predicate(To::NonTerminal)
+			remember_included_predicate(To::Predicate)
 		;	add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
 			^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
 			remember_included_predicate(To::Predicate)
@@ -188,19 +188,19 @@
 		fail.
 	process_entity(Kind, Entity, Options) :-
 		calls_self_predicate(Kind, Entity, Caller, Line, Callee),
-		\+ ^^edge(Caller, Callee, ['calls in self'], calls_self_predicate, _),
+		\+ ^^edge(Caller, ::Callee, [calls], calls_self_predicate, _),
 		remember_referenced_predicate(Caller),
-		remember_referenced_predicate(Callee),
+		remember_external_predicate(::Callee),
 		add_xref_code_url(Options, Kind, Entity, Line, XRefOptions),
-		^^save_edge(Caller, Callee, ['calls in self'], calls_self_predicate, [tooltip('calls in self')| XRefOptions]),
+		^^save_edge(Caller, ::Callee, [calls], calls_self_predicate, [tooltip(calls)| XRefOptions]),
 		fail.
 	process_entity(Kind, Entity, Options) :-
 		calls_super_predicate(Kind, Entity, Caller, Line, Callee),
-		\+ ^^edge(Caller, Callee, ['super call'], calls_super_predicate, _),
+		\+ ^^edge(Caller, ^^Callee, [calls], calls_super_predicate, _),
 		remember_referenced_predicate(Caller),
-		remember_referenced_predicate(Callee),
+		remember_external_predicate(^^Callee),
 		add_xref_code_url(Options, Kind, Entity, Line, XRefOptions),
-		^^save_edge(Caller, Callee, ['super call'], calls_super_predicate, [tooltip('super call')| XRefOptions]),
+		^^save_edge(Caller, ^^Callee, [calls], calls_super_predicate, [tooltip(calls)| XRefOptions]),
 		fail.
 	process_entity(Kind, Entity, Options) :-
 		calls_external_predicate(Kind, Entity, Caller, Line, Callee0),

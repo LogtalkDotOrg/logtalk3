@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 1539,-376.8528 1539,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for category proto_hierarchy</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_proto_hierarchy_category</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt">
@@ -80,8 +80,8 @@
 <g id="edge1" class="edge">
 <title>ancestor/1&#45;&gt;ancestor/2</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L40" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1167.8499,-293.4224C1154.0193,-252.381 1123.5184,-161.8718 1107.0552,-113.0187"/>
-<polygon fill="#000000" stroke="#000000" points="1107.0231,-112.9231 1101.3164,-108.5146 1103.1908,-101.5514 1107.0231,-112.9231"/>
+<path fill="none" stroke="#000000" d="M1167.8499,-293.4224C1153.8435,-251.8593 1122.7402,-159.5628 1106.4343,-111.1761"/>
+<polygon fill="#000000" stroke="#000000" points="1109.7011,-109.91 1103.1908,-101.5514 1103.0676,-112.1455 1109.7011,-109.91"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L40">
@@ -107,8 +107,8 @@
 <g id="edge2" class="edge">
 <title>ancestors/1&#45;&gt;ancestor/2</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L50" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1025.0595,-293.4224C1038.7151,-252.381 1068.83,-161.8718 1085.0847,-113.0187"/>
-<polygon fill="#000000" stroke="#000000" points="1085.1116,-112.9377 1083.2105,-105.9817 1088.9002,-101.5514 1085.1116,-112.9377"/>
+<path fill="none" stroke="#000000" d="M1025.0595,-293.4224C1038.8887,-251.8593 1069.5983,-159.5628 1085.6978,-111.1761"/>
+<polygon fill="#000000" stroke="#000000" points="1089.064,-112.145 1088.9002,-101.5514 1082.422,-109.935 1089.064,-112.145"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L50">
@@ -176,8 +176,8 @@
 <g id="edge3" class="edge">
 <title>leaf/1&#45;&gt;leaf/2</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L62" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M542.1215,-293.4224C528.7824,-252.2771 499.3247,-161.4133 483.5154,-112.6485"/>
-<polygon fill="#000000" stroke="#000000" points="483.509,-112.6287 477.8536,-108.1548 479.8082,-101.2136 483.509,-112.6287"/>
+<path fill="none" stroke="#000000" d="M542.1215,-293.4224C528.6128,-251.7541 498.5732,-159.0951 482.9192,-110.8094"/>
+<polygon fill="#000000" stroke="#000000" points="486.2217,-109.6468 479.8082,-101.2136 479.5628,-111.8056 486.2217,-109.6468"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L62">
@@ -203,8 +203,8 @@
 <g id="edge4" class="edge">
 <title>leaves/1&#45;&gt;leaf/2</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L73" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M430.2538,-293.4224C438.4648,-252.468 456.5515,-162.2551 466.3605,-113.3298"/>
-<polygon fill="#000000" stroke="#000000" points="466.3629,-113.3173 463.6205,-106.648 468.7219,-101.5514 466.3629,-113.3173"/>
+<path fill="none" stroke="#000000" d="M430.2538,-293.4224C438.5693,-251.9463 457.0139,-159.9487 466.7313,-111.4803"/>
+<polygon fill="#000000" stroke="#000000" points="470.1878,-112.0443 468.7219,-101.5514 463.3244,-110.6682 470.1878,-112.0443"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L73">
@@ -244,8 +244,8 @@
 <g id="edge5" class="edge">
 <title>descendant/1&#45;&gt;descendant/2</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L80" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M266.1259,-293.4224C250.8947,-252.381 217.305,-161.8718 199.1747,-113.0187"/>
-<polygon fill="#000000" stroke="#000000" points="199.0942,-112.8017 193.2565,-108.5683 194.919,-101.5514 199.0942,-112.8017"/>
+<path fill="none" stroke="#000000" d="M266.1259,-293.4224C250.7011,-251.8593 216.4481,-159.5628 198.4909,-111.1761"/>
+<polygon fill="#000000" stroke="#000000" points="201.6797,-109.7088 194.919,-101.5514 195.1171,-112.1444 201.6797,-109.7088"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L80">
@@ -271,8 +271,8 @@
 <g id="edge6" class="edge">
 <title>descendants/1&#45;&gt;descendant/2</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L93" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M106.9646,-293.4224C122.3709,-252.381 156.3466,-161.8718 174.6853,-113.0187"/>
-<polygon fill="#000000" stroke="#000000" points="174.7726,-112.7859 173.1365,-105.7629 178.99,-101.5514 174.7726,-112.7859"/>
+<path fill="none" stroke="#000000" d="M106.9646,-293.4224C122.5667,-251.8593 157.2134,-159.5628 175.377,-111.1761"/>
+<polygon fill="#000000" stroke="#000000" points="178.7523,-112.1436 178.99,-101.5514 172.1988,-109.6835 178.7523,-112.1436"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/proto_hierarchy.lgt#L93">

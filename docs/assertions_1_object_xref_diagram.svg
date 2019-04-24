@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 551,-376.8528 551,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object assertions/1</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_assertions_1_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/assertions/assertions.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/assertions/assertions.lgt">
@@ -52,8 +52,8 @@
 <g id="edge1" class="edge">
 <title>assertion/1&#45;&gt;logtalk::print_message/3</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/assertions/assertions.lgt#L54" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M449.7639,-293.4224C433.8324,-252.381 398.6984,-161.8718 379.7345,-113.0187"/>
-<polygon fill="#000000" stroke="#000000" points="379.6256,-112.7381 373.7255,-108.5923 375.2831,-101.5514 379.6256,-112.7381"/>
+<path fill="none" stroke="#000000" d="M449.7639,-293.4224C433.6299,-251.8593 397.802,-159.5628 379.0192,-111.1761"/>
+<polygon fill="#000000" stroke="#000000" points="382.1647,-109.6071 375.2831,-101.5514 375.6391,-112.1403 382.1647,-109.6071"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/assertions/assertions.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/assertions/assertions.lgt#L54">
@@ -79,8 +79,8 @@
 <g id="edge2" class="edge">
 <title>assertion/2&#45;&gt;logtalk::print_message/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/assertions/assertions.lgt#L63" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M303.3355,-293.4224C315.5645,-252.468 342.5022,-162.2551 357.1113,-113.3298"/>
-<polygon fill="#000000" stroke="#000000" points="357.1949,-113.0497 355.0789,-106.1561 360.6284,-101.5514 357.1949,-113.0497"/>
+<path fill="none" stroke="#000000" d="M303.3355,-293.4224C315.7463,-251.8593 343.3061,-159.5628 357.7545,-111.1761"/>
+<polygon fill="#000000" stroke="#000000" points="361.1208,-112.1348 360.6284,-101.5514 354.4135,-110.1319 361.1208,-112.1348"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/assertions/assertions.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/assertions/assertions.lgt#L63">

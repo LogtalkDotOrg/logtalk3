@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1080.132 1027,-1080.132 1027,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object tap_output</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_tap_output_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt">
@@ -66,8 +66,8 @@
 <g id="edge2" class="edge">
 <title>message_hook/1&#45;&gt;generating_/0</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M359.154,-774.1519C307.239,-765.3024 238.6521,-748.5102 185,-717.2792 136.1682,-688.8542 114.1135,-622.5135 104.9103,-582.1575"/>
-<polygon fill="#000000" stroke="#000000" points="104.8844,-582.0343 99.7304,-576.9908 102.4037,-570.2935 104.8844,-582.0343"/>
+<path fill="none" stroke="#000000" d="M359.154,-774.1519C307.239,-765.3024 238.6521,-748.5102 185,-717.2792 135.3245,-688.3631 113.3593,-620.2096 104.4447,-580.0892"/>
+<polygon fill="#000000" stroke="#000000" points="107.87,-579.3693 102.4037,-570.2935 101.0171,-580.7972 107.87,-579.3693"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L60">
@@ -93,8 +93,8 @@
 <g id="edge6" class="edge">
 <title>message_hook/1&#45;&gt;partial_/1</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L106" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M417.3601,-762.6113C397.9777,-740.5376 367.1507,-704.3991 343,-671.2792 321.297,-641.5161 298.9176,-605.8434 283.7276,-580.744"/>
-<polygon fill="#000000" stroke="#000000" points="283.6623,-580.6352 277.1433,-577.5524 277.4818,-570.3492 283.6623,-580.6352"/>
+<path fill="none" stroke="#000000" d="M417.3601,-762.6113C397.9777,-740.5376 367.1507,-704.3991 343,-671.2792 320.8103,-640.8487 297.9137,-604.2408 282.7167,-579.0718"/>
+<polygon fill="#000000" stroke="#000000" points="285.6288,-577.1224 277.4818,-570.3492 279.6268,-580.7246 285.6288,-577.1224"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L106">
@@ -134,8 +134,8 @@
 <g id="edge5" class="edge">
 <title>message_hook/1&#45;&gt;write_failed_reason_message/1</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L94" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M442.3355,-762.2752C454.5645,-721.3208 481.5022,-631.108 496.1113,-582.1826"/>
-<polygon fill="#000000" stroke="#000000" points="496.1949,-581.9026 494.0789,-575.0089 499.6284,-570.4042 496.1949,-581.9026"/>
+<path fill="none" stroke="#000000" d="M442.3355,-762.2752C454.7463,-720.7121 482.3061,-628.4156 496.7545,-580.0289"/>
+<polygon fill="#000000" stroke="#000000" points="500.1208,-580.9876 499.6284,-570.4042 493.4135,-578.9847 500.1208,-580.9876"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L94">
@@ -161,8 +161,8 @@
 <g id="edge4" class="edge">
 <title>message_hook/1&#45;&gt;write_test_note/2</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L90" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M465.244,-763.5054C526.7281,-721.4835 669.4541,-623.9361 739.1996,-576.268"/>
-<polygon fill="#000000" stroke="#000000" points="739.4357,-576.1066 742.1322,-569.4187 749.3428,-569.3355 739.4357,-576.1066"/>
+<path fill="none" stroke="#000000" d="M465.244,-763.5054C527.2331,-721.1384 671.8042,-622.33 740.9033,-575.1035"/>
+<polygon fill="#000000" stroke="#000000" points="743.0618,-577.8677 749.3428,-569.3355 739.1119,-572.0885 743.0618,-577.8677"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L90">
@@ -188,8 +188,8 @@
 <g id="edge3" class="edge">
 <title>message_hook/1&#45;&gt;pretty_print_term/1</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L74" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M519.9326,-779.3098C653.129,-770.3498 898,-743.3914 898,-666.2792 898,-666.2792 898,-666.2792 898,-197.4264 898,-152.4866 855.5462,-122.0622 816.1138,-103.4959"/>
-<polygon fill="#000000" stroke="#000000" points="816.063,-103.4732 808.9524,-104.6734 805.1097,-98.5714 816.063,-103.4732"/>
+<path fill="none" stroke="#000000" d="M519.9326,-779.3098C653.129,-770.3498 898,-743.3914 898,-666.2792 898,-666.2792 898,-666.2792 898,-197.4264 898,-151.8144 854.2668,-121.1554 814.3466,-102.6707"/>
+<polygon fill="#000000" stroke="#000000" points="815.6698,-99.4288 805.1097,-98.5714 812.8303,-105.827 815.6698,-99.4288"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L74">
@@ -215,8 +215,8 @@
 <g id="edge7" class="edge">
 <title>message_hook/1&#45;&gt;sum/2</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L106" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M517.0977,-776.5999C642.913,-765.2268 873.786,-741.381 903,-717.2792 943.2476,-684.0747 955.634,-621.4592 959.4036,-582.6975"/>
-<polygon fill="#000000" stroke="#000000" points="959.4189,-582.5051 955.912,-576.2042 960.3794,-570.5436 959.4189,-582.5051"/>
+<path fill="none" stroke="#000000" d="M517.0977,-776.5999C642.913,-765.2268 873.786,-741.381 903,-717.2792 943.9476,-683.4973 956.0564,-619.2723 959.5925,-580.697"/>
+<polygon fill="#000000" stroke="#000000" points="963.0962,-580.7842 960.3794,-570.5436 956.1171,-580.2433 963.0962,-580.7842"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L106">
@@ -242,8 +242,8 @@
 <g id="edge8" class="edge">
 <title>write_failed_reason_message/1&#45;&gt;write_failed_reason_message_data/1</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L121" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M514.7792,-527.8488C531.7971,-486.7205 569.3704,-395.9145 589.5541,-347.1352"/>
-<polygon fill="#000000" stroke="#000000" points="589.5826,-347.0661 588.1806,-339.9926 594.1708,-335.9778 589.5826,-347.0661"/>
+<path fill="none" stroke="#000000" d="M514.7792,-527.8488C532.013,-486.1988 570.3269,-393.6028 590.3137,-345.2994"/>
+<polygon fill="#000000" stroke="#000000" points="593.5814,-346.5562 594.1708,-335.9778 587.1132,-343.8798 593.5814,-346.5562"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L121">
@@ -255,8 +255,8 @@
 <g id="edge9" class="edge">
 <title>write_failed_reason_message_data/1&#45;&gt;pretty_print_term/1</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L134" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M616.3045,-293.4224C642.2581,-252.0332 699.7591,-160.3342 730.2021,-111.7857"/>
-<polygon fill="#000000" stroke="#000000" points="730.2445,-111.718 730.0432,-104.5096 736.6196,-101.5514 730.2445,-111.718"/>
+<path fill="none" stroke="#000000" d="M616.3045,-293.4224C642.5307,-251.5985 700.9706,-158.4022 731.1524,-110.2702"/>
+<polygon fill="#000000" stroke="#000000" points="734.2723,-111.8829 736.6196,-101.5514 728.3418,-108.1641 734.2723,-111.8829"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L134">
@@ -282,8 +282,8 @@
 <g id="edge10" class="edge">
 <title>sum/2&#45;&gt;sum/3</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L171" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M961,-527.8488C961,-486.9813 961,-397.0644 961,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="961.0001,-347.9778 957,-341.9778 961,-335.9778 961.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M961,-527.8488C961,-486.4596 961,-394.7606 961,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="964.5001,-345.9778 961,-335.9778 957.5001,-345.9778 964.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L171">
@@ -309,8 +309,8 @@
 <g id="edge1" class="edge">
 <title>logtalk::message_hook/4&#45;&gt;message_hook/1</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L56" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M436,-996.7016C436,-955.8342 436,-865.9172 436,-816.9212"/>
-<polygon fill="#000000" stroke="#000000" points="436.0001,-816.8306 432,-810.8307 436,-804.8306 436.0001,-816.8306"/>
+<path fill="none" stroke="#000000" d="M436,-996.7016C436,-955.3124 436,-863.6135 436,-815.0649"/>
+<polygon fill="#000000" stroke="#000000" points="439.5001,-814.8306 436,-804.8306 432.5001,-814.8307 439.5001,-814.8306"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/tap_output.lgt#L56">

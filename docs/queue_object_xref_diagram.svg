@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 1192,-376.8528 1192,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object queue</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_queue_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt">
@@ -94,8 +94,8 @@
 <g id="edge1" class="edge">
 <title>join_all/3&#45;&gt;join/3</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L50" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M723,-293.4224C723,-252.5549 723,-162.638 723,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="723.0001,-113.5514 719,-107.5514 723,-101.5514 723.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M723,-293.4224C723,-252.0332 723,-160.3342 723,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="726.5001,-111.5514 723,-101.5514 719.5001,-111.5514 726.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L50">
@@ -135,8 +135,8 @@
 <g id="edge2" class="edge">
 <title>jump_all/3&#45;&gt;jump/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L57" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M571,-293.4224C571,-252.5549 571,-162.638 571,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="571.0001,-113.5514 567,-107.5514 571,-101.5514 571.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M571,-293.4224C571,-252.0332 571,-160.3342 571,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="574.5001,-111.5514 571,-101.5514 567.5001,-111.5514 574.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L57">
@@ -176,8 +176,8 @@
 <g id="edge3" class="edge">
 <title>length/2&#45;&gt;length/4</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L61" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M429,-293.4224C429,-252.5549 429,-162.638 429,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="429.0001,-113.5514 425,-107.5514 429,-101.5514 429.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M429,-293.4224C429,-252.0332 429,-160.3342 429,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="432.5001,-111.5514 429,-101.5514 425.5001,-111.5514 432.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L61">
@@ -245,8 +245,8 @@
 <g id="edge4" class="edge">
 <title>valid/1&#45;&gt;valid2/1</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L78" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M71.362,-293.4224C72.0593,-252.5549 73.5936,-162.638 74.4296,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="74.4311,-113.5497 70.5341,-107.4823 74.6359,-101.5514 74.4311,-113.5497"/>
+<path fill="none" stroke="#000000" d="M71.362,-293.4224C72.0682,-252.0332 73.6329,-160.3342 74.4613,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="77.9647,-111.6097 74.6359,-101.5514 70.9657,-111.4902 77.9647,-111.6097"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/queue.lgt#L78">

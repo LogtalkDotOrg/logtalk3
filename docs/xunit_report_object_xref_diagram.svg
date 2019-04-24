@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-2059.2641 2727,-2059.2641 2727,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object xunit_report</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_xunit_report_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt">
@@ -80,8 +80,8 @@
 <g id="edge2" class="edge">
 <title>message_hook/1&#45;&gt;generate_xml_report/0</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L70" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1745.9689,-1746.8791C1594.5868,-1705.805 1187.6237,-1595.385 1016.9706,-1549.0822"/>
-<polygon fill="#000000" stroke="#000000" points="1016.9244,-1549.0698 1010.0863,-1551.359 1005.3431,-1545.9274 1016.9244,-1549.0698"/>
+<path fill="none" stroke="#000000" d="M1745.9689,-1746.8791C1594.0573,-1705.6614 1184.7733,-1594.6116 1015.1884,-1548.5987"/>
+<polygon fill="#000000" stroke="#000000" points="1015.9107,-1545.1682 1005.3431,-1545.9274 1014.0776,-1551.9239 1015.9107,-1545.1682"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L70">
@@ -107,8 +107,8 @@
 <g id="edge41" class="edge">
 <title>message_hook/1&#45;&gt;logtalk::loaded_file_property/2</title>
 <g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L60" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1821.4116,-1741.647C1838.1743,-1719.2698 1861,-1682.0688 1861,-1645.4113 1861,-1645.4113 1861,-1645.4113 1861,-824.9188 1861,-747.6073 1857.1142,-715.4964 1802,-661.2792 1749.1807,-609.3196 1671.3098,-581.3838 1604.6963,-566.3821"/>
-<polygon fill="#000000" stroke="#000000" points="1604.5566,-566.352 1597.847,-568.9945 1592.8273,-563.8175 1604.5566,-566.352"/>
+<path fill="none" stroke="#000000" d="M1821.4116,-1741.647C1838.1743,-1719.2698 1861,-1682.0688 1861,-1645.4113 1861,-1645.4113 1861,-1645.4113 1861,-824.9188 1861,-747.6073 1857.1142,-715.4964 1802,-661.2792 1748.6339,-608.7817 1669.6948,-580.808 1602.6313,-565.9204"/>
+<polygon fill="#000000" stroke="#000000" points="1603.3389,-562.4926 1592.8273,-563.8175 1601.8708,-569.337 1603.3389,-562.4926"/>
 </a>
 </g>
 <g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L60">
@@ -134,8 +134,8 @@
 <g id="edge3" class="edge">
 <title>generate_xml_report/0&#45;&gt;write_report_header/0</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M940,-1506.9808C940,-1466.1134 940,-1376.1964 940,-1327.2004"/>
-<polygon fill="#000000" stroke="#000000" points="940.0001,-1327.1098 936,-1321.1099 940,-1315.1098 940.0001,-1327.1098"/>
+<path fill="none" stroke="#000000" d="M940,-1506.9808C940,-1465.5917 940,-1373.8927 940,-1325.3442"/>
+<polygon fill="#000000" stroke="#000000" points="943.5001,-1325.1098 940,-1315.1098 936.5001,-1325.1099 943.5001,-1325.1098"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87">
@@ -161,8 +161,8 @@
 <g id="edge4" class="edge">
 <title>generate_xml_report/0&#45;&gt;write_testsuites_element/0</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M890.8024,-1508.8145C782.8861,-1466.2961 525.5725,-1364.9161 406.8988,-1318.1594"/>
-<polygon fill="#000000" stroke="#000000" points="406.68,-1318.0732 399.6313,-1319.5954 395.5153,-1313.6744 406.68,-1318.0732"/>
+<path fill="none" stroke="#000000" d="M890.8024,-1508.8145C782.3417,-1466.0816 522.9722,-1363.8916 405.1132,-1317.4559"/>
+<polygon fill="#000000" stroke="#000000" points="406.1022,-1314.0837 395.5153,-1313.6744 403.5362,-1320.5965 406.1022,-1314.0837"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L87">
@@ -188,8 +188,8 @@
 <g id="edge6" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_testsuite_element/0</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M388.8376,-1273.5817C481.5769,-1230.8694 697.445,-1131.4486 799.1439,-1084.6099"/>
-<polygon fill="#000000" stroke="#000000" points="799.1878,-1084.5897 802.9643,-1078.4466 810.0874,-1079.5698 799.1878,-1084.5897"/>
+<path fill="none" stroke="#000000" d="M388.8376,-1273.5817C482.1406,-1230.6098 700.0741,-1130.2378 800.9859,-1083.7616"/>
+<polygon fill="#000000" stroke="#000000" points="802.4686,-1086.9321 810.0874,-1079.5698 799.5402,-1080.5741 802.4686,-1086.9321"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94">
@@ -215,8 +215,8 @@
 <g id="edge5" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_xml_open_tag/2</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M266.1667,-1276.1321C216.226,-1259.7755 161,-1229.6788 161,-1176.5584 161,-1176.5584 161,-1176.5584 161,-891.632 161,-786.791 179.4529,-510.9926 242,-426.8528 268.3316,-391.431 308.6267,-361.3415 339.9019,-341.2646"/>
-<polygon fill="#000000" stroke="#000000" points="339.9649,-341.2251 342.9209,-334.6476 350.1293,-334.8465 339.9649,-341.2251"/>
+<path fill="none" stroke="#000000" d="M266.1667,-1276.1321C216.226,-1259.7755 161,-1229.6788 161,-1176.5584 161,-1176.5584 161,-1176.5584 161,-891.632 161,-786.791 179.4529,-510.9926 242,-426.8528 268.7895,-390.815 310.0324,-360.2965 341.5253,-340.2262"/>
+<polygon fill="#000000" stroke="#000000" points="343.5058,-343.1158 350.1293,-334.8465 339.7947,-337.1805 343.5058,-343.1158"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94">
@@ -242,8 +242,8 @@
 <g id="edge7" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_xml_close_tag/1</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M274.9276,-1275.2497C201.5912,-1253.7484 97,-1216.1445 97,-1176.5584 97,-1176.5584 97,-1176.5584 97,-431.8528 97,-401.9477 108.5709,-369.8447 119.1076,-346.8108"/>
-<polygon fill="#000000" stroke="#000000" points="119.1172,-346.7907 118.1,-339.6517 124.2987,-335.967 119.1172,-346.7907"/>
+<path fill="none" stroke="#000000" d="M274.9276,-1275.2497C201.5912,-1253.7484 97,-1216.1445 97,-1176.5584 97,-1176.5584 97,-1176.5584 97,-431.8528 97,-401.2649 109.1053,-368.3777 119.8275,-345.2475"/>
+<polygon fill="#000000" stroke="#000000" points="123.1114,-346.4951 124.2987,-335.967 116.8051,-343.4568 123.1114,-346.4951"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L94">
@@ -269,8 +269,8 @@
 <g id="edge14" class="edge">
 <title>write_testsuite_element/0&#45;&gt;write_test_elements/0</title>
 <g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M841.6005,-1038.128C817.4633,-996.8258 764.0482,-905.4249 735.6303,-856.7979"/>
-<polygon fill="#000000" stroke="#000000" points="735.5249,-856.6176 729.044,-853.4556 729.4702,-846.257 735.5249,-856.6176"/>
+<path fill="none" stroke="#000000" d="M841.6005,-1038.128C817.1584,-996.3041 762.6941,-903.1079 734.5655,-854.9759"/>
+<polygon fill="#000000" stroke="#000000" points="737.5376,-853.1248 729.4702,-846.257 731.494,-856.6568 737.5376,-853.1248"/>
 </a>
 </g>
 <g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
@@ -296,8 +296,8 @@
 <g id="edge8" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_stats/4</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M864.7703,-1038.128C885.6921,-996.9128 931.9381,-905.8096 956.6613,-857.1056"/>
-<polygon fill="#000000" stroke="#000000" points="956.7365,-856.9573 955.8856,-849.7966 962.1683,-846.257 956.7365,-856.9573"/>
+<path fill="none" stroke="#000000" d="M864.7703,-1038.128C885.9569,-996.391 933.1129,-903.4952 957.5897,-855.2766"/>
+<polygon fill="#000000" stroke="#000000" points="960.7627,-856.7582 962.1683,-846.257 954.5209,-853.5897 960.7627,-856.7582"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
@@ -323,8 +323,8 @@
 <g id="edge9" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_name/1</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M852.9194,-1037.9314C851.1093,-993.754 849.0051,-889.4595 864,-803.7056 865.926,-792.6912 869.2116,-780.9696 872.6192,-770.498"/>
-<polygon fill="#000000" stroke="#000000" points="872.7055,-770.2466 870.8702,-763.2729 876.6015,-758.8966 872.7055,-770.2466"/>
+<path fill="none" stroke="#000000" d="M852.9194,-1037.9314C851.1093,-993.754 849.0051,-889.4595 864,-803.7056 866.0516,-791.9729 869.6459,-779.4377 873.2872,-768.4657"/>
+<polygon fill="#000000" stroke="#000000" points="876.6358,-769.4914 876.6015,-758.8966 870.0213,-767.2004 876.6358,-769.4914"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
@@ -350,8 +350,8 @@
 <g id="edge10" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_package/1</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M884.7052,-1038.5415C947.3159,-996.1206 1089.7092,-899.6445 1159.6757,-852.2399"/>
-<polygon fill="#000000" stroke="#000000" points="1159.9231,-852.0723 1162.6467,-845.3953 1169.8577,-845.3413 1159.9231,-852.0723"/>
+<path fill="none" stroke="#000000" d="M884.7052,-1038.5415C947.8302,-995.7722 1092.0537,-898.056 1161.385,-851.0818"/>
+<polygon fill="#000000" stroke="#000000" points="1163.5421,-853.848 1169.8577,-845.3413 1159.6157,-848.0529 1163.5421,-853.848"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
@@ -377,8 +377,8 @@
 <g id="edge11" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_time/1</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M921.2896,-1040.8523C1079.317,-997.4223 1473.0172,-889.2233 1635.3161,-844.6194"/>
-<polygon fill="#000000" stroke="#000000" points="1635.4877,-844.5723 1640.2131,-839.1253 1647.0586,-841.3923 1635.4877,-844.5723"/>
+<path fill="none" stroke="#000000" d="M921.2896,-1040.8523C1079.9497,-997.2484 1476.1737,-888.3558 1637.2545,-844.0867"/>
+<polygon fill="#000000" stroke="#000000" points="1638.3437,-847.4172 1647.0586,-841.3923 1636.4886,-840.6675 1638.3437,-847.4172"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
@@ -404,8 +404,8 @@
 <g id="edge12" class="edge">
 <title>write_testsuite_element/0&#45;&gt;testsuite_timestamp/1</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M903.879,-1039.5602C1012.0099,-996.6689 1267.6721,-895.2578 1384.6631,-848.8521"/>
-<polygon fill="#000000" stroke="#000000" points="1384.724,-848.828 1388.8264,-842.8975 1395.8785,-844.4034 1384.724,-848.828"/>
+<path fill="none" stroke="#000000" d="M903.879,-1039.5602C1012.5555,-996.4525 1270.2557,-894.233 1386.4233,-848.1539"/>
+<polygon fill="#000000" stroke="#000000" points="1387.8736,-851.344 1395.8785,-844.4034 1385.2925,-844.8372 1387.8736,-851.344"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
@@ -417,8 +417,8 @@
 <g id="edge13" class="edge">
 <title>write_testsuite_element/0&#45;&gt;write_xml_open_tag/2</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M804.0463,-1039.4702C677.719,-986.101 346.646,-826.1341 221,-570.2792 177.8791,-482.4716 283.4913,-387.9259 345.215,-342.3411"/>
-<polygon fill="#000000" stroke="#000000" points="345.3644,-342.233 347.8766,-335.4736 355.0822,-335.1929 345.3644,-342.233"/>
+<path fill="none" stroke="#000000" d="M804.0463,-1039.4702C677.719,-986.101 346.646,-826.1341 221,-570.2792 177.5235,-481.7474 285.2435,-386.3659 346.7332,-341.2233"/>
+<polygon fill="#000000" stroke="#000000" points="349.025,-343.8854 355.0822,-335.1929 344.9263,-338.2109 349.025,-343.8854"/>
 </a>
 </g>
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
@@ -430,8 +430,8 @@
 <g id="edge15" class="edge">
 <title>write_testsuite_element/0&#45;&gt;write_xml_close_tag/1</title>
 <g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M753.129,-1044.9588C554.9748,-1010.404 134,-903.1735 134,-615.7792 134,-615.7792 134,-615.7792 134,-431.8528 134,-403.6901 134.5843,-371.7266 135.1213,-348.2996"/>
-<polygon fill="#000000" stroke="#000000" points="135.1227,-348.2376 131.2679,-342.1434 135.4108,-336.2411 135.1227,-348.2376"/>
+<path fill="none" stroke="#000000" d="M753.129,-1044.9588C554.9748,-1010.404 134,-903.1735 134,-615.7792 134,-615.7792 134,-615.7792 134,-431.8528 134,-402.9078 134.6173,-369.948 135.1659,-346.3673"/>
+<polygon fill="#000000" stroke="#000000" points="138.6679,-346.3228 135.4108,-336.2411 131.67,-346.1536 138.6679,-346.3228"/>
 </a>
 </g>
 <g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L101">
@@ -457,8 +457,8 @@
 <g id="edge17" class="edge">
 <title>write_test_elements/0&#45;&gt;write_testcase_element_tags/4</title>
 <g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M691.8495,-803.9586C633.325,-755.1848 487.9114,-633.9982 420.8693,-578.1259"/>
-<polygon fill="#000000" stroke="#000000" points="420.7846,-578.0553 413.6146,-577.2868 411.5662,-570.3727 420.7846,-578.0553"/>
+<path fill="none" stroke="#000000" d="M691.8495,-803.9586C632.9653,-754.8849 486.1202,-632.5054 419.6418,-577.1029"/>
+<polygon fill="#000000" stroke="#000000" points="421.489,-574.0862 411.5662,-570.3727 417.0075,-579.4636 421.489,-574.0862"/>
 </a>
 </g>
 <g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116">
@@ -484,8 +484,8 @@
 <g id="edge16" class="edge">
 <title>write_test_elements/0&#45;&gt;testcase_classname_name_time/4</title>
 <g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M717.2354,-803.2731C717.7557,-755.4331 719.0067,-640.4041 719.6317,-582.9343"/>
-<polygon fill="#000000" stroke="#000000" points="719.6351,-582.6105 715.7006,-576.5673 719.7657,-570.6112 719.6351,-582.6105"/>
+<path fill="none" stroke="#000000" d="M717.2354,-803.2731C717.7623,-754.8288 719.0384,-637.4873 719.6551,-580.7843"/>
+<polygon fill="#000000" stroke="#000000" points="723.1566,-580.6487 719.7657,-570.6112 716.1571,-580.5725 723.1566,-580.6487"/>
 </a>
 </g>
 <g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L116">
@@ -511,8 +511,8 @@
 <g id="edge18" class="edge">
 <title>write_testcase_element_tags/4&#45;&gt;write_xml_empty_tag/2</title>
 <g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L122" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M428.7033,-528.4677C517.714,-485.5326 722.8339,-386.5912 819.6273,-339.902"/>
-<polygon fill="#000000" stroke="#000000" points="819.7929,-339.8222 823.4592,-333.6127 830.6012,-334.6087 819.7929,-339.8222"/>
+<path fill="none" stroke="#000000" d="M428.7033,-528.4677C518.2562,-485.2711 725.3371,-385.3837 821.384,-339.0547"/>
+<polygon fill="#000000" stroke="#000000" points="823.1149,-342.1057 830.6012,-334.6087 820.0737,-335.8009 823.1149,-342.1057"/>
 </a>
 </g>
 <g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L122">
@@ -524,8 +524,8 @@
 <g id="edge19" class="edge">
 <title>write_testcase_element_tags/4&#45;&gt;write_xml_open_tag/2</title>
 <g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M386,-527.8488C386,-486.9813 386,-397.0644 386,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="386.0001,-347.9778 382,-341.9778 386,-335.9778 386.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M386,-527.8488C386,-486.4596 386,-394.7606 386,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="389.5001,-345.9778 386,-335.9778 382.5001,-345.9778 389.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124">
@@ -551,8 +551,8 @@
 <g id="edge20" class="edge">
 <title>write_testcase_element_tags/4&#45;&gt;write_xml_element/3</title>
 <g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M407.8122,-527.8488C451.0074,-485.8318 547.5041,-391.9672 596.7824,-344.033"/>
-<polygon fill="#000000" stroke="#000000" points="596.8089,-344.0072 598.3208,-336.9563 605.4107,-335.64 596.8089,-344.0072"/>
+<path fill="none" stroke="#000000" d="M407.8122,-527.8488C451.3658,-485.4831 549.1093,-390.4057 597.9994,-342.8492"/>
+<polygon fill="#000000" stroke="#000000" points="600.683,-345.1215 605.4107,-335.64 595.8021,-340.1038 600.683,-345.1215"/>
 </a>
 </g>
 <g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124">
@@ -564,8 +564,8 @@
 <g id="edge21" class="edge">
 <title>write_testcase_element_tags/4&#45;&gt;write_xml_close_tag/1</title>
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M363.3732,-527.8488C318.565,-485.8318 218.4647,-391.9672 167.3461,-344.033"/>
-<polygon fill="#000000" stroke="#000000" points="167.1491,-343.8483 160.0362,-342.662 158.3955,-335.64 167.1491,-343.8483"/>
+<path fill="none" stroke="#000000" d="M363.3732,-527.8488C318.1002,-485.396 216.3819,-390.0142 165.7712,-342.5562"/>
+<polygon fill="#000000" stroke="#000000" points="168.0842,-339.9271 158.3955,-335.64 163.2961,-345.0334 168.0842,-339.9271"/>
 </a>
 </g>
 <g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L124">
@@ -591,8 +591,8 @@
 <g id="edge22" class="edge">
 <title>testsuites_duration/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1720.8603,-530.1795C1597.6135,-487.1849 1296.6844,-382.2062 1165.6674,-336.5011"/>
-<polygon fill="#000000" stroke="#000000" points="1165.6089,-336.4807 1158.6262,-338.2812 1154.2786,-332.5281 1165.6089,-336.4807"/>
+<path fill="none" stroke="#000000" d="M1720.8603,-530.1795C1597.1175,-487.0119 1294.2595,-381.3603 1164.094,-335.9522"/>
+<polygon fill="#000000" stroke="#000000" points="1164.8734,-332.5173 1154.2786,-332.5281 1162.5677,-339.1266 1164.8734,-332.5173"/>
 </a>
 </g>
 <g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135">
@@ -618,8 +618,8 @@
 <g id="edge23" class="edge">
 <title>testsuites_duration/1&#45;&gt;julian_day/4</title>
 <g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1733.8197,-529.079C1645.1455,-486.0405 1436.4669,-384.7573 1341.1008,-338.4709"/>
-<polygon fill="#000000" stroke="#000000" points="1340.8439,-338.3463 1333.6995,-339.3249 1330.0482,-333.1065 1340.8439,-338.3463"/>
+<path fill="none" stroke="#000000" d="M1733.8197,-529.079C1644.5147,-485.7343 1433.4918,-383.3133 1339.0829,-337.4915"/>
+<polygon fill="#000000" stroke="#000000" points="1340.5729,-334.3243 1330.0482,-333.1065 1337.5163,-340.6217 1340.5729,-334.3243"/>
 </a>
 </g>
 <g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L135">
@@ -645,8 +645,8 @@
 <g id="edge24" class="edge">
 <title>testsuite_stats/4&#45;&gt;testsuite_stats/6</title>
 <g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L148" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M979.9127,-803.7312C995.5202,-755.8938 1033.5806,-639.2375 1052.2774,-581.9312"/>
-<polygon fill="#000000" stroke="#000000" points="1052.3416,-581.734 1050.4,-574.7893 1056.0637,-570.3259 1052.3416,-581.734"/>
+<path fill="none" stroke="#000000" d="M979.9127,-803.7312C995.6838,-755.3923 1034.381,-636.7843 1052.8589,-580.1488"/>
+<polygon fill="#000000" stroke="#000000" points="1056.2894,-580.9183 1056.0637,-570.3259 1049.6346,-578.7471 1056.2894,-580.9183"/>
 </a>
 </g>
 <g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L148">
@@ -672,8 +672,8 @@
 <g id="edge25" class="edge">
 <title>testsuite_name/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L162" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M894.2557,-715.9538C903.7065,-691.9711 917,-651.8299 917,-615.7792 917,-615.7792 917,-615.7792 917,-431.8528 917,-378.9142 971.5962,-348.9326 1021.6301,-332.5716"/>
-<polygon fill="#000000" stroke="#000000" points="1021.7465,-332.5357 1026.2976,-326.9422 1033.2113,-328.9918 1021.7465,-332.5357"/>
+<path fill="none" stroke="#000000" d="M894.2557,-715.9538C903.7065,-691.9711 917,-651.8299 917,-615.7792 917,-615.7792 917,-615.7792 917,-431.8528 917,-378.2455 972.9842,-348.1788 1023.5239,-331.9581"/>
+<polygon fill="#000000" stroke="#000000" points="1024.6742,-335.2663 1033.2113,-328.9918 1022.6247,-328.5731 1024.6742,-335.2663"/>
 </a>
 </g>
 <g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L162">
@@ -685,8 +685,8 @@
 <g id="edge26" class="edge">
 <title>testsuite_package/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1199.7805,-803.6217C1199.4862,-773.173 1199,-715.442 1199,-666.2792 1199,-666.2792 1199,-666.2792 1199,-431.8528 1199,-395.001 1170.2474,-363.379 1144.2132,-342.2999"/>
-<polygon fill="#000000" stroke="#000000" points="1143.9318,-342.0827 1136.7382,-341.5815 1134.434,-334.7484 1143.9318,-342.0827"/>
+<path fill="none" stroke="#000000" d="M1199.7805,-803.6217C1199.4862,-773.173 1199,-715.442 1199,-666.2792 1199,-666.2792 1199,-666.2792 1199,-431.8528 1199,-394.1893 1168.9668,-361.9885 1142.4971,-340.9224"/>
+<polygon fill="#000000" stroke="#000000" points="1144.5016,-338.0491 1134.434,-334.7484 1140.2459,-343.6069 1144.5016,-338.0491"/>
 </a>
 </g>
 <g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171">
@@ -698,8 +698,8 @@
 <g id="edge42" class="edge">
 <title>testsuite_package/1&#45;&gt;logtalk::loaded_file_property/2</title>
 <g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1212.9934,-803.7704C1227.4616,-781.01 1252.2231,-744.307 1278,-716.2792 1327.6499,-662.2936 1394.1122,-608.8612 1435.4774,-577.4235"/>
-<polygon fill="#000000" stroke="#000000" points="1435.5946,-577.3351 1437.9752,-570.5283 1445.1741,-570.1077 1435.5946,-577.3351"/>
+<path fill="none" stroke="#000000" d="M1212.9934,-803.7704C1227.4616,-781.01 1252.2231,-744.307 1278,-716.2792 1328.2797,-661.6088 1395.8011,-607.5057 1437.0394,-576.2378"/>
+<polygon fill="#000000" stroke="#000000" points="1439.2942,-578.9212 1445.1741,-570.1077 1435.0814,-573.3308 1439.2942,-578.9212"/>
 </a>
 </g>
 <g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L171">
@@ -711,8 +711,8 @@
 <g id="edge27" class="edge">
 <title>testsuite_time/1&#45;&gt;testsuites_duration/1</title>
 <g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L186" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1725.4053,-803.8832C1748.5561,-775.8828 1787.0828,-723.7684 1802,-671.2792 1810.525,-641.2823 1801.006,-606.5091 1790.995,-581.7423"/>
-<polygon fill="#000000" stroke="#000000" points="1790.8769,-581.4687 1784.8254,-577.547 1786.1179,-570.4527 1790.8769,-581.4687"/>
+<path fill="none" stroke="#000000" d="M1725.4053,-803.8832C1748.5561,-775.8828 1787.0828,-723.7684 1802,-671.2792 1810.7575,-640.4642 1800.4734,-604.6088 1790.1752,-579.7386"/>
+<polygon fill="#000000" stroke="#000000" points="1793.329,-578.2148 1786.1179,-570.4527 1786.9146,-581.0175 1793.329,-578.2148"/>
 </a>
 </g>
 <g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L186">
@@ -724,8 +724,8 @@
 <g id="edge28" class="edge">
 <title>testsuite_timestamp/1&#45;&gt;message_cache_/1</title>
 <g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1428.6536,-803.5868C1396.3096,-760.8224 1322.8803,-660.9282 1272,-570.2792 1226.7448,-489.6518 1242.8203,-453.793 1186,-380.8528 1174.4951,-366.0839 1159.0551,-352.612 1144.6133,-341.7324"/>
-<polygon fill="#000000" stroke="#000000" points="1144.5444,-341.6825 1137.3391,-341.393 1134.8351,-334.6305 1144.5444,-341.6825"/>
+<path fill="none" stroke="#000000" d="M1428.6536,-803.5868C1396.3096,-760.8224 1322.8803,-660.9282 1272,-570.2792 1226.7448,-489.6518 1242.8203,-453.793 1186,-380.8528 1174.0526,-365.5159 1157.8616,-351.5776 1142.9516,-340.4887"/>
+<polygon fill="#000000" stroke="#000000" points="1144.9921,-337.645 1134.8351,-334.6305 1140.8953,-343.321 1144.9921,-337.645"/>
 </a>
 </g>
 <g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190">
@@ -751,8 +751,8 @@
 <g id="edge29" class="edge">
 <title>testsuite_timestamp/1&#45;&gt;date_time_to_timestamp/7</title>
 <g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1482.4333,-804.5166C1542.3002,-772.2433 1663.6812,-708.2616 1770,-661.2792 1846.2527,-627.583 1936.0534,-594.0703 1995.9493,-572.5651"/>
-<polygon fill="#000000" stroke="#000000" points="1996.2179,-572.4691 2000.5203,-566.6821 2007.5169,-568.4277 1996.2179,-572.4691"/>
+<path fill="none" stroke="#000000" d="M1482.4333,-804.5166C1542.3002,-772.2433 1663.6812,-708.2616 1770,-661.2792 1847.047,-627.232 1937.9257,-593.3722 1997.8113,-571.897"/>
+<polygon fill="#000000" stroke="#000000" points="1999.2786,-575.0895 2007.5169,-568.4277 1996.9223,-568.498 1999.2786,-575.0895"/>
 </a>
 </g>
 <g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L190">
@@ -764,8 +764,8 @@
 <g id="edge30" class="edge">
 <title>testcase_classname_name_time/4&#45;&gt;message_cache_/1</title>
 <g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L196" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M738.9705,-527.7885C771.3016,-492.6836 840.546,-422.3913 912,-380.8528 947.4377,-360.2517 990.2966,-344.6661 1026.4286,-333.8077"/>
-<polygon fill="#000000" stroke="#000000" points="1026.886,-333.6741 1031.5222,-328.1509 1038.4037,-330.3061 1026.886,-333.6741"/>
+<path fill="none" stroke="#000000" d="M738.9705,-527.7885C771.3016,-492.6836 840.546,-422.3913 912,-380.8528 948.2081,-359.8039 992.1636,-343.9909 1028.7753,-333.1063"/>
+<polygon fill="#000000" stroke="#000000" points="1029.7789,-336.4595 1038.4037,-330.3061 1027.8241,-329.738 1029.7789,-336.4595"/>
 </a>
 </g>
 <g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L196">
@@ -791,8 +791,8 @@
 <g id="edge31" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;integers_to_atoms/2</title>
 <g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2054.9864,-527.7748C2040.4329,-492.0046 2006.2478,-419.9353 1954,-380.8528 1931.7515,-364.2105 1868.9988,-346.3302 1815.7091,-333.3503"/>
-<polygon fill="#000000" stroke="#000000" points="1815.4707,-333.2931 1808.7027,-335.7821 1803.8022,-330.492 1815.4707,-333.2931"/>
+<path fill="none" stroke="#000000" d="M2054.9864,-527.7748C2040.4329,-492.0046 2006.2478,-419.9353 1954,-380.8528 1931.4711,-364.0007 1867.4104,-345.8792 1813.6986,-332.8618"/>
+<polygon fill="#000000" stroke="#000000" points="1814.3423,-329.4171 1803.8022,-330.492 1812.7122,-336.2246 1814.3423,-329.4171"/>
 </a>
 </g>
 <g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213">
@@ -818,8 +818,8 @@
 <g id="edge32" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;pad_single_char_atoms/2</title>
 <g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2062.0825,-527.8002C2060.5116,-503.0095 2056.2868,-461.0694 2045,-426.8528 2035.5277,-398.137 2019.0323,-368.0497 2005.7317,-346.2664"/>
-<polygon fill="#000000" stroke="#000000" points="2005.6672,-346.1631 1999.0969,-343.1912 1999.3131,-335.9834 2005.6672,-346.1631"/>
+<path fill="none" stroke="#000000" d="M2062.0825,-527.8002C2060.5116,-503.0095 2056.2868,-461.0694 2045,-426.8528 2035.2682,-397.3503 2018.1231,-366.4 2004.6459,-344.4949"/>
+<polygon fill="#000000" stroke="#000000" points="2007.5884,-342.5993 1999.3131,-335.9834 2001.6565,-346.3158 2007.5884,-342.5993"/>
 </a>
 </g>
 <g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213">
@@ -845,8 +845,8 @@
 <g id="edge33" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;concatenate_atoms/3</title>
 <g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2044.8486,-527.7685C2006.6694,-483.0237 1921.2068,-383.159 1917,-380.8528 1797.233,-315.1955 1747.7858,-357.9387 1613,-335.8528 1604.2879,-334.4253 1595.2236,-332.8884 1586.1628,-331.3177"/>
-<polygon fill="#000000" stroke="#000000" points="1586.1041,-331.3075 1579.5046,-334.2138 1574.2836,-329.2397 1586.1041,-331.3075"/>
+<path fill="none" stroke="#000000" d="M2044.8486,-527.7685C2006.6694,-483.0237 1921.2068,-383.159 1917,-380.8528 1797.233,-315.1955 1747.7858,-357.9387 1613,-335.8528 1603.7006,-334.329 1593.9998,-332.6807 1584.3305,-330.9996"/>
+<polygon fill="#000000" stroke="#000000" points="1584.7375,-327.5177 1574.2836,-329.2397 1583.5297,-334.4127 1584.7375,-327.5177"/>
 </a>
 </g>
 <g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L213">
@@ -872,8 +872,8 @@
 <g id="edge34" class="edge">
 <title>write_xml_empty_tag/2&#45;&gt;write_xml_tag_attributes/1</title>
 <g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L239" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M872,-293.4224C872,-252.5549 872,-162.638 872,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="872.0001,-113.5514 868,-107.5514 872,-101.5514 872.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M872,-293.4224C872,-252.0332 872,-160.3342 872,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="875.5001,-111.5514 872,-101.5514 868.5001,-111.5514 875.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L239">
@@ -885,8 +885,8 @@
 <g id="edge35" class="edge">
 <title>write_xml_open_tag/2&#45;&gt;write_xml_tag_attributes/1</title>
 <g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L245" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M427.4361,-294.6525C515.5373,-252.1561 721.3659,-152.8729 818.9147,-105.8194"/>
-<polygon fill="#000000" stroke="#000000" points="819.1702,-105.6962 822.8365,-99.4866 829.9785,-100.4827 819.1702,-105.6962"/>
+<path fill="none" stroke="#000000" d="M427.4361,-294.6525C516.074,-251.8973 723.8778,-151.6613 820.6852,-104.9653"/>
+<polygon fill="#000000" stroke="#000000" points="822.4922,-107.9797 829.9785,-100.4827 819.4509,-101.6749 822.4922,-107.9797"/>
 </a>
 </g>
 <g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L245" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L245">
@@ -898,8 +898,8 @@
 <g id="edge36" class="edge">
 <title>write_xml_element/3&#45;&gt;write_xml_tag_attributes/1</title>
 <g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L251" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M648.7421,-293.8358C692.4006,-252.0615 790.8437,-157.867 841.1461,-109.7355"/>
-<polygon fill="#000000" stroke="#000000" points="841.2841,-109.6035 842.8539,-102.5653 849.9544,-101.3073 841.2841,-109.6035"/>
+<path fill="none" stroke="#000000" d="M648.7421,-293.8358C692.8535,-251.6282 792.892,-155.9071 842.6959,-108.2526"/>
+<polygon fill="#000000" stroke="#000000" points="845.1489,-110.7497 849.9544,-101.3073 840.3094,-105.692 845.1489,-110.7497"/>
 </a>
 </g>
 <g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L251">
@@ -925,8 +925,8 @@
 <g id="edge37" class="edge">
 <title>writeq_xml_cdata_element/3&#45;&gt;write_xml_tag_attributes/1</title>
 <g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L261" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2460.8462,-300.1189C2444.8287,-297.8726 2428.4693,-295.5832 2413,-293.4264 1881.1009,-219.2678 1245.7813,-131.6774 988.6041,-96.2621"/>
-<polygon fill="#000000" stroke="#000000" points="988.5332,-96.2524 982.0436,-99.3965 976.6454,-94.6154 988.5332,-96.2524"/>
+<path fill="none" stroke="#000000" d="M2460.8462,-300.1189C2444.8287,-297.8726 2428.4693,-295.5832 2413,-293.4264 1879.7817,-219.0838 1242.6293,-131.2429 986.6976,-95.9996"/>
+<polygon fill="#000000" stroke="#000000" points="987.0294,-92.5123 976.6454,-94.6154 986.0744,-99.4469 987.0294,-92.5123"/>
 </a>
 </g>
 <g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L261">
@@ -952,8 +952,8 @@
 <g id="edge38" class="edge">
 <title>writeq_xml_cdata_element/3&#45;&gt;pretty_print_vars_quoted/1</title>
 <g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L261" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2564,-293.4224C2564,-252.5549 2564,-162.638 2564,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="2564.0001,-113.5514 2560,-107.5514 2564,-101.5514 2564.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M2564,-293.4224C2564,-252.0332 2564,-160.3342 2564,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="2567.5001,-111.5514 2564,-101.5514 2560.5001,-111.5514 2567.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L261">
@@ -979,8 +979,8 @@
 <g id="edge39" class="edge">
 <title>write_xml_cdata_element/3&#45;&gt;write_xml_tag_attributes/1</title>
 <g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L271" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2173.8476,-298.9856C1924.3467,-257.0575 1242.0684,-142.4023 978.1756,-98.0558"/>
-<polygon fill="#000000" stroke="#000000" points="978.1416,-98.0501 971.5617,-101.0004 966.3076,-96.0614 978.1416,-98.0501"/>
+<path fill="none" stroke="#000000" d="M2173.8476,-298.9856C1923.7282,-256.9536 1238.6831,-141.8334 976.2208,-97.7273"/>
+<polygon fill="#000000" stroke="#000000" points="976.7494,-94.2671 966.3076,-96.0614 975.5892,-101.1703 976.7494,-94.2671"/>
 </a>
 </g>
 <g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L271">
@@ -1006,8 +1006,8 @@
 <g id="edge40" class="edge">
 <title>write_xml_cdata_element/3&#45;&gt;pretty_print_vars/1</title>
 <g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L271" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2267,-293.4224C2267,-252.5549 2267,-162.638 2267,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="2267.0001,-113.5514 2263,-107.5514 2267,-101.5514 2267.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M2267,-293.4224C2267,-252.0332 2267,-160.3342 2267,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="2270.5001,-111.5514 2267,-101.5514 2263.5001,-111.5514 2270.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L271">
@@ -1033,8 +1033,8 @@
 <g id="edge1" class="edge">
 <title>logtalk::message_hook/4&#45;&gt;message_hook/1</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L50" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1804,-1975.8336C1804,-1934.9662 1804,-1845.0492 1804,-1796.0532"/>
-<polygon fill="#000000" stroke="#000000" points="1804.0001,-1795.9627 1800,-1789.9627 1804,-1783.9627 1804.0001,-1795.9627"/>
+<path fill="none" stroke="#000000" d="M1804,-1975.8336C1804,-1934.4445 1804,-1842.7455 1804,-1794.197"/>
+<polygon fill="#000000" stroke="#000000" points="1807.5001,-1793.9626 1804,-1783.9627 1800.5001,-1793.9627 1807.5001,-1793.9626"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/xunit_report.lgt#L50">

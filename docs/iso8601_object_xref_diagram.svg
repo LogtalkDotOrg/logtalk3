@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1314.5584 1572,-1314.5584 1572,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object iso8601</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_iso8601_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt">
@@ -52,8 +52,8 @@
 <g id="edge29" class="edge">
 <title>date/4&#45;&gt;os::date_time/7</title>
 <g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L263" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M773,-293.4224C773,-252.5549 773,-162.638 773,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="773.0001,-113.5514 769,-107.5514 773,-101.5514 773.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M773,-293.4224C773,-252.0332 773,-160.3342 773,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="776.5001,-111.5514 773,-101.5514 769.5001,-111.5514 776.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L263">
@@ -79,8 +79,8 @@
 <g id="edge1" class="edge">
 <title>date/5&#45;&gt;date/4</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L297" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M768.4525,-527.8488C769.3242,-486.9813 771.242,-397.0644 772.287,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="772.2889,-347.9751 768.4178,-341.8911 772.5449,-335.9778 772.2889,-347.9751"/>
+<path fill="none" stroke="#000000" d="M768.4525,-527.8488C769.3353,-486.4596 771.2911,-394.7606 772.3266,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="775.8308,-346.0502 772.5449,-335.9778 768.8323,-345.9009 775.8308,-346.0502"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L297" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L297">
@@ -106,8 +106,8 @@
 <g id="edge3" class="edge">
 <title>date/6&#45;&gt;date/4</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L305" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M852,-761.889C852,-738.3706 852,-699.6524 852,-666.2792 852,-666.2792 852,-666.2792 852,-431.8528 852,-396.4807 826.9551,-363.7816 805.0683,-341.9593"/>
-<polygon fill="#000000" stroke="#000000" points="804.9626,-341.8586 797.8595,-340.6152 796.2753,-333.5803 804.9626,-341.8586"/>
+<path fill="none" stroke="#000000" d="M852,-761.889C852,-738.3706 852,-699.6524 852,-666.2792 852,-666.2792 852,-666.2792 852,-431.8528 852,-395.6947 825.8296,-362.3296 803.6141,-340.5207"/>
+<polygon fill="#000000" stroke="#000000" points="805.9458,-337.9085 796.2753,-333.5803 801.136,-342.9944 805.9458,-337.9085"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L305">
@@ -119,8 +119,8 @@
 <g id="edge2" class="edge">
 <title>date/6&#45;&gt;date/5</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L305" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M844.3974,-762.2752C829.6542,-721.1299 797.0957,-630.2661 779.6223,-581.5013"/>
-<polygon fill="#000000" stroke="#000000" points="779.5728,-581.3631 773.7833,-577.0641 775.5249,-570.0664 779.5728,-581.3631"/>
+<path fill="none" stroke="#000000" d="M844.3974,-762.2752C829.4668,-720.6069 796.2651,-627.9479 778.9633,-579.6622"/>
+<polygon fill="#000000" stroke="#000000" points="782.193,-578.2997 775.5249,-570.0664 775.6033,-580.661 782.193,-578.2997"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L305">
@@ -146,8 +146,8 @@
 <g id="edge4" class="edge">
 <title>date/7&#45;&gt;date/4</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L330" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1007.643,-996.3455C1005.2832,-972.8528 1002,-934.1565 1002,-900.7056 1002,-900.7056 1002,-900.7056 1002,-431.8528 1002,-355.7508 900.5465,-329.0276 832.6952,-319.6651"/>
-<polygon fill="#000000" stroke="#000000" points="832.3535,-319.6218 825.8976,-322.8345 820.4489,-318.1109 832.3535,-319.6218"/>
+<path fill="none" stroke="#000000" d="M1007.643,-996.3455C1005.2832,-972.8528 1002,-934.1565 1002,-900.7056 1002,-900.7056 1002,-900.7056 1002,-431.8528 1002,-354.9613 898.4308,-328.4785 830.5946,-319.3793"/>
+<polygon fill="#000000" stroke="#000000" points="830.8059,-315.8785 820.4489,-318.1109 829.9375,-322.8245 830.8059,-315.8785"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L330">
@@ -159,8 +159,8 @@
 <g id="edge5" class="edge">
 <title>date/7&#45;&gt;date/6</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L330" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1001.5283,-997.0022C987.5722,-963.9033 957.6128,-898.2363 921,-849.7056 910.3229,-835.553 896.5481,-821.6869 884.1173,-810.3305"/>
-<polygon fill="#000000" stroke="#000000" points="883.9126,-810.1485 876.7711,-809.1489 874.947,-802.1723 883.9126,-810.1485"/>
+<path fill="none" stroke="#000000" d="M1001.5283,-997.0022C987.5722,-963.9033 957.6128,-898.2363 921,-849.7056 909.9042,-834.998 895.4629,-820.5998 882.6613,-809.0062"/>
+<polygon fill="#000000" stroke="#000000" points="884.7532,-806.1835 874.947,-802.1723 880.1115,-811.4232 884.7532,-806.1835"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L330">
@@ -186,8 +186,8 @@
 <g id="edge6" class="edge">
 <title>date_string/3&#45;&gt;date/4</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1227.5074,-1231.848C1274.6658,-1189.7647 1370.6939,-1089.736 1339,-996.7056 1304.2549,-894.719 1230.8992,-904.7883 1191,-804.7056 1176.4529,-768.2159 1182,-756.0618 1182,-716.7792 1182,-716.7792 1182,-716.7792 1182,-431.8528 1182,-360.1225 946.5884,-329.7659 832.9641,-319.2915"/>
-<polygon fill="#000000" stroke="#000000" points="832.6702,-319.2653 826.3377,-322.7149 820.718,-318.1963 832.6702,-319.2653"/>
+<path fill="none" stroke="#000000" d="M1227.5074,-1231.848C1274.6658,-1189.7647 1370.6939,-1089.736 1339,-996.7056 1304.2549,-894.719 1230.8992,-904.7883 1191,-804.7056 1176.4529,-768.2159 1182,-756.0618 1182,-716.7792 1182,-716.7792 1182,-716.7792 1182,-431.8528 1182,-359.6864 943.7175,-329.3983 830.9055,-319.1027"/>
+<polygon fill="#000000" stroke="#000000" points="830.9888,-315.5964 820.718,-318.1963 830.3684,-322.5688 830.9888,-315.5964"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344">
@@ -199,8 +199,8 @@
 <g id="edge10" class="edge">
 <title>date_string/3&#45;&gt;date/6</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L431" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1138.5916,-1239.5146C1053.9745,-1220.7764 916,-1182.8988 916,-1135.132 916,-1135.132 916,-1135.132 916,-900.7056 916,-867.7317 896.2479,-835.2195 878.6899,-812.8325"/>
-<polygon fill="#000000" stroke="#000000" points="878.4721,-812.5673 871.5729,-810.4693 870.856,-803.2939 878.4721,-812.5673"/>
+<path fill="none" stroke="#000000" d="M1138.5916,-1239.5146C1053.9745,-1220.7764 916,-1182.8988 916,-1135.132 916,-1135.132 916,-1135.132 916,-900.7056 916,-866.8406 895.1658,-833.4624 877.2715,-811.0398"/>
+<polygon fill="#000000" stroke="#000000" points="879.9302,-808.7627 870.856,-803.2939 874.5392,-813.2279 879.9302,-808.7627"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L431" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L431">
@@ -212,8 +212,8 @@
 <g id="edge9" class="edge">
 <title>date_string/3&#45;&gt;date/7</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L405" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1185.8725,-1231.5415C1151.5074,-1189.8 1074.0531,-1095.7206 1034.3988,-1047.5547"/>
-<polygon fill="#000000" stroke="#000000" points="1034.167,-1047.2731 1027.2653,-1045.1834 1026.5398,-1038.0088 1034.167,-1047.2731"/>
+<path fill="none" stroke="#000000" d="M1185.8725,-1231.5415C1151.076,-1189.276 1072.1019,-1093.3505 1032.9235,-1045.7628"/>
+<polygon fill="#000000" stroke="#000000" points="1035.5979,-1043.5045 1026.5398,-1038.0088 1030.1937,-1047.9537 1035.5979,-1043.5045"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L405" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L405">
@@ -239,8 +239,8 @@
 <g id="edge7" class="edge">
 <title>date_string/3&#45;&gt;prepend_zeros/3</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1258.8007,-1236.8398C1289.4191,-1226.2629 1326.6105,-1209.8177 1354,-1186.132 1397.8217,-1148.2363 1429.4036,-1087.4725 1445.9008,-1050.2824"/>
-<polygon fill="#000000" stroke="#000000" points="1445.9731,-1050.1147 1444.675,-1043.0214 1450.7234,-1039.095 1445.9731,-1050.1147"/>
+<path fill="none" stroke="#000000" d="M1258.8007,-1236.8398C1289.4191,-1226.2629 1326.6105,-1209.8177 1354,-1186.132 1398.5805,-1147.5801 1430.4936,-1085.3613 1446.7442,-1048.3719"/>
+<polygon fill="#000000" stroke="#000000" points="1449.998,-1049.6649 1450.7234,-1039.095 1443.5648,-1046.9055 1449.998,-1049.6649"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344">
@@ -266,8 +266,8 @@
 <g id="edge8" class="edge">
 <title>date_string/3&#45;&gt;list_of_lists_to_atom/2</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1203,-1231.128C1203,-1190.2606 1203,-1100.3436 1203,-1051.3476"/>
-<polygon fill="#000000" stroke="#000000" points="1203.0001,-1051.257 1199,-1045.2571 1203,-1039.257 1203.0001,-1051.257"/>
+<path fill="none" stroke="#000000" d="M1203,-1231.128C1203,-1189.7388 1203,-1098.0399 1203,-1049.4914"/>
+<polygon fill="#000000" stroke="#000000" points="1206.5001,-1049.257 1203,-1039.257 1199.5001,-1049.2571 1206.5001,-1049.257"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L344">
@@ -307,8 +307,8 @@
 <g id="edge14" class="edge">
 <title>valid_date/3&#45;&gt;leap_year/1</title>
 <g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L552" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M144.4791,-1231.128C133.8223,-1190.1736 110.3481,-1099.9608 97.6173,-1051.0354"/>
-<polygon fill="#000000" stroke="#000000" points="97.5744,-1050.8703 92.1923,-1046.071 94.5524,-1039.257 97.5744,-1050.8703"/>
+<path fill="none" stroke="#000000" d="M144.4791,-1231.128C133.6866,-1189.6519 109.7479,-1097.6544 97.136,-1049.1859"/>
+<polygon fill="#000000" stroke="#000000" points="100.4579,-1048.0534 94.5524,-1039.257 93.6835,-1049.8162 100.4579,-1048.0534"/>
 </a>
 </g>
 <g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L552" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L552">
@@ -334,8 +334,8 @@
 <g id="edge15" class="edge">
 <title>valid_date/3&#45;&gt;days_in_month/2</title>
 <g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L552" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M158.4926,-1231.2632C168.5975,-1206.6451 186.3322,-1164.8669 204,-1130.132 218.1456,-1102.3219 236.0247,-1071.7365 249.4495,-1049.5307"/>
-<polygon fill="#000000" stroke="#000000" points="249.592,-1049.2966 249.296,-1042.0915 255.8329,-1039.0471 249.592,-1049.2966"/>
+<path fill="none" stroke="#000000" d="M158.4926,-1231.2632C168.5975,-1206.6451 186.3322,-1164.8669 204,-1130.132 218.5331,-1101.5599 237.0071,-1070.0585 250.5427,-1047.7247"/>
+<polygon fill="#000000" stroke="#000000" points="253.6159,-1049.4074 255.8329,-1039.0471 247.6391,-1045.7636 253.6159,-1049.4074"/>
 </a>
 </g>
 <g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L552" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L552">
@@ -347,8 +347,8 @@
 <g id="edge16" class="edge">
 <title>leap_year/1&#45;&gt;date/4</title>
 <g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L565" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M141.8475,-1003.5588C150.8888,-1001.2014 160.2017,-998.8353 169,-996.7056 265.8471,-973.2637 607,-1000.3494 607,-900.7056 607,-900.7056 607,-900.7056 607,-431.8528 607,-402.2047 626.985,-399.5429 650,-380.8528 673.1592,-362.0456 702.4633,-346.0239 726.6589,-334.4534"/>
-<polygon fill="#000000" stroke="#000000" points="726.8479,-334.3654 730.5974,-328.2057 737.7254,-329.2977 726.8479,-334.3654"/>
+<path fill="none" stroke="#000000" d="M141.8475,-1003.5588C150.8888,-1001.2014 160.2017,-998.8353 169,-996.7056 265.8471,-973.2637 607,-1000.3494 607,-900.7056 607,-900.7056 607,-900.7056 607,-431.8528 607,-402.2047 626.985,-399.5429 650,-380.8528 673.7879,-361.535 704.059,-345.156 728.618,-333.5209"/>
+<polygon fill="#000000" stroke="#000000" points="730.1257,-336.6798 737.7254,-329.2977 727.1809,-330.3293 730.1257,-336.6798"/>
 </a>
 </g>
 <g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L565" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L565">
@@ -374,8 +374,8 @@
 <g id="edge17" class="edge">
 <title>calendar_month/3&#45;&gt;date/4</title>
 <g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M596.6843,-1231.8977C621.8249,-1210.7593 655,-1175.2626 655,-1135.132 655,-1135.132 655,-1135.132 655,-431.8528 655,-388.6008 695.3982,-355.8346 728.9196,-336.0911"/>
-<polygon fill="#000000" stroke="#000000" points="729.0414,-336.0226 732.3112,-329.5954 739.5016,-330.1417 729.0414,-336.0226"/>
+<path fill="none" stroke="#000000" d="M596.6843,-1231.8977C621.8249,-1210.7593 655,-1175.2626 655,-1135.132 655,-1135.132 655,-1135.132 655,-431.8528 655,-387.8518 696.8094,-354.703 730.6545,-335.0772"/>
+<polygon fill="#000000" stroke="#000000" points="732.4738,-338.0701 739.5016,-330.1417 729.0634,-331.957 732.4738,-338.0701"/>
 </a>
 </g>
 <g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575">
@@ -387,8 +387,8 @@
 <g id="edge18" class="edge">
 <title>calendar_month/3&#45;&gt;date/6</title>
 <g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M638.9551,-1237.8775C722.7595,-1218.4892 852,-1181.1322 852,-1135.132 852,-1135.132 852,-1135.132 852,-900.7056 852,-872.547 852,-840.5832 852,-817.155"/>
-<polygon fill="#000000" stroke="#000000" points="852.0001,-817.0958 848,-811.0958 852,-805.0958 852.0001,-817.0958"/>
+<path fill="none" stroke="#000000" d="M638.9551,-1237.8775C722.7595,-1218.4892 852,-1181.1322 852,-1135.132 852,-1135.132 852,-1135.132 852,-900.7056 852,-871.7648 852,-838.8045 852,-815.2226"/>
+<polygon fill="#000000" stroke="#000000" points="855.5001,-815.0958 852,-805.0958 848.5001,-815.0958 855.5001,-815.0958"/>
 </a>
 </g>
 <g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575">
@@ -400,8 +400,8 @@
 <g id="edge19" class="edge">
 <title>calendar_month/3&#45;&gt;leap_year/1</title>
 <g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M529.3112,-1232.9617C441.7884,-1190.2166 232.4546,-1087.9804 137.4132,-1041.5633"/>
-<polygon fill="#000000" stroke="#000000" points="137.188,-1041.4533 130.0412,-1042.4145 126.4052,-1036.1871 137.188,-1041.4533"/>
+<path fill="none" stroke="#000000" d="M529.3112,-1232.9617C441.1658,-1189.9125 229.4701,-1086.5228 135.4023,-1040.5812"/>
+<polygon fill="#000000" stroke="#000000" points="136.9268,-1037.4307 126.4052,-1036.1871 133.8548,-1043.7206 136.9268,-1037.4307"/>
 </a>
 </g>
 <g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575">
@@ -427,8 +427,8 @@
 <g id="edge21" class="edge">
 <title>calendar_month/3&#45;&gt;zeros/3</title>
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M556.51,-1231.128C532.0735,-1189.6167 477.846,-1097.4981 449.3334,-1049.0626"/>
-<polygon fill="#000000" stroke="#000000" points="449.2524,-1048.9249 442.7615,-1045.7835 443.1648,-1038.5837 449.2524,-1048.9249"/>
+<path fill="none" stroke="#000000" d="M556.51,-1231.128C531.7649,-1189.0923 476.4713,-1095.1628 448.2654,-1047.2482"/>
+<polygon fill="#000000" stroke="#000000" points="451.254,-1045.4258 443.1648,-1038.5837 445.2216,-1048.977 451.254,-1045.4258"/>
 </a>
 </g>
 <g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575">
@@ -454,8 +454,8 @@
 <g id="edge22" class="edge">
 <title>calendar_month/3&#45;&gt;day_list/3</title>
 <g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M569,-1231.128C569,-1190.2606 569,-1100.3436 569,-1051.3476"/>
-<polygon fill="#000000" stroke="#000000" points="569.0001,-1051.257 565,-1045.2571 569,-1039.257 569.0001,-1051.257"/>
+<path fill="none" stroke="#000000" d="M569,-1231.128C569,-1189.7388 569,-1098.0399 569,-1049.4914"/>
+<polygon fill="#000000" stroke="#000000" points="572.5001,-1049.257 569,-1039.257 565.5001,-1049.2571 572.5001,-1049.257"/>
 </a>
 </g>
 <g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575">
@@ -481,8 +481,8 @@
 <g id="edge23" class="edge">
 <title>calendar_month/3&#45;&gt;week_list/5</title>
 <g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M604.1121,-1232.4067C622.4621,-1220.6981 644.303,-1204.5865 660,-1186.132 695.141,-1144.8179 720.4114,-1086.4802 733.8605,-1050.4863"/>
-<polygon fill="#000000" stroke="#000000" points="733.8659,-1050.4712 732.1563,-1043.4656 737.9654,-1039.1931 733.8659,-1050.4712"/>
+<path fill="none" stroke="#000000" d="M604.1121,-1232.4067C622.4621,-1220.6981 644.303,-1204.5865 660,-1186.132 695.7521,-1144.0994 721.2874,-1084.446 734.5514,-1048.6288"/>
+<polygon fill="#000000" stroke="#000000" points="737.8542,-1049.7874 737.9654,-1039.1931 731.2718,-1047.4057 737.8542,-1049.7874"/>
 </a>
 </g>
 <g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575">
@@ -494,8 +494,8 @@
 <g id="edge20" class="edge">
 <title>calendar_month/3&#45;&gt;days_in_month/2</title>
 <g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M542.9018,-1231.9515C489.1569,-1189.9541 366.0491,-1093.7551 304.8705,-1045.9488"/>
-<polygon fill="#000000" stroke="#000000" points="304.707,-1045.8211 297.5164,-1045.2786 295.2515,-1038.4323 304.707,-1045.8211"/>
+<path fill="none" stroke="#000000" d="M542.9018,-1231.9515C488.7136,-1189.6077 364.0138,-1092.1646 303.3696,-1044.7759"/>
+<polygon fill="#000000" stroke="#000000" points="305.2862,-1041.8318 295.2515,-1038.4323 300.9761,-1047.3475 305.2862,-1041.8318"/>
 </a>
 </g>
 <g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L575">
@@ -521,8 +521,8 @@
 <g id="edge25" class="edge">
 <title>easter_day/3&#45;&gt;date/4</title>
 <g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M442.0491,-528.2388C471.456,-493.478 535.0328,-423.2769 602,-380.8528 607.524,-377.3533 676.4142,-351.0643 725.0451,-332.6849"/>
-<polygon fill="#000000" stroke="#000000" points="725.0809,-332.6714 729.2813,-326.81 736.3074,-328.4328 725.0809,-332.6714"/>
+<path fill="none" stroke="#000000" d="M442.0491,-528.2388C471.456,-493.478 535.0328,-423.2769 602,-380.8528 607.594,-377.309 678.1684,-350.3951 726.8819,-331.9908"/>
+<polygon fill="#000000" stroke="#000000" points="728.1879,-335.239 736.3074,-328.4328 725.7157,-328.69 728.1879,-335.239"/>
 </a>
 </g>
 <g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637">
@@ -548,8 +548,8 @@
 <g id="edge26" class="edge">
 <title>easter_day/3&#45;&gt;calc_M_and_N/3</title>
 <g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M420.5652,-527.8488C412.0048,-486.8944 393.1485,-396.6815 382.9221,-347.7562"/>
-<polygon fill="#000000" stroke="#000000" points="382.9154,-347.724 377.7724,-342.6693 380.4601,-335.9778 382.9154,-347.724"/>
+<path fill="none" stroke="#000000" d="M420.5652,-527.8488C411.8958,-486.3727 392.6664,-394.3751 382.5355,-345.9067"/>
+<polygon fill="#000000" stroke="#000000" points="385.9322,-345.0501 380.4601,-335.9778 379.0802,-346.4824 385.9322,-345.0501"/>
 </a>
 </g>
 <g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637">
@@ -575,8 +575,8 @@
 <g id="edge27" class="edge">
 <title>easter_day/3&#45;&gt;calc_month_and_day/3</title>
 <g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M435.4511,-527.9761C448.1965,-502.9892 471.0228,-460.5082 495,-426.8528 516.1424,-397.1765 543.6923,-366.1809 564.1954,-344.3046"/>
-<polygon fill="#000000" stroke="#000000" points="564.263,-344.2332 565.4822,-337.1259 572.5118,-335.5178 564.263,-344.2332"/>
+<path fill="none" stroke="#000000" d="M435.4511,-527.9761C448.1965,-502.9892 471.0228,-460.5082 495,-426.8528 516.6143,-396.5141 544.9254,-364.7965 565.5577,-342.8534"/>
+<polygon fill="#000000" stroke="#000000" points="568.172,-345.183 572.5118,-335.5178 563.0919,-340.3672 568.172,-345.183"/>
 </a>
 </g>
 <g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637">
@@ -602,8 +602,8 @@
 <g id="edge28" class="edge">
 <title>easter_day/3&#45;&gt;corr_day/6</title>
 <g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M405.4765,-528.2622C366.2384,-486.4512 277.7194,-392.1275 232.5863,-344.0349"/>
-<polygon fill="#000000" stroke="#000000" points="232.3775,-343.8123 225.3548,-342.1744 224.1657,-335.062 232.3775,-343.8123"/>
+<path fill="none" stroke="#000000" d="M405.4765,-528.2622C365.8297,-486.0156 275.8699,-390.1568 231.1901,-342.5472"/>
+<polygon fill="#000000" stroke="#000000" points="233.561,-339.9588 224.1657,-335.062 228.4567,-344.7491 233.561,-339.9588"/>
 </a>
 </g>
 <g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L637">
@@ -629,8 +629,8 @@
 <g id="edge11" class="edge">
 <title>prepend_zeros/3&#45;&gt;two_codes/2</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L507" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1444.5189,-996.7016C1416.1986,-955.2077 1353.3669,-863.1488 1320.2977,-814.6971"/>
-<polygon fill="#000000" stroke="#000000" points="1320.0979,-814.4043 1313.4117,-811.7035 1313.3331,-804.4928 1320.0979,-814.4043"/>
+<path fill="none" stroke="#000000" d="M1444.5189,-996.7016C1415.8416,-954.6846 1351.7774,-860.82 1319.0615,-812.8858"/>
+<polygon fill="#000000" stroke="#000000" points="1321.8613,-810.7794 1313.3331,-804.4928 1316.0796,-814.7255 1321.8613,-810.7794"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L507" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L507">
@@ -656,8 +656,8 @@
 <g id="edge12" class="edge">
 <title>prepend_zeros/3&#45;&gt;three_codes/2</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L510" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1459.9051,-996.7016C1461.6484,-955.8342 1465.484,-865.9172 1467.574,-816.9212"/>
-<polygon fill="#000000" stroke="#000000" points="1467.5783,-816.8197 1463.8376,-810.6547 1468.0898,-804.8306 1467.5783,-816.8197"/>
+<path fill="none" stroke="#000000" d="M1459.9051,-996.7016C1461.6706,-955.3124 1465.5823,-863.6135 1467.6532,-815.0649"/>
+<polygon fill="#000000" stroke="#000000" points="1471.1603,-814.9707 1468.0898,-804.8306 1464.1667,-814.6723 1471.1603,-814.9707"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L510" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L510">
@@ -683,8 +683,8 @@
 <g id="edge13" class="edge">
 <title>list_of_lists_to_atom/2&#45;&gt;flatten/2</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L526" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1192.2297,-996.7016C1171.2549,-955.382 1124.8276,-863.9215 1100.1513,-815.3101"/>
-<polygon fill="#000000" stroke="#000000" points="1100.092,-815.1931 1093.8094,-811.6536 1094.6603,-804.4928 1100.092,-815.1931"/>
+<path fill="none" stroke="#000000" d="M1192.2297,-996.7016C1170.9894,-954.859 1123.6481,-861.5981 1099.2248,-813.4849"/>
+<polygon fill="#000000" stroke="#000000" points="1102.3077,-811.8255 1094.6603,-804.4928 1096.0658,-814.994 1102.3077,-811.8255"/>
 </a>
 </g>
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L526" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L526">
@@ -696,8 +696,8 @@
 <g id="edge24" class="edge">
 <title>week_list/5&#45;&gt;date/6</title>
 <g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L617" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M754.6843,-996.7016C773.5041,-955.4692 815.1134,-864.3072 837.3367,-815.6183"/>
-<polygon fill="#000000" stroke="#000000" points="837.432,-815.4095 836.2845,-808.2902 842.4147,-804.4928 837.432,-815.4095"/>
+<path fill="none" stroke="#000000" d="M754.6843,-996.7016C773.7428,-954.9461 816.1727,-861.9864 838.1729,-813.7862"/>
+<polygon fill="#000000" stroke="#000000" points="841.4464,-815.0433 842.4147,-804.4928 835.0784,-812.1367 841.4464,-815.0433"/>
 </a>
 </g>
 <g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L617" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/iso8601/iso8601.lgt#L617">

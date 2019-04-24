@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-611.2792 606,-611.2792 606,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object hook_pipeline/1</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_hook_pipeline_1_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt">
@@ -52,8 +52,8 @@
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;term_expansion_pipeline/3</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L36" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M447,-527.8488C447,-486.9813 447,-397.0644 447,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="447.0001,-347.9778 443,-341.9778 447,-335.9778 447.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M447,-527.8488C447,-486.4596 447,-394.7606 447,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="450.5001,-345.9778 447,-335.9778 443.5001,-345.9778 450.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L36">
@@ -79,8 +79,8 @@
 <g id="edge2" class="edge">
 <title>term_expansion_pipeline/3&#45;&gt;term_expansion_pipeline_all/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L41" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M430.7087,-293.4224C398.7953,-251.8593 327.9271,-159.5628 290.7743,-111.1761"/>
-<polygon fill="#000000" stroke="#000000" points="290.6923,-111.0693 283.8656,-108.7464 283.3841,-101.5514 290.6923,-111.0693"/>
+<path fill="none" stroke="#000000" d="M430.7087,-293.4224C398.4615,-251.4246 326.4402,-157.6263 289.6195,-109.6722"/>
+<polygon fill="#000000" stroke="#000000" points="292.2504,-107.3515 283.3841,-101.5514 286.6982,-111.6146 292.2504,-107.3515"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L41">
@@ -106,8 +106,8 @@
 <g id="edge3" class="edge">
 <title>term_expansion_pipeline/3&#45;&gt;flatten/3</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L41" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M452.0684,-293.4224C461.8516,-252.468 483.4017,-162.2551 495.0891,-113.3298"/>
-<polygon fill="#000000" stroke="#000000" points="495.1145,-113.223 492.6181,-106.4578 497.9027,-101.5514 495.1145,-113.223"/>
+<path fill="none" stroke="#000000" d="M452.0684,-293.4224C461.9762,-251.9463 483.9527,-159.9487 495.5309,-111.4803"/>
+<polygon fill="#000000" stroke="#000000" points="498.9834,-112.091 497.9027,-101.5514 492.175,-110.4645 498.9834,-112.091"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L41">
@@ -147,8 +147,8 @@
 <g id="edge4" class="edge">
 <title>goal_expansion/2&#45;&gt;goal_expansion_pipeline/3</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L55" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M155,-527.8488C155,-486.9813 155,-397.0644 155,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="155.0001,-347.9778 151,-341.9778 155,-335.9778 155.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M155,-527.8488C155,-486.4596 155,-394.7606 155,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="158.5001,-345.9778 155,-335.9778 151.5001,-345.9778 158.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/hook_pipeline.lgt#L55">

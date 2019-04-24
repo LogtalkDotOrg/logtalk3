@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 620,-376.8528 620,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object atom</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_atom_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt">
@@ -52,8 +52,8 @@
 <g id="edge1" class="edge">
 <title>replace_sub_atom/4&#45;&gt;replace_sub_atom/5</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L45" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M473.5454,-293.4224C433.1228,-251.4926 342.9233,-157.93 296.625,-109.9055"/>
-<polygon fill="#000000" stroke="#000000" points="296.5742,-109.8528 289.5301,-108.3094 288.2455,-101.2136 296.5742,-109.8528"/>
+<path fill="none" stroke="#000000" d="M473.5454,-293.4224C432.7026,-251.0567 341.0427,-155.9793 295.1956,-108.4228"/>
+<polygon fill="#000000" stroke="#000000" points="297.7058,-105.9837 288.2455,-101.2136 292.6663,-110.8421 297.7058,-105.9837"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L45">
@@ -79,8 +79,8 @@
 <g id="edge2" class="edge">
 <title>replace_sub_atom/4&#45;&gt;append_fragments/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L45" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M494,-293.4224C494,-252.5549 494,-162.638 494,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="494.0001,-113.5514 490,-107.5514 494,-101.5514 494.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M494,-293.4224C494,-252.0332 494,-160.3342 494,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="497.5001,-111.5514 494,-101.5514 490.5001,-111.5514 497.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L45">
@@ -120,8 +120,8 @@
 <g id="edge3" class="edge">
 <title>split/3&#45;&gt;split/4</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L69" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M299.7314,-294.6525C259.6188,-253.0444 167.0254,-156.9986 120.5953,-108.8374"/>
-<polygon fill="#000000" stroke="#000000" points="120.5485,-108.7888 113.5045,-107.2455 112.2199,-100.1497 120.5485,-108.7888"/>
+<path fill="none" stroke="#000000" d="M299.7314,-294.6525C259.2019,-252.6119 165.0947,-154.996 119.1625,-107.3512"/>
+<polygon fill="#000000" stroke="#000000" points="121.6801,-104.9198 112.2199,-100.1497 116.6406,-109.7782 121.6801,-104.9198"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/atom.lgt#L69">

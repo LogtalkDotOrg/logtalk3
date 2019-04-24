@@ -44,6 +44,13 @@ Tools
 * CHANGED: Predicate nodes in cross-referencing diagrams (with the exception
 of external nodes) now link to source code instead of documentation.
 
+* CHANGED: Predicate cross-referencing diagrams now use `::Predicate` and
+`^^Predicate` external nodes for, respectively, calls in *self* and *super*
+calls.
+
+* CHANGED: Predicate cross-referencing call edges to use a normal arrow and
+dynamic predicate update edges to use a diamond arrow.
+
 * CHANGED: When using the `zoom(true)` option, also link to non-empty protocol
 cross-referencing diagrams to allow linking and thus quick access to the source
 file lines of the predicate declarations.
@@ -107,6 +114,9 @@ URL prefix is defined.
 * FIXED: Label for root directory in directory diagrams.
 
 * FIXED: Use only SVG colors for diagram elements.
+
+* FIXED: Bug where a non-terminal diagram node could be wrongly captioned as
+`local` instead of using its scope for the caption.
 
 Ports
 -----

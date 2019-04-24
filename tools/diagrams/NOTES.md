@@ -173,6 +173,11 @@ relations):
 - uses and use module relations  
 	`rdiamond` (arrow ending with a black half diamond)
 
+- predicate calls  
+	`normal` (arrow ending with a black triangle)
+- dynamic predicate updates  
+	`diamond` (arrow ending with a black diamond)
+
 The library, directory, file, entity, and predicate nodes that are not part
 of the predicates, entities, files, or libraries for which we are generating
 a diagram use a dashed border, a darker color, and are described as external.

@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.23,
+		version is 2.24,
 		author is 'Paulo Moura',
-		date is 2019/04/22,
+		date is 2019/04/24,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -251,13 +251,13 @@
 	% multifile predicates
 	edge_arrow(provides_clauses, inv).
 	% cross-referencing predicate calls
-	edge_arrow(calls_predicate, rdiamond).
-	edge_arrow(calls_super_predicate, rdiamond).
-	edge_arrow(calls_self_predicate, ordiamond).
+	edge_arrow(calls_predicate, normal).
+	edge_arrow(calls_super_predicate, normal).
+	edge_arrow(calls_self_predicate, normal).
 	% dynamic predicate updates
 	edge_arrow(updates_predicate, tee).
-	edge_arrow(updates_this_predicate, otee).
-	edge_arrow(updates_self_predicate, otee).
+	edge_arrow(updates_this_predicate, tee).
+	edge_arrow(updates_self_predicate, tee).
 	% file relations
 	edge_arrow(depends_on_file, normal).
 	edge_arrow(loads_file, normal).

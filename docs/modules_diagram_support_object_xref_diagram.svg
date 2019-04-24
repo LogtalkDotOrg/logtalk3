@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 1106,-376.8528 1106,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object modules_diagram_support</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_modules_diagram_support_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/modules_diagram_support.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/modules_diagram_support.lgt">
@@ -52,8 +52,8 @@
 <g id="edge1" class="edge">
 <title>module_property/2&#45;&gt;property_module/2</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/modules_diagram_support.lgt#L158" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M984,-293.4224C984,-252.5549 984,-162.638 984,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="984.0001,-113.5514 980,-107.5514 984,-101.5514 984.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M984,-293.4224C984,-252.0332 984,-160.3342 984,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="987.5001,-111.5514 984,-101.5514 980.5001,-111.5514 987.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/modules_diagram_support.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/modules_diagram_support.lgt#L158">
@@ -93,8 +93,8 @@
 <g id="edge2" class="edge">
 <title>loaded_file_property/2&#45;&gt;property_source_file/2</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/modules_diagram_support.lgt#L249" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M743,-293.4224C743,-252.5549 743,-162.638 743,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="743.0001,-113.5514 739,-107.5514 743,-101.5514 743.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M743,-293.4224C743,-252.0332 743,-160.3342 743,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="746.5001,-111.5514 743,-101.5514 739.5001,-111.5514 746.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/modules_diagram_support.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/diagrams/modules_diagram_support.lgt#L249">

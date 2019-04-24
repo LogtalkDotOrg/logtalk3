@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-845.7056 6442,-845.7056 6442,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object list</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_list_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt">
@@ -66,8 +66,8 @@
 <g id="edge40" class="edge">
 <title>substitute/4&#45;&gt;substitute_aux/4</title>
 <g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L543" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M6164,-762.2752C6164,-721.4077 6164,-631.4908 6164,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="6164.0001,-582.4042 6160,-576.4043 6164,-570.4042 6164.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M6164,-762.2752C6164,-720.886 6164,-629.1871 6164,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="6167.5001,-580.4042 6164,-570.4042 6160.5001,-580.4043 6167.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L543" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L543">
@@ -121,8 +121,8 @@
 <g id="edge32" class="edge">
 <title>sort/3&#45;&gt;sort_/3</title>
 <g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L408" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5907.0949,-762.2752C5905.3516,-721.4077 5901.516,-631.4908 5899.426,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="5899.4217,-582.3933 5895.1696,-576.5693 5898.9102,-570.4042 5899.4217,-582.3933"/>
+<path fill="none" stroke="#000000" d="M5907.0949,-762.2752C5905.3294,-720.886 5901.4177,-629.1871 5899.3468,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="5902.8333,-580.2459 5898.9102,-570.4042 5895.8397,-580.5443 5902.8333,-580.2459"/>
 </a>
 </g>
 <g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L408">
@@ -176,8 +176,8 @@
 <g id="edge29" class="edge">
 <title>reverse/2&#45;&gt;reverse/4</title>
 <g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L346" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5666.8146,-762.2752C5668.3835,-721.4077 5671.8356,-631.4908 5673.7166,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="5673.7203,-582.3954 5669.9535,-576.2463 5674.1808,-570.4042 5673.7203,-582.3954"/>
+<path fill="none" stroke="#000000" d="M5666.8146,-762.2752C5668.4036,-720.886 5671.924,-629.1871 5673.7879,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="5677.2945,-580.5312 5674.1808,-570.4042 5670.2996,-580.2626 5677.2945,-580.5312"/>
 </a>
 </g>
 <g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L346">
@@ -217,8 +217,8 @@
 <g id="edge15" class="edge">
 <title>nth1/4&#45;&gt;nth/5</title>
 <g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L248" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M4759.4116,-767.008C4682.5253,-725.5731 4481.1977,-617.0754 4395.0487,-570.6487"/>
-<polygon fill="#000000" stroke="#000000" points="4394.9679,-570.6052 4387.7884,-571.28 4384.4043,-564.9123 4394.9679,-570.6052"/>
+<path fill="none" stroke="#000000" d="M4759.4116,-767.008C4681.9767,-725.2774 4478.3182,-615.5236 4393.2222,-569.6644"/>
+<polygon fill="#000000" stroke="#000000" points="4394.8678,-566.5753 4384.4043,-564.9123 4391.5469,-572.7375 4394.8678,-566.5753"/>
 </a>
 </g>
 <g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L248">
@@ -244,8 +244,8 @@
 <g id="edge13" class="edge">
 <title>nth0/4&#45;&gt;nth/5</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L242" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M4535.2039,-763.5054C4500.3839,-722.0702 4420.197,-626.6492 4379.5613,-578.2935"/>
-<polygon fill="#000000" stroke="#000000" points="4379.4738,-578.1894 4372.5514,-576.1693 4371.7536,-569.0025 4379.4738,-578.1894"/>
+<path fill="none" stroke="#000000" d="M4535.2039,-763.5054C4500.0205,-721.6377 4418.518,-624.6513 4378.3018,-576.7947"/>
+<polygon fill="#000000" stroke="#000000" points="4380.8666,-574.4065 4371.7536,-569.0025 4375.5076,-578.91 4380.8666,-574.4065"/>
 </a>
 </g>
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L242">
@@ -285,8 +285,8 @@
 <g id="edge7" class="edge">
 <title>msort/3&#45;&gt;msort_/3</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L203" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5533.362,-762.2752C5534.0593,-721.4077 5535.5936,-631.4908 5536.4296,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="5536.4311,-582.4025 5532.5341,-576.3351 5536.6359,-570.4042 5536.4311,-582.4025"/>
+<path fill="none" stroke="#000000" d="M5533.362,-762.2752C5534.0682,-720.886 5535.6329,-629.1871 5536.4613,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="5539.9647,-580.4625 5536.6359,-570.4042 5532.9657,-580.343 5539.9647,-580.4625"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L203">
@@ -368,8 +368,8 @@
 <g id="edge3" class="edge">
 <title>hamming_distance/3&#45;&gt;hamming_distance/4</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L91" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5358,-762.2752C5358,-721.4077 5358,-631.4908 5358,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="5358.0001,-582.4042 5354,-576.4043 5358,-570.4042 5358.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M5358,-762.2752C5358,-720.886 5358,-629.1871 5358,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="5361.5001,-580.4042 5358,-570.4042 5354.5001,-580.4043 5361.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L91">
@@ -409,8 +409,8 @@
 <g id="edge2" class="edge">
 <title>flatten/2&#45;&gt;flatten/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L75" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5174,-762.2752C5174,-721.4077 5174,-631.4908 5174,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="5174.0001,-582.4042 5170,-576.4043 5174,-570.4042 5174.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M5174,-762.2752C5174,-720.886 5174,-629.1871 5174,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="5177.5001,-580.4042 5174,-570.4042 5170.5001,-580.4043 5177.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L75">
@@ -464,8 +464,8 @@
 <g id="edge1" class="edge">
 <title>append/2&#45;&gt;append/3</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L44" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M4913,-762.2752C4913,-721.4077 4913,-631.4908 4913,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="4913.0001,-582.4042 4909,-576.4043 4913,-570.4042 4913.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M4913,-762.2752C4913,-720.886 4913,-629.1871 4913,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="4916.5001,-580.4042 4913,-570.4042 4909.5001,-580.4043 4916.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L44">
@@ -533,8 +533,8 @@
 <g id="edge4" class="edge">
 <title>last/2&#45;&gt;last/3</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L107" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M3738,-762.2752C3738,-721.4077 3738,-631.4908 3738,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="3738.0001,-582.4042 3734,-576.4043 3738,-570.4042 3738.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M3738,-762.2752C3738,-720.886 3738,-629.1871 3738,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="3741.5001,-580.4042 3738,-570.4042 3734.5001,-580.4043 3741.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L107">
@@ -574,8 +574,8 @@
 <g id="edge5" class="edge">
 <title>max/2&#45;&gt;max/3</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L144" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M3403.9191,-763.0987C3432.1218,-721.7771 3496.1371,-627.9841 3529.2686,-579.4409"/>
-<polygon fill="#000000" stroke="#000000" points="3529.4622,-579.1572 3529.5408,-571.9465 3536.2271,-569.2457 3529.4622,-579.1572"/>
+<path fill="none" stroke="#000000" d="M3403.9191,-763.0987C3432.4773,-721.2562 3497.7566,-625.6112 3530.5066,-577.627"/>
+<polygon fill="#000000" stroke="#000000" points="3533.4806,-579.4783 3536.2271,-569.2457 3527.6988,-575.5322 3533.4806,-579.4783"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L144">
@@ -643,8 +643,8 @@
 <g id="edge6" class="edge">
 <title>min/2&#45;&gt;min/3</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L163" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M3297.9191,-763.0987C3326.1218,-721.7771 3390.1371,-627.9841 3423.2686,-579.4409"/>
-<polygon fill="#000000" stroke="#000000" points="3423.4622,-579.1572 3423.5408,-571.9465 3430.2271,-569.2457 3423.4622,-579.1572"/>
+<path fill="none" stroke="#000000" d="M3297.9191,-763.0987C3326.4773,-721.2562 3391.7566,-625.6112 3424.5066,-577.627"/>
+<polygon fill="#000000" stroke="#000000" points="3427.4806,-579.4783 3430.2271,-569.2457 3421.6988,-575.5322 3427.4806,-579.4783"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L163">
@@ -670,8 +670,8 @@
 <g id="edge8" class="edge">
 <title>msort_/3&#45;&gt;split/3</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L208" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5553.5289,-528.6723C5587.1603,-487.177 5663.6773,-392.7686 5702.8755,-344.405"/>
-<polygon fill="#000000" stroke="#000000" points="5703.0888,-344.1418 5703.7592,-336.9619 5710.6446,-334.8192 5703.0888,-344.1418"/>
+<path fill="none" stroke="#000000" d="M5553.5289,-528.6723C5587.5825,-486.6562 5665.605,-390.3902 5704.3338,-342.6057"/>
+<polygon fill="#000000" stroke="#000000" points="5707.0672,-344.7918 5710.6446,-334.8192 5701.629,-340.3843 5707.0672,-344.7918"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L208">
@@ -697,8 +697,8 @@
 <g id="edge9" class="edge">
 <title>msort_/3&#45;&gt;merge_keep_dups/4</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L208" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5537,-527.8488C5537,-486.9813 5537,-397.0644 5537,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="5537.0001,-347.9778 5533,-341.9778 5537,-335.9778 5537.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M5537,-527.8488C5537,-486.4596 5537,-394.7606 5537,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="5540.5001,-345.9778 5537,-335.9778 5533.5001,-345.9778 5540.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L208">
@@ -724,8 +724,8 @@
 <g id="edge10" class="edge">
 <title>merge_keep_dups/4&#45;&gt;merge_keep_dups/5</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L222" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5530.8414,-293.1039C5524.5799,-268.7665 5516.1717,-227.915 5519,-192.4264 5521.1326,-165.667 5526.0826,-135.6558 5530.2529,-113.4076"/>
-<polygon fill="#000000" stroke="#000000" points="5530.257,-113.3859 5527.4652,-106.7372 5532.5287,-101.6029 5530.257,-113.3859"/>
+<path fill="none" stroke="#000000" d="M5530.8414,-293.1039C5524.5799,-268.7665 5516.1717,-227.915 5519,-192.4264 5521.1921,-164.9202 5526.361,-133.9783 5530.6001,-111.5634"/>
+<polygon fill="#000000" stroke="#000000" points="5534.0639,-112.0859 5532.5287,-101.6029 5527.1915,-110.7552 5534.0639,-112.0859"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L222">
@@ -737,8 +737,8 @@
 <g id="edge11" class="edge">
 <title>merge_keep_dups/5&#45;&gt;merge_keep_dups/4</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L226" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5539.4853,-101.6873C5541.9617,-124.2447 5545.5924,-160.7727 5547,-192.4264 5548.3308,-222.3521 5545.1775,-256.303 5542.0674,-280.8133"/>
-<polygon fill="#000000" stroke="#000000" points="5542.0231,-281.1428 5545.1862,-287.6232 5540.421,-293.0354 5542.0231,-281.1428"/>
+<path fill="none" stroke="#000000" d="M5539.4853,-101.6873C5541.9617,-124.2447 5545.5924,-160.7727 5547,-192.4264 5548.3676,-223.1795 5544.9997,-258.1836 5541.8096,-282.8244"/>
+<polygon fill="#000000" stroke="#000000" points="5538.3005,-282.655 5540.421,-293.0354 5545.2367,-283.5983 5538.3005,-282.655"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L226">
@@ -792,8 +792,8 @@
 <g id="edge12" class="edge">
 <title>nth0/3&#45;&gt;nth/5</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L239" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M4119.0314,-764.3083C4164.6255,-722.7189 4272.6885,-624.1477 4325.2545,-576.1988"/>
-<polygon fill="#000000" stroke="#000000" points="4325.5306,-575.947 4327.2678,-568.9483 4334.3963,-567.86 4325.5306,-575.947"/>
+<path fill="none" stroke="#000000" d="M4119.0314,-764.3083C4165.0985,-722.2875 4274.9372,-622.0965 4326.8723,-574.7231"/>
+<polygon fill="#000000" stroke="#000000" points="4329.3669,-577.185 4334.3963,-567.86 4324.6495,-572.0134 4329.3669,-577.185"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L239">
@@ -819,8 +819,8 @@
 <g id="edge14" class="edge">
 <title>nth1/3&#45;&gt;nth/5</title>
 <g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L245" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M4011.5822,-766.0639C4077.3661,-724.4965 4243.5192,-619.5082 4317.9462,-572.4795"/>
-<polygon fill="#000000" stroke="#000000" points="4318.0943,-572.3859 4321.0298,-565.7994 4328.2388,-565.9758 4318.0943,-572.3859"/>
+<path fill="none" stroke="#000000" d="M4011.5822,-766.0639C4077.9054,-724.1558 4246.2497,-617.7828 4319.7577,-571.3348"/>
+<polygon fill="#000000" stroke="#000000" points="4321.6546,-574.2764 4328.2388,-565.9758 4317.9154,-568.3588 4321.6546,-574.2764"/>
 </a>
 </g>
 <g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L245" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L245">
@@ -846,8 +846,8 @@
 <g id="edge16" class="edge">
 <title>nth/5&#45;&gt;nth_aux/5</title>
 <g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L251" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M4355,-527.8488C4355,-486.9813 4355,-397.0644 4355,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="4355.0001,-347.9778 4351,-341.9778 4355,-335.9778 4355.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M4355,-527.8488C4355,-486.4596 4355,-394.7606 4355,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="4358.5001,-345.9778 4355,-335.9778 4351.5001,-345.9778 4358.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L251">
@@ -887,8 +887,8 @@
 <g id="edge17" class="edge">
 <title>partition/5&#45;&gt;partition/7</title>
 <g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L266" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M3159.5876,-762.2569C3170.1946,-737.1301 3189.6055,-694.5145 3212,-661.2792 3232.4513,-630.9278 3260.3736,-600 3281.3513,-578.3214"/>
-<polygon fill="#000000" stroke="#000000" points="3281.4748,-578.1954 3282.818,-571.1105 3289.8745,-569.6254 3281.4748,-578.1954"/>
+<path fill="none" stroke="#000000" d="M3159.5876,-762.2569C3170.1946,-737.1301 3189.6055,-694.5145 3212,-661.2792 3232.9078,-630.2503 3261.6238,-598.619 3282.7455,-576.8836"/>
+<polygon fill="#000000" stroke="#000000" points="3285.3642,-579.2123 3289.8745,-569.6254 3280.3702,-574.3071 3285.3642,-579.2123"/>
 </a>
 </g>
 <g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L266">
@@ -900,8 +900,8 @@
 <g id="edge18" class="edge">
 <title>partition/7&#45;&gt;partition/5</title>
 <g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L270" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M3299.8313,-570.3871C3286.543,-595.2297 3263.2231,-637.2186 3240,-671.2792 3220.2332,-700.2707 3195.2149,-731.3973 3176.7412,-753.4956"/>
-<polygon fill="#000000" stroke="#000000" points="3176.7387,-753.4986 3175.9328,-760.6646 3169.0081,-762.6768 3176.7387,-753.4986"/>
+<path fill="none" stroke="#000000" d="M3299.8313,-570.3871C3286.543,-595.2297 3263.2231,-637.2186 3240,-671.2792 3219.79,-700.9207 3194.0904,-732.7942 3175.5086,-754.9683"/>
+<polygon fill="#000000" stroke="#000000" points="3172.7792,-752.7758 3169.0081,-762.6768 3178.1304,-757.2885 3172.7792,-752.7758"/>
 </a>
 </g>
 <g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L270" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L270">
@@ -941,8 +941,8 @@
 <g id="edge20" class="edge">
 <title>permutation/2&#45;&gt;permutation2/2</title>
 <g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L277" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2978.8278,-762.2752C2974.6439,-721.4077 2965.4384,-631.4908 2960.4224,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="2960.4068,-582.3418 2955.8165,-576.7804 2959.1846,-570.4042 2960.4068,-582.3418"/>
+<path fill="none" stroke="#000000" d="M2978.8278,-762.2752C2974.5905,-720.886 2965.2026,-629.1871 2960.2323,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="2963.6849,-579.9957 2959.1846,-570.4042 2956.7213,-580.7087 2963.6849,-579.9957"/>
 </a>
 </g>
 <g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L277">
@@ -968,8 +968,8 @@
 <g id="edge19" class="edge">
 <title>permutation/2&#45;&gt;same_length/2</title>
 <g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L277" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2995.4811,-762.2752C3023.8014,-720.7813 3086.6331,-628.7224 3119.7023,-580.2706"/>
-<polygon fill="#000000" stroke="#000000" points="3119.9021,-579.9779 3119.9806,-572.7672 3126.6669,-570.0664 3119.9021,-579.9779"/>
+<path fill="none" stroke="#000000" d="M2995.4811,-762.2752C3024.1584,-720.2582 3088.2226,-626.3936 3120.9385,-578.4594"/>
+<polygon fill="#000000" stroke="#000000" points="3123.9204,-580.2991 3126.6669,-570.0664 3118.1387,-576.3529 3123.9204,-580.2991"/>
 </a>
 </g>
 <g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L277">
@@ -995,8 +995,8 @@
 <g id="edge21" class="edge">
 <title>permutation2/2&#45;&gt;select/3</title>
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L282" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2957,-527.8488C2957,-486.9813 2957,-397.0644 2957,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="2957.0001,-347.9778 2953,-341.9778 2957,-335.9778 2957.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M2957,-527.8488C2957,-486.4596 2957,-394.7606 2957,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="2960.5001,-345.9778 2957,-335.9778 2953.5001,-345.9778 2960.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L282">
@@ -1050,8 +1050,8 @@
 <g id="edge22" class="edge">
 <title>prefix/3&#45;&gt;prefix/4</title>
 <g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L290" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2701.4127,-762.2752C2719.7049,-721.0428 2760.1476,-629.8808 2781.7478,-581.1919"/>
-<polygon fill="#000000" stroke="#000000" points="2781.8172,-581.0355 2780.594,-573.9288 2786.6835,-570.0664 2781.8172,-581.0355"/>
+<path fill="none" stroke="#000000" d="M2701.4127,-762.2752C2719.937,-720.5197 2761.1772,-627.56 2782.5606,-579.3598"/>
+<polygon fill="#000000" stroke="#000000" points="2785.8275,-580.6266 2786.6835,-570.0664 2779.4289,-577.7879 2785.8275,-580.6266"/>
 </a>
 </g>
 <g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L290">
@@ -1105,8 +1105,8 @@
 <g id="edge23" class="edge">
 <title>proper_prefix/3&#45;&gt;proper_prefix/4</title>
 <g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L306" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2353.3592,-763.0987C2407.6416,-721.1013 2531.9804,-624.9023 2593.7708,-577.096"/>
-<polygon fill="#000000" stroke="#000000" points="2593.9949,-576.9226 2596.2927,-570.0874 2603.486,-569.5795 2593.9949,-576.9226"/>
+<path fill="none" stroke="#000000" d="M2353.3592,-763.0987C2408.0892,-720.7549 2534.0361,-623.3118 2595.2868,-575.9231"/>
+<polygon fill="#000000" stroke="#000000" points="2597.7185,-578.467 2603.486,-569.5795 2593.435,-572.9305 2597.7185,-578.467"/>
 </a>
 </g>
 <g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L306">
@@ -1132,8 +1132,8 @@
 <g id="edge25" class="edge">
 <title>remove_duplicates/2&#45;&gt;keysort/2</title>
 <g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2074.3443,-763.3025C1998.4002,-720.2993 1820.9394,-619.8126 1738.9407,-573.3811"/>
-<polygon fill="#000000" stroke="#000000" points="1738.6998,-573.2447 1731.5077,-573.769 1728.2576,-567.3318 1738.6998,-573.2447"/>
+<path fill="none" stroke="#000000" d="M2074.3443,-763.3025C1997.8572,-719.9919 1818.3964,-618.3727 1737.1965,-572.3934"/>
+<polygon fill="#000000" stroke="#000000" points="1738.684,-569.2136 1728.2576,-567.3318 1735.2348,-575.3049 1738.684,-569.2136"/>
 </a>
 </g>
 <g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318">
@@ -1159,8 +1159,8 @@
 <g id="edge24" class="edge">
 <title>remove_duplicates/2&#45;&gt;add_positions/3</title>
 <g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2088.4354,-762.6886C2045.0239,-720.8088 1947.0003,-626.2437 1897.2249,-578.2245"/>
-<polygon fill="#000000" stroke="#000000" points="1897.1526,-578.1548 1890.0573,-576.8677 1888.5163,-569.8232 1897.1526,-578.1548"/>
+<path fill="none" stroke="#000000" d="M2088.4354,-762.6886C2044.6636,-720.4613 1945.3696,-624.6706 1895.9957,-577.0387"/>
+<polygon fill="#000000" stroke="#000000" points="1898.1433,-574.2472 1888.5163,-569.8232 1893.2832,-579.2851 1898.1433,-574.2472"/>
 </a>
 </g>
 <g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318">
@@ -1186,8 +1186,8 @@
 <g id="edge26" class="edge">
 <title>remove_duplicates/2&#45;&gt;remove_duplicates_and_invert/2</title>
 <g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2112.3532,-762.2752C2116.8857,-721.4077 2126.8583,-631.4908 2132.2924,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="2132.3105,-582.3311 2128.9963,-575.9267 2133.6334,-570.4042 2132.3105,-582.3311"/>
+<path fill="none" stroke="#000000" d="M2112.3532,-762.2752C2116.9436,-720.886 2127.1139,-629.1871 2132.4983,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="2136.0097,-580.7291 2133.6334,-570.4042 2129.0523,-579.9574 2136.0097,-580.7291"/>
 </a>
 </g>
 <g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318">
@@ -1213,8 +1213,8 @@
 <g id="edge27" class="edge">
 <title>remove_duplicates/2&#45;&gt;remove_positions/2</title>
 <g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2137.063,-762.8941C2192.2664,-720.8774 2317.939,-625.2249 2380.7797,-577.3953"/>
-<polygon fill="#000000" stroke="#000000" points="2381.1188,-577.1372 2383.4706,-570.3204 2390.6676,-569.8694 2381.1188,-577.1372"/>
+<path fill="none" stroke="#000000" d="M2137.063,-762.8941C2192.8355,-720.4443 2320.5377,-623.247 2382.7031,-575.9314"/>
+<polygon fill="#000000" stroke="#000000" points="2384.83,-578.711 2390.6676,-569.8694 2380.5905,-573.1409 2384.83,-578.711"/>
 </a>
 </g>
 <g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L318">
@@ -1240,8 +1240,8 @@
 <g id="edge28" class="edge">
 <title>remove_duplicates_and_invert/2&#45;&gt;remove_duplicates_and_invert/3</title>
 <g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L331" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2136,-527.8488C2136,-486.9813 2136,-397.0644 2136,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="2136.0001,-347.9778 2132,-341.9778 2136,-335.9778 2136.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M2136,-527.8488C2136,-486.4596 2136,-394.7606 2136,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="2139.5001,-345.9778 2136,-335.9778 2132.5001,-345.9778 2139.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L331">
@@ -1281,8 +1281,8 @@
 <g id="edge30" class="edge">
 <title>same_length/3&#45;&gt;same_length_length/3</title>
 <g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L357" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1855.4597,-766.0639C1744.313,-724.4413 1463.3605,-619.2294 1338.0228,-572.2925"/>
-<polygon fill="#000000" stroke="#000000" points="1337.987,-572.2792 1330.9652,-573.9209 1326.7491,-568.0707 1337.987,-572.2792"/>
+<path fill="none" stroke="#000000" d="M1855.4597,-766.0639C1743.7534,-724.2317 1460.5269,-618.1682 1336.1414,-571.5879"/>
+<polygon fill="#000000" stroke="#000000" points="1337.3415,-568.3 1326.7491,-568.0707 1334.8865,-574.8555 1337.3415,-568.3"/>
 </a>
 </g>
 <g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L357">
@@ -1308,8 +1308,8 @@
 <g id="edge31" class="edge">
 <title>same_length/3&#45;&gt;same_length_list/4</title>
 <g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L357" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1868.6218,-763.88C1846.3257,-750.7496 1816.3641,-733.048 1790,-717.2792 1706.942,-667.601 1610.3532,-608.9597 1555.6727,-575.6805"/>
-<polygon fill="#000000" stroke="#000000" points="1555.5618,-575.613 1548.3567,-575.9097 1545.3117,-569.373 1555.5618,-575.613"/>
+<path fill="none" stroke="#000000" d="M1868.6218,-763.88C1846.3257,-750.7496 1816.3641,-733.048 1790,-717.2792 1706.0768,-667.0835 1608.3395,-607.7371 1553.9776,-574.6488"/>
+<polygon fill="#000000" stroke="#000000" points="1555.6734,-571.5837 1545.3117,-569.373 1552.0332,-577.5628 1555.6734,-571.5837"/>
 </a>
 </g>
 <g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L357">
@@ -1363,8 +1363,8 @@
 <g id="edge33" class="edge">
 <title>sort_/3&#45;&gt;split/3</title>
 <g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L413" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5883.124,-528.6723C5852.9947,-487.3676 5784.6222,-393.6347 5749.2003,-345.0743"/>
-<polygon fill="#000000" stroke="#000000" points="5749.0352,-344.848 5742.2677,-342.3578 5741.9634,-335.1531 5749.0352,-344.848"/>
+<path fill="none" stroke="#000000" d="M5883.124,-528.6723C5852.6157,-486.8481 5782.8961,-391.2684 5747.8794,-343.2635"/>
+<polygon fill="#000000" stroke="#000000" points="5750.6842,-341.1695 5741.9634,-335.1531 5745.0289,-345.2948 5750.6842,-341.1695"/>
 </a>
 </g>
 <g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L413">
@@ -1390,8 +1390,8 @@
 <g id="edge34" class="edge">
 <title>sort_/3&#45;&gt;merge_no_dups/4</title>
 <g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L413" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5898,-527.8488C5898,-486.9813 5898,-397.0644 5898,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="5898.0001,-347.9778 5894,-341.9778 5898,-335.9778 5898.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M5898,-527.8488C5898,-486.4596 5898,-394.7606 5898,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="5901.5001,-345.9778 5898,-335.9778 5894.5001,-345.9778 5901.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L413">
@@ -1417,8 +1417,8 @@
 <g id="edge35" class="edge">
 <title>merge_no_dups/4&#45;&gt;merge_no_dups/5</title>
 <g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L421" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5891.8414,-293.1039C5885.5799,-268.7665 5877.1717,-227.915 5880,-192.4264 5882.1326,-165.667 5887.0826,-135.6558 5891.2529,-113.4076"/>
-<polygon fill="#000000" stroke="#000000" points="5891.257,-113.3859 5888.4652,-106.7372 5893.5287,-101.6029 5891.257,-113.3859"/>
+<path fill="none" stroke="#000000" d="M5891.8414,-293.1039C5885.5799,-268.7665 5877.1717,-227.915 5880,-192.4264 5882.1921,-164.9202 5887.361,-133.9783 5891.6001,-111.5634"/>
+<polygon fill="#000000" stroke="#000000" points="5895.0639,-112.0859 5893.5287,-101.6029 5888.1915,-110.7552 5895.0639,-112.0859"/>
 </a>
 </g>
 <g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L421" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L421">
@@ -1430,8 +1430,8 @@
 <g id="edge36" class="edge">
 <title>merge_no_dups/5&#45;&gt;merge_no_dups/4</title>
 <g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L425" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M5900.4853,-101.6873C5902.9617,-124.2447 5906.5924,-160.7727 5908,-192.4264 5909.3308,-222.3521 5906.1775,-256.303 5903.0674,-280.8133"/>
-<polygon fill="#000000" stroke="#000000" points="5903.0231,-281.1428 5906.1862,-287.6232 5901.421,-293.0354 5903.0231,-281.1428"/>
+<path fill="none" stroke="#000000" d="M5900.4853,-101.6873C5902.9617,-124.2447 5906.5924,-160.7727 5908,-192.4264 5909.3676,-223.1795 5905.9997,-258.1836 5902.8096,-282.8244"/>
+<polygon fill="#000000" stroke="#000000" points="5899.3005,-282.655 5901.421,-293.0354 5906.2367,-283.5983 5899.3005,-282.655"/>
 </a>
 </g>
 <g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L425" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L425">
@@ -1471,8 +1471,8 @@
 <g id="edge37" class="edge">
 <title>split/4&#45;&gt;split_aux/4</title>
 <g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L432" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1281.3957,-762.8428C1257.552,-729.8291 1207.8985,-663.933 1158,-615.2792 1143.7448,-601.3796 1126.6498,-587.5921 1111.5406,-576.2262"/>
-<polygon fill="#000000" stroke="#000000" points="1111.107,-575.9058 1103.9044,-575.556 1101.457,-568.7729 1111.107,-575.9058"/>
+<path fill="none" stroke="#000000" d="M1281.3957,-762.8428C1257.552,-729.8291 1207.8985,-663.933 1158,-615.2792 1143.1965,-600.845 1125.3306,-586.5317 1109.8064,-574.9257"/>
+<polygon fill="#000000" stroke="#000000" points="1111.5837,-571.8877 1101.457,-568.7729 1107.4309,-577.5229 1111.5837,-571.8877"/>
 </a>
 </g>
 <g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L432" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L432">
@@ -1498,8 +1498,8 @@
 <g id="edge38" class="edge">
 <title>split_aux/4&#45;&gt;subsequence/4</title>
 <g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L436" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1073,-527.8488C1073,-486.9813 1073,-397.0644 1073,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="1073.0001,-347.9778 1069,-341.9778 1073,-335.9778 1073.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M1073,-527.8488C1073,-486.4596 1073,-394.7606 1073,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="1076.5001,-345.9778 1073,-335.9778 1069.5001,-345.9778 1076.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L436" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L436">
@@ -1539,8 +1539,8 @@
 <g id="edge39" class="edge">
 <title>sublist/2&#45;&gt;sublist/3</title>
 <g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L519" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1141.9474,-763.0987C1098.7531,-721.2562 1000.0181,-625.6112 950.4837,-577.627"/>
-<polygon fill="#000000" stroke="#000000" points="950.4507,-577.595 943.358,-576.2934 941.8316,-569.2457 950.4507,-577.595"/>
+<path fill="none" stroke="#000000" d="M1141.9474,-763.0987C1098.3947,-720.909 998.3756,-624.02 949.2607,-576.4423"/>
+<polygon fill="#000000" stroke="#000000" points="951.4494,-573.6896 941.8316,-569.2457 946.5789,-578.7174 951.4494,-573.6896"/>
 </a>
 </g>
 <g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L519" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L519">
@@ -1580,8 +1580,8 @@
 <g id="edge41" class="edge">
 <title>subtract/3&#45;&gt;memberchk/2</title>
 <g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L555" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M829.936,-762.2752C818.2311,-721.3208 792.4479,-631.108 778.4649,-582.1826"/>
-<polygon fill="#000000" stroke="#000000" points="778.3962,-581.9422 772.9014,-577.2725 775.0985,-570.4042 778.3962,-581.9422"/>
+<path fill="none" stroke="#000000" d="M829.936,-762.2752C818.0571,-720.7121 791.6784,-628.4156 777.8493,-580.0289"/>
+<polygon fill="#000000" stroke="#000000" points="781.2119,-579.0574 775.0985,-570.4042 774.4814,-580.9811 781.2119,-579.0574"/>
 </a>
 </g>
 <g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L555" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L555">
@@ -1621,8 +1621,8 @@
 <g id="edge42" class="edge">
 <title>suffix/3&#45;&gt;length/2</title>
 <g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L566" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M455.0265,-527.8488C443.4963,-486.8944 418.0979,-396.6815 404.3236,-347.7562"/>
-<polygon fill="#000000" stroke="#000000" points="404.2596,-347.5288 398.7833,-342.8373 401.0075,-335.9778 404.2596,-347.5288"/>
+<path fill="none" stroke="#000000" d="M455.0265,-527.8488C443.3494,-486.3727 417.4486,-394.3751 403.8029,-345.9067"/>
+<polygon fill="#000000" stroke="#000000" points="407.0866,-344.6551 401.0075,-335.9778 400.3486,-346.5521 407.0866,-344.6551"/>
 </a>
 </g>
 <g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L566" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L566">
@@ -1648,8 +1648,8 @@
 <g id="edge43" class="edge">
 <title>suffix/3&#45;&gt;suffix/4</title>
 <g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L566" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M467.064,-527.8488C478.7689,-486.8944 504.5521,-396.6815 518.5351,-347.7562"/>
-<polygon fill="#000000" stroke="#000000" points="518.6038,-347.5158 516.4066,-340.6476 521.9015,-335.9778 518.6038,-347.5158"/>
+<path fill="none" stroke="#000000" d="M467.064,-527.8488C478.9429,-486.2857 505.3216,-393.9892 519.1507,-345.6025"/>
+<polygon fill="#000000" stroke="#000000" points="522.5186,-346.5547 521.9015,-335.9778 515.7881,-344.631 522.5186,-346.5547"/>
 </a>
 </g>
 <g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L566" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L566">
@@ -1675,8 +1675,8 @@
 <g id="edge44" class="edge">
 <title>proper_suffix/2&#45;&gt;suffix/2</title>
 <g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L579" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M656.5607,-762.2752C649.9362,-721.4077 635.3609,-631.4908 627.4187,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="627.3791,-582.2496 622.4705,-576.967 625.4589,-570.4042 627.3791,-582.2496"/>
+<path fill="none" stroke="#000000" d="M656.5607,-762.2752C649.8375,-720.7991 634.925,-628.8015 627.0683,-580.3331"/>
+<polygon fill="#000000" stroke="#000000" points="630.514,-579.7153 625.4589,-570.4042 623.6041,-580.8354 630.514,-579.7153"/>
 </a>
 </g>
 <g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L579" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L579">
@@ -1702,8 +1702,8 @@
 <g id="edge45" class="edge">
 <title>proper_suffix/3&#45;&gt;suffix/3</title>
 <g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L582" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M461,-762.2752C461,-721.4077 461,-631.4908 461,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="461.0001,-582.4042 457,-576.4043 461,-570.4042 461.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M461,-762.2752C461,-720.886 461,-629.1871 461,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="464.5001,-580.4042 461,-570.4042 457.5001,-580.4043 464.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L582" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L582">
@@ -1743,8 +1743,8 @@
 <g id="edge46" class="edge">
 <title>check/1&#45;&gt;valid/1</title>
 <g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L592" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M299,-762.2752C299,-721.4077 299,-631.4908 299,-582.4948"/>
-<polygon fill="#000000" stroke="#000000" points="299.0001,-582.4042 295,-576.4043 299,-570.4042 299.0001,-582.4042"/>
+<path fill="none" stroke="#000000" d="M299,-762.2752C299,-720.886 299,-629.1871 299,-580.6385"/>
+<polygon fill="#000000" stroke="#000000" points="302.5001,-580.4042 299,-570.4042 295.5001,-580.4043 302.5001,-580.4042"/>
 </a>
 </g>
 <g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L592" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/list.lgt#L592">

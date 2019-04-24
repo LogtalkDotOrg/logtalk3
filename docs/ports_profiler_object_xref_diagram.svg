@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1732.6905 3004.7869,-1732.6905 3004.7869,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object ports_profiler</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_ports_profiler_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt">
@@ -52,8 +52,8 @@
 <g id="edge9" class="edge">
 <title>data/0&#45;&gt;port_/5</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L163" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2207.785,-1649.6061C2219.584,-1626.7137 2236,-1588.527 2236,-1553.2641 2236,-1553.2641 2236,-1553.2641 2236,-1369.3377 2236,-1344.5711 2226.1277,-1333.6417 2241,-1313.8377 2319.1855,-1209.7253 2540.759,-1294.0388 2497,-1171.4113 2463.2596,-1076.8591 2425.3693,-1067.1626 2354,-996.5584 2303.4219,-946.5226 2259.8196,-960.6824 2229,-896.5584 2220.8317,-879.5633 2220.575,-871.0014 2229,-854.132 2300.7649,-710.4372 2479.1385,-618.284 2569.1829,-579.3489"/>
-<polygon fill="#000000" stroke="#000000" points="2569.1945,-579.3439 2573.1493,-573.314 2580.2364,-574.6453 2569.1945,-579.3439"/>
+<path fill="none" stroke="#000000" d="M2207.785,-1649.6061C2219.584,-1626.7137 2236,-1588.527 2236,-1553.2641 2236,-1553.2641 2236,-1553.2641 2236,-1369.3377 2236,-1344.5711 2226.1277,-1333.6417 2241,-1313.8377 2319.1855,-1209.7253 2540.759,-1294.0388 2497,-1171.4113 2463.2596,-1076.8591 2425.3693,-1067.1626 2354,-996.5584 2303.4219,-946.5226 2259.8196,-960.6824 2229,-896.5584 2220.8317,-879.5633 2220.575,-871.0014 2229,-854.132 2301.2034,-709.5592 2481.3222,-617.1598 2570.8234,-578.6411"/>
+<polygon fill="#000000" stroke="#000000" points="2572.3991,-581.7746 2580.2364,-574.6453 2569.6638,-575.3311 2572.3991,-581.7746"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L163">
@@ -79,8 +79,8 @@
 <g id="edge10" class="edge">
 <title>data/0&#45;&gt;write_data/2</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L163" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2189.031,-1649.26C2175.5505,-1608.2187 2145.8217,-1517.7095 2129.7753,-1468.8564"/>
-<polygon fill="#000000" stroke="#000000" points="2129.7535,-1468.7898 2124.0809,-1464.3377 2126.0088,-1457.3891 2129.7535,-1468.7898"/>
+<path fill="none" stroke="#000000" d="M2189.031,-1649.26C2175.3791,-1607.697 2145.0633,-1515.4004 2129.1701,-1467.0137"/>
+<polygon fill="#000000" stroke="#000000" points="2132.4547,-1465.7975 2126.0088,-1457.3891 2125.8042,-1467.9819 2132.4547,-1465.7975"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L163">
@@ -106,8 +106,8 @@
 <g id="edge12" class="edge">
 <title>data/1&#45;&gt;port_/5</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2619.2441,-1649.1663C2610.1768,-1603.395 2594.6265,-1493.4745 2634,-1414.8377 2680.118,-1322.7307 2760.7439,-1357.0099 2814,-1268.8377 2826.8883,-1247.4994 2822.5436,-1238.6449 2825,-1213.8377 2826.858,-1195.0732 2828.9144,-1189.8567 2825,-1171.4113 2820.4566,-1150.0017 2811.5752,-1147.2866 2805,-1126.4113 2793.108,-1088.6559 2791.7953,-1078.3864 2788,-1038.9848 2786.1921,-1020.2155 2779.5171,-1013.3988 2788,-996.5584 2821.5912,-929.873 2889.4088,-963.2438 2923,-896.5584 2931.4829,-879.7181 2929.0557,-871.9894 2923,-854.132 2879.0765,-724.6079 2739.3767,-626.3983 2667.1661,-582.8199"/>
-<polygon fill="#000000" stroke="#000000" points="2666.918,-582.6725 2659.7166,-583.0471 2656.601,-576.5437 2666.918,-582.6725"/>
+<path fill="none" stroke="#000000" d="M2619.2441,-1649.1663C2610.1768,-1603.395 2594.6265,-1493.4745 2634,-1414.8377 2680.118,-1322.7307 2760.7439,-1357.0099 2814,-1268.8377 2826.8883,-1247.4994 2822.5436,-1238.6449 2825,-1213.8377 2826.858,-1195.0732 2828.9144,-1189.8567 2825,-1171.4113 2820.4566,-1150.0017 2811.5752,-1147.2866 2805,-1126.4113 2793.108,-1088.6559 2791.7953,-1078.3864 2788,-1038.9848 2786.1921,-1020.2155 2779.5171,-1013.3988 2788,-996.5584 2821.5912,-929.873 2889.4088,-963.2438 2923,-896.5584 2931.4829,-879.7181 2929.0557,-871.9894 2923,-854.132 2878.7157,-723.544 2737.0754,-624.7871 2665.4006,-581.7572"/>
+<polygon fill="#000000" stroke="#000000" points="2666.9885,-578.6299 2656.601,-576.5437 2663.4204,-584.6522 2666.9885,-578.6299"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178">
@@ -133,8 +133,8 @@
 <g id="edge11" class="edge">
 <title>data/1&#45;&gt;entity_spec_to_template/2</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2637.5711,-1650.0836C2664.862,-1609.0726 2726.5471,-1516.3764 2759.0532,-1467.5283"/>
-<polygon fill="#000000" stroke="#000000" points="2759.2523,-1467.2291 2759.2462,-1460.018 2765.9003,-1457.2389 2759.2523,-1467.2291"/>
+<path fill="none" stroke="#000000" d="M2637.5711,-1650.0836C2665.206,-1608.5557 2728.1076,-1514.0313 2760.2684,-1465.7022"/>
+<polygon fill="#000000" stroke="#000000" points="2763.2741,-1467.5031 2765.9003,-1457.2389 2757.4465,-1463.6251 2763.2741,-1467.5031"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178">
@@ -160,8 +160,8 @@
 <g id="edge13" class="edge">
 <title>data/1&#45;&gt;write_data_entity/2</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2610.511,-1649.6735C2583.7621,-1608.4192 2523.8653,-1516.0416 2492.3212,-1467.3918"/>
-<polygon fill="#000000" stroke="#000000" points="2492.2058,-1467.2137 2485.5853,-1464.3555 2485.6773,-1457.145 2492.2058,-1467.2137"/>
+<path fill="none" stroke="#000000" d="M2610.511,-1649.6735C2583.4249,-1607.8992 2522.35,-1513.7046 2491.142,-1465.5731"/>
+<polygon fill="#000000" stroke="#000000" points="2494.0544,-1463.6315 2485.6773,-1457.145 2488.181,-1467.4398 2494.0544,-1463.6315"/>
 </a>
 </g>
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L178">
@@ -229,8 +229,8 @@
 <g id="edge14" class="edge">
 <title>reset/1&#45;&gt;entity_spec_to_template/2</title>
 <g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L191" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2883.6822,-1649.26C2863.6395,-1608.0448 2819.3366,-1516.9416 2795.6522,-1468.2376"/>
-<polygon fill="#000000" stroke="#000000" points="2795.6246,-1468.1807 2789.4034,-1464.5342 2790.3766,-1457.3891 2795.6246,-1468.1807"/>
+<path fill="none" stroke="#000000" d="M2883.6822,-1649.26C2863.3858,-1607.5231 2818.2111,-1514.6272 2794.7628,-1466.4087"/>
+<polygon fill="#000000" stroke="#000000" points="2797.8975,-1464.8515 2790.3766,-1457.3891 2791.6024,-1467.9128 2797.8975,-1464.8515"/>
 </a>
 </g>
 <g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L191">
@@ -256,8 +256,8 @@
 <g id="edge15" class="edge">
 <title>port/5&#45;&gt;port_/5</title>
 <g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L195" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2852.3934,-854.8583C2828.1668,-818.6831 2775.5323,-741.438 2727,-679.2792 2701.8422,-647.0578 2671.1686,-611.7475 2649.6761,-587.5926"/>
-<polygon fill="#000000" stroke="#000000" points="2649.6329,-587.5443 2642.6522,-585.7357 2641.6368,-578.5964 2649.6329,-587.5443"/>
+<path fill="none" stroke="#000000" d="M2852.3934,-854.8583C2828.1668,-818.6831 2775.5323,-741.438 2727,-679.2792 2701.3969,-646.4875 2670.0811,-610.4966 2648.5436,-586.3206"/>
+<polygon fill="#000000" stroke="#000000" points="2650.9116,-583.718 2641.6368,-578.5964 2645.6934,-588.3839 2650.9116,-583.718"/>
 </a>
 </g>
 <g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L195">
@@ -297,8 +297,8 @@
 <g id="edge58" class="edge">
 <title>reverse/2&#45;&gt;reverse/3</title>
 <g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L482" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2262.0255,-858.3237C2214.9079,-834.9617 2136.3518,-788.1606 2100,-721.7056 2077.8561,-681.2242 2078.1137,-626.5329 2081.2999,-591.7729"/>
-<polygon fill="#000000" stroke="#000000" points="2081.3369,-591.4286 2078.0034,-585.0343 2082.6238,-579.4978 2081.3369,-591.4286"/>
+<path fill="none" stroke="#000000" d="M2262.0255,-858.3237C2214.9079,-834.9617 2136.3518,-788.1606 2100,-721.7056 2077.3683,-680.3325 2078.1359,-624.1167 2081.5145,-589.5053"/>
+<polygon fill="#000000" stroke="#000000" points="2085.0006,-589.8226 2082.6238,-579.4978 2078.0432,-589.0513 2085.0006,-589.8226"/>
 </a>
 </g>
 <g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L482" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L482">
@@ -352,8 +352,8 @@
 <g id="edge57" class="edge">
 <title>generate_atom/3&#45;&gt;generate_atom/4</title>
 <g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L423" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1576,-293.4224C1576,-252.5549 1576,-162.638 1576,-113.642"/>
-<polygon fill="#000000" stroke="#000000" points="1576.0001,-113.5514 1572,-107.5514 1576,-101.5514 1576.0001,-113.5514"/>
+<path fill="none" stroke="#000000" d="M1576,-293.4224C1576,-252.0332 1576,-160.3342 1576,-111.7857"/>
+<polygon fill="#000000" stroke="#000000" points="1579.5001,-111.5514 1576,-101.5514 1572.5001,-111.5514 1579.5001,-111.5514"/>
 </a>
 </g>
 <g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L423" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L423">
@@ -393,8 +393,8 @@
 <g id="edge28" class="edge">
 <title>maximum_width_predicate/2&#45;&gt;maximum_width_predicate/3</title>
 <g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L256" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1421.5611,-1171.5612C1362.9801,-1116.5715 1205.2931,-968.5513 1137.589,-904.9977"/>
-<polygon fill="#000000" stroke="#000000" points="1137.4018,-904.822 1130.2895,-903.6319 1128.6525,-896.6091 1137.4018,-904.822"/>
+<path fill="none" stroke="#000000" d="M1421.5611,-1171.5612C1362.501,-1116.1216 1202.7068,-966.1235 1135.9457,-903.4552"/>
+<polygon fill="#000000" stroke="#000000" points="1138.339,-900.9013 1128.6525,-896.6091 1133.5482,-906.005 1138.339,-900.9013"/>
 </a>
 </g>
 <g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L256">
@@ -434,8 +434,8 @@
 <g id="edge27" class="edge">
 <title>maximum_width_entity/2&#45;&gt;maximum_width_entity/3</title>
 <g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L237" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M926.6862,-1171.3142C887.3412,-1116.5627 782.5721,-970.7685 736.3933,-906.5072"/>
-<polygon fill="#000000" stroke="#000000" points="736.2499,-906.3076 729.5002,-903.7694 729.2471,-896.5627 736.2499,-906.3076"/>
+<path fill="none" stroke="#000000" d="M926.6862,-1171.3142C887.0167,-1116.1111 780.8395,-968.3575 735.2628,-904.934"/>
+<polygon fill="#000000" stroke="#000000" points="737.925,-902.641 729.2471,-896.5627 732.2405,-906.7259 737.925,-902.641"/>
 </a>
 </g>
 <g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L237">
@@ -461,8 +461,8 @@
 <g id="edge4" class="edge">
 <title>debug_handler/2&#45;&gt;call_goal/2</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L105" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M620.3051,-1415.2965C579.2199,-1372.0011 484.2694,-1271.9429 436.9105,-1222.0363"/>
-<polygon fill="#000000" stroke="#000000" points="436.9053,-1222.0309 429.8737,-1220.432 428.6451,-1213.3263 436.9053,-1222.0309"/>
+<path fill="none" stroke="#000000" d="M620.3051,-1415.2965C578.8789,-1371.6418 482.6897,-1270.2782 435.7413,-1220.8043"/>
+<polygon fill="#000000" stroke="#000000" points="438.0674,-1218.1709 428.6451,-1213.3263 432.9898,-1222.9894 438.0674,-1218.1709"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L105">
@@ -488,8 +488,8 @@
 <g id="edge2" class="edge">
 <title>debug_handler/2&#45;&gt;ground_entity_identifier/2</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M640,-1414.4484C640,-1371.9532 640,-1277.2186 640,-1226.3906"/>
-<polygon fill="#000000" stroke="#000000" points="640.0001,-1226.1785 636,-1220.1785 640,-1214.1785 640.0001,-1226.1785"/>
+<path fill="none" stroke="#000000" d="M640,-1414.4484C640,-1371.4119 640,-1274.7965 640,-1224.4697"/>
+<polygon fill="#000000" stroke="#000000" points="643.5001,-1224.1785 640,-1214.1785 636.5001,-1224.1785 643.5001,-1224.1785"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95">
@@ -515,8 +515,8 @@
 <g id="edge3" class="edge">
 <title>debug_handler/2&#45;&gt;port/3</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M727.6862,-1430.6248C860.2199,-1417.345 1109.292,-1371.5737 1234,-1213.8377 1294.1975,-1137.6973 1312.5938,-1075.4142 1256,-996.5584 1175.0352,-883.745 1090.863,-943.0026 960,-896.5584 957.1267,-895.5387 954.1764,-894.4791 951.2031,-893.4016"/>
-<polygon fill="#000000" stroke="#000000" points="951.0034,-893.3286 943.994,-895.0224 939.7346,-889.2037 951.0034,-893.3286"/>
+<path fill="none" stroke="#000000" d="M727.6862,-1430.6248C860.2199,-1417.345 1109.292,-1371.5737 1234,-1213.8377 1294.1975,-1137.6973 1312.5938,-1075.4142 1256,-996.5584 1175.0352,-883.745 1090.863,-943.0026 960,-896.5584 956.511,-895.3202 952.9085,-894.0232 949.289,-892.7067"/>
+<polygon fill="#000000" stroke="#000000" points="950.3283,-889.36 939.7346,-889.2037 947.9186,-895.9322 950.3283,-889.36"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95">
@@ -542,8 +542,8 @@
 <g id="edge5" class="edge">
 <title>debug_handler/2&#45;&gt;exception/3</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L105" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M680.3327,-1416.9496C773.5353,-1372.8096 1003.6005,-1263.8525 1104.8404,-1215.906"/>
-<polygon fill="#000000" stroke="#000000" points="1105.1112,-1215.7779 1108.8217,-1209.5947 1115.9564,-1210.6416 1105.1112,-1215.7779"/>
+<path fill="none" stroke="#000000" d="M680.3327,-1416.9496C774.1025,-1372.541 1006.4055,-1262.524 1106.6743,-1215.0376"/>
+<polygon fill="#000000" stroke="#000000" points="1108.4168,-1218.085 1115.9564,-1210.6416 1105.4206,-1211.7586 1108.4168,-1218.085"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L105">
@@ -569,8 +569,8 @@
 <g id="edge59" class="edge">
 <title>debug_handler/2&#45;&gt;logtalk::execution_context/7</title>
 <g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M602.2523,-1416.5417C518.0503,-1373.0237 314.8174,-1267.9871 219.6939,-1218.8246"/>
-<polygon fill="#000000" stroke="#000000" points="219.578,-1218.7647 212.4112,-1219.5633 208.9176,-1213.255 219.578,-1218.7647"/>
+<path fill="none" stroke="#000000" d="M602.2523,-1416.5417C517.5374,-1372.7586 312.337,-1266.7052 217.9677,-1217.9324"/>
+<polygon fill="#000000" stroke="#000000" points="219.4082,-1214.7371 208.9176,-1213.255 216.1942,-1220.9557 219.4082,-1214.7371"/>
 </a>
 </g>
 <g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L95">
@@ -610,8 +610,8 @@
 <g id="edge6" class="edge">
 <title>port/3&#45;&gt;entity_defines/2</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L139" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M916.6475,-854.5277C952.1893,-800.3128 1047.7878,-654.4888 1090.2209,-589.7621"/>
-<polygon fill="#000000" stroke="#000000" points="1090.4504,-589.412 1090.3947,-582.2011 1097.0296,-579.3763 1090.4504,-589.412"/>
+<path fill="none" stroke="#000000" d="M916.6475,-854.5277C952.5565,-799.7528 1049.7693,-651.4661 1091.5188,-587.7823"/>
+<polygon fill="#000000" stroke="#000000" points="1094.474,-589.6583 1097.0296,-579.3763 1088.6198,-585.8204 1094.474,-589.6583"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L139">
@@ -637,8 +637,8 @@
 <g id="edge7" class="edge">
 <title>entity_defines/2&#45;&gt;member/2</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L149" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1116.5676,-536.8894C1127.7259,-494.4485 1152.8989,-398.702 1166.2702,-347.8438"/>
-<polygon fill="#000000" stroke="#000000" points="1166.3483,-347.5462 1164.0055,-340.7263 1169.3997,-335.9407 1166.3483,-347.5462"/>
+<path fill="none" stroke="#000000" d="M1116.5676,-536.8894C1127.8677,-493.909 1153.5412,-396.2591 1166.7743,-345.9262"/>
+<polygon fill="#000000" stroke="#000000" points="1170.2419,-346.502 1169.3997,-335.9407 1163.4719,-344.722 1170.2419,-346.502"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L149">
@@ -650,8 +650,8 @@
 <g id="edge8" class="edge">
 <title>exception/3&#45;&gt;port/3</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L157" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1137.5312,-1171.8069C1094.154,-1116.9754 976.6466,-968.439 926.3528,-904.8646"/>
-<polygon fill="#000000" stroke="#000000" points="926.3249,-904.8293 919.4652,-902.6054 918.8797,-895.4181 926.3249,-904.8293"/>
+<path fill="none" stroke="#000000" d="M1137.5312,-1171.8069C1093.797,-1116.5242 974.7073,-965.9877 925.1247,-903.3122"/>
+<polygon fill="#000000" stroke="#000000" points="927.8289,-901.0892 918.8797,-895.4181 922.3391,-905.4323 927.8289,-901.0892"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L157">
@@ -663,8 +663,8 @@
 <g id="edge17" class="edge">
 <title>write_data/2&#45;&gt;maximum_width_predicate/2</title>
 <g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2072.3382,-1419.2231C1954.6126,-1376.7676 1645.268,-1265.2081 1509.4859,-1216.2408"/>
-<polygon fill="#000000" stroke="#000000" points="1509.3533,-1216.193 1502.3521,-1217.9203 1498.0649,-1212.122 1509.3533,-1216.193"/>
+<path fill="none" stroke="#000000" d="M2072.3382,-1419.2231C1954.1394,-1376.5969 1642.7777,-1264.31 1507.8568,-1215.6532"/>
+<polygon fill="#000000" stroke="#000000" points="1508.6593,-1212.222 1498.0649,-1212.122 1506.2845,-1218.8069 1508.6593,-1212.222"/>
 </a>
 </g>
 <g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210">
@@ -676,8 +676,8 @@
 <g id="edge16" class="edge">
 <title>write_data/2&#45;&gt;maximum_width_entity/2</title>
 <g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2057.3765,-1423.3059C1863.1375,-1383.1336 1262.9657,-1259.0064 1032.9748,-1211.4398"/>
-<polygon fill="#000000" stroke="#000000" points="1032.7406,-1211.3915 1026.0548,-1214.0933 1020.9893,-1208.961 1032.7406,-1211.3915"/>
+<path fill="none" stroke="#000000" d="M2057.3765,-1423.3059C1862.5583,-1383.0138 1259.3825,-1258.2653 1030.9271,-1211.0163"/>
+<polygon fill="#000000" stroke="#000000" points="1031.491,-1207.5589 1020.9893,-1208.961 1030.0732,-1214.4139 1031.491,-1207.5589"/>
 </a>
 </g>
 <g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210">
@@ -703,8 +703,8 @@
 <g id="edge18" class="edge">
 <title>write_data/2&#45;&gt;maximum_width_result/2</title>
 <g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2149.4819,-1416.599C2190.8095,-1390.7832 2267.457,-1344.8573 2337,-1313.8377 2430.6201,-1272.0784 2543.3149,-1235.9472 2616.4707,-1214.2485"/>
-<polygon fill="#000000" stroke="#000000" points="2616.7999,-1214.1516 2621.4249,-1208.619 2628.3107,-1210.7603 2616.7999,-1214.1516"/>
+<path fill="none" stroke="#000000" d="M2149.4819,-1416.599C2190.8095,-1390.7832 2267.457,-1344.8573 2337,-1313.8377 2431.3922,-1271.734 2545.1751,-1235.3516 2618.2726,-1213.7146"/>
+<polygon fill="#000000" stroke="#000000" points="2619.7058,-1216.9413 2628.3107,-1210.7603 2617.7294,-1210.2261 2619.7058,-1216.9413"/>
 </a>
 </g>
 <g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210">
@@ -730,8 +730,8 @@
 <g id="edge20" class="edge">
 <title>write_data/2&#45;&gt;write_table_label/3</title>
 <g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2098.7537,-1415.4865C2062.1137,-1379.2882 1981.0602,-1303.7764 1900,-1258.8377 1864.6749,-1239.2539 1822.5202,-1223.9387 1786.7209,-1212.9932"/>
-<polygon fill="#000000" stroke="#000000" points="1786.3419,-1212.8802 1779.4487,-1214.9975 1774.8429,-1209.4489 1786.3419,-1212.8802"/>
+<path fill="none" stroke="#000000" d="M2098.7537,-1415.4865C2062.1137,-1379.2882 1981.0602,-1303.7764 1900,-1258.8377 1864.0606,-1238.9133 1821.0519,-1223.4073 1784.8589,-1212.4261"/>
+<polygon fill="#000000" stroke="#000000" points="1785.4257,-1208.9433 1774.8429,-1209.4489 1783.4312,-1215.6531 1785.4257,-1208.9433"/>
 </a>
 </g>
 <g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210">
@@ -757,8 +757,8 @@
 <g id="edge21" class="edge">
 <title>write_data/2&#45;&gt;write_data_rows/4</title>
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2125.949,-1414.7435C2133.0548,-1392.322 2144.0134,-1355.9035 2151,-1323.8377 2158.1668,-1290.9447 2163.6672,-1252.8616 2167.0691,-1226.2246"/>
-<polygon fill="#000000" stroke="#000000" points="2167.0908,-1226.0492 2163.8602,-1219.6023 2168.5687,-1214.1406 2167.0908,-1226.0492"/>
+<path fill="none" stroke="#000000" d="M2125.949,-1414.7435C2133.0548,-1392.322 2144.0134,-1355.9035 2151,-1323.8377 2158.3622,-1290.0476 2163.966,-1250.7805 2167.3427,-1224.0711"/>
+<polygon fill="#000000" stroke="#000000" points="2170.817,-1224.4941 2168.5687,-1214.1406 2163.8697,-1223.6364 2170.817,-1224.4941"/>
 </a>
 </g>
 <g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210">
@@ -784,8 +784,8 @@
 <g id="edge19" class="edge">
 <title>write_data/2&#45;&gt;table_ruler/4</title>
 <g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2043.7832,-1432.2811C1795.5938,-1418.4948 1007.2687,-1363.5597 810,-1213.8377 793.3948,-1201.2347 804.4663,-1186.4211 790,-1171.4113 771.4984,-1152.2145 746.2209,-1137.5265 723.0144,-1126.9199"/>
-<polygon fill="#000000" stroke="#000000" points="722.826,-1126.8378 715.727,-1128.1047 711.8272,-1122.039 722.826,-1126.8378"/>
+<path fill="none" stroke="#000000" d="M2043.7832,-1432.2811C1795.5938,-1418.4948 1007.2687,-1363.5597 810,-1213.8377 793.3948,-1201.2347 804.4663,-1186.4211 790,-1171.4113 770.9938,-1151.691 744.8371,-1136.7287 721.1205,-1126.0612"/>
+<polygon fill="#000000" stroke="#000000" points="722.3948,-1122.799 711.8272,-1122.039 719.6143,-1129.2232 722.3948,-1122.799"/>
 </a>
 </g>
 <g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L210">
@@ -797,8 +797,8 @@
 <g id="edge22" class="edge">
 <title>write_data_entity/2&#45;&gt;maximum_width_predicate/2</title>
 <g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2433.6337,-1416.1789C2379.5926,-1389.0168 2277.3201,-1340.6206 2185,-1313.8377 2125.5559,-1296.5923 1746.4556,-1238.2178 1554.725,-1209.2338"/>
-<polygon fill="#000000" stroke="#000000" points="1554.5181,-1209.2026 1547.988,-1212.2616 1542.6527,-1207.4102 1554.5181,-1209.2026"/>
+<path fill="none" stroke="#000000" d="M2433.6337,-1416.1789C2379.5926,-1389.0168 2277.3201,-1340.6206 2185,-1313.8377 2125.3484,-1296.5321 1743.8046,-1237.8097 1552.7237,-1208.9313"/>
+<polygon fill="#000000" stroke="#000000" points="1553.0633,-1205.443 1542.6527,-1207.4102 1552.0179,-1212.3645 1553.0633,-1205.443"/>
 </a>
 </g>
 <g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224">
@@ -810,8 +810,8 @@
 <g id="edge23" class="edge">
 <title>write_data_entity/2&#45;&gt;maximum_width_result/2</title>
 <g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2491.2257,-1414.8742C2530.4912,-1371.6241 2620.0147,-1273.0161 2665.451,-1222.969"/>
-<polygon fill="#000000" stroke="#000000" points="2665.5952,-1222.8102 2666.6667,-1215.6791 2673.6614,-1213.9255 2665.5952,-1222.8102"/>
+<path fill="none" stroke="#000000" d="M2491.2257,-1414.8742C2530.8994,-1371.1745 2621.8813,-1270.96 2666.8536,-1221.4242"/>
+<polygon fill="#000000" stroke="#000000" points="2669.5309,-1223.6821 2673.6614,-1213.9255 2664.3482,-1218.9768 2669.5309,-1223.6821"/>
 </a>
 </g>
 <g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224">
@@ -837,8 +837,8 @@
 <g id="edge25" class="edge">
 <title>write_data_entity/2&#45;&gt;write_table_label/2</title>
 <g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2459.5446,-1414.538C2442.5539,-1387.0965 2409.5393,-1340.061 2369,-1313.8377 2312.9587,-1277.5866 2136.7991,-1234.6247 2029.6695,-1210.8163"/>
-<polygon fill="#000000" stroke="#000000" points="2029.6399,-1210.8098 2022.9182,-1213.4212 2017.9225,-1208.2209 2029.6399,-1210.8098"/>
+<path fill="none" stroke="#000000" d="M2459.5446,-1414.538C2442.5539,-1387.0965 2409.5393,-1340.061 2369,-1313.8377 2312.618,-1277.3662 2134.6529,-1234.1022 2027.7235,-1210.3842"/>
+<polygon fill="#000000" stroke="#000000" points="2028.4419,-1206.9586 2017.9225,-1208.2209 2026.933,-1213.7941 2028.4419,-1206.9586"/>
 </a>
 </g>
 <g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224">
@@ -864,8 +864,8 @@
 <g id="edge26" class="edge">
 <title>write_data_entity/2&#45;&gt;write_data_rows/3</title>
 <g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2465.5344,-1414.7567C2458.0302,-1390.2933 2445.1293,-1348.9981 2433,-1313.8377 2422.6045,-1283.7034 2409.8951,-1249.7024 2400.6378,-1225.3972"/>
-<polygon fill="#000000" stroke="#000000" points="2400.5556,-1225.1822 2394.6762,-1221.0069 2396.2691,-1213.9739 2400.5556,-1225.1822"/>
+<path fill="none" stroke="#000000" d="M2465.5344,-1414.7567C2458.0302,-1390.2933 2445.1293,-1348.9981 2433,-1313.8377 2422.3197,-1282.8778 2409.197,-1247.8364 2399.8848,-1223.4217"/>
+<polygon fill="#000000" stroke="#000000" points="2403.1122,-1222.0623 2396.2691,-1213.9739 2396.5746,-1224.5643 2403.1122,-1222.0623"/>
 </a>
 </g>
 <g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224">
@@ -891,8 +891,8 @@
 <g id="edge24" class="edge">
 <title>write_data_entity/2&#45;&gt;table_ruler/3</title>
 <g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2522.2551,-1417.2055C2598.3915,-1386.1863 2742.7851,-1317.3121 2825,-1213.8377 2845.4118,-1188.1477 2871.2015,-1099.7591 2884.3832,-1050.8975"/>
-<polygon fill="#000000" stroke="#000000" points="2884.4361,-1050.6986 2882.1166,-1043.8707 2887.527,-1039.1034 2884.4361,-1050.6986"/>
+<path fill="none" stroke="#000000" d="M2522.2551,-1417.2055C2598.3915,-1386.1863 2742.7851,-1317.3121 2825,-1213.8377 2845.6718,-1187.8204 2871.8594,-1097.497 2884.8808,-1049.0496"/>
+<polygon fill="#000000" stroke="#000000" points="2888.3382,-1049.6672 2887.527,-1039.1034 2881.5735,-1047.8673 2888.3382,-1049.6672"/>
 </a>
 </g>
 <g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L224">
@@ -904,8 +904,8 @@
 <g id="edge31" class="edge">
 <title>maximum_width_result/2&#45;&gt;reverse/2</title>
 <g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2667.2142,-1171.8069C2598.5744,-1116.3922 2411.3841,-965.2686 2334.0875,-902.8649"/>
-<polygon fill="#000000" stroke="#000000" points="2333.6983,-902.5508 2326.5171,-901.8941 2324.3613,-895.0128 2333.6983,-902.5508"/>
+<path fill="none" stroke="#000000" d="M2667.2142,-1171.8069C2598.0141,-1115.9399 2408.32,-962.7949 2332.2166,-901.3545"/>
+<polygon fill="#000000" stroke="#000000" points="2334.3407,-898.5712 2324.3613,-895.0128 2329.9436,-904.0178 2334.3407,-898.5712"/>
 </a>
 </g>
 <g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270">
@@ -931,8 +931,8 @@
 <g id="edge29" class="edge">
 <title>maximum_width_result/2&#45;&gt;count/1</title>
 <g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2688.2984,-1171.3142C2676.3433,-1117.1271 2644.7139,-973.7649 2630.3193,-908.5205"/>
-<polygon fill="#000000" stroke="#000000" points="2630.2665,-908.2809 2625.0678,-903.2836 2627.6811,-896.5627 2630.2665,-908.2809"/>
+<path fill="none" stroke="#000000" d="M2688.2984,-1171.3142C2676.2188,-1116.5627 2644.0528,-970.7685 2629.8751,-906.5072"/>
+<polygon fill="#000000" stroke="#000000" points="2633.2535,-905.5738 2627.6811,-896.5627 2626.4178,-907.082 2633.2535,-905.5738"/>
 </a>
 </g>
 <g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270">
@@ -958,8 +958,8 @@
 <g id="edge30" class="edge">
 <title>maximum_width_result/2&#45;&gt;entity_count/2</title>
 <g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2677.7534,-1171.3142C2638.581,-1116.5627 2534.2714,-970.7685 2488.2951,-906.5072"/>
-<polygon fill="#000000" stroke="#000000" points="2488.1627,-906.3221 2481.4183,-903.7699 2481.1802,-896.5627 2488.1627,-906.3221"/>
+<path fill="none" stroke="#000000" d="M2677.7534,-1171.3142C2638.2579,-1116.1111 2532.5464,-968.3575 2487.1695,-904.934"/>
+<polygon fill="#000000" stroke="#000000" points="2489.8455,-902.659 2481.1802,-896.5627 2484.1525,-906.7321 2489.8455,-902.659"/>
 </a>
 </g>
 <g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L270">
@@ -971,8 +971,8 @@
 <g id="edge32" class="edge">
 <title>count/1&#45;&gt;port_/5</title>
 <g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L288" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2623,-854.035C2623,-799.9608 2623,-657.0826 2623,-591.65"/>
-<polygon fill="#000000" stroke="#000000" points="2623.0001,-591.2835 2619,-585.2835 2623,-579.2835 2623.0001,-591.2835"/>
+<path fill="none" stroke="#000000" d="M2623,-854.035C2623,-799.3963 2623,-654.0901 2623,-589.6265"/>
+<polygon fill="#000000" stroke="#000000" points="2626.5001,-589.2835 2623,-579.2835 2619.5001,-589.2835 2626.5001,-589.2835"/>
 </a>
 </g>
 <g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L288">
@@ -984,8 +984,8 @@
 <g id="edge33" class="edge">
 <title>entity_count/2&#45;&gt;port_/5</title>
 <g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L291" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2476.545,-854.035C2503.4703,-799.6221 2574.8907,-655.2894 2606.9854,-590.4298"/>
-<polygon fill="#000000" stroke="#000000" points="2607.1788,-590.0388 2606.2548,-582.8871 2612.5009,-579.2835 2607.1788,-590.0388"/>
+<path fill="none" stroke="#000000" d="M2476.545,-854.035C2503.7496,-799.0577 2576.3773,-652.2853 2607.9714,-588.4372"/>
+<polygon fill="#000000" stroke="#000000" points="2611.2028,-589.7985 2612.5009,-579.2835 2604.9288,-586.694 2611.2028,-589.7985"/>
 </a>
 </g>
 <g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L291">
@@ -1011,8 +1011,8 @@
 <g id="edge36" class="edge">
 <title>write_table_label/3&#45;&gt;write_list/1</title>
 <g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1726.8319,-1171.2244C1752.3415,-1141.9697 1798.9464,-1087.5707 1836,-1038.9848 1870.2923,-994.0197 1907.2295,-939.8233 1929.479,-906.4764"/>
-<polygon fill="#000000" stroke="#000000" points="1929.5209,-906.4133 1929.5118,-899.2022 1936.1648,-896.4203 1929.5209,-906.4133"/>
+<path fill="none" stroke="#000000" d="M1726.8319,-1171.2244C1752.3415,-1141.9697 1798.9464,-1087.5707 1836,-1038.9848 1870.8861,-993.2411 1908.5095,-937.9436 1930.6215,-904.763"/>
+<polygon fill="#000000" stroke="#000000" points="1933.5457,-906.6863 1936.1648,-896.4203 1927.7154,-902.8124 1933.5457,-906.6863"/>
 </a>
 </g>
 <g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294">
@@ -1038,8 +1038,8 @@
 <g id="edge34" class="edge">
 <title>write_table_label/3&#45;&gt;atom_to_right_padded_atom/3</title>
 <g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1708.0672,-1171.3142C1708.2376,-1117.24 1708.6879,-974.3619 1708.8941,-908.9293"/>
-<polygon fill="#000000" stroke="#000000" points="1708.8952,-908.5627 1704.9142,-902.5501 1708.9331,-896.5627 1708.8952,-908.5627"/>
+<path fill="none" stroke="#000000" d="M1708.0672,-1171.3142C1708.2394,-1116.6755 1708.6974,-971.3693 1708.9005,-906.9057"/>
+<polygon fill="#000000" stroke="#000000" points="1712.4015,-906.5737 1708.9331,-896.5627 1705.4015,-906.5516 1712.4015,-906.5737"/>
 </a>
 </g>
 <g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294">
@@ -1065,8 +1065,8 @@
 <g id="edge35" class="edge">
 <title>write_table_label/3&#45;&gt;atom_to_left_padded_atom/3</title>
 <g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1687.5145,-1171.3142C1634.5564,-1116.224 1492.9931,-968.9614 1431.8187,-905.3241"/>
-<polygon fill="#000000" stroke="#000000" points="1431.7126,-905.2138 1424.6708,-903.6603 1423.3963,-896.5627 1431.7126,-905.2138"/>
+<path fill="none" stroke="#000000" d="M1687.5145,-1171.3142C1634.1223,-1115.7724 1490.6664,-966.5411 1430.3307,-903.7762"/>
+<polygon fill="#000000" stroke="#000000" points="1432.8498,-901.3464 1423.3963,-896.5627 1427.8033,-906.1975 1432.8498,-901.3464"/>
 </a>
 </g>
 <g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L294">
@@ -1078,8 +1078,8 @@
 <g id="edge39" class="edge">
 <title>write_table_label/2&#45;&gt;write_list/1</title>
 <g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1944.403,-1171.3142C1945.4256,-1117.24 1948.1275,-974.3619 1949.3649,-908.9293"/>
-<polygon fill="#000000" stroke="#000000" points="1949.3718,-908.5606 1945.486,-902.486 1949.5988,-896.5627 1949.3718,-908.5606"/>
+<path fill="none" stroke="#000000" d="M1944.403,-1171.3142C1945.4363,-1116.6755 1948.1841,-971.3693 1949.4032,-906.9057"/>
+<polygon fill="#000000" stroke="#000000" points="1952.909,-906.6272 1949.5988,-896.5627 1945.9102,-906.4947 1952.909,-906.6272"/>
 </a>
 </g>
 <g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307">
@@ -1091,8 +1091,8 @@
 <g id="edge37" class="edge">
 <title>write_table_label/2&#45;&gt;atom_to_right_padded_atom/3</title>
 <g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1923.3424,-1171.7851C1895.5035,-1143.1658 1845.1556,-1089.4844 1808,-1038.9848 1775.9119,-995.3727 1744.5343,-940.9252 1725.9814,-907.1413"/>
-<polygon fill="#000000" stroke="#000000" points="1725.9376,-907.0607 1719.5552,-903.7042 1720.1988,-896.5219 1725.9376,-907.0607"/>
+<path fill="none" stroke="#000000" d="M1923.3424,-1171.7851C1895.5035,-1143.1658 1845.1556,-1089.4844 1808,-1038.9848 1775.3538,-994.6142 1743.4431,-939.0281 1725.0252,-905.3976"/>
+<polygon fill="#000000" stroke="#000000" points="1728.0508,-903.635 1720.1988,-896.5219 1721.9012,-906.9791 1728.0508,-903.635"/>
 </a>
 </g>
 <g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307">
@@ -1104,8 +1104,8 @@
 <g id="edge38" class="edge">
 <title>write_table_label/2&#45;&gt;atom_to_left_padded_atom/3</title>
 <g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1908.3251,-1172.4647C1856.8464,-1143.308 1758.8166,-1087.538 1676,-1038.9848 1595.0558,-991.5295 1501.3836,-935.0338 1447.4796,-902.3686"/>
-<polygon fill="#000000" stroke="#000000" points="1447.1833,-902.189 1439.9788,-902.4986 1436.9221,-895.9674 1447.1833,-902.189"/>
+<path fill="none" stroke="#000000" d="M1908.3251,-1172.4647C1856.8464,-1143.308 1758.8166,-1087.538 1676,-1038.9848 1594.2109,-991.0341 1499.4267,-933.8534 1445.8046,-901.3535"/>
+<polygon fill="#000000" stroke="#000000" points="1447.2876,-898.1596 1436.9221,-895.9674 1443.6581,-904.1452 1447.2876,-898.1596"/>
 </a>
 </g>
 <g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L307">
@@ -1117,8 +1117,8 @@
 <g id="edge43" class="edge">
 <title>write_data_rows/4&#45;&gt;write_list/1</title>
 <g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2151.1617,-1171.7108C2139.6646,-1159.0881 2125.2792,-1142.4 2114,-1126.4113 2075.7093,-1072.1322 2076.31,-1052.182 2040,-996.5584 2019.1896,-964.6789 1993.0211,-929.9538 1974.2739,-905.875"/>
-<polygon fill="#000000" stroke="#000000" points="1974.1315,-905.6931 1967.2825,-903.4366 1966.7311,-896.2466 1974.1315,-905.6931"/>
+<path fill="none" stroke="#000000" d="M2151.1617,-1171.7108C2139.6646,-1159.0881 2125.2792,-1142.4 2114,-1126.4113 2075.7093,-1072.1322 2076.31,-1052.182 2040,-996.5584 2018.7251,-963.9673 1991.8502,-928.4021 1973.0298,-904.2786"/>
+<polygon fill="#000000" stroke="#000000" points="1975.6561,-901.9558 1966.7311,-896.2466 1970.1478,-906.2754 1975.6561,-901.9558"/>
 </a>
 </g>
 <g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320">
@@ -1144,8 +1144,8 @@
 <g id="edge40" class="edge">
 <title>write_data_rows/4&#45;&gt;port/6</title>
 <g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2169.7239,-1171.3142C2166.4857,-1117.24 2157.9295,-974.3619 2154.0112,-908.9293"/>
-<polygon fill="#000000" stroke="#000000" points="2153.988,-908.5413 2149.6365,-902.7911 2153.2706,-896.5627 2153.988,-908.5413"/>
+<path fill="none" stroke="#000000" d="M2169.7239,-1171.3142C2166.4519,-1116.6755 2157.7503,-971.3693 2153.89,-906.9057"/>
+<polygon fill="#000000" stroke="#000000" points="2157.3622,-906.3356 2153.2706,-896.5627 2150.3747,-906.7541 2157.3622,-906.3356"/>
 </a>
 </g>
 <g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320">
@@ -1171,8 +1171,8 @@
 <g id="edge41" class="edge">
 <title>write_data_rows/4&#45;&gt;entity_to_padded_atom/3</title>
 <g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2135.2238,-1172.8069C2094.5431,-1147.8338 2030.8145,-1100.6188 2008,-1038.9848 1979.1774,-961.1196 2074.7866,-927.0071 2035,-854.132 2025.6828,-837.0661 2009.8751,-823.7427 1993.4043,-813.666"/>
-<polygon fill="#000000" stroke="#000000" points="1992.9839,-813.4276 1985.7915,-813.9461 1982.5465,-807.5064 1992.9839,-813.4276"/>
+<path fill="none" stroke="#000000" d="M2135.2238,-1172.8069C2094.5431,-1147.8338 2030.8145,-1100.6188 2008,-1038.9848 1979.1774,-961.1196 2074.7866,-927.0071 2035,-854.132 2025.3278,-836.416 2008.6613,-822.733 1991.5194,-812.5285"/>
+<polygon fill="#000000" stroke="#000000" points="1992.9821,-809.3363 1982.5465,-807.5064 1989.5632,-815.4446 1992.9821,-809.3363"/>
 </a>
 </g>
 <g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320">
@@ -1198,8 +1198,8 @@
 <g id="edge42" class="edge">
 <title>write_data_rows/4&#45;&gt;predicate_to_padded_atom/4</title>
 <g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2163.2938,-1171.3689C2146.0629,-1123.1233 2104.0478,-1001.3824 2080,-896.5584 2076.7358,-882.3298 2069.9541,-777.3839 2060,-766.7056 2037.0121,-742.0454 1962.3538,-725.3762 1894.2884,-714.9311"/>
-<polygon fill="#000000" stroke="#000000" points="1893.981,-714.8854 1887.4569,-717.9574 1882.112,-713.1167 1893.981,-714.8854"/>
+<path fill="none" stroke="#000000" d="M2163.2938,-1171.3689C2146.0629,-1123.1233 2104.0478,-1001.3824 2080,-896.5584 2076.7358,-882.3298 2069.9541,-777.3839 2060,-766.7056 2036.7741,-741.7901 1960.8026,-725.0319 1892.1767,-714.6088"/>
+<polygon fill="#000000" stroke="#000000" points="1892.5172,-711.1211 1882.112,-713.1167 1891.4906,-718.0454 1892.5172,-711.1211"/>
 </a>
 </g>
 <g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L320">
@@ -1211,8 +1211,8 @@
 <g id="edge46" class="edge">
 <title>write_data_rows/3&#45;&gt;write_list/1</title>
 <g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2337.2064,-1174.2674C2312.2573,-1163.3199 2283.104,-1147.4187 2262,-1126.4113 2215.6818,-1080.305 2240.0767,-1041.8899 2193,-996.5584 2159.9239,-964.7085 2141.137,-971.9592 2100,-951.5584 2065.4252,-934.4121 2026.5848,-914.6642 1997.091,-899.5671"/>
-<polygon fill="#000000" stroke="#000000" points="1996.9527,-899.4963 1989.7888,-900.3199 1986.2732,-894.0238 1996.9527,-899.4963"/>
+<path fill="none" stroke="#000000" d="M2337.2064,-1174.2674C2312.2573,-1163.3199 2283.104,-1147.4187 2262,-1126.4113 2215.6818,-1080.305 2240.0767,-1041.8899 2193,-996.5584 2159.9239,-964.7085 2141.137,-971.9592 2100,-951.5584 2064.816,-934.1099 2025.2147,-913.9674 1995.5406,-898.7734"/>
+<polygon fill="#000000" stroke="#000000" points="1996.7689,-895.47 1986.2732,-894.0238 1993.5762,-901.6996 1996.7689,-895.47"/>
 </a>
 </g>
 <g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337">
@@ -1224,8 +1224,8 @@
 <g id="edge44" class="edge">
 <title>write_data_rows/3&#45;&gt;port/6</title>
 <g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2381.0323,-1171.2018C2365.0994,-1124.8174 2322.197,-1013.4841 2256,-941.5584 2239.1224,-923.2203 2216.0829,-907.866 2195.9784,-896.5749"/>
-<polygon fill="#000000" stroke="#000000" points="2195.7234,-896.437 2188.5428,-897.1001 2185.1689,-890.7269 2195.7234,-896.437"/>
+<path fill="none" stroke="#000000" d="M2381.0323,-1171.2018C2365.0994,-1124.8174 2322.197,-1013.4841 2256,-941.5584 2238.5755,-922.626 2214.5832,-906.8739 2194.0333,-895.49"/>
+<polygon fill="#000000" stroke="#000000" points="2195.6345,-892.3771 2185.1689,-890.7269 2192.3212,-898.5433 2195.6345,-892.3771"/>
 </a>
 </g>
 <g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337">
@@ -1237,8 +1237,8 @@
 <g id="edge45" class="edge">
 <title>write_data_rows/3&#45;&gt;predicate_to_padded_atom/4</title>
 <g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2373.2572,-1171.4761C2364.2154,-1158.4878 2352.4141,-1141.5032 2342,-1126.4113 2302.2622,-1068.8242 2303.3707,-1045.1192 2253,-996.5584 2193.1707,-938.879 2142.571,-964.7015 2095,-896.5584 2092.8878,-893.5328 2069.6019,-769.322 2067,-766.7056 2042.4134,-741.9821 1964.5319,-725.2116 1894.4211,-714.7347"/>
-<polygon fill="#000000" stroke="#000000" points="1894.2182,-714.7052 1887.7053,-717.8006 1882.343,-712.9792 1894.2182,-714.7052"/>
+<path fill="none" stroke="#000000" d="M2373.2572,-1171.4761C2364.2154,-1158.4878 2352.4141,-1141.5032 2342,-1126.4113 2302.2622,-1068.8242 2303.3707,-1045.1192 2253,-996.5584 2193.1707,-938.879 2142.571,-964.7015 2095,-896.5584 2092.8878,-893.5328 2069.6019,-769.322 2067,-766.7056 2042.1594,-741.7267 1962.9171,-724.8659 1892.2508,-714.412"/>
+<polygon fill="#000000" stroke="#000000" points="1892.741,-710.9465 1882.343,-712.9792 1891.7391,-717.8745 1892.741,-710.9465"/>
 </a>
 </g>
 <g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L337">
@@ -1250,8 +1250,8 @@
 <g id="edge47" class="edge">
 <title>port/6&#45;&gt;port_/5</title>
 <g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L355" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2154.7935,-853.9031C2162.4701,-804.4063 2188.725,-682.0116 2266,-624.2792 2309.1338,-592.0538 2453.6715,-573.3523 2545.0711,-564.4754"/>
-<polygon fill="#000000" stroke="#000000" points="2545.1004,-564.4727 2550.6956,-559.9236 2557.0467,-563.3388 2545.1004,-564.4727"/>
+<path fill="none" stroke="#000000" d="M2154.7935,-853.9031C2162.4701,-804.4063 2188.725,-682.0116 2266,-624.2792 2309.4419,-591.8236 2455.7414,-573.0858 2547.0214,-564.2867"/>
+<polygon fill="#000000" stroke="#000000" points="2547.4206,-567.7646 2557.0467,-563.3388 2546.7616,-560.7957 2547.4206,-567.7646"/>
 </a>
 </g>
 <g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L355" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L355">
@@ -1277,8 +1277,8 @@
 <g id="edge48" class="edge">
 <title>port/6&#45;&gt;integer_to_padded_atom/3</title>
 <g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L355" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2139.2092,-854.6673C2124.726,-831.9888 2099.7733,-795.0513 2074,-766.7056 2009.3487,-695.6016 1921.8036,-624.5027 1872.6037,-586.4315"/>
-<polygon fill="#000000" stroke="#000000" points="1872.5122,-586.3611 1865.3176,-585.8729 1863.0011,-579.044 1872.5122,-586.3611"/>
+<path fill="none" stroke="#000000" d="M2139.2092,-854.6673C2124.726,-831.9888 2099.7733,-795.0513 2074,-766.7056 2008.6739,-694.8593 1919.9734,-623.0184 1871.0756,-585.2501"/>
+<polygon fill="#000000" stroke="#000000" points="1873.0627,-582.363 1863.0011,-579.044 1868.7969,-587.9131 1873.0627,-582.363"/>
 </a>
 </g>
 <g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L355" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L355">
@@ -1290,8 +1290,8 @@
 <g id="edge49" class="edge">
 <title>atom_to_right_padded_atom/3&#45;&gt;generate_atom/3</title>
 <g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L362" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1656.7248,-855.4958C1598.3626,-829.5275 1512,-778.005 1512,-700.4924 1512,-700.4924 1512,-700.4924 1512,-431.8528 1512,-399.4821 1531.0361,-367.5563 1548.3445,-345.2184"/>
-<polygon fill="#000000" stroke="#000000" points="1548.5382,-344.9796 1549.2138,-337.8002 1556.1008,-335.6625 1548.5382,-344.9796"/>
+<path fill="none" stroke="#000000" d="M1656.7248,-855.4958C1598.3626,-829.5275 1512,-778.005 1512,-700.4924 1512,-700.4924 1512,-700.4924 1512,-431.8528 1512,-398.6072 1532.079,-365.8309 1549.7437,-343.4284"/>
+<polygon fill="#000000" stroke="#000000" points="1552.4747,-345.6176 1556.1008,-335.6625 1547.0582,-341.1835 1552.4747,-345.6176"/>
 </a>
 </g>
 <g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L362" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L362">
@@ -1303,8 +1303,8 @@
 <g id="edge50" class="edge">
 <title>atom_to_left_padded_atom/3&#45;&gt;generate_atom/3</title>
 <g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L368" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1404.3997,-854.0926C1406.4425,-821.1923 1410,-755.9372 1410,-700.4924 1410,-700.4924 1410,-700.4924 1410,-431.8528 1410,-382.5796 1459.408,-352.1825 1504.3137,-334.7309"/>
-<polygon fill="#000000" stroke="#000000" points="1504.3415,-334.7207 1508.5873,-328.892 1515.6006,-330.5693 1504.3415,-334.7207"/>
+<path fill="none" stroke="#000000" d="M1404.3997,-854.0926C1406.4425,-821.1923 1410,-755.9372 1410,-700.4924 1410,-700.4924 1410,-700.4924 1410,-431.8528 1410,-381.9533 1460.6721,-351.4127 1506.0239,-334.0716"/>
+<polygon fill="#000000" stroke="#000000" points="1507.4111,-337.2911 1515.6006,-330.5693 1505.0068,-330.7169 1507.4111,-337.2911"/>
 </a>
 </g>
 <g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L368" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L368">
@@ -1316,8 +1316,8 @@
 <g id="edge51" class="edge">
 <title>entity_to_padded_atom/3&#45;&gt;generate_atom/3</title>
 <g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L374" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1826.2726,-775.9552C1748.0638,-765.2343 1649.8335,-747.2409 1618,-721.7056 1582.8036,-693.4728 1576,-674.3999 1576,-629.2792 1576,-629.2792 1576,-629.2792 1576,-431.8528 1576,-403.6942 1576,-371.7304 1576,-348.3022"/>
-<polygon fill="#000000" stroke="#000000" points="1576.0001,-348.243 1572,-342.243 1576,-336.243 1576.0001,-348.243"/>
+<path fill="none" stroke="#000000" d="M1826.2726,-775.9552C1748.0638,-765.2343 1649.8335,-747.2409 1618,-721.7056 1582.8036,-693.4728 1576,-674.3999 1576,-629.2792 1576,-629.2792 1576,-629.2792 1576,-431.8528 1576,-402.912 1576,-369.9517 1576,-346.3698"/>
+<polygon fill="#000000" stroke="#000000" points="1579.5001,-346.243 1576,-336.243 1572.5001,-346.243 1579.5001,-346.243"/>
 </a>
 </g>
 <g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L374">
@@ -1329,8 +1329,8 @@
 <g id="edge53" class="edge">
 <title>predicate_to_padded_atom/4&#45;&gt;generate_atom/3</title>
 <g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L387" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1753.7689,-679.0843C1738.1933,-655.237 1712.9217,-615.2927 1694,-579.2792 1651.2195,-497.8556 1609.3549,-397.7441 1588.921,-347.1752"/>
-<polygon fill="#000000" stroke="#000000" points="1588.9059,-347.1376 1582.9567,-343.0624 1584.4303,-336.0034 1588.9059,-347.1376"/>
+<path fill="none" stroke="#000000" d="M1753.7689,-679.0843C1738.1933,-655.237 1712.9217,-615.2927 1694,-579.2792 1650.7683,-496.9967 1608.4718,-395.63 1588.2815,-345.5915"/>
+<polygon fill="#000000" stroke="#000000" points="1591.4054,-343.9783 1584.4303,-336.0034 1584.9098,-346.5874 1591.4054,-343.9783"/>
 </a>
 </g>
 <g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L387" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L387">
@@ -1342,8 +1342,8 @@
 <g id="edge52" class="edge">
 <title>predicate_to_padded_atom/4&#45;&gt;member/2</title>
 <g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L387" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1751.1136,-679.2377C1723.7541,-645.796 1666.8406,-580.2426 1608,-536.8528 1481.5104,-443.578 1310.2462,-368.5375 1226.045,-334.4744"/>
-<polygon fill="#000000" stroke="#000000" points="1225.8915,-334.4128 1218.8332,-335.8896 1214.7554,-329.9422 1225.8915,-334.4128"/>
+<path fill="none" stroke="#000000" d="M1751.1136,-679.2377C1723.7541,-645.796 1666.8406,-580.2426 1608,-536.8528 1480.6051,-442.9104 1307.7922,-367.4643 1224.2504,-333.7492"/>
+<polygon fill="#000000" stroke="#000000" points="1225.3396,-330.4152 1214.7554,-329.9422 1222.7345,-336.9124 1225.3396,-330.4152"/>
 </a>
 </g>
 <g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L387" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L387">
@@ -1355,8 +1355,8 @@
 <g id="edge54" class="edge">
 <title>integer_to_padded_atom/3&#45;&gt;generate_atom/3</title>
 <g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L407" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M1819.8696,-536.9174C1794.0617,-501.779 1738.6985,-430.3455 1681,-380.8528 1663.4156,-365.7693 1642.0842,-351.6779 1623.2535,-340.4051"/>
-<polygon fill="#000000" stroke="#000000" points="1623.1495,-340.3442 1615.9505,-340.7612 1612.7967,-334.2763 1623.1495,-340.3442"/>
+<path fill="none" stroke="#000000" d="M1819.8696,-536.9174C1794.0617,-501.779 1738.6985,-430.3455 1681,-380.8528 1662.9249,-365.3483 1640.8907,-350.8922 1621.683,-339.468"/>
+<polygon fill="#000000" stroke="#000000" points="1623.1967,-336.2989 1612.7967,-334.2763 1619.6655,-342.3429 1623.1967,-336.2989"/>
 </a>
 </g>
 <g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L407" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L407">
@@ -1368,8 +1368,8 @@
 <g id="edge55" class="edge">
 <title>table_ruler/4&#45;&gt;generate_atom/3</title>
 <g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L415" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M644.7743,-1084.1756C610.7556,-1039.9423 541.6069,-934.6947 582,-854.132 687.6508,-643.4152 800.91,-651.2669 1007,-536.8528 1178.0933,-441.8677 1398.1669,-368.3608 1507.7167,-334.7196"/>
-<polygon fill="#000000" stroke="#000000" points="1507.7664,-334.7045 1512.3376,-329.1273 1519.2438,-331.2019 1507.7664,-334.7045"/>
+<path fill="none" stroke="#000000" d="M644.7743,-1084.1756C610.7556,-1039.9423 541.6069,-934.6947 582,-854.132 687.6508,-643.4152 800.91,-651.2669 1007,-536.8528 1178.9592,-441.387 1400.3956,-367.6174 1509.3714,-334.2119"/>
+<polygon fill="#000000" stroke="#000000" points="1510.6993,-337.4662 1519.2438,-331.2019 1508.6578,-330.7704 1510.6993,-337.4662"/>
 </a>
 </g>
 <g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L415" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L415">
@@ -1381,8 +1381,8 @@
 <g id="edge56" class="edge">
 <title>table_ruler/3&#45;&gt;generate_atom/3</title>
 <g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L419" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M2917.396,-997.3172C2929.9329,-985.3441 2944.1828,-969.1455 2952,-951.5584 3011.2961,-818.1542 3031.4846,-723.0708 2924,-624.2792 2738.0404,-453.3594 1947.4045,-354.252 1671.4783,-324.3534"/>
-<polygon fill="#000000" stroke="#000000" points="1671.4483,-324.3502 1665.0547,-327.685 1659.5173,-323.0658 1671.4483,-324.3502"/>
+<path fill="none" stroke="#000000" d="M2917.396,-997.3172C2929.9329,-985.3441 2944.1828,-969.1455 2952,-951.5584 3011.2961,-818.1542 3031.4846,-723.0708 2924,-624.2792 2737.6718,-453.0206 1944.2678,-353.8594 1669.8435,-324.1764"/>
+<polygon fill="#000000" stroke="#000000" points="1669.8342,-320.6553 1659.5173,-323.0658 1669.0856,-327.6151 1669.8342,-320.6553"/>
 </a>
 </g>
 <g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L419" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L419">
@@ -1422,8 +1422,8 @@
 <g id="edge1" class="edge">
 <title>logtalk::debug_handler/2&#45;&gt;debug_handler/2</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L92" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M640,-1649.26C640,-1608.3926 640,-1518.4756 640,-1469.4796"/>
-<polygon fill="#000000" stroke="#000000" points="640.0001,-1469.3891 636,-1463.3891 640,-1457.3891 640.0001,-1469.3891"/>
+<path fill="none" stroke="#000000" d="M640,-1649.26C640,-1607.8709 640,-1516.1719 640,-1467.6234"/>
+<polygon fill="#000000" stroke="#000000" points="643.5001,-1467.389 640,-1457.3891 636.5001,-1467.3891 643.5001,-1467.389"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/ports_profiler/ports_profiler.lgt#L92">

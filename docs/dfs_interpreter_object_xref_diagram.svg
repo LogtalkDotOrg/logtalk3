@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-611.2792 382,-611.2792 382,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object dfs_interpreter</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_dfs_interpreter_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt">
@@ -52,8 +52,8 @@
 <g id="edge1" class="edge">
 <title>prove/2&#45;&gt;prove_body/3</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L12" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M239.8953,-528.2093C228.681,-506.1554 211.7957,-470.0329 203,-436.8528 195.2177,-407.4958 191.7614,-373.0409 190.2264,-348.2115"/>
-<polygon fill="#000000" stroke="#000000" points="190.2241,-348.1656 185.9107,-342.3868 189.5861,-336.1826 190.2241,-348.1656"/>
+<path fill="none" stroke="#000000" d="M239.8953,-528.2093C228.681,-506.1554 211.7957,-470.0329 203,-436.8528 195.0035,-406.6878 191.5745,-371.1405 190.104,-346.1835"/>
+<polygon fill="#000000" stroke="#000000" points="193.5987,-345.9882 189.5861,-336.1826 186.608,-346.3503 193.5987,-345.9882"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L12" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L12">
@@ -79,8 +79,8 @@
 <g id="edge2" class="edge">
 <title>prove/3&#45;&gt;prove_body/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L15" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M130.7925,-527.8488C141.9733,-486.8944 166.602,-396.6815 179.9589,-347.7562"/>
-<polygon fill="#000000" stroke="#000000" points="180.014,-347.5542 177.7355,-340.7125 183.1745,-335.9778 180.014,-347.5542"/>
+<path fill="none" stroke="#000000" d="M130.7925,-527.8488C142.1157,-486.3727 167.2317,-394.3751 180.4639,-345.9067"/>
+<polygon fill="#000000" stroke="#000000" points="183.9172,-346.5466 183.1745,-335.9778 177.1643,-344.703 183.9172,-346.5466"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L15" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L15">
@@ -92,8 +92,8 @@
 <g id="edge3" class="edge">
 <title>prove_body/3&#45;&gt;prove/2</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M198.3232,-335.7455C207.8148,-358.0026 222.3311,-394.2888 231,-426.8528 238.8655,-456.3989 244.1641,-490.8327 247.3205,-515.6062"/>
-<polygon fill="#000000" stroke="#000000" points="247.3307,-515.6911 252.0252,-521.1649 248.778,-527.6035 247.3307,-515.6911"/>
+<path fill="none" stroke="#000000" d="M198.3232,-335.7455C207.8148,-358.0026 222.3311,-394.2888 231,-426.8528 239.082,-457.2121 244.4539,-492.7319 247.5762,-517.6295"/>
+<polygon fill="#000000" stroke="#000000" points="244.1068,-518.094 248.778,-527.6035 251.0565,-517.2566 244.1068,-518.094"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19">
@@ -119,8 +119,8 @@
 <g id="edge4" class="edge">
 <title>prove_body/3&#45;&gt;rule/4</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M177.8676,-293.4224C156.1879,-252.1028 108.1999,-160.6423 82.6943,-112.0309"/>
-<polygon fill="#000000" stroke="#000000" points="82.594,-111.8398 76.2643,-108.3852 77.0186,-101.2136 82.594,-111.8398"/>
+<path fill="none" stroke="#000000" d="M177.8676,-293.4224C155.9134,-251.5797 106.9808,-158.3188 81.7366,-110.2057"/>
+<polygon fill="#000000" stroke="#000000" points="84.7641,-108.4426 77.0186,-101.2136 78.5655,-111.6949 84.7641,-108.4426"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19">
@@ -146,8 +146,8 @@
 <g id="edge5" class="edge">
 <title>prove_body/3&#45;&gt;counter::increment/0</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M194.1589,-293.4224C204.1168,-252.468 226.0518,-162.2551 237.9478,-113.3298"/>
-<polygon fill="#000000" stroke="#000000" points="237.9765,-113.2117 235.5073,-106.4365 240.8117,-101.5514 237.9765,-113.2117"/>
+<path fill="none" stroke="#000000" d="M194.1589,-293.4224C204.2437,-251.9463 226.6126,-159.9487 238.3975,-111.4803"/>
+<polygon fill="#000000" stroke="#000000" points="241.8499,-112.0952 240.8117,-101.5514 235.0481,-110.4414 241.8499,-112.0952"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/dfs_interpreter.lgt#L19">

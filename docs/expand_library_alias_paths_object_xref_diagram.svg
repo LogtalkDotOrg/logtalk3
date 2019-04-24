@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 644,-376.8528 644,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object expand_library_alias_paths</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_expand_library_alias_paths_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/expand_library_alias_paths.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/expand_library_alias_paths.lgt">
@@ -52,8 +52,8 @@
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;os::absolute_file_name/2</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/expand_library_alias_paths.lgt#L31" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M291.8809,-293.4224C264.3383,-252.0332 203.3169,-160.3342 171.0101,-111.7857"/>
-<polygon fill="#000000" stroke="#000000" points="170.8476,-111.5416 164.1936,-108.7625 164.1996,-101.5514 170.8476,-111.5416"/>
+<path fill="none" stroke="#000000" d="M291.8809,-293.4224C263.9911,-251.5115 201.7732,-158.0145 169.8022,-109.9706"/>
+<polygon fill="#000000" stroke="#000000" points="172.6535,-107.9376 164.1996,-101.5514 166.8258,-111.8156 172.6535,-107.9376"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/expand_library_alias_paths.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/expand_library_alias_paths.lgt#L31">
@@ -79,8 +79,8 @@
 <g id="edge2" class="edge">
 <title>term_expansion/2&#45;&gt;logtalk::expand_library_path/2</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/expand_library_alias_paths.lgt#L31" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M320.0286,-293.4224C347.3946,-252.0332 408.0249,-160.3342 440.1246,-111.7857"/>
-<polygon fill="#000000" stroke="#000000" points="440.273,-111.5613 440.2456,-104.3502 446.8914,-101.5514 440.273,-111.5613"/>
+<path fill="none" stroke="#000000" d="M320.0286,-293.4224C347.7396,-251.5115 409.5587,-158.0145 441.3247,-109.9706"/>
+<polygon fill="#000000" stroke="#000000" points="444.2956,-111.8233 446.8914,-101.5514 438.4565,-107.9626 444.2956,-111.8233"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/expand_library_alias_paths.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/expand_library_alias_paths.lgt#L31">

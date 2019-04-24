@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-376.8528 522,-376.8528 522,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object code_metrics</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_code_metrics_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/code_metrics/code_metrics.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/code_metrics/code_metrics.lgt">
@@ -52,8 +52,8 @@
 <g id="edge1" class="edge">
 <title>process_entity/2&#45;&gt;process_entity_/3</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/code_metrics/code_metrics.lgt#L32" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M231.6866,-293.4224C209.71,-252.2071 161.1323,-161.1039 135.1625,-112.4"/>
-<polygon fill="#000000" stroke="#000000" points="135.024,-112.1402 128.6714,-108.7278 129.3779,-101.5514 135.024,-112.1402"/>
+<path fill="none" stroke="#000000" d="M231.6866,-293.4224C209.4318,-251.6854 159.8982,-158.7895 134.1873,-110.571"/>
+<polygon fill="#000000" stroke="#000000" points="137.1714,-108.7286 129.3779,-101.5514 130.9946,-112.0222 137.1714,-108.7286"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/code_metrics/code_metrics.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/code_metrics/code_metrics.lgt#L32">
@@ -79,8 +79,8 @@
 <g id="edge2" class="edge">
 <title>process_entity/2&#45;&gt;logtalk::print_message/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/code_metrics/code_metrics.lgt#L32" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M254.3134,-293.4224C276.29,-252.2071 324.8677,-161.1039 350.8375,-112.4"/>
-<polygon fill="#000000" stroke="#000000" points="350.976,-112.1402 350.2695,-104.9637 356.6221,-101.5514 350.976,-112.1402"/>
+<path fill="none" stroke="#000000" d="M254.3134,-293.4224C276.5682,-251.6854 326.1018,-158.7895 351.8127,-110.571"/>
+<polygon fill="#000000" stroke="#000000" points="355.0054,-112.0222 356.6221,-101.5514 348.8286,-108.7286 355.0054,-112.0222"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/code_metrics/code_metrics.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/code_metrics/code_metrics.lgt#L32">

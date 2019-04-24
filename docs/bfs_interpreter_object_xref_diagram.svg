@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1080.132 1266,-1080.132 1266,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object bfs_interpreter</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_bfs_interpreter_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt">
@@ -52,8 +52,8 @@
 <g id="edge1" class="edge">
 <title>prove/2&#45;&gt;prove/3</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L12" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M534.0221,-996.7016C524.4136,-955.7472 503.2483,-865.5344 491.7697,-816.609"/>
-<polygon fill="#000000" stroke="#000000" points="491.7473,-816.5134 486.4825,-811.5857 489.0063,-804.8306 491.7473,-816.5134"/>
+<path fill="none" stroke="#000000" d="M534.0221,-996.7016C524.2912,-955.2255 502.7072,-863.2279 491.3357,-814.7595"/>
+<polygon fill="#000000" stroke="#000000" points="494.6979,-813.7668 489.0063,-804.8306 487.883,-815.3657 494.6979,-813.7668"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L12" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L12">
@@ -79,8 +79,8 @@
 <g id="edge2" class="edge">
 <title>prove/3&#45;&gt;prove_branch/3</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L15" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M492.0551,-762.2752C507.6365,-721.2338 541.9983,-630.7247 560.5454,-581.8715"/>
-<polygon fill="#000000" stroke="#000000" points="560.6397,-581.6229 559.0298,-574.5938 564.899,-570.4042 560.6397,-581.6229"/>
+<path fill="none" stroke="#000000" d="M492.0551,-762.2752C507.8345,-720.7121 542.8749,-628.4156 561.2449,-580.0289"/>
+<polygon fill="#000000" stroke="#000000" points="564.6217,-580.9954 564.899,-570.4042 558.0774,-578.5109 564.6217,-580.9954"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L15" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L15">
@@ -106,8 +106,8 @@
 <g id="edge8" class="edge">
 <title>prove/3&#45;&gt;queue::jump/3</title>
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L15" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M475.4018,-762.2752C458.7348,-721.1469 421.9362,-630.3409 402.1687,-581.5616"/>
-<polygon fill="#000000" stroke="#000000" points="402.1542,-581.5257 396.1935,-577.4673 397.6472,-570.4042 402.1542,-581.5257"/>
+<path fill="none" stroke="#000000" d="M475.4018,-762.2752C458.5234,-720.6252 420.9994,-628.0292 401.4247,-579.7258"/>
+<polygon fill="#000000" stroke="#000000" points="404.6468,-578.3576 397.6472,-570.4042 398.1592,-580.9867 404.6468,-578.3576"/>
 </a>
 </g>
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L15" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L15">
@@ -119,8 +119,8 @@
 <g id="edge4" class="edge">
 <title>prove_branch/3&#45;&gt;prove/2</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M573,-570.6694C573,-594.1879 573,-632.906 573,-666.2792 573,-900.7056 573,-900.7056 573,-900.7056 573,-930.2965 562.8814,-962.4851 553.6843,-985.6307"/>
-<polygon fill="#000000" stroke="#000000" points="553.6268,-985.7691 555.0151,-992.8453 549.0172,-996.8485 553.6268,-985.7691"/>
+<path fill="none" stroke="#000000" d="M573,-570.6694C573,-594.1879 573,-632.906 573,-666.2792 573,-900.7056 573,-900.7056 573,-900.7056 573,-931.1109 562.3168,-964.2589 552.9272,-987.521"/>
+<polygon fill="#000000" stroke="#000000" points="549.6554,-986.2729 549.0172,-996.8485 556.1111,-988.9791 549.6554,-986.2729"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24">
@@ -146,8 +146,8 @@
 <g id="edge5" class="edge">
 <title>prove_branch/3&#45;&gt;expand_state/3</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M604.0583,-529.281C670.2043,-487.1441 825.0109,-388.528 899.5067,-341.072"/>
-<polygon fill="#000000" stroke="#000000" points="899.7741,-340.9017 902.6854,-334.3044 909.895,-334.4544 899.7741,-340.9017"/>
+<path fill="none" stroke="#000000" d="M604.0583,-529.281C670.7465,-486.7987 827.5546,-386.9075 901.3222,-339.9155"/>
+<polygon fill="#000000" stroke="#000000" points="903.3414,-342.7791 909.895,-334.4544 899.5804,-336.8752 903.3414,-342.7791"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24">
@@ -173,8 +173,8 @@
 <g id="edge3" class="edge">
 <title>prove_branch/3&#45;&gt;execute_bindings/1</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L20" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M540.3381,-529.281C470.8085,-487.1632 308.1251,-388.6173 229.7421,-341.1365"/>
-<polygon fill="#000000" stroke="#000000" points="229.5237,-341.0043 222.3193,-341.3168 219.2599,-334.7869 229.5237,-341.0043"/>
+<path fill="none" stroke="#000000" d="M540.3381,-529.281C470.2398,-486.8187 305.4574,-387.0013 227.8356,-339.9817"/>
+<polygon fill="#000000" stroke="#000000" points="229.6265,-336.9744 219.2599,-334.7869 225.9997,-342.9616 229.6265,-336.9744"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L20" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L20">
@@ -200,8 +200,8 @@
 <g id="edge9" class="edge">
 <title>prove_branch/3&#45;&gt;queue::head/2</title>
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L20" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M556.3467,-527.8488C523.6415,-486.1805 450.914,-393.5215 413.0148,-345.2358"/>
-<polygon fill="#000000" stroke="#000000" points="412.8922,-345.0796 406.0411,-342.8295 405.4831,-335.64 412.8922,-345.0796"/>
+<path fill="none" stroke="#000000" d="M556.3467,-527.8488C523.2994,-485.7446 449.3881,-391.5775 411.837,-343.7353"/>
+<polygon fill="#000000" stroke="#000000" points="414.4106,-341.3454 405.4831,-335.64 408.9041,-345.6673 414.4106,-341.3454"/>
 </a>
 </g>
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L20" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L20">
@@ -227,8 +227,8 @@
 <g id="edge10" class="edge">
 <title>prove_branch/3&#45;&gt;queue::serve/3</title>
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M573,-527.8488C573,-486.9813 573,-397.0644 573,-348.0684"/>
-<polygon fill="#000000" stroke="#000000" points="573.0001,-347.9778 569,-341.9778 573,-335.9778 573.0001,-347.9778"/>
+<path fill="none" stroke="#000000" d="M573,-527.8488C573,-486.4596 573,-394.7606 573,-346.2121"/>
+<polygon fill="#000000" stroke="#000000" points="576.5001,-345.9778 573,-335.9778 569.5001,-345.9778 576.5001,-345.9778"/>
 </a>
 </g>
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24">
@@ -254,8 +254,8 @@
 <g id="edge11" class="edge">
 <title>prove_branch/3&#45;&gt;queue::join/3</title>
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M589.6533,-527.8488C622.3585,-486.1805 695.086,-393.5215 732.9852,-345.2358"/>
-<polygon fill="#000000" stroke="#000000" points="733.1078,-345.0796 733.6658,-337.8901 740.5169,-335.64 733.1078,-345.0796"/>
+<path fill="none" stroke="#000000" d="M589.6533,-527.8488C622.7006,-485.7446 696.6119,-391.5775 734.163,-343.7353"/>
+<polygon fill="#000000" stroke="#000000" points="737.0959,-345.6673 740.5169,-335.64 731.5894,-341.3454 737.0959,-345.6673"/>
 </a>
 </g>
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24">
@@ -281,8 +281,8 @@
 <g id="edge12" class="edge">
 <title>prove_branch/3&#45;&gt;counter::increment/0</title>
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M509.8124,-534.7285C499.5172,-532.4149 488.9644,-530.0568 479,-527.8528 380.6477,-506.0988 36,-532.5823 36,-431.8528 36,-431.8528 36,-431.8528 36,-197.4264 36,-140.4196 193.7904,-108.2418 306.2812,-92.5453"/>
-<polygon fill="#000000" stroke="#000000" points="306.4975,-92.5159 311.9022,-87.742 318.3875,-90.8947 306.4975,-92.5159"/>
+<path fill="none" stroke="#000000" d="M509.8124,-534.7285C499.5172,-532.4149 488.9644,-530.0568 479,-527.8528 380.6477,-506.0988 36,-532.5823 36,-431.8528 36,-431.8528 36,-431.8528 36,-197.4264 36,-140.0734 195.7127,-107.8519 308.3256,-92.2612"/>
+<polygon fill="#000000" stroke="#000000" points="308.9495,-95.7086 318.3875,-90.8947 308.0075,-88.7723 308.9495,-95.7086"/>
 </a>
 </g>
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24">
@@ -308,8 +308,8 @@
 <g id="edge13" class="edge">
 <title>prove_branch/3&#45;&gt;queue::join_all/3</title>
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M617.3303,-530.866C719.8019,-488.7959 972.9963,-384.8459 1086.8851,-338.0884"/>
-<polygon fill="#000000" stroke="#000000" points="1087.0135,-338.0357 1091.0448,-332.0566 1098.1144,-333.4781 1087.0135,-338.0357"/>
+<path fill="none" stroke="#000000" d="M617.3303,-530.866C720.3194,-488.5834 975.5577,-383.7943 1088.6,-337.3843"/>
+<polygon fill="#000000" stroke="#000000" points="1090.193,-340.5139 1098.1144,-333.4781 1087.5344,-334.0384 1090.193,-340.5139"/>
 </a>
 </g>
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L24">
@@ -335,8 +335,8 @@
 <g id="edge7" class="edge">
 <title>expand_state/3&#45;&gt;add_bindings/5</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M935.117,-293.4224C923.7615,-252.468 898.748,-162.2551 885.1823,-113.3298"/>
-<polygon fill="#000000" stroke="#000000" points="885.1229,-113.1151 879.6651,-108.4021 881.9165,-101.5514 885.1229,-113.1151"/>
+<path fill="none" stroke="#000000" d="M935.117,-293.4224C923.6169,-251.9463 898.1085,-159.9487 884.6695,-111.4803"/>
+<polygon fill="#000000" stroke="#000000" points="887.9612,-110.2526 881.9165,-101.5514 881.2157,-112.123 887.9612,-110.2526"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43">
@@ -362,8 +362,8 @@
 <g id="edge6" class="edge">
 <title>expand_state/3&#45;&gt;rule/4</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M948.8741,-293.4224C964.1439,-252.2771 997.8652,-161.4133 1015.9627,-112.6485"/>
-<polygon fill="#000000" stroke="#000000" points="1016.0311,-112.4638 1014.3687,-105.447 1020.2064,-101.2136 1016.0311,-112.4638"/>
+<path fill="none" stroke="#000000" d="M948.8741,-293.4224C964.338,-251.7541 998.7255,-159.0951 1016.6452,-110.8094"/>
+<polygon fill="#000000" stroke="#000000" points="1020.0083,-111.8066 1020.2064,-101.2136 1013.4457,-109.371 1020.0083,-111.8066"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43">
@@ -375,8 +375,8 @@
 <g id="edge14" class="edge">
 <title>expand_state/3&#45;&gt;counter::increment/0</title>
 <g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M899.4446,-296.0486C805.6724,-254.0969 577.6181,-152.0703 472.1611,-104.8911"/>
-<polygon fill="#000000" stroke="#000000" points="472.088,-104.8584 464.9775,-106.0594 461.1342,-99.9579 472.088,-104.8584"/>
+<path fill="none" stroke="#000000" d="M899.4446,-296.0486C805.1979,-253.8846 575.3064,-151.0361 470.5695,-104.1791"/>
+<polygon fill="#000000" stroke="#000000" points="471.6917,-100.8468 461.1342,-99.9579 468.833,-107.2365 471.6917,-100.8468"/>
 </a>
 </g>
 <g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/bfs_interpreter.lgt#L43">

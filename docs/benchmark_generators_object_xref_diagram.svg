@@ -11,7 +11,7 @@
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1080.132 390,-1080.132 390,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Cross&#45;referencing diagram for object benchmark_generators</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/23, 18:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2019/04/24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_benchmark_generators_object</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt">
@@ -52,8 +52,8 @@
 <g id="edge3" class="edge">
 <title>random_tree/1&#45;&gt;max_depth/1</title>
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L29" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M106.2353,-997.2397C85.6866,-975.3884 58,-938.8661 58,-900.7056 58,-900.7056 58,-900.7056 58,-197.4264 58,-168.0299 67.2258,-135.8236 75.6114,-112.6217"/>
-<polygon fill="#000000" stroke="#000000" points="75.6211,-112.5959 74.0026,-105.5688 79.8666,-101.372 75.6211,-112.5959"/>
+<path fill="none" stroke="#000000" d="M106.2353,-997.2397C85.6866,-975.3884 58,-938.8661 58,-900.7056 58,-900.7056 58,-900.7056 58,-197.4264 58,-167.2208 67.7406,-134.0486 76.3017,-110.7267"/>
+<polygon fill="#000000" stroke="#000000" points="79.5761,-111.9629 79.8666,-101.372 73.0349,-109.4701 79.5761,-111.9629"/>
 </a>
 </g>
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L29" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L29">
@@ -79,8 +79,8 @@
 <g id="edge4" class="edge">
 <title>random_tree/1&#45;&gt;random_tree/2</title>
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L29" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M130.7152,-996.7016C135.9451,-955.8342 147.4519,-865.9172 153.7221,-816.9212"/>
-<polygon fill="#000000" stroke="#000000" points="153.746,-816.7336 150.54,-810.2743 155.2693,-804.8306 153.746,-816.7336"/>
+<path fill="none" stroke="#000000" d="M130.7152,-996.7016C136.023,-955.2255 147.7961,-863.2279 153.9987,-814.7595"/>
+<polygon fill="#000000" stroke="#000000" points="157.4715,-815.194 155.2693,-804.8306 150.5282,-814.3054 157.4715,-815.194"/>
 </a>
 </g>
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L29" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L29">
@@ -106,8 +106,8 @@
 <g id="edge1" class="edge">
 <title>random_node/1&#45;&gt;max_depth/1</title>
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L20" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M189.9537,-293.4224C170.4385,-252.2071 127.3014,-161.1039 104.2403,-112.4"/>
-<polygon fill="#000000" stroke="#000000" points="104.239,-112.3971 98.0561,-108.686 99.1036,-101.5514 104.239,-112.3971"/>
+<path fill="none" stroke="#000000" d="M189.9537,-293.4224C170.2326,-251.7724 126.3888,-159.1764 103.5173,-110.873"/>
+<polygon fill="#000000" stroke="#000000" points="106.5464,-109.0916 99.1036,-101.5514 100.2198,-112.0873 106.5464,-109.0916"/>
 </a>
 </g>
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L20" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L20">
@@ -133,8 +133,8 @@
 <g id="edge7" class="edge">
 <title>random_node/1&#45;&gt;random::random/1</title>
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L20" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M206.607,-293.4224C219.3872,-252.381 247.5716,-161.8718 262.7844,-113.0187"/>
-<polygon fill="#000000" stroke="#000000" points="262.7874,-113.0088 260.7523,-106.0908 266.3553,-101.5514 262.7874,-113.0088"/>
+<path fill="none" stroke="#000000" d="M206.607,-293.4224C219.5497,-251.8593 248.2907,-159.5628 263.3582,-111.1761"/>
+<polygon fill="#000000" stroke="#000000" points="266.7238,-112.1398 266.3553,-101.5514 260.0404,-110.0586 266.7238,-112.1398"/>
 </a>
 </g>
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L20" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L20">
@@ -160,8 +160,8 @@
 <g id="edge2" class="edge">
 <title>random_continue/1&#45;&gt;random_node/1</title>
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L25" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M261.8455,-527.8488C249.9659,-486.8944 223.7979,-396.6815 209.6061,-347.7562"/>
-<polygon fill="#000000" stroke="#000000" points="209.5327,-347.5027 204.0195,-342.8546 206.1896,-335.9778 209.5327,-347.5027"/>
+<path fill="none" stroke="#000000" d="M261.8455,-527.8488C249.7893,-486.2857 223.0169,-393.9892 208.9814,-345.6025"/>
+<polygon fill="#000000" stroke="#000000" points="212.3369,-344.6068 206.1896,-335.9778 205.6141,-346.557 212.3369,-344.6068"/>
 </a>
 </g>
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L25" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L25">
@@ -173,8 +173,8 @@
 <g id="edge5" class="edge">
 <title>random_tree/2&#45;&gt;random_node/1</title>
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L33" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M147.1988,-762.0626C136.5948,-739.0096 122,-700.9781 122,-666.2792 122,-666.2792 122,-666.2792 122,-431.8528 122,-397.4793 145.5364,-365.5007 166.7513,-343.6581"/>
-<polygon fill="#000000" stroke="#000000" points="166.7663,-343.6434 168.238,-336.584 175.3203,-335.2273 166.7663,-343.6434"/>
+<path fill="none" stroke="#000000" d="M147.1988,-762.0626C136.5948,-739.0096 122,-700.9781 122,-666.2792 122,-666.2792 122,-666.2792 122,-431.8528 122,-396.7154 146.5941,-364.0807 168.1619,-342.217"/>
+<polygon fill="#000000" stroke="#000000" points="170.6106,-344.7178 175.3203,-335.2273 165.7202,-339.7094 170.6106,-344.7178"/>
 </a>
 </g>
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L33">
@@ -186,8 +186,8 @@
 <g id="edge6" class="edge">
 <title>random_tree/2&#45;&gt;random_continue/1</title>
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L35" xlink:title="calls">
-<path fill="none" stroke="#000000" d="M167.9558,-762.2752C187.2544,-721.1469 229.8633,-630.3409 252.7521,-581.5616"/>
-<polygon fill="#000000" stroke="#000000" points="252.8899,-581.2677 251.8175,-574.1368 257.9875,-570.4042 252.8899,-581.2677"/>
+<path fill="none" stroke="#000000" d="M167.9558,-762.2752C187.4992,-720.6252 230.9481,-628.0292 253.6135,-579.7258"/>
+<polygon fill="#000000" stroke="#000000" points="256.908,-580.9439 257.9875,-570.4042 250.571,-577.9704 256.908,-580.9439"/>
 </a>
 </g>
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/contributions/verdi_neruda/benchmark_generators.lgt#L35">
