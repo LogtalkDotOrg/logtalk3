@@ -94,6 +94,9 @@ node is the library directory.
 * IMPROVED: Output missing external nodes (usually due to unloaded resources)
 that are referenced from diagram edges.
 
+* IMPROVED: Associate directory and file URLs with graph labels instead of the
+whole graph background to avoid accidental clicks.
+
 * FIXED: Bug when generating predicate cross-referencing diagrams where a call
 to a multifile predicate for a parametric entity would result in a duplicated
 node.

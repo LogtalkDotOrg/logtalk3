@@ -22,7 +22,7 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.24,
+		version is 2.25,
 		author is 'Paulo Moura',
 		date is 2019/04/24,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
@@ -115,22 +115,34 @@
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Identifier),
 		write(Stream, '" {'), nl(Stream),
-		(	memberchk(url(URL), Options) ->
-			write_key_value_nl(Stream, 'URL', URL),
-			(	URL \== '' ->
-				write_key_value_nl(Stream, tooltip, URL)
-			;	member(tooltip(Tooltip), Options) ->
-				write_key_value_nl(Stream, tooltip, Tooltip)
-			;	true
-			)
-		;	member(tooltip(Tooltip), Options) ->
-			write_key_value_nl(Stream, tooltip, Tooltip)
-		;	true
-		),
 		write_key_value_nl(Stream, bgcolor, Color),
 		write_key_value_nl(Stream, style, Style),
 		write_key_value_nl(Stream, margin, Margin),
-		write_key_value_nl(Stream, label, Label).
+		(	memberchk(url(URL), Options) ->
+			(	URL \== '' ->
+				write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
+				write(Stream, URL),
+				write(Stream, '" href="'),
+				write(Stream, URL),
+				write(Stream, '">'),
+				write(Stream, Label),
+				write(Stream, '</TD></TR></TABLE>>'), nl(Stream)
+			;	member(tooltip(Tooltip), Options) ->
+				write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
+				write(Stream, Tooltip),
+				write(Stream, '">'),
+				write(Stream, Label),
+				write(Stream, '</TD></TR></TABLE>>'), nl(Stream)
+			;	true
+			)
+		;	member(tooltip(Tooltip), Options) ->
+			write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
+			write(Stream, Tooltip),
+			write(Stream, '">'),
+			write(Stream, Label),
+			write(Stream, '</TD></TR></TABLE>>'), nl(Stream)
+		;	true
+		).
 
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
 		write(Stream, '}'), nl(Stream), nl(Stream).
