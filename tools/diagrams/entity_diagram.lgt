@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.36,
+		version is 2.37,
 		author is 'Paulo Moura',
 		date is 2019/04/24,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -140,7 +140,7 @@
 	output_externals(Options) :-
 		referenced_module_(Module),
 		\+ included_module_(Module),
-		add_external_entity_documentation_url(module, Module, Options, EntityOptions),
+		add_external_entity_code_url(module, Module, Options, EntityOptions),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
 	output_externals(_).
@@ -263,6 +263,40 @@
 		number_codes(Arity, ArityCodes),
 		atom_codes(ArityAtom, ArityCodes),
 		atom_concat(Name0, ArityAtom, Name).
+
+	add_external_entity_code_url(Kind, Entity, Options, EntityOptions) :-
+		(	% first, find the file defining the entity
+			(	Kind == object ->
+				object_property(Entity, file(Path))
+			;	Kind == category ->
+				category_property(Entity, file(Path))
+			;	Kind == protocol ->
+				protocol_property(Entity, file(Path))
+			;	{atom(Entity), current_module(Entity)} ->
+				modules_diagram_support::module_property(Entity, file(Path))
+			;	% entity is not loaded
+				fail
+			),
+			% second, find the code URL prefix, looking for a path
+			% specific prefix before considering the generic prefix
+			(	member(path_url_prefixes(Prefix, CodePrefix, _), Options),
+				atom_concat(Prefix, _, Path) ->
+				true
+			;	member(url_prefixes(CodePrefix, _), Options)
+			) ->
+			% third, cut down when specified local path prefix
+			% before constructing the final code URL
+			memberchk(omit_path_prefixes(PathPrefixes), Options),
+			(	member(PathPrefix, PathPrefixes),
+				atom_concat(PathPrefix, RelativePath, Path) ->
+				true
+			;	RelativePath = Path
+			),
+			atom_concat(CodePrefix, RelativePath, CodeURL),
+			EntityOptions = [url(CodeURL)| Options]
+		;	% could not find entity file or URL prefixes not definined
+			EntityOptions = [url('')| Options]
+		).
 
 	output_protocol(Protocol, Options) :-
 		^^ground_entity_identifier(protocol, Protocol, Name),
