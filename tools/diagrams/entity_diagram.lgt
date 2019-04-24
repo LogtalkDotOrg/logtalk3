@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.37,
+		version is 2.38,
 		author is 'Paulo Moura',
 		date is 2019/04/24,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -245,9 +245,11 @@
 		;	% entity is not loaded
 			fail
 		),
-		(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
-			DocPrefix \== '',
-			atom_concat(Prefix, _, Path) ->
+		(	(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
+				DocPrefix \== '',
+				atom_concat(Prefix, _, Path)
+			;	member(url_prefixes(_, DocPrefix), Options)
+			) ->
 			entity_to_html_name(logtalk, Entity, Name),
 			atom_concat(DocPrefix, Name, DocURL0),
 			memberchk(entity_url_suffix_target(Suffix, _), Options),

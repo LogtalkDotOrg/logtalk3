@@ -121,6 +121,9 @@ URL prefix is defined.
 * FIXED: Bug where a non-terminal diagram node could be wrongly captioned as
 `local` instead of using its scope for the caption.
 
+* FIXED: Case where URL links would not be generated for external Logtalk
+entities in entity, inheritance, or uses diagrams.
+
 Ports
 -----
 
