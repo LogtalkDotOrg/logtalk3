@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.46,
+		version is 2.47,
 		author is 'Paulo Moura',
-		date is 2019/04/24,
+		date is 2019/04/25,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -217,19 +217,16 @@
 	process_entity(Kind, Entity, Options) :-
 		updates_predicate(Kind, Entity, Caller, Line, Dynamic),
 		(	Dynamic = ::_ ->
-			Tooltip = 'updates in self',
 			EdgeKind = updates_self_predicate
 		;	Kind == category ->
-			Tooltip = 'updates in this',
 			EdgeKind = updates_this_predicate
-		;	Tooltip = 'updates',
-			EdgeKind = updates_predicate
+		;	EdgeKind = updates_predicate
 		),
-		\+ ^^edge(Caller, Dynamic, [Tooltip], EdgeKind, _),
+		\+ ^^edge(Caller, Dynamic, [updates], EdgeKind, _),
 		remember_referenced_predicate(Caller),
 		remember_referenced_predicate(Dynamic),
 		add_xref_code_url(Options, Kind, Entity, Line, XRefOptions),
-		^^save_edge(Caller, Dynamic, [Tooltip], EdgeKind, [tooltip(Tooltip)| XRefOptions]),
+		^^save_edge(Caller, Dynamic, [updates], EdgeKind, [tooltip(updates)| XRefOptions]),
 		fail.
 	process_entity(_, _, _) :-
 		retract(included_predicate_(Predicate)),
