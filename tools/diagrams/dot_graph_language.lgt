@@ -22,7 +22,7 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.27,
+		version is 2.28,
 		author is 'Paulo Moura',
 		date is 2019/04/24,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
@@ -46,7 +46,7 @@
 		memberchk(layout(Layout), Options),
 		convert_layout(Layout, RankDir),
 		write_key_value_nl(Stream, rankdir, RankDir),
-		write_key_value_nl(Stream, ranksep, '1.25'),
+		write_key_value_nl(Stream, ranksep, '1.0'),
 		write_key_value_nl(Stream, compound, true),
 		write_key_value_nl(Stream, splines, true),
 		write_key_value_nl(Stream, pack, true),
@@ -224,15 +224,15 @@
 	node_shape_style_color(external_directory, box3d, 'filled,dashed', lightgoldenrodyellow).
 	node_shape_style_color(external_library, box3d, 'filled,dashed', lightgoldenrodyellow).
 	% predicates of the entities being documented
-	node_shape_style_color(predicate, ellipse, filled, cornsilk).
-	node_shape_style_color(public_predicate, ellipse, filled, springgreen).
-	node_shape_style_color(protected_predicate, ellipse, filled, yellow).
-	node_shape_style_color(private_predicate, ellipse, filled, indianred1).
-	node_shape_style_color(local_predicate, ellipse, filled, cornsilk).
-	node_shape_style_color(multifile_predicate, ellipse, filled, skyblue).
-	node_shape_style_color(exported_predicate, ellipse, filled, springgreen).
+	node_shape_style_color(predicate, box, filled, cornsilk).
+	node_shape_style_color(public_predicate, box, filled, springgreen).
+	node_shape_style_color(protected_predicate, box, filled, yellow).
+	node_shape_style_color(private_predicate, box, filled, indianred1).
+	node_shape_style_color(local_predicate, box, filled, cornsilk).
+	node_shape_style_color(multifile_predicate, box, filled, skyblue).
+	node_shape_style_color(exported_predicate, box, filled, springgreen).
 	% external predicates to the entities being documented
-	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', beige).
+	node_shape_style_color(external_predicate, box, 'filled,dashed', beige).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),

@@ -135,17 +135,17 @@ relations):
 	`tab` (plum rectangle with small tab at top)
 
 - public predicates  
-	`ellipse` (green)
+	`box` (springgreen)
 - public, multifile, predicates  
-	`ellipse` (blue)
+	`box` (skyblue)
 - protected predicates  
-	`ellipse` (yellow)
+	`box` (yellow)
 - private predicates  
-	`ellipse` (red)
-- predicates not locally declared  
-	`ellipse` (beige)
+	`box` (indianred)
+- external predicates  
+	`box` (beige)
 - exported module predicates  
-	`ellipse` (green)
+	`box` (springgreen)
 
 - directories  
 	`box3d` (3D box, lightyellow)

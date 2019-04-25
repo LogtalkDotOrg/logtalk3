@@ -51,6 +51,9 @@ calls.
 * CHANGED: Predicate cross-referencing call edges to use a normal arrow and
 dynamic predicate update edges to use a diamond arrow.
 
+* CHANGED: Predicate nodes to use a rectangle instead of an ellipse for more
+compact diagrams.
+
 * CHANGED: When using the `zoom(true)` option, also link to non-empty protocol
 cross-referencing diagrams to allow linking and thus quick access to the source
 file lines of the predicate declarations.
