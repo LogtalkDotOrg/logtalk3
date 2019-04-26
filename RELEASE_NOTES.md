@@ -128,6 +128,9 @@ URL prefix is defined.
 * FIXED: Case where URL links would not be generated for external Logtalk
 entities in entity, inheritance, or uses diagrams.
 
+* FIXED: Case where predicate cross-referencing diagrams would includes nodes
+for local auxiliary predicates.
+
 Ports
 -----
 

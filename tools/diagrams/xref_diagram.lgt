@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.47,
+		version is 2.48,
 		author is 'Paulo Moura',
-		date is 2019/04/25,
+		date is 2019/04/26,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -412,9 +412,12 @@
 			member(non_terminal(CalleeNonTerminal), CalleeDeclaresProperties) ->
 			Callee = CalleeNonTerminal
 		;	entity_property(Kind, Entity, defines(Callee0, CalleeDefinesProperties)),
-			member(non_terminal(CalleeNonTerminal), CalleeDefinesProperties) ->
-			Callee = CalleeNonTerminal
-		;	Callee = Callee0
+			\+ member(auxiliary, CalleeDefinesProperties) ->
+			(	member(non_terminal(CalleeNonTerminal), CalleeDefinesProperties) ->
+				Callee = CalleeNonTerminal
+			;	Callee = Callee0
+			)
+		;	fail
 		),
 		(	Caller0 = From::Predicate ->
 			(	current_object(From) ->
