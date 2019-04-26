@@ -188,13 +188,15 @@ Supported graph languages
 
 Currently only the DOT graph language is supported (tested with Graphviz
 version 2.40.1 on macOS; visit the <http://www.graphviz.org/> website for
-more information). Some of the more recent have a nasty regression in the
-SVG exporter where text overflows the boxes that should contain it.
+more information). Some recent versions have a nasty regression in the
+SVG exporter where text overflows the boxes that should contain it. Also,
+stable version 2.40.1 have a bug (fixed in the current git version) that
+can result in very long edges.
 
 The diagrams `.dot` files are created on the current directory by default.
-These files can be easily converted into a printable format such as SVG, PDF,
-or Postscript. For example, using the `dot` command-line executable we can
-simply type:
+These files can be easily converted into a printable format such as SVG,
+PDF, or Postscript. For example, using the `dot` command-line executable
+we can simply type:
 
 	dot -Tpdf diagram.dot > diagram.pdf
 
