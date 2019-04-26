@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.48,
+		version is 2.49,
 		author is 'Paulo Moura',
 		date is 2019/04/26,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -644,8 +644,12 @@
 		fail.
 	output_externals(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
-		memberchk(node_type_captions(Boolean), Options),
-		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, [node_type_captions(Boolean)]),
+		(	modules_diagram_support::module_property(Module, defines(Predicate,Properties)) ->
+			add_predicate_code_url(Options, module, Module, Properties, PredicateOptions),
+			^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, PredicateOptions)
+		;	memberchk(node_type_captions(Boolean), Options),
+			^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, [node_type_captions(Boolean)])
+		),
 		fail.
 	output_externals(Options) :-
 		retract(external_predicate_(Predicate)),
