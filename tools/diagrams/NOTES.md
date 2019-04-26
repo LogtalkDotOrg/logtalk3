@@ -121,7 +121,7 @@ entities, predicates, and files) and arrows (entity, predicate, and file
 relations):
 
 - libraries  
-	`box3d` (3D box, lightyellow)
+	`tab` (lightsalmon)
 - library loading and dependency relations  
 	`normal` (arrow ending with a black triangle)
 
@@ -148,7 +148,7 @@ relations):
 	`box` (springgreen)
 
 - directories  
-	`box3d` (3D box, lightyellow)
+	`tab` (lightsalmon)
 - directory loading and dependency relations  
 	`normal` (arrow ending with a black triangle)
 

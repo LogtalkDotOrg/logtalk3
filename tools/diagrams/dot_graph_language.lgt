@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.29,
+		version is 2.31,
 		author is 'Paulo Moura',
-		date is 2019/04/24,
+		date is 2019/04/26,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -210,8 +210,8 @@
 	node_shape_style_color(category, component, filled, lightcyan).
 	node_shape_style_color(module, tab, filled, plum).
 	node_shape_style_color(file, box, filled, paleturquoise).
-	node_shape_style_color(directory, tab, filled, lightyellow).
-	node_shape_style_color(library, tab, filled, lightyellow).
+	node_shape_style_color(directory, tab, filled, lightsalmon).
+	node_shape_style_color(library, tab, filled, lightsalmon).
 	% external entities to the file or library being documented
 	node_shape_style_color(external_prototype, box, 'filled,dashed', beige).
 	node_shape_style_color(external_class, box, 'filled,dashed', lightgoldenrodyellow).
@@ -221,8 +221,8 @@
 	node_shape_style_color(external_category, component, 'filled,dashed', cyan).
 	node_shape_style_color(external_module, tab, 'filled,dashed', thistle).
 	node_shape_style_color(external_file, box, 'filled,dashed', powderblue).
-	node_shape_style_color(external_directory, tab, 'filled,dashed', lightgoldenrodyellow).
-	node_shape_style_color(external_library, tab, 'filled,dashed', lightgoldenrodyellow).
+	node_shape_style_color(external_directory, tab, 'filled,dashed', salmon).
+	node_shape_style_color(external_library, tab, 'filled,dashed', salmon).
 	% predicates of the entities being documented
 	node_shape_style_color(predicate, box, filled, cornsilk).
 	node_shape_style_color(public_predicate, box, filled, springgreen).
