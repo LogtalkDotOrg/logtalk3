@@ -22,14 +22,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/09/11,
+		date is 2019/04/28,
 		comment is 'Unit tests for the "super_calls" example.'
 	]).
 
 	cover(parent).
 	cover(prototype).
+	cover(top).
+	cover(middle).
+	cover(bottom).
 
 	test(super_calls_01) :-
 		parent::get_local(Local),
@@ -46,5 +49,19 @@
 	test(super_calls_04) :-
 		prototype::wrong(Local),
 		Local == parent.
+
+	test(super_calls_05) :-
+		bottom::value(Value),
+		Value == parent.
+
+	test(super_calls_06) :-
+		middle::assertz(d(middle)),
+		bottom::value(Value),
+		Value == middle.
+
+	test(super_calls_07) :-
+		middle::retractall(d(_)),
+		bottom::value(Value),
+		Value == parent.
 
 :- end_object.

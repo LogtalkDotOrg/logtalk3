@@ -133,13 +133,19 @@ entities in entity, inheritance, or uses diagrams.
 * FIXED: Case where predicate cross-referencing diagrams would includes nodes
 for local auxiliary predicates.
 
+Examples
+--------
+
+* UPDATED: The `super_calls` example to illustrate that *super* calls force
+dynamic binding when the called predicate is dynamic.
+
 Ports
 -----
 
 * ADDED: Port of Metagol examples from the (Evans & Greffenstette, 2018) paper.
 Original Prolog examples source code files contributed by MystikNinja.
 
-* UPDATED: Sync Metagol port with upstream changes.
+* UPDATED: Sync Metagol port with upstream changes (2.3.0 tag).
 
 3.25.0 - April 2, 2019
 ======================

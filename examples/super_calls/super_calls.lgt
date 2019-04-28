@@ -18,6 +18,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% the first set of objects illustrate that "super" calls preserve "self"
+
 :- object(parent).
 
 	:- public(get_local/1).
@@ -44,5 +46,33 @@
 		parent::get_local(Local).
 
 	local(prototype).
+
+:- end_object.
+
+
+% the second set of objects illustrate that "super" calls require static
+% binding when the called object is declared dynamic
+
+:- object(top).
+
+	:- public(d/1).
+	:- dynamic(d/1).
+	d(parent).
+
+:- end_object.
+
+
+:- object(middle,
+	extends(top)).
+
+:- end_object.
+
+
+:- object(bottom,
+	extends(middle)).
+
+	:- public(value/1).
+	value(Value) :-
+		^^d(Value).
 
 :- end_object.

@@ -53,3 +53,29 @@ yes
 
 Local = parent
 yes
+
+
+% "super" calls force dynamic binding when the called predicate is dynamic:
+
+| ?- bottom::value(Value).
+
+Value = parent
+yes
+
+| ?- middle::assertz(d(middle)).
+
+yes
+
+| ?- bottom::value(Value).
+
+Value = middle
+yes
+
+| ?- middle::retractall(d(_)).
+
+yes
+
+| ?- bottom::value(Value).
+
+Value = parent
+yes
