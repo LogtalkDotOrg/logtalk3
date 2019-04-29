@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.39,
+		version is 2.41,
 		author is 'Paulo Moura',
 		date is 2019/04/29,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -863,6 +863,8 @@
 	default_option(url_prefixes('', '')).
 	% by default, omit the home directory path prefix when printing paths:
 	default_option(omit_path_prefixes([])).
+	% by default, assume documentation generated using Sphinx
+	default_option(documentation_format(sphinx)).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).
 	% by default, don't link to sub-diagrams:

@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.21,
+		version is 2.22,
 		author is 'Paulo Moura',
-		date is 2019/04/20,
+		date is 2019/04/29,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_)]
@@ -122,6 +122,8 @@
 	default_option(url_prefixes('', '')).
 	% by default, omit the home directory path prefix when printing paths:
 	default_option(omit_path_prefixes([])).
+	% by default, assume documentation generated using Sphinx
+	default_option(documentation_format(sphinx)).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
 	% by default, print relation labels:

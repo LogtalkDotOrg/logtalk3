@@ -22,9 +22,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2019/04/20,
+		date is 2019/04/29,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parnames is ['Format'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -147,6 +147,8 @@
 	default_option(url_prefixes('', '')).
 	% by default, omit the home directory path prefix when printing paths:
 	default_option(omit_path_prefixes([])).
+	% by default, assume documentation generated using Sphinx
+	default_option(documentation_format(sphinx)).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
 	% by default, print relation labels:

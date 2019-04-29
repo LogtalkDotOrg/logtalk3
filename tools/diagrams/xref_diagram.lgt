@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.51,
+		version is 2.52,
 		author is 'Paulo Moura',
 		date is 2019/04/29,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -272,8 +272,17 @@
 	scope_predicate_kind(protected, protected_predicate).
 	scope_predicate_kind(private, private_predicate).
 
-	add_predicate_documentation_url(Options, Entity, Predicate, XRefOptions) :-
-		(	% first, find the file defining the entity
+	add_predicate_documentation_url(Options, Object, Predicate, XRefOptions) :-
+		(	Predicate = Functor/Arity ->
+			functor(Template, Functor, Arity)
+		;	Predicate = Functor//Arity,
+			Arity2 is Arity + 2,
+			functor(Template, Functor, Arity2)
+		),
+		(	% first, find the entity declaring the called predicate; but fail if
+			% the entity is not loaded
+			catch(Object::predicate_property(Template, declared_in(Entity)), _, fail),
+			% second, find the file defining the entity declaring the predicate
 			(	current_object(Entity) ->
 				object_property(Entity, file(Path))
 			;	current_category(Entity) ->
@@ -283,7 +292,7 @@
 			;	% entity is not loaded
 				fail
 			),
-			% second, find the documentation URL prefix, looking for a
+			% third, find the documentation URL prefix, looking for a
 			% path specific prefix before considering the generic prefix
 			(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
 				atom_concat(Prefix, _, Path) ->
@@ -298,25 +307,52 @@
 			atom_codes(EntityArityAtom, EntityArityCodes),
 			atom_concat(DocURL1, EntityArityAtom, DocURL2),
 			memberchk(entity_url_suffix_target(Suffix, Target), Options),
+			atom_concat(DocURL2, Suffix, DocURL3),
 			(	Target == '' ->
-				atom_concat(DocURL2, Suffix, DocURL)
-			;	atom_concat(DocURL2, Suffix, DocURL3),
+				DocURL = DocURL3
+			;	memberchk(documentation_format(Format), Options),
 				atom_concat(DocURL3, Target, DocURL4),
-				(	Predicate = Functor/Arity ->
-					atom_concat(DocURL4, Functor, DocURL5),
-					atom_concat(DocURL5, '/', DocURL6)
-				;	Predicate = Functor//Arity,
-					atom_concat(DocURL4, Functor, DocURL5),
-					atom_concat(DocURL5, '//', DocURL6)
-				),
-				number_codes(Arity, ArityCodes),
-				atom_codes(ArityAtom, ArityCodes),
-				atom_concat(DocURL6, ArityAtom, DocURL)
+				predicate_target_value(Format, Predicate, TargetValue),
+				atom_concat(DocURL4, TargetValue, DocURL)
 			),
 			XRefOptions = [url(DocURL)| Options]
 		;	% could not find entity file or URL prefixes not defined
 			XRefOptions = [url('')| Options]
 		).
+
+	predicate_target_value(sphinx, Predicate, TargetValue) :-
+		(	Predicate = Functor/Arity ->
+			underscores_to_dashes(Functor, TargetValue0)
+		;	Predicate = Functor//Arity,
+			underscores_to_dashes(Functor, TargetValue0)
+		),
+		atom_concat(TargetValue0, '-', TargetValue1),
+		number_codes(Arity, ArityCodes),
+		atom_codes(ArityAtom, ArityCodes),
+		atom_concat(TargetValue1, ArityAtom, TargetValue).
+	predicate_target_value(html, Predicate, TargetValue) :-
+		(	Predicate = Functor/Arity ->
+			atom_concat(TargetValue0, Functor, TargetValue1),
+			atom_concat(TargetValue1, '/', TargetValue2)
+		;	Predicate = Functor//Arity,
+			atom_concat(TargetValue0, Functor, TargetValue1),
+			atom_concat(TargetValue1, '//', TargetValue2)
+		),
+		number_codes(Arity, ArityCodes),
+		atom_codes(ArityAtom, ArityCodes),
+		atom_concat(TargetValue2, ArityAtom, TargetValue).
+
+	underscores_to_dashes(Atom, ConvertedAtom) :-
+		atom_chars(Atom, Chars),
+		list_underscores_to_dashes(Chars, ConvertedChars),
+		atom_chars(ConvertedAtom, ConvertedChars).
+
+	list_underscores_to_dashes([], []).
+	list_underscores_to_dashes(['_'| Chars], ['-'| ConvertedChars]) :-
+		!,
+		list_underscores_to_dashes(Chars, ConvertedChars).
+	list_underscores_to_dashes([Char| Chars], [Char| ConvertedChars]) :-
+		list_underscores_to_dashes(Chars, ConvertedChars).
 
 	add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions) :-
 		(	member(line_count(Line), Properties),
@@ -698,6 +734,8 @@
 	default_option(url_prefixes('', '')).
 	% by default, omit the home directory path prefix when printing paths:
 	default_option(omit_path_prefixes([])).
+	% by default, assume documentation generated using Sphinx
+	default_option(documentation_format(sphinx)).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).
 	% by default, don't link to sub-diagrams:

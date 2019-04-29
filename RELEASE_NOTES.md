@@ -82,6 +82,10 @@ diagrams for a directory and its sub-directories.
 * ADDED: Boolean option `externals/1` to the `diagrams` tool to control
 printing of external modes.
 
+* ADDED: Option `documentation_format/1` option to the `diagrams` tool with
+default value `sphinx`. Also accepts value `html` for the legacy documentation
+format.
+
 * ADDED: Support for URL links for module predicate external nodes.
 
 * UPDATED: The `diagrams` tool predicates to print log messages for the
@@ -102,6 +106,9 @@ that are referenced from diagram edges.
 
 * IMPROVED: Associate directory and file URLs with graph labels instead of the
 whole graph background to avoid accidental clicks.
+
+* FIXED: Predicate documentation cross-reference links to default to Sphinx
+format and to link to the actual predicate declaration.
 
 * FIXED: Bug when generating predicate cross-referencing diagrams where a call
 to a multifile predicate for a parametric entity would result in a duplicated
