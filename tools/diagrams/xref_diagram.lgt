@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.52,
+		version is 2.53,
 		author is 'Paulo Moura',
 		date is 2019/04/29,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -310,9 +310,8 @@
 			atom_concat(DocURL2, Suffix, DocURL3),
 			(	Target == '' ->
 				DocURL = DocURL3
-			;	memberchk(documentation_format(Format), Options),
-				atom_concat(DocURL3, Target, DocURL4),
-				predicate_target_value(Format, Predicate, TargetValue),
+			;	atom_concat(DocURL3, Target, DocURL4),
+				predicate_target_value(Predicate, TargetValue),
 				atom_concat(DocURL4, TargetValue, DocURL)
 			),
 			XRefOptions = [url(DocURL)| Options]
@@ -320,27 +319,15 @@
 			XRefOptions = [url('')| Options]
 		).
 
-	predicate_target_value(sphinx, Predicate, TargetValue) :-
+	predicate_target_value(Predicate, TargetValue) :-
 		(	Predicate = Functor/Arity ->
-			underscores_to_dashes(Functor, TargetValue0)
+			atom_concat(Functor, '/', TargetValue0)
 		;	Predicate = Functor//Arity,
-			underscores_to_dashes(Functor, TargetValue0)
-		),
-		atom_concat(TargetValue0, '-', TargetValue1),
-		number_codes(Arity, ArityCodes),
-		atom_codes(ArityAtom, ArityCodes),
-		atom_concat(TargetValue1, ArityAtom, TargetValue).
-	predicate_target_value(html, Predicate, TargetValue) :-
-		(	Predicate = Functor/Arity ->
-			atom_concat(TargetValue0, Functor, TargetValue1),
-			atom_concat(TargetValue1, '/', TargetValue2)
-		;	Predicate = Functor//Arity,
-			atom_concat(TargetValue0, Functor, TargetValue1),
-			atom_concat(TargetValue1, '//', TargetValue2)
+			atom_concat(Functor, '//', TargetValue0)
 		),
 		number_codes(Arity, ArityCodes),
 		atom_codes(ArityAtom, ArityCodes),
-		atom_concat(TargetValue2, ArityAtom, TargetValue).
+		atom_concat(TargetValue0, ArityAtom, TargetValue).
 
 	underscores_to_dashes(Atom, ConvertedAtom) :-
 		atom_chars(Atom, Chars),
@@ -734,8 +721,6 @@
 	default_option(url_prefixes('', '')).
 	% by default, omit the home directory path prefix when printing paths:
 	default_option(omit_path_prefixes([])).
-	% by default, assume documentation generated using Sphinx
-	default_option(documentation_format(sphinx)).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).
 	% by default, don't link to sub-diagrams:

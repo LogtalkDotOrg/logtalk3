@@ -294,8 +294,6 @@ generated diagrams. For entity diagrams the options are:
 	code and documenting URL prefixes for a path prefix used when generating cluster, library, directory, file, and entity links (atoms; no default; can be specified multiple times)
 - `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
 	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; default is `'file://'` for `CodeURLPrefix` and `''` for `DocURLPrefix`)
-- `documentation_format(Format)`  
-	format for generated documentation (atom; default is `sphinx`; set to `html` for the legacy format)
 - `entity_url_suffix_target(Suffix, Target)`  
 	extension for entity documenting URLs (an atom; default is `'.html'`) and target separating symbols (an atom; default is `'#'`)
 - `omit_path_prefixes(Prefixes)`  

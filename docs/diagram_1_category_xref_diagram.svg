@@ -11,7 +11,7 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-725 7531,-725 7531,4 -4,4"/>
 <text text-anchor="start" x="8" y="-26" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-16" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category diagram/1</text>
-<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2019/04/29, 14:56</text>
+<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2019/04/29, 17:39</text>
 <g id="clust1" class="cluster">
 <title>cluster_diagram_1_category</title>
 <g id="a_clust1"><a xlink:title="diagram(Format)">
@@ -121,7 +121,7 @@
 <!-- logtalk::print_message/3 -->
 <g id="node75" class="node">
 <title>logtalk::print_message/3</title>
-<g id="a_node75"><a xlink:href="https://logtalk.org/library/logtalk_0.html#print-message-3" xlink:title="https://logtalk.org/library/logtalk_0.html#print&#45;message&#45;3">
+<g id="a_node75"><a xlink:href="https://logtalk.org/library/logtalk_0.html#print_message/3" xlink:title="https://logtalk.org/library/logtalk_0.html#print_message/3">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="4359,-443 4175,-443 4175,-407 4359,-407 4359,-443"/>
 <text text-anchor="start" x="4182.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="4187.79" y="-426.2" font-family="Courier,monospace" font-size="11.00">logtalk::print_message/3</text>
@@ -724,7 +724,7 @@
 <!-- logtalk::expand_library_path/2 -->
 <g id="node76" class="node">
 <title>logtalk::expand_library_path/2</title>
-<g id="a_node76"><a xlink:href="https://logtalk.org/library/logtalk_0.html#expand-library-path-2" xlink:title="https://logtalk.org/library/logtalk_0.html#expand&#45;library&#45;path&#45;2">
+<g id="a_node76"><a xlink:href="https://logtalk.org/library/logtalk_0.html#expand_library_path/2" xlink:title="https://logtalk.org/library/logtalk_0.html#expand_library_path/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="3958,-326 3734,-326 3734,-290 3958,-290 3958,-326"/>
 <text text-anchor="start" x="3741.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3746.98" y="-309.2" font-family="Courier,monospace" font-size="11.00">logtalk::expand_library_path/2</text>
@@ -1644,7 +1644,7 @@
 <!-- os::absolute_file_name/2 -->
 <g id="node82" class="node">
 <title>os::absolute_file_name/2</title>
-<g id="a_node82"><a xlink:href="https://logtalk.org/library/osp_0.html#absolute-file-name-2" xlink:title="https://logtalk.org/library/osp_0.html#absolute&#45;file&#45;name&#45;2">
+<g id="a_node82"><a xlink:href="https://logtalk.org/library/osp_0.html#absolute_file_name/2" xlink:title="https://logtalk.org/library/osp_0.html#absolute_file_name/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="6283,-92 6099,-92 6099,-56 6283,-56 6283,-92"/>
 <text text-anchor="start" x="6106.8" y="-75.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="6111.79" y="-75.2" font-family="Courier,monospace" font-size="11.00">os::absolute_file_name/2</text>
@@ -1671,7 +1671,7 @@
 <!-- os::decompose_file_name/4 -->
 <g id="node83" class="node">
 <title>os::decompose_file_name/4</title>
-<g id="a_node83"><a xlink:href="https://logtalk.org/library/osp_0.html#decompose-file-name-4" xlink:title="https://logtalk.org/library/osp_0.html#decompose&#45;file&#45;name&#45;4">
+<g id="a_node83"><a xlink:href="https://logtalk.org/library/osp_0.html#decompose_file_name/4" xlink:title="https://logtalk.org/library/osp_0.html#decompose_file_name/4">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="6483.5,-326 6292.5,-326 6292.5,-290 6483.5,-290 6483.5,-326"/>
 <text text-anchor="start" x="6300.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="6305.99" y="-309.2" font-family="Courier,monospace" font-size="11.00">os::decompose_file_name/4</text>
@@ -2453,7 +2453,7 @@
 <!-- graph_language_registry::language_object/2 -->
 <g id="node84" class="node">
 <title>graph_language_registry::language_object/2</title>
-<g id="a_node84"><a xlink:href="https://logtalk.org/library/graph_language_registry_0.html#language-object-2" xlink:title="https://logtalk.org/library/graph_language_registry_0.html#language&#45;object&#45;2">
+<g id="a_node84"><a xlink:href="https://logtalk.org/library/graph_language_registry_0.html#language_object/2" xlink:title="https://logtalk.org/library/graph_language_registry_0.html#language_object/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="2874.5,-326 2571.5,-326 2571.5,-290 2874.5,-290 2874.5,-326"/>
 <text text-anchor="start" x="2579.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2584.88" y="-309.2" font-family="Courier,monospace" font-size="11.00">graph_language_registry::language_object/2</text>
@@ -2587,7 +2587,7 @@
 <!-- list::member/2 -->
 <g id="node78" class="node">
 <title>list::member/2</title>
-<g id="a_node78"><a xlink:href="https://logtalk.org/library/listp_0.html#member-2" xlink:title="https://logtalk.org/library/listp_0.html#member&#45;2">
+<g id="a_node78"><a xlink:href="https://logtalk.org/library/listp_0.html#member/2" xlink:title="https://logtalk.org/library/listp_0.html#member/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="3247,-326 3129,-326 3129,-290 3247,-290 3247,-326"/>
 <text text-anchor="start" x="3136.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3141.79" y="-309.2" font-family="Courier,monospace" font-size="11.00">list::member/2</text>
@@ -2614,7 +2614,7 @@
 <!-- list::append/3 -->
 <g id="node85" class="node">
 <title>list::append/3</title>
-<g id="a_node85"><a xlink:href="https://logtalk.org/library/listp_0.html#append-3" xlink:title="https://logtalk.org/library/listp_0.html#append&#45;3">
+<g id="a_node85"><a xlink:href="https://logtalk.org/library/listp_0.html#append/3" xlink:title="https://logtalk.org/library/listp_0.html#append/3">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="5697,-443 5579,-443 5579,-407 5697,-407 5697,-443"/>
 <text text-anchor="start" x="5586.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="5591.79" y="-426.2" font-family="Courier,monospace" font-size="11.00">list::append/3</text>
@@ -2747,7 +2747,7 @@
 <!-- list::memberchk/2 -->
 <g id="node77" class="node">
 <title>list::memberchk/2</title>
-<g id="a_node77"><a xlink:href="https://logtalk.org/library/listp_0.html#memberchk-2" xlink:title="https://logtalk.org/library/listp_0.html#memberchk&#45;2">
+<g id="a_node77"><a xlink:href="https://logtalk.org/library/listp_0.html#memberchk/2" xlink:title="https://logtalk.org/library/listp_0.html#memberchk/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="3578,-326 3440,-326 3440,-290 3578,-290 3578,-326"/>
 <text text-anchor="start" x="3447.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3452.89" y="-309.2" font-family="Courier,monospace" font-size="11.00">list::memberchk/2</text>
@@ -2814,7 +2814,7 @@
 <!-- logtalk::loaded_file_property/2 -->
 <g id="node79" class="node">
 <title>logtalk::loaded_file_property/2</title>
-<g id="a_node79"><a xlink:href="https://logtalk.org/library/logtalk_0.html#loaded-file-property-2" xlink:title="https://logtalk.org/library/logtalk_0.html#loaded&#45;file&#45;property&#45;2">
+<g id="a_node79"><a xlink:href="https://logtalk.org/library/logtalk_0.html#loaded_file_property/2" xlink:title="https://logtalk.org/library/logtalk_0.html#loaded_file_property/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="2288,-443 2058,-443 2058,-407 2288,-407 2288,-443"/>
 <text text-anchor="start" x="2065.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2070.68" y="-426.2" font-family="Courier,monospace" font-size="11.00">logtalk::loaded_file_property/2</text>
@@ -2841,7 +2841,7 @@
 <!-- modules_diagram_support::loaded_file_property/2 -->
 <g id="node80" class="node">
 <title>modules_diagram_support::loaded_file_property/2</title>
-<g id="a_node80"><a xlink:href="https://logtalk.org/library/modules_diagram_support_0.html#loaded-file-property-2" xlink:title="https://logtalk.org/library/modules_diagram_support_0.html#loaded&#45;file&#45;property&#45;2">
+<g id="a_node80"><a xlink:href="https://logtalk.org/library/modules_diagram_support_0.html#loaded_file_property/2" xlink:title="https://logtalk.org/library/modules_diagram_support_0.html#loaded_file_property/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="1694,-443 1358,-443 1358,-407 1694,-407 1694,-443"/>
 <text text-anchor="start" x="1365.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1370.87" y="-426.2" font-family="Courier,monospace" font-size="11.00">modules_diagram_support::loaded_file_property/2</text>
@@ -2868,7 +2868,7 @@
 <!-- logtalk::loaded_file/1 -->
 <g id="node81" class="node">
 <title>logtalk::loaded_file/1</title>
-<g id="a_node81"><a xlink:href="https://logtalk.org/library/logtalk_0.html#loaded-file-1" xlink:title="https://logtalk.org/library/logtalk_0.html#loaded&#45;file&#45;1">
+<g id="a_node81"><a xlink:href="https://logtalk.org/library/logtalk_0.html#loaded_file/1" xlink:title="https://logtalk.org/library/logtalk_0.html#loaded_file/1">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="2039.5,-443 1868.5,-443 1868.5,-407 2039.5,-407 2039.5,-443"/>
 <text text-anchor="start" x="1876.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1881.89" y="-426.2" font-family="Courier,monospace" font-size="11.00">logtalk::loaded_file/1</text>
@@ -3455,7 +3455,7 @@
 <!-- logtalk::file_type_extension/2 -->
 <g id="node87" class="node">
 <title>logtalk::file_type_extension/2</title>
-<g id="a_node87"><a xlink:href="https://logtalk.org/library/logtalk_0.html#file-type-extension-2" xlink:title="https://logtalk.org/library/logtalk_0.html#file&#45;type&#45;extension&#45;2">
+<g id="a_node87"><a xlink:href="https://logtalk.org/library/logtalk_0.html#file_type_extension/2" xlink:title="https://logtalk.org/library/logtalk_0.html#file_type_extension/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="953,-326 729,-326 729,-290 953,-290 953,-326"/>
 <text text-anchor="start" x="736.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="741.98" y="-309.2" font-family="Courier,monospace" font-size="11.00">logtalk::file_type_extension/2</text>
@@ -3482,7 +3482,7 @@
 <!-- modules_diagram_support::source_file_extension/1 -->
 <g id="node88" class="node">
 <title>modules_diagram_support::source_file_extension/1</title>
-<g id="a_node88"><a xlink:href="https://logtalk.org/library/modules_diagram_support_0.html#source-file-extension-1" xlink:title="https://logtalk.org/library/modules_diagram_support_0.html#source&#45;file&#45;extension&#45;1">
+<g id="a_node88"><a xlink:href="https://logtalk.org/library/modules_diagram_support_0.html#source_file_extension/1" xlink:title="https://logtalk.org/library/modules_diagram_support_0.html#source_file_extension/1">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="1313,-326 971,-326 971,-290 1313,-290 1313,-326"/>
 <text text-anchor="start" x="978.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="983.57" y="-309.2" font-family="Courier,monospace" font-size="11.00">modules_diagram_support::source_file_extension/1</text>
@@ -3536,7 +3536,7 @@
 <!-- os::make_directory/1 -->
 <g id="node89" class="node">
 <title>os::make_directory/1</title>
-<g id="a_node89"><a xlink:href="https://logtalk.org/library/osp_0.html#make-directory-1" xlink:title="https://logtalk.org/library/osp_0.html#make&#45;directory&#45;1">
+<g id="a_node89"><a xlink:href="https://logtalk.org/library/osp_0.html#make_directory/1" xlink:title="https://logtalk.org/library/osp_0.html#make_directory/1">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="515,-326 357,-326 357,-290 515,-290 515,-326"/>
 <text text-anchor="start" x="364.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="369.99" y="-309.2" font-family="Courier,monospace" font-size="11.00">os::make_directory/1</text>
@@ -4273,7 +4273,7 @@
 <!-- os::directory_files/3 -->
 <g id="node86" class="node">
 <title>os::directory_files/3</title>
-<g id="a_node86"><a xlink:href="https://logtalk.org/library/osp_0.html#directory-files-3" xlink:title="https://logtalk.org/library/osp_0.html#directory&#45;files&#45;3">
+<g id="a_node86"><a xlink:href="https://logtalk.org/library/osp_0.html#directory_files/3" xlink:title="https://logtalk.org/library/osp_0.html#directory_files/3">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="3057,-326 2893,-326 2893,-290 3057,-290 3057,-326"/>
 <text text-anchor="start" x="2900.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2905.69" y="-309.2" font-family="Courier,monospace" font-size="11.00">os::directory_files/3</text>
@@ -4418,7 +4418,7 @@
 <!-- pairs::keys/2 -->
 <g id="node90" class="node">
 <title>pairs::keys/2</title>
-<g id="a_node90"><a xlink:href="https://logtalk.org/library/pairs_0.html#keys-2" xlink:title="https://logtalk.org/library/pairs_0.html#keys&#45;2">
+<g id="a_node90"><a xlink:href="https://logtalk.org/library/pairs_0.html#keys/2" xlink:title="https://logtalk.org/library/pairs_0.html#keys/2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="338.5,-326 227.5,-326 227.5,-290 338.5,-290 338.5,-326"/>
 <text text-anchor="start" x="235.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="240.59" y="-309.2" font-family="Courier,monospace" font-size="11.00">pairs::keys/2</text>
