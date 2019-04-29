@@ -22,13 +22,15 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.31,
+		version is 2.32,
 		author is 'Paulo Moura',
-		date is 2019/04/26,
+		date is 2019/04/29,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
-	:- uses(list, [member/2, memberchk/2]).
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
 
 	:- multifile(graph_language_registry::language_object/2).
 	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
@@ -118,7 +120,7 @@
 		write_key_value_nl(Stream, bgcolor, Color),
 		write_key_value_nl(Stream, style, Style),
 		write_key_value_nl(Stream, margin, Margin),
-		(	memberchk(url(URL), Options) ->
+		(	member(url(URL), Options) ->
 			(	URL \== '' ->
 				write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
 				write(Stream, URL),

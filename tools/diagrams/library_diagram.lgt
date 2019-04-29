@@ -3,14 +3,16 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2019/04/21,
+		date is 2019/04/29,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
 
-	:- uses(list, [member/2, memberchk/2]).
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
 
 	:- protected(add_library_documentation_url/4).
 	:- mode(add_library_documentation_url(+atom, +list(compound), +atom, -list(compound)), one).
@@ -70,7 +72,7 @@
 		::retractall(referenced_prolog_library_(_, _)).
 
 	output_externals(Options) :-
-		memberchk(externals(false), Options),
+		member(externals(false), Options),
 		!.
 	output_externals(_Options) :-
 		::retract(included_library_(Library, Path)),
@@ -82,7 +84,7 @@
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions),
-		(	memberchk(directory_paths(true), Options) ->
+		(	member(directory_paths(true), Options) ->
 			^^output_node(Directory, Library, library, [Relative], external_library, NodeOptions)
 		;	^^output_node(Directory, Library, library, [], external_library, NodeOptions)
 		),
@@ -92,7 +94,7 @@
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(prolog, LinkingOptions, Library, NodeOptions),
-		(	memberchk(directory_paths(true), Options) ->
+		(	member(directory_paths(true), Options) ->
 			^^output_node(Directory, Library, library, [Relative], external_library, NodeOptions)
 		;	^^output_node(Directory, Library, library, [], external_library, NodeOptions)
 		),

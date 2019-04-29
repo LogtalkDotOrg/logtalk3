@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.38,
+		version is 2.39,
 		author is 'Paulo Moura',
-		date is 2019/04/24,
+		date is 2019/04/29,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -128,7 +128,7 @@
 		retractall(referenced_module_(_)).
 
 	output_externals(Options) :-
-		memberchk(externals(false), Options),
+		member(externals(false), Options),
 		!.
 	output_externals(Options) :-
 		referenced_entity_(Entity),
@@ -146,7 +146,7 @@
 	output_externals(_).
 
 	output_missing_externals(Options) :-
-		memberchk(externals(false), Options),
+		member(externals(false), Options),
 		!.
 	output_missing_externals(Options) :-
 		referenced_entity_(Entity),

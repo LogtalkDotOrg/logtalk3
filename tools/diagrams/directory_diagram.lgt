@@ -3,15 +3,15 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2019/04/21,
+		date is 2019/04/29,
 		comment is 'Common predicates for generating directory diagrams.',
 		parnames is ['Format']
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	:- protected(remember_included_directory/1).
@@ -65,7 +65,7 @@
 		::retractall(referenced_prolog_directory_(_)).
 
 	output_externals(Options) :-
-		memberchk(externals(false), Options),
+		member(externals(false), Options),
 		!.
 	output_externals(_Options) :-
 		::retract(included_directory_(Path)),

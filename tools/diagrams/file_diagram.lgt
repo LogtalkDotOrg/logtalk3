@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.9,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2019/04/21,
+		date is 2019/04/29,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -52,7 +52,7 @@
 		::retractall(referenced_prolog_file_(_)).
 
 	output_externals(Options) :-
-		memberchk(externals(false), Options),
+		member(externals(false), Options),
 		!.
 	output_externals(_Options) :-
 		::retract(included_file_(Path)),

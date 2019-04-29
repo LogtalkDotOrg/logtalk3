@@ -21,15 +21,19 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.36,
+		version is 2.37,
 		author is 'Paulo Moura',
-		date is 2019/04/23,
+		date is 2019/04/29,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
 
-	:- uses(list, [append/3, member/2, memberchk/2]).
-	:- uses(pairs, [keys/2]).
+	:- uses(list, [
+		append/3, member/2, memberchk/2
+	]).
+	:- uses(pairs, [
+		keys/2
+	]).
 
 	:- public(libraries/3).
 	:- mode(libraries(+atom, +list(atom), +list(compound)), one).
@@ -883,7 +887,7 @@
 	]).
 
 	save_edge(From, To, Labels, Kind, Options) :-
-		(	memberchk(relation_labels(true), Options) ->
+		(	member(relation_labels(true), Options) ->
 			::assertz(edge_(From, To, Labels, Kind, Options))
 		;	::assertz(edge_(From, To, [], Kind, Options))
 		).
