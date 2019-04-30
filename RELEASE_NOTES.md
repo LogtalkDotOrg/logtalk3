@@ -150,6 +150,12 @@ Original Prolog examples source code files contributed by MystikNinja.
 
 * UPDATED: Sync Metagol port with upstream changes (2.3.0 tag).
 
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: The `update_svg_diagrams.sh` script to use a git hash to keep node
+URLs links to source file lines accurate.
+
 
 3.25.0 - April 2, 2019
 ======================
