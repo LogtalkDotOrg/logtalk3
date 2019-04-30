@@ -21,9 +21,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.17,
+		version is 0.18,
 		author is 'Paulo Moura',
-		date is 2019/04/06,
+		date is 2019/04/30,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -200,6 +200,8 @@
 			 (	Caller0 = ':'(ForModule,Caller1) ->
 			 	functor(Caller1, CallerFunctor, CallerArity),
 				Caller = ':'(ForModule,CallerFunctor/CallerArity)
+			 ;	Caller0 = '<directive>'(_) ->
+			 	Caller = (:-)/1
 			 ;	functor(Caller0, CallerFunctor, CallerArity),
 			 	Caller = CallerFunctor/CallerArity
 			 ),

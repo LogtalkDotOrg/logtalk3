@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.56,
+		version is 2.57,
 		author is 'Paulo Moura',
 		date is 2019/04/30,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -204,6 +204,7 @@
 		fail.
 	process_entity(Kind, Entity, Options) :-
 		calls_external_predicate(Kind, Entity, Caller, Line, Callee0),
+		remember_referenced_predicate(Caller),
 		remember_external_predicate(Callee0),
 		\+ ^^edge(Caller, Callee0, [calls], calls_predicate, _),
 		add_xref_code_url(Options, Kind, Entity, Line, XRefOptions),
