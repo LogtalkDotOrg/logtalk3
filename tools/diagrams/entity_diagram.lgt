@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.44,
+		version is 2.45,
 		author is 'Paulo Moura',
 		date is 2019/04/30,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -54,11 +54,11 @@
 	:- private(included_module_/1).
 	:- dynamic(included_module_/1).
 
-	:- private(referenced_entity_/1).
-	:- dynamic(referenced_entity_/1).
+	:- private(referenced_entity_/2).
+	:- dynamic(referenced_entity_/2).
 
-	:- private(referenced_module_/1).
-	:- dynamic(referenced_module_/1).
+	:- private(referenced_module_/2).
+	:- dynamic(referenced_module_/2).
 
 	file(Source, UserOptions) :-
 		self(Self),
@@ -106,39 +106,41 @@
 		;	process(Basename, Directory, Options)
 		).
 
-	remember_referenced_entity(Entity) :-
-		(	referenced_entity_(Entity) ->
+	remember_referenced_entity(Referencer, Entity) :-
+		(	referenced_entity_(Referencer, Entity) ->
 			true
-		;	functor(Entity, Functor, Arity),
-			functor(Template, Functor, Arity),
-			assertz(referenced_entity_(Template))
+		;	functor(Referencer, ReferencerFunctor, ReferencerArity),
+			functor(ReferencerTemplate, ReferencerFunctor, ReferencerArity),
+			functor(Entity, EntityFunctor, EntityArity),
+			functor(EntityTemplate, EntityFunctor, EntityArity),
+			assertz(referenced_entity_(ReferencerTemplate, EntityTemplate))
 		).
 
-	remember_referenced_module(Module) :-
-		(	referenced_module_(Module) ->
+	remember_referenced_module(Referencer, Module) :-
+		(	referenced_module_(Referencer, Module) ->
 			true
-		;	assertz(referenced_module_(Module))
+		;	assertz(referenced_module_(Referencer, Module))
 		).
 
 	reset :-
 		^^reset,
 		retractall(included_entity_(_)),
 		retractall(included_module_(_)),
-		retractall(referenced_entity_(_)),
-		retractall(referenced_module_(_)).
+		retractall(referenced_entity_(_, _)),
+		retractall(referenced_module_(_, _)).
 
 	output_externals(Options) :-
 		member(externals(false), Options),
 		!.
 	output_externals(Options) :-
-		referenced_entity_(Entity),
+		referenced_entity_(_, Entity),
 		\+ included_entity_(Entity),
 		add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
 		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
-		referenced_module_(Module),
+		referenced_module_(_, Module),
 		\+ included_module_(Module),
 		add_external_entity_code_url(module, Module, Options, EntityOptions),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
@@ -149,13 +151,13 @@
 		member(externals(false), Options),
 		!.
 	output_missing_externals(Options) :-
-		referenced_entity_(Entity),
+		referenced_entity_(_, Entity),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
 		\+ ::node_(Name, _, _, _, _, _),
 		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| Options]),
 		fail.
 	output_missing_externals(Options) :-
-		referenced_module_(Module),
+		referenced_module_(_, Module),
 		\+ ::node_(Module, _, _, _, _, _),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| Options]),
 		fail.
@@ -463,7 +465,7 @@
 		^^ground_entity_identifier(protocol, ExtendedProtocol, ExtendedProtocolName),
 		scope_relation_label(Scope, extends, Label),
 		^^save_edge(ProtocolName, ExtendedProtocolName, [Label], extends_protocol, [tooltip(Label)| Options]),
-		remember_referenced_entity(ExtendedProtocol),
+		remember_referenced_entity(Protocol, ExtendedProtocol),
 		fail.
 	output_protocol_inheritance_relations(_, _).
 
@@ -489,7 +491,7 @@
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		scope_relation_label(Scope, implements, Label),
 		^^save_edge(ObjectName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options]),
-		remember_referenced_entity(Protocol),
+		remember_referenced_entity(Object, Protocol),
 		fail.
 	output_object_inheritance_relations(Instance, Options) :-
 		instantiates_class(Instance, Class, Scope),
@@ -497,7 +499,7 @@
 		^^ground_entity_identifier(object, Class, ClassName),
 		scope_relation_label(Scope, instantiates, Label),
 		^^save_edge(InstanceName, ClassName, [Label], instantiates_class, [tooltip(Label)| Options]),
-		remember_referenced_entity(Class),
+		remember_referenced_entity(Instance, Class),
 		fail.
 	output_object_inheritance_relations(Class, Options) :-
 		specializes_class(Class, SuperClass, Scope),
@@ -505,7 +507,7 @@
 		^^ground_entity_identifier(object, SuperClass, SuperClassName),
 		scope_relation_label(Scope, specializes, Label),
 		^^save_edge(ClassName, SuperClassName, [Label], specializes_class, [tooltip(Label)| Options]),
-		remember_referenced_entity(SuperClass),
+		remember_referenced_entity(Class, SuperClass),
 		fail.
 	output_object_inheritance_relations(Prototype, Options) :-
 		extends_object(Prototype, Parent, Scope),
@@ -513,7 +515,7 @@
 		^^ground_entity_identifier(object, Parent, ParentName),
 		scope_relation_label(Scope, extends, Label),
 		^^save_edge(PrototypeName, ParentName, [Label], extends_object, [tooltip(Label)| Options]),
-		remember_referenced_entity(Parent),
+		remember_referenced_entity(Prototype, Parent),
 		fail.
 	output_object_inheritance_relations(Object, Options) :-
 		imports_category(Object, Category, Scope),
@@ -521,7 +523,7 @@
 		^^ground_entity_identifier(category, Category, CategoryName),
 		scope_relation_label(Scope, imports, Label),
 		^^save_edge(ObjectName, CategoryName, [Label], imports_category, [tooltip(Label)| Options]),
-		remember_referenced_entity(Category),
+		remember_referenced_entity(Object, Category),
 		fail.
 	output_object_inheritance_relations(_, _).
 
@@ -540,7 +542,7 @@
 			^^ground_entity_identifier(unknown, To, ToName)
 		),
 		^^save_edge(ObjectName, ToName, [provides], provides_clauses, [tooltip(provides)| Options]),
-		remember_referenced_entity(To),
+		remember_referenced_entity(Object, To),
 		fail.
 	output_object_provide_relations(_, _).
 
@@ -551,16 +553,16 @@
 		^^ground_entity_identifier(object, Other, OtherName),
 		\+ ^^edge(ObjectName, OtherName, [uses], calls_predicate, _),
 		^^save_edge(ObjectName, OtherName, [uses], calls_predicate, [tooltip(uses)| Options]),
-		remember_referenced_entity(Other),
+		remember_referenced_entity(Object, Other),
 		fail.
 	output_object_xref_relations(Object, Options) :-
 		object_property(Object, calls(':'(Module,_), _)),
 		nonvar(Module),
-		\+ referenced_module_(Module),
+		\+ referenced_module_(Object, Module),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		\+ ^^edge(ObjectName, Module, [use_module], calls_predicate, _),
 		^^save_edge(ObjectName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options]),
-		remember_referenced_module(Module),
+		remember_referenced_module(Object, Module),
 		fail.
 	output_object_xref_relations(_, _).
 
@@ -579,7 +581,7 @@
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(object, Other, OtherName),
 		^^save_edge(ObjectName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_entity(Other),
+		remember_referenced_entity(Object, Other),
 		fail.
 	output_object_xref_calls(Object, Options) :-
 		setof(
@@ -589,7 +591,7 @@
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(ObjectName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_module(Module),
+		remember_referenced_module(Object, Module),
 		fail.
 	output_object_xref_calls(_, _).
 
@@ -615,7 +617,7 @@
 		^^ground_entity_identifier(category, ExtendedCategory, ExtendedCategoryName),
 		scope_relation_label(Scope, extends, Label),
 		^^save_edge(CategoryName, ExtendedCategoryName, [Label], extends_category, [tooltip(Label)| Options]),
-		remember_referenced_entity(ExtendedCategory),
+		remember_referenced_entity(Category, ExtendedCategory),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
 		implements_protocol(Category, Protocol, Scope),
@@ -623,14 +625,14 @@
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		scope_relation_label(Scope, implements, Label),
 		^^save_edge(CategoryName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options]),
-		remember_referenced_entity(Protocol),
+		remember_referenced_entity(Category, Protocol),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
 		complements_object(Category, Object),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(ObjectName, CategoryName, [complements], complements_object, [tooltip(complements)| Options]),
-		remember_referenced_entity(Object),
+		remember_referenced_entity(Category, Object),
 		fail.
 	output_category_inheritance_relations(_, _).
 
@@ -649,28 +651,28 @@
 			^^ground_entity_identifier(unknown, To, ToName)
 		),
 		^^save_edge(CategoryName, ToName, [provides], provides_clauses, [tooltip(provides)| Options]),
-		remember_referenced_entity(To),
+		remember_referenced_entity(Category, To),
 		fail.
 	output_category_provide_relations(_, _).
 
 	output_category_xref_relations(Category, Options) :-
 		category_property(Category, calls(Object::_, _)),
 		nonvar(Object),
-		\+ referenced_entity_(Object),
+		\+ referenced_entity_(Category, Object),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		\+ ^^edge(CategoryName, ObjectName, [uses], calls_predicate, _),
 		^^save_edge(CategoryName, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options]),
-		remember_referenced_entity(Object),
+		remember_referenced_entity(Category, Object),
 		fail.
 	output_category_xref_relations(Category, Options) :-
 		category_property(Category, calls(':'(Module,_), _)),
 		nonvar(Module),
-		\+ referenced_module_(Module),
+		\+ referenced_module_(Category, Module),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		\+ ^^edge(CategoryName, Module, [use_module], calls_predicate, _),
 		^^save_edge(CategoryName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options]),
-		remember_referenced_module(Module),
+		remember_referenced_module(Category, Module),
 		fail.
 	output_category_xref_relations(_, _).
 
@@ -689,7 +691,7 @@
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(CategoryName, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_entity(Object),
+		remember_referenced_entity(Category, Object),
 		fail.
 	output_category_xref_calls(Category, Options) :-
 		setof(
@@ -699,7 +701,7 @@
 		),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^save_edge(CategoryName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_module(Module),
+		remember_referenced_module(Category, Module),
 		fail.
 	output_category_xref_calls(_, _).
 
@@ -722,26 +724,26 @@
 			_
 		),
 		^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options]),
-		remember_referenced_module(To),
+		remember_referenced_module(Module, To),
 		fail.
 	output_module_provide_relations(_, _).
 
 	output_module_xref_relations(Module, Options) :-
 		modules_diagram_support::module_property(Module, calls(Object::_, _)),
 		nonvar(Object),
-		\+ referenced_entity_(Object),
+		\+ referenced_entity_(Module, Object),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		\+ ^^edge(Module, ObjectName, [uses], calls_predicate, _),
 		^^save_edge(Module, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options]),
-		remember_referenced_entity(Object),
+		remember_referenced_entity(Module, Object),
 		fail.
 	output_module_xref_relations(Module, Options) :-
 		modules_diagram_support::module_property(Module, calls(':'(FromModule,_), _)),
-		nonvar(Module),
-		\+ referenced_module_(FromModule),
+		nonvar(FromModule),
+		\+ referenced_module_(Module, FromModule),
 		\+ ^^edge(Module, FromModule, [use_module], calls_predicate, _),
 		^^save_edge(Module, FromModule, [use_module], calls_predicate, [tooltip(use_module)| Options]),
-		remember_referenced_module(FromModule),
+		remember_referenced_module(Module, FromModule),
 		fail.
 	output_module_xref_relations(_, _).
 
@@ -753,7 +755,7 @@
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(Module, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_entity(Object),
+		remember_referenced_entity(Module, Object),
 		fail.
 	output_module_xref_calls(Module, Options) :-
 		setof(
@@ -762,7 +764,7 @@
 			Predicates
 		),
 		^^save_edge(Module, FromModule, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_module(FromModule),
+		remember_referenced_module(Module, FromModule),
 		fail.
 	output_module_xref_calls(_, _).
 
