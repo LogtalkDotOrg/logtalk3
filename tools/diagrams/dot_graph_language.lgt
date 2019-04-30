@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.32,
+		version is 2.33,
 		author is 'Paulo Moura',
-		date is 2019/04/29,
+		date is 2019/04/30,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -226,6 +226,7 @@
 	node_shape_style_color(external_directory, tab, 'filled,dashed', salmon).
 	node_shape_style_color(external_library, tab, 'filled,dashed', salmon).
 	% predicates of the entities being documented
+	node_shape_style_color(directive, box, filled, bisque).
 	node_shape_style_color(predicate, box, filled, cornsilk).
 	node_shape_style_color(public_predicate, box, filled, springgreen).
 	node_shape_style_color(protected_predicate, box, filled, yellow).

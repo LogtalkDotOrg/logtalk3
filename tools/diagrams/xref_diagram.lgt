@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.54,
+		version is 2.55,
 		author is 'Paulo Moura',
 		date is 2019/04/30,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -231,6 +231,20 @@
 	process_entity(_, _, _) :-
 		retract(included_predicate_(Predicate)),
 		retractall(referenced_predicate_(Predicate)),
+		fail.
+	process_entity(Kind, Entity, Options) :-
+		retract(referenced_predicate_((:-)/1)),
+		% initialization/1 directive; only create a node for the first directive occurrence
+		once((
+			entity_property(Kind, Entity, calls(_, Properties)),
+			member(caller((:-)/1), Properties)
+		)),
+		(	member(line_count(Line), Properties) ->
+			true
+		;	Line = -1
+		),
+		add_xref_code_url(Options, Kind, Entity, Line, XRefOptions),
+		^^output_node((:-)/1, (:-)/1, directive, [], directive, XRefOptions),
 		fail.
 	process_entity(_, _, _) :-
 		retract(referenced_predicate_(Functor/Arity)),

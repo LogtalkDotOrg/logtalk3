@@ -103,6 +103,9 @@ that are referenced from diagram edges.
 * IMPROVED: Associate directory and file URLs with graph labels instead of the
 whole graph background to avoid accidental clicks.
 
+* IMPROVED: Support for `initialization/1` directive nodes in predicate
+cross-referencing diagrams.
+
 * FIXED: Predicate documentation cross-reference nodes to link to the actual
 predicate declaration.
 
