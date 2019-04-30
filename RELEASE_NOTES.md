@@ -150,6 +150,7 @@ Original Prolog examples source code files contributed by MystikNinja.
 
 * UPDATED: Sync Metagol port with upstream changes (2.3.0 tag).
 
+
 3.25.0 - April 2, 2019
 ======================
 

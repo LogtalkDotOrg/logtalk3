@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.53,
+		version is 2.54,
 		author is 'Paulo Moura',
-		date is 2019/04/29,
+		date is 2019/04/30,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -366,17 +366,18 @@
 			(	member(path_url_prefixes(Prefix, CodePrefix, _), Options),
 				atom_concat(Prefix, _, Path) ->
 				true
-			;	member(url_prefixes(CodePrefix, _), Options)
-			) ->
-			% third, cut down when specified local path prefix
+			;	memberchk(url_prefixes(CodePrefix, _), Options)
+			),
+			% third, cut down any specified local path prefix
 			% before constructing the final code URL
 			memberchk(omit_path_prefixes(PathPrefixes), Options),
 			(	member(PathPrefix, PathPrefixes),
 				atom_concat(PathPrefix, RelativePath, Path) ->
-				true
-			;	RelativePath = Path
+				atom_concat(CodePrefix, RelativePath, CodeURL0)
+			;	% prefix to be cut not specified; use the file
+				% absolute path as a local URL
+				CodeURL0 = Path
 			),
-			atom_concat(CodePrefix, RelativePath, CodeURL0),
 			(	Line = -1 ->
 				% no line number available; simply link to the entity file
 				CodeURL = CodeURL0
@@ -402,7 +403,7 @@
 				number_codes(Line, LineCodes),
 				atom_codes(LineAtom, LineCodes),
 				atom_concat(CodeURL1, LineAtom, CodeURL)
-			),
+			) ->
 			XRefOptions = [url(CodeURL)| Options]
 		;	% could not find entity file or URL prefixes not definined
 			XRefOptions = [url('')| Options]
