@@ -156,27 +156,28 @@ yes
 %
 % the required query is complex due to the use of submodules for the SWI-Prolog
 % packages, and thus separate git repositories; here we take into account only
-% the "http" and "semweb" packages
+% the "http", "pldoc", and "semweb" packages
 
 | ?- [cliopatria].
 ...
 
 | ?- working_directory(ClioPatria,ClioPatria), getenv('HOME', Home), file_search_path(swi, SWIHome),
      atom_concat(SWIHome, '/library', Library),
-	 atom_concat(SWIHome, '/library/http', SWIHTTP),
-	 atom_concat(SWIHome, '/library/semweb', SWISemWeb),
+	 atom_concat(SWIHome, '/library/http', SWIhttp),
+	 atom_concat(SWIHome, '/library/pldoc', SWIpldoc),
+	 atom_concat(SWIHome, '/library/semweb', SWIsemweb),
 	 git_hash(Hash, []),
 	 atomic_list_concat(['https://github.com/ClioPatria/ClioPatria/tree/',Hash,'/'], Git),
 	 diagrams::rdirectory(cliopatria, '.', [
 	 	title('ClioPatria - an RDF application platform'),
 		zoom(true),
 		path_url_prefixes(ClioPatria, Git, ''),
-		path_url_prefixes(SWIHTTP, 'https://github.com/SWI-Prolog/packages-http/tree/master/', ''),
-		path_url_prefixes(SWISemWeb, 'https://github.com/SWI-Prolog/packages-semweb/tree/master/', ''),
+		path_url_prefixes(SWIhttp, 'https://github.com/SWI-Prolog/packages-http/tree/master/', ''),
+		path_url_prefixes(SWIpldoc, 'https://github.com/SWI-Prolog/packages-pldoc/tree/master/', ''),
+		path_url_prefixes(SWIsemweb, 'https://github.com/SWI-Prolog/packages-semweb/tree/master/', ''),
 		path_url_prefixes(Library, 'https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', ''),
-		omit_path_prefixes([ClioPatria, SWIHTTP, SWISemWeb, Library, Home]),
+		omit_path_prefixes([ClioPatria, SWIhttp, SWIpldoc, SWIsemweb, Library, Home]),
 		exclude_directories([web, test, scripts, w3c, etc, rdf, 'Windows', 'Java']),
-		layout(top_to_bottom),
-		path_url_prefixes(Home, '', '')
+		layout(top_to_bottom)
 	]).
 ...
