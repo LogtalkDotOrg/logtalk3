@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.37,
+		version is 2.38,
 		author is 'Paulo Moura',
-		date is 2019/04/29,
+		date is 2019/04/30,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -1109,6 +1109,7 @@
 			true
 		;	memberchk(url_prefixes(CodePrefix, DocPrefix), Options)
 		),
+		!,
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		(	member(Path, Prefixes) ->
 			(	CodePrefix == '' ->
@@ -1124,6 +1125,14 @@
 			Suffix = Path
 		),
 		LinkingOptions = [url(CodeURL), urls(CodeURL,DocPrefix), tooltip(Suffix)| Options].
+	add_link_options(Path, Options, LinkingOptions) :-
+		memberchk(omit_path_prefixes(Prefixes), Options),
+		(	member(Prefix, Prefixes),
+			atom_concat(Prefix, Suffix, Path) ->
+			true
+		;	Suffix = Path
+		),
+		LinkingOptions = [url(''), tooltip(Suffix)| Options].
 
 	:- protected(omit_path_prefix/3).
 	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).
