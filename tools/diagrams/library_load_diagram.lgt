@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.23,
+		version is 2.24,
 		author is 'Paulo Moura',
-		date is 2019/04/29,
+		date is 2019/04/30,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_)]
@@ -118,9 +118,7 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
-	% by default, use a home directory URL for the source code:
-	default_option(url_prefixes('', '')).
-	% by default, omit the home directory path prefix when printing paths:
+	% by default, don't omit any prefix when printing paths:
 	default_option(omit_path_prefixes([])).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).

@@ -67,6 +67,10 @@ library diagrams for compatibility with Sphinx-based API documentation.
 
 * CHANGED: Default uses diagram layout to top to bottom.
 
+* CHANGED: Don't define a default value for the `url_prefixes/2` option to
+allow preventing the generation of node URLs for prefixes that are not
+specified in `path_url_prefixes/2` options.
+
 * ADDED: Support for generating sub-diagrams when using the `zoom(true)`
 option.
 

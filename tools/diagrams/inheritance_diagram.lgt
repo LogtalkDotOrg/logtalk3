@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.15,
+		version is 2.16,
 		author is 'Paulo Moura',
-		date is 2019/04/29,
+		date is 2019/04/30,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -66,9 +66,7 @@
 	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
-	% by default, use a home directory URL for the source code:
-	default_option(url_prefixes('', '')).
-	% by default, omit the home directory path prefix when printing paths:
+	% by default, don't omit any prefix when printing paths:
 	default_option(omit_path_prefixes([])).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).

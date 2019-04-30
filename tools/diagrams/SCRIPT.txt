@@ -54,6 +54,11 @@ yes
 | ?- xref_diagram(dot)::entity(point).
 yes
 
+% same but with predicate node local file system URLs:
+
+| ?- xref_diagram(dot)::entity(point, [url_prefixes('','')]).
+yes
+
 
 % load another example for testing:
 

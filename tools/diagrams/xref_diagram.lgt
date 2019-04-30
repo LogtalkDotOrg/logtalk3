@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.55,
+		version is 2.56,
 		author is 'Paulo Moura',
 		date is 2019/04/30,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -732,9 +732,7 @@
 	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
-	% by default, use a home directory URL for the source code:
-	default_option(url_prefixes('', '')).
-	% by default, omit the home directory path prefix when printing paths:
+	% by default, don't omit any prefix when printing paths:
 	default_option(omit_path_prefixes([])).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).
