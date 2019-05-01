@@ -24,8 +24,8 @@ This tool generates library, directory, file, and entity diagrams for source
 files and for libraries of source files using the Logtalk reflection features
 to collect the relevant information and a graph language for representing
 the diagrams. Limited support is also available for generating diagrams
-for Prolog module applications. It's also possible to generate predicate
-cross-referencing diagrams for plain Prolog files.
+for Prolog module applications. It's also possible in general to generate
+predicate cross-referencing diagrams for plain Prolog files.
 
 Linking library diagrams to entity diagrams to predicate cross-referencing
 diagrams and linking directory diagrams to file diagrams is also supported
@@ -33,6 +33,13 @@ when using SVG output. This feature allows using diagrams for navigating
 complex code by zooming into details. SVG output can also easily link to
 both source code repositories and API documentation. This allows diagrams
 to be used for source code navigation.
+
+Diagrams can also be used to uncover code issues. For example, comparing
+loading diagrams with dependency diagrams can reveal implicit dependencies.
+Loading diagrams can reveal circular dependencies that may warrant code
+refactoring. Entity diagrams can provide a good overview of code coupling.
+Predicate cross-referencing diagrams can be used to access entity code
+complexity.
 
 All diagrams support a comprehensive set of options, discussed below, to
 customize the final contents and appearance.
