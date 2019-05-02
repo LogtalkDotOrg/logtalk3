@@ -18,12 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(rectangle(_Width, _Height)).
+:- object(rectangle(_Width_, _Height_)).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
-		date is 2000/4/22,
+		version is 1.1,
+		date is 2019/05/02,
 		comment is 'Parametric object for representing geometric rectangles.',
 		parnames is ['Width', 'Height']
 	]).
@@ -49,27 +49,25 @@
 		argnames is ['Area']
 	]).
 
-	width(Width) :-
-		parameter(1, Width).
+	width(_Width_).
 
-	height(Height) :-
-		parameter(2, Height).
+	height(_Height_).
 
 	area(Area) :-
-		::width(Width),
-		::height(Height),
-		Area is Width*Height.
+		% thanks to parameter passing between entities,
+		% there's no need of using ::/1 messages
+		Area is _Width_ * _Height_.
 
 :- end_object.
 
 
-:- object(square(Side),
-	extends(rectangle(Side, Side))).
+:- object(square(_Side_),
+	extends(rectangle(_Side_, _Side_))).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
-		date is 2000/4/22,
+		version is 1.1,
+		date is 2019/05/02,
 		comment is 'Parametric object for representing geometric squares.',
 		parnames is ['Side']
 	]).
@@ -81,13 +79,6 @@
 		argnames is ['Side']
 	]).
 
-	side(Side) :-
-		parameter(1, Side).
-
-	width(Width) :-
-		parameter(1, Width).
-
-	height(Height) :-
-		parameter(1, Height).
+	side(_Side_).
 
 :- end_object.

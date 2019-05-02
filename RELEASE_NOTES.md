@@ -152,6 +152,8 @@ Examples
 * UPDATED: The `super_calls` example to illustrate that *super* calls force
 dynamic binding when the called predicate is dynamic.
 
+* UPDATED: The `sicstus` example to use parameter variables.
+
 Ports
 -----
 

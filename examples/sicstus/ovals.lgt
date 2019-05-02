@@ -42,13 +42,13 @@
 :- end_object.
 
 
-:- object(ellipse(_RX, _RY, _Color),
+:- object(ellipse(_RX_, _RY_, _Color_),
 	imports(proto_hierarchy)).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.1,
-		date is 2013/04/23,
+		version is 1.2,
+		date is 2019/05/02,
 		comment is 'Parametric object for representing geometric ellipses.',
 		parnames is ['RX', 'RY', 'Color'],
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -92,20 +92,17 @@
 		comment is 'Shows execution context (self, this and sender values).'
 	]).
 
-	color(Color) :-
-		parameter(3, Color).
+	color(_Color_).
 
-	rx(Rx) :-
-		parameter(1, Rx).
+	rx(_RX_).
 
-	ry(Ry) :-
-		parameter(2, Ry).
+	ry(_RY_).
 
 	area(Area) :-
-		::rx(Rx),
-		::ry(Ry),
 		pi(Pi),
-		Area is Rx*Ry*Pi.
+		% thanks to parameter passing between entities,
+		% there's no need of using ::/1 messages
+		Area is _RX_ * _RY_ * Pi.
 
 	context :-
 		write(ellipse3), nl,
@@ -116,13 +113,13 @@
 :- end_object.
 
 
-:- object(circle(Radius, Color),
-	extends(ellipse(Radius, Radius, Color))).
+:- object(circle(_Radius_, _Color_),
+	extends(ellipse(_Radius_, _Radius_, _Color_))).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
-		date is 2000/4/22,
+		version is 1.1,
+		date is 2019/05/02,
 		comment is 'Parametric object for representing geometric circles.',
 		parnames is ['Radius', 'Color'],
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -135,17 +132,9 @@
 		argnames is ['Radius']
 	]).
 
-	r(Radius) :-
-		parameter(1, Radius).
+	r(_Radius_).
 
-	color(Color) :-
-		parameter(2, Color).
-
-	rx(Radius) :-
-		::r(Radius).
-
-	ry(Radius) :-
-		::r(Radius).
+	color(_Color_).
 
 	context :-
 		write(circle2), nl,
