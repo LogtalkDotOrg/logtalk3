@@ -24,6 +24,12 @@ RELEASE NOTES
 3.26.0 - May ??, 2019
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Decompilation of exceptions thrown by the `<</2` control construct
+when in debug mode.
+
 Prolog adapter and integration files
 ------------------------------------
 

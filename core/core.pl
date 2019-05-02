@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 26, 0, b01)).
+'$lgt_version_data'(logtalk(3, 26, 0, b02)).
 
 
 
@@ -5957,7 +5957,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				catch('$lgt_compile_body'(Goal, TGoal, DGoal, ObjCtx), Error, throw(error(Error, logtalk(Obj<<Goal, ExCtx)))),
 				(	Flags /\ 512 =:= 512 ->
 					% object compiled in debug mode
-					catch(DGoal, Error, throw(error(Error, logtalk(Obj<<Goal, ExCtx))))
+					catch(DGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, ExCtx))))
 				;	catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, ExCtx))))
 				)
 			)
