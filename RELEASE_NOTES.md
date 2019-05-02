@@ -110,6 +110,9 @@ whole graph background to avoid accidental clicks.
 * IMPROVED: Support for `initialization/1` directive nodes in predicate
 cross-referencing diagrams.
 
+* IMPROVED: The `diagrams` tool now prints a warning when failing to locate a
+library, directory, or file.
+
 * FIXED: Predicate documentation cross-reference nodes to link to the actual
 predicate declaration.
 

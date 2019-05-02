@@ -243,8 +243,8 @@
 <p>Common predicates for generating diagrams.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2.38</div>
-<div class="line"><strong>Date:</strong> 2019/4/30</div>
+<div class="line"><strong>Version:</strong> 2.39</div>
+<div class="line"><strong>Date:</strong> 2019/5/2</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1151,9 +1151,49 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">output_file_path(+atom,+list(atom),+object_identifier,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div id="locate_library/2"> </div></div>
+<div class="section" id="locate-library-2">
+<span id="diagram-1-locate-library-2"></span><span id="index-46"></span><h3><code class="docutils literal notranslate"><span class="pre">locate_library/2</span></code><a class="headerlink" href="#locate-library-2" title="Permalink to this headline">¶</a></h3>
+<p>Locates a library given its name.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">locate_library(Library,Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">locate_library(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div id="locate_directory/2"> </div></div>
+<div class="section" id="locate-directory-2">
+<span id="diagram-1-locate-directory-2"></span><span id="index-47"></span><h3><code class="docutils literal notranslate"><span class="pre">locate_directory/2</span></code><a class="headerlink" href="#locate-directory-2" title="Permalink to this headline">¶</a></h3>
+<p>Locates a directory given its name or full path.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">locate_directory(Directory,Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">locate_directory(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="locate_file/5"> </div></div>
 <div class="section" id="locate-file-5">
-<span id="diagram-1-locate-file-5"></span><span id="index-46"></span><h3><code class="docutils literal notranslate"><span class="pre">locate_file/5</span></code><a class="headerlink" href="#locate-file-5" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-locate-file-5"></span><span id="index-48"></span><h3><code class="docutils literal notranslate"><span class="pre">locate_file/5</span></code><a class="headerlink" href="#locate-file-5" title="Permalink to this headline">¶</a></h3>
 <p>Locates a file given its name, basename, full path, or library notation representation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1173,7 +1213,7 @@
 </div>
 <div id="ground_entity_identifier/3"> </div></div>
 <div class="section" id="ground-entity-identifier-3">
-<span id="diagram-1-ground-entity-identifier-3"></span><span id="index-47"></span><h3><code class="docutils literal notranslate"><span class="pre">ground_entity_identifier/3</span></code><a class="headerlink" href="#ground-entity-identifier-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-ground-entity-identifier-3"></span><span id="index-49"></span><h3><code class="docutils literal notranslate"><span class="pre">ground_entity_identifier/3</span></code><a class="headerlink" href="#ground-entity-identifier-3" title="Permalink to this headline">¶</a></h3>
 <p>Converts an entity identifier to a ground term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1193,7 +1233,7 @@
 </div>
 <div id="filter_file_extension/3"> </div></div>
 <div class="section" id="filter-file-extension-3">
-<span id="diagram-1-filter-file-extension-3"></span><span id="index-48"></span><h3><code class="docutils literal notranslate"><span class="pre">filter_file_extension/3</span></code><a class="headerlink" href="#filter-file-extension-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-filter-file-extension-3"></span><span id="index-50"></span><h3><code class="docutils literal notranslate"><span class="pre">filter_file_extension/3</span></code><a class="headerlink" href="#filter-file-extension-3" title="Permalink to this headline">¶</a></h3>
 <p>Filters the file name extension depending on the file_extensions/1 option.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1213,7 +1253,7 @@
 </div>
 <div id="add_link_options/3"> </div></div>
 <div class="section" id="add-link-options-3">
-<span id="diagram-1-add-link-options-3"></span><span id="index-49"></span><h3><code class="docutils literal notranslate"><span class="pre">add_link_options/3</span></code><a class="headerlink" href="#add-link-options-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-add-link-options-3"></span><span id="index-51"></span><h3><code class="docutils literal notranslate"><span class="pre">add_link_options/3</span></code><a class="headerlink" href="#add-link-options-3" title="Permalink to this headline">¶</a></h3>
 <p>Adds urls/2 and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1233,7 +1273,7 @@
 </div>
 <div id="omit_path_prefix/3"> </div></div>
 <div class="section" id="omit-path-prefix-3">
-<span id="diagram-1-omit-path-prefix-3"></span><span id="index-50"></span><h3><code class="docutils literal notranslate"><span class="pre">omit_path_prefix/3</span></code><a class="headerlink" href="#omit-path-prefix-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-omit-path-prefix-3"></span><span id="index-52"></span><h3><code class="docutils literal notranslate"><span class="pre">omit_path_prefix/3</span></code><a class="headerlink" href="#omit-path-prefix-3" title="Permalink to this headline">¶</a></h3>
 <p>Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing directory and file node identitifers and captions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1253,7 +1293,7 @@
 </div>
 <div id="add_node_zoom_option/5"> </div></div>
 <div class="section" id="add-node-zoom-option-5">
-<span id="diagram-1-add-node-zoom-option-5"></span><span id="index-51"></span><h3><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option/5</span></code><a class="headerlink" href="#add-node-zoom-option-5" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-add-node-zoom-option-5"></span><span id="index-53"></span><h3><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option/5</span></code><a class="headerlink" href="#add-node-zoom-option-5" title="Permalink to this headline">¶</a></h3>
 <p>Adds node zoom options when using the zoom option.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1273,7 +1313,7 @@
 </div>
 <div id="message_diagram_description/1"> </div></div>
 <div class="section" id="message-diagram-description-1">
-<span id="diagram-1-message-diagram-description-1"></span><span id="index-52"></span><h3><code class="docutils literal notranslate"><span class="pre">message_diagram_description/1</span></code><a class="headerlink" href="#message-diagram-description-1" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-message-diagram-description-1"></span><span id="index-54"></span><h3><code class="docutils literal notranslate"><span class="pre">message_diagram_description/1</span></code><a class="headerlink" href="#message-diagram-description-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1285,7 +1325,7 @@
 <div class="section" id="private-predicates">
 <h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="node_/6"> </div><div class="section" id="id1">
-<span id="index-53"></span><span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">node_/6</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<span id="index-55"></span><span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">node_/6</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Table of saved nodes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1305,7 +1345,7 @@
 </div>
 <div id="edge_/5"> </div></div>
 <div class="section" id="id3">
-<span id="index-54"></span><span id="id4"></span><h3><code class="docutils literal notranslate"><span class="pre">edge_/5</span></code><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<span id="index-56"></span><span id="id4"></span><h3><code class="docutils literal notranslate"><span class="pre">edge_/5</span></code><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Table of saved edges.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

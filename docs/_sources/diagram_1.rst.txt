@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.38
-| **Date:** 2019/4/30
+| **Version:** 2.39
+| **Date:** 2019/5/2
 
 | **Compilation flags:**
 |    ``static``
@@ -963,6 +963,48 @@ Returns the output file path.
 |    ``output_file_path(Name,Options,Format,Path)``
 | **Mode and number of proofs:**
 |    ``output_file_path(+atom,+list(atom),+object_identifier,-atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="locate_library/2"> </div>
+
+.. index:: locate_library/2
+.. _diagram/1::locate_library/2:
+
+``locate_library/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Locates a library given its name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``locate_library(Library,Path)``
+| **Mode and number of proofs:**
+|    ``locate_library(+atom,-atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="locate_directory/2"> </div>
+
+.. index:: locate_directory/2
+.. _diagram/1::locate_directory/2:
+
+``locate_directory/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Locates a directory given its name or full path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``locate_directory(Directory,Path)``
+| **Mode and number of proofs:**
+|    ``locate_directory(+atom,-atom)`` - ``one``
 
 
 .. raw:: html

@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.38,
+		version is 2.39,
 		author is 'Paulo Moura',
-		date is 2019/04/30,
+		date is 2019/05/02,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -168,10 +168,10 @@
 	rlibrary(Library, UserOptions) :-
 		self(Self),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
+		locate_library(Library, Path),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
-		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		diagram_caption(library, Library, Description),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
@@ -213,10 +213,10 @@
 	library(Library, UserOptions) :-
 		self(Self),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
+		locate_library(Library, Path),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
-		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		diagram_caption(library, Library, Description),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
@@ -336,8 +336,8 @@
 
 	rdirectory(Project, Directory, UserOptions) :-
 		self(Self),
-		normalize_directory_paths([Directory], [NormalizedDirectory]),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, NormalizedDirectory)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
+		locate_directory(Directory, NormalizedDirectory),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -396,8 +396,8 @@
 
 	directory(Project, Directory, UserOptions) :-
 		self(Self),
-		normalize_directory_paths([Directory], [NormalizedDirectory]),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, NormalizedDirectory)),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
+		locate_directory(Directory, NormalizedDirectory),
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -947,6 +947,41 @@
 		os::make_directory(Directory),
 		atom_concat(Directory, Basename, Path).
 
+	:- protected(locate_library/2).
+	:- mode(locate_library(+atom, -atom), one).
+	:- info(locate_library/2, [
+		comment is 'Locates a library given its name.',
+		argnames is ['Library', 'Path']
+	]).
+
+	locate_library(Library, Path) :-
+		logtalk::expand_library_path(Library, Path),
+		!.
+	% give up
+	locate_library(Library, _) :-
+		logtalk::print_message(warning, diagrams, unable_to_locate(library, Library)),
+		fail.
+
+	:- protected(locate_directory/2).
+	:- mode(locate_directory(+atom, -atom), one).
+	:- info(locate_directory/2, [
+		comment is 'Locates a directory given its name or full path.',
+		argnames is ['Directory', 'Path']
+	]).
+
+	locate_directory(Directory, Path) :-
+		os::absolute_file_name(Directory, Path0),
+		os::directory_exists(Path0),
+		(	sub_atom(Path0, _, _, 0, '/') ->
+			Path = Path0
+		;	atom_concat(Path0, '/', Path)
+		),
+		!.
+	% give up
+	locate_directory(Directory, _) :-
+		logtalk::print_message(warning, diagrams, unable_to_locate(directory, Directory)),
+		fail.
+
 	:- protected(locate_file/5).
 	:- mode(locate_file(+atom, +atom, +atom, +atom, -atom), one).
 	:- info(locate_file/5, [
@@ -1000,6 +1035,10 @@
 		modules_diagram_support::loaded_file_property(Source, basename(Basename)),
 		modules_diagram_support::loaded_file_property(Source, directory(Directory)),
 		!.
+	% give up
+	locate_file(Source, _, _, _, _) :-
+		logtalk::print_message(warning, diagrams, unable_to_locate(file, Source)),
+		fail.
 
 	add_extension(logtalk, Source, SourceWithExtension, Extension) :-
 		% ensure that Source is not specified using library notation
@@ -1217,5 +1256,7 @@
 		[nl, 'Generating diagram failed: ~q'-[Message], nl].
 	message_tokens(entity_not_loaded(Entity)) -->
 		[nl, 'Referenced entity not loaded: ~q'-[Entity], nl].
+	message_tokens(unable_to_locate(Kind, Specification)) -->
+		[at_same_line, nl, 'Unable to locate ~w: ~q'-[Kind, Specification], nl].
 
 :- end_category.
