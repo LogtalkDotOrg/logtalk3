@@ -9,7 +9,7 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.41
+| **Version:** 2.42
 | **Date:** 2019/5/3
 
 | **Compilation flags:**
@@ -1080,13 +1080,13 @@ Filters the file name extension depending on the file_extensions/1 option.
 ``add_link_options/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Adds urls/2 and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.
+Adds url/1, urls/2, and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``add_link_options(Path,Options,GraphOptions)``
+|    ``add_link_options(Path,Options,LinkingOptions)``
 | **Mode and number of proofs:**
 |    ``add_link_options(+atom,+list(compound),-list(compound))`` - ``one``
 
@@ -1114,12 +1114,12 @@ Removes a prefix from a path, returning the relative path, when using the option
 
 .. raw:: html
 
-   <div id="add_node_zoom_option/5"> </div>
+   <div id="add_node_zoom_option/4"> </div>
 
-.. index:: add_node_zoom_option/5
-.. _diagram/1::add_node_zoom_option/5:
+.. index:: add_node_zoom_option/4
+.. _diagram/1::add_node_zoom_option/4:
 
-``add_node_zoom_option/5``
+``add_node_zoom_option/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Adds node zoom options when using the zoom option.
@@ -1128,9 +1128,9 @@ Adds node zoom options when using the zoom option.
 |    ``static``
 
 | **Template:**
-|    ``add_node_zoom_option(Identifier,Suffix,Options,NodeOptions0,NodeOptions)``
+|    ``add_node_zoom_option(Identifier,Suffix,Options,NodeOptions)``
 | **Mode and number of proofs:**
-|    ``add_node_zoom_option(+atom,+atom,+list(compound),+list(compound),-list(compound))`` - ``one``
+|    ``add_node_zoom_option(+atom,+atom,+list(compound),-list(compound))`` - ``one``
 
 
 .. raw:: html

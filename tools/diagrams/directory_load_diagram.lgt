@@ -22,9 +22,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.17,
+		version is 1.18,
 		author is 'Paulo Moura',
-		date is 2019/05/02,
+		date is 2019/05/03,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parnames is ['Format'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
@@ -46,7 +46,7 @@
 			) ->
 			parameter(1, Format),
 			file_load_diagram(Format)::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Project, Suffix, Options, LinkingOptions, NodeOptions),
+			^^add_node_zoom_option(Project, Suffix, LinkingOptions, NodeOptions),
 			assertz((sub_diagram_(Project, Directory)))
 		;	% no files for this directory
 			NodeOptions = LinkingOptions

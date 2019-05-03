@@ -243,7 +243,7 @@
 <p>Common predicates for generating diagrams.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2.41</div>
+<div class="line"><strong>Version:</strong> 2.42</div>
 <div class="line"><strong>Date:</strong> 2019/5/3</div>
 </div>
 <div class="line-block">
@@ -1254,7 +1254,7 @@
 <div id="add_link_options/3"> </div></div>
 <div class="section" id="add-link-options-3">
 <span id="diagram-1-add-link-options-3"></span><span id="index-51"></span><h3><code class="docutils literal notranslate"><span class="pre">add_link_options/3</span></code><a class="headerlink" href="#add-link-options-3" title="Permalink to this headline">¶</a></h3>
-<p>Adds urls/2 and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.</p>
+<p>Adds url/1, urls/2, and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1264,7 +1264,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">add_link_options(Path,Options,GraphOptions)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_link_options(Path,Options,LinkingOptions)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -1291,9 +1291,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">omit_path_prefix(+atom,+list(compound),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
-<div id="add_node_zoom_option/5"> </div></div>
-<div class="section" id="add-node-zoom-option-5">
-<span id="diagram-1-add-node-zoom-option-5"></span><span id="index-53"></span><h3><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option/5</span></code><a class="headerlink" href="#add-node-zoom-option-5" title="Permalink to this headline">¶</a></h3>
+<div id="add_node_zoom_option/4"> </div></div>
+<div class="section" id="add-node-zoom-option-4">
+<span id="diagram-1-add-node-zoom-option-4"></span><span id="index-53"></span><h3><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option/4</span></code><a class="headerlink" href="#add-node-zoom-option-4" title="Permalink to this headline">¶</a></h3>
 <p>Adds node zoom options when using the zoom option.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1304,11 +1304,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option(Identifier,Suffix,Options,NodeOptions0,NodeOptions)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option(Identifier,Suffix,Options,NodeOptions)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option(+atom,+atom,+list(compound),+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option(+atom,+atom,+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <div id="message_diagram_description/1"> </div></div>

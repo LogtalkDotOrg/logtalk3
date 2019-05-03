@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.24,
+		version is 2.25,
 		author is 'Paulo Moura',
-		date is 2019/04/30,
+		date is 2019/05/03,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parnames is ['Format'],
 		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_)]
@@ -48,7 +48,7 @@
 			;	logtalk::loaded_file_property(File, category(_))
 			) ->
 			entity_diagram::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Library, Suffix, Options, NodeOptions0, NodeOptions),
+			^^add_node_zoom_option(Library, Suffix, NodeOptions0, NodeOptions),
 			assertz(sub_diagrams_(Library))
 		;	% no entities for this library; entity diagram empty
 			NodeOptions = NodeOptions0

@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.41,
+		version is 2.42,
 		author is 'Paulo Moura',
 		date is 2019/05/03,
 		comment is 'Common predicates for generating diagrams.',
@@ -1138,8 +1138,8 @@
 	:- protected(add_link_options/3).
 	:- mode(add_link_options(+atom, +list(compound), -list(compound)), one).
 	:- info(add_link_options/3, [
-		comment is 'Adds urls/2 and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.',
-		argnames is ['Path', 'Options', 'GraphOptions']
+		comment is 'Adds url/1, urls/2, and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.',
+		argnames is ['Path', 'Options', 'LinkingOptions']
 	]).
 
 	add_link_options(Path, Options, LinkingOptions) :-
@@ -1190,16 +1190,16 @@
 		;	Relative = Path
 		).
 
-	:- protected(add_node_zoom_option/5).
-	:- mode(add_node_zoom_option(+atom, +atom, +list(compound), +list(compound), -list(compound)), one).
-	:- info(add_node_zoom_option/5, [
+	:- protected(add_node_zoom_option/4).
+	:- mode(add_node_zoom_option(+atom, +atom, +list(compound), -list(compound)), one).
+	:- info(add_node_zoom_option/4, [
 		comment is 'Adds node zoom options when using the zoom option.',
-		argnames is ['Identifier', 'Suffix', 'Options', 'NodeOptions0', 'NodeOptions']
+		argnames is ['Identifier', 'Suffix', 'Options', 'NodeOptions']
 	]).
 
-	add_node_zoom_option(Identifier, Suffix, Options, NodeOptions0, NodeOptions) :-
+	add_node_zoom_option(Identifier, Suffix, Options, NodeOptions) :-
 		(	member(zoom(false), Options) ->
-			NodeOptions = NodeOptions0
+			NodeOptions = Options
 		;	member(zoom_url_suffix(Extension), Options) ->
 			(	compound(Identifier) ->
 				functor(Identifier, Functor, Arity),
@@ -1212,9 +1212,9 @@
 			;	atom_concat(Identifier, Suffix, Diagram0),
 				atom_concat(Diagram0, Extension, Diagram)
 			),
-			NodeOptions = [zoom_url(Diagram)| NodeOptions0]
+			NodeOptions = [zoom_url(Diagram)| Options]
 		;	% this case should never occur as the zoom_url_suffix/1 should be always defined
-			NodeOptions = NodeOptions0
+			NodeOptions = Options
 		).
 
 	% structured message printing predicates;

@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.45,
+		version is 2.46,
 		author is 'Paulo Moura',
-		date is 2019/04/30,
+		date is 2019/05/03,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -315,7 +315,7 @@
 			% reference between this object and the xref_diagram object
 			{xref_diagram::diagram_name_suffix(Suffix0)},
 			atom_concat('_protocol', Suffix0, Suffix),
-			^^add_node_zoom_option(Name, Suffix, Options, Options, NodeOptions)
+			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions)
 		;	% no locally declared predicates; xref diagram empty
 			NodeOptions = Options
 		),
@@ -357,7 +357,7 @@
 			% reference between this object and the xref_diagram object
 			{xref_diagram::diagram_name_suffix(Suffix0)},
 			atom_concat('_object', Suffix0, Suffix),
-			^^add_node_zoom_option(Name, Suffix, Options, Options, NodeOptions)
+			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions)
 		;	% no locally declared/defined/provided predicates; xref diagram empty
 			NodeOptions = Options
 		),
@@ -399,7 +399,7 @@
 			% reference between this object and the xref_diagram object
 			{xref_diagram::diagram_name_suffix(Suffix0)},
 			atom_concat('_category', Suffix0, Suffix),
-			^^add_node_zoom_option(Name, Suffix, Options, Options, NodeOptions)
+			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions)
 		;	% no locally declared/defined/provided predicates; xref diagram empty
 			NodeOptions = Options
 		),
@@ -426,7 +426,7 @@
 			% reference between this object and the xref_diagram object
 			{xref_diagram::diagram_name_suffix(Suffix0)},
 			atom_concat('_module', Suffix0, Suffix),
-			^^add_node_zoom_option(Module, Suffix, Options, Options, NodeOptions)
+			^^add_node_zoom_option(Module, Suffix, Options, NodeOptions)
 		;	% no locally exported or defined predicates; xref diagram empty
 			NodeOptions = Options
 		),
