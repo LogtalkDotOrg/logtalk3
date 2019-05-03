@@ -9,8 +9,8 @@
 Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.
 
 | **Author:** Paulo Moura
-| **Version:** 1.16
-| **Date:** 2019/4/30
+| **Version:** 1.17
+| **Date:** 2019/5/2
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -34,13 +34,13 @@ Private predicates
 
 .. raw:: html
 
-   <div id="sub_diagrams_/2"> </div>
+   <div id="sub_diagram_/2"> </div>
 
-.. index:: sub_diagrams_/2
-.. _directory_dependency_diagram/1::sub_diagrams_/2:
+.. index:: sub_diagram_/2
+.. _directory_dependency_diagram/1::sub_diagram_/2:
 
-``sub_diagrams_/2``
-^^^^^^^^^^^^^^^^^^^
+``sub_diagram_/2``
+^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
