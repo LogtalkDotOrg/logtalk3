@@ -108,7 +108,6 @@
 	default_option(directory_paths(false)).
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
-	% by default, print node type captions
 	% by default, print external nodes:
 	default_option(externals(true)).
 	% by default, print node type captions:
