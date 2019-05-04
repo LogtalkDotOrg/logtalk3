@@ -44,6 +44,7 @@
 		coroutining_loader,
 		zippers_loader,
 		reader_loader,
+		timeout_loader,
 		gensym,
 		counters,
 		streamvars

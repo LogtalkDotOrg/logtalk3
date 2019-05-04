@@ -1,0 +1,71 @@
+.. index:: timeout
+.. _timeout/0:
+
+**object**
+
+``timeout``
+===========
+
+Call goal with a time limit predicates.
+
+| **Author:** Paulo Moura
+| **Version:** 0.1
+| **Date:** 2019/5/3
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="call_with_time_limit/2"> </div>
+
+.. index:: call_with_time_limit/2
+.. _timeout/0::call_with_time_limit/2:
+
+``call_with_time_limit/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Calls a goal with the given time limit (expressed in seconds).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``call_with_time_limit(Time,Goal)``
+| **Meta-predicate template:**
+|    ``call_with_time_limit(*,0)``
+| **Mode and number of proofs:**
+|    ``call_with_time_limit(+integer,+callable)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    Goal does not complete in the allowed time:
+|        ``timeout(Goal)``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Supported backend Prolog systems**: ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.
+

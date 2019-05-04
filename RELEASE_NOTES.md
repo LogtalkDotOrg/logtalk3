@@ -44,6 +44,13 @@ Documentation
 * ADDED: Predicate cross-referencing diagrams linked from the core, library,
 tools, ports, and contributions inheritance diagrams.
 
+Library
+-------
+
+* ADDED: Timeout library supporting ECLiPSe, SICStus Prolog, SWI-Prolog,
+and YAP as backend Prolog systems. Provides a portable abstraction over how
+the to call a predicate with a time limit.
+
 Tools
 -----
 
