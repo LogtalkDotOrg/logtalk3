@@ -9,8 +9,8 @@
 Call goal with a time limit predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0.1
-| **Date:** 2019/5/3
+| **Version:** 0.2
+| **Date:** 2019/5/4
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,25 +24,25 @@ Public interface
 
 .. raw:: html
 
-   <div id="call_with_time_limit/2"> </div>
+   <div id="call_with_timeout/2"> </div>
 
-.. index:: call_with_time_limit/2
-.. _timeout/0::call_with_time_limit/2:
+.. index:: call_with_timeout/2
+.. _timeout/0::call_with_timeout/2:
 
-``call_with_time_limit/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+``call_with_timeout/2``
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Calls a goal with the given time limit (expressed in seconds).
+Calls a goal deterministically with the given time limit (expressed in seconds).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``call_with_time_limit(Time,Goal)``
+|    ``call_with_timeout(Goal,Timeout)``
 | **Meta-predicate template:**
-|    ``call_with_time_limit(*,0)``
+|    ``call_with_timeout(0,*)``
 | **Mode and number of proofs:**
-|    ``call_with_time_limit(+integer,+callable)`` - ``zero_or_one``
+|    ``call_with_timeout(+callable,+integer)`` - ``zero_or_one``
 
 | **Exceptions:**
 |    Goal does not complete in the allowed time:

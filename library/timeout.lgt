@@ -21,21 +21,21 @@
 :- object(timeout).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/05/03,
+		date is 2019/05/04,
 		comment is 'Call goal with a time limit predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
 		]
 	]).
 
-	:- public(call_with_time_limit/2).
-	:- meta_predicate(call_with_time_limit(*, 0)).
-	:- mode(call_with_time_limit(+integer, +callable), zero_or_one).
-	:- info(call_with_time_limit/2, [
-		comment is 'Calls a goal with the given time limit (expressed in seconds).',
-		argnames is ['Time', 'Goal'],
+	:- public(call_with_timeout/2).
+	:- meta_predicate(call_with_timeout(0, *)).
+	:- mode(call_with_timeout(+callable, +integer), zero_or_one).
+	:- info(call_with_timeout/2, [
+		comment is 'Calls a goal deterministically with the given time limit (expressed in seconds).',
+		argnames is ['Goal', 'Timeout'],
 		exceptions is [
 			'Goal does not complete in the allowed time' - timeout('Goal')
 		]
@@ -43,35 +43,39 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
-		call_with_time_limit(Time, Goal) :-
-			timeout:timeout(once(Goal), Time, throw(timeout(Goal))).
+		call_with_timeout(Goal, Time) :-
+			context(Context),
+			timeout:timeout(once(Goal), Time, throw(error(timeout(Goal),Context))).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-		call_with_time_limit(Time, Goal) :-
+		call_with_timeout(Goal, Time) :-
+			context(Context),
 			Seconds is Time * 1000,
 			timeout:time_out(once(Goal), Seconds, Result),
 			(	Result == time_out ->
-				throw(timeout(Goal))
+				throw(error(timeout(Goal),Context))
 			;	true
 			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
-		call_with_time_limit(Time, Goal) :-
+		call_with_timeout(Goal, Time) :-
+			context(Context),
 			catch(
 				time:call_with_time_limit(Time, Goal),
 				time_limit_exceeded,
-				throw(timeout(Goal))
+				throw(error(timeout(Goal),Context))
 			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
-		call_with_time_limit(Time, Goal) :-
+		call_with_timeout(Goal, Time) :-
+			context(Context),
 			Seconds is Time * 1000,
 			timeout:time_out(once(Goal), Seconds, Result),
 			(	Result == time_out ->
-				throw(timeout(Goal))
+				throw(error(timeout(Goal),Context))
 			;	true
 			).
 

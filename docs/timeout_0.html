@@ -314,8 +314,8 @@
 <p>Call goal with a time limit predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0.1</div>
-<div class="line"><strong>Date:</strong> 2019/5/3</div>
+<div class="line"><strong>Version:</strong> 0.2</div>
+<div class="line"><strong>Date:</strong> 2019/5/4</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -326,9 +326,9 @@
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
-<div id="call_with_time_limit/2"> </div><div class="section" id="call-with-time-limit-2">
-<span id="timeout-0-call-with-time-limit-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">call_with_time_limit/2</span></code><a class="headerlink" href="#call-with-time-limit-2" title="Permalink to this headline">¶</a></h3>
-<p>Calls a goal with the given time limit (expressed in seconds).</p>
+<div id="call_with_timeout/2"> </div><div class="section" id="call-with-timeout-2">
+<span id="timeout-0-call-with-timeout-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">call_with_timeout/2</span></code><a class="headerlink" href="#call-with-timeout-2" title="Permalink to this headline">¶</a></h3>
+<p>Calls a goal deterministically with the given time limit (expressed in seconds).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -338,15 +338,15 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">call_with_time_limit(Time,Goal)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">call_with_timeout(Goal,Timeout)</span></code></div>
 </div>
 <div class="line"><strong>Meta-predicate template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">call_with_time_limit(*,0)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">call_with_timeout(0,*)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">call_with_time_limit(+integer,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">call_with_timeout(+callable,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div class="line-block">

@@ -159,6 +159,11 @@ entities in entity, inheritance, or uses diagrams.
 * FIXED: Case where predicate cross-referencing diagrams would includes nodes
 for local auxiliary predicates.
 
+Tests
+-----
+
+* ADDED: Unit tests for the new `timeout` library.
+
 Examples
 --------
 
