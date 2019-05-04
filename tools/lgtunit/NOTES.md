@@ -204,7 +204,8 @@ In the case of the `true(Assertion)` and `deterministic(Assertion)` outcomes,
 a message that includes the assertion goal is printed for assertion failures
 and errors to help to debug failed unit tests. Note that this message is only
 printed when the test goal succeeds as its failure will prevent the assertion
-goal from being called.
+goal from being called. This allows distinguishing between test goal failure
+and assertion failure.
 
 Some tests may require individual condition, setup, or cleanup goals. In this
 case, the following alternative test dialect can be used:
@@ -407,7 +408,23 @@ For testing non-deterministic predicates (with a finite and manageable number
 of solutions), you can wrap the test goal using the standard `findall/3`
 predicate to collect all solutions and check against the list of expected
 solutions. When the expected solutions are a set, use in alternative the
-standard `setof/3` predicate.
+standard `setof/3` predicate. Ground results can be compared using the `==/2`
+predicate. Non-ground results can be compared using the `variant/2` predicate
+provided by `lgtunit`.
+
+
+Testing generators
+------------------
+
+To test all solutions of a predicate that acts as a *generator*, we can use
+the `forall/2` predicate as the test goal with the `assertion/2` predicate
+called to report details on any solution that fails the test. For example:
+
+	test(test_solution_generator) :-
+		forall(
+			generator(X, Y, Z),
+			assertion(solution(X,Y,Z), my_test(X,Y,Z))
+		).
 
 
 Testing input/output predicates
