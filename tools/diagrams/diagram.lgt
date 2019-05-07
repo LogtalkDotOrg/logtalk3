@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.42,
+		version is 2.43,
 		author is 'Paulo Moura',
-		date is 2019/05/03,
+		date is 2019/05/07,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -1222,6 +1222,11 @@
 	% allow other tools such as IDEs to intercept and handle results
 
 	:- protected(message_diagram_description/1).
+	:- mode(message_diagram_description(?atom), one).
+	:- info(message_diagram_description/1, [
+		comment is 'Diagram description for progress messages.',
+		argnames is ['Description']
+	]).
 
 	% default definition; should never be required
 	message_diagram_description(Description) :-

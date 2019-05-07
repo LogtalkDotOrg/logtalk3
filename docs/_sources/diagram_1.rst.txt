@@ -9,8 +9,8 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.42
-| **Date:** 2019/5/3
+| **Version:** 2.43
+| **Date:** 2019/5/7
 
 | **Compilation flags:**
 |    ``static``
@@ -1143,8 +1143,15 @@ Adds node zoom options when using the zoom option.
 ``message_diagram_description/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Diagram description for progress messages.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``message_diagram_description(Description)``
+| **Mode and number of proofs:**
+|    ``message_diagram_description(?atom)`` - ``one``
 
 
 Private predicates
