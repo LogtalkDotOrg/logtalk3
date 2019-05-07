@@ -138,7 +138,7 @@
 	    findall(
 			SubList,
 			(	between(1, NumRows, _),
-				random::random(2, 30, NumColumns),
+				random::between(2, 29, NumColumns),
 				random::sequence(NumColumns, 1, NumColumns, SubList)
 			),
 			A
