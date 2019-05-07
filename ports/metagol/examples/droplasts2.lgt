@@ -37,19 +37,9 @@
 :- set_logtalk_flag(hook, metagol).
 
 
-:- object(droplasts,
+:- object(droplasts2,
 	implements(metagol_example_protocol),
 	extends(metagol)).
-
-	%% this example demonstrates a more normal setting with extra/redundant metarules and BK predicates.
-	%% the example is from the papers:
-	%% A. Cropper and S.H. Muggleton. Learning higher-order logic programs through abstraction and invention. IJCAI 2016.
-	%% R. Morel, A. Cropper, and L. Ong. Typed meta-interpretive learning of logic programs.  JELIA 2019.
-
-	%% target theory is:
-	%% f(A,B):-map(A,B,f_1).
-	%% f_1(A,B):-my_reverse(A,C),f_2(C,B).
-	%% f_2(A,B):-my_tail(A,C),my_reverse(C,B).
 
 	:- uses(integer, [between/3, succ/2]).
 	:- uses(list, [last/2, length/2, msort/2, reverse/2, valid/1 as is_list/1]).
@@ -133,21 +123,34 @@
 	ibk([filter,[A|T1],[A|T2],F],[[F,A],[filter,T1,T2,F]]).
 	ibk([filter,[_|T1],T2,F],[[filter,T1,T2,F]]).
 
-	gen_ex(A,B):-
-		random::between(2, 30, NumRows),
+	:- meta_predicate(map(*, *, 2)).
+	map([],[],_F).
+	map([A|As],[B|Bs],F):-
+		call(F,A,B),
+		map(As,Bs,F).
+
+	:- meta_predicate(reduceback(*, *, 3)).
+	reduceback([Last],Last,_F).
+	reduceback([A|T],Out,F):-
+		reduceback(T,C,F),
+		call(F,C,A,Out).
+
+	gen_ex(A, B):-
+		NumRows = 4,
 		findall(
 			SubList,
 			(	between(1, NumRows, _),
-				random::between(2, 29, NumColumns),
+				random::between(2, 7, NumColumns),
 				random::sequence(NumColumns, 1, NumColumns, SubList)
 			),
 			A
 		),
-		maplist(my_droplast, A, B).
+		maplist(my_droplast, A, C),
+		my_droplast(C, B).
 
 	learn(Clauses) :-
-		findall(f(A,B), (between(1,5,_),gen_ex(A,B)), Pos),
-		^^learn(Pos,[], Prog),
+		findall(f(A,B), (between(1,5,_), gen_ex(A,B)), Pos),
+		^^learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

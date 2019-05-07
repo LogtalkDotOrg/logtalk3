@@ -38,7 +38,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
 		date is 2019/05/07,
 		comment is 'Unit tests for the "metagol" example.'
@@ -91,6 +91,18 @@
 				(f(A, B) :- map(A, B, f_1)),
 				(f_1(C, E) :- my_reverse(C, D), f_2(D, E)),
 				(f_2(F, H) :- my_tail(F, G), my_reverse(G, H))
+			]
+		).
+
+	test(metagol_droplasts2_1) :-
+		droplasts2::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[
+				(f(A, B) :- f_1(A, C), f_2(C, B)),
+				(f_1(D, E):-map(D, E, f_2)),
+				(f_2(F, G):-my_reverse(F, H),f_3(H, G)),
+				(f_3(I, J):-my_tail(I, K),my_reverse(K, J))
 			]
 		).
 
