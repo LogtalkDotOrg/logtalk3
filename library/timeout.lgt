@@ -21,18 +21,18 @@
 :- object(timeout).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2019/05/04,
+		date is 2019/05/07,
 		comment is 'Call goal with a time limit predicates.',
 		remarks is [
-			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
+			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
 		]
 	]).
 
 	:- public(call_with_timeout/2).
 	:- meta_predicate(call_with_timeout(0, *)).
-	:- mode(call_with_timeout(+callable, +integer), zero_or_one).
+	:- mode(call_with_timeout(+callable, +positive_number), zero_or_one).
 	:- info(call_with_timeout/2, [
 		comment is 'Calls a goal deterministically with the given time limit (expressed in seconds).',
 		argnames is ['Goal', 'Timeout'],
@@ -41,7 +41,18 @@
 		]
 	]).
 
-	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+	:- if(current_logtalk_flag(prolog_dialect, b)).
+
+		call_with_timeout(Goal, Time) :-
+			context(Context),
+			MilliSeconds is truncate(Time * 1000),
+			time_out(Goal, MilliSeconds, Result),
+			(	Result == time_out ->
+				throw(error(timeout(Goal),Context))
+			;	true
+			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		call_with_timeout(Goal, Time) :-
 			context(Context),
@@ -51,8 +62,8 @@
 
 		call_with_timeout(Goal, Time) :-
 			context(Context),
-			Seconds is Time * 1000,
-			timeout:time_out(once(Goal), Seconds, Result),
+			MilliSeconds is truncate(Time * 1000),
+			timeout:time_out(once(Goal), MilliSeconds, Result),
 			(	Result == time_out ->
 				throw(error(timeout(Goal),Context))
 			;	true
@@ -72,8 +83,8 @@
 
 		call_with_timeout(Goal, Time) :-
 			context(Context),
-			Seconds is Time * 1000,
-			timeout:time_out(once(Goal), Seconds, Result),
+			MilliSeconds is truncate(Time * 1000),
+			timeout:time_out(once(Goal), MilliSeconds, Result),
 			(	Result == time_out ->
 				throw(error(timeout(Goal),Context))
 			;	true
