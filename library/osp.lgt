@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.23,
+		version is 1.24,
 		author is 'Paulo Moura',
-		date is 2018/03/07,
+		date is 2019/05/07,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os, os_types]
 	]).
@@ -186,7 +186,7 @@
 	:- mode(date_time(-integer, -integer, -integer, -integer, -integer, -integer, -integer), one).
 	:- info(date_time/7, [
 		comment is 'Returns the current date and time.',
-		argnames is ['Year', 'Month', 'Day', 'Hours', 'Minutes', 'Seconds', 'Miliseconds']
+		argnames is ['Year', 'Month', 'Day', 'Hours', 'Minutes', 'Seconds', 'Milliseconds']
 	]).
 
 	:- public(cpu_time/1).

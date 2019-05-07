@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.52,
+		version is 1.53,
 		author is 'Paulo Moura',
-		date is 2019/03/18,
+		date is 2019/05/07,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -151,18 +151,18 @@
 		time_stamp(Time) :-
 			{get_time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds) :-
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
 			{get_time(TimeStamp),
 			 stamp_date_time(TimeStamp, date(Year,Month,Day,Hours,Minutes,Seconds0,_,_,_), local),
 			 Seconds is truncate(float_integer_part(Seconds0)),
-			 Miliseconds is round(float_fractional_part(Seconds0)*1000)}.
+			 Milliseconds is round(float_fractional_part(Seconds0)*1000)}.
 
 		cpu_time(Seconds) :-
 			{statistics(cputime, Seconds)}.
 
 		wall_time(Seconds) :-
-			{statistics(walltime, [Miliseconds, _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(walltime, [Milliseconds, _])},
+			Seconds is Milliseconds / 1000.
 
 		operating_system_type(Type) :-
 			(	current_prolog_flag(windows, true) ->
@@ -268,12 +268,12 @@
 			{datime(datime(Year, Month, Day, Hours, Minutes, Seconds))}.
 
 		cpu_time(Seconds) :-
-			{statistics(runtime, [Miliseconds| _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(runtime, [Milliseconds| _])},
+			Seconds is Milliseconds / 1000.
 
 		wall_time(Seconds) :-
-			{statistics(walltime, [Miliseconds, _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(walltime, [Milliseconds, _])},
+			Seconds is Milliseconds / 1000.
 
 		operating_system_type(Type) :-
 			(	current_prolog_flag(windows, true) ->
@@ -479,12 +479,12 @@
 			{date_time(dt(Year, Month, Day, Hours, Minutes, Seconds))}.
 
 		cpu_time(Seconds) :-
-			{cpu_time(Miliseconds)},
-			Seconds is Miliseconds / 1000.
+			{cpu_time(Milliseconds)},
+			Seconds is Milliseconds / 1000.
 
 		wall_time(Seconds) :-
-			{real_time(Miliseconds)},
-			Seconds is Miliseconds / 1000.
+			{real_time(Milliseconds)},
+			Seconds is Milliseconds / 1000.
 
 		operating_system_type(Type) :-
 			(	{os_version(Version)},
@@ -592,8 +592,8 @@
 			{date(Year, Month, Day), time(Hours, Minutes, Seconds)}.
 
 		cpu_time(Seconds) :-
-			{statistics(runtime, [Miliseconds| _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(runtime, [Milliseconds| _])},
+			Seconds is Milliseconds / 1000.
 
 		wall_time(_) :-
 			throw(not_available(wall_time/1)).
@@ -700,12 +700,12 @@
 			{datime(datime(Year, Month, Day, Hours, Minutes, Seconds))}.
 
 		cpu_time(Seconds) :-
-			{statistics(runtime, [Miliseconds| _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(runtime, [Milliseconds| _])},
+			Seconds is Milliseconds / 1000.
 
 		wall_time(Seconds) :-
-			{statistics(walltime, [Miliseconds, _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(walltime, [Milliseconds, _])},
+			Seconds is Milliseconds / 1000.
 
 		operating_system_type(Type) :-
 			(	{environ('COMSPEC', _)} ->
@@ -923,12 +923,12 @@
 			{datime(_, Year, Month, Day, Hours, Minutes, Seconds, _, _)}.
 
 		cpu_time(Seconds) :-
-			{statistics(runtime, [Miliseconds| _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(runtime, [Milliseconds| _])},
+			Seconds is Milliseconds / 1000.
 
 		wall_time(Seconds) :-
-			{statistics(walltime, [Miliseconds| _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(walltime, [Milliseconds| _])},
+			Seconds is Milliseconds / 1000.
 
 		operating_system_type(Type) :-
 			(	{getenvstr('COMSPEC', _)} ->
@@ -1170,8 +1170,8 @@
 			Month is Month2 + 1.
 
 		cpu_time(Seconds) :-
-			{statistics(runtime, [Miliseconds,_])},
-			Seconds is Miliseconds / 1000.
+			{statistics(runtime, [Milliseconds,_])},
+			Seconds is Milliseconds / 1000.
 
 		wall_time(Seconds) :-
 			{gettimeofday(Seconds)}.
@@ -1445,12 +1445,12 @@
 			{time(time(Hours, Minutes, Seconds))}.
 
 		cpu_time(Seconds) :-
-			{statistics(runtime, [Miliseconds| _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(runtime, [Milliseconds| _])},
+			Seconds is Milliseconds / 1000.
 
 		wall_time(Seconds) :-
-			{statistics(real_time, [Miliseconds, _])},
-			Seconds is Miliseconds / 1000.
+			{statistics(real_time, [Milliseconds, _])},
+			Seconds is Milliseconds / 1000.
 
 		operating_system_type(Type) :-
 			(	{environ('COMSPEC', _)} ->
@@ -1559,16 +1559,16 @@
 		time_stamp(Time) :-
 			{get_time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds) :-
-			{time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds)}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
+			{time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds)}.
 
 		cpu_time(Seconds) :-
-			Miliseconds is cputime,
-			Seconds is Miliseconds / 1000.
+			Milliseconds is cputime,
+			Seconds is Milliseconds / 1000.
 
 		wall_time(Seconds) :-
-			{get_time(Miliseconds)},
-			Seconds is Miliseconds / 1000.
+			{get_time(Milliseconds)},
+			Seconds is Milliseconds / 1000.
 
 		operating_system_type(Type) :-
 			{invoke('java.lang.System', getProperty('java.lang.String'), ['os.name'], Name)},
@@ -1581,8 +1581,8 @@
 			throw(not_available(command_line_arguments/1)).
 
 		sleep(Seconds) :-
-			Miliseconds is Seconds * 1000,
-			{sleep(Miliseconds)}.
+			Milliseconds is Seconds * 1000,
+			{sleep(Milliseconds)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, jekejeke)).
 
@@ -1655,12 +1655,12 @@
 		date_time(0, 0, 0, 0, 0, 0, 0).
 
 		cpu_time(Seconds) :-
-			{statistics(time, Miliseconds)},
-			Seconds is Miliseconds / 1000 .
+			{statistics(time, Milliseconds)},
+			Seconds is Milliseconds / 1000 .
 
 		wall_time(Seconds) :-
-			{statistics(uptime, Miliseconds)},
-			Seconds is Miliseconds / 1000 .
+			{statistics(uptime, Milliseconds)},
+			Seconds is Milliseconds / 1000 .
 
 		operating_system_type(Type) :-
 			(	{getenv('COMSPEC', _)} ->

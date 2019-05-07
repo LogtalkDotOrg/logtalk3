@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.9,
+		version is 0.11,
 		author is 'Paulo Moura',
-		date is 2019/01/30,
+		date is 2019/05/07,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -43,14 +43,14 @@
 		TimeStamp1 @=< TimeStamp2.
 
 	test(os_date_time_7_01) :-
-		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds),
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds),
 		integer(Year),
 		integer(Month),
 		integer(Day),
 		integer(Hours),
 		integer(Minutes),
 		integer(Seconds),
-		integer(Miliseconds).
+		integer(Milliseconds).
 
 	test(os_decompose_file_name_3_01) :-
 		os::decompose_file_name('/home/user/foo.bar', Directory, Basename),

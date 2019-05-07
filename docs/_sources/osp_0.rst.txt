@@ -9,8 +9,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.23
-| **Date:** 2018/3/7
+| **Version:** 1.24
+| **Date:** 2019/5/7
 
 | **Compilation flags:**
 |    ``static``
@@ -500,7 +500,7 @@ Returns the current date and time.
 |    ``static``
 
 | **Template:**
-|    ``date_time(Year,Month,Day,Hours,Minutes,Seconds,Miliseconds)``
+|    ``date_time(Year,Month,Day,Hours,Minutes,Seconds,Milliseconds)``
 | **Mode and number of proofs:**
 |    ``date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
 
