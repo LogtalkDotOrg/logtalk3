@@ -41,16 +41,20 @@
 	extends(metagol)).
 
 	%% tell metagol to use the BK
-	prim(copy1/2).
-	prim(skip1/2).
+	body_pred(copy1/2).
+	body_pred(skip1/2).
 
 	%% metarules
-	metarule([P,Q],   [P,A,B], [[Q,A,C],[P,C,B]]).
+	metarule([P,Q],   [P,A,B], [[Q,A,B]]).
+	metarule([P,Q,R], [P,A,B], [[Q,A],[R,A,B]]).
+	metarule([P,Q,R], [P,A,B], [[Q,A,B],[R,A]]).
+	metarule([P,Q,R], [P,A,B], [[Q,A,B],[R,A,B]]).
 	metarule([P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
+	metarule([P,Q],   [P,A,B], [[Q,A,C],[P,C,B]]).
 
 	%% background knowledge
-	copy1([A|T1]/[A|T2],[A|T1]/T2).
-	skip1([_|T1]/Out,T1/Out).
+	copy1([H|RestIn]/[H|RestOut],[H|RestIn]/RestOut).
+	skip1([_|RestIn]/Out,RestIn/Out).
 
 	:- public(learn/1).
 	learn(Clauses) :-
@@ -60,11 +64,11 @@
 			f(['a','c']/['a','a','c','c'],_/[])
 		],
 		::learn(Pos, [], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

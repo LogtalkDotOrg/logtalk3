@@ -60,11 +60,11 @@
 			p(3,1)
 		],
 		::learn(Pos, Neg, Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

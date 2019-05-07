@@ -178,7 +178,7 @@ Ports
 * ADDED: Port of Metagol examples from the (Evans & Greffenstette, 2018) paper.
 Original Prolog examples source code files contributed by MystikNinja.
 
-* UPDATED: Sync Metagol port with upstream changes (2.3.0 release).
+* UPDATED: Sync Metagol port with upstream changes (commit 044f337).
 
 Installers and installation scripts
 -----------------------------------

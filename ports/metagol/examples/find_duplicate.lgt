@@ -44,14 +44,13 @@
 
 	%% metagol settings
 	functional.
-	fold_program.
-	max_clauses(4).
 
 	%% tell metagol to use the BK
-	prim(mergesort/2).
-	prim(tail/2).
-	prim(head/2).
-	prim(element/2).
+	body_pred(mergesort/2).
+	body_pred(tail/2).
+	body_pred(head/2).
+	body_pred(element/2).
+	body_pred(mylast/2).
 
 	%% metarules
 	metarule(dident,  [P,Q,R], [P,A,B], [[Q,A,B],[R,A,B]]).
@@ -61,9 +60,15 @@
 	%% background knowledge
 	head([H|_],H).
 	tail([_|T],T).
+	mylast([A],A) :- !.
+	mylast([_|T],A) :-
+		mylast(T,A).
+
 	element([X|_T],X).
-	element([_|T],X) :- element(T,X).
-	mergesort([H|T],B) :- A = [H|T], msort(A,C), C = B, A \= B.
+	element([_|T],X) :-
+		element(T,X).
+	mergesort([H|T],B) :-
+		msort([H|T],B).
 
 	%% functional test
 	func_test(Atom1, Atom2, Condition):-
@@ -81,11 +86,11 @@
 			f([14,4,13,6,12,1,9,2,10,8,15,5,7,14,3,11],14)
 		],
 		::learn(Pos, [], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

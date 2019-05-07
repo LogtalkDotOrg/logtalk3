@@ -40,9 +40,11 @@
 :- object(kinship1,
 	extends(metagol)).
 
-	%% tell metagol to use the BK
-	prim(mother/2).
-	prim(father/2).
+	%% preds that metagol can use in the body of a clause
+	body_pred(mother/2).
+	body_pred(father/2).
+
+	body_pred(shoe/1).
 
 	%% metarules
 	metarule([P,Q],   [P,A,B], [[Q,A,B]]).
@@ -68,9 +70,10 @@
 			grandparent(steve,spongebob),
 			grandparent(linda,amelia)
 		],
-		Neg = [grandparent(amy,amelia)],
+%%		Neg = [grandparent(amy,amelia)],
+		Neg = [],
 		::learn(Pos, Neg, Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn1/0).
 	learn1 :-

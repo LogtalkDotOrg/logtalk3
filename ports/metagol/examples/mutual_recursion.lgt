@@ -43,12 +43,12 @@
 	:- uses(list, [member/2]).
 
 	%% tell metagol to use the BK
-	prim(s/2).
+	body_pred(s/2).
 
 	%% metarules
 	metarule(base,   [P,A],   [P,A], []).
-	metarule(mutual, [P,Q,R], [P,A], [[Q,A,B],[R,B]], PS) :-
-		member(sym(R,1,_),PS). %% explicitly bind R to a symbol on the predicate signature
+	metarule(mutual, [P,Q,R], [P,A], [[Q,A,B],[R,B]]) :-
+		::type(R,1,head_pred).
 
 	%% background knowledge
 	s(10,9).
@@ -68,11 +68,11 @@
 		Pos = [even(10),even(8),even(6),even(4),even(2)],
 		Neg = [even(3)],
 		::learn(Pos, Neg, Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

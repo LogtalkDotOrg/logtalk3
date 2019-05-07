@@ -41,7 +41,7 @@
 	extends(metagol)).
 
 	%% tell metagol to use the BK
-	prim(parent/2).
+	body_pred(parent/2).
 
 	%% metarules
 	metarule([P,Q], [P,A,B], [[Q,A,B]]).
@@ -69,11 +69,11 @@
 			ancestor(queen_mother,prince_william)
 		],
 		::learn(Pos, [], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

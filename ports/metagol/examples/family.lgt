@@ -51,8 +51,8 @@
 	father(andy,spongebob).
 
 	%% predicates that can be used in the learning
-	prim(mother/2).
-	prim(father/2).
+	body_pred(mother/2).
+	body_pred(father/2).
 
 	%% metarules
 	metarule([P,Q],   [P,A,B], [[Q,A,B]]).
@@ -75,11 +75,11 @@
 			grandparent(amy,amelia)
 		],
 		::learn(Pos, Neg, Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

@@ -41,8 +41,8 @@
 	extends(metagol)).
 
 	%% tell metagol to use BK
-	prim(mother/2).
-	prim(father/2).
+	body_pred(mother/2).
+	body_pred(father/2).
 
 	%% metarules
 	metarule([P,Q],   [P,A,B], [[Q,A,B]]).

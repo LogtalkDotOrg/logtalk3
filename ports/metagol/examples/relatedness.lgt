@@ -41,7 +41,7 @@
 	extends(metagol)).
 
 	%% tell Metagol to use the BK
-	prim(parent/2).
+	body_pred(parent/2).
 
 	%% metarules
 	metarule([P,Q],   [P,A,B], [[Q,A,B]]).
@@ -75,11 +75,11 @@
 			target(g,b)
 		],
 		::learn(Pos, Neg, Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

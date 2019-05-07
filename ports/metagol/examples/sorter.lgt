@@ -56,12 +56,12 @@
 	max_clauses(4).
 
 	%% tell metagol to use the BK
-	prim(comp_adjacent/2).
-	prim(decrement_end/2).
-	prim(go_to_start/2).
-	prim(pick_up_left/2).
-	prim(split/2).
-	prim(combine/2).
+	body_pred(comp_adjacent/2).
+	body_pred(decrement_end/2).
+	body_pred(go_to_start/2).
+	body_pred(pick_up_left/2).
+	body_pred(split/2).
+	body_pred(combine/2).
 
 	%% metarules
 	metarule(tailrec, [P,Q],   [P,A,B], [[Q,A,C],@term_gt(A,C),[P,C,B],@term_gt(C,B)]).
@@ -69,6 +69,7 @@
 
 	:- public(learn/1).
 	learn(Clauses) :-
+		set_seed(111),
 		examples(10,TrainExamples),
 		::learn(TrainExamples, [], G),
 		::pclauses(G, Clauses).
@@ -76,7 +77,7 @@
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 	example(N,A,B) :-
 		randseq(N,1,N,L1),
@@ -186,7 +187,7 @@
 		move_left(A,C),
 		unbag_right(C,B).
 
-	%% BSORT PRIMS
+	%% BSORT body_predS
 	comp_adj(A,B) :- next_gt_current(A), !, move_right(A,B).
 	comp_adj(A,B) :- next_lt_current(A), !, swap_adj(A,C), move_right(C,B).
 
@@ -215,7 +216,7 @@
 		Y @> X.
 
 
-	%% QSORT PRIMS
+	%% QSORT body_predS
 	add_intervals(A,B) :-
 		world_check(intervals(Intervals1),A),
 		Intervals1 = [StartPos-EndPos|_],

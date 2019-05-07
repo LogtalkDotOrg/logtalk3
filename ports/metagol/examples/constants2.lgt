@@ -43,7 +43,7 @@
 	:- uses(integer, [between/3]).
 
 	%% tell metagol to use the BK
-	prim(num/1).
+	body_pred(num/1).
 
 	%% metarules
 	metarule([P,Q,A], [P,A,B], [[Q,A],[Q,B]]).
@@ -74,11 +74,11 @@
 			q(3,1)
 		],
 		::learn(Pos, Neg, Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

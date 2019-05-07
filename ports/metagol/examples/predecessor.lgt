@@ -41,10 +41,12 @@
 	extends(metagol)).
 
 	%% tell Metagol to use the BK
-	prim(succ/2).
+	body_pred(succ/2).
 
 	%% metarules
-	metarule([P,Q], [P,A,B], [[Q,B,A]]).
+	metarule(ident,   [P,Q],   [P,A,B], [[Q,A,B]]).
+	metarule(inverse, [P,Q],   [P,A,B], [[Q,B,A]]).
+	metarule(chain,   [P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
 
 	%% background knowledge
 	succ(I, J) :-
@@ -77,11 +79,11 @@
 			target(5,6)
 		],
 		::learn(Pos, Neg, Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

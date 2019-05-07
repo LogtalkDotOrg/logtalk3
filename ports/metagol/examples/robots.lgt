@@ -41,21 +41,22 @@
 	extends(metagol)).
 
 	%% metagol settings
-	%% functional.
-	max_clauses(10).
-	unfold_program.
+	functional.
+	max_clauses(6).
 
 	%% tell metagol to use the BK
-	prim(move_left/2).
-	prim(move_right/2).
-	prim(move_forwards/2).
-	prim(move_backwards/2).
-	prim(grab_ball/2).
-	prim(drop_ball/2).
+	body_pred(move_left/2).
+	body_pred(move_right/2).
+	body_pred(move_forwards/2).
+	body_pred(move_backwards/2).
+	body_pred(grab_ball/2).
+	body_pred(drop_ball/2).
 
 	%% metarules
-	metarule([P,Q],   [P,A,B], [[Q,A,B]]).
-	metarule([P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
+	metarule(ident,   [P,Q],   [P,A,B], [[Q,A,B]]).
+	metarule(precon,  [P,Q,R], [P,A,B], [[Q,A,B],[R,A]]).
+	metarule(postcon, [P,Q,R], [P,A,B], [[Q,A,B],[R,B]]).
+	metarule(chain,   [P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
 
 	%% functional check
 	func_test(Atom1, Atom2, Condition):-
@@ -68,25 +69,25 @@
 	learn1(Clauses) :-
 		Pos = [f(world((1/1),(1/1),false),world((3/3),(3/3),false))],
 		::learn(Pos, [], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn2/1).
 	learn2(Clauses) :-
 		Pos = [f(world((1/1),(1/1),false),world((5/5),(5/5),false))],
 		::learn(Pos, [], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn3/1).
 	learn3(Clauses) :-
 		Pos = [f(world((1/1),(1/1),false),world((6/6),(6/6),false))],
 		::learn(Pos, [], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn4/1).
 	learn4(Clauses) :-
 		Pos = [f(world((1/1),(1/1),false),world((7/7),(7/7),false))],
 		::learn(Pos, [], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn1/0).
 	learn1 :-

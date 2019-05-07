@@ -44,7 +44,7 @@
 	unfold_program.
 
 	%% tell Metagol to use the BK
-	prim(succ/2).
+	body_pred(succ/2).
 
 	%% metarules
 	metarule([P,Q],   [P,A,B], [[Q,A,B]]).
@@ -80,11 +80,11 @@
 			target(6,5)
 		],
 		::learn(Pos, Neg, Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

@@ -44,7 +44,7 @@
 	max_clauses(2).
 
 	%% tell metagol to use the BK
-	prim(edge/2).
+	body_pred(edge/2).
 
 	%% metarules
 	metarule([P, Q], [P, A, B], [[Q, A, B]]).
@@ -60,11 +60,11 @@
 	learn(Clauses) :-
 		Pos = [p(a, b), p(a, c), p(a, a)],
 		::learn(Pos,[], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

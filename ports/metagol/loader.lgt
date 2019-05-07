@@ -44,6 +44,7 @@
 		logtalk_load(library(types_loader)),
 		logtalk_load(library(metapredicates_loader)),
 		logtalk_load(library(meta_compiler_loader)),
+		logtalk_load(library(timeout_loader)),
 		logtalk_load(metagol, [optimize(on), hook(meta_compiler)])
 	)).
 

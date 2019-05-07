@@ -41,12 +41,21 @@
 	extends(metagol)).
 
 	:- uses(integer, [succ/2]).
-	:- uses(list, [length/2]).
+	:- uses(list, [length/2, valid/1 as is_list/1]).
 
 	%% background knowledge
-	my_double(A,B) :- integer(A), B is A*2.
-	my_succ(A,B) :- integer(A), (ground(B) -> integer(B) ; true), succ(A,B).
-	my_length(A,B) :- A = [_|_], length(A,B).
+	my_double(A,B) :-
+	    integer(A),
+	    (ground(B) -> integer(B); true),
+	    B is A*2.
+	my_succ(A,B) :-
+	    integer(A),
+	    (ground(B) -> integer(B); true),
+	    succ(A,B).
+	my_length(A,B) :-
+	    is_list(A),
+	    (ground(B) -> integer(B); true),
+	    length(A,B).
 
 	:- meta_predicate(map(*, *, 2)).
 	map([],[],_F).
@@ -54,11 +63,10 @@
 		call(F,A,B),
 		map(As,Bs,F).
 
-	%% tell metagol to use the BK
-	prim(my_succ/2).
-	prim(my_double/2).
-	prim(my_length/2).
-	interpreted(map/3).
+	%% allow metagol to use my_succ in the body of a clause
+	body_pred(my_succ/2).
+	body_pred(my_double/2).
+	body_pred(my_length/2).
 
 	%% metarules
 	metarule([P,Q,F], [P,A,B], [[Q,A,B,F]]).
@@ -71,13 +79,13 @@
 	:- public(learn/1).
 	learn(Clauses) :-
 		A = [[a],[a,a],[a,a,a],[a,a,a,a]],
-		B = [2,4,6,8],
+		B = [3,5,7,9],
 		::learn([f(A,B)], [], Prog),
-		::pclauses(Prog, Clauses).
+		^^pclauses(Prog, Clauses).
 
 	:- public(learn/0).
 	learn :-
 		learn(Clauses),
-		::pprint_clauses(Clauses).
+		^^pprint_clauses(Clauses).
 
 :- end_object.

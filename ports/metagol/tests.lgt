@@ -94,7 +94,10 @@
 			]
 		).
 
-	test(metagol_find_duplicate_1) :-
+	test(metagol_find_duplicate_1, true, [
+					condition(\+ current_logtalk_flag(prolog_dialect,eclipse)),
+					note('ECLiPSe msort/2 predicate type-checks output argument')
+			]) :-
 		find_duplicate::learn(Clauses), !,
 		^^variant(
 			Clauses,
@@ -139,7 +142,10 @@
 		higher_order1::learn(Clauses), !,
 		^^variant(
 			Clauses,
-			[(f(A, B):-map(A, B, my_succ))]
+			[
+				(f(A, B) :- map(A, B, f_1)),
+				(f_1(C, E) :- my_succ(C, D), my_succ(D, E))
+			]
 		).
 
 	test(metagol_higher_order2_1) :-
@@ -148,7 +154,8 @@
 			Clauses,
 			[
 				(f(A, B) :- map(A, B, f_1)),
-				(f_1(C, E) :- my_length(C, D), my_double(D, E))
+				(f_1(C, E) :- my_length(C, D), f_2(D, E)),
+				(f_2(F, H) :- my_double(F, G), my_succ(G, H))
 			]
 		).
 
@@ -158,8 +165,8 @@
 			Clauses,
 			[
 				(f(A, B) :- filter(A, B, f_1)),
-				(f_1(D) :- divisible2(D)),
-				(f_1(C) :- divisible5(C))
+				(f_1(C) :- mydiv(C, 2)),
+				(f_1(D) :- mydiv(D, 5))
 			]
 		).
 
@@ -174,6 +181,7 @@
 		).
 
 	test(metagol_kinship1_2) :-
+		^^suppress_text_output,
 		kinship1::learn2, !.
 
 	test(metagol_kinship2_1) :-
@@ -275,7 +283,7 @@
 			[
 				(f(G, I) :- copy1(G, H), f(H, I)),
 				(f(D, F) :- skip1(D, E), f(E, F)),
-				(f(A, C) :- copy1(A, B), skip1(B, C))
+				(f(A, C) :- skip1(A, C))
 			]
 		).
 
@@ -284,11 +292,10 @@
 		^^variant(
 			Clauses,
 			[
-				(f(_3908, _3914) :- f_1(_3908, _3946), f_2(_3946, _3914)),
-				(f_1(_4476, _4482) :- f_2(_4476, _4514), f_1(_4514, _4482)),
-				(f_2(_5046, _5052) :- copy1(_5046, _5084), skip1(_5084, _5052)),
-				(f_1(_4198, _4204) :- next_empty(_4198), f_2(_4198, _4204)),
-				(f_2(_4812, _4818) :- write1(_4812, _4818, d))
+				(f(A, C) :- f_1(A, B), f(B, C)),
+				(f_1(D, F) :- copy1(D, E), skip1(E, F)),
+				(f(G, H) :- empty(G), f_2(G, H)),
+				(f_2(I, J) :- write1(I, J, d))
 			]
 		).
 
@@ -297,11 +304,10 @@
 		^^variant(
 			Clauses,
 			[
-				(f(_1670, _1676) :- copy1(_1670, _1688), f_1(_1688, _1676)),
-				(f_1(_1778, _1784) :- f_2(_1778, _1796), f_1(_1796, _1784)),
-				(f_2(_1856, _1862) :- skip1(_1856, _1874), copy1(_1874, _1862)),
-				(f_1(_1724, _1730) :- next_empty(_1724), f_3(_1724, _1730)),
-				(f_3(_1934, _1940) :- write1(_1934, _1940, d))
+				(f(A, C) :- f_1(A, B), f(B, C)),
+				(f_1(D, F) :-copy1(D, E), skip1(E, F)),
+				(f(G, H) :- empty(G), f_1(G, H)),
+				(f_1(I, J) :- write1(I, J, d))
 			]
 		).
 
