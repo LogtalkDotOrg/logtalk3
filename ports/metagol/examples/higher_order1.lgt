@@ -38,6 +38,7 @@
 
 
 :- object(higher_order1,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	:- uses(integer, [succ/2]).
@@ -64,7 +65,6 @@
 	ibk([map,[],[],_],[]).
 	ibk([map,[A|As],[B|Bs],F],[[F,A,B],[map,As,Bs,F]]).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 				f([1,2,3],[3,4,5]),
@@ -73,7 +73,6 @@
 		::learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

@@ -38,6 +38,7 @@
 
 
 :- object(find_duplicate,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	:- uses(list, [msort/2]).
@@ -76,7 +77,6 @@
 		Atom2 = [P,A,Z],
 		Condition = (Z = B).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			f([1,3,3,4,2,5],3),
@@ -88,7 +88,6 @@
 		::learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

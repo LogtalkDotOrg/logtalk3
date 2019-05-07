@@ -38,6 +38,7 @@
 
 
 :- object(trains,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell metagol to use the BK
@@ -63,7 +64,6 @@
 	metarule([P,Q,X], [P,A],   [[Q,A,X]]).
 	metarule([P,Q,X], [P,A,B], [[Q,A,B,X]]).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			e(east1),
@@ -82,7 +82,6 @@
 		::learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

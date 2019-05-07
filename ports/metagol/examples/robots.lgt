@@ -38,6 +38,7 @@
 
 
 :- object(robots,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% metagol settings

@@ -38,6 +38,7 @@
 
 
 :- object(ibk1,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	:- uses(integer, [succ/2]).
@@ -66,12 +67,10 @@
 	ibk([map,A,B,_], [[empty,A],[empty,B]]).
 	ibk([map,A,B,F], [[head,A,H1],[head,B,H2],[F,H1,H2],[tail,A,T1],[tail,B,T2],[map,T1,T2,F]]).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		::learn([f([1,2,3],[5,6,7])], [], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

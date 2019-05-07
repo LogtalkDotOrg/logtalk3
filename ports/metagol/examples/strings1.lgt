@@ -38,6 +38,7 @@
 
 
 :- object(strings1,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell metagol to use the BK
@@ -56,7 +57,6 @@
 	copy1([H|RestIn]/[H|RestOut],[H|RestIn]/RestOut).
 	skip1([_|RestIn]/Out,RestIn/Out).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			f(['a','b','c']/['a','a','b','b','c','c'],_/[]),
@@ -66,7 +66,6 @@
 		::learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

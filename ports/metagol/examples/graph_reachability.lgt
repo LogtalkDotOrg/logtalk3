@@ -38,6 +38,7 @@
 
 
 :- object(graph_reachability,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% metagol settings
@@ -56,13 +57,11 @@
 	edge(c, a).
 	edge(a, d).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [p(a, b), p(a, c), p(a, a)],
 		::learn(Pos,[], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

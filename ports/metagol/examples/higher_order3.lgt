@@ -38,6 +38,7 @@
 
 
 :- object(higher_order3,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	:- uses(integer, [succ/2]).
@@ -123,7 +124,6 @@
 	body_pred(my_prec/2).
 	body_pred(my_double/2).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			f([1,2,3,4,5,6,7,8,9,10],[2,4,5,6,8,10]),
@@ -134,7 +134,6 @@
 		::learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

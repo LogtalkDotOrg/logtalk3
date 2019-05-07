@@ -3,6 +3,7 @@
 
 
 :- object(strings2,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	:- uses(list, [length/2]).
@@ -49,7 +50,6 @@
 		length(In2, Y),
 		X > Y.
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			f(['a','b','c']/['a','b','c','d'],_/[]),
@@ -59,7 +59,6 @@
 		::learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

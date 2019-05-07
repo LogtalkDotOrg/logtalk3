@@ -38,6 +38,7 @@
 
 
 :- object(family,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% first-order background knowledge
@@ -60,7 +61,6 @@
 	metarule([P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
 
 	%% learning task
-	:- public(learn/1).
 	learn(Clauses) :-
 		%% positive examples
 		Pos = [
@@ -77,7 +77,6 @@
 		::learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

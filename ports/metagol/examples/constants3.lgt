@@ -38,6 +38,7 @@
 
 
 :- object(constants3,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell metagol to use the BK
@@ -50,12 +51,10 @@
 	p(spongebob,laura).
 	p(patrick,amelia).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		::learn([f(andy,laura),f(andy,amelia)], [], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

@@ -38,6 +38,7 @@
 
 
 :- object(sequential,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell metagol to use BK
@@ -60,7 +61,6 @@
 	father(spongebob,sally).
 
 	%% learn parent, then grandparent, then great-grandparent
-	:- public(learn/1).
 	learn(Clauses) :-
 		T1 = [
 			parent(ann,andy),
@@ -84,7 +84,6 @@
 		::learn_seq([T1,T2,T3], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		meta::maplist(::pprint_clause, Clauses).

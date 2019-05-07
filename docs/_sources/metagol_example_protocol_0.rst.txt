@@ -1,0 +1,86 @@
+.. index:: metagol_example_protocol
+.. _metagol_example_protocol/0:
+
+**protocol**
+
+``metagol_example_protocol``
+============================
+
+Convenient learning predicates for use in examples and unit tests.
+
+| **Author:** Paulo Moura.
+| **Version:** 0.1
+| **Date:** 2019/5/7
+
+| **License:** BSD 3-Clause License
+
+| **Compilation flags:**
+|    ``static``
+
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="learn/1"> </div>
+
+.. index:: learn/1
+.. _metagol_example_protocol/0::learn/1:
+
+``learn/1``
+^^^^^^^^^^^
+
+Learns and returns set of clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Clauses)``
+| **Mode and number of proofs:**
+|    ``learn(-list(clause))`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="learn/0"> </div>
+
+.. index:: learn/0
+.. _metagol_example_protocol/0::learn/0:
+
+``learn/0``
+^^^^^^^^^^^
+
+Learns and prints a set of clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``learn`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+

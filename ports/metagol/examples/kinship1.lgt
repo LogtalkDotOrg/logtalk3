@@ -38,6 +38,7 @@
 
 
 :- object(kinship1,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% preds that metagol can use in the body of a clause

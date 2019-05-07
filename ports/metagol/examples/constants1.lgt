@@ -38,13 +38,13 @@
 
 
 :- object(constants1,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% metarules
 	metarule([P,A], [P,A,_B], []).
 	metarule([P,B], [P,_A,B], []).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			p(1,2),
@@ -62,7 +62,6 @@
 		::learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

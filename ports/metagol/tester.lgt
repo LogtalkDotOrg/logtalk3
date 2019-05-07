@@ -46,7 +46,7 @@
 		logtalk_load(library(types_loader)),
 		logtalk_load(library(metapredicates_loader)),
 		logtalk_load(library(timeout_loader)),
-		logtalk_load(metagol, [debug(on), source_data(on)]),
+		logtalk_load([metagol, metagol_example_protocol], [debug(on), source_data(on)]),
 		logtalk_load('examples/loader'),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run

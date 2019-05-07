@@ -38,6 +38,7 @@
 
 
 :- object(sequential2,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell metagol to use BK
@@ -60,7 +61,6 @@
 	father(spongebob,sally).
 
 	%% learn parent, then grandparent, then great-grandparent
-	:- public(learn/0).
 	learn :-
 		Pos1 = [
 			parent(ann,andy),

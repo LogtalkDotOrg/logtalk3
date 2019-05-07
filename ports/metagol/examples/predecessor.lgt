@@ -38,6 +38,7 @@
 
 
 :- object(predecessor,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell Metagol to use the BK
@@ -52,7 +53,6 @@
 	succ(I, J) :-
 		integer::succ(I, J).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			target(1,0),
@@ -81,7 +81,6 @@
 		::learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

@@ -42,6 +42,7 @@
 
 
 :- object(sorter,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	:- uses(list, [append/3, length/2, memberchk/2, nth1/3]).
@@ -67,14 +68,12 @@
 	metarule(tailrec, [P,Q],   [P,A,B], [[Q,A,C],@term_gt(A,C),[P,C,B],@term_gt(C,B)]).
 	metarule(chain,   [P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		set_seed(111),
 		examples(10,TrainExamples),
 		::learn(TrainExamples, [], G),
 		::pclauses(G, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

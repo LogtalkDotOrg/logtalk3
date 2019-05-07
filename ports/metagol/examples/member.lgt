@@ -38,6 +38,7 @@
 
 
 :- object(member,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell Metagol to use the BK
@@ -58,7 +59,6 @@
 	value([2,1],2).
 	value([1],1).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			target(4,[4,3,2,1]),
@@ -87,7 +87,6 @@
 		::learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

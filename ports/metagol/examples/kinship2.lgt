@@ -38,6 +38,7 @@
 
 
 :- object(kinship2,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell metagol to use the BK
@@ -61,7 +62,6 @@
 	parent(princess_diana,prince_harry).
 	parent(prince_william,prince_george).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			ancestor(elizabeth_second,prince_charles),
@@ -71,7 +71,6 @@
 		::learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

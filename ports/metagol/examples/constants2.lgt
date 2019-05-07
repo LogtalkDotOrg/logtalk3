@@ -38,6 +38,7 @@
 
 
 :- object(constants2,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	:- uses(integer, [between/3]).
@@ -58,7 +59,6 @@
 			between(0, 1000000, X).
 	:- endif.
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			q(1,2),
@@ -76,7 +76,6 @@
 		::learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).

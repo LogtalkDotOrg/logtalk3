@@ -38,6 +38,7 @@
 
 
 :- object(adjacent_to_red,
+	implements(metagol_example_protocol),
 	extends(metagol)).
 
 	%% tell Metagol to use the BK
@@ -63,7 +64,6 @@
 	red(red).
 	green(green).
 
-	:- public(learn/1).
 	learn(Clauses) :-
 		Pos = [
 			target(b),
@@ -77,7 +77,6 @@
 		::learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
-	:- public(learn/0).
 	learn :-
 		learn(Clauses),
 		^^pprint_clauses(Clauses).
