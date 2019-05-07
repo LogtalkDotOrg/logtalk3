@@ -52,7 +52,7 @@
 	p(patrick,amelia).
 
 	learn(Clauses) :-
-		::learn([f(andy,laura),f(andy,amelia)], [], Prog),
+		^^learn([f(andy,laura),f(andy,amelia)], [], Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

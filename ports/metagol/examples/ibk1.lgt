@@ -68,7 +68,7 @@
 	ibk([map,A,B,F], [[head,A,H1],[head,B,H2],[F,H1,H2],[tail,A,T1],[tail,B,T2],[map,T1,T2,F]]).
 
 	learn(Clauses) :-
-		::learn([f([1,2,3],[5,6,7])], [], Prog),
+		^^learn([f([1,2,3],[5,6,7])], [], Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

@@ -42,6 +42,7 @@
 		constants1,
 		constants2,
 		constants3,
+		droplasts,
 		family,
 		find_duplicate,
 		grandparent,

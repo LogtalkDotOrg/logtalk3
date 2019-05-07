@@ -74,7 +74,7 @@
 			target(d),
 			target(e)
 		],
-		::learn(Pos, Neg, Prog),
+		^^learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

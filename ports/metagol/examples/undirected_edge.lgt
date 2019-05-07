@@ -63,7 +63,7 @@
 		],
 		Neg = [
 		],
-		::learn(Pos, Neg, Prog),
+		^^learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

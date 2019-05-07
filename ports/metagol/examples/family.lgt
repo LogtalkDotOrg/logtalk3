@@ -74,7 +74,7 @@
 		Neg = [
 			grandparent(amy,amelia)
 		],
-		::learn(Pos, Neg, Prog),
+		^^learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

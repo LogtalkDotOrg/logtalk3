@@ -68,7 +68,7 @@
 			parent(ann,amy),
 			parent(ann,andy)
 		],
-		::learn(Pos1,[],Prog1),
+		^^learn(Pos1,[],Prog1),
 		::pprint(Prog1),
 		::assert_prim(Prog1),
 		::assert_program(Prog1),
@@ -79,7 +79,7 @@
 			grandparent(linda,amelia),
 			grandparent(ann,spongebob)
 		],
-		::learn(Pos2,[],Prog2),
+		^^learn(Pos2,[],Prog2),
 		::pprint(Prog2),
 		::assert_prim(Prog2),
 		::assert_program(Prog2),
@@ -89,7 +89,7 @@
 			great_grandparent(steve,sally)
 		],
 
-		::learn(Pos3, [], Prog3),
+		^^learn(Pos3, [], Prog3),
 		::pprint(Prog3).
 
 :- end_object.

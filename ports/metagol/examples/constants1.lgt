@@ -59,7 +59,7 @@
 			p(3,4),
 			p(3,1)
 		],
-		::learn(Pos, Neg, Prog),
+		^^learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

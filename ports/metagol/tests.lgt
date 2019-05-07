@@ -83,6 +83,17 @@
 			]
 		).
 
+	test(metagol_droplasts_1) :-
+		droplasts::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[
+				(f(A, B) :- map(A, B, f_1)),
+				(f_1(C, E) :- my_reverse(C, D), f_2(D, E)),
+				(f_2(F, H) :- my_tail(F, G), my_reverse(G, H))
+			]
+		).
+
 	test(metagol_family_1) :-
 		family::learn(Clauses), !,
 		^^variant(

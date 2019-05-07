@@ -67,7 +67,7 @@
 	learn(Clauses) :-
 		Pos = [even(10),even(8),even(6),even(4),even(2)],
 		Neg = [even(3)],
-		::learn(Pos, Neg, Prog),
+		^^learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

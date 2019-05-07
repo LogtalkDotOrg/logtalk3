@@ -73,7 +73,7 @@
 			q(3,4),
 			q(3,1)
 		],
-		::learn(Pos, Neg, Prog),
+		^^learn(Pos, Neg, Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

@@ -63,7 +63,7 @@
 			f(['a','a','c']/['a','a','a','a','c','c'],_/[]),
 			f(['a','c']/['a','a','c','c'],_/[])
 		],
-		::learn(Pos, [], Prog),
+		^^learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-

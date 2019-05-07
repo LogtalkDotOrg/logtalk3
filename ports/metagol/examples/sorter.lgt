@@ -71,7 +71,7 @@
 	learn(Clauses) :-
 		set_seed(111),
 		examples(10,TrainExamples),
-		::learn(TrainExamples, [], G),
+		^^learn(TrainExamples, [], G),
 		::pclauses(G, Clauses).
 
 	learn :-

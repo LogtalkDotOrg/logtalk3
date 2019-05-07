@@ -70,7 +70,7 @@
 				f([1,2,3],[3,4,5]),
 				f([10,12,33,3,2,1],[12,14,35,5,4,3])
 		],
-		::learn(Pos, [], Prog),
+		^^learn(Pos, [], Prog),
 		^^pclauses(Prog, Clauses).
 
 	learn :-
