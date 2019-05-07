@@ -38,9 +38,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2019/04/20,
+		date is 2019/05/07,
 		comment is 'Unit tests for the "metagol" example.'
 	]).
 
@@ -167,6 +167,17 @@
 				(f(A, B) :- filter(A, B, f_1)),
 				(f_1(C) :- mydiv(C, 2)),
 				(f_1(D) :- mydiv(D, 5))
+			]
+		).
+
+	test(metagol_ibk1_1) :-
+		ibk1::learn(Clauses), !,
+		^^variant(
+			Clauses,
+			[
+				(f(A, B) :- map(A, B, f_1)),
+				(f_1(C, E) :- f_2(C, D), f_2(D, E)),
+				(f_2(F, H) :- my_succ(F, G), my_succ(G, H))
 			]
 		).
 

@@ -34,48 +34,46 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(library(dates_loader)),
-	logtalk_load(library(random_loader)),
-	logtalk_load([
-		adjacent_to_red,
-		constants1,
-		constants2,
-		constants3,
-		family,
-		find_duplicate,
-		grandparent,
-		graph_colouring,
-		graph_connectedness,
-		graph_reachability,
-		higher_order1,
-		higher_order2,
-		higher_order3,
-		ibk1,
-		kinship1,
-		kinship2,
-		less_than,
-		member,
-		mutual_recursion,
-		predecessor,
-		relatedness,
-		robots,
-		sequential,
-		sequential1,
-		sequential2,
-		son,
-		strings1,
-		strings2,
-		strings3,
-		trains,
-		undirected_edge
-	])
-)).
+:- set_logtalk_flag(hook, metagol).
 
-:- if(\+ current_logtalk_flag(prolog_dialect, sicstus)).
-	:- initialization((
-		logtalk_load([
-			sorter	% requires a setarg/3 built-in predicate
-		])
-	)).
-:- endif.
+
+:- object(ibk1,
+	extends(metagol)).
+
+	:- uses(integer, [succ/2]).
+
+	%% allow metagol to use my_succ in a hypothesis
+	body_pred(my_succ/2).
+
+	%% for current_predicate/1 visibility
+	:- protected([empty/1, head/2, tail/2]).
+
+	%% background knowledge
+	empty([]).
+	head([H|_], H).
+	tail([_|T], T).
+	my_succ(A, B) :-
+		(nonvar(A) -> integer(A); true),
+		(nonvar(B) -> integer(B); true),
+		succ(A,B).
+
+	%% metarules
+	metarule(ident, [P,Q], [P,A,B], [[Q,A,B]]).
+	metarule(curry, [P,Q,F], [P,A,B], [[Q,A,B,F]]).
+	metarule(chain, [P,Q,R], [P,A,B], [[Q,A,C],[R,C,B]]).
+
+	%% ibk
+	ibk([map,A,B,_], [[empty,A],[empty,B]]).
+	ibk([map,A,B,F], [[head,A,H1],[head,B,H2],[F,H1,H2],[tail,A,T1],[tail,B,T2],[map,T1,T2,F]]).
+
+	:- public(learn/1).
+	learn(Clauses) :-
+		::learn([f([1,2,3],[5,6,7])], [], Prog),
+		^^pclauses(Prog, Clauses).
+
+	:- public(learn/0).
+	learn :-
+		learn(Clauses),
+		^^pprint_clauses(Clauses).
+
+:- end_object.
