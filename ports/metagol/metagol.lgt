@@ -300,7 +300,7 @@
 			(	::type(P,A,compiled_pred),
 				\+ ::type(P,A,body_pred),
 				\+ ::type(P,A,head_pred),
-				::type(P,A,ibk_head_pred)
+				\+ ::type(P,A,ibk_head_pred)
 			),
 			S0
 		),

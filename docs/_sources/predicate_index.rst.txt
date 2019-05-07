@@ -592,6 +592,16 @@ Predicate index
 * :ref:`integer <integer/0::between/3>`
 * :ref:`randomp <randomp/0::between/3>`
 
+``body_pred/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::body_pred/1>`
+
 ``built_in_directive/4``
 ------------------------
 
@@ -2675,6 +2685,16 @@ Predicate index
 
 * :ref:`queuep <queuep/0::head/2>`
 
+``head_pred/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::head_pred/1>`
+
 ``help/0``
 ----------
 
@@ -3410,6 +3430,16 @@ Predicate index
 
 * :ref:`metagol <metagol/0::learn_seq/2>`
 
+``learn_with_timeout/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::learn_with_timeout/4>`
+
 ``leash/1``
 -----------
 
@@ -3995,7 +4025,7 @@ Predicate index
 
 * :ref:`type <type/0::meta_type/3>`
 
-``metarule/8``
+``metarule/6``
 --------------
 
 .. toctree::
@@ -4003,17 +4033,7 @@ Predicate index
 
 
 
-* :ref:`metagol <metagol/0::metarule/8>`
-
-``metarule_init/7``
--------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`metagol <metagol/0::metarule_init/7>`
+* :ref:`metagol <metagol/0::metarule/6>`
 
 ``metarule_next_id/1``
 ----------------------
@@ -4891,26 +4911,6 @@ Predicate index
 
 
 * :ref:`dictionaryp <dictionaryp/0::previous/4>`
-
-``prim/1``
-----------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`metagol <metagol/0::prim/1>`
-
-``primcall/2``
---------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`metagol <metagol/0::primcall/2>`
 
 ``print_flags/0``
 -----------------
@@ -6327,6 +6327,16 @@ Predicate index
 
 * :ref:`osp <osp/0::time_stamp/1>`
 
+``timeout/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metagol <metagol/0::timeout/1>`
+
 ``today/3``
 -----------
 
@@ -6437,16 +6447,6 @@ Predicate index
 
 
 * :ref:`either <either/0::unexpecteds/2>`
-
-``unfold_program/0``
---------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`metagol <metagol/0::unfold_program/0>`
 
 ``union/3``
 -----------

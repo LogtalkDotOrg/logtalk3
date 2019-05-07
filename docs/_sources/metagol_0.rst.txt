@@ -9,8 +9,8 @@
 Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0.19
-| **Date:** 2019/4/20
+| **Version:** 0.21
+| **Date:** 2019/5/7
 
 | **Copyright:** Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura
 | **License:** BSD 3-Clause License
@@ -93,6 +93,27 @@ Learns from a sequence of examples represented as a list of PositiveExamples/Neg
 
 .. raw:: html
 
+   <div id="learn_with_timeout/4"> </div>
+
+.. index:: learn_with_timeout/4
+.. _metagol/0::learn_with_timeout/4:
+
+``learn_with_timeout/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Learns from a set of positive examples and a set of negative examples and returns the learned program.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn_with_timeout(PositiveExamples,NegativeExamples,Program,Timeout)``
+| **Mode and number of proofs:**
+|    ``learn_with_timeout(@list(example),@list(example),-list(term),+number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
    <div id="pclauses/2"> </div>
 
 .. index:: pclauses/2
@@ -135,12 +156,12 @@ Prints a learned program.
 
 .. raw:: html
 
-   <div id="metarule/8"> </div>
+   <div id="metarule/6"> </div>
 
-.. index:: metarule/8
-.. _metagol/0::metarule/8:
+.. index:: metarule/6
+.. _metagol/0::metarule/6:
 
-``metarule/8``
+``metarule/6``
 ^^^^^^^^^^^^^^
 
 | **Compilation flags:**
@@ -149,27 +170,13 @@ Prints a learned program.
 
 .. raw:: html
 
-   <div id="metarule_init/7"> </div>
+   <div id="head_pred/1"> </div>
 
-.. index:: metarule_init/7
-.. _metagol/0::metarule_init/7:
+.. index:: head_pred/1
+.. _metagol/0::head_pred/1:
 
-``metarule_init/7``
-^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-.. raw:: html
-
-   <div id="prim/1"> </div>
-
-.. index:: prim/1
-.. _metagol/0::prim/1:
-
-``prim/1``
-^^^^^^^^^^
+``head_pred/1``
+^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -177,13 +184,13 @@ Prints a learned program.
 
 .. raw:: html
 
-   <div id="primcall/2"> </div>
+   <div id="body_pred/1"> </div>
 
-.. index:: primcall/2
-.. _metagol/0::primcall/2:
+.. index:: body_pred/1
+.. _metagol/0::body_pred/1:
 
-``primcall/2``
-^^^^^^^^^^^^^^
+``body_pred/1``
+^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -200,7 +207,7 @@ Prints a learned program.
 ^^^^^^^^^
 
 | **Compilation flags:**
-|    ``static``
+|    ``dynamic``
 
 
 .. raw:: html
@@ -212,20 +219,6 @@ Prints a learned program.
 
 ``functional/0``
 ^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-.. raw:: html
-
-   <div id="unfold_program/0"> </div>
-
-.. index:: unfold_program/0
-.. _metagol/0::unfold_program/0:
-
-``unfold_program/0``
-^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -287,6 +280,20 @@ Prints a learned program.
 |    ``dynamic``
 
 
+.. raw:: html
+
+   <div id="timeout/1"> </div>
+
+.. index:: timeout/1
+.. _metagol/0::timeout/1:
+
+``timeout/1``
+^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
 Protected interface
 -------------------
 
@@ -334,58 +341,44 @@ Protected interface
 
 .. raw:: html
 
-   <div id="prove_deduce/3"> </div>
+   <div id="compiled_pred_call/2"> </div>
 
-.. index:: prove_deduce/3
-.. _metagol/0::prove_deduce/3:
+.. index:: compiled_pred_call/2
+.. _metagol/0::compiled_pred_call/2:
 
-``prove_deduce/3``
-^^^^^^^^^^^^^^^^^^
+``compiled_pred_call/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
-|    ``static``
+|    ``dynamic``
 
 
 .. raw:: html
 
-   <div id="assert_prim/1"> </div>
+   <div id="body_pred_call/2"> </div>
 
-.. index:: assert_prim/1
-.. _metagol/0::assert_prim/1:
+.. index:: body_pred_call/2
+.. _metagol/0::body_pred_call/2:
 
-``assert_prim/1``
-^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-.. raw:: html
-
-   <div id="retract_prim/1"> </div>
-
-.. index:: retract_prim/1
-.. _metagol/0::retract_prim/1:
-
-``retract_prim/1``
-^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-.. raw:: html
-
-   <div id="assert_program/1"> </div>
-
-.. index:: assert_program/1
-.. _metagol/0::assert_program/1:
-
-``assert_program/1``
+``body_pred_call/2``
 ^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
-|    ``static``
+|    ``dynamic``
+
+
+.. raw:: html
+
+   <div id="type/3"> </div>
+
+.. index:: type/3
+.. _metagol/0::type/3:
+
+``type/3``
+^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
 
 
 Private predicates

@@ -214,8 +214,8 @@
 <p>Inductive logic programming (ILP) system based on meta-interpretive learning.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Metagol authors; adapted to Logtalk by Paulo Moura.</div>
-<div class="line"><strong>Version:</strong> 0.19</div>
-<div class="line"><strong>Date:</strong> 2019/4/20</div>
+<div class="line"><strong>Version:</strong> 0.21</div>
+<div class="line"><strong>Date:</strong> 2019/5/7</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Copyright:</strong> Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura</div>
@@ -299,9 +299,29 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">learn_seq(&#64;list(example),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div id="learn_with_timeout/4"> </div></div>
+<div class="section" id="learn-with-timeout-4">
+<span id="metagol-0-learn-with-timeout-4"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">learn_with_timeout/4</span></code><a class="headerlink" href="#learn-with-timeout-4" title="Permalink to this headline">¶</a></h3>
+<p>Learns from a set of positive examples and a set of negative examples and returns the learned program.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_with_timeout(PositiveExamples,NegativeExamples,Program,Timeout)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_with_timeout(&#64;list(example),&#64;list(example),-list(term),+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="pclauses/2"> </div></div>
 <div class="section" id="pclauses-2">
-<span id="metagol-0-pclauses-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">pclauses/2</span></code><a class="headerlink" href="#pclauses-2" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-pclauses-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">pclauses/2</span></code><a class="headerlink" href="#pclauses-2" title="Permalink to this headline">¶</a></h3>
 <p>Converts a learned program into a list of clauses.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -321,7 +341,7 @@
 </div>
 <div id="pprint/1"> </div></div>
 <div class="section" id="pprint-1">
-<span id="metagol-0-pprint-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint/1</span></code><a class="headerlink" href="#pprint-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-pprint-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint/1</span></code><a class="headerlink" href="#pprint-1" title="Permalink to this headline">¶</a></h3>
 <p>Prints a learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -339,36 +359,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">pprint(&#64;list(term))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
-<div id="metarule/8"> </div></div>
-<div class="section" id="metarule-8">
-<span id="metagol-0-metarule-8"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule/8</span></code><a class="headerlink" href="#metarule-8" title="Permalink to this headline">¶</a></h3>
+<div id="metarule/6"> </div></div>
+<div class="section" id="metarule-6">
+<span id="metagol-0-metarule-6"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule/6</span></code><a class="headerlink" href="#metarule-6" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
-<div id="metarule_init/7"> </div></div>
-<div class="section" id="metarule-init-7">
-<span id="metagol-0-metarule-init-7"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule_init/7</span></code><a class="headerlink" href="#metarule-init-7" title="Permalink to this headline">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div id="prim/1"> </div></div>
-<div class="section" id="prim-1">
-<span id="metagol-0-prim-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">prim/1</span></code><a class="headerlink" href="#prim-1" title="Permalink to this headline">¶</a></h3>
+<div id="head_pred/1"> </div></div>
+<div class="section" id="head-pred-1">
+<span id="metagol-0-head-pred-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">head_pred/1</span></code><a class="headerlink" href="#head-pred-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
 </div>
 </div>
-<div id="primcall/2"> </div></div>
-<div class="section" id="primcall-2">
-<span id="metagol-0-primcall-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">primcall/2</span></code><a class="headerlink" href="#primcall-2" title="Permalink to this headline">¶</a></h3>
+<div id="body_pred/1"> </div></div>
+<div class="section" id="body-pred-1">
+<span id="metagol-0-body-pred-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code><a class="headerlink" href="#body-pred-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -381,7 +392,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
 </div>
 </div>
 <div id="functional/0"> </div></div>
@@ -393,18 +404,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
 </div>
 </div>
-<div id="unfold_program/0"> </div></div>
-<div class="section" id="unfold-program-0">
-<span id="metagol-0-unfold-program-0"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">unfold_program/0</span></code><a class="headerlink" href="#unfold-program-0" title="Permalink to this headline">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
 <div id="min_clauses/1"> </div></div>
 <div class="section" id="min-clauses-1">
-<span id="metagol-0-min-clauses-1"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code><a class="headerlink" href="#min-clauses-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-min-clauses-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code><a class="headerlink" href="#min-clauses-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -413,7 +415,7 @@
 </div>
 <div id="max_clauses/1"> </div></div>
 <div class="section" id="max-clauses-1">
-<span id="metagol-0-max-clauses-1"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code><a class="headerlink" href="#max-clauses-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-max-clauses-1"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code><a class="headerlink" href="#max-clauses-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -422,7 +424,7 @@
 </div>
 <div id="max_inv_preds/1"> </div></div>
 <div class="section" id="max-inv-preds-1">
-<span id="metagol-0-max-inv-preds-1"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code><a class="headerlink" href="#max-inv-preds-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-max-inv-preds-1"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code><a class="headerlink" href="#max-inv-preds-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -431,7 +433,16 @@
 </div>
 <div id="metarule_next_id/1"> </div></div>
 <div class="section" id="metarule-next-id-1">
-<span id="metagol-0-metarule-next-id-1"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code><a class="headerlink" href="#metarule-next-id-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-metarule-next-id-1"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code><a class="headerlink" href="#metarule-next-id-1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div id="timeout/1"> </div></div>
+<div class="section" id="timeout-1">
+<span id="metagol-0-timeout-1"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">timeout/1</span></code><a class="headerlink" href="#timeout-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -468,40 +479,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
-<div id="prove_deduce/3"> </div></div>
-<div class="section" id="prove-deduce-3">
-<span id="metagol-0-prove-deduce-3"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">prove_deduce/3</span></code><a class="headerlink" href="#prove-deduce-3" title="Permalink to this headline">¶</a></h3>
+<div id="compiled_pred_call/2"> </div></div>
+<div class="section" id="compiled-pred-call-2">
+<span id="metagol-0-compiled-pred-call-2"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">compiled_pred_call/2</span></code><a class="headerlink" href="#compiled-pred-call-2" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
 </div>
 </div>
-<div id="assert_prim/1"> </div></div>
-<div class="section" id="assert-prim-1">
-<span id="metagol-0-assert-prim-1"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">assert_prim/1</span></code><a class="headerlink" href="#assert-prim-1" title="Permalink to this headline">¶</a></h3>
+<div id="body_pred_call/2"> </div></div>
+<div class="section" id="body-pred-call-2">
+<span id="metagol-0-body-pred-call-2"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">body_pred_call/2</span></code><a class="headerlink" href="#body-pred-call-2" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
 </div>
 </div>
-<div id="retract_prim/1"> </div></div>
-<div class="section" id="retract-prim-1">
-<span id="metagol-0-retract-prim-1"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">retract_prim/1</span></code><a class="headerlink" href="#retract-prim-1" title="Permalink to this headline">¶</a></h3>
+<div id="type/3"> </div></div>
+<div class="section" id="type-3">
+<span id="metagol-0-type-3"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">type/3</span></code><a class="headerlink" href="#type-3" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div id="assert_program/1"> </div></div>
-<div class="section" id="assert-program-1">
-<span id="metagol-0-assert-program-1"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">assert_program/1</span></code><a class="headerlink" href="#assert-program-1" title="Permalink to this headline">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
 </div>
 </div>
 </div>
