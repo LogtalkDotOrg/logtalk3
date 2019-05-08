@@ -20,9 +20,9 @@ ________________________________________________________________________
 Overview
 --------
 
-This tool generates library, directory, file, and entity diagrams for source
-files and for libraries of source files using the Logtalk reflection features
-to collect the relevant information and a graph language for representing
+This tool generates library, directory, file, entity, and predicate diagrams
+for source files and for libraries of source files using the Logtalk reflection
+API to collect the relevant information and a graph language for representing
 the diagrams. Limited support is also available for generating diagrams
 for Prolog module applications. It's also possible in general to generate
 predicate cross-referencing diagrams for plain Prolog files.
