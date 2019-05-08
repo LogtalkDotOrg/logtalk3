@@ -38,9 +38,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.21,
+		version is 0.22,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2019/05/07,
+		date is 2019/05/08,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
@@ -173,9 +173,9 @@
 		::body_pred_call(P,Args).
 
 	prove_aux(p(P,A,Args,Path),FullSig,Sig,MaxN,N1,N2,Prog1,Prog2):-
-	    (var(P) -> true; (\+ ::type(P,A,head_pred), !, ::type(P,A,ibk_head_pred))),
-	    ::ibk([P|Args],Body,Path),
-	    prove(Body,FullSig,Sig,MaxN,N1,N2,Prog1,Prog2).
+		(var(P) -> true; (\+ ::type(P,A,head_pred), !, ::type(P,A,ibk_head_pred))),
+		::ibk([P|Args],Body,Path),
+		prove(Body,FullSig,Sig,MaxN,N1,N2,Prog1,Prog2).
 
 	prove_aux(p(P,A,Args,Path),FullSig,Sig1,MaxN,N1,N2,Prog1,Prog2):-
 		N1 \== 0,
@@ -332,8 +332,8 @@
 	target_predicate([p(P,A,_Args,[])|_],P/A).
 
 	%% target_predicates(Atoms, Preds2) :-
-	%%     findall(P/A, member([p(inv,P,A,_Args,_Atom,[])],Atoms), Preds1),
-	%%     list_to_set(Preds1,Preds2).
+	%%	findall(P/A, member([p(inv,P,A,_Args,_Atom,[])],Atoms), Preds1),
+	%%	list_to_set(Preds1,Preds2).
 
 	invented_symbols(MaxClauses,P/A,[sym(P,A,_U)|Sig]) :-
 		NumSymbols is MaxClauses - 1,
@@ -411,13 +411,13 @@
 
 	%% build the internal metarule clauses
 	term_expansion(metarule(Subs,Head,Body),Asserts):-
-    	metarule_asserts(_Name,Subs,Head,Body,_MetaBody,Asserts).
+		metarule_asserts(_Name,Subs,Head,Body,_MetaBody,Asserts).
 	term_expansion(metarule(Name,Subs,Head,Body),Asserts):-
-    	metarule_asserts(Name,Subs,Head,Body,_MetaBody,Asserts).
+		metarule_asserts(Name,Subs,Head,Body,_MetaBody,Asserts).
 	term_expansion((metarule(Subs,Head,Body):-MetaBody),Asserts):-
-    	metarule_asserts(_Name,Subs,Head,Body,MetaBody,Asserts).
+		metarule_asserts(_Name,Subs,Head,Body,MetaBody,Asserts).
 	term_expansion((metarule(Name,Subs,Head,Body):-MetaBody),Asserts):-
-    	metarule_asserts(Name,Subs,Head,Body,MetaBody,Asserts).
+		metarule_asserts(Name,Subs,Head,Body,MetaBody,Asserts).
 
 	term_expansion((ibk(Head,Body):-IbkBody), [(ibk(Head,Body):-IbkBody)| Types]) :-
 		ibk_asserts(Head,Body,IbkBody,Types).
@@ -497,8 +497,8 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(learned_clause(Clause), metagol) -->
-		{numbervars(Clause, 0, _)},
-		['~q.'-[Clause], nl].
+		{copy_term(Clause, Copy), numbervars(Copy, 0, _)},
+		['~q.'-[Copy], nl].
 	logtalk::message_tokens(learning_predicate(Predicate), metagol) -->
 		['learning ~q'-[Predicate], nl].
 	logtalk::message_tokens(number_of_clauses(Clauses), metagol) -->
