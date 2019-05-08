@@ -9,7 +9,7 @@
 Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0.23
+| **Version:** 0.24
 | **Date:** 2019/5/8
 
 | **Copyright:** Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura
@@ -46,7 +46,7 @@ Learns from a set of positive examples and a set of negative examples and return
 | **Template:**
 |    ``learn(PositiveExamples,NegativeExamples,Program)``
 | **Mode and number of proofs:**
-|    ``learn(@list(example),@list(example),-list(term))`` - ``zero_or_one``
+|    ``learn(@list(example),@list(example),-list(term))`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -59,7 +59,7 @@ Learns from a set of positive examples and a set of negative examples and return
 ``learn/2``
 ^^^^^^^^^^^
 
-Learns from a set of positive examples and a set of negative examples and prints the learned program.
+Learns from a set of positive examples and a set of negative examples and pretty prints the learned program.
 
 | **Compilation flags:**
 |    ``static``
@@ -67,7 +67,7 @@ Learns from a set of positive examples and a set of negative examples and prints
 | **Template:**
 |    ``learn(PositiveExamples,NegativeExamples)``
 | **Mode and number of proofs:**
-|    ``learn(@list(example),@list(example))`` - ``zero_or_one``
+|    ``learn(@list(example),@list(example))`` - ``zero_or_more``
 
 
 .. raw:: html
