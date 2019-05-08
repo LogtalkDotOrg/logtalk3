@@ -9,7 +9,7 @@
 Inductive logic programming (ILP) system based on meta-interpretive learning.
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0.22
+| **Version:** 0.23
 | **Date:** 2019/5/8
 
 | **Copyright:** Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura
@@ -114,13 +114,13 @@ Learns from a set of positive examples and a set of negative examples and return
 
 .. raw:: html
 
-   <div id="pclauses/2"> </div>
+   <div id="program_to_clauses/2"> </div>
 
-.. index:: pclauses/2
-.. _metagol/0::pclauses/2:
+.. index:: program_to_clauses/2
+.. _metagol/0::program_to_clauses/2:
 
-``pclauses/2``
-^^^^^^^^^^^^^^
+``program_to_clauses/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Converts a learned program into a list of clauses.
 
@@ -128,9 +128,9 @@ Converts a learned program into a list of clauses.
 |    ``static``
 
 | **Template:**
-|    ``pclauses(Program,Clauses)``
+|    ``program_to_clauses(Program,Clauses)``
 | **Mode and number of proofs:**
-|    ``pclauses(@list(term),-list(clause))`` - ``one``
+|    ``program_to_clauses(@list(term),-list(clause))`` - ``one``
 
 
 .. raw:: html
@@ -143,7 +143,7 @@ Converts a learned program into a list of clauses.
 ``pprint/1``
 ^^^^^^^^^^^^
 
-Prints a learned program.
+Pretty prints a learned program.
 
 | **Compilation flags:**
 |    ``static``
@@ -179,7 +179,7 @@ Prints a learned program.
 ^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
-|    ``dynamic``
+|    ``static``
 
 
 .. raw:: html
@@ -207,7 +207,21 @@ Prints a learned program.
 ^^^^^^^^^
 
 | **Compilation flags:**
-|    ``dynamic``
+|    ``static``
+
+
+.. raw:: html
+
+   <div id="func_test/3"> </div>
+
+.. index:: func_test/3
+.. _metagol/0::func_test/3:
+
+``func_test/3``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
 
 
 .. raw:: html
@@ -320,20 +334,6 @@ Protected interface
 
 ``pprint_clauses/1``
 ^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-.. raw:: html
-
-   <div id="func_test/3"> </div>
-
-.. index:: func_test/3
-.. _metagol/0::func_test/3:
-
-``func_test/3``
-^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``static``

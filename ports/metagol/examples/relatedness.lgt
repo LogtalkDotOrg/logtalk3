@@ -75,7 +75,7 @@
 			target(g,b)
 		],
 		^^learn(Pos, Neg, Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

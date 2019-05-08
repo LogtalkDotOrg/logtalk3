@@ -151,7 +151,7 @@
 	learn(Clauses) :-
 		findall(f(A,B), (between(1,5,_), gen_ex(A,B)), Pos),
 		^^learn(Pos, [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

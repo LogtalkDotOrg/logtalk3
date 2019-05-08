@@ -71,7 +71,7 @@
 				f([10,12,33,3,2,1],[12,14,35,5,4,3])
 		],
 		^^learn(Pos, [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

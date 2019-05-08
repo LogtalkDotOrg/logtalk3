@@ -72,7 +72,7 @@
 		set_seed(111),
 		examples(10,TrainExamples),
 		^^learn(TrainExamples, [], G),
-		::pclauses(G, Clauses).
+		::program_to_clauses(G, Clauses).
 
 	learn :-
 		learn(Clauses),

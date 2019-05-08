@@ -74,7 +74,7 @@
 %%		Neg = [grandparent(amy,amelia)],
 		Neg = [],
 		^^learn(Pos, Neg, Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	:- public(learn1/0).
 	learn1 :-

@@ -132,7 +132,7 @@
 			f([7],[])
 		],
 		^^learn(Pos, [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

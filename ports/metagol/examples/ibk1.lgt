@@ -69,7 +69,7 @@
 
 	learn(Clauses) :-
 		^^learn([f([1,2,3],[5,6,7])], [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

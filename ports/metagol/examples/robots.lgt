@@ -70,25 +70,25 @@
 	learn1(Clauses) :-
 		Pos = [f(world((1/1),(1/1),false),world((3/3),(3/3),false))],
 		^^learn(Pos, [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	:- public(learn2/1).
 	learn2(Clauses) :-
 		Pos = [f(world((1/1),(1/1),false),world((5/5),(5/5),false))],
 		^^learn(Pos, [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	:- public(learn3/1).
 	learn3(Clauses) :-
 		Pos = [f(world((1/1),(1/1),false),world((6/6),(6/6),false))],
 		^^learn(Pos, [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	:- public(learn4/1).
 	learn4(Clauses) :-
 		Pos = [f(world((1/1),(1/1),false),world((7/7),(7/7),false))],
 		^^learn(Pos, [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	:- public(learn1/0).
 	learn1 :-

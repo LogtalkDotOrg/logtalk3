@@ -38,7 +38,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.22,
+		version is 0.23,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2019/05/08,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
@@ -74,9 +74,9 @@
 		argnames is ['PositiveExamples', 'NegativeExamples', 'Program', 'Timeout']
 	]).
 
-	:- public(pclauses/2).
-	:- mode(pclauses(@list(term), -list(clause)), one).
-	:- info(pclauses/2, [
+	:- public(program_to_clauses/2).
+	:- mode(program_to_clauses(@list(term), -list(clause)), one).
+	:- info(program_to_clauses/2, [
 		comment is 'Converts a learned program into a list of clauses.',
 		argnames is ['Program', 'Clauses']
 	]).
@@ -84,17 +84,19 @@
 	:- public(pprint/1).
 	:- mode(pprint(@list(term)), one).
 	:- info(pprint/1, [
-		comment is 'Prints a learned program.',
+		comment is 'Pretty prints a learned program.',
 		argnames is ['Program']
 	]).
 
-	:- public([metarule/6, head_pred/1, body_pred/1, ibk/3]).
-	:- dynamic([head_pred/1, body_pred/1, ibk/3]).
+	% example definition
+	:- public([metarule/6, head_pred/1, body_pred/1, ibk/3, func_test/3]).
+	:- dynamic([body_pred/1]).
 
+	% example options
 	:- public([functional/0, min_clauses/1, max_clauses/1, max_inv_preds/1, metarule_next_id/1, timeout/1]).
 	:- dynamic([functional/0, min_clauses/1, max_clauses/1, max_inv_preds/1, metarule_next_id/1, timeout/1]).
 
-	:- protected([pprint_clause/1, pprint_clauses/1, func_test/3, compiled_pred_call/2, body_pred_call/2, type/3]).
+	:- protected([pprint_clause/1, pprint_clauses/1, compiled_pred_call/2, body_pred_call/2, type/3]).
 	:- dynamic([compiled_pred_call/2, body_pred_call/2, type/3]).
 
 	:- uses(coroutining, [when/2]).
@@ -350,12 +352,12 @@
 			Sig
 		).
 
-	pclauses(Prog1, Prog2) :-
+	program_to_clauses(Prog1, Prog2) :-
 		reverse(Prog1, Prog3),
 		maplist(metasub_to_clause, Prog3, Prog2).
 
 	pprint(Prog) :-
-		pclauses(Prog, Clauses),
+		program_to_clauses(Prog, Clauses),
 		pprint_clauses(Clauses).
 
 	pprint_clause(Clause) :-

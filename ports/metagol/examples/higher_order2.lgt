@@ -81,7 +81,7 @@
 		A = [[a],[a,a],[a,a,a],[a,a,a,a]],
 		B = [3,5,7,9],
 		^^learn([f(A,B)], [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

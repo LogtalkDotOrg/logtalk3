@@ -60,7 +60,7 @@
 	learn(Clauses) :-
 		Pos = [p(a, b), p(a, c), p(a, a)],
 		^^learn(Pos,[], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

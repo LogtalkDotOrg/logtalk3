@@ -82,7 +82,7 @@
 		]/[],
 
 		::learn_seq([T1,T2,T3], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

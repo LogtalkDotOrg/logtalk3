@@ -53,7 +53,7 @@
 
 	learn(Clauses) :-
 		^^learn([f(andy,laura),f(andy,amelia)], [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

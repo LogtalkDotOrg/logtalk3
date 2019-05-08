@@ -64,7 +64,7 @@
 			f(['a','c']/['a','a','c','c'],_/[])
 		],
 		^^learn(Pos, [], Prog),
-		^^pclauses(Prog, Clauses).
+		^^program_to_clauses(Prog, Clauses).
 
 	learn :-
 		learn(Clauses),

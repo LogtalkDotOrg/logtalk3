@@ -215,7 +215,7 @@
 <p>Inductive logic programming (ILP) system based on meta-interpretive learning.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Metagol authors; adapted to Logtalk by Paulo Moura.</div>
-<div class="line"><strong>Version:</strong> 0.22</div>
+<div class="line"><strong>Version:</strong> 0.23</div>
 <div class="line"><strong>Date:</strong> 2019/5/8</div>
 </div>
 <div class="line-block">
@@ -320,9 +320,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">learn_with_timeout(&#64;list(example),&#64;list(example),-list(term),+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-<div id="pclauses/2"> </div></div>
-<div class="section" id="pclauses-2">
-<span id="metagol-0-pclauses-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">pclauses/2</span></code><a class="headerlink" href="#pclauses-2" title="Permalink to this headline">¶</a></h3>
+<div id="program_to_clauses/2"> </div></div>
+<div class="section" id="program-to-clauses-2">
+<span id="metagol-0-program-to-clauses-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">program_to_clauses/2</span></code><a class="headerlink" href="#program-to-clauses-2" title="Permalink to this headline">¶</a></h3>
 <p>Converts a learned program into a list of clauses.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -333,17 +333,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">pclauses(Program,Clauses)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">program_to_clauses(Program,Clauses)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">pclauses(&#64;list(term),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">program_to_clauses(&#64;list(term),-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <div id="pprint/1"> </div></div>
 <div class="section" id="pprint-1">
 <span id="metagol-0-pprint-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint/1</span></code><a class="headerlink" href="#pprint-1" title="Permalink to this headline">¶</a></h3>
-<p>Prints a learned program.</p>
+<p>Pretty prints a learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -375,7 +375,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div id="body_pred/1"> </div></div>
@@ -393,12 +393,21 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div id="func_test/3"> </div></div>
+<div class="section" id="func-test-3">
+<span id="metagol-0-func-test-3"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code><a class="headerlink" href="#func-test-3" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div id="functional/0"> </div></div>
 <div class="section" id="functional-0">
-<span id="metagol-0-functional-0"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">functional/0</span></code><a class="headerlink" href="#functional-0" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-functional-0"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">functional/0</span></code><a class="headerlink" href="#functional-0" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -407,7 +416,7 @@
 </div>
 <div id="min_clauses/1"> </div></div>
 <div class="section" id="min-clauses-1">
-<span id="metagol-0-min-clauses-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code><a class="headerlink" href="#min-clauses-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-min-clauses-1"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code><a class="headerlink" href="#min-clauses-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -416,7 +425,7 @@
 </div>
 <div id="max_clauses/1"> </div></div>
 <div class="section" id="max-clauses-1">
-<span id="metagol-0-max-clauses-1"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code><a class="headerlink" href="#max-clauses-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-max-clauses-1"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code><a class="headerlink" href="#max-clauses-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -425,7 +434,7 @@
 </div>
 <div id="max_inv_preds/1"> </div></div>
 <div class="section" id="max-inv-preds-1">
-<span id="metagol-0-max-inv-preds-1"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code><a class="headerlink" href="#max-inv-preds-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-max-inv-preds-1"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code><a class="headerlink" href="#max-inv-preds-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -434,7 +443,7 @@
 </div>
 <div id="metarule_next_id/1"> </div></div>
 <div class="section" id="metarule-next-id-1">
-<span id="metagol-0-metarule-next-id-1"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code><a class="headerlink" href="#metarule-next-id-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-metarule-next-id-1"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code><a class="headerlink" href="#metarule-next-id-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -443,7 +452,7 @@
 </div>
 <div id="timeout/1"> </div></div>
 <div class="section" id="timeout-1">
-<span id="metagol-0-timeout-1"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">timeout/1</span></code><a class="headerlink" href="#timeout-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-timeout-1"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">timeout/1</span></code><a class="headerlink" href="#timeout-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -455,7 +464,7 @@
 <div class="section" id="protected-interface">
 <h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
 <div id="pprint_clause/1"> </div><div class="section" id="pprint-clause-1">
-<span id="metagol-0-pprint-clause-1"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint_clause/1</span></code><a class="headerlink" href="#pprint-clause-1" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-pprint-clause-1"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint_clause/1</span></code><a class="headerlink" href="#pprint-clause-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -464,16 +473,7 @@
 </div>
 <div id="pprint_clauses/1"> </div></div>
 <div class="section" id="pprint-clauses-1">
-<span id="metagol-0-pprint-clauses-1"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint_clauses/1</span></code><a class="headerlink" href="#pprint-clauses-1" title="Permalink to this headline">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div id="func_test/3"> </div></div>
-<div class="section" id="func-test-3">
-<span id="metagol-0-func-test-3"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code><a class="headerlink" href="#func-test-3" title="Permalink to this headline">¶</a></h3>
+<span id="metagol-0-pprint-clauses-1"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">pprint_clauses/1</span></code><a class="headerlink" href="#pprint-clauses-1" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
