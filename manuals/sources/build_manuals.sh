@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on March 14, 2019
+##   Last updated on May 11, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -28,6 +28,7 @@ cd "$(dirname "$0")" || exit 1
 
 rm -f ../TheLogtalkHandbook*.pdf
 rm -f ../TheLogtalkHandbook*.epub
+rm -f ../TheLogtalkHandbook*.info
 rm -rf ../_sources
 rm -rf ../_static
 rm -rf ../faq
@@ -39,11 +40,13 @@ make clean
 make html
 make latexpdf
 make epub
+make info
 
 rm -f _build/html/index_latexpdf.html
 mv -f _build/html/* ../
 rm -f ../_sources/index_latexpdf.rst.txt
 mv -f _build/latex/TheLogtalkHandbook*.pdf ../
 mv -f _build/epub/TheLogtalkHandbook*.epub ../
+mv -f _build/texinfo/TheLogtalkHandbook*.info ../
 
 make clean

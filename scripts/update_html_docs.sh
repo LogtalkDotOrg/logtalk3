@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports, and
 ##   contributions documentation
 ## 
-##   Last updated on December 30, 2018
+##   Last updated on May 11, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -138,8 +138,10 @@ lgt2rst -t "Logtalk APIs"
 mv _conf.py conf.py
 make clean
 make html
+make info
 make linkcheck
 cp -R _build/html/* ../
+cp _build/texinfo/LogtalkAPIs-*.info ../
 make clean
 mv conf.py _conf.py
 mv browserconfig.xml browserconfig.xml.saved

@@ -24,6 +24,12 @@ RELEASE NOTES
 3.27.0 - June ??, 2019
 ======================
 
+Documentation
+-------------
+
+* ADDED: Experimental support for generating Texinfo versions of the Handbook
+and the APIs.
+
 
 3.26.0 - May 8, 2019
 ====================

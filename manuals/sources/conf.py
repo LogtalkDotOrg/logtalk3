@@ -178,8 +178,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Logtalk', u'The Logtalk Handbook',
-     author, 'Logtalk', 'Declarative object-oriented logic programming language.',
+    (master_doc, 'TheLogtalkHandbook-' + version, u'The Logtalk Handbook',
+     u'Paulo Moura', u'The Logtalk Handbook', 'Declarative object-oriented logic programming language.',
      'Miscellaneous'),
 ]
 
