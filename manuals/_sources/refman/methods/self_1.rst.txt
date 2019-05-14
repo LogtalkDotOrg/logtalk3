@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: self/1
+.. index:: pair: self/1; Built-in method
 .. _methods_self_1:
 
 self/1

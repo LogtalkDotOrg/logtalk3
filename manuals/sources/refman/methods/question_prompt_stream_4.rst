@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: question_prompt_stream/4
+.. index:: pair: question_prompt_stream/4; Built-in method
 .. _methods_question_prompt_stream_4:
 
 question_prompt_stream/4

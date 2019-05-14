@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: abolish/1
+.. index:: pair: abolish/1; Built-in method
 .. _methods_abolish_1:
 
 abolish/1

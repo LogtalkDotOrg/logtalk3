@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: specializes_class/2-3
+.. index:: pair: specializes_class/2-3; Built-in predicate
 .. _predicates_specializes_class_2_3:
 
 specializes_class/2-3

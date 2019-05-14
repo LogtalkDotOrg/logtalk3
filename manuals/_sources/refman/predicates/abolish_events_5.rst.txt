@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: abolish_events/5
+.. index:: pair: abolish_events/5
 .. _predicates_abolish_events_5:
 
 abolish_events/5

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: abolish_object/1
+.. index:: pair: abolish_object/1
 .. _predicates_abolish_object_1:
 
 abolish_object/1

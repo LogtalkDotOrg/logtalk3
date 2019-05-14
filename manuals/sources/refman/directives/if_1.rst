@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: if/1
+.. index:: pair: if/1; Directive
 .. _directives_if_1:
 
 if/1

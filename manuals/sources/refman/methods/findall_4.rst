@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: findall/4
+.. index:: pair: findall/4; Built-in method
 .. _methods_findall_4:
 
 findall/4

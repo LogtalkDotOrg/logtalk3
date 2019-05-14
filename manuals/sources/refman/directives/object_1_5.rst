@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: object/1-5
+.. index:: pair: object/1-5; Directive
 .. _directives_object_1_5:
 
 object/1-5

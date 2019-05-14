@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: threaded_engine_yield/1
+.. index:: pair: threaded_engine_yield/1; Built-in predicate
 .. _predicates_threaded_engine_yield_1:
 
 threaded_engine_yield/1

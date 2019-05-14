@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: threaded_engine_next_reified/2
+.. index:: pair: threaded_engine_next_reified/2; Built-in predicate
 .. _predicates_threaded_engine_next_reified_2:
 
 threaded_engine_next_reified/2

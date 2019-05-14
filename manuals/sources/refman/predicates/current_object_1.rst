@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: current_object/1
+.. index:: pair: current_object/1; Built-in predicate
 .. _predicates_current_object_1:
 
 current_object/1

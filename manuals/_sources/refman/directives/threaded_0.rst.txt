@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: threaded/0
+.. index:: pair: threaded/0; Directive
 .. _directives_threaded_0:
 
 threaded/0

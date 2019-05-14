@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: object_property/2
+.. index:: pair: object_property/2; Built-in predicate
 .. _predicates_object_property_2:
 
 object_property/2

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: info/2
+.. index:: pair: info/2; Directive
 .. _directives_info_2:
 
 info/2

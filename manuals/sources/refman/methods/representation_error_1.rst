@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: representation_error/1
+.. index:: pair: representation_error/1; Built-in method
 .. _methods_representation_error_1:
 
 representation_error/1

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: coinductive/1
+.. index:: pair: coinductive/1; Directive
 .. _directives_coinductive_1:
 
 coinductive/1

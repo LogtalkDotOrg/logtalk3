@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: setof/3
+.. index:: pair: setof/3; Built-in method
 .. _methods_setof_3:
 
 setof/3

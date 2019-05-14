@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: threaded_notify/1
+.. index:: pair: threaded_notify/1; Built-in predicate
 .. _predicates_threaded_notify_1:
 
 threaded_notify/1

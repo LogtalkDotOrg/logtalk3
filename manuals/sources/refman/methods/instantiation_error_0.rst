@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: instantiation_error/0
+.. index:: pair: instantiation_error/0; Built-in method
 .. _methods_instantiation_error_0:
 
 instantiation_error/0

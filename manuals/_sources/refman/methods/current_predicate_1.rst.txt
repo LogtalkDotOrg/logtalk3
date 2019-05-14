@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: current_predicate/1
+.. index:: pair: current_predicate/1; Built-in method
 .. _methods_current_predicate_1:
 
 current_predicate/1

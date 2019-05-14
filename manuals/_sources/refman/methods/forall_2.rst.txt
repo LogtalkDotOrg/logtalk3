@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: forall/2
+.. index:: pair: forall/2; Built-in method
 .. _methods_forall_2:
 
 forall/2

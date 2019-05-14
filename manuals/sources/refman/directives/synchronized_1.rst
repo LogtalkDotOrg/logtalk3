@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: synchronized/1
+.. index:: pair: synchronized/1; Directive
 .. _directives_synchronized_1:
 
 synchronized/1

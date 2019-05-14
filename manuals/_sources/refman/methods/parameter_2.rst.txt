@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: parameter/2
+.. index:: pair: parameter/2; Built-in method
 .. _methods_parameter_2:
 
 parameter/2

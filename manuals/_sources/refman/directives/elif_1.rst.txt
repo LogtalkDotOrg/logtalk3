@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: elif/1
+.. index:: pair: elif/1; Directive
 .. _directives_elif_1:
 
 elif/1

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: ::/1
+.. index:: pair: ::/1; Control construct
 .. _control_send_to_self_1:
 
 ::/1

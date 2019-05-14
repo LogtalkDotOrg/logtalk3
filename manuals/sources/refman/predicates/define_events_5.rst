@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: define_events/5
+.. index:: pair: define_events/5; Built-in predicate
 .. _predicates_define_events_5:
 
 define_events/5

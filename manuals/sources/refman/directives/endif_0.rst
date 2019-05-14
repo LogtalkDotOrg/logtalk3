@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: endif/0
+.. index:: pair: endif/0; Directive
 .. _directives_endif_0:
 
 endif/0

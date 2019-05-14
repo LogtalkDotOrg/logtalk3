@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: current_protocol/1
+.. index:: pair: current_protocol/1; Built-in predicate
 .. _predicates_current_protocol_1:
 
 current_protocol/1

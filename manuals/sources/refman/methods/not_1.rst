@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: \+/1
+.. index:: pair: \+/1; Built-in method
 .. _methods_not_1:
 
 \\+/1

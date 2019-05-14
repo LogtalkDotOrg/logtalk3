@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: conforms_to_protocol/2-3
+.. index:: pair: conforms_to_protocol/2-3; Built-in predicate
 .. _predicates_conforms_to_protocol_2_3:
 
 conforms_to_protocol/2-3

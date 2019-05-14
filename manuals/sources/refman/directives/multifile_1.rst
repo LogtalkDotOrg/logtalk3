@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: multifile/1
+.. index:: pair: multifile/1; Directive
 .. _directives_multifile_1:
 
 multifile/1

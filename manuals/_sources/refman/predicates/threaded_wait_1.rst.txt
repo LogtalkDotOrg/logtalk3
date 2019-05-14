@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: threaded_wait/1
+.. index:: pair: threaded_wait/1; Built-in predicate
 .. _predicates_threaded_wait_1:
 
 threaded_wait/1

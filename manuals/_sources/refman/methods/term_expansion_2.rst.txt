@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: term_expansion/2
+.. index:: pair: term_expansion/2; Built-in method
 .. _methods_term_expansion_2:
 
 term_expansion/2

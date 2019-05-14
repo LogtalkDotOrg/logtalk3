@@ -30,6 +30,8 @@ Documentation
 * ADDED: Experimental support for generating Texinfo versions of the Handbook
 and the APIs.
 
+* IMPROVED: Handbook index cross-referencing.
+
 
 3.26.0 - May 8, 2019
 ====================

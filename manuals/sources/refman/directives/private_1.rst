@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: private/1
+.. index:: pair: private/1; Directive
 .. _directives_private_1:
 
 private/1

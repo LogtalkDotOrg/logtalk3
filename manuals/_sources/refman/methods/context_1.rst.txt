@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: context/1
+.. index:: pair: context/1; Built-in method
 .. _methods_context_1:
 
 context/1

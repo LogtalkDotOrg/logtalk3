@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: evaluation_error/1
+.. index:: pair: evaluation_error/1; Built-in method
 .. _methods_evaluation_error_1:
 
 evaluation_error/1

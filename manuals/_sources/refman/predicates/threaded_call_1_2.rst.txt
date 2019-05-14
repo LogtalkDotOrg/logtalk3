@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: threaded_call/1-2
+.. index:: pair: threaded_call/1-2; Built-in predicate
 .. _predicates_threaded_call_1_2:
 
 threaded_call/1-2

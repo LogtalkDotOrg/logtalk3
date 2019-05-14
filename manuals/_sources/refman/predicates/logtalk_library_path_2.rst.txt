@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: logtalk_library_path/2
+.. index:: pair: logtalk_library_path/2; Built-in predicate
 .. _predicates_logtalk_library_path_2:
 
 logtalk_library_path/2

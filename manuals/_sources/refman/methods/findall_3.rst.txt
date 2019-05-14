@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: findall/3
+.. index:: pair: findall/3; Built-in method
 .. _methods_findall_3:
 
 findall/3

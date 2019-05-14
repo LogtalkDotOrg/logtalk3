@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: abolish_protocol/1
+.. index:: pair: abolish_protocol/1; Built-in predicate
 .. _predicates_abolish_protocol_1:
 
 abolish_protocol/1

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: after/3
+.. index:: pair: after/3; Built-in method
 .. _methods_after_3:
 
 after/3

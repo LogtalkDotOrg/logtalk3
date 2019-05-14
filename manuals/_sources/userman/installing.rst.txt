@@ -274,7 +274,7 @@ compiler flags. Most of these compiler flags are described in the
 read-only values and cannot be changed at runtime. These are:
 
 .. _flag_settings_file:
-.. index:: single: settings_file flag
+.. index:: pair: settings_file; Flag
 
 ``settings_file``
    Allows or disables loading of a :term:`settings file` at startup.
@@ -287,7 +287,7 @@ read-only values and cannot be changed at runtime. These are:
    Logtalk user directory and in the user home directory.
 
 .. _flag_prolog_dialect:
-.. index:: single: prolog_dialect flag
+.. index:: pair: prolog_dialect; Flag
 
 ``prolog_dialect``
    Name of the :term:`backend Prolog compiler` (an atom). This flag can be used
@@ -295,7 +295,7 @@ read-only values and cannot be changed at runtime. These are:
    of Prolog specific code.
 
 .. _flag_prolog_version:
-.. index:: single: prolog_version flag
+.. index:: pair: prolog_version; Flag
 
 ``prolog_version``
    Version of the :term:`backend Prolog compiler` (a compound term,
@@ -305,7 +305,7 @@ read-only values and cannot be changed at runtime. These are:
    to version data.
 
 .. _flag_prolog_compatible_version:
-.. index:: single: prolog_compatible_version flag
+.. index:: pair: prolog_compatible_version; Flag
 
 ``prolog_compatible_version``
    Compatible version of the :term:`backend Prolog compiler` (a compound term,
@@ -315,7 +315,7 @@ read-only values and cannot be changed at runtime. These are:
    compiler that does not provide access to version data.
 
 .. _flag_prolog_conformance:
-.. index:: single: prolog_conformance flag
+.. index:: pair: prolog_conformance; Flag
 
 ``prolog_conformance``
    Level of conformance of the :term:`backend Prolog compiler` with the
@@ -324,7 +324,7 @@ read-only values and cannot be changed at runtime. These are:
    claiming only broad conformance.
 
 .. _flag_unicode:
-.. index:: single: unicode flag
+.. index:: pair: unicode; Flag
 
 ``unicode``
    Informs Logtalk if the :term:`backend Prolog compiler` supports the Unicode
@@ -333,7 +333,7 @@ read-only values and cannot be changed at runtime. These are:
    Multilingual Plane).
 
 .. _flag_encoding_directive:
-.. index:: single: encoding_directive flag
+.. index:: pair: encoding_directive; Flag
 
 ``encoding_directive``
    Informs Logtalk if the :term:`backend Prolog compiler` supports the
@@ -344,7 +344,7 @@ read-only values and cannot be changed at runtime. These are:
    files), and ``source`` (can be used only in Logtalk source files).
 
 .. _flag_tabling:
-.. index:: single: tabling flag
+.. index:: pair: tabling; Flag
 
 ``tabling``
    Informs Logtalk if the :term:`backend Prolog compiler` provides tabling
@@ -352,7 +352,7 @@ read-only values and cannot be changed at runtime. These are:
    ``supported``.
 
 .. _flag_engines:
-.. index:: single: engines flag
+.. index:: pair: engines; Flag
 
 ``engines``
    Informs if the :term:`backend Prolog compiler` provides the required low
@@ -361,7 +361,7 @@ read-only values and cannot be changed at runtime. These are:
    are ``unsupported`` and ``supported``.
 
 .. _flag_threads:
-.. index:: single: threads flag
+.. index:: pair: threads; Flag
 
 ``threads``
    Informs if the :term:`backend Prolog compiler` provides the required low
@@ -370,7 +370,7 @@ read-only values and cannot be changed at runtime. These are:
    values are ``unsupported`` and ``supported``.
 
 .. _flag_modules:
-.. index:: single: modules flag
+.. index:: pair: modules; Flag
 
 ``modules``
    Informs Logtalk if the :term:`backend Prolog compiler` provides suitable
@@ -379,7 +379,7 @@ read-only values and cannot be changed at runtime. These are:
    modules as objects).
 
 .. _flag_coinduction:
-.. index:: single: coinduction flag
+.. index:: pair: coinduction; Flag
 
 ``coinduction``
    Informs Logtalk if the :term:`backend Prolog compiler` provides the

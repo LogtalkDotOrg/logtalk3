@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: logtalk_make/1
+.. index:: pair: logtalk_make/1; Built-in predicate
 .. _predicates_logtalk_make_1:
 
 logtalk_make/1

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: clause/2
+.. index:: pair: clause/2; Built-in method
 .. _methods_clause_2:
 
 clause/2

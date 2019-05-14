@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: threaded_exit/1-2
+.. index:: pair: threaded_exit/1-2; Built-in predicate
 .. _predicates_threaded_exit_1_2:
 
 threaded_exit/1-2

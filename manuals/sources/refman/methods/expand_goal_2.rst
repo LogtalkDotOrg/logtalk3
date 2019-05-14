@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: expand_goal/2
+.. index:: pair: expand_goal/2; Built-in method
 .. _methods_expand_goal_2:
 
 expand_goal/2

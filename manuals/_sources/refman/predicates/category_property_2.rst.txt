@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: category_property/2
+.. index:: pair: category_property/2; Built-in predicate
 .. _predicates_category_property_2:
 
 category_property/2

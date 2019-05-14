@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: end_protocol/0
+.. index:: pair: end_protocol/0; Directive
 .. _directives_end_protocol_0:
 
 end_protocol/0

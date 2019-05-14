@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: discontiguous/1
+.. index:: pair: discontiguous/1; Directive
 .. _directives_discontiguous_1:
 
 discontiguous/1

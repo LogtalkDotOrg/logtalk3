@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: create_object/4
+.. index:: pair: create_object/4; Built-in predicate
 .. _predicates_create_object_4:
 
 create_object/4

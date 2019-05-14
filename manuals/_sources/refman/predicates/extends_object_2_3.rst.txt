@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: extends_object/2-3
+.. index:: pair: extends_object/2-3; Built-in predicate
 .. _predicates_extends_object_2_3:
 
 extends_object/2-3

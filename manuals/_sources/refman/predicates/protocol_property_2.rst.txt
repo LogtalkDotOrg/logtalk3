@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: protocol_property/2
+.. index:: pair: protocol_property/2; Built-in predicate
 .. _predicates_protocol_property_2:
 
 protocol_property/2

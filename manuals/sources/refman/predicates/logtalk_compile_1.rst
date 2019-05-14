@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: logtalk_compile/1
+.. index:: pair: logtalk_compile/1; Built-in predicate
 .. _predicates_logtalk_compile_1:
 
 logtalk_compile/1

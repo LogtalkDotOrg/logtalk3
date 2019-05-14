@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: permission_error/3
+.. index:: pair: permission_error/3; Built-in method
 .. _methods_permission_error_3:
 
 permission_error/3

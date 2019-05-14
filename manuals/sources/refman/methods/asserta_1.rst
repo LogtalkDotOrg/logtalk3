@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: asserta/1
+.. index:: pair: asserta/1; Built-in method
 .. _methods_asserta_1:
 
 asserta/1

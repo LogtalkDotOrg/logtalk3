@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: sender/1
+.. index:: pair: sender/1; Built-in method
 .. _methods_sender_1:
 
 sender/1

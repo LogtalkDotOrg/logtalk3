@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: mode/2
+.. index:: pair: mode/2; Directive
 .. _directives_mode_2:
 
 mode/2

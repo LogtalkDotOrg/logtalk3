@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: protocol/1-2
+.. index:: pair: protocol/1-2; Directive
 .. _directives_protocol_1_2:
 
 protocol/1-2

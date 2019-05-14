@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: category/1-3
+.. index:: pair: category/1-3; Directive
 .. _directives_category_1_3:
 
 category/1-3

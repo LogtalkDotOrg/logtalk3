@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: encoding/1
+.. index:: pair: encoding/1; Directive
 .. _directives_encoding_1:
 
 encoding/1

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: resource_error/1
+.. index:: pair: resource_error/1; Built-in method
 .. _methods_resource_error_1:
 
 resource_error/1

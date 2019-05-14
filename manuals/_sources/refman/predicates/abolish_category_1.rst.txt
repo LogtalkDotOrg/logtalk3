@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: abolish_category/1
+.. index:: pair: abolish_category/1
 .. _predicates_abolish_category_1:
 
 abolish_category/1

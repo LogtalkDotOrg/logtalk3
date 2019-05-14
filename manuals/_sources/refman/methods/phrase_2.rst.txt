@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: phrase/2
+.. index:: pair: phrase/2; Built-in method
 .. _methods_phrase_2:
 
 phrase/2

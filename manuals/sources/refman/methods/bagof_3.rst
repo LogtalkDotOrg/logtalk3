@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: bagof/3
+.. index:: pair: bagof/3; Built-in method
 .. _methods_bagof_3:
 
 bagof/3

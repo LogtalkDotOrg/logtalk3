@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: use_module/2
+.. index:: pair: use_module/2; Directive
 .. _directives_use_module_2:
 
 use_module/2

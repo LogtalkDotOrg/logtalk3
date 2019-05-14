@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: question_hook/6
+.. index:: pair: question_hook/6; Built-in method
 .. _methods_question_hook_6:
 
 question_hook/6

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: phrase/3
+.. index:: pair: phrase/3; Built-in method
 .. _methods_phrase_3:
 
 phrase/3

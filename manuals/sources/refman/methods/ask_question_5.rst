@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: ask_question/5
+.. index:: pair: ask_question/5; Built-in method
 .. _methods_ask_question_5:
 
 ask_question/5

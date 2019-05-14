@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: end_object/0
+.. index:: pair: end_object/0; Directive
 .. _directives_end_object_0:
 
 end_object/0

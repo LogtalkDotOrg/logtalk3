@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: call/1-N
+.. index:: pair: call/1-N; Built-in method
 .. _methods_call_N:
 
 call/1-N

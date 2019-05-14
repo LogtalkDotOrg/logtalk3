@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: message_hook/4
+.. index:: pair: message_hook/4; Built-in method
 .. _methods_message_hook_4:
 
 message_hook/4

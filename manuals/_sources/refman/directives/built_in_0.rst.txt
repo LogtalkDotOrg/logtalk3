@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: built_in/0
+.. index:: pair: built_in/0; Directive
 .. _directives_built_in_0:
 
 built_in/0

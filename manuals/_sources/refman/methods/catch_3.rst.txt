@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: catch/3
+.. index:: pair: catch/3; Built-in method
 .. _methods_catch_3:
 
 catch/3

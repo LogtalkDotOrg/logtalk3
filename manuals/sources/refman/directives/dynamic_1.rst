@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: dynamic/1
+.. index:: pair: dynamic/1; Directive
 .. _directives_dynamic_1:
 
 dynamic/1

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: threaded/1
+.. index:: pair: threaded/1; Built-in predicate
 .. _predicates_threaded_1:
 
 threaded/1

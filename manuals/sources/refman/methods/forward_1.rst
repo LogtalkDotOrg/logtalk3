@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: forward/1
+.. index:: pair: forward/1; Built-in method
 .. _methods_forward_1:
 
 forward/1

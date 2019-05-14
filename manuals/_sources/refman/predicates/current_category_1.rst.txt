@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: current_category/1
+.. index:: pair: current_category/1; Built-in predicate
 .. _predicates_current_category_1:
 
 current_category/1

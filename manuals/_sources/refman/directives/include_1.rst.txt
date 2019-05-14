@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: include/1
+.. index:: pair: include/1; Directive
 .. _directives_include_1:
 
 include/1

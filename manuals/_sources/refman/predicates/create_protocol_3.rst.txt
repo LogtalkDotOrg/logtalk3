@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: create_protocol/3
+.. index:: pair: create_protocol/3; Built-in predicate
 .. _predicates_create_protocol_3:
 
 create_protocol/3

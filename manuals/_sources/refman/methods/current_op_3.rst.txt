@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: current_op/3
+.. index:: pair: current_op/3; Built-in method
 .. _methods_current_op_3:
 
 current_op/3

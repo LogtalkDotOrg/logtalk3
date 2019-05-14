@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: ^^/1
+.. index:: pair: ^^/1; Control construct
 .. _control_call_super_1:
 
 ^^/1

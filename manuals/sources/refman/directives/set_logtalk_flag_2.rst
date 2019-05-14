@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: set_logtalk_flag/2
+.. index:: pair: set_logtalk_flag/2; Directive
 .. _directives_set_logtalk_flag_2:
 
 set_logtalk_flag/2

@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: alias/2
+.. index:: pair: alias/2; Directive
 .. _directives_alias_2:
 
 alias/2

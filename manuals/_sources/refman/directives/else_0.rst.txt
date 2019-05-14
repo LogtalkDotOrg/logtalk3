@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: else/0
+.. index:: pair: else/0; Directive
 .. _directives_else_0:
 
 else/0

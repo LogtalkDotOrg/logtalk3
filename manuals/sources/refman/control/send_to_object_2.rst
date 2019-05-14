@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: ::/2
+.. index:: pair: ::/2; Control construct
 .. _control_send_to_object_2:
 
 ::/2

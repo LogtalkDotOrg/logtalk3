@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: retract/1
+.. index:: pair: retract/1; Built-in method
 .. _methods_retract_1:
 
 retract/1

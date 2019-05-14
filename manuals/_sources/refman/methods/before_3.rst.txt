@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: before/3
+.. index:: pair: before/3; Built-in method
 .. _methods_before_3:
 
 before/3

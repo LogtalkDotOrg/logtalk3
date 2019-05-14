@@ -527,7 +527,7 @@ Version flags
 ^^^^^^^^^^^^^
 
 .. _flag_version_data:
-.. index:: single: version_data flag
+.. index:: pair: version_data; Flag
 
 ``version_data(Value)``
    Read-only flag whose value is the compound term
@@ -543,7 +543,7 @@ Lint flags
 ^^^^^^^^^^
 
 .. _flag_unknown_entities:
-.. index:: single: unknown_entities flag
+.. index:: pair: unknown_entities; Flag
 
 ``unknown_entities(Option)``
    Controls the unknown entity warnings, resulting from loading an
@@ -553,7 +553,7 @@ Lint flags
    specially when using reflective designs of class-based hierarchies.
 
 .. _flag_unknown_predicates:
-.. index:: single: unknown_predicates flag
+.. index:: pair: unknown_predicates; Flag
 
 ``unknown_predicates(Option)``
    Defines the compiler behavior when calls to unknown predicates (or
@@ -563,7 +563,7 @@ Lint flags
    recommended).
 
 .. _flag_undefined_predicates:
-.. index:: single: undefined_predicates flag
+.. index:: pair: undefined_predicates; Flag
 
 ``undefined_predicates(Option)``
    Defines the compiler behavior when calls to declared but undefined
@@ -573,7 +573,7 @@ Lint flags
    usual default), and ``silent`` (not recommended).
 
 .. _flag_steadfastness:
-.. index:: single: steadfastness flag
+.. index:: pair: steadfastness; Flag
 
 ``steadfastness(Option)``
    Controls warnings about *possible* non :term:`steadfast <steadfastness>`
@@ -582,7 +582,7 @@ Lint flags
    (the usual default due to the possibility of false positives).
 
 .. _flag_portability:
-.. index:: single: portability flag
+.. index:: pair: portability; Flag
 
 ``portability(Option)``
    Controls the non-ISO specified Prolog built-in predicate and non-ISO
@@ -591,7 +591,7 @@ Lint flags
    values are ``warning`` and ``silent`` (the usual default).
 
 .. _flag_missing_directives:
-.. index:: single: missing_directives flag
+.. index:: pair: missing_directives; Flag
 
 ``missing_directives(Option)``
    Controls the missing predicate directive warnings. Possible option
@@ -599,7 +599,7 @@ Lint flags
    recommended).
 
 .. _flag_duplicated_directives:
-.. index:: single: duplicated_directives flag
+.. index:: pair: duplicated_directives; Flag
 
 ``duplicated_directives(Option)``
    Controls the duplicated predicate directive warnings. Possible option
@@ -608,7 +608,7 @@ Lint flags
    are handled as errors, not as duplicated directive warnings.
 
 .. _flag_trivial_goal_fails:
-.. index:: single: trivial_goal_fails flag
+.. index:: pair: trivial_goal_fails; Flag
 
 ``trivial_goal_fails(Option)``
    Controls the printing of warnings warnings for calls to local static
@@ -616,7 +616,7 @@ Lint flags
    ``warning`` (the usual default) and ``silent`` (not recommended).
 
 .. _flag_always_true_or_false_goals:
-.. index:: single: always_true_or_false_goals flag
+.. index:: pair: always_true_or_false_goals; Flag
 
 ``always_true_or_false_goals(Option)``
    Controls the printing of warnings for goals that are always true or
@@ -624,7 +624,7 @@ Lint flags
    ``silent`` (not recommended).
 
 .. _flag_lambda_variables:
-.. index:: single: lambda_variables flag
+.. index:: pair: lambda_variables; Flag
 
 ``lambda_variables(Option)``
    Controls the printing of lambda variable related warnings. Possible
@@ -632,7 +632,7 @@ Lint flags
    recommended).
 
 .. _flag_suspicious_calls:
-.. index:: single: suspicious_calls flag
+.. index:: pair: suspicious_calls; Flag
 
 ``suspicious_calls(Option)``
    Controls the printing of suspicious call warnings. Possible option
@@ -640,7 +640,7 @@ Lint flags
    recommended).
 
 .. _flag_redefined_built_ins:
-.. index:: single: redefined_built_ins flag
+.. index:: pair: redefined_built_ins; Flag
 
 ``redefined_built_ins(Option)``
    Controls the Logtalk and Prolog built-in predicate redefinition
@@ -651,14 +651,14 @@ Lint flags
    predicates.
 
 .. _flag_singleton_variables:
-.. index:: single: singleton_variables flag
+.. index:: pair: singleton_variables; Flag
 
 ``singleton_variables(Option)``
    Controls the singleton variable warnings. Possible option values are
    ``warning`` (the usual default) and ``silent`` (not recommended).
 
 .. _flag_underscore_variables:
-.. index:: single: underscore_variables flag
+.. index:: pair: underscore_variables; Flag
 
 ``underscore_variables(Option)``
    Controls the interpretation of variables that start with an
@@ -671,7 +671,7 @@ Lint flags
    behavior, hence this option.
 
 .. _flag_naming:
-.. index:: single: naming flag
+.. index:: pair: naming; Flag
 
 ``naming(Option)``
    Controls warnings about entity, predicate, and variable names per
@@ -685,7 +685,7 @@ Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _flag_complements:
-.. index:: single: complements flag
+.. index:: pair: complements; Flag
 
 ``complements(Option)``
    Allows objects to be compiled with support for complementing
@@ -700,7 +700,7 @@ Optional features compilation flags
    loaded.
 
 .. _flag_dynamic_declarations:
-.. index:: single: dynamic_declarations flag
+.. index:: pair: dynamic_declarations; Flag
 
 ``dynamic_declarations(Option)``
    Allows objects to be compiled with support for dynamic declaration of
@@ -713,7 +713,7 @@ Optional features compilation flags
    object. Local asserting of new predicates is always allowed.
 
 .. _flag_events:
-.. index:: single: events flag
+.. index:: pair: events; Flag
 
 ``events(Option)``
    Allows message sending calls to be compiled with or without
@@ -726,7 +726,7 @@ Optional features compilation flags
    consequence for objects already compiled and loaded.
 
 .. _flag_context_switching_calls:
-.. index:: single: context_switching_calls flag
+.. index:: pair: context_switching_calls; Flag
 
 ``context_switching_calls(Option)``
    Allows context switching calls (``<</2``) to be either allowed or
@@ -738,7 +738,7 @@ Back-end Prolog compiler and loader flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _flag_prolog_compiler:
-.. index:: single: prolog_compiler flag
+.. index:: pair: prolog_compiler; Flag
 
 ``prolog_compiler(Flags)``
    List of compiler flags for the generated Prolog files. The valid
@@ -750,7 +750,7 @@ Back-end Prolog compiler and loader flags
    the :ref:`prolog_loader <flag_prolog_loader>` flag.
 
 .. _flag_prolog_loader:
-.. index:: single: prolog_loader flag
+.. index:: pair: prolog_loader; Flag
 
 ``prolog_loader(Flags)``
    List of loader flags for the generated Prolog files. The valid flags
@@ -763,7 +763,7 @@ Other flags
 ^^^^^^^^^^^
 
 .. _flag_scratch_directory:
-.. index:: single: scratch_directory flag
+.. index:: pair: scratch_directory; Flag
 
 ``scratch_directory(Directory)``
    Sets the directory to be used to store the temporary files generated
@@ -776,7 +776,7 @@ Other flags
    of a portable solution to check if a path is relative or absolute.
 
 .. _flag_report:
-.. index:: single: report flag
+.. index:: pair: report; Flag
 
 ``report(Option)``
    Controls the default printing of messages. Possible option values are
@@ -786,7 +786,7 @@ Other flags
    messages that are not intercepted by the user).
 
 .. _flag_code_prefix:
-.. index:: single: code_prefix flag
+.. index:: pair: code_prefix; Flag
 
 ``code_prefix(Character)``
    Enables the definition of prefix for all functors of Prolog code
@@ -800,7 +800,7 @@ Other flags
    loading any source files.
 
 .. _flag_optimize:
-.. index:: single: optimize flag
+.. index:: pair: optimize; Flag
 
 ``optimize(Option)``
    Controls the compiler optimizations. Possible option values are
@@ -818,7 +818,7 @@ Other flags
    flag automatically turns off the :ref:`debug <flag_debug>` flag.
 
 .. _flag_source_data:
-.. index:: single: source_data flag
+.. index:: pair: source_data; Flag
 
 ``source_data(Option)``
    Defines how much information is retained when compiling a source
@@ -833,7 +833,7 @@ Other flags
    code.
 
 .. _flag_debug:
-.. index:: single: debug flag
+.. index:: pair: debug; Flag
 
 ``debug(Option)``
    Controls the compilation of source files in debug mode (the Logtalk
@@ -844,7 +844,7 @@ Other flags
    off the :ref:`optimize <flag_optimize>` flag.
 
 .. _flag_reload:
-.. index:: single: reload flag
+.. index:: pair: reload; Flag
 
 ``reload(Option)``
    Defines the reloading behavior for source files. Possible option
@@ -857,14 +857,14 @@ Other flags
    (always reload files).
 
 .. _flag_relative_to:
-.. index:: single: relative_to flag
+.. index:: pair: relative_to; Flag
 
 ``relative_to(Directory)``
    Defines a base directory for resolving relative source file paths.
    The default value is the directory of the source file being compiled.
 
 .. _flag_hook:
-.. index:: single: hook flag
+.. index:: pair: hook; Flag
 
 ``hook(Object)``
    Allows the definition of an object (which can be the pseudo-object
@@ -876,7 +876,7 @@ Other flags
    must be different from any object identifier.
 
 .. _flag_clean:
-.. index:: single: clean flag
+.. index:: pair: clean; Flag
 
 ``clean(Option)``
    Controls cleaning of the intermediate Prolog files generated when

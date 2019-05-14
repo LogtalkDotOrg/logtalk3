@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: assertz/1
+.. index:: pair: assertz/1; Built-in method
 .. _methods_assertz_1:
 
 assertz/1

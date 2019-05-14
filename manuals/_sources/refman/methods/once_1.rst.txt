@@ -15,7 +15,7 @@
    limitations under the License.
 
 
-.. index:: once/1
+.. index:: pair: once/1; Built-in method
 .. _methods_once_1:
 
 once/1
