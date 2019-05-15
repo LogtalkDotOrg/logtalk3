@@ -54,6 +54,9 @@ Examples
 are renamed to, respectively, `assign_parameters`, `missing_data`, `jpl`,
 `logs`, and `books`.
 
+* MOVED: The `redis` example, which only contains tests, to the
+`tests/logtalk/library/redis` directory.
+
 
 3.26.0 - May 8, 2019
 ====================

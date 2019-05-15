@@ -17,11 +17,10 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This example contains only unit tests for the Redis client library but
-these tests also serve as examples of using this library. To run all
-the unit tests, please see the `SCRIPT.txt` file. The tests assume a
-local Redis server running on the default port. If the server is not
-detected, the tests are skipped.
+This directory contains unit tests for the Redis client library but
+these tests also serve as examples of using this library. The tests
+assume a local Redis server running on the default port. If the server
+is not detected, the tests are skipped.
 
 The unit tests were originally written by Sean Charles for his GNU Prolog
 Redis client library:
