@@ -41,6 +41,12 @@ renamed their loader files to `loader.lgt` for uniformity and simplicity.
 * CHANGED: The now deprecated library loader files to load the individual
 libraries from their new directories. 
 
+Tools
+-----
+
+* UPDATED: The `help` tool to open the library documentation index when calling
+the `library/1` predicate with a valid library name.
+
 Examples
 --------
 

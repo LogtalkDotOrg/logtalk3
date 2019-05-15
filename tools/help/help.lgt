@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.19,
+		version is 0.21,
 		author is 'Paulo Moura',
-		date is 2019/02/13,
+		date is 2019/05/15,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -44,9 +44,10 @@
 		nl,
 		write('On-line help is available for Logtalk built-in control constructs, directives,'), nl,
 		write('predicates, non-terminals, methods, and the standard library:'), nl, nl,
-		write('    help::Functor/Arity.             help::Functor//Arity.'), nl,
-		write('    help::library.                   help::library(Entity).'), nl,
-		write('    help::library(Functor/Arity).    help::library(Functor//Arity).'), nl, nl,
+		write('    help::Functor/Arity.           help::Functor//Arity.'), nl,
+		write('    help::library.                 help::library(Library).'), nl,
+		write('    help::library(Entity).'), nl,
+		write('    help::library(Functor/Arity).  help::library(Functor//Arity).'), nl, nl,
 		write('The help page opens in your default web browser. To consult the manuals:'), nl, nl,
 		write('    help::manuals.'), nl, nl,
 		write('To compile and load source files the following shortcut can be used:'), nl, nl,
@@ -462,6 +463,10 @@
 		atom_concat(File1, '.html', File),
 		open('/docs/', File),
 		!.
+	library(Library) :-
+		logtalk_library_path(Library, _),
+		!,
+		open('/docs/', 'library_index.html').
 	library(_) :-
 		open('/docs/', 'entity_index.html').
 
