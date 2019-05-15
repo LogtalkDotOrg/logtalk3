@@ -45,7 +45,7 @@
 		zippers(loader),
 		reader(loader),
 		timeout(loader),
-		gensym,
+		gensym(loader),
 		counters,
 		streamvars
 	], [

@@ -42,68 +42,6 @@ notation as argument for the compiling and loading predicates. For example:
 For existing applications still relying on the old library `*_loader.lgt`
 files, these loader files are still provided but are considered deprecated.
 
-Provided libraries include:
-
-* `arbitrary`  
-	Generation of arbitrary values for most types
-
-* `assignvars`  
-
-* `basic_types`  
-	
-
-* `coroutining`  
-	Portability library abstracting how selected backends provide
-	coroutining support
-
-* `dates`
-
-* `dependents`
-
-* `edcg`
-
-* `expand_library_alias_paths`
-
-* `events`
-
-* `expecteds`  
-
-* `hierarchies`
-
-* `hook_flows`
-
-* `intervals`
-
-* `java`
-
-* `meta`  
-	Common meta-predicates 
-
-* `meta_compiler`  
-	Compiler for the common meta-predicates
-
-* `optionals`
-
-* `os`  
-	Portable operating-system interface predicates
-
-* `random`  
-	Portable and backend-based random number generator predicates
-
-* `statistics`
-
-* `timeout`
-	Portability library abstracting how selected backends provide
-	calls with timeout support
-
-* `types`
-
-* `reader`
-
-* `redis`
-
-* `zippers`
-
 There is a file named `all_loader.lgt` that will load all libraries. Simply
 type the goal:
 

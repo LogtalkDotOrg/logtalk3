@@ -99,7 +99,6 @@ Directory index
 
 
    counters <counters_0>
-   gensym <gensym_0>
    streamvars <streamvars_0>
 
 ``library/arbitrary/``
@@ -203,6 +202,16 @@ Directory index
    either <either_0>
    expected <expected_0>
    expected(Reference) <expected_1>
+
+``library/gensym/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gensym <gensym_0>
 
 ``library/hierarchies/``
 ------------------------

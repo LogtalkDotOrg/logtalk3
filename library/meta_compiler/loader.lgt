@@ -19,6 +19,6 @@
 
 
 :- initialization((
-	logtalk_load([types(loader), library(gensym), meta(loader)]),
+	logtalk_load([types(loader), gensym(loader), meta(loader)]),
 	logtalk_load(meta_compiler, [optimize(on)])
 )).
