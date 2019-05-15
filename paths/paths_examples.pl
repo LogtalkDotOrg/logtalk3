@@ -110,8 +110,8 @@ logtalk_library_path(lazy, engines('lazy/')).
 logtalk_library_path(lo_planner, examples('lo/planner/')).
 logtalk_library_path(lo_travellers, examples('lo/travellers/')).
 logtalk_library_path(localizations, examples('localizations/')).
-logtalk_library_path(logging, examples('logging/')).
 logtalk_library_path(logic, examples('logic/')).
+logtalk_library_path(logs, examples('logging/')).
 logtalk_library_path(lpa_faults, examples('lpa/faults/')).
 logtalk_library_path(lpa_timetables, examples('lpa/timetables/')).
 logtalk_library_path(metaclasses, examples('metaclasses/')).
