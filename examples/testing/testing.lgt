@@ -112,7 +112,7 @@
 	setup :-
 		current_logtalk_flag(report, Value),
 		set_logtalk_flag(report, off),
-		logtalk_load(library(types_loader)),
+		logtalk_load(types(loader)),
 		set_logtalk_flag(report, Value).
 
 	fails(member0) :-

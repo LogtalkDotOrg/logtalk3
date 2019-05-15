@@ -21,7 +21,7 @@
 % load the tool
 
 :- initialization((
-	logtalk_load(library(os_loader)),
+	logtalk_load(os(loader)),
 	logtalk_load(doclet, [optimize(on)])
 )).
 

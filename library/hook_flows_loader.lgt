@@ -18,6 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([hook_pipeline, hook_set], [optimize(on)])
-).
+:- initialization((
+	logtalk_load(hook_flows(loader))
+)).

@@ -20,8 +20,8 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load(library(os_loader)),
+	logtalk_load(basic_types(loader)),
+	logtalk_load(os(loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(main),
 	% test with loading from a relative path a file that uses include/1

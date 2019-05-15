@@ -18,26 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([
-		termp, term,
-		atomic,
-		atom, callable,
-		characterp, character,
-		number, float, integer, natural,
-		compound,
-		pairs,
-		listp, list, list1,
-		difflist,
-		numberlistp, numberlist,
-		varlistp, varlist,
-		queuep, queue,
-		dictionaryp, bintree, rbtree,
-		setp, set, set1,
-		heapp, heaps,
-		comparingp,
-		type
-	], [
-		optimize(on)
-	])
-).
+:- initialization((
+	logtalk_load(types(loader))
+)).

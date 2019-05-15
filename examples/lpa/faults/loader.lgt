@@ -19,6 +19,6 @@
 
 
 :- initialization((
-	logtalk_load(library(hierarchies_loader)),
+	logtalk_load(hierarchies(loader)),
 	logtalk_load(faults)
 )).

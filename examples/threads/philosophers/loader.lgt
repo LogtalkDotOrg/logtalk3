@@ -19,6 +19,6 @@
 
 
 :- initialization((
-	logtalk_load(library(random_loader)),
+	logtalk_load(random(loader)),
 	logtalk_load(philosophers)
 )).

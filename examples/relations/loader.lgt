@@ -19,7 +19,7 @@
 
 
 :- initialization((
-	logtalk_load([library(events_loader), library(basic_types_loader), library(hierarchies_loader)]),
+	logtalk_load([events(loader), basic_types(loader), hierarchies(loader)]),
 	logtalk_load(roots(loader)),
 	logtalk_load(relations)
 )).

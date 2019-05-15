@@ -19,9 +19,9 @@
 
 
 :- initialization((
-	logtalk_load(library(os_loader)),
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load(library(pairs), [optimize(on)]),
+	logtalk_load(os(loader)),
+	logtalk_load(basic_types(loader)),
+	logtalk_load(types(pairs), [optimize(on)]),
 	logtalk_load(modules_diagram_support, [optimize(on)]),
 	logtalk_load([
 		graph_language_registry,

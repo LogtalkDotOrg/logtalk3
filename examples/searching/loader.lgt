@@ -19,9 +19,10 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),
-	logtalk_load(library(metapredicates_loader)),
-	logtalk_load(library(dates_loader)),
+	logtalk_load(types(loader)),
+	logtalk_load(meta(loader)),
+	logtalk_load(loops(loader)),
+	logtalk_load(dates(loader)),
 	logtalk_load(roots(loader)),
 	set_logtalk_flag(events, allow),
 	% puzzles

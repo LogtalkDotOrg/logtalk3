@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- initialization((
-	logtalk_load([metap, meta, loopp, loop], [optimize(on)])
+	logtalk_load(meta(loader)),
+	logtalk_load(loops(loader))
 )).

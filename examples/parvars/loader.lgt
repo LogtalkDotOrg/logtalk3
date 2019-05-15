@@ -24,6 +24,6 @@ file names for the XML documenting files.
 */
 
 :- initialization((
-	logtalk_load(library(dates_loader)),
+	logtalk_load(dates(loader)),
 	logtalk_load(parvars)
 )).

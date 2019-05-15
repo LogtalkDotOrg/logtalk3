@@ -8,6 +8,6 @@
 :- endif.
 
 :- initialization((
-	logtalk_load(library(types_loader)),
+	logtalk_load(types(loader)),
 	logtalk_load(xml)
 )).

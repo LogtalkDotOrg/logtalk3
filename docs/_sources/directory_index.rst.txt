@@ -98,105 +98,328 @@ Directory index
 
 
 
-   after_event_registry <after_event_registry_0>
+   counters <counters_0>
+   gensym <gensym_0>
+   streamvars <streamvars_0>
+
+``library/arbitrary/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    arbitrary <arbitrary_0>
+
+``library/assignvars/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    assignvars <assignvars_0>
    assignvarsp <assignvarsp_0>
-   atom <atom_0>
-   atomic <atomic_0>
-   backend_random <backend_random_0>
-   before_event_registry <before_event_registry_0>
-   bintree <bintree_0>
-   callable <callable_0>
-   character <character_0>
-   characterp <characterp_0>
-   class_hierarchy <class_hierarchy_0>
-   class_hierarchyp <class_hierarchyp_0>
-   comparingp <comparingp_0>
-   compound <compound_0>
+
+``library/coroutining/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    coroutining <coroutining_0>
-   counters <counters_0>
+
+``library/dates/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    date <date_0>
    datep <datep_0>
-   dictionaryp <dictionaryp_0>
-   difflist <difflist_0>
+   time <time_0>
+   timep <timep_0>
+
+``library/dependents/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   observer <observer_0>
+   subject <subject_0>
+
+``library/edcg/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    edcg <edcg_0>
-   either <either_0>
+
+``library/events/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   after_event_registry <after_event_registry_0>
+   before_event_registry <before_event_registry_0>
    event_registry <event_registry_0>
    event_registryp <event_registryp_0>
+   monitor <monitor_0>
+   monitorp <monitorp_0>
+
+``library/expand_library_alias_paths/``
+---------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    expand_library_alias_paths <expand_library_alias_paths_0>
+
+``library/expecteds/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   either <either_0>
    expected <expected_0>
    expected(Reference) <expected_1>
-   fast_random <fast_random_0>
-   float <float_0>
-   gensym <gensym_0>
-   heap(Order) <heap_1>
-   heapp <heapp_0>
+
+``library/hierarchies/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   class_hierarchy <class_hierarchy_0>
+   class_hierarchyp <class_hierarchyp_0>
    hierarchyp <hierarchyp_0>
+   proto_hierarchy <proto_hierarchy_0>
+   proto_hierarchyp <proto_hierarchyp_0>
+
+``library/hook_flows/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    hook_pipeline(Pipeline) <hook_pipeline_1>
    hook_set(Set) <hook_set_1>
-   integer <integer_0>
+
+``library/intervals/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    interval <interval_0>
    intervalp <intervalp_0>
+
+``library/java/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    java <java_0>
    java(Reference) <java_1>
    java(Reference,ReturnValue) <java_2>
    java_access_protocol <java_access_protocol_0>
    java_hook <java_hook_0>
    java_utils_protocol <java_utils_protocol_0>
-   list <list_0>
-   list(Type) <list_1>
-   listp <listp_0>
+
+``library/logging/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    logger <logger_0>
    logging <logging_0>
    loggingp <loggingp_0>
-   loop <loop_0>
-   loopp <loopp_0>
-   maxheap <maxheap_0>
-   maybe <maybe_0>
+
+``library/meta/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    meta <meta_0>
-   meta_compiler <meta_compiler_0>
    metap <metap_0>
+
+``library/meta_compiler/``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   meta_compiler <meta_compiler_0>
+
+``library/optionals/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   maybe <maybe_0>
+   optional <optional_0>
+   optional(Reference) <optional_1>
+
+``library/os/``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   os <os_0>
+   os_types <os_types_0>
+   osp <osp_0>
+
+``library/random/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   backend_random <backend_random_0>
+   fast_random <fast_random_0>
+   random <random_0>
+   randomp <randomp_0>
+
+``library/reader/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   reader <reader_0>
+
+``library/redis/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   redis <redis_0>
+
+``library/statistics/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   population <population_0>
+   sample <sample_0>
+   statistics <statistics_0>
+   statisticsp <statisticsp_0>
+
+``library/timeout/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   timeout <timeout_0>
+
+``library/types/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   atom <atom_0>
+   atomic <atomic_0>
+   bintree <bintree_0>
+   callable <callable_0>
+   character <character_0>
+   characterp <characterp_0>
+   comparingp <comparingp_0>
+   compound <compound_0>
+   dictionaryp <dictionaryp_0>
+   difflist <difflist_0>
+   float <float_0>
+   heap(Order) <heap_1>
+   heapp <heapp_0>
+   integer <integer_0>
+   list <list_0>
+   list(Type) <list_1>
+   listp <listp_0>
+   maxheap <maxheap_0>
    minheap <minheap_0>
-   monitor <monitor_0>
-   monitorp <monitorp_0>
    natural <natural_0>
    number <number_0>
    numberlist <numberlist_0>
    numberlistp <numberlistp_0>
-   observer <observer_0>
-   optional <optional_0>
-   optional(Reference) <optional_1>
-   os <os_0>
-   os_types <os_types_0>
-   osp <osp_0>
    pairs <pairs_0>
-   population <population_0>
-   proto_hierarchy <proto_hierarchy_0>
-   proto_hierarchyp <proto_hierarchyp_0>
    queue <queue_0>
    queuep <queuep_0>
-   random <random_0>
-   randomp <randomp_0>
    rbtree <rbtree_0>
-   reader <reader_0>
-   redis <redis_0>
-   sample <sample_0>
    set <set_0>
    set(Type) <set_1>
    setp <setp_0>
-   statistics <statistics_0>
-   statisticsp <statisticsp_0>
-   streamvars <streamvars_0>
-   subject <subject_0>
    term <term_0>
    termp <termp_0>
-   time <time_0>
-   timeout <timeout_0>
-   timep <timep_0>
    type <type_0>
    varlist <varlist_0>
    varlistp <varlistp_0>
+
+``library/zippers/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
    zipperp <zipperp_0>
    zlist <zlist_0>
 

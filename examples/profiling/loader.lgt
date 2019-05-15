@@ -20,10 +20,10 @@
 
 :- initialization((
 	logtalk_load([
-		library(dates_loader),
-		library(events_loader),
-		library(metapredicates_loader),
-		library(basic_types_loader)
+		dates(loader),
+		events(loader),
+		meta(loader),
+		basic_types(loader)
 	]),
 	logtalk_load([
 		timer,

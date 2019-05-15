@@ -24,13 +24,20 @@ standard library, developer tools, and also for the supplied examples
 and contributions. Note that, in Logtalk, a library is simply a directory
 containing source files.
 
-Also provided in this folder are five Prolog files, `paths_core.pl`,
-`paths_tools.pl`, `paths_contributions.pl`, `paths_ports.pl`, and
-`paths_examples.pl`. Together, these files provide the same path definitions
-of the `paths.pl` file. They can be used when embedding or deploying Logtalk
-applications where e.g. tools or example paths should not be included. Note
-that the obvious solution of having `paths.pl` including or loading the other
-four Prolog files is not portable!
+Also provided in this folder are six Prolog files:
+
+- `paths_core.pl`
+- `paths_tools.pl`
+- `paths_libraries.pl`
+- `paths_contributions.pl`
+- `paths_ports.pl`
+- `paths_examples.pl`
+
+Together, these files provide the same path definitions of the `paths.pl`
+file. They can be used when embedding or deploying Logtalk applications
+where e.g. tools or example paths should not be included. Note that the
+obvious solution of having `paths.pl` including or loading the other four
+Prolog files is not portable!
 
 Basic library aliases defined in the `paths.pl` file include:
 

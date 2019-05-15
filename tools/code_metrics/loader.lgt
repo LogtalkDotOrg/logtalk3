@@ -20,8 +20,8 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),
-	logtalk_load(library(os_loader)),
+	logtalk_load(types(loader)),
+	logtalk_load(os(loader)),
 	logtalk_load([
 		code_metrics_utilities,
 		code_metrics_messages,

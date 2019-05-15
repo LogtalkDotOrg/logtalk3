@@ -22,8 +22,8 @@
 % load the tool
 
 :- initialization((
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load(library(os_loader)),
+	logtalk_load(basic_types(loader)),
+	logtalk_load(os(loader)),
 	logtalk_load([dead_code_scanner, dead_code_scanner_messages], [optimize(on)])
 )).
 

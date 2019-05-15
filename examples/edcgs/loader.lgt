@@ -19,7 +19,7 @@
 
 
 :- initialization((
-	logtalk_load(library(edcg_loader)),
-	logtalk_load(library(types_loader)),
+	logtalk_load(edcgs(loader)),
+	logtalk_load(types(loader)),
 	logtalk_load([gemini, list_constructors, list_sums, synopsis, unique], [hook(edcg)])
 )).

@@ -18,57 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-
-	:- initialization((
-		logtalk_load(basic_types_loader),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-
-	:- initialization((
-		logtalk_load(basic_types_loader),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, qp)).
-
-	:- initialization((
-		logtalk_load(basic_types_loader),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-
-	:- use_module(library(sockets), []).
-	:- initialization((
-		logtalk_load(basic_types_loader),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, swi)).
-
-	:- use_module(library(socket), []).
-	:- initialization((
-		logtalk_load(basic_types_loader),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-
-	:- import(from(/(socket,2), socket)).
-	:- import(from(/(socket_connect,4), socket)).
-	:- import(from(/(socket_close,2), socket)).
-	:- import(from(/(socket_put,3), socket)).
-	:- import(from(/(socket_get0,3), socket)).
-	:- initialization((
-		logtalk_load(basic_types_loader),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- else.
-
-	:- initialization((write('(Redis client library not available for your backend Prolog compiler)'), nl)).
-
-:- endif.
+:- initialization((
+	logtalk_load(redis(loader))
+)).

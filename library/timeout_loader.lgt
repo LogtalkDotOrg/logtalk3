@@ -18,27 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	current_logtalk_flag(prolog_dialect, Dialect),
-	(Dialect == b; Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap)
+:- initialization((
+	logtalk_load(timeout(loader))
 )).
-
-	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-	    :- ensure_loaded(library(timeout)).
-	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-		:- use_module(library(timeout), []).
-	:- elif(current_logtalk_flag(prolog_dialect, swi)).
-		:- use_module(library(time), []).
-	:- elif(current_logtalk_flag(prolog_dialect, yap)).
-		:- use_module(library(timeout), []).
-	:- endif.
-
-	:- initialization((
-		logtalk_load(timeout, [optimize(on)])
-	)).
-
-:- else.
-
-	:- initialization((write('(not available for the used backend Prolog compiler)'), nl)).
-
-:- endif.

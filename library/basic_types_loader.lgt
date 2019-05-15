@@ -18,15 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([
-		termp, term,
-		atomic,
-		atom,
-		number, float, integer,
-		compound, listp, list,
-		type
-	], [
-		optimize(on)
-	])
-).
+:- initialization((
+	logtalk_load(basic_types(loader))
+)).

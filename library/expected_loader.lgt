@@ -19,7 +19,5 @@
 
 
 :- initialization((
-	logtalk_load(basic_types_loader),
-	logtalk_load(arbitrary_loader),
-	logtalk_load([expected, either], [optimize(on)])
+	logtalk_load(expecteds(loader))
 )).

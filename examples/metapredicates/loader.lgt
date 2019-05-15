@@ -19,6 +19,6 @@
 
 
 :- initialization((
-	logtalk_load([library(basic_types_loader), library(metapredicates_loader)]),
+	logtalk_load([basic_types(loader), meta(loader)]),
 	logtalk_load([folds, predicates, closures, metapredicates, fibonacci, company, wrappers, grammar])
 )).

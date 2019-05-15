@@ -18,6 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([zipperp, zlist], [optimize(on)])
-).
+:- initialization((
+	logtalk_load(zippers(loader))
+)).

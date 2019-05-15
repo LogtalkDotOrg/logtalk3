@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on February 14, 2019
+%  Last updated on May 15, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -35,7 +35,7 @@ logtalk_library_path(examples, logtalk_user('examples/')).
 logtalk_library_path(ack, examples('ack/')).
 logtalk_library_path(adventure, examples('adventure/')).
 logtalk_library_path(aliases, examples('aliases/')).
-logtalk_library_path(assignvars, examples('assignvars/')).
+logtalk_library_path(assign_parameters, examples('assign_parameters/')).
 logtalk_library_path(assumptions, examples('assumptions/')).
 logtalk_library_path(attvars, examples('attvars/')).
 logtalk_library_path(barriers, threads('barriers/')).
@@ -45,6 +45,7 @@ logtalk_library_path(birds, examples('birds/')).
 logtalk_library_path(birthdays, threads('birthdays/')).
 logtalk_library_path(blackboard, threads('blackboard/')).
 logtalk_library_path(blocks, examples('blocks/')).
+logtalk_library_path(books, examples('books/')).
 logtalk_library_path(bottles, examples('bottles/')).
 logtalk_library_path(bricks, examples('bricks/')).
 logtalk_library_path(buckets, threads('buckets/')).
@@ -82,7 +83,6 @@ logtalk_library_path(encodings, examples('encodings/')).
 logtalk_library_path(engines, examples('engines/')).
 logtalk_library_path(errors, examples('errors/')).
 logtalk_library_path(expansion, examples('expansion/')).
-logtalk_library_path(expecteds, examples('expecteds/')).
 logtalk_library_path(family, examples('family/')).
 logtalk_library_path(family_alt, examples('family_alt/')).
 logtalk_library_path(fft, threads('fft/')).
@@ -102,7 +102,7 @@ logtalk_library_path(instvars, examples('instvars/')).
 logtalk_library_path(integration, threads('integration/')).
 logtalk_library_path(integration2d, threads('integration2d/')).
 logtalk_library_path(interactors, engines('interactors/')).
-logtalk_library_path(java, examples('java/')).
+logtalk_library_path(jpl, examples('jpl/')).
 logtalk_library_path(lambdas, examples('lambdas/')).
 logtalk_library_path(lambdas_compiled, examples('lambdas_compiled/')).
 logtalk_library_path(laptops, examples('laptops/')).
@@ -121,6 +121,7 @@ logtalk_library_path(metapredicates_compiled, examples('metapredicates_compiled/
 logtalk_library_path(metered_concurrency, threads('metered_concurrency/')).
 logtalk_library_path(mi, examples('mi/')).
 logtalk_library_path(miscellaneous, examples('miscellaneous/')).
+logtalk_library_path(missing_data, examples('missing_data/')).
 logtalk_library_path(modules, examples('modules/')).
 logtalk_library_path(msglog, examples('msglog/')).
 logtalk_library_path(mtbatch, threads('mtbatch/')).
@@ -130,7 +131,6 @@ logtalk_library_path(named_databases, examples('named_databases/')).
 logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(now_you_see_me, examples('now_you_see_me/')).
 logtalk_library_path(operators, examples('operators/')).
-logtalk_library_path(optionals, examples('optionals/')).
 logtalk_library_path(patches, examples('patches/')).
 logtalk_library_path(patching, examples('patching/')).
 logtalk_library_path(parametric, examples('parametric/')).

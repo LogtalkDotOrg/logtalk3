@@ -32,8 +32,8 @@
 )).
 
 	:- initialization((
-		logtalk_load(library(basic_types_loader)),
-		logtalk_load(library(java_loader)),
+		logtalk_load(basic_types(loader)),
+		logtalk_load(java(loader)),
 		logtalk_load(clustering, [optimize(on), hook(java_hook)])
 	)).
 

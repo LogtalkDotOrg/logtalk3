@@ -79,6 +79,15 @@ Start Logtalk and call the goal `{help(loader)}` followed by `help::help`.
 This will provide you with an overview on how to get help and how to load
 and debug your code.
 
+
+Loading libraries
+-----------------
+
+From a source file, use the goal `logtalk_load(<library name>(loader))`. For
+example, `logtalk_load(optionals(loader))`. At the top-level, the shortcut
+`{<library name>(loader)}` is usually available.
+
+
 Running an example
 ------------------
 

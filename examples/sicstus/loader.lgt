@@ -19,6 +19,6 @@
 
 
 :- initialization((
-	logtalk_load([library(hierarchies_loader), library(types_loader)]),
+	logtalk_load([hierarchies(loader), types(loader)]),
 	logtalk_load([ovals, polygons, sorting])
 )).

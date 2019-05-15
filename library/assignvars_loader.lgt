@@ -18,17 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-:- if((
-	current_logtalk_flag(prolog_dialect, Dialect),
-	Dialect \== b, Dialect \== cx, Dialect \== eclipse, Dialect \== gnu,
-	Dialect \== qp, Dialect \== sicstus, Dialect \== swi, Dialect \== yap
+:- initialization((
+	logtalk_load(assignvars(loader))
 )).
-
-	:- initialization(logtalk_load([assignvarsp, assignvars], [optimize(on)])).
-
-:- else.
-
-	:- initialization(logtalk_load([assignvarsp, nd_assignvars], [optimize(on)])).
-
-:- endif.

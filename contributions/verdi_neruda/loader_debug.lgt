@@ -11,9 +11,9 @@ load_interpreters([I|Is]) :-
 					bup_interpreter - magic_expansion(debug),
 					a_star_interpreter(_W) - heuristic_expansion(debug)],
 	logtalk_load(
-		[library(types_loader),
-		 library(metapredicates_loader),
-		 library(random_loader)],
+		[types(loader),
+		 meta(loader),
+		 random(loader)],
 		[report(off)]
 	),
 	logtalk_load(

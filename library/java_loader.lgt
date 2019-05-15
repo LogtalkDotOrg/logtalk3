@@ -18,33 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% don't rely on SWI-Prolog autoloading mechanism to be enabled
-:- if(current_logtalk_flag(prolog_dialect, swi)).
-
-	:- use_module(library(dialect), [exists_source/1]).
-
-:- endif.
-
-
-:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
-
-	:- if(exists_source(library(jpl))).
-
-		:- use_module(library(jpl), []).
-		:- initialization(logtalk_load([java_protocols,java_jpl], [optimize(on)])).
-
-	:- else.
-
-		:- initialization((write('(JPL library not available)'), nl)).
-
-	:- endif.
-
-:- elif(current_logtalk_flag(prolog_dialect, ji)).
-
-	:- initialization(logtalk_load([java_protocols,java_jip], [optimize(on)])).
-
-:- else.
-
-	:- initialization((write('(not applicable)'), nl)).
-
-:- endif.
+:- initialization((
+	logtalk_load(java(loader))
+)).

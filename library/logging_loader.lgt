@@ -19,5 +19,5 @@
 
 
 :- initialization((
-	logtalk_load([loggingp, logging, logger], [optimize(on)])
+	logtalk_load(logging(loader))
 )).

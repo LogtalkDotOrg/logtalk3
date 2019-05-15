@@ -18,6 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([intervalp, interval], [optimize(on)])
-).
+:- initialization((
+	logtalk_load(intervals(loader))
+)).

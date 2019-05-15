@@ -19,6 +19,5 @@
 
 
 :- initialization((
-	logtalk_load(basic_types_loader),
-	logtalk_load([osp, os, os_types], [optimize(on)])
+	logtalk_load(os(loader))
 )).

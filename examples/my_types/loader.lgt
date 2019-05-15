@@ -19,6 +19,6 @@
 
 
 :- initialization((
-	logtalk_load(library(type), [optimize(on)]),
+	logtalk_load(types(type), [optimize(on)]),
 	logtalk_load(my_types)
 )).

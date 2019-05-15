@@ -25,7 +25,7 @@
 :- endif.
 
 :- initialization((
-	logtalk_load(library(os_loader)),
+	logtalk_load(os(loader)),
 	logtalk_load([category], [events(allow), optimize(on)]),
 	logtalk_load([objects, database_other, database, maze, graph], [events(allow), optimize(on)]),
 	logtalk_load([plain, benchmarks], [events(allow), optimize(on)])

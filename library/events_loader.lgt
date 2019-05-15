@@ -18,14 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([
-		event_registryp, event_registry,
-		before_event_registry, after_event_registry,
-		monitorp, monitor
-	],
-	[
-		events(allow),
-		optimize(on)
-	])
-).
+:- initialization((
+	logtalk_load(events(loader))
+)).

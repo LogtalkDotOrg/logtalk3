@@ -18,6 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([reader], [optimize(on)])
-).
+:- initialization((
+	logtalk_load(reader(loader))
+)).

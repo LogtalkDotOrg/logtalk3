@@ -19,6 +19,6 @@
 
 
 :- initialization((
-	logtalk_load(library(zippers_loader)),
+	logtalk_load(zippers(loader)),
 	logtalk_load(slides)
 )).

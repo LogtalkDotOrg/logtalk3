@@ -19,6 +19,5 @@
 
 
 :- initialization((
-	logtalk_load(basic_types_loader),
-	logtalk_load([edcg], [optimize(on)])
+	logtalk_load(edcg(loader))
 )).

@@ -33,7 +33,7 @@
 	:- endif.
 
 	:- initialization((
-		logtalk_load(library(basic_types_loader)),
+		logtalk_load(basic_types(loader)),
 		logtalk_load(symbiosis)
 	)).
 

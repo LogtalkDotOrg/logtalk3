@@ -67,7 +67,7 @@ Follows a short description of each included example (in alphabetical order):
 	alternative names to inherited predicates in order to improve
 	readability or to solve multi-inheritance conflicts
 
-- `assignvars`  
+- `assign_parameters`  
 	example of using assignable variables in the context of parametric
 	objects in order to represent object state
 
@@ -98,6 +98,12 @@ Follows a short description of each included example (in alphabetical order):
 - `blocks`  
 	simpler version of the `bricks` example; illustrates how to use events
 	to avoid breaking object encapsulation when handling object relations
+
+- `books`  
+	illustrates using the optional terms library to decouple data
+	acquisition, which must be able to represent optional values,
+	from data processing, which decides how to handle those values
+	and their absence
 
 - `bottles`  
 	99 bottles of beer on the wall! Sing along!
@@ -188,11 +194,6 @@ Follows a short description of each included example (in alphabetical order):
 - `expansion`  
 	example illustrating the term and goal expansion mechanisms
 
-- `expecteds`  
-	illustrates using the expected terms library to decouple data
-	acquisition, which must be resilient to unexpected events,
-	from data processing, which decides how to handle those events
-
 - `family`  
 	classical family relations example
 
@@ -233,8 +234,9 @@ Follows a short description of each included example (in alphabetical order):
 	example of defining instance variables, default variable values,
 	and setter and getter methods
 
-- `java`  
-	example of using the library minimal abstraction for calling Java
+- `jpl`  
+	examples adapted from SWI-Prolog/YAP JPL library; illustrates how
+	to use the `java` library minimal abstraction for calling Java
 	from Logtalk using familiar message sending syntax (requires Logtalk
 	to be run with SWI-Prolog, YAP, or JIProlog as the backend compiler)
 
@@ -256,13 +258,12 @@ Follows a short description of each included example (in alphabetical order):
 	simple example of supporting application localization in multiple
 	languages
 
-- `logging`  
-	example of using a category to define a simple logging support for
-	objects
-
 - `logic`  
 	example of a translator of first-order predicate logic propositions
 	to conjunctive normal form and to clausal form
+
+- `logs`  
+	example of using a category to define a simple log support for objects
 
 - `lpa`  
 	examples adapted from the LPA Prolog++ system (an expert system for
@@ -287,6 +288,11 @@ Follows a short description of each included example (in alphabetical order):
 
 - `miscellaneous`  
 	unsorted examples
+
+- `missing_data`  
+	illustrates using the expected terms library to decouple data
+	acquisition, which must be resilient to unexpected events,
+	from data processing, which decides how to handle those events
 
 - `modules`  
 	simple example of compiling Prolog modules as objects
@@ -313,12 +319,6 @@ Follows a short description of each included example (in alphabetical order):
 
 - `operators`  
 	example of using operators local to objects and categories
-
-- `optionals`  
-	illustrates using the optional terms library to decouple data
-	acquisition, which must be able to represent optional values,
-	from data processing, which decides how to handle those values
-	and their absence
 
 - `parametric`  
 	simple examples of parametric objects

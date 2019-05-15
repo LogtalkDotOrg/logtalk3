@@ -23,10 +23,20 @@
 	(Dialect == b; Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap)
 )).
 
+	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+	    :- ensure_loaded(library(timeout)).
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+		:- use_module(library(timeout), []).
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(library(time), []).
+	:- elif(current_logtalk_flag(prolog_dialect, yap)).
+		:- use_module(library(timeout), []).
+	:- endif.
+
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(lgtunit(loader)),
-		logtalk_load(library(timeout_loader), [debug(on), source_data(on)]),
+		logtalk_load(timeout(timeout), [debug(on), source_data(on)]),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run
 	)).

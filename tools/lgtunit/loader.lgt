@@ -19,8 +19,8 @@
 
 
 :- initialization((
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load(library(os_loader)),
-	logtalk_load(library(arbitrary_loader)),
+	logtalk_load(basic_types(loader)),
+	logtalk_load(os(loader)),
+	logtalk_load(arbitrary(loader)),
 	logtalk_load([lgtunit, lgtunit_messages], [optimize(on)])
 )).

@@ -19,6 +19,5 @@
 
 
 :- initialization((
-	logtalk_load(os_loader),
-	logtalk_load(expand_library_alias_paths, [optimize(on)])
+	logtalk_load(expand_library_alias_paths(loader))
 )).

@@ -37,7 +37,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
-		logtalk_load(library(redis_loader)),
+		logtalk_load(redis(loader)),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run

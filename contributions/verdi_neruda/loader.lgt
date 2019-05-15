@@ -6,9 +6,9 @@
 
 :- initialization((
 	logtalk_load([
-		library(types_loader),
-		library(metapredicates_loader),
-		library(random_loader)
+		types(loader),
+		meta(loader),
+		random(loader)
 	],
 	[
 		report(warnings)

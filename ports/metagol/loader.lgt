@@ -40,11 +40,11 @@
 )).
 
 	:- initialization((
-		logtalk_load(library(coroutining_loader)),
-		logtalk_load(library(types_loader)),
-		logtalk_load(library(metapredicates_loader)),
-		logtalk_load(library(meta_compiler_loader)),
-		logtalk_load(library(timeout_loader)),
+		logtalk_load(coroutining(loader)),
+		logtalk_load(types(loader)),
+		logtalk_load(meta(loader)),
+		logtalk_load(meta_compiler(loader)),
+		logtalk_load(timeout(loader)),
 		logtalk_load([metagol, metagol_example_protocol], [optimize(on), hook(meta_compiler)])
 	)).
 

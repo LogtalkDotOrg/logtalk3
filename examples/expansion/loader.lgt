@@ -19,7 +19,7 @@
 
 
 :- initialization((
-	logtalk_load([library(basic_types_loader), library(hook_flows_loader)]),
+	logtalk_load([basic_types(loader), hook_flows(loader)]),
 	logtalk_load([expansion, hooks, pipeline]),
 	logtalk_load(raw, [hook(hh)]),
 	logtalk_load(facts, [hook(pipeline([add1, add2, pair12]))])

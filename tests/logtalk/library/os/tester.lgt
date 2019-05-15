@@ -24,9 +24,8 @@
 	% "os" library, which we need to reload in debug mode for
 	% code coverage
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load([library(osp), library(os), library(os_types)], [source_data(on), debug(on)]),
-	logtalk_load(library(basic_types_loader)),
+	logtalk_load(basic_types(loader)),
+	logtalk_load([os(osp), os(os), os(os_types)], [source_data(on), debug(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

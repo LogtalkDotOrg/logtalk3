@@ -21,7 +21,7 @@
 :- if((current_logtalk_flag(threads, supported), current_logtalk_flag(engines, supported))).
 
 	:- initialization((
-		logtalk_load(library(types_loader)),
+		logtalk_load(types(loader)),
 		logtalk_load(futures, [optimize(on)])
 	)).
 

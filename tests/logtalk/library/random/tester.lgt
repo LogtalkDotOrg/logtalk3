@@ -23,9 +23,9 @@
 	% we need to load the lgtunit tool first as it uses the random library,
 	% which we must recompile in order to collect code coverage information
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(library(basic_types_loader)),
+	logtalk_load(basic_types(loader)),
 	logtalk_load(
-		[library(randomp), library(random), library(backend_random), library(fast_random)],
+		[random(randomp), random(random), random(backend_random), random(fast_random)],
 		[debug(on), source_data(on)]
 	),
 	logtalk_load(tests, [hook(lgtunit)]),

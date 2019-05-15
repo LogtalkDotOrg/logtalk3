@@ -24,7 +24,7 @@
 
 :- initialization((
 	set_logtalk_flag(optimize, on),
-	logtalk_load(library(metapredicates_loader)),
-	logtalk_load(library(basic_types_loader)),
+	logtalk_load(meta(loader)),
+	logtalk_load(basic_types(loader)),
 	logtalk_load(lambdas)
 )).

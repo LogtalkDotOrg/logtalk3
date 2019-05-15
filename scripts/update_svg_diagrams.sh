@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on April 30, 2019
+##   Last updated on May 15, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -45,7 +45,7 @@ logtalk="swilgt$extension -g"
 # documentation goals
 core_goal="git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), inheritance_diagram::library(core,[title('Logtalk core entities'),node_type_captions(true),zoom(true),path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/'])]), halt."
 
-library_goal="git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), inheritance_diagram::library(library, [title('Logtalk library'),node_type_captions(true),zoom(true),path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/'])]), halt."
+library_goal="git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), inheritance_diagram::rlibrary(library, [title('Logtalk library'),node_type_captions(true),zoom(true),path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/'])]), halt."
 
 tools_goal="git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports_profiler(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),zoom(true),path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/'])]), halt."
 

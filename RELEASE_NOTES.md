@@ -32,6 +32,22 @@ and the APIs.
 
 * IMPROVED: Handbook index cross-referencing.
 
+Library
+-------
+
+* CHANGED: Moved most of the individual libraries to their own directories and
+renamed their loader files to `loader.lgt` for uniformity and simplicity.
+
+* CHANGED: The now deprecated library loader files to load the individual
+libraries from their new directories. 
+
+Examples
+--------
+
+* RENAMED: The `assignvars`, `expecteds`, `java`, `logging`, and `optionals`
+are renamed to, respectively, `assign_parameters`, `missing_data`, `jpl`,
+`logs`, and `books`.
+
 
 3.26.0 - May 8, 2019
 ====================

@@ -25,120 +25,89 @@ documentation see:
 A plain Prolog version of the Unicode 6.2 standard is also included in the
 `unicode_data` folder. See its `README.md` file for details.
 
-As a general rule, **always** use the corresponding loader file to load
-library entities. The available loader files are described below. Most
-library entities are part of small hierarchies or depend on other entities
-and thus cannot be loaded and compiled separately (e.g. the `list` object
-implements the `listp` protocol and is part of a basic types hierarchy).
-Using the loader files takes care of all dependencies and also ensures
-compilation in optimized mode.
+As a general rule, **always** use the corresponding loader file to load a
+library. Most library entities are part of small hierarchies or depend on
+other libraries and thus cannot be loaded and compiled separately (e.g. the
+`list` object implements the `listp` protocol and is part of a basic types
+hierarchy). Using the loader files takes care of all dependencies and also
+ensures compilation in optimized mode. Specific notes about individual
+libraries can be found in the corresponding library directory `NOTES.md`
+files.
 
-The library loader files can be loaded using the `library(<loader file>)`
+Most of the individual libraries can be loaded using the `<library name>(loader)`
 notation as argument for the compiling and loading predicates. For example:
 
-	| ?- logtalk_load(library(random_loader)).
+	| ?- logtalk_load(random(loader)).
 
-Currently, there are several groups of entities defined, each one with
-its own loader and notes files:
+For existing applications still relying on the old library `*_loader.lgt`
+files, these loader files are still provided but are considered deprecated.
 
-* arbitrary  
-	`arbitrary_loader.lgt`
-	`arbitrary.md`
+Provided libraries include:
 
-* assignvars  
-	`assignvars_loader.lgt`
-	`assignvars.md`
+* `arbitrary`  
+	Generation of arbitrary values for most types
 
-* coroutining  
-	`coroutining_loader.lgt`
-	`coroutining.md`
+* `assignvars`  
 
-* dates  
-	`dates_loader.lgt`
-	`dates.md`
+* `basic_types`  
+	
 
-* dependents  
-	`dependents_loader.lgt`
-	`dependents.md`
+* `coroutining`  
+	Portability library abstracting how selected backends provide
+	coroutining support
 
-* edcg  
-	`edcg_loader.lgt`
-	`edcg.md`
+* `dates`
 
-* events  
-	`events_loader.lgt`
-	`events.md`
+* `dependents`
 
-* expected  
-	`expected_loader.lgt`
-	`expected.md`
+* `edcg`
 
-* hierarchies  
-	`hierarchies_loader.lgt`
-	`hierarchies.md`
+* `expand_library_alias_paths`
 
-* hook_flows  
-	`hook_flows_loader.lgt`
-	`hook_flows.md`
+* `events`
 
-* intervals  
-	`intervals_loader.lgt`
-	`intervals.md`
+* `expecteds`  
 
-* java  
-	`java_loader.lgt`
-	`java.md`
+* `hierarchies`
 
-* metapredicates  
-	`metapredicates_loader.lgt`
-	`meta_compiler_loader.lgt`
-	`metapredicates.md`
+* `hook_flows`
 
-* optional  
-	`optional_loader.lgt`
-	`optional.md`
+* `intervals`
 
-* os  
-	`os_loader.lgt`
-	`os.md`
+* `java`
 
-* random  
-	`random_loader.lgt`
-	`random.md`
+* `meta`  
+	Common meta-predicates 
 
-* statistics  
-	`statistics_loader.lgt`
-	`statistics.md`
+* `meta_compiler`  
+	Compiler for the common meta-predicates
 
-* types  
-	`basic_types_loader.lgt`
-	`types_loader.lgt`
-	`types.md`
+* `optionals`
 
-* reader  
-	`reader_loader.lgt`
-	`reader.md`
+* `os`  
+	Portable operating-system interface predicates
 
-* redis  
-	`redis_loader.lgt`
-	`redis.md`
+* `random`  
+	Portable and backend-based random number generator predicates
 
-* zippers  
-	`zippers_loader.lgt`
-	`zippers.md`
+* `statistics`
 
-For helping when embedding Logtalk and Logtalk applications:
+* `timeout`
+	Portability library abstracting how selected backends provide
+	calls with timeout support
 
-* expand library alias paths
-	`expand_library_alias_paths_loader.lgt`
+* `types`
 
-There is a file named `all_loader.lgt` that will load all entities in the 
-groups listed above. Simply type the goal:
+* `reader`
+
+* `redis`
+
+* `zippers`
+
+There is a file named `all_loader.lgt` that will load all libraries. Simply
+type the goal:
 
 	| ?- logtalk_load(library(all_loader)).
-
-Specific notes about each group of objects, categories, and protocols can be 
-found in the corresponding `*.md` files.
 
 A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
 sample code for selected backend Prolog compilers for initializing Logtalk
@@ -146,7 +115,7 @@ processes such that each process uses a unique scratch directory therefore
 allowing parallel process execution (e.g. for usage at continuous integration
 servers).
 
-Some files contained in this directory represent work in progress and  are
+Some files contained in this directory represent work in progress and are
 not loaded by default by any loader utility file.
 
 Some code in this library is based on public domain Prolog code, in particular,

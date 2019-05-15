@@ -22,7 +22,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([debuggerp, debugger, debugger_messages], [source_data(on)]),
-	logtalk_load(library(types_loader)),
+	logtalk_load(types(loader)),
 	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
 	tests::run
 )).
