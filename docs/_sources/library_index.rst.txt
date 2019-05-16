@@ -181,6 +181,18 @@ Library index
    xref_diagram <xref_diagram_0>
    xref_diagram(Format) <xref_diagram_1>
 
+``dictionaries``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   bintree <bintree_0>
+   dictionaryp <dictionaryp_0>
+   rbtree <rbtree_0>
+
 ``doclet``
 ----------
 
@@ -547,13 +559,11 @@ Library index
 
    atom <atom_0>
    atomic <atomic_0>
-   bintree <bintree_0>
    callable <callable_0>
    character <character_0>
    characterp <characterp_0>
    comparingp <comparingp_0>
    compound <compound_0>
-   dictionaryp <dictionaryp_0>
    difflist <difflist_0>
    float <float_0>
    integer <integer_0>
@@ -565,7 +575,6 @@ Library index
    numberlist <numberlist_0>
    numberlistp <numberlistp_0>
    pairs <pairs_0>
-   rbtree <rbtree_0>
    set <set_0>
    set(Type) <set_1>
    setp <setp_0>

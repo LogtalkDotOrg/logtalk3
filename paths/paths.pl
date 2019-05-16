@@ -103,6 +103,7 @@ logtalk_library_path(basic_types, library('basic_types/')).
 logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(dates, library('dates/')).
 logtalk_library_path(dependents, library('dependents/')).
+logtalk_library_path(dictionaries, library('dictionaries/')).
 logtalk_library_path(edcg, library('edcg/')).
 logtalk_library_path(events, library('events/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).

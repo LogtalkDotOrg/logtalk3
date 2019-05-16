@@ -26,6 +26,7 @@
 		dates(loader),
 		events(loader),
 		dependents(loader),
+		dictionaries(loader),
 		heaps(loader),
 		queues(loader),
 		hierarchies(loader),

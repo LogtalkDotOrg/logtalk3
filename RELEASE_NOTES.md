@@ -47,6 +47,9 @@ libraries from their new directories.
 * MOVED: The queues implementation from the `types` library to a separate
 `queues` library.
 
+* MOVED: The dictionary protocol and implementations from the `types` library
+to a separate `dictionaries` library.
+
 Tools
 -----
 

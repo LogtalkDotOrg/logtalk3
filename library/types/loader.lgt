@@ -31,7 +31,6 @@
 		difflist,
 		numberlistp, numberlist,
 		varlistp, varlist,
-		dictionaryp, bintree, rbtree,
 		setp, set, set1,
 		comparingp,
 		type
