@@ -213,6 +213,19 @@ Directory index
 
    gensym <gensym_0>
 
+``library/heaps/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   heap(Order) <heap_1>
+   heapp <heapp_0>
+   maxheap <maxheap_0>
+   minheap <minheap_0>
+
 ``library/hierarchies/``
 ------------------------
 
@@ -321,6 +334,17 @@ Directory index
    os_types <os_types_0>
    osp <osp_0>
 
+``library/queues/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   queue <queue_0>
+   queuep <queuep_0>
+
 ``library/random/``
 -------------------
 
@@ -396,21 +420,15 @@ Directory index
    dictionaryp <dictionaryp_0>
    difflist <difflist_0>
    float <float_0>
-   heap(Order) <heap_1>
-   heapp <heapp_0>
    integer <integer_0>
    list <list_0>
    list(Type) <list_1>
    listp <listp_0>
-   maxheap <maxheap_0>
-   minheap <minheap_0>
    natural <natural_0>
    number <number_0>
    numberlist <numberlist_0>
    numberlistp <numberlistp_0>
    pairs <pairs_0>
-   queue <queue_0>
-   queuep <queuep_0>
    rbtree <rbtree_0>
    set <set_0>
    set(Type) <set_1>

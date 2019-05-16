@@ -52,6 +52,7 @@ logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(os, library('os/')).
+logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
 logtalk_library_path(reader, library('reader/')).
 logtalk_library_path(redis, library('redis/')).

@@ -44,6 +44,9 @@ libraries from their new directories.
 * MOVED: The heaps implementation from the `types` library to a separate
 `heaps` library.
 
+* MOVED: The queues implementation from the `types` library to a separate
+`queues` library.
+
 Tools
 -----
 

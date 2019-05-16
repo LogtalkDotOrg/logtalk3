@@ -14,6 +14,7 @@ load_interpreters([I|Is]) :-
 		[types(loader),
 		 meta(loader),
 		 heaps(loader),
+		 queues(loader),
 		 random(loader)],
 		[report(off)]
 	),

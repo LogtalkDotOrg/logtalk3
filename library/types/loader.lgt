@@ -31,7 +31,6 @@
 		difflist,
 		numberlistp, numberlist,
 		varlistp, varlist,
-		queuep, queue,
 		dictionaryp, bintree, rbtree,
 		setp, set, set1,
 		comparingp,

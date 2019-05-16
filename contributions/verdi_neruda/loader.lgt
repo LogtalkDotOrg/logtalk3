@@ -8,6 +8,7 @@
 	logtalk_load([
 		types(loader),
 		heaps(loader),
+		queues(loader),
 		meta(loader),
 		random(loader)
 	],

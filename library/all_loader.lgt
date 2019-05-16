@@ -27,6 +27,7 @@
 		events(loader),
 		dependents(loader),
 		heaps(loader),
+		queues(loader),
 		hierarchies(loader),
 		meta(loader),
 		random(loader),
