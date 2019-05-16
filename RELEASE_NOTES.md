@@ -47,6 +47,12 @@ Tools
 * UPDATED: The `help` tool to open the library documentation index when calling
 the `library/1` predicate with a valid library name.
 
+Tests
+-----
+
+* MOVED: All library tests from `tests/logtalk/library` to the individual
+library directories.
+
 Examples
 --------
 

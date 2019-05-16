@@ -46,6 +46,27 @@ To load this library, load the `loader.lgt` utility file:
 	| ?- logtalk_load(redis(loader)).
 
 
+Testing
+-------
+
+The tests assume a local Redis server running on the default port. If the
+server is not detected, the tests are skipped.
+
+The unit tests were originally written by Sean Charles for his GNU Prolog
+Redis client library:
+
+	https://github.com/emacstheviking/gnuprolog-redisclient
+
+The Logtalk version is a straight-forward port of the original tests using
+the `test/1` dialect of `lgtunit`.
+
+
+Credits
+-------
+
+This library is inspired by the Sean Charles GNU Prolog Redis client library.
+
+
 Known issues
 ------------
 
@@ -54,3 +75,5 @@ Recent version of macOS seem to disable the mapping of `localhost` to
 and the `redis::connect/1` from working. This can be fixed either by
 editing the `/etc/hosts file or by using in alternative the predicate
 `redis::connect/3` with `'127.0.0.1'` as first argument.
+
+
