@@ -34,7 +34,6 @@
 		queuep, queue,
 		dictionaryp, bintree, rbtree,
 		setp, set, set1,
-		heapp, heaps,
 		comparingp,
 		type
 	], [

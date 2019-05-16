@@ -26,6 +26,7 @@
 		dates(loader),
 		events(loader),
 		dependents(loader),
+		heaps(loader),
 		hierarchies(loader),
 		meta(loader),
 		random(loader),

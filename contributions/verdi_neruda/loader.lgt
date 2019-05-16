@@ -7,6 +7,7 @@
 :- initialization((
 	logtalk_load([
 		types(loader),
+		heaps(loader),
 		meta(loader),
 		random(loader)
 	],

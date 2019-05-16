@@ -41,6 +41,9 @@ renamed their loader files to `loader.lgt` for uniformity and simplicity.
 * CHANGED: The now deprecated library loader files to load the individual
 libraries from their new directories. 
 
+* MOVED: The heaps implementation from the `types` library to a separate
+`heaps` library.
+
 Tools
 -----
 

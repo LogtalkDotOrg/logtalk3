@@ -19,6 +19,6 @@
 
 
 :- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(heaps(loader))
+	logtalk_load(basic_types(loader)),
+	logtalk_load([heapp, heaps], [optimize(on)])
 )).

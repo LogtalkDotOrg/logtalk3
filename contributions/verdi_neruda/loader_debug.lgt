@@ -13,12 +13,8 @@ load_interpreters([I|Is]) :-
 	logtalk_load(
 		[types(loader),
 		 meta(loader),
+		 heaps(loader),
 		 random(loader)],
-		[report(off)]
-	),
-	logtalk_load(
-		[library(heapp),
-		 library(heaps)],
 		[report(off)]
 	),
 	logtalk_load(counter, [report(warnings), portability(warning)]),
