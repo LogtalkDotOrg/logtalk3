@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2019/05/16,
+		date is 2019/05/17,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [rbtree]
 	]).
@@ -226,7 +226,8 @@
 		keys(Right, Acc, Acc2),
 		keys(Left, [Key| Acc2], Keys).
 
-	delete(t, _, _, t).
+	delete(t, _, _, t) :-
+		fail.
 	delete(t(Key1, Value1, Left1, Right1), Key, Value, NewTree) :-
 		compare(Order, Key, Key1),
 		delete(Order, Key1, Value1, Left1, Right1, Key, Value, NewTree).
@@ -237,6 +238,13 @@
 		delete(Left1, Key, Value, Left2).
 	delete(>, Key1, Value1, Left1, Right1, Key, Value, t(Key1, Value1, Left1, Right2)) :-
 		delete(Right1, Key, Value, Right2).
+
+	join(t, Right, Right) :-
+		!.
+	join(Left, t, Left) :-
+		!.
+	join(t(Key, Value, Left, Right), Tree, t(Key, Value, Left, Right2)) :-
+		join(Right, Tree, Right2).
 
 	update(OldTree, Key, NewValue, NewTree) :-
 		update(OldTree, Key, _, NewValue, NewTree).
@@ -250,13 +258,6 @@
 		update(Left1, Key, OldValue, NewValue, Left2).
 	update(>, Key1, Value1, Left1, Right1, Key, OldValue, NewValue, t(Key1, Value1, Left1, Right2)) :-
 		update(Right1, Key, OldValue, NewValue, Right2).
-
-	join(t, Right, Right) :-
-		!.
-	join(Left, t, Left) :-
-		!.
-	join(t(Key, Value, Left, Right), Tree, t(Key, Value, Left, Right2)) :-
-		join(Right, Tree, Right2).
 
 	:- meta_predicate(map_(*, 1)).
 	map_(t(Key, Value, Left, Right), Closure) :-

@@ -56,6 +56,9 @@ to a separate `dictionaries` library.
 * FIXED: Bug where the `bintree::apply/4` predicate would return an invalid
 tree.
 
+* FIXED: Bug where the `bintree::delete/4` predicate that would succeed when
+the lookup key was not found.
+
 Tools
 -----
 
