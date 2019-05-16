@@ -302,7 +302,7 @@ properties. The `lgtunit` tool supports both `quick_check/2-3` test dialects,
 as described above, and `quick_check/1-3` public predicates for interactive
 use:
 
-	quick_check(Template, Options, Result).
+	quick_check(Template, Result, Options).
 	quick_check(Template, Options).
 	quick_check(Template).
 

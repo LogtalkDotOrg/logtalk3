@@ -57,6 +57,7 @@ logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
 logtalk_library_path(reader, library('reader/')).
 logtalk_library_path(redis, library('redis/')).
+logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(statistics, library('statistics/')).
 logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(types, library('types/')).

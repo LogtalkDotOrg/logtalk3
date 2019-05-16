@@ -526,6 +526,18 @@ Library index
 
    redis <redis_0>
 
+``sets``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   set <set_0>
+   set(Type) <set_1>
+   setp <setp_0>
+
 ``statistics``
 --------------
 
@@ -575,9 +587,6 @@ Library index
    numberlist <numberlist_0>
    numberlistp <numberlistp_0>
    pairs <pairs_0>
-   set <set_0>
-   set(Type) <set_1>
-   setp <setp_0>
    term <term_0>
    termp <termp_0>
    type <type_0>

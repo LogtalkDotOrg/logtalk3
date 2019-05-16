@@ -29,6 +29,7 @@
 		dictionaries(loader),
 		heaps(loader),
 		queues(loader),
+		sets(loader),
 		hierarchies(loader),
 		meta(loader),
 		random(loader),

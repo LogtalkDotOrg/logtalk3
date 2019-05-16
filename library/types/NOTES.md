@@ -21,8 +21,7 @@ About
 -----
 
 This library implements predicates over standard Prolog term types and 
-also term representing common data structures such as lists, difference
-lists, binary trees, queues, heaps, dictionaries, sets, and pairs.
+also term representing common data structures such as lists and pairs.
 
 It also includes a user-extensible `type` object defining type checking
 predicates over common Logtalk and Prolog term types.

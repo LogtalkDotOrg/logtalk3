@@ -22,5 +22,6 @@
 	logtalk_load(types(loader)),
 	logtalk_load(heaps(loader)),
 	logtalk_load(queues(loader)),
-	logtalk_load(dictionaries(loader))
+	logtalk_load(dictionaries(loader)),
+	logtalk_load(sets(loader))
 )).

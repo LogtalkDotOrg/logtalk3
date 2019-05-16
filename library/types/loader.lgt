@@ -31,7 +31,6 @@
 		difflist,
 		numberlistp, numberlist,
 		varlistp, varlist,
-		setp, set, set1,
 		comparingp,
 		type
 	], [
