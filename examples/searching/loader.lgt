@@ -20,6 +20,7 @@
 
 :- initialization((
 	logtalk_load(types(loader)),
+	logtalk_load(sets(loader)),
 	logtalk_load(meta(loader)),
 	logtalk_load(loops(loader)),
 	logtalk_load(dates(loader)),

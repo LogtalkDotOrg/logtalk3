@@ -24,7 +24,7 @@
 )).
 
 	:- initialization((
-		logtalk_load(types(loader)),
+		logtalk_load(sets(loader)),
 		logtalk_load(attvars_hook),
 		logtalk_load(domain, [hook(attvars_hook)]),
 		logtalk_load(domain1, [hook(attvars_hook)])

@@ -23,7 +23,7 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(edcg(loader)),
-	logtalk_load(types(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load([gemini, list_constructors, list_sums, synopsis, unique], [source_data(on), debug(on), hook(edcg)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
