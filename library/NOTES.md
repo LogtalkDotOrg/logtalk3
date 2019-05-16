@@ -17,24 +17,38 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains useful objects, categories, and protocols. For full
-documentation see:
+About
+-----
 
-[../docs/index.html](https://logtalk.org/docs/index.html)
+This folder contains libraries of useful objects, categories, and protocols.
+Specific notes about individual libraries can be found in the corresponding
+library directory `NOTES.md` files.
 
 A plain Prolog version of the Unicode 6.2 standard is also included in the
 `unicode_data` folder. See its `README.md` file for details.
 
-As a general rule, **always** use the corresponding loader file to load a
-library. Most library entities are part of small hierarchies or depend on
-other libraries and thus cannot be loaded and compiled separately (e.g. the
-`list` object implements the `listp` protocol and is part of a basic types
-hierarchy). Using the loader files takes care of all dependencies and also
-ensures compilation in optimized mode. Specific notes about individual
-libraries can be found in the corresponding library directory `NOTES.md`
-files.
+A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
+sample code for selected backend Prolog compilers for initializing Logtalk
+processes such that each process uses a unique scratch directory therefore
+allowing parallel process execution (e.g. for usage at continuous integration
+servers).
 
-Most of the individual libraries can be loaded using the `<library name>(loader)`
+
+Documentation
+-------------
+
+For full documentation see:
+
+[../docs/index.html](https://logtalk.org/docs/index.html)
+
+The documentation can be regenerated using the shell scripts
+`../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.
+
+
+Loading libraries
+-----------------
+
+All the individual libraries can be loaded using the `<library name>(loader)`
 notation as argument for the compiling and loading predicates. For example:
 
 	| ?- logtalk_load(random(loader)).
@@ -47,14 +61,16 @@ type the goal:
 
 	| ?- logtalk_load(library(all_loader)).
 
-A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
-sample code for selected backend Prolog compilers for initializing Logtalk
-processes such that each process uses a unique scratch directory therefore
-allowing parallel process execution (e.g. for usage at continuous integration
-servers).
+As a general rule, always use the corresponding loader file to load a
+library. Most library entities are part of small hierarchies or depend on
+other libraries and thus cannot be loaded and compiled separately (e.g. the
+`list` object implements the `listp` protocol and is part of a basic types
+hierarchy). Using the loader files takes care of all dependencies and also
+ensures compilation in optimized mode.
 
-Some files contained in this directory represent work in progress and are
-not loaded by default by any loader utility file.
+
+Credits
+-------
 
 Some code in this library is based on public domain Prolog code, in particular,
 code adopted from the Edinburgh Prolog library. The definition  of predicate
@@ -66,10 +82,12 @@ available at:
 
 	http://www.cs.otago.ac.nz/staffpriv/ok/pllib.htm
 
-HTML documentation for the library APIs can be found on the `docs`
-directory (open the `docs/index.html` file with your web browser).
-The documentation can be regenerated using the shell scripts
-`../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.
+
+Other notes
+-----------
+
+Some files contained in this directory represent work in progress and are
+not loaded by default by any loader utility file.
 
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).

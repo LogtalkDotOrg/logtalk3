@@ -80,12 +80,12 @@ This will provide you with an overview on how to get help and how to load
 and debug your code.
 
 
-Loading libraries
------------------
+Loading libraries, examples, and tools
+--------------------------------------
 
-From a source file, use the goal `logtalk_load(<library name>(loader))`. For
-example, `logtalk_load(optionals(loader))`. At the top-level, the shortcut
-`{<library name>(loader)}` is usually available.
+From within a source file, use the goal `logtalk_load(<name>(loader))`. For
+example, `logtalk_load(optionals(loader))`. At the top-level interpreter, a
+`{<name>(loader)}` shortcut is available. For example, `{debugger(loader)}`.
 
 
 Running an example
