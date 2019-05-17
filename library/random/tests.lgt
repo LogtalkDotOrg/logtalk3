@@ -22,16 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2018/08/14,
+		date is 2019/05/17,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
 
-	cover(random).
-	cover(fast_random).
-	cover(backend_random).
+	cover(_RandomObject_).
 
 	:- uses(list, [length/2, min/2, max/2]).
 	:- uses(integer, [between/3]).
