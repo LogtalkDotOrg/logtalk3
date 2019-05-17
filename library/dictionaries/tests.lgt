@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
 		date is 2019/05/17,
 		comment is 'Unit tests for the "dictionaries" library.',
@@ -36,12 +36,12 @@
 	test(dictionary_as_dictionary_2_01) :-
 		_DictionaryObject_::as_dictionary([], Dictionary),
 		_DictionaryObject_::as_list(Dictionary, Pairs),
-		Pairs == [].
+		^^assertion(pairs, Pairs == []).
 
 	test(dictionary_as_dictionary_2_02) :-
 		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		_DictionaryObject_::as_list(Dictionary, Pairs),
-		Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0].
+		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% clone/3 tests
 
@@ -278,12 +278,12 @@
 	test(dictionary_size_2_01) :-
 		_DictionaryObject_::as_dictionary([], Dictionary),
 		_DictionaryObject_::size(Dictionary, Size),
-		Size == 0.
+		^^assertion(size, Size == 0).
 
 	test(dictionary_size_2_02) :-
 		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		_DictionaryObject_::size(Dictionary, Size),
-		Size == 10.
+		^^assertion(size, Size == 10).
 
 	% valid/1 tests
 
