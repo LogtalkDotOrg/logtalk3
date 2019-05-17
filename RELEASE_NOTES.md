@@ -58,6 +58,8 @@ to a separate `dictionaries` library.
 * ADDED: Port of the SWI-Prolog `assoc` library under the name `avltree` and
 complying with the `dictionaries` library protocol.
 
+* FIXED: Missing definition of predicate `bintree::valid/1`.
+
 * FIXED: Bug where the `bintree::apply/4` predicate would return an invalid
 tree.
 

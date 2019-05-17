@@ -23,7 +23,7 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura and Paul Fodor',
 		date is 2019/05/17,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
@@ -76,7 +76,7 @@
 		postorder(Left, Pairs1, Pairs).
 
 	as_dictionary(Pairs, Tree) :-
-		list::sort(Pairs, SortedPairs),
+		keysort(Pairs, SortedPairs),
 		as_dictionary_(SortedPairs, Tree).
 
 	as_dictionary_([], t) :-
@@ -307,6 +307,36 @@
 		apply_(OldTree, Key, Closure, NewTree).
 
 	new(t).
+
+	valid(Tree) :-
+		nonvar(Tree),
+		valid_(Tree).
+
+	valid_(t).
+	valid_(t(Key,_,t,t)) :-
+		!,
+		ground(Key).
+	valid_(t(Key,_,t,t(RightKey,_,Left,Right))) :-
+		!,
+		ground((Key,RightKey)),
+		Key @< RightKey,
+		valid(Left),
+		valid(Right).
+	valid_(t(Key,_,t(LeftKey,_,Left,Right),t)) :-
+		!,
+		ground((LeftKey,Key)),
+		LeftKey @< Key,
+		valid(Left),
+		valid(Right).
+	valid_(t(Key,_,Left,Right)) :-
+		ground(Key),
+		valid(Left),
+		valid(Right),
+		Left = t(LeftKey,_,_,_),
+		Right = t(RightKey,_,_,_),
+		ground((LeftKey,RightKey)),
+		LeftKey @< Key,
+		Key @< RightKey.
 
 	size(Dictionary, Size) :-
 		size(Dictionary, 0, Size).
