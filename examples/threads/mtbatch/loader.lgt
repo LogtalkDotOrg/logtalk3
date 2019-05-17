@@ -20,6 +20,7 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
+	logtalk_load(loops(loader)),
 	logtalk_load(meta(loader)),
 	logtalk_load(primes(loader)),
 	logtalk_load(sorting(loader)),

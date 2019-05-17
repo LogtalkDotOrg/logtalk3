@@ -23,7 +23,8 @@
 		dates(loader),
 		events(loader),
 		meta(loader),
-		basic_types(loader)
+		basic_types(loader),
+		loops(loader)
 	]),
 	logtalk_load([
 		timer,
