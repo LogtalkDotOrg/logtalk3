@@ -59,6 +59,9 @@ tree.
 * FIXED: Bug where the `bintree::delete/4` predicate that would succeed when
 the lookup key was not found.
 
+* FIXED: Bug in the `rbtree::map/3` predicate that could result in pairs with
+a wrong value.
+
 Tools
 -----
 

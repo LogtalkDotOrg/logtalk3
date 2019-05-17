@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 2010 Vitor Santos Costa
 %
 %  This code implements Red-Black trees as described in:
@@ -11,9 +11,9 @@
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,9 +28,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Vitor Santos Costa; adapted to Logtalk by Paulo Moura.',
-		date is 2018/06/18,
+		date is 2019/05/17,
 		comment is 'Red-Black trees. Uses standard order to compare keys.',
 		see_also is [bintree]
 	]).
@@ -534,7 +534,7 @@
 		map_(Left, Closure, NewLeft, Nil),
 		map_(Right, Closure, NewRight, Nil).
 	map_(black(Left,Key,Value,Right), Closure, black(NewLeft,Key,NewValue,NewRight), Nil) :-
-		call(Closure, Key-Value, NewValue),
+		call(Closure, Key-Value, Key-NewValue),
 		map_(Left, Closure, NewLeft, Nil),
 		map_(Right, Closure, NewRight, Nil).
 
