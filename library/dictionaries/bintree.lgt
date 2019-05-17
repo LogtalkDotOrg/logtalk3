@@ -23,7 +23,7 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura and Paul Fodor',
 		date is 2019/05/17,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
@@ -83,7 +83,7 @@
 		!.
 	as_dictionary_([Key-Value], t(Key, Value, t, t)) :-
 		!.
-	as_dictionary_([Key1-Value1, Key2-Value2], t(Key1, Value1, t(Key2, Value2, t, t), t)) :-
+	as_dictionary_([Key1-Value1, Key2-Value2], t(Key1, Value1, t, t(Key2, Value2, t, t))) :-
 		!.
 	as_dictionary_(Pairs, t(Key, Value, Left, Right)) :-
 		list::length(Pairs, N),

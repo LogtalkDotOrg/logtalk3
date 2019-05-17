@@ -60,6 +60,9 @@ complying with the `dictionaries` library protocol.
 
 * FIXED: Missing definition of predicate `bintree::valid/1`.
 
+* FIXED: Bug where the `bintree::as_dictionary/2` predicate would return an
+invalid tree.
+
 * FIXED: Bug where the `bintree::apply/4` predicate would return an invalid
 tree.
 
