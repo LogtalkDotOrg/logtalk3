@@ -371,29 +371,29 @@
 		{X is div(7, 3)},
 		X == 2.
 
-	succeeds(iso_is_2_75) :-
+	succeeds(lgt_is_2_75) :-
 		{X is div(0, 3+11)},
 		X == 0.
 
-	succeeds(iso_is_2_76) :-
+	succeeds(lgt_is_2_76) :-
 		{X is div(7,-2)},
 		X == -4.
 
-	throws(iso_is_2_77, error(instantiation_error,_)) :-
+	throws(lgt_is_2_77, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is div(77, N)}.
 
-	throws(iso_is_2_78, error(type_error(evaluable,foo/0),_)) :-
+	throws(lgt_is_2_78, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is div(Foo, 77)}.
 
-	throws(iso_is_2_79, error(type_error(integer,7.5),_)) :-
+	throws(lgt_is_2_79, error(type_error(integer,7.5),_)) :-
 		% try to delay the expected error to runtime
 		{G = (_X is div(7.5, 2)), call(G)}.
 
-	throws(iso_is_2_80, error(evaluation_error(zero_divisor),_)) :-
+	throws(lgt_is_2_80, error(evaluation_error(zero_divisor),_)) :-
 		% try to delay the expected error to runtime
 		{G = (_X is div(7, 0)), call(G)}.
 
