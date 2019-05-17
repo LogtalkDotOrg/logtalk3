@@ -43,7 +43,7 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'R.A.O''Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura',
 		date is 2019/05/17,
 		comment is 'AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.',
@@ -52,7 +52,7 @@
 
 	as_dictionary([], t).
 	as_dictionary([Pair| Pairs], Tree) :-
-		sort([Pair| Pairs], SortedPairs),
+		keysort([Pair| Pairs], SortedPairs),
 		list::length(SortedPairs, Length),
 		as_dictionary(Length, SortedPairs, [], _, Tree).
 
