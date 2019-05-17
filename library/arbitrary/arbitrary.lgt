@@ -33,9 +33,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2019/03/27,
+		date is 2019/05/17,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -48,8 +48,9 @@
 			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
-			'Registering new types' - 'New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. Clauses for the predicates must have a bound first argument to avoid introducing spurious choice-points.',
-			'Character sets' - 'When generating character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default depends on the type.',
+			'Registering new types' - 'New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
+			'Character sets' - '{ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, unicode_full}',
+			'Default character sets' - 'The default character set when using a parameterizable type that takes a character set parameter depends on the type.',
 			'Default character sets' - 'Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.',
 			'Caveats' - 'The type argument to the predicates is not type-checked for performance reasons.'
 		],

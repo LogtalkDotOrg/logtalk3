@@ -72,6 +72,8 @@ the lookup key was not found.
 * FIXED: Bug in the `rbtree::map/3` predicate that could result in pairs with
 a wrong value.
 
+* FIXED: Workaround B-Prolog atom size limitation in the `arbitrary` library.
+
 Tools
 -----
 
