@@ -9,7 +9,7 @@
 Dictionary protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 2.01
+| **Version:** 2.1
 | **Date:** 2019/5/17
 
 | **Compilation flags:**
@@ -369,15 +369,36 @@ Deletes the pair with the maximum key from a dictionary, returning the deleted p
 ``keys/2``
 ^^^^^^^^^^
 
-Returns a list with all dictionary keys.
+Returns a list with all the dictionary keys in ascending order.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``keys(Dictionary,List)``
+|    ``keys(Dictionary,Keys)``
 | **Mode and number of proofs:**
 |    ``keys(@dictionary,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="values/2"> </div>
+
+.. index:: values/2
+.. _dictionaryp/0::values/2:
+
+``values/2``
+^^^^^^^^^^^^
+
+Returns a list with all the dictionary values in ascending order of the keys.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``values(Dictionary,Values)``
+| **Mode and number of proofs:**
+|    ``values(@dictionary,-list)`` - ``one``
 
 
 .. raw:: html

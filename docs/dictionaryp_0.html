@@ -247,7 +247,7 @@
 <p>Dictionary protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2.01</div>
+<div class="line"><strong>Version:</strong> 2.1</div>
 <div class="line"><strong>Date:</strong> 2019/5/17</div>
 </div>
 <div class="line-block">
@@ -582,7 +582,7 @@
 <div id="keys/2"> </div></div>
 <div class="section" id="keys-2">
 <span id="dictionaryp-0-keys-2"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">keys/2</span></code><a class="headerlink" href="#keys-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns a list with all dictionary keys.</p>
+<p>Returns a list with all the dictionary keys in ascending order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -592,16 +592,36 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">keys(Dictionary,List)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">keys(Dictionary,Keys)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">keys(&#64;dictionary,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div id="values/2"> </div></div>
+<div class="section" id="values-2">
+<span id="dictionaryp-0-values-2"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">values/2</span></code><a class="headerlink" href="#values-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns a list with all the dictionary values in ascending order of the keys.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">values(Dictionary,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">values(&#64;dictionary,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="map/2"> </div></div>
 <div class="section" id="map-2">
-<span id="dictionaryp-0-map-2"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">map/2</span></code><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
+<span id="dictionaryp-0-map-2"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">map/2</span></code><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
 <p>Maps a closure over each dictionary key-value pair. Fails if the mapped closure attempts to modify the keys.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -625,7 +645,7 @@
 </div>
 <div id="map/3"> </div></div>
 <div class="section" id="map-3">
-<span id="dictionaryp-0-map-3"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">map/3</span></code><a class="headerlink" href="#map-3" title="Permalink to this headline">¶</a></h3>
+<span id="dictionaryp-0-map-3"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">map/3</span></code><a class="headerlink" href="#map-3" title="Permalink to this headline">¶</a></h3>
 <p>Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure attempts to modify the keys.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -649,7 +669,7 @@
 </div>
 <div id="apply/4"> </div></div>
 <div class="section" id="apply-4">
-<span id="dictionaryp-0-apply-4"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">apply/4</span></code><a class="headerlink" href="#apply-4" title="Permalink to this headline">¶</a></h3>
+<span id="dictionaryp-0-apply-4"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">apply/4</span></code><a class="headerlink" href="#apply-4" title="Permalink to this headline">¶</a></h3>
 <p>Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -673,7 +693,7 @@
 </div>
 <div id="size/2"> </div></div>
 <div class="section" id="size-2">
-<span id="dictionaryp-0-size-2"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">size/2</span></code><a class="headerlink" href="#size-2" title="Permalink to this headline">¶</a></h3>
+<span id="dictionaryp-0-size-2"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">size/2</span></code><a class="headerlink" href="#size-2" title="Permalink to this headline">¶</a></h3>
 <p>Number of dictionary entries.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

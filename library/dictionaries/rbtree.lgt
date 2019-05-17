@@ -28,11 +28,11 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.5,
-		author is 'Vitor Santos Costa; adapted to Logtalk by Paulo Moura.',
+		version is 1.6,
+		author is 'Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.',
 		date is 2019/05/17,
 		comment is 'Red-Black trees. Uses standard order to compare keys.',
-		see_also is [bintree]
+		see_also is [avltree, bintree]
 	]).
 
 	:- public(partial_map/4).
@@ -646,6 +646,20 @@
 	keys(black(Left,Key,_,Right), Keys0, Keys) :-
 		keys(Left, [Key| Keys1], Keys),
 		keys(Right, Keys0, Keys1).
+
+	values(t(_,Tree), Values) :-
+		values(Tree, [], Values).
+
+	values(t(_,Tree), Values0, Values) :-
+		values(Tree, Values0, Values).
+	values(black('',_,_,''), Values, Values) :-
+		!.
+	values(red(Left,_,Value,Right), Values0, Values) :-
+		values(Left, [Value| Values1], Values),
+		values(Right, Values0, Values1).
+	values(black(Left,_,Value,Right), Values0, Values) :-
+		values(Left, [Value| Values1], Values),
+		values(Right, Values0, Values1).
 
 	as_dictionary(List, Tree) :-
 		sort(List, Sorted),

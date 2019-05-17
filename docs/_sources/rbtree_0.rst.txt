@@ -8,8 +8,8 @@
 
 Red-Black trees. Uses standard order to compare keys.
 
-| **Author:** Vitor Santos Costa; adapted to Logtalk by Paulo Moura.
-| **Version:** 1.5
+| **Author:** Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.
+| **Version:** 1.6
 | **Date:** 2019/5/17
 
 | **Compilation flags:**
@@ -69,5 +69,5 @@ Remarks
 
 .. seealso::
 
-   :ref:`bintree <bintree/0>`
+   :ref:`avltree <avltree/0>`, :ref:`bintree <bintree/0>`
 

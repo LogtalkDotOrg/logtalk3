@@ -53,6 +53,8 @@ library.
 * MOVED: The dictionary protocol and implementations from the `types` library
 to a separate `dictionaries` library.
 
+* ADDED: Predicate `values/2` to the `dictionaries` library protocol.
+
 * ADDED: Port of the SWI-Prolog `assoc` library under the name `avltree` and
 complying with the `dictionaries` library protocol.
 

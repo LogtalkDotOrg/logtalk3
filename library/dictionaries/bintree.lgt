@@ -23,11 +23,11 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura and Paul Fodor',
 		date is 2019/05/17,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
-		see_also is [rbtree]
+		see_also is [avltree, rbtree]
 	]).
 
 	:- public(preorder/2).
@@ -222,9 +222,17 @@
 		keys(Tree, [], Keys).
 
 	keys(t, Keys, Keys).
-	keys(t(Key, _, Left, Right), Acc, Keys) :-
-		keys(Right, Acc, Acc2),
-		keys(Left, [Key| Acc2], Keys).
+	keys(t(Key, _, Left, Right), Keys0, Keys) :-
+		keys(Right, Keys0, Keys1),
+		keys(Left, [Key| Keys1], Keys).
+
+	values(Tree, Values) :-
+		values(Tree, [], Values).
+
+	values(t, Values, Values).
+	values(t(_, Value, Left, Right), Values0, Values) :-
+		values(Right, Values0, Values1),
+		values(Left, [Value| Values1], Values).
 
 	delete(t, _, _, t) :-
 		fail.

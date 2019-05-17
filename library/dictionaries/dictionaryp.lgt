@@ -21,7 +21,7 @@
 :- protocol(dictionaryp).
 
 	:- info([
-		version is 2.01,
+		version is 2.1,
 		author is 'Paulo Moura',
 		date is 2019/05/17,
 		comment is 'Dictionary protocol.',
@@ -144,8 +144,15 @@
 	:- public(keys/2).
 	:- mode(keys(@dictionary, -list), one).
 	:- info(keys/2, [
-		comment is 'Returns a list with all dictionary keys.',
-		argnames is ['Dictionary', 'List']
+		comment is 'Returns a list with all the dictionary keys in ascending order.',
+		argnames is ['Dictionary', 'Keys']
+	]).
+
+	:- public(values/2).
+	:- mode(values(@dictionary, -list), one).
+	:- info(values/2, [
+		comment is 'Returns a list with all the dictionary values in ascending order of the keys.',
+		argnames is ['Dictionary', 'Values']
 	]).
 
 	:- public(map/2).

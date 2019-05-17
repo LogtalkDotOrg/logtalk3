@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2019/05/17,
 		comment is 'Unit tests for the "dictionaries" library.',
@@ -234,6 +234,18 @@
 		_DictionaryObject_::as_dictionary([a-1,c-3,b-2], Dictionary),
 		_DictionaryObject_::keys(Dictionary, Keys),
 		Keys == [a, b, c].
+
+	% values/2 tests
+
+	test(dictionary_values_2_01) :-
+		_DictionaryObject_::as_dictionary([], Dictionary),
+		_DictionaryObject_::values(Dictionary, Values),
+		Values == [].
+
+	test(dictionary_values_2_02) :-
+		_DictionaryObject_::as_dictionary([a-1,c-3,b-2], Dictionary),
+		_DictionaryObject_::values(Dictionary, Values),
+		Values == [1, 2, 3].
 
 	% map/2 tests
 

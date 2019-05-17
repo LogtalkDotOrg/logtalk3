@@ -43,7 +43,7 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'R.A.O''Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura',
 		date is 2019/05/17,
 		comment is 'AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.',
@@ -224,6 +224,14 @@
 	keys(t(Key,_,_,Left,Right), Keys0, Keys) :-
 		keys(Right, Keys0, Keys1),
 		keys(Left, [Key| Keys1], Keys).
+
+	values(Tree, Values) :-
+		values(Tree, [], Values).
+
+	values(t, Values, Values).
+	values(t(_,Value,_,Left,Right), Values0, Values) :-
+		values(Right, Values0, Values1),
+		values(Left, [Value| Values1], Values).
 
 	delete(t, _, _, t) :-
 		fail.
