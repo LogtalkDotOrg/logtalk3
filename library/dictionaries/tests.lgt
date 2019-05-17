@@ -29,8 +29,7 @@
 		parnames is ['DictionaryObject']
 	]).
 
-	cover(bintree).
-	cover(rbtree).
+	cover(_DictionaryObject_).
 
 	% as_dictionary/2 and  as_list/2 tests
 

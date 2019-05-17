@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bintree &mdash; Logtalk APIs v3.27.0-b01 documentation</title>
+  <title>avltree &mdash; Logtalk APIs v3.27.0-b01 documentation</title>
   
 
   
@@ -46,8 +46,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="dictionaryp" href="dictionaryp_0.html" />
-    <link rel="prev" title="avltree" href="avltree_0.html" />
+    <link rel="next" title="bintree" href="bintree_0.html" />
+    <link rel="prev" title="xref_diagram(Format)" href="xref_diagram_1.html" />
    
 </head>
 
@@ -113,8 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#dictionaries"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="avltree_0.html">avltree</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">bintree</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">avltree</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
@@ -122,6 +121,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
 </ul>
@@ -222,13 +222,13 @@
         
           <li><a href="library_index.html">Library index</a> &raquo;</li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">bintree</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">avltree</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/bintree_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/avltree_0.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -241,13 +241,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p id="bintree-0"><span id="index-0"></span><strong>object</strong></p>
-<div class="section" id="bintree">
-<h1><code class="docutils literal notranslate"><span class="pre">bintree</span></code><a class="headerlink" href="#bintree" title="Permalink to this headline">¶</a></h1>
-<p>Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.</p>
+  <p id="avltree-0"><span id="index-0"></span><strong>object</strong></p>
+<div class="section" id="avltree">
+<h1><code class="docutils literal notranslate"><span class="pre">avltree</span></code><a class="headerlink" href="#avltree" title="Permalink to this headline">¶</a></h1>
+<p>AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.</p>
 <div class="line-block">
-<div class="line"><strong>Author:</strong> Paulo Moura and Paul Fodor</div>
-<div class="line"><strong>Version:</strong> 2.6</div>
+<div class="line"><strong>Author:</strong> R.A.O’Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
 <div class="line"><strong>Date:</strong> 2019/5/17</div>
 </div>
 <div class="line-block">
@@ -268,56 +268,7 @@
 </div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
-<div id="preorder/2"> </div><div class="section" id="preorder-2">
-<span id="bintree-0-preorder-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">preorder/2</span></code><a class="headerlink" href="#preorder-2" title="Permalink to this headline">¶</a></h3>
-<p>Preorder tree traversal.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">preorder(Tree,List)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">preorder(&#64;tree,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<div id="inorder/2"> </div></div>
-<div class="section" id="inorder-2">
-<span id="bintree-0-inorder-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">inorder/2</span></code><a class="headerlink" href="#inorder-2" title="Permalink to this headline">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">inorder(&#64;tree,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<div id="postorder/2"> </div></div>
-<div class="section" id="postorder-2">
-<span id="bintree-0-postorder-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">postorder/2</span></code><a class="headerlink" href="#postorder-2" title="Permalink to this headline">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">postorder(&#64;tree,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-</div>
+<p>(see related entities)</p>
 </div>
 <div class="section" id="protected-interface">
 <h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
@@ -336,7 +287,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="rbtree_0.html#rbtree-0"><span class="std std-ref">rbtree</span></a></p>
+<p><a class="reference internal" href="bintree_0.html#bintree-0"><span class="std std-ref">bintree</span></a>, <a class="reference internal" href="rbtree_0.html#rbtree-0"><span class="std std-ref">rbtree</span></a></p>
 </div>
 </div>
 </div>
@@ -349,10 +300,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dictionaryp_0.html" class="btn btn-neutral float-right" title="dictionaryp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bintree_0.html" class="btn btn-neutral float-right" title="bintree" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="avltree_0.html" class="btn btn-neutral float-left" title="avltree" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="xref_diagram_1.html" class="btn btn-neutral float-left" title="xref_diagram(Format)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -28,6 +28,7 @@
 	),
 	logtalk_load(tests, [hook(lgtunit)]),
 	lgtunit::run_test_sets([
+		tests(avltree),
 		tests(bintree),
 		tests(rbtree)
 	])

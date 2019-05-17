@@ -43,5 +43,10 @@ To load all entities in this library, load the `loader.lgt` utility file:
 Credits
 -------
 
+The AVL tree implementation is an adaptation to Logtalk of the `assoc`
+SWI-Prolog library authored by R.A.O'Keefe, L.Damas, V.S.Costa, Glenn
+Burgess, Jiri Spitz, and Jan Wielemaker. Additional predicates authored
+by Paulo Moura.
+
 The red-black tree implementation is an adaptation to Logtalk of the `rbtrees`
 Prolog library authored by Vitor Santos Costa.

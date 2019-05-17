@@ -1,0 +1,52 @@
+.. index:: avltree
+.. _avltree/0:
+
+**object**
+
+``avltree``
+===========
+
+AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.
+
+| **Author:** R.A.O'Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura
+| **Version:** 1.0
+| **Date:** 2019/5/17
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`dictionaryp <dictionaryp/0>`
+| **Extends:**
+|    ``public`` :ref:`compound <compound/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+.. seealso::
+
+   :ref:`bintree <bintree/0>`, :ref:`rbtree <rbtree/0>`
+
