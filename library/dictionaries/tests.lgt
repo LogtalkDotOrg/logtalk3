@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2019/05/17,
+		date is 2019/05/18,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -77,30 +77,104 @@
 
 	% insert/4 tests
 
+	% insert in empty dictionary
 	test(dictionary_insert_4_01) :-
 		_DictionaryObject_::as_dictionary([], Dictionary),
 		_DictionaryObject_::insert(Dictionary, b, 2, NewDictionary),
 		_DictionaryObject_::lookup(b, Value, NewDictionary),
-		^^assertion(new, Value == 2).
+		^^assertion(new, Value == 2),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [b-2]).
 
+	% insert smallest key
 	test(dictionary_insert_4_02) :-
+		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,d-4], Dictionary),
+		_DictionaryObject_::insert(Dictionary, a, 1, NewDictionary),
+		_DictionaryObject_::lookup(a, Value, NewDictionary),
+		^^assertion(new, Value == 1),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+
+	% insert second smallest key
+	test(dictionary_insert_4_03) :-
 		_DictionaryObject_::as_dictionary([j-0,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		_DictionaryObject_::insert(Dictionary, b, 2, NewDictionary),
 		_DictionaryObject_::lookup(b, Value, NewDictionary),
-		^^assertion(new, Value == 2).
+		^^assertion(new, Value == 2),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+
+	% insert middle key
+	test(dictionary_insert_4_04) :-
+		_DictionaryObject_::as_dictionary([j-0,b-2,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		_DictionaryObject_::insert(Dictionary, e, 5, NewDictionary),
+		_DictionaryObject_::lookup(e, Value, NewDictionary),
+		^^assertion(new, Value == 5),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+
+	% insert key before largest key
+	test(dictionary_insert_4_05) :-
+		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,h-8,f-6,a-1,d-4], Dictionary),
+		_DictionaryObject_::insert(Dictionary, i, 9, NewDictionary),
+		_DictionaryObject_::lookup(i, Value, NewDictionary),
+		^^assertion(new, Value == 9),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+
+	% insert largest key
+	test(dictionary_insert_4_06) :-
+		_DictionaryObject_::as_dictionary([e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		_DictionaryObject_::insert(Dictionary, j, 0, NewDictionary),
+		_DictionaryObject_::lookup(j, Value, NewDictionary),
+		^^assertion(new, Value == 0).
 
 	% delete/4 tests
 
+	% delete from empty dictionary
 	test(dictionary_delete_4_01) :-
 		_DictionaryObject_::as_dictionary([], Dictionary),
 		\+ _DictionaryObject_::delete(Dictionary, b, _, _).
 
+	% delete smallest key
 	test(dictionary_delete_4_02) :-
+		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		_DictionaryObject_::delete(Dictionary, a, Value, NewDictionary),
+		^^assertion(value, Value == 1),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+
+	% delete second smallest key
+	test(dictionary_delete_4_03) :-
 		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		_DictionaryObject_::delete(Dictionary, b, Value, NewDictionary),
 		^^assertion(value, Value == 2),
-		findall(OtherKey-OtherValue, _DictionaryObject_::lookup(OtherKey, OtherValue, NewDictionary), OtherPairs),
-		^^assertion(pairs, OtherPairs == [a-1,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [a-1,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+
+	% delete middle key
+	test(dictionary_delete_4_04) :-
+		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		_DictionaryObject_::delete(Dictionary, e, Value, NewDictionary),
+		^^assertion(value, Value == 5),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,f-6,g-7,h-8,i-9,j-0]).
+
+	% delete key before largest key
+	test(dictionary_delete_4_05) :-
+		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		_DictionaryObject_::delete(Dictionary, i, Value, NewDictionary),
+		^^assertion(value, Value == 9),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,j-0]).
+
+	% delete largest key
+	test(dictionary_delete_4_06) :-
+		_DictionaryObject_::as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		_DictionaryObject_::delete(Dictionary, j, Value, NewDictionary),
+		^^assertion(value, Value == 0),
+		_DictionaryObject_::as_list(NewDictionary, Pairs),
+		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9]).
 
 	% update/4 tests
 
