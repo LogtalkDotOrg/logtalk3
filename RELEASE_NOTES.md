@@ -90,6 +90,8 @@ library directories.
 
 * ADDED: Unit tests for the `dictionaries` library.
 
+* ADDED: Unit tests for the `heaps` library.
+
 * ADDED: Unit tests for the ISO Prolog standard arithmetic function `div/2`.
 
 Examples
