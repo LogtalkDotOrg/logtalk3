@@ -64,9 +64,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
-		date is 2019/03/12,
+		date is 2019/05/18,
 		comment is 'Heap implementation, parameterized by the order to be used to compare keys ("<" or ">").',
 		parnames is ['Order'],
 		see_also is [minheap, maxheap]
@@ -176,7 +176,7 @@
 
 	merge_tree(t, Heap, Heap).
 	merge_tree(t(Key,Value,Left,Right), Heap0, Heap) :-
-		insert(Heap0, Key, Value, Heap1),
+		insert(Key, Value, Heap0, Heap1),
 		merge_tree(Left, Heap1, Heap2),
 		merge_tree(Right, Heap2, Heap).
 
