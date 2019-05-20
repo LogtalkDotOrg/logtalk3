@@ -9,8 +9,8 @@
 Queue predicates implemented using difference lists.
 
 | **Author:** Paulo Moura
-| **Version:** 1.01
-| **Date:** 2019/3/12
+| **Version:** 1.1
+| **Date:** 2019/5/20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -20,6 +20,8 @@ Queue predicates implemented using difference lists.
 |    ``public`` :ref:`queuep <queuep/0>`
 | **Extends:**
 |    ``public`` :ref:`compound <compound/0>`
+| **Aliases:**
+|    ``queuep`` ``size/2`` aka ``length/2``
 
 Public interface
 ----------------

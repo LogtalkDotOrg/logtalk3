@@ -9,8 +9,8 @@
 Queue protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.0
-| **Date:** 2000/7/24
+| **Version:** 1.1
+| **Date:** 2019/5/20
 
 | **Compilation flags:**
 |    ``static``
@@ -80,7 +80,7 @@ Adds the new element at the end of the queue.
 |    ``static``
 
 | **Template:**
-|    ``join(Element,Queue_in,Queue_out)``
+|    ``join(Element,Queue,NewQueue)``
 | **Mode and number of proofs:**
 |    ``join(@term,+queue,-queue)`` - ``zero_or_one``
 
@@ -101,7 +101,7 @@ Adds the new elements at the end of the queue.  The elements are added in the sa
 |    ``static``
 
 | **Template:**
-|    ``join_all(List,Queue_in,Queue_out)``
+|    ``join_all(List,Queue,NewQueue)``
 | **Mode and number of proofs:**
 |    ``join_all(+list,+queue,-queue)`` - ``zero_or_one``
 
@@ -122,7 +122,7 @@ Adds the new element at the front of the queue.
 |    ``static``
 
 | **Template:**
-|    ``jump(Element,Queue_in,Queue_out)``
+|    ``jump(Element,Queue,NewQueue)``
 | **Mode and number of proofs:**
 |    ``jump(@term,+queue,-queue)`` - ``zero_or_one``
 
@@ -143,30 +143,30 @@ Adds the new elements at the front of the queue.  The elements are added in the 
 |    ``static``
 
 | **Template:**
-|    ``jump_all(Element,Queue_in,Queue_out)``
+|    ``jump_all(Elements,Queue,NewQueue)``
 | **Mode and number of proofs:**
 |    ``jump_all(+list,+queue,-queue)`` - ``zero_or_one``
 
 
 .. raw:: html
 
-   <div id="length/2"> </div>
+   <div id="size/2"> </div>
 
-.. index:: length/2
-.. _queuep/0::length/2:
+.. index:: size/2
+.. _queuep/0::size/2:
 
-``length/2``
-^^^^^^^^^^^^
+``size/2``
+^^^^^^^^^^
 
-Queue length.
+Returns the number of heap elements.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``length(Queue,Length)``
+|    ``size(Heap,Size)``
 | **Mode and number of proofs:**
-|    ``length(+queue,?integer)`` - ``zero_or_one``
+|    ``size(+heap,?integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -185,7 +185,7 @@ Removes the first element of the queue for service.
 |    ``static``
 
 | **Template:**
-|    ``serve(Queue_in,Head,Queue_out)``
+|    ``serve(Queue,Head,NewQueue)``
 | **Mode and number of proofs:**
 |    ``serve(+queue,?term,-queue)`` - ``zero_or_one``
 

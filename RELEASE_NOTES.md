@@ -41,6 +41,10 @@ renamed their loader files to `loader.lgt` for uniformity and simplicity.
 * CHANGED: The now deprecated library loader files to load the individual
 libraries from their new directories. 
 
+* CHANGED: Renamed the `queuep` protocol `length/2` predicate to `size/2` for
+naming consistency with other libraries. Added `length/2` as an alias to the
+`size/2` predicate to the `queue` object for backwards compatibility.
+
 * MOVED: The heaps implementation from the `types` library to a separate
 `heaps` library.
 

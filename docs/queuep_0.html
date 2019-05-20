@@ -245,8 +245,8 @@
 <p>Queue protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.0</div>
-<div class="line"><strong>Date:</strong> 2000/7/24</div>
+<div class="line"><strong>Version:</strong> 1.1</div>
+<div class="line"><strong>Date:</strong> 2019/5/20</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -309,7 +309,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">join(Element,Queue_in,Queue_out)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">join(Element,Queue,NewQueue)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -329,7 +329,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">join_all(List,Queue_in,Queue_out)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">join_all(List,Queue,NewQueue)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -349,7 +349,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">jump(Element,Queue_in,Queue_out)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">jump(Element,Queue,NewQueue)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -369,17 +369,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">jump_all(Element,Queue_in,Queue_out)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">jump_all(Elements,Queue,NewQueue)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">jump_all(+list,+queue,-queue)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-<div id="length/2"> </div></div>
-<div class="section" id="length-2">
-<span id="queuep-0-length-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">length/2</span></code><a class="headerlink" href="#length-2" title="Permalink to this headline">¶</a></h3>
-<p>Queue length.</p>
+<div id="size/2"> </div></div>
+<div class="section" id="size-2">
+<span id="queuep-0-size-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">size/2</span></code><a class="headerlink" href="#size-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns the number of heap elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -389,11 +389,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">length(Queue,Length)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">size(Heap,Size)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">length(+queue,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">size(+heap,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div id="serve/3"> </div></div>
@@ -409,7 +409,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve(Queue_in,Head,Queue_out)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">serve(Queue,Head,NewQueue)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
