@@ -97,6 +97,8 @@ Tests
 * MOVED: All library tests from `tests/logtalk/library` to the individual
 library directories.
 
+* ADDED: Unit tests for the `coroutining` library.
+
 * ADDED: Unit tests for the `dictionaries` library.
 
 * ADDED: Unit tests for the `heaps` library.
