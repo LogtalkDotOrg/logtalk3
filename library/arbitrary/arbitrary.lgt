@@ -33,7 +33,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
 		date is 2019/05/20,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -413,7 +413,7 @@
 
 	arbitrary(character_code, Arbitrary) :-
 		% ascii_full
-		between(0, 129, Arbitrary).
+		between(0, 127, Arbitrary).
 
 	arbitrary(character_code(CharSet), Arbitrary) :-
 		(	CharSet == ascii_full ->

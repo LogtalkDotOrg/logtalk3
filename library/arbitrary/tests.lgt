@@ -44,8 +44,8 @@
 				ground(Type),
 				type::arbitrary(Type)
 			),
-			(	^^quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
-				^^assertion(type(Type), Result == passed)
+			(	lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
+				^^assertion(type(Type,Result), Result == passed)
 			)
 		).
 
@@ -63,7 +63,7 @@
 				ground(Type)
 			),
 			(	lgtunit::quick_check(shrink_value({Type}, -Type), Result, [n(25)]),
-				^^assertion(type(Type), Result == passed)
+				^^assertion(type(Type,Result), Result == passed)
 			)
 		).
 

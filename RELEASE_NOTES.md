@@ -81,6 +81,8 @@ a wrong value.
 
 * FIXED: Bug in the `heap/1::merge3` predicate that resulted in failed merges.
 
+* FIXED: Typo in the definition of the arbitrary generator for character codes.
+
 * FIXED: Workaround B-Prolog atom size limitation in the `arbitrary` library.
 
 Tools
