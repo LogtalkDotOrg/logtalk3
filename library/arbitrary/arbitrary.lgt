@@ -33,9 +33,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2019/05/17,
+		date is 2019/05/20,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -73,7 +73,7 @@
 	:- multifile(arbitrary/2).
 	:- mode(arbitrary(@callable, -term), zero_or_one).
 	:- info(arbitrary/2, [
-		comment is 'Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.',
+		comment is 'Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the arbitrary/1 predicate.',
 		argnames is ['Type', 'Term']
 	]).
 
@@ -89,7 +89,7 @@
 	:- multifile(shrink/3).
 	:- mode(shrink(@callable, @term, -term), zero_or_more).
 	:- info(shrink/3, [
-		comment is 'Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate. Must always generate a finite number of solutions.',
+		comment is 'Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the shrinker/1 predicate.',
 		argnames is ['Type', 'Large', 'Small']
 	]).
 
@@ -914,20 +914,42 @@
 	edge_case(atomic, '').
 	edge_case(atomic, 0).
 	edge_case(atomic, 0.0).
+	% integers
 	edge_case(integer, 0).
+	edge_case(integer, MinInteger) :-
+		current_prolog_flag(min_integer, MinInteger).
+	edge_case(integer, MaxInteger) :-
+		current_prolog_flag(max_integer, MaxInteger).
 	edge_case(positive_integer, 1).
+	edge_case(positive_integer, MaxInteger) :-
+		current_prolog_flag(max_integer, MaxInteger).
 	edge_case(negative_integer, -1).
+	edge_case(negative_integer, MinInteger) :-
+		current_prolog_flag(min_integer, MinInteger).
 	edge_case(non_positive_integer, 0).
+	edge_case(non_positive_integer, MinInteger) :-
+		current_prolog_flag(min_integer, MinInteger).
 	edge_case(non_negative_integer, 0).
+	edge_case(non_negative_integer, MaxInteger) :-
+		current_prolog_flag(max_integer, MaxInteger).
+	% floats
 	edge_case(float, 0.0).
 	edge_case(non_positive_float, 0.0).
 	edge_case(non_negative_float, 0.0).
-	edge_case(number, 0).
-	edge_case(number, 0.0).
-	edge_case(non_positive_number, 0).
-	edge_case(non_positive_number, 0.0).
-	edge_case(non_negative_number, 0).
-	edge_case(non_negative_number, 0.0).
+	% numbers
+	edge_case(number, Number) :-
+		edge_case(integer, Number).
+	edge_case(number, Number) :-
+		edge_case(float, Number).
+	edge_case(non_positive_number, Number) :-
+		edge_case(non_positive_integer, Number).
+	edge_case(non_positive_number, Number) :-
+		edge_case(non_positive_float, Number).
+	edge_case(non_negative_number, Number) :-
+		edge_case(non_negative_integer, Number).
+	edge_case(non_negative_number, Number) :-
+		edge_case(non_negative_float, Number).
+	% other numbers
 	edge_case(byte, 0).
 	edge_case(byte, 255).
 	edge_case(probability, 0.0).
@@ -946,6 +968,7 @@
 		edge_case(character_code(CharSet), Term).
 	edge_case(operator_priority, 0).
 	edge_case(operator_priority, 1200).
+	% lists
 	edge_case(list, []).
 	edge_case(list(_), []).
 	edge_case(list(Type), [Term]) :-
@@ -968,6 +991,7 @@
 	edge_case(chars(_), []).
 	edge_case(chars(CharSet), [Term]) :-
 		edge_case(character(CharSet), Term).
+	% other
 	edge_case(callable, true).
 	edge_case(callable, fail).
 	edge_case(between(_, Lower, _), Lower).

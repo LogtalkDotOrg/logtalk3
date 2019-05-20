@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/05/16,
+		date is 2019/05/20,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -44,8 +44,8 @@
 				ground(Type),
 				type::arbitrary(Type)
 			),
-			(	lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
-				Result == passed
+			(	^^quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
+				^^assertion(type(Type), Result == passed)
 			)
 		).
 
@@ -63,7 +63,7 @@
 				ground(Type)
 			),
 			(	lgtunit::quick_check(shrink_value({Type}, -Type), Result, [n(25)]),
-				Result == passed
+				^^assertion(type(Type), Result == passed)
 			)
 		).
 

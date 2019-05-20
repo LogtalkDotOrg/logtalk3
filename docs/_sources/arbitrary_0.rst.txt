@@ -9,8 +9,8 @@
 Adds predicates for generating random values for selected types to the library "type" object.
 
 | **Author:** Paulo Moura
-| **Version:** 2.4
-| **Date:** 2019/5/17
+| **Version:** 2.5
+| **Date:** 2019/5/20
 
 | **Compilation flags:**
 |    ``static``
@@ -51,7 +51,7 @@ Table of defined types for which an arbitrary value can be generated. A new type
 ``arbitrary/2``
 ^^^^^^^^^^^^^^^
 
-Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.
+Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the arbitrary/1 predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``
@@ -93,7 +93,7 @@ Table of defined types for which a shrinker is provided. A new shrinker can be r
 ``shrink/3``
 ^^^^^^^^^^^^
 
-Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate. Must always generate a finite number of solutions.
+Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the shrinker/1 predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``

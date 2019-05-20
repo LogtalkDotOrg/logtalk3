@@ -244,8 +244,8 @@
 <p>Adds predicates for generating random values for selected types to the library “type” object.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2.4</div>
-<div class="line"><strong>Date:</strong> 2019/5/17</div>
+<div class="line"><strong>Version:</strong> 2.5</div>
+<div class="line"><strong>Date:</strong> 2019/5/20</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -277,7 +277,7 @@
 <div id="arbitrary/2"> </div></div>
 <div class="section" id="arbitrary-2">
 <span id="arbitrary-0-arbitrary-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code><a class="headerlink" href="#arbitrary-2" title="Permalink to this headline">¶</a></h3>
-<p>Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.</p>
+<p>Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the arbitrary/1 predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -317,7 +317,7 @@
 <div id="shrink/3"> </div></div>
 <div class="section" id="shrink-3">
 <span id="arbitrary-0-shrink-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">shrink/3</span></code><a class="headerlink" href="#shrink-3" title="Permalink to this headline">¶</a></h3>
-<p>Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate. Must always generate a finite number of solutions.</p>
+<p>Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the shrinker/1 predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

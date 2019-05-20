@@ -57,6 +57,9 @@ library.
 * MOVED: The dictionary protocol and implementations from the `types` library
 to a separate `dictionaries` library.
 
+* ADDED: Additional edge cases for numbers when using a backend Prolog compiler
+with bounded arithmetic.
+
 * ADDED: Predicate `values/2` to the `dictionaries` library protocol.
 
 * ADDED: Port of the SWI-Prolog `assoc` library under the name `avltree` and
