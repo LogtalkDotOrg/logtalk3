@@ -91,6 +91,9 @@ element in the resulting set.
 Tools
 -----
 
+* CHANGED: Classify the `lgtunit::assertion/1` predicate as deprecated. Use
+in alternative the `lgtunit::assertion/2` predicate.
+
 * UPDATED: The `help` tool to open the library documentation index when calling
 the `library/1` predicate with a valid library name.
 

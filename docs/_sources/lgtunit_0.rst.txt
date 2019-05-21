@@ -9,8 +9,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 7.6
-| **Date:** 2019/3/28
+| **Version:** 7.7
+| **Date:** 2019/5/21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -184,7 +184,7 @@ Reified version of the deterministic/1 predicate. True if the goal succeeds. Ret
 ``assertion/1``
 ^^^^^^^^^^^^^^^
 
-True if the assertion goal succeeds. Throws an error using the assertion goal as argument if the assertion goal throws an error or fails.
+True if the assertion goal succeeds. Throws an error using the assertion goal as argument if the assertion goal throws an error or fails. Deprecated. Use assertion/2 instead.
 
 | **Compilation flags:**
 |    ``static``
