@@ -106,8 +106,8 @@ Tests
 * MOVED: All library tests from `tests/logtalk/library` to the individual
 library directories.
 
-* ADDED: Unit tests for the `coroutining`, `dictionaries`, `heaps`, `queues`,
-and `sets` libraries.
+* ADDED: Unit tests for the `coroutining`, `dictionaries`, `gensym`, `heaps`,
+`queues`, and `sets` libraries.
 
 * ADDED: Unit tests for the ISO Prolog standard arithmetic function `div/2`.
 

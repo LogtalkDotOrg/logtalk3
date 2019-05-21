@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/05/15,
+		date is 2019/05/21,
 		comment is 'Unit tests for the "gensym" library.'
 	]).
 
@@ -32,41 +32,38 @@
 
 	% gensym/2
 
-	test(gensym_gensym_2_01) :-
+	test(gensym_gensym_2_01, deterministic(A1 \== A2)) :-
 		gensym::gensym(a, A1),
 		gensym::gensym(a, A2),
-		ground(A1), ground(A2), A1 \== A2.
+		ground(A1), ground(A2).
 
-	test(gensym_gensym_2_02) :-
+	test(gensym_gensym_2_02, deterministic(Prefix == a)) :-
 		gensym::gensym(a, A),
-		sub_atom(A, 0, 1, _, Prefix), Prefix == a.
+		sub_atom(A, 0, 1, _, Prefix).
 
 	% reset_gensym/0
 
 	test(gensym_reset_gensym_0_01) :-
 		gensym::reset_gensym.
 
-	test(gensym_reset_gensym_0_02) :-
+	test(gensym_reset_gensym_0_02, deterministic(A1 == A2)) :-
 		gensym::gensym(a, A1),
 		gensym::reset_gensym,
-		gensym::gensym(a, A2),
-		A1 == A2.
+		gensym::gensym(a, A2).
 
 	% reset_gensym/1
 
 	test(gensym_reset_gensym_1_01) :-
 		gensym::reset_gensym(a).
 
-	test(gensym_reset_gensym_1_02) :-
+	test(gensym_reset_gensym_1_02, deterministic(A1 == A2)) :-
 		gensym::gensym(a, A1),
 		gensym::reset_gensym(a),
-		gensym::gensym(a, A2),
-		A1 == A2.
+		gensym::gensym(a, A2).
 
-	test(gensym_reset_gensym_1_03) :-
+	test(gensym_reset_gensym_1_03, deterministic(A1 \== A2)) :-
 		gensym::gensym(a, A1),
 		gensym::reset_gensym(b),
-		gensym::gensym(a, A2),
-		A1 \== A2.
+		gensym::gensym(a, A2).
 
 :- end_object.
