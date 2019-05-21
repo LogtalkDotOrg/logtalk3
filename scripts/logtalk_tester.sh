@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on December 3, 2018
+##   Last updated on May 21, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.33"
+	echo "$(basename "$0") 0.34"
 	exit 0
 }
 
@@ -135,6 +135,7 @@ run_tests() {
 		grep -a 'tests:' "$results/$name.results" | $sed 's/%/***** (debug)/'
 	fi
 	if [ $tests_exit -eq 0 ] ; then
+		grep -a 'completed tests from object' "$results/$name.results" | $sed 's/%/*****        /'
 		grep -a 'out of' "$results/$name.results" | grep -a 'clause coverage' | $sed 's/%/*****        /'
 		grep -a 'no code coverage information collected' "$results/$name.results" | $sed 's/%/*****        /'
 		grep -a '(not applicable)' "$results/$name.results" | $sed 's/(/*****         (/'

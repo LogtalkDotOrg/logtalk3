@@ -91,6 +91,9 @@ Tools
 * UPDATED: The `help` tool to open the library documentation index when calling
 the `library/1` predicate with a valid library name.
 
+* UPDATED: The `logtalk_tester` shell script to also print the tests object
+identifier after the test results.
+
 Tests
 -----
 
