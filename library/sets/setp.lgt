@@ -21,9 +21,9 @@
 :- protocol(setp).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2018/08/17,
+		date is 2019/05/21,
 		comment is 'Set protocol.',
 		see_also is [set, set(_)]
 	]).
@@ -172,7 +172,7 @@
 	:- public(symdiff/3).
 	:- mode(symdiff(+set, +set, ?set), zero_or_one).
 	:- info(symdiff/3, [
-		comment is 'True if Difference is the symmetric difference of Set1 and Set2.',
+		comment is 'True if Difference is the symmetric difference of Set1 and Set2, containing all elements that are not in the sets intersection.',
 		argnames is ['Set1', 'Set2', 'Difference']
 	]).
 

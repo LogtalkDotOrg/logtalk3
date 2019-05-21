@@ -9,8 +9,8 @@
 Set protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.4
-| **Date:** 2018/8/17
+| **Version:** 1.5
+| **Date:** 2019/5/21
 
 | **Compilation flags:**
 |    ``static``
@@ -453,7 +453,7 @@ True when Difference contains all and only the elements of Set1 which are not al
 ``symdiff/3``
 ^^^^^^^^^^^^^
 
-True if Difference is the symmetric difference of Set1 and Set2.
+True if Difference is the symmetric difference of Set1 and Set2, containing all elements that are not in the sets intersection.
 
 | **Compilation flags:**
 |    ``static``

@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Richard O''Keefe (main predicates); adapted to Logtalk by Paulo Moura.',
-		date is 2019/03/08,
+		date is 2019/05/21,
 		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.',
 		see_also is [set(_)]
 	]).
@@ -43,7 +43,7 @@
 	delete(=, _, Tail, _, Tail).
 	delete(<, Head, Tail, Element, [Head| Tail2]) :-
 		delete(Tail, Element, Tail2).
-	delete(>, _, Tail, _, Tail).
+	delete(>, Head, Tail, _, [Head| Tail]).
 
 	disjoint([], _) :- !.
 	disjoint(_, []) :- !.

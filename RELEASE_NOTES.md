@@ -79,7 +79,10 @@ the lookup key was not found.
 * FIXED: Bug in the `rbtree::map/3` predicate that could result in pairs with
 a wrong value.
 
-* FIXED: Bug in the `heap/1::merge3` predicate that resulted in failed merges.
+* FIXED: Bug in the `heap/1::merge/3` predicate that resulted in failed merges.
+
+* FIXED: Bug in the `set::delete/3` predicate that could result in a missing
+element in the resulting set.
 
 * FIXED: Typo in the definition of the arbitrary generator for character codes.
 
