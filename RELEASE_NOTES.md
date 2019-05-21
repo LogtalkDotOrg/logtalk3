@@ -110,7 +110,7 @@ Tests
 library directories.
 
 * ADDED: Unit tests for the `coroutining`, `dictionaries`, `gensym`, `heaps`,
-`queues`, and `sets` libraries.
+`intervals`, `queues`, and `sets` libraries.
 
 * ADDED: Unit tests for the ISO Prolog standard arithmetic function `div/2`.
 
