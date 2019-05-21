@@ -84,6 +84,9 @@ a wrong value.
 * FIXED: Bug in the `set::delete/3` predicate that could result in a missing
 element in the resulting set.
 
+* FIXED: Bug in the `interval::overlaps/2` predicate where it could succeed
+for non-overlapping intervals.
+
 * FIXED: Typo in the definition of the arbitrary generator for character codes.
 
 * FIXED: Workaround B-Prolog atom size limitation in the `arbitrary` library.
