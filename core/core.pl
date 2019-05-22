@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 27, 0, b01)).
+'$lgt_version_data'(logtalk(3, 27, 0, b02)).
 
 
 
@@ -12498,7 +12498,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			TPred0 =.. [Functor| TArgs],
 			TPred = ':'(Module, TPred0),
 			DPred0 =.. [Functor| DArgs],
-			DPred = '$lgt_debug'(goal(':'(Module, Pred), DPred0), ExCtx)
+			DPred = '$lgt_debug'(goal(':'(Module, Pred), ':'(Module, DPred0)), ExCtx)
 		;	throw(domain_error(meta_directive_template, Meta))
 		)
 	;	% we're compiling a call to a module predicate

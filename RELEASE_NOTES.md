@@ -24,6 +24,12 @@ RELEASE NOTES
 3.27.0 - June ??, 2019
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug in the compilation of module meta-predicate calls in debug mode
+where the module prefix would be missing.
+
 Documentation
 -------------
 
