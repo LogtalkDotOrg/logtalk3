@@ -1,0 +1,65 @@
+.. index:: cloning
+.. _cloning/0:
+
+**protocol**
+
+``cloning``
+===========
+
+Object cloning protocol.
+
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2010/9/14
+
+| **Compilation flags:**
+|    ``static``
+
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="clone/1"> </div>
+
+.. index:: clone/1
+.. _cloning/0::clone/1:
+
+``clone/1``
+^^^^^^^^^^^
+
+Clones an object, returning the identifier of the new object if none is given.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clone(Clone)``
+| **Mode and number of proofs:**
+|    ``clone(?object)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+

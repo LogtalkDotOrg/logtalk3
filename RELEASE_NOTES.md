@@ -89,6 +89,8 @@ for non-overlapping intervals.
 
 * FIXED: Typo in the definition of the arbitrary generator for character codes.
 
+* FIXED: Missing documentation and diagram for the `cloning` protocol.
+
 * FIXED: Workaround B-Prolog atom size limitation in the `arbitrary` library.
 
 Tools

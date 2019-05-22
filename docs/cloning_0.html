@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>counters &mdash; Logtalk APIs v3.27.0-b01 documentation</title>
+  <title>cloning &mdash; Logtalk APIs v3.27.0-b01 documentation</title>
   
 
   
@@ -46,8 +46,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="streamvars" href="streamvars_0.html" />
-    <link rel="prev" title="cloning" href="cloning_0.html" />
+    <link rel="next" title="counters" href="counters_0.html" />
+    <link rel="prev" title="xunit_report" href="xunit_report_0.html" />
    
 </head>
 
@@ -130,8 +130,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="cloning_0.html">cloning</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">counters</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cloning</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
@@ -139,6 +138,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
 </ul>
 </li>
@@ -221,13 +221,13 @@
         
           <li><a href="library_index.html">Library index</a> &raquo;</li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">counters</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">cloning</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/counters_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/cloning_0.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -240,14 +240,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p id="counters-0"><span id="index-0"></span><strong>category</strong></p>
-<div class="section" id="counters">
-<h1><code class="docutils literal notranslate"><span class="pre">counters</span></code><a class="headerlink" href="#counters" title="Permalink to this headline">¶</a></h1>
-<p>Named integer counters. Counter names can be any nonvar term.</p>
+  <p id="cloning-0"><span id="index-0"></span><strong>protocol</strong></p>
+<div class="section" id="cloning">
+<h1><code class="docutils literal notranslate"><span class="pre">cloning</span></code><a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h1>
+<p>Object cloning protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1.0</div>
-<div class="line"><strong>Date:</strong> 2011/1/3</div>
+<div class="line"><strong>Date:</strong> 2010/9/14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -258,9 +258,9 @@
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
-<div id="counter/2"> </div><div class="section" id="counter-2">
-<span id="counters-0-counter-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">counter/2</span></code><a class="headerlink" href="#counter-2" title="Permalink to this headline">¶</a></h3>
-<p>True if Counter is a counter with value Value.</p>
+<div id="clone/1"> </div><div class="section" id="clone-1">
+<span id="cloning-0-clone-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">clone/1</span></code><a class="headerlink" href="#clone-1" title="Permalink to this headline">¶</a></h3>
+<p>Clones an object, returning the identifier of the new object if none is given.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -270,86 +270,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">counter(Counter,Value)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clone(Clone)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">counter(?nonvar,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<div id="increment_counter/1"> </div></div>
-<div class="section" id="increment-counter-1">
-<span id="counters-0-increment-counter-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">increment_counter/1</span></code><a class="headerlink" href="#increment-counter-1" title="Permalink to this headline">¶</a></h3>
-<p>Increments the named counter.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">increment_counter(Counter)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">increment_counter(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<div id="decrement_counter/1"> </div></div>
-<div class="section" id="decrement-counter-1">
-<span id="counters-0-decrement-counter-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">decrement_counter/1</span></code><a class="headerlink" href="#decrement-counter-1" title="Permalink to this headline">¶</a></h3>
-<p>Decrements the named counter.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">decrement_counter(Counter)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">decrement_counter(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<div id="reset_counter/1"> </div></div>
-<div class="section" id="reset-counter-1">
-<span id="counters-0-reset-counter-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">reset_counter/1</span></code><a class="headerlink" href="#reset-counter-1" title="Permalink to this headline">¶</a></h3>
-<p>Resets the named counter to zero. Creates the counter if it does not exist.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_counter(Counter)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_counter(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<div id="reset_counters/0"> </div></div>
-<div class="section" id="reset-counters-0">
-<span id="counters-0-reset-counters-0"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">reset_counters/0</span></code><a class="headerlink" href="#reset-counters-0" title="Permalink to this headline">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_counters</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clone(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </div>
@@ -360,26 +285,7 @@
 </div>
 <div class="section" id="private-predicates">
 <h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="counter_/2"> </div><div class="section" id="id1">
-<span id="index-6"></span><span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">counter_/2</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>Table of named counters.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">counter_(Counter,Value)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">counter_(?nonvar,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-</div>
+<p>(none)</p>
 </div>
 <div class="section" id="operators">
 <h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
@@ -399,10 +305,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="streamvars_0.html" class="btn btn-neutral float-right" title="streamvars" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="counters_0.html" class="btn btn-neutral float-right" title="counters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cloning_0.html" class="btn btn-neutral float-left" title="cloning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="xunit_report_0.html" class="btn btn-neutral float-left" title="xunit_report" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

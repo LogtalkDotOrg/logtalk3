@@ -50,6 +50,7 @@
 		reader(loader),
 		timeout(loader),
 		gensym(loader),
+		cloning,
 		counters,
 		streamvars
 	], [
