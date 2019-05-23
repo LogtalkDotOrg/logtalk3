@@ -100,6 +100,10 @@ for non-overlapping intervals.
 
 * FIXED: Typo in the definition of the arbitrary generator for character codes.
 
+* FIXED: Updated the `arbitrary` category to workaround backend Prolog
+compilers that either cannot support the null character or provide buggy
+results.
+
 * FIXED: Missing documentation and diagram for the `cloning` protocol.
 
 * FIXED: Workaround B-Prolog atom size limitation in the `arbitrary` library.

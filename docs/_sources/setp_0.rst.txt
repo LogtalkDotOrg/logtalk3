@@ -145,7 +145,7 @@ True if the set is empty.
 | **Template:**
 |    ``empty(Set)``
 | **Mode and number of proofs:**
-|    ``empty(@set)`` - ``zero_or_one``
+|    ``empty(+set)`` - ``zero_or_one``
 
 
 .. raw:: html

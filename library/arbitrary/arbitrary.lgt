@@ -33,9 +33,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2019/05/20,
+		date is 2019/05/24,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -325,11 +325,30 @@
 		member(Arbitrary, [true, false]).
 
 	arbitrary(character, Arbitrary) :-
-		arbitrary(character_code(ascii_full), Code),
+		% ascii_full
+		first_valid_character_code(First),
+		between(First, 127, Code),
 		char_code(Arbitrary, Code).
 
 	arbitrary(character(CharSet), Arbitrary) :-
-		arbitrary(character_code(CharSet), Code),
+		first_valid_character_code(First),
+		(	CharSet == ascii_full ->
+			between(First, 127, Code)
+		;	CharSet == ascii_printable ->
+			between(32, 126, Code)
+		;	CharSet == ascii_identifier ->
+			identifier_characters(Characters),
+			member(Character, Characters),
+			char_code(Character, Code)
+		;	CharSet == byte ->
+			between(First, 255, Code)
+		;	CharSet == unicode_bmp ->
+			between(First, 65535, Code)
+		;	CharSet == unicode_full ->
+			between(First, 1114111, Code)
+		;	% default to ASCII printable
+			between(32, 126, Code)
+		),
 		char_code(Arbitrary, Code).
 
 	arbitrary(char, Arbitrary) :-
@@ -1015,16 +1034,14 @@
 			ground(Arbitrary),
 		!.
 
-	code_upper_limit(Upper) :-
-		current_logtalk_flag(unicode, Unicode),
-		code_upper_limit(Unicode, Upper).
-
-	% 0x10FFFF
-	code_upper_limit(full, 1114111).
-	% 0xFFFF
-	code_upper_limit(bmp, 65535).
-	% 0xFF
-	code_upper_limit(unsupported, 255).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == cx; Dialect == gnu; Dialect == qp; Dialect == xsb; Dialect == yap)
+	)).
+		first_valid_character_code(1).
+	:- else.
+		first_valid_character_code(0).
+	:- endif.
 
 	identifier_characters([
 		a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,
