@@ -21,9 +21,9 @@
 :- protocol(queuep).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/05/20,
+		date is 2019/05/23,
 		comment is 'Queue protocol.',
 		see_also is [queue]
 	]).
@@ -70,11 +70,11 @@
 		argnames is ['Elements', 'Queue', 'NewQueue']
 	]).
 
-	:- public(size/2).
-	:- mode(size(+heap, ?integer), zero_or_one).
-	:- info(size/2, [
-		comment is 'Returns the number of heap elements.',
-		argnames is ['Heap', 'Size']
+	:- public(length/2).
+	:- mode(length(+heap, ?integer), zero_or_one).
+	:- info(length/2, [
+		comment is 'Queue length.',
+		argnames is ['Queue', 'Length']
 	]).
 
 	:- public(serve/3).

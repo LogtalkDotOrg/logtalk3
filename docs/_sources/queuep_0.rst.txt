@@ -9,8 +9,8 @@
 Queue protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.1
-| **Date:** 2019/5/20
+| **Version:** 1.2
+| **Date:** 2019/5/23
 
 | **Compilation flags:**
 |    ``static``
@@ -150,23 +150,23 @@ Adds the new elements at the front of the queue.  The elements are added in the 
 
 .. raw:: html
 
-   <div id="size/2"> </div>
+   <div id="length/2"> </div>
 
-.. index:: size/2
-.. _queuep/0::size/2:
+.. index:: length/2
+.. _queuep/0::length/2:
 
-``size/2``
-^^^^^^^^^^
+``length/2``
+^^^^^^^^^^^^
 
-Returns the number of heap elements.
+Queue length.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``size(Heap,Size)``
+|    ``length(Queue,Length)``
 | **Mode and number of proofs:**
-|    ``size(+heap,?integer)`` - ``zero_or_one``
+|    ``length(+heap,?integer)`` - ``zero_or_one``
 
 
 .. raw:: html

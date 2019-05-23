@@ -23,14 +23,11 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/05/20,
+		date is 2019/05/23,
 		comment is 'Queue predicates implemented using difference lists.'
 	]).
-
-	% for backwards-compatibility with previous versions
-	:- alias(queuep, [size/2 as length/2]).
 
 	as_list(Queue-Back, List) :-
 		(	Queue == Back ->
@@ -61,16 +58,16 @@
 		jump(Head, Queue1, Queue2),
 		jump_all(Tail, Queue2, Queue3).
 
-	size(Front-Back, Length) :-
-		size(Front, Back, 0, Length).
+	length(Front-Back, Length) :-
+		length(Front, Back, 0, Length).
 
-	size(Front, Back, N, Length) :-
+	length(Front, Back, N, Length) :-
 		Front == Back,
 		!,
 		Length = N.
-	size([_|Front], Back, K, Length) :-
+	length([_|Front], Back, K, Length) :-
 		L is K + 1,
-		size(Front, Back, L, Length).
+		length(Front, Back, L, Length).
 
 	new(Back-Back).
 
