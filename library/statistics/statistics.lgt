@@ -22,9 +22,9 @@
 	implements(statisticsp)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2019/03/10,
+		date is 2019/05/23,
 		comment is 'Statistical calculations over a list of numbers.'
 	]).
 
@@ -176,12 +176,12 @@
 		Range is Max - Min.
 
 	range([], Min, Min, Max, Max).
-	range([X| Xs], CurrentMin, Min, CurrentMax, Max) :-
-		(	X < Min ->
-			range(Xs, X, Min, CurrentMax, Max)
-		;	X > Max ->
-			range(Xs, CurrentMin, Min, X, Max)
-		;	range(Xs, CurrentMin, Min, CurrentMax, Max)
+	range([X| Xs], Min0, Min, Max0, Max) :-
+		(	X < Min0 ->
+			range(Xs, X, Min, Max0, Max)
+		;	X > Max0 ->
+			range(Xs, Min0, Min, X, Max)
+		;	range(Xs, Min0, Min, Max0, Max)
 		).
 
 	product([X| Xs], Product) :-
