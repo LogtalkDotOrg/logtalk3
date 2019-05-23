@@ -21,9 +21,9 @@
 :- protocol(setp).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2019/05/21,
+		date is 2019/05/23,
 		comment is 'Set protocol.',
 		see_also is [set, set(_)]
 	]).
@@ -105,11 +105,11 @@
 		argnames is ['Set1', 'Set2', 'Intersection', 'Difference']
 	]).
 
-	:- public(length/2).
-	:- mode(length(+set, ?integer), zero_or_one).
-	:- info(length/2, [
+	:- public(size/2).
+	:- mode(size(+set, ?integer), zero_or_one).
+	:- info(size/2, [
 		comment is 'Number of set elements.',
-		argnames is ['Set', 'Length']
+		argnames is ['Set', 'Size']
 	]).
 
 	:- public(member/2).

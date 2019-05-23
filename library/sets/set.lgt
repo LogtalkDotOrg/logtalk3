@@ -23,12 +23,15 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Richard O''Keefe (main predicates); adapted to Logtalk by Paulo Moura.',
-		date is 2019/05/21,
+		date is 2019/05/23,
 		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.',
 		see_also is [set(_)]
 	]).
+
+	% for backwards-compatibility with previous versions
+	:- alias(setp, [size/2 as length/2]).
 
 	as_set(List, Set) :-
 		sort(List, Set).
@@ -113,13 +116,13 @@
 	intersection(>, Head1, Tail1, Head2, Tail2, Intersection, [Head2| TailDifference]) :-
 		intersection([Head1| Tail1], Tail2, Intersection, TailDifference).
 
-	length(Set, Length) :-
-		length(Set, 0, Length).
+	size(Set, Size) :-
+		size(Set, 0, Size).
 
-	length([], Length, Length).
-	length([_| Set], Acc, Length) :-
-		Acc2 is Acc + 1,
-		length(Set, Acc2, Length).
+	size([], Size, Size).
+	size([_| Set], Size0, Size) :-
+		Size1 is Size0 + 1,
+		size(Set, Size1, Size).
 
 	member(Element, Set) :-
 		(	var(Element) ->

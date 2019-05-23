@@ -9,8 +9,8 @@
 Set protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.5
-| **Date:** 2019/5/21
+| **Version:** 1.6
+| **Date:** 2019/5/23
 
 | **Compilation flags:**
 |    ``static``
@@ -145,7 +145,7 @@ True if the set is empty.
 | **Template:**
 |    ``empty(Set)``
 | **Mode and number of proofs:**
-|    ``empty(+set)`` - ``zero_or_one``
+|    ``empty(@set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -255,13 +255,13 @@ True if Intersection is the intersection of Set1 and Set2 and Difference is the 
 
 .. raw:: html
 
-   <div id="length/2"> </div>
+   <div id="size/2"> </div>
 
-.. index:: length/2
-.. _setp/0::length/2:
+.. index:: size/2
+.. _setp/0::size/2:
 
-``length/2``
-^^^^^^^^^^^^
+``size/2``
+^^^^^^^^^^
 
 Number of set elements.
 
@@ -269,9 +269,9 @@ Number of set elements.
 |    ``static``
 
 | **Template:**
-|    ``length(Set,Length)``
+|    ``size(Set,Size)``
 | **Mode and number of proofs:**
-|    ``length(+set,?integer)`` - ``zero_or_one``
+|    ``size(+set,?integer)`` - ``zero_or_one``
 
 
 .. raw:: html

@@ -9,8 +9,8 @@
 Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.
 
 | **Author:** Richard O'Keefe (main predicates); adapted to Logtalk by Paulo Moura.
-| **Version:** 1.11
-| **Date:** 2019/5/21
+| **Version:** 1.12
+| **Date:** 2019/5/23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -20,6 +20,8 @@ Set predicates implemented using ordered lists. Uses ==/2 for element comparison
 |    ``public`` :ref:`setp <setp/0>`
 | **Extends:**
 |    ``public`` :ref:`compound <compound/0>`
+| **Aliases:**
+|    ``setp`` ``size/2`` aka ``length/2``
 
 Public interface
 ----------------

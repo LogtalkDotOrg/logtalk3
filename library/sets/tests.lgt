@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/05/21,
+		date is 2019/05/23,
 		comment is 'Unit tests for the "sets" library.',
 		parnames is ['SetObject']
 	]).
@@ -224,15 +224,15 @@
 		msort(List2, Sorted2),
 		^^assertion(difference, Sorted2 == [4,5,6]).
 
-	% length/2 tests
+	% size/2 tests
 
-	test(set_length_2_01, deterministic(Length == 0)) :-
+	test(set_size_2_01, deterministic(Size == 0)) :-
 		_SetObject_::as_set([], Set),
-		_SetObject_::length(Set, Length).
+		_SetObject_::size(Set, Size).
 
-	test(set_length_2_02, deterministic(Length == 3)) :-
+	test(set_size_2_02, deterministic(Size == 3)) :-
 		_SetObject_::as_set([3,1,2], Set),
-		_SetObject_::length(Set, Length).
+		_SetObject_::size(Set, Size).
 
 	% member/2 tests
 
