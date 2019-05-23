@@ -127,6 +127,8 @@ library directories.
 
 * ADDED: Unit tests for the ISO Prolog standard arithmetic function `div/2`.
 
+* IMPROVED: Unit tests for the `statistics` library.
+
 Examples
 --------
 

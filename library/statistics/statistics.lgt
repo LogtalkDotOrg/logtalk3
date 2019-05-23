@@ -71,7 +71,6 @@
 
 	average_deviation([X| Xs], CentralTendency, Deviation) :-
 		average_deviation([X| Xs], CentralTendency, 0, Length, 0, Sum),
-		writeq(float(Sum / Length)), nl,
 		Deviation is float(Sum / Length).
 
 	average_deviation([], _, Length, Length, Sum, Sum).
