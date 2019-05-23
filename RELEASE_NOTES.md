@@ -93,6 +93,9 @@ element in the resulting set.
 * FIXED: Bug in the `interval::overlaps/2` predicate where it could succeed
 for non-overlapping intervals.
 
+* FIXED: Off-by-one bug in the definition of the `statistics` predicates
+`mean_deviation/2`, `media_deviation/2`, and `average_deviation/3`.
+
 * FIXED: Broken definition of the `statistics::range/2` predicate.
 
 * FIXED: Typo in the definition of the arbitrary generator for character codes.

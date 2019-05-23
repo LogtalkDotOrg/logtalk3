@@ -61,16 +61,17 @@
 
 	mean_deviation([X| Xs], Deviation) :-
 		arithmetic_mean(Xs, 1, Length, X, Mean),
-		average_deviation([X| Xs], Mean, 1, Length, 0, Sum),
+		average_deviation([X| Xs], Mean, 0, Length, 0, Sum),
 		Deviation is float(Sum / Length).
 
 	median_deviation([X| Xs], Deviation) :-
 		median([X| Xs], Median, Length),
-		average_deviation([X| Xs], Median, 1, Length, 0, Sum),
+		average_deviation([X| Xs], Median, 0, Length, 0, Sum),
 		Deviation is float(Sum / Length).
 
 	average_deviation([X| Xs], CentralTendency, Deviation) :-
-		average_deviation([X| Xs], CentralTendency, 1, Length, 0, Sum),
+		average_deviation([X| Xs], CentralTendency, 0, Length, 0, Sum),
+		writeq(float(Sum / Length)), nl,
 		Deviation is float(Sum / Length).
 
 	average_deviation([], _, Length, Length, Sum, Sum).
