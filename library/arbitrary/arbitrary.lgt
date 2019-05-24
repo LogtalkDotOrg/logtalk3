@@ -33,7 +33,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
 		date is 2019/05/24,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -432,11 +432,13 @@
 
 	arbitrary(character_code, Arbitrary) :-
 		% ascii_full
-		between(0, 127, Arbitrary).
+		first_valid_character_code(First),
+		between(First, 127, Arbitrary).
 
 	arbitrary(character_code(CharSet), Arbitrary) :-
+		first_valid_character_code(First),
 		(	CharSet == ascii_full ->
-			between(0, 127, Arbitrary)
+			between(First, 127, Arbitrary)
 		;	CharSet == ascii_printable ->
 			between(32, 126, Arbitrary)
 		;	CharSet == ascii_identifier ->
@@ -444,11 +446,11 @@
 			member(Character, Characters),
 			char_code(Character, Arbitrary)
 		;	CharSet == byte ->
-			between(0, 255, Arbitrary)
+			between(First, 255, Arbitrary)
 		;	CharSet == unicode_bmp ->
-			between(0, 65535, Arbitrary)
+			between(First, 65535, Arbitrary)
 		;	CharSet == unicode_full ->
-			between(0, 1114111, Arbitrary)
+			between(First, 1114111, Arbitrary)
 		;	% default to ASCII printable
 			between(32, 126, Arbitrary)
 		).
@@ -1034,13 +1036,12 @@
 			ground(Arbitrary),
 		!.
 
-	:- if((
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == cx; Dialect == gnu; Dialect == qp; Dialect == xsb; Dialect == yap)
-	)).
-		first_valid_character_code(1).
-	:- else.
+	% some Prolog systems either don't support the null character or
+	% provide buggy results when calling char_code/2 with a code of zero
+	:- if((catch(char_code(Char,0), _, fail), atom_length(Char,1))).
 		first_valid_character_code(0).
+	:- else.
+		first_valid_character_code(1).
 	:- endif.
 
 	identifier_characters([

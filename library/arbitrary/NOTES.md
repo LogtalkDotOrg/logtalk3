@@ -71,3 +71,12 @@ Examples
 --------
 
 See the implementation of the `optional` and `expected`  libraries.
+
+
+Known issues
+------------
+
+Some Prolog systems either don't support the null character or provide buggy
+results when calling `char_code/2` with a code of zero. When that's the case,
+the null character is excluded when generating arbitrary characters or
+character codes.
