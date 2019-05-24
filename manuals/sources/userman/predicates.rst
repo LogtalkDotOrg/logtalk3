@@ -415,6 +415,16 @@ cannot list a predicate (or its alias if defined) which is defined in
 the object (or category) containing the directive. Any conflicts are
 reported by Logtalk as compilation errors.
 
+The object identifier argument can also be a :term:`parameter variable`
+when using the directive in a parametric object or a parametric category.
+In this case, dynamic binding will necessarily be used for all listed
+predicates (and non-terminals). The parameter variable must be instantiated
+at runtime when the messages are sent. This feature simplifies experimenting
+with multiple implementations of the same protocol (for example, to evaluate
+the performance of each implementation for a particular case). It also
+simplifies writing tests that check multiple implementations of the same
+protocol.
+
 .. _predicates_alias:
 
 Alias directive
@@ -1717,6 +1727,12 @@ as explained. For example:
    source code that uses it. In particular, programmers should not expect
    that the module be auto-loaded (including when using a backend Prolog
    compiler that supports an autoloading mechanism).
+
+The module identifier argument can also be a :term:`parameter variable`
+when using the directive in a parametric object or a parametric category.
+In this case, dynamic binding will necessarily be used for all listed
+predicates (and non-terminals). The parameter variable must be instantiated
+at runtime when the calls are made.
 
 Calling Prolog module meta-predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

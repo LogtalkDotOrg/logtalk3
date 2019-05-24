@@ -75,6 +75,12 @@ module file.
    the compiler to check if the called module predicate is a meta-predicate
    and retrieve its meta-predicate template to ensure proper call compilation.
 
+The module identifier argument can also be a :term:`parameter variable`
+when using the directive in a parametric object or a parametric category.
+In this case, dynamic binding will be used for all listed predicates (and
+non-terminals). The parameter variable must be instantiated at runtime
+when the calls are made.
+
 Template and modes
 ------------------
 

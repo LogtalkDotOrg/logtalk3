@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Predicates &mdash; The Logtalk Handbook v3.27.0-b02 documentation</title>
+  <title>Predicates &mdash; The Logtalk Handbook v3.27.0-b03 documentation</title>
   
 
   
@@ -574,6 +574,15 @@ more than one <code class="docutils literal notranslate"><span class="pre">uses/
 cannot list a predicate (or its alias if defined) which is defined in
 the object (or category) containing the directive. Any conflicts are
 reported by Logtalk as compilation errors.</p>
+<p>The object identifier argument can also be a <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a>
+when using the directive in a parametric object or a parametric category.
+In this case, dynamic binding will necessarily be used for all listed
+predicates (and non-terminals). The parameter variable must be instantiated
+at runtime when the messages are sent. This feature simplifies experimenting
+with multiple implementations of the same protocol (for example, to evaluate
+the performance of each implementation for a particular case). It also
+simplifies writing tests that check multiple implementations of the same
+protocol.</p>
 </div>
 <div class="section" id="alias-directive">
 <span id="predicates-alias"></span><h3>Alias directive<a class="headerlink" href="#alias-directive" title="Permalink to this headline">¶</a></h3>
@@ -1680,6 +1689,11 @@ source code that uses it. In particular, programmers should not expect
 that the module be auto-loaded (including when using a backend Prolog
 compiler that supports an autoloading mechanism).</p>
 </div>
+<p>The module identifier argument can also be a <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a>
+when using the directive in a parametric object or a parametric category.
+In this case, dynamic binding will necessarily be used for all listed
+predicates (and non-terminals). The parameter variable must be instantiated
+at runtime when the calls are made.</p>
 </div>
 <div class="section" id="calling-prolog-module-meta-predicates">
 <h3>Calling Prolog module meta-predicates<a class="headerlink" href="#calling-prolog-module-meta-predicates" title="Permalink to this headline">¶</a></h3>

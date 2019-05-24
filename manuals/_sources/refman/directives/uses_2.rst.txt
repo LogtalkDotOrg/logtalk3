@@ -59,6 +59,12 @@ To enable the use of static binding, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.
 
+The object identifier argument can also be a :term:`parameter variable`
+when using the directive in a parametric object or a parametric category.
+In this case, dynamic binding will be used for all listed predicates (and
+non-terminals). The parameter variable must be instantiated at runtime
+when the messages are sent.
+
 Template and modes
 ------------------
 
@@ -77,9 +83,9 @@ Examples
 
 ::
 
-   :- uses(list, [append/3, member/2]).
+   :- uses(list,  [append/3, member/2]).
    :- uses(store, [data/2]).
-   :- uses(user, [table/4]).
+   :- uses(user,  [table/4]).
 
    foo :-
        ...,

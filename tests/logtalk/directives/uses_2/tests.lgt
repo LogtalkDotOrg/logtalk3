@@ -61,27 +61,72 @@
 
 
 
+% test entities for using a parametric variable in the directive
+
+:- protocol(foo).
+
+	:- public([q/1, g//1]).
+
+:- end_protocol.
+
+
+:- object(bar,
+	implements(foo)).
+
+	q(bar).
+
+	g(X) --> [X].
+
+:- end_object.
+
+
+:- object(baz,
+	implements(foo)).
+
+	q(baz).
+
+	g(Y) --> [X], {Y is X * 2}.
+
+:- end_object.
+
+
+:- object(foo(_Object_)).
+
+	:- uses(_Object_, [q/1, g//1]).
+
+	:- public(p/1).
+	p(X) :- q(X).
+
+	:- public(r/1).
+	r(X) :- phrase(g(X), [1]).
+
+:- end_object.
+
+
+
+% tests
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/28,
+		date is 2019/05/24,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
 	:- uses(uses_2_test_object_1, [p/1, q/1::r/1]).
 
-	test(uses_2_1) :-
+	test(uses_2_01) :-
 		p(X),
 		X == 1.
 
-	test(uses_2_2) :-
+	test(uses_2_02) :-
 		r(X),
 		X == 2.
 
-	test(uses_2_3) :-
+	test(uses_2_03) :-
 		uses_2_test_object_2::p(X),
 		X == 1.
 
@@ -90,10 +135,30 @@
 		(Dialect == eclipse; Dialect == sicstus; Dialect = swi; Dialect = yap)
 	)).
 
-	test(uses_2_4) :-
-		uses_2_test_object_2::mp(X),
-		X == 2.
+		test(uses_2_04) :-
+			uses_2_test_object_2::mp(X),
+			X == 2.
+
+	:- else.
+
+		- test(uses_2_04).
 
 	:- endif.
+
+	test(uses_2_05) :-
+		foo(bar)::p(X),
+		X == bar.
+
+	test(uses_2_06) :-
+		foo(baz)::p(X),
+		X == baz.
+
+	test(uses_2_07) :-
+		foo(bar)::r(X),
+		X == 1.
+
+	test(uses_2_08) :-
+		foo(baz)::r(X),
+		X == 2.
 
 :- end_object.
