@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.66,
+		version is 1.67,
 		author is 'Paulo Moura',
 		date is 2019/05/25,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -435,6 +435,10 @@
 
 	message_tokens(non_standard_file_directive(File, Lines, Directive)) -->
 		['Use of non-standard file directive: ~q'-[Directive], nl],
+		message_context(File, Lines).
+
+	message_tokens(logtalk_built_in_predicate_as_directive(File, Lines, Directive)) -->
+		['Use of Logtalk built-in predicate as a directive: ~q'-[Directive], nl],
 		message_context(File, Lines).
 
 	message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression)) -->

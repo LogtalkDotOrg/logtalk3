@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 in a `use_module/2` directive can now be a parameter variable when using the
 directive in a parametric object or a parametric category.
 
+* ADDED: Compiler lint check for Logtalk built-in predicates being used as
+directives.
+
 * FIXED: Bug in the compilation of module meta-predicate calls in debug mode
 where the module prefix would be missing.
 

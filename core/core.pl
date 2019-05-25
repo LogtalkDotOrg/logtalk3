@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 27, 0, b03)).
+'$lgt_version_data'(logtalk(3, 27, 0, b04)).
 
 
 
@@ -8620,6 +8620,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
 	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (discontiguous)),
 	fail.
+
+'$lgt_compile_file_directive'(Directive, Ctx) :-
+	'$lgt_logtalk_built_in_predicate'(Directive, _),
+	% Logtalk built-in predicate being used as a directive
+	!,
+	% directive will be copied to the generated Prolog file
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- Directive), sd(Term,VariableNames,File,Lines), Lines)),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(general), core, logtalk_built_in_predicate_as_directive(File, Lines, Directive))
+	;	true
+	).
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
 	% directive will be copied to the generated Prolog file
