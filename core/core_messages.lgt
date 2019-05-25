@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.65,
+		version is 1.66,
 		author is 'Paulo Moura',
-		date is 2019/04/01,
+		date is 2019/05/25,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -688,20 +688,26 @@
 
 	message_context(File, Lines, Type, Entity) -->
 		['  while compiling ~w ~q'-[Type, Entity], nl],
-		(	{Lines = Line-Line} ->
+		(	{Lines == 1-1} ->
+			['  in file ~w at line 1'-[File], nl, nl]
+		;	{Lines = Line-Line} ->
 			['  in file ~w at or above line ~d'-[File, Line], nl, nl]
 		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
 		).
 
 	message_context(File, Lines) -->
 		['  while compiling file'-[], nl],
-		(	{Lines = Line-Line} ->
+		(	{Lines == 1-1} ->
+			['  in file ~w at line 1'-[File], nl, nl]
+		;	{Lines = Line-Line} ->
 			['  in file ~w at or above line ~d'-[File, Line], nl, nl]
 		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
 		).
 
 	error_message_context(File, Lines) -->
-		(	{Lines = Line-Line} ->
+		(	{Lines == 1-1} ->
+			['  in file ~w at line 1'-[File], nl, nl]
+		;	{Lines = Line-Line} ->
 			['  in file ~w at or above line ~d'-[File, Line], nl, nl]
 		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
 		).

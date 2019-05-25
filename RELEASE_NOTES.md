@@ -27,13 +27,15 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: The object identifier argument in a `uses/2` directive and the
-module identifier argument in a `use_module/2` directive can now be a
-parameter variable when using the directive in a parametric object or
-a parametric category.
+* ADDED: The object argument in a `uses/2` directive and the module argument
+in a `use_module/2` directive can now be a parameter variable when using the
+directive in a parametric object or a parametric category.
 
 * FIXED: Bug in the compilation of module meta-predicate calls in debug mode
 where the module prefix would be missing.
+
+* FIXED: Compiler warning and error messages when the reported issue is in the
+first line to print "at line 1" instead of "at or above line 1".
 
 Documentation
 -------------
