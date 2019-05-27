@@ -623,7 +623,7 @@ other (e.g. to check expected test results against actual results when they
 contain variables)
 
 - `assertion(Goal)` - to generate an exception in case the goal argument
-fails or throws an error (deprecated; use assertion/2 instead)
+fails or throws an error
 - `assertion(Name, Goal)` - to generate an exception in case the goal
 argument fails or throws an error
 
@@ -644,18 +644,18 @@ leaving a choice-point
 - `deterministic(Goal, Deterministic)` - reified version of the
 `deterministic/1` predicate
 
-The `assertion/2` predicate is used in the code generated for the `test/2-3`
-dialects. But can also be used in the body of tests where using two or more
-assertions is convenient or in the body of tests written using the `test/1`,
-`succeeds/1`, and `deterministic/1` dialects to help differentiate between the
-test goal and checking the test goal results and to provide more informative
-test failure messages. When the assertion is a call to local predicate to the
-tests object, you must call `assertion/2` using an implicit or explicit message
-instead of a using _super_ call. The reason is that `assertion/2` is declared
-as a meta-predicate and thus calls the assertion goal in the _sender_, which
-would be the `lgtunit` object in the case of a `^^/2` call (as it preserves
-both _ self_ and _sender_ and the tests are internally run by a message sent
-from the `lgtunit` object to the tests object).
+The `assertion/1-2` predicates can also be used in the body of tests where
+using two or more assertions is convenient or in the body of tests written
+using the `test/1`, `succeeds/1`, and `deterministic/1` dialects to help
+differentiate between the test goal and checking the test goal results and
+to provide more informative test failure messages. When the assertion is a
+call to local predicate to the tests object, you must call `assertion/1-2`
+using an implicit or explicit message instead of a using _super_ call. The
+reason is that the `assertion/1-2` predicates are declared as meta-predicates
+and thus calls the assertion goal in the _sender_, which would be the `lgtunit`
+object in the case of a `^^/2` call (as they preserve both _ self_ and _sender_
+and the tests are internally run by a message sent from the `lgtunit` object
+to the tests object).
 
 As the `benchmark/2-3` and `deterministic/1-2` predicates are meta-predicates,
 turning on the `optimize` compiler flag is advised to avoid runtime compilation
