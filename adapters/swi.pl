@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on April 3, 2019
+%  Last updated on April 27, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -196,6 +196,9 @@
 '$lgt_prolog_meta_predicate'(load_files(_), load_files(*), predicate).
 '$lgt_prolog_meta_predicate'(load_files(_, _), load_files(*, *), predicate).
 '$lgt_prolog_meta_predicate'(op(_, _, _), op(*, *, *), predicate).
+:- if(predicate_property(tnot(_), built_in)).
+	'$lgt_prolog_meta_predicate'(tnot(_), tnot(0), predicate).
+:- endif.
 '$lgt_prolog_meta_predicate'(use_module(_), use_module(*), predicate).
 '$lgt_prolog_meta_predicate'(use_module(_, _), use_module(*, *), predicate).
 

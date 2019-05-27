@@ -40,6 +40,12 @@ where the module prefix would be missing.
 * FIXED: Compiler warning and error messages when the reported issue is in the
 first line to print "at line 1" instead of "at or above line 1".
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: SWI-Prolog adapter file declaration for the recently added `tnot/1`
+built-in meta-predicate.
+
 Documentation
 -------------
 
