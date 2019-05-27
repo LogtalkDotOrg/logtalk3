@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/05/24,
+		date is 2019/05/27,
 		comment is 'Unit tests for the "sets" library.',
 		parnames is ['SetObject']
 	]).
@@ -37,6 +37,7 @@
 		subset/2, subtract/3, symdiff/3, union/3, union/4, valid/1, new/1
 	]).
 
+	:- uses(lgtunit, [assertion/2]).
 	:- uses(list, [msort/2]).
 
 	cover(_SetObject_).
@@ -200,37 +201,37 @@
 		as_set([], EmptySet),
 		as_set([3,1,2], Set),
 		intersection(EmptySet, Set, Intersection, Difference),
-		^^assertion(intersection, _SetObject_::empty(Intersection)),
+		assertion(intersection, empty(Intersection)),
 		as_list(Difference, List),
 		msort(List, Sorted),
-		^^assertion(difference, Sorted == [1,2,3]).
+		assertion(difference, Sorted == [1,2,3]).
 
 	test(set_intersection_4_02, deterministic) :-
 		as_set([], EmptySet),
 		as_set([3,1,2], Set),
 		intersection(Set, EmptySet, Intersection, Difference),
-		^^assertion(intersection, _SetObject_::empty(Intersection)),
-		^^assertion(difference, _SetObject_::empty(Difference)).
+		assertion(intersection, empty(Intersection)),
+		assertion(difference,   empty(Difference)).
 
 	test(set_intersection_4_03, deterministic) :-
 		as_set([3,5,2], Set1),
 		as_set([1,6,3], Set2),
 		intersection(Set1, Set2, Intersection, Difference),
 		as_list(Intersection, List1),
-		^^assertion(intersection, List1 == [3]),
+		assertion(intersection, List1 == [3]),
 		as_list(Difference, List2),
 		msort(List2, Sorted2),
-		^^assertion(difference, Sorted2 == [1,6]).
+		assertion(difference, Sorted2 == [1,6]).
 
 	test(set_intersection_4_04, deterministic) :-
 		as_set([3,1,2], Set1),
 		as_set([4,6,5], Set2),
 		intersection(Set1, Set2, Intersection, Difference),
 		as_list(Intersection, List1),
-		^^assertion(intersection, List1 == []),
+		assertion(intersection, List1 == []),
 		as_list(Difference, List2),
 		msort(List2, Sorted2),
-		^^assertion(difference, Sorted2 == [4,5,6]).
+		assertion(difference, Sorted2 == [4,5,6]).
 
 	% size/2 tests
 
@@ -426,15 +427,15 @@
 		as_set([], Set1),
 		as_set([1], Set2),
 		union(Set1, Set2, Union, Difference),
-		^^assertion(union, Union == Set2),
-		^^assertion(difference, Difference == Set2).
+		assertion(union, Union == Set2),
+		assertion(difference, Difference == Set2).
 
 	test(set_union_4_02, deterministic) :-
 		as_set([1], Set1),
 		as_set([], Set2),
 		union(Set1, Set2, Union, Difference),
-		^^assertion(union, Union == Set1),
-		^^assertion(difference, _SetObject_::empty(Difference)).
+		assertion(union, Union == Set1),
+		assertion(difference, empty(Difference)).
 
 	test(set_union_4_03, deterministic) :-
 		as_set([3,1,2], Set1),
@@ -442,9 +443,9 @@
 		union(Set1, Set2, Union, Difference),
 		as_list(Union, List1),
 		msort(List1, Sorted1),
-		^^assertion(union, Sorted1 == [1,2,3,6]),
+		assertion(union, Sorted1 == [1,2,3,6]),
 		as_list(Difference, List2),
-		^^assertion(difference, List2 == [6]).
+		assertion(difference, List2 == [6]).
 
 	test(set_union_4_04, deterministic) :-
 		as_set([3,6,2], Set1),
@@ -452,10 +453,10 @@
 		union(Set1, Set2, Union, Difference),
 		as_list(Union, List1),
 		msort(List1, Sorted1),
-		^^assertion(union, Sorted1 == [1,2,3,4,5,6]),
+		assertion(union, Sorted1 == [1,2,3,4,5,6]),
 		as_list(Difference, List2),
 		msort(List2, Sorted),
-		^^assertion(difference, Sorted == [1,4,5]).
+		assertion(difference, Sorted == [1,4,5]).
 
 	% valid/1 tests
 
