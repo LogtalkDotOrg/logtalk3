@@ -420,6 +420,9 @@ To test all solutions of a predicate that acts as a *generator*, we can use
 the `forall/2` predicate as the test goal with the `assertion/2` predicate
 called to report details on any solution that fails the test. For example:
 
+	:- uses(lgtunit, [assertion/2]).
+	...
+
 	test(test_solution_generator) :-
 		forall(
 			generator(X, Y, Z),
@@ -620,7 +623,7 @@ other (e.g. to check expected test results against actual results when they
 contain variables)
 
 - `assertion(Goal)` - to generate an exception in case the goal argument
-fails or throws an error
+fails or throws an error (deprecated; use assertion/2 instead)
 - `assertion(Name, Goal)` - to generate an exception in case the goal
 argument fails or throws an error
 
@@ -646,7 +649,13 @@ dialects. But can also be used in the body of tests where using two or more
 assertions is convenient or in the body of tests written using the `test/1`,
 `succeeds/1`, and `deterministic/1` dialects to help differentiate between the
 test goal and checking the test goal results and to provide more informative
-test failure messages.
+test failure messages. When the assertion is a call to local predicate to the
+tests object, you must call `assertion/2` using an implicit or explicit message
+instead of a using _super_ call. The reason is that `assertion/2` is declared
+as a meta-predicate and thus calls the assertion goal in the _sender_, which
+would be the `lgtunit` object in the case of a `^^/2` call (as it preserves
+both _ self_ and _sender_ and the tests are internally run by a message sent
+from the `lgtunit` object to the tests object).
 
 As the `benchmark/2-3` and `deterministic/1-2` predicates are meta-predicates,
 turning on the `optimize` compiler flag is advised to avoid runtime compilation
