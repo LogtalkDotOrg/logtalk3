@@ -57,7 +57,7 @@ Usage
 -----
 
 The two main objects in this library are `java(Reference, ReturnValue)` and
-`java(_Reference)`. Use the latter if you want to ignore the return value or
+`java(Reference)`. Use the latter if you want to ignore the return value or
 when calling a void Java method.
 
 The `java` object implements utility predicates. For some backend Java
