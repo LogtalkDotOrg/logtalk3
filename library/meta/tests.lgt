@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2019/05/29,
 		comment is 'Unit tests for the "meta" library.'
@@ -155,40 +155,55 @@
 	% map/2 tests
 
 	test(meta_map_2_01, true) :-
-		meta::map(integer, []).
-
-	test(meta_map_2_02, true) :-
 		meta::map(integer, [3,1,2]).
 
-	test(meta_map_2_03, fail) :-
+	test(meta_map_2_02, fail) :-
 		meta::map(integer, [3,a,2]).
 
 	% map/3 tests
 
-	test(meta_map_3_01, true(Codes == [])) :-
-		meta::map(char_code, [], Codes).
-
-	test(meta_map_3_02, true(Codes == [99,97,98])) :-
+	test(meta_map_3_01, true(Codes == [99,97,98])) :-
 		meta::map(char_code, [c,a,b], Codes).
 
-	test(meta_map_3_03, true(Chars == [c,a,b])) :-
+	test(meta_map_3_02, true(Chars == [c,a,b])) :-
 		meta::map(char_code, Chars, [99,97,98]).
 
 	% map/4 tests
 
+	test(meta_map_4_01, true(Atoms == [a,ab,abc])) :-
+		meta::map(sub_atom(abcde,_), [1,2,3], [_,_,_], Atoms).
 
 	% map/5 tests
 
+	test(meta_map_5_01, true(Atoms == [a,bc,cde])) :-
+		meta::map(sub_atom(abcde), [0,1,2], [1,2,3], [_,_,_], Atoms).
 
 	% map/6 tests
 
+	test(meta_map_6_01, true(Atoms == [a,ef,lmn])) :-
+		meta::map(sub_atom, [abc,defghi,jklmnopqr], [0,1,2], [1,2,3], [_,_,_], Atoms).
 
 	% map/7 tests
 
+	test(meta_map_7_01, true(Sums == [20,25])) :-
+		meta::map(sum, [0,1], [2,3], [4,5], [6,7], [8,9], Sums).
 
 	% map/8 tests
 
+	test(meta_map_8_01, true(Sums == [30,36])) :-
+		meta::map(sum, [0,1], [2,3], [4,5], [6,7], [8,9], [10,11], Sums).
 
 	% map_reduce/5 tests
+
+	test(meta_map_reduce_5_01, true(Result == cab)) :-
+		meta::map_reduce([Code,Char]>>char_code(Char,Code), atom_concat, '', [99,97,98], Result).
+
+	% auxiliary predicates
+
+	sum(A1, A2, A3, A4, A5, Sum) :-
+		Sum is A1 + A2 + A3 + A4 + A5.
+
+	sum(A1, A2, A3, A4, A5, A6, Sum) :-
+		Sum is A1 + A2 + A3 + A4 + A5 + A6.
 
 :- end_object.
