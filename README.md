@@ -103,10 +103,14 @@ A quick and highly recommended introduction for users comfortable with Prolog
 and with general knowledge about object-oriented programming is available at
 the [Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
 
-The reference and user manuals are provided in HTML format and can be found in
-the [manuals](manuals/) directory. They are also available online at:
+The HTML version of the Logtalk Handbook is included with the sources and can
+be found in the [manuals](manuals/) directory. It's also available online at:
 
 https://logtalk.org/manuals/index.html
+
+PDF, ePub, and Texinfo versions of the Logtalk Handbook can be downloaded from:
+
+https://logtalk.org/documentation.html
 
 The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
 Logtalk updates since the first public version. Please check it if you are
