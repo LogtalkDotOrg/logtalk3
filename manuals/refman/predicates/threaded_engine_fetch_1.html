@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>threaded_engine_fetch/1 &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>threaded_engine_fetch/1 &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -211,7 +211,7 @@
 <span id="predicates-threaded-engine-fetch-1"></span><span id="index-0"></span><h1>threaded_engine_fetch/1<a class="headerlink" href="#threaded-engine-fetch-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_fetch</span>(<span class="nv">Term</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_fetch(<span class="nv">Term</span>)
 </pre></div>
 </div>
 <p>Fetches a term from the engine term queue. Blocks until a term is
@@ -219,7 +219,7 @@ available. Fails if not called from within an engine.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_fetch</span>(<span class="o">?</span>term) <span class="o">-</span> zero_or_one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_fetch(<span class="o">?</span>term) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
 </div>
@@ -230,7 +230,7 @@ available. Fails if not called from within an engine.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% fetch a term from the engine term queue:</span>
-..., <span class="k">threaded_engine_fetch</span>(<span class="nv">Term</span>), ...
+..., threaded_engine_fetch(<span class="nv">Term</span>), ...
 </pre></div>
 </div>
 <div class="admonition seealso">

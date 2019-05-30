@@ -3396,7 +3396,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 27, 0, b04)).
+'$lgt_version_data'(logtalk(3, 27, 0, b05)).
 
 
 
@@ -18571,7 +18571,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
 	% avoid querying the optimize flag for each compiled term
 	'$lgt_compiler_flag'(optimize, Optimize),
-	'$lgt_compile_predicate_calls'(Optimize).
+	'$lgt_compile_predicate_calls_loop'(Optimize).
+
+
+% compilation of auxiliary clauses can result in the
+% creation of e.g. new auxiliary clauses or directives
+
+'$lgt_compile_predicate_calls_loop'(Optimize) :-
+	'$lgt_compile_predicate_calls'(Optimize),
+	fail.
+
+'$lgt_compile_predicate_calls_loop'(Optimize) :-
+	(	(	'$lgt_pp_entity_aux_clause_'(_)
+		;	'$lgt_pp_coinductive_'(_, _, _, _, _, _, _)
+		;	'$lgt_pp_object_initialization_'(_, _, _)
+		;	'$lgt_pp_entity_meta_directive_'(_, _, _)
+		) ->
+		'$lgt_compile_predicate_calls_loop'(Optimize)
+	;	true
+	).
 
 
 '$lgt_compile_predicate_calls'(Optimize) :-
@@ -18583,7 +18601,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_predicate_calls'(_) :-
 	% coinductive auxiliary clauses
-	'$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
+	retract('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)),
 	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	fail.

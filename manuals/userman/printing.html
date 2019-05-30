@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Printing messages and asking questions &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>Printing messages and asking questions &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -392,7 +392,7 @@ easily accomplished by defining the following category in a settings file:</p>
 
     logtalk<span class="o">::</span>message_hook(default_flags, comment(settings), core, <span class="nv">_</span>).
 
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>The printing message mechanism automatically calls the <code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code>
@@ -413,7 +413,7 @@ compiler messages:</p>
         logtalk<span class="o">::</span>message_prefix_stream(comment(<span class="nv">Key</span>), core, <span class="nv">Prefix</span>, <span class="nv">Stream</span>),
         logtalk<span class="o">::</span>print_message_tokens(<span class="nv">Stream</span>, <span class="nv">Prefix</span>, <span class="nv">Tokens</span>).
 
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>This example calls the <a class="reference internal" href="../refman/methods/message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a>
@@ -450,7 +450,7 @@ the following message tokenization and question prompt and stream:</p>
 
    logtalk<span class="o">::</span>question_prompt_stream(question, hitchhikers, <span class="s">&#39;: &#39;</span>, user_input).
 
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>After compiling and loading this category, we can now ask the ultimate
@@ -486,7 +486,7 @@ on someone manually providing answers:</p>
 
     logtalk<span class="o">::</span>question_hook(ultimate_answer, question, hitchhikers, <span class="nv">_</span>, <span class="nv">_</span>, <span class="m">42</span>).
 
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>After compiling and loading this category, trying the question again will

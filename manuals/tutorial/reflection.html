@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>A reflective class-based system &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>A reflective class-based system &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -210,7 +210,7 @@ to all objects. It will be the root of the inheritance graph:</p>
 
     <span class="c">% predicates common to all objects</span>
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>The class <code class="docutils literal notranslate"><span class="pre">abstract_class</span></code> specializes <code class="docutils literal notranslate"><span class="pre">object</span></code> by adding predicates
@@ -222,7 +222,7 @@ classes:</p>
 
     <span class="c">% predicates common to all classes</span>
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>The class <code class="docutils literal notranslate"><span class="pre">class</span></code> specializes <code class="docutils literal notranslate"><span class="pre">abstract_class</span></code> by adding predicates
@@ -234,7 +234,7 @@ instantiation graph and the default meta-class for instantiable classes:</p>
 
     <span class="c">% predicates common to all instantiable classes</span>
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>Note that all three objects are instances of class <code class="docutils literal notranslate"><span class="pre">class</span></code>. The

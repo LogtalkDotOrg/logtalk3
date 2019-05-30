@@ -40,6 +40,10 @@ where the module prefix would be missing.
 * FIXED: Compiler warning and error messages when the reported issue is in the
 first line to print "at line 1" instead of "at or above line 1".
 
+* FIXED: Compilation of secondary auxiliary clauses and initialization
+directives that are generated during the compilation of an initial set
+of auxiliary clauses (e.g. when using hook pipelines).
+
 Prolog adapter and integration files
 ------------------------------------
 

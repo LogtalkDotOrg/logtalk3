@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Predicates &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>Predicates &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -613,7 +613,7 @@ example:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>The directive allows both <code class="docutils literal notranslate"><span class="pre">width/1</span></code> and <code class="docutils literal notranslate"><span class="pre">side/1</span></code> to be used as
@@ -638,7 +638,7 @@ conflicting predicates. Consider the following example:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>Assuming that both <code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> objects define a <code class="docutils literal notranslate"><span class="pre">member/2</span></code>
@@ -681,7 +681,7 @@ inherited predicate, while keeping the original name as follows:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>Thus, when sending the message <code class="docutils literal notranslate"><span class="pre">member/2</span></code> to <code class="docutils literal notranslate"><span class="pre">my_data_structure</span></code>,
@@ -724,7 +724,7 @@ predicates.</p>
 <span class="p">    :- </span><span class="k">multifile</span>(a<span class="o">/</span><span class="m">1</span>).
     a(<span class="m">1</span>).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>After compiling and loading the <code class="docutils literal notranslate"><span class="pre">main</span></code> object, we can define other
@@ -740,7 +740,7 @@ predicate. For example:</p>
     b(<span class="m">3</span>).
     b(<span class="m">4</span>).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>After compiling and loading the above objects, you can use queries such
@@ -823,7 +823,7 @@ something like:</p>
     member(<span class="nv">H</span>, [<span class="nv">_</span>| <span class="nv">T</span>]) <span class="o">:-</span>
         member(<span class="nv">H</span>, <span class="nv">T</span>).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>Note that, abstracting from the opening and closing object directives
@@ -858,7 +858,7 @@ in <em>self</em> we could write:</p>
         <span class="o">::</span><span class="k">retractall</span>(value_(<span class="nv">Var</span>, <span class="nv">_</span>)),
         <span class="o">::</span><span class="k">asserta</span>(value_(<span class="nv">Var</span>, <span class="nv">Value</span>).
 
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>In this case, the <code class="docutils literal notranslate"><span class="pre">get/2</span></code> and <code class="docutils literal notranslate"><span class="pre">set/2</span></code> predicates will always
@@ -1022,7 +1022,7 @@ for parsing simple arithmetic expressions:</p>
     <span class="k">number</span>(<span class="nv">C</span>) <span class="o">--&gt;</span> <span class="s">&quot;-&quot;</span>, <span class="k">number</span>(<span class="nv">X</span>), <span class="k">{</span><span class="nv">C</span> <span class="k">is</span> <span class="o">-</span><span class="nv">X</span><span class="k">}</span>.
     <span class="k">number</span>(<span class="nv">X</span>) <span class="o">--&gt;</span> [<span class="nv">C</span>], <span class="k">{</span><span class="m">0&#39;0</span> <span class="o">=&lt;</span> <span class="nv">C</span>, <span class="nv">C</span> <span class="o">=&lt;</span> <span class="m">0&#39;9</span>, <span class="nv">X</span> <span class="k">is</span> <span class="nv">C</span> <span class="o">-</span> <span class="m">0&#39;0</span><span class="k">}</span>.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>The predicate <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> called
@@ -1080,7 +1080,7 @@ natural language sentences:</p>
     verb_phrase <span class="o">--&gt;</span> <span class="o">::</span>verb.
     verb_phrase <span class="o">--&gt;</span> <span class="o">::</span>verb, noun_phrase.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>The categories imported by the object would contain the necessary
@@ -1092,7 +1092,7 @@ grammar rules for parsing determiners, nouns, and verbs. For example:</p>
     determiner <span class="o">--&gt;</span> [the].
     determiner <span class="o">--&gt;</span> [a].
 
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">::/1</span></code>, <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, and
@@ -1118,7 +1118,7 @@ same time the Logtalk compiler. Consider the following example:</p>
 
     foo <span class="o">--&gt;</span> <span class="k">{{</span>bar<span class="k">}}</span>.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>After compiling and loading this code, we may try the following query:</p>
@@ -1190,13 +1190,13 @@ context methods:</p>
         <span class="k">write</span>(<span class="s">&#39;that was sent by &#39;</span>),
         <span class="k">writeq</span>(<span class="nv">Sender</span>), <span class="k">nl</span>, <span class="k">nl</span>.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 
 
 <span class="p">:- </span><span class="k">object</span>(descendant,
     <span class="k">extends</span>(test)).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>After compiling and loading these two objects, we can try the following
@@ -1237,7 +1237,7 @@ For example:</p>
         <span class="k">write</span>(<span class="s">&#39;Color parameter value is &#39;</span>),
         <span class="k">writeq</span>(<span class="nv">Color</span>), <span class="k">nl</span>.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>An alternative to the <code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> predicate is to use
@@ -1250,7 +1250,7 @@ For example:</p>
         <span class="k">write</span>(<span class="s">&#39;Color parameter value is &#39;</span>),
         <span class="k">writeq</span>(<span class="nv">_Color_</span>), <span class="k">nl</span>.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>After compiling and loading either version of the object, we can try the
@@ -1273,7 +1273,7 @@ takes an atom and an integer as arguments. We could type-check the
 arguments by writing (using the library <code class="docutils literal notranslate"><span class="pre">type</span></code> object):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo(<span class="nv">A</span>, <span class="nv">N</span>) <span class="o">:-</span>
     <span class="c">% type-check arguments</span>
-    <span class="k">context</span>(<span class="nv">Context</span>),
+    context(<span class="nv">Context</span>),
     type<span class="o">::</span>check(atom, <span class="nv">A</span>, <span class="nv">Context</span>),
     type<span class="o">::</span>check(integer, <span class="nv">N</span>, <span class="nv">Context</span>),
     <span class="c">% arguments are fine; go ahead</span>
@@ -1322,7 +1322,7 @@ the <code class="docutils literal notranslate"><span class="pre">uses/2</span></
         <span class="k">retractall</span>(data(<span class="nv">_</span>)),
         <span class="k">assertz</span>(data(<span class="nv">Arg</span>)).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>When working with dynamic grammar rule non-terminals, you may use the
@@ -1768,7 +1768,7 @@ allowing calls to local object or category predicates. For example:</p>
         <span class="c">% calls to local object predicates</span>
         ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>The Logtalk compiler will print a warning if the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code>

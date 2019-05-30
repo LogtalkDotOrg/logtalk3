@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Inheritance &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>Inheritance &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -296,7 +296,7 @@ definitions. For example, assume that we have the following two objects:</p>
 <span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
     foo(root).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 
 
 <span class="p">:- </span><span class="k">object</span>(descendant,
@@ -304,7 +304,7 @@ definitions. For example, assume that we have the following two objects:</p>
 
     foo(descendant).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>After compiling and loading these objects, we can check the overriding
@@ -340,7 +340,7 @@ inheritance chain:</p>
     init <span class="o">:-</span>
         <span class="k">write</span>(<span class="s">&#39;root init&#39;</span>), <span class="k">nl</span>.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 
 
 <span class="p">:- </span><span class="k">object</span>(descendant,
@@ -350,7 +350,7 @@ inheritance chain:</p>
         <span class="k">write</span>(<span class="s">&#39;descendant init&#39;</span>), <span class="k">nl</span>,
         <span class="o">^^</span>init.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- descendant::init.
@@ -377,7 +377,7 @@ example:</p>
     foo(<span class="m">1</span>).
     foo(<span class="m">2</span>).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 
 
 <span class="p">:- </span><span class="k">object</span>(descendant,
@@ -387,7 +387,7 @@ example:</p>
     foo(<span class="nv">Foo</span>) <span class="o">:-</span>
         <span class="o">^^</span>foo(<span class="nv">Foo</span>).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- descendant::foo(Foo).
@@ -414,7 +414,7 @@ flightless birds:</p>
     mode(walks).
     mode(flies).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 
 
 <span class="p">:- </span><span class="k">object</span>(penguin,
@@ -425,7 +425,7 @@ flightless birds:</p>
         <span class="o">^^</span>mode(<span class="nv">Mode</span>),
         <span class="nv">Mode</span> <span class="o">\==</span> flies.
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- penguin::mode(Mode).
@@ -454,7 +454,7 @@ name with the corresponding keyword. For example:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>or:</p>
@@ -466,7 +466,7 @@ name with the corresponding keyword. For example:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>Omitting the scope keyword is equivalent to using the public scope
@@ -476,7 +476,7 @@ keyword. For example:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>This is the same as:</p>
@@ -485,7 +485,7 @@ keyword. For example:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>This way we ensure backward compatibility with older Logtalk versions

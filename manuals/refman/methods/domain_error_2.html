@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>domain_error/2 &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>domain_error/2 &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -217,15 +217,15 @@
 <span id="methods-domain-error-2"></span><span id="index-0"></span><h1>domain_error/2<a class="headerlink" href="#domain-error-2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">domain_error</span>(<span class="nv">Domain</span>, <span class="nv">Culprit</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>domain_error(<span class="nv">Domain</span>, <span class="nv">Culprit</span>)
 </pre></div>
 </div>
 <p>Throws a domain error. This built-in method is declared private and thus
 cannot be used as a message to an object. Calling this predicate is
 equivalent to the following sequence of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
-<span class="k">context</span>(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(<span class="k">domain_error</span>(<span class="nv">Domain</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
+context(<span class="nv">Context</span>),
+<span class="k">throw</span>(error(domain_error(<span class="nv">Domain</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
@@ -233,7 +233,7 @@ runtime.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">domain_error</span>(<span class="o">+</span>atom, <span class="o">@</span>nonvar) <span class="o">-</span> error
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>domain_error(<span class="o">+</span>atom, <span class="o">@</span>nonvar) <span class="o">-</span> error
 </pre></div>
 </div>
 </div>
@@ -251,7 +251,7 @@ runtime.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">atom</span>(<span class="nv">Color</span>),
 <span class="o">\+</span> color(<span class="nv">Color</span>),
-<span class="k">domain_error</span>(color, <span class="nv">Color</span>).
+domain_error(color, <span class="nv">Color</span>).
 </pre></div>
 </div>
 <div class="admonition seealso">

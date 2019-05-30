@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Dynamic object attributes &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>Dynamic object attributes &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -259,7 +259,7 @@ straightforward. For example, if opting for storing the attributes in
     del_attributes(<span class="nv">Attribute</span>, <span class="nv">Value</span>)<span class="o">:-</span>
         <span class="o">::</span><span class="k">retractall</span>(attribute_(<span class="nv">Attribute</span>, <span class="nv">Value</span>)).
 
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>The alternative, opting for storing the attributes on <em>this</em>, is
@@ -274,7 +274,7 @@ directives inside a protocol that will be implemented by the category:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>Any protocol can be implemented by either an object, a category, or
@@ -288,7 +288,7 @@ both.</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>After compiling and loading this object and our category, we can now try

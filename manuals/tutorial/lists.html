@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>List predicates &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>List predicates &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -219,7 +219,7 @@ definitions for some common list predicates like <code class="docutils literal n
     member(<span class="nv">Element</span>, [<span class="nv">_</span>| <span class="nv">List</span>]) <span class="o">:-</span>
         member(<span class="nv">Element</span>, <span class="nv">List</span>).
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>What is different here from a regular Prolog program? The definitions of
@@ -296,7 +296,7 @@ protocol:</p>
         append<span class="o">/</span><span class="m">3</span>, length<span class="o">/</span><span class="m">2</span>, member<span class="o">/</span><span class="m">2</span>
     ]).
 
-<span class="p">:- </span><span class="k">end_protocol</span>.
+<span class="p">:- </span><span class="k">end_protocol.</span>
 </pre></div>
 </div>
 <p>Similar to what we have done for objects, we use the
@@ -316,7 +316,7 @@ directive:</p>
 <span class="p">    :- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
 <span class="p">    :- </span><span class="k">mode</span>(member(<span class="o">?</span>term, <span class="o">?</span>list), zero_or_more).
 
-<span class="p">:- </span><span class="k">end_protocol</span>.
+<span class="p">:- </span><span class="k">end_protocol.</span>
 </pre></div>
 </div>
 <p>We now need to change our definition of the <code class="docutils literal notranslate"><span class="pre">list</span></code> object by removing
@@ -330,7 +330,7 @@ the predicate directives and by declaring that the object implements the
         append(<span class="nv">Tail</span>, <span class="nv">List</span>, <span class="nv">Tail2</span>).
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>The protocol declared in <code class="docutils literal notranslate"><span class="pre">listp</span></code> may now be alternatively implemented
@@ -341,7 +341,7 @@ using difference lists by defining a new object, <code class="docutils literal n
     append(<span class="nv">L1</span><span class="o">-</span><span class="nv">X</span>, <span class="nv">X</span><span class="o">-</span><span class="nv">L2</span>, <span class="nv">L1</span><span class="o">-</span><span class="nv">L2</span>).
     ...
 
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 </div>

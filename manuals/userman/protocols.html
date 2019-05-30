@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Protocols &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>Protocols &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -257,7 +257,7 @@ most simple protocol will be one that is self-contained, not depending
 on any other Logtalk entity:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">protocol</span>(<span class="nv">Protocol</span>).
     ...
-<span class="p">:- </span><span class="k">end_protocol</span>.
+<span class="p">:- </span><span class="k">end_protocol.</span>
 </pre></div>
 </div>
 <p>If a protocol extends one or more protocols, then the opening directive
@@ -265,7 +265,7 @@ will be:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">protocol</span>(<span class="nv">Protocol</span>,
     <span class="k">extends</span>([<span class="nv">Protocol1</span>, <span class="nv">Protocol2</span>, ...])).
     ...
-<span class="p">:- </span><span class="k">end_protocol</span>.
+<span class="p">:- </span><span class="k">end_protocol.</span>
 </pre></div>
 </div>
 <p>In order to maximize protocol reuse, all predicates specified in a
@@ -304,11 +304,11 @@ opening protocol directive and to the protocol directives.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">protocol</span>(ppp,
     <span class="k">extends</span>(qqq)).
 
-<span class="p">    :- </span><span class="k">dynamic</span>.
+<span class="p">    :- </span><span class="k">dynamic.</span>
 
 <span class="p">    :- </span><span class="k">public</span>([foo<span class="o">/</span><span class="m">1</span>, bar<span class="o">/</span><span class="m">1</span>]).
 
-<span class="p">:- </span><span class="k">end_protocol</span>.
+<span class="p">:- </span><span class="k">end_protocol.</span>
 </pre></div>
 </div>
 <p>If we need to create a lot of (dynamic) protocols at runtime, then is
@@ -337,7 +337,7 @@ dynamic. A protocol created during the execution of a program is always
 dynamic. A protocol defined in a file can be either dynamic or static.
 Dynamic protocols are declared by using the
 <a class="reference internal" href="../refman/directives/dynamic_0.html#directives-dynamic-0"><span class="std std-ref">dynamic/0</span></a> directive in the protocol source code:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic</span>.
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic.</span>
 </pre></div>
 </div>
 <p>The directive must precede any predicate directives. Please be aware
@@ -448,14 +448,14 @@ is very simple:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">implements</span>(<span class="nv">Protocol</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>or, in the case of a category:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(<span class="nv">Object</span>,
     <span class="k">implements</span>(<span class="nv">Protocol</span>)).
     ...
-<span class="p">:- </span><span class="k">end_category</span>.
+<span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
 </div>
 <p>To make all public predicates declared via an implemented protocol
@@ -464,21 +464,21 @@ prefix the protocol’s name with the corresponding keyword. For instance:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">implements</span>(private<span class="o">::</span><span class="nv">Protocol</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>or:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">implements</span>(protected<span class="o">::</span><span class="nv">Protocol</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>Omitting the scope keyword is equivalent to writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">implements</span>(public<span class="o">::</span><span class="nv">Protocol</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object</span>.
+<span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
 </div>
 <p>The same rules applies to protocols implemented by categories.</p>

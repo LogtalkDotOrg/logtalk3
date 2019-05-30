@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Multi-threading programming &mdash; The Logtalk Handbook v3.27.0-b04 documentation</title>
+  <title>Multi-threading programming &mdash; The Logtalk Handbook v3.27.0-b05 documentation</title>
   
 
   
@@ -233,7 +233,7 @@ the Prolog adapter files of supported compilers by setting the read-only
 <span id="threads-directive"></span><h2>Enabling objects to make multi-threading calls<a class="headerlink" href="#enabling-objects-to-make-multi-threading-calls" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="../refman/directives/threaded_0.html#directives-threaded-0"><span class="std std-ref">threaded/0</span></a> object
 directive is used to enable an object to make multi-threading calls:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">threaded</span>.
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">threaded.</span>
 </pre></div>
 </div>
 </div>
@@ -556,7 +556,7 @@ deterministic. In contrast with the <code class="docutils literal notranslate"><
 predicates, retrieving the next solution requires calling the predicate
 again instead of by backtracking into its call. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>collect_all(<span class="nv">Engine</span>, [<span class="nv">Answer</span>| <span class="nv">Answers</span>]) <span class="o">:-</span>
-    <span class="k">threaded_engine_next</span>(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
+    threaded_engine_next(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
     <span class="o">!</span>,
     collect_all(<span class="nv">Engine</span>, <span class="nv">Answers</span>).
 collect_all(<span class="nv">_</span>, []).
@@ -569,13 +569,13 @@ answers. Using this predicate, collecting all solutions to an engine
 uses a different programming pattern:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>... <span class="o">:-</span>
     ...,
-    <span class="k">threaded_engine_next_reified</span>(<span class="nv">Engine</span>, <span class="nv">Reified</span>),
+    threaded_engine_next_reified(<span class="nv">Engine</span>, <span class="nv">Reified</span>),
     collect_all_reifeid(<span class="nv">Reified</span>, <span class="nv">Engine</span>, <span class="nv">Answers</span>),
     ...
 
 collect_all_reifeid(no, <span class="nv">_</span>, []).
 collect_all_reifeid(the(<span class="nv">Answer</span>), <span class="nv">Engine</span>, [<span class="nv">Answer</span>| <span class="nv">Answers</span>]) <span class="o">:-</span>
-    <span class="k">threaded_engine_next_reified</span>(<span class="nv">Engine</span>, <span class="nv">Reified</span>),
+    threaded_engine_next_reified(<span class="nv">Engine</span>, <span class="nv">Reified</span>),
     collect_all_reifeid(<span class="nv">Reified</span>, <span class="nv">Engine</span>, <span class="nv">Answers</span>).
 </pre></div>
 </div>
@@ -589,7 +589,7 @@ yes
 that uses the engine term queue to retrieve a task to be performed. For
 example, assume we define the following predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>loop <span class="o">:-</span>
-    <span class="k">threaded_engine_fetch</span>(<span class="nv">Task</span>),
+    threaded_engine_fetch(<span class="nv">Task</span>),
     handle(<span class="nv">Task</span>),
     loop.
 </pre></div>
