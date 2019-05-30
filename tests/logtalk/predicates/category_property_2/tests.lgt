@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2018/03/27,
+		date is 2019/05/30,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -143,7 +143,7 @@
 		category_property(test_category, defines(e/5, Properties5)),
 		\+ member(line_count(_LC5), Properties5),
 		member(number_of_clauses(NC5), Properties5), NC5 == 0,
-		member(number_of_rules(NR5), Properties5), NR5 == 0.		
+		member(number_of_rules(NR5), Properties5), NR5 == 0.
 
 	% predicate call properties
 
@@ -188,14 +188,14 @@
 			Updaters
 		),
 		Updaters == [updater1/0, updater2/0, updater3/0, updater4/0, updater5/0, updater6/0].
-		
+
 	succeeds(category_property_2_24) :-
 		forall(
 			category_property(test_category, updates(c/3, Properties)),
 			(member(line_count(Line), Properties), integer(Line))
 		).
 
-	succeeds(object_property_2_25) :-
+	succeeds(category_property_2_25) :-
 		setof(
 			Updater,
 			Properties^(
@@ -205,14 +205,14 @@
 			Updaters
 		),
 		Updaters == [updater1s/0, updater2s/0, updater3s/0, updater4s/0, updater5s/0, updater6s/0].
-		
-	succeeds(object_property_2_26) :-
+
+	succeeds(category_property_2_26) :-
 		forall(
 			category_property(test_category, updates(::c/3, Properties)),
 			(member(line_count(Line), Properties), integer(Line))
 		).
 
-	succeeds(object_property_2_27) :-
+	succeeds(category_property_2_27) :-
 		setof(
 			Updater,
 			Properties^(
@@ -222,8 +222,8 @@
 			Updaters
 		),
 		Updaters == [updater1o/0, updater2o/0, updater3o/0, updater4o/0, updater5o/0, updater6o/0].
-		
-	succeeds(object_property_2_28) :-
+
+	succeeds(category_property_2_28) :-
 		forall(
 			category_property(test_object, updates(logtalk::c/3, Properties)),
 			(member(line_count(Line), Properties), integer(Line))

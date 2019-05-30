@@ -290,6 +290,8 @@
 :- dynamic('$lgt_pp_multifile_'/3).
 % '$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)
 :- dynamic('$lgt_pp_coinductive_'/7).
+% '$lgt_pp_coinductive_head_'(Head, HeadExCtx, TCHead)
+:- dynamic('$lgt_pp_coinductive_head_'/3).
 
 % '$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)
 :- dynamic('$lgt_pp_object_'/11).
@@ -3396,7 +3398,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 27, 0, b05)).
+'$lgt_version_data'(logtalk(3, 27, 0, b06)).
 
 
 
@@ -7633,6 +7635,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_discontiguous_'(_)),
 	retractall('$lgt_pp_multifile_'(_, _, _)),
 	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
+	retractall('$lgt_pp_coinductive_head_'(_, _, _)),
 	retractall('$lgt_pp_mode_'(_, _, _, _)),
 	retractall('$lgt_pp_meta_predicate_'(_, _)),
 	retractall('$lgt_pp_predicate_alias_'(_, _, _, _, _, _)),
@@ -9961,6 +9964,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(THead, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Head, THead, BodyExCtx),
 	assertz('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)),
+	assertz('$lgt_pp_coinductive_head_'(Head, HeadExCtx, TCHead)),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, coinductive(Template)))).
 
 '$lgt_compile_coinductive_directive_resource'(Pred) :-
@@ -13840,7 +13844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
 	;	'$lgt_pp_synchronized_'(Pred, _)
-	;	'$lgt_pp_coinductive_'(Pred, _, _, _, _, _, _)
+	;	'$lgt_pp_coinductive_head_'(Pred, _, _)
 	;	'$lgt_pp_discontiguous_'(Pred)
 	),
 	!,
@@ -17123,7 +17127,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
 			Clause =.. [Def, Head, ExCtx, once(Call)]
 		)
-	;	'$lgt_pp_coinductive_'(Head, _, ExCtx, TCHead, _, _, _) ->
+	;	'$lgt_pp_coinductive_head_'(Head, ExCtx, TCHead) ->
 		'$lgt_wrap_compiled_head'(Head, TCHead, ExCtx, Call),
 		Clause =.. [Def, Head, ExCtx, Call]
 	;	'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call),
@@ -17511,7 +17515,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Meta = no,
 		MetaPredicate = 0
 	),
-	(	'$lgt_pp_coinductive_'(Pred, _, _, _, _, _, _) ->
+	(	'$lgt_pp_coinductive_head_'(Pred, _, _) ->
 		Coinductive = 32				% 0b00100000
 	;	Coinductive = 0
 	),
@@ -17567,7 +17571,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
 	;	'$lgt_pp_synchronized_'(Head, _)
-	;	'$lgt_pp_coinductive_'(Head, _, _, _, _, _, _)
+	;	'$lgt_pp_coinductive_head_'(Head, _, _)
 	;	'$lgt_pp_discontiguous_'(Head)
 	),
 	functor(Head, Functor, Arity),
@@ -17595,7 +17599,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_protected_'(Functor, Arity),
 		\+ '$lgt_pp_private_'(Functor, Arity),
 		\+ '$lgt_pp_synchronized_'(Head, _),
-		\+ '$lgt_pp_coinductive_'(Head, _, _, _, _, _, _),
+		\+ '$lgt_pp_coinductive_head_'(Head, _, _),
 		\+ '$lgt_pp_multifile_'(Head, _, _) ->
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, _, Ctx)
 	;	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx)
@@ -18600,7 +18604,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_compile_predicate_calls'(_) :-
-	% coinductive auxiliary clauses
 	retract('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)),
 	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
