@@ -144,8 +144,8 @@ Tests
 library directories.
 
 * ADDED: Unit tests for the `coroutining`, `dictionaries`, `gensym`, `heaps`,
-`hierarchies`, `hook_flows`, `intervals`, `loops`, `meta`, `queues`, and
-`sets` libraries.
+`hierarchies`, `hook_flows`, `intervals`, `loops`, `meta`, `meta_compiler`,
+`queues`, and `sets` libraries.
 
 * ADDED: Unit tests for the ISO Prolog standard arithmetic function `div/2`.
 
