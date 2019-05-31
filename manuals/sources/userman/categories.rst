@@ -363,6 +363,16 @@ can be used to load the contents of a file into a category. See the
 :ref:`objects_objects` section for an example of using this
 directive.
 
+.. _categories_object_aliases:
+
+Declaring object aliases
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The :ref:`directives_uses_1` directive can be used to declare object aliases.
+The typical uses of this directive is to shorten long object names and to
+simplify experimenting with different object implementations of the same
+protocol when using explicit message sending.
+
 .. _categories_relationships:
 
 Category relationships

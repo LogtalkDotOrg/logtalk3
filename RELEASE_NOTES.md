@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Object and category `uses/1` directive to support the declaration of
+object aliases.
+
 * ADDED: The object argument in a `uses/2` directive and the module argument
 in a `use_module/2` directive can now be a parameter variable when using the
 directive in a parametric object or a parametric category.
@@ -146,6 +149,8 @@ library directories.
 * ADDED: Unit tests for the `coroutining`, `dictionaries`, `gensym`, `heaps`,
 `hierarchies`, `hook_flows`, `intervals`, `loops`, `meta`, `meta_compiler`,
 `queues`, and `sets` libraries.
+
+* ADDED: Unit tests for the new object and category `uses/1` directive.
 
 * ADDED: Unit tests for the ISO Prolog standard arithmetic function `div/2`.
 

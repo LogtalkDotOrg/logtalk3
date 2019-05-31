@@ -579,6 +579,16 @@ dynamically. For example:
 
    | ?- create_object(cities, [], [public(city/4), include(dbs('cities.pl'))], []).
 
+.. _objects_object_aliases:
+
+Declaring object aliases
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The :ref:`directives_uses_1` directive can be used to declare object aliases.
+The typical uses of this directive is to shorten long object names and to
+simplify experimenting with different object implementations of the same
+protocol when using explicit message sending.
+
 .. _objects_relationships:
 
 Object relationships

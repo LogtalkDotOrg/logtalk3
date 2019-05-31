@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Objects &mdash; The Logtalk Handbook v3.27.0-b06 documentation</title>
+  <title>Objects &mdash; The Logtalk Handbook v3.27.0-b07 documentation</title>
   
 
   
@@ -119,6 +119,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-objects">Dynamic objects</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#object-documentation">Object documentation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#loading-files-into-an-object">Loading files into an object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#declaring-object-aliases">Declaring object aliases</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#object-relationships">Object relationships</a></li>
@@ -677,6 +678,13 @@ dynamically. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_object(cities, [], [public(city/4), include(dbs(&#39;cities.pl&#39;))], []).
 </pre></div>
 </div>
+</div>
+<div class="section" id="declaring-object-aliases">
+<span id="objects-object-aliases"></span><h3>Declaring object aliases<a class="headerlink" href="#declaring-object-aliases" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../refman/directives/uses_1.html#directives-uses-1"><span class="std std-ref">uses/1</span></a> directive can be used to declare object aliases.
+The typical uses of this directive is to shorten long object names and to
+simplify experimenting with different object implementations of the same
+protocol when using explicit message sending.</p>
 </div>
 </div>
 <div class="section" id="object-relationships">

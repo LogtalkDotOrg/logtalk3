@@ -37,3 +37,4 @@ Entity directives
    protocol_1_2
    set_logtalk_flag_2
    threaded_0
+   uses_1

@@ -307,6 +307,9 @@
 % '$lgt_pp_parameter_variables_'(ParameterVariables)
 :- dynamic('$lgt_pp_parameter_variables_'/1).
 
+% '$lgt_pp_object_alias_'(Obj, Alias)
+:- dynamic('$lgt_pp_object_alias_'/2).
+
 % '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias, CompilationContext)
 :- dynamic('$lgt_pp_uses_predicate_'/4).
 % '$lgt_pp_uses_non_terminal_'(Obj, NonTerminal, NonTerminalAlias, Predicate, PredicateAlias, CompilationContext)
@@ -3398,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 27, 0, b06)).
+'$lgt_version_data'(logtalk(3, 27, 0, b07)).
 
 
 
@@ -7588,6 +7591,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_clean_pp_common_object_category_clauses' :-
 	retractall('$lgt_pp_implemented_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_parameter_variables_'(_)),
+	retractall('$lgt_pp_object_alias_'(_, _)),
 	retractall('$lgt_pp_uses_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_uses_non_terminal_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_use_module_predicate_'(_, _, _, _)),
@@ -9009,7 +9013,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
 
-% uses/2 entity directive
+% uses/1 entity directive
+
+'$lgt_compile_logtalk_directive'(uses(Aliases), Ctx) :-
+	'$lgt_compile_uses_directive'(Aliases, Aliases, Ctx).
+
+% uses/2 predicate directive
 
 '$lgt_compile_logtalk_directive'(uses(Obj, Resources), Ctx) :-
 	var(Obj),
@@ -9027,7 +9036,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	'$lgt_compile_uses_directive'(Resources, Resources, Obj, Ctx).
 
-% use_module/2 module directive
+% use_module/2 predicate directive
 %
 % the first argument must be a module identifier; when a file specification
 % is used, as it's usual in Prolog, it must be expanded at the adapter file
@@ -10035,6 +10044,34 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_map_coinductive_template_args'([(-)| TemplateArgs], [_| HeadArgs], [_| TestHeadArgs]) :-
 	'$lgt_map_coinductive_template_args'(TemplateArgs, HeadArgs, TestHeadArgs).
+
+
+% '$lgt_compile_uses_directive'(Aliases, Aliases, Ctx)
+%
+% auxiliary predicate for compiling uses/1 directives
+
+'$lgt_compile_uses_directive'([Alias| Aliases], Argument, Ctx) :-
+	!,
+	'$lgt_check'(ground, Alias),
+	'$lgt_compile_uses_directive_alias'(Alias, Ctx),
+	'$lgt_compile_uses_directive'(Aliases, Argument, Ctx).
+
+'$lgt_compile_uses_directive'([], _, _) :-
+	!.
+
+'$lgt_compile_uses_directive'(_, Argument, _) :-
+	throw(type_error(list, Argument)).
+
+
+'$lgt_compile_uses_directive_alias'(Obj as Alias, Ctx) :-
+	!,
+	'$lgt_check'(object_identifier, Obj),
+	'$lgt_check'(object_identifier, Alias),
+	'$lgt_add_referenced_object'(Obj, Ctx),
+	assertz('$lgt_pp_object_alias_'(Obj, Alias)).
+
+'$lgt_compile_uses_directive_alias'(Argument, _) :-
+	throw(type_error(object_alias, Argument)).
 
 
 
@@ -12524,6 +12561,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 % message sending
+
+'$lgt_compile_body'(Alias::Pred, TPred, '$lgt_debug'(goal(Alias::Pred, TPred), ExCtx), Ctx) :-
+	callable(Alias),
+	'$lgt_pp_object_alias_'(Obj, Alias),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_compiler_flag'(events, Events),
+	'$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx).
 
 '$lgt_compile_body'(Obj::Pred, TPred, '$lgt_debug'(goal(Obj::Pred, TPred), ExCtx), Ctx) :-
 	!,
@@ -19986,8 +20031,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_logtalk_entity_directive'(built_in).
-'$lgt_logtalk_entity_directive'(uses(_, _)).
-'$lgt_logtalk_entity_directive'(use_module(_, _)).
 '$lgt_logtalk_entity_directive'(include(_)).
 '$lgt_logtalk_entity_directive'(initialization(_)).
 '$lgt_logtalk_entity_directive'((dynamic)).
@@ -19995,6 +20038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_entity_directive'(info(_)).
 '$lgt_logtalk_entity_directive'(threaded).
 '$lgt_logtalk_entity_directive'(set_logtalk_flag(_, _)).
+'$lgt_logtalk_entity_directive'(uses(_)).
 
 
 '$lgt_logtalk_predicate_directive'(synchronized(_)).
@@ -20010,6 +20054,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_predicate_directive'(alias(_, _)).
 '$lgt_logtalk_predicate_directive'(multifile(_)).
 '$lgt_logtalk_predicate_directive'(coinductive(_)).
+'$lgt_logtalk_predicate_directive'(uses(_, _)).
+'$lgt_logtalk_predicate_directive'(use_module(_, _)).
 % Prolog module directives that are recognized when compiling modules as objects
 '$lgt_logtalk_predicate_directive'(export(_)).
 '$lgt_logtalk_predicate_directive'(reexport(_, _)).

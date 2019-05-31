@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Grammar &mdash; The Logtalk Handbook v3.27.0-b06 documentation</title>
+  <title>Grammar &mdash; The Logtalk Handbook v3.27.0-b07 documentation</title>
   
 
   
@@ -933,6 +933,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” entity_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>” object_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
 <div class="line">predicate_directives</div>
 </div>
 </div>
@@ -954,6 +955,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” entity_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>” object_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
 <div class="line">predicate_directives</div>
 </div>
 </div>
@@ -1517,6 +1519,25 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">redefinition</span></code>” | “<code class="docutils literal notranslate"><span class="pre">allocation</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">examples</span></code>” | “<code class="docutils literal notranslate"><span class="pre">exceptions</span></code>” |</div>
 <div class="line"><em>atom</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_alias ::=</div>
+<div class="line-block">
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">as</span></code>” object_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_alias_sequence ::=</div>
+<div class="line-block">
+<div class="line">object_alias |</div>
+<div class="line">object_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_alias_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_alias_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” object_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
 </div>

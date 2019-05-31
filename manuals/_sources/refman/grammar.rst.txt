@@ -515,6 +515,7 @@ Object directives
 |    "``:- info(``" entity_info_list "``).``" \|
 |    "``:- set_logtalk_flag(``" *atom* "``,``" *nonvar* "``).``" \|
 |    "``:- include(``" source_file_name "``).``" \|
+|    "``:- uses(``" object_alias_list "``).``" \|
 |    predicate_directives
 
 .. _grammar_category_directives:
@@ -532,6 +533,7 @@ Category directives
 |    "``:- info(``" entity_info_list "``).``" \|
 |    "``:- set_logtalk_flag(``" *atom* "``,``" *nonvar* "``).``" \|
 |    "``:- include(``" source_file_name "``).``" \|
+|    "``:- uses(``" object_alias_list "``).``" \|
 |    predicate_directives
 
 .. _grammar_protocol_directives:
@@ -868,6 +870,16 @@ Predicate directives
 |    "``redefinition``" \| "``allocation``" \|
 |    "``examples``" \| "``exceptions``" \|
 |    *atom*
+
+| object_alias ::=
+|    object_identifier "``as``" object_identifier
+
+| object_alias_sequence ::=
+|    object_alias \|
+|    object_alias "``,``" object_alias_sequence
+
+| object_alias_list ::=
+|    "``[``" object_alias_sequence "``]``"
 
 .. _grammar_clauses:
 
