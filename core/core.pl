@@ -1359,7 +1359,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_clean_pp_runtime_clauses',
 	% complementing categories can invalidate dynamic binding cache entries
 	(	'$lgt_member'(Relation, Relations),
-		 functor(Relation, complements, _) ->
+		functor(Relation, complements, _) ->
 		'$lgt_clean_lookup_caches'
 	;	true
 	).
@@ -3544,7 +3544,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_current_object_'(TCtn, _, TCtnDcl, _, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_current_protocol_'(TCtn, _, TCtnDcl, _, _) ->
-	 	true
+		true
 	;	'$lgt_current_category_'(TCtn, _, TCtnDcl, _, _, _)
 	),
 	(	call(TCtnDcl, Pred, _, _, _) ->
@@ -6095,7 +6095,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	% bare-bones message printing
 		writeq(Component), write(' '), write(Kind), write(': '), writeq(Message), nl
- 	).
+	).
 
 
 
@@ -10133,7 +10133,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% the binding between the parametric variable and the object argument
 		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
 		assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, NewCtx))
-	; 	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, _))
+	;	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, _))
 	).
 
 '$lgt_compile_uses_directive_predicate_resource'(_, AliasFunctor, Arity, _, _) :-
@@ -11314,8 +11314,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_control_construct'(Pred),
 	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
 	% call to a standard Prolog predicate that is not being locally redefined
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, {Pred}, [Pred])),
 	fail.
 
@@ -11438,8 +11438,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Pred2),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), [(Pred1, Pred2)])),
 	fail.
 '$lgt_compile_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
@@ -11453,8 +11453,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Pred2),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), [(once(Pred1), Pred2)])),
 	fail.
 '$lgt_compile_body'((Pred1 -> Pred2), (TPred1 -> TPred2), (DPred1 -> DPred2), Ctx) :-
@@ -11530,8 +11530,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Goal),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, call(Goal), [Goal])),
 	fail.
 '$lgt_compile_body'(call(Goal), TPred, '$lgt_debug'(goal(call(Goal), DPred), ExCtx), Ctx) :-
@@ -11659,8 +11659,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	ListTerm =.. List,
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Term =.. List, [Term = ListTerm])),
 	fail.
 
@@ -11745,8 +11745,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Goal, GoalVariables),
 	term_variables(Term, TermVariables),
 	'$lgt_intersection'(TermVariables, GoalVariables, []),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, bagof(Term,QGoal,List), reason(no_shared_variables(bagof)))),
 	fail.
 '$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
@@ -11755,8 +11755,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
 	fail.
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
@@ -11782,8 +11782,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Term, TermVariables),
 	term_variables(Goal, GoalVariables),
 	'$lgt_intersection'(TermVariables, GoalVariables, []),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List), reason(no_shared_variables(findall)))),
 	fail.
 '$lgt_compile_body'(findall(Term, Goal, List), findall(Term, TGoal, List), '$lgt_debug'(goal(findall(Term, Goal, List), findall(Term, DGoal, List)), ExCtx), Ctx) :-
@@ -11799,8 +11799,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Term, TermVariables),
 	term_variables(Goal, GoalVariables),
 	'$lgt_intersection'(TermVariables, GoalVariables, []),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List,Tail), reason(no_shared_variables(findall)))),
 	fail.
 '$lgt_compile_body'(findall(Term, Goal, List, Tail), findall(Term, TGoal, List, Tail), '$lgt_debug'(goal(findall(Term, Goal, List, Tail), findall(Term, DGoal, List, Tail)), ExCtx), Ctx) :-
@@ -11811,15 +11811,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(forall(Gen, Test), _, _, Ctx) :-
 	callable(Gen),
 	callable(Test),
-	 \+ ground(Gen),
-	 \+ ground(Test),
+	\+ ground(Gen),
+	\+ ground(Test),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	term_variables(Gen, GenVariables),
 	term_variables(Test, TestVariables),
 	'$lgt_intersection'(GenVariables, TestVariables, []),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, forall(Gen,Test), reason(no_shared_variables(forall)))),
 	fail.
 '$lgt_compile_body'(forall(Gen, Test), \+ (TGen, \+ TTest), '$lgt_debug'(goal(forall(Gen, Test), \+ (DGen, \+ DTest)), ExCtx), Ctx) :-
@@ -11837,8 +11837,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Goal, GoalVariables),
 	term_variables(Term, TermVariables),
 	'$lgt_intersection'(TermVariables, GoalVariables, []),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, setof(Term,QGoal,List), reason(no_shared_variables(setof)))),
 	fail.
 '$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
@@ -11847,8 +11847,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
- 	'$lgt_increment_compiling_warnings_counter',
- 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
 	fail.
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
@@ -13836,7 +13836,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
- 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
 
 '$lgt_compile_body'(Pred, fail, '$lgt_debug'(goal(Pred, fail), ExCtx), Ctx) :-
 	functor(Pred, Functor, Arity),
@@ -13852,7 +13852,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% but undefined predicates must fail instead of throwing an exception
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
- 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head),
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head),
 	'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity).
 
 % call to a Prolog built-in predicate
@@ -13904,11 +13904,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _),
- 	functor(Pred, Functor, Arity),
+	functor(Pred, Functor, Arity),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
- 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head),
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head),
 	'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity).
 
 
@@ -15698,11 +15698,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_read_term'(Stream, Term, Options, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 read_term(Stream, Term, Options),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			read_term(Stream, Term, Options),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15715,11 +15716,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_read_term'(Term, Options, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 read_term(Term, Options),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			read_term(Term, Options),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15732,11 +15734,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_read'(Stream, Term, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 read(Stream, Term),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			read(Stream, Term),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15749,11 +15752,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_read'(Term, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 read(Term),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			read(Term),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15766,11 +15770,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_write_term'(Stream, Term, Options, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 write_term(Stream, Term, Options),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			write_term(Stream, Term, Options),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15783,11 +15788,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_write_term'(Term, Options, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 write_term(Term, Options),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			write_term(Term, Options),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15800,11 +15806,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_write'(Stream, Term, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 write(Stream, Term),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			write(Stream, Term),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15817,11 +15824,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_write'(Term, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 write(Term),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			write(Term),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15834,11 +15842,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_writeq'(Stream, Term, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 writeq(Stream, Term),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			writeq(Stream, Term),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -15851,11 +15860,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_iso_writeq'(Term, Operators) :-
 	catch(
-		('$lgt_save_operators'(Operators, Saved),
-		 '$lgt_add_operators'(Operators),
-		 writeq(Term),
-		 '$lgt_remove_operators'(Operators),
-		 '$lgt_add_operators'(Saved)),
+		(	'$lgt_save_operators'(Operators, Saved),
+			'$lgt_add_operators'(Operators),
+			writeq(Term),
+			'$lgt_remove_operators'(Operators),
+			'$lgt_add_operators'(Saved)
+		),
 		Error,
 		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
 	).
@@ -22636,8 +22646,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	with_mutex(
 		'$lgt_threaded_tag',
 		(	retract('$lgt_threaded_tag_counter_'(Old)),
-		 	New is Old + 1,
-		 	asserta('$lgt_threaded_tag_counter_'(New))
+			New is Old + 1,
+			asserta('$lgt_threaded_tag_counter_'(New))
 		)
 	).
 
