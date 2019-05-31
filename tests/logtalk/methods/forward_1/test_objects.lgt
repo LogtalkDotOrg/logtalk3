@@ -33,7 +33,6 @@
 :- object(test_object_2,
 	implements(forwarding)).
 
-	:- meta_predicate(forward(::)).
 	forward(Message) :-
 		[test_object_1::Message].
 
@@ -43,8 +42,24 @@
 :- object(test_object_3,
 	implements(forwarding)).
 
-	:- meta_predicate(forward(::)).
 	forward(Message) :-
 		call([test_object_1::Message], bar).
 
 :- end_object.
+
+
+:- object(test_object_4).
+
+	:- set_logtalk_flag(complements, restrict).
+
+:- end_object.
+
+
+:- category(patch,
+	implements(forwarding),
+	complements(test_object_4)).
+
+	forward(Message) :-
+		[test_object_1::Message].
+
+:- end_category.

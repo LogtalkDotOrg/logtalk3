@@ -22,18 +22,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/02/01,
+		date is 2019/05/31,
 		comment is 'Unit tests for the forward/1 built-in method.'
 	]).
 
-	test(forward_1_1) :-
-		{test_object_2::p(X)},
-		X == 1.
+	test(forward_1_01, true(X == 1)) :-
+		test_object_2::p(X).
 
-	test(forward_1_2) :-
-		{test_object_3::q(X)},
-		X == 2.
+	test(forward_1_02, true(X == 2)) :-
+		test_object_3::q(X).
+
+	test(forward_1_03, true(X == 1)) :-
+		test_object_4::p(X).
+
+	test(forward_1_04, ball(error(existence_error(predicate_declaration,r/3),logtalk(test_object_1::r(_,_,_),_)))) :-
+		test_object_4::r(_, _, _).
 
 :- end_object.

@@ -151,6 +151,8 @@ library directories.
 
 * IMPROVED: Unit tests for the `statistics` library.
 
+* IMPROVED: Unit tests for the `forward/1` built-in method.
+
 Examples
 --------
 
