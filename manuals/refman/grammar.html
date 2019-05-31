@@ -1010,8 +1010,14 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">alias_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">alias(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_indicator_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">alias(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” non_terminal_indicator_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">alias(</span></code>“</div>
+<div class="line-block">
+<div class="line-block">
+<div class="line">entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_indicator_alias_list | non_terminal_indicator_alias_list</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -1053,7 +1059,12 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">mode_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">mode(</span></code>” predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code> ” number_of_proofs “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">mode(</span></code>“</div>
+<div class="line-block">
+<div class="line">predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">number_of_proofs</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
 </div>
 </div>
 <div class="line-block">
@@ -1071,7 +1082,12 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">info_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” predicate_indicator | non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>“</div>
+<div class="line-block">
+<div class="line">predicate_indicator | non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_info_list</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
 </div>
 </div>
 <div class="line-block">
@@ -1163,8 +1179,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line"><em>predicate_indicator</em> |</div>
 <div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>predicate_indicator</em> |</div>
-<div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>predicate_indicator</em> |</div>
-<div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">:</span></code>” <em>predicate_indicator</em></div>
+<div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>predicate_indicator</em></div>
 </div>
 </div>
 <div class="line-block">

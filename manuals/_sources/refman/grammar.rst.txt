@@ -577,8 +577,10 @@ Predicate directives
 |    *operator_directive*
 
 | alias_directive ::=
-|    "``:- alias(``" entity_identifier "``,``" predicate_indicator_alias_list "``).``" \|
-|    "``:- alias(``" entity_identifier "``,``" non_terminal_indicator_alias_list "``).``"
+|    "``:- alias(``"
+|           entity_identifier "``,``"
+|           predicate_indicator_alias_list \| non_terminal_indicator_alias_list
+|        "``).``"
 
 | synchronized_directive ::=
 |    "``:- synchronized(``" predicate_indicator_term \| non_terminal_indicator_term "``).``"
@@ -601,7 +603,10 @@ Predicate directives
 |    "``:- private(``" predicate_indicator_term \| non_terminal_indicator_term "``).``"
 
 | mode_directive ::=
-|    "``:- mode(``" predicate_mode_term \| non_terminal_mode_term "``,`` " number_of_proofs "``).``"
+|    "``:- mode(``"
+|           predicate_mode_term \| non_terminal_mode_term "``,``"
+|           number_of_proofs
+|    "``).``"
 
 | meta_predicate_directive ::=
 |    "``:- meta_predicate(``" meta_predicate_template_term "``).``"
@@ -610,7 +615,10 @@ Predicate directives
 |    "``:- meta_non_terminal(``" meta_non_terminal_template_term "``).``"
 
 | info_directive ::=
-|    "``:- info(``" predicate_indicator \| non_terminal_indicator "``,``" predicate_info_list "``).``"
+|    "``:- info(``"
+|           predicate_indicator \| non_terminal_indicator "``,``"
+|           predicate_info_list
+|    "``).``"
 
 | dynamic_directive ::=
 |    "``:- dynamic(``" qualified_predicate_indicator_term \| qualified_non_terminal_indicator_term "``).``"
@@ -663,8 +671,7 @@ Predicate directives
 | predicate_indicator_alias ::=
 |    *predicate_indicator* \|
 |    *predicate_indicator* "``as``" *predicate_indicator* \|
-|    *predicate_indicator* "``::``" *predicate_indicator* \|
-|    *predicate_indicator* "``:``" *predicate_indicator*
+|    *predicate_indicator* "``::``" *predicate_indicator*
 
 | predicate_indicator_alias_sequence ::=
 |    predicate_indicator_alias \|
