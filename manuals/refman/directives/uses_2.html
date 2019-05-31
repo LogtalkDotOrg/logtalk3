@@ -293,6 +293,19 @@ btree_to_queue <span class="o">:-</span>
     ...
 </pre></div>
 </div>
+<p>An example of using a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a> in place of the object
+identifier to allow using the same test set for checking multiple
+implementations of the same protocol:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests(<span class="nv">_HeapObject_</span>),
+    <span class="k">extends</span>(lgtunit)).
+
+<span class="p">    :- </span><span class="k">uses</span>(<span class="nv">_HeapObject_</span>, [
+        as_heap<span class="o">/</span><span class="m">2</span>, as_list<span class="o">/</span><span class="m">2</span>, valid<span class="o">/</span><span class="m">1</span>, new<span class="o">/</span><span class="m">1</span>,
+        insert<span class="o">/</span><span class="m">4</span>, insert_all<span class="o">/</span><span class="m">3</span>, delete<span class="o">/</span><span class="m">4</span>, merge<span class="o">/</span><span class="m">3</span>,
+        empty<span class="o">/</span><span class="m">1</span>, size<span class="o">/</span><span class="m">2</span>, top<span class="o">/</span><span class="m">3</span>, top_next<span class="o">/</span><span class="m">5</span>
+    ]).
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a></p>

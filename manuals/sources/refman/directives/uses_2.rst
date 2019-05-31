@@ -115,6 +115,22 @@ predicate aliases:
        new_queue(Queue),
        ...
 
+An example of using a :term:`parameter variable` in place of the object
+identifier to allow using the same test set for checking multiple
+implementations of the same protocol:
+
+::
+
+   :- object(tests(_HeapObject_),
+       extends(lgtunit)).
+
+       :- uses(_HeapObject_, [
+           as_heap/2, as_list/2, valid/1, new/1,
+           insert/4, insert_all/3, delete/4, merge/3,
+           empty/1, size/2, top/3, top_next/5
+       ]).
+   
+
 .. seealso::
 
    :ref:`directives_use_module_2`
