@@ -1023,13 +1023,23 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">uses_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>” object_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_indicator_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>“</div>
+<div class="line-block">
+<div class="line">object_identifier | parameter_variable “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_indicator_alias_list | non_terminal_indicator_alias_list | operator_list</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
 </div>
 </div>
 <div class="line-block">
 <div class="line">use_module_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">use_module(</span></code>” module_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” module_predicate_indicator_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">use_module(</span></code>“</div>
+<div class="line-block">
+<div class="line">module_identifier | parameter_variable “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">module_predicate_indicator_alias_list | module_non_terminal_indicator_alias_list | operator_list</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
 </div>
 </div>
 <div class="line-block">
@@ -1089,6 +1099,12 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">coinductive(</span></code>” predicate_indicator_term |</div>
 <div class="line">coinductive_predicate_template_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">parameter_variable ::=</div>
+<div class="line-block">
+<div class="line"><em>_variable_</em></div>
 </div>
 </div>
 <div class="line-block">
@@ -1186,6 +1202,27 @@ Prolog Core standard. Terminal symbols are represented in a
 </div>
 </div>
 <div class="line-block">
+<div class="line">module_non_terminal_indicator_alias ::=</div>
+<div class="line-block">
+<div class="line"><em>non_terminal_indicator</em> |</div>
+<div class="line"><em>non_terminal_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>non_terminal_indicator</em></div>
+<div class="line"><em>non_terminal_indicator</em> “<code class="docutils literal notranslate"><span class="pre">:</span></code>” <em>non_terminal_indicator</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">module_non_terminal_indicator_alias_sequence ::=</div>
+<div class="line-block">
+<div class="line">module_non_terminal_indicator_alias |</div>
+<div class="line">module_non_terminal_indicator_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>” module_non_terminal_indicator_alias_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">module_non_terminal_indicator_alias_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” module_non_terminal_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line">non_terminal_indicator_term ::=</div>
 <div class="line-block">
 <div class="line">non_terminal_indicator |</div>
@@ -1262,6 +1299,20 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">non_terminal_indicator_alias_list ::=</div>
 <div class="line-block">
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” non_terminal_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">operator_sequence ::=</div>
+<div class="line-block">
+<div class="line"><em>operator specification</em> |</div>
+<div class="line"><em>operator specification</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">operator_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">operator_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” operator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
 <div class="line-block">

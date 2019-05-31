@@ -584,10 +584,16 @@ Predicate directives
 |    "``:- synchronized(``" predicate_indicator_term \| non_terminal_indicator_term "``).``"
 
 | uses_directive ::=
-|    "``:- uses(``" object_identifier "``,``" predicate_indicator_alias_list "``).``"
+|    "``:- uses(``"
+|           object_identifier \| parameter_variable "``,``"
+|           predicate_indicator_alias_list \| non_terminal_indicator_alias_list \| operator_list
+|    "``).``"
 
 | use_module_directive ::=
-|    "``:- use_module(``" module_identifier "``,``" module_predicate_indicator_alias_list "``).``" \|
+|    "``:- use_module(``"
+|           module_identifier \| parameter_variable "``,``"
+|           module_predicate_indicator_alias_list \| module_non_terminal_indicator_alias_list \| operator_list
+|    "``).``"
 
 | scope_directive ::=
 |    "``:- public(``" predicate_indicator_term \| non_terminal_indicator_term "``).``" \|
@@ -620,6 +626,9 @@ Predicate directives
 | coinductive_directive ::=
 |    "``:- coinductive(``" predicate_indicator_term \|
 |    coinductive_predicate_template_term "``).``"
+
+| parameter_variable ::=
+|    *_variable_*
 
 | predicate_indicator_term ::=
 |    *predicate_indicator* \|
@@ -676,6 +685,18 @@ Predicate directives
 | module_predicate_indicator_alias_list ::=
 |    "``[``" module_predicate_indicator_alias_sequence "``]``"
 
+| module_non_terminal_indicator_alias ::=
+|    *non_terminal_indicator* \|
+|    *non_terminal_indicator* "``as``" *non_terminal_indicator*
+|    *non_terminal_indicator* "``:``" *non_terminal_indicator*
+
+| module_non_terminal_indicator_alias_sequence ::=
+|    module_non_terminal_indicator_alias \|
+|    module_non_terminal_indicator_alias "``,``" module_non_terminal_indicator_alias_sequence
+
+| module_non_terminal_indicator_alias_list ::=
+|    "``[``" module_non_terminal_indicator_alias_sequence "``]``"
+
 | non_terminal_indicator_term ::=
 |    non_terminal_indicator \|
 |    non_terminal_indicator_sequence \|
@@ -721,6 +742,14 @@ Predicate directives
 
 | non_terminal_indicator_alias_list ::=
 |    "``[``" non_terminal_indicator_alias_sequence "``]``"
+
+| operator_sequence ::=
+|    *operator specification* \|
+|    *operator specification* "``,``"
+|    operator_sequence
+
+| operator_list ::=
+|    "``[``" operator_sequence "``]``"
 
 | coinductive_predicate_template_term ::=
 |    coinductive_predicate_template \|
