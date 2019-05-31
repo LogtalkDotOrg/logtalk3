@@ -49,16 +49,21 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.44,
+		version is 1.45,
 		author is 'Paulo Moura',
-		date is 2019/02/12,
+		date is 2019/05/31,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
 	:- built_in.
 	:- threaded.
 	:- dynamic.
+
 	:- initialization(some_goal(X, Y)).
+
+	:- uses([
+		foobar as fb
+	]).
 
 	:- alias(set, [member/2 as set_member/2]).
 	:- alias(words, [singular//0 as peculiar//0]).

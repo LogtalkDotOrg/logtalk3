@@ -168,6 +168,11 @@ are renamed to, respectively, `assign_parameters`, `missing_data`, `jpl`,
 * MOVED: The `redis` example, which only contains tests, to the
 `tests/logtalk/library/redis` directory.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Syntax highlighting test files for the new `uses/1` directive.
+
 
 3.26.0 - May 8, 2019
 ====================
