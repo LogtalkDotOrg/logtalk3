@@ -18,12 +18,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(meta(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(experiments, [source_data(on), debug(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2019/06/01,
+		comment is 'Unit tests for the "object_aliases" example.'
+	]).
+
+	cover(experiments).
+	cover(simple(_)).
+
+	test(object_aliases_experiments_01, true(TotalLess + TotalEqual + TotalGreater =:= 42)) :-
+		experiments::stats(TotalLess, TotalEqual, TotalGreater).
+
+	test(object_aliases_simple_01, true(Top == 1-a)) :-
+		simple(<)::insert_top([3-c,1-a,2-b], Top).
+
+	test(object_aliases_simple_02, true(Top == 3-c)) :-
+		simple(>)::insert_top([3-c,1-a,2-b], Top).
+
+:- end_object.

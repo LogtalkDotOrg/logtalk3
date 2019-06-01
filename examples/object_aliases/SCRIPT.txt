@@ -19,28 +19,29 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(planets(loader)).
+| ?- logtalk_load(object_aliases(loader)).
 ...
 
 
-% compute the weights of the m1 and m2 objects on Earth and on Mars:
+% demonstration of using aliases for shorten object names and
+% simplify trying alternative implementations:
 
-| ?- earth::weight(m1, W1).
+| ?- experiments::stats(TotalLess, TotalEqual, TotalGreater),
+     Total is TotalLess + TotalEqual + TotalGreater.
 
-W1 = 29.41995
+...
+Total = 42
 yes
 
-| ?- mars::weight(m1, W1).
 
-W1 = 11.162279999999999
+% demonstration of using aliases for parametric objects:
+
+| ?- simple(<)::insert_top([3-c,1-a,2-b], Top).
+
+Top = 1-a
 yes
 
-| ?- earth::weight(m2, W2).
+| ?- simple(>)::insert_top([3-c,1-a,2-b], Top).
 
-W2 = 39.2266
-yes
-
-| ?- mars::weight(m2, W2).
-
-W2 = 14.88304
+Top = 3-c
 yes

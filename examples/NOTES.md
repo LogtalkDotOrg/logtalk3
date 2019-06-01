@@ -194,9 +194,6 @@ Follows a short description of each included example (in alphabetical order):
 - `expansion`  
 	example illustrating the term and goal expansion mechanisms
 
-- `experiments`  
-	minimal example illustrating the use of object aliases
-
 - `family`  
 	classical family relations example
 
@@ -319,6 +316,9 @@ Follows a short description of each included example (in alphabetical order):
 - `now_you_see_me`  
 	example illustrating requirements dictated by inheritance semantics
 	for the implementation of dynamic predicates
+
+- `object_aliases`  
+	simple examples illustrating the use of object aliases
 
 - `operators`  
 	example of using operators local to objects and categories

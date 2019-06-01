@@ -19,7 +19,12 @@
 
 
 :- initialization((
+	set_logtalk_flag(report, warnings),
 	logtalk_load(meta(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load(experiments, [optimize(on)])
+	logtalk_load(heaps(loader)),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(object_aliases, [source_data(on), debug(on)]),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
 )).

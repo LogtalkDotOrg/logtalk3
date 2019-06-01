@@ -20,17 +20,16 @@
 
 :- object(experiments).
 
-	:- public(stats/3).
-
-	% editing the random object in the following directive avoids
+	% editing the random object in the following directive would avoid
 	% having to change all explicit message sending calls to it as
-	% they are written using the object alias
+	% they all would be written using the object alias
 	:- uses([
 		fast_random as rnd
 %		backend_random as rnd
 %		random as rnd
 	]).
 
+	:- public(stats/3).
 	stats(TotalLess, TotalEqual, TotalGreater) :-
 		% generate a set of 42 random integers in the [1,1000] interval
 		rnd::set(42, 1, 1000, Set),
@@ -42,3 +41,21 @@
 		list::length(Greater, TotalGreater).
 
 :- end_object.
+
+
+
+:- object(simple(_HeapType_)).
+
+	% allow consistently using the same object parametrization
+	% for all message sending calls by simply defining an alias
+	:- uses([
+		heap(_HeapType_) as h
+	]).
+
+	:- public(insert_top/2).
+	insert_top(List, Key-Value) :-
+		h::as_heap(List, Heap),
+		h::top(Heap, Key, Value).
+
+:- end_object.
+

@@ -18,20 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
-
-	:- info([
-		version is 1.0,
-		author is 'Paulo Moura',
-		date is 2019/06/01,
-		comment is 'Unit tests for the "experiments" example.'
-	]).
-
-	cover(experiments).
-
-	test(experiments_01) :-
-		experiments::stats(TotalLess, TotalEqual, TotalGreater),
-		TotalLess + TotalEqual + TotalGreater =:= 42.
-
-:- end_object.
+:- initialization((
+	logtalk_load(meta(loader)),
+	logtalk_load(random(loader)),
+	logtalk_load(heaps(loader)),
+	logtalk_load(object_aliases, [optimize(on)])
+)).
