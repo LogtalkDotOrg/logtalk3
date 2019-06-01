@@ -307,8 +307,8 @@
 % '$lgt_pp_parameter_variables_'(ParameterVariables)
 :- dynamic('$lgt_pp_parameter_variables_'/1).
 
-% '$lgt_pp_object_alias_'(Obj, Alias)
-:- dynamic('$lgt_pp_object_alias_'/2).
+% '$lgt_pp_object_alias_'(Obj, Alias, CompilationContext)
+:- dynamic('$lgt_pp_object_alias_'/3).
 
 % '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias, CompilationContext)
 :- dynamic('$lgt_pp_uses_predicate_'/4).
@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 27, 0, b08)).
+'$lgt_version_data'(logtalk(3, 27, 0, b09)).
 
 
 
@@ -7591,7 +7591,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_clean_pp_common_object_category_clauses' :-
 	retractall('$lgt_pp_implemented_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_parameter_variables_'(_)),
-	retractall('$lgt_pp_object_alias_'(_, _)),
+	retractall('$lgt_pp_object_alias_'(_, _, _)),
 	retractall('$lgt_pp_uses_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_uses_non_terminal_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_use_module_predicate_'(_, _, _, _)),
@@ -10052,8 +10052,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_uses_directive'([Alias| Aliases], Argument, Ctx) :-
 	!,
-	'$lgt_check'(ground, Alias),
-	'$lgt_compile_uses_directive_alias'(Alias, Ctx),
+	'$lgt_compile_uses_directive_alias'(Alias, Argument, Ctx),
 	'$lgt_compile_uses_directive'(Aliases, Argument, Ctx).
 
 '$lgt_compile_uses_directive'([], _, _) :-
@@ -10063,22 +10062,35 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(type_error(list, Argument)).
 
 
-'$lgt_compile_uses_directive_alias'(Obj as Alias, Ctx) :-
+'$lgt_compile_uses_directive_alias'(Obj as Alias, Argument, Ctx) :-
 	!,
 	'$lgt_check'(object_identifier, Obj),
 	'$lgt_check'(object_identifier, Alias),
-	(	\+ \+ '$lgt_pp_object_alias_'(Obj, Alias) ->
+	(	\+ \+ '$lgt_pp_object_alias_'(Obj, Alias, _) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, duplicated_object_alias(File, Lines, Type, Entity, Obj as Alias))
-	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias) ->
+	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias, _) ->
 		throw(permission_error(modify, object_alias, Alias))
 	;	'$lgt_add_referenced_object'(Obj, Ctx),
-		assertz('$lgt_pp_object_alias_'(Obj, Alias))
+		(	term_variables(Obj, Variables),
+			'$lgt_pp_term_variable_names_file_lines_'((:- uses(Argument)), VariableNames, _, _),
+			'$lgt_member'(VariableName=Variable, VariableNames),
+			'$lgt_member_var'(Variable, Variables),
+			'$lgt_pp_parameter_variables_'(ParameterVariablePairs),
+			'$lgt_member'(VariableName-_, ParameterVariablePairs) ->
+			% at least one of the object arguments is a parameter variable;
+			% use a minimal compilation-context to preserve the binding
+			% between the parametric variable and the object argument
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+			assertz('$lgt_pp_object_alias_'(Obj, Alias, NewCtx))
+		;	assertz('$lgt_pp_object_alias_'(Obj, Alias, _))
+		)
 	).
 
-'$lgt_compile_uses_directive_alias'(Argument, _) :-
-	throw(type_error(object_alias, Argument)).
+'$lgt_compile_uses_directive_alias'(Term, _, _) :-
+	throw(type_error(object_alias, Term)).
 
 
 
@@ -12571,7 +12583,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Alias::Pred, TPred, '$lgt_debug'(goal(Alias::Pred, TPred), ExCtx), Ctx) :-
 	callable(Alias),
-	'$lgt_pp_object_alias_'(Obj, Alias),
+	'$lgt_pp_object_alias_'(Obj, Alias, Ctx),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compiler_flag'(events, Events),

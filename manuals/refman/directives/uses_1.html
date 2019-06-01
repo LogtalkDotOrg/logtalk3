@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>uses/1 &mdash; The Logtalk Handbook v3.27.0-b08 documentation</title>
+  <title>uses/1 &mdash; The Logtalk Handbook v3.27.0-b09 documentation</title>
   
 
   
@@ -214,7 +214,8 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>uses([<span class="nv">Object</span> <span class="o">as</span> <span class="nv">Alias</span>, ...])
 </pre></div>
 </div>
-<p>Declares object aliases. Typically used to shorten long object names or to
+<p>Declares object aliases. Typically used to shorten long object names, to
+simplify and consistently send messages to parameterized objects, and to
 simplify experimenting with different object implementations of the same
 protocol when using explicit message sending.</p>
 <p>To enable the use of static binding, and thus optimal message sending
@@ -229,18 +230,34 @@ that call their predicates.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>([
-    difflist <span class="o">as</span> dl,
-    fast_random <span class="o">as</span> rnd
-]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_HeapType_</span>)).
 
-foo <span class="o">:-</span>
-    ...,
-    <span class="c">% the same as difflist::append(L1, L2, L)</span>
-    dl<span class="o">::</span>append(<span class="nv">L1</span>, <span class="nv">L2</span>, <span class="nv">L</span>),
-    <span class="c">% the same as fast_random::permutation(L, P)</span>
-    rnd<span class="o">::</span>permutation(<span class="nv">L</span>, <span class="nv">P</span>),
-    ...
+<span class="p">    :- </span><span class="k">uses</span>([
+        difflist <span class="o">as</span> dl,
+        fast_random <span class="o">as</span> rnd,
+        time(utc) <span class="o">as</span> time,
+        heap(<span class="nv">_HeapType_</span>) <span class="o">as</span> heap
+    ]).
+
+    bar <span class="o">:-</span>
+        ...,
+        <span class="c">% the same as difflist::append(L1, L2, L)</span>
+        dl<span class="o">::</span>append(<span class="nv">L1</span>, <span class="nv">L2</span>, <span class="nv">L</span>),
+        ...
+
+    baz <span class="o">:-</span>
+        ...,
+        <span class="c">% the same as fast_random::permutation(L, P)</span>
+        rnd<span class="o">::</span>permutation(<span class="nv">L</span>, <span class="nv">P</span>),
+        <span class="c">% the same as heap(_HeapType_)::as_heap(L, H)</span>
+        heap<span class="o">::</span>as_heap(<span class="nv">L</span>, <span class="nv">H</span>),
+        ...
+
+    qux <span class="o">:-</span>
+        ...,
+        <span class="c">% the same as time(utc)::now(T)</span>
+        time<span class="o">::</span>now(<span class="nv">T</span>),
+        ...
 </pre></div>
 </div>
 <div class="admonition seealso">

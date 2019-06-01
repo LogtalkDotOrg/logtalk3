@@ -28,7 +28,8 @@ Description
 
    uses([Object as Alias, ...])
 
-Declares object aliases. Typically used to shorten long object names or to
+Declares object aliases. Typically used to shorten long object names, to
+simplify and consistently send messages to parameterized objects, and to
 simplify experimenting with different object implementations of the same
 protocol when using explicit message sending.
 
@@ -48,18 +49,34 @@ Examples
 
 ::
 
-   :- uses([
-       difflist as dl,
-       fast_random as rnd
-   ]).
+   :- object(foo(_HeapType_)).
 
-   foo :-
-       ...,
-       % the same as difflist::append(L1, L2, L)
-       dl::append(L1, L2, L),
-       % the same as fast_random::permutation(L, P)
-       rnd::permutation(L, P),
-       ...
+       :- uses([
+           difflist as dl,
+           fast_random as rnd,
+           time(utc) as time,
+           heap(_HeapType_) as heap
+       ]).
+
+       bar :-
+           ...,
+           % the same as difflist::append(L1, L2, L)
+           dl::append(L1, L2, L),
+           ...
+
+       baz :-
+           ...,
+           % the same as fast_random::permutation(L, P)
+           rnd::permutation(L, P),
+           % the same as heap(_HeapType_)::as_heap(L, H)
+           heap::as_heap(L, H),
+           ...
+
+       qux :-
+           ...,
+           % the same as time(utc)::now(T)
+           time::now(T),
+           ...
 
 .. seealso::
 
