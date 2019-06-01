@@ -168,6 +168,9 @@ are renamed to, respectively, `assign_parameters`, `missing_data`, `jpl`,
 * MOVED: The `redis` example, which only contains tests, to the
 `tests/logtalk/library/redis` directory.
 
+* ADDED: Minimal example, `experiments`, illustrating the use of object
+aliases.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
