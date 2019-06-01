@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 27, 0, b07)).
+'$lgt_version_data'(logtalk(3, 27, 0, b08)).
 
 
 
@@ -10067,8 +10067,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(object_identifier, Obj),
 	'$lgt_check'(object_identifier, Alias),
-	'$lgt_add_referenced_object'(Obj, Ctx),
-	assertz('$lgt_pp_object_alias_'(Obj, Alias)).
+	(	\+ \+ '$lgt_pp_object_alias_'(Obj, Alias) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(warning(general), core, duplicated_object_alias(File, Lines, Type, Entity, Obj as Alias))
+	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias) ->
+		throw(permission_error(modify, object_alias, Alias))
+	;	'$lgt_add_referenced_object'(Obj, Ctx),
+		assertz('$lgt_pp_object_alias_'(Obj, Alias))
+	).
 
 '$lgt_compile_uses_directive_alias'(Argument, _) :-
 	throw(type_error(object_alias, Argument)).
