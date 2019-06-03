@@ -126,14 +126,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">iso8601</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">iso8601</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#java"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
@@ -254,10 +247,31 @@
 </div>
 </div>
 <p>(no dependencies on other entities)</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
+<ul>
+<li><p><a class="reference internal" href="#date-4" id="id2"><code class="docutils literal notranslate"><span class="pre">date/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-5" id="id3"><code class="docutils literal notranslate"><span class="pre">date/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-6" id="id4"><code class="docutils literal notranslate"><span class="pre">date/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-7" id="id5"><code class="docutils literal notranslate"><span class="pre">date/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-string-3" id="id6"><code class="docutils literal notranslate"><span class="pre">date_string/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-date-3" id="id7"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#leap-year-1" id="id8"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#calendar-month-3" id="id9"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#easter-day-3" id="id10"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-interface" id="id11">Protected interface</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id12">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+<li><p><a class="reference internal" href="#remarks" id="id14">Remarks</a></p></li>
+</ul>
+</div>
 <div class="section" id="public-interface">
-<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">Public interface</a><a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="date/4"> </div><div class="section" id="date-4">
-<span id="iso8601-0-date-4"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">date/4</span></code><a class="headerlink" href="#date-4" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#id2"><code class="docutils literal notranslate"><span class="pre">date/4</span></code></a><a class="headerlink" href="#date-4" title="Permalink to this headline">¶</a></h3>
 <p>Get the system date and/or its Julian Day # or convert a Julian Day # to/from given date parts.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -328,7 +342,7 @@
 </div>
 <div id="date/5"> </div></div>
 <div class="section" id="date-5">
-<span id="iso8601-0-date-5"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">date/5</span></code><a class="headerlink" href="#date-5" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-5"></span><span id="index-2"></span><h3><a class="toc-backref" href="#id3"><code class="docutils literal notranslate"><span class="pre">date/5</span></code></a><a class="headerlink" href="#date-5" title="Permalink to this headline">¶</a></h3>
 <p>Ditto date/4 + get/check its day-of-week #.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -380,7 +394,7 @@
 </div>
 <div id="date/6"> </div></div>
 <div class="section" id="date-6">
-<span id="iso8601-0-date-6"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">date/6</span></code><a class="headerlink" href="#date-6" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-6"></span><span id="index-3"></span><h3><a class="toc-backref" href="#id4"><code class="docutils literal notranslate"><span class="pre">date/6</span></code></a><a class="headerlink" href="#date-6" title="Permalink to this headline">¶</a></h3>
 <p>Ditto date/5 + get/check its week #.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -473,7 +487,7 @@
 </div>
 <div id="date/7"> </div></div>
 <div class="section" id="date-7">
-<span id="iso8601-0-date-7"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">date/7</span></code><a class="headerlink" href="#date-7" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-7"></span><span id="index-4"></span><h3><a class="toc-backref" href="#id5"><code class="docutils literal notranslate"><span class="pre">date/7</span></code></a><a class="headerlink" href="#date-7" title="Permalink to this headline">¶</a></h3>
 <p>Ditto date/6 + get/check its day-of-year #.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -547,7 +561,7 @@
 </div>
 <div id="date_string/3"> </div></div>
 <div class="section" id="date-string-3">
-<span id="iso8601-0-date-string-3"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">date_string/3</span></code><a class="headerlink" href="#date-string-3" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-string-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#id6"><code class="docutils literal notranslate"><span class="pre">date_string/3</span></code></a><a class="headerlink" href="#date-string-3" title="Permalink to this headline">¶</a></h3>
 <p>Conversion between an ISO 8601 compliant date string and its components (truncated and expanded date representations are currently unsupported). Note that date components are not validated; that is the caller’s responsibility!</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -708,7 +722,7 @@
 </div>
 <div id="valid_date/3"> </div></div>
 <div class="section" id="valid-date-3">
-<span id="iso8601-0-valid-date-3"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code><a class="headerlink" href="#valid-date-3" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-valid-date-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#id7"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a><a class="headerlink" href="#valid-date-3" title="Permalink to this headline">¶</a></h3>
 <p>Validate a given date in the Gregorian calendar.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -753,7 +767,7 @@
 </div>
 <div id="leap_year/1"> </div></div>
 <div class="section" id="leap-year-1">
-<span id="iso8601-0-leap-year-1"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code><a class="headerlink" href="#leap-year-1" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-leap-year-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#id8"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a><a class="headerlink" href="#leap-year-1" title="Permalink to this headline">¶</a></h3>
 <p>Succeed if given year is a leap year in the Gregorian calendar.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -826,7 +840,7 @@
 </div>
 <div id="calendar_month/3"> </div></div>
 <div class="section" id="calendar-month-3">
-<span id="iso8601-0-calendar-month-3"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code><a class="headerlink" href="#calendar-month-3" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-calendar-month-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#id9"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a><a class="headerlink" href="#calendar-month-3" title="Permalink to this headline">¶</a></h3>
 <p>Compute a calendar month.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -861,7 +875,7 @@
 </div>
 <div id="easter_day/3"> </div></div>
 <div class="section" id="easter-day-3">
-<span id="iso8601-0-easter-day-3"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code><a class="headerlink" href="#easter-day-3" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-easter-day-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#id10"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a><a class="headerlink" href="#easter-day-3" title="Permalink to this headline">¶</a></h3>
 <p>Compute a Gregorian Easter Sunday.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -902,19 +916,19 @@
 </div>
 </div>
 <div class="section" id="protected-interface">
-<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">Protected interface</a><a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="private-predicates">
-<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="operators">
-<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="remarks">
-<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><strong>Scope</strong>: This object currently provides a powerful, versatile and efficient set of date-handling predicates, which–thanks to Logtalk–may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.</p></li>
 <li><p><strong>Validation of dates</strong>: Date parts are not validated–that is the caller’s responsibility! However, not being quite heartless yet, we do provide a predicate for this purpose.</p></li>

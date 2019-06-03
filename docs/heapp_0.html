@@ -122,14 +122,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#heaps"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">heapp</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">heapp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
 </ul>
@@ -257,10 +250,32 @@
 </div>
 </div>
 <p>(no dependencies on other entities)</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
+<ul>
+<li><p><a class="reference internal" href="#insert-4" id="id2"><code class="docutils literal notranslate"><span class="pre">insert/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#insert-all-3" id="id3"><code class="docutils literal notranslate"><span class="pre">insert_all/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#delete-4" id="id4"><code class="docutils literal notranslate"><span class="pre">delete/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#merge-3" id="id5"><code class="docutils literal notranslate"><span class="pre">merge/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#empty-1" id="id6"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#size-2" id="id7"><code class="docutils literal notranslate"><span class="pre">size/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#as-list-2" id="id8"><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#as-heap-2" id="id9"><code class="docutils literal notranslate"><span class="pre">as_heap/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#top-3" id="id10"><code class="docutils literal notranslate"><span class="pre">top/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#top-next-5" id="id11"><code class="docutils literal notranslate"><span class="pre">top_next/5</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-interface" id="id12">Protected interface</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id13">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id14">Operators</a></p></li>
+<li><p><a class="reference internal" href="#remarks" id="id15">Remarks</a></p></li>
+</ul>
+</div>
 <div class="section" id="public-interface">
-<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">Public interface</a><a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="insert/4"> </div><div class="section" id="insert-4">
-<span id="heapp-0-insert-4"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">insert/4</span></code><a class="headerlink" href="#insert-4" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-insert-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#id2"><code class="docutils literal notranslate"><span class="pre">insert/4</span></code></a><a class="headerlink" href="#insert-4" title="Permalink to this headline">¶</a></h3>
 <p>Inserts the new Key-Value pair into a heap, returning the updated heap.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -280,7 +295,7 @@
 </div>
 <div id="insert_all/3"> </div></div>
 <div class="section" id="insert-all-3">
-<span id="heapp-0-insert-all-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">insert_all/3</span></code><a class="headerlink" href="#insert-all-3" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-insert-all-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#id3"><code class="docutils literal notranslate"><span class="pre">insert_all/3</span></code></a><a class="headerlink" href="#insert-all-3" title="Permalink to this headline">¶</a></h3>
 <p>Inserts a list of Key-Value pairs into a heap, returning the updated heap.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -300,7 +315,7 @@
 </div>
 <div id="delete/4"> </div></div>
 <div class="section" id="delete-4">
-<span id="heapp-0-delete-4"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">delete/4</span></code><a class="headerlink" href="#delete-4" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-delete-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#id4"><code class="docutils literal notranslate"><span class="pre">delete/4</span></code></a><a class="headerlink" href="#delete-4" title="Permalink to this headline">¶</a></h3>
 <p>Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -320,7 +335,7 @@
 </div>
 <div id="merge/3"> </div></div>
 <div class="section" id="merge-3">
-<span id="heapp-0-merge-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">merge/3</span></code><a class="headerlink" href="#merge-3" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-merge-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#id5"><code class="docutils literal notranslate"><span class="pre">merge/3</span></code></a><a class="headerlink" href="#merge-3" title="Permalink to this headline">¶</a></h3>
 <p>Merges two heaps.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -340,7 +355,7 @@
 </div>
 <div id="empty/1"> </div></div>
 <div class="section" id="empty-1">
-<span id="heapp-0-empty-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">empty/1</span></code><a class="headerlink" href="#empty-1" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-empty-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#id6"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a><a class="headerlink" href="#empty-1" title="Permalink to this headline">¶</a></h3>
 <p>True if the heap is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -360,7 +375,7 @@
 </div>
 <div id="size/2"> </div></div>
 <div class="section" id="size-2">
-<span id="heapp-0-size-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">size/2</span></code><a class="headerlink" href="#size-2" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-size-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#id7"><code class="docutils literal notranslate"><span class="pre">size/2</span></code></a><a class="headerlink" href="#size-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the number of heap elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -380,7 +395,7 @@
 </div>
 <div id="as_list/2"> </div></div>
 <div class="section" id="as-list-2">
-<span id="heapp-0-as-list-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code><a class="headerlink" href="#as-list-2" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-as-list-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#id8"><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code></a><a class="headerlink" href="#as-list-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the current set of Key-Value pairs in the Heap as a List, sorted into ascending order of Keys.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -400,7 +415,7 @@
 </div>
 <div id="as_heap/2"> </div></div>
 <div class="section" id="as-heap-2">
-<span id="heapp-0-as-heap-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">as_heap/2</span></code><a class="headerlink" href="#as-heap-2" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-as-heap-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#id9"><code class="docutils literal notranslate"><span class="pre">as_heap/2</span></code></a><a class="headerlink" href="#as-heap-2" title="Permalink to this headline">¶</a></h3>
 <p>Constructs a Heap from a list of Key-Value pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -420,7 +435,7 @@
 </div>
 <div id="top/3"> </div></div>
 <div class="section" id="top-3">
-<span id="heapp-0-top-3"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">top/3</span></code><a class="headerlink" href="#top-3" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-top-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#id10"><code class="docutils literal notranslate"><span class="pre">top/3</span></code></a><a class="headerlink" href="#top-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns the top Key-Value pair in Heap. Fails if the heap is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -440,7 +455,7 @@
 </div>
 <div id="top_next/5"> </div></div>
 <div class="section" id="top-next-5">
-<span id="heapp-0-top-next-5"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">top_next/5</span></code><a class="headerlink" href="#top-next-5" title="Permalink to this headline">¶</a></h3>
+<span id="heapp-0-top-next-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#id11"><code class="docutils literal notranslate"><span class="pre">top_next/5</span></code></a><a class="headerlink" href="#top-next-5" title="Permalink to this headline">¶</a></h3>
 <p>Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fails if the heap does not have at least two elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -461,19 +476,19 @@
 </div>
 </div>
 <div class="section" id="protected-interface">
-<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">Protected interface</a><a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="private-predicates">
-<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="operators">
-<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="remarks">
-<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>

@@ -108,14 +108,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dead_code_scanner</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dead_code_scanner</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dead_code_scanner_messages_0.html">dead_code_scanner_messages</a></li>
 </ul>
 </li>
@@ -255,10 +248,31 @@
 </div>
 </div>
 <p>(no dependencies on other entities)</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
+<ul>
+<li><p><a class="reference internal" href="#entity-1" id="id2"><code class="docutils literal notranslate"><span class="pre">entity/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-1" id="id3"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#directory-1" id="id4"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rdirectory-1" id="id5"><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#library-1" id="id6"><code class="docutils literal notranslate"><span class="pre">library/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rlibrary-1" id="id7"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#all-0" id="id8"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicates-2" id="id9"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicate-2" id="id10"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-interface" id="id11">Protected interface</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id12">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+<li><p><a class="reference internal" href="#remarks" id="id14">Remarks</a></p></li>
+</ul>
+</div>
 <div class="section" id="public-interface">
-<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">Public interface</a><a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="entity/1"> </div><div class="section" id="entity-1">
-<span id="dead-code-scanner-0-entity-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">entity/1</span></code><a class="headerlink" href="#entity-1" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-entity-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#id2"><code class="docutils literal notranslate"><span class="pre">entity/1</span></code></a><a class="headerlink" href="#entity-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans a loaded entity for dead code. Fails if the entity does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -278,7 +292,7 @@
 </div>
 <div id="file/1"> </div></div>
 <div class="section" id="file-1">
-<span id="dead-code-scanner-0-file-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">file/1</span></code><a class="headerlink" href="#file-1" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-file-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#id3"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a><a class="headerlink" href="#file-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in a loaded source file for dead code. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -298,7 +312,7 @@
 </div>
 <div id="directory/1"> </div></div>
 <div class="section" id="directory-1">
-<span id="dead-code-scanner-0-directory-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">directory/1</span></code><a class="headerlink" href="#directory-1" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-directory-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#id4"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a><a class="headerlink" href="#directory-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in all loaded files from a given directory for dead code.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -318,7 +332,7 @@
 </div>
 <div id="rdirectory/1"> </div></div>
 <div class="section" id="rdirectory-1">
-<span id="dead-code-scanner-0-rdirectory-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code><a class="headerlink" href="#rdirectory-1" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-rdirectory-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#id5"><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code></a><a class="headerlink" href="#rdirectory-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in all loaded files from a given directory and its sub-directories for dead code.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -338,7 +352,7 @@
 </div>
 <div id="library/1"> </div></div>
 <div class="section" id="library-1">
-<span id="dead-code-scanner-0-library-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">library/1</span></code><a class="headerlink" href="#library-1" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-library-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#id6"><code class="docutils literal notranslate"><span class="pre">library/1</span></code></a><a class="headerlink" href="#library-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in all loaded files from a given library for dead code.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -358,7 +372,7 @@
 </div>
 <div id="rlibrary/1"> </div></div>
 <div class="section" id="rlibrary-1">
-<span id="dead-code-scanner-0-rlibrary-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code><a class="headerlink" href="#rlibrary-1" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-rlibrary-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#id7"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a><a class="headerlink" href="#rlibrary-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -378,7 +392,7 @@
 </div>
 <div id="all/0"> </div></div>
 <div class="section" id="all-0">
-<span id="dead-code-scanner-0-all-0"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">all/0</span></code><a class="headerlink" href="#all-0" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-all-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#id8"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a><a class="headerlink" href="#all-0" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities for dead code.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -394,7 +408,7 @@
 </div>
 <div id="predicates/2"> </div></div>
 <div class="section" id="predicates-2">
-<span id="dead-code-scanner-0-predicates-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code><a class="headerlink" href="#predicates-2" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-predicates-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#id9"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a><a class="headerlink" href="#predicates-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -414,7 +428,7 @@
 </div>
 <div id="predicate/2"> </div></div>
 <div class="section" id="predicate-2">
-<span id="dead-code-scanner-0-predicate-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code><a class="headerlink" href="#predicate-2" title="Permalink to this headline">¶</a></h3>
+<span id="dead-code-scanner-0-predicate-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#id10"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a><a class="headerlink" href="#predicate-2" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -435,19 +449,19 @@
 </div>
 </div>
 <div class="section" id="protected-interface">
-<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">Protected interface</a><a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="private-predicates">
-<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="operators">
-<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="remarks">
-<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><strong>Dead code</strong>: A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.</p></li>
 <li><p><strong>Known issues</strong>: Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.</p></li>

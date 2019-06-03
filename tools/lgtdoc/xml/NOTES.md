@@ -214,7 +214,8 @@ Brief description of each file in this folder:
 	Read the Docs Sphinx Theme are both installed, `lgt2rst -s` calls the
 	`sphinx-quickstart` interactive script using the `conf.py_t` file in this
 	directory as the `conf.py` template. You can edit the `conf.py_t` to
-	customize it; see the Sphinx documentation for more details.
+	customize it; see the Sphinx documentation for more details. See also the
+	custom CSS code used for Logtalk included API documentation.
 
 - `lgt2txt.sh` and `lgt2txt.js`  
 	Sample scripts to batch convert XML files to text files.

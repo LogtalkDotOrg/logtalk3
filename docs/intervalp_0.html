@@ -126,14 +126,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#intervals"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">intervalp</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">intervalp</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
@@ -255,10 +248,37 @@
 </div>
 </div>
 <p>(no dependencies on other entities)</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
+<ul>
+<li><p><a class="reference internal" href="#new-3" id="id2"><code class="docutils literal notranslate"><span class="pre">new/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-1" id="id3"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#before-2" id="id4"><code class="docutils literal notranslate"><span class="pre">before/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#after-2" id="id5"><code class="docutils literal notranslate"><span class="pre">after/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#meets-2" id="id6"><code class="docutils literal notranslate"><span class="pre">meets/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#met-by-2" id="id7"><code class="docutils literal notranslate"><span class="pre">met_by/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#overlaps-2" id="id8"><code class="docutils literal notranslate"><span class="pre">overlaps/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#overlapped-by-2" id="id9"><code class="docutils literal notranslate"><span class="pre">overlapped_by/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#starts-2" id="id10"><code class="docutils literal notranslate"><span class="pre">starts/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#started-by-2" id="id11"><code class="docutils literal notranslate"><span class="pre">started_by/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#during-2" id="id12"><code class="docutils literal notranslate"><span class="pre">during/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#contains-2" id="id13"><code class="docutils literal notranslate"><span class="pre">contains/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#finishes-2" id="id14"><code class="docutils literal notranslate"><span class="pre">finishes/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#finished-by-2" id="id15"><code class="docutils literal notranslate"><span class="pre">finished_by/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#equal-2" id="id16"><code class="docutils literal notranslate"><span class="pre">equal/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-interface" id="id17">Protected interface</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id18">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
+<li><p><a class="reference internal" href="#remarks" id="id20">Remarks</a></p></li>
+</ul>
+</div>
 <div class="section" id="public-interface">
-<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">Public interface</a><a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="new/3"> </div><div class="section" id="new-3">
-<span id="intervalp-0-new-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">new/3</span></code><a class="headerlink" href="#new-3" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-new-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#id2"><code class="docutils literal notranslate"><span class="pre">new/3</span></code></a><a class="headerlink" href="#new-3" title="Permalink to this headline">¶</a></h3>
 <p>Constructs a new interval given start and end points. The start point must strictly precede the end point.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -278,7 +298,7 @@
 </div>
 <div id="valid/1"> </div></div>
 <div class="section" id="valid-1">
-<span id="intervalp-0-valid-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">valid/1</span></code><a class="headerlink" href="#valid-1" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-valid-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#id3"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a><a class="headerlink" href="#valid-1" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval is a valid interval.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -298,7 +318,7 @@
 </div>
 <div id="before/2"> </div></div>
 <div class="section" id="before-2">
-<span id="intervalp-0-before-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">before/2</span></code><a class="headerlink" href="#before-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-before-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#id4"><code class="docutils literal notranslate"><span class="pre">before/2</span></code></a><a class="headerlink" href="#before-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 takes place before Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -318,7 +338,7 @@
 </div>
 <div id="after/2"> </div></div>
 <div class="section" id="after-2">
-<span id="intervalp-0-after-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">after/2</span></code><a class="headerlink" href="#after-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-after-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#id5"><code class="docutils literal notranslate"><span class="pre">after/2</span></code></a><a class="headerlink" href="#after-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 takes place after Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -338,7 +358,7 @@
 </div>
 <div id="meets/2"> </div></div>
 <div class="section" id="meets-2">
-<span id="intervalp-0-meets-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">meets/2</span></code><a class="headerlink" href="#meets-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-meets-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#id6"><code class="docutils literal notranslate"><span class="pre">meets/2</span></code></a><a class="headerlink" href="#meets-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 meets Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -358,7 +378,7 @@
 </div>
 <div id="met_by/2"> </div></div>
 <div class="section" id="met-by-2">
-<span id="intervalp-0-met-by-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">met_by/2</span></code><a class="headerlink" href="#met-by-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-met-by-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#id7"><code class="docutils literal notranslate"><span class="pre">met_by/2</span></code></a><a class="headerlink" href="#met-by-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 is met by Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -378,7 +398,7 @@
 </div>
 <div id="overlaps/2"> </div></div>
 <div class="section" id="overlaps-2">
-<span id="intervalp-0-overlaps-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">overlaps/2</span></code><a class="headerlink" href="#overlaps-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-overlaps-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#id8"><code class="docutils literal notranslate"><span class="pre">overlaps/2</span></code></a><a class="headerlink" href="#overlaps-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 overlaps with Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -398,7 +418,7 @@
 </div>
 <div id="overlapped_by/2"> </div></div>
 <div class="section" id="overlapped-by-2">
-<span id="intervalp-0-overlapped-by-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">overlapped_by/2</span></code><a class="headerlink" href="#overlapped-by-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-overlapped-by-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#id9"><code class="docutils literal notranslate"><span class="pre">overlapped_by/2</span></code></a><a class="headerlink" href="#overlapped-by-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 is overlapped by Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -418,7 +438,7 @@
 </div>
 <div id="starts/2"> </div></div>
 <div class="section" id="starts-2">
-<span id="intervalp-0-starts-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">starts/2</span></code><a class="headerlink" href="#starts-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-starts-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#id10"><code class="docutils literal notranslate"><span class="pre">starts/2</span></code></a><a class="headerlink" href="#starts-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 starts Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -438,7 +458,7 @@
 </div>
 <div id="started_by/2"> </div></div>
 <div class="section" id="started-by-2">
-<span id="intervalp-0-started-by-2"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">started_by/2</span></code><a class="headerlink" href="#started-by-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-started-by-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#id11"><code class="docutils literal notranslate"><span class="pre">started_by/2</span></code></a><a class="headerlink" href="#started-by-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 is started by Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -458,7 +478,7 @@
 </div>
 <div id="during/2"> </div></div>
 <div class="section" id="during-2">
-<span id="intervalp-0-during-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">during/2</span></code><a class="headerlink" href="#during-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-during-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#id12"><code class="docutils literal notranslate"><span class="pre">during/2</span></code></a><a class="headerlink" href="#during-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 occurs during Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -478,7 +498,7 @@
 </div>
 <div id="contains/2"> </div></div>
 <div class="section" id="contains-2">
-<span id="intervalp-0-contains-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">contains/2</span></code><a class="headerlink" href="#contains-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-contains-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#id13"><code class="docutils literal notranslate"><span class="pre">contains/2</span></code></a><a class="headerlink" href="#contains-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 contains Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -498,7 +518,7 @@
 </div>
 <div id="finishes/2"> </div></div>
 <div class="section" id="finishes-2">
-<span id="intervalp-0-finishes-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">finishes/2</span></code><a class="headerlink" href="#finishes-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-finishes-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#id14"><code class="docutils literal notranslate"><span class="pre">finishes/2</span></code></a><a class="headerlink" href="#finishes-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 finishes Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -518,7 +538,7 @@
 </div>
 <div id="finished_by/2"> </div></div>
 <div class="section" id="finished-by-2">
-<span id="intervalp-0-finished-by-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">finished_by/2</span></code><a class="headerlink" href="#finished-by-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-finished-by-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#id15"><code class="docutils literal notranslate"><span class="pre">finished_by/2</span></code></a><a class="headerlink" href="#finished-by-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 is finished by Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -538,7 +558,7 @@
 </div>
 <div id="equal/2"> </div></div>
 <div class="section" id="equal-2">
-<span id="intervalp-0-equal-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">equal/2</span></code><a class="headerlink" href="#equal-2" title="Permalink to this headline">¶</a></h3>
+<span id="intervalp-0-equal-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#id16"><code class="docutils literal notranslate"><span class="pre">equal/2</span></code></a><a class="headerlink" href="#equal-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval1 is equal to Interval2.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -559,19 +579,19 @@
 </div>
 </div>
 <div class="section" id="protected-interface">
-<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id17">Protected interface</a><a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="private-predicates">
-<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id18">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="operators">
-<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id19">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 </div>
 <div class="section" id="remarks">
-<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id20">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>

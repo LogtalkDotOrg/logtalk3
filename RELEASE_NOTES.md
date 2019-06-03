@@ -61,6 +61,8 @@ and the APIs.
 
 * IMPROVED: Handbook index cross-referencing.
 
+* IMPROVED: Entity protocol navigation in API documentation when using Sphinx.
+
 Library
 -------
 
