@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>uses/1 &mdash; The Logtalk Handbook v3.27.0-b09 documentation</title>
+  <title>uses/1 &mdash; The Logtalk Handbook v3.27.0-b10 documentation</title>
   
 
   
@@ -217,7 +217,12 @@
 <p>Declares object aliases. Typically used to shorten long object names, to
 simplify and consistently send messages to parameterized objects, and to
 simplify experimenting with different object implementations of the same
-protocol when using explicit message sending.</p>
+protocol when using explicit message sending. Object aliases are local
+to the object (or category) where they are defined.</p>
+<p>Declaring multiple aliases for the same object are allowed. But repeated
+declarations of the same alias, declaring an alias for an object alias,
+and redefining an alias to reference a different object are reported as
+compilation errors.</p>
 <p>To enable the use of static binding, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.</p>

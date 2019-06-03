@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.68,
+		version is 1.65,
 		author is 'Paulo Moura',
-		date is 2019/06/01,
+		date is 2019/02/25,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -398,10 +398,6 @@
 
 	message_tokens(duplicated_directive(File, Lines, Type, Entity, Directive)) -->
 		['Duplicated directive: ~q'-[Directive], nl],
-		message_context(File, Lines, Type, Entity).
-
-	message_tokens(duplicated_object_alias(File, Lines, Type, Entity, AliasDeclaration)) -->
-		['Duplicated object alias: ~q'-[AliasDeclaration], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(suspicious_call(File, Lines, Type, Entity, Call, [AlternativeCall| AlternativeCalls])) -->
