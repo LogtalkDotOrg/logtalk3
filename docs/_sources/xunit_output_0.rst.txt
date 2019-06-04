@@ -9,8 +9,8 @@
 Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.
 
 | **Author:** Paulo Moura
-| **Version:** 1.0
-| **Date:** 2017/12/29
+| **Version:** 1.1
+| **Date:** 2019/6/4
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -22,7 +22,9 @@ Intercepts unit test execution messages and outputs a report using the xUnit XML
 |    :ref:`logtalk <logtalk/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Simply load this object before running your tests using the goal logtalk_load(lgtunit(xunit_output)).
 
 .. contents::
    :local:

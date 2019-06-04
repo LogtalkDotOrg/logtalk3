@@ -28,10 +28,13 @@
 :- object(tap_output).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/12/21,
-		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.'
+		date is 2019/06/04,
+		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.',
+		remarks is [
+			'Usage' - 'Simply load this object before running your tests using the goal logtalk_load(lgtunit(tap_output)).'
+		]
 	]).
 
 	:- private(generating_/0).
@@ -62,7 +65,7 @@
 			true
 		;	write('TAP version 13'), nl,
 			assertz(generating_),
-			retractall(partial_(_))	
+			retractall(partial_(_))
 		).
 	% test results summary
 	message_hook(tests_results_summary(_, Partial, _, _, _, _)) :-

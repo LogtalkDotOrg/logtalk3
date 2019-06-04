@@ -28,10 +28,13 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/12/29,
-		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.'
+		date is 2019/06/04,
+		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
+		remarks is [
+			'Usage' - 'Simply load this object before running your tests using the goal logtalk_load(lgtunit(xunit_output)).'
+		]
 	]).
 
 	:- private(message_cache_/1).
@@ -74,10 +77,10 @@
 	generate_xml_report :-
 		write_report_header,
 		write_testsuites_element.
-		
+
 	write_report_header :-
 		write('<?xml version="1.0" encoding="UTF-8"?>'), nl.
-	
+
 	write_testsuites_element :-
 %		testsuites_duration(Duration),
 %		write_xml_open_tag(testsuites, [duration-Duration]),
@@ -125,7 +128,7 @@
 		julian_day(Year0, Month0, Day0, JulianDay0),
 		julian_day(Year, Month, Day, JulianDay),
 		Duration is
-			(JulianDay - JulianDay0) * 86400 + 
+			(JulianDay - JulianDay0) * 86400 +
 			(Hours - Hours0) * 3600 +
 			(Minutes - Minutes0) * 60 +
 			Seconds - Seconds0.
@@ -134,7 +137,7 @@
 
 	testsuite_stats(Tests, 0, Failures, Skipped) :-
 		testsuite_stats(0, Tests, 0, Failures, 0, Skipped).
-	
+
 	testsuite_stats(Tests0, Tests, Failures0, Failures, Skipped0, Skipped) :-
 		(	retract(message_cache_(tests_results_summary(_Object, PartialTests, PartialSkipped, _, PartialFailures, _))) ->
 			Tests1 is Tests0 + PartialTests,

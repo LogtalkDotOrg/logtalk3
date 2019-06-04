@@ -28,10 +28,13 @@
 :- object(tap_report).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/12/21,
-		comment is 'Intercepts unit test execution messages and generates a tap_report.txt file using the TAP output format in the same directory as the tests object file.'
+		date is 2019/06/04,
+		comment is 'Intercepts unit test execution messages and generates a tap_report.txt file using the TAP output format in the same directory as the tests object file.',
+		remarks is [
+			'Usage' - 'Simply load this object before running your tests using the goal logtalk_load(lgtunit(tap_report)).'
+		]
 	]).
 
 	:- private(partial_/1).
