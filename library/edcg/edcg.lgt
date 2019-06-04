@@ -27,10 +27,10 @@ SOFTWARE.
 	implements(expanding)).
 
 	:- info([
-		version is 1.01,
+		version is 1.02,
 		author is 'Peter Van Roy; adapted to Logtalk by Paulo Moura.',
-		date is 2018/08/08,
-		comment is 'Multiple hidden parameters: an extension to Prolog''s DCG notation.',
+		date is 2019/06/04,
+		comment is 'Multiple hidden parameters: an extension to Prolog''s DCG notation. Ported to Logtalk as a hook object.',
 		copyright is 'Copyright (C) 1992 Peter Van Roy',
 		license is 'MIT'
 	]).
@@ -376,7 +376,7 @@ SOFTWARE.
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
-	
+
 	logtalk::message_tokens(missing_accumulator(Predicate,Accumulator), edcg) -->
 		['In ~w the accumulator ''~w'' does not exist'-[Predicate,Accumulator], nl].
 	logtalk::message_tokens(missing_hidden_parameter(Predicate,Term), edcg) -->
