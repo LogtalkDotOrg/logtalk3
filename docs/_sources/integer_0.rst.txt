@@ -9,8 +9,8 @@
 Integer data type predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1.53
-| **Date:** 2018/7/11
+| **Version:** 1.54
+| **Date:** 2019/6/4
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -20,7 +20,9 @@ Integer data type predicates.
 |    ``public`` :ref:`number <number/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Portability notes:* This object will use the backend Prolog system between/3, plus/3, and succ/2 built-in predicates when avaialble.
 
 .. contents::
    :local:

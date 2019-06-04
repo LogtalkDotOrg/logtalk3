@@ -23,13 +23,13 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.19,
+		version is 2.21,
 		author is 'Paulo Moura',
-		date is 2019/03/18,
+		date is 2019/06/04,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
-			'Portability notes' - 'This object will use the backend Prolog system length/2 and msort/2 built-in predicates when avaialble.'
+			'Portability notes' - 'This object will use the backend Prolog system length/2, msort/2, and sort/4 built-in predicates when avaialble.'
 		]
 	]).
 
