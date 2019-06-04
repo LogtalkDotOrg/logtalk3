@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into Markdown files
 %
-%  Last updated on October 4, 2018
+%  Last updated on June 4, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -147,7 +147,8 @@
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:text>(no dependencies on other entities)</xsl:text><xsl:value-of select="$nl2" />
+			<xsl:text>* dependencies:</xsl:text><xsl:value-of select="$nl" />
+			<xsl:text>  (none)</xsl:text><xsl:value-of select="$nl2" />
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:value-of select="$nl" />

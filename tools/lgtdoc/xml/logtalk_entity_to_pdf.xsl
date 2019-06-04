@@ -10,7 +10,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
 %
-%  Last updated on March 14, 2016
+%  Last updated on June 4, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -357,11 +357,16 @@
 		</xsl:when>
 		<xsl:otherwise>
 			<fo:block
-					font-size="10pt" 
+					font-size="10pt"
 					font-family="serif" 
-					font-style="italic"
-					space-before="4pt">
-				(no dependencies on other entities)
+					keep-with-next="always">
+				dependencies:
+			</fo:block>
+			<fo:block
+					font-size="9pt"
+					font-family="serif"
+					margin-left="10mm">
+				(none)
 			</fo:block>
 		</xsl:otherwise>
 	</xsl:choose>

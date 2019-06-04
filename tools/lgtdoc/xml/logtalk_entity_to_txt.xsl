@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into text files
 %
-%  Last updated on August 11, 2017
+%  Last updated on June 4, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -153,7 +153,8 @@
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:text>(no dependencies on other entities)</xsl:text><xsl:value-of select="$nl" />
+			<xsl:text>dependencies:</xsl:text><xsl:value-of select="$nl" />
+			<xsl:value-of select="$tab" /><xsl:text>(none)</xsl:text><xsl:value-of select="$nl" />
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:value-of select="$nl" />

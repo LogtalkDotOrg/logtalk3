@@ -183,7 +183,10 @@
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:text>(no dependencies on other entities)</xsl:text><xsl:value-of select="$nl2" />
+			<xsl:text>| **Dependencies:**</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>|   (none)</xsl:text>
+			<xsl:value-of select="$nl2" />
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:value-of select="$nl" />

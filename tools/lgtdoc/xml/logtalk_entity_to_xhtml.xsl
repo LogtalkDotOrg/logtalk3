@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into XHTML files
 %
-%  Last updated on August 11, 2017
+%  Last updated on June 4, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -173,7 +173,8 @@
 		</dl>
 		</xsl:when>
 		<xsl:otherwise>
-			<p class="comment">(no dependencies on other entities)</p>
+			<dt class ="key">dependencies:</dt>
+				<dd class="comment">(none)</dd>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
