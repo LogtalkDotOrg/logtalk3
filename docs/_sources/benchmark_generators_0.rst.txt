@@ -16,8 +16,8 @@ Generates random data structures for use in benchmarks.
 |    ``static, context_switching_calls``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`random <random/0>`
 
 | **Remarks:**
 |    (none)
@@ -53,12 +53,12 @@ Generates a random tree.
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------

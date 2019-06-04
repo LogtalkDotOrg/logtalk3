@@ -18,6 +18,12 @@ Predicates for generating directory dependency diagrams. A dependency exists whe
 
 | **Imports:**
 |    ``public`` :ref:`directory_diagram(Format) <directory_diagram/1>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`modules_diagram_support <modules_diagram_support/0>`
+|    :ref:`file_dependency_diagram(Format) <file_dependency_diagram/1>`
+|    :ref:`file_dependency_diagram(Format) <file_dependency_diagram/1>`
 
 | **Remarks:**
 |    (none)

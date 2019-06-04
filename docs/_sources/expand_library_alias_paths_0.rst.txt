@@ -18,6 +18,9 @@ Hook object for expanding library alias paths in logtalk_library_path/2 facts wh
 
 | **Implements:**
 |    ``public`` :ref:`expanding <expanding/0>`
+| **Uses:**
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
 
 | **Remarks:**
 |    (none)

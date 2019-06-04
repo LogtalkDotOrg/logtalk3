@@ -18,6 +18,8 @@ Intercepts unit test execution messages and generates a tap_report.txt file usin
 
 | **Provides:**
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`logtalk <logtalk/0>`
 
 | **Remarks:**
 |    (none)

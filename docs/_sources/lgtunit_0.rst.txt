@@ -20,6 +20,14 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``public`` :ref:`expanding <expanding/0>`
 | **Provides:**
 |    :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
+| **Uses:**
+|    :ref:`integer <integer/0>`
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`random <random/0>`
+|    :ref:`type <type/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)

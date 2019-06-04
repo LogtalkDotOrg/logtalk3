@@ -16,8 +16,9 @@ Predicates for generating all supported diagrams for libraries, directories, or 
 |    ``static, context_switching_calls``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
 
 | **Remarks:**
 |    
@@ -493,12 +494,12 @@ Creates all supported diagrams for all loaded files using default options.
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------

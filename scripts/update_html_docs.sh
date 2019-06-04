@@ -145,7 +145,7 @@ cp _build/texinfo/LogtalkAPIs-*.info ../
 make clean
 mv conf.py _conf.py
 mv browserconfig.xml browserconfig.xml.saved
-rm *.xml
+# rm *.xml
 mv browserconfig.xml.saved browserconfig.xml
 # rm *.rst
 

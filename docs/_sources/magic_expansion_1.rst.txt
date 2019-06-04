@@ -22,6 +22,9 @@ Expands rules of the form p <- f & g to the more manageable rule(p, [f,g]) and p
 |    ``public`` :ref:`flatting <flatting/0>`
 | **Extends:**
 |    ``public`` :ref:`debug_expansion(A) <debug_expansion/1>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`magic <magic/0>`
 
 | **Remarks:**
 |    (none)

@@ -16,8 +16,10 @@ Core predicates for computing source code metrics.
 |    ``static``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
 
 | **Remarks:**
 |    (none)
@@ -508,7 +510,7 @@ Enumerates, by backtracking, all library sub-library paths.
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------

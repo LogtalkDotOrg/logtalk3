@@ -128,8 +128,7 @@
 		<xsd:element name="specializes"		type="relation"				minOccurs="0" maxOccurs="unbounded"/>
 		<xsd:element name="complements"		type="complementsrelation"	minOccurs="0" maxOccurs="unbounded"/>
 		<xsd:element name="provides"		type="providesrelation"		minOccurs="0" maxOccurs="unbounded"/>
-		<xsd:element name="uses"			type="docrelation"			minOccurs="0" maxOccurs="unbounded"/>
-		<xsd:element name="calls"			type="docrelation"			minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="uses"			type="usesrelation"			minOccurs="0" maxOccurs="unbounded"/>
 		<xsd:element name="alias"			type="alias"				minOccurs="0" maxOccurs="unbounded"/>
 	</xsd:sequence>
 </xsd:complexType>
@@ -164,9 +163,10 @@
 </xsd:complexType>
 
 
-<xsd:complexType name="docrelation">
+<xsd:complexType name="usesrelation">
 	<xsd:sequence>
 		<xsd:element name="name"	type="xsd:string"/>
+		<xsd:element name="functor"	type="xsd:string"/>
 		<xsd:element name="file"	type="xsd:string"/>
 	</xsd:sequence>
 </xsd:complexType>

@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.12,
+		version is 4.13,
 		author is 'Paulo Moura',
-		date is 2019/03/08,
+		date is 2019/05/04,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -997,12 +997,18 @@
 			write_xml_entity_relation(Stream, Entity, Superclass, specializes, Scope),
 		fail.
 	write_xml_object_relations(Stream, Entity) :-
-		entity_property(Entity, provides(Functor/Arity, To, _)),
-			entity_property(To, declares(Functor/Arity, Properties)),
+		object_property(Entity, provides(Functor/Arity, To, _)),
+			object_property(To, declares(Functor/Arity, Properties)),
 			(	member(non_terminal(Functor//Args), Properties) ->
 				write_xml_provides_relation(Stream, Entity, To, Functor//Args)
 			;	write_xml_provides_relation(Stream, Entity, To, Functor/Arity)
 			),
+		fail.
+	write_xml_object_relations(Stream, Entity) :-
+		findall(Other, (object_property(Entity, calls(Other::_, _)), nonvar(Other)), Others0),
+		sort(Others0, Others),
+			member(Object, Others),
+			write_xml_uses_relation(Stream, Object),
 		fail.
 	write_xml_object_relations(_, _).
 
@@ -1025,12 +1031,18 @@
 			write_xml_complements_relation(Stream, Entity, Object),
 		fail.
 	write_xml_category_relations(Stream, Entity) :-
-		entity_property(Entity, provides(Functor/Arity, To, _)),
-			entity_property(To, declares(Functor/Arity, Properties)),
+		category_property(Entity, provides(Functor/Arity, To, _)),
+			category_property(To, declares(Functor/Arity, Properties)),
 			(	member(non_terminal(Functor//Args), Properties) ->
 				write_xml_provides_relation(Stream, Entity, To, Functor//Args)
 			;	write_xml_provides_relation(Stream, Entity, To, Functor/Arity)
 			),
+		fail.
+	write_xml_category_relations(Stream, Entity) :-
+		findall(Other, (category_property(Entity, calls(Other::_, _)), nonvar(Other)), Others0),
+		sort(Others0, Others),
+			member(Object, Others),
+			write_xml_uses_relation(Stream, Object),
 		fail.
 	write_xml_category_relations(_, _).
 
@@ -1063,6 +1075,16 @@
 		write_xml_cdata_element(Stream, resource, [], Resource),
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, provides).
+
+	write_xml_uses_relation(Stream, Entity) :-
+		entity_to_xml_term(Entity),
+		relation_to_xml_filename(Entity, File),
+		write_xml_open_tag(Stream, uses, []),
+		write_xml_cdata_element(Stream, name, [], Entity),
+		functor(Entity, Name, Arity),
+		write_xml_cdata_element(Stream, functor, [], Name/Arity),
+		write_xml_cdata_element(Stream, file, [], File),
+		write_xml_close_tag(Stream, uses).
 
 	write_entity_xml_operators(Stream, Entity) :-
 		write_xml_open_tag(Stream, operators, []),
@@ -1274,11 +1296,11 @@
 		close(Stream).
 
 	kind_ref_doctype_xsd(entity, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/4.2/logtalk_entity.dtd', 'https://logtalk.org/xml/4.2/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/4.3/logtalk_entity.dtd', 'https://logtalk.org/xml/4.3/logtalk_entity.xsd').
 	kind_ref_doctype_xsd(entity, standalone, logtalk_entity-none, none).
 
 	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/4.2/logtalk_index.dtd', 'https://logtalk.org/xml/4.2/logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/4.3/logtalk_index.dtd', 'https://logtalk.org/xml/4.3/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
 	sorted_keys_to_keys([], []).

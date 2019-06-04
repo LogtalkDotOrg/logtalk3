@@ -19,8 +19,9 @@ Bi-directional XML parser.
 |    ``static, context_switching_calls``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`term <term/0>`
 
 | **Remarks:**
 |    
@@ -130,7 +131,7 @@ Pretty prints a XML document on the current output stream.
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------

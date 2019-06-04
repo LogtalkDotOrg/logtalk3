@@ -136,6 +136,13 @@ results when calling `char_code/2` with a code of zero.
 Tools
 -----
 
+* CHANGED: The `lgtdoc` tool XML output specification removing the deprecated
+`calls` tag and updating the `uses` tag to include a `functor` tag for use with
+Sphinx output.
+
+* IMPROVED: The `lgtdoc` tool generated XML documenting files now include
+information about `uses` relations.
+
 * UPDATED: The `help` tool to open the library documentation index when calling
 the `library/1` predicate with a valid library name.
 

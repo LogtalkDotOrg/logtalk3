@@ -16,8 +16,11 @@ Prolog shell for the interpreters.
 |    ``static, context_switching_calls``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`counter <counter/0>`
+|    :ref:`list <list/0>`
+|    :ref:`meta <meta/0>`
+|    :ref:`pairs <pairs/0>`
 
 | **Remarks:**
 |    (none)
@@ -46,12 +49,12 @@ Public interface
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------

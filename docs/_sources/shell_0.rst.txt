@@ -16,8 +16,8 @@ User frontend to start the application.
 |    ``static, context_switching_calls``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`shell(Interpreters) <shell/1>`
 
 | **Remarks:**
 |    (none)
@@ -60,12 +60,12 @@ Public interface
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------

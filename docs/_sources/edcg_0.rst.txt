@@ -23,6 +23,9 @@ Multiple hidden parameters: an extension to Prolog's DCG notation.
 |    ``public`` :ref:`expanding <expanding/0>`
 | **Provides:**
 |    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
 
 | **Remarks:**
 |    (none)

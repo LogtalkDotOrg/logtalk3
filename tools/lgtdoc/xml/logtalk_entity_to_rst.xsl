@@ -197,7 +197,7 @@
 
 
 <xsl:template match="logtalk_entity/relations/uses" priority="1">
-	<xsl:text>|    :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
+	<xsl:text>|    :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 

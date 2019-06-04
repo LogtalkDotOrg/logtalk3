@@ -16,8 +16,8 @@ ISO 8601 (and European civil calendar) compliant library of date predicates.
 |    ``static, context_switching_calls``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`os <os/0>`
 
 | **Remarks:**
 |    
@@ -507,12 +507,12 @@ Compute a Gregorian Easter Sunday.
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------

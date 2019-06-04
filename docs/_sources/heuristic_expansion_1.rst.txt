@@ -20,6 +20,8 @@ Expands rules of the form p <- f & g to rule(p, [f,g|Tail], Length, Tail).
 |    ``public`` :ref:`expanding <expanding/0>`
 | **Extends:**
 |    ``public`` :ref:`rule_expansion(A) <rule_expansion/1>`
+| **Uses:**
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)

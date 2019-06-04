@@ -250,9 +250,6 @@
 				<ref name="uses"/>
 			</zeroOrMore>
 			<zeroOrMore>
-				<ref name="calls"/>
-			</zeroOrMore>
-			<zeroOrMore>
 				<ref name="alias"/>
 			</zeroOrMore>
 		</element>
@@ -323,13 +320,7 @@
 	<define name="uses">
 		<element name="uses">
 			<ref name="name"/>
-			<ref name="file"/>
-		</element>
-	</define>
-
-	<define name="calls">
-		<element name="calls">
-			<ref name="name"/>
+			<ref name="functor"/>
 			<ref name="file"/>
 		</element>
 	</define>

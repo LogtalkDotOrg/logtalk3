@@ -65,7 +65,7 @@
 <!ELEMENT reference (name, file)>
 
 
-<!ELEMENT relations (implements*, imports*, extends*, instantiates*, specializes*, complements*, provides*, uses*, calls*, alias*)>
+<!ELEMENT relations (implements*, imports*, extends*, instantiates*, specializes*, complements*, provides*, uses*, alias*)>
 
 <!ELEMENT implements (name, functor, scope, file)>
 
@@ -81,9 +81,7 @@
 
 <!ELEMENT provides (to, functor, resource, file)>
 
-<!ELEMENT uses (name, file)>
-
-<!ELEMENT calls (name, file)>
+<!ELEMENT uses (name, functor, file)>
 
 <!ELEMENT alias (name, original, alternative)>
 

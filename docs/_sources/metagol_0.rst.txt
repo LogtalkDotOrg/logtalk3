@@ -24,6 +24,14 @@ Inductive logic programming (ILP) system based on meta-interpretive learning.
 | **Provides:**
 |    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 |    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
+| **Uses:**
+|    :ref:`coroutining <coroutining/0>`
+|    :ref:`integer <integer/0>`
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`meta <meta/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`timeout <timeout/0>`
 
 | **Remarks:**
 |    (none)

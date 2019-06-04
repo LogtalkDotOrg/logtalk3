@@ -16,8 +16,8 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 |    ``static, context_switching_calls, complements(restrict)``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    
@@ -206,12 +206,12 @@ True if the given term is of the specified type. Throws an error otherwise. A ne
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------

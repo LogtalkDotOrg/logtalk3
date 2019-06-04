@@ -20,6 +20,9 @@ Predicates for generating graph files in the DOT language (version 2.36.0 or lat
 |    ``public`` :ref:`graph_language_protocol <graph_language_protocol/0>`
 | **Provides:**
 |    :ref:`graph_language_registry::language_object/2 <graph_language_registry/0::language_object/2>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
 
 | **Remarks:**
 |    (none)

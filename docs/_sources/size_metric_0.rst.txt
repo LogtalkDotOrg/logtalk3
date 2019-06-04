@@ -21,6 +21,11 @@ Source code size metric. Returned scores are upper bounds and based solely in so
 |    ``public`` :ref:`code_metric <code_metric/0>`
 | **Provides:**
 |    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`os <os/0>`
 
 | **Remarks:**
 |    (none)

@@ -16,8 +16,10 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 |    ``static, context_switching_calls``
 
 
-(no dependencies on other entities)
-
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
 
 | **Remarks:**
 |    
@@ -224,12 +226,12 @@ Enumerates, by backtracking, local predicates (and non-terminals) that are not u
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------

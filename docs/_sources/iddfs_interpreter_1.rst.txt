@@ -18,6 +18,9 @@ Iterative deepening depth-first interpreter for general logic programs. Based on
 
 | **Implements:**
 |    ``public`` :ref:`interpreterp <interpreterp/0>`
+| **Uses:**
+|    :ref:`counter <counter/0>`
+|    :ref:`dfs_interpreter <dfs_interpreter/0>`
 
 | **Remarks:**
 |    (none)
