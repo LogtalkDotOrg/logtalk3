@@ -32,10 +32,11 @@ Types and predicates for extended type-checking of expected term references and 
 |    :ref:`expected(Reference) <expected/1>`
 
 | **Remarks:**
-|    
-|    *Type either(ExpectedType, UnexpectedType):* Allows type-checking expected references where the expected and unexpected terms must be of the given types.
-|    
-|    *QuickCheck support:* Defines clauses for the type::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpectedType) type.
+
+
+   - *Type either(ExpectedType, UnexpectedType):* Allows type-checking expected references where the expected and unexpected terms must be of the given types.
+
+   - *QuickCheck support:* Defines clauses for the type::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpectedType) type.
 
 .. contents::
    :local:

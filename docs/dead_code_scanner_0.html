@@ -257,15 +257,14 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line"><br /></div>
-<div class="line-block">
-<div class="line"><em>Dead code:</em> A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.</div>
-<div class="line"><br /></div>
-<div class="line"><em>Known issues:</em> Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.</div>
-<div class="line"><br /></div>
-<div class="line"><em>Requirements:</em> Source files must be compiled with the source_data flag turned on. To avoid false positives do to meta-calls, compilation of source files with the optimized flag turned on is also advised.</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Dead code:</em> A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.</p></li>
+<li><p><em>Known issues:</em> Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.</p></li>
+<li><p><em>Requirements:</em> Source files must be compiled with the source_data flag turned on. To avoid false positives do to meta-calls, compilation of source files with the optimized flag turned on is also advised.</p></li>
+</ul>
+</div></blockquote>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>

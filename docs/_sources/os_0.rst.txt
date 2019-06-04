@@ -24,10 +24,11 @@ Portable operating-system access predicates.
 |    ``osp`` ``absolute_file_name/2`` aka ``expand_path/2``
 
 | **Remarks:**
-|    
-|    *File path expansion:* To ensure portability, all file paths are expanded before being handed to the backend Prolog system.
-|    
-|    *Missing implementations:* A few predicates (e.g. wall_time/1) cannot be implemented in some backend Prolog systems.
+
+
+   - *File path expansion:* To ensure portability, all file paths are expanded before being handed to the backend Prolog system.
+
+   - *Missing implementations:* A few predicates (e.g. wall_time/1) cannot be implemented in some backend Prolog systems.
 
 .. contents::
    :local:

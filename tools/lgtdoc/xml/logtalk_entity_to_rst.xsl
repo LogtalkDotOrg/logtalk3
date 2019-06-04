@@ -414,6 +414,7 @@
 	<xsl:value-of select="$nl" />
 	<xsl:choose>
 		<xsl:when test="remark">
+			<xsl:value-of select="$nl" />
 			<xsl:apply-templates select="remark" />
 			<xsl:value-of select="$nl" />
 		</xsl:when>
@@ -425,9 +426,8 @@
 </xsl:template>
 
 <xsl:template match="logtalk_entity/remarks/remark">
-	<xsl:text>|    </xsl:text>
 	<xsl:value-of select="$nl" />
-	<xsl:text>|    *</xsl:text><xsl:value-of select="topic" /><xsl:text>:* </xsl:text><xsl:value-of select="text" />
+	<xsl:text>   - *</xsl:text><xsl:value-of select="topic" /><xsl:text>:* </xsl:text><xsl:value-of select="text" />
 	<xsl:value-of select="$nl" />
 </xsl:template>
 

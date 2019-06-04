@@ -20,10 +20,11 @@ Internal predicates for analyzing source code.
 |    :ref:`list <list/0>`
 
 | **Remarks:**
-|    
-|    *Usage:* This is meant to be imported by any metric added to the system.
-|    
-|    *Predicate Scope:* This is meant for internal use by metrics only. As such, all provided predicates are private.
+
+
+   - *Usage:* This is meant to be imported by any metric added to the system.
+
+   - *Predicate Scope:* This is meant for internal use by metrics only. As such, all provided predicates are private.
 
 .. contents::
    :local:

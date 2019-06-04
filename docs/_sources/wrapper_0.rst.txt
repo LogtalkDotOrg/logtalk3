@@ -27,16 +27,17 @@ Adviser tool for porting and wrapping plain Prolog applications.
 |    :ref:`os <os/0>`
 
 | **Remarks:**
-|    
-|    *prolog_extensions(Extensions) option:* list of file name extensions used to recognize Prolog source files (default is ['.pl','.pro','.prolog'])
-|    
-|    *logtalk_extension(Extension) option:* Logtalk file name extension to be used for the generated wrapper files (default is '.lgt')
-|    
-|    *exclude_files(Files) option:* list of Prolog source files names to exclude (default is [])
-|    
-|    *exclude_directories(Files) option:* list of sub-directory names to exclude (default is [])
-|    
-|    *include_wrapped_files(Boolean):* generate include/1 directives for the wrapped Prolog source files (default is true)
+
+
+   - *prolog_extensions(Extensions) option:* list of file name extensions used to recognize Prolog source files (default is ['.pl','.pro','.prolog'])
+
+   - *logtalk_extension(Extension) option:* Logtalk file name extension to be used for the generated wrapper files (default is '.lgt')
+
+   - *exclude_files(Files) option:* list of Prolog source files names to exclude (default is [])
+
+   - *exclude_directories(Files) option:* list of sub-directory names to exclude (default is [])
+
+   - *include_wrapped_files(Boolean):* generate include/1 directives for the wrapped Prolog source files (default is true)
 
 .. contents::
    :local:

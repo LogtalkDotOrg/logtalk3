@@ -22,8 +22,9 @@ Portable random number generator predicates. Core predicates originally written 
 |    :ref:`list <list/0>`
 
 | **Remarks:**
-|    
-|    *Multiple random number generators:* To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.
+
+
+   - *Multiple random number generators:* To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.
 
 .. contents::
    :local:

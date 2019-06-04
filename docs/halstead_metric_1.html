@@ -277,37 +277,25 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line"><br /></div>
-<div class="line-block">
-<div class="line"><em>Definition of operators:</em> Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.</div>
-<div class="line"><br /></div>
-<div class="line"><em>Definition of operands:</em> Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.</div>
-<div class="line"><br /></div>
-<div class="line"><em>Pn:</em> Number of distinct predicates (declared, defined, called, or updated)</div>
-<div class="line"><br /></div>
-<div class="line"><em>PAn:</em> Number of predicate arguments (assumed distinct)</div>
-<div class="line"><br /></div>
-<div class="line"><em>Cn:</em> Number of predicate calls/updates + number of clauses</div>
-<div class="line"><br /></div>
-<div class="line"><em>CAn:</em> Number of predicate call/update arguments + number of clause head arguments</div>
-<div class="line"><br /></div>
-<div class="line"><em>EV:</em> Entity vocabulary: EV = Pn + PAn</div>
-<div class="line"><br /></div>
-<div class="line"><em>EL:</em> Entity length: EL = Cn + CAn</div>
-<div class="line"><br /></div>
-<div class="line"><em>V:</em> Volume: V = EL * log2(EV)</div>
-<div class="line"><br /></div>
-<div class="line"><em>D:</em> Difficulty: D = (Pn/2) * (CAn/An)</div>
-<div class="line"><br /></div>
-<div class="line"><em>E:</em> Effort: E = D * V</div>
-<div class="line"><br /></div>
-<div class="line"><em>T:</em> Time required to program: T = E/k seconds (k is the Stroud number; defaults to 18)</div>
-<div class="line"><br /></div>
-<div class="line"><em>B:</em> Number of delivered bugs: B = V/3000</div>
-<div class="line"><br /></div>
-<div class="line"><em>Entity score:</em> Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Definition of operators:</em> Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.</p></li>
+<li><p><em>Definition of operands:</em> Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.</p></li>
+<li><p><em>Pn:</em> Number of distinct predicates (declared, defined, called, or updated)</p></li>
+<li><p><em>PAn:</em> Number of predicate arguments (assumed distinct)</p></li>
+<li><p><em>Cn:</em> Number of predicate calls/updates + number of clauses</p></li>
+<li><p><em>CAn:</em> Number of predicate call/update arguments + number of clause head arguments</p></li>
+<li><p><em>EV:</em> Entity vocabulary: EV = Pn + PAn</p></li>
+<li><p><em>EL:</em> Entity length: EL = Cn + CAn</p></li>
+<li><p><em>V:</em> Volume: V = EL * log2(EV)</p></li>
+<li><p><em>D:</em> Difficulty: D = (Pn/2) * (CAn/An)</p></li>
+<li><p><em>E:</em> Effort: E = D * V</p></li>
+<li><p><em>T:</em> Time required to program: T = E/k seconds (k is the Stroud number; defaults to 18)</p></li>
+<li><p><em>B:</em> Number of delivered bugs: B = V/3000</p></li>
+<li><p><em>Entity score:</em> Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.</p></li>
+</ul>
+</div></blockquote>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p></li>

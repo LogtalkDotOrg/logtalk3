@@ -255,35 +255,24 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line"><br /></div>
-<div class="line-block">
-<div class="line"><em>Compiling files for generating XML documentation:</em> All source files must be compiled with the “source_data” compiler flag turned on.</div>
-<div class="line"><br /></div>
-<div class="line"><em>xml_spec(Specification) option:</em> XML documenting files specification format. Possible option values are “dtd” (DTD specification; default) and “xsd” (XML Schema specification).</div>
-<div class="line"><br /></div>
-<div class="line"><em>xml_spec_reference(Reference) option:</em> Reference to the XML specification file in XML documenting files. Possible values are “local” (default; DTD/XSD file in the same folder as the XML files), “web” (logtalk.org website DTD/XSD file), and “standalone” (no reference to specification files).</div>
-<div class="line"><br /></div>
-<div class="line"><em>entity_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is “logtalk_entity_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</div>
-<div class="line"><br /></div>
-<div class="line"><em>index_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is “logtalk_index_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</div>
-<div class="line"><br /></div>
-<div class="line"><em>xml_docs_directory(Directory) option:</em> Directory where the XML documenting files will be generated. The default value is “./xml_docs”, a sub-directory of the source files directory.</div>
-<div class="line"><br /></div>
-<div class="line"><em>bom(Boolean) option:</em> Defines if a BOM should be added to the generated XML documenting files.</div>
-<div class="line"><br /></div>
-<div class="line"><em>encoding(Encoding) option:</em> Encoding to be used for the generated XML documenting files.</div>
-<div class="line"><br /></div>
-<div class="line"><em>omit_path_prefixes(Prefixes) option:</em> List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</div>
-<div class="line"><br /></div>
-<div class="line"><em>exclude_files(List) option:</em> List of files to exclude when generating the XML documenting files.</div>
-<div class="line"><br /></div>
-<div class="line"><em>exclude_paths(List) option:</em> List of (relative) library paths to exclude when generating the XML documenting files.</div>
-<div class="line"><br /></div>
-<div class="line"><em>exclude_entities(List) option:</em> List of entities to exclude when generating the XML documenting files.</div>
-<div class="line"><br /></div>
-<div class="line"><em>Known issues:</em> The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Compiling files for generating XML documentation:</em> All source files must be compiled with the “source_data” compiler flag turned on.</p></li>
+<li><p><em>xml_spec(Specification) option:</em> XML documenting files specification format. Possible option values are “dtd” (DTD specification; default) and “xsd” (XML Schema specification).</p></li>
+<li><p><em>xml_spec_reference(Reference) option:</em> Reference to the XML specification file in XML documenting files. Possible values are “local” (default; DTD/XSD file in the same folder as the XML files), “web” (logtalk.org website DTD/XSD file), and “standalone” (no reference to specification files).</p></li>
+<li><p><em>entity_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is “logtalk_entity_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</p></li>
+<li><p><em>index_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is “logtalk_index_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</p></li>
+<li><p><em>xml_docs_directory(Directory) option:</em> Directory where the XML documenting files will be generated. The default value is “./xml_docs”, a sub-directory of the source files directory.</p></li>
+<li><p><em>bom(Boolean) option:</em> Defines if a BOM should be added to the generated XML documenting files.</p></li>
+<li><p><em>encoding(Encoding) option:</em> Encoding to be used for the generated XML documenting files.</p></li>
+<li><p><em>omit_path_prefixes(Prefixes) option:</em> List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</p></li>
+<li><p><em>exclude_files(List) option:</em> List of files to exclude when generating the XML documenting files.</p></li>
+<li><p><em>exclude_paths(List) option:</em> List of (relative) library paths to exclude when generating the XML documenting files.</p></li>
+<li><p><em>exclude_entities(List) option:</em> List of entities to exclude when generating the XML documenting files.</p></li>
+<li><p><em>Known issues:</em> The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.</p></li>
+</ul>
+</div></blockquote>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
