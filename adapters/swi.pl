@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on April 27, 2019
+%  Last updated on June 4, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -794,8 +794,15 @@
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_prolog_goal_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_goal_expansion'(table(Predicates), {table(TPredicates)}) :-
+	predicate_property(table(_), built_in),
+	logtalk_load_context(entity_type, _),
+	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
+
+'$lgt_prolog_goal_expansion'(untable(Predicates), {untable(TPredicates)}) :-
+	predicate_property(untable(_), built_in),
+	logtalk_load_context(entity_type, _),
+	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
 
 
 

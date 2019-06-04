@@ -50,8 +50,8 @@ of auxiliary clauses (e.g. when using hook pipelines).
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: SWI-Prolog adapter file declaration for the recently added `tnot/1`
-built-in meta-predicate.
+* ADDED: SWI-Prolog adapter file declarations for the recently added `tnot/1`
+built-in meta-predicate plus `table/1` and `untable/1` built-in predicates.
 
 Documentation
 -------------
