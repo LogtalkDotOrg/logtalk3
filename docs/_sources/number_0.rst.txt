@@ -20,7 +20,9 @@ Number data type predicates.
 |    ``public`` :ref:`atomic <atomic/0>`
 
 
-.. contents:: :local:
+.. contents::
+   :local:
+   :backlinks: top
 
 Public interface
 ----------------
@@ -123,7 +125,12 @@ Private predicates
 Operators
 ---------
 
-* ``op(700,xfx,=~=) (public)``
+``op(700,xfx,=~=)``
+^^^^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
 
 
 Remarks

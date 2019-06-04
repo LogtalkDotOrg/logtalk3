@@ -22,7 +22,9 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
 
 
-.. contents:: :local:
+.. contents::
+   :local:
+   :backlinks: top
 
 Public interface
 ----------------
@@ -1716,7 +1718,12 @@ Auxiliary predicate for collecting statistics on clause coverage.
 Operators
 ---------
 
-* ``op(700,xfx,=~=) (public)``
+``op(700,xfx,=~=)``
+^^^^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
 
 
 Remarks

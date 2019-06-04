@@ -25,7 +25,9 @@ Multiple hidden parameters: an extension to Prolog's DCG notation.
 |    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 
-.. contents:: :local:
+.. contents::
+   :local:
+   :backlinks: top
 
 Public interface
 ----------------
@@ -113,7 +115,12 @@ Private predicates
 Operators
 ---------
 
-* ``op(1200,xfx,-->>) (public)``
+``op(1200,xfx,-->>)``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
 
 
 Remarks

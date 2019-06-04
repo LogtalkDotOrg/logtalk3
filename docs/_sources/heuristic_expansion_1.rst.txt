@@ -22,7 +22,9 @@ Expands rules of the form p <- f & g to rule(p, [f,g|Tail], Length, Tail).
 |    ``public`` :ref:`rule_expansion(A) <rule_expansion/1>`
 
 
-.. contents:: :local:
+.. contents::
+   :local:
+   :backlinks: top
 
 Public interface
 ----------------

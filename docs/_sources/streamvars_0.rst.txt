@@ -20,7 +20,9 @@ Stream variables (supporting logical, backtracable, adding and retrieving of ter
 
 
 
-.. contents:: :local:
+.. contents::
+   :local:
+   :backlinks: top
 
 Public interface
 ----------------
@@ -130,8 +132,18 @@ Private predicates
 Operators
 ---------
 
-* ``op(100,xfx,<=) (public)``
-* ``op(100,xfx,=>) (public)``
+``op(100,xfx,<=)``
+^^^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
+``op(100,xfx,=>)``
+^^^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
 
 
 Remarks

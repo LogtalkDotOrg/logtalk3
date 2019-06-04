@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on June 3, 2019
+%  Last updated on June 4, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -95,7 +95,11 @@
 	<xsl:apply-templates select="logtalk_entity/entity" />
 	<xsl:apply-templates select="logtalk_entity/relations" />
 	<xsl:value-of select="$nl" />
-	<xsl:text>.. contents:: :local:</xsl:text>
+	<xsl:text>.. contents::</xsl:text>
+	<xsl:value-of select="$nl" />
+	<xsl:text>   :local:</xsl:text>
+	<xsl:value-of select="$nl" />
+	<xsl:text>   :backlinks: top</xsl:text>
 	<xsl:value-of select="$nl2" />
 	<xsl:apply-templates select="logtalk_entity/predicates" />
 	<xsl:apply-templates select="logtalk_entity/operators" />
@@ -382,8 +386,17 @@
 	<xsl:choose>
 		<xsl:when test="operator">
 			<xsl:for-each select="operator">
-				<xsl:text>* ``</xsl:text><xsl:value-of select="term" /><xsl:text> (</xsl:text><xsl:value-of select="scope" /><xsl:text>)``</xsl:text>
+				<xsl:text>``</xsl:text><xsl:value-of select="term" /><xsl:text>``</xsl:text>
 				<xsl:value-of select="$nl" />
+				<xsl:call-template name="adornment">
+					<xsl:with-param name="char" select="'^'"/>
+					<xsl:with-param name="n" select="4 + string-length(term)"/>
+				</xsl:call-template>
+				<xsl:value-of select="$nl2" />
+				<xsl:text>| **Scope:**</xsl:text>
+				<xsl:value-of select="$nl" />
+				<xsl:text>|    ``</xsl:text><xsl:value-of select="scope" /><xsl:text>``</xsl:text>
+				<xsl:value-of select="$nl2" />
 			</xsl:for-each>
 		</xsl:when>
 		<xsl:otherwise>

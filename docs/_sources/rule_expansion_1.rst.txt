@@ -24,7 +24,9 @@ Expands rules of the form p <- f & g to the more manageable rule(p, [f,g]).
 |    ``public`` :ref:`debug_expansion(A) <debug_expansion/1>`
 
 
-.. contents:: :local:
+.. contents::
+   :local:
+   :backlinks: top
 
 Public interface
 ----------------
