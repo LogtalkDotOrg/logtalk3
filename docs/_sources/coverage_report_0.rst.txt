@@ -9,8 +9,8 @@
 Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.
 
 | **Author:** Paulo Moura
-| **Version:** 1.3
-| **Date:** 2018/3/11
+| **Version:** 1.4
+| **Date:** 2019/6/4
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -22,7 +22,9 @@ Intercepts unit test execution messages and generates a coverage_report.xml file
 |    :ref:`logtalk <logtalk/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Simply load this object before running your tests using the goal logtalk_load(lgtunit(coverage_report)).
 
 .. contents::
    :local:

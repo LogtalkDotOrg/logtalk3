@@ -28,10 +28,13 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/03/11,
-		comment is 'Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.'
+		date is 2019/06/04,
+		comment is 'Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.',
+		remarks is [
+			'Usage' - 'Simply load this object before running your tests using the goal logtalk_load(lgtunit(coverage_report)).'
+		]
 	]).
 
 	% the timestamp message is printed before the message that prints
@@ -90,7 +93,7 @@
 		write_xml_element(name, Predicate),
 		write_xml_element(clauses, Clauses),
 		write_xml_element(covered, Covered),
-		write_xml_element(total, Total),	
+		write_xml_element(total, Total),
 		write_xml_element(percentage, Percentage),
 		entity_predicate_line(Predicate, Entity, Line),
 		write_xml_element(line, Line),
@@ -100,7 +103,7 @@
 	message_hook(entity_coverage(Entity, Covered, Total, Percentage)) :-
 		write_xml_close_tag(predicates),
 		write_xml_element(covered, Covered),
-		write_xml_element(total, Total),	
+		write_xml_element(total, Total),
 		write_xml_element(percentage, Percentage),
 		entity_file(Entity, File, Line),
 		write_xml_element(file, File),
