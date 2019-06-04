@@ -252,6 +252,15 @@
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-message-tokens-2"><span class="std std-ref">logtalk::message_tokens//2</span></a></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line"><em>Command representation:</em> Use the Redis command name as the functor of a compound term where the arguments are the command arguments.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Valid arguments:</em> Atoms, integers, and floats. Always use atoms instead of double-quoted “strings”. This helps portability by not depending on the value of the double_quotes flag.</div>
+</div>
+</div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
@@ -266,7 +275,6 @@
 <li><p><a class="reference internal" href="#protected-interface" id="id7">Protected interface</a></p></li>
 <li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
 <li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
-<li><p><a class="reference internal" href="#remarks" id="id10">Remarks</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-interface">
@@ -383,13 +391,6 @@
 <div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="remarks">
-<h2><a class="toc-backref" href="#contents">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Command representation</strong>: Use the Redis command name as the functor of a compound term where the arguments are the command arguments.</p></li>
-<li><p><strong>Valid arguments</strong>: Atoms, integers, and floats. Always use atoms instead of double-quoted “strings”. This helps portability by not depending on the value of the double_quotes flag.</p></li>
-</ul>
 </div>
 </div>
 

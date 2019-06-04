@@ -19,6 +19,8 @@ Intercepts unit test execution messages and outputs a report using the TAP forma
 | **Provides:**
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 
+| **Remarks:**
+|    (none)
 
 .. contents::
    :local:
@@ -77,11 +79,6 @@ Cache of total of tests per test set.
 
 Operators
 ---------
-
-(none)
-
-Remarks
--------
 
 (none)
 

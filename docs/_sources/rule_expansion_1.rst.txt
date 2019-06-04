@@ -23,6 +23,8 @@ Expands rules of the form p <- f & g to the more manageable rule(p, [f,g]).
 | **Extends:**
 |    ``public`` :ref:`debug_expansion(A) <debug_expansion/1>`
 
+| **Remarks:**
+|    (none)
 
 .. contents::
    :local:
@@ -45,11 +47,6 @@ Private predicates
 
 Operators
 ---------
-
-(none)
-
-Remarks
--------
 
 (none)
 

@@ -19,6 +19,13 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 (no dependencies on other entities)
 
 
+| **Remarks:**
+|    
+|    *Dead code:* A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.
+|    
+|    *Known issues:* Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.
+|    
+|    *Requirements:* Source files must be compiled with the source_data flag turned on. To avoid false positives do to meta-calls, compilation of source files with the optimized flag turned on is also advised.
 
 .. contents::
    :local:
@@ -228,13 +235,4 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Dead code**: A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.
-
-* **Known issues**: Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.
-
-* **Requirements**: Source files must be compiled with the source_data flag turned on. To avoid false positives do to meta-calls, compilation of source files with the optimized flag turned on is also advised.
 

@@ -19,6 +19,9 @@ Fast portable random number generator predicates. Core predicates originally wri
 | **Implements:**
 |    ``public`` :ref:`randomp <randomp/0>`
 
+| **Remarks:**
+|    
+|    *Single random number generator:* This object provides a faster version of the "random" library object but does not support being extended to define multiple random number generators.
 
 .. contents::
    :local:
@@ -100,11 +103,6 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Single random number generator**: This object provides a faster version of the "random" library object but does not support being extended to define multiple random number generators.
 
 .. seealso::
 

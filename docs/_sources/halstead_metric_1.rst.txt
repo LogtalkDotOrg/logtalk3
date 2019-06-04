@@ -23,6 +23,35 @@ Computes Halstead complexity numbers for an entity.
 |    ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
 |    ``public`` :ref:`code_metric <code_metric/0>`
 
+| **Remarks:**
+|    
+|    *Definition of operators:* Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.
+|    
+|    *Definition of operands:* Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.
+|    
+|    *Pn:* Number of distinct predicates (declared, defined, called, or updated)
+|    
+|    *PAn:* Number of predicate arguments (assumed distinct)
+|    
+|    *Cn:* Number of predicate calls/updates + number of clauses
+|    
+|    *CAn:* Number of predicate call/update arguments + number of clause head arguments
+|    
+|    *EV:* Entity vocabulary: EV = Pn + PAn
+|    
+|    *EL:* Entity length: EL = Cn + CAn
+|    
+|    *V:* Volume: V = EL * log2(EV)
+|    
+|    *D:* Difficulty: D = (Pn/2) * (CAn/An)
+|    
+|    *E:* Effort: E = D * V
+|    
+|    *T:* Time required to program: T = E/k seconds (k is the Stroud number; defaults to 18)
+|    
+|    *B:* Number of delivered bugs: B = V/3000
+|    
+|    *Entity score:* Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.
 
 .. contents::
    :local:
@@ -47,35 +76,4 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Definition of operators**: Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.
-
-* **Definition of operands**: Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.
-
-* **Pn**: Number of distinct predicates (declared, defined, called, or updated)
-
-* **PAn**: Number of predicate arguments (assumed distinct)
-
-* **Cn**: Number of predicate calls/updates + number of clauses
-
-* **CAn**: Number of predicate call/update arguments + number of clause head arguments
-
-* **EV**: Entity vocabulary: EV = Pn + PAn
-
-* **EL**: Entity length: EL = Cn + CAn
-
-* **V**: Volume: V = EL * log2(EV)
-
-* **D**: Difficulty: D = (Pn/2) * (CAn/An)
-
-* **E**: Effort: E = D * V
-
-* **T**: Time required to program: T = E/k seconds (k is the Stroud number; defaults to 18)
-
-* **B**: Number of delivered bugs: B = V/3000
-
-* **Entity score**: Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.
 

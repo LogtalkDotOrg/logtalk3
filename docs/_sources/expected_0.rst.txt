@@ -20,6 +20,9 @@ Constructors for expected term references. A reference contains either an expect
 |    :ref:`type::type/1 <type/0::type/1>`
 |    :ref:`type::check/2 <type/0::check/2>`
 
+| **Remarks:**
+|    
+|    *Type-checking support:* This object also defines a type "expected" for use with the "type" library object.
 
 .. contents::
    :local:
@@ -130,11 +133,6 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Type-checking support**: This object also defines a type "expected" for use with the "type" library object.
 
 .. seealso::
 

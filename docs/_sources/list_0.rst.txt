@@ -21,6 +21,9 @@ List predicates.
 | **Extends:**
 |    ``public`` :ref:`compound <compound/0>`
 
+| **Remarks:**
+|    
+|    *Portability notes:* This object will use the backend Prolog system length/2 and msort/2 built-in predicates when avaialble.
 
 .. contents::
    :local:
@@ -64,11 +67,6 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Portability notes**: This object will use the backend Prolog system length/2 and msort/2 built-in predicates when avaialble.
 
 .. seealso::
 

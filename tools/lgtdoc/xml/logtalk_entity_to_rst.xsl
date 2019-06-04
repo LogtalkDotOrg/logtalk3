@@ -94,7 +94,7 @@
 	</xsl:if>
 	<xsl:apply-templates select="logtalk_entity/entity" />
 	<xsl:apply-templates select="logtalk_entity/relations" />
-	<xsl:value-of select="$nl" />
+	<xsl:apply-templates select="logtalk_entity/remarks" />
 	<xsl:text>.. contents::</xsl:text>
 	<xsl:value-of select="$nl" />
 	<xsl:text>   :local:</xsl:text>
@@ -103,7 +103,6 @@
 	<xsl:value-of select="$nl2" />
 	<xsl:apply-templates select="logtalk_entity/predicates" />
 	<xsl:apply-templates select="logtalk_entity/operators" />
-	<xsl:apply-templates select="logtalk_entity/remarks" />
 	<xsl:apply-templates select="logtalk_entity/see_also" />
 </xsl:template>
 
@@ -408,24 +407,25 @@
 
 
 <xsl:template match="logtalk_entity/remarks">
-	<xsl:text>Remarks</xsl:text>
+	<xsl:text>| **Remarks:**</xsl:text>
 	<xsl:value-of select="$nl" />
-	<xsl:text>-------</xsl:text>
-	<xsl:value-of select="$nl2" />
 	<xsl:choose>
 		<xsl:when test="remark">
 			<xsl:apply-templates select="remark" />
+			<xsl:value-of select="$nl" />
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:text>(none)</xsl:text>
+			<xsl:text>|    (none)</xsl:text>
 			<xsl:value-of select="$nl2" />
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
 <xsl:template match="logtalk_entity/remarks/remark">
-	<xsl:text>* **</xsl:text><xsl:value-of select="topic" /><xsl:text>**: </xsl:text><xsl:value-of select="text" />
-	<xsl:value-of select="$nl2" />
+	<xsl:text>|    </xsl:text>
+	<xsl:value-of select="$nl" />
+	<xsl:text>|    *</xsl:text><xsl:value-of select="topic" /><xsl:text>:* </xsl:text><xsl:value-of select="text" />
+	<xsl:value-of select="$nl" />
 </xsl:template>
 
 

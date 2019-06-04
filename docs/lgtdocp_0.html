@@ -248,6 +248,37 @@
 </div>
 </div>
 <p>(no dependencies on other entities)</p>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line"><em>Compiling files for generating XML documentation:</em> All source files must be compiled with the “source_data” compiler flag turned on.</div>
+<div class="line"><br /></div>
+<div class="line"><em>xml_spec(Specification) option:</em> XML documenting files specification format. Possible option values are “dtd” (DTD specification; default) and “xsd” (XML Schema specification).</div>
+<div class="line"><br /></div>
+<div class="line"><em>xml_spec_reference(Reference) option:</em> Reference to the XML specification file in XML documenting files. Possible values are “local” (default; DTD/XSD file in the same folder as the XML files), “web” (logtalk.org website DTD/XSD file), and “standalone” (no reference to specification files).</div>
+<div class="line"><br /></div>
+<div class="line"><em>entity_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is “logtalk_entity_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</div>
+<div class="line"><br /></div>
+<div class="line"><em>index_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is “logtalk_index_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</div>
+<div class="line"><br /></div>
+<div class="line"><em>xml_docs_directory(Directory) option:</em> Directory where the XML documenting files will be generated. The default value is “./xml_docs”, a sub-directory of the source files directory.</div>
+<div class="line"><br /></div>
+<div class="line"><em>bom(Boolean) option:</em> Defines if a BOM should be added to the generated XML documenting files.</div>
+<div class="line"><br /></div>
+<div class="line"><em>encoding(Encoding) option:</em> Encoding to be used for the generated XML documenting files.</div>
+<div class="line"><br /></div>
+<div class="line"><em>omit_path_prefixes(Prefixes) option:</em> List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</div>
+<div class="line"><br /></div>
+<div class="line"><em>exclude_files(List) option:</em> List of files to exclude when generating the XML documenting files.</div>
+<div class="line"><br /></div>
+<div class="line"><em>exclude_paths(List) option:</em> List of (relative) library paths to exclude when generating the XML documenting files.</div>
+<div class="line"><br /></div>
+<div class="line"><em>exclude_entities(List) option:</em> List of entities to exclude when generating the XML documenting files.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Known issues:</em> The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.</div>
+</div>
+</div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
@@ -271,7 +302,6 @@
 <li><p><a class="reference internal" href="#protected-interface" id="id16">Protected interface</a></p></li>
 <li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p></li>
 <li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
-<li><p><a class="reference internal" href="#remarks" id="id19">Remarks</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-interface">
@@ -624,24 +654,6 @@
 <div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="remarks">
-<h2><a class="toc-backref" href="#contents">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Compiling files for generating XML documentation</strong>: All source files must be compiled with the “source_data” compiler flag turned on.</p></li>
-<li><p><strong>xml_spec(Specification) option</strong>: XML documenting files specification format. Possible option values are “dtd” (DTD specification; default) and “xsd” (XML Schema specification).</p></li>
-<li><p><strong>xml_spec_reference(Reference) option</strong>: Reference to the XML specification file in XML documenting files. Possible values are “local” (default; DTD/XSD file in the same folder as the XML files), “web” (logtalk.org website DTD/XSD file), and “standalone” (no reference to specification files).</p></li>
-<li><p><strong>entity_xsl_file(File) option</strong>: XSLT file to use with generated XML documenting files. Default is “logtalk_entity_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</p></li>
-<li><p><strong>index_xsl_file(File) option</strong>: XSLT file to use with generated XML documenting files. Default is “logtalk_index_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</p></li>
-<li><p><strong>xml_docs_directory(Directory) option</strong>: Directory where the XML documenting files will be generated. The default value is “./xml_docs”, a sub-directory of the source files directory.</p></li>
-<li><p><strong>bom(Boolean) option</strong>: Defines if a BOM should be added to the generated XML documenting files.</p></li>
-<li><p><strong>encoding(Encoding) option</strong>: Encoding to be used for the generated XML documenting files.</p></li>
-<li><p><strong>omit_path_prefixes(Prefixes) option</strong>: List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</p></li>
-<li><p><strong>exclude_files(List) option</strong>: List of files to exclude when generating the XML documenting files.</p></li>
-<li><p><strong>exclude_paths(List) option</strong>: List of (relative) library paths to exclude when generating the XML documenting files.</p></li>
-<li><p><strong>exclude_entities(List) option</strong>: List of entities to exclude when generating the XML documenting files.</p></li>
-<li><p><strong>Known issues</strong>: The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.</p></li>
-</ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="lgtdoc_0.html#lgtdoc-0"><span class="std std-ref">lgtdoc</span></a></p>

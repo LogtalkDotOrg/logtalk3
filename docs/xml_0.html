@@ -251,6 +251,21 @@
 </div>
 </div>
 <p>(no dependencies on other entities)</p>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line"><em>On-line documentation:</em> <a class="reference external" href="https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog">https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog</a></div>
+<div class="line"><br /></div>
+<div class="line"><em>Compliance:</em> This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Compliance-strictness:</em> It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Compliance-comprehensive:</em> It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Bi-directional conversions:</em> The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -&gt; Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term malformed(&lt;attributes&gt;, &lt;content&gt;).</div>
+</div>
+</div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
@@ -278,7 +293,6 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
-<li><p><a class="reference internal" href="#remarks" id="id20">Remarks</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-interface">
@@ -584,16 +598,6 @@
 <div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="remarks">
-<h2><a class="toc-backref" href="#contents">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><strong>On-line documentation</strong>: <a class="reference external" href="https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog">https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog</a></p></li>
-<li><p><strong>Compliance</strong>: This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.</p></li>
-<li><p><strong>Compliance-strictness</strong>: It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.</p></li>
-<li><p><strong>Compliance-comprehensive</strong>: It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.</p></li>
-<li><p><strong>Bi-directional conversions</strong>: The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -&gt; Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term malformed(&lt;attributes&gt;, &lt;content&gt;).</p></li>
-</ul>
 </div>
 </div>
 

@@ -19,6 +19,11 @@ Redis client. Inspired by Sean Charles GNU Prolog Redis client.
 | **Provides:**
 |    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
+| **Remarks:**
+|    
+|    *Command representation:* Use the Redis command name as the functor of a compound term where the arguments are the command arguments.
+|    
+|    *Valid arguments:* Atoms, integers, and floats. Always use atoms instead of double-quoted "strings". This helps portability by not depending on the value of the double_quotes flag.
 
 .. contents::
    :local:
@@ -146,11 +151,4 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Command representation**: Use the Redis command name as the functor of a compound term where the arguments are the command arguments.
-
-* **Valid arguments**: Atoms, integers, and floats. Always use atoms instead of double-quoted "strings". This helps portability by not depending on the value of the double_quotes flag.
 

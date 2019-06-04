@@ -19,6 +19,9 @@ Portable random number generator predicates. Core predicates originally written 
 | **Implements:**
 |    ``public`` :ref:`randomp <randomp/0>`
 
+| **Remarks:**
+|    
+|    *Multiple random number generators:* To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.
 
 .. contents::
    :local:
@@ -100,11 +103,6 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Multiple random number generators**: To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.
 
 .. seealso::
 

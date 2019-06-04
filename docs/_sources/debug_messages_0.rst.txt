@@ -19,6 +19,9 @@ Supports selective enabling and disabling of debug and debug(Group) messages.
 | **Provides:**
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 
+| **Remarks:**
+|    
+|    *Limitations:* Debug messages are suppressed by the compiler when the "optimize" flag is turned on and thus cannot be enabled in this case.
 
 .. contents::
    :local:
@@ -205,9 +208,4 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Limitations**: Debug messages are suppressed by the compiler when the "optimize" flag is turned on and thus cannot be enabled in this case.
 

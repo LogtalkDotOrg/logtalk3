@@ -19,6 +19,8 @@ Intercepts unit test execution messages and outputs a report using the xUnit XML
 | **Provides:**
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 
+| **Remarks:**
+|    (none)
 
 .. contents::
    :local:
@@ -60,11 +62,6 @@ Table of messages emitted by the lgtunit tool when running tests.
 
 Operators
 ---------
-
-(none)
-
-Remarks
--------
 
 (none)
 

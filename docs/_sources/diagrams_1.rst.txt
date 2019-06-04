@@ -19,6 +19,11 @@ Predicates for generating all supported diagrams for libraries, directories, or 
 (no dependencies on other entities)
 
 
+| **Remarks:**
+|    
+|    *Common options:* title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.
+|    
+|    *Limitations:* Some of the provided predicates only make sense for some types of diagrams. Also, fine tuning may require generating individual diagrams directly instead of as a batch using this utility object.
 
 .. contents::
    :local:
@@ -499,11 +504,4 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Common options**: title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.
-
-* **Limitations**: Some of the provided predicates only make sense for some types of diagrams. Also, fine tuning may require generating individual diagrams directly instead of as a batch using this utility object.
 

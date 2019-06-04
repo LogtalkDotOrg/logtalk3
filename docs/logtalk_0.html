@@ -252,6 +252,35 @@
 </div>
 </div>
 <p>(no dependencies on other entities)</p>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line"><em>Message kinds:</em> The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Printing of silent messages:</em> By default, silent messages are not printed. These messages are only useful when intercepted.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Printing of banner and comment messages:</em> By default, banner and comment messages are only printed when the report flag is turned on.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Printing of help, information, and question messages:</em> These messages are always printed by default as they provide requested output.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Printing of warning messages:</em> By default, warning messages are not printed when the report flag is turned off.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Printing of error messages:</em> These messages are always printed by default.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Printing of debug messages:</em> By default, debug messages are only printed when the debug flag is turned on.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Meta messages:</em> A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.</div>
+<div class="line"><br /></div>
+<div class="line"><em>&#64;Message meta message:</em> By default, the message is printed as passed to the write/1 predicate followed by a newline.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Key-Value meta message:</em> By default, the message is printed as “Key: Value” followed by a newline. The value is printed as passed to the writeq/1 predicate.</div>
+<div class="line"><br /></div>
+<div class="line"><em>List meta message:</em> By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Title::List meta message:</em> By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</div>
+</div>
+</div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
@@ -284,7 +313,6 @@
 <li><p><a class="reference internal" href="#protected-interface" id="id25">Protected interface</a></p></li>
 <li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
 <li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
-<li><p><a class="reference internal" href="#remarks" id="id28">Remarks</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-interface">
@@ -774,23 +802,6 @@
 <div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="remarks">
-<h2><a class="toc-backref" href="#contents">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Message kinds</strong>: The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.</p></li>
-<li><p><strong>Printing of silent messages</strong>: By default, silent messages are not printed. These messages are only useful when intercepted.</p></li>
-<li><p><strong>Printing of banner and comment messages</strong>: By default, banner and comment messages are only printed when the report flag is turned on.</p></li>
-<li><p><strong>Printing of help, information, and question messages</strong>: These messages are always printed by default as they provide requested output.</p></li>
-<li><p><strong>Printing of warning messages</strong>: By default, warning messages are not printed when the report flag is turned off.</p></li>
-<li><p><strong>Printing of error messages</strong>: These messages are always printed by default.</p></li>
-<li><p><strong>Printing of debug messages</strong>: By default, debug messages are only printed when the debug flag is turned on.</p></li>
-<li><p><strong>Meta messages</strong>: A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.</p></li>
-<li><p><strong>&#64;Message meta message</strong>: By default, the message is printed as passed to the write/1 predicate followed by a newline.</p></li>
-<li><p><strong>Key-Value meta message</strong>: By default, the message is printed as “Key: Value” followed by a newline. The value is printed as passed to the writeq/1 predicate.</p></li>
-<li><p><strong>List meta message</strong>: By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</p></li>
-<li><p><strong>Title::List meta message</strong>: By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</p></li>
-</ul>
 </div>
 </div>
 

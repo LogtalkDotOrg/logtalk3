@@ -147,6 +147,6 @@ mv conf.py _conf.py
 mv browserconfig.xml browserconfig.xml.saved
 rm *.xml
 mv browserconfig.xml.saved browserconfig.xml
-rm *.rst
+# rm *.rst
 
 exit 0

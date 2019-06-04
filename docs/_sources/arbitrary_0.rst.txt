@@ -17,6 +17,37 @@ Adds predicates for generating random values for selected types to the library "
 
 
 
+| **Remarks:**
+|    
+|    *Logtalk specific types:* {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}
+|    
+|    *Prolog module related types (when the backend compiler supports modules):* {module, module_identifier, qualified_callable}
+|    
+|    *Base types from Prolog:* {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}
+|    
+|    *Atom derived types:* {atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}
+|    
+|    *Number derived types:* {positive_number, negative_number, non_positive_number, non_negative_number}
+|    
+|    *Float derived types:* {positive_float, negative_float, non_positive_float, non_negative_float, probability}
+|    
+|    *Integer derived types:* {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}
+|    
+|    *List types (compound derived types):* {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}
+|    
+|    *Other compound derived types:* {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}
+|    
+|    *Other types:* {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}
+|    
+|    *Registering new types:* New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.
+|    
+|    *Character sets:* {ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, unicode_full}
+|    
+|    *Default character sets:* The default character set when using a parameterizable type that takes a character set parameter depends on the type.
+|    
+|    *Default character sets:* Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.
+|    
+|    *Caveats:* The type argument to the predicates is not type-checked for performance reasons.
 
 .. contents::
    :local:
@@ -144,39 +175,6 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Logtalk specific types**: {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}
-
-* **Prolog module related types (when the backend compiler supports modules)**: {module, module_identifier, qualified_callable}
-
-* **Base types from Prolog**: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}
-
-* **Atom derived types**: {atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}
-
-* **Number derived types**: {positive_number, negative_number, non_positive_number, non_negative_number}
-
-* **Float derived types**: {positive_float, negative_float, non_positive_float, non_negative_float, probability}
-
-* **Integer derived types**: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}
-
-* **List types (compound derived types)**: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}
-
-* **Other compound derived types**: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}
-
-* **Other types**: {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}
-
-* **Registering new types**: New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.
-
-* **Character sets**: {ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, unicode_full}
-
-* **Default character sets**: The default character set when using a parameterizable type that takes a character set parameter depends on the type.
-
-* **Default character sets**: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.
-
-* **Caveats**: The type argument to the predicates is not type-checked for performance reasons.
 
 .. seealso::
 

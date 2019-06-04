@@ -19,6 +19,9 @@ Call goal with a time limit predicates.
 (no dependencies on other entities)
 
 
+| **Remarks:**
+|    
+|    *Supported backend Prolog systems:* B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.
 
 .. contents::
    :local:
@@ -68,9 +71,4 @@ Operators
 ---------
 
 (none)
-
-Remarks
--------
-
-* **Supported backend Prolog systems**: B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.
 

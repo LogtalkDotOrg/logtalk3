@@ -266,6 +266,17 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metric_0.html#code-metric-0"><span class="std std-ref">code_metric</span></a></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line"><em>Score range:</em> Score is a integer percentage where a 100% score means that all expected documentation information is present.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Score weights:</em> The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate entity_predicates_weights_hook/2.</div>
+<div class="line"><br /></div>
+<div class="line"><em>Score customization:</em> The individual scores of entity info/1 pairs and predicate info/2 pairs can be customized using the entity_info_pair_score_hook/3 and predicate_info_pair_score_hook/4 predicates.</div>
+</div>
+</div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-interface" id="id1">Public interface</a></p>
@@ -282,7 +293,6 @@
 <li><p><a class="reference internal" href="#protected-interface" id="id9">Protected interface</a></p></li>
 <li><p><a class="reference internal" href="#private-predicates" id="id10">Private predicates</a></p></li>
 <li><p><a class="reference internal" href="#operators" id="id11">Operators</a></p></li>
-<li><p><a class="reference internal" href="#remarks" id="id12">Remarks</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-interface">
@@ -439,14 +449,6 @@
 <div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="remarks">
-<h2><a class="toc-backref" href="#contents">Remarks</a><a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Score range</strong>: Score is a integer percentage where a 100% score means that all expected documentation information is present.</p></li>
-<li><p><strong>Score weights</strong>: The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate entity_predicates_weights_hook/2.</p></li>
-<li><p><strong>Score customization</strong>: The individual scores of entity info/1 pairs and predicate info/2 pairs can be customized using the entity_info_pair_score_hook/3 and predicate_info_pair_score_hook/4 predicates.</p></li>
-</ul>
 </div>
 </div>
 
