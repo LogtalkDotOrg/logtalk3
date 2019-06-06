@@ -4,6 +4,10 @@
 Predicate index
 ===============
 
+This index lists all entities *declaring* a given predicate. To load an entity providing the predicate that you want to call, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded.
+
+
+
 ``(/)/2``
 ---------
 
