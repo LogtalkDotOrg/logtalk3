@@ -20,7 +20,7 @@ The Logtalk Handbook
 
 .. toctree::
    :maxdepth: 3
-   :caption: Contents:
+   :caption: Contents
 
    userman/index
    refman/index

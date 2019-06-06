@@ -4,7 +4,7 @@
 ## 
 ##   XML documenting files to reStructuredText files conversion script
 ## 
-##   Last updated on February 26, 2019
+##   Last updated on June 6, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -128,7 +128,7 @@ create_index_file()
 
 		echo ".. toctree::" >> "$index_file"
 		echo "   :maxdepth: 3" >> "$index_file"
-		echo "   :caption: Contents:" >> "$index_file"
+		echo "   :caption: Contents" >> "$index_file"
 		echo "" >> "$index_file"
 		echo "   library_index" >> "$index_file"
 		echo "   directory_index" >> "$index_file"

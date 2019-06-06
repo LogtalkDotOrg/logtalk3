@@ -1,7 +1,7 @@
 
 .. _entity_index:
 
-Entity index
+Entities
 ============
 
 To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded.

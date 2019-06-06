@@ -74,7 +74,7 @@
 	<xsl:if test=".='library'">
 		<xsl:text>.. _library_index:</xsl:text>
 		<xsl:value-of select="$nl2" />
-		<xsl:text>Library index</xsl:text>
+		<xsl:text>Libraries</xsl:text>
 		<xsl:value-of select="$nl" />
 		<xsl:text>=============</xsl:text>
 		<xsl:value-of select="$nl2" />
@@ -84,7 +84,7 @@
 	<xsl:if test=".='directory'">
 		<xsl:text>.. _directory_index:</xsl:text>
 		<xsl:value-of select="$nl2" />
-		<xsl:text>Directory index</xsl:text>
+		<xsl:text>Directories</xsl:text>
 		<xsl:value-of select="$nl" />
 		<xsl:text>===============</xsl:text>
 		<xsl:value-of select="$nl2" />
@@ -94,7 +94,7 @@
 	<xsl:if test=".='entity'">
 		<xsl:text>.. _entity_index:</xsl:text>
 		<xsl:value-of select="$nl2" />
-		<xsl:text>Entity index</xsl:text>
+		<xsl:text>Entities</xsl:text>
 		<xsl:value-of select="$nl" />
 		<xsl:text>============</xsl:text>
 		<xsl:value-of select="$nl2" />
@@ -104,7 +104,7 @@
 	<xsl:if test=".='predicate'">
 		<xsl:text>.. _predicate_index:</xsl:text>
 		<xsl:value-of select="$nl2" />
-		<xsl:text>Predicate index</xsl:text>
+		<xsl:text>Predicates</xsl:text>
 		<xsl:value-of select="$nl" />
 		<xsl:text>===============</xsl:text>
 		<xsl:value-of select="$nl2" />
