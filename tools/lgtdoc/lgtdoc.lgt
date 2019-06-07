@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.13,
+		version is 4.14,
 		author is 'Paulo Moura',
-		date is 2019/05/04,
+		date is 2019/05/07,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -998,7 +998,7 @@
 		fail.
 	write_xml_object_relations(Stream, Entity) :-
 		object_property(Entity, provides(Functor/Arity, To, _)),
-			object_property(To, declares(Functor/Arity, Properties)),
+			entity_property(To, declares(Functor/Arity, Properties)),
 			(	member(non_terminal(Functor//Args), Properties) ->
 				write_xml_provides_relation(Stream, Entity, To, Functor//Args)
 			;	write_xml_provides_relation(Stream, Entity, To, Functor/Arity)
@@ -1032,7 +1032,7 @@
 		fail.
 	write_xml_category_relations(Stream, Entity) :-
 		category_property(Entity, provides(Functor/Arity, To, _)),
-			category_property(To, declares(Functor/Arity, Properties)),
+			entity_property(To, declares(Functor/Arity, Properties)),
 			(	member(non_terminal(Functor//Args), Properties) ->
 				write_xml_provides_relation(Stream, Entity, To, Functor//Args)
 			;	write_xml_provides_relation(Stream, Entity, To, Functor/Arity)

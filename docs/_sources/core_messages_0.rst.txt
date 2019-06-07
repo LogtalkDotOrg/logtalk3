@@ -16,9 +16,9 @@ Logtalk core (compiler and runtime) default message translations.
 |    ``static``
 
 
-| **Dependencies:**
-|   (none)
-
+| **Provides:**
+|    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 | **Remarks:**
 |    (none)
@@ -30,17 +30,17 @@ Logtalk core (compiler and runtime) default message translations.
 Public interface
 ----------------
 
-(none)
+(see related entities)
 
 Protected interface
 -------------------
 
-(none)
+(see related entities)
 
 Private predicates
 ------------------
 
-(none)
+(see related entities)
 
 Operators
 ---------
