@@ -22,10 +22,10 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.22,
+		version is 0.23,
 		author is 'Paulo Moura',
-		date is 2019/06/01,
-		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
+		date is 2019/06/07,
+		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
 	:- initialization((nl, write('For help on Logtalk, type help::help.'), nl, nl)).
@@ -42,8 +42,8 @@
 
 	help :-
 		nl,
-		write('On-line help is available for Logtalk built-in control constructs, directives,'), nl,
-		write('predicates, non-terminals, methods, and the standard library:'), nl, nl,
+		write('On-line help is available for Logtalk libraries, entities, plus built-in'), nl,
+		write('control constructs, directives, predicates, non-terminals, and methods:'), nl, nl,
 		write('    help::Functor/Arity.           help::Functor//Arity.'), nl,
 		write('    help::library.                 help::library(Library).'), nl,
 		write('    help::library(Entity).'), nl,
