@@ -190,13 +190,26 @@
 
 
 <xsl:template match="logtalk_entity/relations/provides" priority="1">
-	<xsl:text>|    :ref:`</xsl:text><xsl:value-of select="to" />::<xsl:value-of select="resource" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+	<xsl:text>|    :ref:`</xsl:text>
+	<xsl:call-template name="replace-string">
+		<xsl:with-param name="text" select="to" />
+		<xsl:with-param name="replace" select="'&#60;'" />
+		<xsl:with-param name="with" select="'\&#60;'" />
+	</xsl:call-template>
+	<xsl:text>::</xsl:text><xsl:value-of select="resource" />
+	<xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/uses" priority="1">
-	<xsl:text>|    :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+	<xsl:text>|    :ref:`</xsl:text>
+	<xsl:call-template name="replace-string">
+		<xsl:with-param name="text" select="name" />
+		<xsl:with-param name="replace" select="'&#60;'" />
+		<xsl:with-param name="with" select="'\&#60;'" />
+	</xsl:call-template>
+	<xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
@@ -208,7 +221,13 @@
 
 
 <xsl:template match="logtalk_entity/relations/*" priority="0">
-	<xsl:text>|    ``</xsl:text><xsl:value-of select="scope" /><xsl:text>`` :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+	<xsl:text>|    ``</xsl:text><xsl:value-of select="scope" /><xsl:text>`` :ref:`</xsl:text>
+	<xsl:call-template name="replace-string">
+		<xsl:with-param name="text" select="name" />
+		<xsl:with-param name="replace" select="'&#60;'" />
+		<xsl:with-param name="with" select="'\&#60;'" />
+	</xsl:call-template>
+	<xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
@@ -428,7 +447,13 @@
 		<xsl:value-of select="$nl2" />
 		<xsl:text>   </xsl:text>
 		<xsl:for-each select="reference">
-			<xsl:text>:ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+			<xsl:text>:ref:`</xsl:text>
+			<xsl:call-template name="replace-string">
+				<xsl:with-param name="text" select="name" />
+				<xsl:with-param name="replace" select="'&#60;'" />
+				<xsl:with-param name="with" select="'\&#60;'" />
+			</xsl:call-template>
+			<xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 			<xsl:if test="position() != last()">
 				<xsl:text>, </xsl:text>
 			</xsl:if>

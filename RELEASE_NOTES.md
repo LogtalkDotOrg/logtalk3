@@ -63,6 +63,9 @@ and the APIs.
 
 * IMPROVED: Entity protocol navigation in API documentation when using Sphinx.
 
+* FIXED: Workaround Sphinx HTML builder bug where it fails to escape special
+characters for the sole case of the `<` character in hyperlinks.
+
 Library
 -------
 
