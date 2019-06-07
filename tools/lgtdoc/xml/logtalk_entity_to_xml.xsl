@@ -18,7 +18,7 @@
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
 %
-%  Last updated on June 4, 2019
+%  Last updated on June 7, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -156,10 +156,6 @@
 			<dt class ="key">uses:</dt>
 				<xsl:apply-templates select="uses" />
 			</xsl:if>
-			<xsl:if test="calls">
-			<dt class ="key">calls:</dt>
-				<xsl:apply-templates select="calls" />
-			</xsl:if>
 			<xsl:if test="alias">
 			<dt class ="key">aliases:</dt>
 				<xsl:apply-templates select="alias" />
@@ -180,11 +176,6 @@
 
 
 <xsl:template match="logtalk_entity/relations/uses" priority="1">
-	<dd class ="value"><code><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
-</xsl:template>
-
-
-<xsl:template match="logtalk_entity/relations/calls" priority="1">
 	<dd class ="value"><code><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
