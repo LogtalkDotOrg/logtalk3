@@ -389,7 +389,7 @@
 			font-size="9pt"
 			margin-left="10mm">
 		<fo:inline font-family="monospace"><xsl:value-of select="name" /><xsl:text> </xsl:text><xsl:value-of select="original" /></fo:inline>
-		<fo:inline font-family="serif" font-style="italic"> aka </fo:inline>
+		<fo:inline font-family="serif" font-style="italic"> as </fo:inline>
 		<fo:inline font-family="monospace"><xsl:value-of select="alternative" /></fo:inline>
 	</fo:block>
 </xsl:template>

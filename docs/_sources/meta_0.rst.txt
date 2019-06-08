@@ -19,23 +19,23 @@ Some useful meta-predicates.
 | **Implements:**
 |    ``public`` :ref:`metap <metap/0>`
 | **Aliases:**
-|    ``metap`` ``map/2`` aka ``succeeds/2``
-|    ``metap`` ``map/2`` aka ``maplist/2``
-|    ``metap`` ``map/3`` aka ``maplist/3``
-|    ``metap`` ``map/4`` aka ``maplist/4``
-|    ``metap`` ``map/5`` aka ``maplist/5``
-|    ``metap`` ``map/6`` aka ``maplist/6``
-|    ``metap`` ``map/7`` aka ``maplist/7``
-|    ``metap`` ``map/8`` aka ``maplist/8``
-|    ``metap`` ``include/3`` aka ``filter/3``
-|    ``metap`` ``fold_left/4`` aka ``foldl/4``
-|    ``metap`` ``fold_left_1/3`` aka ``foldl1/3``
-|    ``metap`` ``fold_right/4`` aka ``foldr/4``
-|    ``metap`` ``fold_right_1/3`` aka ``foldr1/3``
-|    ``metap`` ``scan_left/4`` aka ``scanl/4``
-|    ``metap`` ``scan_left_1/3`` aka ``scanl1/3``
-|    ``metap`` ``scan_right/4`` aka ``scanr/4``
-|    ``metap`` ``scan_right_1/3`` aka ``scanr1/3``
+|    ``metap`` ``map/2`` as ``succeeds/2``
+|    ``metap`` ``map/2`` as ``maplist/2``
+|    ``metap`` ``map/3`` as ``maplist/3``
+|    ``metap`` ``map/4`` as ``maplist/4``
+|    ``metap`` ``map/5`` as ``maplist/5``
+|    ``metap`` ``map/6`` as ``maplist/6``
+|    ``metap`` ``map/7`` as ``maplist/7``
+|    ``metap`` ``map/8`` as ``maplist/8``
+|    ``metap`` ``include/3`` as ``filter/3``
+|    ``metap`` ``fold_left/4`` as ``foldl/4``
+|    ``metap`` ``fold_left_1/3`` as ``foldl1/3``
+|    ``metap`` ``fold_right/4`` as ``foldr/4``
+|    ``metap`` ``fold_right_1/3`` as ``foldr1/3``
+|    ``metap`` ``scan_left/4`` as ``scanl/4``
+|    ``metap`` ``scan_left_1/3`` as ``scanl1/3``
+|    ``metap`` ``scan_right/4`` as ``scanr/4``
+|    ``metap`` ``scan_right_1/3`` as ``scanr1/3``
 
 | **Remarks:**
 |    (none)

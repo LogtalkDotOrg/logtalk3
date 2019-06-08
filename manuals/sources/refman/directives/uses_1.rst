@@ -34,6 +34,11 @@ simplify experimenting with different object implementations of the same
 protocol when using explicit message sending. Object aliases are local
 to the object (or category) where they are defined.
 
+The objects being aliased can be :term:`parameter variables <parameter variable>`
+or parametric objects where one of more parameters are parameter variables
+when using the directive in a parametric object or a parametric category
+defined in a source file (the common case).
+
 Declaring multiple aliases for the same object are allowed. But repeated
 declarations of the same alias, declaring an alias for an object alias,
 and redefining an alias to reference a different object are reported as
@@ -55,31 +60,23 @@ Examples
 
 ::
 
-   :- object(foo(_HeapType_)).
+   :- object(foo(_HeapType_, _OptionsObject_)).
 
        :- uses([
-           difflist as dl,
            fast_random as rnd,
            time(utc) as time,
-           heap(_HeapType_) as heap
+           heap(_HeapType_) as heap,
+           _OptionsObject_ as options
        ]).
 
        bar :-
-           ...,
-           % the same as difflist::append(L1, L2, L)
-           dl::append(L1, L2, L),
-           ...
-
-       baz :-
            ...,
            % the same as fast_random::permutation(L, P)
            rnd::permutation(L, P),
            % the same as heap(_HeapType_)::as_heap(L, H)
            heap::as_heap(L, H),
-           ...
-
-       qux :-
-           ...,
+           % the same as _OptionsObject_::get(foo, X)
+           options::get(foo, X),
            % the same as time(utc)::now(T)
            time::now(T),
            ...

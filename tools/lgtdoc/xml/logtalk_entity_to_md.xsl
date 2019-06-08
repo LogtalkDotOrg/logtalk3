@@ -164,7 +164,7 @@
 
 
 <xsl:template match="logtalk_entity/relations/alias" priority="1">
-	<xsl:text>  * `</xsl:text><xsl:value-of select="name" /><xsl:text>` `</xsl:text><xsl:value-of select="original" /><xsl:text>` aka `</xsl:text><xsl:value-of select="alternative" /><xsl:text>`</xsl:text>
+	<xsl:text>  * `</xsl:text><xsl:value-of select="name" /><xsl:text>` `</xsl:text><xsl:value-of select="original" /><xsl:text>` as `</xsl:text><xsl:value-of select="alternative" /><xsl:text>`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 

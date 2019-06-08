@@ -28,7 +28,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * ADDED: Object and category `uses/1` directive to support the declaration of
-object aliases.
+object aliases. The aliased object can be a parameter variable when using the
+directive in a parametric object or a parametric category.
 
 * ADDED: The object argument in a `uses/2` directive and the module argument
 in a `use_module/2` directive can now be a parameter variable when using the

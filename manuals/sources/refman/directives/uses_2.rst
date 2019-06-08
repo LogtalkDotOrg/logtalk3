@@ -60,10 +60,10 @@ performance, the objects should be loaded before compiling the entities
 that call their predicates.
 
 The object identifier argument can also be a :term:`parameter variable`
-when using the directive in a parametric object or a parametric category.
-In this case, dynamic binding will be used for all listed predicates (and
-non-terminals). The parameter variable must be instantiated at runtime
-when the messages are sent.
+when using the directive in a parametric object or a parametric category
+defined in a source file (the common case). In this case, dynamic binding
+will be used for all listed predicates (and non-terminals). The parameter
+variable must be instantiated at runtime when the messages are sent.
 
 Template and modes
 ------------------

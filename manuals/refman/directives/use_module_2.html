@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>use_module/2 &mdash; The Logtalk Handbook v3.27.0-b10 documentation</title>
+  <title>use_module/2 &mdash; The Logtalk Handbook v3.27.0-b11 documentation</title>
   
 
   
@@ -262,10 +262,10 @@ the compiler to check if the called module predicate is a meta-predicate
 and retrieve its meta-predicate template to ensure proper call compilation.</p>
 </div>
 <p>The module identifier argument can also be a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a>
-when using the directive in a parametric object or a parametric category.
-In this case, dynamic binding will be used for all listed predicates (and
-non-terminals). The parameter variable must be instantiated at runtime
-when the calls are made.</p>
+when using the directive in a parametric object or a parametric category
+defined in a source file (the common case). In this case, dynamic binding
+will be used for all listed predicates (and non-terminals). The parameter
+variable must be instantiated at runtime when the calls are made.</p>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
@@ -298,9 +298,18 @@ foo <span class="o">:-</span>
     ...
 </pre></div>
 </div>
+<p>An example of using a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a> in place of the module:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bar(<span class="nv">_OptionsModule_</span>)).
+
+<span class="p">    :- </span><span class="k">use_module</span>(<span class="nv">_OptionsModule_</span>, [
+        set<span class="o">/</span><span class="m">2</span>, get<span class="o">/</span><span class="m">2</span>, reset<span class="o">/</span><span class="m">0</span>
+    ])
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a></p>
+<p><a class="reference internal" href="uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>,
+<a class="reference internal" href="uses_1.html#directives-uses-1"><span class="std std-ref">uses/1</span></a></p>
 </div>
 </div>
 </div>

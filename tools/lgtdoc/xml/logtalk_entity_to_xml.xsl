@@ -181,7 +181,7 @@
 
 
 <xsl:template match="logtalk_entity/relations/alias" priority="1">
-	<dd class ="value"><code><xsl:value-of select="name" /><xsl:text> </xsl:text><xsl:value-of select="original" /></code><em> aka </em><code><xsl:value-of select="alternative" /></code></dd>
+	<dd class ="value"><code><xsl:value-of select="name" /><xsl:text> </xsl:text><xsl:value-of select="original" /></code><em> as </em><code><xsl:value-of select="alternative" /></code></dd>
 </xsl:template>
 
 

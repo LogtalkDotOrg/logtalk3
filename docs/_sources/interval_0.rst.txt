@@ -19,19 +19,19 @@ Basic temporal interval relations. An interval is represented by a compound term
 | **Implements:**
 |    ``public`` :ref:`intervalp <intervalp/0>`
 | **Aliases:**
-|    ``intervalp`` ``before/2`` aka ``b/2``
-|    ``intervalp`` ``after/2`` aka ``bi/2``
-|    ``intervalp`` ``meets/2`` aka ``m/2``
-|    ``intervalp`` ``met_by/2`` aka ``mi/2``
-|    ``intervalp`` ``overlaps/2`` aka ``o/2``
-|    ``intervalp`` ``overlapped_by/2`` aka ``oi/2``
-|    ``intervalp`` ``starts/2`` aka ``s/2``
-|    ``intervalp`` ``started_by/2`` aka ``si/2``
-|    ``intervalp`` ``during/2`` aka ``d/2``
-|    ``intervalp`` ``contains/2`` aka ``di/2``
-|    ``intervalp`` ``contains/2`` aka ``f/2``
-|    ``intervalp`` ``finished_by/2`` aka ``fi/2``
-|    ``intervalp`` ``equal/2`` aka ``eq/2``
+|    ``intervalp`` ``before/2`` as ``b/2``
+|    ``intervalp`` ``after/2`` as ``bi/2``
+|    ``intervalp`` ``meets/2`` as ``m/2``
+|    ``intervalp`` ``met_by/2`` as ``mi/2``
+|    ``intervalp`` ``overlaps/2`` as ``o/2``
+|    ``intervalp`` ``overlapped_by/2`` as ``oi/2``
+|    ``intervalp`` ``starts/2`` as ``s/2``
+|    ``intervalp`` ``started_by/2`` as ``si/2``
+|    ``intervalp`` ``during/2`` as ``d/2``
+|    ``intervalp`` ``contains/2`` as ``di/2``
+|    ``intervalp`` ``contains/2`` as ``f/2``
+|    ``intervalp`` ``finished_by/2`` as ``fi/2``
+|    ``intervalp`` ``equal/2`` as ``eq/2``
 
 | **Remarks:**
 |    (none)

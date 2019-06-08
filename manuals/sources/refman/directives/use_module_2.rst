@@ -76,10 +76,10 @@ module file.
    and retrieve its meta-predicate template to ensure proper call compilation.
 
 The module identifier argument can also be a :term:`parameter variable`
-when using the directive in a parametric object or a parametric category.
-In this case, dynamic binding will be used for all listed predicates (and
-non-terminals). The parameter variable must be instantiated at runtime
-when the calls are made.
+when using the directive in a parametric object or a parametric category
+defined in a source file (the common case). In this case, dynamic binding
+will be used for all listed predicates (and non-terminals). The parameter
+variable must be instantiated at runtime when the calls are made.
 
 Template and modes
 ------------------
@@ -115,6 +115,17 @@ Examples
        retractall(bar(_)),
        ...
 
+An example of using a :term:`parameter variable` in place of the module:
+
+::
+
+   :- object(bar(_OptionsModule_)).
+
+       :- use_module(_OptionsModule_, [
+           set/2, get/2, reset/0
+       ])
+
 .. seealso::
 
-   :ref:`directives_uses_2`
+   :ref:`directives_uses_2`,
+   :ref:`directives_uses_1`

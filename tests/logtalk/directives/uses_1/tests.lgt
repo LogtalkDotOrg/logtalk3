@@ -24,27 +24,30 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/06/03,
+		date is 2019/06/08,
 		comment is 'Unit tests for the uses/1 built-in directive.'
 	]).
 
 	test(uses_1_01, true(List == [1,2,3])) :-
 		findall(X, obj::p(X), List).
 
+	test(uses_1_02, true(List == [1,2,3])) :-
+		findall(X, obj(list)::p(X), List).
+
 	% multiple aliases for the same object are allowed
-	test(uses_1_02, true) :-
+	test(uses_1_03, true) :-
 		create_object(_, [], [uses([o as a, o as b])], []).
 
 	% repeated declarations of the same alias for the same object are not allowed
-	test(uses_1_03, error(permission_error(repeat,object_alias,a))) :-
+	test(uses_1_04, error(permission_error(repeat,object_alias,a))) :-
 		create_object(_, [], [uses([o as a, o as a])], []).
 
-	% redefinind an alias to reference another object is not allowed
-	test(uses_1_04, error(permission_error(modify,object_alias,a))) :-
+	% redefining an alias to reference another object is not allowed
+	test(uses_1_05, error(permission_error(modify,object_alias,a))) :-
 		create_object(_, [], [uses([o1 as a, o2 as a])], []).
 
 	% defining an alias of an alias is not allowed
-	test(uses_1_05, error(permission_error(create,alias_alias,b))) :-
+	test(uses_1_06, error(permission_error(create,alias_alias,b))) :-
 		create_object(_, [], [uses([o as a, a as b])], []).
 
 :- end_object.

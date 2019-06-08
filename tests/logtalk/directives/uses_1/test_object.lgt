@@ -29,3 +29,16 @@
 		l::member(X, [1,2,3]).
 
 :- end_object.
+
+
+:- object(obj(_ListObject_)).
+
+	:- uses([
+		_ListObject_ as l
+	]).
+
+	:- public(p/1).
+	p(X) :-
+		l::member(X, [1,2,3]).
+
+:- end_object.

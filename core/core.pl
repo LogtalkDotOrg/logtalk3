@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 27, 0, b10)).
+'$lgt_version_data'(logtalk(3, 27, 0, b11)).
 
 
 
@@ -10061,6 +10061,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_uses_directive'(_, Argument, _) :-
 	throw(type_error(list, Argument)).
 
+
+'$lgt_compile_uses_directive_alias'(Obj as Alias, Argument, Ctx) :-
+	var(Obj),
+	'$lgt_pp_term_variable_names_file_lines_'((:- uses(Argument)), VariableNames, _, _),
+	'$lgt_member'(VariableName=Variable, VariableNames),
+	Obj == Variable,
+	'$lgt_pp_parameter_variables_'(ParameterVariablePairs),
+	'$lgt_member'(VariableName-_, ParameterVariablePairs),
+	% object argument is a parameter variable
+	!,
+	'$lgt_check'(object_identifier, Alias),
+	(	\+ \+ ('$lgt_pp_object_alias_'(Other, Alias, _), Obj == Other) ->
+		throw(permission_error(repeat, object_alias, Alias))
+	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias, _) ->
+		throw(permission_error(modify, object_alias, Alias))
+	;	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+		assertz('$lgt_pp_object_alias_'(Obj, Alias, NewCtx))
+	).
 
 '$lgt_compile_uses_directive_alias'(Obj as Alias, Argument, Ctx) :-
 	!,
