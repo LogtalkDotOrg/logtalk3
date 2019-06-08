@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on June 7, 2019
+%  Last updated on June 8, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -71,6 +71,8 @@
 	</xsl:call-template>
 	<xsl:value-of select="$nl" />
 	<xsl:text>.. _</xsl:text><xsl:value-of select="logtalk_entity/entity/functor" /><xsl:text>:</xsl:text>
+	<xsl:value-of select="$nl2" />
+	<xsl:text>.. rst-class:: right</xsl:text>
 	<xsl:value-of select="$nl2" />
 	<xsl:text>**</xsl:text><xsl:value-of select="logtalk_entity/entity/type" /><xsl:text>**</xsl:text>
 	<xsl:value-of select="$nl2" />
