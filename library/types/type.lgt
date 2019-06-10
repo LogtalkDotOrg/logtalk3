@@ -21,7 +21,7 @@
 :- object(type).
 
 	:- info([
-		version is 1.25,
+		version is 1.26,
 		author is 'Paulo Moura',
 		date is 2019/06/10,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
@@ -29,7 +29,7 @@
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
 			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier, qualified_callable}',
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
-			'Atom derived types' - '{atom(CharSet), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}',
+			'Atom derived types' - '{atom(CharSet), atom(CharSet,Length), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}',
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}',
@@ -178,6 +178,7 @@
 	type(operator_priority).
 	% atom derived types
 	type(atom(_Charset)).
+	type(atom(_Charset, _Length)).
 	type(non_empty_atom).
 	type(non_empty_atom(_Charset)).
 	type(boolean).
@@ -501,6 +502,20 @@
 			catch(check(list(character_code(CharSet)), Codes), _, fail) ->
 			true
 		;	throw(type_error(atom(CharSet), Term))
+		).
+
+	check(atom(CharSet, Length), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	atom(Term),
+			(	atom_length(Term, Length) ->
+				true
+			;	throw(type_error(atom(CharSet,Length), Term))
+			),
+			atom_codes(Term, Codes),
+			catch(check(list(character_code(CharSet)), Codes), _, fail) ->
+			true
+		;	throw(type_error(atom(CharSet,Length), Term))
 		).
 
 	check(non_empty_atom, Term) :-

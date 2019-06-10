@@ -33,7 +33,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2.9,
+		version is 2.11,
 		author is 'Paulo Moura',
 		date is 2019/06/10,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -168,6 +168,7 @@
 	arbitrary(order).
 	arbitrary(non_empty_atom).
 	arbitrary(atom(_CharSet)).
+	arbitrary(atom(_CharSet, _Length)).
 	arbitrary(non_empty_atom(_CharSet)).
 	arbitrary(operator_specifier).
 	% compound derived types
@@ -369,6 +370,10 @@
 
 	arbitrary(atom(CharSet), Arbitrary) :-
 		arbitrary(list(character_code(CharSet)), Codes),
+		atom_codes(Arbitrary, Codes).
+
+	arbitrary(atom(CharSet,Length), Arbitrary) :-
+		arbitrary(list(character_code(CharSet),Length), Codes),
 		atom_codes(Arbitrary, Codes).
 
 	arbitrary(non_empty_atom(CharSet), Arbitrary) :-

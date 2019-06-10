@@ -92,8 +92,9 @@ library.
 * MOVED: The dictionary protocol and implementations from the `types` library
 to a separate `dictionaries` library.
 
-* ADDED: Types `list(Type,Length)` and `list(Type,Length,Min,Max)` with support
-for generating and shrinking arbitrary values.
+* ADDED: Types `list(Type,Length)`, `list(Type,Length,Min,Max)`, and
+`atom(CharSet,Length)` with support for generating and shrinking arbitrary
+values.
 
 * ADDED: Additional edge cases for numbers when using a backend Prolog compiler
 with bounded arithmetic.
