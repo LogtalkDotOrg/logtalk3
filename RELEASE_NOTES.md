@@ -154,6 +154,9 @@ Sphinx output.
 * IMPROVED: The `lgtdoc` tool generated XML documenting files now include
 information about `uses` relations.
 
+* IMPROVED: The `lgtunit` tool QuickCheck implementation now ensures that
+generated values for `++Type` arguments are indeed ground.
+
 * UPDATED: The `help` tool to open the library documentation index when calling
 the `library/1` predicate with a valid library name.
 

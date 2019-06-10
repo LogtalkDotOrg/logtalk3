@@ -33,7 +33,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
 		date is 2019/06/10,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -1057,6 +1057,7 @@
 	% other
 	edge_case(callable, true).
 	edge_case(callable, fail).
+	edge_case(callable, false).
 	edge_case(callable, '').
 	edge_case(between(_, Lower, _), Lower).
 	edge_case(between(_, _, Upper), Upper).
@@ -1068,7 +1069,8 @@
 	edge_case(ground, 0.0).
 	edge_case(ground, []).
 	edge_case(ground(Type), Term) :-
-		edge_case(Type, Term).
+		edge_case(Type, Term),
+		ground(Term).
 	edge_case(types(Types), Term) :-
 		list::member(Type, Types),
 		edge_case(Type, Term).

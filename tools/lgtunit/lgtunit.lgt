@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.8,
+		version is 7.9,
 		author is 'Paulo Moura',
-		date is 2019/05/27,
+		date is 2019/06/10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1639,9 +1639,9 @@
 	generate_arbitrary_argument('--'(_), _, _).
 	generate_arbitrary_argument('-'(_), _, _).
 	generate_arbitrary_argument('++'(Type), Arbitrary, Test) :-
-		(	type_test_edge_case(Type, Test, Arbitrary) ->
+		(	type_test_edge_case(ground(Type), Test, Arbitrary) ->
 			true
-		;	arbitrary(Type, Arbitrary)
+		;	arbitrary(ground(Type), Arbitrary)
 		).
 	generate_arbitrary_argument('+'(Type), Arbitrary, Test) :-
 		(	type_test_edge_case(Type, Test, Arbitrary) ->
