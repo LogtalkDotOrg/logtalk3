@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.24,
+		version is 1.25,
 		author is 'Paulo Moura',
-		date is 2019/03/25,
+		date is 2019/06/10,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -33,7 +33,7 @@
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}',
-			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}',
+			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}',
@@ -55,7 +55,7 @@
 			'Registering new types' - 'New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.',
 			'Meta-types' - 'Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.',
 			'Character sets' - 'When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.',
-			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.'
+			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.'
 		],
 		see_also is [arbitrary, os_types]
 	]).
@@ -199,7 +199,9 @@
 	type(partial_list).
 	type(list_or_partial_list).
 	type(list(_Type)).
+	type(list(_Type, _Length)).
 	type(list(_Type, _Min, _Max)).
+	type(list(_Type, _Length, _Min, _Max)).
 	type(non_empty_list(_Type)).
 	type(difference_list).
 	type(difference_list(_Type)).
@@ -903,6 +905,14 @@
 		;	throw(type_error(list(Type), Term))
 		).
 
+	check(list(Type, Length), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	is_list(Term, 0, Length) ->
+			is_list_of_type(Term, Type)
+		;	throw(type_error(list(Type,Length), Term))
+		).
+
 	check(list(Type, Min, Max), Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
@@ -918,6 +928,23 @@
 			;	true
 			)
 		;	throw(type_error(list(Type,Min,Max), Term))
+		).
+
+	check(list(Type, Length, Min, Max), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ is_list(Term, 0, Length) ->
+			throw(type_error(list(Type,Length,Min,Max), Term))
+		;	is_list_of_type(Term, Type) ->
+			(	list::min(Term, MinOfTerm),
+				MinOfTerm @< Min ->
+				throw(type_error(list(Type,Length,Min,Max), Term))
+			;	list::max(Term, MaxOfTerm),
+				MaxOfTerm @> Max ->
+				throw(type_error(list(Type,Length,Min,Max), Term))
+			;	true
+			)
+		;	throw(type_error(list(Type,Length,Min,Max), Term))
 		).
 
 	check(non_empty_list(Type), Term) :-
@@ -1139,6 +1166,15 @@
 	is_list([]).
 	is_list([_| Tail]) :-
 		is_list(Tail).
+
+	is_list(Var, _, _) :-
+		var(Var),
+		!,
+		fail.
+	is_list([], Length, Length).
+	is_list([_| Tail], Length0, Length) :-
+		Length1 is Length0 + 1,
+		is_list(Tail, Length1, Length).
 
 	is_partial_list(Var) :-
 		var(Var),

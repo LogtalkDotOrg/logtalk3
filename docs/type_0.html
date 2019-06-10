@@ -262,8 +262,8 @@
 <p>Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.24</div>
-<div class="line"><strong>Date:</strong> 2019/3/25</div>
+<div class="line"><strong>Version:</strong> 1.25</div>
+<div class="line"><strong>Date:</strong> 2019/6/10</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -289,7 +289,7 @@
 <li><p><em>Number derived types:</em> {positive_number, negative_number, non_positive_number, non_negative_number}</p></li>
 <li><p><em>Float derived types:</em> {positive_float, negative_float, non_positive_float, non_negative_float, probability}</p></li>
 <li><p><em>Integer derived types:</em> {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}</p></li>
-<li><p><em>List types (compound derived types):</em> {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}</p></li>
+<li><p><em>List types (compound derived types):</em> {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}</p></li>
 <li><p><em>Other compound derived types:</em> {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}</p></li>
 <li><p><em>Stream types:</em> {stream, stream_or_alias, stream(Property), stream_or_alias(Property)}</p></li>
 <li><p><em>Other types:</em> {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}</p></li>
@@ -311,7 +311,7 @@
 <li><p><em>Registering new types:</em> New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</p></li>
 <li><p><em>Meta-types:</em> Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.</p></li>
 <li><p><em>Character sets:</em> When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.</p></li>
-<li><p><em>Caveats:</em> The type argument to the predicates is never itself type-checked for performance reasons.</p></li>
+<li><p><em>Caveats:</em> The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>
 </ul>
 </div></blockquote>
 <div class="contents local topic" id="contents">

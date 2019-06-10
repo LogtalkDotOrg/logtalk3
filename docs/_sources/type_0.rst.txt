@@ -11,8 +11,8 @@
 Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1.24
-| **Date:** 2019/3/25
+| **Version:** 1.25
+| **Date:** 2019/6/10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(restrict)``
@@ -38,7 +38,7 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 
    - *Integer derived types:* {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}
 
-   - *List types (compound derived types):* {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}
+   - *List types (compound derived types):* {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}
 
    - *Other compound derived types:* {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}
 
@@ -82,7 +82,7 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 
    - *Character sets:* When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.
 
-   - *Caveats:* The type argument to the predicates is never itself type-checked for performance reasons.
+   - *Caveats:* The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.
 
 .. contents::
    :local:

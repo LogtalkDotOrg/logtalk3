@@ -240,8 +240,8 @@
 <p>Adds predicates for generating random values for selected types to the library “type” object.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2.8</div>
-<div class="line"><strong>Date:</strong> 2019/5/24</div>
+<div class="line"><strong>Version:</strong> 2.9</div>
+<div class="line"><strong>Date:</strong> 2019/6/10</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -270,14 +270,14 @@
 <li><p><em>Number derived types:</em> {positive_number, negative_number, non_positive_number, non_negative_number}</p></li>
 <li><p><em>Float derived types:</em> {positive_float, negative_float, non_positive_float, non_negative_float, probability}</p></li>
 <li><p><em>Integer derived types:</em> {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}</p></li>
-<li><p><em>List types (compound derived types):</em> {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}</p></li>
+<li><p><em>List types (compound derived types):</em> {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}</p></li>
 <li><p><em>Other compound derived types:</em> {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}</p></li>
 <li><p><em>Other types:</em> {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}</p></li>
 <li><p><em>Registering new types:</em> New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.</p></li>
 <li><p><em>Character sets:</em> {ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, unicode_full}</p></li>
 <li><p><em>Default character sets:</em> The default character set when using a parameterizable type that takes a character set parameter depends on the type.</p></li>
 <li><p><em>Default character sets:</em> Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.</p></li>
-<li><p><em>Caveats:</em> The type argument to the predicates is not type-checked for performance reasons.</p></li>
+<li><p><em>Caveats:</em> The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>
 </ul>
 </div></blockquote>
 <div class="contents local topic" id="contents">

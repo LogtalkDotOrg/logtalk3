@@ -33,9 +33,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2019/05/24,
+		date is 2019/06/10,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -45,14 +45,14 @@
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}',
-			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type), codes (same as list(character_code)), chars (same as list(character))}',
+			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
 			'Registering new types' - 'New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
 			'Character sets' - '{ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, unicode_full}',
 			'Default character sets' - 'The default character set when using a parameterizable type that takes a character set parameter depends on the type.',
 			'Default character sets' - 'Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ascii_identifier functor. Character and character code types default to ascii_full. Other types default to ascii_printable.',
-			'Caveats' - 'The type argument to the predicates is not type-checked for performance reasons.'
+			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.'
 		],
 		see_also is [type]
 	]).
@@ -179,8 +179,10 @@
 	arbitrary(list).
 	arbitrary(non_empty_list).
 	arbitrary(list(_Type)).
+	arbitrary(list(_Type, _Length)).
 	arbitrary(non_empty_list(_Type)).
 	arbitrary(list(_Type, _Min, _Max)).
+	arbitrary(list(_Type, _Length, _Min, _Max)).
 	arbitrary(difference_list).
 	arbitrary(difference_list(_Type)).
 	arbitrary(codes).
@@ -520,6 +522,10 @@
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type).
 
+	arbitrary(list(Type,Length), Arbitrary) :-
+		length(Arbitrary, Length),
+		map_arbitrary(Arbitrary, Type).
+
 	arbitrary(non_empty_list(Type), Arbitrary) :-
 		between(1, 42, Length),
 		length(Arbitrary, Length),
@@ -527,6 +533,10 @@
 
 	arbitrary(list(Type,Min,Max), Arbitrary) :-
 		between(0, 42, Length),
+		length(Arbitrary, Length),
+		map_arbitrary(Arbitrary, Type, Min, Max).
+
+	arbitrary(list(Type,Length,Min,Max), Arbitrary) :-
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type, Min, Max).
 
@@ -642,8 +652,10 @@
 	shrinker(list).
 	shrinker(non_empty_list).
 	shrinker(list(_Type)).
+	shrinker(list(_Type, _Length)).
 	shrinker(non_empty_list(_Type)).
 	shrinker(list(_Type, _Min, _Max)).
+	shrinker(list(_Type, _Length, _Min, _Max)).
 	shrinker(difference_list).
 	shrinker(difference_list(_Type)).
 	shrinker(codes).
@@ -801,6 +813,9 @@
 	shrink(list(Type), Large, Small) :-
 		shrink_list(Large, Type, Small).
 
+	shrink(list(Type,_Length), Large, Small) :-
+		shrink_list_elements(Large, Type, Small).
+
 	shrink(non_empty_list, Large, Small) :-
 		shrink_list(Large, term, Small),
 		Small \== [].
@@ -811,6 +826,9 @@
 
 	shrink(list(Type,Lower,Upper), Large, Small) :-
 		shrink_list(Large, between(Type,Lower,Upper), Small).
+
+	shrink(list(Type,_Length,Lower,Upper), Large, Small) :-
+		shrink_list_elements(Large, between(Type,Lower,Upper), Small).
 
 	shrink(difference_list, Large-Back, Small) :-
 		Large \== Back,
@@ -994,10 +1012,25 @@
 	edge_case(list(_), []).
 	edge_case(list(Type), [Term]) :-
 		edge_case(Type, Term).
+	edge_case(list(_, Length), []) :-
+		Length >= 0.
+	edge_case(list(Type, Length), [Term]) :-
+		Length >= 1,
+		edge_case(Type, Term).
 	edge_case(list(_, _, _), []).
 	edge_case(list(_, Min, _), [Min]).
 	edge_case(list(_, _, Max), [Max]).
 	edge_case(list(Type, Min, Max), [Term]) :-
+		edge_case(Type, Term),
+		Min @< Term, Term @< Max.
+	edge_case(list(_, Length, _, _), []) :-
+		Length >= 0.
+	edge_case(list(_, Length, Min, _), [Min]) :-
+		Length >= 1.
+	edge_case(list(_, Length, _, Max), [Max]) :-
+		Length >= 1.
+	edge_case(list(Type, Length, Min, Max), [Term]) :-
+		Length >= 1,
 		edge_case(Type, Term),
 		Min @< Term, Term @< Max.
 	edge_case(difference_list, Back-Back).
