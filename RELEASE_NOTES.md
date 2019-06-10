@@ -97,7 +97,10 @@ to a separate `dictionaries` library.
 values.
 
 * ADDED: Additional edge cases for numbers when using a backend Prolog compiler
-with bounded arithmetic.
+with bounded arithmetic. Additional edge cases for the `callable` type.
+
+ADDED: Edge cases for the `ground`, `ground(Type)`, `types(Types)`, and
+`var_or(Type)` types.
 
 * ADDED: Predicate `values/2` to the `dictionaries` library protocol.
 

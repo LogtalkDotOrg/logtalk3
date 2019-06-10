@@ -33,7 +33,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
 		date is 2019/06/10,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -953,10 +953,12 @@
 
 	% edge_case/2
 
+	% atoms
 	edge_case(atom, '').
 	edge_case(atom(_), '').
 	edge_case(atom(_, Length), '') :-
 		Length >= 0.
+	% atomics
 	edge_case(atomic, '').
 	edge_case(atomic, 0).
 	edge_case(atomic, 0.0).
@@ -1055,14 +1057,25 @@
 	% other
 	edge_case(callable, true).
 	edge_case(callable, fail).
+	edge_case(callable, '').
 	edge_case(between(_, Lower, _), Lower).
 	edge_case(between(_, _, Upper), Upper).
 	edge_case(between(Type, Lower, Upper), Term) :-
 		edge_case(Type, Term),
 		Lower @< Term, Term @< Upper.
+	edge_case(ground, '').
+	edge_case(ground, 0).
+	edge_case(ground, 0.0).
+	edge_case(ground, []).
+	edge_case(ground(Type), Term) :-
+		edge_case(Type, Term).
+	edge_case(types(Types), Term) :-
+		list::member(Type, Types),
+		edge_case(Type, Term).
+	edge_case(var_or(Type), Term) :-
+		edge_case(Type, Term).
 
-	% auxiliary predicates; we could use the Logtalk standard library
-	% for some of them but we prefer to avoid any object dependencies
+	% auxiliary predicates
 
 	arbitrary_between(Type, Lower, Upper, Arbitrary) :-
 		repeat,
