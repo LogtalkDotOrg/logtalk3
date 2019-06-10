@@ -133,4 +133,5 @@ implementations of the same protocol:
 .. seealso::
 
    :ref:`directives_use_module_2`,
-   :ref:`directives_uses_1`
+   :ref:`directives_uses_1`,
+   :ref:`directives_alias_2`

@@ -128,4 +128,5 @@ An example of using a :term:`parameter variable` in place of the module:
 .. seealso::
 
    :ref:`directives_uses_2`,
-   :ref:`directives_uses_1`
+   :ref:`directives_uses_1`,
+   :ref:`directives_alias_2`

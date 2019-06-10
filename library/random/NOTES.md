@@ -55,7 +55,7 @@ by defining derived objects. For example:
 
 The `fast_random` object also implements a portable random number
 generator but does not support deriving multiple random number
-generators.
+generators, which makes it a bit faster than the `random` object.
 
 The `random` and `fast_random` objects manage the random number generator
 seed using internal dynamic state. The predicates that update the seed
