@@ -955,6 +955,8 @@
 
 	edge_case(atom, '').
 	edge_case(atom(_), '').
+	edge_case(atom(_, Length), '') :-
+		Length >= 0.
 	edge_case(atomic, '').
 	edge_case(atomic, 0).
 	edge_case(atomic, 0.0).
