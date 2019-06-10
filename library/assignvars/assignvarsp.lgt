@@ -19,8 +19,8 @@
 
 
 /*
-This file contains a protocol for the predicates used for logical assignment 
-of Prolog terms developed by Nobukuni Kino. For more information, please 
+This file contains a protocol for the predicates used for logical assignment
+of Prolog terms developed by Nobukuni Kino. For more information, please
 consult the URL http://www.kprolog.com/en/logical_assignment/
 */
 
@@ -28,15 +28,15 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 :- protocol(assignvarsp).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2015/07/31,
+		date is 2019/06/10,
 		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms) protocol.',
 		see_also is [assignvars]
 	]).
 
 	:- public(assignable/1).
-	:- mode(assignable(-assignvar), one).
+	:- mode(assignable(--assignvar), one).
 	:- info(assignable/1, [
 		comment is 'Makes Variable an assignable variable. Initial state will be empty.',
 		argnames is ['Variable'],
@@ -46,7 +46,7 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 	]).
 
 	:- public(assignable/2).
-	:- mode(assignable(-assignvar, @nonvar), one).
+	:- mode(assignable(--assignvar, @nonvar), one).
 	:- info(assignable/2, [
 		comment is 'Makes Variable an assignable variable and sets its initial state to Value.',
 		argnames is ['Variable', 'Value'],

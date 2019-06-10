@@ -11,8 +11,8 @@
 Assignable variables (supporting backtracable assignement of non-variable terms) protocol.
 
 | **Author:** Nobukuni Kino and Paulo Moura
-| **Version:** 1.0
-| **Date:** 2015/7/31
+| **Version:** 1.01
+| **Date:** 2019/6/10
 
 | **Compilation flags:**
 |    ``static``
@@ -50,7 +50,7 @@ Makes Variable an assignable variable. Initial state will be empty.
 | **Template:**
 |    ``assignable(Variable)``
 | **Mode and number of proofs:**
-|    ``assignable(-assignvar)`` - ``one``
+|    ``assignable(--assignvar)`` - ``one``
 
 | **Exceptions:**
 |    Variable is not a variable:
@@ -75,7 +75,7 @@ Makes Variable an assignable variable and sets its initial state to Value.
 | **Template:**
 |    ``assignable(Variable,Value)``
 | **Mode and number of proofs:**
-|    ``assignable(-assignvar,@nonvar)`` - ``one``
+|    ``assignable(--assignvar,@nonvar)`` - ``one``
 
 | **Exceptions:**
 |    Variable is not a variable:
