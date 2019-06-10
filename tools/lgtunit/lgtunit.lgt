@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.9,
+		version is 7.11,
 		author is 'Paulo Moura',
 		date is 2019/06/10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
@@ -1620,68 +1620,74 @@
 
 	:- meta_predicate(run_quick_check_test(*, *, *, *, *, *, *)).
 	run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaximumNumberOfShrinks) :-
-		generate_arbitrary_arguments(Types, Arguments, Test),
+		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],
 		(	catch(Goal, Error, throw(quick_check_error(Error, Goal, Test))) ->
-			(	check_output_arguments(Types, Arguments) ->
+			(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 				true
 			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaximumNumberOfShrinks)
 			)
 		;	shrink_failed_test(Types, Goal, Template, Test, 0, MaximumNumberOfShrinks)
 		).
 
-	generate_arbitrary_arguments([], [], _).
-	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], Test) :-
-		generate_arbitrary_argument(Type, Argument, Test),
-		generate_arbitrary_arguments(Types, Arguments, Test).
+	% return, along the generated arguments, a copy of those arguments so that
+	% we can check that the property being tested don't further instantiates
+	% '@'(Type) arguments; but as copies for other argument instantiation modes
+	% are not required, only '@'(Type) arguments are actually copied
+	generate_arbitrary_arguments([], [], [], _).
+	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], [ArgumentCopy| ArgumentsCopy], Test) :-
+		generate_arbitrary_argument(Type, Argument, ArgumentCopy, Test),
+		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test).
 
-	generate_arbitrary_argument('--'(_), _, _).
-	generate_arbitrary_argument('-'(_), _, _).
-	generate_arbitrary_argument('++'(Type), Arbitrary, Test) :-
+	generate_arbitrary_argument('--'(_), _, _, _).
+	generate_arbitrary_argument('-'(_), _, _, _).
+	generate_arbitrary_argument('++'(Type), Arbitrary, _, Test) :-
 		(	type_test_edge_case(ground(Type), Test, Arbitrary) ->
 			true
 		;	arbitrary(ground(Type), Arbitrary)
 		).
-	generate_arbitrary_argument('+'(Type), Arbitrary, Test) :-
+	generate_arbitrary_argument('+'(Type), Arbitrary, _, Test) :-
 		(	type_test_edge_case(Type, Test, Arbitrary) ->
 			true
 		;	arbitrary(Type, Arbitrary)
 		).
-	generate_arbitrary_argument('?'(Type), Arbitrary, Test) :-
+	generate_arbitrary_argument('?'(Type), Arbitrary, _, Test) :-
 		(	type_test_edge_case(Type, Test, Arbitrary) ->
 			true
 		;	maybe ->
 			arbitrary(var, Arbitrary)
 		;	arbitrary(Type, Arbitrary)
 		).
-	generate_arbitrary_argument('@'(Type), Arbitrary, Test) :-
+	generate_arbitrary_argument('@'(Type), Arbitrary, ArbitraryCopy, Test) :-
 		(	type_test_edge_case(Type, Test, Arbitrary) ->
 			true
 		;	arbitrary(Type, Arbitrary)
-		).
-	generate_arbitrary_argument('{}'(Argument), Argument, _).
+		),
+		copy_term(Arbitrary, ArbitraryCopy).
+	generate_arbitrary_argument('{}'(Argument), Argument, _, _).
 
 	type_test_edge_case(Type, Test, EdgeCase) :-
 		findall(Term, edge_case(Type, Term), EdgeCases),
 		nth1(Test, EdgeCases, EdgeCase).
 
-	check_output_arguments([], []).
-	check_output_arguments([Type| Types], [Argument| Arguments]) :-
-		check_output_argument(Type, Argument),
-		check_output_arguments(Types, Arguments).
+	check_output_arguments([], [], []).
+	check_output_arguments([Type| Types], [Argument| Arguments], [ArgumentCopy| ArgumentsCopy]) :-
+		check_output_argument(Type, Argument, ArgumentCopy),
+		check_output_arguments(Types, Arguments, ArgumentsCopy).
 
-	check_output_argument('--'(Type), Argument) :-
+	check_output_argument('--'(Type), Argument, _) :-
 		valid(Type, Argument).
-	check_output_argument('-'(Type), Argument) :-
+	check_output_argument('-'(Type), Argument, _) :-
 		valid(Type, Argument).
-	check_output_argument('++'(_), _).
-	check_output_argument('+'(Type), Argument) :-
+	check_output_argument('++'(_), _, _).
+	check_output_argument('+'(Type), Argument, _) :-
 		valid(Type, Argument).
-	check_output_argument('?'(Type), Argument) :-
+	check_output_argument('?'(Type), Argument, _) :-
 		valid(Type, Argument).
-	check_output_argument('@'(_), _).
-	check_output_argument('{}'(_), _).
+	check_output_argument('@'(_), Argument, ArgumentCopy) :-
+		variant(Argument, ArgumentCopy).
+	check_output_argument('{}'(_), _, _).
 
 	shrink_failed_test(Types, Goal, Template, Test, Count, MaximumNumberOfShrinks) :-
 		(	Count < MaximumNumberOfShrinks ->

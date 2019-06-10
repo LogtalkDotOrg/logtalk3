@@ -154,14 +154,18 @@ Sphinx output.
 * IMPROVED: The `lgtdoc` tool generated XML documenting files now include
 information about `uses` relations.
 
-* IMPROVED: The `lgtunit` tool QuickCheck implementation now ensures that
-generated values for `++Type` arguments are indeed ground.
-
 * UPDATED: The `help` tool to open the library documentation index when calling
 the `library/1` predicate with a valid library name.
 
 * UPDATED: The `logtalk_tester` shell script to also print the tests object
 identifier after the test results.
+
+* FIXED: The `lgtunit` tool QuickCheck implementation now ensures that
+generated values for `++Type` arguments are indeed ground.
+
+* FIXED: The `lgtunit` tool QuickCheck implementation check for `@Type`
+arguments to actually check that the generated values are not modified
+by the property being tested.
 
 Tests
 -----

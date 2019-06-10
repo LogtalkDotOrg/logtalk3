@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.15,
+		version is 1.16,
 		author is 'Paulo Moura',
-		date is 2019/03/23,
+		date is 2019/06/10,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -396,6 +396,10 @@
 	succeeds(quick_check_3_07) :-
 		quick_check(type::foo42(+integer), Result, []),
 		Result = error(Error, _), Error == existence_error(predicate_declaration, foo42/1).
+
+	succeeds(quick_check_3_08) :-
+		quick_check(foo(@var), Result, []),
+		Result == failed(foo(1)).
 
 	% quick_check/2 tests
 
