@@ -42,6 +42,10 @@ Template and modes
 Examples
 --------
 
+An example where an hypothetic application would have some limitations
+that the user should be made aware when running on a backend Prolog
+compiler with bounded arithmetic:
+
 ::
 
    :- if(current_prolog_flag(bounded, true)).

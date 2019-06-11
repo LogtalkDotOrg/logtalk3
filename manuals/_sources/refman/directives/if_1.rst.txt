@@ -31,7 +31,7 @@ Description
 Starts conditional compilation. The code following the directive is
 compiled iff ``Goal`` is true. The goal is subjected to
 :ref:`goal expansion <expansion_expansion>` when the directive occurs
-in a source file.
+in a source file. Conditional compilation directives can be nested.
 
 Conditional compilation goals cannot depend on predicate definitions
 contained in the same source file that contains the conditional
@@ -48,6 +48,9 @@ Template and modes
 Examples
 --------
 
+A common example is checking if a built-in predicate exists and
+providing a definition when the predicate is absent:
+
 ::
 
    :- if(\+ predicate_property(length(_,_), built_in)).
@@ -56,7 +59,18 @@ Examples
            ...
 
    :- endif.
-   
+
+Another common example is conditionally including code for a specific
+backend Prolog compiler:
+
+::
+
+   :- if(current_logtalk_flag(prolog_dialect, swi)).
+
+       % SWI-Prolog specific code
+       :- set_prolog_flag(double_quotes, codes).
+
+   :- endif.
 
 .. seealso::
 

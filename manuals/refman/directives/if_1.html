@@ -209,7 +209,7 @@
 <p>Starts conditional compilation. The code following the directive is
 compiled iff <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is true. The goal is subjected to
 <a class="reference internal" href="../../userman/expansion.html#expansion-expansion"><span class="std std-ref">goal expansion</span></a> when the directive occurs
-in a source file.</p>
+in a source file. Conditional compilation directives can be nested.</p>
 <p>Conditional compilation goals cannot depend on predicate definitions
 contained in the same source file that contains the conditional
 compilation directives (as those predicates only become available after
@@ -223,10 +223,22 @@ the file is fully compiled and loaded).</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>A common example is checking if a built-in predicate exists and
+providing a definition when the predicate is absent:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="o">\+</span> <span class="k">predicate_property</span>(length(<span class="nv">_</span>,<span class="nv">_</span>), built_in)).
 
     length(<span class="nv">List</span>, <span class="nv">Length</span>) <span class="o">:-</span>
         ...
+
+<span class="p">:- </span><span class="k">endif.</span>
+</pre></div>
+</div>
+<p>Another common example is conditionally including code for a specific
+backend Prolog compiler:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">current_logtalk_flag</span>(prolog_dialect, swi)).
+
+    <span class="c">% SWI-Prolog specific code</span>
+<span class="p">    :- </span><span class="k">set_prolog_flag</span>(double_quotes, codes).
 
 <span class="p">:- </span><span class="k">endif.</span>
 </pre></div>
