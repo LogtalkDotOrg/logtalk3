@@ -144,6 +144,8 @@ results when calling `char_code/2` with a code of zero.
 
 * FIXED: Workaround B-Prolog atom size limitation in the `arbitrary` library.
 
+* FIXED: JIProlog implementation of the `java/2::invoke/2` predicate.
+
 Tools
 -----
 
