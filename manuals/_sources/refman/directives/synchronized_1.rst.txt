@@ -34,19 +34,24 @@ Description
    synchronized((Name//Arity, ...))
    synchronized([Name//Arity, ...])
 
-Declares synchronized predicates and synchronized grammar rule
-non-terminals. A synchronized predicate (or synchronized non-terminal)
-is protected by a mutex in order to allow for thread synchronization
-when proving a call to the predicate (or non-terminal). All predicates
-(and non-terminals) declared in the same synchronized directive share
-the same mutex. In order to use a separate mutex for each predicate
-(non-terminal) so that they are independently synchronized, a
-per-predicate synchronized directive must be used.
+Declares synchronized predicates and synchronized grammar rule non-terminals.
+The most common use is for predicates that have side effects (e.g. asserting
+or retracting clauses for a dynamic predicate) in multi-threaded applications.
+A synchronized predicate (or synchronized non-terminal) is protected by a
+mutex in order to allow for thread synchronization when proving a call to
+the predicate (or non-terminal).
 
-Declaring a predicate synchronized implicitly makes it deterministic.
-When using a single-threaded :term:`backend Prolog compiler`, calls
-to synchronized predicates behave as wrapped by the standard
-:ref:`methods_once_1` meta-predicate.
+All predicates (and non-terminals) declared in the same synchronized
+directive share the same mutex. In order to use a separate mutex for
+each predicate (non-terminal) so that they are independently synchronized,
+a per-predicate synchronized directive must be used.
+
+.. warning::
+
+   Declaring a predicate synchronized implicitly makes it **deterministic**.
+   When using a single-threaded :term:`backend Prolog compiler`, calls
+   to synchronized predicates behave as wrapped by the standard
+   :ref:`methods_once_1` meta-predicate.
 
 Note that synchronized predicates cannot be declared
 :ref:`dynamic <directives_dynamic_1>` (when necessary, declare the

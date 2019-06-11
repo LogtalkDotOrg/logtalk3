@@ -224,18 +224,23 @@ synchronized((<span class="nv">Name</span><span class="o">//</span><span class="
 synchronized([<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...])
 </pre></div>
 </div>
-<p>Declares synchronized predicates and synchronized grammar rule
-non-terminals. A synchronized predicate (or synchronized non-terminal)
-is protected by a mutex in order to allow for thread synchronization
-when proving a call to the predicate (or non-terminal). All predicates
-(and non-terminals) declared in the same synchronized directive share
-the same mutex. In order to use a separate mutex for each predicate
-(non-terminal) so that they are independently synchronized, a
-per-predicate synchronized directive must be used.</p>
-<p>Declaring a predicate synchronized implicitly makes it deterministic.
+<p>Declares synchronized predicates and synchronized grammar rule non-terminals.
+The most common use is for predicates that have side effects (e.g. asserting
+or retracting clauses for a dynamic predicate) in multi-threaded applications.
+A synchronized predicate (or synchronized non-terminal) is protected by a
+mutex in order to allow for thread synchronization when proving a call to
+the predicate (or non-terminal).</p>
+<p>All predicates (and non-terminals) declared in the same synchronized
+directive share the same mutex. In order to use a separate mutex for
+each predicate (non-terminal) so that they are independently synchronized,
+a per-predicate synchronized directive must be used.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Declaring a predicate synchronized implicitly makes it <strong>deterministic</strong>.
 When using a single-threaded <a class="reference internal" href="../../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, calls
 to synchronized predicates behave as wrapped by the standard
 <a class="reference internal" href="../methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a> meta-predicate.</p>
+</div>
 <p>Note that synchronized predicates cannot be declared
 <a class="reference internal" href="dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic</span></a> (when necessary, declare the
 predicates updating the dynamic predicates as synchronized).</p>
