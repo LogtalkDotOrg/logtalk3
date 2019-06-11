@@ -44,13 +44,13 @@ the same mutex. In order to use a separate mutex for each predicate
 per-predicate synchronized directive must be used.
 
 Declaring a predicate synchronized implicitly makes it deterministic.
-When using a single-threaded :term:`backend Prolog compiler`, calls to
-synchronized predicates behave as wrapped by the standard ``once/1``
-meta-predicate.
+When using a single-threaded :term:`backend Prolog compiler`, calls
+to synchronized predicates behave as wrapped by the standard
+:ref:`methods_once_1` meta-predicate.
 
-Note that synchronized predicates cannot be declared dynamic (when
-necessary, declare the predicates updating the dynamic predicates as
-synchronized).
+Note that synchronized predicates cannot be declared
+:ref:`dynamic <directives_dynamic_1>` (when necessary, declare the
+predicates updating the dynamic predicates as synchronized).
 
 Template and modes
 ------------------

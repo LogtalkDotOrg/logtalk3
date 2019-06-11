@@ -240,14 +240,15 @@ multifile((<span class="nv">Module</span><span class="o">:</span><span class="nv
 multifile([<span class="nv">Module</span><span class="o">:</span><span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...])
 </pre></div>
 </div>
-<p>Declares multifile predicates and multifile grammar rule non-terminals.
-In the case of object or category multifile predicates, the predicate
-(or non-terminal) must also have a scope directive in the object or
-category holding its <em>primary declaration</em> (i.e. the declaration without
-the <code class="docutils literal notranslate"><span class="pre">Entity::</span></code> prefix). Entities holding multifile predicate primary
-declarations must be compiled and loaded prior to any entities
-contributing with clauses for the multifile predicates.</p>
-<p>Protocols cannot declare multifile predicates as protocols cannot
+<p>Declares multifile predicates and multifile grammar rule non-terminals. In the
+case of object or category multifile predicates, the predicate (or non-terminal)
+must also have a <a class="reference internal" href="../../glossary.html#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> in the
+object or category holding its <em>primary declaration</em> (i.e. the declaration
+without the <code class="docutils literal notranslate"><span class="pre">Entity::</span></code> prefix). Entities holding multifile predicate primary
+declarations must be compiled and loaded prior to any entities contributing
+with clauses for the multifile predicates (to prevent using multifile
+predicates to break entity encapsulation).</p>
+<p>Protocols cannot declare or define multifile predicates as protocols cannot
 contain predicate definitions.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>

@@ -298,7 +298,8 @@ foo <span class="o">:-</span>
     ...
 </pre></div>
 </div>
-<p>An example of using a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a> in place of the module:</p>
+<p>An example of using a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a> in place of the module
+identifier to delay to runtime the actual module to use:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bar(<span class="nv">_OptionsModule_</span>)).
 
 <span class="p">    :- </span><span class="k">use_module</span>(<span class="nv">_OptionsModule_</span>, [

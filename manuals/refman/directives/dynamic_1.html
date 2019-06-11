@@ -242,18 +242,17 @@ dynamic([<span class="nv">Module</span><span class="o">:</span><span class="nv">
 </div>
 <p>Declares dynamic predicates and dynamic grammar rule non-terminals. Note
 that an object can be static and have both static and dynamic
-predicates/non-terminals. Dynamic predicates cannot be declared as
-synchronized. When the dynamic predicates are local to an object,
-declaring them also as private predicates allows the Logtalk compiler to
-generate optimized code for asserting and retracting predicate clauses.
-Categories can also contain dynamic predicate directives but cannot
-contain clauses for dynamic predicates.</p>
+predicates/non-terminals. When the dynamic predicates are local to an object,
+declaring them also as <a class="reference internal" href="private_1.html#directives-private-1"><span class="std std-ref">private predicates</span></a>
+allows the Logtalk compiler to generate optimized code for asserting and
+retracting predicate clauses. Categories can also contain dynamic predicate
+directives but cannot contain clauses for dynamic predicates.</p>
 <p>The predicate indicators (or non-terminal indicators) can be explicitly
-qualified with an object, category, or module identifier when the
-predicates (or non-terminals) are also declared multifile.</p>
+qualified with an object, category, or module identifier when the predicates
+(or non-terminals) are also declared <a class="reference internal" href="multifile_1.html#directives-multifile-1"><span class="std std-ref">multifile</span></a>.</p>
 <p>Note that dynamic predicates cannot be declared synchronized (when
 necessary, declare the predicates updating the dynamic predicates as
-synchronized).</p>
+<a class="reference internal" href="synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized</span></a>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Some backend Prolog compilers declare <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> as an operator

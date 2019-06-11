@@ -115,7 +115,8 @@ Examples
        retractall(bar(_)),
        ...
 
-An example of using a :term:`parameter variable` in place of the module:
+An example of using a :term:`parameter variable` in place of the module
+identifier to delay to runtime the actual module to use:
 
 ::
 

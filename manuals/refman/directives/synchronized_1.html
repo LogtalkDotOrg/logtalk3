@@ -233,12 +233,12 @@ the same mutex. In order to use a separate mutex for each predicate
 (non-terminal) so that they are independently synchronized, a
 per-predicate synchronized directive must be used.</p>
 <p>Declaring a predicate synchronized implicitly makes it deterministic.
-When using a single-threaded <a class="reference internal" href="../../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, calls to
-synchronized predicates behave as wrapped by the standard <code class="docutils literal notranslate"><span class="pre">once/1</span></code>
-meta-predicate.</p>
-<p>Note that synchronized predicates cannot be declared dynamic (when
-necessary, declare the predicates updating the dynamic predicates as
-synchronized).</p>
+When using a single-threaded <a class="reference internal" href="../../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, calls
+to synchronized predicates behave as wrapped by the standard
+<a class="reference internal" href="../methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a> meta-predicate.</p>
+<p>Note that synchronized predicates cannot be declared
+<a class="reference internal" href="dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic</span></a> (when necessary, declare the
+predicates updating the dynamic predicates as synchronized).</p>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>

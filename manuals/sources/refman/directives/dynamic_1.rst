@@ -52,20 +52,19 @@ Description
 
 Declares dynamic predicates and dynamic grammar rule non-terminals. Note
 that an object can be static and have both static and dynamic
-predicates/non-terminals. Dynamic predicates cannot be declared as
-synchronized. When the dynamic predicates are local to an object,
-declaring them also as private predicates allows the Logtalk compiler to
-generate optimized code for asserting and retracting predicate clauses.
-Categories can also contain dynamic predicate directives but cannot
-contain clauses for dynamic predicates.
+predicates/non-terminals. When the dynamic predicates are local to an object,
+declaring them also as :ref:`private predicates <directives_private_1>`
+allows the Logtalk compiler to generate optimized code for asserting and
+retracting predicate clauses. Categories can also contain dynamic predicate
+directives but cannot contain clauses for dynamic predicates.
 
 The predicate indicators (or non-terminal indicators) can be explicitly
-qualified with an object, category, or module identifier when the
-predicates (or non-terminals) are also declared multifile.
+qualified with an object, category, or module identifier when the predicates
+(or non-terminals) are also declared :ref:`multifile <directives_multifile_1>`.
 
 Note that dynamic predicates cannot be declared synchronized (when
 necessary, declare the predicates updating the dynamic predicates as
-synchronized).
+:ref:`synchronized <directives_synchronized_1>`).
 
 .. warning::
 
