@@ -52,6 +52,8 @@ Parses a PDDL 3.0 domain file, returning a compound term representing its conten
 |    ``parse_domain(+atom,-compound,-list(atom))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="parse_domain/2"> </div>
@@ -72,6 +74,8 @@ Parses a PDDL 3.0 domain file, returning a compound term representing its conten
 | **Mode and number of proofs:**
 |    ``parse_domain(+atom,-compound)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -94,6 +98,8 @@ Parses a PDDL 3.0 problem file, returning a compound term representing its conte
 |    ``parse_problem(+atom,-compound)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="parse_problem/3"> </div>
@@ -114,6 +120,8 @@ Parses a PDDL 3.0 problem file, returning a compound term representing its conte
 | **Mode and number of proofs:**
 |    ``parse_problem(+atom,-compound,-list(atom))`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

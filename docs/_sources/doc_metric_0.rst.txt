@@ -62,6 +62,8 @@ Relative weight between entity documentation and predicates documentation in per
 |    ``entity_predicates_weights_hook(?integer,?integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="entity_info_score_hook/2"> </div>
@@ -82,6 +84,8 @@ Maximum score for entity info/1 directives.
 | **Mode and number of proofs:**
 |    ``entity_info_score_hook(?term,?integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -104,6 +108,8 @@ Score for relevant entity info/1 directive pairs. If defined, the entity_info_sc
 |    ``entity_info_pair_score_hook(?callable,?term,?integer)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="predicate_mode_score_hook/3"> </div>
@@ -124,6 +130,8 @@ Maximum score for predicate mode/2 directives.
 | **Mode and number of proofs:**
 |    ``predicate_mode_score_hook(?term,?term,?integer)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -146,6 +154,8 @@ Score for a predicate mode/2 directive. If defined, the predicate_mode_score_hoo
 |    ``predicate_mode_score_hook(?term,?term,?term,?term,?integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="predicate_info_score_hook/3"> </div>
@@ -167,6 +177,8 @@ Maximum score for predicate info/2 directives.
 |    ``predicate_info_score_hook(?term,?term,?integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="predicate_info_pair_score_hook/4"> </div>
@@ -187,6 +199,8 @@ Score for a predicate info/2 directive pairs. If defined, the predicate_info_sco
 | **Mode and number of proofs:**
 |    ``predicate_info_pair_score_hook(?callable,?term,?term,?integer)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

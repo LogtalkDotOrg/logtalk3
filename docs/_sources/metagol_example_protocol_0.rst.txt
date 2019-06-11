@@ -55,6 +55,8 @@ Learns and returns set of clauses.
 |    ``learn(-list(clause))`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="learn/0"> </div>
@@ -73,6 +75,8 @@ Learns and prints a set of clauses.
 | **Mode and number of proofs:**
 |    ``learn`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

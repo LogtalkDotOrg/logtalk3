@@ -62,6 +62,8 @@ Flag to detect report in progress when processing two or more test sets as a uni
 |    ``generating_`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="partial_/1"> </div>
@@ -80,6 +82,8 @@ Cache of total of tests per test set.
 | **Mode and number of proofs:**
 |    ``partial_(?integer)`` - ``zero_or_more``
 
+
+------------
 
 Operators
 ---------

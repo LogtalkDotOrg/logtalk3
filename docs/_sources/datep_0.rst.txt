@@ -53,6 +53,8 @@ Returns current date.
 |    ``today(-integer,-integer,-integer)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="leap_year/1"> </div>
@@ -73,6 +75,8 @@ True if the argument is a leap year.
 | **Mode and number of proofs:**
 |    ``leap_year(+integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Name and short name of day.
 |    ``name_of_day(?integer,?atom,?atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="name_of_month/3"> </div>
@@ -115,6 +121,8 @@ Name and short name of month.
 | **Mode and number of proofs:**
 |    ``name_of_month(?integer,?atom,?atom)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Number of days in a month.
 |    ``days_in_month(?integer,+integer,?integer)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="valid/3"> </div>
@@ -157,6 +167,8 @@ True if the arguments represent a valid date.
 | **Mode and number of proofs:**
 |    ``valid(@integer,@integer,@integer)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

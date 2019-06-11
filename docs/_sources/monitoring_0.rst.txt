@@ -53,6 +53,8 @@ Event handler for "before" events. A "before" event handler may prevent a method
 |    ``before(?term,?term,?term)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="after/3"> </div>
@@ -73,6 +75,8 @@ Event handler for "after" events. An "after" event handler may prevent a method 
 | **Mode and number of proofs:**
 |    ``after(?term,?term,?term)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

@@ -53,6 +53,8 @@ Returns a list of all current monitors.
 |    ``monitors(-list(object_identifier))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="monitor/1"> </div>
@@ -75,6 +77,8 @@ Monitor is an object playing the role of a monitor.
 |    ``monitor(+object_identifier)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="monitored/1"> </div>
@@ -95,6 +99,8 @@ Returns a list of all currently monitored objects.
 | **Mode and number of proofs:**
 |    ``monitored(-list(object_identifier))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -117,6 +123,8 @@ True if the arguments describe a currently defined monitored event.
 |    ``monitor(?object_identifier,?nonvar,?object_identifier,?object_identifier)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_monitor/4"> </div>
@@ -137,6 +145,8 @@ Sets a monitor for the set of matching events.
 | **Mode and number of proofs:**
 |    ``set_monitor(?object_identifier,?nonvar,?object_identifier,+object_identifier)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -159,6 +169,8 @@ Deletes all matching monitored events.
 |    ``del_monitors(?object_identifier,?nonvar,?object_identifier,?object_identifier)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="del_monitors/0"> </div>
@@ -177,6 +189,8 @@ Deletes all monitored events.
 | **Mode and number of proofs:**
 |    ``del_monitors`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

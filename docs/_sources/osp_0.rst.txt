@@ -53,6 +53,8 @@ Returns the process identifier of the running process.
 |    ``pid(-integer)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="shell/2"> </div>
@@ -73,6 +75,8 @@ Runs an operating-system shell command and returns its exit status.
 | **Mode and number of proofs:**
 |    ``shell(+atom,-integer)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Runs an operating-system shell command.
 |    ``shell(+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="absolute_file_name/2"> </div>
@@ -115,6 +121,8 @@ Expands a file name to an absolute file path. An environment variable at the beg
 | **Mode and number of proofs:**
 |    ``absolute_file_name(+atom,-atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Decomposes a file name into its directory (which always ends with a slash; "./" 
 |    ``decompose_file_name(+atom,?atom,?atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="decompose_file_name/4"> </div>
@@ -157,6 +167,8 @@ Decomposes a file name into its directory (which always ends with a slash; "./" 
 | **Mode and number of proofs:**
 |    ``decompose_file_name(+atom,?atom,?atom,?atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Makes a new directory. Succeeds if the directory already exists.
 |    ``make_directory(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="make_directory_path/1"> </div>
@@ -199,6 +213,8 @@ Makes a new directory creating all the intermediate directories if necessary. Su
 | **Mode and number of proofs:**
 |    ``make_directory_path(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ Deletes an empty directory.
 |    ``delete_directory(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="change_directory/1"> </div>
@@ -241,6 +259,8 @@ Changes current working directory.
 | **Mode and number of proofs:**
 |    ``change_directory(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -263,6 +283,8 @@ Current working directory.
 |    ``working_directory(?atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="directory_files/2"> </div>
@@ -283,6 +305,8 @@ Returns a list of all files (including directories, regular files, and hidden di
 | **Mode and number of proofs:**
 |    ``directory_files(+atom,-list(atom))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -305,6 +329,8 @@ Returns a filtered list of files. Filters: paths/1 - relative/absolute, type/1 -
 |    ``directory_files(+atom,-list(atom),+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="directory_exists/1"> </div>
@@ -325,6 +351,8 @@ True if the specified directory exists (irrespective of directory permissions).
 | **Mode and number of proofs:**
 |    ``directory_exists(+atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -347,6 +375,8 @@ True if the specified file exists and is a regular file (irrespective of file pe
 |    ``file_exists(+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file_modification_time/2"> </div>
@@ -367,6 +397,8 @@ File modification time (which can be used for comparison).
 | **Mode and number of proofs:**
 |    ``file_modification_time(+atom,-integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -389,6 +421,8 @@ File size (in bytes).
 |    ``file_size(+atom,-integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file_permission/2"> </div>
@@ -409,6 +443,8 @@ True if the specified file has the specified permission (read, write, or execute
 | **Mode and number of proofs:**
 |    ``file_permission(+atom,?atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -431,6 +467,8 @@ Renames a file or a directory.
 |    ``rename_file(+atom,+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="delete_file/1"> </div>
@@ -451,6 +489,8 @@ Deletes a file.
 | **Mode and number of proofs:**
 |    ``delete_file(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -473,6 +513,8 @@ Returns an environment variable value. Fails if the variable does not exists.
 |    ``environment_variable(+atom,?atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="time_stamp/1"> </div>
@@ -493,6 +535,8 @@ Returns a system-dependent time stamp, which can be used for sorting, but should
 | **Mode and number of proofs:**
 |    ``time_stamp(-ground)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -515,6 +559,8 @@ Returns the current date and time.
 |    ``date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="cpu_time/1"> </div>
@@ -535,6 +581,8 @@ System cpu time in seconds.
 | **Mode and number of proofs:**
 |    ``cpu_time(-number)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -557,6 +605,8 @@ Wall time in seconds.
 |    ``wall_time(-number)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="operating_system_type/1"> </div>
@@ -577,6 +627,8 @@ Operating system type. Possible values are "unix", "windows", and "unknown".
 | **Mode and number of proofs:**
 |    ``operating_system_type(?atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -599,6 +651,8 @@ Returns a list with the command line arguments that occur after "--".
 |    ``command_line_arguments(-list(atom))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="sleep/1"> </div>
@@ -619,6 +673,8 @@ Suspends execution the given number of seconds.
 | **Mode and number of proofs:**
 |    ``sleep(+number)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

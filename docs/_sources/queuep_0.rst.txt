@@ -53,6 +53,8 @@ True if the queue is empty.
 |    ``empty(@queue)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="head/2"> </div>
@@ -73,6 +75,8 @@ Unifies Head with the first element of the queue.
 | **Mode and number of proofs:**
 |    ``head(+queue,?term)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Adds the new element at the end of the queue.
 |    ``join(@term,+queue,-queue)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="join_all/3"> </div>
@@ -115,6 +121,8 @@ Adds the new elements at the end of the queue.  The elements are added in the sa
 | **Mode and number of proofs:**
 |    ``join_all(+list,+queue,-queue)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Adds the new element at the front of the queue.
 |    ``jump(@term,+queue,-queue)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="jump_all/3"> </div>
@@ -157,6 +167,8 @@ Adds the new elements at the front of the queue.  The elements are added in the 
 | **Mode and number of proofs:**
 |    ``jump_all(+list,+queue,-queue)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Queue length.
 |    ``length(+heap,?integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="serve/3"> </div>
@@ -200,6 +214,8 @@ Removes the first element of the queue for service.
 |    ``serve(+queue,?term,-queue)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="as_list/2"> </div>
@@ -220,6 +236,8 @@ Converts a queue to a list.
 | **Mode and number of proofs:**
 |    ``as_list(+queue,-list)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

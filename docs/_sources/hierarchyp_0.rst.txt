@@ -53,6 +53,8 @@ Returns, by backtracking, all object ancestors.
 |    ``ancestor(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="ancestors/1"> </div>
@@ -73,6 +75,8 @@ List of all object ancestors.
 | **Mode and number of proofs:**
 |    ``ancestors(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Returns, by backtracking, all object leaves.
 |    ``leaf(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="leaves/1"> </div>
@@ -115,6 +121,8 @@ List of all object leaves.
 | **Mode and number of proofs:**
 |    ``leaves(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Returns, by backtracking, all object descendants.
 |    ``descendant(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="descendants/1"> </div>
@@ -157,6 +167,8 @@ List of all object descendants.
 | **Mode and number of proofs:**
 |    ``descendants(-list)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

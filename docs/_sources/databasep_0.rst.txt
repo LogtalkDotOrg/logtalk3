@@ -53,6 +53,8 @@ Clauses for this predicate are automatically generated using term-expansion. The
 |    ``rule(?callable,?callable,-,-)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="rule/3"> </div>
@@ -73,6 +75,8 @@ Clauses for this predicate are automatically generated using term-expansion. The
 | **Mode and number of proofs:**
 |    ``rule(?callable,?callable,-)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Clauses for this predicate are automatically generated using term-expansion.
 |    ``rule(?callable,-list(callable))`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="bench_goal/1"> </div>
@@ -115,6 +121,8 @@ Table of benchmark goals. They are used from shell.lgt to make benchmarking easi
 | **Mode and number of proofs:**
 |    ``bench_goal(?callable)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

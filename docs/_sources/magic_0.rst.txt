@@ -52,6 +52,8 @@ Transform (Head :- Body) into a magic clause (NewHead :- NewBody).
 |    ``magicise(+term,+list,-term,-list)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="magic/2"> </div>
@@ -72,6 +74,8 @@ Prefix the predicate symbol of Old with magic_.
 | **Mode and number of proofs:**
 |    ``magic(+callable,-callable)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

@@ -53,6 +53,8 @@ Access to the table of log files.
 |    ``log_file(?atom,?atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="define_log_file/2"> </div>
@@ -73,6 +75,8 @@ Defines a log file with alias Alias and file name File. If the log file already 
 | **Mode and number of proofs:**
 |    ``define_log_file(+atom,+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Initializes a new log file with alias Alias and file name File. If the log file 
 |    ``init_log_file(+atom,+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="log_event/2"> </div>
@@ -115,6 +121,8 @@ Logs an event Event to a log file with alias Alias. Fails if a log file with ali
 | **Mode and number of proofs:**
 |    ``log_event(+atom,+nonvar)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ True if logging to file with alias Alias is enabled.
 |    ``logging(+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="enable_logging/1"> </div>
@@ -158,6 +168,8 @@ Enables logging to file with alias Alias. Fails if a log file with alias Alias i
 |    ``enable_logging(+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="disable_logging/1"> </div>
@@ -178,6 +190,8 @@ Disables logging to file with alias Alias. Fails if a log file with alias Alias 
 | **Mode and number of proofs:**
 |    ``disable_logging(+atom)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

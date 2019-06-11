@@ -57,6 +57,8 @@ Makes Variable a stream variable. Initial state will be empty.
 |        ``type_error(variable,Variable)``
 
 
+------------
+
 .. raw:: html
 
    <div id="new/2"> </div>
@@ -82,6 +84,8 @@ Makes Variable a stream variable and sets its initial state to Value.
 |        ``type_error(variable,Variable)``
 
 
+------------
+
 .. raw:: html
 
    <div id="(<=)/2"> </div>
@@ -103,6 +107,8 @@ Sets the state of the stream variable Variable to Value (initializing the variab
 |    ``(?streamvar)<=(@nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="(=>)/2"> </div>
@@ -123,6 +129,8 @@ Unifies Value with the current state of the stream variable Variable.
 | **Mode and number of proofs:**
 |    ``(+streamvar)=>(?nonvar)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

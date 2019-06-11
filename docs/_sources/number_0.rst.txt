@@ -52,6 +52,8 @@ Compares two numbers for approximate equality given an epsilon value using the d
 |    ``approximately_equal(+number,+number,+number)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="essentially_equal/3"> </div>
@@ -72,6 +74,8 @@ Compares two numbers for essential equality given an epsilon value using the de 
 | **Mode and number of proofs:**
 |    ``essentially_equal(+number,+number,+number)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -94,6 +98,8 @@ Compares two numbers for close equality given relative and absolute tolerances u
 |    ``tolerance_equal(+number,+number,+number,+number)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="=~= / 2"> </div>
@@ -115,6 +121,8 @@ Compares two floats (or lists of floats) for approximate equality using 100*epsi
 |    ``=~=(+number,+number)`` - ``zero_or_one``
 |    ``=~=(+list(number),+list(number))`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

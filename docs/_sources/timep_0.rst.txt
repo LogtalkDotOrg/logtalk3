@@ -53,6 +53,8 @@ Returns current time.
 |    ``now(-integer,-integer,-integer)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="cpu_time/1"> </div>
@@ -74,6 +76,8 @@ Returns the current cpu time.
 |    ``cpu_time(-number)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="valid/3"> </div>
@@ -94,6 +98,8 @@ True if the arguments represent a valid time value.
 | **Mode and number of proofs:**
 |    ``valid(+integer,+integer,+integer)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

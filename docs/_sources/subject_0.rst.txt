@@ -51,6 +51,8 @@ Receiver changed in some way. Notify all dependents.
 |    ``changed`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="changed/1"> </div>
@@ -71,6 +73,8 @@ Receiver changed as specified in the argument. Notify all dependents.
 | **Mode and number of proofs:**
 |    ``changed(?nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -93,6 +97,8 @@ Returns a list of all dependent objects.
 |    ``dependents(-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="addDependent/1"> </div>
@@ -114,6 +120,8 @@ Adds a new dependent object.
 |    ``addDependent(@object)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="removeDependent/1"> </div>
@@ -134,6 +142,8 @@ Removes a dependent object.
 | **Mode and number of proofs:**
 |    ``removeDependent(?object)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------
@@ -163,6 +173,8 @@ Table of dependent objects.
 | **Mode and number of proofs:**
 |    ``dependent_(?object)`` - ``zero_or_more``
 
+
+------------
 
 Operators
 ---------

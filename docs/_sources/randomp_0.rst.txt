@@ -53,6 +53,8 @@ Returns a new random float value in the interval [0.0, 1.0[.
 |    ``random(-float)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="between/3"> </div>
@@ -73,6 +75,8 @@ Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or U
 | **Mode and number of proofs:**
 |    ``between(+integer,+integer,-integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Returns a random member of a list. Fails if the list is empty.
 |    ``member(-term,+list(term))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="select/3"> </div>
@@ -115,6 +121,8 @@ Returns a random member of a list and the rest of the list. Fails if the list is
 | **Mode and number of proofs:**
 |    ``select(-term,+list(term),-list(term))`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Returns a random permutation of a list.
 |    ``permutation(+list,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="sequence/4"> </div>
@@ -158,6 +168,8 @@ Returns a list of the given length of random integers in random order in the int
 |    ``sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="set/4"> </div>
@@ -178,6 +190,8 @@ Returns an ordered set of the given size of random integers in the interval [Low
 | **Mode and number of proofs:**
 |    ``set(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -201,6 +215,8 @@ Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Uppe
 |    ``random(+float,+float,-float)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="randseq/4"> </div>
@@ -222,6 +238,8 @@ Returns a list of the given length of random values in random order in the inter
 |    ``randseq(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 |    ``randseq(+integer,+float,+float,-list(float))`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -245,6 +263,8 @@ Returns an ordered set of the given size of random values in the interval [Lower
 |    ``randset(+integer,+float,+float,-list(float))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="get_seed/1"> </div>
@@ -265,6 +285,8 @@ Gets the current random generator seed. Seed should be regarded as an opaque gro
 | **Mode and number of proofs:**
 |    ``get_seed(-ground)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -287,6 +309,8 @@ Sets the random generator seed to a given value returned by calling the get_seed
 |    ``set_seed(+ground)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="maybe/0"> </div>
@@ -305,6 +329,8 @@ Succeeds or fails with equal probability.
 | **Mode and number of proofs:**
 |    ``maybe`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -327,6 +353,8 @@ Succeeds with probability Probability or fails with probability 1 - Probability.
 |    ``maybe(+probability)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="maybe/2"> </div>
@@ -347,6 +375,8 @@ Succeeds with probability K/N where K and N are integers satisfying the equation
 | **Mode and number of proofs:**
 |    ``maybe(+non_negative_integer,+non_negative_integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -371,6 +401,8 @@ Calls a goal or fails without calling it with equal probability. When the goal i
 |    ``maybe_call(+callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="maybe_call/2"> </div>
@@ -393,6 +425,8 @@ Calls a goal or fails without calling it with probability Probability. When the 
 | **Mode and number of proofs:**
 |    ``maybe_call(+probability,+callable)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

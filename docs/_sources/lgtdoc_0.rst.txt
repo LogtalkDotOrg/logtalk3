@@ -65,6 +65,8 @@ Table of option values.
 |    ``option_(?atom,?nonvar)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="library_entity_/4"> </div>
@@ -85,6 +87,8 @@ Table of documented entities per library.
 | **Mode and number of proofs:**
 |    ``library_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -107,6 +111,8 @@ Table of documented entities per directory.
 |    ``directory_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="type_entity_/4"> </div>
@@ -128,6 +134,8 @@ Table of documented entities per type.
 |    ``type_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="predicate_entity_/4"> </div>
@@ -148,6 +156,8 @@ Table of public predicates for all documented entities.
 | **Mode and number of proofs:**
 |    ``predicate_entity_(?predicate_indicator,?nonvar,?nonvar,?entity_identifier)`` - ``zero_or_more``
 
+
+------------
 
 Operators
 ---------

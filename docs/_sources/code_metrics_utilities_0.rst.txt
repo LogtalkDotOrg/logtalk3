@@ -66,6 +66,8 @@ True if Entity descends from Ancestor, and EntityKind and AncestorKind unify wit
 |    ``ancestor(?entity,?entity_identifier,?entity,?entity_identifier)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="current_entity/1"> </div>
@@ -86,6 +88,8 @@ True if Entity is a currently loaded entity.
 | **Mode and number of proofs:**
 |    ``current_entity(?entity_identifier)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -108,6 +112,8 @@ True if Entity declares Predicate internally.
 |    ``declares_predicate(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="defines_predicate/2"> </div>
@@ -128,6 +134,8 @@ True if Entity defines an implementation of Predicate internally. 'Auxiliary' pr
 | **Mode and number of proofs:**
 |    ``defines_predicate(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -150,6 +158,8 @@ Same as defines_predicate/2, except Property is unified with a corresponding pro
 |    ``defines_predicate(?entity_identifier,?predicate_indicator,?term)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="entity_calls/3"> </div>
@@ -170,6 +180,8 @@ True if a predicate Caller within Entity makes a Call.
 | **Mode and number of proofs:**
 |    ``entity_calls(?entity_identifier,?predicate_indicator,?predicate_indicator)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -192,6 +204,8 @@ True if Kind defines Entity and is one of category, protocol, or object.
 |    ``entity_kind(+entity_identifier,-entity)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="entity_property/2"> </div>
@@ -213,6 +227,8 @@ True if Property is a valid property of Entity. Entity can be either a category,
 |    ``entity_property(+entity_identifier,-term)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="entity_updates/3"> </div>
@@ -233,6 +249,8 @@ True if a predicate Updater within Entity makes a dynamic update to Update (by e
 | **Mode and number of proofs:**
 |    ``entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator)`` - ``zero_or_one``
 
+
+------------
 
 Operators
 ---------

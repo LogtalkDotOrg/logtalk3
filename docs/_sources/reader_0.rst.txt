@@ -53,6 +53,8 @@ Reads a text file into a list of character codes.
 |    ``file_to_codes(+atom,-list(character_code))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file_to_codes/3"> </div>
@@ -73,6 +75,8 @@ Reads a text file into a list of character codes. The list is terminated by the 
 | **Mode and number of proofs:**
 |    ``file_to_codes(+atom,-list(character_code),@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Reads a text file into a list of characters.
 |    ``file_to_chars(+atom,-list(character))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file_to_chars/3"> </div>
@@ -115,6 +121,8 @@ Reads a text file into a list of characters. The list is terminated by the given
 | **Mode and number of proofs:**
 |    ``file_to_chars(+atom,-list(character),@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Reads a text file into a list of terms.
 |    ``file_to_terms(+atom,-list(term))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file_to_terms/3"> </div>
@@ -157,6 +167,8 @@ Reads a text file into a list of terms. The list is terminated by the given tail
 | **Mode and number of proofs:**
 |    ``file_to_terms(+atom,-list(term),@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Reads a text stream into a list of character codes. Does not close the stream.
 |    ``stream_to_codes(+stream_or_alias,-list(character_code))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="stream_to_codes/3"> </div>
@@ -199,6 +213,8 @@ Reads a text stream into a list of character codes. Does not close the stream. T
 | **Mode and number of proofs:**
 |    ``stream_to_codes(+stream_or_alias,-list(character_code),@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ Reads a text stream into a list of characters. Does not close the stream.
 |    ``stream_to_chars(+stream_or_alias,-list(char))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="stream_to_chars/3"> </div>
@@ -241,6 +259,8 @@ Reads a text stream into a list of characters. Does not close the stream. The li
 | **Mode and number of proofs:**
 |    ``stream_to_chars(+stream_or_alias,-list(char),@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -263,6 +283,8 @@ Reads a text stream into a list of terms. Does not close the stream.
 |    ``stream_to_terms(+stream_or_alias,-list(term))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="stream_to_terms/3"> </div>
@@ -283,6 +305,8 @@ Reads a text stream into a list of terms. Does not close the stream. The list is
 | **Mode and number of proofs:**
 |    ``stream_to_terms(+stream_or_alias,-list(term),@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -305,6 +329,8 @@ Reads a line from a text stream into a list of codes. Discards the end-of-line c
 |    ``line_to_codes(+stream_or_alias,-list(character_code))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="line_to_codes/3"> </div>
@@ -325,6 +351,8 @@ Reads a line from a text stream into a list of codes. Keeps the end-of-line mark
 | **Mode and number of proofs:**
 |    ``line_to_codes(+stream_or_alias,-list(character_code),?term)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

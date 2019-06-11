@@ -51,6 +51,8 @@ True if the reference holds an unexpected term. Avoid whenever possible by using
 |    ``is_unexpected`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_expected/0"> </div>
@@ -69,6 +71,8 @@ True if the reference holds an expected term. Avoid whenever possible by using i
 | **Mode and number of proofs:**
 |    ``is_expected`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -93,6 +97,8 @@ Applies a closure when the reference holds an unexpected term using the term as 
 |    ``if_unexpected(+callable)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="if_expected/1"> </div>
@@ -115,6 +121,8 @@ Applies a closure when the reference holds an expected term using the term as ar
 | **Mode and number of proofs:**
 |    ``if_expected(+callable)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -141,6 +149,8 @@ Returns the unexpected term hold by the reference. Throws an error otherwise.
 |        ``existence_error(unexpected_term,Reference)``
 
 
+------------
+
 .. raw:: html
 
    <div id="expected/1"> </div>
@@ -166,6 +176,8 @@ Returns the expected term hold by the reference. Throws an error otherwise.
 |        ``existence_error(expected_term,Reference)``
 
 
+------------
+
 .. raw:: html
 
    <div id="map/2"> </div>
@@ -188,6 +200,8 @@ When the reference does not hold an unexpected term and mapping a closure with t
 | **Mode and number of proofs:**
 |    ``map(+callable,--nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -212,6 +226,8 @@ When the reference does not hold an unexpected term and mapping a closure with t
 |    ``flat_map(+callable,--nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="or_else/2"> </div>
@@ -232,6 +248,8 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 | **Mode and number of proofs:**
 |    ``or_else(--term,@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -260,6 +278,8 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 |        ``existence_error(expected_term,Reference)``
 
 
+------------
+
 .. raw:: html
 
    <div id="or_else_call/2"> </div>
@@ -283,6 +303,8 @@ Returns the expected term if the reference does not hold an unexpected term. Cal
 |    ``or_else_call(--term,+callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="or_else_throw/1"> </div>
@@ -304,6 +326,8 @@ Returns the expected term hold by the reference if present. Throws the unexpecte
 |    ``or_else_throw(--term)`` - ``one_or_error``
 
 
+------------
+
 .. raw:: html
 
    <div id="or_else_fail/1"> </div>
@@ -324,6 +348,8 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 | **Mode and number of proofs:**
 |    ``or_else_fail(--term)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

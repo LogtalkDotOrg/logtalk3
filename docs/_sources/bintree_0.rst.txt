@@ -56,6 +56,8 @@ Preorder tree traversal.
 |    ``preorder(@tree,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="inorder/2"> </div>
@@ -73,6 +75,8 @@ Preorder tree traversal.
 |    ``inorder(@tree,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="postorder/2"> </div>
@@ -89,6 +93,8 @@ Preorder tree traversal.
 | **Mode and number of proofs:**
 |    ``postorder(@tree,-list)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

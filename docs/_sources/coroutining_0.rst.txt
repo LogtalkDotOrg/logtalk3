@@ -55,6 +55,8 @@ Sets a constraint that is true iff the two terms are different.
 |    ``dif(+term,+term)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="freeze/2"> </div>
@@ -78,6 +80,8 @@ Delays the execution of a goal until a variable is bound.
 |    ``freeze(+term,+callable)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="frozen/2"> </div>
@@ -98,6 +102,8 @@ Unifies Goal with the goal delayed by Variable. When no goals are frozen on Vari
 | **Mode and number of proofs:**
 |    ``frozen(@var,--callable)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -121,6 +127,8 @@ Calls Goal when Condition becomes true. The portable conditions are: nonvar/1, g
 | **Mode and number of proofs:**
 |    ``when(+callable,+callable)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

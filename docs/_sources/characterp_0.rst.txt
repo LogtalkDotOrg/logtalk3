@@ -53,6 +53,8 @@ True if the argument is an ASCII character.
 |    ``is_ascii(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_alphanumeric/1"> </div>
@@ -73,6 +75,8 @@ True if the argument is an alphanumeric character.
 | **Mode and number of proofs:**
 |    ``is_alphanumeric(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ True if the argument is a letter or an underscore.
 |    ``is_alpha(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_letter/1"> </div>
@@ -115,6 +121,8 @@ True if the argument is a letter.
 | **Mode and number of proofs:**
 |    ``is_letter(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ True if the argument is a binary digit.
 |    ``is_bin_digit(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_octal_digit/1"> </div>
@@ -157,6 +167,8 @@ True if the argument is an octal digit.
 | **Mode and number of proofs:**
 |    ``is_octal_digit(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ True if the argument is a decimal digit.
 |    ``is_dec_digit(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_hex_digit/1"> </div>
@@ -199,6 +213,8 @@ True if the argument is an hexadecimal digit.
 | **Mode and number of proofs:**
 |    ``is_hex_digit(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ True if the argument is a lower case letter.
 |    ``is_lower_case(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_upper_case/1"> </div>
@@ -241,6 +259,8 @@ True if the argument is a upper case letter.
 | **Mode and number of proofs:**
 |    ``is_upper_case(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -263,6 +283,8 @@ True if the argument is a vowel.
 |    ``is_vowel(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_white_space/1"> </div>
@@ -283,6 +305,8 @@ True if the argument is a white space character (a space or a tab) inside a line
 | **Mode and number of proofs:**
 |    ``is_white_space(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -305,6 +329,8 @@ True if the argument is a layout character.
 |    ``is_layout(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_quote/1"> </div>
@@ -325,6 +351,8 @@ True if the argument is a quote character.
 | **Mode and number of proofs:**
 |    ``is_quote(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -347,6 +375,8 @@ True if the argument is a sentence punctation character.
 |    ``is_punctation(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_period/1"> </div>
@@ -367,6 +397,8 @@ True if the argument is a character that ends a sentence.
 | **Mode and number of proofs:**
 |    ``is_period(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -389,6 +421,8 @@ True if the argument is an ASCII control character.
 |    ``is_control(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_newline/1"> </div>
@@ -410,6 +444,8 @@ True if the argument is the ASCII newline character.
 |    ``is_newline(+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_end_of_line/1"> </div>
@@ -430,6 +466,8 @@ True if the argument is the ASCII end-of-line character (either a carriage retur
 | **Mode and number of proofs:**
 |    ``is_end_of_line(+char)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -454,6 +492,8 @@ Recognises and converts between open and close parenthesis.
 |    ``parenthesis(?char,+char)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="lower_upper/2"> </div>
@@ -476,6 +516,8 @@ Recognises and converts between lower and upper case letters.
 |    ``lower_upper(+char,?char)`` - ``zero_or_one``
 |    ``lower_upper(?char,+char)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

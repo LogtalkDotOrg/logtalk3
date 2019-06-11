@@ -53,6 +53,8 @@ True if goal is provable in the specified database.
 |    ``prove(+goal,+database)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="prove/3"> </div>
@@ -73,6 +75,8 @@ True if goal is provable within the given depth-limit in the specified database.
 | **Mode and number of proofs:**
 |    ``prove(+goal,+limit,+database)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

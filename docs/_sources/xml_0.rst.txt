@@ -67,6 +67,8 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 |    ``parse(?nonvar,+nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="parse/3"> </div>
@@ -89,6 +91,8 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 |    ``parse(+nonvar,?nonvar,+nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="subterm/2"> </div>
@@ -110,6 +114,8 @@ Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of i
 |    ``subterm(+nonvar,?nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="pp/1"> </div>
@@ -130,6 +136,8 @@ Pretty prints a XML document on the current output stream.
 | **Mode and number of proofs:**
 |    ``pp(+nonvar)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------
@@ -160,6 +168,8 @@ Translates the list of character codes XML into the Prolog term Document. Contro
 |    ``xml_to_document(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="empty_map/1"> </div>
@@ -180,6 +190,8 @@ True if Map is a null map.
 | **Mode and number of proofs:**
 |    ``empty_map(?nonvar)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -202,6 +214,8 @@ True if Map is a ordered map structure which records the pair Key-Data. Key must
 |    ``map_member(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="map_store/4"> </div>
@@ -222,6 +236,8 @@ True if Map0 is an ordered map structure, Key must be ground, and Map1 is identi
 | **Mode and number of proofs:**
 |    ``map_store(+nonvar,+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -244,6 +260,8 @@ Prints String onto the current output stream. If String contains only 7-bit char
 |    ``pp_string(+nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="fault/5"> </div>
@@ -264,6 +282,8 @@ Identifies SubTerm as a sub-term of Term which cannot be serialized after Indent
 | **Mode and number of proofs:**
 |    ``fault(+nonvar,+nonvar,?nonvar,?nonvar,?nonvar)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -286,6 +306,8 @@ Hook to raise an exception to be raised in respect of a fault in the XML Term: D
 |    ``exception(+atom,+nonvar,+nonvar,+nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="document_generation//2"> </div>
@@ -304,6 +326,8 @@ DCG generating Document as a list of character codes. Format is true|false defin
 | **Template:**
 |    ``document_generation(Format,Document)``
 
+------------
+
 .. raw:: html
 
    <div id="pcdata_7bit//1"> </div>
@@ -321,6 +345,8 @@ Represents the ascii character set in its simplest format, using the character e
 
 | **Template:**
 |    ``pcdata_7bit(Char)``
+
+------------
 
 .. raw:: html
 
@@ -343,6 +369,8 @@ Holds when Format0 and Format1 are the statuses of XML formatting before and aft
 |    ``character_data_format(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="cdata_generation//1"> </div>
@@ -360,6 +388,8 @@ Holds when Format0 and Format1 are the statuses of XML formatting before and aft
 
 | **Template:**
 |    ``cdata_generation(Chars)``
+
+------------
 
 Operators
 ---------

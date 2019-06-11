@@ -59,6 +59,8 @@ Connect to a Redis server running on localhost using the default 6379 port.
 |    ``connect(--ground)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="connect/3"> </div>
@@ -79,6 +81,8 @@ Connect to a Redis server running on the given host and port.
 | **Mode and number of proofs:**
 |    ``connect(+atom,+integer,--ground)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -101,6 +105,8 @@ Disconnect from a Redis server.
 |    ``disconnect(++ground)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="send/3"> </div>
@@ -122,6 +128,8 @@ Sends a request to the a Redis server and returns its reply
 |    ``send(++ground,++callable,--callable)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="console/1"> </div>
@@ -142,6 +150,8 @@ Sends a request to a Redis server running on localhost at the default 6379 port 
 | **Mode and number of proofs:**
 |    ``console(++callable)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

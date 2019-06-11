@@ -77,6 +77,8 @@ Prints a message of the given kind for the specified component.
 |    ``print_message(+nonvar,+nonvar,+nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="print_message_tokens/3"> </div>
@@ -97,6 +99,8 @@ Print the messages tokens to the given stream, prefixing each line with the spec
 | **Mode and number of proofs:**
 |    ``print_message_tokens(@stream_or_alias,+atom,@list(nonvar))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -119,6 +123,8 @@ User-defined hook predicate for printing a message token (at_same_line, nl, flus
 |    ``print_message_token(@stream_or_alias,@atom,@nonvar,@list(nonvar))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="message_tokens//2"> </div>
@@ -136,6 +142,8 @@ User-defined hook grammar rule for converting a message into a list of tokens (a
 
 | **Template:**
 |    ``message_tokens(Message,Component)``
+
+------------
 
 .. raw:: html
 
@@ -158,6 +166,8 @@ Message line prefix and output stream to be used when printing a message given i
 |    ``message_prefix_stream(?nonvar,?nonvar,?atom,?stream_or_alias)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="message_hook/4"> </div>
@@ -178,6 +188,8 @@ User-defined hook predicate for intercepting message printing calls.
 | **Mode and number of proofs:**
 |    ``message_hook(+nonvar,+nonvar,+nonvar,+list(nonvar))`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -202,6 +214,8 @@ Asks a question and reads the answer until the check predicate is true.
 |    ``ask_question(+nonvar,+nonvar,+nonvar,+callable,-term)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="question_hook/6"> </div>
@@ -225,6 +239,8 @@ User-defined hook predicate for intercepting question asking calls.
 |    ``question_hook(+nonvar,+nonvar,+nonvar,+list(nonvar),+callable,-term)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="question_prompt_stream/4"> </div>
@@ -245,6 +261,8 @@ Prompt and input stream to be used when asking a question given its kind and com
 | **Mode and number of proofs:**
 |    ``question_prompt_stream(?nonvar,?nonvar,?atom,?stream_or_alias)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -267,6 +285,8 @@ Trace event handler. The runtime calls all trace event handlers using a failure-
 |    ``trace_event(@callable,@execution_context)`` - ``zero``
 
 
+------------
+
 .. raw:: html
 
    <div id="debug_handler_provider/1"> </div>
@@ -288,6 +308,8 @@ Declares an object as the debug handler provider. There should be at most one de
 |    ``debug_handler_provider(?object_identifier)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="debug_handler/2"> </div>
@@ -308,6 +330,8 @@ Debug event handler. The defined events are unification events - fact(Entity,Fac
 | **Mode and number of proofs:**
 |    ``debug_handler(?entity_identifier,?atom)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -331,6 +355,8 @@ Expands a library alias or a library path into its absolute path. Uses a depth b
 |    ``expand_library_path(+callable,?atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="loaded_file/1"> </div>
@@ -351,6 +377,8 @@ Enumerates, by backtracking, all loaded files, returning their full paths.
 | **Mode and number of proofs:**
 |    ``loaded_file(?atom)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -373,6 +401,8 @@ Enumerates, by backtracking, all loaded file properties. Valid properties are: b
 |    ``loaded_file_property(?atom,?compound)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="file_type_extension/2"> </div>
@@ -393,6 +423,8 @@ Enumerates, by backtracking, all defined file type extensions. The defined types
 | **Mode and number of proofs:**
 |    ``file_type_extension(?atom,?atom)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -415,6 +447,8 @@ Compiles a list of auxiliary clauses. Can only be called during source file comp
 |    ``compile_aux_clauses(@list(clause))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="entity_prefix/2"> </div>
@@ -435,6 +469,8 @@ Converts between an entity identifier and the entity prefix that is used for its
 | **Mode and number of proofs:**
 |    ``entity_prefix(?entity_identifier,?atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -459,6 +495,8 @@ Compiles clause heads. The heads are compiled in the context of the entity under
 |    ``compile_predicate_heads(@callable,?entity_identifier,-callable,@execution_context)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="compile_predicate_indicators/3"> </div>
@@ -481,6 +519,8 @@ Compiles predicate indicators. The predicate are compiled in the context of the 
 |    ``compile_predicate_indicators(@conjunction(predicate_indicator),?entity_identifier,-conjunction(predicate_indicator))`` - ``zero_or_one``
 |    ``compile_predicate_indicators(@predicate_indicator,?entity_identifier,-predicate_indicator)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -505,6 +545,8 @@ Decompiles clause heads. All compiled clause heads must belong to the same entit
 |    ``decompile_predicate_heads(@callable,-entity_identifier,-atom,-callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="decompile_predicate_indicators/4"> </div>
@@ -528,6 +570,8 @@ Decompiles predicate indicators. All compiled predicate indicators must belong t
 |    ``decompile_predicate_indicators(@predicate_indicator,-entity_identifier,-atom,-predicate_indicator)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="execution_context/7"> </div>
@@ -548,6 +592,8 @@ Execution context term data. Execution context terms should be considered opaque
 | **Mode and number of proofs:**
 |    ``execution_context(?nonvar,?entity_identifier,?object_identifier,?object_identifier,?object_identifier,@list(callable),@list(callable))`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

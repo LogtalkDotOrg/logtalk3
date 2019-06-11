@@ -85,6 +85,8 @@ Table of defined types for which an arbitrary value can be generated. A new type
 |    ``arbitrary(?callable)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="arbitrary/2"> </div>
@@ -105,6 +107,8 @@ Generates an arbitrary term of the specified type. Fails if the type is not supp
 | **Mode and number of proofs:**
 |    ``arbitrary(@callable,-term)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -127,6 +131,8 @@ Table of defined types for which a shrinker is provided. A new shrinker can be r
 |    ``shrinker(?callable)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="shrink/3"> </div>
@@ -148,6 +154,8 @@ Shrinks a value to a smaller value if possible. Must generate a finite number of
 |    ``shrink(@callable,@term,-term)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="edge_case/2"> </div>
@@ -168,6 +176,8 @@ Table of type edge cases. Fails if the given type have no defined edge cases. Ne
 | **Mode and number of proofs:**
 |    ``edge_case(?callable,?term)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

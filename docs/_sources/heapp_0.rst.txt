@@ -53,6 +53,8 @@ Inserts the new Key-Value pair into a heap, returning the updated heap.
 |    ``insert(+key,+value,+heap,-heap)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="insert_all/3"> </div>
@@ -73,6 +75,8 @@ Inserts a list of Key-Value pairs into a heap, returning the updated heap.
 | **Mode and number of proofs:**
 |    ``insert_all(@list(pairs),+heap,-heap)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.
 |    ``delete(+heap,?key,?value,-heap)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="merge/3"> </div>
@@ -115,6 +121,8 @@ Merges two heaps.
 | **Mode and number of proofs:**
 |    ``merge(+heap,+heap,-heap)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ True if the heap is empty.
 |    ``empty(@heap)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="size/2"> </div>
@@ -157,6 +167,8 @@ Returns the number of heap elements.
 | **Mode and number of proofs:**
 |    ``size(+heap,?integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Returns the current set of Key-Value pairs in the Heap as a List, sorted into as
 |    ``as_list(+heap,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="as_heap/2"> </div>
@@ -199,6 +213,8 @@ Constructs a Heap from a list of Key-Value pairs.
 | **Mode and number of proofs:**
 |    ``as_heap(+list,-heap)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ Returns the top Key-Value pair in Heap. Fails if the heap is empty.
 |    ``top(+heap,?key,?value)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="top_next/5"> </div>
@@ -241,6 +259,8 @@ Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fail
 | **Mode and number of proofs:**
 |    ``top_next(+heap,?key,?value,?key,?value)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

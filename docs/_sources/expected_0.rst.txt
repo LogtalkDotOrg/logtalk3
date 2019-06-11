@@ -55,6 +55,8 @@ Constructs a reference from an unexpected term.
 |    ``of_unexpected(@term,--nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="of_expected/2"> </div>
@@ -75,6 +77,8 @@ Constructs a reference from an expected term.
 | **Mode and number of proofs:**
 |    ``of_expected(@term,--nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -99,6 +103,8 @@ Constructs a reference by calling Goal that binds and holds Expected on success.
 |    ``from_goal(+callable,--term,@term,--nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="from_goal/3"> </div>
@@ -121,6 +127,8 @@ Constructs a reference by calling Goal that binds and uses Expected on success. 
 | **Mode and number of proofs:**
 |    ``from_goal(+callable,--term,--nonvar)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

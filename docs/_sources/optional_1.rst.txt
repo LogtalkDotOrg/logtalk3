@@ -51,6 +51,8 @@ True if the reference is empty. Avoid whenever possible by using instead the if_
 |    ``is_empty`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_present/0"> </div>
@@ -69,6 +71,8 @@ True if the reference holds a term. Avoid whenever possible by using instead the
 | **Mode and number of proofs:**
 |    ``is_present`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -93,6 +97,8 @@ Calls a goal if the reference is empty. Succeeds otherwise.
 |    ``if_empty(+callable)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="if_present/1"> </div>
@@ -115,6 +121,8 @@ Applies a closure if the reference holds a term using the term as additional arg
 | **Mode and number of proofs:**
 |    ``if_present(+callable)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -139,6 +147,8 @@ Returns the reference when it is non-empty and the term it holds satisfies a clo
 |    ``filter(+callable,--nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="map/2"> </div>
@@ -162,6 +172,8 @@ When the reference is non-empty and mapping a closure with the term it holds and
 |    ``map(+callable,--nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="flat_map/2"> </div>
@@ -184,6 +196,8 @@ When the reference is non-empty and mapping a closure with the optional tern and
 | **Mode and number of proofs:**
 |    ``flat_map(+callable,--nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -210,6 +224,8 @@ Returns the term hold by the reference if not empty. Throws an error otherwise.
 |        ``existence_error(optional_term,Reference)``
 
 
+------------
+
 .. raw:: html
 
    <div id="or_else/2"> </div>
@@ -230,6 +246,8 @@ Returns the term hold by the reference if not empty or the given default term if
 | **Mode and number of proofs:**
 |    ``or_else(--term,@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -258,6 +276,8 @@ Returns the term hold by the reference if not empty. Applies a closure to comput
 |        ``existence_error(optional_term,Reference)``
 
 
+------------
+
 .. raw:: html
 
    <div id="or_else_call/2"> </div>
@@ -281,6 +301,8 @@ Returns the term hold by the reference if not empty or calls a goal deterministi
 |    ``or_else_call(--term,+callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="or_else_fail/1"> </div>
@@ -301,6 +323,8 @@ Returns the term hold by the reference if not empty. Fails otherwise. Usually ca
 | **Mode and number of proofs:**
 |    ``or_else_fail(--term)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

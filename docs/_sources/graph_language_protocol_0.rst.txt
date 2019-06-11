@@ -53,6 +53,8 @@ Constructs the diagram file basename by adding a graph language dependent extens
 |    ``output_file_name(+atom,-atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file_header/3"> </div>
@@ -73,6 +75,8 @@ Writes the output file header using the specified options.
 | **Mode and number of proofs:**
 |    ``file_header(+stream_or_alias,+atom,+list(compound))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Writes the output file footer using the specified options.
 |    ``file_footer(+stream_or_alias,+atom,+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="graph_header/5"> </div>
@@ -115,6 +121,8 @@ Writes a graph header using the specified options.
 | **Mode and number of proofs:**
 |    ``graph_header(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Writes a graph footer using the specified options.
 |    ``graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="node/7"> </div>
@@ -158,6 +168,8 @@ Writes a node using the specified options.
 |    ``node(+stream_or_alias,+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="edge/6"> </div>
@@ -178,6 +190,8 @@ Writes an edge between two nodes using the specified options.
 | **Mode and number of proofs:**
 |    ``edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

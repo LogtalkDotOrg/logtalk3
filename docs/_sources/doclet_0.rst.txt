@@ -53,6 +53,8 @@ Updates the project documentation, first by calling a sequence of goals and seco
 |    ``update`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="doc_goal/1"> </div>
@@ -74,6 +76,8 @@ Table of goals, typically using the "diagrams" and the "lgtdoc" tools, used to g
 |    ``doc_goal(?callable)`` - ``one_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="shell_command/1"> </div>
@@ -94,6 +98,8 @@ Table of shell commands to convert intermediate documentation files into user-fr
 | **Mode and number of proofs:**
 |    ``shell_command(?atom)`` - ``one_or_more``
 
+
+------------
 
 Protected interface
 -------------------

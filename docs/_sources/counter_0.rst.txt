@@ -51,6 +51,8 @@ Increment the counter by 1.
 |    ``increment`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="increase/1"> </div>
@@ -71,6 +73,8 @@ Increments the counter by the specified amount.
 
 | **argname:**
 |    [I]
+
+------------
 
 .. raw:: html
 
@@ -93,6 +97,8 @@ Sets the counter to the specified amount.
 | **argname:**
 |    [N]
 
+------------
+
 .. raw:: html
 
    <div id="value/1"> </div>
@@ -114,6 +120,8 @@ Gets the current value of the counter.
 | **argname:**
 |    [N]
 
+------------
+
 .. raw:: html
 
    <div id="reset/0"> </div>
@@ -132,6 +140,8 @@ Resets the counter to zero.
 | **Mode and number of proofs:**
 |    ``reset`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------
@@ -154,6 +164,8 @@ Private predicates
 | **Compilation flags:**
 |    ``dynamic``
 
+
+------------
 
 Operators
 ---------

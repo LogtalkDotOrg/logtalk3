@@ -56,6 +56,8 @@ Enables all debug and debug(Group) messages for the given component.
 |    ``enable(@term)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="disable/1"> </div>
@@ -73,6 +75,8 @@ Disables all debug and debug(Group) messages for the given component.
 
 | **Template:**
 |    ``disable(Component)``
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Enumerates by backtraking the components with enabled debug and debug(Group) mes
 |    ``enabled(?term)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="enable/2"> </div>
@@ -115,6 +121,8 @@ Enables debug(Group) messages for the given component and group.
 | **Mode and number of proofs:**
 |    ``enable(@term,@term)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -138,6 +146,8 @@ Disables debug(Group) messages for the given component and group.
 |    ``disable(@term,@term)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="enabled/2"> </div>
@@ -158,6 +168,8 @@ Enumerates by backtraking the enabled debug(Group) messages for each component.
 | **Mode and number of proofs:**
 |    ``enabled(?term,?term)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------
@@ -188,6 +200,8 @@ Table of components with currently enabled debug and debug(Group) messages.
 |    ``enabled_(?term)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="enabled_/2"> </div>
@@ -208,6 +222,8 @@ Table of currently enabled debug(Group) per component.
 | **Mode and number of proofs:**
 |    ``enabled_(?term,?term)`` - ``zero_or_more``
 
+
+------------
 
 Operators
 ---------

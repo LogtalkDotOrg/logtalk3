@@ -53,6 +53,8 @@ Gets or tests the value of a flag.
 |    ``get_flag_value(+atom,?nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_flag_value/2"> </div>
@@ -73,6 +75,8 @@ Sets the value of a flag.
 | **Mode and number of proofs:**
 |    ``set_flag_value(+atom,@nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Sets the value of a flag, returning the old value.
 |    ``set_flag_value(+atom,?nonvar,@nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="reset_flags/0"> </div>
@@ -113,6 +119,8 @@ Resets all flags to their default values.
 | **Mode and number of proofs:**
 |    ``reset_flags`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -135,6 +143,8 @@ Resets all flags in a group to their default values.
 |    ``reset_flags(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="flag_groups/1"> </div>
@@ -155,6 +165,8 @@ Returns a list of all flag groups.
 | **Mode and number of proofs:**
 |    ``flag_groups(-list(atom))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -177,6 +189,8 @@ Checks if a given atom is a flag group.
 |    ``flag_group_chk(+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="print_flags/0"> </div>
@@ -195,6 +209,8 @@ Prints a listing of all flags.
 | **Mode and number of proofs:**
 |    ``print_flags`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -217,6 +233,8 @@ Prints a listing of all flags in a group.
 |    ``print_flags(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="defined_flag/6"> </div>
@@ -238,6 +256,8 @@ Gets or test the existing (visible) flag definitions.
 |    ``defined_flag(?atom,?atom,?nonvar,?nonvar,?atom,?atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="built_in_flag/2"> </div>
@@ -258,6 +278,8 @@ True if the argument is a built-in flag type with the specified default value.
 | **Mode and number of proofs:**
 |    ``built_in_flag(?atom,?nonvar)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------
@@ -283,6 +305,8 @@ Sets the value of a flag without performing any validation checks.
 |    ``unsafe_set_flag_value(+atom,@nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="define_flag/1"> </div>
@@ -304,6 +328,8 @@ Defines a new flag using default options.
 |    ``define_flag(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="define_flag/2"> </div>
@@ -324,6 +350,8 @@ Defines a new flag using a given set of options (for example, [group(general), t
 | **Mode and number of proofs:**
 |    ``define_flag(+atom,@list)`` - ``one``
 
+
+------------
 
 Private predicates
 ------------------
@@ -349,6 +377,8 @@ Gets or test the existing flag definitions.
 |    ``defined_flag_(?atom,?atom,?nonvar,?nonvar,?atom,?atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="flag_value_/2"> </div>
@@ -370,6 +400,8 @@ Table of flag values.
 |    ``flag_value_(?atom,?nonvar)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="validate/3"> </div>
@@ -383,6 +415,8 @@ Table of flag values.
 | **Compilation flags:**
 |    ``static``
 
+
+------------
 
 .. raw:: html
 
@@ -398,6 +432,8 @@ Table of flag values.
 |    ``static``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_validator/1"> </div>
@@ -411,6 +447,8 @@ Table of flag values.
 | **Compilation flags:**
 |    ``static``
 
+
+------------
 
 Operators
 ---------

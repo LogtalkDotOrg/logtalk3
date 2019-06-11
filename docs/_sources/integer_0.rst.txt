@@ -55,6 +55,8 @@ Returns integers in the interval defined by the two first arguments.
 |    ``between(+integer,+integer,-integer)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="plus/3"> </div>
@@ -78,6 +80,8 @@ Reversible integer sum. At least two of the arguments must be instantiated to in
 |    ``plus(?integer,+integer,+integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="succ/2"> </div>
@@ -100,6 +104,8 @@ Successor of a natural number. At least one of the arguments must be instantiate
 |    ``succ(?integer,+integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="sequence/3"> </div>
@@ -120,6 +126,8 @@ Generates a list with the sequence of all integers in the interval [Inf, Sup], a
 | **Mode and number of proofs:**
 |    ``sequence(+integer,+integer,-list(integer))`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

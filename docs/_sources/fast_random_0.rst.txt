@@ -54,6 +54,8 @@ Resets the random generator seed to its default value. Use get_seed/1 and set_se
 |    ``reset_seed`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="randomize/1"> </div>
@@ -74,6 +76,8 @@ Randomizes the random generator using a positive integer to compute a new seed.
 | **Mode and number of proofs:**
 |    ``randomize(+positive_integer)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------
@@ -103,6 +107,8 @@ Stores the current random generator seed values.
 | **Mode and number of proofs:**
 |    ``seed_(-integer,-integer,-integer)`` - ``one``
 
+
+------------
 
 Operators
 ---------

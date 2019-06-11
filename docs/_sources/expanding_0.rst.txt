@@ -53,6 +53,8 @@ Defines a goal expansion. Called recursively until a fixed point is reached on g
 |    ``goal_expansion(+callable,-callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="term_expansion/2"> </div>
@@ -74,6 +76,8 @@ Defines a term expansion. Called until it succeeds on all terms read while compi
 |    ``term_expansion(+term,-term)`` - ``zero_or_one``
 |    ``term_expansion(+term,-list(term))`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

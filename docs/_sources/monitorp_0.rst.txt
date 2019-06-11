@@ -51,6 +51,8 @@ True if monitor is currently active.
 |    ``monitor_activated`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="activate_monitor/0"> </div>
@@ -69,6 +71,8 @@ Activates all spy points and start monitoring.
 | **Mode and number of proofs:**
 |    ``activate_monitor`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -89,6 +93,8 @@ Suspends monitoring, deactivating all spy points.
 |    ``suspend_monitor`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="reset_monitor/0"> </div>
@@ -107,6 +113,8 @@ Resets monitor, deactivating and deleting all spy points.
 | **Mode and number of proofs:**
 |    ``reset_monitor`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -129,6 +137,8 @@ Current spy point.
 |    ``spy_point(?event,?object,?callable,?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_spy_point/4"> </div>
@@ -150,6 +160,8 @@ Sets a spy point.
 |    ``set_spy_point(?event,?object,?callable,?object)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="del_spy_points/4"> </div>
@@ -170,6 +182,8 @@ Deletes all matching spy points.
 | **Mode and number of proofs:**
 |    ``del_spy_points(@event,@object,@callable,@object)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

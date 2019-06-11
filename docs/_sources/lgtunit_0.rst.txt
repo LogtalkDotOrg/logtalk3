@@ -62,6 +62,8 @@ Declares entities being tested for which code coverage information should be col
 |    ``cover(?entity_identifier)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="run/0"> </div>
@@ -80,6 +82,8 @@ Runs the unit tests, writing the results to the current output stream.
 | **Mode and number of proofs:**
 |    ``run`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -103,6 +107,8 @@ Runs a unit test or a list of unit tests, writing the results to the current out
 |    ``run(+list(atom))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="run/2"> </div>
@@ -124,6 +130,8 @@ Runs the unit tests, writing the results to the specified file. Mode can be eith
 |    ``run(+atom,+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="run_test_sets/1"> </div>
@@ -144,6 +152,8 @@ Runs two or more test sets as a unified set generating a single code coverage re
 | **Mode and number of proofs:**
 |    ``run_test_sets(+list(object_identifier))`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -168,6 +178,8 @@ True if the goal succeeds once without leaving choice-points.
 |    ``deterministic(+callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="deterministic/2"> </div>
@@ -190,6 +202,8 @@ Reified version of the deterministic/1 predicate. True if the goal succeeds. Ret
 | **Mode and number of proofs:**
 |    ``deterministic(+callable,--atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -220,6 +234,8 @@ True if the assertion goal succeeds. Throws an error using the assertion goal as
 |        ``assertion_error(Assertion,Error)``
 
 
+------------
+
 .. raw:: html
 
    <div id="assertion/2"> </div>
@@ -249,6 +265,8 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 |        ``assertion_error(Description,Error)``
 
 
+------------
+
 .. raw:: html
 
    <div id="quick_check/3"> </div>
@@ -269,6 +287,8 @@ Reified version of the quick_check/2 predicate. Reports the result as "passed", 
 | **Mode and number of proofs:**
 |    ``quick_check(@callable,-callable,++list(compound))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -291,6 +311,8 @@ Generates and runs random tests for a given predicate given its mode template. F
 |    ``quick_check(@callable,++list(compound))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="quick_check/1"> </div>
@@ -311,6 +333,8 @@ Generates and runs 100 random tests for a given predicate given its mode templat
 | **Mode and number of proofs:**
 |    ``quick_check(@callable)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -335,6 +359,8 @@ Benchmarks a goal and returns the total execution time in seconds. Uses cpu cloc
 |    ``benchmark(+callable,-float)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="benchmark_reified/3"> </div>
@@ -357,6 +383,8 @@ Benchmarks a goal and returns the total execution time in seconds plus its resul
 | **Mode and number of proofs:**
 |    ``benchmark_reified(+callable,-float,-callable)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -381,6 +409,8 @@ Benchmarks a goal by repeating it the specified number of times and returning th
 |    ``benchmark(@callable,+positive_integer,-float)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="benchmark/4"> </div>
@@ -404,6 +434,8 @@ Benchmarks a goal by repeating it the specified number of times and returning th
 |    ``benchmark(@callable,+positive_integer,+atom,-float)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="variant/2"> </div>
@@ -424,6 +456,8 @@ True when the two arguments are a variant of each other. I.e. if is possible to 
 | **Mode and number of proofs:**
 |    ``variant(@term,@term)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -446,6 +480,8 @@ Compares two numbers for approximate equality given an epsilon value using the d
 |    ``approximately_equal(+number,+number,+number)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="essentially_equal/3"> </div>
@@ -467,6 +503,8 @@ Compares two numbers for essential equality given an epsilon value using the de 
 |    ``essentially_equal(+number,+number,+number)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="tolerance_equal/4"> </div>
@@ -487,6 +525,8 @@ Compares two numbers for close equality given relative and absolute tolerances u
 | **Mode and number of proofs:**
 |    ``tolerance_equal(+number,+number,+number,+number)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -510,6 +550,8 @@ Compares two numbers (or lists of numbers) for approximate equality using 100*ep
 |    ``=~=(+list(number),+list(number))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="epsilon/1"> </div>
@@ -530,6 +572,8 @@ Returns the value of epsilon used in the definition of the (=~=)/2 predicate.
 | **Mode and number of proofs:**
 |    ``epsilon(-float)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------
@@ -553,6 +597,8 @@ Runs all defined unit tests.
 |    ``run_tests`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="run_tests/2"> </div>
@@ -574,6 +620,8 @@ Runs a list of defined tests.
 |    ``run_tests(+list(callable),+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="run_test_set/0"> </div>
@@ -592,6 +640,8 @@ Runs a test set as part of running two or more test sets as a unified set.
 | **Mode and number of proofs:**
 |    ``run_test_set`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -614,6 +664,8 @@ Runs a list of defined tests using the given options.
 |    ``run_quick_check_tests(@callable,+list)`` - ``one_or_error``
 
 
+------------
+
 .. raw:: html
 
    <div id="condition/0"> </div>
@@ -632,6 +684,8 @@ Verifies conditions for running the tests. Defaults to the goal true.
 | **Mode and number of proofs:**
 |    ``condition`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -652,6 +706,8 @@ Setup environment before running the test set. Defaults to the goal true.
 |    ``setup`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="cleanup/0"> </div>
@@ -670,6 +726,8 @@ Cleanup environment after running the test set. Defaults to the goal true.
 | **Mode and number of proofs:**
 |    ``cleanup`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -690,6 +748,8 @@ Make target for automatically running the test set when calling the logtalk_make
 |    ``make(?atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="note/1"> </div>
@@ -708,6 +768,8 @@ Note to be printed after the test results. Defaults to the empty atom.
 | **Mode and number of proofs:**
 |    ``note(?atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -728,6 +790,8 @@ Suppresses text output. Useful to avoid irrelevant text output from predicates b
 |    ``suppress_text_output`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="suppress_binary_output/0"> </div>
@@ -746,6 +810,8 @@ Suppresses binary output. Useful to avoid irrelevant binary output from predicat
 | **Mode and number of proofs:**
 |    ``suppress_binary_output`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -768,6 +834,8 @@ Creates a temporary file with the given text contents and opens it for reading r
 |    ``set_text_input(+atom,+atom,+list(stream_option))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_text_input/2"> </div>
@@ -788,6 +856,8 @@ Creates a temporary file with the given text contents and opens it for reading r
 | **Mode and number of proofs:**
 |    ``set_text_input(+atom,+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -810,6 +880,8 @@ Creates a temporary file with the given text contents, opens it for reading usin
 |    ``set_text_input(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="check_text_input/2"> </div>
@@ -830,6 +902,8 @@ Checks that the temporary file (referenced with the given alias) being written h
 | **Mode and number of proofs:**
 |    ``check_text_input(+atom,+atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -852,6 +926,8 @@ Checks that the temporary file being written have the expected text contents.
 |    ``check_text_input(+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="text_input_assertion/3"> </div>
@@ -872,6 +948,8 @@ Returns an assertion for checking that the temporary file (referenced with the g
 | **Mode and number of proofs:**
 |    ``text_input_assertion(+atom,+atom,--callable)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -894,6 +972,8 @@ Returns an assertion for checking that the temporary file being written have the
 |    ``text_input_assertion(+atom,--callable)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="clean_text_input/0"> </div>
@@ -912,6 +992,8 @@ Cleans the temporary file used when testing text input.
 | **Mode and number of proofs:**
 |    ``clean_text_input`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -934,6 +1016,8 @@ Creates a temporary file with the given binary contents and opens it for reading
 |    ``set_binary_input(+atom,+list(byte),+list(stream_option))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_binary_input/2"> </div>
@@ -954,6 +1038,8 @@ Creates a temporary file with the given binary contents and opens it for reading
 | **Mode and number of proofs:**
 |    ``set_binary_input(+atom,+list(byte))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -976,6 +1062,8 @@ Creates a temporary file with the given binary contents, opens it for reading us
 |    ``set_binary_input(+list(byte))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="check_binary_input/2"> </div>
@@ -996,6 +1084,8 @@ Checks that the temporary file (referenced with the given alias) have the expect
 | **Mode and number of proofs:**
 |    ``check_binary_input(+atom,+list(byte))`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -1018,6 +1108,8 @@ Checks that the temporary file have the expected binary contents.
 |    ``check_binary_input(+list(byte))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="binary_input_assertion/3"> </div>
@@ -1038,6 +1130,8 @@ Returns an assertion for checking that the temporary file (referenced with the g
 | **Mode and number of proofs:**
 |    ``binary_input_assertion(+atom,+list(byte),--callable)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -1060,6 +1154,8 @@ Returns an assertion for checking that the temporary file have the expected bina
 |    ``binary_input_assertion(+list(byte),--callable)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="clean_binary_input/0"> </div>
@@ -1078,6 +1174,8 @@ Cleans the temporary file used when testing binary input.
 | **Mode and number of proofs:**
 |    ``clean_binary_input`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -1100,6 +1198,8 @@ Creates a temporary file with the given text contents and referenced with the gi
 |    ``set_text_output(+atom,+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_text_output/1"> </div>
@@ -1120,6 +1220,8 @@ Creates a temporary file with the given text contents and sets the current outpu
 | **Mode and number of proofs:**
 |    ``set_text_output(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -1142,6 +1244,8 @@ Checks that the temporary file (referenced with the given alias) being written h
 |    ``check_text_output(+atom,+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="check_text_output/1"> </div>
@@ -1162,6 +1266,8 @@ Checks that the temporary file being written have the expected text contents.
 | **Mode and number of proofs:**
 |    ``check_text_output(+atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -1184,6 +1290,8 @@ Returns an assertion for checking that the temporary file (referenced with the g
 |    ``text_output_assertion(+atom,+atom,--callable)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="text_output_assertion/2"> </div>
@@ -1205,6 +1313,8 @@ Returns an assertion for checking that the temporary file being written have the
 |    ``text_output_assertion(+atom,--callable)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="clean_text_output/0"> </div>
@@ -1223,6 +1333,8 @@ Cleans the temporary file used when testing text output.
 | **Mode and number of proofs:**
 |    ``clean_text_output`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -1245,6 +1357,8 @@ Creates a temporary file with the given binary contents and referenced with the 
 |    ``set_binary_output(+atom,+list(byte))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_binary_output/1"> </div>
@@ -1265,6 +1379,8 @@ Creates a temporary file with the given binary contents and sets the current out
 | **Mode and number of proofs:**
 |    ``set_binary_output(+list(byte))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -1287,6 +1403,8 @@ Checks that the temporary file (referenced with the given alias) have the expect
 |    ``check_binary_output(+atom,+list(byte))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="check_binary_output/1"> </div>
@@ -1307,6 +1425,8 @@ Checks that the temporary file have the expected binary contents.
 | **Mode and number of proofs:**
 |    ``check_binary_output(+list(byte))`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -1329,6 +1449,8 @@ Returns an assertion for checking that the temporary file (referenced with the g
 |    ``binary_output_assertion(+atom,+list(byte),--callable)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="binary_output_assertion/2"> </div>
@@ -1350,6 +1472,8 @@ Returns an assertion for checking that the temporary file have the expected bina
 |    ``binary_output_assertion(+list(byte),--callable)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="clean_binary_output/0"> </div>
@@ -1368,6 +1492,8 @@ Cleans the temporary file used when testing binary output.
 | **Mode and number of proofs:**
 |    ``clean_binary_output`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -1390,6 +1516,8 @@ Creates a text file with the given contents.
 |    ``create_text_file(+atom,+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="create_binary_file/2"> </div>
@@ -1410,6 +1538,8 @@ Creates a binary file with the given contents.
 | **Mode and number of proofs:**
 |    ``create_binary_file(+atom,+list(byte))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -1432,6 +1562,8 @@ Checks that the contents of a text file match the expected contents.
 |    ``check_text_file(+atom,+atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="check_binary_file/2"> </div>
@@ -1452,6 +1584,8 @@ Checks the contents of a binary file match the expected contents.
 | **Mode and number of proofs:**
 |    ``check_binary_file(+atom,+list(byte))`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -1474,6 +1608,8 @@ Closes any existing stream associated with the file and deletes the file if it e
 |    ``clean_file(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="closed_input_stream/2"> </div>
@@ -1494,6 +1630,8 @@ Opens a temporary file with the given options for reading, closes it, and return
 | **Mode and number of proofs:**
 |    ``closed_input_stream(-stream,+list(stream_option))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -1516,6 +1654,8 @@ Opens a temporary file with the given options for writing, closes it, and return
 |    ``closed_output_stream(-stream,+list(stream_option))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="stream_position/1"> </div>
@@ -1536,6 +1676,8 @@ Returns a syntactically valid stream position.
 | **Mode and number of proofs:**
 |    ``stream_position(-stream_position)`` - ``one``
 
+
+------------
 
 Private predicates
 ------------------
@@ -1559,6 +1701,8 @@ Internal flag used when running two or more test sets as a unified set.
 |    ``running_test_sets_`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="test/3"> </div>
@@ -1579,6 +1723,8 @@ Specifies a unit test.
 | **Mode and number of proofs:**
 |    ``test(?atom,?list(variable),?nonvar)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -1601,6 +1747,8 @@ Counter for generarting unique auxiliary predicate names.
 |    ``auxiliary_predicate_counter_(?integer)`` - ``one_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="test_/2"> </div>
@@ -1621,6 +1769,8 @@ Table of defined tests.
 | **Mode and number of proofs:**
 |    ``test_(?atom,?compound)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -1643,6 +1793,8 @@ Counter for skipped tests.
 |    ``skipped_(?integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="passed_/1"> </div>
@@ -1663,6 +1815,8 @@ Counter for passed tests.
 | **Mode and number of proofs:**
 |    ``passed_(?integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -1685,6 +1839,8 @@ Counter for failed tests.
 |    ``failed_(?callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="fired_/3"> </div>
@@ -1706,6 +1862,8 @@ Fired clauses when running the unit tests.
 |    ``fired_(?entity_identifier,?predicate_indicator,?integer)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="covered_/4"> </div>
@@ -1726,6 +1884,8 @@ Auxiliary predicate for collecting statistics on clause coverage.
 | **Mode and number of proofs:**
 |    ``covered_(?entity_identifier,?callable,?integer,?integer)`` - ``zero_or_more``
 
+
+------------
 
 Operators
 ---------

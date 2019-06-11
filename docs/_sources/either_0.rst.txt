@@ -70,6 +70,8 @@ Returns the terms stored in the references that hold an expected term.
 |    ``expecteds(+list(expected),-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="unexpecteds/2"> </div>
@@ -91,6 +93,8 @@ Returns the terms stored in the references that hold an expected term.
 |    ``unexpecteds(+list(expected),-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="partition/3"> </div>
@@ -111,6 +115,8 @@ Retrieves and partitions the terms hold by the references.
 | **Mode and number of proofs:**
 |    ``partition(+list(expected),-list,-list)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

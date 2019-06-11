@@ -53,6 +53,8 @@ True if Counter is a counter with value Value.
 |    ``counter(?nonvar,?integer)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="increment_counter/1"> </div>
@@ -73,6 +75,8 @@ Increments the named counter.
 | **Mode and number of proofs:**
 |    ``increment_counter(+nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Decrements the named counter.
 |    ``decrement_counter(+nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="reset_counter/1"> </div>
@@ -116,6 +122,8 @@ Resets the named counter to zero. Creates the counter if it does not exist.
 |    ``reset_counter(+nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="reset_counters/0"> </div>
@@ -132,6 +140,8 @@ Resets the named counter to zero. Creates the counter if it does not exist.
 | **Mode and number of proofs:**
 |    ``reset_counters`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------
@@ -161,6 +171,8 @@ Table of named counters.
 | **Mode and number of proofs:**
 |    ``counter_(?nonvar,?integer)`` - ``zero_or_more``
 
+
+------------
 
 Operators
 ---------

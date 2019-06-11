@@ -84,6 +84,8 @@ Creates XML documenting files for all entities in a library and its sub-librarie
 |      ``yes``
 
 
+------------
+
 .. raw:: html
 
    <div id="rlibrary/1"> </div>
@@ -109,6 +111,8 @@ Creates XML documenting files for all entities in a library and its sub-librarie
 |      ``rlibrary(tools)``
 |      ``yes``
 
+
+------------
 
 .. raw:: html
 
@@ -136,6 +140,8 @@ Creates XML documenting files for all entities in a library using the specified 
 |      ``yes``
 
 
+------------
+
 .. raw:: html
 
    <div id="library/1"> </div>
@@ -156,6 +162,8 @@ Creates XML documenting files for all entities in a library using default option
 | **Mode and number of proofs:**
 |    ``library(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -183,6 +191,8 @@ Creates XML documenting files for all entities in a directory and its sub-direct
 |      ``yes``
 
 
+------------
+
 .. raw:: html
 
    <div id="rdirectory/1"> </div>
@@ -208,6 +218,8 @@ Creates XML documenting files for all entities in a directory and its sub-direct
 |      ``rdirectory('./tools')``
 |      ``yes``
 
+
+------------
 
 .. raw:: html
 
@@ -235,6 +247,8 @@ Creates XML documenting files for all entities in a directory using the specifie
 |      ``yes``
 
 
+------------
+
 .. raw:: html
 
    <div id="directory/1"> </div>
@@ -255,6 +269,8 @@ Creates XML documenting files for all entities in a directory using default opti
 | **Mode and number of proofs:**
 |    ``directory(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -277,6 +293,8 @@ Creates XML documenting files for all entities in a loaded source file using the
 |    ``file(+atom,+list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file/1"> </div>
@@ -297,6 +315,8 @@ Creates XML documenting files for all entities in a loaded source file using def
 | **Mode and number of proofs:**
 |    ``file(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -319,6 +339,8 @@ Creates XML documenting files for all loaded entities using the specified option
 |    ``all(+list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="all/0"> </div>
@@ -337,6 +359,8 @@ Creates XML documenting files for all loaded entities using default options.
 | **Mode and number of proofs:**
 |    ``all`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -359,6 +383,8 @@ Returns, by backtracking, all options and their values.
 |    ``option(?atom,?nonvar)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_option/2"> </div>
@@ -379,6 +405,8 @@ Sets an option value.
 | **Mode and number of proofs:**
 |    ``set_option(+atom,+nonvar)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

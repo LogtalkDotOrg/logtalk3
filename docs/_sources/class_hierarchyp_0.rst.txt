@@ -52,6 +52,8 @@ Returns, by backtracking, all object classes.
 |    ``class(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="classes/1"> </div>
@@ -72,6 +74,8 @@ List of all object classes.
 | **Mode and number of proofs:**
 |    ``classes(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -94,6 +98,8 @@ Returns, by backtracking, all class instances.
 |    ``instance(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="instances/1"> </div>
@@ -114,6 +120,8 @@ List of all class instances.
 | **Mode and number of proofs:**
 |    ``instances(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -136,6 +144,8 @@ Returns, by backtracking, all class subclasses.
 |    ``subclass(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="subclasses/1"> </div>
@@ -156,6 +166,8 @@ List of all class subclasses.
 | **Mode and number of proofs:**
 |    ``subclasses(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -178,6 +190,8 @@ Returns, by backtracking, all class superclasses.
 |    ``superclass(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="superclasses/1"> </div>
@@ -198,6 +212,8 @@ List of all class superclasses.
 | **Mode and number of proofs:**
 |    ``superclasses(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -220,6 +236,8 @@ Returns, by backtracking, all class leaf instances.
 |    ``leaf_instance(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="leaf_instances/1"> </div>
@@ -240,6 +258,8 @@ List of all class leaf instances.
 | **Mode and number of proofs:**
 |    ``leaf_instances(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -262,6 +282,8 @@ Returns, by backtracking, all class leaf subclasses.
 |    ``leaf_class(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="leaf_classes/1"> </div>
@@ -282,6 +304,8 @@ List of all class leaf leaf subclasses.
 | **Mode and number of proofs:**
 |    ``leaf_classes(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -304,6 +328,8 @@ Returns, by backtracking, all class descendant instances.
 |    ``descendant_instance(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="descendant_instances/1"> </div>
@@ -324,6 +350,8 @@ List of all class descendant instances.
 | **Mode and number of proofs:**
 |    ``descendant_instances(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -346,6 +374,8 @@ Returns, by backtracking, all class descendant subclasses.
 |    ``descendant_class(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="descendant_classes/1"> </div>
@@ -366,6 +396,8 @@ List of all class descendant subclasses.
 | **Mode and number of proofs:**
 |    ``descendant_classes(-list)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

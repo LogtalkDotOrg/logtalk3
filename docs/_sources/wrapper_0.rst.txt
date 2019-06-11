@@ -69,6 +69,8 @@ Advises the user on missing directives for converting all plain Prolog files in 
 |    ``rdirectory(+atom,+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="rdirectory/1"> </div>
@@ -89,6 +91,8 @@ Advises the user on missing directives for converting all plain Prolog files in 
 | **Mode and number of proofs:**
 |    ``rdirectory(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -111,6 +115,8 @@ Advises the user on missing directives for converting all plain Prolog files in 
 |    ``directory(+atom,+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="directory/1"> </div>
@@ -131,6 +137,8 @@ Advises the user on missing directives for converting all plain Prolog files in 
 | **Mode and number of proofs:**
 |    ``directory(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -153,6 +161,8 @@ Advises the user on missing directives for converting all Prolog files in a set 
 |    ``directories(+list(atom),+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="directories/1"> </div>
@@ -173,6 +183,8 @@ Advises the user on missing directives for converting all Prolog files in a set 
 | **Mode and number of proofs:**
 |    ``directories(+list(atom))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -195,6 +207,8 @@ Advises the user on missing directives for converting a list of plain Prolog fil
 |    ``files(+list(atom),+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="files/1"> </div>
@@ -215,6 +229,8 @@ Advises the user on missing directives for converting a list of plain Prolog fil
 | **Mode and number of proofs:**
 |    ``files(+list(atom))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -237,6 +253,8 @@ Advises the user on missing directives for converting a plain Prolog file to Log
 |    ``file(+atom,+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file/1"> </div>
@@ -257,6 +275,8 @@ Advises the user on missing directives for converting a plain Prolog file to Log
 | **Mode and number of proofs:**
 |    ``file(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -279,6 +299,8 @@ Saves the generated wrapper objects (plus a loader file per directory) for all a
 |    ``save(+list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="save/0"> </div>
@@ -297,6 +319,8 @@ Saves the generated wrapper objects (plus a loader file per directory) for all a
 | **Mode and number of proofs:**
 |    ``save`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -319,6 +343,8 @@ Enumerates by backtracking the default options used when generating the wrapper 
 |    ``default_option(?compound)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="default_options/1"> </div>
@@ -339,6 +365,8 @@ Returns a list of the default options used when generating the wrapper objects.
 | **Mode and number of proofs:**
 |    ``default_options(-list(compound))`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------
@@ -369,6 +397,8 @@ Merges the user options with the default options, returning the list of options 
 |    ``merge_options(+list(compound),-list(compound))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="predicate_called_but_not_defined_/2"> </div>
@@ -389,6 +419,8 @@ Table of called object predicates that are not locally defined.
 | **Mode and number of proofs:**
 |    ``predicate_called_but_not_defined_(?atom,?predicate_indicator)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -411,6 +443,8 @@ Table of called object predicates.
 |    ``object_predicate_called_(?atom,?atom,?predicate_indicator)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="module_predicate_called_/3"> </div>
@@ -431,6 +465,8 @@ Table of called module predicates.
 | **Mode and number of proofs:**
 |    ``module_predicate_called_(?atom,?atom,?predicate_indicator)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -453,6 +489,8 @@ Table of predicates called but not defined.
 |    ``unknown_predicate_called_(?atom,?predicate_indicator)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="missing_predicate_directive_/3"> </div>
@@ -473,6 +511,8 @@ Table of missing predicate directives.
 | **Mode and number of proofs:**
 |    ``missing_predicate_directive_(?atom,?predicate_indicator,?predicate_indicator)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -495,6 +535,8 @@ Table of called non-standard predicates.
 |    ``non_standard_predicate_call_(?atom,?predicate_indicator)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="dynamic_directive_/3"> </div>
@@ -515,6 +557,8 @@ Table of declared dynamic predicates.
 | **Mode and number of proofs:**
 |    ``dynamic_directive_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -537,6 +581,8 @@ Table of declared multifile predicates.
 |    ``multifile_directive_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="add_directive_before_entity_/2"> </div>
@@ -557,6 +603,8 @@ Table of directives to be added before the entity opening directive.
 | **Mode and number of proofs:**
 |    ``add_directive_before_entity_(?atom,?predicate_indicator)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -579,6 +627,8 @@ Table of directives to be added.
 |    ``add_directive_(?atom,?predicate_indicator)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="add_directive_/3"> </div>
@@ -599,6 +649,8 @@ Table of directives to be added to complement existing directives.
 | **Mode and number of proofs:**
 |    ``add_directive_(?atom,?predicate_indicator,?predicate_indicator)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -621,6 +673,8 @@ Table of directives to be removed.
 |    ``remove_directive_(?atom,?predicate_indicator)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="file_being_advised_/4"> </div>
@@ -641,6 +695,8 @@ Table of files being advised are respective directories and names (basename with
 | **Mode and number of proofs:**
 |    ``file_being_advised_(?atom,?atom,?atom,?atom)`` - ``zero_or_more``
 
+
+------------
 
 Operators
 ---------

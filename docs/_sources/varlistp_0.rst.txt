@@ -53,6 +53,8 @@ Appends two lists.
 |    ``append(?list,?list,?list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="delete/3"> </div>
@@ -73,6 +75,8 @@ Deletes from a list all occurrences of an element returning the list of remainin
 | **Mode and number of proofs:**
 |    ``delete(@list,@term,?list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ True if the argument is an empty list.
 |    ``empty(@list)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="flatten/2"> </div>
@@ -115,6 +121,8 @@ Flattens a list of lists into a list.
 | **Mode and number of proofs:**
 |    ``flatten(@list,-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ List last element (if it exists).
 |    ``last(@list,@var)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="length/2"> </div>
@@ -157,6 +167,8 @@ List length.
 | **Mode and number of proofs:**
 |    ``length(@list,?integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Checks if a variable is a member of a list.
 |    ``memberchk(@var,@list)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="nextto/3"> </div>
@@ -199,6 +213,8 @@ X and Y are consecutive elements in List.
 | **Mode and number of proofs:**
 |    ``nextto(@var,@var,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ Nth element of a list (counting from zero).
 |    ``nth0(?integer,+list,@var)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="nth0/4"> </div>
@@ -241,6 +259,8 @@ Nth element of a list (counting from zero).
 | **Mode and number of proofs:**
 |    ``nth0(?integer,+list,@var,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -263,6 +283,8 @@ Nth element of a list (counting from one).
 |    ``nth1(?integer,+list,@var)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="nth1/4"> </div>
@@ -283,6 +305,8 @@ Nth element of a list (counting from zero).
 | **Mode and number of proofs:**
 |    ``nth1(?integer,+list,@var,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -305,6 +329,8 @@ The two lists are a permutation of the same list.
 |    ``permutation(@list,@list)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="prefix/2"> </div>
@@ -326,6 +352,8 @@ Prefix is a prefix of List.
 |    ``prefix(?list,@list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="remove_duplicates/2"> </div>
@@ -343,6 +371,8 @@ Removes duplicated variables and keepying the left-most variable when repeated.
 
 | **Template:**
 |    ``remove_duplicates(List,Set)``
+
+------------
 
 .. raw:: html
 
@@ -368,6 +398,8 @@ Reverses a list.
 |    ``reverse(-list,-list)`` - ``one_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="same_length/2"> </div>
@@ -391,6 +423,8 @@ The two lists have the same length.
 |    ``same_length(-list,-list)`` - ``one_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="select/3"> </div>
@@ -411,6 +445,8 @@ Selects an element from a list, returning the list of remaining elements.
 | **Mode and number of proofs:**
 |    ``select(@var,?list,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -433,6 +469,8 @@ The first list is a sublist of the second.
 |    ``sublist(?list,@list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="subtract/3"> </div>
@@ -453,6 +491,8 @@ Removes all elements in the second list from the first list, returning the list 
 | **Mode and number of proofs:**
 |    ``subtract(@list,@list,-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -475,6 +515,8 @@ Suffix is a suffix of List.
 |    ``suffix(?list,@list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="valid/1"> </div>
@@ -496,6 +538,8 @@ Term is a valid list of variables.
 |    ``valid(@nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="check/1"> </div>
@@ -516,6 +560,8 @@ Checks if a term is a valid list of variables. Throws an exception if the term i
 | **Mode and number of proofs:**
 |    ``check(@nonvar)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

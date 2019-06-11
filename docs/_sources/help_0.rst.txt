@@ -52,6 +52,8 @@ Prints instructions on how to use the help tool.
 |    ``help`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="(/)/2"> </div>
@@ -72,6 +74,8 @@ Provides help on the Functor/Arity built-in control construct, directive, predic
 | **Mode and number of proofs:**
 |    ``+atom/ +integer`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -94,6 +98,8 @@ Provides help on the Functor//Arity built-in non-terminal.
 |    ``+atom// +integer`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="completion/2"> </div>
@@ -114,6 +120,8 @@ Provides a completion pair (Completion-Page) for a given prefix.
 | **Mode and number of proofs:**
 |    ``completion(+atom,-pair)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -136,6 +144,8 @@ Provides a list of completions pairs (Completion-Page) for a given prefix.
 |    ``completions(+atom,-lists(pair))`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="built_in_directive/4"> </div>
@@ -156,6 +166,8 @@ Provides access to the HTML documenting files describing built-in directives.
 | **Mode and number of proofs:**
 |    ``built_in_directive(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -178,6 +190,8 @@ Provides access to the HTML documenting files describing built-in predicates.
 |    ``built_in_predicate(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="built_in_method/4"> </div>
@@ -198,6 +212,8 @@ Provides access to the HTML documenting files describing built-in methods.
 | **Mode and number of proofs:**
 |    ``built_in_method(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -220,6 +236,8 @@ Provides access to the HTML documenting files describing built-in control constr
 |    ``control_construct(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="built_in_non_terminal/4"> </div>
@@ -241,6 +259,8 @@ Provides access to the HTML documenting files describing built-in DCG non-termin
 |    ``built_in_non_terminal(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="library/0"> </div>
@@ -259,6 +279,8 @@ Provides help on the standard Logtalk library.
 | **Mode and number of proofs:**
 |    ``library`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -281,6 +303,8 @@ Provides help on the standard Logtalk library entities, predicates, and non-term
 |    ``library(+entity_identifier)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="manuals/0"> </div>
@@ -299,6 +323,8 @@ Provides access to the Logtalk User and Reference manuals.
 | **Mode and number of proofs:**
 |    ``manuals`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

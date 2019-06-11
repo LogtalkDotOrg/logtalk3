@@ -57,6 +57,8 @@ Makes Variable an assignable variable. Initial state will be empty.
 |        ``type_error(variable,Variable)``
 
 
+------------
+
 .. raw:: html
 
    <div id="assignable/2"> </div>
@@ -84,6 +86,8 @@ Makes Variable an assignable variable and sets its initial state to Value.
 |        ``instantiation_error``
 
 
+------------
+
 .. raw:: html
 
    <div id="(<=)/2"> </div>
@@ -109,6 +113,8 @@ Sets the state of the assignable variable Variable to Value (initializing the va
 |        ``instantiation_error``
 
 
+------------
+
 .. raw:: html
 
    <div id="(=>)/2"> </div>
@@ -133,6 +139,8 @@ Unifies Value with the current state of the assignable variable Variable.
 |    Variable is not instantiated:
 |        ``instantiation_error``
 
+
+------------
 
 Protected interface
 -------------------

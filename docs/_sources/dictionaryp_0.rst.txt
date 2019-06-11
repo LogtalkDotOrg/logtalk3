@@ -53,6 +53,8 @@ Converts a list of key-value pairs to a dictionary.
 |    ``as_dictionary(@list(pairs),-dictionary)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="as_list/2"> </div>
@@ -73,6 +75,8 @@ Converts a dictionary to a ordered list of key-value pairs.
 | **Mode and number of proofs:**
 |    ``as_list(@dictionary,-list(pairs))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 |    ``clone(+tree,-tree,-list(pairs))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="clone/4"> </div>
@@ -115,6 +121,8 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 | **Mode and number of proofs:**
 |    ``clone(+tree,-list(pairs),-tree,-list(pairs))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Inserts a Key-Value pair into a dictionary, returning the updated dictionary. Wh
 |    ``insert(+dictionary,+ground,@term,-dictionary)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="delete/4"> </div>
@@ -157,6 +167,8 @@ Deletes a matching Key-Value pair from a dictionary, returning the updated dicti
 | **Mode and number of proofs:**
 |    ``delete(+dictionary,@ground,?term,-dictionary)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 |    ``update(+dictionary,@ground,+term,-dictionary)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="update/5"> </div>
@@ -200,6 +214,8 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 |    ``update(+dictionary,@ground,?term,+term,-dictionary)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="empty/1"> </div>
@@ -220,6 +236,8 @@ True if the dictionary is empty.
 | **Mode and number of proofs:**
 |    ``empty(@dictionary)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -243,6 +261,8 @@ Lookups a matching Key-Value pair from a dictionary.
 |    ``lookup(-ground,?term,@dictionary)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="previous/4"> </div>
@@ -263,6 +283,8 @@ Returns the previous pair in a dictionary given a key.
 | **Mode and number of proofs:**
 |    ``previous(+dictionary,+key,-key,-value)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -285,6 +307,8 @@ Returns the next pair in a dictionary given a key.
 |    ``next(+dictionary,+key,-key,-value)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="min/3"> </div>
@@ -305,6 +329,8 @@ Returns the pair with the minimum key in a dictionary. Fails if the dictionary i
 | **Mode and number of proofs:**
 |    ``min(+dictionary,-key,-value)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -327,6 +353,8 @@ Returns the pair with the maximum key in a dictionary. Fails if the dictionary i
 |    ``max(+dictionary,-key,-value)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="delete_min/4"> </div>
@@ -347,6 +375,8 @@ Deletes the pair with the minimum key from a dictionary, returning the deleted p
 | **Mode and number of proofs:**
 |    ``delete_min(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -369,6 +399,8 @@ Deletes the pair with the maximum key from a dictionary, returning the deleted p
 |    ``delete_max(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="keys/2"> </div>
@@ -390,6 +422,8 @@ Returns a list with all the dictionary keys in ascending order.
 |    ``keys(@dictionary,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="values/2"> </div>
@@ -410,6 +444,8 @@ Returns a list with all the dictionary values in ascending order of the keys.
 | **Mode and number of proofs:**
 |    ``values(@dictionary,-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -434,6 +470,8 @@ Maps a closure over each dictionary key-value pair. Fails if the mapped closure 
 |    ``map(@callable,+dictionary)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="map/3"> </div>
@@ -456,6 +494,8 @@ Maps a closure over each dictionary key-value pair, returning the new dictionary
 | **Mode and number of proofs:**
 |    ``map(@callable,+dictionary,-dictionary)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -480,6 +520,8 @@ Applies a closure to a specific key-value pair, returning the new dictionary. Fa
 |    ``apply(+callable,+dictionary,+key,-dictionary)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="size/2"> </div>
@@ -500,6 +542,8 @@ Number of dictionary entries.
 | **Mode and number of proofs:**
 |    ``size(@dictionary,?integer)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

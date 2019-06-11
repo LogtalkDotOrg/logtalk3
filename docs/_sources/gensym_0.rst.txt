@@ -51,6 +51,8 @@ Resets the generator counter for all bases.
 |    ``reset_gensym`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="reset_gensym/1"> </div>
@@ -72,6 +74,8 @@ Resets the generator counter for a given base.
 |    ``reset_gensym(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="gensym/2"> </div>
@@ -92,6 +96,8 @@ Returns a new unique atom with a given base (prefix).
 | **Mode and number of proofs:**
 |    ``gensym(+atom,-atom)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------
@@ -121,6 +127,8 @@ Table of generator bases and respective counters.
 | **Mode and number of proofs:**
 |    ``base_(?atom,?integer)`` - ``zero_or_more``
 
+
+------------
 
 Operators
 ---------

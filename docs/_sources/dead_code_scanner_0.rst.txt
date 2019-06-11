@@ -60,6 +60,8 @@ Scans a loaded entity for dead code. Fails if the entity does not exist.
 |    ``entity(+entity_identifier)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file/1"> </div>
@@ -80,6 +82,8 @@ Scans all entities in a loaded source file for dead code. The file can be given 
 | **Mode and number of proofs:**
 |    ``file(+atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -102,6 +106,8 @@ Scans all entities in all loaded files from a given directory for dead code.
 |    ``directory(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="rdirectory/1"> </div>
@@ -122,6 +128,8 @@ Scans all entities in all loaded files from a given directory and its sub-direct
 | **Mode and number of proofs:**
 |    ``rdirectory(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -144,6 +152,8 @@ Scans all entities in all loaded files from a given library for dead code.
 |    ``library(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="rlibrary/1"> </div>
@@ -165,6 +175,8 @@ Scans all entities in all loaded files in a loaded library and its sub-libraries
 |    ``rlibrary(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="all/0"> </div>
@@ -183,6 +195,8 @@ Scans all entities for dead code.
 | **Mode and number of proofs:**
 |    ``all`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -205,6 +219,8 @@ Returns an ordered set of local predicates (and non-terminals) that are not used
 |    ``predicates(+entity_identifier,-list(predicate_indicator))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="predicate/2"> </div>
@@ -225,6 +241,8 @@ Enumerates, by backtracking, local predicates (and non-terminals) that are not u
 | **Mode and number of proofs:**
 |    ``predicate(+entity_identifier,?predicate_indicator)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

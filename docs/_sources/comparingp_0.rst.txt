@@ -53,6 +53,8 @@ True if Term1 is less than Term2.
 |    ``+term< +term`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="(=<)/2"> </div>
@@ -73,6 +75,8 @@ True if Term1 is less or equal than Term2.
 | **Mode and number of proofs:**
 |    ``+term=< +term`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ True if Term1 is greater than Term2.
 |    ``+term> +term`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="(>=)/2"> </div>
@@ -115,6 +121,8 @@ True if Term1 is equal or grater than Term2.
 | **Mode and number of proofs:**
 |    ``+term>= +term`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ True if Term1 is equal to Term2.
 |    ``+term=:= +term`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="(=\=)/2"> </div>
@@ -157,6 +167,8 @@ True if Term1 is not equal to Term2.
 | **Mode and number of proofs:**
 |    ``+term=\= +term`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

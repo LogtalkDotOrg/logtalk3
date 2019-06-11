@@ -54,6 +54,8 @@ Converts between a list of pairs and lists of keys and values.
 |    ``keys_values(-list(pair),+list,+list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="keys/2"> </div>
@@ -74,6 +76,8 @@ Extracts a list of keys from a list of pairs.
 | **Mode and number of proofs:**
 |    ``keys(+list(pair),-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -96,6 +100,8 @@ Extracts a list of values from a list of pairs.
 |    ``values(+list(pair),-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="transpose/2"> </div>
@@ -117,6 +123,8 @@ Transposes a list of pairs by swapping each pair key and value. The relative ord
 |    ``transpose(+list(pair),-list(pair))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="group_by_key/2"> </div>
@@ -137,6 +145,8 @@ Groups pairs by key by constructing new pairs by grouping all values for a given
 | **Mode and number of proofs:**
 |    ``group_by_key(+list(pair),-list(pair))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -160,6 +170,8 @@ Maps a list into pairs using a closure that applies to each list element to comp
 | **Mode and number of proofs:**
 |    ``map(@callable,+list,-list(pair))`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

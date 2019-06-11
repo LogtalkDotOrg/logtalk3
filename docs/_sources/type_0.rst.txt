@@ -112,6 +112,8 @@ Table of defined types. A new type can be registered by defining a clause for th
 |    ``type(?callable)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="meta_type/3"> </div>
@@ -132,6 +134,8 @@ Table of defined meta-types. A registered type that is a meta-type can be descri
 | **Mode and number of proofs:**
 |    ``meta_type(?callable,-list,-list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -154,6 +158,8 @@ True if the given term is of the specified type. Fails otherwise.
 |    ``valid(@callable,@term)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="check/3"> </div>
@@ -174,6 +180,8 @@ True if the given term is of the specified type. Throws an error otherwise using
 | **Mode and number of proofs:**
 |    ``check(@callable,@term,@term)`` - ``one_or_error``
 
+
+------------
 
 .. raw:: html
 
@@ -205,6 +213,8 @@ True if the given term is of the specified type. Throws an error otherwise. A ne
 |    Term is the of the correct type and domain but the resource it represents does not exist:
 |        ``existence_error(Type, Term)``
 
+
+------------
 
 Protected interface
 -------------------

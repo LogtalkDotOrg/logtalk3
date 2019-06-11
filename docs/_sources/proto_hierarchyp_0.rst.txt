@@ -52,6 +52,8 @@ Returns, by backtracking, all object parents.
 |    ``parent(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="parents/1"> </div>
@@ -72,6 +74,8 @@ List of all object parents.
 | **Mode and number of proofs:**
 |    ``parents(-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -94,6 +98,8 @@ Returns, by backtracking, all object direct descendants.
 |    ``extension(?object)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="extensions/1"> </div>
@@ -114,6 +120,8 @@ List of all object direct descendants.
 | **Mode and number of proofs:**
 |    ``extensions(-list)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

@@ -53,6 +53,8 @@ Access to module properties, at least exports/1, file/1, and file/2 but also dec
 |    ``module_property(?atom,?callable)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="loaded_file_property/2"> </div>
@@ -74,6 +76,8 @@ Access to loaded source file properties, at least basename/1, directory/1 but al
 |    ``loaded_file_property(?atom,?callable)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="source_file_extension/1"> </div>
@@ -94,6 +98,8 @@ Valid source file extension for Prolog source files.
 | **Mode and number of proofs:**
 |    ``source_file_extension(?atom)`` - ``one_or_more``
 
+
+------------
 
 Protected interface
 -------------------

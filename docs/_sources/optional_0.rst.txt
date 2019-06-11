@@ -55,6 +55,8 @@ Constructs an empty reference.
 |    ``empty(--nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="of/2"> </div>
@@ -75,6 +77,8 @@ Constructs a reference holding a term.
 | **Mode and number of proofs:**
 |    ``of(@term,--nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -98,6 +102,8 @@ Constructs a reference by calling Goal that binds and holds Term on success. Ret
 | **Mode and number of proofs:**
 |    ``from_goal(+callable,--term,--nonvar)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

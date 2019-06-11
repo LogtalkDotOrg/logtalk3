@@ -96,6 +96,8 @@ Get the system date and/or its Julian Day # or convert a Julian Day # to/from gi
 |      ``Year=1900,Month=3,Day=1``
 
 
+------------
+
 .. raw:: html
 
    <div id="date/5"> </div>
@@ -135,6 +137,8 @@ Ditto date/4 + get/check its day-of-week #.
 |      ``date(2451545,Year,Month,Day,DoW)``
 |      ``Year=2000,Month=1,Day=1,DoW=6``
 
+
+------------
 
 .. raw:: html
 
@@ -201,6 +205,8 @@ Ditto date/5 + get/check its week #.
 |      ``Year=2005,Month=2,Day=14``
 
 
+------------
+
 .. raw:: html
 
    <div id="date/7"> </div>
@@ -254,6 +260,8 @@ Ditto date/6 + get/check its day-of-year #.
 |      ``date(_,2004,_,2,_,_,61)``
 |      ``no``
 
+
+------------
 
 .. raw:: html
 
@@ -360,6 +368,8 @@ Conversion between an ISO 8601 compliant date string and its components (truncat
 |      ``Components=[2004,9]``
 
 
+------------
+
 .. raw:: html
 
    <div id="valid_date/3"> </div>
@@ -394,6 +404,8 @@ Validate a given date in the Gregorian calendar.
 |      ``valid_date(-1,2,29)``
 |      ``yes``
 
+
+------------
 
 .. raw:: html
 
@@ -446,6 +458,8 @@ Succeed if given year is a leap year in the Gregorian calendar.
 |      ``yes``
 
 
+------------
+
 .. raw:: html
 
    <div id="calendar_month/3"> </div>
@@ -474,6 +488,8 @@ Compute a calendar month.
 |      ``calendar_month(2005,3,Calendar)``
 |      ``Calendar=m(2005,3,[w(9,[0,1,2,3,4,5,6]),w(10,[7,8,9,10,11,12,13]),w(11,[14,15,16,17,18,19,20]),w(12,[21,22,23,24,25,26,27]),w(13,[28,29,30,31,0,0,0]),w(0,[0,0,0,0,0,0,0])])``
 
+
+------------
 
 .. raw:: html
 
@@ -506,6 +522,8 @@ Compute a Gregorian Easter Sunday.
 |      ``easter_day(Year,Month,Day)``
 |      ``Year=2005,Month=3,Day=27``
 
+
+------------
 
 Protected interface
 -------------------

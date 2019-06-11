@@ -53,6 +53,8 @@ Calculates the product of all list numbers. Fails if the list is empty.
 |    ``product(+list(number),-number)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="sum/2"> </div>
@@ -73,6 +75,8 @@ Calculates the sum of all list numbers. Fails if the list is empty.
 | **Mode and number of proofs:**
 |    ``sum(+list(number),-number)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Determines the list maximum value in a list of numbers. Fails if the list is emp
 |    ``max(+list,-number)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="min/2"> </div>
@@ -115,6 +121,8 @@ Determines the minimum value in a list of numbers. Fails if the list is empty.
 | **Mode and number of proofs:**
 |    ``min(+list,-number)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Range is the length of the smallest interval which contains all the numbers in L
 |    ``range(+list,-number)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="arithmetic_mean/2"> </div>
@@ -157,6 +167,8 @@ Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.
 | **Mode and number of proofs:**
 |    ``arithmetic_mean(+list(number),-float)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Calculates the geometric mean of a list of numbers. Fails if the list is empty.
 |    ``geometric_mean(+list(number),-float)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="harmonic_mean/2"> </div>
@@ -199,6 +213,8 @@ Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 | **Mode and number of proofs:**
 |    ``harmonic_mean(+list(number),-float)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ Calculates the median of a list of numbers. Fails if the list is empty.
 |    ``median(+list(number),-float)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="average_deviation/3"> </div>
@@ -241,6 +259,8 @@ Calculates the average absolute deviation of a list of numbers given a central t
 | **Mode and number of proofs:**
 |    ``average_deviation(+list(number),+float,-float)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -263,6 +283,8 @@ Calculates the mean absolute deviation of a list of numbers. Fails if the list i
 |    ``mean_deviation(+list(number),-float)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="median_deviation/2"> </div>
@@ -283,6 +305,8 @@ Calculates the median absolute deviation of a list of numbers. Fails if the list
 | **Mode and number of proofs:**
 |    ``median_deviation(+list(number),-float)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -305,6 +329,8 @@ Calculates the standard deviation of a list of numbers. Fails if the list is emp
 |    ``standard_deviation(+list(number),-float)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="coefficient_of_variation/2"> </div>
@@ -325,6 +351,8 @@ Calculates the coefficient of variation of a list of numbers. Fails if the list 
 | **Mode and number of proofs:**
 |    ``coefficient_of_variation(+list(number),-float)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -347,6 +375,8 @@ Calculates the relative standard deviation of a list of numbers. Fails if the li
 |    ``relative_standard_deviation(+list(number),-float)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="skewness/2"> </div>
@@ -367,6 +397,8 @@ Calculates the (moment) skewness of a list of numbers. Fails if the list is empt
 | **Mode and number of proofs:**
 |    ``skewness(+list(number),-float)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -389,6 +421,8 @@ Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empt
 |    ``kurtosis(+list(number),-float)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="variance/2"> </div>
@@ -409,6 +443,8 @@ Calculates the unbiased variance of a list of numbers. Fails if the list is empt
 | **Mode and number of proofs:**
 |    ``variance(+list(number),-float)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -431,6 +467,8 @@ Normalizes a list of number such that for the resulting list the mean of is clos
 |    ``z_normalization(+list(number),-list(float))`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="valid/1"> </div>
@@ -451,6 +489,8 @@ Term is a closed list of numbers.
 | **Mode and number of proofs:**
 |    ``valid(@nonvar)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------
@@ -474,6 +514,8 @@ Private predicates
 |    ``static``
 
 
+------------
+
 .. raw:: html
 
    <div id="squares_and_cubes/6"> </div>
@@ -487,6 +529,8 @@ Private predicates
 | **Compilation flags:**
 |    ``static``
 
+
+------------
 
 .. raw:: html
 
@@ -502,6 +546,8 @@ Private predicates
 |    ``static``
 
 
+------------
+
 .. raw:: html
 
    <div id="variance/6"> </div>
@@ -515,6 +561,8 @@ Private predicates
 | **Compilation flags:**
 |    ``static``
 
+
+------------
 
 Operators
 ---------

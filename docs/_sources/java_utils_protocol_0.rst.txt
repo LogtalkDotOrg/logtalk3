@@ -53,6 +53,8 @@ Returns an opaque term that represents the Java value with the given name.
 |    ``value_reference(?atom,--ground)`` - ``one_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="true/1"> </div>
@@ -73,6 +75,8 @@ Returns an opaque term that represents the Java value true.
 | **Mode and number of proofs:**
 |    ``true(--ground)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Returns an opaque term that represents the Java value false.
 |    ``false(--ground)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="void/1"> </div>
@@ -115,6 +121,8 @@ Returns an opaque term that represents the Java value void.
 | **Mode and number of proofs:**
 |    ``void(--ground)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Returns an opaque term that represents the Java value null.
 |    ``null(--ground)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_true/1"> </div>
@@ -157,6 +167,8 @@ True when the argument is the Java value true. Fails if the argument is not inst
 | **Mode and number of proofs:**
 |    ``is_true(@term)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ True when the argument is the Java value false. Fails if the argument is not ins
 |    ``is_false(@term)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_void/1"> </div>
@@ -199,6 +213,8 @@ True when the argument is the Java value void. Fails if the argument is not inst
 | **Mode and number of proofs:**
 |    ``is_void(@term)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ True when the argument is the Java value null. Fails if the argument is not inst
 |    ``is_null(@term)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="is_object/1"> </div>
@@ -241,6 +259,8 @@ True when the argument is a reference to a Java object. Fails if the argument is
 | **Mode and number of proofs:**
 |    ``is_object(@term)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -263,6 +283,8 @@ Converts a list of ground Prolog terms to an array (a Java reference).
 |    ``terms_to_array(++list(ground),-array)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="array_to_terms/3"> </div>
@@ -284,6 +306,8 @@ Converts an array (a Java reference) to a list of ground Prolog terms returning 
 |    ``array_to_terms(+array,-list(ground),-integer)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="array_to_terms/2"> </div>
@@ -304,6 +328,8 @@ Converts an array (a Java reference) to a list of ground Prolog terms. The array
 | **Mode and number of proofs:**
 |    ``array_to_terms(+array,-list(term))`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -327,6 +353,8 @@ Converts between an array (a Java reference) and a list. Deprecated. Use the ter
 |    ``array_list(-array,+list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="iterator_element/2"> </div>
@@ -347,6 +375,8 @@ Enumerates, by backtracking, all iterator elements.
 | **Mode and number of proofs:**
 |    ``iterator_element(+iterator,-element)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -369,6 +399,8 @@ Decodes an exception into its corresponding cause. Fails if the exception is not
 |    ``decode_exception(+callable,-atom)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="decode_exception/3"> </div>
@@ -389,6 +421,8 @@ Decodes an exception into its corresponding cause and a stack trace. Fails if th
 | **Mode and number of proofs:**
 |    ``decode_exception(+callable,-atom,-list(atom))`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

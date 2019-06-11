@@ -53,6 +53,8 @@ Constructs a new interval given start and end points. The start point must stric
 |    ``new(@ground,@ground,-interval)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="valid/1"> </div>
@@ -73,6 +75,8 @@ True if Interval is a valid interval.
 | **Mode and number of proofs:**
 |    ``valid(@interval)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ True if Interval1 takes place before Interval2.
 |    ``before(@interval,@interval)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="after/2"> </div>
@@ -115,6 +121,8 @@ True if Interval1 takes place after Interval2.
 | **Mode and number of proofs:**
 |    ``after(@interval,@interval)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ True if Interval1 meets Interval2.
 |    ``meets(@interval,@interval)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="met_by/2"> </div>
@@ -157,6 +167,8 @@ True if Interval1 is met by Interval2.
 | **Mode and number of proofs:**
 |    ``met_by(@interval,@interval)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ True if Interval1 overlaps with Interval2.
 |    ``overlaps(@interval,@interval)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="overlapped_by/2"> </div>
@@ -199,6 +213,8 @@ True if Interval1 is overlapped by Interval2.
 | **Mode and number of proofs:**
 |    ``overlapped_by(@interval,@interval)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ True if Interval1 starts Interval2.
 |    ``starts(@interval,@interval)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="started_by/2"> </div>
@@ -241,6 +259,8 @@ True if Interval1 is started by Interval2.
 | **Mode and number of proofs:**
 |    ``started_by(@interval,@interval)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -263,6 +283,8 @@ True if Interval1 occurs during Interval2.
 |    ``during(@interval,@interval)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="contains/2"> </div>
@@ -283,6 +305,8 @@ True if Interval1 contains Interval2.
 | **Mode and number of proofs:**
 |    ``contains(@interval,@interval)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -305,6 +329,8 @@ True if Interval1 finishes Interval2.
 |    ``finishes(@interval,@interval)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="finished_by/2"> </div>
@@ -326,6 +352,8 @@ True if Interval1 is finished by Interval2.
 |    ``finished_by(@interval,@interval)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="equal/2"> </div>
@@ -346,6 +374,8 @@ True if Interval1 is equal to Interval2.
 | **Mode and number of proofs:**
 |    ``equal(@interval,@interval)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

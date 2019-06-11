@@ -53,6 +53,8 @@ Gets the value of a class or object field.
 |    ``get_field(+atom,?nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="set_field/2"> </div>
@@ -73,6 +75,8 @@ Sets the value of a class or object field.
 | **Mode and number of proofs:**
 |    ``set_field(+atom,+nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Creates a new instance using the specified parameter values.
 |    ``new(+list(nonvar),-reference)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="new/1"> </div>
@@ -115,6 +121,8 @@ Creates a new instance using default parameter values.
 | **Mode and number of proofs:**
 |    ``new(-reference)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Invokes a method. This is a more efficient compared with relying on the forward/
 |    ``invoke(@nonvar)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="invoke/2"> </div>
@@ -157,6 +167,8 @@ Invokes a method. This is a more efficient compared with relying on the forward/
 | **Mode and number of proofs:**
 |    ``invoke(@nonvar,@list)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

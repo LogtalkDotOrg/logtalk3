@@ -54,6 +54,8 @@ Scans an entity and prints its metric score.
 |    ``entity(+term)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="file/1"> </div>
@@ -74,6 +76,8 @@ Prints metric scores for all the entities defined in a loaded source file.
 | **Mode and number of proofs:**
 |    ``file(+atom)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -96,6 +100,8 @@ Scans a directory and prints metric scores for all entities defined in its loade
 |    ``directory(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="rdirectory/1"> </div>
@@ -116,6 +122,8 @@ Recursive version of the directory/1 predicate.
 | **Mode and number of proofs:**
 |    ``rdirectory(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -138,6 +146,8 @@ Prints metrics scores for all loaded entities from a given library.
 |    ``library(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="rlibrary/1"> </div>
@@ -159,6 +169,8 @@ Recursive version of the library/1 predicate.
 |    ``rlibrary(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="all/0"> </div>
@@ -178,6 +190,8 @@ Scans all loaded entities and prints their metric scores.
 |    ``all`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="entity_score/2"> </div>
@@ -195,6 +209,8 @@ Score is a term that represents the metric score associated with a loaded entity
 
 | **Template:**
 |    ``entity_score(Entity,Score)``
+
+------------
 
 .. raw:: html
 
@@ -217,6 +233,8 @@ Score is a term that represents the metric score associated with a loaded librar
 |    ``library_score(@atom,-ground)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="rlibrary_score/2"> </div>
@@ -237,6 +255,8 @@ Score is a term that represents the metric score associated with loaded source f
 | **Mode and number of proofs:**
 |    ``rlibrary_score(@atom,-ground)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -259,6 +279,8 @@ Score is a term that represents the metric score associated with a loaded source
 |    ``file_score(@atom,-ground)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="directory_score/2"> </div>
@@ -279,6 +301,8 @@ Score is a term that represents the metric score associated with loaded source f
 | **Mode and number of proofs:**
 |    ``directory_score(@atom,-ground)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -301,6 +325,8 @@ Score is a term that represents the metric score associated with loaded source f
 |    ``rdirectory_score(@atom,-ground)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="all_score/1"> </div>
@@ -322,6 +348,8 @@ Score is a term that represents the metric score associated with all loaded sour
 |    ``all_score(-ground)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="entity_score//2"> </div>
@@ -339,6 +367,8 @@ Pretty prints the entity score.
 
 | **Template:**
 |    ``entity_score(Entity,Score)``
+
+------------
 
 Protected interface
 -------------------
@@ -364,6 +394,8 @@ Processes an entity of the given kind.
 |    ``process_entity(+atom,@entity_identifier)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="process_file/1"> </div>
@@ -384,6 +416,8 @@ Processes a source file.
 | **Mode and number of proofs:**
 |    ``process_file(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -406,6 +440,8 @@ Processes a directory of source files.
 |    ``process_directory(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="process_rdirectory/1"> </div>
@@ -426,6 +462,8 @@ Recursively process a directory of source files.
 | **Mode and number of proofs:**
 |    ``process_rdirectory(+atom)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -448,6 +486,8 @@ Recursively process a library of source files.
 |    ``process_rlibrary(+atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="process_all/0"> </div>
@@ -466,6 +506,8 @@ Processes all loaded source code.
 | **Mode and number of proofs:**
 |    ``process_all`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -488,6 +530,8 @@ Enumerates, by backtracking, all directory sub-directories containing loaded fil
 |    ``sub_directory(+atom,-atom)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="sub_library/2"> </div>
@@ -508,6 +552,8 @@ Enumerates, by backtracking, all library sub-library paths.
 | **Mode and number of proofs:**
 |    ``sub_library(+atom,-atom)`` - ``one``
 
+
+------------
 
 Private predicates
 ------------------

@@ -53,6 +53,8 @@ True if the depth of Term is Depth. The depth of atomic terms is zero; the depth
 |    ``depth(@term,?integer)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="ground/1"> </div>
@@ -73,6 +75,8 @@ True if the argument is ground.
 | **Mode and number of proofs:**
 |    ``ground(@term)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Creates a new term instance (if meaningful).
 |    ``new(-nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="occurs/2"> </div>
@@ -115,6 +121,8 @@ True if the variable occurs in the term.
 | **Mode and number of proofs:**
 |    ``occurs(@var,@term)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ The first term subsumes the second term.
 |    ``subsumes(?term,@term)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="subterm/2"> </div>
@@ -157,6 +167,8 @@ The first term is a subterm of the second term.
 | **Mode and number of proofs:**
 |    ``subterm(?term,+term)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Term is valid.
 |    ``valid(@nonvar)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="check/1"> </div>
@@ -199,6 +213,8 @@ Checks if a term is valid. Throws an exception if the term is not valid.
 | **Mode and number of proofs:**
 |    ``check(@nonvar)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ Each term is a variant of the other (i.e. they are structurally equivalent).
 |    ``variant(@term,@term)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="variables/2"> </div>
@@ -242,6 +260,8 @@ Returns a list of all term variables (ordered as found when doing a depth-first,
 |    ``variables(@term,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="singletons/2"> </div>
@@ -262,6 +282,8 @@ Returns a list of all term singleton variables (ordered as found when doing a de
 | **Mode and number of proofs:**
 |    ``singletons(@term,-list)`` - ``one``
 
+
+------------
 
 Protected interface
 -------------------

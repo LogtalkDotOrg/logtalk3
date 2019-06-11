@@ -55,6 +55,8 @@ Returns a list of all list elements that satisfy a predicate.
 |    ``include(+callable,+list,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="exclude/3"> </div>
@@ -77,6 +79,8 @@ Returns a list of all list elements that fail to satisfy a predicate.
 | **Mode and number of proofs:**
 |    ``exclude(+callable,+list,-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -101,6 +105,8 @@ Finds all members of a list that satisfy a given test.
 |    ``findall_member(@term,+list,@callable,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="findall_member/5"> </div>
@@ -123,6 +129,8 @@ Finds all members of a list that satisfy a given test appending the given tail t
 | **Mode and number of proofs:**
 |    ``findall_member(@term,+list,@callable,-list,+list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -147,6 +155,8 @@ Partition a list of elements in two lists using a predicate.
 |    ``partition(+callable,+list,-list,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="partition/6"> </div>
@@ -169,6 +179,8 @@ Partitions a list in lists with values less, equal, and greater than a given val
 | **Mode and number of proofs:**
 |    ``partition(+callable,+list,@term,-list,-list,-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -193,6 +205,8 @@ List folding (left associative). Closure is extended with three arguments: accum
 |    ``fold_left(+callable,?term,+list,?term)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="fold_left_1/3"> </div>
@@ -215,6 +229,8 @@ List folding (left associative). Closure is extended with three arguments: accum
 | **Mode and number of proofs:**
 |    ``fold_left_1(+callable,+list,?term)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -239,6 +255,8 @@ List scanning (left associative). Closure is extended with three arguments: accu
 |    ``scan_left(+callable,?term,+list,?list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="scan_left_1/3"> </div>
@@ -261,6 +279,8 @@ List scanning (left associative). Closure is extended with three arguments: accu
 | **Mode and number of proofs:**
 |    ``scan_left_1(+callable,+list,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -285,6 +305,8 @@ List folding (right associative). Closure is extended with three arguments: list
 |    ``fold_right(+callable,?term,+list,?term)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="fold_right_1/3"> </div>
@@ -307,6 +329,8 @@ List folding (right associative). Closure is extended with three arguments: list
 | **Mode and number of proofs:**
 |    ``fold_right_1(+callable,+list,?term)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -331,6 +355,8 @@ List scanning (right associative). Closure is extended with three arguments: lis
 |    ``scan_right(+callable,?term,+list,?list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="scan_right_1/3"> </div>
@@ -353,6 +379,8 @@ List scanning (right associative). Closure is extended with three arguments: lis
 | **Mode and number of proofs:**
 |    ``scan_right_1(+callable,+list,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -377,6 +405,8 @@ True if the predicate succeeds for each list element.
 |    ``map(+callable,?list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="map/3"> </div>
@@ -399,6 +429,8 @@ List mapping predicate taken arguments from two lists of elements.
 | **Mode and number of proofs:**
 |    ``map(+callable,?list,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -423,6 +455,8 @@ List mapping predicate taken arguments from three lists of elements.
 |    ``map(+callable,?list,?list,?list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="map/5"> </div>
@@ -445,6 +479,8 @@ List mapping predicate taken arguments from four lists of elements.
 | **Mode and number of proofs:**
 |    ``map(+callable,?list,?list,?list,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -469,6 +505,8 @@ List mapping predicate taken arguments from five lists of elements.
 |    ``map(+callable,?list,?list,?list,?list,?list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="map/7"> </div>
@@ -491,6 +529,8 @@ List mapping predicate taken arguments from six lists of elements.
 | **Mode and number of proofs:**
 |    ``map(+callable,?list,?list,?list,?list,?list,?list)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -515,6 +555,8 @@ List mapping predicate taken arguments from seven lists of elements.
 |    ``map(+callable,?list,?list,?list,?list,?list,?list,?list)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="map_reduce/5"> </div>
@@ -537,6 +579,8 @@ Map a list and apply a fold left (reduce) to the resulting list.
 | **Mode and number of proofs:**
 |    ``map_reduce(+callable,+callable,+term,?list,?term)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------

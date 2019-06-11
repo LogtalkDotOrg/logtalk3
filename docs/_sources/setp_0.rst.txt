@@ -53,6 +53,8 @@ Returns a set with all unique elements from the given list.
 |    ``as_set(@list,-set)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="as_list/2"> </div>
@@ -73,6 +75,8 @@ Returns a list with all elements of the given set.
 | **Mode and number of proofs:**
 |    ``as_list(@set,-list)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -95,6 +99,8 @@ Deletes an element from a set returning the set of remaining elements.
 |    ``delete(+set,@term,?set)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="disjoint/2"> </div>
@@ -115,6 +121,8 @@ True if the two sets have no element in common.
 | **Mode and number of proofs:**
 |    ``disjoint(+set,+set)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ True if the two sets are equal.
 |    ``equal(+set,+set)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="empty/1"> </div>
@@ -157,6 +167,8 @@ True if the set is empty.
 | **Mode and number of proofs:**
 |    ``empty(+set)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -179,6 +191,8 @@ Inserts an element in a set, returning the resulting set.
 |    ``insert(+set,+term,?set)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="insert_all/3"> </div>
@@ -199,6 +213,8 @@ Inserts a list of elements in a set, returning the resulting set.
 | **Mode and number of proofs:**
 |    ``insert_all(+list,+set,?set)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -221,6 +237,8 @@ True if the two sets have at least one element in common.
 |    ``intersect(+set,+set)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="intersection/3"> </div>
@@ -241,6 +259,8 @@ Returns the intersection of Set1 and Set2.
 | **Mode and number of proofs:**
 |    ``intersection(+set,+set,?set)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -263,6 +283,8 @@ True if Intersection is the intersection of Set1 and Set2 and Difference is the 
 |    ``intersection(+set,+set,?set,?set)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="size/2"> </div>
@@ -283,6 +305,8 @@ Number of set elements.
 | **Mode and number of proofs:**
 |    ``size(+set,?integer)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -306,6 +330,8 @@ Element is a member of set Set.
 |    ``member(-term,+set)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="memberchk/2"> </div>
@@ -326,6 +352,8 @@ Checks if a term is a member of a set.
 | **Mode and number of proofs:**
 |    ``memberchk(+term,+set)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -348,6 +376,8 @@ Returns the power set of a set, represented as a list of sets.
 |    ``powerset(+set,-list)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="product/3"> </div>
@@ -368,6 +398,8 @@ Returns the cartesian product of two sets.
 | **Mode and number of proofs:**
 |    ``product(+set,+set,-set)`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -390,6 +422,8 @@ Selects an element from a set, returning the set of remaining elements.
 |    ``select(?term,+set,?set)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="selectchk/3"> </div>
@@ -410,6 +444,8 @@ Checks that an element can be selected from a set, returning the set of remainin
 | **Mode and number of proofs:**
 |    ``selectchk(?term,+set,?set)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -432,6 +468,8 @@ True if Subset is a subset of Set.
 |    ``subset(+set,+set)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="subtract/3"> </div>
@@ -452,6 +490,8 @@ True when Difference contains all and only the elements of Set1 which are not al
 | **Mode and number of proofs:**
 |    ``subtract(+set,+set,?set)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -474,6 +514,8 @@ True if Difference is the symmetric difference of Set1 and Set2, containing all 
 |    ``symdiff(+set,+set,?set)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="union/3"> </div>
@@ -495,6 +537,8 @@ True if Union is the union of Set1 and Set2.
 |    ``union(+set,+set,?set)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="union/4"> </div>
@@ -515,6 +559,8 @@ True if Union is the union of Set1 and Set2 and Difference is the difference bet
 | **Mode and number of proofs:**
 |    ``union(+set,+set,?set,?set)`` - ``zero_or_one``
 
+
+------------
 
 Protected interface
 -------------------

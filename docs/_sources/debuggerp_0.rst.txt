@@ -59,6 +59,8 @@ Resets all debugging settings, including spy points and leashed ports, and turns
 |    ``reset`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="debug/0"> </div>
@@ -77,6 +79,8 @@ Starts debugging for all defined spy points.
 | **Mode and number of proofs:**
 |    ``debug`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -97,6 +101,8 @@ Stops debugging for all defined spy points.
 |    ``nodebug`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="debugging/0"> </div>
@@ -115,6 +121,8 @@ Reports current debugging settings, including spy points.
 | **Mode and number of proofs:**
 |    ``debugging`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +145,8 @@ Enumerates, by backtracking, all entities compiled in debug mode.
 |    ``debugging(?entity_identifier)`` - ``zero_or_more``
 
 
+------------
+
 .. raw:: html
 
    <div id="trace/0"> </div>
@@ -156,6 +166,8 @@ Starts tracing all calls compiled in debug mode.
 |    ``trace`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="notrace/0"> </div>
@@ -174,6 +186,8 @@ Stops tracing of calls compiled in debug mode.
 | **Mode and number of proofs:**
 |    ``notrace`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -197,6 +211,8 @@ Sets a line number spy point or a predicate spy point or a list of spy points.
 |    ``spy(@list(spy_point))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="spying/1"> </div>
@@ -217,6 +233,8 @@ Enumerates, by backtracking, all defined line number and predicate spy points.
 | **Mode and number of proofs:**
 |    ``spying(?spy_point)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -239,6 +257,8 @@ Sets a context spy point.
 |    ``spy(@term,@term,@term,@term)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="spying/4"> </div>
@@ -259,6 +279,8 @@ Enumerates, by backtracking, all defined context spy points.
 | **Mode and number of proofs:**
 |    ``spying(?term,?term,?term,?term)`` - ``zero_or_more``
 
+
+------------
 
 .. raw:: html
 
@@ -283,6 +305,8 @@ Removes all matching line number spy points and predicate spy points.
 |    ``nospy(@list(spy_point))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="nospy/4"> </div>
@@ -304,6 +328,8 @@ Removes all matching context spy points.
 |    ``nospy(@term,@term,@term,@term)`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="nospyall/0"> </div>
@@ -322,6 +348,8 @@ Removes all line number, predicate, and context spy points.
 | **Mode and number of proofs:**
 |    ``nospyall`` - ``one``
 
+
+------------
 
 .. raw:: html
 
@@ -345,6 +373,8 @@ Sets the debugger leash ports using an abbreviation (none, loose, half, tight, o
 |    ``leash(+list(atom))`` - ``one``
 
 
+------------
+
 .. raw:: html
 
    <div id="leashing/1"> </div>
@@ -365,6 +395,8 @@ Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call
 | **Mode and number of proofs:**
 |    ``leashing(?atom)`` - ``zero_or_more``
 
+
+------------
 
 Protected interface
 -------------------
