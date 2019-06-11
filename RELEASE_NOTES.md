@@ -174,8 +174,8 @@ Tests
 library directories.
 
 * ADDED: Unit tests for the `assignvars`, `coroutining`, `dictionaries`,
-`gensym`, `heaps`, `hierarchies`, `hook_flows`, `intervals`, `loops`, `meta`,
-`meta_compiler`, `queues`, and `sets` libraries.
+`gensym`, `heaps`, `hierarchies`, `hook_flows`, `intervals`, `java`, `loops`,
+`meta`, `meta_compiler`, `queues`, and `sets` libraries.
 
 * ADDED: Unit tests for the new object and category `uses/1` directive.
 
