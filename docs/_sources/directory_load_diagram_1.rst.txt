@@ -21,11 +21,10 @@ Predicates for generating directory loading dependency diagrams.
 | **Imports:**
 |    ``public`` :ref:`directory_diagram(Format) <directory_diagram/1>`
 | **Uses:**
+|    :ref:`file_load_diagram(Format) <file_load_diagram/1>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`modules_diagram_support <modules_diagram_support/0>`
-|    :ref:`file_load_diagram(Format) <file_load_diagram/1>`
-|    :ref:`file_load_diagram(Format) <file_load_diagram/1>`
 
 | **Remarks:**
 |    (none)

@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.14,
+		version is 4.15,
 		author is 'Paulo Moura',
-		date is 2019/05/07,
+		date is 2019/06/12,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1005,9 +1005,17 @@
 			),
 		fail.
 	write_xml_object_relations(Stream, Entity) :-
-		findall(Other, (object_property(Entity, calls(Other::_, _)), nonvar(Other)), Others0),
-		sort(Others0, Others),
-			member(Object, Others),
+		findall(
+			Name/Arity,
+			(	object_property(Entity, calls(Other::_, _)),
+				nonvar(Other),
+				functor(Other, Name, Arity)
+			),
+			Functors
+		),
+		sort(Functors, UniqueFunctors),
+			member(Name/Arity, UniqueFunctors),
+			functor(Object, Name, Arity),
 			write_xml_uses_relation(Stream, Object),
 		fail.
 	write_xml_object_relations(_, _).
@@ -1039,9 +1047,17 @@
 			),
 		fail.
 	write_xml_category_relations(Stream, Entity) :-
-		findall(Other, (category_property(Entity, calls(Other::_, _)), nonvar(Other)), Others0),
-		sort(Others0, Others),
-			member(Object, Others),
+		findall(
+			Name/Arity,
+			(	category_property(Entity, calls(Other::_, _)),
+				nonvar(Other),
+				functor(Other, Name, Arity)
+			),
+			Functors
+		),
+		sort(Functors, UniqueFunctors),
+			member(Name/Arity, UniqueFunctors),
+			functor(Object, Name, Arity),
 			write_xml_uses_relation(Stream, Object),
 		fail.
 	write_xml_category_relations(_, _).
