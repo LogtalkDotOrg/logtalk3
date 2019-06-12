@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
 		date is 2019/06/12,
 		comment is 'Unit tests for the "java" library.'
@@ -131,5 +131,11 @@
 		java::array_to_terms(Array, Terms, Length),
 		^^assertion(terms, Terms == [a,42,foo]),
 		^^assertion(length, Length == 3).
+
+	test(java_iterator_element_2_01, true(Elements == [a,b,c])) :-
+		java('java.util.ArrayList')::new(ArrayList),
+		java(ArrayList)::(add(a), add(b), add(c)),
+		java(ArrayList, Iterator)::iterator,
+		findall(Element, java::iterator_element(Iterator,Element), Elements).
 
 :- end_object.
