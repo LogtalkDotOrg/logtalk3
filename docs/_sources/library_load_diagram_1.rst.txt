@@ -11,8 +11,8 @@
 Predicates for generating library loading dependency diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.25
-| **Date:** 2019/5/3
+| **Version:** 2.26
+| **Date:** 2019/6/12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -21,7 +21,6 @@ Predicates for generating library loading dependency diagrams.
 | **Imports:**
 |    ``public`` :ref:`library_diagram(Format) <library_diagram/1>`
 | **Uses:**
-|    :ref:`entity_diagram <entity_diagram/0>`
 |    :ref:`entity_diagram(Format) <entity_diagram/1>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
