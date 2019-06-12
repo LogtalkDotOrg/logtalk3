@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/06/11,
+		date is 2019/06/12,
 		comment is 'Unit tests for the "java" library.'
 	]).
 
@@ -117,5 +117,19 @@
 	test(java_value_reference_2_04, true) :-
 		java::value_reference(null, Reference),
 		java::is_null(Reference).
+
+	test(java_arrays_01, true(Terms == [a,42,foo])) :-
+		java::terms_to_array([a,42,foo], Array),
+		java::array_to_terms(Array, Terms).
+
+	test(java_arrays_02, true(Terms =~= [2.72,3.14,9.8])) :-
+		java::terms_to_array([2.72,3.14,9.8], Array),
+		java::array_to_terms(Array, Terms).
+
+	test(java_arrays_03, true) :-
+		java::terms_to_array([a,42,foo], Array),
+		java::array_to_terms(Array, Terms, Length),
+		^^assertion(terms, Terms == [a,42,foo]),
+		^^assertion(length, Length == 3).
 
 :- end_object.
