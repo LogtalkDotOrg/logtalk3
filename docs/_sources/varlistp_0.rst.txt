@@ -29,8 +29,8 @@ List of variables protocol.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -563,8 +563,8 @@ Checks if a term is a valid list of variables. Throws an exception if the term i
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

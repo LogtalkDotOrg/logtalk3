@@ -29,8 +29,8 @@ Flag validation protocol. Must be implemented by validator objects.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -76,8 +76,8 @@ Validates a flag value.
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

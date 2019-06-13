@@ -29,8 +29,8 @@ Term and goal expansion protocol.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -79,8 +79,8 @@ Defines a term expansion. Called until it succeeds on all terms read while compi
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

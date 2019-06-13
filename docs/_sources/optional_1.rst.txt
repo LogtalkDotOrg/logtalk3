@@ -29,8 +29,8 @@ Optional reference predicates. Requires passing a reference constructed using th
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -326,8 +326,8 @@ Returns the term hold by the reference if not empty. Fails otherwise. Usually ca
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

@@ -29,8 +29,8 @@ List protocol.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -1194,8 +1194,8 @@ Drops the first N elements of a list. Fails if the list have fewer than N elemen
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

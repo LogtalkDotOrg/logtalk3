@@ -30,8 +30,8 @@ Red-Black trees. Uses standard order to compare keys.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -58,8 +58,8 @@ Applies a closure to the tree pairs identified by a set of keys.
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (see related entities)
 

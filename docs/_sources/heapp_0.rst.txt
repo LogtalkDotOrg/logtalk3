@@ -29,8 +29,8 @@ Heap protocol.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -262,8 +262,8 @@ Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fail
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

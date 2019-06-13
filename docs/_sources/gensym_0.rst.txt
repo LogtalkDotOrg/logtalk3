@@ -29,8 +29,8 @@ Predicates for generating unique atoms. Object protocol based on the "gensym" mo
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -99,8 +99,8 @@ Returns a new unique atom with a given base (prefix).
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

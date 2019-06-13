@@ -35,8 +35,8 @@ Redis client. Inspired by Sean Charles GNU Prolog Redis client.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -153,8 +153,8 @@ Sends a request to a Redis server running on localhost at the default 6379 port 
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (see related entities)
 

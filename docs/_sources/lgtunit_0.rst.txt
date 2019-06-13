@@ -38,8 +38,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -575,8 +575,8 @@ Returns the value of epsilon used in the definition of the (=~=)/2 predicate.
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 .. raw:: html
 

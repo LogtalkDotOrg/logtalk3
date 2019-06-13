@@ -29,8 +29,8 @@ Named integer counters. Counter names can be any nonvar term.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -143,8 +143,8 @@ Resets the named counter to zero. Creates the counter if it does not exist.
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

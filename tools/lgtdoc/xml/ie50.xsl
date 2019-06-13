@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
-%  Last updated on June 7, 2019
+%  Last updated on June 13, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -142,7 +142,7 @@
 
 
 <xsl:template match="logtalk_entity/predicates">
-	<h1>Public interface</h1>
+	<h1>Public predicates</h1>
 	<xsl:choose>
 		<xsl:when test="public/predicate">
 			<xsl:apply-templates select="public/predicate" />
@@ -154,7 +154,7 @@
 			<h4 class="code">(none)</h4>
 		</xsl:otherwise>
 	</xsl:choose>
-	<h1>Protected interface</h1>
+	<h1>Protected predicates</h1>
 	<xsl:choose>
 		<xsl:when test="protected/predicate">
 			<xsl:apply-templates select="protected/predicate" />

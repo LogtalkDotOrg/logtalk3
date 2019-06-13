@@ -29,8 +29,8 @@ Implementation of persistent object flags.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -281,8 +281,8 @@ True if the argument is a built-in flag type with the specified default value.
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 .. raw:: html
 

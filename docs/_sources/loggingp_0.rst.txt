@@ -29,8 +29,8 @@ Logging events to files protocol.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -193,8 +193,8 @@ Disables logging to file with alias Alias. Fails if a log file with alias Alias 
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

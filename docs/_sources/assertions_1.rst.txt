@@ -30,8 +30,8 @@ A simple assertions framework. Can be used as a hook object for either suppressi
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -83,8 +83,8 @@ Checks that an assertion is true. Uses the structured message printing mechanism
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (see related entities)
 

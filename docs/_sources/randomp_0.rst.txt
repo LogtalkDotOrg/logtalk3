@@ -29,8 +29,8 @@ Random number generator protocol.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -428,8 +428,8 @@ Calls a goal or fails without calling it with probability Probability. When the 
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

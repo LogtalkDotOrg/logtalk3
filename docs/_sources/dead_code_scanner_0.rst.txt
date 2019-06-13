@@ -36,8 +36,8 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -244,8 +244,8 @@ Enumerates, by backtracking, local predicates (and non-terminals) that are not u
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (see related entities)
 

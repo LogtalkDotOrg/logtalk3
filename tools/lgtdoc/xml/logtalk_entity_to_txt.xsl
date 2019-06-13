@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into text files
 %
-%  Last updated on June 7, 2019
+%  Last updated on June 13, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -179,7 +179,7 @@
 
 <xsl:template match="logtalk_entity/predicates">
 	<xsl:value-of select="$hr2" />
-	<xsl:text>Public interface</xsl:text><xsl:value-of select="$nl2" />
+	<xsl:text>Public predicates</xsl:text><xsl:value-of select="$nl2" />
 	<xsl:choose>
 		<xsl:when test="public/predicate">
 			<xsl:apply-templates select="public/predicate" />
@@ -192,7 +192,7 @@
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:value-of select="$hr2" />
-	<xsl:text>Protected interface</xsl:text><xsl:value-of select="$nl2" />
+	<xsl:text>Protected predicates</xsl:text><xsl:value-of select="$nl2" />
 	<xsl:choose>
 		<xsl:when test="protected/predicate">
 			<xsl:apply-templates select="protected/predicate" />

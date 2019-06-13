@@ -88,8 +88,8 @@ Type checking predicates. User extensible. New types can be defined by adding cl
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -216,8 +216,8 @@ True if the given term is of the specified type. Throws an error otherwise. A ne
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (see related entities)
 

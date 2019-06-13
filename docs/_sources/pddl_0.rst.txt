@@ -28,8 +28,8 @@ Simple parser of PDDL 3.0 files.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -123,8 +123,8 @@ Parses a PDDL 3.0 problem file, returning a compound term representing its conte
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (see related entities)
 

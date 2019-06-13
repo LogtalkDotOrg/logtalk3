@@ -29,8 +29,8 @@ Protocol for an interpreter.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -78,8 +78,8 @@ True if goal is provable within the given depth-limit in the specified database.
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

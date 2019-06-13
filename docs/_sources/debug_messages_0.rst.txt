@@ -32,8 +32,8 @@ Supports selective enabling and disabling of debug and debug(Group) messages.
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -171,8 +171,8 @@ Enumerates by backtraking the enabled debug(Group) messages for each component.
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (see related entities)
 

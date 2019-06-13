@@ -29,8 +29,8 @@ Event handlers protocol. The handlers are automatically by the runtime called fo
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -78,8 +78,8 @@ Event handler for "after" events. An "after" event handler may prevent a method 
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (none)
 

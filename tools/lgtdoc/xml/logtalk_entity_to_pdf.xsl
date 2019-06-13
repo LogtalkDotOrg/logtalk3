@@ -10,7 +10,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
 %
-%  Last updated on June 7, 2019
+%  Last updated on June 13, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -413,7 +413,7 @@
 			font-weight="bold" 
 			keep-with-next="always"
 			space-before="18pt">
-		Public interface
+		Public predicates
 	</fo:block>
 	<xsl:choose>
 		<xsl:when test="public/predicate">
@@ -445,7 +445,7 @@
 			font-weight="bold" 
 			keep-with-next="always"
 			space-before="18pt">
-		Protected interface
+		Protected predicates
 	</fo:block>
 	<xsl:choose>
 		<xsl:when test="protected/predicate">

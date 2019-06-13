@@ -31,8 +31,8 @@ Constructors for expected term references. A reference contains either an expect
    :local:
    :backlinks: top
 
-Public interface
-----------------
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -130,8 +130,8 @@ Constructs a reference by calling Goal that binds and uses Expected on success. 
 
 ------------
 
-Protected interface
--------------------
+Protected predicates
+--------------------
 
 (see related entities)
 
