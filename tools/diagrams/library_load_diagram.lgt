@@ -22,12 +22,12 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.26,
+		version is 2.27,
 		author is 'Paulo Moura',
-		date is 2019/06/12,
+		date is 2019/06/13,
 		comment is 'Predicates for generating library loading dependency diagrams.',
-		parnames is ['Format'],
-		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_)]
+		parameters is ['Format' - 'Graph language file format'],
+		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -158,11 +158,11 @@
 	extends(library_load_diagram(dot))).
 
 	:- info([
-		version is 2.0,
+		version is 2.01,
 		author is 'Paulo Moura',
-		date is 2016/02/29,
+		date is 2019/06/13,
 		comment is 'Predicates for generating library loading dependency diagrams in DOT format.',
-		see_also is [library_dependency_diagram, file_dependency_diagram]
+		see_also is [library_dependency_diagram, file_dependency_diagram, entity_diagram]
 	]).
 
 :- end_object.

@@ -11,8 +11,8 @@
 Predicates for generating library dependency diagrams in DOT format.
 
 | **Author:** Paulo Moura
-| **Version:** 2.0
-| **Date:** 2016/2/29
+| **Version:** 2.01
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -50,5 +50,5 @@ Operators
 
 .. seealso::
 
-   :ref:`library_load_diagram <library_load_diagram/0>`, :ref:`file_load_diagram <file_load_diagram/0>`
+   :ref:`library_load_diagram <library_load_diagram/0>`, :ref:`file_load_diagram <file_load_diagram/0>`, :ref:`entity_diagram <entity_diagram/0>`
 

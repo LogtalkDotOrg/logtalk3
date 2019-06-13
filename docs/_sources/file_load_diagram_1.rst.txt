@@ -8,11 +8,14 @@
 ``file_load_diagram(Format)``
 =============================
 
+* ``Format`` - Graph language file format
+
+
 Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.
 
 | **Author:** Paulo Moura
-| **Version:** 2.25
-| **Date:** 2019/4/30
+| **Version:** 2.26
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

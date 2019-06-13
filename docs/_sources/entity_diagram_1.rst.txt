@@ -8,11 +8,14 @@
 ``entity_diagram(Format)``
 ==========================
 
+* ``Format`` - Graph language file format
+
+
 Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.
 
 | **Author:** Paulo Moura
-| **Version:** 2.46
-| **Date:** 2019/5/3
+| **Version:** 2.47
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -160,5 +163,5 @@ Operators
 
 .. seealso::
 
-   :ref:`inheritance_diagram(Format) <inheritance_diagram/1>`, :ref:`uses_diagram(Format) <uses_diagram/1>`, :ref:`xref_diagram(Format) <xref_diagram/1>`
+   :ref:`inheritance_diagram(Format) <inheritance_diagram/1>`, :ref:`uses_diagram(Format) <uses_diagram/1>`, :ref:`xref_diagram(Format) <xref_diagram/1>`, :ref:`library_diagram(Format) <library_diagram/1>`
 

@@ -22,11 +22,11 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.57,
+		version is 2.58,
 		author is 'Paulo Moura',
-		date is 2019/04/30,
+		date is 2019/06/13,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
-		parnames is ['Format'],
+		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
 	]).
 

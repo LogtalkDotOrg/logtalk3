@@ -8,11 +8,14 @@
 ``inheritance_diagram(Format)``
 ===============================
 
+* ``Format`` - Graph language file format
+
+
 Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.
 
 | **Author:** Paulo Moura
-| **Version:** 2.16
-| **Date:** 2019/4/30
+| **Version:** 2.17
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

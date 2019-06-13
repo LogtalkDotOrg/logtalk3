@@ -8,11 +8,14 @@
 ``library_dependency_diagram(Format)``
 ======================================
 
+* ``Format`` - Graph language file format
+
+
 Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.
 
 | **Author:** Paulo Moura
-| **Version:** 2.26
-| **Date:** 2019/6/12
+| **Version:** 2.27
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -69,5 +72,5 @@ Operators
 
 .. seealso::
 
-   :ref:`library_load_diagram(Format) <library_load_diagram/1>`, :ref:`directory_load_diagram(Format) <directory_load_diagram/1>`, :ref:`file_load_diagram(Format) <file_load_diagram/1>`
+   :ref:`library_load_diagram(Format) <library_load_diagram/1>`, :ref:`directory_load_diagram(Format) <directory_load_diagram/1>`, :ref:`file_load_diagram(Format) <file_load_diagram/1>`, :ref:`entity_diagram(Format) <entity_diagram/1>`
 

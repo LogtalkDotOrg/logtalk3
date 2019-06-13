@@ -8,11 +8,14 @@
 ``library_load_diagram(Format)``
 ================================
 
+* ``Format`` - Graph language file format
+
+
 Predicates for generating library loading dependency diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2.26
-| **Date:** 2019/6/12
+| **Version:** 2.27
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -69,5 +72,5 @@ Operators
 
 .. seealso::
 
-   :ref:`library_dependency_diagram(Format) <library_dependency_diagram/1>`, :ref:`directory_dependency_diagram(Format) <directory_dependency_diagram/1>`, :ref:`file_dependency_diagram(Format) <file_dependency_diagram/1>`
+   :ref:`library_dependency_diagram(Format) <library_dependency_diagram/1>`, :ref:`directory_dependency_diagram(Format) <directory_dependency_diagram/1>`, :ref:`file_dependency_diagram(Format) <file_dependency_diagram/1>`, :ref:`entity_diagram(Format) <entity_diagram/1>`
 

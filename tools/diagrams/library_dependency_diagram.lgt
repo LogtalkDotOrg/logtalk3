@@ -22,12 +22,12 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.26,
+		version is 2.27,
 		author is 'Paulo Moura',
-		date is 2019/06/12,
+		date is 2019/06/13,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
-		parnames is ['Format'],
-		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_)]
+		parameters is ['Format' - 'Graph language file format'],
+		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_), entity_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -194,11 +194,11 @@
 	extends(library_dependency_diagram(dot))).
 
 	:- info([
-		version is 2.0,
+		version is 2.01,
 		author is 'Paulo Moura',
-		date is 2016/02/29,
+		date is 2019/06/13,
 		comment is 'Predicates for generating library dependency diagrams in DOT format.',
-		see_also is [library_load_diagram, file_load_diagram]
+		see_also is [library_load_diagram, file_load_diagram, entity_diagram]
 	]).
 
 :- end_object.

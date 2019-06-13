@@ -22,11 +22,11 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.18,
+		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2019/05/03,
+		date is 2019/06/13,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
-		parnames is ['Format'],
+		parameters is ['Format' - 'Graph language file format'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
 	]).
 

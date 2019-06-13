@@ -8,11 +8,14 @@
 ``directory_dependency_diagram(Format)``
 ========================================
 
+* ``Format`` - Graph language file format
+
+
 Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.
 
 | **Author:** Paulo Moura
-| **Version:** 1.18
-| **Date:** 2019/5/3
+| **Version:** 1.19
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

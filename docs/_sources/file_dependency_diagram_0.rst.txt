@@ -11,8 +11,8 @@
 Predicates for generating file contents dependency diagrams in DOT format. A dependency exists when an entity in one file makes a reference to an entity in another file.
 
 | **Author:** Paulo Moura
-| **Version:** 2.0
-| **Date:** 2014/1/14
+| **Version:** 2.01
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -50,5 +50,5 @@ Operators
 
 .. seealso::
 
-   :ref:`file_load_diagram <file_load_diagram/0>`, :ref:`library_load_diagram <library_load_diagram/0>`
+   :ref:`file_load_diagram <file_load_diagram/0>`, :ref:`directory_load_diagram <directory_load_diagram/0>`, :ref:`library_load_diagram <library_load_diagram/0>`
 

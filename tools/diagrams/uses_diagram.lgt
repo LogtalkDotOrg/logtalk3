@@ -22,11 +22,11 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.17,
+		version is 2.18,
 		author is 'Paulo Moura',
-		date is 2019/04/30,
+		date is 2019/06/13,
 		comment is 'Predicates for generating entity diagrams with only uses and use_module relation edges.',
-		parnames is ['Format'],
+		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), xref_diagram(_)]
 	]).
 

@@ -3,11 +3,11 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2019/04/29,
+		date is 2019/06/13,
 		comment is 'Common predicates for generating directory diagrams.',
-		parnames is ['Format']
+		parameters is ['Format' - 'Graph language file format']
 	]).
 
 	:- uses(list, [

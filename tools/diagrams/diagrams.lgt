@@ -21,11 +21,11 @@
 :- object(diagrams(_Format)).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2019/04/21,
+		date is 2019/06/13,
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.',
-		parnames is ['Format'],
+		parameters is ['Format' - 'Graph language file format'],
 		remarks is [
 			'Common options' - 'title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.',
 			'Limitations' - 'Some of the provided predicates only make sense for some types of diagrams. Also, fine tuning may require generating individual diagrams directly instead of as a batch using this utility object.'

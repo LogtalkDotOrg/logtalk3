@@ -21,11 +21,11 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.43,
+		version is 2.44,
 		author is 'Paulo Moura',
-		date is 2019/05/07,
+		date is 2019/06/13,
 		comment is 'Common predicates for generating diagrams.',
-		parnames is ['Format']
+		parameters is ['Format' - 'Graph language file format']
 	]).
 
 	:- uses(list, [
