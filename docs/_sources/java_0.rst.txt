@@ -11,8 +11,8 @@
 Abstract interface to JPL API utility predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1.5
-| **Date:** 2017/10/16
+| **Version:** 1.6
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -49,4 +49,8 @@ Operators
 ---------
 
 (none)
+
+.. seealso::
+
+   :ref:`java(Reference,ReturnValue) <java/2>`, :ref:`java(Reference) <java/1>`, :ref:`java_hook <java_hook/0>`
 

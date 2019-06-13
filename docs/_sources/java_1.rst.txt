@@ -14,8 +14,8 @@
 Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.
 
 | **Author:** Paulo Moura and Sergio Castro
-| **Version:** 1.0
-| **Date:** 2014/3/25
+| **Version:** 1.01
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,7 +25,9 @@ Minimal abstraction of the JPL API for calling Java from Logtalk using familiar 
 |    ``public`` :ref:`java(Reference,_) <java/2>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Send to this object any valid message as listed in the JavaDocs for the given reference.
 
 .. contents::
    :local:
@@ -50,4 +52,8 @@ Operators
 ---------
 
 (none)
+
+.. seealso::
+
+   :ref:`java(Reference,ReturnValue) <java/2>`, :ref:`java <java/0>`, :ref:`java_hook <java_hook/0>`
 

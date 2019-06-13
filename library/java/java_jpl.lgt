@@ -22,13 +22,19 @@
 	implements((forwarding, java_access_protocol))).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2018/09/04,
+		date is 2019/06/13,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object',
 			'ReturnValue' - 'Value returned by a method call (possibly the Java value void)'
+		],
+		remarks is [
+			'Usage' - 'Send to this object any valid message as listed in the JavaDocs for the given reference.'
+		],
+		see_also is [
+			java(_), java, java_hook
 		]
 	]).
 
@@ -68,12 +74,18 @@
 	extends(java(Reference, _))).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2014/03/25,
+		date is 2019/06/13,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object'
+		],
+		remarks is [
+			'Usage' - 'Send to this object any valid message as listed in the JavaDocs for the given reference.'
+		],
+		see_also is [
+			java(_,_), java, java_hook
 		]
 	]).
 
@@ -84,10 +96,13 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2017/10/16,
-		comment is 'Abstract interface to JPL API utility predicates.'
+		date is 2019/06/13,
+		comment is 'Abstract interface to JPL API utility predicates.',
+		see_also is [
+			java(_,_), java(_), java_hook
+		]
 	]).
 
 	:- use_module(jpl, [
@@ -201,6 +216,9 @@
 		comment is 'Hook object to optimize messages to the java/1-2 objects that otherwise would trigger the forward/1 handler.',
 		remarks is [
 			'Usage' - 'Compile source files with messages to the java/1-2 objects using the compiler option hook(java_hook).'
+		],
+		see_also is [
+			java(_,_), java(_)
 		]
 	]).
 

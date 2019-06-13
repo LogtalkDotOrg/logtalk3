@@ -61,8 +61,15 @@ Private predicates
 ``pred_info/3``
 ^^^^^^^^^^^^^^^
 
+Declares predicates that have the listed hidden parameters.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``pred_info(Name,Arity,HiddenParameters)``
+| **Mode and number of proofs:**
+|    ``pred_info(?atom,?integer,?list(atom))`` - ``zero_or_more``
 
 
 ------------
@@ -77,8 +84,15 @@ Private predicates
 ``acc_info/7``
 ^^^^^^^^^^^^^^
 
+Long form for declaring accumulators.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``acc_info(Accumulator,Term,Left,Right,Joiner,LStart,RStart)``
+| **Mode and number of proofs:**
+|    ``acc_info(?atom,?term,?term,?term,?callable,?term,?term)`` - ``zero_or_more``
 
 
 ------------
@@ -93,8 +107,15 @@ Private predicates
 ``acc_info/5``
 ^^^^^^^^^^^^^^
 
+Short form for declaring accumulators.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``acc_info(Accumulator,Term,Left,Right,Joiner)``
+| **Mode and number of proofs:**
+|    ``acc_info(?atom,?term,?term,?term,?callable)`` - ``zero_or_more``
 
 
 ------------
@@ -109,8 +130,15 @@ Private predicates
 ``pass_info/2``
 ^^^^^^^^^^^^^^^
 
+Long form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with =/2 as the joiner function.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``pass_info(Argument,PStart)``
+| **Mode and number of proofs:**
+|    ``pass_info(?atom,?term)`` - ``zero_or_more``
 
 
 ------------
@@ -125,8 +153,15 @@ Private predicates
 ``pass_info/1``
 ^^^^^^^^^^^^^^^
 
+Short form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with =/2 as the joiner function.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``pass_info(Argument)``
+| **Mode and number of proofs:**
+|    ``pass_info(?atom)`` - ``zero_or_more``
 
 
 ------------

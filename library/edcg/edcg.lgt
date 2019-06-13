@@ -43,15 +43,44 @@ SOFTWARE.
 	:- uses(list, [member/2]).
 	:- uses(logtalk, [print_message/3]).
 
-	:- private([
-		pred_info/3,
-		acc_info/7, acc_info/5,
-		pass_info/2, pass_info/1
+	:- private(pred_info/3).
+	:- dynamic(pred_info/3).
+	:- mode(pred_info(?atom, ?integer, ?list(atom)), zero_or_more).
+	:- info(pred_info/3, [
+		comment is 'Declares predicates that have the listed hidden parameters.',
+		argnames is ['Name', 'Arity', 'HiddenParameters']
 	]).
-	:- dynamic([
-		pred_info/3,
-		acc_info/7, acc_info/5,
-		pass_info/2, pass_info/1
+
+	:- private(acc_info/7).
+	:- dynamic(acc_info/7).
+	:- mode(acc_info(?atom, ?term, ?term, ?term, ?callable, ?term, ?term), zero_or_more).
+	:- info(acc_info/7, [
+		comment is 'Long form for declaring accumulators.',
+		argnames is ['Accumulator', 'Term', 'Left', 'Right', 'Joiner', 'LStart', 'RStart']
+	]).
+
+	:- private(acc_info/5).
+	:- dynamic(acc_info/5).
+	:- mode(acc_info(?atom, ?term, ?term, ?term, ?callable), zero_or_more).
+	:- info(acc_info/5, [
+		comment is 'Short form for declaring accumulators.',
+		argnames is ['Accumulator', 'Term', 'Left', 'Right', 'Joiner']
+	]).
+
+	:- private(pass_info/2).
+	:- dynamic(pass_info/2).
+	:- mode(pass_info(?atom, ?term), zero_or_more).
+	:- info(pass_info/2, [
+		comment is 'Long form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with =/2 as the joiner function.',
+		argnames is ['Argument', 'PStart']
+	]).
+
+	:- private(pass_info/1).
+	:- dynamic(pass_info/1).
+	:- mode(pass_info(?atom), zero_or_more).
+	:- info(pass_info/1, [
+		comment is 'Short form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with =/2 as the joiner function.',
+		argnames is ['Argument']
 	]).
 
 	cleanup :-
