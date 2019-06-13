@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`wrapper`
+=========
 
 This is a prototype tool to help port a plain Prolog application to Logtalk.
 It can also be used to enable applying other Logtalk developer tools, such as

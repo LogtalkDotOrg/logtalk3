@@ -26,6 +26,7 @@ The Logtalk Handbook
    refman/index
    tutorial/index
    faq/index
+   devtools/index
    glossary
    bibliography
    genindex

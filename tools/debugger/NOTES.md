@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`debugger`
+==========
 
 This tool provides the default Logtalk command-line debugger.
 

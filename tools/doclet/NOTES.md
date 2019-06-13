@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`doclet`
+========
 
 This folder provides a simple tool for (re)generating documentation for a
 project. The tool defines a `doclet` object that is expected to be extended

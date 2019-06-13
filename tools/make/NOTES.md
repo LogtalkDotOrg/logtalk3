@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`make`
+======
 
 Logtalk provides a make tool supporting several targets using the
 `logtalk_make/0-1` built-in predicates.

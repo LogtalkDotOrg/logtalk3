@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`diagrams`
+==========
 
 This tool generates library, directory, file, entity, and predicate diagrams
 for source files and for libraries of source files using the Logtalk reflection

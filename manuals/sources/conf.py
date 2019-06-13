@@ -43,7 +43,7 @@ release = u'v3.27.0-b11'
 extensions = [
     'sphinx.ext.intersphinx'
 #    'rinoh.frontend.sphinx'
-#.   'rst2pdf.pdfbuilder'
+#    'rst2pdf.pdfbuilder'
 ]
 
 intersphinx_mapping = {'apis': ('https://logtalk.org/library/','../../docs/objects.inv')}

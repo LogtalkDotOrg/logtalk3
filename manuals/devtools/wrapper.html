@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>wrapper &mdash; The Logtalk Handbook v3.27.0-b11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Glossary" href="../glossary.html" />
+    <link rel="prev" title="profiler" href="profiler.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger.html"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#workflows">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customization">Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-notes">Other notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Tools</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/devtools/wrapper.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="wrapper">
+<h1><code class="docutils literal notranslate"><span class="pre">wrapper</span></code><a class="headerlink" href="#wrapper" title="Permalink to this headline">¶</a></h1>
+<p>This is a prototype tool to help port a plain Prolog application to
+Logtalk. It can also be used to enable applying other Logtalk developer
+tools, such as the documenting and diagramming tools, to plain Prolog
+code.</p>
+<p>The tool takes a directory of Prolog files or a list of Prolog files,
+loads and wraps the code in each file using an object wrapper, and
+advises on missing directives to be added to those objects by using the
+compiler lint checker and the reflection API. The user can then either
+save the generated wrapper objects or copy and paste the printed advice
+into the Prolog files (updating them to Logtalk files by adding the
+object opening and closing directives to the Prolog files). The wrapper
+objects use <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directives to include the Prolog files and can
+be loaded for testing and for use with other tools. The wrapped Prolog
+files are not modified and thus require only read permission.</p>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>To consult this tool API documentation, open in a web browser the link:</p>
+<p><a class="reference external" href="https://logtalk.org/docs/library_index.html#wrapper">docs/library_index.html#wrapper</a></p>
+</div>
+<div class="section" id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<p>This tool can be loaded using the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(wrapper(loader)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="workflows">
+<h2>Workflows<a class="headerlink" href="#workflows" title="Permalink to this headline">¶</a></h2>
+<p>The typical porting workflow is simply:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> wrapper<span class="o">::</span>rdirectory(root_directory_of_prolog_code).
+...
+| <span class="o">?-</span> wrapper<span class="o">::</span>save.
+...
+</pre></div>
+</div>
+<p>See the next section on how to customize the API calls for more flexible
+processing.</p>
+</div>
+<div class="section" id="customization">
+<h2>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h2>
+<p>The tool can be customized by extending the <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> object. A common
+scenario is when wrapping plain Prolog code just to take advantage, for
+example, of the documenting tool or for generating cross-referencing
+diagrams. In this case, we can workaround any compiler errors by
+specializing the inherited definitions for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates and then load the wrapper objects for
+further processing by using the <code class="docutils literal notranslate"><span class="pre">include_wrapped_files(false)</span></code> option
+described below.</p>
+<p>The API predicates also accept a set of options for customization:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">prolog_extensions(Extensions)</span></code>
+list of file name extensions used to recognize Prolog source files
+(default is <code class="docutils literal notranslate"><span class="pre">['.pl',</span> <span class="pre">'.pro',</span> <span class="pre">'.prolog']</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logtalk_extension(Extension)</span></code>
+Logtalk file name extension to be used for the generated wrapper
+files (default is <code class="docutils literal notranslate"><span class="pre">'.lgt'</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code>
+list of Prolog source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_directories(Files)</span></code>
+list of sub-directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">include_wrapped_files(Boolean)</span></code>
+generate <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directives for the wrapped Prolog source files
+(default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
+</ul>
+</div>
+<div class="section" id="current-limitations">
+<h2>Current limitations<a class="headerlink" href="#current-limitations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The tool cannot deal with syntax errors in the Prolog files. These
+errors usually occur when using a backend Prolog system different
+from the one used to compile the original plain Prolog code. A common
+cause of syntax errors are operator definitions. These can often be
+solved by defining those operators for the Prolog backend used to run
+Logtalk and this tool. An alternative is to preload the Prolog files
+where those operators are declared. Preloading the plain Prolog
+application can also help in wrapping it by ensuring that its
+dependencies are also loaded.</p></li>
+<li><p>The tool assumes that all files to be wrapped have different names
+(even if found in different directories). If that is not the case,
+the name conflicts must be manually solved before using the tool.</p></li>
+<li><p>There isn’t yet any support for dealing with meta-predicates and
+advise on missing meta-predicate directives.</p></li>
+</ul>
+</div>
+<div class="section" id="other-notes">
+<h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>
+<p>All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="profiler.html" class="btn btn-neutral float-left" title="profiler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

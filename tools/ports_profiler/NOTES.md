@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`ports_profiler`
+================
 
 The `ports_profiler.lgt` source file defines a simple predicate execution box
 model port profiler tool (inspired by the ECLiPSe `port_profiler` tool). The

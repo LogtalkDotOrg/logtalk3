@@ -35,7 +35,24 @@ rm -rf ../faq
 rm -rf ../refman
 rm -rf ../tutorial
 rm -rf ../userman
+rm -rf ../devtools
 make clean
+
+sed '1,18d' ../../tools/asdf/NOTES.md | pandoc -f markdown -t rst -o devtools/asdf.rst
+sed '1,18d' ../../tools/assertions/NOTES.md | pandoc -f markdown -t rst -o devtools/assertions.rst
+sed '1,18d' ../../tools/code_metrics/NOTES.md | pandoc -f markdown -t rst -o devtools/code_metrics.rst
+sed '1,18d' ../../tools/dead_code_scanner/NOTES.md | pandoc -f markdown -t rst -o devtools/dead_code_scanner.rst
+sed '1,18d' ../../tools/debug_messages/NOTES.md | pandoc -f markdown -t rst -o devtools/debug_messages.rst
+sed '1,18d' ../../tools/debugger/NOTES.md | pandoc -f markdown -t rst -o devtools/debugger.rst
+sed '1,18d' ../../tools/diagrams/NOTES.md | pandoc -f markdown -t rst -o devtools/diagrams.rst
+sed '1,18d' ../../tools/doclet/NOTES.md | pandoc -f markdown -t rst -o devtools/doclet.rst
+sed '1,18d' ../../tools/help/NOTES.md | pandoc -f markdown -t rst -o devtools/help.rst
+sed '1,18d' ../../tools/lgtdoc/NOTES.md | pandoc -f markdown -t rst -o devtools/lgtdoc.rst
+sed '1,18d' ../../tools/lgtunit/NOTES.md | pandoc -f markdown -t rst -o devtools/lgtunit.rst
+sed '1,18d' ../../tools/make/NOTES.md | pandoc -f markdown -t rst -o devtools/make.rst
+sed '1,18d' ../../tools/ports_profiler/NOTES.md | pandoc -f markdown -t rst -o devtools/ports_profiler.rst
+sed '1,18d' ../../tools/profiler/NOTES.md | pandoc -f markdown -t rst -o devtools/profiler.rst
+sed '1,18d' ../../tools/wrapper/NOTES.md | pandoc -f markdown -t rst -o devtools/wrapper.rst
 
 make html
 make latexpdf

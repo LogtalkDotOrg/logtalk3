@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`dead_code_scanner`
+===================
 
 This tool detects *likely* dead code in Logtalk entities and in Prolog modules
 compiled as objects. Predicates (and non-terminals) are classified as dead code

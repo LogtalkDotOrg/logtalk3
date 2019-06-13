@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`profiler`
+==========
 
 This tool contains simple wrappers for selected Prolog profiler tools.
 
@@ -28,7 +28,7 @@ Loading
 
 This tool can be loaded using the query:
 
-	| ?- logtalk_load(assertions(loader)).
+	| ?- logtalk_load(profiler(loader)).
 
 For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file.
 

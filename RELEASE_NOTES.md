@@ -57,6 +57,8 @@ built-in meta-predicate plus `table/1` and `untable/1` built-in predicates.
 Documentation
 -------------
 
+* ADDED: Developer tools documentation to the Handbook.
+
 * ADDED: Experimental support for generating Texinfo versions of the Handbook
 and the APIs.
 

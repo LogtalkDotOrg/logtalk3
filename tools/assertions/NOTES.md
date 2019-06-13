@@ -1,4 +1,3 @@
-
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -18,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`assertions`
+============
 
 The `assertions.lgt` file contains definitions for two meta-predicates,
 `assertion/1-2`, which allows using of assertions on your source code

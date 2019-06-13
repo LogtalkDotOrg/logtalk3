@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`lgtunit`
+=========
 
 The `lgtunit` tool provides testing support for Logtalk. It can also be used
 for testing Prolog code.
@@ -104,7 +104,7 @@ Running unit tests
 Assuming that your test object is named `tests`, after compiling and loading its
 source file, you can run the tests by typing:
 
-    | ?- tests::run.
+	| ?- tests::run.
 
 Usually, this goal is called automatically from an `initialization/1` directive
 in a `tester.lgt` loader file.
@@ -114,7 +114,7 @@ several test objects or using parametric test objects to be able to run the same
 tests using different parameters (e.g. different data sets). In this case, you
 can run all test subsets using the goal:
 
-    | ?- lgtunit::run_test_sets([...])
+	| ?- lgtunit::run_test_sets([...])
 
 where the `run_test_sets/1` predicate argument is a list of test object
 identifiers. This predicate makes possible to get a single code coverage

@@ -17,9 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
-
+`help`
+======
 This tool provides basic on-line help for Logtalk when running in a limited
 set of operating-systems.
 

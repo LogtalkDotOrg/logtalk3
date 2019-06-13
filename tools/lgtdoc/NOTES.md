@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`lgtdoc`
+========
 
 This folder provides the default Logtalk documenting tool, which is focused on
 generating API documentation for applications.

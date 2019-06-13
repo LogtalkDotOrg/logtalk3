@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Overview
---------
+`debug_messages`
+================
 
 By default, `debug` and `debug(Group)` messages are only printed when the `debug`
 flag is turned on. These messages are also suppressed when compiling code with the
