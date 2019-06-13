@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 7.11
-| **Date:** 2019/6/10
+| **Version:** 7.12
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,7 +32,13 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    :ref:`user <user/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Define test objects as extensions of the "lgtunit" object and compile their source files using the compiler option hook(lgtunit).
+
+   - *Portability:* Deterministic unit tests are currently not available when using Lean Prolog or Quintus Prolog as backend compilers.
+
+   - *Known issues:* Parameter variables cannot currently be used in the definition of test options.
 
 .. contents::
    :local:

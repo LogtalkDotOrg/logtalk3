@@ -26,10 +26,15 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.11,
+		version is 7.12,
 		author is 'Paulo Moura',
-		date is 2019/06/10,
-		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
+		date is 2019/06/13,
+		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.',
+		remarks is [
+			'Usage' - 'Define test objects as extensions of the "lgtunit" object and compile their source files using the compiler option hook(lgtunit).',
+			'Portability' - 'Deterministic unit tests are currently not available when using Lean Prolog or Quintus Prolog as backend compilers.',
+			'Known issues' - 'Parameter variables cannot currently be used in the definition of test options.'
+		]
 	]).
 
 	:- public(cover/1).
