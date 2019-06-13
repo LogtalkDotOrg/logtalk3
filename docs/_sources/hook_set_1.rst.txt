@@ -14,8 +14,8 @@
 Use a set (represented using a list) of hook objects to expand terms and goals. The hook objects are tried in sequence until one of them succeeds in expanding the current term (goal) into a different term (goal).
 
 | **Author:** Paulo Moura
-| **Version:** 1.0
-| **Date:** 2015/11/16
+| **Version:** 1.01
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,7 +25,9 @@ Use a set (represented using a list) of hook objects to expand terms and goals. 
 |    ``public`` :ref:`expanding <expanding/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Compile source files that should be expanded using the set of hook objects using the compiler option hook(hook_set(Set)).
 
 .. contents::
    :local:
@@ -34,17 +36,17 @@ Use a set (represented using a list) of hook objects to expand terms and goals. 
 Public predicates
 -----------------
 
-(see related entities)
+(see entity ancestors)
 
 Protected predicates
 --------------------
 
-(see related entities)
+(see entity ancestors)
 
 Private predicates
 ------------------
 
-(see related entities)
+(see entity ancestors)
 
 Operators
 ---------

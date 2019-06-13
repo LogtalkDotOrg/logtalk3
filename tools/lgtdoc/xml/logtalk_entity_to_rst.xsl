@@ -244,7 +244,7 @@
 			<xsl:apply-templates select="public/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<xsl:text>(see related entities)</xsl:text>
+			<xsl:text>(see entity ancestors)</xsl:text>
 			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
@@ -261,7 +261,7 @@
 			<xsl:apply-templates select="protected/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<xsl:text>(see related entities)</xsl:text>
+			<xsl:text>(see entity ancestors)</xsl:text>
 			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
@@ -278,7 +278,7 @@
 			<xsl:apply-templates select="private/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<xsl:text>(see related entities)</xsl:text>
+			<xsl:text>(see entity ancestors)</xsl:text>
 			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>

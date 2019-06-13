@@ -44,10 +44,10 @@
 	set_field(Field, Value) :-
 		jpl_set(_Reference_, Field, Value).
 
-	new(Parameters, _ReturnValue_) :- 
+	new(Parameters, _ReturnValue_) :-
 		jpl_new(_Reference_, Parameters, _ReturnValue_).
 
-	new(_ReturnValue_) :- 
+	new(_ReturnValue_) :-
 		jpl_new(_Reference_, [], _ReturnValue_).
 
 	invoke(Message) :-
@@ -195,10 +195,13 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2018/05/23,
-		comment is 'Hook object to optimize messages to the java/1-2 objects that otherwise would trigger the forward/1 handler.'
+		date is 2019/06/13,
+		comment is 'Hook object to optimize messages to the java/1-2 objects that otherwise would trigger the forward/1 handler.',
+		remarks is [
+			'Usage' - 'Compile source files with messages to the java/1-2 objects using the compiler option hook(java_hook).'
+		]
 	]).
 
 	goal_expansion(java(Reference,ReturnValue)::Message, java(Reference,ReturnValue)::invoke(Functor,Arguments)) :-

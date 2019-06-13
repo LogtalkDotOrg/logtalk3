@@ -11,8 +11,8 @@
 Multiple hidden parameters: an extension to Prolog's DCG notation. Ported to Logtalk as a hook object.
 
 | **Author:** Peter Van Roy; adapted to Logtalk by Paulo Moura.
-| **Version:** 1.02
-| **Date:** 2019/6/4
+| **Version:** 1.03
+| **Date:** 2019/6/13
 
 | **Copyright:** Copyright (C) 1992 Peter Van Roy
 | **License:** MIT
@@ -30,7 +30,9 @@ Multiple hidden parameters: an extension to Prolog's DCG notation. Ported to Log
 |    :ref:`logtalk <logtalk/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Compile source files with objects (or categories) defining EDCGs using the compiler option hook(edcg).
 
 .. contents::
    :local:
@@ -39,12 +41,12 @@ Multiple hidden parameters: an extension to Prolog's DCG notation. Ported to Log
 Public predicates
 -----------------
 
-(see related entities)
+(see entity ancestors)
 
 Protected predicates
 --------------------
 
-(see related entities)
+(see entity ancestors)
 
 Private predicates
 ------------------

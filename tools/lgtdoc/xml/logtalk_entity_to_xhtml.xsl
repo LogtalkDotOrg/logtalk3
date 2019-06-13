@@ -205,7 +205,7 @@
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
-				<p class="comment">(see related entities)</p>
+				<p class="comment">(see entity ancestors)</p>
 			</div>
 		</xsl:when>
 		<xsl:otherwise>
@@ -223,7 +223,7 @@
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
-				<p class="comment">(see related entities)</p>
+				<p class="comment">(see entity ancestors)</p>
 			</div>
 		</xsl:when>
 		<xsl:otherwise>
@@ -241,7 +241,7 @@
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
-				<p class="comment">(see related entities)</p>
+				<p class="comment">(see entity ancestors)</p>
 			</div>
 		</xsl:when>
 		<xsl:otherwise>

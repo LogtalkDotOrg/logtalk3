@@ -11,8 +11,8 @@
 Hook object to optimize messages to the java/1-2 objects that otherwise would trigger the forward/1 handler.
 
 | **Author:** Paulo Moura
-| **Version:** 1.0
-| **Date:** 2018/5/23
+| **Version:** 1.01
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -22,7 +22,9 @@ Hook object to optimize messages to the java/1-2 objects that otherwise would tr
 |    ``public`` :ref:`expanding <expanding/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Compile source files with messages to the java/1-2 objects using the compiler option hook(java_hook).
 
 .. contents::
    :local:
@@ -31,17 +33,17 @@ Hook object to optimize messages to the java/1-2 objects that otherwise would tr
 Public predicates
 -----------------
 
-(see related entities)
+(see entity ancestors)
 
 Protected predicates
 --------------------
 
-(see related entities)
+(see entity ancestors)
 
 Private predicates
 ------------------
 
-(see related entities)
+(see entity ancestors)
 
 Operators
 ---------

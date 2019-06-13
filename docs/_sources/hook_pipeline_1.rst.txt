@@ -14,8 +14,8 @@
 Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.
 
 | **Author:** Paulo Moura
-| **Version:** 1.01
-| **Date:** 2019/3/10
+| **Version:** 1.02
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,7 +25,9 @@ Use a pipeline (represented using a list) of hook objects to expand terms and go
 |    ``public`` :ref:`expanding <expanding/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Compile source files that should be expanded using the pipeline of hook objects using the compiler option hook(hook_pipeline(Pipeline)).
 
 .. contents::
    :local:
@@ -34,17 +36,17 @@ Use a pipeline (represented using a list) of hook objects to expand terms and go
 Public predicates
 -----------------
 
-(see related entities)
+(see entity ancestors)
 
 Protected predicates
 --------------------
 
-(see related entities)
+(see entity ancestors)
 
 Private predicates
 ------------------
 
-(see related entities)
+(see entity ancestors)
 
 Operators
 ---------

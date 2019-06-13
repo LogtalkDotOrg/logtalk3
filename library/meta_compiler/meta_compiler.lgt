@@ -22,10 +22,13 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.12,
-		date is 2018/08/16,
+		version is 0.13,
+		date is 2019/06/13,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
+		remarks is [
+			'Usage' - 'Compile source files with calls to the "meta" object meta-predicates using the compiler option hook(meta_compiler).'
+		],
 		see_also is [meta]
 	]).
 

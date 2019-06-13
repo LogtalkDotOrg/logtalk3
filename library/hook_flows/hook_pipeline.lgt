@@ -25,11 +25,14 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1.01,
+		version is 1.02,
 		author is 'Paulo Moura',
-		date is 2019/03/10,
+		date is 2019/06/13,
 		comment is 'Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.',
 		parameters is ['Pipeline'-'List of hook objects'],
+		remarks is [
+			'Usage' - 'Compile source files that should be expanded using the pipeline of hook objects using the compiler option hook(hook_pipeline(Pipeline)).'
+		],
 		see_also is [hook_set(_)]
 	]).
 

@@ -27,12 +27,15 @@ SOFTWARE.
 	implements(expanding)).
 
 	:- info([
-		version is 1.02,
+		version is 1.03,
 		author is 'Peter Van Roy; adapted to Logtalk by Paulo Moura.',
-		date is 2019/06/04,
+		date is 2019/06/13,
 		comment is 'Multiple hidden parameters: an extension to Prolog''s DCG notation. Ported to Logtalk as a hook object.',
 		copyright is 'Copyright (C) 1992 Peter Van Roy',
-		license is 'MIT'
+		license is 'MIT',
+		remarks is [
+			'Usage' - 'Compile source files with objects (or categories) defining EDCGs using the compiler option hook(edcg).'
+		]
 	]).
 
 	:- public(op(1200, xfx, '-->>')).   % Similar to '-->'

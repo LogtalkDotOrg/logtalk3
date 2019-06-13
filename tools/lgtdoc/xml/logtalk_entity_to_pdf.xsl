@@ -425,7 +425,7 @@
 					font-family="serif" 
 					font-style="italic"
 					space-before="10pt">
-				(see related entities)
+				(see entity ancestors)
 			</fo:block>
 		</xsl:when>
 		<xsl:otherwise>
@@ -457,7 +457,7 @@
 					font-family="serif" 
 					font-style="italic"
 					space-before="10pt">
-				(see related entities)
+				(see entity ancestors)
 			</fo:block>
 		</xsl:when>
 		<xsl:otherwise>
@@ -489,7 +489,7 @@
 					font-family="serif" 
 					font-style="italic"
 					space-before="10pt">
-				(see related entities)
+				(see entity ancestors)
 			</fo:block>
 		</xsl:when>
 		<xsl:otherwise>

@@ -11,8 +11,8 @@
 Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.
 
 | **Author:** Paulo Moura
-| **Version:** 0.12
-| **Date:** 2018/8/16
+| **Version:** 0.13
+| **Date:** 2019/6/13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,7 +26,9 @@ Compiler for the "meta" object meta-predicates. Generates auxiliary predicates i
 |    :ref:`logtalk <logtalk/0>`
 
 | **Remarks:**
-|    (none)
+
+
+   - *Usage:* Compile source files with calls to the "meta" object meta-predicates using the compiler option hook(meta_compiler).
 
 .. contents::
    :local:
@@ -35,12 +37,12 @@ Compiler for the "meta" object meta-predicates. Generates auxiliary predicates i
 Public predicates
 -----------------
 
-(see related entities)
+(see entity ancestors)
 
 Protected predicates
 --------------------
 
-(see related entities)
+(see entity ancestors)
 
 Private predicates
 ------------------
