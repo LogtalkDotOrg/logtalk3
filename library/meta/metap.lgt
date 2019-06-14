@@ -72,7 +72,7 @@
 	:- meta_predicate(partition(3, *, *, *, *, *)).
 	:- mode(partition(+callable, +list, @term, -list, -list, -list), one).
 	:- info(partition/6, [
-		comment is 'Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as compare/3.',
+		comment is 'Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as ``compare/3``.',
 		argnames is ['Closure', 'List', 'Value', 'Less', 'Equal', 'Greater']
 	]).
 

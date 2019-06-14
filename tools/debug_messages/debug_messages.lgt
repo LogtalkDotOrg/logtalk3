@@ -24,51 +24,51 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2019/01/16,
-		comment is 'Supports selective enabling and disabling of debug and debug(Group) messages.',
+		comment is 'Supports selective enabling and disabling of ``debug`` and ``debug(Group)`` messages.',
 		remarks is [
-			'Limitations' - 'Debug messages are suppressed by the compiler when the "optimize" flag is turned on and thus cannot be enabled in this case.'
+			'Limitations' - 'Debug messages are suppressed by the compiler when the ``optimize`` flag is turned on and thus cannot be enabled in this case.'
 		]
 	]).
 
 	:- public(enable/1).
 	:- mode(enable(@term), one).
 	:- info(enable/1, [
-		comment is 'Enables all debug and debug(Group) messages for the given component.',
+		comment is 'Enables all ``debug`` and ``debug(Group)`` messages for the given component.',
 		argnames is ['Component']
 	]).
 
 	:- public(disable/1).
 	:- mode(disable(@term, @term), one).
 	:- info(disable/1, [
-		comment is 'Disables all debug and debug(Group) messages for the given component.',
+		comment is 'Disables all ``debug`` and ``debug(Group)`` messages for the given component.',
 		argnames is ['Component']
 	]).
 
 	:- public(enabled/1).
 	:- mode(enabled(?term), zero_or_more).
 	:- info(enabled/1, [
-		comment is 'Enumerates by backtraking the components with enabled debug and debug(Group) messages.',
+		comment is 'Enumerates by backtraking the components with enabled ``debug`` and ``debug(Group)`` messages.',
 		argnames is ['Component']
 	]).
 
 	:- public(enable/2).
 	:- mode(enable(@term, @term), one).
 	:- info(enable/2, [
-		comment is 'Enables debug(Group) messages for the given component and group.',
+		comment is 'Enables ``debug(Group)`` messages for the given component and group.',
 		argnames is ['Component', 'Group']
 	]).
 
 	:- public(disable/2).
 	:- mode(disable(@term, @term), one).
 	:- info(disable/2, [
-		comment is 'Disables debug(Group) messages for the given component and group.',
+		comment is 'Disables ``debug(Group)`` messages for the given component and group.',
 		argnames is ['Component', 'Group']
 	]).
 
 	:- public(enabled/2).
 	:- mode(enabled(?term, ?term), zero_or_more).
 	:- info(enabled/2, [
-		comment is 'Enumerates by backtraking the enabled debug(Group) messages for each component.',
+		comment is 'Enumerates by backtraking the enabled ``debug(Group)`` messages for each component.',
 		argnames is ['Component', 'Group']
 	]).
 
@@ -76,7 +76,7 @@
 	:- dynamic(enabled_/1).
 	:- mode(enabled_(?term), zero_or_more).
 	:- info(enabled_/1, [
-		comment is 'Table of components with currently enabled debug and debug(Group) messages.',
+		comment is 'Table of components with currently enabled ``debug`` and ``debug(Group)`` messages.',
 		argnames is ['Component']
 	]).
 
@@ -84,7 +84,7 @@
 	:- dynamic(enabled_/2).
 	:- mode(enabled_(?term, ?term), zero_or_more).
 	:- info(enabled_/2, [
-		comment is 'Table of currently enabled debug(Group) per component.',
+		comment is 'Table of currently enabled ``debug(Group)`` per component.',
 		argnames is ['Component', 'Group']
 	]).
 

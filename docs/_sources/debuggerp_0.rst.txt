@@ -25,13 +25,13 @@ Debugger protocol.
 | **Remarks:**
 
 
-   - *Debugger help:* Type the character "h" or the character "?" at a leashed port.
+   - *Debugger help:* Type the character ``h`` or the character ``?`` at a leashed port.
 
-   - *Predicate spy point:* Specified as a ground term Functor/Arity.
+   - *Predicate spy point:* Specified as a ground term ``Functor/Arity``.
 
-   - *Line number spy point:* Specified as an Entity-Line term with both Entity and Line bound. Line must be the first source file line of an entity clause.
+   - *Line number spy point:* Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.
 
-   - *Leash shorthands:* none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].
+   - *Leash shorthands:* ``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.
 
 .. contents::
    :local:
@@ -361,7 +361,7 @@ Removes all line number, predicate, and context spy points.
 ``leash/1``
 ^^^^^^^^^^^
 
-Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).
+Sets the debugger leash ports using an abbreviation (``none``, ``loose``, ``half``, ``tight``, or ``full``) or a list of ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).
 
 | **Compilation flags:**
 |    ``static``
@@ -385,7 +385,7 @@ Sets the debugger leash ports using an abbreviation (none, loose, half, tight, o
 ``leashing/1``
 ^^^^^^^^^^^^^^
 
-Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).
+Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).
 
 | **Compilation flags:**
 |    ``static``

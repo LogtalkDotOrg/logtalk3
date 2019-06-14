@@ -94,14 +94,14 @@
 	:- public(intersection/3).
 	:- mode(intersection(+set, +set, ?set), zero_or_one).
 	:- info(intersection/3, [
-		comment is 'Returns the intersection of Set1 and Set2.',
+		comment is 'Returns the intersection of ``Set1`` and ``Set2``.',
 		argnames is ['Set1', 'Set2', 'Intersection']
 	]).
 
 	:- public(intersection/4).
 	:- mode(intersection(+set, +set, ?set, ?set), zero_or_one).
 	:- info(intersection/4, [
-		comment is 'True if Intersection is the intersection of Set1 and Set2 and Difference is the difference between Set2 and Set1.',
+		comment is 'True if ``Intersection`` is the intersection of ``Set1`` and ``Set2`` and ``Difference`` is the difference between ``Set2`` and ``Set1``.',
 		argnames is ['Set1', 'Set2', 'Intersection', 'Difference']
 	]).
 
@@ -116,7 +116,7 @@
 	:- mode(member(+term, +set), zero_or_one).
 	:- mode(member(-term, +set), zero_or_more).
 	:- info(member/2, [
-		comment is 'Element is a member of set Set.',
+		comment is '``Element`` is a member of set ``Set``.',
 		argnames is ['Element', 'Set']
 	]).
 
@@ -158,35 +158,35 @@
 	:- public(subset/2).
 	:- mode(subset(+set, +set), zero_or_one).
 	:- info(subset/2, [
-		comment is 'True if Subset is a subset of Set.',
+		comment is 'True if ``Subset`` is a subset of ``Set``.',
 		argnames is ['Subset', 'Set']
 	]).
 
 	:- public(subtract/3).
 	:- mode(subtract(+set, +set, ?set), zero_or_one).
 	:- info(subtract/3, [
-		comment is 'True when Difference contains all and only the elements of Set1 which are not also in Set2.',
+		comment is 'True when ``Difference`` contains all and only the elements of ``Set1`` which are not also in ``Set2``.',
 		argnames is ['Set1', 'Set2', 'Difference']
 	]).
 
 	:- public(symdiff/3).
 	:- mode(symdiff(+set, +set, ?set), zero_or_one).
 	:- info(symdiff/3, [
-		comment is 'True if Difference is the symmetric difference of Set1 and Set2, containing all elements that are not in the sets intersection.',
+		comment is 'True if ``Difference`` is the symmetric difference of ``Set1`` and ``Set2``, containing all elements that are not in the sets intersection.',
 		argnames is ['Set1', 'Set2', 'Difference']
 	]).
 
 	:- public(union/3).
 	:- mode(union(+set, +set, ?set), zero_or_one).
 	:- info(union/3, [
-		comment is 'True if Union is the union of Set1 and Set2.',
+		comment is 'True if ``Union`` is the union of ``Set1`` and ``Set2``.',
 		argnames is ['Set1', 'Set2', 'Union']
 	]).
 
 	:- public(union/4).
 	:- mode(union(+set, +set, ?set, ?set), zero_or_one).
 	:- info(union/4, [
-		comment is 'True if Union is the union of Set1 and Set2 and Difference is the difference between Set2 and Set1.',
+		comment is 'True if ``Union`` is the union of ``Set1`` and ``Set2`` and ``Difference`` is the difference between ``Set2`` and ``Set1``.',
 		argnames is ['Set1', 'Set2', 'Union', 'Difference']
 	]).
 

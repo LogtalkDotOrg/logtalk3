@@ -38,18 +38,18 @@
 		date is 2019/04/01,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
-			'Message kinds' - 'The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.',
+			'Message kinds' - 'Default set: ``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
 			'Printing of silent messages' - 'By default, silent messages are not printed. These messages are only useful when intercepted.',
-			'Printing of banner and comment messages' - 'By default, banner and comment messages are only printed when the report flag is turned on.',
+			'Printing of banner and comment messages' - 'By default, banner and comment messages are only printed when the ``report`` flag is turned on.',
 			'Printing of help, information, and question messages' - 'These messages are always printed by default as they provide requested output.',
-			'Printing of warning messages' - 'By default, warning messages are not printed when the report flag is turned off.',
+			'Printing of warning messages' - 'By default, warning messages are not printed when the ``report`` flag is turned off.',
 			'Printing of error messages' - 'These messages are always printed by default.',
-			'Printing of debug messages' - 'By default, debug messages are only printed when the debug flag is turned on.',
+			'Printing of debug messages' - 'By default, debug messages are only printed when the ``debug`` flag is turned on.',
 			'Meta messages' - 'A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.',
-			'@Message meta message' - 'By default, the message is printed as passed to the write/1 predicate followed by a newline.',
-			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the writeq/1 predicate.',
-			'List meta message' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.',
-			'Title::List meta message' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.'
+			'@Message meta message' - 'By default, the message is printed as passed to the ``write/1`` predicate followed by a newline.',
+			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the ``writeq/1`` predicate.',
+			'List meta message' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the ``writeq/1`` predicate.',
+			'Title::List meta message' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the ``writeq/1`` predicate.'
 		]
 	]).
 
@@ -84,7 +84,7 @@
 	:- dynamic(print_message_token/4).
 	:- mode(print_message_token(@stream_or_alias, @atom, @nonvar, @list(nonvar)), zero_or_one).
 	:- info(print_message_token/4, [
-		comment is 'User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
+		comment is 'User-defined hook predicate for printing a message token (``at_same_line``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``).',
 		argnames is ['Stream', 'Prefix', 'Token', 'Tokens']
 	]).
 
@@ -93,7 +93,7 @@
 	:- dynamic(message_tokens//2).
 	:- mode(message_tokens(+nonvar, +nonvar), zero_or_one).
 	:- info(message_tokens//2, [
-		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
+		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (``at_same_line``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``).',
 		argnames is ['Message', 'Component']
 	]).
 
@@ -171,7 +171,7 @@
 	:- multifile(debug_handler/2).
 	:- mode(debug_handler(?entity_identifier, ?atom), zero_or_more).
 	:- info(debug_handler/2, [
-		comment is 'Debug event handler. The defined events are unification events - fact(Entity,Fact,Clause,File,Line) and rule(Entity,Head,Clause,File,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).',
+		comment is 'Debug event handler. The defined events are unification events - ``fact(Entity,Fact,Clause,File,Line)`` and ``rule(Entity,Head,Clause,File,Line)`` - and goal events - ``top_goal(Goal,CompiledGoal)`` and ``goal(Goal,CompiledGoal)``.',
 		argnames is ['Event', 'ExecutionContext']
 	]).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
@@ -199,14 +199,14 @@
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?compound), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.',
+		comment is 'Enumerates, by backtracking, loaded file properties: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.',
 		argnames is ['Path', 'Property']
 	]).
 
 	:- public(file_type_extension/2).
 	:- mode(file_type_extension(?atom, ?atom), zero_or_more).
 	:- info(file_type_extension/2, [
-		comment is 'Enumerates, by backtracking, all defined file type extensions. The defined types are: source, object, logtalk, prolog, and tmp. The source type returns both logtalk and prolog type extensions.',
+		comment is 'Enumerates, by backtracking, all defined file type extensions. The defined types are: ``source``, ``object``, ``logtalk``, ``prolog``, and ``tmp``. The source type returns both ``logtalk`` and ``prolog`` type extensions.',
 		argnames is ['Type', 'Extension']
 	]).
 
@@ -215,7 +215,7 @@
 	:- public(compile_aux_clauses/1).
 	:- mode(compile_aux_clauses(@list(clause)), one).
 	:- info(compile_aux_clauses/1, [
-		comment is 'Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from term_expansion/2 or goal_expansion/2 hook predicate definitions.',
+		comment is 'Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from ``term_expansion/2`` or ``goal_expansion/2`` hook predicate definitions.',
 		argnames is ['Clauses']
 	]).
 

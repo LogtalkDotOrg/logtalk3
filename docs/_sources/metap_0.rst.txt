@@ -167,7 +167,7 @@ Partition a list of elements in two lists using a predicate.
 ``partition/6``
 ^^^^^^^^^^^^^^^
 
-Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as compare/3.
+Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as ``compare/3``.
 
 | **Compilation flags:**
 |    ``static``

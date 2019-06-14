@@ -265,18 +265,18 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p><em>Message kinds:</em> The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.</p></li>
+<li><p><em>Message kinds:</em> Default set: <code class="docutils literal notranslate"><span class="pre">silent</span></code>, <code class="docutils literal notranslate"><span class="pre">silent(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">banner</span></code>, <code class="docutils literal notranslate"><span class="pre">help</span></code>, <code class="docutils literal notranslate"><span class="pre">comment</span></code>, <code class="docutils literal notranslate"><span class="pre">comment(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">information</span></code>, <code class="docutils literal notranslate"><span class="pre">information(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">warning(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">error(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">debug(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">question</span></code>, and <code class="docutils literal notranslate"><span class="pre">question(Key)</span></code>.</p></li>
 <li><p><em>Printing of silent messages:</em> By default, silent messages are not printed. These messages are only useful when intercepted.</p></li>
-<li><p><em>Printing of banner and comment messages:</em> By default, banner and comment messages are only printed when the report flag is turned on.</p></li>
+<li><p><em>Printing of banner and comment messages:</em> By default, banner and comment messages are only printed when the <code class="docutils literal notranslate"><span class="pre">report</span></code> flag is turned on.</p></li>
 <li><p><em>Printing of help, information, and question messages:</em> These messages are always printed by default as they provide requested output.</p></li>
-<li><p><em>Printing of warning messages:</em> By default, warning messages are not printed when the report flag is turned off.</p></li>
+<li><p><em>Printing of warning messages:</em> By default, warning messages are not printed when the <code class="docutils literal notranslate"><span class="pre">report</span></code> flag is turned off.</p></li>
 <li><p><em>Printing of error messages:</em> These messages are always printed by default.</p></li>
-<li><p><em>Printing of debug messages:</em> By default, debug messages are only printed when the debug flag is turned on.</p></li>
+<li><p><em>Printing of debug messages:</em> By default, debug messages are only printed when the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag is turned on.</p></li>
 <li><p><em>Meta messages:</em> A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.</p></li>
-<li><p><em>&#64;Message meta message:</em> By default, the message is printed as passed to the write/1 predicate followed by a newline.</p></li>
-<li><p><em>Key-Value meta message:</em> By default, the message is printed as “Key: Value” followed by a newline. The value is printed as passed to the writeq/1 predicate.</p></li>
-<li><p><em>List meta message:</em> By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</p></li>
-<li><p><em>Title::List meta message:</em> By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</p></li>
+<li><p><em>&#64;Message meta message:</em> By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate followed by a newline.</p></li>
+<li><p><em>Key-Value meta message:</em> By default, the message is printed as “Key: Value” followed by a newline. The value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
+<li><p><em>List meta message:</em> By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
+<li><p><em>Title::List meta message:</em> By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
 </ul>
 </div></blockquote>
 <div class="contents local topic" id="contents">
@@ -359,7 +359,7 @@
 <div id="print_message_token/4"> </div></div>
 <div class="section" id="print-message-token-4">
 <span id="logtalk-0-print-message-token-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code></a><a class="headerlink" href="#print-message-token-4" title="Permalink to this headline">¶</a></h3>
-<p>User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
+<p>User-defined hook predicate for printing a message token (<code class="docutils literal notranslate"><span class="pre">at_same_line</span></code>, <code class="docutils literal notranslate"><span class="pre">nl</span></code>, <code class="docutils literal notranslate"><span class="pre">flush</span></code>, <code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code>, <code class="docutils literal notranslate"><span class="pre">term(Term,Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">ansi(Attributes,Format,Arguments)</span></code>, <code class="docutils literal notranslate"><span class="pre">begin(Kind,Variable)</span></code>, and <code class="docutils literal notranslate"><span class="pre">end(Variable)</span></code>).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -380,7 +380,7 @@
 <div id="message_tokens//2"> </div></div>
 <div class="section" id="message-tokens-2">
 <span id="logtalk-0-message-tokens-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code></a><a class="headerlink" href="#message-tokens-2" title="Permalink to this headline">¶</a></h3>
-<p>User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
+<p>User-defined hook grammar rule for converting a message into a list of tokens (<code class="docutils literal notranslate"><span class="pre">at_same_line</span></code>, <code class="docutils literal notranslate"><span class="pre">nl</span></code>, <code class="docutils literal notranslate"><span class="pre">flush</span></code>, <code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code>, <code class="docutils literal notranslate"><span class="pre">term(Term,Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">ansi(Attributes,Format,Arguments)</span></code>, <code class="docutils literal notranslate"><span class="pre">begin(Kind,Variable)</span></code>, and <code class="docutils literal notranslate"><span class="pre">end(Variable)</span></code>).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -552,7 +552,7 @@
 <div id="debug_handler/2"> </div></div>
 <div class="section" id="debug-handler-2">
 <span id="logtalk-0-debug-handler-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">debug_handler/2</span></code></a><a class="headerlink" href="#debug-handler-2" title="Permalink to this headline">¶</a></h3>
-<p>Debug event handler. The defined events are unification events - fact(Entity,Fact,Clause,File,Line) and rule(Entity,Head,Clause,File,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).</p>
+<p>Debug event handler. The defined events are unification events - <code class="docutils literal notranslate"><span class="pre">fact(Entity,Fact,Clause,File,Line)</span></code> and <code class="docutils literal notranslate"><span class="pre">rule(Entity,Head,Clause,File,Line)</span></code> - and goal events - <code class="docutils literal notranslate"><span class="pre">top_goal(Goal,CompiledGoal)</span></code> and <code class="docutils literal notranslate"><span class="pre">goal(Goal,CompiledGoal)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -616,7 +616,7 @@
 <div id="loaded_file_property/2"> </div></div>
 <div class="section" id="loaded-file-property-2">
 <span id="logtalk-0-loaded-file-property-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code></a><a class="headerlink" href="#loaded-file-property-2" title="Permalink to this headline">¶</a></h3>
-<p>Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.</p>
+<p>Enumerates, by backtracking, loaded file properties: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -637,7 +637,7 @@
 <div id="file_type_extension/2"> </div></div>
 <div class="section" id="file-type-extension-2">
 <span id="logtalk-0-file-type-extension-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">file_type_extension/2</span></code></a><a class="headerlink" href="#file-type-extension-2" title="Permalink to this headline">¶</a></h3>
-<p>Enumerates, by backtracking, all defined file type extensions. The defined types are: source, object, logtalk, prolog, and tmp. The source type returns both logtalk and prolog type extensions.</p>
+<p>Enumerates, by backtracking, all defined file type extensions. The defined types are: <code class="docutils literal notranslate"><span class="pre">source</span></code>, <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">logtalk</span></code>, <code class="docutils literal notranslate"><span class="pre">prolog</span></code>, and <code class="docutils literal notranslate"><span class="pre">tmp</span></code>. The source type returns both <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> and <code class="docutils literal notranslate"><span class="pre">prolog</span></code> type extensions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -658,7 +658,7 @@
 <div id="compile_aux_clauses/1"> </div></div>
 <div class="section" id="compile-aux-clauses-1">
 <span id="logtalk-0-compile-aux-clauses-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses/1</span></code></a><a class="headerlink" href="#compile-aux-clauses-1" title="Permalink to this headline">¶</a></h3>
-<p>Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from term_expansion/2 or goal_expansion/2 hook predicate definitions.</p>
+<p>Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> or <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> hook predicate definitions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

@@ -26,10 +26,10 @@
 		date is 2016/10/23,
 		comment is 'Debugger protocol.',
 		remarks is [
-			'Debugger help' - 'Type the character "h" or the character "?" at a leashed port.',
-			'Predicate spy point' - 'Specified as a ground term Functor/Arity.',
-			'Line number spy point' - 'Specified as an Entity-Line term with both Entity and Line bound. Line must be the first source file line of an entity clause.',
-			'Leash shorthands' - 'none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].'
+			'Debugger help' - 'Type the character ``h`` or the character ``?`` at a leashed port.',
+			'Predicate spy point' - 'Specified as a ground term ``Functor/Arity``.',
+			'Line number spy point' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
+			'Leash shorthands' - '``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.'
 		],
 		see_also is [debugger]
 	]).
@@ -135,14 +135,14 @@
 	:- mode(leash(+atom), one).
 	:- mode(leash(+list(atom)), one).
 	:- info(leash/1, [
-		comment is 'Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).',
+		comment is 'Sets the debugger leash ports using an abbreviation (``none``, ``loose``, ``half``, ``tight``, or ``full``) or a list of ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).',
 		argnames is ['Ports']
 	]).
 
 	:- public(leashing/1).
 	:- mode(leashing(?atom), zero_or_more).
 	:- info(leashing/1, [
-		comment is 'Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).',
+		comment is 'Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).',
 		argnames is ['Port']
 	]).
 

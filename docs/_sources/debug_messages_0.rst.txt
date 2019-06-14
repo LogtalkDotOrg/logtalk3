@@ -8,7 +8,7 @@
 ``debug_messages``
 ==================
 
-Supports selective enabling and disabling of debug and debug(Group) messages.
+Supports selective enabling and disabling of ``debug`` and ``debug(Group)`` messages.
 
 | **Author:** Paulo Moura
 | **Version:** 1.0
@@ -26,7 +26,7 @@ Supports selective enabling and disabling of debug and debug(Group) messages.
 | **Remarks:**
 
 
-   - *Limitations:* Debug messages are suppressed by the compiler when the "optimize" flag is turned on and thus cannot be enabled in this case.
+   - *Limitations:* Debug messages are suppressed by the compiler when the ``optimize`` flag is turned on and thus cannot be enabled in this case.
 
 .. contents::
    :local:
@@ -45,7 +45,7 @@ Public predicates
 ``enable/1``
 ^^^^^^^^^^^^
 
-Enables all debug and debug(Group) messages for the given component.
+Enables all ``debug`` and ``debug(Group)`` messages for the given component.
 
 | **Compilation flags:**
 |    ``static``
@@ -68,7 +68,7 @@ Enables all debug and debug(Group) messages for the given component.
 ``disable/1``
 ^^^^^^^^^^^^^
 
-Disables all debug and debug(Group) messages for the given component.
+Disables all ``debug`` and ``debug(Group)`` messages for the given component.
 
 | **Compilation flags:**
 |    ``static``
@@ -88,7 +88,7 @@ Disables all debug and debug(Group) messages for the given component.
 ``enabled/1``
 ^^^^^^^^^^^^^
 
-Enumerates by backtraking the components with enabled debug and debug(Group) messages.
+Enumerates by backtraking the components with enabled ``debug`` and ``debug(Group)`` messages.
 
 | **Compilation flags:**
 |    ``static``
@@ -111,7 +111,7 @@ Enumerates by backtraking the components with enabled debug and debug(Group) mes
 ``enable/2``
 ^^^^^^^^^^^^
 
-Enables debug(Group) messages for the given component and group.
+Enables ``debug(Group)`` messages for the given component and group.
 
 | **Compilation flags:**
 |    ``static``
@@ -134,7 +134,7 @@ Enables debug(Group) messages for the given component and group.
 ``disable/2``
 ^^^^^^^^^^^^^
 
-Disables debug(Group) messages for the given component and group.
+Disables ``debug(Group)`` messages for the given component and group.
 
 | **Compilation flags:**
 |    ``static``
@@ -158,7 +158,7 @@ Disables debug(Group) messages for the given component and group.
 ``enabled/2``
 ^^^^^^^^^^^^^
 
-Enumerates by backtraking the enabled debug(Group) messages for each component.
+Enumerates by backtraking the enabled ``debug(Group)`` messages for each component.
 
 | **Compilation flags:**
 |    ``static``
@@ -189,7 +189,7 @@ Private predicates
 ``enabled_/1``
 ^^^^^^^^^^^^^^
 
-Table of components with currently enabled debug and debug(Group) messages.
+Table of components with currently enabled ``debug`` and ``debug(Group)`` messages.
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -212,7 +212,7 @@ Table of components with currently enabled debug and debug(Group) messages.
 ``enabled_/2``
 ^^^^^^^^^^^^^^
 
-Table of currently enabled debug(Group) per component.
+Table of currently enabled ``debug(Group)`` per component.
 
 | **Compilation flags:**
 |    ``dynamic``

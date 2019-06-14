@@ -249,7 +249,7 @@ True if the two sets have at least one element in common.
 ``intersection/3``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the intersection of Set1 and Set2.
+Returns the intersection of ``Set1`` and ``Set2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -272,7 +272,7 @@ Returns the intersection of Set1 and Set2.
 ``intersection/4``
 ^^^^^^^^^^^^^^^^^^
 
-True if Intersection is the intersection of Set1 and Set2 and Difference is the difference between Set2 and Set1.
+True if ``Intersection`` is the intersection of ``Set1`` and ``Set2`` and ``Difference`` is the difference between ``Set2`` and ``Set1``.
 
 | **Compilation flags:**
 |    ``static``
@@ -318,7 +318,7 @@ Number of set elements.
 ``member/2``
 ^^^^^^^^^^^^
 
-Element is a member of set Set.
+``Element`` is a member of set ``Set``.
 
 | **Compilation flags:**
 |    ``static``
@@ -457,7 +457,7 @@ Checks that an element can be selected from a set, returning the set of remainin
 ``subset/2``
 ^^^^^^^^^^^^
 
-True if Subset is a subset of Set.
+True if ``Subset`` is a subset of ``Set``.
 
 | **Compilation flags:**
 |    ``static``
@@ -480,7 +480,7 @@ True if Subset is a subset of Set.
 ``subtract/3``
 ^^^^^^^^^^^^^^
 
-True when Difference contains all and only the elements of Set1 which are not also in Set2.
+True when ``Difference`` contains all and only the elements of ``Set1`` which are not also in ``Set2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -503,7 +503,7 @@ True when Difference contains all and only the elements of Set1 which are not al
 ``symdiff/3``
 ^^^^^^^^^^^^^
 
-True if Difference is the symmetric difference of Set1 and Set2, containing all elements that are not in the sets intersection.
+True if ``Difference`` is the symmetric difference of ``Set1`` and ``Set2``, containing all elements that are not in the sets intersection.
 
 | **Compilation flags:**
 |    ``static``
@@ -526,7 +526,7 @@ True if Difference is the symmetric difference of Set1 and Set2, containing all 
 ``union/3``
 ^^^^^^^^^^^
 
-True if Union is the union of Set1 and Set2.
+True if ``Union`` is the union of ``Set1`` and ``Set2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -549,7 +549,7 @@ True if Union is the union of Set1 and Set2.
 ``union/4``
 ^^^^^^^^^^^
 
-True if Union is the union of Set1 and Set2 and Difference is the difference between Set2 and Set1.
+True if ``Union`` is the union of ``Set1`` and ``Set2`` and ``Difference`` is the difference between ``Set2`` and ``Set1``.
 
 | **Compilation flags:**
 |    ``static``
