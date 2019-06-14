@@ -328,12 +328,13 @@ set object. For example:</p>
 </pre></div>
 </div>
 <p>This clause will cause all tests to be run when calling the
-<code class="docutils literal notranslate"><span class="pre">logtalk_make/1</span></code> predicate with the target <code class="docutils literal notranslate"><span class="pre">check</span></code>. The other
-possible target is <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">logtalk_make/1</span></code> predicate with the target <code class="docutils literal notranslate"><span class="pre">check</span></code> (or its top-level
+shortcut, <code class="docutils literal notranslate"><span class="pre">{?}</span></code>). The other possible target is <code class="docutils literal notranslate"><span class="pre">all</span></code> (with top-level
+shortcut <code class="docutils literal notranslate"><span class="pre">{*}</span></code>).</p>
 <p>Note that you can have multiple test driver files. For example, one
 driver file that runs the tests collecting code coverage data and a
-quicker driver file that skips code coverage and compiles the tests in
-optimized mode.</p>
+quicker driver file that skips code coverage and compiles the code to be
+tested in optimized mode.</p>
 </div>
 <div class="section" id="unit-test-dialects">
 <h2>Unit test dialects<a class="headerlink" href="#unit-test-dialects" title="Permalink to this headline">¶</a></h2>
@@ -446,7 +447,7 @@ some of them with code coverage.</p>
 <p>Parameterized unit tests can be easily defined by using parametric
 objects.</p>
 <p>Note: when using the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct to access
-and test an object internal (i.e. non-public) predicates, make sure that
+and test an object local (i.e. non-public) predicates, make sure that
 the compiler flag <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for
 those objects.</p>
 </div>
@@ -484,7 +485,30 @@ idiom by using a <code class="docutils literal notranslate"><span class="pre">te
 </pre></div>
 </div>
 <p>The hook pipeline first applies our <code class="docutils literal notranslate"><span class="pre">simple_dialect</span></code> expansion
-followed by the default <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> expansion.</p>
+followed by the default <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> expansion. This solution allows
+other hook objects (e.g. required by the code being tested) to also be
+used by updating the pipeline. When that is not required, a simpler
+alternative is to change the expansion of the <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> virtual
+term to:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">term_expansion</span>(
+    begin_of_file,
+    [
+        (<span class="o">:-</span> <span class="k">set_logtalk_flag</span>(hook,lgtunit)),
+        (<span class="o">:-</span> object(tests,extends(lgtunit)))
+    ]
+).
+</pre></div>
+</div>
+<p>This allows simplifying the driver file to:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="k">set_logtalk_flag</span>(report, warnings),
+    <span class="k">logtalk_load</span>(lgtunit(loader)),
+    <span class="k">logtalk_load</span>(simple_dialect),
+    <span class="k">logtalk_load</span>(tests, [hook(simple_dialect)]),
+    tests<span class="o">::</span>run
+)).
+</pre></div>
+</div>
 </div>
 <div class="section" id="quickcheck">
 <h2>QuickCheck<a class="headerlink" href="#quickcheck" title="Permalink to this headline">¶</a></h2>
@@ -509,8 +533,9 @@ quick_check(<span class="nv">Template</span>).
 <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> qualified callable term. When the
 template is an unqualified callable term, it will be used to construct a
 goal to be called in the context of the <em>sender</em> using the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>
-debugging control construct. A simple example by passing an incorrect
-template:</p>
+debugging control construct. A simple example by passing a template that
+will trigger a failed test (as the <code class="docutils literal notranslate"><span class="pre">random::random/1</span></code> predicate always
+returns non-negative floats):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(random<span class="o">::</span>random(<span class="o">-</span>negative_float)).
 <span class="o">*</span>     quick check test failure (at test <span class="m">1</span> after <span class="m">1</span> shrink)<span class="o">:</span>
 <span class="o">*</span>       random<span class="o">::</span>random(<span class="m">0.09230089279334841</span>)
@@ -551,6 +576,14 @@ need to generate random values for the second argument according to the
 first argument. Using the <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> notation we can solve this problem
 for any specific type, e.g. integer, by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(type<span class="o">::</span>valid(<span class="k">{</span>integer<span class="k">}</span>, <span class="o">+</span>integer)).
+</pre></div>
+</div>
+<p>We can also test all (ground, i.e. non-parametrizable) types with
+arbitrary value generators by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">forall</span>(
+        (type<span class="o">::</span>type(<span class="nv">Type</span>), <span class="k">ground</span>(<span class="nv">Type</span>), type<span class="o">::</span>arbitrary(<span class="nv">Type</span>)),
+        lgtunit<span class="o">::</span>quick_check(type<span class="o">::</span>valid(<span class="k">{</span><span class="nv">Type</span><span class="k">}</span>, <span class="o">+</span><span class="nv">Type</span>))
+     ).
 </pre></div>
 </div>
 <p>You can find the list of the basic supported types for using in the

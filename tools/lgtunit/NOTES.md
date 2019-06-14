@@ -138,11 +138,13 @@ object. For example:
 	make(check).
 
 This clause will cause all tests to be run when calling the `logtalk_make/1`
-predicate with the target `check`. The other possible target is `all`.
+predicate with the target `check` (or its top-level shortcut, `{?}`). The
+other possible target is `all` (with top-level shortcut `{*}`).
 
 Note that you can have multiple test driver files. For example, one driver
 file that runs the tests collecting code coverage data and a quicker driver
-file that skips code coverage and compiles the tests in optimized mode.
+file that skips code coverage and compiles the code to be tested in optimized
+mode.
 
 
 Unit test dialects
@@ -250,7 +252,7 @@ code coverage.
 Parameterized unit tests can be easily defined by using parametric objects.
 
 Note: when using the `(<<)/2` debugging control construct to access and test
-an object internal (i.e. non-public) predicates, make sure that the compiler
+an object local (i.e. non-public) predicates, make sure that the compiler
 flag `context_switching_calls` is set to `allow` for those objects.
 
 
@@ -289,7 +291,28 @@ idiom by using a `tester.lgt` driver file with contents such as:
 	)).
 
 The hook pipeline first applies our `simple_dialect` expansion followed by
-the default `lgtunit` expansion.
+the default `lgtunit` expansion. This solution allows other hook objects
+(e.g. required by the code being tested) to also be used by updating the
+pipeline. When that is not required, a simpler alternative is to change the
+expansion of the `begin_of_file` virtual term to:
+
+	term_expansion(
+		begin_of_file,
+		[
+			(:- set_logtalk_flag(hook,lgtunit)),
+			(:- object(tests,extends(lgtunit)))
+		]
+	).
+
+This allows simplifying the driver file to:
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(simple_dialect),
+		logtalk_load(tests, [hook(simple_dialect)]),
+		tests::run
+	)).
 
 
 QuickCheck
@@ -316,7 +339,8 @@ The other two predicates print the test results. The template can be a `::/2`,
 `<</2`, or `:/2` qualified callable term. When the template is an unqualified
 callable term, it will be used to construct a goal to be called in the context
 of the *sender* using the `<</2` debugging control construct. A simple example
-by passing an incorrect template:
+by passing a template that will trigger a failed test (as the `random::random/1`
+predicate always returns non-negative floats):
 
 	| ?- lgtunit::quick_check(random::random(-negative_float)).
 	*     quick check test failure (at test 1 after 1 shrink):
@@ -357,6 +381,14 @@ according to the first argument. Using the `{}/1` notation we can solve this
 problem for any specific type, e.g. integer, by writing:
 
 	| ?- lgtunit::quick_check(type::valid({integer}, +integer)).
+
+We can also test all (ground, i.e. non-parametrizable) types with arbitrary
+value generators by writing:
+
+	| ?- forall(
+			(type::type(Type), ground(Type), type::arbitrary(Type)),
+			lgtunit::quick_check(type::valid({Type}, +Type))
+		 ).
 
 You can find the list of the basic supported types for using in the template
 in the API documentation for the library entities `type` and `arbitrary`. Note
