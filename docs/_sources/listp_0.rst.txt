@@ -88,7 +88,7 @@ Appends two lists.
 ``delete/3``
 ^^^^^^^^^^^^
 
-Deletes from a list all occurrences of an element returning the list of remaining elements. Uses ==/2 for element comparison.
+Deletes from a list all occurrences of an element returning the list of remaining elements. Uses ``==/2`` for element comparison.
 
 | **Compilation flags:**
 |    ``static``
@@ -111,7 +111,7 @@ Deletes from a list all occurrences of an element returning the list of remainin
 ``delete_matches/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-Deletes all matching elements from a list, returning the list of remaining elements. Uses =/2 for element comparison.
+Deletes all matching elements from a list, returning the list of remaining elements. Uses ``=/2`` for element comparison.
 
 | **Compilation flags:**
 |    ``static``
@@ -412,7 +412,7 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 ``nextto/3``
 ^^^^^^^^^^^^
 
-X and Y are consecutive elements in List.
+``X`` and ``Y`` are consecutive elements in List.
 
 | **Compilation flags:**
 |    ``static``
@@ -667,7 +667,7 @@ Prefix is a proper prefix of length Length of List.
 ``remove_duplicates/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Removes duplicated list elements using equality (==/2) for comparison and keepying the left-most element when repeated.
+Removes duplicated list elements using equality (``==/2``) for comparison and keepying the left-most element when repeated.
 
 | **Compilation flags:**
 |    ``static``
@@ -878,7 +878,7 @@ Sorts a list in ascending order (duplicated elements are removed).
 ``sort/3``
 ^^^^^^^^^^
 
-Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are removed).
+Sorts a list using a user-specified comparison predicate modeled on the standard ``compare/3`` predicate (duplicated elements are removed).
 
 | **Compilation flags:**
 |    ``static``
@@ -972,7 +972,7 @@ The first list is a sublist of the second.
 ``subsequence/3``
 ^^^^^^^^^^^^^^^^^
 
-List is an interleaving of Subsequence and Remaining. Element order is preserved.
+``List`` is an interleaving of ``Subsequence`` and ``Remaining``. Element order is preserved.
 
 | **Compilation flags:**
 |    ``static``
@@ -1018,7 +1018,7 @@ Generates subsequences of a given length from a list. Also returns the remaining
 ``substitute/4``
 ^^^^^^^^^^^^^^^^
 
-Substitutes all occurrences of Old in List by New, returning NewList. Uses term equality for element comparison.
+Substitutes all occurrences of ``Old`` in ``List`` by ``New``, returning ``NewList``. Uses term equality for element comparison.
 
 | **Compilation flags:**
 |    ``static``
@@ -1158,7 +1158,7 @@ Suffix is a proper suffix of length Length of List.
 ``take/3``
 ^^^^^^^^^^
 
-Takes the first N elements of a list. Fails if the list have fewer than N elements.
+Takes the first ``N`` elements of a list. Fails if the list have fewer than ``N`` elements.
 
 | **Compilation flags:**
 |    ``static``
@@ -1181,7 +1181,7 @@ Takes the first N elements of a list. Fails if the list have fewer than N elemen
 ``drop/3``
 ^^^^^^^^^^
 
-Drops the first N elements of a list. Fails if the list have fewer than N elements.
+Drops the first ``N`` elements of a list. Fails if the list have fewer than ``N`` elements.
 
 | **Compilation flags:**
 |    ``static``

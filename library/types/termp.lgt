@@ -31,7 +31,7 @@
 	:- public(depth/2).
 	:- mode(depth(@term, ?integer), zero_or_one).
 	:- info(depth/2, [
-		comment is 'True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.',
+		comment is 'True if the depth of ``Term`` is ``Depth``. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.',
 		argnames is ['Term', 'Depth']
 	]).
 
@@ -94,14 +94,14 @@
 	:- public(variables/2).
 	:- mode(variables(@term, -list), one).
 	:- info(variables/2, [
-		comment is 'Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of Term).',
+		comment is 'Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).',
 		argnames is ['Term', 'List']
 	]).
 
 	:- public(singletons/2).
 	:- mode(singletons(@term, -list), one).
 	:- info(singletons/2, [
-		comment is 'Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of Term).',
+		comment is 'Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).',
 		argnames is ['Term', 'Singletons']
 	]).
 

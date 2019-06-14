@@ -134,7 +134,7 @@ Expands a file name to an absolute file path. An environment variable at the beg
 ``decompose_file_name/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).
+Decomposes a file name into its directory (which always ends with a slash; ``./`` is returned if absent) and its basename (that can be the empty atom).
 
 | **Compilation flags:**
 |    ``static``
@@ -157,7 +157,7 @@ Decomposes a file name into its directory (which always ends with a slash; "./" 
 ``decompose_file_name/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).
+Decomposes a file name into its directory (which always ends with a slash; ``./`` is returned if absent), name (that can be the empty atom), and extension (which starts with a ``.`` when defined; the empty atom otherwise).
 
 | **Compilation flags:**
 |    ``static``
@@ -433,7 +433,7 @@ File size (in bytes).
 ``file_permission/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-True if the specified file has the specified permission (read, write, or execute).
+True if the specified file has the specified permission (``read``, ``write``, or ``execute``).
 
 | **Compilation flags:**
 |    ``static``
@@ -617,7 +617,7 @@ Wall time in seconds.
 ``operating_system_type/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Operating system type. Possible values are "unix", "windows", and "unknown".
+Operating system type. Possible values are ``unix``, ``windows``, and ``unknown``.
 
 | **Compilation flags:**
 |    ``static``
@@ -640,7 +640,7 @@ Operating system type. Possible values are "unix", "windows", and "unknown".
 ``command_line_arguments/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns a list with the command line arguments that occur after "--".
+Returns a list with the command line arguments that occur after ``--``.
 
 | **Compilation flags:**
 |    ``static``

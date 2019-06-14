@@ -42,7 +42,7 @@ Public predicates
 ``depth/2``
 ^^^^^^^^^^^
 
-True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.
+True if the depth of ``Term`` is ``Depth``. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.
 
 | **Compilation flags:**
 |    ``static``
@@ -249,7 +249,7 @@ Each term is a variant of the other (i.e. they are structurally equivalent).
 ``variables/2``
 ^^^^^^^^^^^^^^^
 
-Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of Term).
+Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).
 
 | **Compilation flags:**
 |    ``static``
@@ -272,7 +272,7 @@ Returns a list of all term variables (ordered as found when doing a depth-first,
 ``singletons/2``
 ^^^^^^^^^^^^^^^^
 
-Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of Term).
+Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).
 
 | **Compilation flags:**
 |    ``static``

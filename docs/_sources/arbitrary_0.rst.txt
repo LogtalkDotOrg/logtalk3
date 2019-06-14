@@ -41,7 +41,9 @@ Adds predicates for generating random values for selected types to the library "
 
    - *Integer derived types:* {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}
 
-   - *List types (compound derived types):* {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}
+   - *List types (compound derived types):* {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), codes (list(character_code)), chars (list(character))}
+
+   - *Difference list types (compound derived types):* {difference_list, difference_list(Type)}
 
    - *Other compound derived types:* {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}
 
@@ -74,7 +76,7 @@ Public predicates
 ``arbitrary/1``
 ^^^^^^^^^^^^^^^
 
-Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the arbitrary/2 multifile predicate.
+Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the ``arbitrary/2`` multifile predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``
@@ -97,7 +99,7 @@ Table of defined types for which an arbitrary value can be generated. A new type
 ``arbitrary/2``
 ^^^^^^^^^^^^^^^
 
-Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the arbitrary/1 predicate.
+Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the ``arbitrary/1`` predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``
@@ -120,7 +122,7 @@ Generates an arbitrary term of the specified type. Fails if the type is not supp
 ``shrinker/1``
 ^^^^^^^^^^^^^^
 
-Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the shrink/3 multifile predicate.
+Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the ``shrink/3`` multifile predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``
@@ -143,7 +145,7 @@ Table of defined types for which a shrinker is provided. A new shrinker can be r
 ``shrink/3``
 ^^^^^^^^^^^^
 
-Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the shrinker/1 predicate.
+Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the ``shrinker/1`` predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``

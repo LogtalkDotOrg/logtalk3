@@ -45,14 +45,14 @@
 	:- public(delete/3).
 	:- mode(delete(@list, @term, ?list), one).
 	:- info(delete/3, [
-		comment is 'Deletes from a list all occurrences of an element returning the list of remaining elements. Uses ==/2 for element comparison.',
+		comment is 'Deletes from a list all occurrences of an element returning the list of remaining elements. Uses ``==/2`` for element comparison.',
 		argnames is ['List', 'Element', 'Remaining']
 	]).
 
 	:- public(delete_matches/3).
 	:- mode(delete_matches(@list, @term, ?list), one).
 	:- info(delete_matches/3, [
-		comment is 'Deletes all matching elements from a list, returning the list of remaining elements. Uses =/2 for element comparison.',
+		comment is 'Deletes all matching elements from a list, returning the list of remaining elements. Uses ``=/2`` for element comparison.',
 		argnames is ['List', 'Element', 'Remaining']
 	]).
 
@@ -144,7 +144,7 @@
 	:- public(nextto/3).
 	:- mode(nextto(?term, ?term, ?list), zero_or_more).
 	:- info(nextto/3, [
-		comment is 'X and Y are consecutive elements in List.',
+		comment is '``X`` and ``Y`` are consecutive elements in List.',
 		argnames is ['X', 'Y', 'List']
 	]).
 
@@ -223,7 +223,7 @@
 	:- public(remove_duplicates/2).
 	:- mode(reverse(+list, -list), one).
 	:- info(remove_duplicates/2, [
-		comment is 'Removes duplicated list elements using equality (==/2) for comparison and keepying the left-most element when repeated.',
+		comment is 'Removes duplicated list elements using equality (``==/2``) for comparison and keepying the left-most element when repeated.',
 		argnames is ['List', 'Set']
 	]).
 
@@ -293,7 +293,7 @@
 	:- meta_predicate(sort(3, *, *)).
 	:- mode(sort(+callable, +list, -list), one).
 	:- info(sort/3, [
-		comment is 'Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are removed).',
+		comment is 'Sorts a list using a user-specified comparison predicate modeled on the standard ``compare/3`` predicate (duplicated elements are removed).',
 		argnames is ['Closure', 'List', 'Sorted']
 	]).
 
@@ -321,7 +321,7 @@
 	:- public(subsequence/3).
 	:- mode(subsequence(?list, ?list, ?list), zero_or_more).
 	:- info(subsequence/3, [
-		comment is 'List is an interleaving of Subsequence and Remaining. Element order is preserved.',
+		comment is '``List`` is an interleaving of ``Subsequence`` and ``Remaining``. Element order is preserved.',
 		argnames is ['List', 'Subsequence', 'Remaining']
 	]).
 
@@ -335,7 +335,7 @@
 	:- public(substitute/4).
 	:- mode(substitute(@term, @list, @term, -list), one).
 	:- info(substitute/4, [
-		comment is 'Substitutes all occurrences of Old in List by New, returning NewList. Uses term equality for element comparison.',
+		comment is 'Substitutes all occurrences of ``Old`` in ``List`` by ``New``, returning ``NewList``. Uses term equality for element comparison.',
 		argnames is ['Old', 'List', 'New', 'NewList']
 	]).
 
@@ -379,14 +379,14 @@
 	:- public(take/3).
 	:- mode(take(+integer, +list, -list), zero_or_one).
 	:- info(take/3, [
-		comment is 'Takes the first N elements of a list. Fails if the list have fewer than N elements.',
+		comment is 'Takes the first ``N`` elements of a list. Fails if the list have fewer than ``N`` elements.',
 		argnames is ['N', 'List', 'Elements']
 	]).
 
 	:- public(drop/3).
 	:- mode(drop(+integer, +list, -list), zero_or_one).
 	:- info(drop/3, [
-		comment is 'Drops the first N elements of a list. Fails if the list have fewer than N elements.',
+		comment is 'Drops the first ``N`` elements of a list. Fails if the list have fewer than ``N`` elements.',
 		argnames is ['N', 'List', 'Remaining']
 	]).
 

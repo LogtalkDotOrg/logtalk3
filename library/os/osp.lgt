@@ -59,14 +59,14 @@
 	:- public(decompose_file_name/3).
 	:- mode(decompose_file_name(+atom, ?atom, ?atom), one).
 	:- info(decompose_file_name/3, [
-		comment is 'Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).',
+		comment is 'Decomposes a file name into its directory (which always ends with a slash; ``./`` is returned if absent) and its basename (that can be the empty atom).',
 		argnames is ['File', 'Directory', 'Basename']
 	]).
 
 	:- public(decompose_file_name/4).
 	:- mode(decompose_file_name(+atom, ?atom, ?atom, ?atom), one).
 	:- info(decompose_file_name/4, [
-		comment is 'Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).',
+		comment is 'Decomposes a file name into its directory (which always ends with a slash; ``./`` is returned if absent), name (that can be the empty atom), and extension (which starts with a ``.`` when defined; the empty atom otherwise).',
 		argnames is ['File', 'Directory', 'Name', 'Extension']
 	]).
 
@@ -150,7 +150,7 @@
 	:- public(file_permission/2).
 	:- mode(file_permission(+atom, ?atom), zero_or_one).
 	:- info(file_permission/2, [
-		comment is 'True if the specified file has the specified permission (read, write, or execute).',
+		comment is 'True if the specified file has the specified permission (``read``, ``write``, or ``execute``).',
 		argnames is ['File', 'Permission']
 	]).
 
@@ -206,14 +206,14 @@
 	:- public(operating_system_type/1).
 	:- mode(operating_system_type(?atom), one).
 	:- info(operating_system_type/1, [
-		comment is 'Operating system type. Possible values are "unix", "windows", and "unknown".',
+		comment is 'Operating system type. Possible values are ``unix``, ``windows``, and ``unknown``.',
 		argnames is ['Type']
 	]).
 
 	:- public(command_line_arguments/1).
 	:- mode(command_line_arguments(-list(atom)), one).
 	:- info(command_line_arguments/1, [
-		comment is 'Returns a list with the command line arguments that occur after "--".',
+		comment is 'Returns a list with the command line arguments that occur after ``--``.',
 		argnames is ['Arguments']
 	]).
 

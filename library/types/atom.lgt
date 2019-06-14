@@ -31,7 +31,7 @@
 	:- public(replace_sub_atom/4).
 	:- mode(replace_sub_atom(+atom, +atom, +atom, ?atom), zero_or_one).
 	:- info(replace_sub_atom/4, [
-		comment is 'Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.',
+		comment is 'Replaces all occurences of ``Old`` by ``New`` in ``Input`` returning ``Output``. Returns ``Input`` if ``Old`` is the empty atom. Fails when ``Output`` does not unify with the resulting atom.',
 		argnames is ['Old', 'New', 'Input', 'Output']
 	]).
 

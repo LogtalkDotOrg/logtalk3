@@ -270,7 +270,8 @@
 <li><p><em>Number derived types:</em> {positive_number, negative_number, non_positive_number, non_negative_number}</p></li>
 <li><p><em>Float derived types:</em> {positive_float, negative_float, non_positive_float, non_negative_float, probability}</p></li>
 <li><p><em>Integer derived types:</em> {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}</p></li>
-<li><p><em>List types (compound derived types):</em> {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}</p></li>
+<li><p><em>List types (compound derived types):</em> {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), codes (list(character_code)), chars (list(character))}</p></li>
+<li><p><em>Difference list types (compound derived types):</em> {difference_list, difference_list(Type)}</p></li>
 <li><p><em>Other compound derived types:</em> {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}</p></li>
 <li><p><em>Other types:</em> {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}</p></li>
 <li><p><em>Registering new types:</em> New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.</p></li>
@@ -300,7 +301,7 @@
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="arbitrary/1"> </div><div class="section" id="arbitrary-1">
 <span id="arbitrary-0-arbitrary-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code></a><a class="headerlink" href="#arbitrary-1" title="Permalink to this headline">¶</a></h3>
-<p>Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the arbitrary/2 multifile predicate.</p>
+<p>Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code> multifile predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -321,7 +322,7 @@
 <div id="arbitrary/2"> </div></div>
 <div class="section" id="arbitrary-2">
 <span id="arbitrary-0-arbitrary-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code></a><a class="headerlink" href="#arbitrary-2" title="Permalink to this headline">¶</a></h3>
-<p>Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the arbitrary/1 predicate.</p>
+<p>Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the <code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -342,7 +343,7 @@
 <div id="shrinker/1"> </div></div>
 <div class="section" id="shrinker-1">
 <span id="arbitrary-0-shrinker-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code></a><a class="headerlink" href="#shrinker-1" title="Permalink to this headline">¶</a></h3>
-<p>Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the shrink/3 multifile predicate.</p>
+<p>Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> multifile predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -363,7 +364,7 @@
 <div id="shrink/3"> </div></div>
 <div class="section" id="shrink-3">
 <span id="arbitrary-0-shrink-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">shrink/3</span></code></a><a class="headerlink" href="#shrink-3" title="Permalink to this headline">¶</a></h3>
-<p>Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the shrinker/1 predicate.</p>
+<p>Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the <code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

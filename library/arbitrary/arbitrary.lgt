@@ -45,7 +45,8 @@
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}',
-			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}',
+			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), codes (list(character_code)), chars (list(character))}',
+			'Difference list types (compound derived types)' - '{difference_list, difference_list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
 			'Registering new types' - 'New types can be registered by defining clauses for the arbitrary/1-2 multifile predicates and optionally for the shrinker/1 and shrink/3 multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
@@ -65,7 +66,7 @@
 	:- multifile(arbitrary/1).
 	:- mode(arbitrary(?callable), zero_or_more).
 	:- info(arbitrary/1, [
-		comment is 'Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the arbitrary/2 multifile predicate.',
+		comment is 'Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the ``arbitrary/2`` multifile predicate.',
 		argnames is ['Type']
 	]).
 
@@ -73,7 +74,7 @@
 	:- multifile(arbitrary/2).
 	:- mode(arbitrary(@callable, -term), zero_or_one).
 	:- info(arbitrary/2, [
-		comment is 'Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the arbitrary/1 predicate.',
+		comment is 'Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the ``arbitrary/1`` predicate.',
 		argnames is ['Type', 'Term']
 	]).
 
@@ -81,7 +82,7 @@
 	:- multifile(shrinker/1).
 	:- mode(shrinker(?callable), zero_or_more).
 	:- info(shrinker/1, [
-		comment is 'Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the shrink/3 multifile predicate.',
+		comment is 'Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the ``shrink/3`` multifile predicate.',
 		argnames is ['Type']
 	]).
 
@@ -89,7 +90,7 @@
 	:- multifile(shrink/3).
 	:- mode(shrink(@callable, @term, -term), zero_or_more).
 	:- info(shrink/3, [
-		comment is 'Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the shrinker/1 predicate.',
+		comment is 'Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the ``shrinker/1`` predicate.',
 		argnames is ['Type', 'Large', 'Small']
 	]).
 

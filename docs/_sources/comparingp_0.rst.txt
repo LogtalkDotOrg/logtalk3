@@ -42,7 +42,7 @@ Public predicates
 ``(<)/2``
 ^^^^^^^^^
 
-True if Term1 is less than Term2.
+True if ``Term1`` is less than ``Term2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -65,7 +65,7 @@ True if Term1 is less than Term2.
 ``(=<)/2``
 ^^^^^^^^^^
 
-True if Term1 is less or equal than Term2.
+True if ``Term1`` is less or equal than ``Term2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -88,7 +88,7 @@ True if Term1 is less or equal than Term2.
 ``(>)/2``
 ^^^^^^^^^
 
-True if Term1 is greater than Term2.
+True if ``Term1`` is greater than ``Term2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -111,7 +111,7 @@ True if Term1 is greater than Term2.
 ``(>=)/2``
 ^^^^^^^^^^
 
-True if Term1 is equal or grater than Term2.
+True if ``Term1`` is equal or grater than ``Term2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -134,7 +134,7 @@ True if Term1 is equal or grater than Term2.
 ``(=:=)/2``
 ^^^^^^^^^^^
 
-True if Term1 is equal to Term2.
+True if ``Term1`` is equal to ``Term2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -157,7 +157,7 @@ True if Term1 is equal to Term2.
 ``(=\=)/2``
 ^^^^^^^^^^^
 
-True if Term1 is not equal to Term2.
+True if ``Term1`` is not equal to ``Term2``.
 
 | **Compilation flags:**
 |    ``static``

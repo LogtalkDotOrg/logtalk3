@@ -27,7 +27,7 @@
 		date is 2019/06/04,
 		comment is 'Integer data type predicates.',
 		remarks is [
-			'Portability notes' - 'This object will use the backend Prolog system between/3, plus/3, and succ/2 built-in predicates when avaialble.'
+			'Portability notes' - 'This object will use the backend Prolog system ``between/3``, ``plus/3``, and ``succ/2`` built-in predicates when avaialble.'
 		]
 	]).
 
@@ -59,7 +59,7 @@
 	:- public(sequence/3).
 	:- mode(sequence(+integer, +integer, -list(integer)), zero_or_one).
 	:- info(sequence/3, [
-		comment is 'Generates a list with the sequence of all integers in the interval [Inf, Sup], assuming Inf =< Sup.',
+		comment is 'Generates a list with the sequence of all integers in the interval ``[Inf,Sup]``, assuming ``Inf =< Sup``.',
 		argnames is ['Inf', 'Sup', 'List']
 	]).
 

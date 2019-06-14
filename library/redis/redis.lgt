@@ -27,7 +27,7 @@
 		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',
 		remarks is [
 			'Command representation' - 'Use the Redis command name as the functor of a compound term where the arguments are the command arguments.',
-			'Valid arguments' - 'Atoms, integers, and floats. Always use atoms instead of double-quoted "strings". This helps portability by not depending on the value of the double_quotes flag.'
+			'Valid arguments' - 'Atoms, integers, and floats. Always use atoms instead of double-quoted "strings". This helps portability by not depending on the value of the ``double_quotes`` flag.'
 		]
 	]).
 
@@ -193,7 +193,7 @@
 		connect(Connection),
 		send_request(Connection, Request, Reply),
 		disconnect(Connection),
-		print_reply(Reply).		
+		print_reply(Reply).
 
 	send_request(redis(Input, Output, _), Request, Reply) :-
 		parse_request(Request, Bytes),
