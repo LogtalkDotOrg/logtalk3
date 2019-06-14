@@ -702,7 +702,7 @@ https://logtalk.org/man/logtalk_tester.html
 Additional advice on testing and on automating testing using continuous
 integration servers can be found at:
 
-https://github.com/LogtalkDotOrg/logtalk3/wiki/Testing
+https://logtalk.org/testing.html
 
 Utility predicates
 ------------------
