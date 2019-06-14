@@ -26,8 +26,8 @@
 		date is 2019/01/24,
 		comment is 'Types and predicates for type-checking and handling optional term references. Inspired by Haskell.',
 		remarks is [
-			'Type maybe(Type)' - 'Allows type-checking optional term references where the optional term must be of the given type.',
-			'QuickCheck support' - 'Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.'
+			'Type-checking support' - 'Defines type ``maybe(Type)`` for checking optional term references where the optional term must be of the given type.',
+			'QuickCheck support' - 'Defines clauses for the ``arbitrary::arbitrary/1-2`` predicates to allow generating random values for the maybe(Type) type.'
 		],
 		see_also is [optional, optional(_), type, arbitrary]
 	]).
@@ -75,7 +75,7 @@
 		(	random::maybe ->
 			optional::empty(Arbitrary)
 		;	type::arbitrary(Type, Term),
-			optional::of(Term, Arbitrary)	
+			optional::of(Term, Arbitrary)
 		).
 
 	cat([], []).

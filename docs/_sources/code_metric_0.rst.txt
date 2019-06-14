@@ -112,7 +112,7 @@ Scans a directory and prints metric scores for all entities defined in its loade
 ``rdirectory/1``
 ^^^^^^^^^^^^^^^^
 
-Recursive version of the directory/1 predicate.
+Recursive version of the ``directory/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -158,7 +158,7 @@ Prints metrics scores for all loaded entities from a given library.
 ``rlibrary/1``
 ^^^^^^^^^^^^^^
 
-Recursive version of the library/1 predicate.
+Recursive version of the ``library/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``

@@ -8,7 +8,7 @@
 ``lgtunit``
 ===========
 
-A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.
+A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
 | **Version:** 7.12
@@ -34,7 +34,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 | **Remarks:**
 
 
-   - *Usage:* Define test objects as extensions of the "lgtunit" object and compile their source files using the compiler option hook(lgtunit).
+   - *Usage:* Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.
 
    - *Portability:* Deterministic unit tests are currently not available when using Lean Prolog or Quintus Prolog as backend compilers.
 
@@ -125,7 +125,7 @@ Runs a unit test or a list of unit tests, writing the results to the current out
 ``run/2``
 ^^^^^^^^^
 
-Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).
+Runs the unit tests, writing the results to the specified file. Mode can be either ``write`` (to create a new file) or ``append`` (to add results to an existing file).
 
 | **Compilation flags:**
 |    ``static``
@@ -196,7 +196,7 @@ True if the goal succeeds once without leaving choice-points.
 ``deterministic/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Reified version of the deterministic/1 predicate. True if the goal succeeds. Returns a boolean value (true or false) indicating if the goal succeeded without leaving choice-points.
+Reified version of the ``deterministic/1`` predicate. True if the goal succeeds. Returns a boolean value (``true`` or ``false``) indicating if the goal succeeded without leaving choice-points.
 
 | **Compilation flags:**
 |    ``static``
@@ -283,7 +283,7 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 ``quick_check/3``
 ^^^^^^^^^^^^^^^^^
 
-Reified version of the quick_check/2 predicate. Reports the result as "passed", "failed(Goal)" where Goal is the test that failed, or "error(Error,Template)".
+Reified version of the quick_check/2 predicate. Reports the result as ``passed``, ``failed(Goal)`` where ``Goal`` is the test that failed, or ``error(Error,Template)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -306,7 +306,7 @@ Reified version of the quick_check/2 predicate. Reports the result as "passed", 
 ``quick_check/2``
 ^^^^^^^^^^^^^^^^^
 
-Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option n(NumberOfTests). Default is to run 100 random tests.
+Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option ``n(NumberOfTests)``. Default is to run 100 random tests.
 
 | **Compilation flags:**
 |    ``static``
@@ -352,7 +352,7 @@ Generates and runs 100 random tests for a given predicate given its mode templat
 ``benchmark/2``
 ^^^^^^^^^^^^^^^
 
-Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.
+Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.
 
 | **Compilation flags:**
 |    ``static``
@@ -377,7 +377,7 @@ Benchmarks a goal and returns the total execution time in seconds. Uses cpu cloc
 ``benchmark_reified/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)). Uses cpu clock.
+Benchmarks a goal and returns the total execution time in seconds plus its result (``success``, ``failure``, or ``error(Error))``. Uses CPU clock.
 
 | **Compilation flags:**
 |    ``static``
@@ -402,7 +402,7 @@ Benchmarks a goal and returns the total execution time in seconds plus its resul
 ``benchmark/3``
 ^^^^^^^^^^^^^^^
 
-Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.
+Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses CPU clock. Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.
 
 | **Compilation flags:**
 |    ``static``
@@ -427,7 +427,7 @@ Benchmarks a goal by repeating it the specified number of times and returning th
 ``benchmark/4``
 ^^^^^^^^^^^^^^^
 
-Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (cpu or wall). Goals that may throw an exception should be wrapped by the catch/3 control construct.
+Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (``cpu`` or ``wall``). Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.
 
 | **Compilation flags:**
 |    ``static``
@@ -475,7 +475,7 @@ True when the two arguments are a variant of each other. I.e. if is possible to 
 ``approximately_equal/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. Type-checked.
+Compares two numbers for approximate equality given an epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.
 
 | **Compilation flags:**
 |    ``static``
@@ -498,7 +498,7 @@ Compares two numbers for approximate equality given an epsilon value using the d
 ``essentially_equal/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. Type-checked.
+Compares two numbers for essential equality given an epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.
 
 | **Compilation flags:**
 |    ``static``
@@ -521,7 +521,7 @@ Compares two numbers for essential equality given an epsilon value using the de 
 ``tolerance_equal/4``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). Type-checked.
+Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula ``abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance)``. Type-checked.
 
 | **Compilation flags:**
 |    ``static``
@@ -544,7 +544,7 @@ Compares two numbers for close equality given relative and absolute tolerances u
 ``=~= / 2``
 ^^^^^^^^^^^
 
-Compares two numbers (or lists of numbers) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.
+Compares two numbers (or lists of numbers) for approximate equality using ``100*epsilon`` for the absolute error and, if that fails, ``99.999%`` accuracy for the relative error. But these precision values may not be adequate for all cases. Type-checked.
 
 | **Compilation flags:**
 |    ``static``
@@ -568,7 +568,7 @@ Compares two numbers (or lists of numbers) for approximate equality using 100*ep
 ``epsilon/1``
 ^^^^^^^^^^^^^
 
-Returns the value of epsilon used in the definition of the (=~=)/2 predicate.
+Returns the value of epsilon used in the definition of the ``(=~=)/2`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -682,7 +682,7 @@ Runs a list of defined tests using the given options.
 ``condition/0``
 ^^^^^^^^^^^^^^^
 
-Verifies conditions for running the tests. Defaults to the goal true.
+Verifies conditions for running the tests. Defaults to the goal ``true``.
 
 | **Compilation flags:**
 |    ``static``
@@ -703,7 +703,7 @@ Verifies conditions for running the tests. Defaults to the goal true.
 ``setup/0``
 ^^^^^^^^^^^
 
-Setup environment before running the test set. Defaults to the goal true.
+Setup environment before running the test set. Defaults to the goal ``true``.
 
 | **Compilation flags:**
 |    ``static``
@@ -724,7 +724,7 @@ Setup environment before running the test set. Defaults to the goal true.
 ``cleanup/0``
 ^^^^^^^^^^^^^
 
-Cleanup environment after running the test set. Defaults to the goal true.
+Cleanup environment after running the test set. Defaults to the goal ``true``.
 
 | **Compilation flags:**
 |    ``static``
@@ -745,7 +745,7 @@ Cleanup environment after running the test set. Defaults to the goal true.
 ``make/1``
 ^^^^^^^^^^
 
-Make target for automatically running the test set when calling the logtalk_make/1 built-in predicate. No default. Possible values are {all, check}.
+Make target for automatically running the test set when calling the ``logtalk_make/1`` built-in predicate. No default. Possible values are ``all`` and ``check``.
 
 | **Compilation flags:**
 |    ``static``
@@ -829,7 +829,7 @@ Suppresses binary output. Useful to avoid irrelevant binary output from predicat
 ``set_text_input/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.
+Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.
 
 | **Compilation flags:**
 |    ``static``
@@ -1011,7 +1011,7 @@ Cleans the temporary file used when testing text input.
 ``set_binary_input/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.
+Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.
 
 | **Compilation flags:**
 |    ``static``

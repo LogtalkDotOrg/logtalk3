@@ -120,7 +120,7 @@
 	:- public(line_to_codes/2).
 	:- mode(line_to_codes(+stream_or_alias, -list(character_code)), zero_or_one).
 	:- info(line_to_codes/2, [
-		comment is 'Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies Codes with end_of_file at the end of the file.',
+		comment is 'Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies ``Codes`` with ``end_of_file`` at the end of the file.',
 		argnames is ['Stream', 'Codes']
 	]).
 

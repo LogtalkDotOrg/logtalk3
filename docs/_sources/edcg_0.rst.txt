@@ -32,7 +32,7 @@ Multiple hidden parameters: an extension to Prolog's DCG notation. Ported to Log
 | **Remarks:**
 
 
-   - *Usage:* Compile source files with objects (or categories) defining EDCGs using the compiler option hook(edcg).
+   - *Usage:* Compile source files with objects (or categories) defining EDCGs using the compiler option ``hook(edcg)``.
 
 .. contents::
    :local:
@@ -130,7 +130,7 @@ Short form for declaring accumulators.
 ``pass_info/2``
 ^^^^^^^^^^^^^^^
 
-Long form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with =/2 as the joiner function.
+Long form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with ``=/2`` as the joiner function.
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -153,7 +153,7 @@ Long form for declaring passed arguments. Passed arguments are conceptually the 
 ``pass_info/1``
 ^^^^^^^^^^^^^^^
 
-Short form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with =/2 as the joiner function.
+Short form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with ``=/2`` as the joiner function.
 
 | **Compilation flags:**
 |    ``dynamic``

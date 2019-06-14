@@ -8,7 +8,7 @@
 ``optional(Reference)``
 =======================
 
-Optional reference predicates. Requires passing a reference constructed using the "optional" object as a parameter.
+Optional reference predicates. Requires passing a reference constructed using the ``optional`` object as a parameter.
 
 | **Author:** Paulo Moura
 | **Version:** 1.5
@@ -42,7 +42,7 @@ Public predicates
 ``is_empty/0``
 ^^^^^^^^^^^^^^
 
-True if the reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.
+True if the reference is empty. Avoid whenever possible by using instead the ``if_empty/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -63,7 +63,7 @@ True if the reference is empty. Avoid whenever possible by using instead the if_
 ``is_present/0``
 ^^^^^^^^^^^^^^^^
 
-True if the reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.
+True if the reference holds a term. Avoid whenever possible by using instead the ``if_present/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``

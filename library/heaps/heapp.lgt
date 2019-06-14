@@ -24,29 +24,29 @@
 		version is 1.01,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
 		date is 2010/11/13,
-		comment is 'Heap protocol.',
+		comment is 'Heap protocol. Key-value pairs are represented as ``Key-Value``.',
 		see_also is [heap(_)]
 	]).
 
 	:- public(insert/4).
 	:- mode(insert(+key, +value, +heap, -heap), one).
 	:- info(insert/4, [
-		comment is 'Inserts the new Key-Value pair into a heap, returning the updated heap.',
+		comment is 'Inserts the new pair into a heap, returning the updated heap.',
 		argnames is ['Key', 'Value', 'Heap', 'NewHeap']
 	]).
 
 	:- public(insert_all/3).
 	:- mode(insert_all(@list(pairs), +heap, -heap), one).
 	:- info(insert_all/3, [
-		comment is 'Inserts a list of Key-Value pairs into a heap, returning the updated heap.',
+		comment is 'Inserts a list of pairs into a heap, returning the updated heap.',
 		argnames is ['List', 'Heap', 'NewHeap']
 	]).
 
 	:- public(delete/4).
 	:- mode(delete(+heap, ?key, ?value, -heap), zero_or_one).
 	:- info(delete/4, [
-		comment is 'Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.',
-		argnames is ['Heap', 'Key', 'Value', 'NewHeap']
+		comment is 'Deletes and returns the top pair in a heap returning the updated heap.',
+		argnames is ['Heap', 'TopKey', 'TopValue', 'NewHeap']
 	]).
 
 	:- public(merge/3).
@@ -73,29 +73,29 @@
 	:- public(as_list/2).
 	:- mode(as_list(+heap, -list), one).
 	:- info(as_list/2, [
-		comment is 'Returns the current set of Key-Value pairs in the Heap as a List, sorted into ascending order of Keys.',
+		comment is 'Returns the current set of pairs in the heap as a list, sorted into ascending order of the keys.',
 		argnames is ['Heap', 'List']
 	]).
 
 	:- public(as_heap/2).
 	:- mode(as_heap(+list, -heap), one).
 	:- info(as_heap/2, [
-		comment is 'Constructs a Heap from a list of Key-Value pairs.',
+		comment is 'Constructs a heap from a list of pairs.',
 		argnames is ['List', 'Heap']
 	]).
 
 	:- public(top/3).
 	:- mode(top(+heap, ?key, ?value), zero_or_one).
 	:- info(top/3, [
-		comment is 'Returns the top Key-Value pair in Heap. Fails if the heap is empty.',
-		argnames is ['Heap', 'Key', 'Value']
+		comment is 'Returns the top pair in the heap. Fails if the heap is empty.',
+		argnames is ['Heap', 'TopKey', 'TopValue']
 	]).
 
 	:- public(top_next/5).
 	:- mode(top_next(+heap, ?key, ?value, ?key, ?value), zero_or_one).
 	:- info(top_next/5, [
-		comment is 'Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fails if the heap does not have at least two elements.',
-		argnames is ['Heap', 'Key1', 'Value1', 'Key2', 'Value2']
+		comment is 'Returns the top pair and the next pair in the heap. Fails if the heap does not have at least two elements.',
+		argnames is ['Heap', 'TopKey', 'TopValue', 'NextKey', 'NextValue']
 	]).
 
 :- end_protocol.

@@ -8,7 +8,7 @@
 ``expected(Reference)``
 =======================
 
-Expected term reference predicates. Requires passing a reference constructed using the "expected" object as a parameter.
+Expected term reference predicates. Requires passing a reference (constructed using the ``expected`` object) as a parameter.
 
 | **Author:** Paulo Moura
 | **Version:** 1.2
@@ -42,7 +42,7 @@ Public predicates
 ``is_unexpected/0``
 ^^^^^^^^^^^^^^^^^^^
 
-True if the reference holds an unexpected term. Avoid whenever possible by using instead the if_unexpected/1 predicate.
+True if the reference holds an unexpected term. Avoid whenever possible by using instead the ``if_unexpected/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -63,7 +63,7 @@ True if the reference holds an unexpected term. Avoid whenever possible by using
 ``is_expected/0``
 ^^^^^^^^^^^^^^^^^
 
-True if the reference holds an expected term. Avoid whenever possible by using instead the if_expected/1 predicate.
+True if the reference holds an expected term. Avoid whenever possible by using instead the ``if_expected/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -84,7 +84,7 @@ True if the reference holds an expected term. Avoid whenever possible by using i
 ``if_unexpected/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Applies a closure when the reference holds an unexpected term using the term as argument. Succeeds otherwise. Can be used to throw the exception hold by the reference by calling it the atom "throw".
+Applies a closure when the reference holds an unexpected term using the term as argument. Succeeds otherwise. Can be used to throw the exception hold by the reference by calling it the atom ``throw``.
 
 | **Compilation flags:**
 |    ``static``

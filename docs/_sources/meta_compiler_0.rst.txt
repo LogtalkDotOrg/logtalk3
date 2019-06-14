@@ -8,7 +8,7 @@
 ``meta_compiler``
 =================
 
-Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.
+Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.
 
 | **Author:** Paulo Moura
 | **Version:** 0.13
@@ -28,7 +28,7 @@ Compiler for the "meta" object meta-predicates. Generates auxiliary predicates i
 | **Remarks:**
 
 
-   - *Usage:* Compile source files with calls to the "meta" object meta-predicates using the compiler option hook(meta_compiler).
+   - *Usage:* Compile source files with calls to the ``meta`` object meta-predicates using the compiler option ``hook(meta_compiler)``.
 
 .. contents::
    :local:

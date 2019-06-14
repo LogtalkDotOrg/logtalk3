@@ -24,7 +24,7 @@ Intercepts unit test execution messages and outputs a report using the TAP forma
 | **Remarks:**
 
 
-   - *Usage:* Simply load this object before running your tests using the goal logtalk_load(lgtunit(tap_output)).
+   - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.
 
 .. contents::
    :local:

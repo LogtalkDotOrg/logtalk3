@@ -8,7 +8,7 @@
 ``xunit_report``
 ================
 
-Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format in the same directory as the tests object file.
+Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.
 
 | **Author:** Paulo Moura
 | **Version:** 1.1
@@ -26,7 +26,7 @@ Intercepts unit test execution messages and generates a xunit_report.xml file us
 | **Remarks:**
 
 
-   - *Usage:* Simply load this object before running your tests using the goal logtalk_load(lgtunit(xunit_report)).
+   - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.
 
 .. contents::
    :local:

@@ -42,7 +42,7 @@ Public predicates
 ``random/1``
 ^^^^^^^^^^^^
 
-Returns a new random float value in the interval [0.0, 1.0[.
+Returns a new random float value in the interval ``[0.0, 1.0[``.
 
 | **Compilation flags:**
 |    ``static``
@@ -65,7 +65,7 @@ Returns a new random float value in the interval [0.0, 1.0[.
 ``between/3``
 ^^^^^^^^^^^^^
 
-Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or Upper are not integers or if Lower > Upper.
+Returns a new random integer in the interval ``[Lower, Upper]``. Fails if ``Lower`` or ``Upper`` are not integers or if ``Lower > Upper``.
 
 | **Compilation flags:**
 |    ``static``
@@ -157,7 +157,7 @@ Returns a random permutation of a list.
 ``sequence/4``
 ^^^^^^^^^^^^^^
 
-Returns a list of the given length of random integers in random order in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers or if Lower > Upper.
+Returns list of random integers of given length in random order in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers or if ``Lower > Upper``.
 
 | **Compilation flags:**
 |    ``static``
@@ -180,7 +180,7 @@ Returns a list of the given length of random integers in random order in the int
 ``set/4``
 ^^^^^^^^^
 
-Returns an ordered set of the given size of random integers in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers, if Lower > Upper, or if Length > Upper - Lower + 1.
+Returns ordered set of random integers of given size in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers, if ``Lower > Upper``, or if ``Length > Upper - Lower + 1``.
 
 | **Compilation flags:**
 |    ``static``
@@ -203,7 +203,7 @@ Returns an ordered set of the given size of random integers in the interval [Low
 ``random/3``
 ^^^^^^^^^^^^
 
-Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Upper. Deprecated. Use between/3 for integers.
+Returns a new random value in the interval ``[Lower, Upper[``. Fails if ``Lower > Upper``. Deprecated. Use ``between/3`` for integers.
 
 | **Compilation flags:**
 |    ``static``
@@ -227,7 +227,7 @@ Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Uppe
 ``randseq/4``
 ^^^^^^^^^^^^^
 
-Returns a list of the given length of random values in random order in the interval [Lower, Upper[. Fails if Lower > Upper or if the arguments are neither integers or floats. Deprecated. Use sequence/4 for integers.
+Returns list of random values of given length in random order in interval ``[Lower, Upper[``. Fails if ``Lower > Upper`` or if the arguments are neither integers or floats. Deprecated. Use ``sequence/4`` for integers.
 
 | **Compilation flags:**
 |    ``static``
@@ -251,7 +251,7 @@ Returns a list of the given length of random values in random order in the inter
 ``randset/4``
 ^^^^^^^^^^^^^
 
-Returns an ordered set of the given size of random values in the interval [Lower, Upper[. Fails if the arguments are neither integers or floats, Lower > Upper, or Length > Upper - Lower when the arguments are integers. Deprecated. Use set/4 for integers.
+Returns ordered set of random values of given size in interval ``[Lower, Upper[``. Fails if the arguments are neither integers or floats, ``Lower > Upper``, or ``Length > Upper - Lower`` when arguments are integers. Deprecated. Use ``set/4`` for integers.
 
 | **Compilation flags:**
 |    ``static``
@@ -298,7 +298,7 @@ Gets the current random generator seed. Seed should be regarded as an opaque gro
 ``set_seed/1``
 ^^^^^^^^^^^^^^
 
-Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.
+Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -342,7 +342,7 @@ Succeeds or fails with equal probability.
 ``maybe/1``
 ^^^^^^^^^^^
 
-Succeeds with probability Probability or fails with probability 1 - Probability. Fails if Probability is not a float or is outside the interval [0.0, 1.0].
+Succeeds with probability ``Probability`` or fails with probability ``1 - Probability``. Fails if ``Probability`` is not a float or is outside the interval ``[0.0, 1.0]``.
 
 | **Compilation flags:**
 |    ``static``
@@ -365,7 +365,7 @@ Succeeds with probability Probability or fails with probability 1 - Probability.
 ``maybe/2``
 ^^^^^^^^^^^
 
-Succeeds with probability K/N where K and N are integers satisfying the equation 0 =< K =< N. Fails otherwise.
+Succeeds with probability ``K/N`` where ``K`` and ``N`` are integers satisfying the equation ``0 =< K =< N``. Fails otherwise.
 
 | **Compilation flags:**
 |    ``static``

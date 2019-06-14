@@ -24,7 +24,7 @@
 		version is 1.26,
 		author is 'Paulo Moura',
 		date is 2019/06/10,
-		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
+		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
 			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier, qualified_callable}',
@@ -70,7 +70,7 @@
 	:- endif.
 	:- mode(type(?callable), zero_or_more).
 	:- info(type/1, [
-		comment is 'Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.',
+		comment is 'Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the ``check/2`` multifile predicate.',
 		argnames is ['Type']
 	]).
 
@@ -96,7 +96,7 @@
 	:- public(check/3).
 	:- mode(check(@callable, @term, @term), one_or_error).
 	:- info(check/3, [
-		comment is 'True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.',
+		comment is 'True if the given term is of the specified type. Throws an error otherwise using the format ``error(Error, Context)``. For the possible values of ``Error`` see the ``check/2`` predicate.',
 		argnames is ['Type', 'Term', 'Context']
 	]).
 
@@ -108,13 +108,13 @@
 	:- endif.
 	:- mode(check(@callable, @term), one_or_error).
 	:- info(check/2, [
-		comment is 'True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.',
+		comment is 'True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the ``type/1`` multifile predicate.',
 		argnames is ['Type', 'Term'],
 		exceptions is [
-			'Term is not bound as required' - 'instantiation_error',
-			'Term is bound but not of the specified type' - 'type_error(Type, Term)',
-			'Term is the of the correct type but not in the specified domain' - 'domain_error(Domain, Term)',
-			'Term is the of the correct type and domain but the resource it represents does not exist' - 'existence_error(Type, Term)'
+			'``Term`` is not bound as required' - 'instantiation_error',
+			'``Term`` is bound but not of the specified type' - 'type_error(Type, Term)',
+			'``Term`` is the of the correct type but not in the specified domain' - 'domain_error(Domain, Term)',
+			'``Term`` is the of the correct type and domain but the resource it represents does not exist' - 'existence_error(Type, Term)'
 		]
 	]).
 

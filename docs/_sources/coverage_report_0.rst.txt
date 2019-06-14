@@ -8,7 +8,7 @@
 ``coverage_report``
 ===================
 
-Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.
+Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.
 
 | **Author:** Paulo Moura
 | **Version:** 1.4
@@ -26,7 +26,7 @@ Intercepts unit test execution messages and generates a coverage_report.xml file
 | **Remarks:**
 
 
-   - *Usage:* Simply load this object before running your tests using the goal logtalk_load(lgtunit(coverage_report)).
+   - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.
 
 .. contents::
    :local:

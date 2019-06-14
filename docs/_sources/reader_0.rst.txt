@@ -318,7 +318,7 @@ Reads a text stream into a list of terms. Does not close the stream. The list is
 ``line_to_codes/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies Codes with end_of_file at the end of the file.
+Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies ``Codes`` with ``end_of_file`` at the end of the file.
 
 | **Compilation flags:**
 |    ``static``

@@ -26,7 +26,7 @@ Fast portable random number generator predicates. Core predicates originally wri
 | **Remarks:**
 
 
-   - *Single random number generator:* This object provides a faster version of the "random" library object but does not support being extended to define multiple random number generators.
+   - *Single random number generator:* This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.
 
 .. contents::
    :local:
@@ -45,7 +45,7 @@ Public predicates
 ``reset_seed/0``
 ^^^^^^^^^^^^^^^^
 
-Resets the random generator seed to its default value. Use get_seed/1 and set_seed/1 instead if you need reproducibility.
+Resets the random generator seed to its default value. Use ``get_seed/1`` and ``set_seed/1`` instead if you need reproducibility.
 
 | **Compilation flags:**
 |    ``static, synchronized``

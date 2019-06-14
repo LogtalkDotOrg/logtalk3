@@ -8,7 +8,7 @@
 ``heapp``
 =========
 
-Heap protocol.
+Heap protocol. Key-value pairs are represented as ``Key-Value``.
 
 | **Author:** Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.
 | **Version:** 1.01
@@ -42,7 +42,7 @@ Public predicates
 ``insert/4``
 ^^^^^^^^^^^^
 
-Inserts the new Key-Value pair into a heap, returning the updated heap.
+Inserts the new pair into a heap, returning the updated heap.
 
 | **Compilation flags:**
 |    ``static``
@@ -65,7 +65,7 @@ Inserts the new Key-Value pair into a heap, returning the updated heap.
 ``insert_all/3``
 ^^^^^^^^^^^^^^^^
 
-Inserts a list of Key-Value pairs into a heap, returning the updated heap.
+Inserts a list of pairs into a heap, returning the updated heap.
 
 | **Compilation flags:**
 |    ``static``
@@ -88,13 +88,13 @@ Inserts a list of Key-Value pairs into a heap, returning the updated heap.
 ``delete/4``
 ^^^^^^^^^^^^
 
-Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.
+Deletes and returns the top pair in a heap returning the updated heap.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``delete(Heap,Key,Value,NewHeap)``
+|    ``delete(Heap,TopKey,TopValue,NewHeap)``
 | **Mode and number of proofs:**
 |    ``delete(+heap,?key,?value,-heap)`` - ``zero_or_one``
 
@@ -180,7 +180,7 @@ Returns the number of heap elements.
 ``as_list/2``
 ^^^^^^^^^^^^^
 
-Returns the current set of Key-Value pairs in the Heap as a List, sorted into ascending order of Keys.
+Returns the current set of pairs in the heap as a list, sorted into ascending order of the keys.
 
 | **Compilation flags:**
 |    ``static``
@@ -203,7 +203,7 @@ Returns the current set of Key-Value pairs in the Heap as a List, sorted into as
 ``as_heap/2``
 ^^^^^^^^^^^^^
 
-Constructs a Heap from a list of Key-Value pairs.
+Constructs a heap from a list of pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -226,13 +226,13 @@ Constructs a Heap from a list of Key-Value pairs.
 ``top/3``
 ^^^^^^^^^
 
-Returns the top Key-Value pair in Heap. Fails if the heap is empty.
+Returns the top pair in the heap. Fails if the heap is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``top(Heap,Key,Value)``
+|    ``top(Heap,TopKey,TopValue)``
 | **Mode and number of proofs:**
 |    ``top(+heap,?key,?value)`` - ``zero_or_one``
 
@@ -249,13 +249,13 @@ Returns the top Key-Value pair in Heap. Fails if the heap is empty.
 ``top_next/5``
 ^^^^^^^^^^^^^^
 
-Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fails if the heap does not have at least two elements.
+Returns the top pair and the next pair in the heap. Fails if the heap does not have at least two elements.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``top_next(Heap,Key1,Value1,Key2,Value2)``
+|    ``top_next(Heap,TopKey,TopValue,NextKey,NextValue)``
 | **Mode and number of proofs:**
 |    ``top_next(+heap,?key,?value,?key,?value)`` - ``zero_or_one``
 

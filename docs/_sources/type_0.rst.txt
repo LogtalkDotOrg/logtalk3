@@ -8,7 +8,7 @@
 ``type``
 ========
 
-Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.
+Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1.26
@@ -101,7 +101,7 @@ Public predicates
 ``type/1``
 ^^^^^^^^^^
 
-Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.
+Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the ``check/2`` multifile predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``
@@ -170,7 +170,7 @@ True if the given term is of the specified type. Fails otherwise.
 ``check/3``
 ^^^^^^^^^^^
 
-True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.
+True if the given term is of the specified type. Throws an error otherwise using the format ``error(Error, Context)``. For the possible values of ``Error`` see the ``check/2`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -193,7 +193,7 @@ True if the given term is of the specified type. Throws an error otherwise using
 ``check/2``
 ^^^^^^^^^^^
 
-True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.
+True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the ``type/1`` multifile predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``
@@ -204,13 +204,13 @@ True if the given term is of the specified type. Throws an error otherwise. A ne
 |    ``check(@callable,@term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Term is not bound as required:
+|    ``Term`` is not bound as required:
 |        ``instantiation_error``
-|    Term is bound but not of the specified type:
+|    ``Term`` is bound but not of the specified type:
 |        ``type_error(Type, Term)``
-|    Term is the of the correct type but not in the specified domain:
+|    ``Term`` is the of the correct type but not in the specified domain:
 |        ``domain_error(Domain, Term)``
-|    Term is the of the correct type and domain but the resource it represents does not exist:
+|    ``Term`` is the of the correct type and domain but the resource it represents does not exist:
 |        ``existence_error(Type, Term)``
 
 

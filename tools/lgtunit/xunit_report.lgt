@@ -31,9 +31,9 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2019/06/04,
-		comment is 'Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format in the same directory as the tests object file.',
+		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
-			'Usage' - 'Simply load this object before running your tests using the goal logtalk_load(lgtunit(xunit_report)).'
+			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'
 		]
 	]).
 

@@ -32,9 +32,9 @@ Types and predicates for type-checking and handling optional term references. In
 | **Remarks:**
 
 
-   - *Type maybe(Type):* Allows type-checking optional term references where the optional term must be of the given type.
+   - *Type-checking support:* Defines type ``maybe(Type)`` for checking optional term references where the optional term must be of the given type.
 
-   - *QuickCheck support:* Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.
+   - *QuickCheck support:* Defines clauses for the ``arbitrary::arbitrary/1-2`` predicates to allow generating random values for the maybe(Type) type.
 
 .. contents::
    :local:

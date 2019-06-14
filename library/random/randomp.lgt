@@ -31,14 +31,14 @@
 	:- public(random/1).
 	:- mode(random(-float), one).
 	:- info(random/1, [
-		comment is 'Returns a new random float value in the interval [0.0, 1.0[.',
+		comment is 'Returns a new random float value in the interval ``[0.0, 1.0[``.',
 		argnames is ['Random']
 	]).
 
 	:- public(between/3).
 	:- mode(between(+integer, +integer, -integer), zero_or_one).
 	:- info(between/3, [
-		comment is 'Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or Upper are not integers or if Lower > Upper.',
+		comment is 'Returns a new random integer in the interval ``[Lower, Upper]``. Fails if ``Lower`` or ``Upper`` are not integers or if ``Lower > Upper``.',
 		argnames is ['Lower', 'Upper', 'Random']
 	]).
 
@@ -66,14 +66,14 @@
 	:- public(sequence/4).
 	:- mode(sequence(+integer, +integer, +integer, -list(integer)), zero_or_one).
 	:- info(sequence/4, [
-		comment is 'Returns a list of the given length of random integers in random order in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers or if Lower > Upper.',
+		comment is 'Returns list of random integers of given length in random order in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers or if ``Lower > Upper``.',
 		argnames is ['Length', 'Lower', 'Upper', 'List']
 	]).
 
 	:- public(set/4).
 	:- mode(set(+integer, +integer, +integer, -list(integer)), zero_or_one).
 	:- info(set/4, [
-		comment is 'Returns an ordered set of the given size of random integers in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers, if Lower > Upper, or if Length > Upper - Lower + 1.',
+		comment is 'Returns ordered set of random integers of given size in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers, if ``Lower > Upper``, or if ``Length > Upper - Lower + 1``.',
 		argnames is ['Length', 'Lower', 'Upper', 'Set']
 	]).
 
@@ -81,7 +81,7 @@
 	:- mode(random(+integer, +integer, -integer), zero_or_one).
 	:- mode(random(+float, +float, -float), zero_or_one).
 	:- info(random/3, [
-		comment is 'Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Upper. Deprecated. Use between/3 for integers.',
+		comment is 'Returns a new random value in the interval ``[Lower, Upper[``. Fails if ``Lower > Upper``. Deprecated. Use ``between/3`` for integers.',
 		argnames is ['Lower', 'Upper', 'Random']
 	]).
 
@@ -89,7 +89,7 @@
 	:- mode(randseq(+integer, +integer, +integer, -list(integer)), zero_or_one).
 	:- mode(randseq(+integer, +float, +float, -list(float)), zero_or_one).
 	:- info(randseq/4, [
-		comment is 'Returns a list of the given length of random values in random order in the interval [Lower, Upper[. Fails if Lower > Upper or if the arguments are neither integers or floats. Deprecated. Use sequence/4 for integers.',
+		comment is 'Returns list of random values of given length in random order in interval ``[Lower, Upper[``. Fails if ``Lower > Upper`` or if the arguments are neither integers or floats. Deprecated. Use ``sequence/4`` for integers.',
 		argnames is ['Length', 'Lower', 'Upper', 'List']
 	]).
 
@@ -97,7 +97,7 @@
 	:- mode(randset(+integer, +integer, +integer, -list(integer)), zero_or_one).
 	:- mode(randset(+integer, +float, +float, -list(float)), zero_or_one).
 	:- info(randset/4, [
-		comment is 'Returns an ordered set of the given size of random values in the interval [Lower, Upper[. Fails if the arguments are neither integers or floats, Lower > Upper, or Length > Upper - Lower when the arguments are integers. Deprecated. Use set/4 for integers.',
+		comment is 'Returns ordered set of random values of given size in interval ``[Lower, Upper[``. Fails if the arguments are neither integers or floats, ``Lower > Upper``, or ``Length > Upper - Lower`` when arguments are integers. Deprecated. Use ``set/4`` for integers.',
 		argnames is ['Length', 'Lower', 'Upper', 'Set']
 	]).
 
@@ -111,7 +111,7 @@
 	:- public(set_seed/1).
 	:- mode(set_seed(+ground), one).
 	:- info(set_seed/1, [
-		comment is 'Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.',
+		comment is 'Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.',
 		argnames is ['Seed']
 	]).
 
@@ -124,14 +124,14 @@
 	:- public(maybe/1).
 	:- mode(maybe(+probability), zero_or_one).
 	:- info(maybe/1, [
-		comment is 'Succeeds with probability Probability or fails with probability 1 - Probability. Fails if Probability is not a float or is outside the interval [0.0, 1.0].',
+		comment is 'Succeeds with probability ``Probability`` or fails with probability ``1 - Probability``. Fails if ``Probability`` is not a float or is outside the interval ``[0.0, 1.0]``.',
 		argnames is ['Probability']
 	]).
 
 	:- public(maybe/2).
 	:- mode(maybe(+non_negative_integer, +non_negative_integer), zero_or_one).
 	:- info(maybe/2, [
-		comment is 'Succeeds with probability K/N where K and N are integers satisfying the equation 0 =< K =< N. Fails otherwise.',
+		comment is 'Succeeds with probability ``K/N`` where ``K`` and ``N`` are integers satisfying the equation ``0 =< K =< N``. Fails otherwise.',
 		argnames is ['K', 'N']
 	]).
 

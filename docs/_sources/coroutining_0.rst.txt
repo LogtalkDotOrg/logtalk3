@@ -92,7 +92,7 @@ Delays the execution of a goal until a variable is bound.
 ``frozen/2``
 ^^^^^^^^^^^^
 
-Unifies Goal with the goal delayed by Variable. When no goals are frozen on Variable, Goal is unified with true.
+Unifies ``Goal`` with the goal delayed by ``Variable``. When no goals are frozen on ``Variable``, ``Goal`` is unified with true.
 
 | **Compilation flags:**
 |    ``static``
@@ -115,7 +115,7 @@ Unifies Goal with the goal delayed by Variable. When no goals are frozen on Vari
 ``when/2``
 ^^^^^^^^^^
 
-Calls Goal when Condition becomes true. The portable conditions are: nonvar/1, ground/1, (,)/2, and (;)/2.
+Calls ``Goal`` when ``Condition`` becomes true. The portable conditions are: ``nonvar/1``, ``ground/1``, ``(,)/2``, and ``(;)/2``.
 
 | **Compilation flags:**
 |    ``static``

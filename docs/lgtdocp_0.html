@@ -261,12 +261,12 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p><em>Compiling files for generating XML documentation:</em> All source files must be compiled with the “source_data” compiler flag turned on.</p></li>
-<li><p><em>xml_spec(Specification) option:</em> XML documenting files specification format. Possible option values are “dtd” (DTD specification; default) and “xsd” (XML Schema specification).</p></li>
-<li><p><em>xml_spec_reference(Reference) option:</em> Reference to the XML specification file in XML documenting files. Possible values are “local” (default; DTD/XSD file in the same folder as the XML files), “web” (logtalk.org website DTD/XSD file), and “standalone” (no reference to specification files).</p></li>
-<li><p><em>entity_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is “logtalk_entity_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</p></li>
-<li><p><em>index_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is “logtalk_index_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</p></li>
-<li><p><em>xml_docs_directory(Directory) option:</em> Directory where the XML documenting files will be generated. The default value is “./xml_docs”, a sub-directory of the source files directory.</p></li>
+<li><p><em>Compiling files for generating XML documentation:</em> All source files must be compiled with the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on.</p></li>
+<li><p><em>xml_spec(Specification) option:</em> XML documenting files specification format. Possible option values are <code class="docutils literal notranslate"><span class="pre">dtd</span></code> (DTD specification; default) and <code class="docutils literal notranslate"><span class="pre">xsd</span></code> (XML Schema specification).</p></li>
+<li><p><em>xml_spec_reference(Reference) option:</em> Reference to the XML specification file in XML documenting files. Possible values are <code class="docutils literal notranslate"><span class="pre">local</span></code> (default; DTD/XSD file in same folder as XML files), <code class="docutils literal notranslate"><span class="pre">web</span></code> (logtalk.org website DTD/XSD file), and <code class="docutils literal notranslate"><span class="pre">standalone</span></code> (no reference to specification files).</p></li>
+<li><p><em>entity_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_entity_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
+<li><p><em>index_xsl_file(File) option:</em> XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_index_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
+<li><p><em>xml_docs_directory(Directory) option:</em> Directory where the XML documenting files will be generated. The default value is <code class="docutils literal notranslate"><span class="pre">./xml_docs</span></code>, a sub-directory of the source files directory.</p></li>
 <li><p><em>bom(Boolean) option:</em> Defines if a BOM should be added to the generated XML documenting files.</p></li>
 <li><p><em>encoding(Encoding) option:</em> Encoding to be used for the generated XML documenting files.</p></li>
 <li><p><em>omit_path_prefixes(Prefixes) option:</em> List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</p></li>
@@ -356,7 +356,7 @@
 <div class="line-block">
 <div class="line"><strong>Examples:</strong></div>
 <div class="line-block">
-<div class="line">Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the “lgt2xml” script)</div>
+<div class="line">Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the <code class="docutils literal notranslate"><span class="pre">lgt2xml</span></code> script)</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(tools)</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
@@ -470,7 +470,7 @@
 <div class="line-block">
 <div class="line"><strong>Examples:</strong></div>
 <div class="line-block">
-<div class="line">Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the “lgt2xml” script)</div>
+<div class="line">Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the <code class="docutils literal notranslate"><span class="pre">lgt2xml</span></code> script)</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory('./tools')</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>

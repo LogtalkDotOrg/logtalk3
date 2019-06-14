@@ -67,7 +67,7 @@
 		version is 1.1,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
 		date is 2019/05/18,
-		comment is 'Heap implementation, parameterized by the order to be used to compare keys ("<" or ">").',
+		comment is 'Heap implementation, parameterized by the order to be used to compare keys (``<`` or ``>``).',
 		parnames is ['Order'],
 		see_also is [minheap, maxheap]
 	]).

@@ -27,7 +27,7 @@
 		date is 2018/08/14,
 		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
-			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.'
+			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to self the ``reset_seed/0`` message.'
 		],
 		see_also is [fast_random, backend_random]
 	]).
@@ -35,7 +35,7 @@
 	:- public(reset_seed/0).
 	:- mode(reset_seed, one).
 	:- info(reset_seed/0, [
-		comment is 'Resets the random generator seed to its default value. Use get_seed/1 and set_seed/1 instead if you need reproducibility.'
+		comment is 'Resets the random generator seed to its default value. Use ``get_seed/1`` and ``set_seed/1`` instead if you need reproducibility.'
 	]).
 
 	:- public(randomize/1).

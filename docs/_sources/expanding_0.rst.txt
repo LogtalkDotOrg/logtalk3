@@ -42,7 +42,7 @@ Public predicates
 ``goal_expansion/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Defines a goal expansion. Called recursively until a fixed point is reached on goals found while compiling a source file (except for goals wrapped using the {}/1 compiler bypass control construct).
+Defines a goal expansion. Called recursively until a fixed point is reached on goals found while compiling a source file (except for goals wrapped using the ``{}/1`` compiler bypass control construct).
 
 | **Compilation flags:**
 |    ``static``
@@ -65,7 +65,7 @@ Defines a goal expansion. Called recursively until a fixed point is reached on g
 ``term_expansion/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Defines a term expansion. Called until it succeeds on all terms read while compiling a source file (except for terms skipped by using the conditional compilation directives or wrapped using the {}/1 compiler bypass control construct).
+Defines a term expansion. Called until it succeeds on all terms read while compiling a source file (except for terms skipped by using the conditional compilation directives or wrapped using the ``{}/1`` compiler bypass control construct).
 
 | **Compilation flags:**
 |    ``static``

@@ -8,7 +8,7 @@
 ``expected``
 ============
 
-Constructors for expected term references. A reference contains either an expected term or an unexpected term. References should be regarded as opaque terms and always used with the "expected(_)" object by passing the reference as a parameter.
+Constructors for expected term references. A reference contains either an expected term or an unexpected term. References should be regarded as opaque terms and always used with the ``expected/1`` object by passing the reference as a parameter.
 
 | **Author:** Paulo Moura
 | **Version:** 1.2
@@ -25,7 +25,7 @@ Constructors for expected term references. A reference contains either an expect
 | **Remarks:**
 
 
-   - *Type-checking support:* This object also defines a type "expected" for use with the "type" library object.
+   - *Type-checking support:* This object also defines a type ``expected`` for use with the ``type`` library object.
 
 .. contents::
    :local:
@@ -90,7 +90,7 @@ Constructs a reference from an expected term.
 ``from_goal/4``
 ^^^^^^^^^^^^^^^
 
-Constructs a reference by calling Goal that binds and holds Expected on success. Otherwise returns a reference with the unexpected goal error or failure represented by the Failure argument.
+Constructs a reference by calling ``Goal`` that binds and holds ``Expected`` on success. Otherwise returns a reference with the unexpected goal error or failure represented by the ``Failure`` argument.
 
 | **Compilation flags:**
 |    ``static``
@@ -115,7 +115,7 @@ Constructs a reference by calling Goal that binds and holds Expected on success.
 ``from_goal/3``
 ^^^^^^^^^^^^^^^
 
-Constructs a reference by calling Goal that binds and uses Expected on success. Otherwise returns a reference with the unexpected goal error or failure represented by the atom "fail".
+Constructs a reference by calling ``Goal`` that binds and uses ``Expected`` on success. Otherwise returns a reference with the unexpected goal error or failure represented by the atom ``fail``.
 
 | **Compilation flags:**
 |    ``static``

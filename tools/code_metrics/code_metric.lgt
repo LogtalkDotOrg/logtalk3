@@ -56,7 +56,7 @@
 	:- public(rdirectory/1).
 	:- mode(rdirectory(+atom), one).
 	:- info(rdirectory/1, [
-		comment is 'Recursive version of the directory/1 predicate.',
+		comment is 'Recursive version of the ``directory/1`` predicate.',
 		argnames is ['Directory']
 	]).
 
@@ -70,7 +70,7 @@
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
 	:- info(rlibrary/1, [
-		comment is 'Recursive version of the library/1 predicate.',
+		comment is 'Recursive version of the ``library/1`` predicate.',
 		argnames is ['Library']
 	]).
 

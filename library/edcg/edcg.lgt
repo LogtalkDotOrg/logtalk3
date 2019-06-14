@@ -34,7 +34,7 @@ SOFTWARE.
 		copyright is 'Copyright (C) 1992 Peter Van Roy',
 		license is 'MIT',
 		remarks is [
-			'Usage' - 'Compile source files with objects (or categories) defining EDCGs using the compiler option hook(edcg).'
+			'Usage' - 'Compile source files with objects (or categories) defining EDCGs using the compiler option ``hook(edcg)``.'
 		]
 	]).
 
@@ -71,7 +71,7 @@ SOFTWARE.
 	:- dynamic(pass_info/2).
 	:- mode(pass_info(?atom, ?term), zero_or_more).
 	:- info(pass_info/2, [
-		comment is 'Long form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with =/2 as the joiner function.',
+		comment is 'Long form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with ``=/2`` as the joiner function.',
 		argnames is ['Argument', 'PStart']
 	]).
 
@@ -79,7 +79,7 @@ SOFTWARE.
 	:- dynamic(pass_info/1).
 	:- mode(pass_info(?atom), zero_or_more).
 	:- info(pass_info/1, [
-		comment is 'Short form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with =/2 as the joiner function.',
+		comment is 'Short form for declaring passed arguments. Passed arguments are conceptually the same as accumulators with ``=/2`` as the joiner function.',
 		argnames is ['Argument']
 	]).
 

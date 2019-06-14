@@ -48,7 +48,7 @@
 	:- public(frozen/2).
 	:- mode(frozen(@var, --callable), one).
 	:- info(frozen/2, [
-		comment is 'Unifies Goal with the goal delayed by Variable. When no goals are frozen on Variable, Goal is unified with true.',
+		comment is 'Unifies ``Goal`` with the goal delayed by ``Variable``. When no goals are frozen on ``Variable``, ``Goal`` is unified with true.',
 		argnames is ['Variable', 'Goal']
 	]).
 
@@ -56,7 +56,7 @@
 	:- meta_predicate(when(*,0)).
 	:- mode(when(+callable, +callable), zero_or_more).
 	:- info(when/2, [
-		comment is 'Calls Goal when Condition becomes true. The portable conditions are: nonvar/1, ground/1, (,)/2, and (;)/2.',
+		comment is 'Calls ``Goal`` when ``Condition`` becomes true. The portable conditions are: ``nonvar/1``, ``ground/1``, ``(,)/2``, and ``(;)/2``.',
 		argnames is ['Condition', 'Goal']
 	]).
 

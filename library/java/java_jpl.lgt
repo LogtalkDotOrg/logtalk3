@@ -25,7 +25,7 @@
 		version is 1.3,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2019/06/13,
-		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.',
+		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object',
 			'ReturnValue' - 'Value returned by a method call (possibly the Java value void)'
@@ -77,7 +77,7 @@
 		version is 1.01,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2019/06/13,
-		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.',
+		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object'
 		],
@@ -213,9 +213,9 @@
 		version is 1.01,
 		author is 'Paulo Moura',
 		date is 2019/06/13,
-		comment is 'Hook object to optimize messages to the java/1-2 objects that otherwise would trigger the forward/1 handler.',
+		comment is 'Hook object to optimize messages to the ``java/1-2`` objects that otherwise would trigger the ``forward/1`` handler.',
 		remarks is [
-			'Usage' - 'Compile source files with messages to the java/1-2 objects using the compiler option hook(java_hook).'
+			'Usage' - 'Compile source files with messages to the ``java/1-2`` objects using the compiler option ``hook(java_hook)``.'
 		],
 		see_also is [
 			java(_,_), java(_)

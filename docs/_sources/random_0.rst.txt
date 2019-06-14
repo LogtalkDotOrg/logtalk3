@@ -26,7 +26,7 @@ Portable random number generator predicates. Core predicates originally written 
 | **Remarks:**
 
 
-   - *Multiple random number generators:* To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.
+   - *Multiple random number generators:* To define multiple random number generators, simply extend this object. The derived objects must send to self the ``reset_seed/0`` message.
 
 .. contents::
    :local:
@@ -45,7 +45,7 @@ Public predicates
 ``reset_seed/0``
 ^^^^^^^^^^^^^^^^
 
-Resets the random generator seed to its default value. Use get_seed/1 and set_seed/1 instead if you need reproducibility.
+Resets the random generator seed to its default value. Use ``get_seed/1`` and ``set_seed/1`` instead if you need reproducibility.
 
 | **Compilation flags:**
 |    ``static, synchronized``

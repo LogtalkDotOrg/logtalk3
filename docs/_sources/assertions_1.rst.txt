@@ -8,7 +8,7 @@
 ``assertions(Mode)``
 ====================
 
-A simple assertions framework. Can be used as a hook object for either suppressing assertions ("production" mode) or expanding them with file context information ("debug" mode).
+A simple assertions framework. Can be used as a hook object for either suppressing assertions (``production`` mode) or expanding them with file context information (``debug`` mode).
 
 | **Author:** Paulo Moura
 | **Version:** 2.1
@@ -68,7 +68,7 @@ Checks that an assertion is true. Uses the structured message printing mechanism
 ``assertion/2``
 ^^^^^^^^^^^^^^^
 
-Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure. The context argument can be used to pass location data.
+Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure. The context argument can be used to e.g. pass location data.
 
 | **Compilation flags:**
 |    ``static``

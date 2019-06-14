@@ -25,7 +25,7 @@
 		version is 2.1,
 		author is 'Paulo Moura',
 		date is 2018/02/20,
-		comment is 'A simple assertions framework. Can be used as a hook object for either suppressing assertions ("production" mode) or expanding them with file context information ("debug" mode).',
+		comment is 'A simple assertions framework. Can be used as a hook object for either suppressing assertions (``production`` mode) or expanding them with file context information (``debug`` mode).',
 		parnames is ['Mode']
 	]).
 
@@ -41,7 +41,7 @@
 	:- meta_predicate(assertion(*, 0)).
 	:- mode(assertion(@term, @callable), one).
 	:- info(assertion/2, [
-		comment is 'Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure. The context argument can be used to pass location data.',
+		comment is 'Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure. The context argument can be used to e.g. pass location data.',
 		argnames is ['Context', 'Goal']
 	]).
 

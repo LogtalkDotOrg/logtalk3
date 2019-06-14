@@ -88,7 +88,7 @@ True if Interval is a valid interval.
 ``before/2``
 ^^^^^^^^^^^^
 
-True if Interval1 takes place before Interval2.
+True if ``Interval1`` takes place before ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -111,7 +111,7 @@ True if Interval1 takes place before Interval2.
 ``after/2``
 ^^^^^^^^^^^
 
-True if Interval1 takes place after Interval2.
+True if ``Interval1`` takes place after ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -134,7 +134,7 @@ True if Interval1 takes place after Interval2.
 ``meets/2``
 ^^^^^^^^^^^
 
-True if Interval1 meets Interval2.
+True if ``Interval1`` meets ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -157,7 +157,7 @@ True if Interval1 meets Interval2.
 ``met_by/2``
 ^^^^^^^^^^^^
 
-True if Interval1 is met by Interval2.
+True if ``Interval1`` is met by ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -180,7 +180,7 @@ True if Interval1 is met by Interval2.
 ``overlaps/2``
 ^^^^^^^^^^^^^^
 
-True if Interval1 overlaps with Interval2.
+True if ``Interval1`` overlaps with ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -203,7 +203,7 @@ True if Interval1 overlaps with Interval2.
 ``overlapped_by/2``
 ^^^^^^^^^^^^^^^^^^^
 
-True if Interval1 is overlapped by Interval2.
+True if ``Interval1`` is overlapped by ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -226,7 +226,7 @@ True if Interval1 is overlapped by Interval2.
 ``starts/2``
 ^^^^^^^^^^^^
 
-True if Interval1 starts Interval2.
+True if ``Interval1`` starts ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -249,7 +249,7 @@ True if Interval1 starts Interval2.
 ``started_by/2``
 ^^^^^^^^^^^^^^^^
 
-True if Interval1 is started by Interval2.
+True if ``Interval1`` is started by ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -272,7 +272,7 @@ True if Interval1 is started by Interval2.
 ``during/2``
 ^^^^^^^^^^^^
 
-True if Interval1 occurs during Interval2.
+True if ``Interval1`` occurs during ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -295,7 +295,7 @@ True if Interval1 occurs during Interval2.
 ``contains/2``
 ^^^^^^^^^^^^^^
 
-True if Interval1 contains Interval2.
+True if ``Interval1`` contains ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -318,7 +318,7 @@ True if Interval1 contains Interval2.
 ``finishes/2``
 ^^^^^^^^^^^^^^
 
-True if Interval1 finishes Interval2.
+True if ``Interval1`` finishes ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -341,7 +341,7 @@ True if Interval1 finishes Interval2.
 ``finished_by/2``
 ^^^^^^^^^^^^^^^^^
 
-True if Interval1 is finished by Interval2.
+True if ``Interval1`` is finished by ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -364,7 +364,7 @@ True if Interval1 is finished by Interval2.
 ``equal/2``
 ^^^^^^^^^^^
 
-True if Interval1 is equal to Interval2.
+True if ``Interval1`` is equal to ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``

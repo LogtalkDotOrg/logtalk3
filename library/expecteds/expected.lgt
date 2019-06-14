@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of Logtalk <https://logtalk.org/>  
+%
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 2017-2018 Paulo Moura <pmoura@logtalk.org>
-%  
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,9 +24,9 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2019/01/23,
-		comment is 'Constructors for expected term references. A reference contains either an expected term or an unexpected term. References should be regarded as opaque terms and always used with the "expected(_)" object by passing the reference as a parameter.',
+		comment is 'Constructors for expected term references. A reference contains either an expected term or an unexpected term. References should be regarded as opaque terms and always used with the ``expected/1`` object by passing the reference as a parameter.',
 		remarks is [
-			'Type-checking support' - 'This object also defines a type "expected" for use with the "type" library object.'
+			'Type-checking support' - 'This object also defines a type ``expected`` for use with the ``type`` library object.'
 		],
 		see_also is [expected(_), type]
 	]).
@@ -49,7 +49,7 @@
 	:- meta_predicate(from_goal(0, *, *, *)).
 	:- mode(from_goal(+callable, --term, @term, --nonvar), one).
 	:- info(from_goal/4, [
-		comment is 'Constructs a reference by calling Goal that binds and holds Expected on success. Otherwise returns a reference with the unexpected goal error or failure represented by the Failure argument.',
+		comment is 'Constructs a reference by calling ``Goal`` that binds and holds ``Expected`` on success. Otherwise returns a reference with the unexpected goal error or failure represented by the ``Failure`` argument.',
 		argnames is ['Goal', 'Expected', 'Failure', 'Reference']
 	]).
 
@@ -57,7 +57,7 @@
 	:- meta_predicate(from_goal(0, *, *)).
 	:- mode(from_goal(+callable, --term, --nonvar), one).
 	:- info(from_goal/3, [
-		comment is 'Constructs a reference by calling Goal that binds and uses Expected on success. Otherwise returns a reference with the unexpected goal error or failure represented by the atom "fail".',
+		comment is 'Constructs a reference by calling ``Goal`` that binds and uses ``Expected`` on success. Otherwise returns a reference with the unexpected goal error or failure represented by the atom ``fail``.',
 		argnames is ['Goal', 'Expected', 'Reference']
 	]).
 
@@ -116,7 +116,7 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2019/01/24,
-		comment is 'Expected term reference predicates. Requires passing a reference constructed using the "expected" object as a parameter.',
+		comment is 'Expected term reference predicates. Requires passing a reference (constructed using the ``expected`` object) as a parameter.',
 		parnames is ['Reference'],
 		see_also is [expected]
 	]).
@@ -124,20 +124,20 @@
 	:- public(is_unexpected/0).
 	:- mode(is_unexpected, zero_or_one).
 	:- info(is_unexpected/0, [
-		comment is 'True if the reference holds an unexpected term. Avoid whenever possible by using instead the if_unexpected/1 predicate.'
+		comment is 'True if the reference holds an unexpected term. Avoid whenever possible by using instead the ``if_unexpected/1`` predicate.'
 	]).
 
 	:- public(is_expected/0).
 	:- mode(is_expected, zero_or_one).
 	:- info(is_expected/0, [
-		comment is 'True if the reference holds an expected term. Avoid whenever possible by using instead the if_expected/1 predicate.'
+		comment is 'True if the reference holds an expected term. Avoid whenever possible by using instead the ``if_expected/1`` predicate.'
 	]).
 
 	:- public(if_unexpected/1).
 	:- meta_predicate(if_unexpected(1)).
 	:- mode(if_unexpected(+callable), zero_or_more).
 	:- info(if_unexpected/1, [
-		comment is 'Applies a closure when the reference holds an unexpected term using the term as argument. Succeeds otherwise. Can be used to throw the exception hold by the reference by calling it the atom "throw".',
+		comment is 'Applies a closure when the reference holds an unexpected term using the term as argument. Succeeds otherwise. Can be used to throw the exception hold by the reference by calling it the atom ``throw``.',
 		argnames is ['Closure']
 	]).
 
@@ -289,7 +289,7 @@
 		parameter(1, Reference),
 		(	Reference = expected(Expected) ->
 			true
-		;	once(Goal)	
+		;	once(Goal)
 		).
 
 	or_else_throw(Expected) :-

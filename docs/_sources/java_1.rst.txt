@@ -11,7 +11,7 @@
 * ``Reference`` - Either a class name or a Java reference to an object
 
 
-Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.
+Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.
 
 | **Author:** Paulo Moura and Sergio Castro
 | **Version:** 1.01

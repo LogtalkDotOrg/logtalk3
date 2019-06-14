@@ -1,15 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of Logtalk <https://logtalk.org/>  
-%  Copyright 2017 Sergio Castro <sergioc78@gmail.com> and  
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
 %  Paulo Moura <pmoura@logtalk.org>
-%  
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,9 +25,9 @@
 		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2019/01/23,
-		comment is 'Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
+		comment is 'Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the ``optional/1`` object by passing the reference as a parameter.',
 		remarks is [
-			'Type-checking support' - 'This object also defines a type "optional" for use with the "type" library object.'
+			'Type-checking support' - 'This object also defines a type ``optional`` for use with the ``type`` library object.'
 		],
 		see_also is [optional(_), type]
 	]).
@@ -50,7 +50,7 @@
 	:- meta_predicate(from_goal(0, *, *)).
 	:- mode(from_goal(+callable, --term, --nonvar), one).
 	:- info(from_goal/3, [
-		comment is 'Constructs a reference by calling Goal that binds and holds Term on success. Returns an empty reference if the goal fails or throws an error.',
+		comment is 'Constructs a reference by calling ``Goal`` that binds and holds ``Term`` on success. Returns an empty reference if the goal fails or throws an error.',
 		argnames is ['Goal', 'Term', 'Reference']
 	]).
 
@@ -106,7 +106,7 @@
 		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2019/01/24,
-		comment is 'Optional reference predicates. Requires passing a reference constructed using the "optional" object as a parameter.',
+		comment is 'Optional reference predicates. Requires passing a reference constructed using the ``optional`` object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [optional]
 	]).
@@ -114,13 +114,13 @@
 	:- public(is_empty/0).
 	:- mode(is_empty, zero_or_one).
 	:- info(is_empty/0, [
-		comment is 'True if the reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.'
+		comment is 'True if the reference is empty. Avoid whenever possible by using instead the ``if_empty/1`` predicate.'
 	]).
 
 	:- public(is_present/0).
 	:- mode(is_present, zero_or_one).
 	:- info(is_present/0, [
-		comment is 'True if the reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.'
+		comment is 'True if the reference holds a term. Avoid whenever possible by using instead the ``if_present/1`` predicate.'
 	]).
 
 	:- public(if_empty/1).

@@ -29,9 +29,9 @@
 		version is 7.12,
 		author is 'Paulo Moura',
 		date is 2019/06/13,
-		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.',
+		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
-			'Usage' - 'Define test objects as extensions of the "lgtunit" object and compile their source files using the compiler option hook(lgtunit).',
+			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
 			'Portability' - 'Deterministic unit tests are currently not available when using Lean Prolog or Quintus Prolog as backend compilers.',
 			'Known issues' - 'Parameter variables cannot currently be used in the definition of test options.'
 		]
@@ -61,7 +61,7 @@
 	:- public(run/2).
 	:- mode(run(+atom, +atom), one).
 	:- info(run/2, [
-		comment is 'Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).',
+		comment is 'Runs the unit tests, writing the results to the specified file. Mode can be either ``write`` (to create a new file) or ``append`` (to add results to an existing file).',
 		argnames is ['File', 'Mode']
 	]).
 
@@ -84,7 +84,7 @@
 	:- meta_predicate(deterministic(0, *)).
 	:- mode(deterministic(+callable, --atom), zero_or_one).
 	:- info(deterministic/2, [
-		comment is 'Reified version of the deterministic/1 predicate. True if the goal succeeds. Returns a boolean value (true or false) indicating if the goal succeeded without leaving choice-points.',
+		comment is 'Reified version of the ``deterministic/1`` predicate. True if the goal succeeds. Returns a boolean value (``true`` or ``false``) indicating if the goal succeeded without leaving choice-points.',
 		argnames is ['Goal', 'Deterministic']
 	]).
 
@@ -115,14 +115,14 @@
 	:- public(quick_check/3).
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
 	:- info(quick_check/3, [
-		comment is 'Reified version of the quick_check/2 predicate. Reports the result as "passed", "failed(Goal)" where Goal is the test that failed, or "error(Error,Template)".',
+		comment is 'Reified version of the quick_check/2 predicate. Reports the result as ``passed``, ``failed(Goal)`` where ``Goal`` is the test that failed, or ``error(Error,Template)``.',
 		argnames is ['Template', 'Result', 'Options']
 	]).
 
 	:- public(quick_check/2).
 	:- mode(quick_check(@callable, ++list(compound)), zero_or_one).
 	:- info(quick_check/2, [
-		comment is 'Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option n(NumberOfTests). Default is to run 100 random tests.',
+		comment is 'Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option ``n(NumberOfTests)``. Default is to run 100 random tests.',
 		argnames is ['Template', 'Options']
 	]).
 
@@ -137,7 +137,7 @@
 	:- meta_predicate(benchmark(0, *)).
 	:- mode(benchmark(+callable, -float), one).
 	:- info(benchmark/2, [
-		comment is 'Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
+		comment is 'Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.',
 		argnames is ['Goal', 'Time']
 	]).
 
@@ -145,7 +145,7 @@
 	:- meta_predicate(benchmark_reified(0, *, *)).
 	:- mode(benchmark_reified(+callable, -float, -callable), one).
 	:- info(benchmark_reified/3, [
-		comment is 'Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)). Uses cpu clock.',
+		comment is 'Benchmarks a goal and returns the total execution time in seconds plus its result (``success``, ``failure``, or ``error(Error))``. Uses CPU clock.',
 		argnames is ['Goal', 'Time', 'Result']
 	]).
 
@@ -153,7 +153,7 @@
 	:- meta_predicate(benchmark(0, *, *)).
 	:- mode(benchmark(@callable, +positive_integer, -float), one).
 	:- info(benchmark/3, [
-		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
+		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses CPU clock. Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.',
 		argnames is ['Goal', 'Repetitions', 'Time']
 	]).
 
@@ -161,7 +161,7 @@
 	:- meta_predicate(benchmark(0, *, *, *)).
 	:- mode(benchmark(@callable, +positive_integer, +atom, -float), one).
 	:- info(benchmark/4, [
-		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (cpu or wall). Goals that may throw an exception should be wrapped by the catch/3 control construct.',
+		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (``cpu`` or ``wall``). Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.',
 		argnames is ['Goal', 'Repetitions', 'Clock', 'Time']
 	]).
 
@@ -175,21 +175,21 @@
 	:- public(approximately_equal/3).
 	:- mode(approximately_equal(+number, +number, +number), zero_or_one).
 	:- info(approximately_equal/3, [
-		comment is 'Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. Type-checked.',
+		comment is 'Compares two numbers for approximate equality given an epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.',
 		argnames is ['Number1', 'Number2', 'Epsilon']
 	]).
 
 	:- public(essentially_equal/3).
 	:- mode(essentially_equal(+number, +number, +number), zero_or_one).
 	:- info(essentially_equal/3, [
-		comment is 'Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. Type-checked.',
+		comment is 'Compares two numbers for essential equality given an epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.',
 		argnames is ['Number1', 'Number2', 'Epsilon']
 	]).
 
 	:- public(tolerance_equal/4).
 	:- mode(tolerance_equal(+number, +number, +number, +number), zero_or_one).
 	:- info(tolerance_equal/4, [
-		comment is 'Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). Type-checked.',
+		comment is 'Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula ``abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance)``. Type-checked.',
 		argnames is ['Number1', 'Number2', 'RelativeTolerance', 'AbsoluteTolerance']
 	]).
 
@@ -198,14 +198,14 @@
 	:- mode('=~='(+number, +number), zero_or_one).
 	:- mode('=~='(+list(number), +list(number)), zero_or_one).
 	:- info(('=~=')/2, [
-		comment is 'Compares two numbers (or lists of numbers) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.',
+		comment is 'Compares two numbers (or lists of numbers) for approximate equality using ``100*epsilon`` for the absolute error and, if that fails, ``99.999%`` accuracy for the relative error. But these precision values may not be adequate for all cases. Type-checked.',
 		argnames is ['Number1', 'Number2']
 	]).
 
 	:- public(epsilon/1).
 	:- mode(epsilon(-float), one).
 	:- info(epsilon/1, [
-		comment is 'Returns the value of epsilon used in the definition of the (=~=)/2 predicate.',
+		comment is 'Returns the value of epsilon used in the definition of the ``(=~=)/2`` predicate.',
 		argnames is ['Epsilon']
 	]).
 
@@ -238,25 +238,25 @@
 	:- protected(condition/0).
 	:- mode(condition, zero_or_one).
 	:- info(condition/0, [
-		comment is 'Verifies conditions for running the tests. Defaults to the goal true.'
+		comment is 'Verifies conditions for running the tests. Defaults to the goal ``true``.'
 	]).
 
 	:- protected(setup/0).
 	:- mode(setup, zero_or_one).
 	:- info(setup/0, [
-		comment is 'Setup environment before running the test set. Defaults to the goal true.'
+		comment is 'Setup environment before running the test set. Defaults to the goal ``true``.'
 	]).
 
 	:- protected(cleanup/0).
 	:- mode(cleanup, zero_or_one).
 	:- info(cleanup/0, [
-		comment is 'Cleanup environment after running the test set. Defaults to the goal true.'
+		comment is 'Cleanup environment after running the test set. Defaults to the goal ``true``.'
 	]).
 
 	:- protected(make/1).
 	:- mode(make(?atom), zero_or_one).
 	:- info(make/1, [
-		comment is 'Make target for automatically running the test set when calling the logtalk_make/1 built-in predicate. No default. Possible values are {all, check}.'
+		comment is 'Make target for automatically running the test set when calling the ``logtalk_make/1`` built-in predicate. No default. Possible values are ``all`` and ``check``.'
 	]).
 
 	:- protected(note/1).
@@ -280,7 +280,7 @@
 	:- protected(set_text_input/3).
 	:- mode(set_text_input(+atom, +atom, +list(stream_option)), one).
 	:- info(set_text_input/3, [
-		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.',
+		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.',
 		argnames is ['Alias', 'Contents', 'Options']
 	]).
 
@@ -335,7 +335,7 @@
 	:- protected(set_binary_input/3).
 	:- mode(set_binary_input(+atom, +list(byte), +list(stream_option)), one).
 	:- info(set_binary_input/3, [
-		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.',
+		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.',
 		argnames is ['Alias', 'Bytes', 'Options']
 	]).
 

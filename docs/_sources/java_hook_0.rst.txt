@@ -8,7 +8,7 @@
 ``java_hook``
 =============
 
-Hook object to optimize messages to the java/1-2 objects that otherwise would trigger the forward/1 handler.
+Hook object to optimize messages to the ``java/1-2`` objects that otherwise would trigger the ``forward/1`` handler.
 
 | **Author:** Paulo Moura
 | **Version:** 1.01
@@ -24,7 +24,7 @@ Hook object to optimize messages to the java/1-2 objects that otherwise would tr
 | **Remarks:**
 
 
-   - *Usage:* Compile source files with messages to the java/1-2 objects using the compiler option hook(java_hook).
+   - *Usage:* Compile source files with messages to the ``java/1-2`` objects using the compiler option ``hook(java_hook)``.
 
 .. contents::
    :local:

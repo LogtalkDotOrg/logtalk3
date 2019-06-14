@@ -296,7 +296,7 @@
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="random/1"> </div><div class="section" id="random-1">
 <span id="randomp-0-random-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">random/1</span></code></a><a class="headerlink" href="#random-1" title="Permalink to this headline">¶</a></h3>
-<p>Returns a new random float value in the interval [0.0, 1.0[.</p>
+<p>Returns a new random float value in the interval <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0[</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -317,7 +317,7 @@
 <div id="between/3"> </div></div>
 <div class="section" id="between-3">
 <span id="randomp-0-between-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">between/3</span></code></a><a class="headerlink" href="#between-3" title="Permalink to this headline">¶</a></h3>
-<p>Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or Upper are not integers or if Lower &gt; Upper.</p>
+<p>Returns a new random integer in the interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper]</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Lower</span></code> or <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are not integers or if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -401,7 +401,7 @@
 <div id="sequence/4"> </div></div>
 <div class="section" id="sequence-4">
 <span id="randomp-0-sequence-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">sequence/4</span></code></a><a class="headerlink" href="#sequence-4" title="Permalink to this headline">¶</a></h3>
-<p>Returns a list of the given length of random integers in random order in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers or if Lower &gt; Upper.</p>
+<p>Returns list of random integers of given length in random order in interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper]</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Length</span></code>, <code class="docutils literal notranslate"><span class="pre">Lower</span></code>, or <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are not integers or if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -422,7 +422,7 @@
 <div id="set/4"> </div></div>
 <div class="section" id="set-4">
 <span id="randomp-0-set-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set/4</span></code></a><a class="headerlink" href="#set-4" title="Permalink to this headline">¶</a></h3>
-<p>Returns an ordered set of the given size of random integers in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers, if Lower &gt; Upper, or if Length &gt; Upper - Lower + 1.</p>
+<p>Returns ordered set of random integers of given size in interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper]</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Length</span></code>, <code class="docutils literal notranslate"><span class="pre">Lower</span></code>, or <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are not integers, if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>, or if <code class="docutils literal notranslate"><span class="pre">Length</span> <span class="pre">&gt;</span> <span class="pre">Upper</span> <span class="pre">-</span> <span class="pre">Lower</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -443,7 +443,7 @@
 <div id="random/3"> </div></div>
 <div class="section" id="random-3">
 <span id="randomp-0-random-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">random/3</span></code></a><a class="headerlink" href="#random-3" title="Permalink to this headline">¶</a></h3>
-<p>Returns a new random value in the interval [Lower, Upper[. Fails if Lower &gt; Upper. Deprecated. Use between/3 for integers.</p>
+<p>Returns a new random value in the interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper[</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>. Deprecated. Use <code class="docutils literal notranslate"><span class="pre">between/3</span></code> for integers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -465,7 +465,7 @@
 <div id="randseq/4"> </div></div>
 <div class="section" id="randseq-4">
 <span id="randomp-0-randseq-4"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">randseq/4</span></code></a><a class="headerlink" href="#randseq-4" title="Permalink to this headline">¶</a></h3>
-<p>Returns a list of the given length of random values in random order in the interval [Lower, Upper[. Fails if Lower &gt; Upper or if the arguments are neither integers or floats. Deprecated. Use sequence/4 for integers.</p>
+<p>Returns list of random values of given length in random order in interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper[</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code> or if the arguments are neither integers or floats. Deprecated. Use <code class="docutils literal notranslate"><span class="pre">sequence/4</span></code> for integers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -487,7 +487,7 @@
 <div id="randset/4"> </div></div>
 <div class="section" id="randset-4">
 <span id="randomp-0-randset-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">randset/4</span></code></a><a class="headerlink" href="#randset-4" title="Permalink to this headline">¶</a></h3>
-<p>Returns an ordered set of the given size of random values in the interval [Lower, Upper[. Fails if the arguments are neither integers or floats, Lower &gt; Upper, or Length &gt; Upper - Lower when the arguments are integers. Deprecated. Use set/4 for integers.</p>
+<p>Returns ordered set of random values of given size in interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper[</span></code>. Fails if the arguments are neither integers or floats, <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>, or <code class="docutils literal notranslate"><span class="pre">Length</span> <span class="pre">&gt;</span> <span class="pre">Upper</span> <span class="pre">-</span> <span class="pre">Lower</span></code> when arguments are integers. Deprecated. Use <code class="docutils literal notranslate"><span class="pre">set/4</span></code> for integers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -530,7 +530,7 @@
 <div id="set_seed/1"> </div></div>
 <div class="section" id="set-seed-1">
 <span id="randomp-0-set-seed-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code></a><a class="headerlink" href="#set-seed-1" title="Permalink to this headline">¶</a></h3>
-<p>Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.</p>
+<p>Sets the random generator seed to a given value returned by calling the <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -568,7 +568,7 @@
 <div id="maybe/1"> </div></div>
 <div class="section" id="maybe-1">
 <span id="randomp-0-maybe-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">maybe/1</span></code></a><a class="headerlink" href="#maybe-1" title="Permalink to this headline">¶</a></h3>
-<p>Succeeds with probability Probability or fails with probability 1 - Probability. Fails if Probability is not a float or is outside the interval [0.0, 1.0].</p>
+<p>Succeeds with probability <code class="docutils literal notranslate"><span class="pre">Probability</span></code> or fails with probability <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">Probability</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Probability</span></code> is not a float or is outside the interval <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -589,7 +589,7 @@
 <div id="maybe/2"> </div></div>
 <div class="section" id="maybe-2">
 <span id="randomp-0-maybe-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">maybe/2</span></code></a><a class="headerlink" href="#maybe-2" title="Permalink to this headline">¶</a></h3>
-<p>Succeeds with probability K/N where K and N are integers satisfying the equation 0 =&lt; K =&lt; N. Fails otherwise.</p>
+<p>Succeeds with probability <code class="docutils literal notranslate"><span class="pre">K/N</span></code> where <code class="docutils literal notranslate"><span class="pre">K</span></code> and <code class="docutils literal notranslate"><span class="pre">N</span></code> are integers satisfying the equation <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=&lt;</span> <span class="pre">K</span> <span class="pre">=&lt;</span> <span class="pre">N</span></code>. Fails otherwise.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

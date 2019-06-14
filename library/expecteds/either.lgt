@@ -26,8 +26,8 @@
 		date is 2019/01/24,
 		comment is 'Types and predicates for extended type-checking of expected term references and for handling lists of expected term references.',
 		remarks is [
-			'Type either(ExpectedType, UnexpectedType)' - 'Allows type-checking expected references where the expected and unexpected terms must be of the given types.',
-			'QuickCheck support' - 'Defines clauses for the type::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpectedType) type.'
+			'Type-checking support' - 'Defines a ``either(ExpectedType, UnexpectedType)`` type for checking expected references where the expected and unexpected terms must be of the given types.',
+			'QuickCheck support' - 'Defines clauses for the ``type::arbitrary/1-2`` predicates to allow generating random values for the ``either(ExpectedType, UnexpectedType)`` type.'
 		],
 		see_also is [expected, expected(_), type, arbitrary]
 	]).
@@ -91,7 +91,7 @@
 			type::arbitrary(ExpectedType, Expected),
 			expected::of_expected(Expected, Arbitrary)
 		;	type::arbitrary(UnexpectedType, Unexpected),
-			expected::of_unexpected(Unexpected, Arbitrary)	
+			expected::of_unexpected(Unexpected, Arbitrary)
 		).
 
 	expecteds([], []).

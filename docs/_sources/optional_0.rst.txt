@@ -8,7 +8,7 @@
 ``optional``
 ============
 
-Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.
+Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the ``optional/1`` object by passing the reference as a parameter.
 
 | **Author:** Paulo Moura
 | **Version:** 1.4
@@ -25,7 +25,7 @@ Constructors for optional term references. A reference is either empty or holds 
 | **Remarks:**
 
 
-   - *Type-checking support:* This object also defines a type "optional" for use with the "type" library object.
+   - *Type-checking support:* This object also defines a type ``optional`` for use with the ``type`` library object.
 
 .. contents::
    :local:
@@ -90,7 +90,7 @@ Constructs a reference holding a term.
 ``from_goal/3``
 ^^^^^^^^^^^^^^^
 
-Constructs a reference by calling Goal that binds and holds Term on success. Returns an empty reference if the goal fails or throws an error.
+Constructs a reference by calling ``Goal`` that binds and holds ``Term`` on success. Returns an empty reference if the goal fails or throws an error.
 
 | **Compilation flags:**
 |    ``static``

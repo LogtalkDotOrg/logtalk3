@@ -33,7 +33,7 @@
 		date is 2019/06/04,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
-			'Usage' - 'Simply load this object before running your tests using the goal logtalk_load(lgtunit(xunit_output)).'
+			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
 		]
 	]).
 

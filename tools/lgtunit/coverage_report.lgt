@@ -31,9 +31,9 @@
 		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2019/06/04,
-		comment is 'Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.',
+		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
-			'Usage' - 'Simply load this object before running your tests using the goal logtalk_load(lgtunit(coverage_report)).'
+			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'
 		]
 	]).
 
