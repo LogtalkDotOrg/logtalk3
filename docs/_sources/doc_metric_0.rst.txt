@@ -30,9 +30,9 @@ Entity and entity predicates documentation score.
 
    - *Score range:* Score is a integer percentage where a 100% score means that all expected documentation information is present.
 
-   - *Score weights:* The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate entity_predicates_weights_hook/2.
+   - *Score weights:* The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate ``entity_predicates_weights_hook/2``.
 
-   - *Score customization:* The individual scores of entity info/1 pairs and predicate info/2 pairs can be customized using the entity_info_pair_score_hook/3 and predicate_info_pair_score_hook/4 predicates.
+   - *Score customization:* The individual scores of entity ``info/1`` pairs and predicate ``info/2`` pairs can be customized using the ``entity_info_pair_score_hook/3`` and ``predicate_info_pair_score_hook/4`` predicates.
 
 .. contents::
    :local:
@@ -74,7 +74,7 @@ Relative weight between entity documentation and predicates documentation in per
 ``entity_info_score_hook/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Maximum score for entity info/1 directives.
+Maximum score for entity ``info/1`` directives.
 
 | **Compilation flags:**
 |    ``dynamic, multifile``
@@ -97,7 +97,7 @@ Maximum score for entity info/1 directives.
 ``entity_info_pair_score_hook/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Score for relevant entity info/1 directive pairs. If defined, the entity_info_score_hook/2 predicate should be defined accordingly.
+Score for relevant entity ``info/1`` directive pairs. If defined, the ``entity_info_score_hook/2`` predicate should be defined accordingly.
 
 | **Compilation flags:**
 |    ``dynamic, multifile``
@@ -120,7 +120,7 @@ Score for relevant entity info/1 directive pairs. If defined, the entity_info_sc
 ``predicate_mode_score_hook/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Maximum score for predicate mode/2 directives.
+Maximum score for predicate ``mode/2`` directives.
 
 | **Compilation flags:**
 |    ``dynamic, multifile``
@@ -143,7 +143,7 @@ Maximum score for predicate mode/2 directives.
 ``predicate_mode_score_hook/5``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Score for a predicate mode/2 directive. If defined, the predicate_mode_score_hook/3 predicate should be defined accordingly.
+Score for a predicate ``mode/2`` directive. If defined, the ``predicate_mode_score_hook/3`` predicate should be defined accordingly.
 
 | **Compilation flags:**
 |    ``dynamic, multifile``
@@ -166,7 +166,7 @@ Score for a predicate mode/2 directive. If defined, the predicate_mode_score_hoo
 ``predicate_info_score_hook/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Maximum score for predicate info/2 directives.
+Maximum score for predicate ``info/2`` directives.
 
 | **Compilation flags:**
 |    ``dynamic, multifile``
@@ -189,7 +189,7 @@ Maximum score for predicate info/2 directives.
 ``predicate_info_pair_score_hook/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Score for a predicate info/2 directive pairs. If defined, the predicate_info_score_hook/3 predicate should be defined accordingly.
+Score for a predicate ``info/2`` directive pairs. If defined, the ``predicate_info_score_hook/3`` predicate should be defined accordingly.
 
 | **Compilation flags:**
 |    ``dynamic, multifile``

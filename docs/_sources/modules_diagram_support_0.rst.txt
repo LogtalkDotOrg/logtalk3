@@ -42,7 +42,7 @@ Public predicates
 ``module_property/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Access to module properties, at least exports/1, file/1, and file/2 but also declares/2, defines/2, calls/2, and provides/3 when possible.
+Access to module properties, at least ``exports/1``, ``file/1``, and ``file/2`` but also ``declares/2``, ``defines/2``, ``calls/2``, and ``provides/3`` when possible.
 
 | **Compilation flags:**
 |    ``static``
@@ -65,7 +65,7 @@ Access to module properties, at least exports/1, file/1, and file/2 but also dec
 ``loaded_file_property/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Access to loaded source file properties, at least basename/1, directory/1 but also parent/1 when possible.
+Access to loaded source file properties, at least ``basename/1``, ``directory/1`` but also ``parent/1`` when possible.
 
 | **Compilation flags:**
 |    ``static``

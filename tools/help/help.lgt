@@ -66,7 +66,7 @@
 	:- public(('/')/2).
 	:- mode('/'(+atom, +integer), zero_or_one).
 	:- info(('/')/2, [
-		comment is 'Provides help on the Functor/Arity built-in control construct, directive, predicate, or method.',
+		comment is 'Provides help on the ``Functor/Arity`` built-in control construct, directive, predicate, or method.',
 		argnames is ['Functor', 'Arity']
 	]).
 
@@ -86,7 +86,7 @@
 	:- public(('//')/2).
 	:- mode('//'(+atom, +integer), zero_or_one).
 	:- info(('//')/2, [
-		comment is 'Provides help on the Functor//Arity built-in non-terminal.',
+		comment is 'Provides help on the ``Functor//Arity`` built-in non-terminal.',
 		argnames is ['Functor', 'Arity']
 	]).
 
@@ -140,7 +140,7 @@
 	:- public(completion/2).
 	:- mode(completion(+atom, -pair), zero_or_more).
 	:- info(completion/2, [
-		comment is 'Provides a completion pair (Completion-Page) for a given prefix.',
+		comment is 'Provides a completion pair, ``Completion-Page``, for a given prefix.',
 		argnames is ['Prefix', 'Completion']
 	]).
 
@@ -164,7 +164,7 @@
 	:- public(completions/2).
 	:- mode(completions(+atom, -lists(pair)), zero_or_more).
 	:- info(completions/2, [
-		comment is 'Provides a list of completions pairs (Completion-Page) for a given prefix.',
+		comment is 'Provides a list of completions pairs, ``Completion-Page``, for a given prefix.',
 		argnames is ['Prefix', 'Completions']
 	]).
 

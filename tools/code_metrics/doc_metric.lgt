@@ -28,8 +28,8 @@
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
 			'Score range' - 'Score is a integer percentage where a 100% score means that all expected documentation information is present.',
-			'Score weights' - 'The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate entity_predicates_weights_hook/2.',
-			'Score customization' - 'The individual scores of entity info/1 pairs and predicate info/2 pairs can be customized using the entity_info_pair_score_hook/3 and predicate_info_pair_score_hook/4 predicates.'
+			'Score weights' - 'The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate ``entity_predicates_weights_hook/2``.',
+			'Score customization' - 'The individual scores of entity ``info/1`` pairs and predicate ``info/2`` pairs can be customized using the ``entity_info_pair_score_hook/3`` and ``predicate_info_pair_score_hook/4`` predicates.'
 		]
 	]).
 
@@ -47,7 +47,7 @@
 	:- dynamic(entity_info_score_hook/2).
 	:- mode(entity_info_score_hook(?term, ?integer), zero_or_one).
 	:- info(entity_info_score_hook/2, [
-		comment is 'Maximum score for entity info/1 directives.',
+		comment is 'Maximum score for entity ``info/1`` directives.',
 		argnames is ['Entity', 'MaximumScore']
 	]).
 
@@ -56,7 +56,7 @@
 	:- dynamic(entity_info_pair_score_hook/3).
 	:- mode(entity_info_pair_score_hook(?callable, ?term, ?integer), zero_or_more).
 	:- info(entity_info_pair_score_hook/3, [
-		comment is 'Score for relevant entity info/1 directive pairs. If defined, the entity_info_score_hook/2 predicate should be defined accordingly.',
+		comment is 'Score for relevant entity ``info/1`` directive pairs. If defined, the ``entity_info_score_hook/2`` predicate should be defined accordingly.',
 		argnames is ['Pair', 'Entity', 'Score']
 	]).
 
@@ -65,7 +65,7 @@
 	:- dynamic(predicate_mode_score_hook/3).
 	:- mode(predicate_mode_score_hook(?term, ?term, ?integer), zero_or_more).
 	:- info(predicate_mode_score_hook/3, [
-		comment is 'Maximum score for predicate mode/2 directives.',
+		comment is 'Maximum score for predicate ``mode/2`` directives.',
 		argnames is ['Entity', 'Predicate', 'MaximumScore']
 	]).
 
@@ -74,7 +74,7 @@
 	:- dynamic(predicate_mode_score_hook/5).
 	:- mode(predicate_mode_score_hook(?term, ?term, ?term, ?term, ?integer), zero_or_one).
 	:- info(predicate_mode_score_hook/5, [
-		comment is 'Score for a predicate mode/2 directive. If defined, the predicate_mode_score_hook/3 predicate should be defined accordingly.',
+		comment is 'Score for a predicate ``mode/2`` directive. If defined, the ``predicate_mode_score_hook/3`` predicate should be defined accordingly.',
 		argnames is ['Template', 'Solutions', 'Entity', 'Predicate', 'Score']
 	]).
 
@@ -83,7 +83,7 @@
 	:- dynamic(predicate_info_score_hook/3).
 	:- mode(predicate_info_score_hook(?term, ?term, ?integer), zero_or_one).
 	:- info(predicate_info_score_hook/3, [
-		comment is 'Maximum score for predicate info/2 directives.',
+		comment is 'Maximum score for predicate ``info/2`` directives.',
 		argnames is ['Entity', 'Predicate', 'MaximumScore']
 	]).
 
@@ -92,7 +92,7 @@
 	:- dynamic(predicate_info_pair_score_hook/4).
 	:- mode(predicate_info_pair_score_hook(?callable, ?term, ?term, ?integer), zero_or_more).
 	:- info(predicate_info_pair_score_hook/4, [
-		comment is 'Score for a predicate info/2 directive pairs. If defined, the predicate_info_score_hook/3 predicate should be defined accordingly.',
+		comment is 'Score for a predicate ``info/2`` directive pairs. If defined, the ``predicate_info_score_hook/3`` predicate should be defined accordingly.',
 		argnames is ['Pair', 'Entity', 'Predicate', 'Score']
 	]).
 
@@ -228,7 +228,7 @@
 			Ratio is NumberOfParameters / NumberOfDescriptions,
 			Score is 3 + 7 / Ratio
 		).
-		
+
 	parameters_with_descriptions([], NumberOfParameters, NumberOfParameters, NumberOfDescriptions, NumberOfDescriptions).
 	parameters_with_descriptions([_-Description| Parameters], NumberOfParameters0, NumberOfParameters, NumberOfDescriptions0, NumberOfDescriptions) :-
 		NumberOfParameters1 is NumberOfParameters0 + 1,
@@ -285,7 +285,7 @@
 			Ratio is NumberOfArguments / NumberOfDescriptions,
 			Score is 3 + 7 / Ratio
 		).
-		
+
 	arguments_with_descriptions([], NumberOfArguments, NumberOfArguments, NumberOfDescriptions, NumberOfDescriptions).
 	arguments_with_descriptions([_-Description| Arguments], NumberOfArguments0, NumberOfArguments, NumberOfDescriptions0, NumberOfDescriptions) :-
 		NumberOfArguments1 is NumberOfArguments0 + 1,

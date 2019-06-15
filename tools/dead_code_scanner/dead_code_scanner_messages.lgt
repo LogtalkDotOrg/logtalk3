@@ -25,7 +25,7 @@
 		version is 0.6,
 		author is 'Barry Evans and Paulo Moura',
 		date is 2017/05/05,
-		comment is 'Logtalk "dead_code_scanner" tool default message translations.'
+		comment is 'Logtalk ``dead_code_scanner`` tool default message translations.'
 	]).
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).

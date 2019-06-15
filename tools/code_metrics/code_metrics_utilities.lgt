@@ -37,35 +37,35 @@
 	:- private(ancestor/4).
 	:- mode(ancestor(?entity, ?entity_identifier, ?entity, ?entity_identifier), zero_or_more).
 	:- info(ancestor/4, [
-		comment is 'True if Entity descends from Ancestor, and EntityKind and AncestorKind unify with their respective entity types.',
+		comment is 'True if ``Entity`` descends from ``Ancestor``, and ``EntityKind`` and ``AncestorKind`` unify with their respective entity types.',
 		argnames is ['EntityKind', 'Entity', 'AncestorKind', 'Ancestor']
 	]).
 
 	:- private(current_entity/1).
 	:- mode(current_entity(?entity_identifier), zero_or_more).
 	:- info(current_entity/1, [
-		comment is 'True if Entity is a currently loaded entity.',
+		comment is 'True if ``Entity`` is a currently loaded entity.',
 		argnames is ['Entity']
 	]).
 
 	:- private(declares_predicate/2).
 	:- mode(declares_predicate(?entity_identifier, ?predicate_indicator), zero_or_more).
 	:- info(declares_predicate/2, [
-		comment is 'True if Entity declares Predicate internally.',
+		comment is 'True if ``Entity`` declares ``Predicate`` internally.',
 		argnames is ['Entity', 'Predicate']
 	]).
 
 	:- private(defines_predicate/2).
 	:- mode(defines_predicate(?entity_identifier, ?predicate_indicator), zero_or_more).
 	:- info(defines_predicate/2, [
-		comment is 'True if Entity defines an implementation of Predicate internally. \'Auxiliary\' predicates are excluded from results.',
+		comment is 'True if ``Entity`` defines an implementation of ``Predicate`` internally. Auxiliary predicates are excluded from results.',
 		argnames is ['Entity', 'Predicate']
 	]).
 
 	:- private(defines_predicate/3).
 	:- mode(defines_predicate(?entity_identifier, ?predicate_indicator, ?term), zero_or_more).
 	:- info(defines_predicate/3, [
-		comment is 'Same as defines_predicate/2, except Property is unified with a corresponding property defined in the grammar.',
+		comment is 'Same as ``defines_predicate/2``, except ``Property`` is unified with a property of the predicate.',
 		argnames is ['Entity', 'Predicate', 'Property']
 	]).
 
@@ -75,21 +75,21 @@
 		zero_or_one
 	).
 	:- info(entity_calls/3, [
-		comment is 'True if a predicate Caller within Entity makes a Call.',
+		comment is 'True if a predicate ``Caller`` within ``Entity`` makes a ``Call``.',
 		argnames is ['Entity', 'Caller', 'Call']
 	]).
 
 	:- private(entity_kind/2).
 	:- mode(entity_kind(+entity_identifier, -entity), zero_or_one).
 	:- info(entity_kind/2, [
-		comment is 'True if Kind defines Entity and is one of category, protocol, or object.',
+		comment is 'True if ``Kind`` defines ``Entity`` and is one of category, protocol, or object.',
 		argnames is ['Entity', 'Kind']
 	]).
 
 	:- private(entity_property/2).
 	:- mode(entity_property(+entity_identifier, -term), zero_or_more).
 	:- info(entity_property/2, [
-		comment is 'True if Property is a valid property of Entity. Entity can be either a category, a protocol, or an object.',
+		comment is 'True if ``Property`` is a valid property of ``Entity``. Entity can be either a category, a protocol, or an object.',
 		argnames is ['Entity', 'Property']
 
 	]).
@@ -100,7 +100,7 @@
 		zero_or_one
 	).
 	:- info(entity_updates/3, [
-		comment is 'True if a predicate Updater within Entity makes a dynamic update to Update (by e.g. asserta/1, retract/1, etc.)',
+		comment is 'True if a predicate ``Updater`` within ``Entity`` makes a dynamic update to ``Update`` (by e.g. asserta/1, retract/1, etc.)',
 		argnames is ['Entity', 'Updater', 'Update']
 	]).
 

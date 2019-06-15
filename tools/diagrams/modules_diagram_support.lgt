@@ -30,14 +30,14 @@
 	:- public(module_property/2).
 	:- mode(module_property(?atom, ?callable), zero_or_more).
 	:- info(module_property/2, [
-		comment is 'Access to module properties, at least exports/1, file/1, and file/2 but also declares/2, defines/2, calls/2, and provides/3 when possible.',
+		comment is 'Access to module properties, at least ``exports/1``, ``file/1``, and ``file/2`` but also ``declares/2``, ``defines/2``, ``calls/2``, and ``provides/3`` when possible.',
 		argnames is ['Module', 'Property']
 	]).
 
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?callable), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Access to loaded source file properties, at least basename/1, directory/1 but also parent/1 when possible.',
+		comment is 'Access to loaded source file properties, at least ``basename/1``, ``directory/1`` but also ``parent/1`` when possible.',
 		argnames is ['File', 'Property']
 	]).
 

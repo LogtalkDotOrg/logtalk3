@@ -52,7 +52,7 @@ Public predicates
 ``libraries/3``
 ^^^^^^^^^^^^^^^
 
-Creates a diagram for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a set of libraries using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -75,7 +75,7 @@ Creates a diagram for a set of libraries using the specified options. The Projec
 ``libraries/2``
 ^^^^^^^^^^^^^^^
 
-Creates a diagram for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a set of libraries using the default options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -98,7 +98,7 @@ Creates a diagram for a set of libraries using the default options. The Project 
 ``libraries/1``
 ^^^^^^^^^^^^^^^
 
-Creates a diagram for a set of libraries using the default options. The prefix "libraries" is used for the diagram file name.
+Creates a diagram for a set of libraries using the default options. The prefix ``libraries`` is used for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -257,7 +257,7 @@ Creates a diagram for a library using default options.
 ``directories/3``
 ^^^^^^^^^^^^^^^^^
 
-Creates a diagram for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a set of directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -280,7 +280,7 @@ Creates a diagram for a set of directories using the specified options. The Proj
 ``directories/2``
 ^^^^^^^^^^^^^^^^^
 
-Creates a diagram for a set of directories using the default options. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a set of directories using the default options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -303,7 +303,7 @@ Creates a diagram for a set of directories using the default options. The Projec
 ``rdirectory/3``
 ^^^^^^^^^^^^^^^^
 
-Creates a diagram for a directory and its sub-directories using the specified options. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a directory and its sub-directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -326,7 +326,7 @@ Creates a diagram for a directory and its sub-directories using the specified op
 ``rdirectory/2``
 ^^^^^^^^^^^^^^^^
 
-Creates a diagram for a directory and its sub-directories using default options. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a directory and its sub-directories using default options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -372,7 +372,7 @@ Creates a diagram for a directory and its sub-directories using default options.
 ``directory/3``
 ^^^^^^^^^^^^^^^
 
-Creates a diagram for a directory using the specified options. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a directory using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -395,7 +395,7 @@ Creates a diagram for a directory using the specified options. The Project argum
 ``directory/2``
 ^^^^^^^^^^^^^^^
 
-Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a directory using default options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -441,7 +441,7 @@ Creates a diagram for a directory using default options. The name of the directo
 ``files/3``
 ^^^^^^^^^^^
 
-Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -464,7 +464,7 @@ Creates a diagram for a set of files using the specified options. The file can b
 ``files/2``
 ^^^^^^^^^^^
 
-Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.
+Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -487,7 +487,7 @@ Creates a diagram for a set of files using the default options. The file can be 
 ``files/1``
 ^^^^^^^^^^^
 
-Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file name.
+Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix ``files`` is used for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -787,7 +787,7 @@ Generates diagram output for a directory and its sub-directories using the speci
 ``output_externals/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Output external nodes using the specified options depending on the value of the boolean option externals/1.
+Output external nodes using the specified options depending on the value of the boolean option ``externals/1``.
 
 | **Compilation flags:**
 |    ``static``
@@ -1176,7 +1176,7 @@ Converts an entity identifier to a ground term.
 ``filter_file_extension/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Filters the file name extension depending on the file_extensions/1 option.
+Filters the file name extension depending on the ``file_extensions/1`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -1199,7 +1199,7 @@ Filters the file name extension depending on the file_extensions/1 option.
 ``add_link_options/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Adds url/1, urls/2, and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.
+Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph language) based on the specified path to the list of options.
 
 | **Compilation flags:**
 |    ``static``
@@ -1222,7 +1222,7 @@ Adds url/1, urls/2, and tooltip/1 link options (for use by the graph language) b
 ``omit_path_prefix/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing directory and file node identitifers and captions.
+Removes a prefix from a path, returning the relative path, when using the option ``omit_path_prefixes/1``. Used mainly for contructing directory and file node identitifers and captions.
 
 | **Compilation flags:**
 |    ``static``

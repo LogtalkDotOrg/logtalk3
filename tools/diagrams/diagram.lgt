@@ -38,7 +38,7 @@
 	:- public(libraries/3).
 	:- mode(libraries(+atom, +list(atom), +list(compound)), one).
 	:- info(libraries/3, [
-		comment is 'Creates a diagram for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a set of libraries using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Libraries', 'Options']
 	]).
 
@@ -84,7 +84,7 @@
 	:- public(libraries/2).
 	:- mode(libraries(+atom, +list(atom)), one).
 	:- info(libraries/2, [
-		comment is 'Creates a diagram for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a set of libraries using the default options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Libraries']
 	]).
 
@@ -94,7 +94,7 @@
 	:- public(libraries/1).
 	:- mode(libraries(+list(atom)), one).
 	:- info(libraries/1, [
-		comment is 'Creates a diagram for a set of libraries using the default options. The prefix "libraries" is used for the diagram file name.',
+		comment is 'Creates a diagram for a set of libraries using the default options. The prefix ``libraries`` is used for the diagram file name.',
 		argnames is ['Libraries']
 	]).
 
@@ -270,7 +270,7 @@
 	:- public(directories/3).
 	:- mode(directories(+atom, +list(atom), +list(compound)), one).
 	:- info(directories/3, [
-		comment is 'Creates a diagram for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a set of directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directories', 'Options']
 	]).
 
@@ -320,7 +320,7 @@
 	:- public(directories/2).
 	:- mode(directories(+atom, +list(atom)), one).
 	:- info(directories/2, [
-		comment is 'Creates a diagram for a set of directories using the default options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a set of directories using the default options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directories']
 	]).
 
@@ -330,7 +330,7 @@
 	:- public(rdirectory/3).
 	:- mode(rdirectory(+atom, +atom, +list(compound)), one).
 	:- info(rdirectory/3, [
-		comment is 'Creates a diagram for a directory and its sub-directories using the specified options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a directory and its sub-directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directory', 'Options']
 	]).
 
@@ -368,7 +368,7 @@
 	:- public(rdirectory/2).
 	:- mode(rdirectory(+atom, +atom), one).
 	:- info(rdirectory/2, [
-		comment is 'Creates a diagram for a directory and its sub-directories using default options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a directory and its sub-directories using default options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directory']
 	]).
 
@@ -390,7 +390,7 @@
 	:- public(directory/3).
 	:- mode(directory(+atom, +atom, +list(compound)), one).
 	:- info(directory/3, [
-		comment is 'Creates a diagram for a directory using the specified options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a directory using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directory', 'Options']
 	]).
 
@@ -428,7 +428,7 @@
 	:- public(directory/2).
 	:- mode(directory(+atom, +atom), one).
 	:- info(directory/2, [
-		comment is 'Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a directory using default options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directory']
 	]).
 
@@ -450,7 +450,7 @@
 	:- public(files/3).
 	:- mode(files(+atom, +list(atom), +list(compound)), one).
 	:- info(files/3, [
-		comment is 'Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Files', 'Options']
 	]).
 
@@ -491,7 +491,7 @@
 	:- public(files/2).
 	:- mode(files(+atom, +list(atom)), one).
 	:- info(files/2, [
-		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Files']
 	]).
 
@@ -501,7 +501,7 @@
 	:- public(files/1).
 	:- mode(files(+list(atom)), one).
 	:- info(files/1, [
-		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file name.',
+		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix ``files`` is used for the diagram file name.',
 		argnames is ['Files']
 	]).
 
@@ -753,7 +753,7 @@
 	:- protected(output_externals/1).
 	:- mode(output_externals(+list(compound)), one).
 	:- info(output_externals/1, [
-		comment is 'Output external nodes using the specified options depending on the value of the boolean option externals/1.',
+		comment is 'Output external nodes using the specified options depending on the value of the boolean option ``externals/1``.',
 		argnames is ['Options']
 	]).
 
@@ -1124,7 +1124,7 @@
 	:- protected(filter_file_extension/3).
 	:- mode(filter_file_extension(+atom, +list(compound), -atom), one).
 	:- info(filter_file_extension/3, [
-		comment is 'Filters the file name extension depending on the file_extensions/1 option.',
+		comment is 'Filters the file name extension depending on the ``file_extensions/1`` option.',
 		argnames is ['Basename', 'Options', 'Name']
 	]).
 
@@ -1138,7 +1138,7 @@
 	:- protected(add_link_options/3).
 	:- mode(add_link_options(+atom, +list(compound), -list(compound)), one).
 	:- info(add_link_options/3, [
-		comment is 'Adds url/1, urls/2, and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.',
+		comment is 'Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph language) based on the specified path to the list of options.',
 		argnames is ['Path', 'Options', 'LinkingOptions']
 	]).
 
@@ -1176,7 +1176,7 @@
 	:- protected(omit_path_prefix/3).
 	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).
 	:- info(omit_path_prefix/3, [
-		comment is 'Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing directory and file node identitifers and captions.',
+		comment is 'Removes a prefix from a path, returning the relative path, when using the option ``omit_path_prefixes/1``. Used mainly for contructing directory and file node identitifers and captions.',
 		argnames is ['Path', 'Options', 'Relative']
 	]).
 

@@ -42,7 +42,7 @@ Public predicates
 ``assignable/1``
 ^^^^^^^^^^^^^^^^
 
-Makes Variable an assignable variable. Initial state will be empty.
+Makes ``Variable`` an assignable variable. Initial state will be empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -69,7 +69,7 @@ Makes Variable an assignable variable. Initial state will be empty.
 ``assignable/2``
 ^^^^^^^^^^^^^^^^
 
-Makes Variable an assignable variable and sets its initial state to Value.
+Makes ``Variable`` an assignable variable and sets its initial state to ``Value``.
 
 | **Compilation flags:**
 |    ``static``
@@ -98,7 +98,7 @@ Makes Variable an assignable variable and sets its initial state to Value.
 ``(<=)/2``
 ^^^^^^^^^^
 
-Sets the state of the assignable variable Variable to Value (initializing the variable if needed).
+Sets the state of the assignable variable ``Variable`` to ``Value`` (initializing the variable if needed).
 
 | **Compilation flags:**
 |    ``static``
@@ -125,7 +125,7 @@ Sets the state of the assignable variable Variable to Value (initializing the va
 ``(=>)/2``
 ^^^^^^^^^^
 
-Unifies Value with the current state of the assignable variable Variable.
+Unifies ``Value`` with the current state of the assignable variable ``Variable``.
 
 | **Compilation flags:**
 |    ``static``

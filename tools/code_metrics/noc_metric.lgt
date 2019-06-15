@@ -26,7 +26,7 @@
 		version is 0.9,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
 		date is 2018/07/16,
-		comment is 'Number of entity clauses metric. The score is represented using the compound term number_of_clauses(Total, User).'
+		comment is 'Number of entity clauses metric. The score is represented using the compound term ``number_of_clauses(Total, User)``.'
 	]).
 
 	entity_score(Entity, Score) :-
@@ -103,7 +103,7 @@
 
 	process_library(Library) :-
 		library_score(Library, Score),
-		logtalk::print_message(information, code_metrics, Score).		
+		logtalk::print_message(information, code_metrics, Score).
 
 	rlibrary_score(Library, Score) :-
 		setof(
@@ -122,7 +122,7 @@
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, Score),
-		logtalk::print_message(information, code_metrics, Score).		
+		logtalk::print_message(information, code_metrics, Score).
 
 	all_score(Score) :-
 		findall(

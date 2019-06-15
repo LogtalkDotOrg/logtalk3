@@ -25,7 +25,7 @@
 		author is 'Paulo Moura',
 		date is 2017/01/05,
 		comment is 'Utility object to help automate (re)generating documentation for a project.',
-		see_also is [lgtdocp, diagram(_)] 
+		see_also is [lgtdocp, diagram(_)]
 	]).
 
 	:- uses(logtalk, [
@@ -45,7 +45,7 @@
 	:- public(doc_goal/1).
 	:- mode(doc_goal(?callable), one_or_more).
 	:- info(doc_goal/1, [
-		comment is 'Table of goals, typically using the "diagrams" and the "lgtdoc" tools, used to generate the documentation. Goals are called in the order they are defined and in the context of the "user" pseudo-object.',
+		comment is 'Table of goals, typically using the ``diagrams`` and the ``lgtdoc`` tools, used to generate the documentation. Goals are called in the order they are defined and in the context of the ``user`` pseudo-object.',
 		argnames is ['Goal']
 	]).
 

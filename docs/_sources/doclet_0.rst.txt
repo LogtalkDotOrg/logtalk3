@@ -65,7 +65,7 @@ Updates the project documentation, first by calling a sequence of goals and seco
 ``doc_goal/1``
 ^^^^^^^^^^^^^^
 
-Table of goals, typically using the "diagrams" and the "lgtdoc" tools, used to generate the documentation. Goals are called in the order they are defined and in the context of the "user" pseudo-object.
+Table of goals, typically using the ``diagrams`` and the ``lgtdoc`` tools, used to generate the documentation. Goals are called in the order they are defined and in the context of the ``user`` pseudo-object.
 
 | **Compilation flags:**
 |    ``static``

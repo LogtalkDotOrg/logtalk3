@@ -34,14 +34,14 @@
 			'PAn' - 'Number of predicate arguments (assumed distinct)',
 			'Cn'  - 'Number of predicate calls/updates + number of clauses',
 			'CAn' - 'Number of predicate call/update arguments + number of clause head arguments',
-			'EV'  - 'Entity vocabulary: EV = Pn + PAn',
-			'EL'  - 'Entity length: EL = Cn + CAn',
-			'V'   - 'Volume: V = EL * log2(EV)',
-			'D'   - 'Difficulty: D = (Pn/2) * (CAn/An)',
-			'E'   - 'Effort: E = D * V',
-			'T'   - 'Time required to program: T = E/k seconds (k is the Stroud number; defaults to 18)',
-			'B'   - 'Number of delivered bugs: B = V/3000',
-			'Entity score' - 'Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.'
+			'EV'  - 'Entity vocabulary: ``EV = Pn + PAn``',
+			'EL'  - 'Entity length: ``EL = Cn + CAn``',
+			'V'   - 'Volume: ``V = EL * log2(EV)``',
+			'D'   - 'Difficulty: ``D = (Pn/2) * (CAn/An)``',
+			'E'   - 'Effort: ``E = D * V``',
+			'T'   - 'Time required to program: ``T = E/k`` seconds (``k`` is the Stroud number; defaults to 18)',
+			'B'   - 'Number of delivered bugs: ``B = V/3000``',
+			'Entity score' - 'Represented as the compound term ``pn_pan_cn_can_ev_el_v_d_e_t_b/11``.'
 		]
 	]).
 

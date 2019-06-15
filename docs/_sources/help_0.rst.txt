@@ -64,7 +64,7 @@ Prints instructions on how to use the help tool.
 ``(/)/2``
 ^^^^^^^^^
 
-Provides help on the Functor/Arity built-in control construct, directive, predicate, or method.
+Provides help on the ``Functor/Arity`` built-in control construct, directive, predicate, or method.
 
 | **Compilation flags:**
 |    ``static``
@@ -87,7 +87,7 @@ Provides help on the Functor/Arity built-in control construct, directive, predic
 ``(//)/2``
 ^^^^^^^^^^
 
-Provides help on the Functor//Arity built-in non-terminal.
+Provides help on the ``Functor//Arity`` built-in non-terminal.
 
 | **Compilation flags:**
 |    ``static``
@@ -110,7 +110,7 @@ Provides help on the Functor//Arity built-in non-terminal.
 ``completion/2``
 ^^^^^^^^^^^^^^^^
 
-Provides a completion pair (Completion-Page) for a given prefix.
+Provides a completion pair, ``Completion-Page``, for a given prefix.
 
 | **Compilation flags:**
 |    ``static``
@@ -133,7 +133,7 @@ Provides a completion pair (Completion-Page) for a given prefix.
 ``completions/2``
 ^^^^^^^^^^^^^^^^^
 
-Provides a list of completions pairs (Completion-Page) for a given prefix.
+Provides a list of completions pairs, ``Completion-Page``, for a given prefix.
 
 | **Compilation flags:**
 |    ``static``

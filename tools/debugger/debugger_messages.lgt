@@ -24,7 +24,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2017/02/27,
-		comment is 'Logtalk debugger default message translations.'
+		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
 	% avoid a catch-22...

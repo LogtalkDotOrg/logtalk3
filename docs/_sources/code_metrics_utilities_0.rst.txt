@@ -55,7 +55,7 @@ Private predicates
 ``ancestor/4``
 ^^^^^^^^^^^^^^
 
-True if Entity descends from Ancestor, and EntityKind and AncestorKind unify with their respective entity types.
+True if ``Entity`` descends from ``Ancestor``, and ``EntityKind`` and ``AncestorKind`` unify with their respective entity types.
 
 | **Compilation flags:**
 |    ``static``
@@ -78,7 +78,7 @@ True if Entity descends from Ancestor, and EntityKind and AncestorKind unify wit
 ``current_entity/1``
 ^^^^^^^^^^^^^^^^^^^^
 
-True if Entity is a currently loaded entity.
+True if ``Entity`` is a currently loaded entity.
 
 | **Compilation flags:**
 |    ``static``
@@ -101,7 +101,7 @@ True if Entity is a currently loaded entity.
 ``declares_predicate/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-True if Entity declares Predicate internally.
+True if ``Entity`` declares ``Predicate`` internally.
 
 | **Compilation flags:**
 |    ``static``
@@ -124,7 +124,7 @@ True if Entity declares Predicate internally.
 ``defines_predicate/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-True if Entity defines an implementation of Predicate internally. 'Auxiliary' predicates are excluded from results.
+True if ``Entity`` defines an implementation of ``Predicate`` internally. Auxiliary predicates are excluded from results.
 
 | **Compilation flags:**
 |    ``static``
@@ -147,7 +147,7 @@ True if Entity defines an implementation of Predicate internally. 'Auxiliary' pr
 ``defines_predicate/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Same as defines_predicate/2, except Property is unified with a corresponding property defined in the grammar.
+Same as ``defines_predicate/2``, except ``Property`` is unified with a property of the predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -170,7 +170,7 @@ Same as defines_predicate/2, except Property is unified with a corresponding pro
 ``entity_calls/3``
 ^^^^^^^^^^^^^^^^^^
 
-True if a predicate Caller within Entity makes a Call.
+True if a predicate ``Caller`` within ``Entity`` makes a ``Call``.
 
 | **Compilation flags:**
 |    ``static``
@@ -193,7 +193,7 @@ True if a predicate Caller within Entity makes a Call.
 ``entity_kind/2``
 ^^^^^^^^^^^^^^^^^
 
-True if Kind defines Entity and is one of category, protocol, or object.
+True if ``Kind`` defines ``Entity`` and is one of category, protocol, or object.
 
 | **Compilation flags:**
 |    ``static``
@@ -216,7 +216,7 @@ True if Kind defines Entity and is one of category, protocol, or object.
 ``entity_property/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-True if Property is a valid property of Entity. Entity can be either a category, a protocol, or an object.
+True if ``Property`` is a valid property of ``Entity``. Entity can be either a category, a protocol, or an object.
 
 | **Compilation flags:**
 |    ``static``
@@ -239,7 +239,7 @@ True if Property is a valid property of Entity. Entity can be either a category,
 ``entity_updates/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-True if a predicate Updater within Entity makes a dynamic update to Update (by e.g. asserta/1, retract/1, etc.)
+True if a predicate ``Updater`` within ``Entity`` makes a dynamic update to ``Update`` (by e.g. asserta/1, retract/1, etc.)
 
 | **Compilation flags:**
 |    ``static``

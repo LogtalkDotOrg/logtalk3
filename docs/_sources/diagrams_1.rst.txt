@@ -28,7 +28,7 @@ Predicates for generating all supported diagrams for libraries, directories, or 
 | **Remarks:**
 
 
-   - *Common options:* title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.
+   - *Common options:* ``title/1``, ``date/1``, ``output_directory/1``, ``relation_labels/1``, ``node_type_captions/1``, ``exclude_files/1``, ``exclude_libraries/1``, ``url_prefixes/1``, ``omit_path_prefix/1``, ``entity_url_suffix_target/2``, and ``layout/1``.
 
    - *Limitations:* Some of the provided predicates only make sense for some types of diagrams. Also, fine tuning may require generating individual diagrams directly instead of as a batch using this utility object.
 
@@ -49,7 +49,7 @@ Public predicates
 ``libraries/3``
 ^^^^^^^^^^^^^^^
 
-Creates all supported diagrams for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file names.
+Creates all supported diagrams for a set of libraries using the specified options. The ``Project`` argument is used as a prefix for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``
@@ -72,7 +72,7 @@ Creates all supported diagrams for a set of libraries using the specified option
 ``libraries/2``
 ^^^^^^^^^^^^^^^
 
-Creates all supported diagrams for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file names.
+Creates all supported diagrams for a set of libraries using the default options. The ``Project`` argument is used as a prefix for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``
@@ -95,7 +95,7 @@ Creates all supported diagrams for a set of libraries using the default options.
 ``libraries/1``
 ^^^^^^^^^^^^^^^
 
-Creates  all supported diagrams for a set of libraries using the default options. The prefix "libraries" is used for the diagram file names.
+Creates  all supported diagrams for a set of libraries using the default options. The prefix ``libraries`` is used for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``
@@ -254,7 +254,7 @@ Creates all supported diagrams for a library using default options.
 ``directories/3``
 ^^^^^^^^^^^^^^^^^
 
-Creates all supported diagrams for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file names.
+Creates all supported diagrams for a set of directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``
@@ -277,7 +277,7 @@ Creates all supported diagrams for a set of directories using the specified opti
 ``directories/2``
 ^^^^^^^^^^^^^^^^^
 
-Creates all supported diagrams for a directory using default options. The Project argument is used as a prefix for the diagram file names.
+Creates all supported diagrams for a directory using default options. The ``Project`` argument is used as a prefix for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``
@@ -300,7 +300,7 @@ Creates all supported diagrams for a directory using default options. The Projec
 ``rdirectory/3``
 ^^^^^^^^^^^^^^^^
 
-Creates all supported diagrams for a directory and its sub-directories using the specified options. The Project argument is used as a prefix for the diagram file name.
+Creates all supported diagrams for a directory and its sub-directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -323,7 +323,7 @@ Creates all supported diagrams for a directory and its sub-directories using the
 ``rdirectory/2``
 ^^^^^^^^^^^^^^^^
 
-Creates all supported diagrams for a directory and its sub-directories using default options. The Project argument is used as a prefix for the diagram file name.
+Creates all supported diagrams for a directory and its sub-directories using default options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
@@ -369,7 +369,7 @@ Creates all supported diagrams for a directory and its sub-directories using def
 ``directory/3``
 ^^^^^^^^^^^^^^^
 
-Creates all supported diagrams for a directory using the specified options. The Project argument is used as a prefix for the diagram file names.
+Creates all supported diagrams for a directory using the specified options. The ``Project`` argument is used as a prefix for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``
@@ -392,7 +392,7 @@ Creates all supported diagrams for a directory using the specified options. The 
 ``directory/2``
 ^^^^^^^^^^^^^^^
 
-Creates all supported diagrams for a directory using default options. The Project argument is used as a prefix for the diagram file names.
+Creates all supported diagrams for a directory using default options. The ``Project`` argument is used as a prefix for the diagram file names.
 
 | **Compilation flags:**
 |    ``static``

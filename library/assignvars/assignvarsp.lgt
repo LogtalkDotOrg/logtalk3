@@ -38,7 +38,7 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 	:- public(assignable/1).
 	:- mode(assignable(--assignvar), one).
 	:- info(assignable/1, [
-		comment is 'Makes Variable an assignable variable. Initial state will be empty.',
+		comment is 'Makes ``Variable`` an assignable variable. Initial state will be empty.',
 		argnames is ['Variable'],
 		exceptions is [
 			'Variable is not a variable' - type_error(variable, 'Variable')
@@ -48,7 +48,7 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 	:- public(assignable/2).
 	:- mode(assignable(--assignvar, @nonvar), one).
 	:- info(assignable/2, [
-		comment is 'Makes Variable an assignable variable and sets its initial state to Value.',
+		comment is 'Makes ``Variable`` an assignable variable and sets its initial state to ``Value``.',
 		argnames is ['Variable', 'Value'],
 		exceptions is [
 			'Variable is not a variable' - type_error(variable, 'Variable'),
@@ -60,7 +60,7 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 	:- public(op(100, xfx, '<=')).
 	:- mode(<=(?assignvar, @nonvar), one).
 	:- info((<=)/2, [
-		comment is 'Sets the state of the assignable variable Variable to Value (initializing the variable if needed).',
+		comment is 'Sets the state of the assignable variable ``Variable`` to ``Value`` (initializing the variable if needed).',
 		argnames is ['Variable', 'Value'],
 		exceptions is [
 			'Value is not instantiated' - instantiation_error
@@ -71,7 +71,7 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 	:- public(op(100, xfx, '=>')).
 	:- mode(=>(+assignvar, ?nonvar), zero_or_one).
 	:- info((=>)/2, [
-		comment is 'Unifies Value with the current state of the assignable variable Variable.',
+		comment is 'Unifies ``Value`` with the current state of the assignable variable ``Variable``.',
 		argnames is ['Variable', 'Value'],
 		exceptions is [
 			'Variable is not instantiated' - instantiation_error

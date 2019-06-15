@@ -25,7 +25,7 @@
 		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
 		date is 2017/12/31,
-		comment is 'Message translations for the code_metrics tool.'
+		comment is 'Message translations for the ``code_metrics`` tool.'
 	]).
 
 	:- multifile(logtalk::message_prefix_stream/4).

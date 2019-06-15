@@ -27,7 +27,7 @@
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.',
 		parameters is ['Format' - 'Graph language file format'],
 		remarks is [
-			'Common options' - 'title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.',
+			'Common options' - '``title/1``, ``date/1``, ``output_directory/1``, ``relation_labels/1``, ``node_type_captions/1``, ``exclude_files/1``, ``exclude_libraries/1``, ``url_prefixes/1``, ``omit_path_prefix/1``, ``entity_url_suffix_target/2``, and ``layout/1``.',
 			'Limitations' - 'Some of the provided predicates only make sense for some types of diagrams. Also, fine tuning may require generating individual diagrams directly instead of as a batch using this utility object.'
 		]
 	]).
@@ -35,7 +35,7 @@
 	:- public(libraries/3).
 	:- mode(libraries(+atom, +list(atom), +list(compound)), one).
 	:- info(libraries/3, [
-		comment is 'Creates all supported diagrams for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file names.',
+		comment is 'Creates all supported diagrams for a set of libraries using the specified options. The ``Project`` argument is used as a prefix for the diagram file names.',
 		argnames is ['Project', 'Libraries', 'Options']
 	]).
 
@@ -49,7 +49,7 @@
 	:- public(libraries/2).
 	:- mode(libraries(+atom, +list(atom)), one).
 	:- info(libraries/2, [
-		comment is 'Creates all supported diagrams for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file names.',
+		comment is 'Creates all supported diagrams for a set of libraries using the default options. The ``Project`` argument is used as a prefix for the diagram file names.',
 		argnames is ['Project', 'Libraries']
 	]).
 
@@ -59,7 +59,7 @@
 	:- public(libraries/1).
 	:- mode(libraries(+list(atom)), one).
 	:- info(libraries/1, [
-		comment is 'Creates  all supported diagrams for a set of libraries using the default options. The prefix "libraries" is used for the diagram file names.',
+		comment is 'Creates  all supported diagrams for a set of libraries using the default options. The prefix ``libraries`` is used for the diagram file names.',
 		argnames is ['Libraries']
 	]).
 
@@ -140,7 +140,7 @@
 	:- public(directories/3).
 	:- mode(directories(+atom, +list(atom), +list(compound)), one).
 	:- info(directories/3, [
-		comment is 'Creates all supported diagrams for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file names.',
+		comment is 'Creates all supported diagrams for a set of directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file names.',
 		argnames is ['Project', 'Directories', 'Options']
 	]).
 
@@ -154,7 +154,7 @@
 	:- public(directories/2).
 	:- mode(directories(+atom, +list(atom)), one).
 	:- info(directories/2, [
-		comment is 'Creates all supported diagrams for a directory using default options. The Project argument is used as a prefix for the diagram file names.',
+		comment is 'Creates all supported diagrams for a directory using default options. The ``Project`` argument is used as a prefix for the diagram file names.',
 		argnames is ['Project', 'Directories']
 	]).
 
@@ -164,7 +164,7 @@
 	:- public(rdirectory/3).
 	:- mode(rdirectory(+atom, +atom, +list(compound)), one).
 	:- info(rdirectory/3, [
-		comment is 'Creates all supported diagrams for a directory and its sub-directories using the specified options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates all supported diagrams for a directory and its sub-directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directory', 'Options']
 	]).
 
@@ -178,7 +178,7 @@
 	:- public(rdirectory/2).
 	:- mode(rdirectory(+atom, +atom), one).
 	:- info(rdirectory/2, [
-		comment is 'Creates all supported diagrams for a directory and its sub-directories using default options. The Project argument is used as a prefix for the diagram file name.',
+		comment is 'Creates all supported diagrams for a directory and its sub-directories using default options. The ``Project`` argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directory']
 	]).
 
@@ -200,7 +200,7 @@
 	:- public(directory/3).
 	:- mode(directory(+atom, +atom, +list(compound)), one).
 	:- info(directory/3, [
-		comment is 'Creates all supported diagrams for a directory using the specified options. The Project argument is used as a prefix for the diagram file names.',
+		comment is 'Creates all supported diagrams for a directory using the specified options. The ``Project`` argument is used as a prefix for the diagram file names.',
 		argnames is ['Project', 'Directory', 'Options']
 	]).
 
@@ -214,7 +214,7 @@
 	:- public(directory/2).
 	:- mode(directory(+atom, +atom), one).
 	:- info(directory/2, [
-		comment is 'Creates all supported diagrams for a directory using default options. The Project argument is used as a prefix for the diagram file names.',
+		comment is 'Creates all supported diagrams for a directory using default options. The ``Project`` argument is used as a prefix for the diagram file names.',
 		argnames is ['Project', 'Directory']
 	]).
 

@@ -280,8 +280,8 @@
 <blockquote>
 <div><ul class="simple">
 <li><p><em>Score range:</em> Score is a integer percentage where a 100% score means that all expected documentation information is present.</p></li>
-<li><p><em>Score weights:</em> The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate entity_predicates_weights_hook/2.</p></li>
-<li><p><em>Score customization:</em> The individual scores of entity info/1 pairs and predicate info/2 pairs can be customized using the entity_info_pair_score_hook/3 and predicate_info_pair_score_hook/4 predicates.</p></li>
+<li><p><em>Score weights:</em> The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate <code class="docutils literal notranslate"><span class="pre">entity_predicates_weights_hook/2</span></code>.</p></li>
+<li><p><em>Score customization:</em> The individual scores of entity <code class="docutils literal notranslate"><span class="pre">info/1</span></code> pairs and predicate <code class="docutils literal notranslate"><span class="pre">info/2</span></code> pairs can be customized using the <code class="docutils literal notranslate"><span class="pre">entity_info_pair_score_hook/3</span></code> and <code class="docutils literal notranslate"><span class="pre">predicate_info_pair_score_hook/4</span></code> predicates.</p></li>
 </ul>
 </div></blockquote>
 <div class="contents local topic" id="contents">
@@ -327,7 +327,7 @@
 <div id="entity_info_score_hook/2"> </div></div>
 <div class="section" id="entity-info-score-hook-2">
 <span id="doc-metric-0-entity-info-score-hook-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">entity_info_score_hook/2</span></code></a><a class="headerlink" href="#entity-info-score-hook-2" title="Permalink to this headline">¶</a></h3>
-<p>Maximum score for entity info/1 directives.</p>
+<p>Maximum score for entity <code class="docutils literal notranslate"><span class="pre">info/1</span></code> directives.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -348,7 +348,7 @@
 <div id="entity_info_pair_score_hook/3"> </div></div>
 <div class="section" id="entity-info-pair-score-hook-3">
 <span id="doc-metric-0-entity-info-pair-score-hook-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">entity_info_pair_score_hook/3</span></code></a><a class="headerlink" href="#entity-info-pair-score-hook-3" title="Permalink to this headline">¶</a></h3>
-<p>Score for relevant entity info/1 directive pairs. If defined, the entity_info_score_hook/2 predicate should be defined accordingly.</p>
+<p>Score for relevant entity <code class="docutils literal notranslate"><span class="pre">info/1</span></code> directive pairs. If defined, the <code class="docutils literal notranslate"><span class="pre">entity_info_score_hook/2</span></code> predicate should be defined accordingly.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -369,7 +369,7 @@
 <div id="predicate_mode_score_hook/3"> </div></div>
 <div class="section" id="predicate-mode-score-hook-3">
 <span id="doc-metric-0-predicate-mode-score-hook-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook/3</span></code></a><a class="headerlink" href="#predicate-mode-score-hook-3" title="Permalink to this headline">¶</a></h3>
-<p>Maximum score for predicate mode/2 directives.</p>
+<p>Maximum score for predicate <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -390,7 +390,7 @@
 <div id="predicate_mode_score_hook/5"> </div></div>
 <div class="section" id="predicate-mode-score-hook-5">
 <span id="doc-metric-0-predicate-mode-score-hook-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook/5</span></code></a><a class="headerlink" href="#predicate-mode-score-hook-5" title="Permalink to this headline">¶</a></h3>
-<p>Score for a predicate mode/2 directive. If defined, the predicate_mode_score_hook/3 predicate should be defined accordingly.</p>
+<p>Score for a predicate <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directive. If defined, the <code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook/3</span></code> predicate should be defined accordingly.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -411,7 +411,7 @@
 <div id="predicate_info_score_hook/3"> </div></div>
 <div class="section" id="predicate-info-score-hook-3">
 <span id="doc-metric-0-predicate-info-score-hook-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">predicate_info_score_hook/3</span></code></a><a class="headerlink" href="#predicate-info-score-hook-3" title="Permalink to this headline">¶</a></h3>
-<p>Maximum score for predicate info/2 directives.</p>
+<p>Maximum score for predicate <code class="docutils literal notranslate"><span class="pre">info/2</span></code> directives.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -432,7 +432,7 @@
 <div id="predicate_info_pair_score_hook/4"> </div></div>
 <div class="section" id="predicate-info-pair-score-hook-4">
 <span id="doc-metric-0-predicate-info-pair-score-hook-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">predicate_info_pair_score_hook/4</span></code></a><a class="headerlink" href="#predicate-info-pair-score-hook-4" title="Permalink to this headline">¶</a></h3>
-<p>Score for a predicate info/2 directive pairs. If defined, the predicate_info_score_hook/3 predicate should be defined accordingly.</p>
+<p>Score for a predicate <code class="docutils literal notranslate"><span class="pre">info/2</span></code> directive pairs. If defined, the <code class="docutils literal notranslate"><span class="pre">predicate_info_score_hook/3</span></code> predicate should be defined accordingly.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
