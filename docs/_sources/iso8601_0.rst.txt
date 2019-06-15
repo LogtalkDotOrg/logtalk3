@@ -30,9 +30,9 @@ ISO 8601 (and European civil calendar) compliant library of date predicates.
 
    - *Date arithmetic:* Many of the examples illustrate a simplified method of doing date arithmetic. Note, however, that we do not generally recommend this practice--it is all too easy to make mistakes. The safest way of finding the day difference between two dates is to first convert the dates to their Julian day numbers and then subtract one from the other. Similarly, the safe way to add or subtract a day offset to a particular date is to first convert the date to its Julian day number, add or subtract the day offset, and then convert the result to its corresponding date.
 
-   - *BC years:* ISO 8601 specifies that the Gregorian calendar be used, yet requires that years prior to 1 AD be handled arithmetically, i.e., the year we know as 1 BC is year 0, 2 BC is year -1, 3 BC is year -2 and so on. We do not follow ISO 8601 with regard to the handling of BC years. Our date predicates will accept and interpret an input year 0 as 1 BC; however, a negative year, Year, should always be interpreted as abs(Year) =:= Year BC. We believe that the average person will find our handling of BC years more user-friendly than the ISO 8601 one, but we encourage feedback from users with a view to a possible change in future versions.
+   - *BC years:* ISO 8601 specifies that the Gregorian calendar be used, yet requires that years prior to 1 AD be handled arithmetically, i.e., the year we know as 1 BC is year 0, 2 BC is year -1, 3 BC is year -2 and so on. We do not follow ISO 8601 with regard to the handling of BC years. Our date predicates will accept and interpret an input year 0 as 1 BC; however, a negative year, Year, should always be interpreted as ``abs(Year) =:= Year BC``. We believe that the average person will find our handling of BC years more user-friendly than the ISO 8601 one, but we encourage feedback from users with a view to a possible change in future versions.
 
-   - *Week numbers:* It is possible for a day (date) to have a week number that belongs to another year. Up to three of the first days of a calendar year may belong to the last week (number) of the prior calendar year, and up to three days of the last days of a calendar year may belong to the first week (number) of the next calendar year. It for this reason that the Week parameter in date/6-7 is a compound term, namely week(WeekNo,ActualYear).
+   - *Week numbers:* It is possible for a day (date) to have a week number that belongs to another year. Up to three of the first days of a calendar year may belong to the last week (number) of the prior calendar year, and up to three days of the last days of a calendar year may belong to the first week (number) of the next calendar year. It for this reason that the Week parameter in ``date/6-7`` is a compound term, namely ``week(WeekNo,ActualYear)``.
 
    - *Computation of Gregorian Easter Sunday:* The algorithm is based upon the "Gaussian rule". Proleptic use is limited to years > 1582 AD, that is, after the introduction of the Gregorian calendar.
 
@@ -108,7 +108,7 @@ Get the system date and/or its Julian Day # or convert a Julian Day # to/from gi
 ``date/5``
 ^^^^^^^^^^
 
-Ditto date/4 + get/check its day-of-week #.
+Ditto ``date/4`` + get/check its day-of-week #.
 
 | **Compilation flags:**
 |    ``static``
@@ -150,7 +150,7 @@ Ditto date/4 + get/check its day-of-week #.
 ``date/6``
 ^^^^^^^^^^
 
-Ditto date/5 + get/check its week #.
+Ditto ``date/5`` + get/check its week #.
 
 | **Compilation flags:**
 |    ``static``
@@ -162,7 +162,7 @@ Ditto date/5 + get/check its week #.
 |        ``Month`` - Normally an integer between 1 and 12 inclusive
 |        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
 |        ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7
-|        ``Week`` - Compound term, week(WeekNo,ActualYear), of a day
+|        ``Week`` - Compound term, ``week(WeekNo,ActualYear)``, of a day
 | **Mode and number of proofs:**
 |    ``date(?integer,?integer,?integer,?integer,?integer,?compound)`` - ``zero_or_one``
 
@@ -217,7 +217,7 @@ Ditto date/5 + get/check its week #.
 ``date/7``
 ^^^^^^^^^^
 
-Ditto date/6 + get/check its day-of-year #.
+Ditto ``date/6`` + get/check its day-of-year #.
 
 | **Compilation flags:**
 |    ``static``
@@ -229,7 +229,7 @@ Ditto date/6 + get/check its day-of-year #.
 |        ``Month`` - Normally an integer between 1 and 12 inclusive
 |        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
 |        ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7
-|        ``Week`` - Compound term, week(WeekNo,ActualYear), of a day
+|        ``Week`` - Compound term, ``week(WeekNo,ActualYear)``, of a day
 |        ``DoY`` - Day of year (NB! calendar year, not week # year)
 | **Mode and number of proofs:**
 |    ``date(?integer,?integer,?integer,?integer,?integer,?compound,?integer)`` - ``zero_or_one``
@@ -281,7 +281,7 @@ Conversion between an ISO 8601 compliant date string and its components (truncat
 | **Template:**
 |    ``date_string(Format,Components,String)``
 |        ``Format`` - ISO 8601 format
-|        ``Components`` - When bound and String is free, either a Julian number or a [Year,Month,Day] term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String
+|        ``Components`` - When bound and String is free, either a Julian number or a ``[Year,Month,Day]`` term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String
 |        ``String`` - ISO 8601 formatted string correspondent to Components
 | **Mode and number of proofs:**
 |    ``date_string(+atom,+integer,?atom)`` - ``zero_or_one``
@@ -479,7 +479,7 @@ Compute a calendar month.
 |    ``calendar_month(Year,Month,Calendar)``
 |        ``Year`` - The calendar year
 |        ``Month`` - The calendar month
-|        ``Calendar`` - A compound term, m/3, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).
+|        ``Calendar`` - A compound term, ``m/3``, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).
 | **Mode and number of proofs:**
 |    ``calendar_month(?integer,?integer,-compound)`` - ``zero_or_one``
 

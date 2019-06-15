@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
+%
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright (c) 2004-2005 Daniel L. Dudley
-%  
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -45,8 +45,8 @@
 			'Scope' - 'This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.',
 			'Validation of dates' - 'Date parts are not validated--that is the caller''s responsibility! However, not being quite heartless yet, we do provide a predicate for this purpose.',
 			'Date arithmetic' - 'Many of the examples illustrate a simplified method of doing date arithmetic. Note, however, that we do not generally recommend this practice--it is all too easy to make mistakes. The safest way of finding the day difference between two dates is to first convert the dates to their Julian day numbers and then subtract one from the other. Similarly, the safe way to add or subtract a day offset to a particular date is to first convert the date to its Julian day number, add or subtract the day offset, and then convert the result to its corresponding date.',
-			'BC years' - 'ISO 8601 specifies that the Gregorian calendar be used, yet requires that years prior to 1 AD be handled arithmetically, i.e., the year we know as 1 BC is year 0, 2 BC is year -1, 3 BC is year -2 and so on. We do not follow ISO 8601 with regard to the handling of BC years. Our date predicates will accept and interpret an input year 0 as 1 BC; however, a negative year, Year, should always be interpreted as abs(Year) =:= Year BC. We believe that the average person will find our handling of BC years more user-friendly than the ISO 8601 one, but we encourage feedback from users with a view to a possible change in future versions.',
-			'Week numbers' - 'It is possible for a day (date) to have a week number that belongs to another year. Up to three of the first days of a calendar year may belong to the last week (number) of the prior calendar year, and up to three days of the last days of a calendar year may belong to the first week (number) of the next calendar year. It for this reason that the Week parameter in date/6-7 is a compound term, namely week(WeekNo,ActualYear).',
+			'BC years' - 'ISO 8601 specifies that the Gregorian calendar be used, yet requires that years prior to 1 AD be handled arithmetically, i.e., the year we know as 1 BC is year 0, 2 BC is year -1, 3 BC is year -2 and so on. We do not follow ISO 8601 with regard to the handling of BC years. Our date predicates will accept and interpret an input year 0 as 1 BC; however, a negative year, Year, should always be interpreted as ``abs(Year) =:= Year BC``. We believe that the average person will find our handling of BC years more user-friendly than the ISO 8601 one, but we encourage feedback from users with a view to a possible change in future versions.',
+			'Week numbers' - 'It is possible for a day (date) to have a week number that belongs to another year. Up to three of the first days of a calendar year may belong to the last week (number) of the prior calendar year, and up to three days of the last days of a calendar year may belong to the first week (number) of the next calendar year. It for this reason that the Week parameter in ``date/6-7`` is a compound term, namely ``week(WeekNo,ActualYear)``.',
 			'Computation of Gregorian Easter Sunday' - 'The algorithm is based upon the "Gaussian rule". Proleptic use is limited to years > 1582 AD, that is, after the introduction of the Gregorian calendar.',
 			'Some Christian feast day offsets from Easter Sunday' - 'Carnival Monday: -48 days, Mardi Gras (Shrove Tuesday): -47 days, Ash Wednesday: -46 days, Palm Sunday: -7 days, Easter Friday: -2 days, Easter Saturday: -1 day, Easter Monday: +1 day, Ascension of Christ: +39 days, Whitsunday: +49 days, Whitmonday: +50 days, Feast of Corpus Christi: +60 days.'
 		]
@@ -79,7 +79,7 @@
 	:- public(date/5).
 	:- mode(date(?integer, ?integer, ?integer, ?integer, ?integer), zero_or_one).
 	:- info(date/5, [
-		comment is 'Ditto date/4 + get/check its day-of-week #.',
+		comment is 'Ditto ``date/4`` + get/check its day-of-week #.',
 		arguments is [
 			'JD' - 'Julian day serial number',
 			'Year' - '0 or negative if converted BC year, positive otherwise',
@@ -98,14 +98,14 @@
 	:- public(date/6).
 	:- mode(date(?integer, ?integer, ?integer, ?integer, ?integer, ?compound), zero_or_one).
 	:- info(date/6, [
-		comment is 'Ditto date/5 + get/check its week #.',
+		comment is 'Ditto ``date/5`` + get/check its week #.',
 		arguments is [
 			'JD' - 'Julian day serial number',
 			'Year' - '0 or negative if converted BC year, positive otherwise',
 			'Month' - 'Normally an integer between 1 and 12 inclusive',
 			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month',
 			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7',
-			'Week' - 'Compound term, week(WeekNo,ActualYear), of a day'
+			'Week' - 'Compound term, ``week(WeekNo,ActualYear)``, of a day'
 		],
 		examples is [
 			'Get the day-of-week and week number of a date' - date(_,2000,1,1,DoW,Wk) - {DoW = 6, Wk = week(52,1999)},
@@ -126,14 +126,14 @@
 	:- public(date/7).
 	:- mode(date(?integer, ?integer, ?integer, ?integer, ?integer, ?compound, ?integer), zero_or_one).
 	:- info(date/7, [
-		comment is 'Ditto date/6 + get/check its day-of-year #.',
+		comment is 'Ditto ``date/6`` + get/check its day-of-year #.',
 		arguments is [
 			'JD' - 'Julian day serial number',
 			'Year' - '0 or negative if converted BC year, positive otherwise',
 			'Month' - 'Normally an integer between 1 and 12 inclusive',
 			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month',
 			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7',
-			'Week' - 'Compound term, week(WeekNo,ActualYear), of a day',
+			'Week' - 'Compound term, ``week(WeekNo,ActualYear)``, of a day',
 			'DoY' - 'Day of year (NB! calendar year, not week # year)'
 		],
 		examples is [
@@ -155,7 +155,7 @@
 		comment is 'Conversion between an ISO 8601 compliant date string and its components (truncated and expanded date representations are currently unsupported). Note that date components are not validated; that is the caller''s responsibility!',
 		arguments is [
 			'Format' - 'ISO 8601 format',
-			'Components' - 'When bound and String is free, either a Julian number or a [Year,Month,Day] term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String',
+			'Components' - 'When bound and String is free, either a Julian number or a ``[Year,Month,Day]`` term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String',
 			'String' - 'ISO 8601 formatted string correspondent to Components'
 		],
 		examples is [
@@ -230,7 +230,7 @@
 		arguments is [
 			'Year' - 'The calendar year',
 			'Month' - 'The calendar month',
-			'Calendar' - 'A compound term, m/3, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).'
+			'Calendar' - 'A compound term, ``m/3``, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).'
 		],
 		examples is [
 			'Compute the calendar of March, 2005' - calendar_month(2005, 3, Calendar) - {Calendar = m(2005, 3,[w( 9, [ 0,  1,  2,  3,  4,  5,  6]),w(10, [ 7,  8,  9, 10, 11, 12, 13]),w(11, [14, 15, 16, 17, 18, 19, 20]),w(12, [21, 22, 23, 24, 25, 26, 27]),w(13, [28, 29, 30, 31,  0,  0, 0]),w( 0, [ 0,  0,  0,  0,  0,  0,  0])])}

@@ -1,26 +1,26 @@
 
 /*
-This file contains an adaptation to Logtalk of code for logical assignment 
-of Prolog terms developed by Nobukuni Kino. For more information, please 
+This file contains an adaptation to Logtalk of code for logical assignment
+of Prolog terms developed by Nobukuni Kino. For more information, please
 consult the URL http://www.kprolog.com/en/logical_assignment/
 
-As a derivative work, this file is licensed under the Open Software License 
+As a derivative work, this file is licensed under the Open Software License
 version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 */
 
 :- object(streamvars).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2018/07/11,
+		date is 2019/06/15,
 		comment is 'Stream variables (supporting logical, backtracable, adding and retrieving of terms).'
 	]).
 
 	:- public(new/1).
-	:- mode(new(-streamvar), one).
+	:- mode(new(--streamvar), one).
 	:- info(new/1, [
-		comment is 'Makes Variable a stream variable. Initial state will be empty.',
+		comment is 'Makes ``Variable`` a stream variable. Initial state will be empty.',
 		argnames is ['Variable'],
 		exceptions is [
 			'Variable is not a variable' - type_error(variable, 'Variable')
@@ -28,9 +28,9 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	]).
 
 	:- public(new/2).
-	:- mode(new(-streamvar, @nonvar), one).
+	:- mode(new(--streamvar, @nonvar), one).
 	:- info(new/2, [
-		comment is 'Makes Variable a stream variable and sets its initial state to Value.',
+		comment is 'Makes ``Variable`` a stream variable and sets its initial state to ``Value``.',
 		argnames is ['Variable', 'Value'],
 		exceptions is [
 			'Variable is not a variable' - type_error(variable, 'Variable')
@@ -40,7 +40,7 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	:- public((<=)/2).
 	:- mode(<=(?streamvar, @nonvar), one).
 	:- info((<=)/2, [
-		comment is 'Sets the state of the stream variable Variable to Value (initializing the variable if needed).',
+		comment is 'Sets the state of the stream variable ``Variable`` to ``Value`` (initializing the variable if needed).',
 		argnames is ['Variable', 'Value']
 	]).
 
@@ -49,7 +49,7 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	:- public((=>)/2).
 	:- mode(=>(+streamvar, ?nonvar), zero_or_one).
 	:- info((=>)/2, [
-		comment is 'Unifies Value with the current state of the stream variable Variable.',
+		comment is 'Unifies ``Value`` with the current state of the stream variable ``Variable``.',
 		argnames is ['Variable', 'Value']
 	]).
 

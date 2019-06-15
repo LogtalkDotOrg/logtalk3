@@ -31,7 +31,7 @@
 	:- public(counter/2).
 	:- mode(counter(?nonvar, ?integer), zero_or_more).
 	:- info(counter/2, [
-		comment is 'True if Counter is a counter with value Value.',
+		comment is 'True if ``Counter`` is a counter with value ``Value``.',
 		argnames is ['Counter', 'Value']
 	]).
 

@@ -80,7 +80,7 @@
 	:- public(nextto/3).
 	:- mode(nextto(@var, @var, ?list), zero_or_more).
 	:- info(nextto/3, [
-		comment is 'X and Y are consecutive elements in List.',
+		comment is '``X`` and ``Y`` are consecutive elements in List.',
 		argnames is ['X', 'Y', 'List']
 	]).
 
