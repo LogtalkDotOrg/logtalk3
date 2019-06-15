@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.15,
+		version is 4.16,
 		author is 'Paulo Moura',
-		date is 2019/06/12,
+		date is 2019/06/15,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1078,6 +1078,8 @@
 		relation_to_xml_filename(Relation, File),
 		write_xml_open_tag(Stream, complements, []),
 		write_xml_cdata_element(Stream, name, [], Relation),
+		functor(Relation, Name, Arity),
+		write_xml_cdata_element(Stream, functor, [], Name/Arity),
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, complements).
 

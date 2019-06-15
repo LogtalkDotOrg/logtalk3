@@ -171,6 +171,9 @@ generated values for `++Type` arguments are indeed ground.
 arguments to actually check that the generated values are not modified
 by the property being tested.
 
+* FIXED: The `lgtdoc` tool XSLT files that generate final documentation
+formats ignored `complements` category relations.
+
 Tests
 -----
 

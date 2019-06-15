@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into XHTML files
 %
-%  Last updated on June 13, 2019
+%  Last updated on June 15, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -154,6 +154,10 @@
 			<dt class ="key">specializes:</dt>
 				<xsl:apply-templates select="specializes" />
 			</xsl:if>
+			<xsl:if test="complements">
+			<dt class ="key">complements:</dt>
+				<xsl:apply-templates select="complements" />
+			</xsl:if>
 			<xsl:if test="provides">
 			<dt class ="key">provides:</dt>
 				<xsl:apply-templates select="provides" />
@@ -188,6 +192,11 @@
 
 <xsl:template match="logtalk_entity/relations/alias" priority="1">
 	<dd class ="value"><code><xsl:value-of select="name" /><xsl:text> </xsl:text><xsl:value-of select="original" /></code><em> as </em><code><xsl:value-of select="alternative" /></code></dd>
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/relations/complements" priority="1">
+	<dd class ="value"><code><a href="{file}.html"><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 

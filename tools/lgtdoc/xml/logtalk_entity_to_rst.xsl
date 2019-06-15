@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on June 13, 2019
+%  Last updated on June 15, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -167,6 +167,10 @@
 				<xsl:text>| **Specializes:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="specializes" />
 			</xsl:if>
+			<xsl:if test="complements">
+				<xsl:text>| **Complements:**</xsl:text><xsl:value-of select="$nl" />
+				<xsl:apply-templates select="complements" />
+			</xsl:if>
 			<xsl:if test="provides">
 				<xsl:text>| **Provides:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="provides" />
@@ -218,6 +222,18 @@
 
 <xsl:template match="logtalk_entity/relations/alias" priority="1">
 	<xsl:text>|    ``</xsl:text><xsl:value-of select="name" /><xsl:text>`` ``</xsl:text><xsl:value-of select="original" /><xsl:text>`` as ``</xsl:text><xsl:value-of select="alternative" /><xsl:text>``</xsl:text>
+	<xsl:value-of select="$nl" />
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/relations/complements" priority="1">
+	<xsl:text>|    :ref:`</xsl:text>
+	<xsl:call-template name="replace-string">
+		<xsl:with-param name="text" select="name" />
+		<xsl:with-param name="replace" select="'&#60;'" />
+		<xsl:with-param name="with" select="'\&#60;'" />
+	</xsl:call-template>
+	<xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 

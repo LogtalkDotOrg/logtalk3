@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into Markdown files
 %
-%  Last updated on June 13, 2019
+%  Last updated on June 15, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -129,6 +129,10 @@
 				<xsl:text>* specializes:</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="specializes" />
 			</xsl:if>
+			<xsl:if test="complements">
+				<xsl:text>* complements:</xsl:text><xsl:value-of select="$nl" />
+				<xsl:apply-templates select="complements" />
+			</xsl:if>
 			<xsl:if test="provides">
 				<xsl:text>* provides:</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="provides" />
@@ -165,6 +169,12 @@
 
 <xsl:template match="logtalk_entity/relations/alias" priority="1">
 	<xsl:text>  * `</xsl:text><xsl:value-of select="name" /><xsl:text>` `</xsl:text><xsl:value-of select="original" /><xsl:text>` as `</xsl:text><xsl:value-of select="alternative" /><xsl:text>`</xsl:text>
+	<xsl:value-of select="$nl" />
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/relations/complements" priority="1">
+	<xsl:text>  * [`</xsl:text><xsl:value-of select="name" /><xsl:text>`](</xsl:text><xsl:value-of select="file" /><xsl:text>.md)</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 

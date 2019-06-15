@@ -24,41 +24,43 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 | **Remarks:**
 
 
-   - *Logtalk specific types:* {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}
+   - *Logtalk specific types:* ``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``
 
-   - *Prolog module related types (when the backend compiler supports modules):* {module, module_identifier, qualified_callable}
+   - *Prolog module related types (when the backend compiler supports modules):* ``module``, ``module_identifier``, ``qualified_callable``
 
-   - *Base types from Prolog:* {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}
+   - *Prolog base types:* ``term``, ``var``, ``nonvar``, ``atomic``, ``atom``, ``number``, ``integer``, ``float``, ``compound``, ``callable``, ``ground``
 
-   - *Atom derived types:* {atom(CharSet), atom(CharSet,Length), non_empty_atom, non_empty_atom(CharSet), boolean, character, character(CharSet), char (same as character), char(CharSet) (same as character(CharSet)), operator_specifier}
+   - *Atom derived types:* ``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``
 
-   - *Number derived types:* {positive_number, negative_number, non_positive_number, non_negative_number}
+   - *Number derived types:* ``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``
 
-   - *Float derived types:* {positive_float, negative_float, non_positive_float, non_negative_float, probability}
+   - *Float derived types:* ``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float, probability``
 
-   - *Integer derived types:* {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, character_code(CharSet), code (same as character_code), code(CharSet) (same as character_code(CharSet)), operator_priority}
+   - *Integer derived types:* ``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``character_code``, ``character_code(CharSet)``, ``code``, ``code(CharSet)``, ``operator_priority``
 
-   - *List types (compound derived types):* {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type,Length), list(Type,Min,Max), list(Type,Length,Min,Max), non_empty_list(Type), difference_list, difference_list(Type), codes (list(character_code)), chars (list(character))}
+   - *List types (compound derived types):* ``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``
 
-   - *Other compound derived types:* {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}
+   - *Difference list types (compound derived types):* ``difference_list``, ``difference_list(Type)``
 
-   - *Stream types:* {stream, stream_or_alias, stream(Property), stream_or_alias(Property)}
+   - *Other compound derived types:* ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``clause_or_partial_clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``
 
-   - *Other types:* {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}
+   - *Stream types:* ``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``
+
+   - *Other types:* ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``type``
 
    - *predicate type notes:* This type is used to check for an object public predicate specified as Object::Functor/Arity.
 
    - *boolean type notes:* The two value of this type are the atoms true and false.
 
-   - *Stream types notes:* In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.
+   - *Stream types notes:* In the case of the ``stream(Property)`` and ``stream_or_alias(Property)`` types, Property must be a valid stream property.
 
-   - *order type notes:* The three possible values of this type are the single character atoms <, =, and >.
+   - *order type notes:* The three possible values of this type are the single character atoms ``<``, ``=``, and ``>``.
 
    - *character_code type notes:* This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.
 
    - *between(Type, Lower, Upper) type notes:* The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.
 
-   - *property(Type, Lambda) type notes:* Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]>>Goal. The lambda expression is applied in the context of "user". The term is type-checked before calling the goal.
+   - *property(Type, Lambda) type notes:* Verifies that ``Term`` satisfies a property described using a lambda expression of the form ``[Parameter]>>Goal``. The lambda expression is applied in the context of ``user``. The term is type-checked before calling the goal.
 
    - *one_of(Type, Set) type notes:* For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.
 
@@ -72,15 +74,15 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 
    - *qualified_callable notes:* Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.
 
-   - *Design choices:* The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.
+   - *Design choices:* The main predicates are ``valid/2`` and ``check/3``. These are defined using the predicate ``check/2``. Defining clauses for ``check/2`` instead of ``valid/2`` gives the user full control of exception terms without requiring an additional predicate.
 
-   - *Error context:* The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.
+   - *Error context:* The built-in execution-context method ``context/1`` can be used to provide the calling context for errors when using the predicate ``check/3``.
 
-   - *Registering new types:* New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.
+   - *Registering new types:* New types can be registered by defining clauses for the ``type/1`` and ``check/2`` multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.
 
-   - *Meta-types:* Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.
+   - *Meta-types:* Meta-types are types that have one or more sub-types. E.g. ``var_or(Type)``. The sub-types of a meta-type can be enumerated by defining a clause for the ``meta_type/3`` multifile predicate.
 
-   - *Character sets:* When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (ascii_identifier, ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types.
+   - *Character sets:* When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, or ``unicode_full``) using the parameterizable types.
 
    - *Caveats:* The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.
 
@@ -233,5 +235,5 @@ Operators
 
 .. seealso::
 
-   :ref:`arbitrary <arbitrary/0>`, :ref:`os_types <os_types/0>`
+   :ref:`arbitrary <arbitrary/0>`, :ref:`os_types <os_types/0>`, :ref:`either <either/0>`, :ref:`maybe <maybe/0>`
 

@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
-%  Last updated on June 13, 2019
+%  Last updated on June 15, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -114,6 +114,12 @@
 				<xsl:apply-templates select="specializes" />
 			</dl>
 			</xsl:if>
+			<xsl:if test="complements">
+			<dl>
+			<dt>complements:</dt>
+				<xsl:apply-templates select="complements" />
+			</dl>
+			</xsl:if>
 			<xsl:if test="uses">
 			<dl>
 			<dt>uses:</dt>
@@ -132,6 +138,11 @@
 
 
 <xsl:template match="logtalk_entity/relations/uses">
+	<dd><code><a><xsl:attribute name="href"><xsl:value-of select="file" />.xml</xsl:attribute><xsl:value-of select="name" /></a></code></dd>
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/relations/complements" xml:space="preserve">
 	<dd><code><a><xsl:attribute name="href"><xsl:value-of select="file" />.xml</xsl:attribute><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 

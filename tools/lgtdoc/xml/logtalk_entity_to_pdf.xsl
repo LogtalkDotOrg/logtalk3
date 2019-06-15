@@ -10,7 +10,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
 %
-%  Last updated on June 13, 2019
+%  Last updated on June 15, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -318,6 +318,15 @@
 				</fo:block>
 				<xsl:apply-templates select="specializes"/>
 			</xsl:if>
+			<xsl:if test="complements">
+				<fo:block
+						font-size="10pt"
+						font-family="serif" 
+						keep-with-next="always">
+					complements:
+				</fo:block>
+				<xsl:apply-templates select="complements"/>
+			</xsl:if>
 			<xsl:if test="provides">
 				<fo:block
 						font-size="10pt"
@@ -391,6 +400,16 @@
 		<fo:inline font-family="monospace"><xsl:value-of select="name" /><xsl:text> </xsl:text><xsl:value-of select="original" /></fo:inline>
 		<fo:inline font-family="serif" font-style="italic"> as </fo:inline>
 		<fo:inline font-family="monospace"><xsl:value-of select="alternative" /></fo:inline>
+	</fo:block>
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/relations/complements" priority="1">
+	<fo:block
+			font-size="9pt"
+			font-family="monospace"
+			margin-left="10mm">
+		<xsl:value-of select="name"/>
 	</fo:block>
 </xsl:template>
 
