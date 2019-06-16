@@ -36,7 +36,7 @@ Bi-directional XML parser.
 
    - *Compliance-comprehensive:* It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.
 
-   - *Bi-directional conversions:* The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term malformed(<attributes>, <content>).
+   - *Bi-directional conversions:* The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term ``malformed(<attributes>,<content>)``.
 
 .. contents::
    :local:
@@ -55,7 +55,7 @@ Public predicates
 ``parse/2``
 ^^^^^^^^^^^
 
-Parses Chars to/from a data structure of the form xml(<atts>, <content>).
+Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -79,7 +79,7 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 ``parse/3``
 ^^^^^^^^^^^
 
-Parses Chars to/from a data structure of the form xml(<atts>, <content>).
+Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -103,7 +103,7 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 ``subterm/2``
 ^^^^^^^^^^^^^
 
-Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.
+Unifies ``Subterm`` with a sub-term of ``XMLTerm``. Note that ``XMLTerm`` is a sub-term of itself.
 
 | **Compilation flags:**
 |    ``static``
@@ -157,7 +157,7 @@ Private predicates
 ``xml_to_document/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.
+Translates the list of character codes ``XML`` into the Prolog term ``Document``. ``Controls`` is a list of terms controlling the treatment of layout characters and character entities.
 
 | **Compilation flags:**
 |    ``static``
@@ -180,7 +180,7 @@ Translates the list of character codes XML into the Prolog term Document. Contro
 ``empty_map/1``
 ^^^^^^^^^^^^^^^
 
-True if Map is a null map.
+True if ``Map`` is a null map.
 
 | **Compilation flags:**
 |    ``static``
@@ -203,7 +203,7 @@ True if Map is a null map.
 ``map_member/3``
 ^^^^^^^^^^^^^^^^
 
-True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.
+True if ``Map`` is a ordered map structure which records the pair ``Key-Data``. ``Key`` must be ground.
 
 | **Compilation flags:**
 |    ``static``
@@ -226,7 +226,7 @@ True if Map is a ordered map structure which records the pair Key-Data. Key must
 ``map_store/4``
 ^^^^^^^^^^^^^^^
 
-True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.
+True if ``Map0`` is an ordered map structure, ``Key`` must be ground, and ``Map1`` is identical to ``Map0`` except that the pair ``Key-Data`` is recorded by ``Map1``.
 
 | **Compilation flags:**
 |    ``static``
@@ -249,7 +249,7 @@ True if Map0 is an ordered map structure, Key must be ground, and Map1 is identi
 ``pp_string/1``
 ^^^^^^^^^^^^^^^
 
-Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.
+Prints ``String`` onto the current output stream. If ``String`` contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.
 
 | **Compilation flags:**
 |    ``static``
@@ -272,7 +272,7 @@ Prints String onto the current output stream. If String contains only 7-bit char
 ``fault/5``
 ^^^^^^^^^^^
 
-Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm's ancestor elements in the form <tag>{(id)}* where <tag> is the element tag and <id> is the value of any attribute _named_ id.
+Identifies ``SubTerm`` as a sub-term of ``Term`` which cannot be serialized after ``Indentation``. ``Message`` is an atom naming the type of error; ``Path`` is a string encoding a list of ``SubTerm``'s ancestor elements in the form ``<tag>{(id)}*`` where ``<tag>`` is the element tag and ``<id>`` is the value of any attribute _named_ ``id``.
 
 | **Compilation flags:**
 |    ``static``
@@ -295,7 +295,7 @@ Identifies SubTerm as a sub-term of Term which cannot be serialized after Indent
 ``exception/4``
 ^^^^^^^^^^^^^^^
 
-Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.
+Hook to raise an exception to be raised in respect of a fault in the XML Term ``Document``.
 
 | **Compilation flags:**
 |    ``static``
@@ -318,13 +318,16 @@ Hook to raise an exception to be raised in respect of a fault in the XML Term: D
 ``document_generation//2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML's 'inline' elements. Also, Format is over-ridden, for an individual element, by an explicit 'xml:space'="preserve" attribute.
+DCG generating Document as a list of character codes. ``Format`` is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with ``pcdata/1`` terms, such as XHTML's 'inline' elements. Also, ``Format`` is over-ridden, for an individual element, by an explicit ``'xml:space'="preserve"`` attribute.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
 |    ``document_generation(Format,Document)``
+| **Mode and number of proofs:**
+|    ``document_generation(+nonvar,+nonvar)`` - ``zero_or_one``
+
 
 ------------
 
@@ -338,13 +341,16 @@ DCG generating Document as a list of character codes. Format is true|false defin
 ``pcdata_7bit//1``
 ^^^^^^^^^^^^^^^^^^
 
-Represents the ascii character set in its simplest format, using the character entities &amp; &quot; &lt; and &gt; which are common to both XML and HTML. The numeric entity &#39; is used in place of &apos;, because browsers don't recognize it in HTML.
+Represents the ASCII character set in its simplest format, using the character entities ``&amp;``, ``&quot;``, ``&lt;``, and ``&gt;`` which are common to both XML and HTML. The numeric entity ``&#39;`` is used in place of ``&apos;`` because browsers don't recognize it in HTML.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
 |    ``pcdata_7bit(Char)``
+| **Mode and number of proofs:**
+|    ``pcdata_7bit(?nonvar)`` - ``zero_or_one``
+
 
 ------------
 
@@ -358,7 +364,7 @@ Represents the ascii character set in its simplest format, using the character e
 ``character_data_format/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.
+Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.
 
 | **Compilation flags:**
 |    ``static``
@@ -381,13 +387,16 @@ Holds when Format0 and Format1 are the statuses of XML formatting before and aft
 ``cdata_generation//1``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.
+Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
 |    ``cdata_generation(Chars)``
+| **Mode and number of proofs:**
+|    ``cdata_generation(+list)`` - ``zero_or_one``
+
 
 ------------
 

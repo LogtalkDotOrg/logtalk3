@@ -28,7 +28,7 @@
 			'Compliance' - 'This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.',
 			'Compliance-strictness' - 'It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.',
 			'Compliance-comprehensive' - 'It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.',
-			'Bi-directional conversions' - 'The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term malformed(<attributes>, <content>).'
+			'Bi-directional conversions' - 'The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term ``malformed(<attributes>,<content>)``.'
 		]
 	]).
 
@@ -36,7 +36,7 @@
 	:- mode(parse(+nonvar, ?nonvar), zero_or_one).
 	:- mode(parse(?nonvar, +nonvar), zero_or_one).
 	:- info(parse/2, [
-		comment is 'Parses Chars to/from a data structure of the form xml(<atts>, <content>).',
+		comment is 'Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.',
 		argnames is ['Chars', 'Document']
 	]).
 
@@ -44,14 +44,14 @@
 	:- mode(parse(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- mode(parse(+nonvar, ?nonvar, +nonvar), zero_or_one).
 	:- info(parse/3, [
-		comment is 'Parses Chars to/from a data structure of the form xml(<atts>, <content>).',
+		comment is 'Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.',
 		argnames is ['Controls', 'Chars', 'Document']
 	]).
 
 	:- public(subterm/2).
 	:- mode(subterm(+nonvar, ?nonvar), zero_or_one).
 	:- info(subterm/2, [
-		comment is 'Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.',
+		comment is 'Unifies ``Subterm`` with a sub-term of ``XMLTerm``. Note that ``XMLTerm`` is a sub-term of itself.',
 		argnames is ['XMLTerm', 'Subterm']
 	]).
 
@@ -174,7 +174,7 @@
 	:- private(xml_to_document/3).
 	:- mode(xml_to_document(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(xml_to_document/3, [
-		comment is 'Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.',
+		comment is 'Translates the list of character codes ``XML`` into the Prolog term ``Document``. ``Controls`` is a list of terms controlling the treatment of layout characters and character entities.',
 		argnames is ['Controls', 'XML', 'Document']
 	]).
 
@@ -1089,7 +1089,7 @@
 	:- private(empty_map/1).
 	:- mode(empty_map(?nonvar), zero_or_one).
 	:- info(empty_map/1, [
-		comment is 'True if Map is a null map.',
+		comment is 'True if ``Map`` is a null map.',
 		argnames is ['Map']
 	]).
 
@@ -1101,7 +1101,7 @@
 	:- private(map_member/3).
 	:- mode(map_member(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(map_member/3, [
-		comment is 'True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.',
+		comment is 'True if ``Map`` is a ordered map structure which records the pair ``Key-Data``. ``Key`` must be ground.',
 		argnames is ['Key', 'Map', 'Data']
 	]).
 
@@ -1120,7 +1120,7 @@
 	:- private(map_store/4).
 	:- mode(map_store(+nonvar, +nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(map_store/4, [
-		comment is 'True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.',
+		comment is 'True if ``Map0`` is an ordered map structure, ``Key`` must be ground, and ``Map1`` is identical to ``Map0`` except that the pair ``Key-Data`` is recorded by ``Map1``.',
 		argnames is ['Map0', 'Key', 'Data', 'Map1']
 	]).
 
@@ -1249,7 +1249,7 @@
 	:- private(pp_string/1).
 	:- mode(pp_string(+nonvar), zero_or_one).
 	:- info(pp_string/1, [
-		comment is 'Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.',
+		comment is 'Prints ``String`` onto the current output stream. If ``String`` contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.',
 		argnames is ['String']
 	]).
 
@@ -1598,7 +1598,7 @@
 	:- private(fault/5).
 	:- mode(fault(+nonvar, +nonvar, ?nonvar, ?nonvar, ?nonvar), zero_or_one).
 	:- info(fault/5, [
-		comment is 'Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm''s ancestor elements in the form <tag>{(id)}* where <tag> is the element tag and <id> is the value of any attribute _named_ id.',
+		comment is 'Identifies ``SubTerm`` as a sub-term of ``Term`` which cannot be serialized after ``Indentation``. ``Message`` is an atom naming the type of error; ``Path`` is a string encoding a list of ``SubTerm``''s ancestor elements in the form ``<tag>{(id)}*`` where ``<tag>`` is the element tag and ``<id>`` is the value of any attribute _named_ ``id``.',
 		argnames is ['Term', 'Indentation', 'SubTerm', 'Path', 'Message']
 	]).
 
@@ -1678,7 +1678,7 @@
 	:- private(exception/4).
 	:- mode(exception(+atom, +nonvar, +nonvar, +nonvar), one).
 	:- info(exception/4, [
-		comment is 'Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.',
+		comment is 'Hook to raise an exception to be raised in respect of a fault in the XML Term ``Document``.',
 		argnames is ['Message', 'Document', 'Culprit', 'Path']
 	]).
 
@@ -1700,7 +1700,7 @@
 	:- private(document_generation//2).
 	:- mode(document_generation(+nonvar, +nonvar), zero_or_one).
 	:- info(document_generation//2, [
-		comment is 'DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML''s ''inline'' elements. Also, Format is over-ridden, for an individual element, by an explicit ''xml:space''="preserve" attribute.',
+		comment is 'DCG generating Document as a list of character codes. ``Format`` is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with ``pcdata/1`` terms, such as XHTML''s ''inline'' elements. Also, ``Format`` is over-ridden, for an individual element, by an explicit ``''xml:space''="preserve"`` attribute.',
 		argnames is ['Format', 'Document']
 	]).
 
@@ -1905,7 +1905,7 @@
 	:- private(pcdata_7bit//1).
 	:- mode(pcdata_7bit(?nonvar), zero_or_one).
 	:- info(pcdata_7bit//1, [
-		comment is 'Represents the ascii character set in its simplest format, using the character entities &amp; &quot; &lt; and &gt; which are common to both XML and HTML. The numeric entity &#39; is used in place of &apos;, because browsers don''t recognize it in HTML.',
+		comment is 'Represents the ASCII character set in its simplest format, using the character entities ``&amp;``, ``&quot;``, ``&lt;``, and ``&gt;`` which are common to both XML and HTML. The numeric entity ``&#39;`` is used in place of ``&apos;`` because browsers don''t recognize it in HTML.',
 		argnames is ['Char']
 	]).
 
@@ -2048,7 +2048,7 @@
 	:- private(character_data_format/3).
 	:- mode(character_data_format(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(character_data_format/3, [
-		comment is 'Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.',
+		comment is 'Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.',
 		argnames is ['Chars', 'Format0', 'Format1']
 	]).
 
@@ -2062,7 +2062,7 @@
 	:- private(cdata_generation//1).
 	:- mode(cdata_generation(+list), zero_or_one).
 	:- info(cdata_generation//1, [
-		comment is 'Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.',
+		comment is 'Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.',
 		argnames is ['Chars']
 	]).
 

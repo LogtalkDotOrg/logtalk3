@@ -142,6 +142,9 @@ User-defined hook grammar rule for converting a message into a list of tokens (`
 
 | **Template:**
 |    ``message_tokens(Message,Component)``
+| **Mode and number of proofs:**
+|    ``message_tokens(+nonvar,+nonvar)`` - ``zero_or_one``
+
 
 ------------
 

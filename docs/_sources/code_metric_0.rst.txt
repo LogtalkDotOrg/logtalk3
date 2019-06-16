@@ -367,6 +367,10 @@ Pretty prints the entity score.
 
 | **Template:**
 |    ``entity_score(Entity,Score)``
+| **Mode and number of proofs:**
+|    ``entity_score(@entity_identifier,-ground)`` - ``zero_or_one``
+|    ``entity_score(@entity_identifier,+ground)`` - ``one``
+
 
 ------------
 

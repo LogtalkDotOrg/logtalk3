@@ -55,6 +55,9 @@ Flattens a conjunction of goals.
 
 | **Template:**
 |    ``flatten_goals(Conjunction)``
+| **Mode and number of proofs:**
+|    ``flatten_goals(+callable)`` - ``one``
+
 
 ------------
 

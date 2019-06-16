@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.16,
+		version is 4.17,
 		author is 'Paulo Moura',
-		date is 2019/06/15,
+		date is 2019/06/16,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -837,7 +837,10 @@
 			)
 		;	true
 		),
-		functor(Template, Functor, Arity),
+		(	Name = Functor//Args ->
+			functor(Template, Functor, Args)
+		;	functor(Template, Functor, Arity)
+		),
 		forall(
 			member(mode(Template, Proofs), Properties),
 			(write_xml_open_tag(Stream, (mode), []),

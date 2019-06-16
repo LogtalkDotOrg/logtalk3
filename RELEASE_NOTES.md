@@ -174,6 +174,8 @@ by the property being tested.
 * FIXED: The `lgtdoc` tool XSLT files that generate final documentation
 formats ignored `complements` category relations.
 
+* FIXED: The `lgtdoc` tool processing of `mode/2` directives for non-terminals.
+
 Tests
 -----
 
