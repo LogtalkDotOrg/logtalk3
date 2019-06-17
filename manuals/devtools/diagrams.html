@@ -504,76 +504,148 @@ fine-tuning the diagrams layout.</p>
 <h2>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h2>
 <p>A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code>
-diagram layout (one of the atoms
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code></div>
+<div class="line">diagram layout (one of the atoms
 <code class="docutils literal notranslate"><span class="pre">{top_to_bottom,bottom_to_top,left_to_right,right_to_left}</span></code>;
-default is <code class="docutils literal notranslate"><span class="pre">bottom_to_top</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">title(Title)</span></code>
-diagram title (an atom; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code>
-print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">interface(Boolean)</span></code>
-print/omit public predicates (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file_labels(Boolean)</span></code>
-print/omit file labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file_extensions(Boolean)</span></code>
-print/omit file name extensions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code>
-print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code>
-print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code>
-print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">inheritance_relations(Boolean)</span></code>
-print/omit inheritance relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+default is <code class="docutils literal notranslate"><span class="pre">bottom_to_top</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">title(Title)</span></code></div>
+<div class="line">diagram title (an atom; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code></div>
+<div class="line">print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interface(Boolean)</span></code></div>
+<div class="line">print/omit public predicates (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_labels(Boolean)</span></code></div>
+<div class="line">print/omit file labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_extensions(Boolean)</span></code></div>
+<div class="line">print/omit file name extensions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code></div>
+<div class="line">print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default
+is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code></div>
+<div class="line">print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code></div>
+<div class="line">print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inheritance_relations(Boolean)</span></code></div>
+<div class="line">print/omit inheritance relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code> for entity inheritance diagrams and <code class="docutils literal notranslate"><span class="pre">false</span></code> for other
-entity diagrams)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">provide_relations(Boolean)</span></code>
-print/omit provide relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">xref_relations(Boolean)</span></code>
-print/omit predicate call cross-reference relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or
-<code class="docutils literal notranslate"><span class="pre">false</span></code>; default depends on the specific diagram)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">xref_calls(Boolean)</span></code>
-print/omit predicate cross-reference calls (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>;
-default depends on the specific diagram)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">output_directory(Directory)</span></code>
-directory for the .dot files (an atom; default is <code class="docutils literal notranslate"><span class="pre">'./'</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code>
-list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code>
-list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_libraries(Libraries)</span></code>
-list of libraries to exclude (default is
-<code class="docutils literal notranslate"><span class="pre">[startup,</span> <span class="pre">scratch_directory]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_entities(Entities)</span></code>
-list of entities to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">path_url_prefixes(PathPrefix,</span> <span class="pre">CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code>
-code and documenting URL prefixes for a path prefix used when
+entity diagrams)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">provide_relations(Boolean)</span></code></div>
+<div class="line">print/omit provide relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">xref_relations(Boolean)</span></code></div>
+<div class="line">print/omit predicate call cross-reference relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or
+<code class="docutils literal notranslate"><span class="pre">false</span></code>; default depends on the specific diagram)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">xref_calls(Boolean)</span></code></div>
+<div class="line">print/omit predicate cross-reference calls (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>;
+default depends on the specific diagram)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">output_directory(Directory)</span></code></div>
+<div class="line">directory for the .dot files (an atom; default is <code class="docutils literal notranslate"><span class="pre">'./'</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code></div>
+<div class="line">list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code></div>
+<div class="line">list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_libraries(Libraries)</span></code></div>
+<div class="line">list of libraries to exclude (default is
+<code class="docutils literal notranslate"><span class="pre">[startup,</span> <span class="pre">scratch_directory]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_entities(Entities)</span></code></div>
+<div class="line">list of entities to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_url_prefixes(PathPrefix,</span> <span class="pre">CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code></div>
+<div class="line">code and documenting URL prefixes for a path prefix used when
 generating cluster, library, directory, file, and entity links
-(atoms; no default; can be specified multiple times)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">url_prefixes(CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code>
-default URL code and documenting URL prefixes used when generating
-cluster, library, file, and entity links (atoms; no default)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">entity_url_suffix_target(Suffix,</span> <span class="pre">Target)</span></code>
-extension for entity documenting URLs (an atom; default is
+(atoms; no default; can be specified multiple times)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">url_prefixes(CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code></div>
+<div class="line">default URL code and documenting URL prefixes used when generating
+cluster, library, file, and entity links (atoms; no default)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_url_suffix_target(Suffix,</span> <span class="pre">Target)</span></code></div>
+<div class="line">extension for entity documenting URLs (an atom; default is
 <code class="docutils literal notranslate"><span class="pre">'.html'</span></code>) and target separating symbols (an atom; default is
-<code class="docutils literal notranslate"><span class="pre">'#'</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code>
-omit common path prefixes when printing directory paths (a list of
-atoms; default is an empty list)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zoom(Boolean)</span></code>
-generate sub-diagrams and add links and zoom icons to library and
-entity nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zoom_url_suffix(Suffix)</span></code>
-extension for linked diagrams (an atom; default is <code class="docutils literal notranslate"><span class="pre">'.svg'</span></code>)</p></li>
+<code class="docutils literal notranslate"><span class="pre">'#'</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code></div>
+<div class="line">omit common path prefixes when printing directory paths (a list of
+atoms; default is an empty list)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zoom(Boolean)</span></code></div>
+<div class="line">generate sub-diagrams and add links and zoom icons to library and
+entity nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zoom_url_suffix(Suffix)</span></code></div>
+<div class="line">extension for linked diagrams (an atom; default is <code class="docutils literal notranslate"><span class="pre">'.svg'</span></code>)</div>
+</div>
+</li>
 </ul>
 <p>In the particular case of cross-referencing diagrams, there is also the
 option:</p>
@@ -585,100 +657,196 @@ this option, the <code class="docutils literal notranslate"><span class="pre">Co
 it should include the commit SHA1)</p></li>
 </ul>
 <p>For directory and file diagrams the options are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code>
-diagram layout (one of the atoms
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code></div>
+<div class="line">diagram layout (one of the atoms
 <code class="docutils literal notranslate"><span class="pre">{top_to_bottom,bottom_to_top,left_to_right,right_to_left}</span></code>;
-default is <code class="docutils literal notranslate"><span class="pre">top_to_bottom</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">title(Title)</span></code>
-diagram title (an atom; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code>
-print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">directory_paths(Boolean)</span></code>
-print/omit file directory paths (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file_extensions(Boolean)</span></code>
-print/omit file name extensions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">path_url_prefixes(PathPrefix,</span> <span class="pre">CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code>
-code and documenting URL prefixes for a path prefix used when
+default is <code class="docutils literal notranslate"><span class="pre">top_to_bottom</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">title(Title)</span></code></div>
+<div class="line">diagram title (an atom; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code></div>
+<div class="line">print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_paths(Boolean)</span></code></div>
+<div class="line">print/omit file directory paths (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_extensions(Boolean)</span></code></div>
+<div class="line">print/omit file name extensions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_url_prefixes(PathPrefix,</span> <span class="pre">CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code></div>
+<div class="line">code and documenting URL prefixes for a path prefix used when
 generating cluster, directory, file, and entity links (atoms; no
-default; can be specified multiple times)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">url_prefixes(CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code>
-default URL code and documenting URL prefixes used when generating
-cluster, library, file, and entity links (atoms; no default)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code>
-omit common path prefixes when printing directory paths (a list of
-atoms; default is an empty list)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code>
-print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code>
-print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code>
-print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">output_directory(Directory)</span></code>
-directory for the .dot files (an atom; default is <code class="docutils literal notranslate"><span class="pre">'./'</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code>
-list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code>
-list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zoom(Boolean)</span></code>
-generate sub-diagrams and add links and zoom icons to library and
-entity nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zoom_url_suffix(Suffix)</span></code>
-extension for linked diagrams (an atom; default is <code class="docutils literal notranslate"><span class="pre">'.svg'</span></code>)</p></li>
+default; can be specified multiple times)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">url_prefixes(CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code></div>
+<div class="line">default URL code and documenting URL prefixes used when generating
+cluster, library, file, and entity links (atoms; no default)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code></div>
+<div class="line">omit common path prefixes when printing directory paths (a list of
+atoms; default is an empty list)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code></div>
+<div class="line">print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default
+is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code></div>
+<div class="line">print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code></div>
+<div class="line">print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">output_directory(Directory)</span></code></div>
+<div class="line">directory for the .dot files (an atom; default is <code class="docutils literal notranslate"><span class="pre">'./'</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code></div>
+<div class="line">list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code></div>
+<div class="line">list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zoom(Boolean)</span></code></div>
+<div class="line">generate sub-diagrams and add links and zoom icons to library and
+entity nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zoom_url_suffix(Suffix)</span></code></div>
+<div class="line">extension for linked diagrams (an atom; default is <code class="docutils literal notranslate"><span class="pre">'.svg'</span></code>)</div>
+</div>
+</li>
 </ul>
 <p>For library diagrams the options are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code>
-diagram layout (one of the atoms
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code></div>
+<div class="line">diagram layout (one of the atoms
 <code class="docutils literal notranslate"><span class="pre">{top_to_bottom,bottom_to_top,left_to_right,right_to_left}</span></code>;
-default is <code class="docutils literal notranslate"><span class="pre">top_to_bottom</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">title(Title)</span></code>
-diagram title (an atom; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code>
-print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">directory_paths(Boolean)</span></code>
-print/omit file directory paths (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">path_url_prefixes(PathPrefix,</span> <span class="pre">CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code>
-code and documenting URL prefixes for a path prefix used when
+default is <code class="docutils literal notranslate"><span class="pre">top_to_bottom</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">title(Title)</span></code></div>
+<div class="line">diagram title (an atom; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code></div>
+<div class="line">print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_paths(Boolean)</span></code></div>
+<div class="line">print/omit file directory paths (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_url_prefixes(PathPrefix,</span> <span class="pre">CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code></div>
+<div class="line">code and documenting URL prefixes for a path prefix used when
 generating cluster, library, file, and entity links (atoms; no
-default; can be specified multiple times)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">url_prefixes(CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code>
-default URL code and documenting URL prefixes used when generating
-cluster, library, file, and entity links (atoms; no default)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code>
-omit common path prefixes when printing directory paths (a list of
-atoms; default is an empty list)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code>
-print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code>
-print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code>
-print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">output_directory(Directory)</span></code>
-directory for the .dot files (an atom; default is <code class="docutils literal notranslate"><span class="pre">'./'</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code>
-list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code>
-list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_libraries(Libraries)</span></code>
-list of libraries to exclude (default is
-<code class="docutils literal notranslate"><span class="pre">[startup,</span> <span class="pre">scratch_directory]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zoom(Boolean)</span></code>
-generate sub-diagrams and add links and zoom icons to library and
-entity nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zoom_url_suffix(Suffix)</span></code>
-extension for linked diagrams (an atom; default is <code class="docutils literal notranslate"><span class="pre">'.svg'</span></code>)</p></li>
+default; can be specified multiple times)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">url_prefixes(CodeURLPrefix,</span> <span class="pre">DocURLPrefix)</span></code></div>
+<div class="line">default URL code and documenting URL prefixes used when generating
+cluster, library, file, and entity links (atoms; no default)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code></div>
+<div class="line">omit common path prefixes when printing directory paths (a list of
+atoms; default is an empty list)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code></div>
+<div class="line">print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default
+is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code></div>
+<div class="line">print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code></div>
+<div class="line">print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">output_directory(Directory)</span></code></div>
+<div class="line">directory for the .dot files (an atom; default is <code class="docutils literal notranslate"><span class="pre">'./'</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code></div>
+<div class="line">list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code></div>
+<div class="line">list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_libraries(Libraries)</span></code></div>
+<div class="line">list of libraries to exclude (default is
+<code class="docutils literal notranslate"><span class="pre">[startup,</span> <span class="pre">scratch_directory]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zoom(Boolean)</span></code></div>
+<div class="line">generate sub-diagrams and add links and zoom icons to library and
+entity nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zoom_url_suffix(Suffix)</span></code></div>
+<div class="line">extension for linked diagrams (an atom; default is <code class="docutils literal notranslate"><span class="pre">'.svg'</span></code>)</div>
+</div>
+</li>
 </ul>
 <p>The option <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code> with a non-empty list of
 prefixes should be used together with the option
@@ -689,15 +857,27 @@ directories, or files.</p>
 libraries or files for which you want to generated diagrams.</p>
 <p>Support for displaying Prolog modules and Prolog module files in
 diagrams of Logtalk applications:</p>
-<ul class="simple">
-<li><p>ECLiPSe
-file diagrams don’t display module files</p></li>
-<li><p>SICStus Prolog
-file diagrams don’t display module files</p></li>
-<li><p>SWI-Prolog
-full support (uses the SWI-Prolog <code class="docutils literal notranslate"><span class="pre">prolog_xref</span></code> library)</p></li>
-<li><p>YAP
-full support (uses the YAP <code class="docutils literal notranslate"><span class="pre">prolog_xref</span></code> library)</p></li>
+<ul>
+<li><div class="line-block">
+<div class="line">ECLiPSe</div>
+<div class="line">file diagrams don’t display module files</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">SICStus Prolog</div>
+<div class="line">file diagrams don’t display module files</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">SWI-Prolog</div>
+<div class="line">full support (uses the SWI-Prolog <code class="docutils literal notranslate"><span class="pre">prolog_xref</span></code> library)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">YAP</div>
+<div class="line">full support (uses the YAP <code class="docutils literal notranslate"><span class="pre">prolog_xref</span></code> library)</div>
+</div>
+</li>
 </ul>
 </div>
 <div class="section" id="linking-diagrams">

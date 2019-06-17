@@ -369,30 +369,61 @@ is:</p>
 </pre></div>
 </div>
 <p>The possible values of the outcome argument are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">true</span></code>
-the test is expected to succeed</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code>
-the test is expected to succeed and satisfy the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code> goal</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">deterministic</span></code>
-the test is expected to succeed once without leaving a choice-point</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>
-the test is expected to succeed once without leaving a choice-point
-and satisfy the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code> goal</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fail</span></code>
-the test is expected to fail</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code>
-the test is expected to fail</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">error(Error)</span></code>
-the test is expected to throw the exception term <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">_)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">errors(Errors)</span></code>
-the test is expected to throw an exception term <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">_)</span></code>
-where <code class="docutils literal notranslate"><span class="pre">Error</span></code> is an element of the list <code class="docutils literal notranslate"><span class="pre">Errors</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ball(Ball)</span></code>
-the test is expected to throw the exception term <code class="docutils literal notranslate"><span class="pre">Ball</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">balls(Balls)</span></code>
-the test is expected to throw an exception term <code class="docutils literal notranslate"><span class="pre">Ball</span></code> where
-<code class="docutils literal notranslate"><span class="pre">Ball</span></code> is an element of the list <code class="docutils literal notranslate"><span class="pre">Balls</span></code></p></li>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true</span></code></div>
+<div class="line">the test is expected to succeed</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code></div>
+<div class="line">the test is expected to succeed and satisfy the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code> goal</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic</span></code></div>
+<div class="line">the test is expected to succeed once without leaving a choice-point</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code></div>
+<div class="line">the test is expected to succeed once without leaving a choice-point
+and satisfy the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code> goal</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fail</span></code></div>
+<div class="line">the test is expected to fail</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">false</span></code></div>
+<div class="line">the test is expected to fail</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error(Error)</span></code></div>
+<div class="line">the test is expected to throw the exception term
+<code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">_)</span></code></div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">errors(Errors)</span></code></div>
+<div class="line">the test is expected to throw an exception term <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">_)</span></code>
+where <code class="docutils literal notranslate"><span class="pre">Error</span></code> is an element of the list <code class="docutils literal notranslate"><span class="pre">Errors</span></code></div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ball(Ball)</span></code></div>
+<div class="line">the test is expected to throw the exception term <code class="docutils literal notranslate"><span class="pre">Ball</span></code></div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">balls(Balls)</span></code></div>
+<div class="line">the test is expected to throw an exception term <code class="docutils literal notranslate"><span class="pre">Ball</span></code> where
+<code class="docutils literal notranslate"><span class="pre">Ball</span></code> is an element of the list <code class="docutils literal notranslate"><span class="pre">Balls</span></code></div>
+</div>
+</li>
 </ul>
 <p>In the case of the <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>
 outcomes, a message that includes the assertion goal is printed for
@@ -407,19 +438,31 @@ this case, the following alternative test dialect can be used:</p>
 </div>
 <p>The currently supported options are (non-recognized options are
 ignored):</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">condition(Goal)</span></code>
-condition for deciding if the test should be run or skipped (default
-goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">setup(Goal)</span></code>
-setup goal for the test (default goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cleanup(Goal)</span></code>
-cleanup goal for the test (default goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">note(Term)</span></code>
-annotation to print (between parenthesis by default) after the test
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">condition(Goal)</span></code></div>
+<div class="line">condition for deciding if the test should be run or skipped
+(default goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">setup(Goal)</span></code></div>
+<div class="line">setup goal for the test (default goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cleanup(Goal)</span></code></div>
+<div class="line">cleanup goal for the test (default goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">note(Term)</span></code></div>
+<div class="line">annotation to print (between parenthesis by default) after the test
 result (default is <code class="docutils literal notranslate"><span class="pre">''</span></code>); the annotation term can share variables
-with the test goal, which can be used to pass additional information
-about the test result</p></li>
+with the test goal, which can be used to pass additional
+information about the test result</div>
+</div>
+</li>
 </ul>
 <p>Also supported is QuickCheck testing where random tests are
 automatically generated and run given a predicate mode template with
@@ -822,33 +865,79 @@ integration servers can be found at:</p>
 <h2>Utility predicates<a class="headerlink" href="#utility-predicates" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool provides several public utility predicates to
 simplify writing unit tests:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code> - to check when two terms are a variant of
-each other (e.g. to check expected test results against actual
-results when they contain variables)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">assertion(Goal)</span></code> - to generate an exception in case the goal
-argument fails or throws an error</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">assertion(Name,</span> <span class="pre">Goal)</span></code> - to generate an exception in case the goal
-argument fails or throws an error</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">approximately_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">Epsilon)</span></code> - for number
-approximate equality</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">essentially_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">Epsilon)</span></code> - for number
-essential equality</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tolerance_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">RelativeTolerance,</span> <span class="pre">AbsoluteTolerance)</span></code>
-- for number equality within tolerances</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Number1</span> <span class="pre">=~=</span> <span class="pre">Number2</span></code> - for number (or list of numbers) close
-equality (usually floating-point numbers)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Time)</span></code> - for timing a goal</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">benchmark_reified(Goal,</span> <span class="pre">Time,</span> <span class="pre">Result)</span></code> - reified version of
-<code class="docutils literal notranslate"><span class="pre">benchmark/2</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Repetitions,</span> <span class="pre">Time)</span></code> - for finding the average time
-to prove a goal</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Repetitions,</span> <span class="pre">Clock,</span> <span class="pre">Time)</span></code> - for finding the
-average time to prove a goal using a cpu or a wall clock</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">deterministic(Goal)</span></code> - for checking that a predicate succeeds
-without leaving a choice-point</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">deterministic(Goal,</span> <span class="pre">Deterministic)</span></code> - reified version of the
-<code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> predicate</p></li>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code></div>
+<div class="line">to check when two terms are a variant of each other (e.g. to check
+expected test results against actual results when they contain
+variables)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Goal)</span></code></div>
+<div class="line">to generate an exception in case the goal argument fails or throws
+an error</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Name,</span> <span class="pre">Goal)</span></code></div>
+<div class="line">to generate an exception in case the goal argument fails or throws
+an error</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">approximately_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">Epsilon)</span></code></div>
+<div class="line">for number approximate equality</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">essentially_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">Epsilon)</span></code></div>
+<div class="line">for number essential equality</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tolerance_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">RelativeTolerance,</span> <span class="pre">AbsoluteTolerance)</span></code></div>
+<div class="line">for number equality within tolerances</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Number1</span> <span class="pre">=~=</span> <span class="pre">Number2</span></code></div>
+<div class="line">for number (or list of numbers) close equality (usually
+floating-point numbers)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Time)</span></code></div>
+<div class="line">for timing a goal</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark_reified(Goal,</span> <span class="pre">Time,</span> <span class="pre">Result)</span></code></div>
+<div class="line">reified version of <code class="docutils literal notranslate"><span class="pre">benchmark/2</span></code></div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Repetitions,</span> <span class="pre">Time)</span></code></div>
+<div class="line">for finding the average time to prove a goal</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Repetitions,</span> <span class="pre">Clock,</span> <span class="pre">Time)</span></code></div>
+<div class="line">for finding the average time to prove a goal using a cpu or a wall
+clock</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(Goal)</span></code></div>
+<div class="line">for checking that a predicate succeeds without leaving a
+choice-point</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(Goal,</span> <span class="pre">Deterministic)</span></code></div>
+<div class="line">reified version of the <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> predicate</div>
+</div>
+</li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates can also be used in the body of tests
 where using two or more assertions is convenient or in the body of tests

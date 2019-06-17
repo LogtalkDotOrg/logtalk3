@@ -19,6 +19,9 @@
 Developer Tools
 ===============
 
+The documentation of each developer tool can also be found in the tool
+directory in the ``NOTES.md`` file.
+
 .. toctree::
    :maxdepth: 2
 

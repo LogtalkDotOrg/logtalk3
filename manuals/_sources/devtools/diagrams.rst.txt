@@ -277,75 +277,98 @@ Customization
 A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:
 
--  ``layout(Layout)``
-   diagram layout (one of the atoms
-   ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
-   default is ``bottom_to_top``)
--  ``title(Title)``
-   diagram title (an atom; default is ``''``)
--  ``date(Boolean)``
-   print/omit current date and time (``true`` or ``false``; default is
-   ``true``)
--  ``interface(Boolean)``
-   print/omit public predicates (``true`` or ``false``; default is
-   ``true``)
--  ``file_labels(Boolean)``
-   print/omit file labels (``true`` or ``false``; default is ``true``)
--  ``file_extensions(Boolean)``
-   print/omit file name extensions (``true`` or ``false``; default is
-   ``true``)
--  ``relation_labels(Boolean)``
-   print/omit entity relation labels (``true`` or ``false``; default is
-   ``true``)
--  ``externals(Boolean)``
-   print/omit external nodes (``true`` or ``false``; default is
-   ``true``)
--  ``node_type_captions(Boolean)``
-   print/omit node type captions (``true`` or ``false``; default is
-   ``true``)
--  ``inheritance_relations(Boolean)``
-   print/omit inheritance relations (``true`` or ``false``; default is
-   ``true`` for entity inheritance diagrams and ``false`` for other
-   entity diagrams)
--  ``provide_relations(Boolean)``
-   print/omit provide relations (``true`` or ``false``; default is
-   ``false``)
--  ``xref_relations(Boolean)``
-   print/omit predicate call cross-reference relations (``true`` or
-   ``false``; default depends on the specific diagram)
--  ``xref_calls(Boolean)``
-   print/omit predicate cross-reference calls (``true`` or ``false``;
-   default depends on the specific diagram)
--  ``output_directory(Directory)``
-   directory for the .dot files (an atom; default is ``'./'``)
--  ``exclude_directories(Directories)``
-   list of directories to exclude (default is ``[]``)
--  ``exclude_files(Files)``
-   list of source files to exclude (default is ``[]``)
--  ``exclude_libraries(Libraries)``
-   list of libraries to exclude (default is
-   ``[startup, scratch_directory]``)
--  ``exclude_entities(Entities)``
-   list of entities to exclude (default is ``[]``)
--  ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
-   code and documenting URL prefixes for a path prefix used when
-   generating cluster, library, directory, file, and entity links
-   (atoms; no default; can be specified multiple times)
--  ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
-   default URL code and documenting URL prefixes used when generating
-   cluster, library, file, and entity links (atoms; no default)
--  ``entity_url_suffix_target(Suffix, Target)``
-   extension for entity documenting URLs (an atom; default is
-   ``'.html'``) and target separating symbols (an atom; default is
-   ``'#'``)
--  ``omit_path_prefixes(Prefixes)``
-   omit common path prefixes when printing directory paths (a list of
-   atoms; default is an empty list)
--  ``zoom(Boolean)``
-   generate sub-diagrams and add links and zoom icons to library and
-   entity nodes (``true`` or ``false``; default is ``false``)
--  ``zoom_url_suffix(Suffix)``
-   extension for linked diagrams (an atom; default is ``'.svg'``)
+-  | ``layout(Layout)``
+   | diagram layout (one of the atoms
+     ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
+     default is ``bottom_to_top``)
+
+-  | ``title(Title)``
+   | diagram title (an atom; default is ``''``)
+
+-  | ``date(Boolean)``
+   | print/omit current date and time (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``interface(Boolean)``
+   | print/omit public predicates (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``file_labels(Boolean)``
+   | print/omit file labels (``true`` or ``false``; default is ``true``)
+
+-  | ``file_extensions(Boolean)``
+   | print/omit file name extensions (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``relation_labels(Boolean)``
+   | print/omit entity relation labels (``true`` or ``false``; default
+     is ``true``)
+
+-  | ``externals(Boolean)``
+   | print/omit external nodes (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``node_type_captions(Boolean)``
+   | print/omit node type captions (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``inheritance_relations(Boolean)``
+   | print/omit inheritance relations (``true`` or ``false``; default is
+     ``true`` for entity inheritance diagrams and ``false`` for other
+     entity diagrams)
+
+-  | ``provide_relations(Boolean)``
+   | print/omit provide relations (``true`` or ``false``; default is
+     ``false``)
+
+-  | ``xref_relations(Boolean)``
+   | print/omit predicate call cross-reference relations (``true`` or
+     ``false``; default depends on the specific diagram)
+
+-  | ``xref_calls(Boolean)``
+   | print/omit predicate cross-reference calls (``true`` or ``false``;
+     default depends on the specific diagram)
+
+-  | ``output_directory(Directory)``
+   | directory for the .dot files (an atom; default is ``'./'``)
+
+-  | ``exclude_directories(Directories)``
+   | list of directories to exclude (default is ``[]``)
+
+-  | ``exclude_files(Files)``
+   | list of source files to exclude (default is ``[]``)
+
+-  | ``exclude_libraries(Libraries)``
+   | list of libraries to exclude (default is
+     ``[startup, scratch_directory]``)
+
+-  | ``exclude_entities(Entities)``
+   | list of entities to exclude (default is ``[]``)
+
+-  | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
+   | code and documenting URL prefixes for a path prefix used when
+     generating cluster, library, directory, file, and entity links
+     (atoms; no default; can be specified multiple times)
+
+-  | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
+   | default URL code and documenting URL prefixes used when generating
+     cluster, library, file, and entity links (atoms; no default)
+
+-  | ``entity_url_suffix_target(Suffix, Target)``
+   | extension for entity documenting URLs (an atom; default is
+     ``'.html'``) and target separating symbols (an atom; default is
+     ``'#'``)
+
+-  | ``omit_path_prefixes(Prefixes)``
+   | omit common path prefixes when printing directory paths (a list of
+     atoms; default is an empty list)
+
+-  | ``zoom(Boolean)``
+   | generate sub-diagrams and add links and zoom icons to library and
+     entity nodes (``true`` or ``false``; default is ``false``)
+
+-  | ``zoom_url_suffix(Suffix)``
+   | extension for linked diagrams (an atom; default is ``'.svg'``)
 
 In the particular case of cross-referencing diagrams, there is also the
 option:
@@ -358,99 +381,129 @@ option:
 
 For directory and file diagrams the options are:
 
--  ``layout(Layout)``
-   diagram layout (one of the atoms
-   ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
-   default is ``top_to_bottom``)
--  ``title(Title)``
-   diagram title (an atom; default is ``''``)
--  ``date(Boolean)``
-   print/omit current date and time (``true`` or ``false``; default is
-   ``true``)
--  ``directory_paths(Boolean)``
-   print/omit file directory paths (``true`` or ``false``; default is
-   ``false``)
--  ``file_extensions(Boolean)``
-   print/omit file name extensions (``true`` or ``false``; default is
-   ``true``)
--  ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
-   code and documenting URL prefixes for a path prefix used when
-   generating cluster, directory, file, and entity links (atoms; no
-   default; can be specified multiple times)
--  ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
-   default URL code and documenting URL prefixes used when generating
-   cluster, library, file, and entity links (atoms; no default)
--  ``omit_path_prefixes(Prefixes)``
-   omit common path prefixes when printing directory paths (a list of
-   atoms; default is an empty list)
--  ``relation_labels(Boolean)``
-   print/omit entity relation labels (``true`` or ``false``; default is
-   ``false``)
--  ``externals(Boolean)``
-   print/omit external nodes (``true`` or ``false``; default is
-   ``true``)
--  ``node_type_captions(Boolean)``
-   print/omit node type captions (``true`` or ``false``; default is
-   ``false``)
--  ``output_directory(Directory)``
-   directory for the .dot files (an atom; default is ``'./'``)
--  ``exclude_directories(Directories)``
-   list of directories to exclude (default is ``[]``)
--  ``exclude_files(Files)``
-   list of source files to exclude (default is ``[]``)
--  ``zoom(Boolean)``
-   generate sub-diagrams and add links and zoom icons to library and
-   entity nodes (``true`` or ``false``; default is ``false``)
--  ``zoom_url_suffix(Suffix)``
-   extension for linked diagrams (an atom; default is ``'.svg'``)
+-  | ``layout(Layout)``
+   | diagram layout (one of the atoms
+     ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
+     default is ``top_to_bottom``)
+
+-  | ``title(Title)``
+   | diagram title (an atom; default is ``''``)
+
+-  | ``date(Boolean)``
+   | print/omit current date and time (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``directory_paths(Boolean)``
+   | print/omit file directory paths (``true`` or ``false``; default is
+     ``false``)
+
+-  | ``file_extensions(Boolean)``
+   | print/omit file name extensions (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
+   | code and documenting URL prefixes for a path prefix used when
+     generating cluster, directory, file, and entity links (atoms; no
+     default; can be specified multiple times)
+
+-  | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
+   | default URL code and documenting URL prefixes used when generating
+     cluster, library, file, and entity links (atoms; no default)
+
+-  | ``omit_path_prefixes(Prefixes)``
+   | omit common path prefixes when printing directory paths (a list of
+     atoms; default is an empty list)
+
+-  | ``relation_labels(Boolean)``
+   | print/omit entity relation labels (``true`` or ``false``; default
+     is ``false``)
+
+-  | ``externals(Boolean)``
+   | print/omit external nodes (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``node_type_captions(Boolean)``
+   | print/omit node type captions (``true`` or ``false``; default is
+     ``false``)
+
+-  | ``output_directory(Directory)``
+   | directory for the .dot files (an atom; default is ``'./'``)
+
+-  | ``exclude_directories(Directories)``
+   | list of directories to exclude (default is ``[]``)
+
+-  | ``exclude_files(Files)``
+   | list of source files to exclude (default is ``[]``)
+
+-  | ``zoom(Boolean)``
+   | generate sub-diagrams and add links and zoom icons to library and
+     entity nodes (``true`` or ``false``; default is ``false``)
+
+-  | ``zoom_url_suffix(Suffix)``
+   | extension for linked diagrams (an atom; default is ``'.svg'``)
 
 For library diagrams the options are:
 
--  ``layout(Layout)``
-   diagram layout (one of the atoms
-   ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
-   default is ``top_to_bottom``)
--  ``title(Title)``
-   diagram title (an atom; default is ``''``)
--  ``date(Boolean)``
-   print/omit current date and time (``true`` or ``false``; default is
-   ``true``)
--  ``directory_paths(Boolean)``
-   print/omit file directory paths (``true`` or ``false``; default is
-   ``false``)
--  ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
-   code and documenting URL prefixes for a path prefix used when
-   generating cluster, library, file, and entity links (atoms; no
-   default; can be specified multiple times)
--  ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
-   default URL code and documenting URL prefixes used when generating
-   cluster, library, file, and entity links (atoms; no default)
--  ``omit_path_prefixes(Prefixes)``
-   omit common path prefixes when printing directory paths (a list of
-   atoms; default is an empty list)
--  ``relation_labels(Boolean)``
-   print/omit entity relation labels (``true`` or ``false``; default is
-   ``false``)
--  ``externals(Boolean)``
-   print/omit external nodes (``true`` or ``false``; default is
-   ``true``)
--  ``node_type_captions(Boolean)``
-   print/omit node type captions (``true`` or ``false``; default is
-   ``false``)
--  ``output_directory(Directory)``
-   directory for the .dot files (an atom; default is ``'./'``)
--  ``exclude_directories(Directories)``
-   list of directories to exclude (default is ``[]``)
--  ``exclude_files(Files)``
-   list of source files to exclude (default is ``[]``)
--  ``exclude_libraries(Libraries)``
-   list of libraries to exclude (default is
-   ``[startup, scratch_directory]``)
--  ``zoom(Boolean)``
-   generate sub-diagrams and add links and zoom icons to library and
-   entity nodes (``true`` or ``false``; default is ``false``)
--  ``zoom_url_suffix(Suffix)``
-   extension for linked diagrams (an atom; default is ``'.svg'``)
+-  | ``layout(Layout)``
+   | diagram layout (one of the atoms
+     ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
+     default is ``top_to_bottom``)
+
+-  | ``title(Title)``
+   | diagram title (an atom; default is ``''``)
+
+-  | ``date(Boolean)``
+   | print/omit current date and time (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``directory_paths(Boolean)``
+   | print/omit file directory paths (``true`` or ``false``; default is
+     ``false``)
+
+-  | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
+   | code and documenting URL prefixes for a path prefix used when
+     generating cluster, library, file, and entity links (atoms; no
+     default; can be specified multiple times)
+
+-  | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
+   | default URL code and documenting URL prefixes used when generating
+     cluster, library, file, and entity links (atoms; no default)
+
+-  | ``omit_path_prefixes(Prefixes)``
+   | omit common path prefixes when printing directory paths (a list of
+     atoms; default is an empty list)
+
+-  | ``relation_labels(Boolean)``
+   | print/omit entity relation labels (``true`` or ``false``; default
+     is ``false``)
+
+-  | ``externals(Boolean)``
+   | print/omit external nodes (``true`` or ``false``; default is
+     ``true``)
+
+-  | ``node_type_captions(Boolean)``
+   | print/omit node type captions (``true`` or ``false``; default is
+     ``false``)
+
+-  | ``output_directory(Directory)``
+   | directory for the .dot files (an atom; default is ``'./'``)
+
+-  | ``exclude_directories(Directories)``
+   | list of directories to exclude (default is ``[]``)
+
+-  | ``exclude_files(Files)``
+   | list of source files to exclude (default is ``[]``)
+
+-  | ``exclude_libraries(Libraries)``
+   | list of libraries to exclude (default is
+     ``[startup, scratch_directory]``)
+
+-  | ``zoom(Boolean)``
+   | generate sub-diagrams and add links and zoom icons to library and
+     entity nodes (``true`` or ``false``; default is ``false``)
+
+-  | ``zoom_url_suffix(Suffix)``
+   | extension for linked diagrams (an atom; default is ``'.svg'``)
 
 The option ``omit_path_prefixes(Prefixes)`` with a non-empty list of
 prefixes should be used together with the option
@@ -464,14 +517,17 @@ libraries or files for which you want to generated diagrams.
 Support for displaying Prolog modules and Prolog module files in
 diagrams of Logtalk applications:
 
--  ECLiPSe
-   file diagrams don't display module files
--  SICStus Prolog
-   file diagrams don't display module files
--  SWI-Prolog
-   full support (uses the SWI-Prolog ``prolog_xref`` library)
--  YAP
-   full support (uses the YAP ``prolog_xref`` library)
+-  | ECLiPSe
+   | file diagrams don't display module files
+
+-  | SICStus Prolog
+   | file diagrams don't display module files
+
+-  | SWI-Prolog
+   | full support (uses the SWI-Prolog ``prolog_xref`` library)
+
+-  | YAP
+   | full support (uses the YAP ``prolog_xref`` library)
 
 Linking diagrams
 ----------------

@@ -183,22 +183,31 @@ The possible values of the outcome argument are:
 
 - `true`  
 	the test is expected to succeed
+
 - `true(Assertion)`  
 	the test is expected to succeed and satisfy the `Assertion` goal
+
 - `deterministic`  
 	the test is expected to succeed once without leaving a choice-point
+
 - `deterministic(Assertion)`  
 	the test is expected to succeed once without leaving a choice-point and satisfy the `Assertion` goal
+
 - `fail`  
 	the test is expected to fail
+
 - `false`  
 	the test is expected to fail
+
 - `error(Error)`  
 	the test is expected to throw the exception term `error(Error, _)`
+
 - `errors(Errors)`  
 	the test is expected to throw an exception term `error(Error, _)` where `Error` is an element of the list `Errors`
+
 - `ball(Ball)`  
 	the test is expected to throw the exception term `Ball`
+
 - `balls(Balls)`  
 	the test is expected to throw an exception term `Ball` where `Ball` is an element of the list `Balls`
 
@@ -218,10 +227,13 @@ The currently supported options are (non-recognized options are ignored):
 
 - `condition(Goal)`  
 	condition for deciding if the test should be run or skipped (default goal is `true`)
+
 - `setup(Goal)`  
 	setup goal for the test (default goal is `true`)
+
 - `cleanup(Goal)`  
 	cleanup goal for the test (default goal is `true`)
+
 - `note(Term)`  
 	annotation to print (between parenthesis by default) after the test result (default is `''`); the annotation term can share variables with the test goal, which can be used to pass additional information about the test result
 
@@ -650,31 +662,45 @@ Utility predicates
 The `lgtunit` tool provides several public utility predicates to simplify
 writing unit tests:
 
-- `variant(Term1, Term2)` - to check when two terms are a variant of each
-other (e.g. to check expected test results against actual results when they
-contain variables)
+- `variant(Term1, Term2)`  
+	to check when two terms are a variant of each other (e.g. to check
+	expected test results against actual results when they contain variables)
 
-- `assertion(Goal)` - to generate an exception in case the goal argument
-fails or throws an error
-- `assertion(Name, Goal)` - to generate an exception in case the goal
-argument fails or throws an error
+- `assertion(Goal)`  
+	to generate an exception in case the goal argument fails or throws an error
 
-- `approximately_equal(Number1, Number2, Epsilon)` - for number approximate equality
-- `essentially_equal(Number1, Number2, Epsilon)` - for number essential equality
-- `tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)` - for number equality within tolerances
-- `Number1 =~= Number2` - for number (or list of numbers) close equality (usually floating-point numbers)
+- `assertion(Name, Goal)`  
+	to generate an exception in case the goal	argument fails or throws an error
 
-- `benchmark(Goal, Time)` - for timing a goal
-- `benchmark_reified(Goal, Time, Result)` - reified version of `benchmark/2`
-- `benchmark(Goal, Repetitions, Time)` - for finding the average time
-to prove a goal
-- `benchmark(Goal, Repetitions, Clock, Time)` - for finding the average time
-to prove a goal using a cpu or a wall clock
+- `approximately_equal(Number1, Number2, Epsilon)`  
+	for number approximate equality
 
-- `deterministic(Goal)` - for checking that a predicate succeeds without
-leaving a choice-point
-- `deterministic(Goal, Deterministic)` - reified version of the
-`deterministic/1` predicate
+- `essentially_equal(Number1, Number2, Epsilon)`  
+	for number essential equality
+
+- `tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)`  
+	for number equality within tolerances
+
+- `Number1 =~= Number2`  
+	for number (or list of numbers) close equality (usually floating-point numbers)
+
+- `benchmark(Goal, Time)`  
+	for timing a goal
+
+- `benchmark_reified(Goal, Time, Result)`  
+	reified version of `benchmark/2`
+
+- `benchmark(Goal, Repetitions, Time)`  
+	for finding the average time to prove a goal
+
+- `benchmark(Goal, Repetitions, Clock, Time)`  
+	for finding the average time to prove a goal using a cpu or a wall clock
+
+- `deterministic(Goal)`  
+	for checking that a predicate succeeds without	leaving a choice-point
+
+- `deterministic(Goal, Deterministic)`  
+	reified version of the `deterministic/1` predicate
 
 The `assertion/1-2` predicates can also be used in the body of tests where
 using two or more assertions is convenient or in the body of tests written
