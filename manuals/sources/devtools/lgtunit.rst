@@ -23,8 +23,8 @@ Main files
 The ``lgtunit.lgt`` source file implements a framework for defining and
 running unit tests in Logtalk. The ``lgtunit_messages.lgt`` source file
 defines the default translations for the messages printed when running
-unit tests. These messages can be intercepted to customize output,
-e.g. to make it less verbose, or for integration with e.g. GUI IDEs and
+unit tests. These messages can be intercepted to customize output, e.g.
+to make it less verbose, or for integration with e.g. GUI IDEs and
 continuous integration servers.
 
 Other files part of this tool provide support for alternative output
@@ -45,6 +45,8 @@ This tool can be loaded using the query:
 ::
 
    | ?- logtalk_load(lgtunit(loader)).
+
+.. _writing,-compiling,-and-loading-unit-tests:
 
 Writing, compiling, and loading unit tests
 ------------------------------------------
@@ -78,7 +80,7 @@ for the tests should go to separate files.
 See the ``../../tester-sample.lgt`` file for an example of a loader file
 for compiling and loading the ``lgtunit`` tool, the source code under
 testing, the unit tests, and for automatically run all the tests after
-loading. See e.g. the ``../../tests`` directory for examples of unit
+loading. See e.g. the ``../../tests`` directory for examples of unit
 tests.
 
 Debugged test sets should preferably be compiled in optimal mode,
@@ -100,7 +102,7 @@ directive in a ``tester.lgt`` loader file.
 
 When testing complex *units*, it is often desirable to split the tests
 between several test objects or using parametric test objects to be able
-to run the same tests using different parameters (e.g. different data
+to run the same tests using different parameters (e.g. different data
 sets). In this case, you can run all test subsets using the goal:
 
 ::
@@ -111,7 +113,7 @@ where the ``run_test_sets/1`` predicate argument is a list of test
 object identifiers. This predicate makes possible to get a single code
 coverage report that takes into account all the tests.
 
-It’s also possible to automatically run loaded tests when using the
+It's also possible to automatically run loaded tests when using the
 ``make`` tool by calling the goal that runs the tests from a definition
 of the hook predicate ``logtalk_make_target_action/1``. For example, by
 adding to the tests ``tester.lgt`` driver file the following code:
@@ -271,7 +273,7 @@ Parameterized unit tests can be easily defined by using parametric
 objects.
 
 Note: when using the ``(<<)/2`` debugging control construct to access
-and test an object local (i.e. non-public) predicates, make sure that
+and test an object local (i.e. non-public) predicates, make sure that
 the compiler flag ``context_switching_calls`` is set to ``allow`` for
 those objects.
 
@@ -317,7 +319,7 @@ idiom by using a ``tester.lgt`` driver file with contents such as:
 
 The hook pipeline first applies our ``simple_dialect`` expansion
 followed by the default ``lgtunit`` expansion. This solution allows
-other hook objects (e.g. required by the code being tested) to also be
+other hook objects (e.g. required by the code being tested) to also be
 used by updating the pipeline. When that is not required, a simpler
 alternative is to change the expansion of the ``begin_of_file`` virtual
 term to:
@@ -399,7 +401,7 @@ Properties are expressed using predicates. The QuickCheck test dialects
 and predicates take as argument the mode template for a property,
 generate random values for each input argument based on the type
 information, and check each output argument. For common types, the
-implementation tries first common edge cases (e.g. empty atom, empty
+implementation tries first common edge cases (e.g. empty atom, empty
 list, or zero) before generating arbitrary values. When the output
 arguments check fails, the QuickCheck implementation tries (by default)
 up to 64 shrink operations of the counter-example to report a simpler
@@ -416,13 +418,13 @@ predicate, which takes as first argument a type. Randomly generating
 random types would be cumbersome at best but the main problem is that we
 need to generate random values for the second argument according to the
 first argument. Using the ``{}/1`` notation we can solve this problem
-for any specific type, e.g. integer, by writing:
+for any specific type, e.g. integer, by writing:
 
 ::
 
    | ?- lgtunit::quick_check(type::valid({integer}, +integer)).
 
-We can also test all (ground, i.e. non-parametrizable) types with
+We can also test all (ground, i.e. non-parametrizable) types with
 arbitrary value generators by writing:
 
 ::
@@ -512,6 +514,8 @@ For example:
            assertion(solution(X,Y,Z), my_test(X,Y,Z))
        ).
 
+.. _testing-input/output-predicates:
+
 Testing input/output predicates
 -------------------------------
 
@@ -541,7 +545,7 @@ it by using the goals ``^^suppress_text_output`` or
 Unit tests with timeout limits
 ------------------------------
 
-There’s no portable way to call a goal with a timeout limit. However,
+There's no portable way to call a goal with a timeout limit. However,
 some backend Prolog compilers provide this functionality:
 
 -  B-Prolog: ``time_out/3`` predicate
@@ -568,13 +572,13 @@ goal fails or throws an error.
 Per test setup and cleanup goals can be defined using the ``test/3``
 dialect and the ``setup/1`` and ``cleanup/1`` options. The test is
 skipped when the setup goal fails or throws an error. Note that a broken
-test cleanup goal doesn’t affect the test but may adversely affect any
+test cleanup goal doesn't affect the test but may adversely affect any
 following tests.
 
 Test annotations
 ----------------
 
-It’s possible to define per unit and per test annotations to be printed
+It's possible to define per unit and per test annotations to be printed
 after the test results or when tests are skipped. This is particularly
 useful when some units or some unit tests may be run while still being
 developed. Annotations can be used to pass additional information to a
@@ -648,7 +652,7 @@ Code coverage
 -------------
 
 If you want entity predicate clause coverage information to be collected
-and printed, you will need to compile the entities that you’re testing
+and printed, you will need to compile the entities that you're testing
 using the flags ``debug(on)`` and ``source_data(on)``. Be aware,
 however, that compiling in debug mode results in a performance penalty.
 
@@ -697,12 +701,12 @@ page for the script:
 
 An HTML version of this man page can be found at:
 
-https://logtalk.org/man/logtalk_tester.html
+`https://logtalk.org/man/logtalk_tester.html <https://logtalk.org/man/logtalk_tester.html>`__
 
 Additional advice on testing and on automating testing using continuous
 integration servers can be found at:
 
-https://logtalk.org/testing.html
+`https://logtalk.org/testing.html <https://logtalk.org/testing.html>`__
 
 Utility predicates
 ------------------
@@ -711,33 +715,41 @@ The ``lgtunit`` tool provides several public utility predicates to
 simplify writing unit tests:
 
 -  ``variant(Term1, Term2)`` - to check when two terms are a variant of
-   each other (e.g. to check expected test results against actual
+   each other (e.g. to check expected test results against actual
    results when they contain variables)
 
 -  ``assertion(Goal)`` - to generate an exception in case the goal
    argument fails or throws an error
+
 -  ``assertion(Name, Goal)`` - to generate an exception in case the goal
    argument fails or throws an error
 
 -  ``approximately_equal(Number1, Number2, Epsilon)`` - for number
    approximate equality
+
 -  ``essentially_equal(Number1, Number2, Epsilon)`` - for number
    essential equality
+
 -  ``tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)``
    - for number equality within tolerances
+
 -  ``Number1 =~= Number2`` - for number (or list of numbers) close
    equality (usually floating-point numbers)
 
 -  ``benchmark(Goal, Time)`` - for timing a goal
+
 -  ``benchmark_reified(Goal, Time, Result)`` - reified version of
    ``benchmark/2``
+
 -  ``benchmark(Goal, Repetitions, Time)`` - for finding the average time
    to prove a goal
+
 -  ``benchmark(Goal, Repetitions, Clock, Time)`` - for finding the
    average time to prove a goal using a cpu or a wall clock
 
 -  ``deterministic(Goal)`` - for checking that a predicate succeeds
    without leaving a choice-point
+
 -  ``deterministic(Goal, Deterministic)`` - reified version of the
    ``deterministic/1`` predicate
 
@@ -833,8 +845,8 @@ XSLT processor, however. For example:
      --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master \
      -o coverage_report.html coverage_report.xml
 
-Note that the URL should be a permanent link (i.e. it should include the
-commit SHA1). It’s also necessary to suppress the local path prefix in
+Note that the URL should be a permanent link (i.e. it should include the
+commit SHA1). It's also necessary to suppress the local path prefix in
 the generated ``coverage_report.xml`` file. For example:
 
 ::

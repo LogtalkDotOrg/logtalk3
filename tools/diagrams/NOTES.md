@@ -472,7 +472,7 @@ missing entities can result in incomplete diagrams.
 
 The zoom icons, `zoom.png` and `zoom.svg` have been designed by Xinh Studio:
 
-	https://www.iconfinder.com/xinhstudio
+https://www.iconfinder.com/xinhstudio
 
 Currently, only the `zoom.png` file is used. A copy of this file must exist
 in any directory used for publishing diagrams using it.

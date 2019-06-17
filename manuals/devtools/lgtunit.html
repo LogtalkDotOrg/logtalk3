@@ -241,8 +241,8 @@ implementation object as a parameter value.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgtunit.lgt</span></code> source file implements a framework for defining and
 running unit tests in Logtalk. The <code class="docutils literal notranslate"><span class="pre">lgtunit_messages.lgt</span></code> source file
 defines the default translations for the messages printed when running
-unit tests. These messages can be intercepted to customize output,
-e.g. to make it less verbose, or for integration with e.g. GUI IDEs and
+unit tests. These messages can be intercepted to customize output, e.g.
+to make it less verbose, or for integration with e.g. GUI IDEs and
 continuous integration servers.</p>
 <p>Other files part of this tool provide support for alternative output
 formats of test results and are discussed below.</p>
@@ -260,7 +260,7 @@ formats of test results and are discussed below.</p>
 </div>
 </div>
 <div class="section" id="writing-compiling-and-loading-unit-tests">
-<h2>Writing, compiling, and loading unit tests<a class="headerlink" href="#writing-compiling-and-loading-unit-tests" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Writing, compiling, and loading unit tests<a class="headerlink" href="#writing-compiling-and-loading-unit-tests" title="Permalink to this headline">¶</a></h2>
 <p>In order to write your own unit tests, define objects extending the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start from the <code class="docutils literal notranslate"><span class="pre">../../tests-sample.lgt</span></code>
 file. For example:</p>
@@ -285,7 +285,7 @@ for the tests should go to separate files.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">../../tester-sample.lgt</span></code> file for an example of a loader file
 for compiling and loading the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code under
 testing, the unit tests, and for automatically run all the tests after
-loading. See e.g. the <code class="docutils literal notranslate"><span class="pre">../../tests</span></code> directory for examples of unit
+loading. See e.g. the <code class="docutils literal notranslate"><span class="pre">../../tests</span></code> directory for examples of unit
 tests.</p>
 <p>Debugged test sets should preferably be compiled in optimal mode,
 specially when containing deterministic tests and when using the utility
@@ -302,7 +302,7 @@ loading its source file, you can run the tests by typing:</p>
 directive in a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> loader file.</p>
 <p>When testing complex <em>units</em>, it is often desirable to split the tests
 between several test objects or using parametric test objects to be able
-to run the same tests using different parameters (e.g. different data
+to run the same tests using different parameters (e.g. different data
 sets). In this case, you can run all test subsets using the goal:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>run_test_sets([...])
 </pre></div>
@@ -447,7 +447,7 @@ some of them with code coverage.</p>
 <p>Parameterized unit tests can be easily defined by using parametric
 objects.</p>
 <p>Note: when using the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct to access
-and test an object local (i.e. non-public) predicates, make sure that
+and test an object local (i.e. non-public) predicates, make sure that
 the compiler flag <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for
 those objects.</p>
 </div>
@@ -486,7 +486,7 @@ idiom by using a <code class="docutils literal notranslate"><span class="pre">te
 </div>
 <p>The hook pipeline first applies our <code class="docutils literal notranslate"><span class="pre">simple_dialect</span></code> expansion
 followed by the default <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> expansion. This solution allows
-other hook objects (e.g. required by the code being tested) to also be
+other hook objects (e.g. required by the code being tested) to also be
 used by updating the pipeline. When that is not required, a simpler
 alternative is to change the expansion of the <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> virtual
 term to:</p>
@@ -558,7 +558,7 @@ yes
 and predicates take as argument the mode template for a property,
 generate random values for each input argument based on the type
 information, and check each output argument. For common types, the
-implementation tries first common edge cases (e.g. empty atom, empty
+implementation tries first common edge cases (e.g. empty atom, empty
 list, or zero) before generating arbitrary values. When the output
 arguments check fails, the QuickCheck implementation tries (by default)
 up to 64 shrink operations of the counter-example to report a simpler
@@ -574,11 +574,11 @@ predicate, which takes as first argument a type. Randomly generating
 random types would be cumbersome at best but the main problem is that we
 need to generate random values for the second argument according to the
 first argument. Using the <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> notation we can solve this problem
-for any specific type, e.g. integer, by writing:</p>
+for any specific type, e.g. integer, by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(type<span class="o">::</span>valid(<span class="k">{</span>integer<span class="k">}</span>, <span class="o">+</span>integer)).
 </pre></div>
 </div>
-<p>We can also test all (ground, i.e. non-parametrizable) types with
+<p>We can also test all (ground, i.e. non-parametrizable) types with
 arbitrary value generators by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">forall</span>(
         (type<span class="o">::</span>type(<span class="nv">Type</span>), <span class="k">ground</span>(<span class="nv">Type</span>), type<span class="o">::</span>arbitrary(<span class="nv">Type</span>)),
@@ -655,7 +655,7 @@ test(test_solution_generator) <span class="o">:-</span>
 </div>
 </div>
 <div class="section" id="testing-input-output-predicates">
-<h2>Testing input/output predicates<a class="headerlink" href="#testing-input-output-predicates" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Testing input/output predicates<a class="headerlink" href="#testing-input-output-predicates" title="Permalink to this headline">¶</a></h2>
 <p>Extensive support for testing input/output predicates is provided, based
 on similar support found on the Prolog conformance testing framework
 written by Péter Szabó and Péter Szeredi.</p>
@@ -824,7 +824,7 @@ integration servers can be found at:</p>
 simplify writing unit tests:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code> - to check when two terms are a variant of
-each other (e.g. to check expected test results against actual
+each other (e.g. to check expected test results against actual
 results when they contain variables)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">assertion(Goal)</span></code> - to generate an exception in case the goal
 argument fails or throws an error</p></li>
@@ -927,7 +927,7 @@ XSLT processor, however. For example:</p>
   -o coverage_report.html coverage_report.xml
 </pre></div>
 </div>
-<p>Note that the URL should be a permanent link (i.e. it should include the
+<p>Note that the URL should be a permanent link (i.e. it should include the
 commit SHA1). It’s also necessary to suppress the local path prefix in
 the generated <code class="docutils literal notranslate"><span class="pre">coverage_report.xml</span></code> file. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -c xml -s $HOME/logtalk/

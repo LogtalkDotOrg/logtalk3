@@ -24,8 +24,8 @@ This tool can be loaded using the query:
 
    | ?- logtalk_load(debugger(loader)).
 
-Note that this tool cannot be loaded at the same time as other tools (
-e.g. the ports profiler) that also provide a debug handler, which must
+Note that this tool cannot be loaded at the same time as other tools
+(e.g. the ports profiler) that also provide a debug handler, which must
 be unique in a running session.
 
 When the code to be debugged runs computationally expensive
@@ -49,8 +49,8 @@ typing:
 
    | ?- set_logtalk_flag(debug, on).
 
-But note that loader files may override this flag setting (e.g. by using
-``debug(off)`` or ``optimize(on)`` options for loaded files). If that’s
+But note that loader files may override this flag setting (e.g. by using
+``debug(off)`` or ``optimize(on)`` options for loaded files). If that's
 the case, you will need to either edit the loader files or write
 customized loader files enabling debugging.
 
@@ -78,7 +78,7 @@ predicate definition using a query such as:
 
    | ?- object_property(Entity, defines(Functor/Arity, Properties)).
 
-and checking the returned ``line_count/1`` property to find if there’s
+and checking the returned ``line_count/1`` property to find if there's
 any offset to the source file number of the predicate clause that you
 want to trace. This issue, if present, usually only affects the first
 predicate clause.

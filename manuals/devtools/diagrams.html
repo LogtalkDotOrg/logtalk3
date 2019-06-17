@@ -305,65 +305,113 @@ entity relations. Currently we use the following DOT shapes (libraries,
 entities, predicates, and files) and arrows (entity, predicate, and file
 relations):</p>
 <ul>
-<li><p>libraries
-<code class="docutils literal notranslate"><span class="pre">tab</span></code> (lightsalmon)</p></li>
+<li><div class="line-block">
+<div class="line">libraries</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tab</span></code> (lightsalmon)</div>
+</div>
+</li>
 <li><div class="line-block">
 <div class="line">library loading and dependency relations</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">normal</span></code> (arrow ending with a black triangle)</div>
 </div>
 </li>
-<li><p>objects (classes, instances, and prototypes)
-<code class="docutils literal notranslate"><span class="pre">box</span></code> (rectangle, yellow for instances/classes and beige for
-prototypes)</p></li>
-<li><p>protocols
-<code class="docutils literal notranslate"><span class="pre">note</span></code> (aqua marine rectangle with folded right-upper corners)</p></li>
-<li><p>categories
-<code class="docutils literal notranslate"><span class="pre">component</span></code> (light cyan rectangle with two small rectangles
-intercepting the left side)</p></li>
+<li><div class="line-block">
+<div class="line">objects (classes, instances, and prototypes)</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (rectangle, yellow for instances/classes and beige for
+prototypes)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">protocols</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">note</span></code> (aqua marine rectangle with folded right-upper corners)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">categories</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">component</span></code> (light cyan rectangle with two small rectangles
+intercepting the left side)</div>
+</div>
+</li>
 <li><div class="line-block">
 <div class="line">modules</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">tab</span></code> (plum rectangle with small tab at top)</div>
 </div>
 </li>
-<li><p>public predicates
-<code class="docutils literal notranslate"><span class="pre">box</span></code> (springgreen)</p></li>
-<li><p>public, multifile, predicates
-<code class="docutils literal notranslate"><span class="pre">box</span></code> (skyblue)</p></li>
-<li><p>protected predicates
-<code class="docutils literal notranslate"><span class="pre">box</span></code> (yellow)</p></li>
-<li><p>private predicates
-<code class="docutils literal notranslate"><span class="pre">box</span></code> (indianred)</p></li>
-<li><p>external predicates
-<code class="docutils literal notranslate"><span class="pre">box</span></code> (beige)</p></li>
+<li><div class="line-block">
+<div class="line">public predicates</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (springgreen)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">public, multifile, predicates</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (skyblue)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">protected predicates</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (yellow)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">private predicates</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (indianred)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">external predicates</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (beige)</div>
+</div>
+</li>
 <li><div class="line-block">
 <div class="line">exported module predicates</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (springgreen)</div>
 </div>
 </li>
-<li><p>directories
-<code class="docutils literal notranslate"><span class="pre">tab</span></code> (lightsalmon)</p></li>
+<li><div class="line-block">
+<div class="line">directories</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tab</span></code> (lightsalmon)</div>
+</div>
+</li>
 <li><div class="line-block">
 <div class="line">directory loading and dependency relations</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">normal</span></code> (arrow ending with a black triangle)</div>
 </div>
 </li>
-<li><p>files
-<code class="docutils literal notranslate"><span class="pre">box</span></code> (pale turquoise rectangle)</p></li>
+<li><div class="line-block">
+<div class="line">files</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (pale turquoise rectangle)</div>
+</div>
+</li>
 <li><div class="line-block">
 <div class="line">file loading and dependency relations</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">normal</span></code> (arrow ending with a black triangle)</div>
 </div>
 </li>
-<li><p>specialization relation
-<code class="docutils literal notranslate"><span class="pre">onormal</span></code> (arrow ending with a white triangle)</p></li>
-<li><p>instantiation relation
-<code class="docutils literal notranslate"><span class="pre">normal</span></code> (arrow ending with a black triangle)</p></li>
-<li><p>extends relation
-<code class="docutils literal notranslate"><span class="pre">vee</span></code> (arrow ending with a “v”)</p></li>
-<li><p>implements relation
-<code class="docutils literal notranslate"><span class="pre">dot</span></code> (arrow ending with a black circle)</p></li>
-<li><p>imports relation
-<code class="docutils literal notranslate"><span class="pre">box</span></code> (arrow ending with a black square)</p></li>
+<li><div class="line-block">
+<div class="line">specialization relation</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">onormal</span></code> (arrow ending with a white triangle)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">instantiation relation</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normal</span></code> (arrow ending with a black triangle)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">extends relation</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">vee</span></code> (arrow ending with a “v”)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">implements relation</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dot</span></code> (arrow ending with a black circle)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">imports relation</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">box</span></code> (arrow ending with a black square)</div>
+</div>
+</li>
 <li><div class="line-block">
 <div class="line">complements relation</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">obox</span></code> (arrow ending with a white square)</div>
@@ -374,8 +422,11 @@ intercepting the left side)</p></li>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">rdiamond</span></code> (arrow ending with a black half diamond)</div>
 </div>
 </li>
-<li><p>predicate calls
-<code class="docutils literal notranslate"><span class="pre">normal</span></code> (arrow ending with a black triangle)</p></li>
+<li><div class="line-block">
+<div class="line">predicate calls</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normal</span></code> (arrow ending with a black triangle)</div>
+</div>
+</li>
 <li><div class="line-block">
 <div class="line">dynamic predicate updates</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">diamond</span></code> (arrow ending with a black diamond)</div>
@@ -390,11 +441,12 @@ described as external.</p>
 <div class="section" id="supported-graph-languages">
 <h2>Supported graph languages<a class="headerlink" href="#supported-graph-languages" title="Permalink to this headline">¶</a></h2>
 <p>Currently only the DOT graph language is supported (tested with Graphviz
-version 2.40.1 on macOS; visit the <a class="reference external" href="http://www.graphviz.org/">http://www.graphviz.org/</a> website for
-more information). Some recent versions have a nasty regression in the
-SVG exporter where text overflows the boxes that should contain it.
-Also, stable version 2.40.1 have a bug (fixed in the current git
-version) that can result in very long edges.</p>
+version 2.40.1 on macOS; visit the
+<a class="reference external" href="http://www.graphviz.org/">http://www.graphviz.org/</a> website for more
+information). Some recent versions have a nasty regression in the SVG
+exporter where text overflows the boxes that should contain it. Also,
+stable version 2.40.1 have a bug (fixed in the current git version) that
+can result in very long edges.</p>
 <p>The diagrams <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files are created on the current directory by
 default. These files can be easily converted into a printable format
 such as SVG, PDF, or Postscript. For example, using the <code class="docutils literal notranslate"><span class="pre">dot</span></code>
@@ -413,7 +465,7 @@ circo <span class="o">-</span><span class="nv">Tsvg</span> diagram.dot <span cla
 that produces the best results (see the <code class="docutils literal notranslate"><span class="pre">layout/1</span></code> option described
 below).</p>
 <p>Some output formats such as SVG support tooltips and URL links, which
-can be used for showing e.g. entity types, relation types, file paths,
+can be used for showing e.g. entity types, relation types, file paths,
 and for navigating to files and directories of files (libraries). See
 the relevant diagram options below in order to take advantage of these
 features.</p>
@@ -444,7 +496,7 @@ with a specific backend Prolog compiler, try to use another supported
 backend Prolog compiler when generating diagrams.</p>
 <p>For printing large diagrams, you will need to either use a tool to slice
 the diagram in page-sized pieces or, preferably, use software capable of
-tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
+tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
 <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files and play with settings such as aspect ratio for
 fine-tuning the diagrams layout.</p>
 </div>
@@ -529,8 +581,8 @@ option:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">url_line_references(Host)</span></code>
 syntax for the URL source file line part (an atom; possible values
 are <code class="docutils literal notranslate"><span class="pre">{github,gitlab,bitbucket}</span></code>; default is <code class="docutils literal notranslate"><span class="pre">github</span></code>); when using
-this option, the <code class="docutils literal notranslate"><span class="pre">CodeURLPrefix</span></code> should be a permanent link
-(i.e. it should include the commit SHA1)</p></li>
+this option, the <code class="docutils literal notranslate"><span class="pre">CodeURLPrefix</span></code> should be a permanent link (i.e.
+it should include the commit SHA1)</p></li>
 </ul>
 <p>For directory and file diagrams the options are:</p>
 <ul class="simple">
@@ -705,9 +757,7 @@ cross-referencing diagrams, missing entities can result in incomplete
 diagrams.</p>
 <p>The zoom icons, <code class="docutils literal notranslate"><span class="pre">zoom.png</span></code> and <code class="docutils literal notranslate"><span class="pre">zoom.svg</span></code> have been designed by Xinh
 Studio:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>www.iconfinder.com<span class="o">/</span>xinhstudio
-</pre></div>
-</div>
+<p><a class="reference external" href="https://www.iconfinder.com/xinhstudio">https://www.iconfinder.com/xinhstudio</a></p>
 <p>Currently, only the <code class="docutils literal notranslate"><span class="pre">zoom.png</span></code> file is used. A copy of this file must
 exist in any directory used for publishing diagrams using it.</p>
 <p>The Graphviz command-line utilities, e.g. <code class="docutils literal notranslate"><span class="pre">dot</span></code>, are notorious for

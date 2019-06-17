@@ -3,7 +3,7 @@
 
 The ``assertions.lgt`` file contains definitions for two
 meta-predicates, ``assertion/1-2``, which allows using of assertions on
-your source code (e.g. when writing unit tests). The
+your source code (e.g. when writing unit tests). The
 ``assertions_messages.lgt`` file defines the default message
 translations generated on assertions succeed, fail, or throw an
 exception. For more information on these entities, open the
@@ -29,7 +29,7 @@ Adding assertions to your source code
 -------------------------------------
 
 The ``assertion/1`` predicate takes a goal as argument. For example,
-assuming that you’re writing a unit test:
+assuming that you're writing a unit test:
 
 ::
 

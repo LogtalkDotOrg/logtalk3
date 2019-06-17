@@ -51,8 +51,8 @@ For usage examples, see the ``SCRIPT.txt`` file in the tool directory.
 
 For code coverage metrics, see the ``lgtunit`` tool documentation.
 
-For interpretation of the coupling metric scores, see e.g. the original
-paper by Robert Martin, “OO Design Quality Metrics”:
+For interpretation of the coupling metric scores, see e.g. the original
+paper by Robert Martin, "OO Design Quality Metrics":
 
 ::
 
@@ -132,14 +132,15 @@ Third-party tools
 
 ``cloc`` is an open-source command-line program that counts blank lines,
 comment lines, and lines of source code in many programming languages
-including Logtalk. Available at https://github.com/AlDanial/cloc
+including Logtalk. Available at
+`https://github.com/AlDanial/cloc <https://github.com/AlDanial/cloc>`__
 
 ``ohcount`` is an open-source command-line program that counts blank
 lines, comment lines, and lines of source code in many programming
 languages including Logtalk. Available at
-https://github.com/blackducksoftware/ohcount
+`https://github.com/blackducksoftware/ohcount <https://github.com/blackducksoftware/ohcount>`__
 
 ``tokei`` is an open-source command-line program that counts blank
 lines, comment lines, and lines of source code in many programming
 languages including Logtalk. Available at
-https://github.com/Aaronepower/tokei
+`https://github.com/Aaronepower/tokei <https://github.com/Aaronepower/tokei>`__

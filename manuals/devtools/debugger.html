@@ -218,8 +218,8 @@ following file and consult the debugging section of the User Manual:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(loader)).
 </pre></div>
 </div>
-<p>Note that this tool cannot be loaded at the same time as other tools (
-e.g. the ports profiler) that also provide a debug handler, which must
+<p>Note that this tool cannot be loaded at the same time as other tools
+(e.g. the ports profiler) that also provide a debug handler, which must
 be unique in a running session.</p>
 <p>When the code to be debugged runs computationally expensive
 initializations, loading this tool after the code may have a noticeable
@@ -237,7 +237,7 @@ typing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(debug, on).
 </pre></div>
 </div>
-<p>But note that loader files may override this flag setting (e.g. by using
+<p>But note that loader files may override this flag setting (e.g. by using
 <code class="docutils literal notranslate"><span class="pre">debug(off)</span></code> or <code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> options for loaded files). If that’s
 the case, you will need to either edit the loader files or write
 customized loader files enabling debugging.</p>

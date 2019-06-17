@@ -7,7 +7,7 @@ execution box model port profiler tool (inspired by the ECLiPSe
 tool.
 
 The Logtalk predicate execution box model is an extended version of the
-original Byrd’s four port model. Besides the standard ``call``,
+original Byrd's four port model. Besides the standard ``call``,
 ``exit``, ``fail``, and ``redo`` ports, Logtalk also defines two
 (post-)unification ports, ``fact`` and ``rule``, and an ``exception``
 port. This tool counts and reports the number of times each port is
@@ -33,8 +33,8 @@ Loading
 
    | ?- logtalk_load(ports_profiler(loader)).
 
-Note that this tool cannot be loaded at the same time as other tools (
-e.g. the debugger) that also provide a debug handler, which must be
+Note that this tool cannot be loaded at the same time as other tools
+(e.g. the debugger) that also provide a debug handler, which must be
 unique in a running session.
 
 Compiling source files for port profiling
@@ -54,7 +54,7 @@ Alternatively, you can also simply turn on the ``debug`` and
 
    | ?- set_logtalk_flag(debug, on), set_logtalk_flag(source_data, on).
 
-Be aware, however, that loader files (e.g. library loader files) may
+Be aware, however, that loader files (e.g. library loader files) may
 override default flag values and thus loaded files may not be compiled
 in debug mode. In this case, you will need to modify the loader files
 themselves.

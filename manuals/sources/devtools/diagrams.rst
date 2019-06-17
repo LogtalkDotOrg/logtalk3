@@ -5,7 +5,7 @@ This tool generates library, directory, file, entity, and predicate
 diagrams for source files and for libraries of source files using the
 Logtalk reflection API to collect the relevant information and a graph
 language for representing the diagrams. Limited support is also
-available for generating diagrams for Prolog module applications. It’s
+available for generating diagrams for Prolog module applications. It's
 also possible in general to generate predicate cross-referencing
 diagrams for plain Prolog files.
 
@@ -113,63 +113,80 @@ entity relations. Currently we use the following DOT shapes (libraries,
 entities, predicates, and files) and arrows (entity, predicate, and file
 relations):
 
--  libraries
-   ``tab`` (lightsalmon)
+-  | libraries
+   | ``tab`` (lightsalmon)
+
 -  | library loading and dependency relations
    | ``normal`` (arrow ending with a black triangle)
 
--  objects (classes, instances, and prototypes)
-   ``box`` (rectangle, yellow for instances/classes and beige for
-   prototypes)
--  protocols
-   ``note`` (aqua marine rectangle with folded right-upper corners)
--  categories
-   ``component`` (light cyan rectangle with two small rectangles
-   intercepting the left side)
+-  | objects (classes, instances, and prototypes)
+   | ``box`` (rectangle, yellow for instances/classes and beige for
+     prototypes)
+
+-  | protocols
+   | ``note`` (aqua marine rectangle with folded right-upper corners)
+
+-  | categories
+   | ``component`` (light cyan rectangle with two small rectangles
+     intercepting the left side)
+
 -  | modules
    | ``tab`` (plum rectangle with small tab at top)
 
--  public predicates
-   ``box`` (springgreen)
--  public, multifile, predicates
-   ``box`` (skyblue)
--  protected predicates
-   ``box`` (yellow)
--  private predicates
-   ``box`` (indianred)
--  external predicates
-   ``box`` (beige)
+-  | public predicates
+   | ``box`` (springgreen)
+
+-  | public, multifile, predicates
+   | ``box`` (skyblue)
+
+-  | protected predicates
+   | ``box`` (yellow)
+
+-  | private predicates
+   | ``box`` (indianred)
+
+-  | external predicates
+   | ``box`` (beige)
+
 -  | exported module predicates
    | ``box`` (springgreen)
 
--  directories
-   ``tab`` (lightsalmon)
+-  | directories
+   | ``tab`` (lightsalmon)
+
 -  | directory loading and dependency relations
    | ``normal`` (arrow ending with a black triangle)
 
--  files
-   ``box`` (pale turquoise rectangle)
+-  | files
+   | ``box`` (pale turquoise rectangle)
+
 -  | file loading and dependency relations
    | ``normal`` (arrow ending with a black triangle)
 
--  specialization relation
-   ``onormal`` (arrow ending with a white triangle)
--  instantiation relation
-   ``normal`` (arrow ending with a black triangle)
--  extends relation
-   ``vee`` (arrow ending with a “v”)
--  implements relation
-   ``dot`` (arrow ending with a black circle)
--  imports relation
-   ``box`` (arrow ending with a black square)
+-  | specialization relation
+   | ``onormal`` (arrow ending with a white triangle)
+
+-  | instantiation relation
+   | ``normal`` (arrow ending with a black triangle)
+
+-  | extends relation
+   | ``vee`` (arrow ending with a "v")
+
+-  | implements relation
+   | ``dot`` (arrow ending with a black circle)
+
+-  | imports relation
+   | ``box`` (arrow ending with a black square)
+
 -  | complements relation
    | ``obox`` (arrow ending with a white square)
 
 -  | uses and use module relations
    | ``rdiamond`` (arrow ending with a black half diamond)
 
--  predicate calls
-   ``normal`` (arrow ending with a black triangle)
+-  | predicate calls
+   | ``normal`` (arrow ending with a black triangle)
+
 -  | dynamic predicate updates
    | ``diamond`` (arrow ending with a black diamond)
 
@@ -182,11 +199,12 @@ Supported graph languages
 -------------------------
 
 Currently only the DOT graph language is supported (tested with Graphviz
-version 2.40.1 on macOS; visit the http://www.graphviz.org/ website for
-more information). Some recent versions have a nasty regression in the
-SVG exporter where text overflows the boxes that should contain it.
-Also, stable version 2.40.1 have a bug (fixed in the current git
-version) that can result in very long edges.
+version 2.40.1 on macOS; visit the
+`http://www.graphviz.org/ <http://www.graphviz.org/>`__ website for more
+information). Some recent versions have a nasty regression in the SVG
+exporter where text overflows the boxes that should contain it. Also,
+stable version 2.40.1 have a bug (fixed in the current git version) that
+can result in very long edges.
 
 The diagrams ``.dot`` files are created on the current directory by
 default. These files can be easily converted into a printable format
@@ -206,12 +224,12 @@ command-line executables may produce better results. For example:
    fdp -Tsvg diagram.dot > diagram.pdf
    circo -Tsvg diagram.dot > diagram.pdf
 
-It’s also worth to experiment with different layouts to find the one
+It's also worth to experiment with different layouts to find the one
 that produces the best results (see the ``layout/1`` option described
 below).
 
 Some output formats such as SVG support tooltips and URL links, which
-can be used for showing e.g. entity types, relation types, file paths,
+can be used for showing e.g. entity types, relation types, file paths,
 and for navigating to files and directories of files (libraries). See
 the relevant diagram options below in order to take advantage of these
 features.
@@ -225,9 +243,9 @@ Sample helper scripts are provided for converting ``.dot`` files to
 The scripts assume that the ``dot`` executable is available from the
 system path. Due to the lack of a Graphviz installer for Windows,
 limited test is performed in Windows operating-systems. Use if possible
-the bash script in a POSIX system (macOS, Linux, BSD, …).
+the bash script in a POSIX system (macOS, Linux, BSD, ...).
 
-When generating diagrams for multiple libraries or directories, it’s
+When generating diagrams for multiple libraries or directories, it's
 possible to split a diagram with several disconnected library or
 directory graphs using the ``ccomps`` command-line executable. For
 example:
@@ -249,7 +267,7 @@ backend Prolog compiler when generating diagrams.
 
 For printing large diagrams, you will need to either use a tool to slice
 the diagram in page-sized pieces or, preferably, use software capable of
-tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
+tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
 ``.dot`` files and play with settings such as aspect ratio for
 fine-tuning the diagrams layout.
 
@@ -335,8 +353,8 @@ option:
 -  ``url_line_references(Host)``
    syntax for the URL source file line part (an atom; possible values
    are ``{github,gitlab,bitbucket}``; default is ``github``); when using
-   this option, the ``CodeURLPrefix`` should be a permanent link
-   (i.e. it should include the commit SHA1)
+   this option, the ``CodeURLPrefix`` should be a permanent link (i.e.
+   it should include the commit SHA1)
 
 For directory and file diagrams the options are:
 
@@ -447,9 +465,9 @@ Support for displaying Prolog modules and Prolog module files in
 diagrams of Logtalk applications:
 
 -  ECLiPSe
-   file diagrams don’t display module files
+   file diagrams don't display module files
 -  SICStus Prolog
-   file diagrams don’t display module files
+   file diagrams don't display module files
 -  SWI-Prolog
    full support (uses the SWI-Prolog ``prolog_xref`` library)
 -  YAP
@@ -458,7 +476,7 @@ diagrams of Logtalk applications:
 Linking diagrams
 ----------------
 
-When using SVG output, it’s possible to generate diagrams that link to
+When using SVG output, it's possible to generate diagrams that link to
 other diagrams and also diagrams that link to API documentation and
 source code repositories.
 
@@ -524,9 +542,7 @@ diagrams.
 The zoom icons, ``zoom.png`` and ``zoom.svg`` have been designed by Xinh
 Studio:
 
-::
-
-   https://www.iconfinder.com/xinhstudio
+`https://www.iconfinder.com/xinhstudio <https://www.iconfinder.com/xinhstudio>`__
 
 Currently, only the ``zoom.png`` file is used. A copy of this file must
 exist in any directory used for publishing diagrams using it.

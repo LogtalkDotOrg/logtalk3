@@ -30,7 +30,7 @@ Currently, this tool supports the profilers provided with SICStus Prolog
 Logtalk also supports the YAP tick profiler (using the latest YAP
 development version) and the SWI-Prolog XPCE profiler. When using the
 XPCE profiler, you can avoid profiling the Logtalk compiler (which is
-invoked e.g. when you use the ``(::)/2`` message-sending operator at the
+invoked e.g. when you use the ``(::)/2`` message-sending operator at the
 top-level) by typing:
 
 ::
@@ -38,7 +38,7 @@ top-level) by typing:
    | ?- logtalk << (prolog_statistics:profile(... :: ...)).
 
 Given that ``prolog_statistics:profile/1`` is a meta-predicate, Logtalk
-will compile its argument before calling it. Don’t forget, however, to
+will compile its argument before calling it. Don't forget, however, to
 load the ``prolog_statistics`` module *before* using or compiling calls
 to the ``profile/1`` predicate by typing:
 

@@ -231,8 +231,8 @@ the tool directory.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ports_profiler(loader)).
 </pre></div>
 </div>
-<p>Note that this tool cannot be loaded at the same time as other tools (
-e.g. the debugger) that also provide a debug handler, which must be
+<p>Note that this tool cannot be loaded at the same time as other tools
+(e.g. the debugger) that also provide a debug handler, which must be
 unique in a running session.</p>
 </div>
 <div class="section" id="compiling-source-files-for-port-profiling">
@@ -247,7 +247,7 @@ mode and with the <code class="docutils literal notranslate"><span class="pre">s
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(debug, on), <span class="k">set_logtalk_flag</span>(source_data, on).
 </pre></div>
 </div>
-<p>Be aware, however, that loader files (e.g. library loader files) may
+<p>Be aware, however, that loader files (e.g. library loader files) may
 override default flag values and thus loaded files may not be compiled
 in debug mode. In this case, you will need to modify the loader files
 themselves.</p>

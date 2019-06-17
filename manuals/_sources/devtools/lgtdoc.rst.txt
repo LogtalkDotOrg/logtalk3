@@ -4,7 +4,7 @@
 This folder provides the default Logtalk documenting tool, which is
 focused on generating API documentation for applications.
 
-This documenting tool uses Logtalk’s structural reflection support to
+This documenting tool uses Logtalk's structural reflection support to
 extract and output in XML format relevant documentation about a source
 code file, a library or directory of source files, or all loaded source
 files. The tool predicates allows you to set several options for the XML
