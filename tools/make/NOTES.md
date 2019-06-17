@@ -33,3 +33,4 @@ predicates, open in a web browser the links:
 
 - [manuals/refman/logtalk_make_0.html](https://logtalk.org/manuals/refman/logtalk_make_0.html)
 - [manuals/refman/logtalk_make_1.html](https://logtalk.org/manuals/refman/logtalk_make_1.html)
+- [manuals/refman/logtalk_make_target_action_1.html](https://logtalk.org/manuals/refman/logtalk_make_target_action_1.html)

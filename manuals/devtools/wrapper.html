@@ -253,20 +253,35 @@ specializing the inherited definitions for the <code class="docutils literal not
 further processing by using the <code class="docutils literal notranslate"><span class="pre">include_wrapped_files(false)</span></code> option
 described below.</p>
 <p>The API predicates also accept a set of options for customization:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">prolog_extensions(Extensions)</span></code>
-list of file name extensions used to recognize Prolog source files
-(default is <code class="docutils literal notranslate"><span class="pre">['.pl',</span> <span class="pre">'.pro',</span> <span class="pre">'.prolog']</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">logtalk_extension(Extension)</span></code>
-Logtalk file name extension to be used for the generated wrapper
-files (default is <code class="docutils literal notranslate"><span class="pre">'.lgt'</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code>
-list of Prolog source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude_directories(Files)</span></code>
-list of sub-directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">include_wrapped_files(Boolean)</span></code>
-generate <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directives for the wrapped Prolog source files
-(default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prolog_extensions(Extensions)</span></code></div>
+<div class="line">list of file name extensions used to recognize Prolog source files
+(default is <code class="docutils literal notranslate"><span class="pre">['.pl',</span> <span class="pre">'.pro',</span> <span class="pre">'.prolog']</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_extension(Extension)</span></code></div>
+<div class="line">Logtalk file name extension to be used for the generated wrapper
+files (default is <code class="docutils literal notranslate"><span class="pre">'.lgt'</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code></div>
+<div class="line">list of Prolog source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_directories(Files)</span></code></div>
+<div class="line">list of sub-directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">include_wrapped_files(Boolean)</span></code></div>
+<div class="line">generate <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directives for the wrapped Prolog source
+files (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
 </ul>
 </div>
 <div class="section" id="current-limitations">
