@@ -93,14 +93,13 @@ the ``logtalk::message_hook/4`` multifile predicate. For example:
 
 ::
 
-   :- category(redirect_assertions_messages(_File)).
+   :- category(redirect_assertions_messages).
 
        :- multifile(logtalk::message_hook/4).
        :- dynamic(logtalk::message_hook/4).
 
        logtalk::message_hook(Message, error, assertions, _) :-
-           parameter(1, File),
-           writeq(File, Message), write(File, '.'), nl(File).
+           writeq(my_log_file, Message), write(my_log_file, '.\n').
 
    :- end_category.
 
@@ -119,7 +118,7 @@ them, and throw an error. For example:
        :- dynamic(logtalk::message_hook/4).
 
        logtalk::message_hook(Message, error, assertions, Tokens) :-
-           % uncomment the next two lines to also print the default assertion failure message
+           % uncomment the next two lines to also print the default message
            % logtalk::message_prefix_stream(error, assertions, Prefix, Stream),
            % logtalk::print_message_tokens(Stream, Prefix, Tokens),
            throw(error(Message, _)).

@@ -13,7 +13,8 @@ To consult this tool API documentation, open in a web browser the link:
 
 `docs/library_index.html#code-metrics <https://logtalk.org/docs/library_index.html#code-metrics>`__
 
-For sample queries, please see the `SCRIPT.txt <SCRIPT.txt>`__ file.
+For sample queries, please see the `SCRIPT.txt <SCRIPT.txt>`__ file in
+the tool directory.
 
 Loading
 -------
@@ -46,7 +47,7 @@ All metrics require the source code to be analyzed to be loaded with the
 A helper object, ``code_metrics``, is also provided allowing running all
 loaded individual metrics.
 
-For usage examples, see the ``SCRIPT.txt`` file.
+For usage examples, see the ``SCRIPT.txt`` file in the tool directory.
 
 For code coverage metrics, see the ``lgtunit`` tool documentation.
 
@@ -56,17 +57,17 @@ paper by Robert Martin, “OO Design Quality Metrics”:
 ::
 
    @inproceedings{citeulike:1579528,
-       author = {Martin, Robert},
-       booktitle = {Workshop Pragmatic and Theoretical Directions in Object-Oriented Software Metrics},
-       citeulike-article-id = {1579528},
-       citeulike-linkout-0 = {http://www.objectmentor.com/resources/articles/oodmetrc.pdf},
-       keywords = {diplomarbeit},
-       organization = {OOPSLA'94},
-       posted-at = {2007-08-21 11:08:44},
-       priority = {0},
-       title = {{OO} Design Quality Metrics - An Analysis of Dependencies},
-       url = {http://www.objectmentor.com/resources/articles/oodmetrc.pdf},
-       year = {1994}
+       author = "Martin, Robert",
+       booktitle = "Workshop Pragmatic and Theoretical Directions in Object-Oriented Software Metrics",
+       citeulike-article-id = 1579528,
+       citeulike-linkout-0 = "http://www.objectmentor.com/resources/articles/oodmetrc.pdf",
+       keywords = "diplomarbeit",
+       organization = "OOPSLA'94",
+       posted-at = "2007-08-21 11:08:44",
+       priority = 0,
+       title = "OO Design Quality Metrics - An Analysis of Dependencies",
+       url = "http://www.objectmentor.com/resources/articles/oodmetrc.pdf",
+       year = 1994
    }
 
 The Halstead metric computation uses the reflection API for performance.
@@ -104,18 +105,18 @@ original paper by Thomas J. McCabe:
 ::
 
    @inproceedings{McCabe:1976:CM:800253.807712,
-       author = {McCabe, Thomas J.},
-       title = {A Complexity Measure},
-       booktitle = {Proceedings of the 2Nd International Conference on Software Engineering},
-       series = {ICSE '76},
-       year = {1976},
-       location = {San Francisco, California, USA},
-       pages = {407--},
-       url = {http://dl.acm.org/citation.cfm?id=800253.807712},
-       acmid = {807712},
-       publisher = {IEEE Computer Society Press},
-       address = {Los Alamitos, CA, USA},
-       keywords = {Basis, Complexity measure, Control flow, Decomposition, Graph theory, Independence, Linear, Modularization, Programming, Reduction, Software, Testing},
+       author = "McCabe, Thomas J.",
+       title = "A Complexity Measure",
+       booktitle = "Proceedings of the 2Nd International Conference on Software Engineering",
+       series = "ICSE '76",
+       year = 1976,
+       location = "San Francisco, California, USA",
+       pages = "407--",
+       url = "http://dl.acm.org/citation.cfm?id=800253.807712",
+       acmid = 807712,
+       publisher = "IEEE Computer Society Press",
+       address = "Los Alamitos, CA, USA",
+       keywords = "Basis, Complexity measure, Control flow, Decomposition, Graph theory, Independence, Linear, Modularization, Programming, Reduction, Software, Testing",
    } 
 
 Defining new metrics

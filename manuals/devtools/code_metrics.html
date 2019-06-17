@@ -211,7 +211,8 @@ extensible via the addition of objects implementing new metrics.</p>
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>To consult this tool API documentation, open in a web browser the link:</p>
 <p><a class="reference external" href="https://logtalk.org/docs/library_index.html#code-metrics">docs/library_index.html#code-metrics</a></p>
-<p>For sample queries, please see the <a class="reference external" href="SCRIPT.txt">SCRIPT.txt</a> file.</p>
+<p>For sample queries, please see the <a class="reference external" href="SCRIPT.txt">SCRIPT.txt</a> file in
+the tool directory.</p>
 </div>
 <div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
@@ -239,22 +240,22 @@ extensible via the addition of objects implementing new metrics.</p>
 <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on.</p>
 <p>A helper object, <code class="docutils literal notranslate"><span class="pre">code_metrics</span></code>, is also provided allowing running all
 loaded individual metrics.</p>
-<p>For usage examples, see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file.</p>
+<p>For usage examples, see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory.</p>
 <p>For code coverage metrics, see the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool documentation.</p>
 <p>For interpretation of the coupling metric scores, see e.g. the original
 paper by Robert Martin, “OO Design Quality Metrics”:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span>citeulike<span class="o">:</span><span class="m">1579528</span>,
-    author <span class="o">=</span> <span class="k">{</span><span class="nv">Martin</span>, <span class="nv">Robert</span><span class="k">}</span>,
-    booktitle <span class="o">=</span> <span class="k">{</span><span class="nv">Workshop</span> <span class="nv">Pragmatic</span> and <span class="nv">Theoretical</span> <span class="nv">Directions</span> in <span class="nv">Object</span><span class="o">-</span><span class="nv">Oriented</span> <span class="nv">Software</span> <span class="nv">Metrics</span><span class="k">}</span>,
-    citeulike<span class="o">-</span>article<span class="o">-</span>id <span class="o">=</span> <span class="k">{</span><span class="m">1579528</span><span class="k">}</span>,
-    citeulike<span class="o">-</span>linkout<span class="o">-</span><span class="m">0</span> <span class="o">=</span> <span class="k">{</span>http<span class="o">://</span>www.objectmentor.com<span class="o">/</span>resources<span class="o">/</span>articles<span class="o">/</span>oodmetrc.pdf<span class="k">}</span>,
-    keywords <span class="o">=</span> <span class="k">{</span>diplomarbeit<span class="k">}</span>,
-    organization <span class="o">=</span> <span class="k">{</span><span class="nv">OOPSLA</span><span class="s">&#39;94},</span>
-    posted<span class="o">-</span>at <span class="o">=</span> <span class="k">{</span><span class="m">2007</span><span class="o">-</span><span class="m">08</span><span class="o">-</span><span class="m">21</span> <span class="m">11</span><span class="o">:</span><span class="m">08</span><span class="o">:</span><span class="m">44</span><span class="k">}</span>,
-    priority <span class="o">=</span> <span class="k">{</span><span class="m">0</span><span class="k">}</span>,
-    title <span class="o">=</span> <span class="k">{{</span><span class="nv">OO</span><span class="k">}</span> <span class="nv">Design</span> <span class="nv">Quality</span> <span class="nv">Metrics</span> <span class="o">-</span> <span class="nv">An</span> <span class="nv">Analysis</span> of <span class="nv">Dependencies</span><span class="k">}</span>,
-    url <span class="o">=</span> <span class="k">{</span>http<span class="o">://</span>www.objectmentor.com<span class="o">/</span>resources<span class="o">/</span>articles<span class="o">/</span>oodmetrc.pdf<span class="k">}</span>,
-    year <span class="o">=</span> <span class="k">{</span><span class="m">1994</span><span class="k">}</span>
+    author <span class="o">=</span> <span class="s">&quot;Martin, Robert&quot;</span>,
+    booktitle <span class="o">=</span> <span class="s">&quot;Workshop Pragmatic and Theoretical Directions in Object-Oriented Software Metrics&quot;</span>,
+    citeulike<span class="o">-</span>article<span class="o">-</span>id <span class="o">=</span> <span class="m">1579528</span>,
+    citeulike<span class="o">-</span>linkout<span class="o">-</span><span class="m">0</span> <span class="o">=</span> <span class="s">&quot;http://www.objectmentor.com/resources/articles/oodmetrc.pdf&quot;</span>,
+    keywords <span class="o">=</span> <span class="s">&quot;diplomarbeit&quot;</span>,
+    organization <span class="o">=</span> <span class="s">&quot;OOPSLA&#39;94&quot;</span>,
+    posted<span class="o">-</span>at <span class="o">=</span> <span class="s">&quot;2007-08-21 11:08:44&quot;</span>,
+    priority <span class="o">=</span> <span class="m">0</span>,
+    title <span class="o">=</span> <span class="s">&quot;OO Design Quality Metrics - An Analysis of Dependencies&quot;</span>,
+    url <span class="o">=</span> <span class="s">&quot;http://www.objectmentor.com/resources/articles/oodmetrc.pdf&quot;</span>,
+    year <span class="o">=</span> <span class="m">1994</span>
 <span class="k">}</span>
 </pre></div>
 </div>
@@ -286,18 +287,18 @@ paper:</p>
 the UPN metric and it is also described in the above paper besides the
 original paper by Thomas J. McCabe:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span><span class="nv">McCabe</span><span class="o">:</span><span class="m">1976</span><span class="o">:</span><span class="nv">CM</span><span class="o">:</span><span class="m">800253.807712</span>,
-    author <span class="o">=</span> <span class="k">{</span><span class="nv">McCabe</span>, <span class="nv">Thomas</span> <span class="nv">J</span>.<span class="k">}</span>,
-    title <span class="o">=</span> <span class="k">{</span><span class="nv">A</span> <span class="nv">Complexity</span> <span class="nv">Measure</span><span class="k">}</span>,
-    booktitle <span class="o">=</span> <span class="k">{</span><span class="nv">Proceedings</span> of the <span class="m">2</span><span class="nv">Nd</span> <span class="nv">International</span> <span class="nv">Conference</span> on <span class="nv">Software</span> <span class="nv">Engineering</span><span class="k">}</span>,
-    series <span class="o">=</span> <span class="k">{</span><span class="nv">ICSE</span> <span class="s">&#39;76},</span>
-    year <span class="o">=</span> <span class="k">{</span><span class="m">1976</span><span class="k">}</span>,
-    location <span class="o">=</span> <span class="k">{</span><span class="nv">San</span> <span class="nv">Francisco</span>, <span class="nv">California</span>, <span class="nv">USA</span><span class="k">}</span>,
-    pages <span class="o">=</span> <span class="k">{</span><span class="m">407</span><span class="o">--</span><span class="k">}</span>,
-    url <span class="o">=</span> <span class="k">{</span>http<span class="o">://</span>dl.acm.org<span class="o">/</span>citation.cfm<span class="o">?</span>id<span class="o">=</span><span class="m">800253.807712</span><span class="k">}</span>,
-    acmid <span class="o">=</span> <span class="k">{</span><span class="m">807712</span><span class="k">}</span>,
-    publisher <span class="o">=</span> <span class="k">{</span><span class="nv">IEEE</span> <span class="nv">Computer</span> <span class="nv">Society</span> <span class="nv">Press</span><span class="k">}</span>,
-    address <span class="o">=</span> <span class="k">{</span><span class="nv">Los</span> <span class="nv">Alamitos</span>, <span class="nv">CA</span>, <span class="nv">USA</span><span class="k">}</span>,
-    keywords <span class="o">=</span> <span class="k">{</span><span class="nv">Basis</span>, <span class="nv">Complexity</span> measure, <span class="nv">Control</span> flow, <span class="nv">Decomposition</span>, <span class="nv">Graph</span> theory, <span class="nv">Independence</span>, <span class="nv">Linear</span>, <span class="nv">Modularization</span>, <span class="nv">Programming</span>, <span class="nv">Reduction</span>, <span class="nv">Software</span>, <span class="nv">Testing</span><span class="k">}</span>,
+    author <span class="o">=</span> <span class="s">&quot;McCabe, Thomas J.&quot;</span>,
+    title <span class="o">=</span> <span class="s">&quot;A Complexity Measure&quot;</span>,
+    booktitle <span class="o">=</span> <span class="s">&quot;Proceedings of the 2Nd International Conference on Software Engineering&quot;</span>,
+    series <span class="o">=</span> <span class="s">&quot;ICSE &#39;76&quot;</span>,
+    year <span class="o">=</span> <span class="m">1976</span>,
+    location <span class="o">=</span> <span class="s">&quot;San Francisco, California, USA&quot;</span>,
+    pages <span class="o">=</span> <span class="s">&quot;407--&quot;</span>,
+    url <span class="o">=</span> <span class="s">&quot;http://dl.acm.org/citation.cfm?id=800253.807712&quot;</span>,
+    acmid <span class="o">=</span> <span class="m">807712</span>,
+    publisher <span class="o">=</span> <span class="s">&quot;IEEE Computer Society Press&quot;</span>,
+    address <span class="o">=</span> <span class="s">&quot;Los Alamitos, CA, USA&quot;</span>,
+    keywords <span class="o">=</span> <span class="s">&quot;Basis, Complexity measure, Control flow, Decomposition, Graph theory, Independence, Linear, Modularization, Programming, Reduction, Software, Testing&quot;</span>,
 <span class="k">}</span>
 </pre></div>
 </div>

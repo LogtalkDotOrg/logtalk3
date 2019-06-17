@@ -39,7 +39,8 @@ To consult this tool API documentation, open in a web browser the link:
 
 `docs/library_index.html#diagrams <https://logtalk.org/docs/library_index.html#diagrams>`__
 
-For sample queries, please see the `SCRIPT.txt <SCRIPT.txt>`__ file.
+For sample queries, please see the `SCRIPT.txt <SCRIPT.txt>`__ file in
+the tool directory.
 
 Loading
 -------
@@ -477,7 +478,7 @@ cases) and ``omit_path_prefixes/1``. The idea is that the
 be cut and replaced by the URL prefixes (which can be path prefix
 specific when addressing multiple code repositories). To generate local
 file system URLs, define the empty atom, ``''``, as a prefix. See the
-``SCRIPT.txt`` file for some usage examples.
+``SCRIPT.txt`` file in the tool directory for some usage examples.
 
 Creating diagrams for Prolog module applications
 ------------------------------------------------
@@ -487,9 +488,10 @@ to the lack of a comprehensive reflection API in other Prolog systems.
 
 Simply load your Prolog module application and its dependencies and then
 use diagram entity, directory, or file predicates. Library diagram
-predicates are not supported. See the ``SCRIPT.txt`` file for some usage
-examples. Note that support for diagrams with links to API documentation
-is quite limited, however, due to the lack of Prolog standards.
+predicates are not supported. See the ``SCRIPT.txt`` file in the tool
+directory for some usage examples. Note that support for diagrams with
+links to API documentation is quite limited, however, due to the lack of
+Prolog standards.
 
 Creating diagrams for plain Prolog files
 ----------------------------------------

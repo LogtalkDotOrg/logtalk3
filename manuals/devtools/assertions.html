@@ -279,14 +279,13 @@ is named <code class="docutils literal notranslate"><span class="pre">source</sp
 <p>By default, assertion failures and errors are printed to the standard
 output stream. These messages, however, can be intercepted by defining
 the <code class="docutils literal notranslate"><span class="pre">logtalk::message_hook/4</span></code> multifile predicate. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(redirect_assertions_messages(<span class="nv">_File</span>)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(redirect_assertions_messages).
 
 <span class="p">    :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
 <span class="p">    :- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
 
     logtalk<span class="o">::</span>message_hook(<span class="nv">Message</span>, error, assertions, <span class="nv">_</span>) <span class="o">:-</span>
-        <span class="k">parameter</span>(<span class="m">1</span>, <span class="nv">File</span>),
-        <span class="k">writeq</span>(<span class="nv">File</span>, <span class="nv">Message</span>), <span class="k">write</span>(<span class="nv">File</span>, <span class="s">&#39;.&#39;</span>), <span class="k">nl</span>(<span class="nv">File</span>).
+        <span class="k">writeq</span>(my_log_file, <span class="nv">Message</span>), <span class="k">write</span>(my_log_file, <span class="s">&#39;.</span><span class="se">\n</span><span class="s">&#39;</span>).
 
 <span class="p">:- </span><span class="k">end_category.</span>
 </pre></div>
@@ -303,7 +302,7 @@ them, and throw an error. For example:</p>
 <span class="p">    :- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
 
     logtalk<span class="o">::</span>message_hook(<span class="nv">Message</span>, error, assertions, <span class="nv">Tokens</span>) <span class="o">:-</span>
-        <span class="c">% uncomment the next two lines to also print the default assertion failure message</span>
+        <span class="c">% uncomment the next two lines to also print the default message</span>
         <span class="c">% logtalk::message_prefix_stream(error, assertions, Prefix, Stream),</span>
         <span class="c">% logtalk::print_message_tokens(Stream, Prefix, Tokens),</span>
         <span class="k">throw</span>(error(<span class="nv">Message</span>, <span class="nv">_</span>)).

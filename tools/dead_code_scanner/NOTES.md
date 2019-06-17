@@ -23,8 +23,12 @@ ________________________________________________________________________
 
 This tool detects *likely* dead code in Logtalk entities and in Prolog modules
 compiled as objects. Predicates (and non-terminals) are classified as dead code
-when (1) there is no scope directive for them and (2) are not called, directly
-or indirectly, by any predicate with a (local or inherited) scope directive.
+when:
+
+1. There is no scope directive for them.
+2. They are not called, directly or indirectly, by any predicate with a (local
+or inherited) scope directive.
+
 Predicates (and non-terminals) listed in `uses/2` and `use_module/2` directives
 but that are not used are also classified as dead code.
 
@@ -53,7 +57,8 @@ To consult this tool API documentation, open in a web browser the link:
 
 [docs/library_index.html#dead-code-scanner](https://logtalk.org/docs/library_index.html#dead-code-scanner)
 
-For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file.
+For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file in the
+tool directory.
 
 
 Loading
