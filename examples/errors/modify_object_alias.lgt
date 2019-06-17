@@ -18,9 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% clause heads must be callable terms
-
-:- object(redefined_object_alias).
+:- object(modify_object_alias).
 
 	:- uses([
 		foo as baz,

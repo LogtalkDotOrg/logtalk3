@@ -449,14 +449,3 @@
 :- object(someObject).
 
 :- end_object.
-
-
-
-:- object(duplicated_object_alias).
-
-	:- uses([
-		logtalk as lgt,
-		logtalk as lgt
-	]).
-
-:- end_object.
