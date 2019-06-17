@@ -176,6 +176,9 @@ formats ignored `complements` category relations.
 
 * FIXED: The `lgtdoc` tool processing of `mode/2` directives for non-terminals.
 
+* FIXED: The `assertions` tool to prevent accidental expansion of `::/2` goals
+with unbound arguments.
+
 Tests
 -----
 

@@ -266,10 +266,9 @@ compiled and loaded using the call:</p>
 <h2>Suppressing assertion calls from source code<a class="headerlink" href="#suppressing-assertion-calls-from-source-code" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">assertions/1</span></code> parametric object can be used as a hook object to
 suppress calls to the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates using goal-expansion
-(the expansion assumes that a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive is being used in the
-code that will be expanded to direct <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> calls to the
-<code class="docutils literal notranslate"><span class="pre">assertions</span></code> object). For example, assuming the file using assertions
-is named <code class="docutils literal notranslate"><span class="pre">source</span></code>, it would be compiled and loaded using the call:</p>
+(the expansion assumes <code class="docutils literal notranslate"><span class="pre">assertions::assertion/1-2</span></code> messages). For
+example, assuming the file using assertions is named <code class="docutils literal notranslate"><span class="pre">source</span></code>, it
+would be compiled and loaded using the call:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_load</span>(source, [hook(assertions(production))])
 </pre></div>
 </div>

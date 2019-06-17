@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2018/02/20,
+		date is 2019/06/17,
 		comment is 'A simple assertions framework. Can be used as a hook object for either suppressing assertions (``production`` mode) or expanding them with file context information (``debug`` mode).',
 		parnames is ['Mode']
 	]).
@@ -71,7 +71,10 @@
 
 	% the following clauses for the goal_expansion/2 predicate are only used when
 	% this object is used as a hook object with its parameter instantiated
-	goal_expansion(assertion(Goal), ExpandedGoal) :-
+	goal_expansion(Object::Message, ExpandedGoal) :-
+		Object == assertions,
+		callable(Message),
+		Message = assertion(Goal),
 		parameter(1, Mode),
 		(	Mode == debug ->
 			logtalk_load_context(source, File),
@@ -81,7 +84,10 @@
 			ExpandedGoal = true
 		;	fail
 		).
-	goal_expansion(assertion(_, _), true) :-
+	goal_expansion(Object::Message, true) :-
+		Object == assertions,
+		callable(Message),
+		Message = assertion(_, _),
 		parameter(1, Mode),
 		Mode == production.
 

@@ -87,10 +87,9 @@ Suppressing assertion calls from source code
 
 The `assertions/1` parametric object can be used as a hook object to
 suppress calls to the `assertion/1-2` predicates using goal-expansion
-(the expansion assumes that a `uses/2` directive is being used in the
-code that will be expanded to direct `assertion/1-2` calls to the
-`assertions` object). For example, assuming the file using assertions
-is named `source`, it would be compiled and loaded using the call:
+(the expansion assumes `assertions::assertion/1-2` messages). For example,
+assuming the file using assertions is named `source`, it would be compiled
+and loaded using the call:
 
 	logtalk_load(source, [hook(assertions(production))])
 
