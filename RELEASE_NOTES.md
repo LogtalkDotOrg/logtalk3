@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.27.0 - June ??, 2019
+3.27.0 - June 18, 2019
 ======================
 
 Logtalk compiler and runtime
@@ -33,7 +33,7 @@ directive in a parametric object or a parametric category.
 
 * ADDED: The object argument in a `uses/2` directive and the module argument
 in a `use_module/2` directive can now be a parameter variable when using the
-directive in a parametric object or a parametric category.
+directives in a parametric object or a parametric category.
 
 * ADDED: Compiler lint check for Logtalk built-in predicates being used as
 directives.
@@ -57,7 +57,7 @@ built-in meta-predicate plus `table/1` and `untable/1` built-in predicates.
 Documentation
 -------------
 
-* ADDED: Developer tools documentation to the Handbook.
+* ADDED: The developer tools documentation is now included in the Handbook.
 
 * ADDED: Experimental support for generating Texinfo versions of the Handbook
 and the APIs.
