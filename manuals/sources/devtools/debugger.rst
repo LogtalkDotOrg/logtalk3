@@ -10,8 +10,8 @@ To consult this tool API documentation, open in a web browser the link:
 
 `docs/library_index.html#debugger <https://logtalk.org/docs/library_index.html#debugger>`__
 
-For more information on using the debugger, open in a web browser the
-following file and consult the debugging section of the User Manual:
+For more information on using the debugger, consult the debugging
+section of the User Manual:
 
 `manuals/userman/debugging.html <https://logtalk.org/manuals/userman/debugging.html>`__
 

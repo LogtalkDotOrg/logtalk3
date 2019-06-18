@@ -25,9 +25,21 @@ generating API documentation for applications.
 
 This documenting tool uses Logtalk's structural reflection support to extract
 and output in XML format relevant documentation about a source code file, a
-library or directory  of source files, or all loaded source files. The tool
+library or directory of source files, or all loaded source files. The tool
 predicates allows you to set several options for the XML files, including the
 output directory.
+
+The `lgtdoc/xml` directory includes several ready to use scripts for converting
+the XML documenting files into final formats including (X)HTML, PDF, Markdown,
+and reStructuredText (for use with Sphinx), or plain text files. The scripts are
+described in their `man` pages. See also the `lgtdoc/xml/NOTES.md` for details.
+
+
+For information on documenting your source code, consult the documenting section
+of the User Manual:
+
+[manuals/userman/documenting.html](https://logtalk.org/manuals/userman/documenting.html)
+
 
 
 API documentation
@@ -54,7 +66,9 @@ files using the `source_data(on)` compiler flag. For example:
 
 	| ?- logtalk_load(source_file, [source_data(on)]).
 
-In alternative, you may also turn on the `source_data` flag globally by typing:
+Usually, this flag is set for all application source files in the corresponding
+loader file. In alternative, you may also turn on the `source_data` flag
+globally by typing:
 
 	| ?- set_logtalk_flag(source_data, on).
 
@@ -63,9 +77,34 @@ files, complemented with library, directory, entity, and predicate indexes.
 The source files to be documented **must** be loaded prior to using this tool
 predicates to generate the documentation.
 
-The `lgtdoc/xml` directory includes several ready to use scripts for converting
-the XML documenting files to (X)HTML, PDF, Markdown, reStructuredText (for use
-with Sphinx), or plain text files. See the `lgtdoc/xml/NOTES.md` for details.
+
+Generating documentation
+------------------------
+
+For a simple application, assuming a library alias is defined for it (e.g.
+`my_app`), and at the top-level interpreter, we can generate the application
+documentation by typing:
+
+	| ?- {my_app(loader)}.
+	...
+	
+	| ?- {lgtdoc(loader)}.
+	...
+	
+	| ?- lgtdoc::library(my_app).
+	...
+
+By default, the documenting XML files are created in a `./xml_docs` directory
+in the application directory. For example, assuming that we want to generate
+HTML documentation:
+
+	$ cd xml_docs
+	$ lgt2html -t "My app"
+
+For more complex applications, you can use the `doclet` tool to define a *doclet*
+to automate all the steps required to generate documentation. The *doclet* message
+that triggers the process can also be sent automatically when the `make` tool is
+used. 
 
 
 Other notes
