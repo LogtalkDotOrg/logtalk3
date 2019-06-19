@@ -21,6 +21,15 @@ RELEASE NOTES
 =============
 
 
+3.28.0 - July ??, 2019
+======================
+
+Documentation
+-------------
+
+* FIXED: Missing `loops` library API documentation.
+
+
 3.27.0 - June 18, 2019
 ======================
 

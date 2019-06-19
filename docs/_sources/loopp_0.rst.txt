@@ -1,6 +1,8 @@
 .. index:: loopp
 .. _loopp/0:
 
+.. rst-class:: right
+
 **protocol**
 
 ``loopp``
@@ -16,11 +18,19 @@ Loop control constructs protocol.
 |    ``static``
 
 
-(no dependencies on other entities)
+| **Dependencies:**
+|   (none)
 
 
-Public interface
-----------------
+| **Remarks:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
 
 .. raw:: html
 
@@ -45,6 +55,8 @@ While Condition is true do Action.
 |    ``whiledo(+callable,@callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="dowhile/2"> </div>
@@ -67,6 +79,8 @@ Do Action while Condition is true.
 | **Mode and number of proofs:**
 |    ``dowhile(@callable,+callable)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -91,6 +105,8 @@ For each element Element in List call Goal.
 |    ``foreach(@var,+list(term),@callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="foreach/4"> </div>
@@ -113,6 +129,8 @@ For each element Element in List at position Index call Goal. Index starts at 1.
 | **Mode and number of proofs:**
 |    ``foreach(@var,@var,+list(term),@callable)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -137,6 +155,8 @@ Call Goal counting up from First to Last. Increment is 1. For convenience and cl
 |    ``forto(+number,+number,@callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="forto/4"> </div>
@@ -159,6 +179,8 @@ Call Goal counting up from First to Last and instantiating Count to each success
 | **Mode and number of proofs:**
 |    ``forto(@var,+number,+number,@callable)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -183,6 +205,8 @@ Call Goal counting up from First to Last and instantiating Count to each success
 |    ``forto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="fordownto/3"> </div>
@@ -205,6 +229,8 @@ Call Goal counting down from First to Last. Decrement is 1. For convenience and 
 | **Mode and number of proofs:**
 |    ``fordownto(+number,+number,@callable)`` - ``zero_or_one``
 
+
+------------
 
 .. raw:: html
 
@@ -229,6 +255,8 @@ Call Goal counting down from First to Last and instantiating Count to each succe
 |    ``fordownto(@var,+number,+number,@callable)`` - ``zero_or_one``
 
 
+------------
+
 .. raw:: html
 
    <div id="fordownto/5"> </div>
@@ -252,8 +280,10 @@ Call Goal counting down from First to Last and instantiating Count to each succe
 |    ``fordownto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
 
 
-Protected interface
--------------------
+------------
+
+Protected predicates
+--------------------
 
 (none)
 
@@ -264,11 +294,6 @@ Private predicates
 
 Operators
 ---------
-
-(none)
-
-Remarks
--------
 
 (none)
 

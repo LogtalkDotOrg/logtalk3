@@ -32,6 +32,7 @@
 		sets(loader),
 		hierarchies(loader),
 		meta(loader),
+		loops(loader),
 		random(loader),
 		statistics(loader),
 		intervals(loader),
