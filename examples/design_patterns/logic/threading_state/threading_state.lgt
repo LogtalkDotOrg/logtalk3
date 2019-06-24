@@ -24,7 +24,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2019/01/31,
-		comment is 'Example of threading state between predocate calls using Definite Clause Grammars (DCGs).'
+		comment is 'Example of threading state between predicate calls using Definite Clause Grammars (DCGs).'
 	]).
 
 	:- public(convert/2).
@@ -58,7 +58,7 @@
 	% are defined as predicates instead of non-terminals
 	%
 	% the call//1 built-in meta non-terminal is used to
-	% avoid hard-coding assumptions abourt how grammar
+	% avoid hard-coding assumptions about how grammar
 	% rules are compiled into clauses
 
 %	steps -->
