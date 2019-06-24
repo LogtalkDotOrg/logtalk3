@@ -27,6 +27,10 @@ RELEASE NOTES
 Documentation
 -------------
 
+* ADDED: Glossary definition of *hook predicate*.
+
+* IMPROVED: Handbook session on multifile predicates.
+
 * FIXED: Missing `loops` library API documentation.
 
 

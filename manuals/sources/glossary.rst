@@ -401,6 +401,11 @@ Glossary
       :term:`built-in method`, a Logtalk built-in predicate, or a Prolog
       built-in predicate.
 
+   hook predicate
+      A predicate, usually declared :term:`multifile <multifile predicate>`,
+      that allows the user to customize another predicate or provide
+      alternative definitions for a default predicate definition.
+
    profiler
       A program that collects data about other program performance.
 

@@ -575,16 +575,20 @@ A predicate can be declared *multifile* by using the
 
 This allows clauses for a predicate to be defined in several objects
 and/or categories. This is a directive that should be used with care.
-Support for this directive have been added to Logtalk primarily to
-support migration of Prolog module code. Spreading clauses for a
-predicate among several Logtalk entities can be handy in some cases but
-can also make your code difficult to understand. Logtalk precludes using
-a multifile predicate for breaking object encapsulation by checking that
-the object (or category) declaring the predicate (using a scope
-directive) defines it also as multifile. This entity is said to contain
-the *primary declaration* for the multifile predicate. In addition, note
-that the ``multifile/1`` directive is mandatory when defining multifile
-predicates.
+It's commonly used in the definition of :term:`hook predicates <hook predicate>`.
+Multifile predicates (and non-terminals) may also be declared dynamic
+using the same predicate (or non-terminal) notation (multifile predicates
+are static by default).
+
+Logtalk precludes using a multifile predicate for breaking object
+encapsulation by checking that the object (or category) declaring the
+predicate (using a scope directive) defines it also as multifile.
+This entity is said to contain the *primary declaration* for the multifile
+predicate. Entities containing primary multifile predicate declarations
+must always be compiled before entities defining clauses for those multifile
+predicates. The Logtalk compiler will print a warning if the scope
+directive is missing. Note also that the ``multifile/1`` directive
+is mandatory when defining multifile predicates.
 
 Consider the following simple example:
 
@@ -629,14 +633,10 @@ as:
    X = 4
    yes
 
-Entities containing :term:`primary multifile predicate declarations <primary predicate declaration>`
-must always be compiled before entities defining clauses for those multifile
-predicates. The Logtalk compiler will print a warning if the scope
-directive is missing.
-
-Multifile predicates may also be declared dynamic using the same
-``Entity::Name/Arity`` notation (multifile predicates are static by
-default).
+Note that the order of multifile predicate clauses depend on several factors,
+including loading order and compiler implementation details. Therefore, your
+code should never assume or rely on a specific order of the multifile predicate
+clauses.
 
 When a clause of a multifile predicate is a rule, its body is compiled
 within the context of the object or category defining the clause. This
@@ -650,6 +650,11 @@ parameters of the entity defining the clause, not from the entity for
 which the clause is defined. The parameters of the entity for which the
 clause is defined can be accessed by simple unification at the clause
 head.
+
+Multifile predicate rules should not contain cuts as these may prevent
+other clauses for the predicate for being used by callers. The compiler
+prints by default a warning when a cut is found in a multifile predicate
+definition.
 
 Local calls to the database methods from multifile predicate clauses
 defined in an object take place in the object own database instead of
@@ -913,7 +918,7 @@ practical performance by the standard library.
 .. _predicates_dcgs:
 
 Definite clause grammar rules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 Definite clause grammar rules provide a convenient notation to represent
 the rewrite rules common of most grammars in Prolog. In Logtalk,

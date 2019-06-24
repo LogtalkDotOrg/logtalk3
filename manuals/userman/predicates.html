@@ -130,9 +130,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#category-predicates">Category predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#meta-predicates">Meta-predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lambda-expressions">Lambda expressions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#definite-clause-grammar-rules">Definite clause grammar rules</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#definite-clause-grammar-rules">Definite clause grammar rules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#built-in-object-predicates-methods">Built-in object predicates (methods)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#execution-context-methods">Execution context methods</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#error-handling-and-throwing-methods">Error handling and throwing methods</a></li>
@@ -711,16 +711,19 @@ using the <a class="reference internal" href="../refman/directives/info_2.html#d
 </div>
 <p>This allows clauses for a predicate to be defined in several objects
 and/or categories. This is a directive that should be used with care.
-Support for this directive have been added to Logtalk primarily to
-support migration of Prolog module code. Spreading clauses for a
-predicate among several Logtalk entities can be handy in some cases but
-can also make your code difficult to understand. Logtalk precludes using
-a multifile predicate for breaking object encapsulation by checking that
-the object (or category) declaring the predicate (using a scope
-directive) defines it also as multifile. This entity is said to contain
-the <em>primary declaration</em> for the multifile predicate. In addition, note
-that the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive is mandatory when defining multifile
-predicates.</p>
+It’s commonly used in the definition of <a class="reference internal" href="../glossary.html#term-hook-predicate"><span class="xref std std-term">hook predicates</span></a>.
+Multifile predicates (and non-terminals) may also be declared dynamic
+using the same predicate (or non-terminal) notation (multifile predicates
+are static by default).</p>
+<p>Logtalk precludes using a multifile predicate for breaking object
+encapsulation by checking that the object (or category) declaring the
+predicate (using a scope directive) defines it also as multifile.
+This entity is said to contain the <em>primary declaration</em> for the multifile
+predicate. Entities containing primary multifile predicate declarations
+must always be compiled before entities defining clauses for those multifile
+predicates. The Logtalk compiler will print a warning if the scope
+directive is missing. Note also that the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive
+is mandatory when defining multifile predicates.</p>
 <p>Consider the following simple example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(main).
 
@@ -758,13 +761,10 @@ X = 4
 yes
 </pre></div>
 </div>
-<p>Entities containing <a class="reference internal" href="../glossary.html#term-primary-predicate-declaration"><span class="xref std std-term">primary multifile predicate declarations</span></a>
-must always be compiled before entities defining clauses for those multifile
-predicates. The Logtalk compiler will print a warning if the scope
-directive is missing.</p>
-<p>Multifile predicates may also be declared dynamic using the same
-<code class="docutils literal notranslate"><span class="pre">Entity::Name/Arity</span></code> notation (multifile predicates are static by
-default).</p>
+<p>Note that the order of multifile predicate clauses depend on several factors,
+including loading order and compiler implementation details. Therefore, your
+code should never assume or rely on a specific order of the multifile predicate
+clauses.</p>
 <p>When a clause of a multifile predicate is a rule, its body is compiled
 within the context of the object or category defining the clause. This
 allows clauses for multifile predicates to call local object or category
@@ -777,6 +777,10 @@ parameters of the entity defining the clause, not from the entity for
 which the clause is defined. The parameters of the entity for which the
 clause is defined can be accessed by simple unification at the clause
 head.</p>
+<p>Multifile predicate rules should not contain cuts as these may prevent
+other clauses for the predicate for being used by callers. The compiler
+prints by default a warning when a cut is found in a multifile predicate
+definition.</p>
 <p>Local calls to the database methods from multifile predicate clauses
 defined in an object take place in the object own database instead of
 the database of the entity holding the multifile predicate primary
@@ -995,8 +999,9 @@ meta-predicate and lambda expression compiler, based on the
 <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>, is provided for
 practical performance by the standard library.</p>
 </div>
+</div>
 <div class="section" id="definite-clause-grammar-rules">
-<span id="predicates-dcgs"></span><h3>Definite clause grammar rules<a class="headerlink" href="#definite-clause-grammar-rules" title="Permalink to this headline">¶</a></h3>
+<span id="predicates-dcgs"></span><h2>Definite clause grammar rules<a class="headerlink" href="#definite-clause-grammar-rules" title="Permalink to this headline">¶</a></h2>
 <p>Definite clause grammar rules provide a convenient notation to represent
 the rewrite rules common of most grammars in Prolog. In Logtalk,
 definite clause grammar rules can be encapsulated in objects and
@@ -1145,7 +1150,6 @@ directive, as in the following example:</p>
 <span class="p">:- </span><span class="k">info</span>(sentence<span class="o">//</span><span class="m">0</span>, [
     comment <span class="k">is</span> <span class="s">&#39;Rewrites sentence into noun and verb phrases.&#39;</span>]).
 </pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="built-in-object-predicates-methods">
