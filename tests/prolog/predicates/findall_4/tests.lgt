@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/02/26,
+		date is 2019/06/26,
 		comment is 'Unit tests for the de facto Prolog standard findall/4 built-in predicate.'
 	]).
 
@@ -34,7 +34,7 @@
 
 	succeeds(commons_findall_4_02) :-
 		{findall(X+_Y, (X=1), S, _)},
-		S = [H| _], callable(H), functor(H, (+), 2), arg(1, H, N), N == 1, arg(2, H, V), var(V).
+		^^variant(S, [1+_|_]).
 
 	succeeds(commons_findall_4_03) :-
 		{findall(_X, fail, L, [0])},
