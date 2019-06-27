@@ -2815,7 +2815,7 @@ logtalk_make(Target) :-
 	'$lgt_failed_file_'(Path),
 	'$lgt_decompose_file_name'(Path, Directory, Name, Extension),
 	atom_concat(Name, Extension, Basename),
-	% force reloding by changing the main file time stamp to 0.0, a value that in the standard term
+	% force reloading by changing the main file time stamp to 0.0, a value that in the standard term
 	% comparison order used to compare time stamps comes before any integer or float actual time stamp
 	retract('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, _)),
 	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, 0.0)),
@@ -2835,7 +2835,7 @@ logtalk_make(Target) :-
 	'$lgt_included_file_'(Path, MainBasename, MainDirectory, LoadingTimeStamp),
 	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 	LoadingTimeStamp @< CurrentTimeStamp,
-	% force reloding by changing the main file time stamp to 0.0, a value that in the standard term
+	% force reloading by changing the main file time stamp to 0.0, a value that in the standard term
 	% comparison order used to compare time stamps comes before any integer or float actual time stamp
 	retract('$lgt_loaded_file_'(MainBasename, MainDirectory, Mode, Flags, TextProperties, ObjectFile, _)),
 	assertz('$lgt_loaded_file_'(MainBasename, MainDirectory, Mode, Flags, TextProperties, ObjectFile, 0.0)),
@@ -3554,7 +3554,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% found static declaration for the predicate
 		'$lgt_predicate_property_user'(Prop, Pred, Pred, Obj, ScopeAsAtom, Meta, PredFlags, TCtn, Obj, Def, Rnm)
 	;	PredFlags /\ 2 =:= 2 ->
-		% dynamically declared predicate; aliases can only be defined for staticly declared predicates
+		% dynamically declared predicate; aliases can only be defined for statically declared predicates
 		'$lgt_predicate_property_user'(Prop, Pred, Pred, Obj, ScopeAsAtom, Meta, PredFlags, TCtn, Obj, Def, Rnm)
 	;	% no predicate declaration; we may be querying properties of a predicate alias
 		'$lgt_find_original_predicate'(Obj, Rnm, ObjFlags, Pred, Original, Entity),
@@ -5618,7 +5618,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
-		% prevent the original sender, which is perserved when delegating a message, to be reset to "this"
+		% prevent the original sender, which is preserved when delegating a message, to be reset to "this"
 		'$lgt_execution_context'(CallerExCtx0, Entity, Sender, _, Self, MetaCallCtx, Stack),
 		'$lgt_execution_context'(CallerExCtx, Entity, Sender, Sender, Self, MetaCallCtx, Stack),
 		(	'$lgt_current_object_'(Sender, _, _, _, _, _, _, _, _, _, Flags),
@@ -6444,8 +6444,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % a file can be loaded by a loader file that, in turn, may also be loaded by
 % another loader file; propagating a file loading failure to its parent files
-% provides better top-level usability allowing realoding of fixed files by
-% simply relaoding the loader files, which also ensures loading of any files
+% provides better top-level usability allowing reloading of fixed files by
+% simply reloading the loader files, which also ensures loading of any files
 % to be loaded after the broken file that were not loaded in the previous
 % attempt
 
@@ -6752,7 +6752,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_file_term'(@term, +list, +pair(intger), +atom, @stream)
+% '$lgt_compile_file_term'(@term, +list, +pair(integer), +atom, @stream)
 
 '$lgt_compile_file_term'((-), _, _, _, _) :-
 	% catch variables
@@ -7991,7 +7991,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % goal-expansion results in a goal that contains the expanded goal
 %
 % calls to this predicate fail if the goal about to be expanded was
-% the resault of a previous goal expansion
+% the result of a previous goal expansion
 
 '$lgt_push_if_new'(ExpandedGoals, Pred, NewExpandedGoals) :-
 	var(ExpandedGoals),
