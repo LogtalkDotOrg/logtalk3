@@ -43,7 +43,7 @@
 		assertz(answer_(l)),
 		assertz(answer_(e)),
 		% divert the slide show output to the stream
-		% indentified with the "test_output" alias
+		% identified with the "test_output" alias
 		logtalk::retractall(message_prefix_stream(_, slides, _, _)),
 		logtalk::assertz(message_prefix_stream(_, slides, '', test_output)).
 

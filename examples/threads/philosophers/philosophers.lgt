@@ -240,7 +240,7 @@
 :- end_object.
 
 
-:- object(philosopher(_Philosopher, _LeftChopstick, _RightShopstick),
+:- object(philosopher(_Philosopher, _LeftChopstick, _RightChopstick),
 	implements(philosopherp)).
 
 	:- info([
@@ -263,7 +263,7 @@
 	left_chopstick(LeftStick) :-
 		parameter(2, LeftStick).
 
-	rigth_chopstick(RightStick) :-
+	right_chopstick(RightStick) :-
 		parameter(3, RightStick).
 
 	run(0, _) :-

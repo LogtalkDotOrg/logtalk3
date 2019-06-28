@@ -63,7 +63,7 @@
 		)).
 
 	create_buckets(N, Min, Max, Sum) :-
-		% remove all exisiting buckets
+		% remove all existing buckets
 		retractall(bucket_(_,_)),
 		% create the new buckets
 		create_buckets(N, Min, Max, 0, Sum).
@@ -85,17 +85,17 @@
 
 	transfer(Origin, _, Origin) :-
 		!.
-	transfer(Origin, Delta, Destin) :-
+	transfer(Origin, Delta, Destination) :-
 		retract(bucket_(Origin, OriginValue)),
-		retract(bucket_(Destin, DestinValue)),
+		retract(bucket_(Destination, DestinationValue)),
 		% the buckets may have changed between the access to its
 		% values and the calling of this transfer predicate; thus,
-		% we must ensure that we're transfering a legal amount
+		% we must ensure that we're transferring a legal amount
 		Amount is min(Delta, OriginValue),
 		NewOriginValue is OriginValue - Amount,
-		NewDestinValue is DestinValue + Amount,
+		NewDestinationValue is DestinationValue + Amount,
 		assertz(bucket_(Origin, NewOriginValue)),
-		assertz(bucket_(Destin, NewDestinValue)).
+		assertz(bucket_(Destination, NewDestinationValue)).
 
 	match_loop(N) :-
 		% randomly select two buckets

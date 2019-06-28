@@ -129,7 +129,7 @@
 
 
 
-% the follwing two objects, "m2" and "m1", implement a Logtalk version
+% the following two objects, "m2" and "m1", implement a Logtalk version
 % of a Ulrich Neumerkel example posted in the SWI-Prolog mailing list
 % on December 7, 2010 on the "Should var/1 be module-aware?" thread
 

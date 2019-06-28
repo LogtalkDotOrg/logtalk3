@@ -178,7 +178,7 @@
 
 	clone(_Object, _Clone) :-
 		context(Context),
-		throw(error(subclass_responsability, Context)).
+		throw(error(subclass_responsibility, Context)).
 
 	delete(Object) :-
 		::delete(Object, []).
@@ -234,7 +234,7 @@
 
 	equals(_Instance1, _Instance2) :-
 		context(Context),
-		throw(error(subclass_responsability, Context)).
+		throw(error(subclass_responsibility, Context)).
 
 	abstract_class :-
 		fail.

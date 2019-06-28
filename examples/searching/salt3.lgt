@@ -105,7 +105,7 @@ Remarks:
 			Z is X + Y
 		).
 
-	% throwing out the contents of a measure; does not afect the accumulator
+	% throwing out the contents of a measure; does not affect the accumulator
 	next_state(s(Acc, X, Y, Step), s(Acc, 0, Y, empty(m1)), 1) :-
 		X > 0,
 		Step \= fill(m1).

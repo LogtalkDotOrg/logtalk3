@@ -52,7 +52,7 @@ t(6, 'C', 'C').
 
 	% the compiler generates a predicate definition table entry that
 	% directly calls user::integer/1, thus inlining the predicate
-	% definition, and discars the clause (assuming compilation with
+	% definition, and discards the clause (assuming compilation with
 	% the "optimize" flag turned on)
 
 	integer(Term) :-

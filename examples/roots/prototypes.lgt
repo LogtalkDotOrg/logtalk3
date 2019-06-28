@@ -59,7 +59,7 @@
 
 	clone(_Clone) :-
 		context(Context),
-		throw(error(descendant_responsability, Context)).
+		throw(error(descendant_responsibility, Context)).
 
 	default_free_option(del_monitors).
 

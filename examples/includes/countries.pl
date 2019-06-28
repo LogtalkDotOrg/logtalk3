@@ -23,4 +23,4 @@ country(portugal, lisbon,    10).
 country(spain,    madrid,    40).
 country(france,   paris,    123).
 country(germany,  berlim,    40).
-country(polony,   varsovia, 123).
+country(poland,   varsovia, 123).

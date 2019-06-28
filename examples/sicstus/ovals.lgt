@@ -24,7 +24,7 @@
 		author is 'Paulo Moura',
 		version is 1.0,
 		date is 2000/4/22,
-		comment is 'Implements predicates for retriving common mathematical constants.'
+		comment is 'Implements predicates for retrieving common mathematical constants.'
 	]).
 
 	:- public(pi/1).

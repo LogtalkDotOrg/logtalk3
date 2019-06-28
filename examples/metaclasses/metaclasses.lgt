@@ -81,7 +81,7 @@
 
 	% methods can always be specialized:
 	init :-
-		% call the inherited, overriden definition:
+		% call the inherited, overridden definition:
 		^^init,
 		% do something more:
 		write('Instance initialized.'), nl.
@@ -132,7 +132,7 @@
 :- object(instance2,
 	instantiates(class2)).
 
-	% ... it's alos possible, if necessary, to define a dynamic
+	% ... it's also possible, if necessary, to define a dynamic
 	% instance in a source file by using the dynamic/0 directive:
 	:- (dynamic).
 

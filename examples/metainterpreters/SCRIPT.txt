@@ -107,12 +107,12 @@ yes
 
 % another example: expert system rules:
 
-| ?- rules::prove(weather(Wheather)).
+| ?- rules::prove(weather(Weather)).
 
-Wheather = raining 
+Weather = raining
 yes
 
 | ?- rules::prove(goto(Where)).
 
-Where = cinema 
+Where = cinema
 yes

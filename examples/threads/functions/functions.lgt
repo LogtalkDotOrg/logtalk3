@@ -30,7 +30,7 @@
 	:- public(find_root/5).
 	:- mode(find_root(+object_identifier, +float, +float, +float, -float), one).
 	:- info(find_root/5, [
-		comment is 'Find the root of a function in the interval [A, B] given a maximum aproximation error.',
+		comment is 'Find the root of a function in the interval [A, B] given a maximum approximation error.',
 		argnames is ['Function', 'A', 'B', 'Error', 'Zero']
 	]).
 
@@ -281,7 +281,7 @@
 	:- public(find_root/6).
 	:- mode(find_root(+object_identifier, +float, +float, +float, -float, -object_identifier), one).
 	:- info(find_root/6, [
-		comment is 'Finds the root of a function in the interval [A, B] given a maximum aproximation error. Returns the method used.',
+		comment is 'Finds the root of a function in the interval [A, B] given a maximum approximation error. Returns the method used.',
 		argnames is ['Function', 'A', 'B', 'Error', 'Zero', 'Method']
 	]).
 

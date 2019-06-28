@@ -32,7 +32,7 @@
 	:- public(next_state/3).
 	:- mode(next_state(+nonvar, -nonvar, -number), zero_or_more).
 	:- info(next_state/3, [
-		comment is 'Generates a state sucessor.',
+		comment is 'Generates a state successor.',
 		argnames is ['State', 'Next', 'Cost']
 	]).
 

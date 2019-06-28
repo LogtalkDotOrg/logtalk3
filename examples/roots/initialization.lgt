@@ -30,7 +30,7 @@
 	:- public(init/1).
 	:- mode(init(+list), zero_or_one).
 	:- info(init/1, [
-		comment is 'Intialize an object with the given list of options.',
+		comment is 'Initialize an object with the given list of options.',
 		argnames is ['Options']
 	]).
 
@@ -51,28 +51,28 @@
 	:- public(default_init_options/1).
 	:- mode(default_init_options(+list), one).
 	:- info(default_init_options/1, [
-		comment is 'List of default initilization options.',
+		comment is 'List of default initialization options.',
 		argnames is ['Options']
 	]).
 
 	:- public(default_init_option/1).
 	:- mode(default_init_option(?nonvar), zero_or_more).
 	:- info(default_init_option/1, [
-		comment is 'Default initilization option.',
+		comment is 'Default initialization option.',
 		argnames is ['Option']
 	]).
 
 	:- protected(process_init_option/1).
 	:- mode(process_init_option(?nonvar), zero_or_one).
 	:- info(process_init_option/1, [
-		comment is 'Process initilization option.',
+		comment is 'Process initialization option.',
 		argnames is ['Option']
 	]).
 
 	:- private(process_init_options/1).
 	:- mode(process_init_options(+list), zero_or_one).
 	:- info(process_init_options/1, [
-		comment is 'Process a list of initilization options.',
+		comment is 'Process a list of initialization options.',
 		argnames is ['Options']
 	]).
 

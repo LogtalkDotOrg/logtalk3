@@ -38,7 +38,7 @@
 
 	test(includes_3) :-
 		setof(Countries, countries::same_population(Countries), Solutions),
-		Solutions == [[france, polony], [germany, spain], [portugal]].
+		Solutions == [[france, poland], [germany, spain], [portugal]].
 
 	test(includes_4) :-
 		create_object(capitals, [], [public(capital/1), include(includes('countries.pl'))], [(capital(Capital) :- country(_,Capital,_))]),

@@ -46,7 +46,7 @@
 	:- public(next_state/2).
 	:- mode(next_state(+nonvar, -nonvar), zero_or_more).
 	:- info(next_state/2, [
-		comment is 'Generates a state sucessor.',
+		comment is 'Generates a state successor.',
 		argnames is ['State', 'Next']
 	]).
 

@@ -57,7 +57,7 @@
 % single functionality, that can be imported into any object
 
 % categories can be interpreted as the dual concept of protocols, with
-% both aiming for functional coheasion with the difference being that
+% both aiming for functional cohesion with the difference being that
 % categories can both declare and define predicates
 
 % in this example, we define a category for declaring planetary properties

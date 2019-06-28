@@ -45,7 +45,7 @@ yes
 
 | ?- setof(Countries, countries::same_population(Countries), Solutions).
 
-Solutions = [[france, polony], [germany, spain], [portugal]]
+Solutions = [[france, poland], [germany, spain], [portugal]]
 yes
 
 

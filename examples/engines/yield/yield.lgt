@@ -32,7 +32,7 @@
 	:- public(yield/2).
 	:- mode(yield(+natural, -list(natural)), one).
 	:- info(yield/2, [
-		comment is 'Fetchs answers from an engine that returns them using threaded_engine_yield/1. Note that yield_loop/2 eventually fails. If we succeed we would extract one more answer from the engine.',
+		comment is 'Fetches answers from an engine that returns them using threaded_engine_yield/1. Note that yield_loop/2 eventually fails. If we succeed we would extract one more answer from the engine.',
 		argnames is ['Length', 'List']
 	]).
 

@@ -47,7 +47,7 @@
 		assertz(counter_value_(Counter, New)).
 
 	save_counters :-
-		% save the current state of the conters database to a persistent file
+		% save the current state of the counters database to a persistent file
 		logtalk::expand_library_path(includes, Directory),
 		atom_concat(Directory, 'counters.pl', Path),
 		open(Path, write, Stream),

@@ -68,7 +68,7 @@
 			threaded_wait(done(Worker, Item))
 		),
 		write('Assembly of item '), write(Item), write(' done.'), nl,
-		% signal the workers to procede to the next assembly
+		% signal the workers to proceed to the next assembly
 		NextItem is Item - 1,
 		forall(
 			between(1, Workers, Worker),

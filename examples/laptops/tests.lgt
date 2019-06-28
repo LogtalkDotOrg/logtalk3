@@ -29,7 +29,7 @@
 	]).
 
 	test(laptops_1) :-
-		custom::new(fast, fifteen, querty, Laptop),
+		custom::new(fast, fifteen, qwerty, Laptop),
 		imports_category(Laptop, Category),
 		Category == laptop.
 

@@ -274,7 +274,7 @@ lines :-
 	L2::distance(P33, D),
 	write(D), nl,
 	L1::intersects(L2),
-	write(L1), write(' intesects '), write(L2), nl,
+	write(L1), write(' intersects '), write(L2), nl,
 	\+ L3::intersects(L4),
 	write(L3), write(' does not intersect '), write(L4), nl.
 

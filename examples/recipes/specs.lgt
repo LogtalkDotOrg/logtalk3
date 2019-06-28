@@ -30,7 +30,7 @@
 
 
 % next, we define a prototypical recipe object, which implements the recipe
-% protocol and adds some convinient predicates
+% protocol and adds some convenient predicates
 
 :- object(proto_recipe).
 

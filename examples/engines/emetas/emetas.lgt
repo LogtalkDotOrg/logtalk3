@@ -97,14 +97,14 @@
 	find_all_reified(Template, Goal, List) :-
 		threaded_engine_create(Template, Goal, Engine),
 		threaded_engine_next_reified(Engine, Answer),
-		collect_all_reifeid(Answer, Engine, List0),
+		collect_all_reified(Answer, Engine, List0),
 		threaded_engine_destroy(Engine),
 		List = List0.
 
-	collect_all_reifeid(no, _, []).
-	collect_all_reifeid(the(X), Engine, [X| Xs]) :-
+	collect_all_reified(no, _, []).
+	collect_all_reified(the(X), Engine, [X| Xs]) :-
 		threaded_engine_next_reified(Engine, Answer),
-		collect_all_reifeid(Answer, Engine, Xs).
+		collect_all_reified(Answer, Engine, Xs).
 
 	find_at_most(N, Template, Goal, List) :-
 		threaded_engine_create(Template, Goal, Engine),

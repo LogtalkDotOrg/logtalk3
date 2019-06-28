@@ -37,12 +37,12 @@
 		Males == [gomez, pubert, pugsley].
 
 	test(family_3) :-
-		setof(Child, addams::mother(Mother, Child), Childs),
-		Mother == morticia, Childs == [pubert, pugsley, wednesday].
+		setof(Child, addams::mother(Mother, Child), Children),
+		Mother == morticia, Children == [pubert, pugsley, wednesday].
 
 	test(family_4) :-
-		setof(Child, simpsons::father(Father, Child), Childs),
-		Father == homer, Childs == [bart, lisa, maggie].
+		setof(Child, simpsons::father(Father, Child), Children),
+		Father == homer, Children == [bart, lisa, maggie].
 
 	test(family_5) :-
 		setof(Male, simpsons_extended::male(Male), Males),

@@ -76,7 +76,7 @@
 
 	% make the predicates term_expansion/2 and goal_expansion/2,
 	% defined in the imported category "number_conversion",
-	% protected to this prototype and its descendents
+	% protected to this prototype and its descendants
 
 :- end_object.
 

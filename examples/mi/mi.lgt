@@ -84,7 +84,7 @@
 :- object(xyz(_X,_Y,_Z)).
 
 	:- public(distance/1).
-	:- mode(distance(?nunber), one).
+	:- mode(distance(?number), one).
 
 	distance(Distance) :-
 		parameter(1, X),

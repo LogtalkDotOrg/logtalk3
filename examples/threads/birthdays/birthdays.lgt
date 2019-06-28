@@ -110,7 +110,7 @@
 		define_events(after, Friend, birthday, _, Self),
 		threaded_once(Friend::age(_)).
 
-	% congratule a friend for his/her birthday:
+	% congratulate a friend for his/her birthday:
 	after(Friend, birthday, _) :-
 		self(Self),
 		threaded_ignore(Friend::happy_birthday(Self)).

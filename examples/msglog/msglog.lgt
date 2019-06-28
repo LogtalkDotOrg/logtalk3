@@ -62,7 +62,7 @@
 	:- public(log/2).
 	:- mode(log(?object_identifier, ?callable), zero_or_more).
 	:- info(log_/2, [
-		comment is 'Enumerates by bsacktracking all recorded messages.',
+		comment is 'Enumerates by backtracking all recorded messages.',
 		argnames is ['Object', 'Message']
 	]).
 

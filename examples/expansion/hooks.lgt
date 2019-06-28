@@ -87,7 +87,7 @@
 		list::append(HC, [(:- end_object)], HC0),
 		list::append([HA, HB, HC, [(:- end_object)]], Expansion).
 
-	% here we just try each individual hook object in succesion but more
+	% here we just try each individual hook object in succession but more
 	% elaborate combining schemes could be implemented if necessary
 
 	term_expansion(Term, Expansion) :-

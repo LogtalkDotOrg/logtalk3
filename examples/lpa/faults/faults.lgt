@@ -128,7 +128,7 @@
 	fault(f1002, 'Faulty distributor arm').
 	fault(f1003, 'Worn distributor brushes').
 
-	symptom(s1001, 'The starter turns but the engine doesnt fire').
+	symptom(s1001, 'The starter turns but the engine does not fire').
 	symptom(s1002, 'The engine has difficulty starting').
 	symptom(s1003, 'The engine cuts out shortly after starting').
 	symptom(s1004, 'The engine cuts out at speed').

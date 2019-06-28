@@ -29,20 +29,20 @@
 	:- public(foo/1).
 	% any object (or category) can send a prototype::foo/1 message;
 	% descendant objects can redefine this predicate and call inherited
-	% definitions using ^^foo/1; this object can acess definitions for
+	% definitions using ^^foo/1; this object can access definitions for
 	% this predicate in descendant objects by sending a ::bar/1 message
 	foo(1).
 
 	:- protected(bar/1).
 	% no object (other than this one) can send a prototype::bar/1 message;
 	% descendant objects can redefine this predicate and call inherited
-	% definitions using ^^bar/1; this object can acess definitions for
+	% definitions using ^^bar/1; this object can access definitions for
 	% this predicate in descendant objects by sending a ::bar/1 message
 	bar(1).
 
 	:- private(baz/1).
 	% no object (other than this one) can send a prototype::baz/1 message;
-	% descendant objects can redefine this predicate but cannot acess any
+	% descendant objects can redefine this predicate but cannot access any
 	% inherited definition using ^^baz/1; this object can call this
 	% predicate in descendant objects using ::baz/1
 	baz(1).
@@ -53,17 +53,17 @@
 	local(1).
 
 	:- public(p_foo/1).
-	% access any overriden definition in this object descendants
+	% access any overridden definition in this object descendants
 	p_foo(X) :-
 		::foo(X).
 
 	:- public(p_bar/1).
-	% access any overriden definition in this object descendants
+	% access any overridden definition in this object descendants
 	p_bar(X) :-
 		::bar(X).
 
 	:- public(p_baz/1).
-	% access any overriden definition in this object descendants
+	% access any overridden definition in this object descendants
 	p_baz(X) :-
 		::baz(X).
 
