@@ -43,7 +43,7 @@
 		data(foo).
 
 	deterministic(ports_profiler_data_1_02) :-
-		data(non_existant).
+		data(non_existent).
 
 	succeeds(ports_profiler_port_5_01) :-
 		port(fact, foo, Functor, Arity, Count),
@@ -88,6 +88,6 @@
 		reset(foo).
 
 	deterministic(ports_profiler_reset_1_02) :-
-		reset(non_existant).
+		reset(non_existent).
 
 :- end_object.

@@ -457,7 +457,7 @@
 
 	foo(1).
 
-	% supress quick_check/1-3 messages and save option values for tests
+	% suppress quick_check/1-3 messages and save option values for tests
 
 	:- private(quick_check_passed/1).
 	:- dynamic(quick_check_passed/1).

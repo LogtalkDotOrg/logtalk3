@@ -168,7 +168,7 @@
 				Predicates
 			),
 			write_data(Predicates, _)
-		;	% no profling data collected so far
+		;	% no profiling data collected so far
 			write_data([], _)
 		).
 
@@ -184,7 +184,7 @@
 				Predicates
 			),
 			write_data_entity(Predicates, Entity)
-		;	% no profling data collected so far for this entity
+		;	% no profiling data collected so far for this entity
 			write_data_entity([], _)
 		).
 
@@ -263,8 +263,8 @@
 		atom_length(Functor, FunctorLength),
 		number_codes(Arity, Codes),
 		atom_codes(ArityAtom, Codes),
-		atom_length(ArityAtom, ArirtLength),
-		Max1 is max(Max0, FunctorLength+1+ArirtLength),
+		atom_length(ArityAtom, ArityLength),
+		Max1 is max(Max0, FunctorLength+1+ArityLength),
 		maximum_width_predicate(Predicates, Max1, Max).
 
 	maximum_width_result(Entity, MaximumWidthCount) :-

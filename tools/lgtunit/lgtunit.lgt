@@ -557,7 +557,7 @@
 	:- dynamic(auxiliary_predicate_counter_/1).
 	:- mode(auxiliary_predicate_counter_(?integer), one_or_more).
 	:- info(auxiliary_predicate_counter_/1, [
-		comment is 'Counter for generarting unique auxiliary predicate names.',
+		comment is 'Counter for generating unique auxiliary predicate names.',
 		argnames is ['Counter']
 	]).
 
@@ -1230,7 +1230,7 @@
 		;	Expansion = (:- discontiguous(Filtered))
 		).
 
-	% collect all unit test identifiers when reching the end_object/0 directive
+	% collect all unit test identifiers when reaching the end_object/0 directive
 	directive_expansion(end_object, Terms) :-
 		findall(test_(Identifier, Test), test_(Identifier, Test), Terms, [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]),
 		findall(Test, retract(test_(_, Test)), Tests),
