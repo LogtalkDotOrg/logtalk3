@@ -65,7 +65,7 @@
 		number(Value).
 
 	% to simplify, we assume a single space separate expression tokens
-	% with no preceeding or trailing spaces surrounding the expression
+	% with no preceding or trailing spaces surrounding the expression
 
 	plus(Variables, Value) -->
 		expression(Variables, X), " ", expression(Variables, Y), " ", "+",

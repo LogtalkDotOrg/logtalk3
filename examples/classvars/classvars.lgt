@@ -37,7 +37,7 @@
 	cv_(0).
 
 	cv(Value) :-
-		% retrive cv_/1 value, shared for all instances
+		% retrieve cv_/1 value, shared for all instances
 		cv_(Value).
 
 	set_cv(Value) :-

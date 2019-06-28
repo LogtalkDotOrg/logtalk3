@@ -24,7 +24,7 @@
 % https://en.wikipedia.org/wiki/Multiton_pattern
 
 
-% we start by defing a multiton metaclass prioviding a simple
+% we start by defining a multiton metaclass providing a simple
 % interface for multiton classes
 %
 % this interface uses lazy creation of the named instances

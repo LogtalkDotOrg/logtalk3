@@ -182,7 +182,7 @@
 				Bottom::position(X, Yb) ->
 				% bottom block is already below the new position of the moved block
 				true
-			;	% botom block didn't move along 
+			;	% bottom block didn't move along 
 				remove_tuple(Block-Bottom)
 			)
 		;	true
@@ -205,7 +205,7 @@
 		version is 1.0,
 		date is 2016/05/25,
 		author is 'Paulo Moura',
-		comment is 'Block stack monitor. Prints an ASCII representation of all block stacks everytime a block is moved.'
+		comment is 'Block stack monitor. Prints an ASCII representation of all block stacks when a block is moved.'
 	]).
 
 	:- set_logtalk_flag(events, deny).

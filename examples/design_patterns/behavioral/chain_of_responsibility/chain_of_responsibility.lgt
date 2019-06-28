@@ -24,7 +24,7 @@
 % https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern
 
 
-% the Wikipedia example deals with purchasing requests thart need approval;
+% the Wikipedia example deals with purchasing requests that need approval;
 % depending on the purchase amount, the request may need to be forwarded up
 % in a company hierarchy
 
@@ -36,7 +36,7 @@
 :- category(purchase_power).
 
 	% allowable amount that can be approved
-	% by a fgiven person role 
+	% by a given person role 
 	:- public(allowable/1).
 
 	% main client predicate handling purchase requests
@@ -60,7 +60,7 @@
 	:- private(base/1).
 	base(500).
 
-	% successor in the chain of responsability when the current
+	% successor in the chain of responsibility when the current
 	% object cannot handle a request
 	:- private(successor/1).
 
@@ -68,7 +68,7 @@
 
 
 % define four person roles, each one delegating non-handled
-% requests to the next person in the chain of responsability
+% requests to the next person in the chain of responsibility
 
 :- object(manager,
 	imports(purchase_power)).

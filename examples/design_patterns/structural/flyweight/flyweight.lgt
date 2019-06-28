@@ -24,7 +24,7 @@
 % https://en.wikipedia.org/wiki/Flyweight_pattern
 
 
-% our flyweight object stores cheese brands and their correspoding unit
+% our flyweight object stores cheese brands and their corresponding unit
 % cost, which we assume are the same for all shops selling cheese 
 
 :- object(cheese_brands).
@@ -45,7 +45,7 @@
 
 
 % the cheese shops only store information about units sold per cheese
-% brand while the available brands and correspoding costs are stored
+% brand while the available brands and corresponding costs are stored
 % and shared using the cheese_brands flyweight object
 
 :- object(cheese_shop).

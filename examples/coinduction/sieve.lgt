@@ -38,7 +38,7 @@
 		generate_infinite_list(N, List),
 		sieve(List, Primes).
 
-	% generate a coinductive list with a 2..N repeating patern
+	% generate a coinductive list with a 2..N repeating pattern
 	generate_infinite_list(N, List) :-
 		sequence(2, N, List, List).
 

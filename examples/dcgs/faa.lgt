@@ -30,7 +30,7 @@
 	:- public(main/0).
 	:- mode(main, one).
 	:- info(main/0, [
-		comment is 'Starts iteractive command language interpreter.'
+		comment is 'Starts interactive command language interpreter.'
 	]).
 
 	:- private(booked/2).

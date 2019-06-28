@@ -55,7 +55,7 @@
 %		drop(X, L, L1),
 %		comember(X, L1).
 %
-%	% Drop some prefix of arg2 upto an "occurrence" of arg1 from arg2,
+%	% Drop some prefix of arg2 up to an "occurrence" of arg1 from arg2,
 %	% yielding arg3.
 %	% ("Occurrence" of X = something unifiable with X.)
 %	%:- table(drop/3).	% not working; needs tabling supporting cyclic terms!

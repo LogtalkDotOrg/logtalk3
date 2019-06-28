@@ -52,7 +52,7 @@
 :- end_object.
 
 
-% define the decorator as a parametric object usong one parameter
+% define the decorator as a parametric object using one parameter
 % to pass the decorated object and a second parameter to pass the
 % decoration
 

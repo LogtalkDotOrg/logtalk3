@@ -50,7 +50,7 @@
 	%
 	% book :-
 	%	context(Context),
-	%	throw(error(descendant_responsability, Context)).
+	%	throw(error(descendant_responsibility, Context)).
 
 :- end_object.
 

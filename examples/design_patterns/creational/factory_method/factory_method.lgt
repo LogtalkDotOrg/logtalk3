@@ -25,7 +25,7 @@
 
 
 % the example deals with maze games where each maze is composed by a set of
-% possibly connected rooms; we start by defing two kinds of rooms: ordinary
+% possibly connected rooms; we start by defining two kinds of rooms: ordinary
 % rooms and magic rooms
 
 :- category(room).

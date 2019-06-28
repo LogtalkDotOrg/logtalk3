@@ -24,7 +24,7 @@
 % https://en.wikipedia.org/wiki/Lazy_initialization
 
 
-% we start by defing a metaclass with a simple interface for
+% we start by defining a metaclass with a simple interface for
 % lazy creation of required instances, which are accessed by
 % using a key
 

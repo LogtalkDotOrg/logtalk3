@@ -35,7 +35,7 @@
 :- object(mediator).
 
 	% mediator must knows all colleagues
-	% to coordinate their interection
+	% to coordinate their interaction
 
 	:- public(book/0).
     book :-

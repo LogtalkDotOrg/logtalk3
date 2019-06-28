@@ -33,6 +33,6 @@ Related examples:
 This design pattern is usually implemented using some representation of
 rules that express the domain knowledge and a meta-interpreter for those
 rules that allows asking (usually, interactively) questions about rule
-permises. Answers to those questions are stored to avoid repeating the
+premisses. Answers to those questions are stored to avoid repeating the
 questions and an allow using the answers when attempting to apply other
-rules that share som of the permises.
+rules that share some of the premisses.

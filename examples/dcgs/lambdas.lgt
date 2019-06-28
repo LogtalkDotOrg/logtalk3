@@ -28,7 +28,7 @@
 		source is 'Adapted from example posted by Kuniaki Mukai in the SWI-Prolog mailing list.'
 	]).
 
-	% silent variables with dual role in lambda expresions warnings
+	% silent variables with dual role in lambda expressions warnings
 	:- set_logtalk_flag(lambda_variables, silent).
 
 	:- public(aa//1).

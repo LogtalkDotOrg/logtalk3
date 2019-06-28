@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	% avoid warnings as the tests create at runtime new objects with
-	% fixed indentifiers that are used as references in other tests
+	% fixed identifiers that are used as references in other tests
 	:- set_logtalk_flag(unknown_entities, silent).
 
 	% generate events for all messages so that the

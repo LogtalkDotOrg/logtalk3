@@ -42,7 +42,7 @@
 		half,
 		round.
 
-	% we use a lambda expression to access the implict
+	% we use a lambda expression to access the implicit
 	% difference-list in each grammar rule
 
 	square -->

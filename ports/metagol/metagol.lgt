@@ -346,7 +346,7 @@
 		::max_inv_preds(MaxInvPreds),
 		M is min(NumSymbols,MaxInvPreds),
 		findall(
-			sym(Sym1,_Artiy,_Used1),
+			sym(Sym1,_Arity,_Used1),
 			(	between(1,M,I),
 				atom_concat(P, '_', Sym0),
 				number_codes(I, ICodes),

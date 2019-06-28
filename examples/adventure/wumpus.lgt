@@ -61,8 +61,8 @@
 
 	:- public(main/0).
 
-	:- private([in/1, item/1, have/1, lit/1, location/2, path/2, slain/1, transporation/1]).
-	:- dynamic([in/1, item/1, have/1, lit/1, location/2, path/2, slain/1, transporation/1]).
+	:- private([in/1, item/1, have/1, lit/1, location/2, path/2, slain/1, transportation/1]).
+	:- dynamic([in/1, item/1, have/1, lit/1, location/2, path/2, slain/1, transportation/1]).
 
 	% The facts about the world at the beginning of the game.
 	% First, The places the player can visit
@@ -315,7 +315,7 @@
 		location(Thing, Place),
 		ride.
 	board(Thing) :-
-		\+ transporation(Thing),
+		\+ transportation(Thing),
 		write('You can''t get into that!'), nl,
 		fail.
 

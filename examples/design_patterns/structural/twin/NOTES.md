@@ -23,7 +23,7 @@ Design pattern:
 Description:
 	This design pattern provides an alternative for the use of
 	multiple inheritance, based on defining two (or more) tightly
-	coupled instances of the parent clases whose protocol we want
+	coupled instances of the parent class whose protocol we want
 	to inherit, hence the pattern name. Each instance refers to the
 	other and is responsible for its parent protocol, forwarding to
 	its twin other messages.

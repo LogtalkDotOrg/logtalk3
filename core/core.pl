@@ -8655,7 +8655,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-% auxiliar predicate for performing basic error checking if file level
+% auxiliary predicate for performing basic error checking if file level
 % predicate directive arguments
 
 '$lgt_check_file_predicate_directive_arguments'([Pred| Preds], Property) :-
@@ -9923,7 +9923,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_check_primary_multifile_declaration'(Entity, Pred) :-
-	% the object or categry holding the primary declaration must be loaded
+	% the object or category holding the primary declaration must be loaded
 	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, _, _, _, _, _, _)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _)
 	), !,

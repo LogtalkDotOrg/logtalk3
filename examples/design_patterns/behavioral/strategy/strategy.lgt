@@ -27,7 +27,7 @@
 :- object(customer).
 
 	% a simple predicate to dynamically create new
-	% customers with a given intial strategy
+	% customers with a given initial strategy
 	:- public(new/2).
 	new(Customer, Strategy) :-
 		self(Self),

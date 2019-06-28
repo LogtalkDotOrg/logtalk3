@@ -84,7 +84,7 @@
 		draw/0, resize/1
 	]).
 
-	% allow defering to runtime selecting the drawing API
+	% allow deferring to runtime selecting the drawing API
 	% to be used for a concrete shape
 	:- protected(drawing_api/1).
 	:- dynamic(drawing_api/1).
@@ -100,7 +100,7 @@
 	:- dynamic([x/1, y/1, radius/1]).
 
 	% retrieve the instance state and delegate the drawing
-	% operation to the confifgured implementer object
+	% operation to the configured implementer object
 	draw :-
 		::drawing_api(DrawingAPI),
 		::x(X),
