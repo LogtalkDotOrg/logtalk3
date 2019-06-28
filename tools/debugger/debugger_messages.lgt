@@ -262,7 +262,7 @@
 	message_tokens(extended_help) -->
 		[
 			'     Available options are:'-[], nl,
-			'       c - creep (go on; you may use also the spacebar, return, or enter keys)'-[], nl,
+			'       c - creep (go on; you may use also the space, return, or enter keys)'-[], nl,
 			'       l - leap (continues execution until the next spy point is found)'-[], nl,
 			'       s - skip (skips debugging for the current goal; valid at call, redo, and unification ports)'-[], nl,
 			'       q - quasi-skip (skips debugging until returning to the current goal or reaching a spy point)'-[], nl,

@@ -298,7 +298,7 @@
 			),
 			atom_concat(CodePrefix, RelativePath, CodeURL),
 			EntityOptions = [url(CodeURL)| Options]
-		;	% could not find entity file or URL prefixes not definined
+		;	% could not find entity file or URL prefixes not defined
 			EntityOptions = [url('')| Options]
 		).
 

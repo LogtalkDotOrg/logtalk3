@@ -304,7 +304,7 @@
 		atom(Shorthand),
 		Shorthand \== [],
 		!,
-		leash_shortand_ports(Shorthand, Ports).
+		leash_shorthand_ports(Shorthand, Ports).
 
 	valid_leash_value(Ports, Ports) :-
 		nonvar(Ports),
@@ -324,11 +324,11 @@
 	valid_leash_port(fail).
 	valid_leash_port(exception).
 
-	leash_shortand_ports(none, []).
-	leash_shortand_ports(loose, [fact, rule, call]).
-	leash_shortand_ports(half, [fact, rule, call, redo]).
-	leash_shortand_ports(tight, [fact, rule, call, redo, fail, exception]).
-	leash_shortand_ports(full, [fact, rule, call, exit, redo, fail, exception]).
+	leash_shorthand_ports(none, []).
+	leash_shorthand_ports(loose, [fact, rule, call]).
+	leash_shorthand_ports(half, [fact, rule, call, redo]).
+	leash_shorthand_ports(tight, [fact, rule, call, redo, fail, exception]).
+	leash_shorthand_ports(full, [fact, rule, call, exit, redo, fail, exception]).
 
 	leashing(Port) :-
 		leashing_(Port).
@@ -930,7 +930,7 @@
 
 	:- else.
 
-		% hack to workaround the lack of built-in support for unbuffered character input
+		% hack to workaround the lack of built-in support for non-buffered character input
 		read_single_char(Char) :-
 			flush_output, get_code(Code), char_code(Char, Code),
 			(	Code =:= 10 ->

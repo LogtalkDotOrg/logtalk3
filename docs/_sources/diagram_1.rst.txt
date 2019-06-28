@@ -1222,7 +1222,7 @@ Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph
 ``omit_path_prefix/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Removes a prefix from a path, returning the relative path, when using the option ``omit_path_prefixes/1``. Used mainly for contructing directory and file node identitifers and captions.
+Removes a prefix from a path, returning the relative path, when using the option ``omit_path_prefixes/1``. Used mainly for constructing directory and file node identifiers and captions.
 
 | **Compilation flags:**
 |    ``static``

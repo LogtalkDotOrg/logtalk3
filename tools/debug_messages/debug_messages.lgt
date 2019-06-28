@@ -47,7 +47,7 @@
 	:- public(enabled/1).
 	:- mode(enabled(?term), zero_or_more).
 	:- info(enabled/1, [
-		comment is 'Enumerates by backtraking the components with enabled ``debug`` and ``debug(Group)`` messages.',
+		comment is 'Enumerates by backtracking the components with enabled ``debug`` and ``debug(Group)`` messages.',
 		argnames is ['Component']
 	]).
 
@@ -68,7 +68,7 @@
 	:- public(enabled/2).
 	:- mode(enabled(?term, ?term), zero_or_more).
 	:- info(enabled/2, [
-		comment is 'Enumerates by backtraking the enabled ``debug(Group)`` messages for each component.',
+		comment is 'Enumerates by backtracking the enabled ``debug(Group)`` messages for each component.',
 		argnames is ['Component', 'Group']
 	]).
 

@@ -420,7 +420,7 @@
 				atom_concat(CodeURL1, LineAtom, CodeURL)
 			) ->
 			XRefOptions = [url(CodeURL)| Options]
-		;	% could not find entity file or URL prefixes not definined
+		;	% could not find entity file or URL prefixes not defined
 			XRefOptions = [url('')| Options]
 		).
 

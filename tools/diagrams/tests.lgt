@@ -828,7 +828,7 @@
 			)
 		).
 
-	% supress all messages from the "lgtdoc" tool
+	% suppress all messages from the "lgtdoc" tool
 	% component to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).

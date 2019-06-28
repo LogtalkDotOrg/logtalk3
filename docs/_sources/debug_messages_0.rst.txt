@@ -88,7 +88,7 @@ Disables all ``debug`` and ``debug(Group)`` messages for the given component.
 ``enabled/1``
 ^^^^^^^^^^^^^
 
-Enumerates by backtraking the components with enabled ``debug`` and ``debug(Group)`` messages.
+Enumerates by backtracking the components with enabled ``debug`` and ``debug(Group)`` messages.
 
 | **Compilation flags:**
 |    ``static``
@@ -158,7 +158,7 @@ Disables ``debug(Group)`` messages for the given component and group.
 ``enabled/2``
 ^^^^^^^^^^^^^
 
-Enumerates by backtraking the enabled ``debug(Group)`` messages for each component.
+Enumerates by backtracking the enabled ``debug(Group)`` messages for each component.
 
 | **Compilation flags:**
 |    ``static``

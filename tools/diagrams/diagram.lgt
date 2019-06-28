@@ -757,7 +757,7 @@
 		argnames is ['Options']
 	]).
 
-	% default definition; expected to be overriden
+	% default definition; expected to be overridden
 	output_externals(_).
 
 	:- protected(output_files/2).
@@ -1176,7 +1176,7 @@
 	:- protected(omit_path_prefix/3).
 	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).
 	:- info(omit_path_prefix/3, [
-		comment is 'Removes a prefix from a path, returning the relative path, when using the option ``omit_path_prefixes/1``. Used mainly for contructing directory and file node identitifers and captions.',
+		comment is 'Removes a prefix from a path, returning the relative path, when using the option ``omit_path_prefixes/1``. Used mainly for constructing directory and file node identifiers and captions.',
 		argnames is ['Path', 'Options', 'Relative']
 	]).
 
