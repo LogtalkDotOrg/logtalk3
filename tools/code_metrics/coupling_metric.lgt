@@ -208,7 +208,7 @@
 		% discard message sending calls where the target is only known at runtime
 		nonvar(Target),
 		Target = Template,
-		% but no explict self messages
+		% but no explicit self messages
 		Entity \= Object.
 
 	entity_updates_object_predicate(Entity, Object) :-
@@ -220,7 +220,7 @@
 		% discard message sending calls where the target is only known at runtime
 		nonvar(Target),
 		Target = Template,
-		% but no explict self updates
+		% but no explicit self updates
 		Entity \= Object.
 
 	entity_score(_Entity, ce_ca_i_a(Efferent,Afferent,Instability,Abstractness)) -->
