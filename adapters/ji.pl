@@ -321,17 +321,17 @@
 '$lgt_ji_convert_file_path'(File, Converted) :-
 	atom_codes(File, FileCodes),
 	char_code('\\', Backslash),
-	char_code('/', Slah),
-	'$lgt_ji_reverse_slashes'(FileCodes, Backslash, Slah, ConvertedCodes),
+	char_code('/', Slash),
+	'$lgt_ji_reverse_slashes'(FileCodes, Backslash, Slash, ConvertedCodes),
 	atom_codes(Converted, ConvertedCodes).
 
 '$lgt_ji_reverse_slashes'([], _, _, []).
-'$lgt_ji_reverse_slashes'([Code| Codes], Backslash, Slah, [ConvertedCode| ConvertedCodes]) :-
+'$lgt_ji_reverse_slashes'([Code| Codes], Backslash, Slash, [ConvertedCode| ConvertedCodes]) :-
 	(	Code =:= Backslash ->
-		ConvertedCode = Slah
+		ConvertedCode = Slash
 	;	ConvertedCode = Code
 	),
-	'$lgt_ji_reverse_slashes'(Codes, Backslash, Slah, ConvertedCodes).
+	'$lgt_ji_reverse_slashes'(Codes, Backslash, Slash, ConvertedCodes).
 
 
 % '$lgt_change_directory'(+atom)
