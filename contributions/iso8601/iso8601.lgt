@@ -196,7 +196,7 @@
 		comment is 'Validate a given date in the Gregorian calendar.',
 		argnames is ['Year', 'Month', 'Day'],
 		examples is [
-			'Yes, the recent millenium was a leap year' - valid_date(2000,2,29) - {yes},
+			'Yes, the recent millennium was a leap year' - valid_date(2000,2,29) - {yes},
 			'2004 was also a leap year' - valid_date(2004,2,29) - {yes},
 			'Only 30 days in April' - valid_date(2004,4,31) - {no},
 			'1 BC was a leap year' - valid_date(-1,2,29) - {yes}
@@ -212,7 +212,7 @@
 		],
 		examples is [
 			'No, the prior centenary was not a leap year' - leap_year(1900) - {no},
-			'The recent millenium' - leap_year(2000) - {yes},
+			'The recent millennium' - leap_year(2000) - {yes},
 			'This year' - leap_year(Year) - {Year = 2004},
 			'This year (equivalent to prior query)' - leap_year(_) - {yes},
 			'Next centennial' - leap_year(2100) - {no},

@@ -322,7 +322,7 @@ xml_query( q12, element(bib, [], Pairs) ) :-
 		Pairs
 	).
 
-% Auxilliary Predicates
+% Auxiliary Predicates
 
 other_authors( [], [] ).
 other_authors( [Author|Authors], [Author|EtAl] ) :-

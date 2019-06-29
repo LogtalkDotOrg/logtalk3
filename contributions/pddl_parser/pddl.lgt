@@ -18,8 +18,8 @@
 %%        _G4108,
 %%        [ action('pick-up', [block(?x)],         %parameters
 %%		      [clear(?x), ontable(?x), handempty], %preconditions
-%%		      [holding(?x)],                       %positiv effects
-%%          [ontable(?x), clear(?x), handempty],   %negativ effects
+%%		      [holding(?x)],                       %positive effects
+%%          [ontable(?x), clear(?x), handempty],   %negative effects
 %%          [increase('total-cost', 2)]),          %numeric effects
 %%         ...],
 %%       ...)
@@ -168,9 +168,9 @@
 	structure_def(Action) -->
 		action_def(Action).
 %	structure_def(DurativeAction) -->
-%		durative_action_def(DurativeAction).	%:durativeactions
+%		durative_action_def(DurativeAction).	%:durative actions
 %	structure_def(DerivedPredicate)	-->
-%		derived_def(DerivedPredicate).			%:derivedpredicates
+%		derived_def(DerivedPredicate).			%:derived predicates
 
 %	typed_list(W, G) -->
 %		oneOrMore(W, N), ['-'], type(T),
@@ -201,7 +201,7 @@
 	emptyOr(_) --> ['(', ')'].
 	emptyOr(W) --> call(W).
 
-	% Actions definitons
+	% Actions definitions
 	action_def(action(Symbol, Parameters, PreCondition, Pos, Neg, Assign)) -->
 		['(', ':', action], action_symbol(Symbol),
 		[':', parameters, '('], typed_list(variable, Parameters), [')'],
@@ -237,11 +237,11 @@
 	gd(P) -->
 		['(', and],  zeroOrMore(gd, P), [')'].
 %	gd(or(P)) -->
-%		['(', or],   zeroOrMore(gd ,P), [')'].								%:disjuctive-preconditions
+%		['(', or],   zeroOrMore(gd ,P), [')'].								%:disjunctive-preconditions
 %	gd(not(P)) -->
-%		['(', not],  gd(P), [')'].											%:disjuctive-preconditions
+%		['(', not],  gd(P), [')'].											%:disjunctive-preconditions
 %	gd(imply(P1, P2)) -->
-%		['(', imply], gd(P1), gd(P2), [')'].								%:disjuctive-preconditions
+%		['(', imply], gd(P1), gd(P2), [')'].								%:disjunctive-preconditions
 %	gd(exists(L, P)) -->
 %		['(', exists, '('], typed_list(variable, L), [')'], gd(P), [')'].	%:existential-preconditions
 %	gd(forall(L, P)) -->
@@ -345,7 +345,7 @@
 	% List of DCG rules describing structure of problem file in language PDDL.
 	% BNF description was obtain from http://www.cs.yale.edu/homes/dvm/papers/pddl-bnf.pdf
 	% This parser do not fully NOT support PDDL 3.0
-	% However you will find comment out lines ready for futher development.
+	% However you will find comment out lines ready for further development.
 
 	problem(problem(Name, Domain, Requirements, ObjectDeclaration, Init, Goal, _, MetricSpec, LengthSpec)) -->
 		['(', define, '(', problem, Name, ')', '(', ':', domain, Domain, ')'],
@@ -381,7 +381,7 @@
 		['(', and], zeroOrMore(pref_con_GD, P), [')'].
 %	pref_con_GD(forall(L, P)) -->
 %		['(', forall, '('], typed_list(variable, L), [')'], pref_con_GD(P), [')'].	%universal-preconditions
-%	pref_con_GD(prefernce(N, P)) -->
+%	pref_con_GD(preference(N, P)) -->
 %		['(', preference], (pref_name(N) ; []), con_GD(P), [')'].					%preferences
 	pref_con_GD(P) -->
 		con_GD(P).

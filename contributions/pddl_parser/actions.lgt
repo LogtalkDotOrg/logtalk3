@@ -34,7 +34,7 @@
 
 	:- meta_non_terminal(emptyOr(0)).
 
-	% Actions definitons
+	% Actions definitions
 	action_def(action(S, L, Precon, Pos, Neg, Assign)) -->
 		['(', ':', action], action_symbol(S),
 		[':', parameters, '('], ::typed_list(variable, L), [')'],
@@ -111,9 +111,9 @@
 	gd(F)					--> atomic_formula(term, F).	%: this option is covered by gd(L)
 	%gd(L)					--> literal(term, L).													%:negative-preconditions
 	gd(P)					--> ['(', and],  ::zeroOrMore(gd, P), [')'].
-	%gd(or(P))				--> ['(', or],   ::zeroOrMore(gd ,P), [')'].								%:disjuctive-preconditions
-	%gd(not(P))				--> ['(', not],  gd(P), [')'].											%:disjuctive-preconditions
-	%gd(imply(P1, P2))		--> ['(', imply], gd(P1), gd(P2), [')'].									%:disjuctive-preconditions
+	%gd(or(P))				--> ['(', or],   ::zeroOrMore(gd ,P), [')'].								%:disjunctive-preconditions
+	%gd(not(P))				--> ['(', not],  gd(P), [')'].											%:disjunctive-preconditions
+	%gd(imply(P1, P2))		--> ['(', imply], gd(P1), gd(P2), [')'].									%:disjunctive-preconditions
 	%gd(exists(L, P))		--> ['(', exists, '('], ::typed_list(variable, L), [')'], gd(P), [')'].		%:existential-preconditions
 	%gd(forall(L, P))		--> ['(', forall, '('], ::typed_list(variable, L), [')'], gd(P), [')'].		%:universal-preconditions
 	gd(F)					--> f_comp(F).	%:fluents

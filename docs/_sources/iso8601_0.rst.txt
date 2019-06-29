@@ -391,7 +391,7 @@ Validate a given date in the Gregorian calendar.
 |    ``valid_date(+integer,+integer,+integer)`` - ``zero_or_one``
 
 | **Examples:**
-|    Yes, the recent millenium was a leap year
+|    Yes, the recent millennium was a leap year
 |      ``valid_date(2000,2,29)``
 |      ``yes``
 |    2004 was also a leap year
@@ -432,7 +432,7 @@ Succeed if given year is a leap year in the Gregorian calendar.
 |    No, the prior centenary was not a leap year
 |      ``leap_year(1900)``
 |      ``no``
-|    The recent millenium
+|    The recent millennium
 |      ``leap_year(2000)``
 |      ``yes``
 |    This year

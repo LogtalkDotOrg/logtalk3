@@ -31,27 +31,27 @@
 	test(elevators) :-
 		logtalk::expand_library_path(pddl_parser, Base),
 		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/elevators-strips/', Directory),
-		test_colection(Directory).
+		test_collection(Directory).
 
 	test(openstacks) :-
 		logtalk::expand_library_path(pddl_parser, Base),
 		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/openstacks-strips/', Directory),
-		test_colection(Directory).
+		test_collection(Directory).
 
 	test(parcprinter) :-
 		logtalk::expand_library_path(pddl_parser, Base),
 		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/parcprinter-strips/', Directory),
-		test_colection(Directory).
+		test_collection(Directory).
 
 	test(pegsol) :-
 		logtalk::expand_library_path(pddl_parser, Base),
 		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/pegsol-strips/', Directory),
-		test_colection(Directory).
+		test_collection(Directory).
 
 	test(scanalyzer) :-
 		logtalk::expand_library_path(pddl_parser, Base),
 		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/scanalyzer-strips/', Directory),
-		test_colection(Directory).
+		test_collection(Directory).
 
 	:- if(current_prolog_flag(max_arity, 255)).
 		:- initialization((
@@ -62,20 +62,20 @@
 		test(sokoban) :-
 			logtalk::expand_library_path(pddl_parser, Base),
 			atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/sokoban-strips/', Directory),
-			test_colection(Directory).
+			test_collection(Directory).
 	:- endif.
 
 	test(transport) :-
 		logtalk::expand_library_path(pddl_parser, Base),
 		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/transport-strips/', Directory),
-		test_colection(Directory).
+		test_collection(Directory).
 
 	test(woodworking) :-
 		logtalk::expand_library_path(pddl_parser, Base),
 		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/woodworking-strips/', Directory),
-		test_colection(Directory).
+		test_collection(Directory).
 
-	test_colection(Directory) :-
+	test_collection(Directory) :-
 		forall(
 			problem_file(File),
 			(	atom_concat(Directory, File, Path),

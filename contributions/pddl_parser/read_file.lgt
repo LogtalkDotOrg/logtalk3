@@ -3,7 +3,7 @@
 %%%  This is a modified version for parsing pddl files.
 %%%  Read the input file character by character and parse it
 %%%  into a list. Brackets, comma, period and question marks
-%%%  are treated as separate words. White spaces separed
+%%%  are treated as separate words. White spaces separated
 %%%  words.
 %%%
 %%%  Similar to read_sent in Pereira and Shieber, Prolog and
@@ -61,9 +61,9 @@
 		get_code(C1),
 		read_rest(C1, Words).
 
-	/* Brackets, comma, period, colon, dash, or question marks are treated as separed words */
+	/* Brackets, comma, period, colon, dash, or question marks are treated as separated words */
 	read_rest(C, [Char| Words]) :-
-		separed_word(C),
+		separated_word(C),
 		char_code(Char, C),
 		!,
 		get_code(C1),
@@ -91,13 +91,13 @@
 	ignored_character(13).
 	ignored_character(92).
 
-	separed_word(40).
-	separed_word(41).
-	separed_word(44).
-	separed_word(45).
-	separed_word(46).
-	separed_word(63).
-	separed_word(58).
+	separated_word(40).
+	separated_word(41).
+	separated_word(44).
+	separated_word(45).
+	separated_word(46).
+	separated_word(63).
+	separated_word(58).
 
 	read_word(C, [], C) :-
 		separate_word_marker(C),
@@ -126,7 +126,7 @@
 	lower_case(C, C) :- ( C <  65 ; C > 90 ) , !.
 	lower_case(C, LC) :- LC is C + 32.
 
-	/* Keep reading as long you dont find end-of-line or end-of-file */
+	/* Keep reading as long you don't find end-of-line or end-of-file */
 	read_comment(10, 10) :- !.
 	read_comment(-1, -1) :- !.
 	read_comment(_, Last) :-

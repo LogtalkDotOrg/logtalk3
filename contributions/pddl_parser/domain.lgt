@@ -18,8 +18,8 @@
 %%        _G4108,
 %%        [ action('pick-up', [block(?x)],       %parameters
 %%		      [clear(?x), ontable(?x), handempty], %preconditions
-%%		      [holding(?x)],                       %positiv effects
-%%          [ontable(?x), clear(?x), handempty], %negativ effects
+%%		      [holding(?x)],                       %positive effects
+%%          [ontable(?x), clear(?x), handempty], %negative effects
 %%          [increase('total-cost', 2)]),        %numeric effects
 %%         ...],
 %%       ...)
@@ -55,7 +55,7 @@
 	% List of DCG rules describing structure of domain file in language PDDL.
 	% BNF description was obtain from http://www.cs.yale.edu/homes/dvm/papers/pddl-bnf.pdf
 	% This parser do not fully NOT support PDDL 3.0
-	% However you will find comment out lines ready for futher development.
+	% However you will find comment out lines ready for further development.
 	domain(domain(N, R, T, C, P, F, C, S)) -->
 		['(', 'define', '(', 'domain'], :name(N), [')'],
 		(:require_def(R)	; []),
@@ -101,8 +101,8 @@
 	%constraints(C)				--> ['(', ':', constraints], con_GD(C), [')'].	%:constraints
 
 	structure_def(A)		--> :action_def(A).
-	%structure_def(D)		--> :durative_action_def(D).	%:durativeactions
-	%structure_def(D)		--> derived_def(D).			%:derivedpredicates
+	%structure_def(D)		--> :durative_action_def(D).	%:durative actions
+	%structure_def(D)		--> derived_def(D).			%:derived predicates
 
 	function_typed_list(W, [F|Ls])	-->	:oneOrMore(W, L), ['-'], !, function_type(T), function_typed_list(W, Ls), {F =.. [T|L]}.	%:typing
 	function_typed_list(W, L)		--> :zeroOrMore(W, L).

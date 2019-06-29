@@ -334,7 +334,7 @@
 	% valid_date/3 tests
 
 	test(iso8601_valid_date_3_01) :-
-		% Yes, the recent millenium was a leap year
+		% Yes, the recent millennium was a leap year
 		valid_date(2000, 2, 29).
 
 	test(iso8601_valid_date_3_02) :-
@@ -356,7 +356,7 @@
 		\+ leap_year(1900).
 
 	test(iso8601_leap_year_1_02) :-
-		% The recent millenium
+		% The recent millennium
 		leap_year(2000).
 
 	- test(iso8601_leap_year_1_03) :-

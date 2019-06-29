@@ -44,7 +44,7 @@
 	% List of DCG rules describing structure of problem file in language PDDL.
 	% BNF description was obtain from http://www.cs.yale.edu/homes/dvm/papers/pddl-bnf.pdf
 	% This parser do not fully NOT support PDDL 3.0
-	% However you will find comment out lines ready for futher development.
+	% However you will find comment out lines ready for further development.
 	% Some of the rules are already implemented in parseDomain.pl
 	%:-[parseDomain]. %make sure that it is loaded.
 	problem(problem(Name, Domain, R, OD, I, G, _, MS, LS)) -->
@@ -70,8 +70,8 @@
 
 	%constraints(C)						--> ['(', ':', constraints], pref_con_GD(C), [')'].				% constraints
 	pref_con_GD(and(P))					--> ['(', and], :zeroOrMore(pref_con_GD, P), [')'].
-	%pref_con_GD(foral(L, P))			--> ['(', forall, '('], :typed_list(variable, L), [')'], pref_con_GD(P), [')'].	%universal-preconditions
-	%pref_con_GD(prefernce(N, P))		--> ['(', preference], (:pref_name(N) ; []), con_GD(P), [')'].	%preferences
+	%pref_con_GD(forall(L, P))			--> ['(', forall, '('], :typed_list(variable, L), [')'], pref_con_GD(P), [')'].	%universal-preconditions
+	%pref_con_GD(preference(N, P))		--> ['(', preference], (:pref_name(N) ; []), con_GD(P), [')'].	%preferences
 	pref_con_GD(P)						--> con_GD(P).
 
 	con_GD(and(L))						--> ['(', and], :zeroOrMore(con_GD, L), [')'].
@@ -94,7 +94,7 @@
 	optimization(maximize)				--> [maximize].
 
 	metric_f_exp(E)						--> ['('], :binary_op(O), metric_f_exp(E1), metric_f_exp(E2), [')'], {E =..[O, E1, E2]}.
-	metric_f_exp(multi_op(O,[E1|E])) 	--> ['('], :multi_op(O), metric_f_exp(E1), :oneOrMore(metric_f_exp, E), [')']. % I dont see meanful of this rule, in additional is missing in f-exp
+	metric_f_exp(multi_op(O,[E1|E])) 	--> ['('], :multi_op(O), metric_f_exp(E1), :oneOrMore(metric_f_exp, E), [')']. % I don't see meanful of this rule, in additional is missing in f-exp
 	metric_f_exp(E)						--> ['(', '-'], metric_f_exp(E1), [')'], {E=..[-, E1]}.
 	metric_f_exp(N)						--> :number(N).
 	metric_f_exp(F)						--> ['('], :function_symbol(S), :zeroOrMore(name, Ns), [')'], { atomic_list_concat([S|Ns], '-', F) }.

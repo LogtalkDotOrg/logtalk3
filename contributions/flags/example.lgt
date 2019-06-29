@@ -7,7 +7,7 @@
 %
 %  Contributions to this file:
 %  Author: Theofrastos Mantadelis
-%  Sugestions: Paulo Moura
+%  Suggestions: Paulo Moura
 %  Version: 1
 %  Date: 21/11/2010
 %
