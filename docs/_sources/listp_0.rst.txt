@@ -667,7 +667,7 @@ Prefix is a proper prefix of length Length of List.
 ``remove_duplicates/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Removes duplicated list elements using equality (``==/2``) for comparison and keepying the left-most element when repeated.
+Removes duplicated list elements using equality (``==/2``) for comparison and keeping the left-most element when repeated.
 
 | **Compilation flags:**
 |    ``static``

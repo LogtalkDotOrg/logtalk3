@@ -223,7 +223,7 @@
 	:- public(remove_duplicates/2).
 	:- mode(reverse(+list, -list), one).
 	:- info(remove_duplicates/2, [
-		comment is 'Removes duplicated list elements using equality (``==/2``) for comparison and keepying the left-most element when repeated.',
+		comment is 'Removes duplicated list elements using equality (``==/2``) for comparison and keeping the left-most element when repeated.',
 		argnames is ['List', 'Set']
 	]).
 

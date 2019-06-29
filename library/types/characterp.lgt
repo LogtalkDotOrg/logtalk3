@@ -21,9 +21,9 @@
 :- protocol(characterp).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2011/02/19,
+		date is 2019/06/29,
 		comment is 'Character protocol.',
 		see_also is [character]
 	]).
@@ -126,10 +126,10 @@
 		argnames is ['Char']
 	]).
 
-	:- public(is_punctation/1).
-	:- mode(is_punctation(+char), zero_or_one).
-	:- info(is_punctation/1, [
-		comment is 'True if the argument is a sentence punctation character.',
+	:- public(is_punctuation/1).
+	:- mode(is_punctuation(+char), zero_or_one).
+	:- info(is_punctuation/1, [
+		comment is 'True if the argument is a sentence punctuation character.',
 		argnames is ['Char']
 	]).
 
@@ -166,7 +166,7 @@
 	:- mode(parenthesis(+char, ?char), zero_or_one).
 	:- mode(parenthesis(?char, +char), zero_or_one).
 	:- info(parenthesis/2, [
-		comment is 'Recognises and converts between open and close parenthesis.',
+		comment is 'Recognizes and converts between open and close parenthesis.',
 		argnames is ['Char1', 'Char2']
 	]).
 
@@ -175,7 +175,7 @@
 	:- mode(lower_upper(+char, ?char), zero_or_one).
 	:- mode(lower_upper(?char, +char), zero_or_one).
 	:- info(lower_upper/2, [
-		comment is 'Recognises and converts between lower and upper case letters.',
+		comment is 'Recognizes and converts between lower and upper case letters.',
 		argnames is ['Char1', 'Char2']
 	]).
 

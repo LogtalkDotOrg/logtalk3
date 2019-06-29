@@ -129,7 +129,7 @@
 	:- public(remove_duplicates/2).
 	:- mode(reverse(+list, -list), one).
 	:- info(remove_duplicates/2, [
-		comment is 'Removes duplicated variables and keepying the left-most variable when repeated.',
+		comment is 'Removes duplicated variables and keeping the left-most variable when repeated.',
 		argnames is ['List', 'Set']
 	]).
 

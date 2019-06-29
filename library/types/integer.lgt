@@ -27,7 +27,7 @@
 		date is 2019/06/04,
 		comment is 'Integer data type predicates.',
 		remarks is [
-			'Portability notes' - 'This object will use the backend Prolog system ``between/3``, ``plus/3``, and ``succ/2`` built-in predicates when avaialble.'
+			'Portability notes' - 'This object will use the backend Prolog system ``between/3``, ``plus/3``, and ``succ/2`` built-in predicates when available.'
 		]
 	]).
 

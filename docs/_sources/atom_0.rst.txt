@@ -41,7 +41,7 @@ Public predicates
 ``replace_sub_atom/4``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Replaces all occurences of ``Old`` by ``New`` in ``Input`` returning ``Output``. Returns ``Input`` if ``Old`` is the empty atom. Fails when ``Output`` does not unify with the resulting atom.
+Replaces all occurrences of ``Old`` by ``New`` in ``Input`` returning ``Output``. Returns ``Input`` if ``Old`` is the empty atom. Fails when ``Output`` does not unify with the resulting atom.
 
 | **Compilation flags:**
 |    ``static``

@@ -24,7 +24,7 @@ Integer data type predicates.
 | **Remarks:**
 
 
-   - *Portability notes:* This object will use the backend Prolog system ``between/3``, ``plus/3``, and ``succ/2`` built-in predicates when avaialble.
+   - *Portability notes:* This object will use the backend Prolog system ``between/3``, ``plus/3``, and ``succ/2`` built-in predicates when available.
 
 .. contents::
    :local:

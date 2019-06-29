@@ -111,7 +111,7 @@
 			throw(error(Error, Context))
 		).
 
-	% backend Prolog compier dependent auxiliary predicates
+	% backend Prolog compiler dependent auxiliary predicates
 	% (there is not standard sockets Prolog library)
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).

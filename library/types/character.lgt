@@ -23,9 +23,9 @@
 	extends(atom)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2019/06/29,
 		comment is 'Character predicates (most of them assume an ASCII representation).'
 	]).
 
@@ -110,12 +110,12 @@
 	is_quote('"').
 	is_quote('`').
 
-	is_punctation(',').
-	is_punctation(';').
-	is_punctation(':').
-	is_punctation('.').
-	is_punctation('?').
-	is_punctation('!').
+	is_punctuation(',').
+	is_punctuation(';').
+	is_punctuation(':').
+	is_punctuation('.').
+	is_punctuation('?').
+	is_punctuation('!').
 
 	is_period('.').
 	is_period('?').

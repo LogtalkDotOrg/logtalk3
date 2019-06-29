@@ -29,7 +29,7 @@
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
-			'Portability notes' - 'This object will use the backend Prolog system length/2, msort/2, and sort/4 built-in predicates when avaialble.'
+			'Portability notes' - 'This object will use the backend Prolog system length/2, msort/2, and sort/4 built-in predicates when available.'
 		]
 	]).
 

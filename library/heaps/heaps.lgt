@@ -141,8 +141,8 @@
 	tree_to_list(t, []).
 	tree_to_list(t(Key,Value,Left,Right), [Key-Value| Pairs]) :-
 		tree_to_list(Left, LeftPairs),
-		tree_to_list(Right, RighPairs),
-		merge_pairs(LeftPairs, RighPairs, Pairs).
+		tree_to_list(Right, RightPairs),
+		merge_pairs(LeftPairs, RightPairs, Pairs).
 
 	merge_pairs([Pair1| Pairs1], [Pair2| Pairs2], [Pair| Pairs]) :-
 		parameter(1, Order),

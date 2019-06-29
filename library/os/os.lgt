@@ -1492,17 +1492,17 @@
 		convert_file_path(File, Converted) :-
 			atom_codes(File, FileCodes),
 			char_code('\\', Backslash),
-			char_code('/', Slah),
-			reverse_slashes(FileCodes, Backslash, Slah, ConvertedCodes),
+			char_code('/', Slash),
+			reverse_slashes(FileCodes, Backslash, Slash, ConvertedCodes),
 			atom_codes(Converted, ConvertedCodes).
 
 		reverse_slashes([], _, _, []).
-		reverse_slashes([Code| Codes], Backslash, Slah, [ConvertedCode| ConvertedCodes]) :-
+		reverse_slashes([Code| Codes], Backslash, Slash, [ConvertedCode| ConvertedCodes]) :-
 			(	Code =:= Backslash ->
-				ConvertedCode = Slah
+				ConvertedCode = Slash
 			;	ConvertedCode = Code
 			),
-			reverse_slashes(Codes, Backslash, Slah, ConvertedCodes).
+			reverse_slashes(Codes, Backslash, Slash, ConvertedCodes).
 
 		make_directory(Directory) :-
 			(	{exists_directory(Directory)} ->

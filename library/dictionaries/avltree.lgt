@@ -4,7 +4,7 @@
 %
 %  Author: R.A.O'Keefe, L.Damas, V.S.Costa, Glenn Burgess,
 %          Jiri Spitz, and Jan Wielemaker
-%  Logtalk port and aditional predicates: Paulo Moura
+%  Logtalk port and additional predicates: Paulo Moura
 %
 %  Copyright 2004-2018 various people and institutions
 %  Copyright 2019 Paulo Moura

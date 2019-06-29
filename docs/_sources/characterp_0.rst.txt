@@ -11,8 +11,8 @@
 Character protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.2
-| **Date:** 2011/2/19
+| **Version:** 1.3
+| **Date:** 2019/6/29
 
 | **Compilation flags:**
 |    ``static``
@@ -356,23 +356,23 @@ True if the argument is a quote character.
 
 .. raw:: html
 
-   <div id="is_punctation/1"> </div>
+   <div id="is_punctuation/1"> </div>
 
-.. index:: is_punctation/1
-.. _characterp/0::is_punctation/1:
+.. index:: is_punctuation/1
+.. _characterp/0::is_punctuation/1:
 
-``is_punctation/1``
-^^^^^^^^^^^^^^^^^^^
+``is_punctuation/1``
+^^^^^^^^^^^^^^^^^^^^
 
-True if the argument is a sentence punctation character.
+True if the argument is a sentence punctuation character.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``is_punctation(Char)``
+|    ``is_punctuation(Char)``
 | **Mode and number of proofs:**
-|    ``is_punctation(+char)`` - ``zero_or_one``
+|    ``is_punctuation(+char)`` - ``zero_or_one``
 
 
 ------------
@@ -479,7 +479,7 @@ True if the argument is the ASCII end-of-line character (either a carriage retur
 ``parenthesis/2``
 ^^^^^^^^^^^^^^^^^
 
-Recognises and converts between open and close parenthesis.
+Recognizes and converts between open and close parenthesis.
 
 | **Compilation flags:**
 |    ``static``
@@ -504,7 +504,7 @@ Recognises and converts between open and close parenthesis.
 ``lower_upper/2``
 ^^^^^^^^^^^^^^^^^
 
-Recognises and converts between lower and upper case letters.
+Recognizes and converts between lower and upper case letters.
 
 | **Compilation flags:**
 |    ``static``
