@@ -336,7 +336,7 @@ elif [ "$m_arg" == "debug" ] ; then
 elif [ "$m_arg" == "all" ] ; then
 	mode='all'
 elif [ "$m_arg" != "" ] ; then
-	echo "Error! Unknow compilation mode: $m_arg" >&2
+	echo "Error! Unknown compilation mode: $m_arg" >&2
 	usage_help
 	exit 1
 fi
@@ -351,7 +351,7 @@ elif [ "$f_arg" == "xunit" ] ; then
 	format='xunit'
 	format_goal=$format_xunit_goal
 elif [ "$f_arg" != "" ] ; then
-	echo "Error! Unknow format: $f_arg" >&2
+	echo "Error! Unknown format: $f_arg" >&2
 	usage_help
 	exit 1
 fi
@@ -363,7 +363,7 @@ elif [ "$c_arg" == "xml" ] ; then
 	coverage='xml'
 	coverage_goal=$coverage_xml_goal
 elif [ "$c_arg" != "" ] ; then
-	echo "Error! Unknow coverage report: $c_arg" >&2
+	echo "Error! Unknown coverage report: $c_arg" >&2
 	usage_help
 	exit 1
 fi
