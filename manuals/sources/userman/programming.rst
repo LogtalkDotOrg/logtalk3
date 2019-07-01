@@ -678,7 +678,7 @@ Lint flags
    official coding guidelines (which advise using underscores for entity
    and predicate names and camel case for variable names). Additionally,
    variable names should not differ only on case. Possible option values
-   are ``warning`` and ``silent`` (the usual default due to the curent
+   are ``warning`` and ``silent`` (the usual default due to the current
    limitation to ASCII names and the computational cost of the checks).
 
 Optional features compilation flags
@@ -992,4 +992,4 @@ the case of recursive predicates, define them as tail-recursive predicates
 whenever possible.
 
 See the :ref:`section on performance <performance_performance>`
-for a detailed discusion on Logtalk performance.
+for a detailed discussion on Logtalk performance.

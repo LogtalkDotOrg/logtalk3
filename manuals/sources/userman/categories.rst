@@ -220,7 +220,7 @@ binding optimizations invalid.
 
 Another important caveat is that, while a complementing category can
 replace a predicate definition, local callers of the replaced predicate
-will still call the unpatched version of the predicate. This is a
+will still call the non-patched version of the predicate. This is a
 consequence of the lack of a portable solution at the
 :term:`backend Prolog compiler` level for destructively replacing static
 predicates.

@@ -396,7 +396,7 @@ object as it can always be later patched, thus rendering the static
 binding optimizations invalid.</p>
 <p>Another important caveat is that, while a complementing category can
 replace a predicate definition, local callers of the replaced predicate
-will still call the unpatched version of the predicate. This is a
+will still call the non-patched version of the predicate. This is a
 consequence of the lack of a portable solution at the
 <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> level for destructively replacing static
 predicates.</p>

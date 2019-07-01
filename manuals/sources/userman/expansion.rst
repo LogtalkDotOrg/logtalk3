@@ -143,7 +143,7 @@ explicitly by calling the ``expand_term/2`` built-in method. For example:
    Clause = (a(A,B) :- b(A,C), c(C,B))
    yes
 
-Note that the default translation of grammar rules can be overriden by
+Note that the default translation of grammar rules can be overridden by
 defining clauses for the :ref:`methods_term_expansion_2` predicate.
 
 Hook objects

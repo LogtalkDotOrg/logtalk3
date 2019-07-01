@@ -82,7 +82,7 @@ defines an extensive set of types, together with predicates for validating
 and checking terms. The set of types is user extensible and new types can
 be defined by adding clauses for the ``type/1`` and ``check/2`` multifile
 predicates. For example, assume that we want to be able to check
-*temparatures* expressed in Celsius, Fahrenheit, or Kelvin scales. We
+*temperatures* expressed in Celsius, Fahrenheit, or Kelvin scales. We
 start by declaring (in an object or category) the new type:
 
 ::
@@ -193,7 +193,7 @@ is intended. In other cases, the user may not be aware that a particular
 as a built-in predicate or may want to ensure code portability among
 several Prolog compilers with different sets of built-in predicates.
 
-.. _errors_redefinion_predicates:
+.. _errors_redefinition_predicates:
 
 Redefinition of Logtalk built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -202,7 +202,7 @@ Similar to the redefinition of Prolog built-in predicates, the Logtalk
 compiler will warn us if we try to redefine a Logtalk built-in. But the
 redefinition will probably be an error in most (if not all) cases.
 
-.. _errors_redefinion_methods:
+.. _errors_redefinition_methods:
 
 Redefinition of Logtalk built-in methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

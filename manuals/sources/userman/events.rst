@@ -129,7 +129,7 @@ The monitor status of an object can be dynamically changed in runtime
    object).
 
 The execution of actions, defined in a monitor, associated to each event, never affects the term that denotes the message involved
-   In other words, if the message contains uninstantiated variables,
+   In other words, if the message contains unbound variables,
    these are not affected by the acting of monitors associated to the
    event.
 

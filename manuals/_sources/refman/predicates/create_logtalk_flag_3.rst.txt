@@ -81,7 +81,7 @@ Examples
 
 ::
 
-   % create a new booloean flag with default value set to false: 
+   % create a new boolean flag with default value set to false: 
    | ?- create_logtalk_flag(pretty_print_blobs, false, []).
 
 .. seealso::

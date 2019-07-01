@@ -165,7 +165,7 @@ events results in one or more inferences per goal (depending on the number of
 clauses whose head unify with the goal and backtracking). In practice, this
 overhead translates to code compiled in debug mode running typically ~2x to
 ~7x slower than code compiled in normal or optimized mode depending on the
-application (the exact overhead is proporcional to the number of passes on
+application (the exact overhead is proportional to the number of passes on
 the call and unification ports; deterministic code often results in a larger
 overhead compared with code performing significant backtracking).
 

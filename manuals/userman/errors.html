@@ -281,7 +281,7 @@ defines an extensive set of types, together with predicates for validating
 and checking terms. The set of types is user extensible and new types can
 be defined by adding clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile
 predicates. For example, assume that we want to be able to check
-<em>temparatures</em> expressed in Celsius, Fahrenheit, or Kelvin scales. We
+<em>temperatures</em> expressed in Celsius, Fahrenheit, or Kelvin scales. We
 start by declaring (in an object or category) the new type:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
 type<span class="o">::</span>type(temperature(<span class="nv">_Unit</span>)).
@@ -371,13 +371,13 @@ as a built-in predicate or may want to ensure code portability among
 several Prolog compilers with different sets of built-in predicates.</p>
 </div>
 <div class="section" id="redefinition-of-logtalk-built-in-predicates">
-<span id="errors-redefinion-predicates"></span><h3>Redefinition of Logtalk built-in predicates<a class="headerlink" href="#redefinition-of-logtalk-built-in-predicates" title="Permalink to this headline">¶</a></h3>
+<span id="errors-redefinition-predicates"></span><h3>Redefinition of Logtalk built-in predicates<a class="headerlink" href="#redefinition-of-logtalk-built-in-predicates" title="Permalink to this headline">¶</a></h3>
 <p>Similar to the redefinition of Prolog built-in predicates, the Logtalk
 compiler will warn us if we try to redefine a Logtalk built-in. But the
 redefinition will probably be an error in most (if not all) cases.</p>
 </div>
 <div class="section" id="redefinition-of-logtalk-built-in-methods">
-<span id="errors-redefinion-methods"></span><h3>Redefinition of Logtalk built-in methods<a class="headerlink" href="#redefinition-of-logtalk-built-in-methods" title="Permalink to this headline">¶</a></h3>
+<span id="errors-redefinition-methods"></span><h3>Redefinition of Logtalk built-in methods<a class="headerlink" href="#redefinition-of-logtalk-built-in-methods" title="Permalink to this headline">¶</a></h3>
 <p>An error will be thrown if we attempt to redefine a Logtalk built-in
 method inside an entity. The default behavior is to report the error and
 abort the compilation of the offending entity.</p>

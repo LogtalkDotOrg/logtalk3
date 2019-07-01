@@ -105,7 +105,7 @@ Examples
    | ?- logtalk_load(types(tree)).
 
    % compile and load the "file_system" source file in the
-   % current directory with portability warnings supressed:
+   % current directory with portability warnings suppressed:
    | ?- logtalk_load(file_system, [portability(silent)]).
 
 .. seealso::

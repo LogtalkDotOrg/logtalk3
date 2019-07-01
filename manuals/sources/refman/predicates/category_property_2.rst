@@ -29,7 +29,7 @@ Description
    category_property(Category, Property)
 
 Enumerates, by backtracking, the properties associated with the defined
-categories. The valid properties are listed in the language gramar section
+categories. The valid properties are listed in the language grammar section
 on :ref:`entity properties <grammar_entity_properties>` and described in
 the User Manual section on :ref:`category properties <categories_properties>`.
 

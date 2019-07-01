@@ -574,13 +574,13 @@ uses a different programming pattern:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>... <span class="o">:-</span>
     ...,
     threaded_engine_next_reified(<span class="nv">Engine</span>, <span class="nv">Reified</span>),
-    collect_all_reifeid(<span class="nv">Reified</span>, <span class="nv">Engine</span>, <span class="nv">Answers</span>),
+    collect_all_reified(<span class="nv">Reified</span>, <span class="nv">Engine</span>, <span class="nv">Answers</span>),
     ...
 
-collect_all_reifeid(no, <span class="nv">_</span>, []).
-collect_all_reifeid(the(<span class="nv">Answer</span>), <span class="nv">Engine</span>, [<span class="nv">Answer</span>| <span class="nv">Answers</span>]) <span class="o">:-</span>
+collect_all_reified(no, <span class="nv">_</span>, []).
+collect_all_reified(the(<span class="nv">Answer</span>), <span class="nv">Engine</span>, [<span class="nv">Answer</span>| <span class="nv">Answers</span>]) <span class="o">:-</span>
     threaded_engine_next_reified(<span class="nv">Engine</span>, <span class="nv">Reified</span>),
-    collect_all_reifeid(<span class="nv">Reified</span>, <span class="nv">Engine</span>, <span class="nv">Answers</span>).
+    collect_all_reified(<span class="nv">Reified</span>, <span class="nv">Engine</span>, <span class="nv">Answers</span>).
 </pre></div>
 </div>
 <p>Engines must be explicitly terminated using the

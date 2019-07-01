@@ -1518,8 +1518,8 @@ functor but users should not rely on this always being true.
 Calling Prolog predicates
 -------------------------
 
-Logtalk is designed for both *robusteness* and *portability*. In the context
-of calling Prolog predicates, robusteness requires that the compilation of
+Logtalk is designed for both *robustness* and *portability*. In the context
+of calling Prolog predicates, robustness requires that the compilation of
 Logtalk source code must not have *accidental* dependencies on Prolog code that
 happens to be loaded at the time of the compilation. One immediate consequence
 is that only Prolog *built-in* predicates are visible from within objects and

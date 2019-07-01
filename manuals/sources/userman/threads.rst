@@ -453,13 +453,13 @@ uses a different programming pattern:
    ... :-
        ...,
        threaded_engine_next_reified(Engine, Reified),
-       collect_all_reifeid(Reified, Engine, Answers),
+       collect_all_reified(Reified, Engine, Answers),
        ...
 
-   collect_all_reifeid(no, _, []).
-   collect_all_reifeid(the(Answer), Engine, [Answer| Answers]) :-
+   collect_all_reified(no, _, []).
+   collect_all_reified(the(Answer), Engine, [Answer| Answers]) :-
        threaded_engine_next_reified(Engine, Reified),
-       collect_all_reifeid(Reified, Engine, Answers).
+       collect_all_reified(Reified, Engine, Answers).
 
 
 Engines must be explicitly terminated using the

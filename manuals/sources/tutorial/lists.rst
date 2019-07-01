@@ -122,7 +122,7 @@ object predicate. If we try to call a non-public predicate such as the
        )   
 
 The exception term describes the type of error and the context
-where the error occured.
+where the error occurred.
 
 .. _protocol:
 

@@ -103,7 +103,7 @@ Examples
    | ?- logtalk_compile(types(tree), [source_data(on)]).
 
    % compile to disk the "file_system" source file in the
-   % current directory with portability warnings supressed:
+   % current directory with portability warnings suppressed:
    | ?- logtalk_compile(file_system, [portability(silent)]).
 
 .. seealso::
