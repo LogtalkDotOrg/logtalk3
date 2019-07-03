@@ -43,9 +43,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.45,
+		version is 1.46,
 		author is &#x27;Paulo Moura&#x27;,
-		date is 2019/05/31,
+		date is 2019/07/03,
 		comment is &#x27;Sample prototype for testing syntax coloring.&#x27;]).
 
 	:- built_in.
@@ -414,6 +414,7 @@ comment
 
 	escape_sequences :-
 		write(&#x27;Quoted atom with a quote (&#x27;&#x27;) inside.&#x27;),
+		write(&#x27;Quoted atom with a quote (\&#x27;) inside using a control escape sequence.&#x27;),
 		write(&#x27;Quoted atom with a backslash (\\) inside.&#x27;),
 		write(&#x27;Quoted atom with control escape sequences: \a \b \r \f \t \n \v&#x27;),
 		write(&#x27;Quoted atom with an octal escape sequence: \123\.&#x27;),

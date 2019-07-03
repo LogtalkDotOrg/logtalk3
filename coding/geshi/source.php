@@ -49,9 +49,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.45,
+		version is 1.46,
 		author is 'Paulo Moura',
-		date is 2019/05/31,
+		date is 2019/07/03,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -421,6 +421,7 @@ comment
 
 	escape_sequences :-
 		write('Quoted atom with a quote ('') inside.'),
+		write('Quoted atom with a quote (\') inside using a control escape sequence.'),
 		write('Quoted atom with a backslash (\\) inside.'),
 		write('Quoted atom with control escape sequences: \\a \\b \\r \\f \\t \\n \\v'),
 		write('Quoted atom with an octal escape sequence: \\123\\.'),
