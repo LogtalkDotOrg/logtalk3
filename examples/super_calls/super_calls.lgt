@@ -50,8 +50,8 @@
 :- end_object.
 
 
-% the second set of objects illustrate that "super" calls require static
-% binding when the called object is declared dynamic
+% the second set of objects illustrate that "super" calls require
+% dynamic binding when the called predicate is declared dynamic
 
 :- object(top).
 
