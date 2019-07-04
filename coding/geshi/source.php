@@ -335,7 +335,7 @@ comment
 	arithemtic_evaluation :-
 		X is Expression.
 
-	arithemtic_comparison :-
+	arithmetic_comparison :-
 		Exp1 =:= Exp2,
 		Exp1 =\= Exp2,
 		Exp1 < Exp2,

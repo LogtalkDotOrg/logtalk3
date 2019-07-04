@@ -313,10 +313,10 @@ comment
 		numbervars(Term, Start, End),
 		term_variables(Term, Variables).
 
-	arithemtic_evaluation :-
+	arithmetic_evaluation :-
 		X is Expression.
 
-	arithemtic_comparison :-
+	arithmetic_comparison :-
 		Exp1 =:= Exp2,
 		Exp1 =\= Exp2,
 		Exp1 < Exp2,
