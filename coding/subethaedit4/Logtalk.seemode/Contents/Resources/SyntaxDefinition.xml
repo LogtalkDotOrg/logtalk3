@@ -277,7 +277,11 @@
 	
 			<state id="Quoted Atoms" type="string" useforautocomplete="no" scope="string.single">
 				<begin><regex>(?&lt;!0|0'|0'\\)'</regex></begin>
-				<end><regex>'</regex></end>
+				<end><regex>(?&lt;!\\)(\\\\)*'</regex></end>
+                <keywords id="DoubleStringEscapedCharacters" useforautocomplete="no" scope="language.constant.numeric.character">
+                    <regex>(\\[\\abfnrtv"'])</regex>
+                    <regex>(\\(?:x[a-fA-F0-9]+|[0-7]+)\\)</regex>
+                </keywords>
 			</state>
 	
 			<state id="Comment" type="comment" useforautocomplete="no" foldable="yes" scope="comment.block">
