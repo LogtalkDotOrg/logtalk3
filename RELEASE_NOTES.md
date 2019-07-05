@@ -39,6 +39,8 @@ IDEs, text editors, and syntax highlighters support
 * UPDATED: Syntax highlighting test files to test representing a single quote
 inside a quoted atom using an escape sequence.
 
+* ADDED: Pygments support for the 0'\Char number notation.
+
 * FIXED: SubEthaEdit 4.x/5.x syntax coloring of escape sequences in quoted
 atoms.
 
