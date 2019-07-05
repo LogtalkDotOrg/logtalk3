@@ -215,11 +215,9 @@ module Rouge
       end
 
       state :quoted_atoms do
-        rule /['][']/, Str
         rule /[']/, Str, :pop!
-        rule %r(\\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)), Str::Escape
-        rule %r(\\), Str::Escape
-        rule /[^']*/, Str
+        rule /\\([\\abfnrtv"']|(x[a-fA-F0-9]+|[0-7]+)\\)/, Str::Escape
+        rule /[^\\'\n]+/, Str
       end
 
       state :strings do
@@ -228,8 +226,7 @@ module Rouge
       end
 
       state :numbers do
-        rule /0'\\./, Num
-        rule /0'./, Num
+        rule /0'[\\]?.|0''|0'"/, Num
         rule /0b[01]+/, Num
         rule /0o[0-7]+/, Num
         rule /0x[0-9a-fA-F]+/, Num
