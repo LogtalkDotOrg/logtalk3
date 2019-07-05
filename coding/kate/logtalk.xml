@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 
-<language name="Logtalk" version="2.13" kateversion="2.4" section="Sources" extensions="*.lgt;.logtalk" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="Apache License 2.0">
+<language name="Logtalk" version="2.14" kateversion="2.4" section="Sources" extensions="*.lgt;.logtalk" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="Apache License 2.0">
 
 	<highlighting>
 
@@ -219,6 +219,9 @@
 			</context>
 
 			<context name = "atom" attribute = "String" lineEndContext = "#stay" >
+				<RegExpr attribute="String Char" context="#stay" String="\\x[a-fA-F0-9]+\\"/>
+				<RegExpr attribute="String Char" context="#stay" String="\\[0-7]+\\"/>
+				<HlCStringChar attribute="String Char" context="#stay"/>
 				<DetectChar char = "'" attribute = "String" context = "#pop" />
 			</context>
 
@@ -231,7 +234,8 @@
 			<itemData name = "Operator" defStyleNum = "dsDataType" />
 			<itemData name = "Comment" defStyleNum = "dsComment" />
 			<itemData name = "Number" defStyleNum = "dsDecVal" />
-			<itemData name = "String"  defStyleNum = "dsString" />
+			<itemData name = "String" defStyleNum = "dsString" />
+			<itemData name="String Char" defStyleNum="dsSpecialChar" spellChecking="false"/>
 			<itemData name = "Variable" defStyleNum = "dsOthers" />
 		</itemDatas>
 

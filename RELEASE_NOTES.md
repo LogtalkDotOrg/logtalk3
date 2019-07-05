@@ -39,11 +39,11 @@ IDEs, text editors, and syntax highlighters support
 * UPDATED: Syntax highlighting test files to test representing a single quote
 inside a quoted atom using an escape sequence.
 
+* FIXED: Kate and SubEthaEdit 4.x/5.x syntax coloring of escape sequences in
+quoted atoms.
+
 * FIXED: Pygments and Rouge support for the 0'\Char number notation when
 escaping a single or double quote.
-
-* FIXED: SubEthaEdit 4.x/5.x syntax coloring of escape sequences in quoted
-atoms.
 
 
 3.27.0 - June 18, 2019
