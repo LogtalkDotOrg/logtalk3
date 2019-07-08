@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>assertions &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>assertions &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -286,7 +286,7 @@ the <code class="docutils literal notranslate"><span class="pre">logtalk::messag
     logtalk<span class="o">::</span>message_hook(<span class="nv">Message</span>, error, assertions, <span class="nv">_</span>) <span class="o">:-</span>
         <span class="k">writeq</span>(my_log_file, <span class="nv">Message</span>), <span class="k">write</span>(my_log_file, <span class="s">&#39;.</span><span class="se">\n</span><span class="s">&#39;</span>).
 
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 </div>
@@ -306,7 +306,7 @@ them, and throw an error. For example:</p>
         <span class="c">% logtalk::print_message_tokens(Stream, Prefix, Tokens),</span>
         <span class="k">throw</span>(error(<span class="nv">Message</span>, <span class="nv">_</span>)).
 
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 </div>

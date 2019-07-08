@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>lgtunit &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>lgtunit &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -269,7 +269,7 @@ file. For example:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>The tests must be term-expanded by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object by compiling
@@ -318,7 +318,7 @@ adding to the tests <code class="docutils literal notranslate"><span class="pre"
 <span class="p">:- </span><span class="k">multifile</span>(logtalk_make_target_action<span class="o">/</span><span class="m">1</span>).
 <span class="p">:- </span><span class="k">dynamic</span>(logtalk_make_target_action<span class="o">/</span><span class="m">1</span>).
 
-logtalk_make_target_action(check) <span class="o">:-</span>
+<span class="k">logtalk_make_target_action</span>(check) <span class="o">:-</span>
     tests<span class="o">::</span>run.
 </pre></div>
 </div>
@@ -512,7 +512,7 @@ you can simply write a file with clauses using the format:</p>
     <span class="k">term_expansion</span>((<span class="nv">Head</span> <span class="o">:-</span> <span class="nv">Body</span>), [test(<span class="nv">Head</span>) <span class="o">:-</span> <span class="nv">Body</span>]).
     <span class="k">term_expansion</span>(end_of_file, [(<span class="o">:-</span> end_object)]).
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Then we can use this hook object to expand and run tests written in this

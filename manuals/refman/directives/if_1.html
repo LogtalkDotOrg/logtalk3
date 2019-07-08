@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>if/1 &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>if/1 &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -231,7 +231,7 @@ providing a definition when the predicate is absent:</p>
     length(<span class="nv">List</span>, <span class="nv">Length</span>) <span class="o">:-</span>
         ...
 
-<span class="p">:- </span><span class="k">endif.</span>
+<span class="p">:- </span><span class="k">endif</span>.
 </pre></div>
 </div>
 <p>Another common example is conditionally including code for a specific
@@ -241,7 +241,7 @@ backend Prolog compiler:</p>
     <span class="c">% SWI-Prolog specific code</span>
 <span class="p">    :- </span><span class="k">set_prolog_flag</span>(double_quotes, codes).
 
-<span class="p">:- </span><span class="k">endif.</span>
+<span class="p">:- </span><span class="k">endif</span>.
 </pre></div>
 </div>
 <div class="admonition seealso">

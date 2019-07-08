@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Profiling programs &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>Profiling programs &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -247,7 +247,7 @@ time for the Prolog session:</p>
 <span class="p">    :- </span><span class="k">mode</span>(cpu_time(<span class="o">-</span>number), one).
     ...
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Our profiler will be named <code class="docutils literal notranslate"><span class="pre">stop_watch</span></code>. It must define event handlers
@@ -269,7 +269,7 @@ description (object, message, and sender) and the current time:</p>
         <span class="k">write</span>(<span class="s">&#39; from &#39;</span>), <span class="k">write</span>(<span class="nv">Sender</span>), <span class="k">nl</span>, <span class="k">write</span>(<span class="s">&#39;ENDING at &#39;</span>),
         cpu_time(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="s">&#39; seconds&#39;</span>), <span class="k">nl</span>.
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>After compiling and loading the <code class="docutils literal notranslate"><span class="pre">stop_watch</span></code> object (and the objects

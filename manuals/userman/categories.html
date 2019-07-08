@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Categories &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>Categories &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -261,7 +261,7 @@ most simple category will be one that is self-contained, not depending
 on any other Logtalk entity:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(<span class="nv">Category</span>).
     ...
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>If a category implements one or more protocols then the opening
@@ -269,7 +269,7 @@ directive will be:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(<span class="nv">Category</span>,
     <span class="k">implements</span>([<span class="nv">Protocol1</span>, <span class="nv">Protocol2</span>, ...])).
     ...
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>A category may be defined as a composition of other categories by
@@ -277,7 +277,7 @@ writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(<span class="nv">Category</span>,
     <span class="k">extends</span>([<span class="nv">Category1</span>, <span class="nv">Category2</span>, ...])).
     ...
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>This feature should only be used when extending a category without
@@ -317,7 +317,7 @@ dynamic predicates. For example:</p>
         <span class="c">% retract clause in &quot;self&quot;</span>
         <span class="o">::</span><span class="k">retract</span>(attribute_(<span class="nv">Attribute</span>, <span class="nv">Value</span>)).
 
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>Each object importing this category will have its own <code class="docutils literal notranslate"><span class="pre">attribute_/2</span></code>
@@ -350,7 +350,7 @@ instead of <em>self</em>. For example:</p>
         <span class="c">% retract clause in &quot;this&quot;</span>
         <span class="k">retract</span>(attribute_(<span class="nv">Attribute</span>, <span class="nv">Value</span>)).
 
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>When defining a category that declares and handles dynamic predicates,
@@ -367,7 +367,7 @@ categories:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(<span class="nv">Category</span>,
     <span class="k">complements</span>([<span class="nv">Object1</span>, <span class="nv">Object2</span>, ....])).
     ...
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>This allows us to add missing directives (e.g. to define
@@ -438,7 +438,7 @@ contents (directives and clauses).</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(ccc,
     <span class="k">implements</span>(ppp)).
 
-<span class="p">    :- </span><span class="k">dynamic.</span>
+<span class="p">    :- </span><span class="k">dynamic</span>.
 
 <span class="p">    :- </span><span class="k">private</span>(bar<span class="o">/</span><span class="m">1</span>).
 
@@ -448,7 +448,7 @@ contents (directives and clauses).</p>
     bar(<span class="m">1</span>).
     bar(<span class="m">2</span>).
 
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>If we need to create a lot of (dynamic) categories at runtime, then is
@@ -478,7 +478,7 @@ dynamic. A category created during the execution of a program is always
 dynamic. A category defined in a file can be either dynamic or static.
 Dynamic categories are declared by using the <a class="reference internal" href="../refman/directives/dynamic_0.html#directives-dynamic-0"><span class="std std-ref">dynamic/0</span></a>
 directive in the category source code:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic.</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic</span>.
 </pre></div>
 </div>
 <p>The directive must precede any predicate directives or clauses. Please
@@ -672,7 +672,7 @@ import any number of categories. The syntax is very simple:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">imports</span>([<span class="nv">Category1</span>, <span class="nv">Category2</span>, ...])).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>To make all public predicates imported via a category protected or to
@@ -681,21 +681,21 @@ category’s name with the corresponding keyword:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">imports</span>(private<span class="o">::</span><span class="nv">Category</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>or:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">imports</span>(protected<span class="o">::</span><span class="nv">Category</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Omitting the scope keyword is equivalent to writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">imports</span>(public<span class="o">::</span><span class="nv">Category</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 </div>
@@ -711,7 +711,7 @@ category:</p>
     out(<span class="nv">X</span>) <span class="o">:-</span>
         <span class="k">write</span>(<span class="nv">X</span>), <span class="k">nl</span>.
 
-<span class="p">:- </span><span class="k">end_category.</span>
+<span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>The predicate <code class="docutils literal notranslate"><span class="pre">out/1</span></code> can be called from within an object importing
@@ -725,7 +725,7 @@ the category by simply sending a message to <em>self</em>. For example:</p>
         <span class="o">::</span>out(<span class="nv">Result</span>).
     ...
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>This is the recommended way of calling a category predicate that can be
@@ -743,7 +743,7 @@ control construct. For example:</p>
         <span class="o">^^</span>out(<span class="nv">Result</span>).
     ...
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>This alternative should only be used when the user knows a priori that
@@ -767,7 +767,7 @@ Category parameter values can be defined by the importing objects. For example:<
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(speech(<span class="nv">Season</span>, <span class="nv">Event</span>),
     <span class="k">imports</span>([dress(<span class="nv">Season</span>), speech(<span class="nv">Event</span>)])).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Note that access to category parameters is only possible from within the

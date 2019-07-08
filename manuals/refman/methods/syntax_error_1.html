@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>syntax_error/1 &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>syntax_error/1 &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -221,15 +221,15 @@
 <span id="methods-syntax-error-1"></span><span id="index-0"></span><h1>syntax_error/1<a class="headerlink" href="#syntax-error-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>syntax_error(<span class="nv">Description</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">syntax_error</span>(<span class="nv">Description</span>)
 </pre></div>
 </div>
 <p>Throws a syntax error. This built-in method is declared private and thus
 cannot be used as a message to an object. Calling this predicate is
 equivalent to the following sequence of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
-context(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(syntax_error(<span class="nv">Description</span>), <span class="nv">Context</span>)).
+<span class="k">context</span>(<span class="nv">Context</span>),
+<span class="k">throw</span>(error(<span class="k">syntax_error</span>(<span class="nv">Description</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
@@ -237,7 +237,7 @@ runtime.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>syntax_error(<span class="o">@</span>nonvar) <span class="o">-</span> error
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">syntax_error</span>(<span class="o">@</span>nonvar) <span class="o">-</span> error
 </pre></div>
 </div>
 </div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>threaded_engine_post/2 &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>threaded_engine_post/2 &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -215,14 +215,14 @@
 <span id="predicates-threaded-engine-post-2"></span><span id="index-0"></span><h1>threaded_engine_post/2<a class="headerlink" href="#threaded-engine-post-2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_post(<span class="nv">Engine</span>, <span class="nv">Term</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_post</span>(<span class="nv">Engine</span>, <span class="nv">Term</span>)
 </pre></div>
 </div>
 <p>Posts a term to the engine term queue.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_post(<span class="o">@</span>nonvar, <span class="o">@</span>term) <span class="o">-</span> one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_post</span>(<span class="o">@</span>nonvar, <span class="o">@</span>term) <span class="o">-</span> one
 </pre></div>
 </div>
 </div>
@@ -242,7 +242,7 @@
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% post the atom &quot;ready&quot; to the worker_1 engine queue:</span>
-| <span class="o">?-</span> threaded_engine_post(worker_1, ready).
+| <span class="o">?-</span> <span class="k">threaded_engine_post</span>(worker_1, ready).
 </pre></div>
 </div>
 <div class="admonition seealso">

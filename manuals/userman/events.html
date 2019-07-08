@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Event-driven programming &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>Event-driven programming &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -457,7 +457,7 @@ Its definition could be something like:</p>
         <span class="k">write</span>(<span class="s">&#39; &lt;-- &#39;</span>), <span class="k">writeq</span>(<span class="nv">Message</span>),
         <span class="k">write</span>(<span class="s">&#39; from &#39;</span>), <span class="k">writeq</span>(<span class="nv">Sender</span>), <span class="k">nl</span>.
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Assume that we also have the following object:</p>
@@ -470,7 +470,7 @@ Its definition could be something like:</p>
 
     foo(foo).
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>After compiling and loading both objects and setting the

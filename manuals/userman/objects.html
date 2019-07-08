@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Objects &mdash; The Logtalk Handbook v3.28.0-b01 documentation</title>
+  <title>Objects &mdash; The Logtalk Handbook v3.28.0-b02 documentation</title>
   
 
   
@@ -311,7 +311,7 @@ using two Logtalk directives: <a class="reference internal" href="../refman/dire
 that is self-contained, not depending on any other Logtalk entity:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>If an object implements one or more protocols then the opening directive
@@ -319,14 +319,14 @@ will be:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">implements</span>([<span class="nv">Protocol1</span>, <span class="nv">Protocol2</span>, ...])).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>An object can import one or more categories:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">imports</span>([<span class="nv">Category1</span>, <span class="nv">Category2</span>, ...])).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>If an object both implements protocols and imports categories then we
@@ -335,7 +335,7 @@ will write:</p>
     <span class="k">implements</span>([<span class="nv">Protocol1</span>, <span class="nv">Protocol2</span>, ...]),
     <span class="k">imports</span>([<span class="nv">Category1</span>, <span class="nv">Category2</span>, ...])).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>In object-oriented programming objects are usually organized in
@@ -344,7 +344,7 @@ Logtalk, we can construct prototype-based hierarchies by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Prototype</span>,
     <span class="k">extends</span>(<span class="nv">Parent</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>We can also have class-based hierarchies by defining instantiation and
@@ -353,14 +353,14 @@ instance we will write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">instantiates</span>(<span class="nv">Class</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>A class may specialize another class, its superclass:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Class</span>,
     <span class="k">specializes</span>(<span class="nv">Superclass</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>If we are defining a reflexive system where every class is also an
@@ -369,7 +369,7 @@ instance, we will probably be using the following pattern:</p>
     <span class="k">instantiates</span>(<span class="nv">Metaclass</span>),
     <span class="k">specializes</span>(<span class="nv">Superclass</span>)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>In short, an object can be a <em>stand-alone</em> object or be part of an
@@ -390,7 +390,7 @@ of objects that provide the basis of a reflective system <a class="reference int
 <span class="p">:- </span><span class="k">object</span>(object,
     <span class="k">instantiates</span>(class)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 
 
 <span class="c">% default metaclass for all classes</span>
@@ -400,7 +400,7 @@ of objects that provide the basis of a reflective system <a class="reference int
     <span class="k">instantiates</span>(class),
     <span class="k">specializes</span>(abstract_class)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 
 
 <span class="c">% default metaclass for all abstract classes</span>
@@ -410,7 +410,7 @@ of objects that provide the basis of a reflective system <a class="reference int
     <span class="k">instantiates</span>(class),
     <span class="k">specializes</span>(object)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Note that with these instantiation and specialization relations,
@@ -424,7 +424,7 @@ by making a class its own metaclass. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(class,
     <span class="k">instantiates</span>(class)).
     ...
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>We can use, in the same application, both prototype and class-based
@@ -556,13 +556,13 @@ code contents (directives and clauses).</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo,
     <span class="k">extends</span>(bar)).
 
-<span class="p">    :- </span><span class="k">dynamic.</span>
+<span class="p">    :- </span><span class="k">dynamic</span>.
 
 <span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
     foo(<span class="m">1</span>).
     foo(<span class="m">2</span>).
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>If we need to create a lot of (dynamic) objects at runtime, then is best
@@ -606,7 +606,7 @@ message to other object. For example:</p>
 
     ...
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Or:</p>
@@ -615,7 +615,7 @@ message to other object. For example:</p>
 <span class="p">    :- </span><span class="k">initialization</span>(control<span class="o">::</span>start).
     ...
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>The initialization goal can also be a message to <em>self</em> in order to call
@@ -627,7 +627,7 @@ an inherited or imported predicate. For example, assuming that we have a
 <span class="p">    :- </span><span class="k">initialization</span>(<span class="o">::</span>reset).
     ...
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>Note, however, that descendant objects do not inherit initialization
@@ -642,7 +642,7 @@ An object created during the execution of a program is always dynamic.
 An object defined in a file can be either dynamic or static. Dynamic
 objects are declared by using the <a class="reference internal" href="../refman/directives/dynamic_0.html#directives-dynamic-0"><span class="std std-ref">dynamic/0</span></a> directive in the
 object source code:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic.</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic</span>.
 </pre></div>
 </div>
 <p>The directive must precede any predicate directives or clauses. Please
@@ -674,7 +674,7 @@ for this database by writing:</p>
 
 <span class="p">    :- </span><span class="k">include</span>(dbs(<span class="s">&#39;cities.pl&#39;</span>)).
 
-<span class="p">:- </span><span class="k">end_object.</span>
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive can also be used when creating an object

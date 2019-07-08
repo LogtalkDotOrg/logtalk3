@@ -411,10 +411,10 @@
 % '$lgt_pp_previous_predicate_'(Head, Mode)
 :- dynamic('$lgt_pp_previous_predicate_'/2).
 
-% '$lgt_pp_defines_non_terminal_'(Functor, Arity)
-:- dynamic('$lgt_pp_defines_non_terminal_'/2).
-% '$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines)
-:- dynamic('$lgt_pp_calls_non_terminal_'/3).
+% '$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity)
+:- dynamic('$lgt_pp_defines_non_terminal_'/3).
+% '$lgt_pp_calls_non_terminal_'(Functor, Arity, ExtArity, Lines)
+:- dynamic('$lgt_pp_calls_non_terminal_'/4).
 
 % '$lgt_pp_referenced_object_'(Object, File, Lines)
 :- dynamic('$lgt_pp_referenced_object_'/3).
@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 28, 0, b01)).
+'$lgt_version_data'(logtalk(3, 28, 0, b02)).
 
 
 
@@ -7095,9 +7095,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Flags0 is 4
 	;	Flags0 is 0
 	),
-	(	Arity2 is Arity - 2,
-		Arity2 >= 0,
-		'$lgt_pp_defines_non_terminal_'(Functor, Arity2) ->
+	(	'$lgt_pp_defines_non_terminal_'(Functor, _, Arity) ->
 		Flags1 is Flags0 + 2
 	;	Flags1 is Flags0
 	),
@@ -7616,8 +7614,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
 	retractall('$lgt_pp_previous_predicate_'(_, _)),
-	retractall('$lgt_pp_defines_non_terminal_'(_, _)),
-	retractall('$lgt_pp_calls_non_terminal_'(_, _, _)),
+	retractall('$lgt_pp_defines_non_terminal_'(_, _, _)),
+	retractall('$lgt_pp_calls_non_terminal_'(_, _, _, _)),
 	retractall('$lgt_pp_referenced_object_'(_, _, _)),
 	retractall('$lgt_pp_referenced_category_'(_, _, _)),
 	retractall('$lgt_pp_referenced_module_'(_, _, _)),
@@ -9325,7 +9323,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_dynamic_'(Head) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
-	;	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
+	;	'$lgt_pp_defines_non_terminal_'(Functor, Arity, _) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
 	;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
 		% synchronized/1 directives must precede the definitions for the declared non-terminals
@@ -10942,16 +10940,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_grammar_rules'(+list, +compilation_context)
-
-'$lgt_compile_grammar_rules'([GrammarRule| GrammarRules], Ctx) :-
-	'$lgt_compile_grammar_rule'(GrammarRule, Ctx),
-	'$lgt_compile_grammar_rules'(GrammarRules, Ctx).
-
-'$lgt_compile_grammar_rules'([], _).
-
-
-
 % '$lgt_compile_grammar_rule'(+grammar_rule, +compilation_context)
 
 '$lgt_compile_grammar_rule'(GrammarRule, Ctx) :-
@@ -10961,16 +10949,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(Error, grammar_rule(GrammarRule)))
 	),
 	'$lgt_compile_clause'(Clause, Ctx).
-
-
-
-% '$lgt_compile_clauses'(+list, +compilation_context)
-
-'$lgt_compile_clauses'([Clause| Clauses], Ctx) :-
-	'$lgt_compile_clause'(Clause, Ctx),
-	'$lgt_compile_clauses'(Clauses, Ctx).
-
-'$lgt_compile_clauses'([], _).
 
 
 
@@ -11566,8 +11544,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	(	Arity2 is Arity - 2,
-		'$lgt_pp_defines_non_terminal_'(Functor, Arity2) ->
+	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity2, Arity) ->
 		'$lgt_print_message'(warning(steadfastness), core, possible_non_steadfast_non_terminal(File, Lines, Type, Entity, Functor//Arity2))
 	;	'$lgt_print_message'(warning(steadfastness), core, possible_non_steadfast_predicate(File, Lines, Type, Entity, Functor/Arity))
 	),
@@ -17113,8 +17090,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
 	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, _),
-	Arity2 is Arity - 2,
-	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity2),
+	\+ '$lgt_pp_defines_non_terminal_'(Functor, _, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	\+ '$lgt_pp_protected_'(Functor, Arity),
 	\+ '$lgt_pp_private_'(Functor, Arity),
@@ -17129,8 +17105,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-	'$lgt_pp_defines_non_terminal_'(Functor, Arity),
-	ExtArity is Arity + 2,
+	'$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity),
 	\+ '$lgt_pp_public_'(Functor, ExtArity),
 	\+ '$lgt_pp_protected_'(Functor, ExtArity),
 	\+ '$lgt_pp_private_'(Functor, ExtArity),
@@ -18985,17 +18960,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_unknown_predicate_call_aux'(silent, _).
 
 '$lgt_report_unknown_predicate_call_aux'(error, Functor/Arity) :-
-	Arity2 is Arity - 2,
-	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
+	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
 		throw(existence_error(non_terminal, Functor//Arity2))
 	;	throw(existence_error(predicate, Functor/Arity))
 	).
 
 '$lgt_report_unknown_predicate_call_aux'(warning, Functor/Arity) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	Arity2 is Arity - 2,
 	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
+	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
 		'$lgt_print_message'(warning(unknown_predicates), core, unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, Functor//Arity2))
 	;	'$lgt_print_message'(warning(unknown_predicates), core, unknown_predicate_called_but_not_defined(File, Lines, Type, Entity, Functor/Arity))
 	).
@@ -19016,17 +18989,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_undefined_predicate_call_aux'(silent, _).
 
 '$lgt_report_undefined_predicate_call_aux'(error, Functor/Arity) :-
-	Arity2 is Arity - 2,
-	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
+	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
 		throw(existence_error(procedure, Functor//Arity2))
 	;	throw(existence_error(procedure, Functor/Arity))
 	).
 
 '$lgt_report_undefined_predicate_call_aux'(warning, Functor/Arity) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	Arity2 is Arity - 2,
 	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
+	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
 		'$lgt_print_message'(warning(undefined_predicates), core, declared_static_non_terminal_called_but_not_defined(File, Lines, Type, Entity, Functor//Arity2))
 	;	'$lgt_print_message'(warning(undefined_predicates), core, declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Functor/Arity))
 	).
@@ -21188,8 +21159,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Body = (Goal1, Goal2),
 	functor(NonTerminal, Functor, Arity),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
-		assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
+		\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity, _) ->
+		ExtArity is Arity + 2,
+		assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity))
 	;	true
 	).
 
@@ -21220,8 +21192,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_dcg_body'(GRBody, S0, S, Body, Ctx),
 	functor(NonTerminal, Functor, Arity),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
-		assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
+		\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity, _) ->
+		ExtArity is Arity + 2,
+		assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity))
 	;	true
 	).
 
@@ -21505,8 +21478,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Goal),
 	functor(NonTerminal, Functor, Arity),
 	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines),
-		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
-		assertz('$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines))
+		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, _, _) ->
+		ExtArity is Arity + 2,
+		assertz('$lgt_pp_calls_non_terminal_'(Functor, Arity, ExtArity, Lines))
 	;	true
 	).
 
