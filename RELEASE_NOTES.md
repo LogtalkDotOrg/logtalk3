@@ -42,8 +42,7 @@ inside a quoted atom using an escape sequence.
 * FIXED: Kate and SubEthaEdit 4.x/5.x syntax coloring of escape sequences in
 quoted atoms.
 
-* FIXED: Pygments and Rouge support for the 0'\Char number notation when
-escaping a single or double quote.
+* FIXED: GeSHi, Pygments, and Rouge support for the 0'\Char number notation.
 
 
 3.27.0 - June 18, 2019

@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2019/07/08 (1.1.25)
+ *  -  Fixed coloring of 0'Char numbers
  * 2019/02/12 (1.1.24)
  *  -  Added syntax coloring of the threaded_cancel/1 predicate
  * 2018/07/26 (1.1.23)
@@ -91,7 +93,7 @@ $language_data = array(
     'LANG_NAME' => 'Logtalk',
     'COMMENT_SINGLE' => array(1 => '%'),
     'COMMENT_MULTI' => array('/*' => '*/'),
-    'COMMENT_REGEXP' => array(2 => "/0'./sim"),
+    'COMMENT_REGEXP' => array(2 => "/0'[\\\\]?./sim"),
     'CASE_KEYWORDS' => GESHI_CAPS_NO_CHANGE,
     'QUOTEMARKS' => array("'"),
     'HARDQUOTE' => array('"', '"'),

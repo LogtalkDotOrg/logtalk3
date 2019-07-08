@@ -272,8 +272,8 @@ comment
 		X1 is 13, X2 is -13, X3 is +13,
 		Y1 is 13.13, Y2 is -13.13, Y3 is +13.13,
 		Z1 is 13.13e-23, Z2 is -13.13e-23, Z3 is +13.13e-23,
-		C1 is 0'A, C2 is 0'', C3 is 0'", C4 is 0'%,
-		C5 is 0'\n, C6 is 0'\\, C7 is 0'\', C8 is 0'\", C9 is 0'\`,
+		C1 is 0'A, C2 is 0'', C3 is 0'\", C4 is 0'%,
+		C5 is 0'\\n, C6 is 0'\\\\, C7 is 0'\\', C8 is 0'\\\", C9 is 0'\`,
 		B1 is 0b1011101,
 		O1 is 0o1234560,
 		H1 is 0x1234567890abcDEF.
@@ -421,8 +421,8 @@ comment
 
 	escape_sequences :-
 		write('Quoted atom with a quote ('') inside.'),
-		write('Quoted atom with a quote (\') inside using a control escape sequence.'),
-		write('Quoted atom with a backslash (\\) inside.'),
+		write('Quoted atom with a quote (\\') inside using a control escape sequence.'),
+		write('Quoted atom with a backslash (\\\\) inside.'),
 		write('Quoted atom with control escape sequences: \\a \\b \\r \\f \\t \\n \\v'),
 		write('Quoted atom with an octal escape sequence: \\123\\.'),
 		write('Quoted atom with an hexadecimal escape sequence: \\x123f\\.').
