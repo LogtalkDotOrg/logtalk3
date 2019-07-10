@@ -25,7 +25,8 @@ ________________________________________________________________________
 
 % find categories that complement objects:
 
-| ?- ?- complements_object(Category, Object).
+| ?- complements_object(Category, Object).
+
 Category = patch,
 Object = proto
 yes 
@@ -35,10 +36,16 @@ yes
 % defined in the object "proto":
 
 | ?- proto::init.
+
 parent init
 proto init
 yes 
 
-?- proto::pet(Pet).
+
+% verify the imported category added to the "proto" object by the
+% "patch" category:
+
+| ?- proto::pet(Pet).
+
 Pet = cat
 yes 
