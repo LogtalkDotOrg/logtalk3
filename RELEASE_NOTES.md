@@ -34,7 +34,13 @@ Documentation
 * FIXED: Missing `loops` library API documentation.
 
 * FIXED: The category opening directive can have up to arity four. Thanks to
-Anton Danilov for the bug report. 
+Anton Danilov for the bug report.
+
+Tools
+-----
+
+* FIXED: The `help` tool reported the category opening directive to have a
+maximum arity of three instead of four.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
