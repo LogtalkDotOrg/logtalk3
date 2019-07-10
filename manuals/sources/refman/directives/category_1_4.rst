@@ -15,10 +15,10 @@
    limitations under the License.
 
 
-.. index:: pair: category/1-3; Directive
-.. _directives_category_1_3:
+.. index:: pair: category/1-4; Directive
+.. _directives_category_1_4:
 
-category/1-3
+category/1-4
 ============
 
 Description

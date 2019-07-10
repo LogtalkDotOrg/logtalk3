@@ -24,7 +24,7 @@ Entity directives
    :maxdepth: 1
 
    built_in_0
-   category_1_3
+   category_1_4
    dynamic_0
    end_category_0
    end_object_0

@@ -60,7 +60,7 @@ space: we cannot have a category with the same name as an object or a
 protocol.
 
 Category code (directives and predicates) is textually encapsulated by
-using two Logtalk directives: :ref:`directives_category_1_3` and
+using two Logtalk directives: :ref:`directives_category_1_4` and
 :ref:`directives_end_category_0`. The
 most simple category will be one that is self-contained, not depending
 on any other Logtalk entity:

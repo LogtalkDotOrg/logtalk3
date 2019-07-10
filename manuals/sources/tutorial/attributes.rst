@@ -107,7 +107,7 @@ The alternative, opting for storing the attributes on *this*, is
 similar: just delete the uses of the ``::/1`` control structure from the
 code above.
 
-We have two new directives, :ref:`directives_category_1_3` and
+We have two new directives, :ref:`directives_category_1_4` and
 :ref:`directives_end_category_0`, that
 encapsulate the category code. If needed, we can put the predicates
 directives inside a protocol that will be implemented by the category:
