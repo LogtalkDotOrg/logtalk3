@@ -126,8 +126,8 @@ Most directories include `NOTES.md` or `NOTES.txt` documentation files.
 
 On POSIX systems, there's also a [man page](man/man1) for most shell scripts.
 A list of these scripts can be generated using the `apropos logtalk` command.
-[HTML versions](https://logtalk.org/man/) of the man pages are also available
-at the Logtalk website.
+[HTML versions](https://logtalk.org/documentation.html#man-pages) of the man
+pages are also available at the Logtalk website.
 
 
 Registration
