@@ -39,4 +39,5 @@ directory in the ``NOTES.md`` file.
    make
    ports_profiler
    profiler
+   tutor
    wrapper

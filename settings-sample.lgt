@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on March 20, 2019
+%  Last updated on July 23, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -107,6 +107,17 @@ when running on non-POSIX operating systems such as Windows. Check the
 /*
 :- initialization(
 	logtalk_load(help(loader))
+).
+%*/
+
+
+%  To load the `tutor` tool at startup to get additional explanations and
+%  suggestions for the compiler warning and error messages, uncomment the
+%  following lines:
+
+/*
+:- initialization(
+	logtalk_load(help(tutor))
 ).
 %*/
 

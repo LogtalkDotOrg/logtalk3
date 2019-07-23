@@ -38,6 +38,7 @@ The following developer tools are available, each one with its own
 - make
 - ports_profiler
 - profiler
+- tutor
 - wrapper
 
 
@@ -54,6 +55,9 @@ in a running session.
 
 The `profiler` tool is also not loaded by default as it provides integration
 with selected backend Prolog compiler profilers that are not portable.
+
+The `tutor` tool is also not loaded by default given its useful mainly for
+users that need help in understanding compiler warning and error messages.
 
 The `wrapper` tool is also not loaded by default given its beta status.
 

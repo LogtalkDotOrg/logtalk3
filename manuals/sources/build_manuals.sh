@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on June 17, 2019
+##   Last updated on July 23, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -52,6 +52,7 @@ sed '1,18d' ../../tools/lgtunit/NOTES.md | pandoc -f gfm -t rst -o devtools/lgtu
 sed '1,18d' ../../tools/make/NOTES.md | pandoc -f gfm -t rst -o devtools/make.rst
 sed '1,18d' ../../tools/ports_profiler/NOTES.md | pandoc -f gfm -t rst -o devtools/ports_profiler.rst
 sed '1,18d' ../../tools/profiler/NOTES.md | pandoc -f gfm -t rst -o devtools/profiler.rst
+sed '1,18d' ../../tools/tutor/NOTES.md | pandoc -f gfm -t rst -o devtools/tutor.rst
 sed '1,18d' ../../tools/wrapper/NOTES.md | pandoc -f gfm -t rst -o devtools/wrapper.rst
 
 make html

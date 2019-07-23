@@ -24,6 +24,13 @@ RELEASE NOTES
 3.28.0 - July ??, 2019
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The compiler `missing_scope_directive/5` warning message term to
+`missing_scope_directive/6` to pass the name of the directive that triggers
+the warning.
+
 Documentation
 -------------
 
@@ -38,6 +45,10 @@ Anton Danilov for the bug report.
 
 Tools
 -----
+
+* ADDED: Tutor tool aimed to help new users in understanding and acting on
+compiler warning and error messages. The `tutor` tool adds explanations and
+fix suggestions for selected compiler messages.
 
 * FIXED: The `help` tool reported the category opening directive to have a
 maximum arity of three instead of four.

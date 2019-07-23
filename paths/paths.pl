@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on June 1, 2019
+%  Last updated on July 22, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -94,6 +94,7 @@ logtalk_library_path(lgtdoc, tools('lgtdoc/')).
 logtalk_library_path(lgtunit, tools('lgtunit/')).
 logtalk_library_path(ports_profiler, tools('ports_profiler/')).
 logtalk_library_path(profiler, tools('profiler/')).
+logtalk_library_path(tutor, tools('tutor/')).
 logtalk_library_path(wrapper, tools('wrapper/')).
 
 % libraries
