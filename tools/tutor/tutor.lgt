@@ -185,6 +185,42 @@
 		 	'In the later case, use instead anonymous variables.'-[], nl, nl
 		].
 
+	explain(suspicious_call(_, _, _, _, repeat, reason(repeat(_)))) -->
+		[	'A repeat loop not ended with a cut may result in an endless loop in case'-[], nl,
+		 	'of unexpected backtracking. Always use a cut immediately after the test'-[], nl,
+			'goal that exits the repeat loop.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, !, reason(multifile(_)))) -->
+		[	'A cut in a multifile predicate clause may prevent other clauses, possibly'-[], nl,
+			'defined elsewhere, from being used when calling the predicate or when'-[], nl,
+			'backtracking into a call to the predicate.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, _ is _, reason(shared_variable(_)))) -->
+		[	'A variable occuring in both arguments of a is/2 predicate call will most'-[], nl,
+			'likely result in a runtime failure. Logical variables can only be further'-[], nl,
+			'instantiated and not unified with a different term when already bound.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, forall(_, _), reason(no_shared_variables(forall)))) -->
+		[	'In the most common cases, the forall/2 predicate is used for implementing'-[], nl,
+			'a generate-and-test loop where the first argument generates solutions that'-[], nl,
+			'are verified by the second argument. You can likely ignore this warning if'-[], nl,
+			'the first argument simply implements a counter.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, _, reason(no_shared_variables(_)))) -->
+		[	'In the most common cases, the template argument shares variables with the'-[], nl,
+			'goal argument so that we collect template bindings for the goal solutions.'-[], nl,
+			'You can likely ignore this warning if you are using this meta-predicate to'-[], nl,
+			'simply help count solutions.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, _, reason(existential_variables([_], _)))) -->
+		[	'A existentially-qualified variable must exist in the qualified goal.'-[], nl,
+			'Typo in the variable name?'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, _, reason(existential_variables([_, _| _], _)))) -->
+		[	'Existentially-qualified variables must exist in the qualified goal.'-[], nl,
+			'Typos in the variable names?'-[], nl, nl
+		].
+
 	% catchall clause
 
 	explain(_) --> [nl].

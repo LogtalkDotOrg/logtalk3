@@ -342,8 +342,8 @@
 	foo(X,Y,Z,W,V) :-
 		bagof(X, Y^Z^baz(Z,W,V), _).
 
-	bar(X,Y,Z,W,V) :-
-		setof(X, Y^Z^baz(Z,W,V), _).
+	bar(X,Y,Z,W,V,U) :-
+		setof(X, Y^Z^baz(W,V,U), _).
 
 	baz(_, _, _).
 
