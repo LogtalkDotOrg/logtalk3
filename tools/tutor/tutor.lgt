@@ -43,7 +43,7 @@
 	% errors
 
 
-	% warnings
+	% deprecated feature messages
 
 	explain(deprecated_compiler_flag(_, _, _, _, _, _)) -->
 		[	'Code that uses deprecated compiler flags will likely break when those'-[], nl,
@@ -98,12 +98,15 @@
 		].
 
 	explain(missing_reference_to_built_in_protocol(_, _, Type, _, Protocol)) -->
-		[	'The ~w implements reserved but user-defined predicates specified in the ~q protocol.'-[Type, Protocol], nl,
-			'Fix this warning by adding the implements(~q) argument to the ~w opening directive.'-[Protocol, Type], nl, nl
+		[	'The ~w implements reserved but user-defined predicates specified'-[Type], nl,
+			'in the built-in protocol. Add the implements(~q) argument to'-[Protocol], nl,
+			'the ~w opening directive to fix this warning.'-[Type], nl, nl
 		].
 
 	explain(duplicated_directive(_, _, _, _, _)) -->
 		['Easy to fix warning: simply delete or correct the duplicated directive.'-[], nl, nl].
+
+	% portability messages
 
 	explain(non_standard_predicate_call(_, _, _, _, _)) -->
 		[	'Calls to non-standard built-in predicates may make your code non-portable when'-[], nl,
@@ -166,6 +169,8 @@
 			'If there is a scope directive, check for a typo in the predicate name.'-[], nl, nl
 		].
 
+	% naming guidelines messages
+
 	explain(camel_case_entity_name(_, _, _, _)) -->
 		['Coding guidelines advise the use of underscores to separate words in entity names.'-[], nl, nl].
 
@@ -188,6 +193,8 @@
 
 	explain(variable_names_differ_only_on_case(_, _, _, _)) -->
 		['Variables differing only on case hurt code readbility.'-[], nl, nl].
+
+	% singleton variable messages
 
 	explain(singleton_variables(_, _, _, _, [_], _)) -->
 		[	'Misspelt variable name? Don''t care variable?'-[], nl,
@@ -270,6 +277,16 @@
 		[	'Existentially-qualified variables must exist in the qualified goal.'-[], nl,
 			'Typos in the variable names?'-[], nl, nl
 		].
+
+	% encoding/1 directive messages
+
+	explain(ignored_encoding_directive(_, _)) -->
+		['Only the first found encoding/1 directive is recognized and processed.'-[], nl].
+
+	explain(misplaced_encoding_directive(_, _)) -->
+		['The encoding/1 directive must be the first term, in the first line, in a source file.'-[], nl].
+
+	% steadfastness messages
 
 	explain(possible_non_steadfast_predicate(_, _, _, _, _)) -->
 		[	'Variable aliasing in a clause head means that two or more head arguments share'-[], nl,

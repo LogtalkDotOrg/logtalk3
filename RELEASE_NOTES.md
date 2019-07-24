@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 `missing_scope_directive/6` to pass the name of the directive that triggers
 the warning.
 
+* CHANGED: The compiler `ignored_directive/3` warning message term to
+`ignored_encoding_directive/2`.
+
 Documentation
 -------------
 

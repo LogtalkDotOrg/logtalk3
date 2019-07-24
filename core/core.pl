@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 28, 0, b03)).
+'$lgt_version_data'(logtalk(3, 28, 0, b04)).
 
 
 
@@ -8502,7 +8502,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% out-of-place encoding/1 directive, which must be the first term in a source file
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
-		'$lgt_print_message'(warning(general), core, ignored_directive(File, Lines, encoding/1))
+		'$lgt_print_message'(warning(general), core, ignored_encoding_directive(File, Lines))
 	).
 
 '$lgt_compile_file_directive'(ensure_loaded(FileSpec), _) :-

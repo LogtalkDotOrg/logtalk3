@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.66,
+		version is 1.67,
 		author is 'Paulo Moura',
-		date is 2019/07/23,
+		date is 2019/07/24,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -409,6 +409,8 @@
 		suspicious_call_reason(Reason),
 		message_context(File, Lines, Type, Entity).
 
+	% portability messages
+
 	message_tokens(non_standard_predicate_call(File, Lines, Type, Entity, Predicate)) -->
 		['Call to non-standard Prolog built-in predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
@@ -440,6 +442,8 @@
 	message_tokens(logtalk_built_in_predicate_as_directive(File, Lines, Directive)) -->
 		['Use of Logtalk built-in predicate as a directive: ~q'-[Directive], nl],
 		message_context(File, Lines).
+
+	% lambda expression messages
 
 	message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression)) -->
 		(	{UnqualifiedVars = [UnqualifiedVar]} ->
@@ -504,6 +508,8 @@
 		['Compiling query as an initialization goal: ~q'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
 
+	% singleton variable messages
+
 	message_tokens(singleton_variables(File, Lines, Type, Entity, Names, _Term)) -->
 		(	{Names = [Name]} ->
 			['Singleton variable: ~w'-[Name], nl]
@@ -532,6 +538,8 @@
 			loading_warnings(LCounter), [' and '-[]], compilation_warnings(CCounter), [nl]
 		).
 
+	% deprecated feature messages
+
 	message_tokens(deprecated_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag)) -->
 		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
 		message_context(File, Lines, Type, Entity).
@@ -552,13 +560,17 @@
 		['The ~w predicate is deprecated'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(ignored_directive(File, Lines, Directive)) -->
-		['The ~w directive is ignored'-[Directive], nl],
+	% encoding/1 directive messages
+
+	message_tokens(ignored_encoding_directive(File, Lines)) -->
+		['The encoding/1 directive is ignored'-[], nl],
 		message_context(File, Lines).
 
 	message_tokens(misplaced_encoding_directive(File, Lines)) -->
 		['The encoding/1 directive is misplaced'-[], nl],
 		message_context(File, Lines).
+
+	% steadfastness messages
 
 	message_tokens(possible_non_steadfast_predicate(File, Lines, Type, Entity, Predicate)) -->
 		['Predicate ~q may not be steadfast due to cut and variable aliasing in clause head'-[Predicate], nl],
@@ -567,6 +579,8 @@
 	message_tokens(possible_non_steadfast_non_terminal(File, Lines, Type, Entity, NonTerminal)) -->
 		['Non-terminal ~q may not be steadfast due to cut and variable aliasing in grammar rule head'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
+
+	% naming guidelines messages
 
 	message_tokens(camel_case_entity_name(File, Lines, _Type, Entity)) -->
 		['Entity name in camel case: ~w'-[Entity], nl],
