@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/07/22,
+		date is 2019/07/24,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.'
 	]).
 
@@ -46,8 +46,8 @@
 	% warnings
 
 	explain(declared_static_predicate_called_but_not_defined(_, _, _, _, _)) -->
-		[	'Calls to declared, static, but undefined predicates fail.'-[], nl,
-			'Predicate definition missing? Misspelt? Should the predicate be declared dynamic?'-[], nl, nl
+		[	'Calls to declared, static, but undefined predicates fail. Predicate definition missing?'-[], nl,
+			'Typo in the predicate name or number of arguments? Should the predicate be declared dynamic?'-[], nl, nl
 		].
 	explain(unknown_predicate_called_but_not_defined(_, _, _, _, _)) -->
 		[	'Calls to unknown and undefined predicates generate a runtime error.'-[], nl,
@@ -72,7 +72,7 @@
 
 	explain(no_matching_clause_for_goal(_, _, _, _, _)) -->
 		[	'Calls to locally defined predicates without a clause with a matching head fail.'-[], nl,
-			'Misspelt predicate argument? Predicate definition incomplete?'-[], nl, nl
+			'Typo in a predicate argument? Predicate definition incomplete?'-[], nl, nl
 		].
 
 	explain(missing_reference_to_built_in_protocol(_, _, Type, _, Protocol)) -->
@@ -90,6 +90,36 @@
 	explain(non_standard_arithmetic_function_call(_, _, _, _, _)) -->
 		[	'Calls to non-standard built-in functions may make your code non-portable when using'-[], nl,
 			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+		].
+
+	explain(non_standard_prolog_flag(_, _, _, _, _)) -->
+		[	'Use of non-standard Prolog flags may make your code non-portable when using'-[], nl,
+			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+		].
+	explain(non_standard_prolog_flag(_, _, _)) -->
+		[	'Use of non-standard Prolog flags may make your code non-portable when using'-[], nl,
+			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+		].
+	explain(non_standard_prolog_flag_value(_, _, _, _, _, _)) -->
+		[	'Although the flag itself is standard, the use of a non-standard flag value'-[], nl,
+			'may make your code non-portable when using other backend compilers.'-[], nl,
+			'Are there portable alternatives that you can use instead?'-[], nl, nl
+		].
+	explain(non_standard_prolog_flag_value(_, _, _, _)) -->
+		[	'Although the flag itself is standard, the use of a non-standard flag value'-[], nl,
+			'may make your code non-portable when using other backend compilers.'-[], nl,
+			'Are there portable alternatives that you can use instead?'-[], nl, nl
+		].
+
+	explain(non_standard_file_directive(_, _, _)) -->
+		[	'Use of non-standard file directives may make your code non-portable when using'-[], nl,
+			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+		].
+
+	explain(logtalk_built_in_predicate_as_directive(_, _, Directive)) -->
+		[	'Use of built-in predicates as directives may make your code non-portable when using'-[], nl,
+			'other backend compilers. Use instead a standard initialization/1 directive to call'-[], nl,
+			'those predicates: ":- initialization(~q)."'-[Directive], nl, nl
 		].
 
 	explain(reference_to_unknown_object(_, _, _, _, _)) -->
@@ -110,7 +140,9 @@
 		].
 
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
-		['But there is a ~w directive for the predicate.'-[Directive], nl, nl].
+		[	'But there is a ~w directive for the predicate.'-[Directive], nl,
+			'If there is a scope directive, check for a typo in the predicate name.'-[], nl, nl
+		].
 
 	explain(camel_case_entity_name(_, _, _, _)) -->
 		['Coding guidelines advise the use of underscores to separate words in entity names.'-[], nl, nl].
