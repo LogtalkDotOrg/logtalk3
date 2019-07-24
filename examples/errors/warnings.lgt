@@ -428,6 +428,15 @@
 
 
 
+:- object(deprecated).
+
+	foo :-
+		assert(bar).
+
+:- end_object.
+
+
+
 :- object(naming).
 
 	:- public(fooBar/0).

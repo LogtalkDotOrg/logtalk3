@@ -45,9 +45,31 @@
 
 	% warnings
 
+	explain(deprecated_compiler_flag(_, _, _, _, _, _)) -->
+		[	'Code that uses deprecated compiler flags will likely break when those'-[], nl,
+			'flags are removed in future Logtalk versions.'-[], nl, nl
+		].
+	explain(deprecated_compiler_flag(_, _, _, _)) -->
+		[	'Code that uses deprecated compiler flags will likely break when those'-[], nl,
+			'flags are removed in future Logtalk versions.'-[], nl, nl
+		].
+	explain(deprecated_control_construct(_, _, _, _, _)) -->
+		[	'Code that uses deprecated control constructs will likely break when those'-[], nl,
+			'control constructs are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
+	explain(deprecated_directive(_, _, _, _, _)) -->
+		[	'Code that uses deprecated directives will likely break when those'-[], nl,
+			'directives are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
+	explain(deprecated_predicate(_, _, _, _, _)) -->
+		[	'Code that uses deprecated predicates will likely break when those'-[], nl,
+			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
+
 	explain(declared_static_predicate_called_but_not_defined(_, _, _, _, _)) -->
-		[	'Calls to declared, static, but undefined predicates fail. Predicate definition missing?'-[], nl,
-			'Typo in the predicate name or number of arguments? Should the predicate be declared dynamic?'-[], nl, nl
+		[	'Calls to declared, static, but undefined predicates fail. Predicate'-[], nl,
+			'definition missing? Typo in the predicate name or number of arguments?'-[], nl,
+			'Should the predicate be declared dynamic?'-[], nl, nl
 		].
 	explain(unknown_predicate_called_but_not_defined(_, _, _, _, _)) -->
 		[	'Calls to unknown and undefined predicates generate a runtime error.'-[], nl,
@@ -56,12 +78,12 @@
 
 	explain(redefined_logtalk_built_in_predicate(_, _, _, _, _)) -->
 		[	'Avoid redefining Logtalk built-in predicates as it hurts code readbility.'-[], nl,
-			'Or were you not aware that there is already a built-in predicate with that name?'-[], nl, nl
+			'Lack of awareness that a built-in predicate with that name exists?'-[], nl, nl
 		].
 
 	explain(redefined_prolog_built_in_predicate(_, _, _, _, _)) -->
 		[	'Is the redefinition a consequence of making the code portable?'-[], nl,
-			'Or were you not aware that there is already a built-in predicate with that name?'-[], nl, nl
+			'Lack of awareness that a built-in predicate with that name exists?'-[], nl, nl
 		].
 
 	explain(goal_is_always_true(_, _, _, _, _)) -->
@@ -71,8 +93,8 @@
 		['Misspelt variable in goal? Wrong operator or built-in predicate?'-[], nl, nl].
 
 	explain(no_matching_clause_for_goal(_, _, _, _, _)) -->
-		[	'Calls to locally defined predicates without a clause with a matching head fail.'-[], nl,
-			'Typo in a predicate argument? Predicate definition incomplete?'-[], nl, nl
+		[	'Calls to locally defined predicates without a clause with a matching head'-[], nl,
+			'fail. Typo in a predicate argument? Predicate definition incomplete?'-[], nl, nl
 		].
 
 	explain(missing_reference_to_built_in_protocol(_, _, Type, _, Protocol)) -->
@@ -84,21 +106,21 @@
 		['Easy to fix warning: simply delete or correct the duplicated directive.'-[], nl, nl].
 
 	explain(non_standard_predicate_call(_, _, _, _, _)) -->
-		[	'Calls to non-standard built-in predicates may make your code non-portable when using'-[], nl,
-			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+		[	'Calls to non-standard built-in predicates may make your code non-portable when'-[], nl,
+			'using other backend compilers. Are there portable alternatives that you can use?'-[], nl, nl
 		].
 	explain(non_standard_arithmetic_function_call(_, _, _, _, _)) -->
-		[	'Calls to non-standard built-in functions may make your code non-portable when using'-[], nl,
-			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+		[	'Calls to non-standard built-in functions may make your code non-portable when'-[], nl,
+			'using other backend compilers. Are there portable alternatives that you can use?'-[], nl, nl
 		].
 
 	explain(non_standard_prolog_flag(_, _, _, _, _)) -->
 		[	'Use of non-standard Prolog flags may make your code non-portable when using'-[], nl,
-			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+			'other backend compilers. Are there portable alternatives that you can use?'-[], nl, nl
 		].
 	explain(non_standard_prolog_flag(_, _, _)) -->
 		[	'Use of non-standard Prolog flags may make your code non-portable when using'-[], nl,
-			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+			'other backend compilers. Are there portable alternatives that you can use?'-[], nl, nl
 		].
 	explain(non_standard_prolog_flag_value(_, _, _, _, _, _)) -->
 		[	'Although the flag itself is standard, the use of a non-standard flag value'-[], nl,
