@@ -214,7 +214,7 @@
 		 	'In the later case, use instead anonymous variables.'-[], nl, nl
 		].
 
-	explain(suspicious_call(_, _, _, _, _ -> _, _)) -->
+	explain(suspicious_call(_, _, _, _, (_ -> _), _)) -->
 		[	'Using the ->/2 if-then control construct without an else part is a common'-[], nl,
 			'source of errors. Check if the else part is missing due to a coding error'-[], nl,
 			'or use the suggested alternative.'-[], nl, nl
