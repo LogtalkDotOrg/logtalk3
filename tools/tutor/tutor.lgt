@@ -185,6 +185,34 @@
 		 	'In the later case, use instead anonymous variables.'-[], nl, nl
 		].
 
+	explain(suspicious_call(_, _, _, _, _ -> _, _)) -->
+		[	'Using the ->/2 if-then control construct without an else part is a common'-[], nl,
+			'source of errors. Check if the else part is missing due to a coding error'-[], nl,
+			'or use the suggested alternative.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
+		[	'The standard Prolog =../2 built-in predicate is costly and should be avoided'-[], nl,
+			'whenever possible. Simply use the suggested predicate.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, Object::_, _)) -->
+		{Object == user},
+		[	'Prolog standard built-in predicates can be called directly without requiring'-[], nl,
+			'sending a message to the "user" pseudo-object. Simply call the predicate.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, _::Pred, [Pred])) -->
+		[	'Only use message sending to call a local predicate when you need to generate'-[], nl,
+			'an event for the message. Otherwise, simply call the predicate directly.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, _::Pred, [::Pred])) -->
+		[	'Only use an explicit message sending instead of a message to "self" when you need'-[], nl,
+			'to generate an event for the message. Otherwise, simply send a message to "self".'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, ::Pred, [Pred, ^^Pred])) -->
+		[	'Sending a message to self to call a predicate in a recursive definition for it'-[], nl,
+			'is a redundant and costly alternative to simply call the local definition. On'-[], nl,
+			'rare cases, we want to make a "super" call.'-[], nl, nl
+		].
+
 	explain(suspicious_call(_, _, _, _, repeat, reason(repeat(_)))) -->
 		[	'A repeat loop not ended with a cut may result in an endless loop in case'-[], nl,
 		 	'of unexpected backtracking. Always use a cut immediately after the test'-[], nl,
@@ -219,6 +247,19 @@
 	explain(suspicious_call(_, _, _, _, _, reason(existential_variables([_, _| _], _)))) -->
 		[	'Existentially-qualified variables must exist in the qualified goal.'-[], nl,
 			'Typos in the variable names?'-[], nl, nl
+		].
+
+	explain(possible_non_steadfast_predicate(_, _, _, _, _)) -->
+		[	'Variable aliasing in a clause head means that two or more head arguments share'-[], nl,
+			'variables. If the predicate is called with usually output arguments bound, a'-[], nl,
+			'premature cut may result in the wrong clause being used. If that is the case,'-[], nl,
+			'change the clause to performe output unifications after the cut.'-[], nl, nl
+		].
+	explain(possible_non_steadfast_non_terminal(_, _, _, _, _)) -->
+		[	'Variable aliasing in a grammar rule head means that two or more head arguments'-[], nl,
+			'share variables. If the grammar rule is called with usually output arguments'-[], nl,
+			'bound, a premature cut may result in the wrong grammar rule being used. If that is'-[], nl,
+			'the case, change the grammar rule to performe output unifications after the cut.'-[], nl, nl
 		].
 
 	% catchall clause
