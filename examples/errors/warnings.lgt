@@ -18,6 +18,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+:- if(\+ current_logtalk_flag(encoding_directive, unsupported)).
+
+	:- encoding('US-ASCII').
+
+:- endif.
+
+
+
 :- object(misspell).
 
 	% call to an undefined but declared predicate
@@ -323,7 +332,7 @@
 	:- if(predicate_property('*->'(_,_), built_in)).
 
 		qux :-
-			quux -> corge.
+			'*->'(quux, corge).
 
 		quux.
 

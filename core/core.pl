@@ -11493,7 +11493,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), [(Pred1, Pred2)])),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), [';'('*->'(Pred1,Pred2),fail), (Pred1, Pred2)])),
 	fail.
 '$lgt_compile_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
@@ -11508,7 +11508,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), [(once(Pred1), Pred2)])),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), [(Pred1 -> Pred2; fail), (once(Pred1), Pred2)])),
 	fail.
 '$lgt_compile_body'((Pred1 -> Pred2), (TPred1 -> TPred2), (DPred1 -> DPred2), Ctx) :-
 	!,
@@ -15321,7 +15321,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % suspicious use of ::/1 instead of a local predicate call in clauses that
 % apparently are meant to implement recursive predicate definitions where
-% the user intention is to call the local predicate
+% the user intention is to call the local predicate; the user may also
+% intend to make a "super" call instead of a message to "self"
 
 '$lgt_compile_message_to_self'(Pred, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _),

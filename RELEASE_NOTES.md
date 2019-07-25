@@ -49,9 +49,9 @@ Anton Danilov for the bug report.
 Tools
 -----
 
-* ADDED: Tutor tool aimed to help new users in understanding and acting on
-compiler warning and error messages. The `tutor` tool adds explanations and
-fix suggestions for selected compiler messages.
+* ADDED: New developer tool, `tutor`, aimed to help new users in understanding
+and acting on compiler warning and error messages. The tool adds explanations
+and fix suggestions for selected compiler messages.
 
 * FIXED: The `help` tool reported the category opening directive to have a
 maximum arity of three instead of four.

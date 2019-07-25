@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/07/24,
+		date is 2019/07/25,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.'
 	]).
 
@@ -172,23 +172,33 @@
 	% naming guidelines messages
 
 	explain(camel_case_entity_name(_, _, _, _)) -->
-		['Coding guidelines advise the use of underscores to separate words in entity names.'-[], nl, nl].
+		[	'Coding guidelines advise the use of underscores'-[], nl,
+			'to separate words in entity names.'-[], nl, nl
+		].
 
 	explain(camel_case_predicate_name(_, _, _, _, _)) -->
-		['Coding guidelines advise the use of underscores to separate words in predicate names.'-[], nl, nl].
+		[	'Coding guidelines advise the use of underscores'-[], nl,
+			'to separate words in predicate names.'-[], nl, nl
+		].
 
 	explain(camel_case_non_terminal_name(_, _, _, _, _)) -->
-		['Coding guidelines advise the use of underscores to separate words in non-terminal names.'-[], nl, nl].
+		[	'Coding guidelines advise the use of underscores'-[], nl,
+			'to separate words in non-terminal names.'-[], nl, nl
+		].
 
 	explain(non_camel_case_variable_name(_, _, _, _, _)) -->
-		['Coding guidelines advise the use of CamelCase in variable names with multiple words.'-[], nl, nl].
+		[	'Coding guidelines advise the use of CamelCase'-[], nl,
+			'in variable names with multiple words.'-[], nl, nl
+		].
 
 	explain(non_camel_case_variable_name(_, _, _)) -->
-		['Coding guidelines advise the use of CamelCase in variable names with multiple words.'-[], nl, nl].
+		[	'Coding guidelines advise the use of CamelCase'-[], nl,
+			'in variable names with multiple words.'-[], nl, nl
+		].
 
 	explain(variable_names_differ_only_on_case(_, _, _, _, _, _)) -->
-		[	'Variable names differing only on case hurt code readbility.'-[], nl,
-		 	'Consider renaming one or both variables to better clarify their meaning.'-[], nl, nl
+		[	'Variable names differing only on case hurt code readbility. Consider'-[], nl,
+		 	'renaming one or both variables to better clarify their meaning.'-[], nl, nl
 		].
 
 	explain(variable_names_differ_only_on_case(_, _, _, _)) -->
@@ -219,6 +229,11 @@
 			'source of errors. Check if the else part is missing due to a coding error'-[], nl,
 			'or use the suggested alternative.'-[], nl, nl
 		].
+	explain(suspicious_call(_, _, _, _, '*->'(_, _), _)) -->
+		[	'Using the *->/2 soft cut control construct without an else part is a common'-[], nl,
+			'source of errors. Check if the else part is missing due to a coding error'-[], nl,
+			'or use the suggested alternative.'-[], nl, nl
+		].
 	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
 		[	'The standard Prolog =../2 built-in predicate is costly and should be avoided'-[], nl,
 			'whenever possible. Simply use the suggested predicate.'-[], nl, nl
@@ -237,9 +252,9 @@
 			'to generate an event for the message. Otherwise, simply send a message to "self".'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, ::Pred, [Pred, ^^Pred])) -->
-		[	'Sending a message to self to call a predicate in a recursive definition for it'-[], nl,
-			'is a redundant and costly alternative to simply call the local definition. On'-[], nl,
-			'rare cases, we want to make a "super" call.'-[], nl, nl
+		[	'Sending a message to self to call the same predicate being defined is a'-[], nl,
+			'redundant and costly alternative to simply call the local definition. Or'-[], nl,
+			'is your intention to make a "super" call?'-[], nl, nl
 		].
 
 	explain(suspicious_call(_, _, _, _, repeat, reason(repeat(_)))) -->
@@ -248,9 +263,9 @@
 			'goal that exits the repeat loop.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, !, reason(multifile(_)))) -->
-		[	'A cut in a multifile predicate clause may prevent other clauses, possibly'-[], nl,
-			'defined elsewhere, from being used when calling the predicate or when'-[], nl,
-			'backtracking into a call to the predicate.'-[], nl, nl
+		[	'A cut in a multifile predicate clause may prevent other clauses, notably'-[], nl,
+			'those defined elsewhere, from being used when calling the predicate or'-[], nl,
+			'when backtracking into a call to the predicate.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ is _, reason(shared_variable(_)))) -->
 		[	'A variable occuring in both arguments of a is/2 predicate call will most'-[], nl,
@@ -281,24 +296,26 @@
 	% encoding/1 directive messages
 
 	explain(ignored_encoding_directive(_, _)) -->
-		['Only the first found encoding/1 directive is recognized and processed.'-[], nl].
+		[	'The encoding/1 directive must be the first term, in the first line, in a'-[], nl,
+			'file. Moreover, only the first found encoding/1 directive is processed.'-[], nl, nl
+		].
 
 	explain(misplaced_encoding_directive(_, _)) -->
-		['The encoding/1 directive must be the first term, in the first line, in a source file.'-[], nl].
+		['The encoding/1 directive must be the first term, in the first line, in a file.'-[], nl, nl].
 
 	% steadfastness messages
 
 	explain(possible_non_steadfast_predicate(_, _, _, _, _)) -->
-		[	'Variable aliasing in a clause head means that two or more head arguments share'-[], nl,
-			'variables. If the predicate is called with usually output arguments bound, a'-[], nl,
-			'premature cut may result in the wrong clause being used. If that is the case,'-[], nl,
-			'change the clause to performe output unifications after the cut.'-[], nl, nl
+		[	'Variable aliasing in a clause head means that two or more head arguments'-[], nl,
+			'share variables. If the predicate is called with usually output arguments'-[], nl,
+			'bound, a premature cut may result in the wrong clause being used. If that''s'-[], nl,
+			'the case, change the clause to perform output unifications after the cut.'-[], nl, nl
 		].
 	explain(possible_non_steadfast_non_terminal(_, _, _, _, _)) -->
 		[	'Variable aliasing in a grammar rule head means that two or more head arguments'-[], nl,
 			'share variables. If the grammar rule is called with usually output arguments'-[], nl,
-			'bound, a premature cut may result in the wrong grammar rule being used. If that is'-[], nl,
-			'the case, change the grammar rule to performe output unifications after the cut.'-[], nl, nl
+			'bound, a premature cut may result in the wrong grammar rule being used. If that''s'-[], nl,
+			'the case, change the grammar rule to perform output unifications after the cut.'-[], nl, nl
 		].
 
 	% catchall clause
