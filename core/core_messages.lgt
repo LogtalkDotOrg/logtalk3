@@ -93,6 +93,20 @@
 	message_tokens(up_to_date_file(File, _Flags)) -->
 		['[ compiling ~w ... up-to-date ]'-[File], nl].
 
+	message_tokens(compilation_and_loading_warnings(CCounter, LCounter)) -->
+		(	{CCounter + LCounter =:= 0} ->
+			% no warnings
+			['(0 warnings)'-[], nl]
+		;	{CCounter =:= 0} ->
+			% no compilation warnings
+			loading_warnings(LCounter), [nl]
+		;	{LCounter =:= 0} ->
+			% no loading warnings
+			compilation_warnings(CCounter), [nl]
+		;	% both compilation and loading warnings
+			loading_warnings(LCounter), [' and '-[]], compilation_warnings(CCounter), [nl]
+		).
+
 	% entity compilation messages
 
 	message_tokens(compiling_entity(Type, Entity)) -->
@@ -372,6 +386,8 @@
 		['No matching clause for goal: ~q'-[Goal], nl],
 		message_context(File, Lines, Type, Entity).
 
+	% unknown entity messages
+
 	message_tokens(reference_to_unknown_object(File, Lines, Type, Entity, Object)) -->
 		['Reference to unknown object: ~q'-[Object], nl],
 		message_context(File, Lines, Type, Entity).
@@ -523,20 +539,6 @@
 		;	['Singleton variables: ~w'-[Names], nl]
 		),
 		message_context(File, Lines).
-
-	message_tokens(compilation_and_loading_warnings(CCounter, LCounter)) -->
-		(	{CCounter + LCounter =:= 0} ->
-			% no warnings
-			['(0 warnings)'-[], nl]
-		;	{CCounter =:= 0} ->
-			% no compilation warnings
-			loading_warnings(LCounter), [nl]
-		;	{LCounter =:= 0} ->
-			% no loading warnings
-			compilation_warnings(CCounter), [nl]
-		;	% both compilation and loading warnings
-			loading_warnings(LCounter), [' and '-[]], compilation_warnings(CCounter), [nl]
-		).
 
 	% deprecated feature messages
 

@@ -77,7 +77,7 @@
 		].
 
 	explain(redefined_logtalk_built_in_predicate(_, _, _, _, _)) -->
-		[	'Avoid redefining Logtalk built-in predicates as it hurts code readbility.'-[], nl,
+		[	'Avoid redefining Logtalk built-in predicates as it hurts code readability.'-[], nl,
 			'Lack of awareness that a built-in predicate with that name exists?'-[], nl, nl
 		].
 
@@ -147,6 +147,18 @@
 			'those predicates: ":- initialization(~q)."'-[Directive], nl, nl
 		].
 
+	explain(compiling_proprietary_prolog_directive(_, _, _, _, _)) -->
+		[	'Use of non-standard Prolog directives may make your code non-portable when using'-[], nl,
+			'other backend compilers. Are there portable alternatives that you can use instead?'-[], nl, nl
+		].
+
+	explain(compiling_query_as_initialization_goal(_, _, _, _, _)) -->
+		[	'Arbitrary queries used as directives are converted to initialization/1 directives.'-[], nl,
+			'Note that, as a consequence, the queries are only called after the file being loaded. '-[], nl, nl
+		].
+
+	% unknown entity messages
+
 	explain(reference_to_unknown_object(_, _, _, _, _)) -->
 		['Misspelt object name? Wrong file loading order? Circular references?'-[], nl, nl].
 
@@ -161,7 +173,7 @@
 
 	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Predicate)) -->
 		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Predicate], nl,
-			'Add a ":- dynamic(~q)." directive to the ~w to supress this warning.'-[Predicate, Type], nl, nl
+			'Add a ":- dynamic(~q)." directive to the ~w to suppress this warning.'-[Predicate, Type], nl, nl
 		].
 
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
@@ -197,12 +209,12 @@
 		].
 
 	explain(variable_names_differ_only_on_case(_, _, _, _, _, _)) -->
-		[	'Variable names differing only on case hurt code readbility. Consider'-[], nl,
+		[	'Variable names differing only on case hurt code readability. Consider'-[], nl,
 		 	'renaming one or both variables to better clarify their meaning.'-[], nl, nl
 		].
 
 	explain(variable_names_differ_only_on_case(_, _, _, _)) -->
-		['Variables differing only on case hurt code readbility.'-[], nl, nl].
+		['Variables differing only on case hurt code readability.'-[], nl, nl].
 
 	% singleton variable messages
 
@@ -268,7 +280,7 @@
 			'when backtracking into a call to the predicate.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ is _, reason(shared_variable(_)))) -->
-		[	'A variable occuring in both arguments of a is/2 predicate call will most'-[], nl,
+		[	'A variable occurring in both arguments of a is/2 predicate call will most'-[], nl,
 			'likely result in a runtime failure. Logical variables can only be further'-[], nl,
 			'instantiated and not unified with a different term when already bound.'-[], nl, nl
 		].
@@ -320,6 +332,7 @@
 
 	% catchall clause
 
-	explain(_) --> [nl].
+	explain(_) -->
+		[nl].
 
 :- end_object.
