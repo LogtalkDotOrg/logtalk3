@@ -56,6 +56,13 @@ fix suggestions for selected compiler messages.
 * FIXED: The `help` tool reported the category opening directive to have a
 maximum arity of three instead of four.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Workaround recent SWI-Prolog Windows installers no longer writing
+registry keys with its home directory by using the default installation
+directory as the last resort.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
