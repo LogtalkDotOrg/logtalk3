@@ -56,6 +56,13 @@ and fix suggestions for selected compiler messages.
 * FIXED: The `help` tool reported the category opening directive to have a
 maximum arity of three instead of four.
 
+Tests
+-----
+
+* ADDED: New unit test for the ISO Prolog standard `read_term/3` predicate to
+check the `variables/1`, `variable_names/1`, and `singletons/1` options when
+reading the `end_of_file` term.
+
 Installers and installation scripts
 -----------------------------------
 
