@@ -22,7 +22,8 @@ MANUAL INSTALLATION INSTRUCTIONS
 
 The recommended way of installing Logtalk is to use, whenever possible,
 one of the provided installers that can be downloaded from the
-[Logtalk website](https://logtalk.org).
+[Logtalk website](https://logtalk.org). Installers are provided for macOS,
+Windows, and Linux.
 
 This file contains detailed instructions for  *manual* installation and
 configuration of Logtalk. You should also consult
@@ -112,7 +113,16 @@ defining the `LOGTALKHOME` environment variable described below.
 If you're using Windows, you can simply use the provided GUI installer (which
 supports both admin and non-admin users) to perform a full installation. You
 can also easily generate the GUI installer yourself. See the instructions on
-the `scripts/windows/NOTES.md` file.
+the `scripts/windows/NOTES.md` file. If the installer fails to detect the
+installation of the backend Prolog compiler you want to use, you can manually
+create a Windows integration shortcut by finding the full path to the Prolog
+executable and using the Prolog specific command-line options to load the
+integration file (see the Bash integration scripts in the `integration`
+directory for the options and file to be loaded). For example assume that
+you're using a non-standard and non-default installation of SWI-Prolog in
+a removable disk mounted as `G:\`. The shortcut would use a path such as:
+
+	G:\swipl\bin\swipl-win.exe -s "%LOGTALKHOME%\integration\logtalk_swi.pl"
 
 
 Setting Logtalk environment variables

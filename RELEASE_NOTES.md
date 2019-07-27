@@ -41,6 +41,8 @@ Documentation
 
 * IMPROVED: Handbook session on multifile predicates.
 
+* UPDATED: Manual installation instructions for Windows users.
+
 * FIXED: Missing `loops` library API documentation.
 
 * FIXED: The category opening directive can have up to arity four. Thanks to
