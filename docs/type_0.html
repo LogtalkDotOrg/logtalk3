@@ -264,8 +264,8 @@
 <p>Type checking predicates. User extensible. New types can be defined by adding clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.26</div>
-<div class="line"><strong>Date:</strong> 2019/6/10</div>
+<div class="line"><strong>Version:</strong> 1.27</div>
+<div class="line"><strong>Date:</strong> 2019/7/27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -313,7 +313,7 @@
 <li><p><em>Error context:</em> The built-in execution-context method <code class="docutils literal notranslate"><span class="pre">context/1</span></code> can be used to provide the calling context for errors when using the predicate <code class="docutils literal notranslate"><span class="pre">check/3</span></code>.</p></li>
 <li><p><em>Registering new types:</em> New types can be registered by defining clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</p></li>
 <li><p><em>Meta-types:</em> Meta-types are types that have one or more sub-types. E.g. <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>. The sub-types of a meta-type can be enumerated by defining a clause for the <code class="docutils literal notranslate"><span class="pre">meta_type/3</span></code> multifile predicate.</p></li>
-<li><p><em>Character sets:</em> When testing character or character codes, or terms that contain them (e.g. atom), it is possible to choose a character set (<code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, or <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>) using the parameterizable types.</p></li>
+<li><p><em>Character sets:</em> When testing character or character code based terms (e.g. atom), it is possible to choose a character set (<code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, or <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>) using the parameterizable types.</p></li>
 <li><p><em>Caveats:</em> The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>
 </ul>
 </div></blockquote>
