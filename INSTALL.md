@@ -65,8 +65,8 @@ If you want to keep a pristine copy of the sources (or avoid possible merge
 conflicts when updating your git clone) use the provided installation script
 to copy the files that typically you want to play with and modify elsewhere.
 
-For POSIX systems, first, open a terminal, change the current directory to
-the Logtalk directory, and then type:
+For **POSIX** systems (macOS, Linux, ...), first, open a terminal, change the
+current directory to the Logtalk directory, and then type:
 
 	% cd scripts
 	% ./install.sh -p $HOME
@@ -74,7 +74,7 @@ the Logtalk directory, and then type:
 This will install Logtalk into the `$HOME/share` and `$HOME/bin` directories
 (the `$HOME/bin` path must be in your `PATH` environment variable).
 
-If you're using Windows, you can simply use the provided installer (which
+If you're using **Windows**, you can simply use the provided installer (which
 supports both admin and non-admin users) to perform a full installation.
 The Windows installer is built using Inno Setup, which is freely available.
 If you need to customize the installer (e.g. to recognize Prolog compilers
@@ -84,8 +84,8 @@ the [scripts/windows](scripts/windows) directory and regenerate the installer.
 
 * Installing for one or more users by a user with administrative rights:
 
-For POSIX systems, first, open a terminal, change the current directory to
-the Logtalk directory, and then type:
+For **POSIX** systems, first, open a terminal, change the current directory
+to the Logtalk directory, and then type:
 
 	% cd scripts
 	% sudo ./install.sh
@@ -110,10 +110,10 @@ directory, which should be in your path. The `install.sh` shell script also
 creates a symbolic link, `$prefix/share/logtalk`, which can be used for e.g.
 defining the `LOGTALKHOME` environment variable described below.
 
-If you're using Windows, you can simply use the provided GUI installer (which
-supports both admin and non-admin users) to perform a full installation. You
-can also easily generate the GUI installer yourself. See the instructions on
-the `scripts/windows/NOTES.md` file. If the installer fails to detect the
+If you're using **Windows**, you can simply use the provided GUI installer
+(which supports both admin and non-admin users) to perform a full installation.
+You can also easily generate the GUI installer yourself. See the instructions
+on the `scripts/windows/NOTES.md` file. If the installer fails to detect the
 installation of the backend Prolog compiler you want to use, you can manually
 create a Windows integration shortcut by finding the full path to the Prolog
 executable and using the Prolog specific command-line options to load the
@@ -123,6 +123,10 @@ you're using a non-standard and non-default installation of SWI-Prolog in
 a removable disk mounted as `G:\`. The shortcut would use a path such as:
 
 	G:\swipl\bin\swipl-win.exe -s "%LOGTALKHOME%\integration\logtalk_swi.pl"
+
+Alternatively, on Windows 10 or Windows Server 2019, you can use the
+Windows Subsystem for Linux (WSL) and install Logtalk using one of the
+Linux installers or by following the instructions above for POSIX systems.
 
 
 Setting Logtalk environment variables
