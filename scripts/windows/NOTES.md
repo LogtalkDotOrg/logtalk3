@@ -43,3 +43,7 @@ As Logtalk first looks at startup for a `settings.lgt` file in the
 current directory, in order to use a project-specific settings file,
 copy the desired shortcut to the project directory and use its path
 as the value of the `Start in` shortcut setting.
+
+The installer can be run in silent mode when executed at the command-line
+by using the option `/SILENT` (progress window is show) or `/VERYSILENT`
+(no progress window).

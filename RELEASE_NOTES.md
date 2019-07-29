@@ -68,6 +68,9 @@ reading the `end_of_file` term.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The Windows installer to allow running in silent mode when using
+the command-line options `/SILENT` or `/VERYSILENT`.
+
 * FIXED: Workaround recent SWI-Prolog Windows installers no longer writing
 registry keys with its home directory by using the default installation
 directory as the last resort.

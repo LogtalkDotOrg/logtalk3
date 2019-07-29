@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on July 25, 2019
+; Last updated on July 29, 2019
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -221,7 +221,7 @@ Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "Perce
 
 [Run]
 Filename: "{app}\README.md"; Description: "Open the README.md file"; Components: base; Flags: postinstall shellexec skipifsilent
-Filename: "{app}\{#MyAppRegUrlName}"; Components: base; Flags: shellexec nowait; Tasks: registration
+Filename: "{app}\{#MyAppRegUrlName}"; Components: base; Flags: shellexec nowait skipifsilent; Tasks: registration
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}"; Components: base
@@ -289,7 +289,7 @@ var
   Warning: String;
 begin
   Result := BPExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect B-Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -311,7 +311,7 @@ var
   Warning: String;
 begin
   Result := CxExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect CxProlog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -358,7 +358,7 @@ var
   Warning: String;
 begin
   Result := EclipseExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect ECLiPSe Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -380,7 +380,7 @@ var
   Warning: String;
 begin
   Result := GPExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect GNU Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -406,7 +406,7 @@ var
   Warning: String;
 begin
   Result := JIPExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect JIProlog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -431,7 +431,7 @@ var
   Warning: String;
 begin
   Result := LeanPrologExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect Lean Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -455,7 +455,7 @@ var
   Warning: String;
 begin
   Result := QuintusExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect Quintus Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -502,7 +502,7 @@ var
   Warning: String;
 begin
   Result := SICStusExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect SICStus Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -546,7 +546,7 @@ var
   Warning: String;
 begin
   Result := SWIConExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect SWI-Prolog (console version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK)
@@ -590,7 +590,7 @@ var
   Warning: String;
 begin
   Result := SWIWinExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect SWI-Prolog (window version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK)
@@ -617,7 +617,7 @@ var
   Warning: String;
 begin
   Result := XSBExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect XSB installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -644,7 +644,7 @@ var
   Warning: String;
 begin
   Result := XSBMTExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect XSB-MT installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -673,7 +673,7 @@ var
   Warning: String;
 begin
   Result := YAPConExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect YAP (console version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -702,7 +702,7 @@ var
   Warning: String;
 begin
   Result := YAPWinExePath;
-  if Result = 'prolog_compiler_not_installed' then
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
     Warning := 'Failed to detect YAP (window version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
@@ -789,7 +789,7 @@ begin
                + 'All aditional Logtalk users on your computer must also use this installer to update their Logtalk user folders.';
     WarningPage := CreateOutputMsgPage(wpWelcome, 'Warning', 'Logtalk user folder update required.', Warning)
   end;
-  if NoBackEndPrologCompilerInstalled then
+  if NoBackEndPrologCompilerInstalled and not WizardSilent then
   begin
     Error := 'No compatible Prolog compiler found!'
              + Chr(13) + Chr(13)
