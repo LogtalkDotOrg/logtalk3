@@ -291,7 +291,10 @@ begin
   Result := BPExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect B-Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect B-Prolog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the B-Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -i "$LOGTALKHOME/integration/logtalk_bp.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -313,7 +316,10 @@ begin
   Result := CxExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect CxProlog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect CxProlog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the CxProlog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path --script "%LOGTALKHOME%\\integration\\logtalk_cx.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -343,8 +349,8 @@ begin
       Result := 'prolog_compiler_not_installed'
   else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
          Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-	   else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
-	     Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+       else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
+         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
        else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
          Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
        else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
@@ -360,7 +366,10 @@ begin
   Result := EclipseExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect ECLiPSe Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect ECLiPSe installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the ECLiPSe executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -L iso -t user -b "$LOGTALKHOME/integration/logtalk_eclipse.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -382,7 +391,10 @@ begin
   Result := GPExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect GNU Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect GNU Prolog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the GNU Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path --entry-goal "[''$LOGTALKHOME/integration/logtalk_gp.pl'']"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -408,7 +420,10 @@ begin
   Result := JIPExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect JIProlog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect JIProlog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the JIProlog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -c "%LOGTALKHOME%\integration\logtalk_ji.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -433,7 +448,10 @@ begin
   Result := LeanPrologExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect Lean Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect Lean Prolog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the Lean Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path "[''$LOGTALKHOME/integration/logtalk_lean'']"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -457,7 +475,10 @@ begin
   Result := QuintusExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect Quintus Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect Quintus Prolog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the Quintus Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path +l "%LOGTALKHOME%\integration/logtalk_quintus.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -504,7 +525,10 @@ begin
   Result := SICStusExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect SICStus Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect SICStus Prolog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the SICStus Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -l "%LOGTALKHOME%\integration\logtalk_sicstus.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -548,7 +572,10 @@ begin
   Result := SWIConExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect SWI-Prolog (console version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect SWI-Prolog (console version) installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the SWI-Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -s "%LOGTALKHOME%\integration\logtalk_swi.pl"';
     MsgBox(Warning, mbError, MB_OK)
   end
 end;
@@ -592,7 +619,10 @@ begin
   Result := SWIWinExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect SWI-Prolog (window version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect SWI-Prolog (window version) installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the SWI-Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -s "%LOGTALKHOME%\integration\logtalk_swi.pl"';
     MsgBox(Warning, mbError, MB_OK)
   end
 end;
@@ -619,7 +649,10 @@ begin
   Result := XSBExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect XSB installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect XSB installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the XSB executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -l -e "[''%LOGTALKHOME%\\integration\\logtalk_xsb.pl'']."';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -646,7 +679,10 @@ begin
   Result := XSBMTExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect XSB-MT installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect XSB-MT installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the XSB-MT executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -l -e "[''%LOGTALKHOME%\\integration\\logtalk_xsbmt.pl'']."';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -675,7 +711,10 @@ begin
   Result := YAPConExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect YAP (console version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect YAP (console version) installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the YAP executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -l "$LOGTALKHOME/integration/logtalk_yap.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -704,7 +743,10 @@ begin
   Result := YAPWinExePath;
   if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
   begin
-    Warning := 'Failed to detect YAP (window version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect YAP (window version) installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the YAP executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -l "$LOGTALKHOME/integration/logtalk_yap.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;

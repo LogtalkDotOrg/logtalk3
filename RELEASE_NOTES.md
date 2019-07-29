@@ -71,6 +71,10 @@ Installers and installation scripts
 * UPDATED: The Windows installer to allow running in silent mode when using
 the command-line options `/SILENT` or `/VERYSILENT`.
 
+* UPDATED: The Windows installer to print instructions on how to manually
+create integration shortcuts when a backend Prolog compiler installation
+cannot be found.
+
 * FIXED: Workaround recent SWI-Prolog Windows installers no longer writing
 registry keys with its home directory by using the default installation
 directory as the last resort.
