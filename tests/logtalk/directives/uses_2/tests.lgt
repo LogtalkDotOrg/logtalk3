@@ -103,6 +103,31 @@
 :- end_object.
 
 
+:- object(bar(_Object_)).
+
+	:- uses(_Object_, [r/1]).
+
+	:- public(q/1).
+	q(X) :- r(X).
+
+
+:- end_object.
+
+
+:- object(baz(_Object_)).
+
+	:- uses(bar(_Object_), [q/1]).
+
+	:- public(p/1).
+	p(X) :- q(X).
+
+:- end_object.
+
+
+r(1).
+r(2).
+r(3).
+
 
 % tests
 
@@ -110,9 +135,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/05/24,
+		date is 2019/07/30,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
@@ -160,5 +185,9 @@
 	test(uses_2_08) :-
 		foo(baz)::r(X),
 		X == 2.
+
+	test(uses_2_09) :-
+		findall(X, baz(user)::p(X), L),
+		L == [1,2,3].
 
 :- end_object.

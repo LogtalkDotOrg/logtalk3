@@ -475,6 +475,8 @@
 		),
 		message_context(File, Lines, Type, Entity).
 
+	% other warning messages
+
 	message_tokens(complementing_category_ignored(File, Lines, Category, Object)) -->
 		['Complementing category will be ignored: ~q'-[Category], nl,
 		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],

@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 28, 0, b04)).
+'$lgt_version_data'(logtalk(3, 28, 0, b05)).
 
 
 
@@ -6390,8 +6390,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles to disk a source file or a list of source files
 %
-% a call to this predicate can trigger other calls to it, therefore we must clean
-% the compilation auxiliary predicates before compiling a file
+% a call to this predicate can trigger other calls to it, therefore we
+% must clean the compilation auxiliary predicates before compiling a file
 
 '$lgt_compile_files'([], _) :-
 	!.
@@ -6632,7 +6632,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		FirstTermError,
 		'$lgt_compiler_first_term_error_handler'(SourceFile, Lines, FirstTermError)
 	),
-	% open a corresponding Prolog file for writing generated code using any found encoding/1 directive
+	% open a Prolog file for writing the generated code using any found encoding/1 directive
 	catch(
 		'$lgt_open'(ObjectFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),
 		OpenError,
@@ -6643,7 +6643,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		WriteError,
 		'$lgt_compiler_stream_error_handler'(WriteError)
 	),
-	% generate a begin_of_file term for term-expansion
+	% generate a begin_of_file term for use by the term-expansion mechanism
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(user,_,_), _, 0-0),
 	'$lgt_compile_file_term'(begin_of_file, Ctx),
 	% read and compile the remaining terms in the Logtalk source file
@@ -6862,7 +6862,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_add_referenced_module'(@term, @compilation_context)
 %
-% adds referenced module for later checking of references to unknown modules
+% adds referenced module for later checking of references to unknown modules;
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module, Ctx) :-
@@ -7989,7 +7989,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % goal-expansion results in a goal that contains the expanded goal
 %
 % calls to this predicate fail if the goal about to be expanded was
-% the result of a previous goal expansion
+% the result of a previous goal expansion (tested using term equality)
 
 '$lgt_push_if_new'(ExpandedGoals, Pred, NewExpandedGoals) :-
 	var(ExpandedGoals),
@@ -8108,8 +8108,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_module_'(Module),
 	!,
 	% module definitions start with an opening module/1-2 directive and are assumed
-	% to end at the end of a source file; there is no module closing directive;
-	% set the initial compilation context and the position for compiling the end_of_file term
+	% to end at the end of a source file; there is no module closing directive; set
+	% the initial compilation context and the position for compiling the end_of_file term
 	'$lgt_second_stage'(object, Module, Ctx),
 	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)).
 
@@ -8653,7 +8653,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-% auxiliary predicate for performing basic error checking if file level
+% auxiliary predicate for performing basic error checking of file level
 % predicate directive arguments
 
 '$lgt_check_file_predicate_directive_arguments'([Pred| Preds], Property) :-
@@ -8679,6 +8679,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_file_predicate_directive_argument'(Pred, _) :-
 	'$lgt_check'(predicate_or_non_terminal_indicator, Pred).
+
 
 
 '$lgt_expand_module_file_specification'(FileSpec, ExpandedFile) :-
@@ -9019,20 +9020,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 % uses/2 predicate directive
 
 '$lgt_compile_logtalk_directive'(uses(Obj, Resources), Ctx) :-
-	var(Obj),
+	term_variables(Obj, [ObjVariable| ObjVariables]),
 	'$lgt_pp_term_variable_names_file_lines_'((:- uses(Obj,Resources)), VariableNames, _, _),
 	'$lgt_member'(VariableName=Variable, VariableNames),
-	Obj == Variable,
+	'$lgt_member_var'(Variable, [ObjVariable| ObjVariables]),
 	'$lgt_pp_parameter_variables_'(ParameterVariablePairs),
 	'$lgt_member'(VariableName-_, ParameterVariablePairs),
-	% object argument is a parameter variable
+	% object argument is or contains a parameter variable
 	!,
-	'$lgt_compile_uses_directive'(Resources, Resources, Obj, Ctx).
+	'$lgt_compile_uses_directive'(Resources, Resources, Obj, true, Ctx).
 
 '$lgt_compile_logtalk_directive'(uses(Obj, Resources), Ctx) :-
 	'$lgt_check'(object_identifier, Obj),
 	'$lgt_add_referenced_object'(Obj, Ctx),
-	'$lgt_compile_uses_directive'(Resources, Resources, Obj, Ctx).
+	'$lgt_compile_uses_directive'(Resources, Resources, Obj, false, Ctx).
 
 % use_module/2 predicate directive
 %
@@ -9051,19 +9052,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
-		'$lgt_compile_uses_directive'(Imports, Imports, Module, Ctx)
+		'$lgt_compile_uses_directive'(Imports, Imports, Module, true, Ctx)
 	;	% we're calling module predicates within an object or a category
-		'$lgt_compile_use_module_directive'(Imports, Imports, Module, Ctx)
+		'$lgt_compile_use_module_directive'(Imports, Imports, Module, true, Ctx)
 	).
 
 '$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
 	'$lgt_check'(module_identifier, Module),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
-		'$lgt_compile_logtalk_directive'(uses(Module, Imports), Ctx)
+		'$lgt_compile_uses_directive'(Imports, Imports, Module, false, Ctx)
 	;	% we're calling module predicates within an object or a category
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_compile_use_module_directive'(Imports, Imports, Module, Ctx)
+		'$lgt_compile_use_module_directive'(Imports, Imports, Module, false, Ctx)
 	).
 
 % reexport/2 module directive
@@ -9735,8 +9736,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary predicate for compiling meta_non_terminal/1 directives
 %
-% note that the clause order ensures that instantiation errors will be caught by the
-% call to the '$lgt_compile_meta_non_terminal_directive_resource'/1 predicate
+% note that the clause order ensures that instantiation errors will be caught by
+% the call to the '$lgt_compile_meta_non_terminal_directive_resource'/1 predicate
 
 '$lgt_compile_meta_non_terminal_directive'([Meta| Metas]) :-
 	'$lgt_compile_meta_non_terminal_directive_resource'(Meta),
@@ -10111,65 +10112,66 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_uses_directive'(+list, +list, @object_identifier, +compilation_context)
+% '$lgt_compile_uses_directive'(+list, +list, @object_identifier, +boolean, +compilation_context)
 %
-% auxiliary predicate for compiling uses/2 directives
+% auxiliary predicate for compiling uses/2 directives; the boolean flag is true when the
+% object argument is or contains parameter variables
 
-'$lgt_compile_uses_directive'([Resource| Resources], Argument, Obj, Ctx) :-
+'$lgt_compile_uses_directive'([Resource| Resources], Argument, Obj, Flag, Ctx) :-
 	!,
 	'$lgt_check'(ground, Resource),
-	'$lgt_compile_uses_directive_resource'(Resource, Obj, Ctx),
-	'$lgt_compile_uses_directive'(Resources, Argument, Obj, Ctx).
+	'$lgt_compile_uses_directive_resource'(Resource, Obj, Flag, Ctx),
+	'$lgt_compile_uses_directive'(Resources, Argument, Obj, Flag, Ctx).
 
-'$lgt_compile_uses_directive'([], _, _, _) :-
+'$lgt_compile_uses_directive'([], _, _, _, _) :-
 	!.
 
-'$lgt_compile_uses_directive'(_, Argument, _, _) :-
+'$lgt_compile_uses_directive'(_, Argument, _, _, _) :-
 	throw(type_error(list, Argument)).
 
 
-'$lgt_compile_uses_directive_resource'(op(Priority, Specifier, Operators), _, _) :-
+'$lgt_compile_uses_directive_resource'(op(Priority, Specifier, Operators), _, _, _) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
 
-'$lgt_compile_uses_directive_resource'(as(Original,Alias), Obj, Ctx) :-
+'$lgt_compile_uses_directive_resource'(as(Original,Alias), Obj, Flag, Ctx) :-
 	!,
-	'$lgt_compile_uses_directive_resource'(Original::Alias, Obj, Ctx).
+	'$lgt_compile_uses_directive_resource'(Original::Alias, Obj, Flag, Ctx).
 
-'$lgt_compile_uses_directive_resource'(Original::Alias, Obj, Ctx) :-
+'$lgt_compile_uses_directive_resource'(Original::Alias, Obj, Flag, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Original, OriginalFunctor, OriginalArity),
 	'$lgt_valid_predicate_indicator'(Alias, AliasFunctor, AliasArity),
 	!,
 	(	OriginalArity =:= AliasArity ->
-		'$lgt_compile_uses_directive_predicate_resource'(OriginalFunctor, AliasFunctor, OriginalArity, Obj, Ctx)
+		'$lgt_compile_uses_directive_predicate_resource'(OriginalFunctor, AliasFunctor, OriginalArity, Obj, Flag, Ctx)
 	;	throw(domain_error({OriginalArity}, AliasArity))
 	).
 
-'$lgt_compile_uses_directive_resource'(Original::Alias, Obj, Ctx) :-
+'$lgt_compile_uses_directive_resource'(Original::Alias, Obj, Flag, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(Original, OriginalFunctor, OriginalArity, ExtendedArity),
 	'$lgt_valid_non_terminal_indicator'(Alias, AliasFunctor, AliasArity, _),
 	!,
 	(	OriginalArity =:= AliasArity ->
-		'$lgt_compile_uses_directive_non_terminal_resource'(OriginalFunctor, AliasFunctor, OriginalArity, ExtendedArity, Obj, Ctx)
+		'$lgt_compile_uses_directive_non_terminal_resource'(OriginalFunctor, AliasFunctor, OriginalArity, ExtendedArity, Obj, Flag, Ctx)
 	;	throw(domain_error({OriginalArity}, AliasArity))
 	).
 
-'$lgt_compile_uses_directive_resource'(Pred, Obj, Ctx) :-
+'$lgt_compile_uses_directive_resource'(Pred, Obj, Flag, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_compile_uses_directive_predicate_resource'(Functor, Functor, Arity, Obj, Ctx).
+	'$lgt_compile_uses_directive_predicate_resource'(Functor, Functor, Arity, Obj, Flag, Ctx).
 
-'$lgt_compile_uses_directive_resource'(NonTerminal, Obj, Ctx) :-
+'$lgt_compile_uses_directive_resource'(NonTerminal, Obj, Flag, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
-	'$lgt_compile_uses_directive_non_terminal_resource'(Functor, Functor, Arity, ExtArity, Obj, Ctx).
+	'$lgt_compile_uses_directive_non_terminal_resource'(Functor, Functor, Arity, ExtArity, Obj, Flag, Ctx).
 
-'$lgt_compile_uses_directive_resource'(Resource, _, _) :-
+'$lgt_compile_uses_directive_resource'(Resource, _, _, _) :-
 	throw(type_error(predicate_indicator, Resource)).
 
 
-'$lgt_compile_uses_directive_predicate_resource'(OriginalFunctor, AliasFunctor, Arity, Obj, Ctx) :-
+'$lgt_compile_uses_directive_predicate_resource'(OriginalFunctor, AliasFunctor, Arity, Obj, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, _, _, Alias, _),
@@ -10201,19 +10203,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% ensure that this uses/2 directive is found when looking for senders of this message
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
-	(	var(Obj) ->
-		% parametric variable; use a minimal compilation-context to preserve
-		% the binding between the parametric variable and the object argument
+	(	Flag == true ->
+		% shared parameter variables; use a minimal compilation-context to preserve
+		% the binding between any parameter variable and the object argument
 		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
 		assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, NewCtx))
 	;	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, _))
 	).
 
-'$lgt_compile_uses_directive_predicate_resource'(_, AliasFunctor, Arity, _, _) :-
+'$lgt_compile_uses_directive_predicate_resource'(_, AliasFunctor, Arity, _, _, _) :-
 	throw(permission_error(modify, uses_object_predicate, AliasFunctor/Arity)).
 
 
-'$lgt_compile_uses_directive_non_terminal_resource'(OriginalFunctor, AliasFunctor, Arity, ExtArity, Obj, Ctx) :-
+'$lgt_compile_uses_directive_non_terminal_resource'(OriginalFunctor, AliasFunctor, Arity, ExtArity, Obj, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
 	functor(Pred, OriginalFunctor, ExtArity),
@@ -10247,78 +10249,79 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% ensure that the this uses/2 directive is found when looking for senders of this message
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_add_referenced_object_message'(Mode, Obj, Pred, PredAlias, PredAlias),
-	(	var(Obj) ->
-		% parametric variable; use a minimal compilation-context to preserve
-		% the binding between the parametric variable and the object argument
+	(	Flag == true ->
+		% shared parameter variables; use a minimal compilation-context to preserve
+		% the binding between the parameter variable and the object argument
 		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
 		assertz('$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, Pred, PredAlias, NewCtx))
 	;	assertz('$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, Pred, PredAlias, _))
 	).
 
-'$lgt_compile_uses_directive_non_terminal_resource'(_, AliasFunctor, Arity, _, _, _) :-
+'$lgt_compile_uses_directive_non_terminal_resource'(_, AliasFunctor, Arity, _, _, _, _) :-
 	throw(permission_error(modify, uses_object_non_terminal, AliasFunctor//Arity)).
 
 
 
 % '$lgt_compile_use_module_directive'(+list, +list, +atom, +compilation_context)
 %
-% auxiliary predicate for compiling use_module/2 directives in objects or categories
+% auxiliary predicate for compiling use_module/2 directives in objects or categories;
+% the boolean flag is true when the module argument is a parameter variable
 
-'$lgt_compile_use_module_directive'([Resource| Resources], Argument, Module, Ctx) :-
+'$lgt_compile_use_module_directive'([Resource| Resources], Argument, Module, Flag, Ctx) :-
 	!,
 	'$lgt_check'(ground, Resource),
-	'$lgt_compile_use_module_directive_resource'(Resource, Module, Ctx),
-	'$lgt_compile_use_module_directive'(Resources, Argument, Module, Ctx).
+	'$lgt_compile_use_module_directive_resource'(Resource, Module, Flag, Ctx),
+	'$lgt_compile_use_module_directive'(Resources, Argument, Module, Flag, Ctx).
 
-'$lgt_compile_use_module_directive'([], _, _, _) :-
+'$lgt_compile_use_module_directive'([], _, _, _, _) :-
 	!.
 
-'$lgt_compile_use_module_directive'(_, Argument, _, _) :-
+'$lgt_compile_use_module_directive'(_, Argument, _, _, _) :-
 	throw(type_error(list, Argument)).
 
 
-'$lgt_compile_use_module_directive_resource'(op(Priority, Specifier, Operators), _, _) :-
+'$lgt_compile_use_module_directive_resource'(op(Priority, Specifier, Operators), _, _, _) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
 
-'$lgt_compile_use_module_directive_resource'(as(Original, Alias), Module, Ctx) :-
+'$lgt_compile_use_module_directive_resource'(as(Original, Alias), Module, Flag, Ctx) :-
 	!,
-	'$lgt_compile_use_module_directive_resource'(':'(Original, Alias), Module, Ctx).
+	'$lgt_compile_use_module_directive_resource'(':'(Original, Alias), Module, Flag, Ctx).
 
-'$lgt_compile_use_module_directive_resource'(':'(Original, Alias), Module, Ctx) :-
+'$lgt_compile_use_module_directive_resource'(':'(Original, Alias), Module, Flag, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Original, OriginalFunctor, OriginalArity),
 	'$lgt_valid_predicate_indicator'(Alias, AliasFunctor, AliasArity),
 	!,
 	(	OriginalArity =:= AliasArity ->
-		'$lgt_compile_use_module_directive_predicate_resource'(OriginalFunctor, AliasFunctor, OriginalArity, Module, Ctx)
+		'$lgt_compile_use_module_directive_predicate_resource'(OriginalFunctor, AliasFunctor, OriginalArity, Module, Flag, Ctx)
 	;	throw(domain_error({OriginalArity}, AliasArity))
 	).
 
-'$lgt_compile_use_module_directive_resource'(':'(Original, Alias), Module, Ctx) :-
+'$lgt_compile_use_module_directive_resource'(':'(Original, Alias), Module, Flag, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(Original, OriginalFunctor, OriginalArity, ExtendedArity),
 	'$lgt_valid_non_terminal_indicator'(Alias, AliasFunctor, AliasArity, _),
 	!,
 	(	OriginalArity =:= AliasArity ->
-		'$lgt_compile_use_module_directive_non_terminal_resource'(OriginalFunctor, AliasFunctor, OriginalArity, ExtendedArity, Module, Ctx)
+		'$lgt_compile_use_module_directive_non_terminal_resource'(OriginalFunctor, AliasFunctor, OriginalArity, ExtendedArity, Module, Flag, Ctx)
 	;	throw(domain_error({OriginalArity}, AliasArity))
 	).
 
-'$lgt_compile_use_module_directive_resource'(Pred, Module, Ctx) :-
+'$lgt_compile_use_module_directive_resource'(Pred, Module, Flag, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_compile_use_module_directive_predicate_resource'(Functor, Functor, Arity, Module, Ctx).
+	'$lgt_compile_use_module_directive_predicate_resource'(Functor, Functor, Arity, Module, Flag, Ctx).
 
-'$lgt_compile_use_module_directive_resource'(NonTerminal, Module, Ctx) :-
+'$lgt_compile_use_module_directive_resource'(NonTerminal, Module, Flag, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
-	'$lgt_compile_use_module_directive_non_terminal_resource'(Functor, Functor, Arity, ExtArity, Module, Ctx).
+	'$lgt_compile_use_module_directive_non_terminal_resource'(Functor, Functor, Arity, ExtArity, Module, Flag, Ctx).
 
-'$lgt_compile_use_module_directive_resource'(Resource, _, _) :-
+'$lgt_compile_use_module_directive_resource'(Resource, _, _, _) :-
 	throw(type_error(predicate_indicator, Resource)).
 
 
-'$lgt_compile_use_module_directive_predicate_resource'(OriginalFunctor, AliasFunctor, Arity, Module, Ctx) :-
+'$lgt_compile_use_module_directive_predicate_resource'(OriginalFunctor, AliasFunctor, Arity, Module, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, _, _, Alias, _),
@@ -10350,19 +10353,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 	% ensure that this use_module/2 directive is found when looking for callers of this module predicate
 	'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias),
-	(	var(Module) ->
-		% parametric variable; use a minimal compilation-context to preserve
-		% the binding between the parametric variable and the object argument
+	(	Flag == true ->
+		% parameter variable; use a minimal compilation-context to preserve
+		% the binding between the parameter variable and the object argument
 		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
 		assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, NewCtx))
 	;	assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, _))
 	).
 
-'$lgt_compile_use_module_directive_predicate_resource'(_, AliasFunctor, Arity, _, _) :-
+'$lgt_compile_use_module_directive_predicate_resource'(_, AliasFunctor, Arity, _, _, _) :-
 	throw(permission_error(modify, uses_module_predicate, AliasFunctor/Arity)).
 
 
-'$lgt_compile_use_module_directive_non_terminal_resource'(OriginalFunctor, AliasFunctor, Arity, ExtArity, Module, Ctx) :-
+'$lgt_compile_use_module_directive_non_terminal_resource'(OriginalFunctor, AliasFunctor, Arity, ExtArity, Module, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
 	functor(Pred, AliasFunctor, ExtArity),
@@ -10396,15 +10399,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% ensure that the this use_module/2 directive is found when looking for callers of this module non-terminal
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_add_referenced_module_predicate'(Mode, Module, Pred, PredAlias, PredAlias),
-	(	var(Module) ->
-		% parametric variable; use a minimal compilation-context to preserve
-		% the binding between the parametric variable and the object argument
+	(	Flag == true ->
+		% parameter variable; use a minimal compilation-context to preserve
+		% the binding between the parameter variable and the object argument
 		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
 		assertz('$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, Pred, PredAlias, NewCtx))
 	;	assertz('$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, Pred, PredAlias, _))
 	).
 
-'$lgt_compile_use_module_directive_non_terminal_resource'(_, AliasFunctor, Arity, _, _, _) :-
+'$lgt_compile_use_module_directive_non_terminal_resource'(_, AliasFunctor, Arity, _, _, _, _) :-
 	throw(permission_error(modify, uses_module_non_terminal, AliasFunctor//Arity)).
 
 
@@ -22556,7 +22559,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_mt_threaded_or_exit'(+message_queue_identifier, +list)
+% '$lgt_mt_threaded_or_exit'(+list)
 %
 % retrieves the result of proving a disjunction of goals using a threaded/1 predicate
 % call by collecting the individual thread results posted to the call message queue

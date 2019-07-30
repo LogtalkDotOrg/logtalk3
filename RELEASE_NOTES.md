@@ -34,6 +34,10 @@ the warning.
 * CHANGED: The compiler `ignored_directive/3` warning message term to
 `ignored_encoding_directive/2`.
 
+* ADDED: Support parametric object arguments in `uses/2` directives where one
+or more parameters are parameter variables of the object (or category) that
+contains the directive.
+
 Documentation
 -------------
 
@@ -60,6 +64,10 @@ maximum arity of three instead of four.
 
 Tests
 -----
+
+* ADDED: New unit test for the `uses/2` directive where the object argument is
+a parametric object where a parameter is a parameter variable of the object
+containing the directive.
 
 * ADDED: New unit test for the ISO Prolog standard `read_term/3` predicate to
 check the `variables/1`, `variable_names/1`, and `singletons/1` options when
