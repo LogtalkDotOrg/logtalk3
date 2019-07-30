@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2019/07/25,
+		date is 2019/07/30,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.'
 	]).
 
@@ -42,6 +42,66 @@
 
 	% errors
 
+	error_term(error(error(Error, _), _)) -->
+		error_term(error(Error, _)).
+	error_term(error(Error, _)) -->
+		error(Error).
+
+	error(domain_error(directive, _)) -->
+		[	'This is not a Logtalk supported directive. If you are trying to use a'-[], nl,
+			'proprietary Prolog directive, it may be possible to handle it in the'-[], nl,
+			'Prolog compiler adapter file. If the directive should be copied as-is'-[], nl,
+			'to the generated code, wrap it using the {}/1 control construct.'-[], nl, nl
+		].
+
+	error(permission_error(modify, predicate_declaration, _)) -->
+		['This predicate declaration properties cannot be modified.'-[], nl, nl].
+	error(permission_error(modify, static_predicate, _)) -->
+		[	'Clauses of static predicates cannot be retrieved nor modified.'-[], nl,
+			'This error may be fixed by declaring the predicate dynamic.'-[], nl, nl
+		].
+	error(permission_error(modify, private_predicate, _)) -->
+		['This predicate is out-of-scope of the caller trying to modify it.'-[], nl, nl].
+	error(permission_error(modify, protected_predicate, _)) -->
+		['This predicate is out-of-scope of the caller trying to modify it.'-[], nl, nl].
+	error(permission_error(modify, built_in_method, _)) -->
+		[	'Built-in methods cannot be redefined by the user.'-[], nl,
+			'Use a different predicate name to fix this error.'-[], nl, nl
+		].
+	error(permission_error(modify, uses_object_predicate, _)) -->
+		['This predicate is already listed in a uses/2 directive.'-[], nl, nl].
+	error(permission_error(modify, predicate_scope, _)) -->
+		[	'This predicate is already declared in a previous scope directive.'-[], nl,
+			'There can be only one scope directive per predicate.'-[], nl, nl
+		].
+	error(permission_error(modify, meta_predicate_template, _)) -->
+		[	'This meta-predicate template is already declared in a previous directive.'-[], nl,
+			'There can be only one meta-predicate directive per predicate.'-[], nl, nl
+		].
+	error(permission_error(modify, meta_non_terminal_template, _)) -->
+		[	'This meta-non-terminal template is already declared in a previous directive.'-[], nl,
+			'There can be only one meta-non-terminal directive per non-terminal.'-[], nl, nl
+		].
+	error(permission_error(modify, object_alias, _)) -->
+		[	'This predicate is already declared as an alias to another predicate.'-[], nl,
+			'Typo in the alias or the predicate name?'-[], nl, nl
+		].
+	error(permission_error(repeat, object_alias, _)) -->
+		[	'This predicate is already declared as an alias to the same predicate.'-[], nl,
+			'Simply delete the repeated declaration to fix this error.'-[], nl, nl
+		].
+	error(permission_error(define, dynamic_predicate, _)) -->
+		[	'Categories cannot define clauses for dynamic predicates'-[], nl,
+			'as they can be imported by any number of objects.'-[], nl, nl
+		].
+
+	error(existence_error(directive, object/1)) -->
+		[	'Unmatched opening and closing object directives found.'-[], nl,
+			'Typo in the opening directive or wrong closing directive?'-[], nl, nl
+		].
+
+	explain(compiler_error(_, _, Error)) -->
+		error_term(Error).
 
 	% deprecated feature messages
 
