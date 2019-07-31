@@ -84,7 +84,7 @@ create integration shortcuts when a backend Prolog compiler installation
 cannot be found.
 
 * FIXED: Workaround recent SWI-Prolog Windows installers no longer writing
-registry keys with its home directory by using the default installation
+registry keys with its home directory by checking the default installation
 directory as the last resort.
 
 IDEs, text editors, and syntax highlighters support

@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on July 29, 2019
+; Last updated on July 31, 2019
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -548,9 +548,11 @@ begin
       else if FileExists(Home + '\bin\swipl.exe') then
         Result := Home + '\bin\swipl.exe'
       else
-        Result := 'C:\Program Files\swipl\bin\swipl.exe'
-    else
+        Result := 'prolog_compiler_not_installed'
+    else if FileExists('C:\Program Files\swipl\bin\swipl.exe') then
       Result := 'C:\Program Files\swipl\bin\swipl.exe'
+    else
+      Result := 'prolog_compiler_not_installed'
   else
     if RegQueryStringValue(HKLM, 'Software\SWI\Prolog64\', 'home', Home) or
        RegQueryStringValue(HKLM, 'Software\SWI\Prolog\', 'home', Home)
@@ -560,9 +562,11 @@ begin
       else if FileExists(Home + '\bin\swipl.exe') then
         Result := Home + '\bin\swipl.exe'
       else
-        Result := 'C:\Program Files\swipl\bin\swipl.exe'
-    else
+        Result := 'prolog_compiler_not_installed'
+    else if FileExists('C:\Program Files\swipl\bin\swipl.exe') then
       Result := 'C:\Program Files\swipl\bin\swipl.exe'
+    else
+      Result := 'prolog_compiler_not_installed'
 end;
 
 function GetSWIConExePath(Param: String): String;
@@ -595,9 +599,11 @@ begin
       else if FileExists(Home + '\bin\swipl-win.exe') then
         Result := Home + '\bin\swipl-win.exe'
       else
-        Result := 'C:\Program Files\swipl\bin\swipl-win.exe'
-    else
+        Result := 'prolog_compiler_not_installed'
+    else if FileExists('C:\Program Files\swipl\bin\swipl-win.exe') then
       Result := 'C:\Program Files\swipl\bin\swipl-win.exe'
+    else
+      Result := 'prolog_compiler_not_installed'
   else
     if RegQueryStringValue(HKLM, 'Software\SWI\Prolog64\', 'home', Home) or
        RegQueryStringValue(HKLM, 'Software\SWI\Prolog\', 'home', Home)
@@ -607,9 +613,11 @@ begin
       else if FileExists(Home + '\bin\swipl-win.exe') then
         Result := Home + '\bin\swipl-win.exe'
       else
-        Result := 'C:\Program Files\swipl\bin\swipl-win.exe'
-    else
+        Result := 'prolog_compiler_not_installed'
+    else if FileExists('C:\Program Files\swipl\bin\swipl-win.exe') then
       Result := 'C:\Program Files\swipl\bin\swipl-win.exe'
+    else
+      Result := 'prolog_compiler_not_installed'
 end;
 
 function GetSWIWinExePath(Param: String): String;
