@@ -49,7 +49,7 @@ run and modify the provided examples, library, and tool files with the option
 of, at any time, restoring the files to its original state by simply running
 one of the provided scripts.
 
-* Using the sources or git clone directory
+**Using the sources or git clone directory**
 
 In this case, there is no installation procedure other than decompressing the
 sources (or cloning the git repository) into a convenient directory. Simply
@@ -59,7 +59,7 @@ use the directory full path as the value for both the `LOGTALKHOME` and
 need to call the provided scripts without omitting the `.sh` extension (e.g.
 `swilgt.sh` instead of `swilgt`).
 
-* Installing for a single user with no administrative rights:
+**Installing for a single user with no administrative rights**
 
 If you want to keep a pristine copy of the sources (or avoid possible merge
 conflicts when updating your git clone) use the provided installation script
@@ -82,7 +82,7 @@ installed in non-standard locations), edit the Inno Setup script found on
 the [scripts/windows](scripts/windows) directory and regenerate the installer.
 
 
-* Installing for one or more users by a user with administrative rights:
+**Installing for one or more users by a user with administrative rights**
 
 For **POSIX** systems, first, open a terminal, change the current directory
 to the Logtalk directory, and then type:
@@ -219,6 +219,9 @@ Logtalk with all supported backend Prolog compilers. You can use these scripts
 as examples when creating initialization files for other Prolog compilers. Be
 sure to read the `adapters/NOTES.md` file notes on the Prolog compilers that
 you intend to use.
+
+There's also a `logtalk_backend_select` script that creates a `logtalk` alias
+to the Prolog integration script of your choice.
 
 
 Customizing Logtalk
