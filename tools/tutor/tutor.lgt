@@ -21,7 +21,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2019/07/30,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.'
@@ -47,6 +47,16 @@
 	error_term(error(Error, _)) -->
 		error(Error).
 
+	error(type_error(callable, _)) -->
+		['Callable terms are either atoms or compound terms.'-[], nl, nl].
+
+	error(type_error(object_identifier, _)) -->
+		['Object identifiers must be either atoms or compound terms.'-[], nl, nl].
+	error(type_error(category_identifier, _)) -->
+		['Category identifiers must be either atoms or compound terms.'-[], nl, nl].
+	error(type_error(protocol_identifier, _)) -->
+		['Protocol identifiers must be atoms.'-[], nl, nl].
+
 	error(domain_error(directive, _)) -->
 		[	'This is not a Logtalk supported directive. If you are trying to use a'-[], nl,
 			'proprietary Prolog directive, it may be possible to handle it in the'-[], nl,
@@ -54,12 +64,37 @@
 			'to the generated code, wrap it using the {}/1 control construct.'-[], nl, nl
 		].
 
+	error(permission_error(modify, object, _)) -->
+		['An object already exists with this identifier.'-[], nl, nl].
+	error(permission_error(modify, category, _)) -->
+		['A category already exists with this identifier.'-[], nl, nl].
+	error(permission_error(modify, protocol, _)) -->
+		['A protocol already exists with this identifier.'-[], nl, nl].
+
+	error(permission_error(modify, static_object, _)) -->
+		['Static objects cannot be abolished.'-[], nl, nl].
+	error(permission_error(modify, static_category, _)) -->
+		['Static categories cannot be abolished.'-[], nl, nl].
+	error(permission_error(modify, static_protocol, _)) -->
+		['Static protocols cannot be abolished.'-[], nl, nl].
+
+	error(permission_error(create, object, _)) -->
+		['That {}/1 identifier is reserved for working with parametric object proxies.'-[], nl, nl].
+
+	error(permission_error(create, engine, _)) -->
+		['An engine with this identifier already exists.'-[], nl, nl].
+
+	error(permission_error(create, predicate_declaration, _)) -->
+		[	'The object does not allow dynamic declaration of new predicates.'-[], nl,
+			'Set its "dynamic_declarations" flag to "allow" to fix this error.'-[], nl, nl
+		].
 	error(permission_error(modify, predicate_declaration, _)) -->
 		['This predicate declaration properties cannot be modified.'-[], nl, nl].
 	error(permission_error(modify, static_predicate, _)) -->
 		[	'Clauses of static predicates cannot be retrieved nor modified.'-[], nl,
 			'This error may be fixed by declaring the predicate dynamic.'-[], nl, nl
 		].
+
 	error(permission_error(modify, private_predicate, _)) -->
 		['This predicate is out-of-scope of the caller trying to modify it.'-[], nl, nl].
 	error(permission_error(modify, protected_predicate, _)) -->
@@ -82,6 +117,15 @@
 		[	'This meta-non-terminal template is already declared in a previous directive.'-[], nl,
 			'There can be only one meta-non-terminal directive per non-terminal.'-[], nl, nl
 		].
+
+	error(permission_error(access, private_predicate, _)) -->
+		['The predicate is private and not within the scope of the sender or caller.'-[], nl, nl].
+	error(permission_error(access, protected_predicate, _)) -->
+		['The predicate is protected and not within the scope of the sender or caller.'-[], nl, nl].
+
+	error(permission_error(access, static_predicate, _)) -->
+		['The clause/2 built-in method can only access clauses for dynamic predicates.'-[], nl, nl].
+
 	error(permission_error(modify, object_alias, _)) -->
 		[	'This predicate is already declared as an alias to another predicate.'-[], nl,
 			'Typo in the alias or the predicate name?'-[], nl, nl
@@ -90,14 +134,50 @@
 		[	'This predicate is already declared as an alias to the same predicate.'-[], nl,
 			'Simply delete the repeated declaration to fix this error.'-[], nl, nl
 		].
+
 	error(permission_error(define, dynamic_predicate, _)) -->
 		[	'Categories cannot define clauses for dynamic predicates'-[], nl,
 			'as they can be imported by any number of objects.'-[], nl, nl
 		].
+	error(permission_error(define, clause, _)) -->
+		['Protocols cannot contain predicate clauses, only predicate and grammar rule declarations.'-[], nl, nl].
+	error(permission_error(define, non_terminal, _)) -->
+		['Protocols cannot contain grammar rules, only predicate and grammar rule declarations.'-[], nl, nl].
+
+	error(permission_error(access, object, _)) -->
+		[	'An object cannot delegate a message to the sender of the message'-[], nl,
+			'being handled as that would allow breaking object encapsulation.'-[], nl, nl
+		].
+	error(permission_error(access, database, _)) -->
+		[	'The object does not allow debugging context switch calls.'-[], nl,
+			'Set its "context_switching_calls" flag to "allow" to fix this error.'-[], nl, nl
+		].		
+
+	error(permission_error(implement, self, _)) -->
+		['A protocols cannot implement itself. Typo in the object or category identifier?'-[], nl, nl].
+	error(permission_error(import, self, _)) -->
+		['A category cannot import itself. Typo in the object identifier?'-[], nl, nl].
+	error(permission_error(instantiate, class, _)) -->
+		['An object cannot instantiate a prototype, only a class.'-[], nl, nl].
+	error(permission_error(specialize, self, _)) -->
+		['A class cannot specialize itself. Typo in the superclass identifier?'-[], nl, nl].
+	error(permission_error(specialize, class, _)) -->
+		['An object cannot specialize a prototype, only a class.'-[], nl, nl].
+	error(permission_error(extend, self, _)) -->
+		['An entity cannot extend itself. Typo in the parent entity identifier?'-[], nl, nl].
+	error(permission_error(extend, prototype, _)) -->
+		['A prototype cannot extend an instance or a class. Typo in the parent object identifier?'-[], nl, nl].
+	error(permission_error(complement, self, _)) -->
+		['A category cannot complement itself. Typo in the object identifier?'-[], nl, nl].
 
 	error(existence_error(directive, object/1)) -->
 		[	'Unmatched opening and closing object directives found.'-[], nl,
 			'Typo in the opening directive or wrong closing directive?'-[], nl, nl
+		].
+
+	error(existence_error(predicate_declaration, _)) -->
+		[	'There is not declared predicate with that functor.'-[], nl,
+			'Typo in the predicate name or number of arguments?'-[], nl, nl
 		].
 
 	explain(compiler_error(_, _, Error)) -->
