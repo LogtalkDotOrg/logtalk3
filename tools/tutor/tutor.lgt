@@ -35,7 +35,10 @@
 	logtalk::message_hook(Message, Kind, core, Tokens) :-
 		logtalk::message_prefix_stream(Kind, core, Prefix, Stream),
 		phrase(explain(Message), ExplanationTokens),
+		% avoid empty line between the compiler message and its explanation
 		list::append(Tokens0, [nl], Tokens),
+		% add begin/2 and end/1 tokens to enable message coloring
+		% if supported by the backend Prolog compiler
 		list::append([begin(Kind,Ctx)| Tokens0], ExplanationTokens, ExtendedTokens0),
 		list::append(ExtendedTokens0, [end(Ctx)], ExtendedTokens),
 		logtalk::print_message_tokens(Stream, Prefix, ExtendedTokens).
@@ -530,10 +533,5 @@
 			'bound, a premature cut may result in the wrong grammar rule being used. If that''s'-[], nl,
 			'the case, change the grammar rule to perform output unifications after the cut.'-[], nl, nl
 		].
-
-	% catchall clause
-
-	explain(_) -->
-		[nl].
 
 :- end_object.
