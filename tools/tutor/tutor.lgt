@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2019/07/30,
+		date is 2019/08/03,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.'
 	]).
 
@@ -171,13 +171,74 @@
 		['A category cannot complement itself. Typo in the object identifier?'-[], nl, nl].
 
 	error(existence_error(directive, object/1)) -->
-		[	'Unmatched opening and closing object directives found.'-[], nl,
+		[	'Unmatched closing object directive found.'-[], nl,
+			'Typo in the opening directive or wrong closing directive?'-[], nl, nl
+		].
+	error(existence_error(directive, category/1)) -->
+		[	'Unmatched closing category directive found.'-[], nl,
+			'Typo in the opening directive or wrong closing directive?'-[], nl, nl
+		].
+	error(existence_error(directive, protocol/1)) -->
+		[	'Unmatched closing protocol directive found.'-[], nl,
 			'Typo in the opening directive or wrong closing directive?'-[], nl, nl
 		].
 
+	error(existence_error(directive, end_object/0)) -->
+		[	'Unexpected end-of-file while compiling an object.'-[], nl,
+			'Typo in the closing directive or closing directive missing?'-[], nl, nl
+		].
+	error(existence_error(directive, end_protocol/0)) -->
+		[	'Unexpected end-of-file while compiling a protocol.'-[], nl,
+			'Typo in the closing directive or closing directive missing?'-[], nl, nl
+		].
+	error(existence_error(directive, end_category/0)) -->
+		[	'Unexpected end-of-file while compiling a category.'-[], nl,
+			'Typo in the closing directive or closing directive missing?'-[], nl, nl
+		].
+
+	error(existence_error(directive, if/0)) -->
+		[	'Conditional compilation block directive missing.'-[], nl,
+			'Typo in the opening directive or opening directive missing?'-[], nl, nl
+		].
+	error(existence_error(directive, endif/0)) -->
+		[	'Unexpected end-of-file while compiling a conditional compilation block.'-[], nl,
+			'Typo in the closing directive or closing directive missing?'-[], nl, nl
+		].
+
+	error(existence_error(directive, multifile(_))) -->
+		['Multifile directives are mandatory.'-[], nl, nl].
+
+	error(existence_error(object, _)) -->
+		[	'The referenced object does not exist. Typo in the object name?'-[], nl,
+			'Failure when loading the file defining the object?'-[], nl, nl
+		].
+	error(existence_error(protocol, _)) -->
+		[	'The referenced protocol does not exist. Typo in the protocol name?'-[], nl,
+			'Failure when loading the file defining the protocol?'-[], nl, nl
+		].
+	error(existence_error(category, _)) -->
+		[	'The referenced category does not exist. Typo in the category name?'-[], nl,
+			'Failure when loading the file defining the category?'-[], nl, nl
+		].
+
+	error(existence_error(ancestor, object)) -->
+		['Compiling a "super" call but there is not ancestor object.'-[], nl, nl].
+	error(existence_error(ancestor, category)) -->
+		['Compiling a "super" call but there is not ancestor category.'-[], nl, nl].
+
+	error(existence_error(procedure, _)) -->
+		[	'The referenced predicate does not exist.'-[], nl,
+			'Typo in the predicate name or number of arguments?'-[], nl,
+			'Wrong scope for calling the predicate?'-[], nl, nl
+		].
 	error(existence_error(predicate_declaration, _)) -->
 		[	'There is not declared predicate with that functor.'-[], nl,
 			'Typo in the predicate name or number of arguments?'-[], nl, nl
+		].
+
+	error(existence_error(library, _)) -->
+		[	'The referenced library does not exist. Typo in the library name?'-[], nl,
+			'Libraries are defined using the logtalk_library_path/2 predicate.'-[], nl, nl
 		].
 
 	explain(compiler_error(_, _, Error)) -->
