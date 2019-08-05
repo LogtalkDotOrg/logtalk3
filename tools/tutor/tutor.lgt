@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2019/08/03,
+		date is 2019/08/05,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.'
 	]).
 
@@ -172,6 +172,19 @@
 		['A prototype cannot extend an instance or a class. Typo in the parent object identifier?'-[], nl, nl].
 	error(permission_error(complement, self, _)) -->
 		['A category cannot complement itself. Typo in the object identifier?'-[], nl, nl].
+
+	error(permission_error(repeat, entity_relation, implements/1)) -->
+		['Write instead implements((P1, P2, ...)) or implements([P1, P2, ...])'-[], nl, nl].
+	error(permission_error(repeat, entity_relation, imports/1)) -->
+		['Write instead imports((C1, C2, ...)) or imports([C1, C2, ...])'-[], nl, nl].
+	error(permission_error(repeat, entity_relation, instantiates/1)) -->
+		['Write instead instantiates((C1, C2, ...)) or instantiates([C1, C2, ...])'-[], nl, nl].
+	error(permission_error(repeat, entity_relation, specializes/1)) -->
+		['Write instead specializes((C1, C2, ...)) or specializes([C1, C2, ...])'-[], nl, nl].
+	error(permission_error(repeat, entity_relation, extends/1)) -->
+		['Write instead extends((O1, O2, ...)) or extends([O1, O2, ...])'-[], nl, nl].
+	error(permission_error(repeat, entity_relation, complements/1)) -->
+		['Write instead complements((O1, O2, ...)) or complements([O1, O2, ...])'-[], nl, nl].
 
 	error(existence_error(directive, object/1)) -->
 		[	'Unmatched closing object directive found.'-[], nl,
