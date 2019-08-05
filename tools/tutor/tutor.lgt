@@ -304,6 +304,13 @@
 			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
 
+	% other warning messages
+
+	explain(complementing_category_ignored(_, _, _, _)) -->
+		[	'Set the object "complements" flag to "restrict" or "allow"'-[], nl,
+			'to enable patching it using complementing categories.'-[], nl, nl
+		].		
+
 	explain(declared_static_predicate_called_but_not_defined(_, _, _, _, _)) -->
 		[	'Calls to declared, static, but undefined predicates fail. Predicate'-[], nl,
 			'definition missing? Typo in the predicate name or number of arguments?'-[], nl,
