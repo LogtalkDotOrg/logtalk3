@@ -38,6 +38,12 @@ the warning.
 or more parameters are parameter variables of the object (or category) that
 contains the directive.
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: Report an instantiation error when calling the `{}/1` top-level
+interpreter shortcut with an unbound argument.
+
 Documentation
 -------------
 

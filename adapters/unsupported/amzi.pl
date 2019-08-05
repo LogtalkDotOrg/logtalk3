@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Amzi! Prolog 7.6.1 and later versions
-%  Last updated on March 19, 2019
+%  Last updated on August 5, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -672,6 +672,9 @@ callable(Term) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+{X} :-
+	var(X),
+	throw(error(instantiation_error, logtalk({X}, _))).
 {*} :-
 	!,
 	logtalk_make(all).
