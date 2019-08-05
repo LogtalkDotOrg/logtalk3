@@ -475,12 +475,7 @@
 		),
 		message_context(File, Lines, Type, Entity).
 
-	% other warning messages
-
-	message_tokens(complementing_category_ignored(File, Lines, Category, Object)) -->
-		['Complementing category will be ignored: ~q'-[Category], nl,
-		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
-		message_context(File, Lines).
+	% Prolog dialect specific term- and goal-expansion messages
 
 	message_tokens(prolog_dialect_goal_expansion(File, Lines, Type, Entity, Goal, ExpandedGoal)) -->
 		['Prolog dialect rewrite of goal ~q as ~q'-[Goal, ExpandedGoal], nl],
@@ -496,6 +491,13 @@
 
 	message_tokens(prolog_dialect_term_expansion(File, Lines, Term, ExpandedTerms)) -->
 		['Prolog dialect rewrite of term ~q as ~q'-[Term, ExpandedTerms], nl],
+		message_context(File, Lines).
+
+	% other warning messages
+
+	message_tokens(complementing_category_ignored(File, Lines, Category, Object)) -->
+		['Complementing category will be ignored: ~q'-[Category], nl,
+		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
 		message_context(File, Lines).
 
 	message_tokens(declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate)) -->

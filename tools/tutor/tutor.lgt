@@ -309,9 +309,19 @@
 			'definition missing? Typo in the predicate name or number of arguments?'-[], nl,
 			'Should the predicate be declared dynamic?'-[], nl, nl
 		].
+	explain(declared_static_non_terminal_called_but_not_defined(_, _, _, _, _)) -->
+		[	'Calls to declared, static, but undefined grammar rules fail. Grammar'-[], nl,
+			'rule definition missing? Typo in the grammar rule name or number of'-[], nl,
+			'arguments? Should the grammar rule be declared dynamic?'-[], nl, nl
+		].
+
 	explain(unknown_predicate_called_but_not_defined(_, _, _, _, _)) -->
 		[	'Calls to unknown and undefined predicates generate a runtime error.'-[], nl,
-			'Misspelt the predicate name? Wrong number of predicate arguments?'-[], nl, nl
+			'Misspelt predicate name? Wrong number of arguments?'-[], nl, nl
+		].
+	explain(unknown_non_terminal_called_but_not_defined(_, _, _, _, _)) -->
+		[	'Calls to unknown and undefined grammar rules generate a runtime error.'-[], nl,
+			'Misspelt grammar rule name? Wrong number of arguments?'-[], nl, nl
 		].
 
 	explain(redefined_logtalk_built_in_predicate(_, _, _, _, _)) -->
@@ -343,6 +353,18 @@
 
 	explain(duplicated_directive(_, _, _, _, _)) -->
 		['Easy to fix warning: simply delete or correct the duplicated directive.'-[], nl, nl].
+
+	% lambda expression messages
+
+	explain(unclassified_variables_in_lambda_expression(_, _, _, _, _, _)) -->
+		[	'All variables in a lambda expression should be listed as either'-[], nl,
+			'lambda free variables or lambda parameters.'-[], nl, nl
+		].
+
+	explain(variables_with_dual_role_in_lambda_expression(_, _, _, _, _, _)) -->
+		[	'In general, a variable in a lambda expression should not be listed as'-[], nl,
+			'both a lambda free variable or a lambda parameter. Typo or intended?'-[], nl, nl
+		].
 
 	% portability messages
 
@@ -393,6 +415,42 @@
 	explain(compiling_query_as_initialization_goal(_, _, _, _, _)) -->
 		[	'Arbitrary queries used as directives are converted to initialization/1 directives.'-[], nl,
 			'Note that, as a consequence, the queries are only called after the file being loaded. '-[], nl, nl
+		].
+
+	% Prolog dialect specific term- and goal-expansion messages
+
+	explain(prolog_dialect_goal_expansion(_, _, _, _, _, _)) -->
+		[	'Relying on Prolog dialect specific term- and goal-expansions improves integration'-[], nl,
+			'with the backend Prolog system but usually at the expense of portability.'-[], nl, nl
+		].
+	explain(prolog_dialect_goal_expansion(_, _, _, _)) -->
+		[	'Relying on Prolog dialect specific term- and goal-expansions improves integration'-[], nl,
+			'with the backend Prolog system but usually at the expense of portability.'-[], nl, nl
+		].
+	explain(prolog_dialect_term_expansion(_, _, _, _, _, _)) -->
+		[	'Relying on Prolog dialect specific term- and goal-expansions improves integration'-[], nl,
+			'with the backend Prolog system but usually at the expense of portability.'-[], nl, nl
+		].
+	explain(prolog_dialect_term_expansion(_, _, _, _)) -->
+		[	'Relying on Prolog dialect specific term- and goal-expansions improves integration'-[], nl,
+			'with the backend Prolog system but usually at the expense of portability.'-[], nl, nl
+		].
+
+	explain(term_expansion_error(_, _, _, _, _, _, _)) -->
+		[	'Errors during term-expansion can be caused by a bug in the term-expansion code'-[], nl,
+			'or by a misunderstanding of the syntax of the terms expected to be expanded.'-[], nl, nl
+		].
+	explain(term_expansion_error(_, _, _, _, _)) -->
+		[	'Errors during term-expansion can be caused by a bug in the term-expansion code'-[], nl,
+			'or by a misunderstanding of the format of the terms expected to be expanded.'-[], nl, nl
+		].
+	explain(goal_expansion_error(_, _, _, _, _, _, _)) -->
+		[	'Errors during goal-expansion can be caused by a bug in the goal-expansion code'-[], nl,
+			'or by a misunderstanding of the format of the goals expected to be expanded.'-[], nl, nl
+		].
+	explain(goal_expansion_error(_, _, _, _, _)) -->
+		[	'Errors during goal-expansion can be caused by a bug in the goal-expansion code'-[], nl,
+			'or by a misunderstanding of the format of the goals expected to be expanded.'-[], nl, nl
 		].
 
 	% unknown entity messages
