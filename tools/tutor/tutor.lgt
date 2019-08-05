@@ -66,6 +66,27 @@
 			'Prolog compiler adapter file. If the directive should be copied as-is'-[], nl,
 			'to the generated code, wrap it using the {}/1 control construct.'-[], nl, nl
 		].
+	error(domain_error(protocol_directive, threaded/0)) -->
+		['The threaded/0 directive can only be used in objects.'-[], nl, nl].
+	error(domain_error(category_directive, threaded/0)) -->
+		['The threaded/0 directive can only be used in objects.'-[], nl, nl].
+	error(domain_error(protocol_directive, (initialization)/1)) -->
+		['The initialization/1 directive can only be used in objects.'-[], nl, nl].
+	error(domain_error(category_directive, (initialization)/1)) -->
+		['The initialization/1 directive can only be used in objects.'-[], nl, nl].
+
+	error(domain_error(message_sending_goal, _)) -->
+		['The argument of the message delegation control construct must be a ::/2 message sending goal.'-[], nl, nl].
+
+	error(domain_error(meta_directive_template, _)) -->
+		['Likely one on the meta-argument specifiers is not valid.'-[], nl, nl].
+	error(domain_error(meta_argument_specifier, Meta)) -->
+		['The ~q meta-argument specifier is ambiguous in this context.'-[Meta], nl, nl].
+
+	error(domain_error([1,_], _)) -->
+		['The parameter is outside the valid range. Typo?'-[], nl, nl].
+	error(domain_error({_}, _)) -->
+		['Inconsistent number of arguments. The numbers are expected to be equal. Typo?'-[], nl, nl].
 
 	error(permission_error(modify, object, _)) -->
 		['An object already exists with this identifier.'-[], nl, nl].
