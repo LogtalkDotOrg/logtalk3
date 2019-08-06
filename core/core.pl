@@ -10095,7 +10095,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(permission_error(repeat, object_alias, Alias))
 	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias, _) ->
 		throw(permission_error(modify, object_alias, Alias))
-	;	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	;	% use a minimal compilation-context to preserve the binding
+		% between the parameter variable and the object argument
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
 		assertz('$lgt_pp_object_alias_'(Obj, Alias, NewCtx))
 	).
@@ -10119,7 +10121,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_member'(VariableName-_, ParameterVariablePairs) ->
 			% at least one of the object arguments is a parameter variable;
 			% use a minimal compilation-context to preserve the binding
-			% between the parametric variable and the object argument
+			% between the parameter variable and the object argument
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
 			assertz('$lgt_pp_object_alias_'(Obj, Alias, NewCtx))

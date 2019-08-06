@@ -84,6 +84,8 @@ maximum arity of three instead of four.
 Tests
 -----
 
+* ADDED: New unit tests for the `uses/1` directive for improved coverage.
+
 * ADDED: New unit test for the `uses/2` directive where the object argument is
 a parametric object where a parameter is a parameter variable of the object
 containing the directive.

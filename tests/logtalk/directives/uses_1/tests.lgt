@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/06/08,
+		date is 2019/08/06,
 		comment is 'Unit tests for the uses/1 built-in directive.'
 	]).
 
@@ -32,22 +32,28 @@
 		findall(X, obj::p(X), List).
 
 	test(uses_1_02, true(List == [1,2,3])) :-
-		findall(X, obj(list)::p(X), List).
+		findall(X, obj1(list)::p(X), List).
+
+	test(uses_1_03, true) :-
+		obj2(integer)::p.
+
+	test(uses_1_04, fail) :-
+		obj2(atom)::p.
 
 	% multiple aliases for the same object are allowed
-	test(uses_1_03, true) :-
+	test(uses_1_05, true) :-
 		create_object(_, [], [uses([o as a, o as b])], []).
 
 	% repeated declarations of the same alias for the same object are not allowed
-	test(uses_1_04, error(permission_error(repeat,object_alias,a))) :-
+	test(uses_1_06, error(permission_error(repeat,object_alias,a))) :-
 		create_object(_, [], [uses([o as a, o as a])], []).
 
 	% redefining an alias to reference another object is not allowed
-	test(uses_1_05, error(permission_error(modify,object_alias,a))) :-
+	test(uses_1_07, error(permission_error(modify,object_alias,a))) :-
 		create_object(_, [], [uses([o1 as a, o2 as a])], []).
 
 	% defining an alias of an alias is not allowed
-	test(uses_1_06, error(permission_error(create,alias_alias,b))) :-
+	test(uses_1_08, error(permission_error(create,alias_alias,b))) :-
 		create_object(_, [], [uses([o as a, a as b])], []).
 
 :- end_object.

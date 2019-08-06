@@ -31,7 +31,7 @@
 :- end_object.
 
 
-:- object(obj(_ListObject_)).
+:- object(obj1(_ListObject_)).
 
 	:- uses([
 		_ListObject_ as l
@@ -40,5 +40,18 @@
 	:- public(p/1).
 	p(X) :-
 		l::member(X, [1,2,3]).
+
+:- end_object.
+
+
+:- object(obj2(_Type_)).
+
+	:- uses([
+		list(_Type_) as l
+	]).
+
+	:- public(p/0).
+	p :-
+		l::valid([1,2,3]).
 
 :- end_object.
