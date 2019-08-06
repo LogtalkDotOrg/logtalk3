@@ -44,6 +44,10 @@ the compilation first stage. In previous versions, the predicate (or non-
 terminal) would remain static but, depending on the backend Prolog compiler,
 a loading error could be raised.
 
+* IMPROVED: The exception term used by the compiler to report attempts to
+make another entity predicate (or non-terminal) multifile now include the
+entity.
+
 Prolog adapter and integration files
 ------------------------------------
 

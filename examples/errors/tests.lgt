@@ -3,9 +3,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/05/14,
+		date is 2017/08/06,
 		comment is 'Unit tests for the "errors" example.'
 	]).
 
@@ -159,13 +159,13 @@
 
 	throws(
 		no_multifile_primary_declaration_object,
-		error(permission_error(modify,predicate_declaration,loaded_file/1), _)
+		error(permission_error(modify,predicate_declaration,logtalk::loaded_file/1), _)
 	) :-
 		create_object(_, [], [multifile(logtalk::loaded_file/1), dynamic(logtalk::loaded_file/1)], []).
 
 	throws(
 		no_multifile_primary_declaration_category,
-		error(permission_error(modify,predicate_declaration,loaded_file/1), _)
+		error(permission_error(modify,predicate_declaration,logtalk::loaded_file/1), _)
 	) :-
 		create_category(_, [], [multifile(logtalk::loaded_file/1), dynamic(logtalk::loaded_file/1)], []).
 
