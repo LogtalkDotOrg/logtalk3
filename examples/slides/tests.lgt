@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2019/01/18,
+		date is 2019/08/06,
 		comment is 'Unit tests for the "slides" example.'
 	]).
 
@@ -57,7 +57,7 @@
 		).
 
 	:- multifile(logtalk::question_hook/6).
-	:- dynamic(logtalk::message_tokens/6).
+	:- dynamic(logtalk::question_hook/6).
 
 	logtalk::question_hook(remote, question, slides, _, _, Answer) :-
 		retract(answer_(Answer)).
