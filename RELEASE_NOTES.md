@@ -54,6 +54,9 @@ Prolog adapter and integration files
 * IMPROVED: Report an instantiation error when calling the `{}/1` top-level
 interpreter shortcut with an unbound argument.
 
+* UPDATED: The SWI-Prolog adapter file to support tabling directives with
+table property declarations.
+
 Documentation
 -------------
 
