@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 28, 0, b05)).
+'$lgt_version_data'(logtalk(3, 28, 0, b06)).
 
 
 
@@ -9495,10 +9495,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_check_for_duplicated_directive'(dynamic(Functor/Arity), dynamic(Entity::Pred)),
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
 	;	'$lgt_check'(entity_identifier, Entity),
+		functor(Template, Functor, Arity),
+		'$lgt_check_primary_dynamic_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(dynamic(TFunctor/TArity), dynamic(Entity::Pred)),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
+	;	throw(permission_error(modify, predicate_declaration, Entity::Pred))
 	).
 
 '$lgt_compile_dynamic_directive_resource'(Entity::NonTerminal) :-
@@ -9508,10 +9511,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_check_for_duplicated_directive'(dynamic(Functor/ExtArity), dynamic(Entity::NonTerminal)),
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
 	;	'$lgt_check'(entity_identifier, Entity),
+		functor(Template, Functor, ExtArity),
+		'$lgt_check_primary_dynamic_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(dynamic(TFunctor/TArity), dynamic(Entity::NonTerminal)),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
+	;	throw(permission_error(modify, non_terminal_declaration, Entity::NonTerminal))
 	).
 
 '$lgt_compile_dynamic_directive_resource'(':'(Module, Pred)) :-
@@ -9573,6 +9579,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(duplicated_directives), core, duplicated_directive(File, Lines, Type, Entity, dynamic(PI)))
 	;	true
+	).
+
+
+
+'$lgt_check_primary_dynamic_declaration'(Entity, Pred) :-
+	% the object or category holding the primary declaration must be loaded
+	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, _, _, _, _, _, _)
+	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _)
+	), !,
+	% the predicate must be declared (i.e. have a scope directive) and dynamic
+	(	call(Dcl, Pred, Scope, _, Flags) ->
+		functor(Scope, p, _),
+		Flags /\ 2 =:= 2
+	;	fail
 	).
 
 
@@ -9842,7 +9862,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), multifile(Entity::Pred)),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
-	;	throw(permission_error(modify, predicate_declaration, Pred))
+	;	throw(permission_error(modify, predicate_declaration, Entity::Pred))
 	).
 
 '$lgt_compile_multifile_directive_resource'(Entity::NonTerminal, _) :-
@@ -9858,7 +9878,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), multifile(Entity::NonTerminal)),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
-	;	throw(permission_error(modify, non_terminal_declaration, NonTerminal))
+	;	throw(permission_error(modify, non_terminal_declaration, Entity::NonTerminal))
 	).
 
 '$lgt_compile_multifile_directive_resource'(':'(Module, Pred), _) :-

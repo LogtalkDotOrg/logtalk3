@@ -38,6 +38,12 @@ the warning.
 or more parameters are parameter variables of the object (or category) that
 contains the directive.
 
+* IMPROVED: Detect and report as a permission error any attempt to declare
+another entity static predicate (or static non-terminal) as dynamic during
+the compilation first stage. In previous versions, the predicate (or non-
+terminal) would remain static but, depending on the backend Prolog compiler,
+a loading error could be raised.
+
 Prolog adapter and integration files
 ------------------------------------
 
