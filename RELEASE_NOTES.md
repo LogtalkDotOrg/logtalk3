@@ -57,6 +57,9 @@ interpreter shortcut with an unbound argument.
 * UPDATED: The SWI-Prolog adapter file to support tabling directives with
 table property declarations.
 
+* UPDATED: The SWI-Prolog adapter file to support its new proprietary
+`dynamic/2` directive.
+
 Documentation
 -------------
 
@@ -109,6 +112,8 @@ cannot be found.
 * FIXED: Workaround recent SWI-Prolog Windows installers no longer writing
 registry keys with its home directory by checking the default installation
 directory as the last resort.
+
+* FIXED: Add UTF-8 BOM to Inno Setup script to avoid text display glitches.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

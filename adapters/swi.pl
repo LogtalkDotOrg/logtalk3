@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on August 6, 2019
+%  Last updated on August 7, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -705,6 +705,11 @@
 	logtalk_load_context(entity_type, _),
 	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
 
+'$lgt_swi_directive_expansion'(dynamic(Predicates,Properties), [{:- dynamic(TPredicates,Properties)}, (:- dynamic(Predicates))| Directives]) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'(Predicates, _, TPredicates),
+	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+
 
 '$lgt_swi_table_directive_expansion'([Predicate| Predicates], [TPredicate| TPredicates]) :-
 	!,
@@ -723,14 +728,34 @@
 '$lgt_swi_table_directive_predicate'(F/A, TF/TA) :-
 	!,
 	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
-
 '$lgt_swi_table_directive_predicate'(F//A, TF/TA) :-
 	!,
 	A2 is A + 2,
 	'$lgt_compile_predicate_indicators'(F/A2, _, TF/TA).
-
 '$lgt_swi_table_directive_predicate'(Head, THead) :-
 	'$lgt_compile_predicate_heads'(Head, _, THead, _).
+
+
+'$lgt_dynamic_directive_expansion'([], _, _, []).
+'$lgt_dynamic_directive_expansion'([thread(Local)| Properties], Predicates, TPredicates, [{:- thread_local(TPredicates)}| Directives]) :-
+	Local == local,
+	!,
+	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_dynamic_directive_expansion'([multifile(Boolean)| Properties], Predicates, TPredicates, [(:- multifile(Predicates))| Directives]) :-
+	Boolean == true,
+	!,
+	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_dynamic_directive_expansion'([discontiguous(Boolean)| Properties], Predicates, TPredicates, [(:- discontiguous(Predicates))| Directives]) :-
+	Boolean == true,
+	!,
+	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_dynamic_directive_expansion'([volatile(Boolean)| Properties], Predicates, TPredicates, [{:- volatile(TPredicates)}| Directives]) :-
+	Boolean == true,
+	!,
+	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_dynamic_directive_expansion'([_| Properties], Predicates, TPredicates, Directives) :-
+	!,
+	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
 
 
 '$lgt_swi_unify_head_thead_args'([], [_]).

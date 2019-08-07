@@ -125,3 +125,12 @@ OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
 * phpBB (discussion forums)
 * WordPress (blog)
 * TextMate (coding)
+
+
+HOSTING AND TESTING SERVICES USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
+=========================================================================
+
+* GitHub
+* Travis CI
+* AppVeyor
+* Docker
