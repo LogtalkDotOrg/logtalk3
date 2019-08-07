@@ -5,6 +5,10 @@ branches:
   only:
     - master
 
+install:
+  # Add Inno Setup to PATH so the ISCC command is found
+  - set PATH="C:\Program Files (x86)\Inno Setup 5";%PATH%
+
 build_script:
   - iscc c:\lgt3git\scripts\windows\logtalk.iss /DPWD=%CD% /OOutput /F"logtalk-installer"
 
