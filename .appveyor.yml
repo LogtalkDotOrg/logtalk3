@@ -12,7 +12,7 @@ install:
 build_script:
   - iscc c:\lgt3git\scripts\windows\logtalk.iss /DPWD=%CD% /OOutput /F"logtalk-installer"
 
-before_deploy:
+after_build:
   - cd Output
   - copy /y logtalk-installer.exe logtalk-%APPVEYOR_REPO_COMMIT_TIMESTAMP%.exe
   - appveyor PushArtifact logtalk-%APPVEYOR_REPO_COMMIT_TIMESTAMP%.exe
