@@ -1,6 +1,3 @@
-environment:
-  PROJECT_NAME: logtalk
-
 clone_folder: c:\lgt3git
 shallow_clone: true
 
@@ -17,5 +14,5 @@ build_script:
 
 after_build:
   - cd Output
-  - copy /y logtalk-installer.exe %PROJECT_NAME%-%APPVEYOR_REPO_COMMIT_TIMESTAMP%.exe
-  - appveyor PushArtifact logtalk-%APPVEYOR_REPO_COMMIT_TIMESTAMP%.exe
+  - copy /y logtalk-installer.exe logtalk-%APPVEYOR_REPO_COMMIT%.exe
+  - appveyor PushArtifact logtalk-%APPVEYOR_REPO_COMMIT%.exe
