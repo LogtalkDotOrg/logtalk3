@@ -1,5 +1,5 @@
 init:
-  - ps: Update-AppveyorBuild -Version "$(Get-Date -Format "yyyymmdd-HHmm")"
+  - ps: Update-AppveyorBuild -Version "$(Get-Date -Format "yyyy-MM-dd-HHmm")"
 
 clone_folder: c:\lgt3git
 shallow_clone: true
