@@ -899,9 +899,9 @@ tricky for a portable system such as Logtalk. The operator ``(>>)/2``
 was chosen as it suggests an arrow, similar to the syntax used in other
 languages such as OCaml and Haskell to connect lambda parameters with
 lambda functions. This syntax was also chosen in order to simplify
-parsing, error checking, and compilation of lambda expressions. The full
-specification of the lambda expression syntax can be found in the
-:ref:`grammar_lambdas` section of the language grammar.
+parsing, error checking, and compilation of lambda expressions. The
+full specification of the lambda expression syntax can be found in
+the the :ref:`language grammar <grammar_lambdas>`.
 
 The compiler checks whenever possible that all variables in a lambda
 expression are either classified as free variables or as lambda
@@ -909,11 +909,17 @@ parameters. Non-classified variables in a lambda expression
 should be regarded as a programming error. Unfortunately, the dynamic
 features of the language and lack of sufficient information at compile
 time may prevent the compiler of checking all uses of lambda
-expressions. The compiler also checks if a variable is classified as
-both a free variable and a lambda parameter. An optimizing
-meta-predicate and lambda expression compiler, based on the
-:ref:`term-expansion mechanism <expansion_expansion>`, is provided for
-practical performance by the standard library.
+expressions. The compiler also checks if a variable is classified
+as both a free variable and a lambda parameter.
+
+.. warning::
+
+   Variables listed in lambda parameters must not be shared with
+   other goals in a clause.
+
+An optimizing meta-predicate and lambda expression compiler, based on
+the :ref:`term-expansion mechanism <expansion_expansion>`, is provided
+as a standard library for practical performance by the standard library.
 
 .. _predicates_dcgs:
 
