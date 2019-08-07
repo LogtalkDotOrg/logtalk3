@@ -1,0 +1,14 @@
+clone_folder: c:\lgt3git
+shallow_clone: true
+
+branches:
+  only:
+    - master
+
+build_script:
+  - iscc c:\lgt3git\scripts\windows\logtalk.iss /DPWD=%CD% /OOutput /F"logtalk-installer"
+
+before_deploy:
+  - cd Output
+  - copy /y logtalk-installer.exe logtalk-%APPVEYOR_REPO_COMMIT_TIMESTAMP%.exe
+  - appveyor PushArtifact logtalk-%APPVEYOR_REPO_COMMIT_TIMESTAMP%.exe

@@ -97,6 +97,8 @@ reading the `end_of_file` term.
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: AppVeyor script to build nightly Windows installers.
+
 * UPDATED: The Windows installer to allow running in silent mode when using
 the command-line options `/SILENT` or `/VERYSILENT`.
 
