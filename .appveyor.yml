@@ -4,6 +4,8 @@ init:
 clone_folder: c:\lgt3git
 shallow_clone: true
 
+skip_tags: true
+
 branches:
   only:
     - master
