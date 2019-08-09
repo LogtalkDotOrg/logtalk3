@@ -21,10 +21,13 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2019/08/05,
-		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.'
+		date is 2019/08/09,
+		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
+		remarks is [
+			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
+		]
 	]).
 
 	% intercept all compiler warning and error messages
@@ -52,6 +55,19 @@
 
 	error(type_error(callable, _)) -->
 		['Callable terms are either atoms or compound terms.'-[], nl, nl].
+	error(type_error(predicate_alias_specification, _)) -->
+		['Aliases are specified using the as/2 infix operator: Original as Alias.'-[], nl, nl].
+
+	error(type_error(source_file_name, _)) -->
+		[	'Source file names are specified using either an atom (representing a relative or'-[], nl,
+			'absolute path, with or without file extension) or library notation (a compound'-[], nl,
+			'term where the name is a library name and the single argument is an atom).'-[], nl, nl
+		].
+	error(type_error(library_path, _)) -->
+		[	'Library notation syntax is a compound term where the name is a library name and'-[], nl,
+			'the single argument is an atom representing a relative or absolute path, with or'-[], nl,
+			'without file extension.'-[], nl, nl
+		].
 
 	error(type_error(object_identifier, _)) -->
 		['Object identifiers must be either atoms or compound terms.'-[], nl, nl].
@@ -59,6 +75,11 @@
 		['Category identifiers must be either atoms or compound terms.'-[], nl, nl].
 	error(type_error(protocol_identifier, _)) -->
 		['Protocol identifiers must be atoms.'-[], nl, nl].
+
+	error(domain_error(compiler_flag, _)) -->
+		[	'Compiler flags syntax is a compound term where the name is'-[], nl,
+			'the flag name and the single argument is the flag value.'-[], nl, nl
+		].
 
 	error(domain_error(directive, _)) -->
 		[	'This is not a Logtalk supported directive. If you are trying to use a'-[], nl,
@@ -513,7 +534,7 @@
 
 	explain(variable_names_differ_only_on_case(_, _, _, _, _, _)) -->
 		[	'Variable names differing only on case hurt code readability. Consider'-[], nl,
-		 	'renaming one or both variables to better clarify their meaning.'-[], nl, nl
+			'renaming one or both variables to better clarify their meaning.'-[], nl, nl
 		].
 
 	explain(variable_names_differ_only_on_case(_, _, _, _)) -->
@@ -523,11 +544,11 @@
 
 	explain(singleton_variables(_, _, _, _, [_], _)) -->
 		[	'Misspelt variable name? Don''t care variable?'-[], nl,
-		 	'In the later case, use instead an anonymous variable.'-[], nl, nl
+			'In the later case, use instead an anonymous variable.'-[], nl, nl
 		].
 	explain(singleton_variables(_, _, _, _, [_, _| _], _)) -->
 		[	'Misspelt variable names? Don''t care variables?'-[], nl,
-		 	'In the later case, use instead anonymous variables.'-[], nl, nl
+			'In the later case, use instead anonymous variables.'-[], nl, nl
 		].
 
 	explain(singleton_variables(_, _, [_], _)) -->
