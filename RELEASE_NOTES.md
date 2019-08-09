@@ -65,7 +65,7 @@ Documentation
 
 * ADDED: Glossary definition of *hook predicate*.
 
-* IMPROVED: Handbook session on multifile predicates.
+* IMPROVED: Handbook sessions on multifile predicates and lambda expressions.
 
 * UPDATED: Manual installation instructions for Windows users.
 
@@ -100,7 +100,7 @@ reading the `end_of_file` term.
 Installers and installation scripts
 -----------------------------------
 
-* ADDED: AppVeyor script to build nightly Windows installers.
+* ADDED: AppVeyor script to build a Windows installer per commit.
 
 * UPDATED: The Windows installer to allow running in silent mode when using
 the command-line options `/SILENT` or `/VERYSILENT`.
@@ -110,7 +110,7 @@ create integration shortcuts when a backend Prolog compiler installation
 cannot be found.
 
 * FIXED: Workaround recent SWI-Prolog Windows installers no longer writing
-registry keys with its home directory by checking the default installation
+registry keys with its home directory by checking for the default installation
 directory as the last resort.
 
 * FIXED: Add UTF-8 BOM to Inno Setup script to avoid text display glitches.
