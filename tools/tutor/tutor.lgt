@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2019/08/09,
+		date is 2019/08/10,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -155,11 +155,11 @@
 			'There can be only one scope directive per predicate.'-[], nl, nl
 		].
 	error(permission_error(modify, meta_predicate_template, _)) -->
-		[	'This meta-predicate template is already declared in a previous directive.'-[], nl,
+		[	'A meta-predicate template is already declared in a previous directive.'-[], nl,
 			'There can be only one meta-predicate directive per predicate.'-[], nl, nl
 		].
 	error(permission_error(modify, meta_non_terminal_template, _)) -->
-		[	'This meta-non-terminal template is already declared in a previous directive.'-[], nl,
+		[	'A meta-non-terminal template is already declared in a previous directive.'-[], nl,
 			'There can be only one meta-non-terminal directive per non-terminal.'-[], nl, nl
 		].
 
@@ -185,9 +185,13 @@
 			'as they can be imported by any number of objects.'-[], nl, nl
 		].
 	error(permission_error(define, clause, _)) -->
-		['Protocols cannot contain predicate clauses, only predicate and grammar rule declarations.'-[], nl, nl].
+		[	'Protocols cannot contain predicate clauses or grammar rules,'-[], nl,
+			'only predicate and grammar rule directives.'-[], nl, nl
+		].
 	error(permission_error(define, non_terminal, _)) -->
-		['Protocols cannot contain grammar rules, only predicate and grammar rule declarations.'-[], nl, nl].
+		[	'Protocols cannot contain predicate clauses or grammar rules,'-[], nl,
+			'only predicate and grammar rule directives.'-[], nl, nl
+		].
 
 	error(permission_error(access, object, _)) -->
 		[	'An object cannot delegate a message to the sender of the message'-[], nl,
@@ -353,7 +357,7 @@
 		].
 
 	explain(redefined_logtalk_built_in_predicate(_, _, _, _, _)) -->
-		[	'Avoid redefining Logtalk built-in predicates as it hurts code readability.'-[], nl,
+		[	'Avoid redefining Logtalk built-in predicates as it harms readability.'-[], nl,
 			'Lack of awareness that a built-in predicate with that name exists?'-[], nl, nl
 		].
 
@@ -397,21 +401,23 @@
 	% portability messages
 
 	explain(non_standard_predicate_call(_, _, _, _, _)) -->
-		[	'Calls to non-standard built-in predicates may make your code non-portable when'-[], nl,
-			'using other backend compilers. Are there portable alternatives that you can use?'-[], nl, nl
+		[	'Calls to non-standard built-in predicates can make the code non-portable'-[], nl,
+			'when using other backend compilers. Are there portable alternatives that'-[], nl,
+			'can be used?'-[], nl, nl
 		].
 	explain(non_standard_arithmetic_function_call(_, _, _, _, _)) -->
-		[	'Calls to non-standard built-in functions may make your code non-portable when'-[], nl,
-			'using other backend compilers. Are there portable alternatives that you can use?'-[], nl, nl
+		[	'Calls to non-standard built-in functions can make the code non-portable'-[], nl,
+			'when using other backend compilers. Are there portable alternatives that'-[], nl,
+			'can be used?'-[], nl, nl
 		].
 
 	explain(non_standard_prolog_flag(_, _, _, _, _)) -->
-		[	'Use of non-standard Prolog flags may make your code non-portable when using'-[], nl,
-			'other backend compilers. Are there portable alternatives that you can use?'-[], nl, nl
+		[	'Use of non-standard Prolog flags can make the code non-portable when using'-[], nl,
+			'other backend compilers. Are there portable alternatives that can be used?'-[], nl, nl
 		].
 	explain(non_standard_prolog_flag(_, _, _)) -->
-		[	'Use of non-standard Prolog flags may make your code non-portable when using'-[], nl,
-			'other backend compilers. Are there portable alternatives that you can use?'-[], nl, nl
+		[	'Use of non-standard Prolog flags can make the code non-portable when using'-[], nl,
+			'other backend compilers. Are there portable alternatives that can be used?'-[], nl, nl
 		].
 	explain(non_standard_prolog_flag_value(_, _, _, _, _, _)) -->
 		[	'Although the flag itself is standard, the use of a non-standard flag value'-[], nl,
@@ -497,7 +503,7 @@
 
 	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Predicate)) -->
 		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Predicate], nl,
-			'Add a ":- dynamic(~q)." directive to the ~w to suppress this warning.'-[Predicate, Type], nl, nl
+			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Predicate, Type], nl, nl
 		].
 
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
@@ -561,47 +567,49 @@
 		].
 
 	explain(suspicious_call(_, _, _, _, (_ -> _), _)) -->
-		[	'Using the ->/2 if-then control construct without an else part is a common'-[], nl,
-			'source of errors. Check if the else part is missing due to a coding error'-[], nl,
-			'or use the suggested alternative.'-[], nl, nl
+		[	'Using the ->/2 if-then control construct without an else part is'-[], nl,
+			'a common source of errors. Check if the else part is missing due'-[], nl,
+			'to a coding error or use the suggested alternative.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, '*->'(_, _), _)) -->
-		[	'Using the *->/2 soft cut control construct without an else part is a common'-[], nl,
-			'source of errors. Check if the else part is missing due to a coding error'-[], nl,
-			'or use the suggested alternative.'-[], nl, nl
+		[	'Using the *->/2 soft cut control construct without an else part'-[], nl,
+			'is a common source of errors. Check if the else part is missing'-[], nl,
+			'due to a coding error or use the suggested alternative.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
-		[	'The standard Prolog =../2 built-in predicate is costly and should be avoided'-[], nl,
-			'whenever possible. Simply use the suggested predicate.'-[], nl, nl
+		[	'The standard Prolog =../2 built-in predicate is costly and should'-[], nl,
+			'be avoided whenever possible. Simply use the suggested predicate.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, Object::_, _)) -->
 		{Object == user},
-		[	'Prolog standard built-in predicates can be called directly without requiring'-[], nl,
-			'sending a message to the "user" pseudo-object. Simply call the predicate.'-[], nl, nl
+		[	'Prolog standard built-in predicates can be called directly without'-[], nl,
+			'requiring sending a message to the "user" pseudo-object.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _::Pred, [Pred])) -->
-		[	'Only use message sending to call a local predicate when you need to generate'-[], nl,
-			'an event for the message. Otherwise, simply call the predicate directly.'-[], nl, nl
+		[	'Only use message sending to call a local predicate when is necessary to'-[], nl,
+			'generate an event for the message. Otherwise, simply call the predicate'-[], nl,
+			'directly.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _::Pred, [::Pred])) -->
-		[	'Only use an explicit message sending instead of a message to "self" when you need'-[], nl,
-			'to generate an event for the message. Otherwise, simply send a message to "self".'-[], nl, nl
+		[	'Only use an explicit message sending instead of a message to "self" when'-[], nl,
+			'you need to generate an event for the message. Otherwise, simply send'-[], nl,
+			'a message to "self".'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, ::Pred, [Pred, ^^Pred])) -->
-		[	'Sending a message to self to call the same predicate being defined is a'-[], nl,
-			'redundant and costly alternative to simply call the local definition. Or'-[], nl,
-			'is your intention to make a "super" call?'-[], nl, nl
+		[	'Sending a message to self to call the same predicate being defined is'-[], nl,
+			'a redundant and costly alternative to simply call the local definition.'-[], nl,
+			'Or is your intention to make a "super" call?'-[], nl, nl
 		].
 
 	explain(suspicious_call(_, _, _, _, repeat, reason(repeat(_)))) -->
-		[	'A repeat loop not ended with a cut may result in an endless loop in case'-[], nl,
-		 	'of unexpected backtracking. Always use a cut immediately after the test'-[], nl,
-			'goal that exits the repeat loop.'-[], nl, nl
+		[	'A repeat loop not ended with a cut may result in an endless loop'-[], nl,
+		 	'in case of unexpected backtracking. Always use a cut immediately'-[], nl,
+			'after the test goal that exits the repeat loop.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, !, reason(multifile(_)))) -->
-		[	'A cut in a multifile predicate clause may prevent other clauses, notably'-[], nl,
-			'those defined elsewhere, from being used when calling the predicate or'-[], nl,
-			'when backtracking into a call to the predicate.'-[], nl, nl
+		[	'A cut in a multifile predicate clause may prevent other clauses,'-[], nl,
+			'notably those defined elsewhere, from being used when calling the'-[], nl,
+			'predicate or when backtracking into a call to the predicate.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ is _, reason(shared_variable(_)))) -->
 		[	'A variable occurring in both arguments of a is/2 predicate call will most'-[], nl,
@@ -609,16 +617,16 @@
 			'instantiated and not unified with a different term when already bound.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, forall(_, _), reason(no_shared_variables(forall)))) -->
-		[	'In the most common cases, the forall/2 predicate is used for implementing'-[], nl,
-			'a generate-and-test loop where the first argument generates solutions that'-[], nl,
-			'are verified by the second argument. You can likely ignore this warning if'-[], nl,
-			'the first argument simply implements a counter.'-[], nl, nl
+		[	'In most cases, the forall/2 predicate is used for implementing'-[], nl,
+			'generate-and-test loops where the first argument generates solutions'-[], nl,
+			'that are verified by the second argument. This warning can likely be'-[], nl,
+			'ignored if the first argument simply implements a counter.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _, reason(no_shared_variables(_)))) -->
-		[	'In the most common cases, the template argument shares variables with the'-[], nl,
-			'goal argument so that we collect template bindings for the goal solutions.'-[], nl,
-			'You can likely ignore this warning if you are using this meta-predicate to'-[], nl,
-			'simply help count solutions.'-[], nl, nl
+		[	'In most cases, the template argument shares variables with the'-[], nl,
+			'goal argument so that we collect template bindings for the goal'-[], nl,
+			'solutions. This warning can likely be ignored if you are using'-[], nl,
+			'this meta-predicate to simply help count solutions.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _, reason(existential_variables([_], _)))) -->
 		[	'A existentially-qualified variable must exist in the qualified goal.'-[], nl,
@@ -642,16 +650,18 @@
 	% steadfastness messages
 
 	explain(possible_non_steadfast_predicate(_, _, _, _, _)) -->
-		[	'Variable aliasing in a clause head means that two or more head arguments'-[], nl,
-			'share variables. If the predicate is called with usually output arguments'-[], nl,
-			'bound, a premature cut may result in the wrong clause being used. If that''s'-[], nl,
-			'the case, change the clause to perform output unifications after the cut.'-[], nl, nl
+		[	'Variable aliasing in a clause head means that two or more head'-[], nl,
+			'arguments share variables. If the predicate is called with usually'-[], nl,
+			'output arguments bound, a premature cut may result in the wrong'-[], nl,
+			'clause being used. If that''s the case, change the clause to perform'-[], nl,
+			'output unifications after the cut.'-[], nl, nl
 		].
 	explain(possible_non_steadfast_non_terminal(_, _, _, _, _)) -->
-		[	'Variable aliasing in a grammar rule head means that two or more head arguments'-[], nl,
-			'share variables. If the grammar rule is called with usually output arguments'-[], nl,
-			'bound, a premature cut may result in the wrong grammar rule being used. If that''s'-[], nl,
-			'the case, change the grammar rule to perform output unifications after the cut.'-[], nl, nl
+		[	'Variable aliasing in a grammar rule head means that two or more head'-[], nl,
+			'arguments share variables. If the grammar rule is called with usually'-[], nl,
+			'output arguments bound, a premature cut may result in the wrong grammar'-[], nl,
+			'rule being used. If that''s the case, change the grammar rule to perform'-[], nl,
+			'output unifications after the cut.'-[], nl, nl
 		].
 
 :- end_object.

@@ -29,6 +29,7 @@
 	(logtalk_load(non_instantiated_directive) -> true; true),
 	(logtalk_load(invalid_directive_argument) -> true; true),
 	(logtalk_load(unmatched_directive) -> true; true),
+	(logtalk_load(protocol_defines_predicate) -> true; true),
 	(logtalk_load(category_defines_dynamic_predicate) -> true; true),
 	(logtalk_load(control_construct_redefinition) -> true; true),
 	(logtalk_load(uses_predicate_repeated) -> true; true),
