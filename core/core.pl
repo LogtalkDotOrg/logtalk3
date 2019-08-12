@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 28, 0, b06)).
+'$lgt_version_data'(logtalk(3, 28, 0, b07)).
 
 
 
@@ -11544,6 +11544,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
+
+'$lgt_compile_body'(not(_), _, _, Ctx) :-
+	'$lgt_predicate_property'(not(_), built_in),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(deprecated, warning),
+	'$lgt_source_file_context'(File, Lines),
+	'$lgt_pp_entity_'(Type, Entity, _, _, _),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, not/1)),
+	fail.
 
 % warning on cuts on clauses for multifile predicates
 '$lgt_compile_body'(!, _, _, Ctx) :-

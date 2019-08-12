@@ -442,6 +442,11 @@
 	foo :-
 		assert(bar).
 
+	bar :-
+		not(baz).
+
+	baz.
+
 :- end_object.
 
 
