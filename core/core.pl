@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 28, 0, b07)).
+'$lgt_version_data'(logtalk(3, 28, 0, b08)).
 
 
 
@@ -11545,15 +11545,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
 
-'$lgt_compile_body'(not(_), _, _, Ctx) :-
-	'$lgt_predicate_property'(not(_), built_in),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(deprecated, warning),
-	'$lgt_source_file_context'(File, Lines),
-	'$lgt_pp_entity_'(Type, Entity, _, _, _),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, not/1)),
-	fail.
+'$lgt_compile_body'(not(Pred), TPred, DPred, Ctx) :-
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, (not)/1, (\+)/1))
+	;	true
+	),
+	'$lgt_compile_body'(\+ Pred, TPred, DPred, Ctx).
 
 % warning on cuts on clauses for multifile predicates
 '$lgt_compile_body'(!, _, _, Ctx) :-
@@ -12874,7 +12876,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1))
+		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1))
 	;	true
 	),
 	'$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx).
@@ -15167,7 +15169,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1))
+		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1))
 	;	true
 	),
 	'$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, Events, Ctx).
@@ -15453,7 +15455,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1))
+		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1))
 	;	true
 	),
 	'$lgt_compile_message_to_self'(assertz(Clause), TPred, Ctx).

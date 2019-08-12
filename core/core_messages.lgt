@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.67,
+		version is 1.68,
 		author is 'Paulo Moura',
-		date is 2019/07/24,
+		date is 2019/08/12,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -555,15 +555,19 @@
 		message_context(File, Lines).
 
 	message_tokens(deprecated_control_construct(File, Lines, Type, Entity, Term)) -->
-		['The ~w control construct is deprecated'-[Term], nl],
+		['The ~q control construct is deprecated'-[Term], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(deprecated_directive(File, Lines, Type, Entity, Directive)) -->
-		['The ~w directive is deprecated'-[Directive], nl],
+		['The ~q directive is deprecated'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(deprecated_predicate(File, Lines, Type, Entity, Predicate)) -->
-		['The ~w predicate is deprecated'-[Predicate], nl],
+		['The ~q predicate is deprecated'-[Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(deprecated_predicate(File, Lines, Type, Entity, Predicate, Replacement)) -->
+		['The ~q predicate is deprecated (compiled as a call to ~q)'-[Predicate, Replacement], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% encoding/1 directive messages

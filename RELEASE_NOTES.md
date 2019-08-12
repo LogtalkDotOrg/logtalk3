@@ -41,6 +41,9 @@ contains the directive.
 * ADDED: Compiler check for calls to the deprecated `not/1` Prolog built-in
 predicate.
 
+* IMPROVED: When reporting a deprecated predicate, also report its replacement
+when applicable.
+
 * IMPROVED: Detect and report as a permission error any attempt to declare
 another entity static predicate (or static non-terminal) as dynamic during
 the compilation first stage. In previous versions, the predicate (or non-
