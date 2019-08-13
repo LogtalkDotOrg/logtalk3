@@ -54,6 +54,8 @@ a loading error could be raised.
 make another entity predicate (or non-terminal) multifile now include the
 entity.
 
+* FIXED: Line spacing issue when printing errors without a source file context.
+
 Prolog adapter and integration files
 ------------------------------------
 

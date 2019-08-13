@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.68,
+		version is 1.69,
 		author is 'Paulo Moura',
-		date is 2019/08/12,
+		date is 2019/08/13,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -320,7 +320,8 @@
 	% runtime error
 
 	message_tokens(runtime_error(Error)) -->
-		error_term_tokens(Error).
+		error_term_tokens(Error),
+		[nl].
 
 	% compiler error and warning messages
 
@@ -344,7 +345,8 @@
 		error_message_context(File, Lines).
 
 	message_tokens(compiler_stream_error(Error)) -->
-		error_term_tokens(Error).
+		error_term_tokens(Error),
+		[nl].
 
 	message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error)) -->
 		['Error found when term-expanding ~q using hook entity ~q: '-[Term, HookEntity]],
