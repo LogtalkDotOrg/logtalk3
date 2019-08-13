@@ -289,6 +289,11 @@
 			'Failure when loading the file defining the category?'-[], nl, nl
 		].
 
+	error(existence_error(file, _)) -->
+		[	'Typo in the file name or in the file path? If using a relative path,'-[], nl,
+			'also check that the current directory is the expected one.'-[], nl, nl
+		].
+
 	error(existence_error(ancestor, object)) -->
 		['Compiling a "super" call but there is not ancestor object.'-[], nl, nl].
 	error(existence_error(ancestor, category)) -->
@@ -312,6 +317,8 @@
 	explain(compiler_error(_, _, Error)) -->
 		error_term(Error).
 	explain(runtime_error(Error)) -->
+		error_term(Error).
+	explain(compiler_stream_error(Error)) -->
 		error_term(Error).
 
 	% deprecated feature messages
