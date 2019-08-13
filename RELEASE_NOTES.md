@@ -54,6 +54,10 @@ a loading error could be raised.
 make another entity predicate (or non-terminal) multifile now include the
 entity.
 
+* FIXED: Reporting of singleton variables in included files would wrongly
+report the main file and the line of the `include/1` directive instead of
+the actual location.
+
 * FIXED: Line spacing issue when printing errors without a source file context.
 
 Prolog adapter and integration files

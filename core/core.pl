@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 28, 0, b09)).
+'$lgt_version_data'(logtalk(3, 28, 0, b10)).
 
 
 
@@ -6787,7 +6787,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_file_term'(Next, NextSingletons, NextLines, File, Input).
 
 '$lgt_compile_file_term'(Term, Singletons, Lines, File, Input) :-
-	'$lgt_report_singleton_variables'(Singletons, Term),
+	'$lgt_report_singleton_variables'(Singletons, Term, File, Lines),
 	% set the initial compilation context and the position for compiling the term
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(user,_,_), _, Lines),
 	'$lgt_compile_file_term'(Term, Ctx),
@@ -7147,18 +7147,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_report_singleton_variables'(@list, @term)
+% '$lgt_report_singleton_variables'(@list, @term, +atom, @pair(integer))
 %
 % reports the singleton variables found while compiling an entity term
 
-'$lgt_report_singleton_variables'([], _).
+'$lgt_report_singleton_variables'([], _, _, _).
 
-'$lgt_report_singleton_variables'([Singleton| Singletons], Term) :-
+'$lgt_report_singleton_variables'([Singleton| Singletons], Term, File, Lines) :-
 	(	'$lgt_compiler_flag'(singleton_variables, warning),
 		'$lgt_filter_singleton_variable_names'([Singleton| Singletons], Term, Names),
 		Names \== [] ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _) ->
 			'$lgt_print_message'(warning(singleton_variables), core, singleton_variables(File, Lines, Type, Entity, Names, Term))
 		;	'$lgt_print_message'(warning(singleton_variables), core, singleton_variables(File, Lines, Names, Term))
@@ -23450,7 +23449,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(OpenError)
 	),
 	catch(
-		'$lgt_read_stream_to_terms'(Mode, Stream, Terms),
+		'$lgt_read_stream_to_terms'(Mode, SourceFile, Stream, Terms),
 		error(TermError, _),
 		'$lgt_read_file_to_terms_error_handler'(SourceFile, Stream, TermError)
 	),
@@ -23467,10 +23466,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Line-Line, Error).
 
 
-'$lgt_read_stream_to_terms'(runtime, Stream, Terms) :-
+'$lgt_read_stream_to_terms'(runtime, _, Stream, Terms) :-
 	'$lgt_read_stream_to_terms_runtime'(Stream, Terms).
-'$lgt_read_stream_to_terms'(compile(_,_,_), Stream, Terms) :-
-	'$lgt_read_stream_to_terms_compile'(Stream, Terms).
+'$lgt_read_stream_to_terms'(compile(_,_,_), File, Stream, Terms) :-
+	'$lgt_read_stream_to_terms_compile'(File, Stream, Terms).
 
 
 '$lgt_read_stream_to_terms_runtime'(Stream, Terms) :-
@@ -23499,19 +23498,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, Stream, Terms).
 
 
-'$lgt_read_stream_to_terms_compile'(Stream, Terms) :-
+'$lgt_read_stream_to_terms_compile'(File, Stream, Terms) :-
 	'$lgt_read_term'(Stream, Term, [singletons(Singletons)], Lines, VariableNames),
-	'$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, Stream, Terms).
+	'$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, File, Stream, Terms).
 
-'$lgt_read_stream_to_terms_compile'(Term, _, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
+'$lgt_read_stream_to_terms_compile'(Term, _, Lines, VariableNames, File, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
 	var(Term),
 	% delay the instantiation error
 	!,
 	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], NextLines, NextVariableNames),
-	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, Stream, Terms).
-'$lgt_read_stream_to_terms_compile'(end_of_file, _, _, _, _, []) :-
+	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, File, Stream, Terms).
+'$lgt_read_stream_to_terms_compile'(end_of_file, _, _, _, _, _, []) :-
 	!.
-'$lgt_read_stream_to_terms_compile'((:- op(Priority, Specifier, Operators)), _, Lines, VariableNames, Stream, [(:- op(Priority, Specifier, Operators))-sd(Lines,VariableNames)| Terms]) :-
+'$lgt_read_stream_to_terms_compile'((:- op(Priority, Specifier, Operators)), _, Lines, VariableNames, File, Stream, [(:- op(Priority, Specifier, Operators))-sd(Lines,VariableNames)| Terms]) :-
 	!,
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	(	'$lgt_pp_entity_'(_, _, _) ->
@@ -23519,11 +23518,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators)
 	),
 	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], NextLines, NextVariableNames),
-	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, Stream, Terms).
-'$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
-	'$lgt_report_singleton_variables'(Singletons, Term),
+	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, File, Stream, Terms).
+'$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, File, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
+	'$lgt_report_singleton_variables'(Singletons, Term, File, Lines),
 	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], NextLines, NextVariableNames),
-	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, Stream, Terms).
+	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, File, Stream, Terms).
 
 
 
