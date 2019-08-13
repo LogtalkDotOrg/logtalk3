@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Paulo Moura',
-		date is 2019/08/10,
+		date is 2019/08/13,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -81,6 +81,10 @@
 			'the flag name and the single argument is the flag value.'-[], nl, nl
 		].
 
+	error(domain_error(directive, (',')/2)) -->
+		[	'Use individual directives instead of conjunction of directives'-[], nl,
+			'to fix this error.'-[], nl, nl
+		].
 	error(domain_error(directive, _)) -->
 		[	'This is not a Logtalk supported directive. If you are trying to use a'-[], nl,
 			'proprietary Prolog directive, it may be possible to handle it in the'-[], nl,
