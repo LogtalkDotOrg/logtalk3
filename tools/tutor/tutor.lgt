@@ -52,6 +52,8 @@
 		error_term(error(Error, _)).
 	error_term(error(Error, _)) -->
 		error(Error).
+	error_term(Error) -->
+		error(Error).
 
 	error(type_error(callable, _)) -->
 		['Callable terms are either atoms or compound terms.'-[], nl, nl].
@@ -308,6 +310,8 @@
 		].
 
 	explain(compiler_error(_, _, Error)) -->
+		error_term(Error).
+	explain(runtime_error(Error)) -->
 		error_term(Error).
 
 	% deprecated feature messages
