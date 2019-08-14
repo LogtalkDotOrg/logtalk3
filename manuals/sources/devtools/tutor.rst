@@ -2,7 +2,8 @@
 =========
 
 This tool adds explanations and suggestions to selected compiler warning
-and error messages.
+and error messages. It's most useful for new users not yet familiar with
+the compiler and runtime warning and error messages.
 
 API documentation
 -----------------
@@ -23,7 +24,7 @@ This tool can be loaded using the query:
 Usage
 -----
 
-Simply load the tool.
+Simply load the tool at startup (e.g. from a settings file).
 
 Other notes
 -----------
