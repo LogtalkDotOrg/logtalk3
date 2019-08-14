@@ -1,0 +1,55 @@
+.. index:: tutor
+.. _tutor/0:
+
+.. rst-class:: right
+
+**object**
+
+``tutor``
+=========
+
+This object adds explanations and suggestions to selected compiler warning and error messages.
+
+| **Author:** Paulo Moura
+| **Version:** 0.9
+| **Date:** 2019/8/13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+
+| **Remarks:**
+
+
+   - *Usage:* Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(see entity ancestors)
+
+Protected predicates
+--------------------
+
+(see entity ancestors)
+
+Private predicates
+------------------
+
+(see entity ancestors)
+
+Operators
+---------
+
+(none)
+
