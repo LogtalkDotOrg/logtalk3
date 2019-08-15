@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on July 23, 2019
+%  Last updated on August 15, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -117,7 +117,7 @@ when running on non-POSIX operating systems such as Windows. Check the
 
 /*
 :- initialization(
-	logtalk_load(help(tutor))
+	logtalk_load(tutor(loader))
 ).
 %*/
 
