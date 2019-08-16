@@ -21,6 +21,21 @@ RELEASE NOTES
 =============
 
 
+3.29.0 - September ??, 2019
+===========================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Typo in the `settings-sample.lgt` sample code for loading the new
+`tutor` tool. Thanks to Michael T. Richter for the bug report.
+
+Documentation
+-------------
+
+* IMPROVED: Handbook description of the `code_prefix` and `clean` flags.
+
+
 3.28.0 - August 14, 2019
 ========================
 
