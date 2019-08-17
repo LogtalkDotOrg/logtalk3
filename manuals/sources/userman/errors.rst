@@ -294,8 +294,9 @@ Lambda variables
 
 A warning will be reported for :term:`lambda expressions <lambda expression>`
 with unclassified variables (not listed as either :term:`lambda free <lambda free variable>`
-or :term:`lambda parameter` variables) or where variables play a dual role
-(as both lambda free and lambda parameter variables).
+or :term:`lambda parameter` variables), for variables playing a dual role
+(as both lambda free and lambda parameter variables), and for lambda parameters
+used elsewhere in a clause.
 
 .. _errors_predicate_redefinition:
 

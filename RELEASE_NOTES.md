@@ -38,6 +38,8 @@ Documentation
 
 * IMPROVED: Handbook description of the `code_prefix` and `clean` flags.
 
+* UPDATED: Handbook description of lambda expression lint checks.
+
 Examples
 --------
 
@@ -46,6 +48,7 @@ expression parameters.
 
 * FIXED: Lambda expression examples and tests in the `lambdas` example to use
 fresh variables for all lambda expression parameters.
+
 
 3.28.0 - August 14, 2019
 ========================

@@ -905,12 +905,18 @@ the the :ref:`language grammar <grammar_lambdas>`.
 
 The compiler checks whenever possible that all variables in a lambda
 expression are either classified as free variables or as lambda
-parameters. Non-classified variables in a lambda expression
-should be regarded as a programming error. Unfortunately, the dynamic
-features of the language and lack of sufficient information at compile
-time may prevent the compiler of checking all uses of lambda
-expressions. The compiler also checks if a variable is classified
-as both a free variable and a lambda parameter.
+parameters. Non-classified variables in a lambda expression should be
+regarded as a programming error. The compiler also checks if a variable
+is classified as both a free variable and a lambda parameter. There
+are a few cases where a variable playing a dual role is intended but,
+in general, this also results from a programming error. A third check
+verifies that no lambda parameter variable is used elsewhere in a
+clause. Such cases are either programming errors, when the variable
+appears before the lambda expression, or bad programming style, when
+the variable is used after the lambda expression. Note, however, that
+the dynamic features of the language and lack of sufficient information
+at compile time may prevent the compiler of checking all uses of lambda
+expressions.
 
 .. warning::
 
