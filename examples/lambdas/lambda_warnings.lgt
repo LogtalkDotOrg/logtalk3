@@ -21,9 +21,9 @@
 :- object(lambda_warnings).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/04/15,
+		date is 2019/08/17,
 		comment is 'Example for illustrating lambda compilation warnings.'
 	]).
 
@@ -36,8 +36,15 @@
 	bar(C1, C2, C3) :-
 		call({Z}/[X,Y,Z]>>f(X,Y,Z), C1, C2, C3).
 
+	% lambda expression with parameter variables occurring elsewhere
+	baz(X, C1, C2) :-
+		g(X),
+		call([X,Y]>>f(X,Y), C1, C2).
+
 	f(1, 2, 3).
 
 	g(4).
+
+	f(1, 2).
 
 :- end_object.

@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.69,
+		version is 1.71,
 		author is 'Paulo Moura',
-		date is 2019/08/13,
+		date is 2019/08/17,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -462,6 +462,10 @@
 		message_context(File, Lines).
 
 	% lambda expression messages
+
+	message_tokens(parameter_variable_used_elsewhere(File, Lines, Type, Entity, Lambda, Variable)) -->
+		['Lambda expression ~q parameter variable ~q used elsewhere in clause'-[Lambda, Variable], nl],
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression)) -->
 		(	{UnqualifiedVars = [UnqualifiedVar]} ->

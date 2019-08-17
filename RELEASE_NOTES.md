@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: New compiler lint warning for lambda expression parameter variables
+that are used elsewhere in a clause.
+
 * FIXED: Typo in the `settings-sample.lgt` sample code for loading the new
 `tutor` tool. Thanks to Michael T. Richter for the bug report.
 
@@ -37,6 +40,9 @@ Documentation
 
 Examples
 --------
+
+* UPDATED: The `lambdas` example to illustrate the new lint warning for lambda
+expression parameters.
 
 * FIXED: Lambda expression examples and tests in the `lambdas` example to use
 fresh variables for all lambda expression parameters.
