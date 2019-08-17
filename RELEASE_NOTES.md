@@ -40,6 +40,11 @@ Documentation
 
 * UPDATED: Handbook description of lambda expression lint checks.
 
+Tools
+-----
+
+* UPDATED: The `tutor` tool to explain the new lambda expression lint check.
+
 Examples
 --------
 

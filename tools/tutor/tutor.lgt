@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.9,
+		version is 0.11,
 		author is 'Paulo Moura',
-		date is 2019/08/13,
+		date is 2019/08/17,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -402,6 +402,12 @@
 		['Easy to fix warning: simply delete or correct the duplicated directive.'-[], nl, nl].
 
 	% lambda expression messages
+
+	explain(parameter_variable_used_elsewhere(_, _, _, _, _, _)) -->
+		[	'An occurence of a lambda parameter variable before the lambda expression'-[], nl,
+			'is a common source of errors. An occurence of a lambda parameter variable'-[], nl,
+			'after the lambda expression is bad programming style.'-[], nl, nl
+		].
 
 	explain(unclassified_variables_in_lambda_expression(_, _, _, _, _, _)) -->
 		[	'All variables in a lambda expression should be listed as either'-[], nl,
