@@ -88,8 +88,8 @@
 :- object(misc).
 
 	:- info([
-		version is 1.2,
-		date is 2016/10/10,
+		version is 1.3,
+		date is 2019/08/17,
 		author is 'Paulo Moura',
 		comment is 'Some miscellaneous tests for lambda expressions collected from public forums.'
 	]).
@@ -115,9 +115,9 @@
 		f(X, Y),
 		write('This test should print '), write(f(X, Y)), write(' in all lines:'), nl,
 		call(f, A1, A2), write(f(A1, A2)), nl,
-		call([X]>>f(X), B1, B2), write(f(B1, B2)), nl,
-		call([X,Y]>>f(X,Y), C1, C2), write(f(C1, C2)), nl,
-		call([X]>>({X}/[Y]>>f(X,Y)), D1, D2), write(f(D1, D2)), nl,
+		call([X1]>>f(X1), B1, B2), write(f(B1, B2)), nl,
+		call([X2,Y2]>>f(X2,Y2), C1, C2), write(f(C1, C2)), nl,
+		call([X3]>>({X3}/[Y3]>>f(X3,Y3)), D1, D2), write(f(D1, D2)), nl,
 		call(call(f, E1), E2), write(f(E1, E2)), nl,
 		call(f(F1), F2), write(f(F1, F2)), nl.
 

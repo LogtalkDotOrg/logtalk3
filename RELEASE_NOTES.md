@@ -35,6 +35,11 @@ Documentation
 
 * IMPROVED: Handbook description of the `code_prefix` and `clean` flags.
 
+Examples
+--------
+
+* FIXED: Lambda expression examples and tests in the `lambdas` example to use
+fresh variables for all lambda expression parameters.
 
 3.28.0 - August 14, 2019
 ========================

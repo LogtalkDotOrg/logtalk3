@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2019/03/18,
+		date is 2019/08/17,
 		comment is 'Unit tests for the "lambdas" example.'
 	]).
 
@@ -136,7 +136,7 @@
 		R == 285.
 
 	succeeds(lambdas_27) :-
-		sigma::sum([X,Y]>>(sigma::sum([W,Z]>>(Z is W), X, 9, Y)), 0, 9, R),
+		sigma::sum([X,Y]>>(sigma::sum({X,Y}/[W,Z]>>(Z is W), X, 9, Y)), 0, 9, R),
 		R == 330.
 
 	succeeds(lambdas_28) :-
@@ -170,22 +170,25 @@
 		L == [1-1,1-2,2-1,2-2].
 
 	succeeds(lambdas_35) :-
-		call(f, X, Y),
-		call([X]>>f(X), X, Y),
-		call([X,Y]>>f(X,Y), X, Y),
-		call([X]>>({X}/[Y]>>f(X,Y)), X, Y),
-		call(call(f, X), Y),
-		call(f(X), Y),
-		f(X, Y).
+		call([X]>>f(X), XX, YY),
+		XX == x, YY == y.
 
 	succeeds(lambdas_36) :-
-		call([X,Y,Z]>>plus(X,Y,Z), 1, 2, 3),
-		call([X,Y]>>plus(X,Y), 1, 2, 3),
-		call([X]>>plus(X), 1, 2, 3),
+		call([X,Y]>>f(X,Y), XX, YY),
+		XX == x, YY == y.
+
+	succeeds(lambdas_37) :-
+		call([X]>>({X}/[Y]>>f(X,Y)), XX, YY),
+		XX == x, YY == y.
+
+	succeeds(lambdas_38) :-
+		call([X1,Y1,Z1]>>plus(X1,Y1,Z1), 1, 2, 3),
+		call([X2,Y2]>>plus(X2,Y2), 1, 2, 3),
+		call([X3]>>plus(X3), 1, 2, 3),
 		call([]>>plus, 1, 2, 3),
 		call(plus, 1, 2, 3).
 
-	succeeds(lambdas_37) :-
+	succeeds(lambdas_39) :-
 		findall(X, {X}/p(X,_), L),
 		L == [1,2].
 
