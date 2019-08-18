@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * ADDED: New compiler lint warning for lambda expression parameter variables
 that are used elsewhere in a clause.
 
+* FIXED: When a source file contains an `encoding/1` directive, open any
+included files using the same text encoding.
+
 * FIXED: Typo in the `settings-sample.lgt` sample code for loading the new
 `tutor` tool. Thanks to Michael T. Richter for the bug report.
 

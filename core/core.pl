@@ -3401,7 +3401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 29, 0, b01)).
+'$lgt_version_data'(logtalk(3, 29, 0, b02)).
 
 
 
@@ -23494,8 +23494,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	throw(existence_error(file, File))
 	),
+	% use the same encoding as the main file if specified
+	(	'$lgt_pp_file_encoding_'(_, PrologEncoding, _) ->
+		Options = [encoding(PrologEncoding)]
+	;	Options = []
+	),
 	catch(
-		'$lgt_open'(SourceFile, read, Stream, []),
+		'$lgt_open'(SourceFile, read, Stream, Options),
 		error(OpenError, _),
 		throw(OpenError)
 	),

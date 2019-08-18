@@ -46,6 +46,9 @@ entities defined in source files and with the entity creation built-in
 predicates. In the latter case, the file should be specified using an
 absolute path or using library notation (which expands to a full path).
 
+When the main file contains an :ref:`directives_encoding_1` directive,
+included files are opened using the same text encoding.
+
 .. warning::
 
    When using this directive as an argument in calls to the
