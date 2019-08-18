@@ -8164,23 +8164,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_expanded_term'((Head :- Body), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, _, _, _, (Head :- Body)),
+	'$lgt_comp_ctx_term'(Ctx, (Head :- Body)),
 	'$lgt_compile_clause'((Head :- Body), Ctx).
 
 '$lgt_compile_expanded_term'((:- Directive), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, _, _, _, (:- Directive)),
+	'$lgt_comp_ctx_term'(Ctx, (:- Directive)),
 	'$lgt_compile_directive'(Directive, Ctx).
 
 '$lgt_compile_expanded_term'((Head --> Body), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, _, _, _, (Head --> Body)),
+	'$lgt_comp_ctx_term'(Ctx, (Head --> Body)),
 	'$lgt_compile_grammar_rule'((Head --> Body), Ctx).
 
 '$lgt_compile_expanded_term'(ExpandedTerm, Term, Ctx) :-
 	(	callable(ExpandedTerm) ->
 		% fact
-		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, _, _, _, ExpandedTerm),
+		'$lgt_comp_ctx_term'(Ctx, ExpandedTerm),
 		'$lgt_compile_clause'(ExpandedTerm, Ctx)
 	;	throw(error(type_error(callable, ExpandedTerm), term_expansion(Term, ExpandedTerm)))
 	).
@@ -11399,7 +11399,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'({Pred}, _, _, Ctx) :-
 	callable(Pred),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_iso_spec_predicate'(Pred),
 	\+ '$lgt_built_in_method'(Pred, _, _, _),
@@ -11529,7 +11529,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	callable(Pred1),
 	callable(Pred2),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -11544,7 +11544,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'((Pred1 -> Pred2), _, _, Ctx) :-
 	callable(Pred1),
 	callable(Pred2),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -11632,7 +11632,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(call(Goal), _, _, Ctx) :-
 	callable(Goal),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -11760,7 +11760,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_is_list'(List),
 	List = [Functor| _],
 	nonvar(Functor),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	ListTerm =.. List,
 	'$lgt_increment_compiling_warnings_counter',
@@ -11843,7 +11843,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(bagof(Term, QGoal, List), _, _, Ctx) :-
 	callable(QGoal),
 	\+ ground(Term),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_decompose_quantified_body'(QGoal, _, Goal),
 	term_variables(Goal, GoalVariables),
@@ -11856,7 +11856,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
 	callable(QGoal),
 	QGoal = _^_,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
 	'$lgt_increment_compiling_warnings_counter',
@@ -11881,7 +11881,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(findall(Term, Goal, List), _, _, Ctx) :-
 	nonvar(Goal),
 	\+ ground(Term),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	term_variables(Term, TermVariables),
 	term_variables(Goal, GoalVariables),
@@ -11898,7 +11898,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(findall(Term, Goal, List, Tail), _, _, Ctx) :-
 	nonvar(Goal),
 	\+ ground(Term),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	term_variables(Term, TermVariables),
 	term_variables(Goal, GoalVariables),
@@ -11917,7 +11917,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Test),
 	\+ ground(Gen),
 	\+ ground(Test),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	term_variables(Gen, GenVariables),
 	term_variables(Test, TestVariables),
@@ -11935,7 +11935,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(setof(Term, QGoal, List), _, _, Ctx) :-
 	callable(QGoal),
 	\+ ground(Term),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_decompose_quantified_body'(QGoal, _, Goal),
 	term_variables(Goal, GoalVariables),
@@ -11948,7 +11948,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
 	callable(QGoal),
 	QGoal = _^_,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
 	'$lgt_increment_compiling_warnings_counter',
@@ -15011,7 +15011,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(var_or_callable, Pred),
 	(	callable(Pred),
-		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
+		'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(suspicious_calls, warning),
 		'$lgt_iso_spec_predicate'(Pred),
 		\+ '$lgt_built_in_method'(Pred, _, _, _),
