@@ -46,7 +46,9 @@ Documentation
 Tools
 -----
 
-* UPDATED: The `tutor` tool to explain the new lambda expression lint check.
+* UPDATED: The `tutor` tool to explain the new lambda expression lint check
+and the domain error when trying to use the `set_prolog_flag/2` directive as
+an entity directive.
 
 Examples
 --------

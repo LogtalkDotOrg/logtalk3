@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.11,
+		version is 0.12,
 		author is 'Paulo Moura',
-		date is 2019/08/17,
+		date is 2019/08/19,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -86,6 +86,11 @@
 	error(domain_error(directive, (',')/2)) -->
 		[	'Use individual directives instead of conjunction of directives'-[], nl,
 			'to fix this error.'-[], nl, nl
+		].
+	error(domain_error(directive, set_prolog_flag/2)) -->
+		[	'This standard Prolog directive can be used in a source file but not as'-[], nl,
+			'an entity directive. It may be possible to fix this error by simply'-[], nl,
+			'moving the directive to the top of the source file.'-[], nl, nl
 		].
 	error(domain_error(directive, _)) -->
 		[	'This is not a Logtalk supported directive. If you are trying to use a'-[], nl,
