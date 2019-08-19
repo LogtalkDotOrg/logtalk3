@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on August 5, 2019
+%  Last updated on August 19, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -512,7 +512,7 @@ forall(Generate, Test) :-
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
 '$lgt_stream_current_line_number'(Stream, Line) :-
-	stream_property(Stream, position(Position)),
+	stream_position(Stream, Position),
 	stream_position_data(line_count, Position, LineCount),
 	Line is LineCount + 1.
 

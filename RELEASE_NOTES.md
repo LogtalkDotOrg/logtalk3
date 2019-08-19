@@ -36,6 +36,14 @@ included files using the same text encoding.
 * FIXED: Typo in the `settings-sample.lgt` sample code for loading the new
 `tutor` tool. Thanks to Michael T. Richter for the bug report.
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: The SICStus Prolog adapter file now uses the `stream_position/2`
+predicate to retrieve the stream position in case of error instead of the
+standard `stream_property/2` predicate property `position/1` that is not
+always available.
+
 Documentation
 -------------
 
