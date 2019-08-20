@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.12,
+		version is 0.13,
 		author is 'Paulo Moura',
-		date is 2019/08/19,
+		date is 2019/08/20,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -183,11 +183,11 @@
 		['The clause/2 built-in method can only access clauses for dynamic predicates.'-[], nl, nl].
 
 	error(permission_error(modify, object_alias, _)) -->
-		[	'This predicate is already declared as an alias to another predicate.'-[], nl,
-			'Typo in the alias or the predicate name?'-[], nl, nl
+		[	'This name is already declared as an alias to another object.'-[], nl,
+			'Typo in the alias or the object name?'-[], nl, nl
 		].
 	error(permission_error(repeat, object_alias, _)) -->
-		[	'This predicate is already declared as an alias to the same predicate.'-[], nl,
+		[	'This name is already declared as an alias to the same object.'-[], nl,
 			'Simply delete the repeated declaration to fix this error.'-[], nl, nl
 		].
 
