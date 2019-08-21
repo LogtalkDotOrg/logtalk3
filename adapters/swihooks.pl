@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on March 30, 2019
+%  Last updated on August 21, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -311,7 +311,7 @@ prolog:message(error(Error, Context)) -->
 	{
 		callable(Context),
 		Context = logtalk(_, _),
-		'$lgt_print_message'(error, core, runtime_error(error(Error, Context)))
+		'$lgt_print_message'(error, runtime_error(error(Error, Context)))
 	}.
 
 :- multifile(prolog:term_compiled/2).
