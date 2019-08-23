@@ -6663,7 +6663,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_compile_file_term'(Term, Singletons, Lines, SourceFile, NewInput),
 		Error,
-		'$lgt_first_stage_error_handler'(Error)
+		'$lgt_compiler_error_handler'(Error)
 	),
 	'$lgt_close'(NewInput),
 	% finish writing the generated Prolog file
@@ -7228,30 +7228,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_first_stage_error_handler'(@compound)
-%
-% error handler for the compiler first stage
-
-'$lgt_first_stage_error_handler'(Error) :-
-	'$lgt_pp_file_paths_flags_'(_, _, MainSourceFile, ObjectFile, _),
-	(	'$lgt_source_file_context'(SourceFile, Lines) ->
-		true
-	;	% no file context information available for last term read; likely
-		% due to a syntax error when trying to read a main file term as syntax
-		% errors in included files are handled when reading a file to terms
-		SourceFile = MainSourceFile,
-		(	stream_property(Input, alias(logtalk_compiler_input)),
-			'$lgt_stream_current_line_number'(Input, Line) ->
-			Lines = Line-Line
-		;	% some backend Prolog compilers do not support, or do not always support
-			% (e.g. when a syntax error occurs) querying a stream line number
-			Lines = '-'(-1, -1)
-		)
-	),
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
-
-
-
 % '$lgt_compiler_error_handler'(+atom, +atom, +pair(integer), @compound)
 %
 % closes the streams being used for reading and writing terms, restores
@@ -7276,6 +7252,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	!,
 	fail.
+
+
+
+% '$lgt_compiler_error_handler'(@compound)
+
+'$lgt_compiler_error_handler'(Error) :-
+	'$lgt_pp_file_paths_flags_'(_, _, MainSourceFile, ObjectFile, _),
+	(	'$lgt_source_file_context'(SourceFile, Lines) ->
+		true
+	;	% no file context information available for last term read; likely
+		% due to a syntax error when trying to read a main file term as syntax
+		% errors in included files are handled when reading a file to terms
+		SourceFile = MainSourceFile,
+		(	stream_property(Input, alias(logtalk_compiler_input)),
+			'$lgt_stream_current_line_number'(Input, Line) ->
+			Lines = Line-Line
+		;	% some backend Prolog compilers do not support, or do not always support
+			% (e.g. when a syntax error occurs) querying a stream line number
+			Lines = '-'(-1, -1)
+		)
+	),
+	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
 
 
 
@@ -8306,8 +8304,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		asserta('$lgt_pp_cc_mode_'(ignore))
 	;	% Value == skip_else,
 		(	(	Goal = {UserGoal} ->
-				catch(UserGoal, Error, '$lgt_first_stage_error_handler'(Error))
-			;	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error))
+				catch(UserGoal, Error, '$lgt_compiler_error_handler'(Error))
+			;	catch(Goal, Error, '$lgt_compiler_error_handler'(Error))
 			) ->
 			asserta('$lgt_pp_cc_mode_'(skip_else))
 		;	asserta('$lgt_pp_cc_mode_'(seek_else)),
@@ -8321,8 +8319,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	asserta('$lgt_pp_cc_if_found_'(Goal)),
 	(	(	Goal = {UserGoal} ->
-			catch(UserGoal, Error, '$lgt_first_stage_error_handler'(Error))
-		;	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error))
+			catch(UserGoal, Error, '$lgt_compiler_error_handler'(Error))
+		;	catch(Goal, Error, '$lgt_compiler_error_handler'(Error))
 		) ->
 		asserta('$lgt_pp_cc_mode_'(skip_else))
 	;	asserta('$lgt_pp_cc_mode_'(seek_else)),
@@ -8365,8 +8363,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% the corresponding if is false
 		retract('$lgt_pp_cc_mode_'(_)),
 		(	(	Goal = {UserGoal} ->
-				catch(UserGoal, Error, '$lgt_first_stage_error_handler'(Error))
-			;	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error))
+				catch(UserGoal, Error, '$lgt_compiler_error_handler'(Error))
+			;	catch(Goal, Error, '$lgt_compiler_error_handler'(Error))
 			) ->
 			retractall('$lgt_pp_cc_skipping_'),
 			asserta('$lgt_pp_cc_mode_'(skip_else))
