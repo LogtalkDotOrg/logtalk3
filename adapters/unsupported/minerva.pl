@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Minerva 2.4
-%  Last updated on August 5, 2019
+%  Last updated on August 23, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -219,6 +219,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(naming, silent).
+'$lgt_default_flag'(duplicated_clauses, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(deprecated, warning).

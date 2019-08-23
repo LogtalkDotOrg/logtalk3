@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.72,
+		version is 1.73,
 		author is 'Paulo Moura',
 		date is 2019/08/23,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -226,6 +226,7 @@
 		 current_logtalk_flag(undefined_predicates, UndefinedPredicates),
 		 current_logtalk_flag(steadfastness, Steadfastness),
 		 current_logtalk_flag(naming, Naming),
+		 current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, Redefined),
 		 current_logtalk_flag(deprecated, Deprecated),
@@ -266,6 +267,7 @@
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
 			'  unknown_entities: ~w, steadfastness: ~w, naming: ~w'-[UnknownEntities, Steadfastness, Naming], nl,
 			'  missing_directives: ~w, duplicated_directives: ~w'-[Missing, Duplicated], nl,
+			'  duplicated_clauses: ~w'-[DuplicatedClauses], nl,
 			'  portability: ~w, redefined_built_ins: ~w, deprecated: ~w'-[Portability, Redefined, Deprecated], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
 			'  lambda_variables: ~w, suspicious_calls: ~w'-[Lambda, SuspiciousCalls], nl,
@@ -625,6 +627,12 @@
 	message_tokens(variable_names_differ_only_on_case(File, Lines, Name, OtherName)) -->
 		['Variables differ only on case: ~w ~w'-[Name, OtherName], nl],
 		message_context(File, Lines).
+
+	% duplicated clause messages
+
+	message_tokens(duplicated_clauses(File, Lines, Type, Entity, Clause, DuplicateLine-_)) -->
+		['Duplicated clause found around line ~w: ~q'-[DuplicateLine, Clause], nl],
+		message_context(File, Lines, Type, Entity).
 
 	% auxiliary grammar rules
 

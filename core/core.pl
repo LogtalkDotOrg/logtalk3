@@ -1298,7 +1298,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	% the list of clauses may also include grammar rules
 	'$lgt_compile_runtime_terms'(Clauses),
 	'$lgt_generate_def_table_clauses'(Ctx),
-	'$lgt_compile_predicate_calls',
+	'$lgt_compile_predicate_calls'(runtime),
 	'$lgt_generate_object_clauses',
 	'$lgt_generate_object_directives',
 	'$lgt_assert_dynamic_entity'(object),
@@ -1353,7 +1353,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	% the list of clauses may also include grammar rules
 	'$lgt_compile_runtime_terms'(Clauses),
 	'$lgt_generate_def_table_clauses'(Ctx),
-	'$lgt_compile_predicate_calls',
+	'$lgt_compile_predicate_calls'(runtime),
 	'$lgt_generate_category_clauses',
 	'$lgt_generate_category_directives',
 	'$lgt_assert_dynamic_entity'(category),
@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 29, 0, b05)).
+'$lgt_version_data'(logtalk(3, 29, 0, b06)).
 
 
 
@@ -11121,8 +11121,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_clause_number'(PI, rule, File, BeginLine, N).
 
-'$lgt_compile_clause'(Fact, Entity, fact(TFact), dfact(TFact,DHead), Ctx) :-
+'$lgt_compile_clause'(Fact, Entity, fact(TFact,Ctx), dfact(TFact,DHead,Ctx), Ctx) :-
 	'$lgt_compile_head'(Fact, PI, TFact, Ctx),
+	'$lgt_comp_ctx_head'(Ctx, Fact),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_source_file_context'(Ctx, File, BeginLine-_),
 	(	Fact = {UserFact} ->
@@ -14263,17 +14264,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_dynamic_'(Call),
 		\+ '$lgt_pp_multifile_'(Call, _, _),
 		% not a dynamic or multifile predicate
-		\+ '$lgt_pp_entity_term_'(fact(TCall), _, _),
+		\+ '$lgt_pp_entity_term_'(fact(TCall, _), _, _),
 		\+ '$lgt_pp_entity_term_'(srule(TCall, _, _), _, _),
-		\+ '$lgt_pp_entity_term_'(dfact(TCall, _), _, _),
+		\+ '$lgt_pp_entity_term_'(dfact(TCall, _, _), _, _),
 		\+ '$lgt_pp_entity_term_'(dsrule(TCall, _, _, _), _, _),
 		% not a yet to be compiled user-defined fact or rule
 		\+ '$lgt_pp_final_entity_term_'(TCall, _),
 		\+ '$lgt_pp_final_entity_term_'((TCall :- _), _),
 		% not an already compiled user-defined fact or rule
-		\+ '$lgt_pp_entity_aux_clause_'(fact(TCall)),
+		\+ '$lgt_pp_entity_aux_clause_'(fact(TCall, _)),
 		\+ '$lgt_pp_entity_aux_clause_'(srule(TCall, _, _)),
-		\+ '$lgt_pp_entity_aux_clause_'(dfact(TCall, _)),
+		\+ '$lgt_pp_entity_aux_clause_'(dfact(TCall, _, _)),
 		\+ '$lgt_pp_entity_aux_clause_'(dsrule(TCall, _, _, _)),
 		% not a yet to be compiled auxiliary fact or rule
 		\+ '$lgt_pp_final_entity_aux_clause_'(TCall),
@@ -17525,14 +17526,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_entity_code'(object, Ctx) :-
 	'$lgt_generate_def_table_clauses'(Ctx),
-	'$lgt_compile_predicate_calls',
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_compile_predicate_calls'(Mode),
 	'$lgt_generate_object_clauses',
 	'$lgt_generate_object_directives',
 	'$lgt_generate_file_object_initialization_goal'.
 
 '$lgt_generate_entity_code'(category, Ctx) :-
 	'$lgt_generate_def_table_clauses'(Ctx),
-	'$lgt_compile_predicate_calls',
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_compile_predicate_calls'(Mode),
 	'$lgt_generate_category_clauses',
 	'$lgt_generate_category_directives'.
 
@@ -18731,7 +18734,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_predicate_calls'
+% '$lgt_compile_predicate_calls'(+atom)
 %
 % compiles predicate calls in entity clause rules and in initialization goals
 %
@@ -18741,66 +18744,90 @@ create_logtalk_flag(Flag, Value, Options) :-
 % allows us to deal with e.g. meta-predicate directives and redefined built-in
 % predicates which may be textually defined in an entity after their calls
 
-'$lgt_compile_predicate_calls' :-
+'$lgt_compile_predicate_calls'(runtime) :-
 	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
 	% avoid querying the optimize flag for each compiled term
 	'$lgt_compiler_flag'(optimize, Optimize),
-	'$lgt_compile_predicate_calls_loop'(Optimize).
+	'$lgt_compile_predicate_calls_loop'(silent, Optimize).
+
+'$lgt_compile_predicate_calls'(compile(_, _, _)) :-
+	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
+	% avoid querying the duplicated_clauses and optimize flags for each compiled term
+	'$lgt_compiler_flag'(duplicated_clauses, DuplicatedClauses),
+	'$lgt_compiler_flag'(optimize, Optimize),
+	'$lgt_compile_predicate_calls_loop'(DuplicatedClauses, Optimize).
 
 
 % compilation of auxiliary clauses can result in the
 % creation of e.g. new auxiliary clauses or directives
 
-'$lgt_compile_predicate_calls_loop'(Optimize) :-
-	'$lgt_compile_predicate_calls'(Optimize),
+'$lgt_compile_predicate_calls_loop'(DuplicatedClauses, Optimize) :-
+	'$lgt_compile_predicate_calls'(DuplicatedClauses, Optimize),
 	fail.
 
-'$lgt_compile_predicate_calls_loop'(Optimize) :-
+'$lgt_compile_predicate_calls_loop'(DuplicatedClauses, Optimize) :-
 	(	(	'$lgt_pp_entity_aux_clause_'(_)
 		;	'$lgt_pp_coinductive_'(_, _, _, _, _, _, _)
 		;	'$lgt_pp_object_initialization_'(_, _, _)
 		;	'$lgt_pp_entity_meta_directive_'(_, _, _)
 		) ->
-		'$lgt_compile_predicate_calls_loop'(Optimize)
+		'$lgt_compile_predicate_calls_loop'(DuplicatedClauses, Optimize)
 	;	true
 	).
 
 
-'$lgt_compile_predicate_calls'(Optimize) :-
+'$lgt_compile_predicate_calls'(warning, Optimize) :-
+	% user-defined terms
+	retract('$lgt_pp_entity_term_'(Term, SourceData, _)),
+	(	SourceData = sd(_, _, File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _),
+		'$lgt_clause_from_term'(Term, Clause, Template),
+		'$lgt_pp_entity_term_'(Template, _, DuplicateLines),
+		'$lgt_clause_from_term'(Template, Duplicate, _),
+		'$lgt_variant'(Clause, Duplicate) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(duplicated_clauses), duplicated_clauses(File, Lines, Type, Entity, Duplicate, DuplicateLines))
+	;	true
+	),
+	'$lgt_compile_predicate_calls'(Term, SourceData, Optimize, TTerm),
+	assertz('$lgt_pp_final_entity_term_'(TTerm, Lines)),
+	fail.
+
+'$lgt_compile_predicate_calls'(silent, Optimize) :-
 	% user-defined terms
 	retract('$lgt_pp_entity_term_'(Term, SourceData, Lines)),
 	'$lgt_compile_predicate_calls'(Term, SourceData, Optimize, TTerm),
 	assertz('$lgt_pp_final_entity_term_'(TTerm, Lines)),
 	fail.
 
-'$lgt_compile_predicate_calls'(_) :-
+'$lgt_compile_predicate_calls'(_, _) :-
 	retract('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)),
 	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	fail.
 
-'$lgt_compile_predicate_calls'(Optimize) :-
+'$lgt_compile_predicate_calls'(_, Optimize) :-
 	% other auxiliary clauses
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
 	'$lgt_compile_predicate_calls'(Clause, nil, Optimize, TClause),
 	assertz('$lgt_pp_final_entity_aux_clause_'(TClause)),
 	fail.
 
-'$lgt_compile_predicate_calls'(Optimize) :-
+'$lgt_compile_predicate_calls'(_, Optimize) :-
 	% initialization/1 goals
 	retract('$lgt_pp_object_initialization_'(Goal, SourceData, Lines)),
 	'$lgt_compile_predicate_calls'(Goal, SourceData, Optimize, TGoal),
 	assertz('$lgt_pp_final_object_initialization_'(TGoal, Lines)),
 	fail.
 
-'$lgt_compile_predicate_calls'(Optimize) :-
+'$lgt_compile_predicate_calls'(_, Optimize) :-
 	% other initialization goals found on proprietary Prolog directives
 	retract('$lgt_pp_entity_meta_directive_'(Directive, SourceData, _)),
 	'$lgt_compile_predicate_calls'(Directive, SourceData, Optimize, TDirective),
 	assertz('$lgt_pp_directive_'(TDirective)),
 	fail.
 
-'$lgt_compile_predicate_calls'(_).
+'$lgt_compile_predicate_calls'(_, _).
 
 
 
@@ -18826,6 +18853,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_predicate_calls'(Body, Optimize, TRule),
 	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)).
 
+
+'$lgt_clause_from_term'(srule(_,Body,Ctx), (Head:-Body), srule(_,_,_)) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_clause_from_term'(dsrule(_,_,Body,Ctx), (Head:-Body), dsrule(_,_,_,_)) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_clause_from_term'(drule(_,_,Body,Ctx), (Head:-Body), drule(_,_,_,_)) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_clause_from_term'(ddrule(_,_,_,Body,Ctx), (Head:-Body), ddrule(_,_,_,_,_)) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_clause_from_term'(fact(_,Ctx), Fact, fact(_,_)) :-
+	'$lgt_comp_ctx_head'(Ctx, Fact).
+
+'$lgt_clause_from_term'(dfact(_,_,Ctx), Fact, dfact(_,_,_)) :-
+	'$lgt_comp_ctx_head'(Ctx, Fact).
 
 
 '$lgt_compile_predicate_calls_error_handler'(Term, Error) :-
@@ -18902,10 +18947,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Body, _, DBody, Ctx).
 
 % predicate fact
-'$lgt_compile_predicate_calls'(fact(TFact), _, TFact).
+'$lgt_compile_predicate_calls'(fact(TFact,_), _, TFact).
 
 % debug version of a predicate fact
-'$lgt_compile_predicate_calls'(dfact(TFact,DHead), _, (TFact:-DHead)).
+'$lgt_compile_predicate_calls'(dfact(TFact,DHead,_), _, (TFact:-DHead)).
 
 % supported Prolog meta-directives (specified in the adapter files)
 '$lgt_compile_predicate_calls'(directive(Directive,Meta), _, TDirective) :-
@@ -20862,6 +20907,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(always_true_or_false_goals).
 '$lgt_valid_flag'(deprecated).
 '$lgt_valid_flag'(naming).
+'$lgt_valid_flag'(duplicated_clauses).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -20973,6 +21019,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(naming, silent) :- !.
 '$lgt_valid_flag_value'(naming, warning) :- !.
+
+'$lgt_valid_flag_value'(duplicated_clauses, silent) :- !.
+'$lgt_valid_flag_value'(duplicated_clauses, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.
@@ -23514,6 +23563,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_select'(Head, [Head| Tail], Tail).
 '$lgt_select'(Head, [Head2| Tail], [Head2| Tail2]) :-
 	'$lgt_select'(Head, Tail, Tail2).
+
+
+% definition taken from the SWI-Prolog documentation
+'$lgt_variant'(Term1, Term2) :-
+	% avoid trouble in any shared variables
+	copy_term(Term1, Term1Copy),
+	copy_term(Term2, Term2Copy),
+	% ground and compare the term copies
+	numbervars(Term1Copy, 0, N),
+	numbervars(Term2Copy, 0, N),
+	Term1Copy == Term2Copy.
 
 
 '$lgt_variable_aliasing'(Term) :-

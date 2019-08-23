@@ -293,6 +293,7 @@ forall(Generate, Test) :-
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(naming, silent).
+'$lgt_default_flag'(duplicated_clauses, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(deprecated, warning).

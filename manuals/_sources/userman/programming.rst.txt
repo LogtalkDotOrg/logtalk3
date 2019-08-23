@@ -681,6 +681,14 @@ Lint flags
    are ``warning`` and ``silent`` (the usual default due to the current
    limitation to ASCII names and the computational cost of the checks).
 
+.. _flag_duplicated_clauses:
+.. index:: pair: duplicated_clauses; Flag
+
+``duplicated_clauses(Option)``
+   Controls warnings duplicated entity clauses. Possible option values
+   are ``warning`` and ``silent`` (the usual default due to the required
+   heavy computations).
+
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
