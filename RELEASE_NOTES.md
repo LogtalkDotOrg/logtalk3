@@ -50,6 +50,8 @@ predicate to retrieve the stream position in case of error instead of the
 standard `stream_property/2` predicate property `position/1` that is not
 always available.
 
+* FIXED: Harmless dynamic predicate warning in the SICStus Prolog adapter file.
+
 Documentation
 -------------
 
