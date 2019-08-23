@@ -33,6 +33,9 @@ that are used elsewhere in a clause.
 * FIXED: When a source file contains an `encoding/1` directive, open any
 included files using the same text encoding.
 
+* FIXED: Bug in the processing of multiple `initialization/1` directives in
+`create_object/4` goals where the first directive could be ignored.
+
 * FIXED: Typo in the `settings-sample.lgt` sample code for loading the new
 `tutor` tool. Thanks to Michael T. Richter for the bug report.
 
@@ -57,6 +60,13 @@ Tools
 * UPDATED: The `tutor` tool to explain the new lambda expression lint check
 and the domain error when trying to use the `set_prolog_flag/2` directive as
 an entity directive.
+
+
+Tests
+-----
+
+* ADDED: Unit test for multiple `initialization/1` directives in dynamically
+created objects.
 
 Examples
 --------

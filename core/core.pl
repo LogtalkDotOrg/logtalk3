@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 29, 0, b02)).
+'$lgt_version_data'(logtalk(3, 29, 0, b03)).
 
 
 
@@ -8195,7 +8195,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % by the call to the '$lgt_compile_runtime_term'/2 predicate
 
 '$lgt_compile_runtime_include_file_terms'([Term-_| Terms], File) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, runtime, _, '-'(0,0), _),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, runtime, _, '-'(-1, -1), _),
 	'$lgt_compile_runtime_term'(Term, Ctx),
 	'$lgt_compile_runtime_include_file_terms'(Terms, File).
 
@@ -8211,7 +8211,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % by the call to the '$lgt_compile_runtime_term'/2 predicate
 
 '$lgt_compile_runtime_terms'([Term| Terms]) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, runtime, _, '-'(0,0), _),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, runtime, _, '-'(-1, -1), _),
 	'$lgt_compile_runtime_term'(Term, Ctx),
 	'$lgt_compile_runtime_terms'(Terms).
 
@@ -8237,7 +8237,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% bypass control construct; term is final
 	!,
 	(	callable(Term) ->
-		assertz('$lgt_pp_entity_term_'({Term}, nil, '-'(0,0)))
+		assertz('$lgt_pp_entity_term_'({Term}, nil, '-'(-1, -1)))
 	;	var(Term) ->
 		throw(error(instantiation_error, term({Term})))
 	;	throw(error(type_error(callable, Term), term({Term})))
@@ -8711,16 +8711,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_compile_logtalk_directives'(+list(term), +compilation_context)
 %
-% compiles a list of Logtalk directives
+% compiles a list of Logtalk directives when dynamically creating an entity
 
 '$lgt_compile_logtalk_directives'([Directive| Directives], Ctx) :-
 	(	var(Directive) ->
 		throw(instantiation_error)
 	;	'$lgt_logtalk_directive'(Directive) ->
 		'$lgt_compile_logtalk_directive'(Directive, Ctx),
-		% only the compilation context mode should be shared between different directives
-		'$lgt_comp_ctx_mode'(Ctx, Mode),
-		'$lgt_comp_ctx_mode'(NewCtx, Mode),
+		% only the compilation context mode and lines should be shared between different directives
+		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, _, _, _, _, Mode, _, Lines, _),
+		'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines, _),
 		'$lgt_compile_logtalk_directives'(Directives, NewCtx)
 	;	functor(Directive, Functor, Arity),
 		throw(domain_error(directive, Functor/Arity))
@@ -19403,7 +19403,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	),
 	% an object may contain multiple initialization/1 directives
-	(	bagof(Goal, '$lgt_pp_final_object_initialization_'(Goal, _), GoalList) ->
+	(	bagof(Goal, Lines^'$lgt_pp_final_object_initialization_'(Goal, Lines), GoalList) ->
 		'$lgt_list_to_conjunction'(GoalList, Goals),
 		once(Goals)
 	;	true
