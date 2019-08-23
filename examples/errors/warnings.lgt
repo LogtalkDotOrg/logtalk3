@@ -354,7 +354,16 @@
 	bar(X,Y,Z,W,V,U) :-
 		setof(X, Y^Z^baz(W,V,U), _).
 
+	% singleton variables in the meta-argument are often an error
+
+	qux(X, L) :-
+		bagof(X, baz(X,1,_), L).
+
+	quux(X, L) :-
+		setof(X, baz(X,_,_), L).
+
 	baz(_, _, _).
+
 
 :- end_object.
 

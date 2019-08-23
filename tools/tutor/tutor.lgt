@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.13,
+		version is 0.14,
 		author is 'Paulo Moura',
-		date is 2019/08/20,
+		date is 2019/08/23,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -654,6 +654,7 @@
 			'solutions. This warning can likely be ignored if you are using'-[], nl,
 			'this meta-predicate to simply help count solutions.'-[], nl, nl
 		].
+
 	explain(suspicious_call(_, _, _, _, _, reason(existential_variables([_], _)))) -->
 		[	'A existentially-qualified variable must exist in the qualified goal.'-[], nl,
 			'Typo in the variable name?'-[], nl, nl
@@ -661,6 +662,23 @@
 	explain(suspicious_call(_, _, _, _, _, reason(existential_variables([_, _| _], _)))) -->
 		[	'Existentially-qualified variables must exist in the qualified goal.'-[], nl,
 			'Typos in the variable names?'-[], nl, nl
+		].
+
+	explain(suspicious_call(_, _, _, _, _, reason(singleton_variables(_, Goal, [Singleton])))) -->
+		{	copy_term(Goal-Singleton, GoalCopy-SingletonCopy),
+			numbervars(GoalCopy, 0, _)
+		},
+		[	'Variables in the goal argument of bagof/3 and setof/3 calls that are not'-[], nl,
+			'existentially-qualified can result in multiple solutions. If that is not'-[], nl,
+			'intended, write instead ~w^~w'-[SingletonCopy, GoalCopy], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, _, reason(singleton_variables(_, Goal, [Singleton| Singletons])))) -->
+		{	copy_term(Goal-[Singleton| Singletons], GoalCopy-SingletonsCopy),
+			numbervars(GoalCopy, 0, _)
+		},
+		[	'Variables in the goal argument of bagof/3 and setof/3 calls that are not'-[], nl,
+			'existentially-qualified can result in multiple solutions. If that is not'-[], nl,
+			'intended, write instead ~w^~w'-[SingletonsCopy, GoalCopy], nl, nl
 		].
 
 	% encoding/1 directive messages

@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 29, 0, b04)).
+'$lgt_version_data'(logtalk(3, 29, 0, b05)).
 
 
 
@@ -11875,6 +11875,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
 	fail.
+'$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
+	callable(QGoal),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_singleton_variables_in_meta_argument'(QGoal, Singletons, Ctx),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(singleton_variables(bagof/3,QGoal,Singletons)))),
+	fail.
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
@@ -11966,6 +11975,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
+	fail.
+'$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
+	callable(QGoal),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_singleton_variables_in_meta_argument'(QGoal, Singletons, Ctx),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(singleton_variables(setof/3,QGoal,Singletons)))),
 	fail.
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
@@ -14082,6 +14100,26 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_filter_missing_existential_variables'([Variable| ExistentialVariables], GoalVariables, [Variable| Variables]) :-
 	'$lgt_filter_missing_existential_variables'(ExistentialVariables, GoalVariables, Variables).
+
+
+
+% auxiliary predicate to find a singleton variable in the goal argument of
+% bagof/3 and setof/3 calls
+
+'$lgt_singleton_variables_in_meta_argument'(Goal, Singletons, Ctx) :-	
+	term_variables(Goal, Variables),
+	'$lgt_comp_ctx_term'(Ctx, Term),
+	bagof(
+		Singleton,
+		'$lgt_singleton_variable_in_meta_argument'(Variables, Term, Singleton),
+		Singletons
+	).
+
+
+'$lgt_singleton_variable_in_meta_argument'([Variable| _], Term, Variable) :-	
+	'$lgt_count_variable_occurrences'(Term, Variable, 1).
+'$lgt_singleton_variable_in_meta_argument'([_| Variables], Term, Variable) :-	
+	'$lgt_singleton_variable_in_meta_argument'(Variables, Term, Variable).
 
 
 

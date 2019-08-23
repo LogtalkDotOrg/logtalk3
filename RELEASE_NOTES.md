@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * ADDED: New compiler lint warning for lambda expression parameter variables
 that are used elsewhere in a clause.
 
+* ADDED: New compiler lint warning for `bagof/3` and `setof/3` where the goal
+argument contains singleton variables.
+
 * ADDED: New compiler lint warning for calls to the deprecated `name/2` Prolog
 built-in predicate.
 
@@ -79,8 +82,7 @@ created objects.
 Examples
 --------
 
-* UPDATED: The `lambdas` example to illustrate the new lint warning for lambda
-expression parameters.
+* UPDATED: The `lambdas` example to illustrate the new lint warnings.
 
 * FIXED: Lambda expression examples and tests in the `lambdas` example to use
 fresh variables for all lambda expression parameters.
