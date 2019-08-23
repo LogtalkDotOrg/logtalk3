@@ -36,6 +36,9 @@ included files using the same text encoding.
 * FIXED: Bug in the processing of multiple `initialization/1` directives in
 `create_object/4` goals where the first directive could be ignored.
 
+* FIXED: Reporting of non-portable built-in predicate calls when the
+predicates are being redefined.
+
 * FIXED: Typo in the `settings-sample.lgt` sample code for loading the new
 `tutor` tool. Thanks to Michael T. Richter for the bug report.
 

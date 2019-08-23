@@ -17305,7 +17305,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_logtalk_built_in_predicate'(Head, _),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
-	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
+	retractall('$lgt_pp_non_portable_predicate_'(Head, _, _)),
 	(	'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
@@ -17318,7 +17318,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_prolog_built_in_predicate'(Head),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
-	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
+	retractall('$lgt_pp_non_portable_predicate_'(Head, _, _)),
 	(	'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
