@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>multifile/1 &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="private/1" href="private_1.html" />
+    <link rel="prev" title="mode/2" href="mode_2.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Directives</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="source_file_directives.html">Source file directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conditional_compilation_directives.html">Conditional compilation directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="entity_directives.html">Entity directives</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="predicate_directives.html">Predicate directives</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alias_2.html">alias/2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="coinductive_1.html">coinductive/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="discontiguous_1.html">discontiguous/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_1.html">dynamic/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="info_2.html">info/2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meta_predicate_1.html">meta_predicate/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meta_non_terminal_1.html">meta_non_terminal/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode_2.html">mode/2</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">multifile/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="op_3.html">op/3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="private_1.html">private/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="protected_1.html">protected/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="public_1.html">public/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="synchronized_1.html">synchronized/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uses_2.html">uses/2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="use_module_2.html">use_module/2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Manual</a> &raquo;</li>
+        
+          <li><a href="index.html">Directives</a> &raquo;</li>
+        
+          <li><a href="predicate_directives.html">Predicate directives</a> &raquo;</li>
+        
+      <li>multifile/1</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/directives/multifile_1.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multifile-1">
+<span id="directives-multifile-1"></span><span id="index-0"></span><h1>multifile/1<a class="headerlink" href="#multifile-1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>multifile(<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>)
+multifile((<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...))
+multifile([<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...])
+
+multifile(<span class="nv">Entity</span><span class="o">::</span><span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>)
+multifile((<span class="nv">Entity</span><span class="o">::</span><span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...))
+multifile([<span class="nv">Entity</span><span class="o">::</span><span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...])
+
+multifile(<span class="nv">Module</span><span class="o">:</span><span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>)
+multifile((<span class="nv">Module</span><span class="o">:</span><span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...))
+multifile([<span class="nv">Module</span><span class="o">:</span><span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...])
+
+multifile(<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>)
+multifile((<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...))
+multifile([<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...])
+
+multifile(<span class="nv">Entity</span><span class="o">::</span><span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>)
+multifile((<span class="nv">Entity</span><span class="o">::</span><span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...))
+multifile([<span class="nv">Entity</span><span class="o">::</span><span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...])
+
+multifile(<span class="nv">Module</span><span class="o">:</span><span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>)
+multifile((<span class="nv">Module</span><span class="o">:</span><span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...))
+multifile([<span class="nv">Module</span><span class="o">:</span><span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...])
+</pre></div>
+</div>
+<p>Declares multifile predicates and multifile grammar rule non-terminals. In the
+case of object or category multifile predicates, the predicate (or non-terminal)
+must also have a <a class="reference internal" href="../../glossary.html#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> in the
+object or category holding its <em>primary declaration</em> (i.e. the declaration
+without the <code class="docutils literal notranslate"><span class="pre">Entity::</span></code> prefix). Entities holding multifile predicate primary
+declarations must be compiled and loaded prior to any entities contributing
+with clauses for the multifile predicates (to prevent using multifile
+predicates to break entity encapsulation).</p>
+<p>Protocols cannot declare or define multifile predicates as protocols cannot
+contain predicate definitions.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some backend Prolog compilers declare <code class="docutils literal notranslate"><span class="pre">multifile</span></code> as an operator
+for a lighter syntax. But this makes the code non-portable and is
+a practice best avoided.</p>
+</div>
+</div>
+<div class="section" id="template-and-modes">
+<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>multifile(<span class="o">+</span>qualified_predicate_indicator_term)
+multifile(<span class="o">+</span>qualified_non_terminal_indicator_term)
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(table<span class="o">/</span><span class="m">3</span>).
+<span class="p">:- </span><span class="k">multifile</span>(user<span class="o">::</span>hook<span class="o">/</span><span class="m">2</span>).
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a>,
+<a class="reference internal" href="protected_1.html#directives-protected-1"><span class="std std-ref">protected/1</span></a>,
+<a class="reference internal" href="private_1.html#directives-private-1"><span class="std std-ref">private/1</span></a>,
+<a class="reference internal" href="../methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="private_1.html" class="btn btn-neutral float-right" title="private/1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mode_2.html" class="btn btn-neutral float-left" title="mode/2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

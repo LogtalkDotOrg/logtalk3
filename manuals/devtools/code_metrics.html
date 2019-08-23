@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>code_metrics &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="dead_code_scanner" href="dead_code_scanner.html" />
+    <link rel="prev" title="assertions" href="assertions.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#available-metrics">Available metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-new-metrics">Defining new metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#third-party-tools">Third-party tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger.html"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Tools</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/devtools/code_metrics.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="code-metrics">
+<h1><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code><a class="headerlink" href="#code-metrics" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this tool is to assess qualities of source code that may
+predict negative aspects such as entity coupling, cohesion, complexity,
+error-proneness, and overall maintainability. It is meant to be
+extensible via the addition of objects implementing new metrics.</p>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>To consult this tool API documentation, open in a web browser the link:</p>
+<p><a class="reference external" href="https://logtalk.org/docs/library_index.html#code-metrics">docs/library_index.html#code-metrics</a></p>
+<p>For sample queries, please see the <a class="reference external" href="SCRIPT.txt">SCRIPT.txt</a> file in
+the tool directory.</p>
+</div>
+<div class="section" id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<p>This tool can be loaded using the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(code_metrics(loader)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="available-metrics">
+<h2>Available metrics<a class="headerlink" href="#available-metrics" title="Permalink to this headline">¶</a></h2>
+<p>Currently, the following metrics are provided:</p>
+<ul class="simple">
+<li><p>Number of Clauses (<code class="docutils literal notranslate"><span class="pre">noc_metric</span></code>)</p></li>
+<li><p>Number of Rules (<code class="docutils literal notranslate"><span class="pre">nor_metric</span></code>)</p></li>
+<li><p>Unique Predicate Nodes (<code class="docutils literal notranslate"><span class="pre">upn_metric</span></code>)</p></li>
+<li><p>Cyclomatic Complexity (<code class="docutils literal notranslate"><span class="pre">cc_metric</span></code>)</p></li>
+<li><p>Depth of Inheritance (<code class="docutils literal notranslate"><span class="pre">dit_metric</span></code>)</p></li>
+<li><p>Efferent coupling, afferent coupling, instability, and abstractness
+(<code class="docutils literal notranslate"><span class="pre">coupling_metric</span></code>)</p></li>
+<li><p>Documentation (<code class="docutils literal notranslate"><span class="pre">doc_metric</span></code>)</p></li>
+<li><p>Source code size (<code class="docutils literal notranslate"><span class="pre">size_metric</span></code>)</p></li>
+<li><p>Halstead complexity (<code class="docutils literal notranslate"><span class="pre">halstead_metric</span></code>)</p></li>
+</ul>
+<p>All metrics require the source code to be analyzed to be loaded with the
+<code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on.</p>
+<p>A helper object, <code class="docutils literal notranslate"><span class="pre">code_metrics</span></code>, is also provided allowing running all
+loaded individual metrics.</p>
+<p>For usage examples, see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory.</p>
+<p>For code coverage metrics, see the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool documentation.</p>
+<p>For interpretation of the coupling metric scores, see e.g. the original
+paper by Robert Martin, “OO Design Quality Metrics”:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span>citeulike<span class="o">:</span><span class="m">1579528</span>,
+    author <span class="o">=</span> <span class="s">&quot;Martin, Robert&quot;</span>,
+    booktitle <span class="o">=</span> <span class="s">&quot;Workshop Pragmatic and Theoretical Directions in Object-Oriented Software Metrics&quot;</span>,
+    citeulike<span class="o">-</span>article<span class="o">-</span>id <span class="o">=</span> <span class="m">1579528</span>,
+    citeulike<span class="o">-</span>linkout<span class="o">-</span><span class="m">0</span> <span class="o">=</span> <span class="s">&quot;http://www.objectmentor.com/resources/articles/oodmetrc.pdf&quot;</span>,
+    keywords <span class="o">=</span> <span class="s">&quot;diplomarbeit&quot;</span>,
+    organization <span class="o">=</span> <span class="s">&quot;OOPSLA&#39;94&quot;</span>,
+    posted<span class="o">-</span>at <span class="o">=</span> <span class="s">&quot;2007-08-21 11:08:44&quot;</span>,
+    priority <span class="o">=</span> <span class="m">0</span>,
+    title <span class="o">=</span> <span class="s">&quot;OO Design Quality Metrics - An Analysis of Dependencies&quot;</span>,
+    url <span class="o">=</span> <span class="s">&quot;http://www.objectmentor.com/resources/articles/oodmetrc.pdf&quot;</span>,
+    year <span class="o">=</span> <span class="m">1994</span>
+<span class="k">}</span>
+</pre></div>
+</div>
+<p>The Halstead metric computation uses the reflection API for performance.
+The main consequence of this choice is that we abstract all predicate
+arguments. A computation closer to the original definition of the metric
+would require switching to use the parser to collect information on
+syntactic literals, which would imply a much large computation cost.</p>
+<p>The coupling metric was also influenced by the metrics rating system in
+Microsoft Visual Studio and aims to eventually emulate the functionality
+of a maintainability index score.</p>
+<p>The unique predicate nodes (UPN) metric is described in the following
+paper:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>article<span class="k">{</span><span class="nv">MOORES199845</span>,
+    title <span class="o">=</span> <span class="s">&quot;Applying Complexity Measures to Rule-Based Prolog Programs&quot;</span>,
+    journal <span class="o">=</span> <span class="s">&quot;Journal of Systems and Software&quot;</span>,
+    volume <span class="o">=</span> <span class="s">&quot;44&quot;</span>,
+    number <span class="o">=</span> <span class="s">&quot;1&quot;</span>,
+    pages <span class="o">=</span> <span class="s">&quot;45 - 52&quot;</span>,
+    year <span class="o">=</span> <span class="s">&quot;1998&quot;</span>,
+    issn <span class="o">=</span> <span class="s">&quot;0164-1212&quot;</span>,
+    doi <span class="o">=</span> <span class="s">&quot;https://doi.org/10.1016/S0164-1212(98)10042-0&quot;</span>,
+    url <span class="o">=</span> <span class="s">&quot;http://www.sciencedirect.com/science/article/pii/S0164121298100420&quot;</span>,
+    author <span class="o">=</span> <span class="s">&quot;Trevor T Moores&quot;</span>
+<span class="k">}</span>
+</pre></div>
+</div>
+<p>The cyclomatic complexity metric uses the same predicate abstraction as
+the UPN metric and it is also described in the above paper besides the
+original paper by Thomas J. McCabe:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span><span class="nv">McCabe</span><span class="o">:</span><span class="m">1976</span><span class="o">:</span><span class="nv">CM</span><span class="o">:</span><span class="m">800253.807712</span>,
+    author <span class="o">=</span> <span class="s">&quot;McCabe, Thomas J.&quot;</span>,
+    title <span class="o">=</span> <span class="s">&quot;A Complexity Measure&quot;</span>,
+    booktitle <span class="o">=</span> <span class="s">&quot;Proceedings of the 2Nd International Conference on Software Engineering&quot;</span>,
+    series <span class="o">=</span> <span class="s">&quot;ICSE &#39;76&quot;</span>,
+    year <span class="o">=</span> <span class="m">1976</span>,
+    location <span class="o">=</span> <span class="s">&quot;San Francisco, California, USA&quot;</span>,
+    pages <span class="o">=</span> <span class="s">&quot;407--&quot;</span>,
+    url <span class="o">=</span> <span class="s">&quot;http://dl.acm.org/citation.cfm?id=800253.807712&quot;</span>,
+    acmid <span class="o">=</span> <span class="m">807712</span>,
+    publisher <span class="o">=</span> <span class="s">&quot;IEEE Computer Society Press&quot;</span>,
+    address <span class="o">=</span> <span class="s">&quot;Los Alamitos, CA, USA&quot;</span>,
+    keywords <span class="o">=</span> <span class="s">&quot;Basis, Complexity measure, Control flow, Decomposition, Graph theory, Independence, Linear, Modularization, Programming, Reduction, Software, Testing&quot;</span>,
+<span class="k">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-new-metrics">
+<h2>Defining new metrics<a class="headerlink" href="#defining-new-metrics" title="Permalink to this headline">¶</a></h2>
+<p>New metrics can be implemented by defining an object that imports the
+<code class="docutils literal notranslate"><span class="pre">code_metric</span></code> category and implements its score predicates. There is
+also a <code class="docutils literal notranslate"><span class="pre">code_metrics_utilities</span></code> category that defines useful
+predicates for the definition of metrics.</p>
+</div>
+<div class="section" id="third-party-tools">
+<h2>Third-party tools<a class="headerlink" href="#third-party-tools" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cloc</span></code> is an open-source command-line program that counts blank lines,
+comment lines, and lines of source code in many programming languages
+including Logtalk. Available at
+<a class="reference external" href="https://github.com/AlDanial/cloc">https://github.com/AlDanial/cloc</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">ohcount</span></code> is an open-source command-line program that counts blank
+lines, comment lines, and lines of source code in many programming
+languages including Logtalk. Available at
+<a class="reference external" href="https://github.com/blackducksoftware/ohcount">https://github.com/blackducksoftware/ohcount</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">tokei</span></code> is an open-source command-line program that counts blank
+lines, comment lines, and lines of source code in many programming
+languages including Logtalk. Available at
+<a class="reference external" href="https://github.com/Aaronepower/tokei">https://github.com/Aaronepower/tokei</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dead_code_scanner.html" class="btn btn-neutral float-right" title="dead_code_scanner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="assertions.html" class="btn btn-neutral float-left" title="assertions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

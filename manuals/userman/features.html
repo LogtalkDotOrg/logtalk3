@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Main features &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Nomenclature" href="nomenclature.html" />
+    <link rel="prev" title="Declarative object-oriented programming" href="declarative.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Main features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#integration-of-logic-and-object-oriented-programming">Integration of logic and object-oriented programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-of-event-driven-and-object-oriented-programming">Integration of event-driven and object-oriented programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-component-based-programming">Support for component-based programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-both-prototype-and-class-based-systems">Support for both prototype and class-based systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-multiple-object-hierarchies">Support for multiple object hierarchies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#separation-between-interface-and-implementation">Separation between interface and implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#private-protected-and-public-inheritance">Private, protected and public inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#private-protected-and-public-object-predicates">Private, protected and public object predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parametric-objects">Parametric objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-multi-threading-programming-support">High level multi-threading programming support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smooth-learning-curve">Smooth learning curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compatibility-with-most-prolog-systems-and-the-iso-standard">Compatibility with most Prolog systems and the ISO standard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance">Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logtalk-scope">Logtalk scope</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog integration and migration guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Manual</a> &raquo;</li>
+        
+      <li>Main features</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/userman/features.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="main-features">
+<span id="features-features"></span><h1>Main features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h1>
+<p>Several years ago, I decided that the best way to learn object-oriented
+programming was to build my own object-oriented language. Prolog being
+always my favorite language, I chose to extend it with object-oriented
+capabilities. Strong motivation also come from my frustration with
+Prolog shortcomings for writing large applications. Eventually this work
+has led to the Logtalk programming language as its know today. The first
+system to use the name Logtalk appeared in February 1995. At that
+time, Logtalk was mainly an experiment in computational reflection with
+a rudimentary runtime and no compiler. Based on feedback by users and on
+the author subsequent work, the name was retained and Logtalk as created
+as a full programming language focusing on using object-oriented concepts
+for code encapsulation and reuse. Development started on January 1998 with
+the first public alpha version released in July 1998. The first stable
+release (2.0) was published in February 1999. Development of the third
+generation of Logtalk started in 2012 with the first public alpha version
+in August 2012 and the first stable release (3.0.0) in January 2015.</p>
+<p>Logtalk provides the following features:</p>
+<div class="section" id="integration-of-logic-and-object-oriented-programming">
+<span id="features-logic"></span><h2>Integration of logic and object-oriented programming<a class="headerlink" href="#integration-of-logic-and-object-oriented-programming" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Logtalk tries to bring together the main advantages of these two
+programming paradigms. On one hand, the object orientation allows us
+to work with the same set of entities in the successive phases of
+application development, giving us a way of organizing and
+encapsulating the knowledge of each entity within a given domain. On
+the other hand, logic programming allows us to represent, in a
+declarative way, the knowledge we have of each entity. Together,
+these two advantages allow us to minimize the distance between an
+application and its problem domain, turning the writing and
+maintenance of programming easier and more productive.</p>
+<p>From a pragmatic perspective, Logtalk objects provide Prolog with
+the possibility of defining several namespaces, instead of the
+traditional Prolog single database, addressing some of the needs
+of large software projects.</p>
+</div></blockquote>
+</div>
+<div class="section" id="integration-of-event-driven-and-object-oriented-programming">
+<span id="features-events"></span><h2>Integration of event-driven and object-oriented programming<a class="headerlink" href="#integration-of-event-driven-and-object-oriented-programming" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Event-driven programming enables the building of reactive systems,
+where computing which takes place at each moment is a result of the
+observation of occurring events. This integration complements
+object-oriented programming, in which each computing is initiated by
+the explicit sending of a message to an object. The user dynamically
+defines what events are to be observed and establishes monitors for
+these events. This is specially useful when representing
+relationships between objects that imply constraints in the state of
+participating objects <a class="reference internal" href="../bibliography.html#rumbaugh87" id="id1"><span>[Rumbaugh87]</span></a>, <a class="reference internal" href="../bibliography.html#rumbaugh88" id="id2"><span>[Rumbaugh88]</span></a>, <a class="reference internal" href="../bibliography.html#fornarino-et-al-89" id="id3"><span>[Fornarino_et_al_89]</span></a>,
+<a class="reference internal" href="../bibliography.html#razek92" id="id4"><span>[Razek92]</span></a>. Other common uses are
+reflective applications like code debugging or profiling <a class="reference internal" href="../bibliography.html#maes87" id="id5"><span>[Maes87]</span></a>.
+Predicates can be implicitly
+called when a spied event occurs, allowing programming solutions
+which minimize object coupling. In addition, events provide support
+for behavioral reflection and can be used to implement the concepts
+of <em>pointcut</em> and <em>advice</em> found on Aspect-Oriented Programming.</p>
+</div></blockquote>
+</div>
+<div class="section" id="support-for-component-based-programming">
+<span id="features-categories"></span><h2>Support for component-based programming<a class="headerlink" href="#support-for-component-based-programming" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Predicates can be encapsulated inside <em>categories</em> which can be
+imported by any object, without any code duplication and irrespective
+of object hierarchies. A category is a first-class encapsulation
+entity, at the same level as objects and protocols, which can be used
+as a component when building new objects. Thus, objects may be
+defined through composition of categories, which act as fine-grained
+units of code reuse. Categories may also extend existing objects.
+Categories can be used to implement <em>mixins</em> and <em>aspects</em>.
+Categories allows for code reuse between non-related objects,
+independent of hierarchy relations, in the same vein as protocols
+allow for interface reuse.</p>
+</div></blockquote>
+</div>
+<div class="section" id="support-for-both-prototype-and-class-based-systems">
+<span id="features-both"></span><h2>Support for both prototype and class-based systems<a class="headerlink" href="#support-for-both-prototype-and-class-based-systems" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Almost any (if not all) object-oriented languages available today are
+either class-based or prototype-based <a class="reference internal" href="../bibliography.html#lieberman86" id="id6"><span>[Lieberman86]</span></a>, with a strong predominance
+of class-based languages. Logtalk provides support for both hierarchy
+types. That is, we can have both prototype and class hierarchies in
+the same application. Prototypes solve a problem of class-based
+systems where we sometimes have to define a class that will have only
+one instance in order to reuse a piece of code. Classes solves a dual
+problem in prototype based systems where it is not possible to
+encapsulate some code to be reused by other objects but not by the
+encapsulating object. Stand-alone objects, that is, objects that do
+not belong to any hierarchy, are a convenient solution to encapsulate
+code that will be reused by several unrelated objects.</p>
+</div></blockquote>
+</div>
+<div class="section" id="support-for-multiple-object-hierarchies">
+<span id="features-multiple"></span><h2>Support for multiple object hierarchies<a class="headerlink" href="#support-for-multiple-object-hierarchies" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Languages like Smalltalk-80 <a class="reference internal" href="../bibliography.html#goldberg83" id="id7"><span>[Goldberg83]</span></a>, Objective-C <a class="reference internal" href="../bibliography.html#cox86" id="id8"><span>[Cox86]</span></a> and Java
+<a class="reference internal" href="../bibliography.html#joy-et-al-00" id="id9"><span>[Joy_et_al_00]</span></a> define a single hierarchy rooted
+in a class usually named <code class="docutils literal notranslate"><span class="pre">Object</span></code>. This makes it easy to ensure
+that all objects share a common behavior but also tends to result in
+lengthy hierarchies where it is difficult to express objects which
+represent exceptions to default behavior. In Logtalk we can have
+multiple, independent, object hierarchies. Some of them can be
+prototype-based while others can be class-based. Furthermore,
+stand-alone objects provide a simple way to encapsulate utility
+predicates that do not need or fit in an object hierarchy.</p>
+</div></blockquote>
+</div>
+<div class="section" id="separation-between-interface-and-implementation">
+<span id="features-interface"></span><h2>Separation between interface and implementation<a class="headerlink" href="#separation-between-interface-and-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>This is an expected (should we say standard ?) feature of almost any
+modern programming language. Logtalk provides support for separating
+interface from implementation in a flexible way: predicate directives
+can be contained in an object, a category or a protocol (first-order
+entities in Logtalk) or can be spread in both objects, categories and
+protocols.</p>
+</div></blockquote>
+</div>
+<div class="section" id="private-protected-and-public-inheritance">
+<span id="features-inheritance"></span><h2>Private, protected and public inheritance<a class="headerlink" href="#private-protected-and-public-inheritance" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Logtalk supports private, protected and public inheritance in a
+similar way to C++ <a class="reference internal" href="../bibliography.html#stroustrup86" id="id10"><span>[Stroustrup86]</span></a>, enabling us to restrict
+the scope of inherited, imported or implemented predicates (by
+default inheritance is public).</p>
+</div></blockquote>
+</div>
+<div class="section" id="private-protected-and-public-object-predicates">
+<span id="features-predicates"></span><h2>Private, protected and public object predicates<a class="headerlink" href="#private-protected-and-public-object-predicates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Logtalk supports data hiding by implementing private, protected and
+public object predicates in a way similar to C++ <a class="reference internal" href="../bibliography.html#stroustrup86" id="id11"><span>[Stroustrup86]</span></a>. Private predicates can
+only be called from the container object. Protected predicates can be
+called by the container object or by the container descendants.
+Public predicates can be called from any object.</p>
+</div></blockquote>
+</div>
+<div class="section" id="parametric-objects">
+<span id="features-parametric"></span><h2>Parametric objects<a class="headerlink" href="#parametric-objects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Object names can be compound terms (instead of atoms), providing a
+way to parameterize object predicates. Parametric objects are
+implemented in a similar way to <code class="docutils literal notranslate"><span class="pre">L&amp;O</span></code> <a class="reference internal" href="../bibliography.html#mccabe92" id="id12"><span>[McCabe92]</span></a>, <code class="docutils literal notranslate"><span class="pre">OL(P)</span></code>
+<a class="reference internal" href="../bibliography.html#fromherz93" id="id13"><span>[Fromherz93]</span></a> or <code class="docutils literal notranslate"><span class="pre">SICStus</span> <span class="pre">Objects</span></code> <a class="reference internal" href="../bibliography.html#sicstus95" id="id14"><span>[SICStus95]</span></a> (however, access to
+parameter values is done via a built-in method instead of making the
+parameters scope global over the whole object). Parametric objects
+allows us to treat any predicate clause as defining an
+<em>instantiation</em> of a parametric object. Thus, a parametric object
+allows us to encapsulate and associate any number of predicates with
+a compound term.</p>
+</div></blockquote>
+</div>
+<div class="section" id="high-level-multi-threading-programming-support">
+<span id="features-threading"></span><h2>High level multi-threading programming support<a class="headerlink" href="#high-level-multi-threading-programming-support" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>High level multi-threading programming is available when running
+Logtalk with selected backend Prolog compilers, allowing objects to
+support both synchronous and asynchronous messages. Logtalk allows
+programmers to take advantage of modern multi-processor and
+multi-core computers without bothering with the details of creating
+and destroying threads, implement thread communication, or
+synchronizing threads.</p>
+</div></blockquote>
+</div>
+<div class="section" id="smooth-learning-curve">
+<span id="features-learning"></span><h2>Smooth learning curve<a class="headerlink" href="#smooth-learning-curve" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Logtalk has a smooth learning curve, by adopting standard Prolog
+syntax and by enabling an incremental learning and use of most of its
+features.</p>
+</div></blockquote>
+</div>
+<div class="section" id="compatibility-with-most-prolog-systems-and-the-iso-standard">
+<span id="features-compatibility"></span><h2>Compatibility with most Prolog systems and the ISO standard<a class="headerlink" href="#compatibility-with-most-prolog-systems-and-the-iso-standard" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Logtalk system has been designed to be compatible with most
+Prolog compilers and, in particular, with the ISO Prolog standard
+<a class="reference internal" href="../bibliography.html#iso95" id="id15"><span>[ISO95]</span></a>. It runs in almost any computer system with a modern Prolog
+compiler.</p>
+</div></blockquote>
+</div>
+<div class="section" id="performance">
+<span id="features-performance"></span><h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The current Logtalk implementation works as a trans-compiler: Logtalk
+source files are first compiled to Prolog source files, which are
+then compiled by the chosen Prolog compiler. Therefore, Logtalk
+performance necessarily depends on the <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>.
+The Logtalk compiler preserves the programmers choices when writing
+efficient code that takes advantage of tail recursion and
+first-argument indexing.</p>
+<p>As an object-oriented language, Logtalk can use both <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a>
+and <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> for matching messages and methods. Furthermore,
+Logtalk entities (objects, protocols, and categories) are
+independently compiled, allowing for a very flexible programming
+development. Entities can be edited, compiled, and loaded at runtime,
+without necessarily implying recompilation of all related entities.</p>
+<p>When dynamic binding is used, the Logtalk runtime engine implements
+caching of <a class="reference internal" href="../glossary.html#term-message-lookup"><span class="xref std std-term">message lookups</span></a> (including messages
+to <em>self</em> and <em>super</em> calls), ensuring a performance level close to what
+could be achieved when using static binding.</p>
+</div></blockquote>
+</div>
+<div class="section" id="logtalk-scope">
+<span id="features-scope"></span><h2>Logtalk scope<a class="headerlink" href="#logtalk-scope" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk, being a superset of Prolog, shares with it the same preferred
+areas of application but also extends them with those areas where
+object-oriented features provide an advantage compared to plain Prolog.
+Among these areas we have:</p>
+<dl class="simple">
+<dt><strong>Logic and object-oriented programming teaching and researching</strong></dt><dd><p>Logtalk smooth learning curve, combined with support for both
+prototype and class-based programming, protocols, components or
+aspects via category-based composition, and other advanced
+object-oriented features allow a smooth introduction to
+object-oriented programming to people with a background in Prolog
+programming. The distribution of Logtalk source code using an
+open-source license provides a framework for people to learn and then
+modify to try out new ideas on object-oriented programming research.
+In addition, the Logtalk distribution includes plenty of programming
+examples that can be used in the classroom for teaching logic and
+object-oriented programming concepts.</p>
+</dd>
+<dt><strong>Structured knowledge representations and knowledge-based systems</strong></dt><dd><p>Logtalk objects, coupled with event-driven programming features,
+enable easy implementation of frame-like systems and similar
+structured knowledge representations.</p>
+</dd>
+<dt><strong>Blackboard systems, agent-based systems, and systems with complex object relationships</strong></dt><dd><p>Logtalk support for event-driven programming can provide a basis for
+the dynamic and reactive nature of blackboard type applications.</p>
+</dd>
+<dt><strong>Highly portable applications</strong></dt><dd><p>Logtalk is compatible with most modern Prolog systems that support
+official and de facto standards. Used as a way to provide Prolog with
+namespaces, it avoids the porting problems of most Prolog module
+systems. Platform, operating system, or compiler specific code can be
+isolated from the rest of the code by encapsulating it in objects
+with well-defined interfaces.</p>
+</dd>
+<dt><strong>Alternative to a Prolog module system</strong></dt><dd><p>Logtalk can be used as an alternative to a Prolog compiler module
+system. Most Prolog applications that use modules can be converted
+into Logtalk applications, improving portability across Prolog
+systems and taking advantage of the stronger encapsulation and reuse
+framework provided by Logtalk object-oriented features.</p>
+</dd>
+<dt><strong>Integration with other programming languages</strong></dt><dd><p>Logtalk support for most key object-oriented features helps users
+integrating Prolog with object-oriented languages like C++, Java, or
+Smalltalk by facilitating a high-level mapping between the two
+languages.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nomenclature.html" class="btn btn-neutral float-right" title="Nomenclature" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="declarative.html" class="btn btn-neutral float-left" title="Declarative object-oriented programming" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

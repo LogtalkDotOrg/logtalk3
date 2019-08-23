@@ -1,0 +1,1961 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Grammar &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Control constructs" href="control/index.html" />
+    <link rel="prev" title="Reference Manual" href="index.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Grammar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#entities">Entities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#object-definition">Object definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#category-definition">Category definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocol-definition">Protocol definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-relations">Entity relations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#implemented-protocols">Implemented protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extended-protocols">Extended protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#imported-categories">Imported categories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extended-objects">Extended objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extended-categories">Extended categories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instantiated-objects">Instantiated objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specialized-objects">Specialized objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#complemented-objects">Complemented objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#entity-and-predicate-scope">Entity and predicate scope</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-identifiers">Entity identifiers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#object-identifiers">Object identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#category-identifiers">Category identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protocol-identifiers">Protocol identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-identifiers">Module identifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#source-file-names">Source file names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terms">Terms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#object-terms">Object terms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#category-terms">Category terms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#directives">Directives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#source-file-directives">Source file directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conditional-compilation-directives">Conditional compilation directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#object-directives">Object directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#category-directives">Category directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protocol-directives">Protocol directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#predicate-directives">Predicate directives</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#clauses-and-goals">Clauses and goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lambda-expressions">Lambda expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-properties">Entity properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#predicate-properties">Predicate properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiler-flags">Compiler flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="control/index.html">Control constructs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives/index.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods/index.html">Built-in methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Reference Manual</a> &raquo;</li>
+        
+      <li>Grammar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/grammar.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="grammar">
+<span id="grammar-grammar"></span><h1>Grammar<a class="headerlink" href="#grammar" title="Permalink to this headline">¶</a></h1>
+<p>The Logtalk grammar is here described using Backus-Naur Form syntax.
+Non-terminal symbols in <em>italics</em> have the definition found in the ISO
+Prolog Core standard. Terminal symbols are represented in a
+<code class="docutils literal notranslate"><span class="pre">fixed</span> <span class="pre">width</span> <span class="pre">font</span></code> and between double-quotes.</p>
+<div class="section" id="entities">
+<span id="grammar-entities"></span><h2>Entities<a class="headerlink" href="#entities" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">entity ::=</div>
+<div class="line-block">
+<div class="line">object |</div>
+<div class="line">category |</div>
+<div class="line">protocol</div>
+</div>
+</div>
+</div>
+<div class="section" id="object-definition">
+<span id="grammar-object-definition"></span><h2>Object definition<a class="headerlink" href="#object-definition" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">object ::=</div>
+<div class="line-block">
+<div class="line">begin_object_directive [ object_terms ] end_object_directive.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">begin_object_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">object(</span></code>” object_identifier [ “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_relations ] “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">end_object_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">end_object.</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_relations ::=</div>
+<div class="line-block">
+<div class="line">prototype_relations |</div>
+<div class="line">non_prototype_relations</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">prototype_relations ::=</div>
+<div class="line-block">
+<div class="line">prototype_relation |</div>
+<div class="line">prototype_relation “<code class="docutils literal notranslate"><span class="pre">,</span></code>” prototype_relations</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">prototype_relation ::=</div>
+<div class="line-block">
+<div class="line">implements_protocols |</div>
+<div class="line">imports_categories |</div>
+<div class="line">extends_objects</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_prototype_relations ::=</div>
+<div class="line-block">
+<div class="line">non_prototype_relation |</div>
+<div class="line">non_prototype_relation “<code class="docutils literal notranslate"><span class="pre">,</span></code>” non_prototype_relations</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_prototype_relation ::=</div>
+<div class="line-block">
+<div class="line">implements_protocols |</div>
+<div class="line">imports_categories |</div>
+<div class="line">instantiates_classes |</div>
+<div class="line">specializes_classes</div>
+</div>
+</div>
+</div>
+<div class="section" id="category-definition">
+<span id="grammar-category-definition"></span><h2>Category definition<a class="headerlink" href="#category-definition" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">category ::=</div>
+<div class="line-block">
+<div class="line">begin_category_directive [ category_terms ] end_category_directive.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">begin_category_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">category(</span></code>” category_identifier [ “<code class="docutils literal notranslate"><span class="pre">,</span></code>” category_relations ] “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">end_category_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">end_category.</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">category_relations ::=</div>
+<div class="line-block">
+<div class="line">category_relation |</div>
+<div class="line">category_relation “<code class="docutils literal notranslate"><span class="pre">,</span></code>” category_relations</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">category_relation ::=</div>
+<div class="line-block">
+<div class="line">implements_protocols |</div>
+<div class="line">extends_categories |</div>
+<div class="line">complements_objects</div>
+</div>
+</div>
+</div>
+<div class="section" id="protocol-definition">
+<span id="grammar-protocol-definition"></span><h2>Protocol definition<a class="headerlink" href="#protocol-definition" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">protocol ::=</div>
+<div class="line-block">
+<div class="line">begin_protocol_directive [ protocol_directives ] end_protocol_directive.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">begin_protocol_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">protocol(</span></code>” protocol_identifier [ “<code class="docutils literal notranslate"><span class="pre">,</span></code>” extends_protocols ] “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">end_protocol_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">end_protocol.</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="entity-relations">
+<span id="grammar-entity-relations"></span><h2>Entity relations<a class="headerlink" href="#entity-relations" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">extends_protocols ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">extends(</span></code>” extended_protocols “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extends_objects ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">extends(</span></code>” extended_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extends_categories ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">extends(</span></code>” extended_categories “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">implements_protocols ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">implements(</span></code>” implemented_protocols “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">imports_categories ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">imports(</span></code>” imported_categories “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">instantiates_classes ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">instantiates(</span></code>” instantiated_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">specializes_classes ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">specializes(</span></code>” specialized_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">complements_objects ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">complements(</span></code>” complemented_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="section" id="implemented-protocols">
+<span id="grammar-implemented-protocols"></span><h3>Implemented protocols<a class="headerlink" href="#implemented-protocols" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">implemented_protocols ::=</div>
+<div class="line-block">
+<div class="line">implemented_protocol |</div>
+<div class="line">implemented_protocol_sequence |</div>
+<div class="line">implemented_protocol_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">implemented_protocol ::=</div>
+<div class="line-block">
+<div class="line">protocol_identifier |</div>
+<div class="line">scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” protocol_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">implemented_protocol_sequence ::=</div>
+<div class="line-block">
+<div class="line">implemented_protocol |</div>
+<div class="line">implemented_protocol “<code class="docutils literal notranslate"><span class="pre">,</span></code>” implemented_protocol_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">implemented_protocol_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” implemented_protocol_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="extended-protocols">
+<span id="grammar-extended-protocols"></span><h3>Extended protocols<a class="headerlink" href="#extended-protocols" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">extended_protocols ::=</div>
+<div class="line-block">
+<div class="line">extended_protocol |</div>
+<div class="line">extended_protocol_sequence |</div>
+<div class="line">extended_protocol_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_protocol ::=</div>
+<div class="line-block">
+<div class="line">protocol_identifier |</div>
+<div class="line">scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” protocol_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_protocol_sequence ::=</div>
+<div class="line-block">
+<div class="line">extended_protocol |</div>
+<div class="line">extended_protocol “<code class="docutils literal notranslate"><span class="pre">,</span></code>” extended_protocol_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_protocol_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_protocol_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="imported-categories">
+<span id="grammar-imported-categories"></span><h3>Imported categories<a class="headerlink" href="#imported-categories" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">imported_categories ::=</div>
+<div class="line-block">
+<div class="line">imported_category |</div>
+<div class="line">imported_category_sequence |</div>
+<div class="line">imported_category_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">imported_category ::=</div>
+<div class="line-block">
+<div class="line">category_identifier |</div>
+<div class="line">scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” category_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">imported_category_sequence ::=</div>
+<div class="line-block">
+<div class="line">imported_category |</div>
+<div class="line">imported_category “<code class="docutils literal notranslate"><span class="pre">,</span></code>” imported_category_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">imported_category_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” imported_category_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="extended-objects">
+<span id="grammar-extended-objects"></span><h3>Extended objects<a class="headerlink" href="#extended-objects" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">extended_objects ::=</div>
+<div class="line-block">
+<div class="line">extended_object |</div>
+<div class="line">extended_object_sequence |</div>
+<div class="line">extended_object_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_object ::=</div>
+<div class="line-block">
+<div class="line">object_identifier |</div>
+<div class="line">scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” object_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_object_sequence ::=</div>
+<div class="line-block">
+<div class="line">extended_object |</div>
+<div class="line">extended_object “<code class="docutils literal notranslate"><span class="pre">,</span></code>” extended_object_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_object_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="extended-categories">
+<span id="grammar-extended-categories"></span><h3>Extended categories<a class="headerlink" href="#extended-categories" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">extended_categories ::=</div>
+<div class="line-block">
+<div class="line">extended_category |</div>
+<div class="line">extended_category_sequence |</div>
+<div class="line">extended_category_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_category ::=</div>
+<div class="line-block">
+<div class="line">category_identifier |</div>
+<div class="line">scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” category_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_category_sequence ::=</div>
+<div class="line-block">
+<div class="line">extended_category |</div>
+<div class="line">extended_category “<code class="docutils literal notranslate"><span class="pre">,</span></code>” extended_category_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">extended_category_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_category_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="instantiated-objects">
+<span id="grammar-instantiated-objects"></span><h3>Instantiated objects<a class="headerlink" href="#instantiated-objects" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">instantiated_objects ::=</div>
+<div class="line-block">
+<div class="line">instantiated_object |</div>
+<div class="line">instantiated_object_sequence |</div>
+<div class="line">instantiated_object_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">instantiated_object ::=</div>
+<div class="line-block">
+<div class="line">object_identifier |</div>
+<div class="line">scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” object_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">instantiated_object_sequence ::=</div>
+<div class="line-block">
+<div class="line">instantiated_object</div>
+<div class="line">instantiated_object “<code class="docutils literal notranslate"><span class="pre">,</span></code>” instantiated_object_sequence |</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">instantiated_object_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” instantiated_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="specialized-objects">
+<span id="grammar-specialized-objects"></span><h3>Specialized objects<a class="headerlink" href="#specialized-objects" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">specialized_objects ::=</div>
+<div class="line-block">
+<div class="line">specialized_object |</div>
+<div class="line">specialized_object_sequence |</div>
+<div class="line">specialized_object_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">specialized_object ::=</div>
+<div class="line-block">
+<div class="line">object_identifier |</div>
+<div class="line">scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” object_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">specialized_object_sequence ::=</div>
+<div class="line-block">
+<div class="line">specialized_object |</div>
+<div class="line">specialized_object “<code class="docutils literal notranslate"><span class="pre">,</span></code>” specialized_object_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">specialized_object_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” specialized_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="complemented-objects">
+<span id="grammar-complemented-objects"></span><h3>Complemented objects<a class="headerlink" href="#complemented-objects" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">complemented_objects ::=</div>
+<div class="line-block">
+<div class="line">object_identifier |</div>
+<div class="line">complemented_object_sequence |</div>
+<div class="line">complemented_object_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">complemented_object_sequence ::=</div>
+<div class="line-block">
+<div class="line">object_identifier |</div>
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” complemented_object_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">complemented_object_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” complemented_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="entity-and-predicate-scope">
+<span id="grammar-scope"></span><h3>Entity and predicate scope<a class="headerlink" href="#entity-and-predicate-scope" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">scope ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">public</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private</span></code>”</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="entity-identifiers">
+<span id="grammar-entity-identifiers"></span><h2>Entity identifiers<a class="headerlink" href="#entity-identifiers" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">entity_identifiers ::=</div>
+<div class="line-block">
+<div class="line">entity_identifier |</div>
+<div class="line">entity_identifier_sequence |</div>
+<div class="line">entity_identifier_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">entity_identifier ::=</div>
+<div class="line-block">
+<div class="line">object_identifier |</div>
+<div class="line">protocol_identifier |</div>
+<div class="line">category_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">entity_identifier_sequence ::=</div>
+<div class="line-block">
+<div class="line">entity_identifier |</div>
+<div class="line">entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” entity_identifier_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">entity_identifier_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” entity_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="section" id="object-identifiers">
+<span id="grammar-object-identifiers"></span><h3>Object identifiers<a class="headerlink" href="#object-identifiers" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">object_identifiers ::=</div>
+<div class="line-block">
+<div class="line">object_identifier |</div>
+<div class="line">object_identifier_sequence |</div>
+<div class="line">object_identifier_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_identifier ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em> |</div>
+<div class="line"><em>compound</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_identifier_sequence ::=</div>
+<div class="line-block">
+<div class="line">object_identifier |</div>
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_identifier_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” object_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="category-identifiers">
+<span id="grammar-category-identifiers"></span><h3>Category identifiers<a class="headerlink" href="#category-identifiers" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">category_identifiers ::=</div>
+<div class="line-block">
+<div class="line">category_identifier |</div>
+<div class="line">category_identifier_sequence |</div>
+<div class="line">category_identifier_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">category_identifier ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em> |</div>
+<div class="line"><em>compound</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">category_identifier_sequence ::=</div>
+<div class="line-block">
+<div class="line">category_identifier |</div>
+<div class="line">category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” category_identifier_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">category_identifier_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” category_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="protocol-identifiers">
+<span id="grammar-protocol-identifiers"></span><h3>Protocol identifiers<a class="headerlink" href="#protocol-identifiers" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">protocol_identifiers ::=</div>
+<div class="line-block">
+<div class="line">protocol_identifier |</div>
+<div class="line">protocol_identifier_sequence |</div>
+<div class="line">protocol_identifier_list</div>
+<div class="line"><br /></div>
+</div>
+<div class="line">protocol_identifier ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">protocol_identifier_sequence ::=</div>
+<div class="line-block">
+<div class="line">protocol_identifier |</div>
+<div class="line">protocol_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” protocol_identifier_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">protocol_identifier_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” protocol_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="module-identifiers">
+<span id="grammar-module-identifiers"></span><h3>Module identifiers<a class="headerlink" href="#module-identifiers" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">module_identifier ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="source-file-names">
+<span id="grammar-source-file-names"></span><h2>Source file names<a class="headerlink" href="#source-file-names" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">source_file_names ::=</div>
+<div class="line-block">
+<div class="line">source_file_name |</div>
+<div class="line">source_file_name_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">source_file_name ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em> |</div>
+<div class="line">library_source_file_name</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">library_source_file_name ::=</div>
+<div class="line-block">
+<div class="line">library_name “<code class="docutils literal notranslate"><span class="pre">(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">library_name ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">source_file_name_sequence ::=</div>
+<div class="line-block">
+<div class="line">source_file_name |</div>
+<div class="line">source_file_name “<code class="docutils literal notranslate"><span class="pre">,</span></code>” source_file_name_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">source_file_name_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” source_file_name_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="terms">
+<span id="grammar-terms"></span><h2>Terms<a class="headerlink" href="#terms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="object-terms">
+<span id="grammar-object-terms"></span><h3>Object terms<a class="headerlink" href="#object-terms" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">object_terms ::=</div>
+<div class="line-block">
+<div class="line">object_term |</div>
+<div class="line">object_term object_terms</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_term ::=</div>
+<div class="line-block">
+<div class="line">object_directive |</div>
+<div class="line">clause |</div>
+<div class="line">grammar_rule</div>
+</div>
+</div>
+</div>
+<div class="section" id="category-terms">
+<span id="grammar-category-terms"></span><h3>Category terms<a class="headerlink" href="#category-terms" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">category_terms ::=</div>
+<div class="line-block">
+<div class="line">category_term |</div>
+<div class="line">category_term category_terms</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">category_term ::=</div>
+<div class="line-block">
+<div class="line">category_directive |</div>
+<div class="line">clause |</div>
+<div class="line">grammar_rule</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="directives">
+<span id="grammar-directives"></span><h2>Directives<a class="headerlink" href="#directives" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="source-file-directives">
+<span id="grammar-source-file-directives"></span><h3>Source file directives<a class="headerlink" href="#source-file-directives" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">source_file_directives ::=</div>
+<div class="line-block">
+<div class="line">source_file_directive |</div>
+<div class="line">source_file_directive source_file_directives</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">source_file_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">encoding(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+<div class="line"><em>Prolog directives</em></div>
+</div>
+</div>
+</div>
+<div class="section" id="conditional-compilation-directives">
+<span id="grammar-conditional-compilation-directives"></span><h3>Conditional compilation directives<a class="headerlink" href="#conditional-compilation-directives" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">conditional_compilation_directives ::=</div>
+<div class="line-block">
+<div class="line">conditional_compilation_directive |</div>
+<div class="line">conditional_compilation_directive conditional_compilation_directives</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">conditional_compilation_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">if(</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">elif(</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">else.</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">endif.</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="object-directives">
+<span id="grammar-object-directives"></span><h3>Object directives<a class="headerlink" href="#object-directives" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">object_directives ::=</div>
+<div class="line-block">
+<div class="line">object_directive |</div>
+<div class="line">object_directive object_directives</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">initialization(</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">built_in.</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">threaded.</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">dynamic.</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” entity_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>” object_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">predicate_directives</div>
+</div>
+</div>
+</div>
+<div class="section" id="category-directives">
+<span id="grammar-category-directives"></span><h3>Category directives<a class="headerlink" href="#category-directives" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">category_directives ::=</div>
+<div class="line-block">
+<div class="line">category_directive |</div>
+<div class="line">category_directive category_directives</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">category_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">built_in.</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">dynamic.</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” entity_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>” object_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">predicate_directives</div>
+</div>
+</div>
+</div>
+<div class="section" id="protocol-directives">
+<span id="grammar-protocol-directives"></span><h3>Protocol directives<a class="headerlink" href="#protocol-directives" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">protocol_directives ::=</div>
+<div class="line-block">
+<div class="line">protocol_directive |</div>
+<div class="line">protocol_directive protocol_directives</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">protocol_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">built_in.</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">dynamic.</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” entity_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">predicate_directives</div>
+</div>
+</div>
+</div>
+<div class="section" id="predicate-directives">
+<span id="grammar-predicate-directives"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">predicate_directives ::=</div>
+<div class="line-block">
+<div class="line">predicate_directive |</div>
+<div class="line">predicate_directive predicate_directives</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_directive ::=</div>
+<div class="line-block">
+<div class="line">alias_directive |</div>
+<div class="line">synchronized_directive |</div>
+<div class="line">uses_directive |</div>
+<div class="line">use_module_directive |</div>
+<div class="line">scope_directive |</div>
+<div class="line">mode_directive |</div>
+<div class="line">meta_predicate_directive |</div>
+<div class="line">meta_non_terminal_directive |</div>
+<div class="line">info_directive |</div>
+<div class="line">dynamic_directive |</div>
+<div class="line">discontiguous_directive |</div>
+<div class="line">multifile_directive |</div>
+<div class="line">coinductive_directive |</div>
+<div class="line"><em>operator_directive</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">alias_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">alias(</span></code>“</div>
+<div class="line-block">
+<div class="line-block">
+<div class="line">entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_indicator_alias_list | non_terminal_indicator_alias_list</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">synchronized_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">synchronized(</span></code>” predicate_indicator_term | non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">uses_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>“</div>
+<div class="line-block">
+<div class="line">object_identifier | parameter_variable “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_indicator_alias_list | non_terminal_indicator_alias_list | operator_list</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">use_module_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">use_module(</span></code>“</div>
+<div class="line-block">
+<div class="line">module_identifier | parameter_variable “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">module_predicate_indicator_alias_list | module_non_terminal_indicator_alias_list | operator_list</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">scope_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">public(</span></code>” predicate_indicator_term | non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">protected(</span></code>” predicate_indicator_term | non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">private(</span></code>” predicate_indicator_term | non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">mode_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">mode(</span></code>“</div>
+<div class="line-block">
+<div class="line">predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">number_of_proofs</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_predicate_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">meta_predicate(</span></code>” meta_predicate_template_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_non_terminal_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">meta_non_terminal(</span></code>” meta_non_terminal_template_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">info_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>“</div>
+<div class="line-block">
+<div class="line">predicate_indicator | non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_info_list</div>
+</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">dynamic_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">dynamic(</span></code>” qualified_predicate_indicator_term | qualified_non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">discontiguous_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">discontiguous(</span></code>” predicate_indicator_term |</div>
+<div class="line">non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">multifile_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">multifile(</span></code>” qualified_predicate_indicator_term |</div>
+<div class="line">qualified_non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">coinductive_directive ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">coinductive(</span></code>” predicate_indicator_term |</div>
+<div class="line">coinductive_predicate_template_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">parameter_variable ::=</div>
+<div class="line-block">
+<div class="line"><em>_variable_</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_indicator_term ::=</div>
+<div class="line-block">
+<div class="line"><em>predicate_indicator</em> |</div>
+<div class="line">predicate_indicator_sequence |</div>
+<div class="line">predicate_indicator_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_indicator_sequence ::=</div>
+<div class="line-block">
+<div class="line"><em>predicate_indicator</em> |</div>
+<div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_indicator_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_indicator_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_indicator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">qualified_predicate_indicator_term ::=</div>
+<div class="line-block">
+<div class="line">qualified_predicate_indicator |</div>
+<div class="line">qualified_predicate_indicator_sequence |</div>
+<div class="line">qualified_predicate_indicator_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">qualified_predicate_indicator_sequence ::=</div>
+<div class="line-block">
+<div class="line">qualified_predicate_indicator |</div>
+<div class="line">qualified_predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” qualified_predicate_indicator_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">qualified_predicate_indicator_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” qualified_predicate_indicator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">qualified_predicate_indicator ::=</div>
+<div class="line-block">
+<div class="line">predicate_indicator |</div>
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |</div>
+<div class="line">category_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |</div>
+<div class="line">module_identifier “<code class="docutils literal notranslate"><span class="pre">:</span></code>” predicate_indicator</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_indicator_alias ::=</div>
+<div class="line-block">
+<div class="line"><em>predicate_indicator</em> |</div>
+<div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>predicate_indicator</em> |</div>
+<div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>predicate_indicator</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_indicator_alias_sequence ::=</div>
+<div class="line-block">
+<div class="line">predicate_indicator_alias |</div>
+<div class="line">predicate_indicator_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_indicator_alias_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_indicator_alias_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">module_predicate_indicator_alias ::=</div>
+<div class="line-block">
+<div class="line"><em>predicate_indicator</em> |</div>
+<div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>predicate_indicator</em> |</div>
+<div class="line"><em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">:</span></code>” <em>predicate_indicator</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">module_predicate_indicator_alias_sequence ::=</div>
+<div class="line-block">
+<div class="line">module_predicate_indicator_alias |</div>
+<div class="line">module_predicate_indicator_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>” module_predicate_indicator_alias_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">module_predicate_indicator_alias_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” module_predicate_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">module_non_terminal_indicator_alias ::=</div>
+<div class="line-block">
+<div class="line"><em>non_terminal_indicator</em> |</div>
+<div class="line"><em>non_terminal_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>non_terminal_indicator</em></div>
+<div class="line"><em>non_terminal_indicator</em> “<code class="docutils literal notranslate"><span class="pre">:</span></code>” <em>non_terminal_indicator</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">module_non_terminal_indicator_alias_sequence ::=</div>
+<div class="line-block">
+<div class="line">module_non_terminal_indicator_alias |</div>
+<div class="line">module_non_terminal_indicator_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>” module_non_terminal_indicator_alias_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">module_non_terminal_indicator_alias_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” module_non_terminal_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator_term ::=</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator |</div>
+<div class="line">non_terminal_indicator_sequence |</div>
+<div class="line">non_terminal_indicator_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator_sequence ::=</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator |</div>
+<div class="line">non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” non_terminal_indicator_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” non_terminal_indicator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator ::=</div>
+<div class="line-block">
+<div class="line"><em>functor</em> “<code class="docutils literal notranslate"><span class="pre">//</span></code>” <em>arity</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">qualified_non_terminal_indicator_term ::=</div>
+<div class="line-block">
+<div class="line">qualified_non_terminal_indicator |</div>
+<div class="line">qualified_non_terminal_indicator_sequence |</div>
+<div class="line">qualified_non_terminal_indicator_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">qualified_non_terminal_indicator_sequence ::=</div>
+<div class="line-block">
+<div class="line">qualified_non_terminal_indicator |</div>
+<div class="line">qualified_non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code> ” qualified_non_terminal_indicator_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">qualified_non_terminal_indicator_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” qualified_non_terminal_indicator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">qualified_non_terminal_indicator ::=</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator |</div>
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” non_terminal_indicator |</div>
+<div class="line">category_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” non_terminal_indicator |</div>
+<div class="line">module_identifier “<code class="docutils literal notranslate"><span class="pre">:</span></code>” non_terminal_indicator</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator_alias ::=</div>
+<div class="line-block">
+<div class="line"><em>non_terminal_indicator</em> |</div>
+<div class="line"><em>non_terminal_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>non_terminal_indicator</em></div>
+<div class="line"><em>non_terminal_indicator</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>non_terminal_indicator</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator_alias_sequence ::=</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator_alias |</div>
+<div class="line">non_terminal_indicator_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">non_terminal_indicator_alias_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_terminal_indicator_alias_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” non_terminal_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">operator_sequence ::=</div>
+<div class="line-block">
+<div class="line"><em>operator specification</em> |</div>
+<div class="line"><em>operator specification</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">operator_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">operator_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” operator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">coinductive_predicate_template_term ::=</div>
+<div class="line-block">
+<div class="line">coinductive_predicate_template |</div>
+<div class="line">coinductive_predicate_template_sequence |</div>
+<div class="line">coinductive_predicate_template_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">coinductive_predicate_template_sequence ::=</div>
+<div class="line-block">
+<div class="line">coinductive_predicate_template |</div>
+<div class="line">coinductive_predicate_template “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">coinductive_predicate_template_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">coinductive_predicate_template_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” coinductive_predicate_template_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">coinductive_predicate_template ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” coinductive_mode_terms “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">coinductive_mode_terms ::=</div>
+<div class="line-block">
+<div class="line">coinductive_mode_term |</div>
+<div class="line">coinductive_mode_terms “<code class="docutils literal notranslate"><span class="pre">,</span></code>” coinductive_mode_terms</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">coinductive_mode_term ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">+</span></code>” | “<code class="docutils literal notranslate"><span class="pre">-</span></code>“</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_mode_term ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” mode_terms “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">non_terminal_mode_term ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” mode_terms “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">mode_terms ::=</div>
+<div class="line-block">
+<div class="line">mode_term |</div>
+<div class="line">mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>” mode_terms</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">mode_term ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">&#64;</span></code>” [ type ] | “<code class="docutils literal notranslate"><span class="pre">+</span></code>” [ type ] | “<code class="docutils literal notranslate"><span class="pre">-</span></code>” [ type ] | “<code class="docutils literal notranslate"><span class="pre">?</span></code>” [</div>
+<div class="line">type ] |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">++</span></code>” [ type ] | “<code class="docutils literal notranslate"><span class="pre">--</span></code>” [ type ]</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">type ::=</div>
+<div class="line-block">
+<div class="line">prolog_type | logtalk_type | user_defined_type</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">prolog_type ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">term</span></code>” | “<code class="docutils literal notranslate"><span class="pre">nonvar</span></code>” | “<code class="docutils literal notranslate"><span class="pre">var</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">compound</span></code>” | “<code class="docutils literal notranslate"><span class="pre">ground</span></code>” | “<code class="docutils literal notranslate"><span class="pre">callable</span></code>” | “<code class="docutils literal notranslate"><span class="pre">list</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">atomic</span></code>” | “<code class="docutils literal notranslate"><span class="pre">atom</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number</span></code>” | “<code class="docutils literal notranslate"><span class="pre">integer</span></code>” | “<code class="docutils literal notranslate"><span class="pre">float</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">logtalk_type ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">object</span></code>” | “<code class="docutils literal notranslate"><span class="pre">category</span></code>” | “<code class="docutils literal notranslate"><span class="pre">protocol</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">event</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">user_defined_type ::=</div>
+<div class="line-block">
+<div class="line"><em>atom</em> |</div>
+<div class="line"><em>compound</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">number_of_proofs ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">zero</span></code>” | “<code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code>” | “<code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code>” | “<code class="docutils literal notranslate"><span class="pre">one</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">one_or_more</span></code>” | “<code class="docutils literal notranslate"><span class="pre">one_or_error</span></code>” | “<code class="docutils literal notranslate"><span class="pre">error</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_predicate_template_term ::=</div>
+<div class="line-block">
+<div class="line"><em>meta_predicate_template</em> |</div>
+<div class="line">meta_predicate_template_sequence |</div>
+<div class="line">meta_predicate_template_list</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_predicate_template_sequence ::=</div>
+<div class="line-block">
+<div class="line"><em>meta_predicate_template</em> |</div>
+<div class="line"><em>meta_predicate_template</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” meta_predicate_template_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_predicate_template_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” meta_predicate_template_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_predicate_template ::=</div>
+<div class="line-block">
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” meta_predicate_specifiers “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">category_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” meta_predicate_specifiers “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line"><em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” meta_predicate_specifiers “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_predicate_specifiers ::=</div>
+<div class="line-block">
+<div class="line">meta_predicate_specifier |</div>
+<div class="line">meta_predicate_specifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” meta_predicate_specifiers</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_predicate_specifier ::=</div>
+<div class="line-block">
+<div class="line"><em>non-negative integer</em> | “<code class="docutils literal notranslate"><span class="pre">::</span></code>” | “<code class="docutils literal notranslate"><span class="pre">^</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">*</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">meta_non_terminal_template_term ::=</div>
+<div class="line-block">
+<div class="line">meta_predicate_template_term</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">entity_info_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[]</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” entity_info_item “<code class="docutils literal notranslate"><span class="pre">is</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">|</span></code>” entity_info_list</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">entity_info_item ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">comment</span></code>” | “<code class="docutils literal notranslate"><span class="pre">remarks</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">author</span></code>” | “<code class="docutils literal notranslate"><span class="pre">version</span></code>” | “<code class="docutils literal notranslate"><span class="pre">date</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">copyright</span></code>” | “<code class="docutils literal notranslate"><span class="pre">license</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">parameters</span></code>” | “<code class="docutils literal notranslate"><span class="pre">parnames</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">see_also</span></code>” |</div>
+<div class="line"><em>atom</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_info_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[]</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_info_item “<code class="docutils literal notranslate"><span class="pre">is</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">|</span></code>” predicate_info_list “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_info_item ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">comment</span></code>” | “<code class="docutils literal notranslate"><span class="pre">remarks</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">arguments</span></code>” | “<code class="docutils literal notranslate"><span class="pre">argnames</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">redefinition</span></code>” | “<code class="docutils literal notranslate"><span class="pre">allocation</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">examples</span></code>” | “<code class="docutils literal notranslate"><span class="pre">exceptions</span></code>” |</div>
+<div class="line"><em>atom</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_alias ::=</div>
+<div class="line-block">
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">as</span></code>” object_identifier</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_alias_sequence ::=</div>
+<div class="line-block">
+<div class="line">object_alias |</div>
+<div class="line">object_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_alias_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_alias_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” object_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="clauses-and-goals">
+<span id="grammar-clauses"></span><h2>Clauses and goals<a class="headerlink" href="#clauses-and-goals" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">clause ::=</div>
+<div class="line-block">
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>head</em> “<code class="docutils literal notranslate"><span class="pre">:-</span></code>” <em>body</em> |</div>
+<div class="line">module_identifier “<code class="docutils literal notranslate"><span class="pre">:</span></code>” <em>head</em> “<code class="docutils literal notranslate"><span class="pre">:-</span></code>” <em>body</em> |</div>
+<div class="line"><em>head</em> :- <em>body</em> |</div>
+<div class="line"><em>fact</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">goal ::=</div>
+<div class="line-block">
+<div class="line">message_sending |</div>
+<div class="line">super_call |</div>
+<div class="line">external_call |</div>
+<div class="line">context_switching_call |</div>
+<div class="line"><em>callable</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">message_sending ::=</div>
+<div class="line-block">
+<div class="line">message_to_object |</div>
+<div class="line">message_delegation |</div>
+<div class="line">message_to_self</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">message_to_object ::=</div>
+<div class="line-block">
+<div class="line">receiver “<code class="docutils literal notranslate"><span class="pre">::</span></code>” messages</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">message_delegation ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” message_to_object “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">message_to_self ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">::</span></code>” messages</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">super_call ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">^^</span></code>” message</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">messages ::=</div>
+<div class="line-block">
+<div class="line">message |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">(</span></code>” message “<code class="docutils literal notranslate"><span class="pre">,</span></code>” messages “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">(</span></code>” message “<code class="docutils literal notranslate"><span class="pre">;</span></code>” messages “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">(</span></code>” message “<code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>” messages “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">message ::=</div>
+<div class="line-block">
+<div class="line"><em>callable</em> |</div>
+<div class="line"><em>variable</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">receiver ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">{</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">}</span></code>” |</div>
+<div class="line">object_identifier |</div>
+<div class="line"><em>variable</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">external_call ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">{</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">}</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">context_switching_call ::=</div>
+<div class="line-block">
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>” <em>goal</em></div>
+</div>
+</div>
+</div>
+<div class="section" id="lambda-expressions">
+<span id="grammar-lambdas"></span><h2>Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">lambda_expression ::=</div>
+<div class="line-block">
+<div class="line">lambda_free_variables “<code class="docutils literal notranslate"><span class="pre">/</span></code>” lambda_parameters “<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>” <em>callable</em> |</div>
+<div class="line">lambda_free_variables “<code class="docutils literal notranslate"><span class="pre">/</span></code>” <em>callable</em> |</div>
+<div class="line">lambda_parameters “<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>” <em>callable</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">lambda_free_variables ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">{</span></code>” <em>conjunction of variables</em> “<code class="docutils literal notranslate"><span class="pre">}</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">{</span></code>” <em>variable</em> “<code class="docutils literal notranslate"><span class="pre">}</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">{}</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">lambda_parameters ::=</div>
+<div class="line-block">
+<div class="line"><em>list of terms</em> |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[]</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="entity-properties">
+<span id="grammar-entity-properties"></span><h2>Entity properties<a class="headerlink" href="#entity-properties" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">category_property ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">static</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">built_in</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">lines(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">events</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">source_data</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">defines(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">includes(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">provides(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">alias(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_alias_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">calls(</span></code>” predicate “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_call_update_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">updates(</span></code>” predicate “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_call_update_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_user_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">debugging</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">object_property ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">static</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">built_in</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">threaded</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">lines(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">dynamic_declarations</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">events</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">source_data</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">complements(</span></code>” “<code class="docutils literal notranslate"><span class="pre">allow</span></code>” | “<code class="docutils literal notranslate"><span class="pre">restrict</span></code>” “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">complements</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">defines(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">includes(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">provides(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">alias(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_alias_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">calls(</span></code>” predicate “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_call_update_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">updates(</span></code>” predicate “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_call_update_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_user_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">module</span></code> |”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">debugging</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">protocol_property ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">static</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">built_in</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">source_data</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">lines(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">alias(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_alias_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">debugging</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_declaration_property_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_declaration_property_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_declaration_property_sequence ::=</div>
+<div class="line-block">
+<div class="line">predicate_declaration_property |</div>
+<div class="line">predicate_declaration_property “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_declaration_property_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_declaration_property ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">static</span></code>” | “<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">scope(</span></code>” scope “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private</span></code>” | “<code class="docutils literal notranslate"><span class="pre">protected</span></code>” | “<code class="docutils literal notranslate"><span class="pre">public</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">coinductive</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">multifile</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">synchronized</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">meta_predicate(</span></code>” meta_predicate_template “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">coinductive(</span></code>” coinductive_predicate_template “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">non_terminal(</span></code>” non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">include(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">line_count(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">mode(</span></code>” predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>” number_of_proofs “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">info(</span></code>” <em>list</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_definition_property_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_definition_property_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_definition_property_sequence ::=</div>
+<div class="line-block">
+<div class="line">predicate_definition_property |</div>
+<div class="line">predicate_definition_property “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_definition_property_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_definition_property ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">inline</span></code>” | “<code class="docutils literal notranslate"><span class="pre">auxiliary</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">non_terminal(</span></code>” non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">include(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">line_count(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_alias_property_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_alias_property_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_alias_property_sequence ::=</div>
+<div class="line-block">
+<div class="line">predicate_alias_property |</div>
+<div class="line">predicate_alias_property “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_alias_property_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_alias_property ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">for(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">from(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">non_terminal(</span></code>” non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">include(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">line_count(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate ::=</div>
+<div class="line-block">
+<div class="line">predicate_indicator |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">^^</span></code>” predicate_indicator |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |</div>
+<div class="line"><em>variable</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |</div>
+<div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |</div>
+<div class="line"><em>variable</em> “<code class="docutils literal notranslate"><span class="pre">:</span></code>” predicate_indicator |</div>
+<div class="line">module_identifier “<code class="docutils literal notranslate"><span class="pre">:</span></code>” predicate_indicator</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_call_update_property_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_call_update_property_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_call_update_property_sequence ::=</div>
+<div class="line-block">
+<div class="line">predicate_call_update_property |</div>
+<div class="line">predicate_call_update_property “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
+<div class="line">predicate_call_update_property_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_call_update_property ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">caller(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">include(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">line_count(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">as(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="predicate-properties">
+<span id="grammar-predicate-properties"></span><h2>Predicate properties<a class="headerlink" href="#predicate-properties" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">predicate_property ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">static</span></code>” | “<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">scope(</span></code>” scope “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private</span></code>” | “<code class="docutils literal notranslate"><span class="pre">protected</span></code>” | “<code class="docutils literal notranslate"><span class="pre">public</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">logtalk</span></code>” | “<code class="docutils literal notranslate"><span class="pre">prolog</span></code>” | “<code class="docutils literal notranslate"><span class="pre">foreign</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">coinductive(</span></code>” coinductive_predicate_template “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">multifile</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">synchronized</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">built_in</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">inline</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">defined_in(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">redefined_from(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">meta_predicate(</span></code>” meta_predicate_template “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">alias_of(</span></code>” callable “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">alias_declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">non_terminal(</span></code>” non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">mode(</span></code>” predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>” number_of_proofs “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">info(</span></code>” <em>list</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” line_count “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">defined_in(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” line_count “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">redefined_from(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” line_count “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">alias_declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” line_count “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">line_count ::=</div>
+<div class="line-block">
+<div class="line"><em>integer</em>”</div>
+</div>
+</div>
+</div>
+<div class="section" id="compiler-flags">
+<span id="grammar-compiler-flags"></span><h2>Compiler flags<a class="headerlink" href="#compiler-flags" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">compiler_flag ::=</div>
+<div class="line-block">
+<div class="line"><em>flag(flag_value)</em></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="control/index.html" class="btn btn-neutral float-right" title="Control constructs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Reference Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

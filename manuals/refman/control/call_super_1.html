@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>^^/1 &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Calling external predicates" href="external_calls.html" />
+    <link rel="prev" title="Calling imported and inherited predicates" href="super_calls.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Control constructs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="message_sending.html">Message sending</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message_delegation.html">Message delegation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="super_calls.html">Calling imported and inherited predicates</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">^^/1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="external_calls.html">Calling external predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="context_switching_calls.html">Context switching calls</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Manual</a> &raquo;</li>
+        
+          <li><a href="index.html">Control constructs</a> &raquo;</li>
+        
+          <li><a href="super_calls.html">Calling imported and inherited predicates</a> &raquo;</li>
+        
+      <li>^^/1</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/control/call_super_1.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="control-call-super-1">
+<span id="index-0"></span><span id="id1"></span><h1>^^/1<a class="headerlink" href="#control-call-super-1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">^^</span><span class="nv">Predicate</span>
+</pre></div>
+</div>
+<p>Calls an imported or inherited predicate definition. The call fails if
+the predicate is declared but there is no imported or inherited
+predicate definition (as per the <a class="reference internal" href="../../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>). This
+control construct may be used within objects or categories in the body
+of a predicate definition.</p>
+<p>This control construct preserves the implicit execution context
+<a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a> and <a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a> arguments (plus the meta-call
+context and coinduction stack when applicable) when calling the
+inherited (or imported) predicate definition.</p>
+<p>The lookups for the predicate declaration and the predicate definition
+are performed using a depth-first strategy. Depending on the value of
+the <a class="reference internal" href="../../userman/programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag, these lookups are performed
+at compile time when the predicate is static and sufficient information
+is available. When the lookups are performed at runtime, a caching
+mechanism is used to improve performance in subsequent calls. See the
+User Manual section on <a class="reference internal" href="../../userman/performance.html#performance-performance"><span class="std std-ref">performance</span></a> for
+details.</p>
+<p>When the call is made from within an object, the lookup for the
+predicate definition starts at the imported categories, if any. If an
+imported predicate definition is not found, the lookup proceeds to the
+ancestor objects. Calls from predicates defined in complementing
+categories lookup inherited definitions as if the calls were made from
+the complemented object, thus allowing more comprehensive object
+patching. For other categories, the predicate definition lookup is
+restricted to the extended categories.</p>
+<p>The called predicate should be declared <a class="reference internal" href="../directives/public_1.html#directives-public-1"><span class="std std-ref">public</span></a>
+or <a class="reference internal" href="../directives/protected_1.html#directives-protected-1"><span class="std std-ref">protected</span></a>. It may also be declared
+<a class="reference internal" href="../directives/private_1.html#directives-private-1"><span class="std std-ref">private</span></a> if within the scope of the entity
+where the method making the call is defined.</p>
+<p>This control construct is a generalization of the Smalltalk <em>super</em>
+keyword to take into account Logtalk support for prototypes and
+categories besides classes.</p>
+</div>
+<div class="section" id="modes-and-number-of-proofs">
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">^^+</span>callable <span class="o">-</span> zero_or_more
+</pre></div>
+</div>
+</div>
+<div class="section" id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">Predicate is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Predicate is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Predicate)</span></code></div>
+</div>
+<div class="line">Predicate, with predicate indicator Name/Arity, is declared private:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">private_predicate,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+<div class="line">Predicate, with predicate indicator Name/Arity, is not declared:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% specialize the inherited definition</span>
+<span class="c">% of the init/0 predicate:</span>
+init <span class="o">:-</span>
+    <span class="k">assertz</span>(counter(<span class="m">0</span>)),
+    <span class="o">^^</span>init.
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a>,
+<a class="reference internal" href="send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>,
+<a class="reference internal" href="delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="external_calls.html" class="btn btn-neutral float-right" title="Calling external predicates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="super_calls.html" class="btn btn-neutral float-left" title="Calling imported and inherited predicates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

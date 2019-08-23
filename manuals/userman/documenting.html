@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Documenting &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Debugging" href="debugging.html" />
+    <link rel="prev" title="Term and goal expansion" href="expansion.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Documenting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-directives">Documenting directives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#entity-directives">Entity directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#predicate-directives">Predicate directives</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#processing-and-viewing-documenting-files">Processing and viewing documenting files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inline-formatting-in-comments-text">Inline formatting in comments text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagrams">Diagrams</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog integration and migration guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Manual</a> &raquo;</li>
+        
+      <li>Documenting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/userman/documenting.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="documenting">
+<span id="documenting-documenting"></span><h1>Documenting<a class="headerlink" href="#documenting" title="Permalink to this headline">¶</a></h1>
+<p>Assuming that the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag is turned on, the
+compiler saves all relevant documenting information collected when compiling
+a source file. The provided
+<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool can access this
+information by using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection</span></a> support
+and generate a documentation file for each compiled entity (object, protocol,
+or category) in XML format. Contents of the XML file include the entity name,
+type, and compilation mode (static or dynamic), the entity relations with
+other entities, and a description of any declared predicates (name,
+compilation mode, scope, …).</p>
+<p>The XML documentation files can be enriched with arbitrary user-defined
+information, either about an entity or about its predicates, by using
+the two directives described next.</p>
+<div class="section" id="documenting-directives">
+<span id="id1"></span><h2>Documenting directives<a class="headerlink" href="#documenting-directives" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk supports two documentation directives for providing arbitrary
+user-defined information about an entity or a predicate. These two
+directives complement other directives that also provide important
+documentation information such as the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a>
+directive.</p>
+<div class="section" id="entity-directives">
+<span id="documenting-entity"></span><h3>Entity directives<a class="headerlink" href="#entity-directives" title="Permalink to this headline">¶</a></h3>
+<p>Arbitrary user-defined entity information can be represented using the
+<a class="reference internal" href="../refman/directives/info_1.html#directives-info-1"><span class="std std-ref">info/1</span></a> directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>([
+    <span class="nv">Key1</span> <span class="k">is</span> <span class="nv">Value1</span>,
+    <span class="nv">Key2</span> <span class="k">is</span> <span class="nv">Value2</span>,
+    ...
+]).
+</pre></div>
+</div>
+<p>In this pattern, keys should be atoms and values should be ground terms.
+The following keys are predefined and may be processed specially by
+Logtalk tools:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the entity purpose (an atom).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt><dd><p>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
+<code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>
+file).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt><dd><p>Version number (a number).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">date</span></code></dt><dd><p>Date of last modification (formatted as <code class="docutils literal notranslate"><span class="pre">Year/Month/Day</span></code> where
+<code class="docutils literal notranslate"><span class="pre">Year</span></code>, <code class="docutils literal notranslate"><span class="pre">Month</span></code>, and <code class="docutils literal notranslate"><span class="pre">Day</span></code> are integers).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code></dt><dd><p>Parameter names and descriptions for parametric entities (a list of
+<em>Name-Description</em> pairs where both names and descriptions are atoms).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">parnames</span></code></dt><dd><p>Parameter names for parametric entities (a list of atoms; a simpler
+version of the previous key, used when parameter descriptions are
+deemed unnecessary).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">copyright</span></code></dt><dd><p>Copyright notice for the entity source code (an atom or a compound
+term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity
+defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">license</span></code></dt><dd><p>License terms for the entity source code; usually, just the license
+name (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the
+name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the entity using <em>Topic-Text</em> pairs
+where both the topic and the text must be atoms.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">see_also</span></code></dt><dd><p>List of related entities (using the entity identifiers, which can
+be atoms or compound terms).</p>
+</dd>
+</dl>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>([
+    version <span class="k">is</span> <span class="m">2.1</span>,
+    author <span class="k">is</span> <span class="s">&#39;Paulo Moura&#39;</span>,
+    date <span class="k">is</span> <span class="m">2000</span><span class="o">/</span><span class="m">04</span><span class="o">/</span><span class="m">20</span>,
+    comment <span class="k">is</span> <span class="s">&#39;Building representation.&#39;</span>,
+    diagram <span class="k">is</span> <span class="s">&#39;UML Class Diagram #312&#39;</span>
+]).
+</pre></div>
+</div>
+<p>Use only the keywords that make sense for your application and remember that
+you are free to invent your own keywords. All key-value pairs can be retrieved
+programmatically using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and
+are visible to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
+</div>
+<div class="section" id="predicate-directives">
+<span id="documenting-predicate"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Permalink to this headline">¶</a></h3>
+<p>Arbitrary user-defined predicate information can be represented using
+the <a class="reference internal" href="../refman/directives/info_2.html#directives-info-2"><span class="std std-ref">info/2</span></a> directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, [
+    <span class="nv">Key1</span> <span class="k">is</span> <span class="nv">Value1</span>,
+    <span class="nv">Key2</span> <span class="k">is</span> <span class="nv">Value2</span>,
+    ...
+]).
+</pre></div>
+</div>
+<p>The first argument can also a grammar rule non-terminal indicator,
+<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>. Keys should be atoms and values should be bound terms.
+The following keys are predefined and may be processed specially by
+Logtalk tools:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the predicate purpose (an atom).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">arguments</span></code></dt><dd><p>Names and descriptions of predicate arguments for pretty print output
+(a list of <em>Name-Description</em> pairs where both names and descriptions
+are atoms).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">argnames</span></code></dt><dd><p>Names of predicate arguments for pretty print output (a list of
+atoms; a simpler version of the previous key, used when argument
+descriptions are deemed unnecessary).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">allocation</span></code></dt><dd><p>Objects where we should define the predicate. Some possible values
+are <code class="docutils literal notranslate"><span class="pre">container</span></code>, <code class="docutils literal notranslate"><span class="pre">descendants</span></code>, <code class="docutils literal notranslate"><span class="pre">instances</span></code>, <code class="docutils literal notranslate"><span class="pre">classes</span></code>,
+<code class="docutils literal notranslate"><span class="pre">subclasses</span></code>, and <code class="docutils literal notranslate"><span class="pre">any</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">redefinition</span></code></dt><dd><p>Describes if predicate is expected to be redefined and, if so, in
+what way. Some possible values are <code class="docutils literal notranslate"><span class="pre">never</span></code>, <code class="docutils literal notranslate"><span class="pre">free</span></code>,
+<code class="docutils literal notranslate"><span class="pre">specialize</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_first</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_last</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">exceptions</span></code></dt><dd><p>List of possible exceptions throw by the predicate using
+<em>Description</em>-<em>Exception term</em> pairs. The description must be an
+atom. The exception term must be a non-variable term.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">examples</span></code></dt><dd><p>List of typical predicate call examples using the format
+<em>Description-Goal-Bindings</em>. The description must be an atom.
+The predicate call term must be a non-variable term. The
+variable bindings term uses the format <em>{Variable = Term, …}</em>.
+When there are no variable bindings, the success or failure of
+the predicate call should be represented by the terms <code class="docutils literal notranslate"><span class="pre">{yes}</span></code>
+or <code class="docutils literal notranslate"><span class="pre">{no}</span></code>, respectively.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the predicate using <em>Topic-Text</em>
+pairs where both the topic and the text must be atoms.</p>
+</dd>
+</dl>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(color<span class="o">/</span><span class="m">1</span>, [
+    comment <span class="k">is</span> <span class="s">&#39;Table of defined colors.&#39;</span>,
+    argnames <span class="k">is</span> [<span class="s">&#39;Color&#39;</span>],
+    constraint <span class="k">is</span> <span class="s">&#39;Up to four visible colors allowed.&#39;</span>
+]).
+</pre></div>
+</div>
+<p>As with the <code class="docutils literal notranslate"><span class="pre">info/1</span></code> directive, use only the keywords that make sense
+for your application and remember that you are free to invent your own
+keywords. All key-value pairs can also be retrieved programmatically
+using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and are visible
+to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
+</div>
+</div>
+<div class="section" id="processing-and-viewing-documenting-files">
+<span id="documenting-processing"></span><h2>Processing and viewing documenting files<a class="headerlink" href="#processing-and-viewing-documenting-files" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool
+generates an XML documenting file per entity. It can also generate library,
+directory, entity, and predicate indexes when documenting libraries and
+directories. For example, assuming the default filename extensions, a
+<code class="docutils literal notranslate"><span class="pre">trace</span></code> object and a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code> parametric object will result in
+<code class="docutils literal notranslate"><span class="pre">trace_0.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">sort_1.xml</span></code> XML files.</p>
+<p>Each entity XML file contains references to two other files, an XML
+specification file and a XSLT style-sheet file. The XML specification
+file can be either a DTD file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>) or an XML Scheme
+file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.xsd</span></code>). The XSLT style-sheet file is responsible
+for converting the XML files to some desired format such as HTML or PDF.
+The default names for the XML specification file and the XSL style-sheet
+file are defined by the
+<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool but can be
+overridden by passing a list of options to the tool predicates. The
+<code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> sub-directory in the Logtalk installation directory contains
+the XML specification files described above, along with several sample XSL
+style-sheet files and sample scripts for converting XML documenting files
+to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). See
+the <code class="docutils literal notranslate"><span class="pre">NOTES</span></code> file included in the directory for details. You may use
+the supplied sample files as a starting point for generating the
+documentation of your Logtalk applications.</p>
+<p>The Logtalk DTD file, <code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>, contains a reference to a
+user-customizable file, <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>, which declares XML entities for
+source code author names, license terms, and copyright string. After
+editing the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file to reflect your personal data, you may
+use the XML entities on <code class="docutils literal notranslate"><span class="pre">info/1</span></code> documenting directives. For example,
+assuming that the XML entities are named <em>author</em>, <em>license</em>, and
+<em>copyright</em> we may write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>([
+    version <span class="k">is</span> <span class="m">1.1</span>,
+    author <span class="k">is</span> <span class="k">{</span>author<span class="k">}</span>,
+    license <span class="k">is</span> <span class="k">{</span>license<span class="k">}</span>,
+    copyright <span class="k">is</span> <span class="k">{</span>copyright<span class="k">}</span>
+]).
+</pre></div>
+</div>
+<p>The entity references are replaced by the value of the corresponding XML
+entity when the XML documenting files are processed (<strong>not</strong> when they
+are generated; this notation is just a shortcut to take advantage of XML
+entities).</p>
+<p>The <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool supports
+a set of options that can be used to control the generation of the XML
+documentation files. See the tool documentation for details. There is
+also a <a class="reference external" href="https://logtalk.org/tools.html#documenting">doclet</a> tool that
+allows automating the steps required to generate the documentation for
+an application.</p>
+</div>
+<div class="section" id="inline-formatting-in-comments-text">
+<span id="documenting-formatting"></span><h2>Inline formatting in comments text<a class="headerlink" href="#inline-formatting-in-comments-text" title="Permalink to this headline">¶</a></h2>
+<p>Inline formatting in comments text can be accomplished by using Markdown
+(or reStructuredText) syntax and converting XML documenting files to
+Markdown (or reStructuredText) files (and these, if required, to e.g. HTML,
+ePub, or PDF formats).</p>
+</div>
+<div class="section" id="diagrams">
+<h2>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://logtalk.org/tools.html#diagrams">diagrams</a> tool supports
+a wide range of diagrams that can also help in documenting an application.
+The generated diagrams can include URL links to both source code and API
+documentation. They can also be linked, connecting for example high level
+diagrams to detail diagrams. These features allow diagrams to be an
+effective solution for navigating and understanding the structure and
+implementation of an application. This tool uses the same
+<a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool and
+thus have access to the same source data. See the tool documentation for
+details.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="debugging.html" class="btn btn-neutral float-right" title="Debugging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="expansion.html" class="btn btn-neutral float-left" title="Term and goal expansion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

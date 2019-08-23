@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>profiler &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tutor" href="tutor.html" />
+    <link rel="prev" title="ports_profiler" href="ports_profiler.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger.html"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-backend-prolog-compilers">Supported backend Prolog compilers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiling-source-code-for-profiling">Compiling source code for profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-notes">Other notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Tools</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">profiler</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/devtools/profiler.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="profiler">
+<h1><code class="docutils literal notranslate"><span class="pre">profiler</span></code><a class="headerlink" href="#profiler" title="Permalink to this headline">¶</a></h1>
+<p>This tool contains simple wrappers for selected Prolog profiler tools.</p>
+<div class="section" id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<p>This tool can be loaded using the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(loader)).
+</pre></div>
+</div>
+<p>For sample queries, please see the <a class="reference external" href="SCRIPT.txt">SCRIPT.txt</a> file in
+the tool directory.</p>
+</div>
+<div class="section" id="supported-backend-prolog-compilers">
+<h2>Supported backend Prolog compilers<a class="headerlink" href="#supported-backend-prolog-compilers" title="Permalink to this headline">¶</a></h2>
+<p>Currently, this tool supports the profilers provided with SICStus Prolog
+4, SWI-Prolog, and YAP. The tool includes two files:</p>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yap_profiler.lgt</span></code></div>
+<div class="line">simple wrapper for the YAP count profiler</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sicstus_profiler.lgt</span></code></div>
+<div class="line">simple wrapper for the SICStus Prolog 4 profiler</div>
+</div>
+</li>
+</ul>
+<p>Logtalk also supports the YAP tick profiler (using the latest YAP
+development version) and the SWI-Prolog XPCE profiler. When using the
+XPCE profiler, you can avoid profiling the Logtalk compiler (which is
+invoked e.g. when you use the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending operator at the
+top-level) by typing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> logtalk <span class="o">&lt;&lt;</span> (prolog_statistics<span class="o">:</span>profile(... <span class="o">::</span> ...)).
+</pre></div>
+</div>
+<p>Given that <code class="docutils literal notranslate"><span class="pre">prolog_statistics:profile/1</span></code> is a meta-predicate, Logtalk
+will compile its argument before calling it. Don’t forget, however, to
+load the <code class="docutils literal notranslate"><span class="pre">prolog_statistics</span></code> module <em>before</em> using or compiling calls
+to the <code class="docutils literal notranslate"><span class="pre">profile/1</span></code> predicate by typing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> use_module(library(statistics)).
+</pre></div>
+</div>
+<p>The profiler support makes no attempt to conceal the internal Logtalk
+compiler/runtime predicates or the generated predicates that implement
+predicate inheritance. Calls to internal compiler and runtime predicates
+have functors starting with <code class="docutils literal notranslate"><span class="pre">$lgt_</span></code>. Calls to predicates with functors
+such as <code class="docutils literal notranslate"><span class="pre">_def</span></code>, <code class="docutils literal notranslate"><span class="pre">_dcl</span></code>, or <code class="docutils literal notranslate"><span class="pre">_super</span></code>, used to implement
+inheritance, may be listed when your code uses dynamic binding.</p>
+</div>
+<div class="section" id="compiling-source-code-for-profiling">
+<h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Permalink to this headline">¶</a></h2>
+<p>In order to get user-level object and predicate names instead of
+compiler generated names when using the SWI-Prolog and YAP profilers you
+must set <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> flag to a value other than the default <code class="docutils literal notranslate"><span class="pre">$</span></code>.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(code_prefix, <span class="s">&#39;.&#39;</span>).
+</pre></div>
+</div>
+<p>See also the <code class="docutils literal notranslate"><span class="pre">settings-sample</span></code> file for automating the necessary setup
+at Logtalk startup.</p>
+</div>
+<div class="section" id="other-notes">
+<h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>
+<p>All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutor.html" class="btn btn-neutral float-right" title="tutor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ports_profiler.html" class="btn btn-neutral float-left" title="ports_profiler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Declarative object-oriented programming &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Main features" href="features.html" />
+    <link rel="prev" title="User Manual" href="index.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Declarative object-oriented programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog integration and migration guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Manual</a> &raquo;</li>
+        
+      <li>Declarative object-oriented programming</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/userman/declarative.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="declarative-object-oriented-programming">
+<span id="declarative-declarative"></span><h1>Declarative object-oriented programming<a class="headerlink" href="#declarative-object-oriented-programming" title="Permalink to this headline">¶</a></h1>
+<p>Logtalk is a <em>declarative object-oriented logic programming language</em>. This means
+that Logtalk shares key concepts with other object-oriented programming languages
+but abstracts and reinterprets these concepts in the context of declarative logic
+programming.</p>
+<p>The key concepts in <em>declarative</em> object-oriented programming are <em>encapsulation</em>
+and <em>reuse patterns</em>. Notably, the concept of <em>mutable state</em>, which is an <em>imperative</em>
+concept, is not a significant concept in <em>declarative</em> object-oriented programming.
+Declarative object-oriented programming concepts can be materialized in both
+logic and functional languages. In this section, we focus only in declarative
+object-oriented logic programming.</p>
+<p>The first critical generalization of object-oriented programming concepts is the
+concept of object itself. What an object encapsulates depends on the <em>base programming
+paradigm</em> where we apply object-oriented programming concepts. When these concepts
+are applied to an imperative language, where mutable state and destructive assignment
+are central, objects naturally encapsulate and abstract mutable state, providing
+disciplined access and modification. When these concepts are applied to a declarative
+logic language such as Prolog, objects naturally encapsulate predicates. Therefore, an
+object can be seen as a <em>theory</em>, expressed by a set of related predicates. Theories
+are usually static and thus Logtalk objects are static by default. This contrasts with
+imperative object-oriented languages where usually classes are static and objects are
+dynamic. This view of an object as a set of predicates also forgo a distinction
+between <em>data</em> and <em>procedures</em> that is central to imperative object-oriented
+languages but moot in declarative, homoiconic logic languages.</p>
+<p>The second critical generalization concerns the relation between objects and other
+entities such as protocols (interfaces) and ancestor objects. The idea is that entity
+relations define <em>reuse patterns</em> and the <em>roles</em> played by the participating entities.
+A common reuse pattern is <em>inheritance</em>. In this case, an entity inherits, and thus
+reuses, resources from an ancestor entity. In a reuse pattern, each participating entity
+plays a specific <em>role</em>. The same entity, however, can play multiple roles
+depending on its relations with other entities. For example, an object can play
+the role of a class for its instances, the role of a subclass for its superclasses,
+and the role of an instance for its metaclass. Another common reuse pattern is
+<em>protocol implementation</em>. In this case, an object implementing a protocol reuses
+its predicate declarations by providing an implementation for those predicates and
+exposing those predicates to its clients. An essential consequence of this
+generalization is that protocols, objects, and categories are first-class entities
+while e.g. <em>class</em>, <em>instance</em>, <em>metaclass</em>, <em>subclass</em>, <em>superclass</em> are just
+<em>roles</em> that an object can play. Moreover, a language can provide multiple reuse
+patterns instead of selecting a set of patterns and supporting this set as a design
+choice that excludes other reuse patterns. For example, most imperative
+object-oriented languages are either class-based or prototype-based. In contrast,
+Logtalk naturally supports both classes and prototypes by providing the corresponding
+reuse patterns using objects as first-class entities capable of playing multiple
+roles.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="features.html" class="btn btn-neutral float-right" title="Main features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="User Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

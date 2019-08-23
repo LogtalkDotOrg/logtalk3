@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>List predicates &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dynamic object attributes" href="attributes.html" />
+    <link rel="prev" title="Tutorial" href="index.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">List predicates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defining-a-list-object">Defining a list object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-a-list-protocol">Defining a list protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="attributes.html">Dynamic object attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">A reflective class-based system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling programs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorial</a> &raquo;</li>
+        
+      <li>List predicates</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/tutorial/lists.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="list-predicates">
+<h1>List predicates<a class="headerlink" href="#list-predicates" title="Permalink to this headline">¶</a></h1>
+<p>In this example, we will illustrate the use of:</p>
+<ul class="simple">
+<li><p>objects</p></li>
+<li><p>protocols</p></li>
+</ul>
+<p>by using common list utility predicates.</p>
+<div class="section" id="defining-a-list-object">
+<span id="object"></span><h2>Defining a list object<a class="headerlink" href="#defining-a-list-object" title="Permalink to this headline">¶</a></h2>
+<p>We will start by defining an object, <code class="docutils literal notranslate"><span class="pre">list</span></code>, containing predicate
+definitions for some common list predicates like <code class="docutils literal notranslate"><span class="pre">append/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">length/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">member/2</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(list).
+
+<span class="p">    :- </span><span class="k">public</span>([
+        append<span class="o">/</span><span class="m">3</span>, length<span class="o">/</span><span class="m">2</span>, member<span class="o">/</span><span class="m">2</span>
+    ]).
+
+    append([], <span class="nv">List</span>, <span class="nv">List</span>).
+    append([<span class="nv">Head</span>| <span class="nv">Tail</span>], <span class="nv">List</span>, [<span class="nv">Head</span>| <span class="nv">Tail2</span>]) <span class="o">:-</span>
+        append(<span class="nv">Tail</span>, <span class="nv">List</span>, <span class="nv">Tail2</span>).
+
+    length(<span class="nv">List</span>, <span class="nv">Length</span>) <span class="o">:-</span>
+        length(<span class="nv">List</span>, <span class="m">0</span>, <span class="nv">Length</span>).
+
+    length([], <span class="nv">Length</span>, <span class="nv">Length</span>).
+    length([<span class="nv">_</span>| <span class="nv">Tail</span>], <span class="nv">Acc</span>, <span class="nv">Length</span>) <span class="o">:-</span>
+        <span class="nv">Acc2</span> <span class="k">is</span> <span class="nv">Acc</span> <span class="o">+</span> <span class="m">1</span>,
+        length(<span class="nv">Tail</span>, <span class="nv">Acc2</span>, <span class="nv">Length</span>).
+
+    member(<span class="nv">Element</span>, [<span class="nv">Element</span>| <span class="nv">_</span>]).
+    member(<span class="nv">Element</span>, [<span class="nv">_</span>| <span class="nv">List</span>]) <span class="o">:-</span>
+        member(<span class="nv">Element</span>, <span class="nv">List</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>What is different here from a regular Prolog program? The definitions of
+the list predicates are the usual ones. We have two new directives,
+<a class="reference internal" href="../refman/directives/object_1_5.html#directives-object-1-5"><span class="std std-ref">object/1-5</span></a> and
+<a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>, that
+encapsulate the object’s code. In Logtalk, by default, all object
+predicates are private; therefore, we have to explicitly declare all
+predicates that we want to be public, that is, that we want to call from
+outside the object. This is done using the
+<a class="reference internal" href="../refman/directives/public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a> scope directive.</p>
+<p>After we copy the object code to a text file and saved it under the name
+<code class="docutils literal notranslate"><span class="pre">list.lgt</span></code>, we need to change the Prolog working directory to the one
+used to save our file (consult your Prolog compiler reference manual).
+Then, after starting Logtalk (see the
+<a class="reference internal" href="../userman/installing.html#installing-installing"><span class="std std-ref">Installing and running Logtalk</span></a> section on
+the User Manual), we can compile and load the object using the
+<a class="reference internal" href="../refman/predicates/logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> Logtalk built-in predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(list).
+
+object list loaded
+yes
+</pre></div>
+</div>
+<p>We can now try goals like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- list::member(X, [1, 2, 3]).
+
+X = 1;
+X = 2;
+X = 3;
+no
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- list::length([1, 2, 3], L).
+
+L = 3
+yes
+</pre></div>
+</div>
+<p>The infix operator
+<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> is used in
+Logtalk to send a message to an object. The message must match a public
+object predicate. If we try to call a non-public predicate such as the
+<code class="docutils literal notranslate"><span class="pre">length/3</span></code> auxiliary predicate an exception will be generated:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- list::length([1, 2, 3], 0, L).
+
+uncaught exception:
+    error(
+        existence_error(predicate_declaration, length/3),
+        logtalk(list::length([1,2,3],0,_), ...)
+    )
+</pre></div>
+</div>
+<p>The exception term describes the type of error and the context
+where the error occurred.</p>
+</div>
+<div class="section" id="defining-a-list-protocol">
+<span id="protocol"></span><h2>Defining a list protocol<a class="headerlink" href="#defining-a-list-protocol" title="Permalink to this headline">¶</a></h2>
+<p>As we saw in the above example, a Logtalk object may contain predicate
+directives and predicate definitions (clauses). The set of predicate
+directives defines what we call the object’s <em>protocol</em> or interface. An
+interface may have several implementations. For instance, we may want to
+define a new object that implements the list predicates using difference
+lists. However, we do not want to repeat the predicate directives in the
+new object. Therefore, what we need is to split the object’s protocol
+from the object’s implementation by defining a new Logtalk entity known
+as a protocol. Logtalk protocols are compilations units, at the same
+level as objects and categories. That said, let us define a <code class="docutils literal notranslate"><span class="pre">listp</span></code>
+protocol:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">protocol</span>(listp).
+
+<span class="p">    :- </span><span class="k">public</span>([
+        append<span class="o">/</span><span class="m">3</span>, length<span class="o">/</span><span class="m">2</span>, member<span class="o">/</span><span class="m">2</span>
+    ]).
+
+<span class="p">:- </span><span class="k">end_protocol</span>.
+</pre></div>
+</div>
+<p>Similar to what we have done for objects, we use the
+<a class="reference internal" href="../refman/directives/protocol_1_2.html#directives-protocol-1-2"><span class="std std-ref">protocol/1-2</span></a> and <a class="reference internal" href="../refman/directives/end_protocol_0.html#directives-end-protocol-0"><span class="std std-ref">end_protocol/0</span></a>
+directives to encapsulate the predicate directives. We can improve
+this protocol by documenting the call/return modes and the
+number of proofs of each predicate using the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a>
+directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">protocol</span>(listp).
+
+<span class="p">    :- </span><span class="k">public</span>(append<span class="o">/</span><span class="m">3</span>).
+<span class="p">    :- </span><span class="k">mode</span>(append(<span class="o">?</span>list, <span class="o">?</span>list, <span class="o">?</span>list), zero_or_more).
+
+<span class="p">    :- </span><span class="k">public</span>(length<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">mode</span>(length(<span class="o">?</span>list, <span class="o">?</span>integer), zero_or_more).
+
+<span class="p">    :- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">mode</span>(member(<span class="o">?</span>term, <span class="o">?</span>list), zero_or_more).
+
+<span class="p">:- </span><span class="k">end_protocol</span>.
+</pre></div>
+</div>
+<p>We now need to change our definition of the <code class="docutils literal notranslate"><span class="pre">list</span></code> object by removing
+the predicate directives and by declaring that the object implements the
+<code class="docutils literal notranslate"><span class="pre">listp</span></code> protocol:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(list,
+    <span class="k">implements</span>(listp)).
+
+    append([], <span class="nv">List</span>, <span class="nv">List</span>).
+    append([<span class="nv">Head</span>| <span class="nv">Tail</span>], <span class="nv">List</span>, [<span class="nv">Head</span>| <span class="nv">Tail2</span>]) <span class="o">:-</span>
+        append(<span class="nv">Tail</span>, <span class="nv">List</span>, <span class="nv">Tail2</span>).
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The protocol declared in <code class="docutils literal notranslate"><span class="pre">listp</span></code> may now be alternatively implemented
+using difference lists by defining a new object, <code class="docutils literal notranslate"><span class="pre">difflist</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(difflist,
+    <span class="k">implements</span>(listp).
+
+    append(<span class="nv">L1</span><span class="o">-</span><span class="nv">X</span>, <span class="nv">X</span><span class="o">-</span><span class="nv">L2</span>, <span class="nv">L1</span><span class="o">-</span><span class="nv">L2</span>).
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>It is easy to define a simple object: just put your Prolog code
+inside starting and ending object directives and add the necessary
+scope directives. The object will be self-defining and ready to use.</p></li>
+<li><p>Define a protocol when you may want to provide or enable several
+alternative definitions to a given set of predicates. This way we
+avoid needless repetition of predicate directives.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="attributes.html" class="btn btn-neutral float-right" title="Dynamic object attributes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

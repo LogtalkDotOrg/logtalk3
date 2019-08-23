@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>category/1-4 &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="dynamic/0" href="dynamic_0.html" />
+    <link rel="prev" title="built_in/0" href="built_in_0.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Directives</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="source_file_directives.html">Source file directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conditional_compilation_directives.html">Conditional compilation directives</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="entity_directives.html">Entity directives</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="built_in_0.html">built_in/0</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">category/1-4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_0.html">dynamic/0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="end_category_0.html">end_category/0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="end_object_0.html">end_object/0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="end_protocol_0.html">end_protocol/0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="include_1.html">include/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="info_1.html">info/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="initialization_1.html">initialization/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="object_1_5.html">object/1-5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="op_3.html">op/3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="protocol_1_2.html">protocol/1-2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="set_logtalk_flag_2.html">set_logtalk_flag/2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threaded_0.html">threaded/0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uses_1.html">uses/1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="predicate_directives.html">Predicate directives</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Manual</a> &raquo;</li>
+        
+          <li><a href="index.html">Directives</a> &raquo;</li>
+        
+          <li><a href="entity_directives.html">Entity directives</a> &raquo;</li>
+        
+      <li>category/1-4</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/directives/category_1_4.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="category-1-4">
+<span id="directives-category-1-4"></span><span id="index-0"></span><h1>category/1-4<a class="headerlink" href="#category-1-4" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>category(<span class="nv">Category</span>)
+
+category(<span class="nv">Category</span>,
+    implements(<span class="nv">Protocols</span>))
+
+category(<span class="nv">Category</span>,
+    extends(<span class="nv">Categories</span>))
+
+category(<span class="nv">Category</span>,
+    complements(<span class="nv">Objects</span>))
+
+category(<span class="nv">Category</span>,
+    implements(<span class="nv">Protocols</span>),
+    extends(<span class="nv">Categories</span>))
+
+category(<span class="nv">Category</span>,
+    implements(<span class="nv">Protocols</span>),
+    complements(<span class="nv">Objects</span>))
+
+category(<span class="nv">Category</span>,
+    extends(<span class="nv">Categories</span>),
+    complements(<span class="nv">Objects</span>))
+
+category(<span class="nv">Category</span>,
+    implements(<span class="nv">Protocols</span>),
+    extends(<span class="nv">Categories</span>),
+    complements(<span class="nv">Objects</span>))
+</pre></div>
+</div>
+<p>Starting category directive.</p>
+</div>
+<div class="section" id="template-and-modes">
+<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>category(<span class="o">+</span>category_identifier)
+
+category(<span class="o">+</span>category_identifier,
+    implements(<span class="o">+</span>implemented_protocols))
+
+category(<span class="o">+</span>category_identifier,
+    extends(<span class="o">+</span>extended_categories))
+
+category(<span class="o">+</span>category_identifier,
+    complements(<span class="o">+</span>complemented_objects))
+
+category(<span class="o">+</span>category_identifier,
+    implements(<span class="o">+</span>implemented_protocols),
+    extends(<span class="o">+</span>extended_categories))
+
+category(<span class="o">+</span>category_identifier,
+    implements(<span class="o">+</span>implemented_protocols),
+    complements(<span class="o">+</span>complemented_objects))
+
+category(<span class="o">+</span>category_identifier,
+    extends(<span class="o">+</span>extended_categories),
+    complements(<span class="o">+</span>complemented_objects))
+
+category(<span class="o">+</span>category_identifier,
+    implements(<span class="o">+</span>implemented_protocols),
+    extends(<span class="o">+</span>extended_categories),
+    complements(<span class="o">+</span>complemented_objects))
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(monitoring).
+
+<span class="p">:- </span><span class="k">category</span>(monitoring,
+    <span class="k">implements</span>(monitoringp)).
+
+<span class="p">:- </span><span class="k">category</span>(attributes,
+    <span class="k">implements</span>(protected<span class="o">::</span>variables)).
+
+<span class="p">:- </span><span class="k">category</span>(extended,
+    <span class="k">extends</span>(minimal)).
+
+<span class="p">:- </span><span class="k">category</span>(logging,
+    <span class="k">implements</span>(monitoring),
+    <span class="k">complements</span>(employee)).
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="end_category_0.html#directives-end-category-0"><span class="std std-ref">end_category/0</span></a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dynamic_0.html" class="btn btn-neutral float-right" title="dynamic/0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="built_in_0.html" class="btn btn-neutral float-left" title="built_in/0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

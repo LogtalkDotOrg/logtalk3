@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User Manual &mdash; The Logtalk Handbook v3.29.0-b03 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Declarative object-oriented programming" href="declarative.html" />
+    <link rel="prev" title="The Logtalk Handbook" href="../index.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.29.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog integration and migration guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>User Manual</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/userman/index.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-manual">
+<h1>User Manual<a class="headerlink" href="#user-manual" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Main features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="features.html#integration-of-logic-and-object-oriented-programming">Integration of logic and object-oriented programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#integration-of-event-driven-and-object-oriented-programming">Integration of event-driven and object-oriented programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#support-for-component-based-programming">Support for component-based programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#support-for-both-prototype-and-class-based-systems">Support for both prototype and class-based systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#support-for-multiple-object-hierarchies">Support for multiple object hierarchies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#separation-between-interface-and-implementation">Separation between interface and implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#private-protected-and-public-inheritance">Private, protected and public inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#private-protected-and-public-object-predicates">Private, protected and public object predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#parametric-objects">Parametric objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#high-level-multi-threading-programming-support">High level multi-threading programming support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#smooth-learning-curve">Smooth learning curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#compatibility-with-most-prolog-systems-and-the-iso-standard">Compatibility with most Prolog systems and the ISO standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#logtalk-scope">Logtalk scope</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nomenclature.html">Nomenclature</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html#smalltalk-nomenclature">Smalltalk nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html#c-nomenclature">C++ nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html#java-nomenclature">Java nomenclature</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messages.html">Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#operators-used-in-message-sending">Operators used in message sending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#sending-a-message-to-an-object">Sending a message to an object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#delegating-a-message-to-an-object">Delegating a message to an object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#sending-a-message-to-self">Sending a message to <em>self</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#broadcasting">Broadcasting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#calling-imported-and-inherited-predicates">Calling imported and inherited predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#message-sending-and-event-generation">Message sending and event generation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="objects.html">Objects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#objects-prototypes-classes-and-instances">Objects, prototypes, classes, and instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#defining-a-new-object">Defining a new object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#parametric-objects">Parametric objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#finding-defined-objects">Finding defined objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#creating-a-new-object-in-runtime">Creating a new object in runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#abolishing-an-existing-object">Abolishing an existing object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#object-directives">Object directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#object-relationships">Object relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#object-properties">Object properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html#built-in-objects">Built-in objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="protocols.html">Protocols</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#defining-a-new-protocol">Defining a new protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#finding-defined-protocols">Finding defined protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#creating-a-new-protocol-in-runtime">Creating a new protocol in runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#abolishing-an-existing-protocol">Abolishing an existing protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#protocol-directives">Protocol directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#protocol-relationships">Protocol relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#protocol-properties">Protocol properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#implementing-protocols">Implementing protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html#built-in-protocols">Built-in protocols</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="categories.html">Categories</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#defining-a-new-category">Defining a new category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#hot-patching">Hot patching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#finding-defined-categories">Finding defined categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#creating-a-new-category-in-runtime">Creating a new category in runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#abolishing-an-existing-category">Abolishing an existing category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#category-directives">Category directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#category-relationships">Category relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#category-properties">Category properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#importing-categories">Importing categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#calling-category-predicates">Calling category predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html#parametric-categories">Parametric categories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="predicates.html">Predicates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#reserved-predicate-names">Reserved predicate names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#declaring-predicates">Declaring predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#defining-predicates">Defining predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#definite-clause-grammar-rules">Definite clause grammar rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#built-in-object-predicates-methods">Built-in object predicates (methods)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#predicate-properties">Predicate properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#finding-declared-predicates">Finding declared predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html#calling-prolog-predicates">Calling Prolog predicates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Inheritance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html#protocol-inheritance">Protocol inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html#implementation-inheritance">Implementation inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html#public-protected-and-private-inheritance">Public, protected, and private inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html#composition-versus-multiple-inheritance">Composition versus multiple inheritance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">Event-driven programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="events.html#definitions">Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html#event-generation">Event generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html#communicating-events-to-monitors">Communicating events to monitors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html#performance-concerns">Performance concerns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html#monitor-semantics">Monitor semantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html#activation-order-of-monitors">Activation order of monitors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html#event-handling">Event handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="threads.html">Multi-threading programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="threads.html#enabling-multi-threading-support">Enabling multi-threading support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html#enabling-objects-to-make-multi-threading-calls">Enabling objects to make multi-threading calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html#multi-threading-built-in-predicates">Multi-threading built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html#one-way-asynchronous-calls">One-way asynchronous calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html#asynchronous-calls-and-synchronized-predicates">Asynchronous calls and synchronized predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html#synchronizing-threads-through-notifications">Synchronizing threads through notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html#threaded-engines">Threaded engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html#multi-threading-performance">Multi-threading performance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Error handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#generating-errors">Generating errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#type-checking">Type-checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#compiler-warnings-and-errors">Compiler warnings and errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#runtime-errors">Runtime errors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reflection.html">Reflection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html#structural-reflection">Structural reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html#behavioral-reflection">Behavioral reflection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Writing and running applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#writing-applications">Writing applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#compiling-and-running-applications">Compiling and running applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="printing.html">Printing messages and asking questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="printing.html#printing-messages">Printing messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html#message-tokenization">Message tokenization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html#meta-messages">Meta-messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html#intercepting-messages">Intercepting messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html#asking-questions">Asking questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html#intercepting-questions">Intercepting questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="expansion.html">Term and goal expansion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html#defining-expansions">Defining expansions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html#expanding-grammar-rules">Expanding grammar rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html#hook-objects">Hook objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html#bypassing-expansions">Bypassing expansions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html#combining-multiple-expansions">Combining multiple expansions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html#using-prolog-defined-expansions">Using Prolog defined expansions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documenting.html">Documenting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html#documenting-directives">Documenting directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html#processing-and-viewing-documenting-files">Processing and viewing documenting files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html#inline-formatting-in-comments-text">Inline formatting in comments text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html#diagrams">Diagrams</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#compiling-source-files-in-debug-mode">Compiling source files in debug mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#procedure-box-model">Procedure box model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#defining-spy-points">Defining spy points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#tracing-program-execution">Tracing program execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#debugging-using-spy-points">Debugging using spy points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#debugging-commands">Debugging commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#context-switching-calls">Context-switching calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#debugging-messages">Debugging messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#using-the-term-expansion-mechanism-for-debugging">Using the term-expansion mechanism for debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html#ports-profiling">Ports profiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#source-code-compilation-modes">Source code compilation modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#local-predicate-calls">Local predicate calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#calls-to-imported-or-inherited-predicates">Calls to imported or inherited predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#calls-to-module-predicates">Calls to module predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#messages">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#inlining">Inlining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#generated-code-simplification-and-optimizations">Generated code simplification and optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#size-of-the-generated-code">Size of the generated code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#debug-mode-overhead">Debug mode overhead</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#other-considerations">Other considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing Logtalk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#hardware-and-software-requirements">Hardware and software requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#logtalk-installers">Logtalk installers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#source-distribution">Source distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#distribution-overview">Distribution overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Prolog integration and migration guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#source-files-with-both-prolog-code-and-logtalk-code">Source files with both Prolog code and Logtalk code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#encapsulating-plain-prolog-code-in-objects">Encapsulating plain Prolog code in objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#converting-prolog-modules-into-objects">Converting Prolog modules into objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#compiling-prolog-modules-as-objects">Compiling Prolog modules as objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#dealing-with-proprietary-prolog-directives-and-predicates">Dealing with proprietary Prolog directives and predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#calling-prolog-module-predicates">Calling Prolog module predicates</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="declarative.html" class="btn btn-neutral float-right" title="Declarative object-oriented programming" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="The Logtalk Handbook" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
