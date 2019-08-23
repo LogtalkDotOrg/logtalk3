@@ -14107,7 +14107,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % auxiliary predicate to find a singleton variable in the goal argument of
 % bagof/3 and setof/3 calls
 
-'$lgt_singleton_variables_in_meta_argument'(Goal, Singletons, Ctx) :-	
+'$lgt_singleton_variables_in_meta_argument'(Goal, Singletons, Ctx) :-
+	Goal \= _/_,
+	% not a lambda expression
 	term_variables(Goal, Variables),
 	'$lgt_comp_ctx_term'(Ctx, Term),
 	bagof(
