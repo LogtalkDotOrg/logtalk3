@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * ADDED: New compiler lint warning for lambda expression parameter variables
 that are used elsewhere in a clause.
 
+* ADDED: New compiler lint warning for calls to the deprecated `name/2` Prolog
+built-in predicate.
+
 * FIXED: When a source file contains an `encoding/1` directive, open any
 included files using the same text encoding.
 
