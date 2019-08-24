@@ -15059,21 +15059,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % messages to the pseudo-object "user"
 
-'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, Ctx) :-
+'$lgt_compile_message_to_object'(Pred, Obj, TPred, _, Ctx) :-
 	Obj == user,
 	!,
 	'$lgt_check'(var_or_callable, Pred),
-	(	callable(Pred),
-		'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(suspicious_calls, warning),
-		'$lgt_iso_spec_predicate'(Pred),
-		\+ '$lgt_built_in_method'(Pred, _, _, _),
-		\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, user::Pred, [Pred])) ->
-		true
-	;	true
+	(	callable(Pred) ->
+		TPred = Pred,
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+			'$lgt_compiler_flag'(suspicious_calls, warning),
+			'$lgt_iso_spec_predicate'(Pred),
+			\+ '$lgt_built_in_method'(Pred, _, _, _),
+			\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_source_file_context'(File, Lines, Type, Entity),
+			'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, user::Pred, [Pred])) ->
+			true
+		;	true
+		)
+	;	% var(Pred),
+		TPred = call(Pred)
 	).
 
 % suppress debug messages when compiling in optimized mode

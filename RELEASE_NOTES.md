@@ -50,6 +50,9 @@ included files using the same text encoding.
 * FIXED: Reporting of non-portable built-in predicate calls when the
 predicates are being redefined.
 
+* FIXED: Instantiation error when compiling a Prolog module as an object that
+contains a meta-call in `user` where the goal is only know at runtime.
+
 * FIXED: Typo in the `settings-sample.lgt` sample code for loading the new
 `tutor` tool. Thanks to Michael T. Richter for the bug report.
 
