@@ -127,11 +127,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#deprecated-elements">Deprecated elements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#missing-directives">Missing directives</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#duplicated-directives">Duplicated directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#duplicated-clauses">Duplicated clauses</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#goals-that-are-always-true-or-false">Goals that are always true or false</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#trivial-fails">Trivial fails</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#suspicious-calls">Suspicious calls</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lambda-variables">Lambda variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives">Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redefinition-of-predicates-declared-in-uses-2-or-use-module-2-directives">Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-warnings-and-errors">Other warnings and errors</a></li>
 </ul>
 </li>
@@ -399,8 +400,8 @@ Prolog standard.</p>
 </div>
 <div class="section" id="deprecated-elements">
 <span id="errors-deprecated"></span><h3>Deprecated elements<a class="headerlink" href="#deprecated-elements" title="Permalink to this headline">¶</a></h3>
-<p>A warning will be reported if a deprecated directive or control
-construct is used. These warnings should be fixed as soon as possible
+<p>A warning will be reported if a deprecated directive, control construct,
+or predicate is used. These warnings should be fixed as soon as possible
 as support for any deprecated features will likely be discontinued in
 future versions.</p>
 </div>
@@ -415,6 +416,11 @@ meta-predicate, and public predicate directive.</p>
 discontiguous, meta-predicate, and meta-non-terminal directives. Note
 that conflicting directives for the same predicate are handled as
 errors, not as duplicated directive warnings.</p>
+</div>
+<div class="section" id="duplicated-clauses">
+<span id="errors-duplicated-clauses"></span><h3>Duplicated clauses<a class="headerlink" href="#duplicated-clauses" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported for any duplicated entity clauses. This check
+is computationally heavy, however, and usually turned off by default.</p>
 </div>
 <div class="section" id="goals-that-are-always-true-or-false">
 <span id="errors-always-true-or-false-goals"></span><h3>Goals that are always true or false<a class="headerlink" href="#goals-that-are-always-true-or-false" title="Permalink to this headline">¶</a></h3>
@@ -442,8 +448,8 @@ or <a class="reference internal" href="../glossary.html#term-lambda-parameter"><
 (as both lambda free and lambda parameter variables), and for lambda parameters
 used elsewhere in a clause.</p>
 </div>
-<div class="section" id="redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives">
-<span id="errors-predicate-redefinition"></span><h3>Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives<a class="headerlink" href="#redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="redefinition-of-predicates-declared-in-uses-2-or-use-module-2-directives">
+<span id="errors-predicate-redefinition"></span><h3>Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives<a class="headerlink" href="#redefinition-of-predicates-declared-in-uses-2-or-use-module-2-directives" title="Permalink to this headline">¶</a></h3>
 <p>A error will be reported for any attempt to define locally a predicate
 that is already declared in an <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or
 <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive.</p>
@@ -452,7 +458,7 @@ that is already declared in an <a class="reference internal" href="../refman/dir
 <span id="errors-others"></span><h3>Other warnings and errors<a class="headerlink" href="#other-warnings-and-errors" title="Permalink to this headline">¶</a></h3>
 <p>The Logtalk compiler will throw an error if it finds a predicate clause
 or a directive that cannot be parsed. The default behavior is to report
-the error and abort the compilation of the offending entity.</p>
+the error and abort the compilation.</p>
 </div>
 </div>
 <div class="section" id="runtime-errors">

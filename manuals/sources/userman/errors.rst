@@ -237,8 +237,8 @@ Prolog standard.
 Deprecated elements
 ~~~~~~~~~~~~~~~~~~~
 
-A warning will be reported if a deprecated directive or control
-construct is used. These warnings should be fixed as soon as possible
+A warning will be reported if a deprecated directive, control construct,
+or predicate is used. These warnings should be fixed as soon as possible
 as support for any deprecated features will likely be discontinued in
 future versions.
 
@@ -259,6 +259,14 @@ A warning will be reported for any duplicated scope, multifile, dynamic,
 discontiguous, meta-predicate, and meta-non-terminal directives. Note
 that conflicting directives for the same predicate are handled as
 errors, not as duplicated directive warnings.
+
+.. _errors_duplicated_clauses:
+
+Duplicated clauses
+~~~~~~~~~~~~~~~~~~
+
+A warning will be reported for any duplicated entity clauses. This check
+is computationally heavy, however, and usually turned off by default.
 
 .. _errors_always_true_or_false_goals:
 
@@ -300,8 +308,8 @@ used elsewhere in a clause.
 
 .. _errors_predicate_redefinition:
 
-Redefinition of predicates declared in ``uses/2`` and ``use_module/2`` directives
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Redefinition of predicates declared in ``uses/2`` or ``use_module/2`` directives
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A error will be reported for any attempt to define locally a predicate
 that is already declared in an :ref:`directives_uses_2` or
@@ -314,7 +322,7 @@ Other warnings and errors
 
 The Logtalk compiler will throw an error if it finds a predicate clause
 or a directive that cannot be parsed. The default behavior is to report
-the error and abort the compilation of the offending entity.
+the error and abort the compilation.
 
 .. _errors_runtime:
 
