@@ -80,6 +80,7 @@ Tools
 and the domain error when trying to use the `set_prolog_flag/2` directive as
 an entity directive.
 
+* FIXED: Deleted two duplicated clauses in the `help` tool.
 
 Tests
 -----

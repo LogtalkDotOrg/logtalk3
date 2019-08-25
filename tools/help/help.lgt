@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.24,
+		version is 0.25,
 		author is 'Paulo Moura',
-		date is 2019/07/10,
+		date is 2019/08/25,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -179,8 +179,6 @@
 	]).
 
 	built_in_directive(encoding, 1, '/manuals/refman/directives/', 'encoding_1.html').
-	built_in_directive(initialization, 1, '/manuals/refman/directives/', 'initialization_1.html').
-	built_in_directive(op, 3, '/manuals/refman/directives/', 'op_3.html').
 	built_in_directive(set_logtalk_flag, 2, '/manuals/refman/directives/', 'set_logtalk_flag_2.html').
 
 	built_in_directive(if, 1, '/manuals/refman/directives/', 'if_1.html').
