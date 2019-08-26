@@ -685,11 +685,12 @@ Lint flags
 .. index:: pair: duplicated_clauses; Flag
 
 ``duplicated_clauses(Option)``
-   Controls warnings of duplicated entity clauses. Possible option values
-   are ``warning`` and ``silent`` (the usual default due to the required
-   heavy computations). When the term-expansion mechanism is used and
-   results in duplicated clauses, the reported line numbers are for lines
-   of the original clauses that were expanded.
+   Controls warnings of duplicated entity clauses (and duplicated entity
+   grammar rules). Possible option values are ``warning`` and ``silent``
+   (the usual default due to the required heavy computations). When the
+   term-expansion mechanism is used and results in duplicated clauses,
+   the reported line numbers are for lines of the original clauses that
+   were expanded.
 
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

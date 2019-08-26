@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 29, 0, b06)).
+'$lgt_version_data'(logtalk(3, 29, 0, b07)).
 
 
 
@@ -18787,12 +18787,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retract('$lgt_pp_entity_term_'(Term, SourceData, _)),
 	(	SourceData = sd(_, _, File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _),
-		'$lgt_clause_from_term'(Term, Clause, Template),
+		'$lgt_clause_from_term'(Term, Clause, Template, OriginalTerm),
 		'$lgt_pp_entity_term_'(Template, _, DuplicateLines),
-		'$lgt_clause_from_term'(Template, Duplicate, _),
+		'$lgt_clause_from_term'(Template, Duplicate, _, _),
 		'$lgt_variant'(Clause, Duplicate) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(duplicated_clauses), duplicated_clauses(File, Lines, Type, Entity, Duplicate, DuplicateLines))
+		(	OriginalTerm = (_ --> _) ->
+			'$lgt_print_message'(warning(duplicated_clauses), duplicated_grammar_rules(File, Lines, Type, Entity, OriginalTerm, DuplicateLines))
+		;	'$lgt_print_message'(warning(duplicated_clauses), duplicated_clauses(File, Lines, Type, Entity, Duplicate, DuplicateLines))
+		)
 	;	true
 	),
 	'$lgt_compile_predicate_calls'(Term, SourceData, Optimize, TTerm),
@@ -18860,23 +18863,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)).
 
 
-'$lgt_clause_from_term'(srule(_,Body,Ctx), (Head:-Body), srule(_,_,_)) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
+'$lgt_clause_from_term'(srule(_,Body,Ctx), (Head:-Body), srule(_,_,_), Term) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
-'$lgt_clause_from_term'(dsrule(_,_,Body,Ctx), (Head:-Body), dsrule(_,_,_,_)) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
+'$lgt_clause_from_term'(dsrule(_,_,Body,Ctx), (Head:-Body), dsrule(_,_,_,_), Term) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
-'$lgt_clause_from_term'(drule(_,_,Body,Ctx), (Head:-Body), drule(_,_,_,_)) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
+'$lgt_clause_from_term'(drule(_,_,Body,Ctx), (Head:-Body), drule(_,_,_,_), Term) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
-'$lgt_clause_from_term'(ddrule(_,_,_,Body,Ctx), (Head:-Body), ddrule(_,_,_,_,_)) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
+'$lgt_clause_from_term'(ddrule(_,_,_,Body,Ctx), (Head:-Body), ddrule(_,_,_,_,_), Term) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
-'$lgt_clause_from_term'(fact(_,Ctx), Fact, fact(_,_)) :-
-	'$lgt_comp_ctx_head'(Ctx, Fact).
+'$lgt_clause_from_term'(fact(_,Ctx), Fact, fact(_,_), Term) :-
+	'$lgt_comp_ctx'(Ctx, Fact, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
-'$lgt_clause_from_term'(dfact(_,_,Ctx), Fact, dfact(_,_,_)) :-
-	'$lgt_comp_ctx_head'(Ctx, Fact).
+'$lgt_clause_from_term'(dfact(_,_,Ctx), Fact, dfact(_,_,_), Term) :-
+	'$lgt_comp_ctx'(Ctx, Fact, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
 
 '$lgt_compile_predicate_calls_error_handler'(Term, Error) :-

@@ -36,7 +36,8 @@ argument contains singleton variables.
 * ADDED: New compiler lint warning for calls to the deprecated `name/2` Prolog
 built-in predicate.
 
-* ADDED: New compiler lint warning for duplicated entity clauses.
+* ADDED: New compiler lint warning for duplicated entity clauses and grammar
+rules.
 
 * ADDED: New compiler flag, `duplicated_clauses`, with possible values
 `warning` and `silent` (the default value).

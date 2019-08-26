@@ -411,6 +411,11 @@
 			'result in spurious choice-points, degrading performance. Delete or'-[], nl,
 			'correct the duplicated clause to fix this warning.'-[], nl, nl
 		].
+	explain(duplicated_grammar_rules(_, _, _, _, _, _)) -->
+		[	'Duplicated grammar rules are usually a source code editing error and'-[], nl,
+			'can result in spurious choice-points, degrading performance. Delete'-[], nl,
+			'or correct the duplicated grammar rule to fix this warning.'-[], nl, nl
+		].
 
 	% lambda expression messages
 
