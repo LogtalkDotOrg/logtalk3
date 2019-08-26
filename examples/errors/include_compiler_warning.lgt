@@ -35,3 +35,8 @@ baz([_| _]).
 
 quux(A, B).
 
+b(one).
+b(two).
+b(three).
+b(one).
+b(four).

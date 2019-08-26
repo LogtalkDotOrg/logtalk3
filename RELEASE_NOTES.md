@@ -91,7 +91,8 @@ created objects.
 Examples
 --------
 
-* UPDATED: The `lambdas` example to illustrate the new lint warnings.
+* UPDATED: The `errors` and `lambdas` examples to illustrate the new lint
+warnings.
 
 * FIXED: Lambda expression examples and tests in the `lambdas` example to use
 fresh variables for all lambda expression parameters.

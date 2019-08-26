@@ -267,6 +267,22 @@
 
 
 
+:- object(duplicated_clauses).
+
+	a(1).
+	a(2).
+	a(3).
+	a(1).
+	a(4).
+
+	b(X, Y) :- a(X), a(Y).
+	b(a, _).
+	b(X, Y) :- a(X), a(Y).
+
+:- end_object.
+
+
+
 :- object(suspicious_calls).
 
 	% calling local predicates doesn't require message sending

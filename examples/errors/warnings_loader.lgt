@@ -28,6 +28,7 @@
 			redefined_built_ins(warning),
 			missing_directives(warning),
 			duplicated_directives(warning),
+			duplicated_clauses(warning),
 			unknown_entities(warning),
 		 	unknown_predicates(warning),
 		 	undefined_predicates(warning),
