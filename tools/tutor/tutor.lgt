@@ -21,7 +21,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.15,
+		version is 0.16,
 		author is 'Paulo Moura',
 		date is 2019/08/26,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
@@ -112,8 +112,12 @@
 
 	error(domain_error(meta_directive_template, _)) -->
 		['Likely one on the meta-argument specifiers is not valid.'-[], nl, nl].
-	error(domain_error(meta_argument_specifier, Meta)) -->
-		['The ~q meta-argument specifier is ambiguous in this context.'-[Meta], nl, nl].
+	error(domain_error(meta_argument_specifier, _)) -->
+		[	'One (or more) of the meta-argument specifiers in the meta-predicate'-[], nl,
+			'(or meta-non-terminal) template is ambiguous. A typical case is the'-[], nl,
+			'module-aware specifier, ":", which can mean a goal, a closure, or a'-[], nl,
+			'non-callable but yet module-aware argument.'-[], nl, nl
+		].
 
 	error(domain_error([1,_], _)) -->
 		['The parameter is outside the valid range. Typo?'-[], nl, nl].
