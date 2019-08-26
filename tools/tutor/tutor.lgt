@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.14,
+		version is 0.15,
 		author is 'Paulo Moura',
-		date is 2019/08/23,
+		date is 2019/08/26,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -406,6 +406,12 @@
 	explain(duplicated_directive(_, _, _, _, _)) -->
 		['Easy to fix warning: simply delete or correct the duplicated directive.'-[], nl, nl].
 
+	explain(duplicated_clauses(_, _, _, _, _, _)) -->
+		[	'Duplicated clauses are usually a source code editing error and can'-[], nl,
+			'result in spurious choice-points, degrading performance. Delete or'-[], nl,
+			'correct the duplicated clause to fix this warning.'-[], nl, nl
+		].
+
 	% lambda expression messages
 
 	explain(parameter_variable_used_elsewhere(_, _, _, _, _, _)) -->
@@ -529,7 +535,7 @@
 
 	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Predicate)) -->
 		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Predicate], nl,
-			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Predicate, Type], nl, nl
+			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Predicate], nl, nl
 		].
 
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
