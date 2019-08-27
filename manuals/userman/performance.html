@@ -278,7 +278,9 @@ code; it requires compiling code with the <a class="reference internal" href="pr
 flag turned on. Dynamic binding numbers are after the first call (i.e.
 after the generalization of the query is cached). All numbers with the
 <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> (setting this flag to
-<code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of 5 inferences to the results above).</p>
+<code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of 5 inferences to the results above; note
+that this flag can be defined in a per-object basis as needed instead
+of globally and thus minimizing the performance impact).</p>
 <p>The dynamic binding caches assume the used <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>
 does indexing of dynamic predicates. This is a common feature of modern
 Prolog systems but the actual details vary from system to system and may
@@ -346,8 +348,9 @@ clauses whose head unify with the goal and backtracking). In practice, this
 overhead translates to code compiled in debug mode running typically ~2x to
 ~7x slower than code compiled in normal or optimized mode depending on the
 application (the exact overhead is proportional to the number of passes on
-the call and unification ports; deterministic code often results in a larger
-overhead compared with code performing significant backtracking).</p>
+the call and unification ports; deterministic code often results in a
+relatively larger overhead when compared with code performing significant
+backtracking).</p>
 </div>
 <div class="section" id="other-considerations">
 <h2>Other considerations<a class="headerlink" href="#other-considerations" title="Permalink to this headline">¶</a></h2>
@@ -359,7 +362,7 @@ and
 <a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/examples/benchmarks">benchmarks</a>,
 to help evaluate performance with specific backend Prolog systems. A
 table with <a class="reference external" href="https://logtalk.org/performance.html">results</a> for a
-subset of the supported systems is also available in the Logtalk
+subset of the supported systems is also available at the Logtalk
 website.</p>
 </div>
 </div>

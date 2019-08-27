@@ -91,7 +91,9 @@ code; it requires compiling code with the :ref:`optimize <flag_optimize>`
 flag turned on. Dynamic binding numbers are after the first call (i.e.
 after the generalization of the query is cached). All numbers with the
 :ref:`events <flag_events>` flag set to ``deny`` (setting this flag to
-``allow`` adds an overhead of 5 inferences to the results above).
+``allow`` adds an overhead of 5 inferences to the results above; note
+that this flag can be defined in a per-object basis as needed instead
+of globally and thus minimizing the performance impact).
 
 The dynamic binding caches assume the used :term:`backend Prolog compiler`
 does indexing of dynamic predicates. This is a common feature of modern
@@ -166,8 +168,9 @@ clauses whose head unify with the goal and backtracking). In practice, this
 overhead translates to code compiled in debug mode running typically ~2x to
 ~7x slower than code compiled in normal or optimized mode depending on the
 application (the exact overhead is proportional to the number of passes on
-the call and unification ports; deterministic code often results in a larger
-overhead compared with code performing significant backtracking).
+the call and unification ports; deterministic code often results in a
+relatively larger overhead when compared with code performing significant
+backtracking).
 
 
 Other considerations
@@ -181,5 +184,5 @@ and
 `benchmarks <https://github.com/LogtalkDotOrg/logtalk3/tree/master/examples/benchmarks>`_,
 to help evaluate performance with specific backend Prolog systems. A
 table with `results <https://logtalk.org/performance.html>`_ for a
-subset of the supported systems is also available in the Logtalk
+subset of the supported systems is also available at the Logtalk
 website.

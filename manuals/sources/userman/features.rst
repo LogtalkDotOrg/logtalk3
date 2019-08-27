@@ -238,6 +238,9 @@ Performance
    caching of :term:`message lookups <message lookup>` (including messages
    to *self* and *super* calls), ensuring a performance level close to what
    could be achieved when using static binding.
+   
+   For more detailed information on performance, see its dedicated
+   :ref:`section <performance_performance>`.
 
 .. _features_scope:
 
