@@ -38,25 +38,25 @@
 	% to coordinate their interaction
 
 	:- public(book/0).
-    book :-
-        book_button::set_enabled_status(false),
-        view_button::set_enabled_status(true),
-        search_button::set_enabled_status(true),
-        display::show('booking...').
+	book :-
+		book_button::set_enabled_status(false),
+		view_button::set_enabled_status(true),
+		search_button::set_enabled_status(true),
+		display::show('booking...').
 
 	:- public(view/0).
 	view :-
-        book_button::set_enabled_status(true),
-        view_button::set_enabled_status(false),
-        search_button::set_enabled_status(true),
-        display::show('viewing...').
+		book_button::set_enabled_status(true),
+		view_button::set_enabled_status(false),
+		search_button::set_enabled_status(true),
+		display::show('viewing...').
 
 	:- public(search/0).
 	search :-
-        book_button::set_enabled_status(true),
-        view_button::set_enabled_status(true),
-        search_button::set_enabled_status(false),
-        display::show('searching...').
+		book_button::set_enabled_status(true),
+		view_button::set_enabled_status(true),
+		search_button::set_enabled_status(false),
+		display::show('searching...').
 
 :- end_object.
 

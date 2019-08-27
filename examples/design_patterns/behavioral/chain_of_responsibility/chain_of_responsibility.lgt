@@ -72,7 +72,7 @@
 
 :- object(manager,
 	imports(purchase_power)).
-    
+
 	allowable(Allowable) :-
 		^^base(Base),
 		Allowable is Base * 10.
@@ -86,7 +86,7 @@
 
 :- object(director,
 	imports(purchase_power)).
-    
+
 	allowable(Allowable) :-
 		^^base(Base),
 		Allowable is Base * 20.
@@ -100,7 +100,7 @@
 
 :- object(vice_president,
 	imports(purchase_power)).
-    
+
 	allowable(Allowable) :-
 		^^base(Base),
 		Allowable is Base * 40.
@@ -114,7 +114,7 @@
 
 :- object(president,
 	imports(purchase_power)).
-    
+
 	allowable(Allowable) :-
 		^^base(Base),
 		Allowable is Base * 60.
@@ -122,5 +122,3 @@
 	role('President').
 
 :- end_object.
-
-

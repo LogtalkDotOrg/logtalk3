@@ -43,7 +43,7 @@
 	implements(drawing_api_protocol)).
 
 	draw_circle(X, Y, Radius) :-
-        write('API1: circle at '), write(X:Y),
+		write('API1: circle at '), write(X:Y),
 		write(' with radius '), write(Radius), nl.
 
 :- end_object.
@@ -53,7 +53,7 @@
 	implements(drawing_api_protocol)).
 
 	draw_circle(X, Y, Radius) :-
-        write('API2: circle at '), write(X:Y),
+		write('API2: circle at '), write(X:Y),
 		write(' with radius '), write(Radius), nl.
 
 :- end_object.
@@ -80,7 +80,7 @@
 
 	% the draw/0 predicate abstracts how a shape is draw by
 	% delegating the operation to a separate implementation
-    :- public([
+	:- public([
 		draw/0, resize/1
 	]).
 
@@ -110,7 +110,7 @@
 
 	resize(Percent) :-
 		::retract(radius(Radius)),
-        NewRadius is Radius * (1 + Percent / 100),
+		NewRadius is Radius * (1 + Percent / 100),
 		::assertz(radius(NewRadius)).
 
 :- end_object.
