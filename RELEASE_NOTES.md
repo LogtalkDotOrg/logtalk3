@@ -70,7 +70,13 @@ always available.
 Documentation
 -------------
 
+* ADDED: Handbook section on the Logtalk multi-pass compiler and its
+implications when writing source files.
+
 * IMPROVED: Handbook description of the `code_prefix` and `clean` flags.
+
+* IMPROVED: Glossary entry on "entity" and added "static entity" and
+"dynamic entity" aliases.
 
 * UPDATED: Handbook description of lambda expression lint checks.
 

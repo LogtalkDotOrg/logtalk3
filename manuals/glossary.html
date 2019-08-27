@@ -251,6 +251,8 @@ tools for details.</p>
 predicate definition that will be used to answer the message (or the
 super call). Also known as <em>late binding</em>. See also <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</p>
 </dd>
+<dt id="term-dynamic-entity">dynamic entity</dt><dd><p>See <a class="reference internal" href="#term-entity"><span class="xref std std-term">entity</span></a>.</p>
+</dd>
 <dt id="term-early-binding">early binding</dt><dd><p>See <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</p>
 </dd>
 <dt id="term-encapsulation">encapsulation</dt><dd><p>The hiding of an object implementation. This promotes software reuse
@@ -261,7 +263,10 @@ Encapsulation is enforced in Logtalk by using
 <dt id="term-entity">entity</dt><dd><p>Generic name for Logtalk compilation units: <a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a>,
 <a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>, and <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocols</span></a>.
 Entities share a single namespace (i.e. entity
-<a class="reference internal" href="#term-identity"><span class="xref std std-term">identifiers</span></a> must be unique).</p>
+<a class="reference internal" href="#term-identity"><span class="xref std std-term">identifiers</span></a> must be unique) and can be static (the
+default) or dynamic. Static entities are defined in source files.
+Dynamic entities can be created and abolished at runtime using the
+language built-in predicates.</p>
 </dd>
 <dt id="term-entity-directive">entity directive</dt><dd><p>A directive that affects how Logtalk entities (<a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a>,
 <a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>, or <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocols</span></a>) are
@@ -568,6 +573,8 @@ call (or a <a class="reference internal" href="#term-super-call"><span class="xr
 binding is not possible (e.g. due to the predicate being dynamic or due
 to lack of enough information at compilation time). Also known as <em>early
 binding</em>. See also <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</p>
+</dd>
+<dt id="term-static-entity">static entity</dt><dd><p>See <a class="reference internal" href="#term-entity"><span class="xref std std-term">entity</span></a>.</p>
 </dd>
 <dt id="term-steadfastness">steadfastness</dt><dd><p>A predicate definition is <em>steadfast</em> when it still generates only
 correct answers when called with unexpected arguments. Typically,

@@ -49,7 +49,56 @@ Source files
 ~~~~~~~~~~~~
 
 Logtalk source files may define any number of entities (objects,
-categories, or protocols) and Prolog code. If you prefer to define each
+categories, or protocols). Source files may also contain Prolog code
+interleaved with Logtalk entity definitions. Plain Prolog code is usually
+copied as-is to the corresponding Prolog output file (except, of course,
+if subject to the :ref:`term-expansion mechanism <expansion_expansion>`).
+Prolog modules are compiled as objects. The following Prolog directives are
+processed when read (thus affecting the compilation of the source code that
+follows): ``ensure_loaded/1``, ``use_module/1-2``, ``op/3``, and
+``set_prolog_flag/2``. The ``initialization/1`` Prolog directive may be used
+for defining an initialization goal to be executed when loading a source file.
+Most calls to Logtalk built-in predicates from file ``initialization/1``
+directives are compiled for better performance.
+
+Logtalk source files can include the text of other files by using the
+:ref:`directives_include_1` directive. Although there is also a standard
+Prolog ``include/1`` directive, any occurrences of this directive in a
+Logtalk source file is handled by the Logtalk compiler, not by the
+:term:`backend Prolog compiler`.
+
+Multi-pass compiler
+^^^^^^^^^^^^^^^^^^^
+
+Logtalk is currently implemented using a multi-pass compiler. In comparison,
+some Prolog systems use a multi-pass compiler while others use a single-pass
+compiler. While there are pros and cons with each solution, the most relevant
+consequence in this context is for the content of source files. In Logtalk,
+entities and predicates only become available (for the runtime system) after
+the source file is fully compiled and loaded. This may prevent some compiler
+optimizations, notably static binding, if some of the referred entities are
+defined in the same source file. On the other hand, the order of predicate
+directives and predicate definitions is irrelevant. In contrast, in a system
+implemented using a single-pass compiler, the order of the source file terms
+can and often is significant for proper and succesful compilation. In these
+systems, predicates may become available for calling as soon as they are
+compiled even if the remaining of the source file is yet to be compiled.
+When writing a Logtalk source file the following advice applies:
+
+- When practical and when performance is critical, define each entity on
+  its own source file.
+- Source file loading order can impact performance (e.g. if an object
+  imports a category defined in a source file loaded after the object
+  source file, no static binding optimizations will be possible).
+- File directives that result in the compilation and loading of other
+  source files (e.g. libraries) should preferably be written in the
+  application loader file to ensure the availability of the entities
+  they define when compiling the application source files.
+
+Naming conventions
+^^^^^^^^^^^^^^^^^^
+
+If you prefer to define each
 entity in its own source file, then it is recommended that the source
 file be named after the entity identifier. For parametric objects, the
 identifier arity can be appended to the identifier functor. By default,
@@ -69,29 +118,14 @@ embedding applications, and depending on the
 :term:`backend compiler <backend Prolog compiler>`, the names
 of the intermediate Prolog files may include a directory hash.
 
-Logtalk source files may contain Prolog code interleaved with Logtalk
-entity definitions. Plain Prolog code is usually copied as-is to the
-corresponding Prolog output file (except, of course, if subject to the
-:ref:`term-expansion mechanism <expansion_expansion>`). Prolog modules
-are compiled as objects. The following Prolog directives are processed
-when read (thus affecting the compilation of the source code that follows):
-``ensure_loaded/1``, ``use_module/1-2``, ``op/3``, and ``set_prolog_flag/2``.
-The ``initialization/1`` Prolog directive may be used for defining an
-initialization goal to be executed when loading a source file. Most
-calls to Logtalk built-in predicates from file ``initialization/1``
-directives are compiled for better performance.
+Source file text encoding
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The text encoding used in a source file may be declared using the
 :ref:`directives_encoding_1` directive when running Logtalk with
 backend Prolog compilers that support multiple encodings (check the
 :ref:`encoding_directive <flag_encoding_directive>` flag in the
 adapter file of your Prolog compiler).
-
-Logtalk source files can include the text of other files by using the
-:ref:`directives_include_1` directive.
-Although there is also a standard Prolog ``include/1`` directive, any
-occurrences of this directive in a Logtalk source file is handled by
-the Logtalk compiler, not by the :term:`backend Prolog compiler`.
 
 .. _programming_portability:
 

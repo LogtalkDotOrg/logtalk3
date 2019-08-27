@@ -98,7 +98,10 @@ Glossary
       Generic name for Logtalk compilation units: :term:`objects <object>`,
       :term:`categories <category>`, and :term:`protocols <protocol>`.
       Entities share a single namespace (i.e. entity
-      :term:`identifiers <identity>` must be unique).
+      :term:`identifiers <identity>` must be unique) and can be static (the
+      default) or dynamic. Static entities are defined in source files.
+      Dynamic entities can be created and abolished at runtime using the
+      language built-in predicates.
 
    parametric entity
       An :term:`object` or :term:`category` whose :term:`identifier <identity>`
@@ -108,6 +111,12 @@ Glossary
       of a parametric entity is its functor, irrespective of the possible
       values of its arguments (e.g. ``foo(bar)`` and ``foo(baz)`` are
       different parameterizations of the same parametric entity, ``foo/1``).
+
+   static entity
+      See :term:`entity`.
+
+   dynamic entity
+      See :term:`entity`.
 
    event
       The sending of a :term:`message` to an object. An event can be
