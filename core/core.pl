@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 29, 0, b07)).
+'$lgt_version_data'(logtalk(3, 29, 0, b08)).
 
 
 
@@ -11583,6 +11583,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_entity_'(Type, Entity, _),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, name/2)),
+	fail.
+
+'$lgt_compile_body'(current_predicate(_, _), _, _, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(current_predicate(_, _)),
+	\+ '$lgt_pp_defines_predicate_'(current_predicate(_, _), _, _, _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(deprecated, warning),
+	'$lgt_source_file_context'(File, Lines),
+	'$lgt_pp_entity_'(Type, Entity, _),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, current_predicate/2)),
 	fail.
 
 % warning on cuts on clauses for multifile predicates

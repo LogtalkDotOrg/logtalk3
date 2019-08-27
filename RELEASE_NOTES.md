@@ -33,8 +33,8 @@ that are used elsewhere in a clause.
 * ADDED: New compiler lint warning for `bagof/3` and `setof/3` where the goal
 argument contains singleton variables.
 
-* ADDED: New compiler lint warning for calls to the deprecated `name/2` Prolog
-built-in predicate.
+* ADDED: New compiler lint warning for calls to the deprecated `name/2` and
+`current_predicate/2` Prolog built-in predicates.
 
 * ADDED: New compiler lint warning for duplicated entity clauses and grammar
 rules.
