@@ -604,13 +604,15 @@ forall(Generate, Test) :-
 
 :- if((get_flag(version_as_list, Version), Version @>= [7,0,35])).
 	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-		get_stream_info(Stream, line, LineBegin),
+		get_stream_info(Stream, line, LineLast),
 		read_term(Stream, Term, [syntax_errors(error), variable_names(Variables)| Options]),
+		LineBegin is LineLast + 1,
 		get_stream_info(Stream, line, LineEnd).
 :- else.
 	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-		get_stream_info(Stream, line, LineBegin),
+		get_stream_info(Stream, line, LineLast),
 		(	read_term(Stream, Term, [variable_names(Variables)| Options]) ->
+			LineBegin is LineLast + 1,
 			get_stream_info(Stream, line, LineEnd)
 		;	throw(syntax_error)
 		).

@@ -70,6 +70,8 @@ always available.
 * FIXED: Missing meta-predicate directive for the definition of the de facto
 standard `forall/2` predicate in the ECLiPSe and SICStus Prolog adapter files.
 
+* FIXED: Begin line in compiler warning and error messages for ECLiPSe.
+
 Documentation
 -------------
 
