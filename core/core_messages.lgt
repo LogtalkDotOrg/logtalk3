@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.74,
+		version is 1.75,
 		author is 'Paulo Moura',
-		date is 2019/08/26,
+		date is 2019/08/28,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -783,7 +783,7 @@
 		{functor(Head, Functor, Arity)},
 		['loop without a cut in clause for predicate ~q'-[Functor/Arity], nl].
 	suspicious_call_reason(shared_variable(Variable)) -->
-		['as variable ~w occurs in expression'-[Variable], nl].
+		['as variable ~q occurs in expression'-[Variable], nl].
 	suspicious_call_reason(no_shared_variables(Predicate)) -->
 		(	{Predicate == forall} ->
 			['as generator and test goals share no variables'-[], nl]
@@ -791,14 +791,14 @@
 			['as template and goal share no variables'-[], nl]
 		).
 	suspicious_call_reason(existential_variables([Variable], Goal)) -->
-		['as existential variable ~w do not exist in goal ~q '-[Variable, Goal], nl].
+		['as existential variable ~q do not exist in goal ~q '-[Variable, Goal], nl].
 	suspicious_call_reason(existential_variables([Variable1, Variable2| Variables], Goal)) -->
-		['as existential variables ~w do not exist in goal ~q '-[[Variable1, Variable2| Variables], Goal], nl].
+		['as existential variables ~q do not exist in goal ~q '-[[Variable1, Variable2| Variables], Goal], nl].
 
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton])) -->
-		['in ~w goal contains singleton variable ~w'-[Predicate, Singleton], nl].
+		['in ~w goal contains singleton variable ~q'-[Predicate, Singleton], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton| Singletons])) -->
-		['in ~w goal contains singleton variables ~w'-[Predicate, [Singleton| Singletons]], nl].
+		['in ~w goal contains singleton variables ~q'-[Predicate, [Singleton| Singletons]], nl].
 
 	missing_entities([]) -->
 		[].
