@@ -203,6 +203,7 @@
 
 	:- public(foo/1).
 	:- multifile(foo/1).
+	:- dynamic(foo/1).
 
 	foo(1).
 	foo(2).

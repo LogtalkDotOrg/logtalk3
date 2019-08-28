@@ -72,6 +72,10 @@ standard `forall/2` predicate in the ECLiPSe and SICStus Prolog adapter files.
 
 * FIXED: Begin line in compiler warning and error messages for ECLiPSe.
 
+* FIXED: Workaround Qu-Prolog bug where the `read_term/3` predicate returns
+`singletons/1` and `variable_names/1` option lists with variable-name pairs
+instead of standard name-variable pairs.
+
 Documentation
 -------------
 
