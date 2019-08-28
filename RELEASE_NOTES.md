@@ -110,6 +110,9 @@ Examples
 * UPDATED: The `errors` and `lambdas` examples to illustrate the new lint
 warnings.
 
+* FIXED: Workaround Qu-Prolog lack of support for static multifile predicates
+and discontiguous predicates when loading the `errors` example.
+
 * FIXED: Lambda expression examples and tests in the `lambdas` example to use
 fresh variables for all lambda expression parameters.
 

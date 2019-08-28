@@ -229,17 +229,21 @@
 
 
 
-:- object(duplicated_discontiguous_directive).
+:- if(\+ current_logtalk_flag(prolog_dialect, qp)).
 
-	:- discontiguous(foo/1).
+	:- object(duplicated_discontiguous_directive).
+	
+		:- discontiguous(foo/1).
+	
+		foo(1).
+		foo(2).
+		foo(3).
+	
+		:- discontiguous(foo/1).
+	
+	:- end_object.
 
-	foo(1).
-	foo(2).
-	foo(3).
-
-	:- discontiguous(foo/1).
-
-:- end_object.
+:- endif.
 
 
 
@@ -316,6 +320,7 @@
 
 	:- public(multi/0).
 	:- multifile(multi/0).
+	:- dynamic(multi/0).
 	multi :-
 		!.
 
