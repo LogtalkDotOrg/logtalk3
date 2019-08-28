@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.16,
+		version is 0.17,
 		author is 'Paulo Moura',
-		date is 2019/08/26,
+		date is 2019/08/28,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -679,21 +679,12 @@
 			'Typos in the variable names?'-[], nl, nl
 		].
 
-	explain(suspicious_call(_, _, _, _, _, reason(singleton_variables(_, Goal, [Singleton])))) -->
-		{	copy_term(Goal-Singleton, GoalCopy-SingletonCopy),
-			numbervars(GoalCopy, 0, _)
-		},
-		[	'Variables in the goal argument of bagof/3 and setof/3 calls that are not'-[], nl,
-			'existentially-qualified can result in multiple solutions. If that is not'-[], nl,
-			'intended, write instead ~w^~w'-[SingletonCopy, GoalCopy], nl, nl
-		].
-	explain(suspicious_call(_, _, _, _, _, reason(singleton_variables(_, Goal, [Singleton| Singletons])))) -->
-		{	copy_term(Goal-[Singleton| Singletons], GoalCopy-SingletonsCopy),
-			numbervars(GoalCopy, 0, _)
-		},
-		[	'Variables in the goal argument of bagof/3 and setof/3 calls that are not'-[], nl,
-			'existentially-qualified can result in multiple solutions. If that is not'-[], nl,
-			'intended, write instead ~w^~w'-[SingletonsCopy, GoalCopy], nl, nl
+	explain(suspicious_call(_, _, _, _, _, reason(singleton_variables(_, _, _)))) -->
+		[	'Singleton variables in the goal argument of bagof/3 and setof/3 calls'-[], nl,
+			'that are not existentially-qualified can result in multiple solutions.'-[], nl,
+			'If you want a single solution, use the ^/2 operator to existentially'-[], nl,
+			'qualify the variables. If you want multiple solutions, use a lambda'-[], nl,
+			'expression with the relevant variables listed as lambda free variables.'-[], nl, nl
 		].
 
 	% encoding/1 directive messages
