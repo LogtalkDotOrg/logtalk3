@@ -35,9 +35,13 @@
 	:- include('countries.pl').
 
 	capitals(Capitals) :-
+		% use the ^/2 operator to ignore the Country and Population variables
+		% so that we get a single solution with all the capitals
 		setof(Capital, Country^Population^country(Country, Capital, Population), Capitals).
 
 	same_population(Countries) :-
-		setof(Country, Capital^country(Country, Capital, _Population), Countries).
+		% use a lambda expression to ignore the _Capital variable and group
+		% countries by population
+		setof(Country, {Country,Population}/country(Country, _Capital, Population), Countries).
 
 :- end_object.
