@@ -67,6 +67,9 @@ always available.
 
 * FIXED: Harmless dynamic predicate warning in the SICStus Prolog adapter file.
 
+* FIXED: Missing meta-predicate directive for the definition of the de facto
+standard `forall/2` predicate in the ECLiPSe and SICStus Prolog adapter files.
+
 Documentation
 -------------
 
