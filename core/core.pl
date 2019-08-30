@@ -8654,6 +8654,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
+	(	Directive = {_}
+	;	Directive = [_| _]
+	),
+	% assume Logtalk or Prolog top-level shortcut being used as a directive
+	!,
+	% directive will be copied to the generated Prolog file
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- Directive), sd(Term,VariableNames,File,Lines), Lines)),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(general), top_level_shortcut_as_directive(File, Lines, Directive))
+	;	true
+	).
+
+'$lgt_compile_file_directive'(Directive, Ctx) :-
 	% directive will be copied to the generated Prolog file
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- Directive), sd(Term,VariableNames,File,Lines), Lines)),

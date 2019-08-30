@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.17,
+		version is 0.18,
 		author is 'Paulo Moura',
-		date is 2019/08/28,
+		date is 2019/08/30,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -480,6 +480,12 @@
 		[	'Use of built-in predicates as directives may make your code non-portable when using'-[], nl,
 			'other backend compilers. Use instead a standard initialization/1 directive to call'-[], nl,
 			'those predicates: ":- initialization(~q)."'-[Directive], nl, nl
+		].
+
+	explain(top_level_shortcut_as_directive(_, _, _)) -->
+		[	'Top-level shortcuts should only be used at the top-level interpreter.'-[], nl,
+			'Use instead a supported directive or a built-in predicate called from'-[], nl,
+			'an initialization/1 directive to fix this warning.'-[], nl, nl
 		].
 
 	explain(compiling_proprietary_prolog_directive(_, _, _, _, _)) -->

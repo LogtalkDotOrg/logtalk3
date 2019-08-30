@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.75,
+		version is 1.76,
 		author is 'Paulo Moura',
-		date is 2019/08/28,
+		date is 2019/08/30,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -461,6 +461,10 @@
 
 	message_tokens(logtalk_built_in_predicate_as_directive(File, Lines, Directive)) -->
 		['Use of Logtalk built-in predicate as a directive: ~q'-[Directive], nl],
+		message_context(File, Lines).
+
+	message_tokens(top_level_shortcut_as_directive(File, Lines, Directive)) -->
+		['Use of Logtalk or Prolog top-level shortcut as a directive: ~q'-[Directive], nl],
 		message_context(File, Lines).
 
 	% lambda expression messages
