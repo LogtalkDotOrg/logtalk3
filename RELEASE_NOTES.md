@@ -79,6 +79,8 @@ instead of standard name-variable pairs.
 Documentation
 -------------
 
+* ADDED: Cross-links between Handbook and APIs documentation.
+
 * ADDED: Handbook section on the Logtalk multi-pass compiler and its
 implications when writing source files.
 
