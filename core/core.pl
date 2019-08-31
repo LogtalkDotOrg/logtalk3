@@ -21712,10 +21712,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(GRBody, call, Arity),
 	Arity >= 1,
 	!,
-	GRBody =.. [call, Closure| Args],
+	GRBody =.. [call, Closure| ExtraArgs],
 	'$lgt_check'(var_or_callable, Closure),
-	'$lgt_append'(Args, [S0, S], FullArgs),
-	Goal =.. [call, Closure| FullArgs].
+	(	callable(Closure),
+		\+ '$lgt_logtalk_control_construct'(Closure),
+		Closure \= ':'(_, _) ->
+		Closure =.. [Functor| Args],
+		'$lgt_append'(Args, ExtraArgs, FullArgs0),
+		'$lgt_append'(FullArgs0, [S0, S], FullArgs),
+		Goal =.. [Functor| FullArgs]
+	;	% var(Closure),
+		'$lgt_append'(ExtraArgs, [S0, S], FullArgs),
+		Goal =.. [call, Closure| FullArgs]
+	).
 
 '$lgt_dcg_body'([], S0, S, (S0 = S), _) :-
 	!.
