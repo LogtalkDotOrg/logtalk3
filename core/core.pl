@@ -11677,6 +11677,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, call(Goal), [Goal])),
 	fail.
+
 '$lgt_compile_body'(call(Goal), TPred, '$lgt_debug'(goal(call(Goal), DPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -13780,6 +13781,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 2,
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
+	(	callable(Closure),
+		'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(suspicious_calls, warning) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		Goal =.. [Closure| ExtraArgs],
+		'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, CallN, [Goal]))
+	;	true
+	),
 	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
