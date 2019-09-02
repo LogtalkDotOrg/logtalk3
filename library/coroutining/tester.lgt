@@ -41,6 +41,6 @@
 
 :- else.
 
-	:- initialization((write('(not available for the used backend Prolog compiler)'), nl)).
+	:- initialization((write('(not applicable)'), nl)).
 
 :- endif.
