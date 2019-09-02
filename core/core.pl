@@ -16995,6 +16995,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_logtalk_control_construct'(@callable)
 %
 % table of Logtalk own control constructs
+%
+% when these control constructs are used as closures, the additional
+% arguments must be appended to the arguments of the goal argument of
+% the control construct, not as additional arguments of the control
+% construct itself
 
 '$lgt_logtalk_control_construct'(_ :: _).
 '$lgt_logtalk_control_construct'(:: _).
@@ -21714,17 +21719,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	GRBody =.. [call, Closure| ExtraArgs],
 	'$lgt_check'(var_or_callable, Closure),
-	(	callable(Closure),
-		\+ '$lgt_logtalk_control_construct'(Closure),
-		Closure \= ':'(_, _) ->
-		Closure =.. [Functor| Args],
-		'$lgt_append'(Args, ExtraArgs, FullArgs0),
-		'$lgt_append'(FullArgs0, [S0, S], FullArgs),
-		Goal =.. [Functor| FullArgs]
-	;	% var(Closure),
-		'$lgt_append'(ExtraArgs, [S0, S], FullArgs),
-		Goal =.. [call, Closure| FullArgs]
-	).
+	'$lgt_append'(ExtraArgs, [S0, S], FullArgs),
+	% translate to the internal '$lgt_callN'/2 predicate instead of the call/N control
+	% construct to avoid lint warnings about redundant uses of the control construct
+	Goal = '$lgt_callN'(Closure, FullArgs).
 
 '$lgt_dcg_body'([], S0, S, (S0 = S), _) :-
 	!.
