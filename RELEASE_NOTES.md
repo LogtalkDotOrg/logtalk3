@@ -66,6 +66,9 @@ contains a meta-call in `user` where the goal is only know at runtime.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The SWI-Prolog adapter file to support `dynamic/1` directives with
+`as/2` arguments for incremental tabling.
+
 * IMPROVED: The SICStus Prolog adapter file now uses the `stream_position/2`
 predicate to retrieve the stream position in case of error instead of the
 standard `stream_property/2` predicate property `position/1` that is not
@@ -96,6 +99,12 @@ implications when writing source files.
 "dynamic entity" aliases.
 
 * UPDATED: Handbook description of lambda expression lint checks.
+
+Library
+-------
+
+* FIXED: Avoid reporting the `coroutining` and `timeout` libraries as broken
+when testing while running on backend Prolog systems that don't support them.
 
 Tools
 -----
