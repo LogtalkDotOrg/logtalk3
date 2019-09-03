@@ -27,8 +27,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Compilation of `reexport/2` directives when compiling a Prolog module
-as an object.
+* ADDED: Support for compiling Prolog module `meta_predicate/1` directives
+(when compiling a module as an object) where the templates are explicitly
+qualified.
+
+* FIXED: Compilation of `reexport/2` directives regression when compiling a
+Prolog module as an object.
 
 
 3.29.0 - September 3, 2019

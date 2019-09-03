@@ -10538,13 +10538,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 % into Logtalk ones by translating the meta-argument specifiers
 
 '$lgt_compile_module_meta_predicate_directive'([Template| Templates], [ConvertedTemplate| ConvertedTemplates]) :-
-	'$lgt_check'(callable, Template),
-	Template =.. [Functor| Args],
-	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(Args, ConvertedArgs),
-	ConvertedTemplate =.. [Functor| ConvertedArgs],
+	'$lgt_compile_module_meta_predicate_directive_template'(Template, ConvertedTemplate),
 	'$lgt_compile_module_meta_predicate_directive'(Templates, ConvertedTemplates).
 
 '$lgt_compile_module_meta_predicate_directive'([], []).
+
+
+'$lgt_compile_module_meta_predicate_directive_template'(':'(Module,Template), ':'(Module,ConvertedTemplate)) :-
+	!,
+	'$lgt_check'(module_identifier, Module),
+	'$lgt_compile_module_meta_predicate_directive_template'(Template, ConvertedTemplate).
+
+'$lgt_compile_module_meta_predicate_directive_template'(Template, ConvertedTemplate) :-
+	'$lgt_check'(callable, Template),
+	Template =.. [Functor| Args],
+	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(Args, ConvertedArgs),
+	ConvertedTemplate =.. [Functor| ConvertedArgs].
 
 
 
