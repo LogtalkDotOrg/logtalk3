@@ -24,7 +24,11 @@ RELEASE NOTES
 3.30.0 - October ??, 2019
 =========================
 
+Logtalk compiler and runtime
+----------------------------
 
+* FIXED: Compilation of `reexport/2` directives when compiling a Prolog module
+as an object.
 
 
 3.29.0 - September 3, 2019

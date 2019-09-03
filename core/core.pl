@@ -10488,7 +10488,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_logtalk_directive'(public(NewFunctor/Arity), Ctx),
 	functor(NewHead, NewFunctor, Arity),
 	functor(Head, Functor, Arity),
-	'$lgt_compile_clause'((NewHead :- Module::Head), Ctx).
+	% add local definition
+	'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+	'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+	'$lgt_compile_clause'((NewHead :- Module::Head), AuxCtx).
 
 '$lgt_compile_reexport_directive_resource'(as(NonTerminal, NewFunctor), Module, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, _),
@@ -10497,21 +10500,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_logtalk_directive'(public(NewFunctor//Arity), Ctx),
 	functor(NewHead, NewFunctor, Arity),
 	functor(Head, Functor, Arity),
-	'$lgt_compile_grammar_rule'((NewHead --> Module::Head), Ctx).
+	% add local definition
+	'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+	'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+	'$lgt_compile_grammar_rule'((NewHead --> Module::Head), AuxCtx).
 
 '$lgt_compile_reexport_directive_resource'(Pred, Module, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	'$lgt_compile_logtalk_directive'(public(Pred), Ctx),
 	functor(Head, Functor, Arity),
-	'$lgt_compile_clause'((Head :- Module::Head), Ctx).
+	% add local definition
+	'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+	'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+	'$lgt_compile_clause'((Head :- Module::Head), AuxCtx).
 
 '$lgt_compile_reexport_directive_resource'(NonTerminal, Module, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, _),
 	!,
 	'$lgt_compile_logtalk_directive'(public(NonTerminal), Ctx),
 	functor(Head, Functor, Arity),
-	'$lgt_compile_grammar_rule'((Head --> Module::Head), Ctx).
+	% add local definition
+	'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+	'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+	'$lgt_compile_grammar_rule'((Head --> Module::Head), AuxCtx).
 
 '$lgt_compile_reexport_directive_resource'(Resource, _, _) :-
 	ground(Resource),
