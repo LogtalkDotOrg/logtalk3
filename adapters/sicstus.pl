@@ -582,9 +582,8 @@ forall(Generate, Test) :-
 	catch('$lgt_sicstus_directive_expansion'(Directive, Expanded), _, fail).
 
 
-'$lgt_sicstus_directive_expansion'(is(_,Mode), []) :-	% predicate determinism directive
-	logtalk_load_context(entity_type, module),			% only when we're compiling a module as an object!
-	atom(Mode).
+'$lgt_sicstus_directive_expansion'(is(_,_), []) :-	% predicate determinism or similar directive
+	logtalk_load_context(entity_type, module).			% only when we're compiling a module as an object!
 
 '$lgt_sicstus_directive_expansion'(mode(_), []).
 '$lgt_sicstus_directive_expansion'(public(_), []) :-	% used to provide info to the cross-referencer

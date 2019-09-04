@@ -37,7 +37,7 @@ Prolog module as an object.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The SICStus Prolog adapter file to suppress predicate determinism
+* UPDATED: The SICStus Prolog adapter file to suppress `is/2` predicate
 directives when compiling a module as an object.
 
 
