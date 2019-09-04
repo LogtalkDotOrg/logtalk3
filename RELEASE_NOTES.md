@@ -34,6 +34,12 @@ qualified.
 * FIXED: Compilation of `reexport/2` directives regression when compiling a
 Prolog module as an object.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The SICStus Prolog adapter file to suppress predicate determinism
+directives when compiling a module as an object.
+
 
 3.29.0 - September 3, 2019
 ==========================

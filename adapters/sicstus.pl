@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on August 28, 2019
+%  Last updated on September 4, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -581,6 +581,10 @@ forall(Generate, Test) :-
 	% allow first-argument indexing
 	catch('$lgt_sicstus_directive_expansion'(Directive, Expanded), _, fail).
 
+
+'$lgt_sicstus_directive_expansion'(is(_,Mode), []) :-	% predicate determinism directive
+	logtalk_load_context(entity_type, module),			% only when we're compiling a module as an object!
+	atom(Mode).
 
 '$lgt_sicstus_directive_expansion'(mode(_), []).
 '$lgt_sicstus_directive_expansion'(public(_), []) :-	% used to provide info to the cross-referencer
