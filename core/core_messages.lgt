@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.76,
+		version is 1.77,
 		author is 'Paulo Moura',
-		date is 2019/08/30,
+		date is 2019/09/05,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -634,11 +634,11 @@
 
 	% duplicated clause and grammar rule messages
 
-	message_tokens(duplicated_clauses(File, Lines, Type, Entity, Clause, DuplicateLine-_)) -->
+	message_tokens(duplicated_clause(File, Lines, Type, Entity, Clause, DuplicateLine-_)) -->
 		['Duplicated clause found around line ~w: ~q'-[DuplicateLine, Clause], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(duplicated_grammar_rules(File, Lines, Type, Entity, GrammarRule, DuplicateLine-_)) -->
+	message_tokens(duplicated_grammar_rule(File, Lines, Type, Entity, GrammarRule, DuplicateLine-_)) -->
 		['Duplicated grammar rule found around line ~w: ~q'-[DuplicateLine, GrammarRule], nl],
 		message_context(File, Lines, Type, Entity).
 

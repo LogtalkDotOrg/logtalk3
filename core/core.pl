@@ -434,8 +434,8 @@
 :- dynamic('$lgt_pp_global_operator_'/3).
 % '$lgt_pp_file_operator_'(Priority, Specifier, Operator)
 :- dynamic('$lgt_pp_file_operator_'/3).
-% '$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)
-:- dynamic('$lgt_pp_entity_operator_'/4).
+% '$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, File, Lines)
+:- dynamic('$lgt_pp_entity_operator_'/6).
 
 % '$lgt_pp_warnings_top_goal_'(Goal)
 :- dynamic('$lgt_pp_warnings_top_goal_'/1).
@@ -7728,7 +7728,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % called after compiling a source file or after dynamically creating a new entity
 
 '$lgt_restore_global_operator_table' :-
-	retract('$lgt_pp_entity_operator_'(_, Specifier, Operator, _)),
+	retract('$lgt_pp_entity_operator_'(_, Specifier, Operator, _, _, _)),
 		op(0, Specifier, Operator),
 	fail.
 
@@ -7753,7 +7753,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % called after compiling a source file entity
 
 '$lgt_restore_file_operator_table' :-
-	retract('$lgt_pp_entity_operator_'(_, Specifier, Operator, _)),
+	retract('$lgt_pp_entity_operator_'(_, Specifier, Operator, _, _, _)),
 		op(0, Specifier, Operator),
 	fail.
 
@@ -7795,32 +7795,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_activate_entity_operators'(+integer, +operator_specifier, +atom_or_atom_list, +scope)
+% '$lgt_activate_entity_operators'(+integer, +operator_specifier, +atom_or_atom_list, +scope, +atom, +pair(integer))
 %
 % activates local entity operator definitions
 %
 % any conflicting file operator is saved so that it can be restored later
 
-'$lgt_activate_entity_operators'(_, _, [], _) :-
+'$lgt_activate_entity_operators'(_, _, [], _, _, _) :-
 	!.
 
-'$lgt_activate_entity_operators'(Priority, Specifier, [Operator| Operators], Scope) :-
+'$lgt_activate_entity_operators'(Priority, Specifier, [Operator| Operators], Scope, File, Lines) :-
 	!,
-	'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope),
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, Scope).
+	'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope, File, Lines),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, Scope, File, Lines).
 
-'$lgt_activate_entity_operators'(Priority, Specifier, Operator, Scope) :-
-	'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope).
+'$lgt_activate_entity_operators'(Priority, Specifier, Operator, Scope, File, Lines) :-
+	'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope, File, Lines).
 
 
-'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope) :-
+'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope, File, Lines) :-
 	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
 		'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
 		assertz('$lgt_pp_file_operator_'(OriginalPriority, OriginalSpecifier, Operator))
 	;	true
 	),
 	op(Priority, Specifier, Operator),
-	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)),
+	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, File, Lines)),
 	'$lgt_pp_entity_'(_, Entity, _),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope)))).
 
@@ -9037,9 +9037,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % op/3 entity directive (operators are local to entities)
 
-'$lgt_compile_logtalk_directive'(op(Priority, Specifier, Operators), _) :-
+'$lgt_compile_logtalk_directive'(op(Priority, Specifier, Operators), Ctx) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines).
 
 % uses/1 entity directive
 
@@ -9391,12 +9392,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary predicate for compiling scope directive resources
 
-'$lgt_compile_scope_directive_resource'(op(Priority, Specifier, Operators), Scope, _, _) :-
+'$lgt_compile_scope_directive_resource'(op(Priority, Specifier, Operators), Scope, File, Lines) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators), Scope),
 	'$lgt_scope'(Scope, InternalScope),
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, InternalScope).
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, InternalScope, File, Lines).
 
 '$lgt_compile_scope_directive_resource'(Functor/Arity, Scope, File, StartLine-EndLine) :-
 	'$lgt_valid_predicate_indicator'(Functor/Arity, Functor, Arity),
@@ -9436,7 +9437,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, [Operator| Operators]), Scope) :-
 	!,
-	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope) ->
+	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, _, _) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -9444,13 +9445,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
 		;	true
 		)
-	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _) ->
+	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _, _, _) ->
 		throw(permission_error(modify, operator_scope, op(Priority, Specifier, Operator)))
 	;	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators), Scope)
 	).
 
 '$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operator), Scope) :-
-	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope) ->
+	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, _, _) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -9458,7 +9459,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
 		;	true
 		)
-	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _) ->
+	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _, _, _) ->
 		throw(permission_error(modify, predicate_scope, op(Priority, Specifier, Operator)))
 	;	true
 	).
@@ -10194,10 +10195,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(type_error(list, Argument)).
 
 
-'$lgt_compile_uses_directive_resource'(op(Priority, Specifier, Operators), _, _, _) :-
+'$lgt_compile_uses_directive_resource'(op(Priority, Specifier, Operators), _, _, Ctx) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines).
 
 '$lgt_compile_uses_directive_resource'(as(Original,Alias), Obj, Flag, Ctx) :-
 	!,
@@ -10344,10 +10346,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(type_error(list, Argument)).
 
 
-'$lgt_compile_use_module_directive_resource'(op(Priority, Specifier, Operators), _, _, _) :-
+'$lgt_compile_use_module_directive_resource'(op(Priority, Specifier, Operators), _, _, Ctx) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines).
 
 '$lgt_compile_use_module_directive_resource'(as(Original, Alias), Module, Flag, Ctx) :-
 	!,
@@ -10489,10 +10492,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_reexport_directive'(Resources, Module, Ctx).
 
 
-'$lgt_compile_reexport_directive_resource'(op(Priority, Specifier, Operators), _, _) :-
+'$lgt_compile_reexport_directive_resource'(op(Priority, Specifier, Operators), _, Ctx) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines).
 
 '$lgt_compile_reexport_directive_resource'(as(Pred, NewFunctor), Module, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
@@ -13520,22 +13524,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 % (these translations are only applied if there are local entity operators declared)
 
 '$lgt_compile_body'(read_term(Stream, Term, Options), '$lgt_iso_read_term'(Stream, Term, Options, Ops), '$lgt_debug'(goal(read_term(Stream, Term, Options), '$lgt_iso_read_term'(Stream, Term, Options, Ops)), ExCtx), Ctx) :-
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(read_term(Term, Options), '$lgt_iso_read_term'(Term, Options, Ops), '$lgt_debug'(goal(read_term(Term, Options), '$lgt_iso_read_term'(Term, Options, Ops)), ExCtx), Ctx) :-
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(read(Stream, Term), '$lgt_iso_read'(Stream, Term, Ops), '$lgt_debug'(goal(read(Stream, Term), '$lgt_iso_read'(Stream, Term, Ops)), ExCtx), Ctx) :-
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(read(Term), '$lgt_iso_read'(Term, Ops), '$lgt_debug'(goal(read(Term), '$lgt_iso_read'(Term, Ops)), ExCtx), Ctx) :-
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
@@ -13544,33 +13548,33 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(write_term(Stream, Term, Options), '$lgt_iso_write_term'(Stream, Term, Options, Ops), '$lgt_debug'(goal(write_term(Stream, Term, Options), '$lgt_iso_write_term'(Stream, Term, Options, Ops)), ExCtx), Ctx) :-
 	('$lgt_member'(ignore_ops(Value), Options) -> Value \== true; true),
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(write_term(Term, Options), '$lgt_iso_write_term'(Term, Options, Ops), '$lgt_debug'(goal(write_term(Term, Options), '$lgt_iso_write_term'(Term, Options, Ops)), ExCtx), Ctx) :-
 	('$lgt_member'(ignore_ops(Value), Options) -> Value \== true; true),
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(write(Stream, Term), '$lgt_iso_write'(Stream, Term, Ops), '$lgt_debug'(goal(write(Stream, Term), '$lgt_iso_write'(Stream, Term, Ops)), ExCtx), Ctx) :-
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(write(Term), '$lgt_iso_write'(Term, Ops), '$lgt_debug'(goal(write(Term), '$lgt_iso_write'(Term, Ops)), ExCtx), Ctx) :-
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(writeq(Stream, Term), '$lgt_iso_writeq'(Stream, Term, Ops), '$lgt_debug'(goal(writeq(Stream, Term), '$lgt_iso_writeq'(Stream, Term, Ops)), ExCtx), Ctx) :-
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(writeq(Term), '$lgt_iso_writeq'(Term, Ops), '$lgt_debug'(goal(writeq(Term), '$lgt_iso_writeq'(Term, Ops)), ExCtx), Ctx) :-
-	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
+	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
@@ -18888,8 +18892,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_variant'(Clause, Duplicate) ->
 		'$lgt_increment_compiling_warnings_counter',
 		(	OriginalTerm = (_ --> _) ->
-			'$lgt_print_message'(warning(duplicated_clauses), duplicated_grammar_rules(File, Lines, Type, Entity, OriginalTerm, DuplicateLines))
-		;	'$lgt_print_message'(warning(duplicated_clauses), duplicated_clauses(File, Lines, Type, Entity, Duplicate, DuplicateLines))
+			'$lgt_print_message'(warning(duplicated_clauses), duplicated_grammar_rule(File, Lines, Type, Entity, OriginalTerm, DuplicateLines))
+		;	'$lgt_print_message'(warning(duplicated_clauses), duplicated_clause(File, Lines, Type, Entity, Duplicate, DuplicateLines))
 		)
 	;	true
 	),
@@ -23749,36 +23753,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Line-Line, Error).
 
 
-'$lgt_read_stream_to_terms'(runtime, _, Stream, Terms) :-
-	'$lgt_read_stream_to_terms_runtime'(Stream, Terms).
+'$lgt_read_stream_to_terms'(runtime, File, Stream, Terms) :-
+	'$lgt_read_stream_to_terms_runtime'(File, Stream, Terms).
 '$lgt_read_stream_to_terms'(compile(_,_,_), File, Stream, Terms) :-
 	'$lgt_read_stream_to_terms_compile'(File, Stream, Terms).
 
 
-'$lgt_read_stream_to_terms_runtime'(Stream, Terms) :-
+'$lgt_read_stream_to_terms_runtime'(File, Stream, Terms) :-
 	'$lgt_read_term'(Stream, Term, [], Lines, VariableNames),
-	'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, Stream, Terms).
+	'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, File, Stream, Terms).
 
-'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
+'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, File, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
 	var(Term),
 	% delay the instantiation error
 	!,
 	'$lgt_read_term'(Stream, NextTerm, [], NextLines, NextVariableNames),
-	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, Stream, Terms).
-'$lgt_read_stream_to_terms_runtime'(end_of_file, _, _, _, []) :-
+	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, File, Stream, Terms).
+'$lgt_read_stream_to_terms_runtime'(end_of_file, _, _, _, _, []) :-
 	!.
-'$lgt_read_stream_to_terms_runtime'((:- op(Priority, Specifier, Operators)), Lines, VariableNames, Stream, [(:- op(Priority, Specifier, Operators))-sd(Lines,VariableNames)| Terms]) :-
+'$lgt_read_stream_to_terms_runtime'((:- op(Priority, Specifier, Operators)), Lines, VariableNames, File, Stream, [(:- op(Priority, Specifier, Operators))-sd(Lines,VariableNames)| Terms]) :-
 	!,
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	(	'$lgt_pp_entity_'(_, _, _) ->
-		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l)
+		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines)
 	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators)
 	),
 	'$lgt_read_term'(Stream, NextTerm, [], NextLines, NextVariableNames),
-	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, Stream, Terms).
-'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
+	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, File, Stream, Terms).
+'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, File, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
 	'$lgt_read_term'(Stream, NextTerm, [], NextLines, NextVariableNames),
-	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, Stream, Terms).
+	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, File, Stream, Terms).
 
 
 '$lgt_read_stream_to_terms_compile'(File, Stream, Terms) :-
@@ -23797,7 +23801,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	(	'$lgt_pp_entity_'(_, _, _) ->
-		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l)
+		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines)
 	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators)
 	),
 	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], NextLines, NextVariableNames),
