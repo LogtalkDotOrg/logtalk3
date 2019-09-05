@@ -264,32 +264,32 @@
 % '$lgt_pp_super_'(Clause)
 :- dynamic('$lgt_pp_super_'/1).
 
-% '$lgt_pp_synchronized_'(Head, Mutex)
-:- dynamic('$lgt_pp_synchronized_'/2).
+% '$lgt_pp_synchronized_'(Head, Mutex, File, Lines)
+:- dynamic('$lgt_pp_synchronized_'/4).
 % '$lgt_pp_predicate_mutex_counter_'(Count)
 :- dynamic('$lgt_pp_predicate_mutex_counter_'/1).
-% '$lgt_pp_dynamic_'(Head)
-:- dynamic('$lgt_pp_dynamic_'/1).
-% '$lgt_pp_discontiguous_'(Head)
-:- dynamic('$lgt_pp_discontiguous_'/1).
+% '$lgt_pp_dynamic_'(Head, File, Lines)
+:- dynamic('$lgt_pp_dynamic_'/3).
+% '$lgt_pp_discontiguous_'(Head, File, Lines)
+:- dynamic('$lgt_pp_discontiguous_'/3).
 % '$lgt_pp_mode_'(Mode, Determinism, File, Lines)
 :- dynamic('$lgt_pp_mode_'/4).
-% '$lgt_pp_public_'(Functor, Arity)
-:- dynamic('$lgt_pp_public_'/2).
-% '$lgt_pp_protected_'(Functor, Arity)
-:- dynamic('$lgt_pp_protected_'/2).
-% '$lgt_pp_private_'(Functor, Arity)
-:- dynamic('$lgt_pp_private_'/2).
-% '$lgt_pp_meta_predicate_'(PredTemplate, MetaTemplate)
-:- dynamic('$lgt_pp_meta_predicate_'/2).
+% '$lgt_pp_public_'(Functor, Arity, File, Lines)
+:- dynamic('$lgt_pp_public_'/4).
+% '$lgt_pp_protected_'(Functor, Arity, File, Lines)
+:- dynamic('$lgt_pp_protected_'/4).
+% '$lgt_pp_private_'(Functor, Arity, File, Lines)
+:- dynamic('$lgt_pp_private_'/4).
+% '$lgt_pp_meta_predicate_'(PredTemplate, MetaTemplate, File, Lines)
+:- dynamic('$lgt_pp_meta_predicate_'/4).
 % '$lgt_pp_predicate_alias_'(Entity, Pred, Alias, NonTerminalFlag, File, Lines)
 :- dynamic('$lgt_pp_predicate_alias_'/6).
 % '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)
 :- dynamic('$lgt_pp_non_terminal_'/3).
 % '$lgt_pp_multifile_'(Head, File, Lines)
 :- dynamic('$lgt_pp_multifile_'/3).
-% '$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)
-:- dynamic('$lgt_pp_coinductive_'/7).
+% '$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead, File, Lines)
+:- dynamic('$lgt_pp_coinductive_'/9).
 % '$lgt_pp_coinductive_head_'(Head, HeadExCtx, TCHead)
 :- dynamic('$lgt_pp_coinductive_head_'/3).
 
@@ -7638,18 +7638,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_entity_info_'(_)),
 	retractall('$lgt_pp_predicate_info_'(_, _)),
 	retractall('$lgt_pp_directive_'(_)),
-	retractall('$lgt_pp_synchronized_'(_, _)),
+	retractall('$lgt_pp_synchronized_'(_, _, _, _)),
 	retractall('$lgt_pp_predicate_mutex_counter_'(_)),
-	retractall('$lgt_pp_public_'(_, _)),
-	retractall('$lgt_pp_protected_'(_, _)),
-	retractall('$lgt_pp_private_'(_, _)),
-	retractall('$lgt_pp_dynamic_'(_)),
-	retractall('$lgt_pp_discontiguous_'(_)),
+	retractall('$lgt_pp_public_'(_, _, _, _)),
+	retractall('$lgt_pp_protected_'(_, _, _, _)),
+	retractall('$lgt_pp_private_'(_, _, _, _)),
+	retractall('$lgt_pp_dynamic_'(_, _, _)),
+	retractall('$lgt_pp_discontiguous_'(_, _, _)),
 	retractall('$lgt_pp_multifile_'(_, _, _)),
-	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
+	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_coinductive_head_'(_, _, _)),
 	retractall('$lgt_pp_mode_'(_, _, _, _)),
-	retractall('$lgt_pp_meta_predicate_'(_, _)),
+	retractall('$lgt_pp_meta_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_predicate_alias_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_entity_meta_directive_'(_, _, _)),
@@ -9132,26 +9132,26 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % synchronized/1 predicate directive
 
-'$lgt_compile_logtalk_directive'(synchronized(Resources), _) :-
+'$lgt_compile_logtalk_directive'(synchronized(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_synchronized_directive'(ResourcesFlatted).
+	'$lgt_compile_synchronized_directive'(ResourcesFlatted, Ctx).
 
 % scope directives
 
 '$lgt_compile_logtalk_directive'(public(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_source_file_context'(Ctx, File, Line-_),
-	'$lgt_compile_scope_directive'(ResourcesFlatted, (public), File, Line).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	'$lgt_compile_scope_directive'(ResourcesFlatted, (public), File, Lines).
 
 '$lgt_compile_logtalk_directive'(protected(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_source_file_context'(Ctx, File, Line-_),
-	'$lgt_compile_scope_directive'(ResourcesFlatted, protected, File, Line).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	'$lgt_compile_scope_directive'(ResourcesFlatted, protected, File, Lines).
 
 '$lgt_compile_logtalk_directive'(private(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_source_file_context'(Ctx, File, Line-_),
-	'$lgt_compile_scope_directive'(ResourcesFlatted, (private), File, Line).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	'$lgt_compile_scope_directive'(ResourcesFlatted, (private), File, Lines).
 
 % export/1 module directive
 %
@@ -9165,17 +9165,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % dynamic/1 and discontiguous/1 predicate directives
 
-'$lgt_compile_logtalk_directive'(dynamic(Resources), _) :-
+'$lgt_compile_logtalk_directive'(dynamic(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_dynamic_directive'(ResourcesFlatted).
+	'$lgt_compile_dynamic_directive'(ResourcesFlatted, Ctx).
 
-'$lgt_compile_logtalk_directive'(discontiguous(Resources), _) :-
+'$lgt_compile_logtalk_directive'(discontiguous(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_discontiguous_directive'(ResourcesFlatted).
+	'$lgt_compile_discontiguous_directive'(ResourcesFlatted, Ctx).
 
 % meta_predicate/2 and meta_non_terminal/1 predicate directives
 
-'$lgt_compile_logtalk_directive'(meta_predicate(Preds), _) :-
+'$lgt_compile_logtalk_directive'(meta_predicate(Preds), Ctx) :-
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object
@@ -9183,11 +9183,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% we're compiling a Logtalk entity
 		TPredsFlatted = PredsFlatted
 	),
-	'$lgt_compile_meta_predicate_directive'(TPredsFlatted).
+	'$lgt_compile_meta_predicate_directive'(TPredsFlatted, Ctx).
 
-'$lgt_compile_logtalk_directive'(meta_non_terminal(Preds), _) :-
+'$lgt_compile_logtalk_directive'(meta_non_terminal(Preds), Ctx) :-
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	'$lgt_compile_meta_non_terminal_directive'(PredsFlatted).
+	'$lgt_compile_meta_non_terminal_directive'(PredsFlatted, Ctx).
 
 % mode/2 predicate directive
 
@@ -9215,10 +9215,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % coinductive/1 predicate directive
 
-'$lgt_compile_logtalk_directive'(coinductive(Preds), _) :-
+'$lgt_compile_logtalk_directive'(coinductive(Preds), Ctx) :-
 	(	'$lgt_prolog_feature'(coinduction, supported) ->
 		'$lgt_flatten_to_list'(Preds, PredsFlatted),
-		'$lgt_compile_coinductive_directive'(PredsFlatted)
+		'$lgt_compile_coinductive_directive'(PredsFlatted, Ctx)
 	;	throw(resource_error(coinduction))
 	).
 
@@ -9303,13 +9303,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_synchronized_directive'(+list)
+% '$lgt_compile_synchronized_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling synchronized/1 directives
 
-'$lgt_compile_synchronized_directive'(Resources) :-
+'$lgt_compile_synchronized_directive'(Resources, Ctx) :-
 	'$lgt_new_predicate_mutex'(Mutex),
-	'$lgt_compile_synchronized_directive'(Resources, Mutex).
+	'$lgt_compile_synchronized_directive'(Resources, Mutex, Ctx).
 
 
 '$lgt_new_predicate_mutex'(Mutex) :-
@@ -9326,31 +9326,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 % note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_synchronized_directive_resource'/1 predicate
 
-'$lgt_compile_synchronized_directive'([Resource| Resources], Mutex) :-
-	'$lgt_compile_synchronized_directive_resource'(Resource, Mutex),
-	'$lgt_compile_synchronized_directive'(Resources, Mutex).
+'$lgt_compile_synchronized_directive'([Resource| Resources], Mutex, Ctx) :-
+	'$lgt_compile_synchronized_directive_resource'(Resource, Mutex, Ctx),
+	'$lgt_compile_synchronized_directive'(Resources, Mutex, Ctx).
 
-'$lgt_compile_synchronized_directive'([], _).
+'$lgt_compile_synchronized_directive'([], _, _).
 
 
-'$lgt_compile_synchronized_directive_resource'(Pred, Mutex) :-
+'$lgt_compile_synchronized_directive_resource'(Pred, Mutex, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	functor(Head, Functor, Arity),
-	(	'$lgt_pp_dynamic_'(Head) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _) ->
 		% synchronized predicates must be static
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
 	;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
 		% synchronized/1 directives must precede the definitions for the declared predicates
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
-	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
+	;	'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_synchronized_'(Head, Mutex, File, Lines))
 	).
 
-'$lgt_compile_synchronized_directive_resource'(NonTerminal, Mutex) :-
+'$lgt_compile_synchronized_directive_resource'(NonTerminal, Mutex, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
 	functor(Head, Functor, ExtArity),
-	(	'$lgt_pp_dynamic_'(Head) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
 	;	'$lgt_pp_defines_non_terminal_'(Functor, Arity, _) ->
@@ -9358,14 +9359,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
 		% synchronized/1 directives must precede the definitions for the declared non-terminals
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
-	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
+	;	'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_synchronized_'(Head, Mutex, File, Lines))
 	).
 
-'$lgt_compile_synchronized_directive_resource'(Resource, _) :-
+'$lgt_compile_synchronized_directive_resource'(Resource, _, _) :-
 	ground(Resource),
 	throw(type_error(predicate_indicator, Resource)).
 
-'$lgt_compile_synchronized_directive_resource'(_, _) :-
+'$lgt_compile_synchronized_directive_resource'(_, _, _) :-
 	throw(instantiation_error).
 
 
@@ -9377,9 +9379,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_scope_directive_resource'/1 predicate
 
-'$lgt_compile_scope_directive'([Resource| Resources], Scope, File, Line) :-
-	'$lgt_compile_scope_directive_resource'(Resource, Scope, File, Line),
-	'$lgt_compile_scope_directive'(Resources, Scope, File, Line).
+'$lgt_compile_scope_directive'([Resource| Resources], Scope, File, Lines) :-
+	'$lgt_compile_scope_directive_resource'(Resource, Scope, File, Lines),
+	'$lgt_compile_scope_directive'(Resources, Scope, File, Lines).
 
 '$lgt_compile_scope_directive'([], _, _, _).
 
@@ -9396,20 +9398,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_scope'(Scope, InternalScope),
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, InternalScope).
 
-'$lgt_compile_scope_directive_resource'(Functor/Arity, Scope, File, Line) :-
+'$lgt_compile_scope_directive_resource'(Functor/Arity, Scope, File, StartLine-EndLine) :-
 	'$lgt_valid_predicate_indicator'(Functor/Arity, Functor, Arity),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(Functor/Arity, Scope),
-	'$lgt_add_predicate_scope_directive'(Scope, Functor, Arity),
-	assertz('$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line)).
+	'$lgt_add_predicate_scope_directive'(Scope, Functor, Arity, File, StartLine-EndLine),
+	assertz('$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, StartLine)).
 
-'$lgt_compile_scope_directive_resource'(Functor//Arity, Scope, File, Line) :-
+'$lgt_compile_scope_directive_resource'(Functor//Arity, Scope, File, StartLine-EndLine) :-
 	'$lgt_valid_non_terminal_indicator'(Functor//Arity, Functor, Arity, ExtArity),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity, Scope),
 	assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
-	'$lgt_add_predicate_scope_directive'(Scope, Functor, ExtArity),
-	assertz('$lgt_pp_predicate_declaration_location_'(Functor, ExtArity, File, Line)).
+	'$lgt_add_predicate_scope_directive'(Scope, Functor, ExtArity, File, StartLine-EndLine),
+	assertz('$lgt_pp_predicate_declaration_location_'(Functor, ExtArity, File, StartLine)).
 
 '$lgt_compile_scope_directive_resource'(Resource, _, _, _) :-
 	ground(Resource),
@@ -9419,14 +9421,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(instantiation_error).
 
 
-'$lgt_add_predicate_scope_directive'((public), Functor, Arity) :-
-	assertz('$lgt_pp_public_'(Functor, Arity)).
+'$lgt_add_predicate_scope_directive'((public), Functor, Arity, File, Lines) :-
+	assertz('$lgt_pp_public_'(Functor, Arity, File, Lines)).
 
-'$lgt_add_predicate_scope_directive'(protected, Functor, Arity) :-
-	assertz('$lgt_pp_protected_'(Functor, Arity)).
+'$lgt_add_predicate_scope_directive'(protected, Functor, Arity, File, Lines) :-
+	assertz('$lgt_pp_protected_'(Functor, Arity, File, Lines)).
 
-'$lgt_add_predicate_scope_directive'((private), Functor, Arity) :-
-	assertz('$lgt_pp_private_'(Functor, Arity)).
+'$lgt_add_predicate_scope_directive'((private), Functor, Arity, File, Lines) :-
+	assertz('$lgt_pp_private_'(Functor, Arity, File, Lines)).
 
 
 '$lgt_check_for_duplicated_scope_directives'(op(_, _, []), _) :-
@@ -9462,9 +9464,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check_for_duplicated_scope_directives'(Functor/Arity, Scope) :-
-	(	(	Scope == (public), '$lgt_pp_public_'(Functor, Arity)
-		;	Scope == protected, '$lgt_pp_protected_'(Functor, Arity)
-		;	Scope == (private), '$lgt_pp_private_'(Functor, Arity)
+	(	(	Scope == (public), '$lgt_pp_public_'(Functor, Arity, _, _)
+		;	Scope == protected, '$lgt_pp_protected_'(Functor, Arity, _, _)
+		;	Scope == (private), '$lgt_pp_private_'(Functor, Arity, _, _)
 		) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
@@ -9473,18 +9475,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
 		;	true
 		)
-	;	(	'$lgt_pp_public_'(Functor, Arity)
-		;	'$lgt_pp_protected_'(Functor, Arity)
-		;	'$lgt_pp_private_'(Functor, Arity)
+	;	(	'$lgt_pp_public_'(Functor, Arity, _, _)
+		;	'$lgt_pp_protected_'(Functor, Arity, _, _)
+		;	'$lgt_pp_private_'(Functor, Arity, _, _)
 		) ->
 		throw(permission_error(modify, predicate_scope, Functor/Arity))
 	;	true
 	).
 
 '$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity, Scope) :-
-	(	(	Scope == (public), '$lgt_pp_public_'(Functor, ExtArity)
-		;	Scope == protected, '$lgt_pp_protected_'(Functor, ExtArity)
-		;	Scope == (private), '$lgt_pp_private_'(Functor, ExtArity)
+	(	(	Scope == (public), '$lgt_pp_public_'(Functor, ExtArity, _, _)
+		;	Scope == protected, '$lgt_pp_protected_'(Functor, ExtArity, _, _)
+		;	Scope == (private), '$lgt_pp_private_'(Functor, ExtArity, _, _)
 		) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
@@ -9493,9 +9495,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
 		;	true
 		)
-	;	(	'$lgt_pp_public_'(Functor, ExtArity)
-		;	'$lgt_pp_protected_'(Functor, ExtArity)
-		;	'$lgt_pp_private_'(Functor, ExtArity)
+	;	(	'$lgt_pp_public_'(Functor, ExtArity, _, _)
+		;	'$lgt_pp_protected_'(Functor, ExtArity, _, _)
+		;	'$lgt_pp_private_'(Functor, ExtArity, _, _)
 		) ->
 		throw(permission_error(modify, non_terminal_scope, Functor//Arity))
 	;	true
@@ -9503,21 +9505,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_dynamic_directive'(+list)
+% '$lgt_compile_dynamic_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling dynamic/1 directives
 %
 % note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_dynamic_directive_resource'/1 predicate
 
-'$lgt_compile_dynamic_directive'([Resource| Resources]) :-
-	'$lgt_compile_dynamic_directive_resource'(Resource),
-	'$lgt_compile_dynamic_directive'(Resources).
+'$lgt_compile_dynamic_directive'([Resource| Resources], Ctx) :-
+	'$lgt_compile_dynamic_directive_resource'(Resource, Ctx),
+	'$lgt_compile_dynamic_directive'(Resources, Ctx).
 
-'$lgt_compile_dynamic_directive'([]).
+'$lgt_compile_dynamic_directive'([], _).
 
 
-'$lgt_compile_dynamic_directive_resource'(Entity::Pred) :-
+'$lgt_compile_dynamic_directive_resource'(Entity::Pred, _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
@@ -9533,7 +9535,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(permission_error(modify, predicate_declaration, Entity::Pred))
 	).
 
-'$lgt_compile_dynamic_directive_resource'(Entity::NonTerminal) :-
+'$lgt_compile_dynamic_directive_resource'(Entity::NonTerminal, _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Entity == user ->
@@ -9549,7 +9551,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(permission_error(modify, non_terminal_declaration, Entity::NonTerminal))
 	).
 
-'$lgt_compile_dynamic_directive_resource'(':'(Module, Pred)) :-
+'$lgt_compile_dynamic_directive_resource'(':'(Module, Pred), _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Module == user ->
@@ -9560,7 +9562,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/Arity))))
 	).
 
-'$lgt_compile_dynamic_directive_resource'(':'(Module, NonTerminal)) :-
+'$lgt_compile_dynamic_directive_resource'(':'(Module, NonTerminal), _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Module == user ->
@@ -9571,38 +9573,40 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/ExtArity))))
 	).
 
-'$lgt_compile_dynamic_directive_resource'(Pred) :-
+'$lgt_compile_dynamic_directive_resource'(Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	functor(Head, Functor, Arity),
-	(	'$lgt_pp_synchronized_'(Head, _) ->
+	(	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized predicates must be static
 		throw(permission_error(modify, synchronized_predicate, Functor/Arity))
 	;	'$lgt_check_for_duplicated_dynamic_directive'(Head, Pred),
-		assertz('$lgt_pp_dynamic_'(Head))
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_dynamic_'(Head, File, Lines))
 	).
 
-'$lgt_compile_dynamic_directive_resource'(NonTerminal) :-
+'$lgt_compile_dynamic_directive_resource'(NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
 	functor(Head, Functor, ExtArity),
-	(	'$lgt_pp_synchronized_'(Head, _) ->
+	(	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
 	;	'$lgt_check_for_duplicated_dynamic_directive'(Head, NonTerminal),
-		assertz('$lgt_pp_dynamic_'(Head))
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_dynamic_'(Head, File, Lines))
 	).
 
-'$lgt_compile_dynamic_directive_resource'(Resource) :-
+'$lgt_compile_dynamic_directive_resource'(Resource, _) :-
 	ground(Resource),
 	throw(type_error(predicate_indicator, Resource)).
 
-'$lgt_compile_dynamic_directive_resource'(_) :-
+'$lgt_compile_dynamic_directive_resource'(_, _) :-
 	throw(instantiation_error).
 
 
 '$lgt_check_for_duplicated_dynamic_directive'(Head, PI) :-
-	(	'$lgt_pp_dynamic_'(Head),
+	(	'$lgt_pp_dynamic_'(Head, _, _),
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -9626,21 +9630,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_discontiguous_directive'(+list)
+% '$lgt_compile_discontiguous_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling discontiguous/1 directives
 %
 % note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_discontiguous_directive_resource'/1 predicate
 
-'$lgt_compile_discontiguous_directive'([Resource| Resources]) :-
-	'$lgt_compile_discontiguous_directive_resource'(Resource),
-	'$lgt_compile_discontiguous_directive'(Resources).
+'$lgt_compile_discontiguous_directive'([Resource| Resources], Ctx) :-
+	'$lgt_compile_discontiguous_directive_resource'(Resource, Ctx),
+	'$lgt_compile_discontiguous_directive'(Resources, Ctx).
 
-'$lgt_compile_discontiguous_directive'([]).
+'$lgt_compile_discontiguous_directive'([], _).
 
 
-'$lgt_compile_discontiguous_directive_resource'(Entity::Pred) :-
+'$lgt_compile_discontiguous_directive_resource'(Entity::Pred, _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
@@ -9653,7 +9657,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
 
-'$lgt_compile_discontiguous_directive_resource'(Entity::NonTerminal) :-
+'$lgt_compile_discontiguous_directive_resource'(Entity::NonTerminal, _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Entity == user ->
@@ -9666,7 +9670,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
 
-'$lgt_compile_discontiguous_directive_resource'(':'(Module, Pred)) :-
+'$lgt_compile_discontiguous_directive_resource'(':'(Module, Pred), _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Module == user ->
@@ -9677,7 +9681,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/Arity))))
 	).
 
-'$lgt_compile_discontiguous_directive_resource'(':'(Module, NonTerminal)) :-
+'$lgt_compile_discontiguous_directive_resource'(':'(Module, NonTerminal), _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Module == user ->
@@ -9688,30 +9692,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/ExtArity))))
 	).
 
-'$lgt_compile_discontiguous_directive_resource'(Pred) :-
+'$lgt_compile_discontiguous_directive_resource'(Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	functor(Head, Functor, Arity),
 	'$lgt_check_for_duplicated_discontiguous_directive'(Head, Pred),
-	assertz('$lgt_pp_discontiguous_'(Head)).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_discontiguous_'(Head, File, Lines)).
 
-'$lgt_compile_discontiguous_directive_resource'(NonTerminal) :-
+'$lgt_compile_discontiguous_directive_resource'(NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	functor(Head, Functor, ExtArity),
 	'$lgt_check_for_duplicated_discontiguous_directive'(Head, NonTerminal),
-	assertz('$lgt_pp_discontiguous_'(Head)).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_discontiguous_'(Head, File, Lines)).
 
-'$lgt_compile_discontiguous_directive_resource'(Resource) :-
+'$lgt_compile_discontiguous_directive_resource'(Resource, _) :-
 	ground(Resource),
 	throw(type_error(predicate_indicator, Resource)).
 
-'$lgt_compile_discontiguous_directive_resource'(_) :-
+'$lgt_compile_discontiguous_directive_resource'(_, _) :-
 	throw(instantiation_error).
 
 
 '$lgt_check_for_duplicated_discontiguous_directive'(Head, PI) :-
-	(	'$lgt_pp_discontiguous_'(Head),
+	(	'$lgt_pp_discontiguous_'(Head, _, _),
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -9721,111 +9727,117 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_meta_predicate_directive'(+list)
+% '$lgt_compile_meta_predicate_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling meta_predicate/1 directives
 %
 % note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_meta_predicate_directive_resource'/1 predicate
 
-'$lgt_compile_meta_predicate_directive'([Meta| Metas]) :-
-	'$lgt_compile_meta_predicate_directive_resource'(Meta),
-	'$lgt_compile_meta_predicate_directive'(Metas).
+'$lgt_compile_meta_predicate_directive'([Meta| Metas], Ctx) :-
+	'$lgt_compile_meta_predicate_directive_resource'(Meta, Ctx),
+	'$lgt_compile_meta_predicate_directive'(Metas, Ctx).
 
-'$lgt_compile_meta_predicate_directive'([]).
+'$lgt_compile_meta_predicate_directive'([], _).
 
 
-'$lgt_compile_meta_predicate_directive_resource'(Entity::Meta) :-
+'$lgt_compile_meta_predicate_directive_resource'(Entity::Meta, Ctx) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_check'(entity_identifier, Entity),
 	'$lgt_term_template'(Meta, Template),
 	'$lgt_check_for_duplicated_meta_predicate_directive'(Entity::Template, Entity::Meta),
-	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::Meta)).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::Meta, File, Lines)).
 
-'$lgt_compile_meta_predicate_directive_resource'(':'(Module, Meta)) :-
+'$lgt_compile_meta_predicate_directive_resource'(':'(Module, Meta), Ctx) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_check'(module_identifier, Module),
 	'$lgt_term_template'(Meta, Template),
 	'$lgt_check_for_duplicated_meta_predicate_directive'(':'(Module,Template), ':'(Module,Meta)),
-	assertz('$lgt_pp_meta_predicate_'(':'(Module,Template), ':'(Module,Meta))).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_meta_predicate_'(':'(Module,Template), ':'(Module,Meta), File, Lines)).
 
-'$lgt_compile_meta_predicate_directive_resource'(Meta) :-
+'$lgt_compile_meta_predicate_directive_resource'(Meta, Ctx) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_term_template'(Meta, Template),
 	'$lgt_check_for_duplicated_meta_predicate_directive'(Template, Meta),
-	assertz('$lgt_pp_meta_predicate_'(Template, Meta)).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_meta_predicate_'(Template, Meta, File, Lines)).
 
-'$lgt_compile_meta_predicate_directive_resource'(Meta) :-
+'$lgt_compile_meta_predicate_directive_resource'(Meta, _) :-
 	ground(Meta),
 	throw(type_error(meta_predicate_template, Meta)).
 
-'$lgt_compile_meta_predicate_directive_resource'(_) :-
+'$lgt_compile_meta_predicate_directive_resource'(_, _) :-
 	throw(instantiation_error).
 
 
 '$lgt_check_for_duplicated_meta_predicate_directive'(Template, Meta) :-
-	(	'$lgt_pp_meta_predicate_'(Template, Meta) ->
+	(	'$lgt_pp_meta_predicate_'(Template, Meta, _, _) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, meta_predicate(Meta)))
 		;	true
 		)
-	;	'$lgt_pp_meta_predicate_'(Template, _) ->
+	;	'$lgt_pp_meta_predicate_'(Template, _, _, _) ->
 		throw(permission_error(modify, meta_predicate_template, Meta))
 	;	true
 	).
 
 
 
-% '$lgt_compile_meta_non_terminal_directive'(+list)
+% '$lgt_compile_meta_non_terminal_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling meta_non_terminal/1 directives
 %
 % note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_meta_non_terminal_directive_resource'/1 predicate
 
-'$lgt_compile_meta_non_terminal_directive'([Meta| Metas]) :-
-	'$lgt_compile_meta_non_terminal_directive_resource'(Meta),
-	'$lgt_compile_meta_non_terminal_directive'(Metas).
+'$lgt_compile_meta_non_terminal_directive'([Meta| Metas], Ctx) :-
+	'$lgt_compile_meta_non_terminal_directive_resource'(Meta, Ctx),
+	'$lgt_compile_meta_non_terminal_directive'(Metas, Ctx).
 
-'$lgt_compile_meta_non_terminal_directive'([]).
+'$lgt_compile_meta_non_terminal_directive'([], _).
 
 
-'$lgt_compile_meta_non_terminal_directive_resource'(Entity::Meta) :-
+'$lgt_compile_meta_non_terminal_directive_resource'(Entity::Meta, Ctx) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_check'(entity_identifier, Entity),
 	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
 	'$lgt_check_for_duplicated_meta_non_terminal_directive'(Entity::Template, Entity::ExtendedMeta, Entity::Meta),
-	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::ExtendedMeta)).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::ExtendedMeta, File, Lines)).
 
-'$lgt_compile_meta_non_terminal_directive_resource'(':'(Module, Meta)) :-
+'$lgt_compile_meta_non_terminal_directive_resource'(':'(Module, Meta), Ctx) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_check'(module_identifier, Module),
 	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
 	'$lgt_check_for_duplicated_meta_non_terminal_directive'(':'(Module, Template), ':'(Module, ExtendedMeta), ':'(Module, Meta)),
-	assertz('$lgt_pp_meta_predicate_'(':'(Module, Template), ':'(Module, ExtendedMeta))).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_meta_predicate_'(':'(Module, Template), ':'(Module, ExtendedMeta), File, Lines)).
 
-'$lgt_compile_meta_non_terminal_directive_resource'(Meta) :-
+'$lgt_compile_meta_non_terminal_directive_resource'(Meta, Ctx) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
 	'$lgt_check_for_duplicated_meta_non_terminal_directive'(Template, ExtendedMeta, Meta),
-	assertz('$lgt_pp_meta_predicate_'(Template, ExtendedMeta)).
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_meta_predicate_'(Template, ExtendedMeta, File, Lines)).
 
-'$lgt_compile_meta_non_terminal_directive_resource'(Meta) :-
+'$lgt_compile_meta_non_terminal_directive_resource'(Meta, _) :-
 	ground(Meta),
 	throw(type_error(meta_non_terminal_template, Meta)).
 
-'$lgt_compile_meta_non_terminal_directive_resource'(_) :-
+'$lgt_compile_meta_non_terminal_directive_resource'(_, _) :-
 	throw(instantiation_error).
 
 
@@ -9846,14 +9858,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_check_for_duplicated_meta_non_terminal_directive'(Template, ExtendedMeta, Meta) :-
-	(	'$lgt_pp_meta_predicate_'(Template, ExtendedMeta) ->
+	(	'$lgt_pp_meta_predicate_'(Template, ExtendedMeta, _, _) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, meta_non_terminal(Meta)))
 		;	true
 		)
-	;	'$lgt_pp_meta_predicate_'(Template, _) ->
+	;	'$lgt_pp_meta_predicate_'(Template, _, _, _) ->
 		throw(permission_error(modify, meta_non_terminal_template, Meta))
 	;	true
 	).
@@ -9984,21 +9996,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_coinductive_directive'(+list)
+% '$lgt_compile_coinductive_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling coinductive/1 directives
 %
 % note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_coinductive_directive_resource'/1 predicate
 
-'$lgt_compile_coinductive_directive'([Pred| Preds]) :-
-	'$lgt_compile_coinductive_directive_resource'(Pred),
-	'$lgt_compile_coinductive_directive'(Preds).
+'$lgt_compile_coinductive_directive'([Pred| Preds], Ctx) :-
+	'$lgt_compile_coinductive_directive_resource'(Pred, Ctx),
+	'$lgt_compile_coinductive_directive'(Preds, Ctx).
 
-'$lgt_compile_coinductive_directive'([]).
+'$lgt_compile_coinductive_directive'([], _).
 
 
-'$lgt_compile_coinductive_directive_resource'(Pred) :-
+'$lgt_compile_coinductive_directive_resource'(Pred, Ctx) :-
 	'$lgt_valid_coinductive_template'(Pred, Functor, Arity, Head, TestHead, Template),
 	!,
 	(	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
@@ -10020,15 +10032,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THead, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Head, THead, BodyExCtx),
-	assertz('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)),
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead, File, Lines)),
 	assertz('$lgt_pp_coinductive_head_'(Head, HeadExCtx, TCHead)),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, coinductive(Template)))).
 
-'$lgt_compile_coinductive_directive_resource'(Pred) :-
+'$lgt_compile_coinductive_directive_resource'(Pred, _) :-
 	ground(Pred),
 	throw(type_error(predicate_indicator, Pred)).
 
-'$lgt_compile_coinductive_directive_resource'(_) :-
+'$lgt_compile_coinductive_directive_resource'(_, _) :-
 	throw(instantiation_error).
 
 
@@ -11149,7 +11162,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		BodyCtx = Ctx
 	),
-	(	'$lgt_pp_dynamic_'(Head) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _) ->
 		TClause = drule(THead, '$lgt_nop'(Body), Body, BodyCtx),
 		DClause = ddrule(THead, '$lgt_nop'(Body), DHead, Body, BodyCtx)
 	;	TClause = srule(THead, Body, BodyCtx),
@@ -11287,7 +11300,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_head'(Head, _, _, _) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
-	'$lgt_pp_dynamic_'(Head),
+	'$lgt_pp_dynamic_'(Head, _, _),
 	functor(Head, Functor, Arity),
 	throw(permission_error(define, dynamic_predicate, Functor/Arity)).
 
@@ -11404,10 +11417,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_head'(Head, Functor/Arity, THead, Ctx) :-
 	% first clause for this predicate
 	functor(Head, Functor, Arity),
-	(	'$lgt_pp_dynamic_'(Head),
-		\+ '$lgt_pp_public_'(Functor, Arity),
-		\+ '$lgt_pp_protected_'(Functor, Arity),
-		\+ '$lgt_pp_private_'(Functor, Arity) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _),
+		\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_private_'(Functor, Arity, _, _) ->
 		% dynamic predicate without a scope directive; can be abolished if declared
 		% in an object and the abolish message sender is the object itself
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx)
@@ -11721,7 +11734,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% ignore multifile predicates
 	Head \= ':'(_, _),
 	Head \= _::_,
-	'$lgt_pp_meta_predicate_'(Head, Meta),
+	'$lgt_pp_meta_predicate_'(Head, Meta, _, _),
 	% we're compiling a clause for a meta-predicate
 	once('$lgt_member_var'(Closure, MetaVars)),
 	% the closure is a meta-argument
@@ -12665,7 +12678,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, _, _, _, _),
 	(	nonvar(Head),
-		'$lgt_pp_synchronized_'(Head, Mutex) ->
+		'$lgt_pp_synchronized_'(Head, Mutex, _, _) ->
 		(	Type == object ->
 			% we're compiling an object predicate
 			MTPred = '$lgt_threaded_wait_synch'(Mutex, Msg, Prefix)
@@ -12768,7 +12781,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not usable from Logtalk due the ambiguity of the ":" meta-argument qualifier but they
 		% pose no problems when operating in a module database; in this particular case, the
 		% explicit-qualified call can be compiled as-is
-		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
+		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta), _, _)
 			% we're either overriding the original meta-predicate template or working around a
 			% backend Prolog compiler limitation in providing access to meta-predicate templates
 		;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(Meta)), _, fail)
@@ -13828,7 +13841,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, [_| _], _, _, compile(_,_,_), _, _, _),
 	% we're compiling a clause for a meta-predicate as the list of meta-variables is not empty
-	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
+	(	'$lgt_pp_meta_predicate_'(Pred, Meta, _, _) ->
 		% user-defined meta-predicate
 		true
 	;	'$lgt_prolog_meta_predicate'(Pred, Meta, predicate) ->
@@ -13857,7 +13870,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% ignore multifile predicates
 	Head \= ':'(_, _),
 	Head \= _::_,
-	'$lgt_pp_meta_predicate_'(Head, HeadMeta),
+	'$lgt_pp_meta_predicate_'(Head, HeadMeta, _, _),
 	Head =.. [_| HeadArgs],
 	HeadMeta =.. [_| HeadMetaArgs],
 	'$lgt_same_number_of_closure_extra_args'(PredArgs, CMetaArgs, HeadArgs, HeadMetaArgs),
@@ -13919,7 +13932,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
-	'$lgt_pp_dynamic_'(Pred),
+	'$lgt_pp_dynamic_'(Pred, _, _),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_call_in_this'(Pred, ExCtx).
@@ -13964,7 +13977,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(Pred, TPred), ExCtx).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
-	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DCPred),
+	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DCPred, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _, _),
 	(	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, _, TPred0, _, _) ->
@@ -13987,7 +14000,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_pp_synchronized_'(Pred, Mutex),
+	'$lgt_pp_synchronized_'(Pred, Mutex, _, _),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _, _),
 	functor(Pred, Functor, Arity),
 	\+ (nonvar(Head), functor(Head, Functor, Arity)),
@@ -14016,7 +14029,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	'$lgt_check_for_trivial_fails'(Mode, Pred, TPred0, Head),
 	functor(TPred0, TFunctor, TArity),
-	(	'$lgt_pp_meta_predicate_'(Pred, Meta),
+	(	'$lgt_pp_meta_predicate_'(Pred, Meta, _, _),
 		% local user-defined meta-predicate
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
@@ -14031,7 +14044,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % call to a declared but undefined predicate
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	(	'$lgt_pp_dynamic_'(Pred)
+	(	'$lgt_pp_dynamic_'(Pred, _, _)
 	;	'$lgt_pp_multifile_'(Pred, _, _)
 	),
 	!,
@@ -14044,12 +14057,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Pred, fail, '$lgt_debug'(goal(Pred, fail), ExCtx), Ctx) :-
 	functor(Pred, Functor, Arity),
-	(	'$lgt_pp_public_'(Functor, Arity)
-	;	'$lgt_pp_protected_'(Functor, Arity)
-	;	'$lgt_pp_private_'(Functor, Arity)
-	;	'$lgt_pp_synchronized_'(Pred, _)
+	(	'$lgt_pp_public_'(Functor, Arity, _, _)
+	;	'$lgt_pp_protected_'(Functor, Arity, _, _)
+	;	'$lgt_pp_private_'(Functor, Arity, _, _)
+	;	'$lgt_pp_synchronized_'(Pred, _, _, _)
 	;	'$lgt_pp_coinductive_head_'(Pred, _, _)
-	;	'$lgt_pp_discontiguous_'(Pred)
+	;	'$lgt_pp_discontiguous_'(Pred, _, _)
 	),
 	!,
 	% closed-world assumption: calls to static, non-multifile, declared
@@ -14237,7 +14250,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_meta_predicate_directive'(compile(user,_,_), Head, MetaArg) :-
 	'$lgt_term_template'(Head, Template),
-	(	'$lgt_pp_meta_predicate_'(Template, _) ->
+	(	'$lgt_pp_meta_predicate_'(Template, _, _, _) ->
 		% meta_predicate/1 directive is present
 		true
 	;	'$lgt_pp_missing_meta_predicate_directive_'(Template, _, _) ->
@@ -14324,7 +14337,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		copy_term(Head, HeadCopy),
 		Call \= HeadCopy,
 		% not a recursive call which can originate from a predicate with a single clause
-		\+ '$lgt_pp_dynamic_'(Call),
+		\+ '$lgt_pp_dynamic_'(Call, _, _),
 		\+ '$lgt_pp_multifile_'(Call, _, _),
 		% not a dynamic or multifile predicate
 		\+ '$lgt_pp_entity_term_'(fact(TCall, _), _, _),
@@ -14967,7 +14980,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check_dynamic_directive'(Head) :-
-	(	'$lgt_pp_dynamic_'(Head) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _) ->
 		% dynamic/1 directive is present
 		true
 	;	'$lgt_pp_missing_dynamic_directive_'(Head, _, _) ->
@@ -14990,7 +15003,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_term_template'(Head, Template),
 	retractall('$lgt_pp_previous_predicate_'(_, user)),
 	assertz('$lgt_pp_previous_predicate_'(Template, user)),
-	(	'$lgt_pp_discontiguous_'(Template) ->
+	(	'$lgt_pp_discontiguous_'(Template, _, _) ->
 		% discontiguous directive present
 		true
 	;	'$lgt_pp_missing_discontiguous_directive_'(Template, _, _) ->
@@ -15024,12 +15037,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	callable(Head),
 	% a dynamic directive must be present
-	'$lgt_pp_dynamic_'(Head),
+	'$lgt_pp_dynamic_'(Head, _, _),
 	% a scope directive must be present
 	functor(Head, Functor, Arity),
-	(	'$lgt_pp_public_'(Functor, Arity)
-	;	'$lgt_pp_protected_'(Functor, Arity)
-	;	'$lgt_pp_private_'(Functor, Arity)
+	(	'$lgt_pp_public_'(Functor, Arity, _, _)
+	;	'$lgt_pp_protected_'(Functor, Arity, _, _)
+	;	'$lgt_pp_private_'(Functor, Arity, _, _)
 	), !,
 	% not compiled in debug mode
 	'$lgt_compiler_flag'(debug, off),
@@ -15854,7 +15867,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % to a meta-argument in the head of clause being compiled
 
 '$lgt_head_meta_variables'(Head, MetaVars) :-
-	(	'$lgt_pp_meta_predicate_'(Head, Meta) ->
+	(	'$lgt_pp_meta_predicate_'(Head, Meta, _, _) ->
 		(	Head = Entity::Pred ->
 			Meta = Entity::Template
 		;	Head = ':'(Module, Pred) ->
@@ -16940,9 +16953,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, 1, _),
 	% predicate with a single clause
 	functor(Head, Functor, Arity),
-	\+ '$lgt_pp_dynamic_'(Head),
+	\+ '$lgt_pp_dynamic_'(Head, _, _),
 	\+ '$lgt_pp_multifile_'(Head, _, _),
-	\+ '$lgt_pp_synchronized_'(Head, _),
+	\+ '$lgt_pp_synchronized_'(Head, _, _, _),
 	% static, non-multifile, and no synchronization wrapper
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_,_,_), user),
 	% source file user-defined predicate
@@ -17251,9 +17264,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-		(	'$lgt_pp_public_'(Functor, Arity)
-		;	'$lgt_pp_protected_'(Functor, Arity)
-		;	'$lgt_pp_private_'(Functor, Arity)
+		(	'$lgt_pp_public_'(Functor, Arity, _, _)
+		;	'$lgt_pp_protected_'(Functor, Arity, _, _)
+		;	'$lgt_pp_private_'(Functor, Arity, _, _)
 		),
 		\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
 		functor(Template, Functor, Arity),
@@ -17283,9 +17296,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
 	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, _),
 	\+ '$lgt_pp_defines_non_terminal_'(Functor, _, Arity),
-	\+ '$lgt_pp_public_'(Functor, Arity),
-	\+ '$lgt_pp_protected_'(Functor, Arity),
-	\+ '$lgt_pp_private_'(Functor, Arity),
+	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_private_'(Functor, Arity, _, _),
 	\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
 	'$lgt_camel_case_name'(Functor),
 	'$lgt_increment_compiling_warnings_counter',
@@ -17298,9 +17311,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
 	'$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity),
-	\+ '$lgt_pp_public_'(Functor, ExtArity),
-	\+ '$lgt_pp_protected_'(Functor, ExtArity),
-	\+ '$lgt_pp_private_'(Functor, ExtArity),
+	\+ '$lgt_pp_public_'(Functor, ExtArity, _, _),
+	\+ '$lgt_pp_protected_'(Functor, ExtArity, _, _),
+	\+ '$lgt_pp_private_'(Functor, ExtArity, _, _),
 	\+ '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity),
 	'$lgt_camel_case_name'(Functor),
 	'$lgt_increment_compiling_warnings_counter',
@@ -17380,7 +17393,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % constructs a "def" or "ddef" clause (used to translate between user predicate names and internal names)
 
 '$lgt_construct_def_clause'(Def, Head, ExCtx, THead, Clause) :-
-	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
+	(	'$lgt_pp_synchronized_'(Head, Mutex, _, _) ->
 		'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call),
 		(	'$lgt_prolog_feature'(threads, supported) ->
 			Clause =.. [Def, Head, ExCtx, with_mutex(Mutex,Call)]
@@ -17699,7 +17712,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	),
 	assertz('$lgt_pp_directive_'(dynamic(DDef/3))),
-	'$lgt_pp_dynamic_'(Head),
+	'$lgt_pp_dynamic_'(Head, _, _),
 		functor(Head, Functor, Arity),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity))),
@@ -17711,7 +17724,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_object_discontiguous_directives' :-
 	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
-	'$lgt_pp_discontiguous_'(Head),
+	'$lgt_pp_discontiguous_'(Head, _, _),
 		functor(Head, Functor, Arity),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity))),
@@ -17736,7 +17749,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_category_discontiguous_directives' :-
 	'$lgt_pp_category_'(_, Prefix, _, _, _, _),
-	'$lgt_pp_discontiguous_'(Head),
+	'$lgt_pp_discontiguous_'(Head, _, _),
 		functor(Head, Functor, Arity),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity))),
@@ -17765,12 +17778,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 % atom "true" if there are local clauses and the atom "false" otherwise
 
 '$lgt_generate_dcl_table_clauses'(Dcl, _) :-
-	(	'$lgt_pp_public_'(Functor, Arity), Scope = p(p(p))
-	;	'$lgt_pp_protected_'(Functor, Arity), Scope = p(p)
-	;	'$lgt_pp_private_'(Functor, Arity), Scope = p
+	(	'$lgt_pp_public_'(Functor, Arity, _, _), Scope = p(p(p))
+	;	'$lgt_pp_protected_'(Functor, Arity, _, _), Scope = p(p)
+	;	'$lgt_pp_private_'(Functor, Arity, _, _), Scope = p
 	),
 	functor(Pred, Functor, Arity),
-	(	'$lgt_pp_meta_predicate_'(Pred, Template) ->
+	(	'$lgt_pp_meta_predicate_'(Pred, Template, _, _) ->
 		Meta = Template,
 		MetaPredicate = 64				% 0b01000000
 	;	Meta = no,
@@ -17788,13 +17801,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		NonTerminal = 8					% 0b00001000
 	;	NonTerminal = 0
 	),
-	(	'$lgt_pp_synchronized_'(Pred, _) ->
+	(	'$lgt_pp_synchronized_'(Pred, _, _, _) ->
 		Synchronized = 4				% 0b00000100
 	;	Synchronized = 0
 	),
 	(	'$lgt_pp_dynamic_' ->
 		Dynamic = 2						% 0b00000010
-	;	'$lgt_pp_dynamic_'(Pred) ->
+	;	'$lgt_pp_dynamic_'(Pred, _, _) ->
 		Dynamic = 2						% 0b00000010
 	;	Dynamic = 0
 	),
@@ -17828,16 +17841,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% are defined in the complemented objects; for objects compiled with the
 	% complements flag set to allow, we must allow lookup of the predicate
 	% definition in the object itself (and elsewhere in its ancestors)
-	(	'$lgt_pp_public_'(Functor, Arity)
-	;	'$lgt_pp_protected_'(Functor, Arity)
-	;	'$lgt_pp_private_'(Functor, Arity)
-	;	'$lgt_pp_synchronized_'(Head, _)
+	(	'$lgt_pp_public_'(Functor, Arity, _, _)
+	;	'$lgt_pp_protected_'(Functor, Arity, _, _)
+	;	'$lgt_pp_private_'(Functor, Arity, _, _)
+	;	'$lgt_pp_synchronized_'(Head, _, _, _)
 	;	'$lgt_pp_coinductive_head_'(Head, _, _)
-	;	'$lgt_pp_discontiguous_'(Head)
+	;	'$lgt_pp_discontiguous_'(Head, _, _)
 	),
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_multifile_'(Head, _, _),
-	\+ '$lgt_pp_dynamic_'(Head),
+	\+ '$lgt_pp_dynamic_'(Head, _, _),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 	% declared, static, but undefined predicate;
 	% local calls must fail (as per closed-world assumption)
@@ -17848,18 +17861,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_entity_'(Type, _, Prefix),
 	(	Type == object,
 		% categories cannot contain clauses for dynamic predicates
-		'$lgt_pp_dynamic_'(Head)
+		'$lgt_pp_dynamic_'(Head, _, _)
 	;	'$lgt_pp_multifile_'(Head, _, _),
-		\+ '$lgt_pp_dynamic_'(Head)
+		\+ '$lgt_pp_dynamic_'(Head, _, _)
 	),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 	% dynamic and/or multifile predicate with no initial set of clauses
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	functor(Head, Functor, Arity),
-	(	\+ '$lgt_pp_public_'(Functor, Arity),
-		\+ '$lgt_pp_protected_'(Functor, Arity),
-		\+ '$lgt_pp_private_'(Functor, Arity),
-		\+ '$lgt_pp_synchronized_'(Head, _),
+	(	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_private_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_synchronized_'(Head, _, _, _),
 		\+ '$lgt_pp_coinductive_head_'(Head, _, _),
 		\+ '$lgt_pp_multifile_'(Head, _, _) ->
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, _, Ctx)
@@ -18855,7 +18868,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_predicate_calls_loop'(DuplicatedClauses, Optimize) :-
 	(	(	'$lgt_pp_entity_aux_clause_'(_)
-		;	'$lgt_pp_coinductive_'(_, _, _, _, _, _, _)
+		;	'$lgt_pp_coinductive_'(_, _, _, _, _, _, _, _, _)
 		;	'$lgt_pp_object_initialization_'(_, _, _)
 		;	'$lgt_pp_entity_meta_directive_'(_, _, _)
 		) ->
@@ -18892,7 +18905,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_compile_predicate_calls'(_, _) :-
-	retract('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)),
+	retract('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead, _, _)),
 	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	fail.
@@ -19130,9 +19143,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_multifile_'(Head, File, Lines),
 	% declared multifile predicate
 	functor(Head, Functor, Arity),
-	\+ '$lgt_pp_public_'(Functor, Arity),
-	\+ '$lgt_pp_protected_'(Functor, Arity),
-	\+ '$lgt_pp_private_'(Functor, Arity),
+	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_private_'(Functor, Arity, _, _),
 	% but missing corresponding scope directive
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), missing_scope_directive(File, Lines, Type, Entity, (multifile), Functor/Arity)),
@@ -19172,9 +19185,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% documented predicate or non-terminal
 	functor(Mode, Functor, Arity),
 	\+ '$lgt_pp_non_terminal_'(Functor, Arity, _),
-	\+ '$lgt_pp_public_'(Functor, Arity),
-	\+ '$lgt_pp_protected_'(Functor, Arity),
-	\+ '$lgt_pp_private_'(Functor, Arity),
+	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_private_'(Functor, Arity, _, _),
 	% but missing scope directive
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), missing_scope_directive(File, Lines, Type, Entity, mode, Functor/Arity)),
@@ -19471,7 +19484,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_generate_file_object_initialization_goal' :-
 	'$lgt_pp_entity_'(_, Object, Prefix),
 	(	'$lgt_prolog_feature'(threads, supported),
-		setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
+		setof(Mutex, Head^File^Lines^'$lgt_pp_synchronized_'(Head, Mutex, File, Lines), Mutexes) ->
 		Goal1 = '$lgt_create_mutexes'(Mutexes)
 	;	Goal1 = true
 	),
@@ -19580,7 +19593,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_call_initialization_goal' :-
 	(	'$lgt_prolog_feature'(threads, supported),
-		setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
+		setof(Mutex, Head^File^Lines^'$lgt_pp_synchronized_'(Head, Mutex, File, Lines), Mutexes) ->
 		'$lgt_create_mutexes'(Mutexes)
 	;	true
 	),
