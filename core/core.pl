@@ -18884,16 +18884,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(warning, Optimize) :-
 	% user-defined terms
 	retract('$lgt_pp_entity_term_'(Term, SourceData, _)),
-	(	SourceData = sd(_, _, File, Lines),
-		'$lgt_pp_entity_'(Type, Entity, _),
+	(	'$lgt_pp_entity_'(Type, Entity, _),
 		'$lgt_clause_from_term'(Term, Clause, Template, OriginalTerm),
-		'$lgt_pp_entity_term_'(Template, _, DuplicateLines),
+		'$lgt_pp_entity_term_'(Template, sd(_, _, File, Lines), _),
 		'$lgt_clause_from_term'(Template, Duplicate, _, _),
 		'$lgt_variant'(Clause, Duplicate) ->
 		'$lgt_increment_compiling_warnings_counter',
 		(	OriginalTerm = (_ --> _) ->
-			'$lgt_print_message'(warning(duplicated_clauses), duplicated_grammar_rule(File, Lines, Type, Entity, OriginalTerm, DuplicateLines))
-		;	'$lgt_print_message'(warning(duplicated_clauses), duplicated_clause(File, Lines, Type, Entity, Duplicate, DuplicateLines))
+			'$lgt_print_message'(warning(duplicated_clauses), duplicated_grammar_rule(File, Lines, Type, Entity, OriginalTerm))
+		;	'$lgt_print_message'(warning(duplicated_clauses), duplicated_clause(File, Lines, Type, Entity, Duplicate))
 		)
 	;	true
 	),

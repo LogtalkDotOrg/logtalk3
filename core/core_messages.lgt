@@ -371,11 +371,11 @@
 		message_context(File, Lines).
 
 	message_tokens(redefined_logtalk_built_in_predicate(File, Lines, Type, Entity, Predicate)) -->
-		['Redefining a Logtalk built-in predicate: ~q'-[Predicate], nl],
+		['Redefining Logtalk built-in predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(redefined_prolog_built_in_predicate(File, Lines, Type, Entity, Predicate)) -->
-		['Redefining a Prolog built-in predicate: ~q'-[Predicate], nl],
+		['Redefining Prolog built-in predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(goal_is_always_true(File, Lines, Type, Entity, Goal)) -->
@@ -409,11 +409,11 @@
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Predicate)) -->
-		['Missing ~w directive for the predicate: ~q'-[Directive, Predicate], nl],
+		['Missing ~w directive for predicate: ~q'-[Directive, Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(missing_scope_directive(File, Lines, Type, Entity, _Directive, Predicate)) -->
-		['Missing scope directive for the predicate: ~q'-[Predicate], nl],
+		['Missing scope directive for predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(duplicated_directive(File, Lines, Type, Entity, Directive)) -->
@@ -559,27 +559,27 @@
 	% deprecated feature messages
 
 	message_tokens(deprecated_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag)) -->
-		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
+		['Deprecated compiler flag: ~w (renamed to ~w)'-[Flag, NewFlag], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(deprecated_compiler_flag(File, Lines, Flag, NewFlag)) -->
-		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
+		['Deprecated compiler flag: ~w (renamed to ~w)'-[Flag, NewFlag], nl],
 		message_context(File, Lines).
 
 	message_tokens(deprecated_control_construct(File, Lines, Type, Entity, Term)) -->
-		['The ~q control construct is deprecated'-[Term], nl],
+		['Deprecated control construct: ~q'-[Term], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(deprecated_directive(File, Lines, Type, Entity, Directive)) -->
-		['The ~q directive is deprecated'-[Directive], nl],
+		['Deprecated directive: ~q'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(deprecated_predicate(File, Lines, Type, Entity, Predicate)) -->
-		['The ~q predicate is deprecated'-[Predicate], nl],
+		['Deprecated predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(deprecated_predicate(File, Lines, Type, Entity, Predicate, Replacement)) -->
-		['The ~q predicate is deprecated (compiled as a call to ~q)'-[Predicate, Replacement], nl],
+		['Deprecated predicate: ~q (compiled as a call to ~q)'-[Predicate, Replacement], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% encoding/1 directive messages
@@ -634,12 +634,12 @@
 
 	% duplicated clause and grammar rule messages
 
-	message_tokens(duplicated_clause(File, Lines, Type, Entity, Clause, DuplicateLine-_)) -->
-		['Duplicated clause found around line ~w: ~q'-[DuplicateLine, Clause], nl],
+	message_tokens(duplicated_clause(File, Lines, Type, Entity, Clause)) -->
+		['Duplicated clause: ~q'-[Clause], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(duplicated_grammar_rule(File, Lines, Type, Entity, GrammarRule, DuplicateLine-_)) -->
-		['Duplicated grammar rule found around line ~w: ~q'-[DuplicateLine, GrammarRule], nl],
+	message_tokens(duplicated_grammar_rule(File, Lines, Type, Entity, GrammarRule)) -->
+		['Duplicated grammar rule: ~q'-[GrammarRule], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% auxiliary grammar rules
