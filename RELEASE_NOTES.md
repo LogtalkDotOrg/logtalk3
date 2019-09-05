@@ -40,6 +40,12 @@ Prolog adapter and integration files
 * UPDATED: The SICStus Prolog adapter file to suppress `is/2` predicate
 directives when compiling a module as an object.
 
+Library
+-------
+
+* FIXED: Syntax error running the `assignvars` library tests with some backend
+Prolog compilers.
+
 
 3.29.0 - September 3, 2019
 ==========================

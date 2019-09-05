@@ -22,16 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2019/06/10,
+		date is 2019/09/05,
 		comment is 'Unit tests for the "assignvars" library.'
 	]).
 
 	:- uses(assignvars, [
 		assignable/1, assignable/2,
-		op(100, xfx, '<='), '<='/2,
-		op(100, xfx, '=>'), '=>'/2
+		op(100, xfx, '<='), ('<=')/2,
+		op(100, xfx, '=>'), ('=>')/2
 	]).
 
 	cover(assignvars).
