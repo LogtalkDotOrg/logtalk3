@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 (when compiling a module as an object) where the templates are explicitly
 qualified.
 
+* IMPROVED: Duplicated directive, clause, and grammar rule lint warnings now
+also print the location of the first occurrence.
+
 * FIXED: Compilation of `reexport/2` directives regression when compiling a
 Prolog module as an object.
 

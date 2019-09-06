@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.77,
+		version is 1.78,
 		author is 'Paulo Moura',
-		date is 2019/09/05,
+		date is 2019/09/06,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -416,6 +416,10 @@
 		['Missing scope directive for predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
+	message_tokens(duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines)) -->
+		['Duplicated directive: ~q'-[Directive], nl],
+		first_found_at(OriginalFile, OriginalLines, File),
+		message_context(File, Lines, Type, Entity).
 	message_tokens(duplicated_directive(File, Lines, Type, Entity, Directive)) -->
 		['Duplicated directive: ~q'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
@@ -634,12 +638,14 @@
 
 	% duplicated clause and grammar rule messages
 
-	message_tokens(duplicated_clause(File, Lines, Type, Entity, Clause)) -->
+	message_tokens(duplicated_clause(File, Lines, Type, Entity, Clause, OriginalFile, OriginalLines)) -->
 		['Duplicated clause: ~q'-[Clause], nl],
+		first_found_at(OriginalFile, OriginalLines, File),
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(duplicated_grammar_rule(File, Lines, Type, Entity, GrammarRule)) -->
+	message_tokens(duplicated_grammar_rule(File, Lines, Type, Entity, GrammarRule, OriginalFile, OriginalLines)) -->
 		['Duplicated grammar rule: ~q'-[GrammarRule], nl],
+		first_found_at(OriginalFile, OriginalLines, File),
 		message_context(File, Lines, Type, Entity).
 
 	% auxiliary grammar rules
@@ -735,6 +741,21 @@
 		['  in term'-[], nl].
 	term_tokens(_) -->
 		['  in term'-[], nl].
+
+	first_found_at(File, OriginalLines, File) -->
+		(	{OriginalLines == 1-1} ->
+			['  first found at line 1'-[], nl]
+		;	{OriginalLines = Line-Line} ->
+			['  first found at or above line ~d'-[Line], nl]
+		;	['  first found between lines ~w'-[OriginalLines], nl]
+		).
+	first_found_at(OriginalFile, OriginalLines, _) -->
+		(	{OriginalLines == 1-1} ->
+			['  first found in file ~w at line 1'-[OriginalFile], nl]
+		;	{OriginalLines = Line-Line} ->
+			['  first found in file ~w at or above line ~d'-[OriginalFile, Line], nl]
+		;	['  first found in file ~w between lines ~w'-[OriginalFile, OriginalLines], nl]
+		).
 
 	message_context(File, Lines, Type, Entity) -->
 		['  while compiling ~w ~q'-[Type, Entity], nl],

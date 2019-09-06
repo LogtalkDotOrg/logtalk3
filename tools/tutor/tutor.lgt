@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.18,
+		version is 0.19,
 		author is 'Paulo Moura',
-		date is 2019/08/30,
+		date is 2019/09/06,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -407,15 +407,17 @@
 			'the ~w opening directive to fix this warning.'-[Type], nl, nl
 		].
 
+	explain(duplicated_directive(_, _, _, _, _, _, _)) -->
+		['Easy to fix warning: simply delete or correct the duplicated directive.'-[], nl, nl].
 	explain(duplicated_directive(_, _, _, _, _)) -->
 		['Easy to fix warning: simply delete or correct the duplicated directive.'-[], nl, nl].
 
-	explain(duplicated_clauses(_, _, _, _, _, _)) -->
+	explain(duplicated_clause(_, _, _, _, _, _, _)) -->
 		[	'Duplicated clauses are usually a source code editing error and can'-[], nl,
 			'result in spurious choice-points, degrading performance. Delete or'-[], nl,
 			'correct the duplicated clause to fix this warning.'-[], nl, nl
 		].
-	explain(duplicated_grammar_rules(_, _, _, _, _, _)) -->
+	explain(duplicated_grammar_rule(_, _, _, _, _, _, _)) -->
 		[	'Duplicated grammar rules are usually a source code editing error and'-[], nl,
 			'can result in spurious choice-points, degrading performance. Delete'-[], nl,
 			'or correct the duplicated grammar rule to fix this warning.'-[], nl, nl

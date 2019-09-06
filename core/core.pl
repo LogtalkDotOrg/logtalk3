@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b01)).
+'$lgt_version_data'(logtalk(3, 30, 0, b02)).
 
 
 
@@ -9437,12 +9437,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, [Operator| Operators]), Scope) :-
 	!,
-	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, _, _) ->
+	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, OriginalFile, OriginalLines) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			Directive =.. [Scope, op(Priority, Specifier, Operator)],
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
+			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
 		;	true
 		)
 	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _, _, _) ->
@@ -9451,12 +9451,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operator), Scope) :-
-	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, _, _) ->
+	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, OriginalFile, OriginalLines) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			Directive =.. [Scope, op(Priority, Specifier, Operator)],
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
+			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
 		;	true
 		)
 	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _, _, _) ->
@@ -9465,15 +9465,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check_for_duplicated_scope_directives'(Functor/Arity, Scope) :-
-	(	(	Scope == (public), '$lgt_pp_public_'(Functor, Arity, _, _)
-		;	Scope == protected, '$lgt_pp_protected_'(Functor, Arity, _, _)
-		;	Scope == (private), '$lgt_pp_private_'(Functor, Arity, _, _)
+	(	(	Scope == (public), '$lgt_pp_public_'(Functor, Arity, OriginalFile, OriginalLines)
+		;	Scope == protected, '$lgt_pp_protected_'(Functor, Arity, OriginalFile, OriginalLines)
+		;	Scope == (private), '$lgt_pp_private_'(Functor, Arity, OriginalFile, OriginalLines)
 		) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			Directive =.. [Scope, Functor/Arity],
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
+			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
 		;	true
 		)
 	;	(	'$lgt_pp_public_'(Functor, Arity, _, _)
@@ -9485,15 +9485,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity, Scope) :-
-	(	(	Scope == (public), '$lgt_pp_public_'(Functor, ExtArity, _, _)
-		;	Scope == protected, '$lgt_pp_protected_'(Functor, ExtArity, _, _)
-		;	Scope == (private), '$lgt_pp_private_'(Functor, ExtArity, _, _)
+	(	(	Scope == (public), '$lgt_pp_public_'(Functor, ExtArity, OriginalFile, OriginalLines)
+		;	Scope == protected, '$lgt_pp_protected_'(Functor, ExtArity, OriginalFile, OriginalLines)
+		;	Scope == (private), '$lgt_pp_private_'(Functor, ExtArity, OriginalFile, OriginalLines)
 		) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			Directive =.. [Scope, Functor//Arity],
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
+			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
 		;	true
 		)
 	;	(	'$lgt_pp_public_'(Functor, ExtArity, _, _)
@@ -9607,11 +9607,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_check_for_duplicated_dynamic_directive'(Head, PI) :-
-	(	'$lgt_pp_dynamic_'(Head, _, _),
+	(	'$lgt_pp_dynamic_'(Head, OriginalFile, OriginalLines),
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, dynamic(PI)))
+		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, dynamic(PI), OriginalFile, OriginalLines))
 	;	true
 	).
 
@@ -9718,11 +9718,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_check_for_duplicated_discontiguous_directive'(Head, PI) :-
-	(	'$lgt_pp_discontiguous_'(Head, _, _),
+	(	'$lgt_pp_discontiguous_'(Head, OriginalFile, OriginalLines),
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, discontiguous(PI)))
+		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, discontiguous(PI), OriginalFile, OriginalLines))
 	;	true
 	).
 
@@ -9777,11 +9777,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_check_for_duplicated_meta_predicate_directive'(Template, Meta) :-
-	(	'$lgt_pp_meta_predicate_'(Template, Meta, _, _) ->
+	(	'$lgt_pp_meta_predicate_'(Template, Meta, OriginalFile, OriginalLines) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, meta_predicate(Meta)))
+			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, meta_predicate(Meta), OriginalFile, OriginalLines))
 		;	true
 		)
 	;	'$lgt_pp_meta_predicate_'(Template, _, _, _) ->
@@ -9859,11 +9859,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_check_for_duplicated_meta_non_terminal_directive'(Template, ExtendedMeta, Meta) :-
-	(	'$lgt_pp_meta_predicate_'(Template, ExtendedMeta, _, _) ->
+	(	'$lgt_pp_meta_predicate_'(Template, ExtendedMeta, OriginalFile, OriginalLines) ->
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, meta_non_terminal(Meta)))
+			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, meta_non_terminal(Meta), OriginalFile, OriginalLines))
 		;	true
 		)
 	;	'$lgt_pp_meta_predicate_'(Template, _, _, _) ->
@@ -9953,10 +9953,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% protocols cannot contain predicate definitions
 		throw(permission_error(declare, multifile, Functor/Arity))
 	;	functor(Head, Functor, Arity),
+		'$lgt_check_for_duplicated_multifile_directive'(Head, Pred),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), multifile(Pred)),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	).
 
@@ -9968,10 +9968,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% protocols cannot contain non-terminal definitions
 		throw(permission_error(declare, multifile, Functor//Arity))
 	;	functor(Head, Functor, ExtArity),
+		'$lgt_check_for_duplicated_multifile_directive'(Head, NonTerminal),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
-		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), multifile(NonTerminal)),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	).
 
@@ -9993,6 +9993,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		functor(Scope, p, _),
 		Flags /\ 16 =:= 16
 	;	fail
+	).
+
+
+'$lgt_check_for_duplicated_multifile_directive'(Head, PI) :-
+	(	'$lgt_pp_multifile_'(Head, OriginalFile, OriginalLines),
+		'$lgt_compiler_flag'(duplicated_directives, warning) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, multifile(PI), OriginalFile, OriginalLines))
+	;	true
 	).
 
 
@@ -18884,15 +18894,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(warning, Optimize) :-
 	% user-defined terms
 	retract('$lgt_pp_entity_term_'(Term, SourceData, _)),
-	(	'$lgt_pp_entity_'(Type, Entity, _),
+	(	SourceData = sd(_, _, OriginalFile, OriginalLines),
+		'$lgt_pp_entity_'(Type, Entity, _),
 		'$lgt_clause_from_term'(Term, Clause, Template, OriginalTerm),
 		'$lgt_pp_entity_term_'(Template, sd(_, _, File, Lines), _),
 		'$lgt_clause_from_term'(Template, Duplicate, _, _),
 		'$lgt_variant'(Clause, Duplicate) ->
 		'$lgt_increment_compiling_warnings_counter',
 		(	OriginalTerm = (_ --> _) ->
-			'$lgt_print_message'(warning(duplicated_clauses), duplicated_grammar_rule(File, Lines, Type, Entity, OriginalTerm))
-		;	'$lgt_print_message'(warning(duplicated_clauses), duplicated_clause(File, Lines, Type, Entity, Duplicate))
+			'$lgt_print_message'(warning(duplicated_clauses), duplicated_grammar_rule(File, Lines, Type, Entity, OriginalTerm, OriginalFile, OriginalLines))
+		;	'$lgt_print_message'(warning(duplicated_clauses), duplicated_clause(File, Lines, Type, Entity, Duplicate, OriginalFile, OriginalLines))
 		)
 	;	true
 	),
