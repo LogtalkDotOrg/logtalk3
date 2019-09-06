@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.78,
+		version is 1.79,
 		author is 'Paulo Moura',
 		date is 2019/09/06,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -824,6 +824,8 @@
 		['in ~w goal contains singleton variable ~q'-[Predicate, Singleton], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton| Singletons])) -->
 		['in ~w goal contains singleton variables ~q'-[Predicate, [Singleton| Singletons]], nl].
+	suspicious_call_reason(missing_else_part) -->
+		['as else part of the conditional is missing'-[], nl].
 
 	missing_entities([]) -->
 		[].

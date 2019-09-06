@@ -21,7 +21,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.19,
+		version is 0.21,
 		author is 'Paulo Moura',
 		date is 2019/09/06,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
@@ -615,15 +615,15 @@
 		 	'In the later case, use instead anonymous variables.'-[], nl, nl
 		].
 
-	explain(suspicious_call(_, _, _, _, (_ -> _), _)) -->
+	explain(suspicious_call(_, _, _, _, (_ -> _), reason(missing_else_part))) -->
 		[	'Using the ->/2 if-then control construct without an else part is'-[], nl,
 			'a common source of errors. Check if the else part is missing due'-[], nl,
-			'to a coding error or use the suggested alternative.'-[], nl, nl
+			'to a coding error or use the (If -> Then; fail) pattern instead.'-[], nl, nl
 		].
-	explain(suspicious_call(_, _, _, _, '*->'(_, _), _)) -->
-		[	'Using the *->/2 soft cut control construct without an else part'-[], nl,
-			'is a common source of errors. Check if the else part is missing'-[], nl,
-			'due to a coding error or use the suggested alternative.'-[], nl, nl
+	explain(suspicious_call(_, _, _, _, '*->'(_, _), reason(missing_else_part))) -->
+		[	'Using the *->/2 soft cut control construct without an else part is'-[], nl,
+			'a common source of errors. Check if the else part is missing due'-[], nl,
+			'to a coding error or use the (If *-> Then; fail) pattern instead.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
 		[	'The standard Prolog =../2 built-in predicate is costly and should'-[], nl,

@@ -11596,7 +11596,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), [';'('*->'(Pred1,Pred2),fail), (Pred1, Pred2)])),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), reason(missing_else_part))),
 	fail.
 '$lgt_compile_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
@@ -11611,7 +11611,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), [(Pred1 -> Pred2; fail), (once(Pred1), Pred2)])),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), reason(missing_else_part))),
 	fail.
 '$lgt_compile_body'((Pred1 -> Pred2), (TPred1 -> TPred2), (DPred1 -> DPred2), Ctx) :-
 	!,

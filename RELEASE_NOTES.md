@@ -34,6 +34,8 @@ qualified.
 * IMPROVED: Duplicated directive, clause, and grammar rule lint warnings now
 also print the location of the first occurrence.
 
+* IMPROVED: Simplify lint warnings on conditionals missing the else part.
+
 * FIXED: Compilation of `reexport/2` directives regression when compiling a
 Prolog module as an object.
 
