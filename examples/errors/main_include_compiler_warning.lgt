@@ -22,6 +22,11 @@
 
 	:- public(not_defined/0).
 
+	:- dynamic(foo/1).
+
+	a(1, one).
+	a(2, two).
+
 	:- include(include_compiler_warning).
 
 :- end_object.

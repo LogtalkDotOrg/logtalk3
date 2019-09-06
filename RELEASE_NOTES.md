@@ -49,6 +49,12 @@ Library
 * FIXED: Syntax error running the `assignvars` library tests with some backend
 Prolog compilers.
 
+Examples
+--------
+
+* UPDATED. The `errors` example to illustrate duplicate directive and clause
+lint warnings when the duplicates occur in an included file.
+
 
 3.29.0 - September 3, 2019
 ==========================
