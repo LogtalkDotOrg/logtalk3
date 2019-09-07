@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b02)).
+'$lgt_version_data'(logtalk(3, 30, 0, b03)).
 
 
 
@@ -19150,6 +19150,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
+
+% reports missing scope directives for dynamic predicates
+
+'$lgt_report_missing_directives_'(category, Entity) :-
+	'$lgt_pp_dynamic_'(Head, File, Lines),
+	% declared dynamic predicate in a category are for objects
+	functor(Head, Functor, Arity),
+	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_private_'(Functor, Arity, _, _),
+	% but missing corresponding scope directive
+	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
+	\+ '$lgt_pp_extended_category_'(_, _, _, _, _, _),
+	% nowhere from inheriting a predicate scope declaration
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(missing_directives), missing_scope_directive(File, Lines, category, Entity, (dynamic), Functor/Arity)),
+	fail.
 
 % reports missing scope directives for multifile predicates
 

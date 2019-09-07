@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Compiler warning for missing scope directives for dynamic predicates
+declared in standalone categories.
+
 * ADDED: Support for compiling Prolog module `meta_predicate/1` directives
 (when compiling a module as an object) where the templates are explicitly
 qualified.
