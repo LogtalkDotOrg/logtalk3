@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.21,
+		version is 0.22,
 		author is 'Paulo Moura',
-		date is 2019/09/06,
+		date is 2019/09/07,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -552,12 +552,12 @@
 
 	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Predicate)) -->
 		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Predicate], nl,
-			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Predicate], nl, nl
+			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Predicate, Type], nl, nl
 		].
 
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
-		[	'But there is a ~w directive for the predicate.'-[Directive], nl,
-			'If there is a scope directive, check for a typo in the predicate name.'-[], nl, nl
+		[	'But there is a ~w directive for the predicate. If there is a scope'-[Directive], nl,
+			'directive, check for a typo in the predicate name or number of arguments.'-[], nl, nl
 		].
 
 	% naming guidelines messages
@@ -627,7 +627,7 @@
 		].
 	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
 		[	'The standard Prolog =../2 built-in predicate is costly and should'-[], nl,
-			'be avoided whenever possible. Simply use the suggested predicate.'-[], nl, nl
+			'be avoided whenever possible. Simply use the suggested alternative.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, Object::_, _)) -->
 		{Object == user},
@@ -651,9 +651,10 @@
 		].
 
 	explain(suspicious_call(_, _, _, _, repeat, reason(repeat(_)))) -->
-		[	'A repeat loop not ended with a cut may result in an endless loop'-[], nl,
-		 	'in case of unexpected backtracking. Always use a cut immediately'-[], nl,
-			'after the test goal that exits the repeat loop.'-[], nl, nl
+		[	'A repeat loop not ended with a cut may result in an endless loop in'-[], nl,
+		 	'case of unexpected backtracking. Use a cut immediately after the test'-[], nl,
+			'goal that exits the repeat loop unless you really want to define a'-[], nl,
+			'perpetual loop.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, !, reason(multifile(_)))) -->
 		[	'A cut in a multifile predicate clause may prevent other clauses,'-[], nl,

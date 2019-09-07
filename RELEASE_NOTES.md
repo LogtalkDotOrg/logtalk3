@@ -57,6 +57,11 @@ Examples
 * UPDATED. The `errors` example to illustrate duplicate directive and clause
 lint warnings when the duplicates occur in an included file.
 
+Tools
+-----
+
+* IMPROVED: The `tutor` tool explanations for several compiler lint warnings.
+
 
 3.29.0 - September 3, 2019
 ==========================
