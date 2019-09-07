@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.44,
+		version is 2.45,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019/09/07,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -1076,22 +1076,24 @@
 	ground_entity_identifier(object, Object, ObjectName) :-
 		(	atom(Object) ->
 			ObjectName = Object
-		;	(	object_property(Object, info(Info)) ->
+		;	% parametric object
+			(	object_property(Object, info(Info)) ->
 				parameter_names(Object, Info, Names)
 			;	parameter_names(Object, [], Names)
 			),
-			Object =.. [Functor| _],
+			functor(Object, Functor, _),
 			ObjectName =.. [Functor| Names]
 		).
 	ground_entity_identifier(protocol, Protocol, Protocol).
 	ground_entity_identifier(category, Category, CategoryName) :-
 		(	atom(Category) ->
 			CategoryName = Category
-		;	(	category_property(Category, info(Info)) ->
+		;	% parametric category
+			(	category_property(Category, info(Info)) ->
 				parameter_names(Category, Info, Names)
 			;	parameter_names(Category, [], Names)
 			),
-			Category =.. [Functor| _],
+			functor(Category, Functor, _),
 			CategoryName =.. [Functor| Names]
 		).
 	ground_entity_identifier(module, Module, Module).
