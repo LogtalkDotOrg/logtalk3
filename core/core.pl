@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b03)).
+'$lgt_version_data'(logtalk(3, 30, 0, b04)).
 
 
 
@@ -11846,6 +11846,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Term =.. List, _, _, Ctx) :-
 	'$lgt_is_list'(List),
+	% closed list (i.e. fixed number of elements)
 	List = [Functor| _],
 	nonvar(Functor),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
@@ -11854,6 +11855,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [Term = ListTerm])),
+	fail.
+
+'$lgt_compile_body'(Term =.. List, _, _, Ctx) :-
+	nonvar(List),
+	List = [Functor| Args],
+	var(Args),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
+	once((
+		'$lgt_member'(_=Functor0, VariableNames),
+		Functor0 == Functor
+	)),
+	% assume that functor is not an anoymous variable
+	\+ (
+		'$lgt_member'(_=Args0, VariableNames),
+		Args0 == Args
+	),
+	% assume that the list tail is an anoymous variable
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [functor(Term, Functor, _)])),
 	fail.
 
 % lambda expressions

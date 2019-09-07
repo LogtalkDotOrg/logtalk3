@@ -21,7 +21,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.22,
+		version is 0.23,
 		author is 'Paulo Moura',
 		date is 2019/09/07,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
@@ -626,8 +626,8 @@
 			'to a coding error or use the (If *-> Then; fail) pattern instead.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
-		[	'The standard Prolog =../2 built-in predicate is costly and should'-[], nl,
-			'be avoided whenever possible. Simply use the suggested alternative.'-[], nl, nl
+		[	'The standard Prolog =../2 built-in predicate is costly and should be'-[], nl,
+			'avoided whenever possible. Consider using the suggested alternative.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, Object::_, _)) -->
 		{Object == user},

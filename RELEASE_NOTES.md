@@ -30,6 +30,10 @@ Logtalk compiler and runtime
 * ADDED: Compiler warning for missing scope directives for dynamic predicates
 declared in standalone categories.
 
+* ADDED: Lint warning for another case of misusing the `=../2` built-in
+predicate where using the `functor/3` built-in predicate would be more
+efficient.
+
 * ADDED: Support for compiling Prolog module `meta_predicate/1` directives
 (when compiling a module as an object) where the templates are explicitly
 qualified.
