@@ -398,6 +398,15 @@
 
 
 
+:- object(atom_processing).
+
+	foo(Atom) :-
+		atom_concat(bar, _, Atom).
+
+:- end_object.
+
+
+
 :- object(redundant_univ).
 
 	% =../2 calls are only necessary when the second argument is a

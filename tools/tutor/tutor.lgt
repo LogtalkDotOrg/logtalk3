@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.23,
+		version is 0.24,
 		author is 'Paulo Moura',
-		date is 2019/09/07,
+		date is 2019/09/09,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -552,7 +552,7 @@
 
 	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Predicate)) -->
 		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Predicate], nl,
-			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Predicate, Type], nl, nl
+			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Predicate], nl, nl
 		].
 
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
@@ -628,6 +628,10 @@
 	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
 		[	'The standard Prolog =../2 built-in predicate is costly and should be'-[], nl,
 			'avoided whenever possible. Consider using the suggested alternative.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, atom_concat(_, _, _), _)) -->
+		[	'Avoid implicit creation of atoms that will not be used as atom management'-[], nl,
+			'is relatively costly. Consider using the suggested alternative.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, Object::_, _)) -->
 		{Object == user},

@@ -30,6 +30,10 @@ Logtalk compiler and runtime
 * ADDED: Compiler warning for missing scope directives for dynamic predicates
 declared in standalone categories.
 
+* ADDED: Lint warning for a common case of misusing the `atom_concat/3`
+built-in predicate where using the `sub_atom/5` built-in predicates would be
+more efficient.
+
 * ADDED: Lint warnings for two other cases of misusing the `=../2` built-in
 predicate where using the `arg/3` or `functor/3` built-in predicates would be
 more efficient.

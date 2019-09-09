@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b05)).
+'$lgt_version_data'(logtalk(3, 30, 0, b06)).
 
 
 
@@ -11841,6 +11841,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(system_error, TPred, DPred, Ctx) :-
 	!,
 	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
+
+% atomic term processing predicates (only lint warnings)
+
+'$lgt_compile_body'(atom_concat(Prefix, Var, Atom), _, _, Ctx) :-
+	atom(Prefix),
+	var(Var),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	% reinstate relation between term variables and their names
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
+	\+ (
+		'$lgt_member'(_=Var0, VariableNames),
+		Var0 == Var
+	),
+	% assume that Var is an anonymous variable
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	atom_length(Prefix, Length),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, atom_concat(Prefix, Var, Atom), [sub_atom(Atom, 0, Length, _, Prefix)])),
+	fail.
 
 % term creation and decomposition predicates (only lint warnings)
 
