@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on September 2, 2019
+%  Last updated on September 9, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -210,7 +210,9 @@
 '$lgt_prolog_meta_directive'(initialization(_, _), initialization(0, *)).
 '$lgt_prolog_meta_directive'(noprofile(_), noprofile(/)).
 '$lgt_prolog_meta_directive'(thread_initialization(_), thread_initialization(0)).
-'$lgt_prolog_meta_directive'(thread_local(_), thread_local(/)).
+'$lgt_prolog_meta_directive'(thread_local(_), thread_local(/)) :-
+	logtalk_load_context(entity_type, Type),
+	Type \== module.
 '$lgt_prolog_meta_directive'(volatile(_), volatile(/)).
 
 
@@ -697,6 +699,10 @@
 
 '$lgt_swi_directive_expansion'(reexport(File, Exports), (:- reexport(Module, Exports))) :-
 	'$lgt_swi_list_of_exports'(File, Module, _).
+
+'$lgt_swi_directive_expansion'(thread_local(Predicates), [{:- thread_local(TPredicates)}, (:- dynamic(Predicates))]) :-
+	logtalk_load_context(entity_type, module),
+	'$lgt_compile_predicate_indicators'(Predicates, _, TPredicates).
 
 '$lgt_swi_directive_expansion'(table(as(Predicates,Properties)), {:- table(as(TPredicates,Properties))}) :-
 	logtalk_load_context(entity_type, _),

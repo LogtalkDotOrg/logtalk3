@@ -56,6 +56,11 @@ Prolog adapter and integration files
 * UPDATED: The SICStus Prolog adapter file to suppress `is/2` predicate
 directives when compiling a module as an object.
 
+* UPDATED: The SWI-Prolog adapter file to term-expand `thread_local/1`
+directives to both `thread_local/1` and `dynamic/1` directives to prevent
+spurious lint warnings about missing `dynamic/1` directives when compiling
+a module as an object.
+
 Library
 -------
 
