@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b04)).
+'$lgt_version_data'(logtalk(3, 30, 0, b05)).
 
 
 
@@ -11842,13 +11842,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
 
-% term creation and decomposition predicates
+% term creation and decomposition predicates (only lint warnings)
 
 '$lgt_compile_body'(Term =.. List, _, _, Ctx) :-
 	'$lgt_is_list'(List),
-	% closed list (i.e. fixed number of elements)
+	% closed list (compound term with know arity)
 	List = [Functor| _],
 	nonvar(Functor),
+	% with a bound functor
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	ListTerm =.. List,
@@ -11861,23 +11862,47 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(List),
 	List = [Functor| Args],
 	var(Args),
+	% open list (compound term with unknown arity)
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
+	% reinstate relation between term variables and their names
 	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
 	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
 	once((
 		'$lgt_member'(_=Functor0, VariableNames),
 		Functor0 == Functor
 	)),
-	% assume that functor is not an anoymous variable
+	% assume that functor is not an anonymous variable
 	\+ (
 		'$lgt_member'(_=Args0, VariableNames),
 		Args0 == Args
 	),
-	% assume that the list tail is an anoymous variable
+	% assume that the list tail is an anonymous variable
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [functor(Term, Functor, _)])),
+	fail.
+
+'$lgt_compile_body'(Term =.. List, _, _, Ctx) :-
+	nonvar(List),
+	List = [Functor| Args],
+	var(Functor),
+	nonvar(Args),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	% reinstate relation between term variables and their names
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
+	\+ (
+		'$lgt_member'(_=Functor0, VariableNames),
+		Functor0 == Functor
+	),
+	% assume that the functor argument is an anonymous variable
+	'$lgt_position_relevant_argument_pairs'(Args, 1, VariableNames, [N-Arg]),
+	% assume a single bound argument or non-anonymous variable argument in the compound term arguments
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [arg(N, Term, Arg)])),
 	fail.
 
 % lambda expressions
@@ -23667,6 +23692,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Element == Head ->
 		true
 	;	'$lgt_memberchk_var'(Element, Tail)
+	).
+
+
+% find position-relevant argument pairs for =../2 lint checks where a relevant
+% argument is either a bound argument or a named variable argument
+'$lgt_position_relevant_argument_pairs'([], _, _, []).
+'$lgt_position_relevant_argument_pairs'([Argument| Arguments], N, VariableNames, [N-Argument| Pairs]) :-
+	once((
+		nonvar(Argument)
+	;	'$lgt_member'(_=Argument0, VariableNames),
+		Argument0 == Argument
+	)),
+	!,
+	(	var(Arguments) ->
+		% open list
+		Pairs = []
+	;	M is N + 1,
+		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs)
+	).
+'$lgt_position_relevant_argument_pairs'([_| Arguments], N, VariableNames, Pairs) :-
+	(	var(Arguments) ->
+		% open list
+		Pairs = []
+	;	M is N + 1,
+		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs)
 	).
 
 

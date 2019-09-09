@@ -30,9 +30,9 @@ Logtalk compiler and runtime
 * ADDED: Compiler warning for missing scope directives for dynamic predicates
 declared in standalone categories.
 
-* ADDED: Lint warning for another case of misusing the `=../2` built-in
-predicate where using the `functor/3` built-in predicate would be more
-efficient.
+* ADDED: Lint warnings for two other cases of misusing the `=../2` built-in
+predicate where using the `arg/3` or `functor/3` built-in predicates would be
+more efficient.
 
 * ADDED: Support for compiling Prolog module `meta_predicate/1` directives
 (when compiling a module as an object) where the templates are explicitly
@@ -63,6 +63,9 @@ Examples
 
 * UPDATED. The `errors` example to illustrate duplicate directive and clause
 lint warnings when the duplicates occur in an included file.
+
+* UPDATED. The `errors` example to illustrate the new lint warnings for
+misusing the `=../2` built-in predicate.
 
 Tools
 -----

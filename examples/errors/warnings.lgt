@@ -400,10 +400,23 @@
 
 :- object(redundant_univ).
 
-	% =../2 calls are only necessary when the second argument is a partial list
-	% (i.e. a variable or a list with a variable tail)
+	% =../2 calls are only necessary when the second argument is a
+	% partial list (i.e. a variable or a list with a variable tail)
 	foo :-
 		_ =.. [foo, bar, baz].
+
+	% =../2 calls should not be used just to access a term functor
+	% in place of functor/3
+	bar(Term, Functor) :-
+		Term =.. [Functor| _].
+
+	% =../2 calls should not be used to access a specific argument
+	% of a compound term in place of arg/3
+	baz(Term, Arg) :-
+		Term =.. [_, _, Arg| _].
+
+	baz(Term) :-
+		Term =.. [_, _, 3| _].
 
 :- end_object.
 
