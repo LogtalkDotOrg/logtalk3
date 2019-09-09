@@ -11919,8 +11919,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Functor0 == Functor
 	),
 	% assume that the functor argument is an anonymous variable
-	'$lgt_position_relevant_argument_pairs'(Args, 1, VariableNames, [N-Arg]),
-	% assume a single bound argument or non-anonymous variable argument in the compound term arguments
+	'$lgt_position_relevant_argument_pairs'(Args, 1, VariableNames, [N-Arg], open),
+	% assume a single bound argument or non-anonymous variable argument in the
+	% compound term arguments; we also require an open list for this as otherwise
+	% the =../2 call may also being used to verify the compound term arity
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [arg(N, Term, Arg)])),
@@ -12011,6 +12013,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, bagof(Term,QGoal,List), reason(no_shared_variables(bagof)))),
 	fail.
+
 '$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
 	callable(QGoal),
 	QGoal = _^_,
@@ -12021,6 +12024,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
 	fail.
+
 '$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
 	callable(QGoal),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
@@ -12030,6 +12034,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(singleton_variables(bagof/3,QGoal,Singletons)))),
 	fail.
+
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
@@ -12057,6 +12062,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List), reason(no_shared_variables(findall)))),
 	fail.
+
 '$lgt_compile_body'(findall(Term, Goal, List), findall(Term, TGoal, List), '$lgt_debug'(goal(findall(Term, Goal, List), findall(Term, DGoal, List)), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -12074,6 +12080,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List,Tail), reason(no_shared_variables(findall)))),
 	fail.
+
 '$lgt_compile_body'(findall(Term, Goal, List, Tail), findall(Term, TGoal, List, Tail), '$lgt_debug'(goal(findall(Term, Goal, List, Tail), findall(Term, DGoal, List, Tail)), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -12112,6 +12119,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, setof(Term,QGoal,List), reason(no_shared_variables(setof)))),
 	fail.
+
 '$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
 	callable(QGoal),
 	QGoal = _^_,
@@ -12122,6 +12130,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
 	fail.
+
 '$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
 	callable(QGoal),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
@@ -12131,6 +12140,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(singleton_variables(setof/3,QGoal,Singletons)))),
 	fail.
+
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
@@ -23717,9 +23727,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % find position-relevant argument pairs for =../2 lint checks where a relevant
-% argument is either a bound argument or a named variable argument
-'$lgt_position_relevant_argument_pairs'([], _, _, []).
-'$lgt_position_relevant_argument_pairs'([Argument| Arguments], N, VariableNames, [N-Argument| Pairs]) :-
+% argument is either a bound argument or a named variable argument; the last
+% argument returns the type of list (open or closed)
+'$lgt_position_relevant_argument_pairs'([], _, _, [], closed).
+'$lgt_position_relevant_argument_pairs'([Argument| Arguments], N, VariableNames, [N-Argument| Pairs], Type) :-
 	once((
 		nonvar(Argument)
 	;	'$lgt_member'(_=Argument0, VariableNames),
@@ -23728,16 +23739,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	var(Arguments) ->
 		% open list
-		Pairs = []
+		Pairs = [],
+		Type = open
 	;	M is N + 1,
-		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs)
+		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs, Type)
 	).
-'$lgt_position_relevant_argument_pairs'([_| Arguments], N, VariableNames, Pairs) :-
+'$lgt_position_relevant_argument_pairs'([_| Arguments], N, VariableNames, Pairs, Type) :-
 	(	var(Arguments) ->
 		% open list
-		Pairs = []
+		Pairs = [],
+		Type = open
 	;	M is N + 1,
-		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs)
+		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs, Type)
 	).
 
 

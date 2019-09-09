@@ -66,7 +66,7 @@ Tools
 -----
 
 * CHANGED: The `debugger` tool semantics of context spy points to trigger the
-debugger when the spy point subsumes, instead of unifying, with the current
+debugger when the spy point subsumes (instead of unifying with) the current
 goal and its execution context.
 
 * IMPROVED: The `tutor` tool explanations for several compiler lint warnings.
