@@ -417,22 +417,21 @@ a goal:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>(<span class="nv">Sender</span>, <span class="nv">This</span>, <span class="nv">Self</span>, <span class="nv">Goal</span>)
 </pre></div>
 </div>
-<p>The debugger is evoked whenever the execution context is true and when
-the spy point goal unifies with the goal currently being executed.
-Variable bindings resulting from the unification between the current
-goal and the goal argument are discarded. The user may establish any
-number of context spy points as necessary. For example, in order to call
-the debugger whenever a predicate defined on an object named <code class="docutils literal notranslate"><span class="pre">foo</span></code> is
-called we may define the following spy point:</p>
+<p>The debugger is evoked whenever and the spy point goal and the specified
+execution context subsumes the goal currently being executed and its
+execution context. The user may establish any number of context spy points
+as necessary. For example, in order to call the debugger whenever a
+predicate defined on an object named <code class="docutils literal notranslate"><span class="pre">foo</span></code> is called we may define
+the following spy point:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, foo, _, _).
 
 Spy point set.
 yes
 </pre></div>
 </div>
-<p>For example, we can spy all calls to a <code class="docutils literal notranslate"><span class="pre">foo/2</span></code> predicate by setting
-the condition:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, _, _, foo(_, _)).
+<p>For example, we can spy all calls to a <code class="docutils literal notranslate"><span class="pre">foo/2</span></code> predicate with a <cite>bar</cite>
+atom in the second argument by setting the condition:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, _, _, foo(_, bar)).
 
 Spy point set.
 yes

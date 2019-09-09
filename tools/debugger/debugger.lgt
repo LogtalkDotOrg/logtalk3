@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4.0,
+		version is 4.1,
 		author is 'Paulo Moura',
-		date is 2017/02/27,
+		date is 2019/09/09,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -362,7 +362,9 @@
 		!.
 	spying_port_code(_, Goal, ExCtx, '*') :-
 		logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
-		\+ \+ spying_context_(Sender, This, Self, Goal).
+		spying_context_(Sender0, This0, Self0, Goal0),
+		subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal)),
+		!.
 
 	:- multifile(logtalk::debug_handler_provider/1).
 	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
@@ -423,7 +425,8 @@
 				(	functor(Goal, Functor, Arity),
 					\+ \+ spying_predicate_(Functor, Arity)
 				;	logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
-					\+ \+ spying_context_(Sender, This, Self, Goal)
+					spying_context_(Sender0, This0, Self0, Goal0),
+					subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal))
 				)
 			) ->
 			catch(box(N, Goal, TGoal, ExCtx), logtalk_debugger_retry, box(N, Goal, TGoal, ExCtx))

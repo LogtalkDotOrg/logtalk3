@@ -218,13 +218,12 @@ a goal:
 
    (Sender, This, Self, Goal)
 
-The debugger is evoked whenever the execution context is true and when
-the spy point goal unifies with the goal currently being executed.
-Variable bindings resulting from the unification between the current
-goal and the goal argument are discarded. The user may establish any
-number of context spy points as necessary. For example, in order to call
-the debugger whenever a predicate defined on an object named ``foo`` is
-called we may define the following spy point:
+The debugger is evoked whenever and the spy point goal and the specified
+execution context subsumes the goal currently being executed and its
+execution context. The user may establish any number of context spy points
+as necessary. For example, in order to call the debugger whenever a
+predicate defined on an object named ``foo`` is called we may define
+the following spy point:
 
 .. code-block:: text
 
@@ -233,12 +232,12 @@ called we may define the following spy point:
    Spy point set.
    yes
 
-For example, we can spy all calls to a ``foo/2`` predicate by setting
-the condition:
+For example, we can spy all calls to a ``foo/2`` predicate with a `bar`
+atom in the second argument by setting the condition:
 
 .. code-block:: text
 
-   | ?- debugger::spy(_, _, _, foo(_, _)).
+   | ?- debugger::spy(_, _, _, foo(_, bar)).
 
    Spy point set.
    yes

@@ -62,6 +62,15 @@ Library
 * FIXED: Syntax error running the `assignvars` library tests with some backend
 Prolog compilers.
 
+Tools
+-----
+
+* CHANGED: The `debugger` tool semantics of context spy points to trigger the
+debugger when the spy point subsumes, instead of unifying, with the current
+goal and its execution context.
+
+* IMPROVED: The `tutor` tool explanations for several compiler lint warnings.
+
 Examples
 --------
 
@@ -70,11 +79,6 @@ lint warnings when the duplicates occur in an included file.
 
 * UPDATED. The `errors` example to illustrate the new lint warnings for
 misusing the `=../2` built-in predicate.
-
-Tools
------
-
-* IMPROVED: The `tutor` tool explanations for several compiler lint warnings.
 
 
 3.29.0 - September 3, 2019
