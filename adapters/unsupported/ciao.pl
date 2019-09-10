@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on August 23, 2019
+%  Last updated on September 10, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -692,6 +692,22 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_user_module_qualification'(@callable, -callable)
 
 '$lgt_user_module_qualification'(Goal, user:Goal).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  auxiliary predicates for compiling modules as objects
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_find_module_predicate'(+atom, -atom, @callable)
+%
+% succeeds when Module:Predicate is visible in module Current
+
+'$lgt_find_visible_module_predicate'(_Current, _Module, _Predicate) :-
+	fail.
 
 
 

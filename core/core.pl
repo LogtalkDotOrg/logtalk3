@@ -392,6 +392,8 @@
 :- dynamic('$lgt_pp_calls_self_predicate_'/4).
 % '$lgt_pp_calls_super_predicate_'(Functor/Arity, HeadFunctor/HeadArity, File, Lines)
 :- dynamic('$lgt_pp_calls_super_predicate_'/4).
+% '$lgt_pp_calls_module_predicate_'(Module, Functor/Arity)
+:- dynamic('$lgt_pp_calls_module_predicate_'/2).
 
 % '$lgt_pp_updates_predicate_'(Dynamic, HeadFunctor/HeadArity, File, Lines)
 :- dynamic('$lgt_pp_updates_predicate_'/4).
@@ -3402,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b07)).
+'$lgt_version_data'(logtalk(3, 30, 0, b08)).
 
 
 
@@ -7617,6 +7619,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_calls_self_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _, _)),
+	retractall('$lgt_pp_calls_module_predicate_'(_, _)),
 	retractall('$lgt_pp_updates_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
@@ -14215,6 +14218,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
+% call to a foreign predicate but only when compiling a module as an object;
+% this is fragile due to the lack of standards for Prolog foreign language interfaces;
+% moreover, not all backend Prolog systems support a "foreign" predicate property
+
+'$lgt_compile_body'(Pred, {Pred}, '$lgt_debug'(goal(Pred, {Pred}), ExCtx), Ctx) :-
+	'$lgt_pp_module_'(_),
+	'$lgt_predicate_property'(Pred, foreign),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+% call to a module predicate with a missing use_module/2 directive but only
+% when compiling a module as an object; in practice, this is only usable
+% from backend systems with an autoload mechanism
+
+'$lgt_compile_body'(Pred, ':'(Module,Pred), '$lgt_debug'(goal(Pred, ':'(Module,Pred)), ExCtx), Ctx) :-
+	'$lgt_pp_module_'(Current),
+	'$lgt_find_visible_module_predicate'(Current, Module, Pred),
+	!,
+	functor(Pred, Functor, Arity),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_remember_called_module_predicate'(Mode, Module, Functor/Arity).
+
 % call to a unknown predicate
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
@@ -14608,6 +14633,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% already recorded for the current clause being compiled (however unlikely!)
 		true
 	;	assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, Caller, File, Lines))
+	).
+
+
+
+% '$lgt_remember_called_module_predicate'(@compilation_mode, +atom, +predicate_indicator)
+%
+% used only for checking calls to module predicates without missing use_module/2 directives whe
+% compiling modules as objects
+
+'$lgt_remember_called_module_predicate'(runtime, _, _).
+
+'$lgt_remember_called_module_predicate'(compile(aux,_,_), _, _) :-
+	!.
+
+'$lgt_remember_called_module_predicate'(compile(user,_,_), Module, Functor/Arity) :-
+	(	'$lgt_pp_calls_module_predicate_'(Module, Functor/Arity) ->
+		% already recorded
+		true
+	;	assertz('$lgt_pp_calls_module_predicate_'(Module, Functor/Arity))
 	).
 
 
@@ -19306,6 +19350,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% but missing scope directive
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), missing_scope_directive(File, Lines, Type, Entity, mode, Functor/Arity)),
+	fail.
+
+'$lgt_report_missing_directives_'(Type, Entity) :-
+	(	Type == object ->
+		'$lgt_pp_referenced_object_'(Entity, File, Lines)
+	;	Type == category ->
+		'$lgt_pp_referenced_category_'(Entity, File, Lines)
+	;	% Type == protocol
+		fail
+	),
+	setof(Predicate, '$lgt_pp_calls_module_predicate_'(Module, Predicate), Predicates),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- use_module(Module,Predicates)))),
 	fail.
 
 '$lgt_report_missing_directives_'(_, _).

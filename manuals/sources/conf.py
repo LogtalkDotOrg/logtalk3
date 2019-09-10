@@ -28,7 +28,7 @@ author = u'Paulo Moura'
 # The short X.Y version
 version = '3.30.0'
 # The full version, including alpha/beta/rc tags
-release = u'v3.30.0-b07'
+release = u'v3.30.0-b08'
 
 
 # -- General configuration ---------------------------------------------------

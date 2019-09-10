@@ -50,6 +50,9 @@ also print the location of the first occurrence.
 * IMPROVED: Compiler lint reports of missing directives to print the directives
 ready to copy to the source code.
 
+* IMPROVED: Take into account foreign and auto-loaded predicates when compiling
+a module as an object.
+
 * FIXED: Compilation of `reexport/2` directives regression when compiling a
 Prolog module as an object.
 
@@ -63,6 +66,9 @@ directives when compiling a module as an object.
 directives to both `thread_local/1` and `dynamic/1` directives to prevent
 spurious lint warnings about missing `dynamic/1` directives when compiling
 a module as an object.
+
+* UPDATED: All adapter files with auxiliary predicate to locate auto-loaded
+module predicates when supported.
 
 Library
 -------

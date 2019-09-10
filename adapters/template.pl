@@ -600,6 +600,22 @@ term_hash(Term, Depth, Range, Hash) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  auxiliary predicates for compiling modules as objects
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_find_module_predicate'(+atom, -atom, @callable)
+%
+% succeeds when Module:Predicate is visible in module Current
+
+'$lgt_find_visible_module_predicate'(Current, Module, Predicate) :-
+	?????
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  shortcuts to the Logtalk built-in predicates logtalk_load/1 and
 %  logtalk_make/1
 %
