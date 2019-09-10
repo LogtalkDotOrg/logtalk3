@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b08)).
+'$lgt_version_data'(logtalk(3, 30, 0, b09)).
 
 
 
@@ -11662,15 +11662,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, current_predicate/2)),
 	fail.
 
-% warning on cuts on clauses for multifile predicates
+% warning on cuts on clauses for multifile predicates for other entities
 '$lgt_compile_body'(!, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines, _),
 	callable(Head),
 	(	Head = _::_ ->
 		true
-	;	Head = ':'(_, _) ->
-		true
-	;	'$lgt_pp_multifile_'(Head, _, _)
+	;	Head = ':'(_, _)
 	),
 	% clause for a multifile predicate
 	'$lgt_compiler_flag'(suspicious_calls, warning),
@@ -11678,6 +11676,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, !, reason(multifile(Head)))),
 	fail.
+
 % warning on cuts on clauses with variable aliasing in the head
 '$lgt_compile_body'(!, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines, _),
@@ -11691,6 +11690,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_print_message'(warning(steadfastness), possible_non_steadfast_predicate(File, Lines, Type, Entity, Functor/Arity))
 	),
 	fail.
+
 % when processing the debug event, the compiled goal is meta-called but
 % this would make the cut local, changing the semantics of the user code;
 % the solution is to use a conjunction for the debug goal of the debug
