@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.24,
+		version is 0.25,
 		author is 'Paulo Moura',
-		date is 2019/09/09,
+		date is 2019/09/10,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -116,7 +116,8 @@
 		[	'One (or more) of the meta-argument specifiers in the meta-predicate'-[], nl,
 			'(or meta-non-terminal) template is ambiguous. A typical case is the'-[], nl,
 			'module-aware specifier, ":", which can mean a goal, a closure, or a'-[], nl,
-			'non-callable but yet module-aware argument.'-[], nl, nl
+			'non-callable but module-aware argument. The warning may be fixed by'-[], nl,
+			'overridding the meta-predicate directive.'-[], nl, nl
 		].
 
 	error(domain_error([1,_], _)) -->
