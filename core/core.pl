@@ -3402,7 +3402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b06)).
+'$lgt_version_data'(logtalk(3, 30, 0, b07)).
 
 
 
@@ -11372,7 +11372,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(missing_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (multifile), user::Functor/Arity))
+		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- multifile(user::Functor/Arity))))
 	;	true
 	),
 	'$lgt_comp_ctx_head'(Ctx, user::Head).
@@ -11421,7 +11421,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(missing_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (multifile), ':'(Module,Functor/Arity)))
+		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- multifile(':'(Module,Functor/Arity)))))
 	;	true
 	),
 	'$lgt_comp_ctx_head'(Ctx, ':'(Module, Head)).
@@ -19277,7 +19277,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_missing_dynamic_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (dynamic), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- dynamic(Functor/Arity)))),
 	fail.
 
 % reports missing discontiguous/1 directives
@@ -19286,7 +19286,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_missing_discontiguous_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (discontiguous), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- discontiguous(Functor/Arity)))),
 	fail.
 
 % reports missing scope directives for mode directives

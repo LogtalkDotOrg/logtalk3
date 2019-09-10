@@ -47,6 +47,9 @@ also print the location of the first occurrence.
 
 * IMPROVED: Simplify lint warnings on conditionals missing the else part.
 
+* IMPROVED: Compiler lint reports of missing directives to print the directives
+ready to copy to the source code.
+
 * FIXED: Compilation of `reexport/2` directives regression when compiling a
 Prolog module as an object.
 
