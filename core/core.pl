@@ -14142,6 +14142,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
 
+% call to a foreign predicate but only when compiling a module as an object;
+% this is fragile due to the lack of standards for Prolog foreign language interfaces;
+% moreover, not all backend Prolog systems support a "foreign" predicate property
+
+'$lgt_compile_body'(Pred, {Pred}, '$lgt_debug'(goal(Pred, {Pred}), ExCtx), Ctx) :-
+	'$lgt_pp_module_'(_),
+	'$lgt_predicate_property'(Pred, foreign),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+% call to a module predicate with a missing use_module/2 directive but only
+% when compiling a module as an object; in practice, this is only usable
+% from backend systems with an autoload mechanism
+
+'$lgt_compile_body'(Pred, ':'(Module,Pred), '$lgt_debug'(goal(Pred, ':'(Module,Pred)), ExCtx), Ctx) :-
+	'$lgt_pp_module_'(Current),
+	\+ '$lgt_prolog_built_in_predicate'(Pred),
+	'$lgt_find_visible_module_predicate'(Current, Module, Pred),
+	!,
+	functor(Pred, Functor, Arity),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_remember_called_module_predicate'(Mode, Module, Functor/Arity).
+
 % call to a declared but undefined predicate
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
@@ -14217,28 +14240,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_logtalk_built_in_predicate'(Pred, _),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
-
-% call to a foreign predicate but only when compiling a module as an object;
-% this is fragile due to the lack of standards for Prolog foreign language interfaces;
-% moreover, not all backend Prolog systems support a "foreign" predicate property
-
-'$lgt_compile_body'(Pred, {Pred}, '$lgt_debug'(goal(Pred, {Pred}), ExCtx), Ctx) :-
-	'$lgt_pp_module_'(_),
-	'$lgt_predicate_property'(Pred, foreign),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
-
-% call to a module predicate with a missing use_module/2 directive but only
-% when compiling a module as an object; in practice, this is only usable
-% from backend systems with an autoload mechanism
-
-'$lgt_compile_body'(Pred, ':'(Module,Pred), '$lgt_debug'(goal(Pred, ':'(Module,Pred)), ExCtx), Ctx) :-
-	'$lgt_pp_module_'(Current),
-	'$lgt_find_visible_module_predicate'(Current, Module, Pred),
-	!,
-	functor(Pred, Functor, Arity),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
-	'$lgt_remember_called_module_predicate'(Mode, Module, Functor/Arity).
 
 % call to a unknown predicate
 
