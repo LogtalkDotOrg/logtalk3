@@ -53,9 +53,6 @@ ready to copy to the source code.
 * IMPROVED: Take into account foreign and auto-loaded predicates when compiling
 a module as an object.
 
-* FIXED: Compiler lint warning of cuts in multifile predicate clauses to only
-check clauses for other entities.
-
 * FIXED: Compilation of `reexport/2` directives regression when compiling a
 Prolog module as an object.
 

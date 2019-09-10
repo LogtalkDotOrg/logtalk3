@@ -11662,13 +11662,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, current_predicate/2)),
 	fail.
 
-% warning on cuts on clauses for multifile predicates for other entities
+% warning on cuts on clauses for multifile predicates
 '$lgt_compile_body'(!, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines, _),
 	callable(Head),
 	(	Head = _::_ ->
 		true
-	;	Head = ':'(_, _)
+	;	Head = ':'(_, _) ->
+		true
+	;	'$lgt_pp_multifile_'(Head, _, _)
 	),
 	% clause for a multifile predicate
 	'$lgt_compiler_flag'(suspicious_calls, warning),
