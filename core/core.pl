@@ -11502,20 +11502,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 %	(	Mode == runtime ->
 %		'$lgt_compile_body'(Pred, TPred, DPred, Ctx)
 %	;	Mode = compile(How, Cut, _),
-%		'$lgt_comp_ctx'(Ctx,    Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _,                  Stack, Lines, _),
-%		'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,[Pred]), Stack, Lines, _),
+%		'$lgt_comp_ctx'(Ctx,    Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _,                  Stack, Lines, Term),
+%		'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,[Pred]), Stack, Lines, Term),
 %		'$lgt_compile_body'(Pred, TPred, DPred, NewCtx)
 %	).
 
 % goal expansion (only applied at compile time)
 
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,ExpandedGoals), Stack, Lines, _),
+	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,ExpandedGoals), Stack, Lines, Term),
 	'$lgt_push_if_new'(ExpandedGoals, Pred, NewExpandedGoals),
 	'$lgt_expand_file_goal'(Pred, ExpandedPred),
 	Pred \== ExpandedPred,
 	!,
-	'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,NewExpandedGoals), Stack, Lines, _),
+	'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,NewExpandedGoals), Stack, Lines, Term),
 	'$lgt_compile_body'(ExpandedPred, TPred, DPred, NewCtx).
 
 % message delegation (send a message while preserving the original sender)
@@ -11530,9 +11530,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% as delegation keeps the original sender, we cannot use a recursive call
 	% to the '$lgt_compile_body'/4 predicate to compile the ::/2 goal as that
 	% would reset the sender to "this"
-	'$lgt_comp_ctx'(Ctx, Head, _, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines, Term),
 	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _),
-	'$lgt_comp_ctx'(NewCtx, Head, _, _, Sender, Sender, Self, Prefix, MetaVars, MetaCallCtx, NewExCtx, Mode, Stack, Lines, _),
+	'$lgt_comp_ctx'(NewCtx, Head, _, _, Sender, Sender, Self, Prefix, MetaVars, MetaCallCtx, NewExCtx, Mode, Stack, Lines, Term),
 	'$lgt_execution_context_this_entity'(NewExCtx, Sender, _),
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_compile_message_to_object'(Pred, Obj, TPred0, Events, NewCtx),
@@ -11553,8 +11553,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
 	(	TPred1 == repeat,
-		'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,_,ExpandedGoals), Stack, Lines, _) ->
-		'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,ExpandedGoals), Stack, Lines, _),
+		'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,_,ExpandedGoals), Stack, Lines, Term) ->
+		'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,ExpandedGoals), Stack, Lines, Term),
 		'$lgt_compile_body'(Pred2, TPred2, DPred2, NewCtx),
 		(	var(Cut),
 			'$lgt_compiler_flag'(suspicious_calls, warning),
