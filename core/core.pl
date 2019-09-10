@@ -11919,10 +11919,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Functor0 == Functor
 	),
 	% assume that the functor argument is an anonymous variable
-	'$lgt_position_relevant_argument_pairs'(Args, 1, VariableNames, [N-Arg], open),
-	% assume a single bound argument or non-anonymous variable argument in the
-	% compound term arguments; we also require an open list for this as otherwise
-	% the =../2 call may also being used to verify the compound term arity
+	'$lgt_position_relevant_argument_pairs'(Args, 1, VariableNames, [N-Arg], open, Tail),
+	\+ (
+		'$lgt_member'(_=Tail0, VariableNames),
+		Tail0 == Tail
+	),
+	% assume a single bound argument or non-anonymous variable argument in the compound term
+	% arguments; we also require an open list with an anonymous variable as tail for this as
+	% otherwise the =../2 call may also being used e.g. to verify the compound term arity
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [arg(N, Term, Arg)])),
@@ -23729,8 +23733,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % find position-relevant argument pairs for =../2 lint checks where a relevant
 % argument is either a bound argument or a named variable argument; the last
 % argument returns the type of list (open or closed)
-'$lgt_position_relevant_argument_pairs'([], _, _, [], closed).
-'$lgt_position_relevant_argument_pairs'([Argument| Arguments], N, VariableNames, [N-Argument| Pairs], Type) :-
+'$lgt_position_relevant_argument_pairs'([], _, _, [], closed, []).
+'$lgt_position_relevant_argument_pairs'([Argument| Arguments], N, VariableNames, [N-Argument| Pairs], Type, Tail) :-
 	once((
 		nonvar(Argument)
 	;	'$lgt_member'(_=Argument0, VariableNames),
@@ -23740,17 +23744,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Arguments) ->
 		% open list
 		Pairs = [],
-		Type = open
+		Type = open,
+		Tail = Arguments
 	;	M is N + 1,
-		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs, Type)
+		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs, Type, Tail)
 	).
-'$lgt_position_relevant_argument_pairs'([_| Arguments], N, VariableNames, Pairs, Type) :-
+'$lgt_position_relevant_argument_pairs'([_| Arguments], N, VariableNames, Pairs, Type, Tail) :-
 	(	var(Arguments) ->
 		% open list
 		Pairs = [],
-		Type = open
+		Type = open,
+		Tail = Arguments
 	;	M is N + 1,
-		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs, Type)
+		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs, Type, Tail)
 	).
 
 
