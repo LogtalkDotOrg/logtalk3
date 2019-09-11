@@ -14148,9 +14148,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % this is fragile due to the lack of standards for Prolog foreign language interfaces;
 % moreover, not all backend Prolog systems support a "foreign" predicate property
 
-'$lgt_compile_body'(Pred, {Pred}, '$lgt_debug'(goal(Pred, {Pred}), ExCtx), Ctx) :-
+'$lgt_compile_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
 	'$lgt_pp_module_'(_),
 	'$lgt_predicate_property'(Pred, foreign),
+	\+ '$lgt_prolog_built_in_predicate'(Pred),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
