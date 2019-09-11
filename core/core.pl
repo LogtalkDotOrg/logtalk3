@@ -8123,6 +8123,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% module definitions start with an opening module/1-2 directive and are assumed
 	% to end at the end of a source file; there is no module closing directive; set
 	% the initial compilation context and the position for compiling the end_of_file term
+	retract('$lgt_pp_referenced_object_'(Module, File, Start-_)),
+	'$lgt_comp_ctx_lines'(Ctx, _-End),
+	assertz('$lgt_pp_referenced_object_'(Module, File, Start-End)),
 	'$lgt_second_stage'(object, Module, Ctx),
 	'$lgt_print_message'(silent(compiling), compiled_entity(module, Module)).
 

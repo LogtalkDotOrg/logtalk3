@@ -56,6 +56,9 @@ a module as an object.
 * FIXED: Compilation of `reexport/2` directives regression when compiling a
 Prolog module as an object.
 
+* FIXED: Source file start and end lines reported by the reflection API when
+compiling a module as an object.
+
 Prolog adapter and integration files
 ------------------------------------
 
