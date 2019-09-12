@@ -19331,7 +19331,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_missing_meta_predicate_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (meta_predicate), Functor/Arity)),
+	(	'$lgt_pp_defines_non_terminal_'(Functor, NonTerminalArity, Arity) ->
+		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (meta_non_terminal), Functor//NonTerminalArity))
+	;	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (meta_predicate), Functor/Arity))
+	),
 	fail.
 
 % reports missing dynamic/1 directives

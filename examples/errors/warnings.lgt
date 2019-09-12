@@ -137,6 +137,22 @@
 
 
 
+:- object(missing_meta_predicte_directive).
+
+	foo(X) :- call(X).
+
+:- end_object.
+
+
+
+:- object(missing_meta_non_terminal_directive).
+
+	foo(X) --> call(X).
+
+:- end_object.
+
+
+
 :- object(missing_protocol_reference).
 
 	before(_, _, _).

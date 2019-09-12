@@ -45,6 +45,9 @@ qualified.
 * IMPROVED: Duplicated directive, clause, and grammar rule lint warnings now
 also print the location of the first occurrence.
 
+* IMPROVED: Compiler linter to distinguish between missing `meta_predicate/1`
+directives and missing `meta_non_terminal/1` directives.
+
 * IMPROVED: Simplify lint warnings on conditionals missing the else part.
 
 * IMPROVED: Compiler lint reports of missing directives to print the directives
@@ -96,6 +99,9 @@ Examples
 
 * UPDATED. The `errors` example to illustrate duplicate directive and clause
 lint warnings when the duplicates occur in an included file.
+
+* UPDATED. The `errors` example to illustrate missing `meta_predicate/1`
+and `meta_non_terminal/1` directives.
 
 * UPDATED. The `errors` example to illustrate the new lint warnings for
 misusing the `=../2` built-in predicate.
