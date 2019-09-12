@@ -53,6 +53,9 @@ ready to copy to the source code.
 * IMPROVED: Take into account foreign and auto-loaded predicates when compiling
 a module as an object.
 
+* IMPROVED: Accept Prolog `encoding/1` directives when compiling a Prolog
+source file as a Logtalk source file.
+
 * FIXED: Compilation of `reexport/2` directives regression when compiling a
 Prolog module as an object.
 

@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b09)).
+'$lgt_version_data'(logtalk(3, 30, 0, b10)).
 
 
 
@@ -6726,14 +6726,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	var(Term),
 	throw(error(instantiation_error, directive(Term))).
 
-'$lgt_check_for_encoding_directive'((:- encoding(LogtalkEncoding)), Source, Input, NewInput, [encoding(PrologEncoding)|BOM]) :-
+'$lgt_check_for_encoding_directive'((:- encoding(Encoding)), Source, Input, NewInput, [encoding(PrologEncoding)|BOM]) :-
 	!,
-	(	var(LogtalkEncoding) ->
-		throw(error(instantiation_error, directive(encoding(LogtalkEncoding))))
+	(	var(Encoding) ->
+		throw(error(instantiation_error, directive(encoding(Encoding))))
 	;	'$lgt_prolog_feature'(encoding_directive, unsupported) ->
-		throw(error(resource_error(text_encoding_support), directive(encoding(LogtalkEncoding))))
+		throw(error(resource_error(text_encoding_support), directive(encoding(Encoding))))
 	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
-		'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input) ->
+		(	'$lgt_decompose_file_name'(Source, _, _, Extension),
+			'$lgt_file_extension'(prolog, Extension), 
+			'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, Encoding, Input) ->
+			% converted Prolog specific encoding to Logtalk encoding;
+			% possibly compiling a module as an object
+			PrologEncoding = Encoding
+		;	LogtalkEncoding = Encoding,
+			'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input)
+		) ->
 		'$lgt_source_file_context'(File, BeginLine-EndLine),
 		assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding, BeginLine)),
 		% check that the encoding/1 directive is found in the first line
@@ -6757,9 +6765,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% throw away the already processed encoding/1 directive
 		'$lgt_read_file_term'(File, NewInput, _, [singletons(_)], _)
 	;	% encoding not recognized
-		atom(LogtalkEncoding) ->
-		throw(error(domain_error(text_encoding, LogtalkEncoding), directive(encoding(LogtalkEncoding))))
-	;	throw(error(type_error(atom, LogtalkEncoding), directive(encoding(LogtalkEncoding))))
+		atom(Encoding) ->
+		throw(error(domain_error(text_encoding, Encoding), directive(encoding(Encoding))))
+	;	throw(error(type_error(atom, Encoding), directive(encoding(Encoding))))
 	).
 
 % assume no encoding/1 directive present on the source file
