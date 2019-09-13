@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.82,
+		version is 1.83,
 		author is 'Paulo Moura',
-		date is 2019/09/12,
+		date is 2019/09/13,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -821,6 +821,8 @@
 		;	% assume bagof/setof/findall
 			['as template and goal share no variables'-[], nl]
 		).
+	suspicious_call_reason(no_variable_bindings_after_unification) -->
+		['as unification will succeed without any variable bindings'-[], nl].
 	suspicious_call_reason(existential_variables([Variable], Goal)) -->
 		['as existential variable ~q do not exist in goal ~q '-[Variable, Goal], nl].
 	suspicious_call_reason(existential_variables([Variable1, Variable2| Variables], Goal)) -->

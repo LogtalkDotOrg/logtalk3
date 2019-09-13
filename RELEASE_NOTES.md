@@ -27,12 +27,15 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: Compiler warning for missing scope directives for dynamic predicates
+* ADDED: Lint warning for missing scope directives for dynamic predicates
 declared in standalone categories.
 
 * ADDED: Lint warning for a common case of misusing the `atom_concat/3`
 built-in predicate where using the `sub_atom/5` built-in predicates would be
 more efficient.
+
+* ADDED: Lint warning for non-ground `=/2` and `unify_with_occurs_check/2`
+goals that will succeed without binding any variables.
 
 * ADDED: Lint warnings for two other cases of misusing the `=../2` built-in
 predicate where using the `arg/3` or `functor/3` built-in predicates would be
@@ -97,14 +100,7 @@ goal and its execution context.
 Examples
 --------
 
-* UPDATED. The `errors` example to illustrate duplicate directive and clause
-lint warnings when the duplicates occur in an included file.
-
-* UPDATED. The `errors` example to illustrate missing `meta_predicate/1`
-and `meta_non_terminal/1` directives.
-
-* UPDATED. The `errors` example to illustrate the new lint warnings for
-misusing the `=../2` built-in predicate.
+* UPDATED: The `errors` example to illustrate new and improved lint warnings.
 
 
 3.29.0 - September 3, 2019

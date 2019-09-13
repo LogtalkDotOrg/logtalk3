@@ -161,6 +161,16 @@
 
 
 
+:- object(useless_unification).
+
+	foo(X) :- a(1, X) = a(1, X).
+
+	bar(X) :- unify_with_occurs_check(a(1, X), a(1, X)).
+
+:- end_object.
+
+
+
 :- object(tautology).
 
 	% goals are always true (usually happens due to typos)

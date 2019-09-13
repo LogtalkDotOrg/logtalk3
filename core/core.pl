@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b10)).
+'$lgt_version_data'(logtalk(3, 30, 0, b11)).
 
 
 
@@ -11857,6 +11857,40 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(system_error, TPred, DPred, Ctx) :-
 	!,
 	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
+
+% unification (only lint warnings)
+
+'$lgt_compile_body'(Term1 = Term2, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	\+ ground(Term1),
+	\+ ground(Term2),
+	\+ \+ (
+		term_variables(Term1-Term2, Vars0),
+		unify_with_occurs_check(Term1, Term2),
+		term_variables(Term1-Term2, Vars),
+		Vars0 == Vars
+	),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term1 = Term2, reason(no_variable_bindings_after_unification))),
+	fail.
+
+'$lgt_compile_body'(unify_with_occurs_check(Term1, Term2), _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	\+ ground(Term1),
+	\+ ground(Term2),
+	\+ \+ (
+		term_variables(Term1-Term2, Vars0),
+		unify_with_occurs_check(Term1, Term2),
+		term_variables(Term1-Term2, Vars),
+		Vars0 == Vars
+	),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, unify_with_occurs_check(Term1, Term2), reason(no_variable_bindings_after_unification))),
+	fail.
 
 % atomic term processing predicates (only lint warnings)
 
