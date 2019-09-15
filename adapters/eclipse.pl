@@ -748,16 +748,6 @@ forall(Generate, Test) :-
 	fail.
 
 
-'$lgt_eclipse_meta_args1'([]).
-'$lgt_eclipse_meta_args1'([::| MetaArgs]) :-
-	'$lgt_eclipse_meta_args1'(MetaArgs).
-
-
-'$lgt_eclipse_meta_args2'([*]) :- !.
-'$lgt_eclipse_meta_args2'([::| MetaArgs]) :-
-	'$lgt_eclipse_meta_args2'(MetaArgs).
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
