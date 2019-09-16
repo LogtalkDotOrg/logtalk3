@@ -12,7 +12,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-`docs/library_index.html#debug_messages <https://logtalk.org/docs/library_index.html#debug_messages>`__
+`docs/library_index.html#debug-messages <https://logtalk.org/docs/library_index.html#debug-messages>`__
 
 For general information on debugging, open in a web browser the
 following file and consult the debugging section of the User Manual:
