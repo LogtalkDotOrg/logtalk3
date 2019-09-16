@@ -94,6 +94,9 @@ predicates. Thanks to Michael T. Richter for the bug report.
 * FIXED: Link anchors in API documentation links in the documentation of the
 `debug_messages` and `ports_profiler` tools.
 
+* FIXED: Crosslinks between Handbook and APIs documentation cannot be relative
+due to nesting of the Handbook pages.
+
 Library
 -------
 
