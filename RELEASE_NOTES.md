@@ -88,6 +88,9 @@ Documentation
 * FIXED: Links from the `make` tool documentation to the make built-in
 predicates. Thanks to Michael T. Richter for the bug report.
 
+* FIXED: Link anchors in API documentation links from the documentation of the
+`debug_messages` and `ports_profiler` tools.
+
 Library
 -------
 
