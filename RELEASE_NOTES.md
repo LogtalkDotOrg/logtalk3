@@ -97,6 +97,8 @@ predicates. Thanks to Michael T. Richter for the bug report.
 * FIXED: Crosslinks between Handbook and APIs documentation cannot be relative
 due to nesting of the Handbook pages.
 
+* FIXED: URLs in the HTML versions of the man pages.
+
 Library
 -------
 
