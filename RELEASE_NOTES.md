@@ -41,6 +41,9 @@ goals that will succeed without binding any variables.
 predicate where using the `arg/3` or `functor/3` built-in predicates would be
 more efficient.
 
+* ADDED: Lint warnings for use of non-standard options in calls to the
+`open/4`, `read_term/2-3`, and `write_term/2-3` predicates.
+
 * ADDED: Support for compiling Prolog module `meta_predicate/1` directives
 (when compiling a module as an object) where the templates are explicitly
 qualified.
@@ -88,7 +91,7 @@ Documentation
 * FIXED: Links from the `make` tool documentation to the make built-in
 predicates. Thanks to Michael T. Richter for the bug report.
 
-* FIXED: Link anchors in API documentation links from the documentation of the
+* FIXED: Link anchors in API documentation links in the documentation of the
 `debug_messages` and `ports_profiler` tools.
 
 Library

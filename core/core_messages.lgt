@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.83,
+		version is 1.84,
 		author is 'Paulo Moura',
-		date is 2019/09/13,
+		date is 2019/09/16,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -468,6 +468,10 @@
 	message_tokens(non_standard_file_directive(File, Lines, Directive)) -->
 		['Use of non-standard file directive: ~q'-[Directive], nl],
 		message_context(File, Lines).
+
+	message_tokens(non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option)) -->
+		['Use of non-standard ~w predicate option: ~q'-[Predicate, Option], nl],
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(logtalk_built_in_predicate_as_directive(File, Lines, Directive)) -->
 		['Use of Logtalk built-in predicate as a directive: ~q'-[Directive], nl],

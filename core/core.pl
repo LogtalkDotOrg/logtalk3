@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, b11)).
+'$lgt_version_data'(logtalk(3, 30, 0, b12)).
 
 
 
@@ -13664,17 +13664,26 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(domain_error([1,Arity], Arg))
 	).
 
+% open/4 portability lint warnings only
+
+'$lgt_compile_body'(open(_, _, _, Options), _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_check_open_stream_options'(Mode, open/4, Options),
+	fail.
+
 % term input predicates that need to be operator aware
 % (these translations are only applied if there are local entity operators declared)
 
 '$lgt_compile_body'(read_term(Stream, Term, Options), '$lgt_iso_read_term'(Stream, Term, Options, Ops), '$lgt_debug'(goal(read_term(Stream, Term, Options), '$lgt_iso_read_term'(Stream, Term, Options, Ops)), ExCtx), Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_check_read_term_options'(Mode, read_term/3, Options),
 	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(read_term(Term, Options), '$lgt_iso_read_term'(Term, Options, Ops), '$lgt_debug'(goal(read_term(Term, Options), '$lgt_iso_read_term'(Term, Options, Ops)), ExCtx), Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_check_read_term_options'(Mode, read_term/2, Options),
 	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(read(Stream, Term), '$lgt_iso_read'(Stream, Term, Ops), '$lgt_debug'(goal(read(Stream, Term), '$lgt_iso_read'(Stream, Term, Ops)), ExCtx), Ctx) :-
@@ -13691,15 +13700,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 % (these translations are only applied if there are local entity operators declared)
 
 '$lgt_compile_body'(write_term(Stream, Term, Options), '$lgt_iso_write_term'(Stream, Term, Options, Ops), '$lgt_debug'(goal(write_term(Stream, Term, Options), '$lgt_iso_write_term'(Stream, Term, Options, Ops)), ExCtx), Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_check_write_term_options'(Mode, write_term/3, Options),
 	('$lgt_member'(ignore_ops(Value), Options) -> Value \== true; true),
 	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(write_term(Term, Options), '$lgt_iso_write_term'(Term, Options, Ops), '$lgt_debug'(goal(write_term(Term, Options), '$lgt_iso_write_term'(Term, Options, Ops)), ExCtx), Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_check_write_term_options'(Mode, write_term/2, Options),
 	('$lgt_member'(ignore_ops(Value), Options) -> Value \== true; true),
 	bagof(op(Pr, Spec, Op), Scope^File^Lines^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope, File, Lines), Ops),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
 '$lgt_compile_body'(write(Stream, Term), '$lgt_iso_write'(Stream, Term, Ops), '$lgt_debug'(goal(write(Stream, Term), '$lgt_iso_write'(Stream, Term, Ops)), ExCtx), Ctx) :-
@@ -14408,6 +14419,66 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_head_exec_ctx'(Ctx, ExCtx),
 	TPred = throw(error(Exception, logtalk(Head, ExCtx))),
 	DPred = '$lgt_debug'(goal(Exception, TPred), ExCtx).
+
+
+
+% '$lgt_check_read_term_options'(@compilation_mode, @predicate_indicator, @term)
+%
+% check read term options portability
+
+'$lgt_check_read_term_options'(runtime, _, _).
+
+'$lgt_check_read_term_options'(compile(_,_,_), Predicate, Options) :-
+	'$lgt_is_list'(Options),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	(	'$lgt_member'(Option, Options),
+		nonvar(Option),
+		\+ '$lgt_iso_spec_read_term_option'(Option) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(portability), non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option))
+	;	true
+	).
+
+
+
+% '$lgt_check_write_term_options'(@compilation_mode, @predicate_indicator, @term)
+%
+% check write term options portability
+
+'$lgt_check_write_term_options'(runtime, _, _).
+
+'$lgt_check_write_term_options'(compile(_,_,_), Predicate, Options) :-
+	'$lgt_is_list'(Options),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	(	'$lgt_member'(Option, Options),
+		nonvar(Option),
+		\+ '$lgt_iso_spec_write_term_option'(Option) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(portability), non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option))
+	;	true
+	).
+
+
+
+% '$lgt_check_open_stream_options'(@compilation_mode, @predicate_indicator, @term)
+%
+% check open stream options portability
+
+'$lgt_check_open_stream_options'(runtime, _, _).
+
+'$lgt_check_open_stream_options'(compile(_,_,_), Predicate, Options) :-
+	'$lgt_is_list'(Options),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	(	'$lgt_member'(Option, Options),
+		nonvar(Option),
+		\+ '$lgt_iso_spec_open_stream_option'(Option) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(portability), non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option))
+	;	true
+	).
 
 
 
@@ -22327,6 +22398,78 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_iso_spec_flag_value'(version_data, Value) :-
 	compound(Value).
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  tables of ISO Prolog specified read and write term options
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_iso_spec_open_stream_option'(@nonvar)
+
+'$lgt_iso_spec_open_stream_option'(type(Type)) :-
+	(	var(Type) ->
+		true
+	;	Type == text ->
+		true
+	;	Type == binary
+	).
+'$lgt_iso_spec_open_stream_option'(reposition(Boolean)) :-
+	(	var(Boolean) ->
+		true
+	;	Boolean == true ->
+		true
+	;	Boolean == false
+	).
+'$lgt_iso_spec_open_stream_option'(alias(Alias)) :-
+	(	var(Alias) ->
+		true
+	;	atom(Alias)
+	).
+'$lgt_iso_spec_open_stream_option'(eof_action(Action)) :-
+	(	var(Action) ->
+		true
+	;	Action == error ->
+		true
+	;	Action == eof_code ->
+		true
+	;	Action == reset
+	).
+
+
+% '$lgt_iso_spec_read_term_option'(@nonvar)
+
+'$lgt_iso_spec_read_term_option'(variables(_)).
+'$lgt_iso_spec_read_term_option'(variable_names(_)).
+'$lgt_iso_spec_read_term_option'(singletons(_)).
+
+
+% '$lgt_iso_spec_write_term_option'(@nonvar)
+
+'$lgt_iso_spec_write_term_option'(quoted(Boolean)) :-
+	(	var(Boolean) ->
+		true
+	;	Boolean == true ->
+		true
+	;	Boolean == false
+	).
+'$lgt_iso_spec_write_term_option'(ignore_ops(Boolean)) :-
+	(	var(Boolean) ->
+		true
+	;	Boolean == true ->
+		true
+	;	Boolean == false
+	).
+'$lgt_iso_spec_write_term_option'(numbervars(Boolean)) :-
+	(	var(Boolean) ->
+		true
+	;	Boolean == true ->
+		true
+	;	Boolean == false
+	).
 
 
 

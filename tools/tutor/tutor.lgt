@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.25,
+		version is 0.26,
 		author is 'Paulo Moura',
-		date is 2019/09/10,
+		date is 2019/09/16,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -453,6 +453,12 @@
 		[	'Calls to non-standard built-in functions can make the code non-portable'-[], nl,
 			'when using other backend compilers. Are there portable alternatives that'-[], nl,
 			'can be used?'-[], nl, nl
+		].
+
+	explain(non_standard_predicate_option(_, _, _, _, _, _)) -->
+		[	'Use of non-standard predicate options can make the code non-portable'-[], nl,
+			' when using other backend compilers. Are there portable alternatives'-[], nl,
+			'that can be used?'-[], nl, nl
 		].
 
 	explain(non_standard_prolog_flag(_, _, _, _, _)) -->
