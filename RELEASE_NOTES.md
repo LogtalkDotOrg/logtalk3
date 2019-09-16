@@ -82,6 +82,12 @@ a module as an object.
 * UPDATED: All adapter files with auxiliary predicate to locate auto-loaded
 module predicates when supported.
 
+Documentation
+-------------
+
+* FIXED: Links from the `make` tool documentation to the make built-in
+predicates. Thanks to Michael T. Richter for the bug report.
+
 Library
 -------
 
