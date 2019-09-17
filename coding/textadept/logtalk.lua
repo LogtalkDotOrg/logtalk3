@@ -7,8 +7,7 @@ local P, R, S = lpeg.P, lpeg.R, lpeg.S
 
 local lex = lexer.new('logtalk', {inherit = lexer.load('prolog')})
 
-lex:modify_rule('operator', token(lexer.OPERATOR, S('^/*@-!+\\|=:;&<>()[]{}')))
-
+-- add logtalk keywords to prolog ones
 lex:modify_rule('keyword', token(lexer.KEYWORD, word_match[[
   -- Logtalk "keywords" generated from Vim syntax highlighting file with Prolog
   -- keywords stripped since were building up on the Prolog lexer.

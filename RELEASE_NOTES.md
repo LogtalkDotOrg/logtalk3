@@ -124,7 +124,7 @@ Examples
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* UPDATED: Support for the Textadept editor (version 10.0 or later required).
+* IMPROVED: Support for the Textadept editor (version 10.0 or later required).
 Thanks to Michael T. Richter.
 
 
