@@ -88,6 +88,8 @@ module predicates when supported.
 Documentation
 -------------
 
+* IMPROVED: Handbook section on inheritance.
+
 * FIXED: Links from the `make` tool documentation to the make built-in
 predicates. Thanks to Michael T. Richter for the bug report.
 

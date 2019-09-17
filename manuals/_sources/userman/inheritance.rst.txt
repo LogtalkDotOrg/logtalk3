@@ -28,14 +28,21 @@ programming, we can interpret inheritance as a form of *theory extension*:
 an object will virtually contain, besides its own predicates, all the
 predicates inherited from other objects that are not redefined locally.
 
-Logtalk uses a depth-first lookup procedure for finding predicate
-declarations and predicate definitions, as explained below. The lookup
+Logtalk uses a depth-first search procedure for finding predicate
+declarations and predicate definitions, as explained below. The search
 procedures locate the entities holding the predicate declaration and
 the predicate definition using the predicate template.
 The :ref:`directives_alias_2` predicate directive may be used for defining
 alternative names for inherited predicates, for solving inheritance
 conflicts, and for giving access to all inherited definitions (thus
-overriding the default lookup procedure).
+overriding the default search procedure).
+
+The search procedures are notably used when compiling or handling a
+:ref:`message <messages_messages>` sent to an object. The exact details
+of the search procedures depend on the role played by the object receiving
+the message, as explained next. The search procedures are also used by the
+:ref:`methods_current_predicate_1` and :ref:`methods_predicate_property_2`
+reflection predicates.
 
 .. _inheritance_protocol:
 
@@ -69,7 +76,7 @@ Search order for class hierarchies
 The search order for predicate declarations starts in the object
 classes. Following the classes declaration order, the search starts in
 the classes implemented protocols (and the protocols that these may
-extend), third the classes imported categories (and the protocols that
+extend), second the classes imported categories (and the protocols that
 they may implement), and last the superclasses of the object classes.
 This search is performed in depth-first order. If the object inherits
 two different declarations for the same predicate, by default only the

@@ -231,14 +231,20 @@ of common predicates for sets of objects. In the context of logic
 programming, we can interpret inheritance as a form of <em>theory extension</em>:
 an object will virtually contain, besides its own predicates, all the
 predicates inherited from other objects that are not redefined locally.</p>
-<p>Logtalk uses a depth-first lookup procedure for finding predicate
-declarations and predicate definitions, as explained below. The lookup
+<p>Logtalk uses a depth-first search procedure for finding predicate
+declarations and predicate definitions, as explained below. The search
 procedures locate the entities holding the predicate declaration and
 the predicate definition using the predicate template.
 The <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive may be used for defining
 alternative names for inherited predicates, for solving inheritance
 conflicts, and for giving access to all inherited definitions (thus
-overriding the default lookup procedure).</p>
+overriding the default search procedure).</p>
+<p>The search procedures are notably used when compiling or handling a
+<a class="reference internal" href="messages.html#messages-messages"><span class="std std-ref">message</span></a> sent to an object. The exact details
+of the search procedures depend on the role played by the object receiving
+the message, as explained next. The search procedures are also used by the
+<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>
+reflection predicates.</p>
 <div class="section" id="protocol-inheritance">
 <span id="inheritance-protocol"></span><h2>Protocol inheritance<a class="headerlink" href="#protocol-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>Protocol inheritance refers to the inheritance of predicate declarations
@@ -261,7 +267,7 @@ be considered.</p>
 <p>The search order for predicate declarations starts in the object
 classes. Following the classes declaration order, the search starts in
 the classes implemented protocols (and the protocols that these may
-extend), third the classes imported categories (and the protocols that
+extend), second the classes imported categories (and the protocols that
 they may implement), and last the superclasses of the object classes.
 This search is performed in depth-first order. If the object inherits
 two different declarations for the same predicate, by default only the
