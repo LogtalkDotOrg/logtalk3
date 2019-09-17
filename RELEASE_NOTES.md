@@ -121,6 +121,12 @@ Examples
 
 * UPDATED: The `errors` example to illustrate new and improved lint warnings.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Support for the Textadept editor (version 10.0 or later required).
+Thanks to Michael T. Richter.
+
 
 3.29.0 - September 3, 2019
 ==========================
