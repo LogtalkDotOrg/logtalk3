@@ -116,6 +116,8 @@ goal and its execution context.
 
 * IMPROVED: The `tutor` tool explanations for several compiler lint warnings.
 
+* IMPROVED: The `tutor` tool coverage of compiler error messages.
+
 Examples
 --------
 

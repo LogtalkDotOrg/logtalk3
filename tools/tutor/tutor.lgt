@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.26,
+		version is 0.27,
 		author is 'Paulo Moura',
-		date is 2019/09/16,
+		date is 2019/09/17,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -78,6 +78,27 @@
 	error(type_error(protocol_identifier, _)) -->
 		['Protocol identifiers must be atoms.'-[], nl, nl].
 
+	error(domain_error(object_relation, Relation)) -->
+		[	'The ~w relation is not a valid relation between an object'-[Relation], nl,
+			'and other entities.'-[], nl, nl
+		].
+	error(domain_error(protocol_relation, Relation)) -->
+		[	'The ~w relation is not a valid relation between a protocol'-[Relation], nl,
+			'and other entities.'-[], nl, nl
+		].
+	error(domain_error(category_relation, Relation)) -->
+		[	'The ~w relation is not a valid relation between a category'-[Relation], nl,
+			'and other entities.'-[], nl, nl
+		].
+
+	error(domain_error(class, _)) -->
+		[	'An object can only instantiate or specialize an object playing the'-[], nl,
+			'role of a class.'-[], nl, nl
+		].
+	error(domain_error(prototype, _)) -->
+		['An object can only extend an object playing the role of a prototype.'-[], nl, nl].
+
+
 	error(domain_error(compiler_flag, _)) -->
 		[	'Compiler flags syntax is a compound term where the name is'-[], nl,
 			'the flag name and the single argument is the flag value.'-[], nl, nl
@@ -108,7 +129,9 @@
 		['The initialization/1 directive can only be used in objects.'-[], nl, nl].
 
 	error(domain_error(message_sending_goal, _)) -->
-		['The argument of the message delegation control construct must be a ::/2 message sending goal.'-[], nl, nl].
+		[	'The argument of the message delegation control construct must be'-[], nl,
+			'a ::/2 message sending goal.'-[], nl, nl
+		].
 
 	error(domain_error(meta_directive_template, _)) -->
 		['Likely one on the meta-argument specifiers is not valid.'-[], nl, nl].
@@ -164,19 +187,37 @@
 		[	'Built-in methods cannot be redefined by the user.'-[], nl,
 			'Use a different predicate name to fix this error.'-[], nl, nl
 		].
+
 	error(permission_error(modify, uses_object_predicate, _)) -->
-		['This predicate is already listed in a uses/2 directive.'-[], nl, nl].
+		[	'This predicate is already listed in a uses/2 directive.'-[], nl,
+			'Typo in the predicate indicator or a duplicate?'-[], nl, nl
+		].
+	error(permission_error(modify, uses_module_predicate, _)) -->
+		[	'This predicate is already listed in a use_module/2 directive.'-[], nl,
+			'Typo in the predicate indicator or a duplicate?'-[], nl, nl
+		].
+	error(permission_error(modify, uses_object_non_terminal, _)) -->
+		[	'This non-terminal is already listed in a uses/2 directive.'-[], nl,
+			'Typo in the non-terminal indicator or a duplicate?'-[], nl, nl
+		].
+	error(permission_error(modify, uses_module_non_terminal, _)) -->
+		[	'This non-terminal is already listed in a use_module/2 directive.'-[], nl,
+			'Typo in the non-terminal indicator or a duplicate?'-[], nl, nl
+		].
+
 	error(permission_error(modify, predicate_scope, _)) -->
 		[	'This predicate is already declared in a previous scope directive.'-[], nl,
 			'There can be only one scope directive per predicate.'-[], nl, nl
 		].
 	error(permission_error(modify, meta_predicate_template, _)) -->
 		[	'A meta-predicate template is already declared in a previous directive.'-[], nl,
-			'There can be only one meta-predicate directive per predicate.'-[], nl, nl
+			'There can be only one meta-predicate directive per predicate within an'-[], nl,
+			'entity.'-[], nl, nl
 		].
 	error(permission_error(modify, meta_non_terminal_template, _)) -->
 		[	'A meta-non-terminal template is already declared in a previous directive.'-[], nl,
-			'There can be only one meta-non-terminal directive per non-terminal.'-[], nl, nl
+			'There can be only one meta-non-terminal directive per non-terminal within'-[], nl,
+			'entity.'-[], nl, nl
 		].
 
 	error(permission_error(access, private_predicate, _)) -->
@@ -202,7 +243,7 @@
 		].
 	error(permission_error(define, clause, _)) -->
 		[	'Protocols cannot contain predicate clauses or grammar rules,'-[], nl,
-			'only predicate and grammar rule directives.'-[], nl, nl
+			'only entity, predicate, and grammar rule directives.'-[], nl, nl
 		].
 	error(permission_error(define, non_terminal, _)) -->
 		[	'Protocols cannot contain predicate clauses or grammar rules,'-[], nl,
