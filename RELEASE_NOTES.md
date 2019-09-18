@@ -25,6 +25,12 @@ RELEASE NOTES
 =========================
 
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Syntax test files to allow detecting highlighting flaws where an
+atom would be mistaken for a built-in predicate or a built-in directive.
+After a suggestion by Michael T. Richter.
 
 
 3.30.0 - September 17, 2019
