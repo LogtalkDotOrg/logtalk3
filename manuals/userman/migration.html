@@ -520,30 +520,30 @@ using <a class="reference internal" href="../glossary.html#term-hook-object"><sp
 a working solution here when the expansion code is separated from the
 code to be expanded. Logtalk supports using a module as a hook object
 as long as its name doesn’t coincide with the name of an object and
-that the module uses <cite>term_expansion/2</cite> and <cite>goal_expansion/2</cite> predicates.
-Assuming that’s the case, before attempting to compile the modules as
-objects, the default hook object is set to the module containing the
-expansion code. For example, if the expansions stored in the <cite>system</cite>
-module:</p>
+that the module uses <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
+predicates. Assuming that’s the case, before attempting to compile
+the modules as objects, the default hook object is set to the module
+containing the expansion code. For example, if the expansions stored
+in a <code class="docutils literal notranslate"><span class="pre">system</span></code> module:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(hook, system).
 ...
 </pre></div>
 </div>
 <p>This, however, may not be enough as some expansions may stored in more
-than one module. A common example is to use a module named <cite>prolog</cite>.
-It is also common to store the expansions in <cite>user</cite>. The Logtalk library
-provides a solution for these scenarios. Using the <cite>hook_flows</cite> library
+than one module. A common example is to use a module named <code class="docutils literal notranslate"><span class="pre">prolog</span></code>.
+It is also common to store the expansions in <code class="docutils literal notranslate"><span class="pre">user</span></code>. The Logtalk library
+provides a solution for these scenarios. Using the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library
 we can select multiple hook objects or hook modules. For example,
-assuming expansions stored on both <cite>system</cite> and <cite>user</cite> modules:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- {hook_flows(loader)}.
+assuming expansions stored on both <cite>user</cite> and <cite>system</cite> modules:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(hook_flows(loader)).
 ...
 
-| ?- set_logtalk_flag(hook, hook_set([system,user])).
+| ?- set_logtalk_flag(hook, hook_set([user, system])).
 ...
 </pre></div>
 </div>
 <p>After these queries, we can try to compile the modules and look for
-any porting or portability issues.</p>
+other porting or portability issues.</p>
 </div>
 </div>
 <div class="section" id="dealing-with-proprietary-prolog-directives-and-predicates">

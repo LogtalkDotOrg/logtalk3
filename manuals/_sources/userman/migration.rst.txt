@@ -358,11 +358,11 @@ using :term:`hook objects <hook object>`. But hook objects also provide
 a working solution here when the expansion code is separated from the
 code to be expanded. Logtalk supports using a module as a hook object
 as long as its name doesn't coincide with the name of an object and
-that the module uses `term_expansion/2` and `goal_expansion/2` predicates.
-Assuming that's the case, before attempting to compile the modules as
-objects, the default hook object is set to the module containing the
-expansion code. For example, if the expansions stored in the `system`
-module:
+that the module uses ``term_expansion/2`` and ``goal_expansion/2``
+predicates. Assuming that's the case, before attempting to compile
+the modules as objects, the default hook object is set to the module
+containing the expansion code. For example, if the expansions stored
+in a ``system`` module:
 
 .. code-block:: text
 
@@ -370,22 +370,22 @@ module:
    ...
 
 This, however, may not be enough as some expansions may stored in more
-than one module. A common example is to use a module named `prolog`.
-It is also common to store the expansions in `user`. The Logtalk library
-provides a solution for these scenarios. Using the `hook_flows` library
+than one module. A common example is to use a module named ``prolog``.
+It is also common to store the expansions in ``user``. The Logtalk library
+provides a solution for these scenarios. Using the ``hook_flows`` library
 we can select multiple hook objects or hook modules. For example,
-assuming expansions stored on both `system` and `user` modules:
+assuming expansions stored on both `user` and `system` modules:
 
 .. code-block:: text
 
-   | ?- {hook_flows(loader)}.
+   | ?- logtalk_load(hook_flows(loader)).
    ...
 
-   | ?- set_logtalk_flag(hook, hook_set([system,user])).
+   | ?- set_logtalk_flag(hook, hook_set([user, system])).
    ...
 
 After these queries, we can try to compile the modules and look for
-any porting or portability issues.
+other porting or portability issues.
 
 .. _migration_proprietary:
 
