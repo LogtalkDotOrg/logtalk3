@@ -24,6 +24,13 @@ RELEASE NOTES
 3.31.0 - October ??, 2019
 =========================
 
+Documentation
+-------------
+
+* IMPROVED: Handbook section on Prolog integration and migration. Includes
+a discussion on how to use hook objects to deal with Prolog term-expansion
+mechanisms when compiling modules as objects.
+
 Installers and installation scripts
 -----------------------------------
 

@@ -26,13 +26,11 @@ application and, in some cases, it might be the most appropriated
 solution. Modules may be used for legacy code or when a simple
 encapsulation mechanism is adequate. Logtalk objects may be used when
 more powerful encapsulation, abstraction, and reuse features are
-necessary.
+required.
 
-Logtalk supports the compilation of source files containing
-both plain Prolog and Prolog modules. This guide provides tips for
-integrating and migrating plain Prolog code and Prolog module
-code to Logtalk. Step-by-step instructions are provided for
-encapsulating plain Prolog code in objects, converting Prolog modules
+This guide provides tips for integrating and migrating plain Prolog code
+and Prolog module code to Logtalk. Step-by-step instructions are provided
+for encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
 inside Logtalk. An interesting application of the techniques described
 in this guide is a solution for running a Prolog application which uses
@@ -178,8 +176,9 @@ Assuming that this is the case, apply the following steps:
 #. Convert any ``use_module/2`` directives referencing other modules
    also being converted to objects into Logtalk
    :ref:`directives_uses_2` directives. If the
-   referenced modules are not being converted into objects, simply keep
-   the ``use_module/2`` directives unchanged.
+   referenced modules are not being converted into objects, keep
+   the ``use_module/2`` directives but change the first argument to be
+   the module name.
 #. Convert any ``meta_predicate/1`` directives into Logtalk
    :ref:`directives_meta_predicate_1`
    directives by replacing the module meta-argument indicator, ``:``,
@@ -190,10 +189,9 @@ Assuming that this is the case, apply the following steps:
 #. Convert any explicit qualified calls to module predicates to messages
    by replacing the ``:/2`` operator with the
    :ref:`control_send_to_object_2` message
-   sending operator, assuming that the referenced modules are also being
+   sending operator when the referenced modules are also being
    converted into objects. Calls in the pseudo-module ``user`` can
-   simply be encapsulated using the
-   :ref:`control_external_call_1` Logtalk
+   be encapsulated using the :ref:`control_external_call_1` Logtalk
    external call control construct. You can also use instead an
    :ref:`directives_uses_2` directive where the
    first argument would be the atom ``user`` and the second argument a
@@ -206,10 +204,10 @@ Assuming that this is the case, apply the following steps:
    for each dynamic predicate.
 #. If your module declares or defines clauses for multifile module
    predicates, replace the ``:/2`` functor by ``::/2`` in the
-   ``multifile/1`` directives and in the clause heads (assuming that all
-   modules defining the multifile predicates are converted into objects;
-   if that is not the case, just keep the ``multifile/1`` directives and
-   the clause heads as-is).
+   ``multifile/1`` directives and in the clause heads for all modules
+   defining the multifile predicates that are also being converted into
+   objects; if that is not the case, just keep the ``multifile/1``
+   directives and the clause heads as-is).
 #. Compile the resulting objects with the Logtalk
    :ref:`unknown_predicates <flag_unknown_predicates>`, and
    :ref:`portability <flag_portability>` flags set to ``warning``
@@ -231,16 +229,21 @@ changes to the file name extensions.
 Compiling Prolog modules as objects
 -----------------------------------
 
-An alternative to convert Prolog modules into objects is to just compile
-the Prolog source files using the ``logtalk_load/1-2`` and
-``logtalk_compile/1-2`` predicates (set the Logtalk
-:ref:`portability <flag_portability>` flag set to ``warning`` to
-help you catch any unnoticed cross-module predicate calls). This allows
-you to reuse existing module code as objects. This has the advantage of
-requiring little if any code changes. There are, however, some
-limitations that you must be aware. These limitations are a consequence
-of the lack of standardization of Prolog module systems and consequent
-proliferation of proprietary extensions.
+A possible alternative to port Prolog code to Logtalk is to compile the Prolog
+source files using the ``logtalk_load/1-2`` and ``logtalk_compile/1-2``
+predicates. The Logtalk compiler provides partial support for compiling Prolog
+modules as Logtalk objects. This support may allow using modules from a backend
+Prolog system in a different backend Prolog system although its main purpose is
+to help in porting existing Prolog code to Logtalk in order to benefit from its
+extended language features and its developer tools. Why partial support?
+Although there is a ISO Prolog standard for modules, it is (rightfully)
+ignored by most implementers and vendors (due to its flaws and deviation
+from common practice). In addition, there is no de facto standard for module
+systems, despite otherwise frequent bogus claims. Systems differences include
+the set of implemented module directives, the directive semantics, the
+handling of operators, the locality of flags, and on the integration of
+term-expansion mechanisms (when provided). Follows a discussion of the
+limitations of this approach that you should be aware.
 
 .. _migration_compatibility:
 
@@ -317,10 +320,10 @@ turned on. You may use the :ref:`events <flag_events>` compiler flag to
 ``deny`` with the Logtalk compiling and loading built-in methods for a
 small performance gain for the compiled code.
 
-.. _migration_limitations:
+.. _migration_unsupported_module_directives:
 
-Current limitations and workarounds
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Unsupported module directives
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``reexport/1`` and ``use_module/1`` directives are not directly
 supported by the Logtalk compiler. But most Prolog adapter files provide
@@ -339,6 +342,11 @@ that are called but never defined. Second, use these list to replace the
 ``reexport/2`` and ``use_module/2`` directives. You should then be able
 to compile the modified Prolog module as an object.
 
+.. _migration_module_expansions:
+
+Modules using a term-expansion mechanism
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Although Logtalk supports
 :ref:`term and goal expansion mechanisms <expansion_expansion>`, the
 semantics are different from similar mechanisms found in some Prolog
@@ -346,7 +354,38 @@ compilers. In particular, Logtalk does not support defining term and
 goal expansions clauses in a source file for expanding the source file
 itself. Logtalk forces a clean separation between expansions clauses and
 the source files that will be subject to source-to-source expansions by
-using :term:`hook objects <hook object>`.
+using :term:`hook objects <hook object>`. But hook objects also provide
+a working solution here when the expansion code is separated from the
+code to be expanded. Logtalk supports using a module as a hook object
+as long as its name doesn't coincide with the name of an object and
+that the module uses `term_expansion/2` and `goal_expansion/2` predicates.
+Assuming that's the case, before attempting to compile the modules as
+objects, the default hook object is set to the module containing the
+expansion code. For example, if the expansions stored in the `system`
+module:
+
+.. code-block:: text
+
+   | ?- set_logtalk_flag(hook, system).
+   ...
+
+This, however, may not be enough as some expansions may stored in more
+than one module. A common example is to use a module named `prolog`.
+It is also common to store the expansions in `user`. The Logtalk library
+provides a solution for these scenarios. Using the `hook_flows` library
+we can select multiple hook objects or hook modules. For example,
+assuming expansions stored on both `system` and `user` modules:
+
+.. code-block:: text
+
+   | ?- {hook_flows(loader)}.
+   ...
+
+   | ?- set_logtalk_flag(hook, hook_set([system,user])).
+   ...
+
+After these queries, we can try to compile the modules and look for
+any porting or portability issues.
 
 .. _migration_proprietary:
 
