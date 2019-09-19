@@ -24,6 +24,11 @@ RELEASE NOTES
 3.31.0 - October ??, 2019
 =========================
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The Windows installer to find a GNU Prolog 1.4.5 installation, which
+uses a registry key different from the one used in previous versions.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

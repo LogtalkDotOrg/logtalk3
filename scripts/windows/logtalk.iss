@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on July 31, 2019
+; Last updated on September 19, 2019
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -378,7 +378,9 @@ function GPExePath: String;
 var
   RootPath: String;
 begin
-  if RegQueryStringValue(HKCU, 'Software\GnuProlog\', 'RootPath', RootPath) then
+  if RegQueryStringValue(HKCU, 'Software\GNU Prolog\', 'RootPath', RootPath) then
+    Result := RootPath + '\bin\gprolog.exe'
+  else if RegQueryStringValue(HKCU, 'Software\GnuProlog\', 'RootPath', RootPath) then
     Result := RootPath + '\bin\gprolog.exe'
   else
     Result := 'prolog_compiler_not_installed'
