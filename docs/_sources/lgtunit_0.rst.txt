@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 7.12
-| **Date:** 2019/6/13
+| **Version:** 7.13
+| **Date:** 2019/9/20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -838,6 +838,7 @@ Creates a temporary file with the given text contents and opens it for reading r
 |    ``set_text_input(Alias,Contents,Options)``
 | **Mode and number of proofs:**
 |    ``set_text_input(+atom,+atom,+list(stream_option))`` - ``one``
+|    ``set_text_input(+atom,+list(atom),+list(stream_option))`` - ``one``
 
 
 ------------
@@ -861,6 +862,7 @@ Creates a temporary file with the given text contents and opens it for reading r
 |    ``set_text_input(Alias,Contents)``
 | **Mode and number of proofs:**
 |    ``set_text_input(+atom,+atom)`` - ``one``
+|    ``set_text_input(+atom,+list(atom))`` - ``one``
 
 
 ------------
@@ -884,6 +886,7 @@ Creates a temporary file with the given text contents, opens it for reading usin
 |    ``set_text_input(Contents)``
 | **Mode and number of proofs:**
 |    ``set_text_input(+atom)`` - ``one``
+|    ``set_text_input(+list(atom))`` - ``one``
 
 
 ------------
@@ -1202,6 +1205,7 @@ Creates a temporary file with the given text contents and referenced with the gi
 |    ``set_text_output(Alias,Contents)``
 | **Mode and number of proofs:**
 |    ``set_text_output(+atom,+atom)`` - ``one``
+|    ``set_text_output(+atom,+list(atom))`` - ``one``
 
 
 ------------
@@ -1225,6 +1229,7 @@ Creates a temporary file with the given text contents and sets the current outpu
 |    ``set_text_output(Contents)``
 | **Mode and number of proofs:**
 |    ``set_text_output(+atom)`` - ``one``
+|    ``set_text_output(+list(atom))`` - ``one``
 
 
 ------------
@@ -1520,6 +1525,7 @@ Creates a text file with the given contents.
 |    ``create_text_file(File,Contents)``
 | **Mode and number of proofs:**
 |    ``create_text_file(+atom,+atom)`` - ``one``
+|    ``create_text_file(+atom,+list(atom))`` - ``one``
 
 
 ------------

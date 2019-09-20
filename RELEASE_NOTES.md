@@ -31,6 +31,13 @@ Documentation
 a discussion on how to use hook objects to deal with Prolog term-expansion
 mechanisms when compiling modules as objects.
 
+Tools
+-----
+
+* FIXED: Missing additional `mode/2` directives for the `lgtunit` object
+`set_text_input/1-3`, `set_text_output/1-2`, and `create_text_file/2`
+predicates which also accept a list of atoms.
+
 Installers and installation scripts
 -----------------------------------
 

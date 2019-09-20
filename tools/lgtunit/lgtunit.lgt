@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.12,
+		version is 7.13,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019/09/20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -279,6 +279,7 @@
 
 	:- protected(set_text_input/3).
 	:- mode(set_text_input(+atom, +atom, +list(stream_option)), one).
+	:- mode(set_text_input(+atom, +list(atom), +list(stream_option)), one).
 	:- info(set_text_input/3, [
 		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.',
 		argnames is ['Alias', 'Contents', 'Options']
@@ -286,6 +287,7 @@
 
 	:- protected(set_text_input/2).
 	:- mode(set_text_input(+atom, +atom), one).
+	:- mode(set_text_input(+atom, +list(atom)), one).
 	:- info(set_text_input/2, [
 		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.',
 		argnames is ['Alias', 'Contents']
@@ -293,6 +295,7 @@
 
 	:- protected(set_text_input/1).
 	:- mode(set_text_input(+atom), one).
+	:- mode(set_text_input(+list(atom)), one).
 	:- info(set_text_input/1, [
 		comment is 'Creates a temporary file with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.',
 		argnames is ['Contents']
@@ -389,6 +392,7 @@
 
 	:- protected(set_text_output/2).
 	:- mode(set_text_output(+atom, +atom), one).
+	:- mode(set_text_output(+atom, +list(atom)), one).
 	:- info(set_text_output/2, [
 		comment is 'Creates a temporary file with the given text contents and referenced with the given alias.',
 		argnames is ['Alias', 'Contents']
@@ -396,6 +400,7 @@
 
 	:- protected(set_text_output/1).
 	:- mode(set_text_output(+atom), one).
+	:- mode(set_text_output(+list(atom)), one).
 	:- info(set_text_output/1, [
 		comment is 'Creates a temporary file with the given text contents and sets the current output stream to the file.',
 		argnames is ['Contents']
@@ -485,6 +490,7 @@
 
 	:- protected(create_text_file/2).
 	:- mode(create_text_file(+atom, +atom), one).
+	:- mode(create_text_file(+atom, +list(atom)), one).
 	:- info(create_text_file/2, [
 		comment is 'Creates a text file with the given contents.',
 		argnames is ['File', 'Contents']
