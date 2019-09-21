@@ -1,5 +1,7 @@
-:- encoding('UTF-8').		% this directive, when present, must be the first
-							% term, in the first line, of a source file
+:- encoding('UTF-8').
+% the encoding/1 directive, when present, must be the
+% first term, in the first line, of a source file
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
