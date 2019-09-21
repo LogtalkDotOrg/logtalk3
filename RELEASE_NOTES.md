@@ -41,6 +41,12 @@ predicates which also accept a list of atoms.
 * FIXED: Wrong code in the `lgtunit` tool documentation on user-defined test
 dialects.
 
+Examples
+--------
+
+* FIXED: The `clustering` and `document_converter` Java examples when using
+YAP as the backend Prolog compiler.
+
 Installers and installation scripts
 -----------------------------------
 

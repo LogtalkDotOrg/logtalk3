@@ -22,11 +22,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/02/08,
+		date is 2019/09/21,
 		comment is 'Tests for the "clustering" example.'
 	]).
+
+	:- uses(lgtunit, [op(700, xfx, '=~=')]).
 
 	condition :-
 		this(This),
@@ -39,8 +41,10 @@
 
 	test(clustering_01) :-
 		clustering::clusters([1.0,1.5,1.8,3.5,3.6,4.0,4.2], 4, 10000, Clusters),
-		list::length(Clusters, 4),
+		list::length(Clusters, Length),
+		^^assertion(Length == 4),
 		sort(Clusters, SortedClusters),
-		list::flatten(SortedClusters, [1.0,1.5,1.8,3.5,3.6,4.0,4.2]).
+		list::flatten(SortedClusters, FlattenedSortedClusters),
+		^^assertion(FlattenedSortedClusters =~= [1.0,1.5,1.8,3.5,3.6,4.0,4.2]).
 
 :- end_object.

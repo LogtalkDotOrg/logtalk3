@@ -2,8 +2,8 @@
 
 #############################################################################
 ## 
-##   Set CLASSPATH environment variable for SWI-Prolog
-##   Last updated on October 29, 2018
+##   Set CLASSPATH environment variable for YAP
+##   Last updated on September 21, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -24,7 +24,7 @@
 
 
 eval $(yap -dump-runtime-variables)
-CLASSPATH="$PLBASE/lib/jpl.jar"
+CLASSPATH="$YAP_ROOTDIR/share/Yap/jpl.jar"
 
 for jar in jars/*.jar; do
 	CLASSPATH="$PWD/$jar":$CLASSPATH
