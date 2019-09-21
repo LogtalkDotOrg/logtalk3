@@ -225,17 +225,18 @@ and generate a documentation file for each compiled entity (object, protocol,
 or category) in XML format. Contents of the XML file include the entity name,
 type, and compilation mode (static or dynamic), the entity relations with
 other entities, and a description of any declared predicates (name,
-compilation mode, scope, …).</p>
-<p>The XML documentation files can be enriched with arbitrary user-defined
-information, either about an entity or about its predicates, by using
-the two directives described next.</p>
+compilation mode, scope, …). The XML documentation files can be enriched
+with arbitrary user-defined information, either about an entity or about its
+predicates, by using the two directives described in the next section. The
+<code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool includes POSIX and Windows scripts for converting the XML
+documentation files to several final formats (such as HTML and PDF).</p>
 <div class="section" id="documenting-directives">
 <span id="id1"></span><h2>Documenting directives<a class="headerlink" href="#documenting-directives" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
 directives complement other directives that also provide important
-documentation information such as the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a>
-directive.</p>
+documentation information such as the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> and
+<a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directives.</p>
 <div class="section" id="entity-directives">
 <span id="documenting-entity"></span><h3>Entity directives<a class="headerlink" href="#entity-directives" title="Permalink to this headline">¶</a></h3>
 <p>Arbitrary user-defined entity information can be represented using the
@@ -254,8 +255,8 @@ Logtalk tools:</p>
 <dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the entity purpose (an atom).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt><dd><p>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
-<code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>
-file).</p>
+<code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity in a user defined
+<code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt><dd><p>Version number (a number).</p>
 </dd>
@@ -263,7 +264,7 @@ file).</p>
 <code class="docutils literal notranslate"><span class="pre">Year</span></code>, <code class="docutils literal notranslate"><span class="pre">Month</span></code>, and <code class="docutils literal notranslate"><span class="pre">Day</span></code> are integers).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code></dt><dd><p>Parameter names and descriptions for parametric entities (a list of
-<em>Name-Description</em> pairs where both names and descriptions are atoms).</p>
+<code class="docutils literal notranslate"><span class="pre">Name-Description</span></code> pairs where both names and descriptions are atoms).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">parnames</span></code></dt><dd><p>Parameter names for parametric entities (a list of atoms; a simpler
 version of the previous key, used when parameter descriptions are
@@ -271,13 +272,13 @@ deemed unnecessary).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">copyright</span></code></dt><dd><p>Copyright notice for the entity source code (an atom or a compound
 term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity
-defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
+defined in a user defined <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">license</span></code></dt><dd><p>License terms for the entity source code; usually, just the license
 name (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the
-name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
+name of an XML entity in a user defined <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the entity using <em>Topic-Text</em> pairs
+<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the entity using <code class="docutils literal notranslate"><span class="pre">Topic-Text</span></code> pairs
 where both the topic and the text must be atoms.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">see_also</span></code></dt><dd><p>List of related entities (using the entity identifiers, which can
@@ -318,7 +319,7 @@ Logtalk tools:</p>
 <dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the predicate purpose (an atom).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">arguments</span></code></dt><dd><p>Names and descriptions of predicate arguments for pretty print output
-(a list of <em>Name-Description</em> pairs where both names and descriptions
+(a list of <code class="docutils literal notranslate"><span class="pre">Name-Description</span></code> pairs where both names and descriptions
 are atoms).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">argnames</span></code></dt><dd><p>Names of predicate arguments for pretty print output (a list of
@@ -334,18 +335,18 @@ what way. Some possible values are <code class="docutils literal notranslate"><s
 <code class="docutils literal notranslate"><span class="pre">specialize</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_first</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_last</span></code>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">exceptions</span></code></dt><dd><p>List of possible exceptions throw by the predicate using
-<em>Description</em>-<em>Exception term</em> pairs. The description must be an
-atom. The exception term must be a non-variable term.</p>
+<code class="docutils literal notranslate"><span class="pre">Description-Exception</span></code> pairs. The description must be an
+atom. The exception term must be a ground term.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">examples</span></code></dt><dd><p>List of typical predicate call examples using the format
-<em>Description-Goal-Bindings</em>. The description must be an atom.
-The predicate call term must be a non-variable term. The
-variable bindings term uses the format <em>{Variable = Term, …}</em>.
+<code class="docutils literal notranslate"><span class="pre">Description-Goal-Bindings</span></code>. The description must be an atom
+with the goal s sharing variables with the bindings. The
+variable bindings term uses the format <code class="docutils literal notranslate"><span class="pre">{Variable</span> <span class="pre">=</span> <span class="pre">Term,</span> <span class="pre">...}</span></code>.
 When there are no variable bindings, the success or failure of
 the predicate call should be represented by the terms <code class="docutils literal notranslate"><span class="pre">{yes}</span></code>
 or <code class="docutils literal notranslate"><span class="pre">{no}</span></code>, respectively.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the predicate using <em>Topic-Text</em>
+<dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the predicate using <code class="docutils literal notranslate"><span class="pre">Topic-Text</span></code>
 pairs where both the topic and the text must be atoms.</p>
 </dd>
 </dl>
@@ -385,9 +386,9 @@ overridden by passing a list of options to the tool predicates. The
 the XML specification files described above, along with several sample XSL
 style-sheet files and sample scripts for converting XML documenting files
 to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). See
-the <code class="docutils literal notranslate"><span class="pre">NOTES</span></code> file included in the directory for details. You may use
-the supplied sample files as a starting point for generating the
-documentation of your Logtalk applications.</p>
+the <code class="docutils literal notranslate"><span class="pre">NOTES</span></code> file in the tool directory for details. You may use the
+supplied sample files as a starting point for generating the documentation
+of your Logtalk applications.</p>
 <p>The Logtalk DTD file, <code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>, contains a reference to a
 user-customizable file, <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>, which declares XML entities for
 source code author names, license terms, and copyright string. After

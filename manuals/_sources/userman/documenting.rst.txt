@@ -29,11 +29,11 @@ and generate a documentation file for each compiled entity (object, protocol,
 or category) in XML format. Contents of the XML file include the entity name,
 type, and compilation mode (static or dynamic), the entity relations with
 other entities, and a description of any declared predicates (name,
-compilation mode, scope, ...).
-
-The XML documentation files can be enriched with arbitrary user-defined
-information, either about an entity or about its predicates, by using
-the two directives described next.
+compilation mode, scope, ...). The XML documentation files can be enriched
+with arbitrary user-defined information, either about an entity or about its
+predicates, by using the two directives described in the next section. The
+``lgtdoc`` tool includes POSIX and Windows scripts for converting the XML
+documentation files to several final formats (such as HTML and PDF).
 
 .. _documenting_directives:
 
@@ -43,8 +43,8 @@ Documenting directives
 Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
 directives complement other directives that also provide important
-documentation information such as the :ref:`directives_mode_2`
-directive.
+documentation information such as the :ref:`directives_mode_2` and
+:ref:`directives_meta_predicate_1` directives.
 
 .. _documenting_entity:
 
@@ -70,8 +70,8 @@ Logtalk tools:
    Comment describing the entity purpose (an atom).
 ``author``
    Entity author(s) (an atom or a compound term ``{entity}`` where
-   ``entity`` is the name of an XML entity defined in the ``custom.ent``
-   file).
+   ``entity`` is the name of an XML entity in a user defined
+   ``custom.ent`` file).
 ``version``
    Version number (a number).
 ``date``
@@ -79,7 +79,7 @@ Logtalk tools:
    ``Year``, ``Month``, and ``Day`` are integers).
 ``parameters``
    Parameter names and descriptions for parametric entities (a list of
-   *Name-Description* pairs where both names and descriptions are atoms).
+   ``Name-Description`` pairs where both names and descriptions are atoms).
 ``parnames``
    Parameter names for parametric entities (a list of atoms; a simpler
    version of the previous key, used when parameter descriptions are
@@ -87,13 +87,13 @@ Logtalk tools:
 ``copyright``
    Copyright notice for the entity source code (an atom or a compound
    term ``{entity}`` where ``entity`` is the name of an XML entity
-   defined in the ``custom.ent`` file).
+   defined in a user defined ``custom.ent`` file).
 ``license``
    License terms for the entity source code; usually, just the license
    name (an atom or a compound term ``{entity}`` where ``entity`` is the
-   name of an XML entity defined in the ``custom.ent`` file).
+   name of an XML entity in a user defined ``custom.ent`` file).
 ``remarks``
-   List of general remarks about the entity using *Topic-Text* pairs
+   List of general remarks about the entity using ``Topic-Text`` pairs
    where both the topic and the text must be atoms.
 ``see_also``
    List of related entities (using the entity identifiers, which can
@@ -141,7 +141,7 @@ Logtalk tools:
    Comment describing the predicate purpose (an atom).
 ``arguments``
    Names and descriptions of predicate arguments for pretty print output
-   (a list of *Name-Description* pairs where both names and descriptions
+   (a list of ``Name-Description`` pairs where both names and descriptions
    are atoms).
 ``argnames``
    Names of predicate arguments for pretty print output (a list of
@@ -157,18 +157,18 @@ Logtalk tools:
    ``specialize``, ``call_super_first``, ``call_super_last``.
 ``exceptions``
    List of possible exceptions throw by the predicate using
-   *Description*-*Exception term* pairs. The description must be an
-   atom. The exception term must be a non-variable term.
+   ``Description-Exception`` pairs. The description must be an
+   atom. The exception term must be a ground term.
 ``examples``
    List of typical predicate call examples using the format
-   *Description-Goal-Bindings*. The description must be an atom.
-   The predicate call term must be a non-variable term. The
-   variable bindings term uses the format *{Variable = Term, ...}*.
+   ``Description-Goal-Bindings``. The description must be an atom
+   with the goal s sharing variables with the bindings. The
+   variable bindings term uses the format ``{Variable = Term, ...}``.
    When there are no variable bindings, the success or failure of
    the predicate call should be represented by the terms ``{yes}``
    or ``{no}``, respectively.
 ``remarks``
-   List of general remarks about the predicate using *Topic-Text*
+   List of general remarks about the predicate using ``Topic-Text``
    pairs where both the topic and the text must be atoms.
 
 For example:
@@ -212,9 +212,9 @@ overridden by passing a list of options to the tool predicates. The
 the XML specification files described above, along with several sample XSL
 style-sheet files and sample scripts for converting XML documenting files
 to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). See
-the ``NOTES`` file included in the directory for details. You may use
-the supplied sample files as a starting point for generating the
-documentation of your Logtalk applications.
+the ``NOTES`` file in the tool directory for details. You may use the
+supplied sample files as a starting point for generating the documentation
+of your Logtalk applications.
 
 The Logtalk DTD file, ``logtalk_entity.dtd``, contains a reference to a
 user-customizable file, ``custom.ent``, which declares XML entities for
