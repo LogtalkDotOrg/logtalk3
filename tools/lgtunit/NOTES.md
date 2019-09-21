@@ -147,8 +147,8 @@ file that skips code coverage and compiles the code to be tested in optimized
 mode.
 
 
-Unit test dialects
-------------------
+Test dialects
+-------------
 
 Multiple test _dialects_ are supported by default. See the next section on how
 to define your own test dialects.
@@ -268,8 +268,8 @@ an object local (i.e. non-public) predicates, make sure that the compiler
 flag `context_switching_calls` is set to `allow` for those objects.
 
 
-User-defined unit test dialects
--------------------------------
+User-defined test dialects
+--------------------------
 
 Additional test dialects can be easily defined by extending the `lgtunit`
 object and by term-expanding the new dialect into one of the default dialects.
@@ -305,26 +305,7 @@ idiom by using a `tester.lgt` driver file with contents such as:
 The hook pipeline first applies our `simple_dialect` expansion followed by
 the default `lgtunit` expansion. This solution allows other hook objects
 (e.g. required by the code being tested) to also be used by updating the
-pipeline. When that is not required, a simpler alternative is to change the
-expansion of the `begin_of_file` virtual term to:
-
-	term_expansion(
-		begin_of_file,
-		[
-			(:- set_logtalk_flag(hook,lgtunit)),
-			(:- object(tests,extends(lgtunit)))
-		]
-	).
-
-This allows simplifying the driver file to:
-
-	:- initialization((
-		set_logtalk_flag(report, warnings),
-		logtalk_load(lgtunit(loader)),
-		logtalk_load(simple_dialect),
-		logtalk_load(tests, [hook(simple_dialect)]),
-		tests::run
-	)).
+pipeline.
 
 
 QuickCheck

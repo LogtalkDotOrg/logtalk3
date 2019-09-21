@@ -123,8 +123,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#writing-compiling-and-loading-unit-tests">Writing, compiling, and loading unit tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#unit-test-dialects">Unit test dialects</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#user-defined-unit-test-dialects">User-defined unit test dialects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-dialects">Test dialects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-defined-test-dialects">User-defined test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quickcheck">QuickCheck</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#skipping-unit-tests">Skipping unit tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-non-deterministic-predicates">Testing non-deterministic predicates</a></li>
@@ -341,8 +341,8 @@ driver file that runs the tests collecting code coverage data and a
 quicker driver file that skips code coverage and compiles the code to be
 tested in optimized mode.</p>
 </div>
-<div class="section" id="unit-test-dialects">
-<h2>Unit test dialects<a class="headerlink" href="#unit-test-dialects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="test-dialects">
+<h2>Test dialects<a class="headerlink" href="#test-dialects" title="Permalink to this headline">¶</a></h2>
 <p>Multiple test <em>dialects</em> are supported by default. See the next section
 on how to define your own test dialects.</p>
 <p>Unit tests can be written using any of the following predefined
@@ -499,8 +499,8 @@ and test an object local (i.e. non-public) predicates, make sure that
 the compiler flag <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for
 those objects.</p>
 </div>
-<div class="section" id="user-defined-unit-test-dialects">
-<h2>User-defined unit test dialects<a class="headerlink" href="#user-defined-unit-test-dialects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="user-defined-test-dialects">
+<h2>User-defined test dialects<a class="headerlink" href="#user-defined-test-dialects" title="Permalink to this headline">¶</a></h2>
 <p>Additional test dialects can be easily defined by extending the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object and by term-expanding the new dialect into one of the
 default dialects. As an example, suppose that you want a dialect where
@@ -535,28 +535,7 @@ idiom by using a <code class="docutils literal notranslate"><span class="pre">te
 <p>The hook pipeline first applies our <code class="docutils literal notranslate"><span class="pre">simple_dialect</span></code> expansion
 followed by the default <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> expansion. This solution allows
 other hook objects (e.g. required by the code being tested) to also be
-used by updating the pipeline. When that is not required, a simpler
-alternative is to change the expansion of the <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> virtual
-term to:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">term_expansion</span>(
-    begin_of_file,
-    [
-        (<span class="o">:-</span> <span class="k">set_logtalk_flag</span>(hook,lgtunit)),
-        (<span class="o">:-</span> object(tests,extends(lgtunit)))
-    ]
-).
-</pre></div>
-</div>
-<p>This allows simplifying the driver file to:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
-    <span class="k">set_logtalk_flag</span>(report, warnings),
-    <span class="k">logtalk_load</span>(lgtunit(loader)),
-    <span class="k">logtalk_load</span>(simple_dialect),
-    <span class="k">logtalk_load</span>(tests, [hook(simple_dialect)]),
-    tests<span class="o">::</span>run
-)).
-</pre></div>
-</div>
+used by updating the pipeline.</p>
 </div>
 <div class="section" id="quickcheck">
 <h2>QuickCheck<a class="headerlink" href="#quickcheck" title="Permalink to this headline">¶</a></h2>
