@@ -348,6 +348,10 @@ predicate. For example:</p>
 yes
 </pre></div>
 </div>
+<p>Note that, due to the <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive being local to a source,
+file, using it to specify a hook object will override any defined default hook
+object or any hook object specified as a <code class="docutils literal notranslate"><span class="pre">logtalk_compile/2</span></code> or <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code>
+predicate compiler option for compiling or loading the source file.</p>
 <p>When compiling a source file, the compiler will first try the source
 file specific hook object, if defined. If that fails, it tries the
 default hook object, if defined. If that also fails, the compiler tries
