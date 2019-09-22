@@ -17,7 +17,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Chocolat is a MacOS X text editor available from:
+Chocolat is a macOS text editor available from:
 
 	http://chocolatapp.com/
 

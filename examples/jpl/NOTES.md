@@ -32,6 +32,6 @@ JTable example from the JPL distribution are included.
 
 When running the GUI examples on the macOS Terminal application, you may
 get a Java error saying that the AWT cannot be started. In alternative, try
-to run the example from within the SWI-Prolog Mac OS X application instead
-of using the shell integration script. This issue is due to a Mac OS X Java
+to run the example from within the SWI-Prolog macOS application instead
+of using the shell integration script. This issue is due to a macOS Java
 issue that's orthogonal to both SWI-Prolog/YAP and Logtalk.

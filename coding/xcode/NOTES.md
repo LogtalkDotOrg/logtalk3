@@ -18,7 +18,7 @@ ________________________________________________________________________
 
 
 This directory contains some files that provide basic syntax highlighting 
-and project and template files for editing Logtalk source files with MacOS X 
+and project and template files for editing Logtalk source files with macOS 
 Xcode 1.1 or later version.
 
 

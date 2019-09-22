@@ -20,7 +20,7 @@
 
 /*
 On Windows, the compilation of this example generates invalid file names for the XML
-documenting files. No problems on MacOS X and no problems expect in other POSIX systems.
+documenting files. No problems on macOS and no problems expect in other POSIX systems.
 */
 
 :- initialization(

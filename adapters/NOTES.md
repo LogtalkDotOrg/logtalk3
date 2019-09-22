@@ -349,9 +349,9 @@ unqualified calls to library predicates. All the module libraries must
 be loaded prior to compilation of object and categories containing calls
 to the library predicates.
 
-MacOS X users of the `SWI-Prolog.app` application, must add the definitions
+macOS users of the `SWI-Prolog.app` application, must add the definitions
 for the `LOGTALKHOME` and `LOGTALKUSER` environment variables to their
-`~/.plrc` or `~/.swiplrc` init file (as Mac OS X GUI applications *don't*
+`~/.plrc` or `~/.swiplrc` init file (as macOS GUI applications *don't*
 inherit shell environment variable values):
 
 	:- setenv('LOGTALKHOME', ...).
@@ -375,7 +375,7 @@ it implicitly assumes a single user and the files are buried in the directory
 `~/lib/swipl/pack/logtalk`.
 
 If you want to load automatically Logtalk at startup and be able to use it
-with both the shell integration script and the Mac OS X GUI application, you
+with both the shell integration script and the macOS GUI application, you
 can add to the `~/.plrc` or `~/.swiplrc` init file the following lines after
 editing the `LOGTALKHOME` and `LOGTALKUSER` environment variable values in
 the `setenv/2` calls:

@@ -62,6 +62,9 @@ uses a registry key different from the one used in previous versions.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* UPDATED: Textadept editor syntax highlighting support. Contributed by
+Michael T. Richter. 
+
 * UPDATED: Syntax test files to allow detecting highlighting flaws where an
 atom would be mistaken for a built-in predicate or a built-in directive.
 After a suggestion by Michael T. Richter.

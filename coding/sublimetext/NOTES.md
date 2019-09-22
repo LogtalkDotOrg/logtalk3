@@ -17,7 +17,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Sublime Text is a text editor for Windows, Mac OS X, and Linux.
+Sublime Text is a text editor for Windows, macOS, and Linux.
 It's available from:
 
 	http://www.sublimetext.com/
@@ -28,7 +28,7 @@ Sublime Text supports TextMate syntax files and TextMate snippets. See the
 For basic installation, copy the following files to the Sublime Text Packages
 directory, which is operating-system specific:
 
-Mac OS X:
+macOS:
 	~/Library/Application Support/Sublime Text 3/Packages/Logtalk/
 Linux:
 	~/.config/sublime-text-3/Packages/Logtalk
@@ -63,7 +63,7 @@ script to set your default backend compiler. In alternative, edit the
 of the integration scripts.
 
 For code navigation, install ctags Logtalk support (see the `../ctags` folder)
-and the Sublime Text `ctags` package. On Mac OS X, you may also need to install
+and the Sublime Text `ctags` package. On macOS, you may also need to install
 the `Fix Mac Path` package in order to use a recent `ctags` version (that you
 can install using e.g. Homebrew or MacPorts).
 

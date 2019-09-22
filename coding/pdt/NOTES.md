@@ -35,7 +35,7 @@ preferences, and enter the following configuration data for the SWI-Prolog
 executable and for the extra environment variables (change the paths to
 match your SWI-Prolog and Logtalk installations and your home directory):
 
-MacOS X
+macOS
 
 /Users/pmoura/bin/swipl -s /opt/local/share/logtalk/integration/logtalk_swi.pl
 DISPLAY=:0.0, HOME=/Users/pmoura, LOGTALKHOME=/opt/local/share/logtalk, LOGTALKUSER=/Users/pmoura/logtalk

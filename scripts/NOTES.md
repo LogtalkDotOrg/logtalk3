@@ -46,10 +46,10 @@ also available in the Logtalk website.
 	shell script for installing Logtalk in POSIX operating systems. When
 	using the default installation directory prefix, it must be run from
 	this directory by a user with administration privileges (for example,
-	`sudo ./install.sh`). The default prefix is `/opt/local` on Darwin
-	(MacOS X), `/usr` on Debian systems, and `/usr/local` on other POSIX
-	systems, resulting in Logtalk being installed in `$prefix/share` with
-	useful scripts written to `$prefix/bin`, which should be in your path);
+	`sudo ./install.sh`). The default prefix is `/opt/local` on macOS,
+	`/usr` on Debian systems, and `/usr/local` on other POSIX systems,
+	resulting in Logtalk being installed in `$prefix/share` with useful
+	scripts written to `$prefix/bin`, which should be in your path);
 	the script also accepts as an optional argument a prefix for the
 	installation directory (for example, `./install.sh -p $HOME`)
 

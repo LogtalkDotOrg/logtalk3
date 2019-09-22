@@ -17,7 +17,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Kod is a free MacOS X text editor available from:
+Kod is a free macOS text editor available from:
 
 	http://kodapp.com/
 

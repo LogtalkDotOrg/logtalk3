@@ -17,7 +17,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Vico is a MacOS X text editor available at:
+Vico is a macOS text editor available at:
 
 	http://www.vicoapp.com/
 

@@ -114,7 +114,7 @@ OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
 =================================================================
 
 * Several open-source Prolog compilers (development)
-* MacPorts (MacOS X installer)
+* MacPorts (macOS installer)
 * InnoSetup (Windows installer)
 * RPM (Linux installer)
 * dpkg (Debian installer)
