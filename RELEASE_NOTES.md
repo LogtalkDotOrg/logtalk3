@@ -38,8 +38,14 @@ Tools
 `set_text_input/1-3`, `set_text_output/1-2`, and `create_text_file/2`
 predicates which also accept a list of atoms.
 
-* FIXED: Wrong code in the `lgtunit` tool documentation on user-defined test
+* FIXED: Sample code in the `lgtunit` tool documentation on user-defined test
 dialects.
+
+Tests
+-----
+
+* IMPROVED: Rewritten the ISO Prolog standard `read_term/3` predicate tests
+to use assertions for easier debugging.
 
 Examples
 --------

@@ -22,159 +22,162 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2019/07/27,
+		date is 2019/09/22,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.1.4
 
-	succeeds(iso_read_term_3_01) :-
+	test(iso_read_term_3_01, true(Assertion)) :-
 		^^set_text_input('term1. term2. ...'),
 		{read(T)},
 		T == term1,
-		^^check_text_input(' term2. ...').
+		^^text_input_assertion(' term2. ...', Assertion).
 
-	succeeds(iso_read_term_3_02) :-
+	test(iso_read_term_3_02, true(Assertion)) :-
 		^^set_text_input(st_o, 'term1. term2. ...'),
 		{read(st_o, term1)},
-		^^check_text_input(st_o, ' term2. ...').
+		^^text_input_assertion(st_o, ' term2. ...', Assertion).
 
-	succeeds(iso_read_term_3_03) :-
+	test(iso_read_term_3_03, true) :-
 		^^set_text_input(st_o, ['foo(A+Roger,A+_). ','term2. ...']),
 		{read_term(st_o, T, [variables(VL),variable_names(VN),singletons(VS)])},
-		T = foo(X1+X2,X1+X3), VL == [X1,X2,X3], VN == ['A'=X1,'Roger'=X2], VS == ['Roger'=X2],
-		^^check_text_input(st_o, ' term2. ...').
+		^^text_input_assertion(st_o, ' term2. ...', Assertion),
+		^^assertion(T = foo(X1+X2,X1+X3)),
+		^^assertion(VL == [X1,X2,X3]),
+		^^assertion(VN == ['A'=X1,'Roger'=X2]),
+		^^assertion(VS == ['Roger'=X2]),
+		^^assertion(Assertion).
 
-	succeeds(iso_read_term_3_04) :-
+	test(iso_read_term_3_04, true(Assertion)) :-
 		^^set_text_input('3.1.  term2. ...'),
 		\+ {read(4.1)},
-		^^check_text_input('  term2. ...').
+		^^text_input_assertion('  term2. ...', Assertion).
 
-	succeeds(iso_read_term_3_05) :-
+	test(iso_read_term_3_05, true(Assertion)) :-
 		^^set_text_input('foo 123. term2. ...'),
 		catch({read(_T)}, error(syntax_error(_),_), true),
-		^^check_text_input(' term2. ...').
+		^^text_input_assertion(' term2. ...', Assertion).
 
-	succeeds(iso_read_term_3_06) :-
+	test(iso_read_term_3_06, true) :-
 		^^set_text_input('3.1'),
 		catch({read(_T)}, error(syntax_error(_),_), true).
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	succeeds(iso_read_term_3_07) :-
+	test(iso_read_term_3_07, true) :-
 		^^set_text_input('foo( bar). '),
 		{read_term(T, [singletons(S)])},
-		T == foo(bar), S == [].
+		^^assertion(T == foo(bar)),
+		^^assertion(S == []).
 
-	throws(sics_read_term_3_08, error(instantiation_error,_)) :-
+	test(sics_read_term_3_08, error(instantiation_error)) :-
 		{read(_, _)}.
 
-	throws(sics_read_term_3_09, error(instantiation_error,_)) :-
+	test(sics_read_term_3_09, error(instantiation_error)) :-
 		{read_term(user_input, _, _)}.
 
-	throws(sics_read_term_3_10, error(instantiation_error,_)) :-
+	test(sics_read_term_3_10, error(instantiation_error)) :-
 		% some Prolog systems simply ignore non-recognized read options: provide a term
 		% to be read in that case so that the unit test doesn't hang waiting for input
 		^^set_text_input('a. '),
 		current_input(S),
 		{read_term(S, _, [variables(_)|_])}.
 
-	throws(sics_read_term_3_11, error(instantiation_error,_)) :-
+	test(sics_read_term_3_11, error(instantiation_error)) :-
 		{read_term(user_input,_,[variables(_),_])}.
 
-	throws(sics_read_term_3_12, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+	test(sics_read_term_3_12, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
 		% both exception terms seem to be acceptable in the ISO spec
 		{read(foo, _)}.
 
-	throws(sics_read_term_3_13, error(type_error(list,bar),_)) :-
+	test(sics_read_term_3_13, error(type_error(list,bar))) :-
 		{read_term(user_input, _, bar)}.
 
-	throws(sics_read_term_3_14, error(domain_error(read_option,bar),_)) :-
+	test(sics_read_term_3_14, error(domain_error(read_option,bar))) :-
 		% some Prolog systems simply ignore non-recognized read options: provide a term
 		% to be read in that case so that the unit test doesn't hang waiting for input
 		^^set_text_input('a. '),
 		current_input(S),
 		{read_term(S, _, [bar])}.
 
-	throws(sics_read_term_3_15, error(permission_error(input,stream,user_output),_)) :-
+	test(sics_read_term_3_15, error(permission_error(input,stream,user_output))) :-
 		{read_term(user_output, _, [])}.
 
-	succeeds(sics_read_term_3_16) :-
+	test(sics_read_term_3_16, true(Value == past)) :-
 		^^set_text_input(''),
 		{read(T)},
-		T == end_of_file,
+		^^assertion(T == end_of_file),
 		current_input(Stream),
-		stream_property(Stream, end_of_stream(past)).
+		stream_property(Stream, end_of_stream(Value)).
 
-	throws(sics_read_term_3_17, error(existence_error(stream,S),_)) :-
+	test(sics_read_term_3_17, error(existence_error(stream,S))) :-
 		^^closed_input_stream(S, []),
 		{read_term(S, _, [])}.
 
-	throws(sics_read_term_3_18, error(permission_error(input,binary_stream,S),_)) :-
+	test(sics_read_term_3_18, error(permission_error(input,binary_stream,S))) :-
 		^^set_binary_input([]),
 		current_input(S),
 		{read_term(_, [])}.
 
-	throws(sics_read_term_3_19, error(permission_error(input,binary_stream,S),_)) :-
+	test(sics_read_term_3_19, error(permission_error(input,binary_stream,S))) :-
 		^^set_binary_input([]),
 		current_input(S),
 		{read(_)}.
 
-	succeeds(sics_read_term_3_20) :-
+	test(sics_read_term_3_20, true(Value == past)) :-
 		^^set_text_input(st_o, '', [eof_action(error)]),
 		get_code(st_o, _),
 		catch({read_term(st_o, _, [])}, error(permission_error(input,past_end_of_stream,_),_), true),
-		stream_property(S, alias(st_o)),
-		stream_property(S, end_of_stream(past)).
+		stream_property(Stream, alias(st_o)),
+		stream_property(Stream, end_of_stream(Value)).
 
-	succeeds(sics_read_term_3_21) :-
+	test(sics_read_term_3_21, true(Assertion)) :-
 		^^set_text_input('\'a.'),
 		catch({read_term(_,[])}, error(syntax_error(_),_), true),
-		^^check_text_input('').
+		^^text_input_assertion('', Assertion).
 
-	succeeds(sics_read_term_3_22) :-
+	test(sics_read_term_3_22, true(X == Integer)) :-
 		max_min_integer_as_atom(max_integer, Integer, Atom),
 		^^set_text_input([Atom, '. ']),
-		{read(X)},
-		X == Integer.
+		{read(X)}.
 		
-	succeeds(sics_read_term_3_23) :-
+	test(sics_read_term_3_23, true(X == Integer)) :-
 		max_min_integer_as_atom(min_integer, Integer, Atom),
 		^^set_text_input([Atom, '. ']),
-		{read(X)},
-		X == Integer.
+		{read(X)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_read_term_3_24) :-
+	test(lgt_read_term_3_24, true(Term == end_of_file)) :-
 		^^set_text_input(st_o, '', [eof_action(eof_code)]),
 		get_code(st_o, _),
-		{read_term(st_o, Term, [])},
-		Term == end_of_file.
+		{read_term(st_o, Term, [])}.
 
-	throws(lgt_read_term_3_25, error(permission_error(input,stream,s),_)) :-
+	test(lgt_read_term_3_25, error(permission_error(input,stream,s))) :-
 		^^set_text_output(s, ''),
 		{read(s, _)}.
 
-	throws(lgt_read_term_3_26, error(permission_error(input,binary_stream,_),_)) :-
+	test(lgt_read_term_3_26, error(permission_error(input,binary_stream,_))) :-
 		^^set_binary_input(s, []),
 		{read(s, _)}.
 
-	succeeds(lgt_read_term_3_27) :-
+	test(lgt_read_term_3_27, true) :-
 		^^set_text_input('foo(_X,_Y,_x,_y). '),
 		{read_term(T, [singletons(S)])},
-		compound(T), T = foo(A, B, C, D), S == ['_X'=A,'_Y'=B,'_x'=C,'_y'=D].
+		compound(T),
+		^^assertion(T = foo(A, B, C, D)),
+		^^assertion(S == ['_X'=A,'_Y'=B,'_x'=C,'_y'=D]).
 
-	succeeds(lgt_read_term_3_28) :-
+	test(lgt_read_term_3_28, true) :-
 		^^set_text_input(empty, ''),
 		{read_term(empty, T, [variables(VL),variable_names(VN),singletons(VS)])},
-		T == end_of_file, VL == [], VN == [], VS == [].
+		^^assertion(T == end_of_file),
+		^^assertion(VL == []),
+		^^assertion(VN == []),
+		^^assertion(VS == []).
 
 	cleanup :-
 		^^clean_text_input,

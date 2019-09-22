@@ -121,25 +121,25 @@
 <li class="toctree-l3"><a class="reference internal" href="#main-files">Main files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#writing-compiling-and-loading-unit-tests">Writing, compiling, and loading unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-compiling-and-loading-tests">Writing, compiling, and loading tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-dialects">Test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#user-defined-test-dialects">User-defined test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quickcheck">QuickCheck</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#skipping-unit-tests">Skipping unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skipping-tests">Skipping tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-non-deterministic-predicates">Testing non-deterministic predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-generators">Testing generators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-input-output-predicates">Testing input/output predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#suppressing-tested-predicates-output">Suppressing tested predicates output</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#unit-tests-with-timeout-limits">Unit tests with timeout limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tests-with-timeout-limits">Tests with timeout limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setup-and-cleanup-goals">Setup and cleanup goals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-annotations">Test annotations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#debugging-failed-unit-tests">Debugging failed unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#automating-running-unit-tests">Automating running unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automating-running-tests">Automating running tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#utility-predicates">Utility predicates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exporting-unit-test-results-in-xunit-xml-format">Exporting unit test results in xUnit XML format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exporting-unit-test-results-in-the-tap-output-format">Exporting unit test results in the TAP output format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-code-coverage-results-in-xml-format">Exporting code coverage results in XML format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-notes">Other notes</a></li>
@@ -264,8 +264,8 @@ formats of test results and are discussed below.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="writing-compiling-and-loading-unit-tests">
-<span id="id1"></span><h2>Writing, compiling, and loading unit tests<a class="headerlink" href="#writing-compiling-and-loading-unit-tests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="writing-compiling-and-loading-tests">
+<span id="id1"></span><h2>Writing, compiling, and loading tests<a class="headerlink" href="#writing-compiling-and-loading-tests" title="Permalink to this headline">¶</a></h2>
 <p>In order to write your own unit tests, define objects extending the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start from the <code class="docutils literal notranslate"><span class="pre">../../tests-sample.lgt</span></code>
 file. For example:</p>
@@ -630,12 +630,12 @@ QuickCheck by defining a surrogate predicate that calls the predicate
 being tested and performs additional checks on the generated random
 values.</p>
 </div>
-<div class="section" id="skipping-unit-tests">
-<h2>Skipping unit tests<a class="headerlink" href="#skipping-unit-tests" title="Permalink to this headline">¶</a></h2>
-<p>A unit test object can define the <code class="docutils literal notranslate"><span class="pre">condition/0</span></code> predicate (which
-defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>) to test if some necessary condition for running
-the tests holds. The tests are skipped if the call to this predicate
-fails or generates an error.</p>
+<div class="section" id="skipping-tests">
+<h2>Skipping tests<a class="headerlink" href="#skipping-tests" title="Permalink to this headline">¶</a></h2>
+<p>A test object can define the <code class="docutils literal notranslate"><span class="pre">condition/0</span></code> predicate (which defaults
+to <code class="docutils literal notranslate"><span class="pre">true</span></code>) to test if some necessary condition for running the tests
+holds. The tests are skipped if the call to this predicate fails or
+generates an error.</p>
 <p>Individual tests that for some reason should be unconditionally skipped
 can have the test clause head prefixed with the <code class="docutils literal notranslate"><span class="pre">(-)/1</span></code> operator. For
 example:</p>
@@ -703,8 +703,8 @@ test logs. If that output itself is not under testing, you can suppress
 it by using the goals <code class="docutils literal notranslate"><span class="pre">^^suppress_text_output</span></code> or
 <code class="docutils literal notranslate"><span class="pre">^^suppress_binary_output</span></code> at the beginning of the tests.</p>
 </div>
-<div class="section" id="unit-tests-with-timeout-limits">
-<h2>Unit tests with timeout limits<a class="headerlink" href="#unit-tests-with-timeout-limits" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tests-with-timeout-limits">
+<h2>Tests with timeout limits<a class="headerlink" href="#tests-with-timeout-limits" title="Permalink to this headline">¶</a></h2>
 <p>There’s no portable way to call a goal with a timeout limit. However,
 some backend Prolog compilers provide this functionality:</p>
 <ul class="simple">
@@ -721,7 +721,7 @@ can be used to set a limit per test set.</p>
 </div>
 <div class="section" id="setup-and-cleanup-goals">
 <h2>Setup and cleanup goals<a class="headerlink" href="#setup-and-cleanup-goals" title="Permalink to this headline">¶</a></h2>
-<p>A unit test object can define <code class="docutils literal notranslate"><span class="pre">setup/0</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> goals. The
+<p>A test object can define <code class="docutils literal notranslate"><span class="pre">setup/0</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> goals. The
 <code class="docutils literal notranslate"><span class="pre">setup/0</span></code> predicate is called, when defined, before running the object
 unit tests. The <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> predicate is called, when defined, after
 running all the object unit tests. The tests are skipped when the setup
@@ -753,8 +753,8 @@ skipped by writing:</p>
 <p>Annotations are written, by default, between parenthesis after and in
 the same line as the test results.</p>
 </div>
-<div class="section" id="debugging-failed-unit-tests">
-<h2>Debugging failed unit tests<a class="headerlink" href="#debugging-failed-unit-tests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="debugging-failed-tests">
+<h2>Debugging failed tests<a class="headerlink" href="#debugging-failed-tests" title="Permalink to this headline">¶</a></h2>
 <p>Debugging of failed unit tests is usually easy if you use assertions as
 the reason for the assertion failures is printed out. Thus, use
 preferably the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code> dialects with <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code> or
@@ -801,7 +801,7 @@ tests in debug mode and also load the debugger.</p>
 and printed, you will need to compile the entities that you’re testing
 using the flags <code class="docutils literal notranslate"><span class="pre">debug(on)</span></code> and <code class="docutils literal notranslate"><span class="pre">source_data(on)</span></code>. Be aware,
 however, that compiling in debug mode results in a performance penalty.</p>
-<p>A single unit test object may include tests for one or more entities
+<p>A single test object may include tests for one or more entities
 (objects, protocols, and categories). The entities being tested by a
 unit test object for which code coverage information should be collected
 must be declared using the <code class="docutils literal notranslate"><span class="pre">cover/1</span></code> predicate. For example, to
@@ -829,8 +829,8 @@ the depth of printed terms that can be useful:</p>
 <li><p>YAP: <code class="docutils literal notranslate"><span class="pre">write_depth/2-3</span></code> predicates</p></li>
 </ul>
 </div>
-<div class="section" id="automating-running-unit-tests">
-<h2>Automating running unit tests<a class="headerlink" href="#automating-running-unit-tests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="automating-running-tests">
+<h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Permalink to this headline">¶</a></h2>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script for
 automating running unit tests. See the <code class="docutils literal notranslate"><span class="pre">scripts/NOTES.md</span></code> file for
 details. On POSIX systems, assuming Logtalk was installed using one of
@@ -943,8 +943,8 @@ overhead to the timing results.</p>
 <p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object documentation (<code class="docutils literal notranslate"><span class="pre">docs/tools.html</span></code>) for
 further details on these predicates.</p>
 </div>
-<div class="section" id="exporting-unit-test-results-in-xunit-xml-format">
-<h2>Exporting unit test results in xUnit XML format<a class="headerlink" href="#exporting-unit-test-results-in-xunit-xml-format" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exporting-test-results-in-xunit-xml-format">
+<h2>Exporting test results in xUnit XML format<a class="headerlink" href="#exporting-test-results-in-xunit-xml-format" title="Permalink to this headline">¶</a></h2>
 <p>To output test results in the xUnit XML format, simply load the
 <code class="docutils literal notranslate"><span class="pre">xunit_output.lgt</span></code> file before running the tests. This file defines an
 object, <code class="docutils literal notranslate"><span class="pre">xunit_output</span></code>, that intercepts and rewrites unit test
@@ -957,8 +957,8 @@ object defining the tests.</p>
 xUnit report is created in the directory of the first test suite object
 in the set.</p>
 </div>
-<div class="section" id="exporting-unit-test-results-in-the-tap-output-format">
-<h2>Exporting unit test results in the TAP output format<a class="headerlink" href="#exporting-unit-test-results-in-the-tap-output-format" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exporting-test-results-in-the-tap-output-format">
+<h2>Exporting test results in the TAP output format<a class="headerlink" href="#exporting-test-results-in-the-tap-output-format" title="Permalink to this headline">¶</a></h2>
 <p>To output test results in the TAP (Test Anything Protocol) format,
 simply load the <code class="docutils literal notranslate"><span class="pre">tap_output.lgt</span></code> file before running the tests. This
 file defines an object, <code class="docutils literal notranslate"><span class="pre">tap_output</span></code>, that intercepts and rewrites

@@ -46,10 +46,10 @@ This tool can be loaded using the query:
 
    | ?- logtalk_load(lgtunit(loader)).
 
-.. _writing,-compiling,-and-loading-unit-tests:
+.. _writing,-compiling,-and-loading-tests:
 
-Writing, compiling, and loading unit tests
-------------------------------------------
+Writing, compiling, and loading tests
+-------------------------------------
 
 In order to write your own unit tests, define objects extending the
 ``lgtunit`` object. You may start from the ``../../tests-sample.lgt``
@@ -443,13 +443,13 @@ QuickCheck by defining a surrogate predicate that calls the predicate
 being tested and performs additional checks on the generated random
 values.
 
-Skipping unit tests
--------------------
+Skipping tests
+--------------
 
-A unit test object can define the ``condition/0`` predicate (which
-defaults to ``true``) to test if some necessary condition for running
-the tests holds. The tests are skipped if the call to this predicate
-fails or generates an error.
+A test object can define the ``condition/0`` predicate (which defaults
+to ``true``) to test if some necessary condition for running the tests
+holds. The tests are skipped if the call to this predicate fails or
+generates an error.
 
 Individual tests that for some reason should be unconditionally skipped
 can have the test clause head prefixed with the ``(-)/1`` operator. For
@@ -531,8 +531,8 @@ test logs. If that output itself is not under testing, you can suppress
 it by using the goals ``^^suppress_text_output`` or
 ``^^suppress_binary_output`` at the beginning of the tests.
 
-Unit tests with timeout limits
-------------------------------
+Tests with timeout limits
+-------------------------
 
 There's no portable way to call a goal with a timeout limit. However,
 some backend Prolog compilers provide this functionality:
@@ -552,7 +552,7 @@ can be used to set a limit per test set.
 Setup and cleanup goals
 -----------------------
 
-A unit test object can define ``setup/0`` and ``cleanup/0`` goals. The
+A test object can define ``setup/0`` and ``cleanup/0`` goals. The
 ``setup/0`` predicate is called, when defined, before running the object
 unit tests. The ``cleanup/0`` predicate is called, when defined, after
 running all the object unit tests. The tests are skipped when the setup
@@ -589,8 +589,8 @@ skipped by writing:
 Annotations are written, by default, between parenthesis after and in
 the same line as the test results.
 
-Debugging failed unit tests
----------------------------
+Debugging failed tests
+----------------------
 
 Debugging of failed unit tests is usually easy if you use assertions as
 the reason for the assertion failures is printed out. Thus, use
@@ -645,7 +645,7 @@ and printed, you will need to compile the entities that you're testing
 using the flags ``debug(on)`` and ``source_data(on)``. Be aware,
 however, that compiling in debug mode results in a performance penalty.
 
-A single unit test object may include tests for one or more entities
+A single test object may include tests for one or more entities
 (objects, protocols, and categories). The entities being tested by a
 unit test object for which code coverage information should be collected
 must be declared using the ``cover/1`` predicate. For example, to
@@ -675,8 +675,8 @@ the depth of printed terms that can be useful:
 -  XSB: ``set_file_write_depth/1`` predicate
 -  YAP: ``write_depth/2-3`` predicates
 
-Automating running unit tests
------------------------------
+Automating running tests
+------------------------
 
 You can use the ``scripts/logtalk_tester.sh`` Bash shell script for
 automating running unit tests. See the ``scripts/NOTES.md`` file for
@@ -771,8 +771,8 @@ overhead to the timing results.
 Consult the ``lgtunit`` object documentation (``docs/tools.html``) for
 further details on these predicates.
 
-Exporting unit test results in xUnit XML format
------------------------------------------------
+Exporting test results in xUnit XML format
+------------------------------------------
 
 To output test results in the xUnit XML format, simply load the
 ``xunit_output.lgt`` file before running the tests. This file defines an
@@ -788,8 +788,8 @@ When running a set of test suites as a single unified suite, the single
 xUnit report is created in the directory of the first test suite object
 in the set.
 
-Exporting unit test results in the TAP output format
-----------------------------------------------------
+Exporting test results in the TAP output format
+-----------------------------------------------
 
 To output test results in the TAP (Test Anything Protocol) format,
 simply load the ``tap_output.lgt`` file before running the tests. This
