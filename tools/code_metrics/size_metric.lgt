@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2018/06/08,
+		date is 2019/09/23,
 		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).'
 	]).
 
@@ -61,42 +61,58 @@
 		os::file_size(File, Size).
 
 	rdirectory_score(Directory, TotalSize) :-
-		setof(
-			SubDirectory,
-			^^sub_directory(Directory, SubDirectory),
-			SubDirectories
+		directory_score(Directory, DirectorySize),
+		(	setof(
+				SubDirectory,
+				^^sub_directory(Directory, SubDirectory),
+				SubDirectories
+			) ->
+			true
+		;	SubDirectories = []
 		),
 		findall(
-			Size,
+			SubDirectorySize,
 			(	list::member(SubDirectory, SubDirectories),
-				directory_file_size(SubDirectory, _, Size)
+				directory_file_size(SubDirectory, _, SubDirectorySize)
 			),
-			Sizes
+			SubDirectorySizes
 		),
-		numberlist::sum(Sizes, TotalSize).
+		numberlist::sum([DirectorySize| SubDirectorySizes], TotalSize).
 
 	process_rdirectory(Directory) :-
 		rdirectory_score(Directory, TotalSize),
 		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
 
+	process_library(Library) :-
+		logtalk::expand_library_path(Library, Directory),
+		process_directory(Directory).
+
 	rlibrary_score(Library, TotalSize) :-
-		setof(
-			Path,
-			^^sub_library(Library, Path),
-			Paths
+		library_score(Library, LibrarySize),
+		(	setof(
+				SubLibrary,
+				^^sub_library(Library, SubLibrary),
+				SubLibraries
+			) ->
+			true
+		;	SubLibraries = []
 		),
 		findall(
-			Size,
-			(	list::member(Path, Paths),
-				directory_file_size(Path, _, Size)
+			SubLibrarySize,
+			(	list::member(SubLibrary, SubLibraries),
+				library_score(SubLibrary, SubLibrarySize)
 			),
-			Sizes
+			SubLibrarySizes
 		),
-		numberlist::sum(Sizes, TotalSize).
+		numberlist::sum([LibrarySize| SubLibrarySizes], TotalSize).
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, TotalSize),
 		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).		
+
+	library_score(Library, Size) :-
+		logtalk::expand_library_path(Library, Directory),
+		directory_score(Directory, Size).
 
 	all_score(TotalSize) :-
 		findall(

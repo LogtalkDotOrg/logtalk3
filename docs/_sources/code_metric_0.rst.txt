@@ -11,8 +11,8 @@
 Core predicates for computing source code metrics.
 
 | **Author:** Ebrahim Azarisooreh and Paulo Moura
-| **Version:** 0.8
-| **Date:** 2018/2/18
+| **Version:** 0.9
+| **Date:** 2019/9/23
 
 | **Compilation flags:**
 |    ``static``
@@ -471,6 +471,29 @@ Recursively process a directory of source files.
 
 .. raw:: html
 
+   <div id="process_library/1"> </div>
+
+.. index:: process_library/1
+.. _code_metric/0::process_library/1:
+
+``process_library/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Processes a library of source files.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``process_library(Library)``
+| **Mode and number of proofs:**
+|    ``process_library(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="process_rlibrary/1"> </div>
 
 .. index:: process_rlibrary/1
@@ -485,7 +508,7 @@ Recursively process a library of source files.
 |    ``static``
 
 | **Template:**
-|    ``process_rlibrary(Path)``
+|    ``process_rlibrary(Library)``
 | **Mode and number of proofs:**
 |    ``process_rlibrary(+atom)`` - ``one``
 
@@ -546,13 +569,13 @@ Enumerates, by backtracking, all directory sub-directories containing loaded fil
 ``sub_library/2``
 ^^^^^^^^^^^^^^^^^
 
-Enumerates, by backtracking, all library sub-library paths.
+Enumerates, by backtracking, all library sub-libraries.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``sub_library(Library,SubLibraryPath)``
+|    ``sub_library(Library,SubLibrary)``
 | **Mode and number of proofs:**
 |    ``sub_library(+atom,-atom)`` - ``one``
 

@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.9,
+		version is 0.11,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/07/16,
+		date is 2019/09/23,
 		comment is 'Number of entity clauses metric. The score is represented using the compound term ``number_of_clauses(Total, User)``.'
 	]).
 
@@ -79,10 +79,14 @@
 		file_score(File, Nocs).
 
 	rdirectory_score(Directory, Score) :-
-		setof(
-			SubDirectory,
-			^^sub_directory(Directory, SubDirectory),
-			SubDirectories
+		directory_score(Directory, DirectoryScore),
+		(	setof(
+				SubDirectory,
+				^^sub_directory(Directory, SubDirectory),
+				SubDirectories
+			) ->
+			true
+		;	SubDirectories = []
 		),
 		findall(
 			FileScore,
@@ -91,7 +95,7 @@
 			),
 			FileScores
 		),
-		sum_scores(FileScores, Score).
+		sum_scores([DirectoryScore| FileScores], Score).
 
 	process_rdirectory(Directory) :-
 		rdirectory_score(Directory, Score),
@@ -106,19 +110,23 @@
 		logtalk::print_message(information, code_metrics, Score).
 
 	rlibrary_score(Library, Score) :-
-		setof(
-			Path,
-			^^sub_library(Library, Path),
-			Paths
+		library_score(Library, LibraryScore),
+		(	setof(
+				SubLibrary,
+				^^sub_library(Library, SubLibrary),
+				SubLibraries
+			) ->
+			true
+		;	SubLibraries = []
 		),
 		findall(
-			FileScore,
-			(	list::member(Path, Paths),
-				directory_file_score(Path, _, FileScore)
+			SubLibraryScore,
+			(	list::member(SubLibrary, SubLibraries),
+				library_score(SubLibrary, SubLibraryScore)
 			),
-			FileScores
+			SubLibraryScores
 		),
-		sum_scores(FileScores, Score).
+		sum_scores([LibraryScore| SubLibraryScores], Score).
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, Score),

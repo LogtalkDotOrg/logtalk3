@@ -22,9 +22,9 @@
 :- category(code_metrics_messages).
 
 	:- info([
-		version is 0.5,
-		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/31,
+		version is 0.6,
+		author is 'Ebrahim Azarisooreh and Paulo Moura',
+		date is 2019/09/23,
 		comment is 'Message translations for the ``code_metrics`` tool.'
 	]).
 
@@ -53,7 +53,7 @@
 
 	message_tokens(scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)) -->
 		{ Args = [Type, Year, Month, Day, Hours, Minutes, Seconds] },
-		['~w analysis started at ~w/~w/~w, ~w:~w:~w'-Args, nl].
+		['~w analysis started at ~w/~w/~w, ~w:~w:~w'-Args, nl, nl].
 
 	message_tokens(scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)) -->
 		{ Args = [Type, Year, Month, Day, Hours, Minutes, Seconds] },

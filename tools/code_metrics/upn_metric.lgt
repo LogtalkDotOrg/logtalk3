@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/07/18,
+		date is 2019/09/23,
 		comment is 'Number of unique predicates nodes metric. The nodes include called and updated predicates independently of where they are defined. The score is represented by a non-negative integer.'
 	]).
 
@@ -89,19 +89,23 @@
 		file_score(File, Nocs).
 
 	rdirectory_score(Directory, Score) :-
-		setof(
-			SubDirectory,
-			^^sub_directory(Directory, SubDirectory),
-			SubDirectories
+		directory_score(Directory, DirectoryScore),
+		(	setof(
+				SubDirectory,
+				^^sub_directory(Directory, SubDirectory),
+				SubDirectories
+			) ->
+			true
+		;	SubDirectories = []
 		),
 		findall(
-			DirectoryScore,
+			SubDirectoryScore,
 			(	list::member(SubDirectory, SubDirectories),
-				directory_file_score(SubDirectory, _, DirectoryScore)
+				directory_file_score(SubDirectory, _, SubDirectoryScore)
 			),
-			DirectoryScores
+			SubDirectoryScores
 		),
-		sum(DirectoryScores, Score).
+		sum([DirectoryScore| SubDirectoryScores], Score).
 
 	process_rdirectory(Directory) :-
 		rdirectory_score(Directory, Score),
@@ -116,19 +120,23 @@
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).		
 
 	rlibrary_score(Library, Score) :-
-		setof(
-			Path,
-			^^sub_library(Library, Path),
-			Paths
+		library_score(Library, LibraryScore),
+		(	setof(
+				SubLibrary,
+				^^sub_library(Library, SubLibrary),
+				SubLibraries
+			) ->
+			true
+		;	SubLibraries = []
 		),
 		findall(
-			DirectoryScore,
-			(	list::member(Path, Paths),
-				directory_file_score(Path, _, DirectoryScore)
+			SubLibraryScore,
+			(	list::member(SubLibrary, SubLibraries),
+				library_score(SubLibrary, SubLibraryScore)
 			),
-			DirectoryScores
+			SubLibraryScores
 		),
-		sum(DirectoryScores, Score).
+		sum([LibraryScore| SubLibraryScores], Score).
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, Score),

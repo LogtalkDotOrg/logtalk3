@@ -34,6 +34,19 @@ mechanisms when compiling modules as objects.
 Tools
 -----
 
+* CHANGED: The `code_metric::sub_library/2` protected predicate to return
+sub-library names instead of sub-library paths.
+
+* CHANGED: The `code_metric::process_rlibrary/1` protected predicate to take
+as argument a library name instead of a library path.
+
+* FIXED: Missing scope directive for the `code_metric::process_library/1`
+protected predicate.
+
+* FIXED: The `code_metrics` tool processing of predicates `rdirectory_score/2`
+and `rlibrary_score/2` for the `noc_metric`, `nor_metric`, `size_metric`, and
+`upn_metric` metrics.
+
 * FIXED: Missing additional `mode/2` directives for the `lgtunit` object
 `set_text_input/1-3`, `set_text_output/1-2`, and `create_text_file/2`
 predicates which also accept a list of atoms.

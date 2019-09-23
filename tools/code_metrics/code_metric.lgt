@@ -22,9 +22,9 @@
 :- category(code_metric).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/02/18,
+		date is 2019/09/23,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -164,11 +164,18 @@
 		argnames is ['Path']
 	]).
 
+	:- protected(process_library/1).
+	:- mode(process_library(+atom), one).
+	:- info(process_library/1, [
+		comment is 'Processes a library of source files.',
+		argnames is ['Library']
+	]).
+
 	:- protected(process_rlibrary/1).
 	:- mode(process_rlibrary(+atom), one).
 	:- info(process_rlibrary/1, [
 		comment is 'Recursively process a library of source files.',
-		argnames is ['Path']
+		argnames is ['Library']
 	]).
 
 	:- protected(process_all/0).
@@ -187,8 +194,8 @@
 	:- protected(sub_library/2).
 	:- mode(sub_library(+atom, -atom), one).
 	:- info(sub_library/2, [
-		comment is 'Enumerates, by backtracking, all library sub-library paths.',
-		argnames is ['Library', 'SubLibraryPath']
+		comment is 'Enumerates, by backtracking, all library sub-libraries.',
+		argnames is ['Library', 'SubLibrary']
 	]).
 
 	:- uses(logtalk, [print_message/3]).
@@ -309,19 +316,23 @@
 		).
 
 	process_rdirectory(Directory) :-
-		setof(
-			SubDirectory,
-			::sub_directory(Directory, SubDirectory),
-			SubDirectories
+		(	setof(
+				SubDirectory,
+				::sub_directory(Directory, SubDirectory),
+				SubDirectories
+			) ->
+			true
+		;	SubDirectories = []
 		),
 		forall(
-			member(SubDirectory, SubDirectories),
+			member(SubDirectory, [Directory| SubDirectories]),
 			::process_directory(SubDirectory)
 		).
 
 	sub_directory(Directory, SubDirectory) :-
 		logtalk::loaded_file(Path),
 		os::decompose_file_name(Path, SubDirectory, _),
+		Directory \== SubDirectory,
 		atom_concat(Directory, _RelativePath, SubDirectory).
 
 	%%%%%%%%%%%%%%%%%%%
@@ -329,37 +340,44 @@
 	%%%%%%%%%%%%%%%%%%%
 
 	library(Library) :-
-		(	logtalk::expand_library_path(Library, Path) ->
+		(	logtalk_library_path(Library, _) ->
 			write_scan_header('Library'),
-			::process_directory(Path),
+			::process_library(Library),
 			write_scan_footer('Library')
 		;	print_message(warning, code_metrics, unknown(library,Library)),
 			fail
 		).
+
+	process_library(Library) :-
+		logtalk::expand_library_path(Library, LibraryPath),
+		::process_directory(LibraryPath).
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% Recursive library scans %%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	rlibrary(Library) :-
-		(	logtalk::expand_library_path(Library, TopPath) ->
+		(	logtalk_library_path(Library, _) ->
 			write_scan_header('Recursive library'),
-			::process_rlibrary(TopPath),
+			::process_rlibrary(Library),
 			write_scan_footer('Recursive library')
 		;	print_message(warning, code_metrics, unknown(library,Library)),
 			fail
 		).
 
-	process_rlibrary(TopPath) :-
+	process_rlibrary(Library) :-
+		::process_library(Library),
 		forall(
-			sub_library(TopPath, LibraryPath),
-			::process_directory(LibraryPath)
+			sub_library(Library, SubLibrary),
+			::process_library(SubLibrary)
 		).
 
-	sub_library(TopPath, LibraryPath) :-
-		logtalk_library_path(Library, _),
-		logtalk::expand_library_path(Library, LibraryPath),
-		atom_concat(TopPath, _RelativePath, LibraryPath).
+	sub_library(Library, SubLibrary) :-
+		logtalk::expand_library_path(Library, Path),
+		logtalk_library_path(SubLibrary, _),
+		Library \== SubLibrary,
+		logtalk::expand_library_path(SubLibrary, SubPath),
+		atom_concat(Path, _RelativePath, SubPath).
 
 	%%%%%%%%%%%%%%%%%%%%%%%
 	%% Scan all entities %%
