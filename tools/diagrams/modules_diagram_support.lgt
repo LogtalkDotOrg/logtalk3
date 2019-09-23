@@ -21,9 +21,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.18,
+		version is 0.19,
 		author is 'Paulo Moura',
-		date is 2019/04/30,
+		date is 2019/09/23,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -228,25 +228,6 @@
 			 	Callee = CalleeFunctor/CalleeArity
 			 )
 			}.
-
-		module_predicate_properties(Module, Functor/Arity, Properties) :-
-			functor(Predicate, Functor, Arity),
-			(	{predicate_property(':'(Module,Predicate), (dynamic))} ->
-				Properties = [(dynamic)| Properties2]
-			;	Properties = [static| Properties2]
-			),
-			(	{predicate_property(':'(Module,Predicate), (multifile))} ->
-				Properties2 = [(multifile)| Properties1]
-			;	Properties2 = Properties1
-			),
-			(	{predicate_property(':'(Module,Predicate), line_count(Line))} ->
-				Properties1 = [line_count(Line)| Properties0]
-			;	Properties1 = Properties0
-			),
-			(	{predicate_property(':'(Module,Predicate), number_of_clauses(Count))} ->
-				Properties0 = [number_of_clauses(Count)]
-			;	Properties0 = []
-			).
 
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File).

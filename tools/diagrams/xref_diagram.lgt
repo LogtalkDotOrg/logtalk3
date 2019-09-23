@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.58,
+		version is 2.59,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019/09/23,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -343,18 +343,6 @@
 		number_codes(Arity, ArityCodes),
 		atom_codes(ArityAtom, ArityCodes),
 		atom_concat(TargetValue0, ArityAtom, TargetValue).
-
-	underscores_to_dashes(Atom, ConvertedAtom) :-
-		atom_chars(Atom, Chars),
-		list_underscores_to_dashes(Chars, ConvertedChars),
-		atom_chars(ConvertedAtom, ConvertedChars).
-
-	list_underscores_to_dashes([], []).
-	list_underscores_to_dashes(['_'| Chars], ['-'| ConvertedChars]) :-
-		!,
-		list_underscores_to_dashes(Chars, ConvertedChars).
-	list_underscores_to_dashes([Char| Chars], [Char| ConvertedChars]) :-
-		list_underscores_to_dashes(Chars, ConvertedChars).
 
 	add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions) :-
 		(	member(line_count(Line), Properties),

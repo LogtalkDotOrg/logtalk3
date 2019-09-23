@@ -41,6 +41,8 @@ predicates which also accept a list of atoms.
 * FIXED: Sample code in the `lgtunit` tool documentation on user-defined test
 dialects.
 
+* CLEANUP: Dead code in the `diagrams` tool.
+
 Tests
 -----
 
