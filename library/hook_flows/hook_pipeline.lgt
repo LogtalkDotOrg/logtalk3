@@ -25,9 +25,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1.02,
+		version is 1.03,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019/09/23,
 		comment is 'Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.',
 		parameters is ['Pipeline'-'List of hook objects'],
 		remarks is [
@@ -48,10 +48,10 @@
 
 	term_expansion_pipeline_all([], _, []) :-
 		!.
-	term_expansion_pipeline_all([Term| Terms], Hook, [TermExpansion| TermsExpansion]) :-
+	term_expansion_pipeline_all([Term| Terms], Hook, [Expansion| Expansions]) :-
 		!,
-		Hook::expand_term(Term, TermExpansion),
-		term_expansion_pipeline_all(Terms, Hook, TermsExpansion).
+		Hook::expand_term(Term, Expansion),
+		term_expansion_pipeline_all(Terms, Hook, Expansions).
 	term_expansion_pipeline_all(Term, Hook, Expansion) :-
 		Hook::expand_term(Term, Expansion).
 
