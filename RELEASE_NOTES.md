@@ -24,6 +24,12 @@ RELEASE NOTES
 3.31.0 - October ??, 2019
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Support for compiling Prolog modules as objects when the modules
+export built-in predicates.
+
 Documentation
 -------------
 

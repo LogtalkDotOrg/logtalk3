@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 30, 0, stable)).
+'$lgt_version_data'(logtalk(3, 31, 0, b01)).
 
 
 
@@ -14239,6 +14239,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
 
 '$lgt_compile_body'(Pred, fail, '$lgt_debug'(goal(Pred, fail), ExCtx), Ctx) :-
+	% take into account the common practice of defining
+	% Prolog modules that export built-in predicates
+	(	'$lgt_pp_module_'(_) ->
+		% compiling a module as an object
+		\+ '$lgt_built_in_predicate'(Pred)
+	;	true
+	),
 	functor(Pred, Functor, Arity),
 	(	'$lgt_pp_public_'(Functor, Arity, _, _)
 	;	'$lgt_pp_protected_'(Functor, Arity, _, _)
