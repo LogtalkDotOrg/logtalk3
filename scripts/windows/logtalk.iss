@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on September 19, 2019
+; Last updated on September 24, 2019
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -783,10 +783,13 @@ end;
 procedure InitializeWizard;
 var
   Version, InstalledVersion: String;
-  LOGTALKHOME, LOGTALKUSER: String;
+  DIR, LOGTALKHOME, LOGTALKUSER: String;
 begin
   CancelWithoutPrompt := false;
-  if IsAdminLoggedOn then
+  DIR := ExpandConstant('{param:DIR}');
+  if DIR <> '' then
+    WizardForm.DirEdit.Text := DIR
+  else if IsAdminLoggedOn then
     if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'LOGTALKHOME', LOGTALKHOME) then
       WizardForm.DirEdit.Text := LOGTALKHOME
     else

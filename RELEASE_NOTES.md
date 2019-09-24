@@ -77,6 +77,9 @@ YAP as the backend Prolog compiler.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The Windows installer to allow passing the installation directory
+using the command-line option `/DIR=path`.
+
 * FIXED: The Windows installer to find a GNU Prolog 1.4.5 installation, which
 uses a registry key different from the one used in previous versions.
 
