@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.17,
+		version is 1.18,
 		author is 'Paulo Moura',
-		date is 2019/03/15,
+		date is 2019/09/27,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -38,9 +38,9 @@
 	]).
 
 	:- public(as_list/2).
-	:- mode(as_list(+difference_list, -list), one).
+	:- mode(as_list(@difference_list, -list), one).
 	:- info(as_list/2, [
-		comment is 'Converts a difference list to a normal list.',
+		comment is 'Returns a list with the elements of the difference list.',
 		argnames is ['DiffList', 'List']
 	]).
 

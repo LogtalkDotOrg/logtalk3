@@ -37,6 +37,11 @@ Documentation
 a discussion on how to use hook objects to deal with Prolog term-expansion
 mechanisms when compiling modules as objects.
 
+Library
+-------
+
+* FIXED: The `mode/2` directive for the `difflist` predicate `as_list/2`.
+
 Tools
 -----
 

@@ -11,8 +11,8 @@
 Difference list predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1.17
-| **Date:** 2019/3/15
+| **Version:** 1.18
+| **Date:** 2019/9/27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -68,7 +68,7 @@ Adds a term to the end of a difference list.
 ``as_list/2``
 ^^^^^^^^^^^^^
 
-Converts a difference list to a normal list.
+Returns a list with the elements of the difference list.
 
 | **Compilation flags:**
 |    ``static``
@@ -76,7 +76,7 @@ Converts a difference list to a normal list.
 | **Template:**
 |    ``as_list(DiffList,List)``
 | **Mode and number of proofs:**
-|    ``as_list(+difference_list,-list)`` - ``one``
+|    ``as_list(@difference_list,-list)`` - ``one``
 
 
 ------------
