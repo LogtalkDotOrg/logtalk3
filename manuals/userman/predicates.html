@@ -256,7 +256,9 @@
 categories. Protocols can only contain predicate directives. From the
 point-of-view of a traditional imperative object-oriented language,
 predicates allows both object state and object behavior to be represented.
-Mutable object state can be represented using dynamic object predicates.</p>
+Mutable object state can be represented using dynamic object predicates
+but should only be used when strictly necessary as it breaks declarative
+semantics.</p>
 <div class="section" id="reserved-predicate-names">
 <span id="predicates-reserved"></span><h2>Reserved predicate names<a class="headerlink" href="#reserved-predicate-names" title="Permalink to this headline">¶</a></h2>
 <p>For practical and performance reasons, some predicate names have a fixed
@@ -273,11 +275,17 @@ the corresponding built-in protocol is missing.</p>
 </div>
 <div class="section" id="declaring-predicates">
 <span id="predicates-declaring"></span><h2>Declaring predicates<a class="headerlink" href="#declaring-predicates" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk provides a clear distinction between declaring and defining a
+predicate and thus clear closed world assumption semantics. Messages
+or calls for declared but undefined predicates fail. Messages or calls
+for unknown (not declared) predicates throw an error. Note that this is
+a fundamental requirement for supporting protocols: we must be able to
+declare a predicate without necessarily defining it.</p>
 <p>All object (or category) predicates that we want to access from other
 objects (or categories) must be explicitly declared. A predicate
 declaration must contain, at least, a <em>scope</em> directive. Other
 directives may be used to document the predicate or to ensure proper
-compilation of the predicate definitions.</p>
+compilation of the predicate clauses.</p>
 <div class="section" id="scope-directives">
 <span id="predicates-scope"></span><h3>Scope directives<a class="headerlink" href="#scope-directives" title="Permalink to this headline">¶</a></h3>
 <p>A predicate scope directive specifies <em>from where</em> the predicate can be

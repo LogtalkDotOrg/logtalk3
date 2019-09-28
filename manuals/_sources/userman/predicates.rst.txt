@@ -24,7 +24,9 @@ Predicate directives and clauses can be encapsulated inside objects and
 categories. Protocols can only contain predicate directives. From the
 point-of-view of a traditional imperative object-oriented language,
 predicates allows both object state and object behavior to be represented.
-Mutable object state can be represented using dynamic object predicates.
+Mutable object state can be represented using dynamic object predicates
+but should only be used when strictly necessary as it breaks declarative
+semantics.
 
 .. _predicates_reserved:
 
@@ -48,11 +50,18 @@ the corresponding built-in protocol is missing.
 Declaring predicates
 --------------------
 
+Logtalk provides a clear distinction between declaring and defining a
+predicate and thus clear closed world assumption semantics. Messages
+or calls for declared but undefined predicates fail. Messages or calls
+for unknown (not declared) predicates throw an error. Note that this is
+a fundamental requirement for supporting protocols: we must be able to
+declare a predicate without necessarily defining it.
+
 All object (or category) predicates that we want to access from other
 objects (or categories) must be explicitly declared. A predicate
 declaration must contain, at least, a *scope* directive. Other
 directives may be used to document the predicate or to ensure proper
-compilation of the predicate definitions.
+compilation of the predicate clauses.
 
 .. _predicates_scope:
 
