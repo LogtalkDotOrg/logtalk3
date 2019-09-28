@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on September 10, 2019
+%  Last updated on September 28, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -633,17 +633,19 @@
 
 '$lgt_yap_directive_expansion'(yap_flag(Flag, Value), (:- set_prolog_flag(Flag, Value))).
 
-'$lgt_yap_directive_expansion'(use_module(File, Imports), (:- use_module(Module, Imports))) :-
+'$lgt_yap_directive_expansion'(use_module(File, Imports0), (:- use_module(Module, Imports))) :-
 	logtalk_load_context(entity_type, module),
 	% we're compiling a module as an object; assume referenced modules are also compiled as objects
 	!,
-	'$lgt_yap_list_of_exports'(File, Module, _).
+	'$lgt_yap_list_of_exports'(File, Module, Exports),
+	'$lgt_yap_filter_imports'(Imports0, Exports, Imports).
 
-'$lgt_yap_directive_expansion'(use_module(File, Imports), [{:- use_module(File, Imports)}, (:- use_module(Module, Imports))]) :-
+'$lgt_yap_directive_expansion'(use_module(File, Imports0), [{:- use_module(File, Imports0)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
 	% object or category using a Prolog module
-	'$lgt_yap_list_of_exports'(File, Module, _),
-	use_module(File, Imports).
+	'$lgt_yap_list_of_exports'(File, Module, Exports),
+	'$lgt_yap_filter_imports'(Imports0, Exports, Imports),
+	use_module(File, Imports0).
 
 '$lgt_yap_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
 	logtalk_load_context(entity_type, module),
@@ -717,6 +719,18 @@
 		read(Stream, SecondTerm),
 		SecondTerm = (:- module(Module, Exports))
 	;	fail
+	).
+
+
+'$lgt_yap_filter_imports'([], _, []).
+'$lgt_yap_filter_imports'([Import| Imports], _, [Import| Imports]).
+'$lgt_yap_filter_imports'(except(Excluded), Exports, Imports) :-
+	findall(
+		Import,
+		(	'$lgt_member'(Import, Exports),
+			\+ '$lgt_member'(Import, Excluded)
+		),
+		Imports
 	).
 
 

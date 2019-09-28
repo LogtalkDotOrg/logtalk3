@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on September 10, 2019
+%  Last updated on September 28, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -670,21 +670,24 @@
 '$lgt_swi_directive_expansion'(op(Priority, Specifier, Module:Operators), {:- op(Priority, Specifier, Operators)}) :-
 	Module == user.
 
-'$lgt_swi_directive_expansion'(use_module(File, Imports), (:- use_module(Module, Imports))) :-
+'$lgt_swi_directive_expansion'(use_module(File, Imports0), (:- use_module(Module, Imports))) :-
 	logtalk_load_context(entity_type, module),
 	% we're compiling a module as an object; assume referenced modules are also compiled as objects
 	!,
-	'$lgt_swi_list_of_exports'(File, Module, _).
+	'$lgt_swi_list_of_exports'(File, Module, Exports),
+	'$lgt_swi_filter_imports'(Imports0, Exports, Imports).
 
-'$lgt_swi_directive_expansion'(use_module(File, Imports), [{:- use_module(File, Imports)}, (:- use_module(Module, Imports))]) :-
+'$lgt_swi_directive_expansion'(use_module(File, Imports0), [{:- use_module(File, Imports0)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
 	% object or category using a Prolog module
-	'$lgt_swi_list_of_exports'(File, Module, _),
-	use_module(File, Imports).
+	'$lgt_swi_list_of_exports'(File, Module, Exports),
+	'$lgt_swi_filter_imports'(Imports0, Exports, Imports),
+	use_module(File, Imports0).
 
 '$lgt_swi_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
 	logtalk_load_context(entity_type, module),
-	% we're compiling a module as an object; assume referenced modules are also compiled as objects
+	% we're compiling a module as an object;
+	% assume referenced modules are also compiled as objects
 	!,
 	'$lgt_swi_list_of_exports'(File, Module, Imports).
 
@@ -822,6 +825,18 @@
 		read(Stream, SecondTerm),
 		SecondTerm = (:- module(Module, Exports))
 	;	fail
+	).
+
+
+'$lgt_swi_filter_imports'([], _, []).
+'$lgt_swi_filter_imports'([Import| Imports], _, [Import| Imports]).
+'$lgt_swi_filter_imports'(except(Excluded), Exports, Imports) :-
+	findall(
+		Import,
+		(	'$lgt_member'(Import, Exports),
+			\+ '$lgt_member'(Import, Excluded)
+		),
+		Imports
 	).
 
 

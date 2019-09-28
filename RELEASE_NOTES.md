@@ -30,6 +30,12 @@ Logtalk compiler and runtime
 * ADDED: Support for compiling Prolog modules as objects when the modules
 export built-in predicates.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Support to the SWI-Prolog and YAP adapter files to expand Prolog
+`use_module/2` directives with an `except/1` second argument.
+
 Documentation
 -------------
 
