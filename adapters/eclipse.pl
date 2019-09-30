@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on September 10, 2019
+%  Last updated on September 30, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -630,6 +630,8 @@ forall(Generate, Test) :-
 	% allow first-argument indexing
 	catch('$lgt_eclipse_directive_expansion'(Directive, Expanded), _, fail).
 
+
+'$lgt_eclipse_directive_expansion'(module(Spec), (:- module(Spec, []))).
 
 '$lgt_eclipse_directive_expansion'(mode(_), []).
 '$lgt_eclipse_directive_expansion'(comment(_, _), []).
