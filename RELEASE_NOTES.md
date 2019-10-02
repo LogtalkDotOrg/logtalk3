@@ -59,6 +59,8 @@ Library
 Tools
 -----
 
+* UPDATED: The `tutor` tool for the new lint check on entity parameters.
+
 * CHANGED: The `code_metric::sub_library/2` protected predicate to return
 sub-library names instead of sub-library paths.
 
