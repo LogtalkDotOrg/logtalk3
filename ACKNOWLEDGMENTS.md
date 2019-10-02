@@ -63,6 +63,7 @@ CONTRIBUTORS
 * Neng-Fa Zhou (bug reports)
 * Nicolas Pelletier (bug reports, text editor support)
 * Parker Jones (testing, unit tests, bug reports)
+* Paul Brown (bug reports and suggestions)
 * Paul Crocker (testing, multi-threading and meta-predicates examples, bug reports)
 * Paul Fodor (library enhancements)
 * Paul Tarau (feedback on threaded engines API and examples)

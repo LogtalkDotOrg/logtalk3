@@ -121,5 +121,5 @@ Prolog or Quintus Prolog as backend compilers.
 Other notes
 -----------
 
-All source files are formatted using tabs (the recommended setting is a
-tab width equivalent to 4 spaces).
+All source files are indented using tabs (a common setting is a tab
+width equivalent to 4 spaces).

@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 31, 0, b01)).
+'$lgt_version_data'(logtalk(3, 31, 0, b02)).
 
 
 
@@ -8839,7 +8839,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_print_message'(silent(compiling), compiling_entity(object, Obj)),
 		'$lgt_compile_object_relations'(Relations, Obj, Ctx),
 		'$lgt_compile_object_identifier'(Obj, Ctx),
-		'$lgt_save_parameter_variables'(Obj)
+		'$lgt_comp_ctx_term'(Ctx, Term),
+		'$lgt_save_parameter_variables'(Obj, Term)
 	).
 
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
@@ -8944,7 +8945,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_print_message'(silent(compiling), compiling_entity(category, Ctg)),
 		'$lgt_compile_category_identifier'(Ctg, Ctx),
 		'$lgt_compile_category_relations'(Relations, Ctg, Ctx),
-		'$lgt_save_parameter_variables'(Ctg)
+		'$lgt_comp_ctx_term'(Ctx, Term),
+		'$lgt_save_parameter_variables'(Ctg, Term)
 	).
 
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
@@ -16685,35 +16687,37 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_save_parameter_variables'(@object_identifier)
-% '$lgt_save_parameter_variables'(@category_identifier)
+% '$lgt_save_parameter_variables'(@object_identifier, @callable)
+% '$lgt_save_parameter_variables'(@category_identifier, @callable)
 %
 % saves the parameter variable names and positions found
 % in parametric entity identifiers for later processing
+%
+% the original term is passed to the predicate to unify the variables
+% in the entity with the variables in the variable names list
 
-'$lgt_save_parameter_variables'(Entity) :-
+'$lgt_save_parameter_variables'(Entity, Term) :-
 	compound(Entity),
-	'$lgt_pp_term_variable_names_file_lines_'(_, VariableNames, _, _),
-	'$lgt_parameter_variable_pairs'(VariableNames, 1, ParameterVariablePairs),
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, _, _),
+	Entity =.. [_| Arguments],
+	'$lgt_parameter_variable_pairs'(VariableNames, Arguments, ParameterVariablePairs),
 	ParameterVariablePairs \== [],
 	!,
 	assertz('$lgt_pp_parameter_variables_'(ParameterVariablePairs)).
 
-'$lgt_save_parameter_variables'(_).
+'$lgt_save_parameter_variables'(_, _).
 
 
 '$lgt_parameter_variable_pairs'([], _, []).
 
-'$lgt_parameter_variable_pairs'([VariableName=_| VariableNames], Position, [VariableName-Position| ParameterVariablePairs]) :-
+'$lgt_parameter_variable_pairs'([VariableName=Variable| VariableNames], Arguments, [VariableName-Position| ParameterVariablePairs]) :-
 	'$lgt_parameter_variable_name'(VariableName),
+	'$lgt_parameter_variable_position'(Arguments, Variable, 1, Position),
 	!,
-	NextPosition is Position + 1,
-	'$lgt_parameter_variable_pairs'(VariableNames, NextPosition, ParameterVariablePairs).
+	'$lgt_parameter_variable_pairs'(VariableNames, Arguments, ParameterVariablePairs).
 
-'$lgt_parameter_variable_pairs'([_| VariableNames], Position, ParameterVariablePairs) :-
-	NextPosition is Position + 1,
-	'$lgt_parameter_variable_pairs'(VariableNames, NextPosition, ParameterVariablePairs).
-
+'$lgt_parameter_variable_pairs'([_| VariableNames], Arguments, ParameterVariablePairs) :-
+	'$lgt_parameter_variable_pairs'(VariableNames, Arguments, ParameterVariablePairs).
 
 
 % '$lgt_parameter_variable_name'(+atom)
@@ -16724,6 +16728,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	sub_atom(VariableName, 0, 1, After, '_'),
 	After >= 2,
 	sub_atom(VariableName, _, 1, 0, '_').
+
+
+% '$lgt_parameter_variable_position'(@list, @variable, +integer, -integer)
+%
+% finds the position of a parameter variable in the entity arguments
+
+'$lgt_parameter_variable_position'([Argument| _], Variable, Position, Position) :-
+	Argument == Variable,
+	!.
+
+'$lgt_parameter_variable_position'([_| Arguments], Variable, Position0, Position) :-
+	Position1 is Position0 + 1,
+	'$lgt_parameter_variable_position'(Arguments, Variable, Position1, Position).
 
 
 

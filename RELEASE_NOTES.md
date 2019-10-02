@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * ADDED: Support for compiling Prolog modules as objects when the modules
 export built-in predicates.
 
+* FIXED: Compilation of parametric entities where one (or more) of the entity
+arguments is bound at compile time. Thanks to Paul Brown for the bug report.
+
 Prolog adapter and integration files
 ------------------------------------
 
