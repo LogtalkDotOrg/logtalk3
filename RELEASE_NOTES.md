@@ -27,6 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Lint check for entity parameters that are not variables.
+
 * ADDED: Support for compiling Prolog modules as objects when the modules
 export built-in predicates.
 
