@@ -47,7 +47,7 @@ Finally, rebuild the lexer mappings by typing:
 	$ python _mapping.py
 
 Logtalk source files (including the library entities and the programming
-examples) are formatted using tabs (the recommended setting is a tab width
+examples) are indented using tabs (a common setting is a tab width
 equivalent to 4 spaces). This can be specified by using the `whitespace`
 filter option `tabsize`:
 

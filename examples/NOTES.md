@@ -41,8 +41,8 @@ files to fully understand them. Note, however, that some examples main
 purpose is to illustrate general principles rather than being adequate,
 efficient solutions for deployment code.
 
-All examples are formatted using tabs (the recommended setting is a tab
-width equivalent to 4 spaces).
+All examples are indented using tabs (a common setting is a tab width
+equivalent to 4 spaces).
 
 Most example folders contain two files, `tests.lgt` and `tester.lgt`. The
 file `tests.lgt` contains unit tests for the example. These unit tests

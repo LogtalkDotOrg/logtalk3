@@ -51,9 +51,9 @@ Usage example for a "foo.lgt" Logtalk source file:
 
 	% source-highlight --tab=4 --out-format xhtml --input foo.lgt --output foo.html
 
-Usually, Logtalk files are formatted using tabs (the recommended setting is
-a tab width equivalent to 4 spaces). You may want to use the "--tab=4" option
-to keep you source code formatting choices.
+Logtalk source files are indented using tabs (a common setting is a tab width
+to equivalent to 4 spaces). You may want to use the "--tab=4" option to keep
+you source code formatting choices.
 
 You may also use the "logtalk.lang" file with plain Prolog files by using 
 the "--src-lang" option. For example:

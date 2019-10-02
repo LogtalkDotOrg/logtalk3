@@ -42,9 +42,9 @@ of your favorite editor, you may want to check if the supporting files
 provided in this directory are newer than the editor ones.
 
 Logtalk source files (including the library entities and the programming
-examples) are formatted using tabs (the most common setting is a tab width
-equivalent to 4 spaces); you may set the tab width on the editor preference
-panel.
+examples) are indented using tabs and are expected to remain perfectly 
+indented no matter your tab width preference (a common setting is a tab
+width equivalent to 4 spaces).
 
 You may notice that support for some text editors, notably for Windows-only 
 editors, is relatively poor. Depending on the text editor, proper syntax

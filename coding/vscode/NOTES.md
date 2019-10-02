@@ -48,6 +48,6 @@ dead code, running doclets, generating HTML documentation, and generating
 SVG diagrams.
 
 Logtalk source files (including the library entities and the programming
-examples) are formatted using tabs (the recommended setting is a tab width
-equivalent to 4 spaces); you may set the tab width on the editor preference
-panel.
+examples) are indented using tabs and are expected to remain perfectly 
+indented no matter your tab width preference (a common setting is a tab
+width equivalent to 4 spaces).

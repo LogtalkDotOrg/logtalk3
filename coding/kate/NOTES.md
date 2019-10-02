@@ -38,6 +38,6 @@ or:
 	KDE5:	~/.local/share/katepart5/syntax
 
 and restart Kate and KWrite. Logtalk source files (including the library
-entities and the programming examples) are formatted using tabs (with a
-width equivalent to 4 spaces); you may set the tab width on the editor
-preference panel.
+entities and the programming examples) are indented using tabs (a common
+setting is a tab width equivalent to 4 spaces); you may set the tab width
+on the editor preference panel.

@@ -68,9 +68,9 @@ the `Fix Mac Path` package in order to use a recent `ctags` version (that you
 can install using e.g. Homebrew or MacPorts).
 
 Logtalk source files (including the library entities and the programming
-examples) are formatted using tabs (the recommended setting is a tab width
-equivalent to 4 spaces); you may set the tab width on the editor preference
-panel.
+examples) are indented using tabs and are expected to remain perfectly 
+indented no matter your tab width preference (a common setting is a tab
+width equivalent to 4 spaces).
 
 The `Logtalk.sublime-syntax` file is generated from the TextMate 2 syntax file
 using the Sublime syntax convertor available from:

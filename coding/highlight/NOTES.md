@@ -47,9 +47,9 @@ Usage example for a `foo.lgt` Logtalk source file:
 
 You should try different style files (using the `--style` option) in order to 
 find which ones provide the more satisfactory results. As Logtalk files are 
-usually formatted using tabs (the recommended setting is a tab width
-equivalent to 4 spaces), the option `--replace-tabs=4` may be necessary to
-keep you source code properly formatted.
+usually indented using tabs (a common setting is a tab width equivalent to 4
+spaces), the option `--replace-tabs=4` may be necessary to keep you source
+code properly indented.
 
 You may also use the `logtalk.lang` file with plain Prolog files by using the 
 `--syntax` option. For example:

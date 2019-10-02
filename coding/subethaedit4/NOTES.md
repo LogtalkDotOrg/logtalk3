@@ -26,6 +26,6 @@ files with the SubEthaEdit 4.x/5.x text editor:
 To install simply double-click on the "Logtalk.seemode" bundle.
 
 Logtalk source files (including the library entities and the programming
-examples) are formatted using tabs (the recommended setting is a tab width
-equivalent to 4 spaces); you may set the tab width on the editor preference
-panel.
+examples) are indented using tabs and are expected to remain perfectly 
+indented no matter your tab width preference (a common setting is a tab
+width equivalent to 4 spaces).
