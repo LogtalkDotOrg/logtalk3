@@ -27,11 +27,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: Compiler error when an entity parameter is not a variable. Thanks to
-Paul Brown for the bug report.
-
 * ADDED: Support for compiling Prolog modules as objects when the modules
 export built-in predicates.
+
+* FIXED: Generate a compiler error when an entity parameter is not a variable.
+Thanks to Paul Brown for the bug report.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -44,6 +44,8 @@ to allow compiling modules as objects.
 
 Documentation
 -------------
+
+* IMPROVED: Handbook section on parametric objects.
 
 * IMPROVED: Handbook section on Prolog integration and migration. Includes
 a discussion on how to use hook objects to deal with Prolog term-expansion

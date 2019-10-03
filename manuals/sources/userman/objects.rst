@@ -286,13 +286,15 @@ In order to give access to an object parameter, Logtalk provides a
 
 ::
 
-   :- object(Functor(Arg1, Arg2, ...)).
+   :- object(foo(_Bar, _Baz, ...)).
 
        ...
+       bar(Bar) :-
+           parameter(1, Bar).
 
-       Predicate :-
-           ...,
-           parameter(Number, Value),
+       baz :-
+           parameter(2, Baz),
+           baz(Baz),
            ... .
 
 An alternative solution is to use the built-in local method
@@ -300,13 +302,12 @@ An alternative solution is to use the built-in local method
 
 ::
 
-   :- object(foo(Arg)).
+   :- object(foo(_Bar, _Baz, ...)).
 
        ...
-
-       bar :-
-           ...,
-           this(foo(Arg)),
+       baz :-
+           this(Name(_, Baz, ...)),
+           baz(Baz),
            ... .
 
 Both solutions are equally efficient as calls to the methods ``this/1``
@@ -314,27 +315,27 @@ and ``parameter/2`` are usually compiled inline into a clause head
 unification. The drawback of this second solution is that we must check
 all calls of ``this/1`` if we change the object name. Note that we can't
 use these method with the message sending operators
-(:ref:`control_send_to_object_2`,
-:ref:`control_send_to_self_1`, or
+(:ref:`control_send_to_object_2`, :ref:`control_send_to_self_1`, or
 :ref:`control_call_super_1`).
 
 A third alternative to access object parameters is to use
-:term:`parameter variables <parameter variable>`. Although parameter
-variables introduce a concept of entity global variables, they allow
-object parameters to be added, rearranged, or removed without requiring
+:term:`parameter variables <parameter variable>`. Although parameter variables
+introduce a concept of entity global variables, their unique syntax,
+``_ParameterName_``, avoids conflicts and makes them easily recognizable,
+allowing parameters to be added, reordered, or removed without requiring
 any changes to the clauses that refer to them. Note that using parameter
 variables doesn't change the fact that entity parameters are logical
 variables. For example:
 
 ::
 
-   :- object(foo(_Arg_)).
+   :- object(foo(_Bar_, _Baz_, ...)).
 
        ...
+       bar(_Bar_).
 
-       bar :-
-           ...,
-           baz(_Arg_),
+       baz :-
+           baz(_Baz_),
            ... .
 
 When storing a parametric object in its own source file, the convention

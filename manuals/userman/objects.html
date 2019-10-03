@@ -452,25 +452,26 @@ can also be used to associate a set of predicates to terms that share a
 common functor and arity.</p>
 <p>In order to give access to an object parameter, Logtalk provides a
 <a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> built-in local method:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Functor</span>(<span class="nv">Arg1</span>, <span class="nv">Arg2</span>, ...)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Bar</span>, <span class="nv">_Baz</span>, ...)).
 
     ...
+    bar(<span class="nv">Bar</span>) <span class="o">:-</span>
+        <span class="k">parameter</span>(<span class="m">1</span>, <span class="nv">Bar</span>).
 
-    <span class="nv">Predicate</span> <span class="o">:-</span>
-        ...,
-        <span class="k">parameter</span>(<span class="nv">Number</span>, <span class="nv">Value</span>),
+    baz <span class="o">:-</span>
+        <span class="k">parameter</span>(<span class="m">2</span>, <span class="nv">Baz</span>),
+        baz(<span class="nv">Baz</span>),
         ... .
 </pre></div>
 </div>
 <p>An alternative solution is to use the built-in local method
 <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a>. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">Arg</span>)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Bar</span>, <span class="nv">_Baz</span>, ...)).
 
     ...
-
-    bar <span class="o">:-</span>
-        ...,
-        <span class="k">this</span>(foo(<span class="nv">Arg</span>)),
+    baz <span class="o">:-</span>
+        <span class="k">this</span>(<span class="nv">Name</span>(<span class="nv">_</span>, <span class="nv">Baz</span>, ...)),
+        baz(<span class="nv">Baz</span>),
         ... .
 </pre></div>
 </div>
@@ -479,23 +480,23 @@ and <code class="docutils literal notranslate"><span class="pre">parameter/2</sp
 unification. The drawback of this second solution is that we must check
 all calls of <code class="docutils literal notranslate"><span class="pre">this/1</span></code> if we change the object name. Note that we can’t
 use these method with the message sending operators
-(<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a>,
-<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>, or
+(<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a>, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>, or
 <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>).</p>
 <p>A third alternative to access object parameters is to use
-<a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>. Although parameter
-variables introduce a concept of entity global variables, they allow
-object parameters to be added, rearranged, or removed without requiring
+<a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>. Although parameter variables
+introduce a concept of entity global variables, their unique syntax,
+<code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code>, avoids conflicts and makes them easily recognizable,
+allowing parameters to be added, reordered, or removed without requiring
 any changes to the clauses that refer to them. Note that using parameter
 variables doesn’t change the fact that entity parameters are logical
 variables. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Arg_</span>)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Bar_</span>, <span class="nv">_Baz_</span>, ...)).
 
     ...
+    bar(<span class="nv">_Bar_</span>).
 
-    bar <span class="o">:-</span>
-        ...,
-        baz(<span class="nv">_Arg_</span>),
+    baz <span class="o">:-</span>
+        baz(<span class="nv">_Baz_</span>),
         ... .
 </pre></div>
 </div>
