@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Lint check for `findall(_, Goal, _)` goals which misuse `findall/3`
+to backtrack into all solutions of `Goal`.
+
 * ADDED: Support for compiling Prolog modules as objects when the modules
 export built-in predicates.
 

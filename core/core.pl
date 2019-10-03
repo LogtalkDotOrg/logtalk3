@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 31, 0, b04)).
+'$lgt_version_data'(logtalk(3, 31, 0, b05)).
 
 
 
@@ -12112,9 +12112,40 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Term, TermVariables),
 	term_variables(Goal, GoalVariables),
 	'$lgt_intersection'(TermVariables, GoalVariables, []),
+	% reinstate relation between term variables and their names
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
+	once((
+		'$lgt_member'(_=Term0, VariableNames),
+		Term0 == Term
+	)),
+	% assume that Term is not an anonymous variable
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List), reason(no_shared_variables(findall)))),
+	fail.
+
+'$lgt_compile_body'(findall(Term, Goal, List), _, _, Ctx) :-
+	var(Term),
+	var(List),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	% reinstate relation between term variables and their names
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
+	\+ (
+		'$lgt_member'(_=Term0, VariableNames),
+		Term0 == Term
+	),
+	% assume that Term is an anonymous variable
+	\+ (
+		'$lgt_member'(_=List0, VariableNames),
+		List0 == List
+	),
+	% assume that List is an anonymous variable
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, findall(Term, Goal, List), [(Goal, fail; true)])),
 	fail.
 
 '$lgt_compile_body'(findall(Term, Goal, List), findall(Term, TGoal, List), '$lgt_debug'(goal(findall(Term, Goal, List), findall(Term, DGoal, List)), ExCtx), Ctx) :-
@@ -16693,9 +16724,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_save_parameter_variables'(Entity) :-
 	atom(Entity),
+	% non-parametric entity
 	!.
 
 '$lgt_save_parameter_variables'(Entity) :-
+	% all parameters must be variables
 	Entity =.. [_| Parameters],
 	'$lgt_member'(Parameter, Parameters),
 	nonvar(Parameter),
@@ -16706,6 +16739,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_parameter_variable_pairs'(VariableNames, 1, ParameterVariablePairs),
 	ParameterVariablePairs \== [],
 	!,
+	% only save a non-empty list of parameter
+	% variables to improve compiler peformance
 	assertz('$lgt_pp_parameter_variables_'(ParameterVariablePairs)).
 
 '$lgt_save_parameter_variables'(_).
