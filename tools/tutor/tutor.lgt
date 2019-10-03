@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.28,
+		version is 0.27,
 		author is 'Paulo Moura',
-		date is 2019/10/02,
+		date is 2019/09/17,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -396,11 +396,6 @@
 		].
 
 	% other warning messages
-
-	explain(nonvar_parameter(_, _, _, _, _)) -->
-		[	'Parametric entities are identified only by their functor (name'-[], nl,
-			'and number of arguments) and disregarding parameter values.'-[], nl, nl
-		].		
 
 	explain(complementing_category_ignored(_, _, _, _)) -->
 		[	'Set the object "complements" flag to "restrict" or "allow"'-[], nl,

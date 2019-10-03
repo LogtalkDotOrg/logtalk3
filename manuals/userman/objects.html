@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Objects &mdash; The Logtalk Handbook v3.31.0-b03 documentation</title>
+  <title>Objects &mdash; The Logtalk Handbook v3.31.0-b04 documentation</title>
   
 
   
@@ -440,16 +440,16 @@ the <a class="reference internal" href="inheritance.html#inheritance-scope"><spa
 </div>
 <div class="section" id="parametric-objects">
 <span id="objects-parametric"></span><h2>Parametric objects<a class="headerlink" href="#parametric-objects" title="Permalink to this headline">¶</a></h2>
-<p>Parametric objects have a compound term for name instead of an atom.
-This compound term usually contains free variables that can be
-instantiated when sending or as a consequence of sending a message to
-the object, thus acting as object parameters. The object predicates can
-then be coded to depend on those parameters, which are logical variables
-shared by all object predicates. When an object state is set at object
-creation and never changed, parameters provide a better solution than
-using the object’s database via asserts. Parametric objects can also be
-used to associate a set of predicates to terms that share a common
-functor and arity.</p>
+<p>Parametric objects have a compound term as identifier where all the
+arguments of the compound term are variables. These variables, the
+<em>object parameters</em>, can be instantiated when sending or as a consequence
+of sending a message to the object, thus acting as object parameters. The
+object predicates can then be coded to depend on those parameters, which
+are logical variables shared by all object predicates. When an object state
+is set at object creation and never changed, parameters provide a better
+solution than using the object’s database via asserts. Parametric objects
+can also be used to associate a set of predicates to terms that share a
+common functor and arity.</p>
 <p>In order to give access to an object parameter, Logtalk provides a
 <a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> built-in local method:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Functor</span>(<span class="nv">Arg1</span>, <span class="nv">Arg2</span>, ...)).

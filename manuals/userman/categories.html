@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Categories &mdash; The Logtalk Handbook v3.31.0-b03 documentation</title>
+  <title>Categories &mdash; The Logtalk Handbook v3.31.0-b04 documentation</title>
   
 
   
@@ -762,12 +762,14 @@ similar to calling the category predicate using a message to <a class="reference
 </div>
 <div class="section" id="parametric-categories">
 <span id="categories-parametric"></span><h2>Parametric categories<a class="headerlink" href="#parametric-categories" title="Permalink to this headline">¶</a></h2>
-<p>Category predicates can be parameterized in the same way as object
-predicates by using a compound term as the category identifier. The
-category parameters can be accessed by calling the <a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a>
-or <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> built-in local methods in
-the category predicate clauses or by using <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>.
-Category parameter values can be defined by the importing objects. For example:</p>
+<p>Category predicates can be parameterized in the same way as object predicates
+by using a compound term as the category identifier where all the arguments
+of the compound term are variables. These variables, the <em>category parameters</em>,
+can be accessed by calling the <a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> or
+<a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> built-in local methods in the category predicate
+clauses or by using <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>.
+Category parameter values can be defined by the importing objects.
+For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(speech(<span class="nv">Season</span>, <span class="nv">Event</span>),
     <span class="k">imports</span>([dress(<span class="nv">Season</span>), speech(<span class="nv">Event</span>)])).
     ...

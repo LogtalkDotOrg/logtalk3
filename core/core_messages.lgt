@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.85,
+		version is 1.84,
 		author is 'Paulo Moura',
-		date is 2019/10/02,
+		date is 2019/09/16,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -125,10 +125,6 @@
 	message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile)) -->
 		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
 		message_context(File, Lines).
-
-	message_tokens(nonvar_parameter(File, Lines, Type, Entity, Parameter)) -->
-		['Parameter is not a variable: ~q'-[Parameter], nl],
-		message_context(File, Lines, Type, Entity).
 
 	% make messages
 

@@ -270,16 +270,16 @@ the :ref:`inheritance <inheritance_scope>` section for details.
 Parametric objects
 ------------------
 
-Parametric objects have a compound term for name instead of an atom.
-This compound term usually contains free variables that can be
-instantiated when sending or as a consequence of sending a message to
-the object, thus acting as object parameters. The object predicates can
-then be coded to depend on those parameters, which are logical variables
-shared by all object predicates. When an object state is set at object
-creation and never changed, parameters provide a better solution than
-using the object's database via asserts. Parametric objects can also be
-used to associate a set of predicates to terms that share a common
-functor and arity.
+Parametric objects have a compound term as identifier where all the
+arguments of the compound term are variables. These variables, the
+*object parameters*, can be instantiated when sending or as a consequence
+of sending a message to the object, thus acting as object parameters. The
+object predicates can then be coded to depend on those parameters, which
+are logical variables shared by all object predicates. When an object state
+is set at object creation and never changed, parameters provide a better
+solution than using the object's database via asserts. Parametric objects
+can also be used to associate a set of predicates to terms that share a
+common functor and arity.
 
 In order to give access to an object parameter, Logtalk provides a
 :ref:`methods_parameter_2` built-in local method:

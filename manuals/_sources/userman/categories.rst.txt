@@ -671,12 +671,14 @@ similar to calling the category predicate using a message to :term:`self`
 Parametric categories
 ---------------------
 
-Category predicates can be parameterized in the same way as object
-predicates by using a compound term as the category identifier. The
-category parameters can be accessed by calling the :ref:`methods_parameter_2`
-or :ref:`methods_this_1` built-in local methods in
-the category predicate clauses or by using :term:`parameter variables <parameter variable>`.
-Category parameter values can be defined by the importing objects. For example:
+Category predicates can be parameterized in the same way as object predicates
+by using a compound term as the category identifier where all the arguments
+of the compound term are variables. These variables, the *category parameters*, 
+can be accessed by calling the :ref:`methods_parameter_2` or
+:ref:`methods_this_1` built-in local methods in the category predicate
+clauses or by using :term:`parameter variables <parameter variable>`.
+Category parameter values can be defined by the importing objects.
+For example:
 
 ::
 

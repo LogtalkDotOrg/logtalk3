@@ -27,13 +27,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: Lint check for entity parameters that are not variables.
+* ADDED: Compiler error when an entity parameter is not a variable. Thanks to
+Paul Brown for the bug report.
 
 * ADDED: Support for compiling Prolog modules as objects when the modules
 export built-in predicates.
-
-* FIXED: Compilation of parametric entities where one (or more) of the entity
-arguments is bound at compile time. Thanks to Paul Brown for the bug report.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -58,8 +56,6 @@ Library
 
 Tools
 -----
-
-* UPDATED: The `tutor` tool for the new lint check on entity parameters.
 
 * CHANGED: The `code_metric::sub_library/2` protected predicate to return
 sub-library names instead of sub-library paths.
