@@ -8524,8 +8524,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(encoding(Encoding), Ctx) :-
 	!,
 	(	'$lgt_pp_file_encoding_'(Encoding, _, Line),
+		% encoding/1 directive already found and processed ...
 		'$lgt_comp_ctx_lines'(Ctx, Line-_) ->
-		% encoding/1 directive already processed
+		% ... same encoding/1 directive that was found and processed
 		true
 	;	% out-of-place encoding/1 directive, which must be the first term in a source file
 		'$lgt_increment_compiling_warnings_counter',

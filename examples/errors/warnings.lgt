@@ -21,6 +21,7 @@
 
 :- if(\+ current_logtalk_flag(encoding_directive, unsupported)).
 
+	% ignored encoding/1 directive as it's not the first file term
 	:- encoding('US-ASCII').
 
 :- endif.
