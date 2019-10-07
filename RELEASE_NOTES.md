@@ -27,6 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for using `encoding/1` directives in included files.
+
 * ADDED: Lint check for `findall(_, Goal, _)` goals which misuse `findall/3`
 to backtrack into all solutions of `Goal`.
 
@@ -86,6 +88,8 @@ dialects.
 
 Tests
 -----
+
+* ADDED: Tests for `encoding/1` directives in included files.
 
 * IMPROVED: Rewritten the ISO Prolog standard `read_term/3` predicate tests
 to use assertions for easier debugging.

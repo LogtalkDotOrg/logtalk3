@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/02/08,
+		date is 2019/10/07,
 		comment is 'Unit tests for the encoding/1 built-in directive.'
 	]).
 
@@ -55,6 +55,16 @@
 		logtalk::loaded_file_property(Path, text_properties(Properties)),
 		member(encoding('UTF-8'), Properties),
 		\+ member(bom(true), Properties).
+
+	test(encoding_1_includes) :-
+		findall(Name, split::name(Name), Names),
+		^^assertion(
+			Names == [
+				'Paulo Moura', 'John Smith',
+				'António Simões', 'Cátia Conceição',
+				'João Raínho', 'Luís Araújo'
+			]
+		).
 
 	% auxiliary predicates
 

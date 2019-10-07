@@ -458,10 +458,10 @@
 % '$lgt_pp_threaded_'
 :- dynamic('$lgt_pp_threaded_'/0).
 
-% '$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding, Line)
-:- dynamic('$lgt_pp_file_encoding_'/3).
-% '$lgt_pp_file_bom_'(BOM)
-:- dynamic('$lgt_pp_file_bom_'/1).
+% '$lgt_pp_file_encoding_'(SourceFile, LogtalkEncoding, PrologEncoding, Line)
+:- dynamic('$lgt_pp_file_encoding_'/4).
+% '$lgt_pp_file_bom_'(SourceFile, BOM)
+:- dynamic('$lgt_pp_file_bom_'/2).
 % '$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)
 :- dynamic('$lgt_pp_file_paths_flags_'/5).
 
@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 31, 0, b05)).
+'$lgt_version_data'(logtalk(3, 31, 0, b06)).
 
 
 
@@ -6228,7 +6228,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% entities thus potentially invalidating cache entries
 	'$lgt_clean_lookup_caches',
 	'$lgt_report_redefined_entities',
-	(	'$lgt_pp_file_encoding_'(_, Encoding, _) ->
+	(	'$lgt_pp_file_encoding_'(SourceFile, _, Encoding, _) ->
 		% use the same encoding as the original source file but do not use the inferred
 		% bom/1 option as it would only work with some backend Prolog compilers
 		Options = [encoding(Encoding)| DefaultOptions]
@@ -6643,7 +6643,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_first_term_error_handler'(SourceFile, Lines, InputError)
 	),
 	catch(
-		'$lgt_check_for_encoding_directive'(Term, SourceFile, Input, NewInput, OutputOptions),
+		'$lgt_check_for_encoding_directive'(Term, SourceFile, Lines, Input, NewInput, [alias(logtalk_compiler_input)], OutputOptions),
 		FirstTermError,
 		'$lgt_compiler_first_term_error_handler'(SourceFile, Lines, FirstTermError)
 	),
@@ -6701,8 +6701,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% ... or if the file modification date changed (e.g. to fix compilation errors)
 	'$lgt_file_modification_time'(SourceFile, TimeStamp),
 	% compute text properties that are only available after successful file compilation
-	(	'$lgt_pp_file_encoding_'(Encoding, _, _) ->
-		(	'$lgt_pp_file_bom_'(BOM) ->
+	(	'$lgt_pp_file_encoding_'(SourceFile, Encoding, _, _) ->
+		(	'$lgt_pp_file_bom_'(SourceFile, BOM) ->
 			TextProperties = [encoding(Encoding), BOM]
 		;	TextProperties = [encoding(Encoding)]
 		)
@@ -6712,28 +6712,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_check_for_encoding_directive'(?term, +atom, @stream, -stream, -list)
+% '$lgt_check_for_encoding_directive'(?term, +atom, +pair(integer), @stream, -stream, +list, -list)
 %
 % encoding/1 directives must be used during entity compilation and for the
 % encoding of the generated Prolog files; a BOM present in the source file
 % is inherited by the generated Prolog file
 
-'$lgt_check_for_encoding_directive'(Term, _, _, _, _) :-
+'$lgt_check_for_encoding_directive'(Term, _, _, _, _, _, _) :-
 	var(Term),
 	throw(error(instantiation_error, term(Term))).
 
-'$lgt_check_for_encoding_directive'((:- Term), _, _, _, _) :-
+'$lgt_check_for_encoding_directive'((:- Term), _, _, _, _, _, _) :-
 	var(Term),
 	throw(error(instantiation_error, directive(Term))).
 
-'$lgt_check_for_encoding_directive'((:- encoding(Encoding)), Source, Input, NewInput, [encoding(PrologEncoding)|BOM]) :-
+'$lgt_check_for_encoding_directive'((:- encoding(Encoding)), SourceFile, BeginLine-EndLine, Input, NewInput, InputOptions, [encoding(PrologEncoding)|BOM]) :-
 	!,
 	(	var(Encoding) ->
 		throw(error(instantiation_error, directive(encoding(Encoding))))
 	;	'$lgt_prolog_feature'(encoding_directive, unsupported) ->
 		throw(error(resource_error(text_encoding_support), directive(encoding(Encoding))))
 	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
-		(	'$lgt_decompose_file_name'(Source, _, _, Extension),
+		(	'$lgt_decompose_file_name'(SourceFile, _, _, Extension),
 			'$lgt_file_extension'(prolog, Extension), 
 			'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, Encoding, Input) ->
 			% converted Prolog specific encoding to Logtalk encoding;
@@ -6742,28 +6742,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	LogtalkEncoding = Encoding,
 			'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input)
 		) ->
-		'$lgt_source_file_context'(File, BeginLine-EndLine),
-		assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding, BeginLine)),
+		assertz('$lgt_pp_file_encoding_'(SourceFile, LogtalkEncoding, PrologEncoding, BeginLine)),
 		% check that the encoding/1 directive is found in the first line
 		(	BeginLine =:= 1 ->
 			true
 		;	'$lgt_increment_compiling_warnings_counter',
-			'$lgt_print_message'(warning(general), misplaced_encoding_directive(File, BeginLine-EndLine))
+			'$lgt_print_message'(warning(general), misplaced_encoding_directive(SourceFile, BeginLine-EndLine))
 		),
 		% close and reopen the source file using the specified encoding
 		'$lgt_close'(Input),
-		'$lgt_open'(Source, read, NewInput, [alias(logtalk_compiler_input), encoding(PrologEncoding)]),
+		'$lgt_open'(SourceFile, read, NewInput, [encoding(PrologEncoding)| InputOptions]),
 		(	(	catch(stream_property(NewInput, bom(Boolean)), _, fail)
 				% SWI-Prolog and YAP
 			;	catch(stream_property(NewInput, encoding_signature(Boolean)), _, fail)
 				% SICStus Prolog
 			) ->
 			BOM = [bom(Boolean)],
-			assertz('$lgt_pp_file_bom_'(bom(Boolean)))
+			assertz('$lgt_pp_file_bom_'(SourceFile, bom(Boolean)))
 		;	BOM = []
 		),
 		% throw away the already processed encoding/1 directive
-		'$lgt_read_file_term'(File, NewInput, _, [singletons(_)], _)
+		'$lgt_read_file_term'(SourceFile, NewInput, _, [singletons(_)], _)
 	;	% encoding not recognized
 		atom(Encoding) ->
 		throw(error(domain_error(text_encoding, Encoding), directive(encoding(Encoding))))
@@ -6771,7 +6770,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 % assume no encoding/1 directive present on the source file
-'$lgt_check_for_encoding_directive'(_, _, Input, Input, []).
+'$lgt_check_for_encoding_directive'(_, _, _, Input, Input, _, []).
 
 
 
@@ -7530,8 +7529,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_clean_pp_file_clauses' :-
 	retractall('$lgt_pp_file_initialization_'(_, _)),
 	retractall('$lgt_pp_file_object_initialization_'(_, _, _)),
-	retractall('$lgt_pp_file_encoding_'(_, _, _)),
-	retractall('$lgt_pp_file_bom_'(_)),
+	retractall('$lgt_pp_file_encoding_'(_, _, _, _)),
+	retractall('$lgt_pp_file_bom_'(_, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
 	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
 	% a Logtalk source file may contain only plain Prolog terms
@@ -8510,6 +8509,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_compile_logtalk_directive'(initialization(Directive), Ctx).
 
+'$lgt_compile_directive'(encoding(Encoding), Ctx) :-
+	'$lgt_source_file_context'(Path, _),
+	'$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, _, _, _)),
+	% encoding/1 directives may be used in included
+	% files but not as entity directives
+	!,
+	'$lgt_compile_file_directive'(encoding(Encoding), Ctx).
+
 '$lgt_compile_directive'(Directive, _) :-
 	functor(Directive, Functor, Arity),
 	throw(error(domain_error(directive, Functor/Arity), directive(Directive))).
@@ -8523,14 +8530,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_file_directive'(encoding(Encoding), Ctx) :-
 	!,
-	(	'$lgt_pp_file_encoding_'(Encoding, _, Line),
+	'$lgt_source_file_context'(File, Lines),
+	(	'$lgt_pp_file_encoding_'(File, Encoding, _, Line),
 		% encoding/1 directive already found and processed ...
 		'$lgt_comp_ctx_lines'(Ctx, Line-_) ->
 		% ... same encoding/1 directive that was found and processed
 		true
 	;	% out-of-place encoding/1 directive, which must be the first term in a source file
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines),
 		'$lgt_print_message'(warning(general), ignored_encoding_directive(File, Lines))
 	).
 
@@ -19638,7 +19645,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_write_encoding_directive'(Stream, Path) :-
 	(	'$lgt_prolog_feature'(encoding_directive, full),
-		'$lgt_pp_file_encoding_'(_, Encoding, _) ->
+		'$lgt_pp_file_encoding_'(Path, _, Encoding, _) ->
 		'$lgt_write_compiled_term'(Stream, (:- encoding(Encoding)), runtime, Path, 1)
 	;	true
 	).
@@ -24170,22 +24177,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	throw(existence_error(file, File))
 	),
-	% use the same encoding as the main file if specified
-	(	'$lgt_pp_file_encoding_'(_, PrologEncoding, _) ->
-		Options = [encoding(PrologEncoding)]
-	;	Options = []
-	),
 	catch(
-		'$lgt_open'(SourceFile, read, Stream, Options),
+		'$lgt_open'(SourceFile, read, Stream, []),
 		error(OpenError, _),
 		throw(OpenError)
 	),
+	% look for an encoding/1 directive that, when present, must be the first term on a source file
 	catch(
-		'$lgt_read_stream_to_terms'(Mode, SourceFile, Stream, Terms),
+		'$lgt_read_term'(Stream, Term, [singletons(Singletons)], Lines, VariableNames),
 		error(TermError, _),
 		'$lgt_read_file_to_terms_error_handler'(SourceFile, Stream, TermError)
 	),
-	'$lgt_close'(Stream).
+	catch(
+		'$lgt_check_for_encoding_directive'(Term, SourceFile, Lines, Stream, NewStream, [], _),
+		FirstTermError,
+		'$lgt_read_file_to_terms_error_handler'(SourceFile, Stream, FirstTermError)
+	),
+	% read the reamining terms
+	catch(
+		'$lgt_read_stream_to_terms'(Mode, Term, Singletons, Lines, VariableNames, SourceFile, NewStream, Terms),
+		error(TermError, _),
+		'$lgt_read_file_to_terms_error_handler'(SourceFile, NewStream, TermError)
+	),
+	'$lgt_close'(NewStream).
 
 
 '$lgt_read_file_to_terms_error_handler'(SourceFile, Stream, Error) :-
@@ -24198,15 +24212,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Line-Line, Error).
 
 
-'$lgt_read_stream_to_terms'(runtime, File, Stream, Terms) :-
-	'$lgt_read_stream_to_terms_runtime'(File, Stream, Terms).
-'$lgt_read_stream_to_terms'(compile(_,_,_), File, Stream, Terms) :-
-	'$lgt_read_stream_to_terms_compile'(File, Stream, Terms).
-
-
-'$lgt_read_stream_to_terms_runtime'(File, Stream, Terms) :-
-	'$lgt_read_term'(Stream, Term, [], Lines, VariableNames),
+'$lgt_read_stream_to_terms'(runtime, Term, _, Lines, VariableNames, File, Stream, Terms) :-
 	'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, File, Stream, Terms).
+'$lgt_read_stream_to_terms'(compile(_,_,_), Term, Singletons, Lines, VariableNames, File, Stream, Terms) :-
+	'$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, File, Stream, Terms).
+
 
 '$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, File, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
 	var(Term),
@@ -24229,10 +24239,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_read_term'(Stream, NextTerm, [], NextLines, NextVariableNames),
 	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, File, Stream, Terms).
 
-
-'$lgt_read_stream_to_terms_compile'(File, Stream, Terms) :-
-	'$lgt_read_term'(Stream, Term, [singletons(Singletons)], Lines, VariableNames),
-	'$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, File, Stream, Terms).
 
 '$lgt_read_stream_to_terms_compile'(Term, _, Lines, VariableNames, File, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
 	var(Term),
