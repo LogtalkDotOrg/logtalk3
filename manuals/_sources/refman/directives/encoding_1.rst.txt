@@ -30,7 +30,8 @@ Description
 
 Declares the source file text encoding. Requires a :term:`backend Prolog compiler`
 supporting the chosen encoding. When used, this directive must be the first
-term in the source file in the first line.
+term in the source file in the first line. This directive is also supported
+in files included in a main file using :ref:`directives_include_1` directives.
 
 The encoding used in a source file (and, in the case of a Unicode
 encoding, any BOM present) will be used for the intermediate Prolog

@@ -227,8 +227,8 @@ entity directive. As an entity directive, it can be used both in
 entities defined in source files and with the entity creation built-in
 predicates. In the latter case, the file should be specified using an
 absolute path or using library notation (which expands to a full path).</p>
-<p>When the main file contains an <a class="reference internal" href="encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive,
-included files are opened using the same text encoding.</p>
+<p>Included files may contain an <a class="reference internal" href="encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive, which
+may specify the same encoding of the main file or a different encoding.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>When using this directive as an argument in calls to the
