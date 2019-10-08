@@ -366,6 +366,7 @@
 	max(X, Y, X) :- X >= Y, !.
 	max(_, Y, Y).
 
+	% incorrect nt//2 definition (e.g. phrase(nt(75,0), _) is true!)
 	nt(A, A) --> [A], {A >= 65}, !.
 	nt(_, 0) --> [_].
 
