@@ -33,6 +33,8 @@ may specify encodings different from the encoding of the main file.
 * ADDED: Lint check for `findall(_, Goal, _)` goals which misuse `findall/3`
 to backtrack into all solutions of `Goal`.
 
+* ADDED: Lint check for redundant uses of the `\+/1` control construct.
+
 * ADDED: Support for compiling Prolog modules as objects when the modules
 export built-in predicates.
 

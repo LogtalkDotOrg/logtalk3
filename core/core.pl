@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 31, 0, b06)).
+'$lgt_version_data'(logtalk(3, 31, 0, b07)).
 
 
 
@@ -11640,6 +11640,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
 
+'$lgt_compile_body'(\+ Pred, _, _, Ctx) :-
+	callable(Pred),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_negated_goal_alternative'(Pred, Alt),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, \+ Pred, [Alt])),
+	fail.
 '$lgt_compile_body'(\+ Pred, \+ TPred, '$lgt_debug'(goal(\+ Pred, \+ DPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -14444,6 +14453,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Goal = (Goal0, true)
 	;	Goal = Goal0
 	).
+
+
+
+% '$lgt_negated_goal_alternative'(Pred, Alt)
+%
+% auxiliary table to simplify calls to \+ Goal goals
+
+'$lgt_negated_goal_alternative'(Term1 = Term2, Term1 \= Term2).
+'$lgt_negated_goal_alternative'(Term1 == Term2, Term1 \== Term2).
+'$lgt_negated_goal_alternative'(Term1 =:= Term2, Term1 =\= Term2).
+'$lgt_negated_goal_alternative'(var(Term), nonvar(Term)).
 
 
 
