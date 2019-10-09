@@ -406,17 +406,17 @@
 		numbervars(GroundTerm, 0, _).
 
 	location_and_clause_number(File0, Line0, Clause0, File, Line, Clause) :-
-		 (	File0 == nil ->
-		 	File = 'n/a'
-		 ;	File = File0
-		 ),
-		 (	Line0 > 0 ->
-		 	Line = Line0
-		 ;	Line = 'n/a'
-		 ),
-		 (	Clause0 =:= 0 ->
-		 	Clause = 'n/a'
-		 ;	Clause = Clause0
-		 ).
+		(	File0 == nil ->
+			File = 'n/a'
+		;	File = File0
+		),
+		(	Line0 > 0 ->
+			Line = Line0
+		;	Line = 'n/a'
+		),
+		(	Clause0 =:= 0 ->
+			Clause = 'n/a'
+		;	Clause = Clause0
+		).
 
 :- end_category.

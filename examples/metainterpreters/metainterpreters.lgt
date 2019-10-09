@@ -41,7 +41,7 @@
 		solve(A),
 		solve(B).
 	solve(A) :-
-   	 	% retrieve clauses in "this", i.e. in the database
+		% retrieve clauses in "this", i.e. in the database
 		% of the object importing this category
 		clause(A, B),
 		solve(B).
@@ -72,7 +72,7 @@
 		proof_tree(A, PA),
 		proof_tree(B, PB).
 	proof_tree(A, (A :- PB)) :-
-   	 	% retrieve clauses in "this", i.e. in the database
+		% retrieve clauses in "this", i.e. in the database
 		% of the object importing this category
 		clause(A, B),
 		proof_tree(B, PB).

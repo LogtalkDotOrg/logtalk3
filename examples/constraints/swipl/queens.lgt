@@ -108,7 +108,7 @@
 
 	postscript -->
 		"systemdict /.setlanguagelevel known { 2 .setlanguagelevel} if \c
-	 	/init {  /N exch def 322 N div dup scale -1 -1 translate \c
+		/init {  /N exch def 322 N div dup scale -1 -1 translate \c
 	          /Palatino-Roman findfont 0.8 scalefont setfont \c
 	          0 setlinewidth \c
 	          1 1 N { 1 1 N { 1 index c } for pop } for } bind def \c

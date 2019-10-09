@@ -58,7 +58,7 @@
 
 	:- if((
 			current_logtalk_flag(prolog_dialect, yap)
-		; 	current_logtalk_flag(prolog_dialect, swi),
+		;	current_logtalk_flag(prolog_dialect, swi),
 			current_prolog_flag(version_data, swi(Major, Minor, Patch, _)),
 			(Major,Minor,Patch) @>= (7,5,9)
 	)).

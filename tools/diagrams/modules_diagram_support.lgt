@@ -165,7 +165,7 @@
 			 xref_source(File),
 			 module_property(Module, exports(Exports)),
 			 member(Functor/Arity, Exports),
- 			 functor(Predicate, Functor, Arity),
+			 functor(Predicate, Functor, Arity),
 			 xref_defined(File, Predicate, local(_)),
 			 findall(Property, predicate_property(':'(Module,Predicate), Property), Properties)
 			}.

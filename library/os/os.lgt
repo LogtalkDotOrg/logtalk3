@@ -1019,7 +1019,7 @@
 
 		rename_file(Old, New) :-
 			{absolute_file_name(Old, OldPath),
- 			 absolute_file_name(New, NewPath),
+			 absolute_file_name(New, NewPath),
 			 fs_rename(OldPath, NewPath)}.
 
 		environment_variable(Variable, Value) :-
@@ -1552,7 +1552,7 @@
 				Value \== [] ->
 				true
 			;	% check if the environment variable value is passed as a property
-			 	{invoke('java.lang.System', getProperty('java.lang.String'), [Variable], Value)},
+				{invoke('java.lang.System', getProperty('java.lang.String'), [Variable], Value)},
 				Value \== []
 			).
 

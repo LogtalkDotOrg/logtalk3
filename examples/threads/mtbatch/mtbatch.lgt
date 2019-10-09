@@ -273,15 +273,15 @@
 				put_char('\t'), write(Threads)
 			)), nl,
 		forall(
-			(	Function = circle,	A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-8
-			;	Function = poly6,	A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-7
-			;	Function = i14, 	A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-9
-			;	Function = i15,		A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-6
-			;	Function = bailey1,	A =  0, B = 1, C =  0, D = 1, Epsilon = 1.0e-10
-			;	Function = bailey2,	A =  0, B = 1, C =  0, D = 1, Epsilon = 1.0e-10
-			;	Function = bailey3,	A = -1, B = 1, C = -1, D = 1, Epsilon = 1.0e-8
-			;	Function = bailey4,	A =  1.0e-6, B = pi, C = 0, D = pi, Epsilon = 1.0e-3
-			;	Function = bailey5,	A =  0, B = 100, C = 0, D = 100, Epsilon = 1.0e-6
+			(	Function = circle,  A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-8
+			;	Function = poly6,   A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-7
+			;	Function = i14,     A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-9
+			;	Function = i15,     A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-6
+			;	Function = bailey1, A =  0, B = 1, C =  0, D = 1, Epsilon = 1.0e-10
+			;	Function = bailey2, A =  0, B = 1, C =  0, D = 1, Epsilon = 1.0e-10
+			;	Function = bailey3, A = -1, B = 1, C = -1, D = 1, Epsilon = 1.0e-8
+			;	Function = bailey4, A =  1.0e-6, B = pi, C = 0, D = pi, Epsilon = 1.0e-3
+			;	Function = bailey5, A =  0, B = 100, C = 0, D = 100, Epsilon = 1.0e-6
 			),
 			(	write(Function),
 				loop::forto(T, 0, 2,
@@ -300,15 +300,15 @@
 				put_char('\t'), write(Threads)
 			)), nl,
 		forall(
-			(	Function = circle,	A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-8
-			;	Function = poly6,	A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-7
-			;	Function = i14, 	A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-9
-			;	Function = i15,		A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-6
-			;	Function = bailey1,	A =  0, B = 1, C =  0, D = 1, Epsilon = 1.0e-10
-			;	Function = bailey2,	A =  0, B = 1, C =  0, D = 1, Epsilon = 1.0e-10
-			;	Function = bailey3,	A = -1, B = 1, C = -1, D = 1, Epsilon = 1.0e-8
-			;	Function = bailey4,	A =  1.0e-6, B = pi, C = 0, D = pi, Epsilon = 1.0e-3
-			;	Function = bailey5,	A =  0, B = 100, C = 0, D = 100, Epsilon = 1.0e-6
+			(	Function = circle,  A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-8
+			;	Function = poly6,   A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-7
+			;	Function = i14,     A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-9
+			;	Function = i15,     A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-6
+			;	Function = bailey1, A =  0, B = 1, C =  0, D = 1, Epsilon = 1.0e-10
+			;	Function = bailey2, A =  0, B = 1, C =  0, D = 1, Epsilon = 1.0e-10
+			;	Function = bailey3, A = -1, B = 1, C = -1, D = 1, Epsilon = 1.0e-8
+			;	Function = bailey4, A =  1.0e-6, B = pi, C = 0, D = pi, Epsilon = 1.0e-3
+			;	Function = bailey5, A =  0, B = 100, C = 0, D = 100, Epsilon = 1.0e-6
 			),
 			(	write(Function),
 				loop::forto(T, 1, 4,

@@ -94,7 +94,7 @@
 	optimization(maximize)				--> [maximize].
 
 	metric_f_exp(E)						--> ['('], :binary_op(O), metric_f_exp(E1), metric_f_exp(E2), [')'], {E =..[O, E1, E2]}.
-	metric_f_exp(multi_op(O,[E1|E])) 	--> ['('], :multi_op(O), metric_f_exp(E1), :oneOrMore(metric_f_exp, E), [')']. % I don't see meanful of this rule, in additional is missing in f-exp
+	metric_f_exp(multi_op(O,[E1|E]))	--> ['('], :multi_op(O), metric_f_exp(E1), :oneOrMore(metric_f_exp, E), [')']. % I don't see meanful of this rule, in additional is missing in f-exp
 	metric_f_exp(E)						--> ['(', '-'], metric_f_exp(E1), [')'], {E=..[-, E1]}.
 	metric_f_exp(N)						--> :number(N).
 	metric_f_exp(F)						--> ['('], :function_symbol(S), :zeroOrMore(name, Ns), [')'], { atomic_list_concat([S|Ns], '-', F) }.

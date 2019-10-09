@@ -55,7 +55,7 @@
 	c_effect(P, N, A)		--> p_effect(P, N, A).
 
 	p_effect([], [], [])		--> [].
-	p_effect(Ps, Ns, [F|As]) 	-->
+	p_effect(Ps, Ns, [F|As])	-->
 		['('], assign_op(O), f_head(H), f_exp(E), [')'], p_effect(Ps, Ns, As), {F =.. [O, H, E]}.
 	p_effect(Ps, [F|Ns], As)	--> ['(', not], atomic_formula(term,F), [')'], p_effect(Ps, Ns, As).
 	p_effect([F|Ps], Ns, As)	--> atomic_formula(term, F), p_effect(Ps, Ns, As).

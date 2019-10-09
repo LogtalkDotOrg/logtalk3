@@ -29,8 +29,8 @@
 		comment is 'Helper object to apply all loaded code metrics.'
 	]).
 
- 	process_entity(Kind, Entity) :-
- 		logtalk::print_message(information, code_metrics, scanning_entity(Kind, Entity)),
+	process_entity(Kind, Entity) :-
+		logtalk::print_message(information, code_metrics, scanning_entity(Kind, Entity)),
 		forall(
 			process_entity_(Entity, Metric, Score),
 			logtalk::print_message(information, code_metrics, entity_score(Metric, Entity, Score))

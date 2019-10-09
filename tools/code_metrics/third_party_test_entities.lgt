@@ -21,16 +21,16 @@
 % to illustrate the Cyclomatic Complexity and Unique Predicate Nodes metrics:
 % 
 % @article{MOORES199845,
-% 	title = "Applying Complexity Measures to Rule-Based Prolog Programs",
-% 	journal = "Journal of Systems and Software",
-% 	volume = "44",
-% 	number = "1",
-% 	pages = "45 - 52",
-% 	year = "1998",
-% 	issn = "0164-1212",
-% 	doi = "https://doi.org/10.1016/S0164-1212(98)10042-0",
-% 	url = "http://www.sciencedirect.com/science/article/pii/S0164121298100420",
-% 	author = "Trevor T Moores"
+%	title = "Applying Complexity Measures to Rule-Based Prolog Programs",
+%	journal = "Journal of Systems and Software",
+%	volume = "44",
+%	number = "1",
+%	pages = "45 - 52",
+%	year = "1998",
+%	issn = "0164-1212",
+%	doi = "https://doi.org/10.1016/S0164-1212(98)10042-0",
+%	url = "http://www.sciencedirect.com/science/article/pii/S0164121298100420",
+%	author = "Trevor T Moores"
 % }
 
 

@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- 	set_logtalk_flag(context_switching_calls, allow).
+:- set_logtalk_flag(context_switching_calls, allow).
 
 
 % supporting entities

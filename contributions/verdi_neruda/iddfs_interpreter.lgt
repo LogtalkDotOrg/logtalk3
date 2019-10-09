@@ -43,7 +43,7 @@
 		%%This is a temporary workaround that allows iddfs to handle negation.
 		(	dfs_interpreter::prove(Goal, DB) ->
 			fail
-		; 	counter::increment, %Inference counting.
+		;	counter::increment, %Inference counting.
 			bounded_prove(Goals, Bound1, Remaining, DB)
 		).
 	bounded_prove([Goal|Goals], Bound, Remaining, DB) :-

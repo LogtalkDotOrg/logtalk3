@@ -656,11 +656,11 @@
 
 	explain(singleton_variables(_, _, [_], _)) -->
 		[	'Misspelt variable name? Don''t care variable?'-[], nl,
-		 	'In the later case, use instead an anonymous variable.'-[], nl, nl
+			'In the later case, use instead an anonymous variable.'-[], nl, nl
 		].
 	explain(singleton_variables(_, _, [_, _| _], _)) -->
 		[	'Misspelt variable names? Don''t care variables?'-[], nl,
-		 	'In the later case, use instead anonymous variables.'-[], nl, nl
+			'In the later case, use instead anonymous variables.'-[], nl, nl
 		].
 
 	explain(suspicious_call(_, _, _, _, (_ -> _), reason(missing_else_part))) -->
@@ -704,7 +704,7 @@
 
 	explain(suspicious_call(_, _, _, _, repeat, reason(repeat(_)))) -->
 		[	'A repeat loop not ended with a cut may result in an endless loop in'-[], nl,
-		 	'case of unexpected backtracking. Use a cut immediately after the test'-[], nl,
+			'case of unexpected backtracking. Use a cut immediately after the test'-[], nl,
 			'goal that exits the repeat loop unless you really want to define a'-[], nl,
 			'perpetual loop.'-[], nl, nl
 		].

@@ -84,7 +84,7 @@
 		label([DX, DY]).
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-   	Text display.
+	Text display.
 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	:- public(tour_enumeration/2).

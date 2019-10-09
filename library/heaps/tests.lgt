@@ -198,7 +198,7 @@
 		(	arg(1, _HeapObject_, (<)) ->
 			Key1-Value1 == a-1, Key2-Value2 == b-2
 		;	Key1-Value1 == j-0, Key2-Value2 == i-9
- 		).
+		).
 
 	% valid/1 tests
 
