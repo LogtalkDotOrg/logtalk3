@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.21,
+		version is 2.22,
 		author is 'Paulo Moura',
-		date is 2019/06/04,
+		date is 2019/10/09,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -63,7 +63,7 @@
 
 	delete_matches([], _, []).
 	delete_matches([Head| Tail], Element, Remaining) :-
-		(	\+ \+ Head = Element ->
+		(	\+ Head \= Element ->
 			delete_matches(Tail, Element, Remaining)
 		;	Remaining = [Head| Tail2],
 			delete_matches(Tail, Element, Tail2)

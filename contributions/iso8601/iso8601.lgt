@@ -37,9 +37,9 @@
 :- object(iso8601).
 
 	:- info([
-		version is 1.02,
+		version is 1.03,
 		author is 'Daniel L. Dudley',
-		date is 2014/11/03,
+		date is 2019/10/09,
 		comment is 'ISO 8601 (and European civil calendar) compliant library of date predicates.',
 		remarks is [
 			'Scope' - 'This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.',
@@ -566,7 +566,7 @@
 		(var(Year) -> date(_,Year,_,_) ; true),
 		(Year < 0 -> Year1 is Year + 1 ; Year1 = Year),
 		0 =:= Year1 mod 4,
-		(\+ 0 =:= Year1 mod 100 -> true ;  0 =:= Year1 mod 400).
+		(0 =\= Year1 mod 100 -> true ;  0 =:= Year1 mod 400).
 
 
 	%==============================================================================

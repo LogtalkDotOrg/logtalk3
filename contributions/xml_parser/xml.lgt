@@ -17,9 +17,9 @@
 :- object(xml).
 
 	:- info([
-		version is 3.7,
+		version is 3.8,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
-		date is 2019/03/08,
+		date is 2019/10/09,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
 		license is 'This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
@@ -1647,7 +1647,7 @@
 	attribute_fault( Name=Value, Name=Value, "Attribute Value must be chars" ) :-
 		\+ is_chars( Value ).
 	attribute_fault( Attribute, Attribute, "Malformed Attribute" ) :-
-		\+ Attribute = (_Name=_Value).
+		Attribute \= (_Name=_Value).
 
 	is_chars( Chars ) :-
 		is_list( Chars ),
@@ -1786,7 +1786,7 @@
 		generated_attributes( Atts, Format0, Format  ).
 	generated_prefixed_attributes( [], URI, Atts, Format0, Format  ) -->
 		{	atom_codes( URI, Namespace ),
-			findall( Attr, (member(Attr, Atts), \+ Attr=(xmlns=_Val)), Atts1 )
+			findall( Attr, (member(Attr, Atts), Attr \= (xmlns=_Val)), Atts1 )
 		},
 		generated_attributes( [xmlns=Namespace|Atts1], Format0, Format  ).
 

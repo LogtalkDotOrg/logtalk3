@@ -27,9 +27,9 @@ SOFTWARE.
 	implements(expanding)).
 
 	:- info([
-		version is 1.03,
+		version is 1.04,
 		author is 'Peter Van Roy; adapted to Logtalk by Paulo Moura.',
-		date is 2019/06/13,
+		date is 2019/10/09,
 		comment is 'Multiple hidden parameters: an extension to Prolog''s DCG notation. Ported to Logtalk as a hook object.',
 		copyright is 'Copyright (C) 1992 Peter Van Roy',
 		license is 'MIT',
@@ -305,7 +305,7 @@ SOFTWARE.
 	'_replace'(A, B, [A|L], [B|R]) :- !,
 		'_replace'(A, B, L, R).
 	'_replace'(A, B, [C|L], [C|R]) :-
-		\+C=A, !,
+		C \= A, !,
 		'_replace'(A, B, L, R).
 
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/07/16,
+		date is 2019/10/09,
 		comment is 'Unit tests for the entity number of rules metric.'
 	]).
 
@@ -53,7 +53,7 @@
 
 	test(nor_obj_e_wrong_clause) :-
 		entity_score(obj_e, Score),
-		\+ Score == number_of_rules(2, 2).
+		Score \== number_of_rules(2, 2).
 
 	test(nor_obj_e) :-
 		entity_score(obj_e, Score),

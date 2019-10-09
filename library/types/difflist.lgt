@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.18,
+		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2019/09/27,
+		date is 2019/10/09,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -83,7 +83,7 @@
 			unify_with_occurs_check(Remaining, Back-Back)
 		;	List \== Back,
 			List = [Head| Tail],
-			(	\+ \+ Head = Element ->
+			(	\+ Head \= Element ->
 				delete_matches(Tail-Back, Element, Remaining)
 			;	Remaining = [Head| Tail2],
 				delete_matches(Tail-Back, Element, Tail2-Back)
