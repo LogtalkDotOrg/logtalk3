@@ -11743,6 +11743,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(call(Goal), _, _, Ctx) :-
 	callable(Goal),
+	\+ '$lgt_cut_transparent_control_construct'(Goal),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',

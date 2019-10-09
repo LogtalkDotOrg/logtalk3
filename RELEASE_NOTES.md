@@ -27,7 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: Support for using `encoding/1` directives in included files.
+* ADDED: Support for using `encoding/1` directives in included files, which
+may specify encodings different from the encoding of the main file.
 
 * ADDED: Lint check for `findall(_, Goal, _)` goals which misuse `findall/3`
 to backtrack into all solutions of `Goal`.
@@ -37,6 +38,9 @@ export built-in predicates.
 
 * FIXED: Generate a compiler error when an entity parameter is not a variable.
 Thanks to Paul Brown for the bug report.
+
+* FIXED: The lint check on `call/1` wrappers to skip warnings when the wrapped
+goal is a cut-transparent control construct.
 
 Prolog adapter and integration files
 ------------------------------------
