@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.53,
+		version is 1.54,
 		author is 'Paulo Moura',
-		date is 2019/05/07,
+		date is 2019/10/09,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1583,96 +1583,6 @@
 		sleep(Seconds) :-
 			Milliseconds is Seconds * 1000,
 			{sleep(Milliseconds)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, jekejeke)).
-
-		pid(_) :-
-			throw(not_available(pid/1)).
-
-		shell(_, _) :-
-			throw(not_available(shell/2)).
-
-		shell(_) :-
-			throw(not_available(shell/1)).
-
-		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath)}.
-
-		make_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			(	{exists_directory(ExpandedPath)} ->
-				true
-			;	{make_directory(ExpandedPath)}
-			).
-
-		make_directory_path(Directory) :-
-			make_directory_path_portable(Directory).
-
-		delete_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{delete_directory(ExpandedPath)}.
-
-		change_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			set_prolog_flag(base_url, ExpandedPath).
-
-		working_directory(Directory) :-
-			current_prolog_flag(base_url, Directory).
-
-		directory_exists(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{exists_directory(ExpandedPath)}.
-
-		file_exists(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{exists_file(ExpandedPath)}.
-
-		file_modification_time(File, Time) :-
-			absolute_file_name(File, ExpandedPath),
-			{get_time_file(ExpandedPath, Time)}.
-
-		file_size(_, _) :-
-			throw(not_available(file_size/2)).
-
-		file_permission(_, _) :-
-			throw(not_available(file_permission/2)).
-
-		rename_file(Old, New) :-
-			absolute_file_name(Old, OldExpandedPath),
-			absolute_file_name(New, NewExpandedPath),
-			{rename_file(OldExpandedPath, NewExpandedPath)}.
-
-		delete_file(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{delete_file(ExpandedPath)}.
-
-		environment_variable(Variable, Value) :-
-			{getenv(Variable, Value)}.
-
-		time_stamp(_) :-
-			throw(not_available(time_stamp/1)).
-
-		date_time(0, 0, 0, 0, 0, 0, 0).
-
-		cpu_time(Seconds) :-
-			{statistics(time, Milliseconds)},
-			Seconds is Milliseconds / 1000 .
-
-		wall_time(Seconds) :-
-			{statistics(uptime, Milliseconds)},
-			Seconds is Milliseconds / 1000 .
-
-		operating_system_type(Type) :-
-			(	{getenv('COMSPEC', _)} ->
-				Type = windows
-			;	Type = unix
-			).
-
-		command_line_arguments(_) :-
-			throw(not_available(command_line_arguments/1)).
-
-		sleep(_) :-
-			throw(not_available(sleep/1)).
 
 	:- else.
 
