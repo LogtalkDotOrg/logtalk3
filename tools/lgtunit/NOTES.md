@@ -21,7 +21,7 @@ ________________________________________________________________________
 =========
 
 The `lgtunit` tool provides testing support for Logtalk. It can also be used
-for testing Prolog code.
+for testing plain Prolog code and Prolog module code.
 
 This tool is inspired by the xUnit frameworks architecture and by the works of
 Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker (SWI-Prolog
@@ -426,6 +426,39 @@ The conditional compilation directives can also be used in alternative but note
 that in this case there will be no report on the number of skipped tests.
 
 
+Checking test goal results
+--------------------------
+
+Checking test goal results can be performed using the `test/2-3` dialect `true/1`
+and `deterministic/1` assertions. For example:
+
+	test(compare_3_order_less, deterministic(Order == (<))) :-
+		compare(Order, 1, 2).
+
+For the other test dialects, checking test goal results can be performed by calling
+the `assertion/1-2` utility predicates or by writing the checking goals directly in
+the test body. For example:
+
+	test(compare_3_order_less) :-
+		compare(Order, 1, 2),
+		^^assertion(Order == (<)).
+
+or:
+
+	succeeds(compare_3_order_less) :-
+		compare(Order, 1, 2),
+		Order == (<).
+
+Using assertions is preferable as it facilitates debugging by printing the
+unexpected results when the tests fail.
+
+Ground results can be compared using the standard `==/2` term equality built-in
+predicate. Non-ground results can be compared using the `variant/2` predicate
+provided by `lgtunit`. Using the `=/2`  term unification built-in predicate is
+almost always an error as it would mask test goals failing to bind output
+arguments.
+
+
 Testing non-deterministic predicates
 ------------------------------------
 
@@ -433,9 +466,7 @@ For testing non-deterministic predicates (with a finite and manageable number
 of solutions), you can wrap the test goal using the standard `findall/3`
 predicate to collect all solutions and check against the list of expected
 solutions. When the expected solutions are a set, use in alternative the
-standard `setof/3` predicate. Ground results can be compared using the `==/2`
-predicate. Non-ground results can be compared using the `variant/2` predicate
-provided by `lgtunit`.
+standard `setof/3` predicate.
 
 
 Testing generators
@@ -451,7 +482,7 @@ called to report details on any solution that fails the test. For example:
 	test(test_solution_generator) :-
 		forall(
 			generator(X, Y, Z),
-			assertion(solution(X,Y,Z), my_test(X,Y,Z))
+			assertion(generator(X,Y,Z), test(X,Y,Z))
 		).
 
 

@@ -62,6 +62,8 @@ Documentation
 a discussion on how to use hook objects to deal with Prolog term-expansion
 mechanisms when compiling modules as objects.
 
+* IMPROVED: Documentation of the `lgtunit` tool on checking test goal results.
+
 Library
 -------
 

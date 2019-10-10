@@ -127,6 +127,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#user-defined-test-dialects">User-defined test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quickcheck">QuickCheck</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#skipping-tests">Skipping tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#checking-test-goal-results">Checking test goal results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-non-deterministic-predicates">Testing non-deterministic predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-generators">Testing generators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-input-output-predicates">Testing input/output predicates</a></li>
@@ -229,7 +230,7 @@
   <div class="section" id="lgtunit">
 <h1><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code><a class="headerlink" href="#lgtunit" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool provides testing support for Logtalk. It can also
-be used for testing Prolog code.</p>
+be used for testing plain Prolog code and Prolog module code.</p>
 <p>This tool is inspired by the xUnit frameworks architecture and by the
 works of Joachim Schimpf (ECLiPSe library <code class="docutils literal notranslate"><span class="pre">test_util</span></code>) and Jan
 Wielemaker (SWI-Prolog <code class="docutils literal notranslate"><span class="pre">plunit</span></code> package).</p>
@@ -654,15 +655,43 @@ the <code class="docutils literal notranslate"><span class="pre">test/3</span></
 but note that in this case there will be no report on the number of
 skipped tests.</p>
 </div>
+<div class="section" id="checking-test-goal-results">
+<h2>Checking test goal results<a class="headerlink" href="#checking-test-goal-results" title="Permalink to this headline">¶</a></h2>
+<p>Checking test goal results can be performed using the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code>
+dialect <code class="docutils literal notranslate"><span class="pre">true/1</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> assertions. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(compare_3_order_less, deterministic(<span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>))) <span class="o">:-</span>
+    <span class="k">compare</span>(<span class="nv">Order</span>, <span class="m">1</span>, <span class="m">2</span>).
+</pre></div>
+</div>
+<p>For the other test dialects, checking test goal results can be performed
+by calling the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> utility predicates or by writing the
+checking goals directly in the test body. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(compare_3_order_less) <span class="o">:-</span>
+    <span class="k">compare</span>(<span class="nv">Order</span>, <span class="m">1</span>, <span class="m">2</span>),
+    <span class="o">^^</span>assertion(<span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>)).
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>succeeds(compare_3_order_less) <span class="o">:-</span>
+    <span class="k">compare</span>(<span class="nv">Order</span>, <span class="m">1</span>, <span class="m">2</span>),
+    <span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>).
+</pre></div>
+</div>
+<p>Using assertions is preferable as it facilitates debugging by printing
+the unexpected results when the tests fail.</p>
+<p>Ground results can be compared using the standard <code class="docutils literal notranslate"><span class="pre">==/2</span></code> term equality
+built-in predicate. Non-ground results can be compared using the
+<code class="docutils literal notranslate"><span class="pre">variant/2</span></code> predicate provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. Using the <code class="docutils literal notranslate"><span class="pre">=/2</span></code> term
+unification built-in predicate is almost always an error as it would
+mask test goals failing to bind output arguments.</p>
+</div>
 <div class="section" id="testing-non-deterministic-predicates">
 <h2>Testing non-deterministic predicates<a class="headerlink" href="#testing-non-deterministic-predicates" title="Permalink to this headline">¶</a></h2>
 <p>For testing non-deterministic predicates (with a finite and manageable
 number of solutions), you can wrap the test goal using the standard
 <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> predicate to collect all solutions and check against the
 list of expected solutions. When the expected solutions are a set, use
-in alternative the standard <code class="docutils literal notranslate"><span class="pre">setof/3</span></code> predicate. Ground results can be
-compared using the <code class="docutils literal notranslate"><span class="pre">==/2</span></code> predicate. Non-ground results can be
-compared using the <code class="docutils literal notranslate"><span class="pre">variant/2</span></code> predicate provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>.</p>
+in alternative the standard <code class="docutils literal notranslate"><span class="pre">setof/3</span></code> predicate.</p>
 </div>
 <div class="section" id="testing-generators">
 <h2>Testing generators<a class="headerlink" href="#testing-generators" title="Permalink to this headline">¶</a></h2>
@@ -676,7 +705,7 @@ For example:</p>
 test(test_solution_generator) <span class="o">:-</span>
     <span class="k">forall</span>(
         generator(<span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>),
-        assertion(solution(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>), my_test(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>))
+        assertion(generator(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>), test(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>))
     ).
 </pre></div>
 </div>
