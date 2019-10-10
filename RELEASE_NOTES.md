@@ -50,6 +50,9 @@ Prolog adapter and integration files
 * ADDED: Support to the SWI-Prolog and YAP adapter files to expand Prolog
 `use_module/2` directives with an `except/1` second argument.
 
+* ADDED: Support to the SWI-Prolog and YAP adapter files to expand Prolog
+`use_module/2` directives that specify predicate aliases.
+
 * ADDED: Support to the ECLiPSe adapter file to expand `module/1` directives
 to allow compiling modules as objects.
 

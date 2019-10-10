@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on September 28, 2019
+%  Last updated on October 10, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -638,13 +638,15 @@
 	% we're compiling a module as an object; assume referenced modules are also compiled as objects
 	!,
 	'$lgt_yap_list_of_exports'(File, Module, Exports),
-	'$lgt_yap_filter_imports'(Imports0, Exports, Imports).
+	'$lgt_yap_filter_imports'(Imports0, Exports, Imports1),
+	'$lgt_yap_fix_predicate_aliases'(Imports1, Imports).
 
 '$lgt_yap_directive_expansion'(use_module(File, Imports0), [{:- use_module(File, Imports0)}, (:- use_module(Module, Imports))]) :-
 	logtalk_load_context(entity_type, _),
 	% object or category using a Prolog module
 	'$lgt_yap_list_of_exports'(File, Module, Exports),
-	'$lgt_yap_filter_imports'(Imports0, Exports, Imports),
+	'$lgt_yap_filter_imports'(Imports0, Exports, Imports1),
+	'$lgt_yap_fix_predicate_aliases'(Imports1, Imports),
 	use_module(File, Imports0).
 
 '$lgt_yap_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
@@ -732,6 +734,19 @@
 		),
 		Imports
 	).
+
+'$lgt_yap_fix_predicate_aliases'([], []).
+'$lgt_yap_fix_predicate_aliases'([Import0| Imports0], [Import| Imports]) :-
+	'$lgt_yap_fix_predicate_aliases_aux'([Import0| Imports0], [Import| Imports]).
+'$lgt_yap_fix_predicate_aliases'(except(Excluded), except(Excluded)).
+
+'$lgt_yap_fix_predicate_aliases_aux'([], []).
+'$lgt_yap_fix_predicate_aliases_aux'([as(Functor/Arity,Alias)| Imports0], [as(Functor/Arity,Alias/Arity)| Imports]) :-
+	atom(Alias),
+	!,
+	'$lgt_yap_fix_predicate_aliases_aux'(Imports0, Imports).
+'$lgt_yap_fix_predicate_aliases_aux'([Import| Imports0], [Import| Imports]) :-
+	'$lgt_yap_fix_predicate_aliases_aux'(Imports0, Imports).
 
 
 '$lgt_yap_encoding_to_logtalk_encoding'(ascii, 'US-ASCII').
