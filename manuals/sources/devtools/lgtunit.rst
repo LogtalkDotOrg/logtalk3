@@ -507,9 +507,13 @@ the unexpected results when the tests fail.
 
 Ground results can be compared using the standard ``==/2`` term equality
 built-in predicate. Non-ground results can be compared using the
-``variant/2`` predicate provided by ``lgtunit``. Using the ``=/2`` term
-unification built-in predicate is almost always an error as it would
-mask test goals failing to bind output arguments.
+``variant/2`` predicate provided by ``lgtunit``. The standard
+``subsumes_term/2`` built-in predicate can be used when testing a
+compound term structure while abstracting some of its arguments.
+Floating-point numbers can be compared using the ``=~=/2`` predicate
+provided by ``lgtunit``. Using the ``=/2`` term unification built-in
+predicate is almost always an error as it would mask test goals failing
+to bind output arguments.
 
 Testing non-deterministic predicates
 ------------------------------------
