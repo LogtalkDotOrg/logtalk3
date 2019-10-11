@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for contributions
-%  Last updated on December 30, 2017
+%  Last updated on October 10, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -33,3 +33,4 @@
 logtalk_library_path(ports, logtalk_user('ports/')).
 
 logtalk_library_path(metagol, ports('metagol/')).
+logtalk_library_path(toychr, ports('toychr/')).

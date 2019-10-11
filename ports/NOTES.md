@@ -23,6 +23,10 @@ This folder contains ports of third-party libraries and applications:
 	This folder contains a Logtalk port of `metagol`, an inductive
 	logic programming (ILP) system based on meta-interpretive learning.
 
+* `toychr`  
+	This folder contains a Logtalk port of ToyCHR, a reference
+	implementation of Constraint Handling Rules (CHR).
+
 See the copyright and license information on the port files for usage
 and distributions conditions.
 

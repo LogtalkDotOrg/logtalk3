@@ -111,6 +111,11 @@ Examples
 * FIXED: The `clustering` and `document_converter` Java examples when using
 YAP as the backend Prolog compiler.
 
+Ports
+-----
+
+* ADDED: Port of ToyCHR by Gregory J. Duck. Experimental.
+
 Installers and installation scripts
 -----------------------------------
 

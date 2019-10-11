@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on July 22, 2019
+%  Last updated on October 10, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -80,6 +80,7 @@ logtalk_library_path(xml_parser, contributions('xml_parser/')).
 
 % ports of third-party libraries and applications
 logtalk_library_path(metagol, ports('metagol/')).
+logtalk_library_path(toychr, ports('toychr/')).
 
 % developer tools
 logtalk_library_path(assertions, tools('assertions/')).
