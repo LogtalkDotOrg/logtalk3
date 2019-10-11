@@ -237,8 +237,9 @@ paths are resolved using the current working directory. When the calls
 are made from a source file, relative source file paths are resolved
 using the source file directory.</p>
 <p>Note that only the errors related to problems in the predicate argument
-are listed below. This predicate fails when errors are found during
-compilation of a source file.</p>
+are listed below. This predicate fails on the first error found during
+compilation of a source file. In this case, no file with the compiled
+code is written to disk.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>

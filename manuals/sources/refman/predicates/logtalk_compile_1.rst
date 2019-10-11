@@ -45,8 +45,9 @@ are made from a source file, relative source file paths are resolved
 using the source file directory.
 
 Note that only the errors related to problems in the predicate argument
-are listed below. This predicate fails when errors are found during
-compilation of a source file.
+are listed below. This predicate fails on the first error found during
+compilation of a source file. In this case, no file with the compiled
+code is written to disk.
 
 Modes and number of proofs
 --------------------------

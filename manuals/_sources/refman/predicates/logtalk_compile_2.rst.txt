@@ -48,8 +48,9 @@ default using the source file directory (unless a
 :ref:`relative_to <flag_relative_to>` flag is passed).
 
 Note that only the errors related to problems in the predicate argument
-are listed below. This predicate fails when errors are found during
-compilation of a source file.
+are listed below. This predicate fails on the first error found during
+compilation of a source file. In this case, no file with the compiled
+code is written to disk.
 
 .. warning::
 

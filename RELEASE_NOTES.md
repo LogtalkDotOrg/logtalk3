@@ -67,6 +67,9 @@ mechanisms when compiling modules as objects.
 
 * IMPROVED: Documentation of the `lgtunit` tool on checking test goal results.
 
+* IMPROVED: Documentation of the `logtalk_compile/1-2` and `logtalk_load/1-2`
+built-in predicates.
+
 Library
 -------
 
