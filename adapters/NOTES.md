@@ -405,6 +405,9 @@ that can help in generating QLF files from Logtalk and optionally a
 Logtalk application. The script documentation also explains how to
 generate saved states that include Logtalk applications.
 
+Messages sent from modules (including `user`) use static binding when the
+Logtalk `optimize` flag is turned on before compiling the module files.
+
 
 XSB 3.8.0 and later versions
 ----------------------------
@@ -468,3 +471,6 @@ See the `scripts/embedding/yap` directory for a sample shell script
 that can help in pre-compiling Logtalk and Logtalk applications. The
 script documentation also explains how to generated saved states that
 include Logtalk applications.
+
+Messages sent from modules (including `user`) use static binding when the
+Logtalk `optimize` flag is turned on before compiling the module files.

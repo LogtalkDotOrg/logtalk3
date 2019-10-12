@@ -292,6 +292,9 @@ have an impact on dynamic binding performance.</p>
 <p>Note that messages to <em>self</em> (<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> calls) always
 use dynamic binding as the object that receives the message is only know
 at runtime.</p>
+<p>Messages sent from Prolog modules may use static binding depending on the
+used backend Prolog compiler when the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag is turned on.
+Consult the Prolog compiler adapter file notes for details.</p>
 </div>
 <div class="section" id="inlining">
 <h2>Inlining<a class="headerlink" href="#inlining" title="Permalink to this headline">¶</a></h2>

@@ -104,6 +104,10 @@ Note that messages to *self* (:ref:`control_send_to_self_1` calls) always
 use dynamic binding as the object that receives the message is only know
 at runtime.
 
+Messages sent from Prolog modules may use static binding depending on the
+used backend Prolog compiler when the ``optimize`` flag is turned on.
+Consult the Prolog compiler adapter file notes for details.
+
 Inlining
 --------
 
