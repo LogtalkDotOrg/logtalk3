@@ -18,7 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(threads, supported), current_logtalk_flag(engines, supported))).
+:- if((
+	current_logtalk_flag(threads, supported),
+	current_logtalk_flag(engines, supported)
+)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),

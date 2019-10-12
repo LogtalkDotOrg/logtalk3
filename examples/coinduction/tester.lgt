@@ -18,9 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((	current_logtalk_flag(coinduction, supported),
-		\+ current_logtalk_flag(prolog_dialect, cx),
-		\+ current_logtalk_flag(prolog_dialect, eclipse)
+:- if((
+	current_logtalk_flag(coinduction, supported),
+	\+ current_logtalk_flag(prolog_dialect, cx),
+	\+ current_logtalk_flag(prolog_dialect, eclipse)
 )).
 
 	:- initialization((

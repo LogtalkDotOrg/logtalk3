@@ -81,8 +81,9 @@
 			abs(Float1 - Float2) < 0.00001 * max(abs(Float1), abs(Float2))
 		).
 
-	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
-			(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx)
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx)
 	)).
 		epsilon(Epsilon) :-
 			Epsilon is epsilon.

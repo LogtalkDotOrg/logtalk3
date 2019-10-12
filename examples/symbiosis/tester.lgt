@@ -18,8 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((	current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect == gnu; Dialect == sicstus; Dialect == swi; Dialect == yap)
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == eclipse; Dialect == gnu; Dialect == sicstus; Dialect == swi; Dialect == yap)
 )).
 
 	:- initialization((

@@ -532,8 +532,11 @@
 		fail.
 	print_flags.
 
-	:- if((	\+ current_logtalk_flag(prolog_dialect, gnu),	% GNU Prolog format/2-3 doesn't support setting tabs
-			predicate_property(format(_, _), built_in)		% format/2-3 are not standard Prolog predicates
+	:- if((
+		% GNU Prolog format/2-3 doesn't support setting tabs
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		% format/2-3 are not standard Prolog predicates
+		predicate_property(format(_, _), built_in)
 	)).
 
 		print_flags(Group) :-

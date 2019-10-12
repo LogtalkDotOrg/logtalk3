@@ -1419,8 +1419,9 @@
 	% perform a maximum of 64 shrink operations on a counter-example
 	default_quick_check_option(s(64)).
 
-	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
-			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
 	)).
 
 		% avoid portability warnings
@@ -1569,8 +1570,9 @@
 			abs(Float1 - Float2) < 0.00001 * max(abs(Float1), abs(Float2))
 		).
 
-	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
-			(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx)
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx)
 	)).
 		epsilon(Epsilon) :-
 			Epsilon is epsilon.

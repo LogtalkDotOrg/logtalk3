@@ -168,19 +168,19 @@
 	:- dynamic(user::logtalk_make_target_action/1).
 
 	user::logtalk_make_target_action(all) :-
-		retractall(target_action_(all)),
+		retractall(target_action_(_)),
 		assertz(target_action_(all)).
 
 	user::logtalk_make_target_action(circular) :-
-		retractall(target_action_(circular)),
+		retractall(target_action_(_)),
 		assertz(target_action_(circular)).
 
 	user::logtalk_make_target_action(check) :-
-		retractall(target_action_(check)),
+		retractall(target_action_(_)),
 		assertz(target_action_(check)).
 
 	user::logtalk_make_target_action(documentation) :-
-		retractall(target_action_(documentation)),
+		retractall(target_action_(_)),
 		assertz(target_action_(documentation)).
 
 	% supress all logtalk_make/0-1 messages to not pollute the unit tests output

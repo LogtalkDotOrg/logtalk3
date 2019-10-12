@@ -274,11 +274,11 @@
 		;	numbervars(Entity, 0, _),
 			setof(Count, entity_count(Entity, Count), Counts) ->
 			true
-		;	Counts = [9999] 
+		;	Counts = [9999]
 		),
 		reverse(Counts, [MaxCount| _]),
 		(	MaxCount =< 9999 ->
-			% port labels have a maximum length of 4 
+			% port labels have a maximum length of 4
 			MaximumWidthCount = 4
 		;	number_codes(MaxCount, Codes),
 			atom_codes(Atom, Codes),
@@ -430,8 +430,9 @@
 		Length1 is Length0 - 1,
 		generate_atom(Length1, Character, Atom1, Atom).
 
-	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
-			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
 	)).
 
 		call_goal(TGoal, Deterministic) :-
