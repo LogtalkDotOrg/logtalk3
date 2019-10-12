@@ -6488,7 +6488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_write_entity_code'(category, Ctg) :-
 	'$lgt_pp_category_'(Ctg, _, _, _, Rnm, _),
 	'$lgt_write_entity_code'(Rnm).
-	
+
 
 '$lgt_write_entity_code'(Rnm) :-
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
@@ -6734,7 +6734,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(resource_error(text_encoding_support), directive(encoding(Encoding))))
 	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
 		(	'$lgt_decompose_file_name'(SourceFile, _, _, Extension),
-			'$lgt_file_extension'(prolog, Extension), 
+			'$lgt_file_extension'(prolog, Extension),
 			'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, Encoding, Input) ->
 			% converted Prolog specific encoding to Logtalk encoding;
 			% possibly compiling a module as an object
@@ -14432,9 +14432,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_singleton_variable_in_meta_argument'([Variable| _], Term, Variable) :-	
+'$lgt_singleton_variable_in_meta_argument'([Variable| _], Term, Variable) :-
 	'$lgt_count_variable_occurrences'(Term, Variable, 1).
-'$lgt_singleton_variable_in_meta_argument'([_| Variables], Term, Variable) :-	
+'$lgt_singleton_variable_in_meta_argument'([_| Variables], Term, Variable) :-
 	'$lgt_singleton_variable_in_meta_argument'(Variables, Term, Variable).
 
 

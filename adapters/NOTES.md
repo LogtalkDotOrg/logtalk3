@@ -81,8 +81,8 @@ following table summarizes the availability of these features:
 |  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Engines    |    Threads    |  
 | :--------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |  
 |  B-Prolog        |      yes      |       no      |       no      |       no      |       no      |  
-|  CxProlog        |       no      |      yes      |      yes      |       no      |       no      |  
-|  ECLiPSe         |       no      |      yes      |       no      |      yes      |     partial   |  
+|  CxProlog        |       no      |     partial   |      yes      |       no      |       no      |  
+|  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |  
 |  Lean Prolog     |       no      |       no      |      yes      |       no      |       no      |  
