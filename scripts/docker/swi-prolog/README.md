@@ -38,7 +38,7 @@ Volumes
 The work directory where Logtalk is started. The code base can be mounted here.
 
 - `/logtalkuser_prefix`  
-If the user would like to customize its installation, he could mount in this volume the parent directory in its host system where it is located the custom Logtalk user directory. If no Logtalk user directory exists, it will be created the first time and will be persisted and used in the following executions of the Logtalk container.
+To customize its installation, the user can mount in this volume the parent directory in its host system where it is located the custom Logtalk user directory. If no Logtalk user directory exists, it will be created the first time and will be persisted and used in the following executions of the Logtalk container.
 
 
 Building a Logtalk image
