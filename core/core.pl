@@ -11884,7 +11884,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ ground(Term2),
 	\+ \+ (
 		term_variables(Term1-Term2, Vars0),
-		unify_with_occurs_check(Term1, Term2),
+		Term1 = Term2,
 		term_variables(Term1-Term2, Vars),
 		Vars0 == Vars
 	),
