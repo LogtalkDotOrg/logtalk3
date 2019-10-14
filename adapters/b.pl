@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on September 10, 2019
+%  Last updated on October 14, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -186,6 +186,12 @@ findall(Term, Goal, List, Tail) :-
 
 '$lgt_prolog_database_predicate'(assert(_)).
 '$lgt_prolog_database_predicate'(listing(_)).
+
+
+% '$lgt_prolog_predicate_property'(?callable)
+
+'$lgt_prolog_predicate_property'(_) :-
+	fail.
 
 
 

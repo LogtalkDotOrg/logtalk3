@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for using the `predicate_property/2` method to query
+proprietary predicate properties that result from proprietary predicate
+directives that are supported by the adapter files.
+
 * ADDED: Support for using `encoding/1` directives in included files, which
 may specify encodings different from the encoding of the main file.
 
@@ -46,6 +50,9 @@ goal is a cut-transparent control construct.
 
 Prolog adapter and integration files
 ------------------------------------
+
+* ADDED: Internal predicate to all adapter files to declare additional,
+proprietary predicate properties.
 
 * ADDED: Support to the SWI-Prolog and YAP adapter files to expand Prolog
 `use_module/2` directives with an `except/1` second argument.

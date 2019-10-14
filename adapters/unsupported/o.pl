@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for O-Prolog 1.32 and later versions
-%  Last updated on September 10, 2019
+%  Last updated on October 14, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -196,6 +196,12 @@ format(Format, Arguments) :-
 % '$lgt_prolog_database_predicate'(@callable)
 
 '$lgt_prolog_database_predicate'(_) :-
+	fail.
+
+
+% '$lgt_prolog_predicate_property'(?callable)
+
+'$lgt_prolog_predicate_property'(_) :-
 	fail.
 
 

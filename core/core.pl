@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 31, 0, b07)).
+'$lgt_version_data'(logtalk(3, 31, 0, b08)).
 
 
 
@@ -24850,6 +24850,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(instantiation_error, Context))
 	;	'$lgt_valid_predicate_property'(Term) ->
 		true
+	;	'$lgt_prolog_predicate_property'(Term) ->
+		true
 	;	throw(error(domain_error(predicate_property, Term), Context))
 	).
 
@@ -24857,6 +24859,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_valid_predicate_property'(Term) ->
+		true
+	;	'$lgt_prolog_predicate_property'(Term) ->
 		true
 	;	throw(error(domain_error(predicate_property, Term), Context))
 	).

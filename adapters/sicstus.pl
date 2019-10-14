@@ -222,6 +222,11 @@ forall(Generate, Test) :-
 '$lgt_prolog_database_predicate'(listing(_)).
 
 
+% '$lgt_prolog_predicate_property'(?callable)
+
+'$lgt_prolog_predicate_property'(volatile).
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
