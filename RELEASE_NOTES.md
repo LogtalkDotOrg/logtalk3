@@ -56,6 +56,8 @@ Prolog adapter and integration files
 * ADDED: Support to the ECLiPSe adapter file to expand `module/1` directives
 to allow compiling modules as objects.
 
+* FIXED: Workaround lack of a `foreign` predicate property in SICStus Prolog.
+
 Documentation
 -------------
 

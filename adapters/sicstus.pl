@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on September 10, 2019
+%  Last updated on October 14, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -122,7 +122,10 @@ forall(Generate, Test) :-
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
+:- dynamic('$lgt_sicstus_foreign_'/1).
 
+'$lgt_predicate_property'(Pred, foreign) :-
+	'$lgt_sicstus_foreign_'(Pred).
 '$lgt_predicate_property'(Pred, Prop) :-
 	predicate_property(Pred, Prop).
 
@@ -576,6 +579,21 @@ forall(Generate, Test) :-
 
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
+
+'$lgt_prolog_term_expansion'(begin_of_file, begin_of_file) :-
+	retractall('$lgt_sicstus_foreign_'(_)).
+
+'$lgt_prolog_term_expansion'(foreign_resource(ResourceName, Functions), {foreign_resource(ResourceName, Functions)}).
+
+'$lgt_prolog_term_expansion'(foreign(Routine, Mode), {foreign(Routine, Mode)}) :-
+	functor(Mode, Functor, Arity),
+	functor(TTemplate, Functor, Arity),
+	assertz('$lgt_sicstus_foreign_'(TTemplate)).
+
+'$lgt_prolog_term_expansion'(foreign(Routine, Language, Mode), {foreign(Routine, Language, Mode)}) :-
+	functor(Mode, Functor, Arity),
+	functor(TTemplate, Functor, Arity),
+	assertz('$lgt_sicstus_foreign_'(TTemplate)).
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	% allow first-argument indexing
