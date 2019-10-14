@@ -93,8 +93,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 %---------------------------------------------------------------------------%
 
 
-:- op(1150, xfy, chr_is).
-
 :- op(1180, xfx, ==>).
 :- op(1180, xfx, <=>).
 :- op(1150, fx, constraints).
@@ -109,7 +107,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
 		date is 2019/10/14,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
@@ -795,7 +793,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 					read(Pattern),
 					chr_spy(Pattern),
 					print_trace(Trans,Next,State)
-				;	Comm == '?' ->
+				;	Comm == ('?') ->
 					write('\n(enter)\tstep (apply transition)\n'),
 					write('n\tnext (finish executing current constraint)\n'),
 					write('f\tfail (cause derivation to fail)\n'),
@@ -969,15 +967,71 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		chr_option(trace,no),
 		chr_option(interactive,no).
 
-	% hack to workaround the lack of built-in support for non-buffered character input
-	read_single_char(Char) :-
-		flush_output, get_code(Code), char_code(Char, Code),
-		(	Code =:= 10 ->
-			true
-		;	peek_code(10) ->
-			get_code(_)
-		;	true
-		).
+	% read_single_char/1 definition copied from the Logtalk debugger
+
+	:- if(current_logtalk_flag(prolog_dialect, cx)).
+
+		read_single_char(Char) :-
+			{get_single_char(Code)}, put_code(Code), char_code(Char, Code),
+			(	Code =:= 10 ->
+				true
+			;	nl
+			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		read_single_char(Char) :-
+			flush(user), tyi(Code), put(Code), nl, char_code(Char, Code).
+
+	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+
+		read_single_char(Char) :-
+			get_key(Code), char_code(Char, Code), nl.
+
+	:- elif(current_logtalk_flag(prolog_dialect, ji)).
+
+		read_single_char(Char) :-
+			get_code(Code),
+			(	Code =:= -1 ->
+				put_code(10), Char = '\n'
+			;	put_code(Code), char_code(Char, Code), nl
+			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, lean)).
+
+		read_single_char(Char) :-
+			kbd_wait(Code),
+			put_code(Code),
+			nl,
+			char_code(Char, Code).
+
+	:- elif(current_logtalk_flag(prolog_dialect, qp)).
+
+		read_single_char(Char) :-
+			flush_output, get_code(Code), char_code(Char, Code),
+			(	Code =:= 10 ->
+				true
+			;	skip(10)
+			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+
+		read_single_char(Char) :-
+			{get_single_char(Code)}, put_code(Code), nl, char_code(Char, Code).
+
+	:- else.
+
+		% hack to workaround the lack of built-in support for non-buffered character input
+		read_single_char(Char) :-
+			flush_output, get_code(Code), char_code(Char, Code),
+			(	Code =:= 10 ->
+				true
+			;	peek_code(10) ->
+				get_code(_)
+			;	true
+			).
+
+	:- endif.
 
 	% definition taken from the SWI-Prolog documentation
 	variant(Term1, Term2) :-
