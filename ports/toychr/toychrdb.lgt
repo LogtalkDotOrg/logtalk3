@@ -107,7 +107,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
 		date is 2019/10/14,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
@@ -881,8 +881,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			write(C0), write('#'), write(I), write(':'), write(J)
 		;	C = num(C0,I) ->
 			write(C0), write('#'), write(I)
-		;	C = if_then_else(C,T,E) ->
-			write('('), write(C), write('->'),
+		;	C = if_then_else(C0,T,E) ->
+			write('('), write(C0), write('->'),
 			print_stack(T),
 			write(';'),
 			print_stack(E),
