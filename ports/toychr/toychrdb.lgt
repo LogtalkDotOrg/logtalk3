@@ -109,9 +109,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2019/05/08,
+		date is 2019/10/14,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'
@@ -951,7 +951,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		::retractall(chr_spy_point(_)).
 
 	chr_spy(Pattern) :-
-		::asserta(chr_spy_point(P0) :- (P0 =@= Pattern)).
+		::asserta((chr_spy_point(P0) :- variant(P0, Pattern))).
 
 	check_for_spy_point(C) :-
 		(	::chr_spy_point(C) ->
@@ -978,6 +978,16 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			get_code(_)
 		;	true
 		).
+
+	% definition taken from the SWI-Prolog documentation
+	variant(Term1, Term2) :-
+		% avoid trouble in any shared variables
+		copy_term(Term1, Term1Copy),
+		copy_term(Term2, Term2Copy),
+		% ground and compare the term copies
+		numbervars(Term1Copy, 0, N),
+		numbervars(Term2Copy, 0, N),
+		Term1Copy == Term2Copy.
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% PRINT BANNER
