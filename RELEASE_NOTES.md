@@ -30,6 +30,13 @@ Logtalk compiler and runtime
 * IMPROVED: Simplify lint warning for using the `sub_atom/5` predicate instead
 of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: SWI-Prolog packs `download/1` predicate to use an URL pattern instead
+of a version specific URL to allow upgrading. Thanks to Peter Ludemann for the
+bug report.
+
 
 3.31.0 - October 15, 2019
 =========================

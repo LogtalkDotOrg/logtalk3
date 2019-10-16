@@ -5,4 +5,4 @@ author('Paulo Moura', 'pmoura@logtalk.org').
 packager('Paulo Moura', 'pmoura@logtalk.org').
 maintainer('Paulo Moura', 'pmoura@logtalk.org').
 home('https://logtalk.org/').
-download('https://logtalk.org/files/swi-prolog/packs/logtalk-3.32.0.tgz').
+download('https://logtalk.org/files/swi-prolog/packs/logtalk-*.tgz').
