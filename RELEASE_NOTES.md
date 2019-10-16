@@ -37,6 +37,9 @@ Installers and installation scripts
 of a version specific URL to allow upgrading. Thanks to Peter Ludemann for the
 bug report.
 
+* FIXED: The Dockerfile to include the path to the `diagrams` tool scripts in
+the system path.
+
 
 3.31.0 - October 15, 2019
 =========================

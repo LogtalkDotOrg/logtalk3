@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on October 27, 2017
+##   Last updated on October 16, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
@@ -31,7 +31,7 @@ VOLUME ["/source", "/logtalkuser_prefix"]
 ENV LOGTALK_INSTALL_PREFIX=/usr/local
 ENV LOGTALKHOME=$LOGTALK_INSTALL_PREFIX/share/logtalk
 ENV LOGTALKUSER=/logtalkuser_prefix/logtalk
-ENV PATH=$PATH:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
+ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
 ENV MANPATH=$MANPATH:$LOGTALKHOME/man
 
 # Preparation for downloading
