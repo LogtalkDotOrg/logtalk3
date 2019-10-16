@@ -11927,8 +11927,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% assume that Var is an anonymous variable
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	atom_length(Prefix, Length),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, atom_concat(Prefix, Var, Atom), [sub_atom(Atom, 0, Length, _, Prefix)])),
+	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, atom_concat(Prefix, Var, Atom), [sub_atom(Atom, 0, _, _, Prefix)])),
 	fail.
 
 % term creation and decomposition predicates (only lint warnings)

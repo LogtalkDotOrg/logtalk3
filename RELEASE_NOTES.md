@@ -24,7 +24,11 @@ RELEASE NOTES
 3.32.0 - November ??, 2019
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
 
+* IMPROVED: Simplify lint warning for using the `sub_atom/5` predicate instead
+of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 
 
 3.31.0 - October 15, 2019
