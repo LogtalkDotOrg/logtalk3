@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * IMPROVED: Simplify lint warning for using the `sub_atom/5` predicate instead
 of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 
+* UPDATED: The search for a settings file at startup now also looks into the
+`$HOME/.config` directory as the last resort.
+
 Installers and installation scripts
 -----------------------------------
 

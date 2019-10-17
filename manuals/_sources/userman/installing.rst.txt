@@ -395,19 +395,27 @@ Settings files
 Although is always possible to edit the :term:`backend Prolog compiler` adapter
 files, the recommended solution to customize compiler flags is to edit
 the ``settings.lgt`` file in the Logtalk user folder or in the user home
-folder. Depending on the backend Prolog compiler and on the
-operating-system, is also possible to define per-project settings files
-by creating a ``settings.lgt`` file in the project directory and by
-starting Logtalk from this directory. At startup, Logtalk tries to load
-a ``settings.lgt`` file from the startup directory (assuming that the
-read-only :ref:`settings_file <flag_settings_file>` flag is set to
-``allow``). If not found, Logtalk tries to load a ``settings.lgt`` file
-from the Logtalk user folder. If still not found, Logtalk tries to load a
-``settings.lgt`` file from the user home folder. When no settings files are
-found, Logtalk will use the default compiler flag values set on the backend
-Prolog compiler adapter files. When limitations of the backend Prolog
-compiler or on the operating-system prevent Logtalk from finding the
-settings files, these can always be loaded manually after Logtalk startup.
+folder. Depending on the backend Prolog compiler and on the operating-system,
+is also possible to define per-project settings files by creating a
+``settings.lgt`` file in the project directory and by starting Logtalk from
+this directory. At startup, Logtalk tries to load a ``settings.lgt`` file
+from the following directories, searched in sequence:
+
+- Startup directory (``$LOGTALK_STARTUP_DIRECTORY``)
+
+- Logtalk user directory (``$LOGTALKUSER``)
+
+- User home directory (``$HOME``)
+
+- Config directory in the user home directory (``$HOME/.config``)
+
+The startup directory is only searched when the read-only
+:ref:`settings_file <flag_settings_file>` flag is set to ``allow``.
+When no settings files are found, Logtalk will use the default compiler flag
+values set on the backend Prolog compiler adapter files. When limitations of
+the backend Prolog compiler or on the operating-system prevent Logtalk from
+finding the settings files, these can always be loaded manually after Logtalk
+startup.
 
 Settings files are normal Logtalk source files (although when
 automatically loaded by Logtalk they are compiled silently with any

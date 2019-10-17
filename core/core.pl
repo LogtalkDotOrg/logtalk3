@@ -24990,7 +24990,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	% if not found, lookup for a settings file in the user home directory
 		'$lgt_expand_library_alias'(home, Home),
-		'$lgt_load_settings_file_from_directory'(Home, Options, Result) ->
+		(	'$lgt_load_settings_file_from_directory'(Home, Options, Result)
+		;	atom_concat(Home, '.config/', Config),
+			'$lgt_load_settings_file_from_directory'(Config, Options, Result)
+		) ->
 		true
 	;	% no settings file found
 		Result = none(restrict)
@@ -25007,7 +25010,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	% if still not found, lookup for a settings file in the user home directory
 		'$lgt_expand_library_alias'(home, Home),
-		'$lgt_load_settings_file_from_directory'(Home, Options, Result) ->
+		(	'$lgt_load_settings_file_from_directory'(Home, Options, Result)
+		;	atom_concat(Home, '.config/', Config),
+			'$lgt_load_settings_file_from_directory'(Config, Options, Result)
+		) ->
 		true
 	;	% no settings file found
 		Result = none(allow)

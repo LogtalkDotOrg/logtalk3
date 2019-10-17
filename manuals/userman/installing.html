@@ -515,19 +515,24 @@ values are <code class="docutils literal notranslate"><span class="pre">unsuppor
 <p>Although is always possible to edit the <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> adapter
 files, the recommended solution to customize compiler flags is to edit
 the <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file in the Logtalk user folder or in the user home
-folder. Depending on the backend Prolog compiler and on the
-operating-system, is also possible to define per-project settings files
-by creating a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file in the project directory and by
-starting Logtalk from this directory. At startup, Logtalk tries to load
-a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file from the startup directory (assuming that the
-read-only <a class="reference internal" href="#flag-settings-file"><span class="std std-ref">settings_file</span></a> flag is set to
-<code class="docutils literal notranslate"><span class="pre">allow</span></code>). If not found, Logtalk tries to load a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file
-from the Logtalk user folder. If still not found, Logtalk tries to load a
-<code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file from the user home folder. When no settings files are
-found, Logtalk will use the default compiler flag values set on the backend
-Prolog compiler adapter files. When limitations of the backend Prolog
-compiler or on the operating-system prevent Logtalk from finding the
-settings files, these can always be loaded manually after Logtalk startup.</p>
+folder. Depending on the backend Prolog compiler and on the operating-system,
+is also possible to define per-project settings files by creating a
+<code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file in the project directory and by starting Logtalk from
+this directory. At startup, Logtalk tries to load a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file
+from the following directories, searched in sequence:</p>
+<ul class="simple">
+<li><p>Startup directory (<code class="docutils literal notranslate"><span class="pre">$LOGTALK_STARTUP_DIRECTORY</span></code>)</p></li>
+<li><p>Logtalk user directory (<code class="docutils literal notranslate"><span class="pre">$LOGTALKUSER</span></code>)</p></li>
+<li><p>User home directory (<code class="docutils literal notranslate"><span class="pre">$HOME</span></code>)</p></li>
+<li><p>Config directory in the user home directory (<code class="docutils literal notranslate"><span class="pre">$HOME/.config</span></code>)</p></li>
+</ul>
+<p>The startup directory is only searched when the read-only
+<a class="reference internal" href="#flag-settings-file"><span class="std std-ref">settings_file</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>.
+When no settings files are found, Logtalk will use the default compiler flag
+values set on the backend Prolog compiler adapter files. When limitations of
+the backend Prolog compiler or on the operating-system prevent Logtalk from
+finding the settings files, these can always be loaded manually after Logtalk
+startup.</p>
 <p>Settings files are normal Logtalk source files (although when
 automatically loaded by Logtalk they are compiled silently with any
 errors being simply ignored). The usual contents is an
