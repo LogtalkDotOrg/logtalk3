@@ -427,25 +427,13 @@ Logtalk built-in predicate and asserting clauses for the
 multifile dynamic predicate. Note that the
 :ref:`directives_set_logtalk_flag_2`
 directive cannot be used as its scope is local to the source file being
-compiled. For example, one of the troubles of writing portable
-applications is the different feature sets of Prolog compilers. A
-typical issue is the lack of support for tabling. Using the Logtalk
-support for conditional compilation you could write:
+compiled.
 
-::
-
-   :- if(current_logtalk_flag(tabling, supported)).
-
-       % add tabling directives to the source code
-       :- table(foo/1).
-       :- table(bar/2).
-
-   :- endif.
-
-The :ref:`prolog_dialect <flag_prolog_dialect>` flag may also be used
-with the conditional compilation directives in order to define a single
-settings file that can be used with several
-:term:`backend Prolog compilers <backend Prolog compiler>`. For example:
+One of the troubles of writing portable applications is the different
+feature sets of Prolog compilers. Using the Logtalk support for
+conditional compilation and the :ref:`prolog_dialect <flag_prolog_dialect>`
+flag we can write a single settings file that can be used with several
+:term:`backend Prolog compilers <backend Prolog compiler>`:
 
 ::
 
@@ -465,6 +453,7 @@ settings file that can be used with several
 
    :- endif.
 
+
 .. _installing_runtime:
 
 Compiler and runtime
@@ -480,23 +469,22 @@ a single file, depending on the Logtalk release that you are installing.
 Library
 ~~~~~~~
 
-Starting from version 2.7.0, Logtalk contains a standard library of
-useful objects, categories, and protocols. Read the corresponding
-``NOTES.md`` file for details about the library contents.
+The Logtalk distribution includes a standard library of useful objects,
+categories, and protocols. Read the corresponding ``NOTES.md`` file for
+details about the library contents.
 
 .. _installing_examples:
 
 Examples
 ~~~~~~~~
 
-Logtalk 2.x and 3.x contain new implementations of some of the examples
-provided with previous 1.x versions. The sources of each one of these
-examples can be found included in a subdirectory with the same name,
-inside the directory examples. The majority of these examples include a
-file named ``SCRIPT.txt`` that contains cases of simple utilization.
-Some examples may depend on other examples and library objects to work
-properly. Read the corresponding ``NOTES.md`` file for details before
-running an example.
+The Logtalk distribution includes a large number of programing examples.
+The sources of each one of these examples can be found included in a
+subdirectory with the same name, inside the directory examples. The
+majority of these examples include tests and a file named ``SCRIPT.txt``
+with sample calls. Some examples may depend on other examples and
+library objects to work properly. Read the corresponding ``NOTES.md``
+file for details before running an example.
 
 .. _installing_entities:
 

@@ -543,23 +543,12 @@ Logtalk built-in predicate and asserting clauses for the
 multifile dynamic predicate. Note that the
 <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
 directive cannot be used as its scope is local to the source file being
-compiled. For example, one of the troubles of writing portable
-applications is the different feature sets of Prolog compilers. A
-typical issue is the lack of support for tabling. Using the Logtalk
-support for conditional compilation you could write:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">current_logtalk_flag</span>(tabling, supported)).
-
-    <span class="c">% add tabling directives to the source code</span>
-<span class="p">    :- </span>table(foo<span class="o">/</span><span class="m">1</span>).
-<span class="p">    :- </span>table(bar<span class="o">/</span><span class="m">2</span>).
-
-<span class="p">:- </span><span class="k">endif</span>.
-</pre></div>
-</div>
-<p>The <a class="reference internal" href="#flag-prolog-dialect"><span class="std std-ref">prolog_dialect</span></a> flag may also be used
-with the conditional compilation directives in order to define a single
-settings file that can be used with several
-<a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>. For example:</p>
+compiled.</p>
+<p>One of the troubles of writing portable applications is the different
+feature sets of Prolog compilers. Using the Logtalk support for
+conditional compilation and the <a class="reference internal" href="#flag-prolog-dialect"><span class="std std-ref">prolog_dialect</span></a>
+flag we can write a single settings file that can be used with several
+<a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">current_logtalk_flag</span>(prolog_dialect, yap)).
 
     <span class="c">% YAP specific settings</span>
@@ -587,20 +576,19 @@ a single file, depending on the Logtalk release that you are installing.</p>
 </div>
 <div class="section" id="library">
 <span id="installing-library"></span><h3>Library<a class="headerlink" href="#library" title="Permalink to this headline">¶</a></h3>
-<p>Starting from version 2.7.0, Logtalk contains a standard library of
-useful objects, categories, and protocols. Read the corresponding
-<code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> file for details about the library contents.</p>
+<p>The Logtalk distribution includes a standard library of useful objects,
+categories, and protocols. Read the corresponding <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> file for
+details about the library contents.</p>
 </div>
 <div class="section" id="examples">
 <span id="installing-examples"></span><h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<p>Logtalk 2.x and 3.x contain new implementations of some of the examples
-provided with previous 1.x versions. The sources of each one of these
-examples can be found included in a subdirectory with the same name,
-inside the directory examples. The majority of these examples include a
-file named <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> that contains cases of simple utilization.
-Some examples may depend on other examples and library objects to work
-properly. Read the corresponding <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> file for details before
-running an example.</p>
+<p>The Logtalk distribution includes a large number of programing examples.
+The sources of each one of these examples can be found included in a
+subdirectory with the same name, inside the directory examples. The
+majority of these examples include tests and a file named <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code>
+with sample calls. Some examples may depend on other examples and
+library objects to work properly. Read the corresponding <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code>
+file for details before running an example.</p>
 </div>
 <div class="section" id="logtalk-source-files">
 <span id="installing-entities"></span><h3>Logtalk source files<a class="headerlink" href="#logtalk-source-files" title="Permalink to this headline">¶</a></h3>
