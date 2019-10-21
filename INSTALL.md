@@ -143,8 +143,12 @@ administration privileges.
 For POSIX systems using a bash shell, edit and add the following lines to your
 `~/.profile` file:
 
-	LOGTALKHOME=$HOME/lgt3git
-	LOGTALKUSER=$HOME/lgt3git
+	LOGTALKHOME=...
+	LOGTALKUSER=...
+
+In case you're using the clone directory itself to run Logtalk without running
+the `install.sh` script, you will also need to add:
+
 	PATH=$PATH:$LOGTALKHOME/tools/diagrams
 	PATH=$PATH:$LOGTALKHOME/tools/lgtdoc/xml
 	PATH=$PATH:$LOGTALKHOME/scripts
@@ -155,8 +159,12 @@ For POSIX systems using a bash shell, edit and add the following lines to your
 If you use instead a csh shell, edit and add the following lines to your
 `~/.cshrc` file:
 
-	setenv LOGTALKHOME "${HOME}"/lgt3git
-	setenv LOGTALKUSER "${HOME}"/lgt3git
+	setenv LOGTALKHOME ...
+	setenv LOGTALKUSER ...
+
+In case you're using the clone directory itself to run Logtalk without running
+the `install.sh` script, you will also need to add:
+
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/diagrams
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/lgtdoc/xml
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/scripts

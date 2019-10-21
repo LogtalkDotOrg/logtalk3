@@ -33,6 +33,11 @@ of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 * UPDATED: The search for a settings file at startup now also looks into the
 `$HOME/.config` directory as a last resort.
 
+Documentation
+-------------
+
+* FIXED: Installation instructions on setting Logtalk environment variables.
+
 Installers and installation scripts
 -----------------------------------
 
