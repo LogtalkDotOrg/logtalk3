@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 loaded module may be being referenced as an object (which is also a potential
 portability issue).
 
+* IMPROVED: Don't print portability warnings on Prolog dialect term-expansion
+when the term is expanded to itself.
+
 * IMPROVED: Simplify lint warning for using the `sub_atom/5` predicate instead
 of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 

@@ -8072,7 +8072,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms) :-
-	(	'$lgt_compiler_flag'(portability, warning) ->
+	(	Term \== ExpandedTerms,
+		'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _) ->
