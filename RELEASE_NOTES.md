@@ -44,6 +44,10 @@ Tools
 * FIXED: Bug in the `diagrams` tool where a spurious entity node would be
 generated for a related parametric entity with a bound parameter.
 
+* FIXED: Bug in the `diagrams` tool when generating edges between entities
+for cross-referencing predicate calls where the called entity is only know
+at runtime.
+
 Installers and installation scripts
 -----------------------------------
 

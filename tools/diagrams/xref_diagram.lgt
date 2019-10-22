@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.59,
+		version is 2.61,
 		author is 'Paulo Moura',
-		date is 2019/09/23,
+		date is 2019/10/22,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -208,7 +208,8 @@
 		remember_external_predicate(Callee0),
 		\+ ^^edge(Caller, Callee0, [calls], calls_predicate, _),
 		add_xref_code_url(Options, Kind, Entity, Line, XRefOptions),
-		(	Callee0 = Other::Predicate ->
+		(	Callee0 = Other::Predicate,
+			nonvar(Other) ->
 			^^ground_entity_identifier(object, Other, Name),
 			Callee = Name::Predicate
 		;	Callee = Callee0

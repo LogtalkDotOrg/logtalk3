@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.47,
+		version is 2.48,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019/10/22,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -571,6 +571,7 @@
 			Predicate,
 			Predicate0^Properties^NonTerminal^(
 				object_property(Object, calls(Other::Predicate0, Properties)),
+				nonvar(Other),
 				(	member(non_terminal(NonTerminal), Properties) ->
 					Predicate = NonTerminal
 				;	Predicate = Predicate0
@@ -681,6 +682,7 @@
 			Predicate,
 			Predicate0^Properties^NonTerminal^(
 				category_property(Category, calls(Object::Predicate0, Properties)),
+				nonvar(Object),
 				(	member(non_terminal(NonTerminal), Properties) ->
 					Predicate = NonTerminal
 				;	Predicate = Predicate0
