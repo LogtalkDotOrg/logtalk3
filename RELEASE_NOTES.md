@@ -38,6 +38,12 @@ Documentation
 
 * FIXED: Installation instructions on setting Logtalk environment variables.
 
+Tools
+-----
+
+* FIXED: Bug in the `diagrams` tool where a spurious entity node would be
+generated for a related parametric entity with a bound parameter.
+
 Installers and installation scripts
 -----------------------------------
 
