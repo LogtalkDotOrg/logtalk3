@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.84,
+		version is 1.85,
 		author is 'Paulo Moura',
-		date is 2019/09/16,
+		date is 2019/10/22,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -406,6 +406,10 @@
 
 	message_tokens(reference_to_unknown_module(File, Lines, Type, Entity, Module)) -->
 		['Reference to unknown module: ~q'-[Module], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(module_used_as_object(File, Lines, Type, Entity, Module)) -->
+		['Reference to unknown object but there is a module with the same name: ~q'-[Module], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Functor/Arity)) -->

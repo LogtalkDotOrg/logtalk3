@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Refined the compiler warning on unknown objects to detect when a
+loaded module may be being referenced as an object (which is also a potential
+portability issue).
+
 * IMPROVED: Simplify lint warning for using the `sub_atom/5` predicate instead
 of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 
@@ -40,6 +44,8 @@ Documentation
 
 Tools
 -----
+
+* UPDATED: The `tutor` tool for the refined unknown object warning.
 
 * FIXED: Bug in the `diagrams` tool where a spurious entity node would be
 generated for a related parametric entity with a bound parameter.

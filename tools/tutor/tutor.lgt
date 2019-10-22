@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.27,
+		version is 0.28,
 		author is 'Paulo Moura',
-		date is 2019/09/17,
+		date is 2019/10/22,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -257,7 +257,7 @@
 	error(permission_error(access, database, _)) -->
 		[	'The object does not allow debugging context switch calls.'-[], nl,
 			'Set its "context_switching_calls" flag to "allow" to fix this error.'-[], nl, nl
-		].		
+		].
 
 	error(permission_error(implement, self, _)) -->
 		['A protocols cannot implement itself. Typo in the object or category identifier?'-[], nl, nl].
@@ -400,7 +400,7 @@
 	explain(complementing_category_ignored(_, _, _, _)) -->
 		[	'Set the object "complements" flag to "restrict" or "allow"'-[], nl,
 			'to enable patching it using complementing categories.'-[], nl, nl
-		].		
+		].
 
 	explain(declared_static_predicate_called_but_not_defined(_, _, _, _, _)) -->
 		[	'Calls to declared, static, but undefined predicates fail. Predicate'-[], nl,
@@ -597,6 +597,9 @@
 
 	explain(reference_to_unknown_module(_, _, _, _, _)) -->
 		['Misspelt module name? Wrong file loading order? Circular references?'-[], nl, nl].
+
+	explain(module_used_as_object(_, _, _, _, _)) -->
+		['This is also portability issue as not all backends support a module system.'-[], nl, nl].
 
 	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Predicate)) -->
 		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Predicate], nl,

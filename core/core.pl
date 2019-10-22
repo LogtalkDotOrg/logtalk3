@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 32, 0, b01)).
+'$lgt_version_data'(logtalk(3, 32, 0, b02)).
 
 
 
@@ -17506,10 +17506,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 		% not an object defined in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _)),
-		% not a currently loaded module
-		\+ (atom(Object), '$lgt_prolog_feature'(modules, supported), current_module(Object)),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(unknown_entities), reference_to_unknown_object(File, Lines, Type, Entity, Object)),
+		(	atom(Object),
+			'$lgt_prolog_feature'(modules, supported),
+			current_module(Object) ->
+			'$lgt_print_message'(warning(unknown_entities), module_used_as_object(File, Lines, Type, Entity, Object))
+		;	'$lgt_print_message'(warning(unknown_entities), reference_to_unknown_object(File, Lines, Type, Entity, Object))
+		),
 	fail.
 
 '$lgt_report_unknown_objects'(_, _).
