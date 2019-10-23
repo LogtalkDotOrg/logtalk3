@@ -215,7 +215,12 @@ Brief description of each file in this folder:
 	`sphinx-quickstart` interactive script using the `conf.py_t` file in this
 	directory as the `conf.py` template. You can edit the `conf.py_t` to
 	customize it; see the Sphinx documentation for more details. See also the
-	custom CSS code used for Logtalk included API documentation.
+	custom CSS code used for Logtalk included API documentation. To use the
+	`sphinx-quickstart` script in non-interactive mode pass the options to
+	it using the syntax `lgt2rst -s -- -q` followed by `-p`, `-a` and `-v`
+	options. For example `lgt2rst -s -- -q -p "My Project" -a "J. Doe" -v "1.12"`.
+	This use in non-interactive mode is currently only supported by the
+	`lgt2rst.sh` POSIX script.
 
 - `lgt2txt.sh` and `lgt2txt.js`  
 	Sample scripts to batch convert XML files to text files.

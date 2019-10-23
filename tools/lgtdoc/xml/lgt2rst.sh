@@ -4,7 +4,7 @@
 ## 
 ##   XML documenting files to reStructuredText files conversion script
 ## 
-##   Last updated on June 6, 2019
+##   Last updated on October 23, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -23,6 +23,11 @@
 ## 
 #############################################################################
 
+
+print_version() {
+	echo "$(basename "$0") 2.0"
+	exit 0
+}
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -105,11 +110,13 @@ usage_help()
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -d output directory for the text files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
 	echo "  -s run sphinx-quickstart script"
+	echo "  -- arguments to be passed to sphinx-quickstart script (no default)"
 	echo "  -h help"
 	echo
 }
@@ -160,9 +167,10 @@ create_index_file()
 	echo "Generated on $date" >> "$index_file"
 }
 
-while getopts "d:i:t:p:sh" Option
+while getopts "vd:i:t:p:sh" option
 do
-	case $Option in
+	case $option in
+		v) print_version;;
 		d) d_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
@@ -172,6 +180,9 @@ do
 		*) usage_help; exit;;
 	esac
 done
+
+shift $((OPTIND - 1))
+args=("$@")
 
 if [ "$d_arg" != "" ] && [ ! -d "$d_arg" ] ; then
 	echo "Error! directory does not exists: $d_arg" >&2
@@ -247,7 +258,7 @@ if grep -q "<logtalk" ./*.xml ; then
 	echo
 	if [ "$sphinx" = true ] ; then
 		mv index.rst index.rst.backup
-		sphinx-quickstart --templatedir="$LOGTALKUSER/tools/lgtdoc/xml"
+		sphinx-quickstart --templatedir="$LOGTALKUSER/tools/lgtdoc/xml" "${args[@]}"
 		mv index.rst.backup index.rst
 	fi
 else
