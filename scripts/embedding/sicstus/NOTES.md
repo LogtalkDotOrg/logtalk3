@@ -30,3 +30,9 @@ The `.po` files can be loaded using the `load_files/1-2` predicates.
 
 See the script usage examples in the `../SCRIPT.txt` file on how to
 create a SICStus Prolog saved state that includes a Logtalk application.
+
+Usage
+-----
+
+Use `sicstus_logtalk_po.sh -h` for a list and description of the script
+options.

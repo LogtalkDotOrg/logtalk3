@@ -28,3 +28,9 @@ The following scripts are provided:
 
 See the script usage examples in the `../SCRIPT.txt` file on how to
 create a SWI-Prolog saved state that includes a Logtalk application.
+
+Usage
+-----
+
+Use `swipl_logtalk_qlf.sh -h` for a list and description of the script
+options.

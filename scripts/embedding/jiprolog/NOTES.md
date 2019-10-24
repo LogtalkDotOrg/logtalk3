@@ -42,3 +42,9 @@ The `logtalk.jar` file could then be distributed with the other JIProlog
 file by using the `load_library/1` JIProlog built-in predicate:
 
 	| ?- load_library('logtalk.jar').
+
+Usage
+-----
+
+Use `jiprolog_logtalk_jip.sh -h` for a list and description of the script
+options.

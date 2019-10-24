@@ -25,3 +25,9 @@ The following scripts are provided:
 - `cxprolog_logtalk_pl.sh`  
 	creates a `logtalk.pl` file with the Logtalk compiler and runtime
 	and an optional `application.pl` file for an application
+
+Usage
+-----
+
+Use `cxprolog_logtalk_pl.sh -h` for a list and description of the script
+options.
