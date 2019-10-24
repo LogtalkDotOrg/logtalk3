@@ -51,6 +51,9 @@ Tools
 * IMPROVED: The `lgt2rst.sh` POSIX script now supports passing additional
 options to the `sphinx-quickstart` script when using the `-s` option.
 
+* UPDATED: The `lgtdoc` POSIX scripts now accept a `-v` option for returning
+the script version.
+
 * UPDATED: The `tutor` tool for the refined unknown object warning.
 
 * FIXED: Bug in the `diagrams` tool where a spurious entity node would be

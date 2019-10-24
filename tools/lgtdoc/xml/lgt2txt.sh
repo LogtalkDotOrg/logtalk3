@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on May 16, 2018
+##   Last updated on October 24, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -22,6 +22,11 @@
 ## 
 #############################################################################
 
+
+print_version() {
+	echo "$(basename "$0") 1.0"
+	exit 0
+}
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -99,15 +104,17 @@ usage_help()
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -d output directory for the text files (default is $directory)"
 	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
 	echo "  -h help"
 	echo
 }
 
-while getopts "d:p:h" Option
+while getopts "vd:p:h" Option
 do
 	case $Option in
+		v) print_version;;
 		d) d_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		h) usage_help; exit;;

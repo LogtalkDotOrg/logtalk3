@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on May 17, 2018
+##   Last updated on October 24, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -22,6 +22,11 @@
 ## 
 #############################################################################
 
+
+print_version() {
+	echo "$(basename "$0") 1.0"
+	exit 0
+}
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -94,6 +99,7 @@ usage_help()
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -f format of the index file (either xhtml or html; default is $format)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
@@ -156,9 +162,10 @@ create_index_file()
 	echo "</html>" >> "$index_file"
 }
 
-while getopts "f:i:t:h" Option
+while getopts "vf:i:t:h" Option
 do
 	case $Option in
+		v) print_version;;
 		f) f_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;

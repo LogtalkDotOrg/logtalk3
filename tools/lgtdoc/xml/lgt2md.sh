@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to Mardown text files conversion script 
-##   Last updated on May 17, 2018
+##   Last updated on October 24, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -22,6 +22,11 @@
 ## 
 #############################################################################
 
+
+print_version() {
+	echo "$(basename "$0") 1.0"
+	exit 0
+}
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -102,6 +107,7 @@ usage_help()
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -d output directory for the text files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
@@ -142,9 +148,10 @@ create_index_file()
 	echo "Generated on $date" >> "$index_file"
 }
 
-while getopts "d:i:t:p:h" Option
+while getopts "vd:i:t:p:h" Option
 do
 	case $Option in
+		v) print_version;;
 		d) d_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
