@@ -6145,7 +6145,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles to disk and then loads to memory a source file
 
 '$lgt_load_file'(File, [RelativeTo| Flags]) :-
-	(	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
+	(	'$lgt_decompose_file_name'(File, Directory, Name, Extension),
+		atom_concat(Name, Extension, Basename),
+		'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _) ->
+		% assume that the File is an absolute path of a loaded file; this covers the
+		% case of embedded applications created in a POSIX system and being run on a
+		% Windows system or vice-versa
+		SourceFile = File
+	;	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
 		atom_concat(Name, Extension, Basename),
 		(	'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)
 			% file already loaded; possibly an embedded application in which case we
