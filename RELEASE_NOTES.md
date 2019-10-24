@@ -40,6 +40,9 @@ of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 * UPDATED: The search for a settings file at startup now also looks into the
 `$HOME/.config` directory as a last resort.
 
+* FIXED: Running embedded applications on systems other than the one used to
+create the embedding files.
+
 Documentation
 -------------
 

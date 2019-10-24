@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 32, 0, b02)).
+'$lgt_version_data'(logtalk(3, 32, 0, b03)).
 
 
 
@@ -6146,14 +6146,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_load_file'(File, [RelativeTo| Flags]) :-
 	(	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
-		'$lgt_file_exists'(SourceFile) ->
+		atom_concat(Name, Extension, Basename),
+		(	'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)
+			% file already loaded; possibly an embedded application in which case we
+			% don't want to throw a file existence error as the original source files
+			% may not exist, or no longer exist, on the system where we are running
+		;	'$lgt_file_exists'(SourceFile)
+		) ->
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
-	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
-	atom_concat(Name, Extension, Basename),
-	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
-	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp),
 		\+ '$lgt_failed_file_'(SourceFile) ->
 		% we're attempting to reload a file
@@ -6177,17 +6179,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_save_file_loading_dependency'(SourceFile)
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), reloading_file(SourceFile, Flags)),
-			'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Directory),
+			'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags),
 			'$lgt_print_message'(comment(loading), reloaded_file(SourceFile, Flags))
 		)
 	;	% first time loading this source file or previous attempt failed due to compilation error
 		'$lgt_print_message'(silent(loading), loading_file(SourceFile, Flags)),
-		'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Directory),
+		'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags),
 		'$lgt_print_message'(comment(loading), loaded_file(SourceFile, Flags))
 	).
 
 
-'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Directory) :-
+'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags) :-
+	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
+	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
+	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
 	retractall('$lgt_failed_file_'(SourceFile)),
 	% save the file loading dependency on a parent file if it exists
 	'$lgt_save_file_loading_dependency'(SourceFile),
