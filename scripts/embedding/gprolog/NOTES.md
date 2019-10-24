@@ -32,6 +32,19 @@ Usage
 Use `gprolog_embed_logtalk.sh -h` for a list and description of the script
 options.
 
+To define an application goal to be called automatically when running an
+executable, try e.g.
+
+	$ gprolog_embed_logtalk.sh ... -- --strip --no-top-level /full/path/to/init.pl
+
+With the contents of the `init.pl` file being an `initialization/1`
+directive calling the startup goal. For example:
+
+	:- initialization('::'(app,start)).
+
+To avoid syntax errors, use canonical notation in the argument of the
+directive as exemplified.
+
 Known issues
 ------------
 
