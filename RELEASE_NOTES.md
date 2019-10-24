@@ -63,6 +63,9 @@ at runtime.
 Installers and installation scripts
 -----------------------------------
 
+* IMPROVED: The GNU Prolog embedding script now supports setting the name of
+the generated executable and passing additional options to `gplc`.
+
 * FIXED: SWI-Prolog packs `download/1` predicate to use an URL pattern instead
 of a version specific URL to allow upgrading. Thanks to Peter Ludemann for the
 bug report.

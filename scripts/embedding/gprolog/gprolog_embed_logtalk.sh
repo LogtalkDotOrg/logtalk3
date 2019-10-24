@@ -5,7 +5,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on December 13, 2018
+##   Last updated on October 24, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -93,11 +93,12 @@ fi
 
 # default values
 directory="$(pwd -P)"
+name="logtalk"
 paths="$LOGTALKHOME/paths/paths_core.pl"
 compile="false"
 
 print_version() {
-	echo "$(basename "$0") 0.11"
+	echo "$(basename "$0") 0.12"
 	exit 0
 }
 
@@ -116,19 +117,22 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -d directory for the generated top-level (default is the current directory)"
+	echo "  -n name of the generated top-level (default is the logtalk"
 	echo "  -p library paths file (default is $paths)"
 	echo "  -s settings file"
 	echo "  -l loader file for the application"
+	echo "  -- arguments to be passed to gplc (no default)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }
 
-while getopts "cd:p:l:s:vh" option
+while getopts "cd:n:p:l:s:vh" option
 do
 	case $option in
 		c) compile="true";;
 		d) d_arg="$OPTARG";;
+		n) n_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
@@ -138,8 +142,15 @@ do
 	esac
 done
 
+shift $((OPTIND - 1))
+args=("$@")
+
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
+fi
+
+if [ "$n_arg" != "" ] ; then
+	name="$n_arg"
 fi
 
 if [ "$p_arg" != "" ] ; then
@@ -228,7 +239,7 @@ else
 	touch application.pl
 fi
 
-gplc -o "$directory"/logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl $(ls -rt application/*.pl 2>/dev/null) settings*_lgt.pl core.pl paths_*.pl
+gplc "${args[@]}" -o "$directory"/"$name" gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl $(ls -rt application/*.pl 2>/dev/null) settings*_lgt.pl core.pl paths_*.pl
 
 function cleanup {
 	rm -rf "$temporary"

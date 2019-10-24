@@ -26,6 +26,12 @@ The following scripts are provided:
 	creates a `logtalk` executable that embeds the Logtalk compiler/runtime
 	and an optional application; starts the top-level interpreter when run
 
+Usage
+-----
+
+Use `gprolog_embed_logtalk.sh -h` for a list and description of the script
+options.
+
 Known issues
 ------------
 
@@ -38,6 +44,6 @@ predicates to include the multifile predicate directives (or to meta-call
 the multifile predicates).
 
 Be sure to read the GNU Prolog manual on `gplc`, specially the discussion
-on how the calling order for initialization goals found different files
+on how the calling order for initialization goals found in different files
 is machine-dependent. This may dictate listing the files being compiled
 by it in a specific order to avoid runtime predicate existence errors.
