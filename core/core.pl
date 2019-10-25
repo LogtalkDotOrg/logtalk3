@@ -2534,6 +2534,9 @@ logtalk_compile(Files, Flags) :-
 	% expand the library path into an absolute path as it may
 	% contain environment variables that need to be expanded
 	(	sub_atom(Path0, 0, 1, _, '/') ->
+		% this covers the case of embedded applications created in a POSIX system
+		% and being run on a Windows system where a path starting with a slash
+		% would not be recognized as an absolute path by '$lgt_expand_path'/2
 		Path1 = Path0
 	;	'$lgt_expand_path'(Path0, Path1)
 	),
@@ -6534,7 +6537,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	(	sub_atom(FilePath, 0, 1, _, '/')
 			% this covers the case of embedded applications created in a POSIX system
 			% and being run on a Windows system where a path starting with a slash
-			% would not be recognized by as an absolute path by '$lgt_expand_path'/2
+			% would not be recognized as an absolute path by '$lgt_expand_path'/2
 		;	'$lgt_expand_path'(FilePath, FilePath)
 		) ->
 		% assume full path

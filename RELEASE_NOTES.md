@@ -41,7 +41,8 @@ of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 `$HOME/.config` directory as a last resort.
 
 * FIXED: Running embedded applications on systems other than the one used to
-create the embedding files.
+create the embedding files. Notably, running embedded applications created on
+a POSIX system in a Windows system.
 
 Documentation
 -------------
