@@ -67,6 +67,10 @@ generated for a related parametric entity with a bound parameter.
 for cross-referencing predicate calls where the called entity is only know
 at runtime.
 
+* FIXED: Bug in the `lgtunit` tool XSLT script that converts XML code coverage
+reports to HTML where the `prefix` parameter would not be used to shorten the
+test suite file path.
+
 Installers and installation scripts
 -----------------------------------
 

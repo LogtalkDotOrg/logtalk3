@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing code coverage report XML files in a browser
-%  Last updated on March 17, 2018
+%  Last updated on October 25, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -68,7 +68,7 @@
 	<body>
 		<h1>Logtalk Code Coverage Report</h1>
 		<p>
-			<strong>Test suite file: </strong> <code><xsl:value-of select="cover/testsuite" /></code><br />
+			<strong>Test suite file: </strong> <code><xsl:value-of select="substring-after(cover/testsuite, $prefix)" /></code><br />
 			<strong>Test suite object: </strong> <code><xsl:value-of select="cover/object" /></code>
 		</p>
 		<p>
