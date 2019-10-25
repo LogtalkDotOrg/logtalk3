@@ -3404,7 +3404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 32, 0, b03)).
+'$lgt_version_data'(logtalk(3, 32, 0, b04)).
 
 
 
@@ -6145,14 +6145,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles to disk and then loads to memory a source file
 
 '$lgt_load_file'(File, [RelativeTo| Flags]) :-
-	(	'$lgt_decompose_file_name'(File, Directory, Name, Extension),
-		atom_concat(Name, Extension, Basename),
-		'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _) ->
-		% assume that the File is an absolute path of a loaded file; this covers the
-		% case of embedded applications created in a POSIX system and being run on a
-		% Windows system or vice-versa
-		SourceFile = File
-	;	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
+	(	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
 		atom_concat(Name, Extension, Basename),
 		(	'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)
 			% file already loaded; possibly an embedded application in which case we
@@ -6535,7 +6528,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 % commit to that solution when not simply generating all possible solutions
 
 '$lgt_source_file_name'(FilePath, Flags, Directory, Name, Extension, SourceFile) :-
-	(	'$lgt_expand_path'(FilePath, FilePath) ->
+	(	(	sub_atom(FilePath, 0, 1, _, '/')
+			% this covers the case of embedded applications created in a POSIX system
+			% and being run on a Windows system where a path starting with a slash
+			% would not be recognized by as an absolute path by '$lgt_expand_path'/2
+		;	'$lgt_expand_path'(FilePath, FilePath)
+		) ->
 		% assume full path
 		SourceFile0 = FilePath
 	;	% assume relative path and try possible alternatives
