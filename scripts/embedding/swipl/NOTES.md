@@ -18,7 +18,8 @@ ________________________________________________________________________
 
 
 This directory contains example scripts for creating SWI-Prolog QLF files
-from Logtalk core files and Logtalk source files.
+and standalone saved states from Logtalk core files and Logtalk source
+files.
 
 The following scripts are provided:
 

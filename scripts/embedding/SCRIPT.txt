@@ -39,9 +39,8 @@ $ ./logtalk
 % create a SWI-Prolog saved state from the "spider" text adventure example:
 
 $ cd $LOGTALKHOME/scripts/embedding/swipl/
-$ ./swipl_logtalk_qlf.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ ./swipl_logtalk_qlf.sh -c -x -d "$HOME"/collect -n spider -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(spider,start)"
 $ cd ~/collect
-$ swipl -g "[logtalk, application], qsave_program(spider, [goal('::'(spider,start)), stand_alone(true)])" -t "halt"
 $ ./spider
 
 
