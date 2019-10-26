@@ -93,7 +93,10 @@ else
 fi
 
 # default values
+saved_state="false"
+goal="true"
 directory="$(pwd -P)"
+name="application"
 paths="$LOGTALKHOME/paths/paths_core.pl"
 compile="false"
 
@@ -110,29 +113,35 @@ usage_help()
 	echo "code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-x] [-d directory] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
+	echo "  -x also generate a standalone saved state"
 	echo "  -d directory for the generated .po files (default is the current directory)"
+	echo "  -n name of the generated top-level (default is application)"
 	echo "  -p library paths file (default is $paths)"
 	echo "  -s settings file"
 	echo "  -l loader file for the application"
+	echo "  -g startup goal for the saved state in canonical syntax (default is true)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }
 
-while getopts "cd:p:l:s:vh" option
+while getopts "cxd:n:p:s:l:g:vh" option
 do
 	case $option in
 		c) compile="true";;
+		x) saved_state="true";;
 		d) d_arg="$OPTARG";;
+		n) n_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		g) g_arg="$OPTARG";;
 		v) print_version;;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
@@ -143,6 +152,10 @@ if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
 fi
 
+if [ "$n_arg" != "" ] ; then
+	name="$n_arg"
+fi
+
 if [ "$p_arg" != "" ] ; then
 	if [ -f "$p_arg" ] ; then
 		paths="$p_arg"
@@ -150,6 +163,17 @@ if [ "$p_arg" != "" ] ; then
 		echo "The $p_arg library paths file does not exist!" >&2
 		exit 1
 	fi
+fi
+
+if [ "$s_arg" != "" ] ; then
+	if [ -f "$s_arg" ] ; then
+		settings="$s_arg"
+	else
+		echo "The $s_arg settings file does not exist!" >&2
+		exit 1
+	fi
+else
+	settings=""
 fi
 
 if [ "$l_arg" != "" ] ; then
@@ -163,15 +187,8 @@ else
 	loader=""
 fi
 
-if [ "$s_arg" != "" ] ; then
-	if [ -f "$s_arg" ] ; then
-		settings="$s_arg"
-	else
-		echo "The $s_arg settings file does not exist!" >&2
-		exit 1
-	fi
-else
-	settings=""
+if [ "$g_arg" != "" ] ; then
+	goal="$g_arg"
 fi
 
 mkdir -p "$directory"
@@ -249,6 +266,16 @@ if [ "$loader" != "" ] ; then
 	cat $(ls -rt "$temporary/application"/*.pl) > application.pl
 	sicstus$extension --goal "load_files('$directory/logtalk.po'),set_prolog_flag(discontiguous_warnings,off),compile(application),save_files(application,application),halt."
 	mv application.po "$directory"
+fi
+
+if [ "$saved_state" == "true" ] ; then
+	cd "$directory" || exit 1
+	if [ "$loader" != "" ] ; then
+		sicstus --goal "load_files(['logtalk.po','application.po']), save_program('$name', $goal), halt."
+	else
+		sicstus --goal "load_files(['logtalk.po']), save_program('$name', $goal), halt."
+	fi
+	chmod a+x $name.sav
 fi
 
 function cleanup {

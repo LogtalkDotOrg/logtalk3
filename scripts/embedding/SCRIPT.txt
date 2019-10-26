@@ -47,10 +47,8 @@ $ ./spider
 % create a SICStus Prolog saved state from the "sleepy" text adventure example:
 
 $ cd $LOGTALKHOME/scripts/embedding/sicstus/
-$ ./sicstus_logtalk_po.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/sleepy.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ ./sicstus_logtalk_po.sh -c -x -d "$HOME"/collect -n sleepy -l ~/logtalk/examples/adventure/sleepy.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(sleepy,start)"
 $ cd ~/collect
-$ sicstus --goal "load_files(['logtalk.po','application.po']), save_program(sleepy, '::'(sleepy,start)), halt."
-$ chmod a+x sleepy.sav
 $ ./sleepy.sav
 
 
