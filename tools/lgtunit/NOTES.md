@@ -811,7 +811,8 @@ generated `coverage_report.xml` file. For example:
 	$ logtalk_tester -c xml -s $HOME/logtalk/
 
 Alternatively, you can pass the local path prefix to be suppressed to the
-XSLT processor:
+XSLT processor (note that the `logtalk_tester` script suppresses the `$HOME`
+prefix by default):
 
 	$ xsltproc \
 	  --stringparam prefix logtalk/ \
