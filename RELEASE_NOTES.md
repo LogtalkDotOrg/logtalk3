@@ -77,7 +77,7 @@ Installers and installation scripts
 * IMPROVED: The GNU Prolog embedding script now supports setting the name of
 the generated executable and passing additional options to `gplc`.
 
-* IMPROVED: The SICStus Prolog and SWI-Prolog embedding scripts now also
+* IMPROVED: The SICStus Prolog, SWI-Prolog, and YAP embedding scripts now also
 support generating standalone saved states with a given name and startup goal.
 
 * FIXED: SWI-Prolog packs `download/1` predicate to use an URL pattern instead

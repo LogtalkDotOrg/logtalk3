@@ -21,8 +21,7 @@ ________________________________________________________________________
 
 $ cd $LOGTALKHOME/scripts/embedding/gprolog/
 $ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect
-$ cd ~/collect
-$ ./logtalk
+$ ~/collect/logtalk
 
 
 % create a GNU Prolog executable that includes the Logtalk compiler/runtime
@@ -30,8 +29,7 @@ $ ./logtalk
 
 $ cd $LOGTALKHOME/scripts/embedding/gprolog/
 $ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect -l ~/logtalk/examples/searching/loader.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -p ~/logtalk/paths/paths.pl
-$ cd ~/collect
-$ ./logtalk
+$ ~/collect/logtalk
 ...
 | ?- farmer::initial_state(Initial), depth_first(10)::solve(farmer, Initial, Path), farmer::print_path(Path).
 
@@ -40,8 +38,7 @@ $ ./logtalk
 
 $ cd $LOGTALKHOME/scripts/embedding/swipl/
 $ ./swipl_logtalk_qlf.sh -c -x -d "$HOME"/collect -n spider -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(spider,start)"
-$ cd ~/collect
-$ ./spider
+$ ~/collect/spider
 
 
 % create a SICStus Prolog saved state from the "sleepy" text adventure example:
@@ -55,8 +52,5 @@ $ ./sleepy.sav
 % create a YAP saved state from the "wumpus" text adventure example:
 
 $ cd $LOGTALKHOME/scripts/embedding/yap/
-$ ./yap_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
-$ cd ~/collect
-$ yap -g "consult([logtalk,application]), save_program(wumpus, '::'(wumpus,main)), halt"
-$ chmod a+x wumpus
-$ ./wumpus
+$ ./yap_logtalk_pl.sh -c -x -d "$HOME"/collect -n wumpus -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(wumpus,main)"
+$ ~/collect/wumpus

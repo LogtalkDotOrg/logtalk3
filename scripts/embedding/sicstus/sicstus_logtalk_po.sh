@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on December 11, 2018
+##   Last updated on October 26, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -25,6 +25,11 @@
 ## 
 #############################################################################
 
+
+print_version() {
+	echo "$(basename "$0") 0.12"
+	exit 0
+}
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -100,17 +105,12 @@ name="application"
 paths="$LOGTALKHOME/paths/paths_core.pl"
 compile="false"
 
-print_version() {
-	echo "$(basename "$0") 0.11"
-	exit 0
-}
-
 usage_help()
 {
 	echo 
 	echo "This script creates a SICStus Prolog logtalk.po file with the Logtalk compiler"
 	echo "and runtime and an optional application.po file from an application source"
-	echo "code given its loader file."
+	echo "code given its loader file. It can also generate a standalone saved state."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-c] [-x] [-d directory] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
@@ -121,7 +121,7 @@ usage_help()
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -x also generate a standalone saved state"
 	echo "  -d directory for the generated .po files (default is the current directory)"
-	echo "  -n name of the generated top-level (default is application)"
+	echo "  -n name of the generated saved state (default is application)"
 	echo "  -p library paths file (default is $paths)"
 	echo "  -s settings file"
 	echo "  -l loader file for the application"

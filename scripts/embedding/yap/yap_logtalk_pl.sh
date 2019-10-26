@@ -6,7 +6,7 @@
 ##   and runtime and optionally an application.pl file with a Logtalk
 ##   application
 ## 
-##   Last updated on December 11, 2018
+##   Last updated on October 26, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -25,6 +25,11 @@
 ## 
 #############################################################################
 
+
+print_version() {
+	echo "$(basename "$0") 0.12"
+	exit 0
+}
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -93,49 +98,53 @@ else
 fi
 
 # default values
+saved_state="false"
+goal="true"
 directory="$(pwd -P)"
+name="application"
 paths="$LOGTALKHOME/paths/paths_core.pl"
 hooks="$LOGTALKHOME/adapters/yaphooks.pl"
 compile="false"
-
-print_version() {
-	echo "$(basename "$0") 0.11"
-	exit 0
-}
 
 usage_help()
 {
 	echo 
 	echo "This script creates a YAP logtalk.pl file with the Logtalk compiler and"
 	echo "runtime and an optional application.pl file from an application source"
-	echo "code given its loader file."
+	echo "code given its loader file. It can also generate a standalone saved state."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-k hooks] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-x] [-d directory] [-n name] [-p paths] [-k hooks] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
+	echo "  -x also generate a standalone saved state"
 	echo "  -d directory for the generated Prolog files (default is the current directory)"
+	echo "  -n name of the generated saved state (default is application)"
 	echo "  -p library paths file (default is $paths)"
 	echo "  -k hooks file (default is $hooks)"
 	echo "  -s settings file"
 	echo "  -l loader file for the application"
+	echo "  -g startup goal for the saved state in canonical syntax (default is true)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }
 
-while getopts "cd:p:k:l:s:vh" option
+while getopts "cxd:n:p:k:s:l:g:vh" option
 do
 	case $option in
 		c) compile="true";;
+		x) saved_state="true";;
 		d) d_arg="$OPTARG";;
+		n) n_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		k) k_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
+		g) g_arg="$OPTARG";;
 		v) print_version;;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
@@ -144,6 +153,10 @@ done
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
+fi
+
+if [ "$n_arg" != "" ] ; then
+	name="$n_arg"
 fi
 
 if [ "$p_arg" != "" ] ; then
@@ -164,6 +177,17 @@ if [ "$k_arg" != "" ] ; then
 	fi
 fi
 
+if [ "$s_arg" != "" ] ; then
+	if [ -f "$s_arg" ] ; then
+		settings="$s_arg"
+	else
+		echo "The $s_arg settings file does not exist!" >&2
+		exit 1
+	fi
+else
+	settings=""
+fi
+
 if [ "$l_arg" != "" ] ; then
 	if [ -f "$l_arg" ] ; then
 		loader="$l_arg"
@@ -175,15 +199,8 @@ else
 	loader=""
 fi
 
-if [ "$s_arg" != "" ] ; then
-	if [ -f "$s_arg" ] ; then
-		settings="$s_arg"
-	else
-		echo "The $s_arg settings file does not exist!" >&2
-		exit 1
-	fi
-else
-	settings=""
+if [ "$g_arg" != "" ] ; then
+	goal="$g_arg"
 fi
 
 mkdir -p "$directory"
@@ -260,6 +277,16 @@ if [ "$loader" != "" ] ; then
 	cd "$temporary/application" || exit 1
 	yap -g "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
 	cat $(ls -rt "$temporary/application"/*.yap) > "$directory"/application.pl
+fi
+
+if [ "$saved_state" == "true" ] ; then
+	cd "$directory" || exit 1
+	if [ "$loader" != "" ] ; then
+		yap -g "consult([logtalk,application]), save_program('$name', $goal), halt"
+	else
+		yap -g "consult([logtalk]), save_program('$name', $goal), halt"
+	fi
+	chmod a+x $name
 fi
 
 function cleanup {

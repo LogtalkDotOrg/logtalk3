@@ -122,7 +122,7 @@ usage_help()
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -x also generate a standalone saved state"
 	echo "  -d directory for the generated QLF files (default is the current directory)"
-	echo "  -n name of the generated top-level (default is application)"
+	echo "  -n name of the generated saved state (default is application)"
 	echo "  -p library paths file (default is $paths)"
 	echo "  -k hooks file (default is $hooks)"
 	echo "  -s settings file"
