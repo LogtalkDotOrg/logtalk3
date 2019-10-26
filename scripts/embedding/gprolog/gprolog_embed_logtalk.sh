@@ -110,14 +110,14 @@ usage_help()
 	echo "source code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-d directory] [-n name] [-p paths] [-s settings] [-l loader]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -d directory for the generated top-level (default is the current directory)"
-	echo "  -n name of the generated top-level (default is the logtalk"
+	echo "  -n name of the generated top-level (default is logtalk)"
 	echo "  -p library paths file (default is $paths)"
 	echo "  -s settings file"
 	echo "  -l loader file for the application"
