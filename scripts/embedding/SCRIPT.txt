@@ -34,11 +34,29 @@ $ ~/collect/logtalk
 | ?- farmer::initial_state(Initial), depth_first(10)::solve(farmer, Initial, Path), farmer::print_path(Path).
 
 
+% create a SWI-Prolog QLF files from the "spider" text adventure example:
+
+$ cd $LOGTALKHOME/scripts/embedding/swipl/
+$ ./swipl_logtalk_qlf.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd ~/collect
+$ swipl -g "[logtalk, application]"
+?- spider::start.
+
+
 % create a SWI-Prolog saved state from the "spider" text adventure example:
 
 $ cd $LOGTALKHOME/scripts/embedding/swipl/
 $ ./swipl_logtalk_qlf.sh -c -x -d "$HOME"/collect -n spider -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(spider,start)"
 $ ~/collect/spider
+
+
+% create a SICStus Prolog pre-compiled version of the "sleepy" text adventure example:
+
+$ cd $LOGTALKHOME/scripts/embedding/sicstus/
+$ ./sicstus_logtalk_po.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/sleepy.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd ~/collect
+$ sicstus --goal "load_files(['logtalk.po','application.po'])."
+?- sleepy::start.
 
 
 % create a SICStus Prolog saved state from the "sleepy" text adventure example:
