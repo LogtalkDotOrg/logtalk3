@@ -47,15 +47,29 @@
 		GCD is gcd(5, -7).
 
 	test(gcd_2_07, error(instantiation_error)) :-
-		_ is gcd(4, _).
+		var(Var), _ is gcd(4, Var).
 
 	test(gcd_2_08, error(instantiation_error)) :-
-		_ is gcd(_, 4).
+		var(Var), _ is gcd(Var, 4).
 
 	test(gcd_2_09, error(type_error(integer,2.0))) :-
-		_ is gcd(4, 2.0).
+		fp(Float), _ is gcd(4, Float).
 
 	test(gcd_2_10, error(type_error(integer,2.0))) :-
-		_ is gcd(2.0, 4).
+		fp(Float), _ is gcd(Float, 4).
+
+	test(gcd_2_11, error(type_error(evaluable,a/0))) :-
+		a(A), _ is gcd(A, 4).
+
+	test(gcd_2_12, error(type_error(evaluable,a/0))) :-
+		a(A), _ is gcd(4, A).
+
+	% auxiliary predicates to delay errors to runtime
+
+	var(_).
+
+	fp(2.0).
+
+	a(a).
 
 :- end_object.
