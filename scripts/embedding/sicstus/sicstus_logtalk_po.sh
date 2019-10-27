@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on October 26, 2019
+##   Last updated on October 27, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -120,11 +120,11 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -x also generate a standalone saved state"
-	echo "  -d directory for the generated .po files (default is the current directory)"
+	echo "  -d directory for generated .po files (absolute path; default is current directory)"
 	echo "  -n name of the generated saved state (default is application)"
-	echo "  -p library paths file (default is $paths)"
-	echo "  -s settings file"
-	echo "  -l loader file for the application"
+	echo "  -p library paths file (absolute path; default is $paths)"
+	echo "  -s settings file (absolute path)"
+	echo "  -l loader file for the application (absolute path)"
 	echo "  -g startup goal for the saved state in canonical syntax (default is true)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"

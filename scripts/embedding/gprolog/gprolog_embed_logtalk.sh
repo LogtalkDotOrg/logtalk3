@@ -5,7 +5,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on October 24, 2019
+##   Last updated on October 27, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -24,6 +24,11 @@
 ## 
 #############################################################################
 
+
+print_version() {
+	echo "$(basename "$0") 0.12"
+	exit 0
+}
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -97,11 +102,6 @@ name="logtalk"
 paths="$LOGTALKHOME/paths/paths_core.pl"
 compile="false"
 
-print_version() {
-	echo "$(basename "$0") 0.12"
-	exit 0
-}
-
 usage_help()
 {
 	echo 
@@ -116,11 +116,11 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
-	echo "  -d directory for the generated top-level (default is the current directory)"
+	echo "  -d directory for new top-level (absolute path; default is current directory)"
 	echo "  -n name of the generated top-level (default is logtalk)"
-	echo "  -p library paths file (default is $paths)"
-	echo "  -s settings file"
-	echo "  -l loader file for the application"
+	echo "  -p library paths file (absolute path; default is $paths)"
+	echo "  -s settings file (absolute path)"
+	echo "  -l loader file for the application (absolute path)"
 	echo "  -- arguments to be passed to gplc (no default)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
