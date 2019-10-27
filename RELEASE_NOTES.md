@@ -71,6 +71,11 @@ at runtime.
 reports to HTML where the `prefix` parameter would not be used to shorten the
 test suite file path.
 
+Tests
+-----
+
+* ADDED: Tests for the de facto standard Prolog arithmetic function `sign/1`.
+
 Installers and installation scripts
 -----------------------------------
 
