@@ -74,7 +74,8 @@ test suite file path.
 Tests
 -----
 
-* ADDED: Tests for the de facto standard Prolog arithmetic function `sign/1`.
+* ADDED: Tests for the de facto standard Prolog arithmetic functions `gcd/2`
+and `sign/1`.
 
 Installers and installation scripts
 -----------------------------------
