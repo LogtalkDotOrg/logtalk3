@@ -789,27 +789,35 @@ simplify writing unit tests:
 -  | ``deterministic(Goal, Deterministic)``
    | reified version of the ``deterministic/1`` predicate
 
-The ``assertion/1-2`` predicates can also be used in the body of tests
-where using two or more assertions is convenient or in the body of tests
+The ``assertion/1-2`` predicates can be used in the body of tests where
+using two or more assertions is convenient or in the body of tests
 written using the ``test/1``, ``succeeds/1``, and ``deterministic/1``
 dialects to help differentiate between the test goal and checking the
 test goal results and to provide more informative test failure messages.
-When the assertion is a call to local predicate to the tests object, you
+
+When the assertion is a call to local predicate of the tests object, you
 must call ``assertion/1-2`` using an implicit or explicit message
-instead of a using *super* call. The reason is that the
-``assertion/1-2`` predicates are declared as meta-predicates and thus
-calls the assertion goal in the *sender*, which would be the ``lgtunit``
-object in the case of a ``^^/2`` call (as they preserve both \_ self\_
-and *sender* and the tests are internally run by a message sent from the
-``lgtunit`` object to the tests object).
+instead of a using *super* call. To use an implicit message, add the
+following directive to the tests object:
+
+::
+
+   :- uses(lgtunit, [assertion/1, assertion/2]).
+
+The reason this is required is that the ``assertion/1-2`` predicates are
+declared as meta-predicates and thus assertion goals are called in the
+context of the *sender*, which would be the ``lgtunit`` object in the
+case of a ``^^/2`` call (as it preserves both \_ self\_ and *sender* and
+the tests are internally run by a message sent from the ``lgtunit``
+object to the tests object).
 
 As the ``benchmark/2-3`` and ``deterministic/1-2`` predicates are
 meta-predicates, turning on the ``optimize`` compiler flag is advised to
 avoid runtime compilation of the meta-argument, which would add an
 overhead to the timing results.
 
-Consult the ``lgtunit`` object documentation (``docs/tools.html``) for
-further details on these predicates.
+Consult the ``lgtunit`` object documentation for more details on these
+predicates.
 
 Exporting test results in xUnit XML format
 ------------------------------------------

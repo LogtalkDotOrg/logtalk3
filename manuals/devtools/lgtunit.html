@@ -956,25 +956,30 @@ choice-point</div>
 </div>
 </li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates can also be used in the body of tests
-where using two or more assertions is convenient or in the body of tests
+<p>The <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates can be used in the body of tests where
+using two or more assertions is convenient or in the body of tests
 written using the <code class="docutils literal notranslate"><span class="pre">test/1</span></code>, <code class="docutils literal notranslate"><span class="pre">succeeds/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code>
 dialects to help differentiate between the test goal and checking the
-test goal results and to provide more informative test failure messages.
-When the assertion is a call to local predicate to the tests object, you
+test goal results and to provide more informative test failure messages.</p>
+<p>When the assertion is a call to local predicate of the tests object, you
 must call <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> using an implicit or explicit message
-instead of a using <em>super</em> call. The reason is that the
-<code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates are declared as meta-predicates and thus
-calls the assertion goal in the <em>sender</em>, which would be the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>
-object in the case of a <code class="docutils literal notranslate"><span class="pre">^^/2</span></code> call (as they preserve both _ self_
-and <em>sender</em> and the tests are internally run by a message sent from the
-<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object to the tests object).</p>
+instead of a using <em>super</em> call. To use an implicit message, add the
+following directive to the tests object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [assertion<span class="o">/</span><span class="m">1</span>, assertion<span class="o">/</span><span class="m">2</span>]).
+</pre></div>
+</div>
+<p>The reason this is required is that the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates are
+declared as meta-predicates and thus assertion goals are called in the
+context of the <em>sender</em>, which would be the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object in the
+case of a <code class="docutils literal notranslate"><span class="pre">^^/2</span></code> call (as it preserves both _ self_ and <em>sender</em> and
+the tests are internally run by a message sent from the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>
+object to the tests object).</p>
 <p>As the <code class="docutils literal notranslate"><span class="pre">benchmark/2-3</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic/1-2</span></code> predicates are
 meta-predicates, turning on the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> compiler flag is advised to
 avoid runtime compilation of the meta-argument, which would add an
 overhead to the timing results.</p>
-<p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object documentation (<code class="docutils literal notranslate"><span class="pre">docs/tools.html</span></code>) for
-further details on these predicates.</p>
+<p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object documentation for more details on these
+predicates.</p>
 </div>
 <div class="section" id="exporting-test-results-in-xunit-xml-format">
 <h2>Exporting test results in xUnit XML format<a class="headerlink" href="#exporting-test-results-in-xunit-xml-format" title="Permalink to this headline">¶</a></h2>
