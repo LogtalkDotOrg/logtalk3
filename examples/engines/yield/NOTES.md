@@ -21,5 +21,6 @@ To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This example illustrates fetching answers from an engine that returns them using
 the `threaded_engine_yield/1` built-in predicate. The original example was written
-by Jan Wielemaker. Currently it only runs on SWI-Prolog. It should run also on XSB
-and YAP if and when these systems bugs with coroutining and/or threads get fixed.
+by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It should run also
+on XSB and YAP if and when these systems bugs with coroutining and/or threads get
+fixed.

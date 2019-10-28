@@ -20,6 +20,6 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This example illustrates using engines to accumulate state. The original example
-was written by Jan Wielemaker. Currently it only runs on SWI-Prolog. It should
-run also on XSB and YAP if and when these systems bugs with coroutining and/or
-threads get fixed.
+was written by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It
+should run also on XSB and YAP if and when these systems bugs with coroutining
+and/or threads get fixed.

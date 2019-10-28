@@ -20,8 +20,8 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This example requires support for both threads and coroutining. Currently it
-only runs on SWI-Prolog. It should run also on XSB and YAP if and when these
-systems bugs with coroutining and/or threads get fixed.
+runs on ECLiPSe and SWI-Prolog. It should run also on XSB and YAP if and when
+these systems bugs with coroutining and/or threads get fixed.
 
 This folder contains examples of fluents implemented using threaded engines.
 Fluents are described in the paper:
