@@ -20,14 +20,14 @@
 Multi-threading programming
 ===========================
 
-Logtalk provides **experimental** support for multi-threading
-programming on selected Prolog compilers. Logtalk makes use of the
-low-level Prolog built-in predicates that implement message queues and
-interface with POSIX threads and mutexes (or a suitable emulation),
-providing a small set of high-level predicates and directives that
-allows programmers to easily take advantage of modern multi-processor
-and multi-core computers without worrying about the details of creating,
-synchronizing, or communicating with threads. Logtalk multi-threading
+Logtalk provides **experimental** support for multi-threading programming
+on selected Prolog compilers. Logtalk makes use of the low-level Prolog
+built-in predicates that implement message queues and interface with POSIX
+threads and mutexes (or a suitable emulation), providing a small set of
+high-level predicates and directives that allows programmers to easily
+take advantage of modern multi-processor and multi-core computers without
+worrying about the tricky details of creating, synchronizing, or communicating
+with threads, mutexes, and message queues. Logtalk multi-threading
 programming integrates with object-oriented programming providing a
 *threaded engines* API, enabling objects and categories to prove goals
 concurrently, and supporting synchronous and asynchronous messages.
@@ -139,7 +139,7 @@ A goal may be proved asynchronously using a new thread by calling the
 Calls to this predicate are always true and return immediately (assuming
 a callable argument). The term representing the goal is copied, not
 shared with the thread. The thread computes the first solution to the
-goal, posts it to the message queue of the object from where the
+goal, posts it to the implicit message queue of the object from where the
 ``threaded_call/1`` predicate was called, and suspends waiting for
 either a request for an alternative solution or for the program to
 commit to the current solution.
@@ -186,14 +186,14 @@ may be used to check if a reply is already available without removing it
 from the thread queue. The ``threaded_peek/1`` predicate call succeeds
 or fails immediately without blocking the caller. However, keep in mind
 that repeated use of this predicate is equivalent to polling a message
-queue, which may severely hurt performance.
+queue, which may hurt performance.
 
 Be careful when using the ``threaded_exit/1`` predicate inside
 failure-driven loops. When all the solutions have been found (and the
 thread generating them is therefore terminated), re-calling the
 predicate will generate an exception. Note that failing instead of
 throwing an exception is not an acceptable solution as it could be
-misinterpreted as a failure of the ``threaded_exit/1`` argument.
+misinterpreted as a failure of the ``threaded_call/1`` argument.
 
 The example on the previous section with prime numbers could be
 rewritten using the ``threaded_call/1`` and ``threaded_exit/1``
@@ -217,7 +217,8 @@ When using asynchronous calls, the link between a ``threaded_exit/1``
 call and the corresponding ``threaded_call/1`` call is established using
 unification. If there are multiple ``threaded_call/1`` calls for a matching
 ``threaded_exit/1`` call, the connection can potentially be established with
-any of them. Nevertheless, you can easily use a tag the calls by using in
+any of them (this is akin to what happens with tabling). Nevertheless, you
+can easily use a call *tag* by using in
 alternative :ref:`threaded_call/2 <predicates_threaded_call_1_2>`,
 :ref:`threaded_once/2 <predicates_threaded_once_1_2>`, and
 :ref:`threaded_exit/2 <predicates_threaded_exit_1_2>` built-in predicates.

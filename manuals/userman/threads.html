@@ -220,14 +220,14 @@
             
   <div class="section" id="multi-threading-programming">
 <span id="threads-threads"></span><h1>Multi-threading programming<a class="headerlink" href="#multi-threading-programming" title="Permalink to this headline">¶</a></h1>
-<p>Logtalk provides <strong>experimental</strong> support for multi-threading
-programming on selected Prolog compilers. Logtalk makes use of the
-low-level Prolog built-in predicates that implement message queues and
-interface with POSIX threads and mutexes (or a suitable emulation),
-providing a small set of high-level predicates and directives that
-allows programmers to easily take advantage of modern multi-processor
-and multi-core computers without worrying about the details of creating,
-synchronizing, or communicating with threads. Logtalk multi-threading
+<p>Logtalk provides <strong>experimental</strong> support for multi-threading programming
+on selected Prolog compilers. Logtalk makes use of the low-level Prolog
+built-in predicates that implement message queues and interface with POSIX
+threads and mutexes (or a suitable emulation), providing a small set of
+high-level predicates and directives that allows programmers to easily
+take advantage of modern multi-processor and multi-core computers without
+worrying about the tricky details of creating, synchronizing, or communicating
+with threads, mutexes, and message queues. Logtalk multi-threading
 programming integrates with object-oriented programming providing a
 <em>threaded engines</em> API, enabling objects and categories to prove goals
 concurrently, and supporting synchronous and asynchronous messages.</p>
@@ -314,7 +314,7 @@ management.</p>
 Calls to this predicate are always true and return immediately (assuming
 a callable argument). The term representing the goal is copied, not
 shared with the thread. The thread computes the first solution to the
-goal, posts it to the message queue of the object from where the
+goal, posts it to the implicit message queue of the object from where the
 <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> predicate was called, and suspends waiting for
 either a request for an alternative solution or for the program to
 commit to the current solution.</p>
@@ -356,13 +356,13 @@ may be used to check if a reply is already available without removing it
 from the thread queue. The <code class="docutils literal notranslate"><span class="pre">threaded_peek/1</span></code> predicate call succeeds
 or fails immediately without blocking the caller. However, keep in mind
 that repeated use of this predicate is equivalent to polling a message
-queue, which may severely hurt performance.</p>
+queue, which may hurt performance.</p>
 <p>Be careful when using the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate inside
 failure-driven loops. When all the solutions have been found (and the
 thread generating them is therefore terminated), re-calling the
 predicate will generate an exception. Note that failing instead of
 throwing an exception is not an acceptable solution as it could be
-misinterpreted as a failure of the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> argument.</p>
+misinterpreted as a failure of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> argument.</p>
 <p>The example on the previous section with prime numbers could be
 rewritten using the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> and <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code>
 predicates:</p>
@@ -383,7 +383,8 @@ prime_numbers(<span class="nv">N</span>, <span class="nv">M</span>, <span class=
 call and the corresponding <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> call is established using
 unification. If there are multiple <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> calls for a matching
 <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> call, the connection can potentially be established with
-any of them. Nevertheless, you can easily use a tag the calls by using in
+any of them (this is akin to what happens with tabling). Nevertheless, you
+can easily use a call <em>tag</em> by using in
 alternative <a class="reference internal" href="../refman/predicates/threaded_call_1_2.html#predicates-threaded-call-1-2"><span class="std std-ref">threaded_call/2</span></a>,
 <a class="reference internal" href="../refman/predicates/threaded_once_1_2.html#predicates-threaded-once-1-2"><span class="std std-ref">threaded_once/2</span></a>, and
 <a class="reference internal" href="../refman/predicates/threaded_exit_1_2.html#predicates-threaded-exit-1-2"><span class="std std-ref">threaded_exit/2</span></a> built-in predicates.
