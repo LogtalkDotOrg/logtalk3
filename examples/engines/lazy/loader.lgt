@@ -18,23 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, swi)).
+:- if(current_logtalk_flag(engines, supported)).
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),
-		logtalk_load(random(loader)),
-		logtalk_load(lazy)
-	)).
-
-:- elif((
-	current_logtalk_flag(prolog_dialect, eclipse),
-	current_logtalk_flag(engines, supported)
-)).
-
-	:- ensure_loaded(library(swi)).
-
-	:- initialization((
-		logtalk_load(basic_types(loader)),
+		logtalk_load(coroutining(loader)),
 		logtalk_load(random(loader)),
 		logtalk_load(lazy)
 	)).

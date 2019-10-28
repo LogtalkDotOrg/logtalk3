@@ -18,22 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, swi)).
-
-	:- initialization((
-		set_logtalk_flag(report, warnings),
-		logtalk_load(lgtunit(loader)),
-		logtalk_load(loader),
-		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
-	)).
-
-:- elif((
-	current_logtalk_flag(prolog_dialect, eclipse),
-	current_logtalk_flag(engines, supported)
-)).
-
-	:- ensure_loaded(library(swi)).
+:- if(current_logtalk_flag(engines, supported)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),

@@ -77,6 +77,12 @@ Tests
 * ADDED: Tests for the de facto standard Prolog arithmetic functions `gcd/2`
 and `sign/1`.
 
+Examples
+--------
+
+* UPDATED: The `lazy` example of threaded engines to use the `coroutining`
+library.
+
 Installers and installation scripts
 -----------------------------------
 
