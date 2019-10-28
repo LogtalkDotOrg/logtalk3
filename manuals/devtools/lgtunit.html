@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>lgtunit &mdash; The Logtalk Handbook v3.32.0-b04 documentation</title>
+  <title>lgtunit &mdash; The Logtalk Handbook v3.32.0-b05 documentation</title>
   
 
   
@@ -1040,7 +1040,8 @@ the generated <code class="docutils literal notranslate"><span class="pre">cover
 </pre></div>
 </div>
 <p>Alternatively, you can pass the local path prefix to be suppressed to
-the XSLT processor:</p>
+the XSLT processor (note that the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script suppresses
+the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> prefix by default):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ xsltproc \
   --stringparam prefix logtalk/ \
   --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master \

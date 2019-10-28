@@ -3410,7 +3410,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 32, 0, b04)).
+'$lgt_version_data'(logtalk(3, 32, 0, b05)).
 
 
 
@@ -14271,7 +14271,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
 	'$lgt_pp_module_'(_),
-	'$lgt_predicate_property'(Pred, foreign),
+	% not all backend Prolog systems support a "foreign" predicate property
+	catch('$lgt_predicate_property'(Pred, foreign), _, fail),
 	\+ '$lgt_prolog_built_in_predicate'(Pred),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
