@@ -60,6 +60,9 @@ the script version.
 
 * UPDATED: The `tutor` tool for the refined unknown object warning.
 
+* UPDATED: The `logtalk_tester` shell script to accept common aliases for
+the backend name in order to simplify use in GitHub actions and workflows.
+
 * FIXED: Bug in the `diagrams` tool where a spurious entity node would be
 generated for a related parametric entity with a bound parameter.
 

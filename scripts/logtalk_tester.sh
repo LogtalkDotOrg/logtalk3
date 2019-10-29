@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 21, 2019
+##   Last updated on October 29, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -236,12 +236,12 @@ done
 shift $((OPTIND - 1))
 args=("$@")
 
-if [ "$p_arg" == "b" ] ; then
+if [ "$p_arg" == "b" ] || [ "$p_arg" == "b-prolog" ] ; then
 	backend=b
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
 	logtalk_call="$logtalk -g"
-elif [ "$p_arg" == "cx" ] ; then
+elif [ "$p_arg" == "cx" ] || [ "$p_arg" == "cxprolog" ] ; then
 	backend=cx
 	prolog='CxProlog'
 	logtalk=cxlgt$extension
@@ -251,22 +251,22 @@ elif [ "$p_arg" == "eclipse" ] ; then
 	prolog='ECLiPSe'
 	logtalk=eclipselgt$extension
 	logtalk_call="$logtalk -e"
-elif [ "$p_arg" == "gnu" ] ; then
+elif [ "$p_arg" == "gnu" ] || [ "$p_arg" == "gnu-prolog" ] ; then
 	backend=gnu
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
 	logtalk_call="$logtalk --query-goal"
-elif [ "$p_arg" == "ji" ] ; then
+elif [ "$p_arg" == "ji" ] || [ "$p_arg" == "jiprolog" ] ; then
 	backend=ji
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
 	logtalk_call="$logtalk -n -g"
-elif [ "$p_arg" == "lean" ] ; then
+elif [ "$p_arg" == "lean" ] || [ "$p_arg" == "lean-prolog" ] ; then
 	backend=lean
 	prolog='Lean Prolog'
 	logtalk=lplgt$extension
 	logtalk_call="$logtalk"
-elif [ "$p_arg" == "qp" ] ; then
+elif [ "$p_arg" == "qp" ] || [ "$p_arg" == "qu-prolog" ] ; then
 	backend=qp
 	prolog='Qu-Prolog'
 	logtalk=qplgt$extension
@@ -275,7 +275,7 @@ elif [ "$p_arg" == "qp" ] ; then
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" == "sicstus" ] ; then
+elif [ "$p_arg" == "sicstus" ] || [ "$p_arg" == "sicstus-prolog" ] ; then
 	backend=sicstus
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension
@@ -284,7 +284,7 @@ elif [ "$p_arg" == "sicstus" ] ; then
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" == "swi" ] ; then
+elif [ "$p_arg" == "swi" ] || [ "$p_arg" == "swi-prolog" ] ; then
 	backend=swi
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension
