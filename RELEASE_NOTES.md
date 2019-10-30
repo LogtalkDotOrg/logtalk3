@@ -54,6 +54,9 @@ Documentation
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool xUnit reports to list the test results using the
+test order.
+
 * IMPROVED: The `lgt2rst.sh` POSIX script now supports passing additional
 options to the `sphinx-quickstart` script when using the `-s` option.
 

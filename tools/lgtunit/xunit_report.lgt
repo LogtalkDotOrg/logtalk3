@@ -28,9 +28,9 @@
 :- object(xunit_report).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/06/04,
+		date is 2019/10/30,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'
@@ -82,6 +82,14 @@
 %		!,
 %		assertz(message_cache_(tests_ended)),
 %		fail.
+	% "testcase" tag predicates
+	message_hook(passed_test(Object, Test, File, Position, Note)) :-
+		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note)))).
+	message_hook(failed_test(Object, Test, File, Position, Reason, Note)) :-
+		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note)))).
+	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
+		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Note)))).
+	% catchall clause
 	message_hook(Message) :-
 		assertz(message_cache_(Message)).
 
@@ -117,18 +125,18 @@
 		write_xml_close_tag(testsuite).
 
 	write_test_elements :-
-		testcase_classname_name_time(Test, ClassName, Name, Time),
-		write_testcase_element_tags(Test, ClassName, Name, Time),
+		message_cache_(test(ClassName, Name, Test)),
+		write_testcase_element_tags(Test, ClassName, Name, 0),
 		fail.
 	write_test_elements.
 
-	write_testcase_element_tags(passed_test(_Test, _File, _Position, _Note), ClassName, Name, Time) :-
+	write_testcase_element_tags(passed_test(_File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_empty_tag(testcase, [classname-ClassName,name-Name,time-Time]).
-	write_testcase_element_tags(failed_test(_Test, _File, _Position, Reason, Note), ClassName, Name, Time) :-
+	write_testcase_element_tags(failed_test(_File, _Position, Reason, Note), ClassName, Name, Time) :-
 		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
 		write_xml_element(failure, [message-Note], Reason),
 		write_xml_close_tag(testcase).
-	write_testcase_element_tags(skipped_test(_Test, _File, _Position, _Note), ClassName, Name, Time) :-
+	write_testcase_element_tags(skipped_test(_File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
 		write_xml_empty_tag(skipped, []),
 		write_xml_close_tag(testcase).
@@ -193,15 +201,6 @@
 	testsuite_timestamp(TimeStamp) :-
 		message_cache_(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp).
-
-	% "testcase" tag predicates
-
-	testcase_classname_name_time(passed_test(Test, File, Position, Note), Object, Test, 0.0) :-
-		message_cache_(passed_test(Object, Test, File, Position, Note)).
-	testcase_classname_name_time(failed_test(Test, File, Position, Reason, Note), Object, Test, 0.0) :-
-		message_cache_(failed_test(Object, Test, File, Position, Reason, Note)).
-	testcase_classname_name_time(skipped_test(Test, File, Position, Note), Object, Test, 0.0) :-
-		message_cache_(skipped_test(Object, Test, File, Position, Note)).
 
 	% date and time auxiliary predicates
 
