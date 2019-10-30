@@ -761,6 +761,12 @@ When running a set of test suites as a single unified suite, the single
 xUnit report is created in the directory of the first test suite object
 in the set.
 
+There are several third-party xUnit report converters that can generate
+HTML files for easy browsing. For example:
+
+- https://www.npmjs.com/package/xunit-viewer
+- https://github.com/Zir0-93/xunit-to-html
+
 
 Exporting test results in the TAP output format
 -----------------------------------------------

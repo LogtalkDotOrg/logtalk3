@@ -49,6 +49,9 @@ Documentation
 
 * IMPROVED: Handbook sections on event-driven and multi-threading programming.
 
+* UPDATED: The `lgtunit` tool documentation to include links to xUnit report
+converters that generate HTML files.
+
 * FIXED: Installation instructions on setting Logtalk environment variables.
 
 Tools
