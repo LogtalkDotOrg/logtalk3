@@ -138,11 +138,17 @@ The execution of actions, defined in a monitor, associated to each event, never 
 Event generation
 ----------------
 
-For each message that is sent (using the :ref:`control_send_to_object_2`
-control construct) the runtime system automatically generates two events.
+Assuming that the :ref:`events <flag_events>` flag is set to ``allow`` for
+the object (or category) sending the messages we want to observe, for each
+message that is sent using the :ref:`control_send_to_object_2` control
+construct, the runtime system automatically generates two events.
 The first — *before event* — is generated when the message is sent. The
 second — *after event* — is generated after the message has successfully
 been executed.
+
+Note that *self* messages (using the :ref:`control_send_to_self_1` control
+construct) or *super* calls (using the :ref:`control_call_super_1` control
+construct) don't generate events.
 
 .. _events_communicating:
 
@@ -326,11 +332,10 @@ Assume that we also have the following object:
 
    :- object(any).
 
-       :- public(bar/1) .
-       :- public(foo/1) .
-
+       :- public(bar/1).
        bar(bar).
 
+       :- public(foo/1).
        foo(foo).
 
    :- end_object.
@@ -350,8 +355,8 @@ every message sent to any object by calling the
 
    yes
 
-From now on, every message sent to any object will be traced to the
-standard output stream:
+From now on, every message sent from ``user`` to any object will be
+traced to the standard output stream:
 
 .. code-block:: text
 

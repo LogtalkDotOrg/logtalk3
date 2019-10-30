@@ -47,6 +47,8 @@ a POSIX system in a Windows system.
 Documentation
 -------------
 
+* IMPROVED: Handbook sections on event-driven and multi-threading programming.
+
 * FIXED: Installation instructions on setting Logtalk environment variables.
 
 Tools
