@@ -32,10 +32,22 @@ Related examples:
 	simpler, example of this design pattern is `examples/family`.
 
 This is a pattern that is trivial in Logtalk but cumbersome at best
-using Prolog modules. The key Logtalk features are inheritance (of
-the reasoning code that we want to apply to many worlds) and messages
-to self (which allow calling from the reasoning code the predicates
-that describe a specific world).
+using Prolog modules. There are two sensible implementations of this
+design pattern: using inheritance or using parametric objects. Both
+solutions are illustrated. Load the `loader.lgt` file to load the
+sample implementations and look into the `SCRIPT.txt` file for sample
+calls.
+
+In the parametric solution, we use a parametric object for the reasoning
+code and pass the dataset or knowledge base to reason about as a parameter.
+A simple implementation of this solution is provided in the `parametric.lgt`
+file.
+
+In the inheritance solution, the key Logtalk feature (of the reasoning
+code that we want to apply to many worlds) are messages to self (which
+allow calling from the reasoning code the predicates that describe a
+specific world). A simple implementation of this solution is provided
+in the `inheritance.lgt` file.
 
 A common scenario is porting an original Prolog module application
 that assumes a single world defining in "user". Porting consist mainly

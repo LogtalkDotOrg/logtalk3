@@ -83,6 +83,9 @@ and `sign/1`.
 Examples
 --------
 
+* ADDED: Sample implementations of the "many worlds" design pattern using the
+inheritance and parametric solutions.
+
 * UPDATED: The `lazy` example of threaded engines to use the `coroutining`
 library.
 
