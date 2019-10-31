@@ -3410,7 +3410,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 32, 0, b05)).
+'$lgt_version_data'(logtalk(3, 32, 0, b06)).
 
 
 
@@ -14575,6 +14575,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_for_meta_predicate_directive'(compile(aux,_,_), _, _) :-
 	!.
 
+'$lgt_check_for_meta_predicate_directive'(compile(user,_,_), _::_, _) :-
+	% clause for multifile object predicate
+	!.
+'$lgt_check_for_meta_predicate_directive'(compile(user,_,_), ':'(_, _), _) :-
+	% clause for multifile module predicate
+	!.
 '$lgt_check_for_meta_predicate_directive'(compile(user,_,_), Head, MetaArg) :-
 	'$lgt_term_template'(Head, Template),
 	(	'$lgt_pp_meta_predicate_'(Template, _, _, _) ->
