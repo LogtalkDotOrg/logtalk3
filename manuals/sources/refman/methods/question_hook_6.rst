@@ -63,7 +63,7 @@ Examples
    :- dynamic(logtalk::question_hook/6).
 
    % use a pre-defined answer instead of asking the user
-   logtalk::question_hook(upper_limit, question, my_app, _, float, 3.7).
+   logtalk::question_hook(upper_limit, question, my_app, _, _, 3.7).
 
 .. seealso::
 
