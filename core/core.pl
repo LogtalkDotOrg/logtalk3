@@ -3410,7 +3410,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 32, 0, b06)).
+'$lgt_version_data'(logtalk(3, 32, 0, b07)).
 
 
 
@@ -11490,12 +11490,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % runtime resolved meta-calls
 
-'$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+'$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), HeadExCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, _, _, _, _, _, _, _, _, Mode, _, _, _),
 	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred),
-	TPred = '$lgt_metacall'(Pred, ExCtx).
+	TPred = '$lgt_metacall'(Pred, HeadExCtx).
 
 % compiler bypass control construct (opaque to cuts)
 
@@ -11811,11 +11811,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, _, _, _, _, _, _, _, _, Mode, _, _, _),
 	(	var(Closure) ->
 		% we're compiling a runtime meta-call
 		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Closure),
-		TPred = '$lgt_metacall'(Closure, ExtraArgs, ExCtx)
+		TPred = '$lgt_metacall'(Closure, ExtraArgs, HeadExCtx)
 	;	'$lgt_extend_closure'(Closure, ExtraArgs, Goal, Ctx),
 		\+ (functor(Goal, call, Arity), Arity >= 2) ->
 		% not a call to call/2-N itself; safe to compile it
@@ -11826,10 +11826,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	TPred = TPred0
 		)
 	;	% runtime resolved meta-call (e.g. a lambda expression)
-		TPred = '$lgt_metacall'(Closure, ExtraArgs, ExCtx)
+		TPred = '$lgt_metacall'(Closure, ExtraArgs, HeadExCtx)
 	),
 	CallN =.. [call, Closure| ExtraArgs],
-	DPred = '$lgt_debug'(goal(CallN, TPred), ExCtx).
+	DPred = '$lgt_debug'(goal(CallN, TPred), HeadExCtx).
 
 '$lgt_compile_body'(once(Goal), (TGoal -> true), '$lgt_debug'(goal(once(Goal), (DGoal -> true)), ExCtx), Ctx) :-
 	!,
@@ -12125,12 +12125,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	(	var(QGoal) ->
 		% runtime meta-call
 		'$lgt_check_for_meta_predicate_directive'(Mode, Head, QGoal),
-		TPred = '$lgt_bagof'(Term, QGoal, List, ExCtx),
-		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), ExCtx)
+		TPred = '$lgt_bagof'(Term, QGoal, List, HeadExCtx),
+		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), HeadExCtx)
 	;	% compile time local call
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		'$lgt_compile_quantified_body'(QGoal, TGoal, DGoal, Ctx),
@@ -12262,12 +12262,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	(	var(QGoal) ->
 		% runtime meta-call
 		'$lgt_check_for_meta_predicate_directive'(Mode, Head, QGoal),
-		TPred = '$lgt_setof'(Term, QGoal, List, ExCtx),
-		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), ExCtx)
+		TPred = '$lgt_setof'(Term, QGoal, List, HeadExCtx),
+		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), HeadExCtx)
 	;	% compile time local call
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		'$lgt_compile_quantified_body'(QGoal, TGoal, DGoal, Ctx),

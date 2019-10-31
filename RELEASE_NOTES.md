@@ -44,6 +44,9 @@ of the `atom_concat/3` predicate. Thanks to Peter Ludemann for the suggestion.
 create the embedding files. Notably, running embedded applications created on
 a POSIX system in a Windows system.
 
+* FIXED: Meta-call context when a predicate is declared as both a multifile
+predicate and a meta-predicate.
+
 * FIXED: Don't print a warning for a missing `meta_predicate/1` directive for
 multifile predicate definitions in entities other than the one providing the
 primary declaration.
