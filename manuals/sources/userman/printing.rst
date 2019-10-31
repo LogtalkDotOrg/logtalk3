@@ -360,4 +360,18 @@ now skip asking the user:
    yes
 
 In a practical case, the fixed answer would be used for followup goals
-being tested.
+being tested. The question answer read loop is not used when a fixed
+answer is provided using the ``logtalk::question_hook/6`` predicate thus
+preventing the creation of endless loops. For example, the following
+query succeeds:
+
+.. code-block:: text
+
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(41), N).
+
+   N = 42
+   yes
+
+Note that the ``logtalk::question_hook/6`` predicate takes as argument
+the closure specified in the ``logtalk::ask_question/5`` call, allowing
+a fixed answer to be checked before being returned.

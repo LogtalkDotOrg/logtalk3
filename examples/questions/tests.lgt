@@ -46,6 +46,13 @@
 	% be used for followup goals being tested
 
 	test(questions_01, true(N == 42)) :-
-		logtalk::ask_question(question, hitchhikers, ultimate_answer, integer, N).
+		logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
+
+	% the question answer read loop is not used when a fixed answer
+	% is provided using the logtalk::question_hook/6 predicate thus
+	% preventing the creation of endless loops
+
+	test(questions_02, true(N == 42)) :-
+		logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(41), N).
 
 :- end_object.

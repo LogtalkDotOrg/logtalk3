@@ -517,7 +517,19 @@ yes
 </pre></div>
 </div>
 <p>In a practical case, the fixed answer would be used for followup goals
-being tested.</p>
+being tested. The question answer read loop is not used when a fixed
+answer is provided using the <code class="docutils literal notranslate"><span class="pre">logtalk::question_hook/6</span></code> predicate thus
+preventing the creation of endless loops. For example, the following
+query succeeds:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, &#39;==&#39;(41), N).
+
+N = 42
+yes
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">logtalk::question_hook/6</span></code> predicate takes as argument
+the closure specified in the <code class="docutils literal notranslate"><span class="pre">logtalk::ask_question/5</span></code> call, allowing
+a fixed answer to be checked before being returned.</p>
 </div>
 </div>
 
