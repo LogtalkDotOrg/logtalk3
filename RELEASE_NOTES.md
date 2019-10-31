@@ -47,7 +47,8 @@ a POSIX system in a Windows system.
 Documentation
 -------------
 
-* IMPROVED: Handbook sections on event-driven and multi-threading programming.
+* IMPROVED: Handbook sections on event-driven, multi-threading programming,
+and question asking.
 
 * UPDATED: The `lgtunit` tool documentation to include links to xUnit report
 converters that generate HTML files.

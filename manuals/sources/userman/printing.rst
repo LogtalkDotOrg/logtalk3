@@ -291,6 +291,8 @@ the following message tokenization and question prompt and stream:
       :- multifile(logtalk::question_prompt_stream/4).
       :- dynamic(logtalk::question_prompt_stream/4).
    
+      % the prompt is specified here instead of being part of the question text
+      % as it will be repeated if the answer doesn't satisfy the question closure
       logtalk::question_prompt_stream(question, hitchhikers, ': ', user_input).
    
    :- end_category.
@@ -300,17 +302,27 @@ question:
 
 .. code-block:: text
 
-   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, integer, N).
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
    
    The answer to the ultimate question of life, the universe and everything is: 42.
 
    N = 42
    yes
    
-Note that the fourth argument, ``integer`` in our example, is a closure that
+Note that the fourth argument, ``'=='(42)`` in our example, is a closure that
 is used to check the answers provided by the user. The question is repeated
 until the goal constructed by extending the closure with the user answer
-succeeds.
+succeeds. For example:
+
+.. code-block:: text
+
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
+   The answer to the ultimate question of life, the universe and everything is: icecream.
+   : tea.
+   : 42.
+
+   N = 42
+   yes
 
 Practical usage examples of this mechanism can be found e.g. in the
 ``debugger`` tool where it's used to abstract the user interaction when
@@ -342,7 +354,10 @@ now skip asking the user:
 
 .. code-block:: text
 
-   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, integer, N).
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
    
    N = 42
    yes
+
+In a practical case, the fixed answer would be used for followup goals
+being tested.
