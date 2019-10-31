@@ -94,6 +94,8 @@ Examples
 * ADDED: Sample implementations of the "many worlds" design pattern using the
 inheritance and parametric solutions.
 
+* ADDED: New `questions` example illustrating the question asking mechanism.
+
 * UPDATED: The `lazy` example of threaded engines to use the `coroutining`
 library.
 

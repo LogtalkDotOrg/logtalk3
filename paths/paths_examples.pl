@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on June 1, 2019
+%  Last updated on October 31, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -149,6 +149,7 @@ logtalk_library_path(profiling, examples('profiling/')).
 logtalk_library_path(prototypes, examples('prototypes/')).
 logtalk_library_path(proxies, examples('proxies/')).
 logtalk_library_path(puzzles, examples('puzzles/')).
+logtalk_library_path(questions, examples('questions/')).
 logtalk_library_path(quick_check, examples('quick_check/')).
 logtalk_library_path(recipes, examples('recipes/')).
 logtalk_library_path(reflection, examples('reflection/')).
