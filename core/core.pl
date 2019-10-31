@@ -24078,6 +24078,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_member_var'(V, [H| _]) :-
 	V == H.
 '$lgt_member_var'(V, [_| T]) :-
+	nonvar(T),
 	'$lgt_member_var'(V, T).
 
 
