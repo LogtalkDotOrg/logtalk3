@@ -37,6 +37,10 @@
 	multifile_primary_category::n1(5) :-
 		assertz(db(n2, 5)).
 
+	:- multifile(multifile_primary_category::n3/1).
+	multifile_primary_category::n3(G) :-
+		call(G).
+
 :- end_object.
 
 
@@ -56,5 +60,9 @@
 	multifile_primary_category(P)::b(1, P).
 	multifile_primary_category(P)::b(2, P) :-
 		assertz(dbp(b, 2, P)).
+
+	:- multifile(multifile_primary_category(_)::bb/1).
+	multifile_primary_category(P)::bb(G) :-
+		call(G, P).
 
 :- end_object.

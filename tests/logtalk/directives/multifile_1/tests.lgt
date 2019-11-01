@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/10/24,
+		date is 2019/11/01,
 		comment is 'Unit tests for the multifile/1 built-in directive.'
 	]).
 
@@ -109,6 +109,8 @@
 		findall(X-Y-Z, multifile_other_object(_)::dbp(X,Y,Z), L),
 		L == [a-2-0, b-2-0].
 
+	% tests for multifile meta-predicates
+
 	test(multifile_1_19) :-
 		multifile_primary_object::m3(f(X)),
 		X == 1.
@@ -118,6 +120,16 @@
 
 	test(multifile_1_21) :-
 		\+ multifile_primary_object(a)::aa(int).
+
+	test(multifile_1_22) :-
+		multifile_other_object::n3(f(X)),
+		X == 1.
+
+	test(multifile_1_23) :-
+		multifile_other_object(1)::bb(int).
+
+	test(multifile_1_24) :-
+		\+ multifile_other_object(a)::bb(int).
 
 	% auxiliary predicates
 

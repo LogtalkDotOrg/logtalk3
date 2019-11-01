@@ -63,6 +63,10 @@
 	:- public(n2/1).
 	:- multifile(n2/1).
 
+	:- public(n3/1).
+	:- multifile(n3/1).
+	:- meta_predicate(n3(0)).
+
 :- end_category.
 
 
@@ -71,5 +75,9 @@
 
 	:- public(b/2).
 	:- multifile(b/2).
+
+	:- public(bb/1).
+	:- multifile(bb/1).
+	:- meta_predicate(bb(1)).
 
 :- end_category.
