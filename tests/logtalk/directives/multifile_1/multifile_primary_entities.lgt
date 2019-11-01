@@ -32,6 +32,10 @@
 	m2(1).
 	m2(2).
 
+	:- public(m3/1).
+	:- multifile(m3/1).
+	:- meta_predicate(m3(0)).
+
 :- end_object.
 
 
@@ -40,6 +44,10 @@
 
 	:- public(a/2).
 	:- multifile(a/2).
+
+	:- public(aa/1).
+	:- multifile(aa/1).
+	:- meta_predicate(aa(1)).
 
 :- end_object.
 

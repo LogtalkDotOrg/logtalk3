@@ -25,6 +25,10 @@
 	multifile_primary_object::m1(4).
 	multifile_primary_object::m1(5).
 
+	:- multifile(multifile_primary_object::m3/1).
+	multifile_primary_object::m3(G) :-
+		call(G).
+
 :- end_category.
 
 
@@ -33,5 +37,9 @@
 
 	:- multifile(multifile_primary_object(_)::a/2).
 	multifile_primary_object(P)::a(3, P).
+
+	:- multifile(multifile_primary_object(_)::aa/1).
+	multifile_primary_object(P)::aa(G) :-
+		call(G, P).
 
 :- end_category.

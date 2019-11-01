@@ -93,6 +93,8 @@ test suite file path.
 Tests
 -----
 
+* ADDED: Tests for multifile meta-predicates.
+
 * ADDED: Tests for the de facto standard Prolog arithmetic functions `gcd/2`
 and `sign/1`.
 

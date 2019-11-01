@@ -109,4 +109,21 @@
 		findall(X-Y-Z, multifile_other_object(_)::dbp(X,Y,Z), L),
 		L == [a-2-0, b-2-0].
 
+	test(multifile_1_19) :-
+		multifile_primary_object::m3(f(X)),
+		X == 1.
+
+	test(multifile_1_20) :-
+		multifile_primary_object(1)::aa(int).
+
+	test(multifile_1_21) :-
+		\+ multifile_primary_object(a)::aa(int).
+
+	% auxiliary predicates
+
+	f(1).
+
+	int(T) :-
+		integer(T).
+
 :- end_object.
