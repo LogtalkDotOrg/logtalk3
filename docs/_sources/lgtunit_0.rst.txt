@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 7.13
-| **Date:** 2019/9/20
+| **Version:** 7.14
+| **Date:** 2019/11/2
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -583,6 +583,27 @@ Returns the value of epsilon used in the definition of the ``(=~=)/2`` predicate
 
 Protected predicates
 --------------------
+
+.. raw:: html
+
+   <div id="number_of_tests/1"> </div>
+
+.. index:: number_of_tests/1
+.. _lgtunit/0::number_of_tests/1:
+
+``number_of_tests/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Number of defined unit tests.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``number_of_tests(?integer)`` - ``one``
+
+
+------------
 
 .. raw:: html
 

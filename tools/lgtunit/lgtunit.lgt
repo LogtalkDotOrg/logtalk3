@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.13,
+		version is 7.14,
 		author is 'Paulo Moura',
-		date is 2019/09/20,
+		date is 2019/11/02,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -207,6 +207,12 @@
 	:- info(epsilon/1, [
 		comment is 'Returns the value of epsilon used in the definition of the ``(=~=)/2`` predicate.',
 		argnames is ['Epsilon']
+	]).
+
+	:- protected(number_of_tests/1).
+	:- mode(number_of_tests(?integer), one).
+	:- info(number_of_tests/1, [
+		comment is 'Number of defined unit tests.'
 	]).
 
 	:- protected(run_tests/0).
@@ -922,7 +928,9 @@
 			print_message(information, lgtunit, running_tests_from_object_file(Object, Path))
 		;	% source data information missing
 			print_message(information, lgtunit, running_tests_from_object(Object))
-		).
+		),
+		::number_of_tests(Total),
+		print_message(silent, lgtunit, number_of_tests(Total)).
 
 	write_tests_results :-
 		self(Object),
@@ -1238,8 +1246,9 @@
 
 	% collect all unit test identifiers when reaching the end_object/0 directive
 	directive_expansion(end_object, Terms) :-
-		findall(test_(Identifier, Test), test_(Identifier, Test), Terms, [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]),
+		findall(test_(Identifier, Test), test_(Identifier, Test), Terms, [number_of_tests(Total), (run_tests :- ::run_tests(Tests, File)), (:- end_object)]),
 		findall(Test, retract(test_(_, Test)), Tests),
+		length(Tests, Total),
 		logtalk_load_context(source, File).
 
 	filter_discontiguous_directive((PI,PIs), Filtered) :-

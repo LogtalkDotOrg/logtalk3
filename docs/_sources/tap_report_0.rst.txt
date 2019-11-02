@@ -11,8 +11,8 @@
 Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.
 
 | **Author:** Paulo Moura
-| **Version:** 1.1
-| **Date:** 2019/6/4
+| **Version:** 1.2
+| **Date:** 2019/11/2
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -62,6 +62,27 @@ Cache of total of tests per test set.
 
 | **Mode and number of proofs:**
 |    ``partial_(?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="test_count_/1"> </div>
+
+.. index:: test_count_/1
+.. _tap_report/0::test_count_/1:
+
+``test_count_/1``
+^^^^^^^^^^^^^^^^^
+
+Test counter.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``test_count_(?integer)`` - ``zero_or_one``
 
 
 ------------

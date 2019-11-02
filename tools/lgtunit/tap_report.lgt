@@ -28,9 +28,9 @@
 :- object(tap_report).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/06/04,
+		date is 2019/11/02,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_report))``.'
@@ -43,6 +43,18 @@
 	:- info(partial_/1, [
 		comment is 'Cache of total of tests per test set.'
 	]).
+
+	:- private(test_count_/1).
+	:- dynamic(test_count_/1).
+	:- mode(test_count_(?integer), zero_or_one).
+	:- info(test_count_/1, [
+		comment is 'Test counter.'
+	]).
+
+	test_count(N) :-
+		retract(test_count_(N0)),
+		N is N0 + 1,
+		assertz(test_count_(N)).
 
 	% intercept all messages from the "lgtunit" object while running tests
 
@@ -62,8 +74,17 @@
 			true
 		;	open(ReportFile, write, _, [alias(tap_report)]),
 			write(tap_report, 'TAP version 13'), nl(tap_report),
-			retractall(partial_(_))
+			retractall(partial_(_)),
+			retractall(test_count_(_)),
+			assertz(test_count_(0))
 		).
+	message_hook(running_tests_from_object(_)) :-
+		message_hook(running_tests_from_object_file(_, _)).
+	% number of tests
+	message_hook(number_of_tests(Total)) :-
+		number_codes(Total, Codes),
+		atom_codes(TotalAtom, Codes),
+		write(tap_report, '1..'), write(tap_report, TotalAtom), nl(tap_report).
 	% test results summary
 	message_hook(tests_results_summary(_, Partial, _, _, _, _)) :-
 		assertz(partial_(Partial)).
@@ -88,30 +109,25 @@
 		nl(tap_report).
 	% passed test
 	message_hook(passed_test(Object, Test, _, _, Note)) :-
-		write(tap_report, 'ok '),
+		test_count(N),
+		write(tap_report, 'ok '), write(tap_report, N), write(tap_report, ' - '),
 		writeq(tap_report, Test), write(tap_report, ' @ '), writeq(tap_report, Object),
 		write_test_note(passed, Note).
 	% failed test
 	message_hook(failed_test(Object, Test, _, _, Reason, Note)) :-
-		write(tap_report, 'not ok '),
+		test_count(N),
+		write(tap_report, 'not ok '), write(tap_report, N), write(tap_report, ' - '),
 		writeq(tap_report, Test), write(tap_report, ' @ '), writeq(tap_report, Object),
 		write_test_note(failed, Note),
 		write_failed_reason_message(Reason).
 	% skipped test
 	message_hook(skipped_test(Object, Test, _, _, Note)) :-
-		write(tap_report, 'ok '),
+		test_count(N),
+		write(tap_report, 'ok '), write(tap_report, N), write(tap_report, ' - '),
 		writeq(tap_report, Test), write(tap_report, ' @ '), writeq(tap_report, Object),
 		write(tap_report, ' # skip'),
 		write_test_note(skipped, Note).
 	% code coverage results
-	message_hook(no_code_coverage_information_collected) :-
-		message_hook(code_coverage_header).
-	message_hook(code_coverage_header) :-
-		findall(Partial, partial_(Partial), Partials),
-		sum(Partials, Total),
-		number_codes(Total, Codes),
-		atom_codes(TotalAtom, Codes),
-		write(tap_report, '1..'), write(tap_report, TotalAtom), nl(tap_report).
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write(tap_report, '  ---'), nl(tap_report),
 		write(tap_report, '  coverage: '), write(tap_report, Percentage), write(tap_report, '%'), nl(tap_report),

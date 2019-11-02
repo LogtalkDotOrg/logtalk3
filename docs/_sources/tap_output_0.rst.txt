@@ -11,8 +11,8 @@
 Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.
 
 | **Author:** Paulo Moura
-| **Version:** 1.1
-| **Date:** 2019/6/4
+| **Version:** 1.2
+| **Date:** 2019/11/2
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -81,6 +81,27 @@ Cache of total of tests per test set.
 
 | **Mode and number of proofs:**
 |    ``partial_(?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="test_count_/1"> </div>
+
+.. index:: test_count_/1
+.. _tap_output/0::test_count_/1:
+
+``test_count_/1``
+^^^^^^^^^^^^^^^^^
+
+Test counter.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``test_count_(?integer)`` - ``zero_or_one``
 
 
 ------------
