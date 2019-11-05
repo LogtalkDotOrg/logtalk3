@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.32.0 - November ??, 2019
-==========================
+3.32.0 - November 5, 2019
+=========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -54,8 +54,8 @@ primary declaration.
 Documentation
 -------------
 
-* IMPROVED: Handbook sections on event-driven, multi-threading programming,
-and question asking.
+* IMPROVED: Handbook sections on event-driven programming, multi-threading
+programming, and question asking.
 
 * UPDATED: The `lgtunit` tool documentation to include links to xUnit report
 converters that generate HTML files.
@@ -74,8 +74,8 @@ TAP output processors.
 * IMPROVED: The `lgt2rst.sh` POSIX script now supports passing additional
 options to the `sphinx-quickstart` script when using the `-s` option.
 
-* UPDATED: The `lgtdoc` POSIX scripts now accept a `-v` option for returning
-the script version.
+* UPDATED: The `lgtdoc` tool POSIX scripts for converting XML documentation
+files now accept a `-v` option for returning the script version.
 
 * UPDATED: The `tutor` tool for the refined unknown object warning.
 
