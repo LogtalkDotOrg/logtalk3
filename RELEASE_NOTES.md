@@ -24,6 +24,11 @@ RELEASE NOTES
 3.33.0 - December ??, 2019
 ==========================
 
+Tools
+_____
+
+* FIXED: Generating a code coverage report when using a parametric test object
+to test multiple implementations of the same protocol.
 
 
 3.32.0 - November 5, 2019

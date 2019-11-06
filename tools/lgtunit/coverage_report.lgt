@@ -28,9 +28,9 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2019/06/04,
+		date is 2019/11/06,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'
@@ -61,6 +61,12 @@
 		assertz(timestamp_(Year, Month, Day, Hours, Minutes, Seconds)).
 
 	% start
+	message_hook(running_tests_from_object_file(_, _)) :-
+		stream_property(_, alias(coverage_report)),
+		% assume output stream already created, typically as a
+		% consequence of using a parametric test object to test
+		% multiple implementations of the same protocol
+		!.
 	message_hook(running_tests_from_object_file(Object, File)) :-
 		logtalk::loaded_file_property(File, directory(Directory)),
 		atom_concat(Directory, 'coverage_report.xml', ReportFile),
