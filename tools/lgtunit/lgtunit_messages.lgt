@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2019/11/02,
+		date is 2019/11/07,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -103,7 +103,10 @@
 		;	['~q: failure (~w)'-[Test, Note], nl]
 		),
 		failed_test_reason(non_deterministic_success),
-		['  in file ~w between lines ~w'-[File, Position], nl].
+		(	{Position = Line-Line} ->
+			['  in file ~w at or above line ~w'-[File, Line], nl]
+		;	['  in file ~w between lines ~w'-[File, Position], nl]
+		).
 
 	message_tokens(failed_test(_Object, Test, File, Position, Reason, Note)) -->
 		(	{Note == ''} ->
@@ -111,7 +114,10 @@
 		;	['~q: failure (~w)'-[Test, Note], nl]
 		),
 		failed_test_reason(Reason),
-		['  in file ~w between lines ~w'-[File, Position], nl].
+		(	{Position = Line-Line} ->
+			['  in file ~w at or above line ~w'-[File, Line], nl]
+		;	['  in file ~w between lines ~w'-[File, Position], nl]
+		).
 
 	message_tokens(skipped_test(_Object, Test, _File, _Position, Note)) -->
 		(	{Note == ''} ->
@@ -135,7 +141,10 @@
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, _Object, Test),
-		['  in file ~w between lines ~w'-[File, Position], nl].
+		(	{Position = Line-Line} ->
+			['  in file ~w at or above line ~w'-[File, Line], nl]
+		;	['  in file ~w between lines ~w'-[File, Position], nl]
+		).
 
 	message_tokens(broken_step(Step, Object, Error)) -->
 		['broken ~w goal for test object ~q: ~q'-[Step, Object, Error], nl].
