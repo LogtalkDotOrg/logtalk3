@@ -56,3 +56,7 @@ Short description of each example entity:
 Please note that the entities above are just example definitions. There is 
 nothing fundamental about any of them; they can and should be replaced by 
 definitions better fitted to the requirements of specific applications.
+
+For a simpler version of this example, see the `reflection` example. If
+you are not familiar with the concept of metaclass used in this example,
+see the `metaclasses` example first.

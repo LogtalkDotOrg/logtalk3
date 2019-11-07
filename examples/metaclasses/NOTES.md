@@ -21,3 +21,5 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This example illustrates how to work with metaclasses in Logtalk.
+See also the `reflection` and `roots` examples for a followup on
+using metaclasses.

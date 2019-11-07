@@ -17,7 +17,6 @@ limitations under the License.
 ________________________________________________________________________
 
 
-
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file. Run this example with no other examples loaded at the same time.
 
@@ -35,4 +34,5 @@ Each class inherit all the methods form the other two classes and from
 itself (without any inheritance loops of course ;-).
 
 You can find more sophisticated versions of these classes in the `roots`
-example.
+example. If you are not familiar with the concept of metaclass used in
+this example, see the `metaclasses` example first.
