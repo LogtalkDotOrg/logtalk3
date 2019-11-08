@@ -27,6 +27,9 @@ RELEASE NOTES
 Tools
 _____
 
+* IMPROVED: The `lgtunit` tool compatibility of the generated xUnit reports
+with xUnit output processors.
+
 * FIXED: Generating a code coverage report when using a parametric test object
 to test multiple implementations of the same protocol.
 

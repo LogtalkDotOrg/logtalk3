@@ -28,9 +28,9 @@
 :- object(xunit_report).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/10/30,
+		date is 2019/11/08,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'
@@ -133,13 +133,29 @@
 	write_testcase_element_tags(passed_test(_File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_empty_tag(testcase, [classname-ClassName,name-Name,time-Time]).
 	write_testcase_element_tags(failed_test(_File, _Position, Reason, Note), ClassName, Name, Time) :-
+		(	Note == '' ->
+			failure_type_to_message(Type, Message)
+		;	Message = Note
+		),
+		(	Reason =.. [Type, Error] ->
+			true
+		;	Type = Reason,
+			Error = ''
+		),
 		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
-		write_xml_element(failure, [message-Note], Reason),
+		write_xml_element(failure, [message-Message, type-Type], Error),
 		write_xml_close_tag(testcase).
 	write_testcase_element_tags(skipped_test(_File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
 		write_xml_empty_tag(skipped, []),
 		write_xml_close_tag(testcase).
+
+	failure_type_to_message(failure_instead_of_error,   'Failure instead of error').
+	failure_type_to_message(failure_instead_of_success, 'Failure instead of success').
+	failure_type_to_message(error_instead_of_success,   'Error instead of success').
+	failure_type_to_message(error_instead_of_failure,   'Error instead of failure').
+	failure_type_to_message(success_instead_of_error,   'Success instead of error').
+	failure_type_to_message(success_instead_of_failure, 'Success instead of failure').
 
 	% "testsuites" tag attributes
 
