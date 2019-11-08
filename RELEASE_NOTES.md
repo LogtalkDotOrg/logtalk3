@@ -34,7 +34,7 @@ with xUnit output processors.
 to test multiple implementations of the same protocol.
 
 * FIXED: The `lgtunit` tool would write single line number information on
-failed tests or steps as "between lines" instead of as "or above line".
+failed tests or steps as "between lines" instead of as "at or above line".
 
 
 3.32.0 - November 5, 2019

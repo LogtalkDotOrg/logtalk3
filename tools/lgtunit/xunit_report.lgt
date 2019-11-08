@@ -85,6 +85,8 @@
 	% "testcase" tag predicates
 	message_hook(passed_test(Object, Test, File, Position, Note)) :-
 		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note)))).
+	message_hook(non_deterministic_success(Object, Test, File, Position, Note)) :-
+		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note)))).
 	message_hook(failed_test(Object, Test, File, Position, Reason, Note)) :-
 		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note)))).
 	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
@@ -132,30 +134,42 @@
 
 	write_testcase_element_tags(passed_test(_File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_empty_tag(testcase, [classname-ClassName,name-Name,time-Time]).
+	write_testcase_element_tags(non_deterministic_success(File, Position, Note), ClassName, Name, Time) :-
+		write_testcase_element_tags(failed_test(File, Position, non_deterministic_success, Note), ClassName, Name, Time).
 	write_testcase_element_tags(failed_test(_File, _Position, Reason, Note), ClassName, Name, Time) :-
-		(	Note == '' ->
-			failure_type_to_message(Type, Message)
-		;	Message = Note
-		),
-		(	Reason =.. [Type, Error] ->
-			true
-		;	Type = Reason,
-			Error = ''
-		),
+		failed_test(Reason, Description, Type, Error),
+		test_message(Note, Description, Message),
 		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
-		write_xml_element(failure, [message-Message, type-Type], Error),
+		(	Error == '' ->
+			write_xml_empty_tag(failure, [message-Message, type-Type])
+		;	writeq_xml_cdata_element(failure, [message-Message, type-Type], Error)
+		),
 		write_xml_close_tag(testcase).
 	write_testcase_element_tags(skipped_test(_File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
 		write_xml_empty_tag(skipped, [type-skipped_test]),
 		write_xml_close_tag(testcase).
 
-	failure_type_to_message(failure_instead_of_error,   'Failure instead of error').
-	failure_type_to_message(failure_instead_of_success, 'Failure instead of success').
-	failure_type_to_message(error_instead_of_success,   'Error instead of success').
-	failure_type_to_message(error_instead_of_failure,   'Error instead of failure').
-	failure_type_to_message(success_instead_of_error,   'Success instead of error').
-	failure_type_to_message(success_instead_of_failure, 'Success instead of failure').
+	% failed_test(Reason, Description, Type, Error)
+	failed_test(non_deterministic_success, 'Non-deterministic success', non_deterministic_success, '').
+	failed_test(failure_instead_of_error, 'Failure instead of error', failure_instead_of_error, '').
+	failed_test(failure_instead_of_success, 'Failure instead of success', failure_instead_of_success, '').
+	failed_test(error_instead_of_success(Error), 'Error instead of success', error_instead_of_success, Error).
+	failed_test(error_instead_of_failure(Error), 'Error instead of failure', error_instead_of_failure, Error).
+	failed_test(success_instead_of_error, 'Success instead of error', success_instead_of_error, '').
+	failed_test(success_instead_of_failure, 'Success instead of failure', success_instead_of_failure, '').
+	failed_test(wrong_error(_, Error), 'Wrong error', wrong_error, Error).
+	failed_test(quick_check_failed(Error, _, _), 'QuickCheck test failed', quick_check_failed, Error).
+	failed_test(quick_check_error(Error, _, _), 'QuickCheck test error', quick_check_error, Error).
+	failed_test(step_error(_, Error), 'Test step error', step_error, Error).
+	failed_test(step_failure(_), 'Test step failure', step_failure, '').
+
+	test_message(Note, Description, Message) :-
+		(	Note == '' ->
+			Message = Description
+		;	atom_concat(Description, ': ', Message0),
+			atom_concat(Message0, Note, Message)
+		).
 
 	% "testsuites" tag attributes
 

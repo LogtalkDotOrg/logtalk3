@@ -764,8 +764,9 @@ in the set.
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
 
-- https://www.npmjs.com/package/xunit-viewer
+- http://allure.qatools.ru
 - https://github.com/Zir0-93/xunit-to-html
+- https://www.npmjs.com/package/xunit-viewer
 
 
 Exporting test results in the TAP output format
