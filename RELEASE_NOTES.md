@@ -36,6 +36,12 @@ to test multiple implementations of the same protocol.
 * FIXED: The `lgtunit` tool would write single line number information on
 failed tests or steps as "between lines" instead of as "at or above line".
 
+Tests
+-----
+
+* IMPROVED: Convert unit tests for the ISO Prolog standard `is/2` built-in
+predicate to use assertions to simplify debugging.
+
 
 3.32.0 - November 5, 2019
 =========================
