@@ -147,7 +147,7 @@
 		write_xml_close_tag(testcase).
 	write_testcase_element_tags(skipped_test(_File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
-		write_xml_empty_tag(skipped, []),
+		write_xml_empty_tag(skipped, [type-skipped_test]),
 		write_xml_close_tag(testcase).
 
 	failure_type_to_message(failure_instead_of_error,   'Failure instead of error').
