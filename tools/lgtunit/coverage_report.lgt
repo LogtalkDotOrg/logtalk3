@@ -28,9 +28,9 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2019/11/06,
+		date is 2019/11/09,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'
@@ -81,7 +81,10 @@
 			write_xml_element(testsuite, Suffix)
 		;	write_xml_element(testsuite, File)
 		),
-		write_xml_element(object, Object),
+		functor(Object, Functor, Arity),
+		functor(Template, Functor, Arity),
+		numbervars(Template, 0, _),
+		write_xml_element(object, Template),
 		timestamp_(Year, Month, Day, Hours, Minutes, Seconds),
 		date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp),
 		write_xml_element(timestamp, TimeStamp),
