@@ -28,9 +28,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2019/11/08,
+		date is 2019/11/09,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -118,21 +118,22 @@
 	write_test_elements.
 
 	write_testcase_element_tags(passed_test(_File, _Position, _Note), ClassName, Name, Time) :-
-		write_xml_empty_tag(testcase, [classname-ClassName,name-Name,time-Time]).
+		write_xml_empty_tag(testcase, [classname-ClassName, name-Name, time-Time]).
 	write_testcase_element_tags(non_deterministic_success(File, Position, Note), ClassName, Name, Time) :-
 		write_testcase_element_tags(failed_test(File, Position, non_deterministic_success, Note), ClassName, Name, Time).
 	write_testcase_element_tags(failed_test(_File, _Position, Reason, Note), ClassName, Name, Time) :-
 		failed_test(Reason, Description, Type, Error),
 		test_message(Note, Description, Message),
-		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
+		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-Time]),
 		(	Error == '' ->
 			write_xml_empty_tag(failure, [message-Message, type-Type])
 		;	writeq_xml_cdata_element(failure, [message-Message, type-Type], Error)
 		),
 		write_xml_close_tag(testcase).
-	write_testcase_element_tags(skipped_test(_File, _Position, _Note), ClassName, Name, Time) :-
-		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
-		write_xml_empty_tag(skipped, [type-skipped_test]),
+	write_testcase_element_tags(skipped_test(_File, _Position, Note), ClassName, Name, Time) :-
+		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-Time]),
+		test_message(Note, 'Skipped test', Message),
+		write_xml_empty_tag(skipped, [message-Message]),
 		write_xml_close_tag(testcase).
 
 	% failed_test(Reason, Description, Type, Error)

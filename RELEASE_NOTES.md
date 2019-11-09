@@ -30,6 +30,9 @@ _____
 * IMPROVED: The `lgtunit` tool compatibility of the generated xUnit reports
 with xUnit output processors.
 
+* IMPROVED: The `lgtunit` tool generated xUnit reports now include the
+contents of the `note/1` test option for skipped tests.
+
 * FIXED: Generating a code coverage report when using a parametric test object
 to test multiple implementations of the same protocol.
 
