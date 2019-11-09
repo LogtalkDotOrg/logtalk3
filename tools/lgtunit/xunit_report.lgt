@@ -28,7 +28,7 @@
 :- object(xunit_report).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2019/11/09,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
@@ -60,36 +60,35 @@
 		!,
 		retractall(message_cache_(_)),
 		assertz(message_cache_(tests_start_date_time(Year,Month,Day,Hours,Minutes,Seconds))).
-	message_hook(running_tests_from_object_file(_, File)) :-
+	message_hook(running_tests_from_object_file(Object, File)) :-
+		!,
 		logtalk::loaded_file_property(File, directory(Directory)),
 		atom_concat(Directory, 'xunit_report.xml', ReportFile),
 		(	stream_property(_, alias(xunit_report)) ->
 			true
 		;	open(ReportFile, write, _, [alias(xunit_report)])
-		).
+		),
+		assertz(message_cache_(running_tests_from_object_file(Object,File))).
 	% stop
 	message_hook(tests_ended) :-
+		!,
 		close(xunit_report).
 	message_hook(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds)) :-
 		!,
 		assertz(message_cache_(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds))),
 		generate_xml_report.
-%	message_hook(running_tests_from_object_file(Object,File)) :-
-%		!,
-%		assertz(message_cache_(running_tests_from_object_file(Object,File))),
-%		fail.
-%	message_hook(tests_ended) :-
-%		!,
-%		assertz(message_cache_(tests_ended)),
-%		fail.
 	% "testcase" tag predicates
 	message_hook(passed_test(Object, Test, File, Position, Note)) :-
+		!,
 		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note)))).
 	message_hook(non_deterministic_success(Object, Test, File, Position, Note)) :-
+		!,
 		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note)))).
 	message_hook(failed_test(Object, Test, File, Position, Reason, Note)) :-
+		!,
 		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note)))).
 	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
+		!,
 		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Note)))).
 	% catchall clause
 	message_hook(Message) :-
@@ -163,7 +162,7 @@
 	failed_test(quick_check_failed(Error, _, _), 'QuickCheck test failed', quick_check_failed, Error).
 	failed_test(quick_check_error(Error, _, _), 'QuickCheck test error', quick_check_error, Error).
 	failed_test(step_error(_, Error), 'Test step error', step_error, Error).
-	failed_test(step_failure(_), 'Test step failure', step_failure, '').
+	failed_test(step_failure(Step), 'Test step failure', step_failure, Step).
 
 	test_message(Note, Description, Message) :-
 		(	Note == '' ->

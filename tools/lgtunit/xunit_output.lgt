@@ -28,7 +28,7 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2019/11/09,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
@@ -61,14 +61,6 @@
 		!,
 		assertz(message_cache_(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds))),
 		generate_xml_report.
-%	message_hook(running_tests_from_object_file(Object,File)) :-
-%		!,
-%		assertz(message_cache_(running_tests_from_object_file(Object,File))),
-%		fail.
-%	message_hook(tests_ended) :-
-%		!,
-%		assertz(message_cache_(tests_ended)),
-%		fail.
 	% "testcase" tag predicates
 	message_hook(passed_test(Object, Test, File, Position, Note)) :-
 		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note)))).
@@ -148,7 +140,7 @@
 	failed_test(quick_check_failed(Error, _, _), 'QuickCheck test failed', quick_check_failed, Error).
 	failed_test(quick_check_error(Error, _, _), 'QuickCheck test error', quick_check_error, Error).
 	failed_test(step_error(_, Error), 'Test step error', step_error, Error).
-	failed_test(step_failure(Step), 'Test step failure', step_failure, '').
+	failed_test(step_failure(Step), 'Test step failure', step_failure, Step).
 
 	test_message(Note, Description, Message) :-
 		(	Note == '' ->
