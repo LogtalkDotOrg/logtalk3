@@ -265,6 +265,13 @@ entity)</p></li>
 <li><p><em>uses diagrams</em> showing which entities use resources from other
 entities</p></li>
 </ul>
+<p>The following library diagrams are supported:</p>
+<ul class="simple">
+<li><p><em>library loading diagrams</em> showing which libraries load other
+libraries</p></li>
+<li><p><em>library dependency diagrams</em> showing which libraries contain
+entities with references to entities defined in other libraries</p></li>
+</ul>
 <p>The following file diagrams are supported:</p>
 <ul class="simple">
 <li><p><em>file loading diagrams</em> showing which files load or include other
@@ -282,13 +289,6 @@ that load files in other directories</p></li>
 <li><p><em>directory dependency diagrams</em> showing which directories contain
 entities with references to entities defined in other directories</p></li>
 </ul>
-<p>The following library diagrams are supported:</p>
-<ul class="simple">
-<li><p><em>library loading diagrams</em> showing which libraries load other
-libraries</p></li>
-<li><p><em>library dependency diagrams</em> showing which libraries contain
-entities with references to entities defined in other libraries</p></li>
-</ul>
 <p>Comparing directory (or file) loading diagrams with directory (or file)
 dependency diagrams allows comparing what is explicitly loaded with the
 actual directory (or file) dependencies, which are inferred from the
@@ -302,7 +302,7 @@ diagrams in one step. This object provides an interface common to all
 diagrams but note that some predicates that generate diagrams only make
 sense for some types of diagrams. For best results and fine-grained
 customization of each diagram, the individual diagram objects should be
-used.</p>
+used with the intended set of options.</p>
 </div>
 <div class="section" id="graph-elements">
 <h2>Graph elements<a class="headerlink" href="#graph-elements" title="Permalink to this headline">¶</a></h2>
@@ -526,67 +526,66 @@ default is <code class="docutils literal notranslate"><span class="pre">bottom_t
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code></div>
-<div class="line">print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">interface(Boolean)</span></code></div>
-<div class="line">print/omit public predicates (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print public predicates (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">file_labels(Boolean)</span></code></div>
-<div class="line">print/omit file labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+<div class="line">print file labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">file_extensions(Boolean)</span></code></div>
-<div class="line">print/omit file name extensions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print file name extensions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code></div>
-<div class="line">print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default
-is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
-</div>
-</li>
-<li><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code></div>
-<div class="line">print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code></div>
+<div class="line">print external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code></div>
-<div class="line">print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">inheritance_relations(Boolean)</span></code></div>
-<div class="line">print/omit inheritance relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print inheritance relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code> for entity inheritance diagrams and <code class="docutils literal notranslate"><span class="pre">false</span></code> for other
 entity diagrams)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">provide_relations(Boolean)</span></code></div>
-<div class="line">print/omit provide relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print provide relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">xref_relations(Boolean)</span></code></div>
-<div class="line">print/omit predicate call cross-reference relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or
+<div class="line">print predicate call cross-reference relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or
 <code class="docutils literal notranslate"><span class="pre">false</span></code>; default depends on the specific diagram)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">xref_calls(Boolean)</span></code></div>
-<div class="line">print/omit predicate cross-reference calls (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>;
+<div class="line">print predicate cross-reference calls (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>;
 default depends on the specific diagram)</div>
 </div>
 </li>
@@ -679,19 +678,19 @@ default is <code class="docutils literal notranslate"><span class="pre">top_to_b
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code></div>
-<div class="line">print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">directory_paths(Boolean)</span></code></div>
-<div class="line">print/omit file directory paths (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print file directory paths (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">file_extensions(Boolean)</span></code></div>
-<div class="line">print/omit file name extensions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print file name extensions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
@@ -716,19 +715,18 @@ atoms; default is an empty list)</div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code></div>
-<div class="line">print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default
-is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+<div class="line">print entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code></div>
-<div class="line">print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+<div class="line">print external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code></div>
-<div class="line">print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
 </div>
 </li>
@@ -775,13 +773,13 @@ default is <code class="docutils literal notranslate"><span class="pre">top_to_b
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">date(Boolean)</span></code></div>
-<div class="line">print/omit current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print current date and time (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">directory_paths(Boolean)</span></code></div>
-<div class="line">print/omit file directory paths (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print file directory paths (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
 </div>
 </li>
@@ -806,19 +804,18 @@ atoms; default is an empty list)</div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">relation_labels(Boolean)</span></code></div>
-<div class="line">print/omit entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default
-is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+<div class="line">print entity relation labels (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">externals(Boolean)</span></code></div>
-<div class="line">print/omit external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
+<div class="line">print external nodes (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">node_type_captions(Boolean)</span></code></div>
-<div class="line">print/omit node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
+<div class="line">print node type captions (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
 </div>
 </li>
@@ -914,19 +911,22 @@ website. The relevant URLs are:</p>
 documentation)</p></li>
 </ul>
 <p>Git source code URLs should include the commit SHA1 to ensure that
-entity and predicate file line information in the URLs are valid.
-Assuming a <code class="docutils literal notranslate"><span class="pre">GitHub</span></code> variable bound to the SHA1 commit URL we want to
-reference, an inheritance diagram can be generated using the goal:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span>  <span class="k">logtalk_load</span>(diagrams(loader)),
+entity and predicate file line information in the URLs remain valid if
+the code changes in later commits. Assuming a <code class="docutils literal notranslate"><span class="pre">GitHub</span></code> variable bound
+to the SHA1 commit URL we want to reference, an inheritance diagram can
+be generated using the goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span>  <span class="nv">GitHub</span>  <span class="o">=</span> <span class="s">&#39;https://github.com/LogtalkDotOrg/logtalk3/tree/...&#39;</span>,
+    <span class="nv">APIDocs</span> <span class="o">=</span> <span class="s">&#39;https://logtalk.org/library/&#39;</span>,
+    <span class="k">logtalk_load</span>(diagrams(loader)),
     <span class="k">set_logtalk_flag</span>(source_data, on),
     <span class="k">logtalk_load</span>(library(all_loader)),
     inheritance_diagram<span class="o">::</span>rlibrary(library, [
         title(<span class="s">&#39;Logtalk library&#39;</span>),
         node_type_captions(<span class="k">true</span>),
         zoom(<span class="k">true</span>),
-        path_url_prefixes(<span class="s">&#39;$LOGTALKUSER/&#39;</span>,<span class="nv">GitHub</span>,<span class="s">&#39;https://logtalk.org/library/&#39;</span>),
-        path_url_prefixes(<span class="s">&#39;$LOGTALKHOME/&#39;</span>,<span class="nv">GitHub</span>,<span class="s">&#39;https://logtalk.org/library/&#39;</span>),
-        omit_path_prefixes([<span class="s">&#39;$LOGTALKUSER/&#39;</span>,<span class="s">&#39;$LOGTALKHOME/&#39;</span>,<span class="s">&#39;$HOME/&#39;</span>])
+        path_url_prefixes(<span class="s">&#39;$LOGTALKUSER/&#39;</span>, <span class="nv">GitHub</span>, <span class="nv">APIDocs</span>),
+        path_url_prefixes(<span class="s">&#39;$LOGTALKHOME/&#39;</span>, <span class="nv">GitHub</span>, <span class="nv">APIDocs</span>),
+        omit_path_prefixes([<span class="s">&#39;$LOGTALKUSER/&#39;</span>, <span class="s">&#39;$LOGTALKHOME/&#39;</span>, <span class="s">&#39;$HOME/&#39;</span>])
     ]).
 </pre></div>
 </div>

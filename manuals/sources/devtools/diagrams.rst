@@ -64,6 +64,13 @@ The following entity diagrams are supported:
 -  *uses diagrams* showing which entities use resources from other
    entities
 
+The following library diagrams are supported:
+
+-  *library loading diagrams* showing which libraries load other
+   libraries
+-  *library dependency diagrams* showing which libraries contain
+   entities with references to entities defined in other libraries
+
 The following file diagrams are supported:
 
 -  *file loading diagrams* showing which files load or include other
@@ -82,13 +89,6 @@ The following directory diagrams are supported:
 -  *directory dependency diagrams* showing which directories contain
    entities with references to entities defined in other directories
 
-The following library diagrams are supported:
-
--  *library loading diagrams* showing which libraries load other
-   libraries
--  *library dependency diagrams* showing which libraries contain
-   entities with references to entities defined in other libraries
-
 Comparing directory (or file) loading diagrams with directory (or file)
 dependency diagrams allows comparing what is explicitly loaded with the
 actual directory (or file) dependencies, which are inferred from the
@@ -104,7 +104,7 @@ diagrams in one step. This object provides an interface common to all
 diagrams but note that some predicates that generate diagrams only make
 sense for some types of diagrams. For best results and fine-grained
 customization of each diagram, the individual diagram objects should be
-used.
+used with the intended set of options.
 
 Graph elements
 --------------
@@ -288,47 +288,46 @@ generated diagrams. For entity diagrams the options are:
    | diagram title (an atom; default is ``''``)
 
 -  | ``date(Boolean)``
-   | print/omit current date and time (``true`` or ``false``; default is
+   | print current date and time (``true`` or ``false``; default is
      ``true``)
 
 -  | ``interface(Boolean)``
-   | print/omit public predicates (``true`` or ``false``; default is
+   | print public predicates (``true`` or ``false``; default is
      ``true``)
 
 -  | ``file_labels(Boolean)``
-   | print/omit file labels (``true`` or ``false``; default is ``true``)
+   | print file labels (``true`` or ``false``; default is ``true``)
 
 -  | ``file_extensions(Boolean)``
-   | print/omit file name extensions (``true`` or ``false``; default is
+   | print file name extensions (``true`` or ``false``; default is
      ``true``)
 
 -  | ``relation_labels(Boolean)``
-   | print/omit entity relation labels (``true`` or ``false``; default
-     is ``true``)
-
--  | ``externals(Boolean)``
-   | print/omit external nodes (``true`` or ``false``; default is
+   | print entity relation labels (``true`` or ``false``; default is
      ``true``)
 
+-  | ``externals(Boolean)``
+   | print external nodes (``true`` or ``false``; default is ``true``)
+
 -  | ``node_type_captions(Boolean)``
-   | print/omit node type captions (``true`` or ``false``; default is
+   | print node type captions (``true`` or ``false``; default is
      ``true``)
 
 -  | ``inheritance_relations(Boolean)``
-   | print/omit inheritance relations (``true`` or ``false``; default is
+   | print inheritance relations (``true`` or ``false``; default is
      ``true`` for entity inheritance diagrams and ``false`` for other
      entity diagrams)
 
 -  | ``provide_relations(Boolean)``
-   | print/omit provide relations (``true`` or ``false``; default is
+   | print provide relations (``true`` or ``false``; default is
      ``false``)
 
 -  | ``xref_relations(Boolean)``
-   | print/omit predicate call cross-reference relations (``true`` or
+   | print predicate call cross-reference relations (``true`` or
      ``false``; default depends on the specific diagram)
 
 -  | ``xref_calls(Boolean)``
-   | print/omit predicate cross-reference calls (``true`` or ``false``;
+   | print predicate cross-reference calls (``true`` or ``false``;
      default depends on the specific diagram)
 
 -  | ``output_directory(Directory)``
@@ -392,15 +391,15 @@ For directory and file diagrams the options are:
    | diagram title (an atom; default is ``''``)
 
 -  | ``date(Boolean)``
-   | print/omit current date and time (``true`` or ``false``; default is
+   | print current date and time (``true`` or ``false``; default is
      ``true``)
 
 -  | ``directory_paths(Boolean)``
-   | print/omit file directory paths (``true`` or ``false``; default is
+   | print file directory paths (``true`` or ``false``; default is
      ``false``)
 
 -  | ``file_extensions(Boolean)``
-   | print/omit file name extensions (``true`` or ``false``; default is
+   | print file name extensions (``true`` or ``false``; default is
      ``true``)
 
 -  | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
@@ -417,15 +416,14 @@ For directory and file diagrams the options are:
      atoms; default is an empty list)
 
 -  | ``relation_labels(Boolean)``
-   | print/omit entity relation labels (``true`` or ``false``; default
-     is ``false``)
+   | print entity relation labels (``true`` or ``false``; default is
+     ``false``)
 
 -  | ``externals(Boolean)``
-   | print/omit external nodes (``true`` or ``false``; default is
-     ``true``)
+   | print external nodes (``true`` or ``false``; default is ``true``)
 
 -  | ``node_type_captions(Boolean)``
-   | print/omit node type captions (``true`` or ``false``; default is
+   | print node type captions (``true`` or ``false``; default is
      ``false``)
 
 -  | ``output_directory(Directory)``
@@ -455,11 +453,11 @@ For library diagrams the options are:
    | diagram title (an atom; default is ``''``)
 
 -  | ``date(Boolean)``
-   | print/omit current date and time (``true`` or ``false``; default is
+   | print current date and time (``true`` or ``false``; default is
      ``true``)
 
 -  | ``directory_paths(Boolean)``
-   | print/omit file directory paths (``true`` or ``false``; default is
+   | print file directory paths (``true`` or ``false``; default is
      ``false``)
 
 -  | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
@@ -476,15 +474,14 @@ For library diagrams the options are:
      atoms; default is an empty list)
 
 -  | ``relation_labels(Boolean)``
-   | print/omit entity relation labels (``true`` or ``false``; default
-     is ``false``)
+   | print entity relation labels (``true`` or ``false``; default is
+     ``false``)
 
 -  | ``externals(Boolean)``
-   | print/omit external nodes (``true`` or ``false``; default is
-     ``true``)
+   | print external nodes (``true`` or ``false``; default is ``true``)
 
 -  | ``node_type_captions(Boolean)``
-   | print/omit node type captions (``true`` or ``false``; default is
+   | print node type captions (``true`` or ``false``; default is
      ``false``)
 
 -  | ``output_directory(Directory)``
@@ -561,22 +558,25 @@ website. The relevant URLs are:
    documentation)
 
 Git source code URLs should include the commit SHA1 to ensure that
-entity and predicate file line information in the URLs are valid.
-Assuming a ``GitHub`` variable bound to the SHA1 commit URL we want to
-reference, an inheritance diagram can be generated using the goal:
+entity and predicate file line information in the URLs remain valid if
+the code changes in later commits. Assuming a ``GitHub`` variable bound
+to the SHA1 commit URL we want to reference, an inheritance diagram can
+be generated using the goal:
 
 ::
 
-   ?-  logtalk_load(diagrams(loader)),
+   ?-  GitHub  = 'https://github.com/LogtalkDotOrg/logtalk3/tree/...',
+       APIDocs = 'https://logtalk.org/library/',
+       logtalk_load(diagrams(loader)),
        set_logtalk_flag(source_data, on),
        logtalk_load(library(all_loader)),
        inheritance_diagram::rlibrary(library, [
            title('Logtalk library'),
            node_type_captions(true),
            zoom(true),
-           path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),
-           path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),
-           omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/'])
+           path_url_prefixes('$LOGTALKUSER/', GitHub, APIDocs),
+           path_url_prefixes('$LOGTALKHOME/', GitHub, APIDocs),
+           omit_path_prefixes(['$LOGTALKUSER/', '$LOGTALKHOME/', '$HOME/'])
        ]).
 
 The two ``path_url_prefixes/3`` options take care of source code and API
