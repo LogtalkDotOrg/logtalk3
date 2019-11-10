@@ -722,11 +722,47 @@ written by Péter Szabó and Péter Szeredi.</p>
 <p>Two sets of predicates are provided, one for testing text input/output
 and one for testing binary input/output. In both cases, temporary files
 (possibly referenced by a user-defined alias) are used. The predicates
-allow setting, checking, and cleaning text/binary input/output. There is
-also a small set of helper predicates for dealing with stream handles
-and stream positions.</p>
-<p>For practical examples, check the included tests for Prolog conformance
-of standard input/output predicates.</p>
+allow setting, checking, and cleaning text/binary input/output.</p>
+<p>As an example of testing an input predicate, consider the standard
+<code class="docutils literal notranslate"><span class="pre">get_char/1</span></code> predicate. This predicate reads a single character (atom)
+from the current input stream. Some test for basic functionality could
+be:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(get_char_1_01, <span class="k">true</span>(<span class="nv">Char</span> <span class="o">==</span> <span class="s">&#39;q&#39;</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_input(<span class="s">&#39;qwerty&#39;</span>),
+    <span class="k">get_char</span>(<span class="nv">Char</span>).
+
+test(get_char_1_02, <span class="k">true</span>(<span class="nv">Assertion</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_input(<span class="s">&#39;qwerty&#39;</span>),
+    <span class="k">get_char</span>(<span class="nv">_Char</span>),
+    <span class="o">^^</span>text_input_assertion(<span class="s">&#39;werty&#39;</span>, <span class="nv">Assertion</span>).
+</pre></div>
+</div>
+<p>As you can see in the above example, the testing pattern consist on
+setting the input for the predicate being tested, calling it, and then
+checking the results. It is also possible to work with streams other
+than the current input/output streams by using the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> predicate
+variants that take a stream as argument. For example, when testing the
+standard <code class="docutils literal notranslate"><span class="pre">get_char/2</span></code> predicate, we could write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(get_char_2_01, <span class="k">true</span>(<span class="nv">Char</span> <span class="o">==</span> <span class="s">&#39;q&#39;</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_input(my_alias, <span class="s">&#39;qwerty&#39;</span>),
+    <span class="k">get_char</span>(my_alias, <span class="nv">Char</span>).
+
+test(get_char_2_02, <span class="k">true</span>(<span class="nv">Assertion</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_input(my_alias, <span class="s">&#39;qwerty&#39;</span>),
+    <span class="k">get_char</span>(my_alias, <span class="nv">_Char</span>),
+    <span class="o">^^</span>text_input_assertion(my_alias, <span class="s">&#39;werty&#39;</span>, <span class="nv">Assertion</span>).
+</pre></div>
+</div>
+<p>Testing output predicates follows the same pattern by using instead the
+<code class="docutils literal notranslate"><span class="pre">set_text_output/1-2</span></code> and <code class="docutils literal notranslate"><span class="pre">text_output_assertion/2-3</span></code> predicates.
+For testing binary input/output predicates, equivalent testing
+predicates are provided. There is also a small set of helper predicates
+for dealing with stream handles and stream positions. For testing with
+files instead of streams, testing predicates are provided that allow
+creating text and binary files with given contents and check text and
+binary files for expected contents.</p>
+<p>For more practical examples, check the included tests for Prolog
+conformance of standard input/output predicates.</p>
 </div>
 <div class="section" id="suppressing-tested-predicates-output">
 <h2>Suppressing tested predicates output<a class="headerlink" href="#suppressing-tested-predicates-output" title="Permalink to this headline">¶</a></h2>
@@ -997,8 +1033,13 @@ in the set.</p>
 <p>There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:</p>
 <ul class="simple">
+<li><p><a class="reference external" href="http://allure.qatools.ru">http://allure.qatools.ru</a> (supports
+multiple reports)</p></li>
+<li><p><a class="reference external" href="https://github.com/Zir0-93/xunit-to-html">https://github.com/Zir0-93/xunit-to-html</a>
+(supports multiple test sets in a single report)</p></li>
 <li><p><a class="reference external" href="https://www.npmjs.com/package/xunit-viewer">https://www.npmjs.com/package/xunit-viewer</a></p></li>
-<li><p><a class="reference external" href="https://github.com/Zir0-93/xunit-to-html">https://github.com/Zir0-93/xunit-to-html</a></p></li>
+<li><p><a class="reference external" href="https://github.com/JatechUK/NUnit-HTML-Report-Generator">https://github.com/JatechUK/NUnit-HTML-Report-Generator</a></p></li>
+<li><p><a class="reference external" href="https://plugins.jenkins.io/xunit">https://plugins.jenkins.io/xunit</a></p></li>
 </ul>
 </div>
 <div class="section" id="exporting-test-results-in-the-tap-output-format">

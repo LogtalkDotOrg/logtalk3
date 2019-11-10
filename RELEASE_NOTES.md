@@ -24,6 +24,12 @@ RELEASE NOTES
 3.33.0 - December ??, 2019
 ==========================
 
+Documentation
+-------------
+
+* IMPROVED: The `lgtunit` tool documentation section on testing input/output
+predicates.
+
 Tools
 _____
 

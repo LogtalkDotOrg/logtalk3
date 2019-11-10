@@ -555,12 +555,53 @@ written by Péter Szabó and Péter Szeredi.
 Two sets of predicates are provided, one for testing text input/output
 and one for testing binary input/output. In both cases, temporary files
 (possibly referenced by a user-defined alias) are used. The predicates
-allow setting, checking, and cleaning text/binary input/output. There is
-also a small set of helper predicates for dealing with stream handles
-and stream positions.
+allow setting, checking, and cleaning text/binary input/output.
 
-For practical examples, check the included tests for Prolog conformance
-of standard input/output predicates.
+As an example of testing an input predicate, consider the standard
+``get_char/1`` predicate. This predicate reads a single character (atom)
+from the current input stream. Some test for basic functionality could
+be:
+
+::
+
+   test(get_char_1_01, true(Char == 'q')) :-
+       ^^set_text_input('qwerty'),
+       get_char(Char).
+
+   test(get_char_1_02, true(Assertion)) :-
+       ^^set_text_input('qwerty'),
+       get_char(_Char),
+       ^^text_input_assertion('werty', Assertion).
+
+As you can see in the above example, the testing pattern consist on
+setting the input for the predicate being tested, calling it, and then
+checking the results. It is also possible to work with streams other
+than the current input/output streams by using the ``lgtunit`` predicate
+variants that take a stream as argument. For example, when testing the
+standard ``get_char/2`` predicate, we could write:
+
+::
+
+   test(get_char_2_01, true(Char == 'q')) :-
+       ^^set_text_input(my_alias, 'qwerty'),
+       get_char(my_alias, Char).
+
+   test(get_char_2_02, true(Assertion)) :-
+       ^^set_text_input(my_alias, 'qwerty'),
+       get_char(my_alias, _Char),
+       ^^text_input_assertion(my_alias, 'werty', Assertion).
+
+Testing output predicates follows the same pattern by using instead the
+``set_text_output/1-2`` and ``text_output_assertion/2-3`` predicates.
+For testing binary input/output predicates, equivalent testing
+predicates are provided. There is also a small set of helper predicates
+for dealing with stream handles and stream positions. For testing with
+files instead of streams, testing predicates are provided that allow
+creating text and binary files with given contents and check text and
+binary files for expected contents.
+
+For more practical examples, check the included tests for Prolog
+conformance of standard input/output predicates.
 
 Suppressing tested predicates output
 ------------------------------------
@@ -839,8 +880,13 @@ in the set.
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
 
--  `https://www.npmjs.com/package/xunit-viewer <https://www.npmjs.com/package/xunit-viewer>`__
+-  `http://allure.qatools.ru <http://allure.qatools.ru>`__ (supports
+   multiple reports)
 -  `https://github.com/Zir0-93/xunit-to-html <https://github.com/Zir0-93/xunit-to-html>`__
+   (supports multiple test sets in a single report)
+-  `https://www.npmjs.com/package/xunit-viewer <https://www.npmjs.com/package/xunit-viewer>`__
+-  `https://github.com/JatechUK/NUnit-HTML-Report-Generator <https://github.com/JatechUK/NUnit-HTML-Report-Generator>`__
+-  `https://plugins.jenkins.io/xunit <https://plugins.jenkins.io/xunit>`__
 
 Exporting test results in the TAP output format
 -----------------------------------------------
