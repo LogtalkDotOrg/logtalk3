@@ -232,10 +232,59 @@ following file and consult the debugging section of the User Manual:</p>
 <p>The tool provides two sets of predicates. The first set allows enabling
 and disabling of all <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages for a given
 component. The second set allows enabling and disabling of
-<code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages for a given group and component.</p>
+<code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages for a given group and component for
+fine-grained control.</p>
 <p>Upon loading the tool, all debug messages are skipped. The user is then
 expected to use the tool API to selectively enable the messages that
-will be printed.</p>
+will be printed. As an example, consider the following object, part of a
+<code class="docutils literal notranslate"><span class="pre">xyz</span></code> component:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo).
+
+<span class="p">    :- </span><span class="k">public</span>([bar<span class="o">/</span><span class="m">0</span>, baz<span class="o">/</span><span class="m">0</span>]).
+<span class="p">    :- </span><span class="k">uses</span>(logtalk, [print_message<span class="o">/</span><span class="m">3</span>]).
+
+    bar <span class="o">:-</span>
+        print_message(debug(bar), xyz, <span class="o">@</span><span class="s">&#39;bar/0 called&#39;</span>).
+
+    baz <span class="o">:-</span>
+        print_message(debug(baz), xyz, <span class="o">@</span><span class="s">&#39;baz/0 called&#39;</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Assuming the object <code class="docutils literal notranslate"><span class="pre">foo</span></code> is compiled and loaded in normal or debug
+mode, after also loading this tool, <code class="docutils literal notranslate"><span class="pre">bar/0</span></code> and <code class="docutils literal notranslate"><span class="pre">baz/0</span></code> messages
+will not print any debug messages:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">{</span>debug_messages(loader), foo<span class="k">}</span>.
+...
+yes
+
+<span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
+yes
+</pre></div>
+</div>
+<p>We can then enable all debug messages for the <code class="docutils literal notranslate"><span class="pre">xyz</span></code> component:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> debug_messages<span class="o">::</span>enable(xyx).
+yes
+
+<span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
+bar<span class="o">/</span><span class="m">0</span> called
+baz<span class="o">/</span><span class="m">0</span> called
+yes
+</pre></div>
+</div>
+<p>Or we can selectively enable only debug messages for a specific group:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> debug_messages<span class="o">::</span>disable(xyx).
+yes
+
+<span class="o">?-</span> debug_messages<span class="o">::</span>enable(xyx, bar).
+yes
+
+<span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
+bar<span class="o">/</span><span class="m">0</span> called
+yes
+</pre></div>
+</div>
 </div>
 <div class="section" id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>

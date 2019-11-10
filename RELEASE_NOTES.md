@@ -27,6 +27,8 @@ RELEASE NOTES
 Documentation
 -------------
 
+* ADDED: Usage example to the `debug_messages` tool documentation.
+
 * IMPROVED: The `diagrams` tool documentation section on generating diagrams
 with links sub-diagrams, source code, and API documentation.
 

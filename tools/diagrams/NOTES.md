@@ -496,19 +496,19 @@ changes in later commits. Assuming a `GitHub` variable bound to the SHA1
 commit URL we want to reference, an inheritance diagram can be generated
 using the goal:
 
-    ?-  GitHub  = 'https://github.com/LogtalkDotOrg/logtalk3/tree/...',
-        APIDocs = 'https://logtalk.org/library/',
-        logtalk_load(diagrams(loader)),
-        set_logtalk_flag(source_data, on),
-        logtalk_load(library(all_loader)),
-        inheritance_diagram::rlibrary(library, [
-            title('Logtalk library'),
-            node_type_captions(true),
-            zoom(true),
-            path_url_prefixes('$LOGTALKUSER/', GitHub, APIDocs),
-            path_url_prefixes('$LOGTALKHOME/', GitHub, APIDocs),
-            omit_path_prefixes(['$LOGTALKUSER/', '$LOGTALKHOME/', '$HOME/'])
-        ]).
+	?-	GitHub  = 'https://github.com/LogtalkDotOrg/logtalk3/tree/...',
+		APIDocs = 'https://logtalk.org/library/',
+		logtalk_load(diagrams(loader)),
+		set_logtalk_flag(source_data, on),
+		logtalk_load(library(all_loader)),
+		inheritance_diagram::rlibrary(library, [
+			title('Logtalk library'),
+			node_type_captions(true),
+			zoom(true),
+			path_url_prefixes('$LOGTALKUSER/', GitHub, APIDocs),
+			path_url_prefixes('$LOGTALKHOME/', GitHub, APIDocs),
+			omit_path_prefixes(['$LOGTALKUSER/', '$LOGTALKHOME/', '$HOME/'])
+		]).
 
 The two `path_url_prefixes/3` options take care of source code and API
 documentation for entities loaded either from the Logtalk installation
