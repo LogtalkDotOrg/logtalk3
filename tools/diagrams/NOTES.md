@@ -29,10 +29,10 @@ predicate cross-referencing diagrams for plain Prolog files.
 
 Linking library diagrams to entity diagrams to predicate cross-referencing
 diagrams and linking directory diagrams to file diagrams is also supported
-when using SVG output. This feature allows using diagrams for navigating
-complex code by zooming into details. SVG output can also easily link to
-both source code repositories and API documentation. This allows diagrams
-to be used for source code navigation.
+when using SVG output. This feature allows using diagrams for understanding
+the architecture of applications by navigating complex code and zooming into
+details. SVG output can also easily link to both source code repositories and
+API documentation. This allows diagrams to be used for source code navigation.
 
 Diagrams can also be used to uncover code issues. For example, comparing
 loading diagrams with dependency diagrams can reveal implicit dependencies.
@@ -73,16 +73,16 @@ Supported diagrams
 
 The following entity diagrams are supported:
 
-- entity diagrams showing entity public interfaces, entity inheritance
+- *entity diagrams* showing entity public interfaces, entity inheritance
 relations, and entity predicate cross-reference relations
-- predicate cross-reference diagrams (between entities or within an entity)
-- inheritance diagrams showing entity inheritance relations
-- uses diagrams showing which entities use resources from other entities
+- *predicate cross-reference diagrams* (between entities or within an entity)
+- *inheritance diagrams* showing entity inheritance relations
+- *uses diagrams* showing which entities use resources from other entities
 
 The following file diagrams are supported:
 
-- file loading diagrams showing which files load or include other files
-- file dependency diagrams showing which files contain entities with
+- *file loading diagrams* showing which files load or include other files
+- *file dependency diagrams* showing which files contain entities with
 references to entities defined in other files
 
 File dependency diagrams are specially useful in revealing dependencies
@@ -91,15 +91,15 @@ loaded indirectly by files external to the libraries being documented.
 
 The following directory diagrams are supported:
 
-- directory loading diagrams showing which directories contain files that
+- *directory loading diagrams* showing which directories contain files that
 load files in other directories
-- directory dependency diagrams showing which directories contain entities
+- *directory dependency diagrams* showing which directories contain entities
 with references to entities defined in other directories
 
 The following library diagrams are supported:
 
-- library loading diagrams showing which libraries load other libraries
-- library dependency diagrams showing which libraries contain entities with
+- *library loading diagrams* showing which libraries load other libraries
+- *library dependency diagrams* showing which libraries contain entities with
 references to entities defined in other libraries
 
 Comparing directory (or file) loading diagrams with directory (or file)
@@ -124,9 +124,9 @@ Graph elements
 
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
-entity relations. Currently we use the following DOT shapes (libraries,
-entities, predicates, and files) and arrows (entity, predicate, and file
-relations):
+entity relations. Currently we use the following Graphviz DOT shapes
+(libraries, entities, predicates, and files) and arrows (entity, predicate,
+and file relations):
 
 - libraries  
 	`tab` (lightsalmon)
@@ -195,11 +195,11 @@ Supported graph languages
 -------------------------
 
 Currently only the DOT graph language is supported (tested with Graphviz
-version 2.40.1 on macOS; visit the <http://www.graphviz.org/> website for
+version 2.43 on macOS; visit the <http://www.graphviz.org/> website for
 more information). Some recent versions have a nasty regression in the
 SVG exporter where text overflows the boxes that should contain it. Also,
-stable version 2.40.1 have a bug (fixed in the current git version) that
-can result in very long edges.
+old stable versions such as 2.40.1 have a bug (fixed in the recent versions)
+that can result in very long edges.
 
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as SVG,
@@ -468,16 +468,14 @@ Linking diagrams
 ----------------
 
 When using SVG output, it's possible to generate diagrams that link to other
-diagrams and also diagrams that link to API documentation and source code
-repositories.
+diagrams and to API documentation and source code repositories.
 
 For generating links between diagrams, use the `zoom(true)` option. This
 option allows (1) linking library diagrams to entity diagrams to predicate
 cross-referencing diagrams and (2) linking directory diagrams to file
 diagrams. The sub-diagrams are automatically generated. E.g. using the
 predicates that generate library diagrams will automatically also generate
-the entity and predicate cross-referencing diagrams. This feature allows
-using diagrams for navigating complex code by zooming into details.
+the entity and predicate cross-referencing diagrams.
 
 To generate links to API documentation and source code repositories, use
 the options `path_url_prefixes/3` (or `url_prefixes/2` for simpler cases)
@@ -485,8 +483,40 @@ and `omit_path_prefixes/1`. The idea is that the `omit_path_prefixes/1`
 option specifies local file prefixes that will be cut and replaced by the
 URL prefixes (which can be path prefix specific when addressing multiple
 code repositories). To generate local file system URLs, define the empty
-atom, `''`, as a prefix. See the `SCRIPT.txt` file in the tool directory
-for some usage examples.
+atom, `''`, as a prefix. As an example, consider the Logtalk library. Its
+source code is available from a GitHub repository and its documentation
+is published in the Logtalk website. The relevant URLs are:
+
+- https://github.com/LogtalkDotOrg/logtalk3/tree/ (source code)
+- https://logtalk.org/library/ (API documentation)
+
+Git source code URLs should include the commit SHA1 to ensure that entity
+and predicate file line information in the URLs are valid. Assuming a `GitHub`
+variable bound to the SHA1 commit URL we want to reference, an inheritance
+diagram can be generated using the goal:
+
+    ?-  logtalk_load(diagrams(loader)),
+        set_logtalk_flag(source_data, on),
+        logtalk_load(library(all_loader)),
+        inheritance_diagram::rlibrary(library, [
+            title('Logtalk library'),
+            node_type_captions(true),
+            zoom(true),
+            path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),
+            path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),
+            omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/'])
+        ]).
+
+The two `path_url_prefixes/3` options take care of source code and API
+documentation for entities loaded either from the Logtalk installation
+directory (whose location is given by the `LOGTALKHOME` environment
+variable) or from the Logtalk user directory (whose location is given
+by the `LOGTALKUSER` environment variable). As we also don't want any
+local operating-system paths to be exposed in the diagram, we use the
+`omit_path_prefixes/1` option to suppress those path prefixes, Note
+that all the paths and URLs must end with a slash for proper handling.
+
+See the `SCRIPT.txt` file in the tool directory for additional examples.
 
 
 Creating diagrams for Prolog module applications
