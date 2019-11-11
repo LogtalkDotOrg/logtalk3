@@ -26,6 +26,13 @@ predict negative aspects such as entity coupling, cohesion, complexity,
 error-proneness, and overall maintainability. It is meant to be extensible
 via the addition of objects implementing new metrics.
 
+This tool provides predicates for computing metrics for source files,
+entities, libraries, files, and directories. The actual availability
+of a particular predicate depends on the specific metric. One set of
+predicates prints, by default, the computed metric values to the standard
+output. A second set of predicates computes and returns a score (usually
+a compound term with the computed metric values as arguments).
+
 
 API documentation
 -----------------
@@ -33,9 +40,6 @@ API documentation
 To consult this tool API documentation, open in a web browser the link:
 
 [docs/library_index.html#code-metrics](https://logtalk.org/docs/library_index.html#code-metrics)
-
-For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file in the
-tool directory.
 
 
 Loading
@@ -59,17 +63,11 @@ Currently, the following metrics are provided:
 - Efferent coupling, afferent coupling, instability, and abstractness (`coupling_metric`)
 - Documentation (`doc_metric`)
 - Source code size (`size_metric`)
-- Halstead complexity (`halstead_metric`)
-
-All metrics require the source code to be analyzed to be loaded with the
-`source_data` flag turned on.
+- Halstead complexity (`halstead_metric` and `halstead_metric(Stroud)`)
 
 A helper object, `code_metrics`, is also provided allowing running all
-loaded individual metrics.
-
-For usage examples, see the `SCRIPT.txt` file in the tool directory.
-
-For code coverage metrics, see the `lgtunit` tool documentation.
+loaded individual metrics. For code coverage metrics, see the `lgtunit`
+tool documentation.
 
 For interpretation of the coupling metric scores, see e.g. the original
 paper by Robert Martin, "OO Design Quality Metrics":
@@ -132,6 +130,17 @@ paper by Thomas J. McCabe:
 		address = "Los Alamitos, CA, USA",
 		keywords = "Basis, Complexity measure, Control flow, Decomposition, Graph theory, Independence, Linear, Modularization, Programming, Reduction, Software, Testing",
 	} 
+
+Be sure to fully understand the metrics individual meanings and any
+implementation limitations before using them to support any evaluation
+or decision process.
+
+Usage
+-----
+
+All metrics require the source code to be analyzed to be loaded
+with the `source_data` flag turned on. For usage examples, see
+the [SCRIPT.txt](SCRIPT.txt) file in the tool directory.
 
 
 Defining new metrics
