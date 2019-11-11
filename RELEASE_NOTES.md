@@ -29,7 +29,8 @@ Documentation
 
 * ADDED: Usage example to the `debug_messages` tool documentation.
 
-* IMPROVED: Documentation of the `lgtdoc` tool.
+* IMPROVED: Documentation of the `code_metrics`, `dead_code_scanner`, and
+`lgtdoc` tools.
 
 * IMPROVED: The `diagrams` tool documentation section on generating diagrams
 with links sub-diagrams, source code, and API documentation.

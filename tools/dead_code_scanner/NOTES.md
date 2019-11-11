@@ -28,9 +28,7 @@ when:
 1. There is no scope directive for them.
 2. They are not called, directly or indirectly, by any predicate with a (local
 or inherited) scope directive.
-
-Predicates (and non-terminals) listed in `uses/2` and `use_module/2` directives
-but that are not used are also classified as dead code.
+3. They are listed in `uses/2` and `use_module/2` directives but not used.
 
 Besides dead code, this tool can also help detect other problems in the code
 that often result in reporting false positives. For example, typos in `alias/2`
@@ -69,15 +67,24 @@ This tool can be loaded using the query:
 	| ?- logtalk_load(dead_code_scanner(loader)).
 
 
+Usage
+-----
+
+This tool provides a set of predicates that allows scanning entities,
+libraries, files, and directories. The source code to be analyzed should
+be loaded with the `source_data` and `optimize` flags turned on. For
+usage examples, see the `SCRIPT.txt` file in the tool directory.
+
+
 Known issues
 ------------
 
 Use of local meta-calls with goal arguments only known at runtime can result
-in false positives. When using library or user-defined meta-predicates, it
-can be helpful to compile the source files with the `optimize` flag turned
-on so that the meta-calls may be resolved at compile time and thus allow
-calling information for the meta-arguments to be recorded, avoiding false
-positives for predicates that are only meta-called.
+in false positives. When using library or user-defined meta-predicates,
+compilation of the source files with the `optimize` flag turned on may allow
+meta-calls to be resolved at compile time and thus allow calling information
+for the meta-arguments to be recorded, avoiding false positives for predicates
+that are only meta-called.
 
 
 Other notes

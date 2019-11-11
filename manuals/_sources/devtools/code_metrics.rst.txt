@@ -127,7 +127,7 @@ Usage
 
 All metrics require the source code to be analyzed to be loaded with the
 ``source_data`` flag turned on. For usage examples, see the
-`SCRIPT.txt <SCRIPT.txt>`__ file in the tool directory.
+``SCRIPT.txt`` file in the tool directory.
 
 Defining new metrics
 --------------------
