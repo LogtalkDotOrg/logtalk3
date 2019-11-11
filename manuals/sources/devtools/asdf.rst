@@ -1,8 +1,8 @@
 ``asdf``
 ========
 
-A Logtalk plugin for the ``asdf`` extendable version manager is
-available at:
+A Logtalk plugin for the `asdf <https://asdf-vm.com/#/>`__ extendable
+version manager is available at:
 
 `https://github.com/LogtalkDotOrg/asdf-logtalk <https://github.com/LogtalkDotOrg/asdf-logtalk>`__
 
