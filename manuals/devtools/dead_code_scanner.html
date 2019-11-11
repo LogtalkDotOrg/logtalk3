@@ -114,7 +114,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-notes">Other notes</a></li>
 </ul>
 </li>
@@ -211,13 +211,13 @@
 <p>This tool detects <em>likely</em> dead code in Logtalk entities and in Prolog
 modules compiled as objects. Predicates (and non-terminals) are
 classified as dead code when:</p>
-<ol class="arabic simple">
-<li><p>There is no scope directive for them.</p></li>
-<li><p>They are not called, directly or indirectly, by any predicate with a
-(local or inherited) scope directive.</p></li>
+<ul class="simple">
+<li><p>There is no scope directive for them and they are not called,
+directly or indirectly, by any predicate with a (local or inherited)
+scope directive.</p></li>
 <li><p>They are listed in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives but not
-used.</p></li>
-</ol>
+called.</p></li>
+</ul>
 <p>Besides dead code, this tool can also help detect other problems in the
 code that often result in reporting false positives. For example, typos
 in <code class="docutils literal notranslate"><span class="pre">alias/2</span></code> directives, missing scope directives, and missing
@@ -251,12 +251,37 @@ the tool directory.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>This tool provides a set of predicates that allows scanning entities,
-libraries, files, and directories. The source code to be analyzed should
-be loaded with the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flags turned on. For
-usage examples, see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory.</p>
+libraries, files, and directories. See the tool API documentation for
+details. The source code to be analyzed should be loaded with the
+<code class="docutils literal notranslate"><span class="pre">source_data</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flags turned on (possibly set in a
+loader file).</p>
+<p>As an example, assume that we want to scan an application with a library
+alias <code class="docutils literal notranslate"><span class="pre">my_app</span></code>. The following goals could be used:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(source_data, on),
+     <span class="k">set_logtalk_flag</span>(optimize, on).
+yes
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_app(loader)).
+...
+yes
+
+| <span class="o">?-</span> dead_code_scanner<span class="o">::</span>library(my_app).
+...
+</pre></div>
 </div>
-<div class="section" id="known-issues">
-<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<p>For complex applications that make use of sub-libraries, there is also a
+<code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code> predicate that performs a recursive scan of a library and
+all its sub-libraries. Conversely, we may be interested in scanning a
+single entity:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> dead_code_scanner<span class="o">::</span>entity(some_object).
+...
+</pre></div>
+</div>
+<p>For other usage examples, see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
+directory.</p>
+</div>
+<div class="section" id="caveats">
+<h2>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
 <p>Use of local meta-calls with goal arguments only known at runtime can
 result in false positives. When using library or user-defined
 meta-predicates, compilation of the source files with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code>

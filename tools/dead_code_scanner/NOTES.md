@@ -25,10 +25,9 @@ This tool detects *likely* dead code in Logtalk entities and in Prolog modules
 compiled as objects. Predicates (and non-terminals) are classified as dead code
 when:
 
-1. There is no scope directive for them.
-2. They are not called, directly or indirectly, by any predicate with a (local
-or inherited) scope directive.
-3. They are listed in `uses/2` and `use_module/2` directives but not used.
+- There is no scope directive for them and they are not called, directly or
+indirectly, by any predicate with a (local or inherited) scope directive.
+- They are listed in `uses/2` and `use_module/2` directives but not called.
 
 Besides dead code, this tool can also help detect other problems in the code
 that often result in reporting false positives. For example, typos in `alias/2`
@@ -71,13 +70,38 @@ Usage
 -----
 
 This tool provides a set of predicates that allows scanning entities,
-libraries, files, and directories. The source code to be analyzed should
-be loaded with the `source_data` and `optimize` flags turned on. For
-usage examples, see the `SCRIPT.txt` file in the tool directory.
+libraries, files, and directories. See the tool API documentation for
+details. The source code to be analyzed should be loaded with the
+`source_data` and `optimize` flags turned on (possibly set in a loader
+file).
+
+As an example, assume that we want to scan an application with a library
+alias `my_app`. The following goals could be used:
+
+	| ?- set_logtalk_flag(source_data, on),
+	     set_logtalk_flag(optimize, on).
+	yes
+
+	| ?- logtalk_load(my_app(loader)).
+	...
+	yes
+
+	| ?- dead_code_scanner::library(my_app).
+	...
+
+For complex applications that make use of sub-libraries, there is also a
+`rlibrary/1` predicate that performs a recursive scan of a library and all
+its sub-libraries. Conversely, we may be interested in scanning a single
+entity:
+
+	| ?- dead_code_scanner::entity(some_object).
+	...
+
+For other usage examples, see the `SCRIPT.txt` file in the tool directory.
 
 
-Known issues
-------------
+Caveats
+-------
 
 Use of local meta-calls with goal arguments only known at runtime can result
 in false positives. When using library or user-defined meta-predicates,
