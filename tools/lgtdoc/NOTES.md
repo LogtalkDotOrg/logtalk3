@@ -20,26 +20,18 @@ ________________________________________________________________________
 `lgtdoc`
 ========
 
-This folder provides the default Logtalk documenting tool, which is focused on
-generating API documentation for applications.
+This is the default Logtalk documenting tool for generating API documentation
+for applications and Logtalk itself. It uses the structural reflection API to
+extract and output in XML format relevant documentation about a source file,
+a library or directory of source files, or all loaded source files. The tool
+predicates accept several options for generating the XML files, including
+the output directory.
 
-This documenting tool uses Logtalk's structural reflection support to extract
-and output in XML format relevant documentation about a source code file, a
-library or directory of source files, or all loaded source files. The tool
-predicates allows you to set several options for the XML files, including the
-output directory.
-
-The `lgtdoc/xml` directory includes several ready to use scripts for converting
+The `lgtdoc/xml` directory contains several ready to use scripts for converting
 the XML documenting files into final formats including (X)HTML, PDF, Markdown,
 and reStructuredText (for use with Sphinx), or plain text files. The scripts are
-described in their `man` pages. See also the `lgtdoc/xml/NOTES.md` for details.
-
-
-For information on documenting your source code, consult the documenting section
-of the User Manual:
-
-[manuals/userman/documenting.html](https://logtalk.org/manuals/userman/documenting.html)
-
+described in their `man` pages and made available in the system path by default.
+See also the `lgtdoc/xml/NOTES.md` for details.
 
 
 API documentation
@@ -61,8 +53,14 @@ This tool can be loaded using the query:
 Documenting source code
 -----------------------
 
-Documenting Logtalk source code (with this tool) requires compiling the source
-files using the `source_data(on)` compiler flag. For example:
+For information on documenting your source code, notably on documenting
+directives, consult the documenting section of the User Manual:
+
+[manuals/userman/documenting.html](https://logtalk.org/manuals/userman/documenting.html)
+
+Extracting documenting information from your source code using with this tool
+requires compiling the source files using the `source_data(on)` compiler flag.
+For example:
 
 	| ?- logtalk_load(source_file, [source_data(on)]).
 
@@ -74,8 +72,8 @@ globally by typing:
 
 The tool API allows generating documentation for libraries, directories, and
 files, complemented with library, directory, entity, and predicate indexes.
-The source files to be documented **must** be loaded prior to using this tool
-predicates to generate the documentation.
+Note that the source files to be documented **must** be loaded prior to using
+this tool predicates to generate the documentation.
 
 
 Generating documentation
@@ -95,16 +93,36 @@ documentation by typing:
 	...
 
 By default, the documenting XML files are created in a `./xml_docs` directory
-in the application directory. For example, assuming that we want to generate
-HTML documentation:
+in the application directory. But usually all documenting files are collected
+for both the application and the libraries it uses ar collected in a common
+directory so that all documentation links resolved properly. The `lgtdoc`
+predicates can take a list of options to customize the generated XML
+documenting files. See the remarks section in the
+[lgtdocp](https://logtalk.org/docs/library_index.html#lgtdoc)
+protocol documentation for details on the available options.
+
+After generating the XML documenting files, these can be easily converted into
+final formats using the provided scripts. For example, assuming that we want
+to generate HTML documentation:
 
 	$ cd xml_docs
 	$ lgt2html -t "My app"
 
+To generate the documentation in Sphinx format instead (as used by Logtalk
+itself for its APIs):
+
+	$ cd xml_docs
+	$ lgt2rst -s -- -q -p "Application name" -a "Author name" -v "Version X.YZ.P"
+	$ make html
+
+In this case, the generated documentation will be in the `xml_docs/_build/html/`
+directory. See the scripts man pages or call them using the `-h` option to learn
+more about their supported options.
+
 For more complex applications, you can use the `doclet` tool to define a *doclet*
 to automate all the steps required to generate documentation. The *doclet* message
 that triggers the process can also be sent automatically when the `make` tool is
-used. 
+used with the `documentation` target.
 
 
 Other notes

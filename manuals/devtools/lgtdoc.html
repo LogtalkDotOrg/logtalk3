@@ -208,21 +208,18 @@
             
   <div class="section" id="lgtdoc">
 <h1><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code><a class="headerlink" href="#lgtdoc" title="Permalink to this headline">¶</a></h1>
-<p>This folder provides the default Logtalk documenting tool, which is
-focused on generating API documentation for applications.</p>
-<p>This documenting tool uses Logtalk’s structural reflection support to
-extract and output in XML format relevant documentation about a source
-code file, a library or directory of source files, or all loaded source
-files. The tool predicates allows you to set several options for the XML
-files, including the output directory.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> directory includes several ready to use scripts for
+<p>This is the default Logtalk documenting tool for generating API
+documentation for applications and Logtalk itself. It uses the
+structural reflection API to extract and output in XML format relevant
+documentation about a source file, a library or directory of source
+files, or all loaded source files. The tool predicates accept several
+options for generating the XML files, including the output directory.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> directory contains several ready to use scripts for
 converting the XML documenting files into final formats including
 (X)HTML, PDF, Markdown, and reStructuredText (for use with Sphinx), or
-plain text files. The scripts are described in their <code class="docutils literal notranslate"><span class="pre">man</span></code> pages. See
-also the <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml/NOTES.md</span></code> for details.</p>
-<p>For information on documenting your source code, consult the documenting
-section of the User Manual:</p>
-<p><a class="reference external" href="https://logtalk.org/manuals/userman/documenting.html">manuals/userman/documenting.html</a></p>
+plain text files. The scripts are described in their <code class="docutils literal notranslate"><span class="pre">man</span></code> pages and
+made available in the system path by default. See also the
+<code class="docutils literal notranslate"><span class="pre">lgtdoc/xml/NOTES.md</span></code> for details.</p>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>To consult this tool API documentation, open in a web browser the link:</p>
@@ -237,8 +234,12 @@ section of the User Manual:</p>
 </div>
 <div class="section" id="documenting-source-code">
 <h2>Documenting source code<a class="headerlink" href="#documenting-source-code" title="Permalink to this headline">¶</a></h2>
-<p>Documenting Logtalk source code (with this tool) requires compiling the
-source files using the <code class="docutils literal notranslate"><span class="pre">source_data(on)</span></code> compiler flag. For example:</p>
+<p>For information on documenting your source code, notably on documenting
+directives, consult the documenting section of the User Manual:</p>
+<p><a class="reference external" href="https://logtalk.org/manuals/userman/documenting.html">manuals/userman/documenting.html</a></p>
+<p>Extracting documenting information from your source code using with this
+tool requires compiling the source files using the <code class="docutils literal notranslate"><span class="pre">source_data(on)</span></code>
+compiler flag. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(source_file, [source_data(on)]).
 </pre></div>
 </div>
@@ -250,8 +251,8 @@ corresponding loader file. In alternative, you may also turn on the
 </div>
 <p>The tool API allows generating documentation for libraries, directories,
 and files, complemented with library, directory, entity, and predicate
-indexes. The source files to be documented <strong>must</strong> be loaded prior to
-using this tool predicates to generate the documentation.</p>
+indexes. Note that the source files to be documented <strong>must</strong> be loaded
+prior to using this tool predicates to generate the documentation.</p>
 </div>
 <div class="section" id="generating-documentation">
 <h2>Generating documentation<a class="headerlink" href="#generating-documentation" title="Permalink to this headline">¶</a></h2>
@@ -269,16 +270,37 @@ application documentation by typing:</p>
 </pre></div>
 </div>
 <p>By default, the documenting XML files are created in a <code class="docutils literal notranslate"><span class="pre">./xml_docs</span></code>
-directory in the application directory. For example, assuming that we
-want to generate HTML documentation:</p>
+directory in the application directory. But usually all documenting
+files are collected for both the application and the libraries it uses
+ar collected in a common directory so that all documentation links
+resolved properly. The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> predicates can take a list of options
+to customize the generated XML documenting files. See the remarks
+section in the
+<a class="reference external" href="https://logtalk.org/docs/library_index.html#lgtdoc">lgtdocp</a>
+protocol documentation for details on the available options.</p>
+<p>After generating the XML documenting files, these can be easily
+converted into final formats using the provided scripts. For example,
+assuming that we want to generate HTML documentation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd xml_docs
 $ lgt2html -t &quot;My app&quot;
 </pre></div>
 </div>
+<p>To generate the documentation in Sphinx format instead (as used by
+Logtalk itself for its APIs):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd xml_docs
+$ lgt2rst -s -- -q -p &quot;Application name&quot; -a &quot;Author name&quot; -v &quot;Version X.YZ.P&quot;
+$ make html
+</pre></div>
+</div>
+<p>In this case, the generated documentation will be in the
+<code class="docutils literal notranslate"><span class="pre">xml_docs/_build/html/</span></code> directory. See the scripts man pages or call
+them using the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to learn more about their supported
+options.</p>
 <p>For more complex applications, you can use the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> tool to define
 a <em>doclet</em> to automate all the steps required to generate documentation.
 The <em>doclet</em> message that triggers the process can also be sent
-automatically when the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool is used.</p>
+automatically when the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool is used with the <code class="docutils literal notranslate"><span class="pre">documentation</span></code>
+target.</p>
 </div>
 <div class="section" id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>
