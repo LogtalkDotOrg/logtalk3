@@ -281,6 +281,41 @@ with all profile data by typing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ports_profiler<span class="o">::</span>reset(<span class="nv">Entity</span>).
 </pre></div>
 </div>
+<p>To illustrate the tool output, consider the <code class="docutils literal notranslate"><span class="pre">family</span></code> example in the
+Logtalk distribution:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>ports_profiler(loader)<span class="k">}</span>.
+...
+yes
+
+| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(debug, on).
+yes
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(family(loader)).
+...
+yes
+
+| <span class="o">?-</span> addams<span class="o">::</span>sister(<span class="nv">Sister</span>, <span class="nv">Sibling</span>).
+<span class="nv">Sister</span> <span class="o">=</span> wednesday,
+<span class="nv">Sibling</span> <span class="o">=</span> pubert <span class="o">;</span>
+<span class="nv">Sister</span> <span class="o">=</span> wednesday,
+<span class="nv">Sibling</span> <span class="o">=</span> pugsley <span class="o">;</span>
+<span class="nv">Sister</span> <span class="o">=</span> wednesday,
+<span class="nv">Sibling</span> <span class="o">=</span> pubert <span class="o">;</span>
+<span class="nv">Sister</span> <span class="o">=</span> wednesday,
+<span class="nv">Sibling</span> <span class="o">=</span> pugsley <span class="o">;</span>
+no
+
+| <span class="o">?-</span> ports_profiler<span class="o">::</span>data.
+<span class="o">-----------------------------------------------------------------------</span>
+<span class="nv">Entity</span>      <span class="nv">Predicate</span>    <span class="nv">Fact</span>  <span class="nv">Rule</span>  <span class="nv">Call</span>  <span class="nv">Exit</span> <span class="o">*</span><span class="nv">Exit</span>  <span class="nv">Fail</span>  <span class="nv">Redo</span> <span class="nv">Error</span>
+<span class="o">-----------------------------------------------------------------------</span>
+addams      female<span class="o">/</span><span class="m">1</span>        <span class="m">2</span>     <span class="m">0</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">0</span>     <span class="m">1</span>     <span class="m">0</span>
+addams      parent<span class="o">/</span><span class="m">2</span>        <span class="m">8</span>     <span class="m">0</span>     <span class="m">4</span>     <span class="m">3</span>     <span class="m">5</span>     <span class="m">1</span>     <span class="m">5</span>     <span class="m">0</span>
+familytree  sister<span class="o">/</span><span class="m">2</span>        <span class="m">0</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">0</span>     <span class="m">4</span>     <span class="m">1</span>     <span class="m">4</span>     <span class="m">0</span>
+<span class="o">-----------------------------------------------------------------------</span>
+yes
+</pre></div>
+</div>
 </div>
 <div class="section" id="interpreting-profiling-data">
 <h2>Interpreting profiling data<a class="headerlink" href="#interpreting-profiling-data" title="Permalink to this headline">¶</a></h2>

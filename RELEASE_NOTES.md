@@ -29,8 +29,8 @@ Documentation
 
 * ADDED: Usage example to the `debug_messages` tool documentation.
 
-* IMPROVED: Documentation of the `code_metrics`, `dead_code_scanner`, and
-`lgtdoc` tools.
+* IMPROVED: Documentation of the `code_metrics`, `dead_code_scanner`,
+`lgtdoc`, and `ports_profiler` tools.
 
 * IMPROVED: The `diagrams` tool documentation section on generating diagrams
 with links sub-diagrams, source code, and API documentation.

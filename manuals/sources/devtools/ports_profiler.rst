@@ -93,6 +93,43 @@ To reset only the data about a specific entity, use the query:
 
    | ?- ports_profiler::reset(Entity).
 
+To illustrate the tool output, consider the ``family`` example in the
+Logtalk distribution:
+
+::
+
+   | ?- {ports_profiler(loader)}.
+   ...
+   yes
+
+   | ?- set_logtalk_flag(debug, on).
+   yes
+
+   | ?- logtalk_load(family(loader)).
+   ...
+   yes
+
+   | ?- addams::sister(Sister, Sibling).
+   Sister = wednesday,
+   Sibling = pubert ;
+   Sister = wednesday,
+   Sibling = pugsley ;
+   Sister = wednesday,
+   Sibling = pubert ;
+   Sister = wednesday,
+   Sibling = pugsley ;
+   no
+
+   | ?- ports_profiler::data.
+   -----------------------------------------------------------------------
+   Entity      Predicate    Fact  Rule  Call  Exit *Exit  Fail  Redo Error
+   -----------------------------------------------------------------------
+   addams      female/1        2     0     1     1     1     0     1     0
+   addams      parent/2        8     0     4     3     5     1     5     0
+   familytree  sister/2        0     1     1     0     4     1     4     0
+   -----------------------------------------------------------------------
+   yes
+
 Interpreting profiling data
 ---------------------------
 
