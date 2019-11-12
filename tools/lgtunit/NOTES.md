@@ -455,11 +455,12 @@ unexpected results when the tests fail.
 Ground results can be compared using the standard `==/2` term equality
 built-in predicate. Non-ground results can be compared using the `variant/2`
 predicate provided by `lgtunit`. The standard `subsumes_term/2` built-in
-predicate can be used when testing a compound term structure while abstracting
-some of its arguments. Floating-point numbers can be compared using the `=~=/2`
-predicate provided by `lgtunit`. Using the `=/2` term unification built-in
-predicate is almost always an error as it would mask test goals failing to
-bind output arguments.
+predicate can be used when testing a compound term structure while
+abstracting some of its arguments. Floating-point numbers can be compared
+using the `=~=/2`, `approximately_equal/3`, `essentially_equal/3`, and
+`tolerance_equal/4` predicates provided by `lgtunit`. Using the `=/2` term
+unification built-in predicate is almost always an error as it would mask
+test goals failing to bind output arguments.
 
 
 Testing non-deterministic predicates
@@ -792,11 +793,9 @@ execution messages, converting them to the xUnit XML format.
 To export the test results to a file using the xUnit XML format, simply
 load the `xunit_report.lgt` file before running the tests. A file named
 `xunit_report.xml` will be created in the same directory as the object
-defining the tests.
-
-When running a set of test suites as a single unified suite, the single
-xUnit report is created in the directory of the first test suite object
-in the set.
+defining the tests. When running a set of test suites as a single unified
+suite (using the `run_test_sets/1` predicate), the single xUnit report is
+created in the directory of the first test suite object in the set.
 
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
@@ -883,7 +882,9 @@ Known issues
 ------------
 
 Parameter variables (`_VariableName_`) cannot currently be used in the
-definition of test options (e.g. `condition/1`).
+definition of test options (e.g. `condition/1`) when using the `test/3`
+dialect. Use in alternative the `parameter/2` built-in execution context
+predicate.
 
 Deterministic unit tests are currently not available when using Lean Prolog
 or Quintus Prolog as backend compilers do the lack of a required built-in

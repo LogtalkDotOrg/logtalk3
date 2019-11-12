@@ -684,10 +684,11 @@ built-in predicate. Non-ground results can be compared using the
 <code class="docutils literal notranslate"><span class="pre">variant/2</span></code> predicate provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. The standard
 <code class="docutils literal notranslate"><span class="pre">subsumes_term/2</span></code> built-in predicate can be used when testing a
 compound term structure while abstracting some of its arguments.
-Floating-point numbers can be compared using the <code class="docutils literal notranslate"><span class="pre">=~=/2</span></code> predicate
-provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. Using the <code class="docutils literal notranslate"><span class="pre">=/2</span></code> term unification built-in
-predicate is almost always an error as it would mask test goals failing
-to bind output arguments.</p>
+Floating-point numbers can be compared using the <code class="docutils literal notranslate"><span class="pre">=~=/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">approximately_equal/3</span></code>, <code class="docutils literal notranslate"><span class="pre">essentially_equal/3</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">tolerance_equal/4</span></code> predicates provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. Using the
+<code class="docutils literal notranslate"><span class="pre">=/2</span></code> term unification built-in predicate is almost always an error as
+it would mask test goals failing to bind output arguments.</p>
 </div>
 <div class="section" id="testing-non-deterministic-predicates">
 <h2>Testing non-deterministic predicates<a class="headerlink" href="#testing-non-deterministic-predicates" title="Permalink to this headline">¶</a></h2>
@@ -1026,8 +1027,8 @@ execution messages, converting them to the xUnit XML format.</p>
 <p>To export the test results to a file using the xUnit XML format, simply
 load the <code class="docutils literal notranslate"><span class="pre">xunit_report.lgt</span></code> file before running the tests. A file
 named <code class="docutils literal notranslate"><span class="pre">xunit_report.xml</span></code> will be created in the same directory as the
-object defining the tests.</p>
-<p>When running a set of test suites as a single unified suite, the single
+object defining the tests. When running a set of test suites as a single
+unified suite (using the <code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code> predicate), the single
 xUnit report is created in the directory of the first test suite object
 in the set.</p>
 <p>There are several third-party xUnit report converters that can generate
@@ -1108,7 +1109,9 @@ to indicate which service are you running.</p>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
 <p>Parameter variables (<code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>) cannot currently be used in the
-definition of test options (e.g. <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>).</p>
+definition of test options (e.g. <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>) when using the
+<code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. Use in alternative the <code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> built-in
+execution context predicate.</p>
 <p>Deterministic unit tests are currently not available when using Lean
 Prolog or Quintus Prolog as backend compilers do the lack of a required
 built-in support that cannot be sensibly defined in Prolog.</p>
