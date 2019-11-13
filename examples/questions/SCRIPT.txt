@@ -43,3 +43,10 @@ The answer to the ultimate question of life, the universe and everything is: ice
 
 N = 42
 yes
+
+
+% if running using JIProlog, SWI-Prolog, or YAP as the backend, try asking the
+% question after the goal:
+
+| ?- logtalk_load(questions(loader_gui)).
+...

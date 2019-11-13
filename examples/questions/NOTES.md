@@ -22,4 +22,12 @@ file.
 
 This example illustrates the question asking mechanism, which complements
 the message printing mechanism to allow questions to be abstracted and
-intercepted.
+intercepted. The question used in this example is taken from Douglas Adams
+book "The Hitchhiker's Guide to the Galaxy".
+
+The `loader.lgt` file loads code that asks the question in the top-level
+interpreter.
+
+The `loader_gui.lgt` file loads code that asks the question using a Java
+GUI dialog. It can be used with JIProlog, SWI-Prolog, or YAP. Running on
+SWI-Prolog or YAP requires a functional JPL library installation.

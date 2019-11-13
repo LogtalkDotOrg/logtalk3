@@ -59,6 +59,11 @@ Tests
 * IMPROVED: Convert unit tests for the ISO Prolog standard `is/2` built-in
 predicate to use assertions to simplify debugging.
 
+Examples
+--------
+
+* ADDED: Simple Java-based GUI interface to the `questions` example.
+
 
 3.32.0 - November 5, 2019
 =========================
