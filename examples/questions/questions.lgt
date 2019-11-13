@@ -24,13 +24,13 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(ultimate_answer, hitchhikers) -->
-		['The answer to the ultimate question of life, the universe and everything is'-[]].
+		['The answer to the ultimate question of life, the universe and everything is?'-[], nl].
 
 	:- multifile(logtalk::question_prompt_stream/4).
 	:- dynamic(logtalk::question_prompt_stream/4).
 
 	% the prompt is specified here instead of being part of the question text
 	% as it will be repeated if the answer doesn't satisfy the question closure
-	logtalk::question_prompt_stream(question, hitchhikers, ': ', user_input).
+	logtalk::question_prompt_stream(question, hitchhikers, '> ', user_input).
 
 :- end_category.

@@ -18,11 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% calls to the logtalk::ask_question/5 predicate can be intercepted by
-% defining the logtalk::question_hook/6 multifile hook predicate; in
-% the following example, we provide a fixed (and valid) answer
+% calls to the logtalk::ask_question/5 predicate can be intercepted
+% by defining the logtalk::question_hook/6 multifile hook predicate;
+% in this example, we provide a fixed (and valid) answer
 
-:- category(hitchhikers_fixed_answers).
+:- category(hitchhikers_fixed_answer).
 
 	:- multifile(logtalk::question_hook/6).
 	:- dynamic(logtalk::question_hook/6).
@@ -48,9 +48,10 @@
 	test(questions_01, true(N == 42)) :-
 		logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
 
-	% the question answer read loop is not used when a fixed answer
-	% is provided using the logtalk::question_hook/6 predicate thus
-	% preventing the creation of endless loops
+	% the question answer read loop (that calls the question
+	% check closure) is not used when a fixed answer is
+	% provided using the logtalk::question_hook/6 hook
+	% predicate thus preventing the creation of endless loops
 
 	test(questions_02, true(N == 42)) :-
 		logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(41), N).

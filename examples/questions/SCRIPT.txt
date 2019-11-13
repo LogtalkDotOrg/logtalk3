@@ -27,7 +27,8 @@ ________________________________________________________________________
 
 | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
 
-The answer to the ultimate question of life, the universe and everything is: 42.
+The answer to the ultimate question of life, the universe and everything is?
+> 42.
 
 N = 42
 yes
@@ -37,9 +38,10 @@ yes
 % a closure that is used to type-check the answer:
 
 | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
-The answer to the ultimate question of life, the universe and everything is: icecream.
-: tea.
-: 42.
+The answer to the ultimate question of life, the universe and everything is?
+> icecream.
+> tea.
+> 42.
 
 N = 42
 yes

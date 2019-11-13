@@ -25,13 +25,14 @@
 	:- meta_predicate(question_hook(*, *, *, *, 1, *)).
 
 	logtalk::question_hook(ultimate_answer, question, hitchhikers, Tokens, Check, Answer) :-
-		java('javax.swing.JFrame')::new(['The Hitchhiker''s Guide to the Galaxy'], Frame),
 		tokens_to_text(Tokens, Question),
+		java('javax.swing.JFrame')::new(['The Hitchhiker''s Guide to the Galaxy'], Frame),
+		% repeat the question until we get the correct answer
 		repeat,
-			java('javax.swing.JOptionPane', Answer0)::showInputDialog(Frame, Question),
-			atom_codes(Answer0, Codes),
-			number_codes(Answer, Codes),
-			call(Check, Answer),
+			java('javax.swing.JOptionPane', Atom)::showInputDialog(Frame, Question),
+			atom_codes(Atom, Codes),
+			number_codes(Number, Codes),
+		call(Check, Number),
 		!,
 		java(Frame)::dispose.
 
