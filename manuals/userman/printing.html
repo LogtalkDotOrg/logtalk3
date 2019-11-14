@@ -450,15 +450,17 @@ the following message tokenization and question prompt and stream:</p>
 <span class="p">    :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_tokens<span class="o">//</span><span class="m">2</span>).
 <span class="p">    :- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_tokens<span class="o">//</span><span class="m">2</span>).
 
+    <span class="c">% abstract the question text using the atom ultimate_question</span>
+    <span class="c">% the second argument, hitchhikers, is the application component</span>
     logtalk<span class="o">::</span>message_tokens(ultimate_answer, hitchhikers) <span class="o">--&gt;</span>
-        [<span class="s">&#39;The answer to the ultimate question of life, the universe and everything is&#39;</span><span class="o">-</span>[]].
+        [<span class="s">&#39;The answer to the ultimate question of life, the universe and everything is?&#39;</span><span class="o">-</span>[], <span class="k">nl</span>].
 
 <span class="p">   :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>question_prompt_stream<span class="o">/</span><span class="m">4</span>).
 <span class="p">   :- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>question_prompt_stream<span class="o">/</span><span class="m">4</span>).
 
    <span class="c">% the prompt is specified here instead of being part of the question text</span>
    <span class="c">% as it will be repeated if the answer doesn&#39;t satisfy the question closure</span>
-   logtalk<span class="o">::</span>question_prompt_stream(question, hitchhikers, <span class="s">&#39;: &#39;</span>, user_input).
+   logtalk<span class="o">::</span>question_prompt_stream(question, hitchhikers, <span class="s">&#39;&gt; &#39;</span>, user_input).
 
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
@@ -467,7 +469,8 @@ the following message tokenization and question prompt and stream:</p>
 question:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, &#39;==&#39;(42), N).
 
-The answer to the ultimate question of life, the universe and everything is: 42.
+The answer to the ultimate question of life, the universe and everything is?
+&gt; 42.
 
 N = 42
 yes
@@ -478,9 +481,10 @@ is used to check the answers provided by the user. The question is repeated
 until the goal constructed by extending the closure with the user answer
 succeeds. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, &#39;==&#39;(42), N).
-The answer to the ultimate question of life, the universe and everything is: icecream.
-: tea.
-: 42.
+The answer to the ultimate question of life, the universe and everything is?
+&gt; icecream.
+&gt; tea.
+&gt; 42.
 
 N = 42
 yes
@@ -517,10 +521,10 @@ yes
 </pre></div>
 </div>
 <p>In a practical case, the fixed answer would be used for followup goals
-being tested. The question answer read loop is not used when a fixed
-answer is provided using the <code class="docutils literal notranslate"><span class="pre">logtalk::question_hook/6</span></code> predicate thus
-preventing the creation of endless loops. For example, the following
-query succeeds:</p>
+being tested. The question answer read loop (which calls the question
+check closure) is not used when a fixed answer is provided using the
+<code class="docutils literal notranslate"><span class="pre">logtalk::question_hook/6</span></code> predicate thus preventing the creation
+of endless loops. For example, the following query succeeds:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, &#39;==&#39;(41), N).
 
 N = 42

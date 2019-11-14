@@ -22,12 +22,12 @@
 % by defining the logtalk::question_hook/6 multifile hook predicate;
 % in this example, we provide a fixed (and valid) answer
 
-:- category(hitchhikers_fixed_answer).
+:- category(hitchhikers_fixed_answers).
 
 	:- multifile(logtalk::question_hook/6).
 	:- dynamic(logtalk::question_hook/6).
 
-	logtalk::question_hook(ultimate_answer, question, hitchhikers, _, _, 42).
+	logtalk::question_hook(ultimate_question, question, hitchhikers, _, _, 42).
 
 :- end_category.
 
@@ -46,14 +46,14 @@
 	% be used for followup goals being tested
 
 	test(questions_01, true(N == 42)) :-
-		logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
+		logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
 
-	% the question answer read loop (that calls the question
+	% the question answer read loop (which calls the question
 	% check closure) is not used when a fixed answer is
 	% provided using the logtalk::question_hook/6 hook
 	% predicate thus preventing the creation of endless loops
 
 	test(questions_02, true(N == 42)) :-
-		logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(41), N).
+		logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(41), N).
 
 :- end_object.

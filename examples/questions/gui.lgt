@@ -24,19 +24,19 @@
 	:- dynamic(logtalk::question_hook/6).
 	:- meta_predicate(question_hook(*, *, *, *, 1, *)).
 
-	logtalk::question_hook(ultimate_answer, question, hitchhikers, Tokens, Check, Answer) :-
+	logtalk::question_hook(ultimate_question, _, hitchhikers, Tokens, Check, Answer) :-
 		tokens_to_text(Tokens, Question),
 		java('javax.swing.JFrame')::new(['The Hitchhiker''s Guide to the Galaxy'], Frame),
 		% repeat the question until we get the correct answer
 		repeat,
-			java('javax.swing.JOptionPane', Atom)::showInputDialog(Frame, Question),
-			atom_codes(Atom, Codes),
-			number_codes(Number, Codes),
-		call(Check, Number),
+			java('javax.swing.JOptionPane', Answer0)::showInputDialog(Frame, Question),
+			atom_codes(Answer0, Codes),
+			catch(number_codes(Answer, Codes), _, fail),
+		call(Check, Answer),
 		!,
 		java(Frame)::dispose.
 
 	% just a hack for this example
-	tokens_to_text([Question-[]], Question).
+	tokens_to_text([Question-[], _], Question).
 
 :- end_category.

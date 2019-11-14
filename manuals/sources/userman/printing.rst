@@ -285,15 +285,17 @@ the following message tokenization and question prompt and stream:
        :- multifile(logtalk::message_tokens//2).
        :- dynamic(logtalk::message_tokens//2).
    
-       logtalk::message_tokens(ultimate_answer, hitchhikers) -->
-           ['The answer to the ultimate question of life, the universe and everything is'-[]].
+       % abstract the question text using the atom ultimate_question
+       % the second argument, hitchhikers, is the application component
+       logtalk::message_tokens(ultimate_question, hitchhikers) -->
+           ['The answer to the ultimate question of life, the universe and everything is?'-[], nl].
    
       :- multifile(logtalk::question_prompt_stream/4).
       :- dynamic(logtalk::question_prompt_stream/4).
    
       % the prompt is specified here instead of being part of the question text
       % as it will be repeated if the answer doesn't satisfy the question closure
-      logtalk::question_prompt_stream(question, hitchhikers, ': ', user_input).
+      logtalk::question_prompt_stream(question, hitchhikers, '> ', user_input).
    
    :- end_category.
 
@@ -302,9 +304,10 @@ question:
 
 .. code-block:: text
 
-   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
    
-   The answer to the ultimate question of life, the universe and everything is: 42.
+   The answer to the ultimate question of life, the universe and everything is?
+   > 42.
 
    N = 42
    yes
@@ -316,10 +319,11 @@ succeeds. For example:
 
 .. code-block:: text
 
-   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
-   The answer to the ultimate question of life, the universe and everything is: icecream.
-   : tea.
-   : 42.
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
+   The answer to the ultimate question of life, the universe and everything is?
+   > icecream.
+   > tea.
+   > 42.
 
    N = 42
    yes
@@ -345,7 +349,7 @@ on someone manually providing answers:
        :- multifile(logtalk::question_hook/6).
        :- dynamic(logtalk::question_hook/6).
    
-       logtalk::question_hook(ultimate_answer, question, hitchhikers, _, _, 42).
+       logtalk::question_hook(ultimate_question, question, hitchhikers, _, _, 42).
    
    :- end_category.
 
@@ -354,20 +358,20 @@ now skip asking the user:
 
 .. code-block:: text
 
-   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(42), N).
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
    
    N = 42
    yes
 
 In a practical case, the fixed answer would be used for followup goals
-being tested. The question answer read loop is not used when a fixed
-answer is provided using the ``logtalk::question_hook/6`` predicate thus
-preventing the creation of endless loops. For example, the following
-query succeeds:
+being tested. The question answer read loop (which calls the question
+check closure) is not used when a fixed answer is provided using the
+``logtalk::question_hook/6`` predicate thus preventing the creation
+of endless loops. For example, the following query succeeds:
 
 .. code-block:: text
 
-   | ?- logtalk::ask_question(question, hitchhikers, ultimate_answer, '=='(41), N).
+   | ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(41), N).
 
    N = 42
    yes

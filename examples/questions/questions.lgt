@@ -23,8 +23,10 @@
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(ultimate_answer, hitchhikers) -->
-		['The answer to the ultimate question of life, the universe and everything is?'-[], nl].
+	% abstract the question text using the atom ultimate_question
+	% the second argument, hitchhikers, is the application component
+	logtalk::message_tokens(ultimate_question, hitchhikers) -->
+		['The answer to the ultimate question of Life, The Universe and Everything is?'-[], nl].
 
 	:- multifile(logtalk::question_prompt_stream/4).
 	:- dynamic(logtalk::question_prompt_stream/4).
