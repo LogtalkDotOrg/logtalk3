@@ -24,6 +24,12 @@ RELEASE NOTES
 3.33.0 - December ??, 2019
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Wording of the lint warning for all-solution predicates that may
+share no variables between the template and the goal arguments.
+
 Documentation
 -------------
 

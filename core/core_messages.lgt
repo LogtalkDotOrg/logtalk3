@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.85,
+		version is 1.86,
 		author is 'Paulo Moura',
-		date is 2019/10/22,
+		date is 2019/11/14,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -825,9 +825,9 @@
 		['as variable ~q occurs in expression'-[Variable], nl].
 	suspicious_call_reason(no_shared_variables(Predicate)) -->
 		(	{Predicate == forall} ->
-			['as generator and test goals share no variables'-[], nl]
+			['as generator and test goals may share no variables'-[], nl]
 		;	% assume bagof/setof/findall
-			['as template and goal share no variables'-[], nl]
+			['as template and goal may share no variables'-[], nl]
 		).
 	suspicious_call_reason(no_variable_bindings_after_unification) -->
 		['as unification will succeed without any variable bindings'-[], nl].
