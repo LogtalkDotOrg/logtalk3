@@ -30,6 +30,14 @@ Logtalk compiler and runtime
 * IMPROVED: Wording of the lint warning for all-solution predicates that may
 share no variables between the template and the goal arguments.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The SWI-Prolog definition of the internal compiler predicate that
+checks for auto-loaded module predicates when compiling a module as an object
+to use the predicate property `imported_from/1` instead of the buggy property
+`implementation_module/1`.
+
 Documentation
 -------------
 

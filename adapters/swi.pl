@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on October 14, 2019
+%  Last updated on November 15, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -1269,7 +1269,7 @@ term_expansion(
 % succeeds when Module:Predicate is visible in module Current
 
 '$lgt_find_visible_module_predicate'(_Current, Module, Predicate) :-
-	predicate_property(Predicate, implementation_module(Module)).
+	predicate_property(Predicate, imported_from(Module)).
 
 
 
