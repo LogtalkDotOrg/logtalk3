@@ -76,6 +76,8 @@ predicate to use assertions to simplify debugging.
 Examples
 --------
 
+* ADDED: Simple multi-threaded implementation of a ping-pong game.
+
 * ADDED: Simple Java-based GUI interface to the `questions` example.
 
 
