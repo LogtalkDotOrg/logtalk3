@@ -31,3 +31,10 @@ interpreter.
 The `loader_gui.lgt` file loads code that asks the question using a Java
 GUI dialog. It can be used with JIProlog, SWI-Prolog, or YAP. Running on
 SWI-Prolog or YAP requires a functional JPL library installation.
+
+When running the GUI dialog on the macOS Terminal application, you may get
+a Java error saying that the AWT cannot be started. In alternative, try
+to run the GUI version using either JIProlog or from within the SWI-Prolog
+macOS application instead of using the shell integration script. This issue
+is due to a macOS Java issue that's orthogonal to both SWI-Prolog/YAP and
+Logtalk.
