@@ -138,7 +138,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `coinduction`  
 	experimental example of coinductive predicates
-	(requires Logtalk to be run with CxProlog, ECLiPSE, SICStus Prolog,
+	(requires Logtalk to be run with CxProlog, ECLiPSe, SICStus Prolog,
 	SWI-Prolog, or YAP)
 
 - `complements`  
@@ -185,7 +185,7 @@ Follows a short description of each included example (in alphabetical order):
 - `engines`  
 	examples of using threaded engines to implement fluents, lazy
 	meta-predicates, interactors, and simple agents (requires Logtalk
-	to be run with SWI-Prolog)
+	to be run with ECLiPSe, SWI-Prolog, XSB, or YAP)
 
 - `errors`  
 	example showing the Logtalk compiler warning and error reporting

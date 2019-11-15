@@ -17,13 +17,13 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains some examples of multi-threading programming.
+This folder contains several examples of multi-threading programming.
 Multi-threading programming is only supported on some Prolog compilers.
-Currently this includes SWI-Prolog, YAP CVS, and XSB CVS (make sure that 
-you use the multi-threading versions of these Prolog compilers!). Moreover, 
-multi-threading may be turned off by default. In order to run the examples, 
-you may need to first turn on multi-threading support on the Prolog adapter 
-files.
+Currently this includes SWI-Prolog, YAP, and some XSB versions (make sure
+that you use the multi-threading versions of these Prolog compilers!). 
+Moreover, multi-threading may be turned off by default. In order to run 
+the examples,  you may need to first turn on multi-threading support on
+the Prolog adapter files.
 
 Some examples try to benchmark single-threaded and multi-threaded solutions.
 Depending on the Prolog compiler, the operating-system, and the computer
@@ -34,7 +34,6 @@ single-threaded solutions.
 Some examples may imply adjusting the default size of thread data areas or,
 preferably, use of the 64 bits version of the compatible Prolog compilers.
 
-There are known Prolog bugs on the multi-threading support found on XSB, 
-YAP, and SWI-Prolog. These bugs prevent some examples to run and may lead 
-to crashes. Some bugs are platform-specific, only occurring on some 
-operating-systems.
+There are known Prolog bugs on the multi-threading support found on XSB 
+and YAP. These bugs prevent some examples to run and may lead to crashes.
+Some bugs are platform-specific, only occurring on some operating-systems.
