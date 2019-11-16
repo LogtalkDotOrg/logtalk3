@@ -38,6 +38,9 @@ checks for auto-loaded module predicates when compiling a module as an object
 to use the predicate property `imported_from/1` instead of the buggy property
 `implementation_module/1`.
 
+* ADDED: Support to the SWI-Prolog and YAP adapter files to expand Prolog
+`reexport/2` directives with an `except/1` second argument.
+
 Documentation
 -------------
 

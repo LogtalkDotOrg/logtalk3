@@ -635,8 +635,10 @@
 '$lgt_yap_directive_expansion'(reexport(File), (:- reexport(Module, Exports))) :-
 	'$lgt_yap_list_of_exports'(File, Module, Exports).
 
-'$lgt_yap_directive_expansion'(reexport(File, Exports), (:- reexport(Module, Exports))) :-
-	'$lgt_yap_list_of_exports'(File, Module, _).
+'$lgt_yap_directive_expansion'(reexport(File, Exports0), (:- reexport(Module, Exports))) :-
+	'$lgt_yap_list_of_exports'(File, Module, OriginalExports),
+	'$lgt_yap_filter_imports'(Exports0, OriginalExports, Exports1),
+	'$lgt_yap_fix_predicate_aliases'(Exports1, Exports).
 
 '$lgt_yap_directive_expansion'(yap_flag(Flag, Value), (:- set_prolog_flag(Flag, Value))).
 
