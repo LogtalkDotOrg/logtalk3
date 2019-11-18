@@ -58,7 +58,8 @@ predicates.
 Library
 -------
 
-* ADDED: Predicate `ensure_file/1` to the `os` library.
+* ADDED: Predicates `ensure_directory/1` and `ensure_file/1` to the `os`
+library.
 
 Tools
 _____

@@ -356,6 +356,29 @@ True if the specified directory exists (irrespective of directory permissions).
 
 .. raw:: html
 
+   <div id="ensure_directory/1"> </div>
+
+.. index:: ensure_directory/1
+.. _osp/0::ensure_directory/1:
+
+``ensure_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Ensures that a directory exists, creating it if necessary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ensure_directory(Directory)``
+| **Mode and number of proofs:**
+|    ``ensure_directory(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="file_exists/1"> </div>
 
 .. index:: file_exists/1

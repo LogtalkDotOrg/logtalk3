@@ -1590,6 +1590,12 @@
 
 	:- endif.
 
+	ensure_directory(Directory) :-
+		(	directory_exists(Directory) ->
+			true
+		;	make_directory_path(Directory)
+		).
+
 	ensure_file(File) :-
 		(	file_exists(File) ->
 			true

@@ -126,6 +126,13 @@
 		argnames is ['Directory']
 	]).
 
+	:- public(ensure_directory/1).
+	:- mode(ensure_directory(+atom), one).
+	:- info(ensure_directory/1, [
+		comment is 'Ensures that a directory exists, creating it if necessary.',
+		argnames is ['Directory']
+	]).
+
 	:- public(file_exists/1).
 	:- mode(file_exists(+atom), zero_or_one).
 	:- info(file_exists/1, [

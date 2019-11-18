@@ -166,6 +166,11 @@
 		os::ensure_file(EnsureFile),
 		os::file_exists(EnsureFile).
 
+	test(os_ensure_directory_1_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::ensure_directory(Directory).
+
 	test(os_directory_exists_1_01) :-
 		this(This),
 		object_property(This, file(_,Directory)),
@@ -225,6 +230,13 @@
 		;	sub_atom(Directory, 0, _, 1, DirectoryNoSlash),
 			WorkingDirectory == DirectoryNoSlash
 		).
+
+	test(os_ensure_directory_1_02) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, ensure_directory, EnsureDirectory),
+		os::ensure_directory(EnsureDirectory),
+		os::directory_exists(EnsureDirectory).
 
 	test(os_absolute_file_name_2_01) :-
 		this(This),
@@ -384,6 +396,8 @@
 		atom_concat(Directory, 'sub_directory1/sub_directory2', SubDirectory2),
 		catch(ignore(os::delete_directory(SubDirectory2)), _, true),
 		atom_concat(Directory, 'sub_directory1', SubDirectory1),
-		catch(ignore(os::delete_directory(SubDirectory1)), _, true).
+		catch(ignore(os::delete_directory(SubDirectory1)), _, true),
+		atom_concat(Directory, 'ensure_directory', EnsureDirectory),
+		catch(ignore(os::delete_directory(EnsureDirectory)), _, true).
 
 :- end_object.
