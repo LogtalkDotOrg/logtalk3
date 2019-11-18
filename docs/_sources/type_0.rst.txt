@@ -95,75 +95,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="type/1"> </div>
-
-.. index:: type/1
-.. _type/0::type/1:
-
-``type/1``
-^^^^^^^^^^
-
-Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the ``check/2`` multifile predicate.
-
-| **Compilation flags:**
-|    ``static, multifile``
-
-| **Template:**
-|    ``type(Type)``
-| **Mode and number of proofs:**
-|    ``type(?callable)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="meta_type/3"> </div>
-
-.. index:: meta_type/3
-.. _type/0::meta_type/3:
-
-``meta_type/3``
-^^^^^^^^^^^^^^^
-
-Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.
-
-| **Compilation flags:**
-|    ``static, multifile``
-
-| **Template:**
-|    ``meta_type(MetaType,SubTypes,Values)``
-| **Mode and number of proofs:**
-|    ``meta_type(?callable,-list,-list)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="valid/2"> </div>
-
-.. index:: valid/2
-.. _type/0::valid/2:
-
-``valid/2``
-^^^^^^^^^^^
-
-True if the given term is of the specified type. Fails otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``valid(Type,Term)``
-| **Mode and number of proofs:**
-|    ``valid(@callable,@term)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="check/3"> </div>
 
 .. index:: check/3
@@ -214,6 +145,75 @@ True if the given term is of the specified type. Throws an error otherwise. A ne
 |        ``domain_error(Domain, Term)``
 |    ``Term`` is the of the correct type and domain but the resource it represents does not exist:
 |        ``existence_error(Type, Term)``
+
+
+------------
+
+.. raw:: html
+
+   <div id="meta_type/3"> </div>
+
+.. index:: meta_type/3
+.. _type/0::meta_type/3:
+
+``meta_type/3``
+^^^^^^^^^^^^^^^
+
+Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.
+
+| **Compilation flags:**
+|    ``static, multifile``
+
+| **Template:**
+|    ``meta_type(MetaType,SubTypes,Values)``
+| **Mode and number of proofs:**
+|    ``meta_type(?callable,-list,-list)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="type/1"> </div>
+
+.. index:: type/1
+.. _type/0::type/1:
+
+``type/1``
+^^^^^^^^^^
+
+Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the ``check/2`` multifile predicate.
+
+| **Compilation flags:**
+|    ``static, multifile``
+
+| **Template:**
+|    ``type(Type)``
+| **Mode and number of proofs:**
+|    ``type(?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="valid/2"> </div>
+
+.. index:: valid/2
+.. _type/0::valid/2:
+
+``valid/2``
+^^^^^^^^^^^
+
+True if the given term is of the specified type. Fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(Type,Term)``
+| **Mode and number of proofs:**
+|    ``valid(@callable,@term)`` - ``zero_or_one``
 
 
 ------------

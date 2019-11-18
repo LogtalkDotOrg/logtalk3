@@ -41,6 +41,50 @@ Public predicates
 
 .. raw:: html
 
+   <div id="all/0"> </div>
+
+.. index:: all/0
+.. _dead_code_scanner/0::all/0:
+
+``all/0``
+^^^^^^^^^
+
+Scans all entities for dead code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``all`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _dead_code_scanner/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Scans all entities in all loaded files from a given directory for dead code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Directory)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="entity/1"> </div>
 
 .. index:: entity/1
@@ -87,52 +131,6 @@ Scans all entities in a loaded source file for dead code. The file can be given 
 
 .. raw:: html
 
-   <div id="directory/1"> </div>
-
-.. index:: directory/1
-.. _dead_code_scanner/0::directory/1:
-
-``directory/1``
-^^^^^^^^^^^^^^^
-
-Scans all entities in all loaded files from a given directory for dead code.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory(Directory)``
-| **Mode and number of proofs:**
-|    ``directory(+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rdirectory/1"> </div>
-
-.. index:: rdirectory/1
-.. _dead_code_scanner/0::rdirectory/1:
-
-``rdirectory/1``
-^^^^^^^^^^^^^^^^
-
-Scans all entities in all loaded files from a given directory and its sub-directories for dead code.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rdirectory(Directory)``
-| **Mode and number of proofs:**
-|    ``rdirectory(+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="library/1"> </div>
 
 .. index:: library/1
@@ -156,44 +154,23 @@ Scans all entities in all loaded files from a given library for dead code.
 
 .. raw:: html
 
-   <div id="rlibrary/1"> </div>
+   <div id="predicate/2"> </div>
 
-.. index:: rlibrary/1
-.. _dead_code_scanner/0::rlibrary/1:
+.. index:: predicate/2
+.. _dead_code_scanner/0::predicate/2:
 
-``rlibrary/1``
-^^^^^^^^^^^^^^
+``predicate/2``
+^^^^^^^^^^^^^^^
 
-Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.
+Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``rlibrary(Library)``
+|    ``predicate(Entity,Predicate)``
 | **Mode and number of proofs:**
-|    ``rlibrary(+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="all/0"> </div>
-
-.. index:: all/0
-.. _dead_code_scanner/0::all/0:
-
-``all/0``
-^^^^^^^^^
-
-Scans all entities for dead code.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``all`` - ``one``
+|    ``predicate(+entity_identifier,?predicate_indicator)`` - ``zero_or_more``
 
 
 ------------
@@ -223,23 +200,46 @@ Returns an ordered set of local predicates (and non-terminals) that are not used
 
 .. raw:: html
 
-   <div id="predicate/2"> </div>
+   <div id="rdirectory/1"> </div>
 
-.. index:: predicate/2
-.. _dead_code_scanner/0::predicate/2:
+.. index:: rdirectory/1
+.. _dead_code_scanner/0::rdirectory/1:
 
-``predicate/2``
-^^^^^^^^^^^^^^^
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
 
-Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.
+Scans all entities in all loaded files from a given directory and its sub-directories for dead code.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``predicate(Entity,Predicate)``
+|    ``rdirectory(Directory)``
 | **Mode and number of proofs:**
-|    ``predicate(+entity_identifier,?predicate_indicator)`` - ``zero_or_more``
+|    ``rdirectory(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="rlibrary/1"> </div>
+
+.. index:: rlibrary/1
+.. _dead_code_scanner/0::rlibrary/1:
+
+``rlibrary/1``
+^^^^^^^^^^^^^^
+
+Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rlibrary(Library)``
+| **Mode and number of proofs:**
+|    ``rlibrary(+atom)`` - ``one``
 
 
 ------------

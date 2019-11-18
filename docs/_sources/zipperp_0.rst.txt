@@ -34,69 +34,25 @@ Public predicates
 
 .. raw:: html
 
-   <div id="zip/2"> </div>
+   <div id="apply/2"> </div>
 
-.. index:: zip/2
-.. _zipperp/0::zip/2:
+.. index:: apply/2
+.. _zipperp/0::apply/2:
 
-``zip/2``
-^^^^^^^^^
-
-Adds a zipper to a compound term holding a sequence of elements. Fails if the sequence is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``zip(Sequence,Zipper)``
-| **Mode and number of proofs:**
-|    ``zip(+sequence,--zipper)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="zip/3"> </div>
-
-.. index:: zip/3
-.. _zipperp/0::zip/3:
-
-``zip/3``
-^^^^^^^^^
-
-Adds a zipper to a compound term holding a sequence of elements. Also returns the first element. Fails if the sequence is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``zip(Sequence,Zipper,First)``
-| **Mode and number of proofs:**
-|    ``zip(+sequence,--zipper,--term)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="unzip/2"> </div>
-
-.. index:: unzip/2
-.. _zipperp/0::unzip/2:
-
-``unzip/2``
+``apply/2``
 ^^^^^^^^^^^
 
-Removes a zipper from a sequence.
+Applies a closure to the current element.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``unzip(Zipper,Sequence)``
+|    ``apply(Closure,Zipper)``
+| **Meta-predicate template:**
+|    ``apply(1,*)``
 | **Mode and number of proofs:**
-|    ``unzip(@zipper,--sequence)`` - ``one``
+|    ``apply(+callable,+zipper)`` - ``zero_or_more``
 
 
 ------------
@@ -120,6 +76,259 @@ Current element.
 |    ``current(Zipper,Current)``
 | **Mode and number of proofs:**
 |    ``current(+zipper,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_all_after/2"> </div>
+
+.. index:: delete_all_after/2
+.. _zipperp/0::delete_all_after/2:
+
+``delete_all_after/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes all elements after the current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_all_after(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_all_after(+zipper,--zipper)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_all_after_and_unzip/2"> </div>
+
+.. index:: delete_all_after_and_unzip/2
+.. _zipperp/0::delete_all_after_and_unzip/2:
+
+``delete_all_after_and_unzip/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes all elements after the current element and removes the zipper returning the resulting sequence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_all_after_and_unzip(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_all_after_and_unzip(+zipper,--sequence)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_all_before/2"> </div>
+
+.. index:: delete_all_before/2
+.. _zipperp/0::delete_all_before/2:
+
+``delete_all_before/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes all elements before the current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_all_before(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_all_before(+zipper,--zipper)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_all_before_and_unzip/2"> </div>
+
+.. index:: delete_all_before_and_unzip/2
+.. _zipperp/0::delete_all_before_and_unzip/2:
+
+``delete_all_before_and_unzip/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes all elements before the current element and removes the zipper returning the resulting sequence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_all_before_and_unzip(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_all_before_and_unzip(+zipper,--sequence)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_and_next/2"> </div>
+
+.. index:: delete_and_next/2
+.. _zipperp/0::delete_and_next/2:
+
+``delete_and_next/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Deletes the current element and moves to the next element. Fails if no next element exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_and_next(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_and_next(+zipper,--zipper)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_and_previous/2"> </div>
+
+.. index:: delete_and_previous/2
+.. _zipperp/0::delete_and_previous/2:
+
+``delete_and_previous/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes the current element and moves to the previous element. Fails if no previous element exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_and_previous(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``delete_and_previous(+zipper,--zipper)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_and_unzip/2"> </div>
+
+.. index:: delete_and_unzip/2
+.. _zipperp/0::delete_and_unzip/2:
+
+``delete_and_unzip/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes the current element and removes the zipper returning the resulting sequence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_and_unzip(Zipper,Sequence)``
+| **Mode and number of proofs:**
+|    ``delete_and_unzip(+zipper,--sequence)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="forward/2"> </div>
+
+.. index:: forward/2
+.. _zipperp/0::forward/2:
+
+``forward/2``
+^^^^^^^^^^^^^
+
+Forward the zipper so that the last element becomes the current element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forward(Zipper,NewZipper)``
+| **Mode and number of proofs:**
+|    ``forward(+zipper,--zipper)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="forward/3"> </div>
+
+.. index:: forward/3
+.. _zipperp/0::forward/3:
+
+``forward/3``
+^^^^^^^^^^^^^
+
+Forward the zipper so that the last element becomes the current element. Also returns the last element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forward(Zipper,NewZipper,Last)``
+| **Mode and number of proofs:**
+|    ``forward(+zipper,--zipper,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="insert_after/3"> </div>
+
+.. index:: insert_after/3
+.. _zipperp/0::insert_after/3:
+
+``insert_after/3``
+^^^^^^^^^^^^^^^^^^
+
+Inserts an element after the current one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert_after(Zipper,Element,NewZipper)``
+| **Mode and number of proofs:**
+|    ``insert_after(+zipper,?term,--zipper)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="insert_before/3"> </div>
+
+.. index:: insert_before/3
+.. _zipperp/0::insert_before/3:
+
+``insert_before/3``
+^^^^^^^^^^^^^^^^^^^
+
+Inserts an element before the current one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert_before(Zipper,Element,NewZipper)``
+| **Mode and number of proofs:**
+|    ``insert_before(+zipper,?term,--zipper)`` - ``zero_or_one``
 
 
 ------------
@@ -218,6 +427,29 @@ Moves to and returns the previous element. Fails if already at the first element
 
 .. raw:: html
 
+   <div id="replace/3"> </div>
+
+.. index:: replace/3
+.. _zipperp/0::replace/3:
+
+``replace/3``
+^^^^^^^^^^^^^
+
+Replaces the current element with a new element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``replace(Zipper,NewCurrent,NewZipper)``
+| **Mode and number of proofs:**
+|    ``replace(+zipper,?term,--zipper)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="rewind/2"> </div>
 
 .. index:: rewind/2
@@ -264,301 +496,69 @@ Rewinds the zipper so that the first element becomes the current element. Also r
 
 .. raw:: html
 
-   <div id="forward/2"> </div>
+   <div id="unzip/2"> </div>
 
-.. index:: forward/2
-.. _zipperp/0::forward/2:
+.. index:: unzip/2
+.. _zipperp/0::unzip/2:
 
-``forward/2``
-^^^^^^^^^^^^^
-
-Forward the zipper so that the last element becomes the current element.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``forward(Zipper,NewZipper)``
-| **Mode and number of proofs:**
-|    ``forward(+zipper,--zipper)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="forward/3"> </div>
-
-.. index:: forward/3
-.. _zipperp/0::forward/3:
-
-``forward/3``
-^^^^^^^^^^^^^
-
-Forward the zipper so that the last element becomes the current element. Also returns the last element.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``forward(Zipper,NewZipper,Last)``
-| **Mode and number of proofs:**
-|    ``forward(+zipper,--zipper,?term)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="apply/2"> </div>
-
-.. index:: apply/2
-.. _zipperp/0::apply/2:
-
-``apply/2``
+``unzip/2``
 ^^^^^^^^^^^
 
-Applies a closure to the current element.
+Removes a zipper from a sequence.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``apply(Closure,Zipper)``
-| **Meta-predicate template:**
-|    ``apply(1,*)``
+|    ``unzip(Zipper,Sequence)``
 | **Mode and number of proofs:**
-|    ``apply(+callable,+zipper)`` - ``zero_or_more``
+|    ``unzip(@zipper,--sequence)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="insert_before/3"> </div>
+   <div id="zip/2"> </div>
 
-.. index:: insert_before/3
-.. _zipperp/0::insert_before/3:
+.. index:: zip/2
+.. _zipperp/0::zip/2:
 
-``insert_before/3``
-^^^^^^^^^^^^^^^^^^^
+``zip/2``
+^^^^^^^^^
 
-Inserts an element before the current one.
+Adds a zipper to a compound term holding a sequence of elements. Fails if the sequence is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``insert_before(Zipper,Element,NewZipper)``
+|    ``zip(Sequence,Zipper)``
 | **Mode and number of proofs:**
-|    ``insert_before(+zipper,?term,--zipper)`` - ``zero_or_one``
+|    ``zip(+sequence,--zipper)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="insert_after/3"> </div>
+   <div id="zip/3"> </div>
 
-.. index:: insert_after/3
-.. _zipperp/0::insert_after/3:
+.. index:: zip/3
+.. _zipperp/0::zip/3:
 
-``insert_after/3``
-^^^^^^^^^^^^^^^^^^
+``zip/3``
+^^^^^^^^^
 
-Inserts an element after the current one.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``insert_after(Zipper,Element,NewZipper)``
-| **Mode and number of proofs:**
-|    ``insert_after(+zipper,?term,--zipper)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="replace/3"> </div>
-
-.. index:: replace/3
-.. _zipperp/0::replace/3:
-
-``replace/3``
-^^^^^^^^^^^^^
-
-Replaces the current element with a new element.
+Adds a zipper to a compound term holding a sequence of elements. Also returns the first element. Fails if the sequence is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``replace(Zipper,NewCurrent,NewZipper)``
+|    ``zip(Sequence,Zipper,First)``
 | **Mode and number of proofs:**
-|    ``replace(+zipper,?term,--zipper)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete_and_previous/2"> </div>
-
-.. index:: delete_and_previous/2
-.. _zipperp/0::delete_and_previous/2:
-
-``delete_and_previous/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Deletes the current element and moves to the previous element. Fails if no previous element exists.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete_and_previous(Zipper,NewZipper)``
-| **Mode and number of proofs:**
-|    ``delete_and_previous(+zipper,--zipper)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete_and_next/2"> </div>
-
-.. index:: delete_and_next/2
-.. _zipperp/0::delete_and_next/2:
-
-``delete_and_next/2``
-^^^^^^^^^^^^^^^^^^^^^
-
-Deletes the current element and moves to the next element. Fails if no next element exists.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete_and_next(Zipper,NewZipper)``
-| **Mode and number of proofs:**
-|    ``delete_and_next(+zipper,--zipper)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete_and_unzip/2"> </div>
-
-.. index:: delete_and_unzip/2
-.. _zipperp/0::delete_and_unzip/2:
-
-``delete_and_unzip/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Deletes the current element and removes the zipper returning the resulting sequence.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete_and_unzip(Zipper,Sequence)``
-| **Mode and number of proofs:**
-|    ``delete_and_unzip(+zipper,--sequence)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete_all_before/2"> </div>
-
-.. index:: delete_all_before/2
-.. _zipperp/0::delete_all_before/2:
-
-``delete_all_before/2``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Deletes all elements before the current element.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete_all_before(Zipper,NewZipper)``
-| **Mode and number of proofs:**
-|    ``delete_all_before(+zipper,--zipper)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete_all_before_and_unzip/2"> </div>
-
-.. index:: delete_all_before_and_unzip/2
-.. _zipperp/0::delete_all_before_and_unzip/2:
-
-``delete_all_before_and_unzip/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Deletes all elements before the current element and removes the zipper returning the resulting sequence.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete_all_before_and_unzip(Zipper,NewZipper)``
-| **Mode and number of proofs:**
-|    ``delete_all_before_and_unzip(+zipper,--sequence)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete_all_after/2"> </div>
-
-.. index:: delete_all_after/2
-.. _zipperp/0::delete_all_after/2:
-
-``delete_all_after/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Deletes all elements after the current element.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete_all_after(Zipper,NewZipper)``
-| **Mode and number of proofs:**
-|    ``delete_all_after(+zipper,--zipper)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete_all_after_and_unzip/2"> </div>
-
-.. index:: delete_all_after_and_unzip/2
-.. _zipperp/0::delete_all_after_and_unzip/2:
-
-``delete_all_after_and_unzip/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Deletes all elements after the current element and removes the zipper returning the resulting sequence.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete_all_after_and_unzip(Zipper,NewZipper)``
-| **Mode and number of proofs:**
-|    ``delete_all_after_and_unzip(+zipper,--sequence)`` - ``one``
+|    ``zip(+sequence,--zipper,--term)`` - ``zero_or_one``
 
 
 ------------

@@ -21,8 +21,9 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
+	logtalk_load(types(loader)),
+	logtalk_load(os(loader)),
 	logtalk_load([lgtdocp, lgtdoc], [source_data(on), debug(on)]),
-	logtalk_load([basic_types(loader), os(loader)]),
 	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
 	tests::run
 )).

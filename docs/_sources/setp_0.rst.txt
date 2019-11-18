@@ -34,29 +34,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="as_set/2"> </div>
-
-.. index:: as_set/2
-.. _setp/0::as_set/2:
-
-``as_set/2``
-^^^^^^^^^^^^
-
-Returns a set with all unique elements from the given list.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``as_set(List,Set)``
-| **Mode and number of proofs:**
-|    ``as_set(@list,-set)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="as_list/2"> </div>
 
 .. index:: as_list/2
@@ -74,6 +51,29 @@ Returns a list with all elements of the given set.
 |    ``as_list(Set,List)``
 | **Mode and number of proofs:**
 |    ``as_list(@set,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="as_set/2"> </div>
+
+.. index:: as_set/2
+.. _setp/0::as_set/2:
+
+``as_set/2``
+^^^^^^^^^^^^
+
+Returns a set with all unique elements from the given list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_set(List,Set)``
+| **Mode and number of proofs:**
+|    ``as_set(@list,-set)`` - ``one``
 
 
 ------------
@@ -126,29 +126,6 @@ True if the two sets have no element in common.
 
 .. raw:: html
 
-   <div id="equal/2"> </div>
-
-.. index:: equal/2
-.. _setp/0::equal/2:
-
-``equal/2``
-^^^^^^^^^^^
-
-True if the two sets are equal.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``equal(Set1,Set2)``
-| **Mode and number of proofs:**
-|    ``equal(+set,+set)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="empty/1"> </div>
 
 .. index:: empty/1
@@ -166,6 +143,29 @@ True if the set is empty.
 |    ``empty(Set)``
 | **Mode and number of proofs:**
 |    ``empty(+set)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="equal/2"> </div>
+
+.. index:: equal/2
+.. _setp/0::equal/2:
+
+``equal/2``
+^^^^^^^^^^^
+
+True if the two sets are equal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equal(Set1,Set2)``
+| **Mode and number of proofs:**
+|    ``equal(+set,+set)`` - ``zero_or_one``
 
 
 ------------
@@ -281,29 +281,6 @@ True if ``Intersection`` is the intersection of ``Set1`` and ``Set2`` and ``Diff
 |    ``intersection(Set1,Set2,Intersection,Difference)``
 | **Mode and number of proofs:**
 |    ``intersection(+set,+set,?set,?set)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="size/2"> </div>
-
-.. index:: size/2
-.. _setp/0::size/2:
-
-``size/2``
-^^^^^^^^^^
-
-Number of set elements.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``size(Set,Size)``
-| **Mode and number of proofs:**
-|    ``size(+set,?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -443,6 +420,29 @@ Checks that an element can be selected from a set, returning the set of remainin
 |    ``selectchk(Element,Set,Remaining)``
 | **Mode and number of proofs:**
 |    ``selectchk(?term,+set,?set)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="size/2"> </div>
+
+.. index:: size/2
+.. _setp/0::size/2:
+
+``size/2``
+^^^^^^^^^^
+
+Number of set elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``size(Set,Size)``
+| **Mode and number of proofs:**
+|    ``size(+set,?integer)`` - ``zero_or_one``
 
 
 ------------

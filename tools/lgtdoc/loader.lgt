@@ -19,6 +19,7 @@
 
 
 :- initialization((
+	logtalk_load(types(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load([lgtdocp, lgtdoc], [optimize(on)])
 )).

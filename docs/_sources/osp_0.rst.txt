@@ -34,75 +34,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="pid/1"> </div>
-
-.. index:: pid/1
-.. _osp/0::pid/1:
-
-``pid/1``
-^^^^^^^^^
-
-Returns the process identifier of the running process.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``pid(PID)``
-| **Mode and number of proofs:**
-|    ``pid(-integer)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="shell/2"> </div>
-
-.. index:: shell/2
-.. _osp/0::shell/2:
-
-``shell/2``
-^^^^^^^^^^^
-
-Runs an operating-system shell command and returns its exit status.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``shell(Command,Status)``
-| **Mode and number of proofs:**
-|    ``shell(+atom,-integer)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="shell/1"> </div>
-
-.. index:: shell/1
-.. _osp/0::shell/1:
-
-``shell/1``
-^^^^^^^^^^^
-
-Runs an operating-system shell command.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``shell(Command)``
-| **Mode and number of proofs:**
-|    ``shell(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="absolute_file_name/2"> </div>
 
 .. index:: absolute_file_name/2
@@ -120,6 +51,98 @@ Expands a file name to an absolute file path. An environment variable at the beg
 |    ``absolute_file_name(File,Path)``
 | **Mode and number of proofs:**
 |    ``absolute_file_name(+atom,-atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="change_directory/1"> </div>
+
+.. index:: change_directory/1
+.. _osp/0::change_directory/1:
+
+``change_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Changes current working directory.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``change_directory(Directory)``
+| **Mode and number of proofs:**
+|    ``change_directory(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="command_line_arguments/1"> </div>
+
+.. index:: command_line_arguments/1
+.. _osp/0::command_line_arguments/1:
+
+``command_line_arguments/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list with the command line arguments that occur after ``--``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``command_line_arguments(Arguments)``
+| **Mode and number of proofs:**
+|    ``command_line_arguments(-list(atom))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="cpu_time/1"> </div>
+
+.. index:: cpu_time/1
+.. _osp/0::cpu_time/1:
+
+``cpu_time/1``
+^^^^^^^^^^^^^^
+
+System cpu time in seconds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cpu_time(Seconds)``
+| **Mode and number of proofs:**
+|    ``cpu_time(-number)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="date_time/7"> </div>
+
+.. index:: date_time/7
+.. _osp/0::date_time/7:
+
+``date_time/7``
+^^^^^^^^^^^^^^^
+
+Returns the current date and time.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``date_time(Year,Month,Day,Hours,Minutes,Seconds,Milliseconds)``
+| **Mode and number of proofs:**
+|    ``date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
 
 
 ------------
@@ -172,52 +195,6 @@ Decomposes a file name into its directory (which always ends with a slash; ``./`
 
 .. raw:: html
 
-   <div id="make_directory/1"> </div>
-
-.. index:: make_directory/1
-.. _osp/0::make_directory/1:
-
-``make_directory/1``
-^^^^^^^^^^^^^^^^^^^^
-
-Makes a new directory. Succeeds if the directory already exists.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``make_directory(Directory)``
-| **Mode and number of proofs:**
-|    ``make_directory(+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="make_directory_path/1"> </div>
-
-.. index:: make_directory_path/1
-.. _osp/0::make_directory_path/1:
-
-``make_directory_path/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Makes a new directory creating all the intermediate directories if necessary. Succeeds if the directory already exists.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``make_directory_path(Directory)``
-| **Mode and number of proofs:**
-|    ``make_directory_path(+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="delete_directory/1"> </div>
 
 .. index:: delete_directory/1
@@ -241,46 +218,46 @@ Deletes an empty directory.
 
 .. raw:: html
 
-   <div id="change_directory/1"> </div>
+   <div id="delete_file/1"> </div>
 
-.. index:: change_directory/1
-.. _osp/0::change_directory/1:
+.. index:: delete_file/1
+.. _osp/0::delete_file/1:
 
-``change_directory/1``
-^^^^^^^^^^^^^^^^^^^^^^
+``delete_file/1``
+^^^^^^^^^^^^^^^^^
 
-Changes current working directory.
+Deletes a file.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``change_directory(Directory)``
+|    ``delete_file(File)``
 | **Mode and number of proofs:**
-|    ``change_directory(+atom)`` - ``one``
+|    ``delete_file(+atom)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="working_directory/1"> </div>
+   <div id="directory_exists/1"> </div>
 
-.. index:: working_directory/1
-.. _osp/0::working_directory/1:
+.. index:: directory_exists/1
+.. _osp/0::directory_exists/1:
 
-``working_directory/1``
-^^^^^^^^^^^^^^^^^^^^^^^
+``directory_exists/1``
+^^^^^^^^^^^^^^^^^^^^^^
 
-Current working directory.
+True if the specified directory exists (irrespective of directory permissions).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``working_directory(Directory)``
+|    ``directory_exists(Directory)``
 | **Mode and number of proofs:**
-|    ``working_directory(?atom)`` - ``zero_or_one``
+|    ``directory_exists(+atom)`` - ``zero_or_one``
 
 
 ------------
@@ -333,29 +310,6 @@ Returns a filtered list of files. Filters: paths/1 - relative/absolute, type/1 -
 
 .. raw:: html
 
-   <div id="directory_exists/1"> </div>
-
-.. index:: directory_exists/1
-.. _osp/0::directory_exists/1:
-
-``directory_exists/1``
-^^^^^^^^^^^^^^^^^^^^^^
-
-True if the specified directory exists (irrespective of directory permissions).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory_exists(Directory)``
-| **Mode and number of proofs:**
-|    ``directory_exists(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="ensure_directory/1"> </div>
 
 .. index:: ensure_directory/1
@@ -373,144 +327,6 @@ Ensures that a directory exists, creating it if necessary.
 |    ``ensure_directory(Directory)``
 | **Mode and number of proofs:**
 |    ``ensure_directory(+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="file_exists/1"> </div>
-
-.. index:: file_exists/1
-.. _osp/0::file_exists/1:
-
-``file_exists/1``
-^^^^^^^^^^^^^^^^^
-
-True if the specified file exists and is a regular file (irrespective of file permissions).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``file_exists(File)``
-| **Mode and number of proofs:**
-|    ``file_exists(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="file_modification_time/2"> </div>
-
-.. index:: file_modification_time/2
-.. _osp/0::file_modification_time/2:
-
-``file_modification_time/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-File modification time (which can be used for comparison).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``file_modification_time(File,Time)``
-| **Mode and number of proofs:**
-|    ``file_modification_time(+atom,-integer)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="file_size/2"> </div>
-
-.. index:: file_size/2
-.. _osp/0::file_size/2:
-
-``file_size/2``
-^^^^^^^^^^^^^^^
-
-File size (in bytes).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``file_size(File,Size)``
-| **Mode and number of proofs:**
-|    ``file_size(+atom,-integer)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="file_permission/2"> </div>
-
-.. index:: file_permission/2
-.. _osp/0::file_permission/2:
-
-``file_permission/2``
-^^^^^^^^^^^^^^^^^^^^^
-
-True if the specified file has the specified permission (``read``, ``write``, or ``execute``).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``file_permission(File,Permission)``
-| **Mode and number of proofs:**
-|    ``file_permission(+atom,?atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rename_file/2"> </div>
-
-.. index:: rename_file/2
-.. _osp/0::rename_file/2:
-
-``rename_file/2``
-^^^^^^^^^^^^^^^^^
-
-Renames a file or a directory.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rename_file(Old,New)``
-| **Mode and number of proofs:**
-|    ``rename_file(+atom,+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete_file/1"> </div>
-
-.. index:: delete_file/1
-.. _osp/0::delete_file/1:
-
-``delete_file/1``
-^^^^^^^^^^^^^^^^^
-
-Deletes a file.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete_file(File)``
-| **Mode and number of proofs:**
-|    ``delete_file(+atom)`` - ``one``
 
 
 ------------
@@ -563,92 +379,138 @@ Returns an environment variable value. Fails if the variable does not exists.
 
 .. raw:: html
 
-   <div id="time_stamp/1"> </div>
+   <div id="file_exists/1"> </div>
 
-.. index:: time_stamp/1
-.. _osp/0::time_stamp/1:
+.. index:: file_exists/1
+.. _osp/0::file_exists/1:
 
-``time_stamp/1``
-^^^^^^^^^^^^^^^^
+``file_exists/1``
+^^^^^^^^^^^^^^^^^
 
-Returns a system-dependent time stamp, which can be used for sorting, but should be regarded otherwise as an opaque term.
+True if the specified file exists and is a regular file (irrespective of file permissions).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``time_stamp(Time)``
+|    ``file_exists(File)``
 | **Mode and number of proofs:**
-|    ``time_stamp(-ground)`` - ``one``
+|    ``file_exists(+atom)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="date_time/7"> </div>
+   <div id="file_modification_time/2"> </div>
 
-.. index:: date_time/7
-.. _osp/0::date_time/7:
+.. index:: file_modification_time/2
+.. _osp/0::file_modification_time/2:
 
-``date_time/7``
+``file_modification_time/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+File modification time (which can be used for comparison).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_modification_time(File,Time)``
+| **Mode and number of proofs:**
+|    ``file_modification_time(+atom,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="file_permission/2"> </div>
+
+.. index:: file_permission/2
+.. _osp/0::file_permission/2:
+
+``file_permission/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+True if the specified file has the specified permission (``read``, ``write``, or ``execute``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_permission(File,Permission)``
+| **Mode and number of proofs:**
+|    ``file_permission(+atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="file_size/2"> </div>
+
+.. index:: file_size/2
+.. _osp/0::file_size/2:
+
+``file_size/2``
 ^^^^^^^^^^^^^^^
 
-Returns the current date and time.
+File size (in bytes).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``date_time(Year,Month,Day,Hours,Minutes,Seconds,Milliseconds)``
+|    ``file_size(File,Size)``
 | **Mode and number of proofs:**
-|    ``date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
+|    ``file_size(+atom,-integer)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="cpu_time/1"> </div>
+   <div id="make_directory/1"> </div>
 
-.. index:: cpu_time/1
-.. _osp/0::cpu_time/1:
+.. index:: make_directory/1
+.. _osp/0::make_directory/1:
 
-``cpu_time/1``
-^^^^^^^^^^^^^^
+``make_directory/1``
+^^^^^^^^^^^^^^^^^^^^
 
-System cpu time in seconds.
+Makes a new directory. Succeeds if the directory already exists.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``cpu_time(Seconds)``
+|    ``make_directory(Directory)``
 | **Mode and number of proofs:**
-|    ``cpu_time(-number)`` - ``one``
+|    ``make_directory(+atom)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="wall_time/1"> </div>
+   <div id="make_directory_path/1"> </div>
 
-.. index:: wall_time/1
-.. _osp/0::wall_time/1:
+.. index:: make_directory_path/1
+.. _osp/0::make_directory_path/1:
 
-``wall_time/1``
-^^^^^^^^^^^^^^^
+``make_directory_path/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wall time in seconds.
+Makes a new directory creating all the intermediate directories if necessary. Succeeds if the directory already exists.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``wall_time(Seconds)``
+|    ``make_directory_path(Directory)``
 | **Mode and number of proofs:**
-|    ``wall_time(-number)`` - ``one``
+|    ``make_directory_path(+atom)`` - ``one``
 
 
 ------------
@@ -678,23 +540,92 @@ Operating system type. Possible values are ``unix``, ``windows``, and ``unknown`
 
 .. raw:: html
 
-   <div id="command_line_arguments/1"> </div>
+   <div id="pid/1"> </div>
 
-.. index:: command_line_arguments/1
-.. _osp/0::command_line_arguments/1:
+.. index:: pid/1
+.. _osp/0::pid/1:
 
-``command_line_arguments/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``pid/1``
+^^^^^^^^^
 
-Returns a list with the command line arguments that occur after ``--``.
+Returns the process identifier of the running process.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``command_line_arguments(Arguments)``
+|    ``pid(PID)``
 | **Mode and number of proofs:**
-|    ``command_line_arguments(-list(atom))`` - ``one``
+|    ``pid(-integer)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="rename_file/2"> </div>
+
+.. index:: rename_file/2
+.. _osp/0::rename_file/2:
+
+``rename_file/2``
+^^^^^^^^^^^^^^^^^
+
+Renames a file or a directory.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rename_file(Old,New)``
+| **Mode and number of proofs:**
+|    ``rename_file(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="shell/2"> </div>
+
+.. index:: shell/2
+.. _osp/0::shell/2:
+
+``shell/2``
+^^^^^^^^^^^
+
+Runs an operating-system shell command and returns its exit status.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``shell(Command,Status)``
+| **Mode and number of proofs:**
+|    ``shell(+atom,-integer)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="shell/1"> </div>
+
+.. index:: shell/1
+.. _osp/0::shell/1:
+
+``shell/1``
+^^^^^^^^^^^
+
+Runs an operating-system shell command.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``shell(Command)``
+| **Mode and number of proofs:**
+|    ``shell(+atom)`` - ``zero_or_one``
 
 
 ------------
@@ -718,6 +649,75 @@ Suspends execution the given number of seconds.
 |    ``sleep(Seconds)``
 | **Mode and number of proofs:**
 |    ``sleep(+number)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="time_stamp/1"> </div>
+
+.. index:: time_stamp/1
+.. _osp/0::time_stamp/1:
+
+``time_stamp/1``
+^^^^^^^^^^^^^^^^
+
+Returns a system-dependent time stamp, which can be used for sorting, but should be regarded otherwise as an opaque term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``time_stamp(Time)``
+| **Mode and number of proofs:**
+|    ``time_stamp(-ground)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="wall_time/1"> </div>
+
+.. index:: wall_time/1
+.. _osp/0::wall_time/1:
+
+``wall_time/1``
+^^^^^^^^^^^^^^^
+
+Wall time in seconds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wall_time(Seconds)``
+| **Mode and number of proofs:**
+|    ``wall_time(-number)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="working_directory/1"> </div>
+
+.. index:: working_directory/1
+.. _osp/0::working_directory/1:
+
+``working_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Current working directory.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``working_directory(Directory)``
+| **Mode and number of proofs:**
+|    ``working_directory(?atom)`` - ``zero_or_one``
 
 
 ------------

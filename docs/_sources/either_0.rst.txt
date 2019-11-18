@@ -68,29 +68,6 @@ Returns the terms stored in the references that hold an expected term.
 
 .. raw:: html
 
-   <div id="unexpecteds/2"> </div>
-
-.. index:: unexpecteds/2
-.. _either/0::unexpecteds/2:
-
-``unexpecteds/2``
-^^^^^^^^^^^^^^^^^
-
-Returns the terms stored in the references that hold an expected term.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``unexpecteds(References,Unexpecteds)``
-| **Mode and number of proofs:**
-|    ``unexpecteds(+list(expected),-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="partition/3"> </div>
 
 .. index:: partition/3
@@ -108,6 +85,29 @@ Retrieves and partitions the terms hold by the references.
 |    ``partition(References,Expecteds,Unexpecteds)``
 | **Mode and number of proofs:**
 |    ``partition(+list(expected),-list,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="unexpecteds/2"> </div>
+
+.. index:: unexpecteds/2
+.. _either/0::unexpecteds/2:
+
+``unexpecteds/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the terms stored in the references that hold an expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unexpecteds(References,Unexpecteds)``
+| **Mode and number of proofs:**
+|    ``unexpecteds(+list(expected),-list)`` - ``one``
 
 
 ------------

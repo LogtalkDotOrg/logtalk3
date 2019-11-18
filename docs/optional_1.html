@@ -272,18 +272,18 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#is-empty-0" id="id2"><code class="docutils literal notranslate"><span class="pre">is_empty/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-present-0" id="id3"><code class="docutils literal notranslate"><span class="pre">is_present/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#if-empty-1" id="id4"><code class="docutils literal notranslate"><span class="pre">if_empty/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#if-present-1" id="id5"><code class="docutils literal notranslate"><span class="pre">if_present/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#filter-2" id="id6"><code class="docutils literal notranslate"><span class="pre">filter/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#map-2" id="id7"><code class="docutils literal notranslate"><span class="pre">map/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#flat-map-2" id="id8"><code class="docutils literal notranslate"><span class="pre">flat_map/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#get-1" id="id9"><code class="docutils literal notranslate"><span class="pre">get/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#filter-2" id="id2"><code class="docutils literal notranslate"><span class="pre">filter/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#flat-map-2" id="id3"><code class="docutils literal notranslate"><span class="pre">flat_map/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#get-1" id="id4"><code class="docutils literal notranslate"><span class="pre">get/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#if-empty-1" id="id5"><code class="docutils literal notranslate"><span class="pre">if_empty/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#if-present-1" id="id6"><code class="docutils literal notranslate"><span class="pre">if_present/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-empty-0" id="id7"><code class="docutils literal notranslate"><span class="pre">is_empty/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-present-0" id="id8"><code class="docutils literal notranslate"><span class="pre">is_present/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#map-2" id="id9"><code class="docutils literal notranslate"><span class="pre">map/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#or-else-2" id="id10"><code class="docutils literal notranslate"><span class="pre">or_else/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#or-else-get-2" id="id11"><code class="docutils literal notranslate"><span class="pre">or_else_get/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#or-else-call-2" id="id12"><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#or-else-fail-1" id="id13"><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#or-else-call-2" id="id11"><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#or-else-fail-1" id="id12"><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#or-else-get-2" id="id13"><code class="docutils literal notranslate"><span class="pre">or_else_get/2</span></code></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id14">Protected predicates</a></p></li>
@@ -293,92 +293,8 @@
 </div>
 <div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="is_empty/0"> </div><div class="section" id="is-empty-0">
-<span id="optional-1-is-empty-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">is_empty/0</span></code></a><a class="headerlink" href="#is-empty-0" title="Permalink to this headline">¶</a></h3>
-<p>True if the reference is empty. Avoid whenever possible by using instead the <code class="docutils literal notranslate"><span class="pre">if_empty/1</span></code> predicate.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">is_empty</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="is_present/0"> </div></div>
-<div class="section" id="is-present-0">
-<span id="optional-1-is-present-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">is_present/0</span></code></a><a class="headerlink" href="#is-present-0" title="Permalink to this headline">¶</a></h3>
-<p>True if the reference holds a term. Avoid whenever possible by using instead the <code class="docutils literal notranslate"><span class="pre">if_present/1</span></code> predicate.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">is_present</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="if_empty/1"> </div></div>
-<div class="section" id="if-empty-1">
-<span id="optional-1-if-empty-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">if_empty/1</span></code></a><a class="headerlink" href="#if-empty-1" title="Permalink to this headline">¶</a></h3>
-<p>Calls a goal if the reference is empty. Succeeds otherwise.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(Goal)</span></code></div>
-</div>
-<div class="line"><strong>Meta-predicate template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(0)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="if_present/1"> </div></div>
-<div class="section" id="if-present-1">
-<span id="optional-1-if-present-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">if_present/1</span></code></a><a class="headerlink" href="#if-present-1" title="Permalink to this headline">¶</a></h3>
-<p>Applies a closure if the reference holds a term using the term as additional argument. Succeeds otherwise.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(Closure)</span></code></div>
-</div>
-<div class="line"><strong>Meta-predicate template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(1)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="filter/2"> </div></div>
-<div class="section" id="filter-2">
-<span id="optional-1-filter-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">filter/2</span></code></a><a class="headerlink" href="#filter-2" title="Permalink to this headline">¶</a></h3>
+<div id="filter/2"> </div><div class="section" id="filter-2">
+<span id="optional-1-filter-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">filter/2</span></code></a><a class="headerlink" href="#filter-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the reference when it is non-empty and the term it holds satisfies a closure. Otherwise returns an empty reference.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -401,34 +317,9 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="map/2"> </div></div>
-<div class="section" id="map-2">
-<span id="optional-1-map-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">map/2</span></code></a><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
-<p>When the reference is non-empty and mapping a closure with the term it holds and the new term as additional arguments is successful, returns a reference with the new term. Otherwise returns an empty reference.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">map(Closure,NewReference)</span></code></div>
-</div>
-<div class="line"><strong>Meta-predicate template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">map(2,*)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
 <div id="flat_map/2"> </div></div>
 <div class="section" id="flat-map-2">
-<span id="optional-1-flat-map-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">flat_map/2</span></code></a><a class="headerlink" href="#flat-map-2" title="Permalink to this headline">¶</a></h3>
+<span id="optional-1-flat-map-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">flat_map/2</span></code></a><a class="headerlink" href="#flat-map-2" title="Permalink to this headline">¶</a></h3>
 <p>When the reference is non-empty and mapping a closure with the optional tern and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -453,7 +344,7 @@
 <hr class="docutils" />
 <div id="get/1"> </div></div>
 <div class="section" id="get-1">
-<span id="optional-1-get-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">get/1</span></code></a><a class="headerlink" href="#get-1" title="Permalink to this headline">¶</a></h3>
+<span id="optional-1-get-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">get/1</span></code></a><a class="headerlink" href="#get-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the term hold by the reference if not empty. Throws an error otherwise.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -481,6 +372,115 @@
 </div>
 </div>
 <hr class="docutils" />
+<div id="if_empty/1"> </div></div>
+<div class="section" id="if-empty-1">
+<span id="optional-1-if-empty-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">if_empty/1</span></code></a><a class="headerlink" href="#if-empty-1" title="Permalink to this headline">¶</a></h3>
+<p>Calls a goal if the reference is empty. Succeeds otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="if_present/1"> </div></div>
+<div class="section" id="if-present-1">
+<span id="optional-1-if-present-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">if_present/1</span></code></a><a class="headerlink" href="#if-present-1" title="Permalink to this headline">¶</a></h3>
+<p>Applies a closure if the reference holds a term using the term as additional argument. Succeeds otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(Closure)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(1)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="is_empty/0"> </div></div>
+<div class="section" id="is-empty-0">
+<span id="optional-1-is-empty-0"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">is_empty/0</span></code></a><a class="headerlink" href="#is-empty-0" title="Permalink to this headline">¶</a></h3>
+<p>True if the reference is empty. Avoid whenever possible by using instead the <code class="docutils literal notranslate"><span class="pre">if_empty/1</span></code> predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_empty</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="is_present/0"> </div></div>
+<div class="section" id="is-present-0">
+<span id="optional-1-is-present-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">is_present/0</span></code></a><a class="headerlink" href="#is-present-0" title="Permalink to this headline">¶</a></h3>
+<p>True if the reference holds a term. Avoid whenever possible by using instead the <code class="docutils literal notranslate"><span class="pre">if_present/1</span></code> predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_present</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="map/2"> </div></div>
+<div class="section" id="map-2">
+<span id="optional-1-map-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">map/2</span></code></a><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
+<p>When the reference is non-empty and mapping a closure with the term it holds and the new term as additional arguments is successful, returns a reference with the new term. Otherwise returns an empty reference.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(Closure,NewReference)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 <div id="or_else/2"> </div></div>
 <div class="section" id="or-else-2">
 <span id="optional-1-or-else-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else/2</span></code></a><a class="headerlink" href="#or-else-2" title="Permalink to this headline">¶</a></h3>
@@ -502,9 +502,55 @@
 </div>
 </div>
 <hr class="docutils" />
+<div id="or_else_call/2"> </div></div>
+<div class="section" id="or-else-call-2">
+<span id="optional-1-or-else-call-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code></a><a class="headerlink" href="#or-else-call-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty. Can be used e.g. to generate an exception for empty optionals.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(Term,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(*,0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="or_else_fail/1"> </div></div>
+<div class="section" id="or-else-fail-1">
+<span id="optional-1-or-else-fail-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code></a><a class="headerlink" href="#or-else-fail-1" title="Permalink to this headline">¶</a></h3>
+<p>Returns the term hold by the reference if not empty. Fails otherwise. Usually called to skip over empty references.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 <div id="or_else_get/2"> </div></div>
 <div class="section" id="or-else-get-2">
-<span id="optional-1-or-else-get-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else_get/2</span></code></a><a class="headerlink" href="#or-else-get-2" title="Permalink to this headline">¶</a></h3>
+<span id="optional-1-or-else-get-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else_get/2</span></code></a><a class="headerlink" href="#or-else-get-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the term hold by the reference if not empty. Applies a closure to compute the term otherwise. Throws an error when the reference is empty and the term cannot be computed.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -533,52 +579,6 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(optional_term,Reference)</span></code></div>
 </div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="or_else_call/2"> </div></div>
-<div class="section" id="or-else-call-2">
-<span id="optional-1-or-else-call-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code></a><a class="headerlink" href="#or-else-call-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty. Can be used e.g. to generate an exception for empty optionals.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(Term,Goal)</span></code></div>
-</div>
-<div class="line"><strong>Meta-predicate template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(*,0)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="or_else_fail/1"> </div></div>
-<div class="section" id="or-else-fail-1">
-<span id="optional-1-or-else-fail-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code></a><a class="headerlink" href="#or-else-fail-1" title="Permalink to this headline">¶</a></h3>
-<p>Returns the term hold by the reference if not empty. Fails otherwise. Usually called to skip over empty references.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(Term)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </div>

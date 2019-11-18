@@ -36,52 +36,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="of_unexpected/2"> </div>
-
-.. index:: of_unexpected/2
-.. _expected/0::of_unexpected/2:
-
-``of_unexpected/2``
-^^^^^^^^^^^^^^^^^^^
-
-Constructs a reference from an unexpected term.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``of_unexpected(Unexpected,Reference)``
-| **Mode and number of proofs:**
-|    ``of_unexpected(@term,--nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="of_expected/2"> </div>
-
-.. index:: of_expected/2
-.. _expected/0::of_expected/2:
-
-``of_expected/2``
-^^^^^^^^^^^^^^^^^
-
-Constructs a reference from an expected term.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``of_expected(Expected,Reference)``
-| **Mode and number of proofs:**
-|    ``of_expected(@term,--nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="from_goal/4"> </div>
 
 .. index:: from_goal/4
@@ -126,6 +80,52 @@ Constructs a reference by calling ``Goal`` that binds and uses ``Expected`` on s
 |    ``from_goal(0,*,*)``
 | **Mode and number of proofs:**
 |    ``from_goal(+callable,--term,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="of_expected/2"> </div>
+
+.. index:: of_expected/2
+.. _expected/0::of_expected/2:
+
+``of_expected/2``
+^^^^^^^^^^^^^^^^^
+
+Constructs a reference from an expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``of_expected(Expected,Reference)``
+| **Mode and number of proofs:**
+|    ``of_expected(@term,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="of_unexpected/2"> </div>
+
+.. index:: of_unexpected/2
+.. _expected/0::of_unexpected/2:
+
+``of_unexpected/2``
+^^^^^^^^^^^^^^^^^^^
+
+Constructs a reference from an unexpected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``of_unexpected(Unexpected,Reference)``
+| **Mode and number of proofs:**
+|    ``of_unexpected(@term,--nonvar)`` - ``one``
 
 
 ------------

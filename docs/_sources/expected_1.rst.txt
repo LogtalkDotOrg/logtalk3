@@ -34,125 +34,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="is_unexpected/0"> </div>
-
-.. index:: is_unexpected/0
-.. _expected/1::is_unexpected/0:
-
-``is_unexpected/0``
-^^^^^^^^^^^^^^^^^^^
-
-True if the reference holds an unexpected term. Avoid whenever possible by using instead the ``if_unexpected/1`` predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``is_unexpected`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_expected/0"> </div>
-
-.. index:: is_expected/0
-.. _expected/1::is_expected/0:
-
-``is_expected/0``
-^^^^^^^^^^^^^^^^^
-
-True if the reference holds an expected term. Avoid whenever possible by using instead the ``if_expected/1`` predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``is_expected`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="if_unexpected/1"> </div>
-
-.. index:: if_unexpected/1
-.. _expected/1::if_unexpected/1:
-
-``if_unexpected/1``
-^^^^^^^^^^^^^^^^^^^
-
-Applies a closure when the reference holds an unexpected term using the term as argument. Succeeds otherwise. Can be used to throw the exception hold by the reference by calling it the atom ``throw``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``if_unexpected(Closure)``
-| **Meta-predicate template:**
-|    ``if_unexpected(1)``
-| **Mode and number of proofs:**
-|    ``if_unexpected(+callable)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="if_expected/1"> </div>
-
-.. index:: if_expected/1
-.. _expected/1::if_expected/1:
-
-``if_expected/1``
-^^^^^^^^^^^^^^^^^
-
-Applies a closure when the reference holds an expected term using the term as argument. Succeeds otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``if_expected(Closure)``
-| **Meta-predicate template:**
-|    ``if_expected(1)``
-| **Mode and number of proofs:**
-|    ``if_expected(+callable)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="unexpected/1"> </div>
-
-.. index:: unexpected/1
-.. _expected/1::unexpected/1:
-
-``unexpected/1``
-^^^^^^^^^^^^^^^^
-
-Returns the unexpected term hold by the reference. Throws an error otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``unexpected(Unexpected)``
-| **Mode and number of proofs:**
-|    ``unexpected(--term)`` - ``one_or_error``
-
-| **Exceptions:**
-|    Reference holds an expected term:
-|        ``existence_error(unexpected_term,Reference)``
-
-
-------------
-
-.. raw:: html
-
    <div id="expected/1"> </div>
 
 .. index:: expected/1
@@ -174,31 +55,6 @@ Returns the expected term hold by the reference. Throws an error otherwise.
 | **Exceptions:**
 |    Reference holds an unexpected term:
 |        ``existence_error(expected_term,Reference)``
-
-
-------------
-
-.. raw:: html
-
-   <div id="map/2"> </div>
-
-.. index:: map/2
-.. _expected/1::map/2:
-
-``map/2``
-^^^^^^^^^
-
-When the reference does not hold an unexpected term and mapping a closure with the expected term and the new expected term as additional arguments is successful, returns a reference with the new expected term. Otherwise returns the same reference.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``map(Closure,NewReference)``
-| **Meta-predicate template:**
-|    ``map(2,*)``
-| **Mode and number of proofs:**
-|    ``map(+callable,--nonvar)`` - ``one``
 
 
 ------------
@@ -230,6 +86,123 @@ When the reference does not hold an unexpected term and mapping a closure with t
 
 .. raw:: html
 
+   <div id="if_expected/1"> </div>
+
+.. index:: if_expected/1
+.. _expected/1::if_expected/1:
+
+``if_expected/1``
+^^^^^^^^^^^^^^^^^
+
+Applies a closure when the reference holds an expected term using the term as argument. Succeeds otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``if_expected(Closure)``
+| **Meta-predicate template:**
+|    ``if_expected(1)``
+| **Mode and number of proofs:**
+|    ``if_expected(+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="if_unexpected/1"> </div>
+
+.. index:: if_unexpected/1
+.. _expected/1::if_unexpected/1:
+
+``if_unexpected/1``
+^^^^^^^^^^^^^^^^^^^
+
+Applies a closure when the reference holds an unexpected term using the term as argument. Succeeds otherwise. Can be used to throw the exception hold by the reference by calling it the atom ``throw``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``if_unexpected(Closure)``
+| **Meta-predicate template:**
+|    ``if_unexpected(1)``
+| **Mode and number of proofs:**
+|    ``if_unexpected(+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_expected/0"> </div>
+
+.. index:: is_expected/0
+.. _expected/1::is_expected/0:
+
+``is_expected/0``
+^^^^^^^^^^^^^^^^^
+
+True if the reference holds an expected term. Avoid whenever possible by using instead the ``if_expected/1`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``is_expected`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_unexpected/0"> </div>
+
+.. index:: is_unexpected/0
+.. _expected/1::is_unexpected/0:
+
+``is_unexpected/0``
+^^^^^^^^^^^^^^^^^^^
+
+True if the reference holds an unexpected term. Avoid whenever possible by using instead the ``if_unexpected/1`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``is_unexpected`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="map/2"> </div>
+
+.. index:: map/2
+.. _expected/1::map/2:
+
+``map/2``
+^^^^^^^^^
+
+When the reference does not hold an unexpected term and mapping a closure with the expected term and the new expected term as additional arguments is successful, returns a reference with the new expected term. Otherwise returns the same reference.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map(Closure,NewReference)``
+| **Meta-predicate template:**
+|    ``map(2,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="or_else/2"> </div>
 
 .. index:: or_else/2
@@ -247,6 +220,54 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 |    ``or_else(Expected,Default)``
 | **Mode and number of proofs:**
 |    ``or_else(--term,@term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="or_else_call/2"> </div>
+
+.. index:: or_else_call/2
+.. _expected/1::or_else_call/2:
+
+``or_else_call/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the expected term if the reference does not hold an unexpected term. Calls a goal deterministically otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_call(Expected,Goal)``
+| **Meta-predicate template:**
+|    ``or_else_call(*,0)``
+| **Mode and number of proofs:**
+|    ``or_else_call(--term,+callable)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="or_else_fail/1"> </div>
+
+.. index:: or_else_fail/1
+.. _expected/1::or_else_fail/1:
+
+``or_else_fail/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the expected term hold by the reference if it does not hold an unexpected term. Fails otherwise. Usually called to skip over references holding unexpected terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_fail(Expected)``
+| **Mode and number of proofs:**
+|    ``or_else_fail(--term)`` - ``zero_or_one``
 
 
 ------------
@@ -282,31 +303,6 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 
 .. raw:: html
 
-   <div id="or_else_call/2"> </div>
-
-.. index:: or_else_call/2
-.. _expected/1::or_else_call/2:
-
-``or_else_call/2``
-^^^^^^^^^^^^^^^^^^
-
-Returns the expected term if the reference does not hold an unexpected term. Calls a goal deterministically otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``or_else_call(Expected,Goal)``
-| **Meta-predicate template:**
-|    ``or_else_call(*,0)``
-| **Mode and number of proofs:**
-|    ``or_else_call(--term,+callable)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="or_else_throw/1"> </div>
 
 .. index:: or_else_throw/1
@@ -330,23 +326,27 @@ Returns the expected term hold by the reference if present. Throws the unexpecte
 
 .. raw:: html
 
-   <div id="or_else_fail/1"> </div>
+   <div id="unexpected/1"> </div>
 
-.. index:: or_else_fail/1
-.. _expected/1::or_else_fail/1:
+.. index:: unexpected/1
+.. _expected/1::unexpected/1:
 
-``or_else_fail/1``
-^^^^^^^^^^^^^^^^^^
+``unexpected/1``
+^^^^^^^^^^^^^^^^
 
-Returns the expected term hold by the reference if it does not hold an unexpected term. Fails otherwise. Usually called to skip over references holding unexpected terms.
+Returns the unexpected term hold by the reference. Throws an error otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_fail(Expected)``
+|    ``unexpected(Unexpected)``
 | **Mode and number of proofs:**
-|    ``or_else_fail(--term)`` - ``zero_or_one``
+|    ``unexpected(--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Reference holds an expected term:
+|        ``existence_error(unexpected_term,Reference)``
 
 
 ------------

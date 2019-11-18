@@ -34,24 +34,23 @@ Public predicates
 
 .. raw:: html
 
-   <div id="keys_values/3"> </div>
+   <div id="group_by_key/2"> </div>
 
-.. index:: keys_values/3
-.. _pairs/0::keys_values/3:
+.. index:: group_by_key/2
+.. _pairs/0::group_by_key/2:
 
-``keys_values/3``
-^^^^^^^^^^^^^^^^^
+``group_by_key/2``
+^^^^^^^^^^^^^^^^^^
 
-Converts between a list of pairs and lists of keys and values.
+Groups pairs by key by constructing new pairs by grouping all values for a given key in a list. Keys are compared using equality. The relative order of the values for the same key is kept. The resulting list of pairs is sorted by key.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``keys_values(Pairs,Keys,Values)``
+|    ``group_by_key(Pairs,Groups)``
 | **Mode and number of proofs:**
-|    ``keys_values(+list(pair),-list,-list)`` - ``one``
-|    ``keys_values(-list(pair),+list,+list)`` - ``one``
+|    ``group_by_key(+list(pair),-list(pair))`` - ``one``
 
 
 ------------
@@ -81,23 +80,49 @@ Extracts a list of keys from a list of pairs.
 
 .. raw:: html
 
-   <div id="values/2"> </div>
+   <div id="keys_values/3"> </div>
 
-.. index:: values/2
-.. _pairs/0::values/2:
+.. index:: keys_values/3
+.. _pairs/0::keys_values/3:
 
-``values/2``
-^^^^^^^^^^^^
+``keys_values/3``
+^^^^^^^^^^^^^^^^^
 
-Extracts a list of values from a list of pairs.
+Converts between a list of pairs and lists of keys and values.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``values(Pairs,Values)``
+|    ``keys_values(Pairs,Keys,Values)``
 | **Mode and number of proofs:**
-|    ``values(+list(pair),-list)`` - ``one``
+|    ``keys_values(+list(pair),-list,-list)`` - ``one``
+|    ``keys_values(-list(pair),+list,+list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="map/3"> </div>
+
+.. index:: map/3
+.. _pairs/0::map/3:
+
+``map/3``
+^^^^^^^^^
+
+Maps a list into pairs using a closure that applies to each list element to compute its key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map(Closure,List,Pairs)``
+| **Meta-predicate template:**
+|    ``map(2,*,*)``
+| **Mode and number of proofs:**
+|    ``map(@callable,+list,-list(pair))`` - ``one``
 
 
 ------------
@@ -127,48 +152,23 @@ Transposes a list of pairs by swapping each pair key and value. The relative ord
 
 .. raw:: html
 
-   <div id="group_by_key/2"> </div>
+   <div id="values/2"> </div>
 
-.. index:: group_by_key/2
-.. _pairs/0::group_by_key/2:
+.. index:: values/2
+.. _pairs/0::values/2:
 
-``group_by_key/2``
-^^^^^^^^^^^^^^^^^^
+``values/2``
+^^^^^^^^^^^^
 
-Groups pairs by key by constructing new pairs by grouping all values for a given key in a list. Keys are compared using equality. The relative order of the values for the same key is kept. The resulting list of pairs is sorted by key.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``group_by_key(Pairs,Groups)``
-| **Mode and number of proofs:**
-|    ``group_by_key(+list(pair),-list(pair))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="map/3"> </div>
-
-.. index:: map/3
-.. _pairs/0::map/3:
-
-``map/3``
-^^^^^^^^^
-
-Maps a list into pairs using a closure that applies to each list element to compute its key.
+Extracts a list of values from a list of pairs.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``map(Closure,List,Pairs)``
-| **Meta-predicate template:**
-|    ``map(2,*,*)``
+|    ``values(Pairs,Values)``
 | **Mode and number of proofs:**
-|    ``map(@callable,+list,-list(pair))`` - ``one``
+|    ``values(+list(pair),-list)`` - ``one``
 
 
 ------------

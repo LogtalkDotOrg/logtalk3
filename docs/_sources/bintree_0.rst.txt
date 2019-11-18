@@ -37,29 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="preorder/2"> </div>
-
-.. index:: preorder/2
-.. _bintree/0::preorder/2:
-
-``preorder/2``
-^^^^^^^^^^^^^^
-
-Preorder tree traversal.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``preorder(Tree,List)``
-| **Mode and number of proofs:**
-|    ``preorder(@tree,-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="inorder/2"> </div>
 
 .. index:: inorder/2
@@ -92,6 +69,29 @@ Preorder tree traversal.
 
 | **Mode and number of proofs:**
 |    ``postorder(@tree,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="preorder/2"> </div>
+
+.. index:: preorder/2
+.. _bintree/0::preorder/2:
+
+``preorder/2``
+^^^^^^^^^^^^^^
+
+Preorder tree traversal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``preorder(Tree,List)``
+| **Mode and number of proofs:**
+|    ``preorder(@tree,-list)`` - ``one``
 
 
 ------------

@@ -57,23 +57,46 @@ Gets the value of a class or object field.
 
 .. raw:: html
 
-   <div id="set_field/2"> </div>
+   <div id="invoke/1"> </div>
 
-.. index:: set_field/2
-.. _java_access_protocol/0::set_field/2:
+.. index:: invoke/1
+.. _java_access_protocol/0::invoke/1:
 
-``set_field/2``
-^^^^^^^^^^^^^^^
+``invoke/1``
+^^^^^^^^^^^^
 
-Sets the value of a class or object field.
+Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``set_field(Field,Value)``
+|    ``invoke(Method)``
 | **Mode and number of proofs:**
-|    ``set_field(+atom,+nonvar)`` - ``one``
+|    ``invoke(@nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="invoke/2"> </div>
+
+.. index:: invoke/2
+.. _java_access_protocol/0::invoke/2:
+
+``invoke/2``
+^^^^^^^^^^^^
+
+Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``invoke(Functor,Arguments)``
+| **Mode and number of proofs:**
+|    ``invoke(@nonvar,@list)`` - ``one``
 
 
 ------------
@@ -126,46 +149,23 @@ Creates a new instance using default parameter values.
 
 .. raw:: html
 
-   <div id="invoke/1"> </div>
+   <div id="set_field/2"> </div>
 
-.. index:: invoke/1
-.. _java_access_protocol/0::invoke/1:
+.. index:: set_field/2
+.. _java_access_protocol/0::set_field/2:
 
-``invoke/1``
-^^^^^^^^^^^^
+``set_field/2``
+^^^^^^^^^^^^^^^
 
-Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``invoke(Method)``
-| **Mode and number of proofs:**
-|    ``invoke(@nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="invoke/2"> </div>
-
-.. index:: invoke/2
-.. _java_access_protocol/0::invoke/2:
-
-``invoke/2``
-^^^^^^^^^^^^
-
-Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
+Sets the value of a class or object field.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``invoke(Functor,Arguments)``
+|    ``set_field(Field,Value)``
 | **Mode and number of proofs:**
-|    ``invoke(@nonvar,@list)`` - ``one``
+|    ``set_field(+atom,+nonvar)`` - ``one``
 
 
 ------------

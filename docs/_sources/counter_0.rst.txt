@@ -34,6 +34,29 @@ Public predicates
 
 .. raw:: html
 
+   <div id="increase/1"> </div>
+
+.. index:: increase/1
+.. _counter/0::increase/1:
+
+``increase/1``
+^^^^^^^^^^^^^^
+
+Increments the counter by the specified amount.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``increase(+number)`` - ``one``
+
+| **argname:**
+|    [I]
+
+------------
+
+.. raw:: html
+
    <div id="increment/0"> </div>
 
 .. index:: increment/0
@@ -55,24 +78,22 @@ Increment the counter by 1.
 
 .. raw:: html
 
-   <div id="increase/1"> </div>
+   <div id="reset/0"> </div>
 
-.. index:: increase/1
-.. _counter/0::increase/1:
+.. index:: reset/0
+.. _counter/0::reset/0:
 
-``increase/1``
-^^^^^^^^^^^^^^
+``reset/0``
+^^^^^^^^^^^
 
-Increments the counter by the specified amount.
+Resets the counter to zero.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``increase(+number)`` - ``one``
+|    ``reset`` - ``one``
 
-| **argname:**
-|    [I]
 
 ------------
 
@@ -119,27 +140,6 @@ Gets the current value of the counter.
 
 | **argname:**
 |    [N]
-
-------------
-
-.. raw:: html
-
-   <div id="reset/0"> </div>
-
-.. index:: reset/0
-.. _counter/0::reset/0:
-
-``reset/0``
-^^^^^^^^^^^
-
-Resets the counter to zero.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``reset`` - ``one``
-
 
 ------------
 

@@ -278,15 +278,15 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#date-4" id="id2"><code class="docutils literal notranslate"><span class="pre">date/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#date-5" id="id3"><code class="docutils literal notranslate"><span class="pre">date/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#date-6" id="id4"><code class="docutils literal notranslate"><span class="pre">date/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#date-7" id="id5"><code class="docutils literal notranslate"><span class="pre">date/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#date-string-3" id="id6"><code class="docutils literal notranslate"><span class="pre">date_string/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-date-3" id="id7"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#leap-year-1" id="id8"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#calendar-month-3" id="id9"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#easter-day-3" id="id10"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#calendar-month-3" id="id2"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-4" id="id3"><code class="docutils literal notranslate"><span class="pre">date/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-5" id="id4"><code class="docutils literal notranslate"><span class="pre">date/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-6" id="id5"><code class="docutils literal notranslate"><span class="pre">date/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-7" id="id6"><code class="docutils literal notranslate"><span class="pre">date/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-string-3" id="id7"><code class="docutils literal notranslate"><span class="pre">date_string/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#easter-day-3" id="id8"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#leap-year-1" id="id9"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-date-3" id="id10"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id11">Protected predicates</a></p></li>
@@ -296,8 +296,44 @@
 </div>
 <div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="date/4"> </div><div class="section" id="date-4">
-<span id="iso8601-0-date-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date/4</span></code></a><a class="headerlink" href="#date-4" title="Permalink to this headline">¶</a></h3>
+<div id="calendar_month/3"> </div><div class="section" id="calendar-month-3">
+<span id="iso8601-0-calendar-month-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a><a class="headerlink" href="#calendar-month-3" title="Permalink to this headline">¶</a></h3>
+<p>Compute a calendar month.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">calendar_month(Year,Month,Calendar)</span></code></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Year</span></code> - The calendar year</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Month</span></code> - The calendar month</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Calendar</span></code> - A compound term, <code class="docutils literal notranslate"><span class="pre">m/3</span></code>, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).</div>
+</div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">calendar_month(?integer,?integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Compute the calendar of March, 2005</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">calendar_month(2005,3,Calendar)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Calendar=m(2005,3,[w(9,[0,1,2,3,4,5,6]),w(10,[7,8,9,10,11,12,13]),w(11,[14,15,16,17,18,19,20]),w(12,[21,22,23,24,25,26,27]),w(13,[28,29,30,31,0,0,0]),w(0,[0,0,0,0,0,0,0])])</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="date/4"> </div></div>
+<div class="section" id="date-4">
+<span id="iso8601-0-date-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date/4</span></code></a><a class="headerlink" href="#date-4" title="Permalink to this headline">¶</a></h3>
 <p>Get the system date and/or its Julian Day # or convert a Julian Day # to/from given date parts.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -369,7 +405,7 @@
 <hr class="docutils" />
 <div id="date/5"> </div></div>
 <div class="section" id="date-5">
-<span id="iso8601-0-date-5"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date/5</span></code></a><a class="headerlink" href="#date-5" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-5"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date/5</span></code></a><a class="headerlink" href="#date-5" title="Permalink to this headline">¶</a></h3>
 <p>Ditto <code class="docutils literal notranslate"><span class="pre">date/4</span></code> + get/check its day-of-week #.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -422,7 +458,7 @@
 <hr class="docutils" />
 <div id="date/6"> </div></div>
 <div class="section" id="date-6">
-<span id="iso8601-0-date-6"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date/6</span></code></a><a class="headerlink" href="#date-6" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-6"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date/6</span></code></a><a class="headerlink" href="#date-6" title="Permalink to this headline">¶</a></h3>
 <p>Ditto <code class="docutils literal notranslate"><span class="pre">date/5</span></code> + get/check its week #.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -516,7 +552,7 @@
 <hr class="docutils" />
 <div id="date/7"> </div></div>
 <div class="section" id="date-7">
-<span id="iso8601-0-date-7"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date/7</span></code></a><a class="headerlink" href="#date-7" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-7"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date/7</span></code></a><a class="headerlink" href="#date-7" title="Permalink to this headline">¶</a></h3>
 <p>Ditto <code class="docutils literal notranslate"><span class="pre">date/6</span></code> + get/check its day-of-year #.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -591,7 +627,7 @@
 <hr class="docutils" />
 <div id="date_string/3"> </div></div>
 <div class="section" id="date-string-3">
-<span id="iso8601-0-date-string-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date_string/3</span></code></a><a class="headerlink" href="#date-string-3" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-date-string-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">date_string/3</span></code></a><a class="headerlink" href="#date-string-3" title="Permalink to this headline">¶</a></h3>
 <p>Conversion between an ISO 8601 compliant date string and its components (truncated and expanded date representations are currently unsupported). Note that date components are not validated; that is the caller’s responsibility!</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -751,10 +787,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="valid_date/3"> </div></div>
-<div class="section" id="valid-date-3">
-<span id="iso8601-0-valid-date-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a><a class="headerlink" href="#valid-date-3" title="Permalink to this headline">¶</a></h3>
-<p>Validate a given date in the Gregorian calendar.</p>
+<div id="easter_day/3"> </div></div>
+<div class="section" id="easter-day-3">
+<span id="iso8601-0-easter-day-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a><a class="headerlink" href="#easter-day-3" title="Permalink to this headline">¶</a></h3>
+<p>Compute a Gregorian Easter Sunday.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -764,42 +800,37 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(Year,Month,Day)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">easter_day(Year,Month,Day)</span></code></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Year</span></code> - Integer specifying the year to be investigated</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Month</span></code> - Month in which Easter Sunday falls for given year</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Day</span></code> - Day of month in which Easter Sunday falls for given year</div>
+</div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(+integer,+integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">easter_day(?integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Examples:</strong></div>
 <div class="line-block">
-<div class="line">Yes, the recent millennium was a leap year</div>
+<div class="line">Compute Easter Sunday for a particular year</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(2000,2,29)</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">easter_day(2006,Month,Day)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Month=4,Day=16</span></code></div>
 </div>
-<div class="line">2004 was also a leap year</div>
+<div class="line">Compute Easter Sunday for the current year</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(2004,2,29)</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
-</div>
-<div class="line">Only 30 days in April</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(2004,4,31)</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">no</span></code></div>
-</div>
-<div class="line">1 BC was a leap year</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(-1,2,29)</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">easter_day(Year,Month,Day)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Year=2005,Month=3,Day=27</span></code></div>
 </div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="leap_year/1"> </div></div>
 <div class="section" id="leap-year-1">
-<span id="iso8601-0-leap-year-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a><a class="headerlink" href="#leap-year-1" title="Permalink to this headline">¶</a></h3>
+<span id="iso8601-0-leap-year-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a><a class="headerlink" href="#leap-year-1" title="Permalink to this headline">¶</a></h3>
 <p>Succeed if given year is a leap year in the Gregorian calendar.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -871,10 +902,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="calendar_month/3"> </div></div>
-<div class="section" id="calendar-month-3">
-<span id="iso8601-0-calendar-month-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a><a class="headerlink" href="#calendar-month-3" title="Permalink to this headline">¶</a></h3>
-<p>Compute a calendar month.</p>
+<div id="valid_date/3"> </div></div>
+<div class="section" id="valid-date-3">
+<span id="iso8601-0-valid-date-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a><a class="headerlink" href="#valid-date-3" title="Permalink to this headline">¶</a></h3>
+<p>Validate a given date in the Gregorian calendar.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -884,66 +915,35 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">calendar_month(Year,Month,Calendar)</span></code></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Year</span></code> - The calendar year</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Month</span></code> - The calendar month</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Calendar</span></code> - A compound term, <code class="docutils literal notranslate"><span class="pre">m/3</span></code>, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).</div>
-</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(Year,Month,Day)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">calendar_month(?integer,?integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(+integer,+integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Examples:</strong></div>
 <div class="line-block">
-<div class="line">Compute the calendar of March, 2005</div>
+<div class="line">Yes, the recent millennium was a leap year</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">calendar_month(2005,3,Calendar)</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Calendar=m(2005,3,[w(9,[0,1,2,3,4,5,6]),w(10,[7,8,9,10,11,12,13]),w(11,[14,15,16,17,18,19,20]),w(12,[21,22,23,24,25,26,27]),w(13,[28,29,30,31,0,0,0]),w(0,[0,0,0,0,0,0,0])])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(2000,2,29)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
 </div>
+<div class="line">2004 was also a leap year</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(2004,2,29)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
 </div>
+<div class="line">Only 30 days in April</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(2004,4,31)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">no</span></code></div>
 </div>
-<hr class="docutils" />
-<div id="easter_day/3"> </div></div>
-<div class="section" id="easter-day-3">
-<span id="iso8601-0-easter-day-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a><a class="headerlink" href="#easter-day-3" title="Permalink to this headline">¶</a></h3>
-<p>Compute a Gregorian Easter Sunday.</p>
+<div class="line">1 BC was a leap year</div>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">easter_day(Year,Month,Day)</span></code></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Year</span></code> - Integer specifying the year to be investigated</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Month</span></code> - Month in which Easter Sunday falls for given year</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Day</span></code> - Day of month in which Easter Sunday falls for given year</div>
-</div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">easter_day(?integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Examples:</strong></div>
-<div class="line-block">
-<div class="line">Compute Easter Sunday for a particular year</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">easter_day(2006,Month,Day)</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Month=4,Day=16</span></code></div>
-</div>
-<div class="line">Compute Easter Sunday for the current year</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">easter_day(Year,Month,Day)</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Year=2005,Month=3,Day=27</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date(-1,2,29)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
 </div>
 </div>
 </div>

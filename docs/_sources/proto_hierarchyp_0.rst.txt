@@ -33,52 +33,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="parent/1"> </div>
-
-.. index:: parent/1
-.. _proto_hierarchyp/0::parent/1:
-
-``parent/1``
-^^^^^^^^^^^^
-
-Returns, by backtracking, all object parents.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``parent(Parent)``
-| **Mode and number of proofs:**
-|    ``parent(?object)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="parents/1"> </div>
-
-.. index:: parents/1
-.. _proto_hierarchyp/0::parents/1:
-
-``parents/1``
-^^^^^^^^^^^^^
-
-List of all object parents.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``parents(Parents)``
-| **Mode and number of proofs:**
-|    ``parents(-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="extension/1"> </div>
 
 .. index:: extension/1
@@ -119,6 +73,52 @@ List of all object direct descendants.
 |    ``extensions(Extensions)``
 | **Mode and number of proofs:**
 |    ``extensions(-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="parent/1"> </div>
+
+.. index:: parent/1
+.. _proto_hierarchyp/0::parent/1:
+
+``parent/1``
+^^^^^^^^^^^^
+
+Returns, by backtracking, all object parents.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parent(Parent)``
+| **Mode and number of proofs:**
+|    ``parent(?object)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="parents/1"> </div>
+
+.. index:: parents/1
+.. _proto_hierarchyp/0::parents/1:
+
+``parents/1``
+^^^^^^^^^^^^^
+
+List of all object parents.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parents(Parents)``
+| **Mode and number of proofs:**
+|    ``parents(-list)`` - ``one``
 
 
 ------------

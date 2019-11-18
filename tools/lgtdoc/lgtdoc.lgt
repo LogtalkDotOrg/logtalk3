@@ -68,6 +68,18 @@
 		argnames is ['Predicate', 'PrimarySortKey', 'SecondarySortKey', 'Entity']
 	]).
 
+	:- uses(list, [
+		member/2, memberchk/2, sort/4
+	]).
+
+	:- uses(type, [
+		valid/2
+	]).
+
+	:- uses(varlist, [
+		memberchk/2 as member_var/2
+	]).
+
 	rlibrary(Library, UserOptions) :-
 		reset,
 		logtalk::expand_library_path(Library, TopPath),
@@ -750,7 +762,8 @@
 
 	write_xml_public_predicates(Stream, Entity) :-
 		write_xml_open_tag(Stream, (public), []),
-		entity_property(Entity, public(Predicates)),
+		entity_property(Entity, public(Predicates0)),
+		sort(1, @=<, Predicates0, Predicates),
 		member(Functor/Arity, Predicates),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		functor(Entity, EntityFunctor, _),
@@ -770,7 +783,8 @@
 
 	write_xml_protected_predicates(Stream, Entity) :-
 		write_xml_open_tag(Stream, protected, []),
-		entity_property(Entity, protected(Predicates)),
+		entity_property(Entity, protected(Predicates0)),
+		sort(1, @=<, Predicates0, Predicates),
 		member(Functor/Arity, Predicates),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		(	member(non_terminal(Functor//Args), Properties) ->
@@ -787,7 +801,8 @@
 
 	write_xml_private_predicates(Stream, Entity) :-
 		write_xml_open_tag(Stream, private, []),
-		entity_property(Entity, private(Predicates)),
+		entity_property(Entity, private(Predicates0)),
+		sort(1, @=<, Predicates0, Predicates),
 		member(Functor/Arity, Predicates),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		(	member(non_terminal(Functor//Args), Properties) ->
@@ -1408,11 +1423,11 @@
 	valid_option(encoding, Encoding) :-
 		atom(Encoding).
 	valid_option(exclude_files, List) :-
-		is_atom_list(List).
+		valid(list(atom), List).
 	valid_option(exclude_paths, List) :-
-		is_atom_list(List).
+		valid(list(atom), List).
 	valid_option(exclude_entities, List) :-
-		is_atom_list(List).
+		valid(list(atom), List).
 
 	option(Option, Value) :-
 		valid_option(Option),
@@ -1478,29 +1493,7 @@
 		retractall(type_entity_(_, _, _, _)),
 		retractall(predicate_entity_(_, _, _, _)).
 
-	% we want to minimize any dependencies on other entities, including library objects
-
-	member(Element, [Element| _]).
-	member(Element, [_| List]) :-
-		member(Element, List).
-
-	memberchk(Element, [Element| _]) :-
-		!.
-	memberchk(Element, [_| List]) :-
-		memberchk(Element, List).
-
-	member_var(V, [H| _]) :-
-		V == H.
-	member_var(V, [_| T]) :-
-		member_var(V, T).
-
-	is_atom_list((-)) :-
-		!,
-		fail.
-	is_atom_list([]).
-	is_atom_list([Atom| Atoms]) :-
-		atom(Atom),
-		is_atom_list(Atoms).
+	% auxiliary predicates
 
 	pretty_print_vars(Stream, Term) :-
 		\+ \+ (

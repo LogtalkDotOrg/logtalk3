@@ -57,29 +57,6 @@ True if ``Counter`` is a counter with value ``Value``.
 
 .. raw:: html
 
-   <div id="increment_counter/1"> </div>
-
-.. index:: increment_counter/1
-.. _counters/0::increment_counter/1:
-
-``increment_counter/1``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Increments the named counter.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``increment_counter(Counter)``
-| **Mode and number of proofs:**
-|    ``increment_counter(+nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="decrement_counter/1"> </div>
 
 .. index:: decrement_counter/1
@@ -97,6 +74,29 @@ Decrements the named counter.
 |    ``decrement_counter(Counter)``
 | **Mode and number of proofs:**
 |    ``decrement_counter(+nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="increment_counter/1"> </div>
+
+.. index:: increment_counter/1
+.. _counters/0::increment_counter/1:
+
+``increment_counter/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Increments the named counter.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``increment_counter(Counter)``
+| **Mode and number of proofs:**
+|    ``increment_counter(+nonvar)`` - ``one``
 
 
 ------------

@@ -36,27 +36,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="update/0"> </div>
-
-.. index:: update/0
-.. _doclet/0::update/0:
-
-``update/0``
-^^^^^^^^^^^^
-
-Updates the project documentation, first by calling a sequence of goals and second by executing a sequence of shell commands. Fails if any goal or shell command fails.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``update`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="doc_goal/1"> </div>
 
 .. index:: doc_goal/1
@@ -97,6 +76,27 @@ Table of shell commands to convert intermediate documentation files into user-fr
 |    ``shell_command(Command)``
 | **Mode and number of proofs:**
 |    ``shell_command(?atom)`` - ``one_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="update/0"> </div>
+
+.. index:: update/0
+.. _doclet/0::update/0:
+
+``update/0``
+^^^^^^^^^^^^
+
+Updates the project documentation, first by calling a sequence of goals and second by executing a sequence of shell commands. Fails if any goal or shell command fails.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``update`` - ``zero_or_one``
 
 
 ------------

@@ -86,6 +86,29 @@ Connect to a Redis server running on the given host and port.
 
 .. raw:: html
 
+   <div id="console/1"> </div>
+
+.. index:: console/1
+.. _redis/0::console/1:
+
+``console/1``
+^^^^^^^^^^^^^
+
+Sends a request to a Redis server running on localhost at the default 6379 port and prints the reply.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``console(Request)``
+| **Mode and number of proofs:**
+|    ``console(++callable)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="disconnect/1"> </div>
 
 .. index:: disconnect/1
@@ -126,29 +149,6 @@ Sends a request to the a Redis server and returns its reply
 |    ``send(Connection,Request,Reply)``
 | **Mode and number of proofs:**
 |    ``send(++ground,++callable,--callable)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="console/1"> </div>
-
-.. index:: console/1
-.. _redis/0::console/1:
-
-``console/1``
-^^^^^^^^^^^^^
-
-Sends a request to a Redis server running on localhost at the default 6379 port and prints the reply.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``console(Request)``
-| **Mode and number of proofs:**
-|    ``console(++callable)`` - ``one``
 
 
 ------------

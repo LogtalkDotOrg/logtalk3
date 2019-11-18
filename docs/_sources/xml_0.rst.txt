@@ -95,29 +95,6 @@ Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.
 
 .. raw:: html
 
-   <div id="subterm/2"> </div>
-
-.. index:: subterm/2
-.. _xml/0::subterm/2:
-
-``subterm/2``
-^^^^^^^^^^^^^
-
-Unifies ``Subterm`` with a sub-term of ``XMLTerm``. Note that ``XMLTerm`` is a sub-term of itself.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``subterm(XMLTerm,Subterm)``
-| **Mode and number of proofs:**
-|    ``subterm(+nonvar,?nonvar)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="pp/1"> </div>
 
 .. index:: pp/1
@@ -139,6 +116,29 @@ Pretty prints a XML document on the current output stream.
 
 ------------
 
+.. raw:: html
+
+   <div id="subterm/2"> </div>
+
+.. index:: subterm/2
+.. _xml/0::subterm/2:
+
+``subterm/2``
+^^^^^^^^^^^^^
+
+Unifies ``Subterm`` with a sub-term of ``XMLTerm``. Note that ``XMLTerm`` is a sub-term of itself.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subterm(XMLTerm,Subterm)``
+| **Mode and number of proofs:**
+|    ``subterm(+nonvar,?nonvar)`` - ``zero_or_one``
+
+
+------------
+
 Protected predicates
 --------------------
 
@@ -149,23 +149,69 @@ Private predicates
 
 .. raw:: html
 
-   <div id="xml_to_document/3"> </div>
+   <div id="cdata_generation//1"> </div>
 
-.. index:: xml_to_document/3
-.. _xml/0::xml_to_document/3:
+.. index:: cdata_generation//1
+.. _xml/0::cdata_generation//1:
 
-``xml_to_document/3``
-^^^^^^^^^^^^^^^^^^^^^
+``cdata_generation//1``
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Translates the list of character codes ``XML`` into the Prolog term ``Document``. ``Controls`` is a list of terms controlling the treatment of layout characters and character entities.
+Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``xml_to_document(Controls,XML,Document)``
+|    ``cdata_generation(Chars)``
 | **Mode and number of proofs:**
-|    ``xml_to_document(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
+|    ``cdata_generation(+list)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="character_data_format/3"> </div>
+
+.. index:: character_data_format/3
+.. _xml/0::character_data_format/3:
+
+``character_data_format/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``character_data_format(Chars,Format0,Format1)``
+| **Mode and number of proofs:**
+|    ``character_data_format(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="document_generation//2"> </div>
+
+.. index:: document_generation//2
+.. _xml/0::document_generation//2:
+
+``document_generation//2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+DCG generating Document as a list of character codes. ``Format`` is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with ``pcdata/1`` terms, such as XHTML's 'inline' elements. Also, ``Format`` is over-ridden, for an individual element, by an explicit ``'xml:space'="preserve"`` attribute.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``document_generation(Format,Document)``
+| **Mode and number of proofs:**
+|    ``document_generation(+nonvar,+nonvar)`` - ``zero_or_one``
 
 
 ------------
@@ -189,6 +235,52 @@ True if ``Map`` is a null map.
 |    ``empty_map(Map)``
 | **Mode and number of proofs:**
 |    ``empty_map(?nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="exception/4"> </div>
+
+.. index:: exception/4
+.. _xml/0::exception/4:
+
+``exception/4``
+^^^^^^^^^^^^^^^
+
+Hook to raise an exception to be raised in respect of a fault in the XML Term ``Document``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exception(Message,Document,Culprit,Path)``
+| **Mode and number of proofs:**
+|    ``exception(+atom,+nonvar,+nonvar,+nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="fault/5"> </div>
+
+.. index:: fault/5
+.. _xml/0::fault/5:
+
+``fault/5``
+^^^^^^^^^^^
+
+Identifies ``SubTerm`` as a sub-term of ``Term`` which cannot be serialized after ``Indentation``. ``Message`` is an atom naming the type of error; ``Path`` is a string encoding a list of ``SubTerm``'s ancestor elements in the form ``<tag>{(id)}*`` where ``<tag>`` is the element tag and ``<id>`` is the value of any attribute _named_ ``id``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fault(Term,Indentation,SubTerm,Path,Message)``
+| **Mode and number of proofs:**
+|    ``fault(+nonvar,+nonvar,?nonvar,?nonvar,?nonvar)`` - ``zero_or_one``
 
 
 ------------
@@ -241,98 +333,6 @@ True if ``Map0`` is an ordered map structure, ``Key`` must be ground, and ``Map1
 
 .. raw:: html
 
-   <div id="pp_string/1"> </div>
-
-.. index:: pp_string/1
-.. _xml/0::pp_string/1:
-
-``pp_string/1``
-^^^^^^^^^^^^^^^
-
-Prints ``String`` onto the current output stream. If ``String`` contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``pp_string(String)``
-| **Mode and number of proofs:**
-|    ``pp_string(+nonvar)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="fault/5"> </div>
-
-.. index:: fault/5
-.. _xml/0::fault/5:
-
-``fault/5``
-^^^^^^^^^^^
-
-Identifies ``SubTerm`` as a sub-term of ``Term`` which cannot be serialized after ``Indentation``. ``Message`` is an atom naming the type of error; ``Path`` is a string encoding a list of ``SubTerm``'s ancestor elements in the form ``<tag>{(id)}*`` where ``<tag>`` is the element tag and ``<id>`` is the value of any attribute _named_ ``id``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``fault(Term,Indentation,SubTerm,Path,Message)``
-| **Mode and number of proofs:**
-|    ``fault(+nonvar,+nonvar,?nonvar,?nonvar,?nonvar)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="exception/4"> </div>
-
-.. index:: exception/4
-.. _xml/0::exception/4:
-
-``exception/4``
-^^^^^^^^^^^^^^^
-
-Hook to raise an exception to be raised in respect of a fault in the XML Term ``Document``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``exception(Message,Document,Culprit,Path)``
-| **Mode and number of proofs:**
-|    ``exception(+atom,+nonvar,+nonvar,+nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="document_generation//2"> </div>
-
-.. index:: document_generation//2
-.. _xml/0::document_generation//2:
-
-``document_generation//2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-DCG generating Document as a list of character codes. ``Format`` is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with ``pcdata/1`` terms, such as XHTML's 'inline' elements. Also, ``Format`` is over-ridden, for an individual element, by an explicit ``'xml:space'="preserve"`` attribute.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``document_generation(Format,Document)``
-| **Mode and number of proofs:**
-|    ``document_generation(+nonvar,+nonvar)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="pcdata_7bit//1"> </div>
 
 .. index:: pcdata_7bit//1
@@ -356,46 +356,46 @@ Represents the ASCII character set in its simplest format, using the character e
 
 .. raw:: html
 
-   <div id="character_data_format/3"> </div>
+   <div id="pp_string/1"> </div>
 
-.. index:: character_data_format/3
-.. _xml/0::character_data_format/3:
+.. index:: pp_string/1
+.. _xml/0::pp_string/1:
 
-``character_data_format/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``pp_string/1``
+^^^^^^^^^^^^^^^
 
-Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.
+Prints ``String`` onto the current output stream. If ``String`` contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``character_data_format(Chars,Format0,Format1)``
+|    ``pp_string(String)``
 | **Mode and number of proofs:**
-|    ``character_data_format(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
+|    ``pp_string(+nonvar)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="cdata_generation//1"> </div>
+   <div id="xml_to_document/3"> </div>
 
-.. index:: cdata_generation//1
-.. _xml/0::cdata_generation//1:
+.. index:: xml_to_document/3
+.. _xml/0::xml_to_document/3:
 
-``cdata_generation//1``
-^^^^^^^^^^^^^^^^^^^^^^^
+``xml_to_document/3``
+^^^^^^^^^^^^^^^^^^^^^
 
-Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.
+Translates the list of character codes ``XML`` into the Prolog term ``Document``. ``Controls`` is a list of terms controlling the treatment of layout characters and character entities.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``cdata_generation(Chars)``
+|    ``xml_to_document(Controls,XML,Document)``
 | **Mode and number of proofs:**
-|    ``cdata_generation(+list)`` - ``zero_or_one``
+|    ``xml_to_document(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
 
 ------------

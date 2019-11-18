@@ -34,98 +34,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="is_empty/0"> </div>
-
-.. index:: is_empty/0
-.. _optional/1::is_empty/0:
-
-``is_empty/0``
-^^^^^^^^^^^^^^
-
-True if the reference is empty. Avoid whenever possible by using instead the ``if_empty/1`` predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``is_empty`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_present/0"> </div>
-
-.. index:: is_present/0
-.. _optional/1::is_present/0:
-
-``is_present/0``
-^^^^^^^^^^^^^^^^
-
-True if the reference holds a term. Avoid whenever possible by using instead the ``if_present/1`` predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``is_present`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="if_empty/1"> </div>
-
-.. index:: if_empty/1
-.. _optional/1::if_empty/1:
-
-``if_empty/1``
-^^^^^^^^^^^^^^
-
-Calls a goal if the reference is empty. Succeeds otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``if_empty(Goal)``
-| **Meta-predicate template:**
-|    ``if_empty(0)``
-| **Mode and number of proofs:**
-|    ``if_empty(+callable)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="if_present/1"> </div>
-
-.. index:: if_present/1
-.. _optional/1::if_present/1:
-
-``if_present/1``
-^^^^^^^^^^^^^^^^
-
-Applies a closure if the reference holds a term using the term as additional argument. Succeeds otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``if_present(Closure)``
-| **Meta-predicate template:**
-|    ``if_present(1)``
-| **Mode and number of proofs:**
-|    ``if_present(+callable)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="filter/2"> </div>
 
 .. index:: filter/2
@@ -145,31 +53,6 @@ Returns the reference when it is non-empty and the term it holds satisfies a clo
 |    ``filter(1,*)``
 | **Mode and number of proofs:**
 |    ``filter(+callable,--nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="map/2"> </div>
-
-.. index:: map/2
-.. _optional/1::map/2:
-
-``map/2``
-^^^^^^^^^
-
-When the reference is non-empty and mapping a closure with the term it holds and the new term as additional arguments is successful, returns a reference with the new term. Otherwise returns an empty reference.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``map(Closure,NewReference)``
-| **Meta-predicate template:**
-|    ``map(2,*)``
-| **Mode and number of proofs:**
-|    ``map(+callable,--nonvar)`` - ``one``
 
 
 ------------
@@ -228,6 +111,123 @@ Returns the term hold by the reference if not empty. Throws an error otherwise.
 
 .. raw:: html
 
+   <div id="if_empty/1"> </div>
+
+.. index:: if_empty/1
+.. _optional/1::if_empty/1:
+
+``if_empty/1``
+^^^^^^^^^^^^^^
+
+Calls a goal if the reference is empty. Succeeds otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``if_empty(Goal)``
+| **Meta-predicate template:**
+|    ``if_empty(0)``
+| **Mode and number of proofs:**
+|    ``if_empty(+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="if_present/1"> </div>
+
+.. index:: if_present/1
+.. _optional/1::if_present/1:
+
+``if_present/1``
+^^^^^^^^^^^^^^^^
+
+Applies a closure if the reference holds a term using the term as additional argument. Succeeds otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``if_present(Closure)``
+| **Meta-predicate template:**
+|    ``if_present(1)``
+| **Mode and number of proofs:**
+|    ``if_present(+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_empty/0"> </div>
+
+.. index:: is_empty/0
+.. _optional/1::is_empty/0:
+
+``is_empty/0``
+^^^^^^^^^^^^^^
+
+True if the reference is empty. Avoid whenever possible by using instead the ``if_empty/1`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``is_empty`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_present/0"> </div>
+
+.. index:: is_present/0
+.. _optional/1::is_present/0:
+
+``is_present/0``
+^^^^^^^^^^^^^^^^
+
+True if the reference holds a term. Avoid whenever possible by using instead the ``if_present/1`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``is_present`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="map/2"> </div>
+
+.. index:: map/2
+.. _optional/1::map/2:
+
+``map/2``
+^^^^^^^^^
+
+When the reference is non-empty and mapping a closure with the term it holds and the new term as additional arguments is successful, returns a reference with the new term. Otherwise returns an empty reference.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map(Closure,NewReference)``
+| **Meta-predicate template:**
+|    ``map(2,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="or_else/2"> </div>
 
 .. index:: or_else/2
@@ -245,35 +245,6 @@ Returns the term hold by the reference if not empty or the given default term if
 |    ``or_else(Term,Default)``
 | **Mode and number of proofs:**
 |    ``or_else(--term,@term)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="or_else_get/2"> </div>
-
-.. index:: or_else_get/2
-.. _optional/1::or_else_get/2:
-
-``or_else_get/2``
-^^^^^^^^^^^^^^^^^
-
-Returns the term hold by the reference if not empty. Applies a closure to compute the term otherwise. Throws an error when the reference is empty and the term cannot be computed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``or_else_get(Term,Closure)``
-| **Meta-predicate template:**
-|    ``or_else_get(*,1)``
-| **Mode and number of proofs:**
-|    ``or_else_get(--term,+callable)`` - ``one_or_error``
-
-| **Exceptions:**
-|    Reference is empty and the term cannot be computed:
-|        ``existence_error(optional_term,Reference)``
 
 
 ------------
@@ -322,6 +293,35 @@ Returns the term hold by the reference if not empty. Fails otherwise. Usually ca
 |    ``or_else_fail(Term)``
 | **Mode and number of proofs:**
 |    ``or_else_fail(--term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="or_else_get/2"> </div>
+
+.. index:: or_else_get/2
+.. _optional/1::or_else_get/2:
+
+``or_else_get/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the term hold by the reference if not empty. Applies a closure to compute the term otherwise. Throws an error when the reference is empty and the term cannot be computed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_get(Term,Closure)``
+| **Meta-predicate template:**
+|    ``or_else_get(*,1)``
+| **Mode and number of proofs:**
+|    ``or_else_get(--term,+callable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Reference is empty and the term cannot be computed:
+|        ``existence_error(optional_term,Reference)``
 
 
 ------------

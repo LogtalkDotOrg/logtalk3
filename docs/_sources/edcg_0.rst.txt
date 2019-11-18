@@ -53,29 +53,6 @@ Private predicates
 
 .. raw:: html
 
-   <div id="pred_info/3"> </div>
-
-.. index:: pred_info/3
-.. _edcg/0::pred_info/3:
-
-``pred_info/3``
-^^^^^^^^^^^^^^^
-
-Declares predicates that have the listed hidden parameters.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``pred_info(Name,Arity,HiddenParameters)``
-| **Mode and number of proofs:**
-|    ``pred_info(?atom,?integer,?list(atom))`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="acc_info/7"> </div>
 
 .. index:: acc_info/7
@@ -162,6 +139,29 @@ Short form for declaring passed arguments. Passed arguments are conceptually the
 |    ``pass_info(Argument)``
 | **Mode and number of proofs:**
 |    ``pass_info(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="pred_info/3"> </div>
+
+.. index:: pred_info/3
+.. _edcg/0::pred_info/3:
+
+``pred_info/3``
+^^^^^^^^^^^^^^^
+
+Declares predicates that have the listed hidden parameters.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``pred_info(Name,Arity,HiddenParameters)``
+| **Mode and number of proofs:**
+|    ``pred_info(?atom,?integer,?list(atom))`` - ``zero_or_more``
 
 
 ------------

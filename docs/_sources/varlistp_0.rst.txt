@@ -57,6 +57,29 @@ Appends two lists.
 
 .. raw:: html
 
+   <div id="check/1"> </div>
+
+.. index:: check/1
+.. _varlistp/0::check/1:
+
+``check/1``
+^^^^^^^^^^^
+
+Checks if a term is a valid list of variables. Throws an exception if the term is not valid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check(Term)``
+| **Mode and number of proofs:**
+|    ``check(@nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="delete/3"> </div>
 
 .. index:: delete/3
@@ -536,29 +559,6 @@ Term is a valid list of variables.
 |    ``valid(Term)``
 | **Mode and number of proofs:**
 |    ``valid(@nonvar)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="check/1"> </div>
-
-.. index:: check/1
-.. _varlistp/0::check/1:
-
-``check/1``
-^^^^^^^^^^^
-
-Checks if a term is a valid list of variables. Throws an exception if the term is not valid.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``check(Term)``
-| **Mode and number of proofs:**
-|    ``check(@nonvar)`` - ``one``
 
 
 ------------

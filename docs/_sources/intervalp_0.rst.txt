@@ -34,46 +34,23 @@ Public predicates
 
 .. raw:: html
 
-   <div id="new/3"> </div>
+   <div id="after/2"> </div>
 
-.. index:: new/3
-.. _intervalp/0::new/3:
+.. index:: after/2
+.. _intervalp/0::after/2:
 
-``new/3``
-^^^^^^^^^
-
-Constructs a new interval given start and end points. The start point must strictly precede the end point.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``new(Start,End,Interval)``
-| **Mode and number of proofs:**
-|    ``new(@ground,@ground,-interval)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="valid/1"> </div>
-
-.. index:: valid/1
-.. _intervalp/0::valid/1:
-
-``valid/1``
+``after/2``
 ^^^^^^^^^^^
 
-True if Interval is a valid interval.
+True if ``Interval1`` takes place after ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``valid(Interval)``
+|    ``after(Interval1,Interval2)``
 | **Mode and number of proofs:**
-|    ``valid(@interval)`` - ``zero_or_one``
+|    ``after(@interval,@interval)`` - ``zero_or_one``
 
 
 ------------
@@ -103,23 +80,115 @@ True if ``Interval1`` takes place before ``Interval2``.
 
 .. raw:: html
 
-   <div id="after/2"> </div>
+   <div id="contains/2"> </div>
 
-.. index:: after/2
-.. _intervalp/0::after/2:
+.. index:: contains/2
+.. _intervalp/0::contains/2:
 
-``after/2``
-^^^^^^^^^^^
+``contains/2``
+^^^^^^^^^^^^^^
 
-True if ``Interval1`` takes place after ``Interval2``.
+True if ``Interval1`` contains ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``after(Interval1,Interval2)``
+|    ``contains(Interval1,Interval2)``
 | **Mode and number of proofs:**
-|    ``after(@interval,@interval)`` - ``zero_or_one``
+|    ``contains(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="during/2"> </div>
+
+.. index:: during/2
+.. _intervalp/0::during/2:
+
+``during/2``
+^^^^^^^^^^^^
+
+True if ``Interval1`` occurs during ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``during(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``during(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="equal/2"> </div>
+
+.. index:: equal/2
+.. _intervalp/0::equal/2:
+
+``equal/2``
+^^^^^^^^^^^
+
+True if ``Interval1`` is equal to ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equal(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``equal(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="finished_by/2"> </div>
+
+.. index:: finished_by/2
+.. _intervalp/0::finished_by/2:
+
+``finished_by/2``
+^^^^^^^^^^^^^^^^^
+
+True if ``Interval1`` is finished by ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``finished_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``finished_by(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="finishes/2"> </div>
+
+.. index:: finishes/2
+.. _intervalp/0::finishes/2:
+
+``finishes/2``
+^^^^^^^^^^^^^^
+
+True if ``Interval1`` finishes ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``finishes(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``finishes(@interval,@interval)`` - ``zero_or_one``
 
 
 ------------
@@ -172,23 +241,23 @@ True if ``Interval1`` is met by ``Interval2``.
 
 .. raw:: html
 
-   <div id="overlaps/2"> </div>
+   <div id="new/3"> </div>
 
-.. index:: overlaps/2
-.. _intervalp/0::overlaps/2:
+.. index:: new/3
+.. _intervalp/0::new/3:
 
-``overlaps/2``
-^^^^^^^^^^^^^^
+``new/3``
+^^^^^^^^^
 
-True if ``Interval1`` overlaps with ``Interval2``.
+Constructs a new interval given start and end points. The start point must strictly precede the end point.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``overlaps(Interval1,Interval2)``
+|    ``new(Start,End,Interval)``
 | **Mode and number of proofs:**
-|    ``overlaps(@interval,@interval)`` - ``zero_or_one``
+|    ``new(@ground,@ground,-interval)`` - ``zero_or_one``
 
 
 ------------
@@ -218,23 +287,23 @@ True if ``Interval1`` is overlapped by ``Interval2``.
 
 .. raw:: html
 
-   <div id="starts/2"> </div>
+   <div id="overlaps/2"> </div>
 
-.. index:: starts/2
-.. _intervalp/0::starts/2:
+.. index:: overlaps/2
+.. _intervalp/0::overlaps/2:
 
-``starts/2``
-^^^^^^^^^^^^
+``overlaps/2``
+^^^^^^^^^^^^^^
 
-True if ``Interval1`` starts ``Interval2``.
+True if ``Interval1`` overlaps with ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``starts(Interval1,Interval2)``
+|    ``overlaps(Interval1,Interval2)``
 | **Mode and number of proofs:**
-|    ``starts(@interval,@interval)`` - ``zero_or_one``
+|    ``overlaps(@interval,@interval)`` - ``zero_or_one``
 
 
 ------------
@@ -264,115 +333,46 @@ True if ``Interval1`` is started by ``Interval2``.
 
 .. raw:: html
 
-   <div id="during/2"> </div>
+   <div id="starts/2"> </div>
 
-.. index:: during/2
-.. _intervalp/0::during/2:
+.. index:: starts/2
+.. _intervalp/0::starts/2:
 
-``during/2``
+``starts/2``
 ^^^^^^^^^^^^
 
-True if ``Interval1`` occurs during ``Interval2``.
+True if ``Interval1`` starts ``Interval2``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``during(Interval1,Interval2)``
+|    ``starts(Interval1,Interval2)``
 | **Mode and number of proofs:**
-|    ``during(@interval,@interval)`` - ``zero_or_one``
+|    ``starts(@interval,@interval)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="contains/2"> </div>
+   <div id="valid/1"> </div>
 
-.. index:: contains/2
-.. _intervalp/0::contains/2:
+.. index:: valid/1
+.. _intervalp/0::valid/1:
 
-``contains/2``
-^^^^^^^^^^^^^^
-
-True if ``Interval1`` contains ``Interval2``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``contains(Interval1,Interval2)``
-| **Mode and number of proofs:**
-|    ``contains(@interval,@interval)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="finishes/2"> </div>
-
-.. index:: finishes/2
-.. _intervalp/0::finishes/2:
-
-``finishes/2``
-^^^^^^^^^^^^^^
-
-True if ``Interval1`` finishes ``Interval2``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``finishes(Interval1,Interval2)``
-| **Mode and number of proofs:**
-|    ``finishes(@interval,@interval)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="finished_by/2"> </div>
-
-.. index:: finished_by/2
-.. _intervalp/0::finished_by/2:
-
-``finished_by/2``
-^^^^^^^^^^^^^^^^^
-
-True if ``Interval1`` is finished by ``Interval2``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``finished_by(Interval1,Interval2)``
-| **Mode and number of proofs:**
-|    ``finished_by(@interval,@interval)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="equal/2"> </div>
-
-.. index:: equal/2
-.. _intervalp/0::equal/2:
-
-``equal/2``
+``valid/1``
 ^^^^^^^^^^^
 
-True if ``Interval1`` is equal to ``Interval2``.
+True if Interval is a valid interval.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``equal(Interval1,Interval2)``
+|    ``valid(Interval)``
 | **Mode and number of proofs:**
-|    ``equal(@interval,@interval)`` - ``zero_or_one``
+|    ``valid(@interval)`` - ``zero_or_one``
 
 
 ------------

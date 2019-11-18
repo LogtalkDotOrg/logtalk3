@@ -35,27 +35,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="help/0"> </div>
-
-.. index:: help/0
-.. _help/0::help/0:
-
-``help/0``
-^^^^^^^^^^
-
-Prints instructions on how to use the help tool.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``help`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="(/)/2"> </div>
 
 .. index:: (/)/2
@@ -96,6 +75,98 @@ Provides help on the ``Functor//Arity`` built-in non-terminal.
 |    ``Functor//Arity``
 | **Mode and number of proofs:**
 |    ``+atom// +integer`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="built_in_directive/4"> </div>
+
+.. index:: built_in_directive/4
+.. _help/0::built_in_directive/4:
+
+``built_in_directive/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in directives.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``built_in_directive(Functor,Arity,Directory,Basename)``
+| **Mode and number of proofs:**
+|    ``built_in_directive(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="built_in_method/4"> </div>
+
+.. index:: built_in_method/4
+.. _help/0::built_in_method/4:
+
+``built_in_method/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in methods.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``built_in_method(Functor,Arity,Directory,Basename)``
+| **Mode and number of proofs:**
+|    ``built_in_method(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="built_in_non_terminal/4"> </div>
+
+.. index:: built_in_non_terminal/4
+.. _help/0::built_in_non_terminal/4:
+
+``built_in_non_terminal/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in DCG non-terminals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``built_in_non_terminal(Functor,Arity,Directory,Basename)``
+| **Mode and number of proofs:**
+|    ``built_in_non_terminal(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="built_in_predicate/4"> </div>
+
+.. index:: built_in_predicate/4
+.. _help/0::built_in_predicate/4:
+
+``built_in_predicate/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``built_in_predicate(Functor,Arity,Directory,Basename)``
+| **Mode and number of proofs:**
+|    ``built_in_predicate(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
 
 ------------
@@ -148,75 +219,6 @@ Provides a list of completions pairs, ``Completion-Page``, for a given prefix.
 
 .. raw:: html
 
-   <div id="built_in_directive/4"> </div>
-
-.. index:: built_in_directive/4
-.. _help/0::built_in_directive/4:
-
-``built_in_directive/4``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Provides access to the HTML documenting files describing built-in directives.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``built_in_directive(Functor,Arity,Directory,Basename)``
-| **Mode and number of proofs:**
-|    ``built_in_directive(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="built_in_predicate/4"> </div>
-
-.. index:: built_in_predicate/4
-.. _help/0::built_in_predicate/4:
-
-``built_in_predicate/4``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Provides access to the HTML documenting files describing built-in predicates.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``built_in_predicate(Functor,Arity,Directory,Basename)``
-| **Mode and number of proofs:**
-|    ``built_in_predicate(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="built_in_method/4"> </div>
-
-.. index:: built_in_method/4
-.. _help/0::built_in_method/4:
-
-``built_in_method/4``
-^^^^^^^^^^^^^^^^^^^^^
-
-Provides access to the HTML documenting files describing built-in methods.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``built_in_method(Functor,Arity,Directory,Basename)``
-| **Mode and number of proofs:**
-|    ``built_in_method(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="control_construct/4"> </div>
 
 .. index:: control_construct/4
@@ -240,23 +242,21 @@ Provides access to the HTML documenting files describing built-in control constr
 
 .. raw:: html
 
-   <div id="built_in_non_terminal/4"> </div>
+   <div id="help/0"> </div>
 
-.. index:: built_in_non_terminal/4
-.. _help/0::built_in_non_terminal/4:
+.. index:: help/0
+.. _help/0::help/0:
 
-``built_in_non_terminal/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``help/0``
+^^^^^^^^^^
 
-Provides access to the HTML documenting files describing built-in DCG non-terminals.
+Prints instructions on how to use the help tool.
 
 | **Compilation flags:**
 |    ``static``
 
-| **Template:**
-|    ``built_in_non_terminal(Functor,Arity,Directory,Basename)``
 | **Mode and number of proofs:**
-|    ``built_in_non_terminal(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+|    ``help`` - ``one``
 
 
 ------------

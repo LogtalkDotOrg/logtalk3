@@ -47,6 +47,86 @@ Public predicates
 
 .. raw:: html
 
+   <div id="body_pred/1"> </div>
+
+.. index:: body_pred/1
+.. _metagol/0::body_pred/1:
+
+``body_pred/1``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="func_test/3"> </div>
+
+.. index:: func_test/3
+.. _metagol/0::func_test/3:
+
+``func_test/3``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
+   <div id="functional/0"> </div>
+
+.. index:: functional/0
+.. _metagol/0::functional/0:
+
+``functional/0``
+^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="head_pred/1"> </div>
+
+.. index:: head_pred/1
+.. _metagol/0::head_pred/1:
+
+``head_pred/1``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
+   <div id="ibk/3"> </div>
+
+.. index:: ibk/3
+.. _metagol/0::ibk/3:
+
+``ibk/3``
+^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
    <div id="learn/3"> </div>
 
 .. index:: learn/3
@@ -139,164 +219,6 @@ Learns from a set of positive examples and a set of negative examples and return
 
 .. raw:: html
 
-   <div id="program_to_clauses/2"> </div>
-
-.. index:: program_to_clauses/2
-.. _metagol/0::program_to_clauses/2:
-
-``program_to_clauses/2``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Converts a learned program into a list of clauses.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``program_to_clauses(Program,Clauses)``
-| **Mode and number of proofs:**
-|    ``program_to_clauses(@list(term),-list(clause))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="pprint/1"> </div>
-
-.. index:: pprint/1
-.. _metagol/0::pprint/1:
-
-``pprint/1``
-^^^^^^^^^^^^
-
-Pretty prints a learned program.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``pprint(Program)``
-| **Mode and number of proofs:**
-|    ``pprint(@list(term))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="metarule/6"> </div>
-
-.. index:: metarule/6
-.. _metagol/0::metarule/6:
-
-``metarule/6``
-^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="head_pred/1"> </div>
-
-.. index:: head_pred/1
-.. _metagol/0::head_pred/1:
-
-``head_pred/1``
-^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="body_pred/1"> </div>
-
-.. index:: body_pred/1
-.. _metagol/0::body_pred/1:
-
-``body_pred/1``
-^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="ibk/3"> </div>
-
-.. index:: ibk/3
-.. _metagol/0::ibk/3:
-
-``ibk/3``
-^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="func_test/3"> </div>
-
-.. index:: func_test/3
-.. _metagol/0::func_test/3:
-
-``func_test/3``
-^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="functional/0"> </div>
-
-.. index:: functional/0
-.. _metagol/0::functional/0:
-
-``functional/0``
-^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="min_clauses/1"> </div>
-
-.. index:: min_clauses/1
-.. _metagol/0::min_clauses/1:
-
-``min_clauses/1``
-^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
    <div id="max_clauses/1"> </div>
 
 .. index:: max_clauses/1
@@ -329,6 +251,22 @@ Pretty prints a learned program.
 
 .. raw:: html
 
+   <div id="metarule/6"> </div>
+
+.. index:: metarule/6
+.. _metagol/0::metarule/6:
+
+``metarule/6``
+^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
    <div id="metarule_next_id/1"> </div>
 
 .. index:: metarule_next_id/1
@@ -339,6 +277,68 @@ Pretty prints a learned program.
 
 | **Compilation flags:**
 |    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="min_clauses/1"> </div>
+
+.. index:: min_clauses/1
+.. _metagol/0::min_clauses/1:
+
+``min_clauses/1``
+^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="pprint/1"> </div>
+
+.. index:: pprint/1
+.. _metagol/0::pprint/1:
+
+``pprint/1``
+^^^^^^^^^^^^
+
+Pretty prints a learned program.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pprint(Program)``
+| **Mode and number of proofs:**
+|    ``pprint(@list(term))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="program_to_clauses/2"> </div>
+
+.. index:: program_to_clauses/2
+.. _metagol/0::program_to_clauses/2:
+
+``program_to_clauses/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a learned program into a list of clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program_to_clauses(Program,Clauses)``
+| **Mode and number of proofs:**
+|    ``program_to_clauses(@list(term),-list(clause))`` - ``one``
 
 
 ------------
@@ -361,6 +361,38 @@ Pretty prints a learned program.
 
 Protected predicates
 --------------------
+
+.. raw:: html
+
+   <div id="body_pred_call/2"> </div>
+
+.. index:: body_pred_call/2
+.. _metagol/0::body_pred_call/2:
+
+``body_pred_call/2``
+^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="compiled_pred_call/2"> </div>
+
+.. index:: compiled_pred_call/2
+.. _metagol/0::compiled_pred_call/2:
+
+``compiled_pred_call/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
 
 .. raw:: html
 
@@ -390,38 +422,6 @@ Protected predicates
 
 | **Compilation flags:**
 |    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="compiled_pred_call/2"> </div>
-
-.. index:: compiled_pred_call/2
-.. _metagol/0::compiled_pred_call/2:
-
-``compiled_pred_call/2``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="body_pred_call/2"> </div>
-
-.. index:: body_pred_call/2
-.. _metagol/0::body_pred_call/2:
-
-``body_pred_call/2``
-^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
 
 
 ------------

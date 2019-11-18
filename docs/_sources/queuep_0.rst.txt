@@ -34,6 +34,29 @@ Public predicates
 
 .. raw:: html
 
+   <div id="as_list/2"> </div>
+
+.. index:: as_list/2
+.. _queuep/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Converts a queue to a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_list(Queue,List)``
+| **Mode and number of proofs:**
+|    ``as_list(+queue,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="empty/1"> </div>
 
 .. index:: empty/1
@@ -212,29 +235,6 @@ Removes the first element of the queue for service.
 |    ``serve(Queue,Head,NewQueue)``
 | **Mode and number of proofs:**
 |    ``serve(+queue,?term,-queue)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="as_list/2"> </div>
-
-.. index:: as_list/2
-.. _queuep/0::as_list/2:
-
-``as_list/2``
-^^^^^^^^^^^^^
-
-Converts a queue to a list.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``as_list(Queue,List)``
-| **Mode and number of proofs:**
-|    ``as_list(+queue,-list)`` - ``one``
 
 
 ------------

@@ -64,6 +64,8 @@ library.
 Tools
 _____
 
+* IMPROVED: The `lgtdoc` tool to write predicate lists sorted.
+
 * IMPROVED: The `lgtunit` tool compatibility of the generated xUnit reports
 with xUnit output processors.
 

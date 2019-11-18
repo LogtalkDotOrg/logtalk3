@@ -59,29 +59,6 @@ Constructs an empty reference.
 
 .. raw:: html
 
-   <div id="of/2"> </div>
-
-.. index:: of/2
-.. _optional/0::of/2:
-
-``of/2``
-^^^^^^^^
-
-Constructs a reference holding a term.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``of(Term,Reference)``
-| **Mode and number of proofs:**
-|    ``of(@term,--nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="from_goal/3"> </div>
 
 .. index:: from_goal/3
@@ -101,6 +78,29 @@ Constructs a reference by calling ``Goal`` that binds and holds ``Term`` on succ
 |    ``from_goal(0,*,*)``
 | **Mode and number of proofs:**
 |    ``from_goal(+callable,--term,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="of/2"> </div>
+
+.. index:: of/2
+.. _optional/0::of/2:
+
+``of/2``
+^^^^^^^^
+
+Constructs a reference holding a term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``of(Term,Reference)``
+| **Mode and number of proofs:**
+|    ``of(@term,--nonvar)`` - ``one``
 
 
 ------------

@@ -34,29 +34,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="now/3"> </div>
-
-.. index:: now/3
-.. _timep/0::now/3:
-
-``now/3``
-^^^^^^^^^
-
-Returns current time.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``now(Hours,Mins,Secs)``
-| **Mode and number of proofs:**
-|    ``now(-integer,-integer,-integer)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="cpu_time/1"> </div>
 
 .. index:: cpu_time/1
@@ -74,6 +51,29 @@ Returns the current cpu time.
 |    ``cpu_time(Time)``
 | **Mode and number of proofs:**
 |    ``cpu_time(-number)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="now/3"> </div>
+
+.. index:: now/3
+.. _timep/0::now/3:
+
+``now/3``
+^^^^^^^^^
+
+Returns current time.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``now(Hours,Mins,Secs)``
+| **Mode and number of proofs:**
+|    ``now(-integer,-integer,-integer)`` - ``one``
 
 
 ------------

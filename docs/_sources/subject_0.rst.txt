@@ -34,6 +34,29 @@ Public predicates
 
 .. raw:: html
 
+   <div id="addDependent/1"> </div>
+
+.. index:: addDependent/1
+.. _subject/0::addDependent/1:
+
+``addDependent/1``
+^^^^^^^^^^^^^^^^^^
+
+Adds a new dependent object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``addDependent(Dependent)``
+| **Mode and number of proofs:**
+|    ``addDependent(@object)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="changed/0"> </div>
 
 .. index:: changed/0
@@ -95,29 +118,6 @@ Returns a list of all dependent objects.
 |    ``dependents(Dependents)``
 | **Mode and number of proofs:**
 |    ``dependents(-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="addDependent/1"> </div>
-
-.. index:: addDependent/1
-.. _subject/0::addDependent/1:
-
-``addDependent/1``
-^^^^^^^^^^^^^^^^^^
-
-Adds a new dependent object.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``addDependent(Dependent)``
-| **Mode and number of proofs:**
-|    ``addDependent(@object)`` - ``one``
 
 
 ------------

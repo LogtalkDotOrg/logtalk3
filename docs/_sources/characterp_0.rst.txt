@@ -34,23 +34,23 @@ Public predicates
 
 .. raw:: html
 
-   <div id="is_ascii/1"> </div>
+   <div id="is_alpha/1"> </div>
 
-.. index:: is_ascii/1
-.. _characterp/0::is_ascii/1:
+.. index:: is_alpha/1
+.. _characterp/0::is_alpha/1:
 
-``is_ascii/1``
+``is_alpha/1``
 ^^^^^^^^^^^^^^
 
-True if the argument is an ASCII character.
+True if the argument is a letter or an underscore.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``is_ascii(Char)``
+|    ``is_alpha(Char)``
 | **Mode and number of proofs:**
-|    ``is_ascii(+char)`` - ``zero_or_one``
+|    ``is_alpha(+char)`` - ``zero_or_one``
 
 
 ------------
@@ -80,46 +80,23 @@ True if the argument is an alphanumeric character.
 
 .. raw:: html
 
-   <div id="is_alpha/1"> </div>
+   <div id="is_ascii/1"> </div>
 
-.. index:: is_alpha/1
-.. _characterp/0::is_alpha/1:
+.. index:: is_ascii/1
+.. _characterp/0::is_ascii/1:
 
-``is_alpha/1``
+``is_ascii/1``
 ^^^^^^^^^^^^^^
 
-True if the argument is a letter or an underscore.
+True if the argument is an ASCII character.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``is_alpha(Char)``
+|    ``is_ascii(Char)``
 | **Mode and number of proofs:**
-|    ``is_alpha(+char)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_letter/1"> </div>
-
-.. index:: is_letter/1
-.. _characterp/0::is_letter/1:
-
-``is_letter/1``
-^^^^^^^^^^^^^^^
-
-True if the argument is a letter.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``is_letter(Char)``
-| **Mode and number of proofs:**
-|    ``is_letter(+char)`` - ``zero_or_one``
+|    ``is_ascii(+char)`` - ``zero_or_one``
 
 
 ------------
@@ -149,23 +126,23 @@ True if the argument is a binary digit.
 
 .. raw:: html
 
-   <div id="is_octal_digit/1"> </div>
+   <div id="is_control/1"> </div>
 
-.. index:: is_octal_digit/1
-.. _characterp/0::is_octal_digit/1:
+.. index:: is_control/1
+.. _characterp/0::is_control/1:
 
-``is_octal_digit/1``
-^^^^^^^^^^^^^^^^^^^^
+``is_control/1``
+^^^^^^^^^^^^^^^^
 
-True if the argument is an octal digit.
+True if the argument is an ASCII control character.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``is_octal_digit(Char)``
+|    ``is_control(Char)``
 | **Mode and number of proofs:**
-|    ``is_octal_digit(+char)`` - ``zero_or_one``
+|    ``is_control(+char)`` - ``zero_or_one``
 
 
 ------------
@@ -195,6 +172,29 @@ True if the argument is a decimal digit.
 
 .. raw:: html
 
+   <div id="is_end_of_line/1"> </div>
+
+.. index:: is_end_of_line/1
+.. _characterp/0::is_end_of_line/1:
+
+``is_end_of_line/1``
+^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is the ASCII end-of-line character (either a carriage return or a line feed).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_end_of_line(Char)``
+| **Mode and number of proofs:**
+|    ``is_end_of_line(+char)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="is_hex_digit/1"> </div>
 
 .. index:: is_hex_digit/1
@@ -218,6 +218,52 @@ True if the argument is an hexadecimal digit.
 
 .. raw:: html
 
+   <div id="is_layout/1"> </div>
+
+.. index:: is_layout/1
+.. _characterp/0::is_layout/1:
+
+``is_layout/1``
+^^^^^^^^^^^^^^^
+
+True if the argument is a layout character.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_layout(Char)``
+| **Mode and number of proofs:**
+|    ``is_layout(+char)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_letter/1"> </div>
+
+.. index:: is_letter/1
+.. _characterp/0::is_letter/1:
+
+``is_letter/1``
+^^^^^^^^^^^^^^^
+
+True if the argument is a letter.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_letter(Char)``
+| **Mode and number of proofs:**
+|    ``is_letter(+char)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="is_lower_case/1"> </div>
 
 .. index:: is_lower_case/1
@@ -235,6 +281,121 @@ True if the argument is a lower case letter.
 |    ``is_lower_case(Char)``
 | **Mode and number of proofs:**
 |    ``is_lower_case(+char)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_newline/1"> </div>
+
+.. index:: is_newline/1
+.. _characterp/0::is_newline/1:
+
+``is_newline/1``
+^^^^^^^^^^^^^^^^
+
+True if the argument is the ASCII newline character.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_newline(Char)``
+| **Mode and number of proofs:**
+|    ``is_newline(+char)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_octal_digit/1"> </div>
+
+.. index:: is_octal_digit/1
+.. _characterp/0::is_octal_digit/1:
+
+``is_octal_digit/1``
+^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is an octal digit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_octal_digit(Char)``
+| **Mode and number of proofs:**
+|    ``is_octal_digit(+char)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_period/1"> </div>
+
+.. index:: is_period/1
+.. _characterp/0::is_period/1:
+
+``is_period/1``
+^^^^^^^^^^^^^^^
+
+True if the argument is a character that ends a sentence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_period(Char)``
+| **Mode and number of proofs:**
+|    ``is_period(+char)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_punctuation/1"> </div>
+
+.. index:: is_punctuation/1
+.. _characterp/0::is_punctuation/1:
+
+``is_punctuation/1``
+^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a sentence punctuation character.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_punctuation(Char)``
+| **Mode and number of proofs:**
+|    ``is_punctuation(+char)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_quote/1"> </div>
+
+.. index:: is_quote/1
+.. _characterp/0::is_quote/1:
+
+``is_quote/1``
+^^^^^^^^^^^^^^
+
+True if the argument is a quote character.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_quote(Char)``
+| **Mode and number of proofs:**
+|    ``is_quote(+char)`` - ``zero_or_one``
 
 
 ------------
@@ -310,161 +471,25 @@ True if the argument is a white space character (a space or a tab) inside a line
 
 .. raw:: html
 
-   <div id="is_layout/1"> </div>
+   <div id="lower_upper/2"> </div>
 
-.. index:: is_layout/1
-.. _characterp/0::is_layout/1:
+.. index:: lower_upper/2
+.. _characterp/0::lower_upper/2:
 
-``is_layout/1``
-^^^^^^^^^^^^^^^
+``lower_upper/2``
+^^^^^^^^^^^^^^^^^
 
-True if the argument is a layout character.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``is_layout(Char)``
-| **Mode and number of proofs:**
-|    ``is_layout(+char)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_quote/1"> </div>
-
-.. index:: is_quote/1
-.. _characterp/0::is_quote/1:
-
-``is_quote/1``
-^^^^^^^^^^^^^^
-
-True if the argument is a quote character.
+Recognizes and converts between lower and upper case letters.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``is_quote(Char)``
+|    ``lower_upper(Char1,Char2)``
 | **Mode and number of proofs:**
-|    ``is_quote(+char)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_punctuation/1"> </div>
-
-.. index:: is_punctuation/1
-.. _characterp/0::is_punctuation/1:
-
-``is_punctuation/1``
-^^^^^^^^^^^^^^^^^^^^
-
-True if the argument is a sentence punctuation character.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``is_punctuation(Char)``
-| **Mode and number of proofs:**
-|    ``is_punctuation(+char)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_period/1"> </div>
-
-.. index:: is_period/1
-.. _characterp/0::is_period/1:
-
-``is_period/1``
-^^^^^^^^^^^^^^^
-
-True if the argument is a character that ends a sentence.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``is_period(Char)``
-| **Mode and number of proofs:**
-|    ``is_period(+char)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_control/1"> </div>
-
-.. index:: is_control/1
-.. _characterp/0::is_control/1:
-
-``is_control/1``
-^^^^^^^^^^^^^^^^
-
-True if the argument is an ASCII control character.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``is_control(Char)``
-| **Mode and number of proofs:**
-|    ``is_control(+char)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_newline/1"> </div>
-
-.. index:: is_newline/1
-.. _characterp/0::is_newline/1:
-
-``is_newline/1``
-^^^^^^^^^^^^^^^^
-
-True if the argument is the ASCII newline character.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``is_newline(Char)``
-| **Mode and number of proofs:**
-|    ``is_newline(+char)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_end_of_line/1"> </div>
-
-.. index:: is_end_of_line/1
-.. _characterp/0::is_end_of_line/1:
-
-``is_end_of_line/1``
-^^^^^^^^^^^^^^^^^^^^
-
-True if the argument is the ASCII end-of-line character (either a carriage return or a line feed).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``is_end_of_line(Char)``
-| **Mode and number of proofs:**
-|    ``is_end_of_line(+char)`` - ``zero_or_one``
+|    ``lower_upper(?char,?char)`` - ``zero_or_more``
+|    ``lower_upper(+char,?char)`` - ``zero_or_one``
+|    ``lower_upper(?char,+char)`` - ``zero_or_one``
 
 
 ------------
@@ -490,31 +515,6 @@ Recognizes and converts between open and close parenthesis.
 |    ``parenthesis(?char,?char)`` - ``zero_or_more``
 |    ``parenthesis(+char,?char)`` - ``zero_or_one``
 |    ``parenthesis(?char,+char)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="lower_upper/2"> </div>
-
-.. index:: lower_upper/2
-.. _characterp/0::lower_upper/2:
-
-``lower_upper/2``
-^^^^^^^^^^^^^^^^^
-
-Recognizes and converts between lower and upper case letters.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``lower_upper(Char1,Char2)``
-| **Mode and number of proofs:**
-|    ``lower_upper(?char,?char)`` - ``zero_or_more``
-|    ``lower_upper(+char,?char)`` - ``zero_or_one``
-|    ``lower_upper(?char,+char)`` - ``zero_or_one``
 
 
 ------------
