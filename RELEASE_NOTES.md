@@ -30,9 +30,6 @@ Logtalk compiler and runtime
 * IMPROVED: Wording of the lint warning for all-solution predicates that may
 share no variables between the template and the goal arguments.
 
-* FIXED: Using relative file paths in `include/1` directives when using some
-backend compilers such as SICStus Prolog.
-
 Prolog adapter and integration files
 ------------------------------------
 
