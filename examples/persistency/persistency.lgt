@@ -21,13 +21,13 @@
 :- object(persistency).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/10/25,
+		date is 2019/11/18,
 		comment is 'Simple example of object dynamic state persistency across loads.'
 	]).
 
-	:- include(persistency('state.pl')).
+	:- include('state.pl').
 
 	:- public(state/1).
 	:- mode(state(?term), zero_or_more).

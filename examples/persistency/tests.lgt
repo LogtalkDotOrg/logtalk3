@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2019/11/18,
 		comment is 'Unit tests for the "persistency" example.'
@@ -46,5 +46,11 @@
 
 	test(persistency_3) :-
 		reset.
+
+	cleanup :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, 'state.pl', File),
+		catch(ignore(os::delete_file(File)), _, true).
 
 :- end_object.

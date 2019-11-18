@@ -21,6 +21,9 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
+	% ensure the "state.pl" file exists
+	open('state.pl', append, Stream), close(Stream),
+	logtalk_load(os(loader)),
 	logtalk_load(persistency, [debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
