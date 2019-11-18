@@ -64,7 +64,8 @@ library.
 Tools
 _____
 
-* IMPROVED: The `lgtdoc` tool to write predicate lists sorted.
+* IMPROVED: The `lgtdoc` tool to write predicate index lists sorted by
+predicate name.
 
 * IMPROVED: The `lgtunit` tool compatibility of the generated xUnit reports
 with xUnit output processors.
@@ -88,6 +89,8 @@ Examples
 --------
 
 * ADDED: Simple multi-threaded implementation of a ping-pong game.
+
+* ADDED: Threaded engine implementation of a priority message queue.
 
 * ADDED: Simple Java-based GUI interface to the `questions` example.
 

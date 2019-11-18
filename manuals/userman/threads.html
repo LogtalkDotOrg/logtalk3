@@ -614,13 +614,13 @@ yes
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">handle/1</span></code> predicate, after performing a task, can use the
-<a class="reference internal" href="../refman/predicates/threaded_engine_yield_1.html#predicates-threaded-engine-yield-1"><span class="std std-ref">threaded_engine_yield/1</span></a>
-built-in predicate to make the task results available for consumption
-using the <code class="docutils literal notranslate"><span class="pre">threaded_engine_next/2</span></code> built-in predicate. Blocking
-semantics are used by these two predicates: the
-<code class="docutils literal notranslate"><span class="pre">threaded_engine_yield/1</span></code> predicate blocks until the returned solution
-is consumed while the <code class="docutils literal notranslate"><span class="pre">threaded_engine_next/2</span></code> predicate blocks until
-a solution becomes available.</p>
+<a class="reference internal" href="../refman/predicates/threaded_engine_yield_1.html#predicates-threaded-engine-yield-1"><span class="std std-ref">threaded_engine_yield/1</span></a> built-in predicate to make the
+task results available for consumption using the <code class="docutils literal notranslate"><span class="pre">threaded_engine_next/2</span></code>
+and <code class="docutils literal notranslate"><span class="pre">threaded_engine_next_reified/2</span></code> built-in predicates. Blocking
+semantics are used by these two predicates: the <code class="docutils literal notranslate"><span class="pre">threaded_engine_yield/1</span></code>
+predicate blocks until the returned solution is consumed while the
+<code class="docutils literal notranslate"><span class="pre">threaded_engine_next/2</span></code> predicate blocks until a solution becomes
+available.</p>
 </div>
 <div class="section" id="multi-threading-performance">
 <span id="threads-performance"></span><h2>Multi-threading performance<a class="headerlink" href="#multi-threading-performance" title="Permalink to this headline">¶</a></h2>

@@ -495,13 +495,13 @@ would be created using the call:
    yes
 
 The ``handle/1`` predicate, after performing a task, can use the
-:ref:`predicates_threaded_engine_yield_1`
-built-in predicate to make the task results available for consumption
-using the ``threaded_engine_next/2`` built-in predicate. Blocking
-semantics are used by these two predicates: the
-``threaded_engine_yield/1`` predicate blocks until the returned solution
-is consumed while the ``threaded_engine_next/2`` predicate blocks until
-a solution becomes available.
+:ref:`predicates_threaded_engine_yield_1` built-in predicate to make the
+task results available for consumption using the ``threaded_engine_next/2``
+and ``threaded_engine_next_reified/2`` built-in predicates. Blocking
+semantics are used by these two predicates: the ``threaded_engine_yield/1``
+predicate blocks until the returned solution is consumed while the
+``threaded_engine_next/2`` predicate blocks until a solution becomes
+available.
 
 .. _threads_performance:
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on November 15, 2019
+%  Last updated on November 18, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -142,6 +142,7 @@ logtalk_library_path(persistency, examples('persistency/')).
 logtalk_library_path(philosophers, threads('philosophers/')).
 logtalk_library_path(ping_pong, threads('ping_pong/')).
 logtalk_library_path(planets, examples('planets/')).
+logtalk_library_path(pmq, threads('pmq/')).
 logtalk_library_path(poem, examples('poem/')).
 logtalk_library_path(points, examples('points/')).
 logtalk_library_path(polygons, examples('polygons/')).
