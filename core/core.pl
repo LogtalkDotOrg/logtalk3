@@ -3410,7 +3410,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 33, 0, b01)).
+'$lgt_version_data'(logtalk(3, 33, 0, b02)).
 
 
 
@@ -24217,7 +24217,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(FileError)
 	),
 	% find the full file name as the extension may be missing
-	(	'$lgt_source_file_name'(ExpandedFile, [], Directory, _, _, SourceFile),
+	'$lgt_current_directory'(CurrentDirectory),
+	(	'$lgt_source_file_name'(ExpandedFile, ['$relative_to'(CurrentDirectory)], Directory, _, _, SourceFile),
 		% avoid a loading loop by checking that the file name is different
 		% from the name of the file containing the include/1 directive
 		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),
