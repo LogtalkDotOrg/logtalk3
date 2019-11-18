@@ -1599,7 +1599,9 @@
 	ensure_file(File) :-
 		(	file_exists(File) ->
 			true
-		;	open(File, append, Stream),
+		;	decompose_file_name(File, Directory, _),
+			make_directory_path(Directory),
+			open(File, append, Stream),
 			close(Stream)
 		).
 
