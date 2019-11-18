@@ -58,6 +58,11 @@ with links sub-diagrams, source code, and API documentation.
 * IMPROVED: The `lgtunit` tool documentation section on testing input/output
 predicates.
 
+Library
+-------
+
+* ADDED: Predicate `ensure_file/1` to the `os` library.
+
 Tools
 _____
 

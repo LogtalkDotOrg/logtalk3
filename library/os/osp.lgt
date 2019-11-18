@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.24,
+		version is 1.25,
 		author is 'Paulo Moura',
-		date is 2019/05/07,
+		date is 2019/11/18,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os, os_types]
 	]).
@@ -165,6 +165,13 @@
 	:- mode(delete_file(+atom), one).
 	:- info(delete_file/1, [
 		comment is 'Deletes a file.',
+		argnames is ['File']
+	]).
+
+	:- public(ensure_file/1).
+	:- mode(ensure_file(+atom), one).
+	:- info(ensure_file/1, [
+		comment is 'Ensures that a file exists, creating it if necessary.',
 		argnames is ['File']
 	]).
 

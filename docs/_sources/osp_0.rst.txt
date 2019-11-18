@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1.24
-| **Date:** 2019/5/7
+| **Version:** 1.25
+| **Date:** 2019/11/18
 
 | **Compilation flags:**
 |    ``static``
@@ -488,6 +488,29 @@ Deletes a file.
 |    ``delete_file(File)``
 | **Mode and number of proofs:**
 |    ``delete_file(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="ensure_file/1"> </div>
+
+.. index:: ensure_file/1
+.. _osp/0::ensure_file/1:
+
+``ensure_file/1``
+^^^^^^^^^^^^^^^^^
+
+Ensures that a file exists, creating it if necessary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ensure_file(File)``
+| **Mode and number of proofs:**
+|    ``ensure_file(+atom)`` - ``one``
 
 
 ------------

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.11,
+		version is 0.12,
 		author is 'Paulo Moura',
-		date is 2019/05/07,
+		date is 2019/11/18,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -153,6 +153,18 @@
 		\+ os::file_exists(TestFile1),
 		os::file_exists(TestFile2),
 		os::delete_file(TestFile2).
+
+	test(os_ensure_file_1_01) :-
+		this(This),
+		object_property(This, file(Path)),
+		os::ensure_file(Path).
+
+	test(os_ensure_file_1_02) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, ensure_file, EnsureFile),
+		os::ensure_file(EnsureFile),
+		os::file_exists(EnsureFile).
 
 	test(os_directory_exists_1_01) :-
 		this(This),
@@ -357,6 +369,8 @@
 	cleanup :-
 		this(This),
 		object_property(This, file(_,Directory)),
+		atom_concat(Directory, ensure_file, EnsureFile),
+		catch(ignore(os::delete_file(EnsureFile)), _, true),
 		atom_concat(Directory, test_file, TestFile),
 		catch(ignore(os::delete_file(TestFile)), _, true),
 		atom_concat(Directory, test_file_1, TestFile1),

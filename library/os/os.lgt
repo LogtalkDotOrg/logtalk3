@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.54,
+		version is 1.55,
 		author is 'Paulo Moura',
-		date is 2019/10/09,
+		date is 2019/11/18,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1589,6 +1589,13 @@
 		:- initialization((write('WARNING: backend Prolog compiler not supported!'), nl)).
 
 	:- endif.
+
+	ensure_file(File) :-
+		(	file_exists(File) ->
+			true
+		;	open(File, append, Stream),
+			close(Stream)
+		).
 
 	decompose_file_name(File, Directory, Basename) :-
 		atom_codes(File, FileCodes),
