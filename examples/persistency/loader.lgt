@@ -18,6 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
+:- initialization((
+	% ensure the "state.pl" file exists
+	open('state.pl', append, Stream), close(Stream),
+	logtalk_load(os(loader)),
 	logtalk_load(persistency)
-).
+)).

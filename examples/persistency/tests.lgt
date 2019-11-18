@@ -22,25 +22,29 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2017/10/25,
+		date is 2019/11/18,
 		comment is 'Unit tests for the "persistency" example.'
+	]).
+
+	:- uses(persistency, [
+		add/1, state/1, save/0, reset/0
 	]).
 
 	cover(persistency).
 
 	test(persistency_1) :-
-		persistency::add(a),
-		persistency::add(b),
-		persistency::add(c),
-		setof(Term, persistency::state(Term), Terms),
+		add(a),
+		add(b),
+		add(c),
+		setof(Term, state(Term), Terms),
 		ground(Terms), Terms = [a,b,c| _].
 
 	test(persistency_2) :-
-		persistency::save.
+		save.
 
 	test(persistency_3) :-
-		persistency::reset.
+		reset.
 
 :- end_object.

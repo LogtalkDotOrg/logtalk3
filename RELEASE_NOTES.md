@@ -83,6 +83,9 @@ Examples
 
 * ADDED: Simple Java-based GUI interface to the `questions` example.
 
+* FIXED: The loader file of the `persistency` example to load the required
+`os` library and create the saved state file if it doesn't exist.
+
 
 3.32.0 - November 5, 2019
 =========================

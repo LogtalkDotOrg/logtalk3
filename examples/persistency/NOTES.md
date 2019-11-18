@@ -23,4 +23,6 @@ file.
 This example illustrates a very simple solution for persisting an object
 dynamic state across sessions. It uses a plain Prolog file for saving the
 state and an include/1 directive to automatically restore the saved state
-when the object is loaded. See also the `serialization` example.
+when the object is loaded. The saved state file is created if it doesn't
+exist by the `loader.lgt` file before loading the example itself. See also
+the `serialization` example.
