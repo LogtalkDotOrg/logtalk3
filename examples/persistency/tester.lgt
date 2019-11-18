@@ -22,7 +22,9 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	% ensure the "state.pl" file exists
-	open('state.pl', append, Stream), close(Stream),
+	logtalk_load_context(directory, Directory),
+	atom_concat(Directory, 'state.pl', File),
+	open(File, append, Stream), close(Stream),
 	logtalk_load(os(loader)),
 	logtalk_load(persistency, [debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),

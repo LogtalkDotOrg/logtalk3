@@ -20,7 +20,9 @@
 
 :- initialization((
 	% ensure the "state.pl" file exists
-	open('state.pl', append, Stream), close(Stream),
+	logtalk_load_context(directory, Directory),
+	atom_concat(Directory, 'state.pl', File),
+	open(File, append, Stream), close(Stream),
 	logtalk_load(os(loader)),
 	logtalk_load(persistency)
 )).
