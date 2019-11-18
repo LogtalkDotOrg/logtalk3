@@ -88,9 +88,11 @@ predicate to use assertions to simplify debugging.
 Examples
 --------
 
-* ADDED: Simple multi-threaded implementation of a ping-pong game.
+* ADDED: Simple multi-threaded implementation of a ping-pong game,
+`threads/ping_pong`.
 
-* ADDED: Threaded engine implementation of a priority message queue.
+* ADDED: Threaded engine implementation of a priority message queue,
+`engines/pmq`.
 
 * ADDED: Simple Java-based GUI interface to the `questions` example.
 
