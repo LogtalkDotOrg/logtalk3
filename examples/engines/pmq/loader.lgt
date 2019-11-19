@@ -21,5 +21,5 @@
 :- initialization((
 	logtalk_load(heaps(loader)),
 	logtalk_load(types(pairs)),
-	logtalk_load(pmq)
+	logtalk_load([pmq, split])
 )).

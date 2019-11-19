@@ -31,16 +31,16 @@ yes
 
 % retrieve the current messages sorted by priority:
 
-| ?- pmq::important(Ms).
-Ms = [who, let, the, dogs, out]
+| ?- pmq::messages(Messages).
+Messages = [who, let, the, dogs, out]
 yes
 
 
 % after retrieving the messages the priority queue
 % is empty until new messages are received:
 
-| ?- pmq::important(Ms).
-Ms = []
+| ?- pmq::messages(Messages).
+Messages = []
 yes
 
 
@@ -52,6 +52,28 @@ yes
 
 % retrieve the current messages sorted by priority:
 
-| ?- pmq::important(Ms)
-Ms = [have, fun, ':-)']
+| ?- pmq::messages(Messages)
+Messages = [have, fun, ':-)']
+yes
+
+
+% same messages but to an alternative implementation that splits top messages
+% from normal messages instead of sorting all messages by priority
+
+| ?- split::(send(13-let), send(5-out), send(11-the), send(17-who), send(7-dogs)).
+yes
+
+| ?- split::messages(List).
+List = [let, the, who, out, dogs]
+yes
+
+| ?- split::messages(List).
+List = []
+yes
+
+| ?- split::(send(8-fun), send(11-have), send(3-':-)')).
+yes
+
+| ?- split::messages(List).
+List = [have, fun, ':-)']
 yes

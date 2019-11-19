@@ -21,4 +21,10 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains an implementation of a message priority queue using
-a perpetual threaded engine holding the priority queue.
+a perpetual threaded engine holding the priority queue. At any moment, we
+ask for a list of the pending messages ordered by priority.
+
+A variant is also provided that splits top messages from normal messages
+into separate queues. In this case, asking for a list of the pending
+messages returns a list with top messages before the normal messages but
+keeping the message sent order otherwise.

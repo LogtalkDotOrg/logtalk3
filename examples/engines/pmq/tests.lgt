@@ -29,22 +29,40 @@
 	]).
 
 	cover(pmq).
+	cover(split).
 
-	test(priority_queue_01, true(Ms == [])) :-
-		pmq::important(Ms).
+	test(pmq_01, true(Messages == [])) :-
+		pmq::messages(Messages).
 
-	test(priority_queue_02, true(Ms == [who, let, the, dogs, out])) :-
+	test(pmq_02, true(Messages == [who, let, the, dogs, out])) :-
 		pmq::(send(13-let), send(5-out), send(11-the), send(17-who), send(7-dogs)),
-		pmq::important(Ms).
+		pmq::messages(Messages).
 
-	test(priority_queue_03, true(Ms == [])) :-
-		pmq::important(Ms).
+	test(pmq_03, true(Messages == [])) :-
+		pmq::messages(Messages).
 
-	test(priority_queue_04, true(Ms == [have, fun, ':-)'])) :-
+	test(pmq_04, true(Messages == [have, fun, ':-)'])) :-
 		pmq::(send(8-fun), send(11-have), send(3-':-)')),
-		pmq::important(Ms).
+		pmq::messages(Messages).
 
-	test(priority_queue_05, true(Ms == [])) :-
-		pmq::important(Ms).
+	test(pmq_05, true(Messages == [])) :-
+		pmq::messages(Messages).
+
+	test(split_01, true(Messages == [])) :-
+		split::messages(Messages).
+
+	test(split_02, true(Messages == [let, the, who, out, dogs])) :-
+		split::(send(13-let), send(5-out), send(11-the), send(17-who), send(7-dogs)),
+		split::messages(Messages).
+
+	test(split_03, true(Messages == [])) :-
+		split::messages(Messages).
+
+	test(split_04, true(Messages == [have, fun, ':-)'])) :-
+		split::(send(8-fun), send(11-have), send(3-':-)')),
+		split::messages(Messages).
+
+	test(split_05, true(Messages == [])) :-
+		split::messages(Messages).
 
 :- end_object.
