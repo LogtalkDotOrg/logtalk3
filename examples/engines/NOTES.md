@@ -19,6 +19,9 @@ ________________________________________________________________________
 
 This directory contains several examples of using threaded engines:
 
+- `ebench`
+	benchmarking support for evaluating the performance of threaded
+	engines creation and destroying
 - `emetas`  
 	examples of meta-predicates implemented using engines
 - `fluents`  
@@ -27,6 +30,9 @@ This directory contains several examples of using threaded engines:
 	examples of defining interactors using engines
 - `lazy`  
 	examples of defining lazy predicates using engines and coroutining
+- `pmq`
+	threaded engine implementation of a priority message queue showing
+	how to use a perpetual engine to hold an arbitrary structure
 - `sums`  
 	example of using engines to accumulate state
 - `tbbt`  
@@ -35,4 +41,5 @@ This directory contains several examples of using threaded engines:
 - `whisper`  
 	example of creating a chain of engines passing a term
 - `yield`  
-	example of fetching answers from an engine returned using the yield predicate
+	example of fetching answers from an engine returned using the
+	yield predicate

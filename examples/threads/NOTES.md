@@ -37,3 +37,54 @@ preferably, use of the 64 bits version of the compatible Prolog compilers.
 There are known Prolog bugs on the multi-threading support found on XSB 
 and YAP. These bugs prevent some examples to run and may lead to crashes.
 Some bugs are platform-specific, only occurring on some operating-systems.
+
+Follows a short description of the included example (in alphabetical order):
+
+- `barriers`
+	barrier synchronization using threaded notifications
+- `birthdays`
+	using threads to represent agents
+- `blackboard`
+	synchronization of threads using shared resources
+- `buckets`
+	atomic updates example
+- `buffer`
+	synchronizing threads writing to and reading from a buffer
+- `checkpoint`
+	using a barrier as a checkpoint to synchronize a set of worker
+	threads assembling a set of items
+- `fft`
+	multi-threading computation of the Fast Fourier Transform
+- `fibonacci`
+	multi-threading solution for computing Fibonacci numbers
+- `functions`
+	competitive or-parallelism computation of functions
+- `hanoi`
+	multi-threading version of the "Towers of Hanoi" problem
+- `integration`
+	multi-threading implementation of recursive Gaussian quadrature
+	methods for numerical integration of functions of one variable
+- `integration2d`
+	multi-threading implementation of recursive Gaussian quadrature
+	methods for numerical integration of functions of two variables
+- `metered_concurrency`
+	an implementation of a metered concurrency task
+- `mtbatch`
+	multi-threading benchmarks for and-parallelism and competitive
+	or-parallelism
+- `nondet`
+	non-deterministic multi-threading calls
+- `philosophers`
+	classical "dining philosophers" problem using threads
+- `ping_pong`
+	two threads playing a ping-pong game
+- `primes`
+	multi-threading computation of prime numbers in a given interval
+- `sorting`
+	multi-threading implementation of the merge sort algorithm
+- `sync`
+	synchronization of predicates with side-effects
+- `tak`
+	multi-threaded implementation of the Takeuchi function
+- `team`
+	an implementation of a synchronous concurrency task
