@@ -273,10 +273,6 @@
 
 
 <xsl:template match="logtalk_entity/predicates">
-	<xsl:text>.. raw:: html</xsl:text>
-   	<xsl:value-of select="$nl2" />
-	<xsl:text>   &lt;/div&gt;</xsl:text>
-   	<xsl:value-of select="$nl2" />
 	<xsl:text>Public predicates</xsl:text>
 	<xsl:value-of select="$nl" />
 	<xsl:text>-----------------</xsl:text>
