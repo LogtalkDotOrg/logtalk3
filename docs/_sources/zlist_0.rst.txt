@@ -28,6 +28,19 @@ Zipper list predicates. Zippers should be regarded as opaque terms.
    :local:
    :backlinks: top
 
+.. raw:: html
+
+   </div>
+
+Inherited public predicates
+---------------------------
+
+:ref:`zipperp/0::apply/2`  :ref:`zipperp/0::current/2`  :ref:`zipperp/0::delete_all_after/2`  :ref:`zipperp/0::delete_all_after_and_unzip/2`  :ref:`zipperp/0::delete_all_before/2`  :ref:`zipperp/0::delete_all_before_and_unzip/2`  :ref:`zipperp/0::delete_and_next/2`  :ref:`zipperp/0::delete_and_previous/2`  :ref:`zipperp/0::delete_and_unzip/2`  :ref:`zipperp/0::forward/2`  :ref:`zipperp/0::forward/3`  :ref:`zipperp/0::insert_after/3`  :ref:`zipperp/0::insert_before/3`  :ref:`zipperp/0::next/2`  :ref:`zipperp/0::next/3`  :ref:`zipperp/0::previous/2`  :ref:`zipperp/0::previous/3`  :ref:`zipperp/0::replace/3`  :ref:`zipperp/0::rewind/2`  :ref:`zipperp/0::rewind/3`  :ref:`zipperp/0::unzip/2`  :ref:`zipperp/0::zip/2`  :ref:`zipperp/0::zip/3`  
+
+.. raw:: html
+
+   </div>
+
 Public predicates
 -----------------
 

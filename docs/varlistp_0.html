@@ -290,38 +290,43 @@
 </div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<li><p><a class="reference internal" href="#inherited-public-predicates" id="id1">Inherited public predicates</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id2">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#append-3" id="id2"><code class="docutils literal notranslate"><span class="pre">append/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#check-1" id="id3"><code class="docutils literal notranslate"><span class="pre">check/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#delete-3" id="id4"><code class="docutils literal notranslate"><span class="pre">delete/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#empty-1" id="id5"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#flatten-2" id="id6"><code class="docutils literal notranslate"><span class="pre">flatten/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#last-2" id="id7"><code class="docutils literal notranslate"><span class="pre">last/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#length-2" id="id8"><code class="docutils literal notranslate"><span class="pre">length/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#memberchk-2" id="id9"><code class="docutils literal notranslate"><span class="pre">memberchk/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nextto-3" id="id10"><code class="docutils literal notranslate"><span class="pre">nextto/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nth0-3" id="id11"><code class="docutils literal notranslate"><span class="pre">nth0/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nth0-4" id="id12"><code class="docutils literal notranslate"><span class="pre">nth0/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nth1-3" id="id13"><code class="docutils literal notranslate"><span class="pre">nth1/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nth1-4" id="id14"><code class="docutils literal notranslate"><span class="pre">nth1/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#permutation-2" id="id15"><code class="docutils literal notranslate"><span class="pre">permutation/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#prefix-2" id="id16"><code class="docutils literal notranslate"><span class="pre">prefix/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#remove-duplicates-2" id="id17"><code class="docutils literal notranslate"><span class="pre">remove_duplicates/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#reverse-2" id="id18"><code class="docutils literal notranslate"><span class="pre">reverse/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#same-length-2" id="id19"><code class="docutils literal notranslate"><span class="pre">same_length/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#select-3" id="id20"><code class="docutils literal notranslate"><span class="pre">select/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#sublist-2" id="id21"><code class="docutils literal notranslate"><span class="pre">sublist/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#subtract-3" id="id22"><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#suffix-2" id="id23"><code class="docutils literal notranslate"><span class="pre">suffix/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-1" id="id24"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#append-3" id="id3"><code class="docutils literal notranslate"><span class="pre">append/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-1" id="id4"><code class="docutils literal notranslate"><span class="pre">check/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#delete-3" id="id5"><code class="docutils literal notranslate"><span class="pre">delete/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#empty-1" id="id6"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#flatten-2" id="id7"><code class="docutils literal notranslate"><span class="pre">flatten/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#last-2" id="id8"><code class="docutils literal notranslate"><span class="pre">last/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#length-2" id="id9"><code class="docutils literal notranslate"><span class="pre">length/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#memberchk-2" id="id10"><code class="docutils literal notranslate"><span class="pre">memberchk/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nextto-3" id="id11"><code class="docutils literal notranslate"><span class="pre">nextto/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth0-3" id="id12"><code class="docutils literal notranslate"><span class="pre">nth0/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth0-4" id="id13"><code class="docutils literal notranslate"><span class="pre">nth0/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth1-3" id="id14"><code class="docutils literal notranslate"><span class="pre">nth1/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth1-4" id="id15"><code class="docutils literal notranslate"><span class="pre">nth1/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#permutation-2" id="id16"><code class="docutils literal notranslate"><span class="pre">permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prefix-2" id="id17"><code class="docutils literal notranslate"><span class="pre">prefix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#remove-duplicates-2" id="id18"><code class="docutils literal notranslate"><span class="pre">remove_duplicates/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reverse-2" id="id19"><code class="docutils literal notranslate"><span class="pre">reverse/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#same-length-2" id="id20"><code class="docutils literal notranslate"><span class="pre">same_length/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-3" id="id21"><code class="docutils literal notranslate"><span class="pre">select/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sublist-2" id="id22"><code class="docutils literal notranslate"><span class="pre">sublist/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subtract-3" id="id23"><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suffix-2" id="id24"><code class="docutils literal notranslate"><span class="pre">suffix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-1" id="id25"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id25">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id26">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id27">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id28">Operators</a></p></li>
 </ul>
 </div>
+</div><div class="section" id="inherited-public-predicates">
+<h2><a class="toc-backref" href="#contents">Inherited public predicates</a><a class="headerlink" href="#inherited-public-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div></div>
 <div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="append/3"> </div><div class="section" id="append-3">

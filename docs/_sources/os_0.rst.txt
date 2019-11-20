@@ -36,6 +36,19 @@ Portable operating-system access predicates.
    :local:
    :backlinks: top
 
+.. raw:: html
+
+   </div>
+
+Inherited public predicates
+---------------------------
+
+:ref:`osp/0::absolute_file_name/2`  :ref:`osp/0::change_directory/1`  :ref:`osp/0::command_line_arguments/1`  :ref:`osp/0::cpu_time/1`  :ref:`osp/0::date_time/7`  :ref:`osp/0::decompose_file_name/3`  :ref:`osp/0::decompose_file_name/4`  :ref:`osp/0::delete_directory/1`  :ref:`osp/0::delete_file/1`  :ref:`osp/0::directory_exists/1`  :ref:`osp/0::directory_files/2`  :ref:`osp/0::directory_files/3`  :ref:`osp/0::ensure_directory/1`  :ref:`osp/0::ensure_file/1`  :ref:`osp/0::environment_variable/2`  :ref:`osp/0::file_exists/1`  :ref:`osp/0::file_modification_time/2`  :ref:`osp/0::file_permission/2`  :ref:`osp/0::file_size/2`  :ref:`osp/0::make_directory/1`  :ref:`osp/0::make_directory_path/1`  :ref:`osp/0::operating_system_type/1`  :ref:`osp/0::pid/1`  :ref:`osp/0::rename_file/2`  :ref:`osp/0::shell/1`  :ref:`osp/0::shell/2`  :ref:`osp/0::sleep/1`  :ref:`osp/0::time_stamp/1`  :ref:`osp/0::wall_time/1`  :ref:`osp/0::working_directory/1`  
+
+.. raw:: html
+
+   </div>
+
 Public predicates
 -----------------
 

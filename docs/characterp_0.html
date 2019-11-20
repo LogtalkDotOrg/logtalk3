@@ -290,36 +290,41 @@
 </div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<li><p><a class="reference internal" href="#inherited-public-predicates" id="id1">Inherited public predicates</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id2">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#is-alpha-1" id="id2"><code class="docutils literal notranslate"><span class="pre">is_alpha/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-alphanumeric-1" id="id3"><code class="docutils literal notranslate"><span class="pre">is_alphanumeric/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-ascii-1" id="id4"><code class="docutils literal notranslate"><span class="pre">is_ascii/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-bin-digit-1" id="id5"><code class="docutils literal notranslate"><span class="pre">is_bin_digit/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-control-1" id="id6"><code class="docutils literal notranslate"><span class="pre">is_control/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-dec-digit-1" id="id7"><code class="docutils literal notranslate"><span class="pre">is_dec_digit/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-end-of-line-1" id="id8"><code class="docutils literal notranslate"><span class="pre">is_end_of_line/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-hex-digit-1" id="id9"><code class="docutils literal notranslate"><span class="pre">is_hex_digit/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-layout-1" id="id10"><code class="docutils literal notranslate"><span class="pre">is_layout/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-letter-1" id="id11"><code class="docutils literal notranslate"><span class="pre">is_letter/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-lower-case-1" id="id12"><code class="docutils literal notranslate"><span class="pre">is_lower_case/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-newline-1" id="id13"><code class="docutils literal notranslate"><span class="pre">is_newline/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-octal-digit-1" id="id14"><code class="docutils literal notranslate"><span class="pre">is_octal_digit/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-period-1" id="id15"><code class="docutils literal notranslate"><span class="pre">is_period/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-punctuation-1" id="id16"><code class="docutils literal notranslate"><span class="pre">is_punctuation/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-quote-1" id="id17"><code class="docutils literal notranslate"><span class="pre">is_quote/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-upper-case-1" id="id18"><code class="docutils literal notranslate"><span class="pre">is_upper_case/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-vowel-1" id="id19"><code class="docutils literal notranslate"><span class="pre">is_vowel/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-white-space-1" id="id20"><code class="docutils literal notranslate"><span class="pre">is_white_space/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#lower-upper-2" id="id21"><code class="docutils literal notranslate"><span class="pre">lower_upper/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parenthesis-2" id="id22"><code class="docutils literal notranslate"><span class="pre">parenthesis/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-alpha-1" id="id3"><code class="docutils literal notranslate"><span class="pre">is_alpha/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-alphanumeric-1" id="id4"><code class="docutils literal notranslate"><span class="pre">is_alphanumeric/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-ascii-1" id="id5"><code class="docutils literal notranslate"><span class="pre">is_ascii/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-bin-digit-1" id="id6"><code class="docutils literal notranslate"><span class="pre">is_bin_digit/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-control-1" id="id7"><code class="docutils literal notranslate"><span class="pre">is_control/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-dec-digit-1" id="id8"><code class="docutils literal notranslate"><span class="pre">is_dec_digit/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-end-of-line-1" id="id9"><code class="docutils literal notranslate"><span class="pre">is_end_of_line/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-hex-digit-1" id="id10"><code class="docutils literal notranslate"><span class="pre">is_hex_digit/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-layout-1" id="id11"><code class="docutils literal notranslate"><span class="pre">is_layout/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-letter-1" id="id12"><code class="docutils literal notranslate"><span class="pre">is_letter/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-lower-case-1" id="id13"><code class="docutils literal notranslate"><span class="pre">is_lower_case/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-newline-1" id="id14"><code class="docutils literal notranslate"><span class="pre">is_newline/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-octal-digit-1" id="id15"><code class="docutils literal notranslate"><span class="pre">is_octal_digit/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-period-1" id="id16"><code class="docutils literal notranslate"><span class="pre">is_period/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-punctuation-1" id="id17"><code class="docutils literal notranslate"><span class="pre">is_punctuation/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-quote-1" id="id18"><code class="docutils literal notranslate"><span class="pre">is_quote/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-upper-case-1" id="id19"><code class="docutils literal notranslate"><span class="pre">is_upper_case/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-vowel-1" id="id20"><code class="docutils literal notranslate"><span class="pre">is_vowel/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-white-space-1" id="id21"><code class="docutils literal notranslate"><span class="pre">is_white_space/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lower-upper-2" id="id22"><code class="docutils literal notranslate"><span class="pre">lower_upper/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#parenthesis-2" id="id23"><code class="docutils literal notranslate"><span class="pre">parenthesis/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id23">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id24">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id25">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id24">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id25">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id26">Operators</a></p></li>
 </ul>
 </div>
+</div><div class="section" id="inherited-public-predicates">
+<h2><a class="toc-backref" href="#contents">Inherited public predicates</a><a class="headerlink" href="#inherited-public-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div></div>
 <div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="is_alpha/1"> </div><div class="section" id="is-alpha-1">

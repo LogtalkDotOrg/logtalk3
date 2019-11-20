@@ -351,9 +351,18 @@
 
 	<define name="predicates">
 		<element name="predicates">
+			<ref name="inherited"/>
 			<ref name="public"/>
 			<ref name="protected"/>
 			<ref name="private"/>
+		</element>
+	</define>
+
+	<define name="inherited">
+		<element name="inherited">
+			<zeroOrMore>
+				<ref name="inherited_predicate"/>
+			</zeroOrMore>
 		</element>
 	</define>
 
@@ -379,6 +388,15 @@
 			<zeroOrMore>
 				<ref name="predicate"/>
 			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="inherited_predicate">
+		<element name="inherited_predicate">
+			<ref name="name"/>
+			<ref name="entity"/>
+			<ref name="functor"/>
+			<ref name="file"/>
 		</element>
 	</define>
 

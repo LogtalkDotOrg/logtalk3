@@ -97,7 +97,9 @@
 
 <!ELEMENT alternative (#PCDATA)>
 
-<!ELEMENT predicates (public, protected, private)>
+<!ELEMENT predicates (inherited, public, protected, private)>
+
+<!ELEMENT inherited (inherited_predicate*)>
 
 <!ELEMENT public (predicate*)>
 
@@ -105,6 +107,8 @@
 
 <!ELEMENT private (predicate*)>
 
+
+<!ELEMENT inherited_predicate (name, entity, functor, file)>
 
 <!ELEMENT predicate (name, scope, compilation, meta?, coinductive?, mode*, comment?, template?, (argnames|arguments)?, exceptions?, remarks?, info*, examples?)>
 

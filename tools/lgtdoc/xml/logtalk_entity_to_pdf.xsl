@@ -10,7 +10,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
 %
-%  Last updated on June 15, 2019
+%  Last updated on November 20, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -432,6 +432,31 @@
 			font-weight="bold" 
 			keep-with-next="always"
 			space-before="18pt">
+		Inherited public predicates
+	</fo:block>
+	<xsl:choose>
+		<xsl:when test="inherited/inherited_predicate">
+			<fo:block space-before="10pt">
+				<xsl:apply-templates select="inherited/inherited_predicate"/>
+			</fo:block>
+		</xsl:when>
+		<xsl:otherwise>
+			<fo:block
+					font-size="10pt" 
+					font-family="serif" 
+					font-style="italic"
+					space-before="10pt">
+				(none)
+			</fo:block>
+		</xsl:otherwise>
+	</xsl:choose>
+
+	<fo:block
+			font-size="14pt" 
+			font-family="sans-serif" 
+			font-weight="bold" 
+			keep-with-next="always"
+			space-before="18pt">
 		Public predicates
 	</fo:block>
 	<xsl:choose>
@@ -521,6 +546,15 @@
 			</fo:block>
 		</xsl:otherwise>
 	</xsl:choose>
+
+</xsl:template>
+
+
+<xsl:template match="*/inherited_predicate">
+
+	<fo:inline font-size="9pt" font-family="monospace"><xsl:value-of select="name"/></fo:inline>
+	<xsl:text> </xsl:text>
+	<xsl:text> </xsl:text>
 
 </xsl:template>
 

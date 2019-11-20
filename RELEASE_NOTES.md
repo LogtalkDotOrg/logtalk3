@@ -64,6 +64,9 @@ library.
 Tools
 _____
 
+* IMPROVED: The `lgtdoc` tool to list inherited public predicates in entity
+documentation.
+
 * IMPROVED: The `lgtdoc` tool to write predicate index lists sorted by
 predicate name.
 
@@ -78,6 +81,9 @@ to test multiple implementations of the same protocol.
 
 * FIXED: The `lgtunit` tool would write single line number information on
 failed tests or steps as "between lines" instead of as "at or above line".
+
+* FIXED: Loading of the `logtalk_index.dtd` file when running the `lgt2txt.sh`
+script.
 
 Tests
 -----

@@ -11,8 +11,8 @@
 Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.
 
 | **Author:** Paulo Moura
-| **Version:** 4.17
-| **Date:** 2019/6/16
+| **Version:** 5.0
+| **Date:** 2019/11/20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,6 +33,19 @@ Documenting tool. Generates XML documenting files for loaded entities and for li
 .. contents::
    :local:
    :backlinks: top
+
+.. raw:: html
+
+   </div>
+
+Inherited public predicates
+---------------------------
+
+:ref:`lgtdocp/0::all/0`  :ref:`lgtdocp/0::all/1`  :ref:`lgtdocp/0::directory/1`  :ref:`lgtdocp/0::directory/2`  :ref:`lgtdocp/0::file/1`  :ref:`lgtdocp/0::file/2`  :ref:`lgtdocp/0::library/1`  :ref:`lgtdocp/0::library/2`  :ref:`lgtdocp/0::option/2`  :ref:`lgtdocp/0::rdirectory/1`  :ref:`lgtdocp/0::rdirectory/2`  :ref:`lgtdocp/0::rlibrary/1`  :ref:`lgtdocp/0::rlibrary/2`  :ref:`lgtdocp/0::set_option/2`  
+
+.. raw:: html
+
+   </div>
 
 Public predicates
 -----------------

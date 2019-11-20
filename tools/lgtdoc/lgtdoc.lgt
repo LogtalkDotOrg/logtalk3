@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.17,
+		version is 5.0,
 		author is 'Paulo Moura',
-		date is 2019/06/16,
+		date is 2019/11/20,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -289,19 +289,19 @@
 		),
 		entity_type(Entity, Type),
 		assertz(type_entity_(Type, Type, Functor, Entity)),
-		write_entity_doc(Entity, Options, StreamOptions),
+		write_entity_doc(Entity, Type, Options, StreamOptions),
 		fail.
 	process(_, _, _, _).
 
-	% write_entity_doc(@entity_identifier)
+	% write_entity_doc(@entity_identifier, +atom, +list, +list)
 	%
 	% writes to disk the entity documentation in XML format
 
-	write_entity_doc(Entity, Options, StreamOptions) :-
+	write_entity_doc(Entity, Type, Options, StreamOptions) :-
 		entity_doc_file_name(Entity, File),
 		convert_stream_options(StreamOptions, ConvertedStreamOptions),
 		open(File, write, Stream, ConvertedStreamOptions),
-		write_entity_xml_file(File, Stream, Entity, Options, StreamOptions),
+		write_entity_xml_file(File, Stream, Entity, Type, Options, StreamOptions),
 		close(Stream).
 
 	% entity_doc_file_name(@nonvar, -atom)
@@ -349,15 +349,15 @@
 		convert_stream_option(StreamOption, StreamOption).
 	:- endif.
 
-	% write_entity_xml_file(@atom, @stream, @list, @list)
+	% write_entity_xml_file(@atom, @stream, @entity_identifier, +atom, @list, @list)
 	%
 	% writes an entity XML file containing the documentation of a compiled entity
 
-	write_entity_xml_file(File, Stream, Entity, Options, StreamOptions) :-
+	write_entity_xml_file(File, Stream, Entity, Type, Options, StreamOptions) :-
 		write_entity_xml_header(Stream, Options, StreamOptions),
 		write_entity_xml_entity(File, Stream, Entity),
 		write_entity_xml_relations(Stream, Entity),
-		write_entity_xml_predicates(Stream, Entity),
+		write_entity_xml_predicates(Stream, Entity, Type),
 		write_entity_xml_operators(Stream, Entity),
 		write_entity_xml_remarks(Stream, Entity),
 		write_entity_xml_see_also(Stream, Entity),
@@ -745,18 +745,33 @@
 		atom_concat(Functor, '_', Aux),
 		atom_concat(Aux, Atom, File).
 
-	% write_entity_xml_predicates(@stream)
+	% write_entity_xml_predicates(@stream, @entity_identifier, +atom)
 	%
 	% writes the predicate documentation
 
-	write_entity_xml_predicates(Stream, Entity) :-
+	write_entity_xml_predicates(Stream, Entity, Type) :-
 		write_xml_open_tag(Stream, predicates, []),
+		write_xml_inherited_predicates(Stream, Entity, Type),
 		write_xml_public_predicates(Stream, Entity),
 		write_xml_protected_predicates(Stream, Entity),
 		write_xml_private_predicates(Stream, Entity),
 		write_xml_close_tag(Stream, predicates).
 
-	% write_xml_public_predicates(@stream)
+	% write_xml_inherited_predicates(@stream, @entity_identifier, +atom)
+	%
+	% writes the list of inherited public predicates
+
+	write_xml_inherited_predicates(Stream, Entity, Type) :-
+		write_xml_open_tag(Stream, inherited, []),
+		inherited_predicates(Type, Entity, Predicates0),
+		sort(1, @=<, Predicates0, Predicates),
+		member(Predicate, Predicates),
+		write_xml_inherited_predicate(Stream, Predicate),
+		fail.
+	write_xml_inherited_predicates(Stream, _, _) :-
+		write_xml_close_tag(Stream, inherited).
+
+	% write_xml_public_predicates(@stream, @entity_identifier)
 	%
 	% writes the documentation of public predicates
 
@@ -777,7 +792,7 @@
 	write_xml_public_predicates(Stream, _) :-
 		write_xml_close_tag(Stream, (public)).
 
-	% write_xml_protected_predicates(@stream)
+	% write_xml_protected_predicates(@stream, @entity_identifier)
 	%
 	% writes the documentation protected predicates
 
@@ -795,7 +810,7 @@
 	write_xml_protected_predicates(Stream, _) :-
 		write_xml_close_tag(Stream, protected).
 
-	% write_xml_private_predicates(@stream)
+	% write_xml_private_predicates(@stream, @entity_identifier)
 	%
 	% writes the documentation of private predicates
 
@@ -813,7 +828,20 @@
 	write_xml_private_predicates(Stream, _) :-
 		write_xml_close_tag(Stream, private).
 
-	% write_xml_predicate(@stream, +atom, +integer, +term)
+	% write_xml_inherited_predicate(@stream, @compound)
+	%
+	% writes the documentation of an inherited predicate
+
+	write_xml_inherited_predicate(Stream, predicate(Name, From, Functor, File)) :-
+		write_xml_open_tag(Stream, inherited_predicate, []),
+		write_xml_cdata_element(Stream, name, [], Name),
+		write_xml_cdata_element(Stream, from, [], From),
+		write_xml_cdata_element(Stream, functor, [], Functor),
+		write_xml_cdata_element(Stream, file, [], File),
+		write_xml_close_tag(Stream, inherited_predicate).
+
+	% write_xml_predicate(@stream, @entity_identifier, +predicate_indicator, +atom, +integer, +term)
+	% write_xml_predicate(@stream, @entity_identifier, +non_terminal_indicator, +atom, +integer, +term)
 	%
 	% writes the documentation of a predicate
 
@@ -1287,6 +1315,43 @@
 		current_category(Entity),
 		category_property(Entity, Property).
 
+	inherited_predicates(protocol, Entity, Predicates) :-
+		create_object(Object, [implements(Entity)], [], []),
+		find_inherited_predicates(Object, Entity, Predicates).
+	inherited_predicates(category, Entity, Predicates) :-
+		create_object(Object, [imports(Entity)], [], []),
+		find_inherited_predicates(Object, Entity, Predicates).
+	inherited_predicates(object, Entity, Predicates) :-
+		(	\+ instantiates_class(Entity, _),
+			\+ specializes_class(Entity, _) ->
+			% prototype
+			create_object(Object, [extends(Entity)], [], [])
+		;	\+ specializes_class(Entity, _) ->
+			% instance
+			Object = Entity
+		;	% class
+			create_object(Object, [instantiates(Entity)], [], [])
+		),
+		find_inherited_predicates(Object, Entity, Predicates).
+
+	find_inherited_predicates(Object, Entity, Predicates) :-
+		findall(
+			predicate(Predicate, From, EntityName/EntityArity, File),
+			(	Object::current_predicate(Name/Arity),
+				functor(Template, Name, Arity),
+				Object::predicate_property(Template, declared_in(From)),
+				From \= Entity,
+				\+ Object::predicate_property(Template, alias_of(_)),
+				(	Object::predicate_property(Template, non_terminal(Predicate)) ->
+					true
+				;	Predicate = Name/Arity
+				),
+				functor(From, EntityName, EntityArity),
+				relation_to_xml_filename(From, File)
+			),
+			Predicates
+		).
+
 	write_indexes(Options) :-
 		write_library_index(Options),
 		write_directory_index(Options),
@@ -1332,11 +1397,11 @@
 		close(Stream).
 
 	kind_ref_doctype_xsd(entity, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/4.3/logtalk_entity.dtd', 'https://logtalk.org/xml/4.3/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/5.0/logtalk_entity.dtd', 'https://logtalk.org/xml/5.0/logtalk_entity.xsd').
 	kind_ref_doctype_xsd(entity, standalone, logtalk_entity-none, none).
 
 	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/4.3/logtalk_index.dtd', 'https://logtalk.org/xml/4.3/logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/5.0/logtalk_index.dtd', 'https://logtalk.org/xml/5.0/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
 	sorted_keys_to_keys([], []).

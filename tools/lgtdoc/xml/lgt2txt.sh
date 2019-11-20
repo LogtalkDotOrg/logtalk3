@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on October 24, 2019
+##   Last updated on November 20, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -142,12 +142,20 @@ if ! [ -e "./logtalk_entity.dtd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.dtd .
 fi
 
+if ! [ -e "./logtalk_index.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.dtd .
+fi
+
 if ! [ -e "./custom.ent" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/custom.ent .
 fi
 
 if ! [ -e "./logtalk_entity.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
+fi
+
+if ! [ -e "./logtalk_index.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.xsd .
 fi
 
 if grep -q "<logtalk" ./*.xml ; then
@@ -182,6 +190,8 @@ fi
 if [ "$PWD" != "$LOGTALKHOME"/xml ] ; then
 	rm -f ./logtalk_entity.dtd
 	rm -f ./logtalk_entity.xsd
+	rm -f ./logtalk_index.dtd
+	rm -f ./logtalk_index.xsd
 	rm -f ./custom.ent
 fi
 

@@ -42,6 +42,19 @@ Basic temporal interval relations. An interval is represented by a compound term
    :local:
    :backlinks: top
 
+.. raw:: html
+
+   </div>
+
+Inherited public predicates
+---------------------------
+
+:ref:`intervalp/0::after/2`  :ref:`intervalp/0::before/2`  :ref:`intervalp/0::contains/2`  :ref:`intervalp/0::during/2`  :ref:`intervalp/0::equal/2`  :ref:`intervalp/0::finished_by/2`  :ref:`intervalp/0::finishes/2`  :ref:`intervalp/0::meets/2`  :ref:`intervalp/0::met_by/2`  :ref:`intervalp/0::new/3`  :ref:`intervalp/0::overlapped_by/2`  :ref:`intervalp/0::overlaps/2`  :ref:`intervalp/0::started_by/2`  :ref:`intervalp/0::starts/2`  :ref:`intervalp/0::valid/1`  
+
+.. raw:: html
+
+   </div>
+
 Public predicates
 -----------------
 

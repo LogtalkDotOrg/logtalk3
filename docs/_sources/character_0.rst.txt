@@ -30,6 +30,19 @@ Character predicates (most of them assume an ASCII representation).
    :local:
    :backlinks: top
 
+.. raw:: html
+
+   </div>
+
+Inherited public predicates
+---------------------------
+
+:ref:`termp/0::check/1`  :ref:`termp/0::depth/2`  :ref:`termp/0::ground/1`  :ref:`characterp/0::is_alpha/1`  :ref:`characterp/0::is_alphanumeric/1`  :ref:`characterp/0::is_ascii/1`  :ref:`characterp/0::is_bin_digit/1`  :ref:`characterp/0::is_control/1`  :ref:`characterp/0::is_dec_digit/1`  :ref:`characterp/0::is_end_of_line/1`  :ref:`characterp/0::is_hex_digit/1`  :ref:`characterp/0::is_layout/1`  :ref:`characterp/0::is_letter/1`  :ref:`characterp/0::is_lower_case/1`  :ref:`characterp/0::is_newline/1`  :ref:`characterp/0::is_octal_digit/1`  :ref:`characterp/0::is_period/1`  :ref:`characterp/0::is_punctuation/1`  :ref:`characterp/0::is_quote/1`  :ref:`characterp/0::is_upper_case/1`  :ref:`characterp/0::is_vowel/1`  :ref:`characterp/0::is_white_space/1`  :ref:`characterp/0::lower_upper/2`  :ref:`termp/0::new/1`  :ref:`termp/0::occurs/2`  :ref:`characterp/0::parenthesis/2`  :ref:`atom/0::replace_sub_atom/4`  :ref:`termp/0::singletons/2`  :ref:`atom/0::split/3`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  
+
+.. raw:: html
+
+   </div>
+
 Public predicates
 -----------------
 

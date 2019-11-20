@@ -192,9 +192,17 @@
 
 <xsd:complexType name="predicates">
 	<xsd:sequence>
+		<xsd:element name="inherited"	type="inherited"/>
 		<xsd:element name="public"		type="public"/>
 		<xsd:element name="protected"	type="protected"/>
 		<xsd:element name="private"		type="private"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="inherited">
+	<xsd:sequence>
+		<xsd:element name="inherited_predicate"	type="inherited_predicate"	minOccurs="0" maxOccurs="unbounded"/>
 	</xsd:sequence>
 </xsd:complexType>
 
@@ -216,6 +224,16 @@
 <xsd:complexType name="private">
 	<xsd:sequence>
 		<xsd:element name="predicate"	type="predicate"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="inherited_predicate">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="entity"		type="xsd:string"/>
+		<xsd:element name="functor"		type="xsd:string"/>
+		<xsd:element name="file"		type="xsd:string"/>
 	</xsd:sequence>
 </xsd:complexType>
 

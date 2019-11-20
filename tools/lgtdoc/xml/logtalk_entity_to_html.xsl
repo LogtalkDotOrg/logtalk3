@@ -17,7 +17,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into HTML files
 %
-%  Last updated on June 15, 2019
+%  Last updated on November 20, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -198,6 +198,19 @@
 
 
 <xsl:template match="logtalk_entity/predicates">
+	<div class="inherited">
+	<h2>Inherited public predicates</h2>
+	<xsl:choose>
+		<xsl:when test="inherited/inherited_predicate">
+			<p><xsl:apply-templates select="inherited/inherited_predicate" /></p>
+		</xsl:when>
+		<xsl:otherwise>
+			<div class="section">
+				<p class="comment">(none)</p>
+			</div>
+		</xsl:otherwise>
+	</xsl:choose>
+	</div>
 	<div class="public">
 	<h2>Public predicates</h2>
 	<xsl:choose>
@@ -252,6 +265,12 @@
 		</xsl:otherwise>
 	</xsl:choose>
 	</div>
+</xsl:template>
+
+
+<xsl:template match="*/inherited_predicate">
+	<code><a href="{file}.html#{name}"><xsl:value-of select="name" /></a></code>
+	<xsl:text>  </xsl:text>
 </xsl:template>
 
 

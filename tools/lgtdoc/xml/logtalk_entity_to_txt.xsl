@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into text files
 %
-%  Last updated on June 15, 2019
+%  Last updated on November 20, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -188,6 +188,18 @@
 
 <xsl:template match="logtalk_entity/predicates">
 	<xsl:value-of select="$hr2" />
+	<xsl:text>Inherited public predicates</xsl:text><xsl:value-of select="$nl2" />
+	<xsl:choose>
+		<xsl:when test="inherited/inherited_predicate">
+			<xsl:apply-templates select="inherited/inherited_predicate" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text>(none)</xsl:text><xsl:value-of select="$nl2" />
+			</div>
+		</xsl:otherwise>
+	</xsl:choose>
+	</div>
+	<xsl:value-of select="$hr2" />
 	<xsl:text>Public predicates</xsl:text><xsl:value-of select="$nl2" />
 	<xsl:choose>
 		<xsl:when test="public/predicate">
@@ -226,6 +238,12 @@
 			<xsl:text>(none)</xsl:text><xsl:value-of select="$nl2" />
 		</xsl:otherwise>
 	</xsl:choose>
+</xsl:template>
+
+
+<xsl:template match="*/inherited_predicate">
+	<xsl:value-of select="name" />
+	<xsl:text>  </xsl:text>
 </xsl:template>
 
 
