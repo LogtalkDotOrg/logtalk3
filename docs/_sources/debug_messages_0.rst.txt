@@ -28,18 +28,12 @@ Supports selective enabling and disabling of ``debug`` and ``debug(Group)`` mess
 
    - *Limitations:* Debug messages are suppressed by the compiler when the ``optimize`` flag is turned on and thus cannot be enabled in this case.
 
+| **Inherited public predicates:**
+|    (none)
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-(none)
 
 .. raw:: html
 

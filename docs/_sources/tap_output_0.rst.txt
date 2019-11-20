@@ -26,18 +26,12 @@ Intercepts unit test execution messages and outputs a report using the TAP forma
 
    - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.
 
+| **Inherited public predicates:**
+|    (none)
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-(none)
 
 .. raw:: html
 

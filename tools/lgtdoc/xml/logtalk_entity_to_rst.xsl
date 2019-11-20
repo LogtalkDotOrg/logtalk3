@@ -37,6 +37,10 @@
 	encoding="utf-8"/>
 
 
+<xsl:variable name="nbsp">
+	<xsl:text>&#160;</xsl:text>
+</xsl:variable>
+
 <xsl:variable name="nl">
 	<xsl:text>&#10;</xsl:text>
 </xsl:variable>
@@ -97,6 +101,7 @@
 	<xsl:apply-templates select="logtalk_entity/entity" />
 	<xsl:apply-templates select="logtalk_entity/relations" />
 	<xsl:apply-templates select="logtalk_entity/remarks" />
+	<xsl:apply-templates select="logtalk_entity/predicates/inherited" />
 	<xsl:text>.. contents::</xsl:text>
 	<xsl:value-of select="$nl" />
 	<xsl:text>   :local:</xsl:text>
@@ -250,24 +255,24 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk_entity/predicates">
-	<xsl:text>.. raw:: html</xsl:text>
-   	<xsl:value-of select="$nl2" />
-	<xsl:text>   &lt;/div&gt;</xsl:text>
-   	<xsl:value-of select="$nl2" />
-	<xsl:text>Inherited public predicates</xsl:text>
+<xsl:template match="logtalk_entity/predicates/inherited">
+	<xsl:text>| **Inherited public predicates:**</xsl:text>
 	<xsl:value-of select="$nl" />
-	<xsl:text>---------------------------</xsl:text>
-   	<xsl:value-of select="$nl2" />
 	<xsl:choose>
-		<xsl:when test="inherited/inherited_predicate">
-			<xsl:apply-templates select="inherited/inherited_predicate" />
+		<xsl:when test="inherited_predicate">
+			<xsl:text>|    </xsl:text>
+			<xsl:value-of select="$nbsp" />
+			<xsl:apply-templates select="inherited_predicate" />
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:text>(none)</xsl:text>
+			<xsl:text>|    (none)</xsl:text>
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:value-of select="$nl2" />
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/predicates">
 	<xsl:text>.. raw:: html</xsl:text>
    	<xsl:value-of select="$nl2" />
 	<xsl:text>   &lt;/div&gt;</xsl:text>
@@ -331,7 +336,8 @@
 	<xsl:value-of select="functor" />
 	<xsl:text>::</xsl:text>
 	<xsl:value-of select="name" />
-	<xsl:text>`  </xsl:text>
+	<xsl:text>` </xsl:text>
+	<xsl:value-of select="$nbsp" />
 </xsl:template>
 
 

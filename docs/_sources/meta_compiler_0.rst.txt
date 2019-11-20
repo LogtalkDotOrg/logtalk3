@@ -30,18 +30,12 @@ Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates
 
    - *Usage:* Compile source files with calls to the ``meta`` object meta-predicates using the compiler option ``hook(meta_compiler)``.
 
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-:ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
 
 .. raw:: html
 

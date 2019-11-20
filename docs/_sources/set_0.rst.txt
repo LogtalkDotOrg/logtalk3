@@ -28,18 +28,12 @@ Set predicates implemented using ordered lists. Uses ``==/2`` for element compar
 | **Remarks:**
 |    (none)
 
+| **Inherited public predicates:**
+|     :ref:`setp/0::as_list/2`  :ref:`setp/0::as_set/2`  :ref:`termp/0::check/1`  :ref:`setp/0::delete/3`  :ref:`termp/0::depth/2`  :ref:`setp/0::disjoint/2`  :ref:`setp/0::empty/1`  :ref:`setp/0::equal/2`  :ref:`termp/0::ground/1`  :ref:`setp/0::insert/3`  :ref:`setp/0::insert_all/3`  :ref:`setp/0::intersect/2`  :ref:`setp/0::intersection/3`  :ref:`setp/0::intersection/4`  :ref:`setp/0::member/2`  :ref:`setp/0::memberchk/2`  :ref:`termp/0::new/1`  :ref:`termp/0::occurs/2`  :ref:`setp/0::powerset/2`  :ref:`setp/0::product/3`  :ref:`setp/0::select/3`  :ref:`setp/0::selectchk/3`  :ref:`termp/0::singletons/2`  :ref:`setp/0::size/2`  :ref:`setp/0::subset/2`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`setp/0::subtract/3`  :ref:`setp/0::symdiff/3`  :ref:`setp/0::union/3`  :ref:`setp/0::union/4`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-:ref:`setp/0::as_list/2`  :ref:`setp/0::as_set/2`  :ref:`termp/0::check/1`  :ref:`setp/0::delete/3`  :ref:`termp/0::depth/2`  :ref:`setp/0::disjoint/2`  :ref:`setp/0::empty/1`  :ref:`setp/0::equal/2`  :ref:`termp/0::ground/1`  :ref:`setp/0::insert/3`  :ref:`setp/0::insert_all/3`  :ref:`setp/0::intersect/2`  :ref:`setp/0::intersection/3`  :ref:`setp/0::intersection/4`  :ref:`setp/0::member/2`  :ref:`setp/0::memberchk/2`  :ref:`termp/0::new/1`  :ref:`termp/0::occurs/2`  :ref:`setp/0::powerset/2`  :ref:`setp/0::product/3`  :ref:`setp/0::select/3`  :ref:`setp/0::selectchk/3`  :ref:`termp/0::singletons/2`  :ref:`setp/0::size/2`  :ref:`setp/0::subset/2`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`setp/0::subtract/3`  :ref:`setp/0::symdiff/3`  :ref:`setp/0::union/3`  :ref:`setp/0::union/4`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  
 
 .. raw:: html
 

@@ -28,18 +28,12 @@ Difference list predicates.
 | **Remarks:**
 |    (none)
 
+| **Inherited public predicates:**
+|     :ref:`listp/0::append/2`  :ref:`listp/0::append/3`  :ref:`termp/0::check/1`  :ref:`listp/0::delete/3`  :ref:`listp/0::delete_matches/3`  :ref:`termp/0::depth/2`  :ref:`listp/0::drop/3`  :ref:`listp/0::empty/1`  :ref:`listp/0::flatten/2`  :ref:`termp/0::ground/1`  :ref:`listp/0::hamming_distance/3`  :ref:`listp/0::keysort/2`  :ref:`listp/0::last/2`  :ref:`listp/0::length/2`  :ref:`listp/0::max/2`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::min/2`  :ref:`listp/0::msort/2`  :ref:`listp/0::msort/3`  :ref:`termp/0::new/1`  :ref:`listp/0::nextto/3`  :ref:`listp/0::nth0/3`  :ref:`listp/0::nth0/4`  :ref:`listp/0::nth1/3`  :ref:`listp/0::nth1/4`  :ref:`termp/0::occurs/2`  :ref:`listp/0::partition/5`  :ref:`listp/0::permutation/2`  :ref:`listp/0::prefix/2`  :ref:`listp/0::prefix/3`  :ref:`listp/0::proper_prefix/2`  :ref:`listp/0::proper_prefix/3`  :ref:`listp/0::proper_suffix/2`  :ref:`listp/0::proper_suffix/3`  :ref:`listp/0::remove_duplicates/2`  :ref:`listp/0::reverse/2`  :ref:`listp/0::same_length/2`  :ref:`listp/0::same_length/3`  :ref:`listp/0::select/3`  :ref:`listp/0::select/4`  :ref:`listp/0::selectchk/3`  :ref:`listp/0::selectchk/4`  :ref:`termp/0::singletons/2`  :ref:`listp/0::sort/2`  :ref:`listp/0::sort/3`  :ref:`listp/0::sort/4`  :ref:`listp/0::split/4`  :ref:`listp/0::sublist/2`  :ref:`listp/0::subsequence/3`  :ref:`listp/0::subsequence/4`  :ref:`listp/0::substitute/4`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`listp/0::subtract/3`  :ref:`listp/0::suffix/2`  :ref:`listp/0::suffix/3`  :ref:`listp/0::take/3`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-:ref:`listp/0::append/2`  :ref:`listp/0::append/3`  :ref:`termp/0::check/1`  :ref:`listp/0::delete/3`  :ref:`listp/0::delete_matches/3`  :ref:`termp/0::depth/2`  :ref:`listp/0::drop/3`  :ref:`listp/0::empty/1`  :ref:`listp/0::flatten/2`  :ref:`termp/0::ground/1`  :ref:`listp/0::hamming_distance/3`  :ref:`listp/0::keysort/2`  :ref:`listp/0::last/2`  :ref:`listp/0::length/2`  :ref:`listp/0::max/2`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::min/2`  :ref:`listp/0::msort/2`  :ref:`listp/0::msort/3`  :ref:`termp/0::new/1`  :ref:`listp/0::nextto/3`  :ref:`listp/0::nth0/3`  :ref:`listp/0::nth0/4`  :ref:`listp/0::nth1/3`  :ref:`listp/0::nth1/4`  :ref:`termp/0::occurs/2`  :ref:`listp/0::partition/5`  :ref:`listp/0::permutation/2`  :ref:`listp/0::prefix/2`  :ref:`listp/0::prefix/3`  :ref:`listp/0::proper_prefix/2`  :ref:`listp/0::proper_prefix/3`  :ref:`listp/0::proper_suffix/2`  :ref:`listp/0::proper_suffix/3`  :ref:`listp/0::remove_duplicates/2`  :ref:`listp/0::reverse/2`  :ref:`listp/0::same_length/2`  :ref:`listp/0::same_length/3`  :ref:`listp/0::select/3`  :ref:`listp/0::select/4`  :ref:`listp/0::selectchk/3`  :ref:`listp/0::selectchk/4`  :ref:`termp/0::singletons/2`  :ref:`listp/0::sort/2`  :ref:`listp/0::sort/3`  :ref:`listp/0::sort/4`  :ref:`listp/0::split/4`  :ref:`listp/0::sublist/2`  :ref:`listp/0::subsequence/3`  :ref:`listp/0::subsequence/4`  :ref:`listp/0::substitute/4`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`listp/0::subtract/3`  :ref:`listp/0::suffix/2`  :ref:`listp/0::suffix/3`  :ref:`listp/0::take/3`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  
 
 .. raw:: html
 

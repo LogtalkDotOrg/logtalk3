@@ -34,18 +34,12 @@ Multiple hidden parameters: an extension to Prolog's DCG notation. Ported to Log
 
    - *Usage:* Compile source files with objects (or categories) defining EDCGs using the compiler option ``hook(edcg)``.
 
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-:ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
 
 .. raw:: html
 

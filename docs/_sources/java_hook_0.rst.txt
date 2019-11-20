@@ -26,18 +26,12 @@ Hook object to optimize messages to the ``java/1-2`` objects that otherwise woul
 
    - *Usage:* Compile source files with messages to the ``java/1-2`` objects using the compiler option ``hook(java_hook)``.
 
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-:ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
 
 .. raw:: html
 

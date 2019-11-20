@@ -49,18 +49,12 @@ Built-in object providing message printing, debugging, library, source file, and
 
    - *Title::List meta message:* By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the ``writeq/1`` predicate.
 
+| **Inherited public predicates:**
+|    (none)
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-(none)
 
 .. raw:: html
 

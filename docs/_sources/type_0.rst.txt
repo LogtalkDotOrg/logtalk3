@@ -86,18 +86,12 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 
    - *Caveats:* The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.
 
+| **Inherited public predicates:**
+|     :ref:`arbitrary/0::arbitrary/1`  :ref:`arbitrary/0::arbitrary/2`  :ref:`arbitrary/0::edge_case/2`  :ref:`arbitrary/0::shrink/3`  :ref:`arbitrary/0::shrinker/1`  
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-:ref:`arbitrary/0::arbitrary/1`  :ref:`arbitrary/0::arbitrary/2`  :ref:`arbitrary/0::edge_case/2`  :ref:`arbitrary/0::shrink/3`  :ref:`arbitrary/0::shrinker/1`  
 
 .. raw:: html
 

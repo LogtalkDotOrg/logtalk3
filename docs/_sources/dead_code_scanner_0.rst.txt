@@ -32,18 +32,12 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 
    - *Requirements:* Source files must be compiled with the ``source_data`` flag turned on. To avoid false positives do to meta-calls, compilation of source files with the ``optimized`` flag turned on is also advised.
 
+| **Inherited public predicates:**
+|    (none)
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-(none)
 
 .. raw:: html
 

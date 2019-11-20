@@ -33,18 +33,12 @@ Debugger protocol.
 
    - *Leash shorthands:* ``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.
 
+| **Inherited public predicates:**
+|    (none)
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-(none)
 
 .. raw:: html
 

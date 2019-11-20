@@ -28,18 +28,12 @@ Intercepts unit test execution messages and generates a ``coverage_report.xml`` 
 
    - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.
 
+| **Inherited public predicates:**
+|    (none)
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-(none)
 
 .. raw:: html
 

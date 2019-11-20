@@ -26,18 +26,12 @@ Queue predicates implemented using difference lists.
 | **Remarks:**
 |    (none)
 
+| **Inherited public predicates:**
+|     :ref:`queuep/0::as_list/2`  :ref:`termp/0::check/1`  :ref:`termp/0::depth/2`  :ref:`queuep/0::empty/1`  :ref:`termp/0::ground/1`  :ref:`queuep/0::head/2`  :ref:`queuep/0::join/3`  :ref:`queuep/0::join_all/3`  :ref:`queuep/0::jump/3`  :ref:`queuep/0::jump_all/3`  :ref:`queuep/0::length/2`  :ref:`termp/0::new/1`  :ref:`termp/0::occurs/2`  :ref:`queuep/0::serve/3`  :ref:`termp/0::singletons/2`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-:ref:`queuep/0::as_list/2`  :ref:`termp/0::check/1`  :ref:`termp/0::depth/2`  :ref:`queuep/0::empty/1`  :ref:`termp/0::ground/1`  :ref:`queuep/0::head/2`  :ref:`queuep/0::join/3`  :ref:`queuep/0::join_all/3`  :ref:`queuep/0::jump/3`  :ref:`queuep/0::jump_all/3`  :ref:`queuep/0::length/2`  :ref:`termp/0::new/1`  :ref:`termp/0::occurs/2`  :ref:`queuep/0::serve/3`  :ref:`termp/0::singletons/2`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  
 
 .. raw:: html
 

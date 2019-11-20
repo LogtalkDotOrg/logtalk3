@@ -41,18 +41,12 @@ Adviser tool for porting and wrapping plain Prolog applications.
 
    - *include_wrapped_files(Boolean):* generate ``include/1`` directives for the wrapped Prolog source files (default is ``true``)
 
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-:ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
 
 .. raw:: html
 

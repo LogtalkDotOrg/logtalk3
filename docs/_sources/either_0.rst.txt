@@ -36,18 +36,12 @@ Types and predicates for extended type-checking of expected term references and 
 
    - *QuickCheck support:* Defines clauses for the ``type::arbitrary/1-2`` predicates to allow generating random values for the ``either(ExpectedType, UnexpectedType)`` type.
 
+| **Inherited public predicates:**
+|    (none)
+
 .. contents::
    :local:
    :backlinks: top
-
-.. raw:: html
-
-   </div>
-
-Inherited public predicates
----------------------------
-
-(none)
 
 .. raw:: html
 
