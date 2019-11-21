@@ -28,14 +28,14 @@
 	]).
 
 	:- public(parents/3).
-	:- mode(parents(?atom, ?atom, ?atom), zero_or_more).
+	:- mode(parents(?atom, --expected, --expected), zero_or_more).
 	:- info(parents/3, [
 		comment is 'Enumerates, by backtracking, all persons and their parents.',
-		argnames is ['Child', 'Father', 'Mother']
+		argnames is ['Child', 'ExpectedFather', 'ExpectedMother']
 	]).
 
 	% we reuse for this example the database on the Addams family
-	% included in the "family" example
+	% facts included in the "family" example
 	:- uses(addams, [
 		male/1, female/1, parent/2
 	]).
