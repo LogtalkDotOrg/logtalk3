@@ -21,16 +21,17 @@
 :- object(data_acquisition).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/01/21,
+		date is 2019/11/21,
 		comment is 'Data acquisition example, which is fully decoupled from data processing details.'
 	]).
 
 	:- public(parents/3).
 	:- mode(parents(?atom, ?atom, ?atom), zero_or_more).
 	:- info(parents/3, [
-		comment is 'Enumerates, by backtracking, all persons and their parents.'
+		comment is 'Enumerates, by backtracking, all persons and their parents.',
+		argnames is ['Child', 'Father', 'Mother']
 	]).
 
 	% we reuse for this example the database on the Addams family

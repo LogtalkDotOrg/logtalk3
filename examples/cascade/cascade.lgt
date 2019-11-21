@@ -21,9 +21,9 @@
 :- object(cascade).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2019/01/23,
+		date is 2019/11/21,
 		comment is 'Sample example of using expected terms to call a conjunction of goals where any of them may cause an exception condition without using the traditional catch/throw mechanism.'
 	]).
 
@@ -88,8 +88,8 @@
 		% calls) or applies a closure to the expected term and the resulting
 		% expected term reference; we use a lambda expression to call the
 		% from_goal/4 expected term constructor, which takes as arguments a
-		% goal whose success or failure/error dictates if we construct wrap
-		% an expected value (Filtered) or an unexpected error (Error)
+		% goal whose success or failure/error dictates if we wrap an expected
+		% value (Filtered) or an unexpected error (Error)
 		expected(In)::flat_map(
 			{Filtered}/[Value,Ref]>>(expected::from_goal(maybe(0.9), Filtered, Error, Ref)),
 			Out
