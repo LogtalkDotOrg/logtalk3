@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/01/21,
+		date is 2019/11/22,
 		comment is 'Unit tests for the "books" example.'
 	]).
 
@@ -37,15 +37,15 @@
 
 		test(optionals_1, true(Assertion)) :-
 			^^set_text_output(''),
-			data_processing::print_extra,
-			^^text_output_assertion('The Philosopher''s Stone (with extra quidditch_set)\r\nThe Chamber of Secrets (with extra map)\r\nThe Half-Blood Prince (with extra audio_cd)\r\nThe Deathly Hallows (with extra horcrux_set)\r\n', Assertion).
+			data_processing::print,
+			^^text_output_assertion('The Philosopher''s Stone\r\n  with free quidditch_set at 278 gr\r\nThe Chamber of Secrets\r\n with free map\r\nThe Prisoner of Azkaban\r\nThe Goblet of Fire\r\nThe Order of the Phoenix\r\nThe Half-Blood Prince\r\n  with free audio_cd\r\nThe Deathly Hallows\r\n with free horcrux_set at 123 gr\r\n', Assertion).
 
 	:- else.
 
 		test(optionals_1, true(Assertion)) :-
 			^^set_text_output(''),
-			data_processing::print_extra,
-			^^text_output_assertion('The Philosopher''s Stone (with extra quidditch_set)\nThe Chamber of Secrets (with extra map)\nThe Half-Blood Prince (with extra audio_cd)\nThe Deathly Hallows (with extra horcrux_set)\n', Assertion).
+			data_processing::print,
+			^^text_output_assertion('The Philosopher''s Stone\n  with free quidditch_set at 278 gr\nThe Chamber of Secrets\n  with free map\nThe Prisoner of Azkaban\nThe Goblet of Fire\nThe Order of the Phoenix\nThe Half-Blood Prince\n  with free audio_cd\nThe Deathly Hallows\n  with free horcrux_set at 123 gr\n', Assertion).
 
 	:- endif.
 

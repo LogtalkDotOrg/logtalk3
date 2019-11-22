@@ -25,7 +25,8 @@ data acquisition, which must be able to represent optional values in the
 data, from data processing, which decides how to handle those values and
 their absence. The use of optionals terms avoids the often problematic
 solution of using special values to represent the absence of optionals
-values.
+values. The optional terms library predicates allow handling the optional
+terms without the need to use if-then-else or cut control constructs.
 
 For a description of this example, please see the comments in the 
 `books.lgt` source file.

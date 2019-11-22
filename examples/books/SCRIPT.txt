@@ -25,10 +25,17 @@ ________________________________________________________________________
 
 % print a list of books that have extras:
 
-| ?- data_processing::print_extra.
+| ?- data_processing::print.
 
-The Philosopher's Stone (with extra quidditch_set)
-The Chamber of Secrets (with extra map)
-The Half-Blood Prince (with extra audio_cd)
-The Deathly Hallows (with extra horcrux_set)
+The Philosopher's Stone
+  with free quidditch_set at 278 gr
+The Chamber of Secrets
+  with free map
+The Prisoner of Azkaban
+The Goblet of Fire
+The Order of the Phoenix
+The Half-Blood Prince
+  with free audio_cd
+The Deathly Hallows
+  with free horcrux_set at 123 gr
 yes

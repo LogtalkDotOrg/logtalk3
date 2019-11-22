@@ -33,32 +33,37 @@ extra('The Chamber of Secrets',   map).
 extra('The Half-Blood Prince',    audio_cd).
 extra('The Deathly Hallows',      horcrux_set).
 
+% weight(Extra, Weight)
+weight(quidditch_set, 278).
+weight(horcrux_set,   123).
+
 
 :- object(data_acquisition).
 
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/01/21,
+		date is 2019/11/22,
 		comment is 'Data acquisition example, decoupled from data processing.'
 	]).
 
-	:- public(book_extra/1).
-	:- mode(book_extra(-pair(atom,optional)), zero_or_more).
-	:- info(book_extra/1, [
-		comment is 'Returns a pair book-optional where the optional represents the possible presence of a book extra material.'
+	:- public(book/1).
+	:- mode(book(-pair(atom,optional)), zero_or_more).
+	:- info(book/1, [
+		comment is 'Returns a book record represented as a pair title-optional where the optional represents the possible presence of a book extra material.'
 	]).
 
 	:- uses(user, [
-		book/3, extra/2
+		book/3, extra/2, weight/2
 	]).
 
-	book_extra(Book-Optional) :-
-		book(Book, _, _),
-		% instead of using a special value to represent the absence of
-		% a book extra, we use an optional to represent the possible
-		% existence of extras
-		optional::from_goal(extra(Book, Extra), Extra, Optional).
+	book(Title-OptionalExtra) :-
+		book(Title, _, _),
+		% instead of using a special value to represent the absence of a book extra,
+		% we use an optional to represent the possible existence of an extra; as some
+		% extras have a known weight, we use a second optional for the weight
+		optional::from_goal(extra(Title, Extra), Extra-OptionalWeight, OptionalExtra),
+		optional::from_goal((extra(Title, Extra), weight(Extra, Weight)), Weight, OptionalWeight).
 
 :- end_object.
 
@@ -66,27 +71,32 @@ extra('The Deathly Hallows',      horcrux_set).
 :- object(data_processing).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/06/10,
+		date is 2019/11/22,
 		comment is 'Data processing example, decoupled from data acquisition.'
 	]).
 
-	:- public(print_extra/0).
-	:- mode(print_extra, one).
-	:- info(print_extra/0, [
-		comment is 'Prints a list of the books that have extras.'
+	:- public(print/0).
+	:- mode(print, one).
+	:- info(print/0, [
+		comment is 'Prints a list of the books with their optional extras.'
 	]).
 
-	print_extra :-
-		% by using an optional term, we don't need to use control constructs
-		% such as if-then-else or cut to handle optional values in the data
+	% by using optional terms, we don't need to use control constructs
+	% such as if-then-else or cut to handle optional values in the data
+
+	print :-
 		forall(
-			data_acquisition::book_extra(Book-Optional),
-			optional(Optional)::if_present(write_extra(Book))
+			data_acquisition::book(Title-Extra),
+			(	write(Title), nl,
+				optional(Extra)::if_present(print_extra)
+			)
 		).
 
-	write_extra(Book, Extra) :-
-		write(Book), write(' (with extra '), write(Extra), write(')'), nl.
+	print_extra(Extra-Weight) :-
+		write('  with free '), write(Extra),
+		optional(Weight)::if_present([Grams]>>(write(' at '), write(Grams), write(' gr'))),
+		nl.
 
 :- end_object.

@@ -102,6 +102,8 @@ Examples
 
 * ADDED: Simple Java-based GUI interface to the `questions` example.
 
+* IMPROVED: The `books` example of using the `optionals` library.
+
 * FIXED: The loader file of the `persistency` example to load the required
 `os` library and create the saved state file if it doesn't exist.
 
