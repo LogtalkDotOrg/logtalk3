@@ -99,4 +99,64 @@ weight(horcrux_set,   123).
 		optional(Weight)::if_present([Grams]>>(write(' at '), write(Grams), write(' gr'))),
 		nl.
 
+	:- public(print_kg/0).
+	:- mode(print_kg, one).
+	:- info(print_kg/0, [
+		comment is 'Prints a list of the books with their optional extras but with optional weight converted into Kilograms.'
+	]).
+
+	% we can map optionals easily without requiring additional
+	% code for handling empty optional references
+
+	print_kg :-
+		forall(
+			data_acquisition::book(Title-Extra),
+			(	write(Title), nl,
+				optional(Extra)::if_present(print_extra_kg)
+			)
+		).
+
+	print_extra_kg(Extra-WeightGrams) :-
+		write('  with free '), write(Extra),
+		optional(WeightGrams)::map([Grams,Kilos]>>(Kilos is Grams / 1000), WeightKilos),
+		optional(WeightKilos)::if_present([Kilograms]>>(write(' at '), write(Kilograms), write(' kg'))),
+		nl.
+
+	:- public(print_heavy_extras/0).
+	:- mode(print_heavy_extras, one).
+	:- info(print_heavy_extras/0, [
+		comment is 'Prints a list heavy extras.'
+	]).
+
+	% we can chain optionals with some help from lambda expressions
+
+	print_heavy_extras :-
+		forall(
+			data_acquisition::book(_-Extra),
+			optional(Extra)::if_present(
+				[Name-Weight]>>(optional(Weight)::if_present(print_heavy_extra(Name)))
+			)
+		).
+
+	print_heavy_extra(Name, Grams) :-
+		write(Name), write(' at '), write(Grams), write(' gr'), nl.
+
+	:- public(books_with_extras/1).
+	:- mode(books_with_extras(--list(atom)), one).
+	:- info(books_with_extras/1, [
+		comment is 'Returns a list of the book titles that have extras.',
+		argnames is ['Titles']
+	]).
+
+	% we can easily act on the presence (or absence) of optional terms
+
+	books_with_extras(Titles) :-
+		findall(
+			Title,
+			(	data_acquisition::book(Title-Extra),
+				optional(Extra)::is_present
+			),
+			Titles
+		).
+
 :- end_object.
