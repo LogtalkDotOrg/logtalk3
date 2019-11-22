@@ -159,7 +159,7 @@
 	:- meta_predicate(flat_map(2, *)).
 	:- mode(flat_map(+callable, --nonvar), one).
 	:- info(flat_map/2, [
-		comment is 'When the reference is non-empty and mapping a closure with the optional tern and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.',
+		comment is 'When the reference is non-empty and mapping a closure with the term it holds and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.',
 		argnames is ['Closure', 'NewReference']
 	]).
 

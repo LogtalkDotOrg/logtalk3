@@ -70,7 +70,7 @@ Returns the reference when it is non-empty and the term it holds satisfies a clo
 ``flat_map/2``
 ^^^^^^^^^^^^^^
 
-When the reference is non-empty and mapping a closure with the optional tern and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.
+When the reference is non-empty and mapping a closure with the term it holds and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.
 
 | **Compilation flags:**
 |    ``static``
