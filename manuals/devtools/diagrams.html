@@ -637,8 +637,8 @@ cluster, library, file, and entity links (atoms; no default)</div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code></div>
-<div class="line">omit common path prefixes when printing directory paths (a list of
-atoms; default is an empty list)</div>
+<div class="line">omit common path prefixes when printing directory paths and when
+constructing URLs (a list of atoms; default is an empty list)</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -709,8 +709,8 @@ cluster, library, file, and entity links (atoms; no default)</div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code></div>
-<div class="line">omit common path prefixes when printing directory paths (a list of
-atoms; default is an empty list)</div>
+<div class="line">omit common path prefixes when printing directory paths and when
+constructing URLs (a list of atoms; default is an empty list)</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -798,8 +798,8 @@ cluster, library, file, and entity links (atoms; no default)</div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code></div>
-<div class="line">omit common path prefixes when printing directory paths (a list of
-atoms; default is an empty list)</div>
+<div class="line">omit common path prefixes when printing directory paths and when
+constructing URLs (a list of atoms; default is an empty list)</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -853,10 +853,9 @@ entity nodes (<code class="docutils literal notranslate"><span class="pre">true<
 </li>
 </ul>
 <p>The option <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code> with a non-empty list of
-prefixes should be used together with the option
-<code class="docutils literal notranslate"><span class="pre">directory_paths(true)</span></code>, in particular when generating library,
-directory, or file diagrams that reference external libraries,
-directories, or files.</p>
+prefixes should preferably be used together with the option
+<code class="docutils literal notranslate"><span class="pre">directory_paths(true)</span></code> when generating library or file diagrams that
+reference external libraries or files.</p>
 <p>Be sure to set the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag <code class="docutils literal notranslate"><span class="pre">on</span></code> before compiling the
 libraries or files for which you want to generated diagrams.</p>
 <p>Support for displaying Prolog modules and Prolog module files in

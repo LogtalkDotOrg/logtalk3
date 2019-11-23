@@ -361,8 +361,8 @@ generated diagrams. For entity diagrams the options are:
      ``'#'``)
 
 -  | ``omit_path_prefixes(Prefixes)``
-   | omit common path prefixes when printing directory paths (a list of
-     atoms; default is an empty list)
+   | omit common path prefixes when printing directory paths and when
+     constructing URLs (a list of atoms; default is an empty list)
 
 -  | ``zoom(Boolean)``
    | generate sub-diagrams and add links and zoom icons to library and
@@ -412,8 +412,8 @@ For directory and file diagrams the options are:
      cluster, library, file, and entity links (atoms; no default)
 
 -  | ``omit_path_prefixes(Prefixes)``
-   | omit common path prefixes when printing directory paths (a list of
-     atoms; default is an empty list)
+   | omit common path prefixes when printing directory paths and when
+     constructing URLs (a list of atoms; default is an empty list)
 
 -  | ``relation_labels(Boolean)``
    | print entity relation labels (``true`` or ``false``; default is
@@ -470,8 +470,8 @@ For library diagrams the options are:
      cluster, library, file, and entity links (atoms; no default)
 
 -  | ``omit_path_prefixes(Prefixes)``
-   | omit common path prefixes when printing directory paths (a list of
-     atoms; default is an empty list)
+   | omit common path prefixes when printing directory paths and when
+     constructing URLs (a list of atoms; default is an empty list)
 
 -  | ``relation_labels(Boolean)``
    | print entity relation labels (``true`` or ``false``; default is
@@ -505,10 +505,9 @@ For library diagrams the options are:
    | extension for linked diagrams (an atom; default is ``'.svg'``)
 
 The option ``omit_path_prefixes(Prefixes)`` with a non-empty list of
-prefixes should be used together with the option
-``directory_paths(true)``, in particular when generating library,
-directory, or file diagrams that reference external libraries,
-directories, or files.
+prefixes should preferably be used together with the option
+``directory_paths(true)`` when generating library or file diagrams that
+reference external libraries or files.
 
 Be sure to set the ``source_data`` flag ``on`` before compiling the
 libraries or files for which you want to generated diagrams.
