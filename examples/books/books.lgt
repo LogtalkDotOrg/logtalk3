@@ -18,6 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% the raw data in this example are books, some of them sold with extras, and
+% with some of extras weighting enough for their weight to be declared:
+
 % book(Name, Author, Year)
 book('The Philosopher''s Stone', 'J. K. Rowling', 1997).
 book('The Chamber of Secrets',   'J. K. Rowling', 1998).
@@ -50,7 +53,7 @@ weight(horcrux_set,   123).
 	:- public(book/1).
 	:- mode(book(-pair(atom,optional)), zero_or_more).
 	:- info(book/1, [
-		comment is 'Returns a book record represented as a pair title-optional where the optional represents the possible presence of a book extra material.'
+		comment is 'Returns a book record represented as a pair title-optional where the optional represents the possible presence of a book extra, which in turn may have a registered weight.'
 	]).
 
 	:- uses(user, [
@@ -61,7 +64,7 @@ weight(horcrux_set,   123).
 		book(Title, _, _),
 		% instead of using a special value to represent the absence of a book extra,
 		% we use an optional to represent the possible existence of an extra; as some
-		% extras have a known weight, we use a second optional for the weight
+		% extras have a registered weight, we use a second optional for the weight
 		optional::from_goal(extra(Title, Extra), Extra-OptionalWeight, OptionalExtra),
 		optional::from_goal((extra(Title, Extra), weight(Extra, Weight)), Weight, OptionalWeight).
 
@@ -84,7 +87,9 @@ weight(horcrux_set,   123).
 	]).
 
 	% by using optional terms, we don't need to use control constructs
-	% such as if-then-else or cut to handle optional values in the data
+	% such as if-then-else or cut to handle optional values in the data;
+	% in this case, we use the optional/1::if_present/1 predicate that
+	% does nothing if the optional is empty
 
 	print :-
 		forall(
@@ -105,8 +110,10 @@ weight(horcrux_set,   123).
 		comment is 'Prints a list of the books with their optional extras but with optional weight converted into Kilograms.'
 	]).
 
-	% we can map optionals easily without requiring additional
-	% code for handling empty optional references
+	% we can map optionals easily without requiring additional code
+	% for handling empty optional references; in this case we call the
+	% optional/1::map/2 predicate to map an optional weight expressed
+	% in grams into an optional weight expressed in kilograms
 
 	print_kg :-
 		forall(
@@ -128,7 +135,10 @@ weight(horcrux_set,   123).
 		comment is 'Prints a list heavy extras.'
 	]).
 
-	% we can chain optionals with some help from lambda expressions
+	% we can chain optionals with some help from lambda expressions;
+	% in this case, we call the optional/1:: if_present/1 predicate
+	% with an optional/1:: if_present/1 argument; we only consider
+	% books with an extra with a registered weight
 
 	print_heavy_extras :-
 		forall(
@@ -148,7 +158,9 @@ weight(horcrux_set,   123).
 		argnames is ['Titles']
 	]).
 
-	% we can easily act on the presence (or absence) of optional terms
+	% we can easily act on the presence (or absence) of optional terms;
+	% in this case, we call optional/1::is_present/0 to simply fail for
+	% books with no extras
 
 	books_with_extras(Titles) :-
 		findall(
