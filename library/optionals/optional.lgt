@@ -22,9 +22,9 @@
 :- object(optional).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2019/01/23,
+		date is 2019/11/23,
 		comment is 'Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the ``optional/1`` object by passing the reference as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type ``optional`` for use with the ``type`` library object.'
@@ -191,7 +191,7 @@
 	:- meta_predicate(or_else_call(*, 0)).
 	:- mode(or_else_call(--term, +callable), zero_or_one).
 	:- info(or_else_call/2, [
-		comment is 'Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty. Can be used e.g. to generate an exception for empty optionals.',
+		comment is 'Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty.',
 		argnames is ['Term', 'Goal']
 	]).
 
@@ -200,6 +200,13 @@
 	:- info(or_else_fail/1, [
 		comment is 'Returns the term hold by the reference if not empty. Fails otherwise. Usually called to skip over empty references.',
 		argnames is ['Term']
+	]).
+
+	:- public(or_else_throw/2).
+	:- mode(or_else_throw(--term, @nonvar), one_or_error).
+	:- info(or_else_throw/2, [
+		comment is 'Returns the term hold by the reference if not empty. Throws error(Error,Context) otherwise.',
+		argnames is ['Term', 'Error']
 	]).
 
 	is_empty :-
@@ -280,5 +287,12 @@
 
 	or_else_fail(Term) :-
 		parameter(1, optional(Term)).
+
+	or_else_throw(Term, Error) :-
+		parameter(1, Reference),
+		(	Reference = optional(Term) ->
+			true
+		;	throw(Error)
+		).
 
 :- end_object.

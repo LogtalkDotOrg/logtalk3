@@ -61,6 +61,8 @@ Library
 * ADDED: Predicates `ensure_directory/1` and `ensure_file/1` to the `os`
 library.
 
+* ADDED: Predicate `or_else_throw/2` to the `optionals` library.
+
 Tools
 _____
 

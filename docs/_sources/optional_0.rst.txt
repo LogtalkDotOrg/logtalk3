@@ -11,8 +11,8 @@
 Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the ``optional/1`` object by passing the reference as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.4
-| **Date:** 2019/1/23
+| **Version:** 1.5
+| **Date:** 2019/11/23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

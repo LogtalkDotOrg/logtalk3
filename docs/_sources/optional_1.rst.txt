@@ -262,7 +262,7 @@ Returns the term hold by the reference if not empty or the given default term if
 ``or_else_call/2``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty. Can be used e.g. to generate an exception for empty optionals.
+Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -325,6 +325,29 @@ Returns the term hold by the reference if not empty. Applies a closure to comput
 | **Exceptions:**
 |    Reference is empty and the term cannot be computed:
 |        ``existence_error(optional_term,Reference)``
+
+
+------------
+
+.. raw:: html
+
+   <div id="or_else_throw/2"> </div>
+
+.. index:: or_else_throw/2
+.. _optional/1::or_else_throw/2:
+
+``or_else_throw/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the term hold by the reference if not empty. Throws error(Error,Context) otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_throw(Term,Error)``
+| **Mode and number of proofs:**
+|    ``or_else_throw(--term,@nonvar)`` - ``one_or_error``
 
 
 ------------

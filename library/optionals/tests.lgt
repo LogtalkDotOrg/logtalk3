@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.11,
+		version is 0.12,
 		author is 'Paulo Moura',
-		date is 2019/01/30,
+		date is 2019/11/23,
 		comment is 'Unit tests for the "optionals" library.'
 	]).
 
@@ -174,6 +174,15 @@
 
 	succeeds(optional_or_else_fail_1_02) :-
 		optional::of(1, Ref), optional(Ref)::or_else_fail(Term),
+		Term == 1.
+
+	% or_else_throw/2 tests
+
+	throws(optional_or_else_throw_2_01, some_error) :-
+		optional::empty(Ref), optional(Ref)::or_else_throw(_, some_error).
+
+	succeeds(optional_or_else_throw_2_02) :-
+		optional::of(1, Ref), optional(Ref)::or_else_throw(Term, some_error),
 		Term == 1.
 
 	% "optional" type tests

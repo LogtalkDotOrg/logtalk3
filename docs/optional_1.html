@@ -290,11 +290,12 @@
 <li><p><a class="reference internal" href="#or-else-call-2" id="id11"><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#or-else-fail-1" id="id12"><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#or-else-get-2" id="id13"><code class="docutils literal notranslate"><span class="pre">or_else_get/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#or-else-throw-2" id="id14"><code class="docutils literal notranslate"><span class="pre">or_else_throw/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id14">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id15">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id16">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id15">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id16">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-predicates">
@@ -511,7 +512,7 @@
 <div id="or_else_call/2"> </div></div>
 <div class="section" id="or-else-call-2">
 <span id="optional-1-or-else-call-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code></a><a class="headerlink" href="#or-else-call-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty. Can be used e.g. to generate an exception for empty optionals.</p>
+<p>Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -585,6 +586,27 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(optional_term,Reference)</span></code></div>
 </div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="or_else_throw/2"> </div></div>
+<div class="section" id="or-else-throw-2">
+<span id="optional-1-or-else-throw-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">or_else_throw/2</span></code></a><a class="headerlink" href="#or-else-throw-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns the term hold by the reference if not empty. Throws error(Error,Context) otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_throw(Term,Error)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_throw(--term,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 </div>
