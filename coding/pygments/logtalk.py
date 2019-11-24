@@ -160,12 +160,12 @@ class LogtalkLexer(RegexLexer):
             (r'[()\[\],.|]', Text),
             # Atoms
             (r"[a-z][a-zA-Z0-9_]*", Text),
-            (r"[']", String, 'quoted_atom'),
+            (r"'", String, 'quoted_atom'),
         ],
 
         'quoted_atom': [
-            (r"['][']", String),
-            (r"[']", String, '#pop'),
+            (r"''", String),
+            (r"'", String, '#pop'),
             (r'\\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)', String.Escape),
             (r"[^\\'\n]+", String),
             (r'\\', String),
@@ -203,7 +203,7 @@ class LogtalkLexer(RegexLexer):
             (r'([A-Z_][a-zA-Z0-9_]*)', Name.Variable),
             # Atoms
             (r"[a-z][a-zA-Z0-9_]*", Text),
-            (r"[']", String, 'quoted_atom'),
+            (r"'", String, 'quoted_atom'),
             # Strings
             (r'"(\\\\|\\"|[^"])*"', String),
             # End of entity-opening directive
