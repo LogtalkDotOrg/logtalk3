@@ -109,6 +109,11 @@ Examples
 * FIXED: The loader file of the `persistency` example to load the required
 `os` library and create the saved state file if it doesn't exist.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Pygments Logtalk lexer syntax error in `analyse_text` function.
+
 
 3.32.0 - November 5, 2019
 =========================

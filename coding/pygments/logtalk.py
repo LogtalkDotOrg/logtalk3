@@ -228,7 +228,7 @@ class LogtalkLexer(RegexLexer):
             return 1.0
         elif ':- category(' in text:
             return 1.0
-        elif re.search('^:-\s[a-z]', text, re.M):
+        elif re.search(r'^:-\s[a-z]', text, re.M):
             return 0.9
         else:
             return 0.0
