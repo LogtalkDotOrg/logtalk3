@@ -11,8 +11,8 @@
 Optional reference predicates. Requires passing a reference constructed using the ``optional`` object as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.5
-| **Date:** 2019/1/24
+| **Version:** 1.6
+| **Date:** 2019/11/25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -339,7 +339,7 @@ Returns the term hold by the reference if not empty. Applies a closure to comput
 ``or_else_throw/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Returns the term hold by the reference if not empty. Throws error(Error,Context) otherwise.
+Returns the term hold by the reference if not empty. Throws the given error otherwise.
 
 | **Compilation flags:**
 |    ``static``

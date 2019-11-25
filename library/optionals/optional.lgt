@@ -22,9 +22,9 @@
 :- object(optional).
 
 	:- info([
-		version is 1.5,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2019/11/23,
+		date is 2019/01/23,
 		comment is 'Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the ``optional/1`` object by passing the reference as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type ``optional`` for use with the ``type`` library object.'
@@ -103,9 +103,9 @@
 :- object(optional(_Reference)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2019/01/24,
+		date is 2019/11/25,
 		comment is 'Optional reference predicates. Requires passing a reference constructed using the ``optional`` object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [optional]
@@ -205,7 +205,7 @@
 	:- public(or_else_throw/2).
 	:- mode(or_else_throw(--term, @nonvar), one_or_error).
 	:- info(or_else_throw/2, [
-		comment is 'Returns the term hold by the reference if not empty. Throws error(Error,Context) otherwise.',
+		comment is 'Returns the term hold by the reference if not empty. Throws the given error otherwise.',
 		argnames is ['Term', 'Error']
 	]).
 
