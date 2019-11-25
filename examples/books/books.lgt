@@ -50,9 +50,9 @@ weight(horcrux_set,   123).
 		comment is 'Data acquisition example, decoupled from data processing.'
 	]).
 
-	:- public(book/1).
-	:- mode(book(-pair(atom,optional)), zero_or_more).
-	:- info(book/1, [
+	:- public(book/4).
+	:- mode(book(?atom, ?atom, ?integer, --optional), zero_or_more).
+	:- info(book/4, [
 		comment is 'Returns a book record represented as a pair title-optional where the optional represents the possible presence of a book extra, which in turn may have a registered weight.'
 	]).
 
@@ -60,8 +60,8 @@ weight(horcrux_set,   123).
 		book/3, extra/2, weight/2
 	]).
 
-	book(Title-OptionalExtra) :-
-		book(Title, _, _),
+	book(Title, Author, Year, OptionalExtra) :-
+		book(Title, Author, Year),
 		% instead of using a special value to represent the absence of a book extra,
 		% we use an optional to represent the possible existence of an extra; as some
 		% extras have a registered weight, we use a second optional for the weight
@@ -86,14 +86,16 @@ weight(horcrux_set,   123).
 		comment is 'Prints a list of the books with their optional extras.'
 	]).
 
-	% by using optional terms, we don't need to use control constructs
-	% such as if-then-else or cut to handle optional values in the data;
-	% in this case, we use the optional/1::if_present/1 predicate that
-	% does nothing if the optional is empty
+	% by using optionals, we don't need a representation for "null"
+	% values and we also don't need to use control constructs such
+	% as conditionals or cuts to handle optional values in the data
+
+	% in this case, we use the optional/1::if_present/1 meta-predicate
+	% that does nothing if the optional is empty
 
 	print :-
 		forall(
-			data_acquisition::book(Title-Extra),
+			data_acquisition::book(Title, _Author, _Year, Extra),
 			(	write(Title), nl,
 				optional(Extra)::if_present(print_extra)
 			)
@@ -110,14 +112,14 @@ weight(horcrux_set,   123).
 		comment is 'Prints a list of the books with their optional extras but with optional weight converted into Kilograms.'
 	]).
 
-	% we can map optionals easily without requiring additional code
-	% for handling empty optional references; in this case we call the
-	% optional/1::map/2 predicate to map an optional weight expressed
-	% in grams into an optional weight expressed in kilograms
+	% we can easily map optionals without requiring additional code for
+	% handling empty optionals; in this case we call the optional/1::map/2
+	% meta-predicate to map an optional weight expressed in grams into an
+	% optional weight expressed in kilograms
 
 	print_kg :-
 		forall(
-			data_acquisition::book(Title-Extra),
+			data_acquisition::book(Title, _Author, _Year, Extra),
 			(	write(Title), nl,
 				optional(Extra)::if_present(print_extra_kg)
 			)
@@ -136,13 +138,13 @@ weight(horcrux_set,   123).
 	]).
 
 	% we can chain optionals with some help from lambda expressions;
-	% in this case, we call the optional/1:: if_present/1 predicate
-	% with an optional/1:: if_present/1 argument; we only consider
-	% books with an extra with a registered weight
+	% in this case, we call the optional/1::if_present/1 meta-predicate
+	% with an optional/1::if_present/1 argument; we only consider books
+	% with an extra with a registered weight
 
 	print_heavy_extras :-
 		forall(
-			data_acquisition::book(_-Extra),
+			data_acquisition::book(_Title, _Author, _Year, Extra),
 			optional(Extra)::if_present(
 				[Name-Weight]>>(optional(Weight)::if_present(print_heavy_extra(Name)))
 			)
@@ -165,7 +167,7 @@ weight(horcrux_set,   123).
 	books_with_extras(Titles) :-
 		findall(
 			Title,
-			(	data_acquisition::book(Title-Extra),
+			(	data_acquisition::book(Title, _Author, _Year, Extra),
 				optional(Extra)::is_present
 			),
 			Titles
