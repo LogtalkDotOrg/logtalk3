@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.12,
+		version is 0.13,
 		author is 'Paulo Moura',
-		date is 2019/11/23,
+		date is 2019/11/25,
 		comment is 'Unit tests for the "optionals" library.'
 	]).
 
@@ -118,6 +118,10 @@
 		optional::of(a, Ref), optional(Ref)::map(char_code, NewRef),
 		optional(NewRef)::get(Term), Term == 97.
 
+	succeeds(optional_map_2_03) :-
+		optional::of(a, Ref), optional(Ref)::map(is(_), NewRef),
+		optional(NewRef)::is_empty.
+
 	% flat_map/2 tests
 
 	succeeds(optional_flat_map_2_01) :-
@@ -127,6 +131,24 @@
 	succeeds(optional_flat_map_2_02) :-
 		optional::of(a, Ref), optional(Ref)::flat_map(flat_map_closure, NewRef),
 		optional(NewRef)::get(Term), Term == 97.
+
+	succeeds(optional_flat_map_2_03) :-
+		optional::of(a, Ref), optional(Ref)::flat_map(is(_), NewRef),
+		optional(NewRef)::is_empty.
+
+	% or/2 tests
+
+	succeeds(optional_or_2_01) :-
+		optional::empty(Ref), optional(Ref)::or(NewRef, optional::empty),
+		optional(NewRef)::is_empty.
+
+	succeeds(optional_or_2_02) :-
+		optional::empty(Ref), optional(Ref)::or(NewRef, optional::of(a)),
+		optional(NewRef)::get(Term), Term == a.
+
+	succeeds(optional_or_2_03) :-
+		optional::of(a, Ref), optional(Ref)::or(NewRef, optional::empty),
+		NewRef == Ref.
 
 	% get/1 tests
 

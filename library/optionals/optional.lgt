@@ -144,7 +144,7 @@
 	:- mode(filter(+callable, --nonvar), one).
 	:- info(filter/2, [
 		comment is 'Returns the reference when it is non-empty and the term it holds satisfies a closure. Otherwise returns an empty reference.',
-		argnames is ['Closure', 'Reference']
+		argnames is ['Closure', 'NewReference']
 	]).
 
 	:- public(map/2).
@@ -161,6 +161,14 @@
 	:- info(flat_map/2, [
 		comment is 'When the reference is non-empty and mapping a closure with the term it holds and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.',
 		argnames is ['Closure', 'NewReference']
+	]).
+
+	:- public(or/2).
+	:- meta_predicate(or(*, 1)).
+	:- mode(or(--term, @callable), zero_or_one).
+	:- info(or/2, [
+		comment is 'Returns the same reference if not empty. Otherwise calls closure to generate a new reference. Fails if reference is empty and calling the closure fails or throws an error.',
+		argnames is ['NewReference', 'Closure']
 	]).
 
 	:- public(get/1).
@@ -241,7 +249,7 @@
 	map(Closure, NewReference) :-
 		parameter(1, Reference),
 		(	Reference = optional(Term),
-			call(Closure, Term, NewTerm) ->
+			catch(call(Closure, Term, NewTerm), _, fail) ->
 			NewReference = optional(NewTerm)
 		;	NewReference = empty
 		).
@@ -249,9 +257,16 @@
 	flat_map(Closure, NewReference) :-
 		parameter(1, Reference),
 		(	Reference = optional(Term),
-			call(Closure, Term, NewReference) ->
+			catch(call(Closure, Term, NewReference), _, fail) ->
 			true
 		;	NewReference = empty
+		).
+
+	or(NewReference, Closure) :-
+		parameter(1, Reference),
+		(	Reference = optional(_) ->
+			NewReference = Reference
+		;	catch(call(Closure, NewReference), _, fail)
 		).
 
 	get(Term) :-
