@@ -139,6 +139,14 @@
 		argnames is ['Closure']
 	]).
 
+	:- public(if_present_or_else/2).
+	:- meta_predicate(if_present_or_else(1, 0)).
+	:- mode(if_present_or_else(+callable, +callable), zero_or_more).
+	:- info(if_present_or_else/2, [
+		comment is 'Applies a closure if the reference holds a term using the term as additional argument. Otherwise calls the given goal.',
+		argnames is ['Closure', 'Goal']
+	]).
+
 	:- public(filter/2).
 	:- meta_predicate(filter(1, *)).
 	:- mode(filter(+callable, --nonvar), one).
@@ -234,6 +242,14 @@
 		parameter(1, Reference),
 		(	Reference == empty ->
 			true
+		;	Reference = optional(Term),
+			call(Closure, Term)
+		).
+
+	if_present_or_else(Closure, Goal) :-
+		parameter(1, Reference),
+		(	Reference == empty ->
+			call(Goal)
 		;	Reference = optional(Term),
 			call(Closure, Term)
 		).

@@ -61,7 +61,8 @@ Library
 * ADDED: Predicates `ensure_directory/1` and `ensure_file/1` to the `os`
 library.
 
-* ADDED: Predicates `or/2` and `or_else_throw/2` to the `optionals` library.
+* ADDED: Predicates `if_present_or_else/2`, `or/2`, and `or_else_throw/2` to
+the `optionals` library.
 
 * FIXED: Predicates `map/2` and `flat_map/2` of the `optionals` library to also
 return an empty optional when calling the closure argument throws an error.

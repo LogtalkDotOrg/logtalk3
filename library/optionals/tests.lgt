@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.13,
+		version is 0.14,
 		author is 'Paulo Moura',
 		date is 2019/11/25,
 		comment is 'Unit tests for the "optionals" library.'
@@ -97,6 +97,16 @@
 	succeeds(optional_if_present_1_02) :-
 		optional::of(0, Ref), optional(Ref)::if_present({Y}/[X]>>(Y is X + 1)),
 		Y == 1.
+
+	% if_present_or_else/1 tests
+
+	succeeds(optional_if_present_or_else_2_01) :-
+		optional::empty(Ref), optional(Ref)::if_present_or_else('='(X), X = b),
+		X == b.
+
+	succeeds(optional_if_present_or_else_2_02) :-
+		optional::of(a, Ref), optional(Ref)::if_present_or_else('='(X), X = b),
+		X == a.
 
 	% filter/2 tests
 

@@ -164,6 +164,31 @@ Applies a closure if the reference holds a term using the term as additional arg
 
 .. raw:: html
 
+   <div id="if_present_or_else/2"> </div>
+
+.. index:: if_present_or_else/2
+.. _optional/1::if_present_or_else/2:
+
+``if_present_or_else/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Applies a closure if the reference holds a term using the term as additional argument. Otherwise calls the given goal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``if_present_or_else(Closure,Goal)``
+| **Meta-predicate template:**
+|    ``if_present_or_else(1,0)``
+| **Mode and number of proofs:**
+|    ``if_present_or_else(+callable,+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
    <div id="is_empty/0"> </div>
 
 .. index:: is_empty/0
