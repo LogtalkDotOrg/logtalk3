@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.15,
+		version is 0.16,
 		author is 'Paulo Moura',
 		date is 2019/11/26,
 		comment is 'Unit tests for the "optionals" library.'
@@ -61,6 +61,21 @@
 
 	succeeds(optional_from_goal_3_04) :-
 		optional::from_goal(2 is 3, _, Optional), optional(Optional)::is_empty.
+
+	% from_goal/2 tests
+
+	succeeds(optional_from_goal_2_01) :-
+		optional::from_goal([Y]>>(Y is 1+2), Optional), optional(Optional)::is_present.
+
+	succeeds(optional_from_goal_2_02) :-
+		optional::from_goal([Y]>>(Y is 1+2), Optional), optional(Optional)::get(Term),
+		Term == 3.
+
+	succeeds(optional_from_goal_2_03) :-
+		optional::from_goal(is(_), Optional), optional(Optional)::is_empty.
+
+	succeeds(optional_from_goal_2_04) :-
+		optional::from_goal(nonvar, Optional), optional(Optional)::is_empty.
 
 	% is_empty/0 tests
 

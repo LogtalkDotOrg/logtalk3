@@ -22,7 +22,7 @@
 :- object(optional).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
 		date is 2019/11/26,
 		comment is 'Constructors for optional terms. An optional term is either empty or holds a value. Optional terms should be regarded as opaque terms and always used with the ``optional/1`` object by passing the optional term as a parameter.',
@@ -54,12 +54,29 @@
 		argnames is ['Goal', 'Value', 'Optional']
 	]).
 
+	:- public(from_goal/2).
+	:- meta_predicate(from_goal(1, *)).
+	:- mode(from_goal(+callable, --nonvar), one).
+	:- info(from_goal/2, [
+		comment is 'Constructs an optional term holding a value bound by calling the given closure. Returns an empty optional term if the closure fails or throws an error.',
+		argnames is ['Closure', 'Optional']
+	]).
+
 	empty(empty).
 
 	of(Term, optional(Term)).
 
 	from_goal(Goal, Value, Optional) :-
 		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
+				Optional = optional(Value)
+			;	Optional = empty
+			)
+		;	Optional = empty
+		).
+
+	from_goal(Closure, Optional) :-
+		(	catch(call(Closure, Value), Error, true) ->
 			(	var(Error) ->
 				Optional = optional(Value)
 			;	Optional = empty

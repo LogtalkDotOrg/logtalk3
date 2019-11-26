@@ -11,7 +11,7 @@
 Constructors for optional terms. An optional term is either empty or holds a value. Optional terms should be regarded as opaque terms and always used with the ``optional/1`` object by passing the optional term as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.5
+| **Version:** 1.6
 | **Date:** 2019/11/26
 
 | **Compilation flags:**
@@ -81,6 +81,31 @@ Constructs an optional term holding a value bound by calling the given goal. Ret
 |    ``from_goal(0,*,*)``
 | **Mode and number of proofs:**
 |    ``from_goal(+callable,--term,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="from_goal/2"> </div>
+
+.. index:: from_goal/2
+.. _optional/0::from_goal/2:
+
+``from_goal/2``
+^^^^^^^^^^^^^^^
+
+Constructs an optional term holding a value bound by calling the given closure. Returns an empty optional term if the closure fails or throws an error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``from_goal(Closure,Optional)``
+| **Meta-predicate template:**
+|    ``from_goal(1,*)``
+| **Mode and number of proofs:**
+|    ``from_goal(+callable,--nonvar)`` - ``one``
 
 
 ------------

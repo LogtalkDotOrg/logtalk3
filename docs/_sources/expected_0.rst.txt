@@ -11,7 +11,7 @@
 Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.3
+| **Version:** 1.5
 | **Date:** 2019/11/26
 
 | **Compilation flags:**
@@ -72,7 +72,7 @@ Constructs an expected term holding a value bound by calling the given goal. Oth
 ``from_goal/3``
 ^^^^^^^^^^^^^^^
 
-Constructs an expected term holding a value bound by calling the given goal. Otherwise returns a reference with the unexpected goal error or failure represented by the atom ``fail``.
+Constructs an expected term holding a value bound by calling the given goal. Otherwise returns an expected term with the unexpected goal error or, in case of closure goal, the atom ``fail``.
 
 | **Compilation flags:**
 |    ``static``
@@ -83,6 +83,31 @@ Constructs an expected term holding a value bound by calling the given goal. Oth
 |    ``from_goal(0,*,*)``
 | **Mode and number of proofs:**
 |    ``from_goal(+callable,--term,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="from_goal/2"> </div>
+
+.. index:: from_goal/2
+.. _expected/0::from_goal/2:
+
+``from_goal/2``
+^^^^^^^^^^^^^^^
+
+Constructs an expected term holding a value bound by calling the given closure. Otherwise returns an expected term holding the unexpected closure error or, in case of closure failure, the atom ``fail``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``from_goal(Closure,Expected)``
+| **Meta-predicate template:**
+|    ``from_goal(1,*)``
+| **Mode and number of proofs:**
+|    ``from_goal(+callable,--nonvar)`` - ``one``
 
 
 ------------

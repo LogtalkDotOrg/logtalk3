@@ -63,6 +63,8 @@ Library
 * ADDED: Predicates `ensure_directory/1` and `ensure_file/1` to the `os`
 library.
 
+* ADDED: Predicate `from_goal/2` to the `expecteds` and `optionals` libraries.
+
 * ADDED: Predicates `if_present_or_else/2`, `or/2`, and `or_else_throw/2` to
 the `optionals` library.
 

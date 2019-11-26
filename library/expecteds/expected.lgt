@@ -21,7 +21,7 @@
 :- object(expected).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2019/11/26,
 		comment is 'Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.',
@@ -61,6 +61,14 @@
 		argnames is ['Goal', 'Value', 'Expected']
 	]).
 
+	:- public(from_goal/2).
+	:- meta_predicate(from_goal(1, *)).
+	:- mode(from_goal(+callable, --nonvar), one).
+	:- info(from_goal/2, [
+		comment is 'Constructs an expected term holding a value bound by calling the given closure. Otherwise returns an expected term holding the unexpected closure error or, in case of closure failure, the atom ``fail``.',
+		argnames is ['Closure', 'Expected']
+	]).
+
 	of_unexpected(Error, unexpected(Error)).
 
 	of_expected(Value, expected(Value)).
@@ -76,6 +84,15 @@
 
 	from_goal(Goal, Value, Expected) :-
 		from_goal(Goal, Value, fail, Expected).
+
+	from_goal(Closure, Expected) :-
+		(	catch(call(Closure, Value), Error, true) ->
+			(	var(Error) ->
+				Expected = expected(Value)
+			;	Expected = unexpected(Error)
+			)
+		;	Expected = unexpected(fail)
+		).
 
 	:- multifile(type::type/1).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog
