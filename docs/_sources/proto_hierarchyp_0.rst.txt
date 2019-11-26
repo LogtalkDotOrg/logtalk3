@@ -36,52 +36,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="extension/1"> </div>
-
-.. index:: extension/1
-.. _proto_hierarchyp/0::extension/1:
-
-``extension/1``
-^^^^^^^^^^^^^^^
-
-Returns, by backtracking, all object direct descendants.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``extension(Extension)``
-| **Mode and number of proofs:**
-|    ``extension(?object)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="extensions/1"> </div>
-
-.. index:: extensions/1
-.. _proto_hierarchyp/0::extensions/1:
-
-``extensions/1``
-^^^^^^^^^^^^^^^^
-
-List of all object direct descendants.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``extensions(Extensions)``
-| **Mode and number of proofs:**
-|    ``extensions(-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="parent/1"> </div>
 
 .. index:: parent/1
@@ -122,6 +76,52 @@ List of all object parents.
 |    ``parents(Parents)``
 | **Mode and number of proofs:**
 |    ``parents(-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="extension/1"> </div>
+
+.. index:: extension/1
+.. _proto_hierarchyp/0::extension/1:
+
+``extension/1``
+^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all object direct descendants.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extension(Extension)``
+| **Mode and number of proofs:**
+|    ``extension(?object)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="extensions/1"> </div>
+
+.. index:: extensions/1
+.. _proto_hierarchyp/0::extensions/1:
+
+``extensions/1``
+^^^^^^^^^^^^^^^^
+
+List of all object direct descendants.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extensions(Extensions)``
+| **Mode and number of proofs:**
+|    ``extensions(-list)`` - ``one``
 
 
 ------------

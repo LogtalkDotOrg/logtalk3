@@ -37,29 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="check/1"> </div>
-
-.. index:: check/1
-.. _termp/0::check/1:
-
-``check/1``
-^^^^^^^^^^^
-
-Checks if a term is valid. Throws an exception if the term is not valid.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``check(Term)``
-| **Mode and number of proofs:**
-|    ``check(@nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="depth/2"> </div>
 
 .. index:: depth/2
@@ -152,29 +129,6 @@ True if the variable occurs in the term.
 
 .. raw:: html
 
-   <div id="singletons/2"> </div>
-
-.. index:: singletons/2
-.. _termp/0::singletons/2:
-
-``singletons/2``
-^^^^^^^^^^^^^^^^
-
-Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``singletons(Term,Singletons)``
-| **Mode and number of proofs:**
-|    ``singletons(@term,-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="subsumes/2"> </div>
 
 .. index:: subsumes/2
@@ -244,23 +198,23 @@ Term is valid.
 
 .. raw:: html
 
-   <div id="variables/2"> </div>
+   <div id="check/1"> </div>
 
-.. index:: variables/2
-.. _termp/0::variables/2:
+.. index:: check/1
+.. _termp/0::check/1:
 
-``variables/2``
-^^^^^^^^^^^^^^^
+``check/1``
+^^^^^^^^^^^
 
-Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).
+Checks if a term is valid. Throws an exception if the term is not valid.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``variables(Term,List)``
+|    ``check(Term)``
 | **Mode and number of proofs:**
-|    ``variables(@term,-list)`` - ``one``
+|    ``check(@nonvar)`` - ``one``
 
 
 ------------
@@ -284,6 +238,52 @@ Each term is a variant of the other (i.e. they are structurally equivalent).
 |    ``variant(Term1,Term2)``
 | **Mode and number of proofs:**
 |    ``variant(@term,@term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="variables/2"> </div>
+
+.. index:: variables/2
+.. _termp/0::variables/2:
+
+``variables/2``
+^^^^^^^^^^^^^^^
+
+Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variables(Term,List)``
+| **Mode and number of proofs:**
+|    ``variables(@term,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="singletons/2"> </div>
+
+.. index:: singletons/2
+.. _termp/0::singletons/2:
+
+``singletons/2``
+^^^^^^^^^^^^^^^^
+
+Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``singletons(Term,Singletons)``
+| **Mode and number of proofs:**
+|    ``singletons(@term,-list)`` - ``one``
 
 
 ------------

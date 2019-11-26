@@ -71,29 +71,6 @@ Returns the values stored in the expected terms that hold a value.
 
 .. raw:: html
 
-   <div id="partition/3"> </div>
-
-.. index:: partition/3
-.. _either/0::partition/3:
-
-``partition/3``
-^^^^^^^^^^^^^^^
-
-Retrieves and partitions the values and errors hold by the expected terms.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``partition(Expecteds,Values,Errors)``
-| **Mode and number of proofs:**
-|    ``partition(+list(expected),-list,-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="unexpecteds/2"> </div>
 
 .. index:: unexpecteds/2
@@ -111,6 +88,29 @@ Returns the errors stored in the expected terms that hold an error.
 |    ``unexpecteds(Expecteds,Errors)``
 | **Mode and number of proofs:**
 |    ``unexpecteds(+list(expected),-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="partition/3"> </div>
+
+.. index:: partition/3
+.. _either/0::partition/3:
+
+``partition/3``
+^^^^^^^^^^^^^^^
+
+Retrieves and partitions the values and errors hold by the expected terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition(Expecteds,Values,Errors)``
+| **Mode and number of proofs:**
+|    ``partition(+list(expected),-list,-list)`` - ``one``
 
 
 ------------

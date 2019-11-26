@@ -37,52 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="file_to_chars/2"> </div>
-
-.. index:: file_to_chars/2
-.. _reader/0::file_to_chars/2:
-
-``file_to_chars/2``
-^^^^^^^^^^^^^^^^^^^
-
-Reads a text file into a list of characters.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``file_to_chars(File,Chars)``
-| **Mode and number of proofs:**
-|    ``file_to_chars(+atom,-list(character))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="file_to_chars/3"> </div>
-
-.. index:: file_to_chars/3
-.. _reader/0::file_to_chars/3:
-
-``file_to_chars/3``
-^^^^^^^^^^^^^^^^^^^
-
-Reads a text file into a list of characters. The list is terminated by the given tail.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``file_to_chars(File,Chars,Tail)``
-| **Mode and number of proofs:**
-|    ``file_to_chars(+atom,-list(character),@term)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="file_to_codes/2"> </div>
 
 .. index:: file_to_codes/2
@@ -123,6 +77,52 @@ Reads a text file into a list of character codes. The list is terminated by the 
 |    ``file_to_codes(File,Codes,Tail)``
 | **Mode and number of proofs:**
 |    ``file_to_codes(+atom,-list(character_code),@term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="file_to_chars/2"> </div>
+
+.. index:: file_to_chars/2
+.. _reader/0::file_to_chars/2:
+
+``file_to_chars/2``
+^^^^^^^^^^^^^^^^^^^
+
+Reads a text file into a list of characters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_to_chars(File,Chars)``
+| **Mode and number of proofs:**
+|    ``file_to_chars(+atom,-list(character))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="file_to_chars/3"> </div>
+
+.. index:: file_to_chars/3
+.. _reader/0::file_to_chars/3:
+
+``file_to_chars/3``
+^^^^^^^^^^^^^^^^^^^
+
+Reads a text file into a list of characters. The list is terminated by the given tail.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_to_chars(File,Chars,Tail)``
+| **Mode and number of proofs:**
+|    ``file_to_chars(+atom,-list(character),@term)`` - ``one``
 
 
 ------------
@@ -175,46 +175,46 @@ Reads a text file into a list of terms. The list is terminated by the given tail
 
 .. raw:: html
 
-   <div id="line_to_codes/2"> </div>
+   <div id="stream_to_codes/2"> </div>
 
-.. index:: line_to_codes/2
-.. _reader/0::line_to_codes/2:
+.. index:: stream_to_codes/2
+.. _reader/0::stream_to_codes/2:
 
-``line_to_codes/2``
-^^^^^^^^^^^^^^^^^^^
+``stream_to_codes/2``
+^^^^^^^^^^^^^^^^^^^^^
 
-Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies ``Codes`` with ``end_of_file`` at the end of the file.
+Reads a text stream into a list of character codes. Does not close the stream.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``line_to_codes(Stream,Codes)``
+|    ``stream_to_codes(Stream,Codes)``
 | **Mode and number of proofs:**
-|    ``line_to_codes(+stream_or_alias,-list(character_code))`` - ``zero_or_one``
+|    ``stream_to_codes(+stream_or_alias,-list(character_code))`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="line_to_codes/3"> </div>
+   <div id="stream_to_codes/3"> </div>
 
-.. index:: line_to_codes/3
-.. _reader/0::line_to_codes/3:
+.. index:: stream_to_codes/3
+.. _reader/0::stream_to_codes/3:
 
-``line_to_codes/3``
-^^^^^^^^^^^^^^^^^^^
+``stream_to_codes/3``
+^^^^^^^^^^^^^^^^^^^^^
 
-Reads a line from a text stream into a list of codes. Keeps the end-of-line marker normalized to the line feed control character. The list is terminated by the given tail, which is unified with the empty list at the end of the file.
+Reads a text stream into a list of character codes. Does not close the stream. The list is terminated by the given tail.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``line_to_codes(Stream,Codes,Tail)``
+|    ``stream_to_codes(Stream,Codes,Tail)``
 | **Mode and number of proofs:**
-|    ``line_to_codes(+stream_or_alias,-list(character_code),?term)`` - ``zero_or_one``
+|    ``stream_to_codes(+stream_or_alias,-list(character_code),@term)`` - ``one``
 
 
 ------------
@@ -267,52 +267,6 @@ Reads a text stream into a list of characters. Does not close the stream. The li
 
 .. raw:: html
 
-   <div id="stream_to_codes/2"> </div>
-
-.. index:: stream_to_codes/2
-.. _reader/0::stream_to_codes/2:
-
-``stream_to_codes/2``
-^^^^^^^^^^^^^^^^^^^^^
-
-Reads a text stream into a list of character codes. Does not close the stream.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``stream_to_codes(Stream,Codes)``
-| **Mode and number of proofs:**
-|    ``stream_to_codes(+stream_or_alias,-list(character_code))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="stream_to_codes/3"> </div>
-
-.. index:: stream_to_codes/3
-.. _reader/0::stream_to_codes/3:
-
-``stream_to_codes/3``
-^^^^^^^^^^^^^^^^^^^^^
-
-Reads a text stream into a list of character codes. Does not close the stream. The list is terminated by the given tail.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``stream_to_codes(Stream,Codes,Tail)``
-| **Mode and number of proofs:**
-|    ``stream_to_codes(+stream_or_alias,-list(character_code),@term)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="stream_to_terms/2"> </div>
 
 .. index:: stream_to_terms/2
@@ -353,6 +307,52 @@ Reads a text stream into a list of terms. Does not close the stream. The list is
 |    ``stream_to_terms(Stream,Terms,Tail)``
 | **Mode and number of proofs:**
 |    ``stream_to_terms(+stream_or_alias,-list(term),@term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="line_to_codes/2"> </div>
+
+.. index:: line_to_codes/2
+.. _reader/0::line_to_codes/2:
+
+``line_to_codes/2``
+^^^^^^^^^^^^^^^^^^^
+
+Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies ``Codes`` with ``end_of_file`` at the end of the file.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``line_to_codes(Stream,Codes)``
+| **Mode and number of proofs:**
+|    ``line_to_codes(+stream_or_alias,-list(character_code))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="line_to_codes/3"> </div>
+
+.. index:: line_to_codes/3
+.. _reader/0::line_to_codes/3:
+
+``line_to_codes/3``
+^^^^^^^^^^^^^^^^^^^
+
+Reads a line from a text stream into a list of codes. Keeps the end-of-line marker normalized to the line feed control character. The list is terminated by the given tail, which is unified with the empty list at the end of the file.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``line_to_codes(Stream,Codes,Tail)``
+| **Mode and number of proofs:**
+|    ``line_to_codes(+stream_or_alias,-list(character_code),?term)`` - ``zero_or_one``
 
 
 ------------

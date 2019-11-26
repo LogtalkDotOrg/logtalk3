@@ -67,61 +67,13 @@ Private predicates
 
 .. raw:: html
 
-   <div id="invocation_number_/1"> </div>
+   <div id="tracing_/0"> </div>
 
-.. index:: invocation_number_/1
-.. _debugger/0::invocation_number_/1:
+.. index:: tracing_/0
+.. _debugger/0::tracing_/0:
 
-``invocation_number_/1``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="jump_to_invocation_number_/1"> </div>
-
-.. index:: jump_to_invocation_number_/1
-.. _debugger/0::jump_to_invocation_number_/1:
-
-``jump_to_invocation_number_/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="leashing_/1"> </div>
-
-.. index:: leashing_/1
-.. _debugger/0::leashing_/1:
-
-``leashing_/1``
-^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="quasi_skipping_/0"> </div>
-
-.. index:: quasi_skipping_/0
-.. _debugger/0::quasi_skipping_/0:
-
-``quasi_skipping_/0``
-^^^^^^^^^^^^^^^^^^^^^
+``tracing_/0``
+^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -147,12 +99,12 @@ Private predicates
 
 .. raw:: html
 
-   <div id="spying_context_/4"> </div>
+   <div id="quasi_skipping_/0"> </div>
 
-.. index:: spying_context_/4
-.. _debugger/0::spying_context_/4:
+.. index:: quasi_skipping_/0
+.. _debugger/0::quasi_skipping_/0:
 
-``spying_context_/4``
+``quasi_skipping_/0``
 ^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
@@ -195,13 +147,13 @@ Private predicates
 
 .. raw:: html
 
-   <div id="tracing_/0"> </div>
+   <div id="spying_context_/4"> </div>
 
-.. index:: tracing_/0
-.. _debugger/0::tracing_/0:
+.. index:: spying_context_/4
+.. _debugger/0::spying_context_/4:
 
-``tracing_/0``
-^^^^^^^^^^^^^^
+``spying_context_/4``
+^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -211,13 +163,45 @@ Private predicates
 
 .. raw:: html
 
-   <div id="write_max_depth_/1"> </div>
+   <div id="leashing_/1"> </div>
 
-.. index:: write_max_depth_/1
-.. _debugger/0::write_max_depth_/1:
+.. index:: leashing_/1
+.. _debugger/0::leashing_/1:
 
-``write_max_depth_/1``
-^^^^^^^^^^^^^^^^^^^^^^
+``leashing_/1``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="invocation_number_/1"> </div>
+
+.. index:: invocation_number_/1
+.. _debugger/0::invocation_number_/1:
+
+``invocation_number_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="jump_to_invocation_number_/1"> </div>
+
+.. index:: jump_to_invocation_number_/1
+.. _debugger/0::jump_to_invocation_number_/1:
+
+``jump_to_invocation_number_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -234,6 +218,22 @@ Private predicates
 
 ``zap_to_port_/1``
 ^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="write_max_depth_/1"> </div>
+
+.. index:: write_max_depth_/1
+.. _debugger/0::write_max_depth_/1:
+
+``write_max_depth_/1``
+^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``

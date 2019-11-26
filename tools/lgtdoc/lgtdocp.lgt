@@ -21,9 +21,9 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 3.2,
+		version is 3.3,
 		author is 'Paulo Moura',
-		date is 2017/11/04,
+		date is 2019/11/26,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the ``source_data`` flag turned on.',
@@ -38,6 +38,7 @@
 			'exclude_files(List) option' - 'List of files to exclude when generating the XML documenting files.',
 			'exclude_paths(List) option' - 'List of (relative) library paths to exclude when generating the XML documenting files.',
 			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files.',
+			'sort_predicates(Boolean) option' - 'Sort entity predicates (default is ``false``)',
 			'Known issues' - 'The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.'
 		],
 		see_also is [lgtdoc]

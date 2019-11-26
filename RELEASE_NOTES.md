@@ -77,11 +77,11 @@ error argument when calling the goal generates an exception.
 Tools
 _____
 
+* ADDED: A boolean option, `sort_predicates/1`, to `lgtdoc` tool for writing
+predicate index lists sorted by predicate name (default value is `false`).
+
 * IMPROVED: The `lgtdoc` tool to list inherited public predicates in entity
 documentation.
-
-* IMPROVED: The `lgtdoc` tool to write predicate index lists sorted by
-predicate name.
 
 * IMPROVED: The `lgtunit` tool compatibility of the generated xUnit reports
 with xUnit output processors.

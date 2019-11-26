@@ -39,6 +39,52 @@ Public predicates
 
 .. raw:: html
 
+   <div id="of_unexpected/2"> </div>
+
+.. index:: of_unexpected/2
+.. _expected/0::of_unexpected/2:
+
+``of_unexpected/2``
+^^^^^^^^^^^^^^^^^^^
+
+Constructs an expected term from an error that represent that the expected value is missing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``of_unexpected(Error,Expected)``
+| **Mode and number of proofs:**
+|    ``of_unexpected(@term,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="of_expected/2"> </div>
+
+.. index:: of_expected/2
+.. _expected/0::of_expected/2:
+
+``of_expected/2``
+^^^^^^^^^^^^^^^^^
+
+Constructs an expected term from an expected value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``of_expected(Value,Expected)``
+| **Mode and number of proofs:**
+|    ``of_expected(@term,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="from_goal/4"> </div>
 
 .. index:: from_goal/4
@@ -108,52 +154,6 @@ Constructs an expected term holding a value bound by calling the given closure. 
 |    ``from_goal(1,*)``
 | **Mode and number of proofs:**
 |    ``from_goal(+callable,--nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="of_expected/2"> </div>
-
-.. index:: of_expected/2
-.. _expected/0::of_expected/2:
-
-``of_expected/2``
-^^^^^^^^^^^^^^^^^
-
-Constructs an expected term from an expected value.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``of_expected(Value,Expected)``
-| **Mode and number of proofs:**
-|    ``of_expected(@term,--nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="of_unexpected/2"> </div>
-
-.. index:: of_unexpected/2
-.. _expected/0::of_unexpected/2:
-
-``of_unexpected/2``
-^^^^^^^^^^^^^^^^^^^
-
-Constructs an expected term from an error that represent that the expected value is missing.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``of_unexpected(Error,Expected)``
-| **Mode and number of proofs:**
-|    ``of_unexpected(@term,--nonvar)`` - ``one``
 
 
 ------------

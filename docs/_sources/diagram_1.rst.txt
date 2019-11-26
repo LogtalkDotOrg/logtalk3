@@ -47,44 +47,69 @@ Public predicates
 
 .. raw:: html
 
-   <div id="all_files/1"> </div>
+   <div id="libraries/3"> </div>
 
-.. index:: all_files/1
-.. _diagram/1::all_files/1:
+.. index:: libraries/3
+.. _diagram/1::libraries/3:
 
-``all_files/1``
+``libraries/3``
 ^^^^^^^^^^^^^^^
 
-Creates a diagram for all loaded files using the specified options.
+Creates a diagram for a set of libraries using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``all_files(Options)``
+|    ``libraries(Project,Libraries,Options)``
 | **Mode and number of proofs:**
-|    ``all_files(+list(compound))`` - ``one``
+|    ``libraries(+atom,+list(atom),+list(compound))`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="all_files/0"> </div>
+   <div id="libraries/2"> </div>
 
-.. index:: all_files/0
-.. _diagram/1::all_files/0:
+.. index:: libraries/2
+.. _diagram/1::libraries/2:
 
-``all_files/0``
+``libraries/2``
 ^^^^^^^^^^^^^^^
 
-Creates a diagram for all loaded files using default options.
+Creates a diagram for a set of libraries using the default options. The ``Project`` argument is used as a prefix for the diagram file name.
 
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``libraries(Project,Libraries)``
 | **Mode and number of proofs:**
-|    ``all_files`` - ``one``
+|    ``libraries(+atom,+list(atom))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="libraries/1"> </div>
+
+.. index:: libraries/1
+.. _diagram/1::libraries/1:
+
+``libraries/1``
+^^^^^^^^^^^^^^^
+
+Creates a diagram for a set of libraries using the default options. The prefix ``libraries`` is used for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``libraries(Libraries)``
+| **Mode and number of proofs:**
+|    ``libraries(+list(atom))`` - ``one``
 
 
 ------------
@@ -135,92 +160,92 @@ Creates a diagram for all loaded libraries using default options.
 
 .. raw:: html
 
-   <div id="default_option/1"> </div>
+   <div id="rlibrary/2"> </div>
 
-.. index:: default_option/1
-.. _diagram/1::default_option/1:
+.. index:: rlibrary/2
+.. _diagram/1::rlibrary/2:
 
-``default_option/1``
-^^^^^^^^^^^^^^^^^^^^
+``rlibrary/2``
+^^^^^^^^^^^^^^
 
-Enumerates by backtracking the default options used when generating a diagram.
+Creates a diagram for a library and its sub-libraries using the specified options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``default_option(DefaultOption)``
+|    ``rlibrary(Library,Options)``
 | **Mode and number of proofs:**
-|    ``default_option(?compound)`` - ``zero_or_more``
+|    ``rlibrary(+atom,+list(compound))`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="default_options/1"> </div>
+   <div id="rlibrary/1"> </div>
 
-.. index:: default_options/1
-.. _diagram/1::default_options/1:
+.. index:: rlibrary/1
+.. _diagram/1::rlibrary/1:
 
-``default_options/1``
-^^^^^^^^^^^^^^^^^^^^^
+``rlibrary/1``
+^^^^^^^^^^^^^^
 
-Returns a list of the default options used when generating a diagram.
+Creates a diagram for a library and its sub-libraries using default options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``default_options(DefaultOptions)``
+|    ``rlibrary(Library)``
 | **Mode and number of proofs:**
-|    ``default_options(-list(compound))`` - ``one``
+|    ``rlibrary(+atom)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="diagram_description/1"> </div>
+   <div id="library/2"> </div>
 
-.. index:: diagram_description/1
-.. _diagram/1::diagram_description/1:
+.. index:: library/2
+.. _diagram/1::library/2:
 
-``diagram_description/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^
+``library/2``
+^^^^^^^^^^^^^
 
-Returns the diagram description.
+Creates a diagram for a library using the specified options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``diagram_description(Description)``
+|    ``library(Library,Options)``
 | **Mode and number of proofs:**
-|    ``diagram_description(-atom)`` - ``one``
+|    ``library(+atom,+list(compound))`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="diagram_name_suffix/1"> </div>
+   <div id="library/1"> </div>
 
-.. index:: diagram_name_suffix/1
-.. _diagram/1::diagram_name_suffix/1:
+.. index:: library/1
+.. _diagram/1::library/1:
 
-``diagram_name_suffix/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^
+``library/1``
+^^^^^^^^^^^^^
 
-Returns the diagram name suffix.
+Creates a diagram for a library using default options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``diagram_name_suffix(Suffix)``
+|    ``library(Library)``
 | **Mode and number of proofs:**
-|    ``diagram_name_suffix(-atom)`` - ``one``
+|    ``library(+atom)`` - ``one``
 
 
 ------------
@@ -267,6 +292,75 @@ Creates a diagram for a set of directories using the default options. The ``Proj
 |    ``directories(Project,Directories)``
 | **Mode and number of proofs:**
 |    ``directories(+atom,+list(atom))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="rdirectory/3"> </div>
+
+.. index:: rdirectory/3
+.. _diagram/1::rdirectory/3:
+
+``rdirectory/3``
+^^^^^^^^^^^^^^^^
+
+Creates a diagram for a directory and its sub-directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Project,Directory,Options)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="rdirectory/2"> </div>
+
+.. index:: rdirectory/2
+.. _diagram/1::rdirectory/2:
+
+``rdirectory/2``
+^^^^^^^^^^^^^^^^
+
+Creates a diagram for a directory and its sub-directories using default options. The ``Project`` argument is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Project,Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="rdirectory/1"> </div>
+
+.. index:: rdirectory/1
+.. _diagram/1::rdirectory/1:
+
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
+
+Creates a diagram for a directory and its sub-directories using default options. The name of the directory is used as a prefix for the diagram file name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom)`` - ``one``
 
 
 ------------
@@ -411,6 +505,50 @@ Creates a diagram for a set of files using the default options. The file can be 
 
 .. raw:: html
 
+   <div id="all_files/1"> </div>
+
+.. index:: all_files/1
+.. _diagram/1::all_files/1:
+
+``all_files/1``
+^^^^^^^^^^^^^^^
+
+Creates a diagram for all loaded files using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``all_files(Options)``
+| **Mode and number of proofs:**
+|    ``all_files(+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="all_files/0"> </div>
+
+.. index:: all_files/0
+.. _diagram/1::all_files/0:
+
+``all_files/0``
+^^^^^^^^^^^^^^^
+
+Creates a diagram for all loaded files using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``all_files`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="format_object/1"> </div>
 
 .. index:: format_object/1
@@ -434,230 +572,92 @@ Returns the identifier of the object implementing the graph language currently b
 
 .. raw:: html
 
-   <div id="libraries/3"> </div>
+   <div id="diagram_description/1"> </div>
 
-.. index:: libraries/3
-.. _diagram/1::libraries/3:
+.. index:: diagram_description/1
+.. _diagram/1::diagram_description/1:
 
-``libraries/3``
-^^^^^^^^^^^^^^^
+``diagram_description/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creates a diagram for a set of libraries using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
+Returns the diagram description.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``libraries(Project,Libraries,Options)``
+|    ``diagram_description(Description)``
 | **Mode and number of proofs:**
-|    ``libraries(+atom,+list(atom),+list(compound))`` - ``one``
+|    ``diagram_description(-atom)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="libraries/2"> </div>
+   <div id="diagram_name_suffix/1"> </div>
 
-.. index:: libraries/2
-.. _diagram/1::libraries/2:
+.. index:: diagram_name_suffix/1
+.. _diagram/1::diagram_name_suffix/1:
 
-``libraries/2``
-^^^^^^^^^^^^^^^
+``diagram_name_suffix/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creates a diagram for a set of libraries using the default options. The ``Project`` argument is used as a prefix for the diagram file name.
+Returns the diagram name suffix.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``libraries(Project,Libraries)``
+|    ``diagram_name_suffix(Suffix)``
 | **Mode and number of proofs:**
-|    ``libraries(+atom,+list(atom))`` - ``one``
+|    ``diagram_name_suffix(-atom)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="libraries/1"> </div>
+   <div id="default_option/1"> </div>
 
-.. index:: libraries/1
-.. _diagram/1::libraries/1:
+.. index:: default_option/1
+.. _diagram/1::default_option/1:
 
-``libraries/1``
-^^^^^^^^^^^^^^^
+``default_option/1``
+^^^^^^^^^^^^^^^^^^^^
 
-Creates a diagram for a set of libraries using the default options. The prefix ``libraries`` is used for the diagram file name.
+Enumerates by backtracking the default options used when generating a diagram.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``libraries(Libraries)``
+|    ``default_option(DefaultOption)``
 | **Mode and number of proofs:**
-|    ``libraries(+list(atom))`` - ``one``
+|    ``default_option(?compound)`` - ``zero_or_more``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="library/2"> </div>
+   <div id="default_options/1"> </div>
 
-.. index:: library/2
-.. _diagram/1::library/2:
+.. index:: default_options/1
+.. _diagram/1::default_options/1:
 
-``library/2``
-^^^^^^^^^^^^^
+``default_options/1``
+^^^^^^^^^^^^^^^^^^^^^
 
-Creates a diagram for a library using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``library(Library,Options)``
-| **Mode and number of proofs:**
-|    ``library(+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="library/1"> </div>
-
-.. index:: library/1
-.. _diagram/1::library/1:
-
-``library/1``
-^^^^^^^^^^^^^
-
-Creates a diagram for a library using default options.
+Returns a list of the default options used when generating a diagram.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``library(Library)``
+|    ``default_options(DefaultOptions)``
 | **Mode and number of proofs:**
-|    ``library(+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rdirectory/3"> </div>
-
-.. index:: rdirectory/3
-.. _diagram/1::rdirectory/3:
-
-``rdirectory/3``
-^^^^^^^^^^^^^^^^
-
-Creates a diagram for a directory and its sub-directories using the specified options. The ``Project`` argument is used as a prefix for the diagram file name.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rdirectory(Project,Directory,Options)``
-| **Mode and number of proofs:**
-|    ``rdirectory(+atom,+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rdirectory/2"> </div>
-
-.. index:: rdirectory/2
-.. _diagram/1::rdirectory/2:
-
-``rdirectory/2``
-^^^^^^^^^^^^^^^^
-
-Creates a diagram for a directory and its sub-directories using default options. The ``Project`` argument is used as a prefix for the diagram file name.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rdirectory(Project,Directory)``
-| **Mode and number of proofs:**
-|    ``rdirectory(+atom,+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rdirectory/1"> </div>
-
-.. index:: rdirectory/1
-.. _diagram/1::rdirectory/1:
-
-``rdirectory/1``
-^^^^^^^^^^^^^^^^
-
-Creates a diagram for a directory and its sub-directories using default options. The name of the directory is used as a prefix for the diagram file name.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rdirectory(Directory)``
-| **Mode and number of proofs:**
-|    ``rdirectory(+atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rlibrary/2"> </div>
-
-.. index:: rlibrary/2
-.. _diagram/1::rlibrary/2:
-
-``rlibrary/2``
-^^^^^^^^^^^^^^
-
-Creates a diagram for a library and its sub-libraries using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rlibrary(Library,Options)``
-| **Mode and number of proofs:**
-|    ``rlibrary(+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rlibrary/1"> </div>
-
-.. index:: rlibrary/1
-.. _diagram/1::rlibrary/1:
-
-``rlibrary/1``
-^^^^^^^^^^^^^^
-
-Creates a diagram for a library and its sub-libraries using default options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rlibrary(Library)``
-| **Mode and number of proofs:**
-|    ``rlibrary(+atom)`` - ``one``
+|    ``default_options(-list(compound))`` - ``one``
 
 
 ------------
@@ -667,46 +667,23 @@ Protected predicates
 
 .. raw:: html
 
-   <div id="add_link_options/3"> </div>
+   <div id="merge_options/2"> </div>
 
-.. index:: add_link_options/3
-.. _diagram/1::add_link_options/3:
+.. index:: merge_options/2
+.. _diagram/1::merge_options/2:
 
-``add_link_options/3``
-^^^^^^^^^^^^^^^^^^^^^^
+``merge_options/2``
+^^^^^^^^^^^^^^^^^^^
 
-Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph language) based on the specified path to the list of options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``add_link_options(Path,Options,LinkingOptions)``
-| **Mode and number of proofs:**
-|    ``add_link_options(+atom,+list(compound),-list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="add_node_zoom_option/4"> </div>
-
-.. index:: add_node_zoom_option/4
-.. _diagram/1::add_node_zoom_option/4:
-
-``add_node_zoom_option/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Adds node zoom options when using the zoom option.
+Merges the user options with the default options, returning the list of options used when generating a diagram. Path arguments in options are expanded to full paths. Also ensures that all directory paths end with a slash.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``add_node_zoom_option(Identifier,Suffix,Options,NodeOptions)``
+|    ``merge_options(UserOptions,Options)``
 | **Mode and number of proofs:**
-|    ``add_node_zoom_option(+atom,+atom,+list(compound),-list(compound))`` - ``one``
+|    ``merge_options(+list(compound),-list(compound))`` - ``one``
 
 
 ------------
@@ -736,6 +713,234 @@ Creates a diagram caption from the diagram description and the subject and its k
 
 .. raw:: html
 
+   <div id="output_rlibrary/3"> </div>
+
+.. index:: output_rlibrary/3
+.. _diagram/1::output_rlibrary/3:
+
+``output_rlibrary/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Generates diagram output for a library and its sub-libraries using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_rlibrary(Library,Path,Options)``
+| **Mode and number of proofs:**
+|    ``output_rlibrary(+atom,+atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_library/3"> </div>
+
+.. index:: output_library/3
+.. _diagram/1::output_library/3:
+
+``output_library/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates diagram output for a library using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_library(Library,Path,Options)``
+| **Mode and number of proofs:**
+|    ``output_library(+atom,+atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_rdirectory/3"> </div>
+
+.. index:: output_rdirectory/3
+.. _diagram/1::output_rdirectory/3:
+
+``output_rdirectory/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates diagram output for a directory and its sub-directories using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_rdirectory(Project,Path,Options)``
+| **Mode and number of proofs:**
+|    ``output_rdirectory(+atom,+atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_externals/1"> </div>
+
+.. index:: output_externals/1
+.. _diagram/1::output_externals/1:
+
+``output_externals/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Output external nodes using the specified options depending on the value of the boolean option ``externals/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_externals(Options)``
+| **Mode and number of proofs:**
+|    ``output_externals(+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_files/2"> </div>
+
+.. index:: output_files/2
+.. _diagram/1::output_files/2:
+
+``output_files/2``
+^^^^^^^^^^^^^^^^^^
+
+Generates diagram output for a list of files using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_files(Files,Options)``
+| **Mode and number of proofs:**
+|    ``output_files(+list,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_file/4"> </div>
+
+.. index:: output_file/4
+.. _diagram/1::output_file/4:
+
+``output_file/4``
+^^^^^^^^^^^^^^^^^
+
+Generates diagram output for a file using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_file(Path,Basename,Directory,Options)``
+| **Mode and number of proofs:**
+|    ``output_file(+atom,+atom,+atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_sub_diagrams/1"> </div>
+
+.. index:: output_sub_diagrams/1
+.. _diagram/1::output_sub_diagrams/1:
+
+``output_sub_diagrams/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Outputs sub-diagrams using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_sub_diagrams(Options)``
+| **Mode and number of proofs:**
+|    ``output_sub_diagrams(+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="reset/0"> </div>
+
+.. index:: reset/0
+.. _diagram/1::reset/0:
+
+``reset/0``
+^^^^^^^^^^^
+
+Resets all temporary information used when generating a diagram.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``reset`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_node/6"> </div>
+
+.. index:: output_node/6
+.. _diagram/1::output_node/6:
+
+``output_node/6``
+^^^^^^^^^^^^^^^^^
+
+Outputs a graph node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_node(Identifier,Label,Caption,Contents,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``output_node(+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="node/6"> </div>
+
+.. index:: node/6
+.. _diagram/1::node/6:
+
+``node/6``
+^^^^^^^^^^
+
+Enumerates, by backtracking, all saved nodes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``node(Identifier,Label,Caption,Contents,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``node(?nonvar,?nonvar,?nonvar,?list(compound),?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
    <div id="edge/5"> </div>
 
 .. index:: edge/5
@@ -759,46 +964,138 @@ Enumerates, by backtracking, all saved edges.
 
 .. raw:: html
 
-   <div id="filter_file_extension/3"> </div>
+   <div id="output_edges/1"> </div>
 
-.. index:: filter_file_extension/3
-.. _diagram/1::filter_file_extension/3:
+.. index:: output_edges/1
+.. _diagram/1::output_edges/1:
 
-``filter_file_extension/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``output_edges/1``
+^^^^^^^^^^^^^^^^^^
 
-Filters the file name extension depending on the ``file_extensions/1`` option.
+Outputs all edges.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``filter_file_extension(Basename,Options,Name)``
+|    ``output_edges(Options)``
 | **Mode and number of proofs:**
-|    ``filter_file_extension(+atom,+list(compound),-atom)`` - ``one``
+|    ``output_edges(+list(compound))`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="ground_entity_identifier/3"> </div>
+   <div id="save_edge/5"> </div>
 
-.. index:: ground_entity_identifier/3
-.. _diagram/1::ground_entity_identifier/3:
+.. index:: save_edge/5
+.. _diagram/1::save_edge/5:
 
-``ground_entity_identifier/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``save_edge/5``
+^^^^^^^^^^^^^^^
 
-Converts an entity identifier to a ground term.
+Saves a graph edge.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``ground_entity_identifier(Kind,Identifier,GroundIdentifier)``
+|    ``save_edge(From,To,Labels,Kind,Options)``
 | **Mode and number of proofs:**
-|    ``ground_entity_identifier(+atom,+callable,-callable)`` - ``one``
+|    ``save_edge(+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_missing_externals/1"> </div>
+
+.. index:: output_missing_externals/1
+.. _diagram/1::output_missing_externals/1:
+
+``output_missing_externals/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Outputs missing external nodes (usually due to unloaded resources) that are referenced from edges.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_missing_externals(Options)``
+| **Mode and number of proofs:**
+|    ``output_missing_externals(+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="not_excluded_file/3"> </div>
+
+.. index:: not_excluded_file/3
+.. _diagram/1::not_excluded_file/3:
+
+``not_excluded_file/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``not_excluded_file(ExcludedFiles,Path,Basename)``
+| **Mode and number of proofs:**
+|    ``not_excluded_file(+list(atom),+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="output_file_path/4"> </div>
+
+.. index:: output_file_path/4
+.. _diagram/1::output_file_path/4:
+
+``output_file_path/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the output file path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_file_path(Name,Options,Format,Path)``
+| **Mode and number of proofs:**
+|    ``output_file_path(+atom,+list(atom),+object_identifier,-atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="locate_library/2"> </div>
+
+.. index:: locate_library/2
+.. _diagram/1::locate_library/2:
+
+``locate_library/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Locates a library given its name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``locate_library(Library,Path)``
+| **Mode and number of proofs:**
+|    ``locate_library(+atom,-atom)`` - ``one``
 
 
 ------------
@@ -851,115 +1148,69 @@ Locates a file given its name, basename, full path, or library notation represen
 
 .. raw:: html
 
-   <div id="locate_library/2"> </div>
+   <div id="ground_entity_identifier/3"> </div>
 
-.. index:: locate_library/2
-.. _diagram/1::locate_library/2:
+.. index:: ground_entity_identifier/3
+.. _diagram/1::ground_entity_identifier/3:
 
-``locate_library/2``
-^^^^^^^^^^^^^^^^^^^^
+``ground_entity_identifier/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Locates a library given its name.
+Converts an entity identifier to a ground term.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``locate_library(Library,Path)``
+|    ``ground_entity_identifier(Kind,Identifier,GroundIdentifier)``
 | **Mode and number of proofs:**
-|    ``locate_library(+atom,-atom)`` - ``one``
+|    ``ground_entity_identifier(+atom,+callable,-callable)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="merge_options/2"> </div>
+   <div id="filter_file_extension/3"> </div>
 
-.. index:: merge_options/2
-.. _diagram/1::merge_options/2:
+.. index:: filter_file_extension/3
+.. _diagram/1::filter_file_extension/3:
 
-``merge_options/2``
-^^^^^^^^^^^^^^^^^^^
+``filter_file_extension/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Merges the user options with the default options, returning the list of options used when generating a diagram. Path arguments in options are expanded to full paths. Also ensures that all directory paths end with a slash.
+Filters the file name extension depending on the ``file_extensions/1`` option.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``merge_options(UserOptions,Options)``
+|    ``filter_file_extension(Basename,Options,Name)``
 | **Mode and number of proofs:**
-|    ``merge_options(+list(compound),-list(compound))`` - ``one``
+|    ``filter_file_extension(+atom,+list(compound),-atom)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="message_diagram_description/1"> </div>
+   <div id="add_link_options/3"> </div>
 
-.. index:: message_diagram_description/1
-.. _diagram/1::message_diagram_description/1:
+.. index:: add_link_options/3
+.. _diagram/1::add_link_options/3:
 
-``message_diagram_description/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``add_link_options/3``
+^^^^^^^^^^^^^^^^^^^^^^
 
-Diagram description for progress messages.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``message_diagram_description(Description)``
-| **Mode and number of proofs:**
-|    ``message_diagram_description(?atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="node/6"> </div>
-
-.. index:: node/6
-.. _diagram/1::node/6:
-
-``node/6``
-^^^^^^^^^^
-
-Enumerates, by backtracking, all saved nodes.
+Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph language) based on the specified path to the list of options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``node(Identifier,Label,Caption,Contents,Kind,Options)``
+|    ``add_link_options(Path,Options,LinkingOptions)``
 | **Mode and number of proofs:**
-|    ``node(?nonvar,?nonvar,?nonvar,?list(compound),?atom,?list(compound))`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="not_excluded_file/3"> </div>
-
-.. index:: not_excluded_file/3
-.. _diagram/1::not_excluded_file/3:
-
-``not_excluded_file/3``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``not_excluded_file(ExcludedFiles,Path,Basename)``
-| **Mode and number of proofs:**
-|    ``not_excluded_file(+list(atom),+atom,+atom)`` - ``zero_or_one``
+|    ``add_link_options(+atom,+list(compound),-list(compound))`` - ``one``
 
 
 ------------
@@ -989,326 +1240,52 @@ Removes a prefix from a path, returning the relative path, when using the option
 
 .. raw:: html
 
-   <div id="output_edges/1"> </div>
+   <div id="add_node_zoom_option/4"> </div>
 
-.. index:: output_edges/1
-.. _diagram/1::output_edges/1:
+.. index:: add_node_zoom_option/4
+.. _diagram/1::add_node_zoom_option/4:
 
-``output_edges/1``
-^^^^^^^^^^^^^^^^^^
+``add_node_zoom_option/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Outputs all edges.
+Adds node zoom options when using the zoom option.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``output_edges(Options)``
+|    ``add_node_zoom_option(Identifier,Suffix,Options,NodeOptions)``
 | **Mode and number of proofs:**
-|    ``output_edges(+list(compound))`` - ``one``
+|    ``add_node_zoom_option(+atom,+atom,+list(compound),-list(compound))`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="output_externals/1"> </div>
+   <div id="message_diagram_description/1"> </div>
 
-.. index:: output_externals/1
-.. _diagram/1::output_externals/1:
+.. index:: message_diagram_description/1
+.. _diagram/1::message_diagram_description/1:
 
-``output_externals/1``
-^^^^^^^^^^^^^^^^^^^^^^
+``message_diagram_description/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Output external nodes using the specified options depending on the value of the boolean option ``externals/1``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_externals(Options)``
-| **Mode and number of proofs:**
-|    ``output_externals(+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_file/4"> </div>
-
-.. index:: output_file/4
-.. _diagram/1::output_file/4:
-
-``output_file/4``
-^^^^^^^^^^^^^^^^^
-
-Generates diagram output for a file using the specified options.
+Diagram description for progress messages.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``output_file(Path,Basename,Directory,Options)``
+|    ``message_diagram_description(Description)``
 | **Mode and number of proofs:**
-|    ``output_file(+atom,+atom,+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_file_path/4"> </div>
-
-.. index:: output_file_path/4
-.. _diagram/1::output_file_path/4:
-
-``output_file_path/4``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Returns the output file path.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_file_path(Name,Options,Format,Path)``
-| **Mode and number of proofs:**
-|    ``output_file_path(+atom,+list(atom),+object_identifier,-atom)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_files/2"> </div>
-
-.. index:: output_files/2
-.. _diagram/1::output_files/2:
-
-``output_files/2``
-^^^^^^^^^^^^^^^^^^
-
-Generates diagram output for a list of files using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_files(Files,Options)``
-| **Mode and number of proofs:**
-|    ``output_files(+list,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_library/3"> </div>
-
-.. index:: output_library/3
-.. _diagram/1::output_library/3:
-
-``output_library/3``
-^^^^^^^^^^^^^^^^^^^^
-
-Generates diagram output for a library using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_library(Library,Path,Options)``
-| **Mode and number of proofs:**
-|    ``output_library(+atom,+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_missing_externals/1"> </div>
-
-.. index:: output_missing_externals/1
-.. _diagram/1::output_missing_externals/1:
-
-``output_missing_externals/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Outputs missing external nodes (usually due to unloaded resources) that are referenced from edges.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_missing_externals(Options)``
-| **Mode and number of proofs:**
-|    ``output_missing_externals(+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_node/6"> </div>
-
-.. index:: output_node/6
-.. _diagram/1::output_node/6:
-
-``output_node/6``
-^^^^^^^^^^^^^^^^^
-
-Outputs a graph node.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_node(Identifier,Label,Caption,Contents,Kind,Options)``
-| **Mode and number of proofs:**
-|    ``output_node(+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_rdirectory/3"> </div>
-
-.. index:: output_rdirectory/3
-.. _diagram/1::output_rdirectory/3:
-
-``output_rdirectory/3``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Generates diagram output for a directory and its sub-directories using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_rdirectory(Project,Path,Options)``
-| **Mode and number of proofs:**
-|    ``output_rdirectory(+atom,+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_rlibrary/3"> </div>
-
-.. index:: output_rlibrary/3
-.. _diagram/1::output_rlibrary/3:
-
-``output_rlibrary/3``
-^^^^^^^^^^^^^^^^^^^^^
-
-Generates diagram output for a library and its sub-libraries using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_rlibrary(Library,Path,Options)``
-| **Mode and number of proofs:**
-|    ``output_rlibrary(+atom,+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="output_sub_diagrams/1"> </div>
-
-.. index:: output_sub_diagrams/1
-.. _diagram/1::output_sub_diagrams/1:
-
-``output_sub_diagrams/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Outputs sub-diagrams using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``output_sub_diagrams(Options)``
-| **Mode and number of proofs:**
-|    ``output_sub_diagrams(+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="reset/0"> </div>
-
-.. index:: reset/0
-.. _diagram/1::reset/0:
-
-``reset/0``
-^^^^^^^^^^^
-
-Resets all temporary information used when generating a diagram.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``reset`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="save_edge/5"> </div>
-
-.. index:: save_edge/5
-.. _diagram/1::save_edge/5:
-
-``save_edge/5``
-^^^^^^^^^^^^^^^
-
-Saves a graph edge.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``save_edge(From,To,Labels,Kind,Options)``
-| **Mode and number of proofs:**
-|    ``save_edge(+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+|    ``message_diagram_description(?atom)`` - ``one``
 
 
 ------------
 
 Private predicates
 ------------------
-
-.. raw:: html
-
-   <div id="edge_/5"> </div>
-
-.. index:: edge_/5
-.. _diagram/1::edge_/5:
-
-``edge_/5``
-^^^^^^^^^^^
-
-Table of saved edges.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``edge_(From,To,Labels,Kind,Options)``
-| **Mode and number of proofs:**
-|    ``edge_(?nonvar,?nonvar,?list(nonvar),?atom,?list(compound))`` - ``zero_or_more``
-
-
-------------
 
 .. raw:: html
 
@@ -1329,6 +1306,29 @@ Table of saved nodes.
 |    ``node_(Identifier,Label,Caption,Contents,Kind,Options)``
 | **Mode and number of proofs:**
 |    ``node_(?nonvar,?nonvar,?nonvar,?list(compound),?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="edge_/5"> </div>
+
+.. index:: edge_/5
+.. _diagram/1::edge_/5:
+
+``edge_/5``
+^^^^^^^^^^^
+
+Table of saved edges.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``edge_(From,To,Labels,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``edge_(?nonvar,?nonvar,?list(nonvar),?atom,?list(compound))`` - ``zero_or_more``
 
 
 ------------

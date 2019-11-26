@@ -83,29 +83,6 @@ Prints a table with all port profiling data for the specified entity.
 
 .. raw:: html
 
-   <div id="port/5"> </div>
-
-.. index:: port/5
-.. _ports_profiler/0::port/5:
-
-``port/5``
-^^^^^^^^^^
-
-Enumerates, by backtracking, all collected port profiling data.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``port(Port,Entity,Functor,Arity,Count)``
-| **Mode and number of proofs:**
-|    ``port(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="reset/0"> </div>
 
 .. index:: reset/0
@@ -144,6 +121,29 @@ Resets all port profiling data for the specified entity.
 |    ``reset(Entity)``
 | **Mode and number of proofs:**
 |    ``reset(+entity_identifier)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="port/5"> </div>
+
+.. index:: port/5
+.. _ports_profiler/0::port/5:
+
+``port/5``
+^^^^^^^^^^
+
+Enumerates, by backtracking, all collected port profiling data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``port(Port,Entity,Functor,Arity,Count)``
+| **Mode and number of proofs:**
+|    ``port(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
 
 
 ------------

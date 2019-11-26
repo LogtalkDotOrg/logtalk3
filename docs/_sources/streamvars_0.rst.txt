@@ -37,52 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="(<=)/2"> </div>
-
-.. index:: (<=)/2
-.. _streamvars/0::(<=)/2:
-
-``(<=)/2``
-^^^^^^^^^^
-
-Sets the state of the stream variable ``Variable`` to ``Value`` (initializing the variable if needed).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``Variable<=Value``
-| **Mode and number of proofs:**
-|    ``(?streamvar)<=(@nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="(=>)/2"> </div>
-
-.. index:: (=>)/2
-.. _streamvars/0::(=>)/2:
-
-``(=>)/2``
-^^^^^^^^^^
-
-Unifies ``Value`` with the current state of the stream variable ``Variable``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``Variable=>Value``
-| **Mode and number of proofs:**
-|    ``(+streamvar)=>(?nonvar)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="new/1"> </div>
 
 .. index:: new/1
@@ -131,6 +85,52 @@ Makes ``Variable`` a stream variable and sets its initial state to ``Value``.
 | **Exceptions:**
 |    Variable is not a variable:
 |        ``type_error(variable,Variable)``
+
+
+------------
+
+.. raw:: html
+
+   <div id="(<=)/2"> </div>
+
+.. index:: (<=)/2
+.. _streamvars/0::(<=)/2:
+
+``(<=)/2``
+^^^^^^^^^^
+
+Sets the state of the stream variable ``Variable`` to ``Value`` (initializing the variable if needed).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``Variable<=Value``
+| **Mode and number of proofs:**
+|    ``(?streamvar)<=(@nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="(=>)/2"> </div>
+
+.. index:: (=>)/2
+.. _streamvars/0::(=>)/2:
+
+``(=>)/2``
+^^^^^^^^^^
+
+Unifies ``Value`` with the current state of the stream variable ``Variable``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``Variable=>Value``
+| **Mode and number of proofs:**
+|    ``(+streamvar)=>(?nonvar)`` - ``zero_or_one``
 
 
 ------------

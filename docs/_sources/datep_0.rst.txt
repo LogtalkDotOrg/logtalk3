@@ -37,23 +37,23 @@ Public predicates
 
 .. raw:: html
 
-   <div id="days_in_month/3"> </div>
+   <div id="today/3"> </div>
 
-.. index:: days_in_month/3
-.. _datep/0::days_in_month/3:
+.. index:: today/3
+.. _datep/0::today/3:
 
-``days_in_month/3``
-^^^^^^^^^^^^^^^^^^^
+``today/3``
+^^^^^^^^^^^
 
-Number of days in a month.
+Returns current date.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``days_in_month(Month,Year,Days)``
+|    ``today(Year,Month,Day)``
 | **Mode and number of proofs:**
-|    ``days_in_month(?integer,+integer,?integer)`` - ``zero_or_more``
+|    ``today(-integer,-integer,-integer)`` - ``one``
 
 
 ------------
@@ -129,23 +129,23 @@ Name and short name of month.
 
 .. raw:: html
 
-   <div id="today/3"> </div>
+   <div id="days_in_month/3"> </div>
 
-.. index:: today/3
-.. _datep/0::today/3:
+.. index:: days_in_month/3
+.. _datep/0::days_in_month/3:
 
-``today/3``
-^^^^^^^^^^^
+``days_in_month/3``
+^^^^^^^^^^^^^^^^^^^
 
-Returns current date.
+Number of days in a month.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``today(Year,Month,Day)``
+|    ``days_in_month(Month,Year,Days)``
 | **Mode and number of proofs:**
-|    ``today(-integer,-integer,-integer)`` - ``one``
+|    ``days_in_month(?integer,+integer,?integer)`` - ``zero_or_more``
 
 
 ------------

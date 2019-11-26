@@ -37,6 +37,29 @@ Public predicates
 
 .. raw:: html
 
+   <div id="random/1"> </div>
+
+.. index:: random/1
+.. _randomp/0::random/1:
+
+``random/1``
+^^^^^^^^^^^^
+
+Returns a new random float value in the interval ``[0.0, 1.0[``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random(Random)``
+| **Mode and number of proofs:**
+|    ``random(-float)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="between/3"> </div>
 
 .. index:: between/3
@@ -60,6 +83,193 @@ Returns a new random integer in the interval ``[Lower, Upper]``. Fails if ``Lowe
 
 .. raw:: html
 
+   <div id="member/2"> </div>
+
+.. index:: member/2
+.. _randomp/0::member/2:
+
+``member/2``
+^^^^^^^^^^^^
+
+Returns a random member of a list. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``member(Random,List)``
+| **Mode and number of proofs:**
+|    ``member(-term,+list(term))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="select/3"> </div>
+
+.. index:: select/3
+.. _randomp/0::select/3:
+
+``select/3``
+^^^^^^^^^^^^
+
+Returns a random member of a list and the rest of the list. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select(Random,List,Rest)``
+| **Mode and number of proofs:**
+|    ``select(-term,+list(term),-list(term))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="permutation/2"> </div>
+
+.. index:: permutation/2
+.. _randomp/0::permutation/2:
+
+``permutation/2``
+^^^^^^^^^^^^^^^^^
+
+Returns a random permutation of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``permutation(List,Permutation)``
+| **Mode and number of proofs:**
+|    ``permutation(+list,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="sequence/4"> </div>
+
+.. index:: sequence/4
+.. _randomp/0::sequence/4:
+
+``sequence/4``
+^^^^^^^^^^^^^^
+
+Returns list of random integers of given length in random order in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers or if ``Lower > Upper``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Length,Lower,Upper,List)``
+| **Mode and number of proofs:**
+|    ``sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="set/4"> </div>
+
+.. index:: set/4
+.. _randomp/0::set/4:
+
+``set/4``
+^^^^^^^^^
+
+Returns ordered set of random integers of given size in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers, if ``Lower > Upper``, or if ``Length > Upper - Lower + 1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set(Length,Lower,Upper,Set)``
+| **Mode and number of proofs:**
+|    ``set(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="random/3"> </div>
+
+.. index:: random/3
+.. _randomp/0::random/3:
+
+``random/3``
+^^^^^^^^^^^^
+
+Returns a new random value in the interval ``[Lower, Upper[``. Fails if ``Lower > Upper``. Deprecated. Use ``between/3`` for integers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random(Lower,Upper,Random)``
+| **Mode and number of proofs:**
+|    ``random(+integer,+integer,-integer)`` - ``zero_or_one``
+|    ``random(+float,+float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="randseq/4"> </div>
+
+.. index:: randseq/4
+.. _randomp/0::randseq/4:
+
+``randseq/4``
+^^^^^^^^^^^^^
+
+Returns list of random values of given length in random order in interval ``[Lower, Upper[``. Fails if ``Lower > Upper`` or if the arguments are neither integers or floats. Deprecated. Use ``sequence/4`` for integers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``randseq(Length,Lower,Upper,List)``
+| **Mode and number of proofs:**
+|    ``randseq(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+|    ``randseq(+integer,+float,+float,-list(float))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="randset/4"> </div>
+
+.. index:: randset/4
+.. _randomp/0::randset/4:
+
+``randset/4``
+^^^^^^^^^^^^^
+
+Returns ordered set of random values of given size in interval ``[Lower, Upper[``. Fails if the arguments are neither integers or floats, ``Lower > Upper``, or ``Length > Upper - Lower`` when arguments are integers. Deprecated. Use ``set/4`` for integers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``randset(Length,Lower,Upper,Set)``
+| **Mode and number of proofs:**
+|    ``randset(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+|    ``randset(+integer,+float,+float,-list(float))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="get_seed/1"> </div>
 
 .. index:: get_seed/1
@@ -77,6 +287,29 @@ Gets the current random generator seed. Seed should be regarded as an opaque gro
 |    ``get_seed(Seed)``
 | **Mode and number of proofs:**
 |    ``get_seed(-ground)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="set_seed/1"> </div>
+
+.. index:: set_seed/1
+.. _randomp/0::set_seed/1:
+
+``set_seed/1``
+^^^^^^^^^^^^^^
+
+Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set_seed(Seed)``
+| **Mode and number of proofs:**
+|    ``set_seed(+ground)`` - ``one``
 
 
 ------------
@@ -194,239 +427,6 @@ Calls a goal or fails without calling it with probability Probability. When the 
 |    ``maybe_call(*,0)``
 | **Mode and number of proofs:**
 |    ``maybe_call(+probability,+callable)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="member/2"> </div>
-
-.. index:: member/2
-.. _randomp/0::member/2:
-
-``member/2``
-^^^^^^^^^^^^
-
-Returns a random member of a list. Fails if the list is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``member(Random,List)``
-| **Mode and number of proofs:**
-|    ``member(-term,+list(term))`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="permutation/2"> </div>
-
-.. index:: permutation/2
-.. _randomp/0::permutation/2:
-
-``permutation/2``
-^^^^^^^^^^^^^^^^^
-
-Returns a random permutation of a list.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``permutation(List,Permutation)``
-| **Mode and number of proofs:**
-|    ``permutation(+list,-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="random/1"> </div>
-
-.. index:: random/1
-.. _randomp/0::random/1:
-
-``random/1``
-^^^^^^^^^^^^
-
-Returns a new random float value in the interval ``[0.0, 1.0[``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``random(Random)``
-| **Mode and number of proofs:**
-|    ``random(-float)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="random/3"> </div>
-
-.. index:: random/3
-.. _randomp/0::random/3:
-
-``random/3``
-^^^^^^^^^^^^
-
-Returns a new random value in the interval ``[Lower, Upper[``. Fails if ``Lower > Upper``. Deprecated. Use ``between/3`` for integers.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``random(Lower,Upper,Random)``
-| **Mode and number of proofs:**
-|    ``random(+integer,+integer,-integer)`` - ``zero_or_one``
-|    ``random(+float,+float,-float)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="randseq/4"> </div>
-
-.. index:: randseq/4
-.. _randomp/0::randseq/4:
-
-``randseq/4``
-^^^^^^^^^^^^^
-
-Returns list of random values of given length in random order in interval ``[Lower, Upper[``. Fails if ``Lower > Upper`` or if the arguments are neither integers or floats. Deprecated. Use ``sequence/4`` for integers.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``randseq(Length,Lower,Upper,List)``
-| **Mode and number of proofs:**
-|    ``randseq(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
-|    ``randseq(+integer,+float,+float,-list(float))`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="randset/4"> </div>
-
-.. index:: randset/4
-.. _randomp/0::randset/4:
-
-``randset/4``
-^^^^^^^^^^^^^
-
-Returns ordered set of random values of given size in interval ``[Lower, Upper[``. Fails if the arguments are neither integers or floats, ``Lower > Upper``, or ``Length > Upper - Lower`` when arguments are integers. Deprecated. Use ``set/4`` for integers.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``randset(Length,Lower,Upper,Set)``
-| **Mode and number of proofs:**
-|    ``randset(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
-|    ``randset(+integer,+float,+float,-list(float))`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="select/3"> </div>
-
-.. index:: select/3
-.. _randomp/0::select/3:
-
-``select/3``
-^^^^^^^^^^^^
-
-Returns a random member of a list and the rest of the list. Fails if the list is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``select(Random,List,Rest)``
-| **Mode and number of proofs:**
-|    ``select(-term,+list(term),-list(term))`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="sequence/4"> </div>
-
-.. index:: sequence/4
-.. _randomp/0::sequence/4:
-
-``sequence/4``
-^^^^^^^^^^^^^^
-
-Returns list of random integers of given length in random order in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers or if ``Lower > Upper``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``sequence(Length,Lower,Upper,List)``
-| **Mode and number of proofs:**
-|    ``sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="set/4"> </div>
-
-.. index:: set/4
-.. _randomp/0::set/4:
-
-``set/4``
-^^^^^^^^^
-
-Returns ordered set of random integers of given size in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers, if ``Lower > Upper``, or if ``Length > Upper - Lower + 1``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``set(Length,Lower,Upper,Set)``
-| **Mode and number of proofs:**
-|    ``set(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="set_seed/1"> </div>
-
-.. index:: set_seed/1
-.. _randomp/0::set_seed/1:
-
-``set_seed/1``
-^^^^^^^^^^^^^^
-
-Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``set_seed(Seed)``
-| **Mode and number of proofs:**
-|    ``set_seed(+ground)`` - ``one``
 
 
 ------------

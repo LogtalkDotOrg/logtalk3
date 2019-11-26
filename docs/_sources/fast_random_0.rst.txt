@@ -40,6 +40,27 @@ Public predicates
 
 .. raw:: html
 
+   <div id="reset_seed/0"> </div>
+
+.. index:: reset_seed/0
+.. _fast_random/0::reset_seed/0:
+
+``reset_seed/0``
+^^^^^^^^^^^^^^^^
+
+Resets the random generator seed to its default value. Use ``get_seed/1`` and ``set_seed/1`` instead if you need reproducibility.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Mode and number of proofs:**
+|    ``reset_seed`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="randomize/1"> </div>
 
 .. index:: randomize/1
@@ -57,27 +78,6 @@ Randomizes the random generator using a positive integer to compute a new seed.
 |    ``randomize(Seed)``
 | **Mode and number of proofs:**
 |    ``randomize(+positive_integer)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="reset_seed/0"> </div>
-
-.. index:: reset_seed/0
-.. _fast_random/0::reset_seed/0:
-
-``reset_seed/0``
-^^^^^^^^^^^^^^^^
-
-Resets the random generator seed to its default value. Use ``get_seed/1`` and ``set_seed/1`` instead if you need reproducibility.
-
-| **Compilation flags:**
-|    ``static, synchronized``
-
-| **Mode and number of proofs:**
-|    ``reset_seed`` - ``one``
 
 
 ------------

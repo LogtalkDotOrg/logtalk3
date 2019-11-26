@@ -62,6 +62,29 @@ Constructs an empty optional term.
 
 .. raw:: html
 
+   <div id="of/2"> </div>
+
+.. index:: of/2
+.. _optional/0::of/2:
+
+``of/2``
+^^^^^^^^
+
+Constructs an optional term holding the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``of(Value,Optional)``
+| **Mode and number of proofs:**
+|    ``of(@term,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="from_goal/3"> </div>
 
 .. index:: from_goal/3
@@ -106,29 +129,6 @@ Constructs an optional term holding a value bound by calling the given closure. 
 |    ``from_goal(1,*)``
 | **Mode and number of proofs:**
 |    ``from_goal(+callable,--nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="of/2"> </div>
-
-.. index:: of/2
-.. _optional/0::of/2:
-
-``of/2``
-^^^^^^^^
-
-Constructs an optional term holding the given value.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``of(Value,Optional)``
-| **Mode and number of proofs:**
-|    ``of(@term,--nonvar)`` - ``one``
 
 
 ------------

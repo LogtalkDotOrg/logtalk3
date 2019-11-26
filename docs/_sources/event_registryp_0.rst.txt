@@ -37,6 +37,122 @@ Public predicates
 
 .. raw:: html
 
+   <div id="monitors/1"> </div>
+
+.. index:: monitors/1
+.. _event_registryp/0::monitors/1:
+
+``monitors/1``
+^^^^^^^^^^^^^^
+
+Returns a list of all current monitors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``monitors(Monitors)``
+| **Mode and number of proofs:**
+|    ``monitors(-list(object_identifier))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="monitor/1"> </div>
+
+.. index:: monitor/1
+.. _event_registryp/0::monitor/1:
+
+``monitor/1``
+^^^^^^^^^^^^^
+
+Monitor is an object playing the role of a monitor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``monitor(Monitor)``
+| **Mode and number of proofs:**
+|    ``monitor(-object_identifier)`` - ``zero_or_more``
+|    ``monitor(+object_identifier)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="monitored/1"> </div>
+
+.. index:: monitored/1
+.. _event_registryp/0::monitored/1:
+
+``monitored/1``
+^^^^^^^^^^^^^^^
+
+Returns a list of all currently monitored objects.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``monitored(Objects)``
+| **Mode and number of proofs:**
+|    ``monitored(-list(object_identifier))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="monitor/4"> </div>
+
+.. index:: monitor/4
+.. _event_registryp/0::monitor/4:
+
+``monitor/4``
+^^^^^^^^^^^^^
+
+True if the arguments describe a currently defined monitored event.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``monitor(Object,Message,Sender,Monitor)``
+| **Mode and number of proofs:**
+|    ``monitor(?object_identifier,?nonvar,?object_identifier,?object_identifier)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="set_monitor/4"> </div>
+
+.. index:: set_monitor/4
+.. _event_registryp/0::set_monitor/4:
+
+``set_monitor/4``
+^^^^^^^^^^^^^^^^^
+
+Sets a monitor for the set of matching events.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set_monitor(Object,Message,Sender,Monitor)``
+| **Mode and number of proofs:**
+|    ``set_monitor(?object_identifier,?nonvar,?object_identifier,+object_identifier)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="del_monitors/4"> </div>
 
 .. index:: del_monitors/4
@@ -75,122 +191,6 @@ Deletes all monitored events.
 
 | **Mode and number of proofs:**
 |    ``del_monitors`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="monitor/1"> </div>
-
-.. index:: monitor/1
-.. _event_registryp/0::monitor/1:
-
-``monitor/1``
-^^^^^^^^^^^^^
-
-Monitor is an object playing the role of a monitor.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``monitor(Monitor)``
-| **Mode and number of proofs:**
-|    ``monitor(-object_identifier)`` - ``zero_or_more``
-|    ``monitor(+object_identifier)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="monitor/4"> </div>
-
-.. index:: monitor/4
-.. _event_registryp/0::monitor/4:
-
-``monitor/4``
-^^^^^^^^^^^^^
-
-True if the arguments describe a currently defined monitored event.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``monitor(Object,Message,Sender,Monitor)``
-| **Mode and number of proofs:**
-|    ``monitor(?object_identifier,?nonvar,?object_identifier,?object_identifier)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="monitored/1"> </div>
-
-.. index:: monitored/1
-.. _event_registryp/0::monitored/1:
-
-``monitored/1``
-^^^^^^^^^^^^^^^
-
-Returns a list of all currently monitored objects.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``monitored(Objects)``
-| **Mode and number of proofs:**
-|    ``monitored(-list(object_identifier))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="monitors/1"> </div>
-
-.. index:: monitors/1
-.. _event_registryp/0::monitors/1:
-
-``monitors/1``
-^^^^^^^^^^^^^^
-
-Returns a list of all current monitors.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``monitors(Monitors)``
-| **Mode and number of proofs:**
-|    ``monitors(-list(object_identifier))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="set_monitor/4"> </div>
-
-.. index:: set_monitor/4
-.. _event_registryp/0::set_monitor/4:
-
-``set_monitor/4``
-^^^^^^^^^^^^^^^^^
-
-Sets a monitor for the set of matching events.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``set_monitor(Object,Message,Sender,Monitor)``
-| **Mode and number of proofs:**
-|    ``set_monitor(?object_identifier,?nonvar,?object_identifier,+object_identifier)`` - ``zero_or_one``
 
 
 ------------

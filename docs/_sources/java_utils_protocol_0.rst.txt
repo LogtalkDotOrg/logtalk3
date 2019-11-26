@@ -37,116 +37,46 @@ Public predicates
 
 .. raw:: html
 
-   <div id="array_list/2"> </div>
+   <div id="value_reference/2"> </div>
 
-.. index:: array_list/2
-.. _java_utils_protocol/0::array_list/2:
+.. index:: value_reference/2
+.. _java_utils_protocol/0::value_reference/2:
 
-``array_list/2``
-^^^^^^^^^^^^^^^^
+``value_reference/2``
+^^^^^^^^^^^^^^^^^^^^^
 
-Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.
+Returns an opaque term that represents the Java value with the given name.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``array_list(Array,List)``
+|    ``value_reference(Value,Reference)``
 | **Mode and number of proofs:**
-|    ``array_list(+array,-list)`` - ``one``
-|    ``array_list(-array,+list)`` - ``one``
+|    ``value_reference(?atom,--ground)`` - ``one_or_more``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="array_to_terms/3"> </div>
+   <div id="true/1"> </div>
 
-.. index:: array_to_terms/3
-.. _java_utils_protocol/0::array_to_terms/3:
+.. index:: true/1
+.. _java_utils_protocol/0::true/1:
 
-``array_to_terms/3``
-^^^^^^^^^^^^^^^^^^^^
+``true/1``
+^^^^^^^^^^
 
-Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``array_to_terms(Array,Terms,Length)``
-| **Mode and number of proofs:**
-|    ``array_to_terms(+array,-list(ground),-integer)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="array_to_terms/2"> </div>
-
-.. index:: array_to_terms/2
-.. _java_utils_protocol/0::array_to_terms/2:
-
-``array_to_terms/2``
-^^^^^^^^^^^^^^^^^^^^
-
-Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.
+Returns an opaque term that represents the Java value true.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``array_to_terms(Array,Terms)``
+|    ``true(Reference)``
 | **Mode and number of proofs:**
-|    ``array_to_terms(+array,-list(term))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="decode_exception/2"> </div>
-
-.. index:: decode_exception/2
-.. _java_utils_protocol/0::decode_exception/2:
-
-``decode_exception/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``decode_exception(Exception,Cause)``
-| **Mode and number of proofs:**
-|    ``decode_exception(+callable,-atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="decode_exception/3"> </div>
-
-.. index:: decode_exception/3
-.. _java_utils_protocol/0::decode_exception/3:
-
-``decode_exception/3``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``decode_exception(Exception,Cause,StackTrace)``
-| **Mode and number of proofs:**
-|    ``decode_exception(+callable,-atom,-list(atom))`` - ``zero_or_one``
+|    ``true(--ground)`` - ``one``
 
 
 ------------
@@ -176,6 +106,75 @@ Returns an opaque term that represents the Java value false.
 
 .. raw:: html
 
+   <div id="void/1"> </div>
+
+.. index:: void/1
+.. _java_utils_protocol/0::void/1:
+
+``void/1``
+^^^^^^^^^^
+
+Returns an opaque term that represents the Java value void.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``void(Reference)``
+| **Mode and number of proofs:**
+|    ``void(--ground)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="null/1"> </div>
+
+.. index:: null/1
+.. _java_utils_protocol/0::null/1:
+
+``null/1``
+^^^^^^^^^^
+
+Returns an opaque term that represents the Java value null.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``null(Reference)``
+| **Mode and number of proofs:**
+|    ``null(--ground)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_true/1"> </div>
+
+.. index:: is_true/1
+.. _java_utils_protocol/0::is_true/1:
+
+``is_true/1``
+^^^^^^^^^^^^^
+
+True when the argument is the Java value true. Fails if the argument is not instantiated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_true(Reference)``
+| **Mode and number of proofs:**
+|    ``is_true(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="is_false/1"> </div>
 
 .. index:: is_false/1
@@ -193,6 +192,29 @@ True when the argument is the Java value false. Fails if the argument is not ins
 |    ``is_false(Reference)``
 | **Mode and number of proofs:**
 |    ``is_false(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_void/1"> </div>
+
+.. index:: is_void/1
+.. _java_utils_protocol/0::is_void/1:
+
+``is_void/1``
+^^^^^^^^^^^^^
+
+True when the argument is the Java value void. Fails if the argument is not instantiated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_void(Reference)``
+| **Mode and number of proofs:**
+|    ``is_void(@term)`` - ``zero_or_one``
 
 
 ------------
@@ -245,46 +267,93 @@ True when the argument is a reference to a Java object. Fails if the argument is
 
 .. raw:: html
 
-   <div id="is_true/1"> </div>
+   <div id="terms_to_array/2"> </div>
 
-.. index:: is_true/1
-.. _java_utils_protocol/0::is_true/1:
+.. index:: terms_to_array/2
+.. _java_utils_protocol/0::terms_to_array/2:
 
-``is_true/1``
-^^^^^^^^^^^^^
+``terms_to_array/2``
+^^^^^^^^^^^^^^^^^^^^
 
-True when the argument is the Java value true. Fails if the argument is not instantiated.
+Converts a list of ground Prolog terms to an array (a Java reference).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``is_true(Reference)``
+|    ``terms_to_array(Terms,Array)``
 | **Mode and number of proofs:**
-|    ``is_true(@term)`` - ``zero_or_one``
+|    ``terms_to_array(++list(ground),-array)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="is_void/1"> </div>
+   <div id="array_to_terms/3"> </div>
 
-.. index:: is_void/1
-.. _java_utils_protocol/0::is_void/1:
+.. index:: array_to_terms/3
+.. _java_utils_protocol/0::array_to_terms/3:
 
-``is_void/1``
-^^^^^^^^^^^^^
+``array_to_terms/3``
+^^^^^^^^^^^^^^^^^^^^
 
-True when the argument is the Java value void. Fails if the argument is not instantiated.
+Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``is_void(Reference)``
+|    ``array_to_terms(Array,Terms,Length)``
 | **Mode and number of proofs:**
-|    ``is_void(@term)`` - ``zero_or_one``
+|    ``array_to_terms(+array,-list(ground),-integer)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="array_to_terms/2"> </div>
+
+.. index:: array_to_terms/2
+.. _java_utils_protocol/0::array_to_terms/2:
+
+``array_to_terms/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``array_to_terms(Array,Terms)``
+| **Mode and number of proofs:**
+|    ``array_to_terms(+array,-list(term))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="array_list/2"> </div>
+
+.. index:: array_list/2
+.. _java_utils_protocol/0::array_list/2:
+
+``array_list/2``
+^^^^^^^^^^^^^^^^
+
+Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``array_list(Array,List)``
+| **Mode and number of proofs:**
+|    ``array_list(+array,-list)`` - ``one``
+|    ``array_list(-array,+list)`` - ``one``
 
 
 ------------
@@ -314,115 +383,46 @@ Enumerates, by backtracking, all iterator elements.
 
 .. raw:: html
 
-   <div id="null/1"> </div>
+   <div id="decode_exception/2"> </div>
 
-.. index:: null/1
-.. _java_utils_protocol/0::null/1:
+.. index:: decode_exception/2
+.. _java_utils_protocol/0::decode_exception/2:
 
-``null/1``
-^^^^^^^^^^
+``decode_exception/2``
+^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an opaque term that represents the Java value null.
+Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``null(Reference)``
+|    ``decode_exception(Exception,Cause)``
 | **Mode and number of proofs:**
-|    ``null(--ground)`` - ``one``
+|    ``decode_exception(+callable,-atom)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="terms_to_array/2"> </div>
+   <div id="decode_exception/3"> </div>
 
-.. index:: terms_to_array/2
-.. _java_utils_protocol/0::terms_to_array/2:
+.. index:: decode_exception/3
+.. _java_utils_protocol/0::decode_exception/3:
 
-``terms_to_array/2``
-^^^^^^^^^^^^^^^^^^^^
+``decode_exception/3``
+^^^^^^^^^^^^^^^^^^^^^^
 
-Converts a list of ground Prolog terms to an array (a Java reference).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``terms_to_array(Terms,Array)``
-| **Mode and number of proofs:**
-|    ``terms_to_array(++list(ground),-array)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="true/1"> </div>
-
-.. index:: true/1
-.. _java_utils_protocol/0::true/1:
-
-``true/1``
-^^^^^^^^^^
-
-Returns an opaque term that represents the Java value true.
+Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``true(Reference)``
+|    ``decode_exception(Exception,Cause,StackTrace)``
 | **Mode and number of proofs:**
-|    ``true(--ground)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="value_reference/2"> </div>
-
-.. index:: value_reference/2
-.. _java_utils_protocol/0::value_reference/2:
-
-``value_reference/2``
-^^^^^^^^^^^^^^^^^^^^^
-
-Returns an opaque term that represents the Java value with the given name.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``value_reference(Value,Reference)``
-| **Mode and number of proofs:**
-|    ``value_reference(?atom,--ground)`` - ``one_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="void/1"> </div>
-
-.. index:: void/1
-.. _java_utils_protocol/0::void/1:
-
-``void/1``
-^^^^^^^^^^
-
-Returns an opaque term that represents the Java value void.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``void(Reference)``
-| **Mode and number of proofs:**
-|    ``void(--ground)`` - ``one``
+|    ``decode_exception(+callable,-atom,-list(atom))`` - ``zero_or_one``
 
 
 ------------

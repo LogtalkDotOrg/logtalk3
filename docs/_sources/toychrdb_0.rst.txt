@@ -58,28 +58,12 @@ Public predicates
 
 .. raw:: html
 
-   <div id="chr_no_spy/1"> </div>
+   <div id="chr_trace/0"> </div>
 
-.. index:: chr_no_spy/1
-.. _toychrdb/0::chr_no_spy/1:
+.. index:: chr_trace/0
+.. _toychrdb/0::chr_trace/0:
 
-``chr_no_spy/1``
-^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="chr_nospy/0"> </div>
-
-.. index:: chr_nospy/0
-.. _toychrdb/0::chr_nospy/0:
-
-``chr_nospy/0``
+``chr_trace/0``
 ^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
@@ -106,22 +90,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="chr_option/2"> </div>
-
-.. index:: chr_option/2
-.. _toychrdb/0::chr_option/2:
-
-``chr_option/2``
-^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
    <div id="chr_spy/1"> </div>
 
 .. index:: chr_spy/1
@@ -138,13 +106,45 @@ Public predicates
 
 .. raw:: html
 
-   <div id="chr_trace/0"> </div>
+   <div id="chr_nospy/0"> </div>
 
-.. index:: chr_trace/0
-.. _toychrdb/0::chr_trace/0:
+.. index:: chr_nospy/0
+.. _toychrdb/0::chr_nospy/0:
 
-``chr_trace/0``
+``chr_nospy/0``
 ^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
+   <div id="chr_no_spy/1"> </div>
+
+.. index:: chr_no_spy/1
+.. _toychrdb/0::chr_no_spy/1:
+
+``chr_no_spy/1``
+^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
+   <div id="chr_option/2"> </div>
+
+.. index:: chr_option/2
+.. _toychrdb/0::chr_option/2:
+
+``chr_option/2``
+^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``static``
@@ -157,48 +157,16 @@ Protected predicates
 
 .. raw:: html
 
-   <div id="chr_next_state/1"> </div>
+   <div id="current_prog/1"> </div>
 
-.. index:: chr_next_state/1
-.. _toychrdb/0::chr_next_state/1:
+.. index:: current_prog/1
+.. _toychrdb/0::current_prog/1:
 
-``chr_next_state/1``
-^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="chr_option_allow_deep_guards/0"> </div>
-
-.. index:: chr_option_allow_deep_guards/0
-.. _toychrdb/0::chr_option_allow_deep_guards/0:
-
-``chr_option_allow_deep_guards/0``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``current_prog/1``
+^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="chr_option_optimization_level/1"> </div>
-
-.. index:: chr_option_optimization_level/1
-.. _toychrdb/0::chr_option_optimization_level/1:
-
-``chr_option_optimization_level/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
+|    ``static``
 
 
 ------------
@@ -221,13 +189,13 @@ Protected predicates
 
 .. raw:: html
 
-   <div id="chr_option_show_history/0"> </div>
+   <div id="chr_option_trace_interactive/0"> </div>
 
-.. index:: chr_option_show_history/0
-.. _toychrdb/0::chr_option_show_history/0:
+.. index:: chr_option_trace_interactive/0
+.. _toychrdb/0::chr_option_trace_interactive/0:
 
-``chr_option_show_history/0``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``chr_option_trace_interactive/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -237,13 +205,13 @@ Protected predicates
 
 .. raw:: html
 
-   <div id="chr_option_show_id/0"> </div>
+   <div id="chr_option_optimization_level/1"> </div>
 
-.. index:: chr_option_show_id/0
-.. _toychrdb/0::chr_option_show_id/0:
+.. index:: chr_option_optimization_level/1
+.. _toychrdb/0::chr_option_optimization_level/1:
 
-``chr_option_show_id/0``
-^^^^^^^^^^^^^^^^^^^^^^^^
+``chr_option_optimization_level/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -285,13 +253,61 @@ Protected predicates
 
 .. raw:: html
 
-   <div id="chr_option_trace_interactive/0"> </div>
+   <div id="chr_option_show_history/0"> </div>
 
-.. index:: chr_option_trace_interactive/0
-.. _toychrdb/0::chr_option_trace_interactive/0:
+.. index:: chr_option_show_history/0
+.. _toychrdb/0::chr_option_show_history/0:
 
-``chr_option_trace_interactive/0``
+``chr_option_show_history/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="chr_option_show_id/0"> </div>
+
+.. index:: chr_option_show_id/0
+.. _toychrdb/0::chr_option_show_id/0:
+
+``chr_option_show_id/0``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="chr_option_allow_deep_guards/0"> </div>
+
+.. index:: chr_option_allow_deep_guards/0
+.. _toychrdb/0::chr_option_allow_deep_guards/0:
+
+``chr_option_allow_deep_guards/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="chr_next_state/1"> </div>
+
+.. index:: chr_next_state/1
+.. _toychrdb/0::chr_next_state/1:
+
+``chr_next_state/1``
+^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -311,22 +327,6 @@ Protected predicates
 
 | **Compilation flags:**
 |    ``dynamic``
-
-
-------------
-
-.. raw:: html
-
-   <div id="current_prog/1"> </div>
-
-.. index:: current_prog/1
-.. _toychrdb/0::current_prog/1:
-
-``current_prog/1``
-^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
 
 
 ------------

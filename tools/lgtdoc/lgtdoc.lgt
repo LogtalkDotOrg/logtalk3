@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 5.0,
+		version is 5.1,
 		author is 'Paulo Moura',
-		date is 2019/11/20,
+		date is 2019/11/26,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -357,7 +357,7 @@
 		write_entity_xml_header(Stream, Options, StreamOptions),
 		write_entity_xml_entity(File, Stream, Entity),
 		write_entity_xml_relations(Stream, Entity),
-		write_entity_xml_predicates(Stream, Entity, Type),
+		write_entity_xml_predicates(Stream, Entity, Type, Options),
 		write_entity_xml_operators(Stream, Entity),
 		write_entity_xml_remarks(Stream, Entity),
 		write_entity_xml_see_also(Stream, Entity),
@@ -745,40 +745,46 @@
 		atom_concat(Functor, '_', Aux),
 		atom_concat(Aux, Atom, File).
 
-	% write_entity_xml_predicates(@stream, @entity_identifier, +atom)
+	% write_entity_xml_predicates(@stream, @entity_identifier, +atom, @list)
 	%
 	% writes the predicate documentation
 
-	write_entity_xml_predicates(Stream, Entity, Type) :-
+	write_entity_xml_predicates(Stream, Entity, Type, Options) :-
 		write_xml_open_tag(Stream, predicates, []),
-		write_xml_inherited_predicates(Stream, Entity, Type),
-		write_xml_public_predicates(Stream, Entity),
-		write_xml_protected_predicates(Stream, Entity),
-		write_xml_private_predicates(Stream, Entity),
+		write_xml_inherited_predicates(Stream, Entity, Type, Options),
+		write_xml_public_predicates(Stream, Entity, Options),
+		write_xml_protected_predicates(Stream, Entity, Options),
+		write_xml_private_predicates(Stream, Entity, Options),
 		write_xml_close_tag(Stream, predicates).
 
-	% write_xml_inherited_predicates(@stream, @entity_identifier, +atom)
+	% write_xml_inherited_predicates(@stream, @entity_identifier, +atom, @list)
 	%
 	% writes the list of inherited public predicates
 
-	write_xml_inherited_predicates(Stream, Entity, Type) :-
+	write_xml_inherited_predicates(Stream, Entity, Type, Options) :-
 		write_xml_open_tag(Stream, inherited, []),
 		inherited_predicates(Type, Entity, Predicates0),
-		sort(1, @=<, Predicates0, Predicates),
+		(	member(sort_predicates(true), Options) ->
+			sort(1, @=<, Predicates0, Predicates)
+		;	Predicates = Predicates0
+		),
 		member(Predicate, Predicates),
 		write_xml_inherited_predicate(Stream, Predicate),
 		fail.
-	write_xml_inherited_predicates(Stream, _, _) :-
+	write_xml_inherited_predicates(Stream, _, _, _) :-
 		write_xml_close_tag(Stream, inherited).
 
-	% write_xml_public_predicates(@stream, @entity_identifier)
+	% write_xml_public_predicates(@stream, @entity_identifier, @list)
 	%
 	% writes the documentation of public predicates
 
-	write_xml_public_predicates(Stream, Entity) :-
+	write_xml_public_predicates(Stream, Entity, Options) :-
 		write_xml_open_tag(Stream, (public), []),
 		entity_property(Entity, public(Predicates0)),
-		sort(1, @=<, Predicates0, Predicates),
+		(	member(sort_predicates(true), Options) ->
+			sort(1, @=<, Predicates0, Predicates)
+		;	Predicates = Predicates0
+		),
 		member(Functor/Arity, Predicates),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		functor(Entity, EntityFunctor, _),
@@ -789,17 +795,20 @@
 			write_xml_predicate(Stream, Entity, Functor/Arity, Functor, Arity, (public))
 		),
 		fail.
-	write_xml_public_predicates(Stream, _) :-
+	write_xml_public_predicates(Stream, _, _) :-
 		write_xml_close_tag(Stream, (public)).
 
-	% write_xml_protected_predicates(@stream, @entity_identifier)
+	% write_xml_protected_predicates(@stream, @entity_identifier, @list)
 	%
 	% writes the documentation protected predicates
 
-	write_xml_protected_predicates(Stream, Entity) :-
+	write_xml_protected_predicates(Stream, Entity, Options) :-
 		write_xml_open_tag(Stream, protected, []),
 		entity_property(Entity, protected(Predicates0)),
-		sort(1, @=<, Predicates0, Predicates),
+		(	member(sort_predicates(true), Options) ->
+			sort(1, @=<, Predicates0, Predicates)
+		;	Predicates = Predicates0
+		),
 		member(Functor/Arity, Predicates),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		(	member(non_terminal(Functor//Args), Properties) ->
@@ -807,17 +816,20 @@
 		;	write_xml_predicate(Stream, Entity, Functor/Arity, Functor, Arity, protected)
 		),
 		fail.
-	write_xml_protected_predicates(Stream, _) :-
+	write_xml_protected_predicates(Stream, _, _) :-
 		write_xml_close_tag(Stream, protected).
 
-	% write_xml_private_predicates(@stream, @entity_identifier)
+	% write_xml_private_predicates(@stream, @entity_identifier, @list)
 	%
 	% writes the documentation of private predicates
 
-	write_xml_private_predicates(Stream, Entity) :-
+	write_xml_private_predicates(Stream, Entity, Options) :-
 		write_xml_open_tag(Stream, private, []),
 		entity_property(Entity, private(Predicates0)),
-		sort(1, @=<, Predicates0, Predicates),
+		(	member(sort_predicates(true), Options) ->
+			sort(1, @=<, Predicates0, Predicates)
+		;	Predicates = Predicates0
+		),
 		member(Functor/Arity, Predicates),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		(	member(non_terminal(Functor//Args), Properties) ->
@@ -825,7 +837,7 @@
 		;	write_xml_predicate(Stream, Entity, Functor/Arity, Functor, Arity, private)
 		),
 		fail.
-	write_xml_private_predicates(Stream, _) :-
+	write_xml_private_predicates(Stream, _, _) :-
 		write_xml_close_tag(Stream, private).
 
 	% write_xml_inherited_predicate(@stream, @compound)
@@ -1459,6 +1471,7 @@
 	default_option(exclude_files, []).
 	default_option(exclude_paths, []).
 	default_option(exclude_entities, []).
+	default_option(sort_predicates, false).
 
 	valid_option(entity_xsl_file).
 	valid_option(index_xsl_file).
@@ -1471,6 +1484,7 @@
 	valid_option(exclude_files).
 	valid_option(exclude_paths).
 	valid_option(exclude_entities).
+	valid_option(sort_predicates).
 
 	valid_option(entity_xsl_file, File) :-
 		atom(File).
@@ -1493,6 +1507,8 @@
 		valid(list(atom), List).
 	valid_option(exclude_entities, List) :-
 		valid(list(atom), List).
+	valid_option(sort_predicates, true) :- !.
+	valid_option(sort_predicates, false) :- !.
 
 	option(Option, Value) :-
 		valid_option(Option),
@@ -1518,14 +1534,11 @@
 		(member(index_xsl_file(IndexXSL), UserOptions) -> true; option(index_xsl_file, IndexXSL)),
 		(member(encoding(Encoding), UserOptions) -> true; option(encoding, Encoding)),
 		(member(bom(BOM), UserOptions) -> true; option(bom, BOM)),
-		% by default, don't omit any path prefixes:
 		(member(omit_path_prefixes(Prefixes0), UserOptions) -> true; option(omit_path_prefixes, Prefixes0)),
-		% by default, don't exclude any source files:
 		(member(exclude_files(ExcludedFiles0), UserOptions) -> true; option(exclude_files, ExcludedFiles0)),
-		% by default, don't exclude any library sub-directories:
 		(member(exclude_paths(ExcludedPaths0), UserOptions) -> true; option(exclude_paths, ExcludedPaths0)),
-		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
+		(member(sort_predicates(SortPredicates), UserOptions) -> true; option(sort_predicates, SortPredicates)),
 		normalize_directory_paths([Directory0| Prefixes0], [Directory| Prefixes]),
 		normalize_file_paths(ExcludedFiles0, ExcludedFiles),
 		normalize_directory_paths(ExcludedPaths0, ExcludedPaths),
@@ -1534,7 +1547,8 @@
 			entity_xsl_file(EntityXSL), index_xsl_file(IndexXSL),
 			encoding(Encoding), bom(BOM),
 			omit_path_prefixes(Prefixes),
-			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)
+			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities),
+			sort_predicates(SortPredicates)
 		].
 
 	normalize_directory_paths([], []).

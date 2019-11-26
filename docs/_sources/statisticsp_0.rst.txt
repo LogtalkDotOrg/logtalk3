@@ -37,6 +37,121 @@ Public predicates
 
 .. raw:: html
 
+   <div id="product/2"> </div>
+
+.. index:: product/2
+.. _statisticsp/0::product/2:
+
+``product/2``
+^^^^^^^^^^^^^
+
+Calculates the product of all list numbers. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``product(List,Product)``
+| **Mode and number of proofs:**
+|    ``product(+list(number),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="sum/2"> </div>
+
+.. index:: sum/2
+.. _statisticsp/0::sum/2:
+
+``sum/2``
+^^^^^^^^^
+
+Calculates the sum of all list numbers. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sum(List,Sum)``
+| **Mode and number of proofs:**
+|    ``sum(+list(number),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="max/2"> </div>
+
+.. index:: max/2
+.. _statisticsp/0::max/2:
+
+``max/2``
+^^^^^^^^^
+
+Determines the list maximum value in a list of numbers. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``max(List,Maximum)``
+| **Mode and number of proofs:**
+|    ``max(+list,-number)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="min/2"> </div>
+
+.. index:: min/2
+.. _statisticsp/0::min/2:
+
+``min/2``
+^^^^^^^^^
+
+Determines the minimum value in a list of numbers. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min(List,Minimum)``
+| **Mode and number of proofs:**
+|    ``min(+list,-number)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="range/2"> </div>
+
+.. index:: range/2
+.. _statisticsp/0::range/2:
+
+``range/2``
+^^^^^^^^^^^
+
+Range is the length of the smallest interval which contains all the numbers in List. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``range(List,Range)``
+| **Mode and number of proofs:**
+|    ``range(+list,-number)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="arithmetic_mean/2"> </div>
 
 .. index:: arithmetic_mean/2
@@ -54,52 +169,6 @@ Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.
 |    ``arithmetic_mean(List,Mean)``
 | **Mode and number of proofs:**
 |    ``arithmetic_mean(+list(number),-float)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="average_deviation/3"> </div>
-
-.. index:: average_deviation/3
-.. _statisticsp/0::average_deviation/3:
-
-``average_deviation/3``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``average_deviation(List,CentralTendency,Deviation)``
-| **Mode and number of proofs:**
-|    ``average_deviation(+list(number),+float,-float)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="coefficient_of_variation/2"> </div>
-
-.. index:: coefficient_of_variation/2
-.. _statisticsp/0::coefficient_of_variation/2:
-
-``coefficient_of_variation/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Calculates the coefficient of variation of a list of numbers. Fails if the list is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``coefficient_of_variation(List,Coefficient)``
-| **Mode and number of proofs:**
-|    ``coefficient_of_variation(+list(number),-float)`` - ``zero_or_one``
 
 
 ------------
@@ -152,46 +221,46 @@ Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 
 .. raw:: html
 
-   <div id="kurtosis/2"> </div>
+   <div id="median/2"> </div>
 
-.. index:: kurtosis/2
-.. _statisticsp/0::kurtosis/2:
+.. index:: median/2
+.. _statisticsp/0::median/2:
 
-``kurtosis/2``
-^^^^^^^^^^^^^^
+``median/2``
+^^^^^^^^^^^^
 
-Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empty.
+Calculates the median of a list of numbers. Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``kurtosis(List,Kurtosis)``
+|    ``median(List,Median)``
 | **Mode and number of proofs:**
-|    ``kurtosis(+list(number),-float)`` - ``zero_or_one``
+|    ``median(+list(number),-float)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="max/2"> </div>
+   <div id="average_deviation/3"> </div>
 
-.. index:: max/2
-.. _statisticsp/0::max/2:
+.. index:: average_deviation/3
+.. _statisticsp/0::average_deviation/3:
 
-``max/2``
-^^^^^^^^^
+``average_deviation/3``
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Determines the list maximum value in a list of numbers. Fails if the list is empty.
+Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``max(List,Maximum)``
+|    ``average_deviation(List,CentralTendency,Deviation)``
 | **Mode and number of proofs:**
-|    ``max(+list,-number)`` - ``zero_or_one``
+|    ``average_deviation(+list(number),+float,-float)`` - ``zero_or_one``
 
 
 ------------
@@ -221,29 +290,6 @@ Calculates the mean absolute deviation of a list of numbers. Fails if the list i
 
 .. raw:: html
 
-   <div id="median/2"> </div>
-
-.. index:: median/2
-.. _statisticsp/0::median/2:
-
-``median/2``
-^^^^^^^^^^^^
-
-Calculates the median of a list of numbers. Fails if the list is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``median(List,Median)``
-| **Mode and number of proofs:**
-|    ``median(+list(number),-float)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="median_deviation/2"> </div>
 
 .. index:: median_deviation/2
@@ -267,69 +313,46 @@ Calculates the median absolute deviation of a list of numbers. Fails if the list
 
 .. raw:: html
 
-   <div id="min/2"> </div>
+   <div id="standard_deviation/2"> </div>
 
-.. index:: min/2
-.. _statisticsp/0::min/2:
+.. index:: standard_deviation/2
+.. _statisticsp/0::standard_deviation/2:
 
-``min/2``
-^^^^^^^^^
+``standard_deviation/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Determines the minimum value in a list of numbers. Fails if the list is empty.
+Calculates the standard deviation of a list of numbers. Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``min(List,Minimum)``
+|    ``standard_deviation(List,Deviation)``
 | **Mode and number of proofs:**
-|    ``min(+list,-number)`` - ``zero_or_one``
+|    ``standard_deviation(+list(number),-float)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="product/2"> </div>
+   <div id="coefficient_of_variation/2"> </div>
 
-.. index:: product/2
-.. _statisticsp/0::product/2:
+.. index:: coefficient_of_variation/2
+.. _statisticsp/0::coefficient_of_variation/2:
 
-``product/2``
-^^^^^^^^^^^^^
+``coefficient_of_variation/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Calculates the product of all list numbers. Fails if the list is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``product(List,Product)``
-| **Mode and number of proofs:**
-|    ``product(+list(number),-number)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="range/2"> </div>
-
-.. index:: range/2
-.. _statisticsp/0::range/2:
-
-``range/2``
-^^^^^^^^^^^
-
-Range is the length of the smallest interval which contains all the numbers in List. Fails if the list is empty.
+Calculates the coefficient of variation of a list of numbers. Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``range(List,Range)``
+|    ``coefficient_of_variation(List,Coefficient)``
 | **Mode and number of proofs:**
-|    ``range(+list,-number)`` - ``zero_or_one``
+|    ``coefficient_of_variation(+list(number),-float)`` - ``zero_or_one``
 
 
 ------------
@@ -382,69 +405,23 @@ Calculates the (moment) skewness of a list of numbers. Fails if the list is empt
 
 .. raw:: html
 
-   <div id="standard_deviation/2"> </div>
+   <div id="kurtosis/2"> </div>
 
-.. index:: standard_deviation/2
-.. _statisticsp/0::standard_deviation/2:
+.. index:: kurtosis/2
+.. _statisticsp/0::kurtosis/2:
 
-``standard_deviation/2``
-^^^^^^^^^^^^^^^^^^^^^^^^
+``kurtosis/2``
+^^^^^^^^^^^^^^
 
-Calculates the standard deviation of a list of numbers. Fails if the list is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``standard_deviation(List,Deviation)``
-| **Mode and number of proofs:**
-|    ``standard_deviation(+list(number),-float)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="sum/2"> </div>
-
-.. index:: sum/2
-.. _statisticsp/0::sum/2:
-
-``sum/2``
-^^^^^^^^^
-
-Calculates the sum of all list numbers. Fails if the list is empty.
+Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``sum(List,Sum)``
+|    ``kurtosis(List,Kurtosis)``
 | **Mode and number of proofs:**
-|    ``sum(+list(number),-number)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="valid/1"> </div>
-
-.. index:: valid/1
-.. _statisticsp/0::valid/1:
-
-``valid/1``
-^^^^^^^^^^^
-
-Term is a closed list of numbers.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``valid(Term)``
-| **Mode and number of proofs:**
-|    ``valid(@nonvar)`` - ``zero_or_one``
+|    ``kurtosis(+list(number),-float)`` - ``zero_or_one``
 
 
 ------------
@@ -491,6 +468,29 @@ Normalizes a list of number such that for the resulting list the mean of is clos
 |    ``z_normalization(List,NormalizedList)``
 | **Mode and number of proofs:**
 |    ``z_normalization(+list(number),-list(float))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="valid/1"> </div>
+
+.. index:: valid/1
+.. _statisticsp/0::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+Term is a closed list of numbers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(Term)``
+| **Mode and number of proofs:**
+|    ``valid(@nonvar)`` - ``zero_or_one``
 
 
 ------------

@@ -82,98 +82,6 @@ List of all object classes.
 
 .. raw:: html
 
-   <div id="descendant_class/1"> </div>
-
-.. index:: descendant_class/1
-.. _class_hierarchyp/0::descendant_class/1:
-
-``descendant_class/1``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Returns, by backtracking, all class descendant subclasses.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``descendant_class(Descendant)``
-| **Mode and number of proofs:**
-|    ``descendant_class(?object)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="descendant_classes/1"> </div>
-
-.. index:: descendant_classes/1
-.. _class_hierarchyp/0::descendant_classes/1:
-
-``descendant_classes/1``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-List of all class descendant subclasses.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``descendant_classes(Descendants)``
-| **Mode and number of proofs:**
-|    ``descendant_classes(-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="descendant_instance/1"> </div>
-
-.. index:: descendant_instance/1
-.. _class_hierarchyp/0::descendant_instance/1:
-
-``descendant_instance/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Returns, by backtracking, all class descendant instances.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``descendant_instance(Descendant)``
-| **Mode and number of proofs:**
-|    ``descendant_instance(?object)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="descendant_instances/1"> </div>
-
-.. index:: descendant_instances/1
-.. _class_hierarchyp/0::descendant_instances/1:
-
-``descendant_instances/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-List of all class descendant instances.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``descendant_instances(Descendants)``
-| **Mode and number of proofs:**
-|    ``descendant_instances(-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="instance/1"> </div>
 
 .. index:: instance/1
@@ -214,98 +122,6 @@ List of all class instances.
 |    ``instances(Instances)``
 | **Mode and number of proofs:**
 |    ``instances(-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="leaf_class/1"> </div>
-
-.. index:: leaf_class/1
-.. _class_hierarchyp/0::leaf_class/1:
-
-``leaf_class/1``
-^^^^^^^^^^^^^^^^
-
-Returns, by backtracking, all class leaf subclasses.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``leaf_class(Leaf)``
-| **Mode and number of proofs:**
-|    ``leaf_class(?object)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="leaf_classes/1"> </div>
-
-.. index:: leaf_classes/1
-.. _class_hierarchyp/0::leaf_classes/1:
-
-``leaf_classes/1``
-^^^^^^^^^^^^^^^^^^
-
-List of all class leaf leaf subclasses.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``leaf_classes(Leaves)``
-| **Mode and number of proofs:**
-|    ``leaf_classes(-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="leaf_instance/1"> </div>
-
-.. index:: leaf_instance/1
-.. _class_hierarchyp/0::leaf_instance/1:
-
-``leaf_instance/1``
-^^^^^^^^^^^^^^^^^^^
-
-Returns, by backtracking, all class leaf instances.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``leaf_instance(Leaf)``
-| **Mode and number of proofs:**
-|    ``leaf_instance(?object)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="leaf_instances/1"> </div>
-
-.. index:: leaf_instances/1
-.. _class_hierarchyp/0::leaf_instances/1:
-
-``leaf_instances/1``
-^^^^^^^^^^^^^^^^^^^^
-
-List of all class leaf instances.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``leaf_instances(Leaves)``
-| **Mode and number of proofs:**
-|    ``leaf_instances(-list)`` - ``one``
 
 
 ------------
@@ -398,6 +214,190 @@ List of all class superclasses.
 |    ``superclasses(Superclasses)``
 | **Mode and number of proofs:**
 |    ``superclasses(-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="leaf_instance/1"> </div>
+
+.. index:: leaf_instance/1
+.. _class_hierarchyp/0::leaf_instance/1:
+
+``leaf_instance/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class leaf instances.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leaf_instance(Leaf)``
+| **Mode and number of proofs:**
+|    ``leaf_instance(?object)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="leaf_instances/1"> </div>
+
+.. index:: leaf_instances/1
+.. _class_hierarchyp/0::leaf_instances/1:
+
+``leaf_instances/1``
+^^^^^^^^^^^^^^^^^^^^
+
+List of all class leaf instances.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leaf_instances(Leaves)``
+| **Mode and number of proofs:**
+|    ``leaf_instances(-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="leaf_class/1"> </div>
+
+.. index:: leaf_class/1
+.. _class_hierarchyp/0::leaf_class/1:
+
+``leaf_class/1``
+^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class leaf subclasses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leaf_class(Leaf)``
+| **Mode and number of proofs:**
+|    ``leaf_class(?object)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="leaf_classes/1"> </div>
+
+.. index:: leaf_classes/1
+.. _class_hierarchyp/0::leaf_classes/1:
+
+``leaf_classes/1``
+^^^^^^^^^^^^^^^^^^
+
+List of all class leaf leaf subclasses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leaf_classes(Leaves)``
+| **Mode and number of proofs:**
+|    ``leaf_classes(-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="descendant_instance/1"> </div>
+
+.. index:: descendant_instance/1
+.. _class_hierarchyp/0::descendant_instance/1:
+
+``descendant_instance/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class descendant instances.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``descendant_instance(Descendant)``
+| **Mode and number of proofs:**
+|    ``descendant_instance(?object)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="descendant_instances/1"> </div>
+
+.. index:: descendant_instances/1
+.. _class_hierarchyp/0::descendant_instances/1:
+
+``descendant_instances/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+List of all class descendant instances.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``descendant_instances(Descendants)``
+| **Mode and number of proofs:**
+|    ``descendant_instances(-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="descendant_class/1"> </div>
+
+.. index:: descendant_class/1
+.. _class_hierarchyp/0::descendant_class/1:
+
+``descendant_class/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class descendant subclasses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``descendant_class(Descendant)``
+| **Mode and number of proofs:**
+|    ``descendant_class(?object)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="descendant_classes/1"> </div>
+
+.. index:: descendant_classes/1
+.. _class_hierarchyp/0::descendant_classes/1:
+
+``descendant_classes/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+List of all class descendant subclasses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``descendant_classes(Descendants)``
+| **Mode and number of proofs:**
+|    ``descendant_classes(-list)`` - ``one``
 
 
 ------------

@@ -282,11 +282,11 @@
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#get-field-2" id="id2"><code class="docutils literal notranslate"><span class="pre">get_field/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#invoke-1" id="id3"><code class="docutils literal notranslate"><span class="pre">invoke/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#invoke-2" id="id4"><code class="docutils literal notranslate"><span class="pre">invoke/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#new-2" id="id5"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#new-1" id="id6"><code class="docutils literal notranslate"><span class="pre">new/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#set-field-2" id="id7"><code class="docutils literal notranslate"><span class="pre">set_field/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#set-field-2" id="id3"><code class="docutils literal notranslate"><span class="pre">set_field/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#new-2" id="id4"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#new-1" id="id5"><code class="docutils literal notranslate"><span class="pre">new/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#invoke-1" id="id6"><code class="docutils literal notranslate"><span class="pre">invoke/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#invoke-2" id="id7"><code class="docutils literal notranslate"><span class="pre">invoke/2</span></code></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id8">Protected predicates</a></p></li>
@@ -316,10 +316,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="invoke/1"> </div></div>
-<div class="section" id="invoke-1">
-<span id="java-access-protocol-0-invoke-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invoke/1</span></code></a><a class="headerlink" href="#invoke-1" title="Permalink to this headline">¶</a></h3>
-<p>Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.</p>
+<div id="set_field/2"> </div></div>
+<div class="section" id="set-field-2">
+<span id="java-access-protocol-0-set-field-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set_field/2</span></code></a><a class="headerlink" href="#set-field-2" title="Permalink to this headline">¶</a></h3>
+<p>Sets the value of a class or object field.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -329,38 +329,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(Method)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_field(Field,Value)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="invoke/2"> </div></div>
-<div class="section" id="invoke-2">
-<span id="java-access-protocol-0-invoke-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invoke/2</span></code></a><a class="headerlink" href="#invoke-2" title="Permalink to this headline">¶</a></h3>
-<p>Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(Functor,Arguments)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(&#64;nonvar,&#64;list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_field(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="new/2"> </div></div>
 <div class="section" id="new-2">
-<span id="java-access-protocol-0-new-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a><a class="headerlink" href="#new-2" title="Permalink to this headline">¶</a></h3>
+<span id="java-access-protocol-0-new-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a><a class="headerlink" href="#new-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates a new instance using the specified parameter values.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -381,7 +360,7 @@
 <hr class="docutils" />
 <div id="new/1"> </div></div>
 <div class="section" id="new-1">
-<span id="java-access-protocol-0-new-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/1</span></code></a><a class="headerlink" href="#new-1" title="Permalink to this headline">¶</a></h3>
+<span id="java-access-protocol-0-new-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/1</span></code></a><a class="headerlink" href="#new-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates a new instance using default parameter values.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -400,10 +379,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="set_field/2"> </div></div>
-<div class="section" id="set-field-2">
-<span id="java-access-protocol-0-set-field-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set_field/2</span></code></a><a class="headerlink" href="#set-field-2" title="Permalink to this headline">¶</a></h3>
-<p>Sets the value of a class or object field.</p>
+<div id="invoke/1"> </div></div>
+<div class="section" id="invoke-1">
+<span id="java-access-protocol-0-invoke-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invoke/1</span></code></a><a class="headerlink" href="#invoke-1" title="Permalink to this headline">¶</a></h3>
+<p>Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -413,11 +392,32 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">set_field(Field,Value)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(Method)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">set_field(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="invoke/2"> </div></div>
+<div class="section" id="invoke-2">
+<span id="java-access-protocol-0-invoke-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invoke/2</span></code></a><a class="headerlink" href="#invoke-2" title="Permalink to this headline">¶</a></h3>
+<p>Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(Functor,Arguments)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(&#64;nonvar,&#64;list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </div>

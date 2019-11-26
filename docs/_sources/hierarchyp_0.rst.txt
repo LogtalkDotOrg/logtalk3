@@ -83,52 +83,6 @@ List of all object ancestors.
 
 .. raw:: html
 
-   <div id="descendant/1"> </div>
-
-.. index:: descendant/1
-.. _hierarchyp/0::descendant/1:
-
-``descendant/1``
-^^^^^^^^^^^^^^^^
-
-Returns, by backtracking, all object descendants.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``descendant(Descendant)``
-| **Mode and number of proofs:**
-|    ``descendant(?object)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="descendants/1"> </div>
-
-.. index:: descendants/1
-.. _hierarchyp/0::descendants/1:
-
-``descendants/1``
-^^^^^^^^^^^^^^^^^
-
-List of all object descendants.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``descendants(Descendants)``
-| **Mode and number of proofs:**
-|    ``descendants(-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="leaf/1"> </div>
 
 .. index:: leaf/1
@@ -169,6 +123,52 @@ List of all object leaves.
 |    ``leaves(Leaves)``
 | **Mode and number of proofs:**
 |    ``leaves(-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="descendant/1"> </div>
+
+.. index:: descendant/1
+.. _hierarchyp/0::descendant/1:
+
+``descendant/1``
+^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all object descendants.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``descendant(Descendant)``
+| **Mode and number of proofs:**
+|    ``descendant(?object)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="descendants/1"> </div>
+
+.. index:: descendants/1
+.. _hierarchyp/0::descendants/1:
+
+``descendants/1``
+^^^^^^^^^^^^^^^^^
+
+List of all object descendants.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``descendants(Descendants)``
+| **Mode and number of proofs:**
+|    ``descendants(-list)`` - ``one``
 
 
 ------------

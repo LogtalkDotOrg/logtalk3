@@ -129,29 +129,6 @@ Deletes all matching elements from a list, returning the list of remaining eleme
 
 .. raw:: html
 
-   <div id="drop/3"> </div>
-
-.. index:: drop/3
-.. _listp/0::drop/3:
-
-``drop/3``
-^^^^^^^^^^
-
-Drops the first ``N`` elements of a list. Fails if the list have fewer than ``N`` elements.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``drop(N,List,Remaining)``
-| **Mode and number of proofs:**
-|    ``drop(+integer,+list,-list)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="empty/1"> </div>
 
 .. index:: empty/1
@@ -685,53 +662,6 @@ Prefix is a proper prefix of length Length of List.
 
 .. raw:: html
 
-   <div id="proper_suffix/2"> </div>
-
-.. index:: proper_suffix/2
-.. _listp/0::proper_suffix/2:
-
-``proper_suffix/2``
-^^^^^^^^^^^^^^^^^^^
-
-Suffix is a proper suffix of List.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``proper_suffix(Suffix,List)``
-| **Mode and number of proofs:**
-|    ``proper_suffix(?list,+list)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="proper_suffix/3"> </div>
-
-.. index:: proper_suffix/3
-.. _listp/0::proper_suffix/3:
-
-``proper_suffix/3``
-^^^^^^^^^^^^^^^^^^^
-
-Suffix is a proper suffix of length Length of List.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``proper_suffix(Suffix,Length,List)``
-| **Mode and number of proofs:**
-|    ``proper_suffix(?list,+integer,+list)`` - ``zero_or_one``
-|    ``proper_suffix(?list,-integer,+list)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="remove_duplicates/2"> </div>
 
 .. index:: remove_duplicates/2
@@ -851,29 +781,6 @@ Selects an element from a list, returning the list of remaining elements.
 
 .. raw:: html
 
-   <div id="select/4"> </div>
-
-.. index:: select/4
-.. _listp/0::select/4:
-
-``select/4``
-^^^^^^^^^^^^
-
-Selects an element from a list, replacing it by a new element and returning the resulting list.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``select(Old,OldList,New,NewList)``
-| **Mode and number of proofs:**
-|    ``select(?term,?list,?term,?list)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="selectchk/3"> </div>
 
 .. index:: selectchk/3
@@ -891,6 +798,29 @@ Checks that an element can be selected from a list, returning the list of remain
 |    ``selectchk(Element,List,Remaining)``
 | **Mode and number of proofs:**
 |    ``selectchk(?term,?list,?list)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="select/4"> </div>
+
+.. index:: select/4
+.. _listp/0::select/4:
+
+``select/4``
+^^^^^^^^^^^^
+
+Selects an element from a list, replacing it by a new element and returning the resulting list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select(Old,OldList,New,NewList)``
+| **Mode and number of proofs:**
+|    ``select(?term,?list,?term,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -1176,6 +1106,53 @@ Suffix is a suffix of length Length of List.
 
 .. raw:: html
 
+   <div id="proper_suffix/2"> </div>
+
+.. index:: proper_suffix/2
+.. _listp/0::proper_suffix/2:
+
+``proper_suffix/2``
+^^^^^^^^^^^^^^^^^^^
+
+Suffix is a proper suffix of List.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``proper_suffix(Suffix,List)``
+| **Mode and number of proofs:**
+|    ``proper_suffix(?list,+list)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="proper_suffix/3"> </div>
+
+.. index:: proper_suffix/3
+.. _listp/0::proper_suffix/3:
+
+``proper_suffix/3``
+^^^^^^^^^^^^^^^^^^^
+
+Suffix is a proper suffix of length Length of List.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``proper_suffix(Suffix,Length,List)``
+| **Mode and number of proofs:**
+|    ``proper_suffix(?list,+integer,+list)`` - ``zero_or_one``
+|    ``proper_suffix(?list,-integer,+list)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
    <div id="take/3"> </div>
 
 .. index:: take/3
@@ -1193,6 +1170,29 @@ Takes the first ``N`` elements of a list. Fails if the list have fewer than ``N`
 |    ``take(N,List,Elements)``
 | **Mode and number of proofs:**
 |    ``take(+integer,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="drop/3"> </div>
+
+.. index:: drop/3
+.. _listp/0::drop/3:
+
+``drop/3``
+^^^^^^^^^^
+
+Drops the first ``N`` elements of a list. Fails if the list have fewer than ``N`` elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``drop(N,List,Remaining)``
+| **Mode and number of proofs:**
+|    ``drop(+integer,+list,-list)`` - ``zero_or_one``
 
 
 ------------

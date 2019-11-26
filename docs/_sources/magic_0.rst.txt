@@ -36,29 +36,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="magic/2"> </div>
-
-.. index:: magic/2
-.. _magic/0::magic/2:
-
-``magic/2``
-^^^^^^^^^^^
-
-Prefix the predicate symbol of Old with magic_.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``magic(Old,New)``
-| **Mode and number of proofs:**
-|    ``magic(+callable,-callable)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="magicise/4"> </div>
 
 .. index:: magicise/4
@@ -76,6 +53,29 @@ Transform (Head :- Body) into a magic clause (NewHead :- NewBody).
 |    ``magicise(Head,Body,NewHead,NewBody)``
 | **Mode and number of proofs:**
 |    ``magicise(+term,+list,-term,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="magic/2"> </div>
+
+.. index:: magic/2
+.. _magic/0::magic/2:
+
+``magic/2``
+^^^^^^^^^^^
+
+Prefix the predicate symbol of Old with magic_.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``magic(Old,New)``
+| **Mode and number of proofs:**
+|    ``magic(+callable,-callable)`` - ``zero_or_one``
 
 
 ------------

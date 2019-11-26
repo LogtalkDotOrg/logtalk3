@@ -37,6 +37,31 @@ Public predicates
 
 .. raw:: html
 
+   <div id="include/3"> </div>
+
+.. index:: include/3
+.. _metap/0::include/3:
+
+``include/3``
+^^^^^^^^^^^^^
+
+Returns a list of all list elements that satisfy a predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``include(Closure,List,Included)``
+| **Meta-predicate template:**
+|    ``include(1,*,*)``
+| **Mode and number of proofs:**
+|    ``include(+callable,+list,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="exclude/3"> </div>
 
 .. index:: exclude/3
@@ -112,6 +137,56 @@ Finds all members of a list that satisfy a given test appending the given tail t
 
 .. raw:: html
 
+   <div id="partition/4"> </div>
+
+.. index:: partition/4
+.. _metap/0::partition/4:
+
+``partition/4``
+^^^^^^^^^^^^^^^
+
+Partition a list of elements in two lists using a predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition(Closure,List,Included,Excluded)``
+| **Meta-predicate template:**
+|    ``partition(1,*,*,*)``
+| **Mode and number of proofs:**
+|    ``partition(+callable,+list,-list,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="partition/6"> </div>
+
+.. index:: partition/6
+.. _metap/0::partition/6:
+
+``partition/6``
+^^^^^^^^^^^^^^^
+
+Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as ``compare/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition(Closure,List,Value,Less,Equal,Greater)``
+| **Meta-predicate template:**
+|    ``partition(3,*,*,*,*,*)``
+| **Mode and number of proofs:**
+|    ``partition(+callable,+list,@term,-list,-list,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="fold_left/4"> </div>
 
 .. index:: fold_left/4
@@ -156,6 +231,56 @@ List folding (left associative). Closure is extended with three arguments: accum
 |    ``fold_left_1(3,*,*)``
 | **Mode and number of proofs:**
 |    ``fold_left_1(+callable,+list,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="scan_left/4"> </div>
+
+.. index:: scan_left/4
+.. _metap/0::scan_left/4:
+
+``scan_left/4``
+^^^^^^^^^^^^^^^
+
+List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scan_left(Closure,Accumulator,List,Results)``
+| **Meta-predicate template:**
+|    ``scan_left(3,*,*,*)``
+| **Mode and number of proofs:**
+|    ``scan_left(+callable,?term,+list,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="scan_left_1/3"> </div>
+
+.. index:: scan_left_1/3
+.. _metap/0::scan_left_1/3:
+
+``scan_left_1/3``
+^^^^^^^^^^^^^^^^^
+
+List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scan_left_1(Closure,List,Results)``
+| **Meta-predicate template:**
+|    ``scan_left_1(3,*,*)``
+| **Mode and number of proofs:**
+|    ``scan_left_1(+callable,+list,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -212,25 +337,50 @@ List folding (right associative). Closure is extended with three arguments: list
 
 .. raw:: html
 
-   <div id="include/3"> </div>
+   <div id="scan_right/4"> </div>
 
-.. index:: include/3
-.. _metap/0::include/3:
+.. index:: scan_right/4
+.. _metap/0::scan_right/4:
 
-``include/3``
-^^^^^^^^^^^^^
+``scan_right/4``
+^^^^^^^^^^^^^^^^
 
-Returns a list of all list elements that satisfy a predicate.
+List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``include(Closure,List,Included)``
+|    ``scan_right(Closure,Accumulator,List,Results)``
 | **Meta-predicate template:**
-|    ``include(1,*,*)``
+|    ``scan_right(3,*,*,*)``
 | **Mode and number of proofs:**
-|    ``include(+callable,+list,-list)`` - ``one``
+|    ``scan_right(+callable,?term,+list,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="scan_right_1/3"> </div>
+
+.. index:: scan_right_1/3
+.. _metap/0::scan_right_1/3:
+
+``scan_right_1/3``
+^^^^^^^^^^^^^^^^^^
+
+List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scan_right_1(Closure,List,Results)``
+| **Meta-predicate template:**
+|    ``scan_right_1(3,*,*)``
+| **Mode and number of proofs:**
+|    ``scan_right_1(+callable,+list,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -431,156 +581,6 @@ Map a list and apply a fold left (reduce) to the resulting list.
 |    ``map_reduce(2,3,*,*,*)``
 | **Mode and number of proofs:**
 |    ``map_reduce(+callable,+callable,+term,?list,?term)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="partition/4"> </div>
-
-.. index:: partition/4
-.. _metap/0::partition/4:
-
-``partition/4``
-^^^^^^^^^^^^^^^
-
-Partition a list of elements in two lists using a predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``partition(Closure,List,Included,Excluded)``
-| **Meta-predicate template:**
-|    ``partition(1,*,*,*)``
-| **Mode and number of proofs:**
-|    ``partition(+callable,+list,-list,-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="partition/6"> </div>
-
-.. index:: partition/6
-.. _metap/0::partition/6:
-
-``partition/6``
-^^^^^^^^^^^^^^^
-
-Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as ``compare/3``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``partition(Closure,List,Value,Less,Equal,Greater)``
-| **Meta-predicate template:**
-|    ``partition(3,*,*,*,*,*)``
-| **Mode and number of proofs:**
-|    ``partition(+callable,+list,@term,-list,-list,-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="scan_left/4"> </div>
-
-.. index:: scan_left/4
-.. _metap/0::scan_left/4:
-
-``scan_left/4``
-^^^^^^^^^^^^^^^
-
-List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``scan_left(Closure,Accumulator,List,Results)``
-| **Meta-predicate template:**
-|    ``scan_left(3,*,*,*)``
-| **Mode and number of proofs:**
-|    ``scan_left(+callable,?term,+list,?list)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="scan_left_1/3"> </div>
-
-.. index:: scan_left_1/3
-.. _metap/0::scan_left_1/3:
-
-``scan_left_1/3``
-^^^^^^^^^^^^^^^^^
-
-List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``scan_left_1(Closure,List,Results)``
-| **Meta-predicate template:**
-|    ``scan_left_1(3,*,*)``
-| **Mode and number of proofs:**
-|    ``scan_left_1(+callable,+list,?list)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="scan_right/4"> </div>
-
-.. index:: scan_right/4
-.. _metap/0::scan_right/4:
-
-``scan_right/4``
-^^^^^^^^^^^^^^^^
-
-List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``scan_right(Closure,Accumulator,List,Results)``
-| **Meta-predicate template:**
-|    ``scan_right(3,*,*,*)``
-| **Mode and number of proofs:**
-|    ``scan_right(+callable,?term,+list,?list)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="scan_right_1/3"> </div>
-
-.. index:: scan_right_1/3
-.. _metap/0::scan_right_1/3:
-
-``scan_right_1/3``
-^^^^^^^^^^^^^^^^^^
-
-List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``scan_right_1(Closure,List,Results)``
-| **Meta-predicate template:**
-|    ``scan_right_1(3,*,*)``
-| **Mode and number of proofs:**
-|    ``scan_right_1(+callable,+list,?list)`` - ``zero_or_more``
 
 
 ------------

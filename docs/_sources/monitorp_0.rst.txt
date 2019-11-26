@@ -37,50 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="activate_monitor/0"> </div>
-
-.. index:: activate_monitor/0
-.. _monitorp/0::activate_monitor/0:
-
-``activate_monitor/0``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Activates all spy points and start monitoring.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``activate_monitor`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="del_spy_points/4"> </div>
-
-.. index:: del_spy_points/4
-.. _monitorp/0::del_spy_points/4:
-
-``del_spy_points/4``
-^^^^^^^^^^^^^^^^^^^^
-
-Deletes all matching spy points.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``del_spy_points(Event,Object,Message,Sender)``
-| **Mode and number of proofs:**
-|    ``del_spy_points(@event,@object,@callable,@object)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="monitor_activated/0"> </div>
 
 .. index:: monitor_activated/0
@@ -102,6 +58,48 @@ True if monitor is currently active.
 
 .. raw:: html
 
+   <div id="activate_monitor/0"> </div>
+
+.. index:: activate_monitor/0
+.. _monitorp/0::activate_monitor/0:
+
+``activate_monitor/0``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Activates all spy points and start monitoring.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``activate_monitor`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="suspend_monitor/0"> </div>
+
+.. index:: suspend_monitor/0
+.. _monitorp/0::suspend_monitor/0:
+
+``suspend_monitor/0``
+^^^^^^^^^^^^^^^^^^^^^
+
+Suspends monitoring, deactivating all spy points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``suspend_monitor`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="reset_monitor/0"> </div>
 
 .. index:: reset_monitor/0
@@ -117,29 +115,6 @@ Resets monitor, deactivating and deleting all spy points.
 
 | **Mode and number of proofs:**
 |    ``reset_monitor`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="set_spy_point/4"> </div>
-
-.. index:: set_spy_point/4
-.. _monitorp/0::set_spy_point/4:
-
-``set_spy_point/4``
-^^^^^^^^^^^^^^^^^^^
-
-Sets a spy point.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``set_spy_point(Event,Object,Message,Sender)``
-| **Mode and number of proofs:**
-|    ``set_spy_point(?event,?object,?callable,?object)`` - ``one``
 
 
 ------------
@@ -169,21 +144,46 @@ Current spy point.
 
 .. raw:: html
 
-   <div id="suspend_monitor/0"> </div>
+   <div id="set_spy_point/4"> </div>
 
-.. index:: suspend_monitor/0
-.. _monitorp/0::suspend_monitor/0:
+.. index:: set_spy_point/4
+.. _monitorp/0::set_spy_point/4:
 
-``suspend_monitor/0``
-^^^^^^^^^^^^^^^^^^^^^
+``set_spy_point/4``
+^^^^^^^^^^^^^^^^^^^
 
-Suspends monitoring, deactivating all spy points.
+Sets a spy point.
 
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``set_spy_point(Event,Object,Message,Sender)``
 | **Mode and number of proofs:**
-|    ``suspend_monitor`` - ``one``
+|    ``set_spy_point(?event,?object,?callable,?object)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="del_spy_points/4"> </div>
+
+.. index:: del_spy_points/4
+.. _monitorp/0::del_spy_points/4:
+
+``del_spy_points/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Deletes all matching spy points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``del_spy_points(Event,Object,Message,Sender)``
+| **Mode and number of proofs:**
+|    ``del_spy_points(@event,@object,@callable,@object)`` - ``one``
 
 
 ------------

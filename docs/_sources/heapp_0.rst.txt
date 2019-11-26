@@ -37,98 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="as_heap/2"> </div>
-
-.. index:: as_heap/2
-.. _heapp/0::as_heap/2:
-
-``as_heap/2``
-^^^^^^^^^^^^^
-
-Constructs a heap from a list of pairs.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``as_heap(List,Heap)``
-| **Mode and number of proofs:**
-|    ``as_heap(+list,-heap)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="as_list/2"> </div>
-
-.. index:: as_list/2
-.. _heapp/0::as_list/2:
-
-``as_list/2``
-^^^^^^^^^^^^^
-
-Returns the current set of pairs in the heap as a list, sorted into ascending order of the keys.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``as_list(Heap,List)``
-| **Mode and number of proofs:**
-|    ``as_list(+heap,-list)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="delete/4"> </div>
-
-.. index:: delete/4
-.. _heapp/0::delete/4:
-
-``delete/4``
-^^^^^^^^^^^^
-
-Deletes and returns the top pair in a heap returning the updated heap.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete(Heap,TopKey,TopValue,NewHeap)``
-| **Mode and number of proofs:**
-|    ``delete(+heap,?key,?value,-heap)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="empty/1"> </div>
-
-.. index:: empty/1
-.. _heapp/0::empty/1:
-
-``empty/1``
-^^^^^^^^^^^
-
-True if the heap is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``empty(Heap)``
-| **Mode and number of proofs:**
-|    ``empty(@heap)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="insert/4"> </div>
 
 .. index:: insert/4
@@ -175,6 +83,29 @@ Inserts a list of pairs into a heap, returning the updated heap.
 
 .. raw:: html
 
+   <div id="delete/4"> </div>
+
+.. index:: delete/4
+.. _heapp/0::delete/4:
+
+``delete/4``
+^^^^^^^^^^^^
+
+Deletes and returns the top pair in a heap returning the updated heap.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(Heap,TopKey,TopValue,NewHeap)``
+| **Mode and number of proofs:**
+|    ``delete(+heap,?key,?value,-heap)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="merge/3"> </div>
 
 .. index:: merge/3
@@ -198,6 +129,29 @@ Merges two heaps.
 
 .. raw:: html
 
+   <div id="empty/1"> </div>
+
+.. index:: empty/1
+.. _heapp/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True if the heap is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty(Heap)``
+| **Mode and number of proofs:**
+|    ``empty(@heap)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="size/2"> </div>
 
 .. index:: size/2
@@ -215,6 +169,52 @@ Returns the number of heap elements.
 |    ``size(Heap,Size)``
 | **Mode and number of proofs:**
 |    ``size(+heap,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="as_list/2"> </div>
+
+.. index:: as_list/2
+.. _heapp/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Returns the current set of pairs in the heap as a list, sorted into ascending order of the keys.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_list(Heap,List)``
+| **Mode and number of proofs:**
+|    ``as_list(+heap,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="as_heap/2"> </div>
+
+.. index:: as_heap/2
+.. _heapp/0::as_heap/2:
+
+``as_heap/2``
+^^^^^^^^^^^^^
+
+Constructs a heap from a list of pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_heap(List,Heap)``
+| **Mode and number of proofs:**
+|    ``as_heap(+list,-heap)`` - ``one``
 
 
 ------------

@@ -119,23 +119,23 @@ Generates an arbitrary term of the specified type. Fails if the type is not supp
 
 .. raw:: html
 
-   <div id="edge_case/2"> </div>
+   <div id="shrinker/1"> </div>
 
-.. index:: edge_case/2
-.. _arbitrary/0::edge_case/2:
+.. index:: shrinker/1
+.. _arbitrary/0::shrinker/1:
 
-``edge_case/2``
-^^^^^^^^^^^^^^^
+``shrinker/1``
+^^^^^^^^^^^^^^
 
-Table of type edge cases. Fails if the given type have no defined edge cases. New edge cases for existing or new types can be added by defining a clause for this multifile predicate.
+Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the ``shrink/3`` multifile predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``
 
 | **Template:**
-|    ``edge_case(Type,Term)``
+|    ``shrinker(Type)``
 | **Mode and number of proofs:**
-|    ``edge_case(?callable,?term)`` - ``zero_or_more``
+|    ``shrinker(?callable)`` - ``zero_or_more``
 
 
 ------------
@@ -165,23 +165,23 @@ Shrinks a value to a smaller value if possible. Must generate a finite number of
 
 .. raw:: html
 
-   <div id="shrinker/1"> </div>
+   <div id="edge_case/2"> </div>
 
-.. index:: shrinker/1
-.. _arbitrary/0::shrinker/1:
+.. index:: edge_case/2
+.. _arbitrary/0::edge_case/2:
 
-``shrinker/1``
-^^^^^^^^^^^^^^
+``edge_case/2``
+^^^^^^^^^^^^^^^
 
-Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the ``shrink/3`` multifile predicate.
+Table of type edge cases. Fails if the given type have no defined edge cases. New edge cases for existing or new types can be added by defining a clause for this multifile predicate.
 
 | **Compilation flags:**
 |    ``static, multifile``
 
 | **Template:**
-|    ``shrinker(Type)``
+|    ``edge_case(Type,Term)``
 | **Mode and number of proofs:**
-|    ``shrinker(?callable)`` - ``zero_or_more``
+|    ``edge_case(?callable,?term)`` - ``zero_or_more``
 
 
 ------------

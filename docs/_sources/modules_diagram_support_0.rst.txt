@@ -37,29 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="loaded_file_property/2"> </div>
-
-.. index:: loaded_file_property/2
-.. _modules_diagram_support/0::loaded_file_property/2:
-
-``loaded_file_property/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Access to loaded source file properties, at least ``basename/1``, ``directory/1`` but also ``parent/1`` when possible.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``loaded_file_property(File,Property)``
-| **Mode and number of proofs:**
-|    ``loaded_file_property(?atom,?callable)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="module_property/2"> </div>
 
 .. index:: module_property/2
@@ -77,6 +54,29 @@ Access to module properties, at least ``exports/1``, ``file/1``, and ``file/2`` 
 |    ``module_property(Module,Property)``
 | **Mode and number of proofs:**
 |    ``module_property(?atom,?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="loaded_file_property/2"> </div>
+
+.. index:: loaded_file_property/2
+.. _modules_diagram_support/0::loaded_file_property/2:
+
+``loaded_file_property/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Access to loaded source file properties, at least ``basename/1``, ``directory/1`` but also ``parent/1`` when possible.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``loaded_file_property(File,Property)``
+| **Mode and number of proofs:**
+|    ``loaded_file_property(?atom,?callable)`` - ``zero_or_more``
 
 
 ------------

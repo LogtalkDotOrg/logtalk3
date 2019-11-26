@@ -37,77 +37,42 @@ Public predicates
 
 .. raw:: html
 
-   <div id="filter/2"> </div>
+   <div id="is_empty/0"> </div>
 
-.. index:: filter/2
-.. _optional/1::filter/2:
+.. index:: is_empty/0
+.. _optional/1::is_empty/0:
 
-``filter/2``
-^^^^^^^^^^^^
-
-Returns the optional term when it is not empty and the value it holds satisfies a closure. Otherwise returns an empty optional term.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``filter(Closure,NewOptional)``
-| **Meta-predicate template:**
-|    ``filter(1,*)``
-| **Mode and number of proofs:**
-|    ``filter(+callable,--nonvar)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="flat_map/2"> </div>
-
-.. index:: flat_map/2
-.. _optional/1::flat_map/2:
-
-``flat_map/2``
+``is_empty/0``
 ^^^^^^^^^^^^^^
 
-When the optional term is not empty and mapping a closure with the value it holds and the new optional term as additional arguments is successful, returns the new optional term. Otherwise returns an empty optional term.
+True if the optional term is empty. See also the ``if_empty/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
 
-| **Template:**
-|    ``flat_map(Closure,NewOptional)``
-| **Meta-predicate template:**
-|    ``flat_map(2,*)``
 | **Mode and number of proofs:**
-|    ``flat_map(+callable,--nonvar)`` - ``one``
+|    ``is_empty`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="get/1"> </div>
+   <div id="is_present/0"> </div>
 
-.. index:: get/1
-.. _optional/1::get/1:
+.. index:: is_present/0
+.. _optional/1::is_present/0:
 
-``get/1``
-^^^^^^^^^
+``is_present/0``
+^^^^^^^^^^^^^^^^
 
-Returns the value hold by the optional term if not empty. Throws an error otherwise.
+True if the optional term holds a value. See also the ``if_present/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
 
-| **Template:**
-|    ``get(Value)``
 | **Mode and number of proofs:**
-|    ``get(--term)`` - ``one_or_error``
-
-| **Exceptions:**
-|    Optional is empty:
-|        ``existence_error(optional_term,Optional)``
+|    ``is_present`` - ``zero_or_one``
 
 
 ------------
@@ -189,42 +154,25 @@ Applies a closure to the value hold by the optional term if not empty. Otherwise
 
 .. raw:: html
 
-   <div id="is_empty/0"> </div>
+   <div id="filter/2"> </div>
 
-.. index:: is_empty/0
-.. _optional/1::is_empty/0:
+.. index:: filter/2
+.. _optional/1::filter/2:
 
-``is_empty/0``
-^^^^^^^^^^^^^^
+``filter/2``
+^^^^^^^^^^^^
 
-True if the optional term is empty. See also the ``if_empty/1`` predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``is_empty`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="is_present/0"> </div>
-
-.. index:: is_present/0
-.. _optional/1::is_present/0:
-
-``is_present/0``
-^^^^^^^^^^^^^^^^
-
-True if the optional term holds a value. See also the ``if_present/1`` predicate.
+Returns the optional term when it is not empty and the value it holds satisfies a closure. Otherwise returns an empty optional term.
 
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``filter(Closure,NewOptional)``
+| **Meta-predicate template:**
+|    ``filter(1,*)``
 | **Mode and number of proofs:**
-|    ``is_present`` - ``zero_or_one``
+|    ``filter(+callable,--nonvar)`` - ``one``
 
 
 ------------
@@ -256,6 +204,31 @@ When the optional term is not empty and mapping a closure with the value it hold
 
 .. raw:: html
 
+   <div id="flat_map/2"> </div>
+
+.. index:: flat_map/2
+.. _optional/1::flat_map/2:
+
+``flat_map/2``
+^^^^^^^^^^^^^^
+
+When the optional term is not empty and mapping a closure with the value it holds and the new optional term as additional arguments is successful, returns the new optional term. Otherwise returns an empty optional term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flat_map(Closure,NewOptional)``
+| **Meta-predicate template:**
+|    ``flat_map(2,*)``
+| **Mode and number of proofs:**
+|    ``flat_map(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="or/2"> </div>
 
 .. index:: or/2
@@ -281,6 +254,33 @@ Returns the same optional term if not empty. Otherwise calls closure to generate
 
 .. raw:: html
 
+   <div id="get/1"> </div>
+
+.. index:: get/1
+.. _optional/1::get/1:
+
+``get/1``
+^^^^^^^^^
+
+Returns the value hold by the optional term if not empty. Throws an error otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(Value)``
+| **Mode and number of proofs:**
+|    ``get(--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Optional is empty:
+|        ``existence_error(optional_term,Optional)``
+
+
+------------
+
+.. raw:: html
+
    <div id="or_else/2"> </div>
 
 .. index:: or_else/2
@@ -298,6 +298,35 @@ Returns the value hold by the optional term if not empty or the given default va
 |    ``or_else(Value,Default)``
 | **Mode and number of proofs:**
 |    ``or_else(--term,@term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="or_else_get/2"> </div>
+
+.. index:: or_else_get/2
+.. _optional/1::or_else_get/2:
+
+``or_else_get/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the value hold by the optional term if not empty. Applies a closure to compute the value otherwise. Throws an error when the optional term is empty and the value cannot be computed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_get(Value,Closure)``
+| **Meta-predicate template:**
+|    ``or_else_get(*,1)``
+| **Mode and number of proofs:**
+|    ``or_else_get(--term,+callable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Optional is empty and the term cannot be computed:
+|        ``existence_error(optional_term,Optional)``
 
 
 ------------
@@ -346,35 +375,6 @@ Returns the value hold by the optional term if not empty. Fails otherwise. Usual
 |    ``or_else_fail(Value)``
 | **Mode and number of proofs:**
 |    ``or_else_fail(--term)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="or_else_get/2"> </div>
-
-.. index:: or_else_get/2
-.. _optional/1::or_else_get/2:
-
-``or_else_get/2``
-^^^^^^^^^^^^^^^^^
-
-Returns the value hold by the optional term if not empty. Applies a closure to compute the value otherwise. Throws an error when the optional term is empty and the value cannot be computed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``or_else_get(Value,Closure)``
-| **Meta-predicate template:**
-|    ``or_else_get(*,1)``
-| **Mode and number of proofs:**
-|    ``or_else_get(--term,+callable)`` - ``one_or_error``
-
-| **Exceptions:**
-|    Optional is empty and the term cannot be computed:
-|        ``existence_error(optional_term,Optional)``
 
 
 ------------

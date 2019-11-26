@@ -37,60 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="(<=)/2"> </div>
-
-.. index:: (<=)/2
-.. _assignvarsp/0::(<=)/2:
-
-``(<=)/2``
-^^^^^^^^^^
-
-Sets the state of the assignable variable ``Variable`` to ``Value`` (initializing the variable if needed).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``Variable<=Value``
-| **Mode and number of proofs:**
-|    ``(?assignvar)<=(@nonvar)`` - ``one``
-
-| **Exceptions:**
-|    Value is not instantiated:
-|        ``instantiation_error``
-
-
-------------
-
-.. raw:: html
-
-   <div id="(=>)/2"> </div>
-
-.. index:: (=>)/2
-.. _assignvarsp/0::(=>)/2:
-
-``(=>)/2``
-^^^^^^^^^^
-
-Unifies ``Value`` with the current state of the assignable variable ``Variable``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``Variable=>Value``
-| **Mode and number of proofs:**
-|    ``(+assignvar)=>(?nonvar)`` - ``zero_or_one``
-
-| **Exceptions:**
-|    Variable is not instantiated:
-|        ``instantiation_error``
-
-
-------------
-
-.. raw:: html
-
    <div id="assignable/1"> </div>
 
 .. index:: assignable/1
@@ -140,6 +86,60 @@ Makes ``Variable`` an assignable variable and sets its initial state to ``Value`
 |    Variable is not a variable:
 |        ``type_error(variable,Variable)``
 |    Value is not instantiated:
+|        ``instantiation_error``
+
+
+------------
+
+.. raw:: html
+
+   <div id="(<=)/2"> </div>
+
+.. index:: (<=)/2
+.. _assignvarsp/0::(<=)/2:
+
+``(<=)/2``
+^^^^^^^^^^
+
+Sets the state of the assignable variable ``Variable`` to ``Value`` (initializing the variable if needed).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``Variable<=Value``
+| **Mode and number of proofs:**
+|    ``(?assignvar)<=(@nonvar)`` - ``one``
+
+| **Exceptions:**
+|    Value is not instantiated:
+|        ``instantiation_error``
+
+
+------------
+
+.. raw:: html
+
+   <div id="(=>)/2"> </div>
+
+.. index:: (=>)/2
+.. _assignvarsp/0::(=>)/2:
+
+``(=>)/2``
+^^^^^^^^^^
+
+Unifies ``Value`` with the current state of the assignable variable ``Variable``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``Variable=>Value``
+| **Mode and number of proofs:**
+|    ``(+assignvar)=>(?nonvar)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    Variable is not instantiated:
 |        ``instantiation_error``
 
 

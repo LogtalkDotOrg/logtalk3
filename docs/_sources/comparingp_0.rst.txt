@@ -60,29 +60,6 @@ True if ``Term1`` is less than ``Term2``.
 
 .. raw:: html
 
-   <div id="(=:=)/2"> </div>
-
-.. index:: (=:=)/2
-.. _comparingp/0::(=:=)/2:
-
-``(=:=)/2``
-^^^^^^^^^^^
-
-True if ``Term1`` is equal to ``Term2``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``Term1=:=Term2``
-| **Mode and number of proofs:**
-|    ``+term=:= +term`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="(=<)/2"> </div>
 
 .. index:: (=<)/2
@@ -100,29 +77,6 @@ True if ``Term1`` is less or equal than ``Term2``.
 |    ``Term1=<Term2``
 | **Mode and number of proofs:**
 |    ``+term=< +term`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="(=\=)/2"> </div>
-
-.. index:: (=\=)/2
-.. _comparingp/0::(=\=)/2:
-
-``(=\=)/2``
-^^^^^^^^^^^
-
-True if ``Term1`` is not equal to ``Term2``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``Term1=\=Term2``
-| **Mode and number of proofs:**
-|    ``+term=\= +term`` - ``zero_or_one``
 
 
 ------------
@@ -169,6 +123,52 @@ True if ``Term1`` is equal or grater than ``Term2``.
 |    ``Term1>=Term2``
 | **Mode and number of proofs:**
 |    ``+term>= +term`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="(=:=)/2"> </div>
+
+.. index:: (=:=)/2
+.. _comparingp/0::(=:=)/2:
+
+``(=:=)/2``
+^^^^^^^^^^^
+
+True if ``Term1`` is equal to ``Term2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``Term1=:=Term2``
+| **Mode and number of proofs:**
+|    ``+term=:= +term`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="(=\=)/2"> </div>
+
+.. index:: (=\=)/2
+.. _comparingp/0::(=\=)/2:
+
+``(=\=)/2``
+^^^^^^^^^^^
+
+True if ``Term1`` is not equal to ``Term2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``Term1=\=Term2``
+| **Mode and number of proofs:**
+|    ``+term=\= +term`` - ``zero_or_one``
 
 
 ------------

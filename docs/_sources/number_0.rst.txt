@@ -36,30 +36,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="=~= / 2"> </div>
-
-.. index:: =~= / 2
-.. _number/0::=~= / 2:
-
-``=~= / 2``
-^^^^^^^^^^^
-
-Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``=~=(Float1,Float2)``
-| **Mode and number of proofs:**
-|    ``=~=(+number,+number)`` - ``zero_or_one``
-|    ``=~=(+list(number),+list(number))`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="approximately_equal/3"> </div>
 
 .. index:: approximately_equal/3
@@ -123,6 +99,30 @@ Compares two numbers for close equality given relative and absolute tolerances u
 |    ``tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)``
 | **Mode and number of proofs:**
 |    ``tolerance_equal(+number,+number,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="=~= / 2"> </div>
+
+.. index:: =~= / 2
+.. _number/0::=~= / 2:
+
+``=~= / 2``
+^^^^^^^^^^^
+
+Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``=~=(Float1,Float2)``
+| **Mode and number of proofs:**
+|    ``=~=(+number,+number)`` - ``zero_or_one``
+|    ``=~=(+list(number),+list(number))`` - ``zero_or_one``
 
 
 ------------

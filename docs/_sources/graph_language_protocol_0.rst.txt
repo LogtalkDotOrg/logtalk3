@@ -37,46 +37,23 @@ Public predicates
 
 .. raw:: html
 
-   <div id="edge/6"> </div>
+   <div id="output_file_name/2"> </div>
 
-.. index:: edge/6
-.. _graph_language_protocol/0::edge/6:
+.. index:: output_file_name/2
+.. _graph_language_protocol/0::output_file_name/2:
 
-``edge/6``
-^^^^^^^^^^
+``output_file_name/2``
+^^^^^^^^^^^^^^^^^^^^^^
 
-Writes an edge between two nodes using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``edge(Stream,Start,End,Labels,Kind,Options)``
-| **Mode and number of proofs:**
-|    ``edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="file_footer/3"> </div>
-
-.. index:: file_footer/3
-.. _graph_language_protocol/0::file_footer/3:
-
-``file_footer/3``
-^^^^^^^^^^^^^^^^^
-
-Writes the output file footer using the specified options.
+Constructs the diagram file basename by adding a graph language dependent extension to the given name.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``file_footer(Stream,Identifier,Options)``
+|    ``output_file_name(Name,Basename)``
 | **Mode and number of proofs:**
-|    ``file_footer(+stream_or_alias,+atom,+list(compound))`` - ``one``
+|    ``output_file_name(+atom,-atom)`` - ``one``
 
 
 ------------
@@ -106,23 +83,23 @@ Writes the output file header using the specified options.
 
 .. raw:: html
 
-   <div id="graph_footer/5"> </div>
+   <div id="file_footer/3"> </div>
 
-.. index:: graph_footer/5
-.. _graph_language_protocol/0::graph_footer/5:
+.. index:: file_footer/3
+.. _graph_language_protocol/0::file_footer/3:
 
-``graph_footer/5``
-^^^^^^^^^^^^^^^^^^
+``file_footer/3``
+^^^^^^^^^^^^^^^^^
 
-Writes a graph footer using the specified options.
+Writes the output file footer using the specified options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``graph_footer(Stream,Identifier,Label,Kind,Options)``
+|    ``file_footer(Stream,Identifier,Options)``
 | **Mode and number of proofs:**
-|    ``graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
+|    ``file_footer(+stream_or_alias,+atom,+list(compound))`` - ``one``
 
 
 ------------
@@ -152,6 +129,29 @@ Writes a graph header using the specified options.
 
 .. raw:: html
 
+   <div id="graph_footer/5"> </div>
+
+.. index:: graph_footer/5
+.. _graph_language_protocol/0::graph_footer/5:
+
+``graph_footer/5``
+^^^^^^^^^^^^^^^^^^
+
+Writes a graph footer using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``graph_footer(Stream,Identifier,Label,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="node/7"> </div>
 
 .. index:: node/7
@@ -175,23 +175,23 @@ Writes a node using the specified options.
 
 .. raw:: html
 
-   <div id="output_file_name/2"> </div>
+   <div id="edge/6"> </div>
 
-.. index:: output_file_name/2
-.. _graph_language_protocol/0::output_file_name/2:
+.. index:: edge/6
+.. _graph_language_protocol/0::edge/6:
 
-``output_file_name/2``
-^^^^^^^^^^^^^^^^^^^^^^
+``edge/6``
+^^^^^^^^^^
 
-Constructs the diagram file basename by adding a graph language dependent extension to the given name.
+Writes an edge between two nodes using the specified options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``output_file_name(Name,Basename)``
+|    ``edge(Stream,Start,End,Labels,Kind,Options)``
 | **Mode and number of proofs:**
-|    ``output_file_name(+atom,-atom)`` - ``one``
+|    ``edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
 
 
 ------------

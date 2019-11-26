@@ -11,8 +11,8 @@
 Documenting tool protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 3.2
-| **Date:** 2017/11/4
+| **Version:** 3.3
+| **Date:** 2019/11/26
 
 | **Compilation flags:**
 |    ``static``
@@ -49,6 +49,8 @@ Documenting tool protocol.
 
    - *exclude_entities(List) option:* List of entities to exclude when generating the XML documenting files.
 
+   - *sort_predicates(Boolean) option:* Sort entity predicates (default is ``false``)
+
    - *Known issues:* The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.
 
 | **Inherited public predicates:**
@@ -63,44 +65,163 @@ Public predicates
 
 .. raw:: html
 
-   <div id="all/1"> </div>
+   <div id="rlibrary/2"> </div>
 
-.. index:: all/1
-.. _lgtdocp/0::all/1:
+.. index:: rlibrary/2
+.. _lgtdocp/0::rlibrary/2:
 
-``all/1``
-^^^^^^^^^
+``rlibrary/2``
+^^^^^^^^^^^^^^
 
-Creates XML documenting files for all loaded entities using the specified options.
+Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``all(File)``
+|    ``rlibrary(Library,Options)``
 | **Mode and number of proofs:**
-|    ``all(+list)`` - ``one``
+|    ``rlibrary(+atom,+list)`` - ``one``
+
+| **Examples:**
+|    Generate XML documenting files for all tool entities for later conversion to Markdown files
+|      ``rlibrary(tools,[xslfile('lgtmd.xsl')])``
+|      ``yes``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="all/0"> </div>
+   <div id="rlibrary/1"> </div>
 
-.. index:: all/0
-.. _lgtdocp/0::all/0:
+.. index:: rlibrary/1
+.. _lgtdocp/0::rlibrary/1:
 
-``all/0``
-^^^^^^^^^
+``rlibrary/1``
+^^^^^^^^^^^^^^
 
-Creates XML documenting files for all loaded entities using default options.
+Creates XML documenting files for all entities in a library and its sub-libraries using default options.
 
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``rlibrary(Library)``
 | **Mode and number of proofs:**
-|    ``all`` - ``one``
+|    ``rlibrary(+atom)`` - ``one``
+
+| **Examples:**
+|    Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the ``lgt2xml`` script)
+|      ``rlibrary(tools)``
+|      ``yes``
+
+
+------------
+
+.. raw:: html
+
+   <div id="library/2"> </div>
+
+.. index:: library/2
+.. _lgtdocp/0::library/2:
+
+``library/2``
+^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a library using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library(Library,Options)``
+| **Mode and number of proofs:**
+|    ``library(+atom,+list)`` - ``one``
+
+| **Examples:**
+|    Generate XML documenting files for all library entities for later conversion to PDF A4 files
+|      ``library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])``
+|      ``yes``
+
+
+------------
+
+.. raw:: html
+
+   <div id="library/1"> </div>
+
+.. index:: library/1
+.. _lgtdocp/0::library/1:
+
+``library/1``
+^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a library using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library(Library)``
+| **Mode and number of proofs:**
+|    ``library(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="rdirectory/2"> </div>
+
+.. index:: rdirectory/2
+.. _lgtdocp/0::rdirectory/2:
+
+``rdirectory/2``
+^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+list)`` - ``one``
+
+| **Examples:**
+|    Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files
+|      ``rdirectory('./tools',[xslfile('lgtmd.xsl')])``
+|      ``yes``
+
+
+------------
+
+.. raw:: html
+
+   <div id="rdirectory/1"> </div>
+
+.. index:: rdirectory/1
+.. _lgtdocp/0::rdirectory/1:
+
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a directory and its sub-directories using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom)`` - ``one``
+
+| **Examples:**
+|    Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the ``lgt2xml`` script)
+|      ``rdirectory('./tools')``
+|      ``yes``
 
 
 ------------
@@ -204,51 +325,44 @@ Creates XML documenting files for all entities in a loaded source file using def
 
 .. raw:: html
 
-   <div id="library/2"> </div>
+   <div id="all/1"> </div>
 
-.. index:: library/2
-.. _lgtdocp/0::library/2:
+.. index:: all/1
+.. _lgtdocp/0::all/1:
 
-``library/2``
-^^^^^^^^^^^^^
+``all/1``
+^^^^^^^^^
 
-Creates XML documenting files for all entities in a library using the specified options.
+Creates XML documenting files for all loaded entities using the specified options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``library(Library,Options)``
+|    ``all(File)``
 | **Mode and number of proofs:**
-|    ``library(+atom,+list)`` - ``one``
-
-| **Examples:**
-|    Generate XML documenting files for all library entities for later conversion to PDF A4 files
-|      ``library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])``
-|      ``yes``
+|    ``all(+list)`` - ``one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="library/1"> </div>
+   <div id="all/0"> </div>
 
-.. index:: library/1
-.. _lgtdocp/0::library/1:
+.. index:: all/0
+.. _lgtdocp/0::all/0:
 
-``library/1``
-^^^^^^^^^^^^^
+``all/0``
+^^^^^^^^^
 
-Creates XML documenting files for all entities in a library using default options.
+Creates XML documenting files for all loaded entities using default options.
 
 | **Compilation flags:**
 |    ``static``
 
-| **Template:**
-|    ``library(Library)``
 | **Mode and number of proofs:**
-|    ``library(+atom)`` - ``one``
+|    ``all`` - ``one``
 
 
 ------------
@@ -272,118 +386,6 @@ Returns, by backtracking, all options and their values.
 |    ``option(Option,Value)``
 | **Mode and number of proofs:**
 |    ``option(?atom,?nonvar)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rdirectory/2"> </div>
-
-.. index:: rdirectory/2
-.. _lgtdocp/0::rdirectory/2:
-
-``rdirectory/2``
-^^^^^^^^^^^^^^^^
-
-Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rdirectory(Directory,Options)``
-| **Mode and number of proofs:**
-|    ``rdirectory(+atom,+list)`` - ``one``
-
-| **Examples:**
-|    Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files
-|      ``rdirectory('./tools',[xslfile('lgtmd.xsl')])``
-|      ``yes``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rdirectory/1"> </div>
-
-.. index:: rdirectory/1
-.. _lgtdocp/0::rdirectory/1:
-
-``rdirectory/1``
-^^^^^^^^^^^^^^^^
-
-Creates XML documenting files for all entities in a directory and its sub-directories using default options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rdirectory(Directory)``
-| **Mode and number of proofs:**
-|    ``rdirectory(+atom)`` - ``one``
-
-| **Examples:**
-|    Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the ``lgt2xml`` script)
-|      ``rdirectory('./tools')``
-|      ``yes``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rlibrary/2"> </div>
-
-.. index:: rlibrary/2
-.. _lgtdocp/0::rlibrary/2:
-
-``rlibrary/2``
-^^^^^^^^^^^^^^
-
-Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rlibrary(Library,Options)``
-| **Mode and number of proofs:**
-|    ``rlibrary(+atom,+list)`` - ``one``
-
-| **Examples:**
-|    Generate XML documenting files for all tool entities for later conversion to Markdown files
-|      ``rlibrary(tools,[xslfile('lgtmd.xsl')])``
-|      ``yes``
-
-
-------------
-
-.. raw:: html
-
-   <div id="rlibrary/1"> </div>
-
-.. index:: rlibrary/1
-.. _lgtdocp/0::rlibrary/1:
-
-``rlibrary/1``
-^^^^^^^^^^^^^^
-
-Creates XML documenting files for all entities in a library and its sub-libraries using default options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rlibrary(Library)``
-| **Mode and number of proofs:**
-|    ``rlibrary(+atom)`` - ``one``
-
-| **Examples:**
-|    Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the ``lgt2xml`` script)
-|      ``rlibrary(tools)``
-|      ``yes``
 
 
 ------------

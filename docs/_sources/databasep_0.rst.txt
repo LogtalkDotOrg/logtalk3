@@ -37,29 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="bench_goal/1"> </div>
-
-.. index:: bench_goal/1
-.. _databasep/0::bench_goal/1:
-
-``bench_goal/1``
-^^^^^^^^^^^^^^^^
-
-Table of benchmark goals. They are used from shell.lgt to make benchmarking easier.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``bench_goal(Goal)``
-| **Mode and number of proofs:**
-|    ``bench_goal(?callable)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="rule/4"> </div>
 
 .. index:: rule/4
@@ -123,6 +100,29 @@ Clauses for this predicate are automatically generated using term-expansion.
 |    ``rule(Head,Body)``
 | **Mode and number of proofs:**
 |    ``rule(?callable,-list(callable))`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="bench_goal/1"> </div>
+
+.. index:: bench_goal/1
+.. _databasep/0::bench_goal/1:
+
+``bench_goal/1``
+^^^^^^^^^^^^^^^^
+
+Table of benchmark goals. They are used from shell.lgt to make benchmarking easier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bench_goal(Goal)``
+| **Mode and number of proofs:**
+|    ``bench_goal(?callable)`` - ``zero_or_more``
 
 
 ------------

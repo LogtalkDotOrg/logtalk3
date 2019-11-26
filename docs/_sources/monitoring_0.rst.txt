@@ -37,29 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="after/3"> </div>
-
-.. index:: after/3
-.. _monitoring/0::after/3:
-
-``after/3``
-^^^^^^^^^^^
-
-Event handler for ``after`` events. An ``after`` event handler may prevent a method from succeeding by failing.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``after(Object,Message,Sender)``
-| **Mode and number of proofs:**
-|    ``after(?term,?term,?term)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="before/3"> </div>
 
 .. index:: before/3
@@ -77,6 +54,29 @@ Event handler for ``before`` events. A ``before`` event handler may prevent a me
 |    ``before(Object,Message,Sender)``
 | **Mode and number of proofs:**
 |    ``before(?term,?term,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="after/3"> </div>
+
+.. index:: after/3
+.. _monitoring/0::after/3:
+
+``after/3``
+^^^^^^^^^^^
+
+Event handler for ``after`` events. An ``after`` event handler may prevent a method from succeeding by failing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``after(Object,Message,Sender)``
+| **Mode and number of proofs:**
+|    ``after(?term,?term,?term)`` - ``zero_or_more``
 
 
 ------------

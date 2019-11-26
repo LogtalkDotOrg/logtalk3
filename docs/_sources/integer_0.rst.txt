@@ -87,29 +87,6 @@ Reversible integer sum. At least two of the arguments must be instantiated to in
 
 .. raw:: html
 
-   <div id="sequence/3"> </div>
-
-.. index:: sequence/3
-.. _integer/0::sequence/3:
-
-``sequence/3``
-^^^^^^^^^^^^^^
-
-Generates a list with the sequence of all integers in the interval ``[Inf,Sup]``, assuming ``Inf =< Sup``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``sequence(Inf,Sup,List)``
-| **Mode and number of proofs:**
-|    ``sequence(+integer,+integer,-list(integer))`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="succ/2"> </div>
 
 .. index:: succ/2
@@ -128,6 +105,29 @@ Successor of a natural number. At least one of the arguments must be instantiate
 | **Mode and number of proofs:**
 |    ``succ(+integer,?integer)`` - ``zero_or_one``
 |    ``succ(?integer,+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="sequence/3"> </div>
+
+.. index:: sequence/3
+.. _integer/0::sequence/3:
+
+``sequence/3``
+^^^^^^^^^^^^^^
+
+Generates a list with the sequence of all integers in the interval ``[Inf,Sup]``, assuming ``Inf =< Sup``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Inf,Sup,List)``
+| **Mode and number of proofs:**
+|    ``sequence(+integer,+integer,-list(integer))`` - ``zero_or_one``
 
 
 ------------

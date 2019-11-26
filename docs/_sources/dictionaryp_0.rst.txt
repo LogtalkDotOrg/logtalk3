@@ -37,31 +37,6 @@ Public predicates
 
 .. raw:: html
 
-   <div id="apply/4"> </div>
-
-.. index:: apply/4
-.. _dictionaryp/0::apply/4:
-
-``apply/4``
-^^^^^^^^^^^
-
-Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``apply(Closure,OldDictionary,Key,NewDictionary)``
-| **Meta-predicate template:**
-|    ``apply(2,*,*,*)``
-| **Mode and number of proofs:**
-|    ``apply(+callable,+dictionary,+key,-dictionary)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="as_dictionary/2"> </div>
 
 .. index:: as_dictionary/2
@@ -154,6 +129,29 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 
 .. raw:: html
 
+   <div id="insert/4"> </div>
+
+.. index:: insert/4
+.. _dictionaryp/0::insert/4:
+
+``insert/4``
+^^^^^^^^^^^^
+
+Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert(OldDictionary,Key,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``insert(+dictionary,+ground,@term,-dictionary)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="delete/4"> </div>
 
 .. index:: delete/4
@@ -177,46 +175,46 @@ Deletes a matching Key-Value pair from a dictionary, returning the updated dicti
 
 .. raw:: html
 
-   <div id="delete_max/4"> </div>
+   <div id="update/4"> </div>
 
-.. index:: delete_max/4
-.. _dictionaryp/0::delete_max/4:
+.. index:: update/4
+.. _dictionaryp/0::update/4:
 
-``delete_max/4``
-^^^^^^^^^^^^^^^^
+``update/4``
+^^^^^^^^^^^^
 
-Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.
+Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``delete_max(OldDictionary,Key,Value,NewDictionary)``
+|    ``update(OldDictionary,Key,NewValue,NewDictionary)``
 | **Mode and number of proofs:**
-|    ``delete_max(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
+|    ``update(+dictionary,@ground,+term,-dictionary)`` - ``zero_or_one``
 
 
 ------------
 
 .. raw:: html
 
-   <div id="delete_min/4"> </div>
+   <div id="update/5"> </div>
 
-.. index:: delete_min/4
-.. _dictionaryp/0::delete_min/4:
+.. index:: update/5
+.. _dictionaryp/0::update/5:
 
-``delete_min/4``
-^^^^^^^^^^^^^^^^
+``update/5``
+^^^^^^^^^^^^
 
-Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.
+Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``delete_min(OldDictionary,Key,Value,NewDictionary)``
+|    ``update(OldDictionary,Key,OldValue,NewValue,NewDictionary)``
 | **Mode and number of proofs:**
-|    ``delete_min(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
+|    ``update(+dictionary,@ground,?term,+term,-dictionary)`` - ``zero_or_one``
 
 
 ------------
@@ -246,23 +244,162 @@ True if the dictionary is empty.
 
 .. raw:: html
 
-   <div id="insert/4"> </div>
+   <div id="lookup/3"> </div>
 
-.. index:: insert/4
-.. _dictionaryp/0::insert/4:
+.. index:: lookup/3
+.. _dictionaryp/0::lookup/3:
 
-``insert/4``
+``lookup/3``
 ^^^^^^^^^^^^
 
-Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.
+Lookups a matching Key-Value pair from a dictionary.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``insert(OldDictionary,Key,Value,NewDictionary)``
+|    ``lookup(Key,Value,Dictionary)``
 | **Mode and number of proofs:**
-|    ``insert(+dictionary,+ground,@term,-dictionary)`` - ``one``
+|    ``lookup(+ground,?term,@dictionary)`` - ``zero_or_one``
+|    ``lookup(-ground,?term,@dictionary)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="previous/4"> </div>
+
+.. index:: previous/4
+.. _dictionaryp/0::previous/4:
+
+``previous/4``
+^^^^^^^^^^^^^^
+
+Returns the previous pair in a dictionary given a key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``previous(Dictionary,Key,Previous,Value)``
+| **Mode and number of proofs:**
+|    ``previous(+dictionary,+key,-key,-value)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="next/4"> </div>
+
+.. index:: next/4
+.. _dictionaryp/0::next/4:
+
+``next/4``
+^^^^^^^^^^
+
+Returns the next pair in a dictionary given a key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``next(Dictionary,Key,Next,Value)``
+| **Mode and number of proofs:**
+|    ``next(+dictionary,+key,-key,-value)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="min/3"> </div>
+
+.. index:: min/3
+.. _dictionaryp/0::min/3:
+
+``min/3``
+^^^^^^^^^
+
+Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min(Dictionary,Key,Value)``
+| **Mode and number of proofs:**
+|    ``min(+dictionary,-key,-value)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="max/3"> </div>
+
+.. index:: max/3
+.. _dictionaryp/0::max/3:
+
+``max/3``
+^^^^^^^^^
+
+Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``max(Dictionary,Key,Value)``
+| **Mode and number of proofs:**
+|    ``max(+dictionary,-key,-value)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_min/4"> </div>
+
+.. index:: delete_min/4
+.. _dictionaryp/0::delete_min/4:
+
+``delete_min/4``
+^^^^^^^^^^^^^^^^
+
+Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_min(OldDictionary,Key,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``delete_min(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_max/4"> </div>
+
+.. index:: delete_max/4
+.. _dictionaryp/0::delete_max/4:
+
+``delete_max/4``
+^^^^^^^^^^^^^^^^
+
+Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_max(OldDictionary,Key,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``delete_max(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
 
 
 ------------
@@ -292,24 +429,23 @@ Returns a list with all the dictionary keys in ascending order.
 
 .. raw:: html
 
-   <div id="lookup/3"> </div>
+   <div id="values/2"> </div>
 
-.. index:: lookup/3
-.. _dictionaryp/0::lookup/3:
+.. index:: values/2
+.. _dictionaryp/0::values/2:
 
-``lookup/3``
+``values/2``
 ^^^^^^^^^^^^
 
-Lookups a matching Key-Value pair from a dictionary.
+Returns a list with all the dictionary values in ascending order of the keys.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``lookup(Key,Value,Dictionary)``
+|    ``values(Dictionary,Values)``
 | **Mode and number of proofs:**
-|    ``lookup(+ground,?term,@dictionary)`` - ``zero_or_one``
-|    ``lookup(-ground,?term,@dictionary)`` - ``zero_or_more``
+|    ``values(@dictionary,-list)`` - ``one``
 
 
 ------------
@@ -366,92 +502,25 @@ Maps a closure over each dictionary key-value pair, returning the new dictionary
 
 .. raw:: html
 
-   <div id="max/3"> </div>
+   <div id="apply/4"> </div>
 
-.. index:: max/3
-.. _dictionaryp/0::max/3:
+.. index:: apply/4
+.. _dictionaryp/0::apply/4:
 
-``max/3``
-^^^^^^^^^
+``apply/4``
+^^^^^^^^^^^
 
-Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``max(Dictionary,Key,Value)``
-| **Mode and number of proofs:**
-|    ``max(+dictionary,-key,-value)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="min/3"> </div>
-
-.. index:: min/3
-.. _dictionaryp/0::min/3:
-
-``min/3``
-^^^^^^^^^
-
-Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.
+Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``min(Dictionary,Key,Value)``
+|    ``apply(Closure,OldDictionary,Key,NewDictionary)``
+| **Meta-predicate template:**
+|    ``apply(2,*,*,*)``
 | **Mode and number of proofs:**
-|    ``min(+dictionary,-key,-value)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="next/4"> </div>
-
-.. index:: next/4
-.. _dictionaryp/0::next/4:
-
-``next/4``
-^^^^^^^^^^
-
-Returns the next pair in a dictionary given a key.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``next(Dictionary,Key,Next,Value)``
-| **Mode and number of proofs:**
-|    ``next(+dictionary,+key,-key,-value)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="previous/4"> </div>
-
-.. index:: previous/4
-.. _dictionaryp/0::previous/4:
-
-``previous/4``
-^^^^^^^^^^^^^^
-
-Returns the previous pair in a dictionary given a key.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``previous(Dictionary,Key,Previous,Value)``
-| **Mode and number of proofs:**
-|    ``previous(+dictionary,+key,-key,-value)`` - ``zero_or_one``
+|    ``apply(+callable,+dictionary,+key,-dictionary)`` - ``zero_or_one``
 
 
 ------------
@@ -475,75 +544,6 @@ Number of dictionary entries.
 |    ``size(Dictionary,Size)``
 | **Mode and number of proofs:**
 |    ``size(@dictionary,?integer)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="update/4"> </div>
-
-.. index:: update/4
-.. _dictionaryp/0::update/4:
-
-``update/4``
-^^^^^^^^^^^^
-
-Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``update(OldDictionary,Key,NewValue,NewDictionary)``
-| **Mode and number of proofs:**
-|    ``update(+dictionary,@ground,+term,-dictionary)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="update/5"> </div>
-
-.. index:: update/5
-.. _dictionaryp/0::update/5:
-
-``update/5``
-^^^^^^^^^^^^
-
-Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``update(OldDictionary,Key,OldValue,NewValue,NewDictionary)``
-| **Mode and number of proofs:**
-|    ``update(+dictionary,@ground,?term,+term,-dictionary)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="values/2"> </div>
-
-.. index:: values/2
-.. _dictionaryp/0::values/2:
-
-``values/2``
-^^^^^^^^^^^^
-
-Returns a list with all the dictionary values in ascending order of the keys.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``values(Dictionary,Values)``
-| **Mode and number of proofs:**
-|    ``values(@dictionary,-list)`` - ``one``
 
 
 ------------

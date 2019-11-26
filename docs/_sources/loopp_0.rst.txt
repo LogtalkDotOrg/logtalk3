@@ -37,6 +37,31 @@ Public predicates
 
 .. raw:: html
 
+   <div id="whiledo/2"> </div>
+
+.. index:: whiledo/2
+.. _loopp/0::whiledo/2:
+
+``whiledo/2``
+^^^^^^^^^^^^^
+
+While Condition is true do Action.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``whiledo(Condition,Action)``
+| **Meta-predicate template:**
+|    ``whiledo(0,0)``
+| **Mode and number of proofs:**
+|    ``whiledo(+callable,@callable)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="dowhile/2"> </div>
 
 .. index:: dowhile/2
@@ -56,81 +81,6 @@ Do Action while Condition is true.
 |    ``dowhile(0,0)``
 | **Mode and number of proofs:**
 |    ``dowhile(@callable,+callable)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="fordownto/3"> </div>
-
-.. index:: fordownto/3
-.. _loopp/0::fordownto/3:
-
-``fordownto/3``
-^^^^^^^^^^^^^^^
-
-Call Goal counting down from First to Last. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``fordownto(First,Last,Goal)``
-| **Meta-predicate template:**
-|    ``fordownto(*,*,0)``
-| **Mode and number of proofs:**
-|    ``fordownto(+number,+number,@callable)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="fordownto/4"> </div>
-
-.. index:: fordownto/4
-.. _loopp/0::fordownto/4:
-
-``fordownto/4``
-^^^^^^^^^^^^^^^
-
-Call Goal counting down from First to Last and instantiating Count to each successive value. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``fordownto(Count,First,Last,Goal)``
-| **Meta-predicate template:**
-|    ``fordownto(*,*,*,0)``
-| **Mode and number of proofs:**
-|    ``fordownto(@var,+number,+number,@callable)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="fordownto/5"> </div>
-
-.. index:: fordownto/5
-.. _loopp/0::fordownto/5:
-
-``fordownto/5``
-^^^^^^^^^^^^^^^
-
-Call Goal counting down from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Decrement can be arithmetic expressions (uses Decrement absolute value). This predicate fails iff the Goal fails.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``fordownto(Count,First,Last,Decrement,Goal)``
-| **Meta-predicate template:**
-|    ``fordownto(*,*,*,*,0)``
-| **Mode and number of proofs:**
-|    ``fordownto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
 
 
 ------------
@@ -262,25 +212,75 @@ Call Goal counting up from First to Last and instantiating Count to each success
 
 .. raw:: html
 
-   <div id="whiledo/2"> </div>
+   <div id="fordownto/3"> </div>
 
-.. index:: whiledo/2
-.. _loopp/0::whiledo/2:
+.. index:: fordownto/3
+.. _loopp/0::fordownto/3:
 
-``whiledo/2``
-^^^^^^^^^^^^^
+``fordownto/3``
+^^^^^^^^^^^^^^^
 
-While Condition is true do Action.
+Call Goal counting down from First to Last. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``whiledo(Condition,Action)``
+|    ``fordownto(First,Last,Goal)``
 | **Meta-predicate template:**
-|    ``whiledo(0,0)``
+|    ``fordownto(*,*,0)``
 | **Mode and number of proofs:**
-|    ``whiledo(+callable,@callable)`` - ``zero_or_one``
+|    ``fordownto(+number,+number,@callable)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="fordownto/4"> </div>
+
+.. index:: fordownto/4
+.. _loopp/0::fordownto/4:
+
+``fordownto/4``
+^^^^^^^^^^^^^^^
+
+Call Goal counting down from First to Last and instantiating Count to each successive value. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fordownto(Count,First,Last,Goal)``
+| **Meta-predicate template:**
+|    ``fordownto(*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``fordownto(@var,+number,+number,@callable)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="fordownto/5"> </div>
+
+.. index:: fordownto/5
+.. _loopp/0::fordownto/5:
+
+``fordownto/5``
+^^^^^^^^^^^^^^^
+
+Call Goal counting down from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Decrement can be arithmetic expressions (uses Decrement absolute value). This predicate fails iff the Goal fails.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fordownto(Count,First,Last,Decrement,Goal)``
+| **Meta-predicate template:**
+|    ``fordownto(*,*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``fordownto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
 
 
 ------------
