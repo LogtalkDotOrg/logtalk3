@@ -40,13 +40,18 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.55,
+		version is 1.56,
 		author is 'Paulo Moura',
-		date is 2019/11/18,
+		date is 2019/11/26,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
-			'Missing implementations' - 'A few predicates (e.g. ``wall_time/1``) cannot be implemented in some backend Prolog systems.'
+			'B-Prolog portability' - '``pid/1`` and ``wall_time/1`` are not supported.',
+			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` are not supported.',
+			'Lean Prolog' - '``pid/1`` is not supported.',
+			'Qu-Prolog portability' - '``directory_files/2`` is not supported.',
+			'Quintus Prolog' - '``pid/1`` and ``shell/2`` are not supported.',
+			'XSB portability' - '``command_line_arguments/1`` is not supported.'
 		],
 		see_also is [os_types]
 	]).

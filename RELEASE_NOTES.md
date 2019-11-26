@@ -46,6 +46,9 @@ Documentation
 
 * ADDED: Usage example to the `debug_messages` tool documentation.
 
+* ADDED: Prolog backend specific portability notes to the `os` library API
+documentation.
+
 * IMPROVED: Documentation of the `code_metrics`, `dead_code_scanner`,
 `lgtdoc`, and `ports_profiler` tools.
 
