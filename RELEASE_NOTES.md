@@ -69,6 +69,9 @@ the `optionals` library.
 * FIXED: Predicates `map/2` and `flat_map/2` of the `optionals` library to also
 return an empty optional when calling the closure argument throws an error.
 
+* FIXED: The predicate `expected::from_goal/4` which would not use the given
+error argument when calling the goal generates an exception.
+
 Tools
 _____
 

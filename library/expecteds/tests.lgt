@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
 		date is 2019/11/26,
 		comment is 'Unit tests for the "expecteds" library.'
@@ -60,7 +60,7 @@
 		expected::from_goal(Y is _, Y, failure, Expected), expected(Expected)::is_unexpected.
 
 	succeeds(expected_from_goal_4_04) :-
-		expected::from_goal(2 is 3, _, failure, Expected), expected(Expected)::unexpected(Error),
+		expected::from_goal(Y is _, Y, failure, Expected), expected(Expected)::unexpected(Error),
 		Error == failure.
 
 	% from_goal/3 tests

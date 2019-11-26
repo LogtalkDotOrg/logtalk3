@@ -21,7 +21,7 @@
 :- object(expected).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2019/11/26,
 		comment is 'Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.',
@@ -57,7 +57,7 @@
 	:- meta_predicate(from_goal(0, *, *)).
 	:- mode(from_goal(+callable, --term, --nonvar), one).
 	:- info(from_goal/3, [
-		comment is 'Constructs an expected term holding a value bound by calling the given goal. Otherwise returns a reference with the unexpected goal error or failure represented by the atom ``fail``.',
+		comment is 'Constructs an expected term holding a value bound by calling the given goal. Otherwise returns an expected term with the unexpected goal error or, in case of closure goal, the atom ``fail``.',
 		argnames is ['Goal', 'Value', 'Expected']
 	]).
 
@@ -65,13 +65,13 @@
 
 	of_expected(Value, expected(Value)).
 
-	from_goal(Goal, Value, Failure, Expected) :-
-		(	catch(Goal, Error, true) ->
-			(	var(Error) ->
+	from_goal(Goal, Value, Error, Expected) :-
+		(	catch(Goal, Ball, true) ->
+			(	var(Ball) ->
 				Expected = expected(Value)
 			;	Expected = unexpected(Error)
 			)
-		;	Expected = unexpected(Failure)
+		;	Expected = unexpected(Error)
 		).
 
 	from_goal(Goal, Value, Expected) :-
