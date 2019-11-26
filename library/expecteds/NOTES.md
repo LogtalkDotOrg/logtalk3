@@ -20,15 +20,16 @@ ________________________________________________________________________
 About
 -----
 
-This library provides an implementation of *expected term references* with
-an API that is inspired by the `optional` library and C++ standardization
-proposals for an `Expected<T>` type. An expected term reference is an opaque
-term that either contains a term or contains some information about why the
-expected term is not present. Expected term references provide an alternative
-to generating an exception (or a failure) when something unexpected happens
-when asking for a term. This allows e.g. separating the code that retrieves
-or constructs terms from the code that processes them, which is then free to
-deal if necessary and at its convenience with any unexpected events.
+This library provides an implementation of *expected terms* with an API
+that is inspired by the `optional` library and C++ standardization
+proposals for an `Expected<T>` type. An expected term is an opaque term
+that either contains an expected value or an error informing why the
+expected value is not present. Expected terms provide an alternative to
+generating an exception (or a failure) when something unexpected happens
+when asking for a value. This allows e.g. separating the code that
+constructs expected terms from the code that processes them, which is
+then free to deal if necessary and at its convenience with any unexpected
+events.
 
 
 API documentation
@@ -52,21 +53,21 @@ Usage
 The `expected` object provides constructors for expected term references. For
 example:
 
-	| ?- expected::of_expected(1, Ref).
+	| ?- expected::of_expected(1, Expected).
 	...
 
 The created expected term references can then be passed as parameters to the
 `expected/1` parametric object. For example:
 
-	| ?- expected::of_expected(1, Ref), expected(Ref)::or_else(Term, 0).
-	Ref = expected(1),
-	Term = 1
+	| ?- expected::of_expected(1, Expected), expected(Expected)::or_else(Value, 0).
+	Expected = expected(1),
+	Value = 1
 	yes
 
-	| ?- expected::of_unexpected(-1, Ref), expected(Ref)::or_else(Term, 0).
-	Ref = unexpected(-1),
-	Term = 0
+	| ?- expected::of_unexpected(-1, Expected), expected(Expected)::or_else(Value, 0).
+	Expected = unexpected(-1),
+	Value = 0
 	yes
 
 The `either` object provides types and predicates for extended type-checking
-and predicate for handling lists of expected terms.
+and predicates for handling lists of expected terms.

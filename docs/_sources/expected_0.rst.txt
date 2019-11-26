@@ -8,11 +8,11 @@
 ``expected``
 ============
 
-Constructors for expected term references. A reference contains either an expected term or an unexpected term. References should be regarded as opaque terms and always used with the ``expected/1`` object by passing the reference as a parameter.
+Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.2
-| **Date:** 2019/1/23
+| **Version:** 1.3
+| **Date:** 2019/11/26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -47,13 +47,13 @@ Public predicates
 ``from_goal/4``
 ^^^^^^^^^^^^^^^
 
-Constructs a reference by calling ``Goal`` that binds and holds ``Expected`` on success. Otherwise returns a reference with the unexpected goal error or failure represented by the ``Failure`` argument.
+Constructs an expected term holding a value bound by calling the given goal. Otherwise returns a reference with the unexpected goal error or failure represented by the ``Error`` argument.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``from_goal(Goal,Expected,Failure,Reference)``
+|    ``from_goal(Goal,Value,Error,Expected)``
 | **Meta-predicate template:**
 |    ``from_goal(0,*,*,*)``
 | **Mode and number of proofs:**
@@ -72,13 +72,13 @@ Constructs a reference by calling ``Goal`` that binds and holds ``Expected`` on 
 ``from_goal/3``
 ^^^^^^^^^^^^^^^
 
-Constructs a reference by calling ``Goal`` that binds and uses ``Expected`` on success. Otherwise returns a reference with the unexpected goal error or failure represented by the atom ``fail``.
+Constructs an expected term holding a value bound by calling the given goal. Otherwise returns a reference with the unexpected goal error or failure represented by the atom ``fail``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``from_goal(Goal,Expected,Reference)``
+|    ``from_goal(Goal,Value,Expected)``
 | **Meta-predicate template:**
 |    ``from_goal(0,*,*)``
 | **Mode and number of proofs:**
@@ -97,13 +97,13 @@ Constructs a reference by calling ``Goal`` that binds and uses ``Expected`` on s
 ``of_expected/2``
 ^^^^^^^^^^^^^^^^^
 
-Constructs a reference from an expected term.
+Constructs an expected term from an expected value.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``of_expected(Expected,Reference)``
+|    ``of_expected(Value,Expected)``
 | **Mode and number of proofs:**
 |    ``of_expected(@term,--nonvar)`` - ``one``
 
@@ -120,13 +120,13 @@ Constructs a reference from an expected term.
 ``of_unexpected/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Constructs a reference from an unexpected term.
+Constructs an expected term from an error that represent that the expected value is missing.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``of_unexpected(Unexpected,Reference)``
+|    ``of_unexpected(Error,Expected)``
 | **Mode and number of proofs:**
 |    ``of_unexpected(@term,--nonvar)`` - ``one``
 
@@ -150,5 +150,5 @@ Operators
 
 .. seealso::
 
-   :ref:`expected(Reference) <expected/1>`, :ref:`type <type/0>`
+   :ref:`expected(Expected) <expected/1>`, :ref:`type <type/0>`
 

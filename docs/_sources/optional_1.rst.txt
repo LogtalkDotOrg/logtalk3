@@ -1,18 +1,18 @@
-.. index:: optional(Reference)
+.. index:: optional(Optional)
 .. _optional/1:
 
 .. rst-class:: right
 
 **object**
 
-``optional(Reference)``
-=======================
+``optional(Optional)``
+======================
 
-Optional reference predicates. Requires passing a reference constructed using the ``optional`` object as a parameter.
+Optional term handling predicates. Requires passing an optional term (constructed using the ``optional`` object predicates) as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.6
-| **Date:** 2019/11/25
+| **Version:** 1.7
+| **Date:** 2019/11/26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -45,13 +45,13 @@ Public predicates
 ``filter/2``
 ^^^^^^^^^^^^
 
-Returns the reference when it is non-empty and the term it holds satisfies a closure. Otherwise returns an empty reference.
+Returns the optional term when it is not empty and the value it holds satisfies a closure. Otherwise returns an empty optional term.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``filter(Closure,NewReference)``
+|    ``filter(Closure,NewOptional)``
 | **Meta-predicate template:**
 |    ``filter(1,*)``
 | **Mode and number of proofs:**
@@ -70,13 +70,13 @@ Returns the reference when it is non-empty and the term it holds satisfies a clo
 ``flat_map/2``
 ^^^^^^^^^^^^^^
 
-When the reference is non-empty and mapping a closure with the term it holds and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.
+When the optional term is not empty and mapping a closure with the value it holds and the new optional term as additional arguments is successful, returns the new optional term. Otherwise returns an empty optional term.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``flat_map(Closure,NewReference)``
+|    ``flat_map(Closure,NewOptional)``
 | **Meta-predicate template:**
 |    ``flat_map(2,*)``
 | **Mode and number of proofs:**
@@ -95,19 +95,19 @@ When the reference is non-empty and mapping a closure with the term it holds and
 ``get/1``
 ^^^^^^^^^
 
-Returns the term hold by the reference if not empty. Throws an error otherwise.
+Returns the value hold by the optional term if not empty. Throws an error otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``get(Term)``
+|    ``get(Value)``
 | **Mode and number of proofs:**
 |    ``get(--term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Optional is empty:
-|        ``existence_error(optional_term,Reference)``
+|        ``existence_error(optional_term,Optional)``
 
 
 ------------
@@ -122,7 +122,7 @@ Returns the term hold by the reference if not empty. Throws an error otherwise.
 ``if_empty/1``
 ^^^^^^^^^^^^^^
 
-Calls a goal if the reference is empty. Succeeds otherwise.
+Calls a goal if the optional term is empty. Succeeds otherwise.
 
 | **Compilation flags:**
 |    ``static``
@@ -147,7 +147,7 @@ Calls a goal if the reference is empty. Succeeds otherwise.
 ``if_present/1``
 ^^^^^^^^^^^^^^^^
 
-Applies a closure if the reference holds a term using the term as additional argument. Succeeds otherwise.
+Applies a closure to the value hold by the optional term if not empty. Succeeds otherwise.
 
 | **Compilation flags:**
 |    ``static``
@@ -172,7 +172,7 @@ Applies a closure if the reference holds a term using the term as additional arg
 ``if_present_or_else/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Applies a closure if the reference holds a term using the term as additional argument. Otherwise calls the given goal.
+Applies a closure to the value hold by the optional term if not empty. Otherwise calls the given goal.
 
 | **Compilation flags:**
 |    ``static``
@@ -197,7 +197,7 @@ Applies a closure if the reference holds a term using the term as additional arg
 ``is_empty/0``
 ^^^^^^^^^^^^^^
 
-True if the reference is empty. Avoid whenever possible by using instead the ``if_empty/1`` predicate.
+True if the optional term is empty. See also the ``if_empty/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -218,7 +218,7 @@ True if the reference is empty. Avoid whenever possible by using instead the ``i
 ``is_present/0``
 ^^^^^^^^^^^^^^^^
 
-True if the reference holds a term. Avoid whenever possible by using instead the ``if_present/1`` predicate.
+True if the optional term holds a value. See also the ``if_present/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -239,13 +239,13 @@ True if the reference holds a term. Avoid whenever possible by using instead the
 ``map/2``
 ^^^^^^^^^
 
-When the reference is non-empty and mapping a closure with the term it holds and the new term as additional arguments is successful, returns a reference with the new term. Otherwise returns an empty reference.
+When the optional term is not empty and mapping a closure with the value it holds and the new value as additional arguments is successful, returns an optional term with the new value. Otherwise returns an empty optional term.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``map(Closure,NewReference)``
+|    ``map(Closure,NewOptional)``
 | **Meta-predicate template:**
 |    ``map(2,*)``
 | **Mode and number of proofs:**
@@ -264,13 +264,13 @@ When the reference is non-empty and mapping a closure with the term it holds and
 ``or/2``
 ^^^^^^^^
 
-Returns the same reference if not empty. Otherwise calls closure to generate a new reference. Fails if reference is empty and calling the closure fails or throws an error.
+Returns the same optional term if not empty. Otherwise calls closure to generate a new optional term. Fails if optional term is empty and calling the closure fails or throws an error.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or(NewReference,Closure)``
+|    ``or(NewOptional,Closure)``
 | **Meta-predicate template:**
 |    ``or(*,1)``
 | **Mode and number of proofs:**
@@ -289,13 +289,13 @@ Returns the same reference if not empty. Otherwise calls closure to generate a n
 ``or_else/2``
 ^^^^^^^^^^^^^
 
-Returns the term hold by the reference if not empty or the given default term if the reference is empty.
+Returns the value hold by the optional term if not empty or the given default value if the optional term is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else(Term,Default)``
+|    ``or_else(Value,Default)``
 | **Mode and number of proofs:**
 |    ``or_else(--term,@term)`` - ``one``
 
@@ -312,13 +312,13 @@ Returns the term hold by the reference if not empty or the given default term if
 ``or_else_call/2``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty.
+Returns the value hold by the optional term if not empty or calls a goal deterministically if the optional term is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_call(Term,Goal)``
+|    ``or_else_call(Value,Goal)``
 | **Meta-predicate template:**
 |    ``or_else_call(*,0)``
 | **Mode and number of proofs:**
@@ -337,13 +337,13 @@ Returns the term hold by the reference if not empty or calls a goal deterministi
 ``or_else_fail/1``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the term hold by the reference if not empty. Fails otherwise. Usually called to skip over empty references.
+Returns the value hold by the optional term if not empty. Fails otherwise. Usually called to skip over empty optional terms.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_fail(Term)``
+|    ``or_else_fail(Value)``
 | **Mode and number of proofs:**
 |    ``or_else_fail(--term)`` - ``zero_or_one``
 
@@ -360,21 +360,21 @@ Returns the term hold by the reference if not empty. Fails otherwise. Usually ca
 ``or_else_get/2``
 ^^^^^^^^^^^^^^^^^
 
-Returns the term hold by the reference if not empty. Applies a closure to compute the term otherwise. Throws an error when the reference is empty and the term cannot be computed.
+Returns the value hold by the optional term if not empty. Applies a closure to compute the value otherwise. Throws an error when the optional term is empty and the value cannot be computed.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_get(Term,Closure)``
+|    ``or_else_get(Value,Closure)``
 | **Meta-predicate template:**
 |    ``or_else_get(*,1)``
 | **Mode and number of proofs:**
 |    ``or_else_get(--term,+callable)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Reference is empty and the term cannot be computed:
-|        ``existence_error(optional_term,Reference)``
+|    Optional is empty and the term cannot be computed:
+|        ``existence_error(optional_term,Optional)``
 
 
 ------------
@@ -389,13 +389,13 @@ Returns the term hold by the reference if not empty. Applies a closure to comput
 ``or_else_throw/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Returns the term hold by the reference if not empty. Throws the given error otherwise.
+Returns the value hold by the optional term if not empty. Throws the given error otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_throw(Term,Error)``
+|    ``or_else_throw(Value,Error)``
 | **Mode and number of proofs:**
 |    ``or_else_throw(--term,@nonvar)`` - ``one_or_error``
 

@@ -2103,7 +2103,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::expected/1>`
+* :ref:`expected(Expected) <expected/1::expected/1>`
 
 ``expecteds/2``
 ---------------
@@ -2354,7 +2354,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::filter/2>`
+* :ref:`optional(Optional) <optional/1::filter/2>`
 
 ``findall_member/4``
 --------------------
@@ -2424,8 +2424,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::flat_map/2>`
-* :ref:`optional(Reference) <optional/1::flat_map/2>`
+* :ref:`expected(Expected) <expected/1::flat_map/2>`
+* :ref:`optional(Optional) <optional/1::flat_map/2>`
 
 ``flatten/2``
 -------------
@@ -2687,7 +2687,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::get/1>`
+* :ref:`optional(Optional) <optional/1::get/1>`
 
 ``get_field/2``
 ---------------
@@ -2837,7 +2837,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::if_empty/1>`
+* :ref:`optional(Optional) <optional/1::if_empty/1>`
 
 ``if_expected/1``
 -----------------
@@ -2847,7 +2847,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::if_expected/1>`
+* :ref:`expected(Expected) <expected/1::if_expected/1>`
 
 ``if_present/1``
 ----------------
@@ -2857,7 +2857,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::if_present/1>`
+* :ref:`optional(Optional) <optional/1::if_present/1>`
 
 ``if_present_or_else/2``
 ------------------------
@@ -2867,7 +2867,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::if_present_or_else/2>`
+* :ref:`optional(Optional) <optional/1::if_present_or_else/2>`
 
 ``if_unexpected/1``
 -------------------
@@ -2877,7 +2877,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::if_unexpected/1>`
+* :ref:`expected(Expected) <expected/1::if_unexpected/1>`
 
 ``include/3``
 -------------
@@ -3139,7 +3139,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::is_empty/0>`
+* :ref:`optional(Optional) <optional/1::is_empty/0>`
 
 ``is_end_of_line/1``
 --------------------
@@ -3159,7 +3159,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::is_expected/0>`
+* :ref:`expected(Expected) <expected/1::is_expected/0>`
 
 ``is_false/1``
 --------------
@@ -3269,7 +3269,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::is_present/0>`
+* :ref:`optional(Optional) <optional/1::is_present/0>`
 
 ``is_punctuation/1``
 --------------------
@@ -3309,7 +3309,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::is_unexpected/0>`
+* :ref:`expected(Expected) <expected/1::is_unexpected/0>`
 
 ``is_upper_case/1``
 -------------------
@@ -3876,9 +3876,9 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::map/2>`
-* :ref:`expected(Reference) <expected/1::map/2>`
+* :ref:`expected(Expected) <expected/1::map/2>`
 * :ref:`metap <metap/0::map/2>`
-* :ref:`optional(Reference) <optional/1::map/2>`
+* :ref:`optional(Optional) <optional/1::map/2>`
 
 ``map/3``
 ---------
@@ -4626,7 +4626,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::or/2>`
+* :ref:`optional(Optional) <optional/1::or/2>`
 
 ``or_else/2``
 -------------
@@ -4636,8 +4636,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::or_else/2>`
-* :ref:`optional(Reference) <optional/1::or_else/2>`
+* :ref:`expected(Expected) <expected/1::or_else/2>`
+* :ref:`optional(Optional) <optional/1::or_else/2>`
 
 ``or_else_call/2``
 ------------------
@@ -4647,8 +4647,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::or_else_call/2>`
-* :ref:`optional(Reference) <optional/1::or_else_call/2>`
+* :ref:`expected(Expected) <expected/1::or_else_call/2>`
+* :ref:`optional(Optional) <optional/1::or_else_call/2>`
 
 ``or_else_fail/1``
 ------------------
@@ -4658,8 +4658,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::or_else_fail/1>`
-* :ref:`optional(Reference) <optional/1::or_else_fail/1>`
+* :ref:`expected(Expected) <expected/1::or_else_fail/1>`
+* :ref:`optional(Optional) <optional/1::or_else_fail/1>`
 
 ``or_else_get/2``
 -----------------
@@ -4669,8 +4669,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::or_else_get/2>`
-* :ref:`optional(Reference) <optional/1::or_else_get/2>`
+* :ref:`expected(Expected) <expected/1::or_else_get/2>`
+* :ref:`optional(Optional) <optional/1::or_else_get/2>`
 
 ``or_else_throw/1``
 -------------------
@@ -4680,7 +4680,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::or_else_throw/1>`
+* :ref:`expected(Expected) <expected/1::or_else_throw/1>`
 
 ``or_else_throw/2``
 -------------------
@@ -4690,7 +4690,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`optional(Reference) <optional/1::or_else_throw/2>`
+* :ref:`optional(Optional) <optional/1::or_else_throw/2>`
 
 ``output_file_name/2``
 ----------------------
@@ -6600,7 +6600,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`expected(Reference) <expected/1::unexpected/1>`
+* :ref:`expected(Expected) <expected/1::unexpected/1>`
 
 ``unexpecteds/2``
 -----------------

@@ -8,11 +8,11 @@
 ``maybe``
 =========
 
-Types and predicates for type-checking and handling optional term references. Inspired by Haskell.
+Types and predicates for type-checking and handling optional terms. Inspired by Haskell.
 
 | **Author:** Paulo Moura
-| **Version:** 0.5
-| **Date:** 2019/1/24
+| **Version:** 0.6
+| **Date:** 2019/11/26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,14 +25,14 @@ Types and predicates for type-checking and handling optional term references. In
 |    :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
 | **Uses:**
 |    :ref:`optional <optional/0>`
-|    :ref:`optional(Reference) <optional/1>`
+|    :ref:`optional(Optional) <optional/1>`
 |    :ref:`random <random/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
 
 
-   - *Type-checking support:* Defines type ``maybe(Type)`` for checking optional term references where the optional term must be of the given type.
+   - *Type-checking support:* Defines type ``maybe(Type)`` for checking optional terms where the value hold by the optional term must be of the given type.
 
    - *QuickCheck support:* Defines clauses for the ``arbitrary::arbitrary/1-2`` predicates to allow generating random values for the maybe(Type) type.
 
@@ -56,13 +56,13 @@ Public predicates
 ``cat/2``
 ^^^^^^^^^
 
-Returns the terms stored in the non-empty references.
+Returns the values stored in the non-empty optional terms.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``cat(References,Values)``
+|    ``cat(Optionals,Values)``
 | **Mode and number of proofs:**
 |    ``cat(+list(optional),-list)`` - ``one``
 
@@ -86,5 +86,5 @@ Operators
 
 .. seealso::
 
-   :ref:`optional <optional/0>`, :ref:`optional(Reference) <optional/1>`, :ref:`type <type/0>`, :ref:`arbitrary <arbitrary/0>`
+   :ref:`optional <optional/0>`, :ref:`optional(Optional) <optional/1>`, :ref:`type <type/0>`, :ref:`arbitrary <arbitrary/0>`
 

@@ -219,7 +219,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
    either <either_0>
    expected <expected_0>
-   expected(Reference) <expected_1>
+   expected(Expected) <expected_1>
 
 ``library/gensym/``
 -------------------
@@ -349,7 +349,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
    maybe <maybe_0>
    optional <optional_0>
-   optional(Reference) <optional_1>
+   optional(Optional) <optional_1>
 
 ``library/os/``
 ---------------

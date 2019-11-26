@@ -20,17 +20,16 @@ ________________________________________________________________________
 About
 -----
 
-This library provides an implementation of *optional term references* with
-an API modeled after the Java 8 `Optional` class (mainly due to this library
-being requested by users working in Logtalk/Java hybrid applications). An
-optional term reference is an opaque term that may or may not contain a
-term. Optional term references avoid forcing the user to define a
-representation for the absence of a term by providing an API with predicates
-that depend on the presence or absence of an optional term. Optional term
-references also allow separating the code that retrieves or constructs
+This library provides an implementation of *optional terms* with an API
+modeled after the Java 8 `Optional` class (originally due to requests by
+users working in Logtalk/Java hybrid applications). An optional term is
+an opaque term that may or may not hold a value. Optional terms avoid
+forcing the user to define a representation for the absence of a value
+by providing an API with predicates that depend on the presence or absence
+of a value. Optional terms also allow separating the code that constructs
 optional terms from the code that processes them, which is then free to
-deal if necessary and at its convenience with any case where the optional
-terms are not present.
+deal if necessary and at its convenience with any case where the values
+hold by optional terms are not present.
 
 
 API documentation
@@ -51,25 +50,24 @@ To load all entities in this library, load the `loader.lgt` loader file:
 Usage
 -----
 
-The `optional` object provides constructors for optional term references. For
-example:
+The `optional` object provides constructors for optionals. For example:
 
-	| ?- optional::of(1, Ref).
+	| ?- optional::of(1, Optional).
 	...
 
-The created optional term references can then be passed as parameters to the
-`optional/1` parametric object. For example:
+The created optionals can then be passed as parameters to the `optional/1`
+parametric object. For example:
 
-	| ?- optional::of(1, Ref), optional(Ref)::or_else(Term, 0).
-	Ref = the(1),
+	| ?- optional::of(1, Optional), optional(Optional)::or_else(Term, 0).
+	Optional = optional(1),
 	Term = 1
 	yes
 
-	| ?- optional::empty(Ref), optional(Ref)::or_else(Term, 0).
-	Ref = empty,
+	| ?- optional::empty(Optional), optional(Optional)::or_else(Term, 0).
+	Optional = empty,
 	Term = 0
 	yes
 
 The `maybe` object provides types and predicates for type-checking of the
-optional term wrapped by optional term references. It also provides some 
-predicates for handling lists of optional term references.
+term hold by optionals. It also provides some  predicates for handling lists
+of optional terms.

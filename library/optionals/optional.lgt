@@ -22,10 +22,10 @@
 :- object(optional).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2019/01/23,
-		comment is 'Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the ``optional/1`` object by passing the reference as a parameter.',
+		date is 2019/11/26,
+		comment is 'Constructors for optional terms. An optional term is either empty or holds a value. Optional terms should be regarded as opaque terms and always used with the ``optional/1`` object by passing the optional term as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type ``optional`` for use with the ``type`` library object.'
 		],
@@ -35,36 +35,36 @@
 	:- public(empty/1).
 	:- mode(empty(--nonvar), one).
 	:- info(empty/1, [
-		comment is 'Constructs an empty reference.',
-		argnames is ['Reference']
+		comment is 'Constructs an empty optional term.',
+		argnames is ['Optional']
 	]).
 
 	:- public(of/2).
 	:- mode(of(@term, --nonvar), one).
 	:- info(of/2, [
-		comment is 'Constructs a reference holding a term.',
-		argnames is ['Term', 'Reference']
+		comment is 'Constructs an optional term holding the given value.',
+		argnames is ['Value', 'Optional']
 	]).
 
 	:- public(from_goal/3).
 	:- meta_predicate(from_goal(0, *, *)).
 	:- mode(from_goal(+callable, --term, --nonvar), one).
 	:- info(from_goal/3, [
-		comment is 'Constructs a reference by calling ``Goal`` that binds and holds ``Term`` on success. Returns an empty reference if the goal fails or throws an error.',
-		argnames is ['Goal', 'Term', 'Reference']
+		comment is 'Constructs an optional term holding a value bound by calling the given goal. Returns an empty optional term if the goal fails or throws an error.',
+		argnames is ['Goal', 'Value', 'Optional']
 	]).
 
 	empty(empty).
 
 	of(Term, optional(Term)).
 
-	from_goal(Goal, Term, Reference) :-
+	from_goal(Goal, Value, Optional) :-
 		(	catch(Goal, Error, true) ->
 			(	var(Error) ->
-				Reference = optional(Term)
-			;	Reference = empty
+				Optional = optional(Value)
+			;	Optional = empty
 			)
-		;	Reference = empty
+		;	Optional = empty
 		).
 
 	:- multifile(type::type/1).
@@ -100,34 +100,34 @@
 :- end_object.
 
 
-:- object(optional(_Reference)).
+:- object(optional(_Optional)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2019/11/25,
-		comment is 'Optional reference predicates. Requires passing a reference constructed using the ``optional`` object as a parameter.',
-		parnames is ['Reference'],
+		date is 2019/11/26,
+		comment is 'Optional term handling predicates. Requires passing an optional term (constructed using the ``optional`` object predicates) as a parameter.',
+		parnames is ['Optional'],
 		see_also is [optional]
 	]).
 
 	:- public(is_empty/0).
 	:- mode(is_empty, zero_or_one).
 	:- info(is_empty/0, [
-		comment is 'True if the reference is empty. Avoid whenever possible by using instead the ``if_empty/1`` predicate.'
+		comment is 'True if the optional term is empty. See also the ``if_empty/1`` predicate.'
 	]).
 
 	:- public(is_present/0).
 	:- mode(is_present, zero_or_one).
 	:- info(is_present/0, [
-		comment is 'True if the reference holds a term. Avoid whenever possible by using instead the ``if_present/1`` predicate.'
+		comment is 'True if the optional term holds a value. See also the ``if_present/1`` predicate.'
 	]).
 
 	:- public(if_empty/1).
 	:- meta_predicate(if_empty(0)).
 	:- mode(if_empty(+callable), zero_or_more).
 	:- info(if_empty/1, [
-		comment is 'Calls a goal if the reference is empty. Succeeds otherwise.',
+		comment is 'Calls a goal if the optional term is empty. Succeeds otherwise.',
 		argnames is ['Goal']
 	]).
 
@@ -135,7 +135,7 @@
 	:- meta_predicate(if_present(1)).
 	:- mode(if_present(+callable), zero_or_more).
 	:- info(if_present/1, [
-		comment is 'Applies a closure if the reference holds a term using the term as additional argument. Succeeds otherwise.',
+		comment is 'Applies a closure to the value hold by the optional term if not empty. Succeeds otherwise.',
 		argnames is ['Closure']
 	]).
 
@@ -143,7 +143,7 @@
 	:- meta_predicate(if_present_or_else(1, 0)).
 	:- mode(if_present_or_else(+callable, +callable), zero_or_more).
 	:- info(if_present_or_else/2, [
-		comment is 'Applies a closure if the reference holds a term using the term as additional argument. Otherwise calls the given goal.',
+		comment is 'Applies a closure to the value hold by the optional term if not empty. Otherwise calls the given goal.',
 		argnames is ['Closure', 'Goal']
 	]).
 
@@ -151,78 +151,78 @@
 	:- meta_predicate(filter(1, *)).
 	:- mode(filter(+callable, --nonvar), one).
 	:- info(filter/2, [
-		comment is 'Returns the reference when it is non-empty and the term it holds satisfies a closure. Otherwise returns an empty reference.',
-		argnames is ['Closure', 'NewReference']
+		comment is 'Returns the optional term when it is not empty and the value it holds satisfies a closure. Otherwise returns an empty optional term.',
+		argnames is ['Closure', 'NewOptional']
 	]).
 
 	:- public(map/2).
 	:- meta_predicate(map(2, *)).
 	:- mode(map(+callable, --nonvar), one).
 	:- info(map/2, [
-		comment is 'When the reference is non-empty and mapping a closure with the term it holds and the new term as additional arguments is successful, returns a reference with the new term. Otherwise returns an empty reference.',
-		argnames is ['Closure', 'NewReference']
+		comment is 'When the optional term is not empty and mapping a closure with the value it holds and the new value as additional arguments is successful, returns an optional term with the new value. Otherwise returns an empty optional term.',
+		argnames is ['Closure', 'NewOptional']
 	]).
 
 	:- public(flat_map/2).
 	:- meta_predicate(flat_map(2, *)).
 	:- mode(flat_map(+callable, --nonvar), one).
 	:- info(flat_map/2, [
-		comment is 'When the reference is non-empty and mapping a closure with the term it holds and the new reference as additional arguments is successful, returns the new reference. Otherwise returns an empty reference.',
-		argnames is ['Closure', 'NewReference']
+		comment is 'When the optional term is not empty and mapping a closure with the value it holds and the new optional term as additional arguments is successful, returns the new optional term. Otherwise returns an empty optional term.',
+		argnames is ['Closure', 'NewOptional']
 	]).
 
 	:- public(or/2).
 	:- meta_predicate(or(*, 1)).
 	:- mode(or(--term, @callable), zero_or_one).
 	:- info(or/2, [
-		comment is 'Returns the same reference if not empty. Otherwise calls closure to generate a new reference. Fails if reference is empty and calling the closure fails or throws an error.',
-		argnames is ['NewReference', 'Closure']
+		comment is 'Returns the same optional term if not empty. Otherwise calls closure to generate a new optional term. Fails if optional term is empty and calling the closure fails or throws an error.',
+		argnames is ['NewOptional', 'Closure']
 	]).
 
 	:- public(get/1).
 	:- mode(get(--term), one_or_error).
 	:- info(get/1, [
-		comment is 'Returns the term hold by the reference if not empty. Throws an error otherwise.',
-		argnames is ['Term'],
-		exceptions is ['Optional is empty' - existence_error(optional_term,'Reference')]
+		comment is 'Returns the value hold by the optional term if not empty. Throws an error otherwise.',
+		argnames is ['Value'],
+		exceptions is ['Optional is empty' - existence_error(optional_term,'Optional')]
 	]).
 
 	:- public(or_else/2).
 	:- mode(or_else(--term, @term), one).
 	:- info(or_else/2, [
-		comment is 'Returns the term hold by the reference if not empty or the given default term if the reference is empty.',
-		argnames is ['Term', 'Default']
+		comment is 'Returns the value hold by the optional term if not empty or the given default value if the optional term is empty.',
+		argnames is ['Value', 'Default']
 	]).
 
 	:- public(or_else_get/2).
 	:- meta_predicate(or_else_get(*, 1)).
 	:- mode(or_else_get(--term, +callable), one_or_error).
 	:- info(or_else_get/2, [
-		comment is 'Returns the term hold by the reference if not empty. Applies a closure to compute the term otherwise. Throws an error when the reference is empty and the term cannot be computed.',
-		argnames is ['Term', 'Closure'],
-		exceptions is ['Reference is empty and the term cannot be computed' - existence_error(optional_term,'Reference')]
+		comment is 'Returns the value hold by the optional term if not empty. Applies a closure to compute the value otherwise. Throws an error when the optional term is empty and the value cannot be computed.',
+		argnames is ['Value', 'Closure'],
+		exceptions is ['Optional is empty and the term cannot be computed' - existence_error(optional_term,'Optional')]
 	]).
 
 	:- public(or_else_call/2).
 	:- meta_predicate(or_else_call(*, 0)).
 	:- mode(or_else_call(--term, +callable), zero_or_one).
 	:- info(or_else_call/2, [
-		comment is 'Returns the term hold by the reference if not empty or calls a goal deterministically if the reference is empty.',
-		argnames is ['Term', 'Goal']
+		comment is 'Returns the value hold by the optional term if not empty or calls a goal deterministically if the optional term is empty.',
+		argnames is ['Value', 'Goal']
 	]).
 
 	:- public(or_else_fail/1).
 	:- mode(or_else_fail(--term), zero_or_one).
 	:- info(or_else_fail/1, [
-		comment is 'Returns the term hold by the reference if not empty. Fails otherwise. Usually called to skip over empty references.',
-		argnames is ['Term']
+		comment is 'Returns the value hold by the optional term if not empty. Fails otherwise. Usually called to skip over empty optional terms.',
+		argnames is ['Value']
 	]).
 
 	:- public(or_else_throw/2).
 	:- mode(or_else_throw(--term, @nonvar), one_or_error).
 	:- info(or_else_throw/2, [
-		comment is 'Returns the term hold by the reference if not empty. Throws the given error otherwise.',
-		argnames is ['Term', 'Error']
+		comment is 'Returns the value hold by the optional term if not empty. Throws the given error otherwise.',
+		argnames is ['Value', 'Error']
 	]).
 
 	is_empty :-
@@ -232,96 +232,95 @@
 		parameter(1, optional(_)).
 
 	if_empty(Goal) :-
-		parameter(1, Reference),
-		(	Reference == empty ->
+		parameter(1, Optional),
+		(	Optional == empty ->
 			call(Goal)
 		;	true
 		).
 
 	if_present(Closure) :-
-		parameter(1, Reference),
-		(	Reference == empty ->
+		parameter(1, Optional),
+		(	Optional == empty ->
 			true
-		;	Reference = optional(Term),
+		;	Optional = optional(Term),
 			call(Closure, Term)
 		).
 
 	if_present_or_else(Closure, Goal) :-
-		parameter(1, Reference),
-		(	Reference == empty ->
+		parameter(1, Optional),
+		(	Optional == empty ->
 			call(Goal)
-		;	Reference = optional(Term),
-			call(Closure, Term)
+		;	Optional = optional(Value),
+			call(Closure, Value)
 		).
 
-	filter(Closure, NewReference) :-
-		parameter(1, Reference),
-		(	Reference = optional(Term),
-			call(Closure, Term) ->
-			NewReference = Reference
-		;	NewReference = empty
+	filter(Closure, NewOptional) :-
+		parameter(1, Optional),
+		(	Optional = optional(Value),
+			call(Closure, Value) ->
+			NewOptional = Optional
+		;	NewOptional = empty
 		).
 
-	map(Closure, NewReference) :-
-		parameter(1, Reference),
-		(	Reference = optional(Term),
-			catch(call(Closure, Term, NewTerm), _, fail) ->
-			NewReference = optional(NewTerm)
-		;	NewReference = empty
+	map(Closure, NewOptional) :-
+		parameter(1, Optional),
+		(	Optional = optional(Value),
+			catch(call(Closure, Value, NewValue), _, fail) ->
+			NewOptional = optional(NewValue)
+		;	NewOptional = empty
 		).
 
-	flat_map(Closure, NewReference) :-
-		parameter(1, Reference),
-		(	Reference = optional(Term),
-			catch(call(Closure, Term, NewReference), _, fail) ->
+	flat_map(Closure, NewOptional) :-
+		parameter(1, Optional),
+		(	Optional = optional(Value),
+			catch(call(Closure, Value, NewOptional), _, fail) ->
 			true
-		;	NewReference = empty
+		;	NewOptional = empty
 		).
 
-	or(NewReference, Closure) :-
-		parameter(1, Reference),
-		(	Reference = optional(_) ->
-			NewReference = Reference
-		;	catch(call(Closure, NewReference), _, fail)
+	or(NewOptional, Closure) :-
+		parameter(1, Optional),
+		(	Optional = optional(_) ->
+			NewOptional = Optional
+		;	catch(call(Closure, NewOptional), _, fail)
 		).
 
-	get(Term) :-
-		parameter(1, Reference),
-		(	Reference == empty ->
-			existence_error(optional_term, Reference)
-		;	Reference = optional(Term)
+	get(Value) :-
+		parameter(1, Optional),
+		(	Optional == empty ->
+			existence_error(optional_term, Optional)
+		;	Optional = optional(Value)
 		).
 
-	or_else(Term, Default) :-
-		parameter(1, Reference),
-		(	Reference == empty ->
-			Term = Default
-		;	Reference = optional(Term)
+	or_else(Value, Default) :-
+		parameter(1, Optional),
+		(	Optional == empty ->
+			Value = Default
+		;	Optional = optional(Value)
 		).
 
-	or_else_get(Term, Closure) :-
-		parameter(1, Reference),
-		(	Reference == empty ->
-			(	catch(call(Closure, Term), _, existence_error(optional_term,Reference)) ->
-				true
-			;	existence_error(optional_term, Reference)
-			)
-		;	Reference = optional(Term)
+	or_else_get(Value, Closure) :-
+		parameter(1, Optional),
+		(	Optional = optional(Value) ->
+			true
+		;	catch(call(Closure, Value), _, existence_error(optional_term,Optional)) ->
+			true
+		;	existence_error(optional_term, Optional)
 		).
 
-	or_else_call(Term, Goal) :-
-		parameter(1, Reference),
-		(	Reference == empty ->
+	or_else_call(Value, Goal) :-
+		parameter(1, Optional),
+		(	Optional == empty ->
 			once(Goal)
-		;	Reference = optional(Term)
+		;	Optional = optional(Value)
 		).
 
-	or_else_fail(Term) :-
-		parameter(1, optional(Term)).
+	or_else_fail(Value) :-
+		parameter(1, optional(Value)).
 
-	or_else_throw(Term, Error) :-
-		parameter(1, Reference),
-		(	Reference = optional(Term) ->
+	or_else_throw(Value, Error) :-
+		parameter(1, Optional),
+		(	Optional = optional(Value) ->
 			true
 		;	throw(Error)
 		).

@@ -123,7 +123,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#expecteds"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">either</a></li>
 <li class="toctree-l3"><a class="reference internal" href="expected_0.html">expected</a></li>
-<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Expected)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
@@ -244,11 +244,11 @@
   <p class="right" id="either-0"><span id="index-0"></span><strong>object</strong></p>
 <div class="section" id="either">
 <h1><code class="docutils literal notranslate"><span class="pre">either</span></code><a class="headerlink" href="#either" title="Permalink to this headline">¶</a></h1>
-<p>Types and predicates for extended type-checking of expected term references and for handling lists of expected term references.</p>
+<p>Types and predicates for extended type-checking and handling of expected terms.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0.5</div>
-<div class="line"><strong>Date:</strong> 2019/1/24</div>
+<div class="line"><strong>Version:</strong> 0.6</div>
+<div class="line"><strong>Date:</strong> 2019/11/26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -267,7 +267,7 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="expected_0.html#expected-0"><span class="std std-ref">expected</span></a></div>
-<div class="line"><a class="reference internal" href="expected_1.html#expected-1"><span class="std std-ref">expected(Reference)</span></a></div>
+<div class="line"><a class="reference internal" href="expected_1.html#expected-1"><span class="std std-ref">expected(Expected)</span></a></div>
 <div class="line"><a class="reference internal" href="random_0.html#random-0"><span class="std std-ref">random</span></a></div>
 <div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
@@ -277,8 +277,8 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p><em>Type-checking support:</em> Defines a <code class="docutils literal notranslate"><span class="pre">either(ExpectedType,</span> <span class="pre">UnexpectedType)</span></code> type for checking expected references where the expected and unexpected terms must be of the given types.</p></li>
-<li><p><em>QuickCheck support:</em> Defines clauses for the <code class="docutils literal notranslate"><span class="pre">type::arbitrary/1-2</span></code> predicates to allow generating random values for the <code class="docutils literal notranslate"><span class="pre">either(ExpectedType,</span> <span class="pre">UnexpectedType)</span></code> type.</p></li>
+<li><p><em>Type-checking support:</em> Defines a <code class="docutils literal notranslate"><span class="pre">either(ValueType,</span> <span class="pre">ErrorType)</span></code> type for checking expected terms where the value and error terms must be of the given types.</p></li>
+<li><p><em>QuickCheck support:</em> Defines clauses for the <code class="docutils literal notranslate"><span class="pre">type::arbitrary/1-2</span></code> predicates to allow generating random values for the <code class="docutils literal notranslate"><span class="pre">either(ValueType,</span> <span class="pre">ErrorType)</span></code> type.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -305,7 +305,7 @@
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="expecteds/2"> </div><div class="section" id="expecteds-2">
 <span id="either-0-expecteds-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">expecteds/2</span></code></a><a class="headerlink" href="#expecteds-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns the terms stored in the references that hold an expected term.</p>
+<p>Returns the values stored in the expected terms that hold a value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -315,7 +315,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">expecteds(References,Expecteds)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">expecteds(Expecteds,Values)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -326,7 +326,7 @@
 <div id="partition/3"> </div></div>
 <div class="section" id="partition-3">
 <span id="either-0-partition-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">partition/3</span></code></a><a class="headerlink" href="#partition-3" title="Permalink to this headline">¶</a></h3>
-<p>Retrieves and partitions the terms hold by the references.</p>
+<p>Retrieves and partitions the values and errors hold by the expected terms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -336,7 +336,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">partition(References,Expecteds,Unexpecteds)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">partition(Expecteds,Values,Errors)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -347,7 +347,7 @@
 <div id="unexpecteds/2"> </div></div>
 <div class="section" id="unexpecteds-2">
 <span id="either-0-unexpecteds-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">unexpecteds/2</span></code></a><a class="headerlink" href="#unexpecteds-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns the terms stored in the references that hold an expected term.</p>
+<p>Returns the errors stored in the expected terms that hold an error.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -357,7 +357,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">unexpecteds(References,Unexpecteds)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">unexpecteds(Expecteds,Errors)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -380,7 +380,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="expected_0.html#expected-0"><span class="std std-ref">expected</span></a>, <a class="reference internal" href="expected_1.html#expected-1"><span class="std std-ref">expected(Reference)</span></a>, <a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a>, <a class="reference internal" href="arbitrary_0.html#arbitrary-0"><span class="std std-ref">arbitrary</span></a></p>
+<p><a class="reference internal" href="expected_0.html#expected-0"><span class="std std-ref">expected</span></a>, <a class="reference internal" href="expected_1.html#expected-1"><span class="std std-ref">expected(Expected)</span></a>, <a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a>, <a class="reference internal" href="arbitrary_0.html#arbitrary-0"><span class="std std-ref">arbitrary</span></a></p>
 </div>
 </div>
 </div>

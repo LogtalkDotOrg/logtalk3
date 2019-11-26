@@ -46,7 +46,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="optional(Reference)" href="optional_1.html" />
+    <link rel="next" title="optional(Optional)" href="optional_1.html" />
     <link rel="prev" title="maybe" href="maybe_0.html" />
    
 </head>
@@ -141,7 +141,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#optionals"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="maybe_0.html">maybe</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">optional</a></li>
-<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Optional)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#os"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
@@ -244,11 +244,11 @@
   <p class="right" id="optional-0"><span id="index-0"></span><strong>object</strong></p>
 <div class="section" id="optional">
 <h1><code class="docutils literal notranslate"><span class="pre">optional</span></code><a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h1>
-<p>Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the <code class="docutils literal notranslate"><span class="pre">optional/1</span></code> object by passing the reference as a parameter.</p>
+<p>Constructors for optional terms. An optional term is either empty or holds a value. Optional terms should be regarded as opaque terms and always used with the <code class="docutils literal notranslate"><span class="pre">optional/1</span></code> object by passing the optional term as a parameter.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1.4</div>
-<div class="line"><strong>Date:</strong> 2019/1/23</div>
+<div class="line"><strong>Version:</strong> 1.5</div>
+<div class="line"><strong>Date:</strong> 2019/11/26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -295,7 +295,7 @@
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="empty/1"> </div><div class="section" id="empty-1">
 <span id="optional-0-empty-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a><a class="headerlink" href="#empty-1" title="Permalink to this headline">¶</a></h3>
-<p>Constructs an empty reference.</p>
+<p>Constructs an empty optional term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -305,7 +305,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(Reference)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(Optional)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -316,7 +316,7 @@
 <div id="from_goal/3"> </div></div>
 <div class="section" id="from-goal-3">
 <span id="optional-0-from-goal-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">from_goal/3</span></code></a><a class="headerlink" href="#from-goal-3" title="Permalink to this headline">¶</a></h3>
-<p>Constructs a reference by calling <code class="docutils literal notranslate"><span class="pre">Goal</span></code> that binds and holds <code class="docutils literal notranslate"><span class="pre">Term</span></code> on success. Returns an empty reference if the goal fails or throws an error.</p>
+<p>Constructs an optional term holding a value bound by calling the given goal. Returns an empty optional term if the goal fails or throws an error.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -326,7 +326,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">from_goal(Goal,Term,Reference)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">from_goal(Goal,Value,Optional)</span></code></div>
 </div>
 <div class="line"><strong>Meta-predicate template:</strong></div>
 <div class="line-block">
@@ -341,7 +341,7 @@
 <div id="of/2"> </div></div>
 <div class="section" id="of-2">
 <span id="optional-0-of-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">of/2</span></code></a><a class="headerlink" href="#of-2" title="Permalink to this headline">¶</a></h3>
-<p>Constructs a reference holding a term.</p>
+<p>Constructs an optional term holding the given value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -351,7 +351,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">of(Term,Reference)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">of(Value,Optional)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -374,7 +374,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="optional_1.html#optional-1"><span class="std std-ref">optional(Reference)</span></a>, <a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></p>
+<p><a class="reference internal" href="optional_1.html#optional-1"><span class="std std-ref">optional(Optional)</span></a>, <a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></p>
 </div>
 </div>
 </div>
@@ -387,7 +387,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="optional_1.html" class="btn btn-neutral float-right" title="optional(Reference)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="optional_1.html" class="btn btn-neutral float-right" title="optional(Optional)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="maybe_0.html" class="btn btn-neutral float-left" title="maybe" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -1,18 +1,18 @@
-.. index:: expected(Reference)
+.. index:: expected(Expected)
 .. _expected/1:
 
 .. rst-class:: right
 
 **object**
 
-``expected(Reference)``
-=======================
+``expected(Expected)``
+======================
 
-Expected term reference predicates. Requires passing a reference (constructed using the ``expected`` object) as a parameter.
+Expected term predicates. Requires passing an expected term (constructed using the ``expected`` object predicates) as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.2
-| **Date:** 2019/1/24
+| **Version:** 1.3
+| **Date:** 2019/11/26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -45,19 +45,19 @@ Public predicates
 ``expected/1``
 ^^^^^^^^^^^^^^
 
-Returns the expected term hold by the reference. Throws an error otherwise.
+Returns the value hold by the expected term. Throws an error otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``expected(Expected)``
+|    ``expected(Value)``
 | **Mode and number of proofs:**
 |    ``expected(--term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Reference holds an unexpected term:
-|        ``existence_error(expected_term,Reference)``
+|    Reference holds an error:
+|        ``existence_error(expected_term,Expected)``
 
 
 ------------
@@ -72,13 +72,13 @@ Returns the expected term hold by the reference. Throws an error otherwise.
 ``flat_map/2``
 ^^^^^^^^^^^^^^
 
-When the reference does not hold an unexpected term and mapping a closure with the expected term and the new reference as additional arguments is successful, returns the new reference. Otherwise returns the same reference.
+When the expected term does not hold an error and mapping a closure with the expected value and the new expected term as additional arguments is successful, returns the new expected term. Otherwise returns the same expected term.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``flat_map(Closure,NewReference)``
+|    ``flat_map(Closure,NewExpected)``
 | **Meta-predicate template:**
 |    ``flat_map(2,*)``
 | **Mode and number of proofs:**
@@ -97,7 +97,7 @@ When the reference does not hold an unexpected term and mapping a closure with t
 ``if_expected/1``
 ^^^^^^^^^^^^^^^^^
 
-Applies a closure when the reference holds an expected term using the term as argument. Succeeds otherwise.
+Applies a closure when the expected term holds a value using the value as argument. Succeeds otherwise.
 
 | **Compilation flags:**
 |    ``static``
@@ -122,7 +122,7 @@ Applies a closure when the reference holds an expected term using the term as ar
 ``if_unexpected/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Applies a closure when the reference holds an unexpected term using the term as argument. Succeeds otherwise. Can be used to throw the exception hold by the reference by calling it the atom ``throw``.
+Applies a closure when the expected term holds an error using the error as argument. Succeeds otherwise. Can be used to throw the exception hold by the expected term by calling it the atom ``throw``.
 
 | **Compilation flags:**
 |    ``static``
@@ -147,7 +147,7 @@ Applies a closure when the reference holds an unexpected term using the term as 
 ``is_expected/0``
 ^^^^^^^^^^^^^^^^^
 
-True if the reference holds an expected term. Avoid whenever possible by using instead the ``if_expected/1`` predicate.
+True if the expected term holds a value. See also the ``if_expected/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -168,7 +168,7 @@ True if the reference holds an expected term. Avoid whenever possible by using i
 ``is_unexpected/0``
 ^^^^^^^^^^^^^^^^^^^
 
-True if the reference holds an unexpected term. Avoid whenever possible by using instead the ``if_unexpected/1`` predicate.
+True if the expected term holds an error. See also the ``if_unexpected/1`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -189,13 +189,13 @@ True if the reference holds an unexpected term. Avoid whenever possible by using
 ``map/2``
 ^^^^^^^^^
 
-When the reference does not hold an unexpected term and mapping a closure with the expected term and the new expected term as additional arguments is successful, returns a reference with the new expected term. Otherwise returns the same reference.
+When the expected term does not hold an error and mapping a closure with the expected value and the new value as additional arguments is successful, returns a reference with the new value. Otherwise returns the same expected term.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``map(Closure,NewReference)``
+|    ``map(Closure,NewExpected)``
 | **Meta-predicate template:**
 |    ``map(2,*)``
 | **Mode and number of proofs:**
@@ -214,13 +214,13 @@ When the reference does not hold an unexpected term and mapping a closure with t
 ``or_else/2``
 ^^^^^^^^^^^^^
 
-Returns the expected term hold by the reference if it does not hold an unexpected term or the given default term if the reference holds an unexpected term.
+Returns the value hold by the expected term if it does not hold an error or the given default term if the expected term holds an error.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else(Expected,Default)``
+|    ``or_else(Value,Default)``
 | **Mode and number of proofs:**
 |    ``or_else(--term,@term)`` - ``one``
 
@@ -237,13 +237,13 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 ``or_else_call/2``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the expected term if the reference does not hold an unexpected term. Calls a goal deterministically otherwise.
+Returns the value hold by the expected term if it does not hold an error. Calls a goal deterministically otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_call(Expected,Goal)``
+|    ``or_else_call(Value,Goal)``
 | **Meta-predicate template:**
 |    ``or_else_call(*,0)``
 | **Mode and number of proofs:**
@@ -262,13 +262,13 @@ Returns the expected term if the reference does not hold an unexpected term. Cal
 ``or_else_fail/1``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the expected term hold by the reference if it does not hold an unexpected term. Fails otherwise. Usually called to skip over references holding unexpected terms.
+Returns the value hold by the expected term if it does not hold an error. Fails otherwise. Usually called to skip over expected terms holding errors.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_fail(Expected)``
+|    ``or_else_fail(Value)``
 | **Mode and number of proofs:**
 |    ``or_else_fail(--term)`` - ``zero_or_one``
 
@@ -285,13 +285,13 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 ``or_else_get/2``
 ^^^^^^^^^^^^^^^^^
 
-Returns the expected term hold by the reference if it does not hold an unexpected term. Otherwise applies a closure to compute the expected term. Throws an error when the reference holds an unexpected term and an expected term cannot be computed.
+Returns the value hold by the expected term if it does not hold an error. Otherwise applies a closure to compute the expected value. Throws an error when the expected term holds an error and a value cannot be computed.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_get(Expected,Closure)``
+|    ``or_else_get(Value,Closure)``
 | **Meta-predicate template:**
 |    ``or_else_get(*,1)``
 | **Mode and number of proofs:**
@@ -299,7 +299,7 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 
 | **Exceptions:**
 |    Reference holds an unexpected term and an expected term cannot be computed:
-|        ``existence_error(expected_term,Reference)``
+|        ``existence_error(expected_term,Expected)``
 
 
 ------------
@@ -314,13 +314,13 @@ Returns the expected term hold by the reference if it does not hold an unexpecte
 ``or_else_throw/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Returns the expected term hold by the reference if present. Throws the unexpected term as an error otherwise.
+Returns the value hold by the expected term if present. Throws the error hold by the expected term as an exception otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``or_else_throw(Expected)``
+|    ``or_else_throw(Value)``
 | **Mode and number of proofs:**
 |    ``or_else_throw(--term)`` - ``one_or_error``
 
@@ -337,19 +337,19 @@ Returns the expected term hold by the reference if present. Throws the unexpecte
 ``unexpected/1``
 ^^^^^^^^^^^^^^^^
 
-Returns the unexpected term hold by the reference. Throws an error otherwise.
+Returns the error hold by the expected term. Throws an error otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``unexpected(Unexpected)``
+|    ``unexpected(Error)``
 | **Mode and number of proofs:**
 |    ``unexpected(--term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Reference holds an expected term:
-|        ``existence_error(unexpected_term,Reference)``
+|    Reference holds a value:
+|        ``existence_error(unexpected_term,Expected)``
 
 
 ------------

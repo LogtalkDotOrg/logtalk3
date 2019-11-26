@@ -8,11 +8,11 @@
 ``either``
 ==========
 
-Types and predicates for extended type-checking of expected term references and for handling lists of expected term references.
+Types and predicates for extended type-checking and handling of expected terms.
 
 | **Author:** Paulo Moura
-| **Version:** 0.5
-| **Date:** 2019/1/24
+| **Version:** 0.6
+| **Date:** 2019/11/26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,16 +25,16 @@ Types and predicates for extended type-checking of expected term references and 
 |    :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
 | **Uses:**
 |    :ref:`expected <expected/0>`
-|    :ref:`expected(Reference) <expected/1>`
+|    :ref:`expected(Expected) <expected/1>`
 |    :ref:`random <random/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
 
 
-   - *Type-checking support:* Defines a ``either(ExpectedType, UnexpectedType)`` type for checking expected references where the expected and unexpected terms must be of the given types.
+   - *Type-checking support:* Defines a ``either(ValueType, ErrorType)`` type for checking expected terms where the value and error terms must be of the given types.
 
-   - *QuickCheck support:* Defines clauses for the ``type::arbitrary/1-2`` predicates to allow generating random values for the ``either(ExpectedType, UnexpectedType)`` type.
+   - *QuickCheck support:* Defines clauses for the ``type::arbitrary/1-2`` predicates to allow generating random values for the ``either(ValueType, ErrorType)`` type.
 
 | **Inherited public predicates:**
 |    (none)
@@ -56,13 +56,13 @@ Public predicates
 ``expecteds/2``
 ^^^^^^^^^^^^^^^
 
-Returns the terms stored in the references that hold an expected term.
+Returns the values stored in the expected terms that hold a value.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``expecteds(References,Expecteds)``
+|    ``expecteds(Expecteds,Values)``
 | **Mode and number of proofs:**
 |    ``expecteds(+list(expected),-list)`` - ``one``
 
@@ -79,13 +79,13 @@ Returns the terms stored in the references that hold an expected term.
 ``partition/3``
 ^^^^^^^^^^^^^^^
 
-Retrieves and partitions the terms hold by the references.
+Retrieves and partitions the values and errors hold by the expected terms.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``partition(References,Expecteds,Unexpecteds)``
+|    ``partition(Expecteds,Values,Errors)``
 | **Mode and number of proofs:**
 |    ``partition(+list(expected),-list,-list)`` - ``one``
 
@@ -102,13 +102,13 @@ Retrieves and partitions the terms hold by the references.
 ``unexpecteds/2``
 ^^^^^^^^^^^^^^^^^
 
-Returns the terms stored in the references that hold an expected term.
+Returns the errors stored in the expected terms that hold an error.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``unexpecteds(References,Unexpecteds)``
+|    ``unexpecteds(Expecteds,Errors)``
 | **Mode and number of proofs:**
 |    ``unexpecteds(+list(expected),-list)`` - ``one``
 
@@ -132,5 +132,5 @@ Operators
 
 .. seealso::
 
-   :ref:`expected <expected/0>`, :ref:`expected(Reference) <expected/1>`, :ref:`type <type/0>`, :ref:`arbitrary <arbitrary/0>`
+   :ref:`expected <expected/0>`, :ref:`expected(Expected) <expected/1>`, :ref:`type <type/0>`, :ref:`arbitrary <arbitrary/0>`
 

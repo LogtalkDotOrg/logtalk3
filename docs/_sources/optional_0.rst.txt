@@ -8,11 +8,11 @@
 ``optional``
 ============
 
-Constructors for optional term references. A reference is either empty or holds a term. References should be regarded as opaque terms and always used with the ``optional/1`` object by passing the reference as a parameter.
+Constructors for optional terms. An optional term is either empty or holds a value. Optional terms should be regarded as opaque terms and always used with the ``optional/1`` object by passing the optional term as a parameter.
 
 | **Author:** Paulo Moura
-| **Version:** 1.4
-| **Date:** 2019/1/23
+| **Version:** 1.5
+| **Date:** 2019/11/26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -47,13 +47,13 @@ Public predicates
 ``empty/1``
 ^^^^^^^^^^^
 
-Constructs an empty reference.
+Constructs an empty optional term.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``empty(Reference)``
+|    ``empty(Optional)``
 | **Mode and number of proofs:**
 |    ``empty(--nonvar)`` - ``one``
 
@@ -70,13 +70,13 @@ Constructs an empty reference.
 ``from_goal/3``
 ^^^^^^^^^^^^^^^
 
-Constructs a reference by calling ``Goal`` that binds and holds ``Term`` on success. Returns an empty reference if the goal fails or throws an error.
+Constructs an optional term holding a value bound by calling the given goal. Returns an empty optional term if the goal fails or throws an error.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``from_goal(Goal,Term,Reference)``
+|    ``from_goal(Goal,Value,Optional)``
 | **Meta-predicate template:**
 |    ``from_goal(0,*,*)``
 | **Mode and number of proofs:**
@@ -95,13 +95,13 @@ Constructs a reference by calling ``Goal`` that binds and holds ``Term`` on succ
 ``of/2``
 ^^^^^^^^
 
-Constructs a reference holding a term.
+Constructs an optional term holding the given value.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``of(Term,Reference)``
+|    ``of(Value,Optional)``
 | **Mode and number of proofs:**
 |    ``of(@term,--nonvar)`` - ``one``
 
@@ -125,5 +125,5 @@ Operators
 
 .. seealso::
 
-   :ref:`optional(Reference) <optional/1>`, :ref:`type <type/0>`
+   :ref:`optional(Optional) <optional/1>`, :ref:`type <type/0>`
 

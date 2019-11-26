@@ -55,6 +55,8 @@ with links sub-diagrams, source code, and API documentation.
 * IMPROVED: The `lgtunit` tool documentation section on testing input/output
 predicates.
 
+* IMPROVED: Documentation of the `expecteds` and `optionals` libraries.
+
 Library
 -------
 
