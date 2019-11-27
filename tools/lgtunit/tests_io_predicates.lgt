@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/03/04,
+		date is 2019/11/27,
 		comment is 'Unit tests for the "lgtunit" tool input/output testing predicates.'
 	]).
 
@@ -158,7 +158,8 @@
 		atom_concat(Directory, foo42, File),
 		^^create_text_file(File, 'foo42.'),
 		open(File, read, Stream, [type(text)]),
-		read_term(Stream, Term, []).
+		read_term(Stream, Term, []),
+		^^clean_file(File).
 
 	% create_binary_file/2 tests
 
@@ -170,7 +171,8 @@
 		open(File, read, Stream, [type(binary)]),
 		get_byte(Stream, Byte1),
 		get_byte(Stream, Byte2),
-		get_byte(Stream, Byte3).
+		get_byte(Stream, Byte3),
+		^^clean_file(File).
 
 	% check_text_file/2 tests
 
@@ -179,7 +181,8 @@
 		object_property(This, file(_,Directory)),
 		atom_concat(Directory, foo42, File),
 		^^create_text_file(File, 'foo42.'),
-		^^check_text_file(File, 'foo42.').
+		^^check_text_file(File, 'foo42.'),
+		^^clean_file(File).
 
 	% check_binary_file/2 tests
 
@@ -188,7 +191,8 @@
 		object_property(This, file(_,Directory)),
 		atom_concat(Directory, foo42, File),
 		^^create_binary_file(File, [65,66,67]),
-		^^check_binary_file(File, [65,66,67]).
+		^^check_binary_file(File, [65,66,67]),
+		^^clean_file(File).
 
 	% clean_file/1 tests
 

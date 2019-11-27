@@ -107,6 +107,9 @@ Tests
 * IMPROVED: Convert unit tests for the ISO Prolog standard `is/2` built-in
 predicate to use assertions to simplify debugging.
 
+* FIXED: Unit tests for the `lgtunit` tool support for testing predicates
+that perform input/output operations to close the temporary files they use.
+
 Examples
 --------
 
