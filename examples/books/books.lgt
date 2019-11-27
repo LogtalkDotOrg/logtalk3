@@ -74,9 +74,9 @@ weight(horcrux_set,   123).
 :- object(data_processing).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/11/22,
+		date is 2019/11/27,
 		comment is 'Data processing example, decoupled from data acquisition.'
 	]).
 
@@ -172,5 +172,22 @@ weight(horcrux_set,   123).
 			),
 			Titles
 		).
+
+	:- public(print_books_with_extras/0).
+	:- mode(print_books_with_extras, one).
+	:- info(print_books_with_extras/0, [
+		comment is 'Prints a list of all books with extras.'
+	]).
+
+	% an example of one of several predicates that allow us to either
+	% get the value hold by an optional term or act in its absence
+
+	print_books_with_extras :-
+		data_acquisition::book(Title, Author, Year, Extra),
+		optional(Extra)::or_else_fail(Data),
+		write(Title), write(' by '), write(Author), write(' on '), write(Year), nl,
+		print_extra(Data),
+		fail.
+	print_books_with_extras.
 
 :- end_object.
