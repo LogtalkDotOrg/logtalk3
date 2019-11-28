@@ -129,6 +129,8 @@ Examples
 * FIXED: The loader file of the `persistency` example to load the required
 `os` library and create the saved state file if it doesn't exist.
 
+* FIXED: Missing unit tests cleanup in the `serialization` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

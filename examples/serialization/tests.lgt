@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/01/29,
+		date is 2019/11/28,
 		comment is 'Unit tests for the "serialization" example.'
 	]).
 
@@ -52,5 +52,11 @@
 		Object3::a(A3), A3 == 3,
 		Object3::b(B3), B3 == 3,
 		Object3::c(C3), C3 == 3.
+
+	cleanup :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, abc_objects, File),
+		catch(ignore(os::delete_file(File)), _, true).
 
 :- end_object.
