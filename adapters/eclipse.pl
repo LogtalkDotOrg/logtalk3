@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on October 14, 2019
+%  Last updated on November 28, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -270,7 +270,10 @@ forall(Generate, Test) :-
 % valid candidates are proprietary built-in predicates with
 % no side-effects when called with ground arguments
 
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_string(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(breal(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(integer_atom(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(number_string(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(rational(_)).
 
 

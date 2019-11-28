@@ -41,6 +41,10 @@ to use the predicate property `imported_from/1` instead of the buggy property
 * ADDED: Support to the SWI-Prolog and YAP adapter files to expand Prolog
 `reexport/2` directives with an `except/1` second argument.
 
+* ADDED: Some more proprietary built-in predicates that can be used to check
+for tautology and falsehood goals to the ECLiPSe, SWI-Prolog, and YAP adapter
+files.
+
 Documentation
 -------------
 
