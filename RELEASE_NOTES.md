@@ -42,8 +42,7 @@ to use the predicate property `imported_from/1` instead of the buggy property
 `reexport/2` directives with an `except/1` second argument.
 
 * ADDED: Some more proprietary built-in predicates that can be used to check
-for tautology and falsehood goals to the ECLiPSe, SWI-Prolog, and YAP adapter
-files.
+for tautology and falsehood goals to the adapter files.
 
 Documentation
 -------------

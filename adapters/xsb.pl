@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on October 14, 2019
+%  Last updated on November 28, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -166,8 +166,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % valid candidates are proprietary built-in predicates with
 % no side-effects when called with ground arguments
 
-'$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
-	fail.
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(name(_, _)).
 
 
 % '$lgt_prolog_database_predicate'(@callable)

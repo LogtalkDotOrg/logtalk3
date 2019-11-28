@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Lean Prolog 4.5.7 and later versions
-%  Last updated on October 14, 2019
+%  Last updated on November 28, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -254,8 +254,7 @@ to_engine(Interactor, Pattern, Goal) :-
 % valid candidates are proprietary built-in predicates with
 % no side-effects when called with ground arguments
 
-'$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
-	fail.
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(name(_, _)).
 
 
 % '$lgt_prolog_database_predicate'(@callable)

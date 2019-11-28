@@ -231,6 +231,7 @@
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_number(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_string(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(cyclic_term(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(name(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(number_string(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(rational(_)).
 
