@@ -77,6 +77,9 @@ return an empty optional when calling the closure argument throws an error.
 * FIXED: The predicate `expected::from_goal/4` which would not use the given
 error argument when calling the goal generates an exception.
 
+* FIXED: Predicate `backend_random::random/1` when using XSB as the backend
+compiler.
+
 Tools
 _____
 

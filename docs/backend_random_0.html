@@ -274,7 +274,6 @@
 <div><ul class="simple">
 <li><p><em>Implementation:</em> The backend Prolog compiler built-in random generator is only used for the basic <code class="docutils literal notranslate"><span class="pre">random/1</span></code>, <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates.</p></li>
 <li><p><em>Portability:</em> B-Prolog, CxProlog, ECLiPSe, JIProlog, Lean Prolog, Qu-Prolog, Quintus Prolog do not provide implementations for the <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates and calling these predicates simply succeed without performing any action.</p></li>
-<li><p><em>Know issues:</em> XSB implementation of the <code class="docutils literal notranslate"><span class="pre">random/1</span></code> predicate is not usable due to a clash with the XSB atom-based module system.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
