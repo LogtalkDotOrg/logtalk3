@@ -87,6 +87,9 @@ compiler.
 * FIXED: The `coroutining` library `freeze/2` and `when/2` predicates when
 using ECLiPSe as the backend compiler.
 
+* FIXED: The predicate `atom::split/3` when given an empty atom as delimiter.
+Thanks to Paul Brown for the bug report.
+
 Tools
 _____
 
@@ -113,6 +116,9 @@ script.
 
 Tests
 -----
+
+* ADDED: Unit tests for the `atom` library object `replace_sub_atom/4` and
+`split/3` predicates.
 
 * IMPROVED: Convert unit tests for the ISO Prolog standard `is/2` built-in
 predicate to use assertions to simplify debugging.

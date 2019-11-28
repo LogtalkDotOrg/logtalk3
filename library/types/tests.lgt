@@ -22,15 +22,51 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2019/05/16,
+		date is 2019/11/28,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, '=~='), '=~='/2
 	]).
+
+	test(atom_replace_sub_atom_4_01) :-
+		atom::replace_sub_atom(b, x, abc, Atom),
+		Atom == axc.
+
+	test(atom_replace_sub_atom_4_02) :-
+		atom::replace_sub_atom(d, x, abc, Atom),
+		Atom == abc.
+
+	test(atom_replace_sub_atom_4_03) :-
+		atom::replace_sub_atom(b, x, abcbd, Atom),
+		Atom == axcxd.
+
+	test(atom_replace_sub_atom_4_04) :-
+		atom::replace_sub_atom(b, '', abc, Atom),
+		Atom == ac.
+
+	test(atom_replace_sub_atom_4_05) :-
+		atom::replace_sub_atom('', 'x', abc, Atom),
+		Atom == abc.
+
+	test(atom_split_3_01) :-
+		atom::split(abc, '', Atoms),
+		Atoms == [a,b,c].
+
+	test(atom_split_3_02) :-
+		atom::split(abc, b, Atoms),
+		Atoms == [a,c].
+
+	test(atom_split_3_03) :-
+		atom::split(abc, d, Atoms),
+		Atoms == [abc].
+
+	test(atom_split_3_04) :-
+		atom::split('', d, Atoms),
+		Atoms == [''].
 
 	test(list_sort_4_01) :-
 		list::sort(0, @<, [3,2,1], Sorted),

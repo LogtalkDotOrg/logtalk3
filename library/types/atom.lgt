@@ -22,9 +22,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2019/01/08,
+		date is 2019/11/28,
 		comment is 'Atom data type predicates.'
 	]).
 
@@ -67,8 +67,11 @@
 		append_fragments(Fragments, Output0, Output).
 
 	split(Atom, Delimiter, SubAtoms) :-
-		atom_length(Delimiter, Length),
-		split(Atom, Delimiter, Length, SubAtoms).
+		(	Delimiter == '' ->
+			atom_chars(Atom, SubAtoms)
+		;	atom_length(Delimiter, Length),
+			split(Atom, Delimiter, Length, SubAtoms)
+		).
 
 	split(Atom, Delimiter, Length, [SubAtom| SubAtoms]) :-
 		sub_atom(Atom, Before, Length, _, Delimiter),
