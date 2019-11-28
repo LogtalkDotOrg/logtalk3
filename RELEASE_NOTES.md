@@ -80,6 +80,9 @@ error argument when calling the goal generates an exception.
 * FIXED: Predicate `backend_random::random/1` when using XSB as the backend
 compiler.
 
+* FIXED: The `coroutining` library `freeze/2` and `when/2` predicates when
+using ECLiPSe as the backend compiler.
+
 Tools
 _____
 

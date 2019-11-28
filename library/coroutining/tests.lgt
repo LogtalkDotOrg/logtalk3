@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/05/20,
+		date is 2019/11/28,
 		comment is 'Unit tests for the "coroutining" library.'
 	]).
 
@@ -49,6 +49,9 @@
 
 	test(coroutining_freeze_2_02, true(Y == 2)) :-
 		freeze(X, Y = 2), X = 1.
+
+	test(coroutining_freeze_2_03, true(Y == 2)) :-
+		freeze(X, unify_y(Y)), X = 1.
 
 	% frozen/2 tests
 
@@ -77,5 +80,12 @@
 
 	test(coroutining_when_2_05, true(Z == 3)) :-
 		when((ground(_); ground(Y)), Z = 3), Y = 2.
+
+	test(coroutining_when_2_06, true(Y == 2)) :-
+		when(nonvar(X), unify_y(Y)), X = 1.
+
+	% auxiliary predicates
+
+	unify_y(2).
 
 :- end_object.

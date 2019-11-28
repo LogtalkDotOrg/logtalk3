@@ -21,9 +21,9 @@
 :- object(coroutining).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/01/05,
+		date is 2019/11/28,
 		comment is 'Coroutining predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
@@ -61,6 +61,9 @@
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		:- meta_predicate(sicstus:freeze(*, 0)).
+		:- meta_predicate(sicstus:when(*, 0)).
 
 		dif(Term1, Term2) :-
 			sicstus:dif(Term1, Term2).
