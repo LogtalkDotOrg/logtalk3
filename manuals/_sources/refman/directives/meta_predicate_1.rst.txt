@@ -54,8 +54,9 @@ not in the meta-predicate definition context.
 
 Logtalk allows the use of this directive to override the original
 meta-predicate directive. This is sometimes necessary when calling
-Prolog module meta-predicates due to the lack of standardization of the
-syntax of the meta-predicate templates.
+Prolog built-in meta-predicates or Prolog module meta-predicates due
+to the lack of standardization of the syntax of the meta-predicate
+templates.
 
 .. warning::
 
