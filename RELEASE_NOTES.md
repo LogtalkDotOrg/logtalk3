@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for overriding (or providing if absent) the meta-predicate
+template of a Prolog built-in predicate.
+
 * IMPROVED: Wording of the lint warning for all-solution predicates that may
 share no variables between the template and the goal arguments.
 

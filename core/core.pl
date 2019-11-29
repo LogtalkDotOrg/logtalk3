@@ -3410,7 +3410,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 33, 0, b02)).
+'$lgt_version_data'(logtalk(3, 33, 0, b03)).
 
 
 
@@ -14333,13 +14333,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
-	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
+	(	(	'$lgt_pp_meta_predicate_'(Pred, Meta, _, _),
+			Type = predicate
+			% we're either overriding the original meta-predicate template or working around a
+			% backend Prolog compiler limitation in providing access to meta-predicate templates
+		;	'$lgt_prolog_meta_predicate'(Pred, Meta, Type)
 			% built-in Prolog meta-predicate declared in the adapter file in use
-			true
 		;	% lack of standardization of the predicate_property/2 predicate
 			% means that the next call may fail to recognize the predicate as
 			% a meta-predicate and retrieve a usable meta-predicate template
-			catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+			catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail),
+			Type = predicate
 		) ->
 		% meta-predicate
 		Pred =.. [Functor| Args],
