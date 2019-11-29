@@ -28,9 +28,9 @@ Description
 
    else
 
-Starts an *else* branch when performing conditional compilation.
-The code following this directive is compiled iff the goal in the
-matching :ref:`directives_if_1` directive is false.
+Starts an *else* branch when performing conditional compilation. The
+code following this directive is compiled iff the goal in the matching
+:ref:`directives_if_1` or :ref:`directives_elif_1` directive is false.
 
 Template and modes
 ------------------
