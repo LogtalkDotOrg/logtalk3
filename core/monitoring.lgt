@@ -21,10 +21,10 @@
 :- protocol(monitoring).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/10/14,
-		comment is 'Event handlers protocol. The handlers are automatically by the runtime called for messages sent using the ``::/2`` control construct from objects compiled with the ``events`` flag set to ``allow``.'
+		date is 2018/11/29,
+		comment is 'Event handlers protocol. The handlers are automatically called by the runtime for messages sent using the ``::/2`` control construct from objects or categories compiled with the ``events`` flag set to ``allow``.'
 	]).
 
 	:- built_in.
