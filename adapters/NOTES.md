@@ -49,7 +49,7 @@ Top-level interpreter shorthands
 --------------------------------
 
 The adapter files define shorthands to often used Logtalk built-in
-predicates such as `logtalk_load/1` and `logtalk_make/1`:
+predicates such as `logtalk_load/1` and `logtalk_make/1` including:
 
 * `{*}`  
 	shorthand for `logtalk_make(all)`;
@@ -64,11 +64,10 @@ predicates such as `logtalk_load/1` and `logtalk_make/1`:
 	shorthand for `logtalk_load([File1, File2, ...])`;
 	compiles and loads several Logtalk source files (using default flags)
 
-Note, however, that these shorthands, which should only be used for
-iterative development at the top-level interpreter, are not part of
-the Logtalk language specification and can be commented out in case
-of conflict with backend Prolog compiler features or third-party
-libraries.
+Note that these shorthands should only be used for iterative development
+at the top-level interpreter. They are not part of the Logtalk language
+specification and can be commented out in case of conflict with backend
+Prolog compiler features or third-party libraries.
 
 
 Optional features support per backend Prolog compiler
@@ -262,7 +261,7 @@ multifile predicates. This limitation may be fixed in later versions;
 paths containing environment variables prevents using it with Logtalk
 in this operating-system.
 
-Written and tested with the help of Peter Robinson.
+Written and tested with the help of Peter Robinson, Qu-Prolog author.
 
 
 Quintus Prolog 3.3~3.5
@@ -371,12 +370,12 @@ After, you can load Logtalk on-demand by typing:
 	?- use_module(library(logtalk)).
 
 The pack alternative is handy for deployment but not ideal for development as
-it implicitly assumes a single user and the files are buried in the directory
-`~/lib/swipl/pack/logtalk`.
+it implicitly assumes a single user and the files are buried inside the packs
+directory (e.g. `.local/share/swi-prolog/pack/`).
 
 If you want to load automatically Logtalk at startup and be able to use it
 with both the shell integration script and the macOS GUI application, you
-can add to the `~/.plrc` or `~/.swiplrc` init file the following lines after
+can add to the `.plrc` or `.swiplrc` init file the following lines after
 editing the `LOGTALKHOME` and `LOGTALKUSER` environment variable values in
 the `setenv/2` calls:
 
