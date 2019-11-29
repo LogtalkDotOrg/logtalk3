@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on November 28, 2019
+%  Last updated on November 29, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -133,6 +133,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_meta_predicate'(tnot(_), tnot(0), predicate).
 
 '$lgt_prolog_meta_predicate'(time(_), time(0), predicate).
+'$lgt_prolog_meta_predicate'(timed_call(_, _), timed_call(0, *), predicate).
 
 '$lgt_prolog_meta_predicate'(abolish_table_call(_), abolish_table_call(0), predicate).
 '$lgt_prolog_meta_predicate'(abolish_table_call(_, _), abolish_table_call(0, *), predicate).

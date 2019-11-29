@@ -47,6 +47,9 @@ to use the predicate property `imported_from/1` instead of the buggy property
 * ADDED: Some more proprietary built-in predicates that can be used to check
 for tautology and falsehood goals to the adapter files.
 
+* ADDED: Declaration for the `timed_call/2` built-in meta-predicate to the
+XSB adapter file.
+
 Documentation
 -------------
 
