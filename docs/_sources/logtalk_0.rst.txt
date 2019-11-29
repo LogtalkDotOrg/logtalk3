@@ -11,8 +11,8 @@
 Built-in object providing message printing, debugging, library, source file, and hacking methods.
 
 | **Author:** Paulo Moura
-| **Version:** 1.15
-| **Date:** 2019/4/1
+| **Version:** 1.16
+| **Date:** 2019/11/29
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -25,7 +25,7 @@ Built-in object providing message printing, debugging, library, source file, and
 | **Remarks:**
 
 
-   - *Message kinds:* Default set: ``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.
+   - *Default nessage kinds:* ``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.
 
    - *Printing of silent messages:* By default, silent messages are not printed. These messages are only useful when intercepted.
 
@@ -37,7 +37,7 @@ Built-in object providing message printing, debugging, library, source file, and
 
    - *Printing of error messages:* These messages are always printed by default.
 
-   - *Printing of debug messages:* By default, debug messages are only printed when the ``debug`` flag is turned on.
+   - *Printing of debug messages:* By default, debug messages are only printed when the ``debug`` flag is turned on. The compiler suppresses debug messages when compiling in optimized mode.
 
    - *Meta messages:* A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.
 

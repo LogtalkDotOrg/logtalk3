@@ -33,18 +33,18 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.15,
+		version is 1.16,
 		author is 'Paulo Moura',
-		date is 2019/04/01,
+		date is 2019/11/29,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
-			'Message kinds' - 'Default set: ``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
+			'Default nessage kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
 			'Printing of silent messages' - 'By default, silent messages are not printed. These messages are only useful when intercepted.',
 			'Printing of banner and comment messages' - 'By default, banner and comment messages are only printed when the ``report`` flag is turned on.',
 			'Printing of help, information, and question messages' - 'These messages are always printed by default as they provide requested output.',
 			'Printing of warning messages' - 'By default, warning messages are not printed when the ``report`` flag is turned off.',
 			'Printing of error messages' - 'These messages are always printed by default.',
-			'Printing of debug messages' - 'By default, debug messages are only printed when the ``debug`` flag is turned on.',
+			'Printing of debug messages' - 'By default, debug messages are only printed when the ``debug`` flag is turned on. The compiler suppresses debug messages when compiling in optimized mode.',
 			'Meta messages' - 'A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.',
 			'@Message meta message' - 'By default, the message is printed as passed to the ``write/1`` predicate followed by a newline.',
 			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the ``writeq/1`` predicate.',
