@@ -77,6 +77,8 @@ library.
 * ADDED: Predicates `if_present_or_else/2`, `or/2`, and `or_else_throw/2` to
 the `optionals` library.
 
+* ADDED: Support for XSB to the `timeout` library.
+
 * FIXED: Predicates `map/2` and `flat_map/2` of the `optionals` library to also
 return an empty optional when calling the closure argument throws an error.
 

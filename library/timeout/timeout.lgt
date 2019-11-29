@@ -26,7 +26,7 @@
 		date is 2019/11/29,
 		comment is 'Call goal with a time limit predicates.',
 		remarks is [
-			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
+			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, XSB, and YAP.'
 		]
 	]).
 
@@ -58,14 +58,16 @@
 
 		call_with_timeout(Goal, Time) :-
 			context(Context),
-			timeout:timeout(once(Goal), Time, throw(error(timeout(Goal),Context))).
+			timeout:timeout(Goal, Time, throw(error(timeout(Goal),Context))),
+			!.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		call_with_timeout(Goal, Time) :-
 			context(Context),
 			MilliSeconds is truncate(Time * 1000),
-			timeout:time_out(once(Goal), MilliSeconds, Result),
+			timeout:time_out(Goal, MilliSeconds, Result),
+			!,
 			(	Result == time_out ->
 				throw(error(timeout(Goal),Context))
 			;	true
@@ -81,12 +83,23 @@
 				throw(error(timeout(Goal),Context))
 			).
 
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+
+		:- meta_predicate(timed_call(0, *)).
+
+		call_with_timeout(Goal, Time) :-
+			context(Context),
+			MilliSeconds is truncate(Time * 1000),
+			timed_call(Goal, [max(MilliSeconds,throw(error(timeout(Goal),Context)))]),
+			!.
+
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
 		call_with_timeout(Goal, Time) :-
 			context(Context),
 			MilliSeconds is truncate(Time * 1000),
-			timeout:time_out(once(Goal), MilliSeconds, Result),
+			timeout:time_out(Goal, MilliSeconds, Result),
+			!,
 			(	Result == time_out ->
 				throw(error(timeout(Goal),Context))
 			;	true
