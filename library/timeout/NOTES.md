@@ -22,7 +22,7 @@ About
 
 The `timeout` object provides a portable abstraction over calling a goal
 with a time limit as made available by the supported backend Prolog
-systems (ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP).
+systems (B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP).
 
 
 API documentation

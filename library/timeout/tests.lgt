@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2019/05/07,
+		date is 2019/11/29,
 		comment is 'Unit tests for the "timeout" library.'
 	]).
 
@@ -43,7 +43,15 @@
 	deterministic(timeout_03) :-
 		call_with_timeout(repeat, 0.1).
 
-	fails(timeout_04) :-
+	deterministic(timeout_04) :-
+		call_with_timeout(my_repeat, 0.1).
+
+	fails(timeout_05) :-
 		call_with_timeout(fail, 0.1).
+
+	% auxiliary predicates
+
+	my_repeat :-
+		repeat.
 
 :- end_object.

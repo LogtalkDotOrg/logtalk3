@@ -21,9 +21,9 @@
 :- object(timeout).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2019/05/07,
+		date is 2019/11/29,
 		comment is 'Call goal with a time limit predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
@@ -53,6 +53,8 @@
 			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		:- meta_predicate(timeout:timeout(0, *, *)).
 
 		call_with_timeout(Goal, Time) :-
 			context(Context),
