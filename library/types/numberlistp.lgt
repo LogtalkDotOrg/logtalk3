@@ -120,7 +120,7 @@
 	:- public(normalize_range/2).
 	:- mode(normalize_range(+list(number), -list(float)), one).
 	:- info(normalize_range/2, [
-		comment is 'Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.',
+		comment is 'Normalizes a list of numbers into the ``[0.0,1.0]`` range. Caller must handle arithmetic exceptions if the input list if not normalizable.',
 		argnames is ['List', 'NormalizedList']
 	]).
 

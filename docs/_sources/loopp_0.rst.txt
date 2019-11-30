@@ -45,7 +45,7 @@ Public predicates
 ``whiledo/2``
 ^^^^^^^^^^^^^
 
-While Condition is true do Action.
+While ``Condition`` is true do ``Action``.
 
 | **Compilation flags:**
 |    ``static``
@@ -70,7 +70,7 @@ While Condition is true do Action.
 ``dowhile/2``
 ^^^^^^^^^^^^^
 
-Do Action while Condition is true.
+Do ``Action`` while ``Condition`` is true.
 
 | **Compilation flags:**
 |    ``static``
@@ -95,7 +95,7 @@ Do Action while Condition is true.
 ``foreach/3``
 ^^^^^^^^^^^^^
 
-For each element Element in List call Goal.
+For each ``Element`` in ``List`` call ``Goal``.
 
 | **Compilation flags:**
 |    ``static``
@@ -120,7 +120,7 @@ For each element Element in List call Goal.
 ``foreach/4``
 ^^^^^^^^^^^^^
 
-For each element Element in List at position Index call Goal. Index starts at 1.
+For each ``Element`` in ``List`` at position ``Index`` call ``Goal``. ``Index`` starts at 1.
 
 | **Compilation flags:**
 |    ``static``
@@ -145,7 +145,7 @@ For each element Element in List at position Index call Goal. Index starts at 1.
 ``forto/3``
 ^^^^^^^^^^^
 
-Call Goal counting up from First to Last. Increment is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+Calls ``Goal`` counting up from ``First`` to ``Last``. Increment is 1. For convenience, ``First`` and ``Last`` can be arithmetic expressions. Fails iff ``Goal`` fails.
 
 | **Compilation flags:**
 |    ``static``
@@ -170,7 +170,7 @@ Call Goal counting up from First to Last. Increment is 1. For convenience and cl
 ``forto/4``
 ^^^^^^^^^^^
 
-Call Goal counting up from First to Last and instantiating Count to each successive value. Increment is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+Calls ``Goal`` counting up from ``First`` to ``Last`` and binding ``Count`` to each successive value. Increment is 1. For convenience, ``First`` and ``Last`` can be arithmetic expressions. Fails iff ``Goal`` fails.
 
 | **Compilation flags:**
 |    ``static``
@@ -195,7 +195,7 @@ Call Goal counting up from First to Last and instantiating Count to each success
 ``forto/5``
 ^^^^^^^^^^^
 
-Call Goal counting up from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Increment can be arithmetic expressions (uses Increment absolute value). This predicate fails iff the Goal fails.
+Calls ``Goal`` counting up from ``First`` to ``Last`` and binding ``Count`` to each successive value. For convenience, ``First``, ``Last``, and ``Increment`` can be arithmetic expressions (uses ``Increment`` absolute value). Fails iff ``Goal`` fails.
 
 | **Compilation flags:**
 |    ``static``
@@ -220,7 +220,7 @@ Call Goal counting up from First to Last and instantiating Count to each success
 ``fordownto/3``
 ^^^^^^^^^^^^^^^
 
-Call Goal counting down from First to Last. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+Calls ``Goal`` counting down from ``First`` to ``Last``. Decrement is 1. For convenience, ``First`` and ``Last`` can be arithmetic expressions. Fails iff ``Goal`` fails.
 
 | **Compilation flags:**
 |    ``static``
@@ -245,7 +245,7 @@ Call Goal counting down from First to Last. Decrement is 1. For convenience and 
 ``fordownto/4``
 ^^^^^^^^^^^^^^^
 
-Call Goal counting down from First to Last and instantiating Count to each successive value. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+Calls ``Goal`` counting down from ``First`` to ``Last`` and binding ``Count`` to each successive value. Decrement is 1. For convenience, ``First`` and ``Last`` can be arithmetic expressions. Fails iff ``Goal`` fails.
 
 | **Compilation flags:**
 |    ``static``
@@ -270,7 +270,7 @@ Call Goal counting down from First to Last and instantiating Count to each succe
 ``fordownto/5``
 ^^^^^^^^^^^^^^^
 
-Call Goal counting down from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Decrement can be arithmetic expressions (uses Decrement absolute value). This predicate fails iff the Goal fails.
+Calls ``Goal`` counting down from ``First`` to ``Last`` and binding ``Count`` to each successive value. For convenience, ``First``, ``Last``, and ``Decrement`` can be arithmetic expressions (uses ``Decrement`` absolute value). Fails iff ``Goal`` fails.
 
 | **Compilation flags:**
 |    ``static``

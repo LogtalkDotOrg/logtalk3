@@ -326,7 +326,7 @@ Calculates the scalar product of two lists of numbers. Fails if the two lists ar
 ``normalize_range/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.
+Normalizes a list of numbers into the ``[0.0,1.0]`` range. Caller must handle arithmetic exceptions if the input list if not normalizable.
 
 | **Compilation flags:**
 |    ``static``
