@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on November 7, 2019
+%  Last updated on November 31, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,9 @@ About
 -----
 
 This is a sample settings file for Logtalk that can be used to override
-the default flag values in the backend Prolog compiler adapter files.
+the default flag values in the backend Prolog compiler adapter files, to
+automatically load at startup libraries and tools, and to perform other
+initializations (including backend specific ones).
 
 Settings files are specially useful when Logtalk is installed system-wide
 in a read-only directory. Using settings files allows Logtalk to easily
@@ -37,6 +39,7 @@ directive within the source files.
 
 Settings files are also a convenient place to define your own shortcuts
 for commonly used queries (e.g. load the debugger and start tracing).
+
 
 Settings file locations
 -----------------------
@@ -53,7 +56,7 @@ per-project setting files. The POSIX integration scripts automatically set
 this variable. On Windows systems, the integration shortcuts "Start in"
 field is set by default to %LOGTALKUSER% as the %CD% alternative only
 works on some Windows versions. A workaround to use per-project settings
-files is to copy the shortcut to the project directory and to and edit its
+files is to copy the shortcut to the project directory and and edit its
 "Target" field to prefix its content with:
 
 C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
@@ -67,6 +70,7 @@ to restrict searching of settings files to the Logtalk user directory and
 to the home directory or to disable settings files by changing the
 definition of the read-only flag `settings_file` in the used Prolog
 adapter file from `allow` to, respectively, `restrict` or `deny`.
+
 
 Defining a settings file
 ------------------------
@@ -85,6 +89,7 @@ If you use more than one backend Prolog compiler and want to use per
 compiler settings, you can use the Logtalk conditional compilation
 directives and the `prolog_dialect` compiler flag. See the User and
 Reference Manuals for details.
+
 
 Caveats
 -------
@@ -123,7 +128,8 @@ when running on non-POSIX operating systems such as Windows. Check the
 %*/
 
 
-%  To load most of developer tools at startup, uncomment the following lines:
+%  To load most of developer tools at startup (including the `help` tool),
+%  uncomment the following lines:
 
 /*
 :- initialization(
@@ -141,11 +147,11 @@ when running on non-POSIX operating systems such as Windows. Check the
 	(Dialect == eclipse; Dialect == swi)
 )).
 
-:- multifile(logtalk_make_target_action/1).
-:- dynamic(logtalk_make_target_action/1).
+	:- multifile(logtalk_make_target_action/1).
+	:- dynamic(logtalk_make_target_action/1).
 
-logtalk_make_target_action(all) :-
-	make.
+	logtalk_make_target_action(all) :-
+		make.
 
 :- endif.
 %*/
@@ -173,6 +179,52 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	logtalk_load_context(directory, Directory),
 	assertz(logtalk_library_path(my_project, Directory))
 )).
+%*/
+
+
+%  To easily load multiple personal Logtalk projects without having to
+%  first define a library alias for each one, create a directory for
+%  storing their directories (e.g. `$HOME/my_logtalk_projects`), and
+%  edit and uncomment the following lines:
+
+/*
+:- initialization((
+	logtalk_load(types(loader)),
+	logtalk_load(os(loader))
+)).
+
+:- multifile(logtalk_library_path/2).
+:- dynamic(logtalk_library_path/2).
+
+logtalk_library_path(my_logtalk_projects, home('my_logtalk_projects/')).
+logtalk_library_path(Project, my_logtalk_projects(ProjectPath)) :-
+	logtalk::expand_library_path(my_logtalk_projects, MyProjectsPath),
+	os::directory_files(MyProjectsPath, Projects, [type(directory), dot_files(false)]),
+	list::member(Project, Projects),
+	atom_concat(Project, '/', ProjectPath).
+%*/
+
+
+%  To easily load third-party libraries without having to first define
+%  a library alias for each one, create a directory for storing their
+%  directories (e.g. `$HOME/logtalk_third_party_libraries`), and edit
+%  and uncomment the following lines:
+
+/*
+:- initialization((
+	logtalk_load(types(loader)),
+	logtalk_load(os(loader))
+)).
+
+:- multifile(logtalk_library_path/2).
+:- dynamic(logtalk_library_path/2).
+
+logtalk_library_path(third_party_libraries, home('logtalk_third_party_libraries/')).
+logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
+	logtalk::expand_library_path(third_party_libraries, ThirdPartyLibrariesPath),
+	os::directory_files(ThirdPartyLibrariesPath, Libraries, [type(directory), dot_files(false)]),
+	list::member(Library, Libraries),
+	atom_concat(Library, '/', LibraryPath).
 %*/
 
 

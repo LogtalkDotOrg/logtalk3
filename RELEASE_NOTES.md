@@ -69,6 +69,10 @@ predicates.
 
 * IMPROVED: Documentation of the `expecteds` and `optionals` libraries.
 
+* UPDATED: The `settings-sample.lgt` file with sample code for easy loading
+of personal projects and third-party libraries without having to first define
+a library alias for each project or library.
+
 Library
 -------
 
