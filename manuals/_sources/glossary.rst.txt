@@ -476,9 +476,9 @@ Glossary
       source files.
 
    settings file
-      A :term:`source file`, compiled and loaded at Logtalk startup, mainly
-      defining default values for compiler flags that override the
-      defaults found on the backend Prolog compiler
+      A :term:`source file`, compiled and loaded automatically by default at
+      Logtalk startup, mainly defining default values for compiler flags that
+      override the defaults found on the backend Prolog compiler
       :term:`adapter files <adapter file>`.
 
    tester file

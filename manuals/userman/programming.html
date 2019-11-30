@@ -578,11 +578,11 @@ just need to type:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(viewpoints(loader)).
 </pre></div>
 </div>
-<p>The best way to take advantage of this feature is to load at startup a
-source file containing clauses for the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code>
-predicate needed for all available libraries. This allows us to load
-library source files or entire libraries without worrying about
-libraries paths, improving code portability. The directory paths on the
+<p>The best way to take advantage of this feature is to load at startup a source
+file containing clauses for the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> predicate needed
+for all available libraries (typically, using a <a class="reference internal" href="../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a>). This
+allows us to load library source files or entire libraries without worrying
+about libraries paths, improving code portability. The directory paths on the
 second argument should always end with the path directory separator
 character. Most backend Prolog compilers allows the use of environment
 variables in the second argument of the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code>
@@ -591,7 +591,7 @@ top-level library directories (e.g. <code class="docutils literal notranslate"><
 not advised as different backend Prolog compilers may start with
 different initial working directories, which may result in portability
 problems of your loader files.</p>
-<p>The library notation provides functionality inspired by the
+<p>This <a class="reference internal" href="../glossary.html#term-library-notation"><span class="xref std std-term">library notation</span></a> provides functionality inspired by the
 <code class="docutils literal notranslate"><span class="pre">file_search_path/2</span></code> mechanism introduced by Quintus Prolog and later
 adopted by some other Prolog compilers.</p>
 </div>

@@ -443,11 +443,11 @@ just need to type:
 
    | ?- logtalk_load(viewpoints(loader)). 
 
-The best way to take advantage of this feature is to load at startup a
-source file containing clauses for the ``logtalk_library_path/2``
-predicate needed for all available libraries. This allows us to load
-library source files or entire libraries without worrying about
-libraries paths, improving code portability. The directory paths on the
+The best way to take advantage of this feature is to load at startup a source
+file containing clauses for the ``logtalk_library_path/2`` predicate needed
+for all available libraries (typically, using a :term:`settings file`). This
+allows us to load library source files or entire libraries without worrying
+about libraries paths, improving code portability. The directory paths on the
 second argument should always end with the path directory separator
 character. Most backend Prolog compilers allows the use of environment
 variables in the second argument of the ``logtalk_library_path/2``
@@ -457,7 +457,7 @@ not advised as different backend Prolog compilers may start with
 different initial working directories, which may result in portability
 problems of your loader files.
 
-The library notation provides functionality inspired by the
+This :term:`library notation` provides functionality inspired by the
 ``file_search_path/2`` mechanism introduced by Quintus Prolog and later
 adopted by some other Prolog compilers.
 
