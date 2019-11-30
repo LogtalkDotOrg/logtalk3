@@ -137,7 +137,7 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 ``insert/4``
 ^^^^^^^^^^^^
 
-Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.
+Inserts a key-value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.
 
 | **Compilation flags:**
 |    ``static``
@@ -160,7 +160,7 @@ Inserts a Key-Value pair into a dictionary, returning the updated dictionary. Wh
 ``delete/4``
 ^^^^^^^^^^^^
 
-Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.
+Deletes a matching key-value pair from a dictionary, returning the updated dictionary.
 
 | **Compilation flags:**
 |    ``static``
@@ -206,7 +206,7 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 ``update/5``
 ^^^^^^^^^^^^
 
-Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.
+Updates the value associated with a key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match the old value.
 
 | **Compilation flags:**
 |    ``static``
@@ -252,7 +252,7 @@ True if the dictionary is empty.
 ``lookup/3``
 ^^^^^^^^^^^^
 
-Lookups a matching Key-Value pair from a dictionary.
+Lookups a matching key-value pair from a dictionary.
 
 | **Compilation flags:**
 |    ``static``

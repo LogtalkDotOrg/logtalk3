@@ -36,7 +36,7 @@ Bi-directional XML parser.
 
    - *Compliance-comprehensive:* It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.
 
-   - *Bi-directional conversions:* The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term ``malformed(<attributes>,<content>)``.
+   - *Bi-directional conversions:* Conversions are not fully symmetrical as weaker XML is accepted than can be generated. Notably, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term ``malformed(<attributes>,<content>)``.
 
 | **Inherited public predicates:**
 |    (none)

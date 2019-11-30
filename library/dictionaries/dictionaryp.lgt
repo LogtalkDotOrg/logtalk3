@@ -59,14 +59,14 @@
 	:- public(insert/4).
 	:- mode(insert(+dictionary, +ground, @term, -dictionary), one).
 	:- info(insert/4, [
-		comment is 'Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.',
+		comment is 'Inserts a key-value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.',
 		argnames is ['OldDictionary', 'Key', 'Value', 'NewDictionary']
 	]).
 
 	:- public(delete/4).
 	:- mode(delete(+dictionary, @ground, ?term, -dictionary), zero_or_one).
 	:- info(delete/4, [
-		comment is 'Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.',
+		comment is 'Deletes a matching key-value pair from a dictionary, returning the updated dictionary.',
 		argnames is ['OldDictionary', 'Key', 'Value', 'NewDictionary']
 	]).
 
@@ -80,7 +80,7 @@
 	:- public(update/5).
 	:- mode(update(+dictionary, @ground, ?term, +term, -dictionary), zero_or_one).
 	:- info(update/5, [
-		comment is 'Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.',
+		comment is 'Updates the value associated with a key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match the old value.',
 		argnames is ['OldDictionary', 'Key', 'OldValue', 'NewValue', 'NewDictionary']
 	]).
 
@@ -95,7 +95,7 @@
 	:- mode(lookup(+ground, ?term, @dictionary), zero_or_one).
 	:- mode(lookup(-ground, ?term, @dictionary), zero_or_more).
 	:- info(lookup/3, [
-		comment is 'Lookups a matching Key-Value pair from a dictionary.',
+		comment is 'Lookups a matching key-value pair from a dictionary.',
 		argnames is ['Key', 'Value', 'Dictionary']
 	]).
 

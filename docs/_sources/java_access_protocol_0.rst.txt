@@ -137,7 +137,7 @@ Creates a new instance using default parameter values.
 ``invoke/1``
 ^^^^^^^^^^^^
 
-Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
+Invokes a method. This is a more efficient compared with relying on the ``forward/1`` handler to resolve methods.
 
 | **Compilation flags:**
 |    ``static``
@@ -160,7 +160,7 @@ Invokes a method. This is a more efficient compared with relying on the forward/
 ``invoke/2``
 ^^^^^^^^^^^^
 
-Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
+Invokes a method. This is a more efficient compared with relying on the ``forward/1`` handler to resolve methods.
 
 | **Compilation flags:**
 |    ``static``

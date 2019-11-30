@@ -32,7 +32,7 @@ A set of operating-system related types.
 
    - *Type file:* For checking if a term is an atom and an existing file.
 
-   - *Type file(Extensions):* For checking if a term is an atom and an existing file with one of the listed extensions (specified as '.ext').
+   - *Type file(Extensions):* For checking if a term is an atom and an existing file with one of the listed extensions (specified as ``'.ext'``).
 
    - *Type directory:* For checking if a term is an atom and an existing directory.
 

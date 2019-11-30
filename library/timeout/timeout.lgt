@@ -24,7 +24,7 @@
 		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2019/11/29,
-		comment is 'Call goal with a time limit predicates.',
+		comment is 'Predicates for calling goal with a time limit.',
 		remarks is [
 			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, XSB, and YAP.'
 		]

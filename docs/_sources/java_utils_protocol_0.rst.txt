@@ -68,7 +68,7 @@ Returns an opaque term that represents the Java value with the given name.
 ``true/1``
 ^^^^^^^^^^
 
-Returns an opaque term that represents the Java value true.
+Returns an opaque term that represents the Java value *true*.
 
 | **Compilation flags:**
 |    ``static``
@@ -91,7 +91,7 @@ Returns an opaque term that represents the Java value true.
 ``false/1``
 ^^^^^^^^^^^
 
-Returns an opaque term that represents the Java value false.
+Returns an opaque term that represents the Java value *false*.
 
 | **Compilation flags:**
 |    ``static``
@@ -114,7 +114,7 @@ Returns an opaque term that represents the Java value false.
 ``void/1``
 ^^^^^^^^^^
 
-Returns an opaque term that represents the Java value void.
+Returns an opaque term that represents the Java value *void*.
 
 | **Compilation flags:**
 |    ``static``
@@ -137,7 +137,7 @@ Returns an opaque term that represents the Java value void.
 ``null/1``
 ^^^^^^^^^^
 
-Returns an opaque term that represents the Java value null.
+Returns an opaque term that represents the Java value *null*.
 
 | **Compilation flags:**
 |    ``static``
@@ -160,7 +160,7 @@ Returns an opaque term that represents the Java value null.
 ``is_true/1``
 ^^^^^^^^^^^^^
 
-True when the argument is the Java value true. Fails if the argument is not instantiated.
+True when the argument is the Java value *true*. Fails if the argument is not instantiated.
 
 | **Compilation flags:**
 |    ``static``
@@ -183,7 +183,7 @@ True when the argument is the Java value true. Fails if the argument is not inst
 ``is_false/1``
 ^^^^^^^^^^^^^^
 
-True when the argument is the Java value false. Fails if the argument is not instantiated.
+True when the argument is the Java value *false*. Fails if the argument is not instantiated.
 
 | **Compilation flags:**
 |    ``static``
@@ -206,7 +206,7 @@ True when the argument is the Java value false. Fails if the argument is not ins
 ``is_void/1``
 ^^^^^^^^^^^^^
 
-True when the argument is the Java value void. Fails if the argument is not instantiated.
+True when the argument is the Java value *void*. Fails if the argument is not instantiated.
 
 | **Compilation flags:**
 |    ``static``
@@ -229,7 +229,7 @@ True when the argument is the Java value void. Fails if the argument is not inst
 ``is_null/1``
 ^^^^^^^^^^^^^
 
-True when the argument is the Java value null. Fails if the argument is not instantiated.
+True when the argument is the Java value *null*. Fails if the argument is not instantiated.
 
 | **Compilation flags:**
 |    ``static``
@@ -344,7 +344,7 @@ Converts an array (a Java reference) to a list of ground Prolog terms. The array
 ``array_list/2``
 ^^^^^^^^^^^^^^^^
 
-Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.
+Converts between an array (a Java reference) and a list. Deprecated. Use the ``terms_to_array/2`` and ``array_to_terms/2-3`` predicates instead in new code.
 
 | **Compilation flags:**
 |    ``static``

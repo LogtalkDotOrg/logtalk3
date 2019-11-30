@@ -571,7 +571,7 @@
 <div id="directory_files/3"> </div></div>
 <div class="section" id="directory-files-3">
 <span id="osp-0-directory-files-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory_files/3</span></code></a><a class="headerlink" href="#directory-files-3" title="Permalink to this headline">¶</a></h3>
-<p>Returns a filtered list of files. Filters: paths/1 - relative/absolute, type/1 - all/regular/directory, extensions/1 - list, prefixes/1 - list, suffixes/1 - list, dot_files/1 - boolean. Invalid options ignored. Defaults equivalent to directory_files/2.</p>
+<p>Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to <code class="docutils literal notranslate"><span class="pre">directory_files/2</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -586,6 +586,17 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(+atom,-list(atom),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">Option <code class="docutils literal notranslate"><span class="pre">paths/1</span></code>: Possible values are <code class="docutils literal notranslate"><span class="pre">relative</span></code> and <code class="docutils literal notranslate"><span class="pre">absolute</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">relative</span></code>.</div>
+<div class="line">Option <code class="docutils literal notranslate"><span class="pre">type/1</span></code>: Possible values are <code class="docutils literal notranslate"><span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">regular</span></code>, <code class="docutils literal notranslate"><span class="pre">directory</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">all</span></code>.</div>
+<div class="line">Option <code class="docutils literal notranslate"><span class="pre">extensions/1</span></code>: Argument is a list of required extensions (using the format <code class="docutils literal notranslate"><span class="pre">'.ext'</span></code>). Default is the empty list.</div>
+<div class="line">Option <code class="docutils literal notranslate"><span class="pre">prefixes/1</span></code>: Argument is a list of required file prefixes (atoms). Default is the empty list.</div>
+<div class="line">Option <code class="docutils literal notranslate"><span class="pre">suffixes/1</span></code>: Argument is a list of required file suffixes (atoms). Default is the empty list.</div>
+<div class="line">Option <code class="docutils literal notranslate"><span class="pre">dot_files/1</span></code>: Possible values are <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</div>
 </div>
 </div>
 <hr class="docutils" />

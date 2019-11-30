@@ -27,7 +27,7 @@
 		comment is 'Types and predicates for type-checking and handling optional terms. Inspired by Haskell.',
 		remarks is [
 			'Type-checking support' - 'Defines type ``maybe(Type)`` for checking optional terms where the value hold by the optional term must be of the given type.',
-			'QuickCheck support' - 'Defines clauses for the ``arbitrary::arbitrary/1-2`` predicates to allow generating random values for the maybe(Type) type.'
+			'QuickCheck support' - 'Defines clauses for the ``arbitrary::arbitrary/1-2`` predicates to allow generating random values for the ``maybe(Type)`` type.'
 		],
 		see_also is [optional, optional(_), type, arbitrary]
 	]).

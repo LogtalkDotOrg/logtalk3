@@ -115,7 +115,7 @@
 	:- public(quick_check/3).
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
 	:- info(quick_check/3, [
-		comment is 'Reified version of the quick_check/2 predicate. Reports the result as ``passed``, ``failed(Goal)`` where ``Goal`` is the test that failed, or ``error(Error,Template)``.',
+		comment is 'Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed``, ``failed(Goal)`` where ``Goal`` is the test that failed, or ``error(Error,Template)``.',
 		argnames is ['Template', 'Result', 'Options']
 	]).
 

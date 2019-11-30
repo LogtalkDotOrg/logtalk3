@@ -115,8 +115,16 @@
 	:- public(directory_files/3).
 	:- mode(directory_files(+atom, -list(atom), +list(compound)), one).
 	:- info(directory_files/3, [
-		comment is 'Returns a filtered list of files. Filters: paths/1 - relative/absolute, type/1 - all/regular/directory, extensions/1 - list, prefixes/1 - list, suffixes/1 - list, dot_files/1 - boolean. Invalid options ignored. Defaults equivalent to directory_files/2.',
-		argnames is ['Directory', 'Files', 'Options']
+		comment is 'Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``.',
+		argnames is ['Directory', 'Files', 'Options'],
+		remarks is [
+			'Option ``paths/1``' - 'Possible values are ``relative`` and ``absolute``. Default is ``relative``.',
+			'Option ``type/1``' - 'Possible values are ``all``, ``regular``, ``directory``. Default is ``all``.',
+			'Option ``extensions/1``' -'Argument is a list of required extensions (using the format ``\'.ext\'``). Default is the empty list.',
+			'Option ``prefixes/1``' - 'Argument is a list of required file prefixes (atoms). Default is the empty list.',
+			'Option ``suffixes/1``' - 'Argument is a list of required file suffixes (atoms). Default is the empty list.',
+			'Option ``dot_files/1``' - 'Possible values are ``true`` and ``false``. Default is ``true``.'
+		]
 	]).
 
 	:- public(directory_exists/1).
