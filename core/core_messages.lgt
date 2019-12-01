@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.86,
+		version is 1.87,
 		author is 'Paulo Moura',
-		date is 2019/11/14,
+		date is 2019/12/01,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -151,6 +151,12 @@
 	message_tokens(completed_scanning_for_missing_entities_predicates) -->
 		['... completed scanning for missing entities and predicates'-[], nl].
 
+	message_tokens(scanning_for_duplicated_library_aliases) -->
+		['Scanning for duplicated library aliases ...'-[], nl].
+
+	message_tokens(completed_scanning_for_duplicated_library_aliases) -->
+		['... completed scanning for duplicated library aliases'-[], nl].
+
 	message_tokens(scanning_for_circular_dependencies) -->
 		['Scanning for circular entity dependencies ...'-[], nl].
 
@@ -203,6 +209,12 @@
 		(	{CircularReferences == []} ->
 			['  (none)'-[], nl, nl]
 		;	circular_references(CircularReferences), [nl]
+		).
+
+	message_tokens(duplicated_library_aliases(Duplicates)) -->
+		(	{Duplicates = [Duplicate]} ->
+			['Duplicated library alias: ~q'-[Duplicate], nl]
+		;	['Duplicated library aliases: ~q'-[Duplicates], nl]
 		).
 
 	% startup messages

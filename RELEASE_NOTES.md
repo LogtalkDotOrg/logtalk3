@@ -109,6 +109,9 @@ Thanks to Paul Brown for the bug report.
 Tools
 _____
 
+* ADDED: Support for detecting duplicated library aliases when calling the
+`logtalk_make/1` predicate with the `check` target.
+
 * ADDED: A boolean option, `sort_predicates/1`, to `lgtdoc` tool for writing
 predicate index lists sorted by predicate name (default value is `false`).
 

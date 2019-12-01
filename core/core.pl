@@ -2921,7 +2921,16 @@ logtalk_make(Target) :-
 	'$lgt_print_message'(warning(make), missing_predicates(Predicates)),
 	fail.
 '$lgt_logtalk_make'(check) :-
-	'$lgt_print_message'(comment(make), completed_scanning_for_missing_entities_predicates).
+	'$lgt_print_message'(comment(make), completed_scanning_for_missing_entities_predicates),
+	fail.
+'$lgt_logtalk_make'(check) :-
+	'$lgt_print_message'(comment(make), scanning_for_duplicated_library_aliases),
+	findall(Alias, logtalk_library_path(Alias, _), Aliases),
+	setof(Duplicate, Rest^('$lgt_select'(Duplicate, Aliases, Rest), '$lgt_member'(Duplicate, Rest)), Duplicates),
+	'$lgt_print_message'(warning(make), duplicated_library_aliases(Duplicates)),
+	fail.
+'$lgt_logtalk_make'(check) :-
+	'$lgt_print_message'(comment(make), completed_scanning_for_duplicated_library_aliases).
 
 '$lgt_logtalk_make'(circular) :-
 	'$lgt_print_message'(comment(make), scanning_for_circular_dependencies),
@@ -3410,7 +3419,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 33, 0, b03)).
+'$lgt_version_data'(logtalk(3, 33, 0, b04)).
 
 
 
