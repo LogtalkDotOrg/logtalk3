@@ -1,17 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample loader file
-%  Last updated on September 16, 2018
+%  Last updated on December 1, 2019
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
-%  
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,7 @@
 %  During development, loader files can be reloaded repeatedly. Therefore,
 %  any generic settings shared by all source files, such as library paths,
 %  global flag values, and initialization goals with side-effects, are best
-%  defined in in a settings file saved in the application directory and by
+%  defined in a settings file saved in the application directory and by
 %  starting Logtalk from that directory.
 
 %  If you need to preload plain Prolog files or Prolog module files (e.g.
