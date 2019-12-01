@@ -21,7 +21,7 @@
 :- object(timeout).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
 		date is 2019/12/02,
 		comment is 'Predicates for calling goal with a time limit.',
@@ -52,11 +52,10 @@
 	:- if(current_logtalk_flag(prolog_dialect, b)).
 
 		call_with_timeout(Goal, Time) :-
-			context(Context),
 			MilliSeconds is truncate(Time * 1000),
 			time_out(Goal, MilliSeconds, Result),
 			(	Result == time_out ->
-				throw(error(timeout(Goal),Context))
+				throw(timeout(Goal))
 			;	true
 			).
 
@@ -77,8 +76,7 @@
 		:- meta_predicate(timeout:timeout(0, *, *)).
 
 		call_with_timeout(Goal, Time) :-
-			context(Context),
-			timeout:timeout(Goal, Time, throw(error(timeout(Goal),Context))),
+			timeout:timeout(Goal, Time, throw(timeout(Goal))),
 			!.
 
 		call_with_timeout(Goal, Time, Result) :-
@@ -95,12 +93,11 @@
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		call_with_timeout(Goal, Time) :-
-			context(Context),
 			MilliSeconds is truncate(Time * 1000),
 			timeout:time_out(Goal, MilliSeconds, Result),
 			!,
 			(	Result == time_out ->
-				throw(error(timeout(Goal),Context))
+				throw(timeout(Goal))
 			;	true
 			).
 
@@ -119,11 +116,10 @@
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
 		call_with_timeout(Goal, Time) :-
-			context(Context),
 			catch(
 				time:call_with_time_limit(Time, Goal),
 				time_limit_exceeded,
-				throw(error(timeout(Goal),Context))
+				throw(timeout(Goal))
 			).
 
 		call_with_timeout(Goal, Time, Result) :-
@@ -142,9 +138,8 @@
 		:- meta_predicate(timed_call(0, *)).
 
 		call_with_timeout(Goal, Time) :-
-			context(Context),
 			MilliSeconds is truncate(Time * 1000),
-			timed_call(Goal, [max(MilliSeconds,throw(error(timeout(Goal),Context)))]),
+			timed_call(Goal, [max(MilliSeconds,throw(timeout(Goal)))]),
 			!.
 
 		call_with_timeout(Goal, Time, Result) :-
@@ -162,12 +157,11 @@
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
 		call_with_timeout(Goal, Time) :-
-			context(Context),
 			MilliSeconds is truncate(Time * 1000),
 			timeout:time_out(Goal, MilliSeconds, Result),
 			!,
 			(	Result == time_out ->
-				throw(error(timeout(Goal),Context))
+				throw(timeout(Goal))
 			;	true
 			).
 

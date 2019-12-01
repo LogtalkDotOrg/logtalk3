@@ -36,7 +36,7 @@
 
 	% call_with_timeout/2 tests
 
-	test(call_with_timeout_2_01, error(timeout((repeat,fail)))) :-
+	test(call_with_timeout_2_01, ball(timeout((repeat,fail)))) :-
 		call_with_timeout((repeat,fail), 0.1).
 
 	test(call_with_timeout_2_02, deterministic) :-
