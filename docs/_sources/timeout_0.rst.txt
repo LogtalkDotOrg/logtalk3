@@ -11,8 +11,8 @@
 Predicates for calling goal with a time limit.
 
 | **Author:** Paulo Moura
-| **Version:** 0.4
-| **Date:** 2019/11/29
+| **Version:** 0.5
+| **Date:** 2019/12/2
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -47,7 +47,7 @@ Public predicates
 ``call_with_timeout/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Calls a goal deterministically with the given time limit (expressed in seconds).
+Calls a goal deterministically with the given time limit (expressed in seconds). Note that the goal may fail or throw an error before exhausting the time limit.
 
 | **Compilation flags:**
 |    ``static``
@@ -62,6 +62,31 @@ Calls a goal deterministically with the given time limit (expressed in seconds).
 | **Exceptions:**
 |    Goal does not complete in the allowed time:
 |        ``timeout(Goal)``
+
+
+------------
+
+.. raw:: html
+
+   <div id="call_with_timeout/3"> </div>
+
+.. index:: call_with_timeout/3
+.. _timeout/0::call_with_timeout/3:
+
+``call_with_timeout/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Calls a goal deterministically with the given time limit (expressed in seconds) returning a refied result: `true`, `fail`, `timeout`, or `error(Error)`.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``call_with_timeout(Goal,Timeout,Result)``
+| **Meta-predicate template:**
+|    ``call_with_timeout(0,*,*)``
+| **Mode and number of proofs:**
+|    ``call_with_timeout(+callable,+positive_number,--atom)`` - ``one``
 
 
 ------------

@@ -22,32 +22,57 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2019/11/29,
+		date is 2019/12/02,
 		comment is 'Unit tests for the "timeout" library.'
 	]).
 
 	:- uses(timeout, [
-		call_with_timeout/2
+		call_with_timeout/2, call_with_timeout/3
 	]).
 
 	cover(timeout).
 
-	throws(timeout_01, error(timeout((repeat,fail)), _)) :-
+	% call_with_timeout/2 tests
+
+	test(call_with_timeout_2_01, error(timeout((repeat,fail)))) :-
 		call_with_timeout((repeat,fail), 0.1).
 
-	succeeds(timeout_02) :-
+	test(call_with_timeout_2_02, deterministic) :-
 		call_with_timeout(true, 0.1).
 
-	deterministic(timeout_03) :-
+	test(call_with_timeout_2_03, deterministic) :-
 		call_with_timeout(repeat, 0.1).
 
-	deterministic(timeout_04) :-
+	test(call_with_timeout_2_04, deterministic) :-
 		call_with_timeout(my_repeat, 0.1).
 
-	fails(timeout_05) :-
+	test(call_with_timeout_2_05, fail) :-
 		call_with_timeout(fail, 0.1).
+
+	test(call_with_timeout_2_06, ball(e)) :-
+		call_with_timeout(throw(e), 0.1).
+
+	% call_with_timeout/3 tests
+
+	test(call_with_timeout_3_01, true(Result == timeout)) :-
+		call_with_timeout((repeat,fail), 0.1, Result).
+
+	test(call_with_timeout_3_02, true(Result == true)) :-
+		call_with_timeout(true, 0.1, Result).
+
+	test(call_with_timeout_3_03, true(Result == true)) :-
+		call_with_timeout(repeat, 0.1, Result).
+
+	test(call_with_timeout_3_04, true(Result == true)) :-
+		call_with_timeout(my_repeat, 0.1, Result).
+
+	test(call_with_timeout_3_05, true(Result == fail)) :-
+		call_with_timeout(fail, 0.1, Result).
+
+	test(call_with_timeout_3_06, true(Result == error(e))) :-
+		call_with_timeout(throw(e), 0.1, Result).
 
 	% auxiliary predicates
 

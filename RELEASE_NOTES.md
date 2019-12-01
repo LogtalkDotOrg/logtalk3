@@ -89,6 +89,8 @@ the `optionals` library.
 
 * ADDED: Convenience predicate `enumerate/2` to the `random` library.
 
+* ADDED: Predicate `call_with_timeout/3` to the `timeout` library.
+
 * ADDED: Support for XSB to the `timeout` library.
 
 * FIXED: Predicates `map/2` and `flat_map/2` of the `optionals` library to also
