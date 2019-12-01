@@ -126,8 +126,8 @@ all the files of your application.
 5. Copy or rename the [`settings-sample.lgt`](settings-sample.lgt) file to
 `settings.lgt`, and modify it to preload developer tools (e.g. the `help`
 and `debugger` tools), to define library aliases for your applications, to
-define default compiler flags (see the [`CUSTOMIZE.md`](CUSTOMIZE.md) file
-for details), and more.
+define default compiler flags, and more (see the comments in the file itself
+and the [`CUSTOMIZE.md`](CUSTOMIZE.md) file for details).
 
 6. Copy to your application directory the [`loader-sample.lgt`](loader-sample.lgt)
 file, rename it to `loader.lgt`, and modify it to load your application source

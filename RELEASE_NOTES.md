@@ -169,7 +169,7 @@ Examples
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* FIXED: Pygments Logtalk lexer syntax error in `analyse_text` function.
+* FIXED: Pygments Logtalk lexer syntax error in the `analyse_text` function.
 
 
 3.32.0 - November 5, 2019

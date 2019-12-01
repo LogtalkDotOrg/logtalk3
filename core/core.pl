@@ -25069,7 +25069,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% from library alias expansion are guaranteed to end with a slash
 		atom_concat(Directory, SettingsFile, SettingsPath),
 		'$lgt_file_exists'(SettingsPath) ->
-		% settings file found; try to load it silently
+		% settings file found; compile and load it silently
 		'$lgt_current_flag_'(report, Report),
 		'$lgt_set_compiler_flag'(report, off),
 		(	catch(logtalk_load(SettingsPath, Options), _, fail) ->
