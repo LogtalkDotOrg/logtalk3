@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2019/11/27,
+		date is 2019/12/01,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',
@@ -61,6 +61,19 @@
 	select(Current, Index, Random, [Head| Tail], [Head| Rest]) :-
 		Next is Current + 1,
 		select(Next, Index, Random, Tail, Rest).
+
+	enumerate(List, Random) :-
+		permutation(List, Permutation),
+		list::member(Random, Permutation).
+
+	enumerate(List, Length, Random) :-
+		random(Float),
+		Index is truncate(Float*Length+1),
+		select(1, Index, Random0, List, Rest),
+		(	Random = Random0
+		;	Length1 is Length - 1,
+			enumerate(Rest, Length1, Random)
+		).
 
 	sequence(Length, Lower, Upper, Sequence) :-
 		integer(Length),

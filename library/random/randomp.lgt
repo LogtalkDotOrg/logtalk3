@@ -21,9 +21,9 @@
 :- protocol(randomp).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2018/08/14,
+		date is 2019/12/01,
 		comment is 'Random number generator protocol.',
 		see_also is [random, backend_random, fast_random]
 	]).
@@ -54,6 +54,13 @@
 	:- info(select/3, [
 		comment is 'Returns a random member of a list and the rest of the list. Fails if the list is empty.',
 		argnames is ['Random', 'List', 'Rest']
+	]).
+
+	:- public(enumerate/2).
+	:- mode(enumerate(+list(term), --term), zero_or_more).
+	:- info(enumerate/2, [
+		comment is 'Enumerates the elements of a list in random order. Fails if the list is empty.',
+		argnames is ['List', 'Random']
 	]).
 
 	:- public(permutation/2).

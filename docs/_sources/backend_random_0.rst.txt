@@ -11,8 +11,8 @@
 Random number generator predicates using the backend Prolog compiler built-in random generator.
 
 | **Author:** Paulo Moura
-| **Version:** 1.6
-| **Date:** 2019/11/27
+| **Version:** 1.7
+| **Date:** 2019/12/1
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,7 +31,7 @@ Random number generator predicates using the backend Prolog compiler built-in ra
    - *Portability:* B-Prolog, CxProlog, ECLiPSe, JIProlog, Lean Prolog, Qu-Prolog, and Quintus Prolog do not provide implementations for the ``get_seed/1`` and ``set_seed/1`` predicates and calling these predicates simply succeed without performing any action.
 
 | **Inherited public predicates:**
-|     :ref:`randomp/0::between/3`  :ref:`randomp/0::get_seed/1`  :ref:`randomp/0::maybe/0`  :ref:`randomp/0::maybe/1`  :ref:`randomp/0::maybe/2`  :ref:`randomp/0::maybe_call/1`  :ref:`randomp/0::maybe_call/2`  :ref:`randomp/0::member/2`  :ref:`randomp/0::permutation/2`  :ref:`randomp/0::random/1`  :ref:`randomp/0::random/3`  :ref:`randomp/0::randseq/4`  :ref:`randomp/0::randset/4`  :ref:`randomp/0::select/3`  :ref:`randomp/0::sequence/4`  :ref:`randomp/0::set/4`  :ref:`randomp/0::set_seed/1`  
+|     :ref:`randomp/0::between/3`  :ref:`randomp/0::enumerate/2`  :ref:`randomp/0::get_seed/1`  :ref:`randomp/0::maybe/0`  :ref:`randomp/0::maybe/1`  :ref:`randomp/0::maybe/2`  :ref:`randomp/0::maybe_call/1`  :ref:`randomp/0::maybe_call/2`  :ref:`randomp/0::member/2`  :ref:`randomp/0::permutation/2`  :ref:`randomp/0::random/1`  :ref:`randomp/0::random/3`  :ref:`randomp/0::randseq/4`  :ref:`randomp/0::randset/4`  :ref:`randomp/0::select/3`  :ref:`randomp/0::sequence/4`  :ref:`randomp/0::set/4`  :ref:`randomp/0::set_seed/1`  
 
 .. contents::
    :local:

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Paulo Moura',
-		date is 2019/05/17,
+		date is 2019/12/01,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
@@ -58,9 +58,19 @@
 		)
 	).
 
+	% enumerate/2 tests
+
+	quick_check(
+		random_enumerate_2_01,
+		random_enumerate_2(-property(list(integer), [Permutation]>>(list::msort(Permutation,[0,1,2,3,4,5,6,7,8,9]))))
+	).
+
 	% permutation/2 tests
 
-	quick_check(random_permutation_2_01, random_permutation_2(-property(list(integer), [Permutation]>>(list::msort(Permutation,[0,1,2,3,4,5,6,7,8,9]))))).
+	quick_check(
+		random_permutation_2_01,
+		random_permutation_2(-property(list(integer), [Permutation]>>(list::msort(Permutation,[0,1,2,3,4,5,6,7,8,9]))))
+	).
 
 	% sequence/4 tests
 
@@ -142,6 +152,9 @@
 
 	random_select_3(Random, [Random| Rest]) :-
 		_RandomObject_::select(Random, [a,b,c,d,e,f,g,h,i,j], Rest).
+
+	random_enumerate_2(List) :-
+		findall(N, _RandomObject_::enumerate([0,1,2,3,4,5,6,7,8,9], N), List).
 
 	random_permutation_2(Permutation) :-
 		_RandomObject_::permutation([0,1,2,3,4,5,6,7,8,9], Permutation).

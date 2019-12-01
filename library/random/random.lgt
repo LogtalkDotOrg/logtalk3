@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2018/08/14,
+		date is 2019/12/01,
 		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.'
@@ -102,6 +102,10 @@
 	select(Current, Index, Random, [Head| Tail], [Head| Rest]) :-
 		Next is Current + 1,
 		select(Next, Index, Random, Tail, Rest).
+
+	enumerate(List, Random) :-
+		permutation(List, Permutation),
+		list::member(Random, Permutation).
 
 	sequence(Length, Lower, Upper, Sequence) :-
 		integer(Length),
