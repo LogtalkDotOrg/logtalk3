@@ -66,15 +66,6 @@
 		permutation(List, Permutation),
 		list::member(Random, Permutation).
 
-	enumerate(List, Length, Random) :-
-		random(Float),
-		Index is truncate(Float*Length+1),
-		select(1, Index, Random0, List, Rest),
-		(	Random = Random0
-		;	Length1 is Length - 1,
-			enumerate(Rest, Length1, Random)
-		).
-
 	sequence(Length, Lower, Upper, Sequence) :-
 		integer(Length),
 		Length >= 0,
