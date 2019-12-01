@@ -100,8 +100,8 @@
 		zero_or_one
 	).
 	:- info(entity_updates/3, [
-		comment is 'True if a predicate ``Updater`` within ``Entity`` makes a dynamic update to ``Update`` (by e.g. asserta/1, retract/1, etc.)',
-		argnames is ['Entity', 'Updater', 'Update']
+		comment is 'True if a predicate ``Updater`` within ``Entity`` makes a dynamic update to ``Updated`` (by using e.g. the ``asserta/1`` or ``retract/1`` predicates).',
+		argnames is ['Entity', 'Updater', 'Updated']
 	]).
 
 	current_entity(Entity) :-

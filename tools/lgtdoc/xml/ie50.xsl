@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
-%  Last updated on June 15, 2019
+%  Last updated on December 1, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -159,7 +159,7 @@
 			<xsl:apply-templates select="public/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<h4 class="code">(see entity ancestors)</h4>
+			<h4 class="code">(no local declarations; see entity ancestors if any)</h4>
 		</xsl:when>
 		<xsl:otherwise>
 			<h4 class="code">(none)</h4>
@@ -171,7 +171,7 @@
 			<xsl:apply-templates select="protected/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<h4 class="code">(see entity ancestors)</h4>
+			<h4 class="code">(no local declarations; see entity ancestors if any)</h4>
 		</xsl:when>
 		<xsl:otherwise>
 			<h4 class="code">(none)</h4>
@@ -183,7 +183,7 @@
 			<xsl:apply-templates select="private/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<h4 class="code">(see entity ancestors)</h4>
+			<h4 class="code">(no local declarations; see entity ancestors if any)</h4>
 		</xsl:when>
 		<xsl:otherwise>
 			<h4 class="code">(none)</h4>

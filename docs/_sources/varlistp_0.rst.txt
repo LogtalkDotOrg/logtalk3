@@ -344,7 +344,7 @@ The two lists are a permutation of the same list.
 ``prefix/2``
 ^^^^^^^^^^^^
 
-Prefix is a prefix of List.
+``Prefix`` is a prefix of ``List``.
 
 | **Compilation flags:**
 |    ``static``
@@ -507,7 +507,7 @@ Removes all elements in the second list from the first list, returning the list 
 ``suffix/2``
 ^^^^^^^^^^^^
 
-Suffix is a suffix of List.
+``Suffix`` is a suffix of ``List``.
 
 | **Compilation flags:**
 |    ``static``

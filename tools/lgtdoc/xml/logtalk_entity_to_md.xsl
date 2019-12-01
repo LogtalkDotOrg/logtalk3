@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into Markdown files
 %
-%  Last updated on November 20, 2019
+%  Last updated on December 1, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -204,7 +204,7 @@
 			<xsl:apply-templates select="public/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<xsl:text>(see entity ancestors)</xsl:text>
+			<xsl:text>(no local declarations; see entity ancestors if any)</xsl:text>
 			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
@@ -219,7 +219,7 @@
 			<xsl:apply-templates select="protected/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<xsl:text>(see entity ancestors)</xsl:text>
+			<xsl:text>(no local declarations; see entity ancestors if any)</xsl:text>
 			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
@@ -234,7 +234,7 @@
 			<xsl:apply-templates select="private/predicate" />
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
-			<xsl:text>(see entity ancestors)</xsl:text>
+			<xsl:text>(no local declarations; see entity ancestors if any)</xsl:text>
 			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>

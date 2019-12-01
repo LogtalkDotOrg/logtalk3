@@ -122,7 +122,7 @@
 	:- public(prefix/2).
 	:- mode(prefix(?list, @list), zero_or_more).
 	:- info(prefix/2, [
-		comment is 'Prefix is a prefix of List.',
+		comment is '``Prefix`` is a prefix of ``List``.',
 		argnames is ['Prefix', 'List']
 	]).
 
@@ -175,7 +175,7 @@
 	:- public(suffix/2).
 	:- mode(suffix(?list, @list), zero_or_more).
 	:- info(suffix/2, [
-		comment is 'Suffix is a suffix of List.',
+		comment is '``Suffix`` is a suffix of ``List``.',
 		argnames is ['Suffix', 'List']
 	]).
 

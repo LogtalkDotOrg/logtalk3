@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into XHTML files
 %
-%  Last updated on November 20, 2019
+%  Last updated on December 1, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -227,7 +227,7 @@
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
-				<p class="comment">(see entity ancestors)</p>
+				<p class="comment">(no local declarations; see entity ancestors if any)</p>
 			</div>
 		</xsl:when>
 		<xsl:otherwise>
@@ -245,7 +245,7 @@
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
-				<p class="comment">(see entity ancestors)</p>
+				<p class="comment">(no local declarations; see entity ancestors if any)</p>
 			</div>
 		</xsl:when>
 		<xsl:otherwise>
@@ -263,7 +263,7 @@
 		</xsl:when>
 		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
-				<p class="comment">(see entity ancestors)</p>
+				<p class="comment">(no local declarations; see entity ancestors if any)</p>
 			</div>
 		</xsl:when>
 		<xsl:otherwise>

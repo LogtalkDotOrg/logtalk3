@@ -10,7 +10,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
 %
-%  Last updated on November 20, 2019
+%  Last updated on December 1, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -469,7 +469,7 @@
 					font-family="serif" 
 					font-style="italic"
 					space-before="10pt">
-				(see entity ancestors)
+				(no local declarations; see entity ancestors if any)
 			</fo:block>
 		</xsl:when>
 		<xsl:otherwise>
@@ -501,7 +501,7 @@
 					font-family="serif" 
 					font-style="italic"
 					space-before="10pt">
-				(see entity ancestors)
+				(no local declarations; see entity ancestors if any)
 			</fo:block>
 		</xsl:when>
 		<xsl:otherwise>
@@ -533,7 +533,7 @@
 					font-family="serif" 
 					font-style="italic"
 					space-before="10pt">
-				(see entity ancestors)
+				(no local declarations; see entity ancestors if any)
 			</fo:block>
 		</xsl:when>
 		<xsl:otherwise>
