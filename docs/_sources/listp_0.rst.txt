@@ -390,7 +390,7 @@ Sorts a list in ascending order (duplicated elements are not removed).
 ``msort/3``
 ^^^^^^^^^^^
 
-Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are not removed).
+Sorts a list using a user-specified comparison predicate modeled on the standard ``compare/3`` predicate (duplicated elements are not removed).
 
 | **Compilation flags:**
 |    ``static``
@@ -576,7 +576,7 @@ The two lists are a permutation of the same list.
 ``prefix/2``
 ^^^^^^^^^^^^
 
-Prefix is a prefix of List.
+``Prefix`` is a prefix of ``List``.
 
 | **Compilation flags:**
 |    ``static``
@@ -599,7 +599,7 @@ Prefix is a prefix of List.
 ``prefix/3``
 ^^^^^^^^^^^^
 
-Prefix is a prefix of length Length of List.
+``Prefix`` is a prefix of length ``Length`` of ``List``.
 
 | **Compilation flags:**
 |    ``static``
@@ -623,7 +623,7 @@ Prefix is a prefix of length Length of List.
 ``proper_prefix/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Prefix is a proper prefix of List.
+``Prefix`` is a proper prefix of ``List``.
 
 | **Compilation flags:**
 |    ``static``
@@ -646,7 +646,7 @@ Prefix is a proper prefix of List.
 ``proper_prefix/3``
 ^^^^^^^^^^^^^^^^^^^
 
-Prefix is a proper prefix of length Length of List.
+``Prefix`` is a proper prefix of length ``Length`` of ``List``.
 
 | **Compilation flags:**
 |    ``static``
@@ -906,7 +906,7 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 ``sort/4``
 ^^^^^^^^^^
 
-Sorts a list using the given key and order. @< and @> orders remove duplicates while @=< and @>= orders keep them. @< and @=< specify ascending order while @> and @>= specify descending order. When the key is zero, the whole term is used for comparisons.
+Sorts a list using the given key and order. Uses the standard term comparison operators for the order. The key selects the argument in each element in the list to use for comparisons. A key value of zero uses the whole element for comparisons.
 
 | **Compilation flags:**
 |    ``static``
@@ -915,6 +915,12 @@ Sorts a list using the given key and order. @< and @> orders remove duplicates w
 |    ``sort(Key,Order,List,Sorted)``
 | **Mode and number of proofs:**
 |    ``sort(+non_negative_integer,+atom,+list,-list)`` - ``one``
+
+| **Remarks:**
+|    Removing duplicates: Use one of the ``@<`` or ``@>`` orders.
+|    Keeping duplicates: Use one of the ``@=<`` or ``@>=`` orders.
+|    Sorting in ascending order: Use one of the ``@<`` or ``@=<`` orders.
+|    Sorting in descending order: Use one of the ``@>`` or ``@>=`` orders.
 
 
 ------------
@@ -1090,7 +1096,7 @@ Suffix is a suffix of List.
 ``suffix/3``
 ^^^^^^^^^^^^
 
-Suffix is a suffix of length Length of List.
+``Suffix`` is a suffix of length ``Length`` of ``List``.
 
 | **Compilation flags:**
 |    ``static``
@@ -1114,7 +1120,7 @@ Suffix is a suffix of length Length of List.
 ``proper_suffix/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Suffix is a proper suffix of List.
+``Suffix`` is a proper suffix of ``List``.
 
 | **Compilation flags:**
 |    ``static``
@@ -1137,7 +1143,7 @@ Suffix is a proper suffix of List.
 ``proper_suffix/3``
 ^^^^^^^^^^^^^^^^^^^
 
-Suffix is a proper suffix of length Length of List.
+``Suffix`` is a proper suffix of length ``Length`` of ``List``.
 
 | **Compilation flags:**
 |    ``static``

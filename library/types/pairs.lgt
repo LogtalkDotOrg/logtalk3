@@ -24,7 +24,10 @@
 		version is 1.5,
 		date is 2019/03/08,
 		author is 'Paulo Moura',
-		comment is 'Useful predicates over lists of pairs (key-value terms).'
+		comment is 'Useful predicates over lists of pairs (key-value terms).',
+		remarks is [
+			'Usage' - 'This object can be loaded independently of other entities in the ``types`` library by using the goal ``logtalk_load(types(pairs))``.'
+		]
 	]).
 
 	:- public(keys_values/3).

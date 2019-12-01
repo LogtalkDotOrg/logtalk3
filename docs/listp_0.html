@@ -674,7 +674,7 @@
 <div id="msort/3"> </div></div>
 <div class="section" id="msort-3">
 <span id="listp-0-msort-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">msort/3</span></code></a><a class="headerlink" href="#msort-3" title="Permalink to this headline">¶</a></h3>
-<p>Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are not removed).</p>
+<p>Sorts a list using a user-specified comparison predicate modeled on the standard <code class="docutils literal notranslate"><span class="pre">compare/3</span></code> predicate (duplicated elements are not removed).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -846,7 +846,7 @@
 <div id="prefix/2"> </div></div>
 <div class="section" id="prefix-2">
 <span id="listp-0-prefix-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">prefix/2</span></code></a><a class="headerlink" href="#prefix-2" title="Permalink to this headline">¶</a></h3>
-<p>Prefix is a prefix of List.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> is a prefix of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -867,7 +867,7 @@
 <div id="prefix/3"> </div></div>
 <div class="section" id="prefix-3">
 <span id="listp-0-prefix-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">prefix/3</span></code></a><a class="headerlink" href="#prefix-3" title="Permalink to this headline">¶</a></h3>
-<p>Prefix is a prefix of length Length of List.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> is a prefix of length <code class="docutils literal notranslate"><span class="pre">Length</span></code> of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -889,7 +889,7 @@
 <div id="proper_prefix/2"> </div></div>
 <div class="section" id="proper-prefix-2">
 <span id="listp-0-proper-prefix-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">proper_prefix/2</span></code></a><a class="headerlink" href="#proper-prefix-2" title="Permalink to this headline">¶</a></h3>
-<p>Prefix is a proper prefix of List.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> is a proper prefix of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -910,7 +910,7 @@
 <div id="proper_prefix/3"> </div></div>
 <div class="section" id="proper-prefix-3">
 <span id="listp-0-proper-prefix-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">proper_prefix/3</span></code></a><a class="headerlink" href="#proper-prefix-3" title="Permalink to this headline">¶</a></h3>
-<p>Prefix is a proper prefix of length Length of List.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> is a proper prefix of length <code class="docutils literal notranslate"><span class="pre">Length</span></code> of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1149,7 +1149,7 @@
 <div id="sort/4"> </div></div>
 <div class="section" id="sort-4">
 <span id="listp-0-sort-4"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">sort/4</span></code></a><a class="headerlink" href="#sort-4" title="Permalink to this headline">¶</a></h3>
-<p>Sorts a list using the given key and order. &#64;&lt; and &#64;&gt; orders remove duplicates while &#64;=&lt; and &#64;&gt;= orders keep them. &#64;&lt; and &#64;=&lt; specify ascending order while &#64;&gt; and &#64;&gt;= specify descending order. When the key is zero, the whole term is used for comparisons.</p>
+<p>Sorts a list using the given key and order. Uses the standard term comparison operators for the order. The key selects the argument in each element in the list to use for comparisons. A key value of zero uses the whole element for comparisons.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1164,6 +1164,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">sort(+non_negative_integer,+atom,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">Removing duplicates: Use one of the <code class="docutils literal notranslate"><span class="pre">&#64;&lt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;&gt;</span></code> orders.</div>
+<div class="line">Keeping duplicates: Use one of the <code class="docutils literal notranslate"><span class="pre">&#64;=&lt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;&gt;=</span></code> orders.</div>
+<div class="line">Sorting in ascending order: Use one of the <code class="docutils literal notranslate"><span class="pre">&#64;&lt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;=&lt;</span></code> orders.</div>
+<div class="line">Sorting in descending order: Use one of the <code class="docutils literal notranslate"><span class="pre">&#64;&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;&gt;=</span></code> orders.</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1317,7 +1326,7 @@
 <div id="suffix/3"> </div></div>
 <div class="section" id="suffix-3">
 <span id="listp-0-suffix-3"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">suffix/3</span></code></a><a class="headerlink" href="#suffix-3" title="Permalink to this headline">¶</a></h3>
-<p>Suffix is a suffix of length Length of List.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is a suffix of length <code class="docutils literal notranslate"><span class="pre">Length</span></code> of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1339,7 +1348,7 @@
 <div id="proper_suffix/2"> </div></div>
 <div class="section" id="proper-suffix-2">
 <span id="listp-0-proper-suffix-2"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">proper_suffix/2</span></code></a><a class="headerlink" href="#proper-suffix-2" title="Permalink to this headline">¶</a></h3>
-<p>Suffix is a proper suffix of List.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is a proper suffix of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1360,7 +1369,7 @@
 <div id="proper_suffix/3"> </div></div>
 <div class="section" id="proper-suffix-3">
 <span id="listp-0-proper-suffix-3"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">proper_suffix/3</span></code></a><a class="headerlink" href="#proper-suffix-3" title="Permalink to this headline">¶</a></h3>
-<p>Suffix is a proper suffix of length Length of List.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is a proper suffix of length <code class="docutils literal notranslate"><span class="pre">Length</span></code> of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

@@ -137,7 +137,7 @@
 	:- meta_predicate(msort(3, *, *)).
 	:- mode(msort(+callable, +list, -list), one).
 	:- info(msort/3, [
-		comment is 'Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are not removed).',
+		comment is 'Sorts a list using a user-specified comparison predicate modeled on the standard ``compare/3`` predicate (duplicated elements are not removed).',
 		argnames is ['Closure', 'List', 'Sorted']
 	]).
 
@@ -193,7 +193,7 @@
 	:- public(prefix/2).
 	:- mode(prefix(?list, +list), zero_or_more).
 	:- info(prefix/2, [
-		comment is 'Prefix is a prefix of List.',
+		comment is '``Prefix`` is a prefix of ``List``.',
 		argnames is ['Prefix', 'List']
 	]).
 
@@ -201,14 +201,14 @@
 	:- mode(prefix(?list, +integer, +list), zero_or_one).
 	:- mode(prefix(?list, -integer, +list), zero_or_more).
 	:- info(prefix/3, [
-		comment is 'Prefix is a prefix of length Length of List.',
+		comment is '``Prefix`` is a prefix of length ``Length`` of ``List``.',
 		argnames is ['Prefix', 'Length', 'List']
 	]).
 
 	:- public(proper_prefix/2).
 	:- mode(proper_prefix(?list, +list), zero_or_more).
 	:- info(proper_prefix/2, [
-		comment is 'Prefix is a proper prefix of List.',
+		comment is '``Prefix`` is a proper prefix of ``List``.',
 		argnames is ['Prefix', 'List']
 	]).
 
@@ -216,7 +216,7 @@
 	:- mode(proper_prefix(?list, +integer, +list), zero_or_one).
 	:- mode(proper_prefix(?list, -integer, +list), zero_or_more).
 	:- info(proper_prefix/3, [
-		comment is 'Prefix is a proper prefix of length Length of List.',
+		comment is '``Prefix`` is a proper prefix of length ``Length`` of ``List``.',
 		argnames is ['Prefix', 'Length', 'List']
 	]).
 
@@ -300,8 +300,14 @@
 	:- public(sort/4).
 	:- mode(sort(+non_negative_integer, +atom, +list, -list), one).
 	:- info(sort/4, [
-		comment is 'Sorts a list using the given key and order. @< and @> orders remove duplicates while @=< and @>= orders keep them. @< and @=< specify ascending order while @> and @>= specify descending order. When the key is zero, the whole term is used for comparisons.',
-		argnames is ['Key', 'Order', 'List', 'Sorted']
+		comment is 'Sorts a list using the given key and order. Uses the standard term comparison operators for the order. The key selects the argument in each element in the list to use for comparisons. A key value of zero uses the whole element for comparisons.',
+		argnames is ['Key', 'Order', 'List', 'Sorted'],
+		remarks is [
+			'Removing duplicates' - 'Use one of the ``@<`` or ``@>`` orders.',
+			'Keeping duplicates' - 'Use one of the ``@=<`` or ``@>=`` orders.',
+			'Sorting in ascending order' - 'Use one of the ``@<`` or ``@=<`` orders.',
+			'Sorting in descending order' - 'Use one of the ``@>`` or ``@>=`` orders.'
+		]
 	]).
 
 	:- public(split/4).
@@ -357,14 +363,14 @@
 	:- mode(suffix(?list, +integer, +list), zero_or_one).
 	:- mode(suffix(?list, -integer, +list), zero_or_more).
 	:- info(suffix/3, [
-		comment is 'Suffix is a suffix of length Length of List.',
+		comment is '``Suffix`` is a suffix of length ``Length`` of ``List``.',
 		argnames is ['Suffix', 'Length', 'List']
 	]).
 
 	:- public(proper_suffix/2).
 	:- mode(proper_suffix(?list, +list), zero_or_more).
 	:- info(proper_suffix/2, [
-		comment is 'Suffix is a proper suffix of List.',
+		comment is '``Suffix`` is a proper suffix of ``List``.',
 		argnames is ['Suffix', 'List']
 	]).
 
@@ -372,7 +378,7 @@
 	:- mode(proper_suffix(?list, +integer, +list), zero_or_one).
 	:- mode(proper_suffix(?list, -integer, +list), zero_or_more).
 	:- info(proper_suffix/3, [
-		comment is 'Suffix is a proper suffix of length Length of List.',
+		comment is '``Suffix`` is a proper suffix of length ``Length`` of ``List``.',
 		argnames is ['Suffix', 'Length', 'List']
 	]).
 
