@@ -513,9 +513,9 @@ values are <code class="docutils literal notranslate"><span class="pre">unsuppor
 <div class="section" id="settings-files">
 <span id="installing-settings"></span><h3>Settings files<a class="headerlink" href="#settings-files" title="Permalink to this headline">¶</a></h3>
 <p>Although is always possible to edit the <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> adapter
-files, the recommended solution to customize compiler flags is to edit
-the <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file in the Logtalk user folder or in the user home
-folder. Depending on the backend Prolog compiler and on the operating-system,
+files, the recommended solution to customize compiler flags is to create a
+<code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file in the Logtalk user folder or in the user home folder.
+Depending on the backend Prolog compiler and on the operating-system,
 is also possible to define per-project settings files by creating a
 <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file in the project directory and by starting Logtalk from
 this directory. At startup, Logtalk tries to load a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file
@@ -533,9 +533,9 @@ values set on the backend Prolog compiler adapter files. When limitations of
 the backend Prolog compiler or on the operating-system prevent Logtalk from
 finding the settings files, these can always be loaded manually after Logtalk
 startup.</p>
-<p>Settings files are normal Logtalk source files (although when
-automatically loaded by Logtalk they are compiled silently with any
-errors being simply ignored). The usual contents is an
+<p>Settings files are normal Logtalk source files (although when automatically
+loaded by Logtalk they are compiled and loaded silently with any errors being
+reported but otherwise ignored). The usual contents is an
 <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> Prolog directive containing calls to the
 <a class="reference internal" href="../refman/predicates/set_logtalk_flag_2.html#predicates-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
 Logtalk built-in predicate and asserting clauses for the

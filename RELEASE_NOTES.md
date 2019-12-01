@@ -33,6 +33,9 @@ template of a Prolog built-in predicate.
 * IMPROVED: Wording of the lint warning for all-solution predicates that may
 share no variables between the template and the goal arguments.
 
+* FIXED: Actually load settings files silently (although errors will be still
+reported but otherwise ignored).
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -393,9 +393,9 @@ Settings files
 ~~~~~~~~~~~~~~
 
 Although is always possible to edit the :term:`backend Prolog compiler` adapter
-files, the recommended solution to customize compiler flags is to edit
-the ``settings.lgt`` file in the Logtalk user folder or in the user home
-folder. Depending on the backend Prolog compiler and on the operating-system,
+files, the recommended solution to customize compiler flags is to create a
+``settings.lgt`` file in the Logtalk user folder or in the user home folder.
+Depending on the backend Prolog compiler and on the operating-system,
 is also possible to define per-project settings files by creating a
 ``settings.lgt`` file in the project directory and by starting Logtalk from
 this directory. At startup, Logtalk tries to load a ``settings.lgt`` file
@@ -417,9 +417,9 @@ the backend Prolog compiler or on the operating-system prevent Logtalk from
 finding the settings files, these can always be loaded manually after Logtalk
 startup.
 
-Settings files are normal Logtalk source files (although when
-automatically loaded by Logtalk they are compiled silently with any
-errors being simply ignored). The usual contents is an
+Settings files are normal Logtalk source files (although when automatically
+loaded by Logtalk they are compiled and loaded silently with any errors being
+reported but otherwise ignored). The usual contents is an
 ``initialization/1`` Prolog directive containing calls to the
 :ref:`predicates_set_logtalk_flag_2`
 Logtalk built-in predicate and asserting clauses for the

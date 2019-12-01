@@ -3419,7 +3419,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 33, 0, b04)).
+'$lgt_version_data'(logtalk(3, 33, 0, b05)).
 
 
 
@@ -25069,10 +25069,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% from library alias expansion are guaranteed to end with a slash
 		atom_concat(Directory, SettingsFile, SettingsPath),
 		'$lgt_file_exists'(SettingsPath) ->
-		% settings file found; try to load it
+		% settings file found; try to load it silently
+		'$lgt_current_flag_'(report, Report),
+		'$lgt_set_compiler_flag'(report, off),
 		(	catch(logtalk_load(SettingsPath, Options), _, fail) ->
 			Result = loaded(Directory)
 		;	Result = error(Directory)
+		),
+		% restore value of report flag if not changed by the settings file itself
+		(	'$lgt_current_flag_'(report, off) ->
+			'$lgt_set_compiler_flag'(report, Report)
+		;	true
 		)
 	;	% no settings file in this directory
 		fail
