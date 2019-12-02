@@ -28,9 +28,9 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2019/11/09,
+		date is 2019/12/02,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'
@@ -224,6 +224,20 @@
 		;	File = File0
 		).
 
+	entity_predicate_line(Other::Functor//Arity, Entity, Line) :-
+		ExtendedArity is Arity + 2,
+		entity_predicate_line(Other::Functor/ExtendedArity, Entity, Line).
+	entity_predicate_line(Other::Functor/Arity, Entity, Line) :-
+		(	current_object(Entity) ->
+			object_property(Entity, provides(Functor/Arity, Other, Properties))
+		;	current_category(Entity) ->
+			category_property(Entity, provides(Functor/Arity, Other, Properties))
+		;	Properties = []
+		),
+		(	member(line_count(Line), Properties) ->
+			true
+		;	Line = -1
+		).
 	entity_predicate_line(Functor//Arity, Entity, Line) :-
 		ExtendedArity is Arity + 2,
 		entity_predicate_line(Functor/ExtendedArity, Entity, Line).

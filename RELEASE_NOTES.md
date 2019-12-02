@@ -132,6 +132,9 @@ with xUnit output processors.
 * IMPROVED: The `lgtunit` tool generated xUnit reports now include the
 contents of the `note/1` test option for skipped tests.
 
+* FIXED: Invalid code coverage XML report when the source code defines clauses
+for multifile predicates.
+
 * FIXED: Generating a code coverage report when using a parametric test object
 to test multiple implementations of the same protocol.
 
