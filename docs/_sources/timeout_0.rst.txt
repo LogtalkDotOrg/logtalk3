@@ -76,7 +76,7 @@ Calls a goal deterministically with the given time limit (expressed in seconds).
 ``call_with_timeout/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Calls a goal deterministically with the given time limit (expressed in seconds) returning a refied result: `true`, `fail`, `timeout`, or `error(Error)`.
+Calls a goal deterministically with the given time limit (expressed in seconds) returning a reified result: ``true``, ``fail``, ``timeout``, or ``error(Error)``.
 
 | **Compilation flags:**
 |    ``static``

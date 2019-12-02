@@ -45,7 +45,7 @@
 	:- meta_predicate(call_with_timeout(0, *, *)).
 	:- mode(call_with_timeout(+callable, +positive_number, --atom), one).
 	:- info(call_with_timeout/3, [
-		comment is 'Calls a goal deterministically with the given time limit (expressed in seconds) returning a refied result: `true`, `fail`, `timeout`, or `error(Error)`.',
+		comment is 'Calls a goal deterministically with the given time limit (expressed in seconds) returning a reified result: ``true``, ``fail``, ``timeout``, or ``error(Error)``.',
 		argnames is ['Goal', 'Timeout', 'Result']
 	]).
 
