@@ -941,9 +941,11 @@ XSLT processor, however. For example:
      --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master \
      -o coverage_report.html coverage_report.xml
 
-Note that the URL should be a permanent link (i.e. it should include the
-commit SHA1). It's also necessary to suppress the local path prefix in
-the generated ``coverage_report.xml`` file. For example:
+Note that the base URL should preferably be a permanent link (i.e. it
+should include the commit SHA1) so that the links to source code files
+and lines remain valid if the source code is later updated. It's also
+necessary to suppress the local path prefix in the generated
+``coverage_report.xml`` file. For example:
 
 ::
 
@@ -960,10 +962,10 @@ the ``$HOME`` prefix by default):
      --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master \
      -o coverage_report.html coverage_report.xml
 
-If you are using Bitbucket, GitHub, or GitLab on your own servers, the
-``url`` parameter may not contain a ``bitbucket``, ``github``, or
-``gitlab`` string. In this case, you can use the XSLT parameter ``host``
-to indicate which service are you running.
+If you are using Bitbucket, GitHub, or GitLab hosted in your own
+servers, the ``url`` parameter may not contain a ``bitbucket``,
+``github``, or ``gitlab`` string. In this case, you can use the XSLT
+parameter ``host`` to indicate which service are you running.
 
 Known issues
 ------------

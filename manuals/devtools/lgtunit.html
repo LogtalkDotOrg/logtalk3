@@ -1086,9 +1086,11 @@ XSLT processor, however. For example:</p>
   -o coverage_report.html coverage_report.xml
 </pre></div>
 </div>
-<p>Note that the URL should be a permanent link (i.e. it should include the
-commit SHA1). It’s also necessary to suppress the local path prefix in
-the generated <code class="docutils literal notranslate"><span class="pre">coverage_report.xml</span></code> file. For example:</p>
+<p>Note that the base URL should preferably be a permanent link (i.e. it
+should include the commit SHA1) so that the links to source code files
+and lines remain valid if the source code is later updated. It’s also
+necessary to suppress the local path prefix in the generated
+<code class="docutils literal notranslate"><span class="pre">coverage_report.xml</span></code> file. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -c xml -s $HOME/logtalk/
 </pre></div>
 </div>
@@ -1101,10 +1103,10 @@ the <code class="docutils literal notranslate"><span class="pre">$HOME</span></c
   -o coverage_report.html coverage_report.xml
 </pre></div>
 </div>
-<p>If you are using Bitbucket, GitHub, or GitLab on your own servers, the
-<code class="docutils literal notranslate"><span class="pre">url</span></code> parameter may not contain a <code class="docutils literal notranslate"><span class="pre">bitbucket</span></code>, <code class="docutils literal notranslate"><span class="pre">github</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">gitlab</span></code> string. In this case, you can use the XSLT parameter <code class="docutils literal notranslate"><span class="pre">host</span></code>
-to indicate which service are you running.</p>
+<p>If you are using Bitbucket, GitHub, or GitLab hosted in your own
+servers, the <code class="docutils literal notranslate"><span class="pre">url</span></code> parameter may not contain a <code class="docutils literal notranslate"><span class="pre">bitbucket</span></code>,
+<code class="docutils literal notranslate"><span class="pre">github</span></code>, or <code class="docutils literal notranslate"><span class="pre">gitlab</span></code> string. In this case, you can use the XSLT
+parameter <code class="docutils literal notranslate"><span class="pre">host</span></code> to indicate which service are you running.</p>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
