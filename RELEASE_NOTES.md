@@ -138,6 +138,9 @@ for multifile predicates.
 * FIXED: Generating a code coverage report when using a parametric test object
 to test multiple implementations of the same protocol.
 
+* FIXED: The `lgtunit` tool to report a predicate clause coverage percentage
+of 100% when no predicate clauses exist instead of 0%.
+
 * FIXED: The `lgtunit` tool would write single line number information on
 failed tests or steps as "between lines" instead of as "at or above line".
 

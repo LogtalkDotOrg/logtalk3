@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.14,
+		version is 7.15,
 		author is 'Paulo Moura',
-		date is 2019/11/02,
+		date is 2019/12/02,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1930,7 +1930,8 @@
 			assertz(covered_(Entity, Other::Functor/Arity, Covered, Covered))
 		),
 		(	Total =:= 0 ->
-			Percentage is 0.0
+			% predicate with no clauses
+			Percentage is 100.0
 		;	Percentage is float(Covered * 100 / Total)
 		),
 		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, Covered, Total, Percentage, Ns)),
@@ -1942,7 +1943,10 @@
 		\+ fired_(Entity, Other::Functor/Arity, _),
 		entity_indicator_number_of_clauses(Entity, Other::Functor/Arity, PredicateIndicator, Total),
 		assertz(covered_(Entity, Other::Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, [])),
+		(	Total =:= 0 ->
+			print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 100.0, []))
+		;	print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, []))
+		),
 		fail.
 	% list category provided multifile predicates that were never called
 	write_entity_coverage_information(Entity) :-
@@ -1951,7 +1955,10 @@
 		\+ fired_(Entity, Other::Functor/Arity, _),
 		entity_indicator_number_of_clauses(Entity, Other::Functor/Arity, PredicateIndicator, Total),
 		assertz(covered_(Entity, Other::Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, [])),
+		(	Total =:= 0 ->
+			print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 100.0, []))
+		;	print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, []))
+		),
 		fail.
 	% list entity own predicates that were called
 	write_entity_coverage_information(Entity) :-
@@ -1965,7 +1972,8 @@
 			assertz(covered_(Entity, Functor/Arity, Covered, Covered))
 		),
 		(	Total =:= 0 ->
-			Percentage is 0.0
+			% predicate with no clauses
+			Percentage is 100.0
 		;	Percentage is float(Covered * 100 / Total)
 		),
 		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, Covered, Total, Percentage, Ns)),
@@ -1978,7 +1986,10 @@
 		\+ (fired_(Entity, Functor/Arity, N), N > 0),
 		properties_indicator_number_of_clauses(Properties, Functor/Arity, PredicateIndicator, Total),
 		assertz(covered_(Entity, Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, [])),
+		(	Total =:= 0 ->
+			print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 100.0, []))
+		;	print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, []))
+		),
 		fail.
 	% list category own predicates that were never called
 	write_entity_coverage_information(Entity) :-
@@ -1987,7 +1998,10 @@
 		\+ fired_(Entity, Functor/Arity, _),
 		properties_indicator_number_of_clauses(Properties, Functor/Arity, PredicateIndicator, Total),
 		assertz(covered_(Entity, Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, [])),
+		(	Total =:= 0 ->
+			print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 100.0, []))
+		;	print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, []))
+		),
 		fail.
 	% print entity summary coverage statistics
 	write_entity_coverage_information(Entity) :-
