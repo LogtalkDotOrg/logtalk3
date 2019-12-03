@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4.1,
+		version is 4.2,
 		author is 'Paulo Moura',
-		date is 2019/09/09,
+		date is 2019/12/03,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -208,8 +208,8 @@
 		).
 
 	spy_predicate(Functor/Arity) :-
-		nonvar(Functor),
-		nonvar(Arity),
+		atom(Functor),
+		integer(Arity),
 		(	spying_predicate_(Functor, Arity) ->
 			true
 		;	assertz(spying_predicate_(Functor, Arity))
@@ -358,7 +358,7 @@
 		!.
 	spying_port_code(_, Goal, _, '+') :-
 		functor(Goal, Functor, Arity),
-		\+ \+ spying_predicate_(Functor, Arity),
+		spying_predicate_(Functor, Arity),
 		!.
 	spying_port_code(_, Goal, ExCtx, '*') :-
 		logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
@@ -423,7 +423,7 @@
 				\+ quasi_skipping_
 			;	quasi_skipping_,
 				(	functor(Goal, Functor, Arity),
-					\+ \+ spying_predicate_(Functor, Arity)
+					spying_predicate_(Functor, Arity)
 				;	logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
 					spying_context_(Sender0, This0, Self0, Goal0),
 					subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal))
@@ -453,7 +453,7 @@
 			retractall(quasi_skipping_),
 			port(fail, N, Goal, TGoal, _, ExCtx, _),
 			fail
-		),			
+		),
 		retractall(skipping_),
 		retractall(quasi_skipping_).
 

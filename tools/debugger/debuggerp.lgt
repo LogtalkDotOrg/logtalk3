@@ -21,9 +21,9 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/10/23,
+		date is 2019/12/03,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` or the character ``?`` at a leashed port.',
@@ -81,10 +81,10 @@
 	]).
 
 	:- public((spy)/1).
-	:- mode(spy(@spy_point), one).
-	:- mode(spy(@list(spy_point)), one).
+	:- mode(spy(@spy_point), zero_or_one).
+	:- mode(spy(@list(spy_point)), zero_or_one).
 	:- info((spy)/1, [
-		comment is 'Sets a line number spy point or a predicate spy point or a list of spy points.',
+		comment is 'Sets a line number spy point, a predicate spy point, or a list of spy points. Fails if a spy point is invalid.',
 		argnames is ['SpyPoint']
 	]).
 

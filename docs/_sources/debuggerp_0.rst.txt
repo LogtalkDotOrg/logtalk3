@@ -11,8 +11,8 @@
 Debugger protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 2.1
-| **Date:** 2016/10/23
+| **Version:** 2.2
+| **Date:** 2019/12/3
 
 | **Compilation flags:**
 |    ``static``
@@ -202,7 +202,7 @@ Stops tracing of calls compiled in debug mode.
 ``spy/1``
 ^^^^^^^^^
 
-Sets a line number spy point or a predicate spy point or a list of spy points.
+Sets a line number spy point, a predicate spy point, or a list of spy points. Fails if a spy point is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -210,8 +210,8 @@ Sets a line number spy point or a predicate spy point or a list of spy points.
 | **Template:**
 |    ``spy(SpyPoint)``
 | **Mode and number of proofs:**
-|    ``spy(@spy_point)`` - ``one``
-|    ``spy(@list(spy_point))`` - ``one``
+|    ``spy(@spy_point)`` - ``zero_or_one``
+|    ``spy(@list(spy_point))`` - ``zero_or_one``
 
 
 ------------

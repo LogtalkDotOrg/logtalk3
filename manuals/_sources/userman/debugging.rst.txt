@@ -218,7 +218,7 @@ a goal:
 
    (Sender, This, Self, Goal)
 
-The debugger is evoked whenever and the spy point goal and the specified
+The debugger is evoked whenever the spy point goal and the specified
 execution context subsumes the goal currently being executed and its
 execution context. The user may establish any number of context spy points
 as necessary. For example, in order to call the debugger whenever a
