@@ -903,11 +903,11 @@ prefix provides a way to solve possible conflicts between Logtalk
 compiled code and other Prolog code. In addition, some Prolog
 compilers automatically hide predicates whose functor start with a
 specific prefix such as the character <code class="docutils literal notranslate"><span class="pre">$</span></code>. Although this is not a
-read-only flag, it should only be changed at startup time and before
+read-only flag, it should only be changed at startup time and <strong>before</strong>
 loading any source files. When changing this flag (e.g. from a
 <a class="reference internal" href="../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a>), restart with the <a class="reference internal" href="#flag-clean"><span class="std std-ref">clean</span></a>
 flag turned on to ensure that any compiled files using the old
-<cite>code_prefix</cite> value will be recompiled.</p>
+<code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> value will be recompiled.</p>
 </dd>
 </dl>
 <span class="target" id="flag-optimize"></span><dl class="simple" id="index-26">

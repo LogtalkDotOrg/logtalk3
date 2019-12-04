@@ -24,7 +24,11 @@ RELEASE NOTES
 3.34.0 - December ??, 2019
 ==========================
 
+Documentation
+-------------
 
+* IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
+initialization code that changes the `code_prefix` default value.
 
 
 3.33.0 - December 3, 2019

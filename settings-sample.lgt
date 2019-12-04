@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on November 31, 2019
+%  Last updated on December 4, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -304,7 +304,9 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 
 
 %  To compile all your source files for debugging using the SWI-Prolog
-%  graphical tracer, uncomment the following lines:
+%  graphical tracer, uncomment the following lines and ensure that this
+%  initialization block is the first one in your settings file as it
+%  changes the default value of the code_prefix flag:
 
 /*
 :- if(current_logtalk_flag(prolog_dialect, swi)).
@@ -330,7 +332,9 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 
 
 %  To compile all your source files for profiling using the SWI-Prolog
-%  graphical profiler, uncomment the following lines:
+%  graphical profiler, uncomment the following lines and ensure that
+%  this initialization block is the first one in your settings file as
+%  it changes the default value of the code_prefix flag:
 
 /*
 :- if(current_logtalk_flag(prolog_dialect, swi)).
@@ -345,7 +349,9 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 %*/
 
 
-%  To use PDT for Logtalk development, uncomment the following lines:
+%  To use PDT for Logtalk development, uncomment the following lines and
+%  ensure that this initialization block is the first one in your settings
+%  file as it changes the default value of the code_prefix flag:
 
 /*
 :- initialization((

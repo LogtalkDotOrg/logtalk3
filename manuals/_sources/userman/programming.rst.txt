@@ -841,11 +841,11 @@ Other flags
    compiled code and other Prolog code. In addition, some Prolog
    compilers automatically hide predicates whose functor start with a
    specific prefix such as the character ``$``. Although this is not a
-   read-only flag, it should only be changed at startup time and before
+   read-only flag, it should only be changed at startup time and **before**
    loading any source files. When changing this flag (e.g. from a
    :term:`settings file`), restart with the :ref:`clean <flag_clean>`
    flag turned on to ensure that any compiled files using the old
-   `code_prefix` value will be recompiled.
+   ``code_prefix`` value will be recompiled.
 
 .. _flag_optimize:
 .. index:: pair: optimize; Flag
