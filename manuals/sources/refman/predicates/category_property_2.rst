@@ -43,11 +43,12 @@ Modes and number of proofs
 Errors
 ------
 
-| Category is neither a variable nor a valid category identifier:
+| ``Category`` is neither a variable nor a valid category identifier:
 |     ``type_error(category_identifier, Category)``
-| Property is neither a variable nor a callable term:
+|
+| ``Property`` is neither a variable nor a callable term:
 |     ``type_error(callable, Property)``
-| Property is a callable term but not a valid category property:
+| ``Property`` is a callable term but not a valid category property:
 |     ``domain_error(category_property, Property)``
 
 Examples

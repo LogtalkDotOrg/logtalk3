@@ -63,9 +63,9 @@ Modes and number of proofs
 Errors
 ------
 
-| Closure is a variable:
+| ``Closure`` is a variable:
 |     ``instantiation_error``
-| Closure is neither a variable nor a callable term:
+| ``Closure`` is neither a variable nor a callable term:
 |     ``type_error(callable, Closure)``
 
 Examples

@@ -63,13 +63,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Goals is a variable:
+| ``Goals`` is a variable:
 |     ``instantiation_error``
-| A goal in Goals is a variable:
+| A goal in ``Goals`` is a variable:
 |     ``instantiation_error``
-| Goals is neither a variable nor a callable term:
+| ``Goals`` is neither a variable nor a callable term:
 |     ``type_error(callable, Goals)``
-| A goal Goal in Goals is neither a variable nor a callable term:
+| A goal ``Goal`` in ``Goals`` is neither a variable nor a callable term:
 |     ``type_error(callable, Goal)``
 
 Examples

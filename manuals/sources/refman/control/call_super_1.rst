@@ -76,13 +76,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Predicate is a variable:
+| ``Predicate`` is a variable:
 |     ``instantiation_error``
-| Predicate is neither a variable nor a callable term:
+| ``Predicate`` is neither a variable nor a callable term:
 |     ``type_error(callable, Predicate)``
-| Predicate, with predicate indicator Name/Arity, is declared private:
+| ``Predicate``, with predicate indicator ``Name/Arity``, is declared private:
 |     ``permission_error(access, private_predicate, Name/Arity)``
-| Predicate, with predicate indicator Name/Arity, is not declared:
+| ``Predicate``, with predicate indicator ``Name/Arity``, is not declared:
 |     ``existence_error(predicate_declaration, Name/Arity)``
 
 Examples

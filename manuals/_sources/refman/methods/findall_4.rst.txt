@@ -45,11 +45,11 @@ Modes and number of proofs
 Errors
 ------
 
-| Goal is a variable:
+| ``Goal`` is a variable:
 |     ``instantiation_error``
-| Goal is neither a variable nor a callable term:
+| ``Goal`` is neither a variable nor a callable term:
 |     ``type_error(callable, Goal)``
-| Goal is a call to a non-existing predicate:
+| ``Goal`` is a call to a non-existing predicate:
 |     ``existence_error(procedure, Predicate)``
 
 Examples

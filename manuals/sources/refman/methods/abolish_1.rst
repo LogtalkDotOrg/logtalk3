@@ -48,27 +48,27 @@ Modes and number of proofs
 Errors
 ------
 
-| Predicate is a variable:
+| ``Predicate`` is a variable:
 |     ``instantiation_error``
-| Functor is a variable:
+| ``Functor`` is a variable:
 |     ``instantiation_error``
-| Arity is a variable:
+| ``Arity`` is a variable:
 |     ``instantiation_error``
-| Predicate is neither a variable nor a valid predicate indicator:
+| ``Predicate`` is neither a variable nor a valid predicate indicator:
 |     ``type_error(predicate_indicator, Predicate)``
-| Functor is neither a variable nor an atom:
+| ``Functor`` is neither a variable nor an atom:
 |     ``type_error(atom, Functor)``
-| Arity is neither a variable nor an integer:
+| ``Arity`` is neither a variable nor an integer:
 |     ``type_error(integer, Arity)``
-| Predicate is statically declared:
+| ``Predicate`` is statically declared:
 |     ``permission_error(modify, predicate_declaration, Name/Arity)``
-| Predicate is a private predicate:
+| ``Predicate`` is a private predicate:
 |     ``permission_error(modify, private_predicate, Name/Arity)``
-| Predicate is a protected predicate:
+| ``Predicate`` is a protected predicate:
 |     ``permission_error(modify, protected_predicate, Name/Arity)``
-| Predicate is a static predicate:
+| ``Predicate`` is a static predicate:
 |     ``permission_error(modify, static_predicate, Name/Arity)``
-| Predicate is not declared for the object receiving the message:
+| ``Predicate`` is not declared for the object receiving the message:
 |     ``existence_error(predicate_declaration, Name/Arity)``
 
 Examples

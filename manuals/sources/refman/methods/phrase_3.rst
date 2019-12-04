@@ -55,9 +55,9 @@ Modes and number of proofs
 Errors
 ------
 
-| NonTerminal is a variable:
+| ``NonTerminal`` is a variable:
 |     ``instantiation_error``
-| NonTerminal is neither a variable nor a callable term:
+| ``NonTerminal`` is neither a variable nor a callable term:
 |     ``type_error(callable, NonTerminal)``
 
 Examples

@@ -47,7 +47,7 @@ Modes and number of proofs
 Errors
 ------
 
-| Context is not a variable:
+| ``Context`` is not a variable:
 |     ``type_error(var, Context)``
 
 Examples

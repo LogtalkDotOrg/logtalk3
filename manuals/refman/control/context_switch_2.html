@@ -242,42 +242,47 @@ available at runtime.</p>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
-<div class="line">Either Object or Goal is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Object is neither a variable nor a valid object identifier:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is neither a variable nor a valid object identifier:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Object)</span></code></div>
 </div>
-<div class="line">Goal is neither a variable nor a callable term:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Goal)</span></code></div>
-</div>
-<div class="line">Object does not contain a local definition for the Goal predicate:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> does not contain a local definition for the Goal predicate:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">Goal)</span></code></div>
 </div>
-<div class="line">Object does not exist:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> does not exist:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,</span> <span class="pre">Object)</span></code></div>
 </div>
-<div class="line">Object was created/compiled with support for context switching calls turned off:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> was created/compiled with support for context switching calls turned off:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">database,</span> <span class="pre">Goal)</span></code></div>
 <div class="line"><br /></div>
 </div>
-<div class="line">Proxy is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Proxy is neither a variable nor an object identifier:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is neither a variable nor an object identifier:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Proxy)</span></code></div>
 </div>
-<div class="line">The predicate Proxy does not exist in the <em>user</em> pseudo-object:</div>
+<div class="line">The predicate <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> does not exist in the <em>user</em> pseudo-object:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">ProxyFunctor/ProxyArity)</span></code></div>
+<div class="line"><br /></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Goal</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Goal</span></code> is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Goal)</span></code></div>
 </div>
 </div>
 </div>

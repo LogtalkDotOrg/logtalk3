@@ -45,17 +45,17 @@ Modes and number of proofs
 Errors
 ------
 
-| Flag is a variable:
+| ``Flag`` is a variable:
 |     ``instantiation_error``
-| Value is a variable:
+| ``Value`` is a variable:
 |     ``instantiation_error``
-| Flag is neither a variable nor an atom:
+| ``Flag`` is neither a variable nor an atom:
 |     ``type_error(atom, Flag)``
-| Flag is an atom but an invalid flag:
+| ``Flag`` is an atom but an invalid flag:
 |     ``domain_error(flag, Flag)``
-| Value is not a valid value for flag Flag:
+| ``Value`` is not a valid value for flag ``Flag``:
 |     ``domain_error(flag_value, Flag + Value)``
-| Flag is a read-only flag:
+| ``Flag`` is a read-only flag:
 |     ``permission_error(modify, flag, Flag)``
 
 Examples

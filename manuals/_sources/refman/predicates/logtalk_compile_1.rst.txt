@@ -60,15 +60,15 @@ Modes and number of proofs
 Errors
 ------
 
-| File is a variable:
+| ``File`` is a variable:
 |     ``instantiation_error``
-| Files is a variable or a list with an element which is a variable:
+| ``Files`` is a variable or a list with an element which is a variable:
 |     ``instantiation_error``
-| File, or an element File of the Files list, is neither a variable nor a source file:
+| ``File``, or an element ``File`` of the ``Files`` list, is neither a variable nor a source file name:
 |     ``type_error(source_file_name, File)``
-| File, or an element File of the Files list, uses library notation but the library does not exist:
+| ``File``, or an element ``File`` of the ``Files`` list, uses library notation but the library does not exist:
 |     ``existence_error(library, Library)``
-| File or an element File of the Files list does not exist:
+| ``File`` or an element ``File`` of the ``Files`` list does not exist:
 |     ``existence_error(file, File)``
 
 Examples

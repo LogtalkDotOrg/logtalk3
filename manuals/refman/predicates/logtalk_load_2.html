@@ -262,43 +262,43 @@ loaded by it.</p>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
-<div class="line">File is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Files is a variable or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Files</span></code> is a variable or a list with an element which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">File, or an element File of the Files list, is neither a variable nor a source file name:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code>, or an element <code class="docutils literal notranslate"><span class="pre">File</span></code> of the <code class="docutils literal notranslate"><span class="pre">Files</span></code> list, is neither a variable nor a source file name:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(source_file_name,</span> <span class="pre">File)</span></code></div>
 </div>
-<div class="line">File, or an element File of the Files list, uses library notation but the library does not exist:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code>, or an element <code class="docutils literal notranslate"><span class="pre">File</span></code> of the <code class="docutils literal notranslate"><span class="pre">Files</span></code> list, uses library notation but the library does not exist:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(library,</span> <span class="pre">Library)</span></code></div>
 </div>
-<div class="line">File or an element File of the Files list, does not exist:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> or an element <code class="docutils literal notranslate"><span class="pre">File</span></code> of the <code class="docutils literal notranslate"><span class="pre">Files</span></code> list, does not exist:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,</span> <span class="pre">File)</span></code></div>
 </div>
-<div class="line">Flags is a variable or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Flags</span></code> is a variable or a list with an element which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Flags is neither a variable nor a proper list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Flags</span></code> is neither a variable nor a proper list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Flags)</span></code></div>
 </div>
-<div class="line">An element Flag of the Flags list is not a valid compiler flag:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Flag</span></code> of the <code class="docutils literal notranslate"><span class="pre">Flags</span></code> list is not a valid compiler flag:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compiler_flag,</span> <span class="pre">Flag)</span></code></div>
 </div>
-<div class="line">An element Flag of the Flags list defines a value for a read-only compiler flag:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Flag</span></code> of the <code class="docutils literal notranslate"><span class="pre">Flags</span></code> list defines a value for a read-only compiler flag:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">flag,</span> <span class="pre">Flag)</span></code></div>
 </div>
-<div class="line">An element Flag of the Flags list defines an invalid value for a flag:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Flag</span></code> of the <code class="docutils literal notranslate"><span class="pre">Flags</span></code> list defines an invalid value for a flag:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(flag_value,</span> <span class="pre">Flag+Value)</span></code></div>
 </div>

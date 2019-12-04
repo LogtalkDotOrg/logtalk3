@@ -50,13 +50,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Predicate is neither a variable nor a valid predicate indicator:
+| ``Predicate`` is neither a variable nor a valid predicate indicator:
 |     ``type_error(predicate_indicator, Predicate)``
-| Predicate is a Name/Arity term but Functor is neither a variable nor an atom:
+| ``Predicate`` is a ``Name/Arity`` term but ``Functor`` is neither a variable nor an atom:
 |     ``type_error(atom, Name)``
-| Predicate is a Name/Arity term but Arity is neither a variable nor an integer:
+| ``Predicate`` is a ``Name/Arity`` term but ``Arity`` is neither a variable nor an integer:
 |     ``type_error(integer, Arity)``
-| Predicate is a Name/Arity term but Arity is a negative integer:
+| ``Predicate`` is a ``Name/Arity`` term but ``Arity`` is a negative integer:
 |     ``domain_error(not_less_than_zero, Arity)``
 
 Examples

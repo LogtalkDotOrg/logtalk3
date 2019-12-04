@@ -57,11 +57,11 @@ Modes and number of proofs
 Errors
 ------
 
-| Goal is a variable:
+| ``Goal`` is a variable:
 |     ``instantiation_error``
-| Goal is neither a variable nor a callable term:
+| ``Goal`` is neither a variable nor a callable term:
 |     ``type_error(callable, Goal)``
-| Tag is a variable:
+| ``Tag`` is a variable:
 |     ``instantiation_error``
 
 Examples

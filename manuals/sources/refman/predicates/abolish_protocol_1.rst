@@ -40,13 +40,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Protocol is a variable:
+| ``Protocol`` is a variable:
 |     ``instantiation_error``
-| Protocol is neither a variable nor a valid protocol identifier:
+| ``Protocol`` is neither a variable nor a valid protocol identifier:
 |     ``type_error(protocol_identifier, Protocol)``
-| Protocol is an identifier of a static protocol:
+| ``Protocol`` is an identifier of a static protocol:
 |     ``permission_error(modify, static_protocol, Protocol)``
-| Protocol does not exist:
+| ``Protocol`` does not exist:
 |     ``existence_error(protocol, Protocol)``
 
 Examples

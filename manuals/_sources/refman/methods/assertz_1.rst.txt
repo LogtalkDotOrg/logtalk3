@@ -55,19 +55,19 @@ Modes and number of proofs
 Errors
 ------
 
-| Head is a variable:
+| ``Head`` is a variable:
 |     ``instantiation_error``
-| Head is a neither a variable nor a callable term:
+| ``Head`` is a neither a variable nor a callable term:
 |     ``type_error(callable, Head)``
-| Body cannot be converted to a goal:
+| ``Body`` cannot be converted to a goal:
 |     ``type_error(callable, Body)``
-| The predicate indicator of Head, Name/Arity, is that of a private predicate:
+| The predicate indicator of ``Head``, ``Name/Arity``, is that of a private predicate:
 |     ``permission_error(modify, private_predicate, Name/Arity)``
-| The predicate indicator of Head, Name/Arity, is that of a protected predicate:
+| The predicate indicator of ``Head``, ``Name/Arity``, is that of a protected predicate:
 |     ``permission_error(modify, protected_predicate, Name/Arity)``
-| The predicate indicator of Head, Name/Arity, is that of a static predicate:
+| The predicate indicator of ``Head``, ``Name/Arity``, is that of a static predicate:
 |     ``permission_error(modify, static_predicate, Name/Arity)``
-| The predicate indicator of Head, Name/Arity, does not match a declared predicate and the target object was created/compiled with support for dynamic declaration of predicates turned off:
+| The predicate indicator of ``Head``, ``Name/Arity``, does not match a declared predicate and the target object was created/compiled with support for dynamic declaration of predicates turned off:
 |     ``permission_error(create, predicate_declaration, Name/Arity)``
 
 Examples

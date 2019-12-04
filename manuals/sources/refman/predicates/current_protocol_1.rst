@@ -41,7 +41,7 @@ Modes and number of proofs
 Errors
 ------
 
-| Protocol is neither a variable nor a valid protocol identifier:
+| ``Protocol`` is neither a variable nor a valid protocol identifier:
 |     ``type_error(protocol_identifier, Protocol)``
 
 Examples

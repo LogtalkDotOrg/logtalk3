@@ -51,23 +51,23 @@ Modes and number of proofs
 Errors
 ------
 
-| Relations, Directives, or Clauses is a variable:
+| ``Relations``, ``Directives``, or ``Clauses`` is a variable:
 |     ``instantiation_error``
-| Identifier is neither a variable nor a valid category identifier:
+| ``Identifier`` is neither a variable nor a valid category identifier:
 |     ``type_error(category_identifier, Identifier)``
-| Identifier is already in use:
+| ``Identifier`` is already in use:
 |     ``permission_error(modify, category, Identifier)``
 |     ``permission_error(modify, object, Identifier)``
 |     ``permission_error(modify, protocol, Identifier)``
-| Relations is neither a variable nor a proper list:
+| ``Relations`` is neither a variable nor a proper list:
 |     ``type_error(list, Relations)``
 | Repeated entity relation clause:
 |     ``permission_error(repeat, entity_relation, implements/1)``
 |     ``permission_error(repeat, entity_relation, extends/1)``
 |     ``permission_error(repeat, entity_relation, complements/1)``
-| Directives is neither a variable nor a proper list:
+| ``Directives`` is neither a variable nor a proper list:
 |     ``type_error(list, Directives)``
-| Clauses is neither a variable nor a proper list:
+| ``Clauses`` is neither a variable nor a proper list:
 |     ``type_error(list, Clauses)``
 
 Examples

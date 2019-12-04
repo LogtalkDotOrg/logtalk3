@@ -45,7 +45,7 @@ Modes and number of proofs
 Errors
 ------
 
-| Tag is a variable:
+| ``Tag`` is a variable:
 |     ``instantiation_error``
 
 Examples

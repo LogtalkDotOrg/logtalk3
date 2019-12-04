@@ -51,19 +51,19 @@ Modes and number of proofs
 Errors
 ------
 
-| Either Relations or Directives is a variable:
+| Either ``Relations`` or ``Directives`` is a variable:
 |     ``instantiation_error``
-| Identifier is neither a variable nor a valid protocol identifier:
+| ``Identifier`` is neither a variable nor a valid protocol identifier:
 |     ``type_error(protocol_identifier, Identifier)``
-| Identifier is already in use:
+| ``Identifier`` is already in use:
 |     ``permission_error(modify, category, Identifier)``
 |     ``permission_error(modify, object, Identifier)``
 |     ``permission_error(modify, protocol, Identifier)``
-| Relations is neither a variable nor a proper list:
+| ``Relations`` is neither a variable nor a proper list:
 |     ``type_error(list, Relations)``
 | Repeated entity relation clause:
 |     ``permission_error(repeat, entity_relation, extends/1)``
-| Directives is neither a variable nor a proper list:
+| ``Directives`` is neither a variable nor a proper list:
 |     ``type_error(list, Directives)``
 
 Examples

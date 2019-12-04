@@ -41,9 +41,9 @@ Modes and number of proofs
 Errors
 ------
 
-| Category is neither a variable nor a valid category identifier:
+| ``Category`` is neither a variable nor a valid category identifier:
 |     ``type_error(category_identifier, Prototype)``
-| Object is neither a variable nor a valid object identifier:
+| ``Object`` is neither a variable nor a valid object identifier:
 |     ``type_error(object_identifier, Parent)``
 
 Examples

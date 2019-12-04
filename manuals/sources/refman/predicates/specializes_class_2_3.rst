@@ -44,13 +44,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Class is neither a variable nor a valid object identifier:
+| ``Class`` is neither a variable nor a valid object identifier:
 |     ``type_error(object_identifier, Class)``
-| Superclass is neither a variable nor a valid object identifier:
+| ``Superclass`` is neither a variable nor a valid object identifier:
 |     ``type_error(object_identifier, Superclass)``
-| Scope is neither a variable nor an atom:
+| ``Scope`` is neither a variable nor an atom:
 |     ``type_error(atom, Scope)``
-| Scope is an atom but an invalid entity scope:
+| ``Scope`` is an atom but an invalid entity scope:
 |     ``domain_error(scope, Scope)``
 
 Examples

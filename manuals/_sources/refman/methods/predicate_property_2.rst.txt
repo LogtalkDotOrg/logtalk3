@@ -54,11 +54,11 @@ Modes and number of proofs
 Errors
 ------
 
-| Predicate is a variable:
+| ``Predicate`` is a variable:
 |     ``instantiation_error``
-| Predicate is neither a variable nor a callable term:
+| ``Predicate`` is neither a variable nor a callable term:
 |     ``type_error(callable, Predicate)``
-| Property is neither a variable nor a valid predicate property:
+| ``Property`` is neither a variable nor a valid predicate property:
 |     ``domain_error(predicate_property, Property)``
 
 Examples

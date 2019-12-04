@@ -41,9 +41,9 @@ Modes and number of proofs
 Errors
 ------
 
-| Exception is a variable:
+| ``Exception`` is a variable:
 |     ``instantiation_error``
-| Exception does not unify with the second argument of any call of :ref:`methods_catch_3`:
+| ``Exception`` does not unify with the second argument of any call of :ref:`methods_catch_3`:
 |     ``system_error``
 
 Examples

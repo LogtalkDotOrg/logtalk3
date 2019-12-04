@@ -54,13 +54,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Message is a variable:
+| ``Message`` is a variable:
 |     ``instantiation_error``
-| Message is neither a variable nor a callable term:
+| ``Message`` is neither a variable nor a callable term:
 |     ``type_error(callable, Message)``
-| Message, with predicate indicator Name/Arity, is declared private:
+| ``Message``, with predicate indicator ``Name/Arity``, is declared private:
 |     ``permission_error(access, private_predicate, Name/Arity)``
-| Message, with predicate indicator Name/Arity, is not declared:
+| ``Message``, with predicate indicator ``Name/Arity``, is not declared:
 |     ``existence_error(predicate_declaration, Name/Arity)``
 
 Examples

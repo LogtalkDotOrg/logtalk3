@@ -41,7 +41,7 @@ Modes and number of proofs
 Errors
 ------
 
-| Object is neither a variable nor a valid object identifier:
+| ``Object`` is neither a variable nor a valid object identifier:
 |     ``type_error(object_identifier, Object)``
 
 Examples

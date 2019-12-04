@@ -41,7 +41,7 @@ Modes and number of proofs
 Errors
 ------
 
-| Category is neither a variable nor a valid category identifier:
+| ``Category`` is neither a variable nor a valid category identifier:
 |     ``type_error(category_identifier, Category)``
 
 Examples

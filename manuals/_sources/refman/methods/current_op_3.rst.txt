@@ -42,15 +42,15 @@ Modes and number of proofs
 Errors
 ------
 
-| Priority is neither a variable nor an integer:
+| ``Priority`` is neither a variable nor an integer:
 |     ``type_error(integer, Priority)``
-| Priority is an integer but not a valid operator priority:
+| ``Priority`` is an integer but not a valid operator priority:
 |     ``domain_error(operator_priority, Priority)``
-| Specifier is neither a variable nor an atom:
+| ``Specifier`` is neither a variable nor an atom:
 |     ``type_error(atom, Specifier)``
-| Specifier is an atom but not a valid operator specifier:
+| ``Specifier`` is an atom but not a valid operator specifier:
 |     ``domain_error(operator_specifier, Specifier)``
-| Operator is neither a variable nor an atom:
+| ``Operator`` is neither a variable nor an atom:
 |     ``type_error(atom, Operator)``
 
 Examples

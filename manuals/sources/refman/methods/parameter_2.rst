@@ -56,13 +56,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Number is a variable:
+| ``Number`` is a variable:
 |     ``instantiation_error``
-| Number is neither a variable nor an integer value:
+| ``Number`` is neither a variable nor an integer value:
 |     ``type_error(integer, Number)``
-| Number is smaller than one or greater than the parametric entity identifier arity:
+| ``Number`` is smaller than one or greater than the parametric entity identifier arity:
 |     ``domain_error(out_of_range, Number)``
-| Entity identifier is not a compound term:
+| ``Entity`` identifier is not a compound term:
 |     ``type_error(compound, Entity)``
 
 Examples

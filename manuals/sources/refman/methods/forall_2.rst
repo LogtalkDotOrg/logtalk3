@@ -45,11 +45,11 @@ Modes and number of proofs
 Errors
 ------
 
-| Either Generator or Test is a variable:
+| Either ``Generator`` or ``Test`` is a variable:
 |     ``instantiation_error``
-| Generator is neither a variable nor a callable term:
+| ``Generator`` is neither a variable nor a callable term:
 |     ``type_error(callable, Generator)``
-| Test is neither a variable nor a callable term:
+| ``Test`` is neither a variable nor a callable term:
 |     ``type_error(callable, Test)``
 
 Examples

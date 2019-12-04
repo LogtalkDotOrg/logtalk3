@@ -40,13 +40,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Object is a variable:
+| ``Object`` is a variable:
 |     ``instantiation_error``
-| Object is neither a variable nor a valid object identifier:
+| ``Object`` is neither a variable nor a valid object identifier:
 |     ``type_error(object_identifier, Object)``
-| Object is an identifier of a static object:
+| ``Object`` is an identifier of a static object:
 |     ``permission_error(modify, static_object, Object)``
-| Object does not exist:
+| ``Object`` does not exist:
 |     ``existence_error(object, Object)``
 
 Examples

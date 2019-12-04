@@ -45,13 +45,13 @@ Modes and number of proofs
 Errors
 ------
 
-| Object is neither a variable nor a valid object identifier:
+| ``Object`` is neither a variable nor a valid object identifier:
 |     ``type_error(object_identifier, Object)``
-| Category is neither a variable nor a valid category identifier:
+| ``Category`` is neither a variable nor a valid category identifier:
 |     ``type_error(category_identifier, Category)``
-| Scope is neither a variable nor an atom:
+| ``Scope`` is neither a variable nor an atom:
 |     ``type_error(atom, Scope)``
-| Scope is an atom but an invalid entity scope:
+| ``Scope`` is an atom but an invalid entity scope:
 |     ``domain_error(scope, Scope)``
 
 Examples
