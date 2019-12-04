@@ -37,9 +37,11 @@ Steps = [1-'Boil the peas.',2-'Mash the peas',3-'Add salt and mix.']
 yes
 
 
-% find out what dishes you can cook with green peas:
+% find out what dishes you can cook with green peas (we check that
+% we have a ground recipe to skip the generic recipe represented 
+% by the recipe/3 parametric object):
 
-| ?- conforms_to_protocol(Recipe, recipep), Recipe::ingredient(peas).
+| ?- conforms_to_protocol(Recipe, recipep), ground(Recipe), Recipe::ingredient(peas).
 Recipe = green_soup ? ;
 Recipe = mashed_peas ? ;
 no
@@ -50,21 +52,21 @@ no
 | ?- logtalk_load(recipes(patch_1)).
 yes
 
-% you always get into trouble while making green soup:
-
-| ?- green_soup::assertz(level(hard)).
-yes
-
-
-% but most recipes are easy; add a second patch to define a default value
-% for the level/1 descriptor to all recipes that don't specify a different
-% level and check it:
-
-| ?- logtalk_load(recipes(patch_1)).
-yes
+% recipes are now easy by default:
 
 | ?- mashed_peas::level(Level).
 Level = easy
+yes
+
+
+% but you always get into trouble while making green soup; add a second patch
+% to define the level value for this recipe to be "hard":
+
+| ?- logtalk_load(recipes(patch_2)).
+yes
+
+| ?- green_soup::level(Level).
+Level = hard
 yes
 
 

@@ -20,9 +20,9 @@
 
 % extend the first patch with a default value for the level/1 descriptor
 
-:- category(recipe_level_default_value,
-	complements(proto_recipe)).
+:- category(green_soup_level_value,
+	complements(green_soup)).
 
-	level(easy).
+	level(hard).
 
 :- end_category.

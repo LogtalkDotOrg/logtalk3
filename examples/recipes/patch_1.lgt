@@ -19,12 +19,12 @@
 
 
 % add a new descriptor to the recipes for defining the level of expertize
-% require to cook a meal
+% require to cook a meal and sets its default value to "easy"
 
 :- category(add_recipe_level_descriptor,
 	complements(proto_recipe)).
 
 	:- public(level/1).
-	:- dynamic(level/1).
+	level(easy).
 
 :- end_category.

@@ -30,6 +30,12 @@ Documentation
 * IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
 initialization code that changes the `code_prefix` default value.
 
+Examples
+--------
+
+* IMPROVED: The `recipes` hot patching example to better illustrate adding
+clauses to patched objects.
+
 
 3.33.0 - December 3, 2019
 =========================

@@ -42,4 +42,4 @@ The main files defined in this example are:
 	enumerating recipes while abstracting their representation
 
 - `patch_1.lgt` and `patch_2.lgt`  
-	categories used to illustrate hot patching of the `proto_recipe` object
+	categories used to illustrate hot patching of the example objects
