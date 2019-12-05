@@ -3074,10 +3074,10 @@ logtalk_make(Target) :-
 	'$lgt_entity_property_'(Entity, calls(Functor/Arity, _, _, _, Location)),
 	(	'$lgt_current_object_'(Entity, _, Dcl, Def, _, _, _, DDcl, DDef, _, Flags) ->
 		\+ '$lgt_object_property_declares'(Entity, Dcl, DDcl, Flags, Functor/Arity, _),
-		\+ '$lgt_object_property_defines'(Entity, Def, DDef, Functor/Arity, _, _)
-	;	'$lgt_current_category_'(Entity, _, Dcl, Def, _, _),
+		\+ '$lgt_object_property_defines'(Entity, Def, DDef, Functor/Arity, Flags, _)
+	;	'$lgt_current_category_'(Entity, _, Dcl, Def, _, Flags),
 		\+ '$lgt_category_property_declares'(Entity, Dcl, Functor/Arity, _),
-		\+ '$lgt_category_property_defines'(Entity, Def, Functor/Arity, _, _)
+		\+ '$lgt_category_property_defines'(Entity, Def, Functor/Arity, Flags, _)
 	),
 	'$lgt_missing_reference'(Entity, Location, Reference).
 
@@ -3419,7 +3419,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 34, 0, b01)).
+'$lgt_version_data'(logtalk(3, 34, 0, b02)).
 
 
 

@@ -30,6 +30,10 @@ Logtalk compiler and runtime
 * IMPROVED: Take into account foreign and auto-loaded predicates when compiling
 a module as an object also when compiling arbitrary goals used as directives.
 
+* FIXED: Possible instantiation error when running `logtalk_make(check)` while
+checking for missing predicates when there are dynamic or multifile predicates
+with no local clauses.
+
 Documentation
 -------------
 
