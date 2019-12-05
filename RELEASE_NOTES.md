@@ -24,6 +24,12 @@ RELEASE NOTES
 3.34.0 - December ??, 2019
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Take into account foreign and auto-loaded predicates when compiling
+a module as an object also when compiling arbitrary goals used as directives.
+
 Documentation
 -------------
 

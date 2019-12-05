@@ -8510,8 +8510,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_pp_entity_meta_directive_'(directive(Directive, Meta), SourceData, Lines)).
 
 '$lgt_compile_directive'(Directive, Ctx) :-
-	'$lgt_pp_module_'(_),
+	'$lgt_pp_module_'(Current),
 	% we're compiling a module as an object
+	Directive \= use_module(_),
+	Directive \= ensure_loaded(_),
+	% but not unsupported directives that the backend Prolog compiler adapter
+	% file failed to expand into supported use_module/2 directives
 	(	'$lgt_pp_defines_predicate_'(Directive, _, _, _, _, _)
 	;	'$lgt_pp_uses_predicate_'(_, _, Directive, _)
 		% directive is a query for a locally defined predicate
@@ -8519,11 +8523,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% or a predicate referenced in a use_module/2 directive
 	;	'$lgt_built_in_predicate'(Directive)
 		% or a built-in predicate
+	;	\+ '$lgt_control_construct'(Directive),
+		'$lgt_find_visible_module_predicate'(Current, Module, Directive),
+		functor(Directive, Functor, Arity),
+		'$lgt_comp_ctx_mode'(Ctx, Mode),
+		'$lgt_remember_called_module_predicate'(Mode, Module, Functor/Arity)
 	),
-	% but not unsupported directives that the backend Prolog compiler adapter
-	% file failed to expand into supported use_module/2 directives
-	Directive \= use_module(_),
-	Directive \= ensure_loaded(_),
 	!,
 	% compile query as an initialization goal
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
@@ -15535,10 +15540,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Obj),
 	Obj = {Proxy},
 	!,
-	'$lgt_check'(var_or_callable, Proxy),
 	(	var(Proxy) ->
 		CallProxy = call(Proxy)
-	;	CallProxy = Proxy
+	;	callable(Proxy) ->
+		CallProxy = Proxy
+	;	throw(type_error(callable, Proxy))
 	),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
