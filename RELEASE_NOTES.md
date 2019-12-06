@@ -42,6 +42,9 @@ for duplicated operator declarations.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The SWI-Prolog adapter file to support finding predicates that are
+visible in a module via an imported module.
+
 * FIXED: ECLiPSe, SWI-Prolog, and YAP adapter file expansion of `reexport/1`
 directives.
 

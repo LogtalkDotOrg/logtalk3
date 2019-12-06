@@ -1277,6 +1277,10 @@ term_expansion(
 
 '$lgt_find_visible_module_predicate'(_Current, Module, Predicate) :-
 	predicate_property(Predicate, imported_from(Module)).
+'$lgt_find_visible_module_predicate'(Current, Module, Predicate) :-
+	import_module(Current, Module),
+	predicate_property(Predicate, defined),
+	!.
 
 
 
