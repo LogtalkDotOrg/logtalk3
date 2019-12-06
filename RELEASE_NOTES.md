@@ -36,6 +36,9 @@ with no local clauses.
 
 * FIXED: Duplicated missing `multifile/1` directive warnings.
 
+* FIXED: Typo in permission error when compiling scope directives and checking
+for duplicated operator declarations.
+
 Documentation
 -------------
 

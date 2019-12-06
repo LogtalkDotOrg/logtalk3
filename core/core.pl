@@ -9516,7 +9516,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	true
 		)
 	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _, _, _) ->
-		throw(permission_error(modify, predicate_scope, op(Priority, Specifier, Operator)))
+		throw(permission_error(modify, operator_scope, op(Priority, Specifier, Operator)))
 	;	true
 	).
 
