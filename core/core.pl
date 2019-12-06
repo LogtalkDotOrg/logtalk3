@@ -3421,7 +3421,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 34, 0, b03)).
+'$lgt_version_data'(logtalk(3, 34, 0, b04)).
 
 
 
@@ -9501,7 +9501,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
 		;	true
 		)
-	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _, _, _) ->
+	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, OriginalScope, _, _),
+		OriginalScope \== l ->
 		throw(permission_error(modify, operator_scope, op(Priority, Specifier, Operator)))
 	;	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators), Scope)
 	).
@@ -9515,7 +9516,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
 		;	true
 		)
-	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _, _, _) ->
+	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, OriginalScope, _, _),
+		OriginalScope \== l ->
 		throw(permission_error(modify, operator_scope, op(Priority, Specifier, Operator)))
 	;	true
 	).
