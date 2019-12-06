@@ -34,6 +34,8 @@ a module as an object also when compiling arbitrary goals used as directives.
 checking for missing predicates when there are dynamic or multifile predicates
 with no local clauses.
 
+* FIXED: Duplicated missing `multifile/1` directive warnings.
+
 Documentation
 -------------
 

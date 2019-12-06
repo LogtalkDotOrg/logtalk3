@@ -409,6 +409,8 @@
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/3).
 % '$lgt_pp_missing_discontiguous_directive_'(Head, File, Lines)
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).
+% '$lgt_pp_missing_multifile_directive_'(PI, File, Lines)
+:- dynamic('$lgt_pp_missing_multifile_directive_'/3).
 
 % '$lgt_pp_previous_predicate_'(Head, Mode)
 :- dynamic('$lgt_pp_previous_predicate_'/2).
@@ -3419,7 +3421,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 34, 0, b02)).
+'$lgt_version_data'(logtalk(3, 34, 0, b03)).
 
 
 
@@ -7658,6 +7660,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_missing_meta_predicate_directive_'(_, _, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
+	retractall('$lgt_pp_missing_multifile_directive_'(_, _, _)),
 	retractall('$lgt_pp_previous_predicate_'(_, _)),
 	retractall('$lgt_pp_defines_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_calls_non_terminal_'(_, _, _, _)),
@@ -11421,12 +11424,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_directive_'(multifile(Functor/Arity)) ->
 		true
-	;	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- multifile(user::Functor/Arity))))
-	;	true
+	;	'$lgt_pp_missing_multifile_directive_'(user::Functor/Arity, _, _) ->
+		true
+	;	'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_missing_multifile_directive_'(user::Functor/Arity, File, Lines))
 	),
 	'$lgt_comp_ctx_head'(Ctx, user::Head).
 
@@ -11470,12 +11471,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))) ->
 		true
-	;	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- multifile(':'(Module,Functor/Arity)))))
-	;	true
+	;	'$lgt_pp_missing_multifile_directive_'(':'(Module,Functor/Arity), _, _) ->
+		true
+	;	'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_missing_multifile_directive_'(':'(Module,Functor/Arity), File, Lines))
 	),
 	'$lgt_comp_ctx_head'(Ctx, ':'(Module, Head)).
 
@@ -19565,6 +19564,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (meta_non_terminal), Functor//NonTerminalArity))
 	;	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (meta_predicate), Functor/Arity))
 	),
+	fail.
+
+% reports missing multifile/1 directives
+
+'$lgt_report_missing_directives_'(Type, Entity) :-
+	'$lgt_pp_missing_multifile_directive_'(PI, File, Lines),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- multifile(PI)))),
 	fail.
 
 % reports missing dynamic/1 directives
