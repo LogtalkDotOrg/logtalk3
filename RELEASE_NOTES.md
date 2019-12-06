@@ -39,6 +39,12 @@ with no local clauses.
 * FIXED: Typo in permission error when compiling scope directives and checking
 for duplicated operator declarations.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: ECLiPSe, SWI-Prolog, and YAP adapter file expansion of `reexport/1`
+directives.
+
 Documentation
 -------------
 

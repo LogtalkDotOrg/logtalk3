@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on November 28, 2019
+%  Last updated on December 6, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -690,7 +690,7 @@ forall(Generate, Test) :-
 	'$lgt_eclipse_list_of_exports'(library(Library), Module, Exports),
 	lib(Library).
 
-'$lgt_eclipse_directive_expansion'(reexport(File), (:- reexport(Module, Exports))) :-
+'$lgt_eclipse_directive_expansion'(reexport(File), [(:- use_module(Module, Exports)), (:- export(Exports))]) :-
 	atom(File),
 	'$lgt_eclipse_list_of_exports'(File, Module, Exports).
 
