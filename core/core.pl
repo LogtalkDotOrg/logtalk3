@@ -623,6 +623,7 @@ Obj<<Goal :-
 	% check that the error is the context of the module where Logtalk is loaded
 	atom(Module),
 	'$lgt_user_module_qualification'(xx, ':'(Module,xx)),
+	!,
 	'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, PI), Context)).
 
 '$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/6), _)) :-
@@ -670,12 +671,14 @@ Obj<<Goal :-
 
 
 '$lgt_runtime_thread_error_tgoal_goal'('$lgt_send_to_obj_ne_nv'(Self,Goal0,_), Goal) :-
+	!,
 	(	Self == user ->
 		Goal = Goal0
 	;	Goal = Self::Goal0
 	).
 
 '$lgt_runtime_thread_error_tgoal_goal'('$lgt_send_to_obj_nv'(Self,Goal0,_), Goal) :-
+	!,
 	(	Self == user ->
 		Goal = Goal0
 	;	Goal = Self::Goal0
@@ -10680,7 +10683,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % goals and closures are denoted by integers >= 0
 '$lgt_prolog_to_logtalk_meta_argument_specifier'(N, N) :-
-	integer(N).
+	integer(N),
+	!.
 % Prolog to Logtalk notation; this is fragile due to the lack of standardization
 '$lgt_prolog_to_logtalk_meta_argument_specifier'((:), (::)).
 % mixed-up notation or overriding meta-predicate template being used
@@ -10691,11 +10695,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_to_logtalk_meta_argument_specifier'((//), (//)).
 % list of goals/closures
 '$lgt_prolog_to_logtalk_meta_argument_specifier'([N], [N]) :-
-	integer(N).
+	integer(N),
+	!.
 % list of predicate indicators
-'$lgt_prolog_to_logtalk_meta_argument_specifier'([/], [/]).
+'$lgt_prolog_to_logtalk_meta_argument_specifier'([/], [/]) :-
+	!.
 % list of non-terminal indicators
-'$lgt_prolog_to_logtalk_meta_argument_specifier'([//], [//]).
+'$lgt_prolog_to_logtalk_meta_argument_specifier'([//], [//]) :-
+	!.
 % goal with possible existential variables qualification
 '$lgt_prolog_to_logtalk_meta_argument_specifier'((^), (^)).
 % instantiation modes (non meta-arguments)
