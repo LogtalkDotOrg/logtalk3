@@ -20158,7 +20158,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
 		true
-	;	'$lgt_deconstruct_entity_prefix'(Prefix, Entity)
+	;	'$lgt_deconstruct_entity_prefix'(Prefix, Entity) ->
+		true
+	;	throw(representation_error(entity_prefix))
 	).
 
 

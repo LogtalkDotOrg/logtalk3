@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * CHANGED: Allow a local operator to also be declared in a scope directive to
 simplify compilation of included files and compilation of modules as objects.
 
+* CHANGED: Throw a representation error instead of failing if it is not
+possible to convert an entity prefix to an entity template.
+
 * IMPROVED: Take into account foreign and auto-loaded predicates when compiling
 a module as an object also when compiling arbitrary goals used as directives.
 
