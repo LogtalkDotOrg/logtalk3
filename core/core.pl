@@ -3836,7 +3836,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_find_original_predicate'(Obj, Rnm, Flags, Alias, Pred, Entity) :-
 	% we add a fifth argument to properly handle class hierarchies if necessary
-	'$lgt_find_original_predicate'(Obj, Rnm, Flags, Alias, Pred, Entity, _).
+	'$lgt_find_original_predicate'(Obj, Rnm, Flags, Alias, Pred, Entity, _),
+	!.
 
 
 '$lgt_find_original_predicate'(Obj, _, Flags, Alias, Pred, Entity, _) :-
@@ -15155,8 +15156,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_compile_body'(Arg, TArg, DArg, Ctx)
 	).
 
-'$lgt_compile_prolog_meta_argument'([0], [], _, [], []) :- !.
+'$lgt_compile_prolog_meta_argument'([0], [], _, [], []) :-
+	!.
 '$lgt_compile_prolog_meta_argument'([0], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+	!,
 	'$lgt_compile_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg),
 	'$lgt_compile_prolog_meta_argument'([0], Args, Ctx, TArgs, DArgs).
 
@@ -15181,8 +15184,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_prolog_meta_argument'((//), Args, Ctx, TArgs, DArgs) :-
 	'$lgt_compile_prolog_meta_argument'((/), Args, Ctx, TArgs, DArgs).
 
-'$lgt_compile_prolog_meta_argument'([/], [], _, [], []) :- !.
+'$lgt_compile_prolog_meta_argument'([/], [], _, [], []) :-
+	!.
 '$lgt_compile_prolog_meta_argument'([/], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+	!,
 	nonvar(Arg),
 	'$lgt_compile_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
 	'$lgt_compile_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
