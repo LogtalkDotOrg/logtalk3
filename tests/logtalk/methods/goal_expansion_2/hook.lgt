@@ -28,5 +28,8 @@
 	goal_expansion(c(X), d(X)).
 	goal_expansion(d(X), e(X)).
 	goal_expansion(e(X), (c(X) -> d(X); e(X))).
+	% check case where a goal to be expanded resulted from
+	% a previous expansion of the same goal
+	goal_expansion(f(X), (f(X) -> write(true); write(false))).
 
 :- end_object.

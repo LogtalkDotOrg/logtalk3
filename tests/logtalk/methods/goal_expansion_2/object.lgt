@@ -38,10 +38,11 @@
 	r(a). r(b). r(c).
 
 	:- public(fp/1).
-	fp(X) :- c(X).
+	fp(X) :- c(X), f(X).
 
 	c(1).
 	d(1).
 	e(2).
+	f(a).
 
 :- end_object.

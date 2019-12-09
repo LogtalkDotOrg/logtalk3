@@ -57,6 +57,12 @@ Documentation
 * IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
 initialization code that changes the `code_prefix` default value.
 
+Tests
+-----
+
+* UPDATED: Tests for the `goal_expansion/2` predicate to check the case where
+a goal to be expanded resulted from a previous expansion of the same goal.
+
 Examples
 --------
 
