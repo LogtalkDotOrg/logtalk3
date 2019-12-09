@@ -1461,6 +1461,7 @@ create_protocol(Ptc, Relations, Directives) :-
 % handles both compiler first stage and second stage errors
 
 '$lgt_create_entity_error_handler'(error(Error,_), Goal, ExCtx) :-
+	!,
 	% compiler second stage error; unwrap the error
 	'$lgt_create_entity_error_handler'(Error, Goal, ExCtx).
 
@@ -2458,13 +2459,13 @@ logtalk_compile(Files, Flags) :-
 
 
 '$lgt_increment_compiling_warnings_counter' :-
-	retract('$lgt_pp_compiling_warnings_counter_'(Old)),
+	once(retract('$lgt_pp_compiling_warnings_counter_'(Old))),
 	New is Old + 1,
 	assertz('$lgt_pp_compiling_warnings_counter_'(New)).
 
 
 '$lgt_increment_loading_warnings_counter' :-
-	retract('$lgt_pp_loading_warnings_counter_'(Old)),
+	once(retract('$lgt_pp_loading_warnings_counter_'(Old))),
 	New is Old + 1,
 	assertz('$lgt_pp_loading_warnings_counter_'(New)).
 
@@ -8159,7 +8160,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% module definitions start with an opening module/1-2 directive and are assumed
 	% to end at the end of a source file; there is no module closing directive; set
 	% the initial compilation context and the position for compiling the end_of_file term
-	retract('$lgt_pp_referenced_object_'(Module, File, Start-_)),
+	once(retract('$lgt_pp_referenced_object_'(Module, File, Start-_))),
 	'$lgt_comp_ctx_lines'(Ctx, _-End),
 	assertz('$lgt_pp_referenced_object_'(Module, File, Start-End)),
 	'$lgt_second_stage'(object, Module, Ctx),
@@ -8629,7 +8630,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Error,
 		(retract('$lgt_file_loading_stack_'(Path, Directory)), throw(Error))
 	),
-	retract('$lgt_file_loading_stack_'(Path, Directory)).
+	retractall('$lgt_file_loading_stack_'(Path, Directory)).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
 	!,
@@ -8832,7 +8833,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Error,
 		(retract('$lgt_file_loading_stack_'(Path, Directory)), throw(Error))
 	),
-	retract('$lgt_file_loading_stack_'(Path, Directory)).
+	retractall('$lgt_file_loading_stack_'(Path, Directory)).
 
 % object opening and closing directives
 
@@ -8887,7 +8888,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		% we're indeed compiling an object
-		retract('$lgt_pp_referenced_object_'(Obj, File, Start-_)),
+		once(retract('$lgt_pp_referenced_object_'(Obj, File, Start-_))),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
 		assertz('$lgt_pp_referenced_object_'(Obj, File, Start-End)),
 		'$lgt_second_stage'(object, Obj, Ctx),
@@ -8936,7 +8937,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_protocol, Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
 		% we're indeed compiling a protocol
-		retract('$lgt_pp_referenced_protocol_'(Ptc, File, Start-_)),
+		once(retract('$lgt_pp_referenced_protocol_'(Ptc, File, Start-_))),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
 		assertz('$lgt_pp_referenced_protocol_'(Ptc, File, Start-End)),
 		'$lgt_second_stage'(protocol, Ptc, Ctx),
@@ -8992,7 +8993,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
 		% we're indeed compiling a category
-		retract('$lgt_pp_referenced_category_'(Ctg, File, Start-_)),
+		once(retract('$lgt_pp_referenced_category_'(Ctg, File, Start-_))),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
 		assertz('$lgt_pp_referenced_category_'(Ctg, File, Start-End)),
 		'$lgt_second_stage'(category, Ctg, Ctx),
@@ -9371,7 +9372,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_new_predicate_mutex'(Mutex) :-
 	'$lgt_pp_entity_'(_, _, Prefix),
-	retract('$lgt_pp_predicate_mutex_counter_'(Old)),
+	once(retract('$lgt_pp_predicate_mutex_counter_'(Old))),
 	New is Old + 1,
 	asserta('$lgt_pp_predicate_mutex_counter_'(New)),
 	number_codes(New, Codes),
@@ -10174,6 +10175,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_map_coinductive_template_args'([], [], []).
 
 '$lgt_map_coinductive_template_args'([(+)| TemplateArgs], [Arg| HeadArgs], [Arg| TestHeadArgs]) :-
+	!,
 	'$lgt_map_coinductive_template_args'(TemplateArgs, HeadArgs, TestHeadArgs).
 
 '$lgt_map_coinductive_template_args'([(-)| TemplateArgs], [_| HeadArgs], [_| TestHeadArgs]) :-
@@ -20200,10 +20202,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_deconstruct_entity_prefix'(+atom, -entity_identifier)
 %
 % deconstructs the entity prefix used in the compiled code
-% returning the corresponding entity identifier
+% returning the corresponding entity identifier template
 
 '$lgt_deconstruct_entity_prefix'(Prefix, Entity) :-
-	% valid values of the code_prefix flag are a single character atoms
+	% valid values of the code_prefix flag are single character atoms
 	sub_atom(Prefix, 1, _, 0, Entity0),
 	atom_concat(Entity1, '.', Entity0),
 	% locate the rightmost #
