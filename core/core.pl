@@ -13726,6 +13726,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(type_error(parametric_entity, Entity)).
 
 '$lgt_compile_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, DValue), DPred), ExCtx), Ctx) :-
+	!,
 	(	'$lgt_pp_entity_'(_, Entity, _) ->
 		% compile time; instantiate the Entity argument in the compilation context
 		true
