@@ -9501,7 +9501,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
 		;	true
 		)
-	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, OriginalScope, _, _),
+	;	% allow a local operator to also be declared in a scope directive to simplify
+		% compilation of included files and compilation of modules as objects
+		'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, OriginalScope, _, _),
 		OriginalScope \== l ->
 		throw(permission_error(modify, operator_scope, op(Priority, Specifier, Operator)))
 	;	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators), Scope)
@@ -9516,7 +9518,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
 		;	true
 		)
-	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, OriginalScope, _, _),
+	;	% allow a local operator to also be declared in a scope directive to simplify
+		% compilation of included files and compilation of modules as objects
+		'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, OriginalScope, _, _),
 		OriginalScope \== l ->
 		throw(permission_error(modify, operator_scope, op(Priority, Specifier, Operator)))
 	;	true
