@@ -14485,6 +14485,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_singleton_variable_in_meta_argument'([Variable| _], Term, Variable) :-
 	'$lgt_count_variable_occurrences'(Term, Variable, 1).
+
 '$lgt_singleton_variable_in_meta_argument'([_| Variables], Term, Variable) :-
 	'$lgt_singleton_variable_in_meta_argument'(Variables, Term, Variable).
 
@@ -24005,7 +24006,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% local predicate declaration
 		true
 	;	% we add a third argument to properly handle class hierarchies if necessary
-		'$lgt_static_binding_safe_declaration_ancestors'(Entity, DclEntity, _)
+		'$lgt_static_binding_safe_declaration_ancestors'(Entity, DclEntity, _) ->
+		% ensure no spurious choice-points
+		true
+	;	fail
 	).
 
 '$lgt_static_binding_safe_declaration_ancestors'(Entity, DclEntity, Kind) :-
@@ -24028,7 +24032,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% local predicate definition
 		true
 	;	% we add a third argument to properly handle class hierarchies if necessary
-		'$lgt_static_binding_safe_definition_ancestors'(Entity, DefEntity, _)
+		'$lgt_static_binding_safe_definition_ancestors'(Entity, DefEntity, _) ->
+		% ensure no spurious choice-points
+		true
+	;	fail
 	).
 
 '$lgt_static_binding_safe_definition_ancestors'(Entity, DefEntity, Kind) :-
