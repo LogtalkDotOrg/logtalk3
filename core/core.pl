@@ -3422,7 +3422,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 34, 0, b04)).
+'$lgt_version_data'(logtalk(3, 34, 0, b05)).
 
 
 
@@ -13522,7 +13522,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_check'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	var(Body) ->
-					'$lgt_retract_var_body_checked'(Database, Clause, Database, p(_), ExCtx)
+					TCond = '$lgt_retract_var_body_checked'(Database, Clause, Database, p(_), ExCtx)
 				;	Body == true ->
 					TCond = '$lgt_retract_fact_checked'(Database, Head, Database, p(_), ExCtx)
 				;	TCond = '$lgt_retract_rule_checked'(Database, Clause, Database, p(_), ExCtx)
@@ -15775,7 +15775,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	var(Body) ->
-				'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)), ExCtx)
+				TPred = '$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)), ExCtx)
 			;	Body == true ->
 				(	'$lgt_compiler_flag'(optimize, on),
 					'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
@@ -16045,7 +16045,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	var(Body) ->
-				'$lgt_retract_var_body_checked'(Self, Clause, This, p(_), ExCtx)
+				TPred = '$lgt_retract_var_body_checked'(Self, Clause, This, p(_), ExCtx)
 			;	Body == true ->
 				TPred = '$lgt_retract_fact_checked'(Self, Head, This, p(_), ExCtx)
 			;	TPred = '$lgt_retract_rule_checked'(Self, Clause, This, p(_), ExCtx)
