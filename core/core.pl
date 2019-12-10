@@ -662,9 +662,11 @@ Obj<<Goal :-
 
 
 '$lgt_runtime_thread_error_handler_helper'(logtalk(threaded_exit(TGoal),ExCtx), logtalk(threaded_exit(Goal),ExCtx)) :-
+	!,
 	'$lgt_runtime_thread_error_tgoal_goal'(TGoal, Goal).
 
 '$lgt_runtime_thread_error_handler_helper'(logtalk(threaded_exit(TGoal,Tag),ExCtx), logtalk(threaded_exit(Goal,Tag),ExCtx)) :-
+	!,
 	'$lgt_runtime_thread_error_tgoal_goal'(TGoal, Goal).
 
 '$lgt_runtime_thread_error_handler_helper'(Context, Context).
@@ -17672,26 +17674,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-		(	'$lgt_pp_public_'(Functor, Arity, _, _)
-		;	'$lgt_pp_protected_'(Functor, Arity, _, _)
-		;	'$lgt_pp_private_'(Functor, Arity, _, _)
-		),
-		\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
-		functor(Template, Functor, Arity),
-		\+ '$lgt_pp_defines_predicate_'(Template, _, _, _, _, _),
-		'$lgt_camel_case_name'(Functor),
-		'$lgt_increment_compiling_warnings_counter',
-		(	'$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line) ->
-			'$lgt_print_message'(warning(naming), camel_case_predicate_name(File, Line-Line, Type, Entity, Functor/Arity))
-		;	'$lgt_source_file_context'(File, _),
-			'$lgt_print_message'(warning(naming), camel_case_predicate_name(File, '-'(-1, -1), Type, Entity, Functor/Arity))
-		),
-		fail.
+	(	'$lgt_pp_public_'(Functor, Arity, _, _)
+	;	'$lgt_pp_protected_'(Functor, Arity, _, _)
+	;	'$lgt_pp_private_'(Functor, Arity, _, _)
+	),
+	% backtrack over all declared predicates
+	\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
+	% not declared as non-terminals
+	functor(Template, Functor, Arity),
+	\+ '$lgt_pp_defines_predicate_'(Template, _, _, _, _, _),
+	% not defined
+	'$lgt_camel_case_name'(Functor),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line) ->
+		'$lgt_print_message'(warning(naming), camel_case_predicate_name(File, Line-Line, Type, Entity, Functor/Arity))
+	;	'$lgt_source_file_context'(File, _),
+		'$lgt_print_message'(warning(naming), camel_case_predicate_name(File, '-'(-1, -1), Type, Entity, Functor/Arity))
+	),
+	fail.
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
 	'$lgt_pp_non_terminal_'(Functor, Arity, ExtArity),
+	% declared non-terminal (in a scope directive)
 	functor(Template, Functor, ExtArity),
 	\+ '$lgt_pp_defines_predicate_'(Template, _, _, _, _, _),
+	% not defined
 	'$lgt_camel_case_name'(Functor),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_predicate_declaration_location_'(Functor, ExtArity, File, Line) ->
@@ -17708,6 +17715,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
 	\+ '$lgt_pp_private_'(Functor, Arity, _, _),
 	\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
+	% defined local predicate
 	'$lgt_camel_case_name'(Functor),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Line) ->
@@ -17723,6 +17731,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_protected_'(Functor, ExtArity, _, _),
 	\+ '$lgt_pp_private_'(Functor, ExtArity, _, _),
 	\+ '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity),
+	% defined local non-terminal
 	'$lgt_camel_case_name'(Functor),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_predicate_definition_location_'(Functor, ExtArity, File, Line) ->
