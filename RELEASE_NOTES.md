@@ -75,6 +75,9 @@ Examples
 * IMPROVED: The `recipes` hot patching example to better illustrate adding
 clauses to patched objects.
 
+* UPDATED: The `complements/allow` example to also illustrate abolishing a
+dynamic complementing category.
+
 
 3.33.0 - December 3, 2019
 =========================

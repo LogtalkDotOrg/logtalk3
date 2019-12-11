@@ -34,6 +34,7 @@ yes
 %  ask "employee" its salary:
 
 | ?- employee::salary(Salary).
+
 Salary = 23500
 yes
 
@@ -62,6 +63,7 @@ yes
 % find categories that complement objects:
 
 | ?- complements_object(Category, Object).
+
 Category = dynamic_patch,
 Object = employee ;
 Category = add_on,
@@ -81,6 +83,7 @@ yes
 % check the consequences of the runtime patch of the salary/1 predicate:
 
 | ?- employee::salary(Salary).
+
 Received message salary(_G192) from user
 Salary = 42000
 yes
@@ -117,4 +120,17 @@ Property = declared_in(employee) ;
 Property = alias_of(salary(_G3724)) ;
 Property = defined_in(dynamic_patch) ;
 Property = number_of_clauses(0)
+yes
+
+
+% later, the boss finds out about the employee hacked salary:
+
+| ?- abolish_category(dynamic_patch).
+
+yes
+
+| ?- employee::salary(Salary).
+
+Received message salary(_G192) from user
+Salary = 23500
 yes
