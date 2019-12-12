@@ -30,7 +30,8 @@ Description
 
 Multifile and dynamic hook predicate that allows defining user actions for
 the :ref:`predicates_logtalk_make_1` targets. The user defined actions are
-run after the default ones using a failure driven loop.
+run after the default ones using a failure driven loop. This loop does not
+catch any exceptions thrown when calling the user-defined actions.
 
 Modes and number of proofs
 --------------------------

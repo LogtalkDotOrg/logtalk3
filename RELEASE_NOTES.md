@@ -43,7 +43,7 @@ using some backend Prolog compilers.
 checking for missing predicates when there are dynamic or multifile predicates
 with no local clauses.
 
-* FIXED: Duplicated missing `multifile/1` directive warnings.
+* FIXED: Duplicated warnings on missing `multifile/1` directive.
 
 * FIXED: Typo in permission error when compiling scope directives and checking
 for duplicated operator declarations.
@@ -62,6 +62,8 @@ Documentation
 
 * IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
 initialization code that changes the `code_prefix` default value.
+
+* UPDATED: Documentation of the `logtalk_make_target_action/1` predicate.
 
 Tests
 -----

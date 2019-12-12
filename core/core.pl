@@ -24379,7 +24379,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_check'(+atom, @term, @callable)
 %
-% type-checking for built-in predicate arguments
+% type-checking for built-in directive and predicate arguments
 
 '$lgt_check'(var, Term, Context) :-
 	(	var(Term) ->
