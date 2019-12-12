@@ -47,10 +47,12 @@ additional arguments.
 Meta-arguments which are goals are represented by the integer ``0``.
 Meta-arguments which are closures are represented by a positive integer,
 ``N``, representing the number of additional arguments that will be
-appended to the closure in order to construct the corresponding
-meta-call. Normal arguments are represented by the atom ``*``.
-Meta-arguments are always called in the meta-predicate calling context,
-not in the meta-predicate definition context.
+appended to the closure in order to construct the corresponding meta-call.
+Meta-arguments that will be called using the ``bagof/3`` or ``setof/3``
+predicates and that can thus be existentially-qualified are represented
+by the atom ``^``. Normal arguments are represented by the atom ``*``.
+Meta-arguments are always called in the meta-predicate *calling context*,
+not in the meta-predicate *definition context*.
 
 Logtalk allows the use of this directive to override the original
 meta-predicate directive. This is sometimes necessary when calling

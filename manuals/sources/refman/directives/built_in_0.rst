@@ -29,7 +29,8 @@ Description
    built_in
 
 Declares an entity as built-in. Built-in entities must be static and cannot
-be redefined once loaded.
+be redefined once loaded. This directive is used in the pre-defined protocols,
+categories, and objects that are automatically loaded at startup.
 
 Template and modes
 ------------------

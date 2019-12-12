@@ -31,7 +31,8 @@ Description
 Declares the source file text encoding. Requires a :term:`backend Prolog compiler`
 supporting the chosen encoding. When used, this directive must be the first
 term in the source file in the first line. This directive is also supported
-in files included in a main file using :ref:`directives_include_1` directives.
+in files included in a main file or in a dynamically created entity using
+:ref:`directives_include_1` directives.
 
 The encoding used in a source file (and, in the case of a Unicode
 encoding, any BOM present) will be used for the intermediate Prolog
@@ -43,11 +44,12 @@ used instead. Examples includes ``'US-ASCII'``, ``'ISO-8859-1'``,
 ``'UCS-2BE'``, ``'UTF-8'``, ``'UTF-16'``, ``'UTF-16LE'``, ``'UTF-16BE'``,
 ``'UTF-32'``, ``'UTF-32LE'``, ``'UTF-32BE'``, ``'Shift_JIS'``, and
 ``'EUC-JP'``. When writing portable code that cannot be expressed using
-ASCII, ``'UTF-8'`` is the most commonly supported encoding.
+ASCII, ``'UTF-8'`` is the most commonly supported Unicode encoding.
 
 The backend Prolog compiler adapter files define a table that translates
 between the Logtalk and Prolog specific atoms that represent each supported
-encoding.
+encoding. The :ref:`encoding_directive <flag_encoding_directive>` read-only
+flag can be used to find if a backend supports this directive and how.
 
 Template and modes
 ------------------

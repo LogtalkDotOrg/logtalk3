@@ -34,7 +34,8 @@ level within a source file, this directive defines a goal to be called
 after the compiled source file is loaded into memory.
 
 Multiple initialization directives can be used in a source file or in an
-object. Their goals will be called in order at loading time.
+object. Their goals will be called in the same order as the directives at
+loading time.
 
 .. note::
 

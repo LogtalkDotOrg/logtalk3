@@ -63,7 +63,10 @@ Documentation
 * IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
 initialization code that changes the `code_prefix` default value.
 
-* UPDATED: Documentation of the built-in `logtalk_make_target_action/1` and
+* IMPROVED: Documentation of the `built_in/0`, `encoding/1`, and
+`meta_predicate/1` directives.
+
+* IMPROVED: Documentation of the built-in `logtalk_make_target_action/1` and
 `logtalk_library_path/2` predicates.
 
 Tests
