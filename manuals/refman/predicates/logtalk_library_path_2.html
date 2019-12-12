@@ -235,8 +235,8 @@ called.</p>
 installation directory can be retrieved by calling the
 <a class="reference internal" href="logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a> predicate
 with the <code class="docutils literal notranslate"><span class="pre">directory</span></code> key and using the returned value to define the
-<code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> predicate. On a settings file, simply use an
-<a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directive
+<code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> predicate. On a settings file or a loader file,
+simply use an <a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directive
 to wrap the call to the <code class="docutils literal notranslate"><span class="pre">logtalk_load_context/2</span></code> predicate and the
 assert of the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> fact.</p>
 <p>This predicate may also be used to override the default
@@ -265,6 +265,12 @@ using library notation.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+   <span class="k">logtalk_load_context</span>(directory, <span class="nv">Directory</span>),
+   <span class="k">assertz</span>(<span class="k">logtalk_library_path</span>(my_application_root, <span class="nv">Directory</span>))
+)).
+</pre></div>
+</div>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_library_path</span>(viewpoints, <span class="nv">Path</span>).
 
 <span class="nv">Path</span> <span class="o">=</span> examples(<span class="s">&#39;viewpoints/&#39;</span>)
@@ -289,6 +295,17 @@ yes
 
 <span class="nv">Library</span> <span class="o">=</span> viewpoints
 <span class="nv">Path</span> <span class="o">=</span> examples(<span class="s">&#39;viewpoints/&#39;</span>)
+yes
+</pre></div>
+</div>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> logtalk<span class="o">::</span>expand_library_path(viewpoints, <span class="nv">Path</span>).
+
+<span class="nv">Path</span> <span class="o">=</span> <span class="s">&#39;/Users/pmoura/logtalk/examples/viewpoints/&#39;</span>.
+yes
+
+| <span class="o">?-</span> logtalk<span class="o">::</span>expand_library_path(viewpoints(<span class="s">&#39;loader.lgt&#39;</span>), <span class="nv">Path</span>).
+
+<span class="nv">Path</span> <span class="o">=</span> <span class="s">&#39;/Users/pmoura/logtalk/examples/viewpoints/loader.lgt&#39;</span>.
 yes
 </pre></div>
 </div>

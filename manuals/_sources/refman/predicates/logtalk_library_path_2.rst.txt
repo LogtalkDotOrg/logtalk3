@@ -43,8 +43,8 @@ When working with a relocatable application, the actual application
 installation directory can be retrieved by calling the
 :ref:`predicates_logtalk_load_context_2` predicate
 with the ``directory`` key and using the returned value to define the
-``logtalk_library_path/2`` predicate. On a settings file, simply use an
-:ref:`directives_initialization_1` directive
+``logtalk_library_path/2`` predicate. On a settings file or a loader file,
+simply use an :ref:`directives_initialization_1` directive
 to wrap the call to the ``logtalk_load_context/2`` predicate and the
 assert of the ``logtalk_library_path/2`` fact.
 
@@ -80,6 +80,13 @@ Examples
 
 ::
 
+   :- initialization((
+      logtalk_load_context(directory, Directory),
+      assertz(logtalk_library_path(my_application_root, Directory))
+   )).
+
+::
+
    | ?- logtalk_library_path(viewpoints, Path).
 
    Path = examples('viewpoints/')
@@ -105,6 +112,19 @@ Examples
    Library = viewpoints
    Path = examples('viewpoints/')
    yes
+
+::
+
+   | ?- logtalk::expand_library_path(viewpoints, Path).
+
+   Path = '/Users/pmoura/logtalk/examples/viewpoints/'.
+   yes
+
+   | ?- logtalk::expand_library_path(viewpoints('loader.lgt'), Path).
+
+   Path = '/Users/pmoura/logtalk/examples/viewpoints/loader.lgt'.
+   yes
+   
 
 .. seealso::
 
