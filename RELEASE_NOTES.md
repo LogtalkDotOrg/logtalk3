@@ -31,7 +31,9 @@ Logtalk compiler and runtime
 simplify compilation of included files and compilation of modules as objects.
 
 * CHANGED: Throw a representation error instead of failing if it is not
-possible to convert an entity prefix to an entity template.
+possible to convert an entity prefix to an entity template. The error is
+highly unlikely to occur in practice, however, and only affects the runtime
+error handler code that attempts to convert exception terms for readability.
 
 * IMPROVED: Take into account foreign and auto-loaded predicates when compiling
 a module as an object also when compiling arbitrary goals used as directives.
@@ -72,7 +74,6 @@ initialization code that changes the `code_prefix` default value.
 
 * IMPROVED: Documentation of the built-in `logtalk_make_target_action/1` and
 `logtalk_library_path/2` predicates.
-
 
 Tools
 _____
