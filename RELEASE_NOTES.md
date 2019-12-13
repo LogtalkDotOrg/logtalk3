@@ -73,6 +73,13 @@ initialization code that changes the `code_prefix` default value.
 * IMPROVED: Documentation of the built-in `logtalk_make_target_action/1` and
 `logtalk_library_path/2` predicates.
 
+
+Tools
+_____
+
+* CHANGED: The `lgtunit` tool now also prints code coverage information for
+entities declared as covered but with no calls to locally defined predicates.
+
 Tests
 -----
 

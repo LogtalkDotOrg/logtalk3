@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.15,
+		version is 7.16,
 		author is 'Paulo Moura',
-		date is 2019/12/02,
+		date is 2019/12/13,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1869,19 +1869,25 @@
 		retractall(covered_(_, _, _, _)).
 
 	write_coverage_results :-
-		(	setof(TestedEntity, fired_entity(TestedEntity), TestedEntities) ->
+		(	setof(DeclaredEntity, ::cover(DeclaredEntity), DeclaredEntities) ->
 			print_message(information, lgtunit, code_coverage_header),
-			write_entity_coverage_results(TestedEntities),
-			setof(DeclaredEntity, ::cover(DeclaredEntity), DeclaredEntities),
+			write_entity_coverage_results(DeclaredEntities),
+			(	setof(TestedEntity, fired_entity(TestedEntity), TestedEntities) ->
+				true
+			;	TestedEntities = []
+			),
 			write_coverage_results_summary(DeclaredEntities, TestedEntities)
 		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
 
 	write_coverage_results(TestSets) :-
-		(	setof(TestedEntity, fired_entity(TestSets, TestedEntity), TestedEntities) ->
+		(	setof(DeclaredEntity, TestSet^(member(TestSet, TestSets), TestSet::cover(DeclaredEntity)), DeclaredEntities) ->
 			print_message(information, lgtunit, code_coverage_header),
-			write_entity_coverage_results(TestedEntities),
-			setof(DeclaredEntity, TestSet^(member(TestSet, TestSets), TestSet::cover(DeclaredEntity)), DeclaredEntities),
+			write_entity_coverage_results(DeclaredEntities),
+			(	setof(TestedEntity, fired_entity(TestSets, TestedEntity), TestedEntities) ->
+				true
+			;	TestedEntities = []
+			),
 			write_coverage_results_summary(DeclaredEntities, TestedEntities)
 		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
