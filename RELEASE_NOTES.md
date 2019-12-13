@@ -48,6 +48,10 @@ with no local clauses.
 * FIXED: Typo in permission error when compiling scope directives and checking
 for duplicated operator declarations.
 
+* FIXED: Duplicated arithmetic function portability warnings for the Prolog
+legacy use of a list with a single character to represent the code of the
+character.
+
 Prolog adapter and integration files
 ------------------------------------
 

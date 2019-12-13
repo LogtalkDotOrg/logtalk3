@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 34, 0, b05)).
+'$lgt_version_data'(logtalk(3, 34, 0, b06)).
 
 
 
@@ -15505,8 +15505,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		assertz('$lgt_pp_non_portable_function_'(Template, File, Lines))
 	),
-	Expression =.. [_| Expressions],
-	'$lgt_check_non_portable_function_args'(Expressions).
+	(	Expression = [_|_] ->
+		% avoid duplicated warnings with the Prolog legacy use of a list
+		% with a single character to represent the code of the character
+		true
+	;	Expression =.. [_| Expressions],
+		'$lgt_check_non_portable_function_args'(Expressions)
+	).
 
 '$lgt_check_non_portable_functions'(_).	% variables and numbers
 
