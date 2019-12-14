@@ -199,10 +199,7 @@ improve performance. To the best of my knowledge, there is no modern
 Prolog compiler supporting this kind of directive for that purpose.
 The current Logtalk version simply parses this directive for collecting
 its information for use in the :ref:`reflection API <reflection_reflection>`
-(assuming the :ref:`source_data <flag_source_data>` is turned on). But see
-also see the description on
-:ref:`synchronized predicates <threads_synchronized_predicates>`
-in the :ref:`multi-threading programming <threads_threads>` section).
+(assuming the :ref:`source_data <flag_source_data>` flag is turned on).
 In any case, the use of mode directives is a good starting point for
 documenting your predicates.
 
@@ -695,6 +692,23 @@ Logtalk support for coinductive predicates is experimental and requires a
 :term:`backend Prolog compiler` with minimal support for cyclic terms. The
 value of the read-only :ref:`coinduction flag <flag_coinduction>` is set to
 ``supported`` for the backend Prolog compilers providing that support.
+
+.. _predicates_synchronized:
+
+Synchronized directive
+~~~~~~~~~~~~~~~~~~~~~~
+
+A predicate can be declared *synchronized* by using the
+:ref:`directives_synchronized_1` directive. For example:
+
+::
+
+   :- synchronized(write_log_entry/2).
+   :- synchronized([produce/1, consume/1]).
+
+See the section on
+:ref:`synchronized predicates <threads_synchronized_predicates>`
+for details.
 
 .. _predicates_defining:
 
@@ -1433,7 +1447,7 @@ The following predicate properties are supported:
    The predicate is a built-in predicate
 ``multifile``
    The predicate is declared multifile (i.e. it can have clauses defined
-   in several entities)
+   in multiple files or entities)
 ``meta_predicate(Template)``
    The predicate is declared as a meta-predicate with the specified
    template

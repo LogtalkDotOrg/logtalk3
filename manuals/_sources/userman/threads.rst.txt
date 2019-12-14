@@ -341,25 +341,24 @@ performing the update.
 
 Synchronized predicates may be used as wrappers to messages sent to
 objects that are not multi-threading aware. For example, assume a
-``random`` object defining a ``random/1`` predicate that generates
-random numbers, using side effects on its implementation (e.g. for
-storing the generator seed). We can specify and define e.g. a
-``sync_random/1`` predicate as follows:
+``log`` object defining a ``write_log_entry/2`` predicate that writes
+log entries to a file, thus using side effects on its implementation.
+We can specify and define e.g. a ``sync_write_log_entry/2`` predicate
+as follows:
 
 ::
 
-   :- synchronized(sync_random/1).
+   :- synchronized(sync_write_log_entry/2).
 
-   sync_random(Random) :-
-       random::random(Random).
+   sync_write_log_entry(File, Entry) :-
+       log::write_log_entry(File, Entry).
 
-and then always use the ``sync_random/1`` predicate instead of the
-predicate ``random/1`` from multi-threaded code.
+and then call the ``sync_write_log_entry/2`` predicate instead of the
+``write_log_entry/2`` predicate from multi-threaded code.
 
-The synchronization entity and predicate directives may be used when
-defining objects that may be reused in both single-threaded and
-multi-threaded Logtalk applications. The directives are simply ignored
-(i.e. the synchronized predicates are interpreted as normal predicates)
+The synchronization directive may be used when defining objects that may be
+reused in both single-threaded and multi-threaded Logtalk applications. The
+directive simply make calls to the synchronized predicates deterministic
 when the objects are used in a single-threaded application.
 
 .. _threads_notifications:

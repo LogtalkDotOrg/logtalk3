@@ -488,22 +488,21 @@ updates of a dynamic predicate, declare as synchronized the predicate
 performing the update.</p>
 <p>Synchronized predicates may be used as wrappers to messages sent to
 objects that are not multi-threading aware. For example, assume a
-<code class="docutils literal notranslate"><span class="pre">random</span></code> object defining a <code class="docutils literal notranslate"><span class="pre">random/1</span></code> predicate that generates
-random numbers, using side effects on its implementation (e.g. for
-storing the generator seed). We can specify and define e.g. a
-<code class="docutils literal notranslate"><span class="pre">sync_random/1</span></code> predicate as follows:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(sync_random<span class="o">/</span><span class="m">1</span>).
+<code class="docutils literal notranslate"><span class="pre">log</span></code> object defining a <code class="docutils literal notranslate"><span class="pre">write_log_entry/2</span></code> predicate that writes
+log entries to a file, thus using side effects on its implementation.
+We can specify and define e.g. a <code class="docutils literal notranslate"><span class="pre">sync_write_log_entry/2</span></code> predicate
+as follows:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(sync_write_log_entry<span class="o">/</span><span class="m">2</span>).
 
-sync_random(<span class="nv">Random</span>) <span class="o">:-</span>
-    random<span class="o">::</span>random(<span class="nv">Random</span>).
+sync_write_log_entry(<span class="nv">File</span>, <span class="nv">Entry</span>) <span class="o">:-</span>
+    log<span class="o">::</span>write_log_entry(<span class="nv">File</span>, <span class="nv">Entry</span>).
 </pre></div>
 </div>
-<p>and then always use the <code class="docutils literal notranslate"><span class="pre">sync_random/1</span></code> predicate instead of the
-predicate <code class="docutils literal notranslate"><span class="pre">random/1</span></code> from multi-threaded code.</p>
-<p>The synchronization entity and predicate directives may be used when
-defining objects that may be reused in both single-threaded and
-multi-threaded Logtalk applications. The directives are simply ignored
-(i.e. the synchronized predicates are interpreted as normal predicates)
+<p>and then call the <code class="docutils literal notranslate"><span class="pre">sync_write_log_entry/2</span></code> predicate instead of the
+<code class="docutils literal notranslate"><span class="pre">write_log_entry/2</span></code> predicate from multi-threaded code.</p>
+<p>The synchronization directive may be used when defining objects that may be
+reused in both single-threaded and multi-threaded Logtalk applications. The
+directive simply make calls to the synchronized predicates deterministic
 when the objects are used in a single-threaded application.</p>
 </div>
 <div class="section" id="synchronizing-threads-through-notifications">

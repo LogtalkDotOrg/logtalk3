@@ -124,6 +124,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#documenting-directive">Documenting directive</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#multifile-directive">Multifile directive</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#coinductive-directive">Coinductive directive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#synchronized-directive">Synchronized directive</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-predicates">Defining predicates</a><ul>
@@ -404,10 +405,7 @@ improve performance. To the best of my knowledge, there is no modern
 Prolog compiler supporting this kind of directive for that purpose.
 The current Logtalk version simply parses this directive for collecting
 its information for use in the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a>
-(assuming the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> is turned on). But see
-also see the description on
-<a class="reference internal" href="threads.html#threads-synchronized-predicates"><span class="std std-ref">synchronized predicates</span></a>
-in the <a class="reference internal" href="threads.html#threads-threads"><span class="std std-ref">multi-threading programming</span></a> section).
+(assuming the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag is turned on).
 In any case, the use of mode directives is a good starting point for
 documenting your predicates.</p>
 </div>
@@ -818,6 +816,18 @@ predicate primary declaration.</p>
 <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> with minimal support for cyclic terms. The
 value of the read-only <a class="reference internal" href="installing.html#flag-coinduction"><span class="std std-ref">coinduction flag</span></a> is set to
 <code class="docutils literal notranslate"><span class="pre">supported</span></code> for the backend Prolog compilers providing that support.</p>
+</div>
+<div class="section" id="synchronized-directive">
+<span id="predicates-synchronized"></span><h3>Synchronized directive<a class="headerlink" href="#synchronized-directive" title="Permalink to this headline">¶</a></h3>
+<p>A predicate can be declared <em>synchronized</em> by using the
+<a class="reference internal" href="../refman/directives/synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a> directive. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(write_log_entry<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">synchronized</span>([produce<span class="o">/</span><span class="m">1</span>, consume<span class="o">/</span><span class="m">1</span>]).
+</pre></div>
+</div>
+<p>See the section on
+<a class="reference internal" href="threads.html#threads-synchronized-predicates"><span class="std std-ref">synchronized predicates</span></a>
+for details.</p>
 </div>
 </div>
 <div class="section" id="defining-predicates">
@@ -1445,7 +1455,7 @@ foreign code (e.g. in C)</p>
 <dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt><dd><p>The predicate is a built-in predicate</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">multifile</span></code></dt><dd><p>The predicate is declared multifile (i.e. it can have clauses defined
-in several entities)</p>
+in multiple files or entities)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">meta_predicate(Template)</span></code></dt><dd><p>The predicate is declared as a meta-predicate with the specified
 template</p>

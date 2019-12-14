@@ -75,6 +75,9 @@ initialization code that changes the `code_prefix` default value.
 * IMPROVED: Documentation of the built-in `logtalk_make_target_action/1` and
 `logtalk_library_path/2` predicates.
 
+* FIXED: Missing reference to the `synchronized/1` directive in the Handbook
+section on predicate declarations.
+
 Tools
 _____
 
