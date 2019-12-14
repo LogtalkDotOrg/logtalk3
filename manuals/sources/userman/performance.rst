@@ -26,7 +26,7 @@ first-argument indexing and tail-recursion. In practice, this mean that
 if you know how to write efficient Prolog predicates, you already know
 how to write efficient Logtalk predicates.
 
-The Logtalk compiler adds an hidden execution-context argument to all
+The Logtalk compiler appends a hidden execution-context argument to all
 entity predicate clauses. In the common case where a predicate makes no
 calls to the execution-context predicates and message-sending control
 constructs and is neither a meta-predicate nor a coinductive predicate,
@@ -193,6 +193,8 @@ two examples,
 and
 `benchmarks <https://github.com/LogtalkDotOrg/logtalk3/tree/master/examples/benchmarks>`_,
 to help evaluate performance with specific backend Prolog systems. A
-table with `results <https://logtalk.org/performance.html>`_ for a
-subset of the supported systems is also available at the Logtalk
-website.
+table with benchmark `results <https://logtalk.org/performance.html>`_ for
+a subset of the supported systems is also available at the Logtalk
+website. But note that multiple factors affect the performance of an
+application and the benchmark examples and their results only provide
+a partial assessment.

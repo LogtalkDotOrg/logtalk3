@@ -201,7 +201,7 @@ in the :term:`adapter file`.
 .. index:: single: begin_of_file
 .. index:: single: end_of_file
 
-When using an hook object to expand the terms of a source file, two
+When using a hook object to expand the terms of a source file, two
 virtual file terms are generated: ``begin_of_file`` and ``end_of_file``.
 These terms allow the user to define term-expansions before and after
 the actual source file terms.
