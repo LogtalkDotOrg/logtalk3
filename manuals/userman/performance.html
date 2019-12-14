@@ -127,6 +127,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#calls-to-imported-or-inherited-predicates">Calls to imported or inherited predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calls-to-module-predicates">Calls to module predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#messages">Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-expansion-of-built-in-predicates">Automatic expansion of built-in predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inlining">Inlining</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generated-code-simplification-and-optimizations">Generated code simplification and optimizations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#size-of-the-generated-code">Size of the generated code</a></li>
@@ -296,13 +297,18 @@ at runtime.</p>
 used backend Prolog compiler when the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag is turned on.
 Consult the Prolog compiler adapter file notes for details.</p>
 </div>
+<div class="section" id="automatic-expansion-of-built-in-predicates">
+<h2>Automatic expansion of built-in predicates<a class="headerlink" href="#automatic-expansion-of-built-in-predicates" title="Permalink to this headline">¶</a></h2>
+<p>The compiler always expands calls to the <a class="reference internal" href="../refman/methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a> and
+<a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a> predicates into if-then and if-then-else control
+constructs. It also expands calls to the <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> and
+<a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> predicates when the first argument is bound.</p>
+</div>
 <div class="section" id="inlining">
 <h2>Inlining<a class="headerlink" href="#inlining" title="Permalink to this headline">¶</a></h2>
 <p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
 compiler performs <em>inlining</em> of predicate calls whenever possible. This
-includes calls to built-in methods such as <a class="reference internal" href="../refman/methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a>,
-<a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a>, <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a>, and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a>
-but also calls to Prolog predicates that are either built-in, foreign, or
+includes calls to Prolog predicates that are either built-in, foreign, or
 defined in a module (including <code class="docutils literal notranslate"><span class="pre">user</span></code>). Inlining notably allows wrapping
 module or foreign predicates using an object without introducing any
 overhead. In the specific case of the

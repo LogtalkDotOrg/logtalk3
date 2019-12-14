@@ -108,14 +108,20 @@ Messages sent from Prolog modules may use static binding depending on the
 used backend Prolog compiler when the ``optimize`` flag is turned on.
 Consult the Prolog compiler adapter file notes for details.
 
+Automatic expansion of built-in predicates
+------------------------------------------
+
+The compiler always expands calls to the :ref:`methods_once_1` and
+:ref:`methods_ignore_1` predicates into if-then and if-then-else control
+constructs. It also expands calls to the :ref:`methods_phrase_2` and
+:ref:`methods_phrase_3` predicates when the first argument is bound.
+
 Inlining
 --------
 
 When the :ref:`optimize <flag_optimize>` flag is turned on, the Logtalk
 compiler performs *inlining* of predicate calls whenever possible. This
-includes calls to built-in methods such as :ref:`methods_once_1`,
-:ref:`methods_ignore_1`, :ref:`methods_phrase_2`, and :ref:`methods_phrase_3`
-but also calls to Prolog predicates that are either built-in, foreign, or
+includes calls to Prolog predicates that are either built-in, foreign, or
 defined in a module (including ``user``). Inlining notably allows wrapping
 module or foreign predicates using an object without introducing any
 overhead. In the specific case of the 
