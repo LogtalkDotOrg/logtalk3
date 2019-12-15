@@ -317,7 +317,7 @@ First, we define an expansion for this file into a test object:
    :- end_object.
 
 Then we can use this hook object to expand and run tests written in this
-idiom by using a ``tester.lgt`` driver file with contents such as:
+dialect by using a ``tester.lgt`` driver file with contents such as:
 
 ::
 

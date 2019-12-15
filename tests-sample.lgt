@@ -3,15 +3,15 @@
 %  Sample tester file
 %  Last updated on May 21, 2017
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -46,7 +46,7 @@
 	cover(my_other_object).
 	...
 
-	% several test idioms are supported with the most simple one being
+	% several test dialects are supported with the most simple one being
 	% test/1; its argument is the test name, which must be unique in a
 	% test suite object; the test goal must succeed for the test to be
 	% successful
@@ -61,9 +61,8 @@
 
 	...
 
-	% the "lgtunit" tool supports other, more expressive, idioms
-	% allowing e.g. testing for expected failures and errors,
-	% determinism, defining setup and cleanup goals, etc; see its
-	% documentation for details
+	% the "lgtunit" tool supports other, more expressive, test dialects
+	% allowing e.g. testing for expected errors, determinism, defining
+	% setup and cleanup goals, etc; see its documentation for details
 
 :- end_object.

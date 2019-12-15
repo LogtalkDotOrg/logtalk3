@@ -522,7 +522,7 @@ you can simply write a file with clauses using the format:</p>
 </pre></div>
 </div>
 <p>Then we can use this hook object to expand and run tests written in this
-idiom by using a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> driver file with contents such as:</p>
+dialect by using a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> driver file with contents such as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
     <span class="k">set_logtalk_flag</span>(report, warnings),
     <span class="k">logtalk_load</span>(lgtunit(loader)),
