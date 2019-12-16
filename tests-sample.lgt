@@ -30,6 +30,8 @@
 %  The unit testing framework can be found in the "tools/lgtunit" directory.
 %  For an overview of its features, see the "tools/lgtunit/NOTES.md" file.
 %  For API details, open the "docs/index.html" file in your web browser.
+%  See also the "testing" example, which illustrates the tests dialects
+%  supported by default by the "lgtunit" tool
 
 
 %  test suite objets are defined as prototypes extending the "lgtunit" object
@@ -41,6 +43,7 @@
 
 	% if you want to collect code coverage information, add one clause
 	% for the cover/1 predicate for which entity that should be covered
+	% and compile the code that is being tested in debug mode
 
 	cover(my_object).
 	cover(my_other_object).
