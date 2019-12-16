@@ -121,7 +121,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#main-files">Main files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#writing-compiling-and-loading-tests">Writing, compiling, and loading tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-and-loading-tests">Writing and loading tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-dialects">Test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#user-defined-test-dialects">User-defined test dialects</a></li>
@@ -265,34 +265,40 @@ formats of test results and are discussed below.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="writing-compiling-and-loading-tests">
-<span id="id1"></span><h2>Writing, compiling, and loading tests<a class="headerlink" href="#writing-compiling-and-loading-tests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="writing-and-loading-tests">
+<h2>Writing and loading tests<a class="headerlink" href="#writing-and-loading-tests" title="Permalink to this headline">¶</a></h2>
 <p>In order to write your own unit tests, define objects extending the
-<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start from the <code class="docutils literal notranslate"><span class="pre">../../tests-sample.lgt</span></code>
-file. For example:</p>
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start by copying the <code class="docutils literal notranslate"><span class="pre">tests-sample.lgt</span></code>
+file (at the root of the Logtalk distribution) to a <code class="docutils literal notranslate"><span class="pre">tests.lgt</span></code> file
+in your project directory and edit it to add your tests:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests,
     <span class="k">extends</span>(lgtunit)).
 
+    <span class="c">% test definitions</span>
     ...
 
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>The section on <a class="reference external" href="#test-dialects">test dialects</a> below describes in
+detail how to write tests. See the <code class="docutils literal notranslate"><span class="pre">tests</span></code> top directory for examples
+of actual unit tests. Other sources of examples are the <code class="docutils literal notranslate"><span class="pre">library</span></code> and
+<code class="docutils literal notranslate"><span class="pre">examples</span></code> directories.</p>
 <p>The tests must be term-expanded by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object by compiling
 the source files defining the test objects using the option
 <code class="docutils literal notranslate"><span class="pre">hook(lgtunit)</span></code>. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_tests, [hook(lgtunit)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(tests, [hook(lgtunit)]).
 </pre></div>
 </div>
 <p>As the term-expansion mechanism applies to all the contents of a source
 file, the source files defining the test objects should preferably not
 contain entities other than the test objects. Additional code necessary
 for the tests should go to separate files.</p>
-<p>See the <code class="docutils literal notranslate"><span class="pre">../../tester-sample.lgt</span></code> file for an example of a loader file
-for compiling and loading the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code under
-testing, the unit tests, and for automatically run all the tests after
-loading. See e.g. the <code class="docutils literal notranslate"><span class="pre">../../tests</span></code> directory for examples of unit
-tests.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> file (at the root of the Logtalk distribution)
+exemplifies how to compile and load <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code
+under testing, the unit tests, and for automatically run all the tests
+after loading. You may copy this file to a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file in your
+project directory and edit it to load your project and tests files.</p>
 <p>Debugged test sets should preferably be compiled in optimal mode,
 specially when containing deterministic tests and when using the utility
 benchmarking predicates.</p>
@@ -305,7 +311,11 @@ loading its source file, you can run the tests by typing:</p>
 </pre></div>
 </div>
 <p>Usually, this goal is called automatically from an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code>
-directive in a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> loader file.</p>
+directive in a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> loader file. You can also run a single
+test (or a list of tests) using the <code class="docutils literal notranslate"><span class="pre">run/1</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tests<span class="o">::</span>run(test_identifier).
+</pre></div>
+</div>
 <p>When testing complex <em>units</em>, it is often desirable to split the tests
 between several test objects or using parametric test objects to be able
 to run the same tests using different parameters (e.g. different data
@@ -716,7 +726,7 @@ test(test_solution_generator) <span class="o">:-</span>
 </div>
 </div>
 <div class="section" id="testing-input-output-predicates">
-<span id="id2"></span><h2>Testing input/output predicates<a class="headerlink" href="#testing-input-output-predicates" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Testing input/output predicates<a class="headerlink" href="#testing-input-output-predicates" title="Permalink to this headline">¶</a></h2>
 <p>Extensive support for testing input/output predicates is provided, based
 on similar support found on the Prolog conformance testing framework
 written by Péter Szabó and Péter Szeredi.</p>
@@ -936,7 +946,8 @@ an error</div>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Name,</span> <span class="pre">Goal)</span></code></div>
 <div class="line">to generate an exception in case the goal argument fails or throws
-an error</div>
+an error (the first argument allows assertion failures to be
+distinguished when using multiple assertions)</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -1008,13 +1019,15 @@ following directive to the tests object:</p>
 <p>The reason this is required is that the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates are
 declared as meta-predicates and thus assertion goals are called in the
 context of the <em>sender</em>, which would be the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object in the
-case of a <code class="docutils literal notranslate"><span class="pre">^^/2</span></code> call (as it preserves both _ self_ and <em>sender</em> and
+case of a <code class="docutils literal notranslate"><span class="pre">^^/2</span></code> call (as it preserves both <em>self</em> and <em>sender</em> and
 the tests are internally run by a message sent from the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>
 object to the tests object).</p>
-<p>As the <code class="docutils literal notranslate"><span class="pre">benchmark/2-3</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic/1-2</span></code> predicates are
-meta-predicates, turning on the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> compiler flag is advised to
-avoid runtime compilation of the meta-argument, which would add an
-overhead to the timing results.</p>
+<p>As the <code class="docutils literal notranslate"><span class="pre">benchmark/2-3</span></code> predicates are meta-predicates, turning on the
+<code class="docutils literal notranslate"><span class="pre">optimize</span></code> compiler flag is advised to avoid runtime compilation of
+the meta-argument, which would add an overhead to the timing results.
+But this advice conflicts with collecting code coverage data, which
+requires compilation in debug mode. The solution is to use separate test
+objects for benchmarking and for code coverage.</p>
 <p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object documentation for more details on these
 predicates.</p>
 </div>

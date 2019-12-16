@@ -65,33 +65,41 @@ This tool can be loaded using the query:
 	| ?- logtalk_load(lgtunit(loader)).
 
 
-Writing, compiling, and loading tests
--------------------------------------
+Writing and loading tests
+-------------------------
 
 In order to write your own unit tests, define objects extending the `lgtunit`
-object. You may start from the `../../tests-sample.lgt` file. For example:
+object. You may start by copying the `tests-sample.lgt` file (at the root of
+the Logtalk distribution) to a `tests.lgt` file in your project directory and
+edit it to add your tests:
 
 	:- object(tests,
 		extends(lgtunit)).
 
+		% test definitions
 		...
 
 	:- end_object.
 
+The section on [*test dialects*](#test-dialects) below describes in detail
+how to write tests. See the `tests` top directory for examples of actual unit
+tests. Other sources of examples are the `library` and `examples` directories.
+
 The tests must be term-expanded by the `lgtunit` object by compiling the source
 files defining the test objects using the option `hook(lgtunit)`. For example:
 
-	| ?- logtalk_load(my_tests, [hook(lgtunit)]).
+	| ?- logtalk_load(tests, [hook(lgtunit)]).
 
 As the term-expansion mechanism applies to all the contents of a source file,
 the source files defining the test objects should preferably not contain entities
 other than the test objects. Additional code necessary for the tests should go to
 separate files.
 
-See the `../../tester-sample.lgt` file for an example of a loader file for
-compiling and loading the `lgtunit` tool, the source code under testing, the
-unit tests, and for automatically run all the tests after loading. See e.g.
-the `../../tests` directory for examples of unit tests.
+The `tester-sample.lgt` file (at the root of the Logtalk distribution)
+exemplifies how to compile and load `lgtunit` tool, the source code under
+testing, the unit tests, and for automatically run all the tests after loading.
+You may copy this file to a `tester.lgt` file in your project directory and edit
+it to load your project and tests files.
 
 Debugged test sets should preferably be compiled in optimal mode, specially
 when containing deterministic tests and when using the utility benchmarking
@@ -107,7 +115,10 @@ source file, you can run the tests by typing:
 	| ?- tests::run.
 
 Usually, this goal is called automatically from an `initialization/1` directive
-in a `tester.lgt` loader file.
+in a `tester.lgt` loader file. You can also run a single test (or a list of tests)
+using the `run/1` predicate:
+
+	| ?- tests::run(test_identifier).
 
 When testing complex _units_, it is often desirable to split the tests between
 several test objects or using parametric test objects to be able to run the same
@@ -724,6 +735,8 @@ writing unit tests:
 
 - `assertion(Name, Goal)`  
 	to generate an exception in case the goal argument fails or throws an error
+	(the first argument allows assertion failures to be distinguished when using
+	multiple assertions)
 
 - `approximately_equal(Number1, Number2, Epsilon)`  
 	for number approximate equality
@@ -768,15 +781,19 @@ tests object:
 
 	:- uses(lgtunit, [assertion/1, assertion/2]).
 
-The reason this is required is that the `assertion/1-2` predicates are declared
-as meta-predicates and thus assertion goals are called in the context of the
-_sender_, which would be the `lgtunit` object in the case of a `^^/2` call (as
-it preserves both _ self_ and _sender_ and the tests are internally run by a
-message sent from the `lgtunit` object to the tests object).
+The reason this is required is that the `assertion/1-2` predicates are
+declared as meta-predicates and thus assertion goals are called in the
+context of the _sender_, which would be the `lgtunit` object in the case
+of a `^^/2` call (as it preserves both _self_ and _sender_ and the tests
+are internally run by a message sent from the `lgtunit` object to the
+tests object).
 
-As the `benchmark/2-3` and `deterministic/1-2` predicates are meta-predicates,
-turning on the `optimize` compiler flag is advised to avoid runtime compilation
-of the meta-argument, which would add an overhead to the timing results.
+As the `benchmark/2-3` predicates are meta-predicates, turning on the
+`optimize` compiler flag is advised to avoid runtime compilation of the
+meta-argument, which would add an overhead to the timing results. But
+this advice conflicts with collecting code coverage data, which requires
+compilation in debug mode. The solution is to use separate test objects
+for benchmarking and for code coverage.
 
 Consult the `lgtunit` object documentation for more details on these
 predicates.

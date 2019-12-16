@@ -19,4 +19,6 @@ ________________________________________________________________________
 
 This folder contains an example of defining and running unit tests
 in Logtalk. These unit tests make use of the Logtalk `lgtunit` tool.
-See the tool documentation for other supported test dialects.
+See the tool documentation at `tools/lgtunit/NOTES.md` for other
+supported test dialects. See also the `tests-sample.lgt` and
+`tester-sample.lgt` sample files in the root of the distribution.

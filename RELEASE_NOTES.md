@@ -69,6 +69,8 @@ Documentation
 * IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
 initialization code that changes the `code_prefix` default value.
 
+* IMPROVED: The `lgtunit` tool documentation.
+
 * IMPROVED: Handbook section on performance regarding inlining and compiler
 automatic expansion of selected built-in methods.
 
