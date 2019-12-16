@@ -98,6 +98,9 @@ a goal to be expanded resulted from a previous expansion of the same goal.
 Examples
 --------
 
+* CHANGED: Full rewrite of the `testing` example to illustrate all the test
+dialects supported by default by the `lgtunit` tool.
+
 * IMPROVED: The `recipes` hot patching example to better illustrate adding
 clauses to patched objects.
 
