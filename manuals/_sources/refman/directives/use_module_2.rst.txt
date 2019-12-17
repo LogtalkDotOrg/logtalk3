@@ -45,10 +45,10 @@ not occur as arguments for non-standard Prolog meta-predicates not
 declared on the adapter files). It is also possible to include operator
 declarations in the second argument.
 
-This directive is also used when compiling calls to the
+This directive is also taken into account when compiling calls to the
 :ref:`database <predicates_database>` and
 :ref:`reflection <predicates_reflection>` built-in methods by looking
-into these methods predicate arguments.
+into these methods predicate arguments if bound at compile time.
 
 It is possible to specify a predicate alias using the notation
 ``Name/Arity as Alias/Arity`` or, in alternative, the notation
