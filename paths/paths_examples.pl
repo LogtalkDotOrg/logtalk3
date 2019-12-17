@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on November 18, 2019
+%  Last updated on December 17, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -70,6 +70,7 @@ logtalk_library_path(complements_restrict, examples('complements/restrict/')).
 logtalk_library_path(constraints, examples('constraints/')).
 logtalk_library_path(dcgs, examples('dcgs/')).
 logtalk_library_path(debug_hooks, examples('debug_hooks/')).
+logtalk_library_path(defaulty, examples('defaulty/')).
 logtalk_library_path(delegates, examples('delegates/')).
 logtalk_library_path(design_patterns, examples('design_patterns/')).
 logtalk_library_path(document_converter, examples('document_converter/')).
