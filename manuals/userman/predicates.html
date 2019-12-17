@@ -153,9 +153,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#calling-prolog-user-defined-plain-predicates">Calling Prolog user-defined plain predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#calling-prolog-module-predicates">Calling Prolog module predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#calling-prolog-module-meta-predicates">Calling Prolog module meta-predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#compiling-prolog-module-multifile-predicates">Compiling Prolog module multifile predicates</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-prolog-multifile-predicates">Defining Prolog multifile predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asserting-and-retracting-prolog-predicates">Asserting and retracting Prolog predicates</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
@@ -1615,7 +1616,7 @@ directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(user<span class="o">::</span>det_call(<span class="m">0</span>)).
 </pre></div>
 </div>
-<p>Another solution is to explicitly declare all non-standard Prolog
+<p>Another solution is to explicitly declare all non-standard built-in Prolog
 meta-predicates in the corresponding adapter file using the internal
 predicate <code class="docutils literal notranslate"><span class="pre">'$lgt_prolog_meta_predicate'/3</span></code>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_meta_predicate&#39;</span>(det_call(<span class="nv">_</span>), det_call(<span class="m">0</span>), predicate).
@@ -1786,8 +1787,9 @@ compiler bypass control construct to call the meta-predicate as-is:</p>
 <p>The downside of this alternative is that it hides the dependency on the
 module library from the reflection API and thus from the developer tools.</p>
 </div>
-<div class="section" id="compiling-prolog-module-multifile-predicates">
-<h3>Compiling Prolog module multifile predicates<a class="headerlink" href="#compiling-prolog-module-multifile-predicates" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="defining-prolog-multifile-predicates">
+<span id="predicates-prolog-multifile"></span><h2>Defining Prolog multifile predicates<a class="headerlink" href="#defining-prolog-multifile-predicates" title="Permalink to this headline">¶</a></h2>
 <p>Some Prolog module libraries, e.g. constraint packages, expect clauses
 for some library predicates to be defined in other modules. This is
 accomplished by declaring the library predicate <em>multifile</em> and by
@@ -1798,10 +1800,10 @@ clpfd<span class="o">:</span>run_propagator(..., ...) <span class="o">:-</span>
     ...
 </pre></div>
 </div>
-<p>Logtalk supports the compilation of such clauses within objects and
-categories. While the clause head is compiled as-is, the clause body is
-compiled in the same way as a regular object or category predicate, thus
-allowing calls to local object or category predicates. For example:</p>
+<p>Logtalk supports the definition of Prolog module multifile predicates in
+objects and categories. While the clause head is compiled as-is, the clause
+body is compiled in the same way as a regular object or category predicate,
+thus allowing calls to local object or category predicates. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
 
 <span class="p">    :- </span><span class="k">multifile</span>(clpfd<span class="o">:</span>run_propagator<span class="o">/</span><span class="m">2</span>).
@@ -1815,6 +1817,70 @@ allowing calls to local object or category predicates. For example:</p>
 <p>The Logtalk compiler will print a warning if the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code>
 directive is missing. These multifile predicates may also be declared
 dynamic using the same <code class="docutils literal notranslate"><span class="pre">Module:Name/Arity</span></code> notation.</p>
+</div>
+<div class="section" id="asserting-and-retracting-prolog-predicates">
+<span id="predicates-prolog-dynamic"></span><h2>Asserting and retracting Prolog predicates<a class="headerlink" href="#asserting-and-retracting-prolog-predicates" title="Permalink to this headline">¶</a></h2>
+<p>To assert and retract clauses for Prolog dynamic predicates, we can use an
+explicitly qualified module argument (where the module can be <cite>user</cite>). For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
+
+    foo(<span class="nv">X</span>) <span class="o">:-</span>
+        <span class="k">retractall</span>(m<span class="o">:</span>bar(<span class="nv">_</span>)),
+        <span class="k">assertz</span>(m<span class="o">:</span>bar(<span class="nv">X</span>)),
+        ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>In alternative, we can use <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a>
+directives to declare the module predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
+
+<span class="p">    :- </span><span class="k">use_module</span>(m, [bar<span class="o">/</span><span class="m">1</span>]).
+
+    foo(<span class="nv">X</span>) <span class="o">:-</span>
+        <span class="c">% retract and assert bar/1 clauses in module m</span>
+        <span class="k">retractall</span>(bar(<span class="nv">_</span>)),
+        <span class="k">assertz</span>(bar(<span class="nv">X</span>)),
+        ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>When the Prolog dynamic predicates are defined in <cite>user</cite>, the common practice
+is to use a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
+
+<span class="p">    :- </span><span class="k">uses</span>(user, [bar<span class="o">/</span><span class="m">1</span>]).
+
+    foo(<span class="nv">X</span>) <span class="o">:-</span>
+        <span class="c">% retract and assert bar/1 clauses in user</span>
+        <span class="k">retractall</span>(bar(<span class="nv">_</span>)),
+        <span class="k">assertz</span>(bar(<span class="nv">X</span>)),
+        ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Note that in the alternatives using <cite>uses/2</cite> or <cite>use_module/2</cite> directives, the
+argument of the database handling predicates must be know at compile time. If
+that is not the case, you must use instead an explicitly-qualified argument or
+the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> control construct. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
+
+    add(<span class="nv">X</span>) <span class="o">:-</span>
+        <span class="c">% assert clause X in module m</span>
+        <span class="k">assertz</span>(m<span class="o">:</span><span class="nv">X</span>),
+        ...
+
+    remove(<span class="nv">Y</span>) <span class="o">:-</span>
+        <span class="c">% retract all clauses in user whose head unifies with Y</span>
+        <span class="k">{retractall</span>(<span class="nv">Y</span>)<span class="k">}</span>,
+        ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
 </div>
 </div>
 </div>

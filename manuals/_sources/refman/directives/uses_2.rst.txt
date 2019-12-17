@@ -44,8 +44,9 @@ of predicate definitions by allowing the programmer to omit the
 meta-predicates not declared on the adapter files). It is also possible
 to include operator declarations in the second argument.
 
-This directive is also used when compiling calls to the database and
-:ref:`reflection <reflection_reflection>` built-in methods by looking
+This directive is also used when compiling calls to the
+:ref:`database <predicates_database>` and
+:ref:`reflection <predicates_reflection>` built-in methods by looking
 into these methods predicate arguments.
 
 It is possible to specify a predicate alias using the notation

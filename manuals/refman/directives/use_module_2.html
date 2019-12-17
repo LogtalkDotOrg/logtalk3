@@ -239,9 +239,10 @@ predicates listed in the directive (as long as the predicate calls do
 not occur as arguments for non-standard Prolog meta-predicates not
 declared on the adapter files). It is also possible to include operator
 declarations in the second argument.</p>
-<p>This directive is also used when compiling calls to the database and
-<a class="reference internal" href="../../userman/reflection.html#reflection-reflection"><span class="std std-ref">reflection</span></a> built-in methods by examining
-these methods predicate arguments.</p>
+<p>This directive is also used when compiling calls to the
+<a class="reference internal" href="../../userman/predicates.html#predicates-database"><span class="std std-ref">database</span></a> and
+<a class="reference internal" href="../../userman/predicates.html#predicates-reflection"><span class="std std-ref">reflection</span></a> built-in methods by looking
+into these methods predicate arguments.</p>
 <p>It is possible to specify a predicate alias using the notation
 <code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or, in alternative, the notation
 <code class="docutils literal notranslate"><span class="pre">Name/Arity:Alias/Arity</span></code>. Aliases may be used either for avoiding

@@ -1628,7 +1628,7 @@ directive:
 
    :- meta_predicate(user::det_call(0)).
 
-Another solution is to explicitly declare all non-standard Prolog
+Another solution is to explicitly declare all non-standard built-in Prolog
 meta-predicates in the corresponding adapter file using the internal
 predicate ``'$lgt_prolog_meta_predicate'/3``. For example:
 
@@ -1834,8 +1834,10 @@ compiler bypass control construct to call the meta-predicate as-is:
 The downside of this alternative is that it hides the dependency on the
 module library from the reflection API and thus from the developer tools.
 
-Compiling Prolog module multifile predicates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _predicates_prolog_multifile:
+
+Defining Prolog multifile predicates
+------------------------------------
 
 Some Prolog module libraries, e.g. constraint packages, expect clauses
 for some library predicates to be defined in other modules. This is
@@ -1849,10 +1851,10 @@ identifier. For example:
    clpfd:run_propagator(..., ...) :-
        ...
 
-Logtalk supports the compilation of such clauses within objects and
-categories. While the clause head is compiled as-is, the clause body is
-compiled in the same way as a regular object or category predicate, thus
-allowing calls to local object or category predicates. For example:
+Logtalk supports the definition of Prolog module multifile predicates in
+objects and categories. While the clause head is compiled as-is, the clause
+body is compiled in the same way as a regular object or category predicate,
+thus allowing calls to local object or category predicates. For example:
 
 ::
 
@@ -1868,3 +1870,78 @@ allowing calls to local object or category predicates. For example:
 The Logtalk compiler will print a warning if the ``multifile/1``
 directive is missing. These multifile predicates may also be declared
 dynamic using the same ``Module:Name/Arity`` notation.
+
+.. _predicates_prolog_dynamic:
+
+Asserting and retracting Prolog predicates
+------------------------------------------
+
+To assert and retract clauses for Prolog dynamic predicates, we can use an
+explicitly qualified module argument (where the module can be `user`). For
+example:
+
+::
+
+   :- object(...).
+
+       foo(X) :-
+           retractall(m:bar(_)),
+           assertz(m:bar(X)),
+           ...
+
+   :- end_object.
+
+In alternative, we can use :ref:`directives_use_module_2`
+directives to declare the module predicates. For example:
+
+::
+
+   :- object(...).
+
+       :- use_module(m, [bar/1]).
+
+       foo(X) :-
+           % retract and assert bar/1 clauses in module m
+           retractall(bar(_)),
+           assertz(bar(X)),
+           ...
+
+   :- end_object.
+
+When the Prolog dynamic predicates are defined in `user`, the common practice
+is to use a :ref:`directives_uses_2` directive:
+
+::
+
+   :- object(...).
+
+       :- uses(user, [bar/1]).
+
+       foo(X) :-
+           % retract and assert bar/1 clauses in user
+           retractall(bar(_)),
+           assertz(bar(X)),
+           ...
+
+   :- end_object.
+
+Note that in the alternatives using `uses/2` or `use_module/2` directives, the
+argument of the database handling predicates must be know at compile time. If
+that is not the case, you must use instead an explicitly-qualified argument or
+the :ref:`control_external_call_1` control construct. For example:
+
+::
+
+   :- object(...).
+
+       add(X) :-
+           % assert clause X in module m
+           assertz(m:X),
+           ...
+
+       remove(Y) :-
+           % retract all clauses in user whose head unifies with Y
+           {retractall(Y)},
+           ...
+
+   :- end_object.

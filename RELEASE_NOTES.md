@@ -66,6 +66,9 @@ directives.
 Documentation
 -------------
 
+* ADDED: Handbook section on asserting and retracting clauses for Prolog
+dynamic predicates from objects and categories.
+
 * IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
 initialization code that changes the `code_prefix` default value.
 
