@@ -1877,7 +1877,7 @@ Asserting and retracting Prolog predicates
 ------------------------------------------
 
 To assert and retract clauses for Prolog dynamic predicates, we can use an
-explicitly qualified module argument (where the module can be `user`). For
+explicitly qualified module argument (where the module can be ``user``). For
 example:
 
 ::
@@ -1908,8 +1908,8 @@ directives to declare the module predicates. For example:
 
    :- end_object.
 
-When the Prolog dynamic predicates are defined in `user`, the common practice
-is to use a :ref:`directives_uses_2` directive:
+When the Prolog dynamic predicates are defined in ``user``, the recommended
+and most portable practice is to use a :ref:`directives_uses_2` directive:
 
 ::
 
@@ -1925,10 +1925,10 @@ is to use a :ref:`directives_uses_2` directive:
 
    :- end_object.
 
-Note that in the alternatives using `uses/2` or `use_module/2` directives, the
-argument of the database handling predicates must be know at compile time. If
-that is not the case, you must use instead an explicitly-qualified argument or
-the :ref:`control_external_call_1` control construct. For example:
+Note that in the alternatives using ``uses/2`` or ``use_module/2`` directives,
+the argument of the database handling predicates must be know at compile time.
+If that is not the case, you must use instead either an explicitly-qualified
+argument or the :ref:`control_external_call_1` control construct. For example:
 
 ::
 

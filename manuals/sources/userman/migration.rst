@@ -374,7 +374,7 @@ than one module. A common example is to use a module named ``prolog``.
 It is also common to store the expansions in ``user``. The Logtalk library
 provides a solution for these scenarios. Using the ``hook_flows`` library
 we can select multiple hook objects or hook modules. For example,
-assuming expansions stored on both `user` and `system` modules:
+assuming expansions stored on both ``user`` and ``system`` modules:
 
 .. code-block:: text
 

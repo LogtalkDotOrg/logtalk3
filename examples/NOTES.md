@@ -156,8 +156,15 @@ Follows a short description of each included example (in alphabetical order):
 	simple example of using compilation hooks and term expansion for
 	conditional compilation of debug statements
 
+- `defaulty`  
+	example comparing defaulty and tagged data representations
+
 - `delegates`  
 	simple implementation of the delegation design pattern
+
+- `design_patterns`
+	sample implementation of common object-oriented behavioral,
+	creational, and structural design patterns
 
 - `diamonds`  
 	examples of problems and solutions for the "diamond problem"
@@ -165,10 +172,6 @@ Follows a short description of each included example (in alphabetical order):
 
 - `document_converter`  
 	example of using a Java library for converting documents to text
-
-- `design_patterns`
-	sample implementation of common object-oriented behavioral,
-	creational, and structural design patterns
 
 - `dynpred`  
 	example of using the built-in database handling methods to

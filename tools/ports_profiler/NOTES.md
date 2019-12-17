@@ -27,7 +27,7 @@ box model is the same used in the debugger tool.
 
 The Logtalk predicate execution box model is an extended version of the
 original Byrd's four port model. Besides the standard `call`, `exit`, `fail`,
-and `redo` ports, Logtalk also defines two (post-)unification ports, `fact`
+and `redo` ports, Logtalk also defines two post-unification ports, `fact`
 and `rule`, and an `exception` port. This tool counts and reports the
 number of times each port is traversed during the execution of queries.
 It also distinguishes between deterministic exits (reported in the `exit`
