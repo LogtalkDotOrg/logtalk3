@@ -108,13 +108,14 @@ Messages sent from Prolog modules may use static binding depending on the
 used backend Prolog compiler when the ``optimize`` flag is turned on.
 Consult the Prolog compiler adapter file notes for details.
 
-Automatic expansion of built-in predicates
-------------------------------------------
+Automatic expansion of built-in meta-predicates
+-----------------------------------------------
 
-The compiler always expands calls to the :ref:`methods_once_1` and
-:ref:`methods_ignore_1` predicates into if-then and if-then-else control
-constructs. It also expands calls to the :ref:`methods_phrase_2` and
-:ref:`methods_phrase_3` predicates when the first argument is bound.
+The compiler always expands calls to the :ref:`methods_forall_2`,
+:ref:`methods_once_1`, and :ref:`methods_ignore_1` meta-predicates into
+equivalent definitions using the negation and conditional control constructs.
+It also expands calls to the :ref:`methods_call_N`, :ref:`methods_phrase_2`,
+and :ref:`methods_phrase_3` meta-predicates when the first argument is bound.
 
 Inlining
 --------

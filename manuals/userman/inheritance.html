@@ -227,7 +227,7 @@
 <p>The inheritance mechanisms found on object-oriented programming
 languages allow the specialization of previously defined objects,
 avoiding the unnecessary repetition of code and allowing the definition
-of common predicates for sets of objects. In the context of logic
+of common functionality for sets of objects. In the context of logic
 programming, we can interpret inheritance as a form of <em>theory extension</em>:
 an object will virtually contain, besides its own predicates, all the
 predicates inherited from other objects that are not redefined locally.</p>
@@ -249,7 +249,7 @@ reflection predicates.</p>
 <span id="inheritance-protocol"></span><h2>Protocol inheritance<a class="headerlink" href="#protocol-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>Protocol inheritance refers to the inheritance of predicate declarations
 (<a class="reference internal" href="../glossary.html#term-predicate-scope-directive"><span class="xref std std-term">scope directives</span></a>). These can be contained
-in objects, in protocols, or in categories. Logtalk supports single and
+in objects, protocols, or categories. Logtalk supports single and
 multi-inheritance of protocols: an object or a category may implement several
 protocols and a protocol may extend several protocols.</p>
 <div class="section" id="search-order-for-prototype-hierarchies">
@@ -298,10 +298,11 @@ to the class superclasses.</p>
 </div>
 <div class="section" id="redefining-inherited-predicate-definitions">
 <span id="inheritance-implementation-redefinition"></span><h3>Redefining inherited predicate definitions<a class="headerlink" href="#redefining-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
-<p>When we define a predicate that is already inherited from other object,
-the inherited definitions are hidden by the new definitions. This is
-called overriding inheritance: a local definition overrides any inherited
-definitions. For example, assume that we have the following two objects:</p>
+<p>When we define a predicate that is already inherited from an ancestor object
+or an imported category, the inherited definition is hidden by the new
+definition. This is called inheritance overriding: a local definition
+overrides any inherited definitions. For example, assume that we have the
+following two objects:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(root).
 
 <span class="p">    :- </span><span class="k">public</span>(bar<span class="o">/</span><span class="m">1</span>).
@@ -341,9 +342,9 @@ yes
 </div>
 <div class="section" id="specializing-inherited-predicate-definitions">
 <span id="inheritance-specialization"></span><h3>Specializing inherited predicate definitions<a class="headerlink" href="#specializing-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
-<p>Specialization of inherited definitions: the new definition uses the
-inherited definitions, adding new code. This is accomplished by
-calling the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator
+<p>Specialization of inherited definitions: the new definition calls the
+inherited definition and makes additional calls. This is accomplished
+by calling the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator
 in the new definition. For example, assume a <code class="docutils literal notranslate"><span class="pre">init/0</span></code> predicate
 that must account for object specific initializations along the
 inheritance chain:</p>

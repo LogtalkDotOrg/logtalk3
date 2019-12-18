@@ -23,7 +23,7 @@ Inheritance
 The inheritance mechanisms found on object-oriented programming
 languages allow the specialization of previously defined objects,
 avoiding the unnecessary repetition of code and allowing the definition
-of common predicates for sets of objects. In the context of logic
+of common functionality for sets of objects. In the context of logic
 programming, we can interpret inheritance as a form of *theory extension*:
 an object will virtually contain, besides its own predicates, all the
 predicates inherited from other objects that are not redefined locally.
@@ -51,7 +51,7 @@ Protocol inheritance
 
 Protocol inheritance refers to the inheritance of predicate declarations
 (:term:`scope directives <predicate scope directive>`). These can be contained
-in objects, in protocols, or in categories. Logtalk supports single and
+in objects, protocols, or categories. Logtalk supports single and
 multi-inheritance of protocols: an object or a category may implement several
 protocols and a protocol may extend several protocols.
 
@@ -119,10 +119,11 @@ to the class superclasses.
 Redefining inherited predicate definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When we define a predicate that is already inherited from other object,
-the inherited definitions are hidden by the new definitions. This is
-called overriding inheritance: a local definition overrides any inherited
-definitions. For example, assume that we have the following two objects:
+When we define a predicate that is already inherited from an ancestor object
+or an imported category, the inherited definition is hidden by the new
+definition. This is called inheritance overriding: a local definition
+overrides any inherited definitions. For example, assume that we have the
+following two objects:
 
 ::
 
@@ -169,9 +170,9 @@ However, we can explicitly code other behaviors. Some examples follow.
 Specializing inherited predicate definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Specialization of inherited definitions: the new definition uses the
-inherited definitions, adding new code. This is accomplished by
-calling the :ref:`control_call_super_1` *super call* operator
+Specialization of inherited definitions: the new definition calls the
+inherited definition and makes additional calls. This is accomplished
+by calling the :ref:`control_call_super_1` *super call* operator
 in the new definition. For example, assume a ``init/0`` predicate
 that must account for object specific initializations along the
 inheritance chain:
