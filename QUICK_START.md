@@ -23,14 +23,13 @@ QUICK START INSTRUCTIONS
 Starting up Logtalk
 -------------------
 
-Install Logtalk by using either the installer provided for your
-operating-system (when available) or by following the instructions
+Install Logtalk by using either the [installer](https://logtalk.org/download.html)
+provided for your operating-system or by following the instructions
 on the [`INSTALL.md`](INSTALL.md) file.
 
 On POSIX operating-systems, the following shell scripts are installed
-by default for running Logtalk with selected backend Prolog compilers
-(which must be up-to-date and properly installed before running these
-scripts!):
+by default for running Logtalk with the supported backend Prolog compilers
+(which must be installed and up-to-date before running these scripts):
 
 * B-Prolog:       `bplgt`
 * CxProlog:       `cxlgt`
@@ -49,7 +48,7 @@ scripts!):
 On macOS systems, `/opt/local/bin` must be in your `PATH` to run the scripts.
 Terminal command files for running Logtalk with selected backend Prolog
 compilers are also available on the Logtalk installation folder (by default,
-`/opt/local/share/logtalk/scripts/macosx/command_files`; for easy access, the
+`/opt/local/share/logtalk/scripts/macosx/command_files`). For easy access, the
 installer creates an alias to the Logtalk folder in the Applications folder.
 
 On Windows systems, shortcuts for running Logtalk with selected backend
@@ -92,7 +91,9 @@ Running an example
 ------------------
 
 You may now try some examples. The [`examples/NOTES.md`](examples/NOTES.md)
-file contains a brief description of each example.
+file contains a brief description of each example. The
+[learning guide](https://logtalk.org/learning.html) includes a suggested
+walkthrough.
 
 1. Select and open one of the examples directory.
 
