@@ -17,8 +17,8 @@
 
 .. _migration_migration:
 
-Prolog integration and migration guide
-======================================
+Prolog integration and migration
+================================
 
 An application may include plain Prolog files, Prolog modules, and
 Logtalk objects. This is a perfectly valid way of developing a complex
@@ -28,12 +28,12 @@ encapsulation mechanism is adequate. Logtalk objects may be used when
 more powerful encapsulation, abstraction, and reuse features are
 required.
 
-This guide provides tips for integrating and migrating plain Prolog code
+This section provides tips for integrating and migrating plain Prolog code
 and Prolog module code to Logtalk. Step-by-step instructions are provided
 for encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
 inside Logtalk. An interesting application of the techniques described
-in this guide is a solution for running a Prolog application which uses
+in this section is a solution for running a Prolog application which uses
 modules on a Prolog compiler with no module system. The ``wrapper`` tool
 can be used to help in migrating Prolog code.
 
@@ -179,6 +179,8 @@ Assuming that this is the case, apply the following steps:
    referenced modules are not being converted into objects, keep
    the ``use_module/2`` directives but change the first argument to be
    the module name.
+#. Convert each ``reexport/1`` directive into a :ref:`directives_uses_2`
+   directive and ``public/1`` predicate directives (see next section).
 #. Convert any ``meta_predicate/1`` directives into Logtalk
    :ref:`directives_meta_predicate_1`
    directives by replacing the module meta-argument indicator, ``:``,
@@ -329,18 +331,18 @@ The ``reexport/1`` and ``use_module/1`` directives are not directly
 supported by the Logtalk compiler. But most Prolog adapter files provide
 support for compiling these directives using Logtalk's first stage of
 its :ref:`term-expansion mechanism <expansion_expansion>`. Nevertheless,
-these directives can be converted, respectively, into ``reexport/2`` and
-``use_module/2`` directives by finding which predicates exported by the
+these directives can be converted, respectively, into a sequence of
+``:- use_module/2`` and ``export/1`` directives and ``use_module/2``
+directives by finding which predicates exported by the
 specified modules are reexported or imported into the module containing
-the directive. Finding the names of the imported predicates that are
-actually used is easy. First, comment out the ``use_module/1`` directives
+the directive. For ``use_module/1`` directives, finding the names of the
+imported predicates that are actually used is easy. First, comment out the 
 and compile the file (making sure that the
 :ref:`unknown_predicates <flag_unknown_predicates>` compiler flag is set
 to ``warning``). Logtalk will print a warning with a list of predicates
 that are called but never defined. Second, use these list to replace the
-``reexport/1`` and ``use_module/1`` directives by, respectively,
-``reexport/2`` and ``use_module/2`` directives. You should then be able
-to compile the modified Prolog module as an object.
+``use_module/1`` directives by ``use_module/2`` directives. You should
+then be able to compile the modified Prolog module as an object.
 
 .. _migration_module_expansions:
 

@@ -83,6 +83,9 @@ automatic expansion of selected built-in methods.
 * IMPROVED: Documentation of the built-in `logtalk_make_target_action/1` and
 `logtalk_library_path/2` predicates.
 
+* UPDATED: Handbook Prolog migration section on handling and converting
+`reexport/1` module directives.
+
 * FIXED: Missing reference to the `synchronized/1` directive in the Handbook
 section on predicate declarations.
 

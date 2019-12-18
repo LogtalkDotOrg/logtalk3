@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Prolog integration and migration guide &mdash; The Logtalk Handbook v3.34.0-b06 documentation</title>
+  <title>Prolog integration and migration &mdash; The Logtalk Handbook v3.34.0-b06 documentation</title>
   
 
   
@@ -123,7 +123,7 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Prolog integration and migration guide</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Prolog integration and migration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#source-files-with-both-prolog-code-and-logtalk-code">Source files with both Prolog code and Logtalk code</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encapsulating-plain-prolog-code-in-objects">Encapsulating plain Prolog code in objects</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#prolog-multifile-predicates">Prolog multifile predicates</a></li>
@@ -199,7 +199,7 @@
         
           <li><a href="index.html">User Manual</a> &raquo;</li>
         
-      <li>Prolog integration and migration guide</li>
+      <li>Prolog integration and migration</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -220,8 +220,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="prolog-integration-and-migration-guide">
-<span id="migration-migration"></span><h1>Prolog integration and migration guide<a class="headerlink" href="#prolog-integration-and-migration-guide" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="prolog-integration-and-migration">
+<span id="migration-migration"></span><h1>Prolog integration and migration<a class="headerlink" href="#prolog-integration-and-migration" title="Permalink to this headline">¶</a></h1>
 <p>An application may include plain Prolog files, Prolog modules, and
 Logtalk objects. This is a perfectly valid way of developing a complex
 application and, in some cases, it might be the most appropriated
@@ -229,12 +229,12 @@ solution. Modules may be used for legacy code or when a simple
 encapsulation mechanism is adequate. Logtalk objects may be used when
 more powerful encapsulation, abstraction, and reuse features are
 required.</p>
-<p>This guide provides tips for integrating and migrating plain Prolog code
+<p>This section provides tips for integrating and migrating plain Prolog code
 and Prolog module code to Logtalk. Step-by-step instructions are provided
 for encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
 inside Logtalk. An interesting application of the techniques described
-in this guide is a solution for running a Prolog application which uses
+in this section is a solution for running a Prolog application which uses
 modules on a Prolog compiler with no module system. The <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> tool
 can be used to help in migrating Prolog code.</p>
 <div class="section" id="source-files-with-both-prolog-code-and-logtalk-code">
@@ -359,6 +359,8 @@ also being converted to objects into Logtalk
 referenced modules are not being converted into objects, keep
 the <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives but change the first argument to be
 the module name.</p></li>
+<li><p>Convert each <code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> directive into a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
+directive and <code class="docutils literal notranslate"><span class="pre">public/1</span></code> predicate directives (see next section).</p></li>
 <li><p>Convert any <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives into Logtalk
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a>
 directives by replacing the module meta-argument indicator, <code class="docutils literal notranslate"><span class="pre">:</span></code>,
@@ -494,18 +496,18 @@ small performance gain for the compiled code.</p>
 supported by the Logtalk compiler. But most Prolog adapter files provide
 support for compiling these directives using Logtalk’s first stage of
 its <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>. Nevertheless,
-these directives can be converted, respectively, into <code class="docutils literal notranslate"><span class="pre">reexport/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives by finding which predicates exported by the
+these directives can be converted, respectively, into a sequence of
+<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">use_module/2</span></code> and <code class="docutils literal notranslate"><span class="pre">export/1</span></code> directives and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
+directives by finding which predicates exported by the
 specified modules are reexported or imported into the module containing
-the directive. Finding the names of the imported predicates that are
-actually used is easy. First, comment out the <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives
+the directive. For <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives, finding the names of the
+imported predicates that are actually used is easy. First, comment out the
 and compile the file (making sure that the
 <a class="reference internal" href="programming.html#flag-unknown-predicates"><span class="std std-ref">unknown_predicates</span></a> compiler flag is set
 to <code class="docutils literal notranslate"><span class="pre">warning</span></code>). Logtalk will print a warning with a list of predicates
 that are called but never defined. Second, use these list to replace the
-<code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives by, respectively,
-<code class="docutils literal notranslate"><span class="pre">reexport/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives. You should then be able
-to compile the modified Prolog module as an object.</p>
+<code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives by <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives. You should
+then be able to compile the modified Prolog module as an object.</p>
 </div>
 <div class="section" id="modules-using-a-term-expansion-mechanism">
 <span id="migration-module-expansions"></span><h3>Modules using a term-expansion mechanism<a class="headerlink" href="#modules-using-a-term-expansion-mechanism" title="Permalink to this headline">¶</a></h3>
