@@ -249,7 +249,8 @@ Glossary
 
    built-in method
       A predefined :term:`method` that can be called from within any object
-      or :term:`category`. Built-in methods cannot be redefined.
+      or :term:`category`. I.e. built-in methods are built-in object and
+      category predicates. Built-in methods cannot be redefined.
 
    singleton method
       A :term:`method` defined in an :term:`instance` itself. Singleton
