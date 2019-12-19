@@ -86,6 +86,9 @@ automatic expansion of selected built-in methods.
 * UPDATED: Handbook Prolog migration section on handling and converting
 `reexport/1` module directives.
 
+* UPDATED: Handbook reference pages on the database methods to mention the
+support for module qualified arguments.
+
 * FIXED: Missing reference to the `synchronized/1` directive in the Handbook
 section on predicate declarations.
 

@@ -32,7 +32,9 @@ Retracts all clauses with a matching head for an object dynamic predicate.
 
 When the predicate indicator for ``Head`` is declared in a
 :ref:`directives_uses_2` or :ref:`directives_use_module_2` directive,
-the clauses are retracted in the referenced object or module.
+the clauses are retracted in the referenced object or module. When the
+backend Prolog compiler supports a module system, the predicate argument
+can also be module qualified.
 
 This method may be used to retract clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are

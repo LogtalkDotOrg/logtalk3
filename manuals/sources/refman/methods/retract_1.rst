@@ -34,7 +34,9 @@ predicate retracts the next matching clause.
 
 When the predicate indicator for ``Head`` is declared in a
 :ref:`directives_uses_2` or :ref:`directives_use_module_2` directive,
-the clause is retracted in the referenced object or module.
+the clause is retracted in the referenced object or module. When the
+backend Prolog compiler supports a module system, the predicate
+argument can also be module qualified.
 
 This method may be used to retract clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are

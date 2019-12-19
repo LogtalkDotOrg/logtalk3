@@ -1125,14 +1125,14 @@ directive, as in the following example:
 
 .. _predicates_methods:
 
-Built-in object predicates (methods)
-------------------------------------
+Built-in methods
+----------------
 
-Logtalk defines a set of built-in object predicates or methods to access
-message execution context, to find sets of solutions, to inspect
-objects, for database handling, for term and goal expansion, and for
-printing messages. Similar to Prolog built-in predicates, these built-in
-methods should not be redefined.
+Built-in methods are built-in object (and category) predicates. Logtalk
+built-in methods include methods to access message execution context,
+to find sets of solutions, to inspect objects, for database handling, for
+term and goal expansion, and for printing messages. Similar to Prolog
+built-in predicates, these built-in methods should not be redefined.
 
 .. _predicates_context:
 

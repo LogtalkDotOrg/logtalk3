@@ -33,6 +33,8 @@ Enumerates, by backtracking, the clauses of a dynamic predicate.
 When the predicate indicator for ``Head`` is declared in a
 :ref:`directives_uses_2` or :ref:`directives_use_module_2` directive,
 the predicate enumerates the clauses in the referenced object or module.
+When the backend Prolog compiler supports a module system, the head
+argument can also be module qualified.
 
 This method may be used to enumerate clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are

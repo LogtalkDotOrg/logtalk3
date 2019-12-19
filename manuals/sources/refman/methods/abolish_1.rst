@@ -28,15 +28,15 @@ Description
 
    abolish(Predicate)
 
-Abolishes a runtime declared object dynamic predicate or an object 
-local dynamic predicate. Only predicates that are dynamically declared
-at runtime (using a call to the :ref:`methods_asserta_1` or
-:ref:`methods_assertz_1` built-in methods) can be abolished. 
+Abolishes a runtime declared object dynamic predicate or an object local
+dynamic predicate. Only predicates that are dynamically declared at runtime
+(using a call to the :ref:`methods_asserta_1` or :ref:`methods_assertz_1`
+built-in methods) can be abolished. 
 
 When the predicate indicator is declared in a :ref:`directives_uses_2`
-or :ref:`directives_use_module_2` directive, the predicate is abolished
-in the referenced object or module.
-
+or :ref:`directives_use_module_2` directive, the predicate is abolished in
+the referenced object or module. When the backend Prolog compiler supports
+a module system, the predicate argument can also be module qualified.
 
 Modes and number of proofs
 --------------------------
