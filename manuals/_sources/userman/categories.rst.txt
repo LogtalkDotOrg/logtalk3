@@ -691,3 +691,19 @@ Note that access to category parameters is only possible from within the
 category. In particular, calls to the :ref:`methods_this_1` built-in local method
 from category predicates always access the importing object identifier
 (and thus object parameters, not category parameters).
+
+.. _categories_built_in:
+
+Built-in categories
+-------------------
+
+Logtalk defines a built-in category that is always available for any
+application.
+
+.. _categories_core_messages:
+
+The built-in category ``core_messages``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The built-in :ref:`core_messages <apis:core_messages/0>` category provides
+default translations for all compiler and runtime printed messages.

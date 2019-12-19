@@ -69,6 +69,8 @@ Documentation
 * ADDED: Handbook section on asserting and retracting clauses for Prolog
 dynamic predicates from objects and categories.
 
+* ADDED: Missing Handbook reference to the `core_messages` built-in category.
+
 * IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
 initialization code that changes the `code_prefix` default value.
 

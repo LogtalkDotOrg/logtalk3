@@ -824,16 +824,17 @@ application.
 
 .. _objects_user:
 
-The built-in pseudo-object *user*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The built-in pseudo-object ``user``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Logtalk defines a built-in, pseudo-object named :ref:`user <apis:user/0>`
-that virtually contains all user predicate definitions not encapsulated in
-a Logtalk entity. These predicates are assumed to be implicitly declared
-public. Messages sent from this pseudo-object, which includes messages sent
-from the top-level interpreter, generate events when the default value of
-the :ref:`events <flag_events>` flag is set to ``allow``. Defining
-complementing categories for this pseudo-object is not supported.
+The built-in :ref:`user <apis:user/0>` pseudo-object virtually contains all
+user predicate definitions not encapsulated in a Logtalk entity (or a Prolog
+module for backends supporting a module system). These predicates are
+assumed to be implicitly declared public. Messages sent from this
+pseudo-object, which includes messages sent from the top-level interpreter,
+generate events when the default value of the :ref:`events <flag_events>`
+flag is set to ``allow``. Defining complementing categories for this
+pseudo-object is not supported.
 
 With some of the :term:`backend Prolog compilers <backend Prolog compiler>`
 that support a module system, it is possible to load (the) Logtalk
@@ -843,12 +844,12 @@ predicate definitions defined in the module where Logtalk was loaded.
 
 .. _objects_logtalk:
 
-The built-in object *logtalk*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The built-in object ``logtalk``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Logtalk defines a built-in object named :ref:`logtalk <apis:logtalk/0>`
-that provides structured message printing mechanism predicates, structured
-question asking predicates, debugging event predicates, predicates for
-accessing the internal database of loaded files and their properties, and
-also a set of low-level utility predicates normally used when defining
-hook objects. Consult its API documentation for details.
+The built-in :ref:`logtalk <apis:logtalk/0>` object provides structured
+message printing mechanism predicates, structured question asking
+predicates, debugging event predicates, predicates for accessing the
+internal database of loaded files and their properties, and also a set
+of low-level utility predicates normally used when defining hook objects.
+Consult its API documentation for details.

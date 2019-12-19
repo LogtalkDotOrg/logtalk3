@@ -127,6 +127,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#importing-categories">Importing categories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calling-category-predicates">Calling category predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parametric-categories">Parametric categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#built-in-categories">Built-in categories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-built-in-category-core-messages">The built-in category <code class="docutils literal notranslate"><span class="pre">core_messages</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
@@ -780,6 +784,16 @@ For example:</p>
 category. In particular, calls to the <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> built-in local method
 from category predicates always access the importing object identifier
 (and thus object parameters, not category parameters).</p>
+</div>
+<div class="section" id="built-in-categories">
+<span id="categories-built-in"></span><h2>Built-in categories<a class="headerlink" href="#built-in-categories" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk defines a built-in category that is always available for any
+application.</p>
+<div class="section" id="the-built-in-category-core-messages">
+<span id="categories-core-messages"></span><h3>The built-in category <code class="docutils literal notranslate"><span class="pre">core_messages</span></code><a class="headerlink" href="#the-built-in-category-core-messages" title="Permalink to this headline">¶</a></h3>
+<p>The built-in <a class="reference external" href="https://logtalk.org/library/core_messages_0.html#core-messages-0" title="(in Logtalk APIs v3.34.0)"><span class="xref std std-ref">core_messages</span></a> category provides
+default translations for all compiler and runtime printed messages.</p>
+</div>
 </div>
 </div>
 
