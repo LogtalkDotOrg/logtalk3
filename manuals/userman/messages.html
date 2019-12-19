@@ -224,8 +224,11 @@ of the sender object.</p>
 <p>Note that message sending is only the same as calling an object’s
 predicate if the object does not inherit (or import) predicate
 definitions from other objects (or categories). Otherwise, the predicate
-definition that will be executed may depend on the relationships of the
-object with other Logtalk entities.</p>
+definition that will be executed may depend on the relations between the
+object and with its imported categories (if any) and its ancestor objects.
+See the <a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">Inheritance</span></a> section for details.</p>
+<p>When a message corresponds to a meta-predicate, the meta-arguments will
+be called in the context of the object (or category) sending the message.</p>
 <div class="section" id="operators-used-in-message-sending">
 <span id="messages-operators"></span><h2>Operators used in message sending<a class="headerlink" href="#operators-used-in-message-sending" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk declares the following operators for the message sending control

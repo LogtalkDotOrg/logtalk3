@@ -277,12 +277,12 @@ the corresponding built-in protocol is missing.</p>
 </div>
 <div class="section" id="declaring-predicates">
 <span id="predicates-declaring"></span><h2>Declaring predicates<a class="headerlink" href="#declaring-predicates" title="Permalink to this headline">¶</a></h2>
-<p>Logtalk provides a clear distinction between declaring and defining a
-predicate and thus clear closed world assumption semantics. Messages
-or calls for declared but undefined predicates fail. Messages or calls
-for unknown (not declared) predicates throw an error. Note that this is
-a fundamental requirement for supporting protocols: we must be able to
-declare a predicate without necessarily defining it.</p>
+<p>Logtalk provides a clear distinction between <em>declaring a predicate</em> and
+<em>defining a predicate</em> and thus clear closed world assumption semantics.
+Messages or calls for declared but undefined predicates fail. Messages or
+calls for unknown (i.e. non declared) predicates throw an error. Note that
+this is a fundamental requirement for supporting protocols: we must be able
+to declare a predicate without necessarily defining it.</p>
 <p>All object (or category) predicates that we want to access from other
 objects (or categories) must be explicitly declared. A predicate
 declaration must contain, at least, a <em>scope</em> directive. Other
@@ -295,13 +295,14 @@ called, i.e. its <em>visibility</em>. Predicates can be <em>public</em>, <em>pro
 <em>private</em>, or <em>local</em>. Public predicates can be called from any object.
 Protected predicates can only be called from the container object or
 from a container descendant. Private predicates can only be called from
-the container object. Local predicates, like private predicates, can
-only be called from the container object (or category) but they are
-<em>invisible</em> to the reflection built-in methods (
-<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>)
-and to the message error handling mechanisms (i.e. sending a message corresponding
-to a local predicate results in a <code class="docutils literal notranslate"><span class="pre">predicate_declaration</span></code> existence
-error instead of a scope error).</p>
+the container object. Predicates are local when they are not declared in
+a scope directive. Local predicates, like private predicates, can only be
+called from the container object (or category) but they are <em>invisible</em>
+to the reflection built-in methods (<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>
+and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>) and to the message error handling
+mechanisms (i.e. sending a message corresponding to a local predicate
+results in a <code class="docutils literal notranslate"><span class="pre">predicate_declaration</span></code> existence error instead of a scope
+error).</p>
 <p>The scope declarations are made using the directives
 <a class="reference internal" href="../refman/directives/public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a>, <a class="reference internal" href="../refman/directives/protected_1.html#directives-protected-1"><span class="std std-ref">protected/1</span></a>, and
 <a class="reference internal" href="../refman/directives/private_1.html#directives-private-1"><span class="std std-ref">private/1</span></a>. For example:</p>
@@ -904,13 +905,15 @@ and calling dynamic predicates from inside a category.</p>
 </div>
 <div class="section" id="meta-predicates">
 <span id="predicates-metadef"></span><h3>Meta-predicates<a class="headerlink" href="#meta-predicates" title="Permalink to this headline">¶</a></h3>
-<p>Meta-predicates may be defined inside objects (and categories) as any
+<p>Meta-predicates may be defined inside objects and categories as any
 other predicate. A meta-predicate is declared using the
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive as described earlier on
 this section. When defining a meta-predicate, the arguments in the
 clause heads corresponding to the meta-arguments must be variables.
-All meta-arguments are called in the context of the entity calling
-the meta-predicate.</p>
+All meta-arguments are called in the context of the object or category
+calling the meta-predicate. In particular, when sending a message that
+corresponds to a meta-predicate, the meta-arguments are called in the
+context of the object or category sending the message.</p>
 <p>Some meta-predicates have meta-arguments which are not goals but
 closures. Logtalk supports the definition of meta-predicates that are
 called with closures instead of goals as long as the definition uses the
@@ -1432,8 +1435,8 @@ the arguments.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- bar::predicate_property(foo(_), Property).
 </pre></div>
 </div>
-<p>Note that this method respects the predicate’s scope declarations. For
-instance, the above call will only return properties for public
+<p>Note that this method takes into account the predicate’s scope declarations.
+In the above example, the call will only return properties for public
 predicates.</p>
 <p>An object’s set of visible predicates is the union of all the predicates
 declared for the object with all the built-in methods and all the
@@ -1534,8 +1537,8 @@ The same is true for protocol declared predicates.</p>
 <div class="section" id="finding-declared-predicates">
 <span id="predicates-finding"></span><h2>Finding declared predicates<a class="headerlink" href="#finding-declared-predicates" title="Permalink to this headline">¶</a></h2>
 <p>We can find, by backtracking, all visible user predicates by calling the
-<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> built-in method. This method respects
-the predicate’s scope declarations. For instance, the following call will
+<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> built-in method. This method takes into
+account predicate scope declarations. For exampole, the following call will
 only return user predicates that are declared public:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- some_object::current_predicate(Name/Arity).
 </pre></div>

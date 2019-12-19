@@ -30,8 +30,12 @@ of the sender object.
 Note that message sending is only the same as calling an object's
 predicate if the object does not inherit (or import) predicate
 definitions from other objects (or categories). Otherwise, the predicate
-definition that will be executed may depend on the relationships of the
-object with other Logtalk entities.
+definition that will be executed may depend on the relations between the
+object and with its imported categories (if any) and its ancestor objects.
+See the :ref:`inheritance_inheritance` section for details.
+
+When a message corresponds to a meta-predicate, the meta-arguments will
+be called in the context of the object (or category) sending the message.
 
 .. _messages_operators:
 

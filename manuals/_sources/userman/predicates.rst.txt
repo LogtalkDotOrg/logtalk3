@@ -50,12 +50,12 @@ the corresponding built-in protocol is missing.
 Declaring predicates
 --------------------
 
-Logtalk provides a clear distinction between declaring and defining a
-predicate and thus clear closed world assumption semantics. Messages
-or calls for declared but undefined predicates fail. Messages or calls
-for unknown (not declared) predicates throw an error. Note that this is
-a fundamental requirement for supporting protocols: we must be able to
-declare a predicate without necessarily defining it.
+Logtalk provides a clear distinction between *declaring a predicate* and
+*defining a predicate* and thus clear closed world assumption semantics.
+Messages or calls for declared but undefined predicates fail. Messages or
+calls for unknown (i.e. non declared) predicates throw an error. Note that
+this is a fundamental requirement for supporting protocols: we must be able
+to declare a predicate without necessarily defining it.
 
 All object (or category) predicates that we want to access from other
 objects (or categories) must be explicitly declared. A predicate
@@ -73,13 +73,14 @@ called, i.e. its *visibility*. Predicates can be *public*, *protected*,
 *private*, or *local*. Public predicates can be called from any object.
 Protected predicates can only be called from the container object or
 from a container descendant. Private predicates can only be called from
-the container object. Local predicates, like private predicates, can
-only be called from the container object (or category) but they are
-*invisible* to the reflection built-in methods (
-:ref:`methods_current_predicate_1` and :ref:`methods_predicate_property_2`)
-and to the message error handling mechanisms (i.e. sending a message corresponding
-to a local predicate results in a ``predicate_declaration`` existence
-error instead of a scope error).
+the container object. Predicates are local when they are not declared in
+a scope directive. Local predicates, like private predicates, can only be
+called from the container object (or category) but they are *invisible*
+to the reflection built-in methods (:ref:`methods_current_predicate_1`
+and :ref:`methods_predicate_property_2`) and to the message error handling
+mechanisms (i.e. sending a message corresponding to a local predicate
+results in a ``predicate_declaration`` existence error instead of a scope
+error).
 
 The scope declarations are made using the directives
 :ref:`directives_public_1`, :ref:`directives_protected_1`, and
@@ -800,13 +801,15 @@ and calling dynamic predicates from inside a category.
 Meta-predicates
 ~~~~~~~~~~~~~~~
 
-Meta-predicates may be defined inside objects (and categories) as any
+Meta-predicates may be defined inside objects and categories as any
 other predicate. A meta-predicate is declared using the
 :ref:`directives_meta_predicate_1` directive as described earlier on
 this section. When defining a meta-predicate, the arguments in the 
 clause heads corresponding to the meta-arguments must be variables.
-All meta-arguments are called in the context of the entity calling
-the meta-predicate.
+All meta-arguments are called in the context of the object or category
+calling the meta-predicate. In particular, when sending a message that
+corresponds to a meta-predicate, the meta-arguments are called in the
+context of the object or category sending the message.
 
 Some meta-predicates have meta-arguments which are not goals but
 closures. Logtalk supports the definition of meta-predicates that are
@@ -1420,8 +1423,8 @@ We can find the properties of visible predicates by calling the
 
    | ?- bar::predicate_property(foo(_), Property).
 
-Note that this method respects the predicate's scope declarations. For
-instance, the above call will only return properties for public
+Note that this method takes into account the predicate's scope declarations.
+In the above example, the call will only return properties for public
 predicates.
 
 An object's set of visible predicates is the union of all the predicates
@@ -1527,8 +1530,8 @@ Finding declared predicates
 ---------------------------
 
 We can find, by backtracking, all visible user predicates by calling the
-:ref:`methods_current_predicate_1` built-in method. This method respects
-the predicate's scope declarations. For instance, the following call will
+:ref:`methods_current_predicate_1` built-in method. This method takes into
+account predicate scope declarations. For exampole, the following call will
 only return user predicates that are declared public:
 
 .. code-block:: text
