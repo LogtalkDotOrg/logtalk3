@@ -779,8 +779,8 @@ Optional features compilation flags
    default flag vale is ``allow``. Note that changing this option is of
    no consequence for objects already compiled and loaded.
 
-Back-end Prolog compiler and loader flags
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Backend Prolog compiler and loader flags
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _flag_prolog_compiler:
 .. index:: pair: prolog_compiler; Flag
