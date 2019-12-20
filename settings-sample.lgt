@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on December 4, 2019
+%  Last updated on December 20, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -75,17 +75,18 @@ adapter file from `allow` to, respectively, `restrict` or `deny`.
 Defining a settings file
 ------------------------
 
-To use settings files, copy this file to your Logtalk user directory or to
-the directory containing your project files, rename it to `settings.lgt`,
-customize it (see the examples below), and start Logtalk from the project
-directory (if you're using a project specific settings file) or from
-anywhere (when using a default settings file). Note that, for setting
-Logtalk flag values, you must use the `set_logtalk_flag/2` predicate
-(wrapped in a `initialization/1` directive) as the scope of the
-`set_logtalk_flag/2` directive is local to the entity or the source file
-containing it.
+To use settings files, copy this file to one of the supported locatiuons
+listed above, rename it to `settings.lgt`, customize it (see the sample
+code below), and start Logtalk from the project directory (if you're
+using a project specific settings file) or from anywhere (when using a
+default settings file).
 
-If you use more than one backend Prolog compiler and want to use per
+Note that, for setting Logtalk flag values, you must use the predicate
+`set_logtalk_flag/2` (wrapped in a `initialization/1` directive) as the
+scope of the `set_logtalk_flag/2` directive is local to the entity or
+the source file containing it.
+
+If you use multiple backend Prolog compilers and want to define per
 compiler settings, you can use the Logtalk conditional compilation
 directives and the `prolog_dialect` compiler flag. See the User and
 Reference Manuals for details.
@@ -98,7 +99,7 @@ Logtalk compiles and loads settings files silently but a warning will
 be printed by default if syntax errors are found. Be sure to debug and
 test your settings files as regular Logtalk source files before using
 them (you may use the `logtalk_compile/1-2` built-in predicates to compile
-the settings files without loading them to check for e.g. syntax errors).
+the settings files without loading them to check for errors and warnings).
 
 Limitations of the backend Prolog compilers may prevent settings files
 to work from directories other than the Logtalk user directory, specially
@@ -138,8 +139,9 @@ when running on non-POSIX operating systems such as Windows. Check the
 %*/
 
 
-%  To call ECLiPSe/SWI-Prolog make/0 when calling logtalk_make/0 or
-%  logtalk_make/1 with the target all, uncomment the following lines:
+%  To call ECLiPSe/SWI-Prolog make/0 predicate when calling the logtalk_make/0
+%  (or logtalk_make/1 with the target all) predicate, uncomment the following
+%  lines:
 
 /*
 :- if((
@@ -270,12 +272,6 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 	set_logtalk_flag(debug, on),
 	set_logtalk_flag(clean, on),
 	set_logtalk_flag(reload, always),
-	set_logtalk_flag(unknown_entities, warning),
-	set_logtalk_flag(unknown_predicates, warning),
-	set_logtalk_flag(undefined_predicates, warning),
-	set_logtalk_flag(singleton_variables, warning),
-	set_logtalk_flag(context_switching_calls, allow),
-	set_logtalk_flag(optimize, off),
 	set_logtalk_flag(source_data, on)
 )).
 %*/
@@ -315,11 +311,6 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 		set_logtalk_flag(debug, off),
 		set_logtalk_flag(clean, on),
 		set_logtalk_flag(reload, always),
-		set_logtalk_flag(unknown_entities, warning),
-		set_logtalk_flag(unknown_predicates, warning),
-		set_logtalk_flag(undefined_predicates, warning),
-		set_logtalk_flag(singleton_variables, warning),
-		set_logtalk_flag(context_switching_calls, allow),
 		set_logtalk_flag(code_prefix, '.'),
 		set_logtalk_flag(optimize, off),
 		set_logtalk_flag(source_data, on),
@@ -395,6 +386,7 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 /*
 :- initialization((
 	set_logtalk_flag(portability, warning),
+	set_logtalk_flag(unknown_entities, warning),
 	set_logtalk_flag(unknown_predicates, warning),
 	set_logtalk_flag(missing_directives, warning)
 )).
