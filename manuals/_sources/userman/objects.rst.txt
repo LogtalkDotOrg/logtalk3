@@ -847,9 +847,10 @@ predicate definitions defined in the module where Logtalk was loaded.
 The built-in object ``logtalk``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The built-in :ref:`logtalk <apis:logtalk/0>` object provides structured
-message printing mechanism predicates, structured question asking
-predicates, debugging event predicates, predicates for accessing the
-internal database of loaded files and their properties, and also a set
-of low-level utility predicates normally used when defining hook objects.
-Consult its API documentation for details.
+The built-in :ref:`logtalk <apis:logtalk/0>` object provides
+:ref:`message printing <printing_messages>` predicates,
+:ref:`question asking <printing_questions>` predicates,
+:ref:`debug and trace event <debugging_events>` predicates, predicates for
+accessing the internal database of loaded files and their properties, and
+also a set of low-level utility predicates normally used when defining hook
+objects. Consult its API documentation for details.

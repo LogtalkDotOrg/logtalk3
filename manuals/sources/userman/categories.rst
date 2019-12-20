@@ -34,6 +34,9 @@ Objective-C categories [Cox86]_. Categories may also *complement*
 existing objects, thus providing a :term:`hot patching` mechanism
 inspired by the Objective-C categories functionality.
 
+Logtalk defines a built-in category, :ref:`core_messages <apis:core_messages/0>`,
+which is described at the end of this section.
+
 .. _categories_defining:
 
 Defining a new category
@@ -706,4 +709,5 @@ The built-in category ``core_messages``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The built-in :ref:`core_messages <apis:core_messages/0>` category provides
-default translations for all compiler and runtime printed messages.
+default translations for all compiler and runtime printed messages such as
+warnings and errors. It does not define any public predicates.

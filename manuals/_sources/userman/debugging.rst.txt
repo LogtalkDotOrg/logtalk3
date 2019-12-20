@@ -676,3 +676,20 @@ based on the same procedure box model described above. This tool is
 specially useful for debugging performance issues (e.g. due to lack of
 determinism or unexpected backtracking). See the tool documentation for
 details. 
+
+.. _debugging_events:
+
+Debug and trace events
+----------------------
+
+The debugging API defines two multifile predicates,
+:ref:`logtalk::trace_event/2 <apis:logtalk/0::trace_event/2>` and
+:ref:`logtalk::debug_handler/2 <apis:logtalk/0::debug_handler/2>` for handiling
+trace and debug events. It also provides a
+:ref:`logtalk::debug_handler_provider/1 <apis:logtalk/0::debug_handler_provider/1>`
+multifile predicate that allows an object (or a category) to declare itself
+as a debug handler provider. The Logtalk ``debugger`` and  ``ports_profiler``
+tools are regular applications thar are implemented using this API, which
+can also be used to implement alternative or new debugging related tools.
+See the API documentation for details and the source code of the ``debugger``
+and  ``ports_profiler`` tools for usage examples.

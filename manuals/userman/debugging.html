@@ -140,6 +140,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#using-the-term-expansion-mechanism-for-debugging">Using the term-expansion mechanism for debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ports-profiling">Ports profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-and-trace-events">Debug and trace events</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
@@ -811,6 +812,20 @@ based on the same procedure box model described above. This tool is
 specially useful for debugging performance issues (e.g. due to lack of
 determinism or unexpected backtracking). See the tool documentation for
 details.</p>
+</div>
+<div class="section" id="debug-and-trace-events">
+<span id="debugging-events"></span><h2>Debug and trace events<a class="headerlink" href="#debug-and-trace-events" title="Permalink to this headline">¶</a></h2>
+<p>The debugging API defines two multifile predicates,
+<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.34.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> and
+<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-debug-handler-2" title="(in Logtalk APIs v3.34.0)"><span class="xref std std-ref">logtalk::debug_handler/2</span></a> for handiling
+trace and debug events. It also provides a
+<a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0-debug-handler-provider-1" title="(in Logtalk APIs v3.34.0)"><span class="xref std std-ref">logtalk::debug_handler_provider/1</span></a>
+multifile predicate that allows an object (or a category) to declare itself
+as a debug handler provider. The Logtalk <code class="docutils literal notranslate"><span class="pre">debugger</span></code> and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code>
+tools are regular applications thar are implemented using this API, which
+can also be used to implement alternative or new debugging related tools.
+See the API documentation for details and the source code of the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
+and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tools for usage examples.</p>
 </div>
 </div>
 

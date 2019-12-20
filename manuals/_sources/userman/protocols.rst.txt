@@ -370,8 +370,8 @@ for any application.
 
 .. _protocols_expanding:
 
-The built-in protocol *expanding*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The built-in protocol ``expanding``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The built-in :ref:`expanding <apis:expanding/0>` protocol declares
 the :ref:`methods_term_expansion_2` and :ref:`methods_goal_expansion_2`
@@ -380,8 +380,8 @@ compiler flag for more details.
 
 .. _protocols_monitoring:
 
-The built-in protocol *monitoring*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The built-in protocol ``monitoring``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The built-in :ref:`monitoring <apis:monitoring/0>` protocol declares the
 :ref:`methods_before_3` and :ref:`methods_after_3` public event handler
@@ -389,8 +389,8 @@ predicates. See the :ref:`events_events` section for more details.
 
 .. _protocols_forwarding:
 
-The built-in protocol *forwarding*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The built-in protocol ``forwarding``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The built-in :ref:`forwarding <apis:forwarding/0>` protocol declares the
 :ref:`methods_forward_1` user-defined message forwarding handler, which
