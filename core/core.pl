@@ -13169,6 +13169,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % database handling built-in predicates
 
+'$lgt_compile_body'(abolish(Functor, Arity), TCond, DCond, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(abolish(_, _)),
+	\+ '$lgt_pp_defines_predicate_'(abolish(_, _), _, _, _, _, _),
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1))
+	;	true
+	),
+	'$lgt_compile_body'(abolish(Functor/Arity), TCond, DCond, Ctx).
+
 '$lgt_compile_body'(abolish(Term), TCond, DCond, Ctx) :-
 	nonvar(Term),
 	Term = ':'(Module, Pred),
@@ -15693,6 +15707,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % database handling built-in predicates
 
+'$lgt_compile_message_to_object'(abolish(Functor, Arity), Obj, TPred, Events, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(abolish(_, _)),
+	\+ '$lgt_pp_defines_predicate_'(abolish(_, _), _, _, _, _, _),
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1))
+	;	true
+	),
+	'$lgt_compile_message_to_object'(abolish(Functor/Arity), Obj, TPred, Events, Ctx).
+
 '$lgt_compile_message_to_object'(abolish(Pred), Obj, TPred, _, Ctx) :-
 	!,
 	'$lgt_check'(var_or_predicate_indicator, Pred),
@@ -15980,6 +16008,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
 
 % database handling built-in predicates
+
+'$lgt_compile_message_to_self'(abolish(Functor, Arity), TPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(abolish(_, _)),
+	\+ '$lgt_pp_defines_predicate_'(abolish(_, _), _, _, _, _, _),
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1))
+	;	true
+	),
+	'$lgt_compile_message_to_self'(abolish(Functor/Arity), TPred, Ctx).
 
 '$lgt_compile_message_to_self'(abolish(Pred), TPred, Ctx) :-
 	!,

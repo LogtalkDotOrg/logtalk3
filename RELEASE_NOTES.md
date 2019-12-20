@@ -35,6 +35,8 @@ possible to convert an entity prefix to an entity template. The error is
 highly unlikely to occur in practice, however, and only affects the runtime
 error handler code that attempts to convert exception terms for readability.
 
+* ADDED: Detect and report the legacy `abolish/2` Prolog predicate.
+
 * IMPROVED: Take into account foreign and auto-loaded predicates when compiling
 a module as an object also when compiling arbitrary goals used as directives.
 
