@@ -218,8 +218,7 @@
 <span id="documenting-documenting"></span><h1>Documenting<a class="headerlink" href="#documenting" title="Permalink to this headline">¶</a></h1>
 <p>Assuming that the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag is turned on, the
 compiler saves all relevant documenting information collected when compiling
-a source file. The provided
-<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool can access this
+a source file. The provided <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool can access this
 information by using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection</span></a> support
 and generate a documentation file for each compiled entity (object, protocol,
 or category) in XML format. Contents of the XML file include the entity name,
@@ -298,7 +297,7 @@ be atoms or compound terms).</p>
 <p>Use only the keywords that make sense for your application and remember that
 you are free to invent your own keywords. All key-value pairs can be retrieved
 programmatically using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and
-are visible to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
+are visible to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool.</p>
 </div>
 <div class="section" id="predicate-directives">
 <span id="documenting-predicate"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Permalink to this headline">¶</a></h3>
@@ -362,12 +361,12 @@ pairs where both the topic and the text must be atoms.</p>
 for your application and remember that you are free to invent your own
 keywords. All key-value pairs can also be retrieved programmatically
 using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and are visible
-to the <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool.</p>
+to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool.</p>
 </div>
 </div>
 <div class="section" id="processing-and-viewing-documenting-files">
 <span id="documenting-processing"></span><h2>Processing and viewing documenting files<a class="headerlink" href="#processing-and-viewing-documenting-files" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool
+<p>The <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool
 generates an XML documenting file per entity. It can also generate library,
 directory, entity, and predicate indexes when documenting libraries and
 directories. For example, assuming the default filename extensions, a
@@ -380,7 +379,7 @@ file (<code class="docutils literal notranslate"><span class="pre">logtalk_entit
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
 file are defined by the
-<a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool but can be
+<a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool but can be
 overridden by passing a list of options to the tool predicates. The
 <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
@@ -408,12 +407,11 @@ assuming that the XML entities are named <em>author</em>, <em>license</em>, and
 entity when the XML documenting files are processed (<strong>not</strong> when they
 are generated; this notation is just a shortcut to take advantage of XML
 entities).</p>
-<p>The <a class="reference external" href="https://logtalk.org/tools.html#documenting">lgtdoc</a> tool supports
-a set of options that can be used to control the generation of the XML
-documentation files. See the tool documentation for details. There is
-also a <a class="reference external" href="https://logtalk.org/tools.html#documenting">doclet</a> tool that
-allows automating the steps required to generate the documentation for
-an application.</p>
+<p>The <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool supports a set of options that can be
+used to control the generation of the XML documentation files. See the
+tool documentation for details. There is also a <a class="reference internal" href="../devtools/doclet.html"><span class="doc">doclet</span></a>
+tool that allows automating the steps required to generate the documentation
+for an application.</p>
 </div>
 <div class="section" id="inline-formatting-in-comments-text">
 <span id="documenting-formatting"></span><h2>Inline formatting in comments text<a class="headerlink" href="#inline-formatting-in-comments-text" title="Permalink to this headline">¶</a></h2>
@@ -424,16 +422,15 @@ ePub, or PDF formats).</p>
 </div>
 <div class="section" id="diagrams">
 <h2>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://logtalk.org/tools.html#diagrams">diagrams</a> tool supports
-a wide range of diagrams that can also help in documenting an application.
-The generated diagrams can include URL links to both source code and API
-documentation. They can also be linked, connecting for example high level
-diagrams to detail diagrams. These features allow diagrams to be an
-effective solution for navigating and understanding the structure and
-implementation of an application. This tool uses the same
-<a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool and
-thus have access to the same source data. See the tool documentation for
-details.</p>
+<p>The <a class="reference internal" href="../devtools/diagrams.html"><span class="doc">diagrams</span></a> tool supports a wide range of diagrams that
+can also help in documenting an application. The generated diagrams can
+include URL links to both source code and API documentation. They can also
+be linked, connecting for example high level diagrams to detail diagrams.
+These features allow diagrams to be an effective solution for navigating and
+understanding the structure and implementation of an application. This tool
+uses the same <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
+tool and thus have access to the same source data. See the tool documentation
+for details.</p>
 </div>
 </div>
 

@@ -22,8 +22,7 @@ Documenting
 
 Assuming that the :ref:`source_data <flag_source_data>` flag is turned on, the
 compiler saves all relevant documenting information collected when compiling
-a source file. The provided
-`lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool can access this
+a source file. The provided :doc:`../devtools/lgtdoc` tool can access this
 information by using the :ref:`reflection <reflection_reflection>` support
 and generate a documentation file for each compiled entity (object, protocol,
 or category) in XML format. Contents of the XML file include the entity name,
@@ -114,7 +113,7 @@ For example:
 Use only the keywords that make sense for your application and remember that
 you are free to invent your own keywords. All key-value pairs can be retrieved
 programmatically using the :ref:`reflection API <reflection_reflection>` and
-are visible to the `lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool.
+are visible to the :doc:`../devtools/lgtdoc` tool.
 
 .. _documenting_predicate:
 
@@ -185,14 +184,14 @@ As with the ``info/1`` directive, use only the keywords that make sense
 for your application and remember that you are free to invent your own
 keywords. All key-value pairs can also be retrieved programmatically
 using the :ref:`reflection API <reflection_reflection>` and are visible
-to the `lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool.
+to the :doc:`../devtools/lgtdoc` tool.
 
 .. _documenting_processing:
 
 Processing and viewing documenting files
 ----------------------------------------
 
-The `lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool
+The :doc:`../devtools/lgtdoc` tool
 generates an XML documenting file per entity. It can also generate library,
 directory, entity, and predicate indexes when documenting libraries and
 directories. For example, assuming the default filename extensions, a
@@ -206,7 +205,7 @@ file (``logtalk_entity.xsd``). The XSLT style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
 file are defined by the
-`lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool but can be
+:doc:`../devtools/lgtdoc` tool but can be
 overridden by passing a list of options to the tool predicates. The
 ``lgtdoc/xml`` sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
@@ -238,12 +237,11 @@ entity when the XML documenting files are processed (**not** when they
 are generated; this notation is just a shortcut to take advantage of XML
 entities).
 
-The `lgtdoc <https://logtalk.org/tools.html#documenting>`_ tool supports
-a set of options that can be used to control the generation of the XML
-documentation files. See the tool documentation for details. There is
-also a `doclet <https://logtalk.org/tools.html#documenting>`_ tool that
-allows automating the steps required to generate the documentation for
-an application.
+The :doc:`../devtools/lgtdoc` tool supports a set of options that can be
+used to control the generation of the XML documentation files. See the
+tool documentation for details. There is also a :doc:`../devtools/doclet`
+tool that allows automating the steps required to generate the documentation
+for an application.
 
 .. _documenting_formatting:
 
@@ -258,13 +256,12 @@ ePub, or PDF formats).
 Diagrams
 --------
 
-The `diagrams <https://logtalk.org/tools.html#diagrams>`_ tool supports
-a wide range of diagrams that can also help in documenting an application.
-The generated diagrams can include URL links to both source code and API
-documentation. They can also be linked, connecting for example high level
-diagrams to detail diagrams. These features allow diagrams to be an
-effective solution for navigating and understanding the structure and
-implementation of an application. This tool uses the same
-:ref:`reflection API <reflection_reflection>` as the ``lgtdoc`` tool and
-thus have access to the same source data. See the tool documentation for
-details. 
+The :doc:`../devtools/diagrams` tool supports a wide range of diagrams that
+can also help in documenting an application. The generated diagrams can
+include URL links to both source code and API documentation. They can also
+be linked, connecting for example high level diagrams to detail diagrams.
+These features allow diagrams to be an effective solution for navigating and
+understanding the structure and implementation of an application. This tool
+uses the same :ref:`reflection API <reflection_reflection>` as the ``lgtdoc``
+tool and thus have access to the same source data. See the tool documentation
+for details. 

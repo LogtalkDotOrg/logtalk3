@@ -1019,8 +1019,8 @@ Pay special attention to file compilation/loading order. Whenever
 possible, compile/load your files taking into account file dependencies
 to enable :term:`static binding` optimizations. The easiest way to find
 the dependencies and thus the best compilation/loading order is to use
-the `diagrams <https://logtalk.org/tools.html#diagrams>`_ tool to generate
-a file dependency diagram for your application.
+the :doc:`../devtools/diagrams` tool to generate a file dependency
+diagram for your application.
 
 Minimize the use of dynamic predicates. Parametric objects can often be
 used in alternative. When dynamic predicates cannot be avoided, try to

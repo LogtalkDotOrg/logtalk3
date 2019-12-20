@@ -228,9 +228,8 @@
             
   <div class="section" id="debugging">
 <span id="debugging-debugging"></span><h1>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
-<p>The Logtalk distribution includes a command-line
-<a class="reference external" href="https://logtalk.org/tools.html#debugging">debugger</a> tool
-implemented as a Logtalk application. It can be loaded by typing:</p>
+<p>The Logtalk distribution includes a command-line <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a>
+tool implemented as a Logtalk application. It can be loaded by typing:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(debugger(loader)).
 </pre></div>
 </div>
@@ -755,13 +754,12 @@ logtalk<span class="o">::</span>message_prefix_stream(debug, core, <span class="
 </div>
 <div class="section" id="selective-printing-of-debug-messages">
 <h3>Selective printing of debug messages<a class="headerlink" href="#selective-printing-of-debug-messages" title="Permalink to this headline">¶</a></h3>
-<p>By default, all debug messages are either printed or skipped, depending on
-the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> and <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags.
-When the code is not compiled in optimal mode, the
-<a class="reference external" href="https://logtalk.org/tools.html#debugging">debug_messages</a> tool allows
-selectively enabling of debug messages per <a class="reference internal" href="../glossary.html#term-component"><span class="xref std std-term">component</span></a> and per debug
-group. For example, to enable all <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> messages
-for the <code class="docutils literal notranslate"><span class="pre">parser</span></code> component:</p>
+<p>By default, all debug messages are either printed or skipped, depending on the
+<a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> and <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags. When the
+code is not compiled in optimal mode, the <a class="reference internal" href="../devtools/debug_messages.html"><span class="doc">debug_messages</span></a>
+tool allows selectively enabling of debug messages per <a class="reference internal" href="../glossary.html#term-component"><span class="xref std std-term">component</span></a> and
+per debug group. For example, to enable all <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code>
+messages for the <code class="docutils literal notranslate"><span class="pre">parser</span></code> component:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>% upon loading the tool, all messages are disabled by default:
 | ?- logtalk_load(debug_messages(loader)).
 ...
@@ -806,8 +804,7 @@ built-in predicate <code class="docutils literal notranslate"><span class="pre">
 </div>
 <div class="section" id="ports-profiling">
 <span id="debugging-ports-profiling"></span><h2>Ports profiling<a class="headerlink" href="#ports-profiling" title="Permalink to this headline">¶</a></h2>
-<p>The Logtalk distribution includes a
-<a class="reference external" href="https://logtalk.org/tools.html#ports-profiler">ports_profiler</a> tool
+<p>The Logtalk distribution includes a <a class="reference internal" href="../devtools/ports_profiler.html"><span class="doc">ports_profiler</span></a> tool
 based on the same procedure box model described above. This tool is
 specially useful for debugging performance issues (e.g. due to lack of
 determinism or unexpected backtracking). See the tool documentation for

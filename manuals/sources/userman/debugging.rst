@@ -20,9 +20,8 @@
 Debugging
 =========
 
-The Logtalk distribution includes a command-line
-`debugger <https://logtalk.org/tools.html#debugging>`_ tool
-implemented as a Logtalk application. It can be loaded by typing:
+The Logtalk distribution includes a command-line :doc:`../devtools/debugger`
+tool implemented as a Logtalk application. It can be loaded by typing:
 
 .. code-block:: text
 
@@ -606,13 +605,12 @@ hook predicate. For example:
 Selective printing of debug messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, all debug messages are either printed or skipped, depending on
-the :ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` flags.
-When the code is not compiled in optimal mode, the
-`debug_messages <https://logtalk.org/tools.html#debugging>`_ tool allows
-selectively enabling of debug messages per :term:`component` and per debug
-group. For example, to enable all ``debug`` and ``debug(Group)`` messages
-for the ``parser`` component:
+By default, all debug messages are either printed or skipped, depending on the
+:ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` flags. When the
+code is not compiled in optimal mode, the :doc:`../devtools/debug_messages`
+tool allows selectively enabling of debug messages per :term:`component` and
+per debug group. For example, to enable all ``debug`` and ``debug(Group)``
+messages for the ``parser`` component:
 
 .. code-block:: text
 
@@ -670,8 +668,7 @@ built-in predicate ``true/0`` when compiling entity predicates.
 Ports profiling
 ---------------
 
-The Logtalk distribution includes a
-`ports_profiler <https://logtalk.org/tools.html#ports-profiler>`_ tool
+The Logtalk distribution includes a :doc:`../devtools/ports_profiler` tool
 based on the same procedure box model described above. This tool is
 specially useful for debugging performance issues (e.g. due to lack of
 determinism or unexpected backtracking). See the tool documentation for
