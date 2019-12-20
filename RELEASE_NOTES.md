@@ -37,6 +37,9 @@ error handler code that attempts to convert exception terms for readability.
 
 * ADDED: Detect and report the legacy `abolish/2` Prolog predicate.
 
+* IMPROVED: Only report legacy Prolog predicates as deprecated when they are
+built-in and not defined by the user in the entity where they are called.
+
 * IMPROVED: Take into account foreign and auto-loaded predicates when compiling
 a module as an object also when compiling arbitrary goals used as directives.
 

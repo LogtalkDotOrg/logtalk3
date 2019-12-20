@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 34, 0, b06)).
+'$lgt_version_data'(logtalk(3, 34, 0, b07)).
 
 
 
@@ -11705,6 +11705,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % deprecated Prolog built-in predicates
 
 '$lgt_compile_body'(not(Pred), TPred, DPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(not(_)),
+	\+ '$lgt_pp_defines_predicate_'(not(_), _, _, _, _, _),
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(deprecated, warning),
@@ -13235,6 +13237,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DCond = '$lgt_debug'(goal(abolish(Pred), TCond), ExCtx).
 
 '$lgt_compile_body'(assert(Clause), TCond, DCond, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(assert(_)),
+	\+ '$lgt_pp_defines_predicate_'(assert(_), _, _, _, _, _),
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(deprecated, warning),
@@ -15736,6 +15740,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_compile_message_to_object'(assert(Clause), Obj, TPred, Events, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(assert(_)),
+	\+ '$lgt_pp_defines_predicate_'(assert(_), _, _, _, _, _),
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(deprecated, warning),
@@ -16036,6 +16042,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_compile_message_to_self'(assert(Clause), TPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(assert(_)),
+	\+ '$lgt_pp_defines_predicate_'(assert(_), _, _, _, _, _),
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(deprecated, warning),
