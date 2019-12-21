@@ -259,15 +259,15 @@
 :- if(\+ current_logtalk_flag(prolog_dialect, qp)).
 
 	:- object(duplicated_discontiguous_directive).
-	
+
 		:- discontiguous(foo/1).
-	
+
 		foo(1).
 		foo(2).
 		foo(3).
-	
+
 		:- discontiguous(foo/1).
-	
+
 	:- end_object.
 
 :- endif.
@@ -531,9 +531,10 @@
 		assert(bar).
 
 	bar :-
-		not(baz).
+		not(baz(_)).
 
-	baz.
+	baz(X) :-
+		get(X).
 
 :- end_object.
 

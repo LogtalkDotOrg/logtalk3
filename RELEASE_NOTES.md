@@ -35,6 +35,9 @@ possible to convert an entity prefix to an entity template. The error is
 highly unlikely to occur in practice, however, and only affects the runtime
 error handler code that attempts to convert exception terms for readability.
 
+* ADDED: Report calls to deprecated character input/output built-in Prolog
+predicates `get0/1-2`, `get/1-2`, `skip/1-2`, `put/1-2`, and `tab/1-2`.
+
 * ADDED: Detect and report the legacy `abolish/2` Prolog predicate.
 
 * IMPROVED: Only report legacy Prolog predicates as deprecated when they are
@@ -45,6 +48,9 @@ a module as an object also when compiling arbitrary goals used as directives.
 
 * IMPROVED: Avoid spurious choice-points during source file compilation when
 using some backend Prolog compilers.
+
+* IMPROVED: Refactoring of the compiler code that reports calls to deprecated
+Prolog built-in predicates.
 
 * FIXED: Possible instantiation error when running `logtalk_make(check)` while
 checking for missing predicates when there are dynamic or multifile predicates

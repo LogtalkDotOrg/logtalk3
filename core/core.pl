@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 34, 0, b07)).
+'$lgt_version_data'(logtalk(3, 34, 0, b08)).
 
 
 
@@ -11702,44 +11702,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
 
-% deprecated Prolog built-in predicates
-
-'$lgt_compile_body'(not(Pred), TPred, DPred, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(not(_)),
-	\+ '$lgt_pp_defines_predicate_'(not(_), _, _, _, _, _),
-	!,
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(deprecated, warning),
-		'$lgt_source_file_context'(File, Lines),
-		'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, (not)/1, (\+)/1))
-	;	true
-	),
-	'$lgt_compile_body'(\+ Pred, TPred, DPred, Ctx).
-
-'$lgt_compile_body'(name(_, _), _, _, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(name(_, _)),
-	\+ '$lgt_pp_defines_predicate_'(name(_, _), _, _, _, _, _),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(deprecated, warning),
-	'$lgt_source_file_context'(File, Lines),
-	'$lgt_pp_entity_'(Type, Entity, _),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, name/2)),
-	fail.
-
-'$lgt_compile_body'(current_predicate(_, _), _, _, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(current_predicate(_, _)),
-	\+ '$lgt_pp_defines_predicate_'(current_predicate(_, _), _, _, _, _, _),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(deprecated, warning),
-	'$lgt_source_file_context'(File, Lines),
-	'$lgt_pp_entity_'(Type, Entity, _),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, current_predicate/2)),
-	fail.
-
 % warning on cuts on clauses for multifile predicates
 '$lgt_compile_body'(!, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines, _),
@@ -14377,6 +14339,38 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head),
 	'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity).
+
+% call to a deprecated Prolog built-in predicate
+
+'$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
+	'$lgt_prolog_deprecated_built_in_predicate'(Pred, RPred),
+	'$lgt_prolog_built_in_predicate'(Pred),
+	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _) ->
+		functor(Pred, Functor, Arity),
+		functor(RPred, RFunctor, RArity),
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, Functor/Arity, RFunctor/RArity))
+	;	true
+	),
+	'$lgt_compile_body'(RPred, TPred, DPred, Ctx).
+
+'$lgt_compile_body'(Pred, _, _, Ctx) :-
+	'$lgt_prolog_deprecated_built_in_predicate'(Pred),
+	'$lgt_prolog_built_in_predicate'(Pred),
+	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(deprecated, warning),
+	'$lgt_source_file_context'(File, Lines),
+	'$lgt_pp_entity_'(Type, Entity, _),
+	functor(Pred, Functor, Arity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, Functor/Arity)),
+	fail.
 
 % call to a Prolog built-in predicate
 
@@ -20639,6 +20633,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_prolog_database_predicate'(Term),
 	% proprietary database predicate (declared in the adapter files)
 	!.
+
+
+
+% '$lgt_prolog_deprecated_built_in_predicate'(@callable, -callable)
+%
+% Prolog deprecated predicate that can be replaced by a call to a
+% standard predicate; callers must check that the predicate is a
+% built-in predicate that is not being locally redefined
+
+'$lgt_prolog_deprecated_built_in_predicate'(get0(Code), get_code(Code)).
+'$lgt_prolog_deprecated_built_in_predicate'(get0(Stream, Code), get_code(Stream, Code)).
+'$lgt_prolog_deprecated_built_in_predicate'(put(Code), put_code(Code)).
+'$lgt_prolog_deprecated_built_in_predicate'(put(Stream, Code), put_code(Stream, Code)).
+'$lgt_prolog_deprecated_built_in_predicate'(not(Pred), \+ Pred).
+
+
+
+% '$lgt_prolog_deprecated_built_in_predicate'(@callable, -callable)
+%
+% Prolog deprecated built-in predicate; callers must check that the
+% predicate is a built-in predicate that is not being locally redefined
+
+'$lgt_prolog_deprecated_built_in_predicate'(current_predicate(_, _)).
+'$lgt_prolog_deprecated_built_in_predicate'(get(_)).
+'$lgt_prolog_deprecated_built_in_predicate'(get(_, _)).
+'$lgt_prolog_deprecated_built_in_predicate'(name(_, _)).
+'$lgt_prolog_deprecated_built_in_predicate'(skip(_)).
+'$lgt_prolog_deprecated_built_in_predicate'(skip(_, _)).
+'$lgt_prolog_deprecated_built_in_predicate'(tab(_)).
+'$lgt_prolog_deprecated_built_in_predicate'(tab(_, _)).
 
 
 
