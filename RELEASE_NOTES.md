@@ -35,6 +35,9 @@ possible to convert an entity prefix to an entity template. The error is
 highly unlikely to occur in practice, however, and only affects the runtime
 error handler code that attempts to convert exception terms for readability.
 
+* ADDED: Support for the legacy Prolog database built-in predicates that take
+a clause reference argument when supported by the backend Prolog compiler.
+
 * ADDED: Report calls to deprecated character input/output built-in Prolog
 predicates `get0/1-2`, `get/1-2`, `skip/1-2`, `put/1-2`, and `tab/1-2`.
 
