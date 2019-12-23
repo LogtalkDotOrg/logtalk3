@@ -43,9 +43,9 @@ test_error_choice :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Jan Wielemaker. Adapted to Logtalk by Paulo Moura.',
-		date is 2015/05/12,
+		date is 2019/12/23,
 		comment is 'Unit tests for the setup_call_cleanup/3 built-in predicate that is becoming a de facto standard.',
 		source is 'Tests adapted with permission from the SWI-Prolog distribution.'
 	]).
@@ -53,6 +53,9 @@ test_error_choice :-
 	:- discontiguous([
 		succeeds/1, fails/1, throws/2
 	]).
+
+	condition :-
+		predicate_property(setup_call_cleanup(_,_,_), _).
 
 	setup :-
 		{retractall(v(_))}.

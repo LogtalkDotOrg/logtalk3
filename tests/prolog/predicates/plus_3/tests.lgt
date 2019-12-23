@@ -25,36 +25,45 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2019/12/23,
-		comment is 'Unit tests for the de facto Prolog standard succ/2 built-in predicate.'
+		comment is 'Unit tests for the de facto Prolog standard plus/3 built-in predicate.'
 	]).
 
 	condition :-
-		predicate_property(succ(_,_), _).
+		predicate_property(plus(_,_,_), _).
 
 	% tests from the Logtalk portability work
 
-	test(lgt_succ_2_01, error(instantiation_error)) :-
-		{succ(_, _)}.
+	test(lgt_plus_3_01, error(instantiation_error)) :-
+		{plus(_, _, _)}.
 
-	test(lgt_succ_2_02, error(type_error(integer,a))) :-
-		{succ(a, _)}.
+	test(lgt_plus_3_02, error(instantiation_error)) :-
+		{plus(1, _, _)}.
 
-	test(lgt_succ_2_03, error(type_error(integer,a))) :-
-		{succ(_, a)}.
+	test(lgt_plus_3_03, error(instantiation_error)) :-
+		{plus(_, 1, _)}.
 
-	test(lgt_succ_2_04, error(domain_error(not_less_than_zero, -1))) :-
-		{succ(-1, _)}.
+	test(lgt_plus_3_04, error(instantiation_error)) :-
+		{plus(_, _, 1)}.
 
-	test(lgt_succ_2_05, error(domain_error(not_less_than_zero, -1))) :-
-		{succ(_, -1)}.
+	test(lgt_plus_3_05, error(type_error(integer,a))) :-
+		{plus(a, 1, _)}.
 
-	test(lgt_succ_2_06, true(N == 2)) :-
-		{succ(1, N)}.
+	test(lgt_plus_3_06, error(type_error(integer,a))) :-
+		{plus(1, a, _)}.
 
-	test(lgt_succ_2_07, true(N == 1)) :-
-		{succ(N, 2)}.
+	test(lgt_plus_3_07, error(type_error(integer,a))) :-
+		{plus(_, 1, a)}.
 
-	test(lgt_succ_2_08, fail) :-
-		{succ(3, 2)}.
+	test(lgt_plus_3_08, true(N == 3)) :-
+		{plus(1, 2, N)}.
+
+	test(lgt_plus_3_09, true(N == 2)) :-
+		{plus(1, N, 3)}.
+
+	test(lgt_plus_3_10, true(N == 1)) :-
+		{plus(N, 2, 3)}.
+
+	test(lgt_plus_3_11, fail) :-
+		{plus(1, 2, 4)}.
 
 :- end_object.
