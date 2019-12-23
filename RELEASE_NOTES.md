@@ -119,6 +119,8 @@ entities declared as covered but with no calls to locally defined predicates.
 Tests
 -----
 
+* ADDED: Tests for the de facto Prolog standard `succ/2` built-in predicate.
+
 * UPDATED: Tests for the `goal_expansion/2` predicate to check the case where
 a goal to be expanded resulted from a previous expansion of the same goal.
 
