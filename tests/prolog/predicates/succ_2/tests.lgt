@@ -28,8 +28,6 @@
 		comment is 'Unit tests for the de facto Prolog standard succ/2 built-in predicate.'
 	]).
 
-	condition :-
-		predicate_property(succ(_,_), _).
 
 	% tests from the Logtalk portability work
 
