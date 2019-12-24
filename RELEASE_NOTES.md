@@ -127,6 +127,9 @@ Tests
 * ADDED: Tests for the de facto Prolog standard `succ/2` and `plus/3` built-in
 predicates.
 
+* ADDED: Tests for the legacy Prolog database built-in predicates that take a
+clause reference argument.
+
 * UPDATED: Tests for the `goal_expansion/2` predicate to check the case where
 a goal to be expanded resulted from a previous expansion of the same goal.
 
