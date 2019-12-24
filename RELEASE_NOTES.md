@@ -41,7 +41,12 @@ a clause reference argument when supported by the backend Prolog compiler.
 * ADDED: Report calls to deprecated character input/output built-in Prolog
 predicates `get0/1-2`, `get/1-2`, `skip/1-2`, `put/1-2`, and `tab/1-2`.
 
-* ADDED: Detect and report the legacy `abolish/2` Prolog predicate.
+* ADDED: Report calls to deprecated TTY input/output built-in Prolog
+predicates `ttynl/0`, `ttyflush/0`, `ttyget0/1`, `ttyget/1`, `ttyskip/1`,
+`ttyput/1`, and `ttytab/1`.
+
+* ADDED: Detect and report the legacy `abolish/2`, `otherwise/0`, and
+`prolog_flag/2-3` Prolog predicates.
 
 * IMPROVED: Only report legacy Prolog predicates as deprecated when they are
 built-in and not defined by the user in the entity where they are called.

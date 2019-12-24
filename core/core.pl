@@ -21343,7 +21343,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(put(Code), put_code(Code)).
 '$lgt_prolog_deprecated_built_in_predicate'(put(Stream, Code), put_code(Stream, Code)).
 '$lgt_prolog_deprecated_built_in_predicate'(not(Pred), \+ Pred).
-
+'$lgt_prolog_deprecated_built_in_predicate'(otherwise, true).
+'$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(Flag, Value), current_prolog_flag(Flag, Value)).
 
 
 % '$lgt_prolog_deprecated_built_in_predicate'(@callable, -callable)
@@ -21355,6 +21356,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(get(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(get(_, _)).
 '$lgt_prolog_deprecated_built_in_predicate'(name(_, _)).
+'$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(_, _, _)).
 '$lgt_prolog_deprecated_built_in_predicate'(skip(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(skip(_, _)).
 '$lgt_prolog_deprecated_built_in_predicate'(tab(_)).
@@ -21365,6 +21367,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(ttyget(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(ttyskip(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(ttyput(_)).
+'$lgt_prolog_deprecated_built_in_predicate'(ttytab(_)).
 
 
 
