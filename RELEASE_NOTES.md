@@ -45,8 +45,8 @@ predicates `get0/1-2`, `get/1-2`, `skip/1-2`, `put/1-2`, and `tab/1-2`.
 predicates `ttynl/0`, `ttyflush/0`, `ttyget0/1`, `ttyget/1`, `ttyskip/1`,
 `ttyput/1`, and `ttytab/1`.
 
-* ADDED: Detect and report the legacy `abolish/2`, `otherwise/0`, and
-`prolog_flag/2-3` Prolog predicates.
+* ADDED: Detect and report legacy `on_exception/3`, `raise_exception/1`,
+`abolish/2`, `otherwise/0`, and `prolog_flag/2-3` Prolog predicates.
 
 * IMPROVED: Only report legacy Prolog predicates as deprecated when they are
 built-in and not defined by the user in the entity where they are called.

@@ -21345,7 +21345,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(not(Pred), \+ Pred).
 '$lgt_prolog_deprecated_built_in_predicate'(otherwise, true).
 '$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(Flag, Value), current_prolog_flag(Flag, Value)).
-
+'$lgt_prolog_deprecated_built_in_predicate'(on_exception(Error, Goal, Handler), catch(Goal, Error, Handler)).
+'$lgt_prolog_deprecated_built_in_predicate'(raise_exception(Error), throw(Error)).
 
 % '$lgt_prolog_deprecated_built_in_predicate'(@callable, -callable)
 %
