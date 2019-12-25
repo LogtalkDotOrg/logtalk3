@@ -51,14 +51,14 @@ predicates `ttynl/0`, `ttyflush/0`, `ttyget0/1`, `ttyget/1`, `ttyskip/1`,
 * IMPROVED: Only report legacy Prolog predicates as deprecated when they are
 built-in and not defined by the user in the entity where they are called.
 
+* IMPROVED: Refactoring of the compiler code that reports calls to deprecated
+Prolog built-in predicates.
+
 * IMPROVED: Take into account foreign and auto-loaded predicates when compiling
 a module as an object also when compiling arbitrary goals used as directives.
 
 * IMPROVED: Avoid spurious choice-points during source file compilation when
 using some backend Prolog compilers.
-
-* IMPROVED: Refactoring of the compiler code that reports calls to deprecated
-Prolog built-in predicates.
 
 * FIXED: Possible instantiation error when running `logtalk_make(check)` while
 checking for missing predicates when there are dynamic or multifile predicates
@@ -129,6 +129,8 @@ predicates.
 
 * ADDED: Tests for the legacy Prolog database built-in predicates that take a
 clause reference argument.
+
+* ADDED: Tests for the legacy Prolog blackboard built-in predicates.
 
 * UPDATED: Tests for the `goal_expansion/2` predicate to check the case where
 a goal to be expanded resulted from a previous expansion of the same goal.
