@@ -25,7 +25,7 @@ one of the provided installers that can be downloaded from the
 [Logtalk website](https://logtalk.org). Installers are provided for macOS,
 Windows, and Linux.
 
-This file contains detailed instructions for  *manual* installation and
+This file contains detailed instructions for **manual** installation and
 configuration of Logtalk. You should also consult
 the [scripts/NOTES.md](scripts/NOTES.md) and
 [integration/NOTES.md](integration/NOTES.md) files for a description of a
@@ -33,7 +33,7 @@ set of shell scripts that might be used for Logtalk installation on some
 operating-systems and for easy Logtalk integration with popular Prolog
 compilers.
 
-The POSIX shell scripts assume that `/bin/bash` is available.
+The POSIX shell scripts assume that `bash` is available.
 
 
 Logtalk basic installation
