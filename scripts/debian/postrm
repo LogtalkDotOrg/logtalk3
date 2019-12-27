@@ -3,6 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk Debian package auxiliary script
+##   Last updated on December 27, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -26,6 +27,11 @@ echo "Removing menu entries for some of the Logtalk integration scripts..."
 if [ -x /usr/bin/update-menus ] ; then
 	update-menus
 fi
+
+echo "Removing default definitions for the Logtalk environment variables..."
+
+rm -f /etc/profile.d/logtalk.sh 2> /dev/null
+rm -f /etc/profile.d/logtalk.csh 2> /dev/null
 
 echo ""
 echo "You have successfully uninstalled Logtalk!"

@@ -150,6 +150,12 @@ clauses to patched objects.
 * UPDATED: The `complements/allow` example to also illustrate abolishing a
 dynamic complementing category.
 
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: The Debian installer to define default values for the Logtalk
+environment variables.
+
 
 3.33.0 - December 3, 2019
 =========================

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk Debian package auxiliary script
-##   Last updated on September 29, 2016
+##   Last updated on December 27, 2019
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
@@ -78,7 +78,38 @@ echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
 echo "scripts, consult see the \"/usr/share/logtalk/adapters/NOTES.md\" file"
 echo "for compatibility notes or consult the integration script man page."
+
 echo
+mkdir -p /etc/profile.d
+echo "# Logtalk environment setup" > /etc/profile.d/logtalk.sh
+echo "" >> /etc/profile.d/logtalk.sh
+echo "# Logtalk installation directory:" >> /etc/profile.d/logtalk.sh
+echo "export LOGTALKHOME=/usr/share/logtalk" >> /etc/profile.d/logtalk.sh
+echo "" >> /etc/profile.d/logtalk.sh
+echo "# Default location for Logtalk end-user files:" >> /etc/profile.d/logtalk.sh
+echo "export LOGTALKUSER=\$HOME/logtalk" >> /etc/profile.d/logtalk.sh
+chmod a+x /etc/profile.d/logtalk.sh
+echo "# Logtalk environment setup" > /etc/profile.d/logtalk.csh
+echo "" >> /etc/profile.d/logtalk.csh
+echo "# Logtalk installation directory:" >> /etc/profile.d/logtalk.csh
+echo "setenv LOGTALKHOME /usr/share/logtalk" >> /etc/profile.d/logtalk.csh
+echo "" >> /etc/profile.d/logtalk.csh
+echo "# Default location for Logtalk end-user files:" >> /etc/profile.d/logtalk.csh
+echo "setenv LOGTALKUSER \$HOME/logtalk" >> /etc/profile.d/logtalk.csh
+chmod a+x /etc/profile.d/logtalk.csh
+echo "Defined the following environment variables for all users:"
+echo
+echo "  Logtalk installation directory: LOGTALKHOME = /usr/share/logtalk"
+echo "  Default Logtalk user files directory: LOGTALKUSER = \$HOME/logtalk"
+echo
+echo "You may need to logout and login again or start a new shell in order to"
+echo "use the new environment variables."
+echo
+echo "Users may change the default value of the LOGTALKUSER environment variable"
+echo "in their shell configuration files if they already use, or want to use, a "
+echo "different location for the Logtalk user files directory. This directory "
+echo "is created by running the \"logtalk_user_setup\" shell script, which must"
+echo " be run once by each user before using the integration scripts."
 
 if [ -x /usr/bin/update-mime-database ] ; then
 	mkdir -p /usr/share/mime/packages
