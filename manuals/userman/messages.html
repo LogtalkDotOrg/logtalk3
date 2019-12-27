@@ -114,6 +114,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#broadcasting">Broadcasting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calling-imported-and-inherited-predicates">Calling imported and inherited predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#message-sending-and-event-generation">Message sending and event generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#message-sending-performance">Message sending performance</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
@@ -220,12 +221,12 @@ nomenclature found in other object-oriented programming languages such
 as Smalltalk. Therefore, the terms <em>predicate</em> and <em>method</em> are often
 used interchangeably when referring to predicates defined inside objects
 and categories. A message must always match a predicate within the scope
-of the sender object.</p>
+of the <em>sender</em> object.</p>
 <p>Note that message sending is only the same as calling an object’s
 predicate if the object does not inherit (or import) predicate
 definitions from other objects (or categories). Otherwise, the predicate
 definition that will be executed may depend on the relations between the
-object and with its imported categories (if any) and its ancestor objects.
+object and with its imported categories and its ancestor objects (if any).
 See the <a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">Inheritance</span></a> section for details.</p>
 <p>When a message corresponds to a meta-predicate, the meta-arguments will
 be called in the context of the object (or category) sending the message.</p>
@@ -267,7 +268,7 @@ control construct:</p>
 </div>
 <p>This control construct can only be used within objects and categories
 (at the interpreter top-level, the <em>sender</em> is always the pseudo-object
-<em>user</em> so using this control construct would be equivalent to use the
+<code class="docutils literal notranslate"><span class="pre">user</span></code> so using this control construct would be equivalent to use the
 <code class="docutils literal notranslate"><span class="pre">::/2</span></code> message sending control construct).</p>
 </div>
 <div class="section" id="sending-a-message-to-self">
@@ -279,13 +280,12 @@ This is done in Logtalk through the
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="o">::</span><span class="nv">Message</span>, ....
 </pre></div>
 </div>
-<p>The message must match either a public or protected predicate declared
-for the receiving object or a private predicate within the scope of the
-<em>sender</em> otherwise an error will be thrown (see the Reference Manual for
-details). If the message is sent from inside a category or if we are
-using private inheritance, then the message may also match a private
-predicate. Again, if the predicate is declared but not defined, the
-message simply fails (as per the <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
+<p>The message must match either a public or protected predicate declared for
+the receiving object or a private predicate within the scope of the <em>sender</em>
+otherwise an error will be thrown. If the message is sent from inside a
+category or if we are using private inheritance, then the message may also
+match a private predicate. Again, if the predicate is declared but not
+defined, the message simply fails (as per the <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
 </div>
 <div class="section" id="broadcasting">
 <span id="messages-broadcasting"></span><h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this headline">¶</a></h2>
@@ -372,6 +372,11 @@ containing the predicate definition, we can write:</p>
 <p>When events are not used, is possible to turn off event generation globally
 or on a per entity basis by using the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> compiler
 flag (see the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more details).</p>
+</div>
+<div class="section" id="message-sending-performance">
+<span id="messages-performance"></span><h2>Message sending performance<a class="headerlink" href="#message-sending-performance" title="Permalink to this headline">¶</a></h2>
+<p>For a detailed discussion on message sending performance, see the
+<a class="reference internal" href="performance.html#performance-performance"><span class="std std-ref">Performance</span></a> section.</p>
 </div>
 </div>
 

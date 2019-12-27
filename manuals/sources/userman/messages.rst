@@ -25,13 +25,13 @@ nomenclature found in other object-oriented programming languages such
 as Smalltalk. Therefore, the terms *predicate* and *method* are often
 used interchangeably when referring to predicates defined inside objects
 and categories. A message must always match a predicate within the scope
-of the sender object.
+of the *sender* object.
 
 Note that message sending is only the same as calling an object's
 predicate if the object does not inherit (or import) predicate
 definitions from other objects (or categories). Otherwise, the predicate
 definition that will be executed may depend on the relations between the
-object and with its imported categories (if any) and its ancestor objects.
+object and with its imported categories and its ancestor objects (if any).
 See the :ref:`inheritance_inheritance` section for details.
 
 When a message corresponds to a meta-predicate, the meta-arguments will
@@ -90,7 +90,7 @@ control construct:
 
 This control construct can only be used within objects and categories
 (at the interpreter top-level, the *sender* is always the pseudo-object
-*user* so using this control construct would be equivalent to use the
+``user`` so using this control construct would be equivalent to use the
 ``::/2`` message sending control construct).
 
 Sending a message to *self*
@@ -105,13 +105,12 @@ This is done in Logtalk through the
 
    ..., ::Message, ....
 
-The message must match either a public or protected predicate declared
-for the receiving object or a private predicate within the scope of the
-*sender* otherwise an error will be thrown (see the Reference Manual for
-details). If the message is sent from inside a category or if we are
-using private inheritance, then the message may also match a private
-predicate. Again, if the predicate is declared but not defined, the
-message simply fails (as per the :term:`closed-world assumption`).
+The message must match either a public or protected predicate declared for
+the receiving object or a private predicate within the scope of the *sender*
+otherwise an error will be thrown. If the message is sent from inside a
+category or if we are using private inheritance, then the message may also
+match a private predicate. Again, if the predicate is declared but not
+defined, the message simply fails (as per the :term:`closed-world assumption`).
 
 .. _messages_broadcasting:
 
@@ -220,6 +219,15 @@ containing the predicate definition, we can write:
 When events are not used, is possible to turn off event generation globally
 or on a per entity basis by using the :ref:`events <flag_events>` compiler
 flag (see the :ref:`events_events` section for more details).
+
+.. _messages_performance:
+
+Message sending performance
+---------------------------
+
+For a detailed discussion on message sending performance, see the
+:ref:`performance_performance` section.
+
 
 ..
    .. _messages_performance:
