@@ -33,7 +33,7 @@ Structural reflection
 ---------------------
 
 Structural reflection allows querying the properties of objects, categories,
-protocols, and predicates. It is materialized by an API that supports all the
+protocols, and predicates. It is materialized by an API that is used by all the
 developer tools, which are regular applications. This API provides two views
 on the structure of an application: a *transparent-box view* and a *black-box
 view*, described next.
@@ -76,7 +76,7 @@ calling the reflection methods.
 Built-in methods are provided for querying the :ref:`predicates that are
 declared and can be called or used as messages <methods_current_predicate_1>`
 and for querying the :ref:`predicate properties <methods_predicate_property_2>`.
-It is also possible to enumerate defined entity :ref:`entity operators <methods_current_op_3>`.
+It is also possible to enumerate :ref:`entity operators <methods_current_op_3>`.
 See the sections on :ref:`finding declared predicates <predicates_finding>` and
 on :ref:`predicate properties <predicates_properties>` for more details.
 
@@ -90,4 +90,7 @@ Behavioral reflection provides insight on what an application does when running.
 Specifically, by observing and acting on the messages being exchanged between
 objects. See the section on :ref:`event-driven programming <events_events>`
 for details. In addition, the :ref:`logtalk <apis:logtalk/0>` built-in object
-provides predicates for handling debug events. 
+provides predicates for handling debug events.
+
+For use in debugging tools, there is also a small reflection API providing
+:ref:`trace and debug event predicates <debugging_events>`.
