@@ -101,7 +101,7 @@ initialization code that changes the `code_prefix` default value.
 automatic expansion of selected built-in methods.
 
 * IMPROVED: Documentation of the `built_in/0`, `encoding/1`, `use_module/2`,
-`uses/2`, and `meta_predicate/1` directives.
+`uses/2`, `public/1`, `protected/1`, and `meta_predicate/1` directives.
 
 * IMPROVED: Documentation of the built-in `logtalk_make_target_action/1` and
 `logtalk_library_path/2` predicates.

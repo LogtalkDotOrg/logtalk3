@@ -38,12 +38,13 @@ Description
    public((op(Precedence,Associativity,Operator), ...))
    public([op(Precedence,Associativity,Operator), ...])
 
-Declares public predicates, public grammar rule non-terminals, and
-public operators. A public predicate can be called from any object. A
-public non-terminal can be used as an argument in :ref:`methods_phrase_2`
-and :ref:`methods_phrase_3` calls from any object. Public operators are
-not exported but declaring them provides useful information for defining
-client objects.
+Declares public predicates, public grammar rule non-terminals, and public
+operators. A public predicate can be called from any object. A public
+non-terminal can be used as an argument in :ref:`methods_phrase_2` and
+:ref:`methods_phrase_3` calls from any object. Declaring a public operator
+does not make it global when the entity holding the scope directive is
+compiled and loaded. But declaring public operators provides a reusable
+specification for using them in the entity clients.
 
 Template and modes
 ------------------

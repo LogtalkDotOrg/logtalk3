@@ -51,11 +51,11 @@ Declaring predicates
 --------------------
 
 Logtalk provides a clear distinction between *declaring a predicate* and
-*defining a predicate* and thus clear closed world assumption semantics.
+*defining a predicate* and thus clear :term:`closed-world assumption` semantics.
 Messages or calls for declared but undefined predicates fail. Messages or
 calls for unknown (i.e. non declared) predicates throw an error. Note that
-this is a fundamental requirement for supporting protocols: we must be able
-to declare a predicate without necessarily defining it.
+this is a fundamental requirement for supporting :ref:`protocols <protocols_protocols>`:
+we must be able to declare a predicate without necessarily defining it.
 
 All object (or category) predicates that we want to access from other
 objects (or categories) must be explicitly declared. A predicate
@@ -111,7 +111,13 @@ assert/retract clauses for) the predicate but its clauses can be
 found/defined in the instances themselves.
 
 Scope directives may also be used to declare grammar rule non-terminals
-and operators.
+and operators. For example:
+
+::
+
+   :- public(url//1).
+
+   :- public(op(800, fx, tag)).
 
 .. _predicates_mode:
 
@@ -175,7 +181,7 @@ often have different determinism. The possible values are:
 ``one_or_error``
    Predicate either succeeds once or throws an error (see below).
 ``error``
-   Predicate will throw an error (see below).
+   Predicate will throw an error.
 
 Mode declarations can also be used to document that some call modes will
 throw an error. For instance, regarding the ``arg/3`` and ``open/3`` ISO
@@ -339,11 +345,11 @@ Note that operators can also be declared using a scope directive. Only
 these operators are visible to the :ref:`methods_current_op_3` reflection
 method.
 
-When the same operators are used on several entities within the same
-source file, the corresponding directives must appear before any entity
-that uses them. However, this results in a global scope for the
-operators. If you prefer the operators to be local to the source file,
-just *undefine* them at the end of the file. For example:
+When the same operators are used on several entities within the same source
+file, the corresponding directives must either be repeated in each entity or
+appear before any entity that uses them. But in the later case, this results
+in a global scope for the operators. If you prefer the operators to be local
+to the source file, just *undefine* them at the end of the file. For example:
 
 ::
 
