@@ -203,8 +203,8 @@ specialization relations). An object may also implement one or more
 protocols or import one or more categories.
 
 A *stand-alone* object (i.e. an object with no extension, instantiation,
-or specialization relations with other objects) is always compiled as a
-prototype, that is, a self-describing object. If we want to use classes
+or specialization relations with other objects) always plays the role of
+a prototype, that is, a self-describing object. If we want to use classes
 and instances, then we will need to specify at least one instantiation
 or specialization relation. The best way to do this is to define a set
 of objects that provide the basis of a reflective system [Cointe87]_,
@@ -321,11 +321,8 @@ use these method with the message sending operators
 A third alternative to access object parameters is to use
 :term:`parameter variables <parameter variable>`. Although parameter variables
 introduce a concept of entity global variables, their unique syntax,
-``_ParameterName_``, avoids conflicts and makes them easily recognizable,
-allowing parameters to be added, reordered, or removed without requiring
-any changes to the clauses that refer to them. Note that using parameter
-variables doesn't change the fact that entity parameters are logical
-variables. For example:
+``_ParameterName_``, avoids conflicts and makes them easily recognizable. For
+example:
 
 ::
 
@@ -337,6 +334,11 @@ variables. For example:
        baz :-
            baz(_Baz_),
            ... .
+
+Note that using parameter variables doesn't change the fact that entity parameters
+are logical variables. Parameter variables simplify code maintenance by allowing
+parameters to be added, reordered, or removed without having to specify or update
+parameter indexes.
 
 When storing a parametric object in its own source file, the convention
 is to name the file after the object, with the object arity appended.
