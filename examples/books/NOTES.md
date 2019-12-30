@@ -31,4 +31,4 @@ terms without the need to use if-then-else or cut control constructs.
 For a description of this example, please see the comments in the 
 `books.lgt` source file.
 
-See also the `data_handling` and `cascade` examples. 
+See also the `missing_data `and `cascade` examples.

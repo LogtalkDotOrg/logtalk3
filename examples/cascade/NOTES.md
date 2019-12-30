@@ -42,4 +42,4 @@ For details please see the comments in the `cascade.lgt` source file. The
 `cascade_dcgs.lgt` file contains an alternative implementation of the
 `cascade` object using DCGs.
 
-See also the `expecteds` and `optionals` examples. 
+See also the `missing_data` and `books` examples.

@@ -27,4 +27,4 @@ happen, from data processing, which decides how to handle those events.
 For more details about this example, please see the comments in the 
 `expecteds.lgt` source file.
 
-See also the `cascade` and `optionals` examples. 
+See also the `cascade` and `books` examples.
