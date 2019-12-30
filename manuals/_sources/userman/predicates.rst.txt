@@ -215,16 +215,16 @@ documenting your predicates.
 Meta-predicate directive
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Some predicates may have arguments that will be called as goals or
-interpreted as closures that will be used for constructing goals.
-To ensure that these goals will be executed in the correct context
-(i.e. in the *calling context*, not in the meta-predicate
-*definition context*) we need to use the
-:ref:`directives_meta_predicate_1` directive. For example:
+Some predicates may have arguments that will be called as goals or interpreted
+as :term:`closures <closure>` that will be used for constructing goals. To
+ensure that these goals will be executed in the correct context (i.e. in the
+*calling context*, not in the meta-predicate *definition context*) we need to
+use the :ref:`directives_meta_predicate_1` directive. For example:
 
 ::
 
    :- meta_predicate(findall(*, 0, *)).
+   :- meta_predicate(map(2, *, *)).
 
 The meta-predicate mode arguments in this directive have the following
 meaning:
@@ -233,8 +233,8 @@ meaning:
    Meta-argument that will be called as a goal.
 ``N``
    Meta-argument that will be a closure used to construct a call by
-   appending ``N`` arguments. The value of ``N`` must be a positive
-   integer.
+   extending it with ``N`` arguments. The value of ``N`` must be a
+   positive integer.
 ``::``
    Argument that is context-aware but that will not be used as a goal
    or a closure.
@@ -818,10 +818,10 @@ corresponds to a meta-predicate, the meta-arguments are called in the
 context of the object or category sending the message.
 
 Some meta-predicates have meta-arguments which are not goals but
-closures. Logtalk supports the definition of meta-predicates that are
-called with closures instead of goals as long as the definition uses the
-:ref:`methods_call_N` built-in predicate to call the closure with
-the additional arguments. For example:
+:term:`closures <closure>`. Logtalk supports the definition of meta-predicates
+that are called with closures instead of goals as long as the definition uses
+the :ref:`methods_call_N` built-in predicate to call the closure with the
+additional arguments. For example:
 
 ::
 
@@ -847,9 +847,9 @@ Lambda expressions
 
 The use of `lambda
 expressions <https://en.wikipedia.org/wiki/Lambda_calculus>`_ as
-meta-predicate goal and closure arguments often saves writing auxiliary
-predicates for the sole purpose of calling the meta-predicates. A simple
-example of a lambda expression is:
+meta-predicate goal and :term:`closure` arguments often saves writing
+auxiliary predicates for the sole purpose of calling the meta-predicates.
+A simple example of a lambda expression is:
 
 .. code-block:: text
 
@@ -1359,8 +1359,8 @@ Meta-call methods
 
 Logtalk supports the generalized :ref:`methods_call_N` meta-predicate. This
 built-in private meta-predicate must be used in the implementation of
-meta-predicates which work with closures instead of goals. In addition,
-Logtalk supports the built-in private meta-predicates
+meta-predicates which work with :term:`closures <closure>` instead of goals.
+In addition, Logtalk supports the built-in private meta-predicates
 :ref:`methods_ignore_1`, :ref:`methods_once_1`, and
 :ref:`methods_not_1`. These methods cannot be used as messages to objects.
 
@@ -1413,7 +1413,7 @@ used as messages to objects.
 
 Logtalk also supports :ref:`methods_phrase_1`, :ref:`methods_call_1`, and
 :ref:`methods_eos_0` built-in non-terminals.
-The ``call//1-N`` non-terminals takes a closure (which can be a lambda
+The ``call//1-N`` non-terminals takes a :term:`closure` (which can be a lambda
 expression) plus zero or more additional arguments and are processed by
 appending the input list of tokens and the list of remaining tokens to
 the arguments.

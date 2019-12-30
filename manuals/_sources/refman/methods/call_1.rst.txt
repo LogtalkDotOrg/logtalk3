@@ -33,7 +33,7 @@ Description
    call(^^Closure, Arg1, ...)
    ...
 
-This non-terminal takes a closure and is processed by appending the
+This non-terminal takes a :term:`closure` and is processed by appending the
 input list of tokens and the list of remaining tokens to the arguments
 of the closure. This built-in non-terminal is interpreted as a private
 non-terminal and thus cannot be used as a message to an object.

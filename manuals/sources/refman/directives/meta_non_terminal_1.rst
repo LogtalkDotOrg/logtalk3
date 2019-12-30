@@ -40,8 +40,8 @@ Description
 
 Declares meta-non-terminals, i.e., non-terminals that have arguments
 that will be called as non-terminals (or grammar rule bodies). An
-argument may also be a *closure* instead of a goal if the non-terminal
-uses the :ref:`methods_call_1` Logtalk built-in
+argument may also be a :term:`closure` instead of a goal if the
+non-terminal uses the :ref:`methods_call_1` Logtalk built-in
 methods to construct and call the actual non-terminal from the closure
 and the additional arguments.
 

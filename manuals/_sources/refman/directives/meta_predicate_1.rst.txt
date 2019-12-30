@@ -39,7 +39,7 @@ Description
    meta_predicate([Module:Template, ...])
 
 Declares meta-predicates, i.e., predicates that have arguments that will
-be called as goals. An argument may also be a *closure* instead of a
+be called as goals. An argument may also be a :term:`closure` instead of a
 goal if the meta-predicate uses the :ref:`methods_call_N` Logtalk built-in
 methods to construct and call the actual goal from the closure and the
 additional arguments.

@@ -92,6 +92,8 @@ dynamic predicates from objects and categories.
 
 * ADDED: Handbook section on the debugging API.
 
+* ADDED: Handbook glossary definition of *closure*.
+
 * IMPROVED: The `settings-sample.lgt` file now advises on placement of sample
 initialization code that changes the `code_prefix` default value.
 

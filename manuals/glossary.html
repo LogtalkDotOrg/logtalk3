@@ -226,6 +226,10 @@ sending a <a class="reference internal" href="#term-message"><span class="xref s
 predicate, or calling a declared predicate with no clauses, fails.
 But messages or calls to undeclared predicates generate an error.</p>
 </dd>
+<dt id="term-closure">closure</dt><dd><p>A callable term (i.e. an atom or a compound term) passed to a
+<a class="reference internal" href="#term-meta-predicate"><span class="xref std std-term">meta-predicate</span></a> call where it is extended with additional
+arguments to form a goal called by the meta-predicate.</p>
+</dd>
 <dt id="term-coinductive-predicate">coinductive predicate</dt><dd><p>A predicate whose calls are proved using greatest fixed point
 semantics. Coinductive predicates allows reasoning about
 infinite rational entities such as cyclic terms and ω-automata.</p>
@@ -334,7 +338,7 @@ instance may also be defined as a static object in a source file.</p>
 </dd>
 <dt id="term-interface">interface</dt><dd><p>See <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocol</span></a>.</p>
 </dd>
-<dt id="term-lambda-expression">lambda expression</dt><dd><p>A compound term that can be used in place of a goal or closure
+<dt id="term-lambda-expression">lambda expression</dt><dd><p>A compound term that can be used in place of a goal or <a class="reference internal" href="#term-closure"><span class="xref std std-term">closure</span></a>
 meta-argument and that abstracts a <a class="reference internal" href="#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a> by
 listing its variables and a callable term that implements the
 definition. Lambda expressions help avoiding the need of naming and
@@ -389,7 +393,7 @@ occur at <a class="reference internal" href="#term-static-binding"><span class="
 processing. Messages to self require <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> as the
 value of self is only know at runtime.</p>
 </dd>
-<dt id="term-meta-argument">meta-argument</dt><dd><p>A predicate argument that is called as a goal, used as a closure
+<dt id="term-meta-argument">meta-argument</dt><dd><p>A predicate argument that is called as a goal, used as a <a class="reference internal" href="#term-closure"><span class="xref std std-term">closure</span></a>
 to construct a goal that will be called, or that is handled in a
 way that requires awareness of the predicate calling context.</p>
 </dd>

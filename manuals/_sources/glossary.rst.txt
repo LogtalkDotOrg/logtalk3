@@ -360,7 +360,7 @@ Glossary
       they are defined.
 
    meta-argument
-      A predicate argument that is called as a goal, used as a closure
+      A predicate argument that is called as a goal, used as a :term:`closure`
       to construct a goal that will be called, or that is handled in a
       way that requires awareness of the predicate calling context.
 
@@ -368,6 +368,11 @@ Glossary
       A predicate with one or more :term:`meta-arguments <meta-argument>`.
       For example, :ref:`methods_call_N` and :ref:`methods_findall_3` are
       built-in meta-predicates.
+
+   closure
+      A callable term (i.e. an atom or a compound term) passed to a
+      :term:`meta-predicate` call where it is extended with additional
+      arguments to form a goal called by the meta-predicate.
 
    predicate scope directive
       A directive that declares a predicate by specifying its visibility
@@ -524,7 +529,7 @@ Glossary
       See :term:`static binding`.
 
    lambda expression
-      A compound term that can be used in place of a goal or closure
+      A compound term that can be used in place of a goal or :term:`closure`
       meta-argument and that abstracts a :term:`predicate definition` by
       listing its variables and a callable term that implements the
       definition. Lambda expressions help avoiding the need of naming and

@@ -418,13 +418,13 @@ documenting your predicates.</p>
 </div>
 <div class="section" id="meta-predicate-directive">
 <span id="predicates-meta"></span><h3>Meta-predicate directive<a class="headerlink" href="#meta-predicate-directive" title="Permalink to this headline">¶</a></h3>
-<p>Some predicates may have arguments that will be called as goals or
-interpreted as closures that will be used for constructing goals.
-To ensure that these goals will be executed in the correct context
-(i.e. in the <em>calling context</em>, not in the meta-predicate
-<em>definition context</em>) we need to use the
-<a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive. For example:</p>
+<p>Some predicates may have arguments that will be called as goals or interpreted
+as <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> that will be used for constructing goals. To
+ensure that these goals will be executed in the correct context (i.e. in the
+<em>calling context</em>, not in the meta-predicate <em>definition context</em>) we need to
+use the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(<span class="k">findall</span>(<span class="o">*</span>, <span class="m">0</span>, <span class="o">*</span>)).
+<span class="p">:- </span><span class="k">meta_predicate</span>(map(<span class="m">2</span>, <span class="o">*</span>, <span class="o">*</span>)).
 </pre></div>
 </div>
 <p>The meta-predicate mode arguments in this directive have the following
@@ -433,8 +433,8 @@ meaning:</p>
 <dt><code class="docutils literal notranslate"><span class="pre">0</span></code></dt><dd><p>Meta-argument that will be called as a goal.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">N</span></code></dt><dd><p>Meta-argument that will be a closure used to construct a call by
-appending <code class="docutils literal notranslate"><span class="pre">N</span></code> arguments. The value of <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a positive
-integer.</p>
+extending it with <code class="docutils literal notranslate"><span class="pre">N</span></code> arguments. The value of <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a
+positive integer.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">::</span></code></dt><dd><p>Argument that is context-aware but that will not be used as a goal
 or a closure.</p>
@@ -920,10 +920,10 @@ calling the meta-predicate. In particular, when sending a message that
 corresponds to a meta-predicate, the meta-arguments are called in the
 context of the object or category sending the message.</p>
 <p>Some meta-predicates have meta-arguments which are not goals but
-closures. Logtalk supports the definition of meta-predicates that are
-called with closures instead of goals as long as the definition uses the
-<a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> built-in predicate to call the closure with
-the additional arguments. For example:</p>
+<a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a>. Logtalk supports the definition of meta-predicates
+that are called with closures instead of goals as long as the definition uses
+the <a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> built-in predicate to call the closure with the
+additional arguments. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(all_true<span class="o">/</span><span class="m">2</span>).
 <span class="p">:- </span><span class="k">meta_predicate</span>(all_true(<span class="m">1</span>, <span class="o">*</span>)).
 
@@ -943,9 +943,9 @@ or a control construct.</p>
 <span id="predicates-lambdas"></span><h3>Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this headline">¶</a></h3>
 <p>The use of <a class="reference external" href="https://en.wikipedia.org/wiki/Lambda_calculus">lambda
 expressions</a> as
-meta-predicate goal and closure arguments often saves writing auxiliary
-predicates for the sole purpose of calling the meta-predicates. A simple
-example of a lambda expression is:</p>
+meta-predicate goal and <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closure</span></a> arguments often saves writing
+auxiliary predicates for the sole purpose of calling the meta-predicates.
+A simple example of a lambda expression is:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- meta::map([X,Y]&gt;&gt;(Y is 2*X), [1,2,3], Ys).
 Ys = [2,4,6]
 yes
@@ -1385,8 +1385,8 @@ methods.</p>
 <span id="predicates-metacalls"></span><h3>Meta-call methods<a class="headerlink" href="#meta-call-methods" title="Permalink to this headline">¶</a></h3>
 <p>Logtalk supports the generalized <a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> meta-predicate. This
 built-in private meta-predicate must be used in the implementation of
-meta-predicates which work with closures instead of goals. In addition,
-Logtalk supports the built-in private meta-predicates
+meta-predicates which work with <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> instead of goals.
+In addition, Logtalk supports the built-in private meta-predicates
 <a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a>, <a class="reference internal" href="../refman/methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a>, and
 <a class="reference internal" href="../refman/methods/not_1.html#methods-not-1"><span class="std std-ref">\+/1</span></a>. These methods cannot be used as messages to objects.</p>
 </div>
@@ -1428,7 +1428,7 @@ compilers that support definite clause grammars. These methods cannot be
 used as messages to objects.</p>
 <p>Logtalk also supports <a class="reference internal" href="../refman/methods/phrase_1.html#methods-phrase-1"><span class="std std-ref">phrase//1</span></a>, <a class="reference internal" href="../refman/methods/call_1.html#methods-call-1"><span class="std std-ref">call//1-N</span></a>, and
 <a class="reference internal" href="../refman/methods/eos_0.html#methods-eos-0"><span class="std std-ref">eos//0</span></a> built-in non-terminals.
-The <code class="docutils literal notranslate"><span class="pre">call//1-N</span></code> non-terminals takes a closure (which can be a lambda
+The <code class="docutils literal notranslate"><span class="pre">call//1-N</span></code> non-terminals takes a <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closure</span></a> (which can be a lambda
 expression) plus zero or more additional arguments and are processed by
 appending the input list of tokens and the list of remaining tokens to
 the arguments.</p>

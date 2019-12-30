@@ -312,8 +312,8 @@ question:
    N = 42
    yes
    
-Note that the fourth argument, ``'=='(42)`` in our example, is a closure that
-is used to check the answers provided by the user. The question is repeated
+Note that the fourth argument, ``'=='(42)`` in our example, is a :term:`closure`
+that is used to check the answers provided by the user. The question is repeated
 until the goal constructed by extending the closure with the user answer
 succeeds. For example:
 

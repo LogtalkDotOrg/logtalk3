@@ -292,8 +292,8 @@ Currently, Logtalk supports the following module directives:
    operator declarations.
 ``meta_predicate/1``
    Module meta-predicates become object meta-predicates. Only predicate
-   arguments marked as goals or closures (using an integer) are
-   interpreted as meta-arguments. In addition, Prolog module
+   arguments marked as goals or :term:`closures <closure>` (using an integer)
+   are interpreted as meta-arguments. In addition, Prolog module
    meta-predicates and Logtalk meta-predicates don't share the same
    explicit-qualification calling semantics: in Logtalk, meta-arguments
    are always called in the context of the *sender*.
