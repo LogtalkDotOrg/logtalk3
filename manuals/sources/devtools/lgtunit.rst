@@ -154,11 +154,62 @@ driver file that runs the tests collecting code coverage data and a
 quicker driver file that skips code coverage and compiles the code to be
 tested in optimized mode.
 
+Parametric test objects
+-----------------------
+
+Parameterized unit tests can be easily defined by using parametric test
+objects. A typical example is testing multiple implementations of the
+same protocol. In this case, we can use a parameter to pass the specific
+implementation being tested. For example, assume that we want to run the
+same set of tests for the library ``randomp`` protocol. We can write:
+
+::
+
+   :- object(tests(_RandomObject_),
+       extends(lgtunit)).
+
+       :- uses(_RandomObject_, [
+           random/1, between/3, member/2,
+           ...
+       ]).
+
+       test(between_3_in_interval) :-
+           between(1, 10, Random),
+           1 =< Random, Random =< 10.
+
+       ...
+
+   :- end_object.
+
+We can then test a specific implementation by instantiating the
+parameter. For example:
+
+::
+
+   | ?- tests(fast_random)::run.
+
+Or use the ``lgtunit::run_test_sets/1`` predicate to test all the
+implementations:
+
+::
+
+   | ?- lgtunit::run_test_sets([
+           tests(backend_random),
+           tests(fast_random),
+           tests(random)
+       ]).
+
 Test dialects
 -------------
 
 Multiple test *dialects* are supported by default. See the next section
-on how to define your own test dialects.
+on how to define your own test dialects. In all dialects, a callable
+term, usually an atom, is used to uniquely identify a test. This
+simplifies reporting failed tests and running tests selectively. An
+error message is printed if duplicated test identifiers are found. These
+errors must be corrected otherwise the reported test results can be
+misleading. Ideally, tests should have descriptive names that clearly
+state the purpose of the test and what is being tested.
 
 Unit tests can be written using any of the following predefined
 dialects:
@@ -168,9 +219,9 @@ dialects:
    test(Test) :- Goal.
 
 This is the most simple dialect, allowing the specification of tests
-that are expected to succeed. The argument of the ``test/1`` predicate,
-``Test``, is an atom that identifies it and must be unique. A more
-versatile dialect is:
+that are expected to succeed. The argument of the ``test/1`` predicate
+is the test identifier, which must be unique. A more versatile dialect
+is:
 
 ::
 
@@ -279,26 +330,10 @@ The valid options are the same as for the ``test/3`` dialect plus a
 generated/run (default is 100) and a ``s/1`` option to specify the
 maximum number of shrink operations (default is 64).
 
-In all dialects, ``Test`` is a callable term, usually an atom, that
-uniquely identifies a test. This simplifies reporting failed tests and
-running tests selectively. An error message is printed if duplicated
-test identifiers are found. These errors must be corrected otherwise the
-reported test results can be misleading. Ideally, tests should have
-descriptive names that clearly state the purpose of the test and what is
-being tested.
-
 For examples of how to write unit tests, check the ``tests`` folder or
 the ``testing`` example in the ``examples`` folder in the Logtalk
 distribution. Most of the provided examples also include unit tests,
 some of them with code coverage.
-
-Parameterized unit tests can be easily defined by using parametric
-objects.
-
-Note: when using the ``(<<)/2`` debugging control construct to access
-and test an object local (i.e. non-public) predicates, make sure that
-the compiler flag ``context_switching_calls`` is set to ``allow`` for
-those objects.
 
 User-defined test dialects
 --------------------------
@@ -525,6 +560,18 @@ Floating-point numbers can be compared using the ``=~=/2``,
 ``tolerance_equal/4`` predicates provided by ``lgtunit``. Using the
 ``=/2`` term unification built-in predicate is almost always an error as
 it would mask test goals failing to bind output arguments.
+
+Testing local predicates
+------------------------
+
+The ``(<<)/2`` debugging control construct can be used to access and
+test object local predicates (i.e. predicates without a scope
+directive). In this case, make sure that the ``context_switching_calls``
+compiler flag is set to ``allow`` for those objects. This is seldom
+required, however, as local predicates are usually auxiliary predicates
+called by public predicates and thus tested when testing those public
+predicates. The code coverage support can pinpoint any local predicate
+clause that is not being exercised by the tests.
 
 Testing non-deterministic predicates
 ------------------------------------
@@ -985,8 +1032,8 @@ Known issues
 
 Parameter variables (``_VariableName_``) cannot currently be used in the
 definition of test options (e.g. ``condition/1``) when using the
-``test/3`` dialect. Use in alternative the ``parameter/2`` built-in
-execution context predicate.
+``test/3`` dialect. Use in alternative the ``pgr/2`` built-in execution
+context predicate.
 
 Deterministic unit tests are currently not available when using Lean
 Prolog or Quintus Prolog as backend compilers do the lack of a required

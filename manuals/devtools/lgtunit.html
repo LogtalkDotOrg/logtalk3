@@ -123,11 +123,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#writing-and-loading-tests">Writing and loading tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parametric-test-objects">Parametric test objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-dialects">Test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#user-defined-test-dialects">User-defined test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quickcheck">QuickCheck</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#skipping-tests">Skipping tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#checking-test-goal-results">Checking test goal results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-local-predicates">Testing local predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-non-deterministic-predicates">Testing non-deterministic predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-generators">Testing generators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-input-output-predicates">Testing input/output predicates</a></li>
@@ -352,19 +354,64 @@ driver file that runs the tests collecting code coverage data and a
 quicker driver file that skips code coverage and compiles the code to be
 tested in optimized mode.</p>
 </div>
+<div class="section" id="parametric-test-objects">
+<h2>Parametric test objects<a class="headerlink" href="#parametric-test-objects" title="Permalink to this headline">¶</a></h2>
+<p>Parameterized unit tests can be easily defined by using parametric test
+objects. A typical example is testing multiple implementations of the
+same protocol. In this case, we can use a parameter to pass the specific
+implementation being tested. For example, assume that we want to run the
+same set of tests for the library <code class="docutils literal notranslate"><span class="pre">randomp</span></code> protocol. We can write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests(<span class="nv">_RandomObject_</span>),
+    <span class="k">extends</span>(lgtunit)).
+
+<span class="p">    :- </span><span class="k">uses</span>(<span class="nv">_RandomObject_</span>, [
+        random<span class="o">/</span><span class="m">1</span>, between<span class="o">/</span><span class="m">3</span>, member<span class="o">/</span><span class="m">2</span>,
+        ...
+    ]).
+
+    test(between_3_in_interval) <span class="o">:-</span>
+        between(<span class="m">1</span>, <span class="m">10</span>, <span class="nv">Random</span>),
+        <span class="m">1</span> <span class="o">=&lt;</span> <span class="nv">Random</span>, <span class="nv">Random</span> <span class="o">=&lt;</span> <span class="m">10.</span>
+
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>We can then test a specific implementation by instantiating the
+parameter. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tests(fast_random)<span class="o">::</span>run.
+</pre></div>
+</div>
+<p>Or use the <code class="docutils literal notranslate"><span class="pre">lgtunit::run_test_sets/1</span></code> predicate to test all the
+implementations:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>run_test_sets([
+        tests(backend_random),
+        tests(fast_random),
+        tests(random)
+    ]).
+</pre></div>
+</div>
+</div>
 <div class="section" id="test-dialects">
 <h2>Test dialects<a class="headerlink" href="#test-dialects" title="Permalink to this headline">¶</a></h2>
 <p>Multiple test <em>dialects</em> are supported by default. See the next section
-on how to define your own test dialects.</p>
+on how to define your own test dialects. In all dialects, a callable
+term, usually an atom, is used to uniquely identify a test. This
+simplifies reporting failed tests and running tests selectively. An
+error message is printed if duplicated test identifiers are found. These
+errors must be corrected otherwise the reported test results can be
+misleading. Ideally, tests should have descriptive names that clearly
+state the purpose of the test and what is being tested.</p>
 <p>Unit tests can be written using any of the following predefined
 dialects:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
 </pre></div>
 </div>
 <p>This is the most simple dialect, allowing the specification of tests
-that are expected to succeed. The argument of the <code class="docutils literal notranslate"><span class="pre">test/1</span></code> predicate,
-<code class="docutils literal notranslate"><span class="pre">Test</span></code>, is an atom that identifies it and must be unique. A more
-versatile dialect is:</p>
+that are expected to succeed. The argument of the <code class="docutils literal notranslate"><span class="pre">test/1</span></code> predicate
+is the test identifier, which must be unique. A more versatile dialect
+is:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>succeeds(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
 deterministic(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
 fails(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
@@ -492,23 +539,10 @@ quick_check(<span class="nv">Test</span>, <span class="nv">Template</span>).
 <code class="docutils literal notranslate"><span class="pre">n/1</span></code> option to specify the number of random tests that will be
 generated/run (default is 100) and a <code class="docutils literal notranslate"><span class="pre">s/1</span></code> option to specify the
 maximum number of shrink operations (default is 64).</p>
-<p>In all dialects, <code class="docutils literal notranslate"><span class="pre">Test</span></code> is a callable term, usually an atom, that
-uniquely identifies a test. This simplifies reporting failed tests and
-running tests selectively. An error message is printed if duplicated
-test identifiers are found. These errors must be corrected otherwise the
-reported test results can be misleading. Ideally, tests should have
-descriptive names that clearly state the purpose of the test and what is
-being tested.</p>
 <p>For examples of how to write unit tests, check the <code class="docutils literal notranslate"><span class="pre">tests</span></code> folder or
 the <code class="docutils literal notranslate"><span class="pre">testing</span></code> example in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> folder in the Logtalk
 distribution. Most of the provided examples also include unit tests,
 some of them with code coverage.</p>
-<p>Parameterized unit tests can be easily defined by using parametric
-objects.</p>
-<p>Note: when using the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct to access
-and test an object local (i.e. non-public) predicates, make sure that
-the compiler flag <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for
-those objects.</p>
 </div>
 <div class="section" id="user-defined-test-dialects">
 <h2>User-defined test dialects<a class="headerlink" href="#user-defined-test-dialects" title="Permalink to this headline">¶</a></h2>
@@ -699,6 +733,17 @@ Floating-point numbers can be compared using the <code class="docutils literal n
 <code class="docutils literal notranslate"><span class="pre">tolerance_equal/4</span></code> predicates provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. Using the
 <code class="docutils literal notranslate"><span class="pre">=/2</span></code> term unification built-in predicate is almost always an error as
 it would mask test goals failing to bind output arguments.</p>
+</div>
+<div class="section" id="testing-local-predicates">
+<h2>Testing local predicates<a class="headerlink" href="#testing-local-predicates" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct can be used to access and
+test object local predicates (i.e. predicates without a scope
+directive). In this case, make sure that the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code>
+compiler flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for those objects. This is seldom
+required, however, as local predicates are usually auxiliary predicates
+called by public predicates and thus tested when testing those public
+predicates. The code coverage support can pinpoint any local predicate
+clause that is not being exercised by the tests.</p>
 </div>
 <div class="section" id="testing-non-deterministic-predicates">
 <h2>Testing non-deterministic predicates<a class="headerlink" href="#testing-non-deterministic-predicates" title="Permalink to this headline">¶</a></h2>
@@ -1125,8 +1170,8 @@ parameter <code class="docutils literal notranslate"><span class="pre">host</spa
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
 <p>Parameter variables (<code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>) cannot currently be used in the
 definition of test options (e.g. <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>) when using the
-<code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. Use in alternative the <code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> built-in
-execution context predicate.</p>
+<code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. Use in alternative the <code class="docutils literal notranslate"><span class="pre">pgr/2</span></code> built-in execution
+context predicate.</p>
 <p>Deterministic unit tests are currently not available when using Lean
 Prolog or Quintus Prolog as backend compilers do the lack of a required
 built-in support that cannot be sensibly defined in Prolog.</p>
