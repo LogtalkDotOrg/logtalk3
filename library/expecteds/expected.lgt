@@ -83,7 +83,13 @@
 		).
 
 	from_goal(Goal, Value, Expected) :-
-		from_goal(Goal, Value, fail, Expected).
+		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
+				Expected = expected(Value)
+			;	Expected = unexpected(Error)
+			)
+		;	Expected = unexpected(fail)
+		).
 
 	from_goal(Closure, Expected) :-
 		(	catch(call(Closure, Value), Error, true) ->
@@ -171,7 +177,7 @@
 	:- info(unexpected/1, [
 		comment is 'Returns the error hold by the expected term. Throws an error otherwise.',
 		argnames is ['Error'],
-		exceptions is ['Reference holds a value' - existence_error(unexpected_term,'Expected')]
+		exceptions is ['Expected term holds a value' - existence_error(unexpected_term,'Expected')]
 	]).
 
 	:- public(expected/1).
@@ -179,7 +185,7 @@
 	:- info(expected/1, [
 		comment is 'Returns the value hold by the expected term. Throws an error otherwise.',
 		argnames is ['Value'],
-		exceptions is ['Reference holds an error' - existence_error(expected_term,'Expected')]
+		exceptions is ['Expected term holds an error' - existence_error(expected_term,'Expected')]
 	]).
 
 	:- public(map/2).
@@ -211,7 +217,7 @@
 	:- info(or_else_get/2, [
 		comment is 'Returns the value hold by the expected term if it does not hold an error. Otherwise applies a closure to compute the expected value. Throws an error when the expected term holds an error and a value cannot be computed.',
 		argnames is ['Value', 'Closure'],
-		exceptions is ['Reference holds an unexpected term and an expected term cannot be computed' - existence_error(expected_term,'Expected')]
+		exceptions is ['Expected term holds an unexpected error and an expected value cannot be computed' - existence_error(expected_term,'Expected')]
 	]).
 
 	:- public(or_else_call/2).

@@ -117,6 +117,12 @@ support for module qualified arguments.
 * FIXED: Missing reference to the `synchronized/1` directive in the Handbook
 section on predicate declarations.
 
+Library
+-------
+
+* FIXED: The `expected::from_goal/3` predicate to match its description when
+computing the expected value throws an exception.
+
 Tools
 _____
 

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2020/01/02,
 		comment is 'Unit tests for the "expecteds" library.'
 	]).
 
@@ -75,6 +75,10 @@
 	succeeds(expected_from_goal_3_03) :-
 		expected::from_goal(Y is _, Y, Expected), expected(Expected)::is_unexpected.
 
+	succeeds(expected_from_goal_3_04) :-
+		expected::from_goal(Y is _, Y, Expected), expected(Expected)::unexpected(Error),
+		subsumes_term(error(instantiation_error, _), Error).
+
 	% from_goal/2 tests
 
 	succeeds(expected_from_goal_2_01) :-
@@ -86,6 +90,10 @@
 
 	succeeds(expected_from_goal_2_03) :-
 		expected::from_goal(is(_), Expected), expected(Expected)::is_unexpected.
+
+	succeeds(expected_from_goal_2_04) :-
+		expected::from_goal(is(_), Expected), expected(Expected)::unexpected(Error),
+		subsumes_term(error(instantiation_error, _), Error).
 
 	% is_unexpected/0 tests
 

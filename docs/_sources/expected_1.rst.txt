@@ -148,7 +148,7 @@ Returns the error hold by the expected term. Throws an error otherwise.
 |    ``unexpected(--term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Reference holds a value:
+|    Expected term holds a value:
 |        ``existence_error(unexpected_term,Expected)``
 
 
@@ -175,7 +175,7 @@ Returns the value hold by the expected term. Throws an error otherwise.
 |    ``expected(--term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Reference holds an error:
+|    Expected term holds an error:
 |        ``existence_error(expected_term,Expected)``
 
 
@@ -277,7 +277,7 @@ Returns the value hold by the expected term if it does not hold an error. Otherw
 |    ``or_else_get(--term,+callable)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Reference holds an unexpected term and an expected term cannot be computed:
+|    Expected term holds an unexpected error and an expected value cannot be computed:
 |        ``existence_error(expected_term,Expected)``
 
 
