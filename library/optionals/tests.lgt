@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.16,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2020/01/02,
 		comment is 'Unit tests for the "optionals" library.'
 	]).
 
@@ -76,6 +76,34 @@
 
 	succeeds(optional_from_goal_2_04) :-
 		optional::from_goal(nonvar, Optional), optional(Optional)::is_empty.
+
+	% from_generator/3 tests
+
+	succeeds(optional_from_generator_3_01) :-
+		findall(Optional, optional::from_generator(a(X), X, Optional), [Optional1,Optional2,Optional3]),
+		optional(Optional1)::is_present,
+		optional(Optional2)::is_present,
+		optional(Optional3)::is_empty.
+
+	succeeds(optional_from_generator_3_02) :-
+		findall(Optional, optional::from_generator(b(X), X, Optional), [Optional1,Optional2,Optional3]),
+		optional(Optional1)::get(Value1), Value1 == 1,
+		optional(Optional2)::get(Value2), Value2 == 2,
+		optional(Optional3)::is_empty.
+
+	% from_generator/2 tests
+
+	succeeds(optional_from_generator_2_01) :-
+		findall(Optional, optional::from_generator(a, Optional), [Optional1,Optional2,Optional3]),
+		optional(Optional1)::is_present,
+		optional(Optional2)::is_present,
+		optional(Optional3)::is_empty.
+
+	succeeds(optional_from_generator_2_02) :-
+		findall(Optional, optional::from_generator(b, Optional), [Optional1,Optional2,Optional3]),
+		optional(Optional1)::get(Value1), Value1 == 1,
+		optional(Optional2)::get(Value2), Value2 == 2,
+		optional(Optional3)::is_empty.
 
 	% is_empty/0 tests
 
@@ -322,5 +350,13 @@
 	flat_map_closure(Value, Optional) :-
 		char_code(Value, NewValue),
 		optional::of(NewValue, Optional).
+
+	a(1).
+	a(2).
+	a(_) :-
+		throw(e).
+
+	b(1).
+	b(2).
 
 :- end_object.

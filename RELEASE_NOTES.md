@@ -120,8 +120,8 @@ section on predicate declarations.
 Library
 -------
 
-* ADDED: Non-deterministic constructors, `from_generator/2-4`, to the
-`expecteds` library.
+* ADDED: Non-deterministic constructors to the `expecteds` and `optionals`
+libraries.
 
 * FIXED: The `expected::from_goal/3` predicate to match its description when
 computing the expected value throws an exception.
