@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.9,
+		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2020/01/02,
 		comment is 'Unit tests for the "expecteds" library.'
@@ -94,6 +94,48 @@
 	succeeds(expected_from_goal_2_04) :-
 		expected::from_goal(is(_), Expected), expected(Expected)::unexpected(Error),
 		subsumes_term(error(instantiation_error, _), Error).
+
+	% from_generator/4 tests
+
+	succeeds(expected_from_generator_4_01) :-
+		findall(Expected, expected::from_generator(a(X), X, failure, Expected), [Expected1,Expected2,Expected3]),
+		expected(Expected1)::is_expected,
+		expected(Expected2)::is_expected,
+		expected(Expected3)::is_unexpected.
+
+	succeeds(expected_from_generator_4_02) :-
+		findall(Expected, expected::from_generator(a(X), X, failure, Expected), [Expected1,Expected2,Expected3]),
+		expected(Expected1)::expected(Value1), Value1 == 1,
+		expected(Expected2)::expected(Value2), Value2 == 2,
+		expected(Expected3)::unexpected(Error), Error == failure.
+
+	% from_generator/3 tests
+
+	succeeds(expected_from_generator_3_01) :-
+		findall(Expected, expected::from_generator(a(X), X, Expected), [Expected1,Expected2,Expected3]),
+		expected(Expected1)::is_expected,
+		expected(Expected2)::is_expected,
+		expected(Expected3)::is_unexpected.
+
+	succeeds(expected_from_generator_3_02) :-
+		findall(Expected, expected::from_generator(a(X), X, Expected), [Expected1,Expected2,Expected3]),
+		expected(Expected1)::expected(Value1), Value1 == 1,
+		expected(Expected2)::expected(Value2), Value2 == 2,
+		expected(Expected3)::unexpected(Error), Error == e.
+
+	% from_generator/2 tests
+
+	succeeds(expected_from_generator_2_01) :-
+		findall(Expected, expected::from_generator(a, Expected), [Expected1,Expected2,Expected3]),
+		expected(Expected1)::is_expected,
+		expected(Expected2)::is_expected,
+		expected(Expected3)::is_unexpected.
+
+	succeeds(expected_from_generator_2_02) :-
+		findall(Expected, expected::from_generator(a, Expected), [Expected1,Expected2,Expected3]),
+		expected(Expected1)::expected(Value1), Value1 == 1,
+		expected(Expected2)::expected(Value2), Value2 == 2,
+		expected(Expected3)::unexpected(Error), Error == e.
 
 	% is_unexpected/0 tests
 
@@ -373,5 +415,10 @@
 	flat_map_closure(Value, NewExpected) :-
 		char_code(Value, NewValue),
 		expected::of_expected(NewValue, NewExpected).
+
+	a(1).
+	a(2).
+	a(_) :-
+		throw(e).
 
 :- end_object.
