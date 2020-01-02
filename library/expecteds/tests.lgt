@@ -104,7 +104,7 @@
 		expected(Expected3)::is_unexpected.
 
 	succeeds(expected_from_generator_4_02) :-
-		findall(Expected, expected::from_generator(a(X), X, failure, Expected), [Expected1,Expected2,Expected3]),
+		findall(Expected, expected::from_generator(b(X), X, failure, Expected), [Expected1,Expected2,Expected3]),
 		expected(Expected1)::expected(Value1), Value1 == 1,
 		expected(Expected2)::expected(Value2), Value2 == 2,
 		expected(Expected3)::unexpected(Error), Error == failure.
@@ -123,6 +123,12 @@
 		expected(Expected2)::expected(Value2), Value2 == 2,
 		expected(Expected3)::unexpected(Error), Error == e.
 
+	succeeds(expected_from_generator_3_03) :-
+		findall(Expected, expected::from_generator(b(X), X, Expected), [Expected1,Expected2,Expected3]),
+		expected(Expected1)::expected(Value1), Value1 == 1,
+		expected(Expected2)::expected(Value2), Value2 == 2,
+		expected(Expected3)::unexpected(Error), Error == fail.
+
 	% from_generator/2 tests
 
 	succeeds(expected_from_generator_2_01) :-
@@ -136,6 +142,12 @@
 		expected(Expected1)::expected(Value1), Value1 == 1,
 		expected(Expected2)::expected(Value2), Value2 == 2,
 		expected(Expected3)::unexpected(Error), Error == e.
+
+	succeeds(expected_from_generator_2_03) :-
+		findall(Expected, expected::from_generator(b, Expected), [Expected1,Expected2,Expected3]),
+		expected(Expected1)::expected(Value1), Value1 == 1,
+		expected(Expected2)::expected(Value2), Value2 == 2,
+		expected(Expected3)::unexpected(Error), Error == fail.
 
 	% is_unexpected/0 tests
 
@@ -420,5 +432,8 @@
 	a(2).
 	a(_) :-
 		throw(e).
+
+	b(1).
+	b(2).
 
 :- end_object.
