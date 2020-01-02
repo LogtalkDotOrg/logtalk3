@@ -4,7 +4,7 @@
 %  Last updated on April 12, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
+%  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.

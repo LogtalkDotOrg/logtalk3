@@ -2,7 +2,7 @@
 ; Last updated on September 24, 2019
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
-; Copyright 1998-2019 Paulo Moura <pmoura@logtalk.org>
+; Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Licensed under the Apache License, Version 2.0 (the "License");
 ; you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 ; limitations under the License.
 
 #define MyAppName "Logtalk"
-#define MyAppCopyright "Copyright © 1998-2019 Paulo Moura"
+#define MyAppCopyright "Copyright © 1998-2020 Paulo Moura"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "https://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"
