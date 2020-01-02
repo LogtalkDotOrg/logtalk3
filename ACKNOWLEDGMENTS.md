@@ -35,6 +35,7 @@ CONTRIBUTORS
 * Barry Evans (dead code scanner tool, usability suggestions)
 * Clara Dimene (GeSHi syntax highlighter)
 * Damien Roch (Docker support)
+* Daniel Gross (documentation feedback and suggestions)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
 * Douglas R. Miles (suggestions, bug reports, Logtalk on SWISH experiments)
