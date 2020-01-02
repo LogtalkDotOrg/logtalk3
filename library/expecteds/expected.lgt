@@ -49,7 +49,7 @@
 	:- meta_predicate(from_goal(0, *, *, *)).
 	:- mode(from_goal(+callable, --term, @term, --nonvar), one).
 	:- info(from_goal/4, [
-		comment is 'Constructs an expected term holding a value bound by calling the given goal. Otherwise returns a reference with the unexpected goal error or failure represented by the ``Error`` argument.',
+		comment is 'Constructs an expected term holding a value bound by calling the given goal. Otherwise returns an expected term with the unexpected goal error or failure represented by the ``Error`` argument.',
 		argnames is ['Goal', 'Value', 'Error', 'Expected']
 	]).
 
@@ -186,7 +186,7 @@
 	:- meta_predicate(map(2, *)).
 	:- mode(map(+callable, --nonvar), one).
 	:- info(map/2, [
-		comment is 'When the expected term does not hold an error and mapping a closure with the expected value and the new value as additional arguments is successful, returns a reference with the new value. Otherwise returns the same expected term.',
+		comment is 'When the expected term does not hold an error and mapping a closure with the expected value and the new value as additional arguments is successful, returns an expected term with the new value. Otherwise returns the same expected term.',
 		argnames is ['Closure', 'NewExpected']
 	]).
 

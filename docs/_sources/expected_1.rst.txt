@@ -191,7 +191,7 @@ Returns the value hold by the expected term. Throws an error otherwise.
 ``map/2``
 ^^^^^^^^^
 
-When the expected term does not hold an error and mapping a closure with the expected value and the new value as additional arguments is successful, returns a reference with the new value. Otherwise returns the same expected term.
+When the expected term does not hold an error and mapping a closure with the expected value and the new value as additional arguments is successful, returns an expected term with the new value. Otherwise returns the same expected term.
 
 | **Compilation flags:**
 |    ``static``

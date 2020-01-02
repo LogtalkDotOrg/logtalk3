@@ -93,7 +93,7 @@ Constructs an expected term from an expected value.
 ``from_goal/4``
 ^^^^^^^^^^^^^^^
 
-Constructs an expected term holding a value bound by calling the given goal. Otherwise returns a reference with the unexpected goal error or failure represented by the ``Error`` argument.
+Constructs an expected term holding a value bound by calling the given goal. Otherwise returns an expected term with the unexpected goal error or failure represented by the ``Error`` argument.
 
 | **Compilation flags:**
 |    ``static``
