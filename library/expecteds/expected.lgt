@@ -21,9 +21,9 @@
 :- object(expected).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2020/01/02,
 		comment is 'Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type ``expected`` for use with the ``type`` library object.'
@@ -57,7 +57,7 @@
 	:- meta_predicate(from_goal(0, *, *)).
 	:- mode(from_goal(+callable, --term, --nonvar), one).
 	:- info(from_goal/3, [
-		comment is 'Constructs an expected term holding a value bound by calling the given goal. Otherwise returns an expected term with the unexpected goal error or, in case of closure goal, the atom ``fail``.',
+		comment is 'Constructs an expected term holding a value bound by calling the given goal. Otherwise returns an expected term with the unexpected goal error or, in case of goal failure, the atom ``fail``.',
 		argnames is ['Goal', 'Value', 'Expected']
 	]).
 
