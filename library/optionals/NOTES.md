@@ -23,8 +23,8 @@ About
 This library provides an implementation of *optional terms* with an API
 modeled after the Java 8 `Optional` class (originally due to requests by
 users working in Logtalk/Java hybrid applications). An optional term is
-an opaque term that may or may not hold a value. Optional terms avoid
-forcing the user to define a representation for the absence of a value
+an opaque compound term that may or may not hold a value. Optional terms
+avoid forcing the user to define a representation for the absence of a value
 by providing an API with predicates that depend on the presence or absence
 of a value. Optional terms also allow separating the code that constructs
 optional terms from the code that processes them, which is then free to
@@ -50,12 +50,12 @@ To load all entities in this library, load the `loader.lgt` loader file:
 Usage
 -----
 
-The `optional` object provides constructors for optionals. For example:
+The `optional` object provides constructors for optional terms. For example:
 
 	| ?- optional::of(1, Optional).
 	...
 
-The created optionals can then be passed as parameters to the `optional/1`
+The created optional terms can then be passed as parameters to the `optional/1`
 parametric object. For example:
 
 	| ?- optional::of(1, Optional), optional(Optional)::or_else(Term, 0).
@@ -69,5 +69,5 @@ parametric object. For example:
 	yes
 
 The `maybe` object provides types and predicates for type-checking of the
-term hold by optionals. It also provides some  predicates for handling lists
-of optional terms.
+term hold by optional terms. It also provides some  predicates for handling
+lists of optional terms.
