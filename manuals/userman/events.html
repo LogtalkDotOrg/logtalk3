@@ -226,8 +226,7 @@
   <div class="section" id="event-driven-programming">
 <span id="events-events"></span><h1>Event-driven programming<a class="headerlink" href="#event-driven-programming" title="Permalink to this headline">¶</a></h1>
 <p>The addition of event-driven programming capacities to the Logtalk
-language <a class="reference internal" href="../bibliography.html#moura94" id="id1"><span>[Moura94]</span></a> is based on a
-simple but powerful idea:</p>
+language <a class="reference internal" href="../bibliography.html#moura94" id="id1"><span>[Moura94]</span></a> is based on a simple but powerful idea:</p>
 <blockquote>
 <div><p>The computations must result, not only from message sending, but also
 from the <strong>observation</strong> of message sending.</p>
@@ -239,18 +238,20 @@ graphical user interfaces.</p>
 <p>With the integration between object-oriented and event-driven
 programming, we intend to achieve the following goals:</p>
 <ul class="simple">
-<li><p>Minimize the coupling between objects. An object should only contain
+<li><p>Minimize the <em>coupling</em> between objects. An object should only contain
 what is intrinsic to it. If an object observes another object, that
 means that it should depend only on the public protocol of the
 object observed and not on the implementation of that protocol.</p></li>
-<li><p>Provide a mechanism for building reflexive systems in Logtalk based
+<li><p>Provide a mechanism for building <em>reflexive systems</em> in Logtalk based
 on the dynamic behavior of objects in complement to the reflective
 information on object predicates and relations.</p></li>
-<li><p>Provide a mechanism for easily defining method pre- and
-post-conditions that can be toggled using the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a>
+<li><p>Provide a mechanism for easily defining method <em>pre- and
+post-conditions</em> that can be toggled using the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a>
 compiler flag. The pre- and post-conditions may be defined in the same
 object containing the methods or distributed between several objects
 acting as method monitors.</p></li>
+<li><p>Provide a <em>publish-subscribe</em> mechanism where public messages play the
+role of events.</p></li>
 </ul>
 <div class="section" id="definitions">
 <span id="events-definitions"></span><h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h2>
@@ -482,7 +483,7 @@ Its definition could be something like:</p>
 </pre></div>
 </div>
 <p>After compiling and loading both objects and setting the
-<a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> to <code class="docutils literal notranslate"><span class="pre">allow</span></code> flag, we can start tracing
+<a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag to <code class="docutils literal notranslate"><span class="pre">allow</span></code>, we can start tracing
 every message sent to any object by calling the
 <a class="reference internal" href="../refman/predicates/define_events_5.html#predicates-define-events-5"><span class="std std-ref">define_events/5</span></a> built-in predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(events, allow).

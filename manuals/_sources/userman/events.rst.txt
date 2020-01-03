@@ -21,8 +21,7 @@ Event-driven programming
 ========================
 
 The addition of event-driven programming capacities to the Logtalk
-language [Moura94]_ is based on a
-simple but powerful idea:
+language [Moura94]_ is based on a simple but powerful idea:
 
    The computations must result, not only from message sending, but also
    from the **observation** of message sending.
@@ -35,20 +34,23 @@ graphical user interfaces.
 With the integration between object-oriented and event-driven
 programming, we intend to achieve the following goals:
 
-*  Minimize the coupling between objects. An object should only contain
+*  Minimize the *coupling* between objects. An object should only contain
    what is intrinsic to it. If an object observes another object, that
    means that it should depend only on the public protocol of the
    object observed and not on the implementation of that protocol.
 
-*  Provide a mechanism for building reflexive systems in Logtalk based
+*  Provide a mechanism for building *reflexive systems* in Logtalk based
    on the dynamic behavior of objects in complement to the reflective
    information on object predicates and relations.
 
-*  Provide a mechanism for easily defining method pre- and
-   post-conditions that can be toggled using the :ref:`events <flag_events>`
+*  Provide a mechanism for easily defining method *pre- and
+   post-conditions* that can be toggled using the :ref:`events <flag_events>`
    compiler flag. The pre- and post-conditions may be defined in the same
    object containing the methods or distributed between several objects
    acting as method monitors.
+
+*  Provide a *publish-subscribe* mechanism where public messages play the
+   role of events.
 
 .. _events_definitions:
 
@@ -341,7 +343,7 @@ Assume that we also have the following object:
    :- end_object.
 
 After compiling and loading both objects and setting the
-:ref:`events <flag_events>` to ``allow`` flag, we can start tracing
+:ref:`events <flag_events>` flag to ``allow``, we can start tracing
 every message sent to any object by calling the
 :ref:`predicates_define_events_5` built-in predicate:
 
