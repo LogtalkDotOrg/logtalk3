@@ -187,9 +187,9 @@
 :- object(expected(_Expected)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2020/01/04,
 		comment is 'Expected term predicates. Requires passing an expected term (constructed using the ``expected`` object predicates) as a parameter.',
 		parnames is ['Expected'],
 		see_also is [expected]
@@ -228,7 +228,7 @@
 	:- info(unexpected/1, [
 		comment is 'Returns the error hold by the expected term. Throws an error otherwise.',
 		argnames is ['Error'],
-		exceptions is ['Expected term holds a value' - existence_error(unexpected_term,'Expected')]
+		exceptions is ['Expected term holds a value' - existence_error(unexpected_error,'Expected')]
 	]).
 
 	:- public(expected/1).
@@ -236,7 +236,7 @@
 	:- info(expected/1, [
 		comment is 'Returns the value hold by the expected term. Throws an error otherwise.',
 		argnames is ['Value'],
-		exceptions is ['Expected term holds an error' - existence_error(expected_term,'Expected')]
+		exceptions is ['Expected term holds an error' - existence_error(expected_value,'Expected')]
 	]).
 
 	:- public(map/2).
@@ -268,7 +268,7 @@
 	:- info(or_else_get/2, [
 		comment is 'Returns the value hold by the expected term if it does not hold an error. Otherwise applies a closure to compute the expected value. Throws an error when the expected term holds an error and a value cannot be computed.',
 		argnames is ['Value', 'Closure'],
-		exceptions is ['Expected term holds an unexpected error and an expected value cannot be computed' - existence_error(expected_term,'Expected')]
+		exceptions is ['Expected term holds an unexpected error and an expected value cannot be computed' - existence_error(expected_value,'Expected')]
 	]).
 
 	:- public(or_else_call/2).
@@ -317,14 +317,14 @@
 		parameter(1, Expected),
 		(	Expected = unexpected(Error) ->
 			true
-		;	existence_error(unexpected_term, Expected)
+		;	existence_error(unexpected_error, Expected)
 		).
 
 	expected(Value) :-
 		parameter(1, Expected),
 		(	Expected = expected(Value) ->
 			true
-		;	existence_error(expected_term, Expected)
+		;	existence_error(expected_value, Expected)
 		).
 
 	map(Closure, NewExpected) :-
@@ -354,9 +354,9 @@
 		parameter(1, Expected),
 		(	Expected = expected(Value) ->
 			true
-		;	catch(call(Closure, Value), _, existence_error(expected_term,Expected)) ->
+		;	catch(call(Closure, Value), _, existence_error(expected_value,Expected)) ->
 			true
-		;	existence_error(expected_term, Expected)
+		;	existence_error(expected_value, Expected)
 		).
 
 	or_else_call(Value, Goal) :-

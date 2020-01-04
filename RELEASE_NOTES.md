@@ -120,6 +120,9 @@ section on predicate declarations.
 Library
 -------
 
+* CHANGED: The exception terms throw by the `expecteds` library predicates
+`expected/1`, `unexpected/1`, and `or_else_get/2` for clarity.
+
 * ADDED: Non-deterministic constructors to the `expecteds` and `optionals`
 libraries.
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2020/01/02,
+		date is 2020/01/04,
 		comment is 'Unit tests for the "expecteds" library.'
 	]).
 
@@ -187,7 +187,7 @@
 
 	% unexpected/1 tests
 
-	throws(expected_unexpected_1_01, error(existence_error(unexpected_term,_), _)) :-
+	throws(expected_unexpected_1_01, error(existence_error(unexpected_error,_), _)) :-
 		expected::of_expected(1, Expected), expected(Expected)::unexpected(_).
 
 	succeeds(expected_unexpected_1_02) :-
@@ -196,7 +196,7 @@
 
 	% expected/1 tests
 
-	throws(expected_expected_1_01, error(existence_error(expected_term,_), _)) :-
+	throws(expected_expected_1_01, error(existence_error(expected_value,_), _)) :-
 		expected::of_unexpected(-1, Expected), expected(Expected)::expected(_).
 
 	succeeds(expected_expected_1_02) :-
@@ -242,6 +242,9 @@
 	succeeds(expected_or_else_get_2_02) :-
 		expected::of_expected(1, Expected), expected(Expected)::or_else_get(Value, current_logtalk_flag(prolog_dialect)),
 		Value == 1.
+
+	throws(expected_or_else_get_2_03, error(existence_error(expected_value,_), _)) :-
+		expected::of_unexpected(-1, Expected), expected(Expected)::or_else_get(_, nonvar).
 
 	% or_else_call/2 tests
 
