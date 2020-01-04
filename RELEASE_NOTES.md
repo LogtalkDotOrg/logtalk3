@@ -164,6 +164,8 @@ representations.
 * IMPROVED: The `recipes` hot patching example to better illustrate adding
 clauses to patched objects.
 
+* IMPROVED: Documentation of the `cascade` example.
+
 * UPDATED: The `complements/allow` example to also illustrate abolishing a
 dynamic complementing category.
 

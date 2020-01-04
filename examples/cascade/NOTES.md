@@ -22,7 +22,7 @@ file.
 
 This example illustrates using expected terms to call a conjunction of
 goals where any of them may cause an error condition without using the
-traditional catch/throw mechanism. This solution allows us to:
+traditional catch/throw mechanism. This solution enables us to:
 
 1. Abstract the error handling code that would be required to test if
 the previous goal generated an error before calling the next goal in
@@ -32,11 +32,19 @@ the conjunction.
 the previous goal. For example, recovering from an unexpected error or
 just passing the unexpected error to the next goal.
 
+3. Allow postponing handling an error in one of the goals, facilitating
+composition (e.g. adding more goals to a conjunction of goals or using
+some of the goals in a different context).
+
+4. Handle a goal failure by passing the reason for the failure to the
+next goal, thus providing a common solution to handle both failures and
+errors.
+
 The original example is taken from standardization proposals and online
 discussions on expected values in the context of other OOP languages such
 as C++. For example:
 
-https://blog.tartanllama.xyz/optional-expected/ 
+https://blog.tartanllama.xyz/optional-expected/
 
 For details please see the comments in the `cascade.lgt` source file. The
 `cascade_dcgs.lgt` file contains an alternative implementation of the
