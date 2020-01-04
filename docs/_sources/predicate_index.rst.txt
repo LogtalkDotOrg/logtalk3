@@ -1845,6 +1845,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arbitrary <arbitrary/0::edge_case/2>`
 
+``either/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::either/3>`
+
 ``empty/1``
 -----------
 
@@ -2911,6 +2921,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::if_expected/1>`
+
+``if_expected_or_else/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::if_expected_or_else/2>`
 
 ``if_present/1``
 ----------------

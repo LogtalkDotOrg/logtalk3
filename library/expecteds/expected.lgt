@@ -195,16 +195,24 @@
 		see_also is [expected]
 	]).
 
+	:- public(is_expected/0).
+	:- mode(is_expected, zero_or_one).
+	:- info(is_expected/0, [
+		comment is 'True if the expected term holds a value. See also the ``if_expected/1`` predicate.'
+	]).
+
 	:- public(is_unexpected/0).
 	:- mode(is_unexpected, zero_or_one).
 	:- info(is_unexpected/0, [
 		comment is 'True if the expected term holds an error. See also the ``if_unexpected/1`` predicate.'
 	]).
 
-	:- public(is_expected/0).
-	:- mode(is_expected, zero_or_one).
-	:- info(is_expected/0, [
-		comment is 'True if the expected term holds a value. See also the ``if_expected/1`` predicate.'
+	:- public(if_expected/1).
+	:- meta_predicate(if_expected(1)).
+	:- mode(if_expected(+callable), zero_or_more).
+	:- info(if_expected/1, [
+		comment is 'Applies a closure when the expected term holds a value using the value as argument. Succeeds otherwise.',
+		argnames is ['Closure']
 	]).
 
 	:- public(if_unexpected/1).
@@ -215,12 +223,12 @@
 		argnames is ['Closure']
 	]).
 
-	:- public(if_expected/1).
-	:- meta_predicate(if_expected(1)).
-	:- mode(if_expected(+callable), zero_or_more).
-	:- info(if_expected/1, [
-		comment is 'Applies a closure when the expected term holds a value using the value as argument. Succeeds otherwise.',
-		argnames is ['Closure']
+	:- public(if_expected_or_else/2).
+	:- meta_predicate(if_expected_or_else(1, 1)).
+	:- mode(if_expected_or_else(+callable, +callable), zero_or_more).
+	:- info(if_expected_or_else/2, [
+		comment is 'Applies either ``ExpectedClosure`` or ``UnexpectedClosure`` depending on the expected term holding a value or an error.',
+		argnames is ['ExpectedClosure', 'UnexpectedClosure']
 	]).
 
 	:- public(unexpected/1).
@@ -253,6 +261,14 @@
 	:- info(flat_map/2, [
 		comment is 'When the expected term does not hold an error and mapping a closure with the expected value and the new expected term as additional arguments is successful, returns the new expected term. Otherwise returns the same expected term.',
 		argnames is ['Closure', 'NewExpected']
+	]).
+
+	:- public(either/3).
+	:- meta_predicate(either(2, 2, *)).
+	:- mode(either(+callable, +callable, --nonvar), one).
+	:- info(either/3, [
+		comment is 'Applies either ``ExpectedClosure`` if the expected term holds a value or ``UnexpectedClosure`` if the expected term holds an error. Returns a new expected term if the applied closure is successful. Otherwise returns the same expected term.',
+		argnames is ['ExpectedClosure', 'UnexpectedClosure', 'NewExpected']
 	]).
 
 	:- public(or_else/2).
@@ -313,6 +329,14 @@
 		;	true
 		).
 
+	if_expected_or_else(ExpectedClosure, UnexpectedClosure) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value) ->
+			call(ExpectedClosure, Value)
+		;	Expected = unexpected(Error),
+			call(UnexpectedClosure, Error)
+		).
+
 	unexpected(Error) :-
 		parameter(1, Expected),
 		(	Expected = unexpected(Error) ->
@@ -339,6 +363,17 @@
 		parameter(1, Expected),
 		(	Expected = expected(Value),
 			catch(call(Closure, Value, NewExpected), _, fail) ->
+			true
+		;	NewExpected = Expected
+		).
+
+	either(ExpectedClosure, UnexpectedClosure, NewExpected) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value),
+			catch(call(ExpectedClosure, Value, NewExpected), _, fail) ->
+			true
+		;	Expected = unexpected(Error),
+			catch(call(UnexpectedClosure, Error, NewExpected), _, fail) ->
 			true
 		;	NewExpected = Expected
 		).

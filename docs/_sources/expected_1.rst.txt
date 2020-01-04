@@ -37,6 +37,27 @@ Public predicates
 
 .. raw:: html
 
+   <div id="is_expected/0"> </div>
+
+.. index:: is_expected/0
+.. _expected/1::is_expected/0:
+
+``is_expected/0``
+^^^^^^^^^^^^^^^^^
+
+True if the expected term holds a value. See also the ``if_expected/1`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``is_expected`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="is_unexpected/0"> </div>
 
 .. index:: is_unexpected/0
@@ -58,21 +79,25 @@ True if the expected term holds an error. See also the ``if_unexpected/1`` predi
 
 .. raw:: html
 
-   <div id="is_expected/0"> </div>
+   <div id="if_expected/1"> </div>
 
-.. index:: is_expected/0
-.. _expected/1::is_expected/0:
+.. index:: if_expected/1
+.. _expected/1::if_expected/1:
 
-``is_expected/0``
+``if_expected/1``
 ^^^^^^^^^^^^^^^^^
 
-True if the expected term holds a value. See also the ``if_expected/1`` predicate.
+Applies a closure when the expected term holds a value using the value as argument. Succeeds otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``if_expected(Closure)``
+| **Meta-predicate template:**
+|    ``if_expected(1)``
 | **Mode and number of proofs:**
-|    ``is_expected`` - ``zero_or_one``
+|    ``if_expected(+callable)`` - ``zero_or_more``
 
 
 ------------
@@ -104,25 +129,25 @@ Applies a closure when the expected term holds an error using the error as argum
 
 .. raw:: html
 
-   <div id="if_expected/1"> </div>
+   <div id="if_expected_or_else/2"> </div>
 
-.. index:: if_expected/1
-.. _expected/1::if_expected/1:
+.. index:: if_expected_or_else/2
+.. _expected/1::if_expected_or_else/2:
 
-``if_expected/1``
-^^^^^^^^^^^^^^^^^
+``if_expected_or_else/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Applies a closure when the expected term holds a value using the value as argument. Succeeds otherwise.
+Applies either ``ExpectedClosure`` or ``UnexpectedClosure`` depending on the expected term holding a value or an error.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``if_expected(Closure)``
+|    ``if_expected_or_else(ExpectedClosure,UnexpectedClosure)``
 | **Meta-predicate template:**
-|    ``if_expected(1)``
+|    ``if_expected_or_else(1,1)``
 | **Mode and number of proofs:**
-|    ``if_expected(+callable)`` - ``zero_or_more``
+|    ``if_expected_or_else(+callable,+callable)`` - ``zero_or_more``
 
 
 ------------
@@ -227,6 +252,31 @@ When the expected term does not hold an error and mapping a closure with the exp
 |    ``flat_map(2,*)``
 | **Mode and number of proofs:**
 |    ``flat_map(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="either/3"> </div>
+
+.. index:: either/3
+.. _expected/1::either/3:
+
+``either/3``
+^^^^^^^^^^^^
+
+Applies either ``ExpectedClosure`` if the expected term holds a value or ``UnexpectedClosure`` if the expected term holds an error. Returns a new expected term if the applied closure is successful. Otherwise returns the same expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``either(ExpectedClosure,UnexpectedClosure,NewExpected)``
+| **Meta-predicate template:**
+|    ``either(2,2,*)``
+| **Mode and number of proofs:**
+|    ``either(+callable,+callable,--nonvar)`` - ``one``
 
 
 ------------

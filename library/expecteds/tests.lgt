@@ -185,6 +185,16 @@
 		expected::of_expected(1, Expected), expected(Expected)::if_expected({Y}/[X]>>(Y is X + 1)),
 		Y == 2.
 
+	% if_expected_or_else/2 tests
+
+	succeeds(expected_if_expected_or_else_1_01) :-
+		expected::of_unexpected(-1, Expected), expected(Expected)::if_expected_or_else({Y}/[X]>>(Y is X + 1), {Y}/[X]>>(Y is -X)),
+		Y == 1.
+
+	succeeds(expected_if_expected_or_else_1_02) :-
+		expected::of_expected(1, Expected), expected(Expected)::if_expected_or_else({Y}/[X]>>(Y is X + 1), {Y}/[X]>>(Y is -X)),
+		Y == 2.
+
 	% unexpected/1 tests
 
 	throws(expected_unexpected_1_01, error(existence_error(unexpected_error,_), _)) :-
@@ -222,6 +232,16 @@
 	succeeds(expected_flat_map_2_02) :-
 		expected::of_expected(a, Expected), expected(Expected)::flat_map(flat_map_closure, NewExpected),
 		expected(NewExpected)::expected(Value), Value == 97.
+
+	% either/3 tests
+
+	succeeds(expected_either_3_01) :-
+		expected::of_unexpected(-1, Expected), expected(Expected)::either(either_expected, either_unexpected, NewExpected),
+		expected(NewExpected)::expected(Error), Error == 1.
+
+	succeeds(expected_either_3_02) :-
+		expected::of_expected(1, Expected), expected(Expected)::either(either_expected, either_unexpected, NewExpected),
+		expected(NewExpected)::unexpected(Value), Value == -1.
 
 	% or_else/2 tests
 
@@ -430,6 +450,14 @@
 	flat_map_closure(Value, NewExpected) :-
 		char_code(Value, NewValue),
 		expected::of_expected(NewValue, NewExpected).
+
+	either_unexpected(Error, NewExpected) :-
+		NewError is abs(Error),
+		expected::of_expected(NewError, NewExpected).
+
+	either_expected(Value, NewExpected) :-
+		NewValue is -Value,
+		expected::of_unexpected(NewValue, NewExpected).
 
 	a(1).
 	a(2).

@@ -126,6 +126,9 @@ Library
 * ADDED: Non-deterministic constructors to the `expecteds` and `optionals`
 libraries.
 
+* ADDED: Predicates `if_expected_or_else/2` and `either/3` to the `expecteds/1`
+library object.
+
 * FIXED: The `expected::from_goal/3` predicate to match its description when
 computing the expected value throws an exception.
 
