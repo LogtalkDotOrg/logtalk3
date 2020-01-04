@@ -29,6 +29,8 @@ Description
    use_module(Module, [Name/Arity, ...])
    use_module(Module, [Name/Arity as Alias/Arity, ...])
 
+   use_module(Module, [Predicate as Alias, ...])
+
    use_module(Module, [Name//Arity, ...])
    use_module(Module, [Name//Arity as Alias//Arity, ...])
 
@@ -55,7 +57,11 @@ It is possible to specify a predicate alias using the notation
 ``Name/Arity:Alias/Arity``. Aliases may be used either for avoiding
 conflicts between predicates specified in ``use_module/2`` and
 :ref:`directives_uses_2` directives or for giving more meaningful
-names considering the calling context of the predicates.
+names considering the calling context of the predicates. For predicates,
+is also possible to define alias shorthands using the notation
+``Predicate as Alias`` or, in alternative, the notation
+``Predicate::Alias``, where ``Predicate`` and ``Alias`` are callable
+terms where some or all arguments may be instantiated.
 
 Note that this directive differs from the directive with the same name
 found on some Prolog implementations by requiring the first argument to
@@ -90,6 +96,8 @@ Template and modes
    use_module(+module_identifier, +predicate_indicator_list)
    use_module(+module_identifier, +predicate_indicator_alias_list)
 
+   use_module(+module_identifier, +predicate_template_alias_list)
+
    use_module(+module_identifier, +non_terminal_indicator_list)
    use_module(+module_identifier, +non_terminal_indicator_alias_list)
 
@@ -115,6 +123,28 @@ Examples
        % same as retractall(user:foo(_))
        retractall(bar(_)),
        ...
+
+Another example, using the extended notation that allows us to define
+predicate aliases:
+
+::
+
+   :- use_module(ugraphs, [transpose_ugraph/2 as transpose/2]).
+
+   convert_graph :-
+       ...,
+       % the same as ugraphs:transpose_ugraph(Graph0, Graph)
+       transpose(Graph0, Graph),
+       ...
+
+An example of defining a predicate alias that is also a shorthand:
+
+::
+
+   :- use_module(pairs, [
+       map_list_to_pairs(length, Lists, Pairs) as length_pairs(Lists, Pairs)
+   ]).
+
 
 An example of using a :term:`parameter variable` in place of the module
 identifier to delay to runtime the actual module to use:

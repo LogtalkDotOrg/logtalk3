@@ -35,6 +35,9 @@ possible to convert an entity prefix to an entity template. The error is
 highly unlikely to occur in practice, however, and only affects the runtime
 error handler code that attempts to convert exception terms for readability.
 
+* ADDED: Support for defining predicate shorthands to the `uses/2` and
+`use_module/2` directives where some or all arguments may be instantiated.
+
 * ADDED: Support for the legacy Prolog database built-in predicates that take
 a clause reference argument when supported by the backend Prolog compiler.
 

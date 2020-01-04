@@ -682,6 +682,17 @@ Predicate directives
 | predicate_indicator_alias_list ::=
 |    "``[``" predicate_indicator_alias_sequence "``]``"
 
+| predicate_template_alias ::=
+|    *callable* "``as``" *callable* \|
+|    *callable* "``::``" *callable*
+
+| predicate_template_alias_sequence ::=
+|    predicate_template_alias \|
+|    predicate_template_alias "``,``" predicate_template_alias_sequence
+
+| predicate_template_alias_list ::=
+|    "``[``" predicate_template_alias_sequence "``]``"
+
 | module_predicate_indicator_alias ::=
 |    *predicate_indicator* \|
 |    *predicate_indicator* "``as``" *predicate_indicator* \|

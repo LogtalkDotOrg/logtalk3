@@ -29,6 +29,8 @@ Description
    uses(Object, [Name/Arity, ...])
    uses(Object, [Name/Arity as Alias/Arity, ...])
 
+   uses(Object, [Predicate as Alias, ...])
+
    uses(Object, [Name//Arity, ...])
    uses(Object, [Name//Arity as Alias//Arity, ...])
 
@@ -54,7 +56,11 @@ It is possible to specify a predicate alias using the notation
 ``Name/Arity::Alias/Arity``. Aliases may be used either for avoiding
 conflicts between predicates specified in ``use_module/2`` and
 ``uses/2`` directives or for giving more meaningful names considering
-the calling context of the predicates.
+the calling context of the predicates. For predicates, is also
+possible to define alias shorthands using the notation
+``Predicate as Alias`` or, in alternative, the notation
+``Predicate::Alias``, where ``Predicate`` and ``Alias`` are callable
+terms where some or all arguments may be instantiated.
 
 To enable the use of static binding, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities
@@ -73,6 +79,8 @@ Template and modes
 
    uses(+object_identifier, +predicate_indicator_list)
    uses(+object_identifier, +predicate_indicator_alias_list)
+
+   uses(+object_identifier, +predicate_template_alias_list)
 
    uses(+object_identifier, +non_terminal_indicator_list)
    uses(+object_identifier, +non_terminal_indicator_alias_list)
@@ -115,6 +123,14 @@ predicate aliases:
        % the same as queues::new(Queue)
        new_queue(Queue),
        ...
+
+An example of defining a predicate alias that is also a shorthand:
+
+::
+
+   :- uses(logtalk, [
+       print_message(debug, my_app, Message) as dbg(Message)
+   ]).
 
 An example of using a :term:`parameter variable` in place of the object
 identifier to allow using the same test set for checking multiple

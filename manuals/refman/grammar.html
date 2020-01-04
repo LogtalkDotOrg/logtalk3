@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Grammar &mdash; The Logtalk Handbook v3.34.0-b09 documentation</title>
+  <title>Grammar &mdash; The Logtalk Handbook v3.34.0-b10 documentation</title>
   
 
   
@@ -1203,6 +1203,26 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">predicate_indicator_alias_list ::=</div>
 <div class="line-block">
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_template_alias ::=</div>
+<div class="line-block">
+<div class="line"><em>callable</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>callable</em> |</div>
+<div class="line"><em>callable</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>callable</em></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_template_alias_sequence ::=</div>
+<div class="line-block">
+<div class="line">predicate_template_alias |</div>
+<div class="line">predicate_template_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_template_alias_sequence</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">predicate_template_alias_list ::=</div>
+<div class="line-block">
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_template_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
 <div class="line-block">

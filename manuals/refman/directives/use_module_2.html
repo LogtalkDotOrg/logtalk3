@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>use_module/2 &mdash; The Logtalk Handbook v3.34.0-b09 documentation</title>
+  <title>use_module/2 &mdash; The Logtalk Handbook v3.34.0-b10 documentation</title>
   
 
   
@@ -223,6 +223,8 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>use_module(<span class="nv">Module</span>, [<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...])
 use_module(<span class="nv">Module</span>, [<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">/</span><span class="nv">Arity</span>, ...])
 
+use_module(<span class="nv">Module</span>, [<span class="nv">Predicate</span> <span class="o">as</span> <span class="nv">Alias</span>, ...])
+
 use_module(<span class="nv">Module</span>, [<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...])
 use_module(<span class="nv">Module</span>, [<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">//</span><span class="nv">Arity</span>, ...])
 
@@ -248,7 +250,11 @@ into these methods predicate arguments if bound at compile time.</p>
 <code class="docutils literal notranslate"><span class="pre">Name/Arity:Alias/Arity</span></code>. Aliases may be used either for avoiding
 conflicts between predicates specified in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> and
 <a class="reference internal" href="uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directives or for giving more meaningful
-names considering the calling context of the predicates.</p>
+names considering the calling context of the predicates. For predicates,
+is also possible to define alias shorthands using the notation
+<code class="docutils literal notranslate"><span class="pre">Predicate</span> <span class="pre">as</span> <span class="pre">Alias</span></code> or, in alternative, the notation
+<code class="docutils literal notranslate"><span class="pre">Predicate::Alias</span></code>, where <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> are callable
+terms where some or all arguments may be instantiated.</p>
 <p>Note that this directive differs from the directive with the same name
 found on some Prolog implementations by requiring the first argument to
 be a module name (an atom) instead of a file specification. In Logtalk,
@@ -278,6 +284,8 @@ variable must be instantiated at runtime when the calls are made.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>predicate_indicator_list)
 use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>predicate_indicator_alias_list)
 
+use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>predicate_template_alias_list)
+
 use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>non_terminal_indicator_list)
 use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>non_terminal_indicator_alias_list)
 
@@ -302,6 +310,23 @@ foo <span class="o">:-</span>
     <span class="c">% same as retractall(user:foo(_))</span>
     <span class="k">retractall</span>(bar(<span class="nv">_</span>)),
     ...
+</pre></div>
+</div>
+<p>Another example, using the extended notation that allows us to define
+predicate aliases:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(ugraphs, [transpose_ugraph<span class="o">/</span><span class="m">2</span> <span class="o">as</span> transpose<span class="o">/</span><span class="m">2</span>]).
+
+convert_graph <span class="o">:-</span>
+    ...,
+    <span class="c">% the same as ugraphs:transpose_ugraph(Graph0, Graph)</span>
+    transpose(<span class="nv">Graph0</span>, <span class="nv">Graph</span>),
+    ...
+</pre></div>
+</div>
+<p>An example of defining a predicate alias that is also a shorthand:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(pairs, [
+    map_list_to_pairs(length, <span class="nv">Lists</span>, <span class="nv">Pairs</span>) <span class="o">as</span> length_pairs(<span class="nv">Lists</span>, <span class="nv">Pairs</span>)
+]).
 </pre></div>
 </div>
 <p>An example of using a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a> in place of the module
