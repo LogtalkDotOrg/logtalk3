@@ -94,12 +94,12 @@ Template and modes
 ::
 
    use_module(+module_identifier, +predicate_indicator_list)
-   use_module(+module_identifier, +predicate_indicator_alias_list)
+   use_module(+module_identifier, +module_predicate_indicator_alias_list)
 
    use_module(+module_identifier, +predicate_template_alias_list)
 
    use_module(+module_identifier, +non_terminal_indicator_list)
-   use_module(+module_identifier, +non_terminal_indicator_alias_list)
+   use_module(+module_identifier, +module_non_terminal_indicator_alias_list)
 
    use_module(+module_identifier, +operator_list)
 
