@@ -199,7 +199,8 @@ equivalents.
    Logtalk uses the term :term:`predicate`.
 
 **member function**
-   Logtalk uses :term:`predicates <predicate>` for representing both behavior and data.
+   Logtalk uses :term:`predicates <predicate>` for representing both behavior
+   and data.
 
 **namespace**
    Logtalk does not support multiple identifier namespaces. All Logtalk
@@ -208,6 +209,10 @@ equivalents.
 
 **nested class**
    Logtalk does not support nested classes.
+
+**static member**
+   Logtalk does not support a ``static`` keyword. But the equivalent to
+   static members can be declared in a class metaclass.
 
 **template**
    Logtalk supports :ref:`parametric objects <objects_parametric>`, which
