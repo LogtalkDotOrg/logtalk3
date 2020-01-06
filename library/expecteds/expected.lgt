@@ -187,9 +187,9 @@
 :- object(expected(_Expected)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2020/01/04,
+		date is 2020/01/06,
 		comment is 'Expected term predicates. Requires passing an expected term (constructed using the ``expected`` object predicates) as a parameter.',
 		parnames is ['Expected'],
 		see_also is [expected]
@@ -369,13 +369,18 @@
 
 	either(ExpectedClosure, UnexpectedClosure, NewExpected) :-
 		parameter(1, Expected),
-		(	Expected = expected(Value),
-			catch(call(ExpectedClosure, Value, NewExpected), _, fail) ->
+		either(Expected, ExpectedClosure, UnexpectedClosure, NewExpected).
+
+	:- meta_predicate(either(*, 2, 2, *)).
+	either(expected(Value), ExpectedClosure, _, NewExpected) :-
+		(	catch(call(ExpectedClosure, Value, NewExpected), _, fail) ->
 			true
-		;	Expected = unexpected(Error),
-			catch(call(UnexpectedClosure, Error, NewExpected), _, fail) ->
+		;	NewExpected = expected(Value)
+		).
+	either(unexpected(Error), _, UnexpectedClosure, NewExpected) :-
+		(	catch(call(UnexpectedClosure, Error, NewExpected), _, fail) ->
 			true
-		;	NewExpected = Expected
+		;	NewExpected = unexpected(Error)
 		).
 
 	or_else(Value, Default) :-
