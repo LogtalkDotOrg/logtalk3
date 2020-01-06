@@ -22,70 +22,67 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/02/17,
+		date is 2020/01/06,
 		comment is 'Unit tests for the ISO Prolog standard term_variables/2 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.5.5.4
 
-	succeeds(iso_term_variables_2_01) :-
-		{term_variables(t, Vars)},
-		Vars == [].
+	test(iso_term_variables_2_01, true(Vars == [])) :-
+		{term_variables(t, Vars)}.
 
-	succeeds(iso_term_variables_2_02) :-
-		{term_variables(A+B*C/B-D, Vars)},
-		Vars == [A, B, C, D].
+	test(iso_term_variables_2_02, true(Vars == [A, B, C, D])) :-
+		{term_variables(A+B*C/B-D, Vars)}.
 
-	throws(iso_term_variables_2_03, error(type_error(list,[_,_|a]),_)) :-
+	test(iso_term_variables_2_03, error(type_error(list,[_,_|a]))) :-
 		{term_variables(t, [_, _|a])}.
 
-	succeeds(iso_term_variables_2_04) :-
+	test(iso_term_variables_2_04, true) :-
 		{S=B+T, T=A*B, term_variables(S, Vars)},
-		Vars == [B, A], T == A*B, S == B+A*B.
+		^^assertion(Vars == [B, A]),
+		^^assertion(T == A*B),
+		^^assertion(S == B+A*B).
 
-	succeeds(iso_term_variables_2_05) :-
+	test(iso_term_variables_2_05, true) :-
 		{T=A*B, S=B+T, term_variables(S, Vars)},
-		Vars == [B, A], T == A*B, S == B+A*B.
+		^^assertion(Vars == [B, A]),
+		^^assertion(T == A*B),
+		^^assertion(S == B+A*B).
 
-	succeeds(iso_term_variables_2_06) :-
+	test(iso_term_variables_2_06, true) :-
 		{term_variables(A+B+B, [B|Vars])},
-		A == B, Vars == [B].
+		^^assertion(A == B),
+		^^assertion(Vars == [B]).
 
 	:- if((
 		current_logtalk_flag(coinduction, supported),
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		succeeds(iso_term_variables_2_07) :-
-			{term_variables(_X+Vars, Vars), Vars = [_, _]}.
+		test(iso_term_variables_2_07, true(Vars = [_, _])) :-
+			{term_variables(_X+Vars, Vars)}.
 	:- else.
-		- succeeds(iso_term_variables_2_07) :-
+		- test(iso_term_variables_2_07, true(Vars = [_, _])) :-
 			% STO; Undefined.
-			{term_variables(_X+Vars, Vars), Vars = [_, _]}.
+			{term_variables(_X+Vars, Vars)}.
 	:- endif.
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_term_variables_2_08, error(type_error(list,3),_)) :-
+	test(eclipse_term_variables_2_08, error(type_error(list,3))) :-
 		{term_variables(foo, 3)}.
 
-	throws(eclipse_term_variables_2_09, error(type_error(list,[a|b]),_)) :-
+	test(eclipse_term_variables_2_09, error(type_error(list,[a|b]))) :-
 		{term_variables(foo, [a|b])}.
 
-	succeeds(eclipse_term_variables_2_10) :-
-		{term_variables(foo(X,Y,X,Z), Vs)},
-		Vs == [X,Y,Z].
+	test(eclipse_term_variables_2_10, true(Vs == [X,Y,Z])) :-
+		{term_variables(foo(X,Y,X,Z), Vs)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_term_variables_2_11) :-
-		{term_variables([Z,Z], Vs)},
-		Vs == [Z].
+	test(lgt_term_variables_2_11, true(Vs == [Z])) :-
+		{term_variables([Z,Z], Vs)}.
 
 :- end_object.

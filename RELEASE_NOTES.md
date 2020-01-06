@@ -158,8 +158,8 @@ clause reference argument.
 * UPDATED: Tests for the `goal_expansion/2` predicate to check the case where
 a goal to be expanded resulted from a previous expansion of the same goal.
 
-* UPDATED: Tests for the de facto Prolog standard `numbervars/3` built-in
-predicate to use assertions to simplify debugging.
+* UPDATED: Tests for Prolog `term_variables/2` and  `numbervars/3` built-in
+predicates to use assertions to simplify debugging.
 
 Examples
 --------
