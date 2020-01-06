@@ -144,6 +144,9 @@ _____
 * CHANGED: The `lgtunit` tool now also prints code coverage information for
 entities declared as covered but with no calls to locally defined predicates.
 
+* IMPROVED: The `lgtunit` tool now prints a warning when code coverage is
+requested for a protocol.
+
 Tests
 -----
 

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.16,
+		version is 7.17,
 		author is 'Paulo Moura',
-		date is 2019/12/13,
+		date is 2020/01/06,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1925,6 +1925,11 @@
 		print_message(silent, lgtunit, entity_coverage_ends(Entity)),
 		write_entity_coverage_results(Entities).
 
+	% ignore coverage declarations for protocols
+	write_entity_coverage_information(Entity) :-
+		current_protocol(Entity),
+		!,
+		print_message(warning, lgtunit, no_code_coverage_for_protocols(Entity)).
 	% list entity provided multifile predicates that were called
 	write_entity_coverage_information(Entity) :-
 		setof(N, fired_(Entity, Other::Functor/Arity, N), Ns),

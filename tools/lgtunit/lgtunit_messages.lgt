@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2019/11/07,
+		date is 2020/01/06,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -193,6 +193,9 @@
 
 	message_tokens(no_code_coverage_information_collected) -->
 		['no code coverage information collected'-[], nl].
+
+	message_tokens(no_code_coverage_for_protocols(Entity)) -->
+		['code coverage requested for protocol: ~q'-[Entity], nl].
 
 	% messages for test identifier errors
 
