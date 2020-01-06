@@ -22,43 +22,51 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/08/25,
+		date is 2020/01/06,
 		comment is 'Unit tests for the de facto Prolog standard numbervars/3 built-in predicate.'
 	]).
 
-	succeeds(commons_numbervars_3_01) :-
-		{numbervars(t, 0, N)},
-		N == 0.
+	test(commons_numbervars_3_01, true(N == 0)) :-
+		{numbervars(t, 0, N)}.
 
-	succeeds(commons_numbervars_3_02) :-
+	test(commons_numbervars_3_02, true) :-
 		{numbervars(T, 0, N)},
-		ground(T), N == 1.
+		^^assertion(ground(T)),
+		^^assertion(N == 1).
 
-	succeeds(commons_numbervars_3_03) :-
+	test(commons_numbervars_3_03, true) :-
 		T = a(_X,_Y,_Z),
 		{numbervars(T, 0, N)},
-		ground(T), N == 3.
+		^^assertion(ground(T)),
+		^^assertion(N == 3).
 
-	succeeds(commons_numbervars_3_04) :-
+	test(commons_numbervars_3_04, true) :-
 		T = a(_X,_Y,_X),
 		{numbervars(T, 0, N)},
-		ground(T), N == 2.
+		^^assertion(ground(T)),
+		^^assertion(N == 2).
 
-	succeeds(commons_numbervars_3_05) :-
+	test(commons_numbervars_3_05, true) :-
 		T = a(_X, 1, b(_Y, c(_X), 2), 3, _W),
 		{numbervars(T, 3, N)},
-		ground(T), N == 6.
+		^^assertion(ground(T)),
+		^^assertion(N == 6).
 
-	succeeds(commons_numbervars_3_06) :-
+	test(commons_numbervars_3_06, true) :-
 		T = a(X,Y,Z),
 		{numbervars(T, 0, _)},
-		X == '$VAR'(0), Y == '$VAR'(1), Z == '$VAR'(2).
+		^^assertion(X == '$VAR'(0)),
+		^^assertion(Y == '$VAR'(1)),
+		^^assertion(Z == '$VAR'(2)).
 
 	succeeds(commons_numbervars_3_07) :-
 		T = a(X,Y,Z),
 		{numbervars(T, -7, N)},
-		X == '$VAR'(-7), Y == '$VAR'(-6), Z == '$VAR'(-5), N == -4.
+		^^assertion(X == '$VAR'(-7)),
+		^^assertion(Y == '$VAR'(-6)),
+		^^assertion(Z == '$VAR'(-5)),
+		^^assertion(N == -4).
 
 :- end_object.
