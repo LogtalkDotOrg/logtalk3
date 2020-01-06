@@ -22,14 +22,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/08/06,
+		date is 2020/01/06,
 		comment is 'Unit tests for the "relations" example.'
 	]).
-
-	cover(relationp).
-	cover(relation).
-	cover(constrained_relation).
 
 :- end_object.

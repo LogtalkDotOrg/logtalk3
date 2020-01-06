@@ -1927,6 +1927,7 @@
 
 	% ignore coverage declarations for protocols
 	write_entity_coverage_information(Entity) :-
+		atom(Entity),
 		current_protocol(Entity),
 		!,
 		print_message(warning, lgtunit, no_code_coverage_for_protocols(Entity)).

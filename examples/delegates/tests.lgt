@@ -22,16 +22,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2011/02/01,
+		date is 2020/01/06,
 		comment is 'Unit tests for the "delegates" example.'
 	]).
 
 	cover(delegator).
 	cover(a_delegator).
 	cover(a_delegator(_)).
-	cover(delegate).
 	cover(a_delegate).
 	cover(an_object).
 
