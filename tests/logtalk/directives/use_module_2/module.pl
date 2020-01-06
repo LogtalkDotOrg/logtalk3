@@ -22,22 +22,28 @@
 
 	:- module(module).
 
-	:- export((p/1, q/1, r/1)).
+	:- export((p/1, q/1, r/1, s/2)).
 
 	p(1).
 
 	q(2).
 
 	r(3).
+
+	s(1, one).
+	s(2, two).
 
 :- else.
 
-	:- module(module, [p/1, q/1, r/1]).
+	:- module(module, [p/1, q/1, r/1, s/2]).
 
 	p(1).
 
 	q(2).
 
 	r(3).
+
+	s(1, one).
+	s(2, two).
 
 :- endif.

@@ -22,27 +22,27 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/28,
+		date is 2020/01/06,
 		comment is 'Unit tests for the use_module/2 built-in directive.'
 	]).
 
 	% test all possible syntaxes for the directive
 	:- use_module(module, [
-		p/1, q/1 as a1/1, r/1:a2/1
+		p/1, q/1 as a1/1, r/1:a2/1, s(1, Atom) as a3(Atom)
 	]).
 
-	test(use_module_2_1) :-
-		p(X),
-		X == 1.
+	test(use_module_2_01, true(X == 1)) :-
+		p(X).
 
-	test(use_module_2_2) :-
-		a1(X),
-		X == 2.
+	test(use_module_2_2, true(X == 2)) :-
+		a1(X).
 
-	test(use_module_2_3) :-
-		a2(X),
-		X == 3.
+	test(use_module_2_3, true(X == 3)) :-
+		a2(X).
+
+	test(uses_2_03, true(Xs == [one])) :-
+		findall(X, a3(X), Xs).
 
 :- end_object.

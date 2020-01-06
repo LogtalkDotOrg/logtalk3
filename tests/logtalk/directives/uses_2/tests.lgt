@@ -26,6 +26,10 @@
 	:- public(q/1).
 	q(2).
 
+	:- public(r/2).
+	r(1, one).
+	r(2, two).
+
 :- end_object.
 
 
@@ -135,59 +139,55 @@ r(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/07/30,
+		date is 2020/01/06,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
-	:- uses(uses_2_test_object_1, [p/1, q/1::r/1]).
+	:- uses(uses_2_test_object_1, [
+		p/1, q/1::qq/1, r(1, Atom) as r(Atom)
+	]).
 
-	test(uses_2_01) :-
-		p(X),
-		X == 1.
+	test(uses_2_01, true(X == 1)) :-
+		p(X).
 
-	test(uses_2_02) :-
-		r(X),
-		X == 2.
+	test(uses_2_02, true(X == 2)) :-
+		qq(X).
 
-	test(uses_2_03) :-
-		uses_2_test_object_2::p(X),
-		X == 1.
+	test(uses_2_03, true(Xs == [one])) :-
+		findall(X, r(X), Xs).
+
+	test(uses_2_04, true(X == 1)) :-
+		uses_2_test_object_2::p(X).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(Dialect == eclipse; Dialect == sicstus; Dialect = swi; Dialect = yap)
 	)).
 
-		test(uses_2_04) :-
-			uses_2_test_object_2::mp(X),
-			X == 2.
+		test(uses_2_05, true(X == 2)) :-
+			uses_2_test_object_2::mp(X).
 
 	:- else.
 
-		- test(uses_2_04).
+		- test(uses_2_05, true).
 
 	:- endif.
 
-	test(uses_2_05) :-
-		foo(bar)::p(X),
-		X == bar.
+	test(uses_2_06, true(X == bar)) :-
+		foo(bar)::p(X).
 
-	test(uses_2_06) :-
-		foo(baz)::p(X),
-		X == baz.
+	test(uses_2_07, true(X == baz)) :-
+		foo(baz)::p(X).
 
-	test(uses_2_07) :-
-		foo(bar)::r(X),
-		X == 1.
+	test(uses_2_08, true(X == 1)) :-
+		foo(bar)::r(X).
 
-	test(uses_2_08) :-
-		foo(baz)::r(X),
-		X == 2.
+	test(uses_2_09, true(X == 2)) :-
+		foo(baz)::r(X).
 
-	test(uses_2_09) :-
-		findall(X, baz(user)::p(X), L),
-		L == [1,2,3].
+	test(uses_2_10, true(L == [1,2,3])) :-
+		findall(X, baz(user)::p(X), L).
 
 :- end_object.

@@ -10725,7 +10725,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_use_module_directive'([Resource| Resources], Argument, Module, Flag, Ctx) :-
 	!,
-	'$lgt_check'(ground, Resource),
+	'$lgt_check'(nonvar, Resource),
 	'$lgt_compile_use_module_directive_resource'(Resource, Module, Flag, Ctx),
 	'$lgt_compile_use_module_directive'(Resources, Argument, Module, Flag, Ctx).
 
@@ -10882,9 +10882,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_use_module_predicate_'(_, _, Alias, _),
 	% no clash with an earlier uses/2 or a use_module/2 directive predicate
 	!,
-	% unify arguments of TOriginal and TAlias
-	Original =.. [_| Args],
-	Alias =.. [_| Args],
 	% allow for runtime use by adding a local definition that calls the remote definition
 	% except when the remote is a built-in predicate in "user" with no alias being defined
 	% or a built-in method that would clash with the local definition
