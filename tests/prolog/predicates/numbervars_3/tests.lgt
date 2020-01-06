@@ -61,7 +61,7 @@
 		^^assertion(Y == '$VAR'(1)),
 		^^assertion(Z == '$VAR'(2)).
 
-	succeeds(commons_numbervars_3_07) :-
+	test(commons_numbervars_3_07, true) :-
 		T = a(X,Y,Z),
 		{numbervars(T, -7, N)},
 		^^assertion(X == '$VAR'(-7)),
