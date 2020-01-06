@@ -85,6 +85,9 @@ visible in a module via an imported module.
 * FIXED: ECLiPSe, SWI-Prolog, and YAP adapter file expansion of `reexport/1`
 directives.
 
+* FIXED: YAP adapter file internal predicate for module qualification of calls
+to Prolog meta-predicates to not depend on the term-expansion mechanism.
+
 Documentation
 -------------
 
