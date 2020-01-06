@@ -172,6 +172,8 @@ clauses to patched objects.
 
 * IMPROVED: Documentation of the `cascade` example.
 
+* IMPROVED: Unit tests of the `hailstone` example.
+
 * UPDATED: The `complements/allow` example to also illustrate abolishing a
 dynamic complementing category.
 

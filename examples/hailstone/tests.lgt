@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2012/07/03,
+		date is 2020/01/06,
 		comment is 'Unit tests for the "hailstone" example.'
 	]).
 
@@ -34,8 +34,26 @@
 		hailstone::generate_sequence(10, Sequence),
 		Sequence == [10, 5, 16, 8, 4, 2, 1].
 
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
 	test(hailstone_2) :-
-		hailstone::write_sequence(10).
+		^^set_text_output(''),
+		hailstone::write_sequence(10),
+		^^check_text_output('10 5 16 8 4 2 1\r\n').
+
+	:- else.
+
+	test(hailstone_2) :-
+		^^set_text_output(''),
+		hailstone::write_sequence(10),
+		^^check_text_output('10 5 16 8 4 2 1\n').
+
+	:- endif.
 
 	test(hailstone_3) :-
 		hailstone::sequence_length(27, Length),
