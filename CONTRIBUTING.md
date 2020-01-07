@@ -45,6 +45,10 @@ In alternative, you can also join our discussion forums at:
 
 https://forums.logtalk.org/
 
+For contributing improvements and fixes to the Handbook, open it in your
+web browser, click on link on the top right that says "Edit on GitHub",
+make the proposed changes, and submit them as a pull request.
+
 In the case of code contributions, you are required to follow the coding
 guidelines described at:
 
