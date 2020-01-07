@@ -21,7 +21,13 @@ RELEASE NOTES
 =============
 
 
-3.34.0 - January 7, 2019
+3.35.0 - February ??, 2020
+==========================
+
+
+
+
+3.34.0 - January 7, 2020
 ========================
 
 Logtalk compiler and runtime
