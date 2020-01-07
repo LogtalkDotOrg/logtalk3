@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on November 23, 2018
+##   Last updated on January 7, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -105,9 +105,11 @@ mv "$HOME"/rpmbuild/RPMS/noarch/logtalk-*.rpm "$directory"
 
 cd "$directory" || exit 1
 
-openssl sha256 logtalk-$version.tar.bz2
-openssl sha256 logtalk-$version.pkg.zip
-openssl sha256 logtalk-$version-1.noarch.rpm
-openssl sha256 logtalk_$version-1_all.deb
-openssl sha256 logtalk-manuals-$version.tgz
+openssl sha256 logtalk-$version.tar.bz2 || true
+openssl sha256 logtalk-$version.pkg.zip || true
+openssl sha256 logtalk-$version-1.noarch.rpm || true
+openssl sha256 logtalk_$version-1_all.deb || true
+openssl sha256 logtalk-manuals-$version.tgz || true
 openssl sha256 logtalk-$version.exe || true
+openssl sha256 logtalk-$version.tgz || true
+openssl sha256 logtalk-experimental-$version.tgz || true
