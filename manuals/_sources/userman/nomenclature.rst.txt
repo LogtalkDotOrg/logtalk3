@@ -242,10 +242,6 @@ There are several Java glossaries available on the Internet. The list
 that follows relates the most commonly used Java terms with their
 Logtalk equivalents.
 
-**class**
-   Logtalk objects can play the role of classes, instances, or protocols
-   (depending on their relations with other objects).
-
 **abstract class**
    Logtalk uses an *operational* definition of abstract class: any class
    that does not inherit a method for creating new instances is an
@@ -259,6 +255,10 @@ Logtalk equivalents.
 **assertion**
    There is no ``assertion`` keyword in Logtalk. Assertions are
    supported using Logtalk compilation hooks and developer tools.
+
+**class**
+   Logtalk objects can play the role of classes, instances, or protocols
+   (depending on their relations with other objects).
 
 **extends**
    There is no ``extends`` keyword in Logtalk. Class inheritance is
@@ -361,21 +361,59 @@ Python nomenclature
 The list that follows relates the commonly used Java Python concepts with
 their Logtalk equivalents.
 
+**abstract class**
+   Logtalk uses a different definition of abstract class: a class that
+   does not inherit a method for creating new instances. Notably, the
+   presence of *abstract methods* does not a class abstract.
+
+**abstract method**
+   Logtalk uses the term *predicate* interchangeably with *method*. Predicates
+   can be declared without being also defined in an object (or category).
+
 **class**
    Logtalk objects can play the role of classes, instances, or protocols
    (depending on their relations with other objects).
 
-**metaclass**
-   Logtalk objects can play the role of metaclasses by instantiating other
-   objects that play the role of classes.
-
-**object**
-   Objects are first-class entities that can play multiple roles, including
-   prototype, class, instance, and metaclass.
-
 **dictionary**
    There is no native, built-in associative data type. But the library
    provides several implementations of a dictionary protocol.
+
+**function**
+   The closest equivalent is a predicate defined in ``user``, a pseudo-object
+   for predicates not defined in regular objects, and thus callable from
+   anywhere without requiring a scope directive.
+
+**function object**
+   Predicates calls (goals) can be passed or returned from other predicates
+   and unified with other terms (e.g. variables).
+
+**import path**
+   Logtalk uses the term *library* to refer to a directory of source files
+   and supports defining aliases (symbolic names) to library paths to abstract
+   the actual locations.
+
+**lambda**
+   Logtalk natively supports lambda expressions.
+
+**list**
+   Lists are compound terms with native syntax support.
+
+**list comprehensions**
+   There is no native, built-in support for list comprehensions. But the
+   standard ``findall/3`` predicate can be used to construct a list by
+   calling a goal that generates the list elements.
+
+**loader**
+   Logtalk uses the term *loader* to refer to source files whose main or
+   sole purpose is to load other source files.
+
+**loop**
+   There are no native loop control constructs based on a counter. But the
+   library provides implementations of several loop predicates.
+
+**metaclass**
+   Logtalk objects can play the role of metaclasses by instantiating other
+   objects that play the role of classes.
 
 **method**
    Logtalk uses the terms *method* and *predicate* interchangeably.
@@ -389,33 +427,13 @@ their Logtalk equivalents.
    to access predicate declarations and definitions other than the first
    ones found by the lookup algorithm.
 
-**function**
-   The closest equivalent is a predicate defined in ``user``, a pseudo-object
-   for predicates not defined in regular objects, and thus callable from
-   anywhere without requiring a scope directive.
+**object**
+   Objects are first-class entities that can play multiple roles, including
+   prototype, class, instance, and metaclass.
 
-**function object**
-   Predicates calls (goals) can be passed or returned from other predicates
-   and unified with other terms (e.g. variables).
-
-**lambda**
-   Logtalk natively supports lambda expressions.
-
-**list**
-   Lists are compound terms with native syntax support.
-
-**list comprehensions**
-   There is no native, built-in support for list comprehensions. But the
-   standard ``findall/3`` predicate can be used to construct a list by
-   calling a goal that generates the list elements.
-
-**loop**
-   There are no native loop control constructs based on a counter. But the
-   library provides implementations of several loop predicates.
-
-**while loop**
-   The built-in ``forall/2`` predicate implements a *generate-and-test*
-   loop.
+**package**
+   Logtalk uses the term *library* to refer to a directory of source files
+   defining objects, categories, and protocols.
 
 **set**
    There is no native, built-in set type. But the library provides set
@@ -437,3 +455,7 @@ their Logtalk equivalents.
    imperative or imperative-based OOP languages where they are
    symbolic names for memory locations. Logical variables can be
    *unified* with any term, including other variables.
+
+**while loop**
+   The built-in ``forall/2`` predicate implements a *generate-and-test*
+   loop.
