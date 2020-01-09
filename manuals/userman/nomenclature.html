@@ -109,6 +109,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#smalltalk-nomenclature">Smalltalk nomenclature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c-nomenclature">C++ nomenclature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#java-nomenclature">Java nomenclature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-nomenclature">Python nomenclature</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
@@ -389,6 +390,9 @@ methods that are declared but not defined simply fail when called
 that follows relates the most commonly used Java terms with their
 Logtalk equivalents.</p>
 <dl class="simple">
+<dt><strong>class</strong></dt><dd><p>Logtalk objects can play the role of classes, instances, or protocols
+(depending on their relations with other objects).</p>
+</dd>
 <dt><strong>abstract class</strong></dt><dd><p>Logtalk uses an <em>operational</em> definition of abstract class: any class
 that does not inherit a method for creating new instances is an
 abstract class. I.e. there is no <code class="docutils literal notranslate"><span class="pre">abstract</span></code> keyword in Logtalk.</p>
@@ -474,6 +478,73 @@ the current instance. Logtalk also provides a <a class="reference internal" href
 for returning the class containing the predicate clause being
 executed. Why the name clashes? Well, the notion of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> was
 inherited from Smalltalk, which predates Java.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="python-nomenclature">
+<span id="nomenclature-python"></span><h2>Python nomenclature<a class="headerlink" href="#python-nomenclature" title="Permalink to this headline">¶</a></h2>
+<p>The list that follows relates the commonly used Java Python concepts with
+their Logtalk equivalents.</p>
+<dl class="simple">
+<dt><strong>class</strong></dt><dd><p>Logtalk objects can play the role of classes, instances, or protocols
+(depending on their relations with other objects).</p>
+</dd>
+<dt><strong>metaclass</strong></dt><dd><p>Logtalk objects can play the role of metaclasses by instantiating other
+objects that play the role of classes.</p>
+</dd>
+<dt><strong>object</strong></dt><dd><p>Objects are first-class entities that can play multiple roles, including
+prototype, class, instance, and metaclass.</p>
+</dd>
+<dt><strong>dictionary</strong></dt><dd><p>There is no native, built-in associative data type. But the library
+provides several implementations of a dictionary protocol.</p>
+</dd>
+<dt><strong>method</strong></dt><dd><p>Logtalk uses the terms <em>method</em> and <em>predicate</em> interchangeably.
+Predicates canc be defined in objects (and categories). The value
+of <em>self</em> is implicit unlike in Python where it is the first parameter
+of any method.</p>
+</dd>
+<dt><strong>method resolution order</strong></dt><dd><p>Logtalk uses a depth-first algorithm to lookup method (predicate)
+declarations and definitions. It’s possible to use predicate <em>aliases</em>
+to access predicate declarations and definitions other than the first
+ones found by the lookup algorithm.</p>
+</dd>
+<dt><strong>function</strong></dt><dd><p>The closest equivalent is a predicate defined in <code class="docutils literal notranslate"><span class="pre">user</span></code>, a pseudo-object
+for predicates not defined in regular objects, and thus callable from
+anywhere without requiring a scope directive.</p>
+</dd>
+<dt><strong>function object</strong></dt><dd><p>Predicates calls (goals) can be passed or returned from other predicates
+and unified with other terms (e.g. variables).</p>
+</dd>
+<dt><strong>lambda</strong></dt><dd><p>Logtalk natively supports lambda expressions.</p>
+</dd>
+<dt><strong>list</strong></dt><dd><p>Lists are compound terms with native syntax support.</p>
+</dd>
+<dt><strong>list comprehensions</strong></dt><dd><p>There is no native, built-in support for list comprehensions. But the
+standard <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> predicate can be used to construct a list by
+calling a goal that generates the list elements.</p>
+</dd>
+<dt><strong>loop</strong></dt><dd><p>There are no native loop control constructs based on a counter. But the
+library provides implementations of several loop predicates.</p>
+</dd>
+<dt><strong>while loop</strong></dt><dd><p>The built-in <code class="docutils literal notranslate"><span class="pre">forall/2</span></code> predicate implements a <em>generate-and-test</em>
+loop.</p>
+</dd>
+<dt><strong>set</strong></dt><dd><p>There is no native, built-in set type. But the library provides set
+implementations.</p>
+</dd>
+<dt><strong>string</strong></dt><dd><p>The interpretation of text between double-quotes depends on the
+<code class="docutils literal notranslate"><span class="pre">double_quotes</span></code> flag. Depending on this flag, double-quoted text
+can be interpreted as a list of characters, a list of character codes,
+or an atom. Some backend Prolog compilers allow double-quoted text
+to be interpreted as a string in the Python sense.</p>
+</dd>
+<dt><strong>tuple</strong></dt><dd><p>Compound terms can be used to represent tuples of any complexity.</p>
+</dd>
+<dt><strong>variable</strong></dt><dd><p>Logtalk works with <em>logical variables*</em>, which are close to the
+mathematical concept of variables and distinct from variables in
+imperative or imperative-based OOP languages where they are
+symbolic names for memory locations. Logical variables can be
+<em>unified</em> with any term, including other variables.</p>
 </dd>
 </dl>
 </div>

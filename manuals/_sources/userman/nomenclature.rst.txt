@@ -242,6 +242,10 @@ There are several Java glossaries available on the Internet. The list
 that follows relates the most commonly used Java terms with their
 Logtalk equivalents.
 
+**class**
+   Logtalk objects can play the role of classes, instances, or protocols
+   (depending on their relations with other objects).
+
 **abstract class**
    Logtalk uses an *operational* definition of abstract class: any class
    that does not inherit a method for creating new instances is an
@@ -348,3 +352,88 @@ Logtalk equivalents.
    for returning the class containing the predicate clause being
    executed. Why the name clashes? Well, the notion of :term:`self` was
    inherited from Smalltalk, which predates Java.
+
+.. _nomenclature_python:
+
+Python nomenclature
+-------------------
+
+The list that follows relates the commonly used Java Python concepts with
+their Logtalk equivalents.
+
+**class**
+   Logtalk objects can play the role of classes, instances, or protocols
+   (depending on their relations with other objects).
+
+**metaclass**
+   Logtalk objects can play the role of metaclasses by instantiating other
+   objects that play the role of classes.
+
+**object**
+   Objects are first-class entities that can play multiple roles, including
+   prototype, class, instance, and metaclass.
+
+**dictionary**
+   There is no native, built-in associative data type. But the library
+   provides several implementations of a dictionary protocol.
+
+**method**
+   Logtalk uses the terms *method* and *predicate* interchangeably.
+   Predicates canc be defined in objects (and categories). The value
+   of *self* is implicit unlike in Python where it is the first parameter
+   of any method.
+
+**method resolution order**
+   Logtalk uses a depth-first algorithm to lookup method (predicate)
+   declarations and definitions. It's possible to use predicate *aliases*
+   to access predicate declarations and definitions other than the first
+   ones found by the lookup algorithm.
+
+**function**
+   The closest equivalent is a predicate defined in ``user``, a pseudo-object
+   for predicates not defined in regular objects, and thus callable from
+   anywhere without requiring a scope directive.
+
+**function object**
+   Predicates calls (goals) can be passed or returned from other predicates
+   and unified with other terms (e.g. variables).
+
+**lambda**
+   Logtalk natively supports lambda expressions.
+
+**list**
+   Lists are compound terms with native syntax support.
+
+**list comprehensions**
+   There is no native, built-in support for list comprehensions. But the
+   standard ``findall/3`` predicate can be used to construct a list by
+   calling a goal that generates the list elements.
+
+**loop**
+   There are no native loop control constructs based on a counter. But the
+   library provides implementations of several loop predicates.
+
+**while loop**
+   The built-in ``forall/2`` predicate implements a *generate-and-test*
+   loop.
+
+**set**
+   There is no native, built-in set type. But the library provides set
+   implementations.
+
+**string**
+   The interpretation of text between double-quotes depends on the
+   ``double_quotes`` flag. Depending on this flag, double-quoted text
+   can be interpreted as a list of characters, a list of character codes,
+   or an atom. Some backend Prolog compilers allow double-quoted text
+   to be interpreted as a string in the Python sense.
+
+**tuple**
+   Compound terms can be used to represent tuples of any complexity.
+
+**variable**
+   Logtalk works with *logical variables**, which are close to the
+   mathematical concept of variables and distinct from variables in
+   imperative or imperative-based OOP languages where they are
+   symbolic names for memory locations. Logical variables can be
+   *unified* with any term, including other variables.

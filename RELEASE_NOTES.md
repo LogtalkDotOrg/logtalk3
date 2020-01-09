@@ -27,7 +27,9 @@ RELEASE NOTES
 Documentation
 -------------
 
-* IMPROVED: Handbook section on Java nomenclature comparison.
+* ADDED: First version of a Handbook section on Python nomenclature.
+
+* IMPROVED: Handbook section on Java nomenclature.
 
 
 3.34.0 - January 7, 2020
