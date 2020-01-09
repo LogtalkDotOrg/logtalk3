@@ -272,21 +272,6 @@ Logtalk equivalents.
    Logtalk supports :ref:`event-driven programming <events_events>`,
    the most common usage context of callback methods.
 
-**class method**
-   Class methods may be implemented in Logtalk by using a :term:`metaclass` for
-   the class and defining the class methods in the metaclass. I.e. class
-   methods are simply instance methods of the class metaclass.
-
-**class variable**
-   True class variables may be implemented in Logtalk by using a
-   :term:`metaclass` for the class and defining the class variables in the
-   class. I.e. class variables are simply instance variables of the
-   class metaclass. Shared instance variables may be implemented by
-   using the built-in database methods (which can be used to implement
-   variable assignment) to access and updated a single occurrence of the
-   variable stored in the class (there is no ``static`` keyword in
-   Logtalk).
-
 **constructor**
    There are no special methods for creating new objects in Logtalk.
    Instead, Logtalk provides a built-in predicate, :ref:`predicates_create_object_4`,
@@ -321,7 +306,7 @@ Logtalk equivalents.
    There is no concept of packages in Logtalk. All Logtalk entities
    (objects, protocols, categories) share a single namespace. But
    Logtalk does support a concept of :term:`library` that allows
-   grouping of entities whose source files share a common prefix.
+   grouping of entities whose source files share a common path prefix.
 
 **reflection**
    Logtalk features a *white box* API supporting *structural* reflection
@@ -332,8 +317,19 @@ Logtalk equivalents.
    exchanged at runtime.
 
 **static**
-   There is no ``static`` keyword in Logtalk. See the entries on *class
-   methods* and *class variables*.
+   There is no ``static`` keyword in Logtalk. See the entries below on
+   *static method* and *static variable*.
+
+**static method**
+   Static methods may be implemented in Logtalk by using a :term:`metaclass`
+   for the class and defining the static methods in the metaclass. I.e. static
+   methods are simply instance methods of the class metaclass.
+
+**static variable**
+   Static variables are *shared instance variables* and can simply be both
+   declared and defined in a class. The built-in database methods can be
+   used to implement destructive updates if necessary by accessing and
+   updated a single clause of a dynamic predicate stored in the class.
 
 **super**
    Instead of a ``super`` keyword, Logtalk provides a super operator and

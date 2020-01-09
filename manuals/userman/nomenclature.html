@@ -413,19 +413,6 @@ are not required to provide definitions for the declared predicates
 <dt><strong>callback method</strong></dt><dd><p>Logtalk supports <a class="reference internal" href="events.html#events-events"><span class="std std-ref">event-driven programming</span></a>,
 the most common usage context of callback methods.</p>
 </dd>
-<dt><strong>class method</strong></dt><dd><p>Class methods may be implemented in Logtalk by using a <a class="reference internal" href="../glossary.html#term-metaclass"><span class="xref std std-term">metaclass</span></a> for
-the class and defining the class methods in the metaclass. I.e. class
-methods are simply instance methods of the class metaclass.</p>
-</dd>
-<dt><strong>class variable</strong></dt><dd><p>True class variables may be implemented in Logtalk by using a
-<a class="reference internal" href="../glossary.html#term-metaclass"><span class="xref std std-term">metaclass</span></a> for the class and defining the class variables in the
-class. I.e. class variables are simply instance variables of the
-class metaclass. Shared instance variables may be implemented by
-using the built-in database methods (which can be used to implement
-variable assignment) to access and updated a single occurrence of the
-variable stored in the class (there is no <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword in
-Logtalk).</p>
-</dd>
 <dt><strong>constructor</strong></dt><dd><p>There are no special methods for creating new objects in Logtalk.
 Instead, Logtalk provides a built-in predicate, <a class="reference internal" href="../refman/predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a>,
 which is often used to define more sophisticated object creation
@@ -452,7 +439,7 @@ Logtalk (and Prolog) are not typed languages in the same sense as Java.</p>
 <dt><strong>package</strong></dt><dd><p>There is no concept of packages in Logtalk. All Logtalk entities
 (objects, protocols, categories) share a single namespace. But
 Logtalk does support a concept of <a class="reference internal" href="../glossary.html#term-library"><span class="xref std std-term">library</span></a> that allows
-grouping of entities whose source files share a common prefix.</p>
+grouping of entities whose source files share a common path prefix.</p>
 </dd>
 <dt><strong>reflection</strong></dt><dd><p>Logtalk features a <em>white box</em> API supporting <em>structural</em> reflection
 about <a class="reference internal" href="../refman/predicates/enumerating_entity_property_predicates.html#enumerating-entity-property-predicates"><span class="std std-ref">entity contents</span></a>,
@@ -461,8 +448,17 @@ a <em>black box</em> API supporting <em>behavioral</em> reflection about
 <a class="reference internal" href="../refman/predicates/event_handling_predicates.html#event-handling-predicates"><span class="std std-ref">events</span></a> API for reasoning about messages
 exchanged at runtime.</p>
 </dd>
-<dt><strong>static</strong></dt><dd><p>There is no <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword in Logtalk. See the entries on <em>class
-methods</em> and <em>class variables</em>.</p>
+<dt><strong>static</strong></dt><dd><p>There is no <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword in Logtalk. See the entries below on
+<em>static method</em> and <em>static variable</em>.</p>
+</dd>
+<dt><strong>static method</strong></dt><dd><p>Static methods may be implemented in Logtalk by using a <a class="reference internal" href="../glossary.html#term-metaclass"><span class="xref std std-term">metaclass</span></a>
+for the class and defining the static methods in the metaclass. I.e. static
+methods are simply instance methods of the class metaclass.</p>
+</dd>
+<dt><strong>static variable</strong></dt><dd><p>Static variables are <em>shared instance variables</em> and can simply be both
+declared and defined in a class. The built-in database methods can be
+used to implement destructive updates if necessary by accessing and
+updated a single clause of a dynamic predicate stored in the class.</p>
 </dd>
 <dt><strong>super</strong></dt><dd><p>Instead of a <code class="docutils literal notranslate"><span class="pre">super</span></code> keyword, Logtalk provides a super operator and
 control construct, <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>, for calling overridden

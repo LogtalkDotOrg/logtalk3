@@ -24,7 +24,10 @@ RELEASE NOTES
 3.35.0 - February ??, 2020
 ==========================
 
+Documentation
+-------------
 
+* IMPROVED: Handbook section on Java nomenclature comparison.
 
 
 3.34.0 - January 7, 2020
