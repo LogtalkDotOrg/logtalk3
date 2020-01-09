@@ -42,9 +42,9 @@ body.
 
 Entity parameters can also be accessed using *parameter variables*,
 which use the syntax ``_VariableName_``. The compiler recognizes
-occurrences of these variables in entity clauses. Parameter variables
-allows us to abstract parameter positions thus simplifying code
-maintenance.
+occurrences of these variables in directives and clauses. Parameter
+variables allows us to abstract parameter positions thus simplifying
+code maintenance.
 
 Modes and number of proofs
 --------------------------
