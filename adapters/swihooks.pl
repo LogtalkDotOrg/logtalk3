@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on August 21, 2019
+%  Last updated on January 10, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -353,10 +353,7 @@ prolog_clause:unify_clause_hook(Clause, QClause, Module, TermPos0, TermPos) :-
 	logtalk::expand_term((NonTerminal --> GRBody), Clause),
 	'$lgt_swi_prolog_clause:unify_clause_hook'(Clause, (THead :- TBody), Module, TermPos0, TermPos).
 '$lgt_swi_prolog_clause:unify_clause_hook'((Head :- Body), (THead :- TBody), _, TermPos0, TermPos) :-
-	(	'$lgt_swi_unify_clause'((Head :- Body), (THead :- TBody), TermPos0, TermPos) ->
-		true
-	;	writeq('UNIFICATION FAILED'-(THead :- TBody)), nl
-	).
+	'$lgt_swi_unify_clause'((Head :- Body), (THead :- TBody), TermPos0, TermPos).
 '$lgt_swi_prolog_clause:unify_clause_hook'((Head :- Body), THead, _, TermPos0, TermPos) :-
 	'$lgt_swi_unify_clause'((Head :- Body), (THead :- true), TermPos0, TermPos).
 '$lgt_swi_prolog_clause:unify_clause_hook'(Head, THead, _, TermPos0, TermPos) :-
