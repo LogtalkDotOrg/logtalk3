@@ -25,9 +25,9 @@ The goal of this example is to help the user to get acquainted  to the Logtalk
 compiler warning and error reporting. Open the source files in a text editor
 to better understand how the compiler deals with common programming errors.
 
-Note that the warnings and errors that you will get while compiling your source
-files depend on your compiler flags (defined explicitly as parameters for the
-`logtalk_compile/2` or `logtalk_load/2` built-in predicates or by default in
-your Prolog adapter file and possibly overriden in your settings file). See the
-Handbook section on writing and running applications for a detailed description
-of the flags.
+Note that the warnings and errors that you will get while compiling your
+source files depend on your compiler flags (defined explicitly as parameters
+for the `logtalk_compile/2` or `logtalk_load/2` built-in predicates or by
+default in your Prolog adapter file and possibly overridden in your settings
+file). See the Handbook section on writing and running applications for a
+detailed description of the flags.

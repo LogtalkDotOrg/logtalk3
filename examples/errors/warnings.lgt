@@ -138,7 +138,7 @@
 
 
 
-:- object(missing_meta_predicte_directive).
+:- object(missing_meta_predicate_directive).
 
 	foo(X) :- call(X).
 
@@ -184,7 +184,7 @@
 
 
 
-:- object(falsewood).
+:- object(falsehood).
 
 	% goals are always false (usually happens due to typos)
 
@@ -274,7 +274,7 @@
 
 
 
-:- object(duplicated_meta_predicte_directive).
+:- object(duplicated_meta_predicate_directive).
 
 	:- meta_predicate(foo(0)).
 
@@ -488,7 +488,7 @@
 
 :- object(arithmetic).
 
-	% variable typo or misunderstading of arithmetic
+	% variable typo or misunderstanding of arithmetic
 	foo :-
 		X is X - 1.
 
