@@ -494,7 +494,7 @@ small performance gain for the compiled code.</p>
 <span id="migration-unsupported-module-directives"></span><h3>Unsupported module directives<a class="headerlink" href="#unsupported-module-directives" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives are not directly
 supported by the Logtalk compiler. But most Prolog adapter files provide
-support for compiling these directives using Logtalk’s first stage of
+support for compiling these directives using Logtalk first stage of
 its <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>. Nevertheless,
 these directives can be converted, respectively, into a sequence of
 <code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">use_module/2</span></code> and <code class="docutils literal notranslate"><span class="pre">export/1</span></code> directives and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>

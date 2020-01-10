@@ -1538,7 +1538,7 @@ Finding declared predicates
 
 We can find, by backtracking, all visible user predicates by calling the
 :ref:`methods_current_predicate_1` built-in method. This method takes into
-account predicate scope declarations. For exampole, the following call will
+account predicate scope declarations. For example, the following call will
 only return user predicates that are declared public:
 
 .. code-block:: text
@@ -1722,10 +1722,10 @@ to call the module predicates using implicit qualification:
        bar,
        ...
 
-Note that the first argument of the ``use_module/2``, when used within
-an object or a category, is a *module name*, not a *file specification*
-(also be aware that Prolog modules are sometimes defined in files with
-names that differ from the module names).
+Note that the first argument of the ``use_module/2`` directive, when used
+within an object or a category, is a *module name*, not a *file specification*
+(also be aware that Prolog modules are sometimes defined in files with names
+that differ from the module names).
 
 As loading a Prolog module varies between Prolog systems, the actual loading
 directive or goal is preferably done from the application :term:`loader file`.
@@ -1776,7 +1776,7 @@ as explained. For example:
    The actual module code **must** be loaded prior to compilation of Logtalk
    source code that uses it. In particular, programmers should not expect
    that the module be auto-loaded (including when using a backend Prolog
-   compiler that supports an autoloading mechanism).
+   compiler that supports an auto-loading mechanism).
 
 The module identifier argument can also be a :term:`parameter variable`
 when using the directive in a parametric object or a parametric category.

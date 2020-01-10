@@ -417,7 +417,7 @@ problem for any specific type, e.g. integer, by writing:
 
 	| ?- lgtunit::quick_check(type::valid({integer}, +integer)).
 
-We can also test all (ground, i.e. non-parametrizable) types with arbitrary
+We can also test all (ground, i.e. non-parametric) types with arbitrary
 value generators by writing:
 
 	| ?- forall(

@@ -329,7 +329,7 @@ Unsupported module directives
 
 The ``reexport/1`` and ``use_module/1`` directives are not directly
 supported by the Logtalk compiler. But most Prolog adapter files provide
-support for compiling these directives using Logtalk's first stage of
+support for compiling these directives using Logtalk first stage of
 its :ref:`term-expansion mechanism <expansion_expansion>`. Nevertheless,
 these directives can be converted, respectively, into a sequence of
 ``:- use_module/2`` and ``export/1`` directives and ``use_module/2``

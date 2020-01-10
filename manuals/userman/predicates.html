@@ -1544,7 +1544,7 @@ The same is true for protocol declared predicates.</p>
 <span id="predicates-finding"></span><h2>Finding declared predicates<a class="headerlink" href="#finding-declared-predicates" title="Permalink to this headline">¶</a></h2>
 <p>We can find, by backtracking, all visible user predicates by calling the
 <a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> built-in method. This method takes into
-account predicate scope declarations. For exampole, the following call will
+account predicate scope declarations. For example, the following call will
 only return user predicates that are declared public:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- some_object::current_predicate(Name/Arity).
 </pre></div>
@@ -1690,10 +1690,10 @@ foo <span class="o">:-</span>
     ...
 </pre></div>
 </div>
-<p>Note that the first argument of the <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>, when used within
-an object or a category, is a <em>module name</em>, not a <em>file specification</em>
-(also be aware that Prolog modules are sometimes defined in files with
-names that differ from the module names).</p>
+<p>Note that the first argument of the <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directive, when used
+within an object or a category, is a <em>module name</em>, not a <em>file specification</em>
+(also be aware that Prolog modules are sometimes defined in files with names
+that differ from the module names).</p>
 <p>As loading a Prolog module varies between Prolog systems, the actual loading
 directive or goal is preferably done from the application <a class="reference internal" href="../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a>.
 An advantage of this approach is that it contributes to a clean separation
@@ -1738,7 +1738,7 @@ as explained. For example:</p>
 <p>The actual module code <strong>must</strong> be loaded prior to compilation of Logtalk
 source code that uses it. In particular, programmers should not expect
 that the module be auto-loaded (including when using a backend Prolog
-compiler that supports an autoloading mechanism).</p>
+compiler that supports an auto-loading mechanism).</p>
 </div>
 <p>The module identifier argument can also be a <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a>
 when using the directive in a parametric object or a parametric category.

@@ -650,8 +650,8 @@ for any specific type, e.g. integer, by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(type<span class="o">::</span>valid(<span class="k">{</span>integer<span class="k">}</span>, <span class="o">+</span>integer)).
 </pre></div>
 </div>
-<p>We can also test all (ground, i.e. non-parametrizable) types with
-arbitrary value generators by writing:</p>
+<p>We can also test all (ground, i.e. non-parametric) types with arbitrary
+value generators by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">forall</span>(
         (type<span class="o">::</span>type(<span class="nv">Type</span>), <span class="k">ground</span>(<span class="nv">Type</span>), type<span class="o">::</span>arbitrary(<span class="nv">Type</span>)),
         lgtunit<span class="o">::</span>quick_check(type<span class="o">::</span>valid(<span class="k">{</span><span class="nv">Type</span><span class="k">}</span>, <span class="o">+</span><span class="nv">Type</span>))
