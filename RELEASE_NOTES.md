@@ -31,6 +31,12 @@ Documentation
 
 * IMPROVED: Handbook section on Java nomenclature.
 
+Tools
+_____
+
+* UPDATED: The `tutor` tool to provide explanations and suggestions for
+recently introduced linter warnings.
+
 
 3.34.0 - January 7, 2020
 ========================

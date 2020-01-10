@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.28,
+		version is 0.29,
 		author is 'Paulo Moura',
-		date is 2019/10/22,
+		date is 20120/01/10,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -394,6 +394,10 @@
 		[	'Code that uses deprecated predicates will likely break when those'-[], nl,
 			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
+	explain(deprecated_predicate(_, _, _, _, _, _)) -->
+		[	'Code that uses deprecated predicates will likely break when those'-[], nl,
+			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
 
 	% other warning messages
 
@@ -601,10 +605,20 @@
 	explain(module_used_as_object(_, _, _, _, _)) -->
 		['This is also portability issue as not all backends support a module system.'-[], nl, nl].
 
-	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Predicate)) -->
-		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Predicate], nl,
-			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Predicate], nl, nl
+	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Name/Arity)) -->
+		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Name/Arity], nl,
+			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Name/Arity], nl, nl
 		].
+	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Name//Arity)) -->
+		[	'The ~w updates the ~q non-terminal but does not declare it dynamic.'-[Type, Name//Arity], nl,
+			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Name//Arity], nl, nl
+		].
+	explain(missing_predicate_directive(_, _, _, _, Directive, Predicate)) -->
+		['Add a ":- ~q(~q)." directive to suppress this warning.'-[Directive, Predicate], nl, nl].
+	explain(missing_predicate_directive(_, _, _, _, Directive)) -->
+		['Add a  "~q." directive to suppress this warning.'-[Directive], nl, nl
+		].
+
 
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
 		[	'But there is a ~w directive for the predicate. If there is a scope'-[Directive], nl,
@@ -704,6 +718,10 @@
 			'a redundant and costly alternative to simply call the local definition.'-[], nl,
 			'Or is your intention to make a "super" call?'-[], nl, nl
 		].
+	explain(suspicious_call(_, _, _, _, _, [_])) -->
+		['Use the suggested alternative to suppress this warning.'-[], nl, nl].
+	explain(suspicious_call(_, _, _, _, _, [_, _| _])) -->
+		['Use one of the suggested alternatives to suppress this warning.'-[], nl, nl].
 
 	explain(suspicious_call(_, _, _, _, repeat, reason(repeat(_)))) -->
 		[	'A repeat loop not ended with a cut may result in an endless loop in'-[], nl,
@@ -732,6 +750,11 @@
 			'goal argument so that we collect template bindings for the goal'-[], nl,
 			'solutions. This warning can likely be ignored if you are using'-[], nl,
 			'this meta-predicate to simply help count solutions.'-[], nl, nl
+		].
+
+	explain(suspicious_call(_, _, _, _, _, reason(no_variable_bindings_after_unification))) -->
+		[	'Unification goals that do not bind any variables are redundant.'-[], nl,
+			'Typo in one of the unification goal arguments?'-[], nl, nl
 		].
 
 	explain(suspicious_call(_, _, _, _, _, reason(existential_variables([_], _)))) -->
