@@ -26,9 +26,9 @@ in other languages. In addition, being a superset of Prolog, terms such as
 *predicate* and *method* are often used interchangeably. Logtalk inherits
 most of its nomenclature from Smalltalk, arguably (and somehow sadly) not
 the most popular OOP language nowadays. In this section, we map nomenclatures
-from popular OOP languages such as Smalltalk, C++, and Java to the Logtalk
-nomenclature. The Logtalk distribution includes several examples of how to
-implement common concepts found in other languages, complementing the
+from popular OOP languages such as Smalltalk, C++, Java, and Python to the
+Logtalk nomenclature. The Logtalk distribution includes several examples of
+how to implement common concepts found in other languages, complementing the
 information in this section.
 
 .. _nomenclature_smalltalk:
@@ -274,7 +274,8 @@ Logtalk equivalents.
 
 **callback method**
    Logtalk supports :ref:`event-driven programming <events_events>`,
-   the most common usage context of callback methods.
+   the most common usage context of callback methods. Callback methods
+   can also be implemented using :term:`meta-predicates <meta-predicate>`.
 
 **constructor**
    There are no special methods for creating new objects in Logtalk.
@@ -450,7 +451,7 @@ their Logtalk equivalents.
    Compound terms can be used to represent tuples of any complexity.
 
 **variable**
-   Logtalk works with *logical variables**, which are close to the
+   Logtalk works with *logical variables*, which are close to the
    mathematical concept of variables and distinct from variables in
    imperative or imperative-based OOP languages where they are
    symbolic names for memory locations. Logical variables can be

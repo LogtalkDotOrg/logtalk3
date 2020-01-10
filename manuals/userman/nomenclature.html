@@ -218,9 +218,9 @@ in other languages. In addition, being a superset of Prolog, terms such as
 <em>predicate</em> and <em>method</em> are often used interchangeably. Logtalk inherits
 most of its nomenclature from Smalltalk, arguably (and somehow sadly) not
 the most popular OOP language nowadays. In this section, we map nomenclatures
-from popular OOP languages such as Smalltalk, C++, and Java to the Logtalk
-nomenclature. The Logtalk distribution includes several examples of how to
-implement common concepts found in other languages, complementing the
+from popular OOP languages such as Smalltalk, C++, Java, and Python to the
+Logtalk nomenclature. The Logtalk distribution includes several examples of
+how to implement common concepts found in other languages, complementing the
 information in this section.</p>
 <div class="section" id="smalltalk-nomenclature">
 <span id="nomenclature-smalltalk"></span><h2>Smalltalk nomenclature<a class="headerlink" href="#smalltalk-nomenclature" title="Permalink to this headline">¶</a></h2>
@@ -415,7 +415,8 @@ are not required to provide definitions for the declared predicates
 (<a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
 </dd>
 <dt><strong>callback method</strong></dt><dd><p>Logtalk supports <a class="reference internal" href="events.html#events-events"><span class="std std-ref">event-driven programming</span></a>,
-the most common usage context of callback methods.</p>
+the most common usage context of callback methods. Callback methods
+can also be implemented using <a class="reference internal" href="../glossary.html#term-meta-predicate"><span class="xref std std-term">meta-predicates</span></a>.</p>
 </dd>
 <dt><strong>constructor</strong></dt><dd><p>There are no special methods for creating new objects in Logtalk.
 Instead, Logtalk provides a built-in predicate, <a class="reference internal" href="../refman/predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a>,
@@ -554,7 +555,7 @@ to be interpreted as a string in the Python sense.</p>
 </dd>
 <dt><strong>tuple</strong></dt><dd><p>Compound terms can be used to represent tuples of any complexity.</p>
 </dd>
-<dt><strong>variable</strong></dt><dd><p>Logtalk works with <em>logical variables*</em>, which are close to the
+<dt><strong>variable</strong></dt><dd><p>Logtalk works with <em>logical variables</em>, which are close to the
 mathematical concept of variables and distinct from variables in
 imperative or imperative-based OOP languages where they are
 symbolic names for memory locations. Logical variables can be

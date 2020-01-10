@@ -1894,6 +1894,8 @@ example:
 
    :- object(...).
 
+       :- dynamic(m:bar/1).
+
        foo(X) :-
            retractall(m:bar(_)),
            assertz(m:bar(X)),
@@ -1909,6 +1911,7 @@ directives to declare the module predicates. For example:
    :- object(...).
 
        :- use_module(m, [bar/1]).
+       :- dynamic(m:bar/1).
 
        foo(X) :-
            % retract and assert bar/1 clauses in module m
@@ -1926,6 +1929,7 @@ and most portable practice is to use a :ref:`directives_uses_2` directive:
    :- object(...).
 
        :- uses(user, [bar/1]).
+       :- dynamic(user::bar/1).
 
        foo(X) :-
            % retract and assert bar/1 clauses in user

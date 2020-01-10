@@ -1834,6 +1834,8 @@ explicitly qualified module argument (where the module can be <code class="docut
 example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
 
+<span class="p">    :- </span><span class="k">dynamic</span>(m<span class="o">:</span>bar<span class="o">/</span><span class="m">1</span>).
+
     foo(<span class="nv">X</span>) <span class="o">:-</span>
         <span class="k">retractall</span>(m<span class="o">:</span>bar(<span class="nv">_</span>)),
         <span class="k">assertz</span>(m<span class="o">:</span>bar(<span class="nv">X</span>)),
@@ -1847,6 +1849,7 @@ directives to declare the module predicates. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
 
 <span class="p">    :- </span><span class="k">use_module</span>(m, [bar<span class="o">/</span><span class="m">1</span>]).
+<span class="p">    :- </span><span class="k">dynamic</span>(m<span class="o">:</span>bar<span class="o">/</span><span class="m">1</span>).
 
     foo(<span class="nv">X</span>) <span class="o">:-</span>
         <span class="c">% retract and assert bar/1 clauses in module m</span>
@@ -1862,6 +1865,7 @@ and most portable practice is to use a <a class="reference internal" href="../re
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
 
 <span class="p">    :- </span><span class="k">uses</span>(user, [bar<span class="o">/</span><span class="m">1</span>]).
+<span class="p">    :- </span><span class="k">dynamic</span>(user<span class="o">::</span>bar<span class="o">/</span><span class="m">1</span>).
 
     foo(<span class="nv">X</span>) <span class="o">:-</span>
         <span class="c">% retract and assert bar/1 clauses in user</span>
