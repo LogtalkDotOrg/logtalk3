@@ -38,10 +38,9 @@ and choose the library index.
 Loading
 -------
 
-The `arbitrary_loader.lgt` file loads the `type` object and the `arbitrary`
-category:
+To load all entities in this library, load the `loader.lgt` utility file:
 
-	| ?- logtalk_load(library(arbitrary_loader)).
+	| ?- logtalk_load(arbitrary(loader)).
 
 
 Usage
@@ -70,7 +69,7 @@ for shrinking arbitrary values for QuickCheck usage. For example:
 Examples
 --------
 
-See the implementation of the `optional` and `expected`  libraries.
+See the implementation of the `optional` and `expected` libraries.
 
 
 Known issues
