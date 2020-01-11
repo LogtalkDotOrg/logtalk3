@@ -35,7 +35,8 @@ Tools
 _____
 
 * UPDATED: The `tutor` tool to provide explanations and suggestions for
-recently introduced linter warnings.
+recently introduced linter warnings and improve explanations for reference
+to unknown entity warnings.
 
 
 3.34.0 - January 7, 2020

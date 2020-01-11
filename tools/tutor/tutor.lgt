@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.29,
+		version is 0.31,
 		author is 'Paulo Moura',
-		date is 20120/01/10,
+		date is 20120/01/11,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -591,13 +591,19 @@
 	% unknown entity messages
 
 	explain(reference_to_unknown_object(_, _, _, _, _)) -->
-		['Misspelt object name? Wrong file loading order? Circular references?'-[], nl, nl].
+		[	'Misspelt object name? Wrong file loading order? Circular references?'-[], nl,
+			'Object defined later in the same source file?'-[], nl, nl
+		].
 
 	explain(reference_to_unknown_protocol(_, _, _, _, _)) -->
-		['Misspelt protocol name? Wrong file loading order?'-[], nl, nl].
+		[	'Misspelt protocol name? Wrong file loading order?'-[], nl,
+			'Protocol defined later in the same source file?'-[], nl, nl
+		].
 
 	explain(reference_to_unknown_category(_, _, _, _, _)) -->
-		['Misspelt category name? Wrong file loading order?'-[], nl, nl].
+		[	'Misspelt category name? Wrong file loading order?'-[], nl,
+			'Category defined later in the same source file?'-[], nl, nl
+		].
 
 	explain(reference_to_unknown_module(_, _, _, _, _)) -->
 		['Misspelt module name? Wrong file loading order? Circular references?'-[], nl, nl].
