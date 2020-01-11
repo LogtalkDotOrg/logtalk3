@@ -42,6 +42,6 @@ To load all entities in this library, load the `loader.lgt` utility file:
 	| ?- logtalk_load(types(loader)).
 
 In case your code only requires the most basic types, you can load in
-alternative the `basic_types_loader.lgt` utility file:
+alternative the file:
 
 	| ?- logtalk_load(basic_types(loader)).
