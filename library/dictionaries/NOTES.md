@@ -21,8 +21,8 @@ About
 -----
 
 This library provides a dictionary (also know as associative array, map,
-or symbol table) protocol, a simple binary tree implementation, and a
-red–black tree implementation.
+or symbol table) protocol and binary tree, AVL tree, and Red–Black tree
+implementations.
 
 
 API documentation
@@ -48,5 +48,5 @@ SWI-Prolog library authored by R.A.O'Keefe, L.Damas, V.S.Costa, Glenn
 Burgess, Jiri Spitz, and Jan Wielemaker. Additional predicates authored
 by Paulo Moura.
 
-The red-black tree implementation is an adaptation to Logtalk of the `rbtrees`
-Prolog library authored by Vitor Santos Costa.
+The Red–Black tree implementation is an adaptation to Logtalk of the
+`rbtrees` Prolog library authored by Vitor Santos Costa.
