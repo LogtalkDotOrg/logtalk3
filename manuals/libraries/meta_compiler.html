@@ -242,10 +242,20 @@ utility file:</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>To use the meta-predicates compiler, declare <code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code> as the
-default hook object or use the <code class="docutils literal notranslate"><span class="pre">hook(meta_compiler)</span></code> and
-<code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> complier options when compiling and loading the code
-that you want to optimize.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code> is the only hook object you are using, you can set
+it as the default hook object (but note that the optimizations are only
+applied to entities compiled with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(hook, meta_compiler).
+...
+</pre></div>
+</div>
+<p>Otherwise, use the <code class="docutils literal notranslate"><span class="pre">hook(meta_compiler)</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> complier
+options when compiling and loading the code that you want to optimize.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_source_file, [hook(meta_compiler), optimize(on)]).
+...
+</pre></div>
+</div>
 <p>See also the <code class="docutils literal notranslate"><span class="pre">metapredicates_compiled</span></code> example and unit tests.</p>
 </div>
 </div>

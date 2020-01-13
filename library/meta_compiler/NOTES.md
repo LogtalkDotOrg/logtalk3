@@ -42,8 +42,18 @@ To load the main entities in this library, load the `loader.lgt` utility file:
 Usage
 -----
 
-To use the meta-predicates compiler, declare `meta_compiler` as the default
-hook object or use the `hook(meta_compiler)` and `optimize(on)` complier
-options when compiling and loading the code that you want to optimize.
+If `meta_compiler` is the only hook object you are using, you can set it as
+the default hook object (but note that the optimizations are only applied
+to entities compiled with the `optimize` flag turned on):
+
+	| ?- set_logtalk_flag(hook, meta_compiler).
+	...
+
+Otherwise, use the `hook(meta_compiler)` and `optimize(on)` complier options
+when compiling and loading the code that you want to optimize. For example:
+
+	| ?- logtalk_load(my_source_file, [hook(meta_compiler), optimize(on)]).
+	...
+
 
 See also the `metapredicates_compiled` example and unit tests.

@@ -226,12 +226,13 @@
             
   <div class="section" id="arbitrary">
 <h1><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code><a class="headerlink" href="#arbitrary" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category adds predicates for generating random values
-for selected types to the <code class="docutils literal notranslate"><span class="pre">type</span></code> object, complementing its type
-checking predicates. Both the object and the category predicates can be
-extended by the user with definitions for new types by defining clauses
-for multifile predicates. This library is notably used in the QuickCheck
-implementation by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> library defines an <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category providing
+predicates for generating random values for selected types to the
+<code class="docutils literal notranslate"><span class="pre">type</span></code> object, complementing its type checking predicates. Both the
+object and the category predicates can be extended by the user with
+definitions for new types by defining clauses for multifile predicates.
+This library is notably used in the QuickCheck implementation by the
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool.</p>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
@@ -248,6 +249,8 @@ file:</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category complements the <code class="docutils literal notranslate"><span class="pre">type</span></code> object and thus its
+predicates are accessed via this object.</p>
 <p>To define a generator of arbitrary values for a type, define a clause
 for the <code class="docutils literal notranslate"><span class="pre">type::arbitrary/1</span></code> multifile predicate specifying the type
 and a clause for the <code class="docutils literal notranslate"><span class="pre">type::arbitrary/2</span></code> multifile predicate
@@ -271,7 +274,7 @@ type<span class="o">::</span>shrink(foo, <span class="nv">Large</span>, <span cl
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>See the implementation of the <code class="docutils literal notranslate"><span class="pre">optional</span></code> and <code class="docutils literal notranslate"><span class="pre">expected</span></code> libraries.</p>
+<p>See the implementation of the <code class="docutils literal notranslate"><span class="pre">optionals</span></code> and <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> libraries.</p>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>

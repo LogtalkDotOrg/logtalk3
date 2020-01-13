@@ -20,12 +20,12 @@ ________________________________________________________________________
 `arbitrary`
 ===========
 
-The `arbitrary` category adds predicates for generating random values
-for selected types to the `type` object, complementing its type checking
-predicates. Both the object and the category predicates can be extended
-by the user with definitions for new types by defining clauses for
-multifile predicates. This library is notably used in the QuickCheck
-implementation by the `lgtunit` tool.
+The `arbitrary` library defines an `arbitrary` category providing predicates
+for generating random values for selected types to the `type` object,
+complementing its type checking predicates. Both the object and the category
+predicates can be extended by the user with definitions for new types by
+defining clauses for multifile predicates. This library is notably used in
+the QuickCheck implementation by the `lgtunit` tool.
 
 
 API documentation
@@ -45,6 +45,9 @@ To load all entities in this library, load the `loader.lgt` utility file:
 
 Usage
 -----
+
+The `arbitrary` category complements the `type` object and thus its predicates
+are accessed via this object.
 
 To define a generator of arbitrary values for a type, define a clause for the
 `type::arbitrary/1` multifile predicate specifying the type and a clause for
@@ -69,7 +72,7 @@ for shrinking arbitrary values for QuickCheck usage. For example:
 Examples
 --------
 
-See the implementation of the `optional` and `expected` libraries.
+See the implementation of the `optionals` and `expecteds` libraries.
 
 
 Known issues

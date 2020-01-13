@@ -57,3 +57,8 @@ The created expected terms can then be passed as parameters to the
 
 The ``either`` object provides types and predicates for extended
 type-checking and predicates for handling lists of expected terms.
+
+See also
+--------
+
+The ``optionals`` library.

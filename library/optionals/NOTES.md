@@ -71,3 +71,9 @@ parametric object. For example:
 The `maybe` object provides types and predicates for type-checking of the
 term hold by optional terms. It also provides some  predicates for handling
 lists of optional terms.
+
+
+See also
+--------
+
+The `expecteds` library.
