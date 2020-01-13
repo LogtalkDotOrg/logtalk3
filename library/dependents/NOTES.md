@@ -30,7 +30,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#dependents](../../docs/library_index.html#dependents)
-file in a web browser.
+link in a web browser.
 
 
 Loading

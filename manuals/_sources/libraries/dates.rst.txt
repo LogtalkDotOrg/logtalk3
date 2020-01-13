@@ -13,7 +13,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#dates <../../docs/library_index.html#dates>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

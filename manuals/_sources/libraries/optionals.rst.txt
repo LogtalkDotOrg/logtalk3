@@ -17,7 +17,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#optionals <../../docs/library_index.html#optionals>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

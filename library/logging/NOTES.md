@@ -27,7 +27,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#logging](../../docs/library_index.html#logging)
-file in a web browser.
+link in a web browser.
 
 
 Loading

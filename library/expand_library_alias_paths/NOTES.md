@@ -29,7 +29,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#expand_library_alias_paths](../../docs/library_index.html#expand_library_alias_paths)
-file in a web browser.
+link in a web browser.
 
 
 Loading

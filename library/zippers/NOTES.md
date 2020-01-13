@@ -27,7 +27,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#zippers](../../docs/library_index.html#zippers)
-file in a web browser.
+link in a web browser.
 
 
 Loading

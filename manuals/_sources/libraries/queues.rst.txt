@@ -8,7 +8,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#queues <../../docs/library_index.html#queues>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

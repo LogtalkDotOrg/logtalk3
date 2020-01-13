@@ -36,7 +36,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#optionals](../../docs/library_index.html#optionals)
-file in a web browser.
+link in a web browser.
 
 
 Loading

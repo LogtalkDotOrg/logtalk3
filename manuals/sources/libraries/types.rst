@@ -12,7 +12,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#types <../../docs/library_index.html#types>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

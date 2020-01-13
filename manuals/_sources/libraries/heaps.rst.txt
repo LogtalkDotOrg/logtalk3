@@ -8,7 +8,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#heaps <../../docs/library_index.html#heaps>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

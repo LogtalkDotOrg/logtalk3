@@ -10,7 +10,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#coroutining <../../docs/library_index.html#coroutining>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

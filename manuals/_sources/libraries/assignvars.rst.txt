@@ -24,7 +24,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#assignvars <../../docs/library_index.html#assignvars>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

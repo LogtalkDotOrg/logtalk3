@@ -14,7 +14,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#arbitrary <../../docs/library_index.html#arbitrary>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

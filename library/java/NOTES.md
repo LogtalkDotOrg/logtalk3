@@ -42,7 +42,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#java](../../docs/library_index.html#java)
-file in a web browser.
+link in a web browser.
 
 
 Loading

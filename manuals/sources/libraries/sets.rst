@@ -9,7 +9,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#sets <../../docs/library_index.html#sets>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

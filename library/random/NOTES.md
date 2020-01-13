@@ -28,7 +28,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#random](../../docs/library_index.html#random)
-file in a web browser.
+link in a web browser.
 
 
 Loading

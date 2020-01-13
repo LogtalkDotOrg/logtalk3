@@ -35,7 +35,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#redis](../../docs/library_index.html#redis)
-file in a web browser.
+link in a web browser.
 
 
 Loading

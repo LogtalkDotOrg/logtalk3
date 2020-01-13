@@ -46,7 +46,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#edcg <../../docs/library_index.html#edcg>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

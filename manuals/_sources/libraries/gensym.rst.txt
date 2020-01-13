@@ -11,7 +11,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#gensym <../../docs/library_index.html#gensym>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

@@ -24,8 +24,7 @@ The `assertions.lgt` file contains definitions for two meta-predicates,
 `assertion/1-2`, which allows using of assertions on your source code
 (e.g. when writing unit tests). The `assertions_messages.lgt` file defines
 the default message translations generated on assertions succeed, fail, or
-throw an exception. For more information on these entities, open the
-`docs/tools.html` file in a web browser.
+throw an exception.
 
 
 API documentation

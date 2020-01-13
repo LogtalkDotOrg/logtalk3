@@ -9,7 +9,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#loops <../../docs/library_index.html#loops>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

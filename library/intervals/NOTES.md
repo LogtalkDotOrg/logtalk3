@@ -29,7 +29,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#intervals](../../docs/library_index.html#intervals)
-file in a web browser.
+link in a web browser.
 
 
 Loading

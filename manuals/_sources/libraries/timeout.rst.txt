@@ -11,7 +11,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#timeout <../../docs/library_index.html#timeout>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

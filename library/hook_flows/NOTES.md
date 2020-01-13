@@ -29,7 +29,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#hook_flows](../../docs/library_index.html#hook_flows)
-file in a web browser.
+link in a web browser.
 
 
 Loading

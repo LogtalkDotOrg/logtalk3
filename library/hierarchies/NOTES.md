@@ -28,7 +28,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#hierarchies](../../docs/library_index.html#hierarchies)
-file in a web browser.
+link in a web browser.
 
 
 Loading

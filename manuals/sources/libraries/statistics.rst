@@ -11,7 +11,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#statistics <../../docs/library_index.html#statistics>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------

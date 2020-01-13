@@ -35,7 +35,7 @@ API documentation
 -----------------
 
 Open the [../../docs/library_index.html#events](../../docs/library_index.html#events)
-file in a web browser.
+link in a web browser.
 
 
 Loading

@@ -33,8 +33,11 @@ Documentation
 
 * IMPROVED: Handbook section on Java nomenclature.
 
-* IMPROVED: Handbook developer tools documentation links to API documentation
-to work both when browsed locally and from the website.
+* UPDATED: Handbook developer tools documentation links to API documentation
+to not require an Internet connection when browsed locally.
+
+* UPDATED: Handbook and API documentation cross-links to not require an
+Internet connection when browsed locally.
 
 Tools
 _____

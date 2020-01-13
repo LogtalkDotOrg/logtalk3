@@ -10,7 +10,7 @@ API documentation
 
 Open the
 `../../docs/library_index.html#dictionaries <../../docs/library_index.html#dictionaries>`__
-file in a web browser.
+link in a web browser.
 
 Loading
 -------
