@@ -56,7 +56,7 @@ Documenting source code
 For information on documenting your source code, notably on documenting
 directives, consult the documenting section of the User Manual:
 
-[manuals/userman/documenting.html](https://logtalk.org/manuals/userman/documenting.html)
+[../../manuals/userman/documenting.html](../../manuals/userman/documenting.html)
 
 Extracting documenting information from your source code using with this tool
 requires compiling the source files using the `source_data(on)` compiler flag.

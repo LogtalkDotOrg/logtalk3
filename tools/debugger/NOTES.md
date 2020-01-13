@@ -65,7 +65,7 @@ case, you will need to either edit the loader files or write customized
 loader files enabling debugging. For detailed information on using the
 debugger, consult the debugging section of the User Manual:
 
-[manuals/userman/debugging.html](https://logtalk.org/manuals/userman/debugging.html)
+[../../manuals/userman/debugging.html](../../manuals/userman/debugging.html)
 
 Logtalk also provides basic support for the SWI-Prolog graphical tracer.
 The required settings are described in the `settings-sample.lgt` file.

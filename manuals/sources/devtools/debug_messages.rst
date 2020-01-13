@@ -15,9 +15,9 @@ To consult this tool API documentation, open in a web browser the link:
 `../../docs/library_index.html#debug-messages <../../docs/library_index.html#debug-messages>`__
 
 For general information on debugging, open in a web browser the
-following file and consult the debugging section of the User Manual:
+following link and consult the debugging section of the User Manual:
 
-`manuals/userman/debugging.html <https://logtalk.org/manuals/userman/debugging.html>`__
+`../../manuals/userman/debugging.html <../../manuals/userman/debugging.html>`__
 
 Loading
 -------
