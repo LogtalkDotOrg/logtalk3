@@ -4,9 +4,7 @@
 This library provides a Logtalk port of the Peter Van Roy's extended DCG
 implementation. For full documentation on EDCGs, see:
 
-::
-
-   https://www.info.ucl.ac.be/%7Epvr/edcg.html
+`https://www.info.ucl.ac.be/%7Epvr/edcg.html <https://www.info.ucl.ac.be/%7Epvr/edcg.html>`__
 
 This Logtalk version defines a hook object, ``edcg``. Source files
 defining EDCGs must be compiled using the compiler option
@@ -29,9 +27,7 @@ scoped to the source file.
 This port has simplified by copying and then modifying Michael
 Hendricks's ``edcg`` repo at:
 
-::
-
-   https://github.com/mndrix/edcg
+`https://github.com/mndrix/edcg <https://github.com/mndrix/edcg>`__
 
 A notable difference is that Michael's version declares Peter's original
 predicates for declaring accumulators and predicates using the hidden
