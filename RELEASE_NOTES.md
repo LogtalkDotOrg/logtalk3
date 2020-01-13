@@ -33,6 +33,9 @@ Documentation
 
 * IMPROVED: Handbook section on Java nomenclature.
 
+* IMPROVED: Handbook developer tools documentation links to API documentation
+to work both when browsed locally and from the website.
+
 Tools
 _____
 

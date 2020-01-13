@@ -39,7 +39,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/library_index.html#lgtdoc](https://logtalk.org/docs/library_index.html#lgtdoc)
+[../../docs/library_index.html#lgtdoc](../../docs/library_index.html#lgtdoc)
 
 
 Loading

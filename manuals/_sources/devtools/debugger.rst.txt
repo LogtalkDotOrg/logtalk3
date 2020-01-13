@@ -8,7 +8,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-`docs/library_index.html#debugger <https://logtalk.org/docs/library_index.html#debugger>`__
+`../../docs/library_index.html#debugger <../../docs/library_index.html#debugger>`__
 
 Loading
 -------

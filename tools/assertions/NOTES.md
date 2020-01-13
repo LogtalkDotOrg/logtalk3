@@ -33,7 +33,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/library_index.html#assertions](https://logtalk.org/docs/library_index.html#assertions)
+[../../docs/library_index.html#assertions](../../docs/library_index.html#assertions)
 
 
 Loading

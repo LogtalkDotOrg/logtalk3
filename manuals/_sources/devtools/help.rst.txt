@@ -9,7 +9,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-`docs/library_index.html#help <https://logtalk.org/docs/library_index.html#help>`__
+`../../docs/library_index.html#help <../../docs/library_index.html#help>`__
 
 For sample queries, please see the `SCRIPT.txt <SCRIPT.txt>`__ file in
 the tool directory.

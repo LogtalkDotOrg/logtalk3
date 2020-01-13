@@ -35,7 +35,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-`docs/library_index.html#dead-code-scanner <https://logtalk.org/docs/library_index.html#dead-code-scanner>`__
+`../../docs/library_index.html#dead-code-scanner <../../docs/library_index.html#dead-code-scanner>`__
 
 For sample queries, please see the `SCRIPT.txt <SCRIPT.txt>`__ file in
 the tool directory.

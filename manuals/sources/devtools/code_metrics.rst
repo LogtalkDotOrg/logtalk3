@@ -18,7 +18,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-`docs/library_index.html#code-metrics <https://logtalk.org/docs/library_index.html#code-metrics>`__
+`../../docs/library_index.html#code-metrics <../../docs/library_index.html#code-metrics>`__
 
 Loading
 -------

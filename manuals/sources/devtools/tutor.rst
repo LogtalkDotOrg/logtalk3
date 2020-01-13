@@ -10,7 +10,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-`docs/library_index.html#tutor <https://logtalk.org/docs/library_index.html#tutor>`__
+`../../docs/library_index.html#tutor <../../docs/library_index.html#tutor>`__
 
 Loading
 -------

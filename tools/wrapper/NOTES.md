@@ -40,7 +40,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/library_index.html#wrapper](https://logtalk.org/docs/library_index.html#wrapper)
+[../../docs/library_index.html#wrapper](../../docs/library_index.html#wrapper)
 
 
 Loading
