@@ -27,6 +27,8 @@ RELEASE NOTES
 Documentation
 -------------
 
+* ADDED: Overview of the developer tools and libraries to the Handbook.
+
 * ADDED: Library notes to the Handbook.
 
 * ADDED: First version of a Handbook section on Python nomenclature.

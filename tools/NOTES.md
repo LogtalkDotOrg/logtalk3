@@ -17,29 +17,29 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Available developer tools
--------------------------
+Overview
+========
 
 The following developer tools are available, each one with its own
 `loader.lgt` loader file (except make which is a built-in tool) and
 `NOTES.md` documentation files:
 
-- asdf
-- assertions
-- code_metrics
-- dead_code_scanner
-- debug_messages
-- debugger
-- diagrams
-- doclet
-- help
-- lgtdoc
-- lgtunit
-- make
-- ports_profiler
-- profiler
-- tutor
-- wrapper
+- `asdf`
+- `assertions`
+- `code_metrics`
+- `dead_code_scanner`
+- `debug_messages`
+- `debugger`
+- `diagrams`
+- `doclet`
+- `help`
+- `lgtdoc`
+- `lgtunit`
+- `make`
+- `ports_profiler`
+- `profiler`
+- `tutor`
+- `wrapper`
 
 
 Loading the developer tools
@@ -57,14 +57,15 @@ The `profiler` tool is also not loaded by default as it provides integration
 with selected backend Prolog compiler profilers that are not portable.
 
 The `tutor` tool is also not loaded by default given its useful mainly for
-users that need help in understanding compiler warning and error messages.
+new users that need help understanding compiler warning and error messages.
 
-The `wrapper` tool is also not loaded by default given its beta status.
+The `wrapper` tool is also not loaded by default given its specialized purpose
+and beta status.
 
-To load a specific tool, either change your Prolog working directory
-to the tool folder and then compile and load the corresponding loader
-utility file or simply use library notation as argument for the
-compiling and loading predicates. For example:
+To load a specific tool, either change your Prolog working directory to the
+tool folder and then compile and load the corresponding loader utility file
+or simply use library notation as argument for the compiling and loading
+predicates. For example:
 
 	| ?- logtalk_load(lgtunit(loader)).
 

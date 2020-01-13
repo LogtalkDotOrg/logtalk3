@@ -19,12 +19,13 @@
 Libraries
 =========
 
-The documentation of each developer tool can also be found in the tool
+The documentation of each library can also be found in the library
 directory in the ``NOTES.md`` file.
 
 .. toctree::
    :maxdepth: 2
 
+   overview
    arbitrary
    assignvars
    basic_types

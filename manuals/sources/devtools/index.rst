@@ -25,6 +25,7 @@ directory in the ``NOTES.md`` file.
 .. toctree::
    :maxdepth: 2
 
+   overview
    asdf
    assertions
    code_metrics

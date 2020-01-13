@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on July 23, 2019
+##   Last updated on January 13, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -39,6 +39,7 @@ rm -rf ../devtools
 rm -rf ../libraries
 make clean
 
+sed '1,18d' ../../tools/NOTES.md | pandoc -f gfm -t rst -o devtools/overview.rst
 sed '1,18d' ../../tools/asdf/NOTES.md | pandoc -f gfm -t rst -o devtools/asdf.rst
 sed '1,18d' ../../tools/assertions/NOTES.md | pandoc -f gfm -t rst -o devtools/assertions.rst
 sed '1,18d' ../../tools/code_metrics/NOTES.md | pandoc -f gfm -t rst -o devtools/code_metrics.rst
@@ -56,6 +57,7 @@ sed '1,18d' ../../tools/profiler/NOTES.md | pandoc -f gfm -t rst -o devtools/pro
 sed '1,18d' ../../tools/tutor/NOTES.md | pandoc -f gfm -t rst -o devtools/tutor.rst
 sed '1,18d' ../../tools/wrapper/NOTES.md | pandoc -f gfm -t rst -o devtools/wrapper.rst
 
+sed '1,18d' ../../library/NOTES.md | pandoc -f gfm -t rst -o libraries/overview.rst
 sed '1,18d' ../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 sed '1,18d' ../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
 sed '1,18d' ../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
