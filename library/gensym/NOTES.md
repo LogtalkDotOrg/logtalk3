@@ -28,8 +28,8 @@ using a backend Prolog compiler with multi-threading support.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#gensym](../../docs/library_index.html#gensym)
+file in a web browser.
 
 
 Loading

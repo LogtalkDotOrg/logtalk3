@@ -30,8 +30,8 @@ Use the object `sample` of your data represents a sample. Use the object
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#statistics](../../docs/library_index.html#statistics)
+file in a web browser.
 
 
 Loading

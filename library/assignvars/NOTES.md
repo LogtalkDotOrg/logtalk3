@@ -39,8 +39,8 @@ For more information on assignvars, please consult the URL:
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#assignvars](../../docs/library_index.html#assignvars)
+file in a web browser.
 
 
 Loading

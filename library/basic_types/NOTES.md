@@ -21,14 +21,15 @@ About
 -----
 
 The `basic_types` library is a virtual library that loads only basic types
-from the `types` library.
+from the `types` library: `termp`, term`, `atomic`, `atom`, `number`, `float`,
+`integer`, `compound`, `listp`, `list`, and `type`.	
 
 
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#types](../../docs/library_index.html#types)
+file in a web browser.
 
 
 Loading

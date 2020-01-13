@@ -28,8 +28,8 @@ expansion of source files.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#hook_flows](../../docs/library_index.html#hook_flows)
+file in a web browser.
 
 
 Loading

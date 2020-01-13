@@ -28,8 +28,8 @@ API is loosely based on the SWI-Prolog `readutil` module.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#reader](../../docs/library_index.html#reader)
+file in a web browser.
 
 
 Loading

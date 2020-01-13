@@ -28,8 +28,8 @@ Allen Interval Algebra work).
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#intervals](../../docs/library_index.html#intervals)
+file in a web browser.
 
 
 Loading

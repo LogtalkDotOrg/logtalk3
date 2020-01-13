@@ -20,9 +20,8 @@ ________________________________________________________________________
 About
 -----
 
-This library provides implementations of common meta-predicates. The
-`meta` object implements common Prolog meta-predicates like `map/3`
-and `fold_left/4`.
+This library provides implementations of common meta-predicates. The `meta`
+object implements common meta-predicates like `map/3` and `fold_left/4`.
 
 See also the `meta_compiler` library, which provides optimized compilation
 of meta-predicate calls.
@@ -31,8 +30,8 @@ of meta-predicate calls.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#meta](../../docs/library_index.html#meta)
+file in a web browser.
 
 
 Loading

@@ -27,8 +27,8 @@ over native backend Prolog compiler random number generator if available.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#random](../../docs/library_index.html#random)
+file in a web browser.
 
 
 Loading

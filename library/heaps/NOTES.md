@@ -26,8 +26,8 @@ This library implements minimum and maximum heaps.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#heaps](../../docs/library_index.html#heaps)
+file in a web browser.
 
 
 Loading

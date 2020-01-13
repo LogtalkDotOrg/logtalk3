@@ -28,8 +28,8 @@ files. It is mainly used when embedding Logtalk and Logtalk applications.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#expand_library_alias_paths](../../docs/library_index.html#expand_library_alias_paths)
+file in a web browser.
 
 
 Loading

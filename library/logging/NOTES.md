@@ -26,8 +26,8 @@ This library provides support for logging events to files.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#logging](../../docs/library_index.html#logging)
+file in a web browser.
 
 
 Loading

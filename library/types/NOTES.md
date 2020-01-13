@@ -30,8 +30,8 @@ predicates over common Logtalk and Prolog term types.
 API documentation
 -----------------
 
-Open the [../docs/index.html](../docs/index.html) file in a web browser
-and choose the library index.
+Open the [../../docs/library_index.html#types](../../docs/library_index.html#types)
+file in a web browser.
 
 
 Loading

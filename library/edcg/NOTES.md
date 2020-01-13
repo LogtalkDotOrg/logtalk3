@@ -17,9 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this library, load the `loader.lgt` utility file:
-
-	| ?- logtalk_load(edcg(loader)).
+About
+-----
 
 This library provides a Logtalk port of the Peter Van Roy's extended DCG
 implementation. For full documentation on EDCGs, see:
@@ -52,11 +51,28 @@ The Logtalk version uses instead the `edcg` hook object internal state
 to temporarily save those predicates in order to parse the corresponding
 EDCGs.
 
+
+API documentation
+-----------------
+
+Open the [../../docs/library_index.html#edcg](../../docs/library_index.html#edcg)
+file in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` utility file:
+
+	| ?- logtalk_load(edcg(loader)).
+
+
+Usage
+-----
+
 Follows the usage documentation written by Michael Hendricks (with a
 contribution from Peter Ludemann), used here with permission, with the
 necessary changes for the Logtalk port.
-
-# Synopsis
 
 ```logtalk
 
