@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`expecteds`
+===========
 
 This library provides an implementation of *expected terms* with an API
 that is inspired by the `optional` library and C++ standardization proposals

@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`events`
+========
 
 The objects `event_registry`, `before_event_registry`, and `after_event_registry`
 implement convenient predicates for registering before and after events.

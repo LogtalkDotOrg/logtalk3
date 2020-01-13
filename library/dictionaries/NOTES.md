@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`dictionaries`
+==============
 
 This library provides a dictionary (also know as associative array, map,
 or symbol table) protocol and binary tree, AVL tree, and Red–Black tree

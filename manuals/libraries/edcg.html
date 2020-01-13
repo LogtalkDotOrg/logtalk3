@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>edcg &mdash; The Logtalk Handbook v3.35.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="events" href="events.html" />
+    <link rel="prev" title="dictionaries" href="dictionaries.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.35.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#declaration-of-predicates">Declaration of Predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#declaration-of-accumulators">Declaration of Accumulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#declaration-of-passed-arguments">Declaration of Passed Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-documentation">Additional documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+	<p class="caption"><span class="caption-text">External Contents</span></p>
+    <a href="https://logtalk.org/docs/index.html">APIs</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Libraries</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">edcg</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/libraries/edcg.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="edcg">
+<h1><code class="docutils literal notranslate"><span class="pre">edcg</span></code><a class="headerlink" href="#edcg" title="Permalink to this headline">¶</a></h1>
+<p>This library provides a Logtalk port of the Peter Van Roy’s extended DCG
+implementation. For full documentation on EDCGs, see:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>www.info.ucl.ac.be<span class="o">/</span><span class="c">%7Epvr/edcg.html</span>
+</pre></div>
+</div>
+<p>This Logtalk version defines a hook object, <code class="docutils literal notranslate"><span class="pre">edcg</span></code>. Source files
+defining EDCGs must be compiled using the compiler option
+<code class="docutils literal notranslate"><span class="pre">hook(edcg)</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(source, [hook(edcg)]).
+</pre></div>
+</div>
+<p>Alternatively, the following directive can be added at the beginning of
+the source file containing the EDCGs:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, edcg).
+</pre></div>
+</div>
+<p>The hook object automatically adds the EDCGs <code class="docutils literal notranslate"><span class="pre">--&gt;&gt;</span></code> infix operator
+scoped to the source file.</p>
+<p>This port has simplified by copying and then modifying Michael
+Hendricks’s <code class="docutils literal notranslate"><span class="pre">edcg</span></code> repo at:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>github.com<span class="o">/</span>mndrix<span class="o">/</span>edcg
+</pre></div>
+</div>
+<p>A notable difference is that Michael’s version declares Peter’s original
+predicates for declaring accumulators and predicates using the hidden
+arguments as multifile predicates. But this is risky as two independent
+EDCGs may use e.g. the same accumulator names and introduce conflicts.
+The Logtalk version uses instead the <code class="docutils literal notranslate"><span class="pre">edcg</span></code> hook object internal state
+to temporarily save those predicates in order to parse the corresponding
+EDCGs.</p>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#edcg">../../docs/library_index.html#edcg</a>
+file in a web browser.</p>
+</div>
+<div class="section" id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility
+file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(edcg(loader)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Follows the usage documentation written by Michael Hendricks (with a
+contribution from Peter Ludemann), used here with permission, with the
+necessary changes for the Logtalk port.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Declare accumulators</span>
+acc_info(adder, <span class="nv">X</span>, <span class="nv">In</span>, <span class="nv">Out</span>, integer<span class="o">::</span>plus(<span class="nv">X</span>,<span class="nv">In</span>,<span class="nv">Out</span>)).
+
+<span class="c">% Declare predicates using these hidden arguments</span>
+pred_info(len,<span class="m">0</span>,[adder,dcg]).
+pred_info(increment,<span class="m">0</span>,[adder]).
+
+increment <span class="o">--&gt;&gt;</span>
+    [<span class="m">1</span>]<span class="o">:</span>adder.  <span class="c">% add one to the accumulator</span>
+
+
+len(<span class="nv">Xs</span>,<span class="nv">N</span>) <span class="o">:-</span>
+    len(<span class="m">0</span>,<span class="nv">N</span>,<span class="nv">Xs</span>,[]).
+
+len <span class="o">--&gt;&gt;</span>
+    [<span class="nv">_</span>],  <span class="c">% &#39;dcg&#39; accumulator has an element</span>
+    <span class="o">!</span>,
+    increment,  <span class="c">% increment the &#39;adder&#39; accumulator</span>
+    len.
+len <span class="o">--&gt;&gt;</span>
+    [].
+</pre></div>
+</div>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>DCG notation gives us a single, hidden accumulator. Extended DCG
+notation (implemented by this library) lets predicates have arbitrarily
+many hidden accumulators. As demonstrated by the Synopsis above, those
+accumulators can be implemented with arbitrary goals (like
+<code class="docutils literal notranslate"><span class="pre">integer::plus/3</span></code>).</p>
+<p>Benefits of this library:</p>
+<ul class="simple">
+<li><p>avoid tedium and errors from manually threading accumulators through
+your predicates</p></li>
+<li><p>add or remove accumulators with a single declaration</p></li>
+<li><p>change accumulator implementation with a single declaration (ex,
+switching from ordsets to rbtrees)</p></li>
+</ul>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>Extended DCG syntax is very similar to DCG notation. An EDCG is created
+with clauses whose neck is the <code class="docutils literal notranslate"><span class="pre">--&gt;&gt;</span></code> operator. The following syntax
+is supported inside an EDCG clause:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{Goal}</span></code> - don’t expand any hidden arguments of <code class="docutils literal notranslate"><span class="pre">Goal</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Goal</span></code> - expand all hidden arguments of Goal that are also in the
+head. Those hidden arguments not in the head are given default
+values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Goal:L</span></code> - If <code class="docutils literal notranslate"><span class="pre">Goal</span></code> has no hidden arguments then force the
+expansion of all arguments in <code class="docutils literal notranslate"><span class="pre">L</span></code> in the order given. If <code class="docutils literal notranslate"><span class="pre">Goal</span></code>
+has hidden arguments then expand all of them, using the contents of
+<code class="docutils literal notranslate"><span class="pre">L</span></code> to override the expansion. <code class="docutils literal notranslate"><span class="pre">L</span></code> is either a term of the form
+<code class="docutils literal notranslate"><span class="pre">Acc</span></code>, <code class="docutils literal notranslate"><span class="pre">Acc(Left,Right)</span></code>, <code class="docutils literal notranslate"><span class="pre">Pass</span></code>, <code class="docutils literal notranslate"><span class="pre">Pass(Value)</span></code>, or a list of
+such terms. When present, the arguments <code class="docutils literal notranslate"><span class="pre">Left</span></code>, <code class="docutils literal notranslate"><span class="pre">Right</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Value</span></code> override the default values of arguments not in the head.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">List:Acc</span></code> - Accumulate a list of terms in the accumulator <code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">List</span></code> - Accumulate a list of terms in the accumulator <code class="docutils literal notranslate"><span class="pre">dcg</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X/Acc</span></code> - Unify <code class="docutils literal notranslate"><span class="pre">X</span></code> with the left term for the accumulator
+<code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Acc/X</span></code> - Unify <code class="docutils literal notranslate"><span class="pre">X</span></code> with the right term for the accumulator
+<code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X/Acc/Y</span></code> - Unify <code class="docutils literal notranslate"><span class="pre">X</span></code> with the left and <code class="docutils literal notranslate"><span class="pre">Y</span></code> with the right term
+for the accumulator <code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">insert(X,Y):Acc</span></code> - Insert the arguments <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> into the
+chain implementing the accumulator <code class="docutils literal notranslate"><span class="pre">Acc</span></code>. This is useful when the
+value of the accumulator changes radically because <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code>
+may be the arguments of an arbitrary relation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">insert(X,Y)</span></code> - Insert the arguments <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> into the chain
+implementing the accumulator <code class="docutils literal notranslate"><span class="pre">dcg</span></code>. This inserts the difference
+list X-Y into the accumulated list</p></li>
+</ul>
+</div>
+<div class="section" id="declaration-of-predicates">
+<h2>Declaration of Predicates<a class="headerlink" href="#declaration-of-predicates" title="Permalink to this headline">¶</a></h2>
+<p>Predicates are declared with facts of the following form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>pred_info(<span class="nv">Name</span>, <span class="nv">Arity</span>, <span class="nv">List</span>).
+</pre></div>
+</div>
+<p>The predicate <code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code> has the hidden parameters given in
+<code class="docutils literal notranslate"><span class="pre">List</span></code>. The parameters are added in the order given by <code class="docutils literal notranslate"><span class="pre">List</span></code> and
+their names must be atoms.</p>
+</div>
+<div class="section" id="declaration-of-accumulators">
+<h2>Declaration of Accumulators<a class="headerlink" href="#declaration-of-accumulators" title="Permalink to this headline">¶</a></h2>
+<p>Accumulators are declared with facts in one of two forms. The short form
+is:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>acc_info(<span class="nv">Acc</span>, <span class="nv">Term</span>, <span class="nv">Left</span>, <span class="nv">Right</span>, <span class="nv">Joiner</span>).
+</pre></div>
+</div>
+<p>The long form is:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>acc_info(<span class="nv">Acc</span>, <span class="nv">Term</span>, <span class="nv">Left</span>, <span class="nv">Right</span>, <span class="nv">Joiner</span>, <span class="nv">LStart</span>, <span class="nv">RStart</span>).
+</pre></div>
+</div>
+<p>In most cases the short form gives sufficient information. It declares
+the accumulator <code class="docutils literal notranslate"><span class="pre">Acc</span></code>, which must be an atom, along with the
+accumulating function, <code class="docutils literal notranslate"><span class="pre">Joiner</span></code>, and its arguments <code class="docutils literal notranslate"><span class="pre">Term</span></code>, the term
+to be accumulated, and <code class="docutils literal notranslate"><span class="pre">Left</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Right</span></code>, the variables used in
+chaining.</p>
+<p>The long form of <code class="docutils literal notranslate"><span class="pre">acc_info</span></code> is useful in more complex programs. It
+contains two additional arguments, <code class="docutils literal notranslate"><span class="pre">LStart</span></code> and <code class="docutils literal notranslate"><span class="pre">RStart</span></code>, that are
+used to give default starting values for an accumulator occurring in a
+body goal that does not occur in the head. The starting values are given
+to the unused accumulator to ensure that it will execute correctly even
+though its value is not used. Care is needed to give correct values for
+<code class="docutils literal notranslate"><span class="pre">LStart</span></code> and <code class="docutils literal notranslate"><span class="pre">RStart</span></code>. For DCG-like list accumulation both may
+remain unbound.</p>
+<p>Two conventions are used for the two variables used in chaining
+depending on which direction the accumulation is done. For forward
+accumulation, <code class="docutils literal notranslate"><span class="pre">Left</span></code> is the input and <code class="docutils literal notranslate"><span class="pre">Right</span></code> is the output. For
+reverse accumulation, <code class="docutils literal notranslate"><span class="pre">Right</span></code> is the input and <code class="docutils literal notranslate"><span class="pre">Left</span></code> is the output.</p>
+</div>
+<div class="section" id="declaration-of-passed-arguments">
+<h2>Declaration of Passed Arguments<a class="headerlink" href="#declaration-of-passed-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Passed arguments are conceptually the same as accumulators with <code class="docutils literal notranslate"><span class="pre">=/2</span></code>
+as the joiner function. Passed arguments are declared as facts in one of
+two forms. The short form is:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>pass_info(<span class="nv">Pass</span>).
+</pre></div>
+</div>
+<p>The long form is:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>pass_info(<span class="nv">Pass</span>, <span class="nv">PStart</span>).
+</pre></div>
+</div>
+<p>In most cases the short form is sufficient. It declares a passed
+argument <code class="docutils literal notranslate"><span class="pre">Pass</span></code>, that must be an atom. The long form also contains the
+starting value <code class="docutils literal notranslate"><span class="pre">PStart</span></code> that is used to give a default value for a
+passed argument in a body goal that does not occur in the head. Most of
+the time this situation does not occur.</p>
+</div>
+<div class="section" id="additional-documentation">
+<h2>Additional documentation<a class="headerlink" href="#additional-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Peter Van Roy’s page: <a class="reference external" href="https://www.info.ucl.ac.be/~pvr/edcg.html">Declarative Programming with
+State</a></p>
+<p>Technical Report UCB/CSD-90-583 <a class="reference external" href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/5471.html">Extended DCG Notation: A Tool for
+Applicative Programming in
+Prolog</a>
+by Peter Van Roy</p>
+<ul class="simple">
+<li><p>The Tech Report’s PDF is
+<a class="reference external" href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/CSD-90-583.pdf">here</a></p></li>
+</ul>
+<p>A short <a class="reference external" href="https://en.wikipedia.org/wiki/Definite_clause_grammar#Extensions">Wikipedia
+article</a>
+on DCGs and extensions.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="events.html" class="btn btn-neutral float-right" title="events" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dictionaries.html" class="btn btn-neutral float-left" title="dictionaries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`assignvars`
+============
 
 The `assignvarsp` protocol declares the predicates used for logical assignment 
 of Prolog terms developed by Nobukuni Kino.

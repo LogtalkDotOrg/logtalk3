@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`timeout`
+=========
 
 The `timeout` object provides a portable abstraction over calling a goal
 deterministically with a time limit as made available in some form by some

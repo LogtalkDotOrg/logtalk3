@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`meta`
+======
 
 This library provides implementations of common meta-predicates. The `meta`
 object implements common meta-predicates like `map/3` and `fold_left/4`.

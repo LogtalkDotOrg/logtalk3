@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`coroutining`
+=============
 
 The `coroutining` object provides a portable abstraction over how common
 coroutining predicates are made available by the supported backend Prolog

@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`expand_library_alias_paths`
+============================
 
 This library provides provides a hook object, `expand_library_alias_paths`,
 for expanding library alias paths in `logtalk_library_path/2 facts` in source

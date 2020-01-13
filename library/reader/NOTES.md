@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`reader`
+========
 
 The `reader` object provides portable predicates for reading text file and
 text stream contents to lists of terms, characters, or character codes. The

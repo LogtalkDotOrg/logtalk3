@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`statistics`
+============
 
 The entities in this group define some useful predicates for descriptive
 statistics. Data is represented as a list of numbers (integers or floats).

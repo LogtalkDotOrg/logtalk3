@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`heaps`
+=======
 
 This library implements minimum and maximum heaps.
 

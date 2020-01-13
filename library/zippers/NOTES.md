@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`zippers`
+=========
 
 This library implements zippers over lists.
 

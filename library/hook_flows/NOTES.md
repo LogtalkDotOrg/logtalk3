@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`hook_flows`
+============
 
 The `hook_pipeline` and `hook_set` parametric objects in this library
 implement common scenarios of combining multiple hook objects for the

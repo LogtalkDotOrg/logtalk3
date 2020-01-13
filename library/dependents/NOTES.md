@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`dependents`
+============
 
 The `observer` and `subject` categories implement the Smalltalk 
 dependents handling mechanism. This mechanism can be used as an

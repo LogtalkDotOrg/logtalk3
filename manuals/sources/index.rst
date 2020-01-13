@@ -27,6 +27,7 @@ The Logtalk Handbook
    tutorial/index
    faq/index
    devtools/index
+   libraries/index
    glossary
    bibliography
    genindex

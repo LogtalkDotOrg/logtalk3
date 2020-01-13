@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`hierarchies`
+=============
 
 This library provides objects implementing reflection predicates over
 class and prototype hierarchies.

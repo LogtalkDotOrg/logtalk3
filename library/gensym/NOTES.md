@@ -17,10 +17,10 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`gensym`
+========
 
-The `gensym` object implements predicates for generating unique atoms. The
+The `gensym` library implements predicates for generating unique atoms. The
 public predicates are declared synchronized to prevent race conditions when
 using a backend Prolog compiler with multi-threading support.
 

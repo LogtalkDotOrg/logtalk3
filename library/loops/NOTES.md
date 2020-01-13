@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`loops`
+=======
 
 This library provides implementations of several kinds of loops typical of
 imperative languages.

@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`basic_types`
+=============
 
 The `basic_types` library is a virtual library that loads only basic types
 from the `types` library: `termp`, term`, `atomic`, `atom`, `number`, `float`,

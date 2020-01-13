@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`java`
+======
 
 The library Java entities define a minimal abstraction for calling Java
 from Logtalk. This abstraction makes use of Logtalk parametric objects

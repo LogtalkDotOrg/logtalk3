@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`redis`
+=======
 
 Redis client library. Supports GNU Prolog, Qu-Prolog, SICStus Prolog,
 SWI-Prolog, and XSB. Support for ECLiPSe is also included but requires

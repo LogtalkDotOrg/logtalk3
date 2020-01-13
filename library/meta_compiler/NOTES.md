@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`meta_compiler`
+===============
 
 This library supports implementations optimized compilation of meta-calls
 for the predicates defined in the `meta` library. 

@@ -1,0 +1,24 @@
+``intervals``
+=============
+
+This library provides an ``intervalp`` protocol and an ``interval``
+object that implement basic temporal interval relations protocol (based
+on the James F. Allen Interval Algebra work).
+
+API documentation
+-----------------
+
+Open the
+`../../docs/library_index.html#intervals <../../docs/library_index.html#intervals>`__
+file in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` utility
+file:
+
+::
+
+   | ?- logtalk_load(intervals(loader)).
+

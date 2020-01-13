@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`optionals`
+===========
 
 This library provides an implementation of *optional terms* with an API
 modeled after the Java 8 `Optional` class (originally due to requests by

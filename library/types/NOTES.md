@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`types`
+=======
 
 This library implements predicates over standard Prolog term types and 
 also term representing common data structures such as lists and pairs.

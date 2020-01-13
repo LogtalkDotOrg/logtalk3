@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`edcg`
+======
 
 This library provides a Logtalk port of the Peter Van Roy's extended DCG
 implementation. For full documentation on EDCGs, see:
@@ -99,7 +99,8 @@ len -->>
     [].
 ```
 
-# Introduction
+Introduction
+------------
 
 DCG notation gives us a single, hidden accumulator.  Extended DCG notation (implemented by this library) lets predicates have arbitrarily many hidden accumulators. As demonstrated by the Synopsis above, those accumulators can be implemented with arbitrary goals (like `integer::plus/3`).
 
@@ -109,7 +110,8 @@ Benefits of this library:
   * add or remove accumulators with a single declaration
   * change accumulator implementation with a single declaration (ex, switching from ordsets to rbtrees)
 
-# Syntax
+Syntax
+------
 
 Extended DCG syntax is very similar to DCG notation.  An EDCG is created with clauses whose neck is the `-->>` operator.  The following syntax is supported inside an EDCG clause:
 
@@ -124,9 +126,8 @@ Extended DCG syntax is very similar to DCG notation.  An EDCG is created with cl
   * `insert(X,Y):Acc` - Insert the arguments `X` and `Y` into the chain implementing the accumulator `Acc`. This is useful when the value of the accumulator changes radically because `X` and `Y` may be the arguments of an arbitrary relation
   * `insert(X,Y)` - Insert the arguments `X` and `Y` into the chain implementing the accumulator `dcg`. This inserts the difference list X-Y into the accumulated list
 
-# Declarations
-
-## Declaration of Predicates
+Declaration of Predicates
+-------------------------
 
 Predicates are declared with facts of the following form:
 
@@ -136,7 +137,8 @@ pred_info(Name, Arity, List).
 
 The predicate `Name/Arity` has the hidden parameters given in `List`. The parameters are added in the order given by `List` and their names must be atoms.
 
-## Declaration of Accumulators
+Declaration of Accumulators
+---------------------------
 
 Accumulators are declared with facts in one of two forms. The short form is:
 
@@ -156,7 +158,8 @@ The long form of `acc_info` is useful in more complex programs. It contains two 
 
 Two conventions are used for the two variables used in chaining depending on which direction the accumulation is done. For forward accumulation, `Left` is the input and `Right` is the output. For reverse accumulation, `Right` is the input and `Left` is the output.
 
-## Declaration of Passed Arguments
+Declaration of Passed Arguments
+-------------------------------
 
 Passed arguments are conceptually the same as accumulators with `=/2` as the joiner function.  Passed arguments are declared as facts in one of two forms. The short form is:
 
@@ -172,7 +175,8 @@ pass_info(Pass, PStart).
 
 In most cases the short form is sufficient. It declares a passed argument `Pass`, that must be an atom. The long form also contains the starting value `PStart` that is used to give a default value for a passed argument in a body goal that does not occur in the head. Most of the time this situation does not occur.
 
-# Additional documentation
+Additional documentation
+------------------------
 
 Peter Van Roy's page: [Declarative Programming with State](https://www.info.ucl.ac.be/~pvr/edcg.html)
 

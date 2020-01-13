@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`arbitrary`
+===========
 
 The `arbitrary` category adds predicates for generating random values
 for selected types to the `type` object, complementing its type checking

@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`dates`
+=======
 
 The `date` object implements some useful calendar date predicates.
 

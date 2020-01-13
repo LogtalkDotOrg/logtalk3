@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`random`
+========
 
 This library provides portable random number generators and an abstraction
 over native backend Prolog compiler random number generator if available.
@@ -65,12 +65,12 @@ to protect seed updates from signals and prevent inconsistent state when
 threads are canceled.
 
 The `backend_random` object abstracts the native backend Prolog compiler
-random number generator for the basic random/1, get_seed/1, and set_seed/1
+random number generator for the basic `random/1`, `get_seed/1`, and `set_seed/1`
 predicates providing a portable implementation for the remaining predicates.
 This makes the object stateless, which can allow reliable use from multiple
 threads. Consult the backend Prolog compiler documentation for details on
 its random number generator properties. Note that several of the supported
 backend Prolog systems, notably B-Prolog, CxProlog, ECLiPSe, JIProlog, Lean
 Prolog, Qu-Prolog, and Quintus Prolog, do not provide implementations for
-both the get_seed/1 and set_seed/1 predicates and calling these predicates
+both the `get_seed/1` and `set_seed/1` predicates and calling these predicates
 simply succeed without performing any action.

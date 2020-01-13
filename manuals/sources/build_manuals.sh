@@ -36,6 +36,7 @@ rm -rf ../refman
 rm -rf ../tutorial
 rm -rf ../userman
 rm -rf ../devtools
+rm -rf ../libraries
 make clean
 
 sed '1,18d' ../../tools/asdf/NOTES.md | pandoc -f gfm -t rst -o devtools/asdf.rst
@@ -54,6 +55,40 @@ sed '1,18d' ../../tools/ports_profiler/NOTES.md | pandoc -f gfm -t rst -o devtoo
 sed '1,18d' ../../tools/profiler/NOTES.md | pandoc -f gfm -t rst -o devtools/profiler.rst
 sed '1,18d' ../../tools/tutor/NOTES.md | pandoc -f gfm -t rst -o devtools/tutor.rst
 sed '1,18d' ../../tools/wrapper/NOTES.md | pandoc -f gfm -t rst -o devtools/wrapper.rst
+
+sed '1,18d' ../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
+sed '1,18d' ../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
+sed '1,18d' ../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
+sed '1,18d' ../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
+sed '1,18d' ../../library/dates/NOTES.md | pandoc -f gfm -t rst -o libraries/dates.rst
+sed '1,18d' ../../library/dependents/NOTES.md | pandoc -f gfm -t rst -o libraries/dependents.rst
+sed '1,18d' ../../library/dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/dictionaries.rst
+sed '1,18d' ../../library/edcg/NOTES.md | pandoc -f gfm -t rst -o libraries/edcg.rst
+sed '1,18d' ../../library/events/NOTES.md | pandoc -f gfm -t rst -o libraries/events.rst
+sed '1,18d' ../../library/expand_library_alias_paths/NOTES.md | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
+sed '1,18d' ../../library/expecteds/NOTES.md | pandoc -f gfm -t rst -o libraries/expecteds.rst
+sed '1,18d' ../../library/gensym/NOTES.md | pandoc -f gfm -t rst -o libraries/gensym.rst
+sed '1,18d' ../../library/heaps/NOTES.md | pandoc -f gfm -t rst -o libraries/heaps.rst
+sed '1,18d' ../../library/hierarchies/NOTES.md | pandoc -f gfm -t rst -o libraries/hierarchies.rst
+sed '1,18d' ../../library/hook_flows/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_flows.rst
+sed '1,18d' ../../library/intervals/NOTES.md | pandoc -f gfm -t rst -o libraries/intervals.rst
+sed '1,18d' ../../library/java/NOTES.md | pandoc -f gfm -t rst -o libraries/java.rst
+sed '1,18d' ../../library/logging/NOTES.md | pandoc -f gfm -t rst -o libraries/logging.rst
+sed '1,18d' ../../library/loops/NOTES.md | pandoc -f gfm -t rst -o libraries/loops.rst
+sed '1,18d' ../../library/meta/NOTES.md | pandoc -f gfm -t rst -o libraries/meta.rst
+sed '1,18d' ../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
+sed '1,18d' ../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
+sed '1,18d' ../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.rst
+sed '1,18d' ../../library/queues/NOTES.md | pandoc -f gfm -t rst -o libraries/queues.rst
+sed '1,18d' ../../library/random/NOTES.md | pandoc -f gfm -t rst -o libraries/random.rst
+sed '1,18d' ../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries/reader.rst
+sed '1,18d' ../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
+sed '1,18d' ../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
+sed '1,18d' ../../library/statistics/NOTES.md | pandoc -f gfm -t rst -o libraries/statistics.rst
+sed '1,18d' ../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
+sed '1,18d' ../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst
+cat ../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/unicode_data.rst
+sed '1,18d' ../../library/zippers/NOTES.md | pandoc -f gfm -t rst -o libraries/zippers.rst
 
 make html
 make latexpdf

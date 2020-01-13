@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`os`
+====
 
 This library entities define a *portable* operating-system interface for the
 supported backend Prolog compilers. Some predicates may only be supported

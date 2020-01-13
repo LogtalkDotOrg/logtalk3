@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`logging`
+=========
 
 This library provides support for logging events to files.
 

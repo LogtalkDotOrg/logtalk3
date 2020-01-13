@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`sets`
+======
 
 This library provides a set protocol, an implementation of this protocol
 using ordered lists and parametric set that takes a type.

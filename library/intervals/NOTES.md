@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`intervals`
+===========
 
 This library provides an `intervalp` protocol and an `interval` object that
 implement basic temporal interval relations protocol (based on the James F.
