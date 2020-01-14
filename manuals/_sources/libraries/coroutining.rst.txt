@@ -5,6 +5,10 @@ The ``coroutining`` object provides a portable abstraction over how
 common coroutining predicates are made available by the supported
 backend Prolog systems (ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP).
 
+Calls to the library predicates are inlined when compiled with the
+``optimize`` flag turned on. In this case, there is no overhead compared
+with calling the abstracted predicates directly.
+
 API documentation
 -----------------
 

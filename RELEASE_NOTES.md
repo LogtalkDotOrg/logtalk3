@@ -44,7 +44,7 @@ Internet connection when browsed locally.
 Libraries
 ---------
 
-* IMPROVED: The documentation of the `arbitrary` library.
+* IMPROVED: The documentation of the `arbitrary` and `coroutining` libraries.
 
 Tools
 _____
