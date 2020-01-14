@@ -49,6 +49,10 @@ For contributing improvements and fixes to the Handbook, open it in your
 web browser, click on link on the top right that says "Edit on GitHub",
 make the proposed changes, and submit them as a pull request.
 
+In the specific case of developer tools and libraries documentation, note
+that their Handbook sections are automatically generated from the tool and
+library directory `NOTES.md` files.
+
 In the case of code contributions, you are required to follow the coding
 guidelines described at:
 
