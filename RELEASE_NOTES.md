@@ -41,6 +41,11 @@ to not require an Internet connection when browsed locally.
 * UPDATED: Handbook and API documentation cross-links to not require an
 Internet connection when browsed locally.
 
+Libraries
+---------
+
+* IMPROVED: The documentation of the `arbitrary` library.
+
 Tools
 _____
 

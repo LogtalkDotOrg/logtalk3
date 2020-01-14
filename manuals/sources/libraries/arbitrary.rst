@@ -30,7 +30,13 @@ Usage
 -----
 
 The ``arbitrary`` category complements the ``type`` object and thus its
-predicates are accessed via this object.
+predicates are accessed via this object. For example:
+
+::
+
+   | ?- type::arbitrary(integer, Arbitrary).
+   Arbitrary = -816
+   yes
 
 To define a generator of arbitrary values for a type, define a clause
 for the ``type::arbitrary/1`` multifile predicate specifying the type
@@ -55,6 +61,17 @@ example:
    :- multifile(type::shrink/3).
    type::shrink(foo, Large, Small) :-
        ...
+
+It is also possible to define edge cases for a given type for use with
+QuickCheck implementations. For example:
+
+::
+
+   :- multifile(edge_case/2).
+   type::edge_case(cost, 0).
+
+Edge cases are usually tried before resorting to generating arbitrary
+values for a type.
 
 Examples
 --------

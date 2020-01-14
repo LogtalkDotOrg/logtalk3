@@ -251,7 +251,12 @@ file:</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category complements the <code class="docutils literal notranslate"><span class="pre">type</span></code> object and thus its
-predicates are accessed via this object.</p>
+predicates are accessed via this object. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>arbitrary(integer, <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="o">-</span><span class="m">816</span>
+yes
+</pre></div>
+</div>
 <p>To define a generator of arbitrary values for a type, define a clause
 for the <code class="docutils literal notranslate"><span class="pre">type::arbitrary/1</span></code> multifile predicate specifying the type
 and a clause for the <code class="docutils literal notranslate"><span class="pre">type::arbitrary/2</span></code> multifile predicate
@@ -272,6 +277,14 @@ type<span class="o">::</span>shrink(foo, <span class="nv">Large</span>, <span cl
     ...
 </pre></div>
 </div>
+<p>It is also possible to define edge cases for a given type for use with
+QuickCheck implementations. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(edge_case<span class="o">/</span><span class="m">2</span>).
+type<span class="o">::</span>edge_case(cost, <span class="m">0</span>).
+</pre></div>
+</div>
+<p>Edge cases are usually tried before resorting to generating arbitrary
+values for a type.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
