@@ -21,8 +21,12 @@ This folder contains minimal support for using Exuberant Ctags  with Logtalk:
 
 	http://ctags.sourceforge.net/
 
-To install, copy the `ctags` file to `$HOME/.ctags` or append its contents to
-the `$HOME/.ctags` file if it already exists.
+To install, copy the `logtalk.ctags` file to `$HOME/.ctags.d/logtalk.ctags`,
+creating the `$HOME/.ctags.d` directory if it doesn't yet exist.
+
+For older versions of ctags, you may need to copy the `logtalk.ctags` file to
+`$HOME/.ctags` or append its contents to the `$HOME/.ctags` file if it already
+exists instead.
 
 Several text editors (e.g. Atom, Sublime Text, TextMate, and Vim) support code
 navigation using ctags. Check the text editor documentation and the Logtalk
