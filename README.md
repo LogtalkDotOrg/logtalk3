@@ -147,9 +147,9 @@ Support
 
 Support channels include:
 
-* [Professional services](https://logtalk.pt/)
 * [Community discussion forums](https://forums.logtalk.org/)
 * [Community live chat room](https://gitter.im/LogtalkDotOrg/logtalk3)
+* [Support contracts](https://logtalk.org/support_contracts.html)
 
 For more information on support options, please consult:
 
@@ -162,7 +162,7 @@ Citations
 If you find Logtalk useful, please include a citation on your publications
 (also cite the used backend Prolog compilers). The [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib)
 file includes bibliographic references in BibTeX format (including the 2003
-PhD thesis on Logtalk design and implementation).
+PhD thesis on Logtalk design and implementation and the Logtalk Handbook).
 
 
 Contributions
