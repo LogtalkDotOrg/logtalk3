@@ -23,6 +23,58 @@ file:
 
    | ?- logtalk_load(dictionaries(loader)).
 
+Usage
+-----
+
+First, select the dictionary implementation that you want to use. For
+cases where the number of elements is relatively small and performance
+is not critical, ``bintree`` can be a good choice. For other cases,
+``avltree`` or ``rbtree`` are likely better choices. If you want to
+compare the performance of the implementations, either define an object
+alias or use an ``uses/2`` directive so that you can switch between
+implementations by simply changing the alias definition or the first
+argument of the directive. Note that you can switch between
+implementations at runtime without code changes by using a parameter
+variable in the first argument of an ``uses/2`` directive.
+
+To create a new dictionary, use the ``new/1`` predicate. For example:
+
+::
+
+   | ?- avltree::new(Dictionary).
+   Dictionary = ...
+   yes
+
+You can also create a new dictionary from a list of key-value pairs by
+using the ``as_dictionary/2`` predicate. For example:
+
+::
+
+   | ?- avltree::as_dictionary([a-1,c-3,b-2], Dictionary).
+   Dictionary = ...
+   yes
+
+Several predicates are provided for inserting key-value pairs, lookup
+key-value pairs updating the value associated with a key, and deleting
+key-value pairs. For example:
+
+::
+
+   | ?- avltree::(
+           new(Dictionary0),
+           insert(Dictionary0, a, 1, Dictionary1),
+           update(Dictionary1, a, 2, Dictionary2),
+           lookup(a, Value, Dictionary2)
+       ).
+   Dictionary0 = ...,
+   Dictionary1 = ...,
+   Dictionary2 = ...,
+   Value = 2
+   yes
+
+For details on these and other provided predicates, consult the library
+API documentation.
+
 Credits
 -------
 

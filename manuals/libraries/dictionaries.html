@@ -118,6 +118,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#credits">Credits</a></li>
 </ul>
 </li>
@@ -242,6 +243,50 @@ file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dictionaries(loader)).
 </pre></div>
 </div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>First, select the dictionary implementation that you want to use. For
+cases where the number of elements is relatively small and performance
+is not critical, <code class="docutils literal notranslate"><span class="pre">bintree</span></code> can be a good choice. For other cases,
+<code class="docutils literal notranslate"><span class="pre">avltree</span></code> or <code class="docutils literal notranslate"><span class="pre">rbtree</span></code> are likely better choices. If you want to
+compare the performance of the implementations, either define an object
+alias or use an <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive so that you can switch between
+implementations by simply changing the alias definition or the first
+argument of the directive. Note that you can switch between
+implementations at runtime without code changes by using a parameter
+variable in the first argument of an <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive.</p>
+<p>To create a new dictionary, use the <code class="docutils literal notranslate"><span class="pre">new/1</span></code> predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> avltree<span class="o">::</span>new(<span class="nv">Dictionary</span>).
+<span class="nv">Dictionary</span> <span class="o">=</span> ...
+yes
+</pre></div>
+</div>
+<p>You can also create a new dictionary from a list of key-value pairs by
+using the <code class="docutils literal notranslate"><span class="pre">as_dictionary/2</span></code> predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> avltree<span class="o">::</span>as_dictionary([a<span class="o">-</span><span class="m">1</span>,c<span class="o">-</span><span class="m">3</span>,b<span class="o">-</span><span class="m">2</span>], <span class="nv">Dictionary</span>).
+<span class="nv">Dictionary</span> <span class="o">=</span> ...
+yes
+</pre></div>
+</div>
+<p>Several predicates are provided for inserting key-value pairs, lookup
+key-value pairs updating the value associated with a key, and deleting
+key-value pairs. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> avltree<span class="o">::</span>(
+        new(<span class="nv">Dictionary0</span>),
+        insert(<span class="nv">Dictionary0</span>, a, <span class="m">1</span>, <span class="nv">Dictionary1</span>),
+        update(<span class="nv">Dictionary1</span>, a, <span class="m">2</span>, <span class="nv">Dictionary2</span>),
+        lookup(a, <span class="nv">Value</span>, <span class="nv">Dictionary2</span>)
+    ).
+<span class="nv">Dictionary0</span> <span class="o">=</span> ...,
+<span class="nv">Dictionary1</span> <span class="o">=</span> ...,
+<span class="nv">Dictionary2</span> <span class="o">=</span> ...,
+<span class="nv">Value</span> <span class="o">=</span> <span class="m">2</span>
+yes
+</pre></div>
+</div>
+<p>For details on these and other provided predicates, consult the library
+API documentation.</p>
 </div>
 <div class="section" id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>

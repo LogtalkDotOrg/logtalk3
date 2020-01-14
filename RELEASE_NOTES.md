@@ -51,8 +51,8 @@ Internet connection when browsed locally.
 Libraries
 ---------
 
-* IMPROVED: The documentation of the `arbitrary`, `coroutining`, and `queues`
-libraries.
+* IMPROVED: The documentation of the `arbitrary`, `coroutining`, `queues`,
+and `dictionaries` libraries.
 
 Tools
 _____
