@@ -635,8 +635,8 @@
 	% (sloppy replacement for the use_module/1-2 directives)
 	'$lgt_yap_directive_expansion'(use_module(File), Expanded).
 
-'$lgt_yap_directive_expansion'(module(Module,Exports0), (:- module(Module,Exports))) :-
-	'$lgt_yap_fix_predicate_aliases'(Exports0, Exports).
+'$lgt_yap_directive_expansion'(module(Module,Exports0), [(:- module(Module,Exports))| Clauses]) :-
+	'$lgt_yap_split_predicate_aliases'(Exports0, Exports, Clauses).
 
 '$lgt_yap_directive_expansion'(reexport(File), [(:- use_module(Module, Exports)), (:- export(Exports))]) :-
 	'$lgt_yap_list_of_exports'(File, Module, Exports0),
@@ -750,6 +750,19 @@
 		),
 		Imports
 	).
+
+
+'$lgt_yap_split_predicate_aliases'([], [], []).
+'$lgt_yap_split_predicate_aliases'([as(Functor/Arity, Alias)| Exports0], [Alias/Arity| Exports], [Clause| Clauses]) :-
+	!,
+	functor(Template, Functor, Arity),
+	Template =.. [Functor| Arguments],
+	AliasTemplate =.. [Alias| Arguments],
+	Clause = (AliasTemplate :- Template),
+	'$lgt_yap_split_predicate_aliases'(Exports0, Exports, Clauses).
+'$lgt_yap_split_predicate_aliases'([Export| Exports0], [Export| Exports], Clauses) :-
+	'$lgt_yap_split_predicate_aliases'(Exports0, Exports, Clauses).
+
 
 '$lgt_yap_fix_predicate_aliases'([], []).
 '$lgt_yap_fix_predicate_aliases'([Import0| Imports0], [Import| Imports]) :-
