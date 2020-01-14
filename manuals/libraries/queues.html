@@ -135,6 +135,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
@@ -224,7 +225,9 @@
             
   <div class="section" id="queues">
 <h1><code class="docutils literal notranslate"><span class="pre">queues</span></code><a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h1>
-<p>This library implements queues.</p>
+<p>This library implements queues. The queue representation should be
+regarded as an opaque term and only accessed using the library
+predicates.</p>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
@@ -238,6 +241,36 @@ file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(queues(loader)).
 </pre></div>
 </div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>To create a new queue, use the <code class="docutils literal notranslate"><span class="pre">new/1</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> queue<span class="o">::</span>new(<span class="nv">Queue</span>).
+<span class="nv">Queue</span> <span class="o">=</span> ...
+yes
+</pre></div>
+</div>
+<p>Elements can be added to either the end of the queue or the front of the
+queue using, respectively, the <code class="docutils literal notranslate"><span class="pre">join/3</span></code> and <code class="docutils literal notranslate"><span class="pre">join_all/3</span></code> predicates
+or the <code class="docutils literal notranslate"><span class="pre">jump/3</span></code> and <code class="docutils literal notranslate"><span class="pre">jump_all/3</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> queue<span class="o">::</span>(new(<span class="nv">Queue0</span>), join_all([<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>], <span class="nv">Queue0</span>, <span class="nv">Queue1</span>)).
+<span class="nv">Queue0</span> <span class="o">=</span> ...,
+<span class="nv">Queue1</span> <span class="o">=</span> ...
+yes
+</pre></div>
+</div>
+<p>We can query the head of the queue or remove the head of the queue
+using, respectively, the <code class="docutils literal notranslate"><span class="pre">head/2</span></code> and <code class="docutils literal notranslate"><span class="pre">serve/3</span></code> predicates. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> queue<span class="o">::</span>(new(<span class="nv">Queue0</span>), join(<span class="m">1</span>, <span class="nv">Queue0</span>, <span class="nv">Queue1</span>), head(<span class="nv">Queue1</span>, <span class="nv">Head</span>)).
+<span class="nv">Queue0</span> <span class="o">=</span> ...,
+<span class="nv">Queue1</span> <span class="o">=</span> ...,
+<span class="nv">Head</span> <span class="o">=</span> <span class="m">1</span>
+yes
+</pre></div>
+</div>
+<p>For details on these and other provided predicates, consult the library
+API documentation.</p>
 </div>
 </div>
 

@@ -22,7 +22,8 @@ ________________________________________________________________________
 
 This library provides a dictionary (also know as associative array, map,
 or symbol table) protocol and binary tree, AVL tree, and Red–Black tree
-implementations.
+implementations. The different representations of a dictionary should be
+regarded as opaque terms and only accessed using the library predicates.
 
 
 API documentation
