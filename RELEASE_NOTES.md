@@ -24,6 +24,13 @@ RELEASE NOTES
 3.35.0 - February ??, 2020
 ==========================
 
+
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The SWI-Prolog and YAP adapter files to fix predicate aliases in
+`module/2` directives when compiling modules as objects.
+
 Documentation
 -------------
 

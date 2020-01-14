@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on January 6, 2020
+%  Last updated on January 14, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -634,6 +634,9 @@
 	% ensure_loaded/1 directive used within a module
 	% (sloppy replacement for the use_module/1-2 directives)
 	'$lgt_yap_directive_expansion'(use_module(File), Expanded).
+
+'$lgt_yap_directive_expansion'(module(Module,Exports0), module(Module,Exports)) :-
+	'$lgt_yap_fix_predicate_aliases'(Exports0, Exports).
 
 '$lgt_yap_directive_expansion'(reexport(File), [(:- use_module(Module, Exports)), (:- export(Exports))]) :-
 	'$lgt_yap_list_of_exports'(File, Module, Exports0),
