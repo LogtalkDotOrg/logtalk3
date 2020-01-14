@@ -20,7 +20,7 @@ ________________________________________________________________________
 This folder contains a simple Logtalk language definition for the LaTeX
 package `listings`:
 
-	http://www.ctan.org/tex-archive/macros/latex/contrib/listings/
+http://www.ctan.org/tex-archive/macros/latex/contrib/listings/
 
 To use the language definition copy the `lstlang0.sty` to the same
 folder where you have the LaTeX source files that you're typesetting

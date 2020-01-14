@@ -17,8 +17,9 @@ limitations under the License.
 ________________________________________________________________________
 
 
-The "minted" LaTeX package uses Pygments to generate beautiful source
-code listings. For Pygments Logtalk support see the "pygments" folder.
+The `texments` LaTeX package uses Pygments to generate beautiful source
+code listings:
 
-	http://code.google.com/p/minted/
-	http://www.ctan.org/tex-archive/macros/latex/contrib/minted/
+http://www.ctan.org/tex-archive/macros/latex/contrib/texments/
+
+For details on Pygments support for Logtalk, see the `pygments` folder.

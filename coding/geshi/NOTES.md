@@ -17,11 +17,20 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Ultraviolet is a is a syntax highlighting engine available as both
-a stand-alone command line utility and a Ruby library.
+This directory contains files that provide syntax highlighting for 
+GeSHi 1.0.8.6 or later versions:
 
-	http://ultraviolet.rubyforge.org/
+http://geshi.org/
 
-Ultraviolet uses TextMate language syntax files and TextMate themes.
-See the `../textmate` folder and the Sublime Text documentation for
-more information.
+These support files are dual-licensed under the Apache License 2.0 and
+the GeSHi license.
+
+To install, copy the file `logtalk.php` to the GeSHi languages folder.
+
+The file `source.php` is a test file. After copying it to your web
+server documents folder, open the following URL with a web browser:
+
+http://127.0.0.1/source.php
+
+The file assumes that GeSHi is installed in `/usr/share/php-geshi/`.
+Edit the file (line 2) if GeSHi is installed elsewhere.

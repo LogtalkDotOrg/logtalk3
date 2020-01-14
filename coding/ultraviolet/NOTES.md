@@ -17,7 +17,11 @@ limitations under the License.
 ________________________________________________________________________
 
 
-The "texments" LaTeX package uses Pygments to generate beautiful source
-code listings. For Pygments Logtalk support see the "pygments" folder.
+Ultraviolet is a is a syntax highlighting engine available as both
+a stand-alone command line utility and a Ruby library:
 
-	http://www.ctan.org/tex-archive/macros/latex/contrib/texments/
+http://ultraviolet.rubyforge.org/
+
+Ultraviolet uses TextMate language syntax files and TextMate themes.
+See the `../textmate` folder and the Sublime Text documentation for
+more information.

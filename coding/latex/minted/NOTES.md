@@ -17,20 +17,10 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains files that provide syntax highlighting for 
-GeSHi 1.0.8.6 or later versions:
+The `minted` LaTeX package uses Pygments to generate beautiful source
+code listings:
 
-	http://geshi.org/
+http://code.google.com/p/minted/
+http://www.ctan.org/tex-archive/macros/latex/contrib/minted/
 
-These support files are dual-licensed under the Apache License 2.0 and
-the GeSHi license.
-
-To install, copy the file `logtalk.php` to the GeSHi languages folder.
-
-The file `source.php` is a test file. After copying it to your web
-server documents folder, open the following URL with a web browser:
-
-	http://127.0.0.1/source.php
-
-The file assumes that GeSHi is installed in `/usr/share/php-geshi/`.
-Edit the file (line 2) if GeSHi is installed elsewhere.
+For details on Pygments support for Logtalk, see the `pygments` folder.
