@@ -53,6 +53,12 @@ _____
 recently introduced linter warnings and improve explanations for reference
 to unknown entity warnings.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Logtalk setup instructions for ctags 5.8. Thanks to Paul Brown
+for the pull request.
+
 
 3.34.0 - January 7, 2020
 ========================
