@@ -712,7 +712,7 @@
 	'$lgt_swi_list_of_exports'(File, Module, Imports),
 	use_module(File).
 
-'$lgt_swi_directive_expansion'(module(Module,Exports0), module(Module,Exports)) :-
+'$lgt_swi_directive_expansion'(module(Module,Exports0), (:- module(Module,Exports))) :-
 	'$lgt_swi_fix_predicate_aliases'(Exports0, Exports).
 
 '$lgt_swi_directive_expansion'(reexport(File), [(:- use_module(Module, Exports)), (:- export(Exports))]) :-

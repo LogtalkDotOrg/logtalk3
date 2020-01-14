@@ -635,7 +635,7 @@
 	% (sloppy replacement for the use_module/1-2 directives)
 	'$lgt_yap_directive_expansion'(use_module(File), Expanded).
 
-'$lgt_yap_directive_expansion'(module(Module,Exports0), module(Module,Exports)) :-
+'$lgt_yap_directive_expansion'(module(Module,Exports0), (:- module(Module,Exports))) :-
 	'$lgt_yap_fix_predicate_aliases'(Exports0, Exports).
 
 '$lgt_yap_directive_expansion'(reexport(File), [(:- use_module(Module, Exports)), (:- export(Exports))]) :-
