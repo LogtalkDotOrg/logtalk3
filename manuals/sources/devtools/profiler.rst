@@ -31,20 +31,32 @@ Logtalk also supports the YAP tick profiler (using the latest YAP
 development version) and the SWI-Prolog XPCE profiler. When using the
 XPCE profiler, you can avoid profiling the Logtalk compiler (which is
 invoked e.g. when you use the ``(::)/2`` message-sending operator at the
-top-level) by typing:
+top-level) by compiling your code with the ``optimize`` flag turned on:
 
 ::
 
-   | ?- logtalk << (prolog_statistics:profile(... :: ...)).
+   ?- set_logtalk_flag(optimize, on).
+   true.
+
+   ?- use_module(library(statistics)).
+   true.
+
+   ?- profile(... :: ...).
+   ...
 
 Given that ``prolog_statistics:profile/1`` is a meta-predicate, Logtalk
-will compile its argument before calling it. Don't forget, however, to
-load the ``prolog_statistics`` module *before* using or compiling calls
-to the ``profile/1`` predicate by typing:
+will compile its argument before calling it thanks to the
+``goal_expansion/2`` hook predicate definitions in the adapter file.
+Without this hook definition, you would need to use instead:
 
 ::
 
-   | ?- use_module(library(statistics)).
+   ?- logtalk << (prolog_statistics:profile(... :: ...)).
+   ...
+
+In either case, Don't forget, however, to load the ``prolog_statistics``
+module *before* using or compiling calls to the ``profile/1`` to allow
+the Logtalk compiler to access its meta-predicate template.
 
 The profiler support makes no attempt to conceal the internal Logtalk
 compiler/runtime predicates or the generated predicates that implement

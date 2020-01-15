@@ -65,6 +65,8 @@ _____
 recently introduced linter warnings and improve explanations for reference
 to unknown entity warnings.
 
+* UPDATED: Documentation of the `profiler` tool.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
