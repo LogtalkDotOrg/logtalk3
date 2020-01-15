@@ -37,6 +37,7 @@ directory in the ``NOTES.md`` file.
    help
    lgtdoc
    lgtunit
+   linter
    make
    ports_profiler
    profiler
