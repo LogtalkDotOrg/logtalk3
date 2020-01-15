@@ -67,13 +67,19 @@ that implement the :ref:`forwarding <apis:forwarding/0>` built-in protocol
 are not reported. While this usually avoids only false positives, it may
 also result in failure to report true missing predicates in some cases.
 
-When using the ``circular`` target, be prepared for a lengthy
-computation time for applications with a large combined number of
-objects and message calls. Only mutual and triangular dependencies are
-checked due to the computational cost.
+When using the ``circular`` target, be prepared for a lengthy computation
+time for applications with a large combined number of objects and message
+calls. Only mutual and triangular dependencies are checked due to the
+computational cost. Circular dependencies occur when an object sends a
+message to a second object that, in turn, sends a message to the first
+object. These circular dependencies are often a consequence of lack of
+separation of concerns. But, when they cannot be fixed, the only practical
+consequence is a small performance cost as some of the messages would be
+forced to use dynamic binding.
 
 The ``documentation`` target requires the ``doclet`` tool and a single
-*doclet* object to be loaded. See the ``doclet`` tool for more details.
+:term:`doclet object` to be loaded. See the ``doclet`` tool documentation
+for more details.
 
 Depending on the :term:`backend Prolog compiler`, the following top-level
 shortcuts are usually defined:
