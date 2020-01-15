@@ -54,7 +54,7 @@ the alias definition or the first argument of the directive. Note that you
 can switch between implementations at runtime without code changes by using
 a parameter variable in the first argument of an `uses/2` directive.
 
-To create a new dictionary, use the `new/1` predicate. For example:
+To create a new dictionary, you can use the `new/1` predicate. For example:
 
 	| ?- avltree::new(Dictionary).
 	Dictionary = ...

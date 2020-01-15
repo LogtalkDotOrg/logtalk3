@@ -139,6 +139,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#credits">Credits</a></li>
 </ul>
 </li>
@@ -225,8 +226,11 @@
             
   <div class="section" id="sets">
 <h1><code class="docutils literal notranslate"><span class="pre">sets</span></code><a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h1>
-<p>This library provides a set protocol, an implementation of this protocol
-using ordered lists and parametric set that takes a type.</p>
+<p>This library provides a set protocol and two implementations of this
+protocol using ordered lists, one of them a parametric object that takes
+the type of the set elements as a parameter. Although representing sets
+as ordered lists is a common representation, is best practice to regard
+sets as opaque terms and only access them using the library predicates.</p>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
@@ -241,9 +245,43 @@ file:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>First, select a set implementation. Use the <code class="docutils literal notranslate"><span class="pre">set(Type)</span></code> object if you
+want to type-check the set elements. Otherwise, use the <code class="docutils literal notranslate"><span class="pre">set</span></code> object.</p>
+<p>To create a new set, you can use the <code class="docutils literal notranslate"><span class="pre">new/1</span></code> predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> set<span class="o">::</span>new(<span class="nv">Set</span>).
+<span class="nv">Set</span> <span class="o">=</span> []
+yes
+</pre></div>
+</div>
+<p>You can also create a new set with all unique elements from a list of
+terms by using the <code class="docutils literal notranslate"><span class="pre">as_set/2</span></code> predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> set<span class="o">::</span>as_set([<span class="m">1</span>,<span class="m">3</span>,<span class="m">2</span>,<span class="m">1</span>,<span class="m">2</span>], <span class="nv">Set</span>).
+<span class="nv">Set</span> <span class="o">=</span> [<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>
+yes
+</pre></div>
+</div>
+<p>Predicates are provided for the most common set operations. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> set<span class="o">::</span>(
+        as_set([<span class="m">1</span>,<span class="m">3</span>,<span class="m">2</span>,<span class="m">1</span>,<span class="m">2</span>], <span class="nv">Set1</span>),
+        as_set([<span class="m">7</span>,<span class="m">4</span>,<span class="m">2</span>,<span class="m">5</span>,<span class="m">1</span>], <span class="nv">Set2</span>),
+        intersection(<span class="nv">Set1</span>, <span class="nv">Set2</span>, <span class="nv">Intersection</span>),
+        symdiff(<span class="nv">Set1</span>, <span class="nv">Set2</span>, <span class="nv">Difference</span>)
+    ).
+<span class="nv">Set1</span> <span class="o">=</span> [<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>],
+<span class="nv">Set2</span> <span class="o">=</span> [<span class="m">1</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">5</span>, <span class="m">7</span>],
+<span class="nv">Intersection</span> <span class="o">=</span> [<span class="m">1</span>, <span class="m">2</span>],
+<span class="nv">Difference</span> <span class="o">=</span> [<span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>, <span class="m">7</span>]
+yes
+</pre></div>
+</div>
+<p>For details on these and other provided predicates, consult the library
+API documentation.</p>
+</div>
 <div class="section" id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
-<p>Some predicates adapted from code authored by Richard O’’Keefe.</p>
+<p>Some predicates adapted from code authored by Richard O’Keefe.</p>
 </div>
 </div>
 

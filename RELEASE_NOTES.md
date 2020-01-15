@@ -52,7 +52,7 @@ Libraries
 ---------
 
 * IMPROVED: The documentation of the `arbitrary`, `coroutining`, `queues`,
-and `dictionaries` libraries.
+`dictionaries`, and `sets` libraries.
 
 Tools
 _____
