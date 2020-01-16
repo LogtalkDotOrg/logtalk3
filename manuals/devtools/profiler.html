@@ -214,7 +214,7 @@
 <div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>This tool can be loaded using the query:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(loader)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(loader)).
 </pre></div>
 </div>
 <p>For sample queries, please see the <a class="reference external" href="SCRIPT.txt">SCRIPT.txt</a> file in
@@ -239,8 +239,9 @@ the tool directory.</p>
 <p>Logtalk also supports the YAP tick profiler (using the latest YAP
 development version) and the SWI-Prolog XPCE profiler. When using the
 XPCE profiler, you can avoid profiling the Logtalk compiler (which is
-invoked e.g. when you use the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending operator at the
-top-level) by compiling your code with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on:</p>
+invoked e.g. when you use the <code class="docutils literal notranslate"><span class="pre">::/2</span></code> message-sending operator at the
+top-level interpreter) by compiling your code with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag
+turned on:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">set_logtalk_flag</span>(optimize, on).
 <span class="k">true</span>.
 
@@ -254,7 +255,8 @@ top-level) by compiling your code with the <code class="docutils literal notrans
 <p>Given that <code class="docutils literal notranslate"><span class="pre">prolog_statistics:profile/1</span></code> is a meta-predicate, Logtalk
 will compile its argument before calling it thanks to the
 <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> hook predicate definitions in the adapter file.
-Without this hook definition, you would need to use instead:</p>
+Without this hook definition, you would need to use instead (to avoid
+profiling the compiler itself):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> logtalk <span class="o">&lt;&lt;</span> (prolog_statistics<span class="o">:</span>profile(... <span class="o">::</span> ...)).
 ...
 </pre></div>
@@ -272,14 +274,14 @@ inheritance, may be listed when your code uses dynamic binding.</p>
 <div class="section" id="compiling-source-code-for-profiling">
 <h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Permalink to this headline">¶</a></h2>
 <p>In order to get user-level object and predicate names instead of
-compiler generated names when using the SWI-Prolog and YAP profilers you
-must set <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> flag to a value other than the default <code class="docutils literal notranslate"><span class="pre">$</span></code>.
-For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(code_prefix, <span class="s">&#39;.&#39;</span>).
+compiler generated internal names when using the SWI-Prolog and YAP
+profilers you, must set <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> flag to a value other than the
+default <code class="docutils literal notranslate"><span class="pre">$</span></code> before compiling your source code. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">set_logtalk_flag</span>(code_prefix, <span class="s">&#39;.&#39;</span>).
 </pre></div>
 </div>
-<p>See also the <code class="docutils literal notranslate"><span class="pre">settings-sample</span></code> file for automating the necessary setup
-at Logtalk startup.</p>
+<p>See also the <code class="docutils literal notranslate"><span class="pre">settings-sample.lgt</span></code> file for automating the necessary
+setup at Logtalk startup.</p>
 </div>
 <div class="section" id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>

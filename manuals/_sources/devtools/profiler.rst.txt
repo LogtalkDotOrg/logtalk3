@@ -10,7 +10,7 @@ This tool can be loaded using the query:
 
 ::
 
-   | ?- logtalk_load(profiler(loader)).
+   ?- logtalk_load(profiler(loader)).
 
 For sample queries, please see the `SCRIPT.txt <SCRIPT.txt>`__ file in
 the tool directory.
@@ -30,8 +30,9 @@ Currently, this tool supports the profilers provided with SICStus Prolog
 Logtalk also supports the YAP tick profiler (using the latest YAP
 development version) and the SWI-Prolog XPCE profiler. When using the
 XPCE profiler, you can avoid profiling the Logtalk compiler (which is
-invoked e.g. when you use the ``(::)/2`` message-sending operator at the
-top-level) by compiling your code with the ``optimize`` flag turned on:
+invoked e.g. when you use the ``::/2`` message-sending operator at the
+top-level interpreter) by compiling your code with the ``optimize`` flag
+turned on:
 
 ::
 
@@ -47,7 +48,8 @@ top-level) by compiling your code with the ``optimize`` flag turned on:
 Given that ``prolog_statistics:profile/1`` is a meta-predicate, Logtalk
 will compile its argument before calling it thanks to the
 ``goal_expansion/2`` hook predicate definitions in the adapter file.
-Without this hook definition, you would need to use instead:
+Without this hook definition, you would need to use instead (to avoid
+profiling the compiler itself):
 
 ::
 
@@ -69,16 +71,16 @@ Compiling source code for profiling
 -----------------------------------
 
 In order to get user-level object and predicate names instead of
-compiler generated names when using the SWI-Prolog and YAP profilers you
-must set ``code_prefix`` flag to a value other than the default ``$``.
-For example:
+compiler generated internal names when using the SWI-Prolog and YAP
+profilers you, must set ``code_prefix`` flag to a value other than the
+default ``$`` before compiling your source code. For example:
 
 ::
 
-   | ?- set_logtalk_flag(code_prefix, '.').
+   ?- set_logtalk_flag(code_prefix, '.').
 
-See also the ``settings-sample`` file for automating the necessary setup
-at Logtalk startup.
+See also the ``settings-sample.lgt`` file for automating the necessary
+setup at Logtalk startup.
 
 Other notes
 -----------
