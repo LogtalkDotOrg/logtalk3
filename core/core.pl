@@ -19390,7 +19390,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% complementing categories can add to but not override local predicate declarations
 		'$lgt_generate_prototype_local_dcl_clauses'(Local, Complements, Obj, Dcl, DDcl),
 		'$lgt_generate_prototype_complements_dcl_clauses'(Obj, Dcl)
-	;	% Complements == deny ->
+	;	% Complements == deny,
 		'$lgt_generate_prototype_local_dcl_clauses'(Local, Complements, Obj, Dcl, DDcl)
 	),
 	'$lgt_generate_prototype_implements_dcl_clauses'(Dcl, Rnm),
@@ -19526,7 +19526,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% complementing categories can add to but not override local predicate definitions
 		'$lgt_generate_prototype_local_def_clauses'(Local, Obj, Def, DDef),
 		'$lgt_generate_prototype_complements_def_clauses'(Obj, Def)
-	;	% Complements == deny ->
+	;	% Complements == deny,
 		'$lgt_generate_prototype_local_def_clauses'(Local, Obj, Def, DDef)
 	),
 	'$lgt_generate_prototype_imports_def_clauses'(Def, Rnm),
@@ -19717,7 +19717,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% complementing categories can add to but not override local predicate declarations
 		'$lgt_generate_ic_local_idcl_clauses'(Local, Complements, Obj, Dcl, IDcl, DDcl),
 		'$lgt_generate_ic_complements_idcl_clauses'(Obj, IDcl)
-	;	% Complements == deny ->
+	;	% Complements == deny,
 		'$lgt_generate_ic_local_idcl_clauses'(Local, Complements, Obj, Dcl, IDcl, DDcl)
 	),
 	'$lgt_generate_ic_implements_idcl_clauses'(IDcl, Rnm),
@@ -19854,7 +19854,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% complementing categories can add to but not override local predicate definitions
 		'$lgt_generate_ic_local_def_clauses'(Local, Obj, Def, DDef),
 		'$lgt_generate_ic_complements_def_clauses'(Obj, Def)
-	;	% Complements == deny ->
+	;	% Complements == deny,
 		'$lgt_generate_ic_local_def_clauses'(Local, Obj, Def, DDef)
 	),
 	'$lgt_generate_ic_imports_def_clauses'(Def, Rnm),
@@ -19943,7 +19943,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% complementing categories can add to but not override local predicate definitions
 		'$lgt_generate_ic_local_idef_clauses'(Local, Obj, Def, IDef, DDef),
 		'$lgt_generate_ic_complements_idef_clauses'(Obj, IDef)
-	;	% Complements == deny ->
+	;	% Complements == deny,
 		'$lgt_generate_ic_local_idef_clauses'(Local, Obj, Def, IDef, DDef)
 	),
 	'$lgt_generate_ic_complements_idef_clauses'(Obj, IDef),
@@ -21438,6 +21438,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(Flag, Value), current_prolog_flag(Flag, Value)).
 '$lgt_prolog_deprecated_built_in_predicate'(on_exception(Error, Goal, Handler), catch(Goal, Error, Handler)).
 '$lgt_prolog_deprecated_built_in_predicate'(raise_exception(Error), throw(Error)).
+
+
 
 % '$lgt_prolog_deprecated_built_in_predicate'(@callable, -callable)
 %
@@ -25138,14 +25140,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Term1Copy == Term2Copy.
 
 
-'$lgt_variable_aliasing'(Term) :-
-	compound(Term),
-	Term =.. [_| Arguments],
+% variable aliasing occurs in a head of a clause
+% when two or more arguments share variables
+'$lgt_variable_aliasing'(Head) :-
+	compound(Head),
+	Head =.. [_| Arguments],
 	'$lgt_select'(Argument1, Arguments, OtherArguments),
 	'$lgt_select'(Argument2, OtherArguments, _),
 	term_variables(Argument1, Variables1),
 	term_variables(Argument2, Variables2),
 	'$lgt_intersection'(Variables1, Variables2, [_| _]),
+	% at least one variable in common
 	!.
 
 
