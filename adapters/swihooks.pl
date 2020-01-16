@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on January 10, 2020
+%  Last updated on January 16, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -369,7 +369,22 @@ prolog_clause:make_varnames_hook((Head --> _), (Module:THead :- _), Offsets, Nam
 	atom_concat(CodePrefix, _, TFunctor),
 	N is THeadArity - 1,
 	memberchk(N=EVar, Offsets),
-	Names1 = ['<Entity, Sender, This, Self, MetaVars, CoinductionStack>'=EVar| Names],
+	Names1 = ['c(This, Entity, r(Sender, Self, MetaCallContext, Stack))'=EVar| Names],
+	functor(Head, _, HeadArity),
+	In is HeadArity,
+	memberchk(In=IVar, Offsets),
+	Names2 = ['<DCG_list>'=IVar|Names1],
+	Out is HeadArity + 1,
+	memberchk(Out=OVar, Offsets),
+	Names3 = ['<DCG_tail>'=OVar|Names2],
+	prolog_clause:make_varnames(xx, xx, Offsets, Names3, Bindings).
+prolog_clause:make_varnames_hook((Head --> _), (THead :- _), Offsets, Names, Bindings) :-
+	functor(THead, TFunctor, THeadArity),
+	'$lgt_current_flag_'(code_prefix, CodePrefix),
+	atom_concat(CodePrefix, _, TFunctor),
+	N is THeadArity - 1,
+	memberchk(N=EVar, Offsets),
+	Names1 = ['c(This, Entity, r(Sender, Self, MetaCallContext, Stack))'=EVar| Names],
 	functor(Head, _, HeadArity),
 	In is HeadArity,
 	memberchk(In=IVar, Offsets),
@@ -380,6 +395,14 @@ prolog_clause:make_varnames_hook((Head --> _), (Module:THead :- _), Offsets, Nam
 	prolog_clause:make_varnames(xx, xx, Offsets, Names3, Bindings).
 prolog_clause:make_varnames_hook(_, (Module:THead :- _), Offsets, Names, Bindings) :-
 	'$lgt_user_module_qualification'(_, Module:_),
+	functor(THead, TFunctor, Arity),
+	'$lgt_current_flag_'(code_prefix, CodePrefix),
+	atom_concat(CodePrefix, _, TFunctor),
+	N is Arity - 1,
+	memberchk(N=IVar, Offsets),
+	Names1 = ['c(This, Entity, r(Sender, Self, MetaCallCtx, CoinductionStack))'=IVar| Names],
+	prolog_clause:make_varnames(xx, xx, Offsets, Names1, Bindings).
+prolog_clause:make_varnames_hook(_, (THead :- _), Offsets, Names, Bindings) :-
 	functor(THead, TFunctor, Arity),
 	'$lgt_current_flag_'(code_prefix, CodePrefix),
 	atom_concat(CodePrefix, _, TFunctor),
@@ -427,6 +450,11 @@ prolog_clause:make_varnames_hook(_, (Module:THead :- _), Offsets, Names, Binding
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne'(Obj, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne_'(Obj, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_'(Obj, Msg, _), TermPos, TermPos) :- !.
+% implicit message sending via uses/2 directives
+'$lgt_swi_unify_clause_body'(Msg, _, '$lgt_send_to_obj_ne_nv'(_, Msg, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Msg, _, '$lgt_send_to_obj_ne'(_, Msg, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Msg, _, '$lgt_send_to_obj_ne_'(_, Msg, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Msg, _, '$lgt_send_to_obj_'(_, Msg, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self'(Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self_nv'(_, Msg, _), TermPos, TermPos) :- !.

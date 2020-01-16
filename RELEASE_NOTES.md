@@ -31,6 +31,13 @@ Prolog adapter and integration files
 * UPDATED: The SWI-Prolog and YAP adapter files to support predicate aliases
 in `module/2` directives when compiling modules as objects.
 
+* FIXED: Integration bug with the SWI-Prolog graphical tracer where variable
+bindings for user defined predicates would not be displayed in some cases.
+
+* FIXED: Integration bug with the SWI-Prolog graphical tracer where execution
+context variable bindings and grammar rules implicit difference lists would
+not be displayed in some cases.
+
 Documentation
 -------------
 
