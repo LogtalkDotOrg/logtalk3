@@ -22,7 +22,7 @@ ________________________________________________________________________
 
 The `observer` and `subject` categories implement the Smalltalk 
 dependents handling mechanism. This mechanism can be used as an
-alternative to Logtalk's system-wide support for event-driven
+alternative to Logtalk system-wide support for event-driven
 programming.
 
 

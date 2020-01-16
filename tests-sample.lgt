@@ -34,7 +34,7 @@
 %  supported by default by the "lgtunit" tool
 
 
-%  test suite objets are defined as prototypes extending the "lgtunit" object
+%  test suite objects are defined as prototypes extending the "lgtunit" object
 %  which implements the unit test framework; parametric objects can be used
 %  in order to define parametrizable tests
 

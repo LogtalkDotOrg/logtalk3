@@ -35,7 +35,7 @@ An alternative, available in some backend Prolog compilers such as
 SICStus Prolog, SWI-Prolog, and YAP, is to create a *saved state*
 after loading Logtalk and a Logtalk application (or the generated
 Prolog code for Logtalk and a Logtalk application). Saved states
-are usually executables that embed both a Prolog runtime and
+are usually executable files that embed both a Prolog runtime and
 application code. See the `SCRIPT.txt` file for some examples.
 For details on creating and using saved states, see your backend
 Prolog compiler documentation.

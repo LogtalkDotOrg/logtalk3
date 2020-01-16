@@ -75,7 +75,7 @@ adapter file from `allow` to, respectively, `restrict` or `deny`.
 Defining a settings file
 ------------------------
 
-To use settings files, copy this file to one of the supported locatiuons
+To use settings files, copy this file to one of the supported locations
 listed above, rename it to `settings.lgt`, customize it (see the sample
 code below), and start Logtalk from the project directory (if you're
 using a project specific settings file) or from anywhere (when using a
@@ -173,8 +173,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To define a "library" alias for your project while making it
-%  relocatable, use a project specific settings file, editing and
-%  uncommenting the following lines:
+%  relocatable, use a project specific settings file and edit and
+%  uncomment the following lines:
 
 /*
 :- initialization((
