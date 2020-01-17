@@ -25,10 +25,10 @@ ________________________________________________________________________
 
 % some sample queries:
 
-| ?- yield::yield(1, List),
+| ?- yield::yield(1, List).
 List = [1]
 yes
 
-| ?- yield::yield(3, List),
+| ?- yield::yield(3, List).
 List = [1, 2, 3]
 yes
