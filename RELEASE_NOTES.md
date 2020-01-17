@@ -28,8 +28,8 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
-* IMPROVED: Support for the SWI-Prolog graphical profiler by hiding additional
-runtime internal predicates.
+* IMPROVED: Support for the SWI-Prolog graphical profiler by hiding all the
+compiler and runtime internal predicates.
 
 * UPDATED: The SWI-Prolog and YAP adapter files to support predicate aliases
 in `module/2` directives when compiling modules as objects.
