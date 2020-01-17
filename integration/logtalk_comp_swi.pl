@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SWI-Prolog
-%  Last updated on May 30, 2019
+%  Last updated on January 17, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -44,13 +44,32 @@
 	'$lgt_send_to_obj_nv'/3, '$lgt_send_to_obj_nv_inner'/4,
 	'$lgt_send_to_obj_ne_nv'/3,
 	'$lgt_send_to_obj_ne'/3, '$lgt_send_to_obj_ne_'/3,
+	'$lgt_guarded_method_call'/4,
 	'$lgt_obj_super_call'/3, '$lgt_obj_super_call_'/3,
 	'$lgt_ctg_super_call'/3, '$lgt_ctg_super_call_'/3,
 	'$lgt_db_lookup_cache_'/5,
 	'$lgt_hook_term_expansion_'/2, '$lgt_hook_goal_expansion_'/2,
-	'$lgt_dynamic_entity_counter_'/3, '$lgt_threaded_tag_counter_'/1,
+	'$lgt_dynamic_entity_counter_'/3, '$lgt_threaded_tag_counter_'/1, '$lgt_new_threaded_tag'/1,
 	'$lgt_metacall'/2, '$lgt_metacall'/3, '$lgt_quantified_metacall'/3,
-	'$lgt_metacall_local'/2, '$lgt_metacall_sender'/4
+	'$lgt_metacall_local'/2, '$lgt_metacall_sender'/4,
+	'$lgt_execution_context_this_entity'/3,
+	'$lgt_term_template'/2,
+	'$lgt_goal_meta_arguments'/3, '$lgt_extract_meta_arguments'/3,
+	'$lgt_unify_lambda_parameters'/5,
+	'$lgt_reduce_lambda_metacall_ctx'/3, '$lgt_reduce_lambda_metacall_ctx_meta_args'/4,
+	'$lgt_copy_term_without_constraints'/2,
+	'$lgt_append'/3, '$lgt_member_var'/2, '$lgt_check'/3,
+	'$lgt_mt_non_det_reply'/6,
+	'$lgt_mt_threaded_and_add_result'/4,
+	'$lgt_mt_threaded_and_exit'/1, '$lgt_mt_threaded_and_exit'/3,
+	'$lgt_mt_threaded_or_exit'/1, '$lgt_mt_threaded_or_exit'/3, '$lgt_mt_threaded_or_exit_unify'/3,
+	'$lgt_mt_threaded_call_join'/1, '$lgt_mt_threaded_continue'/2,
+	'$lgt_mt_threaded_call_abort'/1, '$lgt_mt_threaded_call_cancel'/1,
+	'$lgt_threaded_goal'/4,
+	'$lgt_threaded_exit'/2, '$lgt_threaded_exit_tagged'/3,
+	'$lgt_current_engine_'/4,
+	'$lgt_threaded_engine_create_protected'/5, '$lgt_threaded_engine_destroy_protected'/2,
+	'$lgt_mt_engine_reply'/5
 )).
 
 % multi-threading meta-predicates
