@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on January 14, 2020
+%  Last updated on January 17, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -1080,6 +1080,16 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	write_canonical(Stream, (:- '$hide'(DDcl/2))),  write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(DDef/3))),  write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(Rnm/3))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Dcl/4))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Dcl/6))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Def/3))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Def/5))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Super/5))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(IDcl/6))),  write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(IDef/5))),  write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(DDcl/2))),  write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(DDef/3))),  write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Rnm/3))),   write(Stream, '.\n'),
 	write_canonical(Stream, '$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags)),
 	write(Stream, '.\n').
 
@@ -1090,6 +1100,11 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	write_canonical(Stream, (:- '$hide'(Def/3))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(Def/4))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(Rnm/3))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Dcl/4))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Dcl/5))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Def/3))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Def/4))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Rnm/3))), write(Stream, '.\n'),
 	write_canonical(Stream, '$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags)),
 	write(Stream, '.\n').
 
@@ -1098,6 +1113,9 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	write_canonical(Stream, (:- '$hide'(Dcl/4))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(Dcl/5))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(Rnm/3))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Dcl/4))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Dcl/5))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Rnm/3))), write(Stream, '.\n'),
 	write_canonical(Stream, '$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags)),
 	write(Stream, '.\n').
 
@@ -1122,6 +1140,7 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	),
 	functor(Head, Functor, Arity),
 	write_canonical(Stream, (:- '$hide'(Functor/Arity))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- noprofile(Functor/Arity))), write(Stream, '.\n'),
 	write_canonical(Stream, Term), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, Term, _, File, Line) :-
@@ -1142,6 +1161,16 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	'$hide'(DDcl/2),
 	'$hide'(DDef/3),
 	'$hide'(Rnm/3),
+	noprofile(Dcl/4),
+	noprofile(Dcl/6),
+	noprofile(Def/3),
+	noprofile(Def/5),
+	noprofile(Super/5),
+	noprofile(IDcl/6),
+	noprofile(IDef/5),
+	noprofile(DDcl/2),
+	noprofile(DDef/3),
+	noprofile(Rnm/3),
 	assertz('$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags)).
 
 '$lgt_assertz_entity_clause'('$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags), _) :-
@@ -1151,6 +1180,11 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	'$hide'(Def/3),
 	'$hide'(Def/4),
 	'$hide'(Rnm/3),
+	noprofile(Dcl/4),
+	noprofile(Dcl/5),
+	noprofile(Def/3),
+	noprofile(Def/4),
+	noprofile(Rnm/3),
 	assertz('$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags)).
 
 '$lgt_assertz_entity_clause'('$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags), _) :-
@@ -1158,6 +1192,9 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	'$hide'(Dcl/4),
 	'$hide'(Dcl/5),
 	'$hide'(Rnm/3),
+	noprofile(Dcl/4),
+	noprofile(Dcl/5),
+	noprofile(Rnm/3),
 	assertz('$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags)).
 
 '$lgt_assertz_entity_clause'(Term, aux) :-
@@ -1168,6 +1205,7 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	),
 	functor(Head, Functor, Arity),
 	'$hide'(Functor/Arity),
+	noprofile(Functor/Arity),
 	assertz(Term).
 
 '$lgt_assertz_entity_clause'(Term, _) :-

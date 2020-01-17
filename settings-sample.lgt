@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on December 20, 2019
+%  Last updated on January 17, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -333,7 +333,8 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 	:- use_module(library(statistics)).
 
 	:- initialization((
-		set_logtalk_flag(code_prefix, '.')
+		set_logtalk_flag(code_prefix, '.'),
+		set_prolog_flag(logtalk_source_location_data, true)
 	)).
 
 :- endif.

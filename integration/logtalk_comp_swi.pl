@@ -287,3 +287,15 @@
 		noprofile(Functor/Arity)
 	)
 )).
+
+:- ((
+	prolog_load_context(directory, Directory),
+	absolute_file_name('../adapters/swi.pl', Path, [relative_to(Directory)]),
+	forall(
+		(	source_file(Predicate, Path),
+			functor(Predicate, Functor, Arity),
+			sub_atom(Functor, 0, 5, _, '$lgt_')
+		),
+		noprofile(Functor/Arity)
+	)
+)).

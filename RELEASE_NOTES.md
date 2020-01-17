@@ -31,6 +31,10 @@ Prolog adapter and integration files
 * IMPROVED: Support for the SWI-Prolog graphical profiler by hiding all the
 compiler and runtime internal predicates.
 
+* IMPROVED: Support for the SWI-Prolog graphical profiler by hiding entity
+internal tables predicates when the `logtalk_source_location_data` flag is
+true.
+
 * UPDATED: The SWI-Prolog and YAP adapter files to support predicate aliases
 in `module/2` directives when compiling modules as objects.
 
