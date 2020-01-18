@@ -66,6 +66,9 @@ to not require an Internet connection when browsed locally.
 * UPDATED: Handbook and API documentation cross-links to not require an
 Internet connection when browsed locally.
 
+* UPDATED: The `settings-sample.lgt` file initialization code for using the
+SWI-Prolog graphical profiler.
+
 Libraries
 ---------
 
