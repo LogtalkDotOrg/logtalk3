@@ -35,9 +35,6 @@ compiler and runtime internal predicates.
 internal tables predicates when the `logtalk_source_location_data` flag is
 true.
 
-* IMPROVED: Support for the SWI-Prolog graphical tracer by hiding internal
-runtime and caching predicates.
-
 * UPDATED: The SWI-Prolog and YAP adapter files to support predicate aliases
 in `module/2` directives when compiling modules as objects.
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SWI-Prolog
-%  Last updated on January 19, 2020
+%  Last updated on January 17, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,92 +25,6 @@
 
 :- '$hide'((::)/2).
 :- '$hide'((<<)/2).
-
-:- '$hide'('$lgt_send_to_obj_rt'/4).
-:- '$hide'('$lgt_send_to_self_nv'/3).
-:- '$hide'('$lgt_send_to_self'/3).
-:- '$hide'('$lgt_send_to_self_'/3).
-:- '$hide'('$lgt_send_to_obj'/3).
-:- '$hide'('$lgt_send_to_obj_'/3).
-:- '$hide'('$lgt_send_to_obj_nv'/3).
-:- '$hide'('$lgt_send_to_obj_ne_nv'/3).
-:- '$hide'('$lgt_send_to_obj_ne'/3).
-:- '$hide'('$lgt_send_to_obj_ne_'/3).
-:- '$hide'('$lgt_obj_super_call'/3).
-:- '$hide'('$lgt_obj_super_call_'/3).
-:- '$hide'('$lgt_ctg_super_call'/3).
-:- '$hide'('$lgt_ctg_super_call_'/3).
-:- '$hide'('$lgt_call_in_this'/2).
-
-:- '$hide'('$lgt_metacall'/2).
-:- '$hide'('$lgt_metacall'/3).
-:- '$hide'('$lgt_quantified_metacall'/3).
-:- '$hide'('$lgt_metacall_local'/2).
-:- '$hide'('$lgt_metacall_sender'/4).
-
-:- '$hide'('$lgt_expand_term_local'/4).
-:- '$hide'('$lgt_expand_term_message'/5).
-:- '$hide'('$lgt_expand_goal_local'/4).
-:- '$hide'('$lgt_expand_goal_message'/5).
-
-:- '$hide'('$lgt_phrase'/3).
-:- '$hide'('$lgt_phrase'/4).
-
-:- '$hide'('$lgt_abolish_checked'/4).
-:- '$hide'('$lgt_asserta_fact_checked'/5).
-:- '$hide'('$lgt_asserta_rule_checked'/5).
-:- '$hide'('$lgt_assertz_fact_checked'/5).
-:- '$hide'('$lgt_assertz_rule_checked'/5).
-:- '$hide'('$lgt_clause_checked'/5).
-:- '$hide'('$lgt_retract_fact_checked'/4).
-:- '$hide'('$lgt_retract_rule_checked'/4).
-:- '$hide'('$lgt_retractall_checked'/4).
-
-:- '$hide'('$lgt_iso_read_term'/4).
-:- '$hide'('$lgt_iso_read_term'/3).
-:- '$hide'('$lgt_iso_read'/3).
-:- '$hide'('$lgt_iso_read'/2).
-:- '$hide'('$lgt_iso_write_term'/4).
-:- '$hide'('$lgt_iso_write_term'/3).
-:- '$hide'('$lgt_iso_write'/3).
-:- '$hide'('$lgt_iso_write'/2).
-:- '$hide'('$lgt_iso_writeq'/3).
-:- '$hide'('$lgt_iso_writeq'/2).
-
-:- '$hide'('$lgt_category_parameter'/4).
-
-:- '$hide'('$lgt_threaded_or'/3).
-:- '$hide'('$lgt_threaded_and'/3).
-:- '$hide'('$lgt_threaded_ignore'/3).
-:- '$hide'('$lgt_threaded_call'/4).
-:- '$hide'('$lgt_threaded_once'/4).
-:- '$hide'('$lgt_threaded_call_tagged'/5).
-:- '$hide'('$lgt_threaded_once_tagged'/5).
-:- '$hide'('$lgt_threaded_peek'/4).
-:- '$hide'('$lgt_threaded_peek'/5).
-:- '$hide'('$lgt_threaded_peek_tagged'/5).
-:- '$hide'('$lgt_threaded_peek_tagged'/6).
-:- '$hide'('$lgt_threaded_exit'/4).
-:- '$hide'('$lgt_threaded_exit'/5).
-:- '$hide'('$lgt_threaded_exit_tagged'/5).
-:- '$hide'('$lgt_threaded_exit_tagged'/6).
-:- '$hide'('$lgt_threaded_cancel_tagged'/2).
-:- '$hide'('$lgt_threaded_wait_synch_ctg'/3).
-:- '$hide'('$lgt_threaded_wait_synch'/3).
-:- '$hide'('$lgt_threaded_wait_ctg'/2).
-:- '$hide'('$lgt_threaded_wait'/2).
-:- '$hide'('$lgt_threaded_notify_ctg'/2).
-:- '$hide'('$lgt_threaded_notify'/2).
-:- '$hide'('$lgt_threaded_engine_create_protected'/5).
-:- '$hide'('$lgt_threaded_engine_create'/5).
-:- '$hide'('$lgt_threaded_engine_destroy'/2).
-:- '$hide'('$lgt_threaded_engine_self'/2).
-:- '$hide'('$lgt_current_engine_'/2).
-:- '$hide'('$lgt_threaded_engine_next'/3).
-:- '$hide'('$lgt_threaded_engine_yield'/2).
-:- '$hide'('$lgt_threaded_engine_post'/3).
-:- '$hide'('$lgt_threaded_engine_fetch'/2).
-
 
 % multi-threading meta-predicates
 :- meta_predicate threaded_call(0, *).

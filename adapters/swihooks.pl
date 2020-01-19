@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on January 19, 2020
+%  Last updated on January 16, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -675,6 +675,95 @@ prolog_clause:make_varnames_hook(_, (THead :- _), Offsets, Names, Bindings) :-
 	arg(N, CallN, Arg),
 	N2 is N + 1,
 	'$lgt_swi_call_n_args'(Args, N2, CallN).
+
+
+% the following directives are necessary when using the SWI-Prolog
+% graphical tracer as predicates whose name start with a $ have by
+% default a "notrace" property
+:- '$set_predicate_attribute'('$lgt_send_to_obj_rt'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_self_nv'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_self'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_self_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_nv'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_ne_nv'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_ne'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_ne_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_obj_super_call'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_obj_super_call_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_ctg_super_call'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_ctg_super_call_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_call_in_this'/2, trace, 1).
+
+:- '$set_predicate_attribute'('$lgt_metacall'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_quantified_metacall'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall_local'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall_sender'/4, trace, 1).
+
+:- '$set_predicate_attribute'('$lgt_expand_term_local'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_expand_term_message'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_expand_goal_local'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_expand_goal_message'/5, trace, 1).
+
+:- '$set_predicate_attribute'('$lgt_phrase'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_phrase'/4, trace, 1).
+
+:- '$set_predicate_attribute'('$lgt_abolish_checked'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_asserta_fact_checked'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_asserta_rule_checked'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_assertz_fact_checked'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_assertz_rule_checked'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_clause_checked'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_retract_fact_checked'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_retract_rule_checked'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_retractall_checked'/4, trace, 1).
+
+:- '$set_predicate_attribute'('$lgt_iso_read_term'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_read_term'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_read'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_read'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_write_term'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_write_term'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_write'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_write'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_writeq'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_iso_writeq'/2, trace, 1).
+
+:- '$set_predicate_attribute'('$lgt_category_parameter'/4, trace, 1).
+
+:- '$set_predicate_attribute'('$lgt_threaded_or'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_and'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_ignore'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_call'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_once'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_call_tagged'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_once_tagged'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_peek'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_peek'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_peek_tagged'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_peek_tagged'/6, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_exit'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_exit'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_exit_tagged'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_exit_tagged'/6, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_cancel_tagged'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_wait_synch_ctg'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_wait_synch'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_wait_ctg'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_wait'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_notify_ctg'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_notify'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_create_protected'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_create'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_destroy'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_self'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_current_engine_'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_next'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_yield'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_post'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_fetch'/2, trace, 1).
 
 % add dummy meta_predicate/1 directives to avoid cluttering the make/0
 % analysis report (as some of the results are not correct for all usage
