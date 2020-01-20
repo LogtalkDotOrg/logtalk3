@@ -27,9 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Don't inline calls to predicates with variable aliasing in the clause
-head as this can result in optimization bugs due to compile time variable
-bindings breaking previous calls in the same clause body.
+* FIXED: Don't inline predicate definitions with variable aliasing in the
+clause head as this can result in optimization bugs when compiling predicate
+calls due to compile time variable bindings propagating to previous goals in
+the same clause body.
 
 Prolog adapter and integration files
 ------------------------------------

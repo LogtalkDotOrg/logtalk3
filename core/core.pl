@@ -18208,9 +18208,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	THeadArguments == THeadVariables,
 	% all head arguments are variables
 	\+ '$lgt_variable_aliasing'(THead),
-	% don't inline calls to predicates with variable aliasing in the clause
-	% head as this can result in optimization bugs due to compile time variable
-	% bindings breaking previous calls in the same clause body
+	% don't inline predicate definitions with variable aliasing in the clause
+	% head as this can result in optimization bugs when compiling predicate
+	% calls due to compile time variable bindings propagating to previous goals
+	% in the same clause body
 	'$lgt_inlining_candidate'(TBody, Functor/Arity),
 	% valid candidate for inlining
 	term_variables(TBody, TBodyVariables),
