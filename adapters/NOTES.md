@@ -350,11 +350,23 @@ to the library predicates.
 
 macOS users of the `SWI-Prolog.app` application, must add the definitions
 for the `LOGTALKHOME` and `LOGTALKUSER` environment variables to their
-`~/.plrc` or `~/.swiplrc` init file (as macOS GUI applications *don't*
-inherit shell environment variable values):
+`~/.plrc` or `~/.swiplrc` or `.config/swi-prolog/init.pl` init files (as
+macOS GUI applications *don't* inherit shell environment variable values):
 
-	:- setenv('LOGTALKHOME', ...).
-	:- setenv('LOGTALKUSER', ...).
+	:- if((
+		current_prolog_flag(home,HOME),
+		sub_atom(HOME,_,_,0,'SWI-Prolog.app/Contents/swipl')
+	)).
+	
+		:- setenv('LOGTALKHOME', '/opt/local/share/logtalk').
+		:- setenv('LOGTALKUSER', '/Users/pmoura/logtalk').
+		:- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
+	
+	:- endif.
+
+The conditional compilation block allows automatically loading Logtalk at
+startup of the the `SWI-Prolog.app` macOS GUI application while still be
+able to use the shell integration script (`swilgt`).
 
 To load Logtalk *on-demand* when using the `SWI-Prolog.app` application, you
 can use the goal:
@@ -373,19 +385,6 @@ The pack alternative is handy for deployment but not ideal for development as
 it implicitly assumes a single user and the files are buried inside the packs
 directory (e.g. `.local/share/swi-prolog/pack/`).
 
-If you want to load automatically Logtalk at startup and be able to use it
-with both the shell integration script and the macOS GUI application, you
-can add to the `.plrc` or `.swiplrc` init file the following lines after
-editing the `LOGTALKHOME` and `LOGTALKUSER` environment variable values in
-the `setenv/2` calls:
-
-	:- setenv('LOGTALKHOME', '/replace/with/your/logtalk/system/folder/path').
-	:- setenv('LOGTALKUSER', '/replace/with/your/logtalk/user/folder/path').
-
-	:- if((current_prolog_flag(home,HOME), sub_atom(HOME,_,_,0,'SWI-Prolog.app/Contents/swipl'))).
-		:- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
-	:- endif.
-
 The Logtalk flag `prolog_compiler` is not usable due to lack of SWI-Prolog
 built-in predicates for separate compilation and loading. To generate
 `.qlf` files when compiling Logtalk source files, set the Logtalk `clean`
@@ -397,7 +396,10 @@ see the `settings-sample.lgt` file for the necessary settings. Note that
 those settings result in large intermediate Prolog files as in addition
 to the information collected for Logtalk own reflection features, all file
 terms are decorated with additional source file location information for
-integration with the SWI-Prolog own development tools.
+integration with the SWI-Prolog own development tools. Use the `gtrace/0-1`
+predicates to start the tracer. For example:
+
+	?- gtrace(foo::bar).
 
 See the `scripts/embedding/swipl` directory for a sample shell script
 that can help in generating QLF files from Logtalk and optionally a

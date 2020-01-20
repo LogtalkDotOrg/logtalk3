@@ -76,6 +76,8 @@ Internet connection when browsed locally.
 * UPDATED: The `settings-sample.lgt` file initialization code for using the
 SWI-Prolog graphical profiler.
 
+* UPDATED: Compatibility notes on SWI-Prolog support.
+
 Libraries
 ---------
 
