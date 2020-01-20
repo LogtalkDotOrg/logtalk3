@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 35, 0, b01)).
+'$lgt_version_data'(logtalk(3, 35, 0, b02)).
 
 
 
@@ -18202,19 +18202,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% static, non-multifile, and no synchronization wrapper
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_,_,_), user),
 	% source file user-defined predicate
-	Head =.. [_| HeadArguments],
-	term_variables(HeadArguments, HeadVariables),
-	HeadArguments == HeadVariables,
-	% all head arguments are variables
 	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
+	THead =.. [_| THeadArguments],
+	term_variables(THeadArguments, THeadVariables),
+	THeadArguments == THeadVariables,
+	% all head arguments are variables
+	\+ '$lgt_variable_aliasing'(THead),
+	% don't inline calls to predicates with variable aliasing in the clause
+	% head as this can result in optimization bugs due to compile time variable
+	% bindings breaking previous calls in the same clause body
 	'$lgt_inlining_candidate'(TBody, Functor/Arity),
 	% valid candidate for inlining
 	term_variables(TBody, TBodyVariables),
 	forall(
 		'$lgt_member'(TBodyVariable, TBodyVariables),
-		'$lgt_member_var'(TBodyVariable, [ExCtx| HeadVariables])
+		'$lgt_member_var'(TBodyVariable, THeadVariables)
 	),
-	% no anonymous variables in the body
+	% no anonymous variables in the body as this would change
+	% semantics for calls from bagof/3 and setof/3 goals
 	DefClauseOld =.. [Def, Head, _, _],
 	retractall('$lgt_pp_def_'(DefClauseOld)),
 	DefClauseNew =.. [Def, Head, ExCtx, TBody],

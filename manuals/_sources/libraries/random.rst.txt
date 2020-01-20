@@ -32,9 +32,9 @@ defining derived objects. For example:
 ::
 
    :- object(my_random_generator_1,
-       extends(ramdom)).
+       extends(random)).
 
-       :- intialization(::reset_seed).
+       :- initialization(::reset_seed).
 
    :- end_object.
 

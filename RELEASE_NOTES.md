@@ -24,6 +24,12 @@ RELEASE NOTES
 3.35.0 - February ??, 2020
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Don't inline calls to predicates with variable aliasing in the clause
+head as this can result in optimization bugs due to compile time variable
+bindings breaking previous calls in the same clause body.
 
 Prolog adapter and integration files
 ------------------------------------
