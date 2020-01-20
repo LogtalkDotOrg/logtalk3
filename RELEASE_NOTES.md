@@ -35,6 +35,10 @@ the same clause body.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Support for using SWI-Prolog `gspy/1` predicate to spy object and
+category predicates specified as `Entity::Functor/Arity` using the graphical
+tracer.
+
 * IMPROVED: Support for the SWI-Prolog graphical profiler by hiding all the
 compiler and runtime internal predicates.
 

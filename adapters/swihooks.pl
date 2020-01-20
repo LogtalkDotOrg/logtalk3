@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on January 16, 2020
+%  Last updated on January 20, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -191,6 +191,20 @@ user:prolog_exception_hook(Error, Error, Frame, _CatchFrame) :-
     format(user_error, '~q~n', [Goal]),
 	'$swi_print_backtrace'(Frames).
 */
+
+
+:- multifile(prolog:debug_control_hook/1).
+
+prolog:debug_control_hook(spy(Module:Entity::Functor/Arity)) :-
+	'$lgt_compile_predicate_indicators'(Functor/Arity, Entity, TFunctor/TArity),
+	'$lgt_user_module_qualification'(TFunctor/TArity, Module:TFunctor/TArity),
+	spy(Module:TFunctor/TArity).
+
+prolog:debug_control_hook(nospy(Module:Entity::Functor/Arity)) :-
+	'$lgt_compile_predicate_indicators'(Functor/Arity, Entity, TFunctor/TArity),
+	'$lgt_user_module_qualification'(TFunctor/TArity, Module:TFunctor/TArity),
+	nospy(Module:TFunctor/TArity).
+
 
 % for e.g. the call stack in the SWI-Prolog graphical tracer
 :- multifile(user:prolog_predicate_name/2).

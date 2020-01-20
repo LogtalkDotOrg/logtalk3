@@ -401,6 +401,9 @@ predicates to start the tracer. For example:
 
 	?- gtrace(foo::bar).
 
+You can also use the `gspy/1` predicate to spy a Logtalk predicate
+specified as `Entity::Functor/Arity` using the graphical tracer.
+
 See the `scripts/embedding/swipl` directory for a sample shell script
 that can help in generating QLF files from Logtalk and optionally a
 Logtalk application. The script documentation also explains how to
