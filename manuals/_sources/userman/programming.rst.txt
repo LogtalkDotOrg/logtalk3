@@ -677,12 +677,11 @@ Lint flags
 .. index:: pair: redefined_built_ins; Flag
 
 ``redefined_built_ins(Option)``
-   Controls the Logtalk and Prolog built-in predicate redefinition
-   warnings. Possible option values are ``warning`` (the usual default)
-   and ``silent``. Warnings about redefined Prolog built-in predicates
-   are often the result of running a Logtalk application on several
-   Prolog compilers as each Prolog compiler defines its set of built-in
-   predicates.
+   Controls the Logtalk and Prolog built-in predicate redefinition warnings.
+   Possible option values are ``warning`` and ``silent`` (the usual default).
+   Warnings about redefined Prolog built-in predicates are often the result
+   of running a Logtalk application on several Prolog compilers as each
+   Prolog compiler defines its set of built-in predicates.
 
 .. _flag_redefined_operators:
 .. index:: pair: redefined_operators; Flag
