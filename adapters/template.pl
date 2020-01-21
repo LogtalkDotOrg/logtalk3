@@ -242,6 +242,7 @@ numbervars(Term, From, Next) :-
 '$lgt_default_flag'(duplicated_clauses, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
+'$lgt_default_flag'(redefined_operators, warning).
 '$lgt_default_flag'(deprecated, warning).
 '$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(duplicated_directives, warning).

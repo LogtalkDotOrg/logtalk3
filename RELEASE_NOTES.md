@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: New compiler lint flag `redefined_operators` (with its default
+value set to `warning`).
+
 * ADDED: Support for using parameter variables in the second argument of
 `uses/2` and `use_module/2` directives.
 
@@ -61,6 +64,8 @@ not be displayed in some cases.
 
 Documentation
 -------------
+
+* ADDED: Documentation on the new compiler lint flag `redefined_operators`.
 
 * ADDED: Overview of the developer tools and libraries to the Handbook.
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on November 28, 2019
+%  Last updated on January 21, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -248,6 +248,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_default_flag'(duplicated_clauses, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
+'$lgt_default_flag'(redefined_operators, warning).
 '$lgt_default_flag'(deprecated, warning).
 '$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(duplicated_directives, warning).

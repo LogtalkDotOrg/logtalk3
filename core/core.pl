@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 35, 0, b03)).
+'$lgt_version_data'(logtalk(3, 35, 0, b04)).
 
 
 
@@ -22376,6 +22376,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(steadfastness).
 '$lgt_valid_flag'(portability).
 '$lgt_valid_flag'(redefined_built_ins).
+'$lgt_valid_flag'(redefined_operators).
 '$lgt_valid_flag'(missing_directives).
 '$lgt_valid_flag'(duplicated_directives).
 '$lgt_valid_flag'(lambda_variables).
@@ -22472,6 +22473,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(redefined_built_ins, silent) :- !.
 '$lgt_valid_flag_value'(redefined_built_ins, warning) :- !.
+
+'$lgt_valid_flag_value'(redefined_operators, silent) :- !.
+'$lgt_valid_flag_value'(redefined_operators, warning) :- !.
 
 '$lgt_valid_flag_value'(missing_directives, silent) :- !.
 '$lgt_valid_flag_value'(missing_directives, warning) :- !.

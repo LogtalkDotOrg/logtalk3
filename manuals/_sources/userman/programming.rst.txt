@@ -684,6 +684,16 @@ Lint flags
    Prolog compilers as each Prolog compiler defines its set of built-in
    predicates.
 
+.. _flag_redefined_operators:
+.. index:: pair: redefined_operators; Flag
+
+``redefined_operators(Option)``
+   Controls the Logtalk and Prolog built-in operator redefinition warnings.
+   Possible option values are ``warning`` (the usual default) and ``silent``.
+   Redefining Logtalk operators or standard Prolog operators can break term
+   parsing causing syntax errors or change how terms are parsed introducing
+   bugs.
+
 .. _flag_singleton_variables:
 .. index:: pair: singleton_variables; Flag
 

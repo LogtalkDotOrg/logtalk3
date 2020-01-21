@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.87,
+		version is 1.88,
 		author is 'Paulo Moura',
-		date is 2019/12/01,
+		date is 2020/01/21,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -240,7 +240,8 @@
 		 current_logtalk_flag(naming, Naming),
 		 current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
 		 current_logtalk_flag(portability, Portability),
-		 current_logtalk_flag(redefined_built_ins, Redefined),
+		 current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns),
+		 current_logtalk_flag(redefined_operators, RedefinedOperators),
 		 current_logtalk_flag(deprecated, Deprecated),
 		 current_logtalk_flag(missing_directives, Missing),
 		 current_logtalk_flag(duplicated_directives, Duplicated),
@@ -279,8 +280,8 @@
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
 			'  unknown_entities: ~w, steadfastness: ~w, naming: ~w'-[UnknownEntities, Steadfastness, Naming], nl,
 			'  missing_directives: ~w, duplicated_directives: ~w'-[Missing, Duplicated], nl,
-			'  duplicated_clauses: ~w'-[DuplicatedClauses], nl,
-			'  portability: ~w, redefined_built_ins: ~w, deprecated: ~w'-[Portability, Redefined, Deprecated], nl,
+			'  duplicated_clauses: ~w, portability: ~w'-[DuplicatedClauses, Portability], nl,
+			'  redefined_built_ins: ~w, redefined_operators: ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
 			'  lambda_variables: ~w, suspicious_calls: ~w'-[Lambda, SuspiciousCalls], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,

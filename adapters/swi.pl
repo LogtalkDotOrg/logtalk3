@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on January 17, 2020
+%  Last updated on January 21, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -348,6 +348,7 @@
 '$lgt_default_flag'(duplicated_clauses, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
+'$lgt_default_flag'(redefined_operators, warning).
 '$lgt_default_flag'(deprecated, warning).
 '$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(duplicated_directives, warning).

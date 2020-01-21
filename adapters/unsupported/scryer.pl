@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on October 14, 2019
+%  Last updated on January 21, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -242,6 +242,7 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(duplicated_clauses, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
+'$lgt_default_flag'(redefined_operators, warning).
 '$lgt_default_flag'(deprecated, warning).
 '$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(duplicated_directives, warning).
