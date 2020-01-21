@@ -23410,12 +23410,80 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  table of ISO Prolog specified flags
+%  table of ISO Prolog operators
 %
 %  (used for portability checking)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+% '$lgt_iso_spec_operator'(?atom, ?atom, ?integer)
+
+'$lgt_iso_spec_operator'((:-),  xfx, 1200).
+'$lgt_iso_spec_operator'((-->), xfx, 1200).
+
+'$lgt_iso_spec_operator'((:-),   fx, 1200).
+'$lgt_iso_spec_operator'((?-),   fx, 1200).
+
+'$lgt_iso_spec_operator'((;),   xfy, 1100).
+'$lgt_iso_spec_operator'((->),  xfy, 1050).
+'$lgt_iso_spec_operator'((','), xfy, 1000).
+'$lgt_iso_spec_operator'((\+),   fy,  900).
+
+'$lgt_iso_spec_operator'((=),   xfx,  700).
+'$lgt_iso_spec_operator'((\=),  xfx,  700).
+
+'$lgt_iso_spec_operator'((==),  xfx,  700).
+'$lgt_iso_spec_operator'((\==), xfx,  700).
+'$lgt_iso_spec_operator'((@<),  xfx,  700).
+'$lgt_iso_spec_operator'((@=<), xfx,  700).
+'$lgt_iso_spec_operator'((@>),  xfx,  700).
+'$lgt_iso_spec_operator'((@>=), xfx,  700).
+
+'$lgt_iso_spec_operator'((=..), xfx,  700).
+
+'$lgt_iso_spec_operator'((is),  xfx,  700).
+'$lgt_iso_spec_operator'((=:=), xfx,  700).
+'$lgt_iso_spec_operator'((=\=), xfx,  700).
+'$lgt_iso_spec_operator'((<),   xfx,  700).
+'$lgt_iso_spec_operator'((=<),  xfx,  700).
+'$lgt_iso_spec_operator'((>),   xfx,  700).
+'$lgt_iso_spec_operator'((>=),  xfx,  700).
+
+'$lgt_iso_spec_operator'((:),   xfy,  600).
+
+'$lgt_iso_spec_operator'((+),   yfx,  500).
+'$lgt_iso_spec_operator'((-),   yfx,  500).
+'$lgt_iso_spec_operator'((/\),  yfx,  500).
+'$lgt_iso_spec_operator'((\/),  yfx,  500).
+
+'$lgt_iso_spec_operator'((*),   yfx,  400).
+'$lgt_iso_spec_operator'((/),   yfx,  400).
+'$lgt_iso_spec_operator'((//),  yfx,  400).
+'$lgt_iso_spec_operator'((rem), yfx,  400).
+'$lgt_iso_spec_operator'((mod), yfx,  400).
+'$lgt_iso_spec_operator'((<<),  yfx,  400).
+'$lgt_iso_spec_operator'((>>),  yfx,  400).
+
+'$lgt_iso_spec_operator'((**),  xfx,  200).
+
+'$lgt_iso_spec_operator'((^),   xfy,  200).
+
+'$lgt_iso_spec_operator'((+),    fy,  200).
+'$lgt_iso_spec_operator'((-),    fy,  200).
+'$lgt_iso_spec_operator'((\),    fy,  200).
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  table of ISO Prolog specified flags
+%
+%  (used for portability checking)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 % '$lgt_iso_spec_flag'(?atom)
@@ -23567,6 +23635,34 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_iso_database_predicate'(clause(_, _)).
 '$lgt_iso_database_predicate'(retract(_)).
 '$lgt_iso_database_predicate'(retractall(_)).
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  table of Logtalk operators
+%
+%  (used for portability checking)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% '$lgt_logtalk_spec_operator'(?atom, ?atom, ?integer)
+
+% message sending operators
+'$lgt_logtalk_spec_operator'(::, xfy, 600).
+'$lgt_logtalk_spec_operator'(::,  fy, 600).
+% "super" call operator
+'$lgt_logtalk_spec_operator'(^^,  fy, 600).
+% mode operators
+'$lgt_logtalk_spec_operator'((?), fy, 200).
+'$lgt_logtalk_spec_operator'((@), fy, 200).
+'$lgt_logtalk_spec_operator'(++,  fy, 200).
+'$lgt_logtalk_spec_operator'(--,  fy, 200).
+% alias operator
+'$lgt_logtalk_spec_operator'(as, xfx, 700).
 
 
 
