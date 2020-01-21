@@ -8075,25 +8075,43 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_activate_file_operators'(+integer, +operator_specifier, +atom_or_atom_list)
+% '$lgt_activate_file_operators'(+integer, +operator_specifier, +atom_or_atom_list, +compilation_mode)
 %
 % activates local file operator definitions
 %
 % any conflicting global operator is saved so that it can be restored later
 
-'$lgt_activate_file_operators'(_, _, []) :-
+'$lgt_activate_file_operators'(_, _, [], _) :-
 	!.
 
-'$lgt_activate_file_operators'(Priority, Specifier, [Operator| Operators]) :-
+'$lgt_activate_file_operators'(Priority, Specifier, [Operator| Operators], Mode) :-
 	!,
-	'$lgt_activate_file_operator'(Priority, Specifier, Operator),
-	'$lgt_activate_file_operators'(Priority, Specifier, Operators).
+	'$lgt_activate_file_operator'(Priority, Specifier, Operator, Mode),
+	'$lgt_activate_file_operators'(Priority, Specifier, Operators, Mode).
 
-'$lgt_activate_file_operators'(Priority, Specifier, Operator) :-
-	'$lgt_activate_file_operator'(Priority, Specifier, Operator).
+'$lgt_activate_file_operators'(Priority, Specifier, Operator, Mode) :-
+	'$lgt_activate_file_operator'(Priority, Specifier, Operator, Mode).
 
 
-'$lgt_activate_file_operator'(Priority, Specifier, Operator) :-
+'$lgt_activate_file_operator'(Priority, Specifier, Operator, compile(_,_,_)) :-
+	'$lgt_compiler_flag'(redefined_operators, warning),
+	(	'$lgt_iso_spec_operator'(Operator, OriginalSpecifier, OriginalPriority)
+	;	'$lgt_logtalk_spec_operator'(Operator, OriginalSpecifier, OriginalPriority)
+	),
+	once((
+		Priority  \== OriginalPriority
+	;	Specifier \== OriginalSpecifier,
+		'$lgt_same_operator_class'(Specifier, OriginalSpecifier)
+	)),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines),
+	'$lgt_print_message'(
+		warning(redefined_operators),
+		redefined_operator(File, Lines, op(OriginalPriority,OriginalSpecifier,Operator), op(Priority,Specifier,Operator))
+	),
+	fail.
+
+'$lgt_activate_file_operator'(Priority, Specifier, Operator, _) :-
 	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
 		'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
 		assertz('$lgt_pp_global_operator_'(OriginalPriority, OriginalSpecifier, Operator))
@@ -8939,10 +8957,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	assertz('$lgt_pp_file_initialization_'(Goal, Lines))
 	).
 
-'$lgt_compile_file_directive'(op(Priority, Specifier, Operators), _) :-
+'$lgt_compile_file_directive'(op(Priority, Specifier, Operators), Ctx) :-
 	!,
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
-	'$lgt_activate_file_operators'(Priority, Specifier, Operators),
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_activate_file_operators'(Priority, Specifier, Operators, Mode),
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), sd(Term,VariableNames,File,Lines), Lines)).
 
@@ -25383,7 +25402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	(	'$lgt_pp_entity_'(_, _, _) ->
 		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines, runtime)
-	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators)
+	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators, runtime)
 	),
 	'$lgt_read_term'(Stream, NextTerm, [], NextLines, NextVariableNames),
 	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, File, Stream, Terms).
@@ -25405,7 +25424,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	(	'$lgt_pp_entity_'(_, _, _) ->
 		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines, compile(_,_,_))
-	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators)
+	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators, compile(_,_,_))
 	),
 	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], NextLines, NextVariableNames),
 	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, File, Stream, Terms).
