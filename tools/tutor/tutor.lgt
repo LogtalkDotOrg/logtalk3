@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.31,
+		version is 0.32,
 		author is 'Paulo Moura',
-		date is 20120/01/11,
+		date is 20120/01/21,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -434,6 +434,16 @@
 	explain(redefined_prolog_built_in_predicate(_, _, _, _, _)) -->
 		[	'Is the redefinition a consequence of making the code portable?'-[], nl,
 			'Lack of awareness that a built-in predicate with that name exists?'-[], nl, nl
+		].
+
+	explain(redefined_operator(_, _, _, _, _, _)) -->
+		[	'Redefining standard operators can break term parsing causing syntax'-[], nl,
+			'errors or change how terms are parsed introducing bugs.'-[], nl, nl
+		].
+
+	explain(redefined_operator(_, _, _, _)) -->
+		[	'Redefining standard operators can break term parsing causing syntax'-[], nl,
+			'errors or change how terms are parsed introducing bugs.'-[], nl, nl
 		].
 
 	explain(goal_is_always_true(_, _, _, _, _)) -->
