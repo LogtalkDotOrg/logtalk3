@@ -391,6 +391,10 @@
 		['Redefining Prolog built-in predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
+	message_tokens(redefined_operator(File, Lines, Type, Entity, OriginalSpec, Spec)) -->
+		['Redefining standard operator ~q as ~q'-[OriginalSpec, Spec], nl],
+		message_context(File, Lines, Type, Entity).
+
 	message_tokens(goal_is_always_true(File, Lines, Type, Entity, Goal)) -->
 		['Goal is always true: ~q'-[Goal], nl],
 		message_context(File, Lines, Type, Entity).

@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: New compiler lint warning for redefined Logtalk operators and
+standard Prolog operators. These redefinitions can break term parsing
+causing syntax errors or change how terms are parsed introducing bugs.
+
 * ADDED: New compiler lint flag `redefined_operators` (with its default
 value set to `warning`).
 
