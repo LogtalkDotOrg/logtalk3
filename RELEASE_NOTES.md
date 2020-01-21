@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for using parameter variables in the second argument of
+`uses/2` and `use_module/2` directives.
+
 * FIXED: Don't inline predicate definitions with variable aliasing in the
 clause head as this can result in optimization bugs when compiling predicate
 calls due to compile time variable bindings propagating to previous goals in

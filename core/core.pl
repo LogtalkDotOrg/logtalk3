@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 35, 0, b02)).
+'$lgt_version_data'(logtalk(3, 35, 0, b03)).
 
 
 
@@ -9388,6 +9388,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_uses_directive'(Resources, Resources, Obj, true, Ctx).
 
 '$lgt_compile_logtalk_directive'(uses(Obj, Resources), Ctx) :-
+	'$lgt_comp_ctx_entity'(Ctx, Entity),
+	term_variables(Entity, [EntityVariable| EntityVariables]),
+	'$lgt_pp_term_variable_names_file_lines_'((:- uses(Obj,Resources)), VariableNames, _, _),
+	'$lgt_member'(VariableName=Variable, VariableNames),
+	'$lgt_member_var'(Variable, [EntityVariable| EntityVariables]),
+	'$lgt_pp_parameter_variables_'(ParameterVariablePairs),
+	'$lgt_member'(VariableName-_, ParameterVariablePairs),
+	% directive uses an entity parameter variable
+	!,
+	'$lgt_compile_uses_directive'(Resources, Resources, Obj, true, Ctx).
+
+'$lgt_compile_logtalk_directive'(uses(Obj, Resources), Ctx) :-
 	'$lgt_check'(object_identifier, Obj),
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	'$lgt_compile_uses_directive'(Resources, Resources, Obj, false, Ctx).
@@ -9406,6 +9418,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_parameter_variables_'(ParameterVariablePairs),
 	'$lgt_member'(VariableName-_, ParameterVariablePairs),
 	% module argument is a parameter variable
+	!,
+	(	'$lgt_pp_module_'(_) ->
+		% we're compiling a module as an object; assume referenced modules are also compiled as objects
+		'$lgt_compile_uses_directive'(Imports, Imports, Module, true, Ctx)
+	;	% we're calling module predicates within an object or a category
+		'$lgt_compile_use_module_directive'(Imports, Imports, Module, true, Ctx)
+	).
+
+'$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
+	'$lgt_comp_ctx_entity'(Ctx, Entity),
+	term_variables(Entity, [EntityVariable| EntityVariables]),
+	'$lgt_pp_term_variable_names_file_lines_'((:- use_module(Module,Imports)), VariableNames, _, _),
+	'$lgt_member'(VariableName=Variable, VariableNames),
+	'$lgt_member_var'(Variable, [EntityVariable| EntityVariables]),
+	'$lgt_pp_parameter_variables_'(ParameterVariablePairs),
+	'$lgt_member'(VariableName-_, ParameterVariablePairs),
+	% directive uses an entity parameter variable
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects

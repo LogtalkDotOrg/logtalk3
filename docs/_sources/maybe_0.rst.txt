@@ -18,6 +18,11 @@ Types and predicates for type-checking and handling optional terms. Inspired by 
 |    ``static, context_switching_calls``
 
 
+| **Provides:**
+|    :ref:`type::type/1 <type/0::type/1>`
+|    :ref:`type::check/2 <type/0::check/2>`
+|    :ref:`arbitrary::arbitrary/1 <arbitrary/0::arbitrary/1>`
+|    :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
 | **Uses:**
 |    :ref:`optional <optional/0>`
 |    :ref:`optional(Optional) <optional/1>`
