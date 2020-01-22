@@ -276,7 +276,10 @@ Currently, Logtalk supports the following module directives:
    second argument must be a predicate indicator (``Name/Arity``), a
    grammar rule non-terminal indicator (``Name//Arity``), a operator
    declaration, or a list of predicate indicators, grammar rule
-   non-terminal indicators, and operator declarations.
+   non-terminal indicators, and operator declarations. Predicate aliases
+   can be declared using the notation ``Name/Arity as Alias/Arity`` or,
+   in alternative, the notation ``Name/Arity:Alias/Arity``. Similar for
+   non-terminal aliases.
 ``export/1``
    Exported predicates are compiled as public object predicates. The
    argument must be a predicate indicator (``Name/Arity``), a grammar
@@ -289,7 +292,9 @@ Currently, Logtalk supports the following module directives:
    predicate indicator (``Name/Arity``), a grammar rule non-terminal
    indicator (``Name//Arity``), an operator declaration, or a list of
    predicate indicators, grammar rule non-terminal indicators, and
-   operator declarations.
+   operator declarations. Predicate aliases can be declared using the
+   notation ``Name/Arity as Alias/Arity`` or, in alternative, the notation
+   ``Name/Arity:Alias/Arity``. Similar for non-terminal aliases.
 ``meta_predicate/1``
    Module meta-predicates become object meta-predicates. Only predicate
    arguments marked as goals or :term:`closures <closure>` (using an integer)

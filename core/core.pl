@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 35, 0, b04)).
+'$lgt_version_data'(logtalk(3, 35, 0, b05)).
 
 
 
@@ -11004,29 +11004,43 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines, Mode).
 
-'$lgt_compile_reexport_directive_resource'(as(Pred, NewFunctor), Module, Ctx) :-
-	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
-	atom(NewFunctor),
+'$lgt_compile_reexport_directive_resource'(as(Original, Alias), Module, Ctx) :-
 	!,
-	'$lgt_compile_logtalk_directive'(public(NewFunctor/Arity), Ctx),
-	functor(NewHead, NewFunctor, Arity),
-	functor(Head, Functor, Arity),
-	% add local definition
-	'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-	'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-	'$lgt_compile_clause'((NewHead :- Module::Head), AuxCtx).
+	'$lgt_compile_reexport_directive_resource'(':'(Original, Alias), Module, Ctx).
 
-'$lgt_compile_reexport_directive_resource'(as(NonTerminal, NewFunctor), Module, Ctx) :-
-	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, _),
-	atom(NewFunctor),
+'$lgt_compile_reexport_directive_resource'(':'(Original, Alias), Module, Ctx) :-
+	'$lgt_valid_predicate_indicator'(Original, OriginalFunctor, Arity),
+	'$lgt_valid_predicate_indicator'(Alias, AliasFunctor, Arity),
 	!,
-	'$lgt_compile_logtalk_directive'(public(NewFunctor//Arity), Ctx),
-	functor(NewHead, NewFunctor, Arity),
-	functor(Head, Functor, Arity),
+	'$lgt_compile_logtalk_directive'(public(AliasFunctor/Arity), Ctx),
+	functor(OriginalHead, OriginalFunctor, Arity),
+	functor(AliasHead, AliasFunctor, Arity),
+	% unify arguments of original and alias
+	OriginalHead =.. [_| Args],
+	AliasHead =.. [_| Args],
 	% add local definition
 	'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-	'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-	'$lgt_compile_grammar_rule'((NewHead --> Module::Head), AuxCtx).
+	'$lgt_comp_ctx'(AuxCtxOriginal, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+	'$lgt_comp_ctx'(AuxCtxAlias, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+	'$lgt_compile_clause'((OriginalHead :- Module::OriginalHead), AuxCtxOriginal),
+	'$lgt_compile_clause'((AliasHead :- Module::OriginalHead), AuxCtxAlias).
+
+'$lgt_compile_reexport_directive_resource'(':'(Original, Alias), Module, Ctx) :-
+	'$lgt_valid_non_terminal_indicator'(Original, OriginalFunctor, Arity, _),
+	'$lgt_valid_predicate_indicator'(Alias, AliasFunctor, Arity),
+	!,
+	'$lgt_compile_logtalk_directive'(public(AliasFunctor//Arity), Ctx),
+	functor(OriginalHead, OriginalFunctor, Arity),
+	functor(AliasHead, AliasFunctor, Arity),
+	% unify arguments of original and alias
+	OriginalHead =.. [_| Args],
+	AliasHead =.. [_| Args],
+	% add local definition
+	'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+	'$lgt_comp_ctx'(AuxCtxOriginal, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+	'$lgt_comp_ctx'(AuxCtxAlias, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+	'$lgt_compile_grammar_rule'((OriginalHead --> Module::OriginalHead), AuxCtxOriginal),
+	'$lgt_compile_grammar_rule'((AliasHead --> Module::OriginalHead), AuxCtxAlias).
 
 '$lgt_compile_reexport_directive_resource'(Pred, Module, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),

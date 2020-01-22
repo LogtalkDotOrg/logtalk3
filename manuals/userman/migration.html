@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Prolog integration and migration &mdash; The Logtalk Handbook v3.35.0-b04 documentation</title>
+  <title>Prolog integration and migration &mdash; The Logtalk Handbook v3.35.0-b05 documentation</title>
   
 
   
@@ -449,7 +449,10 @@ also want the specified module to be compiled as an object). The
 second argument must be a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a
 grammar rule non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), a operator
 declaration, or a list of predicate indicators, grammar rule
-non-terminal indicators, and operator declarations.</p>
+non-terminal indicators, and operator declarations. Predicate aliases
+can be declared using the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or,
+in alternative, the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity:Alias/Arity</span></code>. Similar for
+non-terminal aliases.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">export/1</span></code></dt><dd><p>Exported predicates are compiled as public object predicates. The
 argument must be a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a grammar
@@ -462,7 +465,9 @@ first argument is the module name. The second argument must be a
 predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a grammar rule non-terminal
 indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), an operator declaration, or a list of
 predicate indicators, grammar rule non-terminal indicators, and
-operator declarations.</p>
+operator declarations. Predicate aliases can be declared using the
+notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or, in alternative, the notation
+<code class="docutils literal notranslate"><span class="pre">Name/Arity:Alias/Arity</span></code>. Similar for non-terminal aliases.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code></dt><dd><p>Module meta-predicates become object meta-predicates. Only predicate
 arguments marked as goals or <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> (using an integer)
