@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.88,
+		version is 1.89,
 		author is 'Paulo Moura',
-		date is 2020/01/21,
+		date is 2020/01/22,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -280,7 +280,7 @@
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
 			'  unknown_entities: ~w, steadfastness: ~w, naming: ~w'-[UnknownEntities, Steadfastness, Naming], nl,
 			'  missing_directives: ~w, duplicated_directives: ~w'-[Missing, Duplicated], nl,
-			'  duplicated_clauses: ~w, portability: ~w'-[DuplicatedClauses, Portability], nl,
+			'  duplicated_clauses: ~w, portability: ~w, deprecated: ~w'-[DuplicatedClauses, Portability, Deprecated], nl,
 			'  redefined_built_ins: ~w, redefined_operators: ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
 			'  lambda_variables: ~w, suspicious_calls: ~w'-[Lambda, SuspiciousCalls], nl,

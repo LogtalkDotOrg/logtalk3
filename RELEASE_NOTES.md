@@ -45,6 +45,9 @@ clause head as this can result in optimization bugs when compiling predicate
 calls due to compile time variable bindings propagating to previous goals in
 the same clause body.
 
+* FIXED: The default value of the `deprecated` flag was not displayed at
+startup.
+
 Prolog adapter and integration files
 ------------------------------------
 
