@@ -761,6 +761,10 @@ ensure_loaded(_) :- fail.
 use_module(_) :- fail.
 use_module(_, _) :- fail.
 
+asserta(_, _) :- fail.
+assertz(_, _) :- fail.
+clause(_, _, _) :- fail.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

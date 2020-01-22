@@ -23712,17 +23712,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_logtalk_spec_operator'(?atom, ?atom, ?integer)
 
 % message sending operators
-'$lgt_logtalk_spec_operator'(::, xfy, 600).
-'$lgt_logtalk_spec_operator'(::,  fy, 600).
+'$lgt_logtalk_spec_operator'((::), xfy, 600).
+'$lgt_logtalk_spec_operator'((::),  fy, 600).
 % "super" call operator
-'$lgt_logtalk_spec_operator'(^^,  fy, 600).
+'$lgt_logtalk_spec_operator'((^^),  fy, 600).
 % mode operators
-'$lgt_logtalk_spec_operator'((?), fy, 200).
-'$lgt_logtalk_spec_operator'((@), fy, 200).
-'$lgt_logtalk_spec_operator'(++,  fy, 200).
-'$lgt_logtalk_spec_operator'(--,  fy, 200).
+'$lgt_logtalk_spec_operator'((?),   fy, 200).
+'$lgt_logtalk_spec_operator'((@),   fy, 200).
+'$lgt_logtalk_spec_operator'((++),  fy, 200).
+'$lgt_logtalk_spec_operator'((--),  fy, 200).
 % alias operator
-'$lgt_logtalk_spec_operator'(as, xfx, 700).
+'$lgt_logtalk_spec_operator'((as), xfx, 700).
 
 
 
