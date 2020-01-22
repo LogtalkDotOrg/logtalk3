@@ -624,6 +624,13 @@ Lint flags
    of non-standard Prolog flags and/or flag values. Possible option
    values are ``warning`` and ``silent`` (the usual default).
 
+.. _flag_deprecated:
+.. index:: pair: deprecated; Flag
+
+``deprecated(Option)``
+   Controls the deprecated predicate warnings. Possible option
+   values are ``warning`` (the usual default) and ``silent``.
+
 .. _flag_missing_directives:
 .. index:: pair: missing_directives; Flag
 

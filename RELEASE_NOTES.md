@@ -100,6 +100,8 @@ SWI-Prolog graphical profiler.
 
 * UPDATED: Compatibility notes on SWI-Prolog support.
 
+* FIXED: Missing Handbook documentation on the `deprecated` flag.
+
 Libraries
 ---------
 
