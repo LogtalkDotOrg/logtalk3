@@ -23,5 +23,7 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(user_predicates),
 	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	% the test/1 object parameter is used for testing
+	% predicate shortcuts declared in uses/2 directives
+	tests(2)::run
 )).

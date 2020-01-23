@@ -23,3 +23,7 @@ foo(1).
 :- meta_predicate(bar(0)).
 bar(X) :-
 	call(X).
+
+r(1).
+r(2).
+r(3).

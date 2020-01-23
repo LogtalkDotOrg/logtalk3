@@ -30,6 +30,10 @@
 	r(1, one).
 	r(2, two).
 
+	:- public(s/2).
+	s(1, a). s(1, b). s(1, c).
+	s(2, x). s(2, y). s(2, z).
+
 :- end_object.
 
 
@@ -128,25 +132,20 @@
 :- end_object.
 
 
-r(1).
-r(2).
-r(3).
-
-
 % tests
 
-:- object(tests,
+:- object(tests(_Index_),
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2020/01/06,
+		date is 2020/01/23,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
 	:- uses(uses_2_test_object_1, [
-		p/1, q/1::qq/1, r(1, Atom) as r(Atom)
+		p/1, q/1::qq/1, r(1, Atom) as r(Atom), s(_Index_, Value) as s(Value)
 	]).
 
 	test(uses_2_01, true(X == 1)) :-
@@ -158,7 +157,10 @@ r(3).
 	test(uses_2_03, true(Xs == [one])) :-
 		findall(X, r(X), Xs).
 
-	test(uses_2_04, true(X == 1)) :-
+	test(uses_2_04, true(Xs == [x,y,z])) :-
+		findall(X, s(X), Xs).
+
+	test(uses_2_05, true(X == 1)) :-
 		uses_2_test_object_2::p(X).
 
 	:- if((
@@ -166,28 +168,28 @@ r(3).
 		(Dialect == eclipse; Dialect == sicstus; Dialect = swi; Dialect = yap)
 	)).
 
-		test(uses_2_05, true(X == 2)) :-
+		test(uses_2_06, true(X == 2)) :-
 			uses_2_test_object_2::mp(X).
 
 	:- else.
 
-		- test(uses_2_05, true).
+		- test(uses_2_06, true).
 
 	:- endif.
 
-	test(uses_2_06, true(X == bar)) :-
+	test(uses_2_07, true(X == bar)) :-
 		foo(bar)::p(X).
 
-	test(uses_2_07, true(X == baz)) :-
+	test(uses_2_08, true(X == baz)) :-
 		foo(baz)::p(X).
 
-	test(uses_2_08, true(X == 1)) :-
+	test(uses_2_09, true(X == 1)) :-
 		foo(bar)::r(X).
 
-	test(uses_2_09, true(X == 2)) :-
+	test(uses_2_10, true(X == 2)) :-
 		foo(baz)::r(X).
 
-	test(uses_2_10, true(L == [1,2,3])) :-
+	test(uses_2_11, true(L == [1,2,3])) :-
 		findall(X, baz(user)::p(X), L).
 
 :- end_object.

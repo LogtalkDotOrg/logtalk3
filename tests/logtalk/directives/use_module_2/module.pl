@@ -22,7 +22,7 @@
 
 	:- module(module).
 
-	:- export((p/1, q/1, r/1, s/2)).
+	:- export((p/1, q/1, r/1, s/2, t/2)).
 
 	p(1).
 
@@ -32,10 +32,13 @@
 
 	s(1, one).
 	s(2, two).
+
+	t(1, a). t(1, b). t(1, c).
+	t(2, x). t(2, y). t(2, z).
 
 :- else.
 
-	:- module(module, [p/1, q/1, r/1, s/2]).
+	:- module(module, [p/1, q/1, r/1, s/2, t/2]).
 
 	p(1).
 
@@ -45,5 +48,8 @@
 
 	s(1, one).
 	s(2, two).
+
+	t(1, a). t(1, b). t(1, c).
+	t(2, x). t(2, y). t(2, z).
 
 :- endif.

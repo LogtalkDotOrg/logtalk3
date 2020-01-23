@@ -117,6 +117,12 @@ to unknown entity warnings.
 
 * UPDATED: Documentation of the `profiler` tool.
 
+Tests
+-----
+
+* ADDED: Tests for predicate shortcuts defined in `uses/2` and `use_module/2`
+directives that make use of parameter variables in the second argument.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

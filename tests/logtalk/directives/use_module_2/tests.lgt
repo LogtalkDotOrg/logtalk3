@@ -18,19 +18,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+:- object(tests(_Index_),
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2020/01/06,
+		date is 2020/01/23,
 		comment is 'Unit tests for the use_module/2 built-in directive.'
 	]).
 
 	% test all possible syntaxes for the directive
 	:- use_module(module, [
-		p/1, q/1 as a1/1, r/1:a2/1, s(1, Atom) as a3(Atom)
+		p/1, q/1 as a1/1, r/1:a2/1, s(1, Atom) as a3(Atom), t(_Index_, Value) as a4(Value)
 	]).
 
 	test(use_module_2_01, true(X == 1)) :-
@@ -44,5 +44,8 @@
 
 	test(uses_2_03, true(Xs == [one])) :-
 		findall(X, a3(X), Xs).
+
+	test(uses_2_04, true(Xs == [x,y,z])) :-
+		findall(X, a4(X), Xs).
 
 :- end_object.
