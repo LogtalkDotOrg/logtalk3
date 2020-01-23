@@ -86,8 +86,8 @@ Compiling source code for profiling
 -----------------------------------
 
 In order to get user-level object and predicate names instead of compiler
-generated internal names when using the SWI-Prolog and YAP profilers you,
-must set `code_prefix` flag to a value other than the default `$` before
+generated internal names when using the SWI-Prolog and YAP profilers, you
+must set `code_prefix` flag to a character other than the default `$` before
 compiling your source code. For example:
 
 	?- set_logtalk_flag(code_prefix, '.').

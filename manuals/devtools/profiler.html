@@ -277,8 +277,8 @@ the caller predicates.</p>
 <h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Permalink to this headline">¶</a></h2>
 <p>In order to get user-level object and predicate names instead of
 compiler generated internal names when using the SWI-Prolog and YAP
-profilers you, must set <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> flag to a value other than the
-default <code class="docutils literal notranslate"><span class="pre">$</span></code> before compiling your source code. For example:</p>
+profilers, you must set <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> flag to a character other than
+the default <code class="docutils literal notranslate"><span class="pre">$</span></code> before compiling your source code. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">set_logtalk_flag</span>(code_prefix, <span class="s">&#39;.&#39;</span>).
 </pre></div>
 </div>
