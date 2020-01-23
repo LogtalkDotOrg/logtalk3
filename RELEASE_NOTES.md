@@ -123,6 +123,11 @@ Tests
 * ADDED: Tests for predicate shortcuts defined in `uses/2` and `use_module/2`
 directives that make use of parameter variables in the second argument.
 
+Examples
+--------
+
+* FIXED: The `encodings` example tests to collect code coverage results.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
