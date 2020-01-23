@@ -474,8 +474,9 @@ are declared but not defined), missing directives (including missing
 predicates, calls to non-portable predicates, singleton variables,
 tautology and falsehood goals (i.e. goals that are can be replaced by
 ``true`` or ``fail``), and trivial fails (i.e. calls to predicates with
-no match clauses). Some of the linter warnings are controlled by
-compiler flags. See the next section for details.
+no match clauses). Most of the linter warnings are controlled by
+:ref:`compiler flags <programming_flags_lint>`. See the next section
+for details.
 
 .. _programming_flags:
 
@@ -572,6 +573,8 @@ Version flags
    natural number), and ``stable`` for stable versions. The
    ``version_data`` flag is also a de facto standard for Prolog
    compilers.
+
+.. _programming_flags_lint:
 
 Lint flags
 ^^^^^^^^^^

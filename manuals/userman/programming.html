@@ -606,8 +606,9 @@ are declared but not defined), missing directives (including missing
 predicates, calls to non-portable predicates, singleton variables,
 tautology and falsehood goals (i.e. goals that are can be replaced by
 <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">fail</span></code>), and trivial fails (i.e. calls to predicates with
-no match clauses). Some of the linter warnings are controlled by
-compiler flags. See the next section for details.</p>
+no match clauses). Most of the linter warnings are controlled by
+<a class="reference internal" href="#programming-flags-lint"><span class="std std-ref">compiler flags</span></a>. See the next section
+for details.</p>
 </div>
 <div class="section" id="compiler-flags">
 <span id="programming-flags"></span><h3>Compiler flags<a class="headerlink" href="#compiler-flags" title="Permalink to this headline">¶</a></h3>
@@ -689,7 +690,7 @@ compilers.</p>
 </dl>
 </div>
 <div class="section" id="lint-flags">
-<h4>Lint flags<a class="headerlink" href="#lint-flags" title="Permalink to this headline">¶</a></h4>
+<span id="programming-flags-lint"></span><h4>Lint flags<a class="headerlink" href="#lint-flags" title="Permalink to this headline">¶</a></h4>
 <span class="target" id="flag-unknown-entities"></span><dl class="simple" id="index-1">
 <dt><code class="docutils literal notranslate"><span class="pre">unknown_entities(Option)</span></code></dt><dd><p>Controls the unknown entity warnings, resulting from loading an
 entity that references some other entity that is not currently
