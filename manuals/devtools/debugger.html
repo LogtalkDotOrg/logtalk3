@@ -117,6 +117,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternative-debugger-tools">Alternative debugger tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-notes">Other notes</a></li>
 </ul>
@@ -248,12 +249,31 @@ the case, you will need to either edit the loader files or write
 customized loader files enabling debugging. For detailed information on
 using the debugger, consult the debugging section of the User Manual:</p>
 <p><a class="reference external" href="../../manuals/userman/debugging.html">../../manuals/userman/debugging.html</a></p>
-<p>Logtalk also provides basic support for the SWI-Prolog graphical tracer.
-The required settings are described in the <code class="docutils literal notranslate"><span class="pre">settings-sample.lgt</span></code> file.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">debugger_messages.lgt</span></code> source file defines the default debugger
 message translations.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">dump_trace.lgt</span></code> contains a simple code example on how to redirect
 a goal trace to a file.</p>
+</div>
+<div class="section" id="alternative-debugger-tools">
+<h2>Alternative debugger tools<a class="headerlink" href="#alternative-debugger-tools" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk provides basic support for the SWI-Prolog graphical tracer. The
+<strong>required</strong> settings are described in the <code class="docutils literal notranslate"><span class="pre">settings-sample.lgt</span></code> file.
+Logtalk queries can be traced using this tool by using the
+<code class="docutils literal notranslate"><span class="pre">gtrace/0-1</span></code> predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gtrace(foo<span class="o">::</span>bar).
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gtrace, foo<span class="o">::</span>bar.
+</pre></div>
+</div>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">gspy/1</span></code> predicate to spy a Logtalk predicate
+specified as <code class="docutils literal notranslate"><span class="pre">Entity::Functor/Arity</span></code> when using the graphical tracer.
+When using this tool, internal Logtalk compiler/runtime predicates and
+compiled predicates that resulted from the term-expansion mechanism may
+be exposed in some cases. This issue is shared with Prolog and results
+from the non-availability of source code for the predicates being
+traced.</p>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
