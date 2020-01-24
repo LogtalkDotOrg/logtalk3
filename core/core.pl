@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 35, 0, b05)).
+'$lgt_version_data'(logtalk(3, 35, 0, b06)).
 
 
 
@@ -8098,10 +8098,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_iso_spec_operator'(Operator, OriginalSpecifier, OriginalPriority)
 	;	'$lgt_logtalk_spec_operator'(Operator, OriginalSpecifier, OriginalPriority)
 	),
+	'$lgt_same_operator_class'(Specifier, OriginalSpecifier),
 	once((
 		Priority  \== OriginalPriority
-	;	Specifier \== OriginalSpecifier,
-		'$lgt_same_operator_class'(Specifier, OriginalSpecifier)
+	;	Specifier \== OriginalSpecifier
 	)),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines),
@@ -8145,10 +8145,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_iso_spec_operator'(Operator, OriginalSpecifier, OriginalPriority)
 	;	'$lgt_logtalk_spec_operator'(Operator, OriginalSpecifier, OriginalPriority)
 	),
+	'$lgt_same_operator_class'(Specifier, OriginalSpecifier),
 	once((
 		Priority  \== OriginalPriority
-	;	Specifier \== OriginalSpecifier,
-		'$lgt_same_operator_class'(Specifier, OriginalSpecifier)
+	;	Specifier \== OriginalSpecifier
 	)),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_pp_entity_'(Type, Entity, _),
