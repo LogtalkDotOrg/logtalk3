@@ -31,7 +31,7 @@ A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
 sample code for selected backend Prolog compilers for initializing Logtalk
 processes such that each process uses a unique scratch directory therefore
 allowing parallel process execution (e.g. for usage at continuous integration
-servers).
+servers). See the comments in the file itself for usage instructions.
 
 
 Library documentation
@@ -98,6 +98,11 @@ Some elements of this library are inspired by Richard O'Keefe library proposal
 available at:
 
 http://www.cs.otago.ac.nz/staffpriv/ok/pllib.htm
+
+Some libraries, or part of libraries, are either ports of Prolog system
+libraries or inspired by Prolog system libraries. See the individual library
+notes for details. See also the `NOTICE.txt` file at the root of the Logtalk
+distribution for copyright information on third-party source code.
 
 
 Other notes
