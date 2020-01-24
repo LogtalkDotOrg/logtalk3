@@ -111,6 +111,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#library-documentation">Library documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading-libraries">Loading libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-libraries">Testing libraries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#credits">Credits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-notes">Other notes</a></li>
 </ul>
@@ -267,6 +268,24 @@ on other libraries and thus cannot be loaded and compiled separately
 (e.g. the <code class="docutils literal notranslate"><span class="pre">list</span></code> object implements the <code class="docutils literal notranslate"><span class="pre">listp</span></code> protocol and is part
 of a basic types hierarchy). Using the loader files takes care of all
 dependencies and also ensures compilation in optimized mode.</p>
+</div>
+<div class="section" id="testing-libraries">
+<h2>Testing libraries<a class="headerlink" href="#testing-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Most of the libraries include unit tests in their directory, together
+with a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file for running them. For example, to run the
+tests for the <code class="docutils literal notranslate"><span class="pre">random</span></code> library, we can use the goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(random(tester)).
+</pre></div>
+</div>
+<p>To run all libraries tests, we can use the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation
+script from the <code class="docutils literal notranslate"><span class="pre">library</span></code> directory at the root of the Logtalk
+distribution. For example, assuming the Logtalk user directory is
+<code class="docutils literal notranslate"><span class="pre">~/logtalk</span></code> and that we want to run the tests using ECLiPSe as the
+backend Prolog compiler:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd ~/logtalk/library
+$ logtalk_tester -p eclipse
+</pre></div>
+</div>
 </div>
 <div class="section" id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>

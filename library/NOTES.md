@@ -68,6 +68,24 @@ hierarchy). Using the loader files takes care of all dependencies and also
 ensures compilation in optimized mode.
 
 
+Testing libraries
+-----------------
+
+Most of the libraries include unit tests in their directory, together with
+a `tester.lgt` file for running them. For example, to run the tests for the
+`random` library, we can use the goal:
+
+	| ?- logtalk_load(random(tester)).
+
+To run all libraries tests, we can use the `logtalk_tester` automation script
+from the `library` directory at the root of the Logtalk distribution. For
+example, assuming the Logtalk user directory is `~/logtalk` and that we want
+to run the tests using ECLiPSe as the backend Prolog compiler:
+
+	$ cd ~/logtalk/library
+	$ logtalk_tester -p eclipse
+
+
 Credits
 -------
 
