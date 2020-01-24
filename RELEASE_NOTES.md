@@ -123,6 +123,9 @@ Tests
 * ADDED: Tests for predicate shortcuts defined in `uses/2` and `use_module/2`
 directives that make use of parameter variables in the second argument.
 
+* UPDATED: Tests for the Logtalk `current_op/3` method to avoid warnings with
+the new lint warning for redefined standard operators.
+
 Examples
 --------
 

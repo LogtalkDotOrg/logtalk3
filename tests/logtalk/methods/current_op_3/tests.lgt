@@ -21,6 +21,7 @@
 % plain Prolog database for testing calls in the "user" pseudo-object
 
 :- op(777, yfx, my_test_op).
+:- op(600, xfy, override).
 
 
 :- object(tests,
@@ -68,11 +69,11 @@
 		Operators == [abc].
 
 	succeeds(current_op_3_10) :-
-		test_object_1::current_op(600, xfx, (:)),
-		\+ test_object_1::current_op(600, xfy, (:)).
+		test_object_1::current_op(600, xfx, override),
+		\+ test_object_1::current_op(600, xfy, override).
 
 	succeeds(current_op_3_11) :-
-		\+ test_object_2::current_op(600, xfx, (:)).
+		\+ test_object_2::current_op(600, xfx, override).
 
 	succeeds(current_op_3_12) :-
 		test_object_1::operators(Operators),

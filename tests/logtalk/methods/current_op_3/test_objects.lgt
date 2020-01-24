@@ -31,7 +31,7 @@
 	:- op(501, xfx, jkl).
 
 	% test operator overriding
-	:- public(op(600, xfx, (:))).
+	:- public(op(600, xfx, override)).
 
 	% test for call in "self"
 	:- public(operators/1).
