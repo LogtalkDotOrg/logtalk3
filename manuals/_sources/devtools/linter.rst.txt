@@ -13,3 +13,6 @@ built-in predicate. For (source file or entity) local scope, use instead
 the
 `set_logtalk_flag/2 <../refman/directives/set_logtalk_flag_2.html>`__
 directive.
+
+By loading the ``tutor`` tool, most lint warnings are expanded with
+explanations and suggestions on how to fix the reported issues.
