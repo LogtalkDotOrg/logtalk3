@@ -244,13 +244,17 @@ link in a web browser.</p>
 </div>
 <div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
-<p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility file:</p>
+<p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(redis(loader)).
 </pre></div>
 </div>
 </div>
 <div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(redis(tester)).
+</pre></div>
+</div>
 <p>The tests assume a local Redis server running on the default port. If
 the server is not detected, the tests are skipped.</p>
 <p>The unit tests were originally written by Sean Charles for his GNU

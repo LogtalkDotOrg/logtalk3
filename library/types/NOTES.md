@@ -37,7 +37,7 @@ link in a web browser.
 Loading
 -------
 
-To load all entities in this library, load the `loader.lgt` utility file:
+To load all entities in this library, load the `loader.lgt` file:
 
 	| ?- logtalk_load(types(loader)).
 
@@ -45,3 +45,13 @@ In case your code only requires the most basic types, you can load in
 alternative the file:
 
 	| ?- logtalk_load(basic_types(loader)).
+
+See the notes on the `basic_types` virtual library for details.
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+	| ?- logtalk_load(types(tester)).

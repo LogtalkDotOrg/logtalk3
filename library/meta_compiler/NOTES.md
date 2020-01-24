@@ -34,9 +34,17 @@ link in a web browser.
 Loading
 -------
 
-To load the main entities in this library, load the `loader.lgt` utility file:
+To load the main entities in this library, load the `loader.lgt` file:
 
 	| ?- logtalk_load(meta_compiler(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+	| ?- logtalk_load(meta_compiler(tester)).
 
 
 Usage

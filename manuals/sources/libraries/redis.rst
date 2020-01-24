@@ -23,7 +23,7 @@ link in a web browser.
 Loading
 -------
 
-To load this library, load the ``loader.lgt`` utility file:
+To load this library, load the ``loader.lgt`` file:
 
 ::
 
@@ -31,6 +31,12 @@ To load this library, load the ``loader.lgt`` utility file:
 
 Testing
 -------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(redis(tester)).
 
 The tests assume a local Redis server running on the default port. If
 the server is not detected, the tests are skipped.

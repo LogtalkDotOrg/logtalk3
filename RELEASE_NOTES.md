@@ -105,11 +105,13 @@ SWI-Prolog graphical profiler.
 Libraries
 ---------
 
+* ADDED: Notes on testing to all libraries that include unit tests.
+
 * IMPROVED: The documentation of the `arbitrary`, `coroutining`, `queues`,
 `dictionaries`, and `sets` libraries.
 
 Tools
-_____
+-----
 
 * UPDATED: The `tutor` tool to provide explanations and suggestions for
 recently introduced linter warnings and improve explanations for reference

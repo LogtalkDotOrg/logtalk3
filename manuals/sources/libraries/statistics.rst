@@ -16,10 +16,18 @@ link in a web browser.
 Loading
 -------
 
-To load all entities in this library, load the ``loader.lgt`` utility
-file:
+To load all entities in this library, load the ``loader.lgt`` file:
 
 ::
 
    | ?- logtalk_load(statistics(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(statistics(tester)).
 
