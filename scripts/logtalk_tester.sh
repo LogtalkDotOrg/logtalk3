@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 29, 2019
+##   Last updated on January 24, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -438,7 +438,7 @@ broken=$(cat -- *.errors | grep -c 'LOGTALK_BROKEN')
 testsetruns=$((testsets-timeouts-crashes-broken))
 skipped=$(cat -- *.results | grep -c ': skipped')
 passed=$(cat -- *.results | grep -c ': success')
-failed=$(cat -- *.results | grep -c ': failure')
+failed=$(cat -- *.results | grep -v 'test assertion' | grep -c ': failure')
 total=$((skipped+passed+failed))
 
 echo "*******************************************************************************"
@@ -474,7 +474,7 @@ grep -s -a ': skipped' -- *.results | $sed 's/: skipped//' | $sed 's/.results:% 
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"
-grep -s -a ': failure' -- *.results | $sed 's/: failure//' | $sed 's/.results:!     / - /' | $sed 's|__|/|g' | $sed "s|^$prefix||" | $sed "s|^!     ||"
+grep -s -a -v 'test assertion' -- *.results | grep ': failure' | $sed 's/: failure//' | $sed 's/.results:!     / - /' | $sed 's|__|/|g' | $sed "s|^$prefix||" | $sed "s|^!     ||"
 echo "*******************************************************************************"
 echo "***** $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timeouts, $crashes crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"

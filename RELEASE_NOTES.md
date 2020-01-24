@@ -119,6 +119,9 @@ to unknown entity warnings.
 
 * UPDATED: Documentation of the `profiler` tool.
 
+* FIXED: The `logtalk_tester` shell script to not count twice failed tests
+with assertion failed messages.
+
 Tests
 -----
 
