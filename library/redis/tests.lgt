@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Sean Charles. Adapted to Logtalk by Paulo Moura',
-		date is 2017/04/26,
+		date is 2020/01/25,
 		comment is 'Unit tests for the "redis" library.'
 	]).
 
@@ -42,11 +42,9 @@
 		:- use_module(system, [sleep/1]).
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 		:- uses(user, [thread_sleep/1 as sleep/1]).
-	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-		:- uses(shell, [sleep/1]).
 	:- else.
-		% ECLiPSe, GNU Prolog, and SWI-Prolog provide sleep/1 as
-		% a built-in predicate but we list it here for clarity
+		% ECLiPSe, GNU Prolog, SWI-Prolog, and XSB provide sleep/1
+		% as a built-in predicate but we list it here for clarity
 		:- uses(user, [sleep/1]).
 	:- endif.
 
@@ -59,7 +57,7 @@
 		).
 
 	%% CONNECTION...
-	
+
 	test(default_connection_and_echo) :-
 		connect(Connection),
 		send(Connection, echo('GNU Prolog rocks!'), bulk(Output)),
@@ -87,7 +85,7 @@
 		disconnect(Connection),
 		Set == 'OK',
 		Get == 'Objitsu'.
-	
+
 	test(set_and_get_timeout) :-
 		connect(Connection),
 		send(Connection, config(set, timeout, 86400), status(Set)),
@@ -130,7 +128,7 @@
 		Exists1 == 1,
 		Del1 == 1,
 		Exists2 == 0.
-	
+
 	test(key_expiry_with_set_ttl_expire_and_exists) :-
 		connect(Connection),
 		send(Connection, flushall, status(OK1)),
@@ -190,13 +188,13 @@
 		send(Connection, hmset(test_hash,
 			new_field_1, 'Hello',
 			new_field_2, 'World',
-			new_field_3, 42), status('OK')),	
+			new_field_3, 42), status('OK')),
 		disconnect(Connection).
 
 	test(getting_multiple_keys_previously_set) :-
 		connect(Connection),
 		send(Connection, hmget(test_hash, new_field_1, new_field_2, new_field_3),
-			[bulk('Hello'), bulk('World'), bulk('42')]),	
+			[bulk('Hello'), bulk('World'), bulk('42')]),
 		disconnect(Connection).
 
 	test(getting_all_hash_keys_at_once) :-

@@ -110,6 +110,9 @@ Libraries
 * IMPROVED: The documentation of the `arbitrary`, `coroutining`, `queues`,
 `dictionaries`, and `sets` libraries.
 
+* FIXED: Harmless warning when running the `redis` library tests using XSB as
+the backend compiler.
+
 Tools
 -----
 
