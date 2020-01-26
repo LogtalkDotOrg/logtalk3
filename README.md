@@ -73,12 +73,13 @@ scripts or by using an [installer](https://logtalk.org/download.html) for your
 operating system. For manual installation, see the [INSTALL.md](INSTALL.md)
 file for detailed instructions.
 
-See the [user manual](manuals/index.html) for a description of the source
-files organization and for usage instructions.
+The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
+Logtalk updates since the first public version. Please check it if you are
+upgrading from a previous Logtalk version.
 
-If you are upgrading from a previous Logtalk version, please check the
-[UPGRADING.md](UPGRADING.md) file for instructions on how to upgrade your
-programs or your custom adapter files to run under this new version.
+If you are upgrading from the previous Logtalk 2.x generation, please check
+the [UPGRADING.md](UPGRADING.md) file for instructions on how to upgrade your
+programs or your custom adapter files to run under Logtalk 3.x.
 
 
 Customization
@@ -111,10 +112,6 @@ https://logtalk.org/manuals/index.html
 PDF, ePub, and Texinfo versions of the Logtalk Handbook can be downloaded from:
 
 https://logtalk.org/documentation.html
-
-The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
-Logtalk updates since the first public version. Please check it if you are
-upgrading from a previous Logtalk version.
 
 The API documentation for the core, library, tools, and contributions is
 provided in HTML format and can be found in the [docs](docs/) directory and
