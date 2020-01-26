@@ -56,11 +56,12 @@ category predicates specified as `Entity::Functor/Arity` using the graphical
 tracer.
 
 * IMPROVED: Support for the SWI-Prolog graphical profiler by hiding all the
-compiler and runtime internal predicates.
+compiler and runtime internal predicates (their computation time is added
+to the user level predicates).
 
 * IMPROVED: Support for the SWI-Prolog graphical profiler by hiding entity
 internal tables predicates when the `logtalk_source_location_data` flag is
-true.
+true (their computation time is added to the user level predicates).
 
 * UPDATED: The SWI-Prolog and YAP adapter files to support predicate aliases
 in `module/2` directives when compiling modules as objects.
