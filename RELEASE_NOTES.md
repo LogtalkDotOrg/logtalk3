@@ -40,6 +40,8 @@ value set to `warning`).
 * ADDED: Support for declaring predicate and non-terminal aliases in
 `reexport/2` directives.
 
+* IMPROVED: Inlining of calls to the `this/1` execution context method.
+
 * FIXED: Don't inline predicate definitions with variable aliasing in the
 clause head as this can result in optimization bugs when compiling predicate
 calls due to compile time variable bindings propagating to previous goals in

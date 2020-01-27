@@ -14386,7 +14386,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(this(This), TPred, '$lgt_debug'(goal(this(DThis), DPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_head_exec_ctx'(Ctx, ExCtx),
-	'$lgt_execution_context'(ExCtx, _, _, This0, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This0, _),
 	(	var(This) ->
 		% compile time unification
 		This0 = This,
