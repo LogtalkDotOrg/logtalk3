@@ -5777,6 +5777,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(error(instantiation_error, logtalk(Call, ExCtx))).
 
 '$lgt_metacall'('$lgt_closure'(TFunctor, TArgs, ExCtx), ExtraArgs, _) :-
+	% pre-compiled closure (note that the closure may be called from a mapping
+	% predicate, which prevents us to use a difference list based solution to
+	% avoid the calls to append/3 and =../2 as that would fix the extra arguments
+	% in the goal on the first closure call and thus break the followup calls)
 	!,
 	'$lgt_append'(TArgs, ExtraArgs, FullArgs),
 	TGoal =.. [TFunctor| FullArgs],
