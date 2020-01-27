@@ -17193,14 +17193,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_extract_meta_variables'([Arg| Args], [MArg| MArgs], MetaVars) :-
 	(	MArg == (*) ->
+		% normal argument
 		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
 	;	integer(MArg),
+		% meta-argument (closure or goal)
 		nonvar(Arg) ->
 		throw(type_error(variable, Arg))
 	;	var(Arg) ->
+		% meta-argument
 		MetaVars = [Arg| RestMetaVars],
 		'$lgt_extract_meta_variables'(Args, MArgs, RestMetaVars)
-	;	'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
+	;	% bound argument and thus not a meta-variable
+		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
 	).
 
 
@@ -17213,6 +17217,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 '$lgt_goal_meta_arguments'(Meta, Goal, MetaArgs) :-
+	% don't require the same predicate name for the meta-predicate
+	% template and the goal as the goal may be an alias
 	Meta =.. [_| MArgs],
 	Goal =.. [_| Args],
 	'$lgt_extract_meta_arguments'(MArgs, Args, MetaArgs).
@@ -17222,8 +17228,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_extract_meta_arguments'([MArg| MArgs], [Arg| Args], MetaArgs) :-
 	(	MArg == (*) ->
+		% normal argument
 		'$lgt_extract_meta_arguments'(MArgs, Args, MetaArgs)
-	;	MetaArgs = [Arg| RestMetaArgs],
+	;	% meta-argument
+		MetaArgs = [Arg| RestMetaArgs],
 		'$lgt_extract_meta_arguments'(MArgs, Args, RestMetaArgs)
 	).
 
