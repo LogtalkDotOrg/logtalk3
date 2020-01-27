@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 35, 0, b06)).
+'$lgt_version_data'(logtalk(3, 35, 0, b07)).
 
 
 
@@ -5418,21 +5418,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)
-		;	% protected or private scope: check if sender and scope container are the same
+		;	% protected or private scope: check if sender and scope container are the same;
+			% do not cache the lookup result as it's only valid when the sender unifies with
+			% the scope container
 			Sender = SCtn ->
-			(	% construct predicate, object, and "sender" templates
-				'$lgt_term_template'(Pred, GPred),
-				'$lgt_term_template'(Obj, GObj),
-				'$lgt_term_template'(Sender, GSender),
-				'$lgt_execution_context'(GExCtx, _, GSender, GObj, GObj, _, []),
+			(	'$lgt_execution_context'(ExCtx, _, Sender, Obj, Obj, _, []),
 				% lookup predicate definition
-				call(Def, GPred, GExCtx, GCall, _, _) ->
-				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
-				% cache lookup result (the cut prevents backtracking into the catchall clause)
-				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSenderExCtx) :- !, GGCall)),
-				% unify message arguments and call method
-				GObj = Obj, GPred = Pred, GSender = Sender, GSenderExCtx = SenderExCtx,
-				call(GCall)
+				call(Def, Pred, ExCtx, Call, _, _) ->
+				'$lgt_guarded_method_call'(Obj, Pred, Sender, Call)
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)
@@ -5549,20 +5542,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)
-		;	% protected or private scope: check if sender and scope container are the same
+		;	% protected or private scope: check if sender and scope container are the same;
+			% do not cache the lookup result as it's only valid when the sender unifies with
+			% the scope container
 			Sender = SCtn ->
-			(	% construct predicate, object, and "sender" templates
-				'$lgt_term_template'(Pred, GPred),
-				'$lgt_term_template'(Obj, GObj),
-				'$lgt_term_template'(Sender, GSender),
-				% lookup predicate definition
-				'$lgt_execution_context'(GExCtx, _, GSender, GObj, GObj, _, []),
-				call(Def, GPred, GExCtx, GCall, _, _) ->
-				% cache lookup result (the cut prevents backtracking into the catchall clause)
-				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSenderExCtx) :- !, GCall)),
-				% unify message arguments and call method
-				GObj = Obj, GPred = Pred, GSender = Sender, GSenderExCtx = SenderExCtx,
-				call(GCall)
+			(	% lookup predicate definition
+				'$lgt_execution_context'(ExCtx, _, Sender, Obj, Obj, _, []),
+				call(Def, Pred, ExCtx, Call, _, _) ->
+				call(Call)
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)

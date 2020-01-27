@@ -42,6 +42,10 @@ value set to `warning`).
 
 * IMPROVED: Inlining of calls to the `this/1` execution context method.
 
+* FIXED: Don't cache message sending dynamic binding lookups that are only
+valid when the sender unifies with the predicate scope container as the cache
+entry would be too general while only valid in that specific condition.
+
 * FIXED: Don't inline predicate definitions with variable aliasing in the
 clause head as this can result in optimization bugs when compiling predicate
 calls due to compile time variable bindings propagating to previous goals in
