@@ -203,13 +203,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018/08/20,
+		date is 2020/01/27,
 		comment is 'Unit tests for the "metapredicates" example.'
 	]).
 
 	test(metapredicates_01) :-
+		^^suppress_text_output,
 		sort(user)::sort([3,1,4,2,9], Sorted),
 		Sorted == [1, 2, 3, 4, 9].
 
