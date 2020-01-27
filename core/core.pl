@@ -6152,8 +6152,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_metacall_sender'(+callable, +execution_context, +execution_context, +list)
 %
 % performs a meta-call in "sender" at runtime
+%
+% we must pass any extra arguments (a non-empty list when processing closures)
+% as compilation context meta-variables to properly compile calls to control
+% constructs (e.g. conjunctions) where those extra arguments must be called in
+% the correct context
 
-'$lgt_metacall_sender'(Pred, ExCtx, CallerExCtx, ExtraVars) :-
+'$lgt_metacall_sender'(Pred, ExCtx, CallerExCtx, ExtraArgs) :-
 	'$lgt_execution_context'(CallerExCtx, CallerEntity, Sender, This, Self, _, Stack),
 	(	CallerEntity == user ->
 		catch(Pred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerExCtx))))
@@ -6165,12 +6170,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 			call(DDef, Pred, CallerExCtx, TPred) ->
 			call(TPred)
 		;	% in the worst case we have a control construct or a built-in predicate
-			(	ExtraVars == [] ->
+			(	ExtraArgs == [] ->
 				MetaCallCtx = []
-			;	MetaCallCtx = ExCtx-ExtraVars
+			;	MetaCallCtx = ExCtx-ExtraArgs
 			),
 			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
-			'$lgt_comp_ctx'(Ctx, _, NewCallerExCtx, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _, _),
+			'$lgt_comp_ctx'(Ctx, _, NewCallerExCtx, CallerEntity, Sender, This, Self, CallerPrefix, ExtraArgs, MetaCallCtx, NewCallerExCtx, runtime, Stack, _, _),
 			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerExCtx)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -6183,12 +6188,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 			call(Def, Pred, CallerExCtx, TPred) ->
 			call(TPred)
 		;	% in the worst case we have a control construct or a built-in predicate
-			(	ExtraVars == [] ->
+			(	ExtraArgs == [] ->
 				MetaCallCtx = []
-			;	MetaCallCtx = ExCtx-ExtraVars
+			;	MetaCallCtx = ExCtx-ExtraArgs
 			),
 			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
-			'$lgt_comp_ctx'(Ctx, _, NewCallerExCtx, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _, _),
+			'$lgt_comp_ctx'(Ctx, _, NewCallerExCtx, CallerEntity, Sender, This, Self, CallerPrefix, ExtraArgs, MetaCallCtx, NewCallerExCtx, runtime, Stack, _, _),
 			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerExCtx)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
