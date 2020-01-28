@@ -44,6 +44,8 @@ value set to `warning`).
 and lambda expressions, simplifying the implementation and also providing
 a small performance improvement.
 
+* IMPROVED: Simplified check for valid meta-predicate definitions.
+
 * IMPROVED: Inlining of calls to the `this/1` execution context method.
 
 * FIXED: Don't cache message sending dynamic binding lookups that are only

@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 35, 0, b08)).
+'$lgt_version_data'(logtalk(3, 35, 0, b09)).
 
 
 
@@ -16026,17 +16026,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 % in a call/N call matches the corresponding meta-predicate declaration
 % (the relative ordering of the meta-vars is the same of the corresponding
 % meta-arguments; assumes Logtalk meta-predicate notation)
-
-'$lgt_not_same_meta_arg_extra_args'(MetaArgs, _, _, ExtraArgs, Domain) :-
-	findall(Integer, ('$lgt_member'(Integer, MetaArgs), integer(Integer)), Integers),
-	'$lgt_sum_list'(Integers, Sum),
-	Sum < ExtraArgs,
-	!,
-	(	Integers == [] ->
-		Domain = {}
-	;	Integers = [MetaArg| _],
-		Domain = {MetaArg}
-	).
 
 '$lgt_not_same_meta_arg_extra_args'([(*)| MetaArgs], MetaVars, Closure, ExtraArgs, Domain) :-
 	!,
