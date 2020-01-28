@@ -135,6 +135,9 @@ with assertion failed messages.
 Tests
 -----
 
+* ADDED: Tests for the `::/1-2` control constructs for runtime bound messages
+using the `call/N` control constructs.
+
 * ADDED: Tests for predicate shortcuts defined in `uses/2` and `use_module/2`
 directives that make use of parameter variables in the second argument.
 

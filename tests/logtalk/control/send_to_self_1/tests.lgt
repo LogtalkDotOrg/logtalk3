@@ -26,6 +26,11 @@
 	rt(Goal) :-
 		::Goal.
 
+	:- public(rtmc/1).
+	rtmc(Goal) :-
+		Closure = (::),
+		call(Closure, Goal).
+
 	% predicates for testing of compile-time bound messages
 
 	:- public(ct_p/1).
@@ -85,9 +90,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/03/28,
+		date is 2020/01/28,
 		comment is 'Unit tests for the (::)/1 built-in control construct.'
 	]).
 
@@ -129,32 +134,66 @@
 	fails(send_to_self_1_10) :-
 		send_to_self_test_object_2::rt(q(_)).
 
+	% tests for runtime bound messages using call/N
+
+	throws(send_to_self_1_11, error(instantiation_error,logtalk(call(::_),_))) :-
+		send_to_self_test_object_2::rtmc(_).
+
+	throws(send_to_self_1_12, error(type_error(callable,1),logtalk(call(::1),_))) :-
+		send_to_self_test_object_2::rtmc(1).
+
+	throws(send_to_self_1_13, error(permission_error(access,private_predicate,s/1),logtalk(call(::s(_)),_))) :-
+		send_to_self_test_object_2::rtmc(s(_)).
+
+	throws(send_to_self_1_14, error(existence_error(predicate_declaration,t/1),logtalk(call(::t(_)),_))) :-
+		send_to_self_test_object_2::rtmc(t(_)).
+
+	throws(send_to_self_1_15, error(existence_error(predicate_declaration,atom/1),logtalk(call(::atom(a)),_))) :-
+		send_to_self_test_object_2::rtmc(atom(a)).
+
+	succeeds(send_to_self_1_16) :-
+		send_to_self_test_object_2::rtmc(p(X)),
+		X == 2.
+
+	succeeds(send_to_self_1_17) :-
+		send_to_self_test_object_2::rtmc(r(X)),
+		X == 3.
+
+	succeeds(send_to_self_1_18) :-
+		send_to_self_test_object_2::rtmc({atom(a)}).
+
+	succeeds(send_to_self_1_19) :-
+		send_to_self_test_object_2::rtmc(({atom(a)}, {number(1)})).
+
+	fails(send_to_self_1_20) :-
+		send_to_self_test_object_2::rtmc(q(_)).
+
 	% tests for compile-time bound messages
 
-	throws(send_to_self_1_11, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),_))) :-
+	throws(send_to_self_1_21, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),_))) :-
 		send_to_self_test_object_2::ct_s(_).
 
-	throws(send_to_self_1_12, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),_))) :-
+	throws(send_to_self_1_22, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),_))) :-
 		send_to_self_test_object_2::ct_t(_).
 
-	throws(send_to_self_1_13, error(existence_error(predicate_declaration,atom/1),logtalk(::atom(a),_))) :-
+	throws(send_to_self_1_23, error(existence_error(predicate_declaration,atom/1),logtalk(::atom(a),_))) :-
 		send_to_self_test_object_2::ct_b3.
 
-	succeeds(send_to_self_1_14) :-
+	succeeds(send_to_self_1_24) :-
 		send_to_self_test_object_2::ct_p(X),
 		X == 2.
 
-	succeeds(send_to_self_1_15) :-
+	succeeds(send_to_self_1_25) :-
 		send_to_self_test_object_2::ct_r(X),
 		X == 3.
 
-	succeeds(send_to_self_1_16) :-
+	succeeds(send_to_self_1_26) :-
 		send_to_self_test_object_2::ct_b1.
 
-	succeeds(send_to_self_1_17) :-
+	succeeds(send_to_self_1_27) :-
 		send_to_self_test_object_2::ct_b2.
 
-	fails(send_to_self_1_18) :-
+	fails(send_to_self_1_28) :-
 		send_to_self_test_object_2::ct_q(_).
 
 :- end_object.
