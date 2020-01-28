@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on January 20, 2020
+%  Last updated on January 28, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -242,8 +242,8 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
-'$lgt_swi_prolog_predicate_name'('$lgt_metacall'(_, _, _), 'call/N') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_metacall'(_, _), 'call/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_metacall'(_, _, _, _), 'call/N') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_metacall'(_, _, _), 'call/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_quantified_metacall'(_, _, _), 'call/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_metacall_local'(_, _), 'call/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
@@ -494,14 +494,14 @@ prolog_clause:make_varnames_hook(_, (THead :- _), Offsets, Names, Bindings) :-
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos1),
 	'$lgt_swi_unify_clause_body'(Recover, Entity, TRecover, TermPos1, TermPos).
 
-'$lgt_swi_unify_clause_body'(CallN, _, '$lgt_metacall'(Closure, ExtraArgs, _), TermPos, TermPos) :- !,
+'$lgt_swi_unify_clause_body'(CallN, _, '$lgt_metacall'(Closure, ExtraArgs, _, _), TermPos, TermPos) :- !,
 	functor(CallN, call, Arity),
 	!,
 	length(ExtraArgs, N),
 	Arity is N + 1,
 	arg(1, CallN, Closure),
 	'$lgt_swi_call_n_args'(ExtraArgs, 2, CallN).
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_quantified_metacall'(Goal, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_local'(Goal, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _, _), TermPos, TermPos) :- !.
@@ -710,8 +710,8 @@ prolog_clause:make_varnames_hook(_, (THead :- _), Offsets, Names, Bindings) :-
 :- '$set_predicate_attribute'('$lgt_ctg_super_call_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_call_in_this'/2, trace, 1).
 
-:- '$set_predicate_attribute'('$lgt_metacall'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_metacall'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_quantified_metacall'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_metacall_local'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_metacall_sender'/4, trace, 1).
@@ -848,8 +848,8 @@ prolog_clause:make_varnames_hook(_, (THead :- _), Offsets, Names, Bindings) :-
 :- meta_predicate '$lgt_call_within_context_nv'(*,*,*).
 :- meta_predicate '$lgt_call_within_context'(*,*,*).
 
-:- meta_predicate '$lgt_metacall'(*,*).
 :- meta_predicate '$lgt_metacall'(*,*,*).
+:- meta_predicate '$lgt_metacall'(*,*,*,*).
 :- meta_predicate '$lgt_quantified_metacall'(*,*,*).
 :- meta_predicate '$lgt_metacall_sender'(*,*,*,*).
 :- meta_predicate '$lgt_metacall_local'(*,*).

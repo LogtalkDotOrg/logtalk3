@@ -40,6 +40,10 @@ value set to `warning`).
 * ADDED: Support for declaring predicate and non-terminal aliases in
 `reexport/2` directives.
 
+* IMPROVED: Refactoring of compilation and runtime execution of meta-calls
+and lambda expressions, simplifying the implementation and also providing
+a small performance improvement.
+
 * IMPROVED: Inlining of calls to the `this/1` execution context method.
 
 * FIXED: Don't cache message sending dynamic binding lookups that are only
