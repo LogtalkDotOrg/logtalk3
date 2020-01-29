@@ -807,8 +807,8 @@ and calling dynamic predicates from inside a category.
 Meta-predicates
 ~~~~~~~~~~~~~~~
 
-Meta-predicates may be defined inside objects and categories as any
-other predicate. A meta-predicate is declared using the
+Meta-predicates may be defined inside objects and categories as any other
+predicate. A meta-predicate is declared using the
 :ref:`directives_meta_predicate_1` directive as described earlier on
 this section. When defining a meta-predicate, the arguments in the 
 clause heads corresponding to the meta-arguments must be variables.
@@ -817,28 +817,60 @@ calling the meta-predicate. In particular, when sending a message that
 corresponds to a meta-predicate, the meta-arguments are called in the
 context of the object or category sending the message.
 
+The most simple example is a meta-predicate with a meta-argument that is
+called as a goal. E.g. the :ref:`methods_ignore_1` built-in predicate could
+be defined as:
+
+::
+
+   :- public(ignore/1).
+   :- meta_predicate(ignore(0)).
+
+   ignore(Goal) :-
+      (Goal -> true; true).
+
+The ``0`` in the meta-predicate template tells us that the argument will be
+called as-is.
+
 Some meta-predicates have meta-arguments which are not goals but
 :term:`closures <closure>`. Logtalk supports the definition of meta-predicates
 that are called with closures instead of goals as long as the definition uses
 the :ref:`methods_call_N` built-in predicate to call the closure with the
-additional arguments. For example:
+additional arguments. A classical example is a list mapping predicate:
 
 ::
 
-   :- public(all_true/2).
-   :- meta_predicate(all_true(1, *)).
+   :- public(map/2).
+   :- meta_predicate(map(1, *)).
 
-   all_true(_, []).
-   all_true(Closure, [Arg| Args]) :-
+   map(_, []).
+   map(Closure, [Arg| Args]) :-
        call(Closure, Arg),
-       all_true(Closure, Args).
+       map(Closure, Args).
 
 Note that in this case the meta-predicate directive specifies that the
-closure will be extended with exactly one extra argument.
+closure will be extended with exactly one additional argument. When
+calling a meta-predicate, a closure can correspond to a user-defined
+predicate, a built-in predicate, a :term:`lambda expression`, or a
+control construct.
 
-When calling a meta-predicate, a closure can correspond to a
-user-defined predicate, a built-in predicate, a :term:`lambda expression`,
-or a control construct.
+In some cases, is not a meta-argument but one of its sub-terms that is
+called as a goal or used as a closure. For example:
+
+::
+
+   :- public(call_all/1).
+   :- meta_predicate(call_all(::)).
+
+   call_all([]).
+   call_all([Goal| Goals]) :-
+       call(Goal),
+       call_all(Goals).
+
+The ``::`` mode indicator in the meta-predicate template allows the
+corresponding argument in the meta-predicate definiton to be a
+non-variable term and instructs the compiler to look into the argument
+sub-terms for goal and closure meta-variables.
 
 .. _predicates_lambdas:
 

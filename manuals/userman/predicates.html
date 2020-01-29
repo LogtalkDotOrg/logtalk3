@@ -911,8 +911,8 @@ and calling dynamic predicates from inside a category.</p>
 </div>
 <div class="section" id="meta-predicates">
 <span id="predicates-metadef"></span><h3>Meta-predicates<a class="headerlink" href="#meta-predicates" title="Permalink to this headline">¶</a></h3>
-<p>Meta-predicates may be defined inside objects and categories as any
-other predicate. A meta-predicate is declared using the
+<p>Meta-predicates may be defined inside objects and categories as any other
+predicate. A meta-predicate is declared using the
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive as described earlier on
 this section. When defining a meta-predicate, the arguments in the
 clause heads corresponding to the meta-arguments must be variables.
@@ -920,25 +920,52 @@ All meta-arguments are called in the context of the object or category
 calling the meta-predicate. In particular, when sending a message that
 corresponds to a meta-predicate, the meta-arguments are called in the
 context of the object or category sending the message.</p>
+<p>The most simple example is a meta-predicate with a meta-argument that is
+called as a goal. E.g. the <a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a> built-in predicate could
+be defined as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(ignore<span class="o">/</span><span class="m">1</span>).
+<span class="p">:- </span><span class="k">meta_predicate</span>(<span class="k">ignore</span>(<span class="m">0</span>)).
+
+<span class="k">ignore</span>(<span class="nv">Goal</span>) <span class="o">:-</span>
+   (<span class="nv">Goal</span> <span class="o">-&gt;</span> <span class="k">true</span><span class="o">;</span> <span class="k">true</span>).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">0</span></code> in the meta-predicate template tells us that the argument will be
+called as-is.</p>
 <p>Some meta-predicates have meta-arguments which are not goals but
 <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a>. Logtalk supports the definition of meta-predicates
 that are called with closures instead of goals as long as the definition uses
 the <a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> built-in predicate to call the closure with the
-additional arguments. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(all_true<span class="o">/</span><span class="m">2</span>).
-<span class="p">:- </span><span class="k">meta_predicate</span>(all_true(<span class="m">1</span>, <span class="o">*</span>)).
+additional arguments. A classical example is a list mapping predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(map<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">meta_predicate</span>(map(<span class="m">1</span>, <span class="o">*</span>)).
 
-all_true(<span class="nv">_</span>, []).
-all_true(<span class="nv">Closure</span>, [<span class="nv">Arg</span>| <span class="nv">Args</span>]) <span class="o">:-</span>
+map(<span class="nv">_</span>, []).
+map(<span class="nv">Closure</span>, [<span class="nv">Arg</span>| <span class="nv">Args</span>]) <span class="o">:-</span>
     <span class="k">call</span>(<span class="nv">Closure</span>, <span class="nv">Arg</span>),
-    all_true(<span class="nv">Closure</span>, <span class="nv">Args</span>).
+    map(<span class="nv">Closure</span>, <span class="nv">Args</span>).
 </pre></div>
 </div>
 <p>Note that in this case the meta-predicate directive specifies that the
-closure will be extended with exactly one extra argument.</p>
-<p>When calling a meta-predicate, a closure can correspond to a
-user-defined predicate, a built-in predicate, a <a class="reference internal" href="../glossary.html#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>,
-or a control construct.</p>
+closure will be extended with exactly one additional argument. When
+calling a meta-predicate, a closure can correspond to a user-defined
+predicate, a built-in predicate, a <a class="reference internal" href="../glossary.html#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>, or a
+control construct.</p>
+<p>In some cases, is not a meta-argument but one of its sub-terms that is
+called as a goal or used as a closure. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(call_all<span class="o">/</span><span class="m">1</span>).
+<span class="p">:- </span><span class="k">meta_predicate</span>(call_all(<span class="o">::</span>)).
+
+call_all([]).
+call_all([<span class="nv">Goal</span>| <span class="nv">Goals</span>]) <span class="o">:-</span>
+    <span class="k">call</span>(<span class="nv">Goal</span>),
+    call_all(<span class="nv">Goals</span>).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">::</span></code> mode indicator in the meta-predicate template allows the
+corresponding argument in the meta-predicate definiton to be a
+non-variable term and instructs the compiler to look into the argument
+sub-terms for goal and closure meta-variables.</p>
 </div>
 <div class="section" id="lambda-expressions">
 <span id="predicates-lambdas"></span><h3>Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this headline">¶</a></h3>
