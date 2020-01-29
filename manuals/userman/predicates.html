@@ -437,8 +437,9 @@ meaning:</p>
 extending it with <code class="docutils literal notranslate"><span class="pre">N</span></code> arguments. The value of <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a
 positive integer.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">::</span></code></dt><dd><p>Argument that is context-aware but that will not be used as a goal
-or a closure.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">::</span></code></dt><dd><p>Argument that is context-aware but that will not be called as a goal
+or a closure. It can contain, however, sub-terms that will be called
+as goals or closures.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">^</span></code></dt><dd><p>Goal that may be existentially quantified (<code class="docutils literal notranslate"><span class="pre">Vars^Goal</span></code>).</p>
 </dd>

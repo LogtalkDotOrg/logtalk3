@@ -236,8 +236,9 @@ meaning:
    extending it with ``N`` arguments. The value of ``N`` must be a
    positive integer.
 ``::``
-   Argument that is context-aware but that will not be used as a goal
-   or a closure.
+   Argument that is context-aware but that will not be called as a goal
+   or a closure. It can contain, however, sub-terms that will be called
+   as goals or closures.
 ``^``
    Goal that may be existentially quantified (``Vars^Goal``).
 ``*``
