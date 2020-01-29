@@ -25,7 +25,7 @@
 		metapredicates(folds),
 		metapredicates(predicates),
 		metapredicates(closures),
-		metapredicates(metapredicates),
+		metapredicates(tracer),
 		metapredicates(fibonacci),
 		metapredicates(company),
 		metapredicates(wrappers),
