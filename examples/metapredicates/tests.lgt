@@ -203,9 +203,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020/01/27,
+		date is 2020/01/29,
 		comment is 'Unit tests for the "metapredicates" example.'
 	]).
 
@@ -389,5 +389,12 @@
 	test(metapredicates_42) :-
 		meta::fold_right([X, Y, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R),
 		R == [1, 2, 3, 4, 5, 6, 7, 8, 9].
+
+	test(metapredicates_43) :-
+		simple_client::test_whatever.
+
+	test(metapredicates_44) :-
+		^^suppress_text_output,
+		simple_client::test_whatever_all.
 
 :- end_object.

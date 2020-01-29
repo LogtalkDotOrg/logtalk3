@@ -23,6 +23,18 @@ ________________________________________________________________________
 ...
 
 
+% try the simple meta-predicate definitions from the "goals.lgt" file:
+
+| ?- simple_client::test_whatever.
+
+yes
+
+| ?- simple_client::test_whatever_all.
+
+Hello world!
+yes
+
+
 % note that "user" is a pseudo-object representing the Prolog database;
 % therefore, the integer comparisons are performed using the standard
 % Prolog built-in predicates

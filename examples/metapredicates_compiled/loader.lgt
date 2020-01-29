@@ -24,6 +24,7 @@
 	logtalk_load([
 		metapredicates(folds),
 		metapredicates(predicates),
+		metapredicates(goals),
 		metapredicates(closures),
 		metapredicates(tracer),
 		metapredicates(fibonacci),

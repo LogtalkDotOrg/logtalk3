@@ -155,6 +155,9 @@ the new lint warning for redefined standard operators.
 Examples
 --------
 
+* UPDATED: The `metapredicates` example with additional didactic definitions
+of meta-predicates.
+
 * FIXED: The `encodings` example tests to collect code coverage results.
 
 IDEs, text editors, and syntax highlighters support
