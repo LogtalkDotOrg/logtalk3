@@ -21,6 +21,18 @@ RELEASE NOTES
 =============
 
 
+3.36.0 - February ??, 2020
+==========================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug where a compilation error in a compiler generated auxiliary
+clause (usually caused by a call in the body to a module predicate with
+an ambiguous meta-predicate template) would result in a failure instead
+of an error message.
+
+
 3.35.0 - January 30, 2020
 =========================
 

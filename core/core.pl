@@ -7717,7 +7717,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_second_stage_error_handler'(Error) :-
 	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _),
-	'$lgt_source_file_context'(SourceFile, Lines),
+	% get the source file from the context as we may be reporting
+	% an error in an included file instead of in the main file
+	(	'$lgt_source_file_context'(SourceFile, Lines) ->
+		true
+	;	% assume auxiliary clause and thus not part of the source file
+		'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),
+		Lines = '-'(0, 0)
+	),
 	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
 
 
