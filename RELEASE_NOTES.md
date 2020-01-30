@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.35.0 - February ??, 2020
-==========================
+3.35.0 - January 30, 2020
+=========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -163,8 +163,8 @@ of meta-predicates.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* UPDATED: Logtalk setup instructions for ctags 5.8. Thanks to Paul Brown
-for the pull request.
+* UPDATED: Logtalk setup instructions for ctags 5.8. Thanks to Paul Brown for
+the pull request.
 
 
 3.34.0 - January 7, 2020
