@@ -32,6 +32,12 @@ clause (usually caused by a call in the body to a module predicate with
 an ambiguous meta-predicate template) would result in a failure instead
 of an error message.
 
+Tools
+-----
+
+* FIXED: The `logtalk_tester` shell script to not display text from comment
+messages when listing compilation errors, warnings, and failed unit tests.
+
 
 3.35.0 - January 30, 2020
 =========================

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 24, 2020
+##   Last updated on January 30, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -445,8 +445,8 @@ echo "**************************************************************************
 echo "***** Compilation errors/warnings and failed unit tests"
 echo "***** (compilation errors/warnings might be expected depending on the test)"
 echo "*******************************************************************************"
-grep -s -a -A2 'syntax_error' -- *.results | $sed 's/.results//' | tee errors.all
-grep -s -a -A2 'syntax_error' -- *.errors | $sed 's/.errors//' | tee -a errors.all
+grep "^[^%]" -- *.results | grep -s -a -A2 'syntax_error' | $sed 's/.results//' | tee errors.all
+grep "^[^%]" -- *.errors | grep -s -a -A2 'syntax_error' | $sed 's/.errors//' | tee -a errors.all
 grep -s -a -h '!     ' -- *.errors | $sed 's/.errors//' | tee -a errors.all
 grep -s -a -h '!     ' -- *.results | $sed 's/.results//' | tee -a errors.all
 grep -s -a -h -F '*     ' -- *.errors | $sed 's/.errors//' | tee -a errors.all
