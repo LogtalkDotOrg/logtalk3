@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Generate a compiler error when trying to redefine a built-in method
+using a `uses/2` or `use_module/2` directive.
+
 * FIXED: Bug where a compilation error in a compiler generated auxiliary
 clause (usually caused by a call in the body to a module predicate with
 an ambiguous meta-predicate template) would result in a failure instead

@@ -10683,6 +10683,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_uses_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, Arity, Obj, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
+	\+ '$lgt_built_in_method'(Alias, _, _, _),
+	% no clash with a built-in method, which cannot be redefined
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, _, _, Alias, _),
 	\+ '$lgt_pp_use_module_non_terminal_'(_, _, _, _, Alias, _),
 	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal
@@ -10701,10 +10703,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_predicate_property'(Original, built_in) ->
 		% no need for a local definition
 		true
-	;	'$lgt_built_in_method'(Alias, _, _, _) ->
-		% local definition would clash with a built-in method
-		true
-	;	% safe to add local definition
+	;	% add local definition
 		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
 		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
 		'$lgt_compile_clause'((Alias :- Obj::Original), AuxCtx)
@@ -10729,6 +10728,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Alias, AliasFunctor, Arity),
 	functor(Pred, OriginalFunctor, ExtArity),
 	functor(PredAlias, AliasFunctor, ExtArity),
+	\+ '$lgt_built_in_method'(PredAlias, _, _, _),
+	% no clash with a built-in method, which cannot be redefined
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, _, _,  PredAlias, _),
 	\+ '$lgt_pp_use_module_non_terminal_'(_, _, _, _, PredAlias, _),
 	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal
@@ -10747,10 +10748,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_predicate_property'(Pred, built_in) ->
 		% no need for a local definition
 		true
-	;	'$lgt_built_in_method'(PredAlias, _, _, _) ->
-		% local definition would clash with a built-in method
-		true
-	;	% safe to add local definition
+	;	% add local definition
 		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
 		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
 		'$lgt_compile_grammar_rule'((Alias --> Obj::Original), AuxCtx)
@@ -10771,6 +10769,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_uses_directive_predicate_call'(Original, Alias, Obj, Flag, Ctx) :-
+	\+ '$lgt_built_in_method'(Alias, _, _, _),
+	% no clash with a built-in method, which cannot be redefined
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, _, _, Alias, _),
 	\+ '$lgt_pp_use_module_non_terminal_'(_, _, _, _, Alias, _),
 	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal
@@ -10785,10 +10785,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_predicate_property'(Original, built_in) ->
 		% no need for a local definition
 		true
-	;	'$lgt_built_in_method'(Alias, _, _, _) ->
-		% local definition would clash with a built-in method
-		true
-	;	% safe to add local definition
+	;	% add local definition
 		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
 		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
 		'$lgt_compile_clause'((Alias :- Obj::Original), AuxCtx)
@@ -10881,6 +10878,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_use_module_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, Arity, Module, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
+	\+ '$lgt_built_in_method'(Alias, _, _, _),
+	% no clash with a built-in method, which cannot be redefined
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, _, _, Alias, _),
 	\+ '$lgt_pp_use_module_non_terminal_'(_, _, _, _, Alias, _),
 	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal
@@ -10899,10 +10898,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_predicate_property'(Original, built_in) ->
 		% no need for a local definition
 		true
-	;	'$lgt_built_in_method'(Alias, _, _, _) ->
-		% local definition would clash with a built-in method
-		true
-	;	% safe to add local definition
+	;	% add local definition
 		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
 		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
 		'$lgt_compile_clause'((Alias :- ':'(Module,Original)), AuxCtx)
@@ -10927,6 +10923,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Alias, AliasFunctor, Arity),
 	functor(Pred, AliasFunctor, ExtArity),
 	functor(PredAlias, AliasFunctor, ExtArity),
+	\+ '$lgt_built_in_method'(PredAlias, _, _, _),
+	% no clash with a built-in method, which cannot be redefined
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, _, _, PredAlias, _),
 	\+ '$lgt_pp_use_module_non_terminal_'(_, _, _, _, PredAlias, _),
 	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal
@@ -10945,10 +10943,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_predicate_property'(Pred, built_in) ->
 		% no need for a local definition
 		true
-	;	'$lgt_built_in_method'(PredAlias, _, _, _) ->
-		% local definition would clash with a built-in method
-		true
-	;	% safe to add local definition
+	;	% add local definition
 		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
 		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
 		'$lgt_compile_grammar_rule'((Alias --> ':'(Module,Original)), AuxCtx)
@@ -10969,6 +10964,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_use_module_directive_predicate_call'(Original, Alias, Module, Flag, Ctx) :-
+	\+ '$lgt_built_in_method'(Alias, _, _, _),
+	% no clash with a built-in method, which cannot be redefined
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, _, _, Alias, _),
 	\+ '$lgt_pp_use_module_non_terminal_'(_, _, _, _, Alias, _),
 	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal
@@ -10983,10 +10980,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_predicate_property'(Original, built_in) ->
 		% no need for a local definition
 		true
-	;	'$lgt_built_in_method'(Alias, _, _, _) ->
-		% local definition would clash with a built-in method
-		true
-	;	% safe to add local definition
+	;	% add local definition
 		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
 		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
 		'$lgt_compile_clause'((Alias :- ':'(Module,Original)), AuxCtx)
