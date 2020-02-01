@@ -33,7 +33,7 @@ goal(write('Three ')).
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/01/26,
+		date is 2018-01-26,
 		comment is 'Unit tests for the ISO Prolog standard !/0 control construct.'
 	]).
 

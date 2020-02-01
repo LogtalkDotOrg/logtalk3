@@ -48,7 +48,7 @@ context_switch_test_object(3).
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/03/26,
+		date is 2018-03-26,
 		comment is 'Unit tests for the (<<)/2 built-in control construct.'
 	]).
 

@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2019/12/01,
+		date is 2019-12-01,
 		comment is 'Random number generator protocol.',
 		see_also is [random, backend_random, fast_random]
 	]).

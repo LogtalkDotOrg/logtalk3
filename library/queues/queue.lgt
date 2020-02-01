@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/05/23,
+		date is 2019-05-23,
 		comment is 'Queue predicates implemented using difference lists.'
 	]).
 

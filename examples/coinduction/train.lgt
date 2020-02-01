@@ -27,7 +27,7 @@
 		:- info([
 			version is 0.5,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
-			date is 2013/03/06,
+			date is 2013-03-06,
 			comment is 'Timed automata example.'
 		]).
 
@@ -94,7 +94,7 @@
 		:- info([
 			version is 0.4,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
-			date is 2013/03/06,
+			date is 2013-03-06,
 			comment is 'Timed automata example.'
 		]).
 

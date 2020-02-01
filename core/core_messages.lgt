@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.91,
 		author is 'Paulo Moura',
-		date is 2020/01/30,
+		date is 2020-01-30,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 

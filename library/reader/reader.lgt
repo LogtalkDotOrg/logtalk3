@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/02/26,
+		date is 2019-02-26,
 		comment is 'Predicates for reading text file and text stream contents to lists of terms, characters, or character codes.'
 	]).
 

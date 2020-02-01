@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.2,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2012/08/17,
+		date is 2012-08-17,
 		comment is 'Coinduction omega-automaton example.'
 	]).
 

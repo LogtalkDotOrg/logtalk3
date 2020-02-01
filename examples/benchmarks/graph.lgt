@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Theofrastos Mantadelis',
-		date is 2010/11/14,
+		date is 2010-11-14,
 		comment is 'Example of a fully connected graph path search problem for benchmarking tests.'
 	]).
 

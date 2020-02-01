@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.2,
-		date is 2016/02/15,
+		date is 2016-02-15,
 		author is 'Paulo Moura',
 		comment is 'Translator of logic propositions to clauses in conjunctive normal form.',
 		source is 'Code partially based on an example found on the Clocksin and Mellish Prolog book.'

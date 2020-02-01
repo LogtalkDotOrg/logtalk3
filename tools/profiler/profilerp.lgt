@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.02,
 		author is 'Paulo Moura',
-		date is 2015/02/13,
+		date is 2015-02-13,
 		comment is 'Simple wrapper protocol for Prolog native profilers.'
 	]).
 

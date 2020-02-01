@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.',
 		parameters is ['Format' - 'Graph language file format'],
 		remarks is [
@@ -318,7 +318,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2019/04/07,
+		date is 2019-04-07,
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, and files in one step using the DOT format.'
 	]).
 

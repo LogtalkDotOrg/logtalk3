@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2016/09/19,
+		date is 2016-09-19,
 		comment is 'JTable example from the JPL distribution.'
 	]).
 

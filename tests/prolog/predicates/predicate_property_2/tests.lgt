@@ -35,7 +35,7 @@ elk(X) :- moose(X).
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014-10-14,
 		comment is 'Unit tests for the de facto standard predicate_property/2 built-in predicate.'
 	]).
 

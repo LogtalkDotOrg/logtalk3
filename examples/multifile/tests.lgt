@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2017/01/05,
+		date is 2017-01-05,
 		comment is 'Unit tests for the "multifile" example.'
 	]).
 

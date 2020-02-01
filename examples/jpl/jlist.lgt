@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2018/05/23,
+		date is 2018-05-23,
 		comment is 'JList dialog example from the JPL distribution.'
 	]).
 

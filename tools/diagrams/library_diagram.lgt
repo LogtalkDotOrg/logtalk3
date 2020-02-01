@@ -5,7 +5,7 @@
 	:- info([
 		version is 2.14,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Common predicates for generating library diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), entity_diagram(_)]

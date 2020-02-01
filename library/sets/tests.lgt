@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/05/27,
+		date is 2019-05-27,
 		comment is 'Unit tests for the "sets" library.',
 		parnames is ['SetObject']
 	]).

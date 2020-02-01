@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2019/05/23,
+		date is 2019-05-23,
 		comment is 'Set protocol.',
 		see_also is [set, set(_)]
 	]).

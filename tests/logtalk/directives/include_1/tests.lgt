@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/07/03,
+		date is 2018-07-03,
 		comment is 'Unit tests for the include/1 built-in directive.'
 	]).
 

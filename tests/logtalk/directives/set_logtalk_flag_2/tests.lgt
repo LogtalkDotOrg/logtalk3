@@ -29,7 +29,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/12/06,
+		date is 2014-12-06,
 		comment is 'Unit tests for the set_logtalk_flag/2 built-in directive.'
 	]).
 

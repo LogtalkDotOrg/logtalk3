@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/15,
+		date is 2016-06-15,
 		comment is 'Implementation of the rock, paper, scissors, lizard, Spock game played in the "The Big Bang Theory" sitcom.'
 	]).
 

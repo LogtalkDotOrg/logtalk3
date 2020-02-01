@@ -26,7 +26,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/11/02,
+		date is 2016-11-02,
 		comment is 'Sample category for testing with the `source_data` flag turned on.'
 	]).
 
@@ -136,7 +136,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/02/19,
+		date is 2016-02-19,
 		comment is 'Empty category for testing validity of category properties.'
 	]).
 
@@ -148,7 +148,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/03/20,
+		date is 2016-03-20,
 		comment is 'Built-in category for testing determinism of category properties.'
 	]).
 
@@ -162,7 +162,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/03/20,
+		date is 2016-03-20,
 		comment is 'Dynamic category for testing determinism of category properties.'
 	]).
 
@@ -176,7 +176,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/03/20,
+		date is 2016-03-20,
 		comment is 'Category compiled in debug mode for testing determinism of category properties.'
 	]).
 
@@ -190,7 +190,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/03/20,
+		date is 2016-03-20,
 		comment is 'Category compiled with event support for testing determinism of category properties.'
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/09/29,
+		date is 2016-09-29,
 		comment is 'Parametric doclet.',
 		parnames is ['Library']
 	]).
@@ -76,7 +76,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/09/29,
+		date is 2016-09-29,
 		comment is 'Usage example of the parametric doclet to generate documentation for the standard library.'
 	]).
 

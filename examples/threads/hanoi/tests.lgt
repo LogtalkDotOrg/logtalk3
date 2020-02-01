@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2014/05/12,
+		date is 2014-05-12,
 		comment is 'Unit tests for the "threads/hanoi" example.'
 	]).
 

@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2007/12/27,
+		date is 2007-12-27,
 		author is 'Paulo Moura',
 		comment is 'Multi-threaded version of the Towers of Hanoi problem.',
 		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']

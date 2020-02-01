@@ -205,7 +205,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Theofrastos Mantadelis',
-		date is 2010/11/27,
+		date is 2010-11-27,
 		comment is 'Flag validation protocol. Must be implemented by validator objects.'
 	]).
 
@@ -231,7 +231,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Theofrastos Mantadelis',
-		date is 2010/11/27,
+		date is 2010-11-27,
 		comment is 'Implementation of persistent object flags.'
 	]).
 

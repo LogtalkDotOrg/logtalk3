@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.6,
 		author is 'Ebrahim Azarisooreh',
-		date is 2018/06/08,
+		date is 2018-06-08,
 		comment is 'Internal predicates for analyzing source code.',
 		remarks is [
 			'Usage' - 'This is meant to be imported by any metric added to the system.',

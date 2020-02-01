@@ -24,7 +24,7 @@
 
 	:- info([
 		version is 1.3,
-		date is 2017/02/15,
+		date is 2017-02-15,
 		author is 'Paulo Moura',
 		comment is 'Polygon predicates.'
 	]).
@@ -82,7 +82,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 1998/3/23,
+		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Triangle class.'
 	]).
@@ -101,7 +101,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 1998/3/23,
+		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Square class.'
 	]).
@@ -120,7 +120,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 1998/3/23,
+		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Pentagon class.'
 	]).
@@ -139,7 +139,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 1998/3/23,
+		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Hexagon class.'
 	]).
@@ -157,7 +157,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2004/8/15,
+		date is 2004-8-15,
 		author is 'Paulo Moura',
 		comment is 'Concentric polygons as a constrained binary relation.'
 	]).

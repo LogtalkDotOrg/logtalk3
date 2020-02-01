@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/12/06,
+		date is 2014-12-06,
 		comment is 'Unit tests for the ISO Prolog standard (;)/2 control construct.'
 	]).
 

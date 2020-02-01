@@ -32,7 +32,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/04/04,
+		date is 2018-04-04,
 		comment is 'Unit tests for the "blocks" example.'
 	]).
 

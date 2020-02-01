@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2008/10/20,
+		date is 2008-10-20,
 		comment is 'Message executing time monitor.'
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 1998/3/23,
+		date is 1998-3-23,
 		comment is 'Farmer, cabbage, goat, and wolf state space search problem.'
 	]).
 

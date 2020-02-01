@@ -29,7 +29,7 @@ SOFTWARE.
 	:- info([
 		version is 1.04,
 		author is 'Peter Van Roy; adapted to Logtalk by Paulo Moura.',
-		date is 2019/10/09,
+		date is 2019-10-09,
 		comment is 'Multiple hidden parameters: an extension to Prolog''s DCG notation. Ported to Logtalk as a hook object.',
 		copyright is 'Copyright (C) 1992 Peter Van Roy',
 		license is 'MIT',

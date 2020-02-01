@@ -30,7 +30,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/011/02,
+		date is 2019-11-02,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.'

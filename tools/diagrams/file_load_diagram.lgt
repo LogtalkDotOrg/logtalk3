@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.26,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
@@ -135,7 +135,7 @@
 	:- info([
 		version is 2.01,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating file loading dependency diagrams in DOT format. A dependency exists when a file loads or includes another file.',
 		see_also is [file_dependency_diagram, directory_dependency_diagram, library_dependency_diagram]
 	]).

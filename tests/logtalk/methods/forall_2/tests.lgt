@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/26,
+		date is 2013-05-26,
 		comment is 'Unit tests for the forall/2 built-in method.'
 	]).
 

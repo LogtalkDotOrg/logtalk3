@@ -24,7 +24,7 @@
 	:- info([
 		version is 5.1,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2019-11-26,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 

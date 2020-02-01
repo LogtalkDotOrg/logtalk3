@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.01,
 		author is 'David Matuszek, Villanova University. Adapted to Logtalk by Paulo Moura.',
-		date is 2019/03/11,
+		date is 2019-03-11,
 		comment is 'Spider - A Sample Adventure Game.'
 	]).
 

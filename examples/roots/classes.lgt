@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2010/11/20,
+		date is 2010-11-20,
 		comment is 'Default protocol for all abstract classes.'
 	]).
 
@@ -51,7 +51,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2000/7/24,
+		date is 2000-7-24,
 		comment is 'Default metaclass for all abstract classes.'
 	]).
 
@@ -77,7 +77,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2000/7/24,
+		date is 2000-7-24,
 		comment is 'Default protocol for all instantiable classes.'
 	]).
 
@@ -155,7 +155,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2017-06-29,
 		comment is 'Default metaclass for all classes.'
 	]).
 
@@ -248,7 +248,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2000/7/24,
+		date is 2000-7-24,
 		comment is 'Default protocol for all objects.'
 	]).
 
@@ -281,7 +281,7 @@
 
 	:- info([
 		version is 1.2,
-		date is 2013/04/23,
+		date is 2013-04-23,
 		author is 'Paulo Moura',
 		comment is 'Minimal predicates for all objects. Default root of the inheritance graph.'
 	]).

@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2003/3/17,
+		date is 2003-3-17,
 		author is 'Paulo Moura',
 		comment is 'Parse protocol for using DCG rules.'
 	]).

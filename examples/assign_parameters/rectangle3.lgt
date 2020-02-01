@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/08/02,
+		date is 2015-08-02,
 		comment is 'A simple implementation of a geometric rectangle using assignable variables and parametric objects.',
 		parnames is ['Width', 'Height', 'Position']
 	]).

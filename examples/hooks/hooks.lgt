@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.32,
 		author is 'Paulo Moura',
-		date is 2015/09/07,
+		date is 2015-09-07,
 		comment is 'Example of an object defining compiler hook predicates.'
 	]).
 

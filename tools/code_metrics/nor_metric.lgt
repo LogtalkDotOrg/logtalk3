@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2019/09/23,
+		date is 2019-09-23,
 		comment is 'Number of entity rules metric. The score is represented using the compound term ``number_of_rules(Total, User)``.'
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/04/28,
+		date is 2019-04-28,
 		comment is 'Unit tests for the "super_calls" example.'
 	]).
 

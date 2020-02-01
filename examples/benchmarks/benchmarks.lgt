@@ -23,7 +23,7 @@
 	:- info([
 		version is 5.6,
 		author is 'Paulo Moura',
-		date is 2017/02/15,
+		date is 2017-02-15,
 		comment is 'Benchmark utility predicates and standard set of benchmarks.'
 	]).
 

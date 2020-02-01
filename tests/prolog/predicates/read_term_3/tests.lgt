@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2019/09/22,
+		date is 2019-09-22,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 

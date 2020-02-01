@@ -30,7 +30,7 @@
 	:- info([
 		version is 1.7,
 		author is 'Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.',
-		date is 2019/05/17,
+		date is 2019-05-17,
 		comment is 'Red-Black trees. Uses standard order to compare keys.',
 		see_also is [avltree, bintree]
 	]).

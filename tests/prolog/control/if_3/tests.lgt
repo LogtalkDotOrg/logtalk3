@@ -41,7 +41,7 @@ condition_opaque_to_cut(2).
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/01/30,
+		date is 2018-01-30,
 		comment is 'Unit tests for the soft-cut if/3 built-in predicate.'
 	]).
 

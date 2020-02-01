@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/08/21,
+		date is 2018-08-21,
 		comment is 'Unit tests for the "self_messages" example.'
 	]).
 

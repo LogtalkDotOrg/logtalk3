@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2019/12/03,
+		date is 2019-12-03,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` or the character ``?`` at a leashed port.',

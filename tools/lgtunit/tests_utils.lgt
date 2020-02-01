@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.16,
 		author is 'Paulo Moura',
-		date is 2019/06/10,
+		date is 2019-06-10,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 

@@ -23,7 +23,7 @@
 
 	:- info([
 		version is 0.13,
-		date is 2019/06/13,
+		date is 2019-06-13,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
 		remarks is [

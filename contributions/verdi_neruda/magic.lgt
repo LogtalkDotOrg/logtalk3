@@ -4,7 +4,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Ulf Nilsson. Ported to Logtalk and augmented with stratified negation by Victor Lagerkvist.',
-		date is 2010/06/13,
+		date is 2010-06-13,
 		comment is 'Object encapsulating magic methods.'
 	]).
 

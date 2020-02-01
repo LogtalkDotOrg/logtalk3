@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2007/9/16,
+		date is 2007-9-16,
 		comment is 'Producer-consumer problem with a bounded buffer.'
 	]).
 

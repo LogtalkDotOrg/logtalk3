@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2018/07/13,
+		date is 2018-07-13,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).

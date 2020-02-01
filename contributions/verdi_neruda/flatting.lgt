@@ -6,7 +6,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Victor Lagerkvist',
-		date is 2010/06/13,
+		date is 2010-06-13,
 		comment is 'Flattens conjunction of goals with the form f & g into a list [f,g].',
 		source is 'Based on source code from The Craft of Prolog, by Richard O''Keefe'
 	]).

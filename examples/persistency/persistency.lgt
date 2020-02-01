@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/11/18,
+		date is 2019-11-18,
 		comment is 'Simple example of object dynamic state persistency across loads.'
 	]).
 

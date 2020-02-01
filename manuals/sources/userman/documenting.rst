@@ -105,7 +105,7 @@ For example:
    :- info([
        version is 2.1,
        author is 'Paulo Moura',
-       date is 2000/04/20,
+       date is 2000-11-20,
        comment is 'Building representation.',
        diagram is 'UML Class Diagram #312'
    ]).

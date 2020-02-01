@@ -43,7 +43,7 @@ insect(bee).
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/06/02,
+		date is 2015-06-02,
 		comment is 'Unit tests for the ISO Prolog standard clause/2 built-in predicate.'
 	]).
 

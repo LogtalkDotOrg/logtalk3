@@ -29,7 +29,7 @@ a(1).
 	:- info([
 		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2018/06/20,
+		date is 2018-06-20,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
 

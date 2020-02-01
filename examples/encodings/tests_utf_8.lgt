@@ -29,7 +29,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/08/06,
+		date is 2012-08-06,
 		comment is 'Unit tests for the "encodings" example.'
 	]).
 

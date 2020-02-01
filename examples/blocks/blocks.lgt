@@ -29,7 +29,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2016/05/25,
+		date is 2016-05-25,
 		author is 'Paulo Moura',
 		comment is 'Two-dimensional block (or should I say square?) class.'
 	]).
@@ -89,7 +89,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2017/02/15,
+		date is 2017-02-15,
 		author is 'Paulo Moura',
 		comment is 'Block stacks. A stack is represented by top-bottom tuples.'
 	]).
@@ -203,7 +203,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2016/05/25,
+		date is 2016-05-25,
 		author is 'Paulo Moura',
 		comment is 'Block stack monitor. Prints an ASCII representation of all block stacks when a block is moved.'
 	]).

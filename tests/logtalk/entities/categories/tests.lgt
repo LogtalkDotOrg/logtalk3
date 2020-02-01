@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/09/27,
+		date is 2015-09-27,
 		comment is 'Unit tests for the category/3 opening directive.'
 	]).
 

@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2004/4/29,
+		date is 2004-4-29,
 		author is 'Paulo Moura',
 		comment is 'Simple example of command-line shell parsing.'
 	]).

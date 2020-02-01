@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2009/11/28,
+		date is 2009-11-28,
 		author is 'Paulo Moura',
 		comment is 'Simple example of using lambda expressions to simplify setof/3 and similar calls.'
 	]).
@@ -57,7 +57,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Artur Miguel Dias',
-		date is 2009/12/04,
+		date is 2009-12-04,
 		comment is 'Generic sum predicate for testing lambda expressions.'
 	]).
 
@@ -89,7 +89,7 @@
 
 	:- info([
 		version is 1.3,
-		date is 2019/08/17,
+		date is 2019-08-17,
 		author is 'Paulo Moura',
 		comment is 'Some miscellaneous tests for lambda expressions collected from public forums.'
 	]).

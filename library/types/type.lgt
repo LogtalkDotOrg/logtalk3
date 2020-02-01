@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.27,
 		author is 'Paulo Moura',
-		date is 2019/07/27,
+		date is 2019-07-27,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',

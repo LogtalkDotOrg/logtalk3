@@ -4,7 +4,7 @@
 	:- info([
 		version is 1.10,
 		author is 'Portable Operating-System Interface (POSI) initiative',
-		date is 2006/1/21,
+		date is 2006-1-21,
 		comment is 'Portable operating system access protocol.',
 		remarks is [
 			'File names overview' - 'The main idea is that file names should be operating-system independent. As such, predicates are needed to convert between portable file names and operating-system specific file names. The solution chosen is to use URL syntax for portable file names.',

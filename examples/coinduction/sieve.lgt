@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura. Derived from a coroutining solution by Gopal Gupta et al.',
-		date is 2011/08/13,
+		date is 2011-08-13,
 		comment is 'Sieve of Eratosthenes coinduction example.'
 	]).
 

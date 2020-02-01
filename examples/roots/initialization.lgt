@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2019/03/08,
+		date is 2019-03-08,
 		comment is 'Object initialization protocol.'
 	]).
 

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Jan Wielemaker. Adapted to Logtalk by Paulo Moura',
-		date is 2016/06/16,
+		date is 2016-06-16,
 		comment is 'Example of fetching engine answers returned using the threaded_engine_yield/1 predicate.'
 	]).
 

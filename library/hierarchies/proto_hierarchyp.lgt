@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2006/2/20,
+		date is 2006-2-20,
 		comment is 'Prototype hierarchy protocol.',
 		see_also is [proto_hierarchy]
 	]).

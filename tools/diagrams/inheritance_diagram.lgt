@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.17,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -91,7 +91,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/15,
+		date is 2014-01-15,
 		comment is 'Predicates for generating entity diagrams in DOT format with inheritance relation edges but no cross-referencing relation edges.',
 		see_also is [entity_diagram, uses_diagram, xref_diagram]
 	]).

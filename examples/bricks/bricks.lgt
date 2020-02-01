@@ -29,7 +29,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2000/10/31,
+		date is 2000-10-31,
 		author is 'Paulo Moura',
 		comment is 'Two-dimensional brick (or should I say square?) class.'
 	]).
@@ -89,7 +89,7 @@
 
 	:- info([
 		version is 1.2,
-		date is 2018/04/04,
+		date is 2018-04-04,
 		author is 'Paulo Moura',
 		comment is 'Stack of bricks as a constrained binary relation.'
 	]).
@@ -146,7 +146,7 @@
 
 	:- info([
 		version is 1.2,
-		date is 2010/03/28,
+		date is 2010-03-28,
 		author is 'Paulo Moura',
 		comment is 'Monitor for brick movements printing an ascii representation of each brick position.'
 	]).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2018/07/17,
+		date is 2018-07-17,
 		comment is 'Unit tests for the cyclomatic complexity metric.'
 	]).
 

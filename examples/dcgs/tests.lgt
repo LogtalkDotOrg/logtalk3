@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.12,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2019/02/01,
+		date is 2019-02-01,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 

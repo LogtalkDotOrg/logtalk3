@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/06/29,
+		date is 2018-06-29,
 		comment is 'Unit tests for the syntax_error/1 built-in method.'
 	]).
 

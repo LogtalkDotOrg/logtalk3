@@ -37,7 +37,7 @@ bar(_X) :- true.
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2015-05-05,
 		comment is 'Unit tests for the ISO Prolog standard abolish/1 built-in predicate.'
 	]).
 

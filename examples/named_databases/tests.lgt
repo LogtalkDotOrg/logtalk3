@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/10/10,
+		date is 2016-10-10,
 		comment is 'Unit tests for the "named_databases" example.'
 	]).
 

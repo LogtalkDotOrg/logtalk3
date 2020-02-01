@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/04/12,
+		date is 2018-04-12,
 		comment is 'Hook object for expanding library alias paths in ``logtalk_library_path/2`` facts when compiling a source file.'
 	]).
 

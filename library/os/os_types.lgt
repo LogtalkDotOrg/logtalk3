@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/02/28,
+		date is 2018-02-28,
 		comment is 'A set of operating-system related types.',
 		remarks is [
 			'Provided types' - 'This category adds ``file``, ``file(Extensions)``, ``directory``, and ``environment_variable`` types for type-checking when using the ``type`` library object.',

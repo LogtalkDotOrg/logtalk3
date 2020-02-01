@@ -39,7 +39,7 @@
 	:- info([
 		version is 1.03,
 		author is 'Daniel L. Dudley',
-		date is 2019/10/09,
+		date is 2019-10-09,
 		comment is 'ISO 8601 (and European civil calendar) compliant library of date predicates.',
 		remarks is [
 			'Scope' - 'This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.',

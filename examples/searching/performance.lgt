@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2013/04/23,
+		date is 2013-04-23,
 		comment is 'Performance monitor for state space searches.'
 	]).
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/06/19,
+		date is 2017-06-19,
 		comment is 'Unit tests for the after/3 built-in method.'
 	]).
 

@@ -83,7 +83,7 @@ setof_3_member(X, [_| L]) :-
 	:- info([
 		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/03/12,
+		date is 2018-03-12,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 

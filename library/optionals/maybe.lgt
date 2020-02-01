@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2019-11-26,
 		comment is 'Types and predicates for type-checking and handling optional terms. Inspired by Haskell.',
 		remarks is [
 			'Type-checking support' - 'Defines type ``maybe(Type)`` for checking optional terms where the value hold by the optional term must be of the given type.',

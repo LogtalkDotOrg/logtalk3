@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2017-06-29,
 		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',
 		remarks is [
 			'Command representation' - 'Use the Redis command name as the functor of a compound term where the arguments are the command arguments.',

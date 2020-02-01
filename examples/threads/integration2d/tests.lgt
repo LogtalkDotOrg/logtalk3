@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010/04/26,
+		date is 2010-04-26,
 		comment is 'Unit tests for the "threads/integration2d" example.'
 	]).
 

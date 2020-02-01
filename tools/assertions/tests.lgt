@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/03/07,
+		date is 2019-03-07,
 		comment is 'Unit tests for the "assertions" tool.'
 	]).
 

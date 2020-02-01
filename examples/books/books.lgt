@@ -46,7 +46,7 @@ weight(horcrux_set,   123).
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/11/22,
+		date is 2019-11-22,
 		comment is 'Data acquisition example, decoupled from data processing.'
 	]).
 
@@ -76,7 +76,7 @@ weight(horcrux_set,   123).
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/11/27,
+		date is 2019-11-27,
 		comment is 'Data processing example, decoupled from data acquisition.'
 	]).
 
@@ -127,7 +127,7 @@ weight(horcrux_set,   123).
 
 	print_extra_kg(Extra-WeightGrams) :-
 		write('  with free '), write(Extra),
-		optional(WeightGrams)::map([Grams,Kilos]>>(Kilos is Grams / 1000), WeightKilos),
+		optional(WeightGrams)::map([Grams,Kilos]>>(Kilos is Grams / 1000.0), WeightKilos),
 		optional(WeightKilos)::if_present([Kilograms]>>(write(' at '), write(Kilograms), write(' kg'))),
 		nl.
 

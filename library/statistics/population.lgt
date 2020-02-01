@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2013/04/19,
+		date is 2013-04-19,
 		comment is 'Statistical population represented as a list of numbers.',
 		see_also is [sample]
 	]).

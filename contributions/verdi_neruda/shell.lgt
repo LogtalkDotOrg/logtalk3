@@ -4,7 +4,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Victor Lagerkvist and Paulo Moura',
-		date is 2019/03/20,
+		date is 2019-03-20,
 		comment is 'Prolog shell for the interpreters.',
 		parnames is ['Interpreters']
 	]).
@@ -301,7 +301,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/03/20,
+		date is 2019-03-20,
 		comment is 'User frontend to start the application.'
 	]).
 

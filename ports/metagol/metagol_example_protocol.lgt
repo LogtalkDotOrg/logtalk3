@@ -39,7 +39,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura.',
-		date is 2019/05/07,
+		date is 2019-05-07,
 		license is 'BSD 3-Clause License',
 		comment is 'Convenient learning predicates for use in examples and unit tests.'
 	]).

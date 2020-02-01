@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.01,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2011/09/20,
+		date is 2011-09-20,
 		comment is 'Unit tests for the "shapes_ph" example.'
 	]).
 

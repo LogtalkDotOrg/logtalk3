@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.19,
 		author is 'Paulo Moura',
-		date is 2019/09/23,
+		date is 2019-09-23,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2008/10/12,
+		date is 2008-10-12,
 		comment is 'Generic person.'
 	]).
 
@@ -79,7 +79,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2008/10/12,
+		date is 2008-10-12,
 		comment is 'Teacher person.'
 	]).
 
@@ -116,7 +116,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2008/10/12,
+		date is 2008-10-12,
 		comment is 'Student person.'
 	]).
 
@@ -155,7 +155,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2008/10/12,
+		date is 2008-10-12,
 		comment is 'Person as a parametric object.'
 	]).
 
@@ -174,7 +174,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2008/10/12,
+		date is 2008-10-12,
 		comment is 'Teacher as a parametric object.'
 	]).
 
@@ -196,7 +196,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2008/10/12,
+		date is 2008-10-12,
 		comment is 'Student as a parametric object.'
 	]).
 

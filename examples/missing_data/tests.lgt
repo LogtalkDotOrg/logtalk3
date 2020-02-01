@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/06/10,
+		date is 2018-06-10,
 		comment is 'Unit tests for the "missing_data" example.'
 	]).
 

@@ -30,7 +30,7 @@
 	:- info([
 		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2019/12/02,
+		date is 2019-12-02,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/11/19,
+		date is 2019-11-19,
 		comment is 'An implementation of a priority queue using a threaded engine.'
 	]).
 

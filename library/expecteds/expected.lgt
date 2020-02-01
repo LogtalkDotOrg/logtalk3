@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2020/01/02,
+		date is 2020-01-02,
 		comment is 'Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type ``expected`` for use with the ``type`` library object.'
@@ -189,7 +189,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2020/01/06,
+		date is 2020-01-06,
 		comment is 'Expected term predicates. Requires passing an expected term (constructed using the ``expected`` object predicates) as a parameter.',
 		parnames is ['Expected'],
 		see_also is [expected]

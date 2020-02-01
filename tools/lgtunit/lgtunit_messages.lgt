@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2020/01/06,
+		date is 2020-01-06,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 

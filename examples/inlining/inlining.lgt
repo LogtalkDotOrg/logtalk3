@@ -32,7 +32,7 @@ t(6, 'C', 'C').
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/01/05,
+		date is 2019-01-05,
 		comment is 'Simple object for illustrating and testing inlining of predicate definitions.'
 	]).
 

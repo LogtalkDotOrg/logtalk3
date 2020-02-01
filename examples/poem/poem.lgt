@@ -26,7 +26,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric points.',
 		parnames is ['X', 'Y'],
 		source is 'Example adapted from the POEM system by Ben Staveley-Taylor.'
@@ -64,7 +64,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric lines.',
 		parnames is ['Point1', 'Point2'],
 		source is 'Example adapted from the POEM system by Ben Staveley-Taylor.'
@@ -148,7 +148,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric ellipses.',
 		parnames is ['Center', 'Rx', 'Ry'],
 		source is 'Example adapted from the POEM system by Ben Staveley-Taylor.'
@@ -180,7 +180,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric circles.',
 		parnames is ['Center', 'Radius'],
 		source is 'Example adapted from the POEM system by Ben Staveley-Taylor.'

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/02/15,
+		date is 2017-02-15,
 		comment is 'Unit tests for the set_logtalk_flag/2 built-in predicate.'
 	]).
 

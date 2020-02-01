@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2018-07-11,
 		comment is 'List predicates with elements constrained to a single type.',
 		parnames is ['Type'],
 		see_also is [list, numberlist, varlist, difflist]

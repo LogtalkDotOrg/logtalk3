@@ -30,7 +30,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2019/11/09,
+		date is 2019-11-09,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'

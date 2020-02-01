@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2018/06/29,
+		date is 2018-06-29,
 		comment is 'Unit tests for the representation_error/1 built-in method.'
 	]).
 

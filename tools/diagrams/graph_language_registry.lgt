@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/18,
+		date is 2014-08-18,
 		comment is 'Registry of implemented graph languages.'
 	]).
 

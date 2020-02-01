@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 1998/3/23,
+		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Towers of Hanoi.'
 	]).

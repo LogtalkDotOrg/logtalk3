@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.11,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2011/05/25,
+		date is 2011-05-25,
 		comment is 'Unit tests for the "sicstus" example.'
 	]).
 

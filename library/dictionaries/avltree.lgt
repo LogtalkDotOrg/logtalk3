@@ -45,7 +45,7 @@
 	:- info([
 		version is 1.2,
 		author is 'R.A.O''Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura',
-		date is 2019/05/17,
+		date is 2019-05-17,
 		comment is 'AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [bintree, rbtree]
 	]).

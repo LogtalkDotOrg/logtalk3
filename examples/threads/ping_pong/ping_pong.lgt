@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/11/15,
+		date is 2019-11-15,
 		comment is 'Simple example of two threads playing ping-pong.'
 	]).
 

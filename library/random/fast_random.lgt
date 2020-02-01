@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2019/12/01,
+		date is 2020-02-01,
 		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.'
@@ -76,7 +76,9 @@
 		B1 is (A1*172) mod 30307,
 		B2 is (A2*170) mod 30323,
 		Float is A0/30269 + A1/30307 + A2/30323,
-		Random is Float - truncate(Float).
+		% as some Prolog backends may return Float as an integer or a rational
+		% number, we explicitly convert the value into a float in the next goal
+		Random is float(Float) - truncate(Float).
 
 	between(Lower, Upper, Random) :-
 		integer(Lower),

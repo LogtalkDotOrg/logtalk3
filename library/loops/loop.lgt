@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/03/20,
+		date is 2017-03-20,
 		comment is 'Loop control structures predicates.'
 	]).
 

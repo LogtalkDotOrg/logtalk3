@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.11,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2019/09/23,
+		date is 2019-09-23,
 		comment is 'Number of entity clauses metric. The score is represented using the compound term ``number_of_clauses(Total, User)``.'
 	]).
 

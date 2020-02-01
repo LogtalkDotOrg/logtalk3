@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018/03/03,
+		date is 2018-03-03,
 		comment is 'Unit tests for the "threads/birthdays" example.'
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.33,
 		author is 'Paulo Moura',
-		date is 2019/04/30,
+		date is 2019-04-30,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 

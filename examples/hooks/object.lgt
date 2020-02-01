@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.21,
 		author is pm,
-		date is 2012/08/02,
+		date is 2012-08-02,
 		comment is 'Example object for illustrating the use of compiler hooks.',
 		license is gpl3]).
 

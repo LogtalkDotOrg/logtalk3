@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.2,
-		date is 2019/03/11,
+		date is 2019-03-11,
 		author is 'Paulo Moura',
 		comment is 'Adaptation of the command language DCG example from the Amzi! Prolog manual.'
 	]).

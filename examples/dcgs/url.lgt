@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2003/7/7,
+		date is 2003-7-7,
 		author is 'Paulo Moura',
 		comment is 'Simple example of URL parsing.'
 	]).

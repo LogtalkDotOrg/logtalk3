@@ -64,7 +64,7 @@ send_to_object_test_object(2).
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2020/01/28,
+		date is 2020-01-28,
 		comment is 'Unit tests for the (::)/2 built-in control construct.'
 	]).
 

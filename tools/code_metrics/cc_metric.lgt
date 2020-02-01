@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2018/07/18,
+		date is 2018-07-18,
 		comment is 'Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.'
 	]).
 

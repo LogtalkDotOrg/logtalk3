@@ -109,7 +109,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	:- info([
 		version is 0.4,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2019/10/14,
+		date is 2019-10-14,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/10/12,
+		date is 2015-10-12,
 		comment is 'A simple example of supporting application localization in multiple languages.',
 		parnames is ['CountryCode']
 	]).

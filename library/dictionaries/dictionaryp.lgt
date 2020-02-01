@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2019/05/17,
+		date is 2019-05-17,
 		comment is 'Dictionary protocol.',
 		see_also is [avltree, bintree, rbtree]
 	]).

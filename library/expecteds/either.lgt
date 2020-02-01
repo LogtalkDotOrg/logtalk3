@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2019-11-26,
 		comment is 'Types and predicates for extended type-checking and handling of expected terms.',
 		remarks is [
 			'Type-checking support' - 'Defines a ``either(ValueType, ErrorType)`` type for checking expected terms where the value and error terms must be of the given types.',

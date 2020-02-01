@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paul Crocker',
-		date is 2008/3/18,
+		date is 2008-3-18,
 		comment is 'Default protocol for Numerical Integration.'
 	]).
 
@@ -47,7 +47,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paul Crocker',
-		date is 2013/04/19,
+		date is 2013-04-19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of a single variable.',
 		parameters is ['Threads' - 'Number of threads to use.']
 	]).
@@ -119,7 +119,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paul Crocker',
-		date is 2013/04/19,
+		date is 2013-04-19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of a single variable.',
 		parameters is ['Threads' - 'Number of threads to use.']
 	]).

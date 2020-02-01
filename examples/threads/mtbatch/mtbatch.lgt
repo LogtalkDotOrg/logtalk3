@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2017/08/26,
+		date is 2017-08-26,
 		comment is 'Multi-threading benchmarks. Supports SWI-Prolog, XSB, and YAP.'
 	]).
 

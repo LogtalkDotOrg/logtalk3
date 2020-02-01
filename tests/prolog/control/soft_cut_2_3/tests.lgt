@@ -49,7 +49,7 @@ condition_opaque_to_cut_3(2).
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/02/06,
+		date is 2018-02-06,
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'
 	]).
 

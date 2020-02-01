@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.27,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
@@ -160,7 +160,7 @@
 	:- info([
 		version is 2.01,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating library loading dependency diagrams in DOT format.',
 		see_also is [library_dependency_diagram, file_dependency_diagram, entity_diagram]
 	]).

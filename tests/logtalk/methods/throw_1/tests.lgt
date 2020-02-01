@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/29,
+		date is 2012-12-29,
 		comment is 'Unit tests for the throw/1 built-in method.'
 	]).
 

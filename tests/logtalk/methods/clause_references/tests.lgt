@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/12/24,
+		date is 2019-12-24,
 		comment is 'Unit tests for the database built-in methods that take a clause reference argument.'
 	]).
 

@@ -24,8 +24,14 @@ RELEASE NOTES
 3.36.0 - February ??, 2020
 ==========================
 
+* CHANGED: All dates in `info/1` directives in all source files to the ISO
+8601 standard format, `Year-Month-Day`.
+
 Logtalk compiler and runtime
 ----------------------------
+
+* CHANGED: Accept dates in `info/1` directives in ISO 8601 standard format
+(`Year-Month-Day`).
 
 * FIXED: Generate a compiler error when trying to redefine a built-in method
 using a `uses/2` or `use_module/2` directive.
@@ -34,6 +40,13 @@ using a `uses/2` or `use_module/2` directive.
 clause (usually caused by a call in the body to a module predicate with
 an ambiguous meta-predicate template) would result in a failure instead
 of an error message.
+
+Library
+-------
+
+* IMPROVED: Portability of the `random` library by safe guarding against
+backend Prolog compilers where the `(/)/2` operator may return an integer
+or a rational number depending on proprietary flags.
 
 Tools
 -----
@@ -45,6 +58,12 @@ Examples
 --------
 
 * FIXED: Library name typo preventing loading of the `edcgs` example.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* CHANGED: Code snippets for entities to use the ISO 8601 standard format for
+dates, `Year-Month-Day`, in `info/1` directives.
 
 
 3.35.0 - January 30, 2020

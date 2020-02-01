@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2011/03/13,
+		date is 2011-03-13,
 		comment is 'Hook object for compiling objects and categories using attributed variables.'
 	]).
 

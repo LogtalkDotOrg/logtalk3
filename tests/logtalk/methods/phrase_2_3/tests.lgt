@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018-03-24,
 		comment is 'Unit tests for the phrase/2-3 built-in methods.'
 	]).
 

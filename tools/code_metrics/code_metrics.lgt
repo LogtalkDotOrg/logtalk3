@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2017/12/31,
+		date is 2017-12-31,
 		comment is 'Helper object to apply all loaded code metrics.'
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/03/03,
+		date is 2016-03-03,
 		comment is 'Hook object for the named database predicates.'
 	]).
 

@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2008/01/10,
+		date is 2008-01-10,
 		comment is 'Simple test of the encoding/1 directive.'
 	]).
 

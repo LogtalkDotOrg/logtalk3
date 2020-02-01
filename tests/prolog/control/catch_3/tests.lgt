@@ -47,7 +47,7 @@ p :-
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/04/02,
+		date is 2015-04-02,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 built-in predicate.'
 	]).
 

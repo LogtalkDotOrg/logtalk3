@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2008/10/2,
+		date is 2008-10-2,
 		author is 'Paulo Moura',
 		comment is 'Simple meta-interpreter for pure Prolog with only conjunctions as clause bodies.'
 	]).
@@ -53,7 +53,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2008/10/2,
+		date is 2008-10-2,
 		author is 'Paulo Moura',
 		comment is 'Meta-interpreter for pure Prolog with only conjunctions as clause bodies.'
 	]).
@@ -84,7 +84,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2008/10/2,
+		date is 2008-10-2,
 		author is 'Paulo Moura',
 		comment is 'A simple tracer meta-interpreter for pure Prolog with only conjunctions as clause bodies.'
 	]).

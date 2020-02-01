@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2011/07/02,
+		date is 2011-07-02,
 		comment is 'Coinduction example of filtering a coinductive list.'
 	]).
 

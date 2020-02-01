@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/11/19,
+		date is 2017-11-19,
 		comment is 'Unit tests for the existence_error/2 built-in method.'
 	]).
 

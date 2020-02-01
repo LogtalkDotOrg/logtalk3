@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/26,
+		date is 2014-04-26,
 		comment is 'Basic temporal interval relations protocol (based on James F. Allen Interval Algebra work).',
 		see_also is [interval]
 	]).

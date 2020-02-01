@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.2,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2012/09/11,
+		date is 2012-09-11,
 		comment is 'Coinductive infinite list predicates example.'
 	]).
 

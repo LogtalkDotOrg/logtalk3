@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2019/12/02,
+		date is 2019-12-02,
 		comment is 'Predicates for calling goal with a time limit.',
 		remarks is [
 			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, XSB, and YAP.'

@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.4,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2018/02/18,
+		date is 2018-02-18,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 

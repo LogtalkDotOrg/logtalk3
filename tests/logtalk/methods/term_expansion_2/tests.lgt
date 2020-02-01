@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2015/10/28,
+		date is 2015-10-28,
 		comment is 'Unit tests for the term_expansion/2 user-defined hook predicate.'
 	]).
 

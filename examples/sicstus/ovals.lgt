@@ -23,7 +23,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Implements predicates for retrieving common mathematical constants.'
 	]).
 
@@ -48,7 +48,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.2,
-		date is 2019/05/02,
+		date is 2019-05-02,
 		comment is 'Parametric object for representing geometric ellipses.',
 		parnames is ['RX', 'RY', 'Color'],
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -119,7 +119,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.1,
-		date is 2019/05/02,
+		date is 2019-05-02,
 		comment is 'Parametric object for representing geometric circles.',
 		parnames is ['Radius', 'Color'],
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -152,7 +152,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric circles with radius = 1.',
 		parnames is ['Color'],
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -174,7 +174,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric red circles.',
 		parnames is ['Radius'],
 		source is 'Example adapted from the SICStus Objects documentation.'

@@ -39,7 +39,7 @@ foobaz.
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/28,
+		date is 2018-03-28,
 		comment is 'Unit tests for the clause/2 built-in method.'
 	]).
 

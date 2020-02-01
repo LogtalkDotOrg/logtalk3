@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2018/06/18,
+		date is 2018-06-18,
 		comment is 'Prolog term utility predicates.'
 	]).
 

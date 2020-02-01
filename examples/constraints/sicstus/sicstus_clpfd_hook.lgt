@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2013/09/23,
+		date is 2013-09-23,
 		comment is 'Hook object for compiling objects and categories containing CLP(FD) code when using SICStus Prolog.'
 	]).
 

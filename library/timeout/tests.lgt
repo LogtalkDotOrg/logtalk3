@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2019/12/02,
+		date is 2019-12-02,
 		comment is 'Unit tests for the "timeout" library.'
 	]).
 

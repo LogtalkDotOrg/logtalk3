@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/10/03,
+		date is 2017-10-03,
 		comment is 'Statistical calculations over a list of numbers protocol.',
 		see_also is [statistics, sample, population]
 	]).

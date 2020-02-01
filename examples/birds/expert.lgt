@@ -24,7 +24,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.2,
-		date is 2018/09/24,
+		date is 2018-09-24,
 		comment is 'Expert system for bird identification.',
 		source is 'Example adapted from an Amzi! Inc Prolog book.'
 	]).

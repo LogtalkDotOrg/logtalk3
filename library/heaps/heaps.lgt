@@ -66,7 +66,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
-		date is 2019/05/18,
+		date is 2019-05-18,
 		comment is 'Heap implementation, parameterized by the order to be used to compare keys (``<`` or ``>``).',
 		parnames is ['Order'],
 		see_also is [minheap, maxheap]
@@ -214,7 +214,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura.',
-		date is 2010/02/19,
+		date is 2010-02-19,
 		comment is 'Min-heap implementation. Uses standard order to compare keys.'
 	]).
 
@@ -227,7 +227,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura.',
-		date is 2010/02/19,
+		date is 2010-02-19,
 		comment is 'Max-heap implementation. Uses standard order to compare keys.'
 	]).
 

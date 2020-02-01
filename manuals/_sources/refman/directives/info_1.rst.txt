@@ -48,7 +48,7 @@ Examples
    :- info([
        version is 1.0,
        author is 'Paulo Moura',
-       date is 2000/4/20,
+       date is 2000-11-20,
        comment is 'List protocol.'
    ]).
 

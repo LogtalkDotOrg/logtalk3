@@ -31,7 +31,7 @@ the three objects below with their instantiation and specialization relations.
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Inheritance root for all objects.'
 	]).
 
@@ -65,7 +65,7 @@ the three objects below with their instantiation and specialization relations.
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Instantiation root and default metaclass for all classes.'
 	]).
 
@@ -109,7 +109,7 @@ the three objects below with their instantiation and specialization relations.
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is 'Default metaclass for all abstract classes.'
 	]).
 

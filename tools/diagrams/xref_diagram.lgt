@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.61,
 		author is 'Paulo Moura',
-		date is 2019/10/22,
+		date is 2019-10-22,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -749,7 +749,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/01,
+		date is 2014-01-01,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams in DOT format.',
 		see_also is [entity_diagram, inheritance_diagram, uses_diagram]
 	]).

@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.02,
 		author is 'David Matuszek, Villanova University. Adapted to Logtalk by Paulo Moura.',
-		date is 2019/03/11,
+		date is 2019-03-11,
 		comment is 'Sleepy - A Sample Adventure Game.'
 	]).
 

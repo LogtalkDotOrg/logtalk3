@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.2,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2013/03/06,
+		date is 2013-03-06,
 		comment is 'Module four counter coinductive example.'
 	]).
 

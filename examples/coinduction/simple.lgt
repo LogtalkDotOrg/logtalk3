@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.2,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2010/08/31,
+		date is 2010-08-31,
 		comment is 'Elementary coinduction predicate example.'
 	]).
 

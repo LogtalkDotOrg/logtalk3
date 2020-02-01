@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/04/30,
+		date is 2014-04-30,
 		comment is 'Unit tests for the findall/3 built-in method.'
 	]).
 

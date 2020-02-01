@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2018/05/23,
+		date is 2018-05-23,
 		comment is 'Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.'
 	]).
 
@@ -77,7 +77,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/10/16,
+		date is 2017-10-16,
 		comment is 'Abstract interface to Java utility predicates.'
 	]).
 

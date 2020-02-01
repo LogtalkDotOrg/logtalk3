@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2005/3/17,
+		date is 2005-3-17,
 		comment is 'Date protocol.',
 		see_also is [date, timep]
 	]).

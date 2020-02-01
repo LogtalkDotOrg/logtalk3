@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.9,
 		author is 'Paulo Moura',
-		date is 2019/12/01,
+		date is 2019-12-01,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).

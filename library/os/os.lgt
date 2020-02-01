@@ -42,7 +42,7 @@
 	:- info([
 		version is 1.56,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2019-11-26,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',

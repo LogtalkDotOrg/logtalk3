@@ -23,7 +23,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
 	]).
@@ -41,7 +41,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
 	]).
@@ -100,7 +100,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
 	]).
@@ -174,7 +174,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.1,
-		date is 2013/04/23,
+		date is 2013-04-23,
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
 	]).
@@ -210,7 +210,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
 	]).
@@ -252,7 +252,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2000/4/22,
+		date is 2000-4-22,
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
 	]).

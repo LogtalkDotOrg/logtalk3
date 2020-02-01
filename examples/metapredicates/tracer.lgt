@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2006/9/17,
+		date is 2006-9-17,
 		comment is 'Tracer for a goal call, exit, and fail ports.'
 	]).
 
@@ -62,7 +62,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/04/23,
+		date is 2013-04-23,
 		comment is 'List sorting parameterized by the type of the list elements.'
 	]).
 

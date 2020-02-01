@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2011/04/03,
+		date is 2011-04-03,
 		comment is 'Takeuchi function (recursive arithmetic).',
 		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 3, 9, 27, 81, etc.']
 	]).

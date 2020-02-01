@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paul Crocker',
-		date is 2008/2/14,
+		date is 2008-2-14,
 		comment is 'Simple object defining a predicate for generating lists of random complex numbers.'
 	]).
 

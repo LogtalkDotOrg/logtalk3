@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.01,
-		date is 2008/2/13,
+		date is 2008-2-13,
 		author is 'Paul Crocker, adapted from original code by Colin Barker',
 		comment is 'Simple multi-threaded version of the Fast Fourier Transform.',
 		source is 'Original code available from http://pagesperso-orange.fr/colin.barker/lpa/fft.htm',

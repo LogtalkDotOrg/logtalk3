@@ -10,7 +10,7 @@
 	:- info([
 		version is 1.0,
 		author is '$TM_FULLNAME',
-		date is `date +%Y/%m/%d`,
+		date is `date +%Y-%m-%d`,
 		comment is '${3:Description}'
 	]).
 

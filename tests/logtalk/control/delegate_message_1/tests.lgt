@@ -76,7 +76,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/03/26,
+		date is 2018-03-26,
 		comment is 'Unit tests for the []/1 built-in control construct.'
 	]).
 

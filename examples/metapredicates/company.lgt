@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2010/12/20,
+		date is 2010-12-20,
 		author is 'Ralf Lammel; adapted to Logtalk by Paulo Moura.',
 		comment is 'Example of using the map_reduce/5 meta-predicate.',
 		source is 'Example adapted from the paper "Scrap Your Boilerplate-Prologically!", PPDP 2009 Invited Talk.'

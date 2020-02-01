@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2018/07/15,
+		date is 2018-07-15,
 		comment is 'Floating point numbers data type predicates.'
 	]).
 

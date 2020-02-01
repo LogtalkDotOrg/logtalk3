@@ -106,7 +106,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2005/9/5,
+		date is 2005-9-5,
 		comment is 'Dates as parametric objects.',
 		parnames is ['Year', 'Month', 'Day']
 	]).
@@ -174,7 +174,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2005/9/5,
+		date is 2005-9-5,
 		comment is 'Time as parametric objects.',
 		parnames is ['Hours', 'Mins', 'Secs']
 	]).
@@ -239,7 +239,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2005/9/5,
+		date is 2005-9-5,
 		comment is 'A simple implementation of a geometric rectangle using parametric objects.',
 		parnames is ['Width', 'Height', 'X', 'Y']
 	]).
@@ -321,7 +321,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2007/6/19,
+		date is 2007-6-19,
 		comment is 'A simple representation for persons data using parametric objects.',
 		parnames is ['Name', 'Age']
 	]).
@@ -357,7 +357,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2007/6/19,
+		date is 2007-6-19,
 		comment is 'A simple representation for employees data using parametric objects.',
 		parnames is ['Name', 'Age', 'Salary']
 	]).
@@ -398,7 +398,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2010/02/17,
+		date is 2010-02-17,
 		comment is 'Dress advice according to the season.',
 		parnames is ['Season']
 	]).
@@ -422,7 +422,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2010/02/17,
+		date is 2010-02-17,
 		comment is 'Speech advice according to the event.',
 		parnames is ['Event']
 	]).
@@ -445,7 +445,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/14,
+		date is 2014-08-14,
 		comment is 'Speech and dress advice according to the season and the event.',
 		parnames is ['Season', 'Event']
 	]).

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/15,
+		date is 2016-06-15,
 		comment is 'Unit tests for the threaded_engine_next/2 built-in predicate.'
 	]).
 

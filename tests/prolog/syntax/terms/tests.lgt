@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/07,
+		date is 2014-11-07,
 		comment is 'Unit tests for the ISO Prolog term syntax.'
 	]).
 

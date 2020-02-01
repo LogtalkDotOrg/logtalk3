@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2019/04/07,
+		date is 2019-04-07,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 

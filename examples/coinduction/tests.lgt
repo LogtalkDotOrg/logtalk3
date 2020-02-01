@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2013/03/02,
+		date is 2013-03-02,
 		comment is 'Unit tests for the "coinduction" example.'
 	]).
 

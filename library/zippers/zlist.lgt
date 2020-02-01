@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2019/03/12,
+		date is 2019-03-12,
 		comment is 'Zipper list predicates. Zippers should be regarded as opaque terms.'
 	]).
 

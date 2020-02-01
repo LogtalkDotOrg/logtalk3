@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2008/04/09,
+		date is 2008-04-09,
 		comment is 'Compiler hook support for activating debug statements.'
 	]).
 
@@ -42,7 +42,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2008/4/9,
+		date is 2008-4-9,
 		comment is 'Compiler hook support for discarding debug statements.'
 	]).
 
@@ -62,7 +62,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2010/04/15,
+		date is 2010-04-15,
 		comment is 'Expands debug/1 calls. The parameter Mode can be either the atom "debug" or "production".',
 		parnames is ['Mode']
 	]).

@@ -40,7 +40,7 @@
 	:- info([
 		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2019/05/07,
+		date is 2019-05-07,
 		comment is 'Unit tests for the "metagol" example.'
 	]).
 

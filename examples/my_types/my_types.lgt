@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/14,
+		date is 2016-08-14,
 		comment is 'A simple example of extending the "type" library object with a new type definition.'
 	]).
 

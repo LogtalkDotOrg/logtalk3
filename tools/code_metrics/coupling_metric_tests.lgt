@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2018/03/20,
+		date is 2018-03-20,
 		comment is 'Unit tests for entity coupling code metric.'
 	]).
 

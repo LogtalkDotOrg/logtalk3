@@ -30,7 +30,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2015-05-05,
 		comment is 'Unit tests for the ISO Prolog standard asserta/1 built-in predicate.'
 	]).
 

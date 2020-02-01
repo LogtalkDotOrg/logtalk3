@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.12,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/07/17,
+		date is 2018-07-17,
 		comment is 'Computes entity efferent coupling, afferent coupling, and instability.',
 		remarks is [
 			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',

@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.32,
 		author is 'Paulo Moura',
-		date is 20120/01/21,
+		date is 2020-01-21,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'

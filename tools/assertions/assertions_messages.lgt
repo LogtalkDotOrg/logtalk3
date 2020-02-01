@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2018/02/20,
+		date is 2018-02-20,
 		comment is 'Assertions framework default message translations.'
 	]).
 

@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.01,
-		date is 2010/03/29,
+		date is 2010-03-29,
 		author is 'Paulo Moura',
 		comment is 'Test cases for the Logtalk DCG translator.'
 	]).

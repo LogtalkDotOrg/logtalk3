@@ -24,7 +24,7 @@
 
 	:- info([
 		version is 1.2,
-		date is 2012/10/25,
+		date is 2012-10-25,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point class.',
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -74,7 +74,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 1998/3/23,
+		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Point coordinate bounds management predicates.',
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -141,7 +141,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2000/10/31,
+		date is 2000-10-31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point moving in a constrained area.',
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -177,7 +177,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 1998/3/23,
+		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Point position history management predicates.',
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -227,7 +227,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2000/10/31,
+		date is 2000-10-31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point remembering past positions.',
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -264,7 +264,7 @@
 
 	:- info([
 		version is 1.1,
-		date is 2000/10/31,
+		date is 2000-10-31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point moving in a constrained area and remembering past point positions.',
 		source is 'Example adapted from the SICStus Objects documentation.'

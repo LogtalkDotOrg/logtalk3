@@ -27,7 +27,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2003/2/3,
+		date is 2003-2-3,
 		comment is 'Generic geometric shape.'
 	]).
 
@@ -63,7 +63,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.1,
-		date is 2004/1/8,
+		date is 2004-1-8,
 		comment is 'Generic polygon.'
 	]).
 
@@ -100,7 +100,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.1,
-		date is 2004/1/8,
+		date is 2004-1-8,
 		comment is 'Generic regular polygon.'
 	]).
 
@@ -131,7 +131,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2003/2/3,
+		date is 2003-2-3,
 		comment is 'Geometric square.'
 	]).
 

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/02/13,
+		date is 2019-02-13,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 

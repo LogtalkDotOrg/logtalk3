@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/06/30,
+		date is 2017-06-30,
 		comment is 'Unit tests for the if/1 and other conditional compilation built-in directives.'
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/01/20,
+		date is 2019-01-20,
 		comment is 'Unit tests for the "zippers" library.'
 	]).
 

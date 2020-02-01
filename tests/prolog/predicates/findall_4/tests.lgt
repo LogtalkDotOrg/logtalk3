@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/06/26,
+		date is 2019-06-26,
 		comment is 'Unit tests for the de facto Prolog standard findall/4 built-in predicate.'
 	]).
 

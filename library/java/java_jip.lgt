@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/06/11,
+		date is 2019-06-11,
 		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
 		parnames is ['Reference', 'ReturnValue']
 	]).
@@ -85,7 +85,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/09/22,
+		date is 2016-09-22,
 		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
 		parnames is ['Reference']
 	]).
@@ -99,7 +99,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/10/16,
+		date is 2017-10-16,
 		comment is 'Abstract interface to JIProlog API utility predicates.'
 	]).
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2017/12/28,
+		date is 2017-12-28,
 		comment is 'Unit tests for the code documentation metric.'
 	]).
 

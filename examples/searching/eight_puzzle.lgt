@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2004/8/15,
+		date is 2004-8-15,
 		comment is 'Eight puzzle heuristic state space search problem.'
 	]).
 

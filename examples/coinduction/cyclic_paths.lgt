@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2011/06/24,
+		date is 2011-06-24,
 		comment is 'Coinduction example of finding the cyclic paths in a graph.'
 	]).
 
@@ -48,7 +48,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2011/06/24,
+		date is 2011-06-24,
 		comment is 'Coinduction example of finding the cyclic paths in a graph.'
 	]).
 
@@ -73,7 +73,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura. Derived from a Gopal Gupta et al example.',
-		date is 2013/03/06,
+		date is 2013-03-06,
 		comment is 'Coinduction example of finding the cyclic paths in a graph.'
 	]).
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 1998/3/23,
+		date is 1998-3-23,
 		comment is 'Blind search state space strategies.',
 		parnames is ['Bound']
 	]).

@@ -33,7 +33,7 @@ insect(bee).
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2015-05-05,
 		comment is 'Unit tests for the ISO Prolog standard retractall/1 built-in predicate.'
 	]).
 

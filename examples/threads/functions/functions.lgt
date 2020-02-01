@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura and Paulo Nunes',
-		date is 2006/11/26,
+		date is 2006-11-26,
 		comment is 'Default protocol for root find algorithms.'
 	]).
 
@@ -43,7 +43,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura and Paulo Nunes',
-		date is 2006/11/26,
+		date is 2006-11-26,
 		comment is 'Default protocol for real functions of a single real variable.'
 	]).
 
@@ -151,7 +151,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura and Paulo Nunes',
-		date is 2008/2/4,
+		date is 2008-2-4,
 		comment is 'Bisection algorithm.'
 	]).
 
@@ -190,7 +190,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paul Crocker... No More Coffee',
-		date is 2007/07/06,
+		date is 2007-07-06,
 		comment is 'Newton algorithm.'
 	]).
 
@@ -217,7 +217,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura and Paulo Nunes',
-		date is 2006/11/26,
+		date is 2006-11-26,
 		comment is 'Muller algorithm.'
 	]).
 
@@ -272,7 +272,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura and Paulo Nunes',
-		date is 2008/02/08,
+		date is 2008-02-08,
 		comment is 'Multi-threading interface to root finding algorithms.'
 	]).
 

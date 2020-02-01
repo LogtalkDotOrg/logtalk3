@@ -24,7 +24,7 @@
 	:- info([
 		version is 4.1,
 		author is 'Paulo Moura',
-		date is 2013/04/19,
+		date is 2013-04-19,
 		comment is 'Example object for benchmarking library predicate calls and imported category predicate calls.'
 	]).
 
@@ -80,7 +80,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2007/04/17,
+		date is 2007-04-17,
 		comment is 'Example object used for simulating a small hierarchy.'
 	]).
 
@@ -93,7 +93,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2007/04/17,
+		date is 2007-04-17,
 		comment is 'Example object used for simulating a small hierarchy.'
 	]).
 

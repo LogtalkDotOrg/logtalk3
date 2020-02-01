@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2018/12/17,
+		date is 2018-12-17,
 		comment is 'Simple object for testing passing a dict as the object parameter.'
 	]).
 

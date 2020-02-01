@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/02/08,
+		date is 2018-02-08,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 

@@ -32,7 +32,7 @@ comment
 	:- info([
 		version is 1.47,
 		author is 'Paulo Moura',
-		date is 2019/09/18,
+		date is 2019-09-18,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/07/12,
+		date is 2016-07-12,
 		comment is 'Term and goal expansion protocol.'
 	]).
 

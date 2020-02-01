@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2004/5/11,
+		date is 2004-5-11,
 		author is 'Paulo Moura',
 		comment is 'Adaptation of the bill of materials DCG example from the Amzi! Prolog manual.'
 	]).

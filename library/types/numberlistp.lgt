@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2019/03/02,
+		date is 2019-03-02,
 		comment is 'List of numbers protocol.',
 		see_also is [numberlist, listp, varlistp]
 	]).

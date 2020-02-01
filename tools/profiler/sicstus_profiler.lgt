@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2018/07/12,
+		date is 2018-07-12,
 		comment is 'Simple wrapper for the SICStus Prolog profiler.'
 	]).
 

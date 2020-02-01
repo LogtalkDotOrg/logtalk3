@@ -48,7 +48,7 @@ Published on the web:
 
 	:- info([
 		version is 1.0,
-		date is 2008/10/28,
+		date is 2008-10-28,
 		author is 'Paulo Moura',
 		comment is 'Who Stole the cake logical puzzle by Kevin Stone',
 		source is 'http://www.brainbashers.com/showpuzzles.asp?puzzle=ZFSC'

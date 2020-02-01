@@ -35,7 +35,7 @@
 	:- info([
 		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2019/06/10,
+		date is 2019-06-10,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',

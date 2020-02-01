@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Ivan Bratko; adapted to Logtalk by Paulo Moura.',
-		date is 2013/05/10,
+		date is 2013-05-10,
 		comment is 'Breadth first state space search strategy.',
 		source is 'Code adapted from the book "Prolog Programming for Artificial Intelligence" by Ivan Bratko.',
 		parnames is ['Bound']

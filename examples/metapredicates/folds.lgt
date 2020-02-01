@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2018/08/20,
+		date is 2018-08-20,
 		author is 'Paulo Moura',
 		comment is 'Usage examples of the folds meta-predicates.'
 	]).

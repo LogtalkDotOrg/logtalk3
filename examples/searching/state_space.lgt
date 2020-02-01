@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2008/6/9,
+		date is 2008-6-9,
 		comment is 'State space description predicates.'
 	]).
 

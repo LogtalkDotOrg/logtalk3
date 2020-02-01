@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/06/29,
+		date is 2019-06-29,
 		comment is 'Character protocol.',
 		see_also is [character]
 	]).

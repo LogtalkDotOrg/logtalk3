@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/10/15,
+		date is 2013-10-15,
 		comment is 'Unit tests for the "threads/buckets" example.'
 	]).
 

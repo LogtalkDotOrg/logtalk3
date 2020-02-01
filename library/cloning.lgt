@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2010/09/14,
+		date is 2010-09-14,
 		comment is 'Object cloning protocol.'
 	]).
 

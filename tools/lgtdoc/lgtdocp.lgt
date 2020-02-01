@@ -23,7 +23,7 @@
 	:- info([
 		version is 3.3,
 		author is 'Paulo Moura',
-		date is 2019/11/26,
+		date is 2019-11-26,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the ``source_data`` flag turned on.',

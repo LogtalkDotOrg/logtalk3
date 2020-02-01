@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/03/28,
+		date is 2018-03-28,
 		comment is 'Unit tests for the asserta/1 built-in method.'
 	]).
 

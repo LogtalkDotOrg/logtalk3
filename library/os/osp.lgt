@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.25,
 		author is 'Paulo Moura',
-		date is 2019/11/18,
+		date is 2019-11-18,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os, os_types]
 	]).

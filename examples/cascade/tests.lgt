@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/12/30,
+		date is 2019-12-30,
 		comment is 'Unit tests for the "cascade" example.'
 	]).
 

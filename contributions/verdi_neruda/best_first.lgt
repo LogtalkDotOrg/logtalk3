@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Victor Lagerkvist',
-		date is 2019/03/08,
+		date is 2019-03-08,
 		comment is 'Best-first framework for general logic programs.'
 	]).
 

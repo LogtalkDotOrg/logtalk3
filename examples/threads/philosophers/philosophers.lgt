@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2007/3/19,
+		date is 2007-3-19,
 		comment is 'Dining philosophers problem: chopstick representation.'
 	]).
 
@@ -102,7 +102,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/02/09,
+		date is 2013-02-09,
 		comment is 'Dining philosophers ptotocol.'
 	]).
 
@@ -137,7 +137,7 @@
 	:- info([
 		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2013/02/09,
+		date is 2013-02-09,
 		comment is 'Dining philosophers problem: philosopher representation.'
 	]).
 
@@ -246,7 +246,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2013/02/09,
+		date is 2013-02-09,
 		comment is 'Dining philosophers problem: philosopher representation.'
 	]).
 

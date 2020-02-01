@@ -31,7 +31,7 @@ a(3).
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/01/19,
+		date is 2018-01-19,
 		comment is 'Unit tests for the de facto Prolog standard forall/2 built-in predicate.'
 	]).
 

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/12/19,
+		date is 2018-12-19,
 		comment is 'Simple example of serialization of dynamic objects.'
 	]).
 

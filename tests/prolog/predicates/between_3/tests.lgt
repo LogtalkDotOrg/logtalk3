@@ -29,7 +29,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/10/07,
+		date is 2017-10-07,
 		comment is 'Unit tests for the de facto Prolog standard between/3 built-in predicate.'
 	]).
 

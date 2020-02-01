@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2018/02/28,
+		date is 2018-02-28,
 		comment is 'Unit tests for the "ports_profiler" tool.'
 	]).
 

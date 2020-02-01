@@ -30,7 +30,7 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 	:- info([
 		version is 1.01,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2019/06/10,
+		date is 2019-06-10,
 		comment is 'Assignable variables (supporting backtracable assignment of non-variable terms) protocol.',
 		see_also is [assignvars]
 	]).

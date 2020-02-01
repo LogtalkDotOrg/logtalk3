@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/11/01,
+		date is 2019-11-01,
 		comment is 'Unit tests for the multifile/1 built-in directive.'
 	]).
 

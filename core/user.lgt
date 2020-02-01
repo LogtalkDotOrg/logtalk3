@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/05/24,
+		date is 2018-05-24,
 		comment is 'Pseudo-object ``user`` representing the plain Prolog database.'
 	]).
 

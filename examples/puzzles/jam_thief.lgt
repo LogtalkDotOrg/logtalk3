@@ -34,7 +34,7 @@ Assuming, as we do, that fairy-tale characters either always lie or always tell 
 
 	:- info([
 		version is 1.01,
-		date is 2019/03/08,
+		date is 2019-03-08,
 		author is 'Paulo Moura',
 		comment is 'Who Stole the Jam logical puzzle'
 	]).

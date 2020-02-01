@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.11,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2019/10/09,
+		date is 2019-10-09,
 		comment is 'Unit tests for the entity number of clauses metric.'
 	]).
 

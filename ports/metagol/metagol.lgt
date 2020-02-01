@@ -40,7 +40,7 @@
 	:- info([
 		version is 0.24,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2019/05/08,
+		date is 2019-05-08,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'

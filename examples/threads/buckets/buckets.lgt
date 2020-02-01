@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/12/13,
+		date is 2017-12-13,
 		comment is 'Example of atomic updates as described in the corresponding Rosetta Code task.'
 	]).
 

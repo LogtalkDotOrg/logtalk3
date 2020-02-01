@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.12,
 		author is 'Paulo Moura',
-		date is 2019/09/23,
+		date is 2019-09-23,
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
 			'Score range' - 'Score is a integer percentage where a 100% score means that all expected documentation information is present.',

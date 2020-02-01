@@ -8,7 +8,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -41,7 +41,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -58,7 +58,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -77,7 +77,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -94,7 +94,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -112,7 +112,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -130,7 +130,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -148,7 +148,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -168,7 +168,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is '${6:Description'
 	]).
 
@@ -185,7 +185,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -203,7 +203,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -221,7 +221,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -240,7 +240,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -256,7 +256,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -273,7 +273,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -289,7 +289,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -306,7 +306,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -323,7 +323,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 
@@ -341,7 +341,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Author',
-		date is Year/Month/Day,
+		date is Year-Month-Day,
 		comment is 'Description'
 	]).
 

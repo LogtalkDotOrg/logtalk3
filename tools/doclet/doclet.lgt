@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2017/01/05,
+		date is 2017-01-05,
 		comment is 'Utility object to help automate (re)generating documentation for a project.',
 		see_also is [lgtdocp, diagram(_)]
 	]).

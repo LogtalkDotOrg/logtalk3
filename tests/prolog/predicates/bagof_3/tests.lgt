@@ -43,7 +43,7 @@ c(3, c, 'C').
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/08/25,
+		date is 2015-08-25,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 

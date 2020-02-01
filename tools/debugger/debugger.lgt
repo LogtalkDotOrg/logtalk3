@@ -24,7 +24,7 @@
 	:- info([
 		version is 4.2,
 		author is 'Paulo Moura',
-		date is 2019/12/03,
+		date is 2019-12-03,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2019/05/23,
+		date is 2019-05-23,
 		comment is 'Unit tests for the "statistics" library.'
 	]).
 

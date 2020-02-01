@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2018/07/18,
+		date is 2018-07-18,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		parameters is ['Stroud' - 'Coefficient for computing the time required to program.'],
 		remarks is [
@@ -190,7 +190,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/06/08,
+		date is 2018-06-08,
 		comment is 'Computes Halstead complexity numbers for an entity using a Stroud of 18.'
 	]).
 

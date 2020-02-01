@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/12/08,
+		date is 2014-12-08,
 		comment is 'Unit tests for the protocol/2 opening directive.'
 	]).
 

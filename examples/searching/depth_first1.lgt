@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2013/05/10,
+		date is 2013-05-10,
 		comment is 'Depth first state space search strategy.',
 		parnames is ['Bound']
 	]).

@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.2,
 		author is 'Sean Charles. Adapted to Logtalk by Paulo Moura',
-		date is 2020/01/25,
+		date is 2020-01-25,
 		comment is 'Unit tests for the "redis" library.'
 	]).
 

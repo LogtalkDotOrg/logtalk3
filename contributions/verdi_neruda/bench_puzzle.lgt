@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Victor Lagerkvist',
-		date is 2010/06/13,
+		date is 2010-06-13,
 		comment is 'A simple database for solving the mu-puzzle from GEB.'
 	]).
 

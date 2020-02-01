@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/09/08,
+		date is 2014-09-08,
 		comment is 'Unit tests for the setof/3 built-in method.'
 	]).
 

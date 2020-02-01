@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/02/20,
+		date is 2018-02-20,
 		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate.'
 	]).
 

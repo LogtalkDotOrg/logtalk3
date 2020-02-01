@@ -5,7 +5,7 @@
 	:- info([
 		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Common predicates for generating file diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).

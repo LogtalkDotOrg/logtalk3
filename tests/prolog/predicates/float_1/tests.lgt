@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/02/10,
+		date is 2018-02-10,
 		comment is 'Unit tests for the ISO Prolog standard float/1 built-in predicate.'
 	]).
 

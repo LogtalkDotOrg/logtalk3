@@ -28,7 +28,7 @@
 	:- info([
 		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/05/23,
+		date is 2018-05-23,
 		comment is 'Some benchmarks for the "jpl" example.'
 	]).
 

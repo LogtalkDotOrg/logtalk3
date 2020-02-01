@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 36, 0, b01)).
+'$lgt_version_data'(logtalk(3, 36, 0, b02)).
 
 
 
@@ -11365,7 +11365,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_entity_info_directive_pair'(date, Date, date(Date)) :-
 	!,
-	(	Date = Year/Month/Day ->
+	(	Date = Year-Month-Day ->
+		% ISO 8601 standard format
+		'$lgt_check'(integer, Year),
+		'$lgt_check'(integer, Month),
+		'$lgt_check'(integer, Day)
+	;	Date = Year/Month/Day ->
+		% deprecated format
 		'$lgt_check'(integer, Year),
 		'$lgt_check'(integer, Month),
 		'$lgt_check'(integer, Day)

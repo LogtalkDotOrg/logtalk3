@@ -23,7 +23,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.1,
-		date is 2019/05/02,
+		date is 2019-05-02,
 		comment is 'Parametric object for representing geometric rectangles.',
 		parnames is ['Width', 'Height']
 	]).
@@ -67,7 +67,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.1,
-		date is 2019/05/02,
+		date is 2019-05-02,
 		comment is 'Parametric object for representing geometric squares.',
 		parnames is ['Side']
 	]).

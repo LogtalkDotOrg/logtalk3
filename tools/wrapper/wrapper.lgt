@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.11,
 		author is 'Paulo Moura',
-		date is 2019/03/08,
+		date is 2019-03-08,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is ``[''.pl'',''.pro'',''.prolog'']``)',

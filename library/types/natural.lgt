@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2009/3/6,
+		date is 2009-3-6,
 		comment is 'Natural numbers data type predicates.'
 	]).
 

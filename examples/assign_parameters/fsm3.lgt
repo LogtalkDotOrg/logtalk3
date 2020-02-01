@@ -36,7 +36,7 @@ fsm([red-0-red, red-1-green, red-2-red,
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/08/02,
+		date is 2015-08-02,
 		comment is 'A simple implementation of finite-state machines using assignable variables and parametric objects. Adapted from a similar example by Nobukuni Kino.',
 		parnames is ['Transitions', 'Initial state', 'Final states']
 	]).

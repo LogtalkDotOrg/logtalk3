@@ -4,7 +4,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/10/04,
+		date is 2016-10-04,
 		comment is 'Rewrite compiler error and warnings messages for Sublime Text builds.'
 	]).
 

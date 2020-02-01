@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2009/10/8,
+		date is 2009-10-8,
 		comment is 'Before and after events registry predicates.'
 	]).
 

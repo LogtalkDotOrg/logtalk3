@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2019/06/17,
+		date is 2019-06-17,
 		comment is 'A simple assertions framework. Can be used as a hook object for either suppressing assertions (``production`` mode) or expanding them with file context information (``debug`` mode).',
 		parnames is ['Mode']
 	]).
@@ -100,7 +100,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/03,
+		date is 2014-04-03,
 		comment is 'Proxy object for simplifying the use of the assertion meta-predicates.'
 	]).
 

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/05/23,
+		date is 2019-05-23,
 		comment is 'Queue protocol.',
 		see_also is [queue]
 	]).

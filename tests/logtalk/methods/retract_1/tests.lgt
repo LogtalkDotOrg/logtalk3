@@ -33,7 +33,7 @@ baz(1). baz(2).
 	:- info([
 		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/07/25,
+		date is 2018-07-25,
 		comment is 'Unit tests for the retract/1 built-in method.'
 	]).
 

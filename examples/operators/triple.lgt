@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/06/21,
+		date is 2017-06-21,
 		comment is 'Read and asserts a simple table of facts from a file for testing operator handling code.'
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2019/01/14,
+		date is 2019-01-14,
 		comment is 'Hill climbing heuristic state space search strategy.',
 		parnames is ['Threshold']
 	]).

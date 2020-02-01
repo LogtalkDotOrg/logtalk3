@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/03/05,
+		date is 2019-03-05,
 		comment is 'Unit tests for the goal_expansion/2 user-defined hook predicate.'
 	]).
 

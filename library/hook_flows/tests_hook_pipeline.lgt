@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/05/27,
+		date is 2019-05-27,
 		comment is 'Unit tests for the "hook_flows" library hook_pipeline/1 object.'
 	]).
 

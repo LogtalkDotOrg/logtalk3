@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/01/05,
+		date is 2017-01-05,
 		comment is 'Unit tests for the logtalk_library_path/2 built-in predicate.'
 	]).
 

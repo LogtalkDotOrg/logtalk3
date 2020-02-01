@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/12/12,
+		date is 2017-12-12,
 		comment is 'Example of a doclet object generating linking diagrams using the zoom/1 option.'
 	]).
 

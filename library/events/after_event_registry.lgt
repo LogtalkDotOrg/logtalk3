@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2009/10/8,
+		date is 2009-10-8,
 		comment is 'After events registry predicates.',
 		see_also is [before_event_registry, monitorp]
 	]).

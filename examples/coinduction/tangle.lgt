@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Feliks Kluzniak. Adapted to Logtalk by Paulo Moura.',
-		date is 2013/03/06,
+		date is 2013-03-06,
 		comment is 'Coinduction example of a predicate with two starting points and no common solution prefix.'
 	]).
 

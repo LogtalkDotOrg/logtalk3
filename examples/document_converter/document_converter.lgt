@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/12/10,
+		date is 2018-12-10,
 		comment is 'Document to text conversion example using the Apache Tika Java library.'
 	]).
 

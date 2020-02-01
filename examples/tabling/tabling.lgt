@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2007/05/14,
+		date is 2007-05-14,
 		comment is 'Simple tabling example using graph paths.',
 		source is 'Direct conversion to Logtalk of a XSB tabling example.'
 	]).
@@ -48,7 +48,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2007/05/28,
+		date is 2007-05-28,
 		comment is 'Simple tabling example using Fibonacci numbers.',
 		source is 'Direct conversion to Logtalk of a B-Prolog tabling example.'
 	]).
@@ -85,7 +85,7 @@
 		:- info([
 			version is 1.0,
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
-			date is 2012/10/20,
+			date is 2012-10-20,
 			comment is 'Simple tabling example using graph paths.',
 			source is 'SLATE 2012 paper on mode directed tabling.'
 		]).
@@ -107,7 +107,7 @@
 		:- info([
 			version is 1.0,
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
-			date is 2012/10/20,
+			date is 2012-10-20,
 			comment is 'Simple tabling example using graph paths.',
 			source is 'SLATE 2012 paper on mode directed tabling.'
 		]).
@@ -133,7 +133,7 @@
 			:- info([
 				version is 1.0,
 				author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
-				date is 2012/10/20,
+				date is 2012-10-20,
 				comment is 'Simple tabling example using graph paths.',
 				source is 'SLATE 2012 paper on mode directed tabling.'
 			]).

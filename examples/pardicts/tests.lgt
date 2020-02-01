@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2018/12/17,
+		date is 2018-12-17,
 		comment is 'Unit tests for the "pardicts" example.'
 	]).
 

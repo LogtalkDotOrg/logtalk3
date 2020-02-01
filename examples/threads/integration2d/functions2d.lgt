@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paul Crocker',
-		date is 2008/07/19,
+		date is 2008-07-19,
 		comment is 'Example functions of two variables'
 	]).
 

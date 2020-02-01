@@ -12,7 +12,7 @@ Expands rules of the form p <- f & g to rule(p, [f,g|Tail], Length, Tail).
 
 | **Author:** Victor Lagerkvist
 | **Version:** 1.0
-| **Date:** 2010/6/13
+| **Date:** 2010-6-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

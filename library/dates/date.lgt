@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2014/9/27,
+		date is 2014-9-27,
 		comment is 'Date predicates.'
 	]).
 

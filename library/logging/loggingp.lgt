@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2011/01/06,
+		date is 2011-01-06,
 		comment is 'Logging events to files protocol.',
 		see_also is [logging]
 	]).

@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.25,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [file_load_diagram(_), directory_load_diagram(_), library_load_diagram(_)]
@@ -164,7 +164,7 @@
 	:- info([
 		version is 2.01,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating file contents dependency diagrams in DOT format. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		see_also is [file_load_diagram, directory_load_diagram, library_load_diagram]
 	]).

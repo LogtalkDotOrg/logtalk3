@@ -13,7 +13,7 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	:- info([
 		version is 1.3,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2019/06/15,
+		date is 2019-06-15,
 		comment is 'Stream variables (supporting logical, backtracable, adding and retrieving of terms).'
 	]).
 

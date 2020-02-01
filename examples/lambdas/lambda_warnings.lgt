@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/08/17,
+		date is 2019-08-17,
 		comment is 'Example for illustrating lambda compilation warnings.'
 	]).
 

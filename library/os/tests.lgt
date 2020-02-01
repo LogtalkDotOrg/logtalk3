@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.12,
 		author is 'Paulo Moura',
-		date is 2019/11/18,
+		date is 2019-11-18,
 		comment is 'Unit tests for the "os" object.'
 	]).
 

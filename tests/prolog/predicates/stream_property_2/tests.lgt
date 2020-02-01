@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/08,
+		date is 2018-03-08,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
 	]).
 

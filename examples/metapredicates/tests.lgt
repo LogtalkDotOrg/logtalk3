@@ -205,7 +205,7 @@
 	:- info([
 		version is 1.9,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020/01/29,
+		date is 2020-01-29,
 		comment is 'Unit tests for the "metapredicates" example.'
 	]).
 

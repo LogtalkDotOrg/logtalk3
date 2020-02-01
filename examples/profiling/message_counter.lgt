@@ -25,7 +25,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2006/12/14,
+		date is 2006-12-14,
 		comment is 'Message counter monitor.'
 	]).
 

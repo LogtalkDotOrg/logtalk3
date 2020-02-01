@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/08/03,
+		date is 2016-08-03,
 		comment is 'Unit tests for the mode/2 built-in directive.'
 	]).
 

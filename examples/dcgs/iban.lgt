@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2015/10/11,
+		date is 2015-10-11,
 		comment is 'IBAN validation example using DCG rules.'
 	]).
 

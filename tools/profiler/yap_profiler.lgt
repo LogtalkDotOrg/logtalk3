@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura and Vitor Santos Costa',
-		date is 2013/09/23,
+		date is 2013-09-23,
 		comment is 'Simple wrapper for the YAP count profiler.'
 	]).
 

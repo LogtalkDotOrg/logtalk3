@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2017/11/19,
+		date is 2017-11-19,
 		comment is 'Unit tests for the "parametric" example.'
 	]).
 

@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2005/5/8,
+		date is 2005-5-8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
 		comment is 'General attributes & methods for all subjects.'
 	]).
@@ -44,7 +44,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2005/5/8,
+		date is 2005-5-8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
 		comment is 'General attributes & methods for all subjects.'
 	]).

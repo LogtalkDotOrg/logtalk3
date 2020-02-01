@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/03/06,
+		date is 2017-03-06,
 		comment is 'Addams family.'
 	]).
 

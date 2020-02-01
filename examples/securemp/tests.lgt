@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/10/27,
+		date is 2016-10-27,
 		comment is 'Unit tests for the "securemp" example.'
 	]).
 

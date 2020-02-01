@@ -4,7 +4,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Victor Lagerkvist',
-		date is 2010/06/13,
+		date is 2010-06-13,
 		comment is 'Database protocol.'
 	]).
 

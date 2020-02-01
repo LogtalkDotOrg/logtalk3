@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2008/2/29,
+		date is 2008-2-29,
 		comment is 'Simple example for comparing single and multi-threading calculation of prime numbers.',
 		parameters is ['Threads' - 'Number of threads to use.']
 	]).

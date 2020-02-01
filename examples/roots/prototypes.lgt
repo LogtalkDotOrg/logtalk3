@@ -22,7 +22,7 @@
 
 	:- info([
 		version is 1.0,
-		date is 2000/7/24,
+		date is 2000-7-24,
 		author is 'Paulo Moura',
 		comment is 'Default protocol for all prototypes.'
 	]).
@@ -50,7 +50,7 @@
 
 	:- info([
 		version is 1.3,
-		date is 2017/06/29,
+		date is 2017-06-29,
 		author is 'Paulo Moura',
 		comment is 'Minimal predicates for all prototypes. Default root of the extension graph.'
 	]).

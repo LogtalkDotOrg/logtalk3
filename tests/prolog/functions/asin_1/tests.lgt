@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/04/05,
+		date is 2015-04-05,
 		comment is 'Unit tests for the ISO Prolog standard asin/1 built-in function.'
 	]).
 

@@ -28,7 +28,7 @@ SOFTWARE.
 	:- info([
 		version is 1.0,
 		author is 'Michael Hendricks; adapted to Logtalk by Paulo Moura.',
-		date is 2018/05/30,
+		date is 2018-05-30,
 		comment is 'EDCGs example computing the set of elements of a list.'
 	]).
 

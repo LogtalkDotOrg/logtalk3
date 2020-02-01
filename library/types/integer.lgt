@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.54,
 		author is 'Paulo Moura',
-		date is 2019/06/04,
+		date is 2019-06-04,
 		comment is 'Integer data type predicates.',
 		remarks is [
 			'Portability notes' - 'This object will use the backend Prolog system ``between/3``, ``plus/3``, and ``succ/2`` built-in predicates when available.'

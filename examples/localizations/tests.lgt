@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/02/13,
+		date is 2018-02-13,
 		comment is 'Unit tests for the "localizations" example.'
 	]).
 

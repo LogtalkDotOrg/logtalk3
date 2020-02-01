@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Jan Wielemaker. Adapted to Logtalk by Paulo Moura',
-		date is 2017/08/26,
+		date is 2017-08-26,
 		comment is 'Example of chaining threaded engines.'
 	]).
 

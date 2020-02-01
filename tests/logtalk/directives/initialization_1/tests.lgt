@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/08/23,
+		date is 2019-08-23,
 		comment is 'Unit tests for the initialization/1 built-in directive.'
 	]).
 

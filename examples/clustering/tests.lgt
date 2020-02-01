@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2019/09/21,
+		date is 2019-09-21,
 		comment is 'Tests for the "clustering" example.'
 	]).
 

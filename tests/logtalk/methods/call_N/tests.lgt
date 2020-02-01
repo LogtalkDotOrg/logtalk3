@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/02/08,
+		date is 2018-02-08,
 		comment is 'Unit tests for the call/1-N built-in method.'
 	]).
 

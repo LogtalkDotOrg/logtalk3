@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2018/06/25,
+		date is 2018-06-25,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 

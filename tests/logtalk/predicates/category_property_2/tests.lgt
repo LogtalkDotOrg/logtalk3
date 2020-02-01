@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2019/05/30,
+		date is 2019-05-30,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 

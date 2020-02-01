@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2019/06/13,
+		date is 2019-06-13,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -180,7 +180,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2019/04/07,
+		date is 2019-04-07,
 		comment is 'Predicates for generating directory dependency diagrams in DOT format.',
 		see_also is [directory_load_diagram, file_load_diagram]
 	]).

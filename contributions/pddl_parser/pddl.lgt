@@ -46,7 +46,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2019/03/08,
+		date is 2019-03-08,
 		comment is 'Simple parser of PDDL 3.0 files.'
 	]).
 

@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2018/08/16,
+		date is 2018-08-16,
 		comment is 'Example using lambda expressions in grammar rules.',
 		source is 'Adapted from example posted by Kuniaki Mukai in the SWI-Prolog mailing list.'
 	]).

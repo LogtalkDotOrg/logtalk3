@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2019/05/31,
+		date is 2019-05-31,
 		comment is 'Unit tests for the forward/1 built-in method.'
 	]).
 

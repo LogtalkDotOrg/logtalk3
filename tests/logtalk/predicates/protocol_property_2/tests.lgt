@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/27,
+		date is 2018-03-27,
 		comment is 'Unit tests for the protocol_property/2 built-in predicate.'
 	]).
 
