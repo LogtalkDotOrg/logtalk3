@@ -39,7 +39,7 @@
 		ground(Properties),
 		memberchk(version(1.0), Properties),
 		memberchk(author('Paulo Moura'), Properties),
-		memberchk(date(2016/10/16), Properties),
+		memberchk(date(2016-10-16), Properties),
 		memberchk(comment('Unit tests for the info/1 built-in directive.'), Properties),
 		memberchk(custom(value), Properties).
 
