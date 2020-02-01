@@ -23,14 +23,13 @@
 	extends(list)).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2018-07-13,
+		date is 2020-02-01,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
 
-	average([], 0.0).
 	average([N| Ns], Average) :-
 		average(Ns, 1, N, Average).
 

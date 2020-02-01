@@ -48,6 +48,9 @@ Library
 backend Prolog compilers where the `(/)/2` operator may return an integer
 or a rational number depending on proprietary flags.
 
+* FIXED: The `numberlist::average/2` predicate to fail for empty lists as
+specified in the `numberlistp` protocol.
+
 Tools
 -----
 
