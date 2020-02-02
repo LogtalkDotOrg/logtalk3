@@ -23,7 +23,7 @@
 	extends(list)).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
 		date is 2020-02-01,
 		comment is 'List of numbers predicates.',
@@ -185,13 +185,17 @@
 	normalize_unit([], []).
 	normalize_unit([X| Xs], [Y| Ys]) :-
 		euclidean_norm([X| Xs], Norm),
-		Factor is 1 / Norm,
+		% as some Prolog backends may return 1/Norm as a rational number,
+		% we explicitly convert the term into a float in the next goal
+		Factor is float(1 / Norm),
 		rescale([X| Xs], Factor, [Y| Ys]).
 
 	normalize_scalar([], []).
 	normalize_scalar([X| Xs], [Y| Ys]) :-
 		sum([X| Xs], Sum),
-		Factor is 1 / Sum,
+		% as some Prolog backends may return 1/Norm as a rational number,
+		% we explicitly convert the term into a float in the next goal
+		Factor is float(1 / Sum),
 		rescale([X| Xs], Factor, [Y| Ys]).
 
 	rescale([], _, []).
@@ -199,7 +203,8 @@
 		Y is X * Factor,
 		rescale(Xs, Factor, Ys).
 
-	valid((-)) :-		% catch variables and lists with unbound tails
+	valid((-)) :-
+		% catch variables and lists with unbound tails
 		!,
 		fail.
 	valid([]).
