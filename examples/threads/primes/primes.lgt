@@ -21,9 +21,9 @@
 :- object(primes(_Threads)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2008-2-29,
+		date is 2020-02-02,
 		comment is 'Simple example for comparing single and multi-threading calculation of prime numbers.',
 		parameters is ['Threads' - 'Number of threads to use.']
 	]).
@@ -45,14 +45,14 @@
 		collect(Goals).
 
 	split(Inf, Sup, N, Intervals) :-
-		Width is (Sup - Inf) / N,
+		Width is (Sup - Inf) // N,
 		split(1, N, Inf, Inf, Width, [], Intervals).
 
 	split(N, N, Inf, Current, Width, Acc, [Current-Sup| Acc]) :-
-		Sup is truncate(Inf + Width*N),
+		Sup is Inf + Width*N,
 		!.
 	split(I, N, Inf, Current, Width, Acc, Intervals) :-
-		Sup is truncate(Inf + Width*I),
+		Sup is Inf + Width*I,
 		Current2 is Sup + 1,
 		I2 is I + 1,
 		split(I2, N, Inf, Current2, Width, [Current-Sup| Acc], Intervals).

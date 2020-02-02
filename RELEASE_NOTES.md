@@ -64,6 +64,8 @@ Examples
 
 * FIXED: Missing library path definition for the `object_aliases` example.
 
+* FIXED: No need to use floats in the `threads/primes` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
