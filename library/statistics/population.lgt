@@ -22,9 +22,9 @@
 	imports(statistics)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2013-04-19,
+		date is 2020-02-02,
 		comment is 'Statistical population represented as a list of numbers.',
 		see_also is [sample]
 	]).
@@ -44,7 +44,7 @@
 		^^squares_and_hypers(Xs, Mean, Square, _, Hyper, Hypers),
 		^^variance(Xs, 1, N, X, 0, M2),
 		K2 is M2 / (N - 1),
-		Kurtosis is N * (N + 1) * Hypers / ((N - 1) * (N - 2) * (N - 3) * K2**2) - 3 * (N - 1)**2/((N - 2) * (N - 3)).
+		Kurtosis is float(N * (N + 1) * Hypers / ((N - 1) * (N - 2) * (N - 3) * K2**2) - 3 * (N - 1)**2/((N - 2) * (N - 3))).
 
 	standard_deviation([X| Xs], Deviation) :-
 		^^variance(Xs, 1, N, X, 0, M2),
@@ -52,6 +52,6 @@
 
 	variance([X| Xs], Variance) :-
 		^^variance(Xs, 1, N, X, 0, M2),
-		Variance is M2 / N.
+		Variance is float(M2 / N).
 
 :- end_object.

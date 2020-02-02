@@ -44,9 +44,9 @@ of an error message.
 Library
 -------
 
-* IMPROVED: Portability of the `random` and `types` library by safe guarding
-against backend Prolog compilers where the `(/)/2` operator may return an
-integer or a rational number depending on proprietary flags.
+* IMPROVED: Portability of the `random`, `statistics`, and `types` libraries
+by safe guarding against backend Prolog compilers where the `(/)/2` operator
+may return an integer or a rational number depending on proprietary flags.
 
 * FIXED: The `numberlist::average/2` predicate to fail for empty lists as
 specified in the `numberlistp` protocol.

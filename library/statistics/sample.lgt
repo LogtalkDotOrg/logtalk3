@@ -22,9 +22,9 @@
 	imports(statistics)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2013-04-19,
+		date is 2020-02-02,
 		comment is 'Statistical sample represented as a list of numbers.',
 		see_also is [population]
 	]).
@@ -41,7 +41,7 @@
 		Square is (X - Mean) ** 2,
 		Hyper is (X - Mean) ** 4,
 		^^squares_and_hypers(Xs, Mean, Square, Squares, Hyper, Hypers),
-		Kurtosis is (Hypers / N) / (Squares / (N-1)) ** 2 - 3.
+		Kurtosis is float((Hypers / N) / (Squares / (N-1)) ** 2 - 3).
 
 	standard_deviation([X| Xs], Deviation) :-
 		^^variance(Xs, 1, N, X, 0, M2),
@@ -49,6 +49,6 @@
 
 	variance([X| Xs], Variance) :-
 		^^variance(Xs, 1, N, X, 0, M2),
-		Variance is M2 / (N - 1).
+		Variance is float(M2 / (N - 1)).
 
 :- end_object.
