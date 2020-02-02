@@ -60,6 +60,8 @@ messages when listing compilation errors, warnings, and failed unit tests.
 Examples
 --------
 
+* IMPROVED: Tests for the `sicstus` example.
+
 * FIXED: Library name typo preventing loading of the `edcgs` example.
 
 * FIXED: Missing library path definition for the `object_aliases` example.
