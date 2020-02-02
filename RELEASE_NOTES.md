@@ -62,6 +62,8 @@ Examples
 
 * FIXED: Library name typo preventing loading of the `edcgs` example.
 
+* FIXED: Missing library path definition for the `object_aliases` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

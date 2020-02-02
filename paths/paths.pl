@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on December 17, 2019
+%  Last updated on February 2, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -233,6 +233,7 @@ logtalk_library_path(my_types, examples('my_types/')).
 logtalk_library_path(named_databases, examples('named_databases/')).
 logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(now_you_see_me, examples('now_you_see_me/')).
+logtalk_library_path(object_aliases, examples('object_aliases/')).
 logtalk_library_path(operators, examples('operators/')).
 logtalk_library_path(patches, examples('patches/')).
 logtalk_library_path(patching, examples('patching/')).
