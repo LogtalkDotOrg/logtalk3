@@ -72,6 +72,9 @@ IDEs, text editors, and syntax highlighters support
 * CHANGED: Code snippets for entities to use the ISO 8601 standard format for
 dates, `Year-Month-Day`, in `info/1` directives.
 
+* ADDED: Instructions on how to configure `bat` to use the Logtalk syntax
+highlighting support with Prolog files.
+
 
 3.35.0 - January 30, 2020
 =========================

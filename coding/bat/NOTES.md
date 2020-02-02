@@ -17,11 +17,25 @@ limitations under the License.
 ________________________________________________________________________
 
 
-`bat` is a `cat` clone that supports syntax highlighting and `git`. It's
-available from:
+`bat` is a `cat` clone that supports syntax highlighting and `git`.
+It's available from:
 
 	https://github.com/sharkdp/bat
 
-`bat` supports Sublime Text `.sublime-syntax` files. To configure it for
-Logtalk and Prolog support see the instructions on its website and use
-the `../sublimetext/Logtalk.sublime-syntax` file.
+`bat` supports Sublime Text `.sublime-syntax` files. To configure it
+for Logtalk support see the instructions on its website and use the
+`../sublimetext/Logtalk.sublime-syntax` file.
+
+To also use the Logtalk support for syntax coloring of Prolog files,
+either create an alias to `bat` that calls it with the `-l logtalk`
+option (e.g. for a Bash shell: `alias batpl='bat -l logtalk'`) or
+edit the `bat` configuration file to map Prolog extensions to use
+the Logtalk syntax highlighter. For example, using `nano` as the
+text editor:
+
+	$ nano "$(bat --config-file)"
+
+and add one line per Prolog file extension. For example:
+
+	--map-syntax pl:logtalk
+	--map-syntax pro:logtalk
