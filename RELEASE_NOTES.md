@@ -78,6 +78,13 @@ represent rational numbers as `N/D` terms.
 
 * FIXED: No need to use floats in the `threads/primes` example.
 
+Ports
+-----
+
+* CHANGED: Internal representation used by the `robots` example in the
+`metagol` port to avoid a clash with SWI-Prolog when configured to represent
+rational numbers as `N/D` terms.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
