@@ -41,6 +41,12 @@ clause (usually caused by a call in the body to a module predicate with
 an ambiguous meta-predicate template) would result in a failure instead
 of an error message.
 
+Documentation
+-------------
+
+* UPDATED: Handbook for the change to ISO 8601 standard format for dates in
+`info/1` directives.
+
 Library
 -------
 

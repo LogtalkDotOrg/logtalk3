@@ -74,8 +74,8 @@ Logtalk tools:
 ``version``
    Version number (a number).
 ``date``
-   Date of last modification (formatted as ``Year/Month/Day`` where
-   ``Year``, ``Month``, and ``Day`` are integers).
+   Date of last modification in ISO 8601 standard format (``Year-Month-Day``
+   where ``Year``, ``Month``, and ``Day`` are integers).
 ``parameters``
    Parameter names and descriptions for parametric entities (a list of
    ``Name-Description`` pairs where both names and descriptions are atoms).
