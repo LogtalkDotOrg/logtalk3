@@ -72,6 +72,11 @@ writing dates.
 * FIXED: The `logtalk_tester` shell script to not display text from comment
 messages when listing compilation errors, warnings, and failed unit tests.
 
+Tests
+-----
+
+* ADDED: Tests for the presence of the standard ISO Prolog operators.
+
 Examples
 --------
 

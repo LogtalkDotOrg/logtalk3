@@ -40,6 +40,8 @@
 		{read(T)},
 		T == '{}'(','(a,b)).
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_curly_bracketed_term_03) :-
 		^^set_text_input('{}. '),
 		{read(T)},

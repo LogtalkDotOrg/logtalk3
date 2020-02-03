@@ -36,10 +36,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014-11-07,
+		date is 2020-02-03,
 		comment is 'Unit tests for the ISO Prolog standard operator syntax.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1, assertion/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.4
@@ -75,44 +79,169 @@
 	succeeds(iso_operators_08) :-
 		^^set_text_input('fy fy 1. fy (fy 1). '),
 		{read(TU), read(TB)},
-		TU == TB.
+		assertion(TU == TB).
 
 	succeeds(iso_operators_09) :-
 		^^set_text_input(['1 xfy  2 xfy 3. ','1 xfy (2 xfy 3). ']),
 		{read(TU), read(TB)},
-		TU == TB.
+		assertion(TU == TB).
 
 	succeeds(iso_operators_10) :-
 		^^set_text_input(['1 xfy  2 yfx 3. ','1 xfy (2 yfx 3). ']),
 		{read(TU), read(TB)},
-		TU == TB.
+		assertion(TU == TB).
 
 	succeeds(iso_operators_11) :-
 		^^set_text_input('fy 2 yf. fy (2 yf). '),
 		{read(TU), read(TB)},
-		TU == TB.
+		assertion(TU == TB).
 
 	succeeds(iso_operators_12) :-
 		^^set_text_input('1 yf yf. (1 yf) yf. '),
 		{read(TU), read(TB)},
-		TU == TB.
+		assertion(TU == TB).
 
 	succeeds(iso_operators_13) :-
 		^^set_text_input([' 1 yfx 2  yfx 3. ','(1 yfx 2) yfx 3. ']),
 		{read(TU), read(TB)},
-		TU == TB.
+		assertion(TU == TB).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.4.3
 
 	succeeds(iso_operators_14) :-
 		^^set_text_input('-(1,2). '),
 		{read(T)},
-		T == -(1,2).
+		assertion(T == -(1,2)).
 
 	succeeds(iso_operators_15) :-
 		^^set_text_input('- (1,2). '),
 		{read(T)},
-		T == -((1,2)).
+		assertion(T == -((1,2))).
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_operators_16) :-
+		assertion(op(1200, xfx, (:-)), {current_op(1200, xfx, (:-))}).
+
+	succeeds(lgt_operators_17) :-
+		assertion(op(1200, xfx, (-->)), {current_op(1200, xfx, (-->))}).
+
+	succeeds(lgt_operators_18) :-
+		assertion(op(1200, fx, (:-)), {current_op(1200, fx, (:-))}).
+
+	succeeds(lgt_operators_19) :-
+		assertion(op(1200, fx, (?-)), {current_op(1200, fx, (?-))}).
+
+	succeeds(lgt_operators_20) :-
+		assertion(op(1100, xfy, (;)), {current_op(1100, xfy, (;))}).
+
+	succeeds(lgt_operators_21) :-
+		assertion(op(1050, xfy, (->)), {current_op(1050, xfy, (->))}).
+
+	succeeds(lgt_operators_22) :-
+		assertion(op(1000, xfy, (',')), {current_op(1000, xfy, (','))}).
+
+	succeeds(lgt_operators_23) :-
+		assertion(op(900, fy, (\+)), {current_op(900, fy, (\+))}).
+
+	succeeds(lgt_operators_24) :-
+		assertion(op(700, xfx, (=)), {current_op(700, xfx, (=))}).
+
+	succeeds(lgt_operators_25) :-
+		assertion(op(700, xfx, (\=)), {current_op(700, xfx, (\=))}).
+
+	succeeds(lgt_operators_26) :-
+		assertion(op(700, xfx, (==)), {current_op(700, xfx, (==))}).
+
+	succeeds(lgt_operators_27) :-
+		assertion(op(700, xfx, (\==)), {current_op(700, xfx, (\==))}).
+
+	succeeds(lgt_operators_28) :-
+		assertion(op(700, xfx, (@<)), {current_op(700, xfx, (@<))}).
+
+	succeeds(lgt_operators_29) :-
+		assertion(op(700, xfx, (@=<)), {current_op(700, xfx, (@=<))}).
+
+	succeeds(lgt_operators_30) :-
+		assertion(op(700, xfx, (@>)), {current_op(700, xfx, (@>))}).
+
+	succeeds(lgt_operators_31) :-
+		assertion(op(700, xfx, (@>=)), {current_op(700, xfx, (@>=))}).
+
+	succeeds(lgt_operators_32) :-
+		assertion(op(700, xfx, (=..)), {current_op(700, xfx, (=..))}).
+
+	succeeds(lgt_operators_33) :-
+		assertion(op(700, xfx, (is)), {current_op(700, xfx, (is))}).
+
+	succeeds(lgt_operators_34) :-
+		assertion(op(700, xfx, (=:=)), {current_op(700, xfx, (=:=))}).
+
+	succeeds(lgt_operators_35) :-
+		assertion(op(700, xfx, (=\=)), {current_op(700, xfx, (=\=))}).
+
+	succeeds(lgt_operators_36) :-
+		assertion(op(700, xfx, (<)), {current_op(700, xfx, (<))}).
+
+	succeeds(lgt_operators_37) :-
+		assertion(op(700, xfx, (=<)), {current_op(700, xfx, (=<))}).
+
+	succeeds(lgt_operators_38) :-
+		assertion(op(700, xfx, (>)), {current_op(700, xfx, (>))}).
+
+	succeeds(lgt_operators_39) :-
+		assertion(op(700, xfx, (>=)), {current_op(700, xfx, (>=))}).
+
+	succeeds(lgt_operators_40) :-
+		assertion(op(600, xfy, (:)), {current_op(600, xfy, (:))}).
+
+	succeeds(lgt_operators_41) :-
+		assertion(op(500, yfx, (+)), {current_op(500, yfx, (+))}).
+
+	succeeds(lgt_operators_42) :-
+		assertion(op(500, yfx, (-)), {current_op(500, yfx, (-))}).
+
+	succeeds(lgt_operators_43) :-
+		assertion(op(500, yfx, (/\)), {current_op(500, yfx, (/\))}).
+
+	succeeds(lgt_operators_44) :-
+		assertion(op(500, yfx, (\/)), {current_op(500, yfx, (\/))}).
+
+	succeeds(lgt_operators_45) :-
+		assertion(op(400, yfx, (*)), {current_op(400, yfx, (*))}).
+
+	succeeds(lgt_operators_46) :-
+		assertion(op(400, yfx, (/)), {current_op(400, yfx, (/))}).
+
+	succeeds(lgt_operators_47) :-
+		assertion(op(400, yfx, (//)), {current_op(400, yfx, (//))}).
+
+	succeeds(lgt_operators_48) :-
+		assertion(op(400, yfx, (rem)), {current_op(400, yfx, (rem))}).
+
+	succeeds(lgt_operators_49) :-
+		assertion(op(400, yfx, (mod)), {current_op(400, yfx, (mod))}).
+
+	succeeds(lgt_operators_50) :-
+		assertion(op(400, yfx, (<<)), {current_op(400, yfx, (<<))}).
+
+	succeeds(lgt_operators_51) :-
+		assertion(op(400, yfx, (>>)), {current_op(400, yfx, (>>))}).
+
+	succeeds(lgt_operators_52) :-
+		assertion(op(200, xfx, (**)), {current_op(200, xfx, (**))}).
+
+	succeeds(lgt_operators_53) :-
+		assertion(op(200, xfy, (^)), {current_op(200, xfy, (^))}).
+
+	succeeds(lgt_operators_54) :-
+		assertion(op(200, fy, (+)), {current_op(200, fy, (+))}).
+
+	succeeds(lgt_operators_55) :-
+		assertion(op(200, fy, (-)), {current_op(200, fy, (-))}).
+
+	succeeds(lgt_operators_56) :-
+		assertion(op(200, fy, (\)), {current_op(200, fy, (\))}).
 
 	cleanup :-
 		^^clean_text_input.
