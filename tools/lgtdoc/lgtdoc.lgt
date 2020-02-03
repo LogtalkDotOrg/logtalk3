@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 5.1,
+		version is 5.2,
 		author is 'Paulo Moura',
-		date is 2019-11-26,
+		date is 2020-02-03,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -525,7 +525,8 @@
 		;	true
 		),
 		(	member(date(Date), Info) ->
-			write_xml_element(Stream, date, [], Date)
+			date_to_padded_atom(Date, DateAtom),
+			write_xml_element(Stream, date, [], DateAtom)
 		;	true
 		),
 		(	member(copyright(Copyright), Info) ->
@@ -1573,6 +1574,27 @@
 		retractall(predicate_entity_(_, _, _, _)).
 
 	% auxiliary predicates
+
+	date_to_padded_atom(Year-Month-Day, DateAtom) :-
+		integer_to_padded_atom(Month, MonthAtom),
+		integer_to_padded_atom(Day, DayAtom),
+		number_codes(Year, YearCodes),
+		atom_codes(YearAtom, YearCodes),
+		atom_concat(YearAtom, '-', DateAtom0),
+		atom_concat(DateAtom0, MonthAtom, DateAtom1),
+		atom_concat(DateAtom1, '-', DateAtom2),
+		atom_concat(DateAtom2, DayAtom, DateAtom).
+	date_to_padded_atom(Year/Month/Day, DateAtom) :-
+		% old, deprecated date format
+		date_to_padded_atom(Year-Month-Day, DateAtom).
+
+	integer_to_padded_atom(Integer, Atom) :-
+		number_codes(Integer, Codes),
+		(	Integer < 10 ->
+			char_code('0', ZeroCode),
+			atom_codes(Atom, [ZeroCode| Codes])
+		;	atom_codes(Atom, Codes)
+		).
 
 	pretty_print_vars(Stream, Term) :-
 		\+ \+ (

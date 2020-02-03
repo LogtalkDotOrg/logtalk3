@@ -57,6 +57,9 @@ Tools
 * CHANGED: The `diagrams` tool now prints "Generated on" text using the ISO
 8601 standard date format.
 
+* IMPROVED: The `lgtdoc` tool to pad month and day when single digit when
+writing dates.
+
 * FIXED: The `logtalk_tester` shell script to not display text from comment
 messages when listing compilation errors, warnings, and failed unit tests.
 
