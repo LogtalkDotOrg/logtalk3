@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.91,
+		version is 1.92,
 		author is 'Paulo Moura',
-		date is 2020-01-30,
+		date is 2020-02-03,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -596,6 +596,10 @@
 		message_context(File, Lines).
 
 	% deprecated feature messages
+
+	message_tokens(deprecated_date_format(File, Lines, Type, Entity, Deprecated, Advised)) -->
+		['Deprecated date format: ~w (use instead ISO 8601 format ~w)'-[Deprecated, Advised], nl],
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(deprecated_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag)) -->
 		['Deprecated compiler flag: ~w (renamed to ~w)'-[Flag, NewFlag], nl],

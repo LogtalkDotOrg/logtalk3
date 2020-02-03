@@ -33,6 +33,9 @@ Logtalk compiler and runtime
 * CHANGED: Accept dates in `info/1` directives in ISO 8601 standard format
 (`Year-Month-Day`).
 
+* ADDED: Deprecated warning for `info/1` directives with a `date` value in
+the old `Year/Month/Day` format.
+
 * FIXED: Generate a compiler error when trying to redefine a built-in method
 using a `uses/2` or `use_module/2` directive.
 

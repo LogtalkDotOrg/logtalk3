@@ -9531,9 +9531,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % info/1 entity directive
 
-'$lgt_compile_logtalk_directive'(info(Pairs), _) :-
+'$lgt_compile_logtalk_directive'(info(Pairs), Ctx) :-
 	'$lgt_compile_entity_info_directive'(Pairs, TPairs),
-	assertz('$lgt_pp_entity_info_'(TPairs)).
+	assertz('$lgt_pp_entity_info_'(TPairs)),
+	(	'$lgt_member'(date is Year/Month/Day, Pairs),
+		'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), deprecated_date_format(File, Lines, Type, Entity, Year/Month/Day, Year-Month-Day))
+	;	true
+	).
 
 % info/2 predicate directive
 
