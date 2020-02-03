@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.33,
+		version is 2.34,
 		author is 'Paulo Moura',
-		date is 2019-04-30,
+		date is 2020-02-03,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -89,9 +89,9 @@
 			integer_to_padded_atom(Minutes, PaddedMinutes),
 			atom_concat(Label2, 'Generated on ', Label3),
 			atom_concat(Label3, YearAtom, Label4),
-			atom_concat(Label4, '/', Label5),
+			atom_concat(Label4, '-', Label5),
 			atom_concat(Label5, PaddedMonth, Label6),
-			atom_concat(Label6, '/', Label7),
+			atom_concat(Label6, '-', Label7),
 			atom_concat(Label7, PaddedDay, Label8),
 			atom_concat(Label8, ', ', Label9),
 			atom_concat(Label9, PaddedHours, Label10),

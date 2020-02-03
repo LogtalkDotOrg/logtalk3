@@ -38,7 +38,9 @@
 	:- private(insert/4).
 
 	search(Space, State, Threshold, Solution, Cost) :-
-		expand([], l(State, 0/0), Threshold, _, yes, Path, Space, Cost),
+		% to avoid issues with some Prolog backends parsing 0/0 as
+		% a rational number, we write the term instead as (0)/(0)
+		expand([], l(State, (0)/(0)), Threshold, _, yes, Path, Space, Cost),
 		list::reverse(Path, Solution).
 
 	expand(Path, l(State,Cost/_), _, _, yes, [State|Path], Space, Cost) :-

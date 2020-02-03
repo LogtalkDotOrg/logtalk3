@@ -54,6 +54,9 @@ specified in the `numberlistp` protocol.
 Tools
 -----
 
+* CHANGED: The `diagrams` tool now prints "Generated on" text using the ISO
+8601 standard date format.
+
 * FIXED: The `logtalk_tester` shell script to not display text from comment
 messages when listing compilation errors, warnings, and failed unit tests.
 
