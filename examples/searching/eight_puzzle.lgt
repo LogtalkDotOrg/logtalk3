@@ -22,25 +22,25 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2004-8-15,
+		date is 2020-02-03,
 		comment is 'Eight puzzle heuristic state space search problem.'
 	]).
 
 	:- uses(list, [member/2]).
 
-	initial_state(four_steps, [2/2,1/3,3/2,2/3,3/3,3/1,2/1,1/1,1/2]).
-	initial_state(five_steps, [2/1,1/2,1/3,3/3,3/2,3/1,2/2,1/1,2/3]).
-	initial_state(eighteen_steps, [2/2,2/3,1/3,3/1,1/2,2/1,3/3,1/1,3/2]).
+	initial_state(four_steps, [2-2,1-3,3-2,2-3,3-3,3-1,2-1,1-1,1-2]).
+	initial_state(five_steps, [2-1,1-2,1-3,3-3,3-2,3-1,2-2,1-1,2-3]).
+	initial_state(eighteen_steps, [2-2,2-3,1-3,3-1,1-2,2-1,3-3,1-1,3-2]).
 
-	goal_state(goal, [2/2,1/3,2/3,3/3,3/2,3/1,2/1,1/1,1/2]).
+	goal_state(goal, [2-2,1-3,2-3,3-3,3-2,3-1,2-1,1-1,1-2]).
 
 	print_state([S0,S1,S2,S3,S4,S5,S6,S7,S8]) :-
 		member(Y, [3, 2, 1]),
 		nl,
 		member(X, [1, 2, 3]),
-		member(Tile-X/Y, [' '-S0,1-S1,2-S2,3-S3,4-S4,5-S5,6-S6,7-S7,8-S8]),
+		member(Tile::X-Y, [' '::S0,1::S1,2::S2,3::S3,4::S4,5::S5,6::S6,7::S7,8::S8]),
 		write(Tile),
 		fail.
 	print_state(_) :-
@@ -54,16 +54,16 @@
 	swap(Empty, Tile, [Tile2| L], [Tile2| L2]) :-
 		swap(Empty, Tile, L, L2).
 
-	dist(X/Y, X2/Y2, D) :-
+	dist(X-Y, X2-Y2, D) :-
 		abs_diff(X, X2, Dx),
 		abs_diff(Y, Y2, Dy),
 		D is Dx + Dy.
 
 	abs_diff(A, B, D) :-
-		A > B ->
+		(	A > B ->
 			D is A - B
-			;
-			D is B - A.
+		;	D is B - A
+		).
 
 	heuristic([_| L], H) :-
 		goal_state(_, [_| G]),
@@ -88,16 +88,16 @@
 		score(Last, First, Score),
 		S is Acc + Score.
 
-	score(2/2, _, 1) :- !.
+	score(2-2, _, 1) :- !.
 
-	score(1/3, 2/3, 0) :- !.
-	score(2/3, 3/3, 0) :- !.
-	score(3/3, 3/2, 0) :- !.
-	score(3/2, 3/1, 0) :- !.
-	score(3/1, 2/1, 0) :- !.
-	score(2/1, 1/1, 0) :- !.
-	score(1/1, 1/2, 0) :- !.
-	score(1/2, 1/3, 0) :- !.
+	score(1-3, 2-3, 0) :- !.
+	score(2-3, 3-3, 0) :- !.
+	score(3-3, 3-2, 0) :- !.
+	score(3-2, 3-1, 0) :- !.
+	score(3-1, 2-1, 0) :- !.
+	score(2-1, 1-1, 0) :- !.
+	score(1-1, 1-2, 0) :- !.
+	score(1-2, 1-3, 0) :- !.
 
 	score(_, _, 2) :- !.
 

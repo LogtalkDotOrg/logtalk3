@@ -66,6 +66,10 @@ messages when listing compilation errors, warnings, and failed unit tests.
 Examples
 --------
 
+* CHANGED: Internal representation used by the `eight_puzzle` object in the
+`searching` example to avoid a clash with SWI-Prolog when configured to
+represent rational numbers as `N/D` terms.
+
 * IMPROVED: Tests for the `sicstus` example.
 
 * FIXED: Library name typo preventing loading of the `edcgs` example.

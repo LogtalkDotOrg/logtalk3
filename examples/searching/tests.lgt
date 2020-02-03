@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018-06-04,
+		date is 2020-02-03,
 		comment is 'Unit tests for the "searching" example.'
 	]).
 
@@ -55,7 +55,7 @@
 
 	% test 4.  % generate all solutions then check this path is one of them
 	test(searching_4) :-
-		water_jug::initial_state(Initial), 
+		water_jug::initial_state(Initial),
 		findall(Path, breadth_first(5)::solve(water_jug, Initial, Path), Solutions),
 		ground(Solutions),
 		Answer = [(0,0),(0,3),(3,0),(3,3),(4,2),(0,2)],
@@ -63,7 +63,7 @@
 
 	% test 5.  % generate all solutions then check this path is one of them
 	test(searching_5) :-
-		water_jug::initial_state(Initial), 
+		water_jug::initial_state(Initial),
 		findall(Path, depth_first(7)::solve(water_jug, Initial, Path), Solutions),
 		ground(Solutions),
 		Answer = [(0,0),(4,0),(4,3),(0,3),(3,0),(3,3),(4,2),(0,2)],
@@ -80,7 +80,7 @@
 		eight_puzzle::initial_state(five_steps, Initial),
 		findall(Cost-Path, hill_climbing(5)::solve(eight_puzzle, Initial, Path, Cost), Solutions),
 		ground(Solutions),
-		Answer = 5-[[2/1,1/2,1/3,3/3,3/2,3/1,2/2,1/1,2/3],[2/2,1/2,1/3,3/3,3/2,3/1,2/1,1/1,2/3],[2/3,1/2,1/3,3/3,3/2,3/1,2/1,1/1,2/2],[1/3,1/2,2/3,3/3,3/2,3/1,2/1,1/1,2/2],[1/2,1/3,2/3,3/3,3/2,3/1,2/1,1/1,2/2],[2/2,1/3,2/3,3/3,3/2,3/1,2/1,1/1,1/2]],
+		Answer = 5-[[2-1,1-2,1-3,3-3,3-2,3-1,2-2,1-1,2-3],[2-2,1-2,1-3,3-3,3-2,3-1,2-1,1-1,2-3],[2-3,1-2,1-3,3-3,3-2,3-1,2-1,1-1,2-2],[1-3,1-2,2-3,3-3,3-2,3-1,2-1,1-1,2-2],[1-2,1-3,2-3,3-3,3-2,3-1,2-1,1-1,2-2],[2-2,1-3,2-3,3-3,3-2,3-1,2-1,1-1,1-2]],
 		list::memberchk(Answer, Solutions).
 
 :- end_object.
