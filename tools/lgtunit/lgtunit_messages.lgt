@@ -60,10 +60,12 @@
 		[].
 
 	message_tokens(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
-		[nl, 'tests started at ~w-~w-~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
+		{integer_to_padded_atom(Month, MonthAtom), integer_to_padded_atom(Day, DayAtom)},
+		[nl, 'tests started at ~w-~w-~w, ~w:~w:~w'-[Year, MonthAtom, DayAtom, Hours, Minutes, Seconds], nl, nl].
 
 	message_tokens(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
-		['tests ended at ~w-~w-~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
+		{integer_to_padded_atom(Month, MonthAtom), integer_to_padded_atom(Day, DayAtom)},
+		['tests ended at ~w-~w-~w, ~w:~w:~w'-[Year, MonthAtom, DayAtom, Hours, Minutes, Seconds], nl, nl].
 
 	message_tokens(running_tests_from_object_file(Object, File)) -->
 		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl, nl].
@@ -271,6 +273,14 @@
 		(	{Clauses =:= 1} ->
 			['~d clause'-[Clauses]]
 		;	['~d clauses'-[Clauses]]
+		).
+
+	integer_to_padded_atom(Integer, Atom) :-
+		number_codes(Integer, Codes),
+		(	Integer < 10 ->
+			char_code('0', ZeroCode),
+			atom_codes(Atom, [ZeroCode| Codes])
+		;	atom_codes(Atom, Codes)
 		).
 
 :- end_category.
