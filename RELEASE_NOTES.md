@@ -68,8 +68,8 @@ lists are unbound.
 Tools
 -----
 
-* CHANGED: The `diagrams` tool now prints "Generated on" text using the ISO
-8601 standard date format.
+* CHANGED: The `diagrams` and `lgtunit` tools to print dates using the ISO
+8601 standard format.
 
 * IMPROVED: The `lgtdoc` tool to pad month and day when single digit when
 writing dates.

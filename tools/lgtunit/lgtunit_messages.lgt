@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2020-01-06,
+		date is 2020-02-04,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -60,10 +60,10 @@
 		[].
 
 	message_tokens(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
-		[nl, 'tests started at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
+		[nl, 'tests started at ~w-~w-~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
 
 	message_tokens(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
-		['tests ended at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
+		['tests ended at ~w-~w-~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
 
 	message_tokens(running_tests_from_object_file(Object, File)) -->
 		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl, nl].
