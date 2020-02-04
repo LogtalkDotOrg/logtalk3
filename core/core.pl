@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 36, 0, b03)).
+'$lgt_version_data'(logtalk(3, 36, 0, b04)).
 
 
 
@@ -9534,13 +9534,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(info(Pairs), Ctx) :-
 	'$lgt_compile_entity_info_directive'(Pairs, TPairs),
 	assertz('$lgt_pp_entity_info_'(TPairs)),
-	(	'$lgt_member'(date is Year/Month/Day, Pairs),
-		'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(deprecated, warning),
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_date_format(File, Lines, Type, Entity, Year/Month/Day, Year-Month-Day))
+		(	'$lgt_member'(date is Year/Month/Day, Pairs) ->
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(
+				warning(deprecated),
+				deprecated_date_format(File, Lines, Type, Entity, Year/Month/Day, Year-Month-Day)
+			)
+		;	true
+		),
+		(	'$lgt_member'(version is Version, Pairs),
+			Version \= ':'(_, ':'(_, _)) ->
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(
+				warning(deprecated),
+				deprecated_version_format(File, Lines, Type, Entity, Version)
+			)
+		;	true
+		)
 	;	true
 	).
 

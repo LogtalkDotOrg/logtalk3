@@ -39,6 +39,9 @@ format `Major:Minor:Day`.
 * CHANGED: Accept dates in `info/1` directives in ISO 8601 standard format
 (`Year-Month-Day`).
 
+* ADDED: Deprecated warning for `info/1` directives with a `version` value
+not in the `Major:Minor:Day` format.
+
 * ADDED: Deprecated warning for `info/1` directives with a `date` value in
 the old `Year/Month/Day` format.
 

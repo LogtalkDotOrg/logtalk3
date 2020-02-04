@@ -72,7 +72,8 @@ Logtalk tools:
    ``entity`` is the name of an XML entity in a user defined
    ``custom.ent`` file).
 ``version``
-   Version number (a ``Major:Minor:Patch`` compound term).
+   Version number (a ``Major:Minor:Patch`` compound term) Following the
+   `Semantic Versioning guidelines <https://semver.org>`_ is strongly advised.
 ``date``
    Date of last modification in ISO 8601 standard format (``Year-Month-Day``
    where ``Year``, ``Month``, and ``Day`` are integers).
