@@ -60,6 +60,11 @@ may return an integer or a rational number depending on proprietary flags.
 * FIXED: The `numberlist::average/2` predicate to fail for empty lists as
 specified in the `numberlistp` protocol.
 
+* FIXED: The `difflist::append/3` predicate for the case where the difference
+lists are unbound.
+
+* FIXED: Added missing definition for predicate `difflist::append/2`.
+
 Tools
 -----
 

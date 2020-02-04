@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.19,
+		version is 1.21,
 		author is 'Paulo Moura',
-		date is 2019-10-09,
+		date is 2020-02-04,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -46,17 +46,12 @@
 
 	add(Term, List-[Term| Back], List-Back).
 
-	append(List1-Back1, Back1-Back2, List1-Back2) :-
-		nonvar(List1),
-		nonvar(Back1),
-		!.
-	append(Prefix, Suffix, List) :-
-		length(List, Length),
-		prefix(Prefix, List),
-		length(Prefix, PLength),
-		SLength is Length - PLength,
-		length(Suffix, SLength),
-		suffix(Suffix, List).
+	append([], Back-Back).
+	append([List| Lists], Concatenation) :-
+		append(List, Tail, Concatenation),
+		append(Lists, Tail).
+
+	append(List1-Back1, Back1-Back2, List1-Back2).
 
 	as_list(List-Back, Out) :-
 		(	List == Back ->
