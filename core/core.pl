@@ -5815,7 +5815,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	CallerExCtx == [] ->
 		Self = Self0,
 		SelfExCtx = ExCtx
-	;	Where == local ->
+	;	Where == (local) ->
 		Self = Self0,
 		SelfExCtx = ExCtx
 	;	'$lgt_execution_context'(CallerExCtx, _, _, _, Self, _, _),
@@ -5842,7 +5842,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	CallerExCtx == [] ->
 		Entity = Entity0,
 		SuperExCtx = ExCtx
-	;	Where == local ->
+	;	Where == (local) ->
 		Entity = Entity0,
 		SuperExCtx = ExCtx
 	;	'$lgt_execution_context'(CallerExCtx, Entity, _, _, _, _, _),
@@ -5872,7 +5872,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	CallerExCtx0 == [] ->
 		CallerExCtx = ExCtx,
 		Sender = This
-	;	Where == local ->
+	;	Where == (local) ->
 		CallerExCtx = ExCtx,
 		Sender = This
 	;	CallerExCtx = CallerExCtx0,
@@ -5906,7 +5906,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	CallerExCtx0 == [] ->
 		CallerExCtx1 = ExCtx,
 		Sender = Sender0
-	;	Where == local ->
+	;	Where == (local) ->
 		CallerExCtx1 = ExCtx,
 		Sender = Sender0
 	;	'$lgt_execution_context'(CallerExCtx0, _, Sender, _, _, _, _),
@@ -6019,7 +6019,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, _, _, CallerExCtx, _),
 	(	CallerExCtx == [] ->
 		'$lgt_metacall_local'(Goal, ExCtx)
-	;	Where == local ->
+	;	Where == (local) ->
 		'$lgt_metacall_local'(Goal, ExCtx)
 	;	'$lgt_metacall_sender'(Goal, ExCtx, CallerExCtx, ExtraArgs)
 	).
@@ -6071,7 +6071,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, _, _, CallerExCtx, _),
 	(	CallerExCtx == [] ->
 		'$lgt_metacall_local'(Goal, ExCtx)
-	;	Where == local ->
+	;	Where == (local) ->
 		'$lgt_metacall_local'(Goal, ExCtx)
 	;	'$lgt_metacall_sender'(Goal, ExCtx, CallerExCtx, [])
 	).
@@ -6128,7 +6128,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, _, _, CallerExCtx, _),
 	(	CallerExCtx == [] ->
 		'$lgt_metacall_local'(Goal, ExCtx)
-	;	Where == local ->
+	;	Where == (local) ->
 		'$lgt_metacall_local'(Goal, ExCtx)
 	;	'$lgt_metacall_sender'(Goal, ExCtx, CallerExCtx, [])
 	).
