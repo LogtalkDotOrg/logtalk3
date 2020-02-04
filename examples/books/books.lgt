@@ -44,7 +44,7 @@ weight(horcrux_set,   123).
 :- object(data_acquisition).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2019-11-22,
 		comment is 'Data acquisition example, decoupled from data processing.'
@@ -74,7 +74,7 @@ weight(horcrux_set,   123).
 :- object(data_processing).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2019-11-27,
 		comment is 'Data processing example, decoupled from data acquisition.'

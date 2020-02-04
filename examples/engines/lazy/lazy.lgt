@@ -21,7 +21,7 @@
 :- object(lazy).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paul Tarau and Paulo Moura',
 		date is 2019-10-28,
 		comment is 'Lazy meta-predicates implemented using coroutining and threaded engines.'

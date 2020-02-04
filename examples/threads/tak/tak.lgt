@@ -21,7 +21,7 @@
 :- object(tak(_Threads)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2011-04-03,
 		comment is 'Takeuchi function (recursive arithmetic).',

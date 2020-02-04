@@ -28,7 +28,7 @@
 :- object(tap_report).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2019-11-02,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',

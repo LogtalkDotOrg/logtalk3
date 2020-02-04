@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0:2:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
 		date is 2019-10-09,
 		comment is 'Unit tests for the entity number of rules metric.'

@@ -28,7 +28,7 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 1.7,
+		version is 1:7:0,
 		author is 'Paulo Moura',
 		date is 2019-12-02,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',

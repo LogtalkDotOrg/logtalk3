@@ -25,7 +25,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2018-02-20,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'

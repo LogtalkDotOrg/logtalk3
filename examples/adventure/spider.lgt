@@ -26,7 +26,7 @@
 :- object(spider).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'David Matuszek, Villanova University. Adapted to Logtalk by Paulo Moura.',
 		date is 2019-03-11,
 		comment is 'Spider - A Sample Adventure Game.'

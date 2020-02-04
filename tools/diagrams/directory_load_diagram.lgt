@@ -22,7 +22,7 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1.19,
+		version is 1:19:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
@@ -137,7 +137,7 @@
 	extends(directory_load_diagram(dot))).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2019-04-07,
 		comment is 'Predicates for generating directory loading dependency diagrams in DOT format.',

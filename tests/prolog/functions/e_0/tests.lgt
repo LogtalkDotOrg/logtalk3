@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2018-01-27,
 		comment is 'Unit tests for the de facto standard e/0 built-in evaluable functor.'

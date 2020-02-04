@@ -6,7 +6,7 @@
 :- object(Object).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -23,7 +23,7 @@
 	extends(Parent)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -39,7 +39,7 @@
 	implements(Protocol)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -56,7 +56,7 @@
 	imports(Category)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -75,7 +75,7 @@
 	extends(Parent)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -92,7 +92,7 @@
 	specializes(Superclass)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -110,7 +110,7 @@
 	specializes(Superclass)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -128,7 +128,7 @@
 	specializes(Superclass)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -146,7 +146,7 @@
 	specializes(Superclass)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -166,7 +166,7 @@
 	specializes(Superclass)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is '${6:Description'
@@ -183,7 +183,7 @@
 	instantiates(Class)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -201,7 +201,7 @@
 	instantiates(Class)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -219,7 +219,7 @@
 	instantiates(Class)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -238,7 +238,7 @@
 	instantiates(Class)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -254,7 +254,7 @@
 :- protocol(Protocol).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -271,7 +271,7 @@
 	extends(Minimal)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -287,7 +287,7 @@
 :- category(Category).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -304,7 +304,7 @@
 	implements(Protocol)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -321,7 +321,7 @@
 	imports(Category)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'
@@ -339,7 +339,7 @@
 	imports(Category)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Author',
 		date is Year-Month-Day,
 		comment is 'Description'

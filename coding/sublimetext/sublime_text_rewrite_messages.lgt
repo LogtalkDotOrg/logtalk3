@@ -2,7 +2,7 @@
 :- category(sublime_text_rewrite_messages).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-10-04,
 		comment is 'Rewrite compiler error and warnings messages for Sublime Text builds.'

@@ -37,7 +37,7 @@
 :- protocol(metagol_example_protocol).
 
 	:- info([
-		version is 0.1,
+		version is 0:1:0,
 		author is 'Paulo Moura.',
 		date is 2019-05-07,
 		license is 'BSD 3-Clause License',

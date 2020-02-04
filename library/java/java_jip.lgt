@@ -22,7 +22,7 @@
 	implements((forwarding, java_access_protocol))).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2019-06-11,
 		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
@@ -83,7 +83,7 @@
 	extends(java(Reference, _))).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-09-22,
 		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
@@ -97,7 +97,7 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2017-10-16,
 		comment is 'Abstract interface to JIProlog API utility predicates.'

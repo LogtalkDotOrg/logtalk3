@@ -26,7 +26,7 @@
 :- object(latin).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2008-01-10,
 		comment is 'Simple test of the encoding/1 directive.'

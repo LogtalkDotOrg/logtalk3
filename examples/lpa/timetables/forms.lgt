@@ -21,7 +21,7 @@
 :- object(forms).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2005-5-8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
 		comment is 'General attributes & methods for all forms.'
@@ -42,7 +42,7 @@
 :- object(form).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2005-5-8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
 		comment is 'General attributes & methods for all forms.'

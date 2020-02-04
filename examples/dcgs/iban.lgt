@@ -21,7 +21,7 @@
 :- object(iban).
 
 	:- info([
-		version is 0.1,
+		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2015-10-11,
 		comment is 'IBAN validation example using DCG rules.'

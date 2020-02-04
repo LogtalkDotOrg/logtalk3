@@ -22,7 +22,7 @@
 :- category(code_metric).
 
 	:- info([
-		version is 0.9,
+		version is 0:9:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
 		date is 2019-09-23,
 		comment is 'Core predicates for computing source code metrics.'

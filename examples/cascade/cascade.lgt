@@ -21,7 +21,7 @@
 :- object(cascade).
 
 	:- info([
-		version is 1.02,
+		version is 1:0:2,
 		author is 'Paulo Moura',
 		date is 2019-11-21,
 		comment is 'Sample example of using expected terms to call a conjunction of goals where any of them may cause an exception condition without using the traditional catch/throw mechanism.'

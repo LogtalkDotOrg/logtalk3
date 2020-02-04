@@ -47,7 +47,7 @@ condition_opaque_to_cut_3(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2018-02-06,
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'

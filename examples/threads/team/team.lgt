@@ -21,7 +21,7 @@
 :- object(team).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2013-10-14,
 		comment is 'Example of synchronous concurrency as described in the corresponding Rosetta Code task.'

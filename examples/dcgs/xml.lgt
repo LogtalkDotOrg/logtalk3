@@ -21,7 +21,7 @@
 :- object(xml).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		date is 2012-04-16,
 		author is 'Paulo Moura',
 		comment is 'Conversion between compound terms and XML.'

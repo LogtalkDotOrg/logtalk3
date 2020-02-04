@@ -3,7 +3,7 @@
 	implements(interpreterp)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Victor Lagerkvist',
 		date is 2019-03-08,
 		comment is 'Best-first framework for general logic programs.'

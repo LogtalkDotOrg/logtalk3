@@ -3,7 +3,7 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1.11,
+		version is 1:11:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Common predicates for generating directory diagrams.',

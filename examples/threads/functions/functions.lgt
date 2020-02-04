@@ -21,7 +21,7 @@
 :- protocol(find_rootp).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2006-11-26,
 		comment is 'Default protocol for root find algorithms.'
@@ -41,7 +41,7 @@
 :- protocol(functionp).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2006-11-26,
 		comment is 'Default protocol for real functions of a single real variable.'
@@ -149,7 +149,7 @@
 	implements(find_rootp)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2008-2-4,
 		comment is 'Bisection algorithm.'
@@ -188,7 +188,7 @@
 	implements(find_rootp)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paul Crocker... No More Coffee',
 		date is 2007-07-06,
 		comment is 'Newton algorithm.'
@@ -215,7 +215,7 @@
 	implements(find_rootp)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2006-11-26,
 		comment is 'Muller algorithm.'
@@ -270,7 +270,7 @@
 	implements(find_rootp)).
 
 	:- info([
-		version is 2.1,
+		version is 2:1:0,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2008-02-08,
 		comment is 'Multi-threading interface to root finding algorithms.'

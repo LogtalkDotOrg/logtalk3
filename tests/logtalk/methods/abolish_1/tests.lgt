@@ -37,7 +37,7 @@ foobaz(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1:4:0,
 		author is 'Paulo Moura',
 		date is 2018-07-25,
 		comment is 'Unit tests for the abolish/1 built-in method.'

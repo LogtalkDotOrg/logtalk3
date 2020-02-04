@@ -22,7 +22,7 @@
 	instantiates(heuristic_search(Threshold))).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2019-01-14,
 		comment is 'Hill climbing heuristic state space search strategy.',

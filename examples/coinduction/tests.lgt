@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2013-03-02,
 		comment is 'Unit tests for the "coinduction" example.'

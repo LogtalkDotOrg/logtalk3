@@ -42,7 +42,7 @@ foo(X) :- call(X), call(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2015-05-05,
 		comment is 'Unit tests for the ISO Prolog standard retract/1 built-in predicate.'

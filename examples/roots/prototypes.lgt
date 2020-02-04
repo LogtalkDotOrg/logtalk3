@@ -21,7 +21,7 @@
 :- protocol(protop).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-7-24,
 		author is 'Paulo Moura',
 		comment is 'Default protocol for all prototypes.'
@@ -49,7 +49,7 @@
 	imports(((initialization), proto_hierarchy))).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		date is 2017-06-29,
 		author is 'Paulo Moura',
 		comment is 'Minimal predicates for all prototypes. Default root of the extension graph.'

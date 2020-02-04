@@ -23,7 +23,7 @@
 	extends(integer)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2009-3-6,
 		comment is 'Natural numbers data type predicates.'

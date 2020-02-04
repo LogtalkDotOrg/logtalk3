@@ -22,7 +22,7 @@
 	instantiates(blind_search(Bound))).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Ivan Bratko; adapted to Logtalk by Paulo Moura.',
 		date is 2013-05-10,
 		comment is 'Breadth first state space search strategy.',

@@ -21,7 +21,7 @@
 :- protocol(relationp).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2000-7-24,
 		comment is 'Relations between objects protocol.'
@@ -264,7 +264,7 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.32,
+		version is 1:32:0,
 		date is 2017-06-29,
 		author is 'Esteban Zimanyi, Paulo Moura',
 		comment is 'Enables the representation of relations between independent objects.'
@@ -651,7 +651,7 @@
 	specializes(relation)).
 
 	:- info([
-		version is 3.3,
+		version is 3:3:0,
 		date is 2006-12-16,
 		author is 'Paulo Moura',
 		comment is 'Enables the representation of relations with constraints on the state of participating objects.'

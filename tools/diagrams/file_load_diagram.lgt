@@ -22,7 +22,7 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.26,
+		version is 2:26:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
@@ -133,7 +133,7 @@
 	extends(file_load_diagram(dot))).
 
 	:- info([
-		version is 2.01,
+		version is 2:01:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Predicates for generating file loading dependency diagrams in DOT format. A dependency exists when a file loads or includes another file.',

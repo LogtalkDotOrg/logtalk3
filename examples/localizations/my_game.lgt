@@ -21,7 +21,7 @@
 :- object(my_game(_)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2015-10-12,
 		comment is 'A simple example of supporting application localization in multiple languages.',

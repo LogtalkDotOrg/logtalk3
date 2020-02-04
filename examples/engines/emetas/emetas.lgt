@@ -21,7 +21,7 @@
 :- object(emetas).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paul Tarau and Paulo Moura',
 		date is 2016-06-18,
 		comment is 'Examples of implementing meta-predicates using threaded engines.'

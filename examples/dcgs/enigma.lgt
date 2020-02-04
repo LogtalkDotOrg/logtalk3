@@ -21,7 +21,7 @@
 :- object(enigma).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2006-01-22,
 		comment is 'Example of using DCG rules to decrypt a enigma where words are made of numbers corresponding to the characters on a cellphone keypad.'

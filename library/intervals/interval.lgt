@@ -22,7 +22,7 @@
 	implements(intervalp)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2019-05-21,
 		comment is 'Basic temporal interval relations. An interval is represented by a compound term, ``i/2``, with two ground arguments, the start and end points.'

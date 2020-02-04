@@ -21,7 +21,7 @@
 :- object(timeout).
 
 	:- info([
-		version is 0.6,
+		version is 0:6:0,
 		author is 'Paulo Moura',
 		date is 2019-12-02,
 		comment is 'Predicates for calling goal with a time limit.',

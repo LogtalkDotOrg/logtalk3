@@ -22,7 +22,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		comment is 'Implements predicates for retrieving common mathematical constants.'
 	]).
@@ -47,7 +47,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.2,
+		version is 1:2:0,
 		date is 2019-05-02,
 		comment is 'Parametric object for representing geometric ellipses.',
 		parnames is ['RX', 'RY', 'Color'],
@@ -118,7 +118,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.1,
+		version is 1:1:0,
 		date is 2019-05-02,
 		comment is 'Parametric object for representing geometric circles.',
 		parnames is ['Radius', 'Color'],
@@ -151,7 +151,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric circles with radius = 1.',
 		parnames is ['Color'],
@@ -173,7 +173,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric red circles.',
 		parnames is ['Radius'],

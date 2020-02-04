@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2018-03-26,
 		comment is 'Unit tests for the imports_category/2-3 built-in predicates.'

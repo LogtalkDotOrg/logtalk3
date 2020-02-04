@@ -21,7 +21,7 @@
 :- object(type).
 
 	:- info([
-		version is 1.27,
+		version is 1:27:0,
 		author is 'Paulo Moura',
 		date is 2019-07-27,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',

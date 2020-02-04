@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.7,
+		version is 1:7:0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2019-12-11,
 		comment is 'Unit tests for the "complements/allow" example.'

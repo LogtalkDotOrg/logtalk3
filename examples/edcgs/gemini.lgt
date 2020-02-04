@@ -26,7 +26,7 @@ SOFTWARE.
 :- object(gemini).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Peter Van Roy; adapted to Logtalk by Paulo Moura.',
 		date is 2018-05-30,
 		comment is 'EDCGs example.',

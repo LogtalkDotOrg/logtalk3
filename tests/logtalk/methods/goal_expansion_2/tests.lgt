@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2019-03-05,
 		comment is 'Unit tests for the goal_expansion/2 user-defined hook predicate.'

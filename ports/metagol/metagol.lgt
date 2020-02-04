@@ -38,7 +38,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.24,
+		version is 0:24:0,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
 		date is 2019-05-08,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',

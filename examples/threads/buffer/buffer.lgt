@@ -21,7 +21,7 @@
 :- object(buffer(_MaxCapacity)).
 
 	:- info([
-		version is 2.1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
 		date is 2007-9-16,
 		comment is 'Producer-consumer problem with a bounded buffer.'

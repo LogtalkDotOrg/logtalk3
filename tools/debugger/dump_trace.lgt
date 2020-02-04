@@ -21,7 +21,7 @@
 :- object(dump_trace).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2014-12-16,
 		comment is 'Simple solution for redirecting a debugger trace to a file.'

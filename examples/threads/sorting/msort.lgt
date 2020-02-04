@@ -21,7 +21,7 @@
 :- object(msort(_Threads)).
 
 	:- info([
-		version is 1.32,
+		version is 1:32:0,
 		author is 'Paulo Moura and Paul Crocker',
 		date is 2011-03-28,
 		comment is 'Multi-threaded implementation of the merge sort algorithm.',

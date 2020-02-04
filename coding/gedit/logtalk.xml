@@ -5,7 +5,7 @@
 :- object(${1:Object}).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${2:Description}'
@@ -24,7 +24,7 @@ $0
 	extends(${2:Parent})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'
@@ -43,7 +43,7 @@ $0
 	implements(${2:Protocol})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'
@@ -62,7 +62,7 @@ $0
 	imports(${2:Category})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'
@@ -83,7 +83,7 @@ $0
 	extends(${4:Parent})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${5:Description}'
@@ -102,7 +102,7 @@ $0
 	specializes(${2:Superclass})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'
@@ -122,7 +122,7 @@ $0
 	specializes(${3:Superclass})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${4:Description}'
@@ -142,7 +142,7 @@ $0
 	specializes(${3:Superclass})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${4:Description}'
@@ -162,7 +162,7 @@ $0
 	specializes(${3:Superclass})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${4:Description}'
@@ -184,7 +184,7 @@ $0
 	specializes(${5:Superclass})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${6:Description}'
@@ -203,7 +203,7 @@ $0
 	instantiates(${2:Class})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'
@@ -223,7 +223,7 @@ $0
 	instantiates(${3:Class})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${4:Description}'
@@ -243,7 +243,7 @@ $0
 	instantiates(${3:Class})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${4:Description}'
@@ -264,7 +264,7 @@ $0
 	instantiates(${4:Class})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${5:Description}'
@@ -282,7 +282,7 @@ $0
 :- category(${1:Category}).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${2:Description}'
@@ -301,7 +301,7 @@ $0
 	implements(${2:Protocol})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'
@@ -320,7 +320,7 @@ $0
 	extends(${2:Minimal})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'
@@ -339,7 +339,7 @@ $0
 	complements(${2:Object})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'
@@ -357,7 +357,7 @@ $0
 :- protocol(${1:Protocol}).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${2:Description}'
@@ -376,7 +376,7 @@ $0
 	extends(${2:Minimal})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$(whoami)',
 		date is $(date +%Y-%m-%d),
 		comment is '${3:Description}'

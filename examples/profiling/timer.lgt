@@ -21,7 +21,7 @@
 :- object(timer).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2006-9-17,
 		comment is 'Call executing time profiler.'

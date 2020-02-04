@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2015-05-05,
 		comment is 'Unit tests for the ISO Prolog standard keysort/2 built-in predicate.'

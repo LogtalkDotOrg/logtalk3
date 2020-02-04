@@ -21,7 +21,7 @@
 :- protocol(dictionaryp).
 
 	:- info([
-		version is 2.1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
 		date is 2019-05-17,
 		comment is 'Dictionary protocol.',

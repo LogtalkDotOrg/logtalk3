@@ -22,7 +22,7 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2018-06-04,
 		comment is 'Bridge puzzle.'

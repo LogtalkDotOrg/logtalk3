@@ -30,7 +30,7 @@
 	:- set_logtalk_flag(events, allow).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2018-04-04,
 		comment is 'Unit tests for the "blocks" example.'

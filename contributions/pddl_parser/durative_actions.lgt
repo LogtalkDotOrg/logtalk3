@@ -2,7 +2,7 @@
 :- category(durative_actions).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2011-06-12,
 		comment is 'Durative action grammar rules for parsing PDDL 3.0 domains.'

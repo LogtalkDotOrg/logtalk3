@@ -21,7 +21,7 @@
 :- protocol(java_access_protocol).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2018-05-23,
 		comment is 'Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.'
@@ -75,7 +75,7 @@
 :- protocol(java_utils_protocol).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2017-10-16,
 		comment is 'Abstract interface to Java utility predicates.'

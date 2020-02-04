@@ -24,11 +24,17 @@ RELEASE NOTES
 3.36.0 - February ??, 2020
 ==========================
 
+* CHANGED: All versions in `info/1` directives in all source files to use
+the compound term `Major:Minor:Day` format.
+
 * CHANGED: All dates in `info/1` directives in all source files to the ISO
 8601 standard format, `Year-Month-Day`.
 
 Logtalk compiler and runtime
 ----------------------------
+
+* CHANGED: Accept versions in `info/1` directives using the compound term
+format `Major:Minor:Day`.
 
 * CHANGED: Accept dates in `info/1` directives in ISO 8601 standard format
 (`Year-Month-Day`).
@@ -43,6 +49,12 @@ using a `uses/2` or `use_module/2` directive.
 clause (usually caused by a call in the body to a module predicate with
 an ambiguous meta-predicate template) would result in a failure instead
 of an error message.
+
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The Qu-Prolog adapter file to redefine the `:/2` operator per its
+ISO Prolog standard definition.
 
 Documentation
 -------------

@@ -22,7 +22,7 @@
 :- category(code_metrics_utilities).
 
 	:- info([
-		version is 0.6,
+		version is 0:6:0,
 		author is 'Ebrahim Azarisooreh',
 		date is 2018-06-08,
 		comment is 'Internal predicates for analyzing source code.',

@@ -21,7 +21,7 @@
 :- category(os_types).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2018-02-28,
 		comment is 'A set of operating-system related types.',

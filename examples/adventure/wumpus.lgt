@@ -51,7 +51,7 @@
 :- object(wumpus).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'Dan Cliburn. Adapted to Logtalk by Paulo Moura.',
 		date is 2019-03-11,
 		comment is 'Hunt the Wumpus text adventure.'

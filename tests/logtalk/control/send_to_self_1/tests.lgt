@@ -90,7 +90,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2020-01-28,
 		comment is 'Unit tests for the (::)/1 built-in control construct.'

@@ -22,7 +22,7 @@
 	implements(monitorp)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2019-03-08,
 		comment is 'Monitor predicates.'

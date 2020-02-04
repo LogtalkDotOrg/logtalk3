@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.17,
+		version is 2:17:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
@@ -89,7 +89,7 @@
 	extends(inheritance_diagram(dot))).
 
 	:- info([
-		version is 2.0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2014-01-15,
 		comment is 'Predicates for generating entity diagrams in DOT format with inheritance relation edges but no cross-referencing relation edges.',

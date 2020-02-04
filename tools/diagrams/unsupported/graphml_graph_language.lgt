@@ -22,7 +22,7 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 0.1,
+		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2014-08-18,
 		comment is 'Predicates for generating graph files in the GraphML language.'

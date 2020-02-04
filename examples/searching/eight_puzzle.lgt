@@ -22,7 +22,7 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2020-02-03,
 		comment is 'Eight puzzle heuristic state space search problem.'

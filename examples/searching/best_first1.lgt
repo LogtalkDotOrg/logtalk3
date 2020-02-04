@@ -22,7 +22,7 @@
 	instantiates(heuristic_search(Threshold))).
 
 	:- info([
-		version is 1.4,
+		version is 1:4:0,
 		author is 'Ivan Bratko; adapted to Logtalk by Paulo Moura.',
 		date is 2013-05-10,
 		comment is 'Best first heuristic state space search strategy.',

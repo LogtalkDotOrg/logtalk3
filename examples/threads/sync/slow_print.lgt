@@ -25,7 +25,7 @@
 :- object(slow_print).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2017-03-26,
 		comment is 'Simple example for using the synchronized/1 predicate directive.'

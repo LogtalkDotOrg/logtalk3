@@ -22,7 +22,7 @@
 	implements(statisticsp)).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2019-05-23,
 		comment is 'Statistical calculations over a list of numbers.'

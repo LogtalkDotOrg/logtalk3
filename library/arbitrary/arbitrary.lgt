@@ -33,7 +33,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2.13,
+		version is 2:13:0,
 		author is 'Paulo Moura',
 		date is 2019-06-10,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object.',

@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1:6:0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2019-08-17,
 		comment is 'Unit tests for the "lambdas" example.'

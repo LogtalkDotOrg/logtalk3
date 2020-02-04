@@ -21,7 +21,7 @@
 :- object(metered_concurrency).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2013-11-02,
 		comment is 'Simple example of using multi-threading notifications, which use a per-object FIFO message queue, thus avoiding the need of idle-loops, for implementing a counting semaphore.'

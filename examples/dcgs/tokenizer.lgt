@@ -41,7 +41,7 @@
 :- object(tokenizer).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2006-2-11,
 		author is 'Michael A. Covington',
 		comment is 'Natural language tokenizer example using DCG rules.'

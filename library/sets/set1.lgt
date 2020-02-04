@@ -22,7 +22,7 @@
 	extends(set)).
 
 	:- info([
-		version is 1.23,
+		version is 1:23:0,
 		author is 'Paulo Moura',
 		date is 2018-07-11,
 		comment is 'Set predicates with elements constrained to a single type.',

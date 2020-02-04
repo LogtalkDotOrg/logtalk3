@@ -2,7 +2,7 @@
 :- category(actions).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
 		date is 2011-06-12,
 		comment is 'Actions grammar rules used for parsing both PDDL 3.0 domains and problems.'

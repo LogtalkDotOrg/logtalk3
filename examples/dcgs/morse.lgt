@@ -21,7 +21,7 @@
 :- object(morse).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2013-11-04,
 		comment is 'Morse code decoder.'

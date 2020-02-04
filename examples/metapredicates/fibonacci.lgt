@@ -21,7 +21,7 @@
 :- object(fibonacci).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2010-12-19,
 		author is 'Paulo Moura',
 		comment is 'Computation of Fibonacci numbers using a fold left meta-predicate.'

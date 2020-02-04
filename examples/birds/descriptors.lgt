@@ -22,7 +22,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-2-18,
 		comment is 'Bird descriptors predicates.',
 		source is 'Example adapted from an Amzi! Inc Prolog book.'

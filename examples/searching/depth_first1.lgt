@@ -22,7 +22,7 @@
 	instantiates(blind_search(Bound))).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2013-05-10,
 		comment is 'Depth first state space search strategy.',

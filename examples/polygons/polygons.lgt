@@ -23,7 +23,7 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		date is 2017-02-15,
 		author is 'Paulo Moura',
 		comment is 'Polygon predicates.'
@@ -81,7 +81,7 @@
 	specializes(polygon)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Triangle class.'
@@ -100,7 +100,7 @@
 	specializes(polygon)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Square class.'
@@ -119,7 +119,7 @@
 	specializes(polygon)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Pentagon class.'
@@ -138,7 +138,7 @@
 	specializes(polygon)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Hexagon class.'
@@ -156,7 +156,7 @@
 	instantiates(constrained_relation)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2004-8-15,
 		author is 'Paulo Moura',
 		comment is 'Concentric polygons as a constrained binary relation.'

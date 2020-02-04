@@ -22,7 +22,7 @@
 	extends(term)).
 
 	:- info([
-		version is 1.4,
+		version is 1:4:0,
 		author is 'Paulo Moura',
 		date is 2018-07-11,
 		comment is 'Callable term type predicates.'

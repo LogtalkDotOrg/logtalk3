@@ -34,7 +34,7 @@ fsm([red-0-red, red-1-green, red-2-red,
 :- object(fsm(_Transitions, _Initial, _Final)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2015-08-02,
 		comment is 'A simple implementation of finite-state machines using assignable variables and parametric objects. Adapted from a similar example by Nobukuni Kino.',

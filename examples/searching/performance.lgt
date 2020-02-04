@@ -23,7 +23,7 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2013-04-23,
 		comment is 'Performance monitor for state space searches.'

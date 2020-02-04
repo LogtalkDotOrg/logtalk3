@@ -24,7 +24,7 @@
 :- protocol(test_protocol).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2014-02-08,
 		comment is 'Sample protocol for testing with the `source_data` flag turned on.'
@@ -49,7 +49,7 @@
 :- protocol(empty_protocol).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-02-19,
 		comment is 'Empty protocol for testing validity of protocol properties.'
@@ -61,7 +61,7 @@
 :- protocol(built_in_protocol).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
 		comment is 'Built-in protocol for testing determinism of protocol properties.'
@@ -75,7 +75,7 @@
 :- protocol(dynamic_protocol).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
 		comment is 'Dynamic protocol for testing determinism of protocol properties.'
@@ -89,7 +89,7 @@
 :- protocol(debug_protocol).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
 		comment is 'Protocol compiled in debug mode for testing determinism of protocol properties.'

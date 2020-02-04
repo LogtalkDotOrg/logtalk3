@@ -21,7 +21,7 @@
 :- object(translator).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		date is 2016-02-15,
 		author is 'Paulo Moura',
 		comment is 'Translator of logic propositions to clauses in conjunctive normal form.',

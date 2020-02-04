@@ -21,7 +21,7 @@
 :- object(qsort(_Threads)).
 
 	:- info([
-		version is 1.21,
+		version is 1:21:0,
 		author is 'Paul Crocker and Paulo Moura',
 		date is 2007-12-27,
 		comment is 'Multi-threaded version of the quick sort algorithm.',

@@ -21,7 +21,7 @@
 :- protocol(intervalp).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2014-04-26,
 		comment is 'Basic temporal interval relations protocol (based on James F. Allen Interval Algebra work).',

@@ -102,7 +102,7 @@
 :- object(date(_Year_, _Month_, _Day_)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-11-16,
 		comment is 'Dates as parametric objects.',
@@ -145,7 +145,7 @@
 :- object(time(_Hours_, _Mins_, _Secs_)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-11-16,
 		comment is 'Time as parametric objects.',
@@ -186,7 +186,7 @@
 :- object(rectangle(_Width_, _Height_, _X_, _Y_)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-11-16,
 		comment is 'A simple implementation of a geometric rectangle using parametric objects.',
@@ -244,7 +244,7 @@
 :- object(person(_Name_, _Age_)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-11-16,
 		comment is 'A simple representation for persons data using parametric objects.',
@@ -278,7 +278,7 @@
 	extends(person(_Name_, _Age_))).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-11-16,
 		comment is 'A simple representation for employees data using parametric objects.',
@@ -317,7 +317,7 @@
 :- category(dress(_Season_)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-11-16,
 		comment is 'Dress advice according to the season.',
@@ -340,7 +340,7 @@
 :- category(speech(_Event_)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-11-16,
 		comment is 'Speech advice according to the event.',
@@ -362,7 +362,7 @@
 	imports((dress(Season), speech(Event)))).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-11-16,
 		comment is 'Speech and dress advice according to the season and the event.',

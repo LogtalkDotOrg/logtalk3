@@ -21,7 +21,7 @@
 :- category(counter).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2010-02-23,
 		author is 'Paulo Moura',
 		comment is 'Simple meta-interpreter for pure Prolog for counting resolution steps.'

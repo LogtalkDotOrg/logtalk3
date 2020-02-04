@@ -40,7 +40,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.56,
+		version is 1:56:0,
 		author is 'Paulo Moura',
 		date is 2019-11-26,
 		comment is 'Portable operating-system access predicates.',

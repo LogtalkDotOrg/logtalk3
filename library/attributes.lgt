@@ -22,7 +22,7 @@
 :- category(attributes).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2000-7-24,
 		comment is 'Dynamic attributes dictionary.'

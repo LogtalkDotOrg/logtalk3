@@ -26,7 +26,7 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 0.3,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2018-05-23,
 		comment is 'Some benchmarks for the "jpl" example.'

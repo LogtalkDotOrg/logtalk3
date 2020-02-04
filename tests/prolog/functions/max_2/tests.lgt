@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2015-11-8,
 		comment is 'Unit tests for the ISO Prolog standard max/2 built-in function.'

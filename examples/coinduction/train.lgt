@@ -25,7 +25,7 @@
 	:- object(train).
 
 		:- info([
-			version is 0.5,
+			version is 0:5:0,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2013-03-06,
 			comment is 'Timed automata example.'
@@ -92,7 +92,7 @@
 	:- object(train).
 
 		:- info([
-			version is 0.4,
+			version is 0:4:0,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2013-03-06,
 			comment is 'Timed automata example.'

@@ -23,7 +23,7 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.12,
+		version is 1:12:0,
 		author is 'Richard O''Keefe (main predicates); adapted to Logtalk by Paulo Moura.',
 		date is 2019-05-23,
 		comment is 'Set predicates implemented using ordered lists. Uses ``==/2`` for element comparison and standard term ordering.',

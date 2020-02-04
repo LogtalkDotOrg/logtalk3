@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.92,
+		version is 1:92:0,
 		author is 'Paulo Moura',
 		date is 2020-02-03,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'

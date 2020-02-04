@@ -22,7 +22,7 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.12,
+		version is 0:12:0,
 		author is 'Paulo Moura',
 		date is 2019-09-23,
 		comment is 'Entity and entity predicates documentation score.',

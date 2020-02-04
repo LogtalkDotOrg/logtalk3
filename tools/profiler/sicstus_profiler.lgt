@@ -22,7 +22,7 @@
 	implements(profilerp)).
 
 	:- info([
-		version is 1.6,
+		version is 1:6:0,
 		author is 'Paulo Moura',
 		date is 2018-07-12,
 		comment is 'Simple wrapper for the SICStus Prolog profiler.'

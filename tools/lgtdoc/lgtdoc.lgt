@@ -22,7 +22,7 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 5.2,
+		version is 5:2:0,
 		author is 'Paulo Moura',
 		date is 2020-02-03,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'

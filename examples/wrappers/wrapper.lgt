@@ -22,7 +22,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2015-09-02,
 		comment is 'Hook object for compiling plain Prolog files, wrapping their code in an object named after the file name.'

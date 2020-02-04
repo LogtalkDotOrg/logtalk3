@@ -21,7 +21,7 @@
 :- object(cascade_dcgs).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'Paulo Moura',
 		date is 2019-01-31,
 		comment is 'Sample example of using expected terms to call a conjunction of goals where any of them may cause an exception condition without using the traditional catch/throw mechanism. An alternative implementation of the "cascade" object using DCGs.'

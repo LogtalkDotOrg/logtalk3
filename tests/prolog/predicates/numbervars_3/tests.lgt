@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2020-01-06,
 		comment is 'Unit tests for the de facto Prolog standard numbervars/3 built-in predicate.'

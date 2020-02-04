@@ -22,7 +22,7 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.34,
+		version is 2:34:0,
 		author is 'Paulo Moura',
 		date is 2020-02-03,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'

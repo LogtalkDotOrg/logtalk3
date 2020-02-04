@@ -28,7 +28,7 @@ consult the URL http://www.kprolog.com/en/logical_assignment/
 :- protocol(assignvarsp).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'Nobukuni Kino and Paulo Moura',
 		date is 2019-06-10,
 		comment is 'Assignable variables (supporting backtracable assignment of non-variable terms) protocol.',

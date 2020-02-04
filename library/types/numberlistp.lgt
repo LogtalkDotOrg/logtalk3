@@ -21,7 +21,7 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1.6,
+		version is 1:6:0,
 		author is 'Paulo Moura',
 		date is 2019-03-02,
 		comment is 'List of numbers protocol.',

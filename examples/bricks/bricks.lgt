@@ -28,7 +28,7 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2000-10-31,
 		author is 'Paulo Moura',
 		comment is 'Two-dimensional brick (or should I say square?) class.'
@@ -88,7 +88,7 @@
 	instantiates(constrained_relation)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		date is 2018-04-04,
 		author is 'Paulo Moura',
 		comment is 'Stack of bricks as a constrained binary relation.'
@@ -145,7 +145,7 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		date is 2010-03-28,
 		author is 'Paulo Moura',
 		comment is 'Monitor for brick movements printing an ascii representation of each brick position.'

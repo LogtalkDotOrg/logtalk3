@@ -24,7 +24,7 @@
 	:- set_logtalk_flag(unknown_entities, silent).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012-07-04,
 		comment is 'Unit tests for the "reflection" example.'

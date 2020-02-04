@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2017-12-28,
 		comment is 'Unit tests for the code documentation metric.'

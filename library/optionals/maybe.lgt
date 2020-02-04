@@ -21,7 +21,7 @@
 :- object(maybe).
 
 	:- info([
-		version is 0.6,
+		version is 0:6:0,
 		author is 'Paulo Moura',
 		date is 2019-11-26,
 		comment is 'Types and predicates for type-checking and handling optional terms. Inspired by Haskell.',

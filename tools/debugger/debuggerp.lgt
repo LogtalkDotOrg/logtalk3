@@ -21,7 +21,7 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 2.2,
+		version is 2:2:0,
 		author is 'Paulo Moura',
 		date is 2019-12-03,
 		comment is 'Debugger protocol.',

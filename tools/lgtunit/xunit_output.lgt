@@ -28,7 +28,7 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2019-11-09,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',

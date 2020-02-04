@@ -21,7 +21,7 @@
 :- object(checkpoint).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2013-10-22,
 		comment is 'Simple example of using a barrier as a checkpoint to synchronize a set of worker threads assembling a set of items.'

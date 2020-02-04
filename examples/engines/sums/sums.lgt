@@ -21,7 +21,7 @@
 :- object(sums).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Jan Wielemaker. Adapted to Logtalk by Paulo Moura',
 		date is 2016-06-15,
 		comment is 'Example of using engines to accumulate state.'

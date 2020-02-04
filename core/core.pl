@@ -3427,7 +3427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 36, 0, b02)).
+'$lgt_version_data'(logtalk(3, 36, 0, b03)).
 
 
 
@@ -11376,14 +11376,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Date = Year-Month-Day ->
 		% ISO 8601 standard format
-		'$lgt_check'(integer, Year),
-		'$lgt_check'(integer, Month),
-		'$lgt_check'(integer, Day)
+		'$lgt_check'(non_negative_integer, Year),
+		'$lgt_check'(non_negative_integer, Month),
+		'$lgt_check'(non_negative_integer, Day)
 	;	Date = Year/Month/Day ->
 		% deprecated format
-		'$lgt_check'(integer, Year),
-		'$lgt_check'(integer, Month),
-		'$lgt_check'(integer, Day)
+		'$lgt_check'(non_negative_integer, Year),
+		'$lgt_check'(non_negative_integer, Month),
+		'$lgt_check'(non_negative_integer, Day)
 	;	throw(type_error(date, Date))
 	).
 
@@ -11413,7 +11413,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_entity_info_directive_pair'(version, Version, version(Version)) :-
 	!,
-	'$lgt_check'(atomic_or_string, Version).
+	(	Version = ':'(Major, ':'(Minor, Patch)) ->
+		'$lgt_check'(non_negative_integer, Major),
+		'$lgt_check'(non_negative_integer, Minor),
+		'$lgt_check'(non_negative_integer, Patch)
+	;	% deprecated format
+		'$lgt_check'(atomic_or_string, Version)
+	).
 
 '$lgt_compile_entity_info_directive_pair'(copyright, Copyright, copyright(Copyright)) :-
 	!,

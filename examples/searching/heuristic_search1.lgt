@@ -23,7 +23,7 @@
 	specializes(search_strategy)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 1998-3-23,
 		comment is 'Heuristic state space search strategies.',

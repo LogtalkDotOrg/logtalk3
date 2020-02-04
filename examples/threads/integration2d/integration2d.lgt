@@ -21,7 +21,7 @@
 :- protocol(integrate2d).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paul Crocker',
 		date is 2008-7-11,
 		comment is 'Default protocol for Numerical Integration of functions of two variables.'
@@ -44,7 +44,7 @@
 	:- threaded.
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paul Crocker',
 		date is 2013-04-19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of two variables.',
@@ -142,7 +142,7 @@
 	:- threaded.
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paul Crocker',
 		date is 2013-04-19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of two real variables.',

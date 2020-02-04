@@ -3,7 +3,7 @@
 	implements(interpreterp)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.',
 		date is 2018-05-07,
 		comment is 'Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.'

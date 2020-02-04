@@ -28,7 +28,7 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2016-05-25,
 		author is 'Paulo Moura',
 		comment is 'Two-dimensional block (or should I say square?) class.'
@@ -88,7 +88,7 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2017-02-15,
 		author is 'Paulo Moura',
 		comment is 'Block stacks. A stack is represented by top-bottom tuples.'
@@ -202,7 +202,7 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2016-05-25,
 		author is 'Paulo Moura',
 		comment is 'Block stack monitor. Prints an ASCII representation of all block stacks when a block is moved.'

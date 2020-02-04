@@ -23,7 +23,7 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.21,
+		version is 1:21:0,
 		author is 'Paulo Moura',
 		date is 2020-02-04,
 		comment is 'Difference list predicates.',

@@ -21,7 +21,7 @@
 :- protocol(forwarding).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2013-05-04,
 		comment is 'Message forwarding protocol.'

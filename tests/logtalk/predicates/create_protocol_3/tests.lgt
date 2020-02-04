@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2019-01-09,
 		comment is 'Unit tests for the create_protocol/3 built-in predicate.'

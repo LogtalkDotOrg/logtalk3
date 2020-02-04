@@ -22,7 +22,7 @@
 	implements(metap)).
 
 	:- info([
-		version is 5.2,
+		version is 5:2:0,
 		date is 2016-10-06,
 		author is 'Paulo Moura',
 		comment is 'Some useful meta-predicates.',

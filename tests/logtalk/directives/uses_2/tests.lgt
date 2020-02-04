@@ -138,7 +138,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1:4:0,
 		author is 'Paulo Moura',
 		date is 2020-01-23,
 		comment is 'Unit tests for the uses/2 built-in directive.'

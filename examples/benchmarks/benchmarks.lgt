@@ -21,7 +21,7 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 5.6,
+		version is 5:6:0,
 		author is 'Paulo Moura',
 		date is 2017-02-15,
 		comment is 'Benchmark utility predicates and standard set of benchmarks.'

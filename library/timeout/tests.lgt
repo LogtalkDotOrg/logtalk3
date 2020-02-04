@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0:5:0,
 		author is 'Paulo Moura',
 		date is 2019-12-02,
 		comment is 'Unit tests for the "timeout" library.'

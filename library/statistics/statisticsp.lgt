@@ -21,7 +21,7 @@
 :- protocol(statisticsp).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2017-10-03,
 		comment is 'Statistical calculations over a list of numbers protocol.',

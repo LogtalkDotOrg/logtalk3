@@ -21,7 +21,7 @@
 :- object(dcgtest).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		date is 2010-03-29,
 		author is 'Paulo Moura',
 		comment is 'Test cases for the Logtalk DCG translator.'

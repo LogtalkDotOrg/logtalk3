@@ -37,7 +37,7 @@
 :- object(iso8601).
 
 	:- info([
-		version is 1.03,
+		version is 1:0:3,
 		author is 'Daniel L. Dudley',
 		date is 2019-10-09,
 		comment is 'ISO 8601 (and European civil calendar) compliant library of date predicates.',

@@ -25,7 +25,7 @@
 	:- object(pta).
 
 		:- info([
-			version is 0.1,
+			version is 0:1:0,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2010-07-23,
 			comment is 'Pushdown timed automaton example.'
@@ -54,7 +54,7 @@
 	:- object(pta).
 
 		:- info([
-			version is 0.1,
+			version is 0:1:0,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2010-07-23,
 			comment is 'Pushdown timed automaton example.'

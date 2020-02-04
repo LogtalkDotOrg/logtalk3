@@ -22,7 +22,7 @@
 	implements(event_registryp)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2009-10-8,
 		comment is 'Before events registry predicates.',

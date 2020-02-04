@@ -22,7 +22,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.1,
+		version is 1:1:0,
 		date is 2013-10-10,
 		comment is 'Examples of using Prolog built-in meta-predicates and module meta-predicates that take closures as arguments.'
 	]).

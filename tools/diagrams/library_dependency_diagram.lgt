@@ -22,7 +22,7 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.27,
+		version is 2:27:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
@@ -194,7 +194,7 @@
 	extends(library_dependency_diagram(dot))).
 
 	:- info([
-		version is 2.01,
+		version is 2:01:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Predicates for generating library dependency diagrams in DOT format.',

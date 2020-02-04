@@ -21,7 +21,7 @@
 :- protocol(loopp).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2017-03-20,
 		comment is 'Loop control constructs protocol.',

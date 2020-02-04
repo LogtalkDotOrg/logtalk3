@@ -21,7 +21,7 @@
 :- protocol(profilerp).
 
 	:- info([
-		version is 1.02,
+		version is 1:0:2,
 		author is 'Paulo Moura',
 		date is 2015-02-13,
 		comment is 'Simple wrapper protocol for Prolog native profilers.'

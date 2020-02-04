@@ -46,7 +46,7 @@ context_switch_test_object(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2018-03-26,
 		comment is 'Unit tests for the (<<)/2 built-in control construct.'

@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2018-06-28,
 		comment is 'Unit tests for the ISO Prolog standard numbers syntax plus tests for de facto standard syntax extensions.'

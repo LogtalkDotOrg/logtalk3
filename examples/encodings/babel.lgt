@@ -26,7 +26,7 @@
 :- object(babel).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2011-04-05,
 		comment is 'Simple test of the encoding/1 directive.'

@@ -21,7 +21,7 @@
 :- object(gensym).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'Paulo Moura',
 		date is 2011-11-09,
 		comment is 'Predicates for generating unique atoms. Object protocol based on the ``gensym`` module of SWI-Prolog.'

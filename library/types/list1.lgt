@@ -22,7 +22,7 @@
 	extends(list)).
 
 	:- info([
-		version is 1.22,
+		version is 1:22:0,
 		author is 'Paulo Moura',
 		date is 2018-07-11,
 		comment is 'List predicates with elements constrained to a single type.',

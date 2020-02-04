@@ -22,7 +22,7 @@
 :- object(optional).
 
 	:- info([
-		version is 2.0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2020-01-02,
 		comment is 'Constructors for optional terms. An optional term is either empty or holds a value. Optional terms should be regarded as opaque terms and always used with the ``optional/1`` object by passing the optional term as a parameter.',
@@ -154,7 +154,7 @@
 :- object(optional(_Optional)).
 
 	:- info([
-		version is 1.7,
+		version is 1:7:0,
 		author is 'Paulo Moura',
 		date is 2019-11-26,
 		comment is 'Optional term handling predicates. Requires passing an optional term (constructed using the ``optional`` object predicates) as a parameter.',

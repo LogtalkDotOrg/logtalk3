@@ -33,7 +33,7 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.16,
+		version is 1:16:0,
 		author is 'Paulo Moura',
 		date is 2019-11-29,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',

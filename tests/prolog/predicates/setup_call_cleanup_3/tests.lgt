@@ -43,7 +43,7 @@ test_error_choice :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Jan Wielemaker. Adapted to Logtalk by Paulo Moura.',
 		date is 2015-05-12,
 		comment is 'Unit tests for the setup_call_cleanup/3 built-in predicate that is becoming a de facto standard.',

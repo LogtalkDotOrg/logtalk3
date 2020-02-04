@@ -2,7 +2,7 @@
 :- object(object).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is pm,
 		date is 2008-4-9,
 		comment is 'Simple example of using compilation hooks and term expansion for conditional compilation of debug statements.'

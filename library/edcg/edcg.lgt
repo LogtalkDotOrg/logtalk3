@@ -27,7 +27,7 @@ SOFTWARE.
 	implements(expanding)).
 
 	:- info([
-		version is 1.04,
+		version is 1:04:0,
 		author is 'Peter Van Roy; adapted to Logtalk by Paulo Moura.',
 		date is 2019-10-09,
 		comment is 'Multiple hidden parameters: an extension to Prolog''s DCG notation. Ported to Logtalk as a hook object.',

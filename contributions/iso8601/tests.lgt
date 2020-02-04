@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura and Daniel L. Dudley',
 		date is 2016-03-12,
 		comment is 'Unit tests for the iso8601 library.'

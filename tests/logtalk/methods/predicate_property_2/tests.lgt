@@ -27,7 +27,7 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1:6:0,
 		author is 'Paulo Moura',
 		date is 2018-06-20,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'

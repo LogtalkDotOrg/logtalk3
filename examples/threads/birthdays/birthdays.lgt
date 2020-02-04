@@ -22,7 +22,7 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura and Peter Robinson',
 		date is 2007-3-24,
 		comment is 'Simple multi-threading example with agents and their birthdays.'

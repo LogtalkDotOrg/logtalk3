@@ -21,7 +21,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0.32,
+		version is 0:32:0,
 		author is 'Paulo Moura',
 		date is 2020-01-21,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',

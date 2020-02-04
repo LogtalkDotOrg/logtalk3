@@ -42,7 +42,7 @@ Who owns the zebra and who drinks water?
 :- object(houses).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2014-09-27,
 		author is 'Paulo Moura and Markus Triska',
 		comment is 'Houses logical puzzle'

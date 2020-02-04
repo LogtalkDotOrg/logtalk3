@@ -21,7 +21,7 @@
 :- object(lambdas).
 
 	:- info([
-		version is 0.1,
+		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2018-08-16,
 		comment is 'Example using lambda expressions in grammar rules.',

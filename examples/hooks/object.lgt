@@ -21,7 +21,7 @@
 :- object(object).
 
 	:- info([
-		version is 1.21,
+		version is 1:21:0,
 		author is pm,
 		date is 2012-08-02,
 		comment is 'Example object for illustrating the use of compiler hooks.',

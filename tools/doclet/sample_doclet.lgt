@@ -22,7 +22,7 @@
 	extends(doclet)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2016-10-30,
 		comment is 'Example of a doclet object.'

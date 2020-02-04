@@ -2,7 +2,7 @@
 :- object(shell(_Interpreters_)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Victor Lagerkvist and Paulo Moura',
 		date is 2019-03-20,
 		comment is 'Prolog shell for the interpreters.',
@@ -299,7 +299,7 @@
 :- object(shell).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2019-03-20,
 		comment is 'User frontend to start the application.'

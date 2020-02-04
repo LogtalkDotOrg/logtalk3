@@ -24,7 +24,7 @@
 :- object(test_object).
 
 	:- info([
-		version is 2.1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
 		date is 2016-11-01,
 		comment is 'Sample object for testing with the `source_data` flag turned on.'
@@ -142,7 +142,7 @@
 :- object(empty_object).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-02-19,
 		comment is 'Empty object for testing validity of object properties.'
@@ -154,7 +154,7 @@
 :- object(built_in_object).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
 		comment is 'Built-in object for testing determinism of object properties.'
@@ -168,7 +168,7 @@
 :- object(dynamic_object).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
 		comment is 'Dynamic object for testing determinism of object properties.'
@@ -182,7 +182,7 @@
 :- object(debug_object).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
 		comment is 'Object compiled in debug mode for testing determinism of object properties.'
@@ -196,7 +196,7 @@
 :- object(options_object).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
 		comment is 'Object compiled with optional features turned on for testing determinism of object properties.'
@@ -213,7 +213,7 @@
 :- object(threaded_object).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
 		comment is 'Object compiled with threaded calls support for testing determinism of object properties.'

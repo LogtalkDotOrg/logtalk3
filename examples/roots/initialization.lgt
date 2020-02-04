@@ -21,7 +21,7 @@
 :- category(initialization).
 
 	:- info([
-		version is 1.13,
+		version is 1:13:0,
 		author is 'Paulo Moura',
 		date is 2019-03-08,
 		comment is 'Object initialization protocol.'

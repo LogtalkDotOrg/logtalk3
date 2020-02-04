@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Documenting &mdash; The Logtalk Handbook v3.36.0-b02 documentation</title>
+  <title>Documenting &mdash; The Logtalk Handbook v3.36.0-b03 documentation</title>
   
 
   
@@ -258,7 +258,7 @@ Logtalk tools:</p>
 <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity in a user defined
 <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt><dd><p>Version number (a number).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt><dd><p>Version number (a <code class="docutils literal notranslate"><span class="pre">Major:Minor:Patch</span></code> compound term).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">date</span></code></dt><dd><p>Date of last modification in ISO 8601 standard format (<code class="docutils literal notranslate"><span class="pre">Year-Month-Day</span></code>
 where <code class="docutils literal notranslate"><span class="pre">Year</span></code>, <code class="docutils literal notranslate"><span class="pre">Month</span></code>, and <code class="docutils literal notranslate"><span class="pre">Day</span></code> are integers).</p>
@@ -287,7 +287,7 @@ be atoms or compound terms).</p>
 </dl>
 <p>For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>([
-    version <span class="k">is</span> <span class="m">2.1</span>,
+    version <span class="k">is</span> <span class="m">2</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">0</span>,
     author <span class="k">is</span> <span class="s">&#39;Paulo Moura&#39;</span>,
     date <span class="k">is</span> <span class="m">2000</span><span class="o">-</span><span class="m">11</span><span class="o">-</span><span class="m">20</span>,
     comment <span class="k">is</span> <span class="s">&#39;Building representation.&#39;</span>,
@@ -397,7 +397,7 @@ use the XML entities on <code class="docutils literal notranslate"><span class="
 assuming that the XML entities are named <em>author</em>, <em>license</em>, and
 <em>copyright</em> we may write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>([
-    version <span class="k">is</span> <span class="m">1.1</span>,
+    version <span class="k">is</span> <span class="m">1</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">0</span>,
     author <span class="k">is</span> <span class="k">{</span>author<span class="k">}</span>,
     license <span class="k">is</span> <span class="k">{</span>license<span class="k">}</span>,
     copyright <span class="k">is</span> <span class="k">{</span>copyright<span class="k">}</span>

@@ -23,7 +23,7 @@
 	imports(code_metric)).
 
 	:- info([
-		version is 0.1,
+		version is 0:1:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
 		date is 2017-12-31,
 		comment is 'Helper object to apply all loaded code metrics.'

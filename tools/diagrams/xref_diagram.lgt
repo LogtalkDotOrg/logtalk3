@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.61,
+		version is 2:61:0,
 		author is 'Paulo Moura',
 		date is 2019-10-22,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -747,7 +747,7 @@
 	extends(xref_diagram(dot))).
 
 	:- info([
-		version is 2.0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2014-01-01,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams in DOT format.',

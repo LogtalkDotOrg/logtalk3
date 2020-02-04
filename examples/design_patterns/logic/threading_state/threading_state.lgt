@@ -21,7 +21,7 @@
 :- object(states).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2019-01-31,
 		comment is 'Example of threading state between predicate calls using Definite Clause Grammars (DCGs).'

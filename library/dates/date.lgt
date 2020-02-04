@@ -23,7 +23,7 @@
 	implements(datep)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2014-9-27,
 		comment is 'Date predicates.'

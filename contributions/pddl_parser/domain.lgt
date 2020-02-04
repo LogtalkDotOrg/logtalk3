@@ -30,7 +30,7 @@
 	extends(parser)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
 		date is 2011-06-12,
 		comment is 'Simple parser of PDDL 3.0 domain files.'

@@ -21,7 +21,7 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.25,
+		version is 1:25:0,
 		author is 'Paulo Moura',
 		date is 2019-11-18,
 		comment is 'Portable operating-system access protocol.',

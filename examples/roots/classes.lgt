@@ -21,7 +21,7 @@
 :- protocol(abstract_classp).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2010-11-20,
 		comment is 'Default protocol for all abstract classes.'
@@ -49,7 +49,7 @@
 	specializes(object)).
 
 	:- info([
-		version is 2.0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2000-7-24,
 		comment is 'Default metaclass for all abstract classes.'
@@ -75,7 +75,7 @@
 :- protocol(classp).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2000-7-24,
 		comment is 'Default protocol for all instantiable classes.'
@@ -153,7 +153,7 @@
 	specializes(abstract_class)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2017-06-29,
 		comment is 'Default metaclass for all classes.'
@@ -246,7 +246,7 @@
 :- protocol(objectp).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2000-7-24,
 		comment is 'Default protocol for all objects.'
@@ -280,7 +280,7 @@
 	instantiates(class)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		date is 2013-04-23,
 		author is 'Paulo Moura',
 		comment is 'Minimal predicates for all objects. Default root of the inheritance graph.'

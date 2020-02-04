@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2015-05-10,
 		comment is 'Unit tests for the ISO Prolog standard flush_output/0-1 built-in predicates.'

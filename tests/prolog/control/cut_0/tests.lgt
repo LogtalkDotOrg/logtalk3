@@ -31,7 +31,7 @@ goal(write('Three ')).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2018-01-26,
 		comment is 'Unit tests for the ISO Prolog standard !/0 control construct.'

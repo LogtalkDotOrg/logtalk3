@@ -21,7 +21,7 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.46,
+		version is 2:46:0,
 		author is 'Paulo Moura',
 		date is 2019-10-22,
 		comment is 'Common predicates for generating diagrams.',

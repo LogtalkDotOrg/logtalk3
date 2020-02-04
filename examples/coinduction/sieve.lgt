@@ -21,7 +21,7 @@
 :- object(sieve).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura. Derived from a coroutining solution by Gopal Gupta et al.',
 		date is 2011-08-13,
 		comment is 'Sieve of Eratosthenes coinduction example.'

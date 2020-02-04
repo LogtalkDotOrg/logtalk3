@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0:5:0,
 		author is 'Ebrahim Azarisooreh',
 		date is 2017-12-28,
 		comment is 'Unit tests for the depth of inheritance code metric.'

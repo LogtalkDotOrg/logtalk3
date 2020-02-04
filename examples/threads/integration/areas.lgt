@@ -21,7 +21,7 @@
 :- category(areas).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paul Crocker',
 		date is 2008-07-19,
 		comment is 'Interval and trapezium area predicates for quadrature methods.'

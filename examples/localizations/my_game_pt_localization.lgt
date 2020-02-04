@@ -21,7 +21,7 @@
 :- category(my_game_pt_localization).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2015-08-23,
 		comment is 'Portuguese (pt) localization.'

@@ -67,7 +67,7 @@ nop.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2017-04-26,
 		comment is 'Unit tests for the {}/1 built-in control construct.'

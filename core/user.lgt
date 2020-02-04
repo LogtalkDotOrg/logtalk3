@@ -22,7 +22,7 @@
 	implements((expanding, forwarding))).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2018-05-24,
 		comment is 'Pseudo-object ``user`` representing the plain Prolog database.'

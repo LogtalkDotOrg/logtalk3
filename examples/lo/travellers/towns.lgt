@@ -22,7 +22,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		parnames is ['X', 'Y'],
 		comment is '.',

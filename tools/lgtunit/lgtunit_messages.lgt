@@ -21,7 +21,7 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2.9,
+		version is 2:9:0,
 		author is 'Paulo Moura',
 		date is 2020-02-04,
 		comment is 'Logtalk unit test framework default message translations.'

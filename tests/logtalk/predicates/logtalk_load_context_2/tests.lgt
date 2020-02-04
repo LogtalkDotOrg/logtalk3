@@ -102,7 +102,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1:4:0,
 		author is 'Paulo Moura',
 		date is 2018-04-16,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'

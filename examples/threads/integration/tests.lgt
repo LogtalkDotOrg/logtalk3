@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.21,
+		version is 1:21:0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2011-11-17,
 		comment is 'Unit tests for the "threads/integration" example.'

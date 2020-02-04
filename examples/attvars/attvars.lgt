@@ -21,7 +21,7 @@
 :- category(attvars).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2011-03-08,
 		comment is 'Runtime support for attributed variables.'

@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1:4:0,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2017-01-16,
 		comment is 'Unit tests for the "jpl" example.'

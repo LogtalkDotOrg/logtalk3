@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-06-18,
 		comment is 'Unit tests for the threaded_engine_next_reified/2 built-in predicate.'

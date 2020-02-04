@@ -29,7 +29,7 @@ a(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2018-01-19,
 		comment is 'Unit tests for the de facto Prolog standard forall/2 built-in predicate.'

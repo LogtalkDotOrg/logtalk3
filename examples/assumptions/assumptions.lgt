@@ -21,7 +21,7 @@
 :- category(assumptions).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2014-06-26,
 		comment is 'Simple implementation of ground linear and intuitionistic assumptions.'

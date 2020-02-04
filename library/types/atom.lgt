@@ -22,7 +22,7 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.8,
+		version is 1:8:0,
 		author is 'Paulo Moura',
 		date is 2019-11-28,
 		comment is 'Atom data type predicates.'

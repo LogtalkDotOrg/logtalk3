@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7.17,
+		version is 7:17:0,
 		author is 'Paulo Moura',
 		date is 2020-01-06,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',

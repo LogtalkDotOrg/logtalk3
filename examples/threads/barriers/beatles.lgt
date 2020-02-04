@@ -21,7 +21,7 @@
 :- object(beatles).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2007-10-23,
 		comment is 'Simple example of using a barrier to synchronize a set of threads.'

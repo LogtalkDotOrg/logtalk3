@@ -21,7 +21,7 @@
 :- category(solver).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2008-10-2,
 		author is 'Paulo Moura',
 		comment is 'Simple meta-interpreter for pure Prolog with only conjunctions as clause bodies.'
@@ -52,7 +52,7 @@
 :- category(proof_tree).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2008-10-2,
 		author is 'Paulo Moura',
 		comment is 'Meta-interpreter for pure Prolog with only conjunctions as clause bodies.'
@@ -83,7 +83,7 @@
 :- category(tracer).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2008-10-2,
 		author is 'Paulo Moura',
 		comment is 'A simple tracer meta-interpreter for pure Prolog with only conjunctions as clause bodies.'

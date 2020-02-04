@@ -21,7 +21,7 @@
 :- protocol(cloning).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2010-09-14,
 		comment is 'Object cloning protocol.'

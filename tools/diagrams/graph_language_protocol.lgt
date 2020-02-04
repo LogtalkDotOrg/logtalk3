@@ -21,7 +21,7 @@
 :- protocol(graph_language_protocol).
 
 	:- info([
-		version is 2.0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2014-12-30,
 		comment is 'Predicates for generating graph files.'

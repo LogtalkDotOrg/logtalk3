@@ -22,7 +22,7 @@
 	imports(statistics)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2020-02-02,
 		comment is 'Statistical population represented as a list of numbers.',

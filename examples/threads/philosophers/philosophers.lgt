@@ -21,7 +21,7 @@
 :- category(chopstick).
 
 	:- info([
-		version is 2.0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2007-3-19,
 		comment is 'Dining philosophers problem: chopstick representation.'
@@ -100,7 +100,7 @@
 :- protocol(philosopherp).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2013-02-09,
 		comment is 'Dining philosophers ptotocol.'
@@ -135,7 +135,7 @@
 	implements(philosopherp)).
 
 	:- info([
-		version is 2.2,
+		version is 2:2:0,
 		author is 'Paulo Moura',
 		date is 2013-02-09,
 		comment is 'Dining philosophers problem: philosopher representation.'
@@ -244,7 +244,7 @@
 	implements(philosopherp)).
 
 	:- info([
-		version is 2.1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
 		date is 2013-02-09,
 		comment is 'Dining philosophers problem: philosopher representation.'

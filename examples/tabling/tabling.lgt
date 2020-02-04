@@ -21,7 +21,7 @@
 :- object(paths).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2007-05-14,
 		comment is 'Simple tabling example using graph paths.',
@@ -46,7 +46,7 @@
 :- object(fibonacci).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2007-05-28,
 		comment is 'Simple tabling example using Fibonacci numbers.',
@@ -83,7 +83,7 @@
 	:- object(mdt_paths_first).
 
 		:- info([
-			version is 1.0,
+			version is 1:0:0,
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
 			date is 2012-10-20,
 			comment is 'Simple tabling example using graph paths.',
@@ -105,7 +105,7 @@
 	:- object(mdt_paths_min).
 
 		:- info([
-			version is 1.0,
+			version is 1:0:0,
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
 			date is 2012-10-20,
 			comment is 'Simple tabling example using graph paths.',
@@ -131,7 +131,7 @@
 		:- object(mdt_paths_min_all).
 
 			:- info([
-				version is 1.0,
+				version is 1:0:0,
 				author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
 				date is 2012-10-20,
 				comment is 'Simple tabling example using graph paths.',

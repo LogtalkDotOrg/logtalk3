@@ -21,7 +21,7 @@
 :- protocol(metap).
 
 	:- info([
-		version is 6.1,
+		version is 6:1:0,
 		date is 2015-12-23,
 		author is 'Paulo Moura',
 		comment is 'Useful meta-predicates protocol.',

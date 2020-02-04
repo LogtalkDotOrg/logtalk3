@@ -22,7 +22,7 @@
 
 
 	:- info([
-		version is 1.02,
+		version is 1:0:2,
 		date is 2013-04-23,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
 		comment is 'Set up & create a timetable satisfying all of the constraints.'

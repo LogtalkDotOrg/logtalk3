@@ -21,7 +21,7 @@
 :- object(data_acquisition).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2019-11-21,
 		comment is 'Data acquisition example, which is fully decoupled from data processing details.'
@@ -58,7 +58,7 @@
 :- object(data_processing).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2018-06-10,
 		comment is 'Data processing example, which is fully decoupled from data acquisition details.'

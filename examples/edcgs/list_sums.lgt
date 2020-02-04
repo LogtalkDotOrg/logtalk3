@@ -26,7 +26,7 @@ SOFTWARE.
 :- object(list_sums).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Michael Hendricks; adapted to Logtalk by Paulo Moura.',
 		date is 2018-05-30,
 		comment is 'EDCGs examples of computing list sums.'

@@ -22,7 +22,7 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.7,
+		version is 0:7:0,
 		author is 'Paulo Moura',
 		date is 2018-07-18,
 		comment is 'Computes Halstead complexity numbers for an entity.',
@@ -188,7 +188,7 @@
 	extends(halstead_metric(18))).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2018-06-08,
 		comment is 'Computes Halstead complexity numbers for an entity using a Stroud of 18.'

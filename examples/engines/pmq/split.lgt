@@ -21,7 +21,7 @@
 :- object(split).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2019-11-19,
 		comment is 'An implementation of a split queue for priority and normal messages using a threaded engine.'

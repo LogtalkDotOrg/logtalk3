@@ -22,7 +22,7 @@
 	implements(randomp)).
 
 	:- info([
-		version is 2.7,
+		version is 2:7:0,
 		author is 'Paulo Moura',
 		date is 2020-02-01,
 		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',

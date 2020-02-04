@@ -23,7 +23,7 @@
 	implements(loggingp)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2011-01-06,
 		comment is 'Global logger object for logging events to files.'

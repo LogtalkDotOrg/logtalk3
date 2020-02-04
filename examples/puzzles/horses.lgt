@@ -39,7 +39,7 @@ Published on the web:
 :- object(horses).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2004-5-1,
 		author is 'Paulo Moura',
 		comment is 'Horse show logical puzzle'

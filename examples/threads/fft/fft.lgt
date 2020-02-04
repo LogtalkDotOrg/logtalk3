@@ -21,7 +21,7 @@
 :- object(fft(_Threads)).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		date is 2008-2-13,
 		author is 'Paul Crocker, adapted from original code by Colin Barker',
 		comment is 'Simple multi-threaded version of the Fast Fourier Transform.',

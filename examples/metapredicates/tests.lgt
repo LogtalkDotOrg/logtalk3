@@ -203,7 +203,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.9,
+		version is 1:9:0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2020-01-29,
 		comment is 'Unit tests for the "metapredicates" example.'

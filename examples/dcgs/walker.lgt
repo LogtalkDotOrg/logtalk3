@@ -21,7 +21,7 @@
 :- object(walker).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2004-4-29,
 		author is 'Paulo Moura',
 		comment is 'Walker movements.'

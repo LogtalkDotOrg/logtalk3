@@ -72,7 +72,7 @@ Logtalk tools:
    ``entity`` is the name of an XML entity in a user defined
    ``custom.ent`` file).
 ``version``
-   Version number (a number).
+   Version number (a ``Major:Minor:Patch`` compound term).
 ``date``
    Date of last modification in ISO 8601 standard format (``Year-Month-Day``
    where ``Year``, ``Month``, and ``Day`` are integers).
@@ -103,7 +103,7 @@ For example:
 ::
 
    :- info([
-       version is 2.1,
+       version is 2:1:0,
        author is 'Paulo Moura',
        date is 2000-11-20,
        comment is 'Building representation.',
@@ -226,7 +226,7 @@ assuming that the XML entities are named *author*, *license*, and
 ::
 
    :- info([
-       version is 1.1,
+       version is 1:1:0,
        author is {author},
        license is {license},
        copyright is {copyright}

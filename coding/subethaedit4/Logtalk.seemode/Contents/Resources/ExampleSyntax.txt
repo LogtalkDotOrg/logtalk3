@@ -30,7 +30,7 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.47,
+		version is 1:47:0,
 		author is 'Paulo Moura',
 		date is 2019-09-18,
 		comment is 'Sample prototype for testing syntax coloring.'

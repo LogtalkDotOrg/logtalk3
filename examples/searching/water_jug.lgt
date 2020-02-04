@@ -22,7 +22,7 @@
 	instantiates(state_space)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura. Next step predicate comments contributed by Michael Igler.',
 		date is 2009-9-6,
 		comment is 'Water jug state space search problem.'

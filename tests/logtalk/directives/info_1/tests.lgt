@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-10-16,
 		comment is 'Unit tests for the info/1 built-in directive.',
@@ -37,7 +37,7 @@
 		this(This),
 		object_property(This, info(Properties)),
 		ground(Properties),
-		memberchk(version(1.0), Properties),
+		memberchk(version(1:0:0), Properties),
 		memberchk(author('Paulo Moura'), Properties),
 		memberchk(date(2016-10-16), Properties),
 		memberchk(comment('Unit tests for the info/1 built-in directive.'), Properties),

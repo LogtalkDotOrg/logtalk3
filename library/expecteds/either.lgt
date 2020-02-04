@@ -21,7 +21,7 @@
 :- object(either).
 
 	:- info([
-		version is 0.6,
+		version is 0:6:0,
 		author is 'Paulo Moura',
 		date is 2019-11-26,
 		comment is 'Types and predicates for extended type-checking and handling of expected terms.',

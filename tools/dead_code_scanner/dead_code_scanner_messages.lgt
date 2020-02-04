@@ -22,7 +22,7 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0.6,
+		version is 0:6:0,
 		author is 'Barry Evans and Paulo Moura',
 		date is 2017-05-05,
 		comment is 'Logtalk ``dead_code_scanner`` tool default message translations.'

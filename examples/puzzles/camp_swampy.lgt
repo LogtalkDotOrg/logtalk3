@@ -48,7 +48,7 @@ Published on the web:
 :- object(camp_swampy).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2004-5-1,
 		author is 'Paulo Moura',
 		comment is 'Camp Swampy logical puzzle'

@@ -23,7 +23,7 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.5,
+		version is 0:5:0,
 		author is 'Ebrahim Azarisooreh',
 		date is 2018-06-09,
 		comment is 'Analyzes the depth of inheritance for objects, protocols, and categories.',

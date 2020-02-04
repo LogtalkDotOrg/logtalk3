@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2017-11-24,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'

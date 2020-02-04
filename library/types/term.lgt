@@ -23,7 +23,7 @@
 	implements(termp)).
 
 	:- info([
-		version is 1.8,
+		version is 1:8:0,
 		author is 'Paulo Moura',
 		date is 2018-06-18,
 		comment is 'Prolog term utility predicates.'

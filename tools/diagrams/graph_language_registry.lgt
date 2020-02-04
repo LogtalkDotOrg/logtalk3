@@ -21,7 +21,7 @@
 :- object(graph_language_registry).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2014-08-18,
 		comment is 'Registry of implemented graph languages.'

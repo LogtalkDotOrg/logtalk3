@@ -21,7 +21,7 @@
 :- object(pairs).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		date is 2019-03-08,
 		author is 'Paulo Moura',
 		comment is 'Useful predicates over lists of pairs (key-value terms).',

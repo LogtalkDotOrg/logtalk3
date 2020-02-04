@@ -21,7 +21,7 @@
 :- protocol(randomp).
 
 	:- info([
-		version is 2.5,
+		version is 2:5:0,
 		author is 'Paulo Moura',
 		date is 2019-12-01,
 		comment is 'Random number generator protocol.',

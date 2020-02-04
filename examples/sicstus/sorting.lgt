@@ -22,7 +22,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.1,
+		version is 1:1:0,
 		date is 2013-04-23,
 		comment is 'List sorting parameterized by the type of the list elements.',
 		parnames is ['Type'],
@@ -69,7 +69,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		comment is 'Implements comparison between rational numbers represented as Num/Den.'
 	]).
@@ -100,7 +100,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.01,
+		version is 1:0:1,
 		date is 2018-06-18,
 		comment is 'Implements comparison between visible colors.'
 	]).

@@ -30,7 +30,7 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2018-01-26,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'

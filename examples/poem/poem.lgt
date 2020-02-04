@@ -25,7 +25,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric points.',
 		parnames is ['X', 'Y'],
@@ -63,7 +63,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric lines.',
 		parnames is ['Point1', 'Point2'],
@@ -147,7 +147,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric ellipses.',
 		parnames is ['Center', 'Rx', 'Ry'],
@@ -179,7 +179,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-4-22,
 		comment is 'Parametric object for representing geometric circles.',
 		parnames is ['Center', 'Radius'],

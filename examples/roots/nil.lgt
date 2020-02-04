@@ -22,7 +22,7 @@
 	instantiates(object)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 2000-7-24,
 		author is 'Paulo Moura',
 		comment is 'Used to represent a void reference.'

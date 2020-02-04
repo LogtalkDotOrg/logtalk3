@@ -21,7 +21,7 @@
 :- object(reverse).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2012-11-26,
 		comment is 'Reads and writes a simple table of facts from and to files for testing operator handling code.'

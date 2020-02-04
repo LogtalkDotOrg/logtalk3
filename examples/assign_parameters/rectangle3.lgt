@@ -21,7 +21,7 @@
 :- object(rectangle(_Width, _Height, _Position)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2015-08-02,
 		comment is 'A simple implementation of a geometric rectangle using assignable variables and parametric objects.',

@@ -36,7 +36,7 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	implements(assignvarsp)).
 
 	:- info([
-		version is 1.6,
+		version is 1:6:0,
 		author is 'Nobukuni Kino and Paulo Moura',
 		date is 2018-07-11,
 		comment is 'Assignable variables (supporting backtracable assignment of non-variable terms).'

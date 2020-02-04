@@ -23,7 +23,7 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2019-01-19,
 		comment is 'Monitor for recording, replaying, and saving user messages.'

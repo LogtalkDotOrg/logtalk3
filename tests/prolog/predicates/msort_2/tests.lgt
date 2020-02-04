@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2018-02-20,
 		comment is 'Unit tests for the de facto Prolog standard msort/2 built-in predicate.'

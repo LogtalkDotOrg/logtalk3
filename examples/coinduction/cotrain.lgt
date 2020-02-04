@@ -6,7 +6,7 @@
 	:- object(cotrain).
 
 		:- info([
-			version is 0.2,
+			version is 0:2:0,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2013-03-06,
 			comment is 'Timed automata coroutining example.'
@@ -124,7 +124,7 @@
 	:- object(cotrain).
 
 		:- info([
-			version is 0.2,
+			version is 0:2:0,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2013-03-06,
 			comment is 'Timed automata coroutining example.'

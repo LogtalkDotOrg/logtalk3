@@ -22,7 +22,7 @@
 	implements(timep)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2014-9-27,
 		comment is 'Time predicates.',

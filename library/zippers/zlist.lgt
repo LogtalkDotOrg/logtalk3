@@ -22,7 +22,7 @@
 	implements(zipperp)).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'Paulo Moura',
 		date is 2019-03-12,
 		comment is 'Zipper list predicates. Zippers should be regarded as opaque terms.'

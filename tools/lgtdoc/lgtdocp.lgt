@@ -21,7 +21,7 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 3.3,
+		version is 3:3:0,
 		author is 'Paulo Moura',
 		date is 2019-11-26,
 		comment is 'Documenting tool protocol.',

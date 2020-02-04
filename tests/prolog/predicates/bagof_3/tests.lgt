@@ -41,7 +41,7 @@ c(3, c, 'C').
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2015-08-25,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'

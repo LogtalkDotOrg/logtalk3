@@ -22,7 +22,7 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.25,
+		version is 2:25:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
@@ -162,7 +162,7 @@
 	extends(file_dependency_diagram(dot))).
 
 	:- info([
-		version is 2.01,
+		version is 2:01:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Predicates for generating file contents dependency diagrams in DOT format. A dependency exists when an entity in one file makes a reference to an entity in another file.',

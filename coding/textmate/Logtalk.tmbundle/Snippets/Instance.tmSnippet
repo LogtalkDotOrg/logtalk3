@@ -8,7 +8,7 @@
 	instantiates(${2:Class})).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is '$TM_FULLNAME',
 		date is `date +%Y-%m-%d`,
 		comment is '${3:Description}'

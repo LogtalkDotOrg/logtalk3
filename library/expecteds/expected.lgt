@@ -21,7 +21,7 @@
 :- object(expected).
 
 	:- info([
-		version is 2.0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2020-01-02,
 		comment is 'Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.',
@@ -187,7 +187,7 @@
 :- object(expected(_Expected)).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2020-01-06,
 		comment is 'Expected term predicates. Requires passing an expected term (constructed using the ``expected`` object predicates) as a parameter.',

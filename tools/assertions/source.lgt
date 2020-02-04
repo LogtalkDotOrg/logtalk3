@@ -24,7 +24,7 @@
 :- object(source).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2014-04-02,
 		comment is 'Simple object for testing using the "assertions" object goal-expansion hooks.'

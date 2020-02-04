@@ -21,7 +21,7 @@
 :- object(redis).
 
 	:- info([
-		version is 0.3,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2017-06-29,
 		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',

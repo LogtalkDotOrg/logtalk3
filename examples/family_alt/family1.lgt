@@ -22,7 +22,7 @@
 	implements(basic_family_relations)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2017-03-06,
 		comment is 'Family relations.',

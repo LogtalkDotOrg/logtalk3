@@ -22,7 +22,7 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.25,
+		version is 0:25:0,
 		author is 'Paulo Moura',
 		date is 2019-08-25,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'

@@ -22,7 +22,7 @@
 	imports(category)).
 
 	:- info([
-		version is 4.1,
+		version is 4:1:0,
 		author is 'Paulo Moura',
 		date is 2013-04-19,
 		comment is 'Example object for benchmarking library predicate calls and imported category predicate calls.'
@@ -78,7 +78,7 @@
 	extends(object)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2007-04-17,
 		comment is 'Example object used for simulating a small hierarchy.'
@@ -91,7 +91,7 @@
 	extends(descendant)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2007-04-17,
 		comment is 'Example object used for simulating a small hierarchy.'

@@ -23,7 +23,7 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.12,
+		version is 0:12:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
 		date is 2018-07-17,
 		comment is 'Computes entity efferent coupling, afferent coupling, and instability.',

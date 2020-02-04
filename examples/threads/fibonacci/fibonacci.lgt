@@ -21,7 +21,7 @@
 :- object(fibonacci(_Threads)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2007-12-27,
 		author is 'Paulo Moura',
 		comment is 'Multi-threaded version of the computation of Fibonacci numbers.',

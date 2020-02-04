@@ -21,7 +21,7 @@
 :- object(person).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2008-10-12,
 		comment is 'Generic person.'
@@ -77,7 +77,7 @@
 	extends(person)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2008-10-12,
 		comment is 'Teacher person.'
@@ -114,7 +114,7 @@
 	extends(person)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2008-10-12,
 		comment is 'Student person.'
@@ -153,7 +153,7 @@
 	extends(person)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2008-10-12,
 		comment is 'Person as a parametric object.'
@@ -172,7 +172,7 @@
 	extends(teacher)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2008-10-12,
 		comment is 'Teacher as a parametric object.'
@@ -194,7 +194,7 @@
 	extends(student)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2008-10-12,
 		comment is 'Student as a parametric object.'

@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2020-01-04,
 		comment is 'Unit tests for the "expecteds" library.'

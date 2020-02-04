@@ -21,7 +21,7 @@
 :- object(lambda_warnings).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2019-08-17,
 		comment is 'Example for illustrating lambda compilation warnings.'

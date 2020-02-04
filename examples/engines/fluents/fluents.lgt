@@ -21,7 +21,7 @@
 :- object(fluents).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paul Tarau and Paulo Moura',
 		date is 2016-06-15,
 		comment is 'Examples of implementing fluents using threaded engines.'

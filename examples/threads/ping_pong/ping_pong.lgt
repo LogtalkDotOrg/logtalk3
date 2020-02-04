@@ -21,7 +21,7 @@
 :- object(ping_pong).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2019-11-15,
 		comment is 'Simple example of two threads playing ping-pong.'

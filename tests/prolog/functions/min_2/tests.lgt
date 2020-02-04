@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2015-11-08,
 		comment is 'Unit tests for the ISO Prolog standard min/2 built-in function.'

@@ -23,7 +23,7 @@
 	extends(list)).
 
 	:- info([
-		version is 1.12,
+		version is 1:12:0,
 		author is 'Paulo Moura',
 		date is 2020-02-01,
 		comment is 'List of numbers predicates.',

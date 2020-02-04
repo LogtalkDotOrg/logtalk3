@@ -22,7 +22,7 @@
 	extends(number)).
 
 	:- info([
-		version is 1.5,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2018-07-15,
 		comment is 'Floating point numbers data type predicates.'

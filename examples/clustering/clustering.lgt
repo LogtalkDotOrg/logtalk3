@@ -21,7 +21,7 @@
 :- object(clustering).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2018-09-04,
 		comment is 'Clustering example using the Apache commons math Java library.'

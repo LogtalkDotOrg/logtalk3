@@ -25,7 +25,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2016-08-03,
 		comment is 'Unit tests for the mode/2 built-in directive.'

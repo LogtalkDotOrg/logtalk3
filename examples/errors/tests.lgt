@@ -3,7 +3,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2017-08-06,
 		comment is 'Unit tests for the "errors" example.'

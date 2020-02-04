@@ -23,7 +23,7 @@
 	extends(atom)).
 
 	:- info([
-		version is 1.9,
+		version is 1:9:0,
 		author is 'Paulo Moura',
 		date is 2019-06-29,
 		comment is 'Character predicates (most of them assume an ASCII representation).'

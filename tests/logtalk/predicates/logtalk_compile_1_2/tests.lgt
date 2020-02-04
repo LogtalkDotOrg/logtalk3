@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2018-02-09,
 		comment is 'Unit tests for the logtalk_compile/1-2 built-in predicates.'

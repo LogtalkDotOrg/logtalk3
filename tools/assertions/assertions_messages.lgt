@@ -21,7 +21,7 @@
 :- category(assertions_messages).
 
 	:- info([
-		version is 2.2,
+		version is 2:2:0,
 		author is 'Paulo Moura',
 		date is 2018-02-20,
 		comment is 'Assertions framework default message translations.'

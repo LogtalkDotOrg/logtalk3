@@ -23,7 +23,7 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.9,
+		version is 2:9:0,
 		author is 'Paulo Moura and Paul Fodor',
 		date is 2019-05-17,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',

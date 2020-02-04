@@ -26,7 +26,7 @@
 :- object(text_entry).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
 		date is 2016-09-21,
 		comment is 'JOptionPane dialog example from the JPL distribution.'

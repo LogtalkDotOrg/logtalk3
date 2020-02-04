@@ -21,7 +21,7 @@
 :- object(primes(_Threads)).
 
 	:- info([
-		version is 2.1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
 		date is 2020-02-02,
 		comment is 'Simple example for comparing single and multi-threading calculation of prime numbers.',

@@ -21,7 +21,7 @@
 :- object(binary).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2013-02-06,
 		comment is 'Infinite lists of binary digits coinductive example.'

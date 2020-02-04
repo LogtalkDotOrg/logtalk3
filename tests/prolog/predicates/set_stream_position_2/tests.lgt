@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2015-06-01,
 		comment is 'Unit tests for the ISO Prolog standard set_stream_position/2 built-in predicate.'

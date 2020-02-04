@@ -21,7 +21,7 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.19,
+		version is 0:19:0,
 		author is 'Paulo Moura',
 		date is 2019-09-23,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'

@@ -2,7 +2,7 @@
 :- protocol(systemp).
 
 	:- info([
-		version is 1.10,
+		version is 1:10:0,
 		author is 'Portable Operating-System Interface (POSI) initiative',
 		date is 2006-1-21,
 		comment is 'Portable operating system access protocol.',

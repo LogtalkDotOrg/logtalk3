@@ -21,7 +21,7 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1.15,
+		version is 1:15:0,
 		author is 'Paulo Moura',
 		date is 2019-01-03,
 		comment is 'List protocol.',

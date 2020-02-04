@@ -21,7 +21,7 @@
 :- protocol(heapp).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
 		date is 2010-11-13,
 		comment is 'Heap protocol. Key-value pairs are represented as ``Key-Value``.',

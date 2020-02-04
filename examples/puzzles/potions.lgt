@@ -28,7 +28,7 @@ http://www.csci.csusb.edu/dick/cs320/prolog/Potions.htm
 :- object(potions).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		date is 2006-3-26,
 		author is 'Paulo Moura',
 		comment is 'Harry Potter potions logical puzzle.'

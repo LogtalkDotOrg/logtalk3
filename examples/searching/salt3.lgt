@@ -48,7 +48,7 @@ Remarks:
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1.15,
+		version is 1:15:0,
 		author is 'Paula Marisa Sampaio',
 		date is 2018-05-23,
 		comment is 'Salt state-space search problem (updated from the original 1.0 version to support heuristics).',

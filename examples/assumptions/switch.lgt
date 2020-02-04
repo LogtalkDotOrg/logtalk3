@@ -22,7 +22,7 @@
 	imports(assumptions)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Orginal example by Paul Tarau et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2016-05-18,
 		comment is 'Example of defining a switch...case control construct using linear assumptions.'

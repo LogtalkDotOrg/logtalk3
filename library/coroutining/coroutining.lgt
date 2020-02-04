@@ -21,7 +21,7 @@
 :- object(coroutining).
 
 	:- info([
-		version is 0.2,
+		version is 0:2:0,
 		author is 'Paulo Moura',
 		date is 2019-11-28,
 		comment is 'Coroutining predicates.',

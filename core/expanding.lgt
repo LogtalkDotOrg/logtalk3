@@ -21,7 +21,7 @@
 :- protocol(expanding).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2016-07-12,
 		comment is 'Term and goal expansion protocol.'

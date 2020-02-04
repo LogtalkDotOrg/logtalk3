@@ -21,7 +21,7 @@
 :- object(nasty1).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2013-10-18,
 		comment is 'Simple example for illustrating the problems with lack of thread synchronization when calling methods with side-effects.'
@@ -76,7 +76,7 @@
 :- object(nasty2).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2013-10-18,
 		comment is 'Simple example for using the "synchronized" predicate directive for multi-threading methods with side-effects.'

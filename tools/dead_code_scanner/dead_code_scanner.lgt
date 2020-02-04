@@ -22,7 +22,7 @@
 :- object(dead_code_scanner).
 
 	:- info([
-		version is 0.11,
+		version is 0:11:0,
 		author is 'Barry Evans and Paulo Moura',
 		date is 2017-08-10,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',

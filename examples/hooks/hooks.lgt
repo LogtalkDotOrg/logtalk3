@@ -23,7 +23,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1.32,
+		version is 1:32:0,
 		author is 'Paulo Moura',
 		date is 2015-09-07,
 		comment is 'Example of an object defining compiler hook predicates.'

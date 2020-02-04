@@ -21,7 +21,7 @@
 :- protocol(setp).
 
 	:- info([
-		version is 1.6,
+		version is 1:6:0,
 		author is 'Paulo Moura',
 		date is 2019-05-23,
 		comment is 'Set protocol.',

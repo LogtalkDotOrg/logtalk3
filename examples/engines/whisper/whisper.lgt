@@ -21,7 +21,7 @@
 :- object(whisper).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Jan Wielemaker. Adapted to Logtalk by Paulo Moura',
 		date is 2017-08-26,
 		comment is 'Example of chaining threaded engines.'

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on January 21, 2020
+%  Last updated on February 4, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -36,6 +36,8 @@
 
 
 % '$lgt_iso_predicate'(?callable).
+
+:- op(600, xfy, (:)).
 
 '$lgt_iso_predicate'(acyclic_term(_)).
 '$lgt_iso_predicate'(get_byte(_, _)).

@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2018-01-26,
 		comment is 'Unit tests for the ISO Prolog standard false/0 control construct.'

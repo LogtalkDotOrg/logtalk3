@@ -21,7 +21,7 @@
 :- object(generator).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2008-2-7,
 		comment is 'Simple object defining a predicate for generating lists of random values.'

@@ -22,7 +22,7 @@
 	extends(doclet)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2016-09-29,
 		comment is 'Parametric doclet.',
@@ -74,7 +74,7 @@
 	extends(doclet(library))).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-09-29,
 		comment is 'Usage example of the parametric doclet to generate documentation for the standard library.'

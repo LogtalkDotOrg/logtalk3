@@ -33,7 +33,7 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 	implements(assignvarsp)).
 
 	:- info([
-		version is 1.7,
+		version is 1:7:0,
 		author is 'Nobukuni Kino and Paulo Moura',
 		date is 2018-07-11,
 		comment is 'Assignable variables (supporting backtracable assignment of non-variable terms).'

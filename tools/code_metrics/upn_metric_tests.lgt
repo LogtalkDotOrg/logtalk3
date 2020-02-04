@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2018-07-17,
 		comment is 'Unit tests for the unique predicate nodes metric.'

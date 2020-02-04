@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2013-11-18,
 		comment is 'Unit tests for the meta_non_terminal/1 built-in directive.'

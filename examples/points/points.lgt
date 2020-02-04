@@ -23,7 +23,7 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		date is 2012-10-25,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point class.',
@@ -73,7 +73,7 @@
 :- category(bounded_coordinate).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Point coordinate bounds management predicates.',
@@ -140,7 +140,7 @@
 	specializes(point)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2000-10-31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point moving in a constrained area.',
@@ -176,7 +176,7 @@
 :- category(point_history).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		date is 1998-3-23,
 		author is 'Paulo Moura',
 		comment is 'Point position history management predicates.',
@@ -226,7 +226,7 @@
 	specializes(point)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2000-10-31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point remembering past positions.',
@@ -263,7 +263,7 @@
 	specializes(point)).
 
 	:- info([
-		version is 1.1,
+		version is 1:1:0,
 		date is 2000-10-31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point moving in a constrained area and remembering past point positions.',

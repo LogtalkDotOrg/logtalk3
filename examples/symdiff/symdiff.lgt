@@ -22,7 +22,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 1999-12-29,
 		comment is 'Symbolic differentiation and simplification protocol.',
 		source is 'Example based on the Clocksin and Mellish Prolog book.'
@@ -51,7 +51,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 1999-12-29,
 		comment is 'Symbolic differentiation and simplification of a variable.',
 		source is 'Example based on the Clocksin and Mellish Prolog book.'
@@ -70,7 +70,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 1999-12-29,
 		parnames is ['Expression1', 'Expression2'],
 		comment is 'Symbolic differentiation and simplification of +/2 expressions.',
@@ -139,7 +139,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 1999-12-29,
 		parnames is ['Expression1', 'Expression2'],
 		comment is 'Symbolic differentiation and simplification of -/2 expressions.',
@@ -210,7 +210,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 1999-12-29,
 		parnames is ['Expression1', 'Expression2'],
 		comment is 'Symbolic differentiation and simplification of */2 expressions.',
@@ -283,7 +283,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 1999-12-29,
 		parnames is ['Expression', 'Power'],
 		comment is 'Symbolic differentiation and simplification of **/2 expressions.',
@@ -330,7 +330,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
+		version is 1:0:0,
 		date is 1999-12-29,
 		parnames is ['Expression'],
 		comment is 'Symbolic differentiation and simplification of log/1 expressions.',

@@ -21,7 +21,7 @@
 :- protocol(varlistp).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2019-01-03,
 		comment is 'List of variables protocol.',

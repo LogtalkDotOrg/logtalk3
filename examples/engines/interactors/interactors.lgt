@@ -21,7 +21,7 @@
 :- object(interactors).
 
 	:- info([
-		version is 1.2,
+		version is 1:2:0,
 		author is 'Paul Tarau and Paulo Moura',
 		date is 2019-01-19,
 		comment is 'Examples of implementing interactors using threaded engines.'

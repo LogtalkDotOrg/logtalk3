@@ -22,7 +22,7 @@
 	implements((forwarding, java_access_protocol))).
 
 	:- info([
-		version is 1.3,
+		version is 1:3:0,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2019-06-13,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
@@ -74,7 +74,7 @@
 	extends(java(Reference, _))).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2019-06-13,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
@@ -96,7 +96,7 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.6,
+		version is 1:6:0,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Abstract interface to JPL API utility predicates.',
@@ -210,7 +210,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1.01,
+		version is 1:0:1,
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Hook object to optimize messages to the ``java/1-2`` objects that otherwise would trigger the ``forward/1`` handler.',

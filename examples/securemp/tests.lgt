@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.3,
+		version is 2:3:0,
 		author is 'Paulo Moura',
 		date is 2016-10-27,
 		comment is 'Unit tests for the "securemp" example.'

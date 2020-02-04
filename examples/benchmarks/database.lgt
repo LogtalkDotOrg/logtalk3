@@ -21,7 +21,7 @@
 :- object(database).
 
 	:- info([
-		version is 3.2,
+		version is 3:2:0,
 		author is 'Paulo Moura',
 		date is 2014-01-16,
 		comment is 'Dynamic database benchmark utility predicates.'
@@ -74,7 +74,7 @@
 	extends(database)).
 
 	:- info([
-		version is 1.0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2014-01-16,
 		comment is 'Test object for the database predicate benchmarks.'
