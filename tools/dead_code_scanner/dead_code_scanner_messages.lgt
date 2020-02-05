@@ -22,9 +22,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2017-05-05,
+		date is 2020-02-05,
 		comment is 'Logtalk ``dead_code_scanner`` tool default message translations.'
 	]).
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -57,10 +57,24 @@
 		['... completed scanning for dead code'-[], nl].
 
 	message_tokens(scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)) -->
-		['~w scan started at ~w/~w/~w, ~w:~w:~w'-[Type, Year, Month, Day, Hours, Minutes, Seconds], nl].
+		{	integer_to_padded_atom(Month, MonthAtom),
+			integer_to_padded_atom(Day, DayAtom),
+			integer_to_padded_atom(Hours, HoursAtom),
+			integer_to_padded_atom(Minutes, MinutesAtom),
+			integer_to_padded_atom(Seconds, SecondsAtom),
+			Args = [Type, Year, MonthAtom, DayAtom, HoursAtom, MinutesAtom, SecondsAtom]
+		},
+		['~w scan started at ~w-~w-~w, ~w:~w:~w'-Args, nl].
 
 	message_tokens(scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)) -->
-		['~w scan ended at ~w/~w/~w, ~w:~w:~w'-[Type, Year, Month, Day, Hours, Minutes, Seconds], nl].
+		{	integer_to_padded_atom(Month, MonthAtom),
+			integer_to_padded_atom(Day, DayAtom),
+			integer_to_padded_atom(Hours, HoursAtom),
+			integer_to_padded_atom(Minutes, MinutesAtom),
+			integer_to_padded_atom(Seconds, SecondsAtom),
+			Args = [Type, Year, MonthAtom, DayAtom, HoursAtom, MinutesAtom, SecondsAtom]
+		},
+		['~w scan ended at ~w-~w-~w, ~w:~w:~w'-Args, nl].
 
 	message_tokens(scanning_directory(Directory)) -->
 		['Scanning directory ~w ...'-[Directory], nl].
@@ -100,5 +114,13 @@
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),
 		numbervars(GroundTerm, 0, _).
+
+	integer_to_padded_atom(Integer, Atom) :-
+		number_codes(Integer, Codes),
+		(	Integer < 10 ->
+			char_code('0', ZeroCode),
+			atom_codes(Atom, [ZeroCode| Codes])
+		;	atom_codes(Atom, Codes)
+		).
 
 :- end_category.

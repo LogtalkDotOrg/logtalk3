@@ -22,9 +22,9 @@
 :- category(code_metrics_messages).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2019-09-23,
+		date is 2020-02-05,
 		comment is 'Message translations for the ``code_metrics`` tool.'
 	]).
 
@@ -52,12 +52,24 @@
 		[].
 
 	message_tokens(scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)) -->
-		{ Args = [Type, Year, Month, Day, Hours, Minutes, Seconds] },
-		['~w analysis started at ~w/~w/~w, ~w:~w:~w'-Args, nl, nl].
+		{	integer_to_padded_atom(Month, MonthAtom),
+			integer_to_padded_atom(Day, DayAtom),
+			integer_to_padded_atom(Hours, HoursAtom),
+			integer_to_padded_atom(Minutes, MinutesAtom),
+			integer_to_padded_atom(Seconds, SecondsAtom),
+			Args = [Type, Year, MonthAtom, DayAtom, HoursAtom, MinutesAtom, SecondsAtom]
+		},
+		['~w analysis started at ~w-~w-~w, ~w:~w:~w'-Args, nl, nl].
 
 	message_tokens(scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)) -->
-		{ Args = [Type, Year, Month, Day, Hours, Minutes, Seconds] },
-		[nl, '~w analysis finished at ~w/~w/~w, ~w:~w:~w'-Args, nl].
+		{	integer_to_padded_atom(Month, MonthAtom),
+			integer_to_padded_atom(Day, DayAtom),
+			integer_to_padded_atom(Hours, HoursAtom),
+			integer_to_padded_atom(Minutes, MinutesAtom),
+			integer_to_padded_atom(Seconds, SecondsAtom),
+			Args = [Type, Year, MonthAtom, DayAtom, HoursAtom, MinutesAtom, SecondsAtom]
+		},
+		[nl, '~w analysis finished at ~w-~w-~w, ~w:~w:~w'-Args, nl].
 
 	message_tokens(scanning_directory(Directory)) -->
 		['Scanning directory ~w ...'-[Directory], nl].
@@ -85,5 +97,13 @@
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),
 		numbervars(GroundTerm, 0, _).
+
+	integer_to_padded_atom(Integer, Atom) :-
+		number_codes(Integer, Codes),
+		(	Integer < 10 ->
+			char_code('0', ZeroCode),
+			atom_codes(Atom, [ZeroCode| Codes])
+		;	atom_codes(Atom, Codes)
+		).
 
 :- end_category.

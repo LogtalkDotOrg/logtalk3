@@ -86,11 +86,12 @@ lists are unbound.
 Tools
 -----
 
-* CHANGED: The `diagrams` and `lgtunit` tools to print dates using the ISO
-8601 standard format.
+* CHANGED: The `code_metrics`, `dead_code_scanner`, `diagrams`, and `lgtunit`
+tools to print dates using the ISO 8601 standard format.
 
-* IMPROVED: The `lgtdoc` tool to pad month and day when single digit when
-writing dates.
+* IMPROVED: The `code_metrics`, `dead_code_scanner`, `lgtdoc`, and `lgtunit`
+tools to pad month, day, hours, minutes, and seconds when single digit when
+writing timestamps.
 
 * FIXED: The `logtalk_tester` shell script to not display text from comment
 messages when listing compilation errors, warnings, and failed unit tests.

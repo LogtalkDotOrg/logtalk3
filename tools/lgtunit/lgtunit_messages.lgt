@@ -60,12 +60,24 @@
 		[].
 
 	message_tokens(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
-		{integer_to_padded_atom(Month, MonthAtom), integer_to_padded_atom(Day, DayAtom)},
-		[nl, 'tests started at ~w-~w-~w, ~w:~w:~w'-[Year, MonthAtom, DayAtom, Hours, Minutes, Seconds], nl, nl].
+		{	integer_to_padded_atom(Month, MonthAtom),
+			integer_to_padded_atom(Day, DayAtom),
+			integer_to_padded_atom(Hours, HoursAtom),
+			integer_to_padded_atom(Minutes, MinutesAtom),
+			integer_to_padded_atom(Seconds, SecondsAtom),
+			Args = [Year, MonthAtom, DayAtom, HoursAtom, MinutesAtom, SecondsAtom]
+		},
+		[nl, 'tests started at ~w-~w-~w, ~w:~w:~w'-Args, nl, nl].
 
 	message_tokens(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
-		{integer_to_padded_atom(Month, MonthAtom), integer_to_padded_atom(Day, DayAtom)},
-		['tests ended at ~w-~w-~w, ~w:~w:~w'-[Year, MonthAtom, DayAtom, Hours, Minutes, Seconds], nl, nl].
+		{	integer_to_padded_atom(Month, MonthAtom),
+			integer_to_padded_atom(Day, DayAtom),
+			integer_to_padded_atom(Hours, HoursAtom),
+			integer_to_padded_atom(Minutes, MinutesAtom),
+			integer_to_padded_atom(Seconds, SecondsAtom),
+			Args = [Year, MonthAtom, DayAtom, HoursAtom, MinutesAtom, SecondsAtom]
+		},
+		['tests ended at ~w-~w-~w, ~w:~w:~w'-Args, nl, nl].
 
 	message_tokens(running_tests_from_object_file(Object, File)) -->
 		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl, nl].
