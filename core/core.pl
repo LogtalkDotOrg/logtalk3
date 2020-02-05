@@ -2481,7 +2481,10 @@ logtalk_compile(Files, Flags) :-
 		retract('$lgt_pp_compiling_warnings_counter_'(CCounter)),
 		retract('$lgt_pp_loading_warnings_counter_'(LCounter)) ->
 		% report compilation and loading warnings
-		'$lgt_print_message'(comment(warnings), compilation_and_loading_warnings(CCounter, LCounter))
+		'$lgt_print_message'(
+			comment(warnings),
+			compilation_and_loading_warnings(CCounter, LCounter)
+		)
 	;	% not top compilation/loading goal
 		true
 	).
@@ -2653,8 +2656,14 @@ logtalk_compile(Files, Flags) :-
 '$lgt_term_expansion_error'(HookEntity, Term, Error) :-
 	'$lgt_source_file_context'(File, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_print_message'(warning(expansion), term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error))
-	;	'$lgt_print_message'(warning(expansion), term_expansion_error(File, Lines, HookEntity, Term, Error))
+		'$lgt_print_message'(
+			warning(expansion),
+			term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error)
+		)
+	;	'$lgt_print_message'(
+			warning(expansion),
+			term_expansion_error(File, Lines, HookEntity, Term, Error)
+		)
 	),
 	fail.
 
@@ -2664,8 +2673,14 @@ logtalk_compile(Files, Flags) :-
 '$lgt_goal_expansion_error'(HookEntity, Goal, Error) :-
 	'$lgt_source_file_context'(File, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_print_message'(warning(expansion), goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error))
-	;	'$lgt_print_message'(warning(expansion), goal_expansion_error(File, Lines, HookEntity, Goal, Error))
+		'$lgt_print_message'(
+			warning(expansion),
+			goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error)
+		)
+	;	'$lgt_print_message'(
+			warning(expansion),
+			goal_expansion_error(File, Lines, HookEntity, Goal, Error)
+		)
 	),
 	fail.
 
@@ -7484,8 +7499,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Names \== [] ->
 		'$lgt_increment_compiling_warnings_counter',
 		(	'$lgt_pp_entity_'(Type, Entity, _) ->
-			'$lgt_print_message'(warning(singleton_variables), singleton_variables(File, Lines, Type, Entity, Names, Term))
-		;	'$lgt_print_message'(warning(singleton_variables), singleton_variables(File, Lines, Names, Term))
+			'$lgt_print_message'(
+				warning(singleton_variables),
+				singleton_variables(File, Lines, Type, Entity, Names, Term)
+			)
+		;	'$lgt_print_message'(
+				warning(singleton_variables),
+				singleton_variables(File, Lines, Names, Term)
+			)
 		)
 	;	true
 	).
@@ -8354,8 +8375,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _) ->
-			'$lgt_print_message'(warning(portability), prolog_dialect_goal_expansion(File, Lines, Type, Entity, Goal, ExpandedGoal))
-		;	'$lgt_print_message'(warning(portability), prolog_dialect_goal_expansion(File, Lines, Goal, ExpandedGoal))
+			'$lgt_print_message'(
+				warning(portability),
+				prolog_dialect_goal_expansion(File, Lines, Type, Entity, Goal, ExpandedGoal)
+			)
+		;	'$lgt_print_message'(
+				warning(portability),
+				prolog_dialect_goal_expansion(File, Lines, Goal, ExpandedGoal)
+			)
 		)
 	;	true
 	).
@@ -8436,8 +8463,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _) ->
-			'$lgt_print_message'(warning(portability), prolog_dialect_term_expansion(File, Lines, Type, Entity, Term, ExpandedTerms))
-		;	'$lgt_print_message'(warning(portability), prolog_dialect_term_expansion(File, Lines, Term, ExpandedTerms))
+			'$lgt_print_message'(
+				warning(portability),
+				prolog_dialect_term_expansion(File, Lines, Type, Entity, Term, ExpandedTerms)
+			)
+		;	'$lgt_print_message'(
+				warning(portability),
+				prolog_dialect_term_expansion(File, Lines, Term, ExpandedTerms)
+			)
 		)
 	;	true
 	).
@@ -8831,7 +8864,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(portability), compiling_proprietary_prolog_directive(File, Lines, Type, Entity, Directive))
+		'$lgt_print_message'(
+			warning(portability),
+			compiling_proprietary_prolog_directive(File, Lines, Type, Entity, Directive)
+		)
 	;	true
 	),
 	% save the source data information for use in the second compiler stage
@@ -8869,7 +8905,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(portability), compiling_query_as_initialization_goal(File, Lines, Type, Entity, Directive))
+		'$lgt_print_message'(
+			warning(portability),
+			compiling_query_as_initialization_goal(File, Lines, Type, Entity, Directive)
+		)
 	;	true
 	),
 	'$lgt_compile_logtalk_directive'(initialization(Directive), Ctx).
@@ -9884,7 +9923,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			Directive =.. [Scope, op(Priority, Specifier, Operator)],
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines)
+			)
 		;	true
 		)
 	;	% allow a local operator to also be declared in a scope directive to simplify
@@ -9901,7 +9943,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			Directive =.. [Scope, op(Priority, Specifier, Operator)],
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines)
+			)
 		;	true
 		)
 	;	% allow a local operator to also be declared in a scope directive to simplify
@@ -9921,7 +9966,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			Directive =.. [Scope, Functor/Arity],
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines)
+			)
 		;	true
 		)
 	;	(	'$lgt_pp_public_'(Functor, Arity, _, _)
@@ -9941,7 +9989,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
 			Directive =.. [Scope, Functor//Arity],
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines))
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines)
+			)
 		;	true
 		)
 	;	(	'$lgt_pp_public_'(Functor, ExtArity, _, _)
@@ -10059,7 +10110,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, dynamic(PI), OriginalFile, OriginalLines))
+		'$lgt_print_message'(
+			warning(duplicated_directives),
+			duplicated_directive(File, Lines, Type, Entity, dynamic(PI), OriginalFile, OriginalLines)
+		)
 	;	true
 	).
 
@@ -10170,7 +10224,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, discontiguous(PI), OriginalFile, OriginalLines))
+		'$lgt_print_message'(
+			warning(duplicated_directives),
+			duplicated_directive(File, Lines, Type, Entity, discontiguous(PI), OriginalFile, OriginalLines)
+		)
 	;	true
 	).
 
@@ -10229,7 +10286,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, meta_predicate(Meta), OriginalFile, OriginalLines))
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_directive(File, Lines, Type, Entity, meta_predicate(Meta), OriginalFile, OriginalLines)
+			)
 		;	true
 		)
 	;	'$lgt_pp_meta_predicate_'(Template, _, _, _) ->
@@ -10311,7 +10371,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_compiler_flag'(duplicated_directives, warning) ->
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
-			'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, meta_non_terminal(Meta), OriginalFile, OriginalLines))
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_directive(File, Lines, Type, Entity, meta_non_terminal(Meta), OriginalFile, OriginalLines)
+			)
 		;	true
 		)
 	;	'$lgt_pp_meta_predicate_'(Template, _, _, _) ->
@@ -10449,7 +10512,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, multifile(PI), OriginalFile, OriginalLines))
+		'$lgt_print_message'(
+			warning(duplicated_directives),
+			duplicated_directive(File, Lines, Type, Entity, multifile(PI), OriginalFile, OriginalLines)
+		)
 	;	true
 	).
 
@@ -11142,7 +11208,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(duplicated_directives), duplicated_directive(File, Lines, Type, Entity, Directive))
+		'$lgt_print_message'(
+			warning(duplicated_directives),
+			duplicated_directive(File, Lines, Type, Entity, Directive)
+		)
 	;	true
 	).
 
@@ -11920,7 +11989,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_implemented_protocol_'(Protocol, _, _, _, _),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(general), missing_reference_to_built_in_protocol(File, Lines, Type, Entity, Protocol)),
+	'$lgt_print_message'(
+		warning(general),
+		missing_reference_to_built_in_protocol(File, Lines, Type, Entity, Protocol)
+	),
 	fail.
 
 % compile the head of a clause of another entity predicate (which we check if declared multifile)
@@ -11950,7 +12022,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ functor(OldProvider, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(general), debug_handler_provider_already_exists(File, Lines, Type, Entity, OldProvider)),
+	'$lgt_print_message'(
+		warning(general),
+		debug_handler_provider_already_exists(File, Lines, Type, Entity, OldProvider)
+	),
 	fail.
 
 '$lgt_compile_head'(Other::Head, Other::Functor/Arity, THead, Ctx) :-
@@ -12038,7 +12113,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% call to a standard Prolog predicate that is not being locally redefined
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, {Pred}, [Pred])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, {Pred}, [Pred])
+	),
 	fail.
 
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
@@ -12123,7 +12201,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_compiler_flag'(suspicious_calls, warning),
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
-			'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, repeat, reason(repeat(Head)))) ->
+			'$lgt_print_message'(
+				warning(suspicious_calls),
+				suspicious_call(File, Lines, Type, Entity, repeat, reason(repeat(Head)))
+			) ->
 			true
 		;	true
 		)
@@ -12162,7 +12243,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), reason(missing_else_part))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), reason(missing_else_part))
+	),
 	fail.
 '$lgt_compile_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
@@ -12177,7 +12261,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), reason(missing_else_part))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), reason(missing_else_part))
+	),
 	fail.
 '$lgt_compile_body'((Pred1 -> Pred2), (TPred1 -> TPred2), (DPred1 -> DPred2), Ctx) :-
 	!,
@@ -12191,7 +12278,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, \+ Pred, [Alt])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, \+ Pred, [Alt])
+	),
 	fail.
 '$lgt_compile_body'(\+ Pred, \+ TPred, '$lgt_debug'(goal(\+ Pred, \+ DPred), ExCtx), Ctx) :-
 	!,
@@ -12212,7 +12302,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, !, reason(multifile(Head)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, !, reason(multifile(Head)))
+	),
 	fail.
 
 % warning on cuts on clauses with variable aliasing in the head
@@ -12224,8 +12317,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity2, Arity) ->
-		'$lgt_print_message'(warning(steadfastness), possible_non_steadfast_non_terminal(File, Lines, Type, Entity, Functor//Arity2))
-	;	'$lgt_print_message'(warning(steadfastness), possible_non_steadfast_predicate(File, Lines, Type, Entity, Functor/Arity))
+		'$lgt_print_message'(
+			warning(steadfastness),
+			possible_non_steadfast_non_terminal(File, Lines, Type, Entity, Functor//Arity2)
+		)
+	;	'$lgt_print_message'(
+			warning(steadfastness),
+			possible_non_steadfast_predicate(File, Lines, Type, Entity, Functor/Arity)
+		)
 	),
 	fail.
 
@@ -12265,7 +12364,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, call(Goal), [Goal])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, call(Goal), [Goal])
+	),
 	fail.
 
 '$lgt_compile_body'(call(Goal), TPred, '$lgt_debug'(goal(call(Goal), DPred), ExCtx), Ctx) :-
@@ -12402,7 +12504,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term1 = Term2, reason(no_variable_bindings_after_unification))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Term1 = Term2, reason(no_variable_bindings_after_unification))
+	),
 	fail.
 
 '$lgt_compile_body'(unify_with_occurs_check(Term1, Term2), _, _, Ctx) :-
@@ -12418,7 +12523,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, unify_with_occurs_check(Term1, Term2), reason(no_variable_bindings_after_unification))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, unify_with_occurs_check(Term1, Term2), reason(no_variable_bindings_after_unification))
+	),
 	fail.
 
 % atomic term processing predicates (only lint warnings)
@@ -12438,7 +12546,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% assume that Var is an anonymous variable
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, atom_concat(Prefix, Var, Atom), [sub_atom(Atom, 0, _, _, Prefix)])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, atom_concat(Prefix, Var, Atom), [sub_atom(Atom, 0, _, _, Prefix)])
+	),
 	fail.
 
 % term creation and decomposition predicates (only lint warnings)
@@ -12454,7 +12565,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	ListTerm =.. List,
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [Term = ListTerm])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Term =.. List, [Term = ListTerm])
+	),
 	fail.
 
 '$lgt_compile_body'(Term =.. List, _, _, Ctx) :-
@@ -12479,7 +12593,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% assume that the list tail is an anonymous variable
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [functor(Term, Functor, _)])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Term =.. List, [functor(Term, Functor, _)])
+	),
 	fail.
 
 '$lgt_compile_body'(Term =.. List, _, _, Ctx) :-
@@ -12507,7 +12624,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% otherwise the =../2 call may also being used e.g. to verify the compound term arity
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term =.. List, [arg(N, Term, Arg)])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Term =.. List, [arg(N, Term, Arg)])
+	),
 	fail.
 
 % lambda expressions
@@ -12593,7 +12713,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_intersection'(TermVariables, GoalVariables, []),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, bagof(Term,QGoal,List), reason(no_shared_variables(bagof)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, bagof(Term,QGoal,List), reason(no_shared_variables(bagof)))
+	),
 	fail.
 
 '$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
@@ -12604,7 +12727,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))
+	),
 	fail.
 
 '$lgt_compile_body'(bagof(_, QGoal, _), _, _, Ctx) :-
@@ -12614,7 +12740,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_singleton_variables_in_meta_argument'(QGoal, Singletons, Ctx),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(singleton_variables(bagof/3,QGoal,Singletons)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, QGoal, reason(singleton_variables(bagof/3,QGoal,Singletons)))
+	),
 	fail.
 
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
@@ -12653,7 +12782,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% assume that Term is not an anonymous variable
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List), reason(no_shared_variables(findall)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List), reason(no_shared_variables(findall)))
+	),
 	fail.
 
 '$lgt_compile_body'(findall(Term, Goal, List), _, _, Ctx) :-
@@ -12676,7 +12808,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% assume that List is an anonymous variable
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, findall(Term, Goal, List), [(Goal, fail; true)])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, findall(Term, Goal, List), [(Goal, fail; true)])
+	),
 	fail.
 
 '$lgt_compile_body'(findall(Term, Goal, List), findall(Term, TGoal, List), '$lgt_debug'(goal(findall(Term, Goal, List), findall(Term, DGoal, List)), ExCtx), Ctx) :-
@@ -12694,7 +12829,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_intersection'(TermVariables, GoalVariables, []),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List,Tail), reason(no_shared_variables(findall)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, findall(Term,Goal,List,Tail), reason(no_shared_variables(findall)))
+	),
 	fail.
 
 '$lgt_compile_body'(findall(Term, Goal, List, Tail), findall(Term, TGoal, List, Tail), '$lgt_debug'(goal(findall(Term, Goal, List, Tail), findall(Term, DGoal, List, Tail)), ExCtx), Ctx) :-
@@ -12714,7 +12852,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_intersection'(GenVariables, TestVariables, []),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, forall(Gen,Test), reason(no_shared_variables(forall)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, forall(Gen,Test), reason(no_shared_variables(forall)))
+	),
 	fail.
 '$lgt_compile_body'(forall(Gen, Test), \+ (TGen, \+ TTest), '$lgt_debug'(goal(forall(Gen, Test), \+ (DGen, \+ DTest)), ExCtx), Ctx) :-
 	!,
@@ -12733,7 +12874,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_intersection'(TermVariables, GoalVariables, []),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, setof(Term,QGoal,List), reason(no_shared_variables(setof)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, setof(Term,QGoal,List), reason(no_shared_variables(setof)))
+	),
 	fail.
 
 '$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
@@ -12744,7 +12888,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_missing_existential_variables'(QGoal, [Variable| Variables], Goal),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, QGoal, reason(existential_variables([Variable|Variables],Goal)))
+	),
 	fail.
 
 '$lgt_compile_body'(setof(_, QGoal, _), _, _, Ctx) :-
@@ -12754,7 +12901,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_singleton_variables_in_meta_argument'(QGoal, Singletons, Ctx),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, QGoal, reason(singleton_variables(setof/3,QGoal,Singletons)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, QGoal, reason(singleton_variables(setof/3,QGoal,Singletons)))
+	),
 	fail.
 
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
@@ -13647,7 +13797,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1)
+		)
 	;	true
 	),
 	'$lgt_compile_body'(abolish(Functor/Arity), TCond, DCond, Ctx).
@@ -13712,7 +13865,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1)
+		)
 	;	true
 	),
 	'$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx).
@@ -14100,7 +14256,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1)
+		)
 	;	true
 	),
 	'$lgt_compile_body'(assertz(Clause, Ref), TCond, DCond, Ctx).
@@ -14708,7 +14867,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Term is Exp, reason(shared_variable(Term)))),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Term is Exp, reason(shared_variable(Term)))
+	),
 	fail.
 '$lgt_compile_body'(_ is Exp, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
@@ -14835,7 +14997,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
-		'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, CallN, [Goal]))
+		'$lgt_print_message'(
+			warning(suspicious_calls),
+			suspicious_call(File, Lines, Type, Entity, CallN, [Goal])
+		)
 	;	true
 	),
 	'$lgt_check_closure'(Closure, Ctx),
@@ -15127,7 +15292,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		functor(Pred, Functor, Arity),
 		functor(RPred, RFunctor, RArity),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, Functor/Arity, RFunctor/RArity))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, Functor/Arity, RFunctor/RArity)
+		)
 	;	true
 	),
 	'$lgt_compile_body'(RPred, TPred, DPred, Ctx).
@@ -15142,7 +15310,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_entity_'(Type, Entity, _),
 	functor(Pred, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, Functor/Arity)),
+	'$lgt_print_message'(
+		warning(deprecated),
+		deprecated_predicate(File, Lines, Type, Entity, Functor/Arity)
+	),
 	fail.
 
 % call to a Prolog built-in predicate
@@ -15342,7 +15513,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		nonvar(Option),
 		\+ '$lgt_iso_spec_read_term_option'(Option) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(portability), non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option))
+		'$lgt_print_message'(
+			warning(portability),
+			non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option)
+		)
 	;	true
 	).
 
@@ -15362,7 +15536,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		nonvar(Option),
 		\+ '$lgt_iso_spec_write_term_option'(Option) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(portability), non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option))
+		'$lgt_print_message'(
+			warning(portability),
+			non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option)
+		)
 	;	true
 	).
 
@@ -15382,7 +15559,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		nonvar(Option),
 		\+ '$lgt_iso_spec_open_stream_option'(Option) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(portability), non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option))
+		'$lgt_print_message'(
+			warning(portability),
+			non_standard_predicate_option(File, Lines, Type, Entity, Predicate, Option)
+		)
 	;	true
 	).
 
@@ -15466,8 +15646,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		(	call(Goal) ->
-			'$lgt_print_message'(warning(always_true_or_false_goals), goal_is_always_true(File, Lines, Type, Entity, Goal))
-		;	'$lgt_print_message'(warning(always_true_or_false_goals), goal_is_always_false(File, Lines, Type, Entity, Goal))
+			'$lgt_print_message'(
+				warning(always_true_or_false_goals),
+				goal_is_always_true(File, Lines, Type, Entity, Goal)
+			)
+		;	'$lgt_print_message'(
+				warning(always_true_or_false_goals),
+				goal_is_always_false(File, Lines, Type, Entity, Goal)
+			)
 		)
 	;	true
 	).
@@ -15513,7 +15699,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not an already compiled auxiliary fact or rule
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(trivial_goal_fails), no_matching_clause_for_goal(File, Lines, Type, Entity, Call))
+		'$lgt_print_message'(
+			warning(trivial_goal_fails),
+			no_matching_clause_for_goal(File, Lines, Type, Entity, Call)
+		)
 	;	true
 	).
 
@@ -16318,7 +16507,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 			\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
-			'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, user::Pred, [Pred])) ->
+			'$lgt_print_message'(
+				warning(suspicious_calls),
+				suspicious_call(File, Lines, Type, Entity, user::Pred, [Pred])
+			) ->
 			true
 		;	true
 		)
@@ -16373,7 +16565,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Self == Obj,
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Obj::Pred, [::Pred])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Obj::Pred, [::Pred])
+	),
 	fail.
 
 % suspicious use of ::/2 in objects to call a local predicate
@@ -16386,7 +16581,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	This == Obj,
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, Obj::Pred, [Pred])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Obj::Pred, [Pred])
+	),
 	fail.
 
 % translation performed at runtime
@@ -16476,7 +16674,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1)
+		)
 	;	true
 	),
 	'$lgt_compile_message_to_object'(abolish(Functor/Arity), Obj, TPred, Events, Ctx).
@@ -16504,7 +16705,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1)
+		)
 	;	true
 	),
 	'$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, Events, Ctx).
@@ -16634,7 +16838,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, assert/2, assertz/2))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, assert/2, assertz/2)
+		)
 	;	true
 	),
 	'$lgt_compile_message_to_object'(assertz(Clause, Ref), Obj, TPred, Events, Ctx).
@@ -16791,7 +16998,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(suspicious_calls), suspicious_call(File, Lines, Type, Entity, ::Pred, [Pred, ^^Pred])),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, ::Pred, [Pred, ^^Pred])
+	),
 	fail.
 
 % broadcasting control constructs
@@ -16868,7 +17078,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1)
+		)
 	;	true
 	),
 	'$lgt_compile_message_to_self'(abolish(Functor/Arity), TPred, Ctx).
@@ -16894,7 +17107,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1)
+		)
 	;	true
 	),
 	'$lgt_compile_message_to_self'(assertz(Clause), TPred, Ctx).
@@ -16997,7 +17213,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(deprecated), deprecated_predicate(File, Lines, Type, Entity, assert/2, assertz/2))
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, assert/2, assertz/2)
+		)
 	;	true
 	),
 	'$lgt_compile_message_to_self'(assertz(Clause, Ref), TPred, Ctx).
@@ -18601,7 +18820,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not a protocol defined in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Protocol, _, _, _, _)),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(unknown_entities), reference_to_unknown_protocol(File, Lines, Type, Entity, Protocol)),
+		'$lgt_print_message'(
+			warning(unknown_entities),
+			reference_to_unknown_protocol(File, Lines, Type, Entity, Protocol)
+		),
 	fail.
 
 '$lgt_report_unknown_protocols'(_, _).
@@ -18621,7 +18843,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not a category defined in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(unknown_entities), reference_to_unknown_category(File, Lines, Type, Entity, Category)),
+		'$lgt_print_message'(
+			warning(unknown_entities),
+			reference_to_unknown_category(File, Lines, Type, Entity, Category)
+		),
 	fail.
 
 '$lgt_report_unknown_categories'(_, _).
@@ -18639,7 +18864,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not the module being compiled (self reference)
 		\+ '$lgt_pp_module_'(Module),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(unknown_entities), reference_to_unknown_module(File, Lines, Type, Entity, Module)),
+		'$lgt_print_message'(
+			warning(unknown_entities),
+			reference_to_unknown_module(File, Lines, Type, Entity, Module)
+		),
 	fail.
 
 '$lgt_report_unknown_modules'(_, _).
@@ -18883,7 +19111,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, _, Type, Entity),
-		'$lgt_print_message'(warning(redefined_built_ins), redefined_logtalk_built_in_predicate(File, Lines, Type, Entity, Functor/Arity))
+		'$lgt_print_message'(
+			warning(redefined_built_ins),
+			redefined_logtalk_built_in_predicate(File, Lines, Type, Entity, Functor/Arity)
+		)
 	;	true
 	).
 
@@ -18896,7 +19127,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, _, Type, Entity),
-		'$lgt_print_message'(warning(redefined_built_ins), redefined_prolog_built_in_predicate(File, Lines, Type, Entity, Functor/Arity))
+		'$lgt_print_message'(
+			warning(redefined_built_ins),
+			redefined_prolog_built_in_predicate(File, Lines, Type, Entity, Functor/Arity)
+		)
 	;	true
 	).
 
@@ -18936,8 +19170,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_non_camel_case_name'(Name),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_print_message'(warning(naming), non_camel_case_variable_name(File, Lines, Type, Entity, Name))
-	;	'$lgt_print_message'(warning(naming), non_camel_case_variable_name(File, Lines, Name))
+		'$lgt_print_message'(
+			warning(naming),
+			non_camel_case_variable_name(File, Lines, Type, Entity, Name)
+		)
+	;	'$lgt_print_message'(
+			warning(naming),
+			non_camel_case_variable_name(File, Lines, Name)
+		)
 	),
 	fail.
 
@@ -18946,8 +19186,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_similar_names'(Name, OtherName),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_print_message'(warning(naming), variable_names_differ_only_on_case(File, Lines, Type, Entity, Name, OtherName))
-	;	'$lgt_print_message'(warning(naming), variable_names_differ_only_on_case(File, Lines, Name, OtherName))
+		'$lgt_print_message'(
+			warning(naming),
+			variable_names_differ_only_on_case(File, Lines, Type, Entity, Name, OtherName)
+		)
+	;	'$lgt_print_message'(
+			warning(naming),
+			variable_names_differ_only_on_case(File, Lines, Name, OtherName)
+		)
 	),
 	fail.
 
@@ -20308,8 +20554,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_variant'(Clause, Duplicate) ->
 		'$lgt_increment_compiling_warnings_counter',
 		(	OriginalTerm = (_ --> _) ->
-			'$lgt_print_message'(warning(duplicated_clauses), duplicated_grammar_rule(File, Lines, Type, Entity, OriginalTerm, OriginalFile, OriginalLines))
-		;	'$lgt_print_message'(warning(duplicated_clauses), duplicated_clause(File, Lines, Type, Entity, Duplicate, OriginalFile, OriginalLines))
+			'$lgt_print_message'(
+				warning(duplicated_clauses),
+				duplicated_grammar_rule(File, Lines, Type, Entity, OriginalTerm, OriginalFile, OriginalLines)
+			)
+		;	'$lgt_print_message'(
+				warning(duplicated_clauses),
+				duplicated_clause(File, Lines, Type, Entity, Duplicate, OriginalFile, OriginalLines)
+			)
 		)
 	;	true
 	),
@@ -20571,7 +20823,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_extended_category_'(_, _, _, _, _, _),
 	% nowhere from inheriting a predicate scope declaration
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_scope_directive(File, Lines, category, Entity, (dynamic), Functor/Arity)),
+	'$lgt_print_message'(
+		warning(missing_directives),
+		missing_scope_directive(File, Lines, category, Entity, (dynamic), Functor/Arity)
+	),
 	fail.
 
 % reports missing scope directives for multifile predicates
@@ -20585,7 +20840,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_private_'(Functor, Arity, _, _),
 	% but missing corresponding scope directive
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_scope_directive(File, Lines, Type, Entity, (multifile), Functor/Arity)),
+	'$lgt_print_message'(
+		warning(missing_directives),
+		missing_scope_directive(File, Lines, Type, Entity, (multifile), Functor/Arity)
+	),
 	fail.
 
 % reports missing meta_predicate/1 directives for meta-predicates
@@ -20595,8 +20853,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_defines_non_terminal_'(Functor, NonTerminalArity, Arity) ->
-		'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (meta_non_terminal), Functor//NonTerminalArity))
-	;	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (meta_predicate), Functor/Arity))
+		'$lgt_print_message'(
+			warning(missing_directives),
+			missing_predicate_directive(File, Lines, Type, Entity, (meta_non_terminal), Functor//NonTerminalArity)
+		)
+	;	'$lgt_print_message'(
+			warning(missing_directives),
+			missing_predicate_directive(File, Lines, Type, Entity, (meta_predicate), Functor/Arity)
+		)
 	),
 	fail.
 
@@ -20605,7 +20869,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_missing_directives_'(Type, Entity) :-
 	'$lgt_pp_missing_multifile_directive_'(PI, File, Lines),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- multifile(PI)))),
+	'$lgt_print_message'(
+		warning(missing_directives),
+		missing_predicate_directive(File, Lines, Type, Entity, (:- multifile(PI)))
+	),
 	fail.
 
 % reports missing dynamic/1 directives
@@ -20614,7 +20881,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_missing_dynamic_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- dynamic(Functor/Arity)))),
+	'$lgt_print_message'(
+		warning(missing_directives),
+		missing_predicate_directive(File, Lines, Type, Entity, (:- dynamic(Functor/Arity)))
+	),
 	fail.
 
 % reports missing discontiguous/1 directives
@@ -20623,7 +20893,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_missing_discontiguous_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- discontiguous(Functor/Arity)))),
+	'$lgt_print_message'(
+		warning(missing_directives),
+		missing_predicate_directive(File, Lines, Type, Entity, (:- discontiguous(Functor/Arity)))
+	),
 	fail.
 
 % reports missing scope directives for mode directives
@@ -20638,7 +20911,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_private_'(Functor, Arity, _, _),
 	% but missing scope directive
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_scope_directive(File, Lines, Type, Entity, mode, Functor/Arity)),
+	'$lgt_print_message'(
+		warning(missing_directives),
+		missing_scope_directive(File, Lines, Type, Entity, mode, Functor/Arity)
+	),
 	fail.
 
 '$lgt_report_missing_directives_'(Type, Entity) :-
@@ -20651,7 +20927,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	setof(Predicate, '$lgt_pp_calls_module_predicate_'(Module, Predicate), Predicates),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), missing_predicate_directive(File, Lines, Type, Entity, (:- use_module(Module,Predicates)))),
+	'$lgt_print_message'(
+		warning(missing_directives),
+		missing_predicate_directive(File, Lines, Type, Entity, (:- use_module(Module,Predicates)))
+	),
 	fail.
 
 '$lgt_report_missing_directives_'(_, _).
@@ -20681,8 +20960,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
-		'$lgt_print_message'(warning(unknown_predicates), unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, Functor//Arity2))
-	;	'$lgt_print_message'(warning(unknown_predicates), unknown_predicate_called_but_not_defined(File, Lines, Type, Entity, Functor/Arity))
+		'$lgt_print_message'(
+			warning(unknown_predicates),
+			unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, Functor//Arity2)
+		)
+	;	'$lgt_print_message'(
+			warning(unknown_predicates),
+			unknown_predicate_called_but_not_defined(File, Lines, Type, Entity, Functor/Arity)
+		)
 	).
 
 
@@ -20710,8 +20995,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
-		'$lgt_print_message'(warning(undefined_predicates), declared_static_non_terminal_called_but_not_defined(File, Lines, Type, Entity, Functor//Arity2))
-	;	'$lgt_print_message'(warning(undefined_predicates), declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Functor/Arity))
+		'$lgt_print_message'(
+			warning(undefined_predicates),
+			declared_static_non_terminal_called_but_not_defined(File, Lines, Type, Entity, Functor//Arity2)
+		)
+	;	'$lgt_print_message'(
+			warning(undefined_predicates),
+			declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Functor/Arity)
+		)
 	).
 
 
@@ -20731,14 +21022,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_non_portable_predicate_'(Head, File, Lines),
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(portability), non_standard_predicate_call(File, Lines, Type, Entity, Functor/Arity)),
+		'$lgt_print_message'(
+			warning(portability),
+			non_standard_predicate_call(File, Lines, Type, Entity, Functor/Arity)
+		),
 	fail.
 
 '$lgt_report_non_portable_calls_'(Type, Entity) :-
 	'$lgt_pp_non_portable_function_'(Function, File, Lines),
 		functor(Function, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(portability), non_standard_arithmetic_function_call(File, Lines, Type, Entity, Functor/Arity)),
+		'$lgt_print_message'(
+			warning(portability),
+			non_standard_arithmetic_function_call(File, Lines, Type, Entity, Functor/Arity)
+		),
 	fail.
 
 '$lgt_report_non_portable_calls_'(_, _).
@@ -22157,7 +22454,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(lambda_variables, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(lambda_variables), parameter_variable_used_elsewhere(File, Lines, Type, Entity, Lambda, Variable))
+		'$lgt_print_message'(
+			warning(lambda_variables),
+			parameter_variable_used_elsewhere(File, Lines, Type, Entity, Lambda, Variable)
+		)
 	;	true
 	).
 
@@ -22189,7 +22489,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(lambda_variables, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(lambda_variables), unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, Parameters>>Goal))
+		'$lgt_print_message'(
+			warning(lambda_variables),
+			unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, Parameters>>Goal)
+		)
 	;	true
 	).
 
@@ -22216,7 +22519,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_flag'(lambda_variables, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(lambda_variables), variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, Free/Parameters>>Goal))
+		'$lgt_print_message'(
+			warning(lambda_variables),
+			variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, Free/Parameters>>Goal)
+		)
 	;	true
 	).
 
@@ -26398,7 +26704,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	arg(1, Check, Compatible),
 	(	call(Operator, Current, Compatible) ->
 		true
-	;	'$lgt_print_message'(warning(compatibility), possibly_incompatible_prolog_version(Current, Compatible))
+	;	'$lgt_print_message'(
+			warning(compatibility),
+			possibly_incompatible_prolog_version(Current, Compatible)
+		)
 	).
 
 
