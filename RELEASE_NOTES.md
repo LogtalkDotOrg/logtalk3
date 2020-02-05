@@ -24,6 +24,9 @@ RELEASE NOTES
 3.36.0 - February ??, 2020
 ==========================
 
+Distribution
+------------
+
 * CHANGED: All versions in `info/1` directives in all source files to use
 the compound term `Major:Minor:Day` format.
 
@@ -91,6 +94,9 @@ writing dates.
 
 * FIXED: The `logtalk_tester` shell script to not display text from comment
 messages when listing compilation errors, warnings, and failed unit tests.
+
+* FIXED: The `lgtunit` tool code coverage reports to print the parameters
+passed to a parametric test object instead of printing an object template.
 
 Tests
 -----
