@@ -49,7 +49,7 @@ not in the `Major:Minor:Day` format.
 the old `Year/Month/Day` format.
 
 * FIXED: Generate a compiler error when trying to redefine a built-in method
-using a `uses/2` or `use_module/2` directive.
+or a built-in control construct using a `uses/2` or `use_module/2` directive.
 
 * FIXED: Bug where a compilation error in a compiler generated auxiliary
 clause (usually caused by a call in the body to a module predicate with

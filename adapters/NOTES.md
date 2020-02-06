@@ -259,7 +259,8 @@ Known issues in Qu-Prolog 9.7: (1) this version doesn't support static
 multifile predicates. This limitation may be fixed in later versions;
 (2) a bug in the Windows version of Qu-Prolog in the expansion of file
 paths containing environment variables prevents using it with Logtalk
-in this operating-system.
+in this operating-system; (3) the adapter file redefines the `:/2`
+operator per its ISO Prolog standard definition.
 
 Written and tested with the help of Peter Robinson, Qu-Prolog author.
 
