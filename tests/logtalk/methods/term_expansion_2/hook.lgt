@@ -18,23 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- object(hook,
+	implements(expanding)).
 
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2020-02-07,
-		comment is 'Unit tests for the term_expansion/2 user-defined hook predicate.'
-	]).
-
-	% see the tests for the expand_term/2 predicate, which also
-	% test the term_expansion/2 user-defined hook predicate
-
-	test(term_expansion_2_01, true(p(C,D,E) == p(2,3,4))) :-
-		object1::p(C, D, E).
-
-	test(term_expansion_2_02, true(p(C,D,E) == p(1,2,3))) :-
-		object2::p(C, D, E).
+	term_expansion(c(X), c(Y)) :-
+		Y is X + 1.
+	term_expansion(d(X), d(Y)) :-
+		Y is X + 1.
+	term_expansion(e(X), e(Y)) :-
+		Y is X + 1.
 
 :- end_object.

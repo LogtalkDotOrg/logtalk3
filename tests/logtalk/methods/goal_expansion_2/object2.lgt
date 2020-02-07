@@ -18,31 +18,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(object).
+% override the default flag value
+:- set_logtalk_flag(hook, logtalk).
 
-	:- public(a/1).
-	a(X) :-
-		(	one(q(X))
-		;	r(X)
-		).
 
-	:- public(b/1).
-	b(X) :-
-		(	true ->
-			q(X)
-		;	r(X)
-		).
+:- object(object2).
 
-	q(1). q(2). q(3).
+	:- public(p/3).
 
-	r(a). r(b). r(c).
-
-	:- public(fp/1).
-	fp(X) :- c(X), f(X).
+	p(C, D, E) :-
+		c(C), d(D), e(E).
 
 	c(1).
-	d(1).
-	e(2).
-	f(a).
+	d(2).
+	e(3).
 
 :- end_object.

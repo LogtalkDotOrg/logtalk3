@@ -37,9 +37,10 @@ Logtalk compiler and runtime
 ----------------------------
 
 * CHANGED: The `logtalk` built-in object now complies with the `expanding`
-protocol but defines the expansion predicates to always fail to allow a
-default value for the `hook` flag that effectively prevents the use of default
-expansions when compiling files.
+protocol by defining the expansion predicates to trivially succeed without
+changing input terms and goals. These definitions allow the `logtalk` object
+to be used as a file specific hook object, effectively preventing the use of
+default expansions when compiling those files.
 
 * CHANGED: Accept versions in `info/1` directives using the compound term
 format `Major:Minor:Day`.
@@ -52,6 +53,10 @@ not in the `Major:Minor:Day` format.
 
 * ADDED: Deprecated warning for `info/1` directives with a `date` value in
 the old `Year/Month/Day` format.
+
+* FIXED: Overriding a hook object specified using a compiler option when
+a hook object is already specified using a file local `set_logtalk_flag/2`
+directive.
 
 * FIXED: Generate a compiler error when trying to redefine a built-in method
 or a built-in control construct using a `uses/2` or `use_module/2` directive.
@@ -109,6 +114,8 @@ passed to a parametric test object instead of printing an object template.
 
 Tests
 -----
+
+* ADDED: Tests for the `term_expansion/2` built-in method.
 
 * ADDED: Tests for the presence of the standard ISO Prolog operators.
 

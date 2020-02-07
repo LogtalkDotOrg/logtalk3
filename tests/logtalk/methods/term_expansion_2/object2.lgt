@@ -18,23 +18,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+% override the default flag value
+:- set_logtalk_flag(hook, logtalk).
 
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2020-02-07,
-		comment is 'Unit tests for the term_expansion/2 user-defined hook predicate.'
-	]).
 
-	% see the tests for the expand_term/2 predicate, which also
-	% test the term_expansion/2 user-defined hook predicate
+:- object(object2).
 
-	test(term_expansion_2_01, true(p(C,D,E) == p(2,3,4))) :-
-		object1::p(C, D, E).
+	:- public(p/3).
 
-	test(term_expansion_2_02, true(p(C,D,E) == p(1,2,3))) :-
-		object2::p(C, D, E).
+	p(C, D, E) :-
+		c(C), d(D), e(E).
+
+	c(1).
+	d(2).
+	e(3).
 
 :- end_object.

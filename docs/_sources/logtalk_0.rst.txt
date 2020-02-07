@@ -24,7 +24,7 @@ Built-in object providing message printing, debugging, library, source file, and
 | **Remarks:**
 
 
-   - *Term- and goal-expansion support:* This object complies with the ``expanding`` protocol but defines the expansion predicates to always fail to allow a default value for the ``hook`` flag that effectively prevents the use of default expansions when compiling files.
+   - *Term- and goal-expansion support:* Defines the expansion predicates to trivially succeed without changing input terms and goals. These definitions allow this object to be used as a file specific hook object, effectively preventing the use of default expansions when compiling those files.
 
    - *Default message kinds:* ``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.
 

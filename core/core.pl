@@ -2639,10 +2639,12 @@ logtalk_compile(Files, Flags) :-
 			GoalExpansionGoal = ':'(HookEntity, goal_expansion(Goal, ExpandedGoal))
 		;	throw(error(existence_error(object, HookEntity), _))
 		),
+		retractall('$lgt_pp_hook_term_expansion_'(_, _)),
 		assertz((
 			'$lgt_pp_hook_term_expansion_'(Term, Terms) :-
 				catch(TermExpansionGoal, Error, '$lgt_term_expansion_error'(HookEntity, Term, Error))
 		)),
+		retractall('$lgt_pp_hook_goal_expansion_'(_, _)),
 		assertz((
 			'$lgt_pp_hook_goal_expansion_'(Goal, ExpandedGoal) :-
 				catch(GoalExpansionGoal, Error, '$lgt_goal_expansion_error'(HookEntity, Goal, Error))
