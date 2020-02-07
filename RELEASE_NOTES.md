@@ -36,12 +36,6 @@ the compound term `Major:Minor:Day` format.
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: The `logtalk` built-in object now complies with the `expanding`
-protocol by defining the expansion predicates to trivially succeed without
-changing input terms and goals. These definitions allow the `logtalk` object
-to be used as a file specific hook object, effectively preventing the use of
-default expansions when compiling those files.
-
 * CHANGED: Accept versions in `info/1` directives using the compound term
 format `Major:Minor:Day`.
 
@@ -68,9 +62,6 @@ of an error message.
 
 Prolog adapter and integration files
 ------------------------------------
-
-* CHANGED: Provide a default value for the `hook` flag setting it to the
-`logtalk` built-in object.
 
 * CHANGED: The Qu-Prolog adapter file to redefine the `:/2` operator per its
 ISO Prolog standard definition.

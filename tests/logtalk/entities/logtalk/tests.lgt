@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2020-02-07,
+		date is 2018-05-08,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -177,12 +177,6 @@
 			SourceExtensions
 		),
 		LogtalkPrologExtensions == SourceExtensions.
-
-	% implemented protocols
-
-	succeeds(logtalk_24) :-
-		setof(Protocol-Scope, implements_protocol(logtalk, Protocol, Scope), List),
-		List == [expanding-(public)].
 
 	% auxiliary predicates
 

@@ -19,7 +19,7 @@
 
 
 % override the default flag value
-:- set_logtalk_flag(hook, logtalk).
+:- set_logtalk_flag(hook, dummy).
 
 
 :- object(object2).

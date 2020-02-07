@@ -18,16 +18,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load([hook, dummy]),
-	% set the default hook to test override using ...
-	set_logtalk_flag(hook, hook),
-	% ... a compiler option and ....
-	logtalk_load(object1, [hook(hook)]),
-	% .... a source file local set_logtalk_flag/2 directive
-	logtalk_load(object2),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+% we can define a hook object where the expansion predicates trivially
+% succeed without changing input terms and goals to effectively prevent
+% the use of default expansions when compiling a source file
+
+:- object(dummy,
+	implements(expanding)).
+
+	term_expansion(Term, Term).
+
+	goal_expansion(Goal, Goal).
+
+:- end_object.

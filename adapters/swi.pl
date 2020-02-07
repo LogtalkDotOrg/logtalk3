@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on February 7, 2020
+%  Last updated on January 21, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -337,7 +337,6 @@
 % default values for all flags
 
 % startup flags:
-'$lgt_default_flag'(hook, logtalk).
 '$lgt_default_flag'(settings_file, allow).
 % lint compilation flags:
 '$lgt_default_flag'(unknown_entities, warning).

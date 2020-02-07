@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Term and goal expansion &mdash; The Logtalk Handbook v3.36.0-b05 documentation</title>
+  <title>Term and goal expansion &mdash; The Logtalk Handbook v3.36.0-b06 documentation</title>
   
 
   
@@ -349,16 +349,6 @@ predicate. For example:</p>
 yes
 </pre></div>
 </div>
-<p>The default value of this flag is the <a class="reference external" href="https://logtalk.org/library/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">logtalk</span></a> built-in
-object. This object complies with the <code class="docutils literal notranslate"><span class="pre">expanding</span></code> protocol by defining the
-expansion predicates to trivially succeed without changing input terms and
-goals. These definitions  allows the <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> object to be used as a file
-specific hook object, effectively preventing the use of default expansions
-when compiling those files.</p>
-<blockquote>
-<div><p>to allow a value for the <code class="docutils literal notranslate"><span class="pre">hook</span></code> flag that effectively prevents the use</p>
-</div></blockquote>
-<p>of default expansions when compiling source files.</p>
 <p>Note that, due to the <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive being local to a source,
 file, using it to specify a hook object will override any defined default hook
 object or any hook object specified as a <code class="docutils literal notranslate"><span class="pre">logtalk_compile/2</span></code> or <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code>
