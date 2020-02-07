@@ -30,14 +30,16 @@
 :- endif.
 
 
-:- object(logtalk).
+:- object(logtalk,
+	implements(expanding)).
 
 	:- info([
-		version is 1:16:0,
+		version is 1:17:0,
 		author is 'Paulo Moura',
-		date is 2019-11-29,
+		date is 2020-02-07,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
+			'Term- and goal-expansion support' - 'This object complies with the ``expanding`` protocol but defines the expansion predicates to always fail to allow a default value for the ``hook`` flag that effectively prevents the use of default expansions when compiling files.',
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
 			'Printing of silent messages' - 'By default, silent messages are not printed. These messages are only useful when intercepted.',
 			'Printing of banner and comment messages' - 'By default, banner and comment messages are only printed when the ``report`` flag is turned on.',
@@ -581,6 +583,12 @@
 
 	execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack) :-
 		{'$lgt_execution_context'(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack)}.
+
+	term_expansion(_, _) :-
+		fail.
+
+	goal_expansion(_, _) :-
+		fail.
 
 :- end_object.
 

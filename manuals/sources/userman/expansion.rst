@@ -181,6 +181,11 @@ predicate. For example:
    
    yes
 
+The default value of this flag is the :ref:`logtalk <apis:logtalk/0>` built-in
+object. This object complies with the ``expanding`` protocol but defines the
+expansion predicates to always fail to allow a default value for the flag that
+effectively prevents the use of default expansions when compiling files.
+
 Note that, due to the ``set_logtalk_flag/2`` directive being local to a source,
 file, using it to specify a hook object will override any defined default hook
 object or any hook object specified as a ``logtalk_compile/2`` or ``logtalk_load/2``

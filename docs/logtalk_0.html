@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>logtalk &mdash; Logtalk APIs v3.36.0-b04 documentation</title>
+  <title>logtalk &mdash; Logtalk APIs v3.36.0-b05 documentation</title>
   
 
   
@@ -250,8 +250,8 @@
 <p>Built-in object providing message printing, debugging, library, source file, and hacking methods.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:16:0</div>
-<div class="line"><strong>Date:</strong> 2019-11-29</div>
+<div class="line"><strong>Version:</strong> 1:17:0</div>
+<div class="line"><strong>Date:</strong> 2020-02-07</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -260,9 +260,9 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Dependencies:</strong></div>
+<div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="expanding_0.html#expanding-0"><span class="std std-ref">expanding</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -270,6 +270,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p><em>Term- and goal-expansion support:</em> This object complies with the <code class="docutils literal notranslate"><span class="pre">expanding</span></code> protocol but defines the expansion predicates to always fail to allow a default value for the <code class="docutils literal notranslate"><span class="pre">hook</span></code> flag that effectively prevents the use of default expansions when compiling files.</p></li>
 <li><p><em>Default message kinds:</em> <code class="docutils literal notranslate"><span class="pre">silent</span></code>, <code class="docutils literal notranslate"><span class="pre">silent(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">banner</span></code>, <code class="docutils literal notranslate"><span class="pre">help</span></code>, <code class="docutils literal notranslate"><span class="pre">comment</span></code>, <code class="docutils literal notranslate"><span class="pre">comment(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">information</span></code>, <code class="docutils literal notranslate"><span class="pre">information(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">warning(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">error(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">debug(Key)</span></code>, <code class="docutils literal notranslate"><span class="pre">question</span></code>, and <code class="docutils literal notranslate"><span class="pre">question(Key)</span></code>.</p></li>
 <li><p><em>Printing of silent messages:</em> By default, silent messages are not printed. These messages are only useful when intercepted.</p></li>
 <li><p><em>Printing of banner and comment messages:</em> By default, banner and comment messages are only printed when the <code class="docutils literal notranslate"><span class="pre">report</span></code> flag is turned on.</p></li>
@@ -287,7 +288,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="expanding_0.html#expanding-0-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>  <a class="reference internal" href="expanding_0.html#expanding-0-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a></div>
 </div>
 </div>
 <div class="contents local topic" id="contents">
@@ -829,11 +830,11 @@
 <hr class="docutils" />
 <div class="section" id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline">¶</a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </div>
 <div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </div>
 <div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>

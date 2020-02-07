@@ -11,19 +11,20 @@
 Built-in object providing message printing, debugging, library, source file, and hacking methods.
 
 | **Author:** Paulo Moura
-| **Version:** 1:16:0
-| **Date:** 2019-11-29
+| **Version:** 1:17:0
+| **Date:** 2020-02-07
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
 
 
-| **Dependencies:**
-|   (none)
-
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
 
 | **Remarks:**
 
+
+   - *Term- and goal-expansion support:* This object complies with the ``expanding`` protocol but defines the expansion predicates to always fail to allow a default value for the ``hook`` flag that effectively prevents the use of default expansions when compiling files.
 
    - *Default message kinds:* ``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.
 
@@ -50,7 +51,7 @@ Built-in object providing message printing, debugging, library, source file, and
    - *Title::List meta message:* By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the ``writeq/1`` predicate.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
 
 .. contents::
    :local:
@@ -604,12 +605,12 @@ Execution context term data. Execution context terms should be considered opaque
 Protected predicates
 --------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Private predicates
 ------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------
