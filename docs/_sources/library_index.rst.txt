@@ -324,6 +324,18 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    hook_pipeline(Pipeline) <hook_pipeline_1>
    hook_set(Set) <hook_set_1>
 
+``hook_objects``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   backend_hook <backend_hook_0>
+   default_hook <default_hook_0>
+   dummy_hook <dummy_hook_0>
+
 ``intervals``
 -------------
 

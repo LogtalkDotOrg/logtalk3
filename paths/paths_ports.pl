@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Default library paths for contributions
+%  Default library paths for ports
 %  Last updated on October 10, 2019
 %
 %  This file is part of Logtalk <https://logtalk.org/>

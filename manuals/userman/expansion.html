@@ -121,9 +121,11 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Term and goal expansion</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#defining-expansions">Defining expansions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#expanding-grammar-rules">Expanding grammar rules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hook-objects">Hook objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bypassing-expansions">Bypassing expansions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#combining-multiple-expansions">Combining multiple expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hook-objects">Hook objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#virtual-source-file-terms-and-loading-context">Virtual source file terms and loading context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-compiler-expansion-workflow">Default compiler expansion workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-defined-expansion-workflows">User defined expansion workflows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-prolog-defined-expansions">Using Prolog defined expansions</a></li>
 </ul>
 </li>
@@ -322,6 +324,24 @@ yes
 <p>Note that the default translation of grammar rules can be overridden by
 defining clauses for the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> predicate.</p>
 </div>
+<div class="section" id="bypassing-expansions">
+<h2>Bypassing expansions<a class="headerlink" href="#bypassing-expansions" title="Permalink to this headline">¶</a></h2>
+<p>Terms and goals wrapped by the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> control
+construct are not expanded. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_term({ping}, Term).
+
+Term = {ping}
+yes
+
+| ?- an_object::expand_goal({a}, Goal).
+
+Goal = {a}
+yes
+</pre></div>
+</div>
+<p>This also applies to source file terms and source file goals when using hook
+objects (discussed next).</p>
+</div>
 <div class="section" id="hook-objects">
 <h2>Hook objects<a class="headerlink" href="#hook-objects" title="Permalink to this headline">¶</a></h2>
 <p>Term and goal expansion of a source file during its compilation is performed
@@ -354,37 +374,16 @@ yes
 file, using it to specify a hook object will override any defined default hook
 object or any hook object specified as a <code class="docutils literal notranslate"><span class="pre">logtalk_compile/2</span></code> or <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code>
 predicate compiler option for compiling or loading the source file.</p>
-<p>When compiling a source file, the compiler will first try, by default, the
-source file specific hook object, if defined. If that fails, it tries the
-default hook object, if defined. If that also fails, the compiler tries the
-Prolog dialect specific expansion predicate definitions if defined in the
-<a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a>. This default compiler behavior can thus be overriden
-by defining an hook object where the call to the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates succeed. As an example, if we define the
-following hook object:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(dummy,
-    <span class="k">implements</span>(expanding)).
-
-    <span class="k">term_expansion</span>(<span class="nv">Term</span>, <span class="nv">Term</span>).
-
-    <span class="k">goal_expansion</span>(<span class="nv">Goal</span>, <span class="nv">Goal</span>).
-
-<span class="p">:- </span><span class="k">end_object</span>.
-</pre></div>
-</div>
-<p>and then add as the first term in a source file the directive:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, dummy).
-</pre></div>
-</div>
-<p>the file will be compiled as-is as any default hook object or any hook
-object specified as a compiler option for the file will be ignored.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates
 defined within an object or a category are never used in the compilation
 of the object or the category itself.</p>
 </div>
-<span class="target" id="index-0"></span><p id="index-1">When using a hook object to expand the terms of a source file, two
+<span class="target" id="index-0"></span></div>
+<div class="section" id="virtual-source-file-terms-and-loading-context">
+<span id="index-1"></span><h2>Virtual source file terms and loading context<a class="headerlink" href="#virtual-source-file-terms-and-loading-context" title="Permalink to this headline">¶</a></h2>
+<p>When using a hook object to expand the terms of a source file, two
 virtual file terms are generated: <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> and <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.
 These terms allow the user to define term-expansions before and after
 the actual source file terms.</p>
@@ -427,33 +426,34 @@ yes
 these are term-expanded but not goal-expanded.</p>
 </div>
 </div>
-<div class="section" id="bypassing-expansions">
-<h2>Bypassing expansions<a class="headerlink" href="#bypassing-expansions" title="Permalink to this headline">¶</a></h2>
-<p>Terms and goals wrapped by the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> control
-construct are not expanded. For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- an_object::expand_term({ping}, Term).
-
-Term = {ping}
-yes
-
-| ?- an_object::expand_goal({a}, Goal).
-
-Goal = {a}
-yes
+<div class="section" id="default-compiler-expansion-workflow">
+<h2>Default compiler expansion workflow<a class="headerlink" href="#default-compiler-expansion-workflow" title="Permalink to this headline">¶</a></h2>
+<p>When compiling a source file, the compiler will first try, by default, the
+source file specific hook object, if defined. If that fails, it tries the
+default hook object, if defined. If that also fails, the compiler tries the
+Prolog dialect specific expansion predicate definitions if defined in the
+<a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a>.</p>
+</div>
+<div class="section" id="user-defined-expansion-workflows">
+<h2>User defined expansion workflows<a class="headerlink" href="#user-defined-expansion-workflows" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes we have multiple hook objects that we need to use in the compilation
+of a source file. Logtalk includes a <a class="reference internal" href="../libraries/hook_flows.html"><span class="doc">hook_flows</span></a> library
+that supports two basic expansion workflows: a <a class="reference external" href="https://logtalk.org/library/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">pipeline</span></a>
+of hook objects, where the expansion results from a hook object are feed to the next
+hook object in the pipeline, and a <a class="reference external" href="https://logtalk.org/library/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">set</span></a> of hook objects,
+where expansions are tried until one of them succeeds. These workflows are
+implemented as parametric objects allowing combining them to implement more
+sophisticated expansion workflows.</p>
+<p>There is also a <a class="reference internal" href="../libraries/hook_objects.html"><span class="doc">hook_objects</span></a> library that provides
+convenient hook objects for defining custom expansion workflows. As an
+example, we can prevent expanding a source file using the library object
+<a class="reference external" href="https://logtalk.org/library/dummy_hook_0.html#dummy-hook-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">dummy_hook</span></a> by adding as the first term in a
+source file the directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, dummy_hook).
 </pre></div>
 </div>
-<p>This also applies to source file terms and source file goals.</p>
-</div>
-<div class="section" id="combining-multiple-expansions">
-<h2>Combining multiple expansions<a class="headerlink" href="#combining-multiple-expansions" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes we have multiple hook objects that we need to use in the compilation
-of a source file. The Logtalk library includes support for two basic expansion
-workflows: a <a class="reference external" href="https://logtalk.org/library/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">pipeline</span></a> of hook objects, where the
-expansion results from a hook object are feed to the next hook object in the
-pipeline, and a <a class="reference external" href="https://logtalk.org/library/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">set</span></a> of hook objects, where expansions
-are tried until one of them succeeds. These workflows are implemented as
-parametric objects allowing combining them to implement more sophisticated
-expansion workflows.</p>
+<p>The file will be compiled as-is as any default hook object or any hook
+object specified as a compiler option is overriden by the directive.</p>
 </div>
 <div class="section" id="using-prolog-defined-expansions">
 <h2>Using Prolog defined expansions<a class="headerlink" href="#using-prolog-defined-expansions" title="Permalink to this headline">¶</a></h2>

@@ -41,6 +41,7 @@ directory in the ``NOTES.md`` file.
    heaps
    hierarchies
    hook_flows
+   hook_objects
    intervals
    java
    logging

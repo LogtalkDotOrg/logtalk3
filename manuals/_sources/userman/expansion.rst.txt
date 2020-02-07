@@ -146,6 +146,27 @@ explicitly by calling the ``expand_term/2`` built-in method. For example:
 Note that the default translation of grammar rules can be overridden by
 defining clauses for the :ref:`methods_term_expansion_2` predicate.
 
+Bypassing expansions
+--------------------
+
+Terms and goals wrapped by the :ref:`control_external_call_1` control
+construct are not expanded. For example:
+
+.. code-block:: text
+
+   | ?- an_object::expand_term({ping}, Term).
+   
+   Term = {ping}
+   yes
+   
+   | ?- an_object::expand_goal({a}, Goal).
+   
+   Goal = {a}
+   yes
+
+This also applies to source file terms and source file goals when using hook
+objects (discussed next).
+
 Hook objects
 ------------
 
@@ -187,35 +208,6 @@ file, using it to specify a hook object will override any defined default hook
 object or any hook object specified as a ``logtalk_compile/2`` or ``logtalk_load/2``
 predicate compiler option for compiling or loading the source file.
 
-When compiling a source file, the compiler will first try, by default, the
-source file specific hook object, if defined. If that fails, it tries the
-default hook object, if defined. If that also fails, the compiler tries the
-Prolog dialect specific expansion predicate definitions if defined in the
-:term:`adapter file`. This default compiler behavior can thus be overriden
-by defining an hook object where the call to the ``term_expansion/2`` and
-``goal_expansion/2`` predicates succeed. As an example, if we define the
-following hook object:
-
-::
-
-   :- object(dummy,
-       implements(expanding)).
-
-       term_expansion(Term, Term).
-
-       goal_expansion(Goal, Goal).
-
-   :- end_object.
-   
-and then add as the first term in a source file the directive:
-
-::
-
-   :- set_logtalk_flag(hook, dummy).
-
-the file will be compiled as-is as any default hook object or any hook
-object specified as a compiler option for the file will be ignored.
-
 .. note::
 
    Clauses for the ``term_expansion/2`` and ``goal_expansion/2`` predicates
@@ -224,6 +216,9 @@ object specified as a compiler option for the file will be ignored.
 
 .. index:: single: begin_of_file
 .. index:: single: end_of_file
+
+Virtual source file terms and loading context
+---------------------------------------------
 
 When using a hook object to expand the terms of a source file, two
 virtual file terms are generated: ``begin_of_file`` and ``end_of_file``.
@@ -273,37 +268,39 @@ Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
    When a source file also contains plain Prolog directives and predicates,
    these are term-expanded but not goal-expanded.
 
-Bypassing expansions
---------------------
+Default compiler expansion workflow
+-----------------------------------
 
-Terms and goals wrapped by the :ref:`control_external_call_1` control
-construct are not expanded. For example:
+When compiling a source file, the compiler will first try, by default, the
+source file specific hook object, if defined. If that fails, it tries the
+default hook object, if defined. If that also fails, the compiler tries the
+Prolog dialect specific expansion predicate definitions if defined in the
+:term:`adapter file`.
 
-.. code-block:: text
-
-   | ?- an_object::expand_term({ping}, Term).
-   
-   Term = {ping}
-   yes
-   
-   | ?- an_object::expand_goal({a}, Goal).
-   
-   Goal = {a}
-   yes
-
-This also applies to source file terms and source file goals.
-
-Combining multiple expansions
------------------------------
+User defined expansion workflows
+--------------------------------
 
 Sometimes we have multiple hook objects that we need to use in the compilation
-of a source file. The Logtalk library includes support for two basic expansion
-workflows: a :ref:`pipeline <apis:hook_pipeline/1>` of hook objects, where the
-expansion results from a hook object are feed to the next hook object in the
-pipeline, and a :ref:`set <apis:hook_set/1>` of hook objects, where expansions
-are tried until one of them succeeds. These workflows are implemented as
-parametric objects allowing combining them to implement more sophisticated
-expansion workflows.
+of a source file. Logtalk includes a :doc:`../libraries/hook_flows` library
+that supports two basic expansion workflows: a :ref:`pipeline <apis:hook_pipeline/1>`
+of hook objects, where the expansion results from a hook object are feed to the next
+hook object in the pipeline, and a :ref:`set <apis:hook_set/1>` of hook objects,
+where expansions are tried until one of them succeeds. These workflows are
+implemented as parametric objects allowing combining them to implement more
+sophisticated expansion workflows.
+
+There is also a :doc:`../libraries/hook_objects` library that provides
+convenient hook objects for defining custom expansion workflows. As an
+example, we can prevent expanding a source file using the library object
+:ref:`dummy_hook <apis:dummy_hook/0>` by adding as the first term in a
+source file the directive:
+
+::
+
+   :- set_logtalk_flag(hook, dummy_hook).
+
+The file will be compiled as-is as any default hook object or any hook
+object specified as a compiler option is overriden by the directive.
 
 Using Prolog defined expansions
 -------------------------------

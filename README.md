@@ -113,6 +113,10 @@ PDF, ePub, and Texinfo versions of the Logtalk Handbook can be downloaded from:
 
 https://logtalk.org/documentation.html
 
+The Handbook is the entry point for the Logtalk documentation. It includes the
+user manual, the reference manual, glossary, FAQ, the library overviews, plus
+the developer tools documentation.
+
 The API documentation for the core, library, tools, and contributions is
 provided in HTML format and can be found in the [docs](docs/) directory and
 also available online at:

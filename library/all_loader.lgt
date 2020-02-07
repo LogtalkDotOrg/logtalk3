@@ -40,6 +40,7 @@
 		meta_compiler(loader),
 		assignvars(loader),
 		hook_flows(loader),
+		hook_objects(loader),
 		java(loader),
 		redis(loader),
 		optionals(loader),

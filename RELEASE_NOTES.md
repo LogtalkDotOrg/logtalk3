@@ -69,14 +69,16 @@ ISO Prolog standard definition.
 Documentation
 -------------
 
-* ADDED: Explanation on how to block unwanted source file expansions to the
-Handbook section on the term-expansion mechanism.
+* IMPROVED: The Handbook section on the term-expansion mechanism.
 
 * UPDATED: Handbook for the change to ISO 8601 standard format for dates in
 `info/1` directives.
 
 Library
 -------
+
+* ADDED: New `hook_objects` library providing convenient hook objects for
+defining custom expansion workflows.
 
 * IMPROVED: Portability of the `random`, `statistics`, and `types` libraries
 by safe guarding against backend Prolog compilers where the `(/)/2` operator
