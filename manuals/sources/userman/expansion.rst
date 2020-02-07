@@ -152,7 +152,8 @@ Hook objects
 Term and goal expansion of a source file during its compilation is performed
 by using *hook objects*. A hook object is simply an object implementing the
 :ref:`expanding <apis:expanding/0>` built-in protocol and defining clauses
-for the term and goal expansion hook predicates.
+for the term and goal expansion hook predicates. Hook objects must be compiled
+and loaded prior to be used to expand a source file.
 
 To compile a source file using a hook object, we can use the
 :ref:`hook <flag_hook>` compiler flag in the second argument of the
@@ -186,11 +187,34 @@ file, using it to specify a hook object will override any defined default hook
 object or any hook object specified as a ``logtalk_compile/2`` or ``logtalk_load/2``
 predicate compiler option for compiling or loading the source file.
 
-When compiling a source file, the compiler will first try the source
-file specific hook object, if defined. If that fails, it tries the
-default hook object, if defined. If that also fails, the compiler tries
-the Prolog dialect specific expansion predicate definitions if defined
-in the :term:`adapter file`.
+When compiling a source file, the compiler will first try, by default, the
+source file specific hook object, if defined. If that fails, it tries the
+default hook object, if defined. If that also fails, the compiler tries the
+Prolog dialect specific expansion predicate definitions if defined in the
+:term:`adapter file`. This default compiler behavior can thus be overriden
+by defining an hook object where the call to the ``term_expansion/2`` and
+``goal_expansion/2`` predicates succeed. As an example, if we define the
+following hook object:
+
+::
+
+   :- object(dummy,
+       implements(expanding)).
+
+       term_expansion(Term, Term).
+
+       goal_expansion(Goal, Goal).
+
+   :- end_object.
+   
+and then add as the first term in a source file the directive:
+
+::
+
+   :- set_logtalk_flag(hook, dummy).
+
+the file will be compiled as-is as any default hook object or any hook
+object specified as a compiler option for the file will be ignored.
 
 .. note::
 

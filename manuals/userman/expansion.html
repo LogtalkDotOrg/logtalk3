@@ -327,7 +327,8 @@ defining clauses for the <a class="reference internal" href="../refman/methods/t
 <p>Term and goal expansion of a source file during its compilation is performed
 by using <em>hook objects</em>. A hook object is simply an object implementing the
 <a class="reference external" href="https://logtalk.org/library/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol and defining clauses
-for the term and goal expansion hook predicates.</p>
+for the term and goal expansion hook predicates. Hook objects must be compiled
+and loaded prior to be used to expand a source file.</p>
 <p>To compile a source file using a hook object, we can use the
 <a class="reference internal" href="programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler flag in the second argument of the
 <a class="reference internal" href="../refman/predicates/logtalk_compile_2.html#predicates-logtalk-compile-2"><span class="std std-ref">logtalk_compile/2</span></a> and <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a>
@@ -353,11 +354,30 @@ yes
 file, using it to specify a hook object will override any defined default hook
 object or any hook object specified as a <code class="docutils literal notranslate"><span class="pre">logtalk_compile/2</span></code> or <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code>
 predicate compiler option for compiling or loading the source file.</p>
-<p>When compiling a source file, the compiler will first try the source
-file specific hook object, if defined. If that fails, it tries the
-default hook object, if defined. If that also fails, the compiler tries
-the Prolog dialect specific expansion predicate definitions if defined
-in the <a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a>.</p>
+<p>When compiling a source file, the compiler will first try, by default, the
+source file specific hook object, if defined. If that fails, it tries the
+default hook object, if defined. If that also fails, the compiler tries the
+Prolog dialect specific expansion predicate definitions if defined in the
+<a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a>. This default compiler behavior can thus be overriden
+by defining an hook object where the call to the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates succeed. As an example, if we define the
+following hook object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(dummy,
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">term_expansion</span>(<span class="nv">Term</span>, <span class="nv">Term</span>).
+
+    <span class="k">goal_expansion</span>(<span class="nv">Goal</span>, <span class="nv">Goal</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>and then add as the first term in a source file the directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, dummy).
+</pre></div>
+</div>
+<p>the file will be compiled as-is as any default hook object or any hook
+object specified as a compiler option for the file will be ignored.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates
