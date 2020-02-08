@@ -74,6 +74,9 @@ Documentation
 * UPDATED: Handbook for the change to ISO 8601 standard format for dates in
 `info/1` directives.
 
+* UPDATED: Handbook user and reference manual links to API documentation to
+not require an Internet connection when browsed locally.
+
 Library
 -------
 

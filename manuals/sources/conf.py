@@ -46,7 +46,7 @@ extensions = [
 #    'rst2pdf.pdfbuilder'
 ]
 
-intersphinx_mapping = {'apis': ('https://logtalk.org/library/','../../docs/objects.inv')}
+intersphinx_mapping = {'apis': ('../docs/','../../docs/objects.inv')}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
