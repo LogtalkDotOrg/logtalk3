@@ -18,16 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(test_hook_object,
-	implements(expanding)).
+:- object(f06).
 
-	term_expansion(a(X), a(Y)) :- Y is X + 1.
-	term_expansion(b(X), b(Y)) :- Y is X + 1.
-	term_expansion(c(X), c(Y)) :- Y is X + 1.
-	term_expansion(d(X), d(Y)) :- Y is X + 1.
-	term_expansion(e(X), e(Y)) :- Y is X + 1.
-	term_expansion(f(X), f(Y)) :- Y is X + 1.
-
-	goal_expansion(true, fail).
+	:- public(c/0).
+	c :- true.
 
 :- end_object.

@@ -18,8 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(hook, dummy_hook).
+:- object(f10).
 
-b(1).
+	:- public(d/0).
+	d :- true.
 
-b :- true.
+:- end_object.

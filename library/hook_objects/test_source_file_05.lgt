@@ -18,16 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(test_hook_object,
-	implements(expanding)).
+:- set_logtalk_flag(hook, dummy_hook).
 
-	term_expansion(a(X), a(Y)) :- Y is X + 1.
-	term_expansion(b(X), b(Y)) :- Y is X + 1.
-	term_expansion(c(X), c(Y)) :- Y is X + 1.
-	term_expansion(d(X), d(Y)) :- Y is X + 1.
-	term_expansion(e(X), e(Y)) :- Y is X + 1.
-	term_expansion(f(X), f(Y)) :- Y is X + 1.
 
-	goal_expansion(true, fail).
+:- object(f05).
+
+	:- public(b/0).
+	b :- true.
 
 :- end_object.

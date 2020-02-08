@@ -20,4 +20,10 @@
 
 :- set_logtalk_flag(hook, dummy_hook).
 
-a :- true.
+
+:- object(f04).
+
+	:- public(a/0).
+	a :- true.
+
+:- end_object.
