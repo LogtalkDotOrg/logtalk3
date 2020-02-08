@@ -18,11 +18,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(loader),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(test_hook_object),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(test_hook_object,
+	implements(expanding)).
+
+	term_expansion(a(X), a(Y)) :-
+		Y is X + 1.
+	term_expansion(b(X), b(Y)) :-
+		Y is X + 1.
+	term_expansion(c(X), c(Y)) :-
+		Y is X + 1.
+
+	goal_expansion(true, fail).
+
+:- end_object.
