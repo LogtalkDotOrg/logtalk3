@@ -20,10 +20,23 @@
 Term and goal expansion
 =======================
 
-Logtalk supports the *term and goal expansion mechanism* also found in some
-Prolog systems. This macro mechanism is used to define source-to-source
-transformations. Two common uses are the definition of language extensions
-and domain-specific languages.
+Logtalk supports a *term and goal expansion mechanism* that can be used to
+define source-to-source transformations. Two common uses are the definition
+of language extensions and domain-specific languages.
+
+Logtalk improves upon the term-expansion mechanism found on some Prolog
+systems by providing the user with fine-grained control on if, when, and how
+expansions are applied. It allows declaring in a source file which expansions,
+if any, will be used when compiling it. It allows declaring which expansions
+will be used when compiling a file in the compile and loading predicates
+themselves. It defines a concept of *hook objects* that can be used as
+building blocks to create custom and reusable expansion workflows with
+explicit and well defined semantics. It prevents the simply act of loading
+expansion rules affecting subsequent compilation of files. It prevents
+conflicts between groups of expansion rules of different origins. It
+avoids a group of buggy expansion rules from breaking other groups of
+expansions rules.
+
 
 Defining expansions
 -------------------
@@ -52,7 +65,8 @@ For example:
    :- end_object.
 
 These predicates can be explicitly called using the :ref:`methods_expand_term_2`
-and :ref:`methods_expand_goal_2` built-in methods.
+and :ref:`methods_expand_goal_2` built-in methods or called automatically
+by the compiler (see the section below on *hook objects*).
 
 Clauses for the ``term_expansion/2`` predicate are called until of them
 succeeds. The returned expansion can be a single term or a list of terms. 
@@ -128,6 +142,7 @@ already been expanded.
 Term and goal expansion predicates can also be used when compiling a source
 file as described below.
 
+
 Expanding grammar rules
 -----------------------
 
@@ -145,6 +160,7 @@ explicitly by calling the ``expand_term/2`` built-in method. For example:
 
 Note that the default translation of grammar rules can be overridden by
 defining clauses for the :ref:`methods_term_expansion_2` predicate.
+
 
 Bypassing expansions
 --------------------
@@ -166,6 +182,7 @@ construct are not expanded. For example:
 
 This also applies to source file terms and source file goals when using hook
 objects (discussed next).
+
 
 Hook objects
 ------------
@@ -216,6 +233,7 @@ predicate compiler option for compiling or loading the source file.
 
 .. index:: single: begin_of_file
 .. index:: single: end_of_file
+
 
 Virtual source file terms and loading context
 ---------------------------------------------
@@ -268,6 +286,7 @@ Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
    When a source file also contains plain Prolog directives and predicates,
    these are term-expanded but not goal-expanded.
 
+
 Default compiler expansion workflow
 -----------------------------------
 
@@ -276,6 +295,7 @@ source file specific hook object, if defined. If that fails, it tries the
 default hook object, if defined. If that also fails, the compiler tries the
 Prolog dialect specific expansion predicate definitions if defined in the
 :term:`adapter file`.
+
 
 User defined expansion workflows
 --------------------------------
@@ -287,12 +307,23 @@ of hook objects, where the expansion results from a hook object are feed to the 
 hook object in the pipeline, and a :ref:`set <apis:hook_set/1>` of hook objects,
 where expansions are tried until one of them succeeds. These workflows are
 implemented as parametric objects allowing combining them to implement more
-sophisticated expansion workflows.
+sophisticated expansion workflows. There is also a :doc:`../libraries/hook_objects`
+library that provides convenient hook objects for defining custom expansion workflows.
 
-There is also a :doc:`../libraries/hook_objects` library that provides
-convenient hook objects for defining custom expansion workflows. As an
-example, we can prevent expanding a source file using the library object
-:ref:`dummy_hook <apis:dummy_hook/0>` by adding as the first term in a
+For example, assuming that you want to apply the Prolog backend specific expansion
+rules defined in its adapter file, using the :ref:`backend_hook <apis:backend_hook/0>`
+library object, passing the resulting terms to your own expansion when compiling a
+source file, we could use the goal:
+
+.. code-block:: text
+
+   | ?- logtalk_load(
+            source,
+            [hook(hook_pipeline([backend_hook, my_expansion]))]
+        ).
+
+As a second example, we can prevent expansion of a source file using the library
+object :ref:`dummy_hook <apis:dummy_hook/0>` by adding as the first term in a
 source file the directive:
 
 ::
@@ -301,6 +332,7 @@ source file the directive:
 
 The file will be compiled as-is as any default hook object or any hook
 object specified as a compiler option is overriden by the directive.
+
 
 Using Prolog defined expansions
 -------------------------------

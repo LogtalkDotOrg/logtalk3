@@ -27,10 +27,10 @@ RELEASE NOTES
 Distribution
 ------------
 
-* CHANGED: All versions in `info/1` directives in all source files to use
+* CHANGED: Version data in `info/1` directives in all source files to use
 the compound term `Major:Minor:Day` format.
 
-* CHANGED: All dates in `info/1` directives in all source files to the ISO
+* CHANGED: Date data in `info/1` directives in all source files to the ISO
 8601 standard format, `Year-Month-Day`.
 
 Logtalk compiler and runtime
@@ -71,8 +71,8 @@ Documentation
 
 * IMPROVED: The Handbook section on the term-expansion mechanism.
 
-* UPDATED: Handbook for the change to ISO 8601 standard format for dates in
-`info/1` directives.
+* UPDATED: Handbook for the changes to version and date formats in `info/1`
+directives.
 
 * UPDATED: Handbook user and reference manual links to API documentation to
 not require an Internet connection when browsed locally.

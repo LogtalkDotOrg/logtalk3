@@ -217,10 +217,21 @@
             
   <div class="section" id="term-and-goal-expansion">
 <span id="expansion-expansion"></span><h1>Term and goal expansion<a class="headerlink" href="#term-and-goal-expansion" title="Permalink to this headline">¶</a></h1>
-<p>Logtalk supports the <em>term and goal expansion mechanism</em> also found in some
-Prolog systems. This macro mechanism is used to define source-to-source
-transformations. Two common uses are the definition of language extensions
-and domain-specific languages.</p>
+<p>Logtalk supports a <em>term and goal expansion mechanism</em> that can be used to
+define source-to-source transformations. Two common uses are the definition
+of language extensions and domain-specific languages.</p>
+<p>Logtalk improves upon the term-expansion mechanism found on some Prolog
+systems by providing the user with fine-grained control on if, when, and how
+expansions are applied. It allows declaring in a source file which expansions,
+if any, will be used when compiling it. It allows declaring which expansions
+will be used when compiling a file in the compile and loading predicates
+themselves. It defines a concept of <em>hook objects</em> that can be used as
+building blocks to create custom and reusable expansion workflows with
+explicit and well defined semantics. It prevents the simply act of loading
+expansion rules affecting subsequent compilation of files. It prevents
+conflicts between groups of expansion rules of different origins. It
+avoids a group of buggy expansion rules from breaking other groups of
+expansions rules.</p>
 <div class="section" id="defining-expansions">
 <h2>Defining expansions<a class="headerlink" href="#defining-expansions" title="Permalink to this headline">¶</a></h2>
 <p>Term and goal expansions are defined using, respectively, the predicates
@@ -245,7 +256,8 @@ For example:</p>
 </pre></div>
 </div>
 <p>These predicates can be explicitly called using the <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a>
-and <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a> built-in methods.</p>
+and <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a> built-in methods or called automatically
+by the compiler (see the section below on <em>hook objects</em>).</p>
 <p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> predicate are called until of them
 succeeds. The returned expansion can be a single term or a list of terms.
 For example:</p>
@@ -443,11 +455,20 @@ of hook objects, where the expansion results from a hook object are feed to the 
 hook object in the pipeline, and a <a class="reference external" href="../../docs/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">set</span></a> of hook objects,
 where expansions are tried until one of them succeeds. These workflows are
 implemented as parametric objects allowing combining them to implement more
-sophisticated expansion workflows.</p>
-<p>There is also a <a class="reference internal" href="../libraries/hook_objects.html"><span class="doc">hook_objects</span></a> library that provides
-convenient hook objects for defining custom expansion workflows. As an
-example, we can prevent expanding a source file using the library object
-<a class="reference external" href="../../docs/dummy_hook_0.html#dummy-hook-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">dummy_hook</span></a> by adding as the first term in a
+sophisticated expansion workflows. There is also a <a class="reference internal" href="../libraries/hook_objects.html"><span class="doc">hook_objects</span></a>
+library that provides convenient hook objects for defining custom expansion workflows.</p>
+<p>For example, assuming that you want to apply the Prolog backend specific expansion
+rules defined in its adapter file, using the <a class="reference external" href="../../docs/backend_hook_0.html#backend-hook-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">backend_hook</span></a>
+library object, passing the resulting terms to your own expansion when compiling a
+source file, we could use the goal:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(
+         source,
+         [hook(hook_pipeline([backend_hook, my_expansion]))]
+     ).
+</pre></div>
+</div>
+<p>As a second example, we can prevent expansion of a source file using the library
+object <a class="reference external" href="../../docs/dummy_hook_0.html#dummy-hook-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">dummy_hook</span></a> by adding as the first term in a
 source file the directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, dummy_hook).
 </pre></div>
