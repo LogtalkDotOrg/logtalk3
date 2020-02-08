@@ -221,12 +221,12 @@
 define source-to-source transformations. Two common uses are the definition
 of language extensions and domain-specific languages.</p>
 <p>Logtalk improves upon the term-expansion mechanism found on some Prolog
-systems by providing the user with fine-grained control on if, when, and how
-expansions are applied. It allows declaring in a source file which expansions,
-if any, will be used when compiling it. It allows declaring which expansions
-will be used when compiling a file in the compile and loading predicates
-themselves. It defines a concept of <em>hook objects</em> that can be used as
-building blocks to create custom and reusable expansion workflows with
+systems by providing the user with fine-grained control on <em>if</em>, <em>when</em>,
+and <em>how</em> expansions are applied. It allows declaring in a source file itself
+which expansions, if any, will be used when compiling it. It allows declaring
+which expansions will be used when compiling a file using compile and loading
+predicate options. It defines a concept of <em>hook objects</em> that can be used
+as building blocks to create custom and reusable expansion workflows with
 explicit and well defined semantics. It prevents the simply act of loading
 expansion rules affecting subsequent compilation of files. It prevents
 conflicts between groups of expansion rules of different origins. It
@@ -257,7 +257,8 @@ For example:</p>
 </div>
 <p>These predicates can be explicitly called using the <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a>
 and <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a> built-in methods or called automatically
-by the compiler (see the section below on <em>hook objects</em>).</p>
+by the compiler when compiling a source file (see the section below on <em>hook
+objects</em>).</p>
 <p>Clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> predicate are called until of them
 succeeds. The returned expansion can be a single term or a list of terms.
 For example:</p>
@@ -318,8 +319,6 @@ expansion of the same goal. For example, consider the following object:</p>
 <p>The expansion of the goal <code class="docutils literal notranslate"><span class="pre">a</span></code> results in the goal <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">-&gt;</span> <span class="pre">b;</span> <span class="pre">c)</span></code> with no
 attempt to further expand the <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> goals as they have
 already been expanded.</p>
-<p>Term and goal expansion predicates can also be used when compiling a source
-file as described below.</p>
 </div>
 <div class="section" id="expanding-grammar-rules">
 <h2>Expanding grammar rules<a class="headerlink" href="#expanding-grammar-rules" title="Permalink to this headline">¶</a></h2>

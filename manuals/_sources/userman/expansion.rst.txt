@@ -25,12 +25,12 @@ define source-to-source transformations. Two common uses are the definition
 of language extensions and domain-specific languages.
 
 Logtalk improves upon the term-expansion mechanism found on some Prolog
-systems by providing the user with fine-grained control on if, when, and how
-expansions are applied. It allows declaring in a source file which expansions,
-if any, will be used when compiling it. It allows declaring which expansions
-will be used when compiling a file in the compile and loading predicates
-themselves. It defines a concept of *hook objects* that can be used as
-building blocks to create custom and reusable expansion workflows with
+systems by providing the user with fine-grained control on *if*, *when*,
+and *how* expansions are applied. It allows declaring in a source file itself
+which expansions, if any, will be used when compiling it. It allows declaring
+which expansions will be used when compiling a file using compile and loading
+predicate options. It defines a concept of *hook objects* that can be used
+as building blocks to create custom and reusable expansion workflows with
 explicit and well defined semantics. It prevents the simply act of loading
 expansion rules affecting subsequent compilation of files. It prevents
 conflicts between groups of expansion rules of different origins. It
@@ -66,7 +66,8 @@ For example:
 
 These predicates can be explicitly called using the :ref:`methods_expand_term_2`
 and :ref:`methods_expand_goal_2` built-in methods or called automatically
-by the compiler (see the section below on *hook objects*).
+by the compiler when compiling a source file (see the section below on *hook
+objects*).
 
 Clauses for the ``term_expansion/2`` predicate are called until of them
 succeeds. The returned expansion can be a single term or a list of terms. 
@@ -138,9 +139,6 @@ expansion of the same goal. For example, consider the following object:
 The expansion of the goal ``a`` results in the goal ``(a -> b; c)`` with no
 attempt to further expand the ``a``, ``b``, and ``c`` goals as they have
 already been expanded.
-
-Term and goal expansion predicates can also be used when compiling a source
-file as described below.
 
 
 Expanding grammar rules
