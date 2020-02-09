@@ -3444,7 +3444,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 36, 0, b06)).
+'$lgt_version_data'(logtalk(3, 36, 0, b07)).
 
 
 
@@ -26552,7 +26552,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% if not found, lookup for a settings file in the user home directory
 		'$lgt_expand_library_alias'(home, Home),
 		(	'$lgt_load_settings_file_from_directory'(Home, Options, Result)
-		;	atom_concat(Home, '.config/', Config),
+		;	(	'$lgt_environment_variable'('XDG_CONFIG_HOME', XDG_CONFIG_HOME) ->
+				atom_concat(XDG_CONFIG_HOME, '/logtalk/', Config)
+			;	atom_concat(Home, '.config/logtalk/', Config)
+			),
 			'$lgt_load_settings_file_from_directory'(Config, Options, Result)
 		) ->
 		true
@@ -26572,7 +26575,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% if still not found, lookup for a settings file in the user home directory
 		'$lgt_expand_library_alias'(home, Home),
 		(	'$lgt_load_settings_file_from_directory'(Home, Options, Result)
-		;	atom_concat(Home, '.config/', Config),
+		;	(	'$lgt_environment_variable'('XDG_CONFIG_HOME', XDG_CONFIG_HOME) ->
+				atom_concat(XDG_CONFIG_HOME, '/logtalk/', Config)
+			;	atom_concat(Home, '.config/logtalk/', Config)
+			),
 			'$lgt_load_settings_file_from_directory'(Config, Options, Result)
 		) ->
 		true

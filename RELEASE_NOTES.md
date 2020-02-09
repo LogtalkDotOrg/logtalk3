@@ -60,6 +60,10 @@ clause (usually caused by a call in the body to a module predicate with
 an ambiguous meta-predicate template) would result in a failure instead
 of an error message.
 
+* FIXED: Search for settings files in the `$XDG_CONFIG_HOME/logtalk` and
+`$HOME/.config/logtalk` directories, not in a `$HOME/.config` directory
+for compliance with the XDG Base Directory Specification.
+
 Prolog adapter and integration files
 ------------------------------------
 

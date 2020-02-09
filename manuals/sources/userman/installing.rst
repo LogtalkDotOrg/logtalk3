@@ -407,7 +407,9 @@ from the following directories, searched in sequence:
 
 - User home directory (``$HOME``)
 
-- Config directory in the user home directory (``$HOME/.config``)
+- Config directory (`$XDG_CONFIG_HOME/logtalk`)
+
+- Default config directory (``$HOME/.config/logtalk/``)
 
 The startup directory is only searched when the read-only
 :ref:`settings_file <flag_settings_file>` flag is set to ``allow``.

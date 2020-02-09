@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on January 17, 2020
+%  Last updated on February 9, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -46,10 +46,11 @@ Settings file locations
 
 Logtalk looks for a settings file in the following directories and order:
 
-- $LOGTALK_STARTUP_DIRECTORY (if defined)
+- $LOGTALK_STARTUP_DIRECTORY (if the environment variable is defined)
 - $LOGTALKUSER (the Logtalk user directory)
 - $HOME
-- $HOME/.config
+- $XDG_CONFIG_HOME/logtalk (if the environment variable is defined)
+- $HOME/.config/logtalk
 
 The LOGTALK_STARTUP_DIRECTORY environment variable provides support for
 per-project setting files. The POSIX integration scripts automatically set

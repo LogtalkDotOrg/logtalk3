@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing Logtalk &mdash; The Logtalk Handbook v3.36.0-b06 documentation</title>
+  <title>Installing Logtalk &mdash; The Logtalk Handbook v3.36.0-b07 documentation</title>
   
 
   
@@ -525,7 +525,8 @@ from the following directories, searched in sequence:</p>
 <li><p>Startup directory (<code class="docutils literal notranslate"><span class="pre">$LOGTALK_STARTUP_DIRECTORY</span></code>)</p></li>
 <li><p>Logtalk user directory (<code class="docutils literal notranslate"><span class="pre">$LOGTALKUSER</span></code>)</p></li>
 <li><p>User home directory (<code class="docutils literal notranslate"><span class="pre">$HOME</span></code>)</p></li>
-<li><p>Config directory in the user home directory (<code class="docutils literal notranslate"><span class="pre">$HOME/.config</span></code>)</p></li>
+<li><p>Config directory (<cite>$XDG_CONFIG_HOME/logtalk</cite>)</p></li>
+<li><p>Default config directory (<code class="docutils literal notranslate"><span class="pre">$HOME/.config/logtalk/</span></code>)</p></li>
 </ul>
 <p>The startup directory is only searched when the read-only
 <a class="reference internal" href="#flag-settings-file"><span class="std std-ref">settings_file</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>.
