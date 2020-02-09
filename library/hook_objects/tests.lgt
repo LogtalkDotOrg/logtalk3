@@ -33,21 +33,21 @@
 	test(dummy_hook_01, true(X == 1)) :-
 		% the set_logtalk_flag/2 directive in the test_source_file_01.lgt
 		% source file must override the logtalk_load/2 compiler option
-		logtalk_load(test_source_file_01, [hook(test_hook_object)]),
+		logtalk_load('test_files/test_source_file_01', [hook(test_hook_object)]),
 		{f01::a(X)}.
 
 	test(dummy_hook_02, true(X == 1)) :-
 		% the set_logtalk_flag/2 directive in the test_source_file_02.lgt
 		% source file must override the default hook object
 		set_logtalk_flag(hook, test_hook_object),
-		logtalk_load(test_source_file_02),
+		logtalk_load('test_files/test_source_file_02'),
 		{f02::b(X)}.
 
 	test(dummy_hook_03, true(X == 1)) :-
 		% the the logtalk_load/2 compiler option
 		% must override the default hook object
 		set_logtalk_flag(hook, test_hook_object),
-		logtalk_load(test_source_file_03, [hook(dummy_hook)]),
+		logtalk_load('test_files/test_source_file_03', [hook(dummy_hook)]),
 		{f03::c(X)}.
 
 	% tests for the dummy_hook object | goal_expansion/2
@@ -55,21 +55,21 @@
 	test(dummy_hook_04, true) :-
 		% the set_logtalk_flag/2 directive in the test_source_file_04.lgt
 		% source file must override the logtalk_load/2 compiler option
-		logtalk_load(test_source_file_04, [hook(test_hook_object)]),
+		logtalk_load('test_files/test_source_file_04', [hook(test_hook_object)]),
 		{f04::a}.
 
 	test(dummy_hook_05, true) :-
 		% the set_logtalk_flag/2 directive in the test_source_file_05.lgt
 		% source file must override the default hook object
 		set_logtalk_flag(hook, test_hook_object),
-		logtalk_load(test_source_file_05),
+		logtalk_load('test_files/test_source_file_05'),
 		{f05::b}.
 
 	test(dummy_hook_06, true) :-
 		% the the logtalk_load/2 compiler option
 		% must override the default hook object
 		set_logtalk_flag(hook, test_hook_object),
-		logtalk_load(test_source_file_06, [hook(dummy_hook)]),
+		logtalk_load('test_files/test_source_file_06', [hook(dummy_hook)]),
 		{f06::c}.
 
 	% tests for the default_hook object | term_expansion/2
@@ -77,21 +77,21 @@
 	test(default_hook_01, true(X == 1)) :-
 		% default_hook set as default; expansion rules simply fail
 		set_logtalk_flag(hook, default_hook),
-		logtalk_load(test_source_file_07),
+		logtalk_load('test_files/test_source_file_07'),
 		{f07::d(X)}.
 
 	test(default_hook_02, true(X == 2)) :-
 		% default_hook set as a compiler option; expansion rules
 		% simply fail and thus we use the default hook object
 		set_logtalk_flag(hook, test_hook_object),
-		logtalk_load(test_source_file_08, [hook(default_hook)]),
+		logtalk_load('test_files/test_source_file_08', [hook(default_hook)]),
 		{f08::e(X)}.
 
 	test(default_hook_03, true(X == 2)) :-
 		% default_hook set using a source file set_logtalk_flag/2 directive;
 		% expansion rules simply fail and thus we use the hook object specified
 		% in the compiler option
-		logtalk_load(test_source_file_09, [hook(test_hook_object)]),
+		logtalk_load('test_files/test_source_file_09', [hook(test_hook_object)]),
 		{f09::f(X)}.
 
 	% tests for the default_hook object | goal_expansion/2
@@ -99,21 +99,21 @@
 	test(default_hook_04, true) :-
 		% default_hook set as default; expansion rules simply fail
 		set_logtalk_flag(hook, default_hook),
-		logtalk_load(test_source_file_10),
+		logtalk_load('test_files/test_source_file_10'),
 		{f10::d}.
 
 	test(default_hook_05, fail) :-
 		% default_hook set as a compiler option; expansion rules
 		% simply fail and thus we use the default hook object
 		set_logtalk_flag(hook, test_hook_object),
-		logtalk_load(test_source_file_11, [hook(default_hook)]),
+		logtalk_load('test_files/test_source_file_11', [hook(default_hook)]),
 		{f11::e}.
 
 	test(default_hook_06, fail) :-
 		% default_hook set using a source file set_logtalk_flag/2 directive;
 		% expansion rules simply fail and thus we use the hook object specified
 		% in the compiler option
-		logtalk_load(test_source_file_12, [hook(test_hook_object)]),
+		logtalk_load('test_files/test_source_file_12', [hook(test_hook_object)]),
 		{f12::f}.
 
 :- end_object.

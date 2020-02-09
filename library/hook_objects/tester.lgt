@@ -22,7 +22,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(loader),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(test_hook_object),
+	logtalk_load('test_files/test_hook_object'),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
