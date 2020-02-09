@@ -426,9 +426,9 @@ Possible values are <code class="docutils literal notranslate"><span class="pre"
 default value is <code class="docutils literal notranslate"><span class="pre">allow</span></code> but it can be changed by editing the adapter
 file when e.g. embedding Logtalk in a compiled application. With a value
 of <code class="docutils literal notranslate"><span class="pre">allow</span></code>, settings files are searched in the startup directory,
-in the Logtalk user directory, and in the user home directory. With a
-value of <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, settings files are only searched in the
-Logtalk user directory and in the user home directory.</p>
+in the Logtalk user directory, in the user home directory, and in the
+XDG configuration directory. With a value of <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, the search
+for the settings files skips the startup directory.</p>
 </dd>
 </dl>
 <span class="target" id="flag-prolog-dialect"></span><dl class="simple" id="index-1">
@@ -525,7 +525,7 @@ from the following directories, searched in sequence:</p>
 <li><p>Startup directory (<code class="docutils literal notranslate"><span class="pre">$LOGTALK_STARTUP_DIRECTORY</span></code>)</p></li>
 <li><p>Logtalk user directory (<code class="docutils literal notranslate"><span class="pre">$LOGTALKUSER</span></code>)</p></li>
 <li><p>User home directory (<code class="docutils literal notranslate"><span class="pre">$HOME</span></code>)</p></li>
-<li><p>Config directory (<cite>$XDG_CONFIG_HOME/logtalk</cite>)</p></li>
+<li><p>Config directory (<code class="docutils literal notranslate"><span class="pre">$XDG_CONFIG_HOME/logtalk</span></code>)</p></li>
 <li><p>Default config directory (<code class="docutils literal notranslate"><span class="pre">$HOME/.config/logtalk/</span></code>)</p></li>
 </ul>
 <p>The startup directory is only searched when the read-only

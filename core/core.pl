@@ -26544,47 +26544,41 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_load_settings_file'(deny, _, disabled).
 
 '$lgt_load_settings_file'(restrict, Options, Result) :-
-	% lookup for a settings file restricted to the Logtalk user directory or home directory
-	(	% first lookup for a settings file in the Logtalk user directory
-		'$lgt_expand_library_alias'(logtalk_user, User),
-		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
-		true
-	;	% if not found, lookup for a settings file in the user home directory
-		'$lgt_expand_library_alias'(home, Home),
-		(	'$lgt_load_settings_file_from_directory'(Home, Options, Result)
-		;	(	'$lgt_environment_variable'('XDG_CONFIG_HOME', XDG_CONFIG_HOME) ->
-				atom_concat(XDG_CONFIG_HOME, '/logtalk/', Config)
-			;	atom_concat(Home, '.config/logtalk/', Config)
-			),
-			'$lgt_load_settings_file_from_directory'(Config, Options, Result)
-		) ->
+	(	'$lgt_settings_file_search_directory'(restrict, Directory),
+		'$lgt_load_settings_file_from_directory'(Directory, Options, Result) ->
 		true
 	;	% no settings file found
 		Result = none(restrict)
 	).
 
 '$lgt_load_settings_file'(allow, Options, Result) :-
-	(	% first lookup for a settings file in the startup directory
-		'$lgt_expand_library_alias'(startup, Startup),
-		'$lgt_load_settings_file_from_directory'(Startup, Options, Result) ->
-		true
-	;	% if not found, lookup for a settings file in the Logtalk user directory
-		'$lgt_expand_library_alias'(logtalk_user, User),
-		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
-		true
-	;	% if still not found, lookup for a settings file in the user home directory
-		'$lgt_expand_library_alias'(home, Home),
-		(	'$lgt_load_settings_file_from_directory'(Home, Options, Result)
-		;	(	'$lgt_environment_variable'('XDG_CONFIG_HOME', XDG_CONFIG_HOME) ->
-				atom_concat(XDG_CONFIG_HOME, '/logtalk/', Config)
-			;	atom_concat(Home, '.config/logtalk/', Config)
-			),
-			'$lgt_load_settings_file_from_directory'(Config, Options, Result)
-		) ->
+	(	'$lgt_settings_file_search_directory'(allow, Directory),
+		'$lgt_load_settings_file_from_directory'(Directory, Options, Result) ->
 		true
 	;	% no settings file found
 		Result = none(allow)
 	).
+
+
+'$lgt_settings_file_search_directory'(allow, Directory) :-
+	'$lgt_expand_library_alias'(startup, Directory).
+
+'$lgt_settings_file_search_directory'(allow, Directory) :-
+	'$lgt_settings_file_search_directory'(restrict, Directory).
+
+'$lgt_settings_file_search_directory'(restrict, Directory) :-
+	'$lgt_expand_library_alias'(logtalk_user, Directory).
+
+'$lgt_settings_file_search_directory'(restrict, Directory) :-
+	'$lgt_expand_library_alias'(home, Directory).
+
+'$lgt_settings_file_search_directory'(restrict, Directory) :-
+	'$lgt_environment_variable'('XDG_CONFIG_HOME', XDG_CONFIG_HOME),
+	atom_concat(XDG_CONFIG_HOME, '/logtalk/', Directory).
+
+'$lgt_settings_file_search_directory'(restrict, Directory) :-
+	'$lgt_expand_library_alias'(home, Home),
+	atom_concat(Home, '.config/logtalk/', Directory).
 
 
 '$lgt_load_settings_file_from_directory'(Directory, Options, Result) :-
