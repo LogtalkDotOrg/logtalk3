@@ -75,6 +75,8 @@ Documentation
 
 * IMPROVED: The Handbook section on the term-expansion mechanism.
 
+* IMPROVED: The `linter` tool documentation.
+
 * UPDATED: Handbook for the changes to version and date formats in `info/1`
 directives.
 
