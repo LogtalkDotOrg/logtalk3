@@ -18,11 +18,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load([hook, dummy]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([object1, object2], [hook(hook)]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+% we can define a hook object where the expansion predicates trivially
+% succeed without changing input terms and goals to effectively prevent
+% the use of default expansions when compiling a source file
+
+:- object(dummy,
+	implements(expanding)).
+
+	term_expansion(Term, Term).
+
+	goal_expansion(Goal, Goal).
+
+:- end_object.
