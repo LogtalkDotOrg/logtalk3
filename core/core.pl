@@ -26573,6 +26573,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_expand_library_alias'(home, Directory).
 
 '$lgt_settings_file_search_directory'(restrict, Directory) :-
+	'$lgt_environment_variable'('COMSPEC', _),
+	% Windows systems define this environment variable but not POSIX systems
+	'$lgt_environment_variable'('APPDATA', APPDATA),
+	atom_concat(APPDATA, '\\Logtalk\\', Directory).
+
+'$lgt_settings_file_search_directory'(restrict, Directory) :-
 	'$lgt_environment_variable'('XDG_CONFIG_HOME', XDG_CONFIG_HOME),
 	atom_concat(XDG_CONFIG_HOME, '/logtalk/', Directory).
 

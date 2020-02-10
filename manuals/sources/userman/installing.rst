@@ -402,13 +402,10 @@ this directory. At startup, Logtalk tries to load a ``settings.lgt`` file
 from the following directories, searched in sequence:
 
 - Startup directory (``$LOGTALK_STARTUP_DIRECTORY``)
-
 - Logtalk user directory (``$LOGTALKUSER``)
-
 - User home directory (``$HOME``)
-
+- Application data directory (``%APPDATA%\Logtalk``; only on Windows operating-systems)
 - Config directory (``$XDG_CONFIG_HOME/logtalk``)
-
 - Default config directory (``$HOME/.config/logtalk/``)
 
 The startup directory is only searched when the read-only

@@ -48,6 +48,9 @@ not in the `Major:Minor:Day` format.
 * ADDED: Deprecated warning for `info/1` directives with a `date` value in
 the old `Year/Month/Day` format.
 
+* ADDED: Also search for settings files on the `%APPDATA%\Logtalk` directory
+when running on Windows operating-systems.
+
 * FIXED: Overriding a hook object specified using a compiler option when
 a hook object is already specified using a file local `set_logtalk_flag/2`
 directive.
