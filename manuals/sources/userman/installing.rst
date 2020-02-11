@@ -282,9 +282,10 @@ read-only values and cannot be changed at runtime. These are:
    default value is ``allow`` but it can be changed by editing the adapter
    file when e.g. embedding Logtalk in a compiled application. With a value
    of ``allow``, settings files are searched in the startup directory,
-   in the Logtalk user directory, in the user home directory, and in the
-   XDG configuration directory. With a value of ``restrict``, the search
-   for the settings files skips the startup directory.
+   in the Logtalk user directory, in the user home directory, in the
+   ``APPDATA`` if running on Windows, and in the XDG configuration directory.
+   With a value of ``restrict``, the search for the settings files skips the
+   startup directory.
 
 .. _flag_prolog_dialect:
 .. index:: pair: prolog_dialect; Flag
@@ -403,8 +404,8 @@ from the following directories, searched in sequence:
 
 - Startup directory (``$LOGTALK_STARTUP_DIRECTORY``)
 - Logtalk user directory (``$LOGTALKUSER``)
-- User home directory (``$HOME``)
-- Application data directory (``%APPDATA%\Logtalk``; only on Windows operating-systems)
+- User home directory (``$HOME``; ``%USERPROFILE%`` on Windows if ``$HOME`` is not defined)
+- Application data directory (``%APPDATA%\Logtalk``; only on Windows)
 - Config directory (``$XDG_CONFIG_HOME/logtalk``)
 - Default config directory (``$HOME/.config/logtalk/``)
 
