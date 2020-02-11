@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:33:0,
 		author is 'Paulo Moura',
-		date is 2020-01-21,
+		date is 2020-02-11,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -766,6 +766,11 @@
 			'goal argument so that we collect template bindings for the goal'-[], nl,
 			'solutions. This warning can likely be ignored if you are using'-[], nl,
 			'this meta-predicate to simply help count solutions.'-[], nl, nl
+		].
+
+	explain(suspicious_call(_, _, _, _, _, reason(cyclic_terms))) -->
+		[	'Is the creation of a cyclic term intended or just a bug?'-[], nl,
+			'Is there a typo in a variable name in one of terms ?'-[], nl, nl
 		].
 
 	explain(suspicious_call(_, _, _, _, _, reason(no_variable_bindings_after_unification))) -->

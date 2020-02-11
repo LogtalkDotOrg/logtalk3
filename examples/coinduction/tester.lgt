@@ -27,7 +27,7 @@
 	:- initialization((
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(loader),
-		logtalk_load(tests, [hook(lgtunit)]),
+		logtalk_load(tests, [hook(lgtunit), suspicious_calls(silent)]),
 		tests::run
 	)).
 

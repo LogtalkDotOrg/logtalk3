@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:94:0,
+		version is 1:95:0,
 		author is 'Paulo Moura',
-		date is 2020-02-09,
+		date is 2020-02-11,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -862,6 +862,8 @@
 		;	% assume bagof/setof/findall
 			['as template and goal may share no variables'-[], nl]
 		).
+	suspicious_call_reason(cyclic_terms) -->
+		['as unification will succeed creating a cyclic term'-[], nl].
 	suspicious_call_reason(no_variable_bindings_after_unification) -->
 		['as unification will succeed without any variable bindings'-[], nl].
 	suspicious_call_reason(existential_variables([Variable], Goal)) -->

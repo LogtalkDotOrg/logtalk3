@@ -172,6 +172,18 @@
 
 
 
+:- object(cyclic_terms).
+
+	p :-
+		X = f(X).
+
+	q :-
+		f(X) = f(f(X)).
+
+:- end_object.
+
+
+
 :- object(tautology).
 
 	% goals are always true (usually happens due to typos)

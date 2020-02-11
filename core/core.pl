@@ -3444,7 +3444,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 36, 0, b07)).
+'$lgt_version_data'(logtalk(3, 36, 0, b08)).
 
 
 
@@ -12196,10 +12196,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
 	(	TPred1 == repeat,
+		% check if the repreat loop ends with a cut
 		'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,_,ExpandedGoals), Stack, Lines, Term) ->
 		'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,ExpandedGoals), Stack, Lines, Term),
 		'$lgt_compile_body'(Pred2, TPred2, DPred2, NewCtx),
 		(	var(Cut),
+			% not cut found
 			'$lgt_compiler_flag'(suspicious_calls, warning),
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -12208,7 +12210,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 				suspicious_call(File, Lines, Type, Entity, repeat, reason(repeat(Head)))
 			) ->
 			true
-		;	true
+		;	% cut found
+			true
 		)
 	;	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx)
 	).
@@ -12495,6 +12498,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Term1 = Term2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_prolog_feature'(coinduction, supported),
+	% backend provides minimal support for cyclic terms
+	\+ \+ (
+		Term1 = Term2,
+		\+ acyclic_term(Term1)
+	),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Term1 = Term2, reason(cyclic_terms))
+	),
+	fail.
+
+'$lgt_compile_body'(Term1 = Term2, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	\+ ground(Term1),
 	\+ ground(Term2),
 	\+ \+ (
@@ -12503,6 +12523,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		term_variables(Term1-Term2, Vars),
 		Vars0 == Vars
 	),
+	% unification will not bind any variables in the unified terms
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -12522,6 +12543,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		term_variables(Term1-Term2, Vars),
 		Vars0 == Vars
 	),
+	% unification will not bind any variables in the unified terms
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),

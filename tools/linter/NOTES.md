@@ -53,6 +53,7 @@ Lint checks include:
 - References to unknown entities (objects, protocols, categories, or modules)
 - Top-level shortcuts used as directives
 - Unification goals that will succeed without binding any variables
+- Unification goals that will succeed creating a cyclic term
 - Goals that are always true or always false
 - Trivial goal fails (due to no matching predicate clause)
 - Redefined built-in predicates

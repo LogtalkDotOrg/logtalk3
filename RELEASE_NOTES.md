@@ -48,6 +48,9 @@ not in the `Major:Minor:Day` format.
 * ADDED: Deprecated warning for `info/1` directives with a `date` value in
 the old `Year/Month/Day` format.
 
+* ADDED: Lint check for unification goals that will succeed creating a cyclic
+term.
+
 * ADDED: Also search for settings files on the `%APPDATA%\Logtalk` directory
 when running on Windows operating-systems.
 
@@ -117,6 +120,8 @@ tools to print dates using the ISO 8601 standard format.
 tools to pad month, day, hours, minutes, and seconds when single digit when
 writing timestamps.
 
+* UPDATED: The `tutor` tool for the new lint warning on cyclic terms.
+
 * FIXED: The `logtalk_tester` shell script to not display text from comment
 messages when listing compilation errors, warnings, and failed unit tests.
 
@@ -138,6 +143,8 @@ Examples
 represent rational numbers as `N/D` terms.
 
 * IMPROVED: Tests for the `sicstus` example.
+
+* UPDATED: The `errors` example to illustrate cyclic terms lint warnings.
 
 * FIXED: Library name typo preventing loading of the `edcgs` example.
 
