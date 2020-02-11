@@ -76,6 +76,10 @@ Prolog adapter and integration files
 * CHANGED: The Qu-Prolog adapter file to redefine the `:/2` operator per its
 ISO Prolog standard definition.
 
+* UPDATED: The SWI-Prolog adapter file to expand its new `autoload/1-2`
+directives into the corresponding `use_module/1-2` directives when compiling
+modules as objects.
+
 * FIXED: The SWI-Prolog integration file to load the `lock_predicate/1` library
 predicate explicitly.
 

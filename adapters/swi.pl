@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on January 21, 2020
+%  Last updated on February 11, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -712,6 +712,12 @@
 	% object or category using a Prolog module
 	'$lgt_swi_list_of_exports'(File, Module, Imports),
 	use_module(File).
+
+'$lgt_swi_directive_expansion'(autoload(File, Imports), Expansion) :-
+	'$lgt_swi_directive_expansion'(use_module(File, Imports), Expansion).
+
+'$lgt_swi_directive_expansion'(autoload(File), Expansion) :-
+	'$lgt_swi_directive_expansion'(use_module(File), Expansion).
 
 '$lgt_swi_directive_expansion'(module(Module,Exports0), [(:- module(Module,Exports))| Clauses]) :-
 	'$lgt_swi_split_predicate_aliases'(Exports0, Exports, Clauses).
