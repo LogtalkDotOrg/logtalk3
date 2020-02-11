@@ -12499,7 +12499,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Term1 = Term2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_prolog_feature'(coinduction, supported),
-	% backend provides minimal support for cyclic terms
+	% backend provides minimal support for cyclic terms; calling the next goal
+	% while using a backend that doesn't support cyclic terms would end badly
 	\+ \+ (
 		Term1 = Term2,
 		\+ acyclic_term(Term1)

@@ -404,7 +404,7 @@ from the following directories, searched in sequence:
 
 - Startup directory (``$LOGTALK_STARTUP_DIRECTORY``)
 - Logtalk user directory (``$LOGTALKUSER``)
-- User home directory (``$HOME``; ``%USERPROFILE%`` on Windows if ``$HOME`` is not defined)
+- User home directory (``$HOME``; ``%USERPROFILE%`` on Windows if ``%HOME%`` is not defined)
 - Application data directory (``%APPDATA%\Logtalk``; only on Windows)
 - Config directory (``$XDG_CONFIG_HOME/logtalk``)
 - Default config directory (``$HOME/.config/logtalk/``)
