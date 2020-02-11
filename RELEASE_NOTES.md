@@ -73,6 +73,9 @@ Prolog adapter and integration files
 * CHANGED: The Qu-Prolog adapter file to redefine the `:/2` operator per its
 ISO Prolog standard definition.
 
+* FIXED: The SWI-Prolog integration file to load the `lock_predicate/1` library
+predicate explicitly.
+
 Documentation
 -------------
 

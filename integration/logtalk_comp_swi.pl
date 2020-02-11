@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SWI-Prolog
-%  Last updated on January 17, 2020
+%  Last updated on February 11, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -52,6 +52,8 @@
 	:- index('$lgt_ctg_super_call_'(1, 1, 0)).
 	:- index('$lgt_db_lookup_cache_'(1, 1, 0, 0, 0)).
 :- endif.
+
+:- use_module(library(system), [lock_predicate/1]).
 
 :- lock_predicate('::'/2).
 :- lock_predicate('<<'/2).
