@@ -218,11 +218,20 @@ may find Logtalk nomenclature either familiar or at odds with the terms used
 in other languages. In addition, being a superset of Prolog, terms such as
 <em>predicate</em> and <em>method</em> are often used interchangeably. Logtalk inherits
 most of its nomenclature from Smalltalk, arguably (and somehow sadly) not
-the most popular OOP language nowadays. In this section, we map nomenclatures
-from popular OOP languages such as Smalltalk, C++, Java, and Python to the
-Logtalk nomenclature. The Logtalk distribution includes several examples of
-how to implement common concepts found in other languages, complementing the
-information in this section.</p>
+the most popular OOP language nowadays.</p>
+<p>Note that the same terms can have different meanings in different languages.
+A good example is <em>class</em>. The support for meta-classes in e.g. Smalltalk
+translates to a concept of class that is different is key aspects from the
+concept of class in e.g. Java or C++. Other terms that can have different
+meanings are <em>delegation</em> and <em>forwarding</em>. There are also cases where the
+same concept is found under different names in some languages (e.g. <em>self</em>
+and <em>this</em>) but that can also mean different concepts in other languages.
+Always be aware of these differences and be cautious with assumptions carried
+from other programming languages.</p>
+<p>In this section, we map nomenclatures from popular OOP languages such as
+Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The Logtalk
+distribution includes several examples of how to implement common concepts
+found in other languages, complementing the information in this section.</p>
 <div class="section" id="smalltalk-nomenclature">
 <span id="nomenclature-smalltalk"></span><h2>Smalltalk nomenclature<a class="headerlink" href="#smalltalk-nomenclature" title="Permalink to this headline">¶</a></h2>
 <p>The Logtalk name originates from a combination of the Prolog and Smalltalk
@@ -371,10 +380,10 @@ static members can be declared in a class metaclass.</p>
 allows you to get the similar functionality of templates at runtime.</p>
 </dd>
 <dt><strong>this</strong></dt><dd><p>Logtalk uses the built-in context method <a class="reference internal" href="../refman/methods/self_1.html#methods-self-1"><span class="std std-ref">self/1</span></a> for retrieving
-the current instance. Logtalk also provides a <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> method but
-for returning the class containing the method being executed. Why the
-name clashes? Well, the notion of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> was inherited from
-Smalltalk, which predates C++.</p>
+the instance that received the message being processed. Logtalk also provides
+a <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> method but for returning the class containing the
+method being executed. Why the name clashes? Well, the notion of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a>
+was inherited from Smalltalk, which predates C++.</p>
 </dd>
 <dt><strong>virtual member function</strong></dt><dd><p>There is no <code class="docutils literal notranslate"><span class="pre">virtual</span></code> keyword in Logtalk. Any inherited or imported
 predicate can be redefined (either overridden or specialized).
@@ -476,10 +485,10 @@ predicate directive. Logtalk allows you to synchronize a predicate or a
 set of predicates using per-predicate or per-predicate-set <em>mutexes</em>.</p>
 </dd>
 <dt><strong>this</strong></dt><dd><p>Logtalk uses the built-in context method <a class="reference internal" href="../refman/methods/self_1.html#methods-self-1"><span class="std std-ref">self/1</span></a> for retrieving
-the current instance. Logtalk also provides a <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> method but
-for returning the class containing the predicate clause being
-executed. Why the name clashes? Well, the notion of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> was
-inherited from Smalltalk, which predates Java.</p>
+the instance that received the message being processed. Logtalk also provides
+a <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> method but for returning the class containing the
+method being executed. Why the name clashes? Well, the notion of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a>
+was inherited from Smalltalk, which predates C++.</p>
 </dd>
 </dl>
 </div>

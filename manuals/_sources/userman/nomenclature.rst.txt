@@ -25,11 +25,22 @@ may find Logtalk nomenclature either familiar or at odds with the terms used
 in other languages. In addition, being a superset of Prolog, terms such as
 *predicate* and *method* are often used interchangeably. Logtalk inherits
 most of its nomenclature from Smalltalk, arguably (and somehow sadly) not
-the most popular OOP language nowadays. In this section, we map nomenclatures
-from popular OOP languages such as Smalltalk, C++, Java, and Python to the
-Logtalk nomenclature. The Logtalk distribution includes several examples of
-how to implement common concepts found in other languages, complementing the
-information in this section.
+the most popular OOP language nowadays.
+
+Note that the same terms can have different meanings in different languages.
+A good example is *class*. The support for meta-classes in e.g. Smalltalk
+translates to a concept of class that is different is key aspects from the
+concept of class in e.g. Java or C++. Other terms that can have different
+meanings are *delegation* and *forwarding*. There are also cases where the
+same concept is found under different names in some languages (e.g. *self*
+and *this*) but that can also mean different concepts in other languages.
+Always be aware of these differences and be cautious with assumptions carried
+from other programming languages.
+
+In this section, we map nomenclatures from popular OOP languages such as
+Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The Logtalk
+distribution includes several examples of how to implement common concepts
+found in other languages, complementing the information in this section.
 
 .. _nomenclature_smalltalk:
 
@@ -220,10 +231,10 @@ equivalents.
 
 **this**
    Logtalk uses the built-in context method :ref:`methods_self_1` for retrieving
-   the current instance. Logtalk also provides a :ref:`methods_this_1` method but
-   for returning the class containing the method being executed. Why the
-   name clashes? Well, the notion of :term:`self` was inherited from
-   Smalltalk, which predates C++.
+   the instance that received the message being processed. Logtalk also provides
+   a :ref:`methods_this_1` method but for returning the class containing the
+   method being executed. Why the name clashes? Well, the notion of :term:`self`
+   was inherited from Smalltalk, which predates C++.
 
 **virtual member function**
    There is no ``virtual`` keyword in Logtalk. Any inherited or imported
@@ -349,10 +360,10 @@ Logtalk equivalents.
 
 **this**
    Logtalk uses the built-in context method :ref:`methods_self_1` for retrieving
-   the current instance. Logtalk also provides a :ref:`methods_this_1` method but
-   for returning the class containing the predicate clause being
-   executed. Why the name clashes? Well, the notion of :term:`self` was
-   inherited from Smalltalk, which predates Java.
+   the instance that received the message being processed. Logtalk also provides
+   a :ref:`methods_this_1` method but for returning the class containing the
+   method being executed. Why the name clashes? Well, the notion of :term:`self`
+   was inherited from Smalltalk, which predates C++.
 
 .. _nomenclature_python:
 

@@ -212,6 +212,13 @@ of objects that provide the basis of a reflective system [Cointe87]_,
 
 ::
 
+   % avoid the inevitable unknown entity warnings as in a
+   % reflective system there will always be references to
+   % an entity that will be defined after the reference
+
+   :- set_logtalk_flag(unknown_entities, silent).
+
+
    % default root of the inheritance graph
    % predicates common to all objects
 

@@ -86,7 +86,7 @@ predicate explicitly.
 Documentation
 -------------
 
-* IMPROVED: The Handbook section on the term-expansion mechanism.
+* IMPROVED: The Handbook objects, nomenclature, and term-expansion sections.
 
 * IMPROVED: The `linter` tool documentation.
 

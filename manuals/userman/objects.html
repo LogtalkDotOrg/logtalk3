@@ -389,7 +389,14 @@ and instances, then we will need to specify at least one instantiation
 or specialization relation. The best way to do this is to define a set
 of objects that provide the basis of a reflective system <a class="reference internal" href="../bibliography.html#cointe87" id="id1"><span>[Cointe87]</span></a>,
 <a class="reference internal" href="../bibliography.html#moura94" id="id2"><span>[Moura94]</span></a>. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% default root of the inheritance graph</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% avoid the inevitable unknown entity warnings as in a</span>
+<span class="c">% reflective system there will always be references to</span>
+<span class="c">% an entity that will be defined after the reference</span>
+
+<span class="p">:- </span><span class="k">set_logtalk_flag</span>(unknown_entities, silent).
+
+
+<span class="c">% default root of the inheritance graph</span>
 <span class="c">% predicates common to all objects</span>
 
 <span class="p">:- </span><span class="k">object</span>(object,
