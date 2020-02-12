@@ -76,6 +76,10 @@ Prolog adapter and integration files
 * CHANGED: The Qu-Prolog adapter file to redefine the `:/2` operator per its
 ISO Prolog standard definition.
 
+* IMPROVED: The SWI-Prolog adapter file now deletes `use_module(library(yall))`
+directives when compiling modules as objects as this library implements
+Logtalk lambda expressions and is thus redundant.
+
 * UPDATED: The SWI-Prolog adapter file to expand its new `autoload/1-2`
 directives into the corresponding `use_module/1-2` directives when compiling
 modules as objects.

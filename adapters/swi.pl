@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on February 11, 2020
+%  Last updated on February 12, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -699,6 +699,13 @@
 	'$lgt_swi_filter_imports'(Imports0, Exports, Imports1),
 	'$lgt_swi_fix_predicate_aliases'(Imports1, Imports),
 	use_module(File, Imports0).
+
+'$lgt_swi_directive_expansion'(use_module(File), []) :-
+	logtalk_load_context(entity_type, module),
+	% we're compiling a module as an object
+	File == library(yall),
+	% library(yall) implements Logtalk's lambda expressions
+	!.
 
 '$lgt_swi_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
 	logtalk_load_context(entity_type, module),
