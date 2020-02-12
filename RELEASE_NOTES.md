@@ -146,6 +146,9 @@ Examples
 `searching` example to avoid a clash with SWI-Prolog when configured to
 represent rational numbers as `N/D` terms.
 
+* ADDED: New example, `self_vs_this`, illustrating the difference between
+`self` and `this` and the corresponding execution-context built-in methods.
+
 * IMPROVED: Tests for the `sicstus` example.
 
 * UPDATED: The `errors` example to illustrate cyclic terms lint warnings.

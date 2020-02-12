@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on February 7, 2020
+%  Last updated on February 12, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -266,6 +266,7 @@ logtalk_library_path(scopes, examples('scopes/')).
 logtalk_library_path(searching, examples('searching/')).
 logtalk_library_path(securemp, examples('securemp/')).
 logtalk_library_path(self_messages, examples('self_messages/')).
+logtalk_library_path(self_vs_this, examples('self_vs_this/')).
 logtalk_library_path(serialization, examples('serialization/')).
 logtalk_library_path(shapes_ch, examples('shapes/ch/')).
 logtalk_library_path(shapes_ph, examples('shapes/ph/')).
