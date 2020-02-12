@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:33:0,
+		version is 0:34:0,
 		author is 'Paulo Moura',
-		date is 2020-02-11,
+		date is 2020-02-12,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -602,7 +602,9 @@
 
 	explain(reference_to_unknown_object(_, _, _, _, _)) -->
 		[	'Misspelt object name? Wrong file loading order? Circular references?'-[], nl,
-			'Object defined later in the same source file?'-[], nl, nl
+			'Object defined later in the same source file? If only a loading order'-[], nl,
+			'issue, the only consequence should be only a small performance penalty'-[], nl,
+			'as some static binding optimizations may not be possible.'-[], nl, nl
 		].
 
 	explain(reference_to_unknown_protocol(_, _, _, _, _)) -->

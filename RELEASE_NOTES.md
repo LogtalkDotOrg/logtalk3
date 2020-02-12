@@ -124,6 +124,8 @@ tools to print dates using the ISO 8601 standard format.
 tools to pad month, day, hours, minutes, and seconds when single digit when
 writing timestamps.
 
+* IMPROVED: The `tutor` explanation of unknown entity warnings.
+
 * UPDATED: The `tutor` tool for the new lint warning on cyclic terms.
 
 * FIXED: The `logtalk_tester` shell script to not display text from comment
