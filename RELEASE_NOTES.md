@@ -54,6 +54,9 @@ term.
 * ADDED: Also search for settings files on the `%APPDATA%\Logtalk` directory
 when running on Windows operating-systems.
 
+* IMPROVED: Detect more cases of unification goals that are always true or
+always false.
+
 * FIXED: Overriding a hook object specified using a compiler option when
 a hook object is already specified using a file local `set_logtalk_flag/2`
 directive.

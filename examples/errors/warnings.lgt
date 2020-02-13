@@ -198,13 +198,24 @@
 
 :- object(falsehood).
 
-	% goals are always false (usually happens due to typos)
+	% goals are always false; usually happens due to typos...
 
 	damn :- x == y.
 
 	rats :- \+ x \== y.
 
 	jinx(X) :- a is X*2.
+
+	% ... or misinterpretation of operator precedence
+
+	p :-
+		m(2 * 3 + 4) = m(_ * _).
+
+	q :-
+		unify_with_occurs_check(m(2 * 3 + 4), m(_ * _)).
+
+	r :-
+		a(1,_) \= a(2, _).
 
 :- end_object.
 
