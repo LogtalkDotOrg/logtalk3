@@ -332,9 +332,10 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
 
 
-   backend_hook <backend_hook_0>
-   default_hook <default_hook_0>
-   dummy_hook <dummy_hook_0>
+   backend_adapter_hook <backend_adapter_hook_0>
+   default_workflow_hook <default_workflow_hook_0>
+   identity_hook <identity_hook_0>
+   prolog_module_hook(Module) <prolog_module_hook_1>
 
 ``intervals``
 -------------

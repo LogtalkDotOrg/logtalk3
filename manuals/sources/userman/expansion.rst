@@ -309,7 +309,7 @@ sophisticated expansion workflows. There is also a :doc:`../libraries/hook_objec
 library that provides convenient hook objects for defining custom expansion workflows.
 
 For example, assuming that you want to apply the Prolog backend specific expansion
-rules defined in its adapter file, using the :ref:`backend_hook <apis:backend_hook/0>`
+rules defined in its adapter file, using the :ref:`backend_adapter_hook <apis:backend_adapter_hook/0>`
 library object, passing the resulting terms to your own expansion when compiling a
 source file, we could use the goal:
 
@@ -317,16 +317,16 @@ source file, we could use the goal:
 
    | ?- logtalk_load(
             source,
-            [hook(hook_pipeline([backend_hook, my_expansion]))]
+            [hook(hook_pipeline([backend_adapter_hook, my_expansion]))]
         ).
 
 As a second example, we can prevent expansion of a source file using the library
-object :ref:`dummy_hook <apis:dummy_hook/0>` by adding as the first term in a
+object :ref:`identity_hook <apis:identity_hook/0>` by adding as the first term in a
 source file the directive:
 
 ::
 
-   :- set_logtalk_flag(hook, dummy_hook).
+   :- set_logtalk_flag(hook, identity_hook).
 
 The file will be compiled as-is as any default hook object or any hook
 object specified as a compiler option is overriden by the directive.

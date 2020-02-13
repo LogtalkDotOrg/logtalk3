@@ -1,0 +1,57 @@
+.. index:: prolog_module_hook(Module)
+.. _prolog_module_hook/1:
+
+.. rst-class:: right
+
+**object**
+
+``prolog_module_hook(Module)``
+==============================
+
+This hook object applies the expansion rules defined in a Prolog module.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-02-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`identity_hook <identity_hook/0>`
+

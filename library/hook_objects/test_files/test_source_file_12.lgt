@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(hook, default_hook).
+:- set_logtalk_flag(hook, default_workflow_hook).
 
 
 :- object(f12).

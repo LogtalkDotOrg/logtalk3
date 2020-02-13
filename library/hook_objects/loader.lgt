@@ -20,9 +20,10 @@
 
 :- initialization((
 	logtalk_load([
-		backend_hook,
-		default_hook,
-		dummy_hook
+		backend_adapter_hook,
+		default_workflow_hook,
+		identity_hook,
+		prolog_module_hook
 	], [
 		optimize(on)
 	])

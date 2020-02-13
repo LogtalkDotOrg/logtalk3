@@ -18,21 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(backend_hook,
-	implements(expanding)).
+:- object(f13).
 
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2020-02-07,
-		comment is 'This hook object applies the expansion rules defined in the Prolog backend adapter file.',
-		see_also is [default_hook, dummy_hook]
-	]).
-
-	term_expansion(Term, ExpandedTerm) :-
-		{'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerm)}.
-
-	goal_expansion(Goal, ExpandedGoal) :-
-		{'$lgt_prolog_goal_expansion'(Goal, ExpandedGoal)}.
+	:- public(a/1).
+	a(1).
 
 :- end_object.

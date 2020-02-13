@@ -277,9 +277,10 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
-   backend_hook <backend_hook_0>
-   default_hook <default_hook_0>
-   dummy_hook <dummy_hook_0>
+   backend_adapter_hook <backend_adapter_hook_0>
+   default_workflow_hook <default_workflow_hook_0>
+   identity_hook <identity_hook_0>
+   prolog_module_hook(Module) <prolog_module_hook_1>
 
 ``library/intervals/``
 ----------------------

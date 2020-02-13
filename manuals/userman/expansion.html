@@ -457,19 +457,19 @@ implemented as parametric objects allowing combining them to implement more
 sophisticated expansion workflows. There is also a <a class="reference internal" href="../libraries/hook_objects.html"><span class="doc">hook_objects</span></a>
 library that provides convenient hook objects for defining custom expansion workflows.</p>
 <p>For example, assuming that you want to apply the Prolog backend specific expansion
-rules defined in its adapter file, using the <a class="reference external" href="../../docs/backend_hook_0.html#backend-hook-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">backend_hook</span></a>
+rules defined in its adapter file, using the <a class="reference external" href="../../docs/backend_adapter_hook_0.html#backend-adapter-hook-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">backend_adapter_hook</span></a>
 library object, passing the resulting terms to your own expansion when compiling a
 source file, we could use the goal:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(
          source,
-         [hook(hook_pipeline([backend_hook, my_expansion]))]
+         [hook(hook_pipeline([backend_adapter_hook, my_expansion]))]
      ).
 </pre></div>
 </div>
 <p>As a second example, we can prevent expansion of a source file using the library
-object <a class="reference external" href="../../docs/dummy_hook_0.html#dummy-hook-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">dummy_hook</span></a> by adding as the first term in a
+object <a class="reference external" href="../../docs/identity_hook_0.html#identity-hook-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">identity_hook</span></a> by adding as the first term in a
 source file the directive:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, dummy_hook).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, identity_hook).
 </pre></div>
 </div>
 <p>The file will be compiled as-is as any default hook object or any hook

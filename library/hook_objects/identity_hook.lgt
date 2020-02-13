@@ -18,25 +18,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(default_hook,
+:- object(identity_hook,
 	implements(expanding)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-07,
-		comment is 'Use this object as the default hook object to restore the default expansion pipeline semantics used by the compiler.',
-		see_also is [backend_hook, dummy_hook]
+		date is 2020-02-13,
+		comment is 'Use this object as a file specific hook object to prevent any (other) expansion rules when compiling the file.',
+		see_also is [backend_adapter_hook, default_workflow_hook, prolog_module_hook(_)]
 	]).
 
-	% define the expansion predicates to trivially fail to try first
-	% any defined file specific hook object followed, if that fails,
-	% the backend adapter file expansion rules
+	% define the expansion predicates to trivially succeed without
+	% changing input terms and goals to effectively prevent the
+	% use of any default expansions when compiling a source file
 
-	term_expansion(_, _) :-
-		fail.
+	term_expansion(Term, Term).
 
-	goal_expansion(_, _) :-
-		fail.
+	goal_expansion(Goal, Goal).
 
 :- end_object.

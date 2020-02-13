@@ -1,0 +1,57 @@
+.. index:: default_workflow_hook
+.. _default_workflow_hook/0:
+
+.. rst-class:: right
+
+**object**
+
+``default_workflow_hook``
+=========================
+
+Use this object as the default hook object to restore the default expansion pipeline semantics used by the compiler.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-02-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`identity_hook <identity_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`
+
