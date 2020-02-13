@@ -288,11 +288,15 @@ Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
 Default compiler expansion workflow
 -----------------------------------
 
-When compiling a source file, the compiler will first try, by default, the
-source file specific hook object, if defined. If that fails, it tries the
-default hook object, if defined. If that also fails, the compiler tries the
-Prolog dialect specific expansion predicate definitions if defined in the
-:term:`adapter file`.
+When compiling a source file, the compiler will first try, by default,
+the source file specific hook object specified using a local
+``set_logtalk_flag/2`` directive, if defined. If that expansion fails,
+it tries the hook object specified using the ``hook/1`` compiler option
+in the ``logtalk_compile/2`` or ``logtalk_load/2`` goal that compiles
+or loads the file, if defined. If that expansion fails, it tries the
+default hook object, if defined. If that expansion also fails, the
+compiler tries the Prolog dialect specific expansion rules found found
+in the :term:`adapter file`.
 
 
 User defined expansion workflows
@@ -328,8 +332,9 @@ source file the directive:
 
    :- set_logtalk_flag(hook, identity_hook).
 
-The file will be compiled as-is as any default hook object or any hook
-object specified as a compiler option is overriden by the directive.
+The file will be compiled as-is as any hook object (specified as a compiler
+option or as a default hook object) and any backend adapter expansion rules
+are overriden by the directive.
 
 
 Using Prolog defined expansions
