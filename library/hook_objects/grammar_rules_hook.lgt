@@ -32,9 +32,9 @@
 		]
 	]).
 
-	term_expansion(GRHead --> GRBody, Clause) :-
+	term_expansion((GRHead --> GRBody), Clause) :-
 		{	'$lgt_comp_ctx_mode'(CompilationContext, runtime),
-			'$lgt_dcg_rule'(GRHead --> GRBody, Clause0, CompilationContext),
+			'$lgt_dcg_rule'((GRHead --> GRBody), Clause0, CompilationContext),
 			(	Clause0 = (Head :- Body0) ->
 				'$lgt_simplify_goal'(Body0, Body),
 				(	Body == true ->
