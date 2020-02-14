@@ -12,7 +12,7 @@ This hook object applies the expansion rules defined in the Prolog backend adapt
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2020-02-13
+| **Date:** 2020-02-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -53,5 +53,5 @@ Operators
 
 .. seealso::
 
-   :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`identity_hook <identity_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`
+   :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`identity_hook <identity_hook/0>`, :ref:`grammar_rules_hook <grammar_rules_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`
 

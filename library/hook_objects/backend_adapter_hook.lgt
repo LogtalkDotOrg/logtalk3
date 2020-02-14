@@ -24,9 +24,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-13,
+		date is 2020-02-14,
 		comment is 'This hook object applies the expansion rules defined in the Prolog backend adapter file.',
-		see_also is [default_workflow_hook, identity_hook, prolog_module_hook(_)]
+		see_also is [
+			default_workflow_hook, identity_hook,
+			grammar_rules_hook, prolog_module_hook(_)
+		]
 	]).
 
 	term_expansion(Term, ExpandedTerm) :-

@@ -24,9 +24,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-13,
+		date is 2020-02-14,
 		comment is 'Use this object as the default hook object to restore the default expansion pipeline semantics used by the compiler.',
-		see_also is [backend_adapter_hook, identity_hook, prolog_module_hook(_)]
+		see_also is [
+			backend_adapter_hook, identity_hook,
+			grammar_rules_hook, prolog_module_hook(_)
+		]
 	]).
 
 	% define the expansion predicates to trivially fail to try first

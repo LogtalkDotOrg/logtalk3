@@ -12,7 +12,7 @@ Use this object as a file specific hook object to prevent any (other) expansion 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2020-02-13
+| **Date:** 2020-02-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -53,5 +53,5 @@ Operators
 
 .. seealso::
 
-   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`
+   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`grammar_rules_hook <grammar_rules_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`
 

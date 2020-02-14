@@ -26,7 +26,10 @@
 		author is 'Paulo Moura',
 		date is 2020-02-14,
 		comment is 'This hook object expands grammar rules into clauses.',
-		see_also is [default_workflow_hook, identity_hook, prolog_module_hook(_)]
+		see_also is [
+			backend_adapter_hook, default_workflow_hook,
+			identity_hook, prolog_module_hook(_)
+		]
 	]).
 
 	term_expansion(GRHead --> GRBody, Clause) :-
