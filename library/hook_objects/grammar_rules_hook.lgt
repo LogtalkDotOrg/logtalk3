@@ -18,14 +18,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load([
-		backend_adapter_hook,
-		default_workflow_hook,
-		identity_hook,
-		grammar_rules_hook,
-		prolog_module_hook
-	], [
-		optimize(on)
-	])
-)).
+:- object(grammar_rules_hook,
+	implements(expanding)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2020-02-14,
+		comment is 'This hook object expands grammar rules into clauses.',
+		see_also is [default_workflow_hook, identity_hook, prolog_module_hook(_)]
+	]).
+
+	term_expansion(GrammarRule, Clause) :-
+		{	'$lgt_comp_ctx_mode'(CompilationContext, runtime),
+			'$lgt_dcg_rule'(GrammarRule, Clause0, CompilationContext),
+			(	Clause0 = (Head :- Body0) ->
+				'$lgt_simplify_goal'(Body0, Body),
+				(	Body == true ->
+					Clause = Head
+				;	Clause = (Head :- Body)
+				)
+			;	Clause = Clause0
+			)
+		}.
+
+:- end_object.

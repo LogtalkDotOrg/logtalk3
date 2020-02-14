@@ -67,7 +67,18 @@ follows:
 
        :- set_logtalk_flag(hook, identity_hook).
 
-4. Use the expansion rules defined in a Prolog module (which can be
+4. Expand grammar rules into clauses independently of the compiler by
+   loading the ``grammar_rules_hook.lgt`` and using the term-expansion
+   rules in the ``grammar_rules_hook`` object. For example:
+
+   ::
+
+       | ?- grammar_rules_hook::term_expansion((a --> [b],c), Clause).
+       
+       Clause = (a([b|T], C) :- c(T, C))
+       yes
+
+5. Use the expansion rules defined in a Prolog module (which can be
    ``user``) by loading the ``prolog_module_hook.lgt``, which defines
    the parametric hook object ``prolog_module_hook(Module)``. to use
    this hook object, you need to instantiate the parameter to the name
