@@ -401,7 +401,7 @@ SOFTWARE.
 	'_replace_default'(A, NewA, AList) :-  % New initial values for passed argument.
 		functor(NewA, A, 1),
 		member(NewA, AList), !.
-	'_replace_default'(A, NewA, _) :-	  % Use default initial values.
+	'_replace_default'(A, NewA, _) :-      % Use default initial values.
 		A=NewA.
 
 	% warning messages tokenization
