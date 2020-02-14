@@ -190,6 +190,8 @@ Objects
    uses_diagram(Format) <uses_diagram_1>
    varlist <varlist_0>
    wrapper <wrapper_0>
+   write_to_stream_hook(Stream) <write_to_stream_hook_1>
+   write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>
    xml <xml_0>
    xref_diagram <xref_diagram_0>
    xref_diagram(Format) <xref_diagram_1>

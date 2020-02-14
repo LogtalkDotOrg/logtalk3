@@ -1,0 +1,57 @@
+.. index:: write_to_stream_hook(Stream)
+.. _write_to_stream_hook/1:
+
+.. rst-class:: right
+
+**object**
+
+``write_to_stream_hook(Stream)``
+================================
+
+This hook object writes term-expansion results to a stream in canonical format.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-02-14
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`write_to_stream_hook(Stream,[quoted(true),ignore_ops(true)]) <write_to_stream_hook/2>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`identity_hook <identity_hook/0>`, :ref:`grammar_rules_hook <grammar_rules_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`, :ref:`write_to_stream_hook(Stream,Options) <write_to_stream_hook/2>`
+

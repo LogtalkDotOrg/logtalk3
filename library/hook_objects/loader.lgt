@@ -24,7 +24,8 @@
 		default_workflow_hook,
 		identity_hook,
 		grammar_rules_hook,
-		prolog_module_hook
+		prolog_module_hook,
+		write_to_stream_hook
 	], [
 		optimize(on)
 	])

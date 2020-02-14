@@ -90,3 +90,9 @@ object `prolog_module_hook(Module)`. to use this hook object, you need to
 instantiate the parameter to the name of the module. For example:
 
 		:- set_logtalk_flag(hook, prolog_module_hook(user)).
+
+6. Output term-expansion results to a stream by loading the
+`write_to_stream_hook.lgt` file and using the `write_to_stream_hook(Stream)`
+or `write_to_stream_hook(Stream, Options)` hook object. The terms are not
+modified and thus these hook objects may be used at any point in an expansion
+workflow.
