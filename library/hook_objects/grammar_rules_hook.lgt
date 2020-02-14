@@ -29,9 +29,9 @@
 		see_also is [default_workflow_hook, identity_hook, prolog_module_hook(_)]
 	]).
 
-	term_expansion(GrammarRule, Clause) :-
+	term_expansion(GRHead --> GRBody, Clause) :-
 		{	'$lgt_comp_ctx_mode'(CompilationContext, runtime),
-			'$lgt_dcg_rule'(GrammarRule, Clause0, CompilationContext),
+			'$lgt_dcg_rule'(GRHead --> GRBody, Clause0, CompilationContext),
 			(	Clause0 = (Head :- Body0) ->
 				'$lgt_simplify_goal'(Body0, Body),
 				(	Body == true ->
