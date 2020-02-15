@@ -24,8 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-14,
-		comment is 'Use this object as a file specific hook object to prevent any (other) expansion rules when compiling the file.',
+		date is 2020-02-15,
+		comment is 'Use this object as a file specific hook object to prevent any (other) user-defined expansion rules to be applied when compiling the file.',
 		see_also is [
 			backend_adapter_hook, default_workflow_hook,
 			grammar_rules_hook, prolog_module_hook(_),

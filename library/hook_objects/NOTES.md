@@ -67,13 +67,19 @@ hook object, and use the following **goal** to set the default hook object:
 
 		| ?- set_logtalk_flag(hook, default_workflow_hook).
 
-3. Prevent expanding a source file. Simply load the `identity_hook.lgt`
-file, which defines the `identity_hook` hook object, whose expansion
-rules simply succeed without changing the terms and goals, and set it as
-the file specific hook object writing as the first term in the file the
-**directive**:
+3. Prevent applying any (other) user-defined expansion rules when compiling
+a source file. Simply load the `identity_hook.lgt` file, which defines the
+`identity_hook` hook object, whose expansion rules simply succeed without
+changing the terms and goals, and set it as the file specific hook object
+writing as the first term in the file the **directive**:
 
 		:- set_logtalk_flag(hook, identity_hook).
+
+Note that the compiler will always convert any grammar rules defined in
+the file into clauses. Although this conversion can also be performed as
+an expansion, grammar rules are part of the Logtalk language. If you to
+preserve the grammar rules, use the hook objects described below to write
+them to a stream.
 
 4. Expand grammar rules into clauses independently of the compiler by
 loading the `grammar_rules_hook.lgt` and using the term-expansion rules

@@ -8,11 +8,11 @@
 ``identity_hook``
 =================
 
-Use this object as a file specific hook object to prevent any (other) expansion rules when compiling the file.
+Use this object as a file specific hook object to prevent any (other) user-defined expansion rules to be applied when compiling the file.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2020-02-14
+| **Date:** 2020-02-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
