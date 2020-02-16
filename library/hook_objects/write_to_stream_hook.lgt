@@ -24,8 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-14,
-		comment is 'This hook object writes term-expansion results to a stream using a list of ``write_term/3`` options.',
+		date is 2020-02-16,
+		comment is 'This hook object writes term-expansion results to a stream using a list of ``write_term/3`` options. The terms are terminated by a period and a new line.',
 		parnames is ['Stream', 'Options'],
 		see_also is [
 			backend_adapter_hook, default_workflow_hook,
@@ -51,8 +51,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-14,
-		comment is 'This hook object writes term-expansion results to a stream in canonical format.',
+		date is 2020-02-16,
+		comment is 'This hook object writes term-expansion results to a stream in canonical format. The terms are terminated by a period and a new line.',
 		parnames is ['Stream'],
 		see_also is [
 			backend_adapter_hook, default_workflow_hook,

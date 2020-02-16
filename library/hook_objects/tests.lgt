@@ -39,7 +39,7 @@ goal_expansion(X = 1, X = 2).
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-14,
+		date is 2020-02-16,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -157,5 +157,65 @@ goal_expansion(X = 1, X = 2).
 
 	test(grammar_rules_hook_02, true(variant(Clause, ((a([b|T],C) :- c(T,C)))))) :-
 		grammar_rules_hook::term_expansion((a --> [b],c), Clause).
+
+	% tests for the write_to_stream_hook/2 object | term_expansion/2
+
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+	test(write_to_stream_hook_2_01, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		write_to_stream_hook(Stream,[quoted(true)])::term_expansion(a('A'), _),
+		^^text_output_assertion('a(''A'').\r\n', Assertion).
+
+	:- else.
+
+	test(write_to_stream_hook_2_01, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		write_to_stream_hook(Stream,[quoted(true)])::term_expansion(a('A'), _),
+		^^text_output_assertion('a(''A'').\n', Assertion).
+
+	:- endif.
+
+	test(write_to_stream_hook_2_02, true(Term == a('A'))) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		write_to_stream_hook(Stream,[quoted(true)])::term_expansion(a('A'), Term).
+
+	% tests for the write_to_stream_hook/1 object | term_expansion/2
+
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+	test(write_to_stream_hook_1_01, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		write_to_stream_hook(Stream)::term_expansion(x + y, _),
+		^^text_output_assertion('+(x,y).\r\n', Assertion).
+
+	:- else.
+
+	test(write_to_stream_hook_1_01, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		write_to_stream_hook(Stream)::term_expansion(x + y, _),
+		^^text_output_assertion('+(x,y).\n', Assertion).
+
+	:- endif.
+
+	test(write_to_stream_hook_1_02, true(Term == x + y)) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		write_to_stream_hook(Stream)::term_expansion(x + y, Term).
 
 :- end_object.

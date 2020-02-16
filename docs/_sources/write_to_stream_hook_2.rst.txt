@@ -8,11 +8,11 @@
 ``write_to_stream_hook(Stream,Options)``
 ========================================
 
-This hook object writes term-expansion results to a stream using a list of ``write_term/3`` options.
+This hook object writes term-expansion results to a stream using a list of ``write_term/3`` options. The terms are terminated by a period and a new line.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2020-02-14
+| **Date:** 2020-02-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
