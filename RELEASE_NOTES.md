@@ -93,6 +93,8 @@ predicate explicitly.
 Documentation
 -------------
 
+* ADDED: A glossary definition for *expansion workflow*.
+
 * IMPROVED: The Handbook objects, nomenclature, and term-expansion sections.
 
 * IMPROVED: The `linter` tool documentation.

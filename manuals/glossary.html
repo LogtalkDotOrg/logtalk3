@@ -287,6 +287,10 @@ expressed as an ordered tuple: <code class="docutils literal notranslate"><span 
 Logtalk distinguish between the sending of a message — <code class="docutils literal notranslate"><span class="pre">before</span></code>
 event — and the return of control to the sender — <code class="docutils literal notranslate"><span class="pre">after</span></code> event.</p>
 </dd>
+<dt id="term-expansion-workflow">expansion workflow</dt><dd><p>A sequence of term-expansion or goal-expansion steps where each step is
+usually defined using a <a class="reference internal" href="#term-hook-object"><span class="xref std std-term">hook object</span></a> or a combination of hook
+objects.</p>
+</dd>
 <dt id="term-grammar-rule">grammar rule</dt><dd><p>An alternative notation for predicates used to parse or generate
 sentences on some language. This notation hides the arguments used to
 pass the sequences of tokens being processed, thus simplifying the
@@ -303,7 +307,7 @@ number of arguments using the notation <code class="docutils literal notranslate
 <dt id="term-hook-object">hook object</dt><dd><p>An object, implementing the <a class="reference external" href="../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">expanding</span></a> built-in
 protocol, defining term- and goal-expansion predicates, used in the
 compilation of Logtalk or Prolog source files. A hook object can be
-specified using the <a class="reference internal" href="userman/programming.html#flag-hook"><span class="std std-ref">hook</span></a> compiler flag. It can also
+specified using the <a class="reference internal" href="userman/programming.html#flag-hook"><span class="std std-ref">hook</span></a> flag. It can also
 be specified using a <a class="reference internal" href="refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> directive in
 the source files to be expanded.</p>
 </dd>
