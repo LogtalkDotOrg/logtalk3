@@ -143,6 +143,10 @@ messages when listing compilation errors, warnings, and failed unit tests.
 * FIXED: The `lgtunit` tool code coverage reports to print the parameters
 passed to a parametric test object instead of printing an object template.
 
+* FIXED: The `lgtunit` tool API documentation for the `quick_check/2`
+predicate failed to mention the `s/1` option for specifying the maximum
+number of shrink operations.
+
 Tests
 -----
 
