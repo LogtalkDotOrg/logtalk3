@@ -8,11 +8,11 @@
 ``prolog_module_hook(Module)``
 ==============================
 
-This hook object applies the expansion rules defined in a Prolog module.
+This hook object applies the expansion rules defined in a Prolog module (e.g. ``user``).
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2020-02-14
+| **Date:** 2020-02-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
