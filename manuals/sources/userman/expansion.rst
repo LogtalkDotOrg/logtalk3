@@ -30,7 +30,7 @@ and *how* expansions are applied. It allows declaring in a source file itself
 which expansions, if any, will be used when compiling it. It allows declaring
 which expansions will be used when compiling a file using compile and loading
 predicate options. It defines a concept of *hook objects* that can be used
-as building blocks to create custom and reusable expansion workflows with
+as building blocks to create custom and reusable *expansion workflows* with
 explicit and well defined semantics. It prevents the simply act of loading
 expansion rules affecting subsequent compilation of files. It prevents
 conflicts between groups of expansion rules of different origins. It
@@ -296,7 +296,8 @@ in the ``logtalk_compile/2`` or ``logtalk_load/2`` goal that compiles
 or loads the file, if defined. If that expansion fails, it tries the
 default hook object, if defined. If that expansion also fails, the
 compiler tries the Prolog dialect specific expansion rules found found
-in the :term:`adapter file`.
+in the :term:`adapter file` (which are used to support non-standard
+Prolog features).
 
 
 User defined expansion workflows
@@ -344,9 +345,21 @@ In order to use clauses for the ``term_expansion/2`` and ``goal_expansion/2``
 predicates defined in plain Prolog, simply specify the pseudo-object ``user``
 as the hook object when compiling source files. When using
 :term:`backend Prolog compilers <backend Prolog compiler>` that support a
-module system, it can also be specified a module
-containing clauses for the expanding predicates as long as the module
-name doesn't coincide with an object name. But note that Prolog module
+module system, it can also be specified a module containing clauses for the
+expanding predicates as long as the module name doesn't coincide with an
+object name. When defining a custom workflow, the library object
+:ref:`prolog_module_hook/1 <apis:prolog_module_hook/1>` can be used as a
+workflow step. For example, assuming a module ``functions`` defining expansion
+rules that we want to use:
+
+.. code-block:: text
+
+   | ?- logtalk_load(
+            source,
+            [hook(hook_set([prolog_module_hook(functions), my_expansion]))]
+        ).
+
+But note that Prolog module
 libraries may provide definitions of the expansion predicates that are
 not compatible with the Logtalk compiler. Specially when setting the
 hook object to ``user``, be aware of any Prolog library that is loaded,

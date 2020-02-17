@@ -226,7 +226,7 @@ and <em>how</em> expansions are applied. It allows declaring in a source file it
 which expansions, if any, will be used when compiling it. It allows declaring
 which expansions will be used when compiling a file using compile and loading
 predicate options. It defines a concept of <em>hook objects</em> that can be used
-as building blocks to create custom and reusable expansion workflows with
+as building blocks to create custom and reusable <em>expansion workflows</em> with
 explicit and well defined semantics. It prevents the simply act of loading
 expansion rules affecting subsequent compilation of files. It prevents
 conflicts between groups of expansion rules of different origins. It
@@ -447,7 +447,8 @@ in the <code class="docutils literal notranslate"><span class="pre">logtalk_comp
 or loads the file, if defined. If that expansion fails, it tries the
 default hook object, if defined. If that expansion also fails, the
 compiler tries the Prolog dialect specific expansion rules found found
-in the <a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a>.</p>
+in the <a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a> (which are used to support non-standard
+Prolog features).</p>
 </div>
 <div class="section" id="user-defined-expansion-workflows">
 <h2>User defined expansion workflows<a class="headerlink" href="#user-defined-expansion-workflows" title="Permalink to this headline">¶</a></h2>
@@ -486,9 +487,19 @@ are overriden by the directive.</p>
 predicates defined in plain Prolog, simply specify the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>
 as the hook object when compiling source files. When using
 <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a> that support a
-module system, it can also be specified a module
-containing clauses for the expanding predicates as long as the module
-name doesn’t coincide with an object name. But note that Prolog module
+module system, it can also be specified a module containing clauses for the
+expanding predicates as long as the module name doesn’t coincide with an
+object name. When defining a custom workflow, the library object
+<a class="reference external" href="../../docs/prolog_module_hook_1.html#prolog-module-hook-1" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">prolog_module_hook/1</span></a> can be used as a
+workflow step. For example, assuming a module <code class="docutils literal notranslate"><span class="pre">functions</span></code> defining expansion
+rules that we want to use:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(
+         source,
+         [hook(hook_set([prolog_module_hook(functions), my_expansion]))]
+     ).
+</pre></div>
+</div>
+<p>But note that Prolog module
 libraries may provide definitions of the expansion predicates that are
 not compatible with the Logtalk compiler. Specially when setting the
 hook object to <code class="docutils literal notranslate"><span class="pre">user</span></code>, be aware of any Prolog library that is loaded,
