@@ -39,7 +39,7 @@ goal_expansion(X = 1, X = 2).
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-16,
+		date is 2020-02-17,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -217,5 +217,15 @@ goal_expansion(X = 1, X = 2).
 		^^set_text_output(''),
 		current_output(Stream),
 		write_to_stream_hook(Stream)::term_expansion(x + y, Term).
+
+	% tests for the backend_adapter_hook object | term_expansion/2
+
+	test(backend_adapter_hook_01, true, [condition(current_logtalk_flag(tabling,supported))]) :-
+		logtalk_load('test_files/test_source_file_15', [hook(backend_adapter_hook)]).
+
+	% test set actions
+
+	cleanup :-
+		^^clean_text_output.
 
 :- end_object.
