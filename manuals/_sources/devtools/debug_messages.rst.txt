@@ -10,7 +10,7 @@ in normal and debug modes.
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 `../../docs/library_index.html#debug-messages <../../docs/library_index.html#debug-messages>`__
 

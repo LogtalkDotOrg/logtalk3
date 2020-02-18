@@ -37,7 +37,7 @@ a compound term with the computed metric values as arguments).
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 [../../docs/library_index.html#code-metrics](../../docs/library_index.html#code-metrics)
 

@@ -12,8 +12,8 @@ This tool can be loaded using the query:
 
    ?- logtalk_load(profiler(loader)).
 
-For sample queries, please see the `SCRIPT.txt <SCRIPT.txt>`__ file in
-the tool directory.
+For sample queries, please see the ``SCRIPT.txt`` file in the tool
+directory.
 
 Supported backend Prolog compilers
 ----------------------------------

@@ -8,7 +8,7 @@ the compiler and runtime warning and error messages.
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 `../../docs/library_index.html#tutor <../../docs/library_index.html#tutor>`__
 

@@ -400,12 +400,12 @@
 		].
 
 	explain(deprecated_date_format(_, _, _, _, _, _)) -->
-		[	'We are changing date representation to the ISO 8601 format to avoid'-[], nl,
+		[	'Date representation is changing to the ISO 8601 format to avoid'-[], nl,
 			'ambuiguity when interpreting dates.'-[], nl, nl
 		].
 
 	explain(deprecated_version_format(_, _, _, _, _)) -->
-		[	'We are changing version representation to a compound term that simplifies'-[], nl,
+		[	'Version representation is changing to a compound term to simplify'-[], nl,
 			'semantic versioning and forthcoming version management tools.'-[], nl, nl
 		].
 
@@ -766,7 +766,7 @@
 		[	'A variable occurring in both arguments of an is/2 goal will likely result'-[], nl,
 			'in a runtime failure. Logical variables can only be further instantiated,'-[], nl,
 			'not unified with a different term when already bound. If an arithmetic'-[], nl,
-			'comparison is intended, consider using instead the =:=/2 operator.'-[], nl, nl
+			'comparison is intended, consider using instead the (=:=)/2 operator.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, forall(_, _), reason(no_shared_variables(forall)))) -->
 		[	'In most cases, the forall/2 predicate is used for implementing'-[], nl,

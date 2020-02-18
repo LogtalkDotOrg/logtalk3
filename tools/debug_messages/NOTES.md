@@ -29,7 +29,7 @@ flag is turned on. These messages are also suppressed when compiling code with t
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 [../../docs/library_index.html#debug-messages](../../docs/library_index.html#debug-messages)
 

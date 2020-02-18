@@ -37,7 +37,7 @@ See also the `lgtdoc/xml/NOTES.md` for details.
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 [../../docs/library_index.html#lgtdoc](../../docs/library_index.html#lgtdoc)
 

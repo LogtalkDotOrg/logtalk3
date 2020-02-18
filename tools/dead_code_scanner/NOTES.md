@@ -50,12 +50,11 @@ GUI IDEs and continuous integration servers.
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 [../../docs/library_index.html#dead-code-scanner](../../docs/library_index.html#dead-code-scanner)
 
-For sample queries, please see the [SCRIPT.txt](SCRIPT.txt) file in the
-tool directory.
+For sample queries, please see the `SCRIPT.txt` file in the tool directory.
 
 
 Loading

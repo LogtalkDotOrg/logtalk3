@@ -18,7 +18,7 @@ made available in the system path by default. See also the
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 `../../docs/library_index.html#lgtdoc <../../docs/library_index.html#lgtdoc>`__
 

@@ -6,7 +6,7 @@ This tool provides the default Logtalk command-line debugger.
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 `../../docs/library_index.html#debugger <../../docs/library_index.html#debugger>`__
 

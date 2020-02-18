@@ -16,7 +16,7 @@ standard output. A second set of predicates computes and returns a score
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the link:
+This tool API documentation is available at:
 
 `../../docs/library_index.html#code-metrics <../../docs/library_index.html#code-metrics>`__
 
