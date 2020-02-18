@@ -399,6 +399,16 @@
 			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
 
+	explain(deprecated_date_format(_, _, _, _, _, _)) -->
+		[	'We are changing date representation to the ISO 8601 format to avoid'-[], nl,
+			'ambuiguity when interpreting dates.'-[], nl, nl
+		].
+
+	explain(deprecated_version_format(_, _, _, _, _)) -->
+		[	'We are changing version representation to a compound term that simplifies'-[], nl,
+			'semantic versioning and forthcoming version management tools.'-[], nl, nl
+		].
+
 	% other warning messages
 
 	explain(complementing_category_ignored(_, _, _, _)) -->
