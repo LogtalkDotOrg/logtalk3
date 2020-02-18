@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:34:0,
+		version is 0:34:1,
 		author is 'Paulo Moura',
-		date is 2020-02-12,
+		date is 2020-02-18,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -753,9 +753,10 @@
 			'predicate or when backtracking into a call to the predicate.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ is _, reason(shared_variable(_)))) -->
-		[	'A variable occurring in both arguments of a is/2 predicate call will most'-[], nl,
-			'likely result in a runtime failure. Logical variables can only be further'-[], nl,
-			'instantiated and not unified with a different term when already bound.'-[], nl, nl
+		[	'A variable occurring in both arguments of an is/2 goal will likely result'-[], nl,
+			'in a runtime failure. Logical variables can only be further instantiated,'-[], nl,
+			'not unified with a different term when already bound. If an arithmetic'-[], nl,
+			'comparison is intended, consider using instead the =:=/2 operator.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, forall(_, _), reason(no_shared_variables(forall)))) -->
 		[	'In most cases, the forall/2 predicate is used for implementing'-[], nl,

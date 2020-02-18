@@ -133,7 +133,8 @@ tools to print dates using the ISO 8601 standard format.
 tools to pad month, day, hours, minutes, and seconds when single digit when
 writing timestamps.
 
-* IMPROVED: The `tutor` explanation of unknown entity warnings.
+* IMPROVED: The `tutor` explanations of unknown entity warnings and variables
+shared by both arguments of `is/2` goals.
 
 * UPDATED: The `tutor` tool for the new lint warning on cyclic terms.
 
