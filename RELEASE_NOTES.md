@@ -165,6 +165,9 @@ represent rational numbers as `N/D` terms.
 * ADDED: New example, `self_vs_this`, illustrating the difference between
 `self` and `this` and the corresponding execution-context built-in methods.
 
+* ADDED: New example, `pengines`, of using SWI-Prolog pengines from objects.
+Joint work with Michael T. Richter.
+
 * IMPROVED: Tests for the `sicstus` example.
 
 * UPDATED: The `errors` example to illustrate cyclic terms lint warnings.

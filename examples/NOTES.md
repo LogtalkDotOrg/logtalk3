@@ -344,6 +344,9 @@ Follows a short description of each included example (in alphabetical order):
 	another example of using complementing categories to patch
 	broken object code
 
+- `pengines`  
+	simple example of using SWI-Prolog pengines from objects
+
 - `people`  
 	simple example of defining object constructors
 

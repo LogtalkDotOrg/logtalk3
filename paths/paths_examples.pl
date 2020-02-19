@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on February 12, 2020
+%  Last updated on February 19, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -139,6 +139,7 @@ logtalk_library_path(patching, examples('patching/')).
 logtalk_library_path(parametric, examples('parametric/')).
 logtalk_library_path(pardicts, examples('pardicts/')).
 logtalk_library_path(parvars, examples('parvars/')).
+logtalk_library_path(pengines, examples('pengines/')).
 logtalk_library_path(people, examples('people/')).
 logtalk_library_path(persistency, examples('persistency/')).
 logtalk_library_path(philosophers, threads('philosophers/')).
