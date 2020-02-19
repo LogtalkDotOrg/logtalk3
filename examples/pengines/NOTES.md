@@ -19,16 +19,18 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
- 
+
 This example illustrates how to use SWI-Prolog Pengines from objects. Two
 versions are provided. The first version, `dumper`, simply writes all the
 pengine answers to the current output. The second version, `engines`, uses
 a threaded engine to provide an interface to the pengine in order to access
-the answers on demand. This shows how an application can ask a perngine to
+the answers on demand. This shows how an application can ask a pengine to
 compute answers and then go do something else until it needs to access the
 answers. This example started from a port of the pengines example found at:
 
 https://www.swi-prolog.org/pldoc/man?section=pengine-examples
 
 The minimal `pengine_server` Prolog module code is also based on the pengines
-documentation.
+documentation, available at:
+
+https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/pengines.html%27)
