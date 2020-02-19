@@ -76,4 +76,15 @@
 		threaded_engine_next_reified(Engine, Reified),
 		collect_answers(Reified, Engine, Answers).
 
+	:- public(answer/2).
+
+	answer(Engine, Answer) :-
+		threaded_engine_next_reified(Engine, Reified),
+		(	Reified == no ->
+			threaded_engine_destroy(Engine)
+		;	(	Reified = the(Answer)
+			;	answer(Engine, Answer)
+			)
+		).
+
 :- end_object.

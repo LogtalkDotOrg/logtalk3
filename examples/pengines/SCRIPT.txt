@@ -37,3 +37,30 @@ true.
 ?- engines::(ask(Engine), answers(Engine, Answers)).
 Engine = 1,
 Answers = [q(a), q(b), q(c)].
+
+
+% retrieve answers on demand:
+
+?- engines::ask(my_question).
+true.
+
+?- write('Doing something else ...').
+Doing something else ...
+true.
+
+?- engines::answer(my_question, Answer).
+Answer = q(a) .
+
+?- write('Pause for tea ...').
+Pause for tea ...
+true.
+
+?- engines::answer(my_question, Answer).
+Answer = q(b) .
+
+?- write('Any answers left?').
+Any answers left?
+true.
+
+?- engines::answers(my_question, Answers).
+Answers = [q(c)].
