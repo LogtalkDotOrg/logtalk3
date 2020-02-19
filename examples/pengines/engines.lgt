@@ -81,7 +81,8 @@
 	answer(Engine, Answer) :-
 		threaded_engine_next_reified(Engine, Reified),
 		(	Reified == no ->
-			threaded_engine_destroy(Engine)
+			threaded_engine_destroy(Engine),
+			fail
 		;	(	Reified = the(Answer)
 			;	answer(Engine, Answer)
 			)

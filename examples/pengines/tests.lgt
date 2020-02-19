@@ -34,4 +34,8 @@
 		engines::ask(Engine),
 		engines::answers(Engine, Answers).
 
+	test(pengines_02, true(Answers == [q(a), q(b), q(c)])) :-
+		engines::ask(Engine),
+		findall(Answer, engines::answer(Engine, Answer), Answers).
+
 :- end_object.
