@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on February 19, 2020
+%  Last updated on February 20, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -137,6 +137,7 @@ logtalk_library_path(zippers, library('zippers/')).
 logtalk_library_path(ack, examples('ack/')).
 logtalk_library_path(adventure, examples('adventure/')).
 logtalk_library_path(aliases, examples('aliases/')).
+logtalk_library_path(around_methods, examples('around_methods/')).
 logtalk_library_path(assign_parameters, examples('assign_parameters/')).
 logtalk_library_path(assumptions, examples('assumptions/')).
 logtalk_library_path(attvars, examples('attvars/')).

@@ -67,6 +67,10 @@ Follows a short description of each included example (in alphabetical order):
 	alternative names to inherited predicates in order to improve
 	readability or to solve multi-inheritance conflicts
 
+- `around_methods`  
+	example of defining a complementing category that uses the
+	experimental `@/1` goal annotation to define an "around method"
+
 - `assign_parameters`  
 	example of using assignable variables in the context of parametric
 	objects in order to represent object state

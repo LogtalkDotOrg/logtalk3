@@ -172,6 +172,9 @@ represent rational numbers as `N/D` terms.
 * ADDED: New example, `pengines`, of using SWI-Prolog pengines from objects.
 Joint work with Michael T. Richter.
 
+* ADDED: New example, `around_methods`, of defining a complementing category
+that uses the experimental `@/1` goal annotation to define an "around method".
+
 * IMPROVED: Tests for the `sicstus` example.
 
 * UPDATED: The `errors` example to illustrate cyclic terms lint warnings.
