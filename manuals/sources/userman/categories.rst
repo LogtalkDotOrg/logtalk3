@@ -206,12 +206,57 @@ only adding new functionality). A complementing category takes preference
 over a previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.
 
-Note that :term:`super calls <super call>` from predicates defined in complementing
-categories lookup inherited definitions as if the calls were made from
-the complemented object instead of the category ancestors. This allows
-more comprehensive object patching. But it also means that, if you want
-to patch an object so that it imports a category that extends another
-category and uses super calls to access the extended category
+When replacing a predicate definition, it is possible to call the overriden
+definition in the object from the new definition in the category by annoting
+the goal with the **experimental** ``@`` prefix operator. This goal annotation
+is only valid in the context of a complementing category and for compile time
+bound goals. As an example, consider the following object:
+
+::
+
+   :- object(bird).
+
+       :- set_logtalk_flag(complements, allow).
+
+       :- public(make_sound/0).
+       make_sound :-
+           write('Chirp, chirp!'), nl.
+
+   :- end_object.
+   
+We can use the ``@`` goal annotation to e.g. wrap the original ``make_sound/0``
+predicate definition by writing:
+
+::
+
+   :- category(logging,
+       complements(bird)).
+
+       make_sound :-
+           write('Started making sound...'), nl,
+           @make_sound,
+           write('... finished making sound.'), nl.
+
+   :- end_category.
+
+After loading the object and the category, calling the ``make_sound/0``
+predicate will result in the following output:
+
+.. code-block:: text
+
+   | ?- bird::make_sound.
+   
+   Started making sound...
+   Chirp, chirp!
+   ... finished making sound.
+   yes
+
+Note that :term:`super calls <super call>` from predicates defined in
+complementing categories lookup inherited definitions as if the calls
+were made from the complemented object instead of the category ancestors.
+This allows more comprehensive object patching. But it also means that,
+if you want to patch an object so that it imports a category that extends
+another category and uses super calls to access the extended category
 predicates, you will need to define a (possibly empty) complementing
 category that extends the category that you want to add.
 
@@ -225,8 +270,8 @@ Another important caveat is that, while a complementing category can
 replace a predicate definition, local callers of the replaced predicate
 will still call the non-patched version of the predicate. This is a
 consequence of the lack of a portable solution at the
-:term:`backend Prolog compiler` level for destructively replacing static
-predicates.
+:term:`backend Prolog compiler` level for replacing static predicate
+definitions.
 
 .. _categories_finding:
 

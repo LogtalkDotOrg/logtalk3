@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Categories &mdash; The Logtalk Handbook v3.36.0-b09 documentation</title>
+  <title>Categories &mdash; The Logtalk Handbook v3.36.0-b10 documentation</title>
   
 
   
@@ -392,12 +392,51 @@ with the <a class="reference internal" href="programming.html#flag-complements">
 only adding new functionality). A complementing category takes preference
 over a previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.</p>
-<p>Note that <a class="reference internal" href="../glossary.html#term-super-call"><span class="xref std std-term">super calls</span></a> from predicates defined in complementing
-categories lookup inherited definitions as if the calls were made from
-the complemented object instead of the category ancestors. This allows
-more comprehensive object patching. But it also means that, if you want
-to patch an object so that it imports a category that extends another
-category and uses super calls to access the extended category
+<p>When replacing a predicate definition, it is possible to call the overriden
+definition in the object from the new definition in the category by annoting
+the goal with the <strong>experimental</strong> <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> prefix operator. This goal annotation
+is only valid in the context of a complementing category and for compile time
+bound goals. As an example, consider the following object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bird).
+
+<span class="p">    :- </span><span class="k">set_logtalk_flag</span>(complements, allow).
+
+<span class="p">    :- </span><span class="k">public</span>(make_sound<span class="o">/</span><span class="m">0</span>).
+    make_sound <span class="o">:-</span>
+        <span class="k">write</span>(<span class="s">&#39;Chirp, chirp!&#39;</span>), <span class="k">nl</span>.
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> goal annotation to e.g. wrap the original <code class="docutils literal notranslate"><span class="pre">make_sound/0</span></code>
+predicate definition by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(logging,
+    <span class="k">complements</span>(bird)).
+
+    make_sound <span class="o">:-</span>
+        <span class="k">write</span>(<span class="s">&#39;Started making sound...&#39;</span>), <span class="k">nl</span>,
+        <span class="o">@</span>make_sound,
+        <span class="k">write</span>(<span class="s">&#39;... finished making sound.&#39;</span>), <span class="k">nl</span>.
+
+<span class="p">:- </span><span class="k">end_category</span>.
+</pre></div>
+</div>
+<p>After loading the object and the category, calling the <code class="docutils literal notranslate"><span class="pre">make_sound/0</span></code>
+predicate will result in the following output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- bird::make_sound.
+
+Started making sound...
+Chirp, chirp!
+... finished making sound.
+yes
+</pre></div>
+</div>
+<p>Note that <a class="reference internal" href="../glossary.html#term-super-call"><span class="xref std std-term">super calls</span></a> from predicates defined in
+complementing categories lookup inherited definitions as if the calls
+were made from the complemented object instead of the category ancestors.
+This allows more comprehensive object patching. But it also means that,
+if you want to patch an object so that it imports a category that extends
+another category and uses super calls to access the extended category
 predicates, you will need to define a (possibly empty) complementing
 category that extends the category that you want to add.</p>
 <p>An unfortunate consequence of allowing an object to be patched at
@@ -409,8 +448,8 @@ binding optimizations invalid.</p>
 replace a predicate definition, local callers of the replaced predicate
 will still call the non-patched version of the predicate. This is a
 consequence of the lack of a portable solution at the
-<a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> level for destructively replacing static
-predicates.</p>
+<a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> level for replacing static predicate
+definitions.</p>
 </div>
 <div class="section" id="finding-defined-categories">
 <span id="categories-finding"></span><h2>Finding defined categories<a class="headerlink" href="#finding-defined-categories" title="Permalink to this headline">¶</a></h2>

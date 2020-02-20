@@ -3444,7 +3444,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 36, 0, b09)).
+'$lgt_version_data'(logtalk(3, 36, 0, b10)).
 
 
 
@@ -6300,15 +6300,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_call_in_this'(+callable, +execution_context)
 %
-% calls a dynamic predicate in "this" from within a category at runtime
+% calls a dynamic predicate in "this" from within a category at runtime;
+% also used to call overriden predicate definitions from complementing
+% cateogries
 
 '$lgt_call_in_this'(Pred, ExCtx) :-
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	'$lgt_current_object_'(This, _, _, Def, _, _, _, _, DDef, _, _),
-	(	% the object definition may include some initial clauses for the dynamic predicate
+	(	% the object definition may include some initial clauses for the predicate
 		call(Def, Pred, ExCtx, TPred) ->
 		call(TPred)
-	;	% or the clauses for the dynamic predicate may be defined only at runtime
+	;	% or the clauses for the predicate may be defined only at runtime
 		call(DDef, Pred, ExCtx, TPred) ->
 		call(TPred)
 	;	% no definition found; fail as per closed-world assumption
@@ -13672,6 +13674,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_context_switch_call'(Obj, Pred, TPred, ExCtx).
+
+% access to predicate definitions in "this" from complementing categories;
+% usually used to call a predicate definition that is being overriden by
+% the category
+
+'$lgt_compile_body'(@Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+	'$lgt_pp_complemented_object_'(_, _, _, _, _),
+	'$lgt_check'(callable, Pred),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_call_in_this'(Pred, ExCtx).
 
 % calling explicitly qualified module predicates
 
