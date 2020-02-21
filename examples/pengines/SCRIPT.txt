@@ -64,3 +64,32 @@ true.
 
 ?- engines::answers(my_question, Answers).
 Answers = [q(c)].
+
+
+% use multiple engines concurrently:
+
+?- engines::ask(E2).
+E2 = 2.
+
+?- engines::ask(E3).
+E3 = 3.
+
+?- engines::answer(2, A1).
+A1 = q(a) .
+
+?- engines::answer(3, A2).
+A2 = q(a) .
+
+?- engines::answer(2, A1).
+A1 = q(b) ;
+A1 = q(c) ;
+false.
+
+?- engines::answer(3, A2).
+A2 = q(b) .
+
+?- engines::answer(3, A2).
+A2 = q(c) .
+
+?- engines::answer(3, A2).
+false.
