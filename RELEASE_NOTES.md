@@ -58,6 +58,8 @@ when running on Windows operating-systems.
 complementing category a predicate definition in the patched object
 that is being replaced by a new definition in the category.
 
+* IMPROVED: Mention the `tutor` tool in the startup help message output.
+
 * IMPROVED: Detect more cases of unification goals that are always true or
 always false.
 
@@ -99,7 +101,8 @@ Documentation
 
 * ADDED: A glossary definition for *expansion workflow*.
 
-* IMPROVED: The Handbook objects, nomenclature, and term-expansion sections.
+* IMPROVED: The Handbook objects, categories, nomenclature, and term-expansion
+sections.
 
 * IMPROVED: The `linter` tool documentation.
 

@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:95:0,
+		version is 1:96:0,
 		author is 'Paulo Moura',
-		date is 2020-02-11,
+		date is 2020-02-21,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -304,7 +304,11 @@
 	% help
 
 	message_tokens(help) -->
-		['For Logtalk help, use ?- {help(loader)}. or ?- logtalk_load(help(loader)).'-[], nl, nl].
+		['For Logtalk help on libraries, entities, and built-in features, use:'-[], nl,
+		 '?- {help(loader)}. or ?- logtalk_load(help(loader)).'-[], nl, nl,
+		 'For Logtalk compiler warnings/errors explanations and fix suggestions, use:'-[], nl,
+		 '?- {tutor(loader)}. or ?- logtalk_load(tutor(loader)).'-[], nl, nl
+		].
 
 	% settings files messages
 
