@@ -20,20 +20,31 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This example illustrates how to use SWI-Prolog Pengines from objects. Two
-versions are provided. The first version, `dumper`, simply writes all the
-pengine answers to the current output. The second version, `engines`, uses
-a threaded engine to provide an interface to the pengine in order to access
-the answers on demand while (1) abstracting that a pengine is being used for
-the computations and (2) asking the pengine to compute the next solution when
-the current solution is retrieved. This shows how an application can ask the
-abstracted pengine to compute answers and then go do something else until it
-needs to access the answers. This example started from a port of the pengines
-example found at:
+This example illustrates how to use SWI-Prolog Pengines from objects. It
+is based on simple example provided in the Pengines documentation:
 
 https://www.swi-prolog.org/pldoc/man?section=pengine-examples
 
+The main issue when reusing the original example code from within an object
+is that the `pengines:pengine_create/1` meta-predicate template is ambiguous
+due to the use of `:` as the meta-predicate argument specifier (Logtalk is
+not based on a predicate-prefixing mechanism as used by Prolog modules).
+Thus, we must override the template using the following directive to avoid
+a compilation error:
+
+	:- meta_predicate(pengines:pengine_create(*)).
+
+Two object versions are provided. The first version, `dumper`, uses the
+original example code plus the overriding directive above to write all
+the pengine answers to the current output.
+
+The second version, `engines`, uses a threaded engine to provide an interface
+to the pengine in order to access the answers on demand while (1) abstracting
+that a pengine is being used for the computations, (2) asking the pengine to
+compute the next solution when the current solution is retrieved, and (3) easily
+collect all solutions to a query in a list.
+
 The minimal `pengine_server` Prolog module code is also based on the pengines
-documentation, available at:
+documentation available at:
 
 https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/pengines.html%27)

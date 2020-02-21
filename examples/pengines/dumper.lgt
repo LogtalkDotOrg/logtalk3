@@ -23,10 +23,11 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Michael T. Richter and Paulo Moura',
-		date is 2020-02-19,
-		comment is 'Simple example of using pengines from objects.'
+		date is 2020-02-21,
+		comment is 'Simple example of using pengines from objects. Direct port of the pengines documentation example.'
 	]).
 
+	% allow using implicit module qualification to call pengines predicates
 	:- use_module(pengines, [
 		pengine_ask/3,
 		pengine_create/1,

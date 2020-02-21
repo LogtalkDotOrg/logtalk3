@@ -23,8 +23,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Michael T. Richter and Paulo Moura',
-		date is 2020-02-19,
-		comment is 'Simple example of using pengines from objects.'
+		date is 2020-02-21,
+		comment is 'Simple example of using pengines from objects. Derived from a pengines documentation example.'
 	]).
 
 	:- threaded.
@@ -42,6 +42,8 @@
 	:- public(ask/1).
 
 	ask(Engine) :-
+		% use a threaded engine to interface with the pengine
+		% and simplify collecting all pengine answers in a list
 		threaded_engine_create(_, ask_server, Engine).
 
 	ask_server :-
