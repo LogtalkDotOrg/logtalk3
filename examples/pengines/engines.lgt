@@ -62,6 +62,8 @@
 		threaded_engine_yield(X).
 	handle(success(ID, [X], true)) :-
 		threaded_engine_yield(X),
+		% ask for the next solution while the
+		% current solution is being consumed
 		pengine_next(ID, []).
 
 	:- public(answers/2).

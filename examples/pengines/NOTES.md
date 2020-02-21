@@ -24,11 +24,12 @@ This example illustrates how to use SWI-Prolog Pengines from objects. Two
 versions are provided. The first version, `dumper`, simply writes all the
 pengine answers to the current output. The second version, `engines`, uses
 a threaded engine to provide an interface to the pengine in order to access
-the answers on demand while abstracting that a pengine is being used for the
-computations. This shows how an application can ask the abstracted pengine
-to compute answers and then go do something else until it needs to access
-the answers. This example started from a port of the pengines example found
-at:
+the answers on demand while (1) abstracting that a pengine is being used for
+the computations and (2) asking the pengine to compute the next solution when
+the current solution is retrieved. This shows how an application can ask the
+abstracted pengine to compute answers and then go do something else until it
+needs to access the answers. This example started from a port of the pengines
+example found at:
 
 https://www.swi-prolog.org/pldoc/man?section=pengine-examples
 
