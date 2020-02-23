@@ -3444,7 +3444,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 36, 0, b10)).
+'$lgt_version_data'(logtalk(3, 36, 0, b11)).
 
 
 
@@ -23588,6 +23588,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_dcg_body'(GRElse, S0, S, Else, Ctx).
 
 '$lgt_dcg_body'((GREither; GROr), S0, S, (Either; Or), Ctx) :-
+	!,
+	'$lgt_dcg_body'(GREither, S0, S, Either0, Ctx),
+	'$lgt_fix_disjunction_left_side'(Either0, Either),
+	'$lgt_dcg_body'(GROr, S0, S, Or, Ctx).
+
+'$lgt_dcg_body'('|'(GREither, GROr), S0, S, (Either; Or), Ctx) :-
 	!,
 	'$lgt_dcg_body'(GREither, S0, S, Either0, Ctx),
 	'$lgt_fix_disjunction_left_side'(Either0, Either),

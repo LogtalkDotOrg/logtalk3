@@ -58,6 +58,9 @@ when running on Windows operating-systems.
 complementing category a predicate definition in the patched object
 that is being replaced by a new definition in the category.
 
+* ADDED: Support the `|` infix operator as an alternative for disjunction in
+grammar rules.
+
 * IMPROVED: Mention the `tutor` tool in the startup help message output.
 
 * IMPROVED: Detect more cases of unification goals that are always true or
