@@ -39,10 +39,10 @@ original example code plus the overriding directive above to write all
 the pengine answers to the current output.
 
 The second version, `engines`, uses a threaded engine to provide an interface
-to the pengine in order to access the answers on demand while (1) abstracting
-that a pengine is being used for the computations, (2) asking the pengine to
-compute the next solution when the current solution is retrieved, and (3) easily
-collect all solutions to a query in a list.
+to the pengine in order to access the answers on demand with (1) separate
+predicates for creating the pengine and for querying its answers (including
+easily collecting all query answers in a list) and (2) asking the pengine to
+start computing the next solution when the current solution is retrieved.
 
 The minimal `pengine_server` Prolog module code is also based on the pengines
 documentation available at:
