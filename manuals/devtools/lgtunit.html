@@ -829,7 +829,12 @@ conformance of standard input/output predicates.</p>
 best clutters testing logs and at worse can interfere with parsing of
 test logs. If that output itself is not under testing, you can suppress
 it by using the goals <code class="docutils literal notranslate"><span class="pre">^^suppress_text_output</span></code> or
-<code class="docutils literal notranslate"><span class="pre">^^suppress_binary_output</span></code> at the beginning of the tests.</p>
+<code class="docutils literal notranslate"><span class="pre">^^suppress_binary_output</span></code> at the beginning of the tests. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(proxies_04, <span class="k">true</span>(<span class="nv">Color</span> <span class="o">==</span> yellow)) <span class="o">:-</span>
+    <span class="o">^^</span>suppress_text_output,
+    <span class="k">{</span>circle(<span class="s">&#39;#2&#39;</span>, <span class="nv">Color</span>)<span class="k">}</span><span class="o">::</span>print.
+</pre></div>
+</div>
 </div>
 <div class="section" id="tests-with-timeout-limits">
 <h2>Tests with timeout limits<a class="headerlink" href="#tests-with-timeout-limits" title="Permalink to this headline">¶</a></h2>
@@ -853,7 +858,14 @@ can be used to set a limit per test set.</p>
 <code class="docutils literal notranslate"><span class="pre">setup/0</span></code> predicate is called, when defined, before running the object
 unit tests. The <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> predicate is called, when defined, after
 running all the object unit tests. The tests are skipped when the setup
-goal fails or throws an error.</p>
+goal fails or throws an error. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>cleanup <span class="o">:-</span>
+    <span class="k">this</span>(<span class="nv">This</span>),
+    <span class="k">object_property</span>(<span class="nv">This</span>, file(<span class="nv">_</span>,<span class="nv">Directory</span>)),
+    <span class="k">atom_concat</span>(<span class="nv">Directory</span>, serialized_objects, <span class="nv">File</span>),
+    <span class="k">catch</span>(<span class="k">ignore</span>(os<span class="o">::</span>delete_file(<span class="nv">File</span>)), <span class="nv">_</span>, <span class="k">true</span>).
+</pre></div>
+</div>
 <p>Per test setup and cleanup goals can be defined using the <code class="docutils literal notranslate"><span class="pre">test/3</span></code>
 dialect and the <code class="docutils literal notranslate"><span class="pre">setup/1</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code> options. The test is
 skipped when the setup goal fails or throws an error. Note that a broken

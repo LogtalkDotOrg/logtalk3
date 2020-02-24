@@ -605,7 +605,11 @@ Sometimes predicates being tested output text or binary data that at best
 clutters testing logs and at worse can interfere with parsing of test
 logs. If that output itself is not under testing, you can suppress it by
 using the goals `^^suppress_text_output` or `^^suppress_binary_output` at
-the beginning of the tests.
+the beginning of the tests. For example:
+
+	test(proxies_04, true(Color == yellow)) :-
+		^^suppress_text_output,
+		{circle('#2', Color)}::print.
 
 
 Tests with timeout limits
@@ -634,6 +638,13 @@ A test object can define `setup/0` and `cleanup/0` goals. The `setup/0`
 predicate is called, when defined, before running the object unit tests. The
 `cleanup/0` predicate is called, when defined, after running all the object
 unit tests. The tests are skipped when the setup goal fails or throws an error.
+For example:
+
+	cleanup :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, serialized_objects, File),
+		catch(ignore(os::delete_file(File)), _, true).
 
 Per test setup and cleanup goals can be defined using the `test/3` dialect and
 the `setup/1` and `cleanup/1` options. The test is skipped when the setup goal
