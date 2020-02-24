@@ -97,58 +97,66 @@ found at:
   http://www.unicode.org/reports/tr44/#Directory_Structure  
   http://www.unicode.org/reports/tr44/#Property_Definitions
 
-* File:  
-	`unicode_arabic_shaping.pl`  
-* Provides:  
+
+#### `unicode_arabic_shaping.pl`
+
+- Provides:  
 	`unicode_arabic_shaping/4`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_bidi_mirroring.pl`  
-* Provides:  
+
+#### `unicode_bidi_mirroring.pl`  
+
+- Provides:  
 	`unicode_bidi_mirroring/2`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_blocks.pl`  
-* Provides:  
+
+#### `unicode_blocks.pl`  
+
+- Provides:  
 	`unicode_block/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_case_folding.pl`  
-* Provides:  
+
+#### `unicode_case_folding.pl`  
+
+- Provides:  
 	`unicode_case_folding/3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_categories.pl`  
-* Provides:  
+
+#### `unicode_categories.pl`  
+
+- Provides:  
 	`unicode_category/2`  
-* Dependencies:  
+- Dependencies:  
 	files in the `unicode_categories` directory  
 
-* File:  
-	`unicode_cjk_radicals.pl`  
-* Provides:  
+
+#### `unicode_cjk_radicals.pl`  
+
+- Provides:  
 	`unicode_cjk_radical/3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_composition_exclusions.pl`  
-* Provides:  
+
+#### `unicode_composition_exclusions.pl`  
+
+- Provides:  
 	`unicode_composition_exclusion/1`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_core_properties.pl`  
-* Provides:  
+
+#### `unicode_core_properties.pl`  
+
+- Provides:  
 	`unicode_math/1-2`  
 	`unicode_alphabetic/1-2`  
 	`unicode_range_alphabetic/2`  
@@ -169,12 +177,13 @@ found at:
 	`unicode_grapheme_extend/1-2`  
 	`unicode_grapheme_base/1-2`  
 	`unicode_grapheme_link/1-2`  
-* Dependencies:  
+- Dependencies:  
 	files in the `unicode_core_properties` directory
 
-* File:  
-	`unicode_decomposition_type.pl`  
-* Provides:  
+
+#### `unicode_decomposition_type.pl`  
+
+- Provides:  
 	`unicode_canonical/1-2`  
 	`unicode_compat/1-2`  
 	`unicode_font/1-2`  
@@ -192,75 +201,83 @@ found at:
 	`unicode_small/1-2`  
 	`unicode_square/1-2`  
 	`unicode_fraction/1-2`  
-* Dependencies:  
+- Dependencies:  
 	files in the `unicode_decomposition_type` directory
 
-* File:  
-	`unicode_derived_age.pl`  
-* Provides:  
+
+#### `unicode_derived_age.pl`  
+
+- Provides:  
 	`unicode_age/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_bidi_class.pl`  
-* Provides:  
-	`unicode_bidi_class/2-3`  
-* Dependencies:  
-	(none)
 
-* File:  
-	`unicode_derived_combining_class.pl`  
-* Provides:  
+#### `unicode_derived_bidi_class.pl`  
+
+- Provides: `unicode_bidi_class/2-3`  
+- Dependencies: (none)
+
+
+#### `unicode_derived_combining_class.pl`  
+
+- Provides:  
 	`unicode_combining_class/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_core_properties.pl`  
-* Provides:  
+
+#### `unicode_derived_core_properties.pl`  
+
+- Provides:  
 	`unicode_core_property/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_decomposition_type.pl`  
-* Provides:  
+
+#### `unicode_derived_decomposition_type.pl`  
+
+- Provides:  
 	`unicode_decomposition_type/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_east_asian_width.pl`  
-* Provides:  
+
+#### `unicode_derived_east_asian_width.pl`  
+
+- Provides:  
 	`unicode_east_asian_width/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_joining_group.pl`  
-* Provides:  
+
+#### `unicode_derived_joining_group.pl`  
+
+- Provides:  
 	`unicode_joining_group/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_joining_type.pl`  
-* Provides:  
+
+#### `unicode_derived_joining_type.pl`  
+
+- Provides:  
 	`unicode_joining_type/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_line_break.pl`  
-* Provides:  
+
+#### `unicode_derived_line_break.pl`  
+
+- Provides:  
 	`unicode_line_break/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_normalization_props.pl`  
-* Provides:  
+
+#### `unicode_derived_normalization_props.pl`  
+
+- Provides:  
 	`unicode_fc_nfkc/2`  
 	`unicode_nfkc_cf/2`  
 	`unicode_full_composition_exclusion/1-2`  
@@ -275,68 +292,76 @@ found at:
 	`unicode_expands_on_nfkd/1-2`  
 	`unicode_expands_on_nfkc/1-2`  
 	`unicode_changes_when_nfkc_casefolded/1-2`  
-* Dependencies:  
+- Dependencies:  
 	files in the `unicode_derived_normalization_props` directory
 
-* File:  
-	`unicode_derived_numeric_type.pl`  
-* Provides:  
+#### `unicode_derived_numeric_type.pl`  
+
+- Provides:  
 	`unicode_numeric_type/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_derived_numeric_values.pl`  
-* Provides:  
+
+#### `unicode_derived_numeric_values.pl`  
+
+- Provides:  
 	`unicode_numerical_value/3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_hangul_syllable_type.pl`  
-* Provides:  
+
+#### `unicode_hangul_syllable_type.pl`  
+
+- Provides:  
 	`unicode_hangul_syllable_type/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_indic_matra_category.pl`  
-* Provides:  
+
+#### `unicode_indic_matra_category.pl`  
+
+- Provides:  
 	`unicode_indic_matra_category/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_indic_syllabic_category.pl`  
-* Provides:  
+
+#### `unicode_indic_syllabic_category.pl`  
+
+- Provides:  
 	`unicode_indic_syllabic_category/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_jamo.pl`  
-* Provides:  
+
+#### `unicode_jamo.pl`  
+
+- Provides:  
 	`unicode_jamo/2`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_name_aliases.pl`  
-* Provides:  
+
+#### `unicode_name_aliases.pl`  
+
+- Provides:  
 	`unicode_name_alias/3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_names.pl`  
-* Provides:  
+
+#### `unicode_names.pl`  
+
+- Provides:  
 	`unicode_name/2`  
-* Dependencies:  
+- Dependencies:  
 	files in the `unicode_names` directory
 
-* File:  
-	`unicode_prop_list.pl`  
-* Provides:  
+
+#### `unicode_prop_list.pl`  
+
+- Provides:  
 	`unicode_white_space/1-2`  
 	`unicode_bidi_control/1-2`  
 	`unicode_join_control/1-2`  
@@ -369,49 +394,55 @@ found at:
 	`unicode_variation_selector/1-2`  
 	`unicode_pattern_white_space/1-2`  
 	`unicode_pattern_syntax/1-2`  
-* Dependencies:  
+- Dependencies:  
 	files in the `unicode_prop_list` directory
 
-* File:  
-	`unicode_range_scripts.pl`  
-* Provides:  
+
+#### `unicode_range_scripts.pl`  
+
+- Provides:  
 	`unicode_range_script/3`  
 	`unicode_script/2`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_script_extensions.pl`  
-* Provides:  
+
+#### `unicode_script_extensions.pl`  
+
+- Provides:  
 	`unicode_script_extension/2-3`  
-* Dependencies:  
+- Dependencies:  
 	`unicode_scripts.pl`  
 
-* File:  
-	`unicode_scripts.pl`  
-* Provides:  
+
+#### `unicode_scripts.pl`  
+
+- Provides:  
 	`unicode_script/6`  
 	`unicode_script_category/3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_special_casing.pl`  
-* Provides:  
+
+#### `unicode_special_casing.pl`  
+
+- Provides:  
 	`unicode_special_casing/5`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_unihan_variants.pl`  
-* Provides:  
+
+#### `unicode_unihan_variants.pl`  
+
+- Provides:  
 	`unicode_unihan_variant/2-3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
 
-* File:  
-	`unicode_version.pl`  
-* Provides:  
+
+#### `unicode_version.pl`  
+
+- Provides:  
 	`unicode_version/3`  
-* Dependencies:  
+- Dependencies:  
 	(none)
