@@ -23,7 +23,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Michael T. Richter and Paulo Moura',
-		date is 2020-02-21,
+		date is 2020-02-24,
 		comment is 'Simple example of using pengines from objects. Derived from a pengines documentation example.'
 	]).
 
@@ -85,7 +85,6 @@
 	answer(Engine, Answer) :-
 		threaded_engine_next_reified(Engine, Reified),
 		(	Reified == no ->
-			threaded_engine_destroy(Engine),
 			fail
 		;	(	Reified = the(Answer)
 			;	answer(Engine, Answer)
