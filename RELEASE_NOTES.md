@@ -139,6 +139,9 @@ Tools
 * CHANGED: The `code_metrics`, `dead_code_scanner`, `diagrams`, and `lgtunit`
 tools to print dates using the ISO 8601 standard format.
 
+* ADDED: Support to the `logtalk_tester` shell script to pass additional
+command-line options to the integration script used to run the tests.
+
 * IMPROVED: The `code_metrics`, `dead_code_scanner`, `lgtdoc`, and `lgtunit`
 tools to pad month, day, hours, minutes, and seconds when single digit when
 writing timestamps.

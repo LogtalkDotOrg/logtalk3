@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 30, 2020
+##   Last updated on February 24, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.34"
+	echo "$(basename "$0") 0.35"
 	exit 0
 }
 
@@ -79,10 +79,6 @@ coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
 base="$PWD"
 level=""
 results="$base/logtalk_tester_logs"
-backend=swi
-prolog='SWI-Prolog'
-logtalk=swilgt$extension
-logtalk_call="$logtalk -g"
 mode='normal'
 format='default'
 coverage='none'
@@ -209,13 +205,14 @@ usage_help()
 	echo "     (valid values are none and xml)"
 	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	echo "     (level 1 means current directory only)"
+	echo "  -i integration script command-line options (no default)"
 	echo "  -g initialization goal (default is $initialization_goal)"
-	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
+	echo "  -- arguments to be passed to the tests (no default)"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vp:m:f:d:t:s:c:l:g:h" option
+while getopts "vp:m:f:d:t:s:c:l:g:i:h" option
 do
 	case $option in
 		v) print_version;;
@@ -227,6 +224,7 @@ do
 		s) s_arg="$OPTARG";;
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		i) i_arg="$OPTARG";;
 		g) g_arg="$OPTARG";;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
@@ -236,41 +234,48 @@ done
 shift $((OPTIND - 1))
 args=("$@")
 
+# default backend
+
+backend=swi
+prolog='SWI-Prolog'
+logtalk=swilgt$extension
+logtalk_call="$logtalk $i_arg -g"
+
 if [ "$p_arg" == "b" ] || [ "$p_arg" == "b-prolog" ] ; then
 	backend=b
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
-	logtalk_call="$logtalk -g"
+	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "cx" ] || [ "$p_arg" == "cxprolog" ] ; then
 	backend=cx
 	prolog='CxProlog'
 	logtalk=cxlgt$extension
-	logtalk_call="$logtalk --goal"
+	logtalk_call="$logtalk $i_arg --goal"
 elif [ "$p_arg" == "eclipse" ] ; then
 	backend=eclipse
 	prolog='ECLiPSe'
 	logtalk=eclipselgt$extension
-	logtalk_call="$logtalk -e"
+	logtalk_call="$logtalk $i_arg -e"
 elif [ "$p_arg" == "gnu" ] || [ "$p_arg" == "gnu-prolog" ] ; then
 	backend=gnu
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
-	logtalk_call="$logtalk --query-goal"
+	logtalk_call="$logtalk $i_arg --query-goal"
 elif [ "$p_arg" == "ji" ] || [ "$p_arg" == "jiprolog" ] ; then
 	backend=ji
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
-	logtalk_call="$logtalk -n -g"
+	logtalk_call="$logtalk $i_arg -n -g"
 elif [ "$p_arg" == "lean" ] || [ "$p_arg" == "lean-prolog" ] ; then
 	backend=lean
 	prolog='Lean Prolog'
 	logtalk=lplgt$extension
-	logtalk_call="$logtalk"
+	logtalk_call="$logtalk $i_arg"
 elif [ "$p_arg" == "qp" ] || [ "$p_arg" == "qu-prolog" ] ; then
 	backend=qp
 	prolog='Qu-Prolog'
 	logtalk=qplgt$extension
-	logtalk_call="$logtalk -g"
+	logtalk_call="$logtalk $i_arg -g"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
@@ -279,7 +284,7 @@ elif [ "$p_arg" == "sicstus" ] || [ "$p_arg" == "sicstus-prolog" ] ; then
 	backend=sicstus
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension
-	logtalk_call="$logtalk --goal"
+	logtalk_call="$logtalk $i_arg --goal"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
@@ -288,17 +293,17 @@ elif [ "$p_arg" == "swi" ] || [ "$p_arg" == "swi-prolog" ] ; then
 	backend=swi
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension
-	logtalk_call="$logtalk -g"
+	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "swipack" ] ; then
 	backend=swipack
 	prolog='SWI-Prolog'
 	logtalk=swipl
-	logtalk_call="$logtalk -g"
+	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "xsb" ] ; then
 	backend=xsb
 	prolog='XSB'
 	logtalk=xsblgt$extension
-	logtalk_call="$logtalk -e"
+	logtalk_call="$logtalk $i_arg -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
@@ -307,7 +312,7 @@ elif [ "$p_arg" == "xsbmt" ] ; then
 	backend=xsbmt
 	prolog='XSB-MT'
 	logtalk=xsbmtlgt$extension
-	logtalk_call="$logtalk -e"
+	logtalk_call="$logtalk $i_arg -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
@@ -316,7 +321,7 @@ elif [ "$p_arg" == "yap" ] ; then
 	backend=yap
 	prolog='YAP'
 	logtalk=yaplgt$extension
-	logtalk_call="$logtalk -g"
+	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported backend Prolog compiler: $p_arg" >&2
 	usage_help

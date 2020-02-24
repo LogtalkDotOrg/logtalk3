@@ -1,17 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Parallel Logtalk processes setup for selected backend Prolog compilers
-%  Last updated on January 22, 2019
-%  
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  Last updated on February 24, 2020
+%
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
-%  
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,9 @@
 
 :- if(current_prolog_flag(dialect, swi)).
 
-	% usage: swilgt -f parallel_logtalk_processes_setup.pl
+	% usage:
+	%   swilgt -f parallel_logtalk_processes_setup.pl
+	%   logtalk_tester -p swi -i "-f parallel_logtalk_processes_setup.pl"
 	% in alternative, add the code to your .swiplrc or swipl.ini file and start Logtalk as usual
 
 	:- use_module(library(uuid), []).
@@ -86,9 +88,9 @@
 
 :- elif(current_prolog_flag(dialect, sicstus)).
 
-	% usage on SICStus Prolog 4.4.1 and earlier versions: 
+	% usage on SICStus Prolog 4.4.1 and earlier versions:
 	%   cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_sicstus.pl" > combined.pl && sicstus -l combined.pl
-	% usage on SICStus Prolog 4.5.0 and later versions: 
+	% usage on SICStus Prolog 4.5.0 and later versions:
 	%   sicstus -l parallel_logtalk_processes_setup.pl -l "$LOGTALKHOME/integration/logtalk_sicstus.pl"
 
 	:- use_module(library(system), [environ/2]).

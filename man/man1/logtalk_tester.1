@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "September 16, 2019" "Logtalk 3.30.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "February 24, 2020" "Logtalk 3.36.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -22,6 +22,8 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .I report
 .B ] [-l
 .I level
+.B ] [-i
+.I options
 .B ] [-g
 .I goal
 .B ] [--
@@ -62,11 +64,14 @@ Code coverage report. Default is \fInone\fR. Valid values are \fIxml\fR and \fIn
 .BI \-l
 Directory depth level to look for test sets. Level 1 means current directory only. Default is to recurse into all sub-directories.
 .TP
+.BI \-i
+Integration script command-line options (no default).
+.TP
 .BI \-g
 Initialization goal. Default is true.
 .TP
 .BI \--
-Arguments to be passed to the integration script used to run the tests (no default).
+Arguments to be passed to the tests (no default).
 .TP
 .B \-h
 Provide help on script usage.
@@ -103,6 +108,9 @@ Specifies the location of the Logtalk user directory.
 .TP
 .BI $LOGTALKUSER/library/tester_versions.lgt
 Logtalk source file used for printing the Logtalk and backend Prolog compiler versions.
+.TP
+.BI $LOGTALKUSER/library/parallel_logtalk_processes_setup.pl
+Logtalk source file used for parallel Logtalk processes with selected backend Prolog compilers.
 
 .SH "SEE ALSO"
 The Logtalk website at https://logtalk.org/
