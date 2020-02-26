@@ -1175,19 +1175,20 @@ grammar rules for parsing determiners, nouns, and verbs. For example:</p>
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
-<p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">::/1</span></code>, <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">^^/1</span></code>), we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">\+/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">;/2</span></code>, <code class="docutils literal notranslate"><span class="pre">-&gt;/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> in the body of a grammar. In
-addition, grammar rules may contain meta-calls (a variable taking the
-place of a non-terminal), which are translated to calls of the built-in
-method <code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>.</p>
+<p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">::/1</span></code>, <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">^^/1</span></code>),
+we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">\+/1</span></code>, <code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">;/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">-&gt;/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> in the body of a grammar. When using a backend Prolog
+compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">`:/2</span></code> control construct.
+In addition, grammar rules may contain meta-calls (a variable taking the place
+of a non-terminal), which are translated to calls of the built-in method
+<code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>.</p>
 <p>You may have noticed that Logtalk defines <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a>
-as a control construct for bypassing the compiler when compiling a clause body goal.
-As exemplified above, this is the same control construct that is used in
-grammar rules for bypassing the expansion of rule body goals when a rule
-is converted into a clause. Both control constructs can be combined in
-order to call a goal from a grammar rule body, while bypassing at the
-same time the Logtalk compiler. Consider the following example:</p>
+as a control construct for bypassing the compiler when compiling a clause body
+goal. As exemplified above, this is the same control construct that is used in
+grammar rules for bypassing the expansion of rule body goals when a rule is
+converted into a clause. Both control constructs can be combined in order to
+call a goal from a grammar rule body, while bypassing at the same time the
+Logtalk compiler. Consider the following example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>bar <span class="o">:-</span>
     <span class="k">write</span>(<span class="s">&#39;bar predicate called&#39;</span>), <span class="k">nl</span>.
 

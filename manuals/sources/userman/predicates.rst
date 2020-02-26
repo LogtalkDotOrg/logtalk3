@@ -1110,20 +1110,21 @@ grammar rules for parsing determiners, nouns, and verbs. For example:
 
    :- end_category.
 
-Along with the message sending operators (``::/1``, ``::/2``, and
-``^^/1``), we may also use other control constructs such as ``\+/1``,
-``!/0``, ``;/2``, ``->/2``, and ``{}/1`` in the body of a grammar. In
-addition, grammar rules may contain meta-calls (a variable taking the
-place of a non-terminal), which are translated to calls of the built-in
-method ``phrase/3``.
+Along with the message sending operators (``::/1``, ``::/2``, and ``^^/1``),
+we may also use other control constructs such as ``\+/1``, ``!/0``, ``;/2``,
+``->/2``, and ``{}/1`` in the body of a grammar. When using a backend Prolog
+compiler that supports modules, we may also use the ```:/2`` control construct.
+In addition, grammar rules may contain meta-calls (a variable taking the place
+of a non-terminal), which are translated to calls of the built-in method
+``phrase/3``.
 
 You may have noticed that Logtalk defines :ref:`control_external_call_1`
-as a control construct for bypassing the compiler when compiling a clause body goal.
-As exemplified above, this is the same control construct that is used in
-grammar rules for bypassing the expansion of rule body goals when a rule
-is converted into a clause. Both control constructs can be combined in
-order to call a goal from a grammar rule body, while bypassing at the
-same time the Logtalk compiler. Consider the following example:
+as a control construct for bypassing the compiler when compiling a clause body
+goal. As exemplified above, this is the same control construct that is used in
+grammar rules for bypassing the expansion of rule body goals when a rule is
+converted into a clause. Both control constructs can be combined in order to
+call a goal from a grammar rule body, while bypassing at the same time the
+Logtalk compiler. Consider the following example:
 
 ::
 
