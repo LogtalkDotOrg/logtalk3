@@ -59,7 +59,7 @@ CONTRIBUTORS
 * Michael Hendricks (EDCGs examples and tests)
 * Michael Igler (testing, bug reports, examples documentation improvements)
 * Michael Sheets (text editor support)
-* Michael T. Richter (Textadept text editor support)
+* Michael T. Richter (Textadept text editor support, pengines example)
 * Neda Saeedloei (coinduction examples)
 * Neng-Fa Zhou (bug reports)
 * Nicolas Pelletier (bug reports, text editor support)
