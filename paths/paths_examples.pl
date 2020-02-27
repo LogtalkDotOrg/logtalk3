@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on February 20, 2020
+%  Last updated on February 27, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -58,6 +58,7 @@ logtalk_library_path(cc, examples('cc/')).
 logtalk_library_path(checkpoint, threads('checkpoint/')).
 logtalk_library_path(classmethods, examples('classmethods/')).
 logtalk_library_path(classvars, examples('classvars/')).
+logtalk_library_path(closed_world_assumption, examples('closed_world_assumption/')).
 logtalk_library_path(clp_bp, constraints('bp/')).
 logtalk_library_path(clp_eclipse, constraints('eclipse/')).
 logtalk_library_path(clp_gprolog, constraints('gprolog/')).
