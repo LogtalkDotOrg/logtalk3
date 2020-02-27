@@ -182,6 +182,10 @@ represent rational numbers as `N/D` terms.
 between *declaring* a predicate and *defining* a predicates and the Closed
 World Assumption (CWA) semantics when calling predicates and sending messages.
 
+* ADDED: New example, `predicate_lookups`, illustrating the lookup algorithms
+used when sending messages to objects to locate predicate declarations and
+predicate definitions.
+
 * ADDED: New example, `self_vs_this`, illustrating the difference between
 `self` and `this` and the corresponding execution-context built-in methods.
 

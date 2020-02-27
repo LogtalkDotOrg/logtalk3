@@ -136,6 +136,12 @@ Follows a short description of each included example (in alphabetical order):
 	example of implementation of class variables
 	(as found in Smalltalk; i.e. shared instance variables)
 
+- `closed_world_assumption`  
+	example illustrating the difference between *declaring* a predicate
+	and *defining* a predicate and the Closed World Assumption (CWA)
+	semantics as implemented in Logtalk when calling predicates and
+	sending messages
+
 - `clustering`  
 	example of using a Java library for performing clustering
 	of a set of numbers
@@ -371,6 +377,10 @@ Follows a short description of each included example (in alphabetical order):
 
 - `polygons`  
 	example of representation and handling of relations using events
+
+- `predicate_lookups`  
+	example illustrating the predicate declaration and predicate definition
+	lookup algorithms used when sending a message to an object
 
 - `profiling`  
 	examples of using of events and monitors to implement profilers
