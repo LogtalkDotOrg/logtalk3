@@ -39,7 +39,7 @@ CONTRIBUTORS
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
 * Douglas R. Miles (suggestions, bug reports, Logtalk on SWISH experiments)
-* Ebrahim Azarisooreh (code metrics tool)
+* Ebrahim Azarisooreh (code metrics tool, Arch Linux package, made [lgtinit](https://github.com/eazar001/lgtinit) available)
 * Eva Stöwe (PDT support for Logtalk)
 * Feliks Kluzniak (coinduction examples and bug reports)
 * François Fages (meta-predicate safety bug reports)
