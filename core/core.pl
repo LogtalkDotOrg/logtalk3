@@ -517,9 +517,9 @@ Obj::Pred :-
 		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
-		catch('$lgt_debug'(top_goal({Obj}::Pred, Call), ExCtx), Error, '$lgt_top_level_error_handler'(Error, logtalk({Obj}::Pred, ExCtx)))
+		catch('$lgt_debug'(top_goal({Obj}::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object or invalid object identifier
-		catch(Call, Error, '$lgt_top_level_error_handler'(Error, logtalk({Obj}::Pred, ExCtx)))
+		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
 Obj::Pred :-
@@ -535,9 +535,9 @@ Obj::Pred :-
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
-		catch('$lgt_debug'(top_goal(Obj::Pred, Call), ExCtx), Error, '$lgt_top_level_error_handler'(Error, logtalk(Obj::Pred, ExCtx)))
+		catch('$lgt_debug'(top_goal(Obj::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object
-		catch(Call, Error, '$lgt_top_level_error_handler'(Error, logtalk(Obj::Pred, ExCtx)))
+		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
 
@@ -561,9 +561,9 @@ Obj<<Goal :-
 		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
-		catch('$lgt_debug'(top_goal({Obj}<<Goal, Call), ExCtx), Error, '$lgt_top_level_error_handler'(Error, logtalk({Obj}<<Goal, ExCtx)))
+		catch('$lgt_debug'(top_goal({Obj}<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object or invalid object identifier
-		catch(Call, Error, '$lgt_top_level_error_handler'(Error, logtalk({Obj}<<Goal, ExCtx)))
+		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
 Obj<<Goal :-
@@ -576,29 +576,16 @@ Obj<<Goal :-
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
-		catch('$lgt_debug'(top_goal(Obj<<Goal, Call), ExCtx), Error, '$lgt_top_level_error_handler'(Error, logtalk(Obj<<Goal, ExCtx)))
+		catch('$lgt_debug'(top_goal(Obj<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object
-		catch(Call, Error, '$lgt_top_level_error_handler'(Error, logtalk(Obj<<Goal, ExCtx)))
+		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
-
-
-
-% '$lgt_top_level_error_handler'(@term, @term)
-%
-% top-level runtime error handler
-
-'$lgt_top_level_error_handler'(error(Error, _), Context) :-
-	!,
-	'$lgt_runtime_error_handler'(error(Error, Context)).
-
-'$lgt_top_level_error_handler'(Error, Context) :-
-	'$lgt_runtime_error_handler'(error(Error, Context)).
 
 
 
 % '$lgt_runtime_error_handler'(@term)
 %
-% runtime error handler
+% top-level runtime error handler
 %
 % it tries to decode internal predicate names and deal with variations of
 % Prolog error handling due to the lack of standardization by calling an
