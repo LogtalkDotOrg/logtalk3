@@ -41,7 +41,7 @@ no
 % and thus the message generates an error:
 
 | ?- house::pool.
-ERROR: error(existence_error(predicate_declaration,pool/0)
+ERROR: error(existence_error(predicate_declaration,pool/0), logtalk(house::pool, _))
 
 
 % our house is pleasant as we have a porch and a garden:
@@ -63,4 +63,4 @@ no
 % doesn't apply in this case:
 
 | ?- house::fun.
-ERROR: error(existence_error(procedure,pool/0), _)
+ERROR: error(existence_error(procedure,pool/0), logtalk(house::fun, _))

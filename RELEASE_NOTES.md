@@ -66,6 +66,9 @@ grammar rules.
 * IMPROVED: Detect more cases of unification goals that are always true or
 always false.
 
+* IMPROVED: Decompilation of exception terms for top-level interpreter `::/2`
+and `<</2` goals.
+
 * FIXED: Overriding a hook object specified using a compiler option when
 a hook object is already specified using a file local `set_logtalk_flag/2`
 directive.

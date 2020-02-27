@@ -38,5 +38,8 @@ the following refined CWA semantics:
 - Messages or calls for declared but undefined predicates fail.
 - Messages or calls for unknown (not declared) predicates throw an error.
 
+The Logtalk linter reports wheenver possible the cases that will likely
+result in runtime error.
+
 (1) This is a necessary requirement for protocols/interfaces: we must be
 able to declare a predicate without necessarily defining it.
