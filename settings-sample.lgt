@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on February 9, 2020
+%  Last updated on February 27, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -46,23 +46,24 @@ Settings file locations
 
 Logtalk looks for a settings file in the following directories and order:
 
-- $LOGTALK_STARTUP_DIRECTORY (if the environment variable is defined)
-- $LOGTALKUSER (the Logtalk user directory)
-- $HOME
-- $XDG_CONFIG_HOME/logtalk (if the environment variable is defined)
-- $HOME/.config/logtalk
+- Startup directory (``$LOGTALK_STARTUP_DIRECTORY``)
+- Logtalk user directory (``$LOGTALKUSER``)
+- User home directory (``$HOME``; ``%USERPROFILE%`` on Windows if ``%HOME%`` is not defined)
+- Application data directory (``%APPDATA%\Logtalk``; only on Windows)
+- Config directory (``$XDG_CONFIG_HOME/logtalk``)
+- Default config directory (``$HOME/.config/logtalk/``)
 
-The LOGTALK_STARTUP_DIRECTORY environment variable provides support for
+The `LOGTALK_STARTUP_DIRECTORY` environment variable provides support for
 per-project setting files. The POSIX integration scripts automatically set
 this variable. On Windows systems, the integration shortcuts "Start in"
-field is set by default to %LOGTALKUSER% as the %CD% alternative only
+field is set by default to `%LOGTALKUSER%` as the `%CD%` alternative only
 works on some Windows versions. A workaround to use per-project settings
 files is to copy the shortcut to the project directory and and edit its
 "Target" field to prefix its content with:
 
-C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
+	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
 
-When the LOGTALK_STARTUP_DIRECTORY variable is not available, Logtalk
+When the `LOGTALK_STARTUP_DIRECTORY` variable is not available, Logtalk
 uses the current directory as returned by the backend Prolog compiler.
 
 If no settings file is found, Logtalk will use the default flag values
