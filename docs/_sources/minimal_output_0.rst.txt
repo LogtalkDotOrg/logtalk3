@@ -1,0 +1,55 @@
+.. index:: minimal_output
+.. _minimal_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``minimal_output``
+==================
+
+Intercepts unit test execution messages and outputs a minimal report.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-02-28
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+| **Remarks:**
+
+
+   - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(minimal_output))``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

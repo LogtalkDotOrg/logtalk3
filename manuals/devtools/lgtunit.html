@@ -145,6 +145,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-code-coverage-results-in-xml-format">Exporting code coverage results in XML format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#minimizing-test-results-output">Minimizing test results output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-notes">Other notes</a></li>
 </ul>
@@ -1180,6 +1181,13 @@ the <code class="docutils literal notranslate"><span class="pre">$HOME</span></c
 servers, the <code class="docutils literal notranslate"><span class="pre">url</span></code> parameter may not contain a <code class="docutils literal notranslate"><span class="pre">bitbucket</span></code>,
 <code class="docutils literal notranslate"><span class="pre">github</span></code>, or <code class="docutils literal notranslate"><span class="pre">gitlab</span></code> string. In this case, you can use the XSLT
 parameter <code class="docutils literal notranslate"><span class="pre">host</span></code> to indicate which service are you running.</p>
+</div>
+<div class="section" id="minimizing-test-results-output">
+<h2>Minimizing test results output<a class="headerlink" href="#minimizing-test-results-output" title="Permalink to this headline">¶</a></h2>
+<p>To minimize the test results output, simply load the
+<code class="docutils literal notranslate"><span class="pre">minimal_output.lgt</span></code> file before running the tests. This file defines
+an object, <code class="docutils literal notranslate"><span class="pre">minimal_output</span></code>, that intercepts and summarizes the unit
+test execution messages.</p>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>

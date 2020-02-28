@@ -1041,6 +1041,14 @@ servers, the ``url`` parameter may not contain a ``bitbucket``,
 ``github``, or ``gitlab`` string. In this case, you can use the XSLT
 parameter ``host`` to indicate which service are you running.
 
+Minimizing test results output
+------------------------------
+
+To minimize the test results output, simply load the
+``minimal_output.lgt`` file before running the tests. This file defines
+an object, ``minimal_output``, that intercepts and summarizes the unit
+test execution messages.
+
 Known issues
 ------------
 
