@@ -167,6 +167,9 @@ passed to a parametric test object instead of printing an object template.
 predicate failed to mention the `s/1` option for specifying the maximum
 number of shrink operations.
 
+* FIXED: The `lgtunit` tool to ensure that test objects are compiled with the
+`source_data` flag turned on.
+
 Tests
 -----
 

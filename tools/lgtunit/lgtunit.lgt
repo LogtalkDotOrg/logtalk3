@@ -926,7 +926,7 @@
 		(	object_property(Object, file(File, Directory)) ->
 			atom_concat(Directory, File, Path),
 			print_message(information, lgtunit, running_tests_from_object_file(Object, Path))
-		;	% source data information missing
+		;	% source data information missing or dynamically created test object
 			print_message(information, lgtunit, running_tests_from_object(Object))
 		),
 		::number_of_tests(Total),
@@ -1098,6 +1098,8 @@
 	% different unit test idioms are supported using the term-expansion mechanism;
 	% the unit test objects must be loaded using this object as an hook object
 
+	% ensure the source_data flag is turned on for the test object
+	term_expansion(begin_of_file, [begin_of_file, (:- set_logtalk_flag(source_data,on))]).
 	term_expansion((:- Directive), Terms) :-
 		% delegate to another predicate to take advantage of first-argument indexing
 		directive_expansion(Directive, Terms).
