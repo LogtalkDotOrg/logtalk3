@@ -170,6 +170,9 @@ number of shrink operations.
 * FIXED: The `lgtunit` tool to ensure that test objects are compiled with the
 `source_data` flag turned on.
 
+* FIXED: The `lgtunit` tool TAP and xUnit reports for the rare case where the
+test objects are dynamically created instead of defined in a source file.
+
 Tests
 -----
 
