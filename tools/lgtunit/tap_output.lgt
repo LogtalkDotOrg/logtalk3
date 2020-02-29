@@ -28,9 +28,9 @@
 :- object(tap_output).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2019-11-02,
+		date is 2020-02-29,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.'
@@ -81,8 +81,6 @@
 			retractall(test_count_(_)),
 			assertz(test_count_(0))
 		).
-	message_hook(running_tests_from_object(_)) :-
-		message_hook(running_tests_from_object_file(_, _)).
 	% number of tests
 	message_hook(number_of_tests(Total)) :-
 		number_codes(Total, Codes),

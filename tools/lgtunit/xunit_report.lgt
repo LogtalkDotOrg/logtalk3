@@ -28,7 +28,7 @@
 :- object(xunit_report).
 
 	:- info([
-		version is 1:5:1,
+		version is 1:5:2,
 		author is 'Paulo Moura',
 		date is 2020-02-29,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
@@ -63,16 +63,6 @@
 	message_hook(running_tests_from_object_file(Object, File)) :-
 		!,
 		logtalk::loaded_file_property(File, directory(Directory)),
-		atom_concat(Directory, 'xunit_report.xml', ReportFile),
-		(	stream_property(_, alias(xunit_report)) ->
-			true
-		;	open(ReportFile, write, _, [alias(xunit_report)])
-		),
-		assertz(message_cache_(running_tests_from_object_file(Object,File))).
-	message_hook(running_tests_from_object(Object)) :-
-		% avoid compiler warning as this object is often loaded
-		% before loading lgtunit, which loads the os library
-		{os::working_directory(Directory)},
 		atom_concat(Directory, 'xunit_report.xml', ReportFile),
 		(	stream_property(_, alias(xunit_report)) ->
 			true
@@ -224,7 +214,7 @@
 		(	logtalk::loaded_file_property(File, library(Library)),
 			Library \== startup ->
 			Package = library(Library)
-		;	% use the file directory
+		;	% use the object file directory
 			object_property(Object, file(_,Directory)),
 			% bypass the compiler as the flag is only created after loading this file
 			{current_logtalk_flag(suppress_path_prefix, Prefix)},

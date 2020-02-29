@@ -28,9 +28,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Paulo Moura',
-		date is 2019-11-09,
+		date is 2020-02-29,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -213,10 +213,7 @@
 	% "testcase" tag attributes
 
 	testcase_classname(_Test, ClassName) :-
-		(	message_cache_(running_tests_from_object_file(ClassName, _)) ->
-			true
-		;	message_cache_(running_tests_from_object(ClassName))
-		).
+		once(message_cache_(running_tests_from_object_file(ClassName, _))).
 
 	% date and time auxiliary predicates
 

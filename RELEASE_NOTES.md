@@ -142,6 +142,10 @@ Tools
 * CHANGED: The `code_metrics`, `dead_code_scanner`, `diagrams`, and `lgtunit`
 tools to print dates using the ISO 8601 standard format.
 
+* CHANGED: The `lgtunit` tool no longer prints a `running_tests_from_object/1`
+message as test objects are always compiled with the `source_data` flag turned
+on.
+
 * ADDED: Support to the `logtalk_tester` shell script to pass additional
 command-line options to the integration script used to run the tests.
 
@@ -169,9 +173,6 @@ number of shrink operations.
 
 * FIXED: The `lgtunit` tool to ensure that test objects are compiled with the
 `source_data` flag turned on.
-
-* FIXED: The `lgtunit` tool TAP and xUnit reports for the rare case where the
-test objects are dynamically created instead of defined in a source file.
 
 Tests
 -----

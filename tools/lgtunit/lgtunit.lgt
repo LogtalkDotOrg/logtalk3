@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7:17:1,
+		version is 7:17:2,
 		author is 'Paulo Moura',
 		date is 2020-02-17,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -923,12 +923,9 @@
 
 	write_tests_object :-
 		self(Object),
-		(	object_property(Object, file(File, Directory)) ->
-			atom_concat(Directory, File, Path),
-			print_message(information, lgtunit, running_tests_from_object_file(Object, Path))
-		;	% source data information missing or dynamically created test object
-			print_message(information, lgtunit, running_tests_from_object(Object))
-		),
+		object_property(Object, file(File, Directory)),
+		atom_concat(Directory, File, Path),
+		print_message(information, lgtunit, running_tests_from_object_file(Object, Path)),
 		::number_of_tests(Total),
 		print_message(silent, lgtunit, number_of_tests(Total)).
 

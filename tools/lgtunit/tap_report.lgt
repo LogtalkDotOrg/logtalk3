@@ -28,7 +28,7 @@
 :- object(tap_report).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:2:2,
 		author is 'Paulo Moura',
 		date is 2020-02-29,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
@@ -69,19 +69,6 @@
 	% start
 	message_hook(running_tests_from_object_file(_, File)) :-
 		logtalk::loaded_file_property(File, directory(Directory)),
-		atom_concat(Directory, 'tap_report.txt', ReportFile),
-		(	stream_property(_, alias(tap_report)) ->
-			true
-		;	open(ReportFile, write, _, [alias(tap_report)]),
-			write(tap_report, 'TAP version 13'), nl(tap_report),
-			retractall(partial_(_)),
-			retractall(test_count_(_)),
-			assertz(test_count_(0))
-		).
-	message_hook(running_tests_from_object(_)) :-
-		% avoid compiler warning as this object is often loaded
-		% before loading lgtunit, which loads the os library
-		{os::working_directory(Directory)},
 		atom_concat(Directory, 'tap_report.txt', ReportFile),
 		(	stream_property(_, alias(tap_report)) ->
 			true

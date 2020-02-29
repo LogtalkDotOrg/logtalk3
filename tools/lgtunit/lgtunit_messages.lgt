@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2:9:0,
+		version is 2:9:1,
 		author is 'Paulo Moura',
-		date is 2020-02-04,
+		date is 2020-02-29,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -81,9 +81,6 @@
 
 	message_tokens(running_tests_from_object_file(Object, File)) -->
 		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl, nl].
-
-	message_tokens(running_tests_from_object(Object)) -->
-		['running tests from object ~q'-[Object], nl].
 
 	message_tokens(number_of_tests(Total)) -->
 		['number of tests: ~q'-[Total], nl].
