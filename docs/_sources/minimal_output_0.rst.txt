@@ -12,7 +12,7 @@ Intercepts unit test execution messages and outputs a minimal report.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2020-02-28
+| **Date:** 2020-02-29
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,8 @@ Intercepts unit test execution messages and outputs a minimal report.
 
 
    - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(minimal_output))``.
+
+   - *Limitations:* Cannot be used when the test objects also intercept ``lgtunit`` messages.
 
 | **Inherited public predicates:**
 |    (none)

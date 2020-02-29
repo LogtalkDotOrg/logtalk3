@@ -30,10 +30,11 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-28,
+		date is 2020-02-29,
 		comment is 'Intercepts unit test execution messages and outputs a minimal report.',
 		remarks is [
-			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(minimal_output))``.'
+			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(minimal_output))``.',
+			'Limitations' - 'Cannot be used when the test objects also intercept ``lgtunit`` messages.'
 		]
 	]).
 
