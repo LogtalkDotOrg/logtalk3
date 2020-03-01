@@ -489,9 +489,10 @@ if grep -q -s -a -h '^!' -- *.errors || grep -q -s -a -h '^!' -- *.results || gr
 	grep -s -a -h '^\*' -- *.errors | $sed 's/.errors//' | tee -a errors.all
 	grep -s -a -h '^\*' -- *.results | $sed 's/.results//' | tee -a errors.all
 fi
-if grep -q -s -a 'tests skipped' -- *.results; then
+if grep -q -s -a 'tests skipped' -- *.results || grep -q -s -a '(not applicable)' -- *.results ; then
 	echo "% Skipped"
 	grep -s -a 'tests skipped' -- *.results | $sed 's/% tests skipped//' | $sed 's/.results://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+	grep -s -a '(not applicable)' -- *.results | $sed 's/(not applicable)//' | $sed 's/.results://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 fi
 if grep -q -s -a 'LOGTALK_BROKEN' -- *.errors; then
 	echo "%"
