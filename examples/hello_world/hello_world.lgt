@@ -22,6 +22,6 @@
 
 	% the initialization/1 directive argument is automatically executed
 	% when the object is loaded into memory:
-	:- initialization((nl, write('********** Hello World! **********'), nl)).
+	:- initialization(write('Hello World!\n')).
 
 :- end_object.

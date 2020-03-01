@@ -203,7 +203,7 @@ Examples
 represent rational numbers as `N/D` terms.
 
 * ADDED: New example, `closed_world_assumption`, illustrating the difference
-between *declaring* a predicate and *defining* a predicates and the Closed
+between *declaring* a predicate and *defining* a predicate and the Closed
 World Assumption (CWA) semantics when calling predicates and sending messages.
 
 * ADDED: New example, `predicate_lookups`, illustrating the lookup algorithms
