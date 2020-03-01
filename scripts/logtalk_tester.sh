@@ -256,8 +256,14 @@ done
 shift $((OPTIND - 1))
 args=("$@")
 
-if [ "$o_arg" != "" ] ; then
-	output="$o_arg"
+if [ "$o_arg" == "verbose" ] ; then
+	output='verbose'
+elif [ "$o_arg" == "minimal" ] ; then
+	output='minimal'
+elif [ "$o_arg" != "" ] ; then
+	echo "Error! Unknown output verbosity: $o_arg" >&2
+	usage_help
+	exit 1
 fi
 
 # default backend
