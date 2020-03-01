@@ -40,7 +40,7 @@
 			halstead_metric,
 			code_metrics
 		],
-		[	
+		[
 			source_data(on),
 			debug(on)
 		]

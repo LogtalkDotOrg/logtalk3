@@ -23,14 +23,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:2:1,
 		author is 'Paulo Moura',
-		date is 2018-02-18,
+		date is 2018-03-01,
 		comment is 'Unit tests for the source code size metric.'
 	]).
 
 	cover(code_metric).
-	cover(size_metric_utilities).
 	cover(size_metric).
 
 	:- uses(size_metric, [

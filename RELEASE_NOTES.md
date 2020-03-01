@@ -184,6 +184,8 @@ number of shrink operations.
 * FIXED: The `lgtunit` tool to ensure that test objects are compiled with the
 `source_data` flag turned on.
 
+* FIXED: Unknown entity declared as covered in the `code_metrics` tool.
+
 Tests
 -----
 
