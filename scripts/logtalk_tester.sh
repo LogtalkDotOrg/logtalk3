@@ -484,8 +484,6 @@ if grep -q -s -a -h '^!' -- *.errors || grep -q -s -a -h '^!' -- *.results || gr
 	echo "%"
 	echo "% Compilation errors/warnings and failed unit tests"
 	echo "% (compilation errors/warnings might be expected depending on the test)"
-	grep "^[^%]" -- *.results | grep -s -a -A2 'syntax_error' | $sed 's/.results//' | tee errors.all
-	grep "^[^%]" -- *.errors | grep -s -a -A2 'syntax_error' | $sed 's/.errors//' | tee -a errors.all
 	grep -s -a -h '^!' -- *.errors | $sed 's/.errors//' | tee -a errors.all
 	grep -s -a -h '^!' -- *.results | $sed 's/.results//' | tee -a errors.all
 	grep -s -a -h '^\*' -- *.errors | $sed 's/.errors//' | tee -a errors.all
