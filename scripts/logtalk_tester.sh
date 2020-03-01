@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.35"
+	echo "$(basename "$0") 1.0"
 	exit 0
 }
 
@@ -414,7 +414,7 @@ if [ "$g_arg" != "" ] ; then
 fi
 
 if [ "$p_arg" == "swipack" ] ; then
-	initialization_goal="$initialization_goal,use_module(library(logtalk))"
+	initialization_goal="use_module(library(logtalk)),$initialization_goal"
 fi
 
 if [ "$timeout_command" == "" ] ; then
