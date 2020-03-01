@@ -1,0 +1,55 @@
+.. index:: automation_report
+.. _automation_report/0:
+
+.. rst-class:: right
+
+**object**
+
+``automation_report``
+=====================
+
+Intercepts unit test execution messages and generates a ``*.totals`` files for parsing by the ``logtalk_tester.sh`` automation shell script.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-03-01
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+| **Remarks:**
+
+
+   - *Usage:* Automatically loaded by the ``logtalk_tester.sh`` shell script.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

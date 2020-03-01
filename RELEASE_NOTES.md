@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.36.0 - February ??, 2020
-==========================
+3.36.0 - March ??, 2020
+=======================
 
 Distribution
 ------------
@@ -151,6 +151,13 @@ command-line options to the integration script used to run the tests.
 
 * ADDED: Object `minimal_output` to the `lgtunit` tool that can be loaded
 before running a test suite to minimize the test results output.
+
+* ADDED: Object `automation_report` to the `lgtunit` tool that is loaded
+automatically by the `logtalk_tester` automation shell script.
+
+* IMPROVED: The `logtalk_tester` shell script now uses the report generated
+by the `automation_report` object provided by the `lgtunit` tool for reliable
+reporting independent of the default tests results output format.
 
 * IMPROVED: The `code_metrics`, `dead_code_scanner`, `lgtdoc`, and `lgtunit`
 tools to pad month, day, hours, minutes, and seconds when single digit when

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on February 24, 2020
+##   Last updated on March 1, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -117,28 +117,42 @@ run_tests() {
 		fi
 	fi
 	name=${unit////__}
+	report_goal="logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'$results'),set_logtalk_flag(test_unit_name,'$name')"
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$initialization_goal,$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
+		run_test "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
 		tests_exit=$?
-		grep -a 'tests:' "$results/$name.results" | $sed 's/%/***** (opt)  /'
+		mode_prefix="***** (opt)   "
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$initialization_goal,$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
+		run_test "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
 		tests_exit=$?
-		grep -a 'tests:' "$results/$name.results" | $sed 's/%/*****        /'
+		mode_prefix="*****         "
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$initialization_goal,$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
+		run_test "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
 		tests_exit=$?
-		grep -a 'tests:' "$results/$name.results" | $sed 's/%/***** (debug)/'
+		mode_prefix="***** (debug) "
 	fi
-	if [ $tests_exit -eq 0 ] ; then
-		grep -a 'completed tests from object' "$results/$name.results" | $sed 's/%/*****        /'
-		grep -a 'out of' "$results/$name.results" | grep -a 'clause coverage' | $sed 's/%/*****        /'
-		grep -a 'no code coverage information collected' "$results/$name.results" | $sed 's/%/*****        /'
+	if [ $tests_exit -eq 0 ] && [ -f "$results/$name.totals" ] ; then
+		while read -r line ; do
+			echo -n "$mode_prefix"
+			echo -n "$(cut -f 3 <<< "$line")"
+			echo -n ' tests: '
+			echo -n "$(cut -f 4 <<< "$line")"
+			echo -n ' skipped, '
+			echo -n "$(cut -f 5 <<< "$line")"
+			echo -n ' passed, '
+			echo -n "$(cut -f 6 <<< "$line")"
+			echo ' failed'		
+			echo -n '*****         completed tests from object '
+			echo "$(cut -f 2 <<< "$line")"
+		done < <(grep '^object' "$results/$name.totals")
+		echo -n '*****         clause coverage '
+		echo "$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
+	elif [ $tests_exit -eq 0 ] ; then
 		grep -a '(not applicable)' "$results/$name.results" | $sed 's/(/*****         (/'
 	elif [ $tests_exit -eq 124 ] ; then
 		echo "*****         timeout"
 		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
-	else
+	elif [ $tests_exit -ne 0 ] ; then
 		echo "*****         crash"
 		echo "LOGTALK_CRASH" >> "$results/$name.errors"
 	fi
@@ -171,7 +185,7 @@ run_test() {
 		fi
 	fi
 	exit=$?
-	if [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q "tests:" "$results/$name.results" && ! grep -q "tests skipped" "$results/$name.results"; then
+	if [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q -s "^object" "$results/$name.totals" && ! grep -q "tests skipped" "$results/$name.results"; then
 		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
 	fi
 	return $exit
@@ -373,11 +387,6 @@ elif [ "$c_arg" != "" ] ; then
 	exit 1
 fi
 
-if [ "$p_arg" == "swipack" ] ; then
-	versions_goal="use_module(library(logtalk)),$versions_goal"
-	format_goal="use_module(library(logtalk)),$format_goal"
-fi
-
 if [ "$d_arg" != "" ] ; then
 	results="$d_arg"
 fi
@@ -402,6 +411,10 @@ fi
 
 if [ "$g_arg" != "" ] ; then
 	initialization_goal="$g_arg"
+fi
+
+if [ "$p_arg" == "swipack" ] ; then
+	initialization_goal="$initialization_goal,use_module(library(logtalk))"
 fi
 
 if [ "$timeout_command" == "" ] ; then
@@ -433,6 +446,7 @@ output="$(find "$base" $level -name "tester.lgt" -or -name "tester.logtalk" | LC
 while read -r file && [ "$file" != "" ]; do
 	((testsets++))
 	run_tests "$file"
+	
 done <<< "$output"
 
 cd "$results" || exit 1
@@ -441,9 +455,15 @@ timeouts=$(cat -- *.errors | grep -c 'LOGTALK_TIMEOUT')
 crashes=$(cat -- *.errors | grep -c 'LOGTALK_CRASH')
 broken=$(cat -- *.errors | grep -c 'LOGTALK_BROKEN')
 testsetruns=$((testsets-timeouts-crashes-broken))
-skipped=$(cat -- *.results | grep -c ': skipped')
-passed=$(cat -- *.results | grep -c ': success')
-failed=$(cat -- *.results | grep -v 'test assertion' | grep -c ': failure')
+
+skipped=0
+passed=0
+failed=0
+while read -r line ; do
+	skipped=$((skipped+$(cut -f 4 <<< "$line")))
+	passed=$((passed+$(cut -f 5 <<< "$line")))
+	failed=$((failed+$(cut -f 6 <<< "$line")))
+done < <(grep -s '^object' *.totals)
 total=$((skipped+passed+failed))
 
 echo "*******************************************************************************"
@@ -452,10 +472,10 @@ echo "***** (compilation errors/warnings might be expected depending on the test
 echo "*******************************************************************************"
 grep "^[^%]" -- *.results | grep -s -a -A2 'syntax_error' | $sed 's/.results//' | tee errors.all
 grep "^[^%]" -- *.errors | grep -s -a -A2 'syntax_error' | $sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '!     ' -- *.errors | $sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '!     ' -- *.results | $sed 's/.results//' | tee -a errors.all
-grep -s -a -h -F '*     ' -- *.errors | $sed 's/.errors//' | tee -a errors.all
-grep -s -a -h -F '*     ' -- *.results | $sed 's/.results//' | tee -a errors.all
+grep -s -a -h '^!' -- *.errors | $sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '^!' -- *.results | $sed 's/.results//' | tee -a errors.all
+grep -s -a -h '^\*' -- *.errors | $sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '^\*' -- *.results | $sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Skipped"
 echo "*******************************************************************************"
@@ -475,11 +495,21 @@ grep -s -a 'LOGTALK_CRASH' -- *.errors | $sed 's/LOGTALK_CRASH//' | $sed 's/.err
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
-grep -s -a ': skipped' -- *.results | $sed 's/: skipped//' | $sed 's/.results:% / - /' | $sed 's|__|/|g' | $sed "s|^$prefix||" | $sed "s|^% ||"
+for file in *.totals; do
+	if grep -s -q '^skipped' "$file"; then
+		path=$(grep -m 1 '^file' "$file" | cut -f 2 | $sed "s|^$prefix||")
+		grep '^skipped' "$file" | cut -f 2 | $sed "s|^|$path - |"
+	fi
+done
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"
-grep -s -a -v 'test assertion' -- *.results | grep ': failure' | $sed 's/: failure//' | $sed 's/.results:!     / - /' | $sed 's|__|/|g' | $sed "s|^$prefix||" | $sed "s|^!     ||"
+for file in *.totals; do
+	if grep -s -q '^failed' "$file"; then
+		path=$(grep -m 1 '^file' "$file" | cut -f 2 | $sed "s|^$prefix||")
+		grep '^failed' "$file" | cut -f 2 | $sed "s|^|$path - |"
+	fi
+done
 echo "*******************************************************************************"
 echo "***** $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timeouts, $crashes crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"

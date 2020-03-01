@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "February 24, 2020" "Logtalk 3.36.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "March 1, 2020" "Logtalk 3.36.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -111,6 +111,9 @@ Logtalk source file used for printing the Logtalk and backend Prolog compiler ve
 .TP
 .BI $LOGTALKUSER/library/parallel_logtalk_processes_setup.pl
 Logtalk source file used for parallel Logtalk processes with selected backend Prolog compilers.
+.TP
+.BI $LOGTALKUSER/tools/lgtunit/automation_report.lgt
+Logtalk source file that intercepts unit test execution messages and generates report files that are parsed by this script.
 
 .SH "SEE ALSO"
 The Logtalk website at https://logtalk.org/
