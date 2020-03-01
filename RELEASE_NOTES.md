@@ -155,6 +155,8 @@ before running a test suite to minimize the test results output.
 * ADDED: Object `automation_report` to the `lgtunit` tool that is loaded
 automatically by the `logtalk_tester` automation shell script.
 
+* ADDED: Output verbosity option to the `logtalk_tester` shell script.
+
 * IMPROVED: The `logtalk_tester` shell script now uses the report generated
 by the `automation_report` object provided by the `lgtunit` tool for reliable
 reporting independent of the default tests results output format.

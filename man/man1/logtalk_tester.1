@@ -6,7 +6,9 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .SH SYNOPSIS
 .B logtalk_tester -v
 .br
-.B logtalk_tester [-p 
+.B logtalk_tester [-o
+.I output
+.B ] [-p 
 .I prolog
 .B ] [-m
 .I mode
@@ -40,6 +42,9 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .BI \-v
 Print script version.
 .TP
+.BI \-o
+Output verbosity. Default is \fIverbose\fR. Valid values are \fIverbose\fR and \fIminimal\fR.
+.TP
 .BI \-p
 Backend Prolog compiler. Default is SWI-Prolog. The following identifiers are used: B-Prolog - \fIb\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, JIProlog - \fIji\fR, Lean Prolog - \fIlean\fR, Qu-Prolog - \fIqp\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, XSB - \fIxsb\fR, XSB-MT - \fIxsbmt\fR, YAP - \fIyap\fR.
 .TP
@@ -68,7 +73,7 @@ Directory depth level to look for test sets. Level 1 means current directory onl
 Integration script command-line options (no default).
 .TP
 .BI \-g
-Initialization goal. Default is true.
+Initialization goal. Default is true. Called after loading the Logtalk compiler and runtime.
 .TP
 .BI \--
 Arguments to be passed to the tests (no default).
