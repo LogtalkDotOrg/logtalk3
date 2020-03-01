@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2:9:1,
+		version is 2:10:0,
 		author is 'Paulo Moura',
-		date is 2020-02-29,
+		date is 2020-03-01,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -207,6 +207,9 @@
 
 	message_tokens(no_code_coverage_for_protocols(Entity)) -->
 		['code coverage requested for protocol: ~q'-[Entity], nl].
+
+	message_tokens(unknown_entity_declared_covered(Entity)) -->
+		['unknown entity declared covered: ~q'-[Entity], nl].
 
 	% messages for test identifier errors
 

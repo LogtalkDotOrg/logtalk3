@@ -159,6 +159,9 @@ automatically by the `logtalk_tester` automation shell script.
 by the `automation_report` object provided by the `lgtunit` tool for reliable
 reporting independent of the default tests results output format.
 
+* IMPROVED: The `lgtunit` tool now prints a warning when unknown entities are
+declared as covered.
+
 * IMPROVED: The `code_metrics`, `dead_code_scanner`, `lgtdoc`, and `lgtunit`
 tools to pad month, day, hours, minutes, and seconds when single digit when
 writing timestamps.

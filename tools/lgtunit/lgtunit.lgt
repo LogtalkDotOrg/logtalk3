@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7:17:2,
+		version is 7:18:0,
 		author is 'Paulo Moura',
-		date is 2020-02-17,
+		date is 2020-03-01,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -2017,6 +2017,7 @@
 	% print entity summary coverage statistics
 	write_entity_coverage_information(Entity) :-
 		covered_entity(Entity, Covered, Total),
+		!,
 		(	Covered =:= 0, Total =:= 0 ->
 			% entity with no clauses
 			Percentage is 100.0
@@ -2027,6 +2028,9 @@
 			Percentage is float(Covered * 100 / Total)
 		),
 		print_message(information, lgtunit, entity_coverage(Entity, Covered, Total, Percentage)).
+	% unknown entity
+	write_entity_coverage_information(Entity) :-
+		print_message(warning, lgtunit, unknown_entity_declared_covered(Entity)).
 
 	entity_indicator_number_of_clauses(Entity, Other::Functor/Arity, PredicateIndicator, NumberOfClauses) :-
 		!,
