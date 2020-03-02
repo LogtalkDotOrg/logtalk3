@@ -99,15 +99,13 @@ else
 	sed="sed"
 fi
 
-run_tests() {
+run_testset() {
 	unit=$(dirname "$1")
 	unit_short=${unit#$prefix}
 	cd "$unit" || exit 1
 	if [ "$output" == 'verbose' ] ; then
 		echo "%"
 		echo "% $unit_short"
-#	else
-#		echo -n "."
 	fi
 	if [ -f tester.sh ] ; then
 		if [ $# -eq 0 ] ; then
@@ -124,15 +122,15 @@ run_tests() {
 	name=${unit////__}
 	report_goal="logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'$results'),set_logtalk_flag(test_unit_name,'$name')"
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
+		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
 		tests_exit=$?
 		mode_prefix="% (opt)   "
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
+		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
 		tests_exit=$?
 		mode_prefix="%         "
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
+		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
 		tests_exit=$?
 		mode_prefix="% (debug) "
 	fi
@@ -177,7 +175,7 @@ run_tests() {
 	return 0
 }
 
-run_test() {
+run_tests() {
 	name="$1"
 	goal="$2"
 	if [ ${#args[@]} -eq 0 ] ; then
@@ -470,7 +468,7 @@ counter=1
 while read -r file && [ "$file" != "" ]; do
 	echo -ne "% running $testsets test sets: "
 	echo -ne "$counter"'\r'
-	run_tests "$file"
+	run_testset "$file"
 	((counter++))
 done <<< "$drivers"
 if [ "$output" != 'verbose' ] ; then
