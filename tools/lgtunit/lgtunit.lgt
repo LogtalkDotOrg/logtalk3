@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7:18:0,
+		version is 7:18:1,
 		author is 'Paulo Moura',
-		date is 2020-03-01,
+		date is 2020-03-02,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1409,13 +1409,13 @@
 		parse_quick_check_options(Options, QuickCheckOptions).
 
 	parse_quick_check_options(Options, [n(NumberOfTests), s(MaximumNumberOfShrinks)]) :-
-		(	member(n(NumberOfTests), Options),
+		(	memberchk(n(NumberOfTests), Options),
 			integer(NumberOfTests),
 			NumberOfTests >= 0 ->
 			true
 		;	default_quick_check_option(n(NumberOfTests))
 		),
-		(	member(s(MaximumNumberOfShrinks), Options),
+		(	memberchk(s(MaximumNumberOfShrinks), Options),
 			integer(MaximumNumberOfShrinks),
 			MaximumNumberOfShrinks >= 0 ->
 			true
