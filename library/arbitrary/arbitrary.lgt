@@ -33,9 +33,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:13:0,
+		version is 2:13:1,
 		author is 'Paulo Moura',
-		date is 2019-06-10,
+		date is 2020-03-02,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -771,12 +771,12 @@
 		Small is Large / 2.0.
 
 	shrink(non_positive_float, Large, Small) :-
-		Large =\= 0.0,
-		Small is Large / 2.0.
+		Small is Large / 2.0,
+		Small =\= Large.
 
 	shrink(non_negative_float, Large, Small) :-
-		Large =\= 0.0,
-		Small is Large / 2.0.
+		Small is Large / 2.0,
+		Small =\= Large.
 
 	shrink(positive_float, Large, Small) :-
 		Small is Large / 2.0,
@@ -787,7 +787,8 @@
 		Small < 0.0.
 
 	shrink(probability, Large, Small) :-
-		Small is Large / 2.0.
+		Small is Large / 2.0,
+		Small =\= Large.
 
 	shrink(nonvar, Large, Small) :-
 		(	atom(Large) ->
