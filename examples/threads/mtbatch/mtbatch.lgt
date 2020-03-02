@@ -21,9 +21,9 @@
 :- object(mtbatch).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:6:1,
 		author is 'Paulo Moura',
-		date is 2017-08-26,
+		date is 2020-03-02,
 		comment is 'Multi-threading benchmarks. Supports SWI-Prolog, XSB, and YAP.'
 	]).
 
@@ -64,7 +64,8 @@
 		write('Prime numbers (average of '), write(N), write(' runs)'), nl,
 		loop::forto(Threads, 1, 16,
 			(	put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		loop::forto(S, 1, 10,
 			(	Size is S*10000,
 				write(Size),
@@ -74,8 +75,11 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% merge sort benchmarks:
 	run(msort, N) :-
@@ -83,7 +87,8 @@
 		loop::forto(T, 0, 4,
 			(	Threads is truncate(2**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		loop::forto(S, 1, 10,
 			(	Size is S*5000,
 				write(Size),
@@ -95,8 +100,11 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% quicksort benchmarks:
 	run(qsort, N) :-
@@ -104,7 +112,8 @@
 		loop::forto(T, 0, 4,
 			(	Threads is truncate(2**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		loop::forto(S, 1, 10,
 			(	Size is S*5000,
 				write(Size),
@@ -116,8 +125,11 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% Fibonacci numbers benchmarks:
 	run(fib, N) :-
@@ -125,7 +137,8 @@
 		loop::forto(T, 0, 4,
 			(	Threads is truncate(2**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		loop::forto(Nth, 20, 27,
 			(	write(Nth),
 				loop::forto(T, 0, 4,
@@ -135,8 +148,11 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% Towers of Hanoi benchmarks:
 	run(hanoi, N) :-
@@ -144,7 +160,8 @@
 		loop::forto(T, 0, 4,
 			(	Threads is truncate(2**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		loop::forto(Disks, 20, 27,
 			(	write(Disks),
 				loop::forto(T, 0, 4,
@@ -154,8 +171,11 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% Takeuchi function benchmarks:
 	run(tak, N) :-
@@ -163,7 +183,8 @@
 		loop::forto(T, 0, 5,
 			(	Threads is truncate(3**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		loop::forto(Z, 7, 11,
 			(	X is 3*Z,
 				Y is 2*Z,
@@ -175,8 +196,11 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% fast Fourier transform benchmarks:
 	run(fft, N) :-
@@ -184,7 +208,8 @@
 		loop::forto(T, 0, 4,
 			(	Threads is truncate(2**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		loop::forto(S, 10, 16,
 			(	Size is truncate(2**S),
 				write(Size),
@@ -196,8 +221,11 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% integration benchmarks:
 	run(integration, N) :-
@@ -207,7 +235,8 @@
 		loop::forto(T, 0, 4,
 			(	Threads is truncate(2**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		forall(
 			(	Function = const,     Inf =  0.000, Sup = 4.000, Epsilon = 1.0e-10
 			;	Function = exp,       Inf =  0.000, Sup = 4.000, Epsilon = 1.0e-10
@@ -230,14 +259,18 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl,
+					;	fail
+					)
+				), nl
+			)
+		), nl,
 		write('Numerical integration of functions of one variable (average of '), write(N), write(' runs)'), nl,
 		write('using a split/spawn/collect quadrature method with '), write(NP), write(' points'), nl,
 		loop::forto(T, 0, 4,
 			(	Threads is truncate(2**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		forall(
 			(	Function = const,     Inf =  0.000, Sup = 4.000, Epsilon = 1.0e-10
 			;	Function = exp,       Inf =  0.000, Sup = 4.000, Epsilon = 1.0e-10
@@ -260,8 +293,11 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% integration2d benchmarks:
 	run(integration2d, N) :-
@@ -271,7 +307,8 @@
 		loop::forto(T, 0, 2,
 			(	Threads is truncate(4**T),
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		forall(
 			(	Function = circle,  A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-8
 			;	Function = poly6,   A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-7
@@ -291,14 +328,18 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl,
+					;	fail
+					)
+				), nl
+			)
+		), nl,
 		write('Numerical integration of functions of two variables (average of '), write(N), write(' runs)'), nl,
 		write('using a split/spawn/collect quadrature method with '), write(NP), write(' points'), nl,
 		loop::forto(T, 1, 4,
 			(	Threads is T*T,
 				put_char('\t'), write(Threads)
-			)), nl,
+			)
+		), nl,
 		forall(
 			(	Function = circle,  A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-8
 			;	Function = poly6,   A = -2, B = 2, C = -2, D = 2, Epsilon = 1.0e-7
@@ -318,15 +359,19 @@
 							write_average(Average)
 						;	true
 						)
-					)), nl
-			)), nl.
+					;	fail
+					)
+				), nl
+			)
+		), nl.
 
 	% state-space search benchmarks:
 	run(search, N) :-
 		write('State-space search benchmarks (average of '), write(N), write(' runs)'), nl,
 		loop::forto(Liters, 1, 14,
 			(	put_char('\t'), write(Liters)
-			)), nl,
+			)
+		), nl,
 		write('DF'), put_char('\t'),
 		loop::forto(Liters, 1, 14,
 			(	catch(run(depth_first(Liters, 5, 9, 14), N, Average), Error, write_error) ->
@@ -334,7 +379,9 @@
 					write_average(Average)
 				;	true
 				)
-			)), nl,
+			;	fail
+			)
+		), nl,
 		write('HC'), put_char('\t'),
 		loop::forto(Liters, 1, 14,
 			(	catch(run(hill_climbing(Liters, 5, 9, 14), N, Average), Error, write_error) ->
@@ -342,7 +389,9 @@
 					write_average(Average)
 				;	true
 				)
-			)), nl,
+			;	fail
+			)
+		), nl,
 		write('BF'), put_char('\t'),
 		loop::forto(Liters, 1, 14,
 			(	catch(run(breadth_first(Liters, 5, 9, 14), N, Average), Error, write_error) ->
@@ -350,7 +399,9 @@
 					write_average(Average)
 				;	true
 				)
-			)), nl,
+			;	fail
+			)
+		), nl,
 		write('COP'), put_char('\t'),
 		loop::forto(Liters, 1, 14,
 			(	catch(run(cop_search(Liters, 5, 9, 14), N, Average), Error, write_error) ->
@@ -358,7 +409,9 @@
 					write_average(Average)
 				;	true
 				)
-			)), nl,
+			;	fail
+			)
+		), nl,
 		write('DF+HC+BF'), %put_char('\t'),
 		loop::forto(Liters, 1, 14,
 			(	catch(run(cop_overhead(Liters, 5, 9, 14), N, Average), Error, write_error) ->
@@ -366,7 +419,9 @@
 					write_average(Average)
 				;	true
 				)
-			)), nl.
+			;	fail
+			)
+		), nl.
 
 	run(Id, N, Average) :-
 		walltime_begin(Walltime1),

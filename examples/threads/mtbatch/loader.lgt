@@ -19,6 +19,7 @@
 
 
 :- initialization((
+	set_logtalk_flag(optimize, on),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(loops(loader)),
 	logtalk_load(meta(loader)),
@@ -43,5 +44,5 @@
 		searching(best_first1),
 		searching(hill_climbing1)
 	]),
-	logtalk_load(mtbatch, [undefined_predicates(silent)])
+	logtalk_load(mtbatch)
 )).

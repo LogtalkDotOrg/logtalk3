@@ -229,6 +229,8 @@ that uses the experimental `@/1` goal annotation to define an "around method".
 
 * FIXED: No need to use floats in the `threads/primes` example.
 
+* FIXED: Lint warnings when compiling the `mtbatch` example in optimized mode.
+
 Ports
 -----
 
