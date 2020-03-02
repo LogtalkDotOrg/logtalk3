@@ -106,8 +106,8 @@ run_tests() {
 	if [ "$output" == 'verbose' ] ; then
 		echo "%"
 		echo "% $unit_short"
-	else
-		echo -n "."
+#	else
+#		echo -n "."
 	fi
 	if [ -f tester.sh ] ; then
 		if [ $# -eq 0 ] ; then
@@ -155,10 +155,14 @@ run_tests() {
 	elif [ $tests_exit -eq 0 ] && [ "$output" == 'verbose' ] ; then
 		grep -a '(not applicable)' "$results/$name.results" | $sed 's/(/%         (/'
 	elif [ $tests_exit -eq 124 ] ; then
-		echo "%         timeout"
+		if [ "$output" == 'verbose' ] ; then
+			echo "%         timeout"
+		fi
 		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
 	elif [ $tests_exit -ne 0 ] ; then
-		echo "%         crash"
+		if [ "$output" == 'verbose' ] ; then
+			echo "%         crash"
+		fi
 		echo "LOGTALK_CRASH" >> "$results/$name.errors"
 	fi
 	if [ $coverage == 'xml' ] ; then
@@ -191,7 +195,9 @@ run_test() {
 	fi
 	exit=$?
 	if [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q -s "^object" "$results/$name.totals" && ! grep -q "tests skipped" "$results/$name.results"; then
-		echo "%         broken"
+		if [ "$output" == 'verbose' ] ; then
+			echo "%         broken"
+		fi
 		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
 	fi
 	return $exit
@@ -458,11 +464,14 @@ if [ "$output" == 'verbose' ] ; then
 	grep -a "Prolog version:" "$results"/tester_versions.txt | $sed "s/Prolog/$prolog/"
 fi
 
-testsets=0
-drivers="$(find "$base" $level -name "tester.lgt" -or -name "tester.logtalk" | LC_ALL=C sort)"
+drivers="$(find "$base" $level -type f -name "tester.lgt" -or -name "tester.logtalk" | LC_ALL=C sort)"
+testsets=$(find "$base" $level -type f -name "tester.lgt" -or -name "tester.logtalk" | wc -l | tr -d ' ')
+counter=1
 while read -r file && [ "$file" != "" ]; do
-	((testsets++))
+	echo -ne "% running $testsets test sets: "
+	echo -ne "$counter"'\r'
 	run_tests "$file"
+	((counter++))
 done <<< "$drivers"
 if [ "$output" != 'verbose' ] ; then
 	echo
