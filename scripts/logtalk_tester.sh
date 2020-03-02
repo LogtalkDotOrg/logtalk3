@@ -464,14 +464,18 @@ fi
 
 drivers="$(find "$base" $level -type f -name "tester.lgt" -or -name "tester.logtalk" | LC_ALL=C sort)"
 testsets=$(find "$base" $level -type f -name "tester.lgt" -or -name "tester.logtalk" | wc -l | tr -d ' ')
-counter=1
-while read -r file && [ "$file" != "" ]; do
-	echo -ne "% running $testsets test sets: "
-	echo -ne "$counter"'\r'
-	run_testset "$file"
-	((counter++))
-done <<< "$drivers"
-if [ "$output" != 'verbose' ] ; then
+if [ "$output" == 'verbose' ] ; then
+	while read -r file && [ "$file" != "" ]; do
+		run_testset "$file"
+	done <<< "$drivers"
+else
+	counter=1
+	while read -r file && [ "$file" != "" ]; do
+		echo -ne "% running $testsets test sets: "
+		echo -ne "$counter"'\r'
+		run_testset "$file"
+		((counter++))
+	done <<< "$drivers"
 	echo
 fi
 
