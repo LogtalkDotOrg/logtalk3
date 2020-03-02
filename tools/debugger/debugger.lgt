@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:2:0,
+		version is 4:2:1,
 		author is 'Paulo Moura',
-		date is 2019-12-03,
+		date is 2020-03-02,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -893,7 +893,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		read_single_char(Char) :-
-			flush(user), tyi(Code), put(Code), nl, char_code(Char, Code).
+			flush(user), tyi(Code), put_code(Code), nl, char_code(Char, Code).
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 

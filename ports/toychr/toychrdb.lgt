@@ -107,9 +107,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:4:1,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2019-10-14,
+		date is 2020-03-02,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'
@@ -981,7 +981,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		read_single_char(Char) :-
-			flush(user), tyi(Code), put(Code), nl, char_code(Char, Code).
+			flush(user), tyi(Code), put_code(Code), nl, char_code(Char, Code).
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
