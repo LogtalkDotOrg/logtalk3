@@ -21,13 +21,13 @@ def setup(app):
 # -- Project information -----------------------------------------------------
 
 project = 'Logtalk APIs'
-copyright = '2020, Paulo Moura'
+copyright = '1998-2020, Paulo Moura'
 author = 'Paulo Moura'
 
 # The short X.Y version
 version = '3.36.0'
 # The full version, including alpha/beta/rc tags
-release = u'v3.36.0-b12'
+release = u'v3.36.0-b13'
 
 
 # -- General configuration ---------------------------------------------------

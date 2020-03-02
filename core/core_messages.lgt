@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:96:0,
+		version is 1:97:0,
 		author is 'Paulo Moura',
-		date is 2020-02-21,
+		date is 2020-03-02,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -874,7 +874,8 @@
 		['as existential variable ~q do not exist in goal ~q '-[Variable, Goal], nl].
 	suspicious_call_reason(existential_variables([Variable1, Variable2| Variables], Goal)) -->
 		['as existential variables ~q do not exist in goal ~q '-[[Variable1, Variable2| Variables], Goal], nl].
-
+	suspicious_call_reason(float_comparison) -->
+		['as the goal compares float values for equality'-[], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton])) -->
 		['in ~w goal contains singleton variable ~q'-[Predicate, Singleton], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton| Singletons])) -->

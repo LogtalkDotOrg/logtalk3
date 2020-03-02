@@ -3448,7 +3448,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 36, 0, b12)).
+'$lgt_version_data'(logtalk(3, 36, 0, b13)).
 
 
 
@@ -12500,6 +12500,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
 
+% term comparison (only lint warnings)
+
+'$lgt_compile_body'(Exp1 == Exp2, _, _, Ctx) :-
+	once((float(Exp1); float(Exp2))),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Exp1 == Exp2, reason(float_comparison))
+	),
+	fail.
+
+'$lgt_compile_body'(Exp1 \== Exp2, _, _, Ctx) :-
+	once((float(Exp1); float(Exp2))),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Exp1 \== Exp2, reason(float_comparison))
+	),
+	fail.
+
 % unification (only lint warnings)
 
 '$lgt_compile_body'(Term1 = Term2, _, _, Ctx) :-
@@ -14953,10 +14979,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check_non_portable_functions'(Exp),
 	fail.
 '$lgt_compile_body'(Exp1 =:= Exp2, _, _, Ctx) :-
+	once((float(Exp1); float(Exp2))),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Exp1 =:= Exp2, reason(float_comparison))
+	),
+	fail.
+'$lgt_compile_body'(Exp1 =:= Exp2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
+	fail.
+'$lgt_compile_body'(Exp1 =\= Exp2, _, _, Ctx) :-
+	once((float(Exp1); float(Exp2))),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, Exp1 =\= Exp2, reason(float_comparison))
+	),
 	fail.
 '$lgt_compile_body'(Exp1 =\= Exp2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),

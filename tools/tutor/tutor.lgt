@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:34:1,
+		version is 0:35:0,
 		author is 'Paulo Moura',
-		date is 2020-02-18,
+		date is 2020-03-02,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -806,6 +806,13 @@
 			'If you want a single solution, use the ^/2 operator to existentially'-[], nl,
 			'qualify the variables. If you want multiple solutions, use a lambda'-[], nl,
 			'expression with the relevant variables listed as lambda free variables.'-[], nl, nl
+		].
+
+	explain(suspicious_call(_, _, _, _, _, reason(float_comparison))) -->
+		[	'Comparing floats is problematic as it can fail due to rounding errors and'-[], nl,
+			'loss of precision when converting from decimal to binary representation.'-[], nl,
+			'Check instead if the float values are within a given epsilon. The "float"'-[], nl,
+			'library object provides several predicates for comparing floats. '-[], nl, nl
 		].
 
 	% encoding/1 directive messages

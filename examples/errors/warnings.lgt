@@ -184,6 +184,16 @@
 
 
 
+:- object(bogus_comparisons).
+
+	p(X) :- X == 3.14.
+
+	q(X) :- 3.14 =:= X.
+
+:- end_object.
+
+
+
 :- object(tautology).
 
 	% goals are always true (usually happens due to typos)

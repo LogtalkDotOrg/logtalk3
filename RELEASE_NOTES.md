@@ -51,6 +51,9 @@ the old `Year/Month/Day` format.
 * ADDED: Lint check for unification goals that will succeed creating a cyclic
 term.
 
+* ADDED: Lint check for float comparison in `==/2`, `\==/2`, `=:=/2`, and
+`=\=/2` goals.
+
 * ADDED: Also search for settings files on the `%APPDATA%\Logtalk` directory
 when running on Windows operating-systems.
 
@@ -169,7 +172,8 @@ tools to pad month, day, hours, minutes, and seconds when single digit when
 writing timestamps.
 
 * IMPROVED: The `tutor` explanations of unknown entity, variables shared by
-both arguments of `is/2` goals, plus date and version format warnings.
+both arguments of `is/2` goals, float comparisons, plus date and version
+format warnings.
 
 * UPDATED: The `tutor` tool for the new lint warning on cyclic terms.
 
@@ -221,7 +225,8 @@ that uses the experimental `@/1` goal annotation to define an "around method".
 
 * IMPROVED: Tests for the `sicstus` example.
 
-* UPDATED: The `errors` example to illustrate cyclic terms lint warnings.
+* UPDATED: The `errors` example to illustrate float comparisons and cyclic
+terms lint warnings.
 
 * FIXED: Library name typo preventing loading of the `edcgs` example.
 
