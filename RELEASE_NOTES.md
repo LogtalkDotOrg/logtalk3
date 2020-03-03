@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.36.0 - March ??, 2020
-=======================
+3.36.0 - March 3, 2020
+======================
 
 Distribution
 ------------
@@ -200,7 +200,7 @@ Tests
 * ADDED: Tests for the presence of the standard ISO Prolog operators.
 
 * ADDED: Tests for the `write_term/3` ISO Prolog standard predicate for writing
-atom that contain a `%` character.
+atoms that contain a `%` character.
 
 Examples
 --------
