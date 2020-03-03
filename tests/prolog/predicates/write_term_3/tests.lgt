@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2018-06-25,
+		date is 2020-03-03,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -103,7 +103,7 @@
 		% originally the SICS contributed test wrote 1 but...
 		% {write_term(1, [quoted(true)|foo])}.
 		% ... Jan Wielemaker proposed we write instead '' to avoid messing
-		% with the consistency of the files that cache the test results 
+		% with the consistency of the files that cache the test results
 		{write_term('', [quoted(true)|foo])}.
 
 	test(sics_write_term_3_17, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
@@ -159,6 +159,24 @@
 		current_output(S),
 		{write_term(S, 1+2, [ignore_ops(true)])},
 		^^text_output_assertion('+(1,2)', Assertion).
+
+	test(lgt_write_term_3_28, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, '%', [quoted(true)])},
+		^^text_output_assertion('\'%\'', Assertion).
+
+	test(lgt_write_term_3_29, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, ' %', [quoted(true)])},
+		^^text_output_assertion('\' %\'', Assertion).
+
+	test(lgt_write_term_3_30, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, '%text', [quoted(true)])},
+		^^text_output_assertion('\'%text\'', Assertion).
 
 	cleanup :-
 		^^clean_binary_output,

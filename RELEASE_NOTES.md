@@ -199,6 +199,9 @@ Tests
 
 * ADDED: Tests for the presence of the standard ISO Prolog operators.
 
+* ADDED: Tests for the `write_term/3` ISO Prolog standard predicate for writing
+atom that contain a `%` character.
+
 Examples
 --------
 
