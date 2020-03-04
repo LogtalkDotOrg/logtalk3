@@ -36,7 +36,7 @@
 		version is 2:13:1,
 		author is 'Paulo Moura',
 		date is 2020-03-02,
-		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object.',
+		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
 			'Prolog module related types (when the backend compiler supports modules)' - '``module``, ``module_identifier``, ``qualified_callable``',

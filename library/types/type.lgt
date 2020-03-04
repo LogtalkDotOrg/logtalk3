@@ -38,7 +38,7 @@
 			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``clause_or_partial_clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``',
 			'Stream types' - '``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``',
 			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``type``',
-			'predicate type notes' - 'This type is used to check for an object public predicate specified as Object::Functor/Arity.',
+			'predicate type notes' - 'This type is used to check for an object public predicate specified as ``Object::Functor/Arity``.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'Stream types notes' - 'In the case of the ``stream(Property)`` and ``stream_or_alias(Property)`` types, Property must be a valid stream property.',
 			'order type notes' - 'The three possible values of this type are the single character atoms ``<``, ``=``, and ``>``.',

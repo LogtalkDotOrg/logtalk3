@@ -48,7 +48,7 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 
    - *Other types:* ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``type``
 
-   - *predicate type notes:* This type is used to check for an object public predicate specified as Object::Functor/Arity.
+   - *predicate type notes:* This type is used to check for an object public predicate specified as ``Object::Functor/Arity``.
 
    - *boolean type notes:* The two value of this type are the atoms true and false.
 
