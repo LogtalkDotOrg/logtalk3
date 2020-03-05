@@ -252,8 +252,8 @@
 <p>Built-in object providing message printing, debugging, library, source file, and hacking methods.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:16:0</div>
-<div class="line"><strong>Date:</strong> 2019-11-29</div>
+<div class="line"><strong>Version:</strong> 1:17:0</div>
+<div class="line"><strong>Date:</strong> 2020-02-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -281,9 +281,10 @@
 <li><p><em>Printing of debug messages:</em> By default, debug messages are only printed when the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag is turned on. The compiler suppresses debug messages when compiling in optimized mode.</p></li>
 <li><p><em>Meta messages:</em> A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.</p></li>
 <li><p><em>&#64;Message meta message:</em> By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate followed by a newline.</p></li>
-<li><p><em>Key-Value meta message:</em> By default, the message is printed as “Key: Value” followed by a newline. The value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
-<li><p><em>List meta message:</em> By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
-<li><p><em>Title::List meta message:</em> By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
+<li><p><em>Key-Value meta message:</em> By default, the message is printed as “Key: Value” followed by a newline. The key is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate while the value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
+<li><p><em>Format+Arguments meta message:</em> By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate.</p></li>
+<li><p><em>List meta message:</em> By default, the list items are printed indented one per line. The items are preceded by a dash and can be <code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code>, <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>, or <code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code> messages. If that is not the case, the item is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
+<li><p><em>Title::List meta message:</em> By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the <code class="docutils literal notranslate"><span class="pre">List</span></code> meta message.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

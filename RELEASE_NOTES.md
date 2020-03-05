@@ -24,6 +24,11 @@ RELEASE NOTES
 3.37.0 - April ??, 2020
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: New meta message `Format+Arguments` for use with the message printing
+mechanism. See the `logtalk` built-in object API documentation for details.
 
 
 3.36.0 - March 3, 2020

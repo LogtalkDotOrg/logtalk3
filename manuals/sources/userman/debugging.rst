@@ -546,16 +546,20 @@ tokenization for four *meta-messages* that cover the most common cases:
    predicate followed by a newline.
 ``Key-Value``
    By default, the message is printed as ``Key: Value`` followed by a
-   newline. The value is printed as passed to the ``writeq/1``
+   newline. The key is printed as passed to the ``write/1`` predicate
+   while the value is printed as passed to the ``writeq/1`` predicate.
+``Format+Arguments``
+   By default, the message is printed as passed to the ``format/2``
    predicate.
 ``List``
    By default, the list items are printed indented one per line. The
-   items are preceded by a dash and printed as passed to the
-   ``writeq/1`` predicate.
+   items are preceded by a dash and can be ``@Message``, ``Key-Value``,
+   or ``Format+Arguments`` messages. If that is not the case, the item
+   is printed as passed to the ``writeq/1`` predicate.
 ``Title::List``
    By default, the title is printed followed by a newline and the
-   indented list items, one per line. The items are preceded by a dash
-   and printed as passed to the ``writeq/1`` predicate.
+   indented list items, one per line. The items are printed as in
+   the ``List`` meta message.
 
 These print messages goals can always be combined with hooks as
 described in the previous section to remove them in production ready
@@ -575,6 +579,10 @@ code. Some simple examples of using these meta-messages:
 
    | ?- logtalk::print_message(debug, core, answer-42).
    >>> answer: 42
+   yes
+
+   | ?- logtalk::print_message(debug, core, 'Position: <~d,~d>'+[42,23]).
+   >>> Position: <42,23>
    yes
 
    | ?- logtalk::print_message(debug, core, [arthur,ford,marvin]).

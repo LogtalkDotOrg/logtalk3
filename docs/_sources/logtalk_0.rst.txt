@@ -11,8 +11,8 @@
 Built-in object providing message printing, debugging, library, source file, and hacking methods.
 
 | **Author:** Paulo Moura
-| **Version:** 1:16:0
-| **Date:** 2019-11-29
+| **Version:** 1:17:0
+| **Date:** 2020-02-05
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -43,11 +43,13 @@ Built-in object providing message printing, debugging, library, source file, and
 
    - *@Message meta message:* By default, the message is printed as passed to the ``write/1`` predicate followed by a newline.
 
-   - *Key-Value meta message:* By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the ``writeq/1`` predicate.
+   - *Key-Value meta message:* By default, the message is printed as "Key: Value" followed by a newline. The key is printed as passed to the ``write/1`` predicate while the value is printed as passed to the ``writeq/1`` predicate.
 
-   - *List meta message:* By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the ``writeq/1`` predicate.
+   - *Format+Arguments meta message:* By default, the message is printed as passed to the ``format/2`` predicate.
 
-   - *Title::List meta message:* By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the ``writeq/1`` predicate.
+   - *List meta message:* By default, the list items are printed indented one per line. The items are preceded by a dash and can be ``@Message``, ``Key-Value``, or ``Format+Arguments`` messages. If that is not the case, the item is printed as passed to the ``writeq/1`` predicate.
+
+   - *Title::List meta message:* By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.
 
 | **Inherited public predicates:**
 |    (none)

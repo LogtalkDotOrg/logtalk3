@@ -700,16 +700,20 @@ tokenization for four <em>meta-messages</em> that cover the most common cases:</
 predicate followed by a newline.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">Key-Value</span></code></dt><dd><p>By default, the message is printed as <code class="docutils literal notranslate"><span class="pre">Key:</span> <span class="pre">Value</span></code> followed by a
-newline. The value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code>
+newline. The key is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate
+while the value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code></dt><dd><p>By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">format/2</span></code>
 predicate.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">List</span></code></dt><dd><p>By default, the list items are printed indented one per line. The
-items are preceded by a dash and printed as passed to the
-<code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p>
+items are preceded by a dash and can be <code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code>, <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code> messages. If that is not the case, the item
+is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">Title::List</span></code></dt><dd><p>By default, the title is printed followed by a newline and the
-indented list items, one per line. The items are preceded by a dash
-and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p>
+indented list items, one per line. The items are printed as in
+the <code class="docutils literal notranslate"><span class="pre">List</span></code> meta message.</p>
 </dd>
 </dl>
 <p>These print messages goals can always be combined with hooks as
@@ -727,6 +731,10 @@ yes
 
 | ?- logtalk::print_message(debug, core, answer-42).
 &gt;&gt;&gt; answer: 42
+yes
+
+| ?- logtalk::print_message(debug, core, &#39;Position: &lt;~d,~d&gt;&#39;+[42,23]).
+&gt;&gt;&gt; Position: &lt;42,23&gt;
 yes
 
 | ?- logtalk::print_message(debug, core, [arthur,ford,marvin]).
@@ -815,10 +823,10 @@ details.</p>
 <div class="section" id="debug-and-trace-events">
 <span id="debugging-events"></span><h2>Debug and trace events<a class="headerlink" href="#debug-and-trace-events" title="Permalink to this headline">¶</a></h2>
 <p>The debugging API defines two multifile predicates,
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> and
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-2" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">logtalk::debug_handler/2</span></a> for handiling
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.37.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> and
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-2" title="(in Logtalk APIs v3.37.0)"><span class="xref std std-ref">logtalk::debug_handler/2</span></a> for handiling
 trace and debug events. It also provides a
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-provider-1" title="(in Logtalk APIs v3.36.0)"><span class="xref std std-ref">logtalk::debug_handler_provider/1</span></a>
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-provider-1" title="(in Logtalk APIs v3.37.0)"><span class="xref std std-ref">logtalk::debug_handler_provider/1</span></a>
 multifile predicate that allows an object (or a category) to declare itself
 as a debug handler provider. The Logtalk <code class="docutils literal notranslate"><span class="pre">debugger</span></code> and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code>
 tools are regular applications thar are implemented using this API, which

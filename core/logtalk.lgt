@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:16:0,
+		version is 1:17:0,
 		author is 'Paulo Moura',
-		date is 2019-11-29,
+		date is 2020-02-05,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -47,9 +47,10 @@
 			'Printing of debug messages' - 'By default, debug messages are only printed when the ``debug`` flag is turned on. The compiler suppresses debug messages when compiling in optimized mode.',
 			'Meta messages' - 'A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.',
 			'@Message meta message' - 'By default, the message is printed as passed to the ``write/1`` predicate followed by a newline.',
-			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the ``writeq/1`` predicate.',
-			'List meta message' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the ``writeq/1`` predicate.',
-			'Title::List meta message' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the ``writeq/1`` predicate.'
+			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. The key is printed as passed to the ``write/1`` predicate while the value is printed as passed to the ``writeq/1`` predicate.',
+			'Format+Arguments meta message' - 'By default, the message is printed as passed to the ``format/2`` predicate.',
+			'List meta message' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and can be ``@Message``, ``Key-Value``, or ``Format+Arguments`` messages. If that is not the case, the item is printed as passed to the ``writeq/1`` predicate.',
+			'Title::List meta message' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.'
 		]
 	]).
 
@@ -414,6 +415,8 @@
 	default_message_tokens(Key-Value) -->
 		{copy_term(Value, Copy), numbervars(Copy, 0, _)},
 		['~w: ~q'-[Key, Copy], nl].
+	default_message_tokens(Format+Arguments) -->
+		[Format-Arguments, nl].
 	default_message_tokens([]) -->
 		[].
 	default_message_tokens([Item| Items]) -->
@@ -430,8 +433,12 @@
 		['- '-[]], default_message_tokens_list_item(Item),
 		default_message_tokens_list(Items).
 
+	default_message_tokens_list_item(@Message) -->
+		default_message_tokens(@Message).
 	default_message_tokens_list_item(Key-Value) -->
-		['~q: ~q'-[Key, Value], nl].
+		default_message_tokens(Key-Value).
+	default_message_tokens_list_item(Format+Arguments) -->
+		default_message_tokens(Format+Arguments).
 	default_message_tokens_list_item(Item) -->
 		['~q'- [Item], nl].
 
