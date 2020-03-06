@@ -539,7 +539,7 @@ Meta-messages
 
 To avoid having to define :ref:`methods_message_tokens_2` grammar rules
 for translating each and every debug message, Logtalk provides default
-tokenization for four *meta-messages* that cover the most common cases:
+tokenization for five *meta-messages* that cover the most common cases:
 
 ``@Message``
    By default, the message is printed as passed to the ``write/1``
@@ -561,9 +561,7 @@ tokenization for four *meta-messages* that cover the most common cases:
    indented list items, one per line. The items are printed as in
    the ``List`` meta message.
 
-These print messages goals can always be combined with hooks as
-described in the previous section to remove them in production ready
-code. Some simple examples of using these meta-messages:
+Some simple examples of using these meta-messages:
 
 .. code-block:: text
 
