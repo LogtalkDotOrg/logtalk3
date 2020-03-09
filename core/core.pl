@@ -17077,6 +17077,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, ExCtx)
 	).
 
+% special case where an object sends a message to itself;  the practical
+% case is parametric objects where one of more parameters are updated by
+% the object predicates
+
+'$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
+	'$lgt_pp_entity_'(object, Entity, _),
+	functor(Obj, Functor, Arity),
+	functor(Entity, Functor, Arity),
+	!,
+	'$lgt_comp_ctx'(Ctx,    Head, HeadExCtx, Entity, _,      This, _,    Prefix, MetaVars, _, ExCtx,    Mode, _, Lines, Term),
+	'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Obj,    Entity, Obj,  Obj,  Prefix, MetaVars, _, NewExCtx, Mode, _, Lines, Term),
+	'$lgt_execution_context_this_entity'(ExCtx, This, Entity),
+	'$lgt_execution_context'(NewExCtx, Obj, This, Obj, Obj, [], []),
+	'$lgt_compile_body'(Pred, TPred0, _, NewCtx),
+	(	Events == allow ->
+		TPred = '$lgt_guarded_method_call'(Obj, Pred, This, TPred0)
+	;	TPred = TPred0
+	).
+
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, This, _, _, _, _, ExCtx, Mode, _, _, _),
 	'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Pred, Head),

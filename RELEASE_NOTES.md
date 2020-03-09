@@ -30,6 +30,10 @@ Logtalk compiler and runtime
 * ADDED: New meta message `Format+Arguments` for use with the message printing
 mechanism. See the `logtalk` built-in object API documentation for details.
 
+* ADDED: Compiler optimization for the special case where an object sends a
+message to itself. The practical case is parametric objects where one of more
+parameters are updated by the object predicates.
+
 
 3.36.0 - March 3, 2020
 ======================
