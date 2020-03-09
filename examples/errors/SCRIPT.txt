@@ -17,10 +17,16 @@ limitations under the License.
 ________________________________________________________________________
 
 
+To augment compiler warnings and errors messages with explanations and
+fix suggestions, start by loading the `tutor` tool:
+
+| ?- logtalk_load(tutor(loader)).
+...
+
 The entities on this example are divided in two sets. The first set 
-results on compiler warning messages, while the second set results 
-in compiler error messages. To load each sets of entities, compile 
-and load the corresponding loader files:
+results on compiler warning messages, while the second set results in
+compiler error messages. To load each sets of entities, compile and
+load the corresponding loader files:
 
 | ?- logtalk_load(errors(warnings_loader)).
 ...

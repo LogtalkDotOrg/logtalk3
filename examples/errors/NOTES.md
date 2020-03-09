@@ -31,3 +31,7 @@ for the `logtalk_compile/2` or `logtalk_load/2` built-in predicates or by
 default in your Prolog adapter file and possibly overridden in your settings
 file). See the Handbook section on writing and running applications for a
 detailed description of the flags.
+
+The `tutor` tool provides explanations and fix suggestions for compiler
+warnings and errors messages. New users are advised to load it at startup
+(e.g. from a settings file) for a more friendly experience.
