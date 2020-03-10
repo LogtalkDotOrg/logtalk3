@@ -11,8 +11,8 @@
 Dictionary protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 2:1:0
-| **Date:** 2019-05-17
+| **Version:** 2:2:0
+| **Date:** 2020-03-10
 
 | **Compilation flags:**
 |    ``static``
@@ -221,6 +221,29 @@ Updates the value associated with a key in a dictionary, returning the updated d
 
 .. raw:: html
 
+   <div id="update/3"> </div>
+
+.. index:: update/3
+.. _dictionaryp/0::update/3:
+
+``update/3``
+^^^^^^^^^^^^
+
+Updates the key-value pairs in a dictionary, returning the updated dictionary. Fails if it cannot find one of the keys.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(OldDictionary,Pairs,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``update(+dictionary,@list(pair),-dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="empty/1"> </div>
 
 .. index:: empty/1
@@ -262,6 +285,29 @@ Lookups a matching key-value pair from a dictionary.
 | **Mode and number of proofs:**
 |    ``lookup(+ground,?term,@dictionary)`` - ``zero_or_one``
 |    ``lookup(-ground,?term,@dictionary)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="lookup/2"> </div>
+
+.. index:: lookup/2
+.. _dictionaryp/0::lookup/2:
+
+``lookup/2``
+^^^^^^^^^^^^
+
+Lookups all matching key-value pairs from a dictionary. Fails if it cannot find one of the keys or if a value for a key does not unify.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lookup(Pairs,Dictionary)``
+| **Mode and number of proofs:**
+|    ``lookup(+list(pair),@dictionary)`` - ``zero_or_one``
 
 
 ------------

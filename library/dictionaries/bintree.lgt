@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2:9:0,
+		version is 2:10:0,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2019-05-17,
+		date is 2020-03-10,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [avltree, rbtree]
 	]).
@@ -188,6 +188,11 @@
 	lookup_var(Key, Value, t(_, _, _, Right)) :-
 		lookup_var(Key, Value, Right).
 
+	lookup([], _).
+	lookup([Key-Value| Pairs], Tree) :-
+		lookup(Key, Value, Tree),
+		lookup(Pairs, Tree).
+
 	min(t(Key, Value, t, _), MinKey, MinValue) :-
 		!,
 		MinKey = Key,
@@ -266,6 +271,14 @@
 		update(Left1, Key, OldValue, NewValue, Left2).
 	update(>, Key1, Value1, Left1, Right1, Key, OldValue, NewValue, t(Key1, Value1, Left1, Right2)) :-
 		update(Right1, Key, OldValue, NewValue, Right2).
+
+	update(OldTree, Pairs, NewTree) :-
+		update_(Pairs, OldTree, NewTree).
+
+	update_([], NewTree, NewTree).
+	update_([Key-NewValue| Pairs], OldTree, NewTree) :-
+		update(OldTree, Key, _, NewValue, NewTree0),
+		update_(Pairs, NewTree0, NewTree).
 
 	:- meta_predicate(map_(*, 1)).
 	map_(t(Key, Value, Left, Right), Closure) :-

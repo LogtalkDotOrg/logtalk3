@@ -22,17 +22,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2019-05-24,
+		date is 2020-03-10,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
 
 	:- uses(_DictionaryObject_, [
 		as_dictionary/2, as_list/2,
-		clone/3, clone/4, insert/4, delete/4, update/4, update/5, empty/1,
-		lookup/3, previous/4, next/4, min/3, max/3, delete_min/4, delete_max/4,
+		clone/3, clone/4, insert/4, delete/4, update/4, update/5, update/3, empty/1,
+		lookup/3, lookup/2, previous/4, next/4, min/3, max/3, delete_min/4, delete_max/4,
 		keys/2, values/2, map/2, map/3, apply/4, size/2, valid/1, new/1
 	]).
 
@@ -208,6 +208,20 @@
 		lookup(b, Value, NewDictionary),
 		^^assertion(new, Value == 22).
 
+	% update/3 tests
+
+	test(dictionary_update_3_01) :-
+		as_dictionary([], Dictionary),
+		\+ update(Dictionary, [b-42], _).
+
+	test(dictionary_update_3_02) :-
+		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		update(Dictionary, [b-22, f-7], NewDictionary),
+		lookup(b, B, NewDictionary),
+		^^assertion(new_b, B == 22),
+		lookup(f, F, NewDictionary),
+		^^assertion(new_f, F == 7).
+
 	% empty/1 tests
 
 	test(dictionary_empty_1_01) :-
@@ -233,6 +247,18 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		findall(Key-Value, lookup(Key, Value, Dictionary), Pairs),
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+
+	% lookup/2 tests
+
+	test(dictionary_lookup_2_01) :-
+		as_dictionary([], Dictionary),
+		\+ lookup([b-_], Dictionary).
+
+	deterministic(dictionary_lookup_2_02) :-
+		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		lookup([b-B, f-F], Dictionary),
+		^^assertion(b, B == 2),
+		^^assertion(f, F == 6).
 
 	% previous/4 tests
 

@@ -43,9 +43,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'R.A.O''Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura',
-		date is 2019-05-17,
+		date is 2020-03-10,
 		comment is 'AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [bintree, rbtree]
 	]).
@@ -184,6 +184,11 @@
 	lookup_var(Key, Value, t(Key, Value,_,_,_)).
 	lookup_var(Key, Value, t(_,_,_,_,Right)) :-
 		lookup_var(Key, Value, Right).
+
+	lookup([], _).
+	lookup([Key-Value| Pairs], Tree) :-
+		lookup(Key, Value, Tree),
+		lookup(Pairs, Tree).
 
 	min(t(Key,Value,_,t,_), MinKey, MinValue) :-
 		!,
@@ -325,6 +330,14 @@
 		update(Left1, Key, OldValue, NewValue, Left2).
 	update(>, Key1, Value1, Balance1, Left1, Right1, Key, OldValue, NewValue, t(Key1,Value1,Balance1,Left1,Right2)) :-
 		update(Right1, Key, OldValue, NewValue, Right2).
+
+	update(OldTree, Pairs, NewTree) :-
+		update_(Pairs, OldTree, NewTree).
+
+	update_([], NewTree, NewTree).
+	update_([Key-NewValue| Pairs], OldTree, NewTree) :-
+		update(OldTree, Key, _, NewValue, NewTree0),
+		update_(Pairs, NewTree0, NewTree).
 
 	:- meta_predicate(map_(*, 1)).
 	map_(t(Key,Value,_,Left,Right), Closure) :-

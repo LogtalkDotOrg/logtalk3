@@ -28,9 +28,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.',
-		date is 2019-05-17,
+		date is 2020-03-10,
 		comment is 'Red-Black trees. Uses standard order to compare keys.',
 		see_also is [avltree, bintree]
 	]).
@@ -87,6 +87,11 @@
 		lookup_nonvar(Key, Value, NewTree).
 	lookup_nonvar(=, _, Value, Tree) :-
 		arg(3, Tree, Value).
+
+	lookup([], _).
+	lookup([Key-Value| Pairs], Tree) :-
+		lookup(Key, Value, Tree),
+		lookup(Pairs, Tree).
 
 	min(t(_,Tree), Key, Value) :-
 		min_key(Tree, Key, Value).
@@ -187,6 +192,14 @@
 		update(Left, Key, OldValue, Value, NewLeft).
 	update_red(<, red(Left,Key0,Value0,Right), Key, OldValue, Value, red(Left,Key0,Value0,NewRight)) :-
 		update(Right, Key, OldValue, Value, NewRight).
+
+	update(OldTree, Pairs, NewTree) :-
+		update_(Pairs, OldTree, NewTree).
+
+	update_([], NewTree, NewTree).
+	update_([Key-NewValue| Pairs], OldTree, NewTree) :-
+		update(OldTree, Key, _, NewValue, NewTree0),
+		update_(Pairs, NewTree0, NewTree).
 
 	:- meta_predicate(apply_(*, *, 2, *)).
 	%apply_(black('',_,_,''), _, _, _) :- !, fail.

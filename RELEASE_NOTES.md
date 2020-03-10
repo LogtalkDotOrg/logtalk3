@@ -34,6 +34,11 @@ mechanism. See the `logtalk` built-in object API documentation for details.
 message to itself. The practical case is parametric objects where one of more
 parameters are updated by the object predicates.
 
+Library
+-------
+
+* ADDED: Predicates `update/3` and `lookup/2` to the `dictionaries` library.
+
 
 3.36.0 - March 3, 2020
 ======================

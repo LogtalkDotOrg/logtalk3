@@ -21,9 +21,9 @@
 :- protocol(dictionaryp).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2019-05-17,
+		date is 2020-03-10,
 		comment is 'Dictionary protocol.',
 		see_also is [avltree, bintree, rbtree]
 	]).
@@ -84,6 +84,13 @@
 		argnames is ['OldDictionary', 'Key', 'OldValue', 'NewValue', 'NewDictionary']
 	]).
 
+	:- public(update/3).
+	:- mode(update(+dictionary, @list(pair), -dictionary), zero_or_one).
+	:- info(update/3, [
+		comment is 'Updates the key-value pairs in a dictionary, returning the updated dictionary. Fails if it cannot find one of the keys.',
+		argnames is ['OldDictionary', 'Pairs', 'NewDictionary']
+	]).
+
 	:- public(empty/1).
 	:- mode(empty(@dictionary), zero_or_one).
 	:- info(empty/1, [
@@ -97,6 +104,13 @@
 	:- info(lookup/3, [
 		comment is 'Lookups a matching key-value pair from a dictionary.',
 		argnames is ['Key', 'Value', 'Dictionary']
+	]).
+
+	:- public(lookup/2).
+	:- mode(lookup(+list(pair), @dictionary), zero_or_one).
+	:- info(lookup/2, [
+		comment is 'Lookups all matching key-value pairs from a dictionary. Fails if it cannot find one of the keys or if a value for a key does not unify.',
+		argnames is ['Pairs', 'Dictionary']
 	]).
 
 	:- public(previous/4).
