@@ -125,7 +125,7 @@ set this hook object as the default hook:
 
 ::
 
-   :- set_logtalk_flag(hook, print_goal_hook)).
+   :- set_logtalk_flag(hook, print_goal_hook).
 
 Then, edit the entity source code to print selected goals:
 

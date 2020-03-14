@@ -117,7 +117,7 @@ This is helpful for quick debugging. Load the `print_goal_hook.lgt` file and
 use the `print_goal_hook` hook object. For example, we can set this hook
 object as the default hook:
 
-	:- set_logtalk_flag(hook, print_goal_hook)).
+	:- set_logtalk_flag(hook, print_goal_hook).
 
 Then, edit the entity source code to print selected goals:
 
