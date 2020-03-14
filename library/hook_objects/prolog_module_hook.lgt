@@ -30,7 +30,7 @@
 		see_also is [
 			backend_adapter_hook, default_workflow_hook,
 			identity_hook, grammar_rules_hook,
-			write_to_stream_hook(_, _), write_to_stream_hook(_)
+			write_to_stream_hook(_, _), write_to_stream_hook(_), print_goal_hook
 		]
 	]).
 

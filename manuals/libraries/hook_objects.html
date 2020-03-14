@@ -128,7 +128,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-prolog-backend-adapter-file-expansion-rules">Using the Prolog backend adapter file expansion rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restoring-the-default-compiler-expansion-workflow">Restoring the default compiler expansion workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preventing-applying-any-other-user-defined-expansion-rules">Preventing applying any (other) user-defined expansion rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler">Expanding grammar rules into clauses independently of the compiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-expansion-rules-defined-in-a-prolog-module">Using the expansion rules defined in a Prolog module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#outputting-term-expansion-results-to-a-stream">Outputting term-expansion results to a stream</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#printing-entity-predicate-goals-before-or-after-calling-them">Printing entity predicate goals before or after calling them</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
@@ -258,64 +267,84 @@ object:</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>The provided hook objects cover different expansion scenarios as
-follows:</p>
-<ol class="arabic">
-<li><p>Using the Prolog backend adapter file expansion rules when defining a
-custom expansion workflow. This can be accomplished by loading the
-<code class="docutils literal notranslate"><span class="pre">backend_adapter_hook.lgt</span></code> file, which defines a
-<code class="docutils literal notranslate"><span class="pre">backend_adapter_hook</span></code> hook object that can be used as a workflow
-step.</p></li>
-<li><p>Restore the default compiler expansion workflow. In this case, load
-the <code class="docutils literal notranslate"><span class="pre">default_workflow_hook.lgt</span></code> file, which defines a
-<code class="docutils literal notranslate"><span class="pre">default_workflow_hook</span></code> hook object, and use the following <strong>goal</strong>
+follows.</p>
+<div class="section" id="using-the-prolog-backend-adapter-file-expansion-rules">
+<h3>Using the Prolog backend adapter file expansion rules<a class="headerlink" href="#using-the-prolog-backend-adapter-file-expansion-rules" title="Permalink to this headline">¶</a></h3>
+<p>Useful when defining a custom expansion workflow. This can be
+accomplished by loading the <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook.lgt</span></code> file, which
+defines a <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook</span></code> hook object that can be used as a
+workflow step.</p>
+</div>
+<div class="section" id="restoring-the-default-compiler-expansion-workflow">
+<h3>Restoring the default compiler expansion workflow<a class="headerlink" href="#restoring-the-default-compiler-expansion-workflow" title="Permalink to this headline">¶</a></h3>
+<p>In this case, load the <code class="docutils literal notranslate"><span class="pre">default_workflow_hook.lgt</span></code> file, which defines
+a <code class="docutils literal notranslate"><span class="pre">default_workflow_hook</span></code> hook object, and use the following <strong>goal</strong>
 to set the default hook object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(hook, default_workflow_hook).
 </pre></div>
 </div>
-</li>
-<li><p>Prevent applying any (other) user-defined expansion rules when
-compiling a source file. Simply load the <code class="docutils literal notranslate"><span class="pre">identity_hook.lgt</span></code> file,
-which defines the <code class="docutils literal notranslate"><span class="pre">identity_hook</span></code> hook object, whose expansion
-rules simply succeed without changing the terms and goals, and set it
-as the file specific hook object writing as the first term in the
-file the <strong>directive</strong>:</p>
+</div>
+<div class="section" id="preventing-applying-any-other-user-defined-expansion-rules">
+<span id="id1"></span><h3>Preventing applying any (other) user-defined expansion rules<a class="headerlink" href="#preventing-applying-any-other-user-defined-expansion-rules" title="Permalink to this headline">¶</a></h3>
+<p>When compiling a source file, we sometimes want to prevent applying
+expansion rules. This can be accomplished by simply loading the
+<code class="docutils literal notranslate"><span class="pre">identity_hook.lgt</span></code> file, which defines the <code class="docutils literal notranslate"><span class="pre">identity_hook</span></code> hook
+object, whose expansion rules simply succeed without changing the terms
+and goals, and setting it as the file specific hook object writing as
+the first term in the file the <strong>directive</strong>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, identity_hook).
 </pre></div>
 </div>
-</li>
-</ol>
 <p>Note that the compiler will always convert any grammar rules defined in
 the file into clauses. Although this conversion can also be performed as
 an expansion, grammar rules are part of the Logtalk language. If you to
 preserve the grammar rules, use the hook objects described below to
 write them to a stream.</p>
-<ol class="arabic" start="4">
-<li><p>Expand grammar rules into clauses independently of the compiler by
-loading the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook.lgt</span></code> and using the term-expansion
-rules in the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook</span></code> object. For example:</p>
+</div>
+<div class="section" id="expanding-grammar-rules-into-clauses-independently-of-the-compiler">
+<h3>Expanding grammar rules into clauses independently of the compiler<a class="headerlink" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler" title="Permalink to this headline">¶</a></h3>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook.lgt</span></code> and use the term-expansion rules in
+the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook</span></code> object. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> grammar_rules_hook<span class="o">::</span><span class="k">term_expansion</span>((a <span class="o">--&gt;</span> [b],c), <span class="nv">Clause</span>).
 
 <span class="nv">Clause</span> <span class="o">=</span> (a([b|<span class="nv">T</span>], <span class="nv">C</span>) <span class="o">:-</span> c(<span class="nv">T</span>, <span class="nv">C</span>))
 yes
 </pre></div>
 </div>
-</li>
-<li><p>Use the expansion rules defined in a Prolog module (which can be
-<code class="docutils literal notranslate"><span class="pre">user</span></code>) by loading the <code class="docutils literal notranslate"><span class="pre">prolog_module_hook.lgt</span></code>, which defines
-the parametric hook object <code class="docutils literal notranslate"><span class="pre">prolog_module_hook(Module)</span></code>. to use
-this hook object, you need to instantiate the parameter to the name
-of the module. For example:</p>
+</div>
+<div class="section" id="using-the-expansion-rules-defined-in-a-prolog-module">
+<h3>Using the expansion rules defined in a Prolog module<a class="headerlink" href="#using-the-expansion-rules-defined-in-a-prolog-module" title="Permalink to this headline">¶</a></h3>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">prolog_module_hook.lgt</span></code>, which defines the parametric hook
+object <code class="docutils literal notranslate"><span class="pre">prolog_module_hook(Module)</span></code>. To use this hook object, you need
+to instantiate the parameter to the name of the module. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, prolog_module_hook(user)).
 </pre></div>
 </div>
-</li>
-<li><p>Output term-expansion results to a stream by loading the
-<code class="docutils literal notranslate"><span class="pre">write_to_stream_hook.lgt</span></code> file and using the
+</div>
+<div class="section" id="outputting-term-expansion-results-to-a-stream">
+<h3>Outputting term-expansion results to a stream<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream" title="Permalink to this headline">¶</a></h3>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook.lgt</span></code> file and using the
 <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream)</span></code> or
-<code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,</span> <span class="pre">Options)</span></code> hook object. The terms are
-not modified and thus these hook objects may be used at any point in
-an expansion workflow.</p></li>
-</ol>
+<code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,</span> <span class="pre">Options)</span></code> hook object. The terms are not
+modified and thus these hook objects may be used at any point in an
+expansion workflow.</p>
+</div>
+<div class="section" id="printing-entity-predicate-goals-before-or-after-calling-them">
+<h3>Printing entity predicate goals before or after calling them<a class="headerlink" href="#printing-entity-predicate-goals-before-or-after-calling-them" title="Permalink to this headline">¶</a></h3>
+<p>This is helpful for quick debugging. Load the <code class="docutils literal notranslate"><span class="pre">print_goal_hook.lgt</span></code>
+file and use the <code class="docutils literal notranslate"><span class="pre">print_goal_hook</span></code> hook object. For example, we can
+set this hook object as the default hook:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, print_goal_hook)).
+</pre></div>
+</div>
+<p>Then, edit the entity source code to print selected goals:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
+    <span class="o">-</span> bar,   <span class="c">% print goal before calling it</span>
+    <span class="o">+</span> baz,   <span class="c">% print goal after calling it</span>
+    <span class="o">*</span> quux.  <span class="c">% print goal before and after calling it</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 

@@ -650,24 +650,12 @@ Using the term-expansion mechanism for debugging
 Debugging messages only output information by default. These messages can,
 however, be intercepted to perform other actions. An alternative is to use
 instead the :ref:`term-expansion mechanism <expansion_expansion>` for
-conditional compilation of debugging goals. For example, assuming a
-``debug/1`` predicate is used to wrap debug goals, we can define a hook
-object containing the following definition for ``goal_expansion/2``:
-
-::
-
-   goal_expansion(debug(Goal), Goal).
-
-When not debugging, we can use a second hook object to discard the
-``debug/1`` calls by defining the predicate ``goal_expansion/2`` as
-follows:
-
-::
-
-   goal_expansion(debug(_), true).
-
-The Logtalk compiler automatically removes any redundant calls to the
-built-in predicate ``true/0`` when compiling entity predicates.
+conditional compilation of debugging goals. For example, the
+:doc:`../libraries/hook_objects` library provides a ``print_goal_hook`` hook
+object that simplifies printing entity goals before or after calling them by
+simply prefixing them with an operator. See the library and hook object
+documentation for details. You can also define your own specialized hook
+objects for custom debugging tasks.
 
 .. _debugging_ports_profiling:
 

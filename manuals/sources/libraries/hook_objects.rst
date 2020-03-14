@@ -40,33 +40,42 @@ Usage
 -----
 
 The provided hook objects cover different expansion scenarios as
-follows:
+follows.
 
-1. Using the Prolog backend adapter file expansion rules when defining a
-   custom expansion workflow. This can be accomplished by loading the
-   ``backend_adapter_hook.lgt`` file, which defines a
-   ``backend_adapter_hook`` hook object that can be used as a workflow
-   step.
+Using the Prolog backend adapter file expansion rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Restore the default compiler expansion workflow. In this case, load
-   the ``default_workflow_hook.lgt`` file, which defines a
-   ``default_workflow_hook`` hook object, and use the following **goal**
-   to set the default hook object:
+Useful when defining a custom expansion workflow. This can be
+accomplished by loading the ``backend_adapter_hook.lgt`` file, which
+defines a ``backend_adapter_hook`` hook object that can be used as a
+workflow step.
 
-   ::
+Restoring the default compiler expansion workflow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-       | ?- set_logtalk_flag(hook, default_workflow_hook).
+In this case, load the ``default_workflow_hook.lgt`` file, which defines
+a ``default_workflow_hook`` hook object, and use the following **goal**
+to set the default hook object:
 
-3. Prevent applying any (other) user-defined expansion rules when
-   compiling a source file. Simply load the ``identity_hook.lgt`` file,
-   which defines the ``identity_hook`` hook object, whose expansion
-   rules simply succeed without changing the terms and goals, and set it
-   as the file specific hook object writing as the first term in the
-   file the **directive**:
+::
 
-   ::
+   | ?- set_logtalk_flag(hook, default_workflow_hook).
 
-       :- set_logtalk_flag(hook, identity_hook).
+.. _preventing-applying-any-(other)-user-defined-expansion-rules:
+
+Preventing applying any (other) user-defined expansion rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When compiling a source file, we sometimes want to prevent applying
+expansion rules. This can be accomplished by simply loading the
+``identity_hook.lgt`` file, which defines the ``identity_hook`` hook
+object, whose expansion rules simply succeed without changing the terms
+and goals, and setting it as the file specific hook object writing as
+the first term in the file the **directive**:
+
+::
+
+   :- set_logtalk_flag(hook, identity_hook).
 
 Note that the compiler will always convert any grammar rules defined in
 the file into clauses. Although this conversion can also be performed as
@@ -74,30 +83,56 @@ an expansion, grammar rules are part of the Logtalk language. If you to
 preserve the grammar rules, use the hook objects described below to
 write them to a stream.
 
-4. Expand grammar rules into clauses independently of the compiler by
-   loading the ``grammar_rules_hook.lgt`` and using the term-expansion
-   rules in the ``grammar_rules_hook`` object. For example:
+Expanding grammar rules into clauses independently of the compiler
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   ::
+Load the ``grammar_rules_hook.lgt`` and use the term-expansion rules in
+the ``grammar_rules_hook`` object. For example:
 
-       | ?- grammar_rules_hook::term_expansion((a --> [b],c), Clause).
-       
-       Clause = (a([b|T], C) :- c(T, C))
-       yes
+::
 
-5. Use the expansion rules defined in a Prolog module (which can be
-   ``user``) by loading the ``prolog_module_hook.lgt``, which defines
-   the parametric hook object ``prolog_module_hook(Module)``. to use
-   this hook object, you need to instantiate the parameter to the name
-   of the module. For example:
+   | ?- grammar_rules_hook::term_expansion((a --> [b],c), Clause).
 
-   ::
+   Clause = (a([b|T], C) :- c(T, C))
+   yes
 
-       :- set_logtalk_flag(hook, prolog_module_hook(user)).
+Using the expansion rules defined in a Prolog module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Output term-expansion results to a stream by loading the
-   ``write_to_stream_hook.lgt`` file and using the
-   ``write_to_stream_hook(Stream)`` or
-   ``write_to_stream_hook(Stream, Options)`` hook object. The terms are
-   not modified and thus these hook objects may be used at any point in
-   an expansion workflow.
+Load the ``prolog_module_hook.lgt``, which defines the parametric hook
+object ``prolog_module_hook(Module)``. To use this hook object, you need
+to instantiate the parameter to the name of the module. For example:
+
+::
+
+   :- set_logtalk_flag(hook, prolog_module_hook(user)).
+
+Outputting term-expansion results to a stream
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Load the ``write_to_stream_hook.lgt`` file and using the
+``write_to_stream_hook(Stream)`` or
+``write_to_stream_hook(Stream, Options)`` hook object. The terms are not
+modified and thus these hook objects may be used at any point in an
+expansion workflow.
+
+Printing entity predicate goals before or after calling them
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is helpful for quick debugging. Load the ``print_goal_hook.lgt``
+file and use the ``print_goal_hook`` hook object. For example, we can
+set this hook object as the default hook:
+
+::
+
+   :- set_logtalk_flag(hook, print_goal_hook)).
+
+Then, edit the entity source code to print selected goals:
+
+::
+
+   foo :-
+       - bar,   % print goal before calling it
+       + baz,   % print goal after calling it
+       * quux.  % print goal before and after calling it
+

@@ -34,10 +34,18 @@ mechanism. See the `logtalk` built-in object API documentation for details.
 message to itself. The practical case is parametric objects where one of more
 parameters are updated by the object predicates.
 
+Documentation
+-------------
+
+* UPDATED: Handbook section on debugging using the term-expansion mechanism.
+
 Library
 -------
 
 * ADDED: Predicates `update/3` and `lookup/2` to the `dictionaries` library.
+
+* ADDED: New hook object `print_goal_hook` to the `hook_objects` library to
+print entity predicate goals before, after, or before and after calling them.
 
 
 3.36.0 - March 3, 2020

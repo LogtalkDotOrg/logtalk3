@@ -29,7 +29,7 @@
 		see_also is [
 			backend_adapter_hook, identity_hook,
 			grammar_rules_hook, prolog_module_hook(_),
-			write_to_stream_hook(_, _), write_to_stream_hook(_)
+			write_to_stream_hook(_, _), write_to_stream_hook(_), print_goal_hook
 		]
 	]).
 

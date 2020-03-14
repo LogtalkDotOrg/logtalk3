@@ -25,7 +25,8 @@
 		identity_hook,
 		grammar_rules_hook,
 		prolog_module_hook,
-		write_to_stream_hook
+		write_to_stream_hook,
+		print_goal_hook
 	], [
 		optimize(on)
 	])
