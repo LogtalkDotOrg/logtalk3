@@ -19,6 +19,7 @@
 
 
 :- initialization((
+	set_logtalk_flag(events, allow),
 	set_logtalk_flag(report, warnings),
 	logtalk_load(bank, [complements(allow), source_data(on), debug(on)]),
 	logtalk_load([accounts, security, logging], [source_data(on), debug(on)]),
