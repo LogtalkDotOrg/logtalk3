@@ -71,6 +71,9 @@ Follows a short description of each included example (in alphabetical order):
 	example of defining a complementing category that uses the
 	experimental `@/1` goal annotation to define an "around method"
 
+- `aspects`  
+	example of defining aspects (as in Aspect-Oriented Programming)
+
 - `assign_parameters`  
 	example of using assignable variables in the context of parametric
 	objects in order to represent object state

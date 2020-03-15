@@ -47,6 +47,12 @@ Library
 * ADDED: New hook object `print_goal_hook` to the `hook_objects` library to
 print entity predicate goals before, after, or before and after calling them.
 
+Examples
+--------
+
+* ADDED: Simple example, `aspects`, of Aspect-Oriented Programming using hot
+patching and event-driven programming support.
+
 
 3.36.0 - March 3, 2020
 ======================
