@@ -31,5 +31,9 @@ The following entities are defined:
 
 - `bank` (object defining a bank with a transfer predicate)
 - `accounts` (defining balance, withdraw, and deposit predicates)
-- `security` (category limiting maximum amount of transfers)
-- `logging` (object logging transfers)
+- `security` (hot patching category limiting maximum amount per transfer)
+- `logging` (event monitor object logging transfers)
+
+Note that we could also have defined `security` as a monitor object with a
+`before/3` event handle that would make a transfer fail when the maximum
+amount is exceeded.
