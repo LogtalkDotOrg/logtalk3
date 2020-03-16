@@ -45,6 +45,9 @@ Documentation
 
 * UPDATED: Handbook section on debugging using the term-expansion mechanism.
 
+* FIXED: Typo in Handbook section on the parametric objects in the description
+of the built-in method `this/1`. Thanks to David Tonhofer for the bug report.
+
 Library
 -------
 

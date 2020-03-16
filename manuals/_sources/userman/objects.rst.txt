@@ -313,7 +313,7 @@ An alternative solution is to use the built-in local method
 
        ...
        baz :-
-           this(Name(_, Baz, ...)),
+           this(foo(_, Baz, ...)),
            baz(Baz),
            ... .
 
