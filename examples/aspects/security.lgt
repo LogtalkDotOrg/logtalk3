@@ -21,7 +21,8 @@
 :- category(security,
 	complements(bank)).
 
-	% only authorize transfers up to 200
+	% only authorize transfers up to 200 by patching the
+	% "bank" object definition of the transfer/3 predicate
 	transfer(From, To, Amount) :-
 		(	Amount =< 200 ->
 			% call original predicate definition

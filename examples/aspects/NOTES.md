@@ -36,4 +36,7 @@ The following entities are defined:
 
 Note that we could also have defined `security` as a monitor object with a
 `before/3` event handle that would make a transfer fail when the maximum
-amount is exceeded.
+amount is exceeded. The downside of this alternative is that we should not
+rely in the calling order of event handlers and thus the check could be
+applied before or after the logging message that a transfer is being
+attempted.

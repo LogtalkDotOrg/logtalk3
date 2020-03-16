@@ -19,7 +19,8 @@
 
 
 :- initialization((
-	% generate events for all public messages
+	% generate events for all messages; in actual applications, events are
+	% enabled only for selected objects (senders) to maximize performance
 	set_logtalk_flag(events, allow),
 	% allow the bank object to be patched
 	logtalk_load(bank, [complements(allow)]),

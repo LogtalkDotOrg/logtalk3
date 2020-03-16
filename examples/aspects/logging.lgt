@@ -21,7 +21,7 @@
 :- object(logging,
 	implements(monitoring)).
 
-	% watch all bank::transfer/3 messages
+	% watch all "before" and "after" events for bank::transfer/3 messages
 	:- initialization(define_events(_, bank, transfer(_,_,_), _, logging)).
 
 	% print logging messages for all transfers
