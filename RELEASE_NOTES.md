@@ -34,6 +34,12 @@ mechanism. See the `logtalk` built-in object API documentation for details.
 message to itself. The practical case is parametric objects where one of more
 parameters are updated by the object predicates.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The SWI-Prolog and YAP files to support expanding `reexport/1`
+directives when the argument is a list of files.
+
 Documentation
 -------------
 

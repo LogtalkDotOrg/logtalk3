@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on January 21, 2020
+%  Last updated on March 16, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -639,6 +639,13 @@
 '$lgt_yap_directive_expansion'(module(Module,Exports0), [(:- module(Module,Exports))| Clauses]) :-
 	'$lgt_yap_split_predicate_aliases'(Exports0, Exports, Clauses).
 
+'$lgt_yap_directive_expansion'(reexport([]), []) :-
+	!.
+'$lgt_yap_directive_expansion'(reexport([File| Files]), [(:- use_module(Module, Exports)), (:- export(Exports))| Terms]) :-
+	!,
+	'$lgt_yap_list_of_exports'(File, Module, Exports0),
+	'$lgt_yap_fix_predicate_aliases'(Exports0, Exports),
+	'$lgt_yap_directive_expansion'(reexport(Files), Terms).
 '$lgt_yap_directive_expansion'(reexport(File), [(:- use_module(Module, Exports)), (:- export(Exports))]) :-
 	'$lgt_yap_list_of_exports'(File, Module, Exports0),
 	'$lgt_yap_fix_predicate_aliases'(Exports0, Exports).
