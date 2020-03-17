@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on March 16, 2020
+%  Last updated on March 17, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -860,6 +860,7 @@
 	!.
 
 '$lgt_swi_read_module_directive'(Stream, Module, Exports) :-
+	% fragile hack as it ignores predicates exported via reexport/1-2 directives
 	read(Stream, FirstTerm),
 	(	FirstTerm  = (:- module(Module, Exports)) ->
 		true

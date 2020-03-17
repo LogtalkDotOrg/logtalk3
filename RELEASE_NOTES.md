@@ -37,6 +37,9 @@ parameters are updated by the object predicates.
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: YAP adapter file expansion of `use_module/1-2` and `reexport/1-2`
+directives.
+
 * UPDATED: The SWI-Prolog and YAP files to support expanding `reexport/1`
 directives when the argument is a list of files.
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on March 16, 2020
+%  Last updated on March 17, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -718,6 +718,22 @@
 
 
 '$lgt_yap_list_of_exports'(File, Module, Exports) :-
+	(	logtalk_load_context(directory, Directory)
+	;	logtalk_load_context(file, IncludeFile),
+		file_directory_name(IncludeFile, Directory)
+	),
+	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail), relative_to(Directory)]),
+	(	module_property(Module, file(Path)),
+		% only succeeds for loaded modules
+		module_property(Module, exports(Exports)) ->
+		true
+	;	object_property(Module, file(Path)),
+		object_property(Module, module),
+		% module compiled as an object
+		object_property(Module, public(Exports))
+	),
+	!.
+'$lgt_yap_list_of_exports'(File, Module, Exports) :-
 	(	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail)]),
 		file_property(Path, type(regular))
 	;	% we may be compiling Prolog module files as Logtalk objects
@@ -738,6 +754,7 @@
 	).
 
 '$lgt_yap_read_module_directive'(Stream, Module, Exports) :-
+	% fragile hack as it ignores predicates exported via reexport/1-2 directives
 	read(Stream, FirstTerm),
 	(	FirstTerm  = (:- module(Module, Exports)) ->
 		true
