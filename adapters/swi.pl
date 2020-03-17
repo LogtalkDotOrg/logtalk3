@@ -827,8 +827,9 @@
 	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail), relative_to(Directory)]),
 	(	module_property(Module, file(Path)),
 		% only succeeds for loaded modules
-		module_property(Module, exports(Exports)) ->
-		true
+		module_property(Module, exports(Predicates)) ->
+		module_property(Module, exported_operators(Operators)),
+		'$lgt_append'(Predicates, Operators, Exports)
 	;	object_property(Module, file(Path)),
 		object_property(Module, module),
 		% module compiled as an object

@@ -31,7 +31,7 @@ Logtalk compiler and runtime
 mechanism. See the `logtalk` built-in object API documentation for details.
 
 * ADDED: Compiler optimization for the special case where an object sends a
-message to itself. The practical case is parametric objects where one of more
+message to itself. The practical case is a parametric object where one of more
 parameters are updated by the object predicates.
 
 Prolog adapter and integration files
@@ -42,6 +42,9 @@ directives.
 
 * UPDATED: The SWI-Prolog and YAP files to support expanding `reexport/1`
 directives when the argument is a list of files.
+
+* FIXED: SWI-Prolog adapter file expansion of `use_module/1-2` and
+`reexport/1-2` directives to include exported operators.
 
 Documentation
 -------------
