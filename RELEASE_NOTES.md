@@ -62,6 +62,12 @@ Library
 * ADDED: New hook object `print_goal_hook` to the `hook_objects` library to
 print entity predicate goals before, after, or before and after calling them.
 
+Tools
+-----
+
+* FIXED: The `diagrams` tool generation of module diagrams when using
+SWI-Prolog as the backend compiler to include exported operators.
+
 Examples
 --------
 

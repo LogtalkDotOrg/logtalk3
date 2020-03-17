@@ -21,9 +21,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0:19:0,
+		version is 0:19:1,
 		author is 'Paulo Moura',
-		date is 2019-09-23,
+		date is 2020-03-17,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -153,13 +153,17 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
+		{:- use_module(library(lists))}.
 		{:- use_module(library(prolog_xref))}.
 
 		module_property(Module, Property) :-
 			property_module(Property, Module).
 
 		property_module(exports(Exports), Module) :-
-			{module_property(Module, exports(Exports))}.
+			{module_property(Module, exports(Predicates)),
+			 module_property(Module, exported_operators(Operators)),
+			 append(Predicates, Operators, Exports)
+			}.
 		property_module(declares(Functor/Arity, Properties), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
