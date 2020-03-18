@@ -33,7 +33,8 @@ After installing Logtalk and setting the LOGTALKHOME and LOGTALKUSER
 environment variables, open Eclipse preferences, select PDT runtime
 preferences, and enter the following configuration data for the SWI-Prolog
 executable and for the extra environment variables (change the paths to
-match your SWI-Prolog and Logtalk installations and your home directory):
+match your SWI-Prolog and Logtalk installations and your home directory;
+also, restart Eclipse after entering and saving the configuration data):
 
 macOS
 
