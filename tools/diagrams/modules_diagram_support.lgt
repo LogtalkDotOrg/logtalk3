@@ -21,9 +21,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0:19:1,
+		version is 0:19:2,
 		author is 'Paulo Moura',
-		date is 2020-03-17,
+		date is 2020-03-18,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -161,8 +161,11 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Predicates)),
-			 module_property(Module, exported_operators(Operators)),
-			 append(Predicates, Operators, Exports)
+			 (	module_property(Module, exported_operators(Operators)) ->
+			 	% this property fails instead of returning the empty list!
+			 	append(Predicates, Operators, Exports)
+			 ;	Exports = Predicates
+			 )
 			}.
 		property_module(declares(Functor/Arity, Properties), Module) :-
 			{module_property(Module, file(File)),

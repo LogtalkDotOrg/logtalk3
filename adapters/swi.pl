@@ -832,8 +832,11 @@
 	(	module_property(Module, file(Path)),
 		% only succeeds for loaded modules
 		module_property(Module, exports(Predicates)) ->
-		module_property(Module, exported_operators(Operators)),
-		'$lgt_append'(Predicates, Operators, Exports)
+		(	module_property(Module, exported_operators(Operators)) ->
+			% this property fails instead of returning the empty list!
+			'$lgt_append'(Predicates, Operators, Exports)
+		;	Exports = Predicates
+		)
 	;	object_property(Module, file(Path)),
 		object_property(Module, module),
 		% module compiled as an object
