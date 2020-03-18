@@ -37,6 +37,9 @@ parameters are updated by the object predicates.
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: The SWI-Prolog adapter file now deletes tests when compiling a
+module as an object to avoid compilation errors.
+
 * IMPROVED: YAP adapter file expansion of `use_module/1-2` and `reexport/1-2`
 directives.
 
