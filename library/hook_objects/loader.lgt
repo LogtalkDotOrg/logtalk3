@@ -19,12 +19,14 @@
 
 
 :- initialization((
+	logtalk_load(os(loader)),
 	logtalk_load([
 		backend_adapter_hook,
 		default_workflow_hook,
 		identity_hook,
 		grammar_rules_hook,
 		prolog_module_hook,
+		object_wrapper_hook,
 		write_to_stream_hook,
 		print_goal_hook
 	], [

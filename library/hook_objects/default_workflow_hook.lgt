@@ -28,7 +28,7 @@
 		comment is 'Use this object as the default hook object to restore the default expansion pipeline semantics used by the compiler.',
 		see_also is [
 			backend_adapter_hook, identity_hook,
-			grammar_rules_hook, prolog_module_hook(_),
+			grammar_rules_hook, prolog_module_hook(_), object_wrapper_hook,
 			write_to_stream_hook(_, _), write_to_stream_hook(_), print_goal_hook
 		]
 	]).

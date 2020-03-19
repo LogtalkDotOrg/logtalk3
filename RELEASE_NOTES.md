@@ -65,6 +65,10 @@ Library
 * ADDED: New hook object `print_goal_hook` to the `hook_objects` library to
 print entity predicate goals before, after, or before and after calling them.
 
+* ADDED: New hook object `object_wrapper_hook` to the `hook_objects` library
+to wrap the contents of a plain Prolog file as an object named after the file.
+Can be used to apply Logtalk developer tools to plain Prolog code.
+
 Tools
 -----
 

@@ -281,6 +281,7 @@ To load an entity, always load the library that includes it using the goal ``log
    default_workflow_hook <default_workflow_hook_0>
    grammar_rules_hook <grammar_rules_hook_0>
    identity_hook <identity_hook_0>
+   object_wrapper_hook <object_wrapper_hook_0>
    print_goal_hook <print_goal_hook_0>
    prolog_module_hook(Module) <prolog_module_hook_1>
    write_to_stream_hook(Stream) <write_to_stream_hook_1>

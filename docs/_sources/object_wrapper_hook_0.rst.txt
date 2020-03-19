@@ -1,0 +1,59 @@
+.. index:: object_wrapper_hook
+.. _object_wrapper_hook/0:
+
+.. rst-class:: right
+
+**object**
+
+``object_wrapper_hook``
+=======================
+
+Use this object to wrap the contents of a plain prolog file as an object named after the file.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-03-19
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+| **Uses:**
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`grammar_rules_hook <grammar_rules_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`, :ref:`write_to_stream_hook(Stream,Options) <write_to_stream_hook/2>`, :ref:`write_to_stream_hook(Stream) <write_to_stream_hook/1>`, :ref:`print_goal_hook <print_goal_hook/0>`
+

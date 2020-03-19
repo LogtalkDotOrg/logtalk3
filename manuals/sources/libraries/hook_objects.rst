@@ -107,6 +107,23 @@ to instantiate the parameter to the name of the module. For example:
 
    :- set_logtalk_flag(hook, prolog_module_hook(user)).
 
+Wrap the contents of a plain Prolog file as an object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Load the ``object_wrapper_hook.lgt``, which defines the parametric hook
+object ``object_wrapper_hook``. Use it to wrap the contents of a plain
+Prolog file as an object named after the file. Can be used to apply
+Logtalk developer tools to plain Prolog code or when porting Prolog
+application to Logtalk. For example:
+
+::
+
+   | ?- logtalk_load('plain.pl', [hook(object_wrapper_hook)]).
+   ...
+
+   | ?- current_object(plain).
+   yes
+
 Outputting term-expansion results to a stream
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

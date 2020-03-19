@@ -134,6 +134,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#preventing-applying-any-other-user-defined-expansion-rules">Preventing applying any (other) user-defined expansion rules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler">Expanding grammar rules into clauses independently of the compiler</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-the-expansion-rules-defined-in-a-prolog-module">Using the expansion rules defined in a Prolog module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object">Wrap the contents of a plain Prolog file as an object</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#outputting-term-expansion-results-to-a-stream">Outputting term-expansion results to a stream</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#printing-entity-predicate-goals-before-or-after-calling-them">Printing entity predicate goals before or after calling them</a></li>
 </ul>
@@ -318,6 +319,21 @@ yes
 object <code class="docutils literal notranslate"><span class="pre">prolog_module_hook(Module)</span></code>. To use this hook object, you need
 to instantiate the parameter to the name of the module. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, prolog_module_hook(user)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="wrap-the-contents-of-a-plain-prolog-file-as-an-object">
+<h3>Wrap the contents of a plain Prolog file as an object<a class="headerlink" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object" title="Permalink to this headline">¶</a></h3>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook.lgt</span></code>, which defines the parametric hook
+object <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code>. Use it to wrap the contents of a plain
+Prolog file as an object named after the file. Can be used to apply
+Logtalk developer tools to plain Prolog code or when porting Prolog
+application to Logtalk. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;plain.pl&#39;</span>, [hook(object_wrapper_hook)]).
+...
+
+| <span class="o">?-</span> <span class="k">current_object</span>(plain).
+yes
 </pre></div>
 </div>
 </div>
