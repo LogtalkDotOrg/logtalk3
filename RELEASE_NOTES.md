@@ -68,6 +68,9 @@ print entity predicate goals before, after, or before and after calling them.
 Tools
 -----
 
+* IMPROVED: The `lgtunit` tool automation support now prints the test object
+identifier when listing failed and skipped tests after the test name.
+
 * FIXED: The `diagrams` tool generation of module diagrams when using
 SWI-Prolog as the backend compiler to include exported operators.
 
