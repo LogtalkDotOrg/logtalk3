@@ -69,3 +69,7 @@ until one of them succeeds.
 
 Note that these two basic hook flows can be freely combined and also used as
 examples of how to construct custom hook flows.
+
+When using a backend Prolog compiler that supports modules, it's also possible
+to use as parameter a list of hook modules as long as their names do not
+coincide with the names of loaded objects.
