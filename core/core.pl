@@ -8220,7 +8220,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	op(Priority, Specifier, Operator),
 	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, File, Lines)),
 	'$lgt_pp_entity_'(_, Entity, _),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope)))).
+	% save entity operator property
+	(	'$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, p(p(p))))) ->
+		% handle the case where there is already a public declaration for the operator
+		true
+	;	'$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope))) ->
+		% duplicated operator declarations may originate from e.g. included files
+		% or when compiling modules (as objects) that reexport other modules
+		true
+	;	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope))))
+	).
 
 
 
