@@ -41,6 +41,13 @@ reexport other modules.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: The SWI-Prolog adapter file to only load generated intermediate
+Prolog files with the `derived_from/1` property when the Prolog flag
+`logtalk_source_location_data` is true.
+
+* CHANGED: The SWI-Prolog hooks file to call `logtalk_make/0` from `make/0`
+when the Prolog flag `logtalk_source_location_data` is false.
+
 * IMPROVED: The SWI-Prolog adapter file now deletes tests when compiling a
 module as an object to avoid compilation errors.
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on March 19, 2020
+%  Last updated on March 22, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -504,6 +504,13 @@
 % Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, Source, Options) :-
+	% only record the "derived from" information between the Logtalk
+	% source file and the generated intermediate Prolog file when
+	% integrating with the SWI-Prolog developer tools
+	(	current_prolog_flag(logtalk_source_location_data, true) ->
+		LoadOptions = [derived_from(Source)| Options]
+	;	LoadOptions = Options
+	),
 	% remove the Prolog file name extension in order to support generating
 	% and loading of .qlf files when using the qcompile/1 option
 	file_name_extension(Path, _, File),
@@ -514,10 +521,10 @@
 		% SWI-Prolog 6.5.0
 		setup_call_cleanup(
 			style_check('-'(singleton)),
-			load_files(Path, [derived_from(Source)| Options]),
+			load_files(Path, LoadOptions),
 			style_check('+'(singleton))
 		)
-	;	load_files(Path, [derived_from(Source)| Options])
+	;	load_files(Path, LoadOptions)
 	).
 
 

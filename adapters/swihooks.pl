@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on January 28, 2020
+%  Last updated on March 22, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -23,6 +23,17 @@
 %  limitations under the License.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- multifile(prolog:make_hook/2).
+
+prolog:make_hook(after, _) :-
+	% this explicit integration with make/0 is only necessary
+	% when the logtalk_source_location_data flag is false;
+	% when the flag is true, the integration is handled via
+	% the derived_from/1 option added to loaded files
+	current_prolog_flag(logtalk_source_location_data, false),
+	logtalk_make.
 
 
 :- multifile(user:prolog_load_file/2).
