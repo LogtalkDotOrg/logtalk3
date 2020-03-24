@@ -63,6 +63,8 @@ directives when the argument is a list of files.
 Documentation
 -------------
 
+* IMPROVED: Handbook section on term-expansion.
+
 * UPDATED: Handbook section on debugging using the term-expansion mechanism.
 
 * FIXED: Typo in Handbook section on the parametric objects in the description

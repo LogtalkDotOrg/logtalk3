@@ -33,9 +33,8 @@ predicate options. It defines a concept of *hook objects* that can be used
 as building blocks to create custom and reusable *expansion workflows* with
 explicit and well defined semantics. It prevents the simply act of loading
 expansion rules affecting subsequent compilation of files. It prevents
-conflicts between groups of expansion rules of different origins. It
-avoids a group of buggy expansion rules from breaking other groups of
-expansions rules.
+conflicts between groups of expansion rules of different origins. It avoids
+a set of buggy expansion rules from breaking other sets of expansions rules.
 
 
 Defining expansions
@@ -44,7 +43,13 @@ Defining expansions
 Term and goal expansions are defined using, respectively, the predicates
 :ref:`methods_term_expansion_2` and :ref:`methods_goal_expansion_2`, which
 are declared in the :ref:`expanding <apis:expanding/0>` built-in protocol.
-For example:
+Note that, unlike Prolog systems also providing these two predicates, they
+are **not** declared as :term:`multifile predicates <multifile predicate>`
+in the protocol. This design decision is key to give the programmer full
+control of the expansion process and prevent the problems that inflict most
+Prolog system providing a term-expansion mechanism.
+
+An example of an object defining expansion rules:
 
 ::
 
@@ -306,17 +311,21 @@ User defined expansion workflows
 Sometimes we have multiple hook objects that we need to use in the compilation
 of a source file. Logtalk includes a :doc:`../libraries/hook_flows` library
 that supports two basic expansion workflows: a :ref:`pipeline <apis:hook_pipeline/1>`
-of hook objects, where the expansion results from a hook object are feed to the next
-hook object in the pipeline, and a :ref:`set <apis:hook_set/1>` of hook objects,
-where expansions are tried until one of them succeeds. These workflows are
-implemented as parametric objects allowing combining them to implement more
-sophisticated expansion workflows. There is also a :doc:`../libraries/hook_objects`
-library that provides convenient hook objects for defining custom expansion workflows.
+of hook objects, where the expansion results from a hook object are feed to
+the next hook object in the pipeline, and a :ref:`set <apis:hook_set/1>` of
+hook objects, where expansions are tried until one of them succeeds. These
+workflows are implemented as parametric objects allowing combining them to
+implement more sophisticated expansion workflows. There is also a
+:doc:`../libraries/hook_objects` library that provides convenient hook
+objects for defining custom expansion workflows. This library includes an
+hook object that can be used to restore the default expansion workflow used
+by the compiler.
 
-For example, assuming that you want to apply the Prolog backend specific expansion
-rules defined in its adapter file, using the :ref:`backend_adapter_hook <apis:backend_adapter_hook/0>`
-library object, passing the resulting terms to your own expansion when compiling a
-source file, we could use the goal:
+For example, assuming that you want to apply the Prolog backend specific
+expansion rules defined in its adapter file, using the
+:ref:`backend_adapter_hook <apis:backend_adapter_hook/0>` library object,
+passing the resulting terms to your own expansion when compiling a source
+file, we could use the goal:
 
 .. code-block:: text
 
