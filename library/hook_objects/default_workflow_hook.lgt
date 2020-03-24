@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2020-02-14,
+		date is 2020-03-24,
 		comment is 'Use this object as the default hook object to restore the default expansion pipeline semantics used by the compiler.',
 		see_also is [
 			backend_adapter_hook, identity_hook,
@@ -33,14 +33,9 @@
 		]
 	]).
 
-	% define the expansion predicates to trivially fail to try first
-	% any defined file specific hook object followed, if that fails,
-	% the backend adapter file expansion rules
-
-	term_expansion(_, _) :-
-		fail.
-
-	goal_expansion(_, _) :-
-		fail.
+	% by not defining the expansion predicates, these trivially fail;
+	% therefore, the compiler will try first any defined file specific
+	% hook object followed, if that fails, by the backend adapter file
+	% expansion rules
 
 :- end_object.
