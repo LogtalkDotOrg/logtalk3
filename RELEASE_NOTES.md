@@ -65,6 +65,8 @@ Documentation
 
 * IMPROVED: Handbook section on term-expansion.
 
+* IMPROVED: Handbook glossary definition of steadfastness.
+
 * UPDATED: Handbook section on debugging using the term-expansion mechanism.
 
 * FIXED: Typo in Handbook section on the parametric objects in the description

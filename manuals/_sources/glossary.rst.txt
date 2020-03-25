@@ -569,6 +569,7 @@ Glossary
 
    steadfastness
       A predicate definition is *steadfast* when it still generates only
-      correct answers when called with unexpected arguments. Typically,
-      a predicate may not be steadfast when output argument unifications
-      can occur before a cut in a predicate clause.
+      correct answers when called with unexpected arguments (notably,
+      bound output arguments). Typically, a predicate may not be steadfast
+      when output argument unifications can occur before a cut in a predicate
+      clause.
