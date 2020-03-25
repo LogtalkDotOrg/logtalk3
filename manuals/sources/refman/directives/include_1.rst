@@ -44,7 +44,8 @@ This directive can be used as either a source file directive or an
 entity directive. As an entity directive, it can be used both in
 entities defined in source files and with the entity creation built-in
 predicates. In the latter case, the file should be specified using an
-absolute path or using library notation (which expands to a full path).
+absolute path or using library notation (which expands to a full path)
+to avoid a fragile dependency on the current working directory.
 
 Included files may contain an :ref:`directives_encoding_1` directive, which
 may specify the same encoding of the main file or a different encoding.
@@ -74,12 +75,13 @@ Examples
    % on the "data" library directory:
    :- include(data('raw_1.txt')).
 
-   % include a "factbase.pl" file in the
-   % current directory:
+   % include a "factbase.pl" file in the same directory
+   % of the source file containing the directive:
    :- include('factbase.pl').
 
    % include a file given its absolute path:
    :- include('/home/me/databases/countries.pl').
 
-   % create a wrapper object for a Prolog file:
-   | ?- create_object(cities, [], [public(city/4), include('cities.pl')], []).
+   % create a wrapper object for a Prolog file using
+   % library notation to define the file path:
+   | ?- create_object(cities, [], [public(city/4), include(geo('cities.pl'))], []).
