@@ -21,9 +21,9 @@
 :- protocol(queuep).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2019-05-23,
+		date is 2020-03-25,
 		comment is 'Queue protocol.',
 		see_also is [queue]
 	]).
@@ -38,7 +38,7 @@
 	:- public(head/2).
 	:- mode(head(+queue, ?term), zero_or_one).
 	:- info(head/2, [
-		comment is 'Unifies Head with the first element of the queue.',
+		comment is 'Unifies ``Head`` with the first element of the queue.',
 		argnames is ['Queue', 'Head']
 	]).
 
@@ -52,7 +52,7 @@
 	:- public(join_all/3).
 	:- mode(join_all(+list, +queue, -queue), zero_or_one).
 	:- info(join_all/3, [
-		comment is 'Adds the new elements at the end of the queue.  The elements are added in the same order that they appear in the list.',
+		comment is 'Adds the new elements at the end of the queue. The elements are added in the same order that they appear in the list.',
 		argnames is ['List', 'Queue', 'NewQueue']
 	]).
 
@@ -66,7 +66,7 @@
 	:- public(jump_all/3).
 	:- mode(jump_all(+list, +queue, -queue), zero_or_one).
 	:- info(jump_all/3, [
-		comment is 'Adds the new elements at the front of the queue.  The elements are added in the same order that they appear in the list.',
+		comment is 'Adds the new elements at the front of the queue. The elements are added in the same order that they appear in the list.',
 		argnames is ['Elements', 'Queue', 'NewQueue']
 	]).
 

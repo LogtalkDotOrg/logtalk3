@@ -287,7 +287,9 @@ Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
 .. note::
 
    When a source file also contains plain Prolog directives and predicates,
-   these are term-expanded but not goal-expanded.
+   these are term-expanded but not goal-expanded (with the exception of
+   ``initialization/1`` directives, where the goal argument is expanded to
+   improve code portability across backends).
 
 
 Default compiler expansion workflow
