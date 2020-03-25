@@ -11,11 +11,11 @@
 * ``Format`` - Graph language file format
 
 
-Predicates for generating entity diagrams with only uses and use_module relation edges.
+Predicates for generating entity diagrams with only ``uses/2`` and ``use_module/2`` relation edges.
 
 | **Author:** Paulo Moura
-| **Version:** 2:18:0
-| **Date:** 2019-06-13
+| **Version:** 2:18:1
+| **Date:** 2020-03-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

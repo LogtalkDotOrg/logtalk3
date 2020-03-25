@@ -21,9 +21,9 @@
 :- object(graph_language_registry).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2014-08-18,
+		date is 2020-03-25,
 		comment is 'Registry of implemented graph languages.'
 	]).
 
@@ -35,7 +35,7 @@
 	:- mode(language_object(?atom, ?object_identifier), zero_or_more).
 	:- info(language_object/2, [
 		comment is 'Table of defined graph languages and their implementation objects.',
-		argnames is ['Format', 'Object']
+		argnames is ['Language', 'Object']
 	]).
 
 :- end_object.

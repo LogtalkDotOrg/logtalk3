@@ -8,11 +8,11 @@
 ``uses_diagram``
 ================
 
-Predicates for generating entity diagrams in DOT format with only uses and use_module relation edges.
+Predicates for generating entity diagrams in DOT format with only ``uses/2`` and ``use_module/2`` relation edges.
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2014-01-15
+| **Version:** 2:0:1
+| **Date:** 2020-03-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

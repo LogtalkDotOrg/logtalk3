@@ -21,10 +21,13 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0:19:2,
+		version is 0:19:3,
 		author is 'Paulo Moura',
-		date is 2020-03-18,
-		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
+		date is 2020-03-25,
+		comment is 'Utility predicates for supporting Prolog modules in diagrams.',
+		remarks is [
+			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
+		]
 	]).
 
 	:- public(module_property/2).

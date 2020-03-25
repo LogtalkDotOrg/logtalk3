@@ -22,10 +22,10 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:18:0,
+		version is 2:18:1,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
-		comment is 'Predicates for generating entity diagrams with only uses and use_module relation edges.',
+		date is 2020-03-25,
+		comment is 'Predicates for generating entity diagrams with only ``uses/2`` and ``use_module/2`` relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), xref_diagram(_)]
 	]).
@@ -89,10 +89,10 @@
 	extends(uses_diagram(dot))).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2014-01-15,
-		comment is 'Predicates for generating entity diagrams in DOT format with only uses and use_module relation edges.',
+		date is 2020-03-27,
+		comment is 'Predicates for generating entity diagrams in DOT format with only ``uses/2`` and ``use_module/2`` relation edges.',
 		see_also is [entity_diagram, inheritance_diagram, xref_diagram]
 	]).
 
