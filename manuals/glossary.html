@@ -516,6 +516,15 @@ imported <a class="reference internal" href="#term-category"><span class="xref s
 <dt id="term-predicate-scope-directive">predicate scope directive</dt><dd><p>A directive that declares a predicate by specifying its visibility
 as <em>public</em>, <em>protected</em>, or <em>private</em>.</p>
 </dd>
+<dt id="term-predicate-shorthand">predicate shorthand</dt><dd><p>A predicate alias that defines a call template, possibly using a
+different name, with a reduced number of arguments by hard-coding
+the value of the omitted arguments in the original call template.
+Predicate shorthands can be defined using <a class="reference internal" href="refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
+and <a class="reference internal" href="refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directives. They can be used to
+simplify predicate calls and to ensure consistent call patterns
+when some of the arguments always use the same fixed values in the
+calling context.</p>
+</dd>
 <dt id="term-primary-predicate-declaration">primary predicate declaration</dt><dd><p>See <a class="reference internal" href="#term-multifile-predicate"><span class="xref std std-term">multifile predicate</span></a>.</p>
 </dd>
 <dt id="term-private-inheritance">private inheritance</dt><dd><p>All public and protected predicates are inherited as private

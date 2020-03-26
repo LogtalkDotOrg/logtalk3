@@ -362,6 +362,8 @@ to the source file, just *undefine* them at the end of the file. For example:
    % after all entities that used the operator
    :- op(0, xfx, results).
 
+Global operators can be declared in the application loader file.
+
 .. _predicates_uses:
 
 Uses directive
@@ -381,7 +383,7 @@ sending goals. Consider the following example:
        ...
 
 Logtalk provides a directive, :ref:`directives_uses_2`, which allows us to
-simplify the code above. The usage template for this directive is:
+simplify the code above. One of the usage templates for this directive is:
 
 ::
 
@@ -418,7 +420,9 @@ notation ``Predicate as Alias`` (or the alternative notation
 You may use this extended version for solving conflicts between
 predicates declared on several ``uses/2`` directives or just for giving
 new names to the predicates that will be more meaningful on their using
-context.
+context. It's also possible to define predicate aliases that are also
+:term:`predicate shorthands <predicate shorthand>`. See the directive
+documentation for details and examples.
 
 The ``uses/2`` directive allows simpler predicate definitions as long as
 there are no conflicts between the predicates declared in the directive

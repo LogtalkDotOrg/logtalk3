@@ -345,6 +345,16 @@ Glossary
       to improve code clarity by using alternative names that are more
       meaningful in the calling context.
 
+   predicate shorthand
+      A predicate alias that defines a call template, possibly using a
+      different name, with a reduced number of arguments by hard-coding
+      the value of the omitted arguments in the original call template.
+      Predicate shorthands can be defined using :ref:`directives_uses_2`
+      and :ref:`directives_use_module_2` directives. They can be used to
+      simplify predicate calls and to ensure consistent call patterns
+      when some of the arguments always use the same fixed values in the
+      calling context.
+
    built-in predicate
       A predefined predicate that can be called from anywhere. Built-in
       predicates can be redefined within objects and

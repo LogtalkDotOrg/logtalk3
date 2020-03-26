@@ -544,6 +544,7 @@ to the source file, just <em>undefine</em> them at the end of the file. For exam
 <span class="p">:- </span><span class="k">op</span>(<span class="m">0</span>, xfx, results).
 </pre></div>
 </div>
+<p>Global operators can be declared in the application loader file.</p>
 </div>
 <div class="section" id="uses-directive">
 <span id="predicates-uses"></span><h3>Uses directive<a class="headerlink" href="#uses-directive" title="Permalink to this headline">¶</a></h3>
@@ -559,7 +560,7 @@ sending goals. Consider the following example:</p>
 </pre></div>
 </div>
 <p>Logtalk provides a directive, <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>, which allows us to
-simplify the code above. The usage template for this directive is:</p>
+simplify the code above. One of the usage templates for this directive is:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(<span class="nv">Object</span>, [
     <span class="nv">Name1</span><span class="o">/</span><span class="nv">Arity1</span>, <span class="nv">Name2</span><span class="o">/</span><span class="nv">Arity2</span>, ...
 ]).
@@ -590,7 +591,9 @@ notation <code class="docutils literal notranslate"><span class="pre">Predicate<
 <p>You may use this extended version for solving conflicts between
 predicates declared on several <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directives or just for giving
 new names to the predicates that will be more meaningful on their using
-context.</p>
+context. It’s also possible to define predicate aliases that are also
+<a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a>. See the directive
+documentation for details and examples.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive allows simpler predicate definitions as long as
 there are no conflicts between the predicates declared in the directive
 and the predicates defined in the object (or category) containing the

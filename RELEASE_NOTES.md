@@ -63,6 +63,8 @@ directives when the argument is a list of files.
 Documentation
 -------------
 
+* ADDED: Handbook glossary entry for *predicate shorthand*.
+
 * IMPROVED: Handbook sections on documenting and term-expansion.
 
 * IMPROVED: Handbook glossary definition of steadfastness.
