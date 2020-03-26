@@ -61,12 +61,14 @@ Arbitrary user-defined entity information can be represented using the
        ...
    ]).
 
-In this pattern, keys should be atoms and values should be ground terms.
+In this pattern, keys should be atoms and values should be bound terms.
 The following keys are predefined and may be processed specially by
 Logtalk tools:
 
 ``comment``
-   Comment describing the entity purpose (an atom).
+   Comment describing the entity purpose (an atom). As a style guideline,
+   don't use overly long comments. If you need to provide additional
+   details, use the ``remarks`` key.
 ``author``
    Entity author(s) (an atom or a compound term ``{entity}`` where
    ``entity`` is the name of an XML entity in a user defined
@@ -138,7 +140,9 @@ The following keys are predefined and may be processed specially by
 Logtalk tools:
 
 ``comment``
-   Comment describing the predicate purpose (an atom).
+   Comment describing the predicate (or non-terminal) purpose (an atom).
+   As a style guideline, don't use overly long comments. If you need to
+   provide additional details, use the ``remarks`` key.
 ``arguments``
    Names and descriptions of predicate arguments for pretty print output
    (a list of ``Name-Description`` pairs where both names and descriptions
@@ -162,7 +166,7 @@ Logtalk tools:
 ``examples``
    List of typical predicate call examples using the format
    ``Description-Goal-Bindings``. The description must be an atom
-   with the goal s sharing variables with the bindings. The
+   with the goal sharing variables with the bindings. The
    variable bindings term uses the format ``{Variable = Term, ...}``.
    When there are no variable bindings, the success or failure of
    the predicate call should be represented by the terms ``{yes}``
@@ -250,9 +254,21 @@ Inline formatting in comments text
 ----------------------------------
 
 Inline formatting in comments text can be accomplished by using Markdown
-(or reStructuredText) syntax and converting XML documenting files to
-Markdown (or reStructuredText) files (and these, if required, to e.g. HTML,
-ePub, or PDF formats).
+or reStructuredText syntax and converting XML documenting files to Markdown
+or reStructuredText files (and these, if required, to e.g. HTML, ePub, or
+PDF formats). Note that Markdown and reStructuredText common syntax elements
+are enough for most API documentation:
+
+.. code-block:: text
+
+   Mark *italic text* with one asterisk.
+   Mark **bold text** with two asterisks.
+   Mark ``monospaced text`` with two backquotes.
+
+Rendering this block as markup gives:
+
+   Mark *italic text* with one asterisk. Mark **bold text** with
+   two asterisks. Mark ``monospaced text`` with two backquotes.
 
 Diagrams
 --------

@@ -63,7 +63,7 @@ directives when the argument is a list of files.
 Documentation
 -------------
 
-* IMPROVED: Handbook section on term-expansion.
+* IMPROVED: Handbook sections on documenting and term-expansion.
 
 * IMPROVED: Handbook glossary definition of steadfastness.
 

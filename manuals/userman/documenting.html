@@ -250,11 +250,13 @@ documentation information such as the <a class="reference internal" href="../ref
 ]).
 </pre></div>
 </div>
-<p>In this pattern, keys should be atoms and values should be ground terms.
+<p>In this pattern, keys should be atoms and values should be bound terms.
 The following keys are predefined and may be processed specially by
 Logtalk tools:</p>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the entity purpose (an atom).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the entity purpose (an atom). As a style guideline,
+don’t use overly long comments. If you need to provide additional
+details, use the <code class="docutils literal notranslate"><span class="pre">remarks</span></code> key.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt><dd><p>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
 <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity in a user defined
@@ -319,7 +321,9 @@ the <a class="reference internal" href="../refman/directives/info_2.html#directi
 The following keys are predefined and may be processed specially by
 Logtalk tools:</p>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the predicate purpose (an atom).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the predicate (or non-terminal) purpose (an atom).
+As a style guideline, don’t use overly long comments. If you need to
+provide additional details, use the <code class="docutils literal notranslate"><span class="pre">remarks</span></code> key.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">arguments</span></code></dt><dd><p>Names and descriptions of predicate arguments for pretty print output
 (a list of <code class="docutils literal notranslate"><span class="pre">Name-Description</span></code> pairs where both names and descriptions
@@ -343,7 +347,7 @@ atom. The exception term must be a ground term.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">examples</span></code></dt><dd><p>List of typical predicate call examples using the format
 <code class="docutils literal notranslate"><span class="pre">Description-Goal-Bindings</span></code>. The description must be an atom
-with the goal s sharing variables with the bindings. The
+with the goal sharing variables with the bindings. The
 variable bindings term uses the format <code class="docutils literal notranslate"><span class="pre">{Variable</span> <span class="pre">=</span> <span class="pre">Term,</span> <span class="pre">...}</span></code>.
 When there are no variable bindings, the success or failure of
 the predicate call should be represented by the terms <code class="docutils literal notranslate"><span class="pre">{yes}</span></code>
@@ -420,9 +424,20 @@ for an application.</p>
 <div class="section" id="inline-formatting-in-comments-text">
 <span id="documenting-formatting"></span><h2>Inline formatting in comments text<a class="headerlink" href="#inline-formatting-in-comments-text" title="Permalink to this headline">¶</a></h2>
 <p>Inline formatting in comments text can be accomplished by using Markdown
-(or reStructuredText) syntax and converting XML documenting files to
-Markdown (or reStructuredText) files (and these, if required, to e.g. HTML,
-ePub, or PDF formats).</p>
+or reStructuredText syntax and converting XML documenting files to Markdown
+or reStructuredText files (and these, if required, to e.g. HTML, ePub, or
+PDF formats). Note that Markdown and reStructuredText common syntax elements
+are enough for most API documentation:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Mark *italic text* with one asterisk.
+Mark **bold text** with two asterisks.
+Mark ``monospaced text`` with two backquotes.
+</pre></div>
+</div>
+<p>Rendering this block as markup gives:</p>
+<blockquote>
+<div><p>Mark <em>italic text</em> with one asterisk. Mark <strong>bold text</strong> with
+two asterisks. Mark <code class="docutils literal notranslate"><span class="pre">monospaced</span> <span class="pre">text</span></code> with two backquotes.</p>
+</div></blockquote>
 </div>
 <div class="section" id="diagrams">
 <h2>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">¶</a></h2>
