@@ -1394,7 +1394,7 @@ methods always operate on the database of the object receiving the corresponding
 message. When called locally, these predicates take into account any
 <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directives that refer
 to the dynamic predicate being handled. For example, in the following object, the
-clauses for the <code class="docutils literal notranslate"><span class="pre">data/1</span></code> predicate are retracted and asserted in <em>user</em> due to
+clauses for the <code class="docutils literal notranslate"><span class="pre">data/1</span></code> predicate are retracted and asserted in <code class="docutils literal notranslate"><span class="pre">user</span></code> due to
 the <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(an_object).
 
@@ -1603,7 +1603,7 @@ categories. But Prolog systems provide a widely diverse set of built-in
 predicates, easily rising portability issues. Relying on non-standard
 predicates is often unavoidable, however, due to the narrow scope of Prolog
 standards. Logtalk applications may also require calling user-defined Prolog
-predicates, either in <em>user</em> or in Prolog modules.</p>
+predicates, either in <code class="docutils literal notranslate"><span class="pre">user</span></code> or in Prolog modules.</p>
 <div class="section" id="calling-prolog-built-in-predicates">
 <h3>Calling Prolog built-in predicates<a class="headerlink" href="#calling-prolog-built-in-predicates" title="Permalink to this headline">¶</a></h3>
 <p>In predicate clauses and object <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives, predicate
@@ -1630,7 +1630,7 @@ Prolog arithmetic functions, we may run into portability problems while
 trying your applications with different backend Prolog compilers. We can
 use the compiler <a class="reference internal" href="programming.html#flag-portability"><span class="std std-ref">portability flag</span></a> to generate
 warnings for calls to non-standard predicates and arithmetic functions.
-We can also document those calls using the <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
+We can also help document those calls using the <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
 directive. For example, a few Prolog systems provide an <code class="docutils literal notranslate"><span class="pre">atom_string/2</span></code>
 non-standard predicate. We can write (in the object or category calling the
 predicate):</p>
@@ -1819,8 +1819,9 @@ inside the object (or category) where the meta-predicate is called:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(bar(<span class="o">*</span>, <span class="m">0</span>)).
 </pre></div>
 </div>
-<p>depending on the true meaning of the second meta-argument. The
-second alternative is to simply use the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a>
+<p>depending on the true meaning of the second meta-argument. The second
+alternative, only usable when the meta-argument can be handled as a
+normal argument, is to simply use the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a>
 compiler bypass control construct to call the meta-predicate as-is:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>... <span class="o">:-</span> <span class="k">{</span>foo<span class="o">:</span>bar(..., ...)<span class="k">}</span>, ...
 </pre></div>
@@ -1862,8 +1863,7 @@ dynamic using the same <code class="docutils literal notranslate"><span class="p
 <div class="section" id="asserting-and-retracting-prolog-predicates">
 <span id="predicates-prolog-dynamic"></span><h2>Asserting and retracting Prolog predicates<a class="headerlink" href="#asserting-and-retracting-prolog-predicates" title="Permalink to this headline">¶</a></h2>
 <p>To assert and retract clauses for Prolog dynamic predicates, we can use an
-explicitly qualified module argument (where the module can be <code class="docutils literal notranslate"><span class="pre">user</span></code>). For
-example:</p>
+explicitly qualified module argument. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
 
 <span class="p">    :- </span><span class="k">dynamic</span>(m<span class="o">:</span>bar<span class="o">/</span><span class="m">1</span>).
@@ -1893,7 +1893,8 @@ directives to declare the module predicates. For example:</p>
 </pre></div>
 </div>
 <p>When the Prolog dynamic predicates are defined in <code class="docutils literal notranslate"><span class="pre">user</span></code>, the recommended
-and most portable practice is to use a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive:</p>
+and most portable practice (as not all backends support a module system) is
+to use a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
 
 <span class="p">    :- </span><span class="k">uses</span>(user, [bar<span class="o">/</span><span class="m">1</span>]).

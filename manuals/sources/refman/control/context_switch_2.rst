@@ -79,7 +79,7 @@ Errors
 |     ``instantiation_error``
 | ``Proxy`` is neither a variable nor an object identifier:
 |     ``type_error(object_identifier, Proxy)``
-| The predicate ``Proxy`` does not exist in the *user* pseudo-object:
+| The predicate ``Proxy`` does not exist in the ``user`` pseudo-object:
 |     ``existence_error(procedure, ProxyFunctor/ProxyArity)``
 |
 | ``Goal`` is a variable:

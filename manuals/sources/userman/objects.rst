@@ -847,8 +847,8 @@ pseudo-object is not supported.
 
 With some of the :term:`backend Prolog compilers <backend Prolog compiler>`
 that support a module system, it is possible to load (the) Logtalk
-(compiler/runtime) into a module other than the pseudo-module *user*. In
-this case, the Logtalk pseudo-object *user* virtually contains all user
+(compiler/runtime) into a module other than the pseudo-module ``user``. In
+this case, the Logtalk pseudo-object ``user`` virtually contains all user
 predicate definitions defined in the module where Logtalk was loaded.
 
 .. _objects_logtalk:

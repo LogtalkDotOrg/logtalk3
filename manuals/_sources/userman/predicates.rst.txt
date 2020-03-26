@@ -1365,7 +1365,7 @@ methods always operate on the database of the object receiving the corresponding
 message. When called locally, these predicates take into account any
 :ref:`directives_uses_2` or :ref:`directives_use_module_2` directives that refer
 to the dynamic predicate being handled. For example, in the following object, the
-clauses for the ``data/1`` predicate are retracted and asserted in *user* due to
+clauses for the ``data/1`` predicate are retracted and asserted in ``user`` due to
 the ``uses/2`` directive:
 
 ::
@@ -1606,7 +1606,7 @@ categories. But Prolog systems provide a widely diverse set of built-in
 predicates, easily rising portability issues. Relying on non-standard
 predicates is often unavoidable, however, due to the narrow scope of Prolog
 standards. Logtalk applications may also require calling user-defined Prolog
-predicates, either in *user* or in Prolog modules. 
+predicates, either in ``user`` or in Prolog modules. 
 
 Calling Prolog built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1638,7 +1638,7 @@ Prolog arithmetic functions, we may run into portability problems while
 trying your applications with different backend Prolog compilers. We can
 use the compiler :ref:`portability flag <flag_portability>` to generate
 warnings for calls to non-standard predicates and arithmetic functions.
-We can also document those calls using the :ref:`directives_uses_2`
+We can also help document those calls using the :ref:`directives_uses_2`
 directive. For example, a few Prolog systems provide an ``atom_string/2``
 non-standard predicate. We can write (in the object or category calling the
 predicate):
@@ -1867,8 +1867,9 @@ or:
 
    :- meta_predicate(bar(*, 0)).
 
-depending on the true meaning of the second meta-argument. The
-second alternative is to simply use the :ref:`control_external_call_1`
+depending on the true meaning of the second meta-argument. The second
+alternative, only usable when the meta-argument can be handled as a
+normal argument, is to simply use the :ref:`control_external_call_1`
 compiler bypass control construct to call the meta-predicate as-is:
 
 ::
@@ -1921,8 +1922,7 @@ Asserting and retracting Prolog predicates
 ------------------------------------------
 
 To assert and retract clauses for Prolog dynamic predicates, we can use an
-explicitly qualified module argument (where the module can be ``user``). For
-example:
+explicitly qualified module argument. For example:
 
 ::
 
@@ -1956,7 +1956,8 @@ directives to declare the module predicates. For example:
    :- end_object.
 
 When the Prolog dynamic predicates are defined in ``user``, the recommended
-and most portable practice is to use a :ref:`directives_uses_2` directive:
+and most portable practice (as not all backends support a module system) is
+to use a :ref:`directives_uses_2` directive:
 
 ::
 

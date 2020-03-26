@@ -173,7 +173,7 @@ predicate, we could write:
    no
 
 In this case, the ``threaded_call/1`` and the ``threaded_exit/1`` calls
-are made within the pseudo-object *user*. The implicit thread running
+are made within the pseudo-object ``user``. The implicit thread running
 the ``lists::member/2`` goal suspends itself after providing a solution,
 waiting for a request to an alternative solution; the thread is
 automatically terminated when the runtime engine detects that

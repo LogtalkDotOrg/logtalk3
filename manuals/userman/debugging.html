@@ -291,9 +291,9 @@ all loaded entities compiled in debug mode as follows:</p>
 <div class="section" id="procedure-box-model">
 <span id="debugging-box-model"></span><h2>Procedure box model<a class="headerlink" href="#procedure-box-model" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk uses a <em>procedure box model</em> similar to those found on most
-Prolog compilers. The traditional Prolog procedure box model defines
+Prolog systems. The traditional Prolog procedure box model defines
 four ports (<em>call</em>, <em>exit</em>, <em>redo</em>, and <em>fail</em>) for describing control
-flow when a predicate clause is used during program execution:</p>
+flow when calling a predicate:</p>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">call</span></code></div>
 <div class="line-block">
@@ -312,7 +312,7 @@ flow when a predicate clause is used during program execution:</p>
 <div class="line">failure of a predicate call</div>
 </div>
 </div>
-<p>Logtalk, as found on some recent Prolog compilers, adds a port for
+<p>Logtalk, as found on some recent Prolog systems, adds a port for
 dealing with exceptions thrown when calling a predicate:</p>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exception</span></code></div>
@@ -372,9 +372,10 @@ some Prolog compilers:</p>
 </div>
 <div class="section" id="defining-spy-points">
 <h2>Defining spy points<a class="headerlink" href="#defining-spy-points" title="Permalink to this headline">¶</a></h2>
-<p>Logtalk spy points can be defined by simply stating which file line
-numbers or predicates should be spied, as in most Prolog debuggers, or
-by fully specifying the context for activating a spy point. In the case
+<p>Logtalk spy points can be defined by simply stating which predicates
+should be spied, as in most Prolog debuggers, by stating which predicate
+clauses to specify given their source file line numbers, or by
+specifying the context for activating a spy point. In the case
 of line number spy points (also known as breakpoints), the line number
 must correspond to the first line of an entity clause. To simplify the
 definition of line number spy points, these are specified using the

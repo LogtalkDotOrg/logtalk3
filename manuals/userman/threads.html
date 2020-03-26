@@ -347,7 +347,7 @@ no
 </pre></div>
 </div>
 <p>In this case, the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> and the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> calls
-are made within the pseudo-object <em>user</em>. The implicit thread running
+are made within the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>. The implicit thread running
 the <code class="docutils literal notranslate"><span class="pre">lists::member/2</span></code> goal suspends itself after providing a solution,
 waiting for a request to an alternative solution; the thread is
 automatically terminated when the runtime engine detects that

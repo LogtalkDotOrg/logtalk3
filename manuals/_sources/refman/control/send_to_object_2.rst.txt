@@ -85,7 +85,7 @@ Errors
 |     ``instantiation_error``
 | ``Proxy`` is neither a variable nor a callable term:
 |     ``type_error(callable, Proxy)``
-| ``Proxy``, with predicate indicator ``Name/Arity``, does not exist in the *user* pseudo-object:
+| ``Proxy``, with predicate indicator ``Name/Arity``, does not exist in the ``user`` pseudo-object:
 |     ``existence_error(procedure, Name/Arity)``
 
 Examples

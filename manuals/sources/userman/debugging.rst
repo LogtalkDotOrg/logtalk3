@@ -99,9 +99,9 @@ Procedure box model
 -------------------
 
 Logtalk uses a *procedure box model* similar to those found on most
-Prolog compilers. The traditional Prolog procedure box model defines
+Prolog systems. The traditional Prolog procedure box model defines
 four ports (*call*, *exit*, *redo*, and *fail*) for describing control
-flow when a predicate clause is used during program execution:
+flow when calling a predicate:
 
 | ``call``
 |    predicate call
@@ -112,7 +112,7 @@ flow when a predicate clause is used during program execution:
 | ``fail``
 |    failure of a predicate call
 
-Logtalk, as found on some recent Prolog compilers, adds a port for
+Logtalk, as found on some recent Prolog systems, adds a port for
 dealing with exceptions thrown when calling a predicate:
 
 | ``exception``
@@ -161,9 +161,10 @@ By default, the debugger pauses at every port for user interaction.
 Defining spy points
 -------------------
 
-Logtalk spy points can be defined by simply stating which file line
-numbers or predicates should be spied, as in most Prolog debuggers, or
-by fully specifying the context for activating a spy point. In the case
+Logtalk spy points can be defined by simply stating which predicates
+should be spied, as in most Prolog debuggers, by stating which predicate
+clauses to specify given their source file line numbers, or by
+specifying the context for activating a spy point. In the case
 of line number spy points (also known as breakpoints), the line number
 must correspond to the first line of an entity clause. To simplify the
 definition of line number spy points, these are specified using the

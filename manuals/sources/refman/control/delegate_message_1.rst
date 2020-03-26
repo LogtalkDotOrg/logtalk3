@@ -69,7 +69,7 @@ Errors
 |     ``instantiation_error``
 | ``Proxy`` is neither a variable nor an object identifier:
 |     ``type_error(object_identifier, Proxy)``
-| ``Proxy``, with predicate indicator ``Name/Arity``, does not exist in the *user* pseudo-object:
+| ``Proxy``, with predicate indicator ``Name/Arity``, does not exist in the ``user`` pseudo-object:
 |     ``existence_error(procedure, Name/Arity)``
 | 
 | ``Message`` is a variable:
