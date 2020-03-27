@@ -392,14 +392,9 @@ these need to be abolished during program execution.
 Category documentation
 ~~~~~~~~~~~~~~~~~~~~~~
 
-A category can be documented with arbitrary user-defined information by
-using the :ref:`directives_info_1` directive:
-
-::
-
-   :- info(List).
-
-See the :ref:`documenting_documenting` section for details.
+A category can be documented with arbitrary user-defined information
+by using the :ref:`directives_info_1` entity directive. See the
+:ref:`documenting_documenting` section for details.
 
 .. _categories_include:
 

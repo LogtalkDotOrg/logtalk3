@@ -551,14 +551,9 @@ can declare and define dynamic predicates within a static object.
 Object documentation
 ~~~~~~~~~~~~~~~~~~~~
 
-An object can be documented with arbitrary user-defined information by
-using the :ref:`directives_info_1` directive:
-
-::
-
-   :- info(List).
-
-See the :ref:`documenting_documenting` section for details.
+An object can be documented with arbitrary user-defined information
+by using the :ref:`directives_info_1` entity directive. See the
+:ref:`documenting_documenting` section for details.
 
 .. _objects_include:
 

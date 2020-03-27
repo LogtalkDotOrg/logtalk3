@@ -189,14 +189,9 @@ abolished during program execution.
 Protocol documentation
 ~~~~~~~~~~~~~~~~~~~~~~
 
-A protocol can be documented with arbitrary user-defined information by
-using the :ref:`directives_info_1` directive:
-
-::
-
-   :- info(List).
-
-See the :ref:`documenting_documenting` section for details.
+A protocol can be documented with arbitrary user-defined information
+by using the :ref:`directives_info_1` entity directive. See the
+:ref:`documenting_documenting` section for details.
 
 .. _protocols_include:
 

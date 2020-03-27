@@ -48,8 +48,8 @@ information). The ``ExecutionContext`` argument is an opaque term that
 can be decoded using the
 :ref:`logtalk::execution_context/7 <logtalk/0::execution_context/7>` predicate.
 
-Generating errors
------------------
+Raising Exceptions
+------------------
 
 The :ref:`error handling section <error_handling_methods>` in the reference
 manual lists a set of convenient built-in methods that generate ``error/2``
@@ -62,15 +62,15 @@ manually constructing a type error as in:
    context(Context),
    throw(error(type_error(atom, 42), Context)).
 
-we can simply type:
+we can simply write:
 
 ::
 
    ...,
    type_error(atom, 42).
 
-The provided error built-in methods cover all standard error types as notably
-found in the ISO Prolog Core standard.
+The provided error built-in methods cover all standard error types found in
+the ISO Prolog Core standard.
 
 Type-checking
 -------------
@@ -141,6 +141,14 @@ Note that ``context/1`` calls are inlined and messages to the library
 ``type`` object use :term:`static binding` when compiling with the
 :ref:`optimize flag <flag_optimize>` turned on, thus enabling efficient
 type-checking.
+
+Expected terms
+--------------
+
+Support for representing and handling *expected terms* is provided by the
+:doc:`../libraries/expecteds` library. Expected terms allows defering errors
+to later stages of an application in alternative to raising an exception as
+soon as an error is detected.
 
 Compiler warnings and errors
 ----------------------------
