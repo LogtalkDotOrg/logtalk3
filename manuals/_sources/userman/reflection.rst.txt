@@ -61,6 +61,12 @@ on :ref:`object relations <objects_relationships>`,
 :ref:`protocol relations <protocols_relationships>`, and
 :ref:`category relations <categories_relationships>`.
 
+.. note::
+
+   Some entity and predicate properties are only available when the source
+   files are compiled with the :ref:`source_data <flag_source_data>` flag
+   turned on.
+
 The :ref:`logtalk <apis:logtalk/0>` built-in object provides predicates for
 querying loaded source files and their properties. 
 
@@ -69,9 +75,9 @@ querying loaded source files and their properties.
 Black-box view
 ~~~~~~~~~~~~~~
 
-The black-box view provides a view that respects entity encapsulation and thus
-only allow querying predicates and operators that are within scope of the entity
-calling the reflection methods.
+The black-box view provides a view that respects entity encapsulation and
+thus only allow querying about predicates and operators that are within
+scope of the entity calling the reflection methods.
 
 Built-in methods are provided for querying the :ref:`predicates that are
 declared and can be called or used as messages <methods_current_predicate_1>`
@@ -89,8 +95,9 @@ Behavioral reflection
 Behavioral reflection provides insight on what an application does when running.
 Specifically, by observing and acting on the messages being exchanged between
 objects. See the section on :ref:`event-driven programming <events_events>`
-for details. In addition, the :ref:`logtalk <apis:logtalk/0>` built-in object
-provides predicates for handling debug events.
+for details. There is also a :doc:`../libraries/dependents` library that
+provides an implementation of Smalltalk dependents mechanism.
 
 For use in debugging tools, there is also a small reflection API providing
-:ref:`trace and debug event predicates <debugging_events>`.
+:ref:`trace and debug event predicates <debugging_events>` provided by the
+:ref:`logtalk <apis:logtalk/0>` built-in object.
