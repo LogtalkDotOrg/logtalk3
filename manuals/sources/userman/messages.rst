@@ -20,22 +20,25 @@
 Messages
 ========
 
-Messages allows us to call object predicates. Logtalk uses the same
-nomenclature found in other object-oriented programming languages such
-as Smalltalk. Therefore, the terms *predicate* and *method* are often
-used interchangeably when referring to predicates defined inside objects
-and categories. A message must always match a predicate within the scope
-of the *sender* object.
+Messages allows us to ask an object to prove a goal and must always match a
+declared predicate within the scope of the *sender* object. Note that message
+sending is only the same as calling an object predicate if the object does not
+inherit (or import) predicate definitions from other objects (or categories).
+Otherwise, the predicate definition that will be executed may depend on the
+relations between the object and with its imported categories and its ancestor
+objects (if any). See the :ref:`inheritance_inheritance` section for details
+on the predicate declaration and predicate definition lookup procedures.
 
-Note that message sending is only the same as calling an object's
-predicate if the object does not inherit (or import) predicate
-definitions from other objects (or categories). Otherwise, the predicate
-definition that will be executed may depend on the relations between the
-object and with its imported categories and its ancestor objects (if any).
-See the :ref:`inheritance_inheritance` section for details.
+When a message corresponds to a :term:`meta-predicate`, the meta-arguments
+are always called in the context of the object (or category) sending the
+message.
 
-When a message corresponds to a meta-predicate, the meta-arguments will
-be called in the context of the object (or category) sending the message.
+Logtalk uses nomenclature similar to in other object-oriented programming
+languages such as Smalltalk. Therefore, the terms *query* and *message* are
+used interchangeably when referring to declared predicates that are part of
+an object interface. Likewise, the terms *predicate* and *method* are used
+interchangeably when referring to predicates defined inside objects and
+categories.
 
 .. _messages_operators:
 
@@ -221,6 +224,26 @@ When events are not used, is possible to turn off event generation globally
 or on a per entity basis by using the ``events`` compiler flag to optimize
 message sending performance (see the :ref:`events_events` section for more
 details).
+
+.. _messages_from_module:
+
+Sending a message from a module
+-------------------------------
+
+Messages can be sent to object from within a Prolog module. Depending on
+the backend Prolog system and on the :ref:`optimize <flag_optimize>` flag
+being turned on, the messages will use static binding when possible. This
+optimization requires the object to be compiled and loaded before the module.
+Note that the module can be ``user``. This is usually the case when sending
+the message from the top-level interpreter. Thus, the same conditions apply
+in this case.
+
+.. warning::
+
+   If you want to benchmark the performance of a message sending goal
+   at the top-level interpreter, be careful to check first if the goal
+   is pre-compiled to use static binding, otherwise you will also be
+   benchmarking the Logtalk compiler itself.
 
 .. _messages_performance:
 

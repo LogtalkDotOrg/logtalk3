@@ -114,6 +114,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#broadcasting">Broadcasting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calling-imported-and-inherited-predicates">Calling imported and inherited predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#message-sending-and-event-generation">Message sending and event generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sending-a-message-from-a-module">Sending a message from a module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#message-sending-performance">Message sending performance</a></li>
 </ul>
 </li>
@@ -219,20 +220,23 @@
             
   <div class="section" id="messages">
 <span id="messages-messages"></span><h1>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h1>
-<p>Messages allows us to call object predicates. Logtalk uses the same
-nomenclature found in other object-oriented programming languages such
-as Smalltalk. Therefore, the terms <em>predicate</em> and <em>method</em> are often
-used interchangeably when referring to predicates defined inside objects
-and categories. A message must always match a predicate within the scope
-of the <em>sender</em> object.</p>
-<p>Note that message sending is only the same as calling an object’s
-predicate if the object does not inherit (or import) predicate
-definitions from other objects (or categories). Otherwise, the predicate
-definition that will be executed may depend on the relations between the
-object and with its imported categories and its ancestor objects (if any).
-See the <a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">Inheritance</span></a> section for details.</p>
-<p>When a message corresponds to a meta-predicate, the meta-arguments will
-be called in the context of the object (or category) sending the message.</p>
+<p>Messages allows us to ask an object to prove a goal and must always match a
+declared predicate within the scope of the <em>sender</em> object. Note that message
+sending is only the same as calling an object predicate if the object does not
+inherit (or import) predicate definitions from other objects (or categories).
+Otherwise, the predicate definition that will be executed may depend on the
+relations between the object and with its imported categories and its ancestor
+objects (if any). See the <a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">Inheritance</span></a> section for details
+on the predicate declaration and predicate definition lookup procedures.</p>
+<p>When a message corresponds to a <a class="reference internal" href="../glossary.html#term-meta-predicate"><span class="xref std std-term">meta-predicate</span></a>, the meta-arguments
+are always called in the context of the object (or category) sending the
+message.</p>
+<p>Logtalk uses nomenclature similar to in other object-oriented programming
+languages such as Smalltalk. Therefore, the terms <em>query</em> and <em>message</em> are
+used interchangeably when referring to declared predicates that are part of
+an object interface. Likewise, the terms <em>predicate</em> and <em>method</em> are used
+interchangeably when referring to predicates defined inside objects and
+categories.</p>
 <div class="section" id="operators-used-in-message-sending">
 <span id="messages-operators"></span><h2>Operators used in message sending<a class="headerlink" href="#operators-used-in-message-sending" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk declares the following operators for the message sending control
@@ -377,6 +381,23 @@ containing the predicate definition, we can write:</p>
 or on a per entity basis by using the <code class="docutils literal notranslate"><span class="pre">events</span></code> compiler flag to optimize
 message sending performance (see the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more
 details).</p>
+</div>
+<div class="section" id="sending-a-message-from-a-module">
+<span id="messages-from-module"></span><h2>Sending a message from a module<a class="headerlink" href="#sending-a-message-from-a-module" title="Permalink to this headline">¶</a></h2>
+<p>Messages can be sent to object from within a Prolog module. Depending on
+the backend Prolog system and on the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag
+being turned on, the messages will use static binding when possible. This
+optimization requires the object to be compiled and loaded before the module.
+Note that the module can be <code class="docutils literal notranslate"><span class="pre">user</span></code>. This is usually the case when sending
+the message from the top-level interpreter. Thus, the same conditions apply
+in this case.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you want to benchmark the performance of a message sending goal
+at the top-level interpreter, be careful to check first if the goal
+is pre-compiled to use static binding, otherwise you will also be
+benchmarking the Logtalk compiler itself.</p>
+</div>
 </div>
 <div class="section" id="message-sending-performance">
 <span id="messages-performance"></span><h2>Message sending performance<a class="headerlink" href="#message-sending-performance" title="Permalink to this headline">¶</a></h2>
