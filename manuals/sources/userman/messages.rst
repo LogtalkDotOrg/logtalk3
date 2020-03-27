@@ -176,9 +176,10 @@ fails when the predicate is declared but not defined (as per the
 Message sending and event generation
 ------------------------------------
 
-Every message sent using the
-:ref:`control_send_to_object_2` control construct
-generates two events, one before and one after the message execution.
+Assuming the :ref:`events <flag_events>` flag is set to ``allow`` for the
+object (or category) sending a message using the 
+:ref:`control_send_to_object_2` control construct, two events are generated,
+one before and one after the message execution.
 Messages that are sent using the
 :ref:`control_send_to_self_1` (message to *self*)
 control construct or the
@@ -217,8 +218,9 @@ containing the predicate definition, we can write:
        ... .
 
 When events are not used, is possible to turn off event generation globally
-or on a per entity basis by using the :ref:`events <flag_events>` compiler
-flag (see the :ref:`events_events` section for more details).
+or on a per entity basis by using the ``events`` compiler flag to optimize
+message sending performance (see the :ref:`events_events` section for more
+details).
 
 .. _messages_performance:
 

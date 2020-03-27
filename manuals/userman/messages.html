@@ -337,9 +337,10 @@ fails when the predicate is declared but not defined (as per the
 </div>
 <div class="section" id="message-sending-and-event-generation">
 <span id="messages-events"></span><h2>Message sending and event generation<a class="headerlink" href="#message-sending-and-event-generation" title="Permalink to this headline">¶</a></h2>
-<p>Every message sent using the
-<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct
-generates two events, one before and one after the message execution.
+<p>Assuming the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for the
+object (or category) sending a message using the
+<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct, two events are generated,
+one before and one after the message execution.
 Messages that are sent using the
 <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> (message to <em>self</em>)
 control construct or the
@@ -373,8 +374,9 @@ containing the predicate definition, we can write:</p>
 </pre></div>
 </div>
 <p>When events are not used, is possible to turn off event generation globally
-or on a per entity basis by using the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> compiler
-flag (see the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more details).</p>
+or on a per entity basis by using the <code class="docutils literal notranslate"><span class="pre">events</span></code> compiler flag to optimize
+message sending performance (see the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more
+details).</p>
 </div>
 <div class="section" id="message-sending-performance">
 <span id="messages-performance"></span><h2>Message sending performance<a class="headerlink" href="#message-sending-performance" title="Permalink to this headline">¶</a></h2>
