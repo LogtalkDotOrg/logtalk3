@@ -21,13 +21,16 @@ Messages
 ========
 
 Messages allows us to ask an object to prove a goal and must always match a
-declared predicate within the scope of the *sender* object. Note that message
-sending is only the same as calling an object predicate if the object does not
-inherit (or import) predicate definitions from other objects (or categories).
-Otherwise, the predicate definition that will be executed may depend on the
-relations between the object and with its imported categories and its ancestor
-objects (if any). See the :ref:`inheritance_inheritance` section for details
-on the predicate declaration and predicate definition lookup procedures.
+declared predicate within the scope of the *sender* object. Note that sending
+a message is fundamentally different from calling a predicate. When calling a
+predicate, the caller decides implicitly which predicate definition will be
+executed. When sending a message, it is the receiving object, not the sender,
+that decides which predicate definition (if any) will be called to answer the
+message. The predicate definition that is actually used to answer a message
+depends on the relations between the object and its imported categories and
+ancestor objects (if any). See the :ref:`inheritance_inheritance` section
+for details on the predicate declaration and predicate definition lookup
+procedures.
 
 When a message corresponds to a :term:`meta-predicate`, the meta-arguments
 are always called in the context of the object (or category) sending the
@@ -35,10 +38,10 @@ message.
 
 Logtalk uses nomenclature similar to in other object-oriented programming
 languages such as Smalltalk. Therefore, the terms *query* and *message* are
-used interchangeably when referring to declared predicates that are part of
+used interchangeably when referring to a declared predicate that is part of
 an object interface. Likewise, the terms *predicate* and *method* are used
-interchangeably when referring to predicates defined inside objects and
-categories.
+interchangeably when referring to the predicate definition (inside an object
+or category) that is called to answer a message.
 
 .. _messages_operators:
 
