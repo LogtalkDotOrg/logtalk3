@@ -68,7 +68,7 @@ Documentation
 * ADDED: Handbook glossary entry for *predicate shorthand*.
 
 * IMPROVED: Handbook sections on messages, reflection, error handling,
-documenting, and term-expansion.
+documenting, term-expansion, and writing and running applications.
 
 * IMPROVED: Handbook glossary definition of steadfastness.
 

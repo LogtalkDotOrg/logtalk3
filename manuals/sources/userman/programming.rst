@@ -20,11 +20,6 @@
 Writing and running applications
 ================================
 
-.. _programming_writing:
-
-Writing applications
---------------------
-
 For a successful programming in Logtalk, you need a good working
 knowledge of Prolog and an understanding of the principles of
 object-oriented programming. Most guidelines for writing good Prolog
@@ -43,10 +38,52 @@ information collected during the analysis and design phases can be
 integrated in the objects, categories and protocols that we define by
 using the available entity and predicate documenting directives.
 
+.. _programming_starting:
+
+Starting Logtalk
+----------------
+
+We run Logtalk inside a normal Prolog session, after loading the
+necessary files. Logtalk extends but does not modify your Prolog
+compiler. We can freely mix Prolog queries with the sending of messages
+and our applications can be made of both normal Prolog clauses and
+object definitions.
+
+Depending on your Logtalk installation, you may use a script or a
+shortcut to start Logtalk with your chosen Prolog compiler. On POSIX
+operating systems, the scripts should be available from the
+command-line; scripts are named upon the used backend Prolog compilers.
+On Windows, the shortcuts should be available from the Start Menu.
+
+If no scripts or shortcuts are available for your installation,
+operating-system, or Prolog compiler, you can always start a Logtalk
+session by performing the following steps:
+
+#. Start your Prolog compiler.
+#. Load the appropriate adapter file for your compiler. Adapter files
+   for most common Prolog compilers can be found in the ``adapters``
+   subdirectory.
+#. Load the library paths file corresponding to your Logtalk
+   installation contained in the ``paths`` subdirectory.
+#. Load the Logtalk compiler/runtime files contained in the ``core``
+   subdirectory.
+
+Note that the adapter files, compiler/runtime files, and library paths
+file are Prolog source files. The predicate called to load (and compile)
+them depends on your Prolog compiler. In case of doubt, consult your
+Prolog compiler reference manual or take a look at the definition of the
+predicate ``'$lgt_load_prolog_code'/3`` in the corresponding adapter
+file.
+
+Most Prolog compilers support automatic loading of an initialization
+file, which can include the necessary directives to load both the Prolog
+adapter file and the Logtalk compiler. This feature, when available,
+allows automatic loading of Logtalk when you start your Prolog compiler.
+
 .. _programming_source_files:
 
 Source files
-~~~~~~~~~~~~
+------------
 
 Logtalk source files may define any number of entities (objects,
 categories, or protocols). Source files may also contain Prolog code
@@ -127,142 +164,10 @@ backend Prolog compilers that support multiple encodings (check the
 :ref:`encoding_directive <flag_encoding_directive>` flag in the
 adapter file of your Prolog compiler).
 
-.. _programming_portability:
-
-Portable applications
-~~~~~~~~~~~~~~~~~~~~~
-
-Logtalk is compatible with most modern standards compliant Prolog compilers.
-However, this does not necessarily imply that your Logtalk applications will
-have the same level of portability. If possible, you should only use in your
-applications Logtalk built-in predicates and ISO Prolog specified
-built-in predicates and arithmetic functions. If you need to use
-built-in predicates (or built-in arithmetic functions) that may not be
-available in other Prolog compilers, you should try to encapsulate the
-non-portable code in a small number of objects and provide a portable
-**interface** for that code through the use of Logtalk protocols. An
-example will be code that access operating-system specific features. The
-Logtalk compiler can warn you of the use of non-ISO specified built-in
-predicates and arithmetic functions by using the
-:ref:`portability <flag_portability>` compiler flag.
-
-.. _programming_cc:
-
-Conditional compilation
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Logtalk supports conditional compilation within source files using the
-:ref:`directives_if_1`, :ref:`directives_elif_1`,
-:ref:`directives_else_0`, and :ref:`directives_endif_0` directives. This
-support is similar to the support found in several Prolog systems such
-as ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, XSB, and YAP.
-
-.. _programming_errors:
-
-Avoiding common errors
-~~~~~~~~~~~~~~~~~~~~~~
-
-Try to write objects and protocol documentation **before** writing any
-other code; if you are having trouble documenting a predicate perhaps we
-need to go back to the design stage.
-
-Try to avoid lengthy hierarchies. Composition is often a better choice
-over inheritance for defining new objects (Logtalk supports
-component-based programming through the use of
-:ref:`categories <categories_categories>`). In addition, prototype-based
-hierarchies are semantically simpler than class-based hierarchies.
-
-Dynamic predicates or dynamic entities are sometimes needed, but we
-should always try to minimize the use of non-logical features such as
-asserts and retracts.
-
-Since each Logtalk entity is independently compiled, if an object
-inherits a dynamic or a meta-predicate predicate, then the respective
-directives must be repeated to ensure a correct compilation.
-
-In general, Logtalk does not verify if a user predicate call/return
-arguments comply with the declared modes. On the other hand, Logtalk
-built-in predicates, built-in methods, and message sending control
-structures are fully checked for calling mode errors.
-
-Logtalk error handling strongly depends on the ISO compliance of the
-chosen Prolog compiler. For instance, the error terms that are generated
-by some Logtalk built-in predicates assume that the Prolog built-in
-predicates behave as defined in the ISO standard regarding error
-conditions. In particular, if your Prolog compiler does not support a
-``read_term/3`` built-in predicate compliant with the ISO Prolog
-Standard definition, then the current version of the Logtalk compiler
-may not be able to detect misspell variables in your source code.
-
-.. _programming_style:
-
-Coding style guidelines
-~~~~~~~~~~~~~~~~~~~~~~~
-
-It is suggested that all code between an entity opening and closing
-directives be indented by one tab stop. When defining entity code, both
-directives and predicates, Prolog coding style guidelines may be
-applied. All Logtalk source files, examples, and standard library
-entities use tabs (the recommended setting is a tab width equivalent to
-4 spaces) for laying out code. Closed related entities can be defined in
-the same source file. However, for best performance, is often necessary
-to have an entity per source file. Entities that might be useful in
-different contexts (such as library entities) are best defined in their
-own source files.
-
-A detailed coding style guide is available at the Logtalk official website.
-
-.. _programming_session:
-
-Compiling and running applications
-----------------------------------
-
-We run Logtalk inside a normal Prolog session, after loading the
-necessary files. Logtalk extends but does not modify your Prolog
-compiler. We can freely mix Prolog queries with the sending of messages
-and our applications can be made of both normal Prolog clauses and
-object definitions.
-
-.. _programming_starting:
-
-Starting Logtalk
-~~~~~~~~~~~~~~~~
-
-Depending on your Logtalk installation, you may use a script or a
-shortcut to start Logtalk with your chosen Prolog compiler. On POSIX
-operating systems, the scripts should be available from the
-command-line; scripts are named upon the used backend Prolog compilers.
-On Windows, the shortcuts should be available from the Start Menu.
-
-If no scripts or shortcuts are available for your installation,
-operating-system, or Prolog compiler, you can always start a Logtalk
-session by performing the following steps:
-
-#. Start your Prolog compiler.
-#. Load the appropriate adapter file for your compiler. Adapter files
-   for most common Prolog compilers can be found in the ``adapters``
-   subdirectory.
-#. Load the library paths file corresponding to your Logtalk
-   installation contained in the ``paths`` subdirectory.
-#. Load the Logtalk compiler/runtime files contained in the ``core``
-   subdirectory.
-
-Note that the adapter files, compiler/runtime files, and library paths
-file are Prolog source files. The predicate called to load (and compile)
-them depends on your Prolog compiler. In case of doubt, consult your
-Prolog compiler reference manual or take a look at the definition of the
-predicate ``'$lgt_load_prolog_code'/3`` in the corresponding adapter
-file.
-
-Most Prolog compilers support automatic loading of an initialization
-file, which can include the necessary directives to load both the Prolog
-adapter file and the Logtalk compiler. This feature, when available,
-allows automatic loading of Logtalk when you start your Prolog compiler.
-
 .. _programming_compiling:
 
 Compiling and loading your applications
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 Your applications will be made of source files containing your objects,
 protocols, and categories. The source files can be compiled to disk by
@@ -302,29 +207,19 @@ these shorthands should be restricted to the Logtalk/Prolog top-level
 interpreter as they are not part of the language specification and may be
 commented out in case of conflicts with backend Prolog compiler features.
 
-The built-in predicate :ref:`predicates_logtalk_make_0` can be
-used to reload all modified source files. Files are also reloaded when
-the compilation mode changes. For example, assume that you have loaded
-your application files and found a bug. You can easily recompile the
-files in debug mode by using the queries:
-
-.. code-block:: text
-
-   | ?- set_logtalk_flag(debug, on).
-   ...
-
-   | ?- logtalk_make.
-   ...
-
-After debugging and fixing the bugs, you can reload the files in normal
-(or optimized) mode by turning the :ref:`debug <flag_debug>` flag off and
-calling the ``logtalk_make/0`` predicate again. With most backend Prolog
-compilers, you can also use the ``{*}`` top-level shortcut.
-
-An extended version of this predicate, :ref:`predicates_logtalk_make_1`,
-accepts multiple targets including ``all``, ``clean``, ``check``,
-``circular``, ``documentation``, and ``caches``. See the Reference Manual
-for a complete list of targets and top-level shortcuts. In particular, the
+The built-in predicate :ref:`predicates_logtalk_make_0` can be used to
+reload all modified source files. With most backend Prolog compilers,
+you can also use the ``{*}`` top-level shortcut. Files are also reloaded
+when the compilation mode changes. An extended version of this predicate,
+:ref:`predicates_logtalk_make_1`, accepts multiple targets including
+``all``, ``clean``, ``check``, ``circular``, ``documentation``, ``caches``,
+``debug``, ``normal``, and ``optimal``. For example, assume that you have
+loaded your application files and found a bug. You can easily recompile the
+files in debug mode by using the ``logtalk_make(debug)`` goal. After
+debugging and fixing the bug, you can reload the files in normal mode
+using the ``logtalk_make(normal)`` or in optimized mode using the
+``logtalk_make(optimal)`` goal. See the Reference Manual for a complete
+list of targets and top-level shortcuts. In particular, the
 ``logtalk_make(clean)`` goal can be specially useful before switching
 backend Prolog compilers as the generated intermediate files may not be
 compatible. The ``logtalk_make(caches)`` goal is usually used when
@@ -333,13 +228,13 @@ benchmarking compiler performance improvements.
 .. _programming_loaders:
 
 Loader files
-~~~~~~~~~~~~
+------------
 
 Most examples directories contain a Logtalk utility file that can be used
 to load all included source files. These loader files are usually named
 ``loader.lgt`` or contain the word "loader" in their name. Loader files
-are ordinary source file and thus compiled and loaded like any source file.
-For an example loader file named ``loader.lgt`` we would type:
+are ordinary source files and thus compiled and loaded like any source
+file. For an example loader file named ``loader.lgt`` we would type:
 
 .. code-block:: text
 
@@ -392,7 +287,7 @@ multifile and dynamic ``logtalk_library_path/2`` predicate for the
 directory containing your source files as explained in the next section.
 
 A common mistake is to try to set compiler flags using ``logtalk_load/2``
-with a loader file. For example, by writing:
+when loading a loader file. For example, by writing:
 
 .. code-block:: text
 
@@ -406,7 +301,7 @@ not affect the compilation of files loaded through the
 .. _programming_libraries:
 
 Libraries of source files
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 Logtalk defines a *library* simply as a directory containing source
 files. Library locations can be specified by defining or asserting
@@ -459,12 +354,13 @@ problems of your loader files.
 
 This :term:`library notation` provides functionality inspired by the
 ``file_search_path/2`` mechanism introduced by Quintus Prolog and later
-adopted by some other Prolog compilers.
+adopted by some other Prolog compilers but with a key difference: there
+is no search and Logtalk will warn about duplicated library aliases.
 
 .. _programming_linter:
 
 Compiler linter
-~~~~~~~~~~~~~~~
+---------------
 
 The compiler includes a linter that checks for a wide range of possible
 problems in source files. Notably, the compiler checks for unknown
@@ -481,7 +377,7 @@ for details.
 .. _programming_flags:
 
 Compiler flags
-~~~~~~~~~~~~~~
+--------------
 
 The :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_compile_1`
 always use the current set of default compiler flags as specified in
@@ -556,7 +452,7 @@ the entity or to the source file containing it.
    Applications should never rely on default flag values for working
    properly.  Whenever the compilation of a source file or an entity
    requires a specific flag value, the flag should be set explicitly
-   in the file, in the entity, or in the loader file.
+   in the entity, in the source file, or in the loader file.
 
 Version flags
 ^^^^^^^^^^^^^
@@ -966,7 +862,7 @@ predicate that can be used for defining new flags.
 .. _programming_smart:
 
 Reloading and smart compilation of source files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------
 
 As a general rule, reloading source files should never occur in
 production code and should be handled with care in development code.
@@ -1012,11 +908,11 @@ characters).
 
 .. _programming_batch:
 
-Using Logtalk for batch processing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Batch processing
+----------------
 
-If you use Logtalk for batch processing, you probably want to turn off
-the :ref:`report <flag_report>` flag to suppress all messages of type
+When doing batch processing, you probably want to turn off the
+:ref:`report <flag_report>` flag to suppress all messages of type
 ``banner``, ``comment``, ``comment(_)``, ``warning``, and ``warning(_)``
 that are normally printed. Note that error messages and messages providing
 information requested by the user will still be printed.
@@ -1024,7 +920,7 @@ information requested by the user will still be printed.
 .. _programming_performance:
 
 Optimizing performance
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 The default compiler flag settings are appropriated for the
 **development** but not necessarily for the **deployment** of
@@ -1035,11 +931,12 @@ Your chosen backend Prolog compiler may also provide performance
 related flags; check its documentation.
 
 Pay special attention to file compilation/loading order. Whenever
-possible, compile/load your files taking into account file dependencies
-to enable :term:`static binding` optimizations. The easiest way to find
-the dependencies and thus the best compilation/loading order is to use
-the :doc:`../devtools/diagrams` tool to generate a file dependency
-diagram for your application.
+possible, compile and load your files taking into account file dependencies.
+By default, the compiler will print a warning whenever a file references
+an entity that is not yet loaded. Solving these warnings is key for optimal
+performance by enabling :term:`static binding` optimizations. For a clear
+picture of file dependencies, use the :doc:`../devtools/diagrams` tool to
+generate a file dependency diagram for your application.
 
 Minimize the use of dynamic predicates. Parametric objects can often be
 used in alternative. When dynamic predicates cannot be avoided, try to
@@ -1061,3 +958,88 @@ whenever possible.
 
 See the :ref:`section on performance <performance_performance>`
 for a detailed discussion on Logtalk performance.
+
+.. _programming_portability:
+
+Portable applications
+---------------------
+
+Logtalk is compatible with most modern standards compliant Prolog compilers.
+However, this does not necessarily imply that your Logtalk applications will
+have the same level of portability. If possible, you should only use in your
+applications Logtalk built-in predicates and ISO Prolog specified
+built-in predicates and arithmetic functions. If you need to use
+built-in predicates (or built-in arithmetic functions) that may not be
+available in other Prolog compilers, you should try to encapsulate the
+non-portable code in a small number of objects and provide a portable
+**interface** for that code through the use of Logtalk protocols. An
+example will be code that access operating-system specific features. The
+Logtalk compiler can warn you of the use of non-ISO specified built-in
+predicates and arithmetic functions by using the
+:ref:`portability <flag_portability>` compiler flag.
+
+.. _programming_cc:
+
+Conditional compilation
+-----------------------
+
+Logtalk supports conditional compilation within source files using the
+:ref:`directives_if_1`, :ref:`directives_elif_1`,
+:ref:`directives_else_0`, and :ref:`directives_endif_0` directives. This
+support is similar to the support found in several Prolog systems such
+as ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, XSB, and YAP.
+
+.. _programming_errors:
+
+Avoiding common errors
+----------------------
+
+Try to write objects and protocol documentation **before** writing any
+other code; if you are having trouble documenting a predicate perhaps we
+need to go back to the design stage.
+
+Try to avoid lengthy hierarchies. Composition is often a better choice
+over inheritance for defining new objects (Logtalk supports
+component-based programming through the use of
+:ref:`categories <categories_categories>`). In addition, prototype-based
+hierarchies are semantically simpler than class-based hierarchies.
+
+Dynamic predicates or dynamic entities are sometimes needed, but we
+should always try to minimize the use of non-logical features such as
+asserts and retracts.
+
+Since each Logtalk entity is independently compiled, if an object
+inherits a dynamic or a meta-predicate predicate, then the respective
+directives must be repeated to ensure a correct compilation.
+
+In general, Logtalk does not verify if a user predicate call/return
+arguments comply with the declared modes. On the other hand, Logtalk
+built-in predicates, built-in methods, and message sending control
+structures are fully checked for calling mode errors.
+
+Logtalk error handling strongly depends on the ISO compliance of the
+chosen Prolog compiler. For instance, the error terms that are generated
+by some Logtalk built-in predicates assume that the Prolog built-in
+predicates behave as defined in the ISO standard regarding error
+conditions. In particular, if your Prolog compiler does not support a
+``read_term/3`` built-in predicate compliant with the ISO Prolog
+Standard definition, then the current version of the Logtalk compiler
+may not be able to detect misspell variables in your source code.
+
+.. _programming_style:
+
+Coding style guidelines
+-----------------------
+
+It is suggested that all code between an entity opening and closing
+directives be indented by one tab stop. When defining entity code, both
+directives and predicates, Prolog coding style guidelines may be
+applied. All Logtalk source files, examples, and standard library
+entities use tabs (the recommended setting is a tab width equivalent to
+4 spaces) for laying out code. Closed related entities can be defined in
+the same source file. However, for best performance, is often necessary
+to have an entity per source file. Entities that might be useful in
+different contexts (such as library entities) are best defined in their
+own source files.
+
+A detailed coding style guide is available at the Logtalk official website.
