@@ -230,11 +230,11 @@ benchmarking compiler performance improvements.
 Loader files
 ------------
 
-Most examples directories contain a Logtalk utility file that can be used
-to load all included source files. These loader files are usually named
-``loader.lgt`` or contain the word "loader" in their name. Loader files
-are ordinary source files and thus compiled and loaded like any source
-file. For an example loader file named ``loader.lgt`` we would type:
+Most examples directories contain an utility file that can be used to load
+all included source files and any required libraries. These loader files
+are usually named ``loader.lgt`` or contain the word "loader" in their name.
+Loader files are ordinary source files and thus compiled and loaded like any
+source file. For an example loader file named ``loader.lgt`` we would type:
 
 .. code-block:: text
 
@@ -245,9 +245,9 @@ Usually these files contain a call to the built-in predicates
 (e.g. for setting global, *project-specific*, flag values) and
 :ref:`predicates_logtalk_load_1` or :ref:`predicates_logtalk_load_2` (for
 loading project files), wrapped inside a Prolog ``initialization/1``
-directive. For instance, if your code is split in three Logtalk source
-files named ``source1.lgt``, ``source2.lgt``, and ``source3.lgt``, then
-the contents of your loader file could be:
+directive for poertability. For instance, if your code is split in three
+source files named ``source1.lgt``, ``source2.lgt``, and ``source3.lgt``,
+then the contents of your loader file could be:
 
 ::
 
@@ -285,6 +285,19 @@ compiler flags). For example:
 To take the best advantage of loader files, define a clause for the
 multifile and dynamic ``logtalk_library_path/2`` predicate for the
 directory containing your source files as explained in the next section.
+
+When your application uses Prolog module resources, the loader file is
+also the advised place to load them, preferably without any exports.
+For example:
+
+::
+
+   :- use_module(library(clpfd), []).
+   ...
+
+   :- initialization((
+       ...
+   )).
 
 A common mistake is to try to set compiler flags using ``logtalk_load/2``
 when loading a loader file. For example, by writing:
@@ -340,12 +353,12 @@ just need to type:
 
 The best way to take advantage of this feature is to load at startup a source
 file containing clauses for the ``logtalk_library_path/2`` predicate needed
-for all available libraries (typically, using a :term:`settings file`). This
-allows us to load library source files or entire libraries without worrying
-about libraries paths, improving code portability. The directory paths on the
-second argument should always end with the path directory separator
-character. Most backend Prolog compilers allows the use of environment
-variables in the second argument of the ``logtalk_library_path/2``
+for all available libraries (typically, using a :term:`settings file`, as
+discussed below). This allows us to load library source files or entire
+libraries without worrying about libraries paths, improving code portability.
+The directory paths on the second argument should always end with the path
+directory separator character. Most backend Prolog compilers allows the use
+of environment variables in the second argument of the ``logtalk_library_path/2``
 predicate. Use of POSIX relative paths (e.g. ``'../'`` or ``'./'``) for
 top-level library directories (e.g. ``lgtuser`` in the example above) is
 not advised as different backend Prolog compilers may start with
@@ -356,6 +369,71 @@ This :term:`library notation` provides functionality inspired by the
 ``file_search_path/2`` mechanism introduced by Quintus Prolog and later
 adopted by some other Prolog compilers but with a key difference: there
 is no search and Logtalk will warn about duplicated library aliases.
+
+.. _programming_settings:
+
+Settings files
+--------------
+
+Although is always possible to edit the :term:`backend Prolog compiler` adapter
+files, the recommended solution to customize compiler flags is to create a
+``settings.lgt`` file in the Logtalk user folder or in the user home folder.
+Depending on the backend Prolog compiler and on the operating-system,
+is also possible to define per-project settings files by creating a
+``settings.lgt`` file in the project directory and by starting Logtalk from
+this directory. At startup, Logtalk tries to load a ``settings.lgt`` file
+from the following directories, searched in sequence:
+
+- Startup directory (``$LOGTALK_STARTUP_DIRECTORY``)
+- Logtalk user directory (``$LOGTALKUSER``)
+- User home directory (``$HOME``; ``%USERPROFILE%`` on Windows if ``%HOME%`` is not defined)
+- Application data directory (``%APPDATA%\Logtalk``; only on Windows)
+- Config directory (``$XDG_CONFIG_HOME/logtalk``)
+- Default config directory (``$HOME/.config/logtalk/``)
+
+The startup directory is only searched when the read-only
+:ref:`settings_file <flag_settings_file>` flag is set to ``allow``.
+When no settings files are found, Logtalk will use the default compiler flag
+values set on the backend Prolog compiler adapter files. When limitations of
+the backend Prolog compiler or on the operating-system prevent Logtalk from
+finding the settings files, these can always be loaded manually after Logtalk
+startup.
+
+Settings files are normal Logtalk source files (although when automatically
+loaded by Logtalk they are compiled and loaded silently with any errors being
+reported but otherwise ignored). The usual contents is an
+``initialization/1`` Prolog directive containing calls to the
+:ref:`predicates_set_logtalk_flag_2`
+Logtalk built-in predicate and asserting clauses for the
+:ref:`predicates_logtalk_library_path_2`
+multifile dynamic predicate. Note that the
+:ref:`directives_set_logtalk_flag_2`
+directive cannot be used as its scope is local to the source file being
+compiled.
+
+One of the troubles of writing portable applications is the different
+feature sets of Prolog compilers. Using the Logtalk support for
+conditional compilation and the :ref:`prolog_dialect <flag_prolog_dialect>`
+flag we can write a single settings file that can be used with several
+:term:`backend Prolog compilers <backend Prolog compiler>`:
+
+::
+
+   :- if(current_logtalk_flag(prolog_dialect, yap)).
+
+       % YAP specific settings
+       ...
+
+   :- elif(current_logtalk_flag(prolog_dialect, gnu)).
+
+       % GNU Prolog specific settings
+       ...
+
+   :- else.
+
+       % generic Prolog settings
+
+   :- endif.
 
 .. _programming_linter:
 
@@ -453,6 +531,128 @@ the entity or to the source file containing it.
    properly.  Whenever the compilation of a source file or an entity
    requires a specific flag value, the flag should be set explicitly
    in the entity, in the source file, or in the loader file.
+
+Read-only flags
+^^^^^^^^^^^^^^^
+
+Some flags have read-only values and thus cannot be changed at runtime. Their
+values are defined in the Prolog backend :term:`adapter files <adapter file>`
+These are:
+
+.. _flag_settings_file:
+.. index:: pair: settings_file; Flag
+
+``settings_file``
+   Allows or disables loading of a :term:`settings file` at startup.
+   Possible values are ``allow``, ``restrict``, and ``deny``. The usual
+   default value is ``allow`` but it can be changed by editing the adapter
+   file when e.g. embedding Logtalk in a compiled application. With a value
+   of ``allow``, settings files are searched in the startup directory,
+   in the Logtalk user directory, in the user home directory, in the
+   ``APPDATA`` if running on Windows, and in the XDG configuration directory.
+   With a value of ``restrict``, the search for the settings files skips the
+   startup directory.
+
+.. _flag_prolog_dialect:
+.. index:: pair: prolog_dialect; Flag
+
+``prolog_dialect``
+   Name of the :term:`backend Prolog compiler` (an atom). This flag can be used
+   for :ref:`conditional compilation <conditional_compilation_directives>`
+   of Prolog specific code.
+
+.. _flag_prolog_version:
+.. index:: pair: prolog_version; Flag
+
+``prolog_version``
+   Version of the :term:`backend Prolog compiler` (a compound term,
+   ``v(Major, Minor, Patch)``, whose arguments are integers). This flag
+   availability depends on the Prolog compiler. Checking the value of
+   this flag fails for any Prolog compiler that does not provide access
+   to version data.
+
+.. _flag_prolog_compatible_version:
+.. index:: pair: prolog_compatible_version; Flag
+
+``prolog_compatible_version``
+   Compatible version of the :term:`backend Prolog compiler` (a compound term,
+   usually with the format ``@>=(v(Major, Minor, Patch))``, whose
+   arguments are integers). This flag availability depends on the Prolog
+   compiler. Checking the value of this flag fails for any Prolog
+   compiler that does not provide access to version data.
+
+.. _flag_prolog_conformance:
+.. index:: pair: prolog_conformance; Flag
+
+``prolog_conformance``
+   Level of conformance of the :term:`backend Prolog compiler` with the
+   ISO Prolog Core standard. The possible values are ``strict`` for
+   compilers claiming strict conformance and ``lax`` for compilers
+   claiming only broad conformance.
+
+.. _flag_unicode:
+.. index:: pair: unicode; Flag
+
+``unicode``
+   Informs Logtalk if the :term:`backend Prolog compiler` supports the Unicode
+   standard. Possible flag values are ``unsupported``, ``full`` (all
+   Unicode planes supported), and ``bmp`` (supports only the Basic
+   Multilingual Plane).
+
+.. _flag_encoding_directive:
+.. index:: pair: encoding_directive; Flag
+
+``encoding_directive``
+   Informs Logtalk if the :term:`backend Prolog compiler` supports the
+   :ref:`directives_encoding_1` directive.
+   This directive is used for declaring the text encoding of source
+   files. Possible flag values are ``unsupported``, ``full`` (can be
+   used in both Logtalk source files and compiler generated Prolog
+   files), and ``source`` (can be used only in Logtalk source files).
+
+.. _flag_tabling:
+.. index:: pair: tabling; Flag
+
+``tabling``
+   Informs Logtalk if the :term:`backend Prolog compiler` provides tabling
+   programming support. Possible flag values are ``unsupported`` and
+   ``supported``.
+
+.. _flag_engines:
+.. index:: pair: engines; Flag
+
+``engines``
+   Informs if the :term:`backend Prolog compiler` provides the required low
+   level multi-threading programming support for Logtalk
+   :term:`threaded engines <threaded engine>`. Possible flag values
+   are ``unsupported`` and ``supported``.
+
+.. _flag_threads:
+.. index:: pair: threads; Flag
+
+``threads``
+   Informs if the :term:`backend Prolog compiler` provides the required low
+   level multi-threading programming support for all high-level Logtalk
+   :ref:`multi-threading features <threads_threads>`. Possible flag
+   values are ``unsupported`` and ``supported``.
+
+.. _flag_modules:
+.. index:: pair: modules; Flag
+
+``modules``
+   Informs Logtalk if the :term:`backend Prolog compiler` provides suitable
+   module support. Possible flag values are ``unsupported`` and
+   ``supported`` (Logtalk provides limited support for compiling Prolog
+   modules as objects).
+
+.. _flag_coinduction:
+.. index:: pair: coinduction; Flag
+
+``coinduction``
+   Informs Logtalk if the :term:`backend Prolog compiler` provides the
+   required minimal support for cyclic terms necessary for working with
+   :term:`coinductive predicates <coinductive predicate>`. Possible flag
+   values are ``unsupported`` and ``supported``.
 
 Version flags
 ^^^^^^^^^^^^^

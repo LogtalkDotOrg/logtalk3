@@ -63,6 +63,8 @@ directives when the argument is a list of files.
 Documentation
 -------------
 
+* CHANGED: Consolidated Handbook listing of flags in the programming section.
+
 * ADDED: Handbook section on sending messages from Prolog modules.
 
 * ADDED: Handbook glossary entry for *predicate shorthand*.
