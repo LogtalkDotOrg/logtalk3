@@ -24,7 +24,8 @@ Reflection
 Logtalk provides support for both *structural* and *behavioral* reflection.
 Structural reflection supports computations over an application structure
 while behavioral reflection computations over what an application does while
-running.
+running. The structural and behavioral reflection APIs are used by all the
+:doc:`developer tools <../devtools/index>`, which are regular applications.
 
 .. index:: single: structural reflection
 .. _reflection_structural:
@@ -33,10 +34,9 @@ Structural reflection
 ---------------------
 
 Structural reflection allows querying the properties of objects, categories,
-protocols, and predicates. It is materialized by an API that is used by all the
-developer tools, which are regular applications. This API provides two views
-on the structure of an application: a *transparent-box view* and a *black-box
-view*, described next.
+protocols, and predicates. This API provides two views on the structure of
+an application: a *transparent-box view* and a *black-box view*, described
+next.
 
 .. index:: single: transparent-box view
 
