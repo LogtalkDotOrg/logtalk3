@@ -28,7 +28,8 @@ Description
 
    logtalk_make(Target)
 
-Runs a make target. Fails of the target is not valid.
+Runs a make target. Prints a warning message and fails when the target is
+not valid.
 
 Allows reloading all Logtalk source files that have been modified since
 last loaded when called with the target ``all``, deleting all
@@ -62,9 +63,11 @@ When using the ``check`` or ``circular`` targets, be sure to compile
 your source files with the :ref:`source_data <flag_source_data>` flag
 turned on for complete and detailed reports.
 
-When using the ``check`` target, predicates for messages sent to objects
-that implement the :ref:`forwarding <apis:forwarding/0>` built-in protocol
-are not reported. While this usually avoids only false positives, it may
+The ``check`` target scans for missing entities (objects, protocols,
+categories, and modules), missing entity predicates, and duplicated
+library aliases. Predicates for messages sent to objects that implement
+the :ref:`forwarding <apis:forwarding/0>` built-in protocol are not
+reported. While this usually avoids only false positives, it may
 also result in failure to report true missing predicates in some cases.
 
 When using the ``circular`` target, be prepared for a lengthy computation
@@ -103,8 +106,9 @@ these shortcuts as they are not part of the language.
    never in source files.
 
 The target actions can be extended by defining clauses for the multifile
-and dynamic hook predicate ``logtalk_make_target_action(Target)`` where
-``Target`` is one of the targets listed above. The additional user
+and dynamic hook predicate
+:ref:`logtalk_make_target_action(Target) <predicates_logtalk_make_target_action_1>`
+where ``Target`` is one of the targets listed above. The additional user
 defined actions are run after the default ones.
 
 Modes and number of proofs

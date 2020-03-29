@@ -49,7 +49,7 @@ Prolog files with the `derived_from/1` property when the Prolog flag
 when the Prolog flag `logtalk_source_location_data` is false.
 
 * ADDED: SWI-Prolog adapter support for all the syntax variants of the
-`dynamic(Predicates as Properties)` proprietary directive . Requested by
+`dynamic(Predicates as Properties)` proprietary directive. Requested by
 James Cash.
 
 * IMPROVED: The SWI-Prolog adapter file now deletes tests when compiling a
@@ -79,6 +79,8 @@ documenting, term-expansion, and writing and running applications.
 * IMPROVED: Handbook glossary definition of steadfastness.
 
 * IMPROVED: Handbook documentation of the `include/1` directive.
+
+* IMPROVED: Handbook documentation of the `logtalk_make/1` built-in predicate.
 
 * UPDATED: Handbook section on debugging using the term-expansion mechanism.
 
