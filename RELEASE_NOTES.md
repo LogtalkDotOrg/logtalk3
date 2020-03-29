@@ -48,6 +48,10 @@ Prolog files with the `derived_from/1` property when the Prolog flag
 * CHANGED: The SWI-Prolog hooks file to call `logtalk_make/0` from `make/0`
 when the Prolog flag `logtalk_source_location_data` is false.
 
+* ADDED: SWI-Prolog adapter support for all the syntax variants of the
+`dynamic(Predicates as Properties)` proprietary directive . Requested by
+James Cash.
+
 * IMPROVED: The SWI-Prolog adapter file now deletes tests when compiling a
 module as an object to avoid compilation errors.
 

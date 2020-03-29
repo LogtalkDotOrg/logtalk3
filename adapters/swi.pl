@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on March 22, 2020
+%  Last updated on March 29, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -764,14 +764,13 @@
 	logtalk_load_context(entity_type, _),
 	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
 
-'$lgt_swi_directive_expansion'(dynamic(as(Predicates,ShareMode)), {:- dynamic(as(TPredicates,ShareMode))}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(Predicates, _, TPredicates).
+'$lgt_swi_directive_expansion'(dynamic(as(Predicates,Properties)), Expansion) :-
+	'$lgt_swi_directive_expansion'(dynamic(Predicates,Properties), Expansion).
 
 '$lgt_swi_directive_expansion'(dynamic(Predicates,Properties), [{:- dynamic(TPredicates,Properties)}, (:- dynamic(Predicates))| Directives]) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(Predicates, _, TPredicates),
-	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+	'$lgt_swi_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
 
 '$lgt_swi_directive_expansion'(begin_tests(_, _), (:- if(fail))) :-
 	logtalk_load_context(entity_type, module).
@@ -805,26 +804,38 @@
 	'$lgt_compile_predicate_heads'(Head, _, THead, _).
 
 
-'$lgt_dynamic_directive_expansion'([], _, _, []).
-'$lgt_dynamic_directive_expansion'([thread(Local)| Properties], Predicates, TPredicates, [{:- thread_local(TPredicates)}| Directives]) :-
+'$lgt_swi_dynamic_directive_expansion'([], _, _, []).
+'$lgt_swi_dynamic_directive_expansion'([thread(Local)| Properties], Predicates, TPredicates, [{:- thread_local(TPredicates)}| Directives]) :-
 	Local == local,
 	!,
-	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
-'$lgt_dynamic_directive_expansion'([multifile(Boolean)| Properties], Predicates, TPredicates, [(:- multifile(Predicates))| Directives]) :-
+	'$lgt_swi_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_swi_dynamic_directive_expansion'([multifile(Boolean)| Properties], Predicates, TPredicates, [(:- multifile(Predicates))| Directives]) :-
 	Boolean == true,
 	!,
-	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
-'$lgt_dynamic_directive_expansion'([discontiguous(Boolean)| Properties], Predicates, TPredicates, [(:- discontiguous(Predicates))| Directives]) :-
+	'$lgt_swi_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_swi_dynamic_directive_expansion'([discontiguous(Boolean)| Properties], Predicates, TPredicates, [(:- discontiguous(Predicates))| Directives]) :-
 	Boolean == true,
 	!,
-	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
-'$lgt_dynamic_directive_expansion'([volatile(Boolean)| Properties], Predicates, TPredicates, [{:- volatile(TPredicates)}| Directives]) :-
+	'$lgt_swi_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_swi_dynamic_directive_expansion'([volatile(Boolean)| Properties], Predicates, TPredicates, [{:- volatile(TPredicates)}| Directives]) :-
 	Boolean == true,
 	!,
-	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
-'$lgt_dynamic_directive_expansion'([_| Properties], Predicates, TPredicates, Directives) :-
+	'$lgt_swi_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_swi_dynamic_directive_expansion'([_| Properties], Predicates, TPredicates, Directives) :-
 	!,
-	'$lgt_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+	'$lgt_swi_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives).
+'$lgt_swi_dynamic_directive_expansion'(Properties, Predicates, TPredicates, Directives) :-
+	'$lgt_swi_conjunction_to_list'(Properties, List),
+	'$lgt_swi_dynamic_directive_expansion'(List, Predicates, TPredicates, Directives).
+
+
+'$lgt_swi_conjunction_to_list'(Term, [Term]) :-
+	var(Term),
+	!.
+'$lgt_swi_conjunction_to_list'((Term, Conjunction), [Term| Terms]) :-
+	!,
+	'$lgt_swi_conjunction_to_list'(Conjunction, Terms).
+'$lgt_swi_conjunction_to_list'(Term, [Term]).
 
 
 '$lgt_swi_unify_head_thead_args'([], [_]).
