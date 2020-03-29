@@ -49,8 +49,9 @@ developing an application. Compiling code in optimal mode enables
 several optimizations, notably use of :term:`static binding` whenever
 enough information is available at compile time. In debug mode, most
 optimizations are turned off and the code is instrumented to generate
-*debug events* that enable tools such as the command-line debugger and
-the ports profiler.
+:ref:`debug events <debugging_events>` that enable developer tools such
+as the :doc:`command-line debugger <../devtools/debugger>` and the
+:doc:`ports profiler <../devtools/ports_profiler>`.
 
 Local predicate calls
 ---------------------
@@ -76,11 +77,13 @@ compile time).
 Messages
 --------
 
-Logtalk implements static binding and dynamic binding for message sending
-calls. For dynamic binding, a caching mechanism is used by the runtime.
-It's useful to measure the performance overhead in *number of inferences*
-compared with plain Prolog and Prolog modules. The results for Logtalk
-3.17.0 and later versions are:
+Logtalk implements :term:`static binding` and :term:`dynamic binding`
+for message sending calls. For dynamic binding, a caching mechanism is
+used by the runtime. It's useful to measure the performance overhead in
+*number of inferences* compared with plain Prolog and Prolog modules.
+Note that the number of inferences is a metric independent of the chosen
+backend Prolog compiler. The results for Logtalk 3.17.0 and later versions
+are:
 
 -  Static binding: 0
 -  Dynamic binding (object bound at compile time): 1

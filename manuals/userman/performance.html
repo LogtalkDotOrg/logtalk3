@@ -248,8 +248,9 @@ developing an application. Compiling code in optimal mode enables
 several optimizations, notably use of <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> whenever
 enough information is available at compile time. In debug mode, most
 optimizations are turned off and the code is instrumented to generate
-<em>debug events</em> that enable tools such as the command-line debugger and
-the ports profiler.</p>
+<a class="reference internal" href="debugging.html#debugging-events"><span class="std std-ref">debug events</span></a> that enable developer tools such
+as the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">command-line debugger</span></a> and the
+<a class="reference internal" href="../devtools/ports_profiler.html"><span class="doc">ports profiler</span></a>.</p>
 </div>
 <div class="section" id="local-predicate-calls">
 <h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Permalink to this headline">¶</a></h2>
@@ -271,11 +272,13 @@ compile time).</p>
 </div>
 <div class="section" id="messages">
 <h2>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h2>
-<p>Logtalk implements static binding and dynamic binding for message sending
-calls. For dynamic binding, a caching mechanism is used by the runtime.
-It’s useful to measure the performance overhead in <em>number of inferences</em>
-compared with plain Prolog and Prolog modules. The results for Logtalk
-3.17.0 and later versions are:</p>
+<p>Logtalk implements <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> and <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>
+for message sending calls. For dynamic binding, a caching mechanism is
+used by the runtime. It’s useful to measure the performance overhead in
+<em>number of inferences</em> compared with plain Prolog and Prolog modules.
+Note that the number of inferences is a metric independent of the chosen
+backend Prolog compiler. The results for Logtalk 3.17.0 and later versions
+are:</p>
 <ul class="simple">
 <li><p>Static binding: 0</p></li>
 <li><p>Dynamic binding (object bound at compile time): 1</p></li>
