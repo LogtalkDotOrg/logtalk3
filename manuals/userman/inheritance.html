@@ -127,6 +127,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#public-protected-and-private-inheritance">Public, protected, and private inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-inheritance">Multiple inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#composition-versus-multiple-inheritance">Composition versus multiple inheritance</a></li>
 </ul>
 </li>
@@ -236,18 +237,20 @@ an object will virtually contain, besides its own predicates, all the
 predicates inherited from other objects that are not redefined locally.</p>
 <p>Logtalk uses a depth-first search procedure for finding predicate
 declarations and predicate definitions, as explained below. The search
-procedures locate the entities holding the predicate declaration and
-the predicate definition using the predicate template.
+procedures locate the entities holding the <a class="reference internal" href="../glossary.html#term-predicate-declaration"><span class="xref std std-term">predicate declaration</span></a>
+and the <a class="reference internal" href="../glossary.html#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a> using the predicate name and arity.
 The <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive may be used for defining
 alternative names for inherited predicates, for solving inheritance
 conflicts, and for giving access to all inherited definitions (thus
 overriding the default search procedure).</p>
-<p>The search procedures are notably used when compiling or handling a
-<a class="reference internal" href="messages.html#messages-messages"><span class="std std-ref">message</span></a> sent to an object. The exact details
-of the search procedures depend on the role played by the object receiving
-the message, as explained next. The search procedures are also used by the
-<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>
-reflection predicates.</p>
+<p>The search procedures are used when sending a message (using the
+<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a>, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>, and
+<a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> control constructs) and when making <em>super</em>
+calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> control construct). The exact
+details of the search procedures depend on the role played by the object
+receiving the message or making the <em>super</em> call, as explained next. The
+search procedures are also used by the <a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>
+and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a> reflection predicates.</p>
 <div class="section" id="protocol-inheritance">
 <span id="inheritance-protocol"></span><h2>Protocol inheritance<a class="headerlink" href="#protocol-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>Protocol inheritance refers to the inheritance of predicate declarations
@@ -510,6 +513,25 @@ keyword. For example:</p>
 and a simplified syntax when protected or private inheritance are not
 used.</p>
 </div>
+<div class="section" id="multiple-inheritance">
+<span id="inheritance-multiple"></span><h2>Multiple inheritance<a class="headerlink" href="#multiple-inheritance" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk supports multi-inheritance by enabling an object to extend,
+instantiate, or specialize more than one object. Likewise, a protocol
+may extends multiple protocols and a category may extend multiple
+categories. In this case, the depth-first search algorithms described
+above traverse the list of entities per relation from left to right.
+Consider as an example the following object opening directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo,
+    <span class="k">extends</span>((bar, baz))).
+</pre></div>
+</div>
+<p>The search will look first into the parent object <cite>bar</cite> and its related
+entities before looking into the parent object <cite>baz</cite>. The
+<a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive can always be used to
+solve multi-inheritance conflicts. It should also be noted that the
+multi-inheritance support does not affect performance when we use
+single-inheritance.</p>
+</div>
 <div class="section" id="composition-versus-multiple-inheritance">
 <span id="inheritance-composition"></span><h2>Composition versus multiple inheritance<a class="headerlink" href="#composition-versus-multiple-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>It is not possible to discuss inheritance mechanisms without referring
@@ -529,19 +551,13 @@ strategy like <a class="reference internal" href="../bibliography.html#mccabe92"
 of CLOS <a class="reference internal" href="../bibliography.html#bobrow-et-al-88" id="id5"><span>[Bobrow_et_al_88]</span></a>, there is no
 adequate solution for all the situations. Besides, the use of multiple
 inheritance carries some complex problems in the domain of software
-engineering, particularly in the reuse and maintenance of the
-applications. All these problems are substantially reduced if we
-preferably use in our software development composition mechanisms
-instead of specialization mechanisms <a class="reference internal" href="../bibliography.html#taenzer89" id="id6"><span>[Taenzer89]</span></a>. Multiple inheritance is
-best used as an analysis and project abstraction, rather than
-as an implementation technique <a class="reference internal" href="../bibliography.html#shan-et-al-93" id="id7"><span>[Shan_et_al_93]</span></a>. Logtalk provides first-class
-support for composition using <a class="reference internal" href="categories.html#categories-categories"><span class="std std-ref">categories</span></a>.</p>
-<p>Nevertheless, Logtalk supports multi-inheritance by enabling an object
-to extend, instantiate, or specialize more than one object. The
-<a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive can always be used
-to solve multi-inheritance conflicts. It should also be noted that the
-multi-inheritance support does not affect performance when we use
-single-inheritance.</p>
+engineering, particularly in the reuse and maintenance of the applications.
+All these problems are substantially reduced if we preferably use in our
+software development composition mechanisms instead of specialization
+mechanisms <a class="reference internal" href="../bibliography.html#taenzer89" id="id6"><span>[Taenzer89]</span></a>. Multiple inheritance is best used as an analysis
+and project abstraction, rather than as an implementation technique
+<a class="reference internal" href="../bibliography.html#shan-et-al-93" id="id7"><span>[Shan_et_al_93]</span></a>. Note that Logtalk provides first-class support for
+composition using <a class="reference internal" href="categories.html#categories-categories"><span class="std std-ref">categories</span></a>.</p>
 </div>
 </div>
 

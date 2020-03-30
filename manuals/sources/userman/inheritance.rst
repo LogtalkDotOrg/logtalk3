@@ -30,19 +30,21 @@ predicates inherited from other objects that are not redefined locally.
 
 Logtalk uses a depth-first search procedure for finding predicate
 declarations and predicate definitions, as explained below. The search
-procedures locate the entities holding the predicate declaration and
-the predicate definition using the predicate template.
+procedures locate the entities holding the :term:`predicate declaration`
+and the :term:`predicate definition` using the predicate name and arity.
 The :ref:`directives_alias_2` predicate directive may be used for defining
 alternative names for inherited predicates, for solving inheritance
 conflicts, and for giving access to all inherited definitions (thus
 overriding the default search procedure).
 
-The search procedures are notably used when compiling or handling a
-:ref:`message <messages_messages>` sent to an object. The exact details
-of the search procedures depend on the role played by the object receiving
-the message, as explained next. The search procedures are also used by the
-:ref:`methods_current_predicate_1` and :ref:`methods_predicate_property_2`
-reflection predicates.
+The search procedures are used when sending a message (using the
+:ref:`control_send_to_object_2`, :ref:`control_send_to_self_1`, and
+:ref:`control_delegate_message_1` control constructs) and when making *super*
+calls (using the :ref:`control_call_super_1` control construct). The exact
+details of the search procedures depend on the role played by the object
+receiving the message or making the *super* call, as explained next. The
+search procedures are also used by the :ref:`methods_current_predicate_1`
+and :ref:`methods_predicate_property_2` reflection predicates.
 
 .. _inheritance_protocol:
 
@@ -360,6 +362,30 @@ This way we ensure backward compatibility with older Logtalk versions
 and a simplified syntax when protected or private inheritance are not
 used.
 
+.. _inheritance_multiple:
+
+Multiple inheritance
+--------------------
+
+Logtalk supports multi-inheritance by enabling an object to extend,
+instantiate, or specialize more than one object. Likewise, a protocol
+may extends multiple protocols and a category may extend multiple
+categories. In this case, the depth-first search algorithms described
+above traverse the list of entities per relation from left to right.
+Consider as an example the following object opening directive:
+
+::
+
+   :- object(foo,
+       extends((bar, baz))).
+
+The search will look first into the parent object `bar` and its related
+entities before looking into the parent object `baz`. The
+:ref:`directives_alias_2` predicate directive can always be used to
+solve multi-inheritance conflicts. It should also be noted that the
+multi-inheritance support does not affect performance when we use
+single-inheritance.
+
 .. _inheritance_composition:
 
 Composition versus multiple inheritance
@@ -383,17 +409,10 @@ strategy like [McCabe92]_ or [Moss94]_ and to the sophisticated algorithms
 of CLOS [Bobrow_et_al_88]_, there is no
 adequate solution for all the situations. Besides, the use of multiple
 inheritance carries some complex problems in the domain of software
-engineering, particularly in the reuse and maintenance of the
-applications. All these problems are substantially reduced if we
-preferably use in our software development composition mechanisms
-instead of specialization mechanisms [Taenzer89]_. Multiple inheritance is
-best used as an analysis and project abstraction, rather than
-as an implementation technique [Shan_et_al_93]_. Logtalk provides first-class
-support for composition using :ref:`categories <categories_categories>`.
-
-Nevertheless, Logtalk supports multi-inheritance by enabling an object
-to extend, instantiate, or specialize more than one object. The
-:ref:`directives_alias_2` predicate directive can always be used
-to solve multi-inheritance conflicts. It should also be noted that the
-multi-inheritance support does not affect performance when we use
-single-inheritance.
+engineering, particularly in the reuse and maintenance of the applications.
+All these problems are substantially reduced if we preferably use in our
+software development composition mechanisms instead of specialization
+mechanisms [Taenzer89]_. Multiple inheritance is best used as an analysis
+and project abstraction, rather than as an implementation technique
+[Shan_et_al_93]_. Note that Logtalk provides first-class support for
+composition using :ref:`categories <categories_categories>`.
