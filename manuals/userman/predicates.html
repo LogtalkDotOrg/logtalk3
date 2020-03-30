@@ -653,7 +653,7 @@ provides an alternative, additional name; the original name continues to
 be available (although it may be masked due to the default inheritance
 conflict mechanism).</p>
 <p>Another common use for this directive is to solve conflicts when two
-inherited predicates have the same functor and arity. We may want to
+inherited predicates have the same name and arity. We may want to
 call the predicate which is masked out by the Logtalk lookup algorithm
 (see the <a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">Inheritance</span></a> section) or we may need to
 call both predicates. This is simply accomplished by using the
@@ -706,7 +706,7 @@ inherited predicate, while keeping the original name as follows:</p>
 <span class="p">    :- </span><span class="k">alias</span>(set,  [member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> set_member<span class="o">/</span><span class="m">2</span>]).
 
     member(<span class="nv">X</span>, <span class="nv">L</span>) <span class="o">:-</span>
-        <span class="o">::</span>set_member(<span class="nv">X</span>, <span class="nv">L</span>).
+        <span class="o">^^</span>set_member(<span class="nv">X</span>, <span class="nv">L</span>).
 
     ...
 
@@ -1063,10 +1063,11 @@ in general, this also results from a programming error. A third check
 verifies that no lambda parameter variable is used elsewhere in a
 clause. Such cases are either programming errors, when the variable
 appears before the lambda expression, or bad programming style, when
-the variable is used after the lambda expression. Note, however, that
-the dynamic features of the language and lack of sufficient information
-at compile time may prevent the compiler of checking all uses of lambda
-expressions.</p>
+the variable is used after the lambda expression. These linter warnings
+are controlled by the <a class="reference internal" href="programming.html#flag-lambda-variables"><span class="std std-ref">lambda_variables</span></a>
+flag. Note, however, that the dynamic features of the language and lack
+of sufficient information at compile time may prevent the compiler of
+checking all uses of lambda expressions.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Variables listed in lambda parameters must not be shared with
@@ -1090,9 +1091,9 @@ to alert the user of any redefined Logtalk or Prolog built-in predicate.</p>
 <a class="reference internal" href="../refman/directives/conditional_compilation_directives.html#conditional-compilation-directives"><span class="std std-ref">conditional compilation directives</span></a>
 when writing portable applications where some of the supported backends
 don’t provide a built-in predicate found in the other backends. As an example,
-consider the de facto standard list length predicate, <cite>length/2</cite>. This
+consider the de facto standard list length predicate, <code class="docutils literal notranslate"><span class="pre">length/2</span></code>. This
 predicate is provided as a built-in predicate in most but not all backends.
-The <cite>list</cite> library object includes the code:</p>
+The <code class="docutils literal notranslate"><span class="pre">list</span></code> library object includes the code:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">predicate_property</span>(length(<span class="nv">_</span>, <span class="nv">_</span>), built_in)).
 
     length(<span class="nv">List</span>, <span class="nv">Length</span>) <span class="o">:-</span>
@@ -1110,10 +1111,10 @@ The <cite>list</cite> library object includes the code:</p>
 it will use the object provided predicate definition.</p>
 <p>The redefinition of built-in predicates can also be accomplished using
 <a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a>. This can be useful
-when porting code while minimizing the changes. For examples, assume
+when porting code while minimizing the changes. For example, assume
 that existing code uses the <code class="docutils literal notranslate"><span class="pre">format/2</span></code> de facto standard predicate
-for writing messages. To convert the code to use the message printing
-mechanism we could write:</p>
+for writing messages. To convert the code to use the
+<a class="reference internal" href="printing.html#printing-printing"><span class="std std-ref">message printing mechanism</span></a> we could write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(logtalk, [
     print_message(comment, core, <span class="nv">Format</span><span class="o">+</span><span class="nv">Arguments</span>) <span class="o">as</span> format(<span class="nv">Format</span>, <span class="nv">Arguments</span>)
 ]).

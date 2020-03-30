@@ -492,7 +492,7 @@ be available (although it may be masked due to the default inheritance
 conflict mechanism).
 
 Another common use for this directive is to solve conflicts when two
-inherited predicates have the same functor and arity. We may want to
+inherited predicates have the same name and arity. We may want to
 call the predicate which is masked out by the Logtalk lookup algorithm
 (see the :ref:`inheritance_inheritance` section) or we may need to
 call both predicates. This is simply accomplished by using the
@@ -554,7 +554,7 @@ inherited predicate, while keeping the original name as follows:
        :- alias(set,  [member/2 as set_member/2]).
 
        member(X, L) :-
-           ::set_member(X, L).
+           ^^set_member(X, L).
 
        ...
 
@@ -982,10 +982,11 @@ in general, this also results from a programming error. A third check
 verifies that no lambda parameter variable is used elsewhere in a
 clause. Such cases are either programming errors, when the variable
 appears before the lambda expression, or bad programming style, when
-the variable is used after the lambda expression. Note, however, that
-the dynamic features of the language and lack of sufficient information
-at compile time may prevent the compiler of checking all uses of lambda
-expressions.
+the variable is used after the lambda expression. These linter warnings
+are controlled by the :ref:`lambda_variables <flag_lambda_variables>`
+flag. Note, however, that the dynamic features of the language and lack
+of sufficient information at compile time may prevent the compiler of
+checking all uses of lambda expressions. 
 
 .. warning::
 
@@ -1015,9 +1016,9 @@ The redefinition of Prolog built-in predicates can be combined with the
 :ref:`conditional compilation directives <conditional_compilation_directives>`
 when writing portable applications where some of the supported backends
 don't provide a built-in predicate found in the other backends. As an example,
-consider the de facto standard list length predicate, `length/2`. This
+consider the de facto standard list length predicate, ``length/2``. This
 predicate is provided as a built-in predicate in most but not all backends.
-The `list` library object includes the code:
+The ``list`` library object includes the code:
 
 ::
 
@@ -1038,10 +1039,10 @@ it will use the object provided predicate definition.
 
 The redefinition of built-in predicates can also be accomplished using
 :term:`predicate shorthands <predicate shorthand>`. This can be useful
-when porting code while minimizing the changes. For examples, assume
+when porting code while minimizing the changes. For example, assume
 that existing code uses the ``format/2`` de facto standard predicate
-for writing messages. To convert the code to use the message printing
-mechanism we could write:
+for writing messages. To convert the code to use the
+:ref:`message printing mechanism <printing_printing>` we could write:
 
 ::
 
