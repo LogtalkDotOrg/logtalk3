@@ -83,7 +83,8 @@ running applications.
 
 * IMPROVED: Handbook documentation of the `include/1` directive.
 
-* IMPROVED: Handbook documentation of the `logtalk_make/1` built-in predicate.
+* IMPROVED: Handbook documentation of the `logtalk_make/1`, `logtalk_load/1-2`,
+and `logtalk_compile/1-2` built-in predicates.
 
 * UPDATED: Handbook section on debugging using the term-expansion mechanism.
 

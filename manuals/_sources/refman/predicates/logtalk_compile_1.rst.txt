@@ -37,12 +37,13 @@ predicate can also be used to compile Prolog source files as Logtalk source
 code. When no recognized Logtalk or Prolog extension is specified, the
 compiler tries first to append a Logtalk source file extension and then a
 Prolog source file extension. If that fails, the compiler tries to use the
-file name as-is.
+file name as-is. The recognized Logtalk and Prolog file extensions are
+defined in the :term:`backend adapter files <adapter file>`.
 
-When this predicate is called from the top-level, relative source file
-paths are resolved using the current working directory. When the calls
-are made from a source file, relative source file paths are resolved
-using the source file directory.
+When this predicate is called from the top-level interpreter, relative source
+file paths are resolved using the current working directory. When the calls
+are made from a source file, relative source file paths are resolved using
+the source file directory.
 
 Note that only the errors related to problems in the predicate argument
 are listed below. This predicate fails on the first error found during

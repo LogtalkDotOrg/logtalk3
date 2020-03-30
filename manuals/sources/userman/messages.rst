@@ -95,7 +95,7 @@ control construct:
    ..., [Object::Message], ....
 
 This control construct can only be used within objects and categories
-(at the interpreter top-level, the *sender* is always the pseudo-object
+(in the top-level interpreter, the *sender* is always the pseudo-object
 ``user`` so using this control construct would be equivalent to use the
 ``::/2`` message sending control construct).
 

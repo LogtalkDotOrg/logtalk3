@@ -36,13 +36,16 @@ absolute, relative to the current directory, or use :term:`library notation`.
 Compiler flags are represented as *flag(value)*. This predicate can also be
 used to compile Prolog source files as Logtalk source code. When no recognized
 Logtalk or Prolog extension is specified, the compiler tries first to append a
-Logtalk source file extension and then a Prolog source file extension.
-If that fails, the compiler tries to use the file name as-is. For a
-description of the available compiler flags, please see the
-:ref:`programming_flags` section in the User Manual.
+Logtalk source file extension and then a Prolog source file extension. If that
+fails, the compiler tries to use the file name as-is. For a description of the
+available compiler flags, please see the :ref:`programming_flags` section in
+the User Manual. The recognized Logtalk and Prolog file extensions are defined
+in the :term:`backend adapter files <adapter file>`. The recognized Logtalk
+and Prolog file extensions are defined in the
+:term:`backend adapter files <adapter file>`.
 
-When this predicate is called from the top-level, relative source file
-paths are resolved using the current working directory. When the calls
+When this predicate is called from the top-level interpreter, relative source
+file paths are resolved using the current working directory. When the calls
 are made from a source file, relative source file paths are resolved by
 default using the source file directory (unless a
 :ref:`relative_to <flag_relative_to>` flag is passed).

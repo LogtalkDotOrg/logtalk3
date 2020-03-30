@@ -234,9 +234,10 @@ paths can be absolute, relative to the current directory, or use
 source files as Logtalk source code. When no recognized Logtalk or Prolog
 extension is specified, the compiler tries first to append a Logtalk source
 file extension and then a Prolog source file extension. If that fails, the
-compiler tries to use the file name as-is.</p>
-<p>When this predicate is called from the top-level, relative source file
-paths are resolved using the current working directory. When the calls
+compiler tries to use the file name as-is. The recognized Logtalk and Prolog
+file extensions are defined in the <a class="reference internal" href="../../glossary.html#term-adapter-file"><span class="xref std std-term">backend adapter files</span></a>.</p>
+<p>When this predicate is called from the top-level interpreter, relative source
+file paths are resolved using the current working directory. When the calls
 are made from a source file, relative source file paths are resolved
 using the source file directory.</p>
 <p>Note that only the errors related to problems in the predicate argument
