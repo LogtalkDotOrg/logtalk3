@@ -1202,10 +1202,11 @@ Prolog or Quintus Prolog as backend compilers do the lack of a required
 built-in support that cannot be sensibly defined in Prolog.</p>
 <p>Code coverage is only available when testing Logtalk code. But Prolog
 modules can often be compiled as Logtalk objects and plain Prolog code
-may be wrapped in a Logtalk object by using <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directives.
-These two workarounds may thus allow generating code coverage data also
-for Prolog code by defining tests that use the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging
-control construct to call the Prolog predicates.</p>
+may be wrapped in a Logtalk object by either using <code class="docutils literal notranslate"><span class="pre">include/1</span></code>
+directives or the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the
+<code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library. These workarounds may thus allow generating
+code coverage data also for Prolog code by defining tests that use the
+<code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging control construct to call the Prolog predicates.</p>
 </div>
 <div class="section" id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>

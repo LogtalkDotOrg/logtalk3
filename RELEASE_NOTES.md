@@ -104,6 +104,9 @@ Can be used to apply Logtalk developer tools to plain Prolog code.
 Tools
 -----
 
+* ADDED: Notes on applying the `code_metrics`, `dead_code_scanner`, `diagrams`,
+`lgtunit`, and `ports_profiler` tools to Prolog code.
+
 * IMPROVED: The `lgtunit` tool automation support now prints the test object
 identifier when listing failed and skipped tests after the test name.
 

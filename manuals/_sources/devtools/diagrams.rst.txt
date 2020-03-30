@@ -621,7 +621,19 @@ the Prolog file and then load it and create the diagram:
 
 ::
 
-   ?- logtalk_load(code), xref_diagram::entity(code).
+   | ?- logtalk_load(code),
+        xref_diagram::entity(code).
+
+An alternative is to use the ``object_wrapper_hook`` provided by the
+``hook_objects`` library:
+
+::
+
+   | ?- logtalk_load(hook_objects(object_wrapper_hook)).
+   ...
+
+   | ?- logtalk_load(code, [hook(object_wrapper_hook)]),
+        xref_diagram::entity(code).
 
 Other notes
 -----------

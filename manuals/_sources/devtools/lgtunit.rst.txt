@@ -1063,10 +1063,11 @@ built-in support that cannot be sensibly defined in Prolog.
 
 Code coverage is only available when testing Logtalk code. But Prolog
 modules can often be compiled as Logtalk objects and plain Prolog code
-may be wrapped in a Logtalk object by using ``include/1`` directives.
-These two workarounds may thus allow generating code coverage data also
-for Prolog code by defining tests that use the ``<</2`` debugging
-control construct to call the Prolog predicates.
+may be wrapped in a Logtalk object by either using ``include/1``
+directives or the ``object_wrapper_hook`` provided by the
+``hook_objects`` library. These workarounds may thus allow generating
+code coverage data also for Prolog code by defining tests that use the
+``<</2`` debugging control construct to call the Prolog predicates.
 
 Other notes
 -----------

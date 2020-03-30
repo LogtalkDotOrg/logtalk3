@@ -116,6 +116,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scanning-prolog-modules">Scanning Prolog modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scanning-plain-prolog-files">Scanning plain Prolog files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-notes">Other notes</a></li>
 </ul>
 </li>
@@ -293,6 +295,45 @@ meta-predicates, compilation of the source files with the <code class="docutils 
 flag turned on may allow meta-calls to be resolved at compile time and
 thus allow calling information for the meta-arguments to be recorded,
 avoiding false positives for predicates that are only meta-called.</p>
+</div>
+<div class="section" id="scanning-prolog-modules">
+<h2>Scanning Prolog modules<a class="headerlink" href="#scanning-prolog-modules" title="Permalink to this headline">¶</a></h2>
+<p>This tool can also be applied to Prolog modules that Logtalk is able to
+compile as objects. For example, if the Prolog module file is named
+<code class="docutils literal notranslate"><span class="pre">module.pl</span></code>, try:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(module, [source_data(on)]).
+</pre></div>
+</div>
+<p>Due to the lack of standardization of module systems and the abundance
+of proprietary extensions, this solution is not expected to work for all
+cases.</p>
+</div>
+<div class="section" id="scanning-plain-prolog-files">
+<h2>Scanning plain Prolog files<a class="headerlink" href="#scanning-plain-prolog-files" title="Permalink to this headline">¶</a></h2>
+<p>This tool can also be applied to plain Prolog code. For example, if the
+Prolog file is named <code class="docutils literal notranslate"><span class="pre">code.pl</span></code>, simply define an object including its
+code:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(code).
+<span class="p">    :- </span><span class="k">include</span>(<span class="s">&#39;code.pl&#39;</span>).
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Save the object to an e.g. <code class="docutils literal notranslate"><span class="pre">code.lgt</span></code> file in the same directory as
+the Prolog file and then load it in debug mode:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [source_data(on), optimize(on)]).
+</pre></div>
+</div>
+<p>In alternative, use the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the
+<code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(object_wrapper_hook)).
+...
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [hook(object_wrapper_hook), source_data(on), optimize(on)]).
+</pre></div>
+</div>
+<p>With either wrapping solution, pay special attention to any compilation
+warnings that may signal issues that could prevent the plain Prolog from
+being fully analyzed when wrapped by an object.</p>
 </div>
 <div class="section" id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>

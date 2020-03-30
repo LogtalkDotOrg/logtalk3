@@ -968,7 +968,17 @@ named <code class="docutils literal notranslate"><span class="pre">code.pl</span
 </div>
 <p>Save the object to an e.g. <code class="docutils literal notranslate"><span class="pre">code.lgt</span></code> file in the same directory as
 the Prolog file and then load it and create the diagram:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(code), xref_diagram<span class="o">::</span>entity(code).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(code),
+     xref_diagram<span class="o">::</span>entity(code).
+</pre></div>
+</div>
+<p>An alternative is to use the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the
+<code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(object_wrapper_hook)).
+...
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [hook(object_wrapper_hook)]),
+     xref_diagram<span class="o">::</span>entity(code).
 </pre></div>
 </div>
 </div>

@@ -110,6 +110,46 @@ for the meta-arguments to be recorded, avoiding false positives for predicates
 that are only meta-called.
 
 
+Scanning Prolog modules
+-----------------------
+
+This tool can also be applied to Prolog modules that Logtalk is able to compile
+as objects. For example, if the Prolog module file is named `module.pl`, try:
+
+	| ?- logtalk_load(module, [source_data(on)]).
+
+Due to the lack of standardization of module systems and the abundance of
+proprietary extensions, this solution is not expected to work for all cases.
+
+
+Scanning plain Prolog files
+---------------------------
+
+This tool can also be applied to plain Prolog code. For example, if the Prolog
+file is named `code.pl`, simply define an object including its code:
+
+	:- object(code).
+		:- include('code.pl').
+	:- end_object.
+
+Save the object to an e.g. `code.lgt` file in the same directory as the
+Prolog file and then load it in debug mode:
+
+	| ?- logtalk_load(code, [source_data(on), optimize(on)]).
+
+In alternative, use the `object_wrapper_hook` provided by the `hook_objects`
+library:
+
+	| ?- logtalk_load(hook_objects(object_wrapper_hook)).
+	...
+
+	| ?- logtalk_load(code, [hook(object_wrapper_hook), source_data(on), optimize(on)]).
+
+With either wrapping solution, pay special attention to any compilation
+warnings that may signal issues that could prevent the plain Prolog from
+being fully analyzed when wrapped by an object.
+
+
 Other notes
 -----------
 

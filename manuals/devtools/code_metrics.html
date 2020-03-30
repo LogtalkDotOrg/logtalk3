@@ -117,6 +117,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-new-metrics">Defining new metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#third-party-tools">Third-party tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applying-metrics-to-prolog-modules">Applying metrics to Prolog modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applying-metrics-to-plain-prolog-code">Applying metrics to plain Prolog code</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
@@ -346,6 +348,45 @@ languages including Logtalk. Available at
 lines, comment lines, and lines of source code in many programming
 languages including Logtalk. Available at
 <a class="reference external" href="https://github.com/Aaronepower/tokei">https://github.com/Aaronepower/tokei</a></p>
+</div>
+<div class="section" id="applying-metrics-to-prolog-modules">
+<h2>Applying metrics to Prolog modules<a class="headerlink" href="#applying-metrics-to-prolog-modules" title="Permalink to this headline">¶</a></h2>
+<p>Some of the metrics can also be applied to Prolog modules that Logtalk
+is able to compile as objects. For example, if the Prolog module file is
+named <code class="docutils literal notranslate"><span class="pre">module.pl</span></code>, try:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(module, [source_data(on)]).
+</pre></div>
+</div>
+<p>Due to the lack of standardization of module systems and the abundance
+of proprietary extensions, this solution is not expected to work for all
+cases.</p>
+</div>
+<div class="section" id="applying-metrics-to-plain-prolog-code">
+<h2>Applying metrics to plain Prolog code<a class="headerlink" href="#applying-metrics-to-plain-prolog-code" title="Permalink to this headline">¶</a></h2>
+<p>Some of the metrics can also be applied to plain Prolog code. For
+example, if the Prolog file is named <code class="docutils literal notranslate"><span class="pre">code.pl</span></code>, simply define an
+object including its code:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(code).
+<span class="p">    :- </span><span class="k">include</span>(<span class="s">&#39;code.pl&#39;</span>).
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Save the object to an e.g. <code class="docutils literal notranslate"><span class="pre">code.lgt</span></code> file in the same directory as
+the Prolog file and then load it in debug mode:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [source_data(on)]).
+</pre></div>
+</div>
+<p>In alternative, use the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the
+<code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(object_wrapper_hook)).
+...
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [hook(object_wrapper_hook), source_data(on)]).
+</pre></div>
+</div>
+<p>With either wrapping solution, pay special attention to any compilation
+warnings that may signal issues that could prevent the plain Prolog code
+of working when wrapped by an object.</p>
 </div>
 </div>
 
