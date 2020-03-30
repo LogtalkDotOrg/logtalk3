@@ -994,7 +994,70 @@ expressions.
 
 An optimizing meta-predicate and lambda expression compiler, based on
 the :ref:`term-expansion mechanism <expansion_expansion>`, is provided
-as a standard library for practical performance by the standard library.
+as a standard library for practical performance.
+
+.. _predicates_redefining:
+
+Redefining built-in predicates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Logtalk built-in predicates and Prolog built-in predicates can be redefined
+inside objects and categories. Although the redefinition of Logtalk built-in
+predicates should be avoided, the support for redefining Prolog built-in
+predicates is a practical requirement given the different sets of proprietary
+built-in predicates provided by backend Prolog systems.
+
+The compiler supports a :ref:`redefined_built_ins <flag_redefined_built_ins>`
+flag, whose default value is `silent`, that can be set to `warning`
+to alert the user of any redefined Logtalk or Prolog built-in predicate.
+
+The redefinition of Prolog built-in predicates can be combined with the
+:ref:`conditional compilation directives <conditional_compilation_directives>`
+when writing portable applications where some of the supported backends
+don't provide a built-in predicate found in the other backends. As an example,
+consider the de facto standard list length predicate, `length/2`. This
+predicate is provided as a built-in predicate in most but not all backends.
+The `list` library object includes the code:
+
+::
+
+   :- if(predicate_property(length(_, _), built_in)).
+   
+       length(List, Length) :-
+           {length(List, Length)}.
+   
+   :- else.
+   
+       length(List, Length) :-
+           ...
+   
+   :- endif.
+
+I.e. the object will use the built-in predicate when available. Otherwise,
+it will use the object provided predicate definition.
+
+The redefinition of built-in predicates can also be accomplished using
+:term:`predicate shorthands <predicate shorthand>`. This can be useful
+when porting code while minimizing the changes. For examples, assume
+that existing code uses the ``format/2`` de facto standard predicate
+for writing messages. To convert the code to use the message printing
+mechanism we could write:
+
+::
+
+   :- uses(logtalk, [
+       print_message(comment, core, Format+Arguments) as format(Format, Arguments)
+   ]).
+   
+   process(Crate, Contents) :-
+       format('Processing crate ~w...', [Crate]),
+       ...,
+       format('Filing with ~w...', [Contents]),
+       ....
+
+The predicate shorthand instructs the compiler to rewrite all ``format/2``
+goals as ``logtalk::print_message/3`` goals, thus allowing us to reuse
+the code without changes.
 
 .. _predicates_dcgs:
 
