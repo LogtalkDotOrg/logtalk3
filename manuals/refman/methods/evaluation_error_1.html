@@ -231,9 +231,11 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">evaluation_error</span>(<span class="nv">Exception</span>)
 </pre></div>
 </div>
-<p>Throws an evaluation error. This built-in method is declared private and
-thus cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of calls:</p>
+<p>Throws an evaluation error. Used when evaluating an arithmetic expression
+generates an exception (e.g. zero divisor).</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">evaluation_error</span>(<span class="nv">Exception</span>), <span class="nv">Context</span>)).

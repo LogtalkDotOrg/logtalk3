@@ -231,9 +231,11 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">type_error</span>(<span class="nv">Type</span>, <span class="nv">Culprit</span>)
 </pre></div>
 </div>
-<p>Throws a type error. This built-in method is declared private
-and thus cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of calls:</p>
+<p>Throws a type error. Used when the type of an argument is incorrect. For example,
+trying ot use a non-callable term as a message.</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">type_error</span>(<span class="nv">Type</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).

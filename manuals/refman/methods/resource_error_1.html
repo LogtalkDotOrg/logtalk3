@@ -231,9 +231,11 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">resource_error</span>(<span class="nv">Resource</span>)
 </pre></div>
 </div>
-<p>Throws a resource error. This built-in method is declared private and
-thus cannot be used as a message to an object. Calling this predicate
-is equivalent to the following sequence of calls:</p>
+<p>Throws a resource error. Used when a required resource (e.g. memory or disk
+space) to complete execution is not available.</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">resource_error</span>(<span class="nv">Resource</span>), <span class="nv">Context</span>)).

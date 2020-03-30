@@ -231,9 +231,12 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">representation_error</span>(<span class="nv">Flag</span>)
 </pre></div>
 </div>
-<p>Throws a representation error. This built-in method is declared private
-and thus cannot be used as a message to an object. Calling this predicate
-is equivalent to the following sequence of calls:</p>
+<p>Throws a representation error. Used when some representation limit is exceeded.
+For example, trying to construct a compound term that exceeds the maximum arity
+supported by the backend Prolog system.</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">representation_error</span>(<span class="nv">Flag</span>), <span class="nv">Context</span>)).

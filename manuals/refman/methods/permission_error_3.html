@@ -231,9 +231,11 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">permission_error</span>(<span class="nv">Operation</span>, <span class="nv">Permission</span>, <span class="nv">Culprit</span>)
 </pre></div>
 </div>
-<p>Throws an evaluation error. This built-in method is declared private and
-thus cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of calls:</p>
+<p>Throws an permission error. Used when an operation is not allowed. For example,
+sending a message for a predicate that is not within the scope of the sender.</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">permission_error</span>(<span class="nv">Operation</span>,<span class="nv">Permission</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).

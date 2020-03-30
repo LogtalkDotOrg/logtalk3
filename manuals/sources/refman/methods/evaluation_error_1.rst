@@ -28,9 +28,12 @@ Description
 
    evaluation_error(Exception)
 
-Throws an evaluation error. This built-in method is declared private and
-thus cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of calls:
+Throws an evaluation error. Used when evaluating an arithmetic expression
+generates an exception (e.g. zero divisor).
+
+This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:
 
 ::
 

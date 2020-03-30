@@ -231,9 +231,12 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">instantiation_error</span>
 </pre></div>
 </div>
-<p>Throws an instantiation error. This built-in method is declared private
-and thus cannot be used as a message to an object. Calling this predicate
-is equivalent to the following sequence of calls:</p>
+<p>Throws an instantiation error. Used when an argument or one of its
+sub-arguments is a variable but a non-variable term is required. For example,
+trying to open a file with a variable for the input/output mode.</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">instantiation_error</span>, <span class="nv">Context</span>)).

@@ -28,9 +28,13 @@ Description
 
    type_error(Type, Culprit)
 
-Throws a type error. This built-in method is declared private
-and thus cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of calls:
+Throws a type error. Used when the type of an argument is incorrect. For example,
+trying ot use a non-callable term as a message.
+
+This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:
+
 
 ::
 

@@ -231,9 +231,12 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">domain_error</span>(<span class="nv">Domain</span>, <span class="nv">Culprit</span>)
 </pre></div>
 </div>
-<p>Throws a domain error. This built-in method is declared private and thus
-cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of calls:</p>
+<p>Throws a domain error. Used when an argument is of the correct type but
+outside the valid domain. For example, trying to use an atom as an operator
+specifier that is not a valid specifier.</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">domain_error</span>(<span class="nv">Domain</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).

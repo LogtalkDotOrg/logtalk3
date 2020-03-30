@@ -28,9 +28,13 @@ Description
 
    resource_error(Resource)
 
-Throws a resource error. This built-in method is declared private and
-thus cannot be used as a message to an object. Calling this predicate
-is equivalent to the following sequence of calls:
+Throws a resource error. Used when a required resource (e.g. memory or disk
+space) to complete execution is not available.
+
+This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:
+
 
 ::
 

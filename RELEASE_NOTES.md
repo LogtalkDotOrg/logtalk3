@@ -86,6 +86,8 @@ running applications.
 * IMPROVED: Handbook documentation of the `logtalk_make/1`, `logtalk_load/1-2`,
 and `logtalk_compile/1-2` built-in predicates.
 
+* IMPROVED: Handbook documentation of the error handling built-in methods.
+
 * UPDATED: Handbook section on debugging using the term-expansion mechanism.
 
 * FIXED: Typo in Handbook section on the parametric objects in the description

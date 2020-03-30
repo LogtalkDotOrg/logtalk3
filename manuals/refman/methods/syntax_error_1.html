@@ -231,9 +231,11 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">syntax_error</span>(<span class="nv">Description</span>)
 </pre></div>
 </div>
-<p>Throws a syntax error. This built-in method is declared private and thus
-cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of calls:</p>
+<p>Throws a syntax error. Used when the sequence of characters being read are not
+syntactically valid.</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">syntax_error</span>(<span class="nv">Description</span>), <span class="nv">Context</span>)).

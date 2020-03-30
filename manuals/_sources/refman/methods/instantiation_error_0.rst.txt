@@ -28,9 +28,14 @@ Description
 
    instantiation_error
 
-Throws an instantiation error. This built-in method is declared private
-and thus cannot be used as a message to an object. Calling this predicate
-is equivalent to the following sequence of calls:
+Throws an instantiation error. Used when an argument or one of its
+sub-arguments is a variable but a non-variable term is required. For example,
+trying to open a file with a variable for the input/output mode.
+
+This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:
+
 
 ::
 

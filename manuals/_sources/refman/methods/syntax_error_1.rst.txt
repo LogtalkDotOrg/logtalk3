@@ -28,9 +28,13 @@ Description
 
    syntax_error(Description)
 
-Throws a syntax error. This built-in method is declared private and thus
-cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of calls:
+Throws a syntax error. Used when the sequence of characters being read are not
+syntactically valid.
+
+This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:
+
 
 ::
 

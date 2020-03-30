@@ -28,9 +28,14 @@ Description
 
    representation_error(Flag)
 
-Throws a representation error. This built-in method is declared private
-and thus cannot be used as a message to an object. Calling this predicate
-is equivalent to the following sequence of calls:
+Throws a representation error. Used when some representation limit is exceeded.
+For example, trying to construct a compound term that exceeds the maximum arity
+supported by the backend Prolog system.
+
+This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:
+
 
 ::
 
