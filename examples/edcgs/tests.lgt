@@ -27,9 +27,9 @@ SOFTWARE.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Michael Hendricks; adapted to Logtalk by Paulo Moura.',
-		date is 2018-05-30,
+		date is 2020-03-31,
 		comment is 'Unit tests for the "edcgs" example.'
 	]).
 
@@ -76,5 +76,9 @@ SOFTWARE.
 
 	test(unique_3) :-
 		unique::unique([a,b,a],[a,b]).
+
+	test(gemini_1) :-
+		gemini::p(1, S0, S, _),
+		S0 == S.
 
 :- end_object.
