@@ -27,9 +27,9 @@ SOFTWARE.
 	implements(expanding)).
 
 	:- info([
-		version is 1:04:0,
+		version is 1:4:1,
 		author is 'Peter Van Roy; adapted to Logtalk by Paulo Moura.',
-		date is 2019-10-09,
+		date is 2020-04-01,
 		comment is 'Multiple hidden parameters: an extension to Prolog''s DCG notation. Ported to Logtalk as a hook object.',
 		copyright is 'Copyright (C) 1992 Peter Van Roy',
 		license is 'MIT',
@@ -101,9 +101,9 @@ SOFTWARE.
 	term_expansion(pass_info(A), []) :-
 		assertz(pass_info(A)).
 
-	term_expansion(begin_of_file, [begin_of_file, (:- op(1200, xfx, '-->>'))]) :-
+	term_expansion(begin_of_file, begin_of_file) :-
 		cleanup.
-	term_expansion((:- Directive), [(:- Directive)]) :-
+	term_expansion((:- Directive), [(:- Directive), (:- op(1200, xfx, '-->>'))]) :-
 		nonvar(Directive),
 		functor(Directive, Functor, Arity),
 		Arity >= 1,

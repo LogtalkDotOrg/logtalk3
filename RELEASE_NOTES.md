@@ -110,6 +110,9 @@ print entity predicate goals before, after, or before and after calling them.
 to wrap the contents of a plain Prolog file as an object named after the file.
 Can be used to apply Logtalk developer tools to plain Prolog code.
 
+* FIXED: The `edcg` library to avoid defining the `-->>` infix operator as a
+global when expanding files defining EDCGs.
+
 Tools
 -----
 
