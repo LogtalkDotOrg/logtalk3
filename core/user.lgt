@@ -19,12 +19,12 @@
 
 
 :- object(user,
-	implements((expanding, forwarding))).
+	implements((expanding, forwarding, monitoring))).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2018-05-24,
+		date is 2020-04-01,
 		comment is 'Pseudo-object ``user`` representing the plain Prolog database.'
 	]).
 
@@ -43,6 +43,15 @@
 	% this translation
 	forward(Message) :-
 		{call(Message)}.
+
+	% allow the "user" pseudo-object to be used as an event monitor;
+	% requires before/3 and after/3 predicates to be defined in "user"
+
+	before(Object, Message, Sender) :-
+		{before(Object, Message, Sender)}.
+
+	after(Object, Message, Sender) :-
+		{after(Object, Message, Sender)}.
 
 	% ensure that setting the "hook" flag to "user" will not result in
 	% predicate existence errors during compilation of source files as

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2018-05-24,
+		date is 2020-04-01,
 		comment is 'Unit tests for the "user" built-in object.'
 	]).
 
@@ -69,6 +69,6 @@
 
 	test(user_10) :-
 		setof(Protocol-Scope, implements_protocol(user, Protocol, Scope), List),
-		List == [expanding-(public), forwarding-(public)].
+		List == [expanding-(public), forwarding-(public), monitoring-(public)].
 
 :- end_object.

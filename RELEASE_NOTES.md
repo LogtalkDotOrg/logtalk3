@@ -34,6 +34,9 @@ mechanism. See the `logtalk` built-in object API documentation for details.
 message to itself. The practical case is a parametric object where one of more
 parameters are updated by the object predicates.
 
+* ADDED: Support for using the `user` pseudo-object as an event monitor by
+defining `before/3` and `after/3` plain Prolog predicates.
+
 * FIXED: Avoid duplicated or redundant entity operator properties, which may
 result from e.g. included files or when compiling modules (as objects) that
 reexport other modules.
