@@ -25,7 +25,7 @@
 		version is 1:4:0,
 		author is 'Paulo Moura',
 		date is 2020-04-01,
-		comment is 'Pseudo-object ``user`` representing the plain Prolog database.'
+		comment is 'Pseudo-object representing the plain Prolog database. Can be used as a monitor by defining ``before/3`` and ``after/3`` predicates. Can be used as a hook object by defining ``term_expansion/2`` and ``goal_expansion/2`` multifile and dynamic predicates.'
 	]).
 
 	:- built_in.
