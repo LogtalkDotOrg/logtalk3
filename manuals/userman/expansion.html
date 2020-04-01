@@ -127,6 +127,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#default-compiler-expansion-workflow">Default compiler expansion workflow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#user-defined-expansion-workflows">User defined expansion workflows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-prolog-defined-expansions">Using Prolog defined expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-expansions">Debugging expansions</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
@@ -526,6 +527,71 @@ as multifile and dynamic predicates. This helps in avoiding predicate
 existence errors when compiling source files with the <code class="docutils literal notranslate"><span class="pre">hook</span></code> flag set
 to <code class="docutils literal notranslate"><span class="pre">user</span></code> as these predicates are only natively declared in some of the
 supported backend Prolog compilers.</p>
+</div>
+</div>
+<div class="section" id="debugging-expansions">
+<h2>Debugging expansions<a class="headerlink" href="#debugging-expansions" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates can be debugged
+as any other object predicates. An alternative to the debugging tools is to
+use a monitor for the runtime messages that call the predicates. For example,
+assume a <code class="docutils literal notranslate"><span class="pre">expansions_debug.lgt</span></code> file with the contents:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>(
+     <span class="k">define_events</span>(after, edcg, <span class="nv">_</span>, <span class="nv">_</span>, expansions_debug)
+).
+
+
+<span class="p">:- </span><span class="k">object</span>(expansions_debug,
+    <span class="k">implements</span>(monitoring)).
+
+    <span class="k">after</span>(edcg, <span class="k">term_expansion</span>(<span class="nv">T</span>,<span class="nv">E</span>), <span class="nv">_</span>) <span class="o">:-</span>
+        <span class="o">\+</span> <span class="o">\+</span> (
+            <span class="k">numbervars</span>(<span class="k">term_expansion</span>(<span class="nv">T</span>,<span class="nv">E</span>), <span class="m">0</span>, <span class="nv">_</span>),
+            <span class="k">writeq</span>(<span class="k">term_expansion</span>(<span class="nv">T</span>,<span class="nv">E</span>)), <span class="k">nl</span>
+        ).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>We can use this monitor to help debug the expansion rules of the
+<a class="reference internal" href="../libraries/edcg.html"><span class="doc">edcg</span></a> library when applied to the <code class="docutils literal notranslate"><span class="pre">edcgs</span></code> example using
+the queries:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- {expansions_debug}.
+...
+
+| ?- set_logtalk_flag(events, allow).
+yes
+
+| ?- {edcgs(loader)}.
+...
+term_expansion(begin_of_file,[begin_of_file,(:-op(1200,xfx,--&gt;&gt;))])
+term_expansion((:-object(gemini)),[(:-object(gemini))])
+term_expansion(acc_info(castor,A,B,C,true),[])
+term_expansion(pass_info(pollux),[])
+term_expansion(pred_info(p,1,[castor,pollux]),[])
+term_expansion(pred_info(q,1,[castor,pollux]),[])
+term_expansion(pred_info(r,1,[castor,pollux]),[])
+term_expansion((p(A)--&gt;&gt;B is A+1,q(B),r(B)),(p(A,C,D,E):-B is A+1,q(B,C,F,E),r(B,F,D,E)))
+term_expansion((q(A)--&gt;&gt;[]),(q(A,B,B,C):-true))
+term_expansion((r(A)--&gt;&gt;[]),(r(A,B,B,C):-true))
+term_expansion(end_of_file,end_of_file)
+...
+</pre></div>
+</div>
+<p>This solution does not require (re)compiling the <code class="docutils literal notranslate"><span class="pre">edcg</span></code> hook object in
+debug mode or modifying its expansion rules to emit debug messages. We
+could also simply use the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object as the monitor object:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- assertz((
+         after(_, term_expansion(T,E), _) :-
+             \+ \+ (
+                 numbervars(term_expansion(T,E), 0, _),
+                 writeq(term_expansion(T,E)), nl
+             )
+     )).
+yes
+
+| ?- define_events(after, edcg, _, Sender, user).
+yes
+</pre></div>
 </div>
 </div>
 </div>

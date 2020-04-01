@@ -54,6 +54,16 @@ file:
 
    | ?- logtalk_load(edcg(loader)).
 
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file of the
+``edcgs`` example:
+
+::
+
+   | ?- logtalk_load(edcgs(tester)).
+
 Usage
 -----
 

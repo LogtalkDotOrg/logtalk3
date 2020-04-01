@@ -386,3 +386,74 @@ in a fully controlled way.
    existence errors when compiling source files with the ``hook`` flag set
    to ``user`` as these predicates are only natively declared in some of the
    supported backend Prolog compilers.
+
+Debugging expansions
+--------------------
+
+The ``term_expansion/2`` and ``goal_expansion/2`` predicates can be debugged
+as any other object predicates. An alternative to the debugging tools is to
+use a monitor for the runtime messages that call the predicates. For example,
+assume a ``expansions_debug.lgt`` file with the contents:
+
+::
+
+   :- initialization(
+   	define_events(after, edcg, _, _, expansions_debug)
+   ).
+
+
+   :- object(expansions_debug,
+       implements(monitoring)).
+
+       after(edcg, term_expansion(T,E), _) :-
+           \+ \+ (
+               numbervars(term_expansion(T,E), 0, _),
+               writeq(term_expansion(T,E)), nl
+           ).
+
+   :- end_object.
+
+We can use this monitor to help debug the expansion rules of the
+:doc:`../libraries/edcg` library when applied to the ``edcgs`` example using
+the queries:
+
+.. code-block:: text
+
+   | ?- {expansions_debug}.
+   ...
+
+   | ?- set_logtalk_flag(events, allow).
+   yes
+
+   | ?- {edcgs(loader)}.
+   ...
+   term_expansion(begin_of_file,[begin_of_file,(:-op(1200,xfx,-->>))])
+   term_expansion((:-object(gemini)),[(:-object(gemini))])
+   term_expansion(acc_info(castor,A,B,C,true),[])
+   term_expansion(pass_info(pollux),[])
+   term_expansion(pred_info(p,1,[castor,pollux]),[])
+   term_expansion(pred_info(q,1,[castor,pollux]),[])
+   term_expansion(pred_info(r,1,[castor,pollux]),[])
+   term_expansion((p(A)-->>B is A+1,q(B),r(B)),(p(A,C,D,E):-B is A+1,q(B,C,F,E),r(B,F,D,E)))
+   term_expansion((q(A)-->>[]),(q(A,B,B,C):-true))
+   term_expansion((r(A)-->>[]),(r(A,B,B,C):-true))
+   term_expansion(end_of_file,end_of_file)
+   ...
+
+This solution does not require (re)compiling the ``edcg`` hook object in
+debug mode or modifying its expansion rules to emit debug messages. We
+could also simply use the ``user`` pseudo-object as the monitor object:
+
+.. code-block:: text
+
+   | ?- assertz((
+            after(_, term_expansion(T,E), _) :-
+                \+ \+ (
+                    numbervars(term_expansion(T,E), 0, _),
+                    writeq(term_expansion(T,E)), nl
+                )
+        )).
+   yes
+
+   | ?- define_events(after, edcg, _, Sender, user).
+   yes

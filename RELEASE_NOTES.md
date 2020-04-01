@@ -76,6 +76,8 @@ Documentation
 
 * ADDED: Handbook section on sending messages from Prolog modules.
 
+* ADDED: Handbook section on debugging expansions.
+
 * ADDED: Handbook glossary entry for *predicate shorthand*.
 
 * IMPROVED: Handbook sections on messages, reflection, error handling,
