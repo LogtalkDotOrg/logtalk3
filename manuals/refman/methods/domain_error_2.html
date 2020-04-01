@@ -233,10 +233,9 @@
 </div>
 <p>Throws a domain error. Used when an argument is of the correct type but
 outside the valid domain. For example, trying to use an atom as an operator
-specifier that is not a valid specifier.</p>
-<p>This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:</p>
+specifier that is not a valid specifier. This built-in method is declared
+private and thus cannot be used as a message to an object. Calling this
+predicate is equivalent to the following sequence of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">domain_error</span>(<span class="nv">Domain</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
@@ -244,6 +243,54 @@ of calls:</p>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
+<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Domain</span></code> include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">character_code_list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close_option</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flag_option</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flag_value</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compiler_flag</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flag</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prolog_flag</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">io_mode</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">non_empty_list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">not_less_than_zero</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operator_priority</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operator_specifier</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_option</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_sink</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stream</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stream_option</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stream_or_alias</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stream_position</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stream_property</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_option</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">character_code_list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_encoding</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directive</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object_directive</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol_directive</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">category_directive</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object_relation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol_relation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">category_relation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object_property</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol_property</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">category_property</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">predicate_property</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">meta_argument_specifier</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">meta_directive_template</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">closure</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allocation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">redefinition</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message_sending_goal</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prototype</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scope</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">Culprit</span></code> is the argument or one of its sub-terms that caused
+the error.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>

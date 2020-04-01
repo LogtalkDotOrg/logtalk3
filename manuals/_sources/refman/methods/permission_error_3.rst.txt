@@ -30,11 +30,9 @@ Description
 
 Throws an permission error. Used when an operation is not allowed. For example,
 sending a message for a predicate that is not within the scope of the sender.
-
 This built-in method is declared private and thus cannot be used as a message
 to an object. Calling this predicate is equivalent to the following sequence
-of calls:
-
+of goals:
 
 ::
 
@@ -44,6 +42,41 @@ of calls:
 
 This allows the user to generate errors in the same format used by the
 runtime.
+
+Possible values for ``Operation`` include:
+
+- ``access``
+- ``create``
+- ``modify``
+- ``open``
+- ``input``
+- ``output``
+- ``reposition``
+- ``repeat``
+
+Possible values for ``Permission`` include:
+
+- ``predicate_declaration``
+- ``protected_predicate``
+- ``private_predicate``
+- ``static_predicate``
+- ``database``
+- ``object``
+- ``static_object``
+- ``static_protocol``
+- ``static_category``
+- ``entity_relation``
+- ``operator``
+- ``flag``
+- ``engine``
+- ``binary_stream``
+- ``text_stream``
+- ``source_sink``
+- ``stream``
+- ``past_end_of_stream``
+
+The value of ``Culprit`` is the argument or one of its sub-terms that caused
+the error.
 
 Modes and number of proofs
 --------------------------

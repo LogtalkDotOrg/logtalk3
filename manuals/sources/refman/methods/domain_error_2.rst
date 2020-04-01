@@ -30,12 +30,9 @@ Description
 
 Throws a domain error. Used when an argument is of the correct type but
 outside the valid domain. For example, trying to use an atom as an operator
-specifier that is not a valid specifier.
-
-This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:
-
+specifier that is not a valid specifier. This built-in method is declared
+private and thus cannot be used as a message to an object. Calling this
+predicate is equivalent to the following sequence of goals:
 
 ::
 
@@ -45,6 +42,55 @@ of calls:
 
 This allows the user to generate errors in the same format used by the
 runtime.
+
+Possible values for ``Domain`` include:
+
+- ``character_code_list``
+- ``close_option``
+- ``flag_option``
+- ``flag_value``
+- ``compiler_flag``
+- ``flag``
+- ``prolog_flag``
+- ``io_mode``
+- ``non_empty_list``
+- ``not_less_than_zero``
+- ``operator_priority``
+- ``operator_specifier``
+- ``read_option``
+- ``source_sink``
+- ``stream``
+- ``stream_option``
+- ``stream_or_alias``
+- ``stream_position``
+- ``stream_property``
+- ``write_option``
+- ``character_code_list``
+- ``text_encoding``
+- ``directive``
+- ``object_directive``
+- ``protocol_directive``
+- ``category_directive``
+- ``object_relation``
+- ``protocol_relation``
+- ``category_relation``
+- ``object_property``
+- ``protocol_property``
+- ``category_property``
+- ``predicate_property``
+- ``meta_argument_specifier``
+- ``meta_directive_template``
+- ``closure``
+- ``allocation``
+- ``redefinition``
+- ``message_sending_goal``
+- ``class``
+- ``prototype``
+- ``scope``
+- ``boolean``
+
+The value of ``Culprit`` is the argument or one of its sub-terms that caused
+the error.
 
 Modes and number of proofs
 --------------------------

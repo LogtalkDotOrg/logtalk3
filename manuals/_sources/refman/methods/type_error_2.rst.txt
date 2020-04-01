@@ -29,12 +29,9 @@ Description
    type_error(Type, Culprit)
 
 Throws a type error. Used when the type of an argument is incorrect. For example,
-trying ot use a non-callable term as a message.
-
-This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:
-
+trying ot use a non-callable term as a message. This built-in method is declared
+private and thus cannot be used as a message to an object. Calling this predicate
+is equivalent to the following sequence of goals:
 
 ::
 
@@ -44,6 +41,11 @@ of calls:
 
 This allows the user to generate errors in the same format used by the
 runtime.
+
+Possible values for ``Type`` include all the types defined by the ``type``
+library object and by other libraries such as ``os``, ``expecteds``, and
+``optionals``. The value of ``Culprit`` is the argument or one of its sub-terms 
+that caused the error.
 
 Modes and number of proofs
 --------------------------

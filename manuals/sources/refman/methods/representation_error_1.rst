@@ -30,12 +30,9 @@ Description
 
 Throws a representation error. Used when some representation limit is exceeded.
 For example, trying to construct a compound term that exceeds the maximum arity
-supported by the backend Prolog system.
-
-This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:
-
+supported by the backend Prolog system. This built-in method is declared private
+and thus cannot be used as a message to an object. Calling this predicate is
+equivalent to the following sequence of goals:
 
 ::
 
@@ -45,6 +42,17 @@ of calls:
 
 This allows the user to generate errors in the same format used by the
 runtime.
+
+Possible values for ``Flag`` include:
+
+- ``character``
+- ``character_code``
+- ``in_character_code``
+- ``max_arity``
+- ``max_integer``
+- ``min_integer``
+- ``lambda_parameters``
+- ``entity_prefix``
 
 Modes and number of proofs
 --------------------------

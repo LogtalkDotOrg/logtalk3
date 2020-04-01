@@ -29,11 +29,9 @@ Description
    existence_error(Thing, Culprit)
 
 Throws an existence error. Used when the subject of an operation does not
-exist.
-
-This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:
+exist. This built-in method is declared private and thus cannot be used as a
+message to an object. Calling this predicate is equivalent to the following
+sequence of goals:
 
 ::
 
@@ -43,6 +41,23 @@ of calls:
 
 This allows the user to generate errors in the same format used by the
 runtime.
+
+Possible values for ``Thing`` include:
+
+- ``predicate_declaration``
+- ``procedure``
+- ``source_sink``
+- ``stream``
+- ``object``
+- ``protocol``
+- ``category``
+- ``module``
+- ``library``
+- ``file``
+- ``goal_thread``
+
+The value of ``Culprit`` is the argument or one of its sub-terms that caused
+the error.
 
 Modes and number of proofs
 --------------------------

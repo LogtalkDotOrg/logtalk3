@@ -26,23 +26,29 @@ Description
 
 ::
 
-   evaluation_error(Exception)
+   evaluation_error(Error)
 
 Throws an evaluation error. Used when evaluating an arithmetic expression
-generates an exception (e.g. zero divisor).
-
-This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:
+generates an exception. This built-in method is declared private and thus
+cannot be used as a message to an object. Calling this predicate is
+equivalent to the following sequence of goals:
 
 ::
 
    ...,
    context(Context),
-   throw(error(evaluation_error(Exception), Context)).
+   throw(error(evaluation_error(Error), Context)).
 
 This allows the user to generate errors in the same format used by the
 runtime.
+
+Possible values for ``Error`` include:
+
+- ``float_overflow``
+- ``int_overflow``
+- ``undefined``
+- ``underflow``
+- ``zero_divisor``
 
 Modes and number of proofs
 --------------------------

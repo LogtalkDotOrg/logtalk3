@@ -29,11 +29,9 @@ Description
    system_error
 
 Throws a system error. Used when runtime execution can no longer proceed. For
-example, an exception is thrown without an active catcher.
-
-This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:
+example, an exception is thrown without an active catcher. This built-in method
+is declared private and thus cannot be used as a message to an object. Calling
+this predicate is equivalent to the following sequence of goals:
 
 ::
 

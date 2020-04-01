@@ -233,10 +233,9 @@
 </div>
 <p>Throws a representation error. Used when some representation limit is exceeded.
 For example, trying to construct a compound term that exceeds the maximum arity
-supported by the backend Prolog system.</p>
-<p>This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:</p>
+supported by the backend Prolog system. This built-in method is declared private
+and thus cannot be used as a message to an object. Calling this predicate is
+equivalent to the following sequence of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">representation_error</span>(<span class="nv">Flag</span>), <span class="nv">Context</span>)).
@@ -244,6 +243,17 @@ of calls:</p>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
+<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Flag</span></code> include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">character</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">character_code</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in_character_code</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_arity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_integer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_integer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lambda_parameters</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entity_prefix</span></code></p></li>
+</ul>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>

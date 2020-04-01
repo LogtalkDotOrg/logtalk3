@@ -232,10 +232,9 @@
 </pre></div>
 </div>
 <p>Throws a system error. Used when runtime execution can no longer proceed. For
-example, an exception is thrown without an active catcher.</p>
-<p>This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:</p>
+example, an exception is thrown without an active catcher. This built-in method
+is declared private and thus cannot be used as a message to an object. Calling
+this predicate is equivalent to the following sequence of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">system_error</span>, <span class="nv">Context</span>)).

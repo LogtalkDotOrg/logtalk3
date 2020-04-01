@@ -228,21 +228,28 @@
 <span id="methods-evaluation-error-1"></span><span id="index-0"></span><h1>evaluation_error/1<a class="headerlink" href="#evaluation-error-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">evaluation_error</span>(<span class="nv">Exception</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">evaluation_error</span>(<span class="nv">Error</span>)
 </pre></div>
 </div>
 <p>Throws an evaluation error. Used when evaluating an arithmetic expression
-generates an exception (e.g. zero divisor).</p>
-<p>This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:</p>
+generates an exception. This built-in method is declared private and thus
+cannot be used as a message to an object. Calling this predicate is
+equivalent to the following sequence of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(<span class="k">evaluation_error</span>(<span class="nv">Exception</span>), <span class="nv">Context</span>)).
+<span class="k">throw</span>(error(<span class="k">evaluation_error</span>(<span class="nv">Error</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
+<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Error</span></code> include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">float_overflow</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int_overflow</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">undefined</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">underflow</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zero_divisor</span></code></p></li>
+</ul>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>

@@ -232,10 +232,9 @@
 </pre></div>
 </div>
 <p>Throws an existence error. Used when the subject of an operation does not
-exist.</p>
-<p>This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:</p>
+exist. This built-in method is declared private and thus cannot be used as a
+message to an object. Calling this predicate is equivalent to the following
+sequence of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">existence_error</span>(<span class="nv">Thing</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
@@ -243,6 +242,22 @@ of calls:</p>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
+<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Thing</span></code> include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">predicate_declaration</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">procedure</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_sink</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stream</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">category</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">module</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">library</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">goal_thread</span></code></p></li>
+</ul>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">Culprit</span></code> is the argument or one of its sub-terms that caused
+the error.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>

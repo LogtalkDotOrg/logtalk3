@@ -424,8 +424,8 @@ the queries:
 
    | ?- {edcgs(loader)}.
    ...
-   term_expansion(begin_of_file,[begin_of_file,(:-op(1200,xfx,-->>))])
-   term_expansion((:-object(gemini)),[(:-object(gemini))])
+   term_expansion(begin_of_file,begin_of_file)
+   term_expansion((:-object(gemini)),[(:-object(gemini)),(:-op(1200,xfx,-->>))])
    term_expansion(acc_info(castor,A,B,C,true),[])
    term_expansion(pass_info(pollux),[])
    term_expansion(pred_info(p,1,[castor,pollux]),[])
@@ -437,9 +437,10 @@ the queries:
    term_expansion(end_of_file,end_of_file)
    ...
 
-This solution does not require (re)compiling the ``edcg`` hook object in
-debug mode or modifying its expansion rules to emit debug messages. We
-could also simply use the ``user`` pseudo-object as the monitor object:
+This solution does not require compiling the ``edcg`` hook object in debug
+mode or access to its source code (e.g. to modify its expansion rules, to
+emit debug messages. We could also simply use the ``user`` pseudo-object
+as the monitor object:
 
 .. code-block:: text
 

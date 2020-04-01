@@ -232,10 +232,9 @@
 </pre></div>
 </div>
 <p>Throws a type error. Used when the type of an argument is incorrect. For example,
-trying ot use a non-callable term as a message.</p>
-<p>This built-in method is declared private and thus cannot be used as a message
-to an object. Calling this predicate is equivalent to the following sequence
-of calls:</p>
+trying ot use a non-callable term as a message. This built-in method is declared
+private and thus cannot be used as a message to an object. Calling this predicate
+is equivalent to the following sequence of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">type_error</span>(<span class="nv">Type</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
@@ -243,6 +242,10 @@ of calls:</p>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
+<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Type</span></code> include all the types defined by the <code class="docutils literal notranslate"><span class="pre">type</span></code>
+library object and by other libraries such as <code class="docutils literal notranslate"><span class="pre">os</span></code>, <code class="docutils literal notranslate"><span class="pre">expecteds</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">optionals</span></code>. The value of <code class="docutils literal notranslate"><span class="pre">Culprit</span></code> is the argument or one of its sub-terms
+that caused the error.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
