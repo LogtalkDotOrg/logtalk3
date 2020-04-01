@@ -406,10 +406,7 @@ assume a ``expansions_debug.lgt`` file with the contents:
        implements(monitoring)).
 
        after(edcg, term_expansion(T,E), _) :-
-           \+ \+ (
-               numbervars(term_expansion(T,E), 0, _),
-               writeq(term_expansion(T,E)), nl
-           ).
+           writeq(term_expansion(T,E)), nl.
 
    :- end_object.
 
@@ -448,10 +445,7 @@ could also simply use the ``user`` pseudo-object as the monitor object:
 
    | ?- assertz((
             after(_, term_expansion(T,E), _) :-
-                \+ \+ (
-                    numbervars(term_expansion(T,E), 0, _),
-                    writeq(term_expansion(T,E)), nl
-                )
+               writeq(term_expansion(T,E)), nl
         )).
    yes
 
