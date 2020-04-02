@@ -532,8 +532,11 @@ supported backend Prolog compilers.</p>
 <div class="section" id="debugging-expansions">
 <h2>Debugging expansions<a class="headerlink" href="#debugging-expansions" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates can be debugged
-as any other object predicates. An alternative to the debugging tools is to
-use a monitor for the runtime messages that call the predicates. For example,
+as any other object predicates. Note that expansions can often be manually
+tested by sending <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> and <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a>
+messages to a hook object with the term or goal whose expansion you want to
+check as argument. Another alternative to the debugging tools is to use a
+monitor for the runtime messages that call the predicates. For example,
 assume a <code class="docutils literal notranslate"><span class="pre">expansions_debug.lgt</span></code> file with the contents:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>(
      <span class="k">define_events</span>(after, edcg, <span class="nv">_</span>, <span class="nv">_</span>, expansions_debug)
@@ -575,7 +578,7 @@ term_expansion(end_of_file,end_of_file)
 </pre></div>
 </div>
 <p>This solution does not require compiling the <code class="docutils literal notranslate"><span class="pre">edcg</span></code> hook object in debug
-mode or access to its source code (e.g. to modify its expansion rules, to
+mode or access to its source code (e.g. to modify its expansion rules to
 emit debug messages. We could also simply use the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object
 as the monitor object:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- assertz((

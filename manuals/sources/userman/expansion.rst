@@ -391,8 +391,11 @@ Debugging expansions
 --------------------
 
 The ``term_expansion/2`` and ``goal_expansion/2`` predicates can be debugged
-as any other object predicates. An alternative to the debugging tools is to
-use a monitor for the runtime messages that call the predicates. For example,
+as any other object predicates. Note that expansions can often be manually
+tested by sending :ref:`methods_expand_term_2` and :ref:`methods_expand_goal_2`
+messages to a hook object with the term or goal whose expansion you want to
+check as argument. Another alternative to the debugging tools is to use a
+monitor for the runtime messages that call the predicates. For example,
 assume a ``expansions_debug.lgt`` file with the contents:
 
 ::
@@ -438,7 +441,7 @@ the queries:
    ...
 
 This solution does not require compiling the ``edcg`` hook object in debug
-mode or access to its source code (e.g. to modify its expansion rules, to
+mode or access to its source code (e.g. to modify its expansion rules to
 emit debug messages. We could also simply use the ``user`` pseudo-object
 as the monitor object:
 
