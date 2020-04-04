@@ -118,15 +118,15 @@ in different groups. Note that you can define your own alternative message
 kind identifiers, for your own components, together with suitable definitions
 for their associated prefixes and output streams.
 
-The second argument of ``print_message/3`` is new to Logtalk and represents
-the *component* defining the message being printed. Here *component* is a
-generic term that can designate e.g a tool, a library, or some sub-system
-in a large application. In our example, the component name is ``core``,
-identifying the Logtalk compiler/runtime. This argument was introduced to
-simplify programming-in-the-large by allowing easy filtering of all messages
-from a specific component or library and also avoiding conflicts when two
-components happen to define the same message term (e.g. ``banner``). Users
-should choose and use a unique name for a component, which usually is
+The second argument of ``print_message/3`` represents the *component*
+defining the message being printed. Here *component* is a generic term that
+can designate e.g a tool, a library, or some sub-system in a large application.
+In our example, the component name is ``core``, identifying the Logtalk
+compiler/runtime. This argument was introduced to provide multiple namespaces
+for message terms and thus simplify programming-in-the-large by allowing easy
+filtering of all messages from a specific component and also avoiding conflicts
+when two components happen to define the same message term (e.g. ``banner``).
+Users should choose and use a unique name for a component, which usually is
 the name of the component itself. For example, all messages from the
 ``lgtunit`` tool use ``lgtunit`` for the component argument. The compiler
 and runtime are interpreted as a single component designated as ``core``.

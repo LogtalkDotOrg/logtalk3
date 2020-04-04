@@ -254,7 +254,7 @@ allowing it to filter, rewrite, or redirect any message. Variations of this
 mechanism can also be found in some Prolog systems including SICStus Prolog,
 SWI-Prolog, and YAP. Based on this mechanism, Logtalk introduces an extension
 that also allows abstracting asking a user for input. Both mechanisms are
-implemented by the <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.37.0)"><span class="xref std std-ref">logtalk</span></a> built-in object and
+implemented by the <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.38.0)"><span class="xref std std-ref">logtalk</span></a> built-in object and
 described in this section. The message printing mechanism is extensively
 used by the Logtalk compiler itself and by the developer tools. The question
 asking mechanism is used in the debugger tool.</p>
@@ -306,15 +306,15 @@ by the compiler when the <a class="reference internal" href="programming.html#fl
 in different groups. Note that you can define your own alternative message
 kind identifiers, for your own components, together with suitable definitions
 for their associated prefixes and output streams.</p>
-<p>The second argument of <code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> is new to Logtalk and represents
-the <em>component</em> defining the message being printed. Here <em>component</em> is a
-generic term that can designate e.g a tool, a library, or some sub-system
-in a large application. In our example, the component name is <code class="docutils literal notranslate"><span class="pre">core</span></code>,
-identifying the Logtalk compiler/runtime. This argument was introduced to
-simplify programming-in-the-large by allowing easy filtering of all messages
-from a specific component or library and also avoiding conflicts when two
-components happen to define the same message term (e.g. <code class="docutils literal notranslate"><span class="pre">banner</span></code>). Users
-should choose and use a unique name for a component, which usually is
+<p>The second argument of <code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> represents the <em>component</em>
+defining the message being printed. Here <em>component</em> is a generic term that
+can designate e.g a tool, a library, or some sub-system in a large application.
+In our example, the component name is <code class="docutils literal notranslate"><span class="pre">core</span></code>, identifying the Logtalk
+compiler/runtime. This argument was introduced to provide multiple namespaces
+for message terms and thus simplify programming-in-the-large by allowing easy
+filtering of all messages from a specific component and also avoiding conflicts
+when two components happen to define the same message term (e.g. <code class="docutils literal notranslate"><span class="pre">banner</span></code>).
+Users should choose and use a unique name for a component, which usually is
 the name of the component itself. For example, all messages from the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool use <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> for the component argument. The compiler
 and runtime are interpreted as a single component designated as <code class="docutils literal notranslate"><span class="pre">core</span></code>.</p>
@@ -385,7 +385,7 @@ of messages printed on a console.</p>
 Logtalk defines several <em>meta-messages</em> that are handy for simple cases and
 temporary messages only used to help developing, notably debugging messages.
 See the <a class="reference internal" href="debugging.html#debugging-messages"><span class="std std-ref">Debugging messages</span></a> section and the
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.37.0)"><span class="xref std std-ref">logtalk built-in object</span></a> remarks section for details.</p>
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.38.0)"><span class="xref std std-ref">logtalk built-in object</span></a> remarks section for details.</p>
 </div>
 <div class="section" id="intercepting-messages">
 <h2>Intercepting messages<a class="headerlink" href="#intercepting-messages" title="Permalink to this headline">¶</a></h2>
