@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2:10:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2020-03-01,
+		date is 2020-04-04,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -139,16 +139,21 @@
 	message_tokens(quick_check_passed(NumberOfTests)) -->
 		['~w random tests passed'-[NumberOfTests], nl].
 
-	message_tokens(quick_check_failed(Goal, Test, Shrinks)) -->
+	message_tokens(quick_check_failed(Goal, Test, Shrinks, Seed)) -->
 		(	{Shrinks == 1} ->
 			['quick check test failure (at test ~w after ~w shrink):'-[Test, Shrinks], nl, '  ~q'-[Goal], nl]
 		;	['quick check test failure (at test ~w after ~w shrinks):'-[Test, Shrinks], nl, '  ~q'-[Goal], nl]
-		).
+		),
+		['starting seed: ~w'-[Seed], nl].
 
-	message_tokens(quick_check_error(error(Error,_), Goal, Test)) -->
-		message_tokens(quick_check_error(Error, Goal, Test)).
-	message_tokens(quick_check_error(Error, _Goal, Test)) -->
-		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl].
+	message_tokens(quick_check_error(error(Error,_), Goal, Test, Seed)) -->
+		message_tokens(quick_check_error(Error, Goal, Test, Seed)).
+	message_tokens(quick_check_error(Error, _Goal, Test, Seed)) -->
+		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl],
+		['starting seed: ~w'-[Seed], nl].
+
+	message_tokens(quick_check_error(Error, Template)) -->
+		['quick check error using template: ~w'-[Template], nl, '  ~q'-[Error], nl].
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, _Object, Test),

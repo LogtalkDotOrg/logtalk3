@@ -21,9 +21,9 @@ Adds predicates for generating and shrinking random values for selected types to
 | **Complements:**
 |    :ref:`type <type/0>`
 | **Uses:**
+|    :ref:`fast_random <fast_random/0>`
 |    :ref:`integer <integer/0>`
 |    :ref:`list <list/0>`
-|    :ref:`random <random/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
@@ -182,6 +182,52 @@ Table of type edge cases. Fails if the given type have no defined edge cases. Ne
 |    ``edge_case(Type,Term)``
 | **Mode and number of proofs:**
 |    ``edge_case(?callable,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="get_seed/1"> </div>
+
+.. index:: get_seed/1
+.. _arbitrary/0::get_seed/1:
+
+``get_seed/1``
+^^^^^^^^^^^^^^
+
+Gets the current random generator seed. Seed should be regarded as an opaque ground term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get_seed(Seed)``
+| **Mode and number of proofs:**
+|    ``get_seed(-ground)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="set_seed/1"> </div>
+
+.. index:: set_seed/1
+.. _arbitrary/0::set_seed/1:
+
+``set_seed/1``
+^^^^^^^^^^^^^^
+
+Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set_seed(Seed)``
+| **Mode and number of proofs:**
+|    ``set_seed(+ground)`` - ``one``
 
 
 ------------

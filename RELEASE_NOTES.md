@@ -27,11 +27,29 @@ RELEASE NOTES
 Library
 -------
 
+* CHANGED: Switch the `arbitrary` category to use the `fast_random` generator.
+
+* ADDED: Predicates `get_seed/1` and `set_seed/1` to the `arbitrary` category.
+
 * FIXED: Deleted wrong `edge_case/2` clauses for the type `list(Type,Length)`
 from the `arbitrary` category.
 
 Tools
 -----
+
+* CHANGED: Switch the `lgtunit` tool to use the `fast_random` generator in
+its QuickCheck implementation.
+
+* CHANGED: The `lgtunit` tool `quick_check/3` predicate reified results for
+errors and failures to include the random generator starting seed used to
+generate the random tests. 
+
+* CHANGED: The `lgtunit` tool QuickCheck test dialects printed messages in
+case of errors and failures to include the  starting seed used to generate
+the random tests. 
+
+* ADDED: QuickCheck `rs(Seed)` option to the `lgtunit` tool to allow passing
+the random generator starting seed to be used to generate the random tests.
 
 * ADDED: QuickCheck `ec(Boolean)` option to the `lgtunit` tool to control
 use of edge cases when generating random arguments. Defaults is `true`.

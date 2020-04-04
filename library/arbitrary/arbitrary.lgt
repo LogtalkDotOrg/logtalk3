@@ -60,7 +60,7 @@
 
 	:- uses(integer, [between/3 as for/3]).
 	:- uses(list, [length/2]).
-	:- uses(random, [between/3, member/2, random/1]).
+	:- uses(fast_random, [between/3, member/2, random/1]).
 
 	:- public(arbitrary/1).
 	:- multifile(arbitrary/1).
@@ -100,6 +100,20 @@
 	:- info(edge_case/2, [
 		comment is 'Table of type edge cases. Fails if the given type have no defined edge cases. New edge cases for existing or new types can be added by defining a clause for this multifile predicate.',
 		argnames is ['Type', 'Term']
+	]).
+
+	:- public(get_seed/1).
+	:- mode(get_seed(-ground), one).
+	:- info(get_seed/1, [
+		comment is 'Gets the current random generator seed. Seed should be regarded as an opaque ground term.',
+		argnames is ['Seed']
+	]).
+
+	:- public(set_seed/1).
+	:- mode(set_seed(+ground), one).
+	:- info(set_seed/1, [
+		comment is 'Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.',
+		argnames is ['Seed']
 	]).
 
 	% arbitrary/1
@@ -1073,6 +1087,14 @@
 		edge_case(Type, Term).
 	edge_case(var_or(Type), Term) :-
 		edge_case(Type, Term).
+
+	% seed predicates
+
+	get_seed(Seed) :-
+		fast_random::get_seed(Seed).
+
+	set_seed(Seed) :-
+		fast_random::set_seed(Seed).
 
 	% auxiliary predicates
 

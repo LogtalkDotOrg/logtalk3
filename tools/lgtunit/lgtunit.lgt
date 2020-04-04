@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7:19:0,
+		version is 8:0:0,
 		author is 'Paulo Moura',
 		date is 2020-04-04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -115,7 +115,7 @@
 	:- public(quick_check/3).
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
 	:- info(quick_check/3, [
-		comment is 'Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed``, ``failed(Goal)`` where ``Goal`` is the test that failed, or ``error(Error,Template)``.',
+		comment is 'Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed``, ``failed(Goal,Seed)`` where ``Goal`` is the test that failed, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.',
 		argnames is ['Template', 'Result', 'Options']
 	]).
 
@@ -625,14 +625,14 @@
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
 	:- uses(logtalk, [print_message/3]).
 	% library support for quick check
-	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2]).
+	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3]).
 	% don't assume that between/3 is a built-in predicate as some backend
 	% Prolog systems still provide it as a library predicate
 	:- uses(integer, [between/3]).
 	% for QuickCheck support
-	:- uses(random, [maybe/0]).
+	:- uses(fast_random, [maybe/0]).
 
 	% by default, run the unit tests
 	condition.
@@ -1408,7 +1408,7 @@
 		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),
 		parse_quick_check_options(Options, QuickCheckOptions).
 
-	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxNumberOfShrinks), ec(UseEdgeCases)]) :-
+	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxNumberOfShrinks), ec(UseEdgeCases)| Other]) :-
 		(	memberchk(n(NumberOfTests), Options),
 			integer(NumberOfTests),
 			NumberOfTests >= 0 ->
@@ -1425,6 +1425,10 @@
 			(Boolean == true; Boolean == false) ->
 			UseEdgeCases = Boolean
 		;	default_quick_check_option(ec(UseEdgeCases))
+		),
+		(	member(rs(Seed), Options) ->
+			Other = [rs(Seed)]
+		;	Other = []
 		).
 
 	% generate and run 100 tests by default
@@ -1603,12 +1607,14 @@
 		catch(run_quick_check_tests(Template, QuickCheckOptions), Error, true),
 		(	var(Error) ->
 			Result = passed
-		;	Error = quick_check_failed(Goal, _, _) ->
-			Result = failed(Goal)
-		;	Error = quick_check_error(error(Exception,_), Goal, _) ->
-			Result = error(Exception, Goal)
-		;	Error = quick_check_error(Exception, Goal, _),
-			Result = error(Exception, Goal)
+		;	Error = quick_check_failed(Goal, _, _, Seed) ->
+			Result = failed(Goal, Seed)
+		;	Error = quick_check_error(error(Exception,_), Goal, _, Seed) ->
+			Result = error(Exception, Goal, Seed)
+		;	Error = quick_check_error(Exception, Goal, _, Seed) ->
+			Result = error(Exception, Goal, Seed)
+		;	Error = quick_check_error(Exception, Template),
+			Result = error(Exception, Template)
 		).
 
 	quick_check(Template, Options) :-
@@ -1625,15 +1631,19 @@
 		quick_check(Template, []).
 
 	run_quick_check_tests(Template, Options) :-
-		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template,1))),
+		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template))),
 		memberchk(n(NumberOfTests), Options),
 		memberchk(s(MaxNumberOfShrinks), Options),
 		memberchk(ec(UseEdgeCases), Options),
+		(	member(rs(Seed), Options) ->
+			set_seed(Seed)
+		;	get_seed(Seed)
+		),
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
 		forall(
 			between(1, NumberOfTests, Test),
-			run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaxNumberOfShrinks, UseEdgeCases)
+			run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaxNumberOfShrinks, UseEdgeCases, Seed)
 		).
 
 	decompose_quick_check_template(Template, Entity, Operator, Predicate) :-
@@ -1648,16 +1658,16 @@
 	control_construct(':'(Module,Template), Module, (:), Template).
 
 	:- meta_predicate(run_quick_check_test(*, *, *, *, *, *, *, *)).
-	run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaxNumberOfShrinks, UseEdgeCases) :-
+	run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaxNumberOfShrinks, UseEdgeCases, Seed) :-
 		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, UseEdgeCases),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],
-		(	catch(Goal, Error, throw(quick_check_error(Error, Goal, Test))) ->
+		(	catch(Goal, Error, throw(quick_check_error(Error, Goal, Test, Seed))) ->
 			(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 				true
-			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxNumberOfShrinks)
+			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxNumberOfShrinks, Seed)
 			)
-		;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxNumberOfShrinks)
+		;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxNumberOfShrinks, Seed)
 		).
 
 	% return, along the generated arguments, a copy of those arguments so that
@@ -1718,15 +1728,15 @@
 		variant(Argument, ArgumentCopy).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(Types, Goal, Template, Test, Count, MaxNumberOfShrinks) :-
+	shrink_failed_test(Types, Goal, Template, Test, Count, MaxNumberOfShrinks, Seed) :-
 		(	Count < MaxNumberOfShrinks ->
 			(	shrink_goal(Types, Goal, Small),
 				catch(\+ Small, _, fail) ->
 				Next is Count + 1,
-				shrink_failed_test(Types, Small, Template, Test, Next, MaxNumberOfShrinks)
-			;	quick_check_failed(Goal, Template, Test, Count)
+				shrink_failed_test(Types, Small, Template, Test, Next, MaxNumberOfShrinks, Seed)
+			;	quick_check_failed(Goal, Template, Test, Count, Seed)
 			)
-		;	quick_check_failed(Goal, Template, Test, Count)
+		;	quick_check_failed(Goal, Template, Test, Count, Seed)
 		).
 
 	shrink_goal(Types, Large, Small) :-
@@ -1752,14 +1762,14 @@
 	extract_input_type('@'(Type), Type).
 
 	% undo the <</2 control construct if added by the tool itself
-	quick_check_failed(Object<<Goal, _<<_, Test, Depth) :-
+	quick_check_failed(Object<<Goal, _<<_, Test, Depth, Seed) :-
 		!,
-		throw(quick_check_failed(Object<<Goal, Test, Depth)).
-	quick_check_failed(_<<Goal, _, Test, Depth) :-
+		throw(quick_check_failed(Object<<Goal, Test, Depth, Seed)).
+	quick_check_failed(_<<Goal, _, Test, Depth, Seed) :-
 		!,
-		throw(quick_check_failed(Goal, Test, Depth)).
-	quick_check_failed(Goal, _, Test, Depth) :-
-		throw(quick_check_failed(Goal, Test, Depth)).
+		throw(quick_check_failed(Goal, Test, Depth, Seed)).
+	quick_check_failed(Goal, _, Test, Depth, Seed) :-
+		throw(quick_check_failed(Goal, Test, Depth, Seed)).
 
 	% definition taken from the SWI-Prolog documentation
 	variant(Term1, Term2) :-

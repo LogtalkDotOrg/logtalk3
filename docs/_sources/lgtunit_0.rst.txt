@@ -11,7 +11,7 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 7:19:0
+| **Version:** 8:0:0
 | **Date:** 2020-04-04
 
 | **Compilation flags:**
@@ -23,11 +23,11 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 | **Provides:**
 |    :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
 | **Uses:**
+|    :ref:`fast_random <fast_random/0>`
 |    :ref:`integer <integer/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
-|    :ref:`random <random/0>`
 |    :ref:`type <type/0>`
 |    :ref:`user <user/0>`
 
@@ -286,7 +286,7 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 ``quick_check/3``
 ^^^^^^^^^^^^^^^^^
 
-Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed``, ``failed(Goal)`` where ``Goal`` is the test that failed, or ``error(Error,Template)``.
+Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed``, ``failed(Goal,Seed)`` where ``Goal`` is the test that failed, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.
 
 | **Compilation flags:**
 |    ``static``

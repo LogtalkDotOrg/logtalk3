@@ -367,8 +367,10 @@ use:
 The `quick_check/3` predicate returns results in reified form:
 
 - `passed`,
-- `failed(Goal)` with Goal being the random test that failed
-- `error(Error, Template)` or `error(Error, Goal)`
+- `failed(Goal, Seed)` with Goal being the random test that failed
+- `error(Error, Template)` or `error(Error, Goal, Seed)`
+
+The `Seed` argument is the starting seed used to generate the random tests.
 
 The other two predicates print the test results. The template can be a `::/2`,
 `<</2`, or `:/2` qualified callable term. When the template is an unqualified

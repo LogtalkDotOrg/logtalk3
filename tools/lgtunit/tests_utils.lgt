@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:16:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2019-06-10,
+		date is 2020-04-04,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -379,11 +379,11 @@
 
 	succeeds(quick_check_3_03) :-
 		quick_check(atom(+integer), Result, []),
-		Result = failed(atom(Integer)), integer(Integer).
+		Result = failed(atom(Integer), _Seed), integer(Integer).
 
 	succeeds(quick_check_3_04) :-
 		quick_check(atom(+integer), Result, [n(25)]),
-		Result = failed(atom(Integer)), integer(Integer).
+		Result = failed(atom(Integer), _Seed), integer(Integer).
 
 	succeeds(quick_check_3_05) :-
 		quick_check(_, Result, []),
@@ -395,11 +395,11 @@
 
 	succeeds(quick_check_3_07) :-
 		quick_check(type::foo42(+integer), Result, []),
-		Result = error(Error, _), Error == existence_error(predicate_declaration, foo42/1).
+		Result = error(Error, _, _), Error == existence_error(predicate_declaration, foo42/1).
 
 	succeeds(quick_check_3_08) :-
 		quick_check(foo(@var), Result, []),
-		Result == failed(foo(1)).
+		Result = failed(Goal, _Seed), Goal == foo(1).
 
 	% quick_check/2 tests
 
