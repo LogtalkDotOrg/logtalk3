@@ -24,6 +24,11 @@ RELEASE NOTES
 3.38.0 - May ??, 2020
 =====================
 
+Library
+-------
+
+* FIXED: Deleted wrong `edge_case/2` clauses for the type `list(Type,Length)`
+from the `arbitrary` category.
 
 
 3.37.0 - April 2, 2020
