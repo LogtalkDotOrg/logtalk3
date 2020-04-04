@@ -30,6 +30,12 @@ Library
 * FIXED: Deleted wrong `edge_case/2` clauses for the type `list(Type,Length)`
 from the `arbitrary` category.
 
+Tools
+-----
+
+* ADDED: QuickCheck `ec(Boolean)` option to the `lgtunit` tool to control
+use of edge cases when generating random arguments. Defaults is `true`.
+
 
 3.37.0 - April 2, 2020
 ======================

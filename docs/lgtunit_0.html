@@ -256,8 +256,8 @@
 <p>A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 7:18:1</div>
-<div class="line"><strong>Date:</strong> 2020-03-02</div>
+<div class="line"><strong>Version:</strong> 7:19:0</div>
+<div class="line"><strong>Date:</strong> 2020-04-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -656,7 +656,7 @@
 <div id="quick_check/2"> </div></div>
 <div class="section" id="quick-check-2">
 <span id="lgtunit-0-quick-check-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">quick_check/2</span></code></a><a class="headerlink" href="#quick-check-2" title="Permalink to this headline">¶</a></h3>
-<p>Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts <code class="docutils literal notranslate"><span class="pre">n(NumberOfTests)</span></code> and <code class="docutils literal notranslate"><span class="pre">s(MaximumNumberOfShrinks)</span></code> options. Defaults are <code class="docutils literal notranslate"><span class="pre">n(100)</span></code> and <code class="docutils literal notranslate"><span class="pre">s(64)</span></code>.</p>
+<p>Generates and runs random tests for a predicate given its mode template. Fails when a generated test fails printing the test. Takes <code class="docutils literal notranslate"><span class="pre">n(NumberOfTests)</span></code>, <code class="docutils literal notranslate"><span class="pre">s(MaxNumberOfShrinks)</span></code>, and <code class="docutils literal notranslate"><span class="pre">ec(UseEdgeCases)</span></code> options. Defaults to <code class="docutils literal notranslate"><span class="pre">[n(100),s(64),ec(true)]</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -677,7 +677,7 @@
 <div id="quick_check/1"> </div></div>
 <div class="section" id="quick-check-1">
 <span id="lgtunit-0-quick-check-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">quick_check/1</span></code></a><a class="headerlink" href="#quick-check-1" title="Permalink to this headline">¶</a></h3>
-<p>Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails printing the test.</p>
+<p>Generates and runs 100 random tests for a predicate given its mode template. Fails when a generated test fails printing the test.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

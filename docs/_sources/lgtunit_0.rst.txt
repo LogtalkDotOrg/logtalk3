@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 7:18:1
-| **Date:** 2020-03-02
+| **Version:** 7:19:0
+| **Date:** 2020-04-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -309,7 +309,7 @@ Reified version of the ``quick_check/2`` predicate. Reports the result as ``pass
 ``quick_check/2``
 ^^^^^^^^^^^^^^^^^
 
-Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts ``n(NumberOfTests)`` and ``s(MaximumNumberOfShrinks)`` options. Defaults are ``n(100)`` and ``s(64)``.
+Generates and runs random tests for a predicate given its mode template. Fails when a generated test fails printing the test. Takes ``n(NumberOfTests)``, ``s(MaxNumberOfShrinks)``, and ``ec(UseEdgeCases)`` options. Defaults to ``[n(100),s(64),ec(true)]``.
 
 | **Compilation flags:**
 |    ``static``
@@ -332,7 +332,7 @@ Generates and runs random tests for a given predicate given its mode template. F
 ``quick_check/1``
 ^^^^^^^^^^^^^^^^^
 
-Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails printing the test.
+Generates and runs 100 random tests for a predicate given its mode template. Fails when a generated test fails printing the test.
 
 | **Compilation flags:**
 |    ``static``

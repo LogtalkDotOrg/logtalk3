@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 7:18:1,
+		version is 7:19:0,
 		author is 'Paulo Moura',
-		date is 2020-03-02,
+		date is 2020-04-04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -122,14 +122,14 @@
 	:- public(quick_check/2).
 	:- mode(quick_check(@callable, ++list(compound)), zero_or_one).
 	:- info(quick_check/2, [
-		comment is 'Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts ``n(NumberOfTests)`` and ``s(MaximumNumberOfShrinks)`` options. Defaults are ``n(100)`` and ``s(64)``.',
+		comment is 'Generates and runs random tests for a predicate given its mode template. Fails when a generated test fails printing the test. Takes ``n(NumberOfTests)``, ``s(MaxNumberOfShrinks)``, and ``ec(UseEdgeCases)`` options. Defaults to ``[n(100),s(64),ec(true)]``.',
 		argnames is ['Template', 'Options']
 	]).
 
 	:- public(quick_check/1).
 	:- mode(quick_check(@callable), zero_or_one).
 	:- info(quick_check/1, [
-		comment is 'Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails printing the test.',
+		comment is 'Generates and runs 100 random tests for a predicate given its mode template. Fails when a generated test fails printing the test.',
 		argnames is ['Template']
 	]).
 
@@ -1408,24 +1408,31 @@
 		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),
 		parse_quick_check_options(Options, QuickCheckOptions).
 
-	parse_quick_check_options(Options, [n(NumberOfTests), s(MaximumNumberOfShrinks)]) :-
+	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxNumberOfShrinks), ec(UseEdgeCases)]) :-
 		(	memberchk(n(NumberOfTests), Options),
 			integer(NumberOfTests),
 			NumberOfTests >= 0 ->
 			true
 		;	default_quick_check_option(n(NumberOfTests))
 		),
-		(	memberchk(s(MaximumNumberOfShrinks), Options),
-			integer(MaximumNumberOfShrinks),
-			MaximumNumberOfShrinks >= 0 ->
+		(	memberchk(s(MaxNumberOfShrinks), Options),
+			integer(MaxNumberOfShrinks),
+			MaxNumberOfShrinks >= 0 ->
 			true
-		;	default_quick_check_option(s(MaximumNumberOfShrinks))
+		;	default_quick_check_option(s(MaxNumberOfShrinks))
+		),
+		(	memberchk(ec(Boolean), Options),
+			(Boolean == true; Boolean == false) ->
+			UseEdgeCases = Boolean
+		;	default_quick_check_option(ec(UseEdgeCases))
 		).
 
 	% generate and run 100 tests by default
 	default_quick_check_option(n(100)).
 	% perform a maximum of 64 shrink operations on a counter-example
 	default_quick_check_option(s(64)).
+	% use edge cases by default
+	default_quick_check_option(ec(true)).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
@@ -1620,12 +1627,13 @@
 	run_quick_check_tests(Template, Options) :-
 		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template,1))),
 		memberchk(n(NumberOfTests), Options),
-		memberchk(s(MaximumNumberOfShrinks), Options),
+		memberchk(s(MaxNumberOfShrinks), Options),
+		memberchk(ec(UseEdgeCases), Options),
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
 		forall(
 			between(1, NumberOfTests, Test),
-			run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaximumNumberOfShrinks)
+			run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaxNumberOfShrinks, UseEdgeCases)
 		).
 
 	decompose_quick_check_template(Template, Entity, Operator, Predicate) :-
@@ -1639,56 +1647,56 @@
 	control_construct(Object<<Template, Object, (<<), Template).
 	control_construct(':'(Module,Template), Module, (:), Template).
 
-	:- meta_predicate(run_quick_check_test(*, *, *, *, *, *, *)).
-	run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaximumNumberOfShrinks) :-
-		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test),
+	:- meta_predicate(run_quick_check_test(*, *, *, *, *, *, *, *)).
+	run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaxNumberOfShrinks, UseEdgeCases) :-
+		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, UseEdgeCases),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],
 		(	catch(Goal, Error, throw(quick_check_error(Error, Goal, Test))) ->
 			(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 				true
-			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaximumNumberOfShrinks)
+			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxNumberOfShrinks)
 			)
-		;	shrink_failed_test(Types, Goal, Template, Test, 0, MaximumNumberOfShrinks)
+		;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxNumberOfShrinks)
 		).
 
 	% return, along the generated arguments, a copy of those arguments so that
 	% we can check that the property being tested don't further instantiates
 	% '@'(Type) arguments; but as copies for other argument instantiation modes
 	% are not required, only '@'(Type) arguments are actually copied
-	generate_arbitrary_arguments([], [], [], _).
-	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], [ArgumentCopy| ArgumentsCopy], Test) :-
-		generate_arbitrary_argument(Type, Argument, ArgumentCopy, Test),
-		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test).
+	generate_arbitrary_arguments([], [], [], _, _).
+	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], [ArgumentCopy| ArgumentsCopy], Test, UseEdgeCases) :-
+		generate_arbitrary_argument(Type, Argument, ArgumentCopy, Test, UseEdgeCases),
+		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, UseEdgeCases).
 
-	generate_arbitrary_argument('--'(_), _, _, _).
-	generate_arbitrary_argument('-'(_), _, _, _).
-	generate_arbitrary_argument('++'(Type), Arbitrary, _, Test) :-
-		(	type_test_edge_case(ground(Type), Test, Arbitrary) ->
+	generate_arbitrary_argument('--'(_), _, _, _, _).
+	generate_arbitrary_argument('-'(_), _, _, _, _).
+	generate_arbitrary_argument('++'(Type), Arbitrary, _, Test, UseEdgeCases) :-
+		(	type_test_edge_case(ground(Type), Test, Arbitrary, UseEdgeCases) ->
 			true
 		;	arbitrary(ground(Type), Arbitrary)
 		).
-	generate_arbitrary_argument('+'(Type), Arbitrary, _, Test) :-
-		(	type_test_edge_case(Type, Test, Arbitrary) ->
+	generate_arbitrary_argument('+'(Type), Arbitrary, _, Test, UseEdgeCases) :-
+		(	type_test_edge_case(Type, Test, Arbitrary, UseEdgeCases) ->
 			true
 		;	arbitrary(Type, Arbitrary)
 		).
-	generate_arbitrary_argument('?'(Type), Arbitrary, _, Test) :-
-		(	type_test_edge_case(Type, Test, Arbitrary) ->
+	generate_arbitrary_argument('?'(Type), Arbitrary, _, Test, UseEdgeCases) :-
+		(	type_test_edge_case(Type, Test, Arbitrary, UseEdgeCases) ->
 			true
 		;	maybe ->
 			arbitrary(var, Arbitrary)
 		;	arbitrary(Type, Arbitrary)
 		).
-	generate_arbitrary_argument('@'(Type), Arbitrary, ArbitraryCopy, Test) :-
-		(	type_test_edge_case(Type, Test, Arbitrary) ->
+	generate_arbitrary_argument('@'(Type), Arbitrary, ArbitraryCopy, Test, UseEdgeCases) :-
+		(	type_test_edge_case(Type, Test, Arbitrary, UseEdgeCases) ->
 			true
 		;	arbitrary(Type, Arbitrary)
 		),
 		copy_term(Arbitrary, ArbitraryCopy).
-	generate_arbitrary_argument('{}'(Argument), Argument, _, _).
+	generate_arbitrary_argument('{}'(Argument), Argument, _, _, _).
 
-	type_test_edge_case(Type, Test, EdgeCase) :-
+	type_test_edge_case(Type, Test, EdgeCase, true) :-
 		findall(Term, edge_case(Type, Term), EdgeCases),
 		nth1(Test, EdgeCases, EdgeCase).
 
@@ -1710,12 +1718,12 @@
 		variant(Argument, ArgumentCopy).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(Types, Goal, Template, Test, Count, MaximumNumberOfShrinks) :-
-		(	Count < MaximumNumberOfShrinks ->
+	shrink_failed_test(Types, Goal, Template, Test, Count, MaxNumberOfShrinks) :-
+		(	Count < MaxNumberOfShrinks ->
 			(	shrink_goal(Types, Goal, Small),
 				catch(\+ Small, _, fail) ->
 				Next is Count + 1,
-				shrink_failed_test(Types, Small, Template, Test, Next, MaximumNumberOfShrinks)
+				shrink_failed_test(Types, Small, Template, Test, Next, MaxNumberOfShrinks)
 			;	quick_check_failed(Goal, Template, Test, Count)
 			)
 		;	quick_check_failed(Goal, Template, Test, Count)
