@@ -543,8 +543,11 @@ quick_check(<span class="nv">Test</span>, <span class="nv">Template</span>).
 </div>
 <p>The valid options are the same as for the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect plus a
 <code class="docutils literal notranslate"><span class="pre">n/1</span></code> option to specify the number of random tests that will be
-generated/run (default is 100) and a <code class="docutils literal notranslate"><span class="pre">s/1</span></code> option to specify the
-maximum number of shrink operations (default is 64).</p>
+generated/run (default is 100), a <code class="docutils literal notranslate"><span class="pre">s/1</span></code> option to specify the maximum
+number of shrink operations (default is 64), an <code class="docutils literal notranslate"><span class="pre">ec/1</span></code> boolean option
+to decide if type edge cases are used for testing (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>),
+and a <code class="docutils literal notranslate"><span class="pre">rs/1</span></code> option to specify the starting seed to be used when
+generating the random tests (no default).</p>
 <p>For examples of how to write unit tests, check the <code class="docutils literal notranslate"><span class="pre">tests</span></code> folder or
 the <code class="docutils literal notranslate"><span class="pre">testing</span></code> example in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> folder in the Logtalk
 distribution. Most of the provided examples also include unit tests,
@@ -591,11 +594,12 @@ used by updating the pipeline.</p>
 <div class="section" id="quickcheck">
 <h2>QuickCheck<a class="headerlink" href="#quickcheck" title="Permalink to this headline">¶</a></h2>
 <p>QuickCheck was originally developed for Haskell. Implementations for
-several other programming languages soon followed. The idea is to
-express properties that predicates must comply with and automatically
-generate tests for those properties. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool supports both
-<code class="docutils literal notranslate"><span class="pre">quick_check/2-3</span></code> test dialects, as described above, and
-<code class="docutils literal notranslate"><span class="pre">quick_check/1-3</span></code> public predicates for interactive use:</p>
+several other programming languages soon followed. QuickCheck provides
+support for <em>property-based testing</em>. The idea is to express properties
+that predicates must comply with and automatically generate tests for
+those properties. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool supports both <code class="docutils literal notranslate"><span class="pre">quick_check/2-3</span></code>
+test dialects, as described above, and <code class="docutils literal notranslate"><span class="pre">quick_check/1-3</span></code> public
+predicates for interactive use:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>quick_check(<span class="nv">Template</span>, <span class="nv">Result</span>, <span class="nv">Options</span>).
 quick_check(<span class="nv">Template</span>, <span class="nv">Options</span>).
 quick_check(<span class="nv">Template</span>).
@@ -603,10 +607,20 @@ quick_check(<span class="nv">Template</span>).
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code> predicate returns results in reified form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">passed</span></code>,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal)</span></code> with Goal being the random test that failed</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Template)</span></code> or <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">passed(Seed)</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal,</span> <span class="pre">Seed)</span></code> with Goal being the random test that failed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Template)</span></code> or <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal,</span> <span class="pre">Seed)</span></code></p></li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Seed</span></code> argument is the starting seed used to generate the random
+tests and should be regarded as an opaque term.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">n/1</span></code> option allows us to specify the number of random tests that
+will be generated and run (default is 100). The <code class="docutils literal notranslate"><span class="pre">s/1</span></code> option allows us
+to specify the maximum number of shrink operations when a
+counter-example is found (default is 64). An <code class="docutils literal notranslate"><span class="pre">ec/1</span></code> boolean option
+allows us to decide if type edge cases are tested before generating
+random tests (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>). A <code class="docutils literal notranslate"><span class="pre">rs/1</span></code> option to allow us to
+specify the starting seed to be used when generating the random tests
+(no default).</p>
 <p>The other two predicates print the test results. The template can be a
 <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> qualified callable term. When the
 template is an unqualified callable term, it will be used to construct a
@@ -615,11 +629,17 @@ debugging control construct. A simple example by passing a template that
 will trigger a failed test (as the <code class="docutils literal notranslate"><span class="pre">random::random/1</span></code> predicate always
 returns non-negative floats):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(random<span class="o">::</span>random(<span class="o">-</span>negative_float)).
-<span class="o">*</span>     quick check test failure (at test <span class="m">1</span> after <span class="m">1</span> shrink)<span class="o">:</span>
+<span class="o">*</span>     quick check test failure (at test <span class="m">1</span> after <span class="m">0</span> shrinks)<span class="o">:</span>
 <span class="o">*</span>       random<span class="o">::</span>random(<span class="m">0.09230089279334841</span>)
+<span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
 no
 </pre></div>
 </div>
+<p>When QuickCheck exposes a bug in the tested code, we can use the
+reported counter-example to help diagnose it and fix it. As tests are
+randomly generated, we can use the starting seed reported with the
+counter-example to confirm the bug fix by calling the
+<code class="docutils literal notranslate"><span class="pre">quick_check/2-3</span></code> predicates with the <code class="docutils literal notranslate"><span class="pre">rs(Seed)</span></code> option.</p>
 <p>Another example using a Prolog module predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(
         pairs<span class="o">:</span>pairs_keys_values(
@@ -629,6 +649,7 @@ no
         )
     ).
 <span class="c">% 100 random tests passed</span>
+<span class="c">% starting seed: seed(3172,9814,20125)</span>
 yes
 </pre></div>
 </div>
@@ -670,9 +691,6 @@ template in the API documentation for the library entities <code class="docutils
 or your own, can contribute with additional type definitions as both
 <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> entities are user extensible by defining
 clauses for their multifile predicates.</p>
-<p>An optional argument, <code class="docutils literal notranslate"><span class="pre">n/1</span></code>, allows the specification of the number of
-random tests that will be generated and run. The maximum number of
-shrink operations can be specified using the option <code class="docutils literal notranslate"><span class="pre">s/1</span></code>.</p>
 <p>The user can define new types to use in the property mode templates to
 use with its QuickCheck tests by defining clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code>
 library category multifile predicates.</p>

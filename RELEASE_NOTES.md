@@ -40,9 +40,8 @@ Tools
 * CHANGED: Switch the `lgtunit` tool to use the `fast_random` generator in
 its QuickCheck implementation.
 
-* CHANGED: The `lgtunit` tool `quick_check/3` predicate reified results for
-errors and failures to include the random generator starting seed used to
-generate the random tests. 
+* CHANGED: The `lgtunit` tool `quick_check/3` predicate reified results to
+include the random generator starting seed used to generate the tests.
 
 * CHANGED: The `lgtunit` tool QuickCheck test dialects printed messages in
 case of errors and failures to include the  starting seed used to generate

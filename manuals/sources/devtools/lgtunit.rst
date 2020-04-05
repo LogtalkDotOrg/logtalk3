@@ -327,8 +327,11 @@ details):
 
 The valid options are the same as for the ``test/3`` dialect plus a
 ``n/1`` option to specify the number of random tests that will be
-generated/run (default is 100) and a ``s/1`` option to specify the
-maximum number of shrink operations (default is 64).
+generated/run (default is 100), a ``s/1`` option to specify the maximum
+number of shrink operations (default is 64), an ``ec/1`` boolean option
+to decide if type edge cases are used for testing (default is ``true``),
+and a ``rs/1`` option to specify the starting seed to be used when
+generating the random tests (no default).
 
 For examples of how to write unit tests, check the ``tests`` folder or
 the ``testing`` example in the ``examples`` folder in the Logtalk
@@ -384,11 +387,12 @@ QuickCheck
 ----------
 
 QuickCheck was originally developed for Haskell. Implementations for
-several other programming languages soon followed. The idea is to
-express properties that predicates must comply with and automatically
-generate tests for those properties. The ``lgtunit`` tool supports both
-``quick_check/2-3`` test dialects, as described above, and
-``quick_check/1-3`` public predicates for interactive use:
+several other programming languages soon followed. QuickCheck provides
+support for *property-based testing*. The idea is to express properties
+that predicates must comply with and automatically generate tests for
+those properties. The ``lgtunit`` tool supports both ``quick_check/2-3``
+test dialects, as described above, and ``quick_check/1-3`` public
+predicates for interactive use:
 
 ::
 
@@ -398,9 +402,21 @@ generate tests for those properties. The ``lgtunit`` tool supports both
 
 The ``quick_check/3`` predicate returns results in reified form:
 
--  ``passed``,
--  ``failed(Goal)`` with Goal being the random test that failed
--  ``error(Error, Template)`` or ``error(Error, Goal)``
+-  ``passed(Seed)``,
+-  ``failed(Goal, Seed)`` with Goal being the random test that failed
+-  ``error(Error, Template)`` or ``error(Error, Goal, Seed)``
+
+The ``Seed`` argument is the starting seed used to generate the random
+tests and should be regarded as an opaque term.
+
+The ``n/1`` option allows us to specify the number of random tests that
+will be generated and run (default is 100). The ``s/1`` option allows us
+to specify the maximum number of shrink operations when a
+counter-example is found (default is 64). An ``ec/1`` boolean option
+allows us to decide if type edge cases are tested before generating
+random tests (default is ``true``). A ``rs/1`` option to allow us to
+specify the starting seed to be used when generating the random tests
+(no default).
 
 The other two predicates print the test results. The template can be a
 ``::/2``, ``<</2``, or ``:/2`` qualified callable term. When the
@@ -413,9 +429,16 @@ returns non-negative floats):
 ::
 
    | ?- lgtunit::quick_check(random::random(-negative_float)).
-   *     quick check test failure (at test 1 after 1 shrink):
+   *     quick check test failure (at test 1 after 0 shrinks):
    *       random::random(0.09230089279334841)
+   *     starting seed: seed(3172,9814,20125)
    no
+
+When QuickCheck exposes a bug in the tested code, we can use the
+reported counter-example to help diagnose it and fix it. As tests are
+randomly generated, we can use the starting seed reported with the
+counter-example to confirm the bug fix by calling the
+``quick_check/2-3`` predicates with the ``rs(Seed)`` option.
 
 Another example using a Prolog module predicate:
 
@@ -429,6 +452,7 @@ Another example using a Prolog module predicate:
            )
        ).
    % 100 random tests passed
+   % starting seed: seed(3172,9814,20125)
    yes
 
 Properties are expressed using predicates. The QuickCheck test dialects
@@ -474,10 +498,6 @@ template in the API documentation for the library entities ``type`` and
 or your own, can contribute with additional type definitions as both
 ``type`` and ``arbitrary`` entities are user extensible by defining
 clauses for their multifile predicates.
-
-An optional argument, ``n/1``, allows the specification of the number of
-random tests that will be generated and run. The maximum number of
-shrink operations can be specified using the option ``s/1``.
 
 The user can define new types to use in the property mode templates to
 use with its QuickCheck tests by defining clauses for the ``arbitrary``

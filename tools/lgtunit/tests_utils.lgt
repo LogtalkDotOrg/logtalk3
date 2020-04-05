@@ -24,7 +24,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-04,
+		date is 2020-04-05,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -371,11 +371,11 @@
 
 	succeeds(quick_check_3_01) :-
 		quick_check(atom(+atom), Result, []),
-		Result == passed.
+		subsumes_term(passed(_), Result).
 
 	succeeds(quick_check_3_02) :-
 		quick_check(atom(+atom), Result, [n(25)]),
-		Result == passed.
+		subsumes_term(passed(_), Result).
 
 	succeeds(quick_check_3_03) :-
 		quick_check(atom(+integer), Result, []),
@@ -465,7 +465,7 @@
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
-	logtalk::message_hook(quick_check_passed(NumberOfTests), _, lgtunit, _) :-
+	logtalk::message_hook(quick_check_passed(NumberOfTests,_Seed), _, lgtunit, _) :-
 		retractall(quick_check_passed(_)),
 		assertz(quick_check_passed(NumberOfTests)).
 	logtalk::message_hook(quick_check_failed(_,_,_), _, lgtunit, _).

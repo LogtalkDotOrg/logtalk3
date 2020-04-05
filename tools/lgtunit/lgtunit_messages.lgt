@@ -23,7 +23,7 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-04,
+		date is 2020-04-05,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -136,8 +136,9 @@
 		;	['~q: skipped (~w)'-[Test, Note], nl]
 		).
 
-	message_tokens(quick_check_passed(NumberOfTests)) -->
-		['~w random tests passed'-[NumberOfTests], nl].
+	message_tokens(quick_check_passed(NumberOfTests, Seed)) -->
+		['~w random tests passed'-[NumberOfTests], nl],
+		['starting seed: ~w'-[Seed], nl].
 
 	message_tokens(quick_check_failed(Goal, Test, Shrinks, Seed)) -->
 		(	{Shrinks == 1} ->

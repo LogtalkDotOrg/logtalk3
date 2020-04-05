@@ -28,7 +28,7 @@
 	:- info([
 		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-04,
+		date is 2020-04-05,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -115,15 +115,21 @@
 	:- public(quick_check/3).
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
 	:- info(quick_check/3, [
-		comment is 'Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed``, ``failed(Goal,Seed)`` where ``Goal`` is the test that failed, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.',
+		comment is 'Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed(Seed)``, ``failed(Goal,Seed)`` where ``Goal`` is the test that failed, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.',
 		argnames is ['Template', 'Result', 'Options']
 	]).
 
 	:- public(quick_check/2).
 	:- mode(quick_check(@callable, ++list(compound)), zero_or_one).
 	:- info(quick_check/2, [
-		comment is 'Generates and runs random tests for a predicate given its mode template. Fails when a generated test fails printing the test. Takes ``n(NumberOfTests)``, ``s(MaxNumberOfShrinks)``, and ``ec(UseEdgeCases)`` options. Defaults to ``[n(100),s(64),ec(true)]``.',
-		argnames is ['Template', 'Options']
+		comment is 'Generates and runs random tests for a predicate given its mode template and a set of options. Fails when a generated test fails printing the test.',
+		argnames is ['Template', 'Options'],
+		remarks is [
+			'Number of tests' - 'Use the ``n(NumberOfTests)`` option to specifiy the number of random tests. Default is 100.',
+			'Maximum number of shrink operations' - 'Use the ``s(MaxNumberOfShrinks)`` option to specifiy the number of shrink operations when a counter example is found. Default is 64.',
+			'Type edge cases' - 'Use the ``ec(Boolean)`` option to specifiy if type edge cases are tested (before generating random tests). Default is ``true``.',
+			'Starting seed' - 'Use the ``rs(Seed)`` option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.'
+		]
 	]).
 
 	:- public(quick_check/1).
@@ -234,11 +240,11 @@
 		comment is 'Runs a test set as part of running two or more test sets as a unified set.'
 	]).
 
-	:- protected(run_quick_check_tests/2).
-	:- mode(run_quick_check_tests(@callable, +list), one_or_error).
-	:- info(run_quick_check_tests/2, [
-		comment is 'Runs a list of defined tests using the given options.',
-		argnames is ['Template', 'Options']
+	:- protected(run_quick_check_tests/3).
+	:- mode(run_quick_check_tests(@callable, +list, --nonvar), one_or_error).
+	:- info(run_quick_check_tests/3, [
+		comment is 'Runs a list of defined tests using the given options. Returns the starting seed used to generate the random tests.',
+		argnames is ['Template', 'Options', 'Seed']
 	]).
 
 	:- protected(condition/0).
@@ -1186,14 +1192,14 @@
 		assertz(test_(Test, throws(Test, Errors, Position))).
 
 	% unit test idiom quick_check/3
-	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions))]) :-
+	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions),
 		assertz(test_(Test, quick_check(Test, Position, Condition, Setup, Cleanup, Note))).
 
 	% unit test idiom quick_check/2
-	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions))]) :-
+	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		findall(Option, default_quick_check_option(Option), QuickCheckOptions),
@@ -1604,9 +1610,9 @@
 
 	quick_check(Template, Result, Options) :-
 		parse_quick_check_options(Options, QuickCheckOptions),
-		catch(run_quick_check_tests(Template, QuickCheckOptions), Error, true),
+		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed), Error, true),
 		(	var(Error) ->
-			Result = passed
+			Result = passed(Seed)
 		;	Error = quick_check_failed(Goal, _, _, Seed) ->
 			Result = failed(Goal, Seed)
 		;	Error = quick_check_error(error(Exception,_), Goal, _, Seed) ->
@@ -1620,9 +1626,9 @@
 	quick_check(Template, Options) :-
 		parse_quick_check_options(Options, QuickCheckOptions),
 		memberchk(n(NumberOfTests), QuickCheckOptions),
-		catch(run_quick_check_tests(Template, QuickCheckOptions), Error, true),
+		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed), Error, true),
 		(	var(Error) ->
-			print_message(information, lgtunit, quick_check_passed(NumberOfTests))
+			print_message(information, lgtunit, quick_check_passed(NumberOfTests,Seed))
 		;	print_message(warning, lgtunit, Error),
 			fail
 		).
@@ -1630,7 +1636,7 @@
 	quick_check(Template) :-
 		quick_check(Template, []).
 
-	run_quick_check_tests(Template, Options) :-
+	run_quick_check_tests(Template, Options, Seed) :-
 		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template))),
 		memberchk(n(NumberOfTests), Options),
 		memberchk(s(MaxNumberOfShrinks), Options),
