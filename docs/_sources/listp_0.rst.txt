@@ -917,10 +917,11 @@ Sorts a list using the given key and order. Uses the standard term comparison op
 |    ``sort(+non_negative_integer,+atom,+list,-list)`` - ``one``
 
 | **Remarks:**
-|    Removing duplicates: Use one of the ``@<`` or ``@>`` orders.
-|    Keeping duplicates: Use one of the ``@=<`` or ``@>=`` orders.
-|    Sorting in ascending order: Use one of the ``@<`` or ``@=<`` orders.
-|    Sorting in descending order: Use one of the ``@>`` or ``@>=`` orders.
+
+    - Removing duplicates: Use one of the ``@<`` or ``@>`` orders.
+    - Keeping duplicates: Use one of the ``@=<`` or ``@>=`` orders.
+    - Sorting in ascending order: Use one of the ``@<`` or ``@=<`` orders.
+    - Sorting in descending order: Use one of the ``@>`` or ``@>=`` orders.
 
 
 ------------

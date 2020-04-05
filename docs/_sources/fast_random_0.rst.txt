@@ -25,8 +25,7 @@ Fast portable random number generator predicates. Core predicates originally wri
 
 | **Remarks:**
 
-
-   - *Single random number generator:* This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.
+   - Single random number generator: This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.
 
 | **Inherited public predicates:**
 |     :ref:`randomp/0::between/3`  :ref:`randomp/0::enumerate/2`  :ref:`randomp/0::get_seed/1`  :ref:`randomp/0::maybe/0`  :ref:`randomp/0::maybe/1`  :ref:`randomp/0::maybe/2`  :ref:`randomp/0::maybe_call/1`  :ref:`randomp/0::maybe_call/2`  :ref:`randomp/0::member/2`  :ref:`randomp/0::permutation/2`  :ref:`randomp/0::random/1`  :ref:`randomp/0::random/3`  :ref:`randomp/0::randseq/4`  :ref:`randomp/0::randset/4`  :ref:`randomp/0::select/3`  :ref:`randomp/0::sequence/4`  :ref:`randomp/0::set/4`  :ref:`randomp/0::set_seed/1`  

@@ -28,8 +28,7 @@ Minimal abstraction of the JPL API for calling Java from Logtalk using familiar 
 
 | **Remarks:**
 
-
-   - *Usage:* Send to this object any valid message as listed in the JavaDocs for the given reference.
+   - Usage: Send to this object any valid message as listed in the JavaDocs for the given reference.
 
 | **Inherited public predicates:**
 |     :ref:`forwarding/0::forward/1`  :ref:`java_access_protocol/0::get_field/2`  :ref:`java_access_protocol/0::invoke/1`  :ref:`java_access_protocol/0::invoke/2`  :ref:`java_access_protocol/0::new/1`  :ref:`java_access_protocol/0::new/2`  :ref:`java_access_protocol/0::set_field/2`  

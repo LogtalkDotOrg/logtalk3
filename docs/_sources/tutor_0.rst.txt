@@ -26,8 +26,7 @@ This object adds explanations and suggestions to selected compiler warning and e
 
 | **Remarks:**
 
-
-   - *Usage:* Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.
+   - Usage: Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.
 
 | **Inherited public predicates:**
 |    (none)

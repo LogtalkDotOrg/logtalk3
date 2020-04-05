@@ -23,8 +23,7 @@ Hook object to optimize messages to the ``java/1-2`` objects that otherwise woul
 
 | **Remarks:**
 
-
-   - *Usage:* Compile source files with messages to the ``java/1-2`` objects using the compiler option ``hook(java_hook)``.
+   - Usage: Compile source files with messages to the ``java/1-2`` objects using the compiler option ``hook(java_hook)``.
 
 | **Inherited public predicates:**
 |     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  

@@ -286,12 +286,12 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p><em>Efferent coupling (Ce):</em> Number of entities that an entity depends on.</p></li>
-<li><p><em>Afferent coupling (Ca):</em> Number of entities that depend on an entity.</p></li>
-<li><p><em>Instability (I):</em> Computed as <code class="docutils literal notranslate"><span class="pre">Ce</span> <span class="pre">/</span> <span class="pre">(Ce</span> <span class="pre">+</span> <span class="pre">Ca)</span></code>. Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a maximally stable entity and 1 indicating a maximally unstable entity. Ideally, an entity is either maximally stable or maximally unstable.</p></li>
-<li><p><em>Abstractness (A):</em> Computed as the ratio between the number of static predicates with scope directives without a local definition and the number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.</p></li>
-<li><p><em>Entity score:</em> Represented as the compound term <code class="docutils literal notranslate"><span class="pre">ce_ca_i_a(Ce,Ca,I,A)</span></code>.</p></li>
-<li><p><em>Dependencies count:</em> Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories.</p></li>
+<li><p>Efferent coupling (Ce): Number of entities that an entity depends on.</p></li>
+<li><p>Afferent coupling (Ca): Number of entities that depend on an entity.</p></li>
+<li><p>Instability (I): Computed as <code class="docutils literal notranslate"><span class="pre">Ce</span> <span class="pre">/</span> <span class="pre">(Ce</span> <span class="pre">+</span> <span class="pre">Ca)</span></code>. Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a maximally stable entity and 1 indicating a maximally unstable entity. Ideally, an entity is either maximally stable or maximally unstable.</p></li>
+<li><p>Abstractness (A): Computed as the ratio between the number of static predicates with scope directives without a local definition and the number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.</p></li>
+<li><p>Entity score: Represented as the compound term <code class="docutils literal notranslate"><span class="pre">ce_ca_i_a(Ce,Ca,I,A)</span></code>.</p></li>
+<li><p>Dependencies count: Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

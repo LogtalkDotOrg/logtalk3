@@ -23,16 +23,11 @@ Use this object to easily print entity predicate goals before, after, or before 
 
 | **Remarks:**
 
-
-   - *Usage:* Mark a goal to be printed by prefixing it with an operator. Printing uses a ``comment`` message.
-
-   - *To print goal before calling it:* ``- Goal``
-
-   - *To print goal after calling it:* ``+ Goal``
-
-   - *To print goal before and after calling it:* ``* Goal``
-
-   - *Operators:* This hook object uses the standard ``-`` and ``+`` prefix operators and also defines a global ``*`` prefix operator with the same type and priority.
+   - Usage: Mark a goal to be printed by prefixing it with an operator. Printing uses a ``comment`` message.
+   - To print goal before calling it: ``- Goal``
+   - To print goal after calling it: ``+ Goal``
+   - To print goal before and after calling it: ``* Goal``
+   - Operators: This hook object uses the standard ``-`` and ``+`` prefix operators and also defines a global ``*`` prefix operator with the same type and priority.
 
 | **Inherited public predicates:**
 |     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  

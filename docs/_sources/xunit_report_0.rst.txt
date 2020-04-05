@@ -25,8 +25,7 @@ Intercepts unit test execution messages and generates a ``xunit_report.xml`` fil
 
 | **Remarks:**
 
-
-   - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.
+   - Usage: Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.
 
 | **Inherited public predicates:**
 |    (none)

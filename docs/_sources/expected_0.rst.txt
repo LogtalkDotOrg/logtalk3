@@ -24,8 +24,7 @@ Constructors for expected terms. An expected term contains either a value or an 
 
 | **Remarks:**
 
-
-   - *Type-checking support:* This object also defines a type ``expected`` for use with the ``type`` library object.
+   - Type-checking support: This object also defines a type ``expected`` for use with the ``type`` library object.
 
 | **Inherited public predicates:**
 |    (none)

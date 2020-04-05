@@ -290,9 +290,9 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p><em>Usage:</em> Define test objects as extensions of the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object and compile their source files using the compiler option <code class="docutils literal notranslate"><span class="pre">hook(lgtunit)</span></code>.</p></li>
-<li><p><em>Portability:</em> Deterministic unit tests are currently not available when using Lean Prolog or Quintus Prolog as backend compilers.</p></li>
-<li><p><em>Known issues:</em> Parameter variables cannot currently be used in the definition of test options.</p></li>
+<li><p>Usage: Define test objects as extensions of the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object and compile their source files using the compiler option <code class="docutils literal notranslate"><span class="pre">hook(lgtunit)</span></code>.</p></li>
+<li><p>Portability: Deterministic unit tests are currently not available when using Lean Prolog or Quintus Prolog as backend compilers.</p></li>
+<li><p>Known issues: Parameter variables cannot currently be used in the definition of test options.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -675,13 +675,15 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">Number of tests: Use the <code class="docutils literal notranslate"><span class="pre">n(NumberOfTests)</span></code> option to specifiy the number of random tests. Default is 100.</div>
-<div class="line">Maximum number of shrink operations: Use the <code class="docutils literal notranslate"><span class="pre">s(MaxNumberOfShrinks)</span></code> option to specifiy the number of shrink operations when a counter example is found. Default is 64.</div>
-<div class="line">Type edge cases: Use the <code class="docutils literal notranslate"><span class="pre">ec(Boolean)</span></code> option to specifiy if type edge cases are tested (before generating random tests). Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</div>
-<div class="line">Starting seed: Use the <code class="docutils literal notranslate"><span class="pre">rs(Seed)</span></code> option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Number of tests: Use the <code class="docutils literal notranslate"><span class="pre">n(NumberOfTests)</span></code> option to specifiy the number of random tests. Default is 100.</p></li>
+<li><p>Maximum number of shrink operations: Use the <code class="docutils literal notranslate"><span class="pre">s(MaxNumberOfShrinks)</span></code> option to specifiy the number of shrink operations when a counter example is found. Default is 64.</p></li>
+<li><p>Type edge cases: Use the <code class="docutils literal notranslate"><span class="pre">ec(Boolean)</span></code> option to specifiy if type edge cases are tested (before generating random tests). Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p>Starting seed: Use the <code class="docutils literal notranslate"><span class="pre">rs(Seed)</span></code> option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <div id="quick_check/1"> </div></div>
 <div class="section" id="quick-check-1">

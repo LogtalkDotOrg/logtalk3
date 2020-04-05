@@ -57,6 +57,9 @@ use of edge cases when generating random arguments. Defaults is `true`.
 
 * UPDATED: Documentation of the `lgtunit` tool.
 
+* IMPROVED: The `lgtdoc` tool generated reStructuredText layout for predicate
+remarks.
+
 
 3.37.0 - April 2, 2020
 ======================

@@ -23,10 +23,8 @@ Intercepts unit test execution messages and outputs a minimal report.
 
 | **Remarks:**
 
-
-   - *Usage:* Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(minimal_output))``.
-
-   - *Limitations:* Cannot be used when the test objects also intercept ``lgtunit`` messages.
+   - Usage: Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(minimal_output))``.
+   - Limitations: Cannot be used when the test objects also intercept ``lgtunit`` messages.
 
 | **Inherited public predicates:**
 |    (none)

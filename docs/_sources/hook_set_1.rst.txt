@@ -26,8 +26,7 @@ Use a set (represented using a list) of hook objects to expand terms and goals. 
 
 | **Remarks:**
 
-
-   - *Usage:* Compile source files that should be expanded using the set of hook objects using the compiler option ``hook(hook_set(Set))``.
+   - Usage: Compile source files that should be expanded using the set of hook objects using the compiler option ``hook(hook_set(Set))``.
 
 | **Inherited public predicates:**
 |     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  

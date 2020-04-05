@@ -31,10 +31,8 @@ Types and predicates for extended type-checking and handling of expected terms.
 
 | **Remarks:**
 
-
-   - *Type-checking support:* Defines a ``either(ValueType, ErrorType)`` type for checking expected terms where the value and error terms must be of the given types.
-
-   - *QuickCheck support:* Defines clauses for the ``type::arbitrary/1-2`` predicates to allow generating random values for the ``either(ValueType, ErrorType)`` type.
+   - Type-checking support: Defines a ``either(ValueType, ErrorType)`` type for checking expected terms where the value and error terms must be of the given types.
+   - QuickCheck support: Defines clauses for the ``type::arbitrary/1-2`` predicates to allow generating random values for the ``either(ValueType, ErrorType)`` type.
 
 | **Inherited public predicates:**
 |    (none)

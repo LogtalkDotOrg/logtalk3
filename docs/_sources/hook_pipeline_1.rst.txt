@@ -26,8 +26,7 @@ Use a pipeline (represented using a list) of hook objects to expand terms and go
 
 | **Remarks:**
 
-
-   - *Usage:* Compile source files that should be expanded using the pipeline of hook objects using the compiler option ``hook(hook_pipeline(Pipeline))``.
+   - Usage: Compile source files that should be expanded using the pipeline of hook objects using the compiler option ``hook(hook_pipeline(Pipeline))``.
 
 | **Inherited public predicates:**
 |     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  

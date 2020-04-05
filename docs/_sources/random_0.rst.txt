@@ -25,8 +25,7 @@ Portable random number generator predicates. Core predicates originally written 
 
 | **Remarks:**
 
-
-   - *Multiple random number generators:* To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.
+   - Multiple random number generators: To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.
 
 | **Inherited public predicates:**
 |     :ref:`randomp/0::between/3`  :ref:`randomp/0::enumerate/2`  :ref:`randomp/0::get_seed/1`  :ref:`randomp/0::maybe/0`  :ref:`randomp/0::maybe/1`  :ref:`randomp/0::maybe/2`  :ref:`randomp/0::maybe_call/1`  :ref:`randomp/0::maybe_call/2`  :ref:`randomp/0::member/2`  :ref:`randomp/0::permutation/2`  :ref:`randomp/0::random/1`  :ref:`randomp/0::random/3`  :ref:`randomp/0::randseq/4`  :ref:`randomp/0::randset/4`  :ref:`randomp/0::select/3`  :ref:`randomp/0::sequence/4`  :ref:`randomp/0::set/4`  :ref:`randomp/0::set_seed/1`  
