@@ -295,6 +295,44 @@ type<span class="o">::</span>edge_case(cost, <span class="m">0</span>).
 </div>
 <p>Edge cases are usually tried before resorting to generating arbitrary
 values for a type.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category also provides access to the pseudo-random
+generator it uses via the <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code>. This allows
+sequences of arbitrary values to be reproduced. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>get_seed(<span class="nv">Seed</span>).
+<span class="nv">Seed</span> <span class="o">=</span> seed(<span class="m">3172</span>, <span class="m">9814</span>, <span class="m">20125</span>)
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(integer, <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="o">-</span><span class="m">816</span>
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(integer, <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="o">-</span><span class="m">113</span>
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(integer, <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="m">446</span>
+
+| <span class="o">?-</span> type<span class="o">::</span>set_seed(seed(<span class="m">3172</span>, <span class="m">9814</span>, <span class="m">20125</span>)).
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(integer, <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="o">-</span><span class="m">816</span>
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(integer, <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="o">-</span><span class="m">113</span>
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(integer, <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="m">446</span>
+yes
+</pre></div>
+</div>
+<p>The seed should be regarded as an opaque term and handled using the
+<code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates. These predicates are
+notably used in the QuickCheck implementation provided by the
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>

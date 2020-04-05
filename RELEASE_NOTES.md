@@ -31,6 +31,8 @@ Library
 
 * ADDED: Predicates `get_seed/1` and `set_seed/1` to the `arbitrary` category.
 
+* UPDATED: Documentation of the `arbitrary` library.
+
 * FIXED: Deleted wrong `edge_case/2` clauses for the type `list(Type,Length)`
 from the `arbitrary` category.
 
@@ -52,6 +54,8 @@ the random generator starting seed to be used to generate the random tests.
 
 * ADDED: QuickCheck `ec(Boolean)` option to the `lgtunit` tool to control
 use of edge cases when generating random arguments. Defaults is `true`.
+
+* UPDATED: Documentation of the `lgtunit` tool.
 
 
 3.37.0 - April 2, 2020

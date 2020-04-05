@@ -89,6 +89,43 @@ QuickCheck implementations. For example:
 Edge cases are usually tried before resorting to generating arbitrary values
 for a type.
 
+The `arbitrary` category also provides access to the pseudo-random generator
+it uses via the `get_seed/1` and `set_seed/1`. This allows sequences of
+arbitrary values to be reproduced. For example:
+
+	| ?- type::get_seed(Seed).
+	Seed = seed(3172, 9814, 20125)
+	yes
+
+	| ?- type::arbitrary(integer, Arbitrary).
+	Arbitrary = -816
+	yes
+
+	| ?- type::arbitrary(integer, Arbitrary).
+	Arbitrary = -113
+	yes
+
+	| ?- type::arbitrary(integer, Arbitrary).
+	Arbitrary = 446
+
+	| ?- type::set_seed(seed(3172, 9814, 20125)).
+	yes
+
+	| ?- type::arbitrary(integer, Arbitrary).
+	Arbitrary = -816
+	yes
+
+	| ?- type::arbitrary(integer, Arbitrary).
+	Arbitrary = -113
+	yes
+
+	| ?- type::arbitrary(integer, Arbitrary).
+	Arbitrary = 446
+	yes
+
+The seed should be regarded as an opaque term and handled using the
+`get_seed/1` and `set_seed/1` predicates. These predicates are notably used
+in the QuickCheck implementation provided by the `lgtunit` tool.
 
 Examples
 --------
