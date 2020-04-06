@@ -438,7 +438,65 @@ When QuickCheck exposes a bug in the tested code, we can use the
 reported counter-example to help diagnose it and fix it. As tests are
 randomly generated, we can use the starting seed reported with the
 counter-example to confirm the bug fix by calling the
-``quick_check/2-3`` predicates with the ``rs(Seed)`` option.
+``quick_check/2-3`` predicates with the ``rs(Seed)`` option. For
+example, assume the following broken predicate definition:
+
+::
+
+   every_other([], []). 
+   every_other([_, X| L], [X | R]) :- 
+           every_other(L, R). 
+
+The predicate is supposed to construct a list by taking every other
+element of an input list. Cursory testing may fail to notice the bug:
+
+::
+
+   | ?- every_other([1,2,3,4,5,6], List). 
+   List = [2, 4, 6]
+   yes
+
+But QuickCheck will report a bug with lists with an odd number of
+elements with a simple property that verifies that the predicate always
+succeed and returns a list of integers:
+
+::
+
+   | ?- lgtunit::quick_check(every_other(+list(integer), -list(integer))).
+   *     quick check test failure (at test 2 after 0 shrinks):
+   *       every_other([0],A)
+   *     starting seed: seed(3172,9814,20125)
+   no
+
+We could fix this particular bug by rewriting the predicate:
+
+::
+
+   every_other([], []).
+   every_other([H| T], L) :-
+       every_other(T, H, L).
+
+   every_other([], X, [X]).
+   every_other([_| T], X, [X| L]) :-
+       every_other(T, L).
+
+By retesting with the same seed that uncovered the bug, the same random
+test that found the bug will be generated and run again:
+
+::
+
+   | ?- lgtunit::quick_check(
+            every_other(+list(integer), -list(integer)),
+            [rs(seed(3172,9814,20125))]
+        ).
+   % 100 random tests passed
+   % starting seed: seed(3172,9814,20125)
+   yes
+
+We could now move to other properties that the predicate should comply
+(e.g. all elements in the output list being present in the input list).
+Often, both traditional unit tests and QuickCheck tests are used,
+complementing each other to ensure the required code coverage.
 
 Another example using a Prolog module predicate:
 
@@ -455,18 +513,22 @@ Another example using a Prolog module predicate:
    % starting seed: seed(3172,9814,20125)
    yes
 
-Properties are expressed using predicates. The QuickCheck test dialects
-and predicates take as argument the mode template for a property,
-generate random values for each input argument based on the type
-information, and check each output argument. For common types, the
-implementation tries first common edge cases (e.g. empty atom, empty
-list, or zero) before generating arbitrary values. When the output
-arguments check fails, the QuickCheck implementation tries (by default)
-up to 64 shrink operations of the counter-example to report a simpler
-case to help debugging the failed test. Edge cases, generating of
-arbitrary terms, and shrinking terms make use of the library
-``arbitrary`` category via the ``type`` object (both entities can be
-extended by the user by defining clauses for multifile predicates).
+As illustrated by the examples above, properties are expressed using
+predicates. In the most simple cases, that can be the predicate that we
+are testing itself. But, in general, it will be a set of predicates,
+each expressing a different property that the predicate being tested
+must comply with. The QuickCheck test dialects and predicates take as
+argument the mode template for a property, generate random values for
+each input argument based on the type information, and check each output
+argument. For common types, the implementation tries first (by default)
+common edge cases (e.g. empty atom, empty list, or zero) before
+generating arbitrary values. When the output arguments check fails, the
+QuickCheck implementation tries (by default) up to 64 shrink operations
+of the counter-example to report a simpler case to help debugging the
+failed test. Edge cases, generating of arbitrary terms, and shrinking
+terms make use of the library ``arbitrary`` category via the ``type``
+object (both entities can be extended by the user by defining clauses
+for multifile predicates).
 
 The mode template syntax is the same used in the ``info/2`` predicate
 directives with an additional notation, ``{}/1``, for passing argument
