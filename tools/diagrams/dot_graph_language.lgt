@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2:34:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-03,
+		date is 2020-04-06,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -59,6 +59,7 @@
 		write_key_value_nl(Stream, fontsize, 10),
 		write_key_value_nl(Stream, fontcolor, dimgray),
 		write_key_value_nl(Stream, pencolor, dimgray),
+		write_key_value_nl(Stream, stylesheet, 'diagrams.css'),
 		write(Stream, 'node [shape="ellipse",style="filled",fillcolor="white",fontname="Courier",fontsize="9"]'), nl(Stream),
 		write(Stream, 'edge [fontname="Courier",fontsize="9"]'), nl(Stream),
 		diagram_label(Options, Label),

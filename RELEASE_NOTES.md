@@ -60,6 +60,10 @@ use of edge cases when generating random arguments. Defaults is `true`.
 * IMPROVED: The `lgtdoc` tool generated reStructuredText layout for predicate
 remarks.
 
+* IMPROVED: The `diagrams` tool now uses a `diagrams.css` file to style
+generated diagrams in SVG format. This file is automatically copied to the
+diagrams output directory when using the `lgt2svg` scripts.
+
 
 3.37.0 - April 2, 2020
 ======================

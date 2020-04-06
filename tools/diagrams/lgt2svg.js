@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   DOT diagram files to SVG files conversion script  
-//   Last updated on April 10, 2019
+//   Last updated on April 6, 2020
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -64,6 +64,7 @@ else {
 var FSObject = new ActiveXObject("Scripting.FileSystemObject");
 
 FSObject.CopyFile(logtalk_user + "\\tools\\diagrams\\zoom.png", WshShell.CurrentDirectory + "\\zoom.png");
+FSObject.CopyFile(logtalk_user + "\\tools\\diagrams\\diagrams.css", WshShell.CurrentDirectory + "\\diagrams.css");
 
 WScript.Echo("");
 WScript.Echo("Converting .dot files to .svg files ...");
