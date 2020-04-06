@@ -649,7 +649,12 @@ Studio:
 `https://www.iconfinder.com/xinhstudio <https://www.iconfinder.com/xinhstudio>`__
 
 Currently, only the ``zoom.png`` file is used. A copy of this file must
-exist in any directory used for publishing diagrams using it.
+exist in any directory used for publishing diagrams using it. The
+``lgt2svg`` scripts take care of copying this file.
+
+When generating diagrams in SVG format, a copy of the ``diagrams.css``
+file must exist in any directory used for publishing diagrams using it.
+The ``lgt2svg`` scripts take care of copying this file.
 
 The Graphviz command-line utilities, e.g. ``dot``, are notorious for
 random crashes (segmentation faults usually), often requiring re-doing

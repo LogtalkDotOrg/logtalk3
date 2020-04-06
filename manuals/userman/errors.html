@@ -351,7 +351,7 @@ soon as an error is detected.</p>
 <h2>Compiler warnings and errors<a class="headerlink" href="#compiler-warnings-and-errors" title="Permalink to this headline">¶</a></h2>
 <p>The current Logtalk compiler uses the standard <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in
 predicate to read and compile a Logtalk source file. This improves the
-compatibility with <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>
+compatibility with <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>
 and their proprietary syntax extensions and standard compliance quirks. But one
 consequence of this design choice is that invalid Prolog terms or syntax errors
 may abort the compilation process with limited information given to the user
@@ -372,7 +372,7 @@ avoided when possible as it prevents some code optimizations such as
 <span id="errors-singletons"></span><h3>Singleton variables<a class="headerlink" href="#singleton-variables" title="Permalink to this headline">¶</a></h3>
 <p>Singleton variables in a clause are often misspell variables and, as
 such, one of the most common errors when programming in Prolog.
-Assuming that the <a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> implementation of the
+Assuming that the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> implementation of the
 <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate supports the standard <code class="docutils literal notranslate"><span class="pre">singletons/1</span></code>
 option, the compiler warns about any singleton variable found while
 compiling a source file.</p>
@@ -382,7 +382,7 @@ compiling a source file.</p>
 <p>The Logtalk compiler will warn us of any redefinition of a Prolog
 built-in predicate inside an object or category. Sometimes the redefinition
 is intended. In other cases, the user may not be aware that a particular
-<a class="reference internal" href="../glossary.html#term-backend-prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> may already provide the predicate
+<a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> may already provide the predicate
 as a built-in predicate or may want to ensure code portability among
 several Prolog compilers with different sets of built-in predicates.</p>
 </div>

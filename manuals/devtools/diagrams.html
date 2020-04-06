@@ -992,7 +992,11 @@ diagrams.</p>
 Studio:</p>
 <p><a class="reference external" href="https://www.iconfinder.com/xinhstudio">https://www.iconfinder.com/xinhstudio</a></p>
 <p>Currently, only the <code class="docutils literal notranslate"><span class="pre">zoom.png</span></code> file is used. A copy of this file must
-exist in any directory used for publishing diagrams using it.</p>
+exist in any directory used for publishing diagrams using it. The
+<code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts take care of copying this file.</p>
+<p>When generating diagrams in SVG format, a copy of the <code class="docutils literal notranslate"><span class="pre">diagrams.css</span></code>
+file must exist in any directory used for publishing diagrams using it.
+The <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts take care of copying this file.</p>
 <p>The Graphviz command-line utilities, e.g. <code class="docutils literal notranslate"><span class="pre">dot</span></code>, are notorious for
 random crashes (segmentation faults usually), often requiring re-doing
 conversions from <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to other formats. A possible workaround
