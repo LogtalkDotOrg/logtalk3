@@ -21369,8 +21369,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_list_to_conjunction'([], Conjunction, Conjunction).
 
-'$lgt_list_to_conjunction'([Goal| Goals], Conjunction0, Conjunction) :-
-	'$lgt_list_to_conjunction'(Goals, (Conjunction0, Goal), Conjunction).
+'$lgt_list_to_conjunction'([Next| Goals], Goal, (Goal,Conjunction)) :-
+	'$lgt_list_to_conjunction'(Goals, Next, Conjunction).
 
 
 
