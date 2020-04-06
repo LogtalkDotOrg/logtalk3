@@ -64,6 +64,9 @@ remarks.
 generated diagrams in SVG format. This file is automatically copied to the
 diagrams output directory when using the `lgt2svg` scripts.
 
+* IMPROVED: The `diagrams` tool generated SVG diagrams now highlight links on
+mouse over events.
+
 
 3.37.0 - April 2, 2020
 ======================
