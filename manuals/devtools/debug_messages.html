@@ -260,32 +260,32 @@ will be printed. As an example, consider the following object, part of a
 <p>Assuming the object <code class="docutils literal notranslate"><span class="pre">foo</span></code> is compiled and loaded in normal or debug
 mode, after also loading this tool, <code class="docutils literal notranslate"><span class="pre">bar/0</span></code> and <code class="docutils literal notranslate"><span class="pre">baz/0</span></code> messages
 will not print any debug messages:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">{</span>debug_messages(loader), foo<span class="k">}</span>.
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>debug_messages(loader), foo<span class="k">}</span>.
 ...
 yes
 
-<span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
+| <span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
 yes
 </pre></div>
 </div>
 <p>We can then enable all debug messages for the <code class="docutils literal notranslate"><span class="pre">xyz</span></code> component:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> debug_messages<span class="o">::</span>enable(xyx).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> debug_messages<span class="o">::</span>enable(xyx).
 yes
 
-<span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
+| <span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
 bar<span class="o">/</span><span class="m">0</span> called
 baz<span class="o">/</span><span class="m">0</span> called
 yes
 </pre></div>
 </div>
 <p>Or we can selectively enable only debug messages for a specific group:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> debug_messages<span class="o">::</span>disable(xyx).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> debug_messages<span class="o">::</span>disable(xyx).
 yes
 
-<span class="o">?-</span> debug_messages<span class="o">::</span>enable(xyx, bar).
+| <span class="o">?-</span> debug_messages<span class="o">::</span>enable(xyx, bar).
 yes
 
-<span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
+| <span class="o">?-</span> foo<span class="o">::</span>(bar, baz).
 bar<span class="o">/</span><span class="m">0</span> called
 yes
 </pre></div>

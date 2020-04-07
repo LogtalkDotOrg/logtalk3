@@ -25,7 +25,7 @@ ________________________________________________________________________
 
 % trigger an observed event:
 
-| ?- ?- subject::ping(Reply).
+| ?- subject::ping(Reply).
 
 user is asking observer:  ping(_992)
 observer replied to user: ping(pong)

@@ -138,12 +138,12 @@ yes
 
 % walk a list using left and right folds (note the lambda parameters order):
 
-?- meta::fold_left([Y, X, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R).
+| ?- meta::fold_left([Y, X, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R).
 
 R = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 yes
 
-?- meta::fold_right([X, Y, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R).
+| ?- meta::fold_right([X, Y, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R).
 
 R = [1, 2, 3, 4, 5, 6, 7, 8, 9].
 yes

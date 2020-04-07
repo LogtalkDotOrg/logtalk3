@@ -25,7 +25,7 @@ ________________________________________________________________________
 
 % return a lazy list and access its elements:
 
-?- lazy::find_all(X, (repeat,random::random(X)), List), list::member(E, List).
+| ?- lazy::find_all(X, (repeat,random::random(X)), List), list::member(E, List).
 List = [0.915656206971831|_G118],
 E = 0.915656206971831,
 freeze(_G118, '$lazy#0.source_lazy_list#2'(4, _G118, <lazy,user,lazy,lazy,c(user,user,r(user,lazy,[],[]))-[(repeat,random::random(X))],[],>)) ;

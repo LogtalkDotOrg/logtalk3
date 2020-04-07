@@ -43,7 +43,7 @@ yes
 
 yes
 
-?- car::clone(Clone), Clone::describe.
+| ?- car::clone(Clone), Clone::describe.
 Motor: gasoline
 Doors: 2
 Color: red

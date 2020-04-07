@@ -30,26 +30,26 @@ danny
 merritt
 henley
 jack
-true.
+yes
 
 
 % hide the four horseman
 
 | ?- magic::hide.
-true.
+yes
 
-?- stage::list.
+| ?- stage::list.
 true.
 
 
 % again show all the horseman on stage
 
-?- magic::show.
-true.
+| ?- magic::show.
+yes
 
-?- stage::list.
+| ?- stage::list.
 danny
 merritt
 henley
 jack
-true.
+yes

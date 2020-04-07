@@ -919,19 +919,19 @@ entity and predicate file line information in the URLs remain valid if
 the code changes in later commits. Assuming a <code class="docutils literal notranslate"><span class="pre">GitHub</span></code> variable bound
 to the SHA1 commit URL we want to reference, an inheritance diagram can
 be generated using the goal:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span>  <span class="nv">GitHub</span>  <span class="o">=</span> <span class="s">&#39;https://github.com/LogtalkDotOrg/logtalk3/tree/...&#39;</span>,
-    <span class="nv">APIDocs</span> <span class="o">=</span> <span class="s">&#39;https://logtalk.org/library/&#39;</span>,
-    <span class="k">logtalk_load</span>(diagrams(loader)),
-    <span class="k">set_logtalk_flag</span>(source_data, on),
-    <span class="k">logtalk_load</span>(library(all_loader)),
-    inheritance_diagram<span class="o">::</span>rlibrary(library, [
-        title(<span class="s">&#39;Logtalk library&#39;</span>),
-        node_type_captions(<span class="k">true</span>),
-        zoom(<span class="k">true</span>),
-        path_url_prefixes(<span class="s">&#39;$LOGTALKUSER/&#39;</span>, <span class="nv">GitHub</span>, <span class="nv">APIDocs</span>),
-        path_url_prefixes(<span class="s">&#39;$LOGTALKHOME/&#39;</span>, <span class="nv">GitHub</span>, <span class="nv">APIDocs</span>),
-        omit_path_prefixes([<span class="s">&#39;$LOGTALKUSER/&#39;</span>, <span class="s">&#39;$LOGTALKHOME/&#39;</span>, <span class="s">&#39;$HOME/&#39;</span>])
-    ]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">GitHub</span>  <span class="o">=</span> <span class="s">&#39;https://github.com/LogtalkDotOrg/logtalk3/tree/...&#39;</span>,
+     <span class="nv">APIDocs</span> <span class="o">=</span> <span class="s">&#39;https://logtalk.org/library/&#39;</span>,
+     <span class="k">logtalk_load</span>(diagrams(loader)),
+     <span class="k">set_logtalk_flag</span>(source_data, on),
+     <span class="k">logtalk_load</span>(library(all_loader)),
+     inheritance_diagram<span class="o">::</span>rlibrary(library, [
+         title(<span class="s">&#39;Logtalk library&#39;</span>),
+         node_type_captions(<span class="k">true</span>),
+         zoom(<span class="k">true</span>),
+         path_url_prefixes(<span class="s">&#39;$LOGTALKUSER/&#39;</span>, <span class="nv">GitHub</span>, <span class="nv">APIDocs</span>),
+         path_url_prefixes(<span class="s">&#39;$LOGTALKHOME/&#39;</span>, <span class="nv">GitHub</span>, <span class="nv">APIDocs</span>),
+         omit_path_prefixes([<span class="s">&#39;$LOGTALKUSER/&#39;</span>, <span class="s">&#39;$LOGTALKHOME/&#39;</span>, <span class="s">&#39;$HOME/&#39;</span>])
+     ]).
 </pre></div>
 </div>
 <p>The two <code class="docutils literal notranslate"><span class="pre">path_url_prefixes/3</span></code> options take care of source code and API

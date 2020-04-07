@@ -77,32 +77,32 @@ Assuming the object `foo` is compiled and loaded in normal or debug mode,
 after also loading this tool, `bar/0` and `baz/0` messages will not print
 any debug messages:
 
-	?- {debug_messages(loader), foo}.
+	| ?- {debug_messages(loader), foo}.
 	...
 	yes
 	
-	?- foo::(bar, baz).
+	| ?- foo::(bar, baz).
 	yes
 
 We can then enable all debug messages for the `xyz` component:
 
-	?- debug_messages::enable(xyx).
+	| ?- debug_messages::enable(xyx).
 	yes
 
-	?- foo::(bar, baz).
+	| ?- foo::(bar, baz).
 	bar/0 called
 	baz/0 called
 	yes
 
 Or we can selectively enable only debug messages for a specific group:
 
-	?- debug_messages::disable(xyx).
+	| ?- debug_messages::disable(xyx).
 	yes
 
-	?- debug_messages::enable(xyx, bar).
+	| ?- debug_messages::enable(xyx, bar).
 	yes
 
-	?- foo::(bar, baz).
+	| ?- foo::(bar, baz).
 	bar/0 called
 	yes
 

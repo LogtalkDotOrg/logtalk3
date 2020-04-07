@@ -42,7 +42,7 @@ yes
 % "logtalk" built-in object and the <</2 control construct to invoke the foo//0
 % public grammar rule non-terminal):
 
-?- logtalk << phrase(morse::morse(Message), "... --- ...").
+| ?- logtalk << phrase(morse::morse(Message), "... --- ...").
 
 Message = [sos] 
 yes

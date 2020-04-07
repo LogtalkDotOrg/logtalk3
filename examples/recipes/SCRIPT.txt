@@ -91,7 +91,7 @@ no
 
 % an usage example of the recipe/1 predicate would be:
 
-?- recipe(Recipe), Recipe::cooking_time(CookingTime).
+| ?- recipe(Recipe), Recipe::cooking_time(CookingTime).
 Recipe = green_soup,
 CookingTime = 36 ;
 Recipe = mashed_peas,

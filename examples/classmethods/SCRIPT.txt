@@ -32,7 +32,7 @@ yes
 
 % ask our static instance, c42, its area:
 
-?- c42::area(Area).
+| ?- c42::area(Area).
 Area = 24.6301
 yes
 
