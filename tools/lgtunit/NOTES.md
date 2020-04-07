@@ -800,10 +800,30 @@ A single test object may include tests for one or more entities (objects,
 protocols, and categories). The entities being tested by a unit test object
 for which code coverage information should be collected must be declared using
 the `cover/1` predicate. For example, to collect code coverage data for the
-objects `foo` and `bar` include the two clauses:
+objects `foo` and `bar` include in the tests object the two clauses:
 
 	cover(foo).
 	cover(bar).
+
+Code coverage is listed using the predicates clause indexes (counting from
+one). For example, using the `points` example in the Logtalk distribution:
+
+	% point: default_init_option/1 - 2/2 - (all)
+	% point: instance_base_name/1 - 1/1 - (all)
+	% point: move/2 - 1/1 - (all)
+	% point: position/2 - 1/1 - (all)
+	% point: print/0 - 1/1 - (all)
+	% point: process_init_option/1 - 1/2 - [1]
+	% point: position_/2 - 0/0 - (all)
+	% point: 7 out of 8 clauses covered, 87.500000% coverage
+	
+The numbers after the predicate indicators represents the clauses covered
+and the total number of clauses. E.g. for the `process_init_option/1`
+predicate, the tests cover 1 out of 2 clauses. After these numbers, we either
+get `(all)` telling us that all clauses are covered or a list of indexes for
+the covered clauses. E.g. only the first clause for the `process_init_option/1`
+predicate, `[1]`. Summary clause coverage numbers are also printed for entities
+and for clauses across all entities.
 
 In the printed predicate clause coverage information, you may get a total
 number of clauses smaller than the covered clauses. This results from the
@@ -822,6 +842,38 @@ the depth of printed terms that can be useful:
 - SWI-Prolog 7.1.11 or later: `answer_write_options` flag
 - XSB: `set_file_write_depth/1` predicate
 - YAP: `write_depth/2-3` predicates
+
+Code coverage is only available when testing Logtalk code. But Prolog modules
+can often be compiled as Logtalk objects and plain Prolog code may be wrapped
+in a Logtalk object. For example, assuming a `module.pl` module file, we can
+compile and load the module as an object by simply calling:
+
+	| ?- logtalk_load(module).
+	...
+
+The module exported predicates become object public predicates. For a plain
+Prolog file, say `plain.pl`, we can define a Logtalk object that wraps the
+code using an `include/1` directive:
+
+	:- object(plain).
+	
+		:- include('plain.pl').
+
+	:- end_object.
+
+The object can also declare as public the top Prolog predicates to simplify
+writing the tests. In alternative, we can use the `object_wrapper_hook`
+provided by the `hook_objects` library:
+
+	| ?- logtalk_load(hook_objects(object_wrapper_hook)).
+	...
+
+	| ?- logtalk_load(plain, [hook(object_wrapper_hook)]).
+	...
+
+These workarounds may thus allow generating code coverage data also for Prolog
+code by defining tests that use the `<</2` debugging control construct to call
+the Prolog predicates.
 
 
 Automating running tests
@@ -1038,16 +1090,8 @@ dialect. Use in alternative the `pgr/2` built-in execution context
 predicate.
 
 Deterministic unit tests are currently not available when using Lean Prolog
-or Quintus Prolog as backend compilers do the lack of a required built-in
-support that cannot be sensibly defined in Prolog.
-
-Code coverage is only available when testing Logtalk code. But Prolog modules
-can often be compiled as Logtalk objects and plain Prolog code may be wrapped
-in a Logtalk object by either using `include/1` directives or the
-`object_wrapper_hook` provided by the `hook_objects` library. These
-workarounds may thus allow generating code coverage data also for Prolog code
-by defining tests that use the `<</2` debugging control construct to call the
-Prolog predicates.
+or Quintus Prolog as these backend compilers lack required built-in support
+that cannot be sensibly defined in Prolog.
 
 
 Other notes

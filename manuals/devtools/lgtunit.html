@@ -1019,11 +1019,32 @@ however, that compiling in debug mode results in a performance penalty.</p>
 unit test object for which code coverage information should be collected
 must be declared using the <code class="docutils literal notranslate"><span class="pre">cover/1</span></code> predicate. For example, to
 collect code coverage data for the objects <code class="docutils literal notranslate"><span class="pre">foo</span></code> and <code class="docutils literal notranslate"><span class="pre">bar</span></code> include
-the two clauses:</p>
+in the tests object the two clauses:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>cover(foo).
 cover(bar).
 </pre></div>
 </div>
+<p>Code coverage is listed using the predicates clause indexes (counting
+from one). For example, using the <code class="docutils literal notranslate"><span class="pre">points</span></code> example in the Logtalk
+distribution:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% point: default_init_option/1 - 2/2 - (all)</span>
+<span class="c">% point: instance_base_name/1 - 1/1 - (all)</span>
+<span class="c">% point: move/2 - 1/1 - (all)</span>
+<span class="c">% point: position/2 - 1/1 - (all)</span>
+<span class="c">% point: print/0 - 1/1 - (all)</span>
+<span class="c">% point: process_init_option/1 - 1/2 - [1]</span>
+<span class="c">% point: position_/2 - 0/0 - (all)</span>
+<span class="c">% point: 7 out of 8 clauses covered, 87.500000% coverage</span>
+</pre></div>
+</div>
+<p>The numbers after the predicate indicators represents the clauses
+covered and the total number of clauses. E.g. for the
+<code class="docutils literal notranslate"><span class="pre">process_init_option/1</span></code> predicate, the tests cover 1 out of 2 clauses.
+After these numbers, we either get <code class="docutils literal notranslate"><span class="pre">(all)</span></code> telling us that all clauses
+are covered or a list of indexes for the covered clauses. E.g. only the
+first clause for the <code class="docutils literal notranslate"><span class="pre">process_init_option/1</span></code> predicate, <code class="docutils literal notranslate"><span class="pre">[1]</span></code>.
+Summary clause coverage numbers are also printed for entities and for
+clauses across all entities.</p>
 <p>In the printed predicate clause coverage information, you may get a
 total number of clauses smaller than the covered clauses. This results
 from the use of dynamic predicates with clauses asserted at runtime. You
@@ -1041,6 +1062,38 @@ the depth of printed terms that can be useful:</p>
 <li><p>XSB: <code class="docutils literal notranslate"><span class="pre">set_file_write_depth/1</span></code> predicate</p></li>
 <li><p>YAP: <code class="docutils literal notranslate"><span class="pre">write_depth/2-3</span></code> predicates</p></li>
 </ul>
+<p>Code coverage is only available when testing Logtalk code. But Prolog
+modules can often be compiled as Logtalk objects and plain Prolog code
+may be wrapped in a Logtalk object. For example, assuming a
+<code class="docutils literal notranslate"><span class="pre">module.pl</span></code> module file, we can compile and load the module as an
+object by simply calling:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(module).
+...
+</pre></div>
+</div>
+<p>The module exported predicates become object public predicates. For a
+plain Prolog file, say <code class="docutils literal notranslate"><span class="pre">plain.pl</span></code>, we can define a Logtalk object that
+wraps the code using an <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(plain).
+
+<span class="p">    :- </span><span class="k">include</span>(<span class="s">&#39;plain.pl&#39;</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The object can also declare as public the top Prolog predicates to
+simplify writing the tests. In alternative, we can use the
+<code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the <code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(object_wrapper_hook)).
+...
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(plain, [hook(object_wrapper_hook)]).
+...
+</pre></div>
+</div>
+<p>These workarounds may thus allow generating code coverage data also for
+Prolog code by defining tests that use the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging control
+construct to call the Prolog predicates.</p>
 </div>
 <div class="section" id="automating-running-tests">
 <h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Permalink to this headline">¶</a></h2>
@@ -1268,15 +1321,8 @@ definition of test options (e.g. <code class="docutils literal notranslate"><spa
 <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. Use in alternative the <code class="docutils literal notranslate"><span class="pre">pgr/2</span></code> built-in execution
 context predicate.</p>
 <p>Deterministic unit tests are currently not available when using Lean
-Prolog or Quintus Prolog as backend compilers do the lack of a required
+Prolog or Quintus Prolog as these backend compilers lack required
 built-in support that cannot be sensibly defined in Prolog.</p>
-<p>Code coverage is only available when testing Logtalk code. But Prolog
-modules can often be compiled as Logtalk objects and plain Prolog code
-may be wrapped in a Logtalk object by either using <code class="docutils literal notranslate"><span class="pre">include/1</span></code>
-directives or the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the
-<code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library. These workarounds may thus allow generating
-code coverage data also for Prolog code by defining tests that use the
-<code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging control construct to call the Prolog predicates.</p>
 </div>
 <div class="section" id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>
