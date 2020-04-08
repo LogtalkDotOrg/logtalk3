@@ -36,6 +36,8 @@ Library
 * FIXED: Deleted wrong `edge_case/2` clauses for the type `list(Type,Length)`
 from the `arbitrary` category.
 
+* FIXED: The `edcg` library to write warning message arguments using `~q`.
+
 Tools
 -----
 
