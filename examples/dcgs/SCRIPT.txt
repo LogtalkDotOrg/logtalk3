@@ -210,3 +210,16 @@ a-one
 b-two
 c-three
 yes
+
+
+% use lambda expressions in grammar rules
+
+| ?- logtalk << phrase(lambdas::aa(Duplicates), [a,b,c]).
+
+Duplicates == [a,a,b,b,c,c]
+yes
+
+| ?- logtalk << phrase(lambdas::aa([a,a,b,b,c,c]), Singletons).
+
+Singletons == [a,b,c]
+yes
