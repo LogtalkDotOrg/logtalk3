@@ -471,9 +471,11 @@ Another example using a Prolog module predicate:
 
 As illustrated by the examples above, properties are expressed using
 predicates. In the most simple cases, that can be the predicate that
-we are testing itself. But, in general, it will be a set of predicates,
-each expressing a different property that the predicate being tested
-must comply with. The QuickCheck test dialects and predicates take as
+we are testing itself. But, in general, it will be an auxiliary predicate 
+calling the predicate or predicates being tested and checking properties
+that the results must comply with.
+
+The QuickCheck test dialects and predicates take as
 argument the mode template for a property, generate random values for
 each input argument based on the type information, and check each output
 argument. For common types, the implementation tries first (by default)
@@ -513,10 +515,6 @@ user extensible by defining clauses for their multifile predicates.
 The user can define new types to use in the property mode templates to use
 with its QuickCheck tests by defining clauses for the `arbitrary` library
 category multifile predicates.
-
-Note that is possible to complement the random tests performed by QuickCheck
-by defining a surrogate predicate that calls the predicate being tested and
-performs additional checks on the generated random values.
 
 
 Skipping tests
@@ -914,7 +912,7 @@ writing unit tests:
 - `assertion(Goal)`  
 	to generate an exception in case the goal argument fails or throws an error
 
-- `assertion(Name, Goal)`  
+- `assertion(Description, Goal)`  
 	to generate an exception in case the goal argument fails or throws an error
 	(the first argument allows assertion failures to be distinguished when using
 	multiple assertions)

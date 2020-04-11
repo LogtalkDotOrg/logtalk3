@@ -708,20 +708,21 @@ yes
 </div>
 <p>As illustrated by the examples above, properties are expressed using
 predicates. In the most simple cases, that can be the predicate that we
-are testing itself. But, in general, it will be a set of predicates,
-each expressing a different property that the predicate being tested
-must comply with. The QuickCheck test dialects and predicates take as
-argument the mode template for a property, generate random values for
-each input argument based on the type information, and check each output
-argument. For common types, the implementation tries first (by default)
-common edge cases (e.g. empty atom, empty list, or zero) before
-generating arbitrary values. When the output arguments check fails, the
-QuickCheck implementation tries (by default) up to 64 shrink operations
-of the counter-example to report a simpler case to help debugging the
-failed test. Edge cases, generating of arbitrary terms, and shrinking
-terms make use of the library <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category via the <code class="docutils literal notranslate"><span class="pre">type</span></code>
-object (both entities can be extended by the user by defining clauses
-for multifile predicates).</p>
+are testing itself. But, in general, it will be an auxiliary predicate
+calling the predicate or predicates being tested and checking properties
+that the results must comply with.</p>
+<p>The QuickCheck test dialects and predicates take as argument the mode
+template for a property, generate random values for each input argument
+based on the type information, and check each output argument. For
+common types, the implementation tries first (by default) common edge
+cases (e.g. empty atom, empty list, or zero) before generating arbitrary
+values. When the output arguments check fails, the QuickCheck
+implementation tries (by default) up to 64 shrink operations of the
+counter-example to report a simpler case to help debugging the failed
+test. Edge cases, generating of arbitrary terms, and shrinking terms
+make use of the library <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category via the <code class="docutils literal notranslate"><span class="pre">type</span></code> object
+(both entities can be extended by the user by defining clauses for
+multifile predicates).</p>
 <p>The mode template syntax is the same used in the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> predicate
 directives with an additional notation, <code class="docutils literal notranslate"><span class="pre">{}/1</span></code>, for passing argument
 values as-is instead of generating random values for these arguments.
@@ -751,10 +752,6 @@ clauses for their multifile predicates.</p>
 <p>The user can define new types to use in the property mode templates to
 use with its QuickCheck tests by defining clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code>
 library category multifile predicates.</p>
-<p>Note that is possible to complement the random tests performed by
-QuickCheck by defining a surrogate predicate that calls the predicate
-being tested and performs additional checks on the generated random
-values.</p>
 </div>
 <div class="section" id="skipping-tests">
 <h2>Skipping tests<a class="headerlink" href="#skipping-tests" title="Permalink to this headline">¶</a></h2>
@@ -1135,7 +1132,7 @@ an error</div>
 </div>
 </li>
 <li><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Name,</span> <span class="pre">Goal)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Description,</span> <span class="pre">Goal)</span></code></div>
 <div class="line">to generate an exception in case the goal argument fails or throws
 an error (the first argument allows assertion failures to be
 distinguished when using multiple assertions)</div>
