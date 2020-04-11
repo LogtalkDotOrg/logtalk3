@@ -684,6 +684,11 @@ test that found the bug will be generated and run again:</p>
 yes
 </pre></div>
 </div>
+<p>When retesting using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script, the
+starting seed can be set using the <code class="docutils literal notranslate"><span class="pre">-r</span></code> option. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -r &quot;seed(3172,9814,20125)&quot;
+</pre></div>
+</div>
 <p>We could now move to other properties that the predicate should comply
 (e.g. all elements in the output list being present in the input list).
 Often, both traditional unit tests and QuickCheck tests are used,

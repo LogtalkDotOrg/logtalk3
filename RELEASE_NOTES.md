@@ -51,6 +51,9 @@ include the random generator starting seed used to generate the tests.
 case of errors and failures to include the  starting seed used to generate
 the random tests. 
 
+* ADDED: Support to the `logtalk_tester` shell script to set the random
+generator starting seed used to run QuickCheck tests.
+
 * ADDED: QuickCheck `rs(Seed)` option to the `lgtunit` tool to allow passing
 the random generator starting seed to be used to generate the random tests.
 

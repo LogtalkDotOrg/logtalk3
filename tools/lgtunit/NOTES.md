@@ -446,6 +446,11 @@ that found the bug will be generated and run again:
 	% starting seed: seed(3172,9814,20125)
 	yes
 
+When retesting using the `logtalk_tester` automation script, the starting seed
+can be set using the `-r` option. For example:
+
+	$ logtalk_tester -r "seed(3172,9814,20125)"
+
 We could now move to other properties that the predicate should comply (e.g.
 all elements in the output list being present in the input list). Often, both
 traditional unit tests and QuickCheck tests are used, complementing each other

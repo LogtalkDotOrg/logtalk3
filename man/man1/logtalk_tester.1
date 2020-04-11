@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "March 1, 2020" "Logtalk 3.36.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "April 11, 2020" "Logtalk 3.38.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -28,6 +28,8 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .I options
 .B ] [-g
 .I goal
+.B ] [-r
+.I seed
 .B ] [--
 .I arguments
 .B ]
@@ -74,6 +76,9 @@ Integration script command-line options (no default).
 .TP
 .BI \-g
 Initialization goal. Default is true. Called after loading the Logtalk compiler and runtime.
+.TP
+.BI \-r
+Random generator starting seed goal (no default).
 .TP
 .BI \--
 Arguments to be passed to the tests (no default).

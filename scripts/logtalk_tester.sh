@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 1, 2020
+##   Last updated on April 11, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 1.0"
+	echo "$(basename "$0") 2.0"
 	exit 0
 }
 
@@ -122,15 +122,15 @@ run_testset() {
 	name=${unit////__}
 	report_goal="logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'$results'),set_logtalk_flag(test_unit_name,'$name')"
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
+		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_optimal_goal"
 		tests_exit=$?
 		mode_prefix="% (opt)   "
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
+		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_normal_goal"
 		tests_exit=$?
 		mode_prefix="%         "
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
+		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_debug_goal"
 		tests_exit=$?
 		mode_prefix="% (debug) "
 	fi
@@ -210,7 +210,7 @@ usage_help()
 	echo "errors, this script returns a non-zero exit code."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-o output] [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-- arguments]"
+	echo "  $(basename "$0") [-o output] [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -232,12 +232,13 @@ usage_help()
 	echo "     (level 1 means current directory only)"
 	echo "  -i integration script command-line options (no default)"
 	echo "  -g initialization goal (default is $initialization_goal)"
+	echo "  -r random generator starting seed (no default)"
 	echo "  -- arguments to be passed to the tests (no default)"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vo:p:m:f:d:t:s:c:l:g:i:h" option
+while getopts "vo:p:m:f:d:t:s:c:l:g:r:i:h" option
 do
 	case $option in
 		v) print_version;;
@@ -252,6 +253,7 @@ do
 		l) l_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		g) g_arg="$OPTARG";;
+		r) r_arg="$OPTARG";;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
@@ -432,6 +434,12 @@ fi
 
 if [ "$g_arg" != "" ] ; then
 	initialization_goal="$g_arg"
+fi
+
+if [ "$r_arg" != "" ] ; then
+	seed_goal="logtalk_load(arbitrary(loader)),type::set_seed($r_arg)"
+else
+	seed_goal="true"
 fi
 
 if [ "$p_arg" == "swipack" ] ; then
