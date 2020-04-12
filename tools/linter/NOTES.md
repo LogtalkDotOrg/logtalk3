@@ -48,7 +48,7 @@ Lint checks include:
 - Missing predicates (calls to non-declared and non-defined predicates)
 - Calls to declared but not defined static predicates
 - Non-portable predicate calls, predicate options, arithmetic function calls, directives, flags, and flag values
-- Suspicious calls (syntactically valid calls that are likely semantic errors)
+- Suspicious calls (syntactically valid calls that are likely semantic errors; e.g. float comparisons using the standard arithmetic comparison operators)
 - Deprecated directives, predicates, control constructs, and flags
 - References to unknown entities (objects, protocols, categories, or modules)
 - Top-level shortcuts used as directives
@@ -69,6 +69,7 @@ Lint checks include:
 - Calls to all-solutions predicates with existentially qualified variables not occurring in the qualified goal
 - Calls to all-solutions predicates with no shared variables between template and goal
 - Calls to `bagof/3` and `setof/3` where the goal argument contains singleton variables
+- Calls to `findall/3` used to backtrack over all solutions of a goal
 - Calls to standard predicates that have more efficient alternatives
 - Entity, predicate, and variable names not following official coding guidelines
 - Variable names that differ only on case

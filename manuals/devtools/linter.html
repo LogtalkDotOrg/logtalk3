@@ -235,7 +235,8 @@ discontiguous, and multifile directives)</p></li>
 <li><p>Non-portable predicate calls, predicate options, arithmetic function
 calls, directives, flags, and flag values</p></li>
 <li><p>Suspicious calls (syntactically valid calls that are likely semantic
-errors)</p></li>
+errors; e.g. float comparisons using the standard arithmetic
+comparison operators)</p></li>
 <li><p>Deprecated directives, predicates, control constructs, and flags</p></li>
 <li><p>References to unknown entities (objects, protocols, categories, or
 modules)</p></li>
@@ -260,6 +261,7 @@ variables not occurring in the qualified goal</p></li>
 template and goal</p></li>
 <li><p>Calls to <code class="docutils literal notranslate"><span class="pre">bagof/3</span></code> and <code class="docutils literal notranslate"><span class="pre">setof/3</span></code> where the goal argument contains
 singleton variables</p></li>
+<li><p>Calls to <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> used to backtrack over all solutions of a goal</p></li>
 <li><p>Calls to standard predicates that have more efficient alternatives</p></li>
 <li><p>Entity, predicate, and variable names not following official coding
 guidelines</p></li>
