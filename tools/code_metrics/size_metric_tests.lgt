@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:1,
+		version is 0:2:2,
 		author is 'Paulo Moura',
-		date is 2018-03-01,
+		date is 2020-04-13,
 		comment is 'Unit tests for the source code size metric.'
 	]).
 
@@ -65,13 +65,5 @@
 
 	test(size_metric_all, deterministic) :-
 		all.
-
-	% suppress all messages from the "code_metrics"
-	% tool to not pollute the unit tests output
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
 
 :- end_object.

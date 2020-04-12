@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:1:1,
 		author is 'Paulo Moura',
-		date is 2017-12-28,
+		date is 2020-04-13,
 		comment is 'Unit tests for the code documentation metric.'
 	]).
 
@@ -52,13 +52,5 @@
 	doc_metric_valid(Entity) :-
 		doc_metric::entity_score(Entity, Score),
 		0 =< Score, Score =< 100.
-
-	% suppress all messages from the "code_metrics"
-	% component to not pollute the unit tests output
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
 
 :- end_object.

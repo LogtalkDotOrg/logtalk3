@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017-12-28,
+		date is 2020-04-13,
 		comment is 'Unit tests for the depth of inheritance code metric.'
 	]).
 
@@ -98,13 +98,5 @@
 	depth_is(Entity, N) :-
 		findall(D, dit_metric::entity_score(Entity, D), Depths),
 		Depths == [N].
-
-	% suppress all messages from the "code_metrics"
-	% component to not pollute the unit tests output
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
 
 :- end_object.

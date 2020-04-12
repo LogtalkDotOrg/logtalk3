@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:1:1,
 		author is 'Paulo Moura',
-		date is 2018-07-17,
+		date is 2020-04-13,
 		comment is 'Unit tests for the cyclomatic complexity metric.'
 	]).
 
@@ -36,15 +36,7 @@
 	:- uses(cc_metric, [entity_score/2]).
 
 	test(cc_metric_01) :-
-		entity_score(expert_system, Score), 
+		entity_score(expert_system, Score),
 		Score == 2.
-
-	% suppress all messages from the "code_metrics"
-	% component to not pollute the unit tests output
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
 
 :- end_object.

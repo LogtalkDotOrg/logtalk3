@@ -75,6 +75,9 @@ diagrams output directory when using the `lgt2svg` scripts.
 * IMPROVED: The `diagrams` tool generated SVG diagrams now highlight links on
 mouse over events.
 
+* IMPROVED: The solution used by the `code_metrics` tool tests to suppress the
+metrics normal output when run.
+
 
 3.37.0 - April 2, 2020
 ======================

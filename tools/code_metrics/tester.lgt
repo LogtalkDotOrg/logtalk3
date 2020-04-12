@@ -19,6 +19,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- initialization(
+	logtalk::asserta(message_hook(_Message, _Kind, code_metrics, _Tokens))
+).
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
@@ -82,3 +86,8 @@
 		code_metrics_tests
 	])
 )).
+
+
+:- initialization(
+	logtalk::retractall(message_hook(_Message, _Kind, code_metrics, _Tokens))
+).

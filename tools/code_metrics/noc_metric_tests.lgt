@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:11:1,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2019-10-09,
+		date is 2020-04-13,
 		comment is 'Unit tests for the entity number of clauses metric.'
 	]).
 
@@ -36,7 +36,7 @@
 	:- uses(noc_metric, [entity_score/2]).
 
 	test(noc_cat_a) :-
-		entity_score(cat_a, Score), 
+		entity_score(cat_a, Score),
 		Score == number_of_clauses(0, 0).
 
 	test(noc_cat_b) :-
@@ -102,13 +102,5 @@
 	test(noc_bird) :-
 		entity_score(bird, Score),
 		Score == number_of_clauses(0, 0).
-
-	% suppress all messages from the "code_metrics"
-	% component to not pollute the unit tests output
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
 
 :- end_object.
