@@ -21,10 +21,10 @@ ________________________________________________________________________
 ============
 
 The `assertions.lgt` file contains definitions for two meta-predicates,
-`assertion/1-2`, which allows using of assertions on your source code
-(e.g. when writing unit tests). The `assertions_messages.lgt` file defines
-the default message translations generated on assertions succeed, fail, or
-throw an exception.
+`assertion/1-2`, which allows using of assertions on your source code to
+print warning and error messages (using the message printing mechanism).
+The `assertions_messages.lgt` file defines the default message translations
+generated on assertions succeed, fail, or throw an exception.
 
 
 API documentation
@@ -46,19 +46,18 @@ This tool can be loaded using the query:
 Adding assertions to your source code
 -------------------------------------
 
-The `assertion/1` predicate takes a goal as argument. For example, assuming
-that you're writing a unit test:
+The `assertion/1` predicate takes a goal as argument. For example:
 
-	test(assertions_1) :-
-		assertions::assertion(ground(x)),
-		2 is 1 + 1.
+	foo(L) :-
+		assertions::assertion(non_empty_list(L)),
+		...
 
 The `assertion/2` predicate takes as arguments a term for passing
 context information and a goal. Using again a unit test as an example:
 
-	test(assertions_1) :-
-		assertions::assertion(assertions_1, ground(x)),
-		2 is 1 + 1.
+	foo(L) :-
+		assertions::assertion(foo_list_alerts, non_empty_list(L)),
+		...
 
 When using a large number of assertions, you can use a lighter syntax
 by adding a `uses/2` directive. For example:
@@ -131,6 +130,8 @@ and throw an error. For example:
 	
 	:- end_category.
 
+In alternative, if you want assertions to always trigger an exception, use
+instead the `lgtunit` tool `assertions/1-2` public predicates.
 
 Other notes
 -----------
