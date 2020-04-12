@@ -99,6 +99,14 @@ entity:
 For other usage examples, see the `SCRIPT.txt` file in the tool directory.
 
 
+Integration with the `make` tool
+--------------------------------
+
+The `loader.lgt` file sets a make target action that will call the
+`dead_code_scanner::all` goal whenever the `logtalk_make(check)` goal
+(or its top-level abbreviation, `{?}`) is called.
+
+
 Caveats
 -------
 

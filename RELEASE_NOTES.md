@@ -60,9 +60,10 @@ the random generator starting seed to be used to generate the random tests.
 * ADDED: QuickCheck `ec(Boolean)` option to the `lgtunit` tool to control
 use of edge cases when generating random arguments. Defaults is `true`.
 
-* UPDATED: Documentation of the `lgtunit` tool.
+* UPDATED: Documentation of the `lgtunit` tool for the improved QuickCheck
+implementation.
 
-* IMPROVED: Documentation of the `assertions` tool.
+* IMPROVED: Documentation of the `assertions` and `dead_code_scanner` tools.
 
 * IMPROVED: The `lgtdoc` tool generated reStructuredText layout for predicate
 remarks.

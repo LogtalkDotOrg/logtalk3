@@ -115,6 +115,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-with-the-make-tool">Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scanning-prolog-modules">Scanning Prolog modules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scanning-plain-prolog-files">Scanning plain Prolog files</a></li>
@@ -286,6 +287,12 @@ single entity:</p>
 </div>
 <p>For other usage examples, see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
+</div>
+<div class="section" id="integration-with-the-make-tool">
+<h2>Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool<a class="headerlink" href="#integration-with-the-make-tool" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file sets a make target action that will call the
+<code class="docutils literal notranslate"><span class="pre">dead_code_scanner::all</span></code> goal whenever the <code class="docutils literal notranslate"><span class="pre">logtalk_make(check)</span></code>
+goal (or its top-level abbreviation, <code class="docutils literal notranslate"><span class="pre">{?}</span></code>) is called.</p>
 </div>
 <div class="section" id="caveats">
 <h2>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
