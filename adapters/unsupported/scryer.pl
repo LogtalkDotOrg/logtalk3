@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on January 21, 2020
+%  Last updated on April 13, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -52,26 +52,21 @@
 
 % between(+integer, +integer, ?integer)
 
+:- use_module(library(between), [between/3]).
 
-% findall(?term, +callable, ?list, +list)
+
+% findall(?term, +callable, ?list, +list) -- built-in
 
 
 % forall(+callable, +callable)
 
-forall(Generate, Test) :-
-	\+ (Generate, \+ Test).
+:- use_module(library(iso_ext), [forall/2]).
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in ????
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
+% format(+character_code_list_or_atom, +list)
 
-format(Stream, Format, Arguments) :-
-	?????
-
-
-% format(+character_code_list_or_atom, +list) -- built-in ????
-
-format(Format, Arguments) :-
-	?????
+:- use_module(library(format), [format/3, format/2]).
 
 
 % numbervars(?term, +integer, ?integer)
@@ -110,6 +105,8 @@ format(Format, Arguments) :-
 
 
 % setup_call_cleanup(+callable, +callable, +callable)
+
+:- use_module(library(iso_ext), [setup_call_cleanup/3]).
 
 
 
