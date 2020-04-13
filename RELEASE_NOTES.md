@@ -78,6 +78,12 @@ mouse over events.
 * IMPROVED: The solution used by the `code_metrics` tool tests to suppress the
 metrics normal output when run.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Instructions for installing or updating Logtalk support for the Kate
+text editor when running on Windows.
+
 
 3.37.0 - April 2, 2020
 ======================

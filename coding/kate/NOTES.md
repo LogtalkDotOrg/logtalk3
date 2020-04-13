@@ -25,7 +25,8 @@ and KWrite text editors (http://kate.kde.org/) and with the KDevelop IDE
 These support files are dual-licensed under the Apache License 2.0 and the
 KDE license.
 
-To install copy the file `logtalk.xml` to one of the directories:
+On POSIX systems, to install copy the file `logtalk.xml` to one of the
+directories:
 
     KDE3:	$KDEDIR/share/apps/katepart/syntax/
     KDE4:	$KDEDIR/share/kde4/apps/katepart/syntax/
@@ -37,7 +38,15 @@ or:
     KDE4:	~/.kde/share/kde4/apps/katepart/syntax/
 	KDE5:	~/.local/share/katepart5/syntax
 
-and restart Kate and KWrite. Logtalk source files (including the library
+In recent versions, try:
+
+	~/.local/share/org.kde.syntax-highlighting/syntax
+
+On Windows systems, to install copy the file `logtalk.xml` to the directory:
+
+	%USERPROFILE%/AppData/Local/org.kde.syntax-highlighting/syntax
+
+After, restart Kate and KWrite. Logtalk source files (including the library
 entities and the programming examples) are indented using tabs (a common
 setting is a tab width equivalent to 4 spaces); you may set the tab width
 on the editor preference panel.
