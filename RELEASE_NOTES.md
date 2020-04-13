@@ -82,10 +82,10 @@ IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
 * ADDED: Instructions for installing or updating Logtalk support for the Kate
-text editor when running on Windows.
+text editor when running on macOS or Windows.
 
-* FIXED: Bump version of Kate syntax highlighter support to allow override old
-versions bundled with Kate binaries.
+* FIXED: Bump version of Kate syntax highlighter support to allow overriding
+old versions bundled with Kate binaries.
 
 
 3.37.0 - April 2, 2020
