@@ -12207,12 +12207,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % control constructs
 
-'$lgt_compile_body'((Pred1, _), _, _, Ctx) :-
+'$lgt_compile_body'((Pred1, Pred2), _, _, Ctx) :-
 	callable(Pred1),
+	callable(Pred2),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines, _),
 	callable(Head),
+	% ignore multifile predicates
+	Head \= ':'(_, _),
+	Head \= _::_,
 	functor(Pred1, Functor, Arity),
 	functor(Head, Functor, Arity),
+	% non-tail recursive predicate definition
+	\+ functor(Pred2, Functor, Arity),
+	% ignore predicate definitions with two consecutive recursive calls
 	'$lgt_compiler_flag'(tail_recursion, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),

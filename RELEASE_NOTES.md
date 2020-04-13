@@ -83,7 +83,7 @@ use of edge cases when generating random arguments. Defaults is `true`.
 * UPDATED: Documentation of the `lgtunit` tool for the improved QuickCheck
 implementation.
 
-* UPDATED: The `tutor` tool to explain the new non-tail recursion predicate
+* UPDATED: The `tutor` tool to explain the new non-tail recursive predicate
 definition warnings.
 
 * IMPROVED: Documentation of the `assertions` and `dead_code_scanner` tools.
