@@ -355,6 +355,17 @@
 
 
 
+:- object(tail_recursion).
+
+	sum_list([], 0).
+	sum_list([X| Xs], Sum):-
+		sum_list(Xs, Sum0),
+		Sum is Sum0 + X.
+
+:- end_object.
+
+
+
 :- object(suspicious_calls).
 
 	% calling local predicates doesn't require message sending

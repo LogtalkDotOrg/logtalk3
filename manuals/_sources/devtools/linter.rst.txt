@@ -52,6 +52,7 @@ Lint checks include:
 -  Cuts in clauses for multifile predicates
 -  Missing cut in repeat loops
 -  Possible non-steadfast predicate definitions
+-  Non-tail recursive predicate definitions
 -  Redundant calls to control constructs and built-in predicates
 -  Calls to all-solutions predicates with existentially qualified
    variables not occurring in the qualified goal

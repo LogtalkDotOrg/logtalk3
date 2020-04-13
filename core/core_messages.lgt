@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:97:0,
+		version is 1:98:0,
 		author is 'Paulo Moura',
-		date is 2020-03-02,
+		date is 2020-04-13,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -239,6 +239,7 @@
 		 current_logtalk_flag(steadfastness, Steadfastness),
 		 current_logtalk_flag(naming, Naming),
 		 current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
+		 current_logtalk_flag(tail_recursion, TailRecursion),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns),
 		 current_logtalk_flag(redefined_operators, RedefinedOperators),
@@ -283,7 +284,7 @@
 			'  duplicated_clauses: ~w, portability: ~w, deprecated: ~w'-[DuplicatedClauses, Portability, Deprecated], nl,
 			'  redefined_built_ins: ~w, redefined_operators: ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
-			'  lambda_variables: ~w, suspicious_calls: ~w'-[Lambda, SuspiciousCalls], nl,
+			'  lambda_variables: ~w, suspicious_calls: ~w, tail_recursion: ~w'-[Lambda, SuspiciousCalls, TailRecursion], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
 			'Default optional features compiler flags:'-[], nl,
 			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,
@@ -466,6 +467,10 @@
 	message_tokens(suspicious_call(File, Lines, Type, Entity, Call, reason(Reason))) -->
 		['Suspicious call: ~q '-[Call]],
 		suspicious_call_reason(Reason),
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(non_tail_recursive_predicate(File, Lines, Type, Entity, Predicate)) -->
+		['Non-tail recursive predicate definition: ~q '-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% portability messages
