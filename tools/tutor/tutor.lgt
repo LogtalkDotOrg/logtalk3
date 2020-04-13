@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:35:0,
+		version is 0:36:0,
 		author is 'Paulo Moura',
-		date is 2020-03-02,
+		date is 2020-04-13,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -487,6 +487,15 @@
 		[	'Duplicated grammar rules are usually a source code editing error and'-[], nl,
 			'can result in spurious choice-points, degrading performance. Delete'-[], nl,
 			'or correct the duplicated grammar rule to fix this warning.'-[], nl, nl
+		].
+
+	explain(non_tail_recursive_predicate(_, _, _, _, _)) -->
+		[	'Non-tail recursive predicate definitions consume space proportional'-[], nl,
+			'to the number of recursive calls. A predicate definition is non-tail'-[], nl,
+			'recursive when the recursive call is not the last goal in the clause'-[], nl,
+			'body. This warning can be fixed by redefining the predicate, often by'-[], nl,
+			'using an accumulator. This warning should be fixed when the predicate'-[], nl,
+			'is deterministic.'-[], nl, nl
 		].
 
 	% lambda expression messages
