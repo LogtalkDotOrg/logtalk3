@@ -24,7 +24,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-05,
+		date is 2020-04-13,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -468,7 +468,8 @@
 	logtalk::message_hook(quick_check_passed(NumberOfTests,_Seed), _, lgtunit, _) :-
 		retractall(quick_check_passed(_)),
 		assertz(quick_check_passed(NumberOfTests)).
-	logtalk::message_hook(quick_check_failed(_,_,_), _, lgtunit, _).
-	logtalk::message_hook(quick_check_error(_,_,_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_failed(_,_,_,_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_error(_,_,_,_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_error(_,_), _, lgtunit, _).
 
 :- end_object.
