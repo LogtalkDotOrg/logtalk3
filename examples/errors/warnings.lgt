@@ -355,7 +355,7 @@
 
 
 
-:- object(tail_recursion).
+:- object(tail_recursive).
 
 	sum_list([], 0).
 	sum_list([X| Xs], Sum):-

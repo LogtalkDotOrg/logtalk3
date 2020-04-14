@@ -12210,7 +12210,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'((Pred1, Pred2), _, _, Ctx) :-
 	callable(Pred1),
 	callable(Pred2),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
 	callable(Head),
 	% ignore multifile predicates
 	Head \= ':'(_, _),
@@ -12220,11 +12220,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% non-tail recursive predicate definition
 	\+ functor(Pred2, Functor, Arity),
 	% ignore predicate definitions with two consecutive recursive calls
-	'$lgt_compiler_flag'(tail_recursion, warning),
+	'$lgt_compiler_flag'(tail_recursive, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(tail_recursion),
+		warning(tail_recursive),
 		non_tail_recursive_predicate(File, Lines, Type, Entity, Functor/Arity)
 	),
 	fail.
@@ -22997,7 +22997,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(deprecated).
 '$lgt_valid_flag'(naming).
 '$lgt_valid_flag'(duplicated_clauses).
-'$lgt_valid_flag'(tail_recursion).
+'$lgt_valid_flag'(tail_recursive).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -23116,8 +23116,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(duplicated_clauses, silent) :- !.
 '$lgt_valid_flag_value'(duplicated_clauses, warning) :- !.
 
-'$lgt_valid_flag_value'(tail_recursion, silent) :- !.
-'$lgt_valid_flag_value'(tail_recursion, warning) :- !.
+'$lgt_valid_flag_value'(tail_recursive, silent) :- !.
+'$lgt_valid_flag_value'(tail_recursive, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.

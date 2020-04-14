@@ -38,6 +38,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- set_logtalk_flag(tail_recursive, silent).
+
+
 :- object(avltree,
 	implements(dictionaryp),
 	extends(compound)).

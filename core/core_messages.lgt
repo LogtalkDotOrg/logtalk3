@@ -23,7 +23,7 @@
 	:- info([
 		version is 1:98:0,
 		author is 'Paulo Moura',
-		date is 2020-04-13,
+		date is 2020-04-14,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -239,7 +239,7 @@
 		 current_logtalk_flag(steadfastness, Steadfastness),
 		 current_logtalk_flag(naming, Naming),
 		 current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
-		 current_logtalk_flag(tail_recursion, TailRecursion),
+		 current_logtalk_flag(tail_recursive, TailRecursive),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns),
 		 current_logtalk_flag(redefined_operators, RedefinedOperators),
@@ -284,7 +284,7 @@
 			'  duplicated_clauses: ~w, portability: ~w, deprecated: ~w'-[DuplicatedClauses, Portability, Deprecated], nl,
 			'  redefined_built_ins: ~w, redefined_operators: ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
-			'  lambda_variables: ~w, suspicious_calls: ~w, tail_recursion: ~w'-[Lambda, SuspiciousCalls, TailRecursion], nl,
+			'  lambda_variables: ~w, suspicious_calls: ~w, tail_recursive: ~w'-[Lambda, SuspiciousCalls, TailRecursive], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
 			'Default optional features compiler flags:'-[], nl,
 			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,

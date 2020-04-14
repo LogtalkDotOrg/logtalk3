@@ -18,6 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- set_logtalk_flag(tail_recursive, silent).
+
+
 :- object(meta,
 	implements(metap)).
 
@@ -37,7 +40,7 @@
 		map/5 as maplist/5,
 		map/6 as maplist/6,
 		map/7 as maplist/7,
-		map/8 as maplist/8,		
+		map/8 as maplist/8,
 		include/3 as filter/3,
 		fold_left/4 as foldl/4,
 		fold_left_1/3 as foldl1/3,

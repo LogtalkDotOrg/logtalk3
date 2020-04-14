@@ -841,10 +841,10 @@ Lint flags
    the reported line numbers are for lines of the original clauses that
    were expanded.
 
-.. _flag_tail_recursion:
-.. index:: pair: tail_recursion; Flag
+.. _flag_tail_recursive:
+.. index:: pair: tail_recursive; Flag
 
-``tail_recursion(Option)``
+``tail_recursive(Option)``
    Controls warnings of non-tail recursive predicate definitions. Possible
    option values are ``warning`` and ``silent`` (the usual default).
 

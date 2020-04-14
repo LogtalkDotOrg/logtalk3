@@ -29,7 +29,7 @@
 			missing_directives(warning),
 			duplicated_directives(warning),
 			duplicated_clauses(warning),
-			tail_recursion(warning),
+			tail_recursive(warning),
 			unknown_entities(warning),
 			unknown_predicates(warning),
 			undefined_predicates(warning),

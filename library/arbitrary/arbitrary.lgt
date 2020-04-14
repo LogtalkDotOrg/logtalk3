@@ -18,6 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- set_logtalk_flag(tail_recursive, silent).
+
+
 % fragile workaround for the lack of support for
 % static multifile predicates in Qu-Prolog
 :- if(current_logtalk_flag(prolog_dialect, qp)).

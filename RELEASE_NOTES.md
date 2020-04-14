@@ -29,20 +29,20 @@ Logtalk compiler and runtime
 
 * ADDED: Compiler lint check for non-tail recursive predicate definitions.
 
-* ADDED: New compiler flag, `tail_recursion`, with possible values `warning`
+* ADDED: New compiler flag, `tail_recursive`, with possible values `warning`
 and `silent` (the default value).
 
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: Default definition for the new `tail_recursion` flag to all adapter
+* ADDED: Default definition for the new `tail_recursive` flag to all adapter
 files.
 
 Documentation
 -------------
 
 * UPDATED: The Handbook compiler flags section to include a description of the
-new `tail_recursion` flag.
+new `tail_recursive` flag.
 
 Library
 -------

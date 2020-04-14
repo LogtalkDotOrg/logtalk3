@@ -270,7 +270,7 @@ findall(Term, Goal, List, Tail) :-
 '$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(naming, silent).
 '$lgt_default_flag'(duplicated_clauses, silent).
-'$lgt_default_flag'(tail_recursion, silent).
+'$lgt_default_flag'(tail_recursive, silent).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(redefined_operators, warning).
