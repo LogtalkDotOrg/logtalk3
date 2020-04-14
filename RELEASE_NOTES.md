@@ -101,6 +101,9 @@ mouse over events.
 * IMPROVED: The solution used by the `code_metrics` tool tests to suppress the
 metrics normal output when run.
 
+* FIXED: Bug in the `lgtunit` tool expansion of `discontiguous/1` directives
+when the argument is a singleton list.
+
 Examples
 --------
 

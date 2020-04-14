@@ -18,9 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(tail_recursive, silent).
-
-
 :- object(lgtunit,
 	implements(expanding)).
 
@@ -29,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:0:0,
+		version is 8:0:1,
 		author is 'Paulo Moura',
-		date is 2020-04-05,
+		date is 2020-04-14,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1259,19 +1256,29 @@
 		length(Tests, Total),
 		logtalk_load_context(source, File).
 
-	filter_discontiguous_directive((PI,PIs), Filtered) :-
-		filter_discontiguous_directive(PI, FilteredHead),
-		filter_discontiguous_directive(PIs, FilteredTail),
-		append(FilteredHead, FilteredTail, Filtered).
-	filter_discontiguous_directive([], []).
-	filter_discontiguous_directive([PI| PIs], Filtered) :-
-		filter_discontiguous_directive(PI, FilteredHead),
-		filter_discontiguous_directive(PIs, FilteredTail),
-		append(FilteredHead, FilteredTail, Filtered).
-	filter_discontiguous_directive(Functor/Arity, Filtered) :-
+	filter_discontiguous_directive(PIs, Filtered) :-
+		flatten_to_list(PIs, List),
+		filter_discontiguous_predicates(List, Filtered).
+
+	flatten_to_list([A| B], [A| B]) :-
+		!.
+	flatten_to_list([], []) :-
+		!.
+	flatten_to_list((A, B), [A| BB]) :-
+		!,
+		flatten_to_list(B, BB).
+	flatten_to_list(A, [A]).
+
+	filter_discontiguous_predicates([], []).
+	filter_discontiguous_predicates([PI| PIs], Filtered) :-
+		filter_discontiguous_predicate(PI, Filtered0),
+		append(Filtered0, Filtered1, Filtered),
+		filter_discontiguous_predicates(PIs, Filtered1).
+
+	filter_discontiguous_predicate(Functor/Arity, Filtered) :-
 		(	ignorable_discontiguous_predicate(Functor/Arity) ->
 			Filtered = []
-		;	Filtered = Functor/Arity
+		;	Filtered = [Functor/Arity]
 		).
 
 	ignorable_discontiguous_predicate((-)/1).
