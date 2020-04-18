@@ -32,6 +32,10 @@ Logtalk compiler and runtime
 * ADDED: New compiler flag, `tail_recursive`, with possible values `warning`
 and `silent` (the default value).
 
+* IMPROVED: Compile calls to deprecated `current_predicate/2` predicate when
+the second argument is bound and references a local predicate as calls to the
+`current_predicate/1` predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 
