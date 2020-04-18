@@ -22075,6 +22075,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(get0(Stream, Code), get_code(Stream, Code)).
 '$lgt_prolog_deprecated_built_in_predicate'(put(Code), put_code(Code)).
 '$lgt_prolog_deprecated_built_in_predicate'(put(Stream, Code), put_code(Stream, Code)).
+'$lgt_prolog_deprecated_built_in_predicate'(name(Atomic, Codes), Goal) :-
+	(	number(Atomic) ->
+		Goal = number_codes(Atomic, Codes)
+	;	atom(Atomic),
+		(	atom_length(Atomic, 1) ->
+			Goal = char_code(Atomic, Code),
+			Codes = [Code]
+		;	Goal = atom_codes(Atomic, Codes)
+		)
+	).
 '$lgt_prolog_deprecated_built_in_predicate'(not(Pred), \+ Pred).
 '$lgt_prolog_deprecated_built_in_predicate'(otherwise, true).
 '$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(Flag, Value), current_prolog_flag(Flag, Value)).

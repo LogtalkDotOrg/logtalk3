@@ -34,6 +34,10 @@ and `silent` (the default value).
 
 * ADDED: Compiler deprecated warning for `fail_if/1` built-in predicate calls.
 
+* IMPROVED: Compile calls to deprecated `name/2` predicate when the first
+argument is bound as calls to one of the `atom_codes/2`, `number_codes/2`, or
+`char_code/2` predicates.
+
 * IMPROVED: Compile calls to deprecated `current_predicate/2` predicate when
 the second argument is bound and references a local predicate as calls to the
 `current_predicate/1` predicate.
