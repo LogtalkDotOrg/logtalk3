@@ -22087,7 +22087,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 '$lgt_prolog_deprecated_built_in_predicate'(not(Pred), \+ Pred).
 '$lgt_prolog_deprecated_built_in_predicate'(otherwise, true).
-'$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(Flag, Value), current_prolog_flag(Flag, Value)).
+'$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(Flag, Value), current_prolog_flag(Flag, Value)) :-
+	atom(Flag),
+	'$lgt_iso_spec_flag'(Flag).
+'$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(Flag, Old, New), set_prolog_flag(Flag, New)) :-
+	var(Old),
+	atom(Flag),
+	'$lgt_iso_spec_flag'(Flag).
 '$lgt_prolog_deprecated_built_in_predicate'(on_exception(Error, Goal, Handler), catch(Goal, Error, Handler)).
 '$lgt_prolog_deprecated_built_in_predicate'(raise_exception(Error), throw(Error)).
 
@@ -22102,6 +22108,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(get(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(get(_, _)).
 '$lgt_prolog_deprecated_built_in_predicate'(name(_, _)).
+'$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(_, _)).
 '$lgt_prolog_deprecated_built_in_predicate'(prolog_flag(_, _, _)).
 '$lgt_prolog_deprecated_built_in_predicate'(skip(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(skip(_, _)).

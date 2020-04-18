@@ -32,7 +32,12 @@ Logtalk compiler and runtime
 * ADDED: New compiler flag, `tail_recursive`, with possible values `warning`
 and `silent` (the default value).
 
-* ADDED: Compiler deprecated warning for `fail_if/1` built-in predicate calls.
+* ADDED: Compiler deprecated warning for `fail_if/1` and `prolog_flag/2`
+built-in predicate calls.
+
+* IMPROVED: Compile calls to deprecated `prolog_flag/2-3` as calls to one of
+the `current_prolog_flag/2` or `set_prolog_flag/2` predicates when safe and
+the flags are standard ISO Prolog flags.
 
 * IMPROVED: Compile calls to deprecated `name/2` predicate when the first
 argument is bound as calls to one of the `atom_codes/2`, `number_codes/2`, or
