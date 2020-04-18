@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Parallel Logtalk processes setup for selected backend Prolog compilers
-%  Last updated on February 24, 2020
+%  Last updated on April 18, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -38,8 +38,9 @@
 	:- use_module(library(uuid), []).
 
 	logtalk_library_path(scratch_directory, Directory) :-
+		current_prolog_flag(tmp_dir, Prefix),
     	uuid:uuid(UUID),
-    	atom_concat('/tmp/', UUID, Directory).
+    	atomic_list_concat([Prefix, '/', UUID], Directory).
 
 :- elif(current_prolog_flag(dialect, gprolog)).
 

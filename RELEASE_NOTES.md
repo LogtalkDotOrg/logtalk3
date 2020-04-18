@@ -58,6 +58,10 @@ from the `arbitrary` category.
 
 * FIXED: The `edcg` library to write warning message arguments using `~q`.
 
+* FIXED: The library `parallel_logtalk_processes_setup.pl` file when using
+SWI-Prolog as the backend compiler to use the `tmp_dir` flag instead of a
+fixed `/tmp` path.
+
 Tools
 -----
 
@@ -107,7 +111,7 @@ when the argument is a singleton list.
 Examples
 --------
 
-* UPDATED: The `errors` example to illustrate the new tail recursion lint
+* UPDATED: The `errors` example to illustrate the new tail recursive lint
 warnings.
 
 IDEs, text editors, and syntax highlighters support
