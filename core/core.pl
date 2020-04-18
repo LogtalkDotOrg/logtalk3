@@ -22070,6 +22070,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Template),
 	Template \= ':'(_, _),
 	functor(Template, Name, Arity).
+'$lgt_prolog_deprecated_built_in_predicate'(fail_if(Pred), \+ Pred).
 '$lgt_prolog_deprecated_built_in_predicate'(get0(Code), get_code(Code)).
 '$lgt_prolog_deprecated_built_in_predicate'(get0(Stream, Code), get_code(Stream, Code)).
 '$lgt_prolog_deprecated_built_in_predicate'(put(Code), put_code(Code)).
