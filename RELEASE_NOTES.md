@@ -71,6 +71,9 @@ Library
 * FIXED: Deleted wrong `edge_case/2` clauses for the type `list(Type,Length)`
 from the `arbitrary` category.
 
+* FIXED: The documentation of the `arbitrary` category omitted the support for
+the `atom(CharSet,Length)` type.
+
 * FIXED: The `edcg` library to write warning message arguments using `~q`.
 
 * FIXED: The library `parallel_logtalk_processes_setup.pl` file when using
