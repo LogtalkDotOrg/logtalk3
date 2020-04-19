@@ -36,7 +36,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2:13:3,
+		version is 2:13:4,
 		author is 'Paulo Moura',
 		date is 2020-04-19,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
@@ -63,7 +63,7 @@
 
 	:- uses(integer, [between/3 as for/3]).
 	:- uses(list, [length/2]).
-	:- uses(fast_random, [between/3, member/2, random/1]).
+	:- uses(fast_random, [between/3, member/2, permutation/2, random/1]).
 
 	:- public(arbitrary/1).
 	:- multifile(arbitrary/1).
@@ -975,8 +975,6 @@
 	% atoms
 	edge_case(atom, '').
 	edge_case(atom(_), '').
-	edge_case(atom(_, Length), '') :-
-		Length >= 0.
 	% atomics
 	edge_case(atomic, '').
 	edge_case(atomic, 0).
@@ -1046,16 +1044,20 @@
 	edge_case(list(Type, Min, Max), [Term]) :-
 		edge_case(Type, Term),
 		Min @< Term, Term @< Max.
-	edge_case(list(_, Length, _, _), []) :-
-		Length >= 0.
-	edge_case(list(_, Length, Min, _), [Min]) :-
-		Length >= 1.
-	edge_case(list(_, Length, _, Max), [Max]) :-
-		Length >= 1.
-	edge_case(list(Type, Length, Min, Max), [Term]) :-
+	edge_case(list(Type, Length, Min, Max), EdgeCase) :-
+		Length >= 1,
+		arbitrary(list(Type, Length, Min, Max), [_| Others]),
+		permutation([Min| Others], EdgeCase).
+	edge_case(list(Type, Length, Min, Max), EdgeCase) :-
+		Length >= 1,
+		arbitrary(list(Type, Length, Min, Max), [_| Others]),
+		permutation([Max| Others], EdgeCase).
+	edge_case(list(Type, Length, Min, Max), EdgeCase) :-
 		Length >= 1,
 		edge_case(Type, Term),
-		Min @< Term, Term @< Max.
+		Min @< Term, Term @< Max,
+		arbitrary(list(Type, Length, Min, Max), [_| Others]),
+		permutation([Term| Others], EdgeCase).
 	edge_case(difference_list, Back-Back).
 	edge_case(difference_list(_), Back-Back).
 	edge_case(difference_list(Type), [Term| Back]-Back) :-

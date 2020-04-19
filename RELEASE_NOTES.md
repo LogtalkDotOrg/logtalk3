@@ -74,6 +74,9 @@ from the `arbitrary` category.
 * FIXED: The documentation of the `arbitrary` category omitted the support for
 the `atom(CharSet,Length)` type.
 
+* FIXED: The `arbitrary` category edge cases for the `atom(CharSet,Length)`
+and `list(Type,Length,Min,Max)` types.
+
 * FIXED: The `edcg` library to write warning message arguments using `~q`.
 
 * FIXED: The library `parallel_logtalk_processes_setup.pl` file when using
