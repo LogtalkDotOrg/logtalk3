@@ -66,6 +66,10 @@ Library
 
 * ADDED: Predicates `get_seed/1` and `set_seed/1` to the `arbitrary` category.
 
+* ADDED: Support to generate edge cases for `pair`, `pair(KeyType,ValueType)`,
+`non_empty_list`, `non_empty_atom`, and `non_empty_atom(CharSet)` types to the
+`arbitrary` category.
+
 * UPDATED: Documentation of the `arbitrary` library.
 
 * UPDATED: The `arbitrary` category to also generate surrogate code points as

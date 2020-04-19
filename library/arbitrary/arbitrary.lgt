@@ -36,7 +36,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2:14:0,
+		version is 2:15:0,
 		author is 'Paulo Moura',
 		date is 2020-04-19,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
@@ -975,6 +975,12 @@
 	% atoms
 	edge_case(atom, '').
 	edge_case(atom(_), '').
+	edge_case(non_empty_atom, Char) :-
+		edge_case(character_code(ascii_printable), Code),
+		char_code(Char, Code).
+	edge_case(non_empty_atom(CharSet), Char) :-
+		edge_case(character_code(CharSet), Code),
+		char_code(Char, Code).
 	% atomics
 	edge_case(atomic, '').
 	edge_case(atomic, 0).
@@ -1061,6 +1067,11 @@
 		Min @< Term, Term @< Max,
 		arbitrary(list(Type, Length, Min, Max), [_| Others]),
 		permutation([Term| Others], EdgeCase).
+	edge_case(non_empty_list, [Term]) :-
+		(	edge_case(atom, Term)
+		;	edge_case(integer, Term)
+		;	edge_case(float, Term)
+		).
 	edge_case(difference_list, Back-Back).
 	edge_case(difference_list(_), Back-Back).
 	edge_case(difference_list(Type), [Term| Back]-Back) :-
@@ -1090,6 +1101,12 @@
 	edge_case(ground(Type), Term) :-
 		edge_case(Type, Term),
 		ground(Term).
+	edge_case(pair, Key-Value) :-
+		edge_case(non_empty_atom, Key),
+		edge_case(integer, Value).
+	edge_case(pair(KeyType,ValueType), Key-Value) :-
+		edge_case(KeyType, Key),
+		edge_case(ValueType, Value).
 	edge_case(types(Types), Term) :-
 		list::member(Type, Types),
 		edge_case(Type, Term).
