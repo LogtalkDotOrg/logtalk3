@@ -68,6 +68,9 @@ Library
 
 * UPDATED: Documentation of the `arbitrary` library.
 
+* UPDATED: The `arbitrary` category to also generate surrogate code points as
+edge cases for the `character_code(unicode_full)` type.
+
 * FIXED: Deleted wrong `edge_case/2` clauses for the type `list(Type,Length)`
 from the `arbitrary` category.
 
