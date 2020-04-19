@@ -62,7 +62,7 @@
 	]).
 
 	:- uses(integer, [between/3 as for/3]).
-	:- uses(list, [length/2]).
+	:- uses(list, [append/3, length/2]).
 	:- uses(fast_random, [between/3, member/2, permutation/2, random/1]).
 
 	:- public(arbitrary/1).
@@ -539,6 +539,21 @@
 
 	arbitrary(non_empty_list, Arbitrary) :-
 		arbitrary(non_empty_list(types([var,atom,integer,float])), Arbitrary).
+
+	arbitrary(partial_list, Arbitrary) :-
+		member(Type, [var, list]),
+		(	Type == var ->
+			Arbitrary = _
+		;	arbitrary(list, List),
+			append(List, _, Arbitrary)
+		).
+
+	arbitrary(list_or_partial_list, Arbitrary) :-
+		member(Type, [list, partial_list]),
+		(	Type == list ->
+			arbitrary(list, Arbitrary)
+		;	arbitrary(partial_list, Arbitrary)
+		).
 
 	arbitrary(list(Type), Arbitrary) :-
 		between(0, 42, Length),
@@ -1072,6 +1087,9 @@
 		;	edge_case(integer, Term)
 		;	edge_case(float, Term)
 		).
+	edge_case(partial_list, _).
+	edge_case(list_or_partial_list, _).
+	edge_case(list_or_partial_list, []).
 	edge_case(difference_list, Back-Back).
 	edge_case(difference_list(_), Back-Back).
 	edge_case(difference_list(Type), [Term| Back]-Back) :-
