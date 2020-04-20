@@ -358,7 +358,7 @@
 :- object(tail_recursive).
 
 	sum_list([], 0).
-	sum_list([X| Xs], Sum):-
+	sum_list([X| Xs], Sum) :-
 		sum_list(Xs, Sum0),
 		Sum is Sum0 + X.
 

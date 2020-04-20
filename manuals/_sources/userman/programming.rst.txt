@@ -845,8 +845,12 @@ Lint flags
 .. index:: pair: tail_recursive; Flag
 
 ``tail_recursive(Option)``
-   Controls warnings of non-tail recursive predicate definitions. Possible
-   option values are ``warning`` and ``silent`` (the usual default).
+   Controls warnings of non-tail recursive predicate (and non-terminal)
+   definitions. The lint check does not detect all cases of non-tail
+   recursive predicate definitions, however. Also, definitions that
+   make two or more recursive calls are not reported as usually they
+   cannot be changed to be tail recursive. Possible option values are
+   ``warning`` and ``silent`` (the usual default).
 
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

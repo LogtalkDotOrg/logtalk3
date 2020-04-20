@@ -922,8 +922,12 @@ were expanded.</p>
 </dd>
 </dl>
 <span class="target" id="flag-tail-recursive"></span><dl class="simple" id="index-31">
-<dt><code class="docutils literal notranslate"><span class="pre">tail_recursive(Option)</span></code></dt><dd><p>Controls warnings of non-tail recursive predicate definitions. Possible
-option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (the usual default).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">tail_recursive(Option)</span></code></dt><dd><p>Controls warnings of non-tail recursive predicate (and non-terminal)
+definitions. The lint check does not detect all cases of non-tail
+recursive predicate definitions, however. Also, definitions that
+make two or more recursive calls are not reported as usually they
+cannot be changed to be tail recursive. Possible option values are
+<code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (the usual default).</p>
 </dd>
 </dl>
 </div>
