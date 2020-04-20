@@ -18,9 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(tail_recursive, silent).
-
-
 :- object(list,
 	implements(listp),
 	extends(compound)).

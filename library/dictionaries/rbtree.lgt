@@ -23,9 +23,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(tail_recursive, silent).
-
-
 :- object(rbtree,
 	implements(dictionaryp),
 	extends(compound)).

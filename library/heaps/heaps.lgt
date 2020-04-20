@@ -59,9 +59,6 @@
 */
 
 
-:- set_logtalk_flag(tail_recursive, silent).
-
-
 :- object(heap(_Order),
 	implements(heapp),
 	extends(compound)).

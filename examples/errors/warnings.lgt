@@ -362,6 +362,12 @@
 		sum_list(Xs, Sum0),
 		Sum is Sum0 + X.
 
+	foo([X| Xs]) -->
+		foo(Xs),
+		bar(X).
+
+	bar(X) --> [X].
+
 :- end_object.
 
 

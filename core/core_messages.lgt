@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:98:0,
+		version is 1:99:0,
 		author is 'Paulo Moura',
-		date is 2020-04-14,
+		date is 2020-04-20,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -471,6 +471,9 @@
 
 	message_tokens(non_tail_recursive_predicate(File, Lines, Type, Entity, Predicate)) -->
 		['Non-tail recursive predicate definition: ~q '-[Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+	message_tokens(non_tail_recursive_non_terminal(File, Lines, Type, Entity, NonTerminal)) -->
+		['Non-tail recursive non-terminal definition: ~q '-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% portability messages

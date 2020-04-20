@@ -386,6 +386,10 @@
 % '$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Line)
 :- dynamic('$lgt_pp_predicate_definition_location_'/5).
 
+% '$lgt_pp_non_tail_recursive_predicate_'(Functor, Arity, File, Lines)
+:- dynamic('$lgt_pp_non_tail_recursive_predicate_'/4).
+% '$lgt_pp_predicate_recursive_calls_'(Functor, Arity, Counter)
+:- dynamic('$lgt_pp_predicate_recursive_calls_'/3).
 % '$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, HeadFunctor/HeadArity, File, Lines)
 :- dynamic('$lgt_pp_calls_predicate_'/5).
 % '$lgt_pp_calls_self_predicate_'(Functor/Arity, HeadFunctor/HeadArity, File, Lines)
@@ -3448,7 +3452,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 38, 0, b01)).
+'$lgt_version_data'(logtalk(3, 38, 0, b02)).
 
 
 
@@ -7974,6 +7978,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_inline_predicate_'(_)),
+	retractall('$lgt_pp_non_tail_recursive_predicate_'(_, _, _, _)),
+	retractall('$lgt_pp_predicate_recursive_calls_'(_, _, _)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_calls_self_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _, _)),
@@ -12207,25 +12213,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % control constructs
 
-'$lgt_compile_body'((Pred1, Pred2), _, _, Ctx) :-
-	callable(Pred1),
-	callable(Pred2),
+'$lgt_compile_body'((Pred, _), _, _, Ctx) :-
+	callable(Pred),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, _, _),
 	callable(Head),
 	% ignore multifile predicates
 	Head \= ':'(_, _),
 	Head \= _::_,
-	functor(Pred1, Functor, Arity),
+	functor(Pred, Functor, Arity),
 	functor(Head, Functor, Arity),
 	% non-tail recursive predicate definition
-	\+ functor(Pred2, Functor, Arity),
-	% ignore predicate definitions with two consecutive recursive calls
-	'$lgt_compiler_flag'(tail_recursive, warning),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(
-		warning(tail_recursive),
-		non_tail_recursive_predicate(File, Lines, Type, Entity, Functor/Arity)
+	(	'$lgt_pp_non_tail_recursive_predicate_'(Functor, Arity, _, _) ->
+		true
+	;	'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_non_tail_recursive_predicate_'(Functor, Arity, File, Lines))
 	),
 	fail.
 
@@ -15941,7 +15942,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines),
 	(	Caller == Functor/Arity ->
 		% recursive call
-		true
+		(	retract('$lgt_pp_predicate_recursive_calls_'(Functor, Arity, Count0)) ->
+			Count is Count0 + 1,
+			assertz('$lgt_pp_predicate_recursive_calls_'(Functor, Arity, Count))
+		;	assertz('$lgt_pp_predicate_recursive_calls_'(Functor, Arity, 1))
+		)
 	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, Caller, File, Lines) ->
 		% already recorded for the current clause being compiled
 		true
@@ -18896,6 +18901,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_lint_issues'(Type, Entity) :-
 	'$lgt_report_missing_directives'(Type, Entity),
 	'$lgt_report_non_portable_calls'(Type, Entity),
+	'$lgt_report_non_tail_recursive_predicates'(Type, Entity),
 	'$lgt_report_unknown_entities'(Type, Entity),
 	'$lgt_report_naming_issues'(Type, Entity).
 
@@ -21212,6 +21218,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_non_portable_calls_'(_, _).
+
+
+
+% '$lgt_report_non_tail_recursive_predicates'(@entity_type, @entity_identifier)
+%
+% reports non-tail recursive predicate definitions
+
+'$lgt_report_non_tail_recursive_predicates'(Type, Entity) :-
+	'$lgt_compiler_flag'(tail_recursive, warning),
+	'$lgt_pp_non_tail_recursive_predicate_'(Functor, Arity, File, Lines),
+	'$lgt_pp_predicate_recursive_calls_'(Functor, Arity, Count),
+	Count =:= 1,
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity2, Arity) ->
+		'$lgt_print_message'(
+			warning(tail_recursive),
+			non_tail_recursive_non_terminal(File, Lines, Type, Entity, Functor//Arity2)
+		)
+	;	'$lgt_print_message'(
+			warning(tail_recursive),
+			non_tail_recursive_predicate(File, Lines, Type, Entity, Functor/Arity)
+		)
+	),
+	fail.
+
+'$lgt_report_non_tail_recursive_predicates'(_, _).
 
 
 
