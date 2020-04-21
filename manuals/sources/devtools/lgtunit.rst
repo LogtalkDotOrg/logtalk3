@@ -396,15 +396,7 @@ predicates for interactive use:
    quick_check(Template, Options).
    quick_check(Template).
 
-The ``quick_check/3`` predicate returns results in reified form:
-
--  ``passed(Seed, Discarded, Labels)``,
--  ``failed(Goal, Seed)`` with Goal being the random test that failed
--  ``error(Error, Template)`` or ``error(Error, Goal, Seed)``
-
-The ``Seed`` argument is the starting seed used to generate the random
-tests and should be regarded as an opaque term. The following options
-are supported:
+The following options are supported:
 
 -  ``n/1``: number of random tests that will be generated and run
    (default is 100).
@@ -419,8 +411,66 @@ are supported:
 -  ``l/1``: label closure for classifying the generated tests (extended
    with the test arguments plus the label; no default).
 
-Invalid options are ignored and replaced with the default value if
-applicable.
+The ``quick_check/1`` uses the default option values. When using the
+``quick_check/2-3`` predicates, invalid options are ignored and replaced
+with the default value if applicable. The ``quick_check/3`` predicate
+returns results in reified form:
+
+-  ``passed(Seed, Discarded, Labels)``,
+-  ``failed(Goal, Seed)`` with Goal being the random test that failed
+-  ``error(Error, Template)`` or ``error(Error, Goal, Seed)``
+
+The ``Seed`` argument is the starting seed used to generate the random
+tests and should be regarded as an opaque term. See below how to use it
+when testing bug fixes.
+
+The ``Discarded`` argument returns the number of generate tests that
+were discarded for failing to comply a pre-condition specified using the
+``pc/1`` option. This option is specially useful when constraining or
+enforcing a relation between the generated arguments and is often used
+as an alternative to define a custom type. For example, if we define the
+following predicate:
+
+::
+
+   condition(I) :-
+       between(0, 127, I).
+
+we can then use it to filter the generated tests:
+
+::
+
+   | ?- lgtunit::quick_check(integer(+byte), [pc(condition)]).
+   % 100 random tests passed, 94 discarded
+   % starting seed: seed(416,18610,17023)
+   yes
+
+The ``Labels`` argument returns a list of pairs ``Label-N`` where ``N``
+is the number of generated tests that are classified as ``Label`` by a
+closure specified using the ``l/1`` option. For example, assuming the
+following predicate definition:
+
+::
+
+   label(I, Label) :-
+       (   I mod 2 =:= 0 ->
+           Label = even
+       ;   Label = odd
+       ).
+
+we can try:
+
+::
+
+   | ?- lgtunit::quick_check(integer(+byte), [l(label), n(10000)]).
+   % 10000 random tests passed, 0 discarded
+   % starting seed: seed(25513,20881,16407)
+   % even: 5037/10000 (50.370000%)
+   % odd: 4963/10000 (49.630000%)
+   yes
+
+The label statistics are key to verify if the generated tests provide
+the necessary coverage.
 
 The other two predicates print the test results. The template can be a
 ``::/2``, ``<</2``, or ``:/2`` qualified callable term. When the
@@ -493,7 +543,7 @@ test that found the bug will be generated and run again:
             every_other(+list(integer), -list(integer)),
             [rs(seed(3172,9814,20125))]
         ).
-   % 100 random tests passed
+   % 100 random tests passed, 0 discarded
    % starting seed: seed(3172,9814,20125)
    yes
 
@@ -520,7 +570,7 @@ Another example using a Prolog module predicate:
                -list(integer)
            )
        ).
-   % 100 random tests passed
+   % 100 random tests passed, 0 discarded
    % starting seed: seed(3172,9814,20125)
    yes
 

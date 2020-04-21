@@ -601,15 +601,7 @@ quick_check(<span class="nv">Template</span>, <span class="nv">Options</span>).
 quick_check(<span class="nv">Template</span>).
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code> predicate returns results in reified form:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">passed(Seed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code>,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal,</span> <span class="pre">Seed)</span></code> with Goal being the random test that failed</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Template)</span></code> or <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal,</span> <span class="pre">Seed)</span></code></p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">Seed</span></code> argument is the starting seed used to generate the random
-tests and should be regarded as an opaque term. The following options
-are supported:</p>
+<p>The following options are supported:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">n/1</span></code>: number of random tests that will be generated and run
 (default is 100).</p></li>
@@ -624,8 +616,57 @@ the test arguments; no default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">l/1</span></code>: label closure for classifying the generated tests (extended
 with the test arguments plus the label; no default).</p></li>
 </ul>
-<p>Invalid options are ignored and replaced with the default value if
-applicable.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">quick_check/1</span></code> uses the default option values. When using the
+<code class="docutils literal notranslate"><span class="pre">quick_check/2-3</span></code> predicates, invalid options are ignored and replaced
+with the default value if applicable. The <code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code> predicate
+returns results in reified form:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">passed(Seed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal,</span> <span class="pre">Seed)</span></code> with Goal being the random test that failed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Template)</span></code> or <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal,</span> <span class="pre">Seed)</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Seed</span></code> argument is the starting seed used to generate the random
+tests and should be regarded as an opaque term. See below how to use it
+when testing bug fixes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Discarded</span></code> argument returns the number of generate tests that
+were discarded for failing to comply a pre-condition specified using the
+<code class="docutils literal notranslate"><span class="pre">pc/1</span></code> option. This option is specially useful when constraining or
+enforcing a relation between the generated arguments and is often used
+as an alternative to define a custom type. For example, if we define the
+following predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>condition(<span class="nv">I</span>) <span class="o">:-</span>
+    between(<span class="m">0</span>, <span class="m">127</span>, <span class="nv">I</span>).
+</pre></div>
+</div>
+<p>we can then use it to filter the generated tests:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">integer</span>(<span class="o">+</span>byte), [pc(condition)]).
+<span class="c">% 100 random tests passed, 94 discarded</span>
+<span class="c">% starting seed: seed(416,18610,17023)</span>
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Labels</span></code> argument returns a list of pairs <code class="docutils literal notranslate"><span class="pre">Label-N</span></code> where <code class="docutils literal notranslate"><span class="pre">N</span></code>
+is the number of generated tests that are classified as <code class="docutils literal notranslate"><span class="pre">Label</span></code> by a
+closure specified using the <code class="docutils literal notranslate"><span class="pre">l/1</span></code> option. For example, assuming the
+following predicate definition:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>label(<span class="nv">I</span>, <span class="nv">Label</span>) <span class="o">:-</span>
+    (   <span class="nv">I</span> <span class="o">mod</span> <span class="m">2</span> <span class="o">=:=</span> <span class="m">0</span> <span class="o">-&gt;</span>
+        <span class="nv">Label</span> <span class="o">=</span> even
+    <span class="o">;</span>   <span class="nv">Label</span> <span class="o">=</span> odd
+    ).
+</pre></div>
+</div>
+<p>we can try:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">integer</span>(<span class="o">+</span>byte), [l(label), n(<span class="m">10000</span>)]).
+<span class="c">% 10000 random tests passed, 0 discarded</span>
+<span class="c">% starting seed: seed(25513,20881,16407)</span>
+<span class="c">% even: 5037/10000 (50.370000%)</span>
+<span class="c">% odd: 4963/10000 (49.630000%)</span>
+yes
+</pre></div>
+</div>
+<p>The label statistics are key to verify if the generated tests provide
+the necessary coverage.</p>
 <p>The other two predicates print the test results. The template can be a
 <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> qualified callable term. When the
 template is an unqualified callable term, it will be used to construct a
@@ -684,7 +725,7 @@ test that found the bug will be generated and run again:</p>
          every_other(<span class="o">+</span>list(integer), <span class="o">-</span>list(integer)),
          [rs(seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>))]
      ).
-<span class="c">% 100 random tests passed</span>
+<span class="c">% 100 random tests passed, 0 discarded</span>
 <span class="c">% starting seed: seed(3172,9814,20125)</span>
 yes
 </pre></div>
@@ -706,7 +747,7 @@ complementing each other to ensure the required code coverage.</p>
             <span class="o">-</span>list(integer)
         )
     ).
-<span class="c">% 100 random tests passed</span>
+<span class="c">% 100 random tests passed, 0 discarded</span>
 <span class="c">% starting seed: seed(3172,9814,20125)</span>
 yes
 </pre></div>
