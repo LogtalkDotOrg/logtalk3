@@ -139,7 +139,7 @@
 	message_tokens(quick_check_passed(NumberOfTests, Seed, Discarded, Labels)) -->
 		['~w random tests passed, ~w discarded'-[NumberOfTests, Discarded], nl],
 		['starting seed: ~w'-[Seed], nl],
-		['~q'-[Labels], nl].
+		quick_check_labels(Labels, NumberOfTests).
 
 	message_tokens(quick_check_failed(Goal, Test, Shrinks, Seed)) -->
 		(	{Shrinks == 1} ->
@@ -293,6 +293,16 @@
 			['~d clause'-[Clauses]]
 		;	['~d clauses'-[Clauses]]
 		).
+
+	quick_check_labels([], _) -->
+		[].
+	quick_check_labels([Label-N| Labels], NumberOfTests) -->
+		(	{N > 0} ->
+			{Percentage is N / NumberOfTests * 100}
+		;	{Percentage is 0.0}
+		),
+		['~w: ~d/~d (~f%)'-[Label, N, NumberOfTests, Percentage], nl],
+		quick_check_labels(Labels, NumberOfTests).
 
 	integer_to_padded_atom(Integer, Atom) :-
 		number_codes(Integer, Codes),
