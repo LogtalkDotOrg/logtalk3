@@ -541,13 +541,9 @@ details):</p>
 quick_check(<span class="nv">Test</span>, <span class="nv">Template</span>).
 </pre></div>
 </div>
-<p>The valid options are the same as for the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect plus a
-<code class="docutils literal notranslate"><span class="pre">n/1</span></code> option to specify the number of random tests that will be
-generated/run (default is 100), a <code class="docutils literal notranslate"><span class="pre">s/1</span></code> option to specify the maximum
-number of shrink operations (default is 64), an <code class="docutils literal notranslate"><span class="pre">ec/1</span></code> boolean option
-to decide if type edge cases are used for testing (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>),
-and a <code class="docutils literal notranslate"><span class="pre">rs/1</span></code> option to specify the starting seed to be used when
-generating the random tests (no default).</p>
+<p>The valid options are the same as for the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect plus all
+the supported QuickCheck specific options (see the QuickCheck section
+below for details).</p>
 <p>For examples of how to write unit tests, check the <code class="docutils literal notranslate"><span class="pre">tests</span></code> folder or
 the <code class="docutils literal notranslate"><span class="pre">testing</span></code> example in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> folder in the Logtalk
 distribution. Most of the provided examples also include unit tests,
@@ -607,20 +603,29 @@ quick_check(<span class="nv">Template</span>).
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code> predicate returns results in reified form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">passed(Seed)</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">passed(Seed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code>,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal,</span> <span class="pre">Seed)</span></code> with Goal being the random test that failed</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Template)</span></code> or <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal,</span> <span class="pre">Seed)</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">Seed</span></code> argument is the starting seed used to generate the random
-tests and should be regarded as an opaque term.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">n/1</span></code> option allows us to specify the number of random tests that
-will be generated and run (default is 100). The <code class="docutils literal notranslate"><span class="pre">s/1</span></code> option allows us
-to specify the maximum number of shrink operations when a
-counter-example is found (default is 64). An <code class="docutils literal notranslate"><span class="pre">ec/1</span></code> boolean option
-allows us to decide if type edge cases are tested before generating
-random tests (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>). A <code class="docutils literal notranslate"><span class="pre">rs/1</span></code> option to allow us to
-specify the starting seed to be used when generating the random tests
-(no default).</p>
+tests and should be regarded as an opaque term. The following options
+are supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n/1</span></code>: number of random tests that will be generated and run
+(default is 100).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s/1</span></code>: maximum number of shrink operations when a counter-example
+is found (default is 64).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ec/1</span></code>: boolean option deciding if type edge cases are tested
+before generating random tests (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rs/1</span></code>: starting seed to be used when generating the random tests
+(no default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pc/1</span></code>: pre-condition closure for generated tests (extended with
+the test arguments; no default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l/1</span></code>: label closure for classifying the generated tests (extended
+with the test arguments plus the label; no default).</p></li>
+</ul>
+<p>Invalid options are ignored and replaced with the default value if
+applicable.</p>
 <p>The other two predicates print the test results. The template can be a
 <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> qualified callable term. When the
 template is an unqualified callable term, it will be used to construct a

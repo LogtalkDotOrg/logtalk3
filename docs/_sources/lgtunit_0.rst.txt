@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 8:0:1
-| **Date:** 2020-04-14
+| **Version:** 8:0:0
+| **Date:** 2020-04-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -283,13 +283,15 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 ``quick_check/3``
 ^^^^^^^^^^^^^^^^^
 
-Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed(Seed)``, ``failed(Goal,Seed)`` where ``Goal`` is the test that failed, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.
+Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)`` where ``Goal`` is the failed test, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
 |    ``quick_check(Template,Result,Options)``
+| **Meta-predicate template:**
+|    ``quick_check(::,*,::)``
 | **Mode and number of proofs:**
 |    ``quick_check(@callable,-callable,++list(compound))`` - ``one``
 
@@ -313,13 +315,15 @@ Generates and runs random tests for a predicate given its mode template and a se
 
 | **Template:**
 |    ``quick_check(Template,Options)``
+| **Meta-predicate template:**
+|    ``quick_check(::,::)``
 | **Mode and number of proofs:**
 |    ``quick_check(@callable,++list(compound))`` - ``zero_or_one``
 
 | **Remarks:**
 
     - Number of tests: Use the ``n(NumberOfTests)`` option to specifiy the number of random tests. Default is 100.
-    - Maximum number of shrink operations: Use the ``s(MaxNumberOfShrinks)`` option to specifiy the number of shrink operations when a counter example is found. Default is 64.
+    - Maximum number of shrink operations: Use the ``s(MaxShrinks)`` option to specifiy the number of shrink operations when a counter example is found. Default is 64.
     - Type edge cases: Use the ``ec(Boolean)`` option to specifiy if type edge cases are tested (before generating random tests). Default is ``true``.
     - Starting seed: Use the ``rs(Seed)`` option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.
 
@@ -679,23 +683,25 @@ Runs a test set as part of running two or more test sets as a unified set.
 
 .. raw:: html
 
-   <div id="run_quick_check_tests/3"> </div>
+   <div id="run_quick_check_tests/5"> </div>
 
-.. index:: run_quick_check_tests/3
-.. _lgtunit/0::run_quick_check_tests/3:
+.. index:: run_quick_check_tests/5
+.. _lgtunit/0::run_quick_check_tests/5:
 
-``run_quick_check_tests/3``
+``run_quick_check_tests/5``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Runs a list of defined tests using the given options. Returns the starting seed used to generate the random tests.
+Runs a list of defined tests using the given options. Returns the starting seed used to generate the random tests, the number of discarded tests, and the test label statistics.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``run_quick_check_tests(Template,Options,Seed)``
+|    ``run_quick_check_tests(Template,Options,Seed,Discarded,Labels)``
+| **Meta-predicate template:**
+|    ``run_quick_check_tests(::,::,*,*,*)``
 | **Mode and number of proofs:**
-|    ``run_quick_check_tests(@callable,+list,--nonvar)`` - ``one_or_error``
+|    ``run_quick_check_tests(@callable,+list,--nonvar,--number,--list(pair))`` - ``one_or_error``
 
 
 ------------

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:0:1,
+		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-14,
+		date is 2020-04-21,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -114,19 +114,21 @@
 
 	:- public(quick_check/3).
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
+	:- meta_predicate(quick_check(::, *, ::)).
 	:- info(quick_check/3, [
-		comment is 'Reified version of the ``quick_check/2`` predicate. Reports the result as ``passed(Seed)``, ``failed(Goal,Seed)`` where ``Goal`` is the test that failed, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.',
+		comment is 'Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)`` where ``Goal`` is the failed test, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.',
 		argnames is ['Template', 'Result', 'Options']
 	]).
 
 	:- public(quick_check/2).
 	:- mode(quick_check(@callable, ++list(compound)), zero_or_one).
+	:- meta_predicate(quick_check(::, ::)).
 	:- info(quick_check/2, [
 		comment is 'Generates and runs random tests for a predicate given its mode template and a set of options. Fails when a generated test fails printing the test.',
 		argnames is ['Template', 'Options'],
 		remarks is [
 			'Number of tests' - 'Use the ``n(NumberOfTests)`` option to specifiy the number of random tests. Default is 100.',
-			'Maximum number of shrink operations' - 'Use the ``s(MaxNumberOfShrinks)`` option to specifiy the number of shrink operations when a counter example is found. Default is 64.',
+			'Maximum number of shrink operations' - 'Use the ``s(MaxShrinks)`` option to specifiy the number of shrink operations when a counter example is found. Default is 64.',
 			'Type edge cases' - 'Use the ``ec(Boolean)`` option to specifiy if type edge cases are tested (before generating random tests). Default is ``true``.',
 			'Starting seed' - 'Use the ``rs(Seed)`` option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.'
 		]
@@ -240,11 +242,11 @@
 		comment is 'Runs a test set as part of running two or more test sets as a unified set.'
 	]).
 
-	:- protected(run_quick_check_tests/3).
-	:- mode(run_quick_check_tests(@callable, +list, --nonvar), one_or_error).
-	:- info(run_quick_check_tests/3, [
-		comment is 'Runs a list of defined tests using the given options. Returns the starting seed used to generate the random tests.',
-		argnames is ['Template', 'Options', 'Seed']
+	:- protected(run_quick_check_tests/5).
+	:- mode(run_quick_check_tests(@callable, +list, --nonvar, --number, --list(pair)), one_or_error).
+	:- info(run_quick_check_tests/5, [
+		comment is 'Runs a list of defined tests using the given options. Returns the starting seed used to generate the random tests, the number of discarded tests, and the test label statistics.',
+		argnames is ['Template', 'Options', 'Seed', 'Discarded', 'Labels']
 	]).
 
 	:- protected(condition/0).
@@ -633,7 +635,7 @@
 	% library support for quick check
 	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1]).
 	% library list predicates
-	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3]).
+	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
 	% don't assume that between/3 is a built-in predicate as some backend
 	% Prolog systems still provide it as a library predicate
 	:- uses(integer, [between/3]).
@@ -1192,14 +1194,14 @@
 		assertz(test_(Test, throws(Test, Errors, Position))).
 
 	% unit test idiom quick_check/3
-	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _))]) :-
+	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions),
 		assertz(test_(Test, quick_check(Test, Position, Condition, Setup, Cleanup, Note))).
 
 	% unit test idiom quick_check/2
-	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _))]) :-
+	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		findall(Option, default_quick_check_option(Option), QuickCheckOptions),
@@ -1424,23 +1426,33 @@
 		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),
 		parse_quick_check_options(Options, QuickCheckOptions).
 
-	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxNumberOfShrinks), ec(UseEdgeCases)| Other]) :-
+	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label)| Other]) :-
 		(	memberchk(n(NumberOfTests), Options),
 			integer(NumberOfTests),
 			NumberOfTests >= 0 ->
 			true
 		;	default_quick_check_option(n(NumberOfTests))
 		),
-		(	memberchk(s(MaxNumberOfShrinks), Options),
-			integer(MaxNumberOfShrinks),
-			MaxNumberOfShrinks >= 0 ->
+		(	memberchk(s(MaxShrinks), Options),
+			integer(MaxShrinks),
+			MaxShrinks >= 0 ->
 			true
-		;	default_quick_check_option(s(MaxNumberOfShrinks))
+		;	default_quick_check_option(s(MaxShrinks))
 		),
 		(	memberchk(ec(Boolean), Options),
 			(Boolean == true; Boolean == false) ->
-			UseEdgeCases = Boolean
-		;	default_quick_check_option(ec(UseEdgeCases))
+			EdgeCases = Boolean
+		;	default_quick_check_option(ec(EdgeCases))
+		),
+		(	memberchk(pc(Condition), Options),
+			callable(Condition) ->
+			true
+		;	default_quick_check_option(pc(Condition))
+		),
+		(	memberchk(l(Label), Options),
+			callable(Label) ->
+			true
+		;	default_quick_check_option(l(Label))
 		),
 		(	member(rs(Seed), Options) ->
 			Other = [rs(Seed)]
@@ -1453,6 +1465,10 @@
 	default_quick_check_option(s(64)).
 	% use edge cases by default
 	default_quick_check_option(ec(true)).
+	% don't filter generated tests by default
+	default_quick_check_option(pc(true)).
+	% don't label generated tests by default
+	default_quick_check_option(l(true)).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
@@ -1620,9 +1636,9 @@
 
 	quick_check(Template, Result, Options) :-
 		parse_quick_check_options(Options, QuickCheckOptions),
-		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed), Error, true),
+		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed, Discarded, Labels), Error, true),
 		(	var(Error) ->
-			Result = passed(Seed)
+			Result = passed(Seed, Discarded, Labels)
 		;	Error = quick_check_failed(Goal, _, _, Seed) ->
 			Result = failed(Goal, Seed)
 		;	Error = quick_check_error(error(Exception,_), Goal, _, Seed) ->
@@ -1636,9 +1652,9 @@
 	quick_check(Template, Options) :-
 		parse_quick_check_options(Options, QuickCheckOptions),
 		memberchk(n(NumberOfTests), QuickCheckOptions),
-		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed), Error, true),
+		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed, Discarded, Labels), Error, true),
 		(	var(Error) ->
-			print_message(information, lgtunit, quick_check_passed(NumberOfTests,Seed))
+			print_message(information, lgtunit, quick_check_passed(NumberOfTests, Seed, Discarded, Labels))
 		;	print_message(warning, lgtunit, Error),
 			fail
 		).
@@ -1646,20 +1662,51 @@
 	quick_check(Template) :-
 		quick_check(Template, []).
 
-	run_quick_check_tests(Template, Options, Seed) :-
+	:- meta_predicate(run_quick_check_tests(::, ::, *, *, *)).
+	run_quick_check_tests(Template, Options, Seed, Discarded, Labels) :-
 		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template))),
-		memberchk(n(NumberOfTests), Options),
-		memberchk(s(MaxNumberOfShrinks), Options),
-		memberchk(ec(UseEdgeCases), Options),
+		memberchk(n(N), Options),
+		memberchk(s(MaxShrinks), Options),
+		memberchk(ec(EdgeCases), Options),
+		memberchk(pc(Condition), Options),
+		memberchk(l(Label), Options),
 		(	member(rs(Seed), Options) ->
 			set_seed(Seed)
 		;	get_seed(Seed)
 		),
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
-		forall(
-			between(1, NumberOfTests, Test),
-			run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaxNumberOfShrinks, UseEdgeCases, Seed)
+		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Seed, 0, Discarded, [], Labels).
+
+	:- meta_predicate(run_quick_check_tests(*, *, *, *, *, *, *, *, *, ::, ::, *, *, *, *, *)).
+	run_quick_check_tests(Test, N, _Template, _Entity, _Operator, _Name, _Types, _MaxShrinks, _EdgeCases, _Condition, _Label, _Seed, _Discarded, _Discarded, _Labels, _Labels) :-
+		Test > N,
+		!.
+	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Seed, Discarded0, Discarded, Labels0, Labels) :-
+		generate_test(Condition, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded1, Goal),
+		(	catch(Goal, Error, throw(quick_check_error(Error, Goal, Test, Seed))) ->
+				(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
+					Next is Test + 1,
+					label_test(Label, Arguments, Labels0, Labels1),
+					run_quick_check_tests(Next, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Seed, Discarded1, Discarded, Labels1, Labels)
+				;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Seed)
+				)
+			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Seed)
+		).
+
+	label_test(true, _, Labels, Labels) :-
+		!.
+	label_test(Closure, Arguments, Labels0, Labels1) :-
+		sender(Sender),
+		append(Arguments, [Label], FullArguments),
+		LabelGoal =.. [call, Closure| FullArguments],
+		(	catch(Sender<<LabelGoal, Error, throw(quick_check_error(Error, Closure))) ->
+			(	select(Label-N, Labels0, Others) ->
+				M is N + 1,
+				Labels1 = [Label-M| Others]
+			;	Labels1 = [Label-1| Labels0]
+			)
+		;	throw(quick_check_error(label_goal_failure, Closure))
 		).
 
 	decompose_quick_check_template(Template, Entity, Operator, Predicate) :-
@@ -1673,49 +1720,56 @@
 	control_construct(Object<<Template, Object, (<<), Template).
 	control_construct(':'(Module,Template), Module, (:), Template).
 
-	:- meta_predicate(run_quick_check_test(*, *, *, *, *, *, *, *)).
-	run_quick_check_test(Template, Entity, Operator, Name, Types, Test, MaxNumberOfShrinks, UseEdgeCases, Seed) :-
-		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, UseEdgeCases),
+	:- meta_predicate(generate_test(::, *, *, *, *, *, *, *, *, *, *, *, *)).
+	generate_test(true, _, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded, Discarded, Goal) :-
+		!,
+		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases),
 		Predicate =.. [Name| Arguments],
-		Goal =.. [Operator, Entity, Predicate],
-		(	catch(Goal, Error, throw(quick_check_error(Error, Goal, Test, Seed))) ->
-			(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
-				true
-			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxNumberOfShrinks, Seed)
-			)
-		;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxNumberOfShrinks, Seed)
-		).
+		Goal =.. [Operator, Entity, Predicate].
+	generate_test(Closure, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded, Goal) :-
+		sender(Sender),
+		repeat(N, 0, R),
+			Test1 is Test + R,
+			generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test1, EdgeCases),
+			Predicate =.. [Name| Arguments],
+			Goal =.. [Operator, Entity, Predicate],
+			Condition =.. [call, Closure| Arguments],
+		catch(Sender<<Condition, Error, throw(quick_check_error(Error, Closure))),
+		!,
+		Discarded is Discarded0 + R.
+	generate_test(Closure, _N, _Entity, _Operator, _Name, _Types, _Arguments, _ArgumentsCopy, _Test, _EdgeCases, _Discarded0, _Discarded, _Goal) :-
+		throw(quick_check_error(pre_condition_always_fails, Closure)).
 
 	% return, along the generated arguments, a copy of those arguments so that
 	% we can check that the property being tested don't further instantiates
 	% '@'(Type) arguments; but as copies for other argument instantiation modes
 	% are not required, only '@'(Type) arguments are actually copied
 	generate_arbitrary_arguments([], [], [], _, _).
-	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], [ArgumentCopy| ArgumentsCopy], Test, UseEdgeCases) :-
-		generate_arbitrary_argument(Type, Argument, ArgumentCopy, Test, UseEdgeCases),
-		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, UseEdgeCases).
+	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], [ArgumentCopy| ArgumentsCopy], Test, EdgeCases) :-
+		generate_arbitrary_argument(Type, Argument, ArgumentCopy, Test, EdgeCases),
+		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases).
 
 	generate_arbitrary_argument('--'(_), _, _, _, _).
 	generate_arbitrary_argument('-'(_), _, _, _, _).
-	generate_arbitrary_argument('++'(Type), Arbitrary, _, Test, UseEdgeCases) :-
-		(	type_test_edge_case(ground(Type), Test, Arbitrary, UseEdgeCases) ->
+	generate_arbitrary_argument('++'(Type), Arbitrary, _, Test, EdgeCases) :-
+		(	type_test_edge_case(ground(Type), Test, Arbitrary, EdgeCases) ->
 			true
 		;	arbitrary(ground(Type), Arbitrary)
 		).
-	generate_arbitrary_argument('+'(Type), Arbitrary, _, Test, UseEdgeCases) :-
-		(	type_test_edge_case(Type, Test, Arbitrary, UseEdgeCases) ->
+	generate_arbitrary_argument('+'(Type), Arbitrary, _, Test, EdgeCases) :-
+		(	type_test_edge_case(Type, Test, Arbitrary, EdgeCases) ->
 			true
 		;	arbitrary(Type, Arbitrary)
 		).
-	generate_arbitrary_argument('?'(Type), Arbitrary, _, Test, UseEdgeCases) :-
-		(	type_test_edge_case(Type, Test, Arbitrary, UseEdgeCases) ->
+	generate_arbitrary_argument('?'(Type), Arbitrary, _, Test, EdgeCases) :-
+		(	type_test_edge_case(Type, Test, Arbitrary, EdgeCases) ->
 			true
 		;	maybe ->
 			arbitrary(var, Arbitrary)
 		;	arbitrary(Type, Arbitrary)
 		).
-	generate_arbitrary_argument('@'(Type), Arbitrary, ArbitraryCopy, Test, UseEdgeCases) :-
-		(	type_test_edge_case(Type, Test, Arbitrary, UseEdgeCases) ->
+	generate_arbitrary_argument('@'(Type), Arbitrary, ArbitraryCopy, Test, EdgeCases) :-
+		(	type_test_edge_case(Type, Test, Arbitrary, EdgeCases) ->
 			true
 		;	arbitrary(Type, Arbitrary)
 		),
@@ -1744,12 +1798,12 @@
 		variant(Argument, ArgumentCopy).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(Types, Goal, Template, Test, Count, MaxNumberOfShrinks, Seed) :-
-		(	Count < MaxNumberOfShrinks ->
+	shrink_failed_test(Types, Goal, Template, Test, Count, MaxShrinks, Seed) :-
+		(	Count < MaxShrinks ->
 			(	shrink_goal(Types, Goal, Small),
 				catch(\+ Small, _, fail) ->
 				Next is Count + 1,
-				shrink_failed_test(Types, Small, Template, Test, Next, MaxNumberOfShrinks, Seed)
+				shrink_failed_test(Types, Small, Template, Test, Next, MaxShrinks, Seed)
 			;	quick_check_failed(Goal, Template, Test, Count, Seed)
 			)
 		;	quick_check_failed(Goal, Template, Test, Count, Seed)
@@ -1856,6 +1910,13 @@
 		N > 1,
 		M is N - 1,
 		repeat(M).
+
+	repeat(_, R, R).
+	repeat(N, R0, R) :-
+		N > 1,
+		M is N - 1,
+		R1 is R0 + 1,
+		repeat(M, R1, R).
 
 	% predicate clause coverage support;
 	% it requires entities compiled in debug mode

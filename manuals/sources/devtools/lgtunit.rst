@@ -325,13 +325,9 @@ details):
    quick_check(Test, Template, Options).
    quick_check(Test, Template).
 
-The valid options are the same as for the ``test/3`` dialect plus a
-``n/1`` option to specify the number of random tests that will be
-generated/run (default is 100), a ``s/1`` option to specify the maximum
-number of shrink operations (default is 64), an ``ec/1`` boolean option
-to decide if type edge cases are used for testing (default is ``true``),
-and a ``rs/1`` option to specify the starting seed to be used when
-generating the random tests (no default).
+The valid options are the same as for the ``test/3`` dialect plus all
+the supported QuickCheck specific options (see the QuickCheck section
+below for details).
 
 For examples of how to write unit tests, check the ``tests`` folder or
 the ``testing`` example in the ``examples`` folder in the Logtalk
@@ -402,21 +398,29 @@ predicates for interactive use:
 
 The ``quick_check/3`` predicate returns results in reified form:
 
--  ``passed(Seed)``,
+-  ``passed(Seed, Discarded, Labels)``,
 -  ``failed(Goal, Seed)`` with Goal being the random test that failed
 -  ``error(Error, Template)`` or ``error(Error, Goal, Seed)``
 
 The ``Seed`` argument is the starting seed used to generate the random
-tests and should be regarded as an opaque term.
+tests and should be regarded as an opaque term. The following options
+are supported:
 
-The ``n/1`` option allows us to specify the number of random tests that
-will be generated and run (default is 100). The ``s/1`` option allows us
-to specify the maximum number of shrink operations when a
-counter-example is found (default is 64). An ``ec/1`` boolean option
-allows us to decide if type edge cases are tested before generating
-random tests (default is ``true``). A ``rs/1`` option to allow us to
-specify the starting seed to be used when generating the random tests
-(no default).
+-  ``n/1``: number of random tests that will be generated and run
+   (default is 100).
+-  ``s/1``: maximum number of shrink operations when a counter-example
+   is found (default is 64).
+-  ``ec/1``: boolean option deciding if type edge cases are tested
+   before generating random tests (default is ``true``).
+-  ``rs/1``: starting seed to be used when generating the random tests
+   (no default).
+-  ``pc/1``: pre-condition closure for generated tests (extended with
+   the test arguments; no default).
+-  ``l/1``: label closure for classifying the generated tests (extended
+   with the test arguments plus the label; no default).
+
+Invalid options are ignored and replaced with the default value if
+applicable.
 
 The other two predicates print the test results. The template can be a
 ``::/2``, ``<</2``, or ``:/2`` qualified callable term. When the

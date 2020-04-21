@@ -24,7 +24,7 @@
 	:- info([
 		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2020-03-14,
+		date is 2020-03-21,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -45,7 +45,7 @@
 				type::arbitrary(Type)
 			),
 			(	lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
-				^^assertion(type(Type,Result), subsumes_term(passed(_), Result))
+				^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
 
@@ -63,7 +63,7 @@
 				ground(Type)
 			),
 			(	lgtunit::quick_check(shrink_value({Type}, -Type), Result, [n(25)]),
-				^^assertion(type(Type,Result), subsumes_term(passed(_), Result))
+				^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
 
