@@ -1670,14 +1670,16 @@
 		memberchk(n(N), Options),
 		memberchk(s(MaxShrinks), Options),
 		memberchk(ec(EdgeCases), Options),
-		memberchk(pc(Condition), Options),
-		memberchk(l(Label), Options),
+		memberchk(pc(ConditionClosure), Options),
+		memberchk(l(LabelClosure), Options),
 		(	member(rs(Seed), Options) ->
 			set_seed(Seed)
 		;	get_seed(Seed)
 		),
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
+		extend_quick_check_closure(ConditionClosure, Condition),
+		extend_quick_check_closure(LabelClosure, Label),
 		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Seed, 0, Discarded, [], Labels).
 
 	:- meta_predicate(run_quick_check_tests(*, *, *, *, *, *, *, *, *, ::, ::, *, *, *, *, *)).
@@ -1698,15 +1700,14 @@
 
 	label_test(true, _, Labels, Labels) :-
 		!.
-	label_test(Closure, Arguments, Labels0, Labels1) :-
-		sender(Sender),
+	label_test(Closure, Arguments, Labels0, Labels) :-
 		append(Arguments, [Label], FullArguments),
-		LabelGoal =.. [call, Closure| FullArguments],
-		(	catch(Sender<<LabelGoal, Error, throw(quick_check_error(Error, Closure))) ->
+		Goal =.. [call, Closure| FullArguments],
+		(	catch(Goal, Error, throw(quick_check_error(Error, Closure))) ->
 			(	select(Label-N, Labels0, Others) ->
 				M is N + 1,
-				Labels1 = [Label-M| Others]
-			;	Labels1 = [Label-1| Labels0]
+				Labels = [Label-M| Others]
+			;	Labels = [Label-1| Labels0]
 			)
 		;	throw(quick_check_error(label_goal_failure, Closure))
 		).
@@ -1720,7 +1721,21 @@
 
 	control_construct(Object::Template, Object, (::), Template).
 	control_construct(Object<<Template, Object, (<<), Template).
+	control_construct({Template}, user, (<<), Template).
 	control_construct(':'(Module,Template), Module, (:), Template).
+
+	extend_quick_check_closure(true, true) :-
+		!.
+	extend_quick_check_closure(Object::Closure, Object::Closure) :-
+		!.
+	extend_quick_check_closure(Object<<Closure, Object<<Closure) :-
+		!.
+	extend_quick_check_closure({Closure}, {Closure}) :-
+		!.
+	extend_quick_check_closure(':'(Module,Closure), ':'(Module,Closure)) :-
+		!.
+	extend_quick_check_closure(Closure, Sender<<Closure) :-
+		sender(Sender).
 
 	:- meta_predicate(generate_test(::, *, *, *, *, *, *, *, *, *, *, *, *)).
 	generate_test(true, _, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded, Discarded, Goal) :-
@@ -1729,14 +1744,13 @@
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate].
 	generate_test(Closure, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded, Goal) :-
-		sender(Sender),
 		repeat(N, 0, R),
 			Test1 is Test + R,
 			generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test1, EdgeCases),
 			Predicate =.. [Name| Arguments],
 			Goal =.. [Operator, Entity, Predicate],
 			Condition =.. [call, Closure| Arguments],
-		catch(Sender<<Condition, Error, throw(quick_check_error(Error, Closure))),
+		catch(Condition, Error, throw(quick_check_error(Error, Closure))),
 		!,
 		Discarded is Discarded0 + R.
 	generate_test(Closure, _N, _Entity, _Operator, _Name, _Types, _Arguments, _ArgumentsCopy, _Test, _EdgeCases, _Discarded0, _Discarded, _Goal) :-

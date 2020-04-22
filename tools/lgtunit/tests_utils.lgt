@@ -24,7 +24,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-13,
+		date is 2020-04-22,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -387,19 +387,33 @@
 
 	succeeds(quick_check_3_05) :-
 		quick_check(_, Result, []),
-		Result = error(Error, _), Error == instantiation_error.
+		subsumes_term(error(instantiation_error, _), Result).
 
 	succeeds(quick_check_3_06) :-
 		quick_check(1, Result, []),
-		Result = error(Error, _), Error == type_error(callable, 1).
+		subsumes_term(error(type_error(callable, 1), _), Result).
 
 	succeeds(quick_check_3_07) :-
 		quick_check(type::foo42(+integer), Result, []),
-		Result = error(Error, _, _), Error == existence_error(predicate_declaration, foo42/1).
+		subsumes_term(error(existence_error(predicate_declaration, foo42/1), _, _), Result).
 
 	succeeds(quick_check_3_08) :-
 		quick_check(foo(@var), Result, []),
-		Result = failed(Goal, _Seed), Goal == foo(1).
+		subsumes_term(failed(foo(1), _), Result).
+
+	succeeds(quick_check_3_09) :-
+		quick_check(integer(+byte), passed(Seed, Discarded, Pairs), [l(label), n(1000)]),
+		ground(Seed),
+		Discarded == 0,
+		ground(Pairs), msort(Pairs, Sorted),
+		Sorted = [even-Even, odd-Odd],
+		integer(Even), integer(Odd), 1000 =:= Even + Odd.
+
+	succeeds(quick_check_3_10) :-
+		quick_check(integer(+byte), passed(Seed, Discarded, Pairs), [pc(condition)]),
+		ground(Seed),
+		integer(Discarded), Discarded > 0,
+		Pairs == [].
 
 	% quick_check/2 tests
 
@@ -456,6 +470,15 @@
 	% auxiliary predicates
 
 	foo(1).
+
+	condition(I) :-
+		between(0, 127, I).
+
+	label(I, Label) :-
+		(	I mod 2 =:= 0 ->
+			Label = even
+		;	Label = odd
+		).
 
 	% suppress quick_check/1-3 messages and save option values for tests
 
