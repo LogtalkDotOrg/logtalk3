@@ -1467,9 +1467,9 @@
 	default_quick_check_option(s(64)).
 	% use edge cases by default
 	default_quick_check_option(ec(true)).
-	% don't filter generated tests by default
+	% don't filter generated tests by default (represented internally by the atom "true")
 	default_quick_check_option(pc(true)).
-	% don't label generated tests by default
+	% don't label generated tests by default (represented internally by the atom "true")
 	default_quick_check_option(l(true)).
 
 	:- if((
@@ -1699,11 +1699,14 @@
 		).
 
 	label_test(true, _, Labels, Labels) :-
+		% no label closure was specified (as represented internally by the atom "true")
 		!.
 	label_test(Closure, Arguments, Labels0, Labels) :-
 		append(Arguments, [Label], FullArguments),
 		Goal =.. [call, Closure| FullArguments],
 		(	catch(Goal, Error, throw(quick_check_error(Error, Closure))) ->
+			% we use a simple list of pairs for saving the label counts
+			% as the typical number of labels is small
 			(	select(Label-N, Labels0, Others) ->
 				M is N + 1,
 				Labels = [Label-M| Others]
@@ -1712,6 +1715,9 @@
 		;	throw(quick_check_error(label_goal_failure, Closure))
 		).
 
+	% we need to extract the predicate template from the full template argument
+	% to correctly extract the type and mode of the predicate arguments that will
+	% be randomly generated
 	decompose_quick_check_template(Template, Entity, Operator, Predicate) :-
 		(	control_construct(Template, Entity, Operator, Predicate) ->
 			true
@@ -1724,6 +1730,11 @@
 	control_construct({Template}, user, (<<), Template).
 	control_construct(':'(Module,Template), Module, (:), Template).
 
+	% extend the pre-condition and label closures to ensure that they are called
+	% in the correct context: note that we cannot simply use a meta-predicate
+	% directive as the number of additional arguments for the closure depend on
+	% the template, which is only known at runtime; also note that we use the
+	% atom "true" internally to represent that no closure was specified
 	extend_quick_check_closure(true, true) :-
 		!.
 	extend_quick_check_closure(Object::Closure, Object::Closure) :-
@@ -1739,11 +1750,15 @@
 
 	:- meta_predicate(generate_test(::, *, *, *, *, *, *, *, *, *, *, *, *)).
 	generate_test(true, _, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded, Discarded, Goal) :-
+		% no pre-condition closure was specified (as represented internally by the atom "true")
 		!,
 		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate].
 	generate_test(Closure, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded, Goal) :-
+		% use a repeat loop to ensure that we stop trying to generate tests that
+		% comply with the given pre-condition if the discarded tests exceed the
+		% number of tests that we want to run
 		repeat(N, 0, R),
 			Test1 is Test + R,
 			generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test1, EdgeCases),
