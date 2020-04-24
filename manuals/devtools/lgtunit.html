@@ -627,7 +627,11 @@ returns results in reified form:</p>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">Seed</span></code> argument is the starting seed used to generate the random
 tests and should be regarded as an opaque term. See below how to use it
-when testing bug fixes.</p>
+when testing bug fixes. The <code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Culprit)</span></code> result only occurs
+when the template is not callable (e.g. a non-existing predicate) or
+when there’s a problem with the pre-condition closure or with the label
+closure (e.g. a pre-condition that always fails or a label that fail to
+classify a generated test).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Discarded</span></code> argument returns the number of generate tests that
 were discarded for failing to comply a pre-condition specified using the
 <code class="docutils literal notranslate"><span class="pre">pc/1</span></code> option. This option is specially useful when constraining or

@@ -382,9 +382,12 @@ returns results in reified form:
 - `failed(Goal, Seed)` with Goal being the random test that failed
 - `error(Error, Culprit)` or `error(Error, Goal, Seed)`
 
-The `Seed` argument is the starting seed used to generate the random tests
-and should be regarded as an opaque term. See below how to use it when
-testing bug fixes.
+The `Seed` argument is the starting seed used to generate the random tests and
+should be regarded as an opaque term. See below how to use it when testing bug
+fixes. The `error(Error, Culprit)` result only occurs when the template is not
+callable (e.g. a non-existing predicate) or when there's a problem with the
+pre-condition closure or with the label closure (e.g. a pre-condition that
+always fails or a label that fail to classify a generated test).
 
 The `Discarded` argument returns the number of generate tests that were
 discarded for failing to comply a pre-condition specified using the `pc/1`
