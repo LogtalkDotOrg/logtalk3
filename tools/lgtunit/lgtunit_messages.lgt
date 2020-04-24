@@ -23,7 +23,7 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-21,
+		date is 2020-04-24,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -154,6 +154,14 @@
 		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl],
 		['starting seed: ~w'-[Seed], nl].
 
+	message_tokens(quick_check_error(label_goal_error(Error), Label)) -->
+		['quick check error using label closure: ~w'-[Label], nl, '  ~q'-[Error], nl].
+	message_tokens(quick_check_error(label_goal_failure, Label)) -->
+		['quick check label closure fails: ~w'-[Label], nl].
+	message_tokens(quick_check_error(pre_condition_error(Error), Condition)) -->
+		['quick check error using pre-condition closure: ~w'-[Condition], nl, '  ~q'-[Error], nl].
+	message_tokens(quick_check_error(pre_condition_always_fails, Condition)) -->
+		['quick check pre-condition closure fails: ~w'-[Condition], nl].
 	message_tokens(quick_check_error(Error, Template)) -->
 		['quick check error using template: ~w'-[Template], nl, '  ~q'-[Error], nl].
 

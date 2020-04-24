@@ -418,7 +418,7 @@ returns results in reified form:
 
 -  ``passed(Seed, Discarded, Labels)``,
 -  ``failed(Goal, Seed)`` with Goal being the random test that failed
--  ``error(Error, Template)`` or ``error(Error, Goal, Seed)``
+-  ``error(Error, Culprit)`` or ``error(Error, Goal, Seed)``
 
 The ``Seed`` argument is the starting seed used to generate the random
 tests and should be regarded as an opaque term. See below how to use it

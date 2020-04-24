@@ -28,7 +28,7 @@
 	:- info([
 		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-22,
+		date is 2020-04-24,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -116,7 +116,7 @@
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
 	:- meta_predicate(quick_check(::, *, ::)).
 	:- info(quick_check/3, [
-		comment is 'Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)`` where ``Goal`` is the failed test, or ``error(Error,Template,Seed)``. ``Seed`` is the starting seed used to generate the random tests.',
+		comment is 'Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)``, ``error(Error,Goal,Seed)``, or ``error(Error,Culprit)``. ``Goal`` is the failed test. ``Seed`` is the starting seed.',
 		argnames is ['Template', 'Result', 'Options']
 	]).
 
@@ -1647,8 +1647,10 @@
 			Result = error(Exception, Goal, Seed)
 		;	Error = quick_check_error(Exception, Goal, _, Seed) ->
 			Result = error(Exception, Goal, Seed)
-		;	Error = quick_check_error(Exception, Template),
-			Result = error(Exception, Template)
+		;	Error = quick_check_error(error(Exception, _), Culprit) ->
+			Result = error(Exception, Culprit)
+		;	Error = quick_check_error(Exception, Culprit),
+			Result = error(Exception, Culprit)
 		).
 
 	quick_check(Template, Options) :-
@@ -1680,7 +1682,8 @@
 		Predicate =.. [Name| Types],
 		extend_quick_check_closure(ConditionClosure, Condition),
 		extend_quick_check_closure(LabelClosure, Label),
-		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Seed, 0, Discarded, [], Labels).
+		% we pass both the extend closures and the original closures for improved error reporting
+		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition-ConditionClosure, Label-LabelClosure, Seed, 0, Discarded, [], Labels).
 
 	:- meta_predicate(run_quick_check_tests(*, *, *, *, *, *, *, *, *, ::, ::, *, *, *, *, *)).
 	run_quick_check_tests(Test, N, _Template, _Entity, _Operator, _Name, _Types, _MaxShrinks, _EdgeCases, _Condition, _Label, _Seed, _Discarded, _Discarded, _Labels, _Labels) :-
@@ -1688,7 +1691,7 @@
 		!.
 	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Seed, Discarded0, Discarded, Labels0, Labels) :-
 		generate_test(Condition, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded1, Goal),
-		(	catch(Goal, Error, throw(quick_check_error(Error, Goal, Test, Seed))) ->
+		(	catch(Goal, Error, quick_check_error(Goal, Template, Test, Seed, Error)) ->
 				(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 					Next is Test + 1,
 					label_test(Label, Arguments, Labels0, Labels1),
@@ -1698,13 +1701,13 @@
 			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Seed)
 		).
 
-	label_test(true, _, Labels, Labels) :-
+	label_test(true-_, _, Labels, Labels) :-
 		% no label closure was specified (as represented internally by the atom "true")
 		!.
-	label_test(Closure, Arguments, Labels0, Labels) :-
+	label_test(Closure-Original, Arguments, Labels0, Labels) :-
 		append(Arguments, [Label], FullArguments),
 		Goal =.. [call, Closure| FullArguments],
-		(	catch(Goal, Error, throw(quick_check_error(Error, Closure))) ->
+		(	catch(Goal, Error, throw(quick_check_error(label_goal_error(Error), Original))) ->
 			% we use a simple list of pairs for saving the label counts
 			% as the typical number of labels is small
 			(	select(Label-N, Labels0, Others) ->
@@ -1712,7 +1715,7 @@
 				Labels = [Label-M| Others]
 			;	Labels = [Label-1| Labels0]
 			)
-		;	throw(quick_check_error(label_goal_failure, Closure))
+		;	throw(quick_check_error(label_goal_failure, Original))
 		).
 
 	% we need to extract the predicate template from the full template argument
@@ -1749,13 +1752,13 @@
 		sender(Sender).
 
 	:- meta_predicate(generate_test(::, *, *, *, *, *, *, *, *, *, *, *, *)).
-	generate_test(true, _, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded, Discarded, Goal) :-
+	generate_test(true-_, _, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded, Discarded, Goal) :-
 		% no pre-condition closure was specified (as represented internally by the atom "true")
 		!,
 		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate].
-	generate_test(Closure, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded, Goal) :-
+	generate_test(Closure-Original, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded, Goal) :-
 		% use a repeat loop to ensure that we stop trying to generate tests that
 		% comply with the given pre-condition if the discarded tests exceed the
 		% number of tests that we want to run
@@ -1765,11 +1768,11 @@
 			Predicate =.. [Name| Arguments],
 			Goal =.. [Operator, Entity, Predicate],
 			Condition =.. [call, Closure| Arguments],
-		catch(Condition, Error, throw(quick_check_error(Error, Closure))),
+		catch(Condition, Error, throw(quick_check_error(Error, Original))),
 		!,
 		Discarded is Discarded0 + R.
-	generate_test(Closure, _N, _Entity, _Operator, _Name, _Types, _Arguments, _ArgumentsCopy, _Test, _EdgeCases, _Discarded0, _Discarded, _Goal) :-
-		throw(quick_check_error(pre_condition_always_fails, Closure)).
+	generate_test(_-Original, _N, _Entity, _Operator, _Name, _Types, _Arguments, _ArgumentsCopy, _Test, _EdgeCases, _Discarded0, _Discarded, _Goal) :-
+		throw(quick_check_error(pre_condition_always_fails, Original)).
 
 	% return, along the generated arguments, a copy of those arguments so that
 	% we can check that the property being tested don't further instantiates
@@ -1863,11 +1866,17 @@
 	extract_input_type('@'(Type), Type).
 
 	% undo the <</2 control construct if added by the tool itself
+
+	quick_check_error(Object<<Goal, _<<_, Test, Seed, Error) :-
+		throw(quick_check_error(Error, Object<<Goal, Test, Seed)).
+	quick_check_error(_<<Goal, _, Test, Seed, Error) :-
+		throw(quick_check_error(Error, Goal, Test, Seed)).
+	quick_check_error(Goal, _, Test, Seed, Error) :-
+		throw(quick_check_error(Error, Goal, Test, Seed)).
+
 	quick_check_failed(Object<<Goal, _<<_, Test, Depth, Seed) :-
-		!,
 		throw(quick_check_failed(Object<<Goal, Test, Depth, Seed)).
 	quick_check_failed(_<<Goal, _, Test, Depth, Seed) :-
-		!,
 		throw(quick_check_failed(Goal, Test, Depth, Seed)).
 	quick_check_failed(Goal, _, Test, Depth, Seed) :-
 		throw(quick_check_failed(Goal, Test, Depth, Seed)).
