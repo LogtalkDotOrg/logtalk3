@@ -700,10 +700,10 @@ Lint flags
 
 ``undefined_predicates(Option)``
    Defines the compiler behavior when calls to declared but undefined
-   predicates (or non-terminals) are found. Note that calls to declared
-   but undefined predicates (or non-terminals) fail as per closed-world
-   assumption. Possible option values are ``error``, ``warning`` (the
-   usual default), and ``silent`` (not recommended).
+   predicates (or non-terminals) are found. Note that these calls will
+   fail at runtime as per closed-world assumption. Possible option values
+   are ``error``, ``warning`` (the usual default), and ``silent`` (not
+   recommended).
 
 .. _flag_steadfastness:
 .. index:: pair: steadfastness; Flag
