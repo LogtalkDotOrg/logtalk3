@@ -426,7 +426,8 @@ we can try:
 	yes
 
 The label statistics are key to verify if the generated tests provide the
-necessary coverage.
+necessary coverage. The labelling predicates can return a single test label
+or a list of test labels.
 
 The other two predicates print the test results. The template can be a `::/2`,
 `<</2`, or `:/2` qualified callable term. When the template is an unqualified

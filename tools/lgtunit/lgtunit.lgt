@@ -28,7 +28,7 @@
 	:- info([
 		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-24,
+		date is 2020-04-26,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -132,7 +132,7 @@
 			'Type edge cases' - 'Use the ``ec(Boolean)`` option to specifiy if type edge cases are tested (before generating random tests). Default is ``true``.',
 			'Starting seed' - 'Use the ``rs(Seed)`` option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.',
 			'Test generation filtering' - 'Use the ``pc/1`` option to specifiy a pre-condition closure for filtering generated tests (extended with the test arguments; no default).',
-			'Generated tests classification' - 'Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the label; no default).'
+			'Generated tests classification' - 'Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.'
 		]
 	]).
 
@@ -1705,17 +1705,30 @@
 		% no label closure was specified (as represented internally by the atom "true")
 		!.
 	label_test(Closure-Original, Arguments, Labels0, Labels) :-
-		append(Arguments, [Label], FullArguments),
+		append(Arguments, [TestLabels], FullArguments),
 		Goal =.. [call, Closure| FullArguments],
 		(	catch(Goal, Error, throw(quick_check_error(label_goal_error(Error), Original))) ->
-			% we use a simple list of pairs for saving the label counts
-			% as the typical number of labels is small
-			(	select(Label-N, Labels0, Others) ->
-				M is N + 1,
-				Labels = [Label-M| Others]
-			;	Labels = [Label-1| Labels0]
-			)
+			count_labels(TestLabels, Labels0, Labels)
 		;	throw(quick_check_error(label_goal_failure, Original))
+		).
+
+	% support label closures returning a single test label or a list of test labels
+	count_labels([], Labels, Labels) :-
+		!.
+	count_labels([Label| Others], Labels0, Labels) :-
+		!,
+		count_label(Label, Labels0, Labels1),
+		count_labels(Others, Labels1, Labels).
+	count_labels(Label, Labels0, Labels) :-
+		count_label(Label, Labels0, Labels).
+
+	count_label(Label, Labels0, Labels) :-
+		% we use a simple list of pairs for saving the label counts
+		% as the typical number of labels is small
+		(	select(Label-N, Labels0, Others) ->
+			M is N + 1,
+			Labels = [Label-M| Others]
+		;	Labels = [Label-1| Labels0]
 		).
 
 	% we need to extract the predicate template from the full template argument

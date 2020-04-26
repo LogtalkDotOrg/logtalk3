@@ -12,7 +12,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 
 | **Author:** Paulo Moura
 | **Version:** 8:0:0
-| **Date:** 2020-04-24
+| **Date:** 2020-04-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -327,7 +327,7 @@ Generates and runs random tests for a predicate given its mode template and a se
     - Type edge cases: Use the ``ec(Boolean)`` option to specifiy if type edge cases are tested (before generating random tests). Default is ``true``.
     - Starting seed: Use the ``rs(Seed)`` option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.
     - Test generation filtering: Use the ``pc/1`` option to specifiy a pre-condition closure for filtering generated tests (extended with the test arguments; no default).
-    - Generated tests classification: Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the label; no default).
+    - Generated tests classification: Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.
 
 
 ------------
