@@ -652,11 +652,12 @@ Debugging messages only output information by default. These messages can,
 however, be intercepted to perform other actions. An alternative is to use
 instead the :ref:`term-expansion mechanism <expansion_expansion>` for
 conditional compilation of debugging goals. For example, the
-:doc:`../libraries/hook_objects` library provides a ``print_goal_hook`` hook
-object that simplifies printing entity goals before or after calling them by
-simply prefixing them with an operator. See the library and hook object
-documentation for details. You can also define your own specialized hook
-objects for custom debugging tasks.
+:doc:`../libraries/hook_objects` library provides a
+:ref:`print_goal_hook <apis:print_goal_hook/0>` object that simplifies
+printing entity goals before or after calling them by simply prefixing them
+with an operator. See the library and hook object documentation for details.
+You can also define your own specialized hook objects for custom debugging
+tasks.
 
 .. _debugging_ports_profiling:
 
