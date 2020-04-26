@@ -39,6 +39,14 @@
 		quick_check/3, quick_check/2, quick_check/1
 	]).
 
+	:- uses(integer, [
+		between/3
+	]).
+
+	:- uses(list, [
+		msort/2
+	]).
+
 	:- discontiguous([
 		succeeds/1, fails/1, throws/2
 	]).
